@@ -10,16 +10,17 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import Application from './application/application.js';
 import createStore from './store.js';
+import history from './history';
 
 addLocaleData(nb);
 
 let store = createStore();
-// const tekster = { nb: { spinner: 'spinner' } };
+const tekster = { nb: { spinner: 'spinner' } };
 
 render(
     (
         <Provider store={store}>
-            <IntlProvider defaultLocale="nb" locale="nb">
+            <IntlProvider defaultLocale="nb" locale="nb" messages={tekster}>
                 <Router history={history}>
                     <Route path="/" component={Application}>
                     </Route>

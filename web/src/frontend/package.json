@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.16.0",
+    "history": "2.0.1",
     "intl": "^1.2.5",
     "lodash": "^4.16.4",
     "moment": "2.15.2",

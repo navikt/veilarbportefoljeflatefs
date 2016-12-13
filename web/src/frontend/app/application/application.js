@@ -15,7 +15,7 @@ class Application extends Component {
     render() {
 
         return (
-            <IntlProvider defaultLocale="nb" locale="nb">
+            <IntlProvider defaultLocale="nb" locale="nb" messages={}>
                 <div className="portefolje">
                     <div className="pagewrapper">
                        Hello
@@ -38,7 +38,7 @@ class Application extends Component {
 
  });
 
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ hentLedetekster }, dispatch) });
+// const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ hentLedetekster }, dispatch) });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Application);
+export default connect(mapStateToProps)(Application);
 //export default (Application);
