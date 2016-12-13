@@ -15,10 +15,10 @@ class Application extends Component {
     render() {
 
         return (
-            <IntlProvider defaultLocale="nb" locale="nb" messages={}>
+            <IntlProvider defaultLocale="nb" locale="nb" messages={{ nb : 'test' }}>
                 <div className="portefolje">
                     <div className="pagewrapper">
-                       Hello
+                       <h1>Hello</h1>
                     </div>
                     <div aria-hidden="true">
                         <DevTools />

@@ -5,14 +5,12 @@ import no.nav.sbl.dialogarena.test.SystemProperties;
 
 import static no.nav.modig.testcertificates.TestCertificates.setupKeyAndTrustStore;
 import static no.nav.sbl.dialogarena.common.jetty.JettyStarterUtils.*;
-//import static no.nav.sbl.xmlstillingadmin.config.JndiLocalContextConfig.setupJndiLocalContext;
 
 public class StartJetty {
 
     public static void main(String[] args) {
         SystemProperties.setFrom("jetty-veilarbportefoljeflatefs.properties");
         setupKeyAndTrustStore();
-//        setupJndiLocalContext();
 
         //Må ha https for csrf-token
         final Jetty jetty = Jetty.usingWar()
