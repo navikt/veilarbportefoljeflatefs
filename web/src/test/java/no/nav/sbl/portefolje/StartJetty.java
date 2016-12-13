@@ -10,13 +10,13 @@ import static no.nav.sbl.dialogarena.common.jetty.JettyStarterUtils.*;
 public class StartJetty {
 
     public static void main(String[] args) {
-        SystemProperties.setFrom("jetty-veilarbportefoljeiaf.properties");
+        SystemProperties.setFrom("jetty-veilarbportefoljeflatefs.properties");
         setupKeyAndTrustStore();
 //        setupJndiLocalContext();
 
         //Må ha https for csrf-token
         final Jetty jetty = Jetty.usingWar()
-                .at("veilarbportefoljeiaf")
+                .at("veilarbportefoljeflatefs")
                 .sslPort(9594)
                 .port(9595)
 //                .overrideWebXml()

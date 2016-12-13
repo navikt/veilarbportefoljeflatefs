@@ -5,11 +5,11 @@
 
     <parent>
         <groupId>no.nav.sbl.portefolje</groupId>
-        <artifactId>veilarbportefoljeiaf</artifactId>
+        <artifactId>veilarbportefoljeflatefs</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>veilarbportefoljeiaf-web</artifactId>
+    <artifactId>veilarbportefoljeflatefs-web</artifactId>
     <name>${project.artifactId}</name>
     <packaging>war</packaging>
 
