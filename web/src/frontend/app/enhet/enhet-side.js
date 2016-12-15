@@ -18,10 +18,9 @@ class EnhetSide extends Component {
             <EnhetVelger enheter={enheter} valgtEnhet={valgtEnhet} velgEnhet={velgEnhet} />;
 
         return (
-            <div className="enhet-side">
-                <h1 className="typo-sidetittel">Enhet</h1>
+            <div className="enhet-side panel">
+                <h1 className="typo-sidetittel">{`Enhet (valgt enhet: ${valgtEnhet})`}</h1>
                 <p className="typo-infotekst"><FormattedMessage id="enhet.valgt.infotekst" /></p>
-                {valgtEnhet}
                 {enhetVelger}
             </div>
         );

@@ -3,11 +3,11 @@ import { Link } from 'react-router';
 
 function Lenker() {
     return (
-        <div className="lenker">
-            <Link to="enhet">
+        <div className="lenker blokk-m">
+            <Link to="enhet" className="tab-link typo-undertittel">
                 Enhet
             </Link>
-            <Link to="portefolje" >
+            <Link to="portefolje" className="tab-link typo-undertittel">
                 Portefølje
             </Link>
         </div>

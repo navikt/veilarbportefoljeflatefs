@@ -1,5 +1,15 @@
 .lenker {
-    a {
+    a.tab-link {
         margin-right: 2rem;
+    }
+    a.tab-link:focus {
+        border-bottom: 0.15rem solid #0067c5;
+        padding-bottom: 0.7rem;
+        background-color: inherit;
+    }
+
+    a.tab-link:not(:focus) {
+        border-bottom: none;
+        color: #3e3832;
     }
 }
