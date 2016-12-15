@@ -11,6 +11,8 @@ import nb from 'react-intl/locale-data/nb';
 import Application from './application/application.js';
 import createStore from './store.js';
 import history from './history';
+import EnhetSide from './enhet/enhet-side';
+import PortefoljeSide from './portefolje/portefolje-side';
 
 addLocaleData(nb);
 
@@ -23,6 +25,8 @@ render(
             <IntlProvider defaultLocale="nb" locale="nb" messages={tekster}>
                 <Router history={history}>
                     <Route path="/" component={Application}>
+                        <Route path="enhet" component={EnhetSide} />
+                        <Route path="portefolje" component={PortefoljeSide} />
                     </Route>
                 </Router>
             </IntlProvider>

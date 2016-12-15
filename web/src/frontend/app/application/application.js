@@ -4,12 +4,15 @@ import { bindActionCreators } from 'redux';
 import { IntlProvider, addLocaleData, FormattedMessage } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import { hentLedetekster } from '../ducks/ledetekster';
+import Lenker from './../lenker/lenker';
 import DevTools from './../devtools';
+import { hentEnheterForSaksbehandler } from './../ducks/enheter';
 
 addLocaleData(nb);
 class Application extends Component {
     componentWillMount() {
         this.props.hentTekster();
+        this.props.hentEnheter();
     }
 
     render() {
@@ -17,9 +20,9 @@ class Application extends Component {
         return (
             <IntlProvider defaultLocale="nb" locale="nb" messages={ledetekster.data.nb}>
                 <div className="portefolje">
-                    <div className="pagewrapper">
-                       <h1>Hello</h1>
-                        <FormattedMessage id="fot.nav.tittel" />
+                    <div className="container maincontent side-innhold">
+                        <Lenker />
+                        {children}
                     </div>
                     <div aria-hidden="true">
                         <DevTools />
@@ -36,11 +39,13 @@ class Application extends Component {
  };
 
  const mapStateToProps = state => ({
-    ledetekster: state.ledetekster
+     ledetekster: state.ledetekster,
+     enheter: state.enheter.data
  });
 
 const mapDispatchToProps = dispatch => ({
-    hentTekster: () => dispatch(hentLedetekster())
+    hentTekster: () => dispatch(hentLedetekster()),
+    hentEnheter: () => dispatch(hentEnheterForSaksbehandler())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application);

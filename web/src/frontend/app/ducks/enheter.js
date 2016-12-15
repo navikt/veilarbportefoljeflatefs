@@ -7,8 +7,11 @@ export const OK = 'veilarbportefolje/enheter/OK';
 export const FEILET = 'veilarbportefolje/enheter/FEILET';
 export const PENDING = 'veilarbportefolje/enheter/PENDING';
 
+export const VELG_ENHET = 'VELG_ENHET';
+
 const initialState = {
-    data: []
+    data: [],
+    valgtEnhet: undefined
 };
 
 //  Reducer
@@ -19,7 +22,9 @@ export default function reducer(state = initialState, action) {
         // case FEILET:
         //     return { ...state, status: STATUS.ERROR, data: action.data };
         case OK:
-            return { ...state, status: STATUS.OK, data: action.data };
+            return { ...state, status: STATUS.OK, data: action.data, valgtEnhet: action.data[0] };
+        case VELG_ENHET:
+            return { ...state, valgtEnhet: action.valgtEnhet };
         default:
             return state;
     }
@@ -36,5 +41,12 @@ export function hentEnheterForSaksbehandler(id) {
     return {
         type: OK,
         data: hentEnheter(id)
+    };
+}
+
+export function velgEnhetForSaksbehandler(valgtEnhet) {
+    return {
+        type: VELG_ENHET,
+        valgtEnhet: valgtEnhet
     };
 }
