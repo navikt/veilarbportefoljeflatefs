@@ -1,10 +1,8 @@
 import React, { PropTypes as PT } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
 
-function EnhetVelger({ enheter, valgtEnhet, velgEnhet }) {
+function EnhetVelger({ enheter, velgEnhet }) {
     if (enheter.length === 1) {
-        return <noscript/>;
+        return <noscript />;
     }
     const velgNyEnhet = (event) => {
         velgEnhet(event.target.value);
@@ -21,7 +19,7 @@ function EnhetVelger({ enheter, valgtEnhet, velgEnhet }) {
                 <select
                     id="select-enhet"
                     name="valgtEnhet"
-                    value={valgtEnhet}
+                    onBlur={velgNyEnhet}
                     onChange={velgNyEnhet}
                 >
                     {enhetsliste}
@@ -33,7 +31,7 @@ function EnhetVelger({ enheter, valgtEnhet, velgEnhet }) {
 
 EnhetVelger.propTypes = {
     enheter: PT.arrayOf(PT.string),
-    valgtEnhet: PT.string.isRequired,
+    // valgtEnhet: PT.string.isRequired,
     velgEnhet: PT.func.isRequired
 };
 

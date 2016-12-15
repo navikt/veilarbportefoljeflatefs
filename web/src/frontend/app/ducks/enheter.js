@@ -47,6 +47,6 @@ export function hentEnheterForSaksbehandler(id) {
 export function velgEnhetForSaksbehandler(valgtEnhet) {
     return {
         type: VELG_ENHET,
-        valgtEnhet: valgtEnhet
+        valgtEnhet
     };
 }

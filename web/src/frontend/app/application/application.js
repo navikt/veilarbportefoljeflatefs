@@ -1,7 +1,6 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { IntlProvider, addLocaleData, FormattedMessage } from 'react-intl';
+import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import { hentLedetekster } from '../ducks/ledetekster';
 import Lenker from './../lenker/lenker';
@@ -33,15 +32,17 @@ class Application extends Component {
     }
 }
 
- Application.propTypes = {
+Application.propTypes = {
+    children: PT.object,
+    hentTekster: PT.func.isRequired,
+    hentEnheter: PT.func.isRequired,
+    ledetekster: PT.object
+};
 
-
- };
-
- const mapStateToProps = state => ({
-     ledetekster: state.ledetekster,
-     enheter: state.enheter.data
- });
+const mapStateToProps = state => ({
+    ledetekster: state.ledetekster,
+    enheter: state.enheter.data
+});
 
 const mapDispatchToProps = dispatch => ({
     hentTekster: () => dispatch(hentLedetekster()),
