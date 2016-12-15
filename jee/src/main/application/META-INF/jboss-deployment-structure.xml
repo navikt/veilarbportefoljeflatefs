@@ -1,0 +1,20 @@
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2">
+    <deployment>
+        <exclude-subsystems>
+            <subsystem name="webservices"/>
+            <subsystem name="jaxrs"/>
+        </exclude-subsystems>
+        <exclusions>
+            <module name="org.slf4j" />
+            <module name="org.slf4j.impl" />
+        </exclusions>
+    </deployment>
+    <sub-deployment name="veilarbportefoljeflatefs-web.war">
+        <exclusions>
+            <module name="org.slf4j" />
+            <module name="org.slf4j.impl" />
+            <module name="javaee.api"/>
+        </exclusions>
+
+    </sub-deployment>
+</jboss-deployment-structure>

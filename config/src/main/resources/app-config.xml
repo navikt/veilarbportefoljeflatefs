@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://appconfig.aura.nav.no" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://appconfig.aura.nav.no http://maven.adeo.no/xsd/appconfig.xsd">
+
+    <name>veilarbportefoljeflatefs</name>
+
+    <selftest>
+        <path>veilarbportefoljeflatefs/internal/selftest.json</path>
+        <humanReadablePath>veilarbportefoljeflatefs/internal/selftest</humanReadablePath>
+    </selftest>
+
+    <artifacts>
+        <ear groupId="no.nav.fo.veilarbportefoljeflatefs" artifactId="veilarbportefoljeflatefs-jee"/>
+    </artifacts>
+
+    <resources>
+        <fileLibrary alias="veilarbportefoljeflatefs.ledetekster.v1" mapToProperty="folder.ledetekster" />
+    </resources>
+
+    <loadBalancer isAlive="/veilarbportefoljeflatefs/internal/isAlive" />
+
+</application>

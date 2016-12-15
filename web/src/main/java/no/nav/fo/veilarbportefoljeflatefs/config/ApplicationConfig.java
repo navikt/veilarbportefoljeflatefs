@@ -5,7 +5,6 @@ import no.nav.fo.veilarbportefoljeflatefs.internal.IsAliveServlet;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
@@ -13,7 +12,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
         TeksterServiceConfig.class,
         Pingables.class,
 })
-@ImportResource({"classpath:spring-security.xml", "classpath:spring-security-web.xml"})
 public class ApplicationConfig {
 
     @Bean

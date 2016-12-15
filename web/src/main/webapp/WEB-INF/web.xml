@@ -33,42 +33,6 @@
         <param-value>no.nav.fo.veilarbportefoljeflatefs.config.ApplicationConfig</param-value>
     </context-param>
 
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <filter>
-        <filter-name>xframeoptions</filter-name>
-        <filter-class>no.nav.sbl.dialogarena.common.web.security.XFrameOptionsFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>xframeoptions</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <filter>
-        <filter-name>MDCFilter</filter-name>
-        <filter-class>no.nav.modig.presentation.logging.session.MDCFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>MDCFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <filter>
-        <filter-name>xsrf</filter-name>
-        <filter-class>no.nav.fo.veilarbportefoljeflatefs.provider.filter.XsrfFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>xsrf</filter-name>
-        <servlet-name>restservlet</servlet-name>
-    </filter-mapping>
-
     <servlet>
         <servlet-name>selftest</servlet-name>
         <servlet-class>no.nav.fo.veilarbportefoljeflatefs.servlet.SelfTestServlet</servlet-class>
