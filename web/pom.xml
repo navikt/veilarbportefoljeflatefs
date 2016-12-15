@@ -24,7 +24,6 @@
         <modig-security.version>1.0.24</modig-security.version>
         <modig-content.version>2.0.9</modig-content.version>
         <modig-lang.version>2.0.2</modig-lang.version>
-        <modig-core.version>1.0.1</modig-core.version>
         <modig-log-filter.version>1.1.3</modig-log-filter.version>
         <modig-testcertificates.version>1.1.0</modig-testcertificates.version>
         <modig-core-test.version>1.0.0</modig-core-test.version>
@@ -46,6 +45,7 @@
         <joda.version>2.9.4</joda.version>
 
         <!-- Java -->
+        <javax.ws.rs-api.version>2.0.1</javax.ws.rs-api.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
 
         <!-- Test -->
@@ -54,25 +54,25 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>no.nav.modig</groupId>
-            <artifactId>modig-security-loginmodule</artifactId>
-            <version>${loginmodule.version}</version>
-            <scope>runtime</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>no.nav.modig</groupId>
-            <artifactId>modig-security-loginmodule</artifactId>
-            <type>test-jar</type>
-            <scope>test</scope>
-            <version>${loginmodule.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>no.nav.modig</groupId>-->
+            <!--<artifactId>modig-security-loginmodule</artifactId>-->
+            <!--<version>${loginmodule.version}</version>-->
+            <!--<scope>runtime</scope>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>commons-logging</groupId>-->
+                    <!--<artifactId>commons-logging</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>no.nav.modig</groupId>-->
+            <!--<artifactId>modig-security-loginmodule</artifactId>-->
+            <!--<type>test-jar</type>-->
+            <!--<scope>test</scope>-->
+            <!--<version>${loginmodule.version}</version>-->
+        <!--</dependency>-->
 
         <!--Dialogarena tjenestespesifikasjon-->
 
@@ -114,16 +114,6 @@
         </dependency>
         <dependency>
             <groupId>no.nav.modig</groupId>
-            <artifactId>modig-core</artifactId>
-            <version>${modig-core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>no.nav.modig</groupId>
-            <artifactId>modig-security-core</artifactId>
-            <version>${modig-security.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>no.nav.modig</groupId>
             <artifactId>modig-log-filter</artifactId>
             <scope>runtime</scope>
             <version>${modig-log-filter.version}</version>
@@ -132,19 +122,6 @@
             <groupId>no.nav.modig</groupId>
             <artifactId>modig-testcertificates</artifactId>
             <version>${modig-testcertificates.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>no.nav.modig</groupId>
-            <artifactId>modig-security-core</artifactId>
-            <version>${modig-security.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>no.nav.modig</groupId>
-            <artifactId>modig-core-test</artifactId>
-            <version>${modig-core-test.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -159,6 +136,11 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -179,39 +161,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring.security.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${spring.security.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring.security.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-ldap</artifactId>
-            <version>${spring.security.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ldap</groupId>
-            <artifactId>spring-ldap-core</artifactId>
-            <version>2.0.4.RELEASE</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
@@ -222,14 +171,13 @@
             <version>11.2.0.3</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.2.9</version>
-            <scope>test</scope>
-        </dependency>
 
         <!--Jersey-->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>${javax.ws.rs-api.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
@@ -280,11 +228,6 @@
 
 
         <!--Diverse-->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>${commons-codec.version}</version>
-        </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>

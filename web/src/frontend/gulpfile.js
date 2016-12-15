@@ -18,7 +18,7 @@ gulp.task('eslint', require('./gulp/eslint')(gulp));
 gulp.task('test', require('./gulp/tests').test(gulp, false));
 gulp.task('test-tdd', require('./gulp/tests').test(gulp, true));
 gulp.task('tdd', ['test-tdd'], require('./gulp/tests').watch(gulp));
-gulp.task('build', ['build-js', 'build-html', 'build-less', 'eslint','copy-img' ], () => {
+gulp.task('build', ['build-js', 'build-html', 'build-less','copy-img' ], () => {
 });
 
 gulp.task('clean', function (callback) {

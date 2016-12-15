@@ -16,16 +16,15 @@
     <packaging>pom</packaging>
 
     <modules>
-        <!--<module>config</module>-->
+        <module>config</module>
         <module>web</module>
-        <!--<module>jee</module>-->
+        <module>jee</module>
     </modules>
 
     <properties>
         <sonar.exclusions>
             **/config/**,
             **/servlet/**,
-            **/DateTimeObjectMapperProvider.java,
             **/RestConfig.java
         </sonar.exclusions>
     </properties>
