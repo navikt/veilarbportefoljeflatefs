@@ -30,7 +30,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>no.nav.sbl.veilarbportefoljeflatefs.config.ApplicationConfig</param-value>
+        <param-value>no.nav.fo.veilarbportefoljeflatefs.config.ApplicationConfig</param-value>
     </context-param>
 
     <filter>
@@ -62,7 +62,7 @@
 
     <filter>
         <filter-name>xsrf</filter-name>
-        <filter-class>no.nav.sbl.veilarbportefoljeflatefs.provider.filter.XsrfFilter</filter-class>
+        <filter-class>no.nav.fo.veilarbportefoljeflatefs.provider.filter.XsrfFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>xsrf</filter-name>
@@ -71,7 +71,7 @@
 
     <servlet>
         <servlet-name>selftest</servlet-name>
-        <servlet-class>no.nav.sbl.veilarbportefoljeflatefs.servlet.SelfTestServlet</servlet-class>
+        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.servlet.SelfTestServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>selftest</servlet-name>
@@ -79,7 +79,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>selftest-json</servlet-name>
-        <servlet-class>no.nav.sbl.veilarbportefoljeflatefs.servlet.SelfTestJsonServlet</servlet-class>
+        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.servlet.SelfTestJsonServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>selftest-json</servlet-name>
@@ -87,7 +87,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>isAlive</servlet-name>
-        <servlet-class>no.nav.sbl.veilarbportefoljeflatefs.servlet.IsAliveServlet</servlet-class>
+        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.servlet.IsAliveServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>isAlive</servlet-name>
@@ -99,7 +99,7 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
-            <param-value>no.nav.sbl.veilarbportefoljeflatefs.provider.rest.RestConfig</param-value>
+            <param-value>no.nav.fo.veilarbportefoljeflatefs.provider.rest.RestConfig</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
         <async-supported>true</async-supported>
@@ -117,7 +117,7 @@
 
     <servlet>
         <servlet-name>reactapp</servlet-name>
-        <servlet-class>no.nav.sbl.veilarbportefoljeflatefs.servlet.ApplicationServlet</servlet-class>
+        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.servlet.ApplicationServlet</servlet-class>
         <init-param>
             <param-name>applicationFile</param-name>
             <param-value>index.html</param-value>

@@ -19,11 +19,11 @@
         <constructor-arg value="${ldap.url}"/>
         <property name="authoritiesMapper" ref="grantedAuthoritiesMapper"/>
         <property name="userDetailsContextMapper">
-            <bean class="no.nav.sbl.veilarbportefoljeflatefs.security.NAVLdapUserDetailsMapper" />
+            <bean class="no.nav.fo.veilarbportefoljeflatefs.security.NAVLdapUserDetailsMapper" />
         </property>
         <property name="useAuthenticationRequestCredentials" value="true"/>
         <property name="convertSubErrorCodesToExceptions" value="true"/>
     </bean>
 
-    <bean id="grantedAuthoritiesMapper" class="no.nav.sbl.veilarbportefoljeflatefs.security.AuthoritiesMapper"/>
+    <bean id="grantedAuthoritiesMapper" class="no.nav.fo.veilarbportefoljeflatefs.security.AuthoritiesMapper"/>
 </beans>

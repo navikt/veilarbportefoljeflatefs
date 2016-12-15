@@ -10,7 +10,7 @@
         <version>3</version>
     </parent>
 
-    <groupId>no.nav.sbl.veilarbportefoljeflatefs</groupId>
+    <groupId>no.nav.fo.veilarbportefoljeflatefs</groupId>
     <artifactId>veilarbportefoljeflatefs-tekster</artifactId>
     <version>0.1-SNAPSHOT</version>
 

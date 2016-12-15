@@ -12,6 +12,6 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>no.nav.sbl.veilarbportefoljeflatefs.config.MockApplicationConfig</param-value>
+        <param-value>no.nav.fo.veilarbportefoljeflatefs.config.MockApplicationConfig</param-value>
     </context-param>
 </web-app>

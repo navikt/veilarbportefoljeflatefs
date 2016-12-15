@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>no.nav.sbl.portefolje</groupId>
+        <groupId>no.nav.fo</groupId>
         <artifactId>veilarbportefoljeflatefs</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
