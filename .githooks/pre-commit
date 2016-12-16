@@ -1,0 +1,6 @@
+#!/bin/sh
+
+LIST=`git diff-index --name-only HEAD | grep .*frontend.app.*\.js | grep -v json`;
+if [[ $LIST ]]; then
+    web/src/frontend/node_modules/.bin/eslint $LIST;
+fi
