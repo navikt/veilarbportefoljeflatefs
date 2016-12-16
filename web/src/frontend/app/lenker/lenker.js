@@ -2,7 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { Link } from 'react-router';
 
 function Lenker({ routes }) {
-    const valgtSide = routes[1].path;
+    const valgtSide = routes[1] ? routes[1].path : '';
     function erValgt(lenke) {
         return lenke === valgtSide ? 'valgt' : 'ikke-valgt';
     }
@@ -19,7 +19,7 @@ function Lenker({ routes }) {
 }
 
 Lenker.propTypes = {
-    routes: PT.object
+    routes: PT.arrayOf(PT.object)
 };
 
 export default Lenker;

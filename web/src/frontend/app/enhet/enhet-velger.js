@@ -31,7 +31,6 @@ function EnhetVelger({ enheter, velgEnhet }) {
 
 EnhetVelger.propTypes = {
     enheter: PT.arrayOf(PT.string),
-    // valgtEnhet: PT.string.isRequired,
     velgEnhet: PT.func.isRequired
 };
 

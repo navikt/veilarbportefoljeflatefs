@@ -6,6 +6,7 @@ import { hentLedetekster } from '../ducks/ledetekster';
 import Lenker from './../lenker/lenker';
 import DevTools from './../devtools';
 import { hentEnheterForSaksbehandler } from './../ducks/enheter';
+import Innholdslaster from './../innholdslaster/innholdslaster';
 
 addLocaleData(nb);
 class Application extends Component {
@@ -19,10 +20,12 @@ class Application extends Component {
         return (
             <IntlProvider defaultLocale="nb" locale="nb" messages={ledetekster.data.nb}>
                 <div className="portefolje">
-                    <div className="container maincontent side-innhold">
-                        <Lenker routes={routes} />
-                        {children}
-                    </div>
+                    <Innholdslaster avhengigheter={[ledetekster]}>
+                        <div className="container maincontent side-innhold">
+                            <Lenker routes={routes} />
+                            {children}
+                        </div>
+                    </Innholdslaster>
                     <div aria-hidden="true">
                         <DevTools />
                     </div>
@@ -34,7 +37,7 @@ class Application extends Component {
 
 Application.propTypes = {
     children: PT.object,
-    routes: PT.object,
+    routes: PT.arrayOf(PT.object),
     hentTekster: PT.func.isRequired,
     hentEnheter: PT.func.isRequired,
     ledetekster: PT.object
