@@ -1,4 +1,4 @@
-# XMLStilling-Admin
+# Portefølje-klientside
 
 ## Oppsett
 
