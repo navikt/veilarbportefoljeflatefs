@@ -55,7 +55,7 @@
         </plugins>
     </build>
     <scm>
-        <developerConnection>scm:git:http://stash.devillo.no/scm/sbl/veilarbportefoljeflatefs.git</developerConnection>
-        <url>http://stash.devillo.no:7990/projects/SBL/repos/veilarbportefoljeflatefs/veilarbportefoljeflatefs-tekster/browse</url>
+        <developerConnection>scm:git:http://stash.devillo.no/scm/fo/veilarbportefoljeflatefs.git</developerConnection>
+        <url>http://stash.devillo.no:7990/projects/FO/repos/veilarbportefoljeflatefs/veilarbportefoljeflatefs-tekster/browse</url>
     </scm>
 </project>
