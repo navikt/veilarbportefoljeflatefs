@@ -19,7 +19,7 @@ class EnhetSide extends Component {
 
         return (
             <div className="enhet-side panel">
-                <h1 className="typo-sidetittel">{`Enhet (valgt enhet: ${valgtEnhet})`}</h1>
+                <h1 className="typo-innholdstittel">{`Enhet (valgt enhet: ${valgtEnhet})`}</h1>
                 <p className="typo-infotekst"><FormattedMessage id="enhet.valgt.infotekst" /></p>
                 {enhetVelger}
             </div>

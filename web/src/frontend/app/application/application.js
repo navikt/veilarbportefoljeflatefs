@@ -15,12 +15,12 @@ class Application extends Component {
     }
 
     render() {
-        const { ledetekster = {}, children } = this.props;
+        const { ledetekster = {}, children, routes } = this.props;
         return (
             <IntlProvider defaultLocale="nb" locale="nb" messages={ledetekster.data.nb}>
                 <div className="portefolje">
                     <div className="container maincontent side-innhold">
-                        <Lenker />
+                        <Lenker routes={routes} />
                         {children}
                     </div>
                     <div aria-hidden="true">
@@ -34,6 +34,7 @@ class Application extends Component {
 
 Application.propTypes = {
     children: PT.object,
+    routes: PT.object,
     hentTekster: PT.func.isRequired,
     hentEnheter: PT.func.isRequired,
     ledetekster: PT.object
