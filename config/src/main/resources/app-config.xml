@@ -10,7 +10,7 @@
     </selftest>
 
     <artifacts>
-        <ear groupId="no.nav.fo.veilarbportefoljeflatefs" artifactId="veilarbportefoljeflatefs-jee"/>
+        <ear groupId="no.nav.fo" artifactId="veilarbportefoljeflatefs-jee"/>
     </artifacts>
 
     <resources>
