@@ -1,5 +1,5 @@
 import { hentEnheter } from './../middleware/api';
-import { STATUS } from './utils';
+import { STATUS, doThenDispatch} from './utils';
 
 
 // Actions
@@ -17,10 +17,10 @@ const initialState = {
 //  Reducer
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        // case PENDING:
-        //     return { ...state, status: STATUS.PENDING };
-        // case FEILET:
-        //     return { ...state, status: STATUS.ERROR, data: action.data };
+        case PENDING:
+            return { ...state, status: STATUS.PENDING };
+        case FEILET:
+            return { ...state, status: STATUS.ERROR, data: action.data };
         case OK:
             return { ...state, status: STATUS.OK, data: action.data, valgtEnhet: action.data[0] };
         case VELG_ENHET:
@@ -28,20 +28,15 @@ export default function reducer(state = initialState, action) {
         default:
             return state;
     }
-    // return state;
 }
 
 // Action Creators
 export function hentEnheterForSaksbehandler(id) {
-    // return doThenDispatch(() => hentEnheterForSaksbehandler(id), {
-    //     OK,
-    //     FEILET,
-    //     PENDING
-    // });
-    return {
-        type: OK,
-        data: hentEnheter(id)
-    };
+    return doThenDispatch(() => hentEnheter(id), {
+        OK,
+        FEILET,
+        PENDING
+    });
 }
 
 export function velgEnhetForSaksbehandler(valgtEnhet) {
