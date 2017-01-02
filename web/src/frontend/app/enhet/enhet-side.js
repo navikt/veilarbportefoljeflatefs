@@ -3,24 +3,36 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { velgEnhetForSaksbehandler } from './../ducks/enheter';
 import EnhetVelger from './enhet-velger';
+import { enhetShape } from './../proptype-shapes';
 
 class EnhetSide extends Component {
 
     componentWillMount() {
-        // this.props.hentEnheter();
+        if (!this.props.valgtEnhet) {
+            this.props.velgEnhet(this.props.enheter[0]);
+        }
     }
 
     render() {
         const { enheter, valgtEnhet, velgEnhet } = this.props;
 
+        if (!valgtEnhet) {
+            return <noscript />;
+        }
+
         const enhetVelger = enheter.length === 1 ?
-            <p>{valgtEnhet}</p> :
+            <p>{valgtEnhet.enhetId}</p> :
             <EnhetVelger enheter={enheter} valgtEnhet={valgtEnhet} velgEnhet={velgEnhet} />;
 
         return (
             <div className="enhet-side panel">
-                <h1 className="typo-innholdstittel">{`Enhet (valgt enhet: ${valgtEnhet})`}</h1>
-                <p className="typo-infotekst"><FormattedMessage id="enhet.valgt.infotekst" /></p>
+                <h1 className="typo-innholdstittel">{`Enhet : ${valgtEnhet.enhetId} (${valgtEnhet.navn})`}</h1>
+                <p className="typo-infotekst">
+                    <FormattedMessage
+                        id="enhet.valgt.infotekst"
+                        values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
+                    />
+                </p>
                 {enhetVelger}
             </div>
         );
@@ -28,8 +40,8 @@ class EnhetSide extends Component {
 }
 
 EnhetSide.propTypes = {
-    enheter: PT.arrayOf(PT.string),
-    valgtEnhet: PT.string.isRequired,
+    enheter: PT.arrayOf(enhetShape),
+    valgtEnhet: PT.object,
     velgEnhet: PT.func.isRequired
 };
 
