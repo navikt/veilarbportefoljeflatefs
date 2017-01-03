@@ -22,11 +22,6 @@
     </modules>
 
     <properties>
-        <sonar.exclusions>
-            **/config/**,
-            **/servlet/**,
-            **/RestConfig.java
-        </sonar.exclusions>
     </properties>
 
     <build>
