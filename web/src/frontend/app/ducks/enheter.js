@@ -1,5 +1,5 @@
 import { hentEnheter } from './../middleware/api';
-import { STATUS, doThenDispatch} from './utils';
+import { STATUS, doThenDispatch } from './utils';
 
 
 // Actions
