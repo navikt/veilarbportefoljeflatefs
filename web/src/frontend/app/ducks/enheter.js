@@ -10,7 +10,7 @@ export const PENDING = 'veilarbportefolje/enheter/PENDING';
 export const VELG_ENHET = 'VELG_ENHET';
 
 
-const ident = 'B900001';
+const ident = window.location.search.substr(1);
 
 const initialState = {
     data: [],
@@ -34,8 +34,8 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function hentEnheterForSaksbehandler(id) {
-    return doThenDispatch(() => hentEnheter(id), {
+export function hentEnheterForSaksbehandler() {
+    return doThenDispatch(() => hentEnheter(ident), {
         OK,
         FEILET,
         PENDING
