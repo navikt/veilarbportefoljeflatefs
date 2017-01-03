@@ -16,11 +16,11 @@ class Application extends Component {
     }
 
     render() {
-        const { ledetekster = {}, children, routes } = this.props;
+        const { ledetekster = {}, enheter = {}, children, routes } = this.props;
         return (
             <IntlProvider defaultLocale="nb" locale="nb" messages={ledetekster.data.nb}>
                 <div className="portefolje">
-                    <Innholdslaster avhengigheter={[ledetekster]}>
+                    <Innholdslaster avhengigheter={[ledetekster, enheter]}>
                         <div className="container maincontent side-innhold">
                             <Lenker routes={routes} />
                             {children}
@@ -40,12 +40,13 @@ Application.propTypes = {
     routes: PT.arrayOf(PT.object),
     hentTekster: PT.func.isRequired,
     hentEnheter: PT.func.isRequired,
-    ledetekster: PT.object
+    ledetekster: PT.object,
+    enheter: PT.object
 };
 
 const mapStateToProps = state => ({
     ledetekster: state.ledetekster,
-    enheter: state.enheter.data
+    enheter: state.enheter
 });
 
 const mapDispatchToProps = dispatch => ({

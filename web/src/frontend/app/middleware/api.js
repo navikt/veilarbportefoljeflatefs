@@ -4,9 +4,8 @@ const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
 const MED_CREDENTIALS = { credentials: 'same-origin' };
 
 export function hentEnheter() {
-    const url = 'http://' + window.location.hostname + ':9599/Portefolje-serverside/tjenester/hentenheter';
+    const url = `https://${window.location.hostname}:9590/portefolje/tjenester/hentenheter`;
     return fetchToJson(url, MED_CREDENTIALS);
-
 }
 
 export function hentLedetekster() {
