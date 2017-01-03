@@ -14,8 +14,6 @@
     <packaging>war</packaging>
 
     <properties>
-        <skip.js-tests>true</skip.js-tests>
-
         <!-- Egenlagde -->
         <common-jetty.version>2.0.11</common-jetty.version>
         <common-types.version>1.2</common-types.version>
@@ -351,7 +349,6 @@
                             <arguments>
                                 <argument>test</argument>
                             </arguments>
-                            <skip>${skip.js-tests}</skip>
                             <workingDirectory>src/frontend</workingDirectory>
                         </configuration>
                     </execution>
