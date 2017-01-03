@@ -22,7 +22,7 @@ const tekster = { nb: { spinner: 'spinner' } };
 render(
     (
         <Provider store={store}>
-            <IntlProvider defaultLocale="nb" locale="nb" messages={tekster.nb}>
+            <IntlProvider defaultLocale="nb" locale="nb" messages={tekster}>
                 <Router history={history}>
                     <Route path="/" component={Application}>
                         <Route path="enhet" component={EnhetSide} />

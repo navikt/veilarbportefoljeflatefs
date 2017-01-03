@@ -14,7 +14,7 @@ public class StartJetty {
 
         //Må ha https for csrf-token
         final Jetty jetty = Jetty.usingWar()
-                .at("portefolje")
+                .at("veilarbportefoljeflatefs")
                 .sslPort(9594)
                 .port(9595)
 //                .overrideWebXml()
