@@ -50,10 +50,6 @@
         </dependency>
         <dependency>
             <groupId>no.nav.modig</groupId>
-            <artifactId>modig-security-sts</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>no.nav.modig</groupId>
             <artifactId>modig-log-filter</artifactId>
             <scope>runtime</scope>
         </dependency>

@@ -154,18 +154,6 @@
             </dependency>
             <dependency>
                 <groupId>no.nav.modig</groupId>
-                <artifactId>modig-security-sts</artifactId>
-                <version>${modig.security.version}</version>
-                <scope>runtime</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>no.nav.modig</groupId>
                 <artifactId>modig-testcertificates</artifactId>
                 <version>${modig-testcertificates.version}</version>
                 <scope>test</scope>
