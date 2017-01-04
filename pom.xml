@@ -53,15 +53,6 @@
         <mockito.version>1.10.19</mockito.version>
     </properties>
 
-    <build>
-        <resources>
-            <resource>
-                <directory>config/src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-
-    </build>
     <dependencyManagement>
         <dependencies>
             <dependency>

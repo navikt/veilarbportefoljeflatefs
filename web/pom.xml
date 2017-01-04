@@ -192,9 +192,6 @@
     <build>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-            <resource>
                 <directory>src/frontend</directory>
                 <excludes>
                     <exclude>**/node_modules/**</exclude>
