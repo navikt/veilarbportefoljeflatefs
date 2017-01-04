@@ -9,6 +9,9 @@ export const PENDING = 'veilarbportefolje/enheter/PENDING';
 
 export const VELG_ENHET = 'VELG_ENHET';
 
+
+const ident = 'B900001';
+
 const initialState = {
     data: [],
     valgtEnhet: undefined
@@ -22,7 +25,7 @@ export default function reducer(state = initialState, action) {
         case FEILET:
             return { ...state, status: STATUS.ERROR, data: action.data };
         case OK:
-            return { ...state, status: STATUS.OK, data: action.data, valgtEnhet: action.data[0] };
+            return { ...state, status: STATUS.OK, data: action.data[ident].enhetListe };
         case VELG_ENHET:
             return { ...state, valgtEnhet: action.valgtEnhet };
         default:

@@ -27,7 +27,7 @@ const Innholdslaster = ({ avhengigheter, className, feilmeldingKey, intl, childr
             );
 
         return (
-            <div tittel="Oops" className={className}>
+            <div className={className}>
                 <p>{feilmelding}</p>
             </div>
         );

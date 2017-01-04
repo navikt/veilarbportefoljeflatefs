@@ -5,10 +5,12 @@ function EnhetVelger({ enheter, velgEnhet }) {
         return <noscript />;
     }
     const velgNyEnhet = (event) => {
-        velgEnhet(event.target.value);
+        velgEnhet(enheter[event.target.value]);
     };
 
-    const enhetsliste = enheter.map(element => <option value={element}>{element}</option>);
+    const enhetsliste = enheter.map((enhet, index) =>
+        <option value={index} key={`option-${enhet.enhetId}`}>{`${enhet.enhetId} (${enhet.navn})`}</option>
+    );
 
     return (
         <div className="EnhetVelger">
@@ -30,7 +32,7 @@ function EnhetVelger({ enheter, velgEnhet }) {
 }
 
 EnhetVelger.propTypes = {
-    enheter: PT.arrayOf(PT.string),
+    enheter: PT.arrayOf(PT.object),
     velgEnhet: PT.func.isRequired
 };
 

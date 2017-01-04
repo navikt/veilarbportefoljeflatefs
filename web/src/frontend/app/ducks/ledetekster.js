@@ -8,7 +8,7 @@ export const PENDING = 'veilarbportefoljeflatefs/ledetekster/PENDING';
 
 const initalState = {
     status: STATUS.NOT_STARTED,
-    data: {}
+    data: { nb: { spinner: 'spinner' } }
 };
 
 
