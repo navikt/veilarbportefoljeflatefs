@@ -60,32 +60,6 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>no.nav.maven.plugins</groupId>
-                    <artifactId>modig-scm-plugin</artifactId>
-                    <version>1.1.10</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
-        <plugins>
-            <plugin>
-                <groupId>no.nav.maven.plugins</groupId>
-                <artifactId>modig-scm-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>Check illegal or unwanted dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>failon-unwanted-dependencies</goal>
-                            <goal>report-unapproved-dependencies</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
 
     </build>
     <dependencyManagement>
@@ -356,22 +330,5 @@
         <url>http://stash.devillo.no/projects/FO/repos/veilarbportefoljeflatefs.git/browse</url>
 		<tag>HEAD</tag>
 	</scm>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>no.nav.maven.plugins</groupId>
-                <artifactId>modig-scm-plugin</artifactId>
-                <version>1.1.9</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>generate-jira-changes</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
 
 </project>
