@@ -28,7 +28,6 @@
             <plugin>
                 <artifactId>maven-ear-plugin</artifactId>
                 <configuration>
-                    <version>6</version>
                     <modules>
                         <webModule>
                             <groupId>${project.groupId}</groupId>
@@ -37,7 +36,7 @@
                             <bundleFileName>veilarbportefoljeflatefs-web.war</bundleFileName>
                         </webModule>
                     </modules>
-                    <encoding>UTF-8</encoding>
+                    <displayName>veilarbportefoljeflatefs</displayName>
                 </configuration>
             </plugin>
         </plugins>

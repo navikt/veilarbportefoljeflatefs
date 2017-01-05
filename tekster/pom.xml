@@ -25,10 +25,8 @@
             <plugin>
                 <groupId>no.nav.maven.plugins</groupId>
                 <artifactId>aura-maven-plugin</artifactId>
-                <version>6.1.0</version>
+                <version>6.1.54</version>
                 <configuration>
-                    <apps>${project.parent.artifactId}:${project.version}</apps>
-                    <envConfigUrl>https://envconfig.adeo.no/conf</envConfigUrl>
                     ***REMOVED***
                     ***REMOVED***
                 </configuration>

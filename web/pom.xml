@@ -13,66 +13,17 @@
     <name>${project.artifactId}</name>
     <packaging>war</packaging>
 
-    <properties>
-        <skip.js-tests>true</skip.js-tests>
-
-        <!-- Egenlagde -->
-        <common-jetty.version>2.0.11</common-jetty.version>
-        <common-types.version>1.2</common-types.version>
-        <common-web.version>2.0.4</common-web.version>
-        <common-test.version>1.2</common-test.version>
-        <modig-security.version>1.0.24</modig-security.version>
-        <modig-content.version>2.0.9</modig-content.version>
-        <modig-lang.version>2.0.2</modig-lang.version>
-        <modig-log-filter.version>1.1.3</modig-log-filter.version>
-        <modig-testcertificates.version>1.1.0</modig-testcertificates.version>
-        <modig-core-test.version>1.0.0</modig-core-test.version>
-        <loginmodule.version>1.0.30</loginmodule.version>
-
-        <!-- Tredjepars -->
-        <!--<ehcache.version>2.6.11</ehcache.version>-->
-        <cxf.version>2.7.6</cxf.version>
-        <hamcrest.version>1.3</hamcrest.version>
-        <slf4j.version>1.7.21</slf4j.version>
-        <spring.version>4.2.6.RELEASE</spring.version>
-        <spring.security.version>4.1.3.RELEASE</spring.security.version>
-        <jersey.version>2.22.2</jersey.version>
-        <jackson.version>2.7.4</jackson.version>
-        <logback.version>1.1.7</logback.version>
-        <commons-codec.version>1.9</commons-codec.version>
-        <commons-lang3.version>3.1</commons-lang3.version>
-        <jsoup.version>1.7.2</jsoup.version>
-        <joda.version>2.9.4</joda.version>
-
-        <!-- Java -->
-        <javax.ws.rs-api.version>2.0.1</javax.ws.rs-api.version>
-        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-
-        <!-- Test -->
-        <junit.version>4.11</junit.version>
-        <mockito.version>1.10.19</mockito.version>
-    </properties>
-
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>no.nav.modig</groupId>-->
-            <!--<artifactId>modig-security-loginmodule</artifactId>-->
-            <!--<version>${loginmodule.version}</version>-->
-            <!--<scope>runtime</scope>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>commons-logging</groupId>-->
-                    <!--<artifactId>commons-logging</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>no.nav.modig</groupId>-->
-            <!--<artifactId>modig-security-loginmodule</artifactId>-->
-            <!--<type>test-jar</type>-->
-            <!--<scope>test</scope>-->
-            <!--<version>${loginmodule.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>no.nav.modig</groupId>
+            <artifactId>modig-security-loginmodule</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>no.nav.modig</groupId>
+            <artifactId>modig-security-loginmodule</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
 
         <!--Dialogarena tjenestespesifikasjon-->
 
@@ -80,213 +31,166 @@
         <dependency>
             <groupId>no.nav.sbl.dialogarena</groupId>
             <artifactId>common-web</artifactId>
-            <version>${common-web.version}</version>
         </dependency>
         <dependency>
             <groupId>no.nav.sbl.dialogarena</groupId>
             <artifactId>common-test</artifactId>
-            <version>${common-test.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>no.nav.sbl.dialogarena</groupId>
             <artifactId>common-jetty</artifactId>
-            <version>${common-jetty.version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.eclipse.jetty.orbit</groupId>
-                    <artifactId>javax.servlet</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>no.nav.sbl.dialogarena</groupId>
             <artifactId>common-types</artifactId>
-            <version>${common-types.version}</version>
         </dependency>
-
-        <!--Modig-->
         <dependency>
             <groupId>no.nav.sbl</groupId>
             <artifactId>utave</artifactId>
-            <version>1.0.9</version>
         </dependency>
         <dependency>
             <groupId>no.nav.modig</groupId>
             <artifactId>modig-log-filter</artifactId>
             <scope>runtime</scope>
-            <version>${modig-log-filter.version}</version>
         </dependency>
         <dependency>
             <groupId>no.nav.modig</groupId>
             <artifactId>modig-testcertificates</artifactId>
-            <version>${modig-testcertificates.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>no.nav.modig</groupId>
+            <artifactId>modig-core-test</artifactId>
         </dependency>
 
         <!--Spring-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>${spring.version}</version>
-            <scope>runtime</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
         </dependency>
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
-            <version>11.2.0.3</version>
-            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
         </dependency>
 
         <!--Jersey-->
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
-            <version>${javax.ws.rs-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
-            <version>${jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
-            <version>${jersey.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.ext</groupId>
             <artifactId>jersey-spring3</artifactId>
-            <version>${jersey.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.hk2.external</groupId>
             <artifactId>javax.inject</artifactId>
-            <version>2.4.0-b06</version>
         </dependency>
 
         <!--Logging-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>${logback.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>runtime</scope>
         </dependency>
 
+        <!--Jackson-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+        </dependency>
 
         <!--Diverse-->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.4</version>
-            <scope>runtime</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>${javax.servlet-api.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-jaas</artifactId>
-            <version>9.3.0.M2</version>
-            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
-            <version>1</version>
-            <scope>runtime</scope>
         </dependency>
-        <!--Testing-->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
-            <version>${hamcrest.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-core</artifactId>
-            <version>${hamcrest.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
         <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
             <resource>
                 <directory>src/frontend</directory>
                 <excludes>
@@ -351,7 +255,6 @@
                             <arguments>
                                 <argument>test</argument>
                             </arguments>
-                            <skip>${skip.js-tests}</skip>
                             <workingDirectory>src/frontend</workingDirectory>
                         </configuration>
                     </execution>
