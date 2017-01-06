@@ -47,6 +47,7 @@
     "moment": "2.15.2",
     "nav-react-datepicker": "0.0.28",
     "nav-react-design": "^0.1.4",
+    "query-string": "^4.2.3",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-intl": "^2.1.5",
