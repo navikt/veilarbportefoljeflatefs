@@ -24,7 +24,7 @@ export default function reducer(state = initialState, action) {
         case FEILET:
             return { ...state, status: STATUS.ERROR, data: action.data };
         case OK:
-            return { ...state, status: STATUS.OK, data: action.data[Object.keys(action.data)[0]].enhetListe };
+            return { ...state, status: STATUS.OK, data: action.data.enhetliste };
         case VELG_ENHET:
             return { ...state, valgtEnhet: action.valgtEnhet };
         default:
