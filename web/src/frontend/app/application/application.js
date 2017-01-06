@@ -12,7 +12,7 @@ addLocaleData(nb);
 class Application extends Component {
     componentWillMount() {
         this.props.hentTekster();
-        this.props.hentEnheter();
+        this.props.hentEnheter(this.props.enheter.ident);
     }
 
     render() {
@@ -51,7 +51,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     hentTekster: () => dispatch(hentLedetekster()),
-    hentEnheter: () => dispatch(hentEnheterForSaksbehandler())
+    hentEnheter: ident => dispatch(hentEnheterForSaksbehandler(ident))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application);

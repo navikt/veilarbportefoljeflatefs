@@ -1,7 +1,7 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { velgEnhetForSaksbehandler } from './../ducks/enheter';
+import { velgEnhetForSaksbehandler, leggEnhetIUrl } from './../ducks/enheter';
 import EnhetVelger from './enhet-velger';
 import { enhetShape } from './../proptype-shapes';
 
@@ -10,6 +10,8 @@ class EnhetSide extends Component {
     componentWillMount() {
         if (!this.props.valgtEnhet) {
             this.props.velgEnhet(this.props.enheter[0]);
+        } else {
+            leggEnhetIUrl(this.props.valgtEnhet);
         }
     }
 
