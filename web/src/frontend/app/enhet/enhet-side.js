@@ -1,7 +1,8 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { velgEnhetForSaksbehandler, leggEnhetIUrl } from './../ducks/enheter';
+import { velgEnhetForSaksbehandler } from './../ducks/enheter';
+import { leggEnhetIUrl } from '../utils/utils';
 import EnhetVelger from './enhet-velger';
 import { enhetShape } from './../proptype-shapes';
 

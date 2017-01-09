@@ -1,7 +1,7 @@
 import queryString from 'query-string';
 import { hentEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
-
+import { leggEnhetIUrl } from '../utils/utils';
 
 // Actions
 export const OK = 'veilarbportefolje/enheter/OK';
@@ -39,16 +39,6 @@ export function hentEnheterForSaksbehandler(ident) {
         FEILET,
         PENDING
     });
-}
-
-export function leggEnhetIUrl(enhet) { // eslint-disable-line consistent-return
-    if (!enhet) return null;
-    const parsed = queryString.parse(location.search);
-    parsed.enhet = enhet.enhetId;
-
-    const stringified = queryString.stringify(parsed);
-    const pathname = window.location.pathname;
-    window.history.replaceState({}, null, `${pathname}?${stringified}`);
 }
 
 export function velgEnhetForSaksbehandler(valgtEnhet) {
