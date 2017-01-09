@@ -1,6 +1,7 @@
+import queryString from 'query-string';
 import { hentEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
-
+import { leggEnhetIUrl } from '../utils/utils';
 
 // Actions
 export const OK = 'veilarbportefolje/enheter/OK';
@@ -9,12 +10,10 @@ export const PENDING = 'veilarbportefolje/enheter/PENDING';
 
 export const VELG_ENHET = 'VELG_ENHET';
 
-
-const ident = window.location.search.substr(1);
-
 const initialState = {
     data: [],
-    valgtEnhet: undefined
+    valgtEnhet: undefined,
+    ident: queryString.parse(location.search).ident
 };
 
 //  Reducer
@@ -25,7 +24,7 @@ export default function reducer(state = initialState, action) {
         case FEILET:
             return { ...state, status: STATUS.ERROR, data: action.data };
         case OK:
-            return { ...state, status: STATUS.OK, data: action.data[ident].enhetListe };
+            return { ...state, status: STATUS.OK, data: action.data.enhetliste };
         case VELG_ENHET:
             return { ...state, valgtEnhet: action.valgtEnhet };
         default:
@@ -34,7 +33,7 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function hentEnheterForSaksbehandler() {
+export function hentEnheterForSaksbehandler(ident) {
     return doThenDispatch(() => hentEnheter(ident), {
         OK,
         FEILET,
@@ -43,6 +42,7 @@ export function hentEnheterForSaksbehandler() {
 }
 
 export function velgEnhetForSaksbehandler(valgtEnhet) {
+    leggEnhetIUrl(valgtEnhet);
     return {
         type: VELG_ENHET,
         valgtEnhet
