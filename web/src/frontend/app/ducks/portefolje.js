@@ -1,12 +1,12 @@
 import * as Api from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 
-//Actions
+// Actions
 const OK = 'veilarbportefolje/portefolje/OK';
 const FEILET = 'veilarbportefolje/portefolje/FEILET';
 const PENDING = 'veilarbportefolje/portefolje/PENDING';
 
-//Reducer
+// Reducer
 
 const initialState = {
     status: STATUS.NOT_STARTED,
@@ -20,11 +20,11 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case PENDING:
-            return { ...state, status: STATUS.PENDING}
+            return { ...state, status: STATUS.PENDING };
         case FEILET:
-            return { ...state, status: STATUS.ERROR, data: action.data }
+            return { ...state, status: STATUS.ERROR, data: action.data };
         case OK:
-            return { ...state, status: STATUS.OK, data: action.data }
+            return { ...state, status: STATUS.OK, data: action.data };
         default:
             return state;
     }

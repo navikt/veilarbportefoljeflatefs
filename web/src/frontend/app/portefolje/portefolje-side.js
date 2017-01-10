@@ -1,30 +1,63 @@
 import React, { Component, PropTypes as PT } from 'react';
-import Innholdslaster from '../innholdslaster/innholdslaster';
 import { connect } from 'react-redux';
+import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet } from '../ducks/portefolje';
 
 
 class PortefoljeSide extends Component {
-    componentWillMount(){
+    componentWillMount() {
         const { valgtEnhet, hentPortefolje } = this.props;
         hentPortefolje(valgtEnhet.enhetId);
     }
 
     render() {
         const { portefolje } = this.props;
-        console.log('portefolje', portefolje);
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
                 <div className="portefolje-side panel">
                     <h1 className="typo-innholdstittel">Portefølje</h1>
-                    <ul>{portefolje.data.portefolje.brukere.map( bruker => <li>{bruker.fornavn}</li>)}</ul>
+
+
+                    <table className="tabell tabell-skillestrek">
+                        <thead>
+                            <tr>
+                                <th>Brukere</th>
+                                <th>Fødselnummer</th>
+                                <th>Veileder</th>
+                                <th>
+                                    <div className="nav-input">
+                                        <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
+                                        <label htmlFor="checkbox-alle-brukere" />
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {portefolje.data.portefolje.brukere.map(bruker => <tr>
+                                <td>{`${bruker.fornavn} ${bruker.etternavn}`} </td>
+                                <td>{bruker.fnr}</td>
+                                <td> - </td>
+                                <td>
+                                    <div className="nav-input">
+                                        <input className="nav-checkbox" id={`checkbox-${bruker.fnr}`} type="checkbox" />
+                                        <label htmlFor={`checkbox-${bruker.fnr}`} />
+                                    </div>
+                                </td>
+                            </tr>)}
+                        </tbody>
+                    </table>
+
                 </div>
-                </Innholdslaster>
+            </Innholdslaster>
         );
     }
 }
 
-PortefoljeSide.propTypes = {};
+PortefoljeSide.propTypes = {
+    valgtEnhet: PT.object,
+    hentPortefolje: PT.object,
+    portefolje: PT.object
+};
 
 const mapStateToProps = state => ({
     portefolje: state.portefolje,
