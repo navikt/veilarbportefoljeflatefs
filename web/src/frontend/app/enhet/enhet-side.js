@@ -1,12 +1,12 @@
-import React, { PropTypes as PT, Component } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { velgEnhetForSaksbehandler } from './../ducks/enheter';
-import { leggEnhetIUrl } from '../utils/utils';
+import React, {PropTypes as PT, Component} from 'react';
+import {FormattedMessage} from 'react-intl';
+import {connect} from 'react-redux';
+import {velgEnhetForSaksbehandler} from './../ducks/enheter';
+import {leggEnhetIUrl} from '../utils/utils';
 import EnhetVelger from './enhet-velger';
-import { enhetShape } from './../proptype-shapes';
-import PortefoljeVisning from './../portefolje/portefolje';
-import { hentPortefoljeForEnhet } from '../ducks/portefolje';
+import {enhetShape} from './../proptype-shapes';
+import PortefoljeVisning from '../portefolje/portefolje-visning';
+import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 
 
 class EnhetSide extends Component {
@@ -20,7 +20,7 @@ class EnhetSide extends Component {
     }
 
     render() {
-        const { enheter, ident, valgtEnhet, velgEnhet, hentPortefolje } = this.props;
+        const {enheter, ident, valgtEnhet, velgEnhet, hentPortefolje} = this.props;
 
 
         if (!valgtEnhet) {
@@ -33,7 +33,7 @@ class EnhetSide extends Component {
             <EnhetVelger enheter={enheter} valgtEnhet={valgtEnhet} velgEnhet={enhet => {
                 velgEnhet(enhet);
                 hentPortefolje(enhet.enhetId, ident);
-            }} />;
+            }}/>;
 
         return (
             <div className="enhet-side panel">
@@ -41,7 +41,7 @@ class EnhetSide extends Component {
                 <p className="typo-infotekst">
                     <FormattedMessage
                         id="enhet.valgt.infotekst"
-                        values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}/>
+                        values={{enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn}}/>
                 </p>
                 {enhetVelger}
                 <PortefoljeVisning/>

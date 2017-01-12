@@ -16,7 +16,7 @@ export function hentLedetekster() {
     return fetchToJson(`${API_BASE_URL}/tekster`, MED_CREDENTIALS);
 }
 
-export function hentPortefolje(enhet, ident) {
-    const url = `https://app-t4.adeo.no/veilarbportefolje/tjenester/hentportefoljeforenhet/${enhet}?ident=${ident}`;
+export function hentPortefolje(enhet, ident, fra, antall) {
+    const url = `https://app-t4.adeo.no/veilarbportefolje/tjenester/hentportefoljeforenhet/${enhet}?ident=${ident}&fra=${fra}&antall=${antall}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }

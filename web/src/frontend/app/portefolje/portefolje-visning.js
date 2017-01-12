@@ -1,19 +1,19 @@
-import React, { Component, PropTypes as PT } from 'react';
-import { connect } from 'react-redux';
+import React, {Component, PropTypes as PT} from 'react';
+import {connect} from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet } from '../ducks/portefolje';
+import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 
 
 class PortefoljeVisning extends Component {
     componentWillMount() {
-        const { valgtEnhet, hentPortefolje } = this.props;
+        const {valgtEnhet, hentPortefolje} = this.props;
         if (valgtEnhet) {
-            hentPortefolje(valgtEnhet.enhetId, this.props.portefolje.ident);
+            hentPortefolje(valgtEnhet.enhetId, this.props.ident);
         }
     }
 
     render() {
-        const { portefolje} = this.props;
+        const {portefolje} = this.props;
         const spaceStyle = {
             padding: '20px 5px'
         };
@@ -31,8 +31,8 @@ class PortefoljeVisning extends Component {
                         <th></th>
                         <th>
                             <div className="nav-input">
-                                <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
-                                <label htmlFor="checkbox-alle-brukere" />
+                                <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox"/>
+                                <label htmlFor="checkbox-alle-brukere"/>
                             </div>
                         </th>
                     </tr>
@@ -43,18 +43,14 @@ class PortefoljeVisning extends Component {
                         <td>{bruker.fnr}</td>
                         <td>{`${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`} </td>
                         <td>
-                            {bruker.sikkerhetstiltak.map(tiltak =>
-                                <span>{tiltak}</span>)
-                            }
-                            {bruker.diskresjonskode == null ? null : <span>{`Kode ${bruker.diskresjonskode}`}</span>}
-
+                            {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
+                            {bruker.diskresjonskode != null ? <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
                             {bruker.egenAnsatt == true ? <span>Egen ansatt</span> : null}
-
                         </td>
                         <td>
                             <div className="nav-input">
-                                <input className="nav-checkbox" id={`checkbox-${bruker.fnr}`} type="checkbox" />
-                                <label htmlFor={`checkbox-${bruker.fnr}`} />
+                                <input className="nav-checkbox" id={`checkbox-${bruker.fnr}`} type="checkbox"/>
+                                <label htmlFor={`checkbox-${bruker.fnr}`}/>
                             </div>
                         </td>
                     </tr>)}
@@ -68,12 +64,14 @@ class PortefoljeVisning extends Component {
 PortefoljeVisning.propTypes = {
     valgtEnhet: PT.object,
     portefolje: PT.object,
+    ident: PT.string,
     hentPortefolje: PT.func
 };
 
 const mapStateToProps = state => ({
     portefolje: state.portefolje,
-    valgtEnhet: state.enheter.valgtEnhet
+    valgtEnhet: state.enheter.valgtEnhet,
+    ident: state.enheter.ident
 });
 
 const mapDispatchToProps = dispatch => ({
