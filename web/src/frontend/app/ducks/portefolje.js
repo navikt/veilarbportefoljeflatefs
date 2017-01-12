@@ -15,8 +15,7 @@ const initialState = {
         portefolje: {
             brukere: []
         }
-    },
-    ident: queryString.parse(location.search).ident,
+    }
 };
 
 export default function reducer(state = initialState, action) {
