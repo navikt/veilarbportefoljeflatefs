@@ -7,7 +7,7 @@ import { hentPortefoljeForEnhet } from '../ducks/portefolje';
 class PortefoljeSide extends Component {
     componentWillMount() {
         const { valgtEnhet, hentPortefolje } = this.props;
-        hentPortefolje(valgtEnhet.enhetId);
+        hentPortefolje(valgtEnhet.enhetId, this.props.portefolje.ident);
     }
 
     render() {
@@ -21,7 +21,7 @@ class PortefoljeSide extends Component {
                     <table className="tabell tabell-skillestrek">
                         <thead>
                             <tr>
-                                <th>Brukere</th>
+                                <th>Etternavn, fornavn</th>
                                 <th>Fødselnummer</th>
                                 <th>Veileder</th>
                                 <th>
@@ -34,7 +34,7 @@ class PortefoljeSide extends Component {
                         </thead>
                         <tbody>
                             {portefolje.data.portefolje.brukere.map(bruker => <tr>
-                                <td>{`${bruker.fornavn} ${bruker.etternavn}`} </td>
+                                <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
                                 <td>{bruker.fnr}</td>
                                 <td> - </td>
                                 <td>
@@ -65,7 +65,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: enhet => dispatch(hentPortefoljeForEnhet(enhet))
+    hentPortefolje: (enhet, ident) => dispatch(hentPortefoljeForEnhet(enhet, ident))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeSide);

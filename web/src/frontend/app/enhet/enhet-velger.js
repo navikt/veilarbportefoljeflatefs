@@ -21,7 +21,6 @@ function EnhetVelger({ enheter, velgEnhet }) {
                 <select
                     id="select-enhet"
                     name="valgtEnhet"
-                    onBlur={velgNyEnhet}
                     onChange={velgNyEnhet}
                 >
                     {enhetsliste}

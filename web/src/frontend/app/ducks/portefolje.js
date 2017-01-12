@@ -1,3 +1,4 @@
+import queryString from 'query-string';
 import * as Api from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 
@@ -14,7 +15,8 @@ const initialState = {
         portefolje: {
             brukere: []
         }
-    }
+    },
+    ident: queryString.parse(location.search).ident,
 };
 
 export default function reducer(state = initialState, action) {
@@ -31,8 +33,8 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function hentPortefoljeForEnhet(enhet) {
-    return doThenDispatch(() => Api.hentPortefolje(enhet), {
+export function hentPortefoljeForEnhet(enhet, ident) {
+    return doThenDispatch(() => Api.hentPortefolje(enhet, ident), {
         OK,
         FEILET,
         PENDING
