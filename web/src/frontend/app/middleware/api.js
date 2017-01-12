@@ -17,6 +17,6 @@ export function hentLedetekster() {
 }
 
 export function hentPortefolje(enhet, ident) {
-    const url = `https://app-t4.adeo.no/veilarbportefolje/tjenester/hentportefolje/${enhet.enhetId}?ident=${ident}`;
+    const url = `https://app-t4.adeo.no/veilarbportefolje/tjenester/hentportefoljeforenhet/${enhet.enhetId}?ident=${ident}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }

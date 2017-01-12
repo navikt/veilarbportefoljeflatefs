@@ -38,6 +38,10 @@ class EnhetSide extends Component {
                 hentPortefolje(enhet, portefolje.ident);
             }} />;
 
+            const spaceStyle = {
+                padding: '20px 5px'
+            };
+
         return (
             <div className="enhet-side panel">
                 <h1 className="typo-innholdstittel">{`Enhet : ${valgtEnhet.enhetId} (${valgtEnhet.navn})`}</h1>
@@ -49,6 +53,7 @@ class EnhetSide extends Component {
                 </p>
                 {enhetVelger}
                 <Innholdslaster avhengigheter={[portefolje]}>
+                    <h3 style={spaceStyle}>{`${portefolje.data.portefolje.brukere.length} brukere`}</h3>
                     <table className="tabell tabell-skillestrek">
                         <thead>
                         <tr>
@@ -68,14 +73,14 @@ class EnhetSide extends Component {
                         {portefolje.data.portefolje.brukere.map(bruker => <tr>
                             <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
                             <td>{bruker.fnr}</td>
-                            <td> - </td>
+                            <td>{`${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`} </td>
                             <td>
                                 {bruker.sikkerhetstiltak.map(tiltak =>
                                     <span>{tiltak}</span>)
                                 }
-                                {bruker.diskresjonskode == null ? <p/> : <span>{`Kode ${bruker.diskresjonskode}`}</span>}
+                                {bruker.diskresjonskode == null ? null : <span>{`Kode ${bruker.diskresjonskode}`}</span>}
 
-                                {bruker.egenAnsatt == true ? <span>Egen ansatt</span> : <p/>}
+                                {bruker.egenAnsatt == true ? <span>Egen ansatt</span> : null}
 
                             </td>
                             <td>
