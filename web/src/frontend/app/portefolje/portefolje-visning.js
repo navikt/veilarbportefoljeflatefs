@@ -2,6 +2,7 @@ import React, {Component, PropTypes as PT} from 'react';
 import {connect} from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
+import Pagination from '../utils/pagination';
 
 
 class PortefoljeVisning extends Component {
@@ -15,39 +16,14 @@ class PortefoljeVisning extends Component {
     render() {
         const {portefolje, valgtEnhet, ident, hentPortefolje} = this.props;
         const {antallTotalt, antallReturnert, fraIndex} = portefolje.data;
-        const spaceStyle = {
-            padding: '20px 5px'
-        };
-        const rightPad = {
-            'padding-left': '10 px'
-        }
 
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
-                <h3 style={spaceStyle}>
-                    {`Viser fra ${fraIndex} til ${fraIndex + antallReturnert} av totalt ${antallTotalt} brukere`}
-                </h3>
-                <div>
-                    <a href="" style={{marginRight: '10px'}} onClick={ (e) =>  {
-                        e.preventDefault();
-                        hentPortefolje(valgtEnhet.enhetId, ident, 0, 20)} }
-                    >{"<<"}</a>
-                    <a href="" style={{marginRight: '10px'}} onClick={(e) =>  {
-                        e.preventDefault();
-                        let fra = fraIndex - 20 <= 0 ? fraIndex : fraIndex - 20;
-                        hentPortefolje(valgtEnhet.enhetId, ident, fra, 20)}}
-                    >{"<"}</a>
-                    <span style={{marginRight: '10px'}}>{(fraIndex/20 + 1)}</span>
-                    <a href="" style={{marginRight: '10px'}} onClick={ (e) =>  {
-                        e.preventDefault();
-                        let fra = fraIndex + 20 >= antallTotalt? fraIndex : fraIndex + 20;
-                        hentPortefolje(valgtEnhet.enhetId, ident, fra, 20)}}>{">"}</a>
-                    <a href="" style={{marginRight: '10px'}} onClick={ (e) =>  {
-                        e.preventDefault();
-                        let fra = antallTotalt % 20 == 0 ? antallTotalt - 20 : antallTotalt - (antallTotalt % 20);
-                        hentPortefolje(valgtEnhet.enhetId, ident, fra, 20)}}>{">>"}</a>
-                </div>
+                <Pagination antallTotalt={antallTotalt}
+                            fraIndex={fraIndex}
+                            antallReturnert={antallReturnert}
+                            hentPortefolje={(fra, totalt) => hentPortefolje(valgtEnhet.enhetId, ident, fra, totalt)}/>
                 <table className="tabell tabell-skillestrek">
                     <thead>
                     <tr>
