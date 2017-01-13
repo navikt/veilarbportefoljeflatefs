@@ -41,8 +41,8 @@ function Pagination({fraIndex, antallTotalt, antallReturnert, hentPortefolje}) {
 Pagination.propTypes = {
     enhetId: PT.string,
     ident: PT.string,
-    antallTotalt: PT.int,
-    fraIndex: PT.int,
+    antallTotalt: PT.number,
+    fraIndex: PT.number,
     hentPortefolje: PT.func
 
 };
