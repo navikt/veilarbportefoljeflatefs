@@ -14,7 +14,10 @@ const initialState = {
     data: {
         portefolje: {
             brukere: []
-        }
+        },
+        antallTotalt: 0,
+        antallReturnert: 0,
+        fraIndex: 0
     }
 };
 

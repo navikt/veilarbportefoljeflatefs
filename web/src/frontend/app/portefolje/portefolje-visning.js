@@ -13,15 +13,41 @@ class PortefoljeVisning extends Component {
     }
 
     render() {
-        const {portefolje} = this.props;
+        const {portefolje, valgtEnhet, ident, hentPortefolje} = this.props;
+        const {antallTotalt, antallReturnert, fraIndex} = portefolje.data;
         const spaceStyle = {
             padding: '20px 5px'
         };
+        const rightPad = {
+            'padding-left': '10 px'
+        }
 
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
-                <h3 style={spaceStyle}>{`${portefolje.data.portefolje.brukere.length} brukere`}</h3>
+                <h3 style={spaceStyle}>
+                    {`Viser fra ${fraIndex} til ${fraIndex + antallReturnert} av totalt ${antallTotalt} brukere`}
+                </h3>
+                <div>
+                    <a href="" style={{marginRight: '10px'}} onClick={ (e) =>  {
+                        e.preventDefault();
+                        hentPortefolje(valgtEnhet.enhetId, ident, 0, 20)} }
+                    >{"<<"}</a>
+                    <a href="" style={{marginRight: '10px'}} onClick={(e) =>  {
+                        e.preventDefault();
+                        let fra = fraIndex - 20 <= 0 ? fraIndex : fraIndex - 20;
+                        hentPortefolje(valgtEnhet.enhetId, ident, fra, 20)}}
+                    >{"<"}</a>
+                    <span style={{marginRight: '10px'}}>{(fraIndex/20 + 1)}</span>
+                    <a href="" style={{marginRight: '10px'}} onClick={ (e) =>  {
+                        e.preventDefault();
+                        let fra = fraIndex + 20 >= antallTotalt? fraIndex : fraIndex + 20;
+                        hentPortefolje(valgtEnhet.enhetId, ident, fra, 20)}}>{">"}</a>
+                    <a href="" style={{marginRight: '10px'}} onClick={ (e) =>  {
+                        e.preventDefault();
+                        let fra = antallTotalt % 20 == 0 ? antallTotalt - 20 : antallTotalt - (antallTotalt % 20);
+                        hentPortefolje(valgtEnhet.enhetId, ident, fra, 20)}}>{">>"}</a>
+                </div>
                 <table className="tabell tabell-skillestrek">
                     <thead>
                     <tr>
@@ -75,7 +101,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, ident) => dispatch(hentPortefoljeForEnhet(enhet, ident))
+    hentPortefolje: (enhet, ident, fra=0, antall=20) => dispatch(hentPortefoljeForEnhet(enhet, ident, fra, antall))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeVisning);
