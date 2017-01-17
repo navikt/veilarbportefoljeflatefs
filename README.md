@@ -14,6 +14,8 @@ setup-scriptet er testet i cygwin og gitbash
 
 ## Kjøre applikasjonen
 
+Scriptet kaller veilarbportefolje og veilarbveileder, som også må startes lokalt. For å muliggjøre kall på tvers av domener må chrome startes med følgende flagg: --disable-web-security --user-data-dir
+
 For å hente enheter må man velge en ident, dette velges ved å skrive identen sist i url-en, eks *?A118889*. 
 
 Ident med én enhet: A118889
