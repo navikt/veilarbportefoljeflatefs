@@ -54,9 +54,9 @@ class PortefoljeSide extends Component {
 }
 
 PortefoljeSide.propTypes = {
-    valgtEnhet: PT.object,
-    hentPortefolje: PT.object,
-    portefolje: PT.object
+    valgtEnhet: PT.object.isRequired,
+    hentPortefolje: PT.object.isRequired,
+    portefolje: PT.object.isRequired
 };
 
 const mapStateToProps = state => ({

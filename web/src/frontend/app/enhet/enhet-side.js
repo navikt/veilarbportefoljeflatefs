@@ -54,11 +54,11 @@ class EnhetSide extends Component {
 }
 
 EnhetSide.propTypes = {
-    enheter: PT.arrayOf(enhetShape),
-    ident: PT.string,
+    enheter: PT.arrayOf(enhetShape).isRequired,
+    ident: PT.string.isRequired,
     valgtEnhet: PT.object,
     velgEnhet: PT.func.isRequired,
-    hentPortefolje: PT.func
+    hentPortefolje: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({

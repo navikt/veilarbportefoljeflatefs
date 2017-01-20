@@ -67,10 +67,10 @@ class PortefoljeVisning extends Component {
 }
 
 PortefoljeVisning.propTypes = {
-    valgtEnhet: PT.object,
-    portefolje: PT.object,
-    ident: PT.string,
-    hentPortefolje: PT.func
+    valgtEnhet: PT.object.isRequired,
+    portefolje: PT.object.isRequired,
+    ident: PT.string.isRequired,
+    hentPortefolje: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
