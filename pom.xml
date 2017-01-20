@@ -9,10 +9,9 @@
         <version>3.2</version>
     </parent>
 
-    <name>Portefolje-klientside</name>
     <groupId>no.nav.fo</groupId>
     <artifactId>veilarbportefoljeflatefs</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
