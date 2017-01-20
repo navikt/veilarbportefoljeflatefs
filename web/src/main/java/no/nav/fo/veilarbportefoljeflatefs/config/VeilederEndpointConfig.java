@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbportefoljeflatefs.config.endpoint.veilarbveileder;
+package no.nav.fo.veilarbportefoljeflatefs.config;
 
 import no.nav.sbl.dialogarena.types.Pingable;
 import org.springframework.context.annotation.Bean;

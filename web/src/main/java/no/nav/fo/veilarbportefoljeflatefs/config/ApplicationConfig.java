@@ -1,7 +1,5 @@
 package no.nav.fo.veilarbportefoljeflatefs.config;
 
-import no.nav.fo.veilarbportefoljeflatefs.config.endpoint.veilarbportefolje.PortefoljeEndpointConfig;
-import no.nav.fo.veilarbportefoljeflatefs.config.endpoint.veilarbveileder.VeilederEndpointConfig;
 import no.nav.fo.veilarbportefoljeflatefs.internal.HealthCheckService;
 import no.nav.fo.veilarbportefoljeflatefs.internal.IsAliveServlet;
 import org.springframework.context.annotation.Bean;
