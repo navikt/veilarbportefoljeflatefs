@@ -48,7 +48,8 @@ class PortefoljeVisning extends Component {
                             <td>{`${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`} </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
-                                {bruker.diskresjonskode != null ? <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
+                                {bruker.diskresjonskode != null ?
+                                    <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
                                 {bruker.egenAnsatt === true ? <span>Egen ansatt</span> : null}
                             </td>
                             <td>
