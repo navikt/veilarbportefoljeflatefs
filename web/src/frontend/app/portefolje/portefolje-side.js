@@ -1,4 +1,5 @@
 import React, { Component, PropTypes as PT } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet } from '../ducks/portefolje';
@@ -6,8 +7,8 @@ import { hentPortefoljeForEnhet } from '../ducks/portefolje';
 
 class PortefoljeSide extends Component {
     componentWillMount() {
-        const { valgtEnhet, hentPortefolje } = this.props;
-        hentPortefolje(valgtEnhet.enhetId, this.props.portefolje.ident);
+        const { valgtEnhet, hentPortefolje, ident } = this.props;
+        hentPortefolje(valgtEnhet.enhetId, ident);
     }
 
     render() {
@@ -21,9 +22,15 @@ class PortefoljeSide extends Component {
                     <table className="tabell tabell-skillestrek">
                         <thead>
                             <tr>
-                                <th>Etternavn, fornavn</th>
-                                <th>Fødselnummer</th>
-                                <th>Veileder</th>
+                                <th>
+                                    <FormattedMessage id="portefolje.tabell.navn"/>
+                                </th>
+                                <th>
+                                    <FormattedMessage id="portefolje.tabell.fodselsnummer"/>
+                                </th>
+                                <th>
+                                    <FormattedMessage id="portefolje.tabell.veileder"/>
+                                </th>
                                 <th>
                                     <div className="nav-input">
                                         <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
@@ -56,6 +63,7 @@ class PortefoljeSide extends Component {
 PortefoljeSide.propTypes = {
     valgtEnhet: PT.object.isRequired,
     hentPortefolje: PT.object.isRequired,
+    ident: PT.string.isRequired,
     portefolje: PT.object.isRequired
 };
 
