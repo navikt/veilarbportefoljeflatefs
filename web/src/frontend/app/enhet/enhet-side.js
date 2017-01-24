@@ -13,18 +13,19 @@ import { hentPortefoljeForEnhet } from '../ducks/portefolje';
 class EnhetSide extends Component {
 
     componentWillMount() {
-        const { valgtEnhet, enheter, velgEnhet} = this.props;
+        const { valgtEnhet, enheter, velgEnhet } = this.props;
         const queryEnhet = queryString.parse(location.search).enhet;
-        let queryEnhetFraGyldigeEnhter = enheter
-                                        .filter( enhet => enhet.enhetId == queryEnhet);
+        const queryEnhetFraGyldigeEnhter = enheter
+                                        .filter(enhet => enhet.enhetId === queryEnhet);
 
-        let queryEnhetErGyldig = queryEnhetFraGyldigeEnhter.length > 0;
+        const queryEnhetErGyldig = queryEnhetFraGyldigeEnhter.length > 0;
         if (!valgtEnhet && !queryEnhetErGyldig) {
             velgEnhet(enheter[0]);
         } else if (!valgtEnhet && queryEnhetErGyldig) {
             velgEnhet(queryEnhetFraGyldigeEnhter[0]);
-        } else
+        } else {
             leggEnhetIUrl(valgtEnhet);
+        }
     }
 
     render() {
@@ -51,7 +52,7 @@ class EnhetSide extends Component {
                     <FormattedMessage
                         id="enhet.valgt.tittel"
                         values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
-                            /></h1>
+                    /></h1>
                 <p className="typo-infotekst">
                     <FormattedMessage
                         id="enhet.valgt.infotekst"
