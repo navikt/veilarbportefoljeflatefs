@@ -1,7 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-function EnhetVelger({ enheter, velgEnhet }) {
+function EnhetVelger({ enheter, velgEnhet, valgtEnhet }) {
     if (enheter.length === 1) {
         return <noscript />;
     }
@@ -13,6 +13,7 @@ function EnhetVelger({ enheter, velgEnhet }) {
         <option value={index} key={`option-${enhet.enhetId}`}>{`${enhet.enhetId} (${enhet.navn})`}</option>
     );
 
+    const indexTilValgtEnhet = enheter.indexOf(valgtEnhet);
     return (
         <div className="EnhetVelger">
             <label htmlFor="select-enhet">
@@ -24,6 +25,7 @@ function EnhetVelger({ enheter, velgEnhet }) {
                     name="valgtEnhet"
                     onChange={velgNyEnhet}
                     onBlur={velgNyEnhet}
+                    value={indexTilValgtEnhet}
                 >
                     {enhetsliste}
                 </select>

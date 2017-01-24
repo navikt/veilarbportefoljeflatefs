@@ -1,4 +1,5 @@
 import React, { PropTypes as PT, Component } from 'react';
+import queryString from 'query-string';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { velgEnhetForSaksbehandler } from './../ducks/enheter';
@@ -12,11 +13,18 @@ import { hentPortefoljeForEnhet } from '../ducks/portefolje';
 class EnhetSide extends Component {
 
     componentWillMount() {
-        if (!this.props.valgtEnhet) {
-            this.props.velgEnhet(this.props.enheter[0]);
-        } else {
-            leggEnhetIUrl(this.props.valgtEnhet);
-        }
+        const { valgtEnhet, enheter, velgEnhet} = this.props;
+        const queryEnhet = queryString.parse(location.search).enhet;
+        let queryEnhetFraGyldigeEnhter = enheter
+                                        .filter( enhet => enhet.enhetId == queryEnhet);
+
+        let queryEnhetErGyldig = queryEnhetFraGyldigeEnhter.length > 0;
+        if (!valgtEnhet && !queryEnhetErGyldig) {
+            velgEnhet(enheter[0]);
+        } else if (!valgtEnhet && queryEnhetErGyldig) {
+            velgEnhet(queryEnhetFraGyldigeEnhter[0]);
+        } else
+            leggEnhetIUrl(valgtEnhet);
     }
 
     render() {
