@@ -8,7 +8,7 @@ const VEILARBVEILEDER_URL = erDev() ? ':9590/veilarbveileder' : '/veilarbveilede
 const VEILARBPORTEFOLJE_URL = erDev() ? ':9594/veilarbportefolje' : '/veilarbportefolje';
 
 export function hentEnheter(ident) {
-    const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/hentenheter/${ident}`;
+    const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/veileder/${ident}/enheter`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
@@ -17,7 +17,7 @@ export function hentLedetekster() {
 }
 
 export function hentPortefolje(enhet, ident, rekkefolge, fra, antall) {
-    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/hentportefoljeforenhet/` +
-                `${enhet}?ident=${ident}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
+                `portefolje?ident=${ident}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
