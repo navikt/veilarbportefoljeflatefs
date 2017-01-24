@@ -1,4 +1,5 @@
 import React, { PropTypes as PT } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 function EnhetVelger({ enheter, velgEnhet }) {
     if (enheter.length === 1) {
@@ -15,14 +16,14 @@ function EnhetVelger({ enheter, velgEnhet }) {
     return (
         <div className="EnhetVelger">
             <label htmlFor="select-enhet">
-                Velg enhet
+                <FormattedMessage id="enhet.velg.enhet.label" />
             </label>
             <div className="select-container">
                 <select
                     id="select-enhet"
                     name="valgtEnhet"
-                    onBlur={velgNyEnhet}
                     onChange={velgNyEnhet}
+                    onBlur={velgNyEnhet}
                 >
                     {enhetsliste}
                 </select>

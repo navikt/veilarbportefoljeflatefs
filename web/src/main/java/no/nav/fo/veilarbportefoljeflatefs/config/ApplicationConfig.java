@@ -9,8 +9,10 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
 @Import({
+        PortefoljeEndpointConfig.class,
+        VeilederEndpointConfig.class,
         TeksterServiceConfig.class,
-        Pingables.class,
+        Pingables.class
 })
 public class ApplicationConfig {
 

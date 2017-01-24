@@ -11,7 +11,6 @@ const initalState = {
     data: { nb: { spinner: 'spinner' } }
 };
 
-
 // Reducer
 export default function reducer(state = initalState, action) {
     switch (action.type) {
