@@ -16,8 +16,8 @@ export function hentLedetekster() {
     return fetchToJson(`${API_BASE_URL}/tekster`, MED_CREDENTIALS);
 }
 
-export function hentPortefolje(enhet, ident, fra, antall) {
-    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}` +
-        `/tjenester/hentportefoljeforenhet/${enhet}?ident=${ident}&fra=${fra}&antall=${antall}`;
+export function hentPortefolje(enhet, ident, rekkefolge, fra, antall) {
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/hentportefoljeforenhet/' + 
+                '${enhet}?ident=${ident}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
