@@ -23,13 +23,13 @@ class PortefoljeSide extends Component {
                         <thead>
                             <tr>
                                 <th>
-                                    <FormattedMessage id="portefolje.tabell.navn"/>
+                                    <FormattedMessage id="portefolje.tabell.navn" />
                                 </th>
                                 <th>
-                                    <FormattedMessage id="portefolje.tabell.fodselsnummer"/>
+                                    <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                                 </th>
                                 <th>
-                                    <FormattedMessage id="portefolje.tabell.veileder"/>
+                                    <FormattedMessage id="portefolje.tabell.veileder" />
                                 </th>
                                 <th>
                                     <div className="nav-input">
