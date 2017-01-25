@@ -20,7 +20,7 @@ function Pagination({ fraIndex, antallTotalt, antallReturnert, hentPortefolje })
                 <a
                     href="" style={{ marginRight: '10px' }} onClick={(e) => {
                         e.preventDefault();
-                        const fra = fraIndex - 20 <= 0 ? fraIndex : fraIndex - 20;
+                        const fra = fraIndex - 20 < 0 ? fraIndex : fraIndex - 20;
                         hentPortefolje(fra, 20);
                     }}
                 >{'<'}</a>

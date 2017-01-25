@@ -32,8 +32,8 @@ class PortefoljeVisning extends Component {
 
 
     render() {
-        const { portefolje, valgtEnhet, ident, hentPortefolje } = this.props;
-        const { antallTotalt, antallReturnert, fraIndex, rekkefolge } = portefolje.data;
+        const { portefolje, valgtEnhet, ident, hentPortefolje, sorteringsrekkefolge } = this.props;
+        const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -41,7 +41,8 @@ class PortefoljeVisning extends Component {
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
                     antallReturnert={antallReturnert}
-                    hentPortefolje={(fra, totalt) => hentPortefolje(valgtEnhet.enhetId, ident, rekkefolge, fra, totalt)}
+                    hentPortefolje={(fra, totalt) =>
+                        hentPortefolje(valgtEnhet.enhetId, ident, sorteringsrekkefolge, fra, totalt)}
                 />
                 <table className="tabell tabell-skillestrek" tabIndex="0">
                     <thead>
@@ -57,6 +58,7 @@ class PortefoljeVisning extends Component {
                             <th>
                                 <FormattedMessage id="portefolje.tabell.veileder" />
                             </th>
+                            <th />
                             <th>
                                 <div className="nav-input">
                                     <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
