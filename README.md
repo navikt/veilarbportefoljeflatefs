@@ -21,4 +21,6 @@ For å hente enheter må man velge en ident, dette velges ved å skrive identen 
 Ident med én enhet: A118889
 Ident med flere enheter: B900001
 
-Ekskjøring: https://a34duvw25632.devillo.no:9594/veilarbportefoljeflatefs/enhet?A118889
+### URL for å åpne applikasjonen: 
+
+`https://localhost:9592/veilarbportefoljeflatefs/enhet?ident=A118889`
