@@ -23,4 +23,4 @@ Ident med flere enheter: B900001
 
 ### URL for å åpne applikasjonen: 
 
-`https://localhost:9592/veilarbportefoljeflatefs/enhet?ident=A118889`
+`https://<hostname>.devillo.no:9592/veilarbportefoljeflatefs/enhet?ident=A118889`
