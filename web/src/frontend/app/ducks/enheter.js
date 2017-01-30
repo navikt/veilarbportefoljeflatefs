@@ -4,11 +4,11 @@ import { STATUS, doThenDispatch } from './utils';
 import { leggEnhetIUrl } from '../utils/utils';
 
 // Actions
-export const OK = 'veilarbportefolje/enheter/OK';
-export const FEILET = 'veilarbportefolje/enheter/FEILET';
-export const PENDING = 'veilarbportefolje/enheter/PENDING';
+const OK = 'veilarbportefolje/enheter/OK';
+const FEILET = 'veilarbportefolje/enheter/FEILET';
+const PENDING = 'veilarbportefolje/enheter/PENDING';
 
-export const VELG_ENHET = 'VELG_ENHET';
+const VELG_ENHET = 'VELG_ENHET';
 
 const initialState = {
     data: [],
