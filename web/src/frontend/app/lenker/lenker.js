@@ -11,8 +11,8 @@ function Lenker({ routes }) {
             <Link to="enhet" className={`typo-undertittel ${erValgt('enhet')}`}>
                 Enhet
             </Link>
-            <Link to="portefolje" className={`typo-undertittel ${erValgt('portefolje')}`}>
-                Portefølje
+            <Link to="veiledere" className={`typo-undertittel ${erValgt('veiledere')}`}>
+                Veiledere
             </Link>
         </div>
     );
