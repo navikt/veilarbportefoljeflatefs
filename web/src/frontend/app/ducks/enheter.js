@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function hentEnheterForSaksbehandler(ident) {
+export function hentEnheterForVeileder(ident) {
     return doThenDispatch(() => hentVeiledersEnheter(ident), {
         OK,
         FEILET,
@@ -41,7 +41,7 @@ export function hentEnheterForSaksbehandler(ident) {
     });
 }
 
-export function velgEnhetForSaksbehandler(valgtEnhet) {
+export function velgEnhetForVeileder(valgtEnhet) {
     leggEnhetIUrl(valgtEnhet);
     return {
         type: VELG_ENHET,

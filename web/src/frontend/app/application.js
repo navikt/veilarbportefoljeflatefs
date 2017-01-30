@@ -5,7 +5,7 @@ import nb from 'react-intl/locale-data/nb';
 import { hentLedetekster } from './ducks/ledetekster';
 import Lenker from './lenker/lenker';
 import DevTools from './devtools';
-import { hentEnheterForSaksbehandler } from './ducks/enheter';
+import { hentEnheterForVeileder } from './ducks/enheter';
 import Innholdslaster from './innholdslaster/innholdslaster';
 
 addLocaleData(nb);
@@ -51,7 +51,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     hentTekster: () => dispatch(hentLedetekster()),
-    hentEnheter: ident => dispatch(hentEnheterForSaksbehandler(ident))
+    hentEnheter: ident => dispatch(hentEnheterForVeileder(ident))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application);
