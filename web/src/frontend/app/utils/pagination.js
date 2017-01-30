@@ -1,6 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 
-function Pagination({ fraIndex, antallTotalt, antallReturnert, hentPortefolje }) {
+function Pagination({ fraIndex, antallTotalt, antallReturnert, hentEnhetsPortefolje }) {
     const spaceStyle = {
         padding: '20px 5px'
     };

@@ -1,5 +1,5 @@
 import queryString from 'query-string';
-import { hentEnheter } from './../middleware/api';
+import { hentVeiledersEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { leggEnhetIUrl } from '../utils/utils';
 
@@ -34,7 +34,7 @@ export default function reducer(state = initialState, action) {
 
 // Action Creators
 export function hentEnheterForSaksbehandler(ident) {
-    return doThenDispatch(() => hentEnheter(ident), {
+    return doThenDispatch(() => hentVeiledersEnheter(ident), {
         OK,
         FEILET,
         PENDING
