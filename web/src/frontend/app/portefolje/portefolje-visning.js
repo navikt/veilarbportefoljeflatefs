@@ -71,7 +71,10 @@ class PortefoljeVisning extends Component {
                         {portefolje.data.portefolje.brukere.map(bruker => <tr key={bruker.fnr}>
                             <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
                             <td>{bruker.fnr}</td>
-                            <td>{`${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`} </td>
+                            <td>{ bruker.veilder != null ? `${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`
+                                  : 'Ingen tilknyttet veileder'
+                                }
+                            </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
                                 {bruker.diskresjonskode != null ?
