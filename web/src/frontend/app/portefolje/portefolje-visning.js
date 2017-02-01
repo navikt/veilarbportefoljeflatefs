@@ -68,7 +68,7 @@ class PortefoljeVisning extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {portefolje.data.portefolje.brukere.map(bruker => <tr key={bruker.fnr}>
+                        {portefolje.data.brukere.map(bruker => <tr key={bruker.fnr}>
                             <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
                             <td>{bruker.fnr}</td>
                             <td>{ bruker.veilder != null ? `${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`

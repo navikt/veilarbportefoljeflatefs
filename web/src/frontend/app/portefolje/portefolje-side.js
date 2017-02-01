@@ -40,7 +40,7 @@ class PortefoljeSide extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {portefolje.data.portefolje.brukere.map(bruker => <tr>
+                            {portefolje.data.brukere.map(bruker => <tr>
                                 <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
                                 <td>{bruker.fnr}</td>
                                 <td> - </td>
