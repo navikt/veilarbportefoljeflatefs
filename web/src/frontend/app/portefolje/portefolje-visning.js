@@ -94,12 +94,21 @@ class PortefoljeVisning extends Component {
 
 PortefoljeVisning.propTypes = {
     valgtEnhet: PT.object.isRequired,
-    portefolje: PT.object.isRequired,
+    portefolje: PT.shape({
+        data: PT.shape({
+            portefolje: PT.shape({
+                brukere: PT.arrayOf(PT.object)
+            }).isRequired,
+            antallTotalt: PT.number.isRequired,
+            antallReturnert: PT.number.isRequired,
+            fraIndex: PT.number.isRequired
+        }).isRequired,
+        sorteringsrekkefolge: PT.string.isRequired
+    }).isRequired,
     ident: PT.string.isRequired,
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
-    fraIndex: PT.number.isRequired
 };
 
 const mapStateToProps = state => ({

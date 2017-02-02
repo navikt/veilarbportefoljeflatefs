@@ -48,8 +48,8 @@ VeiledereSide.propTypes = {
         }).isRequired
     }).isRequired,
     hentVeiledere: PT.func.isRequired,
-    enhetsListe: PT.arrayOf(enhetShape),
-    valgtEnhet: enhetShape,
+    enhetsListe: PT.arrayOf(enhetShape).isRequired,
+    valgtEnhet: enhetShape.isRequired,
     velgEnhet: PT.func.isRequired
 };
 
