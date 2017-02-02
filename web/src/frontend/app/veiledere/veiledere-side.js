@@ -7,7 +7,6 @@ import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { velgEnhetForVeileder } from './../ducks/enheter';
 import EnhetVelger from './../enhet/enhet-velger';
-import { leggEnhetIUrl } from '../utils/utils';
 
 class VeiledereSide extends Component {
 
@@ -62,8 +61,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId)),
-    velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet)),
-    leggEnhetIUrl: enhet => dispatch(leggEnhetIUrl(enhet))
+    velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeiledereSide);
