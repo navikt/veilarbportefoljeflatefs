@@ -11,7 +11,7 @@ const initialState = {
     data: {
         veilederListe: [],
         enhet: {}
-    },
+    }
 };
 
 //  Reducer

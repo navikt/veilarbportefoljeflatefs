@@ -1,6 +1,6 @@
-import React, {PropTypes as PT} from 'react';
-import {veilederShape} from './../proptype-shapes';
+import React, { PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { veilederShape } from './../proptype-shapes';
 
 function VeilederTabell({ veiledere }) {
     return (
@@ -32,7 +32,7 @@ function VeilederTabell({ veiledere }) {
 }
 
 VeilederTabell.propTypes = {
-    veiledere: PT.arrayOf(veilederShape),
+    veiledere: PT.arrayOf(veilederShape)
 };
 
 export default VeilederTabell;
