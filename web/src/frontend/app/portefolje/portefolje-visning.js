@@ -41,7 +41,7 @@ class PortefoljeVisning extends Component {
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
                     antallReturnert={antallReturnert}
-                    hentPortefolje={(fra, totalt) =>
+                    hentEnhetsPortefolje={(fra, totalt) =>
                         hentPortefolje(valgtEnhet.enhetId, ident, sorteringsrekkefolge, fra, totalt)}
                 />
                 <table className="tabell tabell-skillestrek" tabIndex="0">

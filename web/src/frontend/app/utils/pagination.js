@@ -14,14 +14,14 @@ function Pagination({ fraIndex, antallTotalt, antallReturnert, hentEnhetsPortefo
                 <a
                     href="" style={{ marginRight: '10px' }} onClick={(e) => {
                         e.preventDefault();
-                        hentPortefolje(0, 20);
+                        hentEnhetsPortefolje(0, 20);
                     }}
                 >{'<<'}</a>
                 <a
                     href="" style={{ marginRight: '10px' }} onClick={(e) => {
                         e.preventDefault();
                         const fra = fraIndex - 20 < 0 ? fraIndex : fraIndex - 20;
-                        hentPortefolje(fra, 20);
+                        hentEnhetsPortefolje(fra, 20);
                     }}
                 >{'<'}</a>
                 <span style={{ marginRight: '10px' }}>{((fraIndex / 20) + 1)}</span>
@@ -29,14 +29,14 @@ function Pagination({ fraIndex, antallTotalt, antallReturnert, hentEnhetsPortefo
                     href="" style={{ marginRight: '10px' }} onClick={(e) => {
                         e.preventDefault();
                         const fra = fraIndex + 20 >= antallTotalt ? fraIndex : fraIndex + 20;
-                        hentPortefolje(fra, 20);
+                        hentEnhetsPortefolje(fra, 20);
                     }}
                 >{'>'}</a>
                 <a
                     href="" style={{ marginRight: '10px' }} onClick={(e) => {
                         e.preventDefault();
                         const fra = antallTotalt % 20 === 0 ? antallTotalt - 20 : antallTotalt - (antallTotalt % 20);
-                        hentPortefolje(fra, 20);
+                        hentEnhetsPortefolje(fra, 20);
                     }}
                 >{'>>'}</a>
             </div>
@@ -48,7 +48,7 @@ Pagination.propTypes = {
     antallTotalt: PT.number,
     antallReturnert: PT.number,
     fraIndex: PT.number,
-    hentPortefolje: PT.func
+    hentEnhetsPortefolje: PT.func
 
 };
 
