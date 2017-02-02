@@ -40,7 +40,7 @@ export default function reducer(state = initialState, action) {
 
 // Action Creators
 export function hentPortefoljeForEnhet(enhet, ident, rekkefolge, fra = 0, antall = 20) {
-    return doThenDispatch(() => Api.hentPortefolje(enhet, ident, rekkefolge, fra, antall), {
+    return doThenDispatch(() => Api.hentEnhetsPortefolje(enhet, ident, rekkefolge, fra, antall), {
         OK,
         FEILET,
         PENDING
