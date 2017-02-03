@@ -22,7 +22,8 @@ export function hentEnhetsPortefolje(enhet, ident, rekkefolge, fra, antall) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentEnhetsVeiledere(enhetId) {
-    const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
+export function hentEnhetsVeiledere(enhetId, fra, antall) {
+    const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere` +
+        `?fra=${fra}&antall=${antall}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }

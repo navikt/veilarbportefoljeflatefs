@@ -29,8 +29,8 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function hentVeiledereForEnhet(enhetId) {
-    return doThenDispatch(() => hentEnhetsVeiledere(enhetId), {
+export function hentVeiledereForEnhet(enhetId, fra, antall) {
+    return doThenDispatch(() => hentEnhetsVeiledere(enhetId, fra, antall), {
         OK,
         FEILET,
         PENDING

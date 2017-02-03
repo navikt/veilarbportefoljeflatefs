@@ -11,7 +11,7 @@ import EnhetVelger from './../enhet/enhet-velger';
 class VeiledereSide extends Component {
 
     componentWillMount() {
-        this.props.hentVeiledere(this.props.enhetsListe[0].enhetId);
+        this.props.hentVeiledere(this.props.enhetsListe[0].enhetId, 0, 20);
     }
 
     render() {
@@ -23,7 +23,7 @@ class VeiledereSide extends Component {
                 <EnhetVelger
                     enheter={enhetsListe} valgtEnhet={valgtEnhet} velgEnhet={(enhet) => {
                         velgEnhet(enhet);
-                        hentVeiledere(enhet.enhetId);
+                        hentVeiledere(enhet.enhetId, 0, 20);
                     }}
                 />
                 <h1 className="typo-innholdstittel">
@@ -60,7 +60,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId)),
+    hentVeiledere: (enhetId, fra, antall) => dispatch(hentVeiledereForEnhet(enhetId, fra, antall)),
     velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet))
 });
 
