@@ -278,4 +278,22 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.language>js</sonar.language>
+                <sonar.coverage.exclusions>
+                    src/frontend/app/js/**/*-test.js,
+                    src/main/webapp/**/*
+                </sonar.coverage.exclusions>
+                <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+                <sonar.sources>src/frontend/app</sonar.sources>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>
