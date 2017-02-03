@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/onclick-has-focus*/
 /* eslint-disable jsx-a11y/onclick-has-role*/
 /* eslint-disable jsx-a11y/no-static-element-interactions*/
-import React, { Component, PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet, settSorterRekkefolge } from '../ducks/portefolje';
-import Pagination from '../utils/pagination';
+import React, {Component, PropTypes as PT} from "react";
+import {FormattedMessage} from "react-intl";
+import {connect} from "react-redux";
+import Innholdslaster from "../innholdslaster/innholdslaster";
+import {hentPortefoljeForEnhet, settSorterRekkefolge} from "../ducks/portefolje";
+import Pagination from "../utils/pagination";
 
 class PortefoljeVisning extends Component {
     componentWillMount() {
@@ -70,9 +70,9 @@ class PortefoljeVisning extends Component {
                     <tbody>
                         {portefolje.data.brukere.map(bruker => <tr key={bruker.fnr}>
                             <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
-                            <td>{bruker.fnr}</td>
-                            <td>{ bruker.veilder != null ? `${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`
-                                  : 'Ingen tilknyttet veileder'
+                            <td>{bruker.fodselsnr}</td>
+                            <td>{ bruker.veileder != null ? `${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`
+                                  : 'Ny bruker'
                                 }
                             </td>
                             <td>
