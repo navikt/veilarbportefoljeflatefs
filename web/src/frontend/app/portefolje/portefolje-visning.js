@@ -69,7 +69,14 @@ class PortefoljeVisning extends Component {
                     </thead>
                     <tbody>
                         {portefolje.data.portefolje.brukere.map(bruker => <tr key={bruker.fnr}>
-                            <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
+                            <td>
+                                <a
+                                    href={`https://${window.location.hostname}/veilarbpersonfs/${bruker.fnr}`}
+                                    target="_blank"
+                                >
+                                    {`${bruker.etternavn}, ${bruker.fornavn}`}
+                                </a>
+                            </td>
                             <td>{bruker.fnr}</td>
                             <td>{`${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`} </td>
                             <td>
