@@ -70,7 +70,7 @@ class PortefoljeVisning extends Component {
                     <tbody>
                         {portefolje.data.brukere.map(bruker => <tr key={bruker.fnr}>
                             <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
-                            <td>{bruker.fodselsnr}</td>
+                            <td>{bruker.fnr}</td>
                             <td>{ bruker.veileder != null ? `${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`
                                   : 'Ny bruker'
                                 }
