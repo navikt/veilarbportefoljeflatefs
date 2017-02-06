@@ -73,6 +73,7 @@ class PortefoljeVisning extends Component {
                                 <a
                                     href={`https://${window.location.hostname}/veilarbpersonfs/${bruker.fnr}`}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     {`${bruker.etternavn}, ${bruker.fornavn}`}
                                 </a>
