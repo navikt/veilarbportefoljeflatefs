@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/onclick-has-focus*/
-/* eslint-disable jsx-a11y/onclick-has-role*/
 /* eslint-disable jsx-a11y/no-static-element-interactions*/
 import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -48,7 +47,7 @@ class PortefoljeVisning extends Component {
                     <thead>
                         <tr>
                             <th>
-                                <a onClick={this.settSorteringOgHentPortefolje}>
+                                <a onClick={this.settSorteringOgHentPortefolje} role="button">
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </a>
                             </th>
