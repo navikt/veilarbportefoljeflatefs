@@ -1,6 +1,8 @@
 import React, { PropTypes as PT } from 'react';
 
-function Pagination({ fraIndex, antallTotalt, antallReturnert, hentEnhetsPortefolje }) {
+function Pagination({ fraIndex, antallTotalt, hentListe, tekst }) {
+    const listeStorrelse = 20;
+
     const spaceStyle = {
         padding: '20px 5px'
     };
@@ -8,35 +10,36 @@ function Pagination({ fraIndex, antallTotalt, antallReturnert, hentEnhetsPortefo
     return (
         <div>
             <h3 style={spaceStyle}>
-                {`Viser fra ${fraIndex} til ${fraIndex + antallReturnert} av totalt ${antallTotalt} brukere`}
+                {tekst}
             </h3>
             <div>
                 <a
                     href="" style={{ marginRight: '10px' }} onClick={(e) => {
                         e.preventDefault();
-                        hentEnhetsPortefolje(0, 20);
+                        hentListe(0, listeStorrelse);
                     }}
                 >{'<<'}</a>
                 <a
                     href="" style={{ marginRight: '10px' }} onClick={(e) => {
                         e.preventDefault();
-                        const fra = fraIndex - 20 < 0 ? fraIndex : fraIndex - 20;
-                        hentEnhetsPortefolje(fra, 20);
+                        const fra = fraIndex - listeStorrelse < 0 ? fraIndex : fraIndex - listeStorrelse;
+                        hentListe(fra, listeStorrelse);
                     }}
                 >{'<'}</a>
-                <span style={{ marginRight: '10px' }}>{((fraIndex / 20) + 1)}</span>
+                <span style={{ marginRight: '10px' }}>{((fraIndex / listeStorrelse) + 1)}</span>
                 <a
                     href="" style={{ marginRight: '10px' }} onClick={(e) => {
                         e.preventDefault();
-                        const fra = fraIndex + 20 >= antallTotalt ? fraIndex : fraIndex + 20;
-                        hentEnhetsPortefolje(fra, 20);
+                        const fra = fraIndex + listeStorrelse >= antallTotalt ? fraIndex : fraIndex + listeStorrelse;
+                        hentListe(fra, listeStorrelse);
                     }}
                 >{'>'}</a>
                 <a
                     href="" style={{ marginRight: '10px' }} onClick={(e) => {
                         e.preventDefault();
-                        const fra = antallTotalt % 20 === 0 ? antallTotalt - 20 : antallTotalt - (antallTotalt % 20);
-                        hentEnhetsPortefolje(fra, 20);
+                        const fra = antallTotalt % listeStorrelse === 0 ? antallTotalt - listeStorrelse
+                            : antallTotalt - (antallTotalt % listeStorrelse);
+                        hentListe(fra, listeStorrelse);
                     }}
                 >{'>>'}</a>
             </div>
@@ -45,10 +48,10 @@ function Pagination({ fraIndex, antallTotalt, antallReturnert, hentEnhetsPortefo
 }
 
 Pagination.propTypes = {
-    antallTotalt: PT.number,
-    antallReturnert: PT.number,
-    fraIndex: PT.number,
-    hentEnhetsPortefolje: PT.func
+    antallTotalt: PT.number.isRequired,
+    fraIndex: PT.number.isRequired,
+    hentListe: PT.func.isRequired,
+    tekst: PT.node.isRequired
 
 };
 

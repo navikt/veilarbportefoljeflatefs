@@ -30,19 +30,25 @@ class PortefoljeVisning extends Component {
         hentPortefolje(valgtEnhet.enhetId, ident, valgtRekkefolge, fraIndex);
     }
 
-
     render() {
         const { portefolje, valgtEnhet, ident, hentPortefolje, sorteringsrekkefolge } = this.props;
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
+
+        const paginationTekst = (
+            <FormattedMessage
+                id="enhet.portefolje.paginering.tekst"
+                values={{ fraIndex: `${fraIndex}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
+            />
+        );
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
                 <Pagination
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
-                    antallReturnert={antallReturnert}
-                    hentEnhetsPortefolje={(fra, totalt) =>
-                        hentPortefolje(valgtEnhet.enhetId, ident, sorteringsrekkefolge, fra, totalt)}
+                    hentListe={(fra, antall) =>
+                        hentPortefolje(valgtEnhet.enhetId, ident, sorteringsrekkefolge, fra, antall)}
+                    tekst={paginationTekst}
                 />
                 <table className="tabell tabell-skillestrek" tabIndex="0">
                     <thead>
