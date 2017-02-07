@@ -1,6 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 
-function Pagination({ fraIndex, antallTotalt, hentListe, tekst }) {
+function Paginering({ fraIndex, antallTotalt, hentListe, tekst }) {
     const listeStorrelse = 20;
 
     return (
@@ -43,7 +43,7 @@ function Pagination({ fraIndex, antallTotalt, hentListe, tekst }) {
     );
 }
 
-Pagination.propTypes = {
+Paginering.propTypes = {
     antallTotalt: PT.number.isRequired,
     fraIndex: PT.number.isRequired,
     hentListe: PT.func.isRequired,
@@ -51,4 +51,4 @@ Pagination.propTypes = {
 
 };
 
-export default Pagination;
+export default Paginering;

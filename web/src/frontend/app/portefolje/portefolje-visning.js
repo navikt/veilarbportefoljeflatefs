@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSorterRekkefolge } from '../ducks/portefolje';
-import Pagination from '../utils/pagination';
+import Paginering from '../utils/paginering';
 
 class PortefoljeVisning extends Component {
     componentWillMount() {
@@ -34,7 +34,7 @@ class PortefoljeVisning extends Component {
         const { portefolje, valgtEnhet, ident, hentPortefolje, sorteringsrekkefolge } = this.props;
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
 
-        const paginationTekst = (
+        const pagineringTekst = (
             <FormattedMessage
                 id="enhet.portefolje.paginering.tekst"
                 values={{ fraIndex: `${fraIndex}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
@@ -43,12 +43,12 @@ class PortefoljeVisning extends Component {
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
-                <Pagination
+                <Paginering
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
                     hentListe={(fra, antall) =>
                         hentPortefolje(valgtEnhet.enhetId, ident, sorteringsrekkefolge, fra, antall)}
-                    tekst={paginationTekst}
+                    tekst={pagineringTekst}
                 />
                 <table className="tabell tabell-skillestrek" tabIndex="0">
                     <thead>
