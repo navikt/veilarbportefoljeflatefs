@@ -15,7 +15,7 @@ class VeiledereSide extends Component {
     }
 
     render() {
-        const { veiledere, enhetsListe, valgtEnhet, hentVeiledere, velgEnhet } = this.props;
+        const { ident, veiledere, enhetsListe, valgtEnhet, hentVeiledere, velgEnhet } = this.props;
         const { veilederListe } = veiledere.data;
 
         return (
@@ -33,7 +33,7 @@ class VeiledereSide extends Component {
                     />
                 </h1>
                 <Innholdslaster avhengigheter={[veiledere]}>
-                    <VeiledereTabell veiledere={veilederListe} />
+                    <VeiledereTabell veiledere={veilederListe} ident={ident} />
                 </Innholdslaster>
             </div>
         );
@@ -41,6 +41,7 @@ class VeiledereSide extends Component {
 }
 
 VeiledereSide.propTypes = {
+    ident: PT.string.isRequired,
     veiledere: PT.shape({
         data: PT.shape({
             enhet: enhetShape.isRequired,
@@ -54,6 +55,7 @@ VeiledereSide.propTypes = {
 };
 
 const mapStateToProps = state => ({
+    ident: state.enheter.ident,
     veiledere: state.veiledere,
     enhetsListe: state.enheter.data,
     valgtEnhet: state.enheter.valgtEnhet

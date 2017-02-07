@@ -6,6 +6,7 @@ const OK = 'veilarbportefolje/portefolje/OK';
 const FEILET = 'veilarbportefolje/portefolje/FEILET';
 const PENDING = 'veilarbportefolje/portefolje/PENDING';
 const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSREKKEFOLGE';
+const SETT_VALGTVEILEDERIDENT = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDERIDENT';
 
 // Reducer
 
@@ -19,7 +20,8 @@ const initialState = {
         antallReturnert: 0,
         fraIndex: 0
     },
-    sorteringsrekkefolge: 'ikke_satt'
+    sorteringsrekkefolge: 'ikke_satt',
+    veilederident: 'ikke_satt'
 };
 
 export default function reducer(state = initialState, action) {
@@ -32,6 +34,9 @@ export default function reducer(state = initialState, action) {
             return { ...state, status: STATUS.OK, data: action.data };
         case SETT_SORTERINGSREKKEFOLGE: {
             return { ...state, sorteringsrekkefolge: action.sorteringsrekkefolge };
+        }
+        case SETT_VALGTVEILEDERIDENT: {
+            return { ...state, veilederident: action.veilederident };
         }
         default:
             return state;
@@ -47,10 +52,27 @@ export function hentPortefoljeForEnhet(enhet, ident, rekkefolge, fra = 0, antall
     });
 }
 
+// Action Creators
+export function hentPortefoljeForVeileder(ident, veilederident, rekkefolge, fra = 0, antall = 20) {
+    return doThenDispatch(() => Api.hentVeiledersPortefolje(ident, veilederident, rekkefolge, fra, antall), {
+        OK,
+        FEILET,
+        PENDING
+    });
+}
+
 export function settSorterRekkefolge(rekkefolge) {
     return dispatch => dispatch({
         type: SETT_SORTERINGSREKKEFOLGE,
         sorteringsrekkefolge: rekkefolge
+
+    });
+}
+
+export function settValgtVeilederIdent(valgtVeilederident) {
+    return dispatch => dispatch({
+        type: SETT_VALGTVEILEDERIDENT,
+        veilederident: valgtVeilederident
 
     });
 }

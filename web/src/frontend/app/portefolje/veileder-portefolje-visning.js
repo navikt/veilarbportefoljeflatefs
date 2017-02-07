@@ -5,20 +5,18 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet, settSorterRekkefolge } from '../ducks/portefolje';
+import { hentPortefoljeForVeileder, settSorterRekkefolge } from '../ducks/portefolje';
 import Pagination from '../utils/pagination';
 
-class PortefoljeVisning extends Component {
+class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
-        const { valgtEnhet, hentPortefolje } = this.props;
-        if (valgtEnhet) {
-            hentPortefolje(valgtEnhet.enhetId, this.props.ident);
-        }
+        const { hentPortefolje } = this.props;
+        hentPortefolje(this.props.ident, this.props.veilederident);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
     settSorteringOgHentPortefolje() {
-        const { sorteringsrekkefolge, settSortering, fraIndex, valgtEnhet, ident, hentPortefolje } = this.props;
+        const { sorteringsrekkefolge, settSortering, fraIndex, ident, hentPortefolje, veilederident } = this.props;
         let valgtRekkefolge = '';
         if (sorteringsrekkefolge === 'ascending') {
             valgtRekkefolge = 'descending';
@@ -27,12 +25,12 @@ class PortefoljeVisning extends Component {
             valgtRekkefolge = 'ascending';
             settSortering('ascending');
         }
-        hentPortefolje(valgtEnhet.enhetId, ident, valgtRekkefolge, fraIndex);
+        hentPortefolje(ident, veilederident, valgtRekkefolge, fraIndex);
     }
 
 
     render() {
-        const { portefolje, valgtEnhet, ident, hentPortefolje, sorteringsrekkefolge } = this.props;
+        const { portefolje, ident, veilederident, hentPortefolje, sorteringsrekkefolge } = this.props;
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
 
         return (
@@ -42,7 +40,7 @@ class PortefoljeVisning extends Component {
                     fraIndex={fraIndex}
                     antallReturnert={antallReturnert}
                     hentEnhetsPortefolje={(fra, totalt) =>
-                        hentPortefolje(valgtEnhet.enhetId, ident, sorteringsrekkefolge, fra, totalt)}
+                        hentPortefolje(ident, veilederident, sorteringsrekkefolge, fra, totalt)}
                 />
                 <table className="tabell tabell-skillestrek" tabIndex="0">
                     <thead>
@@ -55,15 +53,9 @@ class PortefoljeVisning extends Component {
                             <th>
                                 <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                             </th>
-                            <th>
-                                <FormattedMessage id="portefolje.tabell.veileder" />
-                            </th>
                             <th />
                             <th>
-                                <div className="nav-input">
-                                    <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
-                                    <label htmlFor="checkbox-alle-brukere" />
-                                </div>
+                                flagg
                             </th>
                         </tr>
                     </thead>
@@ -71,7 +63,6 @@ class PortefoljeVisning extends Component {
                         {portefolje.data.portefolje.brukere.map(bruker => <tr key={bruker.fnr}>
                             <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
                             <td>{bruker.fnr}</td>
-                            <td>{`${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`} </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
                                 {bruker.diskresjonskode != null ?
@@ -79,10 +70,7 @@ class PortefoljeVisning extends Component {
                                 {bruker.egenAnsatt === true ? <span>Egen ansatt</span> : null}
                             </td>
                             <td>
-                                <div className="nav-input">
-                                    <input className="nav-checkbox" id={`checkbox-${bruker.fnr}`} type="checkbox" />
-                                    <label htmlFor={`checkbox-${bruker.fnr}`} />
-                                </div>
+                                flagg
                             </td>
                         </tr>)}
                     </tbody>
@@ -92,8 +80,7 @@ class PortefoljeVisning extends Component {
     }
 }
 
-PortefoljeVisning.propTypes = {
-    valgtEnhet: PT.object.isRequired,
+VeilederPortefoljeVisning.propTypes = {
     portefolje: PT.shape({
         data: PT.shape({
             portefolje: PT.shape({
@@ -106,6 +93,7 @@ PortefoljeVisning.propTypes = {
         sorteringsrekkefolge: PT.string.isRequired
     }).isRequired,
     ident: PT.string.isRequired,
+    veilederident: PT.string.isRequired,
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
@@ -114,15 +102,15 @@ PortefoljeVisning.propTypes = {
 
 const mapStateToProps = state => ({
     portefolje: state.portefolje,
-    valgtEnhet: state.enheter.valgtEnhet,
     ident: state.enheter.ident,
-    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge
+    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
+    veilederident: state.portefolje.veilederident
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, ident, rekkefolge, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForEnhet(enhet, ident, rekkefolge, fra, antall)),
+    hentPortefolje: (ident, veilederident, rekkefolge, fra = 0, antall = 20) =>
+        dispatch(hentPortefoljeForVeileder(ident, veilederident, rekkefolge, fra, antall)),
     settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeVisning);
+export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);
