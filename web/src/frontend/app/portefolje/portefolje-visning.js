@@ -97,7 +97,7 @@ PortefoljeVisning.propTypes = {
     portefolje: PT.shape({
         data: PT.shape({
             portefolje: PT.shape({
-                brukere: PT.arrayOf(PT.object)
+                brukere: PT.arrayOf(PT.object).isRequired
             }).isRequired,
             antallTotalt: PT.number.isRequired,
             antallReturnert: PT.number.isRequired,
@@ -109,6 +109,7 @@ PortefoljeVisning.propTypes = {
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
+    fraIndex: PT.number
 };
 
 const mapStateToProps = state => ({
