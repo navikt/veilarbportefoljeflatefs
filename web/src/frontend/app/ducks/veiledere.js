@@ -10,7 +10,9 @@ const initialState = {
     status: STATUS.NOT_STARTED,
     data: {
         veilederListe: [],
-        enhet: {}
+        enhet: {},
+        totaltAntallVeiledere: 0,
+        sublistFraIndex: 0
     }
 };
 
