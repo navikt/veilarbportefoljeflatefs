@@ -70,7 +70,7 @@ class PortefoljeVisning extends Component {
                         {portefolje.data.brukere.map(bruker => <tr key={bruker.fnr}>
                             <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
                             <td>{bruker.fnr}</td>
-                            <td>{`Duck, Donald`} </td>
+                            <td>{'Duck, Donald'} </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
                                 {bruker.diskresjonskode != null ?

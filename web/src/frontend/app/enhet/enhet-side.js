@@ -80,7 +80,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     velgEnhet: enhet => dispatch(velgEnhetForSaksbehandler(enhet)),
-    hentPortefolje: (enhet) => dispatch(hentPortefoljeForEnhet(enhet))
+    hentPortefolje: enhet => dispatch(hentPortefoljeForEnhet(enhet))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);

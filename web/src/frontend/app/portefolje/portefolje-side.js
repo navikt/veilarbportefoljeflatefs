@@ -72,7 +72,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet) => dispatch(hentPortefoljeForEnhet(enhet))
+    hentPortefolje: enhet => dispatch(hentPortefoljeForEnhet(enhet))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeSide);
