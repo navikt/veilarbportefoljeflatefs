@@ -12,13 +12,13 @@ class PortefoljeVisning extends Component {
     componentWillMount() {
         const { valgtEnhet, hentPortefolje } = this.props;
         if (valgtEnhet) {
-            hentPortefolje(valgtEnhet.enhetId);
+            hentPortefolje(valgtEnhet.enhetId, this.props.ident);
         }
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
     settSorteringOgHentPortefolje() {
-        const { sorteringsrekkefolge, settSortering, fraIndex, valgtEnhet, hentPortefolje } = this.props;
+        const { sorteringsrekkefolge, settSortering, fraIndex, valgtEnhet, ident, hentPortefolje } = this.props;
         let valgtRekkefolge = '';
         if (sorteringsrekkefolge === 'ascending') {
             valgtRekkefolge = 'descending';
@@ -27,13 +27,14 @@ class PortefoljeVisning extends Component {
             valgtRekkefolge = 'ascending';
             settSortering('ascending');
         }
-        hentPortefolje(valgtEnhet.enhetId, valgtRekkefolge, fraIndex);
+        hentPortefolje(valgtEnhet.enhetId, ident, valgtRekkefolge, fraIndex);
     }
 
 
     render() {
-        const { portefolje, valgtEnhet, hentPortefolje, sorteringsrekkefolge } = this.props;
+        const { portefolje, valgtEnhet, ident, hentPortefolje, sorteringsrekkefolge } = this.props;
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
+
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
                 <Pagination
@@ -47,7 +48,7 @@ class PortefoljeVisning extends Component {
                     <thead>
                         <tr>
                             <th>
-                                <a onClick={this.settSorteringOgHentPortefolje}>
+                                <a onClick={this.settSorteringOgHentPortefolje} role="button">
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </a>
                             </th>
@@ -67,8 +68,16 @@ class PortefoljeVisning extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {portefolje.data.brukere.map(bruker => <tr key={bruker.fnr}>
-                            <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
+                        {brukere.map(bruker => <tr key={bruker.fnr}>
+                            <td>
+                                <a
+                                    href={`https://${window.location.hostname}/veilarbpersonfs/${bruker.fnr}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {`${bruker.etternavn}, ${bruker.fornavn}`}
+                                </a>
+                            </td>
                             <td>{bruker.fnr}</td>
                             <td>{'Duck, Donald'} </td>
                             <td>
@@ -94,21 +103,23 @@ class PortefoljeVisning extends Component {
 PortefoljeVisning.propTypes = {
     valgtEnhet: PT.object.isRequired,
     portefolje: PT.object.isRequired,
+    ident: PT.string.isRequired,
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
-    fraIndex: PT.number
+    fraIndex: PT.number.isRequired
 };
 
 const mapStateToProps = state => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
+    ident: state.enheter.ident,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, rekkefolge, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall)),
+    hentPortefolje: (enhet, ident, rekkefolge, fra = 0, antall = 20) =>
+        dispatch(hentPortefoljeForEnhet(enhet, ident, rekkefolge, fra, antall)),
     settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge))
 });
 
