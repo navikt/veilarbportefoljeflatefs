@@ -13,9 +13,7 @@ const SETT_VALGTVEILEDERIDENT = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER
 const initialState = {
     status: STATUS.NOT_STARTED,
     data: {
-        portefolje: {
-            brukere: []
-        },
+        brukere: [],
         antallTotalt: 0,
         antallReturnert: 0,
         fraIndex: 0
