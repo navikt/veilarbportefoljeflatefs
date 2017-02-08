@@ -1,4 +1,4 @@
-package no.nav.fo.portefolje;
+package no.nav.fo.veilarbportefoljeflatefs;
 
 import no.nav.sbl.dialogarena.common.jetty.Jetty;
 import no.nav.sbl.dialogarena.test.SystemProperties;
