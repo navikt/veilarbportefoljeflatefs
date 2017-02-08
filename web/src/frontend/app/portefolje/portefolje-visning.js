@@ -32,7 +32,7 @@ class PortefoljeVisning extends Component {
 
     render() {
         const { portefolje, valgtEnhet, ident, hentPortefolje, sorteringsrekkefolge } = this.props;
-        const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
+        const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -67,7 +67,7 @@ class PortefoljeVisning extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {portefolje.data.brukere.map(bruker => <tr key={bruker.fnr}>
+                        {brukere.map(bruker => <tr key={bruker.fnr}>
                             <td>
                                 <a
                                     href={`https://${window.location.hostname}/veilarbpersonfs/${bruker.fnr}`}
