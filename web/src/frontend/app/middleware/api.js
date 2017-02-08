@@ -17,14 +17,14 @@ export function hentLedetekster() {
 }
 
 export function hentEnhetsPortefolje(enhet, ident, rekkefolge, fra, antall) {
-    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
-                `portefolje?ident=${ident}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/portefolje/` +
+                `enhet/${enhet}?ident=${ident}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
 export function hentVeiledersPortefolje(ident, veilederident, rekkefolge, fra, antall) {
-    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/0106/` +
-        `portefolje?ident=${ident}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/portefolje/` +
+        `veileder/${veilederident}?ident=${ident}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
