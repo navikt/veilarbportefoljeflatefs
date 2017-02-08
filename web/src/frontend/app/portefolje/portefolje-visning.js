@@ -67,7 +67,7 @@ class PortefoljeVisning extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {portefolje.data.portefolje.brukere.map(bruker => <tr key={bruker.fnr}>
+                        {portefolje.data.brukere.map(bruker => <tr key={bruker.fnr}>
                             <td>
                                 <a
                                     href={`https://${window.location.hostname}/veilarbpersonfs/${bruker.fnr}`}
@@ -78,7 +78,10 @@ class PortefoljeVisning extends Component {
                                 </a>
                             </td>
                             <td>{bruker.fnr}</td>
-                            <td>{`${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`} </td>
+                            <td>{ bruker.veileder != null ? `${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`
+                                  : 'Ny bruker'
+                                }
+                            </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
                                 {bruker.diskresjonskode != null ?
