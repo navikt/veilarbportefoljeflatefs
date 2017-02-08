@@ -12,7 +12,6 @@ import java.net.URL;
 @Configuration
 public class PortefoljeEndpointConfig {
 
-
     @Bean
     public Pingable portefoljePing() throws IOException {
         return () -> {

@@ -1,27 +1,28 @@
 package no.nav.fo.veilarbportefoljeflatefs.internal;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import org.springframework.web.HttpRequestHandler;
-
-import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class IsAliveServlet implements HttpRequestHandler {
+public class IsAliveServlet extends HttpServlet {
 
-    @Inject
-    private HealthCheckService healthCheckService;
+    private ApplicationContext ctx;
 
     @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String status = "DOWN";
-        if ((healthCheckService != null) && healthCheckService.isStatusOk()) {
-            status = "UP";
-        }
+    public void init() throws ServletException {
+        ctx = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+        super.init();
+    }
 
-        response.setContentType("text/html");
-        response.getWriter().write("Application: " + status);
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String status = ctx.getStartupDate() > 0 ? "UP" : "DOWN";
+        resp.setContentType("text/html");
+        resp.getWriter().write("Application: " + status);
     }
 }
