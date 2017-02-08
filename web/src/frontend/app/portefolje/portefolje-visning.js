@@ -112,9 +112,7 @@ PortefoljeVisning.propTypes = {
     valgtEnhet: PT.object.isRequired,
     portefolje: PT.shape({
         data: PT.shape({
-            portefolje: PT.shape({
-                brukere: PT.arrayOf(PT.object).isRequired
-            }).isRequired,
+            brukere: PT.arrayOf(PT.object).isRequired,
             antallTotalt: PT.number.isRequired,
             antallReturnert: PT.number.isRequired,
             fraIndex: PT.number.isRequired
