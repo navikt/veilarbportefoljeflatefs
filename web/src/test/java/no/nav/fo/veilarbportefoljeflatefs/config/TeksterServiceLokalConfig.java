@@ -1,4 +1,4 @@
-package no.nav.fo.portefolje.config;
+package no.nav.fo.veilarbportefoljeflatefs.config;
 
 import no.nav.sbl.tekster.TeksterAPI;
 import org.springframework.beans.factory.annotation.Value;

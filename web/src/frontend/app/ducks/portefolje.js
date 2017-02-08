@@ -12,9 +12,7 @@ const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSR
 const initialState = {
     status: STATUS.NOT_STARTED,
     data: {
-        portefolje: {
-            brukere: []
-        },
+        brukere: [],
         antallTotalt: 0,
         antallReturnert: 0,
         fraIndex: 0
@@ -39,8 +37,8 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function hentPortefoljeForEnhet(enhet, ident, rekkefolge, fra = 0, antall = 20) {
-    return doThenDispatch(() => Api.hentPortefolje(enhet, ident, rekkefolge, fra, antall), {
+export function hentPortefoljeForEnhet(enhet, rekkefolge, fra = 0, antall = 20) {
+    return doThenDispatch(() => Api.hentPortefolje(enhet, rekkefolge, fra, antall), {
         OK,
         FEILET,
         PENDING
