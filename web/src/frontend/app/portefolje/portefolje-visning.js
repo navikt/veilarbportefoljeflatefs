@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/onclick-has-focus*/
-/* eslint-disable jsx-a11y/onclick-has-role*/
 /* eslint-disable jsx-a11y/no-static-element-interactions*/
 import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -33,7 +32,7 @@ class PortefoljeVisning extends Component {
 
     render() {
         const { portefolje, valgtEnhet, ident, hentPortefolje, sorteringsrekkefolge } = this.props;
-        const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
+        const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -48,7 +47,7 @@ class PortefoljeVisning extends Component {
                     <thead>
                         <tr>
                             <th>
-                                <a onClick={this.settSorteringOgHentPortefolje}>
+                                <a onClick={this.settSorteringOgHentPortefolje} role="button">
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </a>
                             </th>
@@ -68,8 +67,16 @@ class PortefoljeVisning extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {portefolje.data.brukere.map(bruker => <tr key={bruker.fnr}>
-                            <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
+                        {brukere.map(bruker => <tr key={bruker.fnr}>
+                            <td>
+                                <a
+                                    href={`https://${window.location.hostname}/veilarbpersonfs/${bruker.fnr}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {`${bruker.etternavn}, ${bruker.fornavn}`}
+                                </a>
+                            </td>
                             <td>{bruker.fnr}</td>
                             <td>{ bruker.veileder != null ? `${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`
                                   : 'Ny bruker'
