@@ -7,23 +7,35 @@ import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { velgEnhetForVeileder } from './../ducks/enheter';
 import EnhetVelger from './../enhet/enhet-velger';
+import Pagination from '../utils/pagination';
 
 class VeiledereSide extends Component {
 
     componentWillMount() {
-        this.props.hentVeiledere(this.props.enhetsListe[0].enhetId);
+        this.props.hentVeiledere(this.props.enhetsListe[0].enhetId, 0, 20);
     }
 
     render() {
         const { ident, veiledere, enhetsListe, valgtEnhet, hentVeiledere, velgEnhet } = this.props;
-        const { veilederListe } = veiledere.data;
+        const { veilederListe, totaltAntallVeiledere, sublistFraIndex } = veiledere.data;
+
+        const paginationTekst = (
+            <FormattedMessage
+                id="enhet.veiledere.paginering.tekst"
+                values={{
+                    fraIndex: `${sublistFraIndex}`,
+                    tilIndex: sublistFraIndex + veilederListe.length,
+                    antallTotalt: totaltAntallVeiledere
+                }}
+            />
+        );
 
         return (
             <div className="veiledere-side panel">
                 <EnhetVelger
                     enheter={enhetsListe} valgtEnhet={valgtEnhet} velgEnhet={(enhet) => {
                         velgEnhet(enhet);
-                        hentVeiledere(enhet.enhetId);
+                        hentVeiledere(enhet.enhetId, 0, 20);
                     }}
                 />
                 <h1 className="typo-innholdstittel">
@@ -33,6 +45,13 @@ class VeiledereSide extends Component {
                     />
                 </h1>
                 <Innholdslaster avhengigheter={[veiledere]}>
+                    <Pagination
+                        antallTotalt={totaltAntallVeiledere}
+                        fraIndex={sublistFraIndex}
+                        hentListe={(fra, antall) =>
+                            hentVeiledere(valgtEnhet.enhetId, fra, antall)}
+                        tekst={paginationTekst}
+                    />
                     <VeiledereTabell veiledere={veilederListe} ident={ident} />
                 </Innholdslaster>
             </div>
@@ -45,7 +64,9 @@ VeiledereSide.propTypes = {
     veiledere: PT.shape({
         data: PT.shape({
             enhet: enhetShape.isRequired,
-            veilederListe: PT.arrayOf(veilederShape).isRequired
+            veilederListe: PT.arrayOf(veilederShape).isRequired,
+            totaltAntallVeiledere: PT.number.isRequired,
+            sublistFraIndex: PT.number.isRequired
         }).isRequired
     }).isRequired,
     hentVeiledere: PT.func.isRequired,
@@ -62,7 +83,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId)),
+    hentVeiledere: (enhetId, fra, antall) => dispatch(hentVeiledereForEnhet(enhetId, fra, antall)),
     velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet))
 });
 
