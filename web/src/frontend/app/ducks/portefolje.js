@@ -6,7 +6,7 @@ const OK = 'veilarbportefolje/portefolje/OK';
 const FEILET = 'veilarbportefolje/portefolje/FEILET';
 const PENDING = 'veilarbportefolje/portefolje/PENDING';
 const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSREKKEFOLGE';
-const SETT_VALGTVEILEDERIDENT = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDERIDENT';
+const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 
 // Reducer
 
@@ -19,7 +19,7 @@ const initialState = {
         fraIndex: 0
     },
     sorteringsrekkefolge: 'ikke_satt',
-    veilederident: 'ikke_satt'
+    veileder: 'ikke_satt'
 };
 
 export default function reducer(state = initialState, action) {
@@ -33,8 +33,8 @@ export default function reducer(state = initialState, action) {
         case SETT_SORTERINGSREKKEFOLGE: {
             return { ...state, sorteringsrekkefolge: action.sorteringsrekkefolge };
         }
-        case SETT_VALGTVEILEDERIDENT: {
-            return { ...state, veilederident: action.veilederident };
+        case SETT_VALGTVEILEDER: {
+            return { ...state, veileder: action.veileder };
         }
         default:
             return state;
@@ -51,8 +51,8 @@ export function hentPortefoljeForEnhet(enhet, ident, rekkefolge, fra = 0, antall
 }
 
 // Action Creators
-export function hentPortefoljeForVeileder(ident, veilederident, rekkefolge, fra = 0, antall = 20) {
-    return doThenDispatch(() => Api.hentVeiledersPortefolje(ident, veilederident, rekkefolge, fra, antall), {
+export function hentPortefoljeForVeileder(ident, veileder, rekkefolge, fra = 0, antall = 20) {
+    return doThenDispatch(() => Api.hentVeiledersPortefolje(ident, veileder.ident, rekkefolge, fra, antall), {
         OK,
         FEILET,
         PENDING
@@ -67,10 +67,10 @@ export function settSorterRekkefolge(rekkefolge) {
     });
 }
 
-export function settValgtVeilederIdent(valgtVeilederident) {
+export function settValgtVeileder(valgtVeileder) {
     return dispatch => dispatch({
-        type: SETT_VALGTVEILEDERIDENT,
-        veilederident: valgtVeilederident
+        type: SETT_VALGTVEILEDER,
+        veileder: valgtVeileder
 
     });
 }

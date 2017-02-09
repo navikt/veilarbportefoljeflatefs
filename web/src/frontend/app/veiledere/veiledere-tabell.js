@@ -6,13 +6,13 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import history from '../history';
 import { veilederShape } from './../proptype-shapes';
-import { settValgtVeilederIdent } from '../ducks/portefolje';
+import { settValgtVeileder } from '../ducks/portefolje';
 
 class VeilederTabell extends Component {
 
-    settValgtVeilederIdent(veileder) {
-        const { settVeilederident } = this.props;
-        settVeilederident(veileder.ident);
+    settValgtVeileder(veileder) {
+        const { settVeileder } = this.props;
+        settVeileder(veileder);
         history.push('/portefolje');
     }
 
@@ -37,7 +37,7 @@ class VeilederTabell extends Component {
                 <tbody>
                     {veiledere.map(veileder =>
                         <tr key={veileder.ident}>
-                            <td><a onClick={() => this.settValgtVeilederIdent(veileder)}>{`${veileder.navn}`}</a></td>
+                            <td><a onClick={() => this.settValgtVeileder(veileder)}>{`${veileder.navn}`}</a></td>
                             <td>{`${veileder.ident}`}</td>
                             <td>{`${veileder.brukere}`}</td>
                         </tr>
@@ -50,15 +50,15 @@ class VeilederTabell extends Component {
 
 VeilederTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape),
-    settVeilederident: PT.func.isRequired
+    settVeileder: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    veilederident: state.portefolje.veilederident
+    veileder: state.portefolje.veileder
 });
 
 const mapDispatchToProps = dispatch => ({
-    settVeilederident: veilederident => dispatch(settValgtVeilederIdent(veilederident))
+    settVeileder: veileder => dispatch(settValgtVeileder(veileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederTabell);

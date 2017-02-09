@@ -3,33 +3,47 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { hentPortefoljeForVeileder } from '../ducks/portefolje';
 import VeilederPortefoljeVisning from '../portefolje/veileder-portefolje-visning';
+import { veilederShape } from './../proptype-shapes';
 
-function PortefoljeSide() {
+function PortefoljeSide({ ident, veileder }) {
+    const annenVeilederVarsel = ident === veileder.ident ?
+            (<noScript />) :
+            (<FormattedMessage
+                id="annen.veileder.portefolje.advarsel"
+                values={{
+                    fornavn: veileder.fornavn,
+                    etternavn: veileder.etternavn
+                }}
+            />);
+
     return (
-        <div className="portefolje-side panel">
-            <h1 className="typo-innholdstittel">
-                <FormattedMessage
-                    id="veileder.portefolje.tittel"
-                />
-            </h1>
-            <VeilederPortefoljeVisning />
+        <div>
+            {annenVeilederVarsel}
+            <div className="portefolje-side panel">
+
+                <h1 className="typo-innholdstittel">
+                    <FormattedMessage
+                        id="veileder.portefolje.tittel"
+                    />
+                </h1>
+                <VeilederPortefoljeVisning />
+            </div>
         </div>
     );
 }
 
 PortefoljeSide.propTypes = {
     ident: PT.string.isRequired,
-    hentPortefolje: PT.func.isRequired,
-    veilederident: PT.string.isRequired
+    veileder: veilederShape.isRequired
 };
 
 const mapStateToProps = state => ({
     ident: state.enheter.ident,
-    veilederident: state.portefolje.veilederident
+    veileder: state.portefolje.veileder
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (ident, veilederident) => dispatch(hentPortefoljeForVeileder(ident, veilederident))
+    hentPortefolje: (ident, veileder) => dispatch(hentPortefoljeForVeileder(ident, veileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeSide);
