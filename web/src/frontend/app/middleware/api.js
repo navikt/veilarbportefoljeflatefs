@@ -6,8 +6,8 @@ const MED_CREDENTIALS = {
     credentials: 'same-origin',
     headers: {
         authorization: `Bearer ${sessionStorage.oidc}`
-        }
-    };
+    }
+};
 
 const VEILARBVEILEDER_URL = erDev() ? ':9590/veilarbveileder' : '/veilarbveileder';
 const VEILARBPORTEFOLJE_URL = erDev() ? ':9594/veilarbportefolje' : '/veilarbportefolje';
