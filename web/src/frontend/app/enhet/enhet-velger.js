@@ -20,11 +20,10 @@ function EnhetVelger({ enheter, velgEnhet, valgtEnhet }) {
                 <FormattedMessage id="enhet.velg.enhet.label" />
             </label>
             <div className="select-container">
-                <select
+                <select // eslint-disable-line jsx-a11y/no-onchange
                     id="select-enhet"
                     name="valgtEnhet"
                     onChange={velgNyEnhet}
-                    onBlur={velgNyEnhet}
                     value={indexTilValgtEnhet}
                 >
                     {enhetsliste}
