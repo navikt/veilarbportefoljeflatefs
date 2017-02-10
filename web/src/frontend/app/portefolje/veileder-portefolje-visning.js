@@ -7,18 +7,19 @@ import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForVeileder, settSorterRekkefolge } from '../ducks/portefolje';
 import Pagination from '../utils/pagination';
-import { veilederShape } from './../proptype-shapes';
+import { enhetShape, veilederShape } from './../proptype-shapes';
 
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
         const { hentPortefolje } = this.props;
-        hentPortefolje(this.props.ident, this.props.veileder);
+        hentPortefolje(this.props.ident, this.props.valgtEnhet.enhetId, this.props.veileder);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
     settSorteringOgHentPortefolje() {
-        const { sorteringsrekkefolge, settSortering, fraIndex, ident, hentPortefolje, veileder } = this.props;
+        const { sorteringsrekkefolge, settSortering, fraIndex,
+                ident, hentPortefolje, veileder, valgtEnhet } = this.props;
         let valgtRekkefolge = '';
         if (sorteringsrekkefolge === 'ascending') {
             valgtRekkefolge = 'descending';
@@ -27,12 +28,12 @@ class VeilederPortefoljeVisning extends Component {
             valgtRekkefolge = 'ascending';
             settSortering('ascending');
         }
-        hentPortefolje(ident, veileder, valgtRekkefolge, fraIndex);
+        hentPortefolje(ident, valgtEnhet, veileder, valgtRekkefolge, fraIndex);
     }
 
 
     render() {
-        const { portefolje, ident, veileder, hentPortefolje, sorteringsrekkefolge } = this.props;
+        const { portefolje, ident, veileder, hentPortefolje, sorteringsrekkefolge, valgtEnhet } = this.props;
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
 
         return (
@@ -42,7 +43,7 @@ class VeilederPortefoljeVisning extends Component {
                     fraIndex={fraIndex}
                     antallReturnert={antallReturnert}
                     hentEnhetsPortefolje={(fra, totalt) =>
-                        hentPortefolje(ident, veileder, sorteringsrekkefolge, fra, totalt)}
+                        hentPortefolje(ident, valgtEnhet, veileder, sorteringsrekkefolge, fra, totalt)}
                 />
                 <table className="tabell tabell-skillestrek" tabIndex="0">
                     <thead>
@@ -95,6 +96,7 @@ VeilederPortefoljeVisning.propTypes = {
         sorteringsrekkefolge: PT.string.isRequired
     }).isRequired,
     ident: PT.string.isRequired,
+    valgtEnhet: enhetShape.isRequired,
     veileder: veilederShape.isRequired,
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
@@ -105,13 +107,14 @@ VeilederPortefoljeVisning.propTypes = {
 const mapStateToProps = state => ({
     portefolje: state.portefolje,
     ident: state.enheter.ident,
+    valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     veileder: state.portefolje.veileder
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (ident, veileder, rekkefolge, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForVeileder(ident, veileder, rekkefolge, fra, antall)),
+    hentPortefolje: (ident, enhet, veileder, rekkefolge, fra = 0, antall = 20) =>
+        dispatch(hentPortefoljeForVeileder(ident, enhet, veileder, rekkefolge, fra, antall)),
     settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge))
 });
 

@@ -22,8 +22,8 @@ export function hentEnhetsPortefolje(enhet, ident, rekkefolge, fra, antall) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentVeiledersPortefolje(ident, veilederident, rekkefolge, fra, antall) {
-    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/portefolje/` +
+export function hentVeiledersPortefolje(ident, enhet, veilederident, rekkefolge, fra, antall) {
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/portefolje/enhet/${enhet}/` +
         `veileder/${veilederident}?ident=${ident}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }

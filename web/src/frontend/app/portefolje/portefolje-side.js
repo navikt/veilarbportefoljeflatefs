@@ -1,7 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { hentPortefoljeForVeileder } from '../ducks/portefolje';
 import VeilederPortefoljeVisning from '../portefolje/veileder-portefolje-visning';
 import { veilederShape } from './../proptype-shapes';
 
@@ -42,9 +41,5 @@ const mapStateToProps = state => ({
     veileder: state.portefolje.veileder
 });
 
-const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (ident, veileder) => dispatch(hentPortefoljeForVeileder(ident, veileder))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeSide);
+export default connect(mapStateToProps)(PortefoljeSide);
 
