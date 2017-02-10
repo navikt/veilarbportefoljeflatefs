@@ -33,8 +33,8 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function hentEnheterForSaksbehandler(ident) {
-    return doThenDispatch(() => hentEnheter(ident), {
+export function hentEnheterForSaksbehandler() {
+    return doThenDispatch(() => hentEnheter(), {
         OK,
         FEILET,
         PENDING

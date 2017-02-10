@@ -1,6 +1,5 @@
-package no.nav.fo.portefolje.config;
+package no.nav.fo.veilarbportefoljeflatefs.config;
 
-import no.nav.fo.veilarbportefoljeflatefs.config.Pingables;
 import no.nav.fo.veilarbportefoljeflatefs.internal.HealthCheckService;
 import no.nav.fo.veilarbportefoljeflatefs.internal.IsAliveServlet;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +13,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
         TeksterServiceLokalConfig.class,
         Pingables.class
 })
-@ImportResource({"classpath:spring-security.xml", "classpath:spring-security-web.xml"})
 public class MockApplicationConfig {
 
     @Bean

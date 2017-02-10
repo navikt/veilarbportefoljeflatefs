@@ -29,7 +29,7 @@ class EnhetSide extends Component {
     }
 
     render() {
-        const { enheter, ident, valgtEnhet, velgEnhet, hentPortefolje } = this.props;
+        const { enheter, valgtEnhet, velgEnhet, hentPortefolje } = this.props;
 
 
         if (!valgtEnhet) {
@@ -42,7 +42,7 @@ class EnhetSide extends Component {
             (<EnhetVelger
                 enheter={enheter} valgtEnhet={valgtEnhet} velgEnhet={(enhet) => {
                     velgEnhet(enhet);
-                    hentPortefolje(enhet.enhetId, ident);
+                    hentPortefolje(enhet.enhetId);
                 }}
             />);
 
@@ -68,7 +68,6 @@ class EnhetSide extends Component {
 
 EnhetSide.propTypes = {
     enheter: PT.arrayOf(enhetShape).isRequired,
-    ident: PT.string.isRequired,
     valgtEnhet: PT.object,
     velgEnhet: PT.func.isRequired,
     hentPortefolje: PT.func.isRequired
@@ -76,13 +75,12 @@ EnhetSide.propTypes = {
 
 const mapStateToProps = state => ({
     enheter: state.enheter.data,
-    ident: state.enheter.ident,
     valgtEnhet: state.enheter.valgtEnhet
 });
 
 const mapDispatchToProps = dispatch => ({
     velgEnhet: enhet => dispatch(velgEnhetForSaksbehandler(enhet)),
-    hentPortefolje: (enhet, ident) => dispatch(hentPortefoljeForEnhet(enhet, ident))
+    hentPortefolje: enhet => dispatch(hentPortefoljeForEnhet(enhet))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);

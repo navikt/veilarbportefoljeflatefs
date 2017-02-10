@@ -12,7 +12,7 @@ addLocaleData(nb);
 class Application extends Component {
     componentWillMount() {
         this.props.hentTekster();
-        this.props.hentEnheter(this.props.enheter.ident);
+        this.props.hentEnheter();
     }
 
     render() {

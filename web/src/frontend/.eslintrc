@@ -32,7 +32,8 @@
       "fetch": false,
       "location": false,
       "window": false,
-      "document": false
+      "document": false,
+      "sessionStorage": false
   },
   "extends": "airbnb"
 }
