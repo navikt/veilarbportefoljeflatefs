@@ -23,8 +23,8 @@ export function hentEnhetsPortefolje(enhet, ident, rekkefolge, fra, antall) {
 }
 
 export function hentVeiledersPortefolje(ident, enhet, veilederident, rekkefolge, fra, antall) {
-    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/portefolje/` +
-        `veileder/${veilederident}?ident=${ident}&enhet=${enhet}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/portefolje/veileder/` +
+        `${veilederident}?ident=${ident}&enhet=${enhet}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
