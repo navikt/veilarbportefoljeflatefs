@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/onclick-has-focus*/
+/* eslint-disable jsx-a11y/onclick-has-role*/
 /* eslint-disable jsx-a11y/no-static-element-interactions*/
 import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -11,13 +12,13 @@ class PortefoljeVisning extends Component {
     componentWillMount() {
         const { valgtEnhet, hentPortefolje } = this.props;
         if (valgtEnhet) {
-            hentPortefolje(valgtEnhet.enhetId, this.props.ident);
+            hentPortefolje(valgtEnhet.enhetId);
         }
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
     settSorteringOgHentPortefolje() {
-        const { sorteringsrekkefolge, settSortering, fraIndex, valgtEnhet, ident, hentPortefolje } = this.props;
+        const { sorteringsrekkefolge, settSortering, fraIndex, valgtEnhet, hentPortefolje } = this.props;
         let valgtRekkefolge = '';
         if (sorteringsrekkefolge === 'ascending') {
             valgtRekkefolge = 'descending';
@@ -26,11 +27,11 @@ class PortefoljeVisning extends Component {
             valgtRekkefolge = 'ascending';
             settSortering('ascending');
         }
-        hentPortefolje(valgtEnhet.enhetId, ident, valgtRekkefolge, fraIndex);
+        hentPortefolje(valgtEnhet.enhetId, valgtRekkefolge, fraIndex);
     }
 
     render() {
-        const { portefolje, valgtEnhet, ident, hentPortefolje, sorteringsrekkefolge } = this.props;
+        const { portefolje, valgtEnhet, hentPortefolje, sorteringsrekkefolge } = this.props;
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         const pagineringTekst = (
@@ -46,7 +47,7 @@ class PortefoljeVisning extends Component {
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
                     hentListe={(fra, antall) =>
-                        hentPortefolje(valgtEnhet.enhetId, ident, sorteringsrekkefolge, fra, antall)}
+                        hentPortefolje(valgtEnhet.enhetId, sorteringsrekkefolge, fra, antall)}
                     tekst={pagineringTekst}
                 />
                 <table className="tabell tabell-skillestrek" tabIndex="0">
@@ -84,10 +85,7 @@ class PortefoljeVisning extends Component {
                                 </a>
                             </td>
                             <td>{bruker.fnr}</td>
-                            <td>{ bruker.veileder != null ? `${bruker.veileder.etternavn}, ${bruker.veileder.fornavn}`
-                                  : 'Ny bruker'
-                                }
-                            </td>
+                            <td>{'Duck, Donald'} </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
                                 {bruker.diskresjonskode != null ?
@@ -119,7 +117,6 @@ PortefoljeVisning.propTypes = {
         }).isRequired,
         sorteringsrekkefolge: PT.string.isRequired
     }).isRequired,
-    ident: PT.string.isRequired,
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
@@ -129,13 +126,12 @@ PortefoljeVisning.propTypes = {
 const mapStateToProps = state => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
-    ident: state.enheter.ident,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, ident, rekkefolge, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForEnhet(enhet, ident, rekkefolge, fra, antall)),
+    hentPortefolje: (enhet, rekkefolge, fra = 0, antall = 20) =>
+        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall)),
     settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge))
 });
 

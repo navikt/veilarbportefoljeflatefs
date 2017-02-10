@@ -7,8 +7,8 @@ import { hentPortefoljeForEnhet } from '../ducks/portefolje';
 
 class PortefoljeSide extends Component {
     componentWillMount() {
-        const { valgtEnhet, hentPortefolje, ident } = this.props;
-        hentPortefolje(valgtEnhet.enhetId, ident);
+        const { valgtEnhet, hentPortefolje } = this.props;
+        hentPortefolje(valgtEnhet.enhetId);
     }
 
     render() {
@@ -63,7 +63,6 @@ class PortefoljeSide extends Component {
 PortefoljeSide.propTypes = {
     valgtEnhet: PT.object.isRequired,
     hentPortefolje: PT.object.isRequired,
-    ident: PT.string.isRequired,
     portefolje: PT.object.isRequired
 };
 
@@ -73,7 +72,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, ident) => dispatch(hentPortefoljeForEnhet(enhet, ident))
+    hentPortefolje: enhet => dispatch(hentPortefoljeForEnhet(enhet))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeSide);
