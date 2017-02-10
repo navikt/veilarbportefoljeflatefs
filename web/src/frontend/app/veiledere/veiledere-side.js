@@ -38,12 +38,6 @@ class VeiledereSide extends Component {
                         hentVeiledere(enhet.enhetId, 0, 20);
                     }}
                 />
-                <h1 className="typo-innholdstittel">
-                    <FormattedMessage
-                        id="enhet.veiledere.tittel"
-                        values={{ antallVeiledere: veilederListe.length }}
-                    />
-                </h1>
                 <Innholdslaster avhengigheter={[veiledere]}>
                     <Paginering
                         antallTotalt={totaltAntallVeiledere}
