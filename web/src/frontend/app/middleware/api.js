@@ -23,13 +23,13 @@ export function hentLedetekster() {
 
 export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall) {
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/portefolje/` +
-                `enhet/${enhet}?ident=${ident}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
+                `enhet/${enhet}?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
 export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, fra, antall) {
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/portefolje/veileder/` +
-        `${veilederident}?ident=${ident}&enhet=${enhet}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
+        `${veilederident}?enhet=${enhet}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 

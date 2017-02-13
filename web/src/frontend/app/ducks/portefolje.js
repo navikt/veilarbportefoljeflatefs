@@ -51,8 +51,8 @@ export function hentPortefoljeForEnhet(enhet, rekkefolge, fra = 0, antall = 20) 
 }
 
 // Action Creators
-export function hentPortefoljeForVeileder(ident, enhet, veileder, rekkefolge, fra = 0, antall = 20) {
-    return doThenDispatch(() => Api.hentVeiledersPortefolje(ident, enhet, veileder.ident, rekkefolge, fra, antall), {
+export function hentPortefoljeForVeileder(enhet, veileder, rekkefolge, fra = 0, antall = 20) {
+    return doThenDispatch(() => Api.hentVeiledersPortefolje(enhet, veileder.ident, rekkefolge, fra, antall), {
         OK,
         FEILET,
         PENDING
