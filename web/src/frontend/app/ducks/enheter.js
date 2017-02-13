@@ -33,8 +33,8 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function hentEnheterForVeileder(ident) {
-    return doThenDispatch(() => hentVeiledersEnheter(ident), {
+export function hentEnheterForVeileder() {
+    return doThenDispatch(() => hentVeiledersEnheter(), {
         OK,
         FEILET,
         PENDING

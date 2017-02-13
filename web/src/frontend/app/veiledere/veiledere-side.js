@@ -7,19 +7,19 @@ import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { velgEnhetForVeileder } from './../ducks/enheter';
 import EnhetVelger from './../enhet/enhet-velger';
-import Pagination from '../utils/pagination';
+import Paginering from '../utils/paginering';
 
 class VeiledereSide extends Component {
 
     componentWillMount() {
-        this.props.hentVeiledere(this.props.enhetsListe[0].enhetId, 0, 20);
+        this.props.hentVeiledere(this.props.valgtEnhet.enhetId, 0, 20);
     }
 
     render() {
         const { ident, veiledere, enhetsListe, valgtEnhet, hentVeiledere, velgEnhet } = this.props;
         const { veilederListe, totaltAntallVeiledere, sublistFraIndex } = veiledere.data;
 
-        const paginationTekst = (
+        const pagineringTekst = (
             <FormattedMessage
                 id="enhet.veiledere.paginering.tekst"
                 values={{
@@ -38,19 +38,13 @@ class VeiledereSide extends Component {
                         hentVeiledere(enhet.enhetId, 0, 20);
                     }}
                 />
-                <h1 className="typo-innholdstittel">
-                    <FormattedMessage
-                        id="enhet.veiledere.tittel"
-                        values={{ antallVeiledere: veilederListe.length }}
-                    />
-                </h1>
                 <Innholdslaster avhengigheter={[veiledere]}>
-                    <Pagination
+                    <Paginering
                         antallTotalt={totaltAntallVeiledere}
                         fraIndex={sublistFraIndex}
                         hentListe={(fra, antall) =>
                             hentVeiledere(valgtEnhet.enhetId, fra, antall)}
-                        tekst={paginationTekst}
+                        tekst={pagineringTekst}
                     />
                     <VeiledereTabell veiledere={veilederListe} ident={ident} />
                 </Innholdslaster>

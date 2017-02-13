@@ -35,7 +35,7 @@
 
     <servlet>
         <servlet-name>selftest</servlet-name>
-        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.servlet.SelfTestServlet</servlet-class>
+        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.internal.SelftestServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>selftest</servlet-name>
@@ -43,7 +43,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>selftest-json</servlet-name>
-        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.servlet.SelfTestJsonServlet</servlet-class>
+        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.internal.SelftestJsonServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>selftest-json</servlet-name>
@@ -51,7 +51,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>isAlive</servlet-name>
-        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.servlet.IsAliveServlet</servlet-class>
+        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.internal.IsAliveServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>isAlive</servlet-name>
@@ -81,7 +81,7 @@
 
     <servlet>
         <servlet-name>reactapp</servlet-name>
-        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.servlet.ApplicationServlet</servlet-class>
+        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.internal.ApplicationServlet</servlet-class>
         <init-param>
             <param-name>applicationFile</param-name>
             <param-value>index.html</param-value>

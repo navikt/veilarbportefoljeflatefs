@@ -7,11 +7,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
 @Import({
-        PortefoljeEndpointConfig.class,
-        VeilederEndpointConfig.class,
-        TeksterServiceConfig.class
+        TeksterServiceLokalConfig.class
 })
-public class ApplicationConfig {
+public class MockApplicationConfig {
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
