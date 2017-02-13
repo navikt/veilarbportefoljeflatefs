@@ -12,9 +12,20 @@ const MED_CREDENTIALS = {
 const VEILARBVEILEDER_URL = erDev() ? ':9590/veilarbveileder' : '/veilarbveileder';
 const VEILARBPORTEFOLJE_URL = erDev() ? ':9594/veilarbportefolje' : '/veilarbportefolje';
 
+function hentNyttJwtPromise() {
+    if (!jwtExpirationImminent()) {
+        return Promise.resolve();
+    }
+    return new Promise((resolve) => {
+        console.log('Token går snart ut. Starter innlogging'); // eslint-disable-line no-console
+        GLOBAL_JWT_UPDATE_RESOLVE = resolve;
+        startLoginSequence();
+    });
+}
+
 export function hentEnheter() {
     const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/veileder/enheter`;
-    return fetchToJson(url, MED_CREDENTIALS);
+    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
 }
 
 export function hentLedetekster() {
@@ -24,5 +35,5 @@ export function hentLedetekster() {
 export function hentPortefolje(enhet, rekkefolge, fra, antall) {
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
                 `portefolje?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
-    return fetchToJson(url, MED_CREDENTIALS);
+    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
 }

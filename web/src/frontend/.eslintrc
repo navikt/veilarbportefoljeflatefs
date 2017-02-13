@@ -33,7 +33,10 @@
       "location": false,
       "window": false,
       "document": false,
-      "sessionStorage": false
+      "sessionStorage": false,
+      "jwtExpirationImminent": false,
+      "GLOBAL_JWT_UPDATE_RESOLVE": true,
+      "startLoginSequence": false
   },
   "extends": "airbnb"
 }
