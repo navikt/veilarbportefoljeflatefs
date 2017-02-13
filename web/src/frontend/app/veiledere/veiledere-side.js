@@ -12,7 +12,7 @@ import Paginering from '../utils/paginering';
 class VeiledereSide extends Component {
 
     componentWillMount() {
-        this.props.hentVeiledere(this.props.enhetsListe[0].enhetId, 0, 20);
+        this.props.hentVeiledere(this.props.valgtEnhet.enhetId, 0, 20);
     }
 
     render() {
