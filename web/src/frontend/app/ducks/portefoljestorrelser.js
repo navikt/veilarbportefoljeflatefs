@@ -1,0 +1,37 @@
+import { fetchPortefoljeStorrelser } from './../middleware/api';
+import { STATUS, doThenDispatch } from './utils';
+
+// Actions
+const OK = 'veilarbportefolje/portefoljestorrelser/OK';
+const FEILET = 'veilarbportefolje/portefoljestorrelser/FEILET';
+const PENDING = 'veilarbportefolje/portefoljestorrelser/PENDING';
+
+const initialState = {
+    status: STATUS.NOT_STARTED,
+    data: {
+        facetResults: []
+    }
+};
+
+//  Reducer
+export default function reducer(state = initialState, action) {
+    switch (action.type) {
+        case PENDING:
+            return { ...state, status: STATUS.PENDING };
+        case FEILET:
+            return { ...state, status: STATUS.ERROR, data: action.data };
+        case OK:
+            return { ...state, status: STATUS.OK, data: action.data };
+        default:
+            return state;
+    }
+}
+
+// Action Creators
+export function hentPortefoljeStorrelser(enhetId) {
+    return doThenDispatch(() => fetchPortefoljeStorrelser(enhetId), {
+        OK,
+        FEILET,
+        PENDING
+    });
+}

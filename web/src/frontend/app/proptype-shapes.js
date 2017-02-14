@@ -11,3 +11,12 @@ export const veilederShape = PT.shape({
     fornavn: PT.string.isRequired,
     etternavn: PT.string.isRequired
 });
+
+export const facetResultsShape = PT.shape({
+    value: PT.string.isRequired,
+    count: PT.number.isRequired
+});
+
+export const portefoljestorrelserShape = PT.shape({
+    facetResults: PT.arrayOf(facetResultsShape).isRequired
+});

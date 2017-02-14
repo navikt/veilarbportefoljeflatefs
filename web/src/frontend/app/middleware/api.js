@@ -32,3 +32,9 @@ export function hentEnhetsVeiledere(enhetId, fra, antall) {
         `?fra=${fra}&antall=${antall}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
+
+export function fetchPortefoljeStorrelser(enhetId) {
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhetId}` +
+        '/portefoljestorrelser';
+    return fetchToJson(url, MED_CREDENTIALS);
+}

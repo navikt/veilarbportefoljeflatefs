@@ -2,7 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { veilederShape } from './../proptype-shapes';
 
-function VeilederTabell({ veiledere }) {
+function VeilederTabell({ veiledere, portefoljestorrelser }) {
     return (
         <table className="tabell tabell-skillestrek">
             <thead>
@@ -23,7 +23,10 @@ function VeilederTabell({ veiledere }) {
                     <tr key={veileder.ident}>
                         <td>{`${veileder.navn}`}</td>
                         <td>{`${veileder.ident}`}</td>
-                        <td>{`${veileder.brukere}`}</td>
+
+                        {/* Denne må endres til å se på veileder_id (storrelse.value === veileder.veileder_id) når
+                        når det er tilgjengelig fra portefølje*/}
+                        <td>{portefoljestorrelser.find(storrelse => storrelse.value === 'SKAFFEA').count}</td>
                     </tr>
                 )}
             </tbody>
@@ -32,7 +35,8 @@ function VeilederTabell({ veiledere }) {
 }
 
 VeilederTabell.propTypes = {
-    veiledere: PT.arrayOf(veilederShape)
+    veiledere: PT.arrayOf(veilederShape),
+    portefoljestorrelser: PT.arrayOf(PT.object)
 };
 
 export default VeilederTabell;
