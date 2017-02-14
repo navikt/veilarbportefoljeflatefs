@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { veilederShape, enhetShape, portefoljestorrelserShape } from './../proptype-shapes';
+import { veiledereShape, enhetShape, portefoljestorrelserShape } from './../proptype-shapes';
 import VeiledereTabell from './veiledere-tabell';
 import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import { hentPortefoljeStorrelser } from './../ducks/portefoljestorrelser';
@@ -60,12 +60,7 @@ class VeiledereSide extends Component {
 
 VeiledereSide.propTypes = {
     veiledere: PT.shape({
-        data: PT.shape({
-            enhet: enhetShape.isRequired,
-            veilederListe: PT.arrayOf(veilederShape).isRequired,
-            totaltAntallVeiledere: PT.number.isRequired,
-            sublistFraIndex: PT.number.isRequired
-        }).isRequired
+        data: veiledereShape.isRequired
     }).isRequired,
     hentVeiledere: PT.func.isRequired,
     enhetsListe: PT.arrayOf(enhetShape).isRequired,
