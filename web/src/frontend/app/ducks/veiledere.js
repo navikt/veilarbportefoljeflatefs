@@ -10,9 +10,7 @@ const initialState = {
     status: STATUS.NOT_STARTED,
     data: {
         veilederListe: [],
-        enhet: {},
-        totaltAntallVeiledere: 0,
-        sublistFraIndex: 0
+        enhet: {}
     }
 };
 
@@ -31,8 +29,8 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function hentVeiledereForEnhet(enhetId, fra, antall) {
-    return doThenDispatch(() => hentEnhetsVeiledere(enhetId, fra, antall), {
+export function hentVeiledereForEnhet(enhetId) {
+    return doThenDispatch(() => hentEnhetsVeiledere(enhetId), {
         OK,
         FEILET,
         PENDING

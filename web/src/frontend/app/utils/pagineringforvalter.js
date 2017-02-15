@@ -1,0 +1,70 @@
+import React, { Component, PropTypes as PT } from 'react';
+import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+import Paginering from '../utils/paginering';
+import { settSubListeForPaginering, settListeSomSkalPagineres, klarerPagineringsliste } from '../ducks/paginering';
+import { veilederShape } from '../proptype-shapes';
+
+class PagineringForvalter extends Component {
+
+    componentWillMount() {
+        this.props.opprettPaginering(this.props.liste);
+        this.props.settSubListe(this.props.fraIndeksForSubListe, this.props.sideStorrelse);
+    }
+
+    componentWillUnmount() {
+        this.props.klarerPaginering();
+    }
+
+    render() {
+        const { liste, fraIndeksForSubListe, sideStorrelse, settSubListe, pagineringTekstId } = this.props;
+
+        const pagineringTekst = (
+            <FormattedMessage
+                id={pagineringTekstId}
+                values={{
+                    fraIndex: `${fraIndeksForSubListe}`,
+                    tilIndex: fraIndeksForSubListe + sideStorrelse,
+                    antallTotalt: liste.length
+                }}
+            />
+        );
+
+        return (
+            <div>
+                <Paginering
+                    antallTotalt={liste.length}
+                    fraIndex={fraIndeksForSubListe}
+                    hentListe={(fra, antall) => settSubListe(fra, antall)}
+                    tekst={pagineringTekst}
+                    sideStorrelse={sideStorrelse}
+                />
+            </div>
+        );
+    }
+}
+
+PagineringForvalter.propTypes = {
+    liste: PT.arrayOf(veilederShape),
+    pagineringTekstId: PT.string.isRequired,
+    fraIndeksForSubListe: PT.number.isRequired,
+    sideStorrelse: PT.number.isRequired,
+    opprettPaginering: PT.func.isRequired,
+    klarerPaginering: PT.func.isRequired,
+    settSubListe: PT.func.isRequired
+};
+
+const mapStateToProps = state => ({
+    fraIndeksForSubListe: state.paginering.fraIndeksForSubListe,
+    sideStorrelse: state.paginering.sideStorrelse,
+    subListe: state.paginering.subListe
+});
+
+const mapDispatchToProps = dispatch => ({
+    opprettPaginering: liste => dispatch(settListeSomSkalPagineres(liste)),
+    klarerPaginering: () => dispatch(klarerPagineringsliste()),
+    settSubListe: (fra, antall) => dispatch(settSubListeForPaginering(fra, antall))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PagineringForvalter);
+

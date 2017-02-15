@@ -49,6 +49,7 @@ class PortefoljeVisning extends Component {
                     hentListe={(fra, antall) =>
                         hentPortefolje(valgtEnhet.enhetId, sorteringsrekkefolge, fra, antall)}
                     tekst={pagineringTekst}
+                    sideStorrelse={20}
                 />
                 <table className="tabell tabell-skillestrek" tabIndex="0">
                     <thead>
