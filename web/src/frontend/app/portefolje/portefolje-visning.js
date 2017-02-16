@@ -78,7 +78,7 @@ class PortefoljeVisning extends Component {
                         {brukere.map(bruker => <tr key={bruker.fnr}>
                             <td>
                                 <a
-                                    href={`https://${window.location.hostname}/veilarbpersonfs/${bruker.fnr}`}
+                                    href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
