@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/onclick-has-focus*/
 /* eslint-disable jsx-a11y/onclick-has-role*/
 /* eslint-disable jsx-a11y/no-static-element-interactions*/
-import React, {Component, PropTypes as PT} from "react";
-import {FormattedMessage} from "react-intl";
-import {connect} from "react-redux";
-import Innholdslaster from "../innholdslaster/innholdslaster";
-import {hentPortefoljeForEnhet, settSorterRekkefolge} from "../ducks/portefolje";
-import Pagination from "../utils/pagination";
+import React, { Component, PropTypes as PT } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import Innholdslaster from '../innholdslaster/innholdslaster';
+import { hentPortefoljeForEnhet, settSorterRekkefolge } from '../ducks/portefolje';
+import Pagination from '../utils/pagination';
 
 class PortefoljeVisning extends Component {
     componentWillMount() {
