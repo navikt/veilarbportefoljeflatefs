@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSorterRekkefolge } from '../ducks/portefolje';
-import Paginering from '../utils/paginering';
+import Paginering from '../paginering/paginering';
 
 class PortefoljeVisning extends Component {
     componentWillMount() {

@@ -6,7 +6,7 @@ import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { velgEnhetForVeileder } from './../ducks/enheter';
 import EnhetVelger from './../enhet/enhet-velger';
-import PagineringForvalter from '../utils/pagineringforvalter';
+import PagineringForvalter from '../paginering/pagineringforvalter';
 
 class VeiledereSide extends Component {
 

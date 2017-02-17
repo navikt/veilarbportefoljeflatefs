@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import Paginering from '../utils/paginering';
+import Paginering from './paginering';
 import { settSubListeForPaginering, settListeSomSkalPagineres,
     klarerPagineringsliste, settFraIndeksForSubListe } from '../ducks/paginering';
 import { veilederShape } from '../proptype-shapes';
