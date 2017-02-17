@@ -4,6 +4,11 @@ export const SETT_SUBLISTE = 'paginering/settsubliste/OK';
 export const KLARER = 'paginering/klarer/OK';
 export const SETT_FRA_INDEKS_FOR_SUBLISTE = 'paginering/settfraindeksforsubliste/OK';
 
+// Utils
+function til(fra, antall, totalt) {
+    return fra + antall < totalt ? fra + antall : totalt;
+}
+
 const initialState = {
     liste: [],
     subListe: [],
@@ -17,7 +22,10 @@ export default function reducer(state = initialState, action) {
         case SETT_LISTE:
             return { ...state, liste: action.liste };
         case SETT_SUBLISTE:
-            return { ...state, subListe: state.liste.slice(action.fra, action.fra + action.antall) };
+            return {
+                ...state,
+                subListe: state.liste.slice(action.fra, til(action.fra, action.antall, state.liste.length))
+            };
         case KLARER:
             return { ...state, liste: [], subListe: [], fraIndeksForSubListe: 0 };
         case SETT_FRA_INDEKS_FOR_SUBLISTE:

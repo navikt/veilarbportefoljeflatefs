@@ -19,14 +19,14 @@ class PagineringForvalter extends Component {
 
     render() {
         const { liste, fraIndeksForSubListe, sideStorrelse, settSubListe, pagineringTekstId,
-            oppdaterFraIndeksForSubListe } = this.props;
+            oppdaterFraIndeksForSubListe, subListe } = this.props;
 
         const pagineringTekst = (
             <FormattedMessage
                 id={pagineringTekstId}
                 values={{
                     fraIndex: `${fraIndeksForSubListe}`,
-                    tilIndex: fraIndeksForSubListe + sideStorrelse,
+                    tilIndex: fraIndeksForSubListe + subListe.length,
                     antallTotalt: liste.length
                 }}
             />
@@ -57,7 +57,8 @@ PagineringForvalter.propTypes = {
     opprettPaginering: PT.func.isRequired,
     klarerPaginering: PT.func.isRequired,
     settSubListe: PT.func.isRequired,
-    oppdaterFraIndeksForSubListe: PT.func.isRequired
+    oppdaterFraIndeksForSubListe: PT.func.isRequired,
+    subListe: PT.arrayOf(veilederShape)
 };
 
 const mapStateToProps = state => ({
