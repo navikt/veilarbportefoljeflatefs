@@ -24,7 +24,8 @@ export default function reducer(state = initialState, action) {
         case SETT_SUBLISTE:
             return {
                 ...state,
-                subListe: state.liste.slice(action.fra, til(action.fra, action.antall, state.liste.length))
+                subListe: state.liste.slice(action.fraIndeks,
+                    til(action.fraIndeks, state.sideStorrelse, state.liste.length))
             };
         case KLARER:
             return { ...state, liste: [], subListe: [], fraIndeksForSubListe: 0 };
@@ -49,11 +50,10 @@ export function klarerPagineringsliste() {
     };
 }
 
-export function settSubListeForPaginering(fra, antall) {
+export function settSubListeForPaginering(fraIndeks) {
     return {
         type: SETT_SUBLISTE,
-        fra,
-        antall
+        fraIndeks
     };
 }
 

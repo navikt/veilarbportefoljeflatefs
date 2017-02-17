@@ -10,7 +10,7 @@ class PagineringForvalter extends Component {
 
     componentWillMount() {
         this.props.opprettPaginering(this.props.liste);
-        this.props.settSubListe(this.props.fraIndeksForSubListe, this.props.sideStorrelse);
+        this.props.settSubListe(this.props.fraIndeksForSubListe);
     }
 
     componentWillUnmount() {
@@ -37,8 +37,8 @@ class PagineringForvalter extends Component {
                 <Paginering
                     antallTotalt={liste.length}
                     fraIndex={fraIndeksForSubListe}
-                    hentListe={(fra, antall) => {
-                        settSubListe(fra, antall);
+                    hentListe={(fra) => {
+                        settSubListe(fra);
                         oppdaterFraIndeksForSubListe(fra);
                     }}
                     tekst={pagineringTekst}
@@ -70,7 +70,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     opprettPaginering: liste => dispatch(settListeSomSkalPagineres(liste)),
     klarerPaginering: () => dispatch(klarerPagineringsliste()),
-    settSubListe: (fra, antall) => dispatch(settSubListeForPaginering(fra, antall)),
+    settSubListe: fra => dispatch(settSubListeForPaginering(fra)),
     oppdaterFraIndeksForSubListe: fra => dispatch(settFraIndeksForSubListe(fra))
 });
 
