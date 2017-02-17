@@ -13,14 +13,14 @@ const VEILARBVEILEDER_URL = erDev() ? ':9590/veilarbveileder' : '/veilarbveilede
 const VEILARBPORTEFOLJE_URL = erDev() ? ':9594/veilarbportefolje' : '/veilarbportefolje';
 
 function hentNyttJwtPromise() {
-    if (!jwtExpirationImminent()) {
-        return Promise.resolve();
+    if (jwtExpirationImminent()) {
+        return new Promise((resolve) => {
+            console.log('Token går snart ut. Starter innlogging'); // eslint-disable-line no-console
+            GLOBAL_JWT_UPDATE_RESOLVE = resolve;
+            startLoginSequence();
+        });
     }
-    return new Promise((resolve) => {
-        console.log('Token går snart ut. Starter innlogging'); // eslint-disable-line no-console
-        GLOBAL_JWT_UPDATE_RESOLVE = resolve;
-        startLoginSequence();
-    });
+    return Promise.resolve();
 }
 
 export function hentEnheter() {
