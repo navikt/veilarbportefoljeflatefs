@@ -22,14 +22,14 @@ export function hentLedetekster() {
 }
 
 export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall) {
-    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/portefolje/` +
-                `enhet/${enhet}?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/` +
+                `${enhet}/portefolje?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
 export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, fra, antall) {
-    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/portefolje/veileder/` +
-        `${veilederident}?enhet=${enhet}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/veileder/` +
+        `${veilederident}/portefolje?enhet=${enhet}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
