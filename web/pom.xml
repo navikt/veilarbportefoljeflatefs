@@ -15,7 +15,10 @@
 
     <dependencies>
 
-        <!--Dialogarena tjenestespesifikasjon-->
+        <dependency>
+            <groupId>no.nav.fo</groupId>
+            <artifactId>miljovariablerfilter</artifactId>
+        </dependency>
 
         <!--Dialogarena-->
         <dependency>

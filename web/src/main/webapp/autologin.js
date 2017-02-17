@@ -3,7 +3,7 @@ var global_jwt_update_listener;
 var GLOBAL_JWT_UPDATE_RESOLVE;
 
 function bootstrap() {
-    sessionStorage.openAmHost = 'https://isso-t.adeo.no';
+    sessionStorage.openAmHost = window.env.loginparameters['openAMTokenIssuer.url'];
     sessionStorage.loginInProgress = "false";
 
     getProtected("js/bundle.js", initApplication);
