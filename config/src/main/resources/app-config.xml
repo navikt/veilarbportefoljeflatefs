@@ -15,6 +15,8 @@
 
     <resources>
         <fileLibrary alias="veilarbportefoljeflatefs.ledetekster.v1" mapToProperty="folder.ledetekster" />
+
+        <baseUrl alias="openAMTokenIssuer" mapToProperty="openAMTokenIssuer" />
     </resources>
 
     <loadBalancer isAlive="/veilarbportefoljeflatefs/internal/isAlive" />
