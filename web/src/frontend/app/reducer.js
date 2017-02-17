@@ -4,11 +4,13 @@ import ledeteksterReducer from './ducks/ledetekster';
 import portefoljeReducer from './ducks/portefolje';
 import veiledereReducer from './ducks/veiledere';
 import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
+import pagineringReducer from './ducks/paginering';
 
 export default combineReducers({
     enheter: enheterReducer,
     ledetekster: ledeteksterReducer,
     portefolje: portefoljeReducer,
     veiledere: veiledereReducer,
-    portefoljestorrelser: portefoljestorrelserReducer
+    portefoljestorrelser: portefoljestorrelserReducer,
+    paginering: pagineringReducer
 });

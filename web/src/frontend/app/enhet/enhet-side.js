@@ -6,7 +6,7 @@ import { velgEnhetForVeileder } from './../ducks/enheter';
 import { leggEnhetIUrl } from '../utils/utils';
 import EnhetVelger from './enhet-velger';
 import { enhetShape } from './../proptype-shapes';
-import PortefoljeVisning from '../portefolje/portefolje-visning';
+import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import { hentPortefoljeForEnhet } from '../ducks/portefolje';
 
 

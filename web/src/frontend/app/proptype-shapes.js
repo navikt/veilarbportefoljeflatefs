@@ -23,9 +23,7 @@ export const portefoljestorrelserShape = PT.shape({
 
 export const veiledereShape = PT.shape({
     enhet: enhetShape.isRequired,
-    veilederListe: PT.arrayOf(veilederShape).isRequired,
-    totaltAntallVeiledere: PT.number.isRequired,
-    sublistFraIndex: PT.number.isRequired
+    veilederListe: PT.arrayOf(veilederShape).isRequired
 });
 
 export const brukerShape = PT.shape({

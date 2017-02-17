@@ -2,10 +2,10 @@ import * as Api from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 
 // Actions
-const OK = 'veilarbportefolje/portefolje/OK';
-const FEILET = 'veilarbportefolje/portefolje/FEILET';
-const PENDING = 'veilarbportefolje/portefolje/PENDING';
-const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSREKKEFOLGE';
+const OK = 'veilarbportefolje/enhetsportefolje/OK';
+const FEILET = 'veilarbportefolje/enhetsportefolje/FEILET';
+const PENDING = 'veilarbportefolje/enhetsportefolje/PENDING';
+const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/enhetsportefolje/SETT_SORTERINGSREKKEFOLGE';
 
 // Reducer
 

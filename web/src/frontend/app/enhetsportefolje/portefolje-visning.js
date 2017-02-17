@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSorterRekkefolge } from '../ducks/portefolje';
-import Paginering from '../utils/paginering';
+import Paginering from '../paginering/paginering';
 import { portefoljeShape } from '../proptype-shapes';
 
 class PortefoljeVisning extends Component {
@@ -50,6 +50,7 @@ class PortefoljeVisning extends Component {
                     hentListe={(fra, antall) =>
                         hentPortefolje(valgtEnhet.enhetId, sorteringsrekkefolge, fra, antall)}
                     tekst={pagineringTekst}
+                    sideStorrelse={20}
                 />
                 <table className="tabell tabell-skillestrek" tabIndex="0">
                     <thead>
@@ -78,7 +79,7 @@ class PortefoljeVisning extends Component {
                         {brukere.map(bruker => <tr key={bruker.fnr}>
                             <td>
                                 <a
-                                    href={`https://${window.location.hostname}/veilarbpersonfs/${bruker.fnr}`}
+                                    href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
