@@ -2,6 +2,7 @@
 export const SETT_LISTE = 'paginering/settliste/OK';
 export const SETT_SUBLISTE = 'paginering/settsubliste/OK';
 export const KLARER = 'paginering/klarer/OK';
+export const SETT_FRA_INDEKS_FOR_SUBLISTE = 'paginering/settfraindeksforsubliste/OK';
 
 const initialState = {
     liste: [],
@@ -19,6 +20,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, subListe: state.liste.slice(action.fra, action.fra + action.antall) };
         case KLARER:
             return { ...state, liste: [], subListe: [], fraIndeksForSubListe: 0 };
+        case SETT_FRA_INDEKS_FOR_SUBLISTE:
+            return { ...state, fraIndeksForSubListe: action.fraIndeks };
         default:
             return state;
     }
@@ -43,5 +46,12 @@ export function settSubListeForPaginering(fra, antall) {
         type: SETT_SUBLISTE,
         fra,
         antall
+    };
+}
+
+export function settFraIndeksForSubListe(fraIndeks) {
+    return {
+        type: SETT_FRA_INDEKS_FOR_SUBLISTE,
+        fraIndeks
     };
 }

@@ -2,7 +2,8 @@ import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Paginering from '../utils/paginering';
-import { settSubListeForPaginering, settListeSomSkalPagineres, klarerPagineringsliste } from '../ducks/paginering';
+import { settSubListeForPaginering, settListeSomSkalPagineres,
+    klarerPagineringsliste, settFraIndeksForSubListe } from '../ducks/paginering';
 import { veilederShape } from '../proptype-shapes';
 
 class PagineringForvalter extends Component {
@@ -17,7 +18,8 @@ class PagineringForvalter extends Component {
     }
 
     render() {
-        const { liste, fraIndeksForSubListe, sideStorrelse, settSubListe, pagineringTekstId } = this.props;
+        const { liste, fraIndeksForSubListe, sideStorrelse, settSubListe, pagineringTekstId,
+            oppdaterFraIndeksForSubListe } = this.props;
 
         const pagineringTekst = (
             <FormattedMessage
@@ -35,7 +37,10 @@ class PagineringForvalter extends Component {
                 <Paginering
                     antallTotalt={liste.length}
                     fraIndex={fraIndeksForSubListe}
-                    hentListe={(fra, antall) => settSubListe(fra, antall)}
+                    hentListe={(fra, antall) => {
+                        settSubListe(fra, antall);
+                        oppdaterFraIndeksForSubListe(fra);
+                    }}
                     tekst={pagineringTekst}
                     sideStorrelse={sideStorrelse}
                 />
@@ -51,7 +56,8 @@ PagineringForvalter.propTypes = {
     sideStorrelse: PT.number.isRequired,
     opprettPaginering: PT.func.isRequired,
     klarerPaginering: PT.func.isRequired,
-    settSubListe: PT.func.isRequired
+    settSubListe: PT.func.isRequired,
+    oppdaterFraIndeksForSubListe: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -63,7 +69,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     opprettPaginering: liste => dispatch(settListeSomSkalPagineres(liste)),
     klarerPaginering: () => dispatch(klarerPagineringsliste()),
-    settSubListe: (fra, antall) => dispatch(settSubListeForPaginering(fra, antall))
+    settSubListe: (fra, antall) => dispatch(settSubListeForPaginering(fra, antall)),
+    oppdaterFraIndeksForSubListe: fra => dispatch(settFraIndeksForSubListe(fra))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PagineringForvalter);
