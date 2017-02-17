@@ -40,5 +40,5 @@ export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall) {
 
 export function hentEnhetsVeiledere(enhetId) {
     const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
-    return fetchToJson(url, MED_CREDENTIALS);
+    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
 }
