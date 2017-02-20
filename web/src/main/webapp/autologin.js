@@ -1,8 +1,9 @@
 var global_operations_waiting_for_jwt = [];
 var global_jwt_update_listener;
+var GLOBAL_JWT_UPDATE_RESOLVE;
 
 function bootstrap() {
-    sessionStorage.openAmHost = 'https://isso-t.adeo.no';
+    sessionStorage.openAmHost = window.env.loginparameters['openAMTokenIssuer.url'];
     sessionStorage.loginInProgress = "false";
 
     getProtected("js/bundle.js", initApplication);
@@ -205,6 +206,9 @@ function setOidcToken(oidc) {
     sessionStorage.oidc = oidc;
     sessionStorage.oidcClaims = JSON.stringify(getClaims(oidc));
     sessionStorage.loginInProgress = "false";
+    if(GLOBAL_JWT_UPDATE_RESOLVE) {
+        GLOBAL_JWT_UPDATE_RESOLVE(oidc);    //Kaller resolve som kan brukes til oppdatering av token ved bruk av f. eks. promise
+    }
     runEnqueuedOperations();
     notifyClaimsListener();
 }

@@ -33,6 +33,27 @@
         <param-value>no.nav.fo.veilarbportefoljeflatefs.config.ApplicationConfig</param-value>
     </context-param>
 
+    <filter>
+        <filter-name>miljovariablerJsFilter</filter-name>
+        <filter-class>no.nav.poc.miljovariablerfilter.MiljovariablerJsFilter</filter-class>
+        <init-param>
+            <param-name>scope-name</param-name>
+            <param-value>loginparameters</param-value>
+        </init-param>
+        <init-param>
+            <param-name>env-vars</param-name>
+            <param-value>
+                openAMTokenIssuer.url
+            </param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>miljovariablerJsFilter</filter-name>
+        <url-pattern>/autologin.js</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>selftest</servlet-name>
         <servlet-class>no.nav.fo.veilarbportefoljeflatefs.internal.SelftestServlet</servlet-class>
