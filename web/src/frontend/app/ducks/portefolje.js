@@ -2,10 +2,10 @@ import * as Api from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 
 // Actions
-const OK = 'veilarbportefolje/portefolje/OK';
-const FEILET = 'veilarbportefolje/portefolje/FEILET';
-const PENDING = 'veilarbportefolje/portefolje/PENDING';
-const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSREKKEFOLGE';
+const OK = 'veilarbportefolje/enhetsportefolje/OK';
+const FEILET = 'veilarbportefolje/enhetsportefolje/FEILET';
+const PENDING = 'veilarbportefolje/enhetsportefolje/PENDING';
+const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/enhetsportefolje/SETT_SORTERINGSREKKEFOLGE';
 
 // Reducer
 
@@ -38,7 +38,7 @@ export default function reducer(state = initialState, action) {
 
 // Action Creators
 export function hentPortefoljeForEnhet(enhet, rekkefolge, fra = 0, antall = 20) {
-    return doThenDispatch(() => Api.hentPortefolje(enhet, rekkefolge, fra, antall), {
+    return doThenDispatch(() => Api.hentEnhetsPortefolje(enhet, rekkefolge, fra, antall), {
         OK,
         FEILET,
         PENDING

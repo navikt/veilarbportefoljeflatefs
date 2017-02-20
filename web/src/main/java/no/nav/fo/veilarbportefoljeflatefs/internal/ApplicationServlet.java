@@ -1,4 +1,4 @@
-package no.nav.fo.veilarbportefoljeflatefs.servlet;
+package no.nav.fo.veilarbportefoljeflatefs.internal;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;

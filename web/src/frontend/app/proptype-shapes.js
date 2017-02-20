@@ -5,4 +5,9 @@ export const enhetShape = PT.shape({
     navn: PT.string
 });
 
-export default enhetShape;
+export const veilederShape = PT.shape({
+    ident: PT.string.isRequired,
+    navn: PT.string.isRequired,
+    fornavn: PT.string.isRequired,
+    etternavn: PT.string.isRequired
+});

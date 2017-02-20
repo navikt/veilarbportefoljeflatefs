@@ -23,7 +23,7 @@ function hentNyttJwtPromise() {
     return Promise.resolve();
 }
 
-export function hentEnheter() {
+export function hentVeiledersEnheter() {
     const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/veileder/enheter`;
     return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
 }
@@ -32,8 +32,13 @@ export function hentLedetekster() {
     return fetchToJson(`${API_BASE_URL}/tekster`, MED_CREDENTIALS);
 }
 
-export function hentPortefolje(enhet, rekkefolge, fra, antall) {
+export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall) {
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
                 `portefolje?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
+    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
+}
+
+export function hentEnhetsVeiledere(enhetId) {
+    const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
     return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
 }

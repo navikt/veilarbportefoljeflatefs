@@ -8,11 +8,11 @@ import { useRouterHistory, Router, Route, IndexRoute } from 'react-router';
 import { createHistory } from 'history';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
-import Application from './application/application.js';
+import Application from './application.js';
 import createStore from './store.js';
 import history from './history';
 import EnhetSide from './enhet/enhet-side';
-import PortefoljeSide from './portefolje/portefolje-side';
+import VeiledereSide from './veiledere/veiledere-side';
 
 addLocaleData(nb);
 
@@ -26,7 +26,7 @@ render(
                 <Router history={history}>
                     <Route path="/" component={Application}>
                         <Route path="enhet" component={EnhetSide} />
-                        <Route path="portefolje" component={PortefoljeSide} />
+                        <Route path="veiledere" component={VeiledereSide} />
                     </Route>
                 </Router>
             </IntlProvider>

@@ -12,7 +12,6 @@ import java.net.URL;
 @Configuration
 public class VeilederEndpointConfig {
 
-
     @Bean
     public Pingable veilederPing() throws IOException {
         return () -> {

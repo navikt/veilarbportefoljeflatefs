@@ -2,11 +2,11 @@ import React, { PropTypes as PT, Component } from 'react';
 import queryString from 'query-string';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { velgEnhetForSaksbehandler } from './../ducks/enheter';
+import { velgEnhetForVeileder } from './../ducks/enheter';
 import { leggEnhetIUrl } from '../utils/utils';
 import EnhetVelger from './enhet-velger';
 import { enhetShape } from './../proptype-shapes';
-import PortefoljeVisning from '../portefolje/portefolje-visning';
+import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import { hentPortefoljeForEnhet } from '../ducks/portefolje';
 
 
@@ -79,7 +79,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    velgEnhet: enhet => dispatch(velgEnhetForSaksbehandler(enhet)),
+    velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet)),
     hentPortefolje: enhet => dispatch(hentPortefoljeForEnhet(enhet))
 });
 

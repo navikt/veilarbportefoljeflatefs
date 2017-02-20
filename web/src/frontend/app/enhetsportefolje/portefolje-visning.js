@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSorterRekkefolge } from '../ducks/portefolje';
-import Pagination from '../utils/pagination';
+import Paginering from '../paginering/paginering';
 
 class PortefoljeVisning extends Component {
     componentWillMount() {
@@ -30,19 +30,26 @@ class PortefoljeVisning extends Component {
         hentPortefolje(valgtEnhet.enhetId, valgtRekkefolge, fraIndex);
     }
 
-
     render() {
         const { portefolje, valgtEnhet, hentPortefolje, sorteringsrekkefolge } = this.props;
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
+        const pagineringTekst = (
+            <FormattedMessage
+                id="enhet.portefolje.paginering.tekst"
+                values={{ fraIndex: `${fraIndex}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
+            />
+        );
+
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
-                <Pagination
+                <Paginering
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
-                    antallReturnert={antallReturnert}
-                    hentPortefolje={(fra, totalt) =>
-                        hentPortefolje(valgtEnhet.enhetId, sorteringsrekkefolge, fra, totalt)}
+                    hentListe={(fra, antall) =>
+                        hentPortefolje(valgtEnhet.enhetId, sorteringsrekkefolge, fra, antall)}
+                    tekst={pagineringTekst}
+                    sideStorrelse={20}
                 />
                 <table className="tabell tabell-skillestrek" tabIndex="0">
                     <thead>
@@ -102,7 +109,15 @@ class PortefoljeVisning extends Component {
 
 PortefoljeVisning.propTypes = {
     valgtEnhet: PT.object.isRequired,
-    portefolje: PT.object.isRequired,
+    portefolje: PT.shape({
+        data: PT.shape({
+            brukere: PT.arrayOf(PT.object).isRequired,
+            antallTotalt: PT.number.isRequired,
+            antallReturnert: PT.number.isRequired,
+            fraIndex: PT.number.isRequired
+        }).isRequired,
+        sorteringsrekkefolge: PT.string.isRequired
+    }).isRequired,
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
