@@ -15,7 +15,8 @@ class VeiledereSide extends Component {
     }
 
     render() {
-        const { ident, veiledere, enhetsListe, valgtEnhet, hentVeiledere, velgEnhet, veiledereSomSkalVises } = this.props;
+        const { ident, veiledere, enhetsListe, valgtEnhet,
+                hentVeiledere, velgEnhet, veiledereSomSkalVises } = this.props;
         const { veilederListe } = veiledere.data;
 
         return (

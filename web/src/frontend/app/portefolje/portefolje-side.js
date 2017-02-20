@@ -1,8 +1,8 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import VeilederPortefoljeVisning from '../portefolje/veileder-portefolje-visning';
-import { veilederShape } from './../proptype-shapes';
+import VeilederPortefoljeVisning from './veileder-portefolje-visning';
+import { veilederShape } from '../proptype-shapes';
 
 function PortefoljeSide({ ident, veileder }) {
     const annenVeilederVarsel = ident === veileder.ident ?

@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForVeileder, settSorterRekkefolge } from '../ducks/portefolje';
-import Paginering from '../utils/paginering';
+import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 
 
@@ -28,12 +28,12 @@ class VeilederPortefoljeVisning extends Component {
             valgtRekkefolge = 'ascending';
             settSortering('ascending');
         }
-        hentPortefolje(valgtEnhet, veileder, valgtRekkefolge, fraIndex);
+        hentPortefolje(valgtEnhet.enhetId, veileder, valgtRekkefolge, fraIndex);
     }
 
 
     render() {
-        const { portefolje, hentPortefolje, sorteringsrekkefolge, valgtEnhet } = this.props;
+        const { portefolje, hentPortefolje, veileder, sorteringsrekkefolge, valgtEnhet } = this.props;
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         const pagineringTekst = (
@@ -49,8 +49,9 @@ class VeilederPortefoljeVisning extends Component {
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
                     hentListe={(fra, antall) =>
-                        hentPortefolje(valgtEnhet.enhetId, sorteringsrekkefolge, fra, antall)}
+                        hentPortefolje(valgtEnhet.enhetId, veileder, sorteringsrekkefolge, fra, antall)}
                     tekst={pagineringTekst}
+                    sideStorrelse={20}
                 />
                 <table className="tabell tabell-skillestrek" tabIndex="0">
                     <thead>
