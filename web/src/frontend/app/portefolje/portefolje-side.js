@@ -19,7 +19,6 @@ function PortefoljeSide({ ident, veileder }) {
         <div>
             {annenVeilederVarsel}
             <div className="portefolje-side panel">
-
                 <h1 className="typo-innholdstittel">
                     <FormattedMessage
                         id="veileder.portefolje.tittel"

@@ -12,8 +12,8 @@ import { enhetShape, veilederShape } from './../proptype-shapes';
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
-        const { hentPortefolje } = this.props;
-        hentPortefolje(this.props.valgtEnhet.enhetId, this.props.veileder);
+        const { hentPortefolje, valgtEnhet, veileder } = this.props;
+        hentPortefolje(valgtEnhet.enhetId, veileder);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
@@ -65,9 +65,6 @@ class VeilederPortefoljeVisning extends Component {
                                 <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                             </th>
                             <th />
-                            <th>
-                                flagg
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,13 +72,12 @@ class VeilederPortefoljeVisning extends Component {
                             <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
                             <td>{bruker.fnr}</td>
                             <td>
-                                {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
+                                {bruker.sikkerhetstiltak.length > 0 ?
+                                    <span><FormattedMessage id="veileder.portefolje.sikkerhetstiltak" /></span> : null}
                                 {bruker.diskresjonskode != null ?
                                     <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
-                                {bruker.egenAnsatt === true ? <span>Egen ansatt</span> : null}
-                            </td>
-                            <td>
-                                flagg
+                                {bruker.egenAnsatt === true ?
+                                    <span><FormattedMessage id="veileder.portefolje.egen.ansatt" /></span> : null}
                             </td>
                         </tr>)}
                     </tbody>

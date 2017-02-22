@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/onclick-has-role*/
 /* eslint-disable jsx-a11y/no-static-element-interactions*/
 import React, { Component, PropTypes as PT } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import history from '../history';
 import { veilederShape } from './../proptype-shapes';
@@ -53,12 +52,8 @@ VeilederTabell.propTypes = {
     settVeileder: PT.func.isRequired
 };
 
-const mapStateToProps = state => ({
-    veileder: state.portefolje.veileder
-});
-
 const mapDispatchToProps = dispatch => ({
     settVeileder: veileder => dispatch(settValgtVeileder(veileder))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VeilederTabell);
+export default (mapDispatchToProps)(VeilederTabell);
