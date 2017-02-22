@@ -9,6 +9,18 @@ function til(fra, antall, totalt) {
     return fra + antall < totalt ? fra + antall : totalt;
 }
 
+function sorterEtternavn(a, b) {
+    const aUpper = a.etternavn.toUpperCase();
+    const bUpper = b.etternavn.toUpperCase();
+    if (aUpper < bUpper) {
+        return -1;
+    }
+    if (aUpper > bUpper) {
+        return 1;
+    }
+    return 0;
+}
+
 const initialState = {
     liste: [],
     subListe: [],
@@ -20,7 +32,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SETT_LISTE:
-            return { ...state, liste: action.liste };
+            return { ...state, liste: action.liste.sort(sorterEtternavn) };
         case SETT_SUBLISTE:
             return {
                 ...state,
