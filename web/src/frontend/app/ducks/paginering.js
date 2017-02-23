@@ -5,11 +5,11 @@ export const KLARER = 'paginering/klarer/OK';
 export const SETT_FRA_INDEKS_FOR_SUBLISTE = 'paginering/settfraindeksforsubliste/OK';
 
 // Utils
-function til(fra, antall, totalt) {
+export function til(fra, antall, totalt) {
     return fra + antall < totalt ? fra + antall : totalt;
 }
 
-function sorterEtternavn(a, b) {
+export function compareEtternavn(a, b) {
     const aUpper = a.etternavn.toUpperCase();
     const bUpper = b.etternavn.toUpperCase();
     if (aUpper < bUpper) {
@@ -32,7 +32,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SETT_LISTE:
-            return { ...state, liste: action.liste.sort(sorterEtternavn) };
+            return { ...state, liste: action.liste.sort(compareEtternavn) };
         case SETT_SUBLISTE:
             return {
                 ...state,

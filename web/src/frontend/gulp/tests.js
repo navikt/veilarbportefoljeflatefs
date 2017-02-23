@@ -8,7 +8,6 @@ module.exports = {
             return gulp.src(['app/**/**-test.js*'])
                 .pipe(mocha(
                     {
-                        require: ['./setup.js'],
                         compilers: 'js:babel-core/register'
                     }
                 ))

@@ -38,5 +38,8 @@
       "GLOBAL_JWT_UPDATE_RESOLVE": true,
       "startLoginSequence": false
   },
+  "env": {
+    "mocha": true
+  },
   "extends": "airbnb"
 }
