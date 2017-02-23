@@ -38,6 +38,12 @@ export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall) {
     return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
 }
 
+export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, fra, antall) {
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/veileder/` +
+        `${veilederident}/portefolje?enhet=${enhet}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
+    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
+}
+
 export function hentEnhetsVeiledere(enhetId) {
     const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
     return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));

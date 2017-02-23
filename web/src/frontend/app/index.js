@@ -13,6 +13,7 @@ import createStore from './store.js';
 import history from './history';
 import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
+import PortefoljeSide from './portefolje/portefolje-side';
 
 addLocaleData(nb);
 
@@ -27,6 +28,7 @@ render(
                     <Route path="/" component={Application}>
                         <Route path="enhet" component={EnhetSide} />
                         <Route path="veiledere" component={VeiledereSide} />
+                        <Route path="portefolje" component={PortefoljeSide} />
                     </Route>
                 </Router>
             </IntlProvider>
