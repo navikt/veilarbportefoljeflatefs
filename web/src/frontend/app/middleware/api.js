@@ -48,3 +48,9 @@ export function hentEnhetsVeiledere(enhetId) {
     const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
     return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
 }
+
+export function fetchPortefoljeStorrelser(enhetId) {
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhetId}` +
+        '/portefoljestorrelser';
+    return fetchToJson(url, MED_CREDENTIALS);
+}
