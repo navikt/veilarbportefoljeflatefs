@@ -1,5 +1,5 @@
-import * as Api from './../middleware/api';
-import { STATUS, doThenDispatch } from './utils';
+import * as Api from "./../middleware/api";
+import {STATUS, doThenDispatch} from "./utils";
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -7,6 +7,7 @@ const FEILET = 'veilarbportefolje/portefolje/FEILET';
 const PENDING = 'veilarbportefolje/portefolje/PENDING';
 const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSREKKEFOLGE';
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
+const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
 
 // Reducer
 
@@ -22,6 +23,19 @@ const initialState = {
     veileder: 'ikke_satt'
 };
 
+function updateBrukerInArray(brukere, action) {
+    console.log(brukere);
+    return brukere.map( bruker => {
+        if (bruker.fnr === action.fnr) {
+            return {
+                ...bruker,
+                markert: action.markert
+            }
+        }
+        return bruker;
+    })
+}
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case PENDING:
@@ -35,6 +49,15 @@ export default function reducer(state = initialState, action) {
         }
         case SETT_VALGTVEILEDER: {
             return { ...state, veileder: action.veileder };
+        }
+        case SETT_MARKERT_BRUKER: {
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    brukere: updateBrukerInArray(state.data.brukere, action)
+                }
+            }
         }
         default:
             return state;
@@ -72,5 +95,15 @@ export function settValgtVeileder(valgtVeileder) {
         type: SETT_VALGTVEILEDER,
         veileder: valgtVeileder
 
+    });
+}
+
+export function settBrukerSomMarkert(fnr, markert) {
+    console.log(fnr);
+    console.log(markert);
+    return dispatch => dispatch({
+        type: SETT_MARKERT_BRUKER,
+        fnr: fnr,
+        markert: markert
     });
 }
