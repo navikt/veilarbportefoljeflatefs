@@ -8,7 +8,7 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSorterRekkefolge } from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import Paginering from '../paginering/paginering';
-import { enhetShape, veilederShape } from '../proptype-shapes'
+import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
 
 class PortefoljeVisning extends Component {
     componentWillMount() {
@@ -130,12 +130,7 @@ class PortefoljeVisning extends Component {
 PortefoljeVisning.propTypes = {
     valgtEnhet: PT.object.isRequired,
     portefolje: PT.shape({
-        data: PT.shape({
-            brukere: PT.arrayOf(PT.object).isRequired,
-            antallTotalt: PT.number.isRequired,
-            antallReturnert: PT.number.isRequired,
-            fraIndex: PT.number.isRequired
-        }).isRequired,
+        data: portefoljeShape.isRequired,
         sorteringsrekkefolge: PT.string.isRequired
     }).isRequired,
     hentPortefolje: PT.func.isRequired,

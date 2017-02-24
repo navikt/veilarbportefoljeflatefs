@@ -12,13 +12,34 @@ export const veilederShape = PT.shape({
     etternavn: PT.string.isRequired
 });
 
-// export const brukerShape = PT.shape({
-//     fnr: PT.string.isRequired,
-//     erDoed: PT.bool.isRequired,
-//     egenAnsatt: PT.boolean.isRequired,
-//     fornavn: PT.string.isRequired,
-//     etternavn: PT.string.isRequired,
-//     diskresjonskode: PT.string.isRequired,
-//     sikkerhetstiltak: PT.arrayOf(object).isRequired,
-//     veilederId: PT.string.isRequired
-// });
+export const facetResultsShape = PT.shape({
+    value: PT.string.isRequired,
+    count: PT.number.isRequired
+});
+
+export const portefoljestorrelserShape = PT.shape({
+    facetResults: PT.arrayOf(facetResultsShape).isRequired
+});
+
+export const veiledereShape = PT.shape({
+    enhet: enhetShape.isRequired,
+    veilederListe: PT.arrayOf(veilederShape).isRequired
+});
+
+export const brukerShape = PT.shape({
+    diskresjonskode: PT.string,
+    egenAnsatt: PT.bool.isRequired,
+    erDoed: PT.bool.isRequired,
+    etternavn: PT.string.isRequired,
+    fnr: PT.string.isRequired,
+    fornavn: PT.string.isRequired,
+    sikkerhetstiltak: PT.arrayOf(PT.string).isRequired,
+    veilederId: PT.string
+});
+
+export const portefoljeShape = PT.shape({
+    brukere: PT.arrayOf(brukerShape).isRequired,
+    antallTotalt: PT.number.isRequired,
+    antallReturnert: PT.number.isRequired,
+    fraIndex: PT.number.isRequired
+});
