@@ -80,8 +80,6 @@ class PortefoljeVisning extends Component {
                             <td>
                                 <a
                                     href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
                                 >
                                     {`${bruker.etternavn}, ${bruker.fornavn}`}
                                 </a>
