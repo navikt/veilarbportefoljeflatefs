@@ -59,5 +59,8 @@
     "redux-form": "^6.1.1",
     "redux-thunk": "^2.1.0",
     "whatwg-fetch": "^1.0.0"
+  },
+  "scripts": {
+    "test": "gulp test"
   }
 }
