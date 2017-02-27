@@ -21,13 +21,13 @@ class PortefoljeVisning extends Component {
     }
 
     settVeilederesNavn() {
-        const {veiledere, portefolje} = this.props;
-        const {brukere} = portefolje.data;
-
-        if (brukere != undefined && veiledere.data.veilederListe != undefined && brukere.length > 1 && veiledere.data.veilederListe.length > 1) {
-            for (let i = 0; i < brukere.length; i++) {
-                for (let j = 0; j < veiledere.data.veilederListe.length; j++) {
-                    if (brukere[i].veilederId == veiledere.data.veilederListe[j].ident) {
+        const { veiledere, portefolje } = this.props;
+        const { brukere } = portefolje.data;
+        if (brukere !== undefined && veiledere.data.veilederListe !== undefined
+            && brukere.length > 1 && veiledere.data.veilederListe.length > 1) {
+            for (let i = 0; i < brukere.length; i += 1) {
+                for (let j = 0; j < veiledere.data.veilederListe.length; j += 1) {
+                    if (brukere[i].veilederId === veiledere.data.veilederListe[j].ident) {
                         brukere[i].veilederNavn = veiledere.data.veilederListe[j].navn;
                     }
                 }
@@ -46,6 +46,7 @@ class PortefoljeVisning extends Component {
             settSortering('ascending');
         }
         hentPortefolje(valgtEnhet.enhetId, valgtRekkefolge, fraIndex);
+        this.settVeilederesNavn();
     }
 
     render() {
@@ -134,7 +135,7 @@ PortefoljeVisning.propTypes = {
         sorteringsrekkefolge: PT.string.isRequired
     }).isRequired,
     hentPortefolje: PT.func.isRequired,
-    hentVeileder: PT.func.isRequired,
+    hentVeiledere: PT.func.isRequired,
     veiledere: PT.shape({
         data: PT.shape({
             enhet: enhetShape.isRequired,

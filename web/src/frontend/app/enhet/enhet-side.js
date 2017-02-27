@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { velgEnhetForVeileder } from './../ducks/enheter';
 import { leggEnhetIUrl } from '../utils/utils';
 import EnhetVelger from './enhet-velger';
-import { enhetShape, veilederShape } from './../proptype-shapes';
+import { enhetShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import { hentPortefoljeForEnhet } from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
@@ -14,7 +14,7 @@ import { hentVeiledereForEnhet } from '../ducks/veiledere';
 class EnhetSide extends Component {
 
     componentWillMount() {
-        const { valgtEnhet, enheter, velgEnhet, hentVeiledere } = this.props;
+        const { valgtEnhet, enheter, velgEnhet } = this.props;
         const queryEnhet = queryString.parse(location.search).enhet;
         const queryEnhetFraGyldigeEnhter = enheter
                                         .filter(enhet => enhet.enhetId === queryEnhet);
@@ -22,13 +22,10 @@ class EnhetSide extends Component {
         const queryEnhetErGyldig = queryEnhetFraGyldigeEnhter.length > 0;
         if (!valgtEnhet && !queryEnhetErGyldig) {
             velgEnhet(enheter[0]);
-            hentVeiledere(enheter[0]);
         } else if (!valgtEnhet && queryEnhetErGyldig) {
             velgEnhet(queryEnhetFraGyldigeEnhter[0]);
-            hentVeiledere(queryEnhetFraGyldigeEnhter[0]);
         } else {
             leggEnhetIUrl(valgtEnhet);
-            hentVeiledere(valgtEnhet);
         }
     }
 
@@ -38,7 +35,6 @@ class EnhetSide extends Component {
         if (!valgtEnhet) {
             return <noscript />;
         }
-
 
         const enhetVelger = enheter.length === 1 ?
             <p>{valgtEnhet.enhetId}</p> :
@@ -74,19 +70,12 @@ EnhetSide.propTypes = {
     enheter: PT.arrayOf(enhetShape).isRequired,
     valgtEnhet: PT.object,
     velgEnhet: PT.func.isRequired,
-    veiledere: PT.shape({
-        data: PT.shape({
-            enhet: enhetShape.isRequired,
-            veilederListe: PT.arrayOf(veilederShape).isRequired
-        }).isRequired
-    }).isRequired,
     hentVeiledere: PT.func.isRequired,
     hentPortefolje: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
     enheter: state.enheter.data,
-    veiledere: state.veiledere,
     valgtEnhet: state.enheter.valgtEnhet
 });
 
