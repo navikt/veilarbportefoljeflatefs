@@ -7,17 +7,20 @@ function TildelVeilederVelger({veiledere, valgtVeileder, velgVeileder}) {
         velgVeileder(veiledere[event.target.value]);
     };
 
-    const indexTilValgtVeileder= veiledere.indexOf(valgtVeileder);
+    const indexTilValgtVeileder = valgtVeileder ? veiledere.indexOf(valgtVeileder) : 0;
+
+    const defaultOption =
+        <option value={0} key={ "default" }>
+            <FormattedMessage id="portefolje.tildel.veileder.label"/>
+        </option>;
 
     const veilederListe = veiledere.map((veileder, index) =>
-        <option value={index} key={`option-${veileder.ident}`}>{`${veileder.navn}`}</option>
+        <option value={index + 1} key={`option-${veileder.ident}`}>{`${veileder.navn}`}</option>
     );
+    veilederListe.unshift(defaultOption);
 
     return (
         <div className="TildelVeilederVelger">
-            <label htmlFor="select-veileder">
-                <FormattedMessage id="portefolje.tildel.veileder.label" />
-            </label>
             <div className="select-container">
                 <select // eslint-disable-line jsx-a11y/no-onchange
                     id="select-veileder"
