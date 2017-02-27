@@ -6,8 +6,7 @@ function TildelVeilederVelger({veiledere, valgtVeileder, velgVeileder}) {
     const velgNyVeileder = (event) => {
         velgVeileder(veiledere[event.target.value]);
     };
-
-    const indexTilValgtVeileder = valgtVeileder ? veiledere.indexOf(valgtVeileder) : 0;
+    const indexTilValgtVeileder = valgtVeileder === undefined ? 0 : veiledere.indexOf(valgtVeileder);
 
     const defaultOption =
         <option value={0} key={ "default" }>

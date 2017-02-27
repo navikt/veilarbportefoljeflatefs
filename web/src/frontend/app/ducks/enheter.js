@@ -1,18 +1,20 @@
-import queryString from 'query-string';
-import { hentVeiledersEnheter } from './../middleware/api';
-import { STATUS, doThenDispatch } from './utils';
-import { leggEnhetIUrl } from '../utils/utils';
+import queryString from "query-string";
+import {hentVeiledersEnheter} from "./../middleware/api";
+import {STATUS, doThenDispatch} from "./utils";
+import {leggEnhetIUrl} from "../utils/utils";
 
 // Actions
 const OK = 'veilarbportefolje/enheter/OK';
 const FEILET = 'veilarbportefolje/enheter/FEILET';
 const PENDING = 'veilarbportefolje/enheter/PENDING';
+const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 
 const VELG_ENHET = 'VELG_ENHET';
 
 const initialState = {
     data: [],
     valgtEnhet: undefined,
+    valgtVeileder: undefined,
     ident: queryString.parse(location.search).ident
 };
 
@@ -20,13 +22,16 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case PENDING:
-            return { ...state, status: STATUS.PENDING };
+            return {...state, status: STATUS.PENDING};
         case FEILET:
-            return { ...state, status: STATUS.ERROR, data: action.data };
+            return {...state, status: STATUS.ERROR, data: action.data};
         case OK:
-            return { ...state, status: STATUS.OK, data: action.data.enhetliste };
+            return {...state, status: STATUS.OK, data: action.data.enhetliste};
         case VELG_ENHET:
-            return { ...state, valgtEnhet: action.valgtEnhet };
+            return {...state, valgtEnhet: action.valgtEnhet};
+        case SETT_VALGTVEILEDER: {
+            return { ...state, valgtVeileder: action.valgtVeileder };
+        }
         default:
             return state;
     }
@@ -47,4 +52,11 @@ export function velgEnhetForVeileder(valgtEnhet) {
         type: VELG_ENHET,
         valgtEnhet
     };
+}
+
+export function settValgtVeileder(valgtVeileder) {
+    return dispatch => dispatch({
+        type: SETT_VALGTVEILEDER,
+        valgtVeileder: valgtVeileder
+    });
 }

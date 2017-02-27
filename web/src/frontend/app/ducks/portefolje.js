@@ -6,7 +6,6 @@ const OK = 'veilarbportefolje/portefolje/OK';
 const FEILET = 'veilarbportefolje/portefolje/FEILET';
 const PENDING = 'veilarbportefolje/portefolje/PENDING';
 const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSREKKEFOLGE';
-const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
 
 // Reducer
@@ -46,9 +45,6 @@ export default function reducer(state = initialState, action) {
             return { ...state, status: STATUS.OK, data: action.data };
         case SETT_SORTERINGSREKKEFOLGE: {
             return { ...state, sorteringsrekkefolge: action.sorteringsrekkefolge };
-        }
-        case SETT_VALGTVEILEDER: {
-            return { ...state, veileder: action.veileder };
         }
         case SETT_MARKERT_BRUKER: {
             return {
@@ -90,13 +86,6 @@ export function settSorterRekkefolge(rekkefolge) {
     });
 }
 
-export function settValgtVeileder(valgtVeileder) {
-    return dispatch => dispatch({
-        type: SETT_VALGTVEILEDER,
-        veileder: valgtVeileder
-
-    });
-}
 
 export function settBrukerSomMarkert(fnr, markert) {
     console.log(fnr);
