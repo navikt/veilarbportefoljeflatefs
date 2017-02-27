@@ -15,17 +15,19 @@ import {hentPortefoljeForEnhet} from "../ducks/portefolje";
 class EnhetSide extends Component {
 
     componentWillMount() {
-        const {valgtEnhet, enheter, velgEnhet} = this.props;
+        const {valgtEnhet, enheter, velgEnhet, hentVeiledere} = this.props;
         const queryEnhet = queryString.parse(location.search).enhet;
-        const queryEnhetFraGyldigeEnhter = enheter
+        const queryEnhetFraGyldigeEnheter = enheter
             .filter(enhet => enhet.enhetId === queryEnhet);
 
-        const queryEnhetErGyldig = queryEnhetFraGyldigeEnhter.length > 0;
+        const queryEnhetErGyldig = queryEnhetFraGyldigeEnheter.length > 0;
 
         if (!valgtEnhet && !queryEnhetErGyldig) {
             velgEnhet(enheter[0]);
+            hentVeiledere(enheter[0].enhetId)
         } else if (!valgtEnhet && queryEnhetErGyldig) {
-            velgEnhet(queryEnhetFraGyldigeEnhter[0]);
+            velgEnhet(queryEnhetFraGyldigeEnheter[0]);
+            hentVeiledere(enheter[0].enhetId)
         } else {
             leggEnhetIUrl(valgtEnhet);
         }
@@ -46,17 +48,15 @@ class EnhetSide extends Component {
                 enheter={enheter} valgtEnhet={valgtEnhet} velgEnhet={(enhet) => {
                 velgEnhet(enhet);
                 hentPortefolje(enhet.enhetId);
+                hentVeiledere(enhet.enhetId);
             }}
             />);
-
-        if (valgtEnhet) {
-            hentVeiledere(valgtEnhet.enhetId);
-        }
 
         const tildelVeilederVelger = veiledere.length === 1 ?
             <p>{valgtVeileder.ident}</p> :
             (<TildelVeilederVelger
                 veiledere={veiledere}
+                valgtEnhet={valgtEnhet}
                 valgtVeileder={valgtVeileder}
                 velgVeileder={(veileder) => velgVeileder(veileder)}
             />);
