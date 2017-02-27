@@ -2,14 +2,14 @@ import React, {PropTypes as PT, Component} from "react";
 import queryString from "query-string";
 import {FormattedMessage} from "react-intl";
 import {connect} from "react-redux";
-import {velgEnhetForVeileder, settValgtVeileder} from "./../ducks/enheter";
+import {velgEnhetForVeileder} from "./../ducks/enheter";
 import {hentVeiledereForEnhet} from "./../ducks/veiledere";
 import {leggEnhetIUrl} from "../utils/utils";
 import EnhetVelger from "./enhet-velger";
 import TildelVeilederVelger from "./tildel-veileder-velger";
 import {enhetShape, veilederShape} from "./../proptype-shapes";
 import PortefoljeVisning from "../enhetsportefolje/portefolje-visning";
-import {hentPortefoljeForEnhet} from "../ducks/portefolje";
+import {hentPortefoljeForEnhet, settValgtVeileder} from "../ducks/portefolje";
 
 
 class EnhetSide extends Component {
@@ -58,7 +58,7 @@ class EnhetSide extends Component {
                 veiledere={veiledere}
                 valgtEnhet={valgtEnhet}
                 valgtVeileder={valgtVeileder}
-                velgVeileder={(veileder) => velgVeileder(veileder)}
+                velgVeileder={(veilederId) => velgVeileder(veilederId)}
             />);
 
         return (
@@ -102,7 +102,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet)),
-    velgVeileder: veileder => dispatch(settValgtVeileder(veileder)),
+    velgVeileder: veilederId => dispatch(settValgtVeileder(veilederId)),
     hentPortefolje: enhet => dispatch(hentPortefoljeForEnhet(enhet)),
     hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId))
 });

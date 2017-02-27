@@ -7,6 +7,7 @@ const FEILET = 'veilarbportefolje/portefolje/FEILET';
 const PENDING = 'veilarbportefolje/portefolje/PENDING';
 const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSREKKEFOLGE';
 const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
+const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 
 // Reducer
 
@@ -22,8 +23,20 @@ const initialState = {
     veileder: 'ikke_satt'
 };
 
+function updateVeilederForBruker(brukere, veilederId) {
+    return brukere.map( bruker => {
+        if (bruker.markert) {
+            return {
+                ...bruker,
+                veilederId: veilederId,
+                markert: false
+            }
+        }
+        return bruker;
+    })
+}
+
 function updateBrukerInArray(brukere, action) {
-    console.log(brukere);
     return brukere.map( bruker => {
         if (bruker.fnr === action.fnr) {
             return {
@@ -55,6 +68,14 @@ export default function reducer(state = initialState, action) {
                 }
             }
         }
+        case TILDEL_VEILEDER: {
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    brukere: updateVeilederForBruker(state.data.brukere, action.veilederId)
+                }
+            }        }
         default:
             return state;
     }
@@ -88,11 +109,16 @@ export function settSorterRekkefolge(rekkefolge) {
 
 
 export function settBrukerSomMarkert(fnr, markert) {
-    console.log(fnr);
-    console.log(markert);
     return dispatch => dispatch({
         type: SETT_MARKERT_BRUKER,
         fnr: fnr,
         markert: markert
+    });
+}
+
+export function settValgtVeileder(veilederId) {
+    return dispatch => dispatch({
+        type: TILDEL_VEILEDER,
+        veilederId
     });
 }

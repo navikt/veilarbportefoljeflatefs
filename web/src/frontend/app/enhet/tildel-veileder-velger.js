@@ -4,7 +4,7 @@ import {FormattedMessage} from "react-intl";
 function TildelVeilederVelger({veiledere, valgtVeileder, velgVeileder}) {
 
     const velgNyVeileder = (event) => {
-        velgVeileder(veiledere[event.target.value]);
+        velgVeileder(veiledere[event.target.value].ident);
     };
     const indexTilValgtVeileder = valgtVeileder === undefined ? 0 : veiledere.indexOf(valgtVeileder);
 
@@ -36,7 +36,7 @@ function TildelVeilederVelger({veiledere, valgtVeileder, velgVeileder}) {
 
 TildelVeilederVelger.propTypes = {
     veiledere: PT.arrayOf(PT.object).isRequired,
-    valgtVeileder: PT.object.isRequired,
+    valgtVeileder: PT.object,
     velgVeileder: PT.func.isRequired
 };
 

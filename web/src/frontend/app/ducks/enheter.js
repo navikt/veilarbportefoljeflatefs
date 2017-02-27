@@ -7,14 +7,11 @@ import {leggEnhetIUrl} from "../utils/utils";
 const OK = 'veilarbportefolje/enheter/OK';
 const FEILET = 'veilarbportefolje/enheter/FEILET';
 const PENDING = 'veilarbportefolje/enheter/PENDING';
-const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
-
 const VELG_ENHET = 'VELG_ENHET';
 
 const initialState = {
     data: [],
     valgtEnhet: undefined,
-    valgtVeileder: undefined,
     ident: queryString.parse(location.search).ident
 };
 
@@ -29,9 +26,6 @@ export default function reducer(state = initialState, action) {
             return {...state, status: STATUS.OK, data: action.data.enhetliste};
         case VELG_ENHET:
             return {...state, valgtEnhet: action.valgtEnhet};
-        case SETT_VALGTVEILEDER: {
-            return { ...state, valgtVeileder: action.valgtVeileder };
-        }
         default:
             return state;
     }
@@ -52,11 +46,4 @@ export function velgEnhetForVeileder(valgtEnhet) {
         type: VELG_ENHET,
         valgtEnhet
     };
-}
-
-export function settValgtVeileder(valgtVeileder) {
-    return dispatch => dispatch({
-        type: SETT_VALGTVEILEDER,
-        valgtVeileder: valgtVeileder
-    });
 }

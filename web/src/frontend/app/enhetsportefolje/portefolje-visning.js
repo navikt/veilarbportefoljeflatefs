@@ -87,7 +87,7 @@ class PortefoljeVisning extends Component {
                                 </a>
                             </td>
                             <td>{bruker.fnr}</td>
-                            <td>{'Duck, Donald'} </td>
+                            <td>{bruker.veilederId || "Ny bruker"} </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
                                 {bruker.diskresjonskode != null ?
