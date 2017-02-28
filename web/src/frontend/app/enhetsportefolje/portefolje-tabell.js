@@ -6,9 +6,14 @@ import { veilederShape, brukerShape } from '../proptype-shapes';
 
 class PortefoljeTabell extends Component {
 
-
     componentWillMount() {
-        const { brukere, veiledere, brukereMedVeilederNavn } = this.props;
+        const { brukere, veiledere } = this.props;
+
+        this.settVeilederNavnForBrukere(brukere, veiledere);
+    }
+
+    settVeilederNavnForBrukere(brukere, veiledere) {
+        const { brukereMedVeilederNavn } = this.props;
 
         if (brukere.length > 0 && veiledere.length > 0) {
             for (let i = 0; i < brukere.length; i += 1) {
@@ -53,8 +58,6 @@ class PortefoljeTabell extends Component {
                         <td>
                             <a
                                 href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
                             >
                                 {`${bruker.etternavn}, ${bruker.fornavn}`}
                             </a>
