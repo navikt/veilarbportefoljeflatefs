@@ -8,6 +8,7 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSorterRekkefolge } from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import Paginering from '../paginering/paginering';
+import PortefoljeTabell from './portefolje-tabell';
 import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
 
 class PortefoljeVisning extends Component {
@@ -18,21 +19,6 @@ class PortefoljeVisning extends Component {
             hentVeiledere(valgtEnhet.enhetId);
         }
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
-    }
-
-    settVeilederesNavn() {
-        const { veiledere, portefolje } = this.props;
-        const { brukere } = portefolje.data;
-        if (brukere !== undefined && veiledere.data.veilederListe !== undefined
-            && brukere.length > 1 && veiledere.data.veilederListe.length > 1) {
-            for (let i = 0; i < brukere.length; i += 1) {
-                for (let j = 0; j < veiledere.data.veilederListe.length; j += 1) {
-                    if (brukere[i].veilederId === veiledere.data.veilederListe[j].ident) {
-                        brukere[i].veilederNavn = veiledere.data.veilederListe[j].navn;
-                    }
-                }
-            }
-        }
     }
 
     settSorteringOgHentPortefolje() {
@@ -46,14 +32,11 @@ class PortefoljeVisning extends Component {
             settSortering('ascending');
         }
         hentPortefolje(valgtEnhet.enhetId, valgtRekkefolge, fraIndex);
-        this.settVeilederesNavn();
     }
 
     render() {
         const { portefolje, valgtEnhet, veiledere, hentPortefolje, sorteringsrekkefolge } = this.props;
-        const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
-
-        this.settVeilederesNavn();
+        const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
 
         const pagineringTekst = (
             <FormattedMessage
@@ -72,57 +55,11 @@ class PortefoljeVisning extends Component {
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
-                <table className="tabell tabell-skillestrek" tabIndex="0">
-                    <thead>
-                        <tr>
-                            <th>
-                                <a onClick={this.settSorteringOgHentPortefolje} role="button">
-                                    <FormattedMessage id="portefolje.tabell.navn" />
-                                </a>
-                            </th>
-                            <th>
-                                <FormattedMessage id="portefolje.tabell.fodselsnummer" />
-                            </th>
-                            <th>
-                                <FormattedMessage id="portefolje.tabell.veileder" />
-                            </th>
-                            <th />
-                            <th>
-                                <div className="nav-input">
-                                    <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
-                                    <label htmlFor="checkbox-alle-brukere" />
-                                </div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {brukere.map(bruker => <tr key={bruker.fnr}>
-                            <td>
-                                <a
-                                    href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {`${bruker.etternavn}, ${bruker.fornavn}`}
-                                </a>
-                            </td>
-                            <td>{bruker.fnr}</td>
-                            <td>{bruker.veilederNavn}</td>
-                            <td>
-                                {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
-                                {bruker.diskresjonskode != null ?
-                                    <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
-                                {bruker.egenAnsatt === true ? <span>Egen ansatt</span> : null}
-                            </td>
-                            <td>
-                                <div className="nav-input">
-                                    <input className="nav-checkbox" id={`checkbox-${bruker.fnr}`} type="checkbox" />
-                                    <label htmlFor={`checkbox-${bruker.fnr}`} />
-                                </div>
-                            </td>
-                        </tr>)}
-                    </tbody>
-                </table>
+                <PortefoljeTabell
+                    veiledere={veiledere.data.veilederListe}
+                    brukere={portefolje.data.brukere}
+                    brukereMedVeilederNavn={portefolje.data.brukere}
+                />
             </Innholdslaster>
         );
     }
