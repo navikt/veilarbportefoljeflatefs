@@ -100,6 +100,7 @@ class PortefoljeVisning extends Component {
                                         className="nav-checkbox"
                                         id={`checkbox-${bruker.fnr}`}
                                         type="checkbox"
+                                        checked={bruker.markert}
                                         onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
                                     />
                                     <label htmlFor={`checkbox-${bruker.fnr}`} />
