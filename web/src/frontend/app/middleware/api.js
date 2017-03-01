@@ -5,7 +5,7 @@ const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
 const credentials = erDev() ? 'include' : 'same-origin';
 
 const MED_CREDENTIALS = {
-    credentials: credentials
+    credentials
 };
 
 const VEILARBVEILEDER_URL = erDev() ? ':9590/veilarbveileder' : '/veilarbveileder';
@@ -26,6 +26,7 @@ export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentEnhetsVeiledere(enhetId) {    const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
+export function hentEnhetsVeiledere(enhetId) {
+    const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
