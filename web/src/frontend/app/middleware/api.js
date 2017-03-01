@@ -2,8 +2,10 @@ import { fetchToJson } from '../ducks/utils';
 import { erDev } from './../utils/utils';
 
 const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
+const credentials = erDev() ? 'include' : 'same-origin';
+
 const MED_CREDENTIALS = {
-    credentials: 'same-origin'
+    credentials: credentials
 };
 
 const VEILARBVEILEDER_URL = erDev() ? ':9590/veilarbveileder' : '/veilarbveileder';
