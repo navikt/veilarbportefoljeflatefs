@@ -1,5 +1,5 @@
-import * as Api from './../middleware/api';
-import { STATUS, doThenDispatch } from './utils';
+import * as Api from "./../middleware/api";
+import {STATUS, doThenDispatch} from "./utils";
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -118,10 +118,10 @@ export function settBrukerSomMarkert(fnr, markert) {
 }
 
 
-export function settValgtVeileder(veilederId) {
-    Api.tilordneVeileder()
+export function settValgtVeileder(tilordninger, tilVeileder) {
+    Api.tilordneVeileder(tilordninger)
         .then(() => dispatch => dispatch({
             type: TILDEL_VEILEDER,
-            veilederId
+            tilVeileder
         }));
 }

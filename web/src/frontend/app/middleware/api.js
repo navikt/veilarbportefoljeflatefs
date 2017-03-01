@@ -1,5 +1,5 @@
-import { fetchToJson } from '../ducks/utils';
-import { erDev } from './../utils/utils';
+import {fetchToJson} from "../ducks/utils";
+import {erDev} from "./../utils/utils";
 
 const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
 const MED_CREDENTIALS = {
@@ -11,7 +11,7 @@ const MED_CREDENTIALS = {
 
 const VEILARBVEILEDER_URL = erDev() ? ':9590/veilarbveileder' : '/veilarbveileder';
 const VEILARBPORTEFOLJE_URL = erDev() ? ':9594/veilarbportefolje' : '/veilarbportefolje';
-const VEILARBSITUASJON_URL = erDev() ? '8486/veilarbsituasjon' : '/veilarbsituasjon';
+const VEILARBSITUASJON_URL = erDev() ? ':8486/veilarbsituasjon' : '/veilarbsituasjon';
 
 function hentNyttJwtPromise() {
     if (jwtExpirationImminent()) {
@@ -56,7 +56,8 @@ export function fetchPortefoljeStorrelser(enhetId) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function tilordneVeileder() {
+export function tilordneVeileder(tilordninger) {
     const url = `https://${window.location.hostname}${VEILARBSITUASJON_URL}/api/tilordneveileder/`;
-    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
+    const body = { body: tilordninger };
+    return hentNyttJwtPromise().then(() => fetchToJson(url, { ...MED_CREDENTIALS, body }));
 }

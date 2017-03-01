@@ -1,9 +1,17 @@
-import React, { PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, {PropTypes as PT} from "react";
+import {FormattedMessage} from "react-intl";
+import {brukerShape} from "./../proptype-shapes";
 
-function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder }) {
+function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder, brukere }) {
     const velgNyVeileder = (event) => {
-        velgVeileder(veiledere[event.target.value].ident);
+        const tilVeileder = veiledere[event.target.value].ident;
+        const tildelinger = brukere.filter(bruker => bruker.markert)
+                                                    .map(bruker => ({
+                                                        fraVeilederId: bruker.veilederId,
+                                                        tilVeilederId: tilVeileder,
+                                                        brukerFnr: bruker.fnr
+                                                    }));
+        velgVeileder(tildelinger);
     };
     const indexTilValgtVeileder = valgtVeileder === undefined ? 0 : veiledere.indexOf(valgtVeileder);
 
@@ -34,6 +42,7 @@ function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder }) {
 }
 
 TildelVeilederVelger.propTypes = {
+    brukere: PT.arrayOf(brukerShape).isRequired,
     veiledere: PT.arrayOf(PT.object).isRequired,
     valgtVeileder: PT.object,
     velgVeileder: PT.func.isRequired

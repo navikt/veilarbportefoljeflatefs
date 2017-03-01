@@ -1,7 +1,7 @@
-import queryString from 'query-string';
-import { hentVeiledersEnheter } from './../middleware/api';
-import { STATUS, doThenDispatch } from './utils';
-import { leggEnhetIUrl } from '../utils/utils';
+import queryString from "query-string";
+import {hentVeiledersEnheter} from "./../middleware/api";
+import {STATUS, doThenDispatch} from "./utils";
+import {leggEnhetIUrl} from "../utils/utils";
 
 // Actions
 const OK = 'veilarbportefolje/enheter/OK';
@@ -47,3 +47,4 @@ export function velgEnhetForVeileder(valgtEnhet) {
         valgtEnhet
     };
 }
+
