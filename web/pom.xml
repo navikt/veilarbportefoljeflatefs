@@ -25,11 +25,6 @@
             <artifactId>oidc-security</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>no.nav.fo</groupId>
-            <artifactId>miljovariablerfilter</artifactId>
-        </dependency>
-
         <!--Dialogarena-->
         <dependency>
             <groupId>no.nav.sbl.dialogarena</groupId>
@@ -188,6 +183,12 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.components</groupId>
+            <artifactId>geronimo-jaspi</artifactId>
+            <version>2.0.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
