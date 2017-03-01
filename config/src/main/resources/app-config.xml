@@ -15,12 +15,19 @@
 
     <resources>
         <fileLibrary alias="veilarbportefoljeflatefs.ledetekster.v1" mapToProperty="folder.ledetekster" />
+        <applicationProperties alias="veilarbportefoljeflatefs.properties"/>
 
-        <baseUrl alias="openAMTokenIssuer" mapToProperty="openAMTokenIssuer" />
+
         <baseUrl alias="veilarbprotefoljePingURL" mapToProperty="veilarbportefolje.hent_portefolje" />
         <baseUrl alias="veilarbveilederPingURL" mapToProperty="veilarbveileder.hent_enheter" />
+
+        <baseUrl alias="isso-host"/>
+        <baseUrl alias="isso-jwks"/>
+        <baseUrl alias="isso-issuer"/>
+        <credential alias="isso-rp-user"/>
     </resources>
 
     <loadBalancer isAlive="/veilarbportefoljeflatefs/internal/isAlive" />
 
+    <security serviceUserResourceAlias="srvveilarbportefoljeflatefs"/>
 </application>
