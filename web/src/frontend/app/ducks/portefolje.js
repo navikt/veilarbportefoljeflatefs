@@ -120,7 +120,7 @@ export function settBrukerSomMarkert(fnr, markert) {
 
 export function settValgtVeileder(tilordninger, tilVeileder) {
     Api.tilordneVeileder(tilordninger)
-        .then(() => dispatch => dispatch({
+        .then(dispatch({
             type: TILDEL_VEILEDER,
             tilVeileder
         }));
