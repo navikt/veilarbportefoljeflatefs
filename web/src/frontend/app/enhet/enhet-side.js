@@ -1,21 +1,21 @@
-import React, {PropTypes as PT, Component} from "react";
-import queryString from "query-string";
-import {FormattedMessage} from "react-intl";
-import {connect} from "react-redux";
-import {velgEnhetForVeileder} from "./../ducks/enheter";
-import {hentVeiledereForEnhet} from "./../ducks/veiledere";
-import {leggEnhetIUrl} from "../utils/utils";
-import EnhetVelger from "./enhet-velger";
-import TildelVeilederVelger from "./tildel-veileder-velger";
-import {enhetShape, veilederShape} from "./../proptype-shapes";
-import PortefoljeVisning from "../enhetsportefolje/portefolje-visning";
-import {hentPortefoljeForEnhet, settValgtVeileder} from "../ducks/portefolje";
+import React, { PropTypes as PT, Component } from 'react';
+import queryString from 'query-string';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { velgEnhetForVeileder } from './../ducks/enheter';
+import { hentVeiledereForEnhet } from './../ducks/veiledere';
+import { leggEnhetIUrl } from '../utils/utils';
+import EnhetVelger from './enhet-velger';
+import TildelVeilederVelger from './tildel-veileder-velger';
+import { enhetShape, veilederShape } from './../proptype-shapes';
+import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
+import { hentPortefoljeForEnhet, settValgtVeileder } from '../ducks/portefolje';
 
 
 class EnhetSide extends Component {
 
     componentWillMount() {
-        const {valgtEnhet, enheter, velgEnhet, hentVeiledere} = this.props;
+        const { valgtEnhet, enheter, velgEnhet, hentVeiledere } = this.props;
         const queryEnhet = queryString.parse(location.search).enhet;
         const queryEnhetFraGyldigeEnheter = enheter
             .filter(enhet => enhet.enhetId === queryEnhet);
@@ -24,17 +24,26 @@ class EnhetSide extends Component {
 
         if (!valgtEnhet && !queryEnhetErGyldig) {
             velgEnhet(enheter[0]);
-            hentVeiledere(enheter[0].enhetId)
+            hentVeiledere(enheter[0].enhetId);
         } else if (!valgtEnhet && queryEnhetErGyldig) {
             velgEnhet(queryEnhetFraGyldigeEnheter[0]);
-            hentVeiledere(enheter[0].enhetId)
+            hentVeiledere(enheter[0].enhetId);
         } else {
             leggEnhetIUrl(valgtEnhet);
         }
     }
 
     render() {
-        const {enheter, valgtEnhet, velgEnhet, hentPortefolje, veiledere, valgtVeileder, hentVeiledere, velgVeileder} = this.props;
+        const {
+            enheter,
+            valgtEnhet,
+            velgEnhet,
+            hentPortefolje,
+            veiledere,
+            valgtVeileder,
+            hentVeiledere,
+            velgVeileder
+        } = this.props;
 
 
         if (!valgtEnhet) {
@@ -46,10 +55,10 @@ class EnhetSide extends Component {
             <p>{valgtEnhet.enhetId}</p> :
             (<EnhetVelger
                 enheter={enheter} valgtEnhet={valgtEnhet} velgEnhet={(enhet) => {
-                velgEnhet(enhet);
-                hentPortefolje(enhet.enhetId);
-                hentVeiledere(enhet.enhetId);
-            }}
+                    velgEnhet(enhet);
+                    hentPortefolje(enhet.enhetId);
+                    hentVeiledere(enhet.enhetId);
+                }}
             />);
 
         const tildelVeilederVelger = veiledere.length === 1 ?
@@ -58,7 +67,7 @@ class EnhetSide extends Component {
                 veiledere={veiledere}
                 valgtEnhet={valgtEnhet}
                 valgtVeileder={valgtVeileder}
-                velgVeileder={(veilederId) => velgVeileder(veilederId)}
+                velgVeileder={veilederId => velgVeileder(veilederId)}
             />);
 
         return (
@@ -66,12 +75,12 @@ class EnhetSide extends Component {
                 <h1 className="typo-innholdstittel">
                     <FormattedMessage
                         id="enhet.valgt.tittel"
-                        values={{enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn}}
+                        values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
                     /></h1>
                 <p className="typo-infotekst">
                     <FormattedMessage
                         id="enhet.valgt.infotekst"
-                        values={{enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn}}
+                        values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
                     />
                 </p>
                 {tildelVeilederVelger}

@@ -1,17 +1,16 @@
-import React, {PropTypes as PT} from "react";
-import {FormattedMessage} from "react-intl";
+import React, { PropTypes as PT } from 'react';
+import { FormattedMessage } from 'react-intl';
 
-function TildelVeilederVelger({veiledere, valgtVeileder, velgVeileder}) {
-
+function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder }) {
     const velgNyVeileder = (event) => {
         velgVeileder(veiledere[event.target.value].ident);
     };
     const indexTilValgtVeileder = valgtVeileder === undefined ? 0 : veiledere.indexOf(valgtVeileder);
 
     const defaultOption =
-        <option value={0} key={ "default" }>
-            <FormattedMessage id="portefolje.tildel.veileder.label"/>
-        </option>;
+        (<option value={0} key={'default'}>
+            <FormattedMessage id="portefolje.tildel.veileder.label" />
+        </option>);
 
     const veilederListe = veiledere.map((veileder, index) =>
         <option value={index + 1} key={`option-${veileder.ident}`}>{`${veileder.navn}`}</option>

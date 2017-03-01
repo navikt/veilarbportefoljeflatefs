@@ -11,6 +11,7 @@ const MED_CREDENTIALS = {
 
 const VEILARBVEILEDER_URL = erDev() ? ':9590/veilarbveileder' : '/veilarbveileder';
 const VEILARBPORTEFOLJE_URL = erDev() ? ':9594/veilarbportefolje' : '/veilarbportefolje';
+const VEILARBSITUASJON_URL = erDev() ? '8486/veilarbsituasjon' : '/veilarbsituasjon';
 
 function hentNyttJwtPromise() {
     if (jwtExpirationImminent()) {
@@ -53,4 +54,9 @@ export function fetchPortefoljeStorrelser(enhetId) {
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhetId}` +
         '/portefoljestorrelser';
     return fetchToJson(url, MED_CREDENTIALS);
+}
+
+export function tilordneVeileder() {
+    const url = `https://${window.location.hostname}${VEILARBSITUASJON_URL}/api/tilordneveileder/`;
+    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
 }

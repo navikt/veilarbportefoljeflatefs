@@ -1,7 +1,7 @@
-import queryString from "query-string";
-import {hentVeiledersEnheter} from "./../middleware/api";
-import {STATUS, doThenDispatch} from "./utils";
-import {leggEnhetIUrl} from "../utils/utils";
+import queryString from 'query-string';
+import { hentVeiledersEnheter } from './../middleware/api';
+import { STATUS, doThenDispatch } from './utils';
+import { leggEnhetIUrl } from '../utils/utils';
 
 // Actions
 const OK = 'veilarbportefolje/enheter/OK';
@@ -19,13 +19,13 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case PENDING:
-            return {...state, status: STATUS.PENDING};
+            return { ...state, status: STATUS.PENDING };
         case FEILET:
-            return {...state, status: STATUS.ERROR, data: action.data};
+            return { ...state, status: STATUS.ERROR, data: action.data };
         case OK:
-            return {...state, status: STATUS.OK, data: action.data.enhetliste};
+            return { ...state, status: STATUS.OK, data: action.data.enhetliste };
         case VELG_ENHET:
-            return {...state, valgtEnhet: action.valgtEnhet};
+            return { ...state, valgtEnhet: action.valgtEnhet };
         default:
             return state;
     }

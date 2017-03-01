@@ -1,5 +1,5 @@
-import * as Api from "./../middleware/api";
-import {STATUS, doThenDispatch} from "./utils";
+import * as Api from './../middleware/api';
+import { STATUS, doThenDispatch } from './utils';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -24,28 +24,28 @@ const initialState = {
 };
 
 function updateVeilederForBruker(brukere, veilederId) {
-    return brukere.map( bruker => {
+    return brukere.map((bruker) => {
         if (bruker.markert) {
             return {
                 ...bruker,
-                veilederId: veilederId,
+                veilederId,
                 markert: false
-            }
+            };
         }
         return bruker;
-    })
+    });
 }
 
 function updateBrukerInArray(brukere, action) {
-    return brukere.map( bruker => {
+    return brukere.map((bruker) => {
         if (bruker.fnr === action.fnr) {
             return {
                 ...bruker,
                 markert: action.markert
-            }
+            };
         }
         return bruker;
-    })
+    });
 }
 
 export default function reducer(state = initialState, action) {
@@ -66,7 +66,7 @@ export default function reducer(state = initialState, action) {
                     ...state.data,
                     brukere: updateBrukerInArray(state.data.brukere, action)
                 }
-            }
+            };
         }
         case TILDEL_VEILEDER: {
             return {
@@ -75,7 +75,8 @@ export default function reducer(state = initialState, action) {
                     ...state.data,
                     brukere: updateVeilederForBruker(state.data.brukere, action.veilederId)
                 }
-            }        }
+            };
+        }
         default:
             return state;
     }
@@ -111,14 +112,16 @@ export function settSorterRekkefolge(rekkefolge) {
 export function settBrukerSomMarkert(fnr, markert) {
     return dispatch => dispatch({
         type: SETT_MARKERT_BRUKER,
-        fnr: fnr,
-        markert: markert
+        fnr,
+        markert
     });
 }
 
+
 export function settValgtVeileder(veilederId) {
-    return dispatch => dispatch({
-        type: TILDEL_VEILEDER,
-        veilederId
-    });
+    Api.tilordneVeileder()
+        .then(() => dispatch => dispatch({
+            type: TILDEL_VEILEDER,
+            veilederId
+        }));
 }
