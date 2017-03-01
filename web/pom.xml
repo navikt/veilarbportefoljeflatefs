@@ -14,6 +14,16 @@
     <packaging>war</packaging>
 
     <dependencies>
+        <!--oidc-security-->
+        <dependency>
+            <groupId>no.nav.dialogarena</groupId>
+            <artifactId>oidc-security</artifactId>
+            <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>no.nav.dialogarena</groupId>
+            <artifactId>oidc-security</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>no.nav.fo</groupId>

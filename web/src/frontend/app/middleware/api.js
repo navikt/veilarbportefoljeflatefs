@@ -3,29 +3,15 @@ import { erDev } from './../utils/utils';
 
 const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
 const MED_CREDENTIALS = {
-    credentials: 'same-origin',
-    headers: {
-        authorization: `Bearer ${sessionStorage.oidc}`
-    }
+    credentials: 'same-origin'
 };
 
 const VEILARBVEILEDER_URL = erDev() ? ':9590/veilarbveileder' : '/veilarbveileder';
 const VEILARBPORTEFOLJE_URL = erDev() ? ':9594/veilarbportefolje' : '/veilarbportefolje';
 
-function hentNyttJwtPromise() {
-    if (jwtExpirationImminent()) {
-        return new Promise((resolve) => {
-            console.log('Token går snart ut. Starter innlogging'); // eslint-disable-line no-console
-            GLOBAL_JWT_UPDATE_RESOLVE = resolve;
-            startLoginSequence();
-        });
-    }
-    return Promise.resolve();
-}
-
 export function hentVeiledersEnheter() {
     const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/veileder/enheter`;
-    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
+    return fetchToJson(url, MED_CREDENTIALS);
 }
 
 export function hentLedetekster() {
@@ -35,10 +21,9 @@ export function hentLedetekster() {
 export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall) {
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
                 `portefolje?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
-    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
+    return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentEnhetsVeiledere(enhetId) {
-    const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
-    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
+export function hentEnhetsVeiledere(enhetId) {    const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
+    return fetchToJson(url, MED_CREDENTIALS);
 }
