@@ -8,6 +8,7 @@ const PENDING = 'veilarbportefolje/portefolje/PENDING';
 const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSREKKEFOLGE';
 const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
 const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
+const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 
 // Reducer
 
@@ -58,6 +59,9 @@ export default function reducer(state = initialState, action) {
             return { ...state, status: STATUS.OK, data: action.data };
         case SETT_SORTERINGSREKKEFOLGE: {
             return { ...state, sorteringsrekkefolge: action.sorteringsrekkefolge };
+        }
+        case SETT_VALGTVEILEDER: {
+            return { ...state, veileder: action.veileder };
         }
         case SETT_MARKERT_BRUKER: {
             return {
@@ -118,7 +122,7 @@ export function settBrukerSomMarkert(fnr, markert) {
 }
 
 
-export function settValgtVeileder(tilordninger, tilVeileder) {
+export function tildelVeileder(tilordninger, tilVeileder) {
     return dispatch => {
         Api.tilordneVeileder(tilordninger)
             .then(response => dispatch({
@@ -127,4 +131,12 @@ export function settValgtVeileder(tilordninger, tilVeileder) {
             })).catch(handterFeil);
 
     };
+}
+
+export function settValgtVeileder(valgtVeileder) {
+    return dispatch => dispatch({
+        type: SETT_VALGTVEILEDER,
+        veileder: valgtVeileder
+
+    });
 }

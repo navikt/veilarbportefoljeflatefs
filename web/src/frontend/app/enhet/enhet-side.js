@@ -9,7 +9,7 @@ import EnhetVelger from "./enhet-velger";
 import TildelVeilederVelger from "./tildel-veileder-velger";
 import {enhetShape, veilederShape, brukerShape} from "./../proptype-shapes";
 import PortefoljeVisning from "../enhetsportefolje/portefolje-visning";
-import {hentPortefoljeForEnhet, settValgtVeileder} from "../ducks/portefolje";
+import {hentPortefoljeForEnhet, tildelVeileder} from "../ducks/portefolje";
 
 
 class EnhetSide extends Component {
@@ -115,7 +115,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet)),
-    velgVeileder: (tildelinger, tilVeileder) => dispatch(settValgtVeileder(tildelinger, tilVeileder)),
+    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder)),
     hentPortefolje: enhet => dispatch(hentPortefoljeForEnhet(enhet)),
     hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId))
 });
