@@ -4,7 +4,6 @@ import {brukerShape} from "./../proptype-shapes";
 
 function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder, brukere }) {
     const velgNyVeileder = (event) => {
-
         const tilVeileder = veiledere[event.target.value - 1].ident;
         const tildelinger = brukere.filter(bruker => bruker.markert)
                                                     .map(bruker => ({

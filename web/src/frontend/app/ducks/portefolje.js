@@ -123,13 +123,12 @@ export function settBrukerSomMarkert(fnr, markert) {
 
 
 export function tildelVeileder(tilordninger, tilVeileder) {
-    return dispatch => {
+    return (dispatch) => {
         Api.tilordneVeileder(tilordninger)
-            .then(response => dispatch({
+            .then(() => dispatch({
                 type: TILDEL_VEILEDER,
                 tilVeileder
             })).catch(handterFeil);
-
     };
 }
 

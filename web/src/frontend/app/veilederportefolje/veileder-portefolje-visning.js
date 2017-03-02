@@ -78,29 +78,33 @@ class VeilederPortefoljeVisning extends Component {
                     <tbody>
                         {brukere.filter(b => b.veileder === veileder.ident)
                                 .map(bruker => <tr key={bruker.fnr}>
-                            <td>
-                                <div className="nav-input">
-                                    <input
-                                        className="nav-checkbox"
-                                        id={`checkbox-${bruker.fnr}`}
-                                        type="checkbox"
-                                        checked={bruker.markert}
-                                        onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
-                                    />
-                                    <label htmlFor={`checkbox-${bruker.fnr}`} />
-                                </div>
-                            </td>
-                            <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
-                            <td>{bruker.fnr}</td>
-                            <td>
-                                {bruker.sikkerhetstiltak.length > 0 ?
-                                    <span><FormattedMessage id="veileder.portefolje.sikkerhetstiltak" /></span> : null}
-                                {bruker.diskresjonskode != null ?
-                                    <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
-                                {bruker.egenAnsatt === true ?
-                                    <span><FormattedMessage id="veileder.portefolje.egen.ansatt" /></span> : null}
-                            </td>
-                        </tr>)}
+                                    <td>
+                                        <div className="nav-input">
+                                            <input
+                                                className="nav-checkbox"
+                                                id={`checkbox-${bruker.fnr}`}
+                                                type="checkbox"
+                                                checked={bruker.markert}
+                                                onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
+                                            />
+                                            <label htmlFor={`checkbox-${bruker.fnr}`} />
+                                        </div>
+                                    </td>
+                                    <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
+                                    <td>{bruker.fnr}</td>
+                                    <td>
+                                        {bruker.sikkerhetstiltak.length > 0 ?
+                                            <span>
+                                                <FormattedMessage id="veileder.portefolje.sikkerhetstiltak" />
+                                            </span> : null}
+                                        {bruker.diskresjonskode != null ?
+                                            <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
+                                        {bruker.egenAnsatt === true ?
+                                            <span>
+                                                <FormattedMessage id="veileder.portefolje.egen.ansatt" />
+                                            </span> : null}
+                                    </td>
+                                </tr>)}
                     </tbody>
                 </table>
             </Innholdslaster>

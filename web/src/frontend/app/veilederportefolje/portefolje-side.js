@@ -7,7 +7,6 @@ import {veilederShape, brukerShape} from "../proptype-shapes";
 import {tildelVeileder} from "../ducks/portefolje";
 
 function PortefoljeSide({ ident, veileder, brukere, veiledere, velgVeileder }) {
-
     const annenVeilederVarsel = ident === veileder.ident ?
             (<noScript />) :
             (<FormattedMessage
@@ -45,7 +44,6 @@ function PortefoljeSide({ ident, veileder, brukere, veiledere, velgVeileder }) {
 PortefoljeSide.propTypes = {
     ident: PT.string.isRequired,
     veileder: veilederShape.isRequired,
-    valgtVeileder: PT.object,
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
     velgVeileder: PT.func.isRequired
@@ -59,7 +57,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder)),
+    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeSide);
