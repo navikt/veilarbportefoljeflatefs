@@ -4,31 +4,36 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { veilederShape, brukerShape } from '../proptype-shapes';
 
-class PortefoljeTabell extends Component {
 
-    componentWillMount() {
-        const { brukere, veiledere } = this.props;
-
-        this.settVeilederNavnForBrukere(brukere, veiledere);
-    }
-
-    settVeilederNavnForBrukere(brukere, veiledere) {
-        const { brukereMedVeilederNavn } = this.props;
-
-        if (brukere.length > 0 && veiledere.length > 0) {
-            for (let i = 0; i < brukere.length; i += 1) {
-                for (let j = 0; j < veiledere.length; j += 1) {
-                    if (brukere[i].veilederId === veiledere[j].ident) {
-                        brukereMedVeilederNavn[i].veilederNavn = veiledere[j].navn;
-                    }
+export function settVeilederNavnForBrukere(brukere, veiledere) {
+    const oppdaterteBrukere = brukere;
+    if (brukere.length > 0 && veiledere.length > 0) {
+        for (let i = 0; i < brukere.length; i += 1) {
+            for (let j = 0; j < veiledere.length; j += 1) {
+                if (brukere[i].veilederId === veiledere[j].ident) {
+                    oppdaterteBrukere[i].veilederNavn = veiledere[j].navn;
+                } else if (brukere[i].veilederId === null) {
+                    oppdaterteBrukere[i].veilederNavn = 'Ny Bruker';
                 }
             }
         }
     }
+    return oppdaterteBrukere;
+}
+
+class PortefoljeTabell extends Component {
+
+    componentWillMount() {
+        const { brukere, veiledere } = this.props;
+        this.brukereMedVeilederNavn = settVeilederNavnForBrukere(brukere, veiledere);
+        this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
+    }
+
+    settSorteringOgHentPortefolje() {
+        this.props.settSorteringForPortefolje();
+    }
 
     render() {
-        const { brukereMedVeilederNavn } = this.props;
-
         return (
             <table className="tabell tabell-skillestrek" tabIndex="0">
                 <thead>
@@ -54,7 +59,7 @@ class PortefoljeTabell extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {brukereMedVeilederNavn.map(bruker => <tr key={bruker.fnr}>
+                    {this.brukereMedVeilederNavn.map(bruker => <tr key={bruker.fnr}>
                         <td>
                             <a
                                 href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
@@ -86,7 +91,7 @@ class PortefoljeTabell extends Component {
 PortefoljeTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
-    brukereMedVeilederNavn: PT.arrayOf(brukerShape).isRequired
+    settSorteringForPortefolje: PT.func.isRequired
 };
 
 export default PortefoljeTabell;

@@ -58,7 +58,7 @@ class PortefoljeVisning extends Component {
                 <PortefoljeTabell
                     veiledere={veiledere.data.veilederListe}
                     brukere={portefolje.data.brukere}
-                    brukereMedVeilederNavn={portefolje.data.brukere}
+                    settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
                 />
             </Innholdslaster>
         );
