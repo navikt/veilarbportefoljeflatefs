@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/onclick-has-focus*/
 /* eslint-disable jsx-a11y/onclick-has-role*/
 /* eslint-disable jsx-a11y/no-static-element-interactions*/
-import React, { Component, PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForVeileder, settSorterRekkefolge } from '../ducks/portefolje';
-import Paginering from '../paginering/paginering';
-import { enhetShape, veilederShape } from './../proptype-shapes';
+import React, {Component, PropTypes as PT} from "react";
+import {FormattedMessage} from "react-intl";
+import {connect} from "react-redux";
+import Innholdslaster from "../innholdslaster/innholdslaster";
+import {hentPortefoljeForVeileder, settSorterRekkefolge, settBrukerSomMarkert} from "../ducks/portefolje";
+import Paginering from "../paginering/paginering";
+import {enhetShape, veilederShape} from "./../proptype-shapes";
 
 
 class VeilederPortefoljeVisning extends Component {
@@ -33,7 +33,7 @@ class VeilederPortefoljeVisning extends Component {
 
 
     render() {
-        const { portefolje, hentPortefolje, veileder, sorteringsrekkefolge, valgtEnhet } = this.props;
+        const { portefolje, hentPortefolje, veileder, sorteringsrekkefolge, valgtEnhet, settMarkert } = this.props;
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         const pagineringTekst = (
@@ -42,6 +42,7 @@ class VeilederPortefoljeVisning extends Component {
                 values={{ fraIndex: `${fraIndex}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
             />
         );
+
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -57,6 +58,12 @@ class VeilederPortefoljeVisning extends Component {
                     <thead>
                         <tr>
                             <th>
+                                <div className="nav-input">
+                                    <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
+                                    <label htmlFor="checkbox-alle-brukere" />
+                                </div>
+                            </th>
+                            <th>
                                 <a onClick={this.settSorteringOgHentPortefolje} role="button">
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </a>
@@ -67,8 +74,22 @@ class VeilederPortefoljeVisning extends Component {
                             <th />
                         </tr>
                     </thead>
+
                     <tbody>
-                        {brukere.map(bruker => <tr key={bruker.fnr}>
+                        {brukere.filter(b => b.veileder === veileder.ident)
+                                .map(bruker => <tr key={bruker.fnr}>
+                            <td>
+                                <div className="nav-input">
+                                    <input
+                                        className="nav-checkbox"
+                                        id={`checkbox-${bruker.fnr}`}
+                                        type="checkbox"
+                                        checked={bruker.markert}
+                                        onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
+                                    />
+                                    <label htmlFor={`checkbox-${bruker.fnr}`} />
+                                </div>
+                            </td>
                             <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
                             <td>{bruker.fnr}</td>
                             <td>
@@ -102,7 +123,8 @@ VeilederPortefoljeVisning.propTypes = {
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
-    fraIndex: PT.number
+    fraIndex: PT.number,
+    settMarkert: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -115,7 +137,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     hentPortefolje: (enhet, veileder, rekkefolge, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, fra, antall)),
-    settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge))
+    settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
+    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);

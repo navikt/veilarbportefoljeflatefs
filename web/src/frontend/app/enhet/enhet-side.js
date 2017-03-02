@@ -62,12 +62,10 @@ class EnhetSide extends Component {
                 }}
             />);
 
-        const tildelVeilederVelger = veiledere.length === 1 ?
-            <p>{valgtVeileder.ident}</p> :
+        const tildelVeilederVelger =
             (<TildelVeilederVelger
-                veiledere={veiledere}
-                valgtEnhet={valgtEnhet}
                 valgtVeileder={valgtVeileder}
+                veiledere={veiledere}
                 brukere={brukere}
                 velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
             />);

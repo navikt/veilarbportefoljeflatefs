@@ -1,19 +1,18 @@
-/* eslint-disable */
-import 'babel-polyfill';
-import 'whatwg-fetch';
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { useRouterHistory, Router, Route, IndexRoute } from 'react-router';
-import { createHistory } from 'history';
-import { IntlProvider, addLocaleData } from 'react-intl';
-import nb from 'react-intl/locale-data/nb';
-import Application from './application.js';
-import createStore from './store.js';
-import history from './history';
-import EnhetSide from './enhet/enhet-side';
-import VeiledereSide from './veiledere/veiledere-side';
-import PortefoljeSide from './portefolje/portefolje-side';
+import "babel-polyfill";
+import "whatwg-fetch";
+import React from "react";
+import {render} from "react-dom";
+import {Provider} from "react-redux";
+import {useRouterHistory, Router, Route, IndexRoute} from "react-router";
+import {createHistory} from "history";
+import {IntlProvider, addLocaleData} from "react-intl";
+import nb from "react-intl/locale-data/nb";
+import Application from "./application.js";
+import createStore from "./store.js";
+import history from "./history";
+import EnhetSide from "./enhet/enhet-side";
+import VeiledereSide from "./veiledere/veiledere-side";
+import PortefoljeSide from "./veilederportefolje/portefolje-side";
 
 addLocaleData(nb);
 
