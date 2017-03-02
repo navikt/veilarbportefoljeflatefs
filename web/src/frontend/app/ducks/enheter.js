@@ -1,13 +1,12 @@
-import queryString from 'query-string';
-import { hentVeiledersEnheter } from './../middleware/api';
-import { STATUS, doThenDispatch } from './utils';
-import { leggEnhetIUrl } from '../utils/utils';
+import queryString from "query-string";
+import {hentVeiledersEnheter} from "./../middleware/api";
+import {STATUS, doThenDispatch} from "./utils";
+import {leggEnhetIUrl} from "../utils/utils";
 
 // Actions
 const OK = 'veilarbportefolje/enheter/OK';
 const FEILET = 'veilarbportefolje/enheter/FEILET';
 const PENDING = 'veilarbportefolje/enheter/PENDING';
-
 const VELG_ENHET = 'VELG_ENHET';
 
 const initialState = {
@@ -48,3 +47,4 @@ export function velgEnhetForVeileder(valgtEnhet) {
         valgtEnhet
     };
 }
+
