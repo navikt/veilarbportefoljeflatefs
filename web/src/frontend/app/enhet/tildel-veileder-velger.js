@@ -11,7 +11,7 @@ function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder, brukere 
                                                         tilVeilederId: tilVeileder,
                                                         brukerFnr: bruker.fnr
                                                     }));
-        velgVeileder(tildelinger);
+        velgVeileder(tildelinger, tilVeileder);
     };
     const indexTilValgtVeileder = valgtVeileder === undefined ? 0 : veiledere.indexOf(valgtVeileder);
 

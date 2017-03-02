@@ -1,5 +1,5 @@
 import * as Api from "./../middleware/api";
-import {STATUS, doThenDispatch} from "./utils";
+import {STATUS, doThenDispatch, handterFeil} from "./utils";
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -73,7 +73,7 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: updateVeilederForBruker(state.data.brukere, action.veilederId)
+                    brukere: updateVeilederForBruker(state.data.brukere, action.tilVeileder)
                 }
             };
         }
@@ -119,9 +119,12 @@ export function settBrukerSomMarkert(fnr, markert) {
 
 
 export function settValgtVeileder(tilordninger, tilVeileder) {
-    Api.tilordneVeileder(tilordninger)
-        .then(dispatch({
-            type: TILDEL_VEILEDER,
-            tilVeileder
-        }));
+    return dispatch => {
+        Api.tilordneVeileder(tilordninger)
+            .then(response => dispatch({
+                type: TILDEL_VEILEDER,
+                tilVeileder
+            })).catch(handterFeil);
+
+    };
 }
