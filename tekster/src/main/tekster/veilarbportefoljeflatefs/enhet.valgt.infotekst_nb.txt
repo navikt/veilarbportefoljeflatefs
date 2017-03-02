@@ -1,1 +1,0 @@
-Dette er oversikten over alle brukerne som tilhører enheten {enhetId} {enhetnavn}.
