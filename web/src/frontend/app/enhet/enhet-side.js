@@ -8,6 +8,7 @@ import EnhetVelger from './enhet-velger';
 import { enhetShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import { hentPortefoljeForEnhet } from '../ducks/portefolje';
+import Nedrekksliste from '../components/nedtrekksliste';
 
 
 class EnhetSide extends Component {
@@ -60,6 +61,7 @@ class EnhetSide extends Component {
                     />
                 </p>
                 {enhetVelger}
+                <Nedrekksliste />
                 <PortefoljeVisning />
             </div>
         );
