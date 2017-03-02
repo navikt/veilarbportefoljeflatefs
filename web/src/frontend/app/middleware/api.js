@@ -1,5 +1,5 @@
-import {fetchToJson, sjekkStatuskode} from "../ducks/utils";
-import {erDev} from "./../utils/utils";
+import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
+import { erDev } from './../utils/utils';
 
 const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
 const MED_CREDENTIALS = {

@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/onclick-has-focus*/
 /* eslint-disable jsx-a11y/onclick-has-role*/
 /* eslint-disable jsx-a11y/no-static-element-interactions*/
-import React, {Component, PropTypes as PT} from "react";
-import {FormattedMessage} from "react-intl";
-import {connect} from "react-redux";
-import Innholdslaster from "../innholdslaster/innholdslaster";
-import {hentPortefoljeForVeileder, settSorterRekkefolge, settBrukerSomMarkert} from "../ducks/portefolje";
-import Paginering from "../paginering/paginering";
-import {enhetShape, veilederShape} from "./../proptype-shapes";
+import React, { Component, PropTypes as PT } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import Innholdslaster from '../innholdslaster/innholdslaster';
+import { hentPortefoljeForVeileder, settSorterRekkefolge, settBrukerSomMarkert } from '../ducks/portefolje';
+import Paginering from '../paginering/paginering';
+import { enhetShape, veilederShape } from './../proptype-shapes';
 
 
 class VeilederPortefoljeVisning extends Component {

@@ -1,15 +1,15 @@
-import React, {PropTypes as PT, Component} from "react";
-import queryString from "query-string";
-import {FormattedMessage} from "react-intl";
-import {connect} from "react-redux";
-import {velgEnhetForVeileder} from "./../ducks/enheter";
-import {hentVeiledereForEnhet} from "./../ducks/veiledere";
-import {leggEnhetIUrl} from "../utils/utils";
-import EnhetVelger from "./enhet-velger";
-import TildelVeilederVelger from "./tildel-veileder-velger";
-import {enhetShape, veilederShape, brukerShape} from "./../proptype-shapes";
-import PortefoljeVisning from "../enhetsportefolje/portefolje-visning";
-import {hentPortefoljeForEnhet, tildelVeileder} from "../ducks/portefolje";
+import React, { PropTypes as PT, Component } from 'react';
+import queryString from 'query-string';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { velgEnhetForVeileder } from './../ducks/enheter';
+import { hentVeiledereForEnhet } from './../ducks/veiledere';
+import { leggEnhetIUrl } from '../utils/utils';
+import EnhetVelger from './enhet-velger';
+import TildelVeilederVelger from './tildel-veileder-velger';
+import { enhetShape, veilederShape, brukerShape } from './../proptype-shapes';
+import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
+import { hentPortefoljeForEnhet, tildelVeileder } from '../ducks/portefolje';
 
 
 class EnhetSide extends Component {

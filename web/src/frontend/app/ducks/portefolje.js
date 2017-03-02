@@ -1,5 +1,5 @@
-import * as Api from "./../middleware/api";
-import {STATUS, doThenDispatch, handterFeil} from "./utils";
+import * as Api from './../middleware/api';
+import { STATUS, doThenDispatch, handterFeil } from './utils';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';

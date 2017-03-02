@@ -1,6 +1,6 @@
-import React, {PropTypes as PT} from "react";
-import {FormattedMessage} from "react-intl";
-import {brukerShape} from "./../proptype-shapes";
+import React, { PropTypes as PT } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { brukerShape } from './../proptype-shapes';
 
 function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder, brukere }) {
     const velgNyVeileder = (event) => {

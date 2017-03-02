@@ -1,10 +1,10 @@
-import React, {PropTypes as PT} from "react";
-import {connect} from "react-redux";
-import {FormattedMessage} from "react-intl";
-import VeilederPortefoljeVisning from "./veileder-portefolje-visning";
-import TildelVeilederVelger from "./../enhet/tildel-veileder-velger";
-import {veilederShape, brukerShape} from "../proptype-shapes";
-import {tildelVeileder} from "../ducks/portefolje";
+import React, { PropTypes as PT } from 'react';
+import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+import VeilederPortefoljeVisning from './veileder-portefolje-visning';
+import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
+import { veilederShape, brukerShape } from '../proptype-shapes';
+import { tildelVeileder } from '../ducks/portefolje';
 
 function PortefoljeSide({ ident, veileder, brukere, veiledere, velgVeileder }) {
     const annenVeilederVarsel = ident === veileder.ident ?
