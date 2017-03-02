@@ -62,6 +62,7 @@
   },
   "scripts": {
     "test": "gulp test",
-    "eslint": "gulp eslint"
+    "eslint": "gulp eslint",
+    "build": "gulp build"
   }
 }
