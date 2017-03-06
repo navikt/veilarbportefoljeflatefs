@@ -14,7 +14,7 @@
     </artifacts>
 
     <resources>
-        <fileLibrary alias="veilarbportefoljeflatefs.ledetekster.v1" mapToProperty="folder.ledetekster" />
+        <fileLibrary alias="veilarbportefoljeflatefs.ledetekster" mapToProperty="folder.ledetekster" />
 
         <baseUrl alias="openAMTokenIssuer" mapToProperty="openAMTokenIssuer" />
         <baseUrl alias="veilarbprotefoljePingURL" mapToProperty="veilarbportefolje.hent_portefolje" />
