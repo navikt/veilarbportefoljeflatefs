@@ -5,7 +5,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet, settSorterRekkefolge } from '../ducks/portefolje';
+import { hentPortefoljeForEnhet, settSorterRekkefolge, settBrukerSomMarkert } from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import Paginering from '../paginering/paginering';
 import PortefoljeTabell from './portefolje-tabell';
@@ -35,7 +35,7 @@ class PortefoljeVisning extends Component {
     }
 
     render() {
-        const { portefolje, valgtEnhet, veiledere, hentPortefolje, sorteringsrekkefolge } = this.props;
+        const { portefolje, valgtEnhet, veiledere, hentPortefolje, sorteringsrekkefolge, settMarkert } = this.props;
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
 
         const pagineringTekst = (
@@ -59,6 +59,7 @@ class PortefoljeVisning extends Component {
                     veiledere={veiledere.data.veilederListe}
                     brukere={portefolje.data.brukere}
                     settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
+                    settSomMarkert={settMarkert}
                 />
             </Innholdslaster>
         );
@@ -81,7 +82,8 @@ PortefoljeVisning.propTypes = {
     }).isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
-    fraIndex: PT.number
+    fraIndex: PT.number,
+    settMarkert: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -94,8 +96,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     hentPortefolje: (enhet, rekkefolge, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall)),
-    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId)),
-    settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge))
+    settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
+    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
+    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeVisning);

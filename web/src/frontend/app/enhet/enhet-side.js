@@ -3,12 +3,13 @@ import queryString from 'query-string';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { velgEnhetForVeileder } from './../ducks/enheter';
+import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import { leggEnhetIUrl } from '../utils/utils';
 import EnhetVelger from './enhet-velger';
-import { enhetShape } from './../proptype-shapes';
+import TildelVeilederVelger from './tildel-veileder-velger';
+import { enhetShape, veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
-import { hentPortefoljeForEnhet } from '../ducks/portefolje';
-import { hentVeiledereForEnhet } from '../ducks/veiledere';
+import { hentPortefoljeForEnhet, tildelVeileder } from '../ducks/portefolje';
 
 
 class EnhetSide extends Component {
@@ -16,34 +17,55 @@ class EnhetSide extends Component {
     componentWillMount() {
         const { valgtEnhet, enheter, velgEnhet } = this.props;
         const queryEnhet = queryString.parse(location.search).enhet;
-        const queryEnhetFraGyldigeEnhter = enheter
-                                        .filter(enhet => enhet.enhetId === queryEnhet);
+        const queryEnhetFraGyldigeEnheter = enheter
+            .filter(enhet => enhet.enhetId === queryEnhet);
 
-        const queryEnhetErGyldig = queryEnhetFraGyldigeEnhter.length > 0;
+        const queryEnhetErGyldig = queryEnhetFraGyldigeEnheter.length > 0;
+
         if (!valgtEnhet && !queryEnhetErGyldig) {
             velgEnhet(enheter[0]);
         } else if (!valgtEnhet && queryEnhetErGyldig) {
-            velgEnhet(queryEnhetFraGyldigeEnhter[0]);
+            velgEnhet(queryEnhetFraGyldigeEnheter[0]);
         } else {
             leggEnhetIUrl(valgtEnhet);
         }
     }
 
     render() {
-        const { enheter, valgtEnhet, velgEnhet, hentVeiledere, hentPortefolje } = this.props;
+        const {
+            enheter,
+            valgtEnhet,
+            velgEnhet,
+            hentPortefolje,
+            veiledere,
+            valgtVeileder,
+            hentVeiledere,
+            velgVeileder,
+            brukere
+        } = this.props;
+
 
         if (!valgtEnhet) {
             return <noscript />;
         }
+
 
         const enhetVelger = enheter.length === 1 ?
             <p>{valgtEnhet.enhetId}</p> :
             (<EnhetVelger
                 enheter={enheter} valgtEnhet={valgtEnhet} velgEnhet={(enhet) => {
                     velgEnhet(enhet);
-                    hentVeiledere(enhet.enhetId);
                     hentPortefolje(enhet.enhetId);
+                    hentVeiledere(enhet.enhetId);
                 }}
+            />);
+
+        const tildelVeilederVelger =
+            (<TildelVeilederVelger
+                valgtVeileder={valgtVeileder}
+                veiledere={veiledere}
+                brukere={brukere}
+                velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
             />);
 
         return (
@@ -59,6 +81,7 @@ class EnhetSide extends Component {
                         values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
                     />
                 </p>
+                {tildelVeilederVelger}
                 {enhetVelger}
                 <PortefoljeVisning />
             </div>
@@ -68,21 +91,29 @@ class EnhetSide extends Component {
 
 EnhetSide.propTypes = {
     enheter: PT.arrayOf(enhetShape).isRequired,
+    veiledere: PT.arrayOf(veilederShape).isRequired,
+    brukere: PT.arrayOf(brukerShape).isRequired,
     valgtEnhet: PT.object,
+    valgtVeileder: PT.object,
     velgEnhet: PT.func.isRequired,
-    hentVeiledere: PT.func.isRequired,
-    hentPortefolje: PT.func.isRequired
+    velgVeileder: PT.func.isRequired,
+    hentPortefolje: PT.func.isRequired,
+    hentVeiledere: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
     enheter: state.enheter.data,
+    veiledere: state.veiledere.data.veilederListe,
+    brukere: state.portefolje.data.brukere,
+    valgtVeileder: state.enheter.valgtVeileder,
     valgtEnhet: state.enheter.valgtEnhet
 });
 
 const mapDispatchToProps = dispatch => ({
     velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet)),
-    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId)),
-    hentPortefolje: enhet => dispatch(hentPortefoljeForEnhet(enhet))
+    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder)),
+    hentPortefolje: enhet => dispatch(hentPortefoljeForEnhet(enhet)),
+    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);

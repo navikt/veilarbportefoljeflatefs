@@ -77,7 +77,13 @@ class PortefoljeTabell extends Component {
                         </td>
                         <td>
                             <div className="nav-input">
-                                <input className="nav-checkbox" id={`checkbox-${bruker.fnr}`} type="checkbox" />
+                                <input
+                                    className="nav-checkbox"
+                                    id={`checkbox-${bruker.fnr}`}
+                                    type="checkbox"
+                                    checked={bruker.markert}
+                                    onClick={() => this.props.settSomMarkert(bruker.fnr, !bruker.markert)}
+                                />
                                 <label htmlFor={`checkbox-${bruker.fnr}`} />
                             </div>
                         </td>
@@ -91,7 +97,8 @@ class PortefoljeTabell extends Component {
 PortefoljeTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
-    settSorteringForPortefolje: PT.func.isRequired
+    settSorteringForPortefolje: PT.func.isRequired,
+    settSomMarkert: PT.func.isRequired
 };
 
 export default PortefoljeTabell;

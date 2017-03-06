@@ -7,7 +7,6 @@ import { leggEnhetIUrl } from '../utils/utils';
 const OK = 'veilarbportefolje/enheter/OK';
 const FEILET = 'veilarbportefolje/enheter/FEILET';
 const PENDING = 'veilarbportefolje/enheter/PENDING';
-
 const VELG_ENHET = 'VELG_ENHET';
 
 const initialState = {
@@ -24,7 +23,7 @@ export default function reducer(state = initialState, action) {
         case FEILET:
             return { ...state, status: STATUS.ERROR, data: action.data };
         case OK:
-            return { ...state, status: STATUS.OK, data: action.data.enhetliste };
+            return { ...state, status: STATUS.OK, data: action.data.enhetliste, ident: action.data.ident };
         case VELG_ENHET:
             return { ...state, valgtEnhet: action.valgtEnhet };
         default:
@@ -48,3 +47,4 @@ export function velgEnhetForVeileder(valgtEnhet) {
         valgtEnhet
     };
 }
+
