@@ -15,7 +15,7 @@ import { hentPortefoljeForEnhet, tildelVeileder } from '../ducks/portefolje';
 class EnhetSide extends Component {
 
     componentWillMount() {
-        const { valgtEnhet, enheter, velgEnhet } = this.props;
+        const { valgtEnhet, enheter, velgEnhet, hentVeiledere } = this.props;
         const queryEnhet = queryString.parse(location.search).enhet;
         const queryEnhetFraGyldigeEnheter = enheter
             .filter(enhet => enhet.enhetId === queryEnhet);
@@ -24,6 +24,7 @@ class EnhetSide extends Component {
 
         if (!valgtEnhet && !queryEnhetErGyldig) {
             velgEnhet(enheter[0]);
+            hentVeiledere(enheter[0].enhetId);
         } else if (!valgtEnhet && queryEnhetErGyldig) {
             velgEnhet(queryEnhetFraGyldigeEnheter[0]);
         } else {
