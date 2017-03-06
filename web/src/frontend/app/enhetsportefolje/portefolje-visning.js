@@ -5,7 +5,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet, settSorterRekkefolge } from '../ducks/portefolje';
+import { hentPortefoljeForEnhet, settSorterRekkefolge, settBrukerSomMarkert } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { portefoljeShape } from '../proptype-shapes';
 
@@ -32,7 +32,7 @@ class PortefoljeVisning extends Component {
     }
 
     render() {
-        const { portefolje, valgtEnhet, hentPortefolje, sorteringsrekkefolge } = this.props;
+        const { portefolje, valgtEnhet, hentPortefolje, sorteringsrekkefolge, settMarkert } = this.props;
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         const pagineringTekst = (
@@ -85,7 +85,7 @@ class PortefoljeVisning extends Component {
                                 </a>
                             </td>
                             <td>{bruker.fnr}</td>
-                            <td>{'Duck, Donald'} </td>
+                            <td>{bruker.veilederId || 'Ny bruker'} </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
                                 {bruker.diskresjonskode != null ?
@@ -94,7 +94,13 @@ class PortefoljeVisning extends Component {
                             </td>
                             <td>
                                 <div className="nav-input">
-                                    <input className="nav-checkbox" id={`checkbox-${bruker.fnr}`} type="checkbox" />
+                                    <input
+                                        className="nav-checkbox"
+                                        id={`checkbox-${bruker.fnr}`}
+                                        type="checkbox"
+                                        checked={bruker.markert}
+                                        onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
+                                    />
                                     <label htmlFor={`checkbox-${bruker.fnr}`} />
                                 </div>
                             </td>
@@ -115,7 +121,8 @@ PortefoljeVisning.propTypes = {
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
-    fraIndex: PT.number
+    fraIndex: PT.number,
+    settMarkert: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -127,7 +134,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     hentPortefolje: (enhet, rekkefolge, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall)),
-    settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge))
+    settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
+    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeVisning);
