@@ -27,7 +27,6 @@ class EnhetSide extends Component {
             hentVeiledere(enheter[0].enhetId);
         } else if (!valgtEnhet && queryEnhetErGyldig) {
             velgEnhet(queryEnhetFraGyldigeEnheter[0]);
-            hentVeiledere(enheter[0].enhetId);
         } else {
             leggEnhetIUrl(valgtEnhet);
         }
