@@ -62,6 +62,8 @@
     "whatwg-fetch": "^1.0.0"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "eslint": "gulp eslint",
+    "build": "gulp build"
   }
 }
