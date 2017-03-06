@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/onclick-has-focus*/
 /* eslint-disable jsx-a11y/no-static-element-interactions*/
 import React, { Component, PropTypes as PT } from 'react';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { veilederShape, brukerShape } from '../proptype-shapes';
 
@@ -12,8 +13,6 @@ export function settVeilederNavnForBrukere(brukere, veiledere) {
             for (let j = 0; j < veiledere.length; j += 1) {
                 if (brukere[i].veilederId === veiledere[j].ident) {
                     oppdaterteBrukere[i].veilederNavn = veiledere[j].navn;
-                } else if (brukere[i].veilederId === null) {
-                    oppdaterteBrukere[i].veilederNavn = 'Ny Bruker';
                 }
             }
         }
@@ -27,6 +26,11 @@ class PortefoljeTabell extends Component {
         const { brukere, veiledere } = this.props;
         this.brukereMedVeilederNavn = settVeilederNavnForBrukere(brukere, veiledere);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
+    }
+
+    componentWillUpdate() {
+        const { brukere, veiledere } = this.props;
+        this.brukereMedVeilederNavn = settVeilederNavnForBrukere(brukere, veiledere);
     }
 
     settSorteringOgHentPortefolje() {
@@ -68,7 +72,7 @@ class PortefoljeTabell extends Component {
                             </a>
                         </td>
                         <td>{bruker.fnr}</td>
-                        <td>{bruker.veilederNavn}</td>
+                        <td>{bruker.veilederNavn || 'Ny bruker'}</td>
                         <td>
                             {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
                             {bruker.diskresjonskode != null ?
@@ -101,4 +105,8 @@ PortefoljeTabell.propTypes = {
     settSomMarkert: PT.func.isRequired
 };
 
-export default PortefoljeTabell;
+const mapStateToProps = state => ({
+    portefolje: state.portefolje
+});
+
+export default connect(mapStateToProps)(PortefoljeTabell);
