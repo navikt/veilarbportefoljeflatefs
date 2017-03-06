@@ -44,7 +44,7 @@ class VeilederTabell extends Component {
                         <tr key={veileder.ident}>
                             <td><a onClick={() => this.settValgtVeileder(veileder)}>{`${veileder.navn}`}</a></td>
                             <td>{`${veileder.ident}`}</td>
-                            <td>{portefoljestorrelse(portefoljestorrelser, veileder.id)}</td>
+                            <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
                         </tr>
                 )}
                 </tbody>
