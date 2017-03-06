@@ -5,6 +5,7 @@ import portefoljeReducer from './ducks/portefolje';
 import veiledereReducer from './ducks/veiledere';
 import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
 import pagineringReducer from './ducks/paginering';
+import filtreringReducer from './ducks/filtrering';
 
 export default combineReducers({
     enheter: enheterReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     portefolje: portefoljeReducer,
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
-    paginering: pagineringReducer
+    paginering: pagineringReducer,
+    filtrering: filtreringReducer
 });

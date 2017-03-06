@@ -8,6 +8,7 @@ import EnhetVelger from './enhet-velger';
 import { enhetShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import { hentPortefoljeForEnhet } from '../ducks/portefolje';
+import FiltreringOversikt from './filtrering/filtrering-oversikt';
 
 
 class EnhetSide extends Component {
@@ -59,6 +60,7 @@ class EnhetSide extends Component {
                         values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
                     />
                 </p>
+                <FiltreringOversikt />
                 {enhetVelger}
                 <PortefoljeVisning />
             </div>
