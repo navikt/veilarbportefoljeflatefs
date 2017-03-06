@@ -19,6 +19,11 @@ class VeilederTabell extends Component {
     render() {
         const { veiledere, portefoljestorrelser } = this.props;
 
+        const portefoljestorrelse = (storrelser, veilederId) => {
+            const currentStorrelse = storrelser.find(storrelse => storrelse.value === veilederId);
+            return currentStorrelse || 0;
+        };
+
         return (
             <table className="tabell tabell-skillestrek">
                 <thead>
@@ -39,10 +44,7 @@ class VeilederTabell extends Component {
                         <tr key={veileder.ident}>
                             <td><a onClick={() => this.settValgtVeileder(veileder)}>{`${veileder.navn}`}</a></td>
                             <td>{`${veileder.ident}`}</td>
-
-                            {/* Denne må endres til å se på veileder_id (storrelse.value === veileder.veileder_id) når
-                                når det er tilgjengelig fra portefølje*/}
-                            <td>{portefoljestorrelser.find(storrelse => storrelse.value === 'SKAFFEA').count}</td>
+                            <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
                         </tr>
                 )}
                 </tbody>
