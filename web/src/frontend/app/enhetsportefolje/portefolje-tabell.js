@@ -49,7 +49,7 @@ class PortefoljeTabell extends Component {
                             </div>
                         </th>
                         <th>
-                            <a onClick={this.settSorteringOgHentPortefolje} role="button">
+                            <a onClick={this.settSorteringOgHentPortefolje} role="button" className="sortering-link">
                                 <FormattedMessage id="portefolje.tabell.navn" />
                             </a>
                         </th>
@@ -81,7 +81,7 @@ class PortefoljeTabell extends Component {
                         </td>
                         <td>
                             <a
-                                href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
+                                href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`} className="til-bruker-link"
                             >
                                 {`${bruker.etternavn}, ${bruker.fornavn}`}
                             </a>
