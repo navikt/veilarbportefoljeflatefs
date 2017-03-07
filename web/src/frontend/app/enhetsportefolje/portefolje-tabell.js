@@ -39,9 +39,15 @@ class PortefoljeTabell extends Component {
 
     render() {
         return (
-            <table className="tabell tabell-skillestrek enhetsportefolje-tabell" tabIndex="0">
+            <table className="tabell enhetsportefolje-tabell" tabIndex="0">
                 <thead>
                     <tr>
+                        <th>
+                            <div className="nav-input">
+                                <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
+                                <label htmlFor="checkbox-alle-brukere" />
+                            </div>
+                        </th>
                         <th>
                             <a onClick={this.settSorteringOgHentPortefolje} role="button">
                                 <FormattedMessage id="portefolje.tabell.navn" />
@@ -56,31 +62,11 @@ class PortefoljeTabell extends Component {
                         <th>
                             <FormattedMessage id="portefolje.tabell.navident" />
                         </th>
-                        <th>
-                            <div className="nav-input">
-                                <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
-                                <label htmlFor="checkbox-alle-brukere" />
-                            </div>
-                        </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {this.brukereMedVeilederNavn.map(bruker => <tr key={bruker.fnr}>
-                        <td>
-                            <a
-                                href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
-                            >
-                                {`${bruker.etternavn}, ${bruker.fornavn}`}
-                            </a>
-                        </td>
-                        <td>{bruker.fnr}</td>
-                        <td className="ny-bruker-td">{bruker.veilederNavn || <span className="ny-bruker">Ny bruker</span>}</td>
-                        <td>
-                            {bruker.sikkerhetstiltak.length > 0 ? <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
-                            {bruker.diskresjonskode != null ?
-                                <span className="diskresjonskode">{`Kode ${bruker.diskresjonskode}`}</span> : null}
-                            {bruker.egenAnsatt === true ? <span className="egen-ansatt">Egen ansatt</span> : null}
-                        </td>
                         <td>
                             <div className="nav-input">
                                 <input
@@ -92,6 +78,23 @@ class PortefoljeTabell extends Component {
                                 />
                                 <label htmlFor={`checkbox-${bruker.fnr}`} />
                             </div>
+                        </td>
+                        <td>
+                            <a
+                                href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
+                            >
+                                {`${bruker.etternavn}, ${bruker.fornavn}`}
+                            </a>
+                        </td>
+                        <td>{bruker.fnr}</td>
+                        {bruker.veilederNavn != null ?
+                            <td className="veileder-td">{bruker.veilederNavn}</td> : <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>}
+                        <td></td>
+                        <td className="sikkerhetstiltak-td">
+                            {bruker.sikkerhetstiltak.length > 0 ? <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
+                            {bruker.diskresjonskode != null ?
+                                <span className="diskresjonskode">{`Kode ${bruker.diskresjonskode}`}</span> : null}
+                            {bruker.egenAnsatt === true ? <span className="egen-ansatt">Egen ansatt</span> : null}
                         </td>
                     </tr>)}
                 </tbody>
