@@ -39,7 +39,7 @@ class PortefoljeTabell extends Component {
 
     render() {
         return (
-            <table className="tabell tabell-skillestrek" tabIndex="0">
+            <table className="tabell tabell-skillestrek enhetsportefolje-tabell" tabIndex="0">
                 <thead>
                     <tr>
                         <th>
@@ -53,7 +53,9 @@ class PortefoljeTabell extends Component {
                         <th>
                             <FormattedMessage id="portefolje.tabell.veileder" />
                         </th>
-                        <th />
+                        <th>
+                            <FormattedMessage id="portefolje.tabell.navident" />
+                        </th>
                         <th>
                             <div className="nav-input">
                                 <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
@@ -72,12 +74,12 @@ class PortefoljeTabell extends Component {
                             </a>
                         </td>
                         <td>{bruker.fnr}</td>
-                        <td>{bruker.veilederNavn || 'Ny bruker'}</td>
+                        <td className="ny-bruker-td">{bruker.veilederNavn || <span className="ny-bruker">Ny bruker</span>}</td>
                         <td>
-                            {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
+                            {bruker.sikkerhetstiltak.length > 0 ? <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
                             {bruker.diskresjonskode != null ?
-                                <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
-                            {bruker.egenAnsatt === true ? <span>Egen ansatt</span> : null}
+                                <span className="diskresjonskode">{`Kode ${bruker.diskresjonskode}`}</span> : null}
+                            {bruker.egenAnsatt === true ? <span className="egen-ansatt">Egen ansatt</span> : null}
                         </td>
                         <td>
                             <div className="nav-input">
