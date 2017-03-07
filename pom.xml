@@ -23,14 +23,15 @@
     <properties>
         <!-- Egenlagde -->
         <modig.security.version>1.0.24</modig.security.version>
-        <common-jetty.version>2.0.11</common-jetty.version>
+        <common-jetty.version>2.0.12</common-jetty.version>
         <common-types.version>1.2</common-types.version>
         <common-web.version>2.0.4</common-web.version>
         <common-test.version>1.2</common-test.version>
         <modig-log-filter.version>1.1.3</modig-log-filter.version>
         <modig-testcertificates.version>1.1.0</modig-testcertificates.version>
         <modig-core-test.version>1.0.0</modig-core-test.version>
-        <miljovariablerfilter.version>1.0.3</miljovariablerfilter.version>
+        <oidc-security.version>2.0.14</oidc-security.version>
+
 
         <!-- Tredjepars -->
         <!--<ehcache.version>2.6.11</ehcache.version>-->
@@ -54,11 +55,17 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--oidc-security-->
             <dependency>
-                <groupId>no.nav.fo</groupId>
-                <artifactId>miljovariablerfilter</artifactId>
-                <version>${miljovariablerfilter.version}</version>
-                <scope>runtime</scope>
+                <groupId>no.nav.dialogarena</groupId>
+                <artifactId>oidc-security</artifactId>
+                <version>${oidc-security.version}</version>
+                <type>test-jar</type>
+            </dependency>
+            <dependency>
+                <groupId>no.nav.dialogarena</groupId>
+                <artifactId>oidc-security</artifactId>
+                <version>${oidc-security.version}</version>
             </dependency>
 
             <!--Dialogarena-->
@@ -297,6 +304,12 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
                 <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.components</groupId>
+                <artifactId>geronimo-jaspi</artifactId>
+                <version>2.0.0</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

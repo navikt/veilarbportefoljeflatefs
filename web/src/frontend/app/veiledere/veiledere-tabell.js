@@ -21,7 +21,7 @@ class VeilederTabell extends Component {
 
         const portefoljestorrelse = (storrelser, veilederId) => {
             const currentStorrelse = storrelser.find(storrelse => storrelse.value === veilederId);
-            return currentStorrelse || 0;
+            return currentStorrelse ? currentStorrelse.count : 0;
         };
 
         return (
