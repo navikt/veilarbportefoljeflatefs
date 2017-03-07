@@ -94,8 +94,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, rekkefolge, fra = 0, antall = 20, nyeBrukere, inaktiveBrukere) =>
-        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere)),
+    hentPortefolje: (enhet, rekkefolge, fra = 0, antall = 20) =>
+        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall)),
     settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId))
