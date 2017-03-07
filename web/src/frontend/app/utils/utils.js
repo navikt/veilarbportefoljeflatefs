@@ -3,7 +3,8 @@ import queryString from 'query-string';
 
 export function erDev() {
     const url = window.location.href;
-    return url.includes('debug=true') || url.includes('devillo.no:9592') || url.includes('devillo.no:9593');
+    return url.includes('debug=true') || url.includes('devillo.no:9592')
+        || url.includes('devillo.no:9593') || url.includes('localhost:');
 }
 
 export function leggEnhetIUrl(enhet) { // eslint-disable-line consistent-return
