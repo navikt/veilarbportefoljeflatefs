@@ -62,12 +62,8 @@ VeilederTabell.propTypes = {
     portefoljestorrelser: PT.arrayOf(PT.object).isRequired
 };
 
-const mapStateToProps = state => ({
-    portefoljestorrelser: state.portefoljestorrelser.data.facetResults
-});
-
 const mapDispatchToProps = dispatch => ({
     settVeileder: veileder => dispatch(settValgtVeileder(veileder))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VeilederTabell);
+export default connect(() => ({}), mapDispatchToProps)(VeilederTabell);
