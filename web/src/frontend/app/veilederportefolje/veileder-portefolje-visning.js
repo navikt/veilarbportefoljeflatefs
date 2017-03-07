@@ -90,7 +90,14 @@ class VeilederPortefoljeVisning extends Component {
                                             <label htmlFor={`checkbox-${bruker.fnr}`} />
                                         </div>
                                     </td>
-                                    <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
+                                    <td>
+                                        <a
+                                            href={`https://${window.location.hostname}` +
+                                            `/veilarbpersonflatefs/${bruker.fnr}`}
+                                        >
+                                            {`${bruker.etternavn}, ${bruker.fornavn}`}
+                                        </a>
+                                    </td>
                                     <td>{bruker.fnr}</td>
                                     <td>
                                         {bruker.sikkerhetstiltak.length > 0 ?
