@@ -62,7 +62,7 @@ class PortefoljeTabell extends Component {
                         <th>
                             <FormattedMessage id="portefolje.tabell.navident" />
                         </th>
-                        <th></th>
+                        <th />
                     </tr>
                 </thead>
                 <tbody>
@@ -81,17 +81,22 @@ class PortefoljeTabell extends Component {
                         </td>
                         <td>
                             <a
-                                href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`} className="til-bruker-link"
+                                href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
+                                className="til-bruker-link"
                             >
                                 {`${bruker.etternavn}, ${bruker.fornavn}`}
                             </a>
                         </td>
                         <td>{bruker.fnr}</td>
                         {bruker.veilederNavn != null ?
-                            <td className="veileder-td">{bruker.veilederNavn}</td> : <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>}
-                        <td></td>
+                            <td className="veileder-td">{bruker.veilederNavn}</td> :
+                            <td className="ny-bruker-td">
+                                <span className="ny-bruker">Ny bruker</span>
+                            </td>}
+                        <td />
                         <td className="sikkerhetstiltak-td">
-                            {bruker.sikkerhetstiltak.length > 0 ? <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
+                            {bruker.sikkerhetstiltak.length > 0 ?
+                                <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
                             {bruker.diskresjonskode != null ?
                                 <span className="diskresjonskode">{`Kode ${bruker.diskresjonskode}`}</span> : null}
                             {bruker.egenAnsatt === true ? <span className="egen-ansatt">Egen ansatt</span> : null}
