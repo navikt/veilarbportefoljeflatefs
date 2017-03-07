@@ -33,7 +33,7 @@ export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall) {
 export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, fra, antall) {
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/veileder/` +
         `${veilederident}/portefolje?enhet=${enhet}&fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
-    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
+    return fetchToJson(url, MED_CREDENTIALS);
 }
 
 export function hentEnhetsVeiledere(enhetId) {
