@@ -20,8 +20,11 @@ class VeilederTabell extends Component {
         const { veiledere, portefoljestorrelser } = this.props;
 
         const portefoljestorrelse = (storrelser, veilederId) => {
-            const currentStorrelse = storrelser.find(storrelse => storrelse.value === veilederId);
-            return currentStorrelse || 0;
+            const currentStorrelseMapping = storrelser.find(storrelse => storrelse.value === veilederId);
+            if (currentStorrelseMapping) {
+                return currentStorrelseMapping.count || 0;
+            }
+            return 0;
         };
 
         return (
