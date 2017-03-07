@@ -76,7 +76,7 @@ class VeilederPortefoljeVisning extends Component {
                     </thead>
 
                     <tbody>
-                        {brukere.filter(b => b.veileder === veileder.ident)
+                        {brukere.filter(b => b.veilederId === veileder.ident)
                                 .map(bruker => <tr key={bruker.fnr}>
                                     <td>
                                         <div className="nav-input">
