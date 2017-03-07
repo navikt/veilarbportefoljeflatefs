@@ -34,13 +34,7 @@ export function hentLedetekster() {
     return fetchToJson(`${API_BASE_URL}/tekster`, MED_CREDENTIALS);
 }
 
-export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall) {
-    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
-                `portefolje?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
-    return hentNyttJwtPromise().then(() => fetchToJson(url, MED_CREDENTIALS));
-}
-
-export function hentEnhetsPortefoljeMedFiltrering(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere) {
+export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere) {
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
         `portefolje?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}` +
         `&nyeBrukere=${nyeBrukere}&inaktiveBrukere=${inaktiveBrukere}`;

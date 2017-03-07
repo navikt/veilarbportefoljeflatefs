@@ -1,45 +1,51 @@
+import * as Api from './../middleware/api';
+import { doThenDispatch } from './utils';
+
 // Actions
+const OK = 'veilarbportefolje/portefolje/OK';
+const FEILET = 'veilarbportefolje/portefolje/FEILET';
+const PENDING = 'veilarbportefolje/portefolje/PENDING';
 export const VALGT_NYE_BRUKERE = 'VALGT_NYE_BRUKERE';
 export const AVVALGT_NYE_BRUKERE = 'AVVALGT_NYE_BRUKERE';
 export const VALGT_INAKTIVE_BRUKERE = 'VALGT_INAKTIVE_BRUKERE';
 export const AVVALGT_INAKTIVE_BRUKERE = 'AVVALGT_INAKTIVE_BRUKERE';
 
+//  Reducer
 const initialState = {
     filtervalg: {
-        nye_brukere: false,
-        inaktive_brukere: false
+        nyeBrukere: false,
+        inaktiveBrukere: false
     }
 };
 
-//  Reducer
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case VALGT_NYE_BRUKERE:
             return { ...state,
                 filtervalg: {
-                    nye_brukere: true,
-                    inaktive_brukere: state.filtervalg.inaktive_brukere
+                    nyeBrukere: true,
+                    inaktiveBrukere: state.filtervalg.inaktiveBrukere
                 }
             };
         case AVVALGT_NYE_BRUKERE:
             return { ...state,
                 filtervalg: {
-                    nye_brukere: false,
-                    inaktive_brukere: state.filtervalg.inaktive_brukere
+                    nyeBrukere: false,
+                    inaktiveBrukere: state.filtervalg.inaktiveBrukere
                 }
             };
         case VALGT_INAKTIVE_BRUKERE:
             return { ...state,
                 filtervalg: {
-                    nye_brukere: state.filtervalg.nye_brukere,
-                    inaktive_brukere: true
+                    nyeBrukere: state.filtervalg.nyeBrukere,
+                    inaktiveBrukere: true
                 }
             };
         case AVVALGT_INAKTIVE_BRUKERE:
             return { ...state,
                 filtervalg: {
-                    nye_brukere: state.filtervalg.nye_brukere,
-                    inaktive_brukere: false
+                    nyeBrukere: state.filtervalg.nyeBrukere,
+                    inaktiveBrukere: false
                 }
             };
         default:
@@ -55,4 +61,11 @@ export function endreFiltervalg(filterId, filtervalg) {
         return { type: filtervalg ? VALGT_INAKTIVE_BRUKERE : AVVALGT_INAKTIVE_BRUKERE };
     }
     return {};
+}
+
+export function hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere) {
+    return doThenDispatch(() =>
+        Api.hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere), {
+            OK, FEILET, PENDING
+        });
 }
