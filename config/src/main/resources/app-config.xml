@@ -14,7 +14,7 @@
     </artifacts>
 
     <resources>
-        <fileLibrary alias="veilarbportefoljeflatefs.ledetekster.v1" mapToProperty="folder.ledetekster" />
+        <fileLibrary alias="veilarbportefoljeflatefs.ledetekster" mapToProperty="folder.ledetekster" />
         <applicationProperties alias="veilarbportefoljeflatefs.properties"/>
 
 
