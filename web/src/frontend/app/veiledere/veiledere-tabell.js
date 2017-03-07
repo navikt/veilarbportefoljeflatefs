@@ -32,7 +32,10 @@ class VeilederTabell extends Component {
                 <thead>
                     <tr>
                         <th scope="col">
-                            <FormattedMessage id="enhet.veiledere.tabell.veiledere" />
+                            <a onClick={this.props.sorterPaaEtternavn} role="button">
+                                <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                            </a>
+                            <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                         </th>
                         <th scope="col">
                             <FormattedMessage id="enhet.veiledere.tabell.ident" />
@@ -59,7 +62,8 @@ class VeilederTabell extends Component {
 VeilederTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape),
     settVeileder: PT.func.isRequired,
-    portefoljestorrelser: PT.arrayOf(PT.object).isRequired
+    portefoljestorrelser: PT.arrayOf(PT.object).isRequired,
+    sorterPaaEtternavn: PT.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
