@@ -21,7 +21,7 @@ class VeilederTabell extends Component {
 
         const portefoljestorrelse = (storrelser, veilederId) => {
             const currentStorrelse = storrelser.find(storrelse => storrelse.value === veilederId);
-            return currentStorrelse || 0;
+            return currentStorrelse ? currentStorrelse.count : 0;
         };
 
         return (
@@ -29,7 +29,10 @@ class VeilederTabell extends Component {
                 <thead>
                     <tr>
                         <th scope="col">
-                            <FormattedMessage id="enhet.veiledere.tabell.veiledere" />
+                            <a onClick={this.props.sorterPaaEtternavn} role="button">
+                                <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                            </a>
+                            <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                         </th>
                         <th scope="col">
                             <FormattedMessage id="enhet.veiledere.tabell.ident" />
@@ -56,15 +59,12 @@ class VeilederTabell extends Component {
 VeilederTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape),
     settVeileder: PT.func.isRequired,
-    portefoljestorrelser: PT.arrayOf(PT.object).isRequired
+    portefoljestorrelser: PT.arrayOf(PT.object).isRequired,
+    sorterPaaEtternavn: PT.func.isRequired
 };
-
-const mapStateToProps = state => ({
-    portefoljestorrelser: state.portefoljestorrelser.data.facetResults
-});
 
 const mapDispatchToProps = dispatch => ({
     settVeileder: veileder => dispatch(settValgtVeileder(veileder))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VeilederTabell);
+export default connect(() => ({}), mapDispatchToProps)(VeilederTabell);
