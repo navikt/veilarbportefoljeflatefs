@@ -5,7 +5,12 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet, settSorterRekkefolge, settBrukerSomMarkert } from '../ducks/portefolje';
+import {
+    hentPortefoljeForEnhet,
+    settSorterRekkefolge,
+    settBrukerSomMarkert,
+    nullstillFeilendeTilordninger
+} from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import Paginering from '../paginering/paginering';
 import PortefoljeTabell from './portefolje-tabell';
@@ -35,7 +40,16 @@ class PortefoljeVisning extends Component {
     }
 
     render() {
-        const { portefolje, valgtEnhet, veiledere, hentPortefolje, sorteringsrekkefolge, settMarkert } = this.props;
+        const {
+            portefolje,
+            valgtEnhet,
+            veiledere,
+            hentPortefolje,
+            sorteringsrekkefolge,
+            settMarkert,
+            clearFeilendeTilordninger
+        } = this.props;
+
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
 
         const pagineringTekst = (
@@ -44,6 +58,14 @@ class PortefoljeVisning extends Component {
                 values={{ fraIndex: `${fraIndex}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
             />
         );
+
+        const feil = portefolje.feilendeTilordninger;
+        if (feil && feil.length > 0) {
+            const fnr = feil.map(b => b.brukerFnr).toString();
+            /* eslint-disable no-undef, no-alert*/
+            alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`);
+            clearFeilendeTilordninger();
+        }
 
         return (
             <Innholdslaster avhengigheter={[portefolje, veiledere]}>
@@ -83,7 +105,8 @@ PortefoljeVisning.propTypes = {
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
     fraIndex: PT.number,
-    settMarkert: PT.func.isRequired
+    settMarkert: PT.func.isRequired,
+    clearFeilendeTilordninger: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -98,7 +121,8 @@ const mapDispatchToProps = dispatch => ({
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall)),
     settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
-    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId))
+    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId)),
+    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeVisning);
