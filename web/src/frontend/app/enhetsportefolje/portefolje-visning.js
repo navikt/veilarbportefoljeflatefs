@@ -5,7 +5,12 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet, settSorterRekkefolge, settBrukerSomMarkert, nullstillFeilendeTilordninger } from '../ducks/portefolje';
+import {
+    hentPortefoljeForEnhet,
+    settSorterRekkefolge,
+    settBrukerSomMarkert,
+    nullstillFeilendeTilordninger
+} from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import Paginering from '../paginering/paginering';
 import PortefoljeTabell from './portefolje-tabell';
@@ -35,7 +40,16 @@ class PortefoljeVisning extends Component {
     }
 
     render() {
-        const { portefolje, valgtEnhet, veiledere, hentPortefolje, sorteringsrekkefolge, settMarkert, clearFeilendeTilordninger } = this.props;
+        const {
+            portefolje,
+            valgtEnhet,
+            veiledere,
+            hentPortefolje,
+            sorteringsrekkefolge,
+            settMarkert,
+            clearFeilendeTilordninger
+        } = this.props;
+
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
 
         const pagineringTekst = (
@@ -46,9 +60,10 @@ class PortefoljeVisning extends Component {
         );
 
         const feil = portefolje.feilendeTilordninger;
-        if(feil && feil.length > 0) {
-            let fnr = feil.map(b => b.brukerFnr).toString();
-            alert("Tilordning av veileder feilet brukere med fnr:" + fnr);
+        if (feil && feil.length > 0) {
+            const fnr = feil.map(b => b.brukerFnr).toString();
+            /* eslint-disable no-undef, no-alert*/
+            alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`);
             clearFeilendeTilordninger();
         }
 

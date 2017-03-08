@@ -26,7 +26,7 @@ const initialState = {
 };
 
 function updateVeilederForBruker(brukere, veilederId, feilende) {
-    let feilendeFnr = feilende.map(b => b.brukerFnr);
+    const feilendeFnr = feilende.map(b => b.brukerFnr);
 
     return brukere.map((bruker) => {
         if (bruker.markert && !feilendeFnr.includes(bruker.fnr)) {
@@ -81,12 +81,16 @@ export default function reducer(state = initialState, action) {
                 feilendeTilordninger: action.feilendeTilordninger,
                 data: {
                     ...state.data,
-                    brukere: updateVeilederForBruker(state.data.brukere, action.tilVeileder, action.feilendeTilordninger)
+                    brukere: updateVeilederForBruker(
+                        state.data.brukere,
+                        action.tilVeileder,
+                        action.feilendeTilordninger
+                    )
                 }
             };
         }
         case NULLSTILL_FEILENDE_TILORDNINGER: {
-            return {...state, feilendeTilordninger: [] }
+            return { ...state, feilendeTilordninger: [] };
         }
         default:
             return state;
@@ -145,7 +149,7 @@ export function tildelVeileder(tilordninger, tilVeileder) {
 export function nullstillFeilendeTilordninger() {
     return dispatch => dispatch({
         type: NULLSTILL_FEILENDE_TILORDNINGER
-    })
+    });
 }
 
 export function settValgtVeileder(valgtVeileder) {

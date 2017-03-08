@@ -58,9 +58,10 @@ class VeilederPortefoljeVisning extends Component {
         );
 
         const feil = portefolje.feilendeTilordninger;
-        if(feil && feil.length > 0) {
-            let fnr = feil.map(b => b.brukerFnr).toString();
-            alert("Tilordning av veileder feilet brukere med fnr:" + fnr);
+        if (feil && feil.length > 0) {
+            const fnr = feil.map(b => b.brukerFnr).toString();
+            /* eslint-disable no-undef, no-alert*/
+            alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`);
             clearFeilendeTilordninger();
         }
 
