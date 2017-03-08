@@ -5,7 +5,12 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForVeileder, settSorterRekkefolge, settBrukerSomMarkert } from '../ducks/portefolje';
+import {
+    hentPortefoljeForVeileder,
+    settSorterRekkefolge,
+    settBrukerSomMarkert,
+    nullstillFeilendeTilordninger
+} from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 
@@ -33,7 +38,16 @@ class VeilederPortefoljeVisning extends Component {
 
 
     render() {
-        const { portefolje, hentPortefolje, veileder, sorteringsrekkefolge, valgtEnhet, settMarkert } = this.props;
+        const {
+            portefolje,
+            hentPortefolje,
+            veileder,
+            sorteringsrekkefolge,
+            valgtEnhet,
+            settMarkert,
+            clearFeilendeTilordninger
+        } = this.props;
+
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         const pagineringTekst = (
@@ -43,6 +57,12 @@ class VeilederPortefoljeVisning extends Component {
             />
         );
 
+        const feil = portefolje.feilendeTilordninger;
+        if(feil && feil.length > 0) {
+            let fnr = feil.map(b => b.brukerFnr).toString();
+            alert("Tilordning av veileder feilet brukere med fnr:" + fnr);
+            clearFeilendeTilordninger();
+        }
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -135,7 +155,8 @@ VeilederPortefoljeVisning.propTypes = {
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
     fraIndex: PT.number,
-    settMarkert: PT.func.isRequired
+    settMarkert: PT.func.isRequired,
+    clearFeilendeTilordninger: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -149,7 +170,8 @@ const mapDispatchToProps = dispatch => ({
     hentPortefolje: (enhet, veileder, rekkefolge, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, fra, antall)),
     settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
-    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert))
+    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
+    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);
