@@ -54,13 +54,12 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function endreFiltervalg(filterId, filtervalg) {
+export function endreFiltervalg(filterId, filtervalg) { // eslint-disable-line consistent-return
     if (filterId === 'checkbox-filtrering-oversikt-nye-brukere') {
         return { type: filtervalg ? VALGT_NYE_BRUKERE : AVVALGT_NYE_BRUKERE };
     } else if (filterId === 'checkbox-filtrering-oversikt-inaktive-brukere') {
         return { type: filtervalg ? VALGT_INAKTIVE_BRUKERE : AVVALGT_INAKTIVE_BRUKERE };
     }
-    return {};
 }
 
 export function hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere) {

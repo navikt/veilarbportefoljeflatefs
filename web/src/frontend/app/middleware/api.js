@@ -1,5 +1,5 @@
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
-import { erDev } from './../utils/utils';
+import { erDev, filterUrlBuilder } from './../utils/utils';
 
 const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
 const credentials = erDev() ? 'include' : 'same-origin';
@@ -25,9 +25,9 @@ export function hentLedetekster() {
 }
 
 export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere) {
-    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
-        `portefolje?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}` +
-        `&nyeBrukere=${nyeBrukere}&inaktiveBrukere=${inaktiveBrukere}`;
+    let url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
+        `portefolje?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
+    url += filterUrlBuilder(nyeBrukere, inaktiveBrukere);
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
