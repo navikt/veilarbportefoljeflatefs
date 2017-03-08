@@ -112,8 +112,12 @@ class VeilederPortefoljeVisning extends Component {
                                         {bruker.sikkerhetstiltak.length > 0 ?
                                             <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
                                         {bruker.diskresjonskode != null ?
-                                            <span className="diskresjonskode">{`Kode ${bruker.diskresjonskode}`}</span> : null}
-                                        {bruker.egenAnsatt === true ? <span className="egen-ansatt">Egen ansatt</span> : null}
+                                            <span className="diskresjonskode">
+                                                {`Kode ${bruker.diskresjonskode}`}
+                                            </span> :
+                                            null}
+                                        {bruker.egenAnsatt === true ?
+                                            <span className="egen-ansatt">Egen ansatt</span> : null}
                                     </td>
                                 </tr>)}
                     </tbody>
