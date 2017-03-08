@@ -43,6 +43,12 @@ class PortefoljeTabell extends Component {
                 <thead>
                     <tr>
                         <th>
+                            <div className="nav-input">
+                                <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
+                                <label htmlFor="checkbox-alle-brukere" />
+                            </div>
+                        </th>
+                        <th>
                             <a onClick={this.settSorteringOgHentPortefolje} role="button">
                                 <FormattedMessage id="portefolje.tabell.navn" />
                             </a>
@@ -54,16 +60,22 @@ class PortefoljeTabell extends Component {
                             <FormattedMessage id="portefolje.tabell.veileder" />
                         </th>
                         <th />
-                        <th>
-                            <div className="nav-input">
-                                <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
-                                <label htmlFor="checkbox-alle-brukere" />
-                            </div>
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     {this.brukereMedVeilederNavn.map(bruker => <tr key={bruker.fnr}>
+                        <td>
+                            <div className="nav-input">
+                                <input
+                                    className="nav-checkbox"
+                                    id={`checkbox-${bruker.fnr}`}
+                                    type="checkbox"
+                                    checked={bruker.markert}
+                                    onClick={() => this.props.settSomMarkert(bruker.fnr, !bruker.markert)}
+                                />
+                                <label htmlFor={`checkbox-${bruker.fnr}`} />
+                            </div>
+                        </td>
                         <td>
                             <a
                                 href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
@@ -78,18 +90,6 @@ class PortefoljeTabell extends Component {
                             {bruker.diskresjonskode != null ?
                                 <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
                             {bruker.egenAnsatt === true ? <span>Egen ansatt</span> : null}
-                        </td>
-                        <td>
-                            <div className="nav-input">
-                                <input
-                                    className="nav-checkbox"
-                                    id={`checkbox-${bruker.fnr}`}
-                                    type="checkbox"
-                                    checked={bruker.markert}
-                                    onClick={() => this.props.settSomMarkert(bruker.fnr, !bruker.markert)}
-                                />
-                                <label htmlFor={`checkbox-${bruker.fnr}`} />
-                            </div>
                         </td>
                     </tr>)}
                 </tbody>
