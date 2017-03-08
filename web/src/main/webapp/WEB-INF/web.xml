@@ -6,15 +6,16 @@
          version="3.1">
 
     <display-name>veilarbportefoljeflatefs</display-name>
-    <session-config>
-        <session-timeout>30</session-timeout>
-        <cookie-config>
-            <name>VEILARBPORTEFOLJEFLATEFS_JSESSIONID</name>
-            <http-only>true</http-only>
-            <secure>true</secure>
-        </cookie-config>
-        <tracking-mode>COOKIE</tracking-mode>
-    </session-config>
+    <filter>
+        <filter-name>decoratorFilter</filter-name>
+        <filter-class>no.nav.fo.veilarbportefoljeflatefs.Dekorator</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>decoratorFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
