@@ -45,7 +45,11 @@ class VeilederTabell extends Component {
                 <tbody>
                     {veiledere.map(veileder =>
                         <tr key={veileder.ident}>
-                            <td><a onClick={() => this.settValgtVeileder(veileder)} className="til-veileder-link">{`${veileder.navn}`}</a></td>
+                            <td>
+                                <a onClick={() => this.settValgtVeileder(veileder)} className="til-veileder-link">
+                                    {`${veileder.navn}`}
+                                </a>
+                            </td>
                             <td>{`${veileder.ident}`}</td>
                             <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
                         </tr>
