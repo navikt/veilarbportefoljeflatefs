@@ -25,11 +25,11 @@ class VeilederTabell extends Component {
         };
 
         return (
-            <table className="tabell tabell-skillestrek">
+            <table className="tabell veiledere-tabell">
                 <thead>
                     <tr>
                         <th scope="col">
-                            <a onClick={this.props.sorterPaaEtternavn} role="button">
+                            <a onClick={this.props.sorterPaaEtternavn} role="button" className="sortering-link">
                                 <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                             </a>
                             <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
@@ -45,7 +45,7 @@ class VeilederTabell extends Component {
                 <tbody>
                     {veiledere.map(veileder =>
                         <tr key={veileder.ident}>
-                            <td><a onClick={() => this.settValgtVeileder(veileder)}>{`${veileder.navn}`}</a></td>
+                            <td><a onClick={() => this.settValgtVeileder(veileder)} className="til-veileder-link">{`${veileder.navn}`}</a></td>
                             <td>{`${veileder.ident}`}</td>
                             <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
                         </tr>
