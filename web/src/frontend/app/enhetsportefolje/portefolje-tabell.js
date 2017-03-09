@@ -66,7 +66,8 @@ class PortefoljeTabell extends Component {
                         <td>
                             {
                                 bruker.veilederId ? veiledere
-                                                        .find(veileder => veileder.ident === bruker.veilederId).navn
+                                                        .filter(veileder => veileder.ident === bruker.veilederId)
+                                                        .map(veileder => veileder.navn)
                                                         :
                                                         'Ny bruker'
                             }
