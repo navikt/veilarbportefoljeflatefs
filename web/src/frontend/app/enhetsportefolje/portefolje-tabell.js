@@ -5,32 +5,10 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { veilederShape, brukerShape } from '../proptype-shapes';
 
-
-export function settVeilederNavnForBrukere(brukere, veiledere) {
-    const oppdaterteBrukere = brukere;
-    if (brukere.length > 0 && veiledere.length > 0) {
-        for (let i = 0; i < brukere.length; i += 1) {
-            for (let j = 0; j < veiledere.length; j += 1) {
-                if (brukere[i].veilederId === veiledere[j].ident) {
-                    oppdaterteBrukere[i].veilederNavn = veiledere[j].navn;
-                }
-            }
-        }
-    }
-    return oppdaterteBrukere;
-}
-
 class PortefoljeTabell extends Component {
 
     componentWillMount() {
-        const { brukere, veiledere } = this.props;
-        this.brukereMedVeilederNavn = settVeilederNavnForBrukere(brukere, veiledere);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
-    }
-
-    componentWillUpdate() {
-        const { brukere, veiledere } = this.props;
-        this.brukereMedVeilederNavn = settVeilederNavnForBrukere(brukere, veiledere);
     }
 
     settSorteringOgHentPortefolje() {
@@ -38,6 +16,7 @@ class PortefoljeTabell extends Component {
     }
 
     render() {
+        const { brukere, veiledere } = this.props;
         return (
             <table className="tabell portefolje-tabell" tabIndex="0">
                 <thead>
@@ -66,14 +45,14 @@ class PortefoljeTabell extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.brukereMedVeilederNavn.map(bruker => <tr key={bruker.fnr}>
+                    {brukere.map(bruker => <tr key={bruker.fnr}>
                         <td>
                             <div className="nav-input">
                                 <input
                                     className="nav-checkbox"
                                     id={`checkbox-${bruker.fnr}`}
                                     type="checkbox"
-                                    checked={bruker.markert}
+                                    checked={!!bruker.markert}
                                     onClick={() => this.props.settSomMarkert(bruker.fnr, !bruker.markert)}
                                 />
                                 <label htmlFor={`checkbox-${bruker.fnr}`} />
@@ -88,18 +67,12 @@ class PortefoljeTabell extends Component {
                             </a>
                         </td>
                         <td>{bruker.fnr}</td>
-                        {bruker.veilederNavn != null ?
-                            <td className="veileder-td">{bruker.veilederNavn}</td> :
-                            <td className="ny-bruker-td">
-                                <span className="ny-bruker">Ny bruker</span>
-                            </td>}
-                        <td />
-                        <td className="sikkerhetstiltak-td">
-                            {bruker.sikkerhetstiltak.length > 0 ?
-                                <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
+                        <td>{bruker.veilederNavn || 'Ny bruker'}</td>
+                        <td>
+                            {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
                             {bruker.diskresjonskode != null ?
-                                <span className="diskresjonskode">{`Kode ${bruker.diskresjonskode}`}</span> : null}
-                            {bruker.egenAnsatt === true ? <span className="egen-ansatt">Egen ansatt</span> : null}
+                                <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
+                            {bruker.egenAnsatt === true ? <span>Egen ansatt</span> : null}
                         </td>
                     </tr>)}
                 </tbody>
