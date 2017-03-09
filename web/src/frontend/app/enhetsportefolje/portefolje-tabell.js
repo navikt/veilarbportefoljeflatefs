@@ -39,7 +39,7 @@ class PortefoljeTabell extends Component {
 
     render() {
         return (
-            <table className="tabell enhetsportefolje-tabell" tabIndex="0">
+            <table className="tabell portefolje-tabell" tabIndex="0">
                 <thead>
                     <tr>
                         <th>
