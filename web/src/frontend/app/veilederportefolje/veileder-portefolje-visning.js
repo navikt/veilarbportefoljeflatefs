@@ -126,9 +126,8 @@ class VeilederPortefoljeVisning extends Component {
                                     </td>
                                     {bruker.fnr != null ?
                                         <td className="fodselsnummer-td">{bruker.fnr}</td> :
-                                        <td className="ny-bruker-td">
-                                            <span className="ny-bruker">Ny bruker</span>
-                                        </td>}
+                                        <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
+                                    }
                                     <td className="sikkerhetstiltak-td">
                                         {bruker.sikkerhetstiltak.length > 0 ?
                                             <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
