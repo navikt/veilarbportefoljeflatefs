@@ -17,7 +17,7 @@ import PortefoljeSide from "./veilederportefolje/portefolje-side";
 
 addLocaleData(nb);
 
-const store = createStore();
+export const store = createStore();
 const tekster = { nb: { spinner: 'spinner' } };
 
 render(

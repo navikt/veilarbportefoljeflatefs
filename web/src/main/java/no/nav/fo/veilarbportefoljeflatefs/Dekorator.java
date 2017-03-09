@@ -13,7 +13,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class Dekorator extends DecoratorFilter {
     private static final Logger LOG = getLogger(Dekorator.class);
 
-    private static final String FRAGMENTS_URL = "?visSokefelt=true&visVeileder=true&visEnhet=true";
+    private static final String FRAGMENTS_URL = "?visSokefelt=true&visVeileder=true&visEnhetVelger=true";
     private static final String APPLICATION_NAME = "Oppfølging";
     private static final List<String> NO_DECORATOR_PATTERNS = new ArrayList<>(asList(".*/img/.*", ".*/css/.*", ".*/js/.*", ".*/font/.*", ".*selftest.*"));
     private static final List<String> FRAGMENT_NAMES = new ArrayList<>(asList("header-withmenu", "styles"));

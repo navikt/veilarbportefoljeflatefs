@@ -10,7 +10,7 @@ export function erDev() {
 export function leggEnhetIUrl(enhet) { // eslint-disable-line consistent-return
     if (!enhet) return null;
     const parsed = queryString.parse(location.search);
-    parsed.enhet = enhet.enhetId;
+    parsed.enhet = enhet;
 
     const stringified = queryString.stringify(parsed);
     const pathname = window.location.pathname;

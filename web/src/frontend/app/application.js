@@ -8,6 +8,8 @@ import Lenker from './lenker/lenker';
 import DevTools from './devtools';
 import { hentEnheterForVeileder } from './ducks/enheter';
 import Innholdslaster from './innholdslaster/innholdslaster';
+import { initialiserEventhandtering } from './eventhandtering';
+
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(location.search).visTekster;
@@ -23,6 +25,8 @@ class Application extends Component {
     componentWillMount() {
         this.props.hentTekster();
         this.props.hentEnheter();
+        initialiserEventhandtering();
+
     }
 
     render() {
