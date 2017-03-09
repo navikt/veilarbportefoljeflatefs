@@ -18,7 +18,7 @@ class PortefoljeTabell extends Component {
     render() {
         const { brukere, veiledere } = this.props;
         return (
-            <table className="tabell tabell-skillestrek" tabIndex="0">
+            <table className="tabell portefolje-tabell" tabIndex="0">
                 <thead>
                     <tr>
                         <th>
@@ -28,7 +28,7 @@ class PortefoljeTabell extends Component {
                             </div>
                         </th>
                         <th>
-                            <a onClick={this.settSorteringOgHentPortefolje} role="button">
+                            <a onClick={this.settSorteringOgHentPortefolje} role="button" className="sortering-link">
                                 <FormattedMessage id="portefolje.tabell.navn" />
                             </a>
                         </th>
@@ -37,6 +37,9 @@ class PortefoljeTabell extends Component {
                         </th>
                         <th>
                             <FormattedMessage id="portefolje.tabell.veileder" />
+                        </th>
+                        <th>
+                            <FormattedMessage id="portefolje.tabell.navident" />
                         </th>
                         <th />
                     </tr>
@@ -58,25 +61,24 @@ class PortefoljeTabell extends Component {
                         <td>
                             <a
                                 href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
+                                className="til-bruker-link"
                             >
                                 {`${bruker.etternavn}, ${bruker.fornavn}`}
                             </a>
                         </td>
                         <td>{bruker.fnr}</td>
-                        <td>
                             {
-                                bruker.veilederId ? veiledere
-                                                        .filter(veileder => veileder.ident === bruker.veilederId)
-                                                        .map(veileder => veileder.navn)
-                                                        :
-                                                        'Ny bruker'
+                                bruker.veilederId ? <td className="veileder-td">{veiledere
+                                    .filter(veileder => veileder.ident === bruker.veilederId)
+                                    .map(veileder => veileder.navn)}</td>
+                                    :
+                                    <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
                             }
-                        </td>
-                        <td>
-                            {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
+                        <td className="sikkerhetstiltak-td">
+                            {bruker.sikkerhetstiltak.length > 0 ? <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
                             {bruker.diskresjonskode != null ?
-                                <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
-                            {bruker.egenAnsatt === true ? <span>Egen ansatt</span> : null}
+                                <span className="diskresjonskode">{`Kode ${bruker.diskresjonskode}`}</span> : null}
+                            {bruker.egenAnsatt === true ? <span className="egen-ansatt">Egen ansatt</span> : null}
                         </td>
                     </tr>)}
                 </tbody>

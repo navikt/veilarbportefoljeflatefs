@@ -75,7 +75,7 @@ class VeilederPortefoljeVisning extends Component {
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
-                <table className="tabell tabell-skillestrek" tabIndex="0">
+                <table className="tabell portefolje-tabell" tabIndex="0">
                     <thead>
                         <tr>
                             <th>
@@ -85,7 +85,11 @@ class VeilederPortefoljeVisning extends Component {
                                 </div>
                             </th>
                             <th>
-                                <a onClick={this.settSorteringOgHentPortefolje} role="button">
+                                <a
+                                    onClick={this.settSorteringOgHentPortefolje}
+                                    role="button"
+                                    className="sortering-link"
+                                >
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </a>
                             </th>
@@ -115,22 +119,25 @@ class VeilederPortefoljeVisning extends Component {
                                         <a
                                             href={`https://${window.location.hostname}` +
                                             `/veilarbpersonflatefs/${bruker.fnr}`}
+                                            className="til-bruker-link"
                                         >
                                             {`${bruker.etternavn}, ${bruker.fornavn}`}
                                         </a>
                                     </td>
-                                    <td>{bruker.fnr}</td>
-                                    <td>
+                                    {bruker.fnr != null ?
+                                        <td className="fodselsnummer-td">{bruker.fnr}</td> :
+                                        <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
+                                    }
+                                    <td className="sikkerhetstiltak-td">
                                         {bruker.sikkerhetstiltak.length > 0 ?
-                                            <span>
-                                                <FormattedMessage id="veileder.portefolje.sikkerhetstiltak" />
-                                            </span> : null}
+                                            <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
                                         {bruker.diskresjonskode != null ?
-                                            <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
+                                            <span className="diskresjonskode">
+                                                {`Kode ${bruker.diskresjonskode}`}
+                                            </span> :
+                                            null}
                                         {bruker.egenAnsatt === true ?
-                                            <span>
-                                                <FormattedMessage id="veileder.portefolje.egen.ansatt" />
-                                            </span> : null}
+                                            <span className="egen-ansatt">Egen ansatt</span> : null}
                                     </td>
                                 </tr>)}
                     </tbody>
