@@ -1,5 +1,5 @@
 import * as Api from './../middleware/api';
-import { STATUS, doThenDispatch, handterFeil } from './utils';
+import { STATUS, doThenDispatch, handterFeil, toJson } from './utils';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -9,6 +9,7 @@ const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSR
 const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
 const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
+const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
 
 // Reducer
 
@@ -24,9 +25,11 @@ const initialState = {
     veileder: 'ikke_satt'
 };
 
-function updateVeilederForBruker(brukere, veilederId) {
+function updateVeilederForBruker(brukere, veilederId, feilende) {
+    const feilendeFnr = feilende.map(b => b.brukerFnr);
+
     return brukere.map((bruker) => {
-        if (bruker.markert) {
+        if (bruker.markert && !feilendeFnr.includes(bruker.fnr)) {
             return {
                 ...bruker,
                 veilederId,
@@ -75,11 +78,19 @@ export default function reducer(state = initialState, action) {
         case TILDEL_VEILEDER: {
             return {
                 ...state,
+                feilendeTilordninger: action.feilendeTilordninger,
                 data: {
                     ...state.data,
-                    brukere: updateVeilederForBruker(state.data.brukere, action.tilVeileder)
+                    brukere: updateVeilederForBruker(
+                        state.data.brukere,
+                        action.tilVeileder,
+                        action.feilendeTilordninger
+                    )
                 }
             };
+        }
+        case NULLSTILL_FEILENDE_TILORDNINGER: {
+            return { ...state, feilendeTilordninger: [] };
         }
         default:
             return state;
@@ -125,17 +136,25 @@ export function settBrukerSomMarkert(fnr, markert) {
 export function tildelVeileder(tilordninger, tilVeileder) {
     return (dispatch) => {
         Api.tilordneVeileder(tilordninger)
-            .then(() => dispatch({
+            .then(toJson)
+            .then(res => dispatch({
                 type: TILDEL_VEILEDER,
-                tilVeileder
-            })).catch(handterFeil);
+                tilVeileder,
+                feilendeTilordninger: res.feilendeTilordninger
+            }))
+            .catch(handterFeil);
     };
+}
+
+export function nullstillFeilendeTilordninger() {
+    return dispatch => dispatch({
+        type: NULLSTILL_FEILENDE_TILORDNINGER
+    });
 }
 
 export function settValgtVeileder(valgtVeileder) {
     return dispatch => dispatch({
         type: SETT_VALGTVEILEDER,
         veileder: valgtVeileder
-
     });
 }
