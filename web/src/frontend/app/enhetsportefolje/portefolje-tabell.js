@@ -74,6 +74,7 @@ class PortefoljeTabell extends Component {
                                     :
                                     <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
                             }
+                        <td></td>
                         <td className="sikkerhetstiltak-td">
                             {bruker.sikkerhetstiltak.length > 0 ? <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
                             {bruker.diskresjonskode != null ?
