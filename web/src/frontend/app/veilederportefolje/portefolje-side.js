@@ -19,7 +19,6 @@ function PortefoljeSide({ ident, veileder, brukere, veiledere, velgVeileder }) {
 
     const tildelVeilederVelger =
         (<TildelVeilederVelger
-            valgtVeileder={veileder}
             veiledere={veiledere}
             brukere={brukere}
             velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}

@@ -19,12 +19,20 @@ class VeilederTabell extends Component {
     render() {
         const { veiledere, portefoljestorrelser } = this.props;
 
+        const portefoljestorrelse = (storrelser, veilederId) => {
+            const currentStorrelse = storrelser.find(storrelse => storrelse.value === veilederId);
+            return currentStorrelse ? currentStorrelse.count : 0;
+        };
+
         return (
-            <table className="tabell tabell-skillestrek">
+            <table className="tabell veiledere-tabell">
                 <thead>
                     <tr>
                         <th scope="col">
-                            <FormattedMessage id="enhet.veiledere.tabell.veiledere" />
+                            <a onClick={this.props.sorterPaaEtternavn} role="button" className="sortering-link">
+                                <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                            </a>
+                            <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                         </th>
                         <th scope="col">
                             <FormattedMessage id="enhet.veiledere.tabell.ident" />
@@ -37,12 +45,13 @@ class VeilederTabell extends Component {
                 <tbody>
                     {veiledere.map(veileder =>
                         <tr key={veileder.ident}>
-                            <td><a onClick={() => this.settValgtVeileder(veileder)}>{`${veileder.navn}`}</a></td>
+                            <td>
+                                <a onClick={() => this.settValgtVeileder(veileder)} className="til-veileder-link">
+                                    {`${veileder.navn}`}
+                                </a>
+                            </td>
                             <td>{`${veileder.ident}`}</td>
-
-                            {/* Denne må endres til å se på veileder_id (storrelse.value === veileder.veileder_id) når
-                                når det er tilgjengelig fra portefølje*/}
-                            <td>{portefoljestorrelser.find(storrelse => storrelse.value === 'SKAFFEA').count}</td>
+                            <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
                         </tr>
                 )}
                 </tbody>
@@ -54,15 +63,12 @@ class VeilederTabell extends Component {
 VeilederTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape),
     settVeileder: PT.func.isRequired,
-    portefoljestorrelser: PT.arrayOf(PT.object).isRequired
+    portefoljestorrelser: PT.arrayOf(PT.object).isRequired,
+    sorterPaaEtternavn: PT.func.isRequired
 };
-
-const mapStateToProps = state => ({
-    portefoljestorrelser: state.portefoljestorrelser.data.facetResults
-});
 
 const mapDispatchToProps = dispatch => ({
     settVeileder: veileder => dispatch(settValgtVeileder(veileder))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VeilederTabell);
+export default connect(() => ({}), mapDispatchToProps)(VeilederTabell);

@@ -5,7 +5,12 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForVeileder, settSorterRekkefolge, settBrukerSomMarkert } from '../ducks/portefolje';
+import {
+    hentPortefoljeForVeileder,
+    settSorterRekkefolge,
+    settBrukerSomMarkert,
+    nullstillFeilendeTilordninger
+} from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 
@@ -33,7 +38,16 @@ class VeilederPortefoljeVisning extends Component {
 
 
     render() {
-        const { portefolje, hentPortefolje, veileder, sorteringsrekkefolge, valgtEnhet, settMarkert } = this.props;
+        const {
+            portefolje,
+            hentPortefolje,
+            veileder,
+            sorteringsrekkefolge,
+            valgtEnhet,
+            settMarkert,
+            clearFeilendeTilordninger
+        } = this.props;
+
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         const pagineringTekst = (
@@ -43,6 +57,13 @@ class VeilederPortefoljeVisning extends Component {
             />
         );
 
+        const feil = portefolje.feilendeTilordninger;
+        if (feil && feil.length > 0) {
+            const fnr = feil.map(b => b.brukerFnr).toString();
+            /* eslint-disable no-undef, no-alert*/
+            alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`);
+            clearFeilendeTilordninger();
+        }
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -54,7 +75,7 @@ class VeilederPortefoljeVisning extends Component {
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
-                <table className="tabell tabell-skillestrek" tabIndex="0">
+                <table className="tabell portefolje-tabell" tabIndex="0">
                     <thead>
                         <tr>
                             <th>
@@ -64,7 +85,11 @@ class VeilederPortefoljeVisning extends Component {
                                 </div>
                             </th>
                             <th>
-                                <a onClick={this.settSorteringOgHentPortefolje} role="button">
+                                <a
+                                    onClick={this.settSorteringOgHentPortefolje}
+                                    role="button"
+                                    className="sortering-link"
+                                >
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </a>
                             </th>
@@ -76,7 +101,7 @@ class VeilederPortefoljeVisning extends Component {
                     </thead>
 
                     <tbody>
-                        {brukere.filter(b => b.veileder === veileder.ident)
+                        {brukere.filter(b => b.veilederId === veileder.ident)
                                 .map(bruker => <tr key={bruker.fnr}>
                                     <td>
                                         <div className="nav-input">
@@ -90,19 +115,29 @@ class VeilederPortefoljeVisning extends Component {
                                             <label htmlFor={`checkbox-${bruker.fnr}`} />
                                         </div>
                                     </td>
-                                    <td>{`${bruker.etternavn}, ${bruker.fornavn}`} </td>
-                                    <td>{bruker.fnr}</td>
                                     <td>
+                                        <a
+                                            href={`https://${window.location.hostname}` +
+                                            `/veilarbpersonflatefs/${bruker.fnr}`}
+                                            className="til-bruker-link"
+                                        >
+                                            {`${bruker.etternavn}, ${bruker.fornavn}`}
+                                        </a>
+                                    </td>
+                                    {bruker.fnr != null ?
+                                        <td className="fodselsnummer-td">{bruker.fnr}</td> :
+                                        <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
+                                    }
+                                    <td className="sikkerhetstiltak-td">
                                         {bruker.sikkerhetstiltak.length > 0 ?
-                                            <span>
-                                                <FormattedMessage id="veileder.portefolje.sikkerhetstiltak" />
-                                            </span> : null}
+                                            <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
                                         {bruker.diskresjonskode != null ?
-                                            <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
+                                            <span className="diskresjonskode">
+                                                {`Kode ${bruker.diskresjonskode}`}
+                                            </span> :
+                                            null}
                                         {bruker.egenAnsatt === true ?
-                                            <span>
-                                                <FormattedMessage id="veileder.portefolje.egen.ansatt" />
-                                            </span> : null}
+                                            <span className="egen-ansatt">Egen ansatt</span> : null}
                                     </td>
                                 </tr>)}
                     </tbody>
@@ -128,7 +163,8 @@ VeilederPortefoljeVisning.propTypes = {
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
     fraIndex: PT.number,
-    settMarkert: PT.func.isRequired
+    settMarkert: PT.func.isRequired,
+    clearFeilendeTilordninger: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -142,7 +178,8 @@ const mapDispatchToProps = dispatch => ({
     hentPortefolje: (enhet, veileder, rekkefolge, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, fra, antall)),
     settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
-    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert))
+    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
+    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);
