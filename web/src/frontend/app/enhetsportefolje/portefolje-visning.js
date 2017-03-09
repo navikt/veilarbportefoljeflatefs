@@ -6,18 +6,12 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSorterRekkefolge, settBrukerSomMarkert } from '../ducks/portefolje';
-import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import Paginering from '../paginering/paginering';
 import PortefoljeTabell from './portefolje-tabell';
 import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
 
 class PortefoljeVisning extends Component {
     componentWillMount() {
-        const { valgtEnhet, hentPortefolje, hentVeiledere } = this.props;
-        if (valgtEnhet) {
-            hentPortefolje(valgtEnhet.enhetId);
-            hentVeiledere(valgtEnhet.enhetId);
-        }
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
@@ -73,7 +67,6 @@ PortefoljeVisning.propTypes = {
         sorteringsrekkefolge: PT.string.isRequired
     }).isRequired,
     hentPortefolje: PT.func.isRequired,
-    hentVeiledere: PT.func.isRequired,
     veiledere: PT.shape({
         data: PT.shape({
             enhet: enhetShape.isRequired,
@@ -98,7 +91,6 @@ const mapDispatchToProps = dispatch => ({
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall)),
     settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
-    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeVisning);

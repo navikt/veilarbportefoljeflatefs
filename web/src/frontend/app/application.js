@@ -19,7 +19,6 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     return ledetekster;
 }
 
-
 addLocaleData(nb);
 class Application extends Component {
     componentWillMount() {
@@ -30,7 +29,7 @@ class Application extends Component {
     }
 
     render() {
-        const { ledetekster = {}, enheter = {}, children, routes } = this.props;
+        const { ledetekster = {}, enheter = {}, veiledere , children, routes } = this.props;
         return (
             <IntlProvider
                 defaultLocale="nb"
@@ -38,7 +37,7 @@ class Application extends Component {
                 messages={mapTeksterTilNokkelDersomAngitt(ledetekster.data.nb)}
             >
                 <div className="portefolje">
-                    <Innholdslaster avhengigheter={[ledetekster, enheter]}>
+                    <Innholdslaster avhengigheter={[ledetekster, enheter, veiledere]}>
                         <div className="container maincontent side-innhold">
                             <Lenker routes={routes} />
                             {children}
@@ -64,7 +63,8 @@ Application.propTypes = {
 
 const mapStateToProps = state => ({
     ledetekster: state.ledetekster,
-    enheter: state.enheter
+    enheter: state.enheter,
+    veiledere: state.veiledere,
 });
 
 const mapDispatchToProps = dispatch => ({

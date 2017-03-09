@@ -25,7 +25,7 @@ export default function reducer(state = initialState, action) {
         case OK:
             return { ...state, status: STATUS.OK, data: action.data.enhetliste, ident: action.data.ident };
         case VELG_ENHET:
-            return { ...state, valgtEnhet: konstruerObjectDersomEnhetErString(state, action.valgtEnhet) };
+            return { ...state, valgtEnhet: konstruerObjectDersomEnhetErString(action.valgtEnhet) };
         default:
             return state;
     }
@@ -48,13 +48,10 @@ export function velgEnhetForVeileder(valgtEnhet) {
     };
 }
 
-const konstruerObjectDersomEnhetErString = (state, valgtEnhet) => {
+const konstruerObjectDersomEnhetErString = (valgtEnhet) => {
   if(typeof valgtEnhet === 'object') {
       return valgtEnhet;
   }
-  return state.data
-      .filter( (enhet) => (enhet.enhetId === valgtEnhet) )
-      .reduce( (acc, curr ) => ( { enhetId:curr.enhetId, navn:curr.navn } ))
-
+  return { enhetId:valgtEnhet };
 };
 

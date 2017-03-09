@@ -2,12 +2,21 @@ import { velgEnhetForVeileder } from './ducks/enheter';
 import { store } from './index';
 import { hentVeiledereForEnhet } from './ducks/veiledere';
 import { hentPortefoljeForEnhet } from './ducks/portefolje';
+import { hentPortefoljeStorrelser } from './ducks/portefoljestorrelser';
+import queryString from 'query-string';
 
 export const initialiserEventhandtering = () => {
-
+    const enhet = queryString.parse(location.search).enhet;
     document.addEventListener('dekorator-hode-velg-enhet', (event) => {
-        store.dispatch(velgEnhetForVeileder( event.enhet));
-        store.dispatch(hentPortefoljeForEnhet(event.enhet));
-        store.dispatch(hentVeiledereForEnhet(event.enhet));
-    })
+
+        hentOgDispatchAllInformasjonOmEnhet(event.enhet);
+    });
+    hentOgDispatchAllInformasjonOmEnhet(enhet);
+};
+
+const hentOgDispatchAllInformasjonOmEnhet = (enhet) => {
+    store.dispatch(velgEnhetForVeileder(enhet));
+    store.dispatch(hentPortefoljeForEnhet(enhet));
+    store.dispatch(hentVeiledereForEnhet(enhet));
+    store.dispatch(hentPortefoljeStorrelser(enhet));
 };
