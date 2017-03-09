@@ -67,12 +67,18 @@ class PortefoljeTabell extends Component {
                             </a>
                         </td>
                         <td>{bruker.fnr}</td>
-                        <td>{bruker.veilederNavn || 'Ny bruker'}</td>
-                        <td>
-                            {bruker.sikkerhetstiltak.length > 0 ? <span>Sikkerhetstiltak</span> : null}
+                            {
+                                bruker.veilederId ? <td className="veileder-td">{veiledere
+                                    .filter(veileder => veileder.ident === bruker.veilederId)
+                                    .map(veileder => veileder.navn)}</td>
+                                    :
+                                    <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
+                            }
+                        <td className="sikkerhetstiltak-td">
+                            {bruker.sikkerhetstiltak.length > 0 ? <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
                             {bruker.diskresjonskode != null ?
-                                <span>{`Kode ${bruker.diskresjonskode}`}</span> : null}
-                            {bruker.egenAnsatt === true ? <span>Egen ansatt</span> : null}
+                                <span className="diskresjonskode">{`Kode ${bruker.diskresjonskode}`}</span> : null}
+                            {bruker.egenAnsatt === true ? <span className="egen-ansatt">Egen ansatt</span> : null}
                         </td>
                     </tr>)}
                 </tbody>
