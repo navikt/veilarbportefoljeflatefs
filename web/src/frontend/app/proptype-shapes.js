@@ -34,7 +34,8 @@ export const brukerShape = PT.shape({
     fnr: PT.string.isRequired,
     fornavn: PT.string.isRequired,
     sikkerhetstiltak: PT.arrayOf(PT.string).isRequired,
-    veilederId: PT.string
+    veilederId: PT.string,
+    veilederNavn: PT.string
 });
 
 export const portefoljeShape = PT.shape({
