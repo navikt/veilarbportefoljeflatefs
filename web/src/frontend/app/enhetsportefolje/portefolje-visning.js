@@ -5,7 +5,6 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet, settSorterRekkefolge, settBrukerSomMarkert } from '../ducks/portefolje';
 import {
     hentPortefoljeForEnhet,
     settSorterRekkefolge,
@@ -18,11 +17,6 @@ import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
 
 class PortefoljeVisning extends Component {
     componentWillMount() {
-        const { valgtEnhet, hentPortefolje, hentVeiledere } = this.props;
-        if (valgtEnhet) {
-            hentPortefolje(valgtEnhet.enhetId);
-            hentVeiledere(valgtEnhet.enhetId);
-        }
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
