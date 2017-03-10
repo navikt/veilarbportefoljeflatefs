@@ -52,14 +52,14 @@ class Nedrekksliste extends Component {
 
         return (
             <section className="nedtrekksliste">
-                <div className="nedtrekksliste-toggle" onClick={this.toggle}>Tildel veiledere</div>
+                <h3 className="nedtrekksliste-toggle" onClick={this.toggle} tabIndex="2">Søk veileder(e)</h3>
                 <div className={classesApen}>
                     <input placeholder="Søk.." />
                     <form>
                         {liste.map(navn => (
-                            <div key={navn}>
-                                <label>{navn}</label>
+                            <div key={navn} className="nedtrekksliste-liste">
                                 <input type="checkbox" />
+                                <label>{navn}</label>
                             </div>
                         ))}
                     </form>
