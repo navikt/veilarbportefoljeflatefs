@@ -19,7 +19,7 @@ class PortefoljeTabell extends Component {
     render() {
         const { brukere, veiledere, settSomMarkertAlle, settSomMarkert } = this.props;
 
-        const alleMarkert = brukere.every(bruker => bruker.markert);
+        const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
         return (
             <table className="tabell portefolje-tabell" tabIndex="0">
                 <thead>

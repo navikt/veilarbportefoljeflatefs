@@ -67,7 +67,7 @@ class VeilederPortefoljeVisning extends Component {
             clearFeilendeTilordninger();
         }
 
-        const alleMarkert = brukere.every(bruker => bruker.markert);
+        const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
