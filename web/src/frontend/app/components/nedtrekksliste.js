@@ -52,7 +52,7 @@ class Nedrekksliste extends Component {
 
         return (
             <section className="nedtrekksliste">
-                <h3 className="nedtrekksliste-toggle" onClick={this.toggle} tabIndex="2">Søk veileder(e)</h3>
+                <button className="nedtrekksliste-toggle" onClick={this.toggle}>Søk veileder(e)</button>
                 <div className={classesApen}>
                     <input placeholder="Søk.." />
                     <form>
@@ -62,6 +62,7 @@ class Nedrekksliste extends Component {
                                 <label>{navn}</label>
                             </div>
                         ))}
+                        <button className="knapp">Lukk</button>
                     </form>
                 </div>
             </section>
