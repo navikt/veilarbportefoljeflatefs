@@ -4,4 +4,16 @@
 
 .paginering .bytt-side {
     float: right;
+
+    a {
+        border-bottom: none;
+    }
+    a.not-active {
+        pointer-events: none;
+        cursor: default;
+        color: lightgray;
+    }
+    span {
+        color: #0067c5;
+    }
 }
