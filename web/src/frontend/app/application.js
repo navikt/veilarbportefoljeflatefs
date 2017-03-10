@@ -8,7 +8,7 @@ import Lenker from './lenker/lenker';
 import DevTools from './devtools';
 import { hentEnheterForVeileder } from './ducks/enheter';
 import Innholdslaster from './innholdslaster/innholdslaster';
-import { initialiserEventhandtering } from './eventhandtering';
+import initialiserEventhandtering from './eventhandtering';
 
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
@@ -25,11 +25,10 @@ class Application extends Component {
         this.props.hentTekster();
         this.props.hentEnheter();
         initialiserEventhandtering();
-
     }
 
     render() {
-        const { ledetekster = {}, enheter = {}, veiledere , children, routes } = this.props;
+        const { ledetekster = {}, enheter = {}, veiledere, children, routes } = this.props;
         return (
             <IntlProvider
                 defaultLocale="nb"
@@ -58,13 +57,14 @@ Application.propTypes = {
     hentTekster: PT.func.isRequired,
     hentEnheter: PT.func.isRequired,
     ledetekster: PT.object,
-    enheter: PT.object
+    enheter: PT.object,
+    veiledere: PT.object
 };
 
 const mapStateToProps = state => ({
     ledetekster: state.ledetekster,
     enheter: state.enheter,
-    veiledere: state.veiledere,
+    veiledere: state.veiledere
 });
 
 const mapDispatchToProps = dispatch => ({
