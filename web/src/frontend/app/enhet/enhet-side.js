@@ -10,8 +10,8 @@ import TildelVeilederVelger from './tildel-veileder-velger';
 import { enhetShape, veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import Nedrekksliste from '../components/nedtrekksliste';
-import { hentPortefoljeForEnhet, tildelVeileder } from '../ducks/portefolje';
-
+import FiltreringOversikt from './filtrering/filtrering-oversikt';
+import { tildelVeileder } from '../ducks/portefolje';
 
 class EnhetSide extends Component {
 
@@ -38,7 +38,6 @@ class EnhetSide extends Component {
             enheter,
             valgtEnhet,
             velgEnhet,
-            hentPortefolje,
             veiledere,
             valgtVeileder,
             hentVeiledere,
@@ -57,7 +56,6 @@ class EnhetSide extends Component {
             (<EnhetVelger
                 enheter={enheter} valgtEnhet={valgtEnhet} velgEnhet={(enhet) => {
                     velgEnhet(enhet);
-                    hentPortefolje(enhet.enhetId);
                     hentVeiledere(enhet.enhetId);
                 }}
             />);
@@ -83,6 +81,7 @@ class EnhetSide extends Component {
                         values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
                     />
                 </p>
+                <FiltreringOversikt />
                 {tildelVeilederVelger}
                 {enhetVelger}
                 <Nedrekksliste />
@@ -100,7 +99,6 @@ EnhetSide.propTypes = {
     valgtVeileder: PT.object,
     velgEnhet: PT.func.isRequired,
     velgVeileder: PT.func.isRequired,
-    hentPortefolje: PT.func.isRequired,
     hentVeiledere: PT.func.isRequired
 };
 
@@ -115,7 +113,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet)),
     velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder)),
-    hentPortefolje: enhet => dispatch(hentPortefoljeForEnhet(enhet)),
     hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId))
 });
 
