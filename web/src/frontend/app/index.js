@@ -14,11 +14,13 @@ import history from "./history";
 import EnhetSide from "./enhet/enhet-side";
 import VeiledereSide from "./veiledere/veiledere-side";
 import PortefoljeSide from "./veilederportefolje/portefolje-side";
+import TilbakeTilEnhetportefolje from './tilbakenavigering/tilbakenavigering-enhet';
+import TilbakeTilVeilederportefolje from './tilbakenavigering/tilbakenavigering-veileder';
 
 addLocaleData(nb);
 
 export const store = createStore();
-const tekster = { nb: { spinner: 'spinner' } };
+const tekster = {nb: {spinner: 'spinner'}};
 
 render(
     (
@@ -26,9 +28,11 @@ render(
             <IntlProvider defaultLocale="nb" locale="nb" messages={tekster}>
                 <Router history={history}>
                     <Route path="/" component={Application}>
-                        <Route path="enhet" component={EnhetSide} />
-                        <Route path="veiledere" component={VeiledereSide} />
-                        <Route path="portefolje" component={PortefoljeSide} />
+                        <Route path="enhet" component={EnhetSide}/>
+                        <Route path="veiledere" component={VeiledereSide}/>
+                        <Route path="portefolje" component={PortefoljeSide}/>
+                        <Route path="tilbaketilenhet" component={TilbakeTilEnhetportefolje}/>
+                        <Route path="tilbaketilportefolje" component={TilbakeTilVeilederportefolje}/>
                     </Route>
                 </Router>
             </IntlProvider>

@@ -11,6 +11,7 @@ export const VALGT_NYE_BRUKERE = 'VALGT_NYE_BRUKERE';
 export const AVVALGT_NYE_BRUKERE = 'AVVALGT_NYE_BRUKERE';
 export const VALGT_INAKTIVE_BRUKERE = 'VALGT_INAKTIVE_BRUKERE';
 export const AVVALGT_INAKTIVE_BRUKERE = 'AVVALGT_INAKTIVE_BRUKERE';
+export const SETT_FILTERVALG = 'SETT_FILTERVALG';
 
 //  Reducer
 const initialState = {
@@ -50,6 +51,10 @@ export default function reducer(state = initialState, action) {
                     inaktiveBrukere: false
                 }
             };
+        case SETT_FILTERVALG:
+            return { ...state,
+                filtervalg: action.filtervalg
+            };
         default:
             return state;
     }
@@ -65,6 +70,14 @@ export function endreFiltervalg(filterId, filtervalg) { // eslint-disable-line c
     eksporterStoreTilLocalStorage();
 
 }
+
+export function settFiltervalg(filtervalg) {
+    return {
+        type: SETT_FILTERVALG,
+        filtervalg
+    }
+}
+
 
 export function hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere) {
     return doThenDispatch(() =>
