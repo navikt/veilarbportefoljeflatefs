@@ -69,7 +69,14 @@ export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
     };
 }
 
-export function eksporterStoreTilLocalStorage() {
+export function eksporterEnhetsportefoljeTilLocalStorage() {
     const objectToStore = { ...store.getState(), path: location.pathname };
-    localStorage.setItem('previousState', JSON.stringify(objectToStore));
+    localStorage.setItem('previousEnhetState', JSON.stringify(objectToStore));
 }
+
+export function eksporterVeilederportefoljeTilLocalStorage() {
+    const objectToStore = { ...store.getState(), path: location.pathname };
+    localStorage.setItem('previousVeilederState', JSON.stringify(objectToStore));
+}
+
+

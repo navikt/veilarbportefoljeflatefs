@@ -4,7 +4,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { veilederShape, brukerShape } from '../proptype-shapes';
-import { eksporterStoreTilLocalStorage } from '../ducks/utils';
+import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 
 class PortefoljeTabell extends Component {
 
@@ -12,7 +12,7 @@ class PortefoljeTabell extends Component {
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
     componentDidMount() {
-        eksporterStoreTilLocalStorage();
+        eksporterEnhetsportefoljeTilLocalStorage();
     }
 
     settSorteringOgHentPortefolje() {

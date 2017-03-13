@@ -7,12 +7,12 @@ import { FormattedMessage } from 'react-intl';
 import history from '../history';
 import { veilederShape } from './../proptype-shapes';
 import { settValgtVeileder } from '../ducks/portefolje';
-import { eksporterStoreTilLocalStorage } from '../ducks/utils';
+import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 
 
 class VeilederTabell extends Component {
     componentDidMount() {
-        eksporterStoreTilLocalStorage();
+        eksporterEnhetsportefoljeTilLocalStorage();
     }
 
     settValgtVeileder(veileder) {
