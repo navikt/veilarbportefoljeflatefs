@@ -42,11 +42,14 @@ function bundle(gulp, bundle, bundleFileName) {
 function buildJs(gulp) {
     return () => {
         const browserify = require('browserify');
+        const filterLess = require('browserify-file-filter');
         var bundler = browserify('./app/index.js', {
             debug: isDevelopment(),
             fullPaths: isDevelopment()
-        });
-        return bundle(gulp, bundler.transform(babelifyReact), 'bundle.js');
+        })
+            .transform(babelifyReact)
+            .plugin(filterLess, { p: '\\.(?:css|less|scss|sass)$' });
+        return bundle(gulp, bundler, 'bundle.js');
     };
 }
 
@@ -54,6 +57,7 @@ function buildJsWatchify(gulp) {
     return () => {
         const watchify = require('watchify');
         const browserify = require('browserify');
+        const filterLess = require('browserify-file-filter');
         const gutil = require('gulp-util');
 
         const browserifyOpts = {
@@ -65,7 +69,7 @@ function buildJsWatchify(gulp) {
         };
 
         var opts = Object.assign({}, watchify.args, browserifyOpts);
-        var bundler = watchify(browserify(opts)).transform(babelifyReact);
+        var bundler = watchify(browserify(opts)).transform(babelifyReact).plugin(filterLess, { p: '\\.(?:css|less|scss|sass)$' });
 
         bundler.on('update', function () {
             gutil.log('Starting', gutil.colors.cyan("'watchify rebundle'"), '...');
