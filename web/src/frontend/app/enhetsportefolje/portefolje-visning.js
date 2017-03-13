@@ -18,16 +18,27 @@ import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
 
 class PortefoljeVisning extends Component {
     componentWillMount() {
-        const { valgtEnhet, hentPortefolje, hentVeiledere } = this.props;
+        const {
+            valgtEnhet, hentPortefolje, hentVeiledere, sorteringsrekkefolge, fraIndex, antall, filtervalg
+        } = this.props;
         if (valgtEnhet) {
-            hentPortefolje(valgtEnhet.enhetId);
+            hentPortefolje(
+                valgtEnhet.enhetId,
+                sorteringsrekkefolge,
+                fraIndex,
+                antall,
+                filtervalg.nyeBrukere,
+                filtervalg.inaktiveBrukere
+            );
             hentVeiledere(valgtEnhet.enhetId);
         }
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
     settSorteringOgHentPortefolje() {
-        const { sorteringsrekkefolge, settSortering, fraIndex, valgtEnhet, hentPortefolje } = this.props;
+        const {
+            sorteringsrekkefolge, settSortering, fraIndex, antall, valgtEnhet, hentPortefolje, filtervalg
+        } = this.props;
         let valgtRekkefolge = '';
         if (sorteringsrekkefolge === 'ascending') {
             valgtRekkefolge = 'descending';
@@ -36,7 +47,9 @@ class PortefoljeVisning extends Component {
             valgtRekkefolge = 'ascending';
             settSortering('ascending');
         }
-        hentPortefolje(valgtEnhet.enhetId, valgtRekkefolge, fraIndex);
+        hentPortefolje(
+            valgtEnhet.enhetId, valgtRekkefolge, fraIndex, antall, filtervalg.nyeBrukere, filtervalg.inaktiveBrukere
+        );
     }
 
     render() {
@@ -47,6 +60,7 @@ class PortefoljeVisning extends Component {
             hentPortefolje,
             sorteringsrekkefolge,
             settMarkert,
+            filtervalg,
             clearFeilendeTilordninger
         } = this.props;
 
@@ -73,7 +87,14 @@ class PortefoljeVisning extends Component {
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
                     hentListe={(fra, antall) =>
-                        hentPortefolje(valgtEnhet.enhetId, sorteringsrekkefolge, fra, antall)}
+                        hentPortefolje(
+                            valgtEnhet.enhetId,
+                            sorteringsrekkefolge,
+                            fra,
+                            antall,
+                            filtervalg.nyeBrukere,
+                            filtervalg.inaktiveBrukere
+                        )}
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
@@ -106,19 +127,23 @@ PortefoljeVisning.propTypes = {
     sorteringsrekkefolge: PT.string.isRequired,
     fraIndex: PT.number,
     settMarkert: PT.func.isRequired,
-    clearFeilendeTilordninger: PT.func.isRequired
+    clearFeilendeTilordninger: PT.func.isRequired,
+    antall: PT.number,
+    filtervalg: PT.object
 };
 
 const mapStateToProps = state => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
     veiledere: state.veiledere,
-    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge
+    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
+    antall: state.paginering.sideStorrelse,
+    filtervalg: state.filtrering.filtervalg
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, rekkefolge, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall)),
+    hentPortefolje: (enhet, rekkefolge, fra = 0, antall = 20, nyeBrukere, inaktiveBrukere) =>
+        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere)),
     settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId)),

@@ -33,7 +33,16 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
                         <span style={{marginRight: '2px'}}>...<b>{((fraIndex / sideStorrelse) + 1)}</b>...</span>}
                         {createSimpleLink(fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt/sideStorrelse))}
                         {createSimpleLink(fraIndeksSisteSide, sideStorrelse, '>')}
-                    </div>
+                        <a
+                            href="" style={{ marginRight: '10px' }} onClick={(e) => {
+                            e.preventDefault();
+                            let fra = antallTotalt % sideStorrelse === 0 ? antallTotalt - sideStorrelse
+                                : antallTotalt - (antallTotalt % sideStorrelse);
+                            if (fra < 0) fra = 0;
+                            hentListe(fra, sideStorrelse);
+                        }}
+                        >{'>>'}</a>
+                        </div>
                 }
             </div>
         </div>

@@ -7,6 +7,7 @@ const FEILET = 'veilarbportefolje/portefolje/FEILET';
 const PENDING = 'veilarbportefolje/portefolje/PENDING';
 const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSREKKEFOLGE';
 const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
+const SETT_MARKERT_BRUKER_ALLE = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER_ALLE';
 const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
@@ -92,14 +93,23 @@ export default function reducer(state = initialState, action) {
         case NULLSTILL_FEILENDE_TILORDNINGER: {
             return { ...state, feilendeTilordninger: [] };
         }
+        case SETT_MARKERT_BRUKER_ALLE: {
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    brukere: state.data.brukere.map(bruker => ({ ...bruker, markert: action.markert }))
+                }
+            };
+        }
         default:
             return state;
     }
 }
 
 // Action Creators
-export function hentPortefoljeForEnhet(enhet, rekkefolge, fra = 0, antall = 20) {
-    return doThenDispatch(() => Api.hentEnhetsPortefolje(enhet, rekkefolge, fra, antall), {
+export function hentPortefoljeForEnhet(enhet, rekkefolge, fra = 0, antall = 20, nyeBrukere, inaktiveBrukere) {
+    return doThenDispatch(() => Api.hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere), {
         OK,
         FEILET,
         PENDING
@@ -128,6 +138,13 @@ export function settBrukerSomMarkert(fnr, markert) {
     return dispatch => dispatch({
         type: SETT_MARKERT_BRUKER,
         fnr,
+        markert
+    });
+}
+
+export function markerAlleBrukere(markert) {
+    return dispatch => dispatch({
+        type: SETT_MARKERT_BRUKER_ALLE,
         markert
     });
 }

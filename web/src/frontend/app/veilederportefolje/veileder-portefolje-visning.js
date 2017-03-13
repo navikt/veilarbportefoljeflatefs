@@ -9,7 +9,8 @@ import {
     hentPortefoljeForVeileder,
     settSorterRekkefolge,
     settBrukerSomMarkert,
-    nullstillFeilendeTilordninger
+    nullstillFeilendeTilordninger,
+    markerAlleBrukere
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
@@ -45,7 +46,8 @@ class VeilederPortefoljeVisning extends Component {
             sorteringsrekkefolge,
             valgtEnhet,
             settMarkert,
-            clearFeilendeTilordninger
+            clearFeilendeTilordninger,
+            settSomMarkertAlle
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
@@ -65,6 +67,8 @@ class VeilederPortefoljeVisning extends Component {
             clearFeilendeTilordninger();
         }
 
+        const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
+
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
                 <Paginering
@@ -80,7 +84,13 @@ class VeilederPortefoljeVisning extends Component {
                         <tr>
                             <th>
                                 <div className="nav-input">
-                                    <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
+                                    <input
+                                        className="nav-checkbox"
+                                        id="checkbox-alle-brukere"
+                                        type="checkbox"
+                                        checked={alleMarkert}
+                                        onClick={() => settSomMarkertAlle(!alleMarkert)}
+                                    />
                                     <label htmlFor="checkbox-alle-brukere" />
                                 </div>
                             </th>
@@ -164,7 +174,8 @@ VeilederPortefoljeVisning.propTypes = {
     sorteringsrekkefolge: PT.string.isRequired,
     fraIndex: PT.number,
     settMarkert: PT.func.isRequired,
-    clearFeilendeTilordninger: PT.func.isRequired
+    clearFeilendeTilordninger: PT.func.isRequired,
+    settSomMarkertAlle: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -179,7 +190,8 @@ const mapDispatchToProps = dispatch => ({
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, fra, antall)),
     settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
-    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
+    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
+    settSomMarkertAlle: markert => dispatch(markerAlleBrukere(markert))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);
