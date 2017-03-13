@@ -16,7 +16,6 @@ import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
 
 
-
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
         const { hentPortefolje, valgtEnhet, veileder } = this.props;

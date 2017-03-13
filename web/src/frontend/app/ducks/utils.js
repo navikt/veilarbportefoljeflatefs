@@ -82,9 +82,8 @@ export function eksporterVeilederportefoljeTilLocalStorage() {
 export function settValgtVeilederIKonstruktor(enhetId) {
     const htmlEnhetVelger = document.getElementById('dekorator-select-enhet');
 
-    if(htmlEnhetVelger) {
+    if (htmlEnhetVelger) {
         htmlEnhetVelger.value = enhetId;
     }
 }
-
 

@@ -44,7 +44,12 @@ class PortefoljeVisning extends Component {
             settSortering('ascending');
         }
         hentPortefolje(
-            valgtEnhet.enhet.enhetId, valgtRekkefolge, fraIndex, antall, filtervalg.nyeBrukere, filtervalg.inaktiveBrukere
+            valgtEnhet.enhet.enhetId,
+            valgtRekkefolge,
+            fraIndex,
+            antall,
+            filtervalg.nyeBrukere,
+            filtervalg.inaktiveBrukere
         );
     }
 

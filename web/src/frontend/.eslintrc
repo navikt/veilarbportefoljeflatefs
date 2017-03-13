@@ -36,7 +36,8 @@
       "sessionStorage": false,
       "jwtExpirationImminent": false,
       "GLOBAL_JWT_UPDATE_RESOLVE": true,
-      "startLoginSequence": false
+      "startLoginSequence": false,
+      "localStorage":false
   },
   "env": {
     "mocha": true

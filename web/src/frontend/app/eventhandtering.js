@@ -3,6 +3,7 @@ import { store } from './index';
 import { hentVeiledereForEnhet } from './ducks/veiledere';
 import { hentPortefoljeForEnhet } from './ducks/portefolje';
 import { hentPortefoljeStorrelser } from './ducks/portefoljestorrelser';
+import lagHtmlMeny from './utils/meny-utils';
 
 const hentOgDispatchAllInformasjonOmEnhet = (enhet) => {
     store.dispatch(velgEnhetForVeileder(enhet));
@@ -26,9 +27,20 @@ function hentInitiellEnhetFraDekoratorOgLastApp() {
 }
 
 
+const settMenyHtmlListener = () => {
+    document.addEventListener('DOMContentLoaded', () => {
+        const hodeMeny = document.getElementById('js-dekorator-nav');
+        const hodeMenyKnapp = document.getElementById('js-dekorator-toggle-meny');
+        hodeMenyKnapp.addEventListener('click', () => {
+            hodeMeny.innerHTML = lagHtmlMeny();
+        });
+    });
+};
+
 export default () => {
     document.addEventListener('dekorator-hode-velg-enhet', (event) => {
         hentOgDispatchAllInformasjonOmEnhet(event.enhet);
     });
     hentInitiellEnhetFraDekoratorOgLastApp();
+    settMenyHtmlListener();
 };
