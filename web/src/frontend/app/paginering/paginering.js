@@ -31,8 +31,9 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
                 <a
                     href="" style={{ marginRight: '10px' }} onClick={(e) => {
                         e.preventDefault();
-                        const fra = antallTotalt % sideStorrelse === 0 ? antallTotalt - sideStorrelse
+                        let fra = antallTotalt % sideStorrelse === 0 ? antallTotalt - sideStorrelse
                             : antallTotalt - (antallTotalt % sideStorrelse);
+                        if (fra < 0) fra = 0;
                         hentListe(fra, sideStorrelse);
                     }}
                 >{'>>'}</a>
