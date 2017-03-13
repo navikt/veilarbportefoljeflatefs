@@ -44,3 +44,8 @@ export const portefoljeShape = PT.shape({
     antallReturnert: PT.number.isRequired,
     fraIndex: PT.number.isRequired
 });
+
+export const valgtEnhetShape = PT.shape({
+    enhetShape,
+    status: PT.string.isRequired
+});

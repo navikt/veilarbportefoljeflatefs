@@ -11,8 +11,19 @@ const VELG_ENHET = 'VELG_ENHET';
 
 const initialState = {
     data: [],
-    valgtEnhet: undefined,
+    valgtEnhet: {
+        status: STATUS.NOT_STARTED,
+        enhet: undefined
+    },
     ident: queryString.parse(location.search).ident
+};
+
+
+const konstruerObjectDersomEnhetErString = (valgtEnhet) => {
+    if (typeof valgtEnhet === 'object') {
+        return valgtEnhet;
+    }
+    return { enhetId: valgtEnhet };
 };
 
 //  Reducer
@@ -25,7 +36,9 @@ export default function reducer(state = initialState, action) {
         case OK:
             return { ...state, status: STATUS.OK, data: action.data.enhetliste, ident: action.data.ident };
         case VELG_ENHET:
-            return { ...state, valgtEnhet: konstruerObjectDersomEnhetErString(action.valgtEnhet) };
+            return { ...state,
+                valgtEnhet: { enhet: konstruerObjectDersomEnhetErString(action.valgtEnhet),
+                    status: STATUS.OK } };
         default:
             return state;
     }
@@ -47,11 +60,4 @@ export function velgEnhetForVeileder(valgtEnhet) {
         valgtEnhet
     };
 }
-
-const konstruerObjectDersomEnhetErString = (valgtEnhet) => {
-  if(typeof valgtEnhet === 'object') {
-      return valgtEnhet;
-  }
-  return { enhetId:valgtEnhet };
-};
 

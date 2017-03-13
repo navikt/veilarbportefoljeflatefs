@@ -17,6 +17,8 @@ import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
 
 class PortefoljeVisning extends Component {
     componentWillMount() {
+        const { hentPortefolje, valgtEnhet } = this.props;
+        hentPortefolje(valgtEnhet.enhet.enhetId);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 

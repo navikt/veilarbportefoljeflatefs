@@ -1,10 +1,17 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { veiledereShape, enhetShape, portefoljestorrelserShape, veilederShape } from './../proptype-shapes';
+import {
+    veiledereShape,
+    portefoljestorrelserShape,
+    veilederShape,
+    valgtEnhetShape
+} from './../proptype-shapes';
 import VeiledereTabell from './veiledere-tabell';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import PagineringForvalter from '../paginering/pagineringforvalter';
 import { settSorteringRekkefolge, settSubListeForPaginering } from '../ducks/paginering';
+import { hentVeiledereForEnhet } from '../ducks/veiledere';
+import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 
 export function compareEtternavn(a, b) {
     const aUpper = a.etternavn.toUpperCase();
@@ -19,6 +26,11 @@ export function compareEtternavn(a, b) {
 }
 
 class VeiledereSide extends Component {
+    componentWillMount() {
+        const { hentVeiledere, hentPortefoljestorrelser, valgtEnhet } = this.props;
+        hentVeiledere(valgtEnhet.enhet.enhetId);
+        hentPortefoljestorrelser(valgtEnhet.enhet.enhetId);
+    }
     render() {
         const { veiledere, portefoljestorrelser, veiledereSomSkalVises, sorterPaaEtternavn,
             currentSorteringsRekkefolge } = this.props;
@@ -48,19 +60,19 @@ VeiledereSide.propTypes = {
     veiledere: PT.shape({
         data: veiledereShape.isRequired
     }).isRequired,
-    enhetsListe: PT.arrayOf(enhetShape).isRequired,
-    velgEnhet: PT.func.isRequired,
     portefoljestorrelser: PT.shape({
         data: portefoljestorrelserShape.isRequired
     }).isRequired,
     veiledereSomSkalVises: PT.arrayOf(veilederShape).isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
-    currentSorteringsRekkefolge: PT.string.isRequired
+    hentVeiledere: PT.func.isRequired,
+    hentPortefoljestorrelser: PT.func.isRequired,
+    currentSorteringsRekkefolge: PT.string.isRequired,
+    valgtEnhet: valgtEnhetShape.isRequired
 };
 
 const mapStateToProps = state => ({
     veiledere: state.veiledere,
-    enhetsListe: state.enheter.data,
     valgtEnhet: state.enheter.valgtEnhet,
     veiledereSomSkalVises: state.paginering.subListe,
     portefoljestorrelser: state.portefoljestorrelser,
@@ -68,7 +80,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet)),
+    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId)),
+    hentPortefoljestorrelser: enhetId => dispatch(hentPortefoljeStorrelser(enhetId)),
     sorterPaaEtternavn: (sorteringsFunksjon, sorteringsRekkefolge) => {
         dispatch(settSorteringRekkefolge(sorteringsFunksjon, sorteringsRekkefolge));
         dispatch(settSubListeForPaginering(0));
