@@ -8,7 +8,6 @@ import { tildelVeileder } from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 
 import FiltreringOversikt from './filtrering/filtrering-oversikt';
-import { tildelVeileder } from '../ducks/portefolje';
 
 class EnhetSide extends Component {
     componentWillMount() {

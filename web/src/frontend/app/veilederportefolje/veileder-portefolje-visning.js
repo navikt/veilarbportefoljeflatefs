@@ -18,7 +18,7 @@ import { enhetShape, veilederShape } from './../proptype-shapes';
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
         const { hentPortefolje, valgtEnhet, veileder } = this.props;
-        hentPortefolje(valgtEnhet.enhetId, veileder);
+        hentPortefolje(valgtEnhet.enhet.enhetId, veileder);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
@@ -33,7 +33,7 @@ class VeilederPortefoljeVisning extends Component {
             valgtRekkefolge = 'ascending';
             settSortering('ascending');
         }
-        hentPortefolje(valgtEnhet.enhetId, veileder, valgtRekkefolge, fraIndex);
+        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, valgtRekkefolge, fraIndex);
     }
 
 
@@ -71,7 +71,7 @@ class VeilederPortefoljeVisning extends Component {
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
                     hentListe={(fra, antall) =>
-                        hentPortefolje(valgtEnhet.enhetId, veileder, sorteringsrekkefolge, fra, antall)}
+                        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, sorteringsrekkefolge, fra, antall)}
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />

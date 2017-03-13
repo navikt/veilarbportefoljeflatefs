@@ -17,8 +17,17 @@ import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
 
 class PortefoljeVisning extends Component {
     componentWillMount() {
-        const { hentPortefolje, valgtEnhet } = this.props;
-        hentPortefolje(valgtEnhet.enhet.enhetId);
+        const {
+            valgtEnhet, hentPortefolje, sorteringsrekkefolge, fraIndex, antall, filtervalg
+        } = this.props;
+        hentPortefolje(
+            valgtEnhet.enhet.enhetId,
+            sorteringsrekkefolge,
+            fraIndex,
+            antall,
+            filtervalg.nyeBrukere,
+            filtervalg.inaktiveBrukere
+        );
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
