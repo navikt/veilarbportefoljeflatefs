@@ -7,6 +7,8 @@ import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import { tildelVeileder } from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 
+import FiltreringOversikt from './filtrering/filtrering-oversikt';
+import { tildelVeileder } from '../ducks/portefolje';
 
 class EnhetSide extends Component {
     componentWillMount() {
@@ -35,6 +37,7 @@ class EnhetSide extends Component {
                 brukere={brukere}
                 velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
             />);
+
         return (
             <div className="enhet-side panel">
                 <h1 className="typo-innholdstittel">
@@ -54,6 +57,7 @@ class EnhetSide extends Component {
                                 enheter.find(enhet => enhet.enhetId === valgtEnhet.enhet.enhetId).navn }}
                     />
                 </p>
+                <FiltreringOversikt />
                 {tildelVeilederVelger}
                 <PortefoljeVisning />
             </div>

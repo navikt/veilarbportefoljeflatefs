@@ -55,7 +55,6 @@
 
     <dependencyManagement>
         <dependencies>
-
             <!--oidc-security-->
             <dependency>
                 <groupId>no.nav.dialogarena</groupId>

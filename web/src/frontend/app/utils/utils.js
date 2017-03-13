@@ -16,3 +16,16 @@ export function leggEnhetIUrl(enhet) { // eslint-disable-line consistent-return
     const pathname = window.location.pathname;
     window.history.replaceState({}, null, `${pathname}?${stringified}`);
 }
+
+export function filterUrlBuilder(nyeBrukere, inaktiveBrukere) {
+    let result = '';
+
+    if (nyeBrukere) {
+        result += `&nyeBrukere=${nyeBrukere}`;
+    }
+
+    if (inaktiveBrukere) {
+        result += `&inaktiveBrukere=${inaktiveBrukere}`;
+    }
+    return result;
+}
