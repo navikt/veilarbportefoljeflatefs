@@ -1,3 +1,5 @@
+import { store } from '../index';
+
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
     PENDING: 'PENDING',
@@ -65,4 +67,9 @@ export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
             .then(sendResultatTilDispatch(dispatch, OK))
             .catch(handterFeil(dispatch, FEILET));
     };
+}
+
+export function eksporterStoreTilLocalStorage() {
+    const objectToStore = { ...store.getState(), path: location.pathname };
+    localStorage.setItem('previousState', JSON.stringify(objectToStore));
 }

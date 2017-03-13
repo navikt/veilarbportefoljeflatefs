@@ -13,6 +13,8 @@ import {
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
+import { eksporterStoreTilLocalStorage } from '../ducks/utils';
+
 
 
 class VeilederPortefoljeVisning extends Component {
@@ -21,6 +23,10 @@ class VeilederPortefoljeVisning extends Component {
         hentPortefolje(valgtEnhet.enhet.enhetId, veileder);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
+    componentDidMount() {
+        eksporterStoreTilLocalStorage();
+    }
+
 
     settSorteringOgHentPortefolje() {
         const { sorteringsrekkefolge, settSortering, fraIndex,

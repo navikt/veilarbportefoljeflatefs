@@ -1,5 +1,7 @@
 import * as Api from './../middleware/api';
 import { doThenDispatch } from './utils';
+import { eksporterStoreTilLocalStorage } from '../ducks/utils';
+
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -60,6 +62,8 @@ export function endreFiltervalg(filterId, filtervalg) { // eslint-disable-line c
     } else if (filterId === 'checkbox-filtrering-oversikt-inaktive-brukere') {
         return { type: filtervalg ? VALGT_INAKTIVE_BRUKERE : AVVALGT_INAKTIVE_BRUKERE };
     }
+    eksporterStoreTilLocalStorage();
+
 }
 
 export function hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere) {
