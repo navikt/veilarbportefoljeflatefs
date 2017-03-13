@@ -33,7 +33,7 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
                         e.preventDefault();
                         let fra = antallTotalt % sideStorrelse === 0 ? antallTotalt - sideStorrelse
                             : antallTotalt - (antallTotalt % sideStorrelse);
-                        if (fra < 0) fra = 0;
+                        if (fra < 0) fra = 0; // Kan fjernes når knapper blir disablet hvis det f.eks bare fins en side
                         hentListe(fra, sideStorrelse);
                     }}
                 >{'>>'}</a>

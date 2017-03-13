@@ -24,10 +24,10 @@ export function hentLedetekster() {
     return fetchToJson(`${API_BASE_URL}/tekster`, MED_CREDENTIALS);
 }
 
-export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere) {
+export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, filtervalg) {
     let url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
         `portefolje?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
-    url += filterUrlBuilder(nyeBrukere, inaktiveBrukere);
+    url += filterUrlBuilder(filtervalg);
     return fetchToJson(url, MED_CREDENTIALS);
 }
 

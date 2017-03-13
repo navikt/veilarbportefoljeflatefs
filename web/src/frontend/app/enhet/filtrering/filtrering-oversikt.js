@@ -20,9 +20,7 @@ class FiltreringOversikt extends Component {
 
     oppdaterDatagrunnlag() {
         const { hentPortefolje, filtervalg, sorteringsrekkefolge, fraIndex, antall, valgtEnhet } = this.props;
-        hentPortefolje(
-            valgtEnhet, sorteringsrekkefolge, fraIndex, antall, filtervalg.nyeBrukere, filtervalg.inaktiveBrukere
-        );
+        hentPortefolje(valgtEnhet, sorteringsrekkefolge, fraIndex, antall, filtervalg);
     }
 
     render() {
@@ -78,8 +76,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(filterId, filtervalg)),
-    hentPortefolje: (enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere) =>
-        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere))
+    hentPortefolje: (enhet, rekkefolge, fra, antall, filtervalg) =>
+        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, filtervalg))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltreringOversikt);

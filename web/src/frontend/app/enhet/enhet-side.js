@@ -10,6 +10,7 @@ import TildelVeilederVelger from './tildel-veileder-velger';
 import { enhetShape, veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import FiltreringOversikt from './filtrering/filtrering-oversikt';
+import FiltreringBrukere from './filtrering/filtrering-filtrer-brukere';
 import { tildelVeileder } from '../ducks/portefolje';
 
 class EnhetSide extends Component {
@@ -81,6 +82,7 @@ class EnhetSide extends Component {
                     />
                 </p>
                 <FiltreringOversikt />
+                <FiltreringBrukere />
                 {tildelVeilederVelger}
                 {enhetVelger}
                 <PortefoljeVisning />

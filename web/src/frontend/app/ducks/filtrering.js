@@ -9,12 +9,16 @@ export const VALGT_NYE_BRUKERE = 'VALGT_NYE_BRUKERE';
 export const AVVALGT_NYE_BRUKERE = 'AVVALGT_NYE_BRUKERE';
 export const VALGT_INAKTIVE_BRUKERE = 'VALGT_INAKTIVE_BRUKERE';
 export const AVVALGT_INAKTIVE_BRUKERE = 'AVVALGT_INAKTIVE_BRUKERE';
+export const ENDRET_ALDER = 'ENDRET_ALDER';
+export const VALGT_KJONN = 'VALGT_KJONN';
 
 //  Reducer
 const initialState = {
     filtervalg: {
         nyeBrukere: false,
-        inaktiveBrukere: false
+        inaktiveBrukere: false,
+        alder: 0,
+        kjonn: 'ikke definert'
     }
 };
 
@@ -23,29 +27,43 @@ export default function reducer(state = initialState, action) {
         case VALGT_NYE_BRUKERE:
             return { ...state,
                 filtervalg: {
-                    nyeBrukere: true,
-                    inaktiveBrukere: state.filtervalg.inaktiveBrukere
+                    ...state.filtervalg,
+                    nyeBrukere: true
                 }
             };
         case AVVALGT_NYE_BRUKERE:
             return { ...state,
                 filtervalg: {
-                    nyeBrukere: false,
-                    inaktiveBrukere: state.filtervalg.inaktiveBrukere
+                    ...state.filtervalg,
+                    nyeBrukere: false
                 }
             };
         case VALGT_INAKTIVE_BRUKERE:
             return { ...state,
                 filtervalg: {
-                    nyeBrukere: state.filtervalg.nyeBrukere,
+                    ...state.filtervalg,
                     inaktiveBrukere: true
                 }
             };
         case AVVALGT_INAKTIVE_BRUKERE:
             return { ...state,
                 filtervalg: {
-                    nyeBrukere: state.filtervalg.nyeBrukere,
+                    ...state.filtervalg,
                     inaktiveBrukere: false
+                }
+            };
+        case ENDRET_ALDER:
+            return { ...state,
+                filtervalg: {
+                    ...state.filtervalg,
+                    alder: parseInt(action.alder, 10) // radix parameter 10 for decimaltall
+                }
+            };
+        case VALGT_KJONN:
+            return { ...state,
+                filtervalg: {
+                    ...state.filtervalg,
+                    kjonn: action.kjonn
                 }
             };
         default:
@@ -59,12 +77,16 @@ export function endreFiltervalg(filterId, filtervalg) { // eslint-disable-line c
         return { type: filtervalg ? VALGT_NYE_BRUKERE : AVVALGT_NYE_BRUKERE };
     } else if (filterId === 'checkbox-filtrering-oversikt-inaktive-brukere') {
         return { type: filtervalg ? VALGT_INAKTIVE_BRUKERE : AVVALGT_INAKTIVE_BRUKERE };
+    } else if (filterId === 'alder') {
+        return { type: ENDRET_ALDER, alder: filtervalg };
+    } else if (filterId === 'kjonn') {
+        return { type: VALGT_KJONN, kjonn: filtervalg };
     }
 }
 
-export function hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere) {
+export function hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, filtervalg) {
     return doThenDispatch(() =>
-        Api.hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, nyeBrukere, inaktiveBrukere), {
+        Api.hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, filtervalg), {
             OK, FEILET, PENDING
         });
 }

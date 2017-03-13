@@ -17,15 +17,19 @@ export function leggEnhetIUrl(enhet) { // eslint-disable-line consistent-return
     window.history.replaceState({}, null, `${pathname}?${stringified}`);
 }
 
-export function filterUrlBuilder(nyeBrukere, inaktiveBrukere) {
+export function filterUrlBuilder(filtervalg) {
     let result = '';
 
-    if (nyeBrukere) {
-        result += `&nyeBrukere=${nyeBrukere}`;
+    if (filtervalg.nyeBrukere) {
+        result += `&nyeBrukere=${filtervalg.nyeBrukere}`;
     }
 
-    if (inaktiveBrukere) {
-        result += `&inaktiveBrukere=${inaktiveBrukere}`;
+    if (filtervalg.inaktiveBrukere) {
+        result += `&inaktiveBrukere=${filtervalg.inaktiveBrukere}`;
+    }
+
+    if (filtervalg.alder && filtervalg.alder > 0) {
+        result += `&alder=${filtervalg.alder}`;
     }
     return result;
 }
