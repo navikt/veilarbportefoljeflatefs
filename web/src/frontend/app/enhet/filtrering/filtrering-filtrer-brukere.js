@@ -51,7 +51,7 @@ class FiltreringBrukere extends Component {
                     <select // eslint-disable-line jsx-a11y/no-onchange
                         id="select-alder"
                         name="valgtAlder"
-                        onChange={this.handleChange('alder')}
+                        onChange={e => this.handleChange(e, 'alder')}
                         value={filtervalg.alder}
                     >
                         {aldersOptions}
@@ -61,7 +61,7 @@ class FiltreringBrukere extends Component {
                     <select // eslint-disable-line jsx-a11y/no-onchange
                         id="select-kjonn"
                         name="valgtKjonn"
-                        onChange={this.handleChange('kjonn')}
+                        onChange={e => this.handleChange(e, 'kjonn')}
                         value={filtervalg.kjonn}
                     >
                         <option value="ikke definert" key="kjonn-ikkeDefinert" selected>
