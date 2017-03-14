@@ -1,11 +1,12 @@
 import React, { PropTypes as PT } from 'react';
+import { Infotittel } from "nav-frontend-typografi";
 
 function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse }) {
     function createSimpleLink(fraIndeks, tilIndeks, linkTekst) {
-        return (<a href="" style={{marginRight: '2px'}} onClick={(e) => {
+        return (<Infotittel><a href="" onClick={(e) => {
             e.preventDefault();
             hentListe(fraIndeks, tilIndeks);
-        }}>{linkTekst}</a>)
+        }}>{linkTekst}</a></Infotittel>)
     }
 
     const fraIndeksForrigeSide = fraIndex - sideStorrelse < 0 ? fraIndex : fraIndex - sideStorrelse;
@@ -19,23 +20,30 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
             <h3 className="info">
                 {tekst}
             </h3>
-            <div className="bytt-side">
-                {antallTotalt <= sideStorrelse ? null :
-                    <div>
-                        {createSimpleLink(0, antallTotalt, 'Se alle')}
-                        <a href="" style={{margin: '0px 10px'}} className={fraIndex == 0 ? "not-active":""} onClick={(e) => {
+            {antallTotalt <= sideStorrelse ? null :
+                <div className="bytt-side">
+                    {createSimpleLink(0, antallTotalt, 'Se alle')}
+                    {fraIndex == 0 ?
+                        <Infotittel><a href="" className="not-active" onClick={(e) => {
                             e.preventDefault();
                             hentListe(fraIndeksForrigeSide, sideStorrelse);
                         }}
-                        >{'<'}</a>
-                        {createSimpleLink(0, sideStorrelse, '1')}
-                        {fraIndex == 0 ? <span style={{marginRight: '2px'}}>...</span>:
-                        <span style={{marginRight: '2px'}}>...<b>{((fraIndex / sideStorrelse) + 1)}</b>...</span>}
-                        {createSimpleLink(fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt/sideStorrelse))}
-                        {createSimpleLink(fraIndeksSisteSide, sideStorrelse, '>')}
-                        </div>
-                }
-            </div>
+                        >{'<'}</a></Infotittel>:
+                        createSimpleLink(fraIndeksForrigeSide, sideStorrelse, '<')
+                    }
+                    {fraIndex == 0 ?
+                        <Infotittel><a href="" className="bold" onClick={(e) => {
+                            e.preventDefault();
+                            hentListe(0, sideStorrelse);
+                        }}>{'1'}</a></Infotittel>:
+                        createSimpleLink(0, sideStorrelse, '1')
+                    }
+                    {fraIndex == 0 ? null :
+                    <Infotittel ><b>{((fraIndex / sideStorrelse) + 1)}</b></Infotittel>}
+                    {createSimpleLink(fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt/sideStorrelse))}
+                    {createSimpleLink(fraIndeksSisteSide, sideStorrelse, '>')}
+                </div>
+            }
         </div>
     );
 }
