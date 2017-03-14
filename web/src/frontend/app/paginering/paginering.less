@@ -6,11 +6,19 @@
 .paginering .bytt-side {
     float: right;
 
-    div {
+    p {
         background-color: #ffffff;
         margin: 1px;
         display: inline-block;
         padding: 4px 10px;
+    }
+    p:first-of-type {
+        border-bottom-left-radius: 2px;
+        border-top-left-radius: 2px;
+    }
+    p:last-of-type {
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
     }
     a {
         color: #3e3832;
