@@ -1,12 +1,13 @@
-.nedtrekksliste .hidden {
-    visibility: hidden;
-}
-.nedtrekksliste .nedtrekksliste-toggle {
+.nedtrekksliste-container .nedtrekksliste-toggle {
     font-size: 11pt;
     font-weight: normal;
     cursor: pointer;
 }
-.nedtrekksliste .nedtrekksliste--er-apen {
+.nedtrekksliste {
+    display: none
+}
+.nedtrekksliste.nedtrekksliste--apen {
+    display: block;
     background-color: white;
     opacity: 1;
     border: 1px solid;
@@ -15,5 +16,8 @@
 }
 
 .nedtrekksliste-liste {
-    display: flex;
+    padding-left: 0;
+    li {
+        display: flex;
+    }
 }
