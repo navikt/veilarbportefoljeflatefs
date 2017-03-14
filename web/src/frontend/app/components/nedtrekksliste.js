@@ -1,5 +1,4 @@
 import React, { PropTypes as PT, Component } from 'react';
-import classnames from 'classnames';
 import { Knapp } from 'nav-frontend-knapper';
 import './nedtrekksliste';
 
@@ -7,13 +6,23 @@ class Nedrekksliste extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            erApen: this.props.erApen
-        };
 
-        this.vis = this.vis.bind(this);
-        this.skjul = this.skjul.bind(this);
-        this.toggle = this.toggle.bind(this);
+        let skjulHvisKlikkUtenfor = (e) => {
+            let target = e.target;
+            let isCalWrap = false;
+            while (target.parentNode) {
+                if (target.classList.contains('nedtrekksliste-container')) {
+                    isCalWrap = true;
+                    break;
+                }
+                target = target.parentNode;
+            }
+            if (!isCalWrap) {
+                this.hideDialog();
+            }
+        };
+        skjulHvisKlikkUtenfor = skjulHvisKlikkUtenfor.bind(this);
+        document.querySelector('body').addEventListener('click', skjulHvisKlikkUtenfor);
     }
 
     componentDidMount() {
@@ -24,57 +33,46 @@ class Nedrekksliste extends Component {
 
     }
 
-    vis() {
-        this.setState({ erApen: true });
+    hideDialog() { // eslint-disable-line class-methods-use-this
+        const el = document.querySelector('.nedtrekksliste');
+        el.classList.remove('nedtrekksliste--apen');
+        el.removeAttribute('aria-hidden');
     }
 
-    skjul() {
-        this.setState({ erApen: false });
-    }
-
-    toggle() {
-        if (this.state.erApen) {
-            this.skjul();
+    toggleDialog(e) { // eslint-disable-line class-methods-use-this
+        const el = document.querySelector('.nedtrekksliste');
+        el.classList.toggle('nedtrekksliste--apen');
+        if (el.hasAttribute('aria-hidden')) {
+            el.removeAttribute('aria-hidden');
         } else {
-            this.vis();
+            el.setAttribute('aria-hidden', 'true');
         }
+        e.preventDefault();
     }
 
     render() {
         const liste = ['Andersen, Kim', 'Barka, Elisabeth V.', 'Johnsen, Ola', 'Karlsen, Magnus'];
 
-        const classesApen = classnames('nedtrekksliste--er-apen', {
-            hidden: !this.state.erApen
-        });
-
         return (
-            <section className="nedtrekksliste" role="listbox">
-                <button className="nedtrekksliste-toggle" onClick={this.toggle}>Søk veileder(e)</button>
-                <div className={classesApen}>
+            <section className="nedtrekksliste-container" role="listbox">
+                <button className="nedtrekksliste-toggle" onClick={this.toggleDialog}>Søk veileder(e)</button>
+                <div className="nedtrekksliste">
                     <input placeholder="Søk.." />
                     <form>
-                        <div>
+                        <ul className="nedtrekksliste-liste">
                             {liste.map(navn => (
-                                <div key={navn} className="nedtrekksliste-liste">
-                                    <input id={`${navn}-checkbox`} type="checkbox" />
+                                <li key={navn}>
+                                    <input id={`${navn}-checkbox`} type="checkbox" className="nav-checkbox" />
                                     <label htmlFor={`${navn}-checkbox`}>{navn}</label>
-                                </div>
+                                </li>
                             ))}
-                        </div>
-                        <Knapp onClick={this.skjul}>Lukk</Knapp>
+                        </ul>
+                        <Knapp onClick={this.toggleDialog}>Lukk</Knapp>
                     </form>
                 </div>
             </section>
         );
     }
 }
-
-Nedrekksliste.defaultProps = {
-    erApen: false
-};
-
-Nedrekksliste.propTypes = {
-    erApen: PT.bool.isRequired
-};
 
 export default Nedrekksliste;
