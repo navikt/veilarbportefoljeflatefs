@@ -1,21 +1,12 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { endreFiltervalg, hentPortefoljeForEnhet } from '../../ducks/filtrering';
+import { endreFiltervalg } from '../../ducks/filtrering';
 
 class FiltreringBrukere extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-    }
-
-    componentDidUpdate() {
-        this.oppdaterDatagrunnlag();
-    }
-
-    oppdaterDatagrunnlag() {
-        const { hentPortefolje, filtervalg, sorteringsrekkefolge, fraIndex, antall, valgtEnhet } = this.props;
-        hentPortefolje(valgtEnhet, sorteringsrekkefolge, fraIndex, antall, filtervalg);
     }
 
     handleChange(e, filter) {
@@ -24,7 +15,6 @@ class FiltreringBrukere extends Component {
     }
 
     render() {
-        const { filtervalg } = this.props;
         const aldersIntervaller = [
             '19 og under',
             '20-24',
@@ -39,42 +29,45 @@ class FiltreringBrukere extends Component {
             <option value={index + 1} key={`option-${alderString}`}>{`${alderString}`}</option>
         );
 
-        const defaultOption = (<option value={0} key={'default'}>
-            <FormattedMessage id="filtrering.filtrer-brukere.demografi.alder" />
-        </option>);
+        const defaultOption = (
+            <FormattedMessage id="filtrering.filtrer-brukere.demografi.alder" key="default">
+                {text => <option value={0}>{text}</option>}
+            </FormattedMessage>);
 
         aldersOptions.unshift(defaultOption);
-
+        const { filtervalg } = this.props;
+        const filtreringAlder = (<div className="select-container">
+            <select // eslint-disable-line jsx-a11y/no-onchange
+                id="select-alder"
+                name="valgtAlder"
+                onChange={e => this.handleChange(e, 'alder')}
+                value={filtervalg.alder}
+            >
+                {aldersOptions}
+            </select>
+        </div>);
+        const filtreringKjonn = (<div className="select-container">
+            <select // eslint-disable-line jsx-a11y/no-onchange
+                id="select-kjonn"
+                name="valgtKjonn"
+                onChange={e => this.handleChange(e, 'kjonn')}
+                value={filtervalg.kjonn}
+            >
+                <FormattedMessage id="filtrering.filtrer-brukere.demografi.velgkjonn" key="kjonn-ikkeDefinert">
+                    {text => <option value="ikke definert">{text}</option>}
+                </FormattedMessage>
+                <FormattedMessage id="filtrering.filtrer-brukere.demograi.mann" key="kjonn-m">
+                    {text => <option value="M">{text}</option>}
+                </FormattedMessage>
+                <FormattedMessage id="filtrering.filtrer-brukere.demograi.kvinne" key="kjonn-k">
+                    {text => <option value="K">{text}</option>}
+                </FormattedMessage>
+            </select>
+        </div>);
         return (
             <div className="filtrering-demografi panel panel-ramme blokk-m">
-                <div className="select-container">
-                    <select // eslint-disable-line jsx-a11y/no-onchange
-                        id="select-alder"
-                        name="valgtAlder"
-                        onChange={e => this.handleChange(e, 'alder')}
-                        value={filtervalg.alder}
-                    >
-                        {aldersOptions}
-                    </select>
-                </div>
-                <div className="select-container">
-                    <select // eslint-disable-line jsx-a11y/no-onchange
-                        id="select-kjonn"
-                        name="valgtKjonn"
-                        onChange={e => this.handleChange(e, 'kjonn')}
-                        value={filtervalg.kjonn}
-                    >
-                        <option value="ikke definert" key="kjonn-ikkeDefinert" selected>
-                            <FormattedMessage id="filtrering.filtrer-brukere.demografi.velgkjonn" />
-                        </option>
-                        <option value="M" key="kjonn-m">
-                            <FormattedMessage id="filtrering.filtrer-brukere.demograi.mann" />
-                        </option>
-                        <option value="K" key="kjonn-k">
-                            <FormattedMessage id="filtrering.filtrer-brukere.demograi.kvinne" />
-                        </option>
-                    </select>
-                </div>
+                {filtreringAlder}
+                {filtreringKjonn}
             </div>
         );
     }
@@ -82,26 +75,15 @@ class FiltreringBrukere extends Component {
 
 FiltreringBrukere.propTypes = {
     endreFilter: PT.func.isRequired,
-    filtervalg: PT.object,
-    sorteringsrekkefolge: PT.string,
-    fraIndex: PT.number,
-    antall: PT.number,
-    valgtEnhet: PT.string,
-    hentPortefolje: PT.func.isRequired
+    filtervalg: PT.object
 };
 
 const mapStateToProps = state => ({
-    filtervalg: state.filtrering.filtervalg,
-    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
-    fraIndex: state.portefolje.data.fraIndex,
-    antall: state.paginering.sideStorrelse,
-    valgtEnhet: state.enheter.valgtEnhet.enhetId
+    filtervalg: state.filtrering.filtervalg
 });
 
 const mapDispatchToProps = dispatch => ({
-    endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(filterId, filtervalg)),
-    hentPortefolje: (enhet, rekkefolge, fra, antall, filtervalg) =>
-        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, filtervalg))
+    endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(filterId, filtervalg))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltreringBrukere);
