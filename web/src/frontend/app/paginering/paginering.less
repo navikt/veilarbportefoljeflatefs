@@ -1,11 +1,19 @@
 .paginering .info {
     padding: 10px 5px;
+    display: inline-block;
 }
 
 .paginering .bytt-side {
     float: right;
 
+    div {
+        background-color: #ffffff;
+        margin: 1px;
+        display: inline-block;
+        padding: 4px 10px;
+    }
     a {
+        color: #3e3832;
         border-bottom: none;
     }
     a.not-active {
@@ -13,7 +21,7 @@
         cursor: default;
         color: lightgray;
     }
-    span {
-        color: #0067c5;
+    a.bold {
+        font-weight: bold;
     }
 }
