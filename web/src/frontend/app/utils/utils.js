@@ -35,5 +35,9 @@ export function filterUrlBuilder(filtervalg) {
     if (filtervalg.kjonn && (filtervalg.kjonn === 'M' || filtervalg.kjonn === 'K')) {
         result += `&kjonn=${filtervalg.kjonn}`;
     }
+
+    if (filtervalg.fodselsdagIMnd > 0 && filtervalg.fodselsdagIMnd <= 31) {
+        result += `&fodselsdagIMnd=${filtervalg.fodselsdagIMnd}`;
+    }
     return result;
 }

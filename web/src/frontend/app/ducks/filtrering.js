@@ -11,6 +11,7 @@ export const VALGT_INAKTIVE_BRUKERE = 'VALGT_INAKTIVE_BRUKERE';
 export const AVVALGT_INAKTIVE_BRUKERE = 'AVVALGT_INAKTIVE_BRUKERE';
 export const ENDRET_ALDER = 'ENDRET_ALDER';
 export const VALGT_KJONN = 'VALGT_KJONN';
+export const VALGT_FODSELSDAG = 'VALGT_FODSELSDAG';
 
 //  Reducer
 const initialState = {
@@ -18,7 +19,8 @@ const initialState = {
         nyeBrukere: false,
         inaktiveBrukere: false,
         alder: 0,
-        kjonn: 'ikke definert'
+        kjonn: 'ikke definert',
+        fodselsdagIMnd: 0
     }
 };
 
@@ -66,6 +68,13 @@ export default function reducer(state = initialState, action) {
                     kjonn: action.kjonn
                 }
             };
+        case VALGT_FODSELSDAG:
+            return { ...state,
+                filtervalg: {
+                    ...state.filtervalg,
+                    fodselsdagIMnd: action.fodselsdagIMnd
+                }
+            };
         default:
             return state;
     }
@@ -81,6 +90,8 @@ export function endreFiltervalg(filterId, filtervalg) { // eslint-disable-line c
         return { type: ENDRET_ALDER, alder: filtervalg };
     } else if (filterId === 'kjonn') {
         return { type: VALGT_KJONN, kjonn: filtervalg };
+    } else if (filterId === 'fodselsdagIMnd') {
+        return { type: VALGT_FODSELSDAG, fodselsdagIMnd: filtervalg };
     }
 }
 
