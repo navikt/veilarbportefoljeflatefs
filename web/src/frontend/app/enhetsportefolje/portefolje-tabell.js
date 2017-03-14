@@ -88,8 +88,10 @@ class PortefoljeTabell extends Component {
                             {bruker.sikkerhetstiltak.length > 0 ?
                                 <span className="etikett etikett--fokus">Sikkerhetstiltak</span> : null}
                             {bruker.diskresjonskode != null ?
-                                <span className="etikett etikett--fokus">{`Kode ${bruker.diskresjonskode}`}</span> : null}
-                            {bruker.egenAnsatt === true ? <span className="etikett etikett--fokus">Egen ansatt</span> : null}
+                                <span className="etikett etikett--fokus">{`Kode ${bruker.diskresjonskode}`}</span>
+                                : null}
+                            {bruker.egenAnsatt === true ?
+                                <span className="etikett etikett--fokus">Egen ansatt</span> : null}
                         </td>
                     </tr>)}
                 </tbody>
