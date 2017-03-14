@@ -1,5 +1,7 @@
 /* eslint-disable */
-import "babel-polyfill";
+if (!window._babelPolyfill) {
+    require('babel-polyfill');
+}
 import "whatwg-fetch";
 import React from "react";
 import {render} from "react-dom";
@@ -16,6 +18,7 @@ import VeiledereSide from "./veiledere/veiledere-side";
 import PortefoljeSide from "./veilederportefolje/portefolje-side";
 import TilbakeTilEnhetportefolje from './tilbakenavigering/tilbakenavigering-enhet';
 import TilbakeTilVeilederportefolje from './tilbakenavigering/tilbakenavigering-veileder';
+
 
 addLocaleData(nb);
 
