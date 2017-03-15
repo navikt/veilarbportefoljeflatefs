@@ -29,6 +29,13 @@ class Application extends Component {
         rendreDekorator();
     }
 
+    componentDidUpdate() {
+        const { enheter } = this.props;
+        if (enheter.status === STATUS.OK && enheter.valgtEnhet.status !== STATUS.OK) {
+            this.oppdaterDekoratorMedInitiellEnhet();
+        }
+    }
+
     finnInitiellEnhet() {
         const { enheter } = this.props;
 
@@ -47,13 +54,6 @@ class Application extends Component {
         const initiellEnhet = this.finnInitiellEnhet();
         velgEnhet(initiellEnhet);
         settEnhetIDekorator(initiellEnhet);
-    }
-
-    componentDidUpdate() {
-        const { enheter } = this.props;
-        if(enheter.status === STATUS.OK && enheter.valgtEnhet.status !== STATUS.OK) {
-            this.oppdaterDekoratorMedInitiellEnhet();
-        }
     }
 
     render() {

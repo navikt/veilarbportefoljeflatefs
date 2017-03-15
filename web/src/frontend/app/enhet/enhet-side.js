@@ -1,8 +1,7 @@
 import React, { PropTypes as PT, Component } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import TildelVeilederVelger from './tildel-veileder-velger';
-import { enhetShape, veilederShape, brukerShape } from './../proptype-shapes';
+import { veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import { tildelVeileder } from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
@@ -20,8 +19,7 @@ class EnhetSide extends Component {
             veiledere,
             valgtVeileder,
             velgVeileder,
-            brukere,
-            enheter
+            brukere
         } = this.props;
 
 
@@ -48,7 +46,6 @@ class EnhetSide extends Component {
 }
 
 EnhetSide.propTypes = {
-    enheter: PT.arrayOf(enhetShape).isRequired,
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
     valgtEnhet: PT.object,
@@ -58,7 +55,6 @@ EnhetSide.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    enheter: state.enheter.data,
     veiledere: state.veiledere.data.veilederListe,
     brukere: state.portefolje.data.brukere,
     valgtVeileder: state.enheter.valgtVeileder,
