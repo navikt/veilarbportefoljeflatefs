@@ -84,12 +84,14 @@ class PortefoljeTabell extends Component {
                                 <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
                             }
                         <td />
-                        <td className="sikkerhetstiltak-td">
+                        <td>
                             {bruker.sikkerhetstiltak.length > 0 ?
-                                <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
+                                <span className="etikett etikett--fokus">Sikkerhetstiltak</span> : null}
                             {bruker.diskresjonskode != null ?
-                                <span className="diskresjonskode">{`Kode ${bruker.diskresjonskode}`}</span> : null}
-                            {bruker.egenAnsatt === true ? <span className="egen-ansatt">Egen ansatt</span> : null}
+                                <span className="etikett etikett--fokus">{`Kode ${bruker.diskresjonskode}`}</span>
+                                : null}
+                            {bruker.egenAnsatt === true ?
+                                <span className="etikett etikett--fokus">Egen ansatt</span> : null}
                         </td>
                     </tr>)}
                 </tbody>
