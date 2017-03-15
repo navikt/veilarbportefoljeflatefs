@@ -1,27 +1,51 @@
+import React, {PropTypes as PT, Component} from 'react';
+import { connect } from 'react-redux';
 import history from '../history';
-import { store } from '../index';
-import { settFiltervalg } from '../ducks/filtrering';
-import { velgEnhetForVeileder } from '../ducks/enheter';
-import { settValgtVeilederIKonstruktor } from '../ducks/utils';
+import {store} from '../index';
+import {settFiltervalg} from '../ducks/filtrering';
+import {velgEnhetForVeileder} from '../ducks/enheter';
+import {settValgtVeilederIKonstruktor} from '../ducks/utils';
 
 const settValgtEnhet = (enhetId) => {
     settValgtVeilederIKonstruktor(enhetId);
     store.dispatch(velgEnhetForVeileder(enhetId));
 };
 
-function TilbakenavigeringEnhet() {
-    const lagretState = JSON.parse(localStorage.previousEnhetState);
-
-    if (lagretState.path === '/veilarbportefoljeflatefs/veiledere') {
-        settValgtEnhet(lagretState.enheter.valgtEnhet.enhet.enhetId);
-        history.replace('/veiledere');
-    } else if (lagretState.path === '/veilarbportefoljeflatefs/enhet') {
-        settValgtEnhet(lagretState.enheter.valgtEnhet.enhet.enhetId);
-        store.dispatch(settFiltervalg(lagretState.filtrering.filtervalg));
-        history.replace('/enhet');
+class TilbakenavigeringEnhet extends Component {
+    componentWillMount(){
+        const { settLagredeFiltervalg, lagredeFiltervalg, lagretValgtEnhet } = this.props;
+        settLagredeFiltervalg(lagredeFiltervalg);
+        settValgtEnhet(lagretValgtEnhet);
+        this.sendUserToPreviousPage()
     }
 
-    return null;
+    sendUserToPreviousPage() {
+        const { lagretPath } = this.props;
+        console.log('lagretPath', lagretPath);
+        history.replace(lagretPath);
+    }
+
+    render() {
+        return null;
+    }
 }
 
-export default TilbakenavigeringEnhet;
+const mapToProps = () => ({
+    lagredeFiltervalg: JSON.parse(localStorage.previousEnhetState).filtrering.filtervalg,
+    lagretPath: JSON.parse(localStorage.previousEnhetState).path.split('/')[2],
+    lagretValgtEnhet: JSON.parse(localStorage.previousEnhetState).enheter.valgtEnhet.enhet
+});
+
+const mapDispatchToProps = dispatch => ({
+    velgEnhet: (enhet) => dispatch(settValgtEnhet(enhet)),
+    settLagredeFiltervalg: filtervalg => dispatch(settFiltervalg(filtervalg))
+});
+
+
+TilbakenavigeringEnhet.propTypes = {
+    lagredeFiltervalg: PT.object,
+    lagretPath: PT.String,
+    lagretValgtEnhet: PT.object
+};
+
+export default connect(mapToProps,mapDispatchToProps)(TilbakenavigeringEnhet);
