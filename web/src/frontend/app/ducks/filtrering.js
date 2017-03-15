@@ -58,7 +58,7 @@ export default function reducer(state = initialState, action) {
             return { ...state,
                 filtervalg: {
                     ...state.filtervalg,
-                    alder: parseInt(action.alder, 10) // radix parameter 10 for decimaltall
+                    alder: action.alder
                 }
             };
         case VALGT_KJONN:
