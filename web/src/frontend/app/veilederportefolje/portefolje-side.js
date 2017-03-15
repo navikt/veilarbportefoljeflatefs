@@ -28,12 +28,7 @@ function PortefoljeSide({ ident, veileder, brukere, veiledere, velgVeileder }) {
     return (
         <div>
             {annenVeilederVarsel}
-            <div className="portefolje-side panel">
-                <h1 className="typo-innholdstittel">
-                    <FormattedMessage
-                        id="veileder.portefolje.tittel"
-                    />
-                </h1>
+            <div className="portefolje-side">
                 <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel" >
                     {tildelVeilederVelger}
                 </Ekspanderbartpanel>

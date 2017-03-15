@@ -70,11 +70,6 @@ class EnhetSide extends Component {
 
         return (
             <div className="enhet-side">
-                <h1 className="typo-innholdstittel">
-                    <FormattedMessage
-                        id="enhet.valgt.tittel"
-                        values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
-                    /></h1>
                 <p className="typo-infotekst">
                     <FormattedMessage
                         id="enhet.valgt.infotekst"
