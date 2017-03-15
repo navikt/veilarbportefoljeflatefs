@@ -69,7 +69,7 @@ class EnhetSide extends Component {
             />);
 
         return (
-            <div className="enhet-side panel">
+            <div className="enhet-side">
                 <h1 className="typo-innholdstittel">
                     <FormattedMessage
                         id="enhet.valgt.tittel"
