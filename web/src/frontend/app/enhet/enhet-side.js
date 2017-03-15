@@ -2,6 +2,7 @@ import React, { PropTypes as PT, Component } from 'react';
 import queryString from 'query-string';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { velgEnhetForVeileder } from './../ducks/enheter';
 import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import { leggEnhetIUrl } from '../utils/utils';
@@ -80,8 +81,12 @@ class EnhetSide extends Component {
                         values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
                     />
                 </p>
-                <FiltreringOversikt />
-                {tildelVeilederVelger}
+                <Ekspanderbartpanel tittel="Status" tittelProps="systemtittel">
+                    <FiltreringOversikt />
+                </Ekspanderbartpanel>
+                <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
+                    {tildelVeilederVelger}
+                </Ekspanderbartpanel>
                 {enhetVelger}
                 <PortefoljeVisning />
             </div>

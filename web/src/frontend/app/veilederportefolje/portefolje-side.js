@@ -1,6 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import VeilederPortefoljeVisning from './veileder-portefolje-visning';
 import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
 import { veilederShape, brukerShape } from '../proptype-shapes';
@@ -33,7 +34,9 @@ function PortefoljeSide({ ident, veileder, brukere, veiledere, velgVeileder }) {
                         id="veileder.portefolje.tittel"
                     />
                 </h1>
-                {tildelVeilederVelger}
+                <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel" >
+                    {tildelVeilederVelger}
+                </Ekspanderbartpanel>
                 <VeilederPortefoljeVisning />
             </div>
         </div>
