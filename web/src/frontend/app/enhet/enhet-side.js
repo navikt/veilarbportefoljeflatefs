@@ -39,23 +39,6 @@ class EnhetSide extends Component {
 
         return (
             <div className="enhet-side panel">
-                <h1 className="typo-innholdstittel">
-                    <FormattedMessage
-                        id="enhet.valgt.tittel"
-                        values={{ enhetId: valgtEnhet.enhet.enhetId,
-                            enhetnavn: valgtEnhet.enhet.navn ?
-                                valgtEnhet.enhet.navn :
-                                enheter.find(enhet => enhet.enhetId === valgtEnhet.enhet.enhetId).navn }}
-                    /></h1>
-                <p className="typo-infotekst">
-                    <FormattedMessage
-                        id="enhet.valgt.infotekst"
-                        values={{ enhetId: valgtEnhet.enhet.enhetId,
-                            enhetnavn: valgtEnhet.enhet.navn ?
-                                valgtEnhet.enhet.navn :
-                                enheter.find(enhet => enhet.enhetId === valgtEnhet.enhet.enhetId).navn }}
-                    />
-                </p>
                 <FiltreringOversikt />
                 {tildelVeilederVelger}
                 <PortefoljeVisning />

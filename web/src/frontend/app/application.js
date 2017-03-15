@@ -8,7 +8,7 @@ import Lenker from './lenker/lenker';
 import DevTools from './devtools';
 import { hentEnheterForVeileder, velgEnhetForVeileder } from './ducks/enheter';
 import Innholdslaster from './innholdslaster/innholdslaster';
-import initialiserEventhandtering, { settEnhetIDekorator } from './eventhandtering';
+import rendreDekorator, { settEnhetIDekorator } from './eventhandtering';
 import { STATUS } from './ducks/utils';
 import { leggEnhetIUrl } from './utils/utils';
 
@@ -26,7 +26,7 @@ class Application extends Component {
     componentWillMount() {
         this.props.hentTekster();
         this.props.hentEnheter();
-        initialiserEventhandtering();
+        rendreDekorator();
     }
 
     finnInitiellEnhet() {
@@ -49,11 +49,15 @@ class Application extends Component {
         settEnhetIDekorator(initiellEnhet);
     }
 
-    render() {
-        const { ledetekster = {}, enheter, children, routes } = this.props;
-        if (enheter.status === STATUS.OK && enheter.valgtEnhet.status !== STATUS.OK) {
+    componentDidUpdate() {
+        const { enheter } = this.props;
+        if(enheter.status === STATUS.OK && enheter.valgtEnhet.status !== STATUS.OK) {
             this.oppdaterDekoratorMedInitiellEnhet();
         }
+    }
+
+    render() {
+        const { ledetekster = {}, enheter, children, routes } = this.props;
         return (
             <IntlProvider
                 defaultLocale="nb"
