@@ -3,12 +3,12 @@ import { Infotekst } from 'nav-frontend-typografi';
 
 function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse }) {
     function createSimpleLink(fraIndeks, tilIndeks, linkTekst) {
-        return (<Infotekst><a
+        return (<Infotekst><button
             href="" onClick={(e) => {
                 e.preventDefault();
                 hentListe(fraIndeks, tilIndeks);
             }}
-        >{linkTekst}</a></Infotekst>);
+        >{linkTekst}</button></Infotekst>);
     }
 
     const fraIndeksForrigeSide = fraIndex - sideStorrelse < 0 ? fraIndex : fraIndex - sideStorrelse;
@@ -26,28 +26,28 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
             <div className="bytt-side">
                 {createSimpleLink(0, antallTotalt, 'Se alle')}
                 {fraIndex === 0 ?
-                    <Infotekst><a
+                    <Infotekst><button
                         href="" className="not-active" onClick={(e) => {
                             e.preventDefault();
                             hentListe(fraIndeksForrigeSide, sideStorrelse);
                         }}
-                    >{'<'}</a></Infotekst> :
+                    >{'<'}</button></Infotekst> :
                         createSimpleLink(fraIndeksForrigeSide, sideStorrelse, '<')
                     }
                 {fraIndex === 0 ? null :
                         createSimpleLink(0, sideStorrelse, '1')
                     }
-                <Infotekst ><b>{((fraIndex / sideStorrelse) + 1)}</b></Infotekst>
+                <Infotekst ><button><b>{((fraIndex / sideStorrelse) + 1)}</b></button></Infotekst>
                 {fraIndex === fraIndeksSisteSide ? null :
                         createSimpleLink(fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt / sideStorrelse))
                     }
                 {fraIndex === fraIndeksSisteSide ?
-                    <Infotekst><a
+                    <Infotekst><button
                         href="" className="not-active" onClick={(e) => {
                             e.preventDefault();
                             hentListe(fraIndeksSisteSide, sideStorrelse);
                         }}
-                    >{'>'}</a></Infotekst> :
+                    >{'>'}</button></Infotekst> :
                         createSimpleLink(fraIndeksSisteSide, sideStorrelse, '>')
                     }
             </div>

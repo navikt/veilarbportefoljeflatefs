@@ -7,7 +7,7 @@
     float: right;
 
     p {
-        background-color: #ffffff;
+        background-color: @white;
         margin: 1px;
         display: inline-block;
         padding: 4px 10px;
@@ -20,16 +20,17 @@
         border-bottom-right-radius: 2px;
         border-top-right-radius: 2px;
     }
-    a {
+    button {
+        border: none;
+        background-color: @white;
         color: #3e3832;
-        border-bottom: none;
     }
-    a.not-active {
+    button.not-active {
         pointer-events: none;
         cursor: default;
         color: lightgray;
     }
-    a.bold {
+    button.bold {
         font-weight: bold;
     }
 }
