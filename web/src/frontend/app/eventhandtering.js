@@ -24,7 +24,6 @@ const getConfig = (initiellEnhet = undefined) => {
                 visSokefelt: true,
                 visSaksbehandler: true
             },
-            fnr: '12345678901',
             handleChangeEnhet,
             initiellEnhet,
             applicationName: 'Oppfølging'
