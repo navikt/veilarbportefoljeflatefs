@@ -7,6 +7,14 @@ export function erDev() {
         || url.includes('devillo.no:9593') || url.includes('localhost:');
 }
 
+export function range(start, end, inclusive = false) {
+    return new Array((end - start) + ((inclusive) ? 1 : 0)).fill(0).map((_, i) => start + i);
+}
+
+export function lag2Sifret(n) {
+    return n < 10 ? `0${n}` : `${n}`;
+}
+
 export function leggEnhetIUrl(enhet) { // eslint-disable-line consistent-return
     if (!enhet) return null;
     const parsed = queryString.parse(location.search);

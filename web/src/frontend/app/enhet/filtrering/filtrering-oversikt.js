@@ -16,6 +16,7 @@ class FiltreringOversikt extends Component {
 
     render() {
         const { filtervalg } = this.props;
+
         const checkboxNyeBrukere = (<div className="nav-input">
             <input
                 className="nav-checkbox"
@@ -28,6 +29,7 @@ class FiltreringOversikt extends Component {
                 <FormattedMessage id="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox" />
             </label>
         </div>);
+
         const checkboxInaktiveBrukere = (<div className="nav-input">
             <input
                 className="nav-checkbox"
@@ -40,6 +42,7 @@ class FiltreringOversikt extends Component {
                 <FormattedMessage id="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox" />
             </label>
         </div>);
+
         return (
             <div className="filtrering-oversikt panel panel-ramme blokk-m">
                 {checkboxNyeBrukere}
