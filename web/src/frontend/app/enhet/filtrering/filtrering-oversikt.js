@@ -2,6 +2,7 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { endreFiltervalg, hentPortefoljeForEnhet } from '../../ducks/filtrering';
+import { eksporterEnhetsportefoljeTilLocalStorage } from '../../ducks/utils';
 
 class FiltreringOversikt extends Component {
     constructor(props) {
@@ -10,7 +11,9 @@ class FiltreringOversikt extends Component {
     }
 
     componentDidUpdate() {
+        const { filtervalg, valgtEnhet } = this.props;
         this.oppdaterDatagrunnlag();
+        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
     }
 
     handleChange(e) {

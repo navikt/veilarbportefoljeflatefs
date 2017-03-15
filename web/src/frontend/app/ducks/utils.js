@@ -1,5 +1,3 @@
-import { store } from '../index';
-
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
     PENDING: 'PENDING',
@@ -69,21 +67,11 @@ export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
     };
 }
 
-export function eksporterEnhetsportefoljeTilLocalStorage() {
-    const objectToStore = { ...store.getState(), path: location.pathname };
-    localStorage.setItem('previousEnhetState', JSON.stringify(objectToStore));
+export function eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, path) {
+    localStorage.setItem('previousEnhetState', JSON.stringify({ filtervalg, valgtEnhet, path }));
 }
 
-export function eksporterVeilederportefoljeTilLocalStorage() {
-    const objectToStore = { ...store.getState(), path: location.pathname };
-    localStorage.setItem('previousVeilederState', JSON.stringify(objectToStore));
-}
-
-export function settValgtVeilederIKonstruktor(enhetId) {
-    const htmlEnhetVelger = document.getElementById('dekorator-select-enhet');
-
-    if (htmlEnhetVelger) {
-        htmlEnhetVelger.value = enhetId;
-    }
+export function eksporterVeilederportefoljeTilLocalStorage(state) {
+    localStorage.setItem('previousVeilederState', JSON.stringify(state));
 }
 

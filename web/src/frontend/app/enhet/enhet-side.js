@@ -5,6 +5,8 @@ import { veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import { tildelVeileder } from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
+import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
+
 
 import FiltreringOversikt from './filtrering/filtrering-oversikt';
 
@@ -12,6 +14,10 @@ class EnhetSide extends Component {
     componentWillMount() {
         const { valgtEnhet, hentVeiledere } = this.props;
         hentVeiledere(valgtEnhet.enhet.enhetId);
+    }
+    componentDidUpdate() {
+        const { filtervalg, valgtEnhet } = this.props;
+        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet.enhet, location.pathname);
     }
     render() {
         const {
@@ -49,6 +55,7 @@ EnhetSide.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
     valgtEnhet: PT.object,
+    filtervalg: PT.object,
     valgtVeileder: PT.object,
     velgVeileder: PT.func.isRequired,
     hentVeiledere: PT.func.isRequired
@@ -58,7 +65,8 @@ const mapStateToProps = state => ({
     veiledere: state.veiledere.data.veilederListe,
     brukere: state.portefolje.data.brukere,
     valgtVeileder: state.enheter.valgtVeileder,
-    valgtEnhet: state.enheter.valgtEnhet
+    valgtEnhet: state.enheter.valgtEnhet,
+    filtervalg: state.filtrering.filtervalg
 });
 
 const mapDispatchToProps = dispatch => ({

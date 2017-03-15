@@ -12,7 +12,8 @@ import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 
 class VeilederTabell extends Component {
     componentDidMount() {
-        eksporterEnhetsportefoljeTilLocalStorage();
+        const { valgtEnhet, filtervalg } = this.props;
+        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
     }
 
     settValgtVeileder(veileder) {
@@ -69,11 +70,18 @@ VeilederTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape),
     settVeileder: PT.func.isRequired,
     portefoljestorrelser: PT.arrayOf(PT.object).isRequired,
-    sorterPaaEtternavn: PT.func.isRequired
+    sorterPaaEtternavn: PT.func.isRequired,
+    valgtEnhet: PT.object,
+    filtervalg: PT.object
 };
+
+const mapStateToProps = state => ({
+    valgtEnhet: state.enheter.valgtEnhet.enhet,
+    filtervalg: state.filtrering.filtervalg
+});
 
 const mapDispatchToProps = dispatch => ({
     settVeileder: veileder => dispatch(settValgtVeileder(veileder))
 });
 
-export default connect(() => ({}), mapDispatchToProps)(VeilederTabell);
+export default connect(mapStateToProps, mapDispatchToProps)(VeilederTabell);

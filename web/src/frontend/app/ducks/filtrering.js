@@ -1,5 +1,5 @@
 import * as Api from './../middleware/api';
-import { doThenDispatch, eksporterEnhetsportefoljeTilLocalStorage } from './utils';
+import { doThenDispatch } from './utils';
 
 
 // Actions
@@ -66,7 +66,6 @@ export function endreFiltervalg(filterId, filtervalg) { // eslint-disable-line c
     } else if (filterId === 'checkbox-filtrering-oversikt-inaktive-brukere') {
         return { type: filtervalg ? VALGT_INAKTIVE_BRUKERE : AVVALGT_INAKTIVE_BRUKERE };
     }
-    eksporterEnhetsportefoljeTilLocalStorage();
 }
 
 export function settFiltervalg(filtervalg) {
