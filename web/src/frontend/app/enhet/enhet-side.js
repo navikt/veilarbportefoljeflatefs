@@ -9,7 +9,7 @@ import EnhetVelger from './enhet-velger';
 import TildelVeilederVelger from './tildel-veileder-velger';
 import { enhetShape, veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
-import Nedrekksliste from '../components/nedtrekksliste';
+import Nedtrekksliste from '../components/nedtrekksliste';
 import FiltreringOversikt from './filtrering/filtrering-oversikt';
 import { tildelVeileder } from '../ducks/portefolje';
 
@@ -84,7 +84,15 @@ class EnhetSide extends Component {
                 <FiltreringOversikt />
                 {tildelVeilederVelger}
                 {enhetVelger}
-                <Nedrekksliste />
+                <Nedtrekksliste
+                    liste={veiledere.map(veileder => ({
+                        key: veileder.ident,
+                        value: veileder.navn,
+                        checked: false
+                    }))}
+                    listeLength={veiledere.length}
+                    submitValgt={() => { }}
+                />
                 <PortefoljeVisning />
             </div>
         );
