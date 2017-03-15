@@ -4,6 +4,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { veilederShape, brukerShape } from '../proptype-shapes';
+import { markerAlleBrukere } from './../ducks/portefolje';
 
 class PortefoljeTabell extends Component {
 
@@ -16,14 +17,22 @@ class PortefoljeTabell extends Component {
     }
 
     render() {
-        const { brukere, veiledere } = this.props;
+        const { brukere, veiledere, settSomMarkertAlle, settSomMarkert } = this.props;
+
+        const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
         return (
             <table className="tabell portefolje-tabell" tabIndex="0">
                 <thead>
                     <tr>
                         <th>
                             <div className="nav-input">
-                                <input className="nav-checkbox" id="checkbox-alle-brukere" type="checkbox" />
+                                <input
+                                    className="nav-checkbox"
+                                    id="checkbox-alle-brukere"
+                                    type="checkbox"
+                                    checked={alleMarkert}
+                                    onClick={() => settSomMarkertAlle(!alleMarkert)}
+                                />
                                 <label htmlFor="checkbox-alle-brukere" />
                             </div>
                         </th>
@@ -53,7 +62,7 @@ class PortefoljeTabell extends Component {
                                     id={`checkbox-${bruker.fnr}`}
                                     type="checkbox"
                                     checked={!!bruker.markert}
-                                    onClick={() => this.props.settSomMarkert(bruker.fnr, !bruker.markert)}
+                                    onClick={() => settSomMarkert(bruker.fnr, !bruker.markert)}
                                 />
                                 <label htmlFor={`checkbox-${bruker.fnr}`} />
                             </div>
@@ -93,11 +102,16 @@ PortefoljeTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
     settSorteringForPortefolje: PT.func.isRequired,
-    settSomMarkert: PT.func.isRequired
+    settSomMarkert: PT.func.isRequired,
+    settSomMarkertAlle: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
     portefolje: state.portefolje
 });
 
-export default connect(mapStateToProps)(PortefoljeTabell);
+const mapDispatchToProps = dispatch => ({
+    settSomMarkertAlle: markert => dispatch(markerAlleBrukere(markert))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeTabell);
