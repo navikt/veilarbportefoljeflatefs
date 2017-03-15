@@ -16,6 +16,19 @@ const handleChangeEnhet = (enhet) => {
 };
 
 const getConfig = (initiellEnhet = undefined) => {
+    const lenker =
+        {
+            lenker:
+            [
+                    ['/mia', 'Arbeidsmarkedet'],
+                    ['/enhet/', 'Enhetsportefolje'],
+                    ['/portefolje', 'Veilederportefølje'],
+                    ['/modiabrukerdialog', 'Modia']
+            ],
+            tittel:
+                ''
+        };
+
     const config = {
         config: {
             toggles: {
@@ -26,6 +39,7 @@ const getConfig = (initiellEnhet = undefined) => {
             },
             handleChangeEnhet,
             initiellEnhet,
+            egendefinerteLenker: lenker,
             applicationName: 'Oppfølging'
         }
     };
