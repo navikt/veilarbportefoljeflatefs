@@ -12,16 +12,23 @@ setup-scriptet er testet i cygwin og gitbash
 ./.githooks/.setup.sh
 ```
 
-## Kjøre applikasjonen
+## Kjøre applikasjonen lokalt
 
-Scriptet kaller veilarbportefolje og veilarbveileder, som også må startes lokalt. For å muliggjøre kall på tvers av domener må chrome startes med følgende flagg: --disable-web-security --user-data-dir
+Systemet er bygget opp som et mikroarkitektursystem, og er avhengig av 6 ulike applikasjoner:
+```
+veilarbportefoljeflatefs
+veilarbportefoljeflatefs-tekster
+veilarbportefolje
+veilarbveileder
+veilarbportefoljeindeks
+veilarbsituasjon
+```
+Disse 6 applikasjonene må klones med `git clone` og bygges med `mvn clean install` ved første gangs bruk, og deretter sporadisk. OBS: `veilarbportefoljeflatefs-tekster` må bygges før `veilarbportefoljeflatefs` kjøres opp.
 
-For å hente enheter må man velge en ident, dette velges ved å skrive identen sist i url-en, eks *?A118889*. 
+Klientkoden i `veilarbportefoljeflatefs` transpileres og bundles ved hjelp av gulp og browserify. Dette kan gjøres ved å stå i `veilarbportefoljeflatefs/web/src/frontend` og kjøre `npm run build`. Evt kan man kjøre en watcher med kommandoen `gulp watch`. Merk at `npm run build` kjøres sammen med `mvn clean install`, så den trenger ikke å kjøres i tillegg.
 
-Ident med én enhet: A118889
-Ident med flere enheter: B900001
+For å muliggjøre kall på tvers av domener må chrome startes med følgende flagg: --disable-web-security --user-data-dir. Dette gjøres ved å høyreklikke på chrome, gå til fanen snarvei, og legge til flaggene under mål. Eks: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir. Merk at chrome skal gi beskjed om at disse flaggene er satt når nettleseren åpnes på nytt.
 
-### URL for å åpne applikasjonen: 
-
-`https://<hostname>.devillo.no:9592/veilarbportefoljeflatefs/enhet?ident=A118889`
-`https://<hostname>.devillo.no:9592/veilarbportefoljeflatefs/enhet?ident=B900001`
+For å åpne applikasjonen i nettleseren, gå til `https://localhost:9592/veilarbportefoljeflatefs/enhet`.
+Brukernavn: Z990610
+Passord: 

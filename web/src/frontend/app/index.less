@@ -1,3 +1,5 @@
+@coreModulePath: './../../../node_modules';
+@nodeModulesPath: './../../../node_modules';
 @modig-frontend-root-url: "./node_modules/modig-frontend/modig-frontend-ressurser/src/main/resources";
 @imgDir: "./../img";
 
@@ -26,18 +28,18 @@ html {
     height:100%;
 }
 
-
 .veilarbportefoljeflatefs {
     @import "@{modig-frontend-root-url}/less/nav_extra/paneler";
     @import "@{modig-frontend-root-url}/less/decorator/grid";
     @import "@{modig-frontend-root-url}/less/nav_extra/lenker";
     @import "@{modig-frontend-root-url}/less/nav_extra/utilities";
     @import "@{modig-frontend-root-url}/less/nav_extra/skjema";
-    @import "@{modig-frontend-root-url}/less/nav_extra/knapper";
+    @import "./node_modules/nav-frontend-etiketter-style/src/index";
+    @import "./node_modules/nav-frontend-etiketter-style/src/_mixins";
+    @import "./node_modules/nav-frontend-etiketter-style/src/_mixins";
     @import "./lenker/lenker";
     @import "./paginering/paginering";
     @import "./components/nedtrekksliste";
     @import "./enhetsportefolje/enhetsportefolje";
     @import "./veiledere/veiledere";
 }
-

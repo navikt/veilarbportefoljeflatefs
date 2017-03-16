@@ -66,3 +66,12 @@ export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
             .catch(handterFeil(dispatch, FEILET));
     };
 }
+
+export function eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, path) {
+    localStorage.setItem('previousEnhetState', JSON.stringify({ filtervalg, valgtEnhet, path }));
+}
+
+export function eksporterVeilederportefoljeTilLocalStorage(state) {
+    localStorage.setItem('previousVeilederState', JSON.stringify(state));
+}
+
