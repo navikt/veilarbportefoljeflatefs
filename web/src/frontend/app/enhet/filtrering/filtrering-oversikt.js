@@ -44,7 +44,7 @@ class FiltreringOversikt extends Component {
         </div>);
 
         return (
-            <div className="filtrering-oversikt panel panel-ramme blokk-m">
+            <div className="filtrering-oversikt panel blokk-m">
                 {checkboxNyeBrukere}
                 {checkboxInaktiveBrukere}
             </div>

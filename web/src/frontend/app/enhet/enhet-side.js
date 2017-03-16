@@ -76,9 +76,7 @@ class EnhetSide extends Component {
                         values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
                     />
                 </p>
-                <Ekspanderbartpanel tittel="Status" tittelProps="systemtittel">
-                    <FiltreringContainer />
-                </Ekspanderbartpanel>
+                <FiltreringContainer />
                 <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
                     {tildelVeilederVelger}
                 </Ekspanderbartpanel>
