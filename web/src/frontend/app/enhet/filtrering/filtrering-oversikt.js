@@ -2,11 +2,17 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { endreFiltervalg } from '../../ducks/filtrering';
+import { eksporterEnhetsportefoljeTilLocalStorage } from '../../ducks/utils';
 
 class FiltreringOversikt extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidUpdate() {
+        const { filtervalg, valgtEnhet } = this.props;
+        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
     }
 
     handleChange(e) {
@@ -54,11 +60,13 @@ class FiltreringOversikt extends Component {
 
 FiltreringOversikt.propTypes = {
     endreFilter: PT.func.isRequired,
-    filtervalg: PT.object
+    filtervalg: PT.object,
+    valgtEnhet: PT.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    filtervalg: state.filtrering.filtervalg
+    filtervalg: state.filtrering.filtervalg,
+    valgtEnhet: state.enheter.valgtEnhet.enhet.enhetId
 });
 
 const mapDispatchToProps = dispatch => ({

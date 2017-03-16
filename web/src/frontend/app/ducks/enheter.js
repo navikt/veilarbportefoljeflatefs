@@ -11,7 +11,10 @@ const VELG_ENHET = 'VELG_ENHET';
 
 const initialState = {
     data: [],
-    valgtEnhet: undefined,
+    valgtEnhet: {
+        status: STATUS.NOT_STARTED,
+        enhet: undefined
+    },
     ident: queryString.parse(location.search).ident
 };
 
@@ -25,7 +28,9 @@ export default function reducer(state = initialState, action) {
         case OK:
             return { ...state, status: STATUS.OK, data: action.data.enhetliste, ident: action.data.ident };
         case VELG_ENHET:
-            return { ...state, valgtEnhet: action.valgtEnhet };
+            return { ...state,
+                valgtEnhet: { enhet: action.valgtEnhet,
+                    status: STATUS.OK } };
         default:
             return state;
     }
@@ -41,7 +46,7 @@ export function hentEnheterForVeileder() {
 }
 
 export function velgEnhetForVeileder(valgtEnhet) {
-    leggEnhetIUrl(valgtEnhet);
+    leggEnhetIUrl(valgtEnhet.enhetId ? valgtEnhet.enhetId : valgtEnhet);
     return {
         type: VELG_ENHET,
         valgtEnhet

@@ -9,6 +9,7 @@ export const VALGT_NYE_BRUKERE = 'VALGT_NYE_BRUKERE';
 export const AVVALGT_NYE_BRUKERE = 'AVVALGT_NYE_BRUKERE';
 export const VALGT_INAKTIVE_BRUKERE = 'VALGT_INAKTIVE_BRUKERE';
 export const AVVALGT_INAKTIVE_BRUKERE = 'AVVALGT_INAKTIVE_BRUKERE';
+export const SETT_FILTERVALG = 'SETT_FILTERVALG';
 export const ENDRET_ALDER = 'ENDRET_ALDER';
 export const VALGT_KJONN = 'VALGT_KJONN';
 export const VALGT_FODSELSDAG = 'VALGT_FODSELSDAG';
@@ -75,6 +76,10 @@ export default function reducer(state = initialState, action) {
                     fodselsdagIMnd: action.fodselsdagIMnd
                 }
             };
+        case SETT_FILTERVALG:
+            return { ...state,
+                filtervalg: action.filtervalg
+            };
         default:
             return state;
     }
@@ -94,6 +99,14 @@ export function endreFiltervalg(filterId, filtervalg) { // eslint-disable-line c
         return { type: VALGT_FODSELSDAG, fodselsdagIMnd: filtervalg };
     }
 }
+
+export function settFiltervalg(filtervalg) {
+    return {
+        type: SETT_FILTERVALG,
+        filtervalg
+    };
+}
+
 
 export function hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, filtervalg) {
     return doThenDispatch(() =>
