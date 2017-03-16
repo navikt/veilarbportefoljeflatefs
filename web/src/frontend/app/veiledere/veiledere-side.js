@@ -37,7 +37,7 @@ class VeiledereSide extends Component {
         const { facetResults } = portefoljestorrelser.data;
 
         return (
-            <div className="veiledere-side panel">
+            <div className="veiledere-side">
                 <EnhetVelger
                     enheter={enhetsListe} valgtEnhet={valgtEnhet} velgEnhet={(enhet) => {
                         velgEnhet(enhet);
