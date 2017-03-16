@@ -1,14 +1,17 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { veiledereShape, enhetShape, portefoljestorrelserShape, veilederShape } from './../proptype-shapes';
+import {
+    veiledereShape,
+    portefoljestorrelserShape,
+    veilederShape,
+    valgtEnhetShape
+} from './../proptype-shapes';
 import VeiledereTabell from './veiledere-tabell';
-import { hentVeiledereForEnhet } from './../ducks/veiledere';
-import { hentPortefoljeStorrelser } from './../ducks/portefoljestorrelser';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { velgEnhetForVeileder } from './../ducks/enheter';
-import EnhetVelger from './../enhet/enhet-velger';
 import PagineringForvalter from '../paginering/pagineringforvalter';
 import { settSorteringRekkefolge, settSubListeForPaginering } from '../ducks/paginering';
+import { hentVeiledereForEnhet } from '../ducks/veiledere';
+import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 
 export function compareEtternavn(a, b) {
     const aUpper = a.etternavn.toUpperCase();
@@ -23,28 +26,19 @@ export function compareEtternavn(a, b) {
 }
 
 class VeiledereSide extends Component {
-
     componentWillMount() {
-        this.props.hentVeiledere(this.props.valgtEnhet.enhetId);
-        this.props.hentPortefoljestorrelser(this.props.valgtEnhet.enhetId);
+        const { hentVeiledere, hentPortefoljestorrelser, valgtEnhet } = this.props;
+        hentVeiledere(valgtEnhet.enhet.enhetId);
+        hentPortefoljestorrelser(valgtEnhet.enhet.enhetId);
     }
-
     render() {
-        const { veiledere, enhetsListe, valgtEnhet, hentVeiledere, velgEnhet, portefoljestorrelser,
-            hentPortefoljestorrelser, veiledereSomSkalVises, sorterPaaEtternavn,
+        const { veiledere, portefoljestorrelser, veiledereSomSkalVises, sorterPaaEtternavn,
             currentSorteringsRekkefolge } = this.props;
         const { veilederListe } = veiledere.data;
         const { facetResults } = portefoljestorrelser.data;
 
         return (
-            <div className="veiledere-side">
-                <EnhetVelger
-                    enheter={enhetsListe} valgtEnhet={valgtEnhet} velgEnhet={(enhet) => {
-                        velgEnhet(enhet);
-                        hentVeiledere(enhet.enhetId);
-                        hentPortefoljestorrelser(enhet.enhetId);
-                    }}
-                />
+            <div className="veiledere-side panel">
                 <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
                     <PagineringForvalter
                         liste={veilederListe}
@@ -66,22 +60,19 @@ VeiledereSide.propTypes = {
     veiledere: PT.shape({
         data: veiledereShape.isRequired
     }).isRequired,
-    hentVeiledere: PT.func.isRequired,
-    enhetsListe: PT.arrayOf(enhetShape).isRequired,
-    valgtEnhet: enhetShape.isRequired,
-    velgEnhet: PT.func.isRequired,
-    hentPortefoljestorrelser: PT.func.isRequired,
     portefoljestorrelser: PT.shape({
         data: portefoljestorrelserShape.isRequired
     }).isRequired,
     veiledereSomSkalVises: PT.arrayOf(veilederShape).isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
-    currentSorteringsRekkefolge: PT.string.isRequired
+    hentVeiledere: PT.func.isRequired,
+    hentPortefoljestorrelser: PT.func.isRequired,
+    currentSorteringsRekkefolge: PT.string.isRequired,
+    valgtEnhet: valgtEnhetShape.isRequired
 };
 
 const mapStateToProps = state => ({
     veiledere: state.veiledere,
-    enhetsListe: state.enheter.data,
     valgtEnhet: state.enheter.valgtEnhet,
     veiledereSomSkalVises: state.paginering.subListe,
     portefoljestorrelser: state.portefoljestorrelser,
@@ -90,7 +81,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId)),
-    velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet)),
     hentPortefoljestorrelser: enhetId => dispatch(hentPortefoljeStorrelser(enhetId)),
     sorterPaaEtternavn: (sorteringsFunksjon, sorteringsRekkefolge) => {
         dispatch(settSorteringRekkefolge(sorteringsFunksjon, sorteringsRekkefolge));

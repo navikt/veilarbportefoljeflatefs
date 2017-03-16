@@ -8,7 +8,7 @@ const OUTPUT_DIRECTORY = constants.OUTPUT_DIRECTORY;
 
 process.env.NODE_ENV = gutil.env.prod != null ? 'production' : 'development';
 
-gulp.task('build-html', require('./gulp/build-html').buildHtml(gulp));
+gulp.task('build-html', require('./gulp/build-html').buildHtml(gulp,isProduction));
 gulp.task('build-less', require('./gulp/build-less')(gulp));
 gulp.task('build-js', require('./gulp/build-js').buildJs(gulp));
 gulp.task('build-js-watchify', require('./gulp/build-js').buildJsWatchify(gulp));

@@ -6,8 +6,12 @@ import queryString from 'query-string';
 import { hentLedetekster } from './ducks/ledetekster';
 import Lenker from './lenker/lenker';
 import DevTools from './devtools';
-import { hentEnheterForVeileder } from './ducks/enheter';
+import { hentEnheterForVeileder, velgEnhetForVeileder } from './ducks/enheter';
 import Innholdslaster from './innholdslaster/innholdslaster';
+import rendreDekorator, { settEnhetIDekorator } from './eventhandtering';
+import { STATUS } from './ducks/utils';
+import { leggEnhetIUrl } from './utils/utils';
+
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(location.search).visTekster;
@@ -17,16 +21,43 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     return ledetekster;
 }
 
-
 addLocaleData(nb);
 class Application extends Component {
     componentWillMount() {
         this.props.hentTekster();
         this.props.hentEnheter();
+        rendreDekorator();
+    }
+
+    componentDidUpdate() {
+        const { enheter } = this.props;
+        if (enheter.status === STATUS.OK && enheter.valgtEnhet.status !== STATUS.OK) {
+            this.oppdaterDekoratorMedInitiellEnhet();
+        }
+    }
+
+    finnInitiellEnhet() {
+        const { enheter } = this.props;
+
+        const enhetliste = enheter.data;
+        const enhetFraUrl = queryString.parse(location.search).enhet;
+        const initiellEnhet = enhetliste
+            .map(enhet => (enhet.enhetId))
+            .includes(enhetFraUrl) ? enhetFraUrl : enhetliste[0].enhetId;
+
+        leggEnhetIUrl(initiellEnhet);
+        return initiellEnhet;
+    }
+
+    oppdaterDekoratorMedInitiellEnhet() {
+        const { velgEnhet } = this.props;
+        const initiellEnhet = this.finnInitiellEnhet();
+        velgEnhet(initiellEnhet);
+        settEnhetIDekorator(initiellEnhet);
     }
 
     render() {
-        const { ledetekster = {}, enheter = {}, children, routes } = this.props;
+        const { ledetekster = {}, enheter, children, routes } = this.props;
         return (
             <IntlProvider
                 defaultLocale="nb"
@@ -34,7 +65,7 @@ class Application extends Component {
                 messages={mapTeksterTilNokkelDersomAngitt(ledetekster.data.nb)}
             >
                 <div className="portefolje">
-                    <Innholdslaster avhengigheter={[ledetekster, enheter]}>
+                    <Innholdslaster avhengigheter={[ledetekster, enheter, enheter.valgtEnhet]}>
                         <div className="container maincontent side-innhold">
                             <Lenker routes={routes} />
                             {children}
@@ -53,6 +84,7 @@ Application.propTypes = {
     children: PT.object,
     routes: PT.arrayOf(PT.object),
     hentTekster: PT.func.isRequired,
+    velgEnhet: PT.func.isRequired,
     hentEnheter: PT.func.isRequired,
     ledetekster: PT.object,
     enheter: PT.object
@@ -65,7 +97,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     hentTekster: () => dispatch(hentLedetekster()),
-    hentEnheter: ident => dispatch(hentEnheterForVeileder(ident))
+    hentEnheter: ident => dispatch(hentEnheterForVeileder(ident)),
+    velgEnhet: enhetid => dispatch(velgEnhetForVeileder({ enhetId: enhetid }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application);
