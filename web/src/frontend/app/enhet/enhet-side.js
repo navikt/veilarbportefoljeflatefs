@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import TildelVeilederVelger from './tildel-veileder-velger';
 import { veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
+import FiltreringContainer from './filtrering/filtrering-container';
 import { tildelVeileder } from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
-
-
-import FiltreringOversikt from './filtrering/filtrering-oversikt';
 
 class EnhetSide extends Component {
     componentWillMount() {
@@ -43,7 +41,7 @@ class EnhetSide extends Component {
 
         return (
             <div className="enhet-side panel">
-                <FiltreringOversikt />
+                <FiltreringContainer />
                 {tildelVeilederVelger}
                 <PortefoljeVisning />
             </div>

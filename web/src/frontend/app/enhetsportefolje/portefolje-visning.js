@@ -25,8 +25,7 @@ class PortefoljeVisning extends Component {
             sorteringsrekkefolge,
             fraIndex,
             antall,
-            filtervalg.nyeBrukere,
-            filtervalg.inaktiveBrukere
+            filtervalg
         );
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
@@ -48,8 +47,7 @@ class PortefoljeVisning extends Component {
             valgtRekkefolge,
             fraIndex,
             antall,
-            filtervalg.nyeBrukere,
-            filtervalg.inaktiveBrukere
+            filtervalg
         );
     }
 
@@ -93,8 +91,7 @@ class PortefoljeVisning extends Component {
                             sorteringsrekkefolge,
                             fra,
                             antall,
-                            filtervalg.nyeBrukere,
-                            filtervalg.inaktiveBrukere
+                            filtervalg
                         )}
                     tekst={pagineringTekst}
                     sideStorrelse={20}
