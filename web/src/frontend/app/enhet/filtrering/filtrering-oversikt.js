@@ -11,6 +11,7 @@ class FiltreringOversikt extends Component {
     }
 
     componentDidUpdate() {
+        const { filtervalg, valgtEnhet } = this.props;
         eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
     }
 
@@ -59,7 +60,8 @@ class FiltreringOversikt extends Component {
 
 FiltreringOversikt.propTypes = {
     endreFilter: PT.func.isRequired,
-    filtervalg: PT.object
+    filtervalg: PT.object,
+    valgtEnhet: PT.object.isRequired
 };
 
 const mapStateToProps = state => ({

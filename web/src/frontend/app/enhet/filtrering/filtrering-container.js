@@ -38,7 +38,7 @@ const mapStateToProps = state => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     fraIndex: state.portefolje.data.fraIndex,
     antall: state.paginering.sideStorrelse,
-    valgtEnhet: state.enheter.valgtEnhet.enhetId
+    valgtEnhet: state.enheter.valgtEnhet.enhet.enhetId
 });
 
 const mapDispatchToProps = dispatch => ({
