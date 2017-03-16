@@ -6,7 +6,7 @@ import FiltreringFodselsdag from './filtrering-demografi-fodselsdag';
 
 function Demografi({ filtervalg, handleChange }) {
     return (
-        <div className="filtrering-demografi panel panel-ramme blokk-m">
+        <div className="filtrering-demografi panel blokk-m">
             <FiltreringAlder
                 filtervalg={filtervalg}
                 handleChange={handleChange}
