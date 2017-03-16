@@ -8,8 +8,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
         constructor(props) {
             super(props);
             this.state = {
-                index: 0,
-                checked: []
+                index: 0
             };
 
             let skjulHvisKlikkUtenfor = (e) => {
@@ -28,8 +27,6 @@ function nedtrekkslisteWrapper(ListeComponent) {
             };
             skjulHvisKlikkUtenfor = skjulHvisKlikkUtenfor.bind(this);
             document.querySelector('body').addEventListener('click', skjulHvisKlikkUtenfor);
-
-            this.handleChange = this.handleChange.bind(this);
         }
 
         componentDidMount() {
@@ -64,26 +61,8 @@ function nedtrekkslisteWrapper(ListeComponent) {
             this.hideDialog();
         }
 
-        onSubmit(e) {
-            e.preventDefault();
-            this.props.submitValgt(this.props.liste.filter((listeElement, i) => this.state.checked[i] === true));
-        }
-
-        handleChange(e) {
-            this.props.liste[Number(e.target.value)].checked = e.target.checked;
-           /* this.setState({
-                checked: this.state.checked.map((choice, i) => {
-                    if (i === Number(e.target.value)) {
-                        return e.target.checked;
-                    }
-                    return choice;
-                })
-            });*/
-        }
-
         noeErChecked() {
             return this.props.liste.some(listeElement => listeElement.checked === true);
-            // return this.state.checked.includes(true);
         }
 
         toggleDialog(e) { // eslint-disable-line class-methods-use-this
@@ -108,7 +87,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
         render() {
             const knapp = () => (
                 this.noeErChecked() ?
-                    <Hovedknapp onClick={this.onSubmit}>Velg</Hovedknapp> :
+                    <Hovedknapp onClick={this.props.onSubmit}>Velg</Hovedknapp> :
                     <Knapp onClick={this.toggleDialog}>Lukk</Knapp>
             );
 
@@ -117,7 +96,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
                     <button className="nedtrekksliste-toggle" onClick={this.toggleDialog}>Søk veileder(e)</button>
                     <div className="nedtrekksliste">
                         <form>
-                            <ListeComponent liste={this.props.liste} handleChange={this.handleChange} />
+                            <ListeComponent liste={this.props.liste} handleChange={this.props.handleChange} />
                         </form>
                         {knapp()}
                     </div>
@@ -132,7 +111,8 @@ function nedtrekkslisteWrapper(ListeComponent) {
             value: PT.string,
             checked: PT.bool
         })).isRequired,
-        submitValgt: PT.func.isRequired
+        handleChange: PT.func.isRequired,
+        onSubmit: PT.func.isRequired
     };
 
     return Nedtrekksliste;
