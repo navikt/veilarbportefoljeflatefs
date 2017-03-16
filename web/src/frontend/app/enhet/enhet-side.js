@@ -1,5 +1,7 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import { velgEnhetForVeileder } from './../ducks/enheter';
 import TildelVeilederVelger from './tildel-veileder-velger';
 import { veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
@@ -40,9 +42,11 @@ class EnhetSide extends Component {
             />);
 
         return (
-            <div className="enhet-side panel">
+            <div className="enhet-side">
                 <FiltreringContainer />
-                {tildelVeilederVelger}
+                <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
+                    {tildelVeilederVelger}
+                </Ekspanderbartpanel>
                 <PortefoljeVisning />
             </div>
         );

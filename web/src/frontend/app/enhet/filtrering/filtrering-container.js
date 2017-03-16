@@ -1,5 +1,6 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { hentPortefoljeForEnhet } from '../../ducks/filtrering';
 import FiltreringOversikt from './filtrering-oversikt';
 import FiltreringBrukere from './filtrering-filtrer-brukere';
@@ -17,8 +18,12 @@ class FiltreringContainer extends Component {
     render() {
         return (
             <div className="filtrering-container">
-                <FiltreringOversikt />
-                <FiltreringBrukere />
+                <Ekspanderbartpanel tittel="Status" tittelProps="systemtittel">
+                    <FiltreringOversikt />
+                </Ekspanderbartpanel>
+                <Ekspanderbartpanel tittel="Filter" tittelProps="systemtittel">
+                    <FiltreringBrukere />
+                </Ekspanderbartpanel>
             </div>
         );
     }
