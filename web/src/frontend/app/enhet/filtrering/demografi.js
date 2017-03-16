@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { PropTypes as PT } from 'react';
 
 import FiltreringAlder from './filtrering-demografi-alder';
 import FiltreringKjonn from './filtrering-demografi-kjonn';
 import FiltreringFodselsdag from './filtrering-demografi-fodselsdag';
 
-function Demografi(filtervalg, handleChange) {
+function Demografi({ filtervalg, handleChange }) {
     return (
         <div className="filtrering-demografi panel panel-ramme blokk-m">
             <FiltreringAlder
@@ -22,5 +22,10 @@ function Demografi(filtervalg, handleChange) {
         </div>
     );
 }
+
+Demografi.propTypes = {
+    filtervalg: PT.object,
+    handleChange: PT.func.isRequired
+};
 
 export default Demografi;

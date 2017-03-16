@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-function FiltreringKjonn(filtervalg, handleChange) {
+function FiltreringKjonn({ filtervalg, handleChange }) {
     return (
         <div className="select-container">
             <select // eslint-disable-line jsx-a11y/no-onchange
@@ -23,5 +23,10 @@ function FiltreringKjonn(filtervalg, handleChange) {
         </div>
     );
 }
+
+FiltreringKjonn.propTypes = {
+    filtervalg: PT.object,
+    handleChange: PT.func.isRequired
+};
 
 export default FiltreringKjonn;

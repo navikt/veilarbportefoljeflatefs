@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 const aldersIntervaller = [
@@ -25,7 +25,7 @@ const aldersOptions = [
     )
 ];
 
-function FiltreringAlder(filtervalg, handleChange) {
+function FiltreringAlder({ filtervalg, handleChange }) {
     return (
         <div className="select-container">
             <select // eslint-disable-line jsx-a11y/no-onchange
@@ -39,5 +39,10 @@ function FiltreringAlder(filtervalg, handleChange) {
         </div>
     );
 }
+
+FiltreringAlder.propTypes = {
+    filtervalg: PT.object,
+    handleChange: PT.func.isRequired
+};
 
 export default FiltreringAlder;
