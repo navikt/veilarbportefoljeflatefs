@@ -13,10 +13,10 @@ function FiltreringKjonn({ filtervalg, handleChange }) {
                 <FormattedMessage id="filtrering.filtrer-brukere.demografi.kjonn" key="kjonn-ikkeDefinert">
                     {text => <option value="ikke definert">{text}</option>}
                 </FormattedMessage>
-                <FormattedMessage id="filtrering.filtrer-brukere.demograi.mann" key="kjonn-m">
+                <FormattedMessage id="filtrering.filtrer-brukere.demografi.mann" key="kjonn-m">
                     {text => <option value="M">{text}</option>}
                 </FormattedMessage>
-                <FormattedMessage id="filtrering.filtrer-brukere.demograi.kvinne" key="kjonn-k">
+                <FormattedMessage id="filtrering.filtrer-brukere.demografi.kvinne" key="kjonn-k">
                     {text => <option value="K">{text}</option>}
                 </FormattedMessage>
             </select>
