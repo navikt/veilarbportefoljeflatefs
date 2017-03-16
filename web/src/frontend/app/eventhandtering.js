@@ -5,7 +5,7 @@ import { hentPortefoljeForEnhet } from './ducks/portefolje';
 import { hentPortefoljeStorrelser } from './ducks/portefoljestorrelser';
 
 const hentOgDispatchAllInformasjonOmEnhet = (enhet) => {
-    store.dispatch(velgEnhetForVeileder(enhet));
+    store.dispatch(velgEnhetForVeileder({enhetId:enhet}));
     store.dispatch(hentPortefoljeForEnhet(enhet));
     store.dispatch(hentVeiledereForEnhet(enhet));
     store.dispatch(hentPortefoljeStorrelser(enhet));
