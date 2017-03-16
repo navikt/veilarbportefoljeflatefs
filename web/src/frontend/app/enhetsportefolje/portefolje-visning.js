@@ -27,8 +27,7 @@ class PortefoljeVisning extends Component {
                 sorteringsrekkefolge,
                 fraIndex,
                 antall,
-                filtervalg.nyeBrukere,
-                filtervalg.inaktiveBrukere
+                filtervalg
             );
             hentVeiledere(valgtEnhet.enhetId);
         }
@@ -47,9 +46,7 @@ class PortefoljeVisning extends Component {
             valgtRekkefolge = 'ascending';
             settSortering('ascending');
         }
-        hentPortefolje(
-            valgtEnhet.enhetId, valgtRekkefolge, fraIndex, antall, filtervalg.nyeBrukere, filtervalg.inaktiveBrukere
-        );
+        hentPortefolje(valgtEnhet.enhetId, valgtRekkefolge, fraIndex, antall, filtervalg);
     }
 
     render() {
@@ -92,8 +89,7 @@ class PortefoljeVisning extends Component {
                             sorteringsrekkefolge,
                             fra,
                             antall,
-                            filtervalg.nyeBrukere,
-                            filtervalg.inaktiveBrukere
+                            filtervalg
                         )}
                     tekst={pagineringTekst}
                     sideStorrelse={20}

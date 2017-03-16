@@ -15,10 +15,10 @@ function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder, brukere 
     };
     const indexTilValgtVeileder = valgtVeileder === undefined ? 0 : veiledere.indexOf(valgtVeileder);
 
-    const defaultOption =
-        (<option value={0} key={'default'}>
-            <FormattedMessage id="portefolje.tildel.veileder.label" />
-        </option>);
+    const defaultOption = (
+        <FormattedMessage id="portefolje.tildel.veileder.label" key="default">
+            {text => <option value={0}>{text}</option>}
+        </FormattedMessage>);
 
     const veilederListe = veiledere.map((veileder, index) =>
         <option value={index + 1} key={`option-${veileder.ident}`}>{`${veileder.navn}`}</option>

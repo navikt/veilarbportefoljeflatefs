@@ -10,7 +10,7 @@ import EnhetVelger from './enhet-velger';
 import TildelVeilederVelger from './tildel-veileder-velger';
 import { enhetShape, veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
-import FiltreringOversikt from './filtrering/filtrering-oversikt';
+import FiltreringContainer from './filtrering/filtrering-container';
 import { tildelVeileder } from '../ducks/portefolje';
 
 class EnhetSide extends Component {
@@ -77,7 +77,7 @@ class EnhetSide extends Component {
                     />
                 </p>
                 <Ekspanderbartpanel tittel="Status" tittelProps="systemtittel">
-                    <FiltreringOversikt />
+                    <FiltreringContainer />
                 </Ekspanderbartpanel>
                 <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
                     {tildelVeilederVelger}
