@@ -311,12 +311,6 @@
                 <version>2.0.0</version>
                 <scope>test</scope>
             </dependency>
-
-            <dependency>
-                <groupId>no.nav.sbl</groupId>
-                <artifactId>innholdshenter</artifactId>
-                <version>${innholdshenter.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
