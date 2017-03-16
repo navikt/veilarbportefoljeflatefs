@@ -15,6 +15,20 @@ import { tildelVeileder } from '../ducks/portefolje';
 
 class EnhetSide extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            liste: [
+                { key: '1', value: 'Arne And', checked: false },
+                { key: '2', value: 'Tore Tang', checked: false },
+                { key: '3', value: 'Else Koss', checked: false }
+            ]
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
     componentWillMount() {
         const { valgtEnhet, enheter, velgEnhet, hentVeiledere } = this.props;
         const queryEnhet = queryString.parse(location.search).enhet;
@@ -31,6 +45,23 @@ class EnhetSide extends Component {
         } else {
             leggEnhetIUrl(valgtEnhet);
         }
+    }
+
+    onSubmit() {
+        const l = this.state.liste.filter(listeElement => listeElement.checked === true);
+        console.log('submit');
+        console.log(l);
+    }
+
+    handleChange(e) {
+        this.setState({
+            liste: this.state.liste.map((el, i) => {
+                if (i === Number(e.target.value)) {
+                    return { ...el, checked: e.target.checked };
+                }
+                return el;
+            })
+        });
     }
 
     render() {
@@ -85,13 +116,9 @@ class EnhetSide extends Component {
                 {tildelVeilederVelger}
                 {enhetVelger}
                 <Nedtrekksliste
-                    liste={veiledere.map(veileder => ({
-                        key: veileder.ident,
-                        value: veileder.navn,
-                        checked: false
-                    }))}
-                    listeLength={veiledere.length}
-                    submitValgt={() => { }}
+                    liste={this.state.liste}
+                    handleChange={this.handleChange}
+                    onSubmit={this.onSubmit}
                 />
                 <PortefoljeVisning />
             </div>
