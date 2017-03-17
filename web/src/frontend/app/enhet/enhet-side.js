@@ -35,9 +35,7 @@ class EnhetSide extends Component {
     }
 
     onSubmit() {
-        const l = this.state.liste.filter(listeElement => listeElement.checked === true);
-        console.log('submit');
-        console.log(l);
+        this.state.liste.filter(listeElement => listeElement.checked === true);
     }
 
     handleChange(e) {
