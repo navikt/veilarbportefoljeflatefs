@@ -85,18 +85,26 @@ class VeilederPortefoljeVisning extends Component {
                     sideStorrelse={20}
                 />
                 <table className="tabell portefolje-tabell" tabIndex="0">
+                    <thead className="extra-head">
+                    <tr>
+                        <th />
+                        <th>Bruker</th>
+                        <th />
+                        <th />
+                    </tr>
+                    </thead>
                     <thead>
                         <tr>
                             <th>
-                                <div className="nav-input">
+                                <div className="skjema__input">
                                     <input
-                                        className="nav-checkbox"
+                                        className="checkboks"
                                         id="checkbox-alle-brukere"
                                         type="checkbox"
                                         checked={alleMarkert}
                                         onClick={() => settSomMarkertAlle(!alleMarkert)}
                                     />
-                                    <label htmlFor="checkbox-alle-brukere" />
+                                    <label className="skjema__label" htmlFor="checkbox-alle-brukere"/>
                                 </div>
                             </th>
                             <th>
@@ -119,15 +127,15 @@ class VeilederPortefoljeVisning extends Component {
                         {brukere.filter(b => b.veilederId === veileder.ident)
                                 .map(bruker => <tr key={bruker.fnr}>
                                     <td>
-                                        <div className="nav-input">
+                                        <div className="skjema__input">
                                             <input
-                                                className="nav-checkbox"
+                                                className="checkboks"
                                                 id={`checkbox-${bruker.fnr}`}
                                                 type="checkbox"
                                                 checked={bruker.markert}
                                                 onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
                                             />
-                                            <label htmlFor={`checkbox-${bruker.fnr}`} />
+                                            <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`}/>
                                         </div>
                                     </td>
                                     <td>
