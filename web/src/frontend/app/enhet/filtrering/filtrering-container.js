@@ -6,8 +6,10 @@ import FiltreringStatus from './filtrering-status';
 import FiltreringFilter from './filtrering-filter';
 
 class FiltreringContainer extends Component {
-    componentDidUpdate() {
-        this.oppdaterDatagrunnlag();
+    constructor(props) {
+        super(props);
+
+        this.oppdaterDatagrunnlag = this.oppdaterDatagrunnlag.bind(this);
     }
 
     oppdaterDatagrunnlag() {
@@ -22,7 +24,7 @@ class FiltreringContainer extends Component {
                     <FiltreringStatus />
                 </Ekspanderbartpanel>
                 <Ekspanderbartpanel tittel="Filter" tittelProps="systemtittel">
-                    <FiltreringFilter />
+                    <FiltreringFilter oppdaterDatagrunnlag={this.oppdaterDatagrunnlag} />
                 </Ekspanderbartpanel>
             </div>
         );

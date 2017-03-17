@@ -1,5 +1,6 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
+import { FormattedMessage } from 'react-intl';
 import './nedtrekksliste';
 import CheckboxListe from './checkbox-liste';
 
@@ -93,7 +94,9 @@ function nedtrekkslisteWrapper(ListeComponent) {
 
             return (
                 <section className="nedtrekksliste-container" role="listbox">
-                    <button className="nedtrekksliste-toggle" onClick={this.toggleDialog}>Søk veileder(e)</button>
+                    <button className="nedtrekksliste-toggle" onClick={this.toggleDialog}>
+                        <FormattedMessage id={this.props.navnId} />
+                    </button>
                     <div className="nedtrekksliste">
                         <form>
                             <ListeComponent liste={this.props.liste} handleChange={this.props.handleChange} />
@@ -107,12 +110,13 @@ function nedtrekkslisteWrapper(ListeComponent) {
 
     Nedtrekksliste.propTypes = {
         liste: PT.arrayOf(PT.shape({
-            key: PT.string,
-            value: PT.string,
+            label: PT.string,
+            value: PT.oneOfType([PT.number, PT.string]),
             checked: PT.bool
         })).isRequired,
         handleChange: PT.func.isRequired,
-        onSubmit: PT.func.isRequired
+        onSubmit: PT.func.isRequired,
+        navnId: PT.string.isRequired
     };
 
     return Nedtrekksliste;

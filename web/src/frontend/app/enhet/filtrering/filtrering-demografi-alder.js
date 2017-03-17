@@ -1,5 +1,5 @@
 import React, { PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
+import Nedtrekksliste from '../../components/nedtrekksliste';
 
 const aldersIntervaller = [
     '19 og under',
@@ -12,37 +12,30 @@ const aldersIntervaller = [
     '67-70'
 ];
 
-const defaultAlderOption = (
-    <FormattedMessage id="filtrering.filtrer-brukere.demografi.alder" key="default">
-        {text => <option value={0}>{text}</option>}
-    </FormattedMessage>
-);
-
-const aldersOptions = [
-    defaultAlderOption,
-    ...aldersIntervaller.map(
-        (alderString, index) => <option value={index + 1} key={`option-${alderString}`}>{`${alderString}`}</option>
-    )
-];
-
-function FiltreringAlder({ filtervalg, handleChange }) {
+function FiltreringAlder({ filtervalg, handleChange, oppdaterDatagrunnlag }) {
     return (
         <div className="select-container">
-            <select // eslint-disable-line jsx-a11y/no-onchange
-                id="select-alder"
-                name="valgtAlder"
-                onChange={e => handleChange(e, 'alder')}
-                value={filtervalg.alder}
-            >
-                {aldersOptions}
-            </select>
+            <Nedtrekksliste
+                liste={[
+                    ...aldersIntervaller.map(
+                        (alderString, index) => ({
+                            value: index + 1,
+                            label: alderString,
+                            checked: index + 1 === Number(filtervalg.alder) })
+                    )
+                ]}
+                handleChange={e => handleChange(e, 'alder')}
+                onSubmit={oppdaterDatagrunnlag}
+                navnId={'filtrering.filtrer-brukere.demografi.alder'}
+            />
         </div>
     );
 }
 
 FiltreringAlder.propTypes = {
     filtervalg: PT.object,
-    handleChange: PT.func.isRequired
+    handleChange: PT.func.isRequired,
+    oppdaterDatagrunnlag: PT.func.isRequired
 };
 
 export default FiltreringAlder;

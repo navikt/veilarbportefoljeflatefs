@@ -9,10 +9,11 @@ function CheckboxListe({ liste, handleChange }) {
                         id={`${indeks}-checkbox`}
                         type="checkbox"
                         className="nav-checkbox"
-                        onClick={handleChange}
-                        value={indeks}
+                        onChange={handleChange}
+                        value={listeElement.value}
+                        checked={listeElement.checked}
                     />
-                    <label htmlFor={`${indeks}-checkbox`}>{listeElement.value}</label>
+                    <label htmlFor={`${indeks}-checkbox`}>{listeElement.label}</label>
                 </li>
             ))}
         </ul>
@@ -22,7 +23,8 @@ function CheckboxListe({ liste, handleChange }) {
 CheckboxListe.propTypes = {
     liste: PT.arrayOf(PT.shape({
         key: PT.string,
-        value: PT.string
+        value: PT.oneOfType([PT.string, PT.number]),
+        checked: PT.bool
     })),
     handleChange: PT.func
 };
