@@ -4,7 +4,6 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import TildelVeilederVelger from './tildel-veileder-velger';
 import { veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
-import Nedtrekksliste from '../components/nedtrekksliste';
 import FiltreringContainer from './filtrering/filtrering-container';
 import { tildelVeileder } from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
@@ -20,9 +19,6 @@ class EnhetSide extends Component {
                 { key: '3', value: 'Else Koss', checked: false }
             ]
         };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentWillMount() {
@@ -32,21 +28,6 @@ class EnhetSide extends Component {
     componentDidUpdate() {
         const { filtervalg, valgtEnhet } = this.props;
         eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet.enhet, location.pathname);
-    }
-
-    onSubmit() {
-        this.state.liste.filter(listeElement => listeElement.checked === true);
-    }
-
-    handleChange(e) {
-        this.setState({
-            liste: this.state.liste.map((el, i) => {
-                if (i === Number(e.target.value)) {
-                    return { ...el, checked: e.target.checked };
-                }
-                return el;
-            })
-        });
     }
 
     render() {
@@ -74,11 +55,6 @@ class EnhetSide extends Component {
         return (
             <div className="enhet-side">
                 <FiltreringContainer />
-                <Nedtrekksliste
-                    liste={this.state.liste}
-                    handleChange={this.handleChange}
-                    onSubmit={this.onSubmit}
-                />
                 <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
                     {tildelVeilederVelger}
                 </Ekspanderbartpanel>
