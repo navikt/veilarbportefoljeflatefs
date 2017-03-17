@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../../ducks/utils';
 
-class FiltreringOversikt extends Component {
+class FiltreringStatus extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -58,7 +58,7 @@ class FiltreringOversikt extends Component {
     }
 }
 
-FiltreringOversikt.propTypes = {
+FiltreringStatus.propTypes = {
     endreFilter: PT.func.isRequired,
     filtervalg: PT.object,
     valgtEnhet: PT.object.isRequired
@@ -73,4 +73,4 @@ const mapDispatchToProps = dispatch => ({
     endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(filterId, filtervalg))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FiltreringOversikt);
+export default connect(mapStateToProps, mapDispatchToProps)(FiltreringStatus);
