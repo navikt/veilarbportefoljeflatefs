@@ -19,7 +19,7 @@ const initialState = {
     filtervalg: {
         nyeBrukere: false,
         inaktiveBrukere: false,
-        alder: 0,
+        alder: [],
         kjonn: 'ikke definert',
         fodselsdagIMnd: 0
     }

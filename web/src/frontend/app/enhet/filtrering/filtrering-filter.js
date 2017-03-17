@@ -10,8 +10,16 @@ class FiltreringFilter extends Component {
     }
 
     handleChange(e, filter) {
-        const { endreFilter } = this.props;
-        endreFilter(filter, e.target.value);
+        const { endreFilter, filtervalg } = this.props;
+
+        const newArray = Array.from(filtervalg.alder);
+        if (e.target.checked === true) {
+            newArray.push(Number(e.target.value));
+        } else {
+            newArray.splice(newArray.indexOf(Number(e.target.value)), 1);
+        }
+
+        endreFilter(filter, newArray);
     }
 
     render() {
