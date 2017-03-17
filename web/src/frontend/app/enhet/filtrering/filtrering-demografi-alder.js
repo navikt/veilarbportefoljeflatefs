@@ -1,5 +1,5 @@
-import React, {PropTypes as PT} from 'react';
-import {FormattedMessage} from 'react-intl';
+import React, { PropTypes as PT } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 const aldersIntervaller = [
     '19 og under',
@@ -25,7 +25,7 @@ const aldersOptions = [
     )
 ];
 
-function FiltreringAlder({filtervalg, handleChange}) {
+function FiltreringAlder({ filtervalg, handleChange }) {
     return (
         <div className="filtrering-select">
             <div className="selectContainer">

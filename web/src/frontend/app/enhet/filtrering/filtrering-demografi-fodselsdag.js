@@ -1,13 +1,13 @@
-import React, {PropTypes as PT} from 'react';
-import {FormattedMessage} from 'react-intl';
+import React, { PropTypes as PT } from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import {range, lag2Sifret} from '../../utils/utils';
+import { range, lag2Sifret } from '../../utils/utils';
 
 const alleDager = range(1, 31, true);
 
 const datoOptions = alleDager.map(x => <option value={x} key={`option-${x}`}>{lag2Sifret(x)}</option>);
 
-function FiltreringFodselsdag({filtervalg, handleChange}) {
+function FiltreringFodselsdag({ filtervalg, handleChange }) {
     return (
         <div className="filtrering-select">
             <div className="selectContainer">

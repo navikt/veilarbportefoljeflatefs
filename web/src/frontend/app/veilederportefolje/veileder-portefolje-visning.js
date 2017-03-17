@@ -86,12 +86,12 @@ class VeilederPortefoljeVisning extends Component {
                 />
                 <table className="tabell portefolje-tabell" tabIndex="0">
                     <thead className="extra-head">
-                    <tr>
-                        <th />
-                        <th>Bruker</th>
-                        <th />
-                        <th />
-                    </tr>
+                        <tr>
+                            <th />
+                            <th>Bruker</th>
+                            <th />
+                            <th />
+                        </tr>
                     </thead>
                     <thead>
                         <tr>
@@ -104,7 +104,7 @@ class VeilederPortefoljeVisning extends Component {
                                         checked={alleMarkert}
                                         onClick={() => settSomMarkertAlle(!alleMarkert)}
                                     />
-                                    <label className="skjema__label" htmlFor="checkbox-alle-brukere"/>
+                                    <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
                                 </div>
                             </th>
                             <th>
@@ -135,7 +135,7 @@ class VeilederPortefoljeVisning extends Component {
                                                 checked={bruker.markert}
                                                 onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
                                             />
-                                            <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`}/>
+                                            <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
                                         </div>
                                     </td>
                                     <td>

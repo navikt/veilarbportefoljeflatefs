@@ -1,7 +1,7 @@
-import React, {PropTypes as PT} from 'react';
-import {Infotekst, Element} from 'nav-frontend-typografi';
+import React, { PropTypes as PT } from 'react';
+import { Element } from 'nav-frontend-typografi';
 
-function Paginering({fraIndex, antallTotalt, hentListe, tekst, sideStorrelse}) {
+function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse }) {
     function createSimpleLink(fraIndeks, tilIndeks, linkTekst) {
         return (
             <button
@@ -23,47 +23,47 @@ function Paginering({fraIndex, antallTotalt, hentListe, tekst, sideStorrelse}) {
                 {tekst}
             </Element>
             {antallTotalt <= sideStorrelse ? null :
-                <div className="bytt-side">
-                    {createSimpleLink(0, antallTotalt, 'Se alle')}
-                    {fraIndex === 0 ?
-                        <button className="not-active" tabIndex="-1">
-                            <i className="chevron--venstre">
-                                <span className="text-hide prev">{'Forrige'}</span>
-                            </i>
-                        </button> :
-                        <button
-                            className="prev"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                hentListe(fraIndeksForrigeSide, sideStorrelse);
-                            }}
-                        >
-                            <i className="chevron--venstre">
-                                <span className="text-hide prev">{'Forrige'}</span>
-                            </i>
-                        </button>
+            <div className="bytt-side">
+                {createSimpleLink(0, antallTotalt, 'Se alle')}
+                {fraIndex === 0 ?
+                    <button className="not-active" tabIndex="-1">
+                        <i className="chevron--venstre">
+                            <span className="text-hide prev">{'Forrige'}</span>
+                        </i>
+                    </button> :
+                    <button
+                        className="prev"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            hentListe(fraIndeksForrigeSide, sideStorrelse);
+                        }}
+                    >
+                        <i className="chevron--venstre">
+                            <span className="text-hide prev">{'Forrige'}</span>
+                        </i>
+                    </button>
                     }
-                    {fraIndex === 0 ? null :
+                {fraIndex === 0 ? null :
                         createSimpleLink(0, sideStorrelse, '1')
                     }
-                    <button><strong>{((fraIndex / sideStorrelse) + 1)}</strong></button>
-                    {fraIndex === fraIndeksSisteSide ? null :
+                <button><strong>{((fraIndex / sideStorrelse) + 1)}</strong></button>
+                {fraIndex === fraIndeksSisteSide ? null :
                         createSimpleLink(fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt / sideStorrelse))
                     }
-                    {fraIndex === fraIndeksSisteSide ?
-                        <button className="not-active" tabIndex="-1">
-                            <i className="chevron--hoyre">
+                {fraIndex === fraIndeksSisteSide ?
+                    <button className="not-active" tabIndex="-1">
+                        <i className="chevron--hoyre">
                             <span className="text-hide next">{'Neste'}</span>
-                            </i>
-                        </button> :
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                hentListe(fraIndeksSisteSide, sideStorrelse);
-                            }}
-                        ><i className="chevron--hoyre"><span className="text-hide next">{'Neste'}</span></i></button>
+                        </i>
+                    </button> :
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            hentListe(fraIndeksSisteSide, sideStorrelse);
+                        }}
+                    ><i className="chevron--hoyre"><span className="text-hide next">{'Neste'}</span></i></button>
                     }
-                </div>
+            </div>
             }
         </div>
     );

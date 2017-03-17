@@ -1,7 +1,7 @@
-import React, {PropTypes as PT} from 'react';
-import {FormattedMessage} from 'react-intl';
+import React, { PropTypes as PT } from 'react';
+import { FormattedMessage } from 'react-intl';
 
-function FiltreringKjonn({filtervalg, handleChange}) {
+function FiltreringKjonn({ filtervalg, handleChange }) {
     return (
         <div className="filtrering-select">
             <div className="selectContainer">
