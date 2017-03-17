@@ -1,14 +1,15 @@
-import React, { PropTypes as PT } from 'react';
-import { Infotekst } from 'nav-frontend-typografi';
+import React, {PropTypes as PT} from 'react';
+import {Infotekst, Element} from 'nav-frontend-typografi';
 
-function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse }) {
+function Paginering({fraIndex, antallTotalt, hentListe, tekst, sideStorrelse}) {
     function createSimpleLink(fraIndeks, tilIndeks, linkTekst) {
-        return (<Infotekst><button
-            href="" onClick={(e) => {
-                e.preventDefault();
-                hentListe(fraIndeks, tilIndeks);
-            }}
-        >{linkTekst}</button></Infotekst>);
+        return (
+            <button
+                onClick={(e) => {
+                    e.preventDefault();
+                    hentListe(fraIndeks, tilIndeks);
+                }}
+            >{linkTekst}</button>);
     }
 
     const fraIndeksForrigeSide = fraIndex - sideStorrelse < 0 ? fraIndex : fraIndex - sideStorrelse;
@@ -16,41 +17,45 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
         : antallTotalt - (antallTotalt % sideStorrelse);
     const fraIndeksSisteSide = fraIndex + sideStorrelse >= antallTotalt ? fraIndex : fraIndex + sideStorrelse;
 
-
     return (
         <div className="paginering">
-            <h3 className="info">
+            <Element className="info" tag="h1">
                 {tekst}
-            </h3>
+            </Element>
             {antallTotalt <= sideStorrelse ? null :
-            <div className="bytt-side">
-                {createSimpleLink(0, antallTotalt, 'Se alle')}
-                {fraIndex === 0 ?
-                    <Infotekst><button
-                        href="" className="not-active" onClick={(e) => {
-                            e.preventDefault();
-                            hentListe(fraIndeksForrigeSide, sideStorrelse);
-                        }}
-                    >{'<'}</button></Infotekst> :
-                        createSimpleLink(fraIndeksForrigeSide, sideStorrelse, '<')
+                <div className="bytt-side">
+                    {createSimpleLink(0, antallTotalt, 'Se alle')}
+                    {fraIndex === 0 ?
+                        <button className="not-active" tabIndex="-1">
+                            <span className="text-hide prev">{'Forrige'}</span>
+                        </button> :
+                        <button
+                            className="prev"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                hentListe(fraIndeksForrigeSide, sideStorrelse);
+                            }}
+                        ><span className="text-hide prev">{'Forrige'}</span></button>
                     }
-                {fraIndex === 0 ? null :
+                    {fraIndex === 0 ? null :
                         createSimpleLink(0, sideStorrelse, '1')
                     }
-                <Infotekst ><button><b>{((fraIndex / sideStorrelse) + 1)}</b></button></Infotekst>
-                {fraIndex === fraIndeksSisteSide ? null :
+                    <button><strong>{((fraIndex / sideStorrelse) + 1)}</strong></button>
+                    {fraIndex === fraIndeksSisteSide ? null :
                         createSimpleLink(fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt / sideStorrelse))
                     }
-                {fraIndex === fraIndeksSisteSide ?
-                    <Infotekst><button
-                        href="" className="not-active" onClick={(e) => {
-                            e.preventDefault();
-                            hentListe(fraIndeksSisteSide, sideStorrelse);
-                        }}
-                    >{'>'}</button></Infotekst> :
-                        createSimpleLink(fraIndeksSisteSide, sideStorrelse, '>')
+                    {fraIndex === fraIndeksSisteSide ?
+                        <button className="not-active" tabIndex="-1">
+                            <span className="text-hide next">{'Neste'}</span>
+                        </button> :
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                hentListe(fraIndeksSisteSide, sideStorrelse);
+                            }}
+                        ><span className="text-hide next">{'Neste'}</span></button>
                     }
-            </div>
+                </div>
             }
         </div>
     );

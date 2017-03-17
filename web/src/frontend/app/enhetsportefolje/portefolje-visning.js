@@ -102,6 +102,19 @@ class PortefoljeVisning extends Component {
                     settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
                     settSomMarkert={settMarkert}
                 />
+                <Paginering
+                    antallTotalt={antallTotalt}
+                    fraIndex={fraIndex}
+                    hentListe={(fra, antall) =>
+                        hentPortefolje(
+                            valgtEnhet.enhet.enhetId,
+                            sorteringsrekkefolge,
+                            fra,
+                            antall,
+                            filtervalg
+                        )}
+                    sideStorrelse={20}
+                />
             </Innholdslaster>
         );
     }

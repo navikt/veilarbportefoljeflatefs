@@ -1,14 +1,6 @@
 @coreModulePath: './../../../node_modules';
 @nodeModulesPath: './../../../node_modules';
-@modig-frontend-root-url: "./node_modules/modig-frontend/modig-frontend-ressurser/src/main/resources";
-@imgDir: "./../img";
-
-@import "@{modig-frontend-root-url}/less/decorator/modus";
-@import "@{modig-frontend-root-url}/less/includes/variables";
-@import "@{modig-frontend-root-url}/less/includes/mixins";
-@import "@{modig-frontend-root-url}/less/nav_extra/typografi";
-@import "@{modig-frontend-root-url}/less/nav_extra/spinner";
-@import "@{modig-frontend-root-url}/less/nav_extra/tabeller";
+@import "tabell";
 
 body {
     margin: 0;
@@ -28,16 +20,14 @@ html {
     height:100%;
 }
 
+@import "./node_modules/nav-frontend-core/less/core";
+@import "./node_modules/nav-frontend-ekspanderbartpanel-style/src/index";
+@import "./node_modules/nav-frontend-etiketter-style/src/index";
+@import "./node_modules/nav-frontend-etiketter-style/src/_mixins";
+@import "./node_modules/nav-frontend-typografi-style/src/index";
+@import "./node_modules/nav-frontend-skjema-style/src/index";
+
 .veilarbportefoljeflatefs {
-    @import "@{modig-frontend-root-url}/less/nav_extra/paneler";
-    @import "@{modig-frontend-root-url}/less/decorator/grid";
-    @import "@{modig-frontend-root-url}/less/nav_extra/lenker";
-    @import "@{modig-frontend-root-url}/less/nav_extra/utilities";
-    @import "@{modig-frontend-root-url}/less/nav_extra/skjema";
-    @import "./node_modules/nav-frontend-ekspanderbartpanel-style/src/index";
-    @import "./node_modules/nav-frontend-etiketter-style/src/index";
-    @import "./node_modules/nav-frontend-etiketter-style/src/_mixins";
-    @import "./node_modules/nav-frontend-etiketter-style/src/_mixins";
     @import "./lenker/lenker";
     @import "paginering/paginering";
     @import "enhetsportefolje/enhetsportefolje";

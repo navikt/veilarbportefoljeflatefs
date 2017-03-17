@@ -1,5 +1,5 @@
-import React, { PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, {PropTypes as PT} from 'react';
+import {FormattedMessage} from 'react-intl';
 
 const aldersIntervaller = [
     '19 og under',
@@ -25,17 +25,20 @@ const aldersOptions = [
     )
 ];
 
-function FiltreringAlder({ filtervalg, handleChange }) {
+function FiltreringAlder({filtervalg, handleChange}) {
     return (
-        <div className="select-container">
-            <select // eslint-disable-line jsx-a11y/no-onchange
-                id="select-alder"
-                name="valgtAlder"
-                onChange={e => handleChange(e, 'alder')}
-                value={filtervalg.alder}
-            >
-                {aldersOptions}
-            </select>
+        <div className="filtrering-select">
+            <div className="selectContainer">
+                <label htmlFor="select-alder" className="text-hide">Velg alder</label>
+                <select // eslint-disable-line jsx-a11y/no-onchange
+                    id="select-alder"
+                    name="valgtAlder"
+                    onChange={e => handleChange(e, 'alder')}
+                    value={filtervalg.alder}
+                >
+                    {aldersOptions}
+                </select>
+            </div>
         </div>
     );
 }

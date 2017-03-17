@@ -1,36 +1,83 @@
-.paginering .info {
-    padding: 10px 5px;
-    display: inline-block;
-}
+.paginering {
+    margin: 1rem 0;
 
-.paginering .bytt-side {
-    float: right;
-
-    p {
-        background-color: @white;
-        margin: 1px;
+    .info {
+        padding: 10px 5px;
         display: inline-block;
-        padding: 4px 10px;
     }
-    p:first-of-type {
-        border-bottom-left-radius: 2px;
-        border-top-left-radius: 2px;
-    }
-    p:last-of-type {
-        border-bottom-right-radius: 2px;
-        border-top-right-radius: 2px;
-    }
-    button {
-        border: none;
-        background-color: @white;
-        color: #3e3832;
-    }
-    button.not-active {
-        pointer-events: none;
-        cursor: default;
-        color: lightgray;
-    }
-    button.bold {
-        font-weight: bold;
+
+    .bytt-side {
+        float: right;
+
+        button {
+            background-color: @white;
+            margin: 1px;
+            display: inline-block;
+            padding: 4px 20px;
+            border: none;
+            color: #3e3832;
+            position: relative;
+        }
+        button:first-of-type {
+            border-bottom-left-radius: 2px;
+            border-top-left-radius: 2px;
+        }
+        button:last-of-type {
+            border-bottom-right-radius: 2px;
+            border-top-right-radius: 2px;
+        }
+        button {
+            cursor: pointer;
+            .prev {
+                display: inline-block;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 13px;
+                    right: 11px;
+                    height: 9px;
+                    width: 9px;
+                    background: currentColor;
+                    transform: translateX(-2px) rotate(45deg);
+                    border-left: 2px solid @navMorkGra;
+                    border-bottom: 2px solid @navMorkGra;
+                }
+                &:focus {
+                    outline: 0;
+                }
+            }
+            .next {
+                display: inline-block;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 13px;
+                    right: 15px;
+                    height: 9px;
+                    width: 9px;
+                    background: currentColor;
+                    transform: translateX(-2px) rotate(45deg);
+                    border-right: 2px solid @navMorkGra;
+                    border-top: 2px solid @navMorkGra;
+                }
+            }
+            &:focus {
+                outline: 0;
+                box-shadow: 0 0 0 2px @orangeFocus;
+            }
+        }
+        button.not-active {
+            .prev, .next {
+                &:after {
+                    border-color: @navGra40;
+                }
+            }
+            pointer-events: none;
+            cursor: default;
+            color: lightgray;
+        }
+        button.bold {
+            font-weight: bold;
+        }
     }
 }
