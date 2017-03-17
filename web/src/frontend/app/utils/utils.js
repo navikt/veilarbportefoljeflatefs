@@ -36,8 +36,10 @@ export function filterUrlBuilder(filtervalg) {
         result += `&inaktiveBrukere=${filtervalg.inaktiveBrukere}`;
     }
 
-    if (filtervalg.alder && (filtervalg.alder > 0 && filtervalg.alder <= 8)) {
-        result += `&alder=${filtervalg.alder}`;
+    if (filtervalg.alder.length > 0) {
+        filtervalg.alder.forEach((i) => {
+            result += `&alder[]=${i}`;
+        });
     }
 
     if (filtervalg.kjonn && (filtervalg.kjonn === 'M' || filtervalg.kjonn === 'K')) {
