@@ -61,7 +61,7 @@ class FiltreringOversikt extends Component {
 FiltreringOversikt.propTypes = {
     endreFilter: PT.func.isRequired,
     filtervalg: PT.object,
-    valgtEnhet: PT.object.isRequired
+    valgtEnhet: PT.string.isRequired
 };
 
 const mapStateToProps = state => ({
