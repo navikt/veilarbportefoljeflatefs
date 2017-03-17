@@ -11,8 +11,10 @@ const hentOgDispatchAllInformasjonOmEnhet = (enhet) => {
     store.dispatch(hentPortefoljeStorrelser(enhet));
 };
 
-const handleChangeEnhet = (enhet) => {
-    hentOgDispatchAllInformasjonOmEnhet(enhet);
+const handleChangeEnhet = (event, enhet) => {
+    if (event.type === 'change') {
+        hentOgDispatchAllInformasjonOmEnhet(enhet);
+    }
 };
 
 const getConfig = (initiellEnhet = undefined) => {
