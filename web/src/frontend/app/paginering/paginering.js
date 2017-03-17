@@ -27,7 +27,9 @@ function Paginering({fraIndex, antallTotalt, hentListe, tekst, sideStorrelse}) {
                     {createSimpleLink(0, antallTotalt, 'Se alle')}
                     {fraIndex === 0 ?
                         <button className="not-active" tabIndex="-1">
-                            <span className="text-hide prev">{'Forrige'}</span>
+                            <i className="chevron--venstre">
+                                <span className="text-hide prev">{'Forrige'}</span>
+                            </i>
                         </button> :
                         <button
                             className="prev"
@@ -35,7 +37,11 @@ function Paginering({fraIndex, antallTotalt, hentListe, tekst, sideStorrelse}) {
                                 e.preventDefault();
                                 hentListe(fraIndeksForrigeSide, sideStorrelse);
                             }}
-                        ><span className="text-hide prev">{'Forrige'}</span></button>
+                        >
+                            <i className="chevron--venstre">
+                                <span className="text-hide prev">{'Forrige'}</span>
+                            </i>
+                        </button>
                     }
                     {fraIndex === 0 ? null :
                         createSimpleLink(0, sideStorrelse, '1')
@@ -46,14 +52,16 @@ function Paginering({fraIndex, antallTotalt, hentListe, tekst, sideStorrelse}) {
                     }
                     {fraIndex === fraIndeksSisteSide ?
                         <button className="not-active" tabIndex="-1">
+                            <i className="chevron--hoyre">
                             <span className="text-hide next">{'Neste'}</span>
+                            </i>
                         </button> :
                         <button
                             onClick={(e) => {
                                 e.preventDefault();
                                 hentListe(fraIndeksSisteSide, sideStorrelse);
                             }}
-                        ><span className="text-hide next">{'Neste'}</span></button>
+                        ><i className="chevron--hoyre"><span className="text-hide next">{'Neste'}</span></i></button>
                     }
                 </div>
             }

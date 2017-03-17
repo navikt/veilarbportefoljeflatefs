@@ -13,7 +13,7 @@
             background-color: @white;
             margin: 1px;
             display: inline-block;
-            padding: 4px 20px;
+            padding: 4px 16px;
             border: none;
             color: #3e3832;
             position: relative;
@@ -28,50 +28,24 @@
         }
         button {
             cursor: pointer;
-            .prev {
+
+            .prev, .next {
                 display: inline-block;
-                &:after {
-                    content: '';
-                    position: absolute;
-                    top: 13px;
-                    right: 11px;
-                    height: 9px;
-                    width: 9px;
-                    background: currentColor;
-                    transform: translateX(-2px) rotate(45deg);
-                    border-left: 2px solid @navMorkGra;
-                    border-bottom: 2px solid @navMorkGra;
-                }
-                &:focus {
-                    outline: 0;
-                }
             }
-            .next {
-                display: inline-block;
-                &:after {
-                    content: '';
-                    position: absolute;
-                    top: 13px;
-                    right: 15px;
-                    height: 9px;
-                    width: 9px;
-                    background: currentColor;
-                    transform: translateX(-2px) rotate(45deg);
-                    border-right: 2px solid @navMorkGra;
-                    border-top: 2px solid @navMorkGra;
-                }
-            }
+
             &:focus {
                 outline: 0;
                 box-shadow: 0 0 0 2px @orangeFocus;
             }
+
+            i {
+                top: 11px;
+            }
+            i.chevron--hoyre, i.chevron--venstre {
+                width: 18px;
+            }
         }
         button.not-active {
-            .prev, .next {
-                &:after {
-                    border-color: @navGra40;
-                }
-            }
             pointer-events: none;
             cursor: default;
             color: lightgray;
