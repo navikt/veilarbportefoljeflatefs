@@ -19,6 +19,7 @@ class FiltreringFilter extends Component {
             <Demografi
                 filtervalg={this.props.filtervalg}
                 handleChange={this.handleChange}
+                oppdaterDatagrunnlag={this.props.oppdaterDatagrunnlag}
             />
         );
     }
@@ -26,7 +27,8 @@ class FiltreringFilter extends Component {
 
 FiltreringFilter.propTypes = {
     endreFilter: PT.func.isRequired,
-    filtervalg: PT.object
+    filtervalg: PT.object,
+    oppdaterDatagrunnlag: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
