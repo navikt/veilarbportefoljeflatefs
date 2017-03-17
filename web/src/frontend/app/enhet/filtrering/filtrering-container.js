@@ -2,8 +2,8 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { hentPortefoljeForEnhet } from '../../ducks/filtrering';
-import FiltreringOversikt from './filtrering-oversikt';
-import FiltreringBrukere from './filtrering-filtrer-brukere';
+import FiltreringStatus from './filtrering-status';
+import FiltreringFilter from './filtrering-filter';
 
 class FiltreringContainer extends Component {
     componentDidUpdate() {
@@ -19,10 +19,10 @@ class FiltreringContainer extends Component {
         return (
             <div className="filtrering-container">
                 <Ekspanderbartpanel tittel="Status" tittelProps="systemtittel">
-                    <FiltreringOversikt />
+                    <FiltreringStatus />
                 </Ekspanderbartpanel>
                 <Ekspanderbartpanel tittel="Filter" tittelProps="systemtittel">
-                    <FiltreringBrukere />
+                    <FiltreringFilter />
                 </Ekspanderbartpanel>
             </div>
         );

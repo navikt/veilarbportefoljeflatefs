@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import Demografi from './demografi';
 
-class FiltreringBrukere extends Component {
+class FiltreringFilter extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -24,7 +24,7 @@ class FiltreringBrukere extends Component {
     }
 }
 
-FiltreringBrukere.propTypes = {
+FiltreringFilter.propTypes = {
     endreFilter: PT.func.isRequired,
     filtervalg: PT.object
 };
@@ -37,4 +37,4 @@ const mapDispatchToProps = dispatch => ({
     endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(filterId, filtervalg))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FiltreringBrukere);
+export default connect(mapStateToProps, mapDispatchToProps)(FiltreringFilter);
