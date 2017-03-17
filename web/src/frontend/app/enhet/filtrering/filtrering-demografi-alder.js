@@ -21,7 +21,8 @@ function FiltreringAlder({ filtervalg, handleChange, oppdaterDatagrunnlag }) {
                         (alderString, index) => ({
                             value: index + 1,
                             label: alderString,
-                            checked: index + 1 === Number(filtervalg.alder) })
+                            checked: filtervalg.alder.includes(index + 1)
+                        })
                     )
                 ]}
                 handleChange={e => handleChange(e, 'alder')}
