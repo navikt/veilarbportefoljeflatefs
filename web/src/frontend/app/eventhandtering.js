@@ -11,8 +11,10 @@ const hentOgDispatchAllInformasjonOmEnhet = (enhet) => {
     store.dispatch(hentPortefoljeStorrelser(enhet));
 };
 
-const handleChangeEnhet = (enhet) => {
-    hentOgDispatchAllInformasjonOmEnhet(enhet);
+const handleChangeEnhet = (event, enhet) => {
+    if (event.type === 'change') {
+        hentOgDispatchAllInformasjonOmEnhet(enhet);
+    }
 };
 
 const getConfig = (initiellEnhet = undefined) => {
@@ -21,8 +23,8 @@ const getConfig = (initiellEnhet = undefined) => {
             lenker:
             [
                     ['/mia', 'Arbeidsmarkedet'],
-                    ['/enhet/', 'Enhetsportefolje'],
-                    ['/portefolje', 'Veilederportefølje'],
+                    ['/veilarbportefoljeflatefs/enhet/', 'Enhetsportefolje'],
+                    ['/veilarbportefoljeflatefs/portefolje', 'Veilederportefølje'],
                     ['/modiabrukerdialog', 'Modia']
             ],
             tittel:
