@@ -3,13 +3,21 @@
         margin-right: 2rem;
     }
     a.valgt {
-        border-bottom: 0.15rem solid #0067c5;
+        border-bottom: 0.15rem solid @blue-interaction;
+        color: @blue-interaction;
         padding-bottom: 0.7rem;
         background-color: inherit;
+        text-decoration: none;
+        &:visited, &:active {
+            color: @blue-interaction;
+        }
     }
 
     a.ikke-valgt {
         border-bottom: none;
-        color: #3e3832;
+        text-decoration: none;
+        &:visited, &:active {
+            color: @navMorkGra;
+        }
     }
 }

@@ -33,9 +33,30 @@
 .portefolje-tabell {
     border-collapse: collapse;
 
+
+    thead tr:first-child th {
+        border-top: 1px solid @grayIcon;
+    }
+
+    tbody tr:first-child td, tbody tr:first-child th {
+        border-top-width: 1px;
+    }
+
     th {
         overflow: hidden;
         white-space: nowrap;
+    }
+
+    td, th {
+        vertical-align: middle;
+
+        .skjema__input {
+            margin-bottom: 0;
+        }
+    }
+
+    tbody th {
+        font-weight: normal;
     }
 
     .sikkerhetstiltak-td {
@@ -52,4 +73,3 @@
     }
 
 }
-
