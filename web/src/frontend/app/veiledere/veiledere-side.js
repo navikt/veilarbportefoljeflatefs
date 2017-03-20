@@ -39,7 +39,7 @@ class VeiledereSide extends Component {
         const { facetResults } = portefoljestorrelser.data;
 
         return (
-            <div className="veiledere-side panel">
+            <div className="veiledere-side">
                 <Lenker routes={routes} />
                 <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
                     <PagineringForvalter

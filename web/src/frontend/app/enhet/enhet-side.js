@@ -2,12 +2,13 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import Lenker from './../lenker/lenker';
+import { FormattedMessage } from 'react-intl';
+import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import TildelVeilederVelger from './tildel-veileder-velger';
 import { veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import FiltreringContainer from './filtrering/filtrering-container';
 import { tildelVeileder } from '../ducks/portefolje';
-import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 
 class EnhetSide extends Component {
@@ -45,8 +46,19 @@ class EnhetSide extends Component {
         return (
             <div className="enhet-side">
                 <Lenker routes={routes} />
+                <p className="typo-infotekst enhetsingress">
+                    <FormattedMessage
+                        id="enhet.valgt.infotekst"
+                        values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
+                    />
+                </p>
                 <FiltreringContainer />
-                <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
+                <Ekspanderbartpanel
+                    tittel="Tildel veileder" tittelProps={{
+                        tag: 'span',
+                        type: 'systemtittel'
+                    }}
+                >
                     {tildelVeilederVelger}
                 </Ekspanderbartpanel>
                 <PortefoljeVisning />

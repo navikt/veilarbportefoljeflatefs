@@ -27,7 +27,8 @@ function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder, brukere 
 
     return (
         <div className="TildelVeilederVelger">
-            <div className="select-container">
+            <div className="selectContainer">
+                <label htmlFor="select-veileder" className="text-hide">Velg veileder</label>
                 <select // eslint-disable-line jsx-a11y/no-onchange
                     id="select-veileder"
                     name="valgtVeileder"

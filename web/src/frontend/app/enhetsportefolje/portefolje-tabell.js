@@ -22,18 +22,28 @@ class PortefoljeTabell extends Component {
         const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
         return (
             <table className="tabell portefolje-tabell" tabIndex="0">
+                <thead className="extra-head">
+                    <tr>
+                        <th />
+                        <th>Bruker</th>
+                        <th />
+                        <th>Veileder</th>
+                        <th />
+                        <th />
+                    </tr>
+                </thead>
                 <thead>
                     <tr>
                         <th>
-                            <div className="nav-input">
+                            <div className="skjema__input">
                                 <input
-                                    className="nav-checkbox"
+                                    className="checkboks"
                                     id="checkbox-alle-brukere"
                                     type="checkbox"
                                     checked={alleMarkert}
                                     onClick={() => settSomMarkertAlle(!alleMarkert)}
                                 />
-                                <label htmlFor="checkbox-alle-brukere" />
+                                <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
                             </div>
                         </th>
                         <th>
@@ -45,7 +55,7 @@ class PortefoljeTabell extends Component {
                             <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                         </th>
                         <th>
-                            <FormattedMessage id="portefolje.tabell.veileder" />
+                            <FormattedMessage id="portefolje.tabell.navn" />
                         </th>
                         <th>
                             <FormattedMessage id="portefolje.tabell.navident" />
@@ -56,40 +66,40 @@ class PortefoljeTabell extends Component {
                 <tbody>
                     {brukere.map(bruker => <tr key={bruker.fnr}>
                         <td>
-                            <div className="nav-input">
+                            <div className="skjema__input">
                                 <input
-                                    className="nav-checkbox"
+                                    className="checkboks"
                                     id={`checkbox-${bruker.fnr}`}
                                     type="checkbox"
                                     checked={!!bruker.markert}
                                     onClick={() => settSomMarkert(bruker.fnr, !bruker.markert)}
                                 />
-                                <label htmlFor={`checkbox-${bruker.fnr}`} />
+                                <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
                             </div>
                         </td>
-                        <td>
+                        <th>
                             <a
                                 href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
                                 className="til-bruker-link"
                             >
                                 {`${bruker.etternavn}, ${bruker.fornavn}`}
                             </a>
-                        </td>
+                        </th>
                         <td>{bruker.fnr}</td>
                         {
-                                bruker.veilederId ? <td className="veileder-td">{veiledere
-                                    .filter(veileder => veileder.ident === bruker.veilederId)
-                                    .map(veileder => veileder.navn)}</td>
-                                    :
-                                <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
-                            }
+                        bruker.veilederId ? <td className="veileder-td">{veiledere
+                            .filter(veileder => veileder.ident === bruker.veilederId)
+                            .map(veileder => veileder.navn)}</td>
+                            :
+                        <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
+                    }
                         <td />
                         <td>
                             {bruker.sikkerhetstiltak.length > 0 ?
                                 <span className="etikett etikett--fokus">Sikkerhetstiltak</span> : null}
                             {bruker.diskresjonskode != null ?
                                 <span className="etikett etikett--fokus">{`Kode ${bruker.diskresjonskode}`}</span>
-                                : null}
+                            : null}
                             {bruker.egenAnsatt === true ?
                                 <span className="etikett etikett--fokus">Egen ansatt</span> : null}
                         </td>
