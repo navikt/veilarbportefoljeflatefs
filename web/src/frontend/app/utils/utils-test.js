@@ -20,17 +20,17 @@ describe('Utils', () => {
         });
 
         it('skal legge til alder i url hvis valgt alder er > 0', () => {
-            const filtervalg = { alder: 1 };
-            expect(filterUrlBuilder(filtervalg)).to.equal('&alder=1');
+            const filtervalg = { alder: [1] };
+            expect(filterUrlBuilder(filtervalg)).to.equal('&alder[]=1');
         });
 
         it('skal ikke legge til alder i url hvis alder er 0', () => {
-            const filtervalg = { alder: 0 };
+            const filtervalg = { alder: [0] };
             expect(filterUrlBuilder(filtervalg)).to.equal('');
         });
 
         it('skal ikke legge til alder i url hvis alder er > 8', () => {
-            const filtervalg = { alder: 9 };
+            const filtervalg = { alder: [9] };
             expect(filterUrlBuilder(filtervalg)).to.equal('');
         });
 
