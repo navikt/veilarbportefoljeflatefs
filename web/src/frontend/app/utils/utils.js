@@ -25,6 +25,10 @@ export function leggEnhetIUrl(enhet) { // eslint-disable-line consistent-return
     window.history.replaceState({}, null, `${pathname}?${stringified}`);
 }
 
+export function erMellom(variabel, fra, til) {
+    return variabel >= fra && variabel <= til;
+}
+
 export function filterUrlBuilder(filtervalg) {
     let result = '';
 
@@ -36,8 +40,8 @@ export function filterUrlBuilder(filtervalg) {
         result += `&inaktiveBrukere=${filtervalg.inaktiveBrukere}`;
     }
 
-    if (filtervalg.alder.length > 0) {
-        filtervalg.alder.forEach((i) => {
+    if (filtervalg.alder && filtervalg.alder.length > 0) {
+        filtervalg.alder.filter(i => erMellom(i, 1, 8)).forEach((i) => {
             result += `&alder[]=${i}`;
         });
     }
@@ -46,7 +50,7 @@ export function filterUrlBuilder(filtervalg) {
         result += `&kjonn=${filtervalg.kjonn}`;
     }
 
-    if (filtervalg.fodselsdagIMnd > 0 && filtervalg.fodselsdagIMnd <= 31) {
+    if (erMellom(filtervalg.fodselsdagIMnd, 1, 31)) {
         result += `&fodselsdagIMnd=${filtervalg.fodselsdagIMnd}`;
     }
     return result;
