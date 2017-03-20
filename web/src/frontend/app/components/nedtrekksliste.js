@@ -67,7 +67,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
         }
 
         toggleDialog(e) { // eslint-disable-line class-methods-use-this
-            const el = document.querySelector('.nedtrekksliste');
+            const el = document.querySelector(`.nedtrekksliste.${this.props.uniqueName}`);
             el.classList.toggle('nedtrekksliste--apen');
             if (el.hasAttribute('aria-hidden')) {
                 el.removeAttribute('aria-hidden');
@@ -78,7 +78,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
         }
 
         hideDialog() { // eslint-disable-line class-methods-use-this
-            const el = document.querySelector('.nedtrekksliste');
+            const el = document.querySelector(`.nedtrekksliste.${this.props.uniqueName}`);
             if (el) {
                 el.classList.remove('nedtrekksliste--apen');
                 el.removeAttribute('aria-hidden');
@@ -97,7 +97,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
                     <button className="nedtrekksliste-toggle" onClick={this.toggleDialog}>
                         <FormattedMessage id={this.props.navnId} />
                     </button>
-                    <div className="nedtrekksliste">
+                    <div className={`nedtrekksliste ${this.props.uniqueName}`}>
                         <form>
                             <ListeComponent liste={this.props.liste} handleChange={this.props.handleChange} />
                         </form>
@@ -116,7 +116,8 @@ function nedtrekkslisteWrapper(ListeComponent) {
         })).isRequired,
         handleChange: PT.func.isRequired,
         onSubmit: PT.func.isRequired,
-        navnId: PT.string.isRequired
+        navnId: PT.string.isRequired,
+        uniqueName: PT.string.isRequired
     };
 
     return Nedtrekksliste;

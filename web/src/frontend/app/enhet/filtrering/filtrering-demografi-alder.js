@@ -1,5 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import Nedtrekksliste from '../../components/nedtrekksliste';
+import { filtervalgMellomlagringShape } from '../../proptype-shapes';
 
 const aldersIntervaller = [
     '19 og under',
@@ -28,13 +29,14 @@ function FiltreringAlder({ filtervalg, handleChange, endreFilter }) {
                 handleChange={e => handleChange(e, 'alder')}
                 onSubmit={endreFilter}
                 navnId={'filtrering.filtrer-brukere.demografi.alder'}
+                uniqueName="alder"
             />
         </div>
     );
 }
 
 FiltreringAlder.propTypes = {
-    filtervalg: PT.object,
+    filtervalg: filtervalgMellomlagringShape.isRequired,
     handleChange: PT.func.isRequired,
     endreFilter: PT.func.isRequired
 };

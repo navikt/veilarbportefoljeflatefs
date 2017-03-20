@@ -12,7 +12,8 @@ class FiltreringFilter extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.filtervalg.alder !== this.props.filtervalg.alder) {
+        if (prevProps.filtervalg.alder !== this.props.filtervalg.alder ||
+            prevProps.filtervalg.fodselsdagIMnd !== this.props.filtervalg.fodselsdagIMnd) {
             this.props.oppdaterDatagrunnlag();
         }
     }
@@ -20,7 +21,7 @@ class FiltreringFilter extends Component {
     handleChange(e, filter) {
         const { endreFilterMellomlagring, filtervalgMellomlagring } = this.props;
 
-        const newArray = Array.from(filtervalgMellomlagring.alder);
+        const newArray = Array.from(filtervalgMellomlagring[filter]);
         if (e.target.checked === true) {
             newArray.push(Number(e.target.value));
         } else {

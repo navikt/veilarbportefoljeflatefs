@@ -50,8 +50,10 @@ export function filterUrlBuilder(filtervalg) {
         result += `&kjonn=${filtervalg.kjonn}`;
     }
 
-    if (erMellom(filtervalg.fodselsdagIMnd, 1, 31)) {
-        result += `&fodselsdagIMnd=${filtervalg.fodselsdagIMnd}`;
+    if (filtervalg.fodselsdagIMnd && filtervalg.fodselsdagIMnd.length > 0) {
+        filtervalg.fodselsdagIMnd.filter(i => erMellom(i, 0, 30)).forEach((i) => {
+            result += `&fodselsdagIMnd[]=${i}`;
+        });
     }
     return result;
 }
