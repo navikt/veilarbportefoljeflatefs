@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import TildelVeilederVelger from './tildel-veileder-velger';
 import { veilederShape, brukerShape } from './../proptype-shapes';
-import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
+import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringContainer from './filtrering/filtrering-container';
 import { tildelVeileder } from '../ducks/portefolje';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
@@ -47,7 +47,7 @@ class EnhetSide extends Component {
                 <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
                     {tildelVeilederVelger}
                 </Ekspanderbartpanel>
-                <PortefoljeVisning />
+                <EnhetsportefoljeVisning />
             </div>
         );
     }

@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { veilederShape, brukerShape } from '../proptype-shapes';
 import { markerAlleBrukere } from './../ducks/portefolje';
 
-class PortefoljeTabell extends Component {
+class EnhetsportefoljeTabell extends Component {
 
     componentWillMount() {
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
@@ -100,7 +100,7 @@ class PortefoljeTabell extends Component {
     }
 }
 
-PortefoljeTabell.propTypes = {
+EnhetsportefoljeTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
     settSorteringForPortefolje: PT.func.isRequired,
@@ -116,4 +116,4 @@ const mapDispatchToProps = dispatch => ({
     settSomMarkertAlle: markert => dispatch(markerAlleBrukere(markert))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeTabell);
+export default connect(mapStateToProps, mapDispatchToProps)(EnhetsportefoljeTabell);

@@ -12,10 +12,10 @@ import {
     nullstillFeilendeTilordninger
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
-import PortefoljeTabell from './portefolje-tabell';
+import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
 import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
 
-class PortefoljeVisning extends Component {
+class EnhetsportefoljeVisning extends Component {
     componentWillMount() {
         const {
             valgtEnhet, hentPortefolje, sorteringsrekkefolge, fraIndex, antall, filtervalg
@@ -96,7 +96,7 @@ class PortefoljeVisning extends Component {
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
-                <PortefoljeTabell
+                <EnhetsportefoljeTabell
                     veiledere={veiledere.data.veilederListe}
                     brukere={portefolje.data.brukere}
                     settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
@@ -107,7 +107,7 @@ class PortefoljeVisning extends Component {
     }
 }
 
-PortefoljeVisning.propTypes = {
+EnhetsportefoljeVisning.propTypes = {
     valgtEnhet: PT.object.isRequired,
     portefolje: PT.shape({
         data: portefoljeShape.isRequired,
@@ -146,4 +146,4 @@ const mapDispatchToProps = dispatch => ({
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeVisning);
+export default connect(mapStateToProps, mapDispatchToProps)(EnhetsportefoljeVisning);
