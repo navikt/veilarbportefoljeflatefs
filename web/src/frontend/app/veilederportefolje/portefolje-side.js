@@ -39,7 +39,8 @@ class PortefoljeSide extends Component {
             <div>
                 {erAnnenVeileder ?
                 <Link to="veiledere" className="typo-normal tilbaketilveileder">
-                    Til veilederoversikt
+                    <i className="chevron--venstre" />
+                    <span>Til veilederoversikt</span>
                 </Link> : null}
                 <section className={erAnnenVeileder ? "annen-veileder" : ""}>
                     {erAnnenVeileder ? annenVeilederVarsel : null}
