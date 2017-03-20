@@ -1,7 +1,9 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
+import { endreFiltervalgMellomlagring } from '../../ducks/filtrering-mellomlagring';
 import { endreFiltervalg } from '../../ducks/filtrering';
-import Demografi from './demografi';
+import FiltreringDemografi from './filtrering-demografi';
+import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
 
 class FiltreringFilter extends Component {
     constructor(props) {
@@ -9,41 +11,52 @@ class FiltreringFilter extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(e, filter) {
-        const { endreFilter, filtervalg } = this.props;
+    componentDidUpdate(prevProps) {
+        if (prevProps.filtervalg.alder !== this.props.filtervalg.alder) {
+            this.props.oppdaterDatagrunnlag();
+        }
+    }
 
-        const newArray = Array.from(filtervalg.alder);
+    handleChange(e, filter) {
+        const { endreFilterMellomlagring, filtervalgMellomlagring } = this.props;
+
+        const newArray = Array.from(filtervalgMellomlagring.alder);
         if (e.target.checked === true) {
             newArray.push(Number(e.target.value));
         } else {
             newArray.splice(newArray.indexOf(Number(e.target.value)), 1);
         }
 
-        endreFilter(filter, newArray);
+        endreFilterMellomlagring(filter, newArray);
     }
 
     render() {
         return (
-            <Demografi
+            <FiltreringDemografi
                 filtervalg={this.props.filtervalg}
+                filtervalgMellomlagring={this.props.filtervalgMellomlagring}
                 handleChange={this.handleChange}
-                oppdaterDatagrunnlag={this.props.oppdaterDatagrunnlag}
+                endreFilter={this.props.endreFilter}
             />
         );
     }
 }
 
 FiltreringFilter.propTypes = {
+    endreFilterMellomlagring: PT.func.isRequired,
     endreFilter: PT.func.isRequired,
-    filtervalg: PT.object,
+    filtervalg: filtervalgShape.isRequired,
+    filtervalgMellomlagring: filtervalgMellomlagringShape.isRequired,
     oppdaterDatagrunnlag: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    filtervalg: state.filtrering.filtervalg
+    filtervalg: state.filtrering.filtervalg,
+    filtervalgMellomlagring: state.filtreringMellomlagring.filtervalg
 });
 
 const mapDispatchToProps = dispatch => ({
+    endreFilterMellomlagring: (filterId, filtervalg) => dispatch(endreFiltervalgMellomlagring(filterId, filtervalg)),
     endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(filterId, filtervalg))
 });
 
