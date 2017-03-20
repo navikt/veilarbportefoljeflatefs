@@ -21,7 +21,7 @@ const initialState = {
         inaktiveBrukere: false,
         alder: [],
         kjonn: 'ikke definert',
-        fodselsdagIMnd: 0
+        fodselsdagIMnd: []
     }
 };
 

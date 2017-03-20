@@ -8,7 +8,7 @@ const initialState = {
     filtervalg: {
         alder: [],
         kjonn: 'ikke definert',
-        fodselsdagIMnd: 0
+        fodselsdagIMnd: []
     }
 };
 

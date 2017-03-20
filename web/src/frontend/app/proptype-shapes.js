@@ -53,7 +53,7 @@ export const valgtEnhetShape = PT.shape({
 export const filtervalgMellomlagringShape = PT.shape({
     alder: PT.arrayOf(PT.number).isRequired,
     kjonn: PT.string.isRequired,
-    fodselsdagIMnd: PT.number.isRequired
+    fodselsdagIMnd: PT.arrayOf(PT.number).isRequired
 });
 
 export const filtervalgShape = PT.shape({
@@ -61,5 +61,5 @@ export const filtervalgShape = PT.shape({
     inaktiveBrukere: PT.bool.isRequired,
     alder: PT.arrayOf(PT.number).isRequired,
     kjonn: PT.string.isRequired,
-    fodselsdagIMnd: PT.number.isRequired
+    fodselsdagIMnd: PT.arrayOf(PT.number).isRequired
 });

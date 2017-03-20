@@ -18,8 +18,9 @@ function FiltreringDemografi({ filtervalg, handleChange, filtervalgMellomlagring
                 handleChange={handleChange}
             />
             <FiltreringFodselsdag
-                filtervalg={filtervalg}
+                filtervalg={filtervalgMellomlagring}
                 handleChange={handleChange}
+                endreFilter={() => endreFilter('fodselsdagIMnd', filtervalgMellomlagring.fodselsdagIMnd)}
             />
         </div>
     );
