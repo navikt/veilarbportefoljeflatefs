@@ -1,16 +1,17 @@
 import React, { PropTypes as PT } from 'react';
+import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
 
 import FiltreringAlder from './filtrering-demografi-alder';
 import FiltreringKjonn from './filtrering-demografi-kjonn';
 import FiltreringFodselsdag from './filtrering-demografi-fodselsdag';
 
-function Demografi({ filtervalg, handleChange, oppdaterDatagrunnlag }) {
+function FiltreringDemografi({ filtervalg, handleChange, filtervalgMellomlagring, endreFilter }) {
     return (
         <div className="filtrering-demografi panel blokk-m">
             <FiltreringAlder
-                filtervalg={filtervalg}
+                filtervalg={filtervalgMellomlagring}
                 handleChange={handleChange}
-                oppdaterDatagrunnlag={oppdaterDatagrunnlag}
+                endreFilter={() => endreFilter('alder', filtervalgMellomlagring.alder)}
             />
             <FiltreringKjonn
                 filtervalg={filtervalg}
@@ -24,10 +25,11 @@ function Demografi({ filtervalg, handleChange, oppdaterDatagrunnlag }) {
     );
 }
 
-Demografi.propTypes = {
-    filtervalg: PT.object,
+FiltreringDemografi.propTypes = {
+    filtervalg: filtervalgShape.isRequired,
     handleChange: PT.func.isRequired,
-    oppdaterDatagrunnlag: PT.func.isRequired
+    filtervalgMellomlagring: filtervalgMellomlagringShape.isRequired,
+    endreFilter: PT.func.isRequired
 };
 
-export default Demografi;
+export default FiltreringDemografi;

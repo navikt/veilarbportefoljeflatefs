@@ -12,7 +12,7 @@ const aldersIntervaller = [
     '67-70'
 ];
 
-function FiltreringAlder({ filtervalg, handleChange, oppdaterDatagrunnlag }) {
+function FiltreringAlder({ filtervalg, handleChange, endreFilter }) {
     return (
         <div className="select-container">
             <Nedtrekksliste
@@ -26,7 +26,7 @@ function FiltreringAlder({ filtervalg, handleChange, oppdaterDatagrunnlag }) {
                     )
                 ]}
                 handleChange={e => handleChange(e, 'alder')}
-                onSubmit={oppdaterDatagrunnlag}
+                onSubmit={endreFilter}
                 navnId={'filtrering.filtrer-brukere.demografi.alder'}
             />
         </div>
@@ -36,7 +36,7 @@ function FiltreringAlder({ filtervalg, handleChange, oppdaterDatagrunnlag }) {
 FiltreringAlder.propTypes = {
     filtervalg: PT.object,
     handleChange: PT.func.isRequired,
-    oppdaterDatagrunnlag: PT.func.isRequired
+    endreFilter: PT.func.isRequired
 };
 
 export default FiltreringAlder;

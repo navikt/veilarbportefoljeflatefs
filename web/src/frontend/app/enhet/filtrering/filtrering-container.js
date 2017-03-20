@@ -4,12 +4,18 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { hentPortefoljeForEnhet } from '../../ducks/filtrering';
 import FiltreringStatus from './filtrering-status';
 import FiltreringFilter from './filtrering-filter';
+import { eksporterEnhetsportefoljeTilLocalStorage } from '../../ducks/utils';
 
 class FiltreringContainer extends Component {
     constructor(props) {
         super(props);
 
         this.oppdaterDatagrunnlag = this.oppdaterDatagrunnlag.bind(this);
+    }
+
+    componentDidUpdate() {
+        const { filtervalg, valgtEnhet } = this.props;
+        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
     }
 
     oppdaterDatagrunnlag() {
@@ -21,7 +27,7 @@ class FiltreringContainer extends Component {
         return (
             <div className="filtrering-container">
                 <Ekspanderbartpanel tittel="Status" tittelProps="systemtittel">
-                    <FiltreringStatus />
+                    <FiltreringStatus oppdaterDatagrunnlag={this.oppdaterDatagrunnlag} />
                 </Ekspanderbartpanel>
                 <Ekspanderbartpanel tittel="Filter" tittelProps="systemtittel">
                     <FiltreringFilter oppdaterDatagrunnlag={this.oppdaterDatagrunnlag} />

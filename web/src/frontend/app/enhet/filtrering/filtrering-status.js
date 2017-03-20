@@ -2,7 +2,6 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { endreFiltervalg } from '../../ducks/filtrering';
-import { eksporterEnhetsportefoljeTilLocalStorage } from '../../ducks/utils';
 
 class FiltreringStatus extends Component {
     constructor(props) {
@@ -11,8 +10,7 @@ class FiltreringStatus extends Component {
     }
 
     componentDidUpdate() {
-        const { filtervalg, valgtEnhet } = this.props;
-        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
+        this.props.oppdaterDatagrunnlag();
     }
 
     handleChange(e) {
@@ -21,7 +19,7 @@ class FiltreringStatus extends Component {
     }
 
     render() {
-        const { filtervalg } = this.props;
+        const { nyeBrukere, inaktiveBrukere } = this.props;
 
         const checkboxNyeBrukere = (<div className="nav-input">
             <input
@@ -29,7 +27,7 @@ class FiltreringStatus extends Component {
                 id="checkbox-filtrering-oversikt-nye-brukere"
                 type="checkbox"
                 onChange={this.handleChange}
-                checked={filtervalg.nyeBrukere}
+                checked={nyeBrukere}
             />
             <label htmlFor="checkbox-filtrering-oversikt-nye-brukere">
                 <FormattedMessage id="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox" />
@@ -42,7 +40,7 @@ class FiltreringStatus extends Component {
                 id="checkbox-filtrering-oversikt-inaktive-brukere"
                 type="checkbox"
                 onChange={this.handleChange}
-                checked={filtervalg.inaktiveBrukere}
+                checked={inaktiveBrukere}
             />
             <label htmlFor="checkbox-filtrering-oversikt-inaktive-brukere">
                 <FormattedMessage id="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox" />
@@ -60,13 +58,14 @@ class FiltreringStatus extends Component {
 
 FiltreringStatus.propTypes = {
     endreFilter: PT.func.isRequired,
-    filtervalg: PT.object,
-    valgtEnhet: PT.string.isRequired
+    oppdaterDatagrunnlag: PT.func.isRequired,
+    nyeBrukere: PT.bool.isRequired,
+    inaktiveBrukere: PT.bool.isRequired
 };
 
 const mapStateToProps = state => ({
-    filtervalg: state.filtrering.filtervalg,
-    valgtEnhet: state.enheter.valgtEnhet.enhet.enhetId
+    nyeBrukere: state.filtrering.filtervalg.nyeBrukere,
+    inaktiveBrukere: state.filtrering.filtervalg.inaktiveBrukere
 });
 
 const mapDispatchToProps = dispatch => ({
