@@ -1,8 +1,10 @@
 import React, {Component, PropTypes as PT} from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
+import {Link} from 'react-router';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import LenkerMiversikt from './../lenker/lenker-minoversikt';
+import Normaltekst from 'nav-frontend-typografi';
+import LenkerMinoversikt from './../lenker/lenker-minoversikt';
 import VeilederPortefoljeVisning from './veileder-portefolje-visning';
 import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
 import {veilederShape, brukerShape} from '../proptype-shapes';
@@ -13,15 +15,18 @@ class PortefoljeSide extends Component {
     render() {
         const {ident, veileder, brukere, veiledere, velgVeileder, routes} = this.props;
 
-        const annenVeilederVarsel = ident === veileder.ident ?
-            (<noScript />) :
-            (<FormattedMessage
+        const erAnnenVeileder = ident !== veileder.ident;
+
+        const annenVeilederVarsel = <Normaltekst tag="h1" type="normal" className="blokk-s">
+            <FormattedMessage
                 id="annen.veileder.portefolje.advarsel"
+                tagName="em"
                 values={{
                     fornavn: veileder.fornavn,
                     etternavn: veileder.etternavn
                 }}
-            />);
+            /></Normaltekst>;
+
 
         const tildelVeilederVelger =
             (<TildelVeilederVelger
@@ -32,14 +37,20 @@ class PortefoljeSide extends Component {
 
         return (
             <div>
-                {annenVeilederVarsel}
-                <div className="portefolje-side">
-                    <LenkerMiversikt routes={routes}/>
-                    <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
-                        {tildelVeilederVelger}
-                    </Ekspanderbartpanel>
-                    <VeilederPortefoljeVisning />
-                </div>
+                {erAnnenVeileder ?
+                <Link to="veiledere" className="typo-normal tilbaketilveileder">
+                    Til veilederoversikt
+                </Link> : null}
+                <section className={erAnnenVeileder ? "annen-veileder" : ""}>
+                    {erAnnenVeileder ? annenVeilederVarsel : null}
+                    <div className="portefolje-side">
+                        <LenkerMinoversikt routes={routes}/>
+                        <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
+                            {tildelVeilederVelger}
+                        </Ekspanderbartpanel>
+                        <VeilederPortefoljeVisning />
+                    </div>
+                </section>
             </div>
         );
     }
