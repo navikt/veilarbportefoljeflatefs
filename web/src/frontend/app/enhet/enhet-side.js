@@ -10,17 +10,6 @@ import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 
 class EnhetSide extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            liste: [
-                { key: '1', value: 'Arne And', checked: false },
-                { key: '2', value: 'Tore Tang', checked: false },
-                { key: '3', value: 'Else Koss', checked: false }
-            ]
-        };
-    }
-
     componentWillMount() {
         const { valgtEnhet, hentVeiledere } = this.props;
         hentVeiledere(valgtEnhet.enhet.enhetId);
