@@ -1,6 +1,7 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import Lenker from './../lenker/lenker';
 import TildelVeilederVelger from './tildel-veileder-velger';
 import { veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
@@ -24,7 +25,8 @@ class EnhetSide extends Component {
             veiledere,
             valgtVeileder,
             velgVeileder,
-            brukere
+            brukere,
+            routes
         } = this.props;
 
 
@@ -42,6 +44,7 @@ class EnhetSide extends Component {
 
         return (
             <div className="enhet-side">
+                <Lenker routes={routes} />
                 <FiltreringContainer />
                 <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
                     {tildelVeilederVelger}
@@ -55,6 +58,7 @@ class EnhetSide extends Component {
 EnhetSide.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
+    routes: PT.arrayOf(PT.object),
     valgtEnhet: PT.object,
     filtervalg: PT.object,
     valgtVeileder: PT.object,

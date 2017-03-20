@@ -9,6 +9,7 @@ import {
 import VeiledereTabell from './veiledere-tabell';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import PagineringForvalter from '../paginering/pagineringforvalter';
+import Lenker from './../lenker/lenker';
 import { settSorteringRekkefolge, settSubListeForPaginering } from '../ducks/paginering';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
@@ -33,12 +34,13 @@ class VeiledereSide extends Component {
     }
     render() {
         const { veiledere, portefoljestorrelser, veiledereSomSkalVises, sorterPaaEtternavn,
-            currentSorteringsRekkefolge } = this.props;
+            currentSorteringsRekkefolge, routes } = this.props;
         const { veilederListe } = veiledere.data;
         const { facetResults } = portefoljestorrelser.data;
 
         return (
             <div className="veiledere-side panel">
+                <Lenker routes={routes} />
                 <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
                     <PagineringForvalter
                         liste={veilederListe}
@@ -65,6 +67,7 @@ VeiledereSide.propTypes = {
     }).isRequired,
     veiledereSomSkalVises: PT.arrayOf(veilederShape).isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
+    routes: PT.arrayOf(PT.object),
     hentVeiledere: PT.func.isRequired,
     hentPortefoljestorrelser: PT.func.isRequired,
     currentSorteringsRekkefolge: PT.string.isRequired,

@@ -1,14 +1,19 @@
-import React, { PropTypes as PT } from 'react';
-import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import React, {Component, PropTypes as PT} from 'react';
+import {connect} from 'react-redux';
+import {FormattedMessage} from 'react-intl';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import LenkerMiversikt from './../lenker/lenker-minoversikt';
 import VeilederPortefoljeVisning from './veileder-portefolje-visning';
 import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
-import { veilederShape, brukerShape } from '../proptype-shapes';
-import { tildelVeileder } from '../ducks/portefolje';
+import {veilederShape, brukerShape} from '../proptype-shapes';
+import {tildelVeileder} from '../ducks/portefolje';
 
-function PortefoljeSide({ ident, veileder, brukere, veiledere, velgVeileder }) {
-    const annenVeilederVarsel = ident === veileder.ident ?
+class PortefoljeSide extends Component {
+
+    render() {
+        const {ident, veileder, brukere, veiledere, velgVeileder, routes} = this.props;
+
+        const annenVeilederVarsel = ident === veileder.ident ?
             (<noScript />) :
             (<FormattedMessage
                 id="annen.veileder.portefolje.advarsel"
@@ -18,29 +23,32 @@ function PortefoljeSide({ ident, veileder, brukere, veiledere, velgVeileder }) {
                 }}
             />);
 
-    const tildelVeilederVelger =
-        (<TildelVeilederVelger
-            veiledere={veiledere}
-            brukere={brukere}
-            velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
-        />);
+        const tildelVeilederVelger =
+            (<TildelVeilederVelger
+                veiledere={veiledere}
+                brukere={brukere}
+                velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
+            />);
 
-    return (
-        <div>
-            {annenVeilederVarsel}
-            <div className="portefolje-side">
-                <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel" >
-                    {tildelVeilederVelger}
-                </Ekspanderbartpanel>
-                <VeilederPortefoljeVisning />
+        return (
+            <div>
+                {annenVeilederVarsel}
+                <div className="portefolje-side">
+                    <LenkerMiversikt routes={routes}/>
+                    <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
+                        {tildelVeilederVelger}
+                    </Ekspanderbartpanel>
+                    <VeilederPortefoljeVisning />
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 PortefoljeSide.propTypes = {
     ident: PT.string.isRequired,
     veileder: veilederShape.isRequired,
+    routes: PT.arrayOf(PT.object),
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
     velgVeileder: PT.func.isRequired
