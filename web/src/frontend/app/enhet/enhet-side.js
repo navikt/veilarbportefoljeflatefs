@@ -1,8 +1,8 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import Lenker from './../lenker/lenker';
 import { FormattedMessage } from 'react-intl';
+import Lenker from './../lenker/lenker';
 import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import TildelVeilederVelger from './tildel-veileder-velger';
 import { veilederShape, brukerShape } from './../proptype-shapes';

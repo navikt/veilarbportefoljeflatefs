@@ -1,60 +1,56 @@
-import React, {Component, PropTypes as PT} from 'react';
-import {connect} from 'react-redux';
-import {FormattedMessage} from 'react-intl';
-import {Link} from 'react-router';
+import React, { PropTypes as PT } from 'react';
+import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import Normaltekst from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
 import VeilederPortefoljeVisning from './veileder-portefolje-visning';
 import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
-import {veilederShape, brukerShape} from '../proptype-shapes';
-import {tildelVeileder} from '../ducks/portefolje';
+import { veilederShape, brukerShape } from '../proptype-shapes';
+import { tildelVeileder } from '../ducks/portefolje';
 
-class PortefoljeSide extends Component {
+function PortefoljeSide({ ident, veileder, brukere, veiledere, velgVeileder, routes }) {
+    // const erAnnenVeileder = veileder !== "ikke_satt" && ident !== veileder.ident;
+    const erAnnenVeileder = ident !== veileder.ident;
 
-    render() {
-        const {ident, veileder, brukere, veiledere, velgVeileder, routes} = this.props;
-
-        const erAnnenVeileder = ident !== veileder.ident;
-
-        const annenVeilederVarsel = <Normaltekst tag="h1" type="normal" className="blokk-s">
-            <FormattedMessage
-                id="annen.veileder.portefolje.advarsel"
-                tagName="em"
-                values={{
-                    fornavn: veileder.fornavn,
-                    etternavn: veileder.etternavn
-                }}
-            /></Normaltekst>;
+    const annenVeilederVarsel = (<Normaltekst tag="h1" type="normal" className="blokk-s">
+        <FormattedMessage
+            id="annen.veileder.portefolje.advarsel"
+            tagName="em"
+            values={{
+                fornavn: veileder.fornavn,
+                etternavn: veileder.etternavn
+            }}
+        /></Normaltekst>);
 
 
-        const tildelVeilederVelger =
-            (<TildelVeilederVelger
-                veiledere={veiledere}
-                brukere={brukere}
-                velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
-            />);
+    const tildelVeilederVelger =
+        (<TildelVeilederVelger
+            veiledere={veiledere}
+            brukere={brukere}
+            velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
+        />);
 
-        return (
-            <div>
-                {erAnnenVeileder ?
+    return (
+        <div>
+            {erAnnenVeileder ?
                 <Link to="veiledere" className="typo-normal tilbaketilveileder">
                     <i className="chevron--venstre" />
                     <span>Til veilederoversikt</span>
                 </Link> : null}
-                <section className={erAnnenVeileder ? "annen-veileder" : ""}>
-                    {erAnnenVeileder ? annenVeilederVarsel : null}
-                    <div className="portefolje-side">
-                        <LenkerMinoversikt routes={routes}/>
-                        <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
-                            {tildelVeilederVelger}
-                        </Ekspanderbartpanel>
-                        <VeilederPortefoljeVisning />
-                    </div>
-                </section>
-            </div>
-        );
-    }
+            <section className={erAnnenVeileder ? 'annen-veileder' : ''}>
+                {erAnnenVeileder ? annenVeilederVarsel : null}
+                <div className="portefolje-side">
+                    <LenkerMinoversikt routes={routes} />
+                    <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="systemtittel">
+                        {tildelVeilederVelger}
+                    </Ekspanderbartpanel>
+                    <VeilederPortefoljeVisning />
+                </div>
+            </section>
+        </div>
+    );
 }
 
 PortefoljeSide.propTypes = {
