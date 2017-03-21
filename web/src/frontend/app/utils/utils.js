@@ -41,7 +41,7 @@ export function filterUrlBuilder(filtervalg) {
     }
 
     if (filtervalg.alder && filtervalg.alder.length > 0) {
-        filtervalg.alder.filter(i => erMellom(i, 1, 8)).forEach((i) => {
+        filtervalg.alder.filter(i => erMellom(i, 0, 7)).forEach((i) => {
             result += `&alder[]=${i}`;
         });
     }
