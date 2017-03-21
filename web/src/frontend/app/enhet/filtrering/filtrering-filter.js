@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { endreFiltervalgMellomlagring } from '../../ducks/filtrering-mellomlagring';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import FiltreringDemografi from './filtrering-demografi';
+import FiltreringSituasjon from './filtrering-situasjon';
 import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
 
 class FiltreringFilter extends Component {
@@ -14,7 +15,8 @@ class FiltreringFilter extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.filtervalg.alder !== this.props.filtervalg.alder ||
             prevProps.filtervalg.fodselsdagIMnd !== this.props.filtervalg.fodselsdagIMnd ||
-            prevProps.filtervalg.kjonn !== this.props.filtervalg.kjonn) {
+            prevProps.filtervalg.kjonn !== this.props.filtervalg.kjonn ||
+            prevProps.filtervalg.innsatsgruppe !== this.props.filtervalg.innsatsgruppe) {
             this.props.oppdaterDatagrunnlag();
         }
     }
@@ -34,12 +36,20 @@ class FiltreringFilter extends Component {
 
     render() {
         return (
-            <FiltreringDemografi
-                filtervalg={this.props.filtervalg}
-                filtervalgMellomlagring={this.props.filtervalgMellomlagring}
-                handleChange={this.handleChange}
-                endreFilter={this.props.endreFilter}
-            />
+            <div className="filtrering-filter">
+                <FiltreringDemografi
+                    filtervalg={this.props.filtervalg}
+                    filtervalgMellomlagring={this.props.filtervalgMellomlagring}
+                    handleChange={this.handleChange}
+                    endreFilter={this.props.endreFilter}
+                />
+                <FiltreringSituasjon
+                    filtervalg={this.props.filtervalg}
+                    filtervalgMellomlagring={this.props.filtervalgMellomlagring}
+                    handleChange={this.handleChange}
+                    endreFilter={this.props.endreFilter}
+                />
+            </div>
         );
     }
 }

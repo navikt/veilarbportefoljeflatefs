@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { filterUrlBuilder, arraysHaveEqualContent } from '../utils/utils';
+import { filterUrlBuilder, arraysHaveEqualContent, erMellom } from '../utils/utils';
 
 describe('Utils', () => {
     describe('filterUrlBuilder', () => {
@@ -34,28 +34,68 @@ describe('Utils', () => {
             expect(filterUrlBuilder(filtervalg)).to.equal('');
         });
 
-        it('skal legge til M kjønn i url hvis Mann er valgt', () => {
-            const filtervalg = { kjonn: 'M' };
-            expect(filterUrlBuilder(filtervalg)).to.equal('&kjonn=M');
+        it('skal legge til kjønn i url hvis Mann er valgt', () => {
+            const filtervalg = { kjonn: [1] };
+            expect(filterUrlBuilder(filtervalg)).to.equal('&kjonn=1');
         });
 
-        it('skal legge til K kjønn i url hvis Kvinne er valgt', () => {
-            const filtervalg = { kjonn: 'K' };
-            expect(filterUrlBuilder(filtervalg)).to.equal('&kjonn=K');
+        it('skal legge til kjønn i url hvis Kvinne er valgt', () => {
+            const filtervalg = { kjonn: [0] };
+            expect(filterUrlBuilder(filtervalg)).to.equal('&kjonn=0');
         });
 
-        it('skal ikke legge til kjønn i url hvis hverken Mann eller Kvinne er valgt', () => {
-            let filtervalg = { kjonn: 'ikke definert' };
+        it('skal ikke legge til kjønn i url hvis hverken Mann eller Kvinne er valgt eller begge er valg', () => {
+            let filtervalg = { kjonn: [0, 1] };
             expect(filterUrlBuilder(filtervalg)).to.equal('');
-            filtervalg = { kjonn: 'L' };
+            filtervalg = { kjonn: -3000 };
             expect(filterUrlBuilder(filtervalg)).to.equal('');
-            filtervalg = { kjonn: null };
+        });
+
+        it('skal legge til innsatsgruppe 0', () => {
+            const filtervalg = { innsatsgruppe: [0] };
+            expect(filterUrlBuilder(filtervalg)).to.equal('&innsatsgruppe[]=0');
+        });
+
+        it('skal legge til innsatsgruppe 0 og 1', () => {
+            const filtervalg = { innsatsgruppe: [0, 1] };
+            expect(filterUrlBuilder(filtervalg)).to.equal('&innsatsgruppe[]=0&innsatsgruppe[]=1');
+        });
+
+        it('skal legge til innsatsgruppe 1, 2 og 3', () => {
+            const filtervalg = { innsatsgruppe: [1, 2, 3] };
+            expect(filterUrlBuilder(filtervalg)).to.equal('&innsatsgruppe[]=1&innsatsgruppe[]=2&innsatsgruppe[]=3');
+        });
+
+        it('skal ikke legge til innsatsgruppe hvis ikke valgt', () => {
+            const filtervalg = { innsatsgruppe: [] };
+            expect(filterUrlBuilder(filtervalg)).to.equal('');
+        });
+
+        it('skal ikke legge til innsatsgruppe hvis ugyldige verdier', () => {
+            const filtervalg = { innsatsgruppe: [-1, 3000] };
             expect(filterUrlBuilder(filtervalg)).to.equal('');
         });
 
         it('skal ikke legge til filtre i url hvis det ikke finnes filtre', () => {
             const filtervalg = {};
             expect(filterUrlBuilder(filtervalg)).to.equal('');
+        });
+    });
+    describe('erMellom', () => {
+        it('skal returnere true når 8 er mellom 2 og 8', () => {
+            expect(erMellom(8, 2, 8)).to.be.equal(true);
+        });
+
+        it('skal returnere true når 2 er mellom 2 og 8', () => {
+            expect(erMellom(2, 2, 8)).to.be.equal(true);
+        });
+
+        it('skal returnere false når 1 ikke er mellom 2 og 8', () => {
+            expect(erMellom(1, 2, 8)).to.be.equal(false);
+        });
+
+        it('skal returnere false når 9 ikke er mellom 2 og 8', () => {
+            expect(erMellom(9, 2, 8)).to.be.equal(false);
         });
     });
     describe('arraysHaveEqualContent', () => {
