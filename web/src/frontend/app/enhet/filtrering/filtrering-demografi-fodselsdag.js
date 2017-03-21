@@ -1,10 +1,10 @@
 import React, { PropTypes as PT } from 'react';
 import Nedtrekksliste from '../../components/nedtrekksliste';
-import { filtervalgMellomlagringShape } from '../../proptype-shapes';
+import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
 
 import { range, lag2Sifret } from '../../utils/utils';
 
-function FiltreringFodselsdag({ filtervalg, handleChange, endreFilter }) {
+function FiltreringFodselsdag({ filtervalg, filtervalgMellomlagring, handleChange, endreFilter }) {
     return (
         <div className="select-container">
             <Nedtrekksliste
@@ -12,20 +12,23 @@ function FiltreringFodselsdag({ filtervalg, handleChange, endreFilter }) {
                     range(1, 31, true).map((x, index) => ({
                         value: index,
                         label: lag2Sifret(x),
-                        checked: filtervalg.fodselsdagIMnd.includes(index)
+                        checked: filtervalgMellomlagring.fodselsdagIMnd.includes(index)
                     }))
                 }
                 handleChange={e => handleChange(e, 'fodselsdagIMnd')}
                 onSubmit={endreFilter}
                 navnId="filtrering.filtrer-brukere.demografi.fodselsdato"
                 uniqueName="fodselsdagIMnd"
+                filtervalgMellomlagring={filtervalgMellomlagring}
+                filtervalg={filtervalg}
             />
         </div>
     );
 }
 
 FiltreringFodselsdag.propTypes = {
-    filtervalg: filtervalgMellomlagringShape.isRequired,
+    filtervalgMellomlagring: filtervalgMellomlagringShape.isRequired,
+    filtervalg: filtervalgShape.isRequired,
     handleChange: PT.func.isRequired,
     endreFilter: PT.func.isRequired
 };
