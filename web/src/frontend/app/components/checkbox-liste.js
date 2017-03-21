@@ -1,19 +1,19 @@
 import React, { PropTypes as PT } from 'react';
 
-function CheckboxListe({ liste, handleChange }) {
+function CheckboxListe({ liste, handleChange, uniqueName }) {
     return (
         <ul className="nedtrekksliste-liste">
             {liste.map((listeElement, indeks) => (
                 <li key={indeks}>
                     <input
-                        id={`${indeks}-checkbox`}
+                        id={`${uniqueName}-${indeks}-checkbox`}
                         type="checkbox"
                         className="nav-checkbox"
                         onChange={handleChange}
                         value={listeElement.value}
                         checked={listeElement.checked}
                     />
-                    <label htmlFor={`${indeks}-checkbox`}>{listeElement.label}</label>
+                    <label htmlFor={`${uniqueName}-${indeks}-checkbox`}>{listeElement.label}</label>
                 </li>
             ))}
         </ul>
@@ -26,7 +26,8 @@ CheckboxListe.propTypes = {
         value: PT.oneOfType([PT.string, PT.number]),
         checked: PT.bool
     })),
-    handleChange: PT.func
+    handleChange: PT.func,
+    uniqueName: PT.string.isRequired
 };
 
 export default CheckboxListe;

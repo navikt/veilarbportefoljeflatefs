@@ -16,7 +16,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
                 let target = e.target;
                 let isCalWrap = false;
                 while (target.parentNode) {
-                    if (target.classList.contains('nedtrekksliste-container')) {
+                    if (target.classList.contains(this.props.uniqueName)) {
                         isCalWrap = true;
                         break;
                     }
@@ -28,6 +28,8 @@ function nedtrekkslisteWrapper(ListeComponent) {
             };
             skjulHvisKlikkUtenfor = skjulHvisKlikkUtenfor.bind(this);
             document.querySelector('body').addEventListener('click', skjulHvisKlikkUtenfor);
+
+            this.toggleDialog = this.toggleDialog.bind(this);
         }
 
         componentDidMount() {
@@ -67,7 +69,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
         }
 
         toggleDialog(e) { // eslint-disable-line class-methods-use-this
-            const el = document.querySelector(`.nedtrekksliste.${this.props.uniqueName}`);
+            const el = document.querySelector(`.${this.props.uniqueName} .nedtrekksliste`);
             el.classList.toggle('nedtrekksliste--apen');
             if (el.hasAttribute('aria-hidden')) {
                 el.removeAttribute('aria-hidden');
@@ -78,7 +80,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
         }
 
         hideDialog() { // eslint-disable-line class-methods-use-this
-            const el = document.querySelector(`.nedtrekksliste.${this.props.uniqueName}`);
+            const el = document.querySelector(`.${this.props.uniqueName} .nedtrekksliste`);
             if (el) {
                 el.classList.remove('nedtrekksliste--apen');
                 el.removeAttribute('aria-hidden');
@@ -88,18 +90,22 @@ function nedtrekkslisteWrapper(ListeComponent) {
         render() {
             const knapp = () => (
                 this.noeErChecked() ?
-                    <Hovedknapp onClick={this.props.onSubmit}>Velg</Hovedknapp> :
+                    <Hovedknapp onClick={() => { this.hideDialog(); this.props.onSubmit(); }}>Velg</Hovedknapp> :
                     <Knapp onClick={this.toggleDialog}>Lukk</Knapp>
             );
 
             return (
-                <section className="nedtrekksliste-container" role="listbox">
+                <section className={`nedtrekksliste-container ${this.props.uniqueName}`} role="listbox">
                     <button className="nedtrekksliste-toggle" onClick={this.toggleDialog}>
                         <FormattedMessage id={this.props.navnId} />
                     </button>
-                    <div className={`nedtrekksliste ${this.props.uniqueName}`}>
+                    <div className="nedtrekksliste">
                         <form>
-                            <ListeComponent liste={this.props.liste} handleChange={this.props.handleChange} />
+                            <ListeComponent
+                                liste={this.props.liste}
+                                handleChange={this.props.handleChange}
+                                uniqueName={this.props.uniqueName}
+                            />
                         </form>
                         {knapp()}
                     </div>

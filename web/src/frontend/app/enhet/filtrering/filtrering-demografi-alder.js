@@ -20,9 +20,9 @@ function FiltreringAlder({ filtervalg, handleChange, endreFilter }) {
                 liste={[
                     ...aldersIntervaller.map(
                         (alderString, index) => ({
-                            value: index + 1,
+                            value: index,
                             label: alderString,
-                            checked: filtervalg.alder.includes(index + 1)
+                            checked: filtervalg.alder.includes(index)
                         })
                     )
                 ]}
