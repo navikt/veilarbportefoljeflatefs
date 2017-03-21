@@ -2,13 +2,15 @@
 export const VALGT_ALDER = 'filtrering-mellomlagring/VALGT_ALDER';
 export const VALGT_KJONN = 'filtrering-mellomlagring/VALGT_KJONN';
 export const VALGT_FODSELSDAG = 'filtrering-mellomlagring/VALGT_FODSELSDAG';
+export const VALGT_INNSATSGRUPPE = 'filtrering-mellomlagring/VALGT_INNSATSGRUPPE';
 
 //  Reducer
 const initialState = {
     filtervalg: {
         alder: [],
         kjonn: [],
-        fodselsdagIMnd: []
+        fodselsdagIMnd: [],
+        innsatsgruppe: []
     }
 };
 
@@ -35,6 +37,13 @@ export default function reducer(state = initialState, action) {
                     fodselsdagIMnd: action.fodselsdagIMnd
                 }
             };
+        case VALGT_INNSATSGRUPPE:
+            return { ...state,
+                filtervalg: {
+                    ...state.filtervalg,
+                    innsatsgruppe: action.innsatsgruppe
+                }
+            };
         default:
             return state;
     }
@@ -48,5 +57,7 @@ export function endreFiltervalgMellomlagring(filterId, filtervalg) { // eslint-d
         return { type: VALGT_KJONN, kjonn: filtervalg };
     } else if (filterId === 'fodselsdagIMnd') {
         return { type: VALGT_FODSELSDAG, fodselsdagIMnd: filtervalg };
+    } else if (filterId === 'innsatsgruppe') {
+        return { type: VALGT_INNSATSGRUPPE, innsatsgruppe: filtervalg };
     }
 }

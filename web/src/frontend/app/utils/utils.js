@@ -55,6 +55,12 @@ export function filterUrlBuilder(filtervalg) {
             result += `&fodselsdagIMnd[]=${i}`;
         });
     }
+
+    if (filtervalg.innsatsgruppe && filtervalg.innsatsgruppe.length > 0) {
+        filtervalg.innsatsgruppe.filter(i => erMellom(i, 0, 3)).forEach((i) => {
+            result += `&innsatsgruppe[]=${i}`;
+        });
+    }
     return result;
 }
 
