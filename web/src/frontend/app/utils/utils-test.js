@@ -19,17 +19,17 @@ describe('Utils', () => {
             expect(filterUrlBuilder(filtervalg)).to.equal('&nyeBrukere=true&inaktiveBrukere=true');
         });
 
-        it('skal legge til alder i url hvis valgt alder er > 0', () => {
+        it('skal legge til alder i url hvis valgt alder er større eller lik 0', () => {
             const filtervalg = { alder: [1] };
             expect(filterUrlBuilder(filtervalg)).to.equal('&alder[]=1');
         });
 
-        it('skal ikke legge til alder i url hvis alder er 0', () => {
-            const filtervalg = { alder: [0] };
+        it('skal ikke legge til alder i url hvis alder er mindre enn 0', () => {
+            const filtervalg = { alder: [-1] };
             expect(filterUrlBuilder(filtervalg)).to.equal('');
         });
 
-        it('skal ikke legge til alder i url hvis alder er > 8', () => {
+        it('skal ikke legge til alder i url hvis alder er > 7', () => {
             const filtervalg = { alder: [9] };
             expect(filterUrlBuilder(filtervalg)).to.equal('');
         });
