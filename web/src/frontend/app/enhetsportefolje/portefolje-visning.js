@@ -68,7 +68,7 @@ class PortefoljeVisning extends Component {
         const pagineringTekst = (
             <FormattedMessage
                 id="enhet.portefolje.paginering.tekst"
-                values={{ fraIndex: `${fraIndex}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
+                values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
             />
         );
 

@@ -48,8 +48,9 @@ class PortefoljeTabell extends Component {
                         </th>
                         <th>
                             <a onClick={this.settSorteringOgHentPortefolje} role="button" className="sortering-link">
-                                <FormattedMessage id="portefolje.tabell.navn" />
-                            </a>
+                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                                </a>
+                                <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                         </th>
                         <th>
                             <FormattedMessage id="portefolje.tabell.fodselsnummer" />

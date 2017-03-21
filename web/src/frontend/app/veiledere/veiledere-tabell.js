@@ -31,7 +31,14 @@ class VeilederTabell extends Component {
         };
 
         return (
-            <table className="tabell veiledere-tabell">
+            <table className="tabell portefolje-tabell" tabIndex="0">
+                <thead className="extra-head">
+                    <tr>
+                        <th>Veileder</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
                 <thead>
                     <tr>
                         <th scope="col">
@@ -51,11 +58,11 @@ class VeilederTabell extends Component {
                 <tbody>
                     {veiledere.map(veileder =>
                         <tr key={veileder.ident}>
-                            <td>
+                            <th>
                                 <a onClick={() => this.settValgtVeileder(veileder)} className="til-veileder-link">
                                     {`${veileder.navn}`}
                                 </a>
-                            </td>
+                            </th>
                             <td>{`${veileder.ident}`}</td>
                             <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
                         </tr>

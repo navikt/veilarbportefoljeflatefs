@@ -60,7 +60,7 @@ class VeilederPortefoljeVisning extends Component {
         const pagineringTekst = (
             <FormattedMessage
                 id="enhet.portefolje.paginering.tekst"
-                values={{ fraIndex: `${fraIndex}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
+                values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
             />
         );
 
@@ -138,7 +138,7 @@ class VeilederPortefoljeVisning extends Component {
                                             <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
                                         </div>
                                     </td>
-                                    <td>
+                                    <th>
                                         <a
                                             href={`https://${window.location.hostname}` +
                                             `/veilarbpersonflatefs/${bruker.fnr}`}
@@ -146,7 +146,7 @@ class VeilederPortefoljeVisning extends Component {
                                         >
                                             {`${bruker.etternavn}, ${bruker.fornavn}`}
                                         </a>
-                                    </td>
+                                    </th>
                                     {bruker.fnr != null ?
                                         <td className="fodselsnummer-td">{bruker.fnr}</td> :
                                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
