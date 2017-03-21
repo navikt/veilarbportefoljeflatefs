@@ -20,7 +20,7 @@ const initialState = {
         nyeBrukere: false,
         inaktiveBrukere: false,
         alder: [],
-        kjonn: 'ikke definert',
+        kjonn: [],
         fodselsdagIMnd: []
     }
 };

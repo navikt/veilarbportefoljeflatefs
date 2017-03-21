@@ -13,7 +13,8 @@ class FiltreringFilter extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.filtervalg.alder !== this.props.filtervalg.alder ||
-            prevProps.filtervalg.fodselsdagIMnd !== this.props.filtervalg.fodselsdagIMnd) {
+            prevProps.filtervalg.fodselsdagIMnd !== this.props.filtervalg.fodselsdagIMnd ||
+            prevProps.filtervalg.kjonn !== this.props.filtervalg.kjonn) {
             this.props.oppdaterDatagrunnlag();
         }
     }

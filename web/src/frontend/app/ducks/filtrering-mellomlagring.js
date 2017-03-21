@@ -7,7 +7,7 @@ export const VALGT_FODSELSDAG = 'filtrering-mellomlagring/VALGT_FODSELSDAG';
 const initialState = {
     filtervalg: {
         alder: [],
-        kjonn: 'ikke definert',
+        kjonn: [],
         fodselsdagIMnd: []
     }
 };
