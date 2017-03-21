@@ -21,7 +21,7 @@ public class VeilederEndpointConfig {
                 if (connection.getResponseCode() == 200) {
                     return Pingable.Ping.lyktes("VeilArbVeileder");
                 }
-                return (Pingable.Ping.feilet("VeilArbVeileder", new Exception("Statuskode: " + connection.getResponseCode())));
+                return Pingable.Ping.feilet("VeilArbVeileder", new Exception("Statuskode: " + connection.getResponseCode()));
             } catch (Exception e) {
                 return Pingable.Ping.feilet("VeilArbVeileder", e);
             }

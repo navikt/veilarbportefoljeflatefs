@@ -18,10 +18,10 @@ class FiltreringContainer extends Component {
     render() {
         return (
             <div className="filtrering-container">
-                <Ekspanderbartpanel tittel="Status" tittelProps="systemtittel">
+                <Ekspanderbartpanel tittel="Status" tittelProps={{ type: 'systemtittel', tag: 'span' }}>
                     <FiltreringOversikt />
                 </Ekspanderbartpanel>
-                <Ekspanderbartpanel tittel="Filter" tittelProps="systemtittel">
+                <Ekspanderbartpanel tittel="Filter" tittelProps={{ type: 'systemtittel', tag: 'span' }}>
                     <FiltreringBrukere />
                 </Ekspanderbartpanel>
             </div>
