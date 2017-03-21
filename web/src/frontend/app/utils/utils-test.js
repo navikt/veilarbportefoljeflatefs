@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { filterUrlBuilder } from '../utils/utils';
+import { filterUrlBuilder, arraysHaveEqualContent } from '../utils/utils';
 
 describe('Utils', () => {
     describe('filterUrlBuilder', () => {
@@ -56,6 +56,28 @@ describe('Utils', () => {
         it('skal ikke legge til filtre i url hvis det ikke finnes filtre', () => {
             const filtervalg = {};
             expect(filterUrlBuilder(filtervalg)).to.equal('');
+        });
+    });
+    describe('arraysHaveEqualContent', () => {
+        it('skal returnere true hvis begge arrayene er tomme', () => {
+            expect(arraysHaveEqualContent([], [])).to.equal(true);
+        });
+        it('skal returnere false hvis arrayene har ulik length', () => {
+            expect(arraysHaveEqualContent([1, 2, 3], [1, 2, 3, 4, 5])).to.equal(false);
+            expect(arraysHaveEqualContent([], [1])).to.equal(false);
+            expect(arraysHaveEqualContent([12, 7, 3], [8, 16, 32, 23, 0])).to.equal(false);
+        });
+        it('skal returnere false hvis arrayenes innhold er ulikt', () => {
+            expect(arraysHaveEqualContent([1, 2, 3], [1, 2])).to.equal(false);
+            expect(arraysHaveEqualContent([1, 2, 3], [1, 2, 4])).to.equal(false);
+            expect(arraysHaveEqualContent([1, 2, 3, 4, 5], [5, 4, 3, 2, 0])).to.equal(false);
+            expect(arraysHaveEqualContent([], [2])).to.equal(false);
+        });
+        it('skal returnere true hvis arrayened innhold er likt', () => {
+            expect(arraysHaveEqualContent([1, 2, 3], [3, 1, 2])).to.equal(true);
+            expect(arraysHaveEqualContent([2, 8, 54, 0, 9], [0, 9, 2, 54, 8])).to.equal(true);
+            expect(arraysHaveEqualContent([10], [10])).to.equal(true);
+            expect(arraysHaveEqualContent([6, 7, 8, 9], [6, 7, 8, 9])).to.equal(true);
         });
     });
 });

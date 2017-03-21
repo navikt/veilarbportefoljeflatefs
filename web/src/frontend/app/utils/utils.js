@@ -57,3 +57,24 @@ export function filterUrlBuilder(filtervalg) {
     }
     return result;
 }
+
+export function arraysHaveEqualContent(arr1, arr2) {
+    if (arr1.length === 0 && arr2.length === 0) {
+        return true;
+    }
+
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
+
+    const sortedCopy1 = arr1.slice().sort();
+    const sortedCopy2 = arr2.slice().sort();
+
+    for (let i = 0; i < sortedCopy1.length; i += 1) {
+        if (sortedCopy1[i] !== sortedCopy2[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}

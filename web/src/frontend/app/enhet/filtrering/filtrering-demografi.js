@@ -9,18 +9,20 @@ function FiltreringDemografi({ filtervalg, handleChange, filtervalgMellomlagring
     return (
         <div className="filtrering-demografi panel blokk-m">
             <FiltreringAlder
-                filtervalg={filtervalgMellomlagring}
+                filtervalgMellomlagring={filtervalgMellomlagring}
                 handleChange={handleChange}
                 endreFilter={() => endreFilter('alder', filtervalgMellomlagring.alder)}
+                filtervalg={filtervalg}
             />
             <FiltreringKjonn
                 filtervalg={filtervalg}
                 handleChange={handleChange}
             />
             <FiltreringFodselsdag
-                filtervalg={filtervalgMellomlagring}
+                filtervalgMellomlagring={filtervalgMellomlagring}
                 handleChange={handleChange}
                 endreFilter={() => endreFilter('fodselsdagIMnd', filtervalgMellomlagring.fodselsdagIMnd)}
+                filtervalg={filtervalg}
             />
         </div>
     );
