@@ -46,8 +46,8 @@ export function filterUrlBuilder(filtervalg) {
         });
     }
 
-    if (filtervalg.kjonn && (filtervalg.kjonn === 'M' || filtervalg.kjonn === 'K')) {
-        result += `&kjonn=${filtervalg.kjonn}`;
+    if (filtervalg.kjonn && filtervalg.kjonn.length === 1) {
+        result += `&kjonn=${filtervalg.kjonn[0]}`;
     }
 
     if (filtervalg.fodselsdagIMnd && filtervalg.fodselsdagIMnd.length > 0) {

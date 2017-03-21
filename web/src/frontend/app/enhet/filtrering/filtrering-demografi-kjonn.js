@@ -1,32 +1,36 @@
 import React, { PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
+import Nedtrekksliste from '../../components/nedtrekksliste';
 
-function FiltreringKjonn({ filtervalg, handleChange }) {
+function FiltreringKjonn({ filtervalg, filtervalgMellomlagring, handleChange, endreFilter }) {
     return (
         <div className="select-container">
-            <select // eslint-disable-line jsx-a11y/no-onchange
-                id="select-kjonn"
-                name="valgtKjonn"
-                onChange={e => handleChange(e, 'kjonn')}
-                value={filtervalg.kjonn}
-            >
-                <FormattedMessage id="filtrering.filtrer-brukere.demografi.kjonn" key="kjonn-ikkeDefinert">
-                    {text => <option value="ikke definert">{text}</option>}
-                </FormattedMessage>
-                <FormattedMessage id="filtrering.filtrer-brukere.demografi.mann" key="kjonn-m">
-                    {text => <option value="M">{text}</option>}
-                </FormattedMessage>
-                <FormattedMessage id="filtrering.filtrer-brukere.demografi.kvinne" key="kjonn-k">
-                    {text => <option value="K">{text}</option>}
-                </FormattedMessage>
-            </select>
+            <Nedtrekksliste
+                liste={
+                    ['Kvinne', 'Mann'].map(
+                        (kjonn, index) => ({
+                            value: index,
+                            label: kjonn,
+                            checked: filtervalgMellomlagring.kjonn.includes(index)
+                        })
+                    )
+                }
+                handleChange={e => handleChange(e, 'kjonn')}
+                onSubmit={endreFilter}
+                navnId={'filtrering.filtrer-brukere.demografi.kjonn'}
+                uniqueName="kjonn"
+                filtervalgMellomlagring={filtervalgMellomlagring}
+                filtervalg={filtervalg}
+            />
         </div>
     );
 }
 
 FiltreringKjonn.propTypes = {
-    filtervalg: PT.object,
-    handleChange: PT.func.isRequired
+    filtervalg: filtervalgShape.isRequired,
+    filtervalgMellomlagring: filtervalgMellomlagringShape.isRequired,
+    handleChange: PT.func.isRequired,
+    endreFilter: PT.func.isRequired
 };
 
 export default FiltreringKjonn;

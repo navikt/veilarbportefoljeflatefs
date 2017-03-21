@@ -15,8 +15,10 @@ function FiltreringDemografi({ filtervalg, handleChange, filtervalgMellomlagring
                 filtervalg={filtervalg}
             />
             <FiltreringKjonn
-                filtervalg={filtervalg}
+                filtervalgMellomlagring={filtervalgMellomlagring}
                 handleChange={handleChange}
+                endreFilter={() => endreFilter('kjonn', filtervalgMellomlagring.kjonn)}
+                filtervalg={filtervalg}
             />
             <FiltreringFodselsdag
                 filtervalgMellomlagring={filtervalgMellomlagring}
