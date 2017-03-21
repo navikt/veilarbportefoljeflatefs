@@ -1,7 +1,7 @@
 // Actions
-export const VALGT_ALDER = 'VALGT_ALDER';
-export const VALGT_KJONN = 'VALGT_KJONN';
-export const VALGT_FODSELSDAG = 'VALGT_FODSELSDAG';
+export const VALGT_ALDER = 'filtrering-mellomlagring/VALGT_ALDER';
+export const VALGT_KJONN = 'filtrering-mellomlagring/VALGT_KJONN';
+export const VALGT_FODSELSDAG = 'filtrering-mellomlagring/VALGT_FODSELSDAG';
 
 //  Reducer
 const initialState = {
