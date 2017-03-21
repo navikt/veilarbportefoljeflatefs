@@ -90,7 +90,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
         render() {
             const knapp = () => (
                 this.noeErChecked() ?
-                    <Hovedknapp onClick={() => { this.hideDialog(); this.props.onSubmit(); }}>Velg</Hovedknapp> :
+                    <Hovedknapp onClick={() => { this.props.onSubmit(); this.hideDialog(); }}>Velg</Hovedknapp> :
                     <Knapp onClick={this.toggleDialog}>Lukk</Knapp>
             );
 
