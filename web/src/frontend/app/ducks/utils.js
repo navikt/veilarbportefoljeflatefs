@@ -10,6 +10,9 @@ export function sjekkStatuskode(response) {
     if (response.status >= 200 && response.status < 300 && response.ok) {
         return response;
     }
+    if (response.status === 401) {
+        window.location.href = 'feilsider/401.html';
+    }
     const error = new Error(response.statusText);
     error.response = response;
     throw error;
