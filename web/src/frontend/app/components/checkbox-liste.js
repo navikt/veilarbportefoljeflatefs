@@ -8,7 +8,7 @@ function CheckboxListe({ liste, handleChange, uniqueName }) {
                     <input
                         id={`${uniqueName}-${indeks}-checkbox`}
                         type="checkbox"
-                        className="nav-checkbox"
+                        className="checkboks"
                         onChange={handleChange}
                         value={listeElement.value}
                         checked={listeElement.checked}
