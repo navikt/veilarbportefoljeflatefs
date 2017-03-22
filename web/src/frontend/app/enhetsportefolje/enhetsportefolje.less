@@ -5,8 +5,8 @@
     text-align: center;
     margin-bottom: 0;
     margin-top: 4px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding-top: 1px;
+    padding-bottom: 1px;
     padding-left: 2rem;
     padding-right: 2rem;
     border-radius: 0.2rem;
@@ -21,8 +21,8 @@
     text-align: center;
     margin-bottom: 0;
     margin-top: 4px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding-top: 1px;
+    padding-bottom: 1px;
     padding-left: 1rem;
     padding-right: 1rem;
     border-radius: 0.1rem;
@@ -56,9 +56,22 @@
 
     td, th {
         vertical-align: middle;
+        height: 38px;
+        padding: 0 8px;
 
         .skjema__input {
             margin-bottom: 0;
+
+            label {
+                padding-left: 1rem;
+
+                &:before {
+
+                    width: 18px;
+                    height: 18px;
+                    top: 2px;
+                }
+            }
         }
     }
 

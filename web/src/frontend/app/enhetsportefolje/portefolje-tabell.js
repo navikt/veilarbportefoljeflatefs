@@ -21,7 +21,7 @@ class PortefoljeTabell extends Component {
 
         const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
         return (
-            <table className="tabell portefolje-tabell" tabIndex="0">
+            <table className="tabell portefolje-tabell typo-undertekst" tabIndex="0">
                 <thead className="extra-head">
                 <tr>
                     <th />

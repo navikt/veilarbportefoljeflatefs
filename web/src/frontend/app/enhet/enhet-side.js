@@ -53,7 +53,7 @@ class EnhetSide extends Component {
                 <Ekspanderbartpanel
                     tittel="Tildel veileder" tittelProps={{
                         tag: 'span',
-                        type: 'systemtittel'
+                        type: 'undertittel'
                     }}
                 >
                     {tildelVeilederVelger}
