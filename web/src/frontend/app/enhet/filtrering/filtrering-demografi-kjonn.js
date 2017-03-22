@@ -1,6 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
 import Nedtrekksliste from '../../components/nedtrekksliste';
+import { arraysHaveEqualContent } from '../../utils/utils';
 
 function FiltreringKjonn({ filtervalg, filtervalgMellomlagring, handleChange, endreFilter }) {
     return (
@@ -19,8 +20,7 @@ function FiltreringKjonn({ filtervalg, filtervalgMellomlagring, handleChange, en
                 onSubmit={endreFilter}
                 navnId={'filtrering.filtrer-brukere.demografi.kjonn'}
                 uniqueName="kjonn"
-                filtervalgMellomlagring={filtervalgMellomlagring}
-                filtervalg={filtervalg}
+                renderVelgKnapp={!arraysHaveEqualContent(filtervalg.kjonn, filtervalgMellomlagring.kjonn)}
             />
         </div>
     );

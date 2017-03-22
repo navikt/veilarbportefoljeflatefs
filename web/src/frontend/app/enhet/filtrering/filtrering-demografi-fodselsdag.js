@@ -1,8 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import Nedtrekksliste from '../../components/nedtrekksliste';
 import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
-
-import { range, lag2Sifret } from '../../utils/utils';
+import { range, lag2Sifret, arraysHaveEqualContent } from '../../utils/utils';
 
 function FiltreringFodselsdag({ filtervalg, filtervalgMellomlagring, handleChange, endreFilter }) {
     return (
@@ -19,8 +18,9 @@ function FiltreringFodselsdag({ filtervalg, filtervalgMellomlagring, handleChang
                 onSubmit={endreFilter}
                 navnId="filtrering.filtrer-brukere.demografi.fodselsdato"
                 uniqueName="fodselsdagIMnd"
-                filtervalgMellomlagring={filtervalgMellomlagring}
-                filtervalg={filtervalg}
+                renderVelgKnapp={
+                    !arraysHaveEqualContent(filtervalg.fodselsdagIMnd, filtervalgMellomlagring.fodselsdagIMnd)
+                }
             />
         </div>
     );

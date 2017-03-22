@@ -3,9 +3,6 @@ import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage } from 'react-intl';
 import './nedtrekksliste';
 import CheckboxListe from './checkbox-liste';
-import { filtervalgMellomlagringShape, filtervalgShape } from '../proptype-shapes';
-import { arraysHaveEqualContent } from '../utils/utils';
-
 
 function nedtrekkslisteWrapper(ListeComponent) {
     class Nedtrekksliste extends Component {
@@ -67,11 +64,6 @@ function nedtrekkslisteWrapper(ListeComponent) {
             this.hideDialog();
         }
 
-        noeErEndret() {
-            const { filtervalg, filtervalgMellomlagring, uniqueName } = this.props;
-            return !arraysHaveEqualContent(filtervalg[uniqueName], filtervalgMellomlagring[uniqueName]);
-        }
-
         toggleDialog(e) { // eslint-disable-line class-methods-use-this
             const el = document.querySelector(`.${this.props.uniqueName} .nedtrekksliste`);
             el.classList.toggle('nedtrekksliste--apen');
@@ -93,7 +85,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
 
         render() {
             const knapp = () => (
-                this.noeErEndret() ?
+                this.props.renderVelgKnapp ?
                     <Hovedknapp onClick={() => { this.props.onSubmit(); this.hideDialog(); }}>Velg</Hovedknapp> :
                     <Knapp onClick={this.toggleDialog}>Lukk</Knapp>
             );
@@ -131,8 +123,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
         onSubmit: PT.func.isRequired,
         navnId: PT.string.isRequired,
         uniqueName: PT.string.isRequired,
-        filtervalgMellomlagring: filtervalgMellomlagringShape.isRequired,
-        filtervalg: filtervalgShape.isRequired
+        renderVelgKnapp: PT.bool.isRequired
     };
 
     return Nedtrekksliste;
