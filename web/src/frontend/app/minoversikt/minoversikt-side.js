@@ -11,8 +11,7 @@ import { veilederShape, brukerShape } from '../proptype-shapes';
 import { tildelVeileder } from '../ducks/portefolje';
 
 function MinOversiktSide({ ident, veileder, brukere, veiledere, velgVeileder, routes }) {
-    // const erAnnenVeileder = veileder !== "ikke_satt" && ident !== veileder.ident;
-    const erAnnenVeileder = ident !== veileder.ident;
+    const erAnnenVeileder = veileder.ident !== undefined && ident !== veileder.ident;
 
     const annenVeilederVarsel = (<Normaltekst tag="h1" type="normal" className="blokk-s">
         <FormattedMessage

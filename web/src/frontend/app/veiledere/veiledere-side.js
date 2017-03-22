@@ -34,9 +34,12 @@ class VeiledereSide extends Component {
         hentVeiledere(valgtEnhet.enhet.enhetId);
         hentPortefoljestorrelser(valgtEnhet.enhet.enhetId);
     }
+
     render() {
-        const { veiledere, portefoljestorrelser, veiledereSomSkalVises, sorterPaaEtternavn,
-            currentSorteringsRekkefolge, routes } = this.props;
+        const {
+            veiledere, portefoljestorrelser, veiledereSomSkalVises, sorterPaaEtternavn,
+            currentSorteringsRekkefolge, routes
+        } = this.props;
         const { veilederListe } = veiledere.data;
         const { facetResults } = portefoljestorrelser.data;
 
@@ -55,7 +58,11 @@ class VeiledereSide extends Component {
                 <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
                     <PagineringForvalter
                         liste={veilederListe}
-                        pagineringTekstId="enhet.veiledere.paginering.tekst"
+                        pagineringTekstId={
+                            veilederListe.length > 0 ?
+                                'enhet.veiledere.paginering.tekst' :
+                                'enhet.veiledere.paginering.ingen.veiledere.tekst'
+                        }
                     />
                     <VeiledereTabell
                         veiledere={veiledereSomSkalVises}

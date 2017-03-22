@@ -58,10 +58,12 @@ class VeilederPortefoljeVisning extends Component {
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         const pagineringTekst = (
-            <FormattedMessage
-                id="enhet.portefolje.paginering.tekst"
-                values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
-            />
+            antallTotalt > 0 ?
+                (<FormattedMessage
+                    id="enhet.portefolje.paginering.tekst"
+                    values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
+                />) :
+                <FormattedMessage id="enhet.portefolje.paginering.ingen.brukere.tekst" />
         );
 
         const feil = portefolje.feilendeTilordninger;
