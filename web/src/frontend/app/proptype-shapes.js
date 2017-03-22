@@ -7,9 +7,9 @@ export const enhetShape = PT.shape({
 
 export const veilederShape = PT.shape({
     ident: PT.string.isRequired,
-    navn: PT.string.isRequired,
-    fornavn: PT.string.isRequired,
-    etternavn: PT.string.isRequired
+    navn: PT.string,
+    fornavn: PT.string,
+    etternavn: PT.string
 });
 
 export const facetResultsShape = PT.shape({

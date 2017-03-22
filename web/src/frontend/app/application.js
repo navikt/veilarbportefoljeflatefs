@@ -11,6 +11,7 @@ import Innholdslaster from './innholdslaster/innholdslaster';
 import rendreDekorator, { settEnhetIDekorator } from './eventhandtering';
 import { STATUS } from './ducks/utils';
 import { leggEnhetIUrl } from './utils/utils';
+import { hentVeiledereForEnhet } from './ducks/veiledere';
 
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
@@ -37,7 +38,7 @@ class Application extends Component {
     }
 
     finnInitiellEnhet() {
-        const { enheter } = this.props;
+        const { enheter, hentVeiledere } = this.props;
 
         const enhetliste = enheter.data;
         const enhetFraUrl = queryString.parse(location.search).enhet;
@@ -46,6 +47,7 @@ class Application extends Component {
             .includes(enhetFraUrl) ? enhetFraUrl : enhetliste[0].enhetId;
 
         leggEnhetIUrl(initiellEnhet);
+        hentVeiledere(initiellEnhet);
         return initiellEnhet;
     }
 
@@ -86,6 +88,7 @@ Application.propTypes = {
     hentTekster: PT.func.isRequired,
     velgEnhet: PT.func.isRequired,
     hentEnheter: PT.func.isRequired,
+    hentVeiledere: PT.func.isRequired,
     ledetekster: PT.object,
     enheter: PT.object
 };
@@ -98,6 +101,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     hentTekster: () => dispatch(hentLedetekster()),
     hentEnheter: ident => dispatch(hentEnheterForVeileder(ident)),
+    hentVeiledere: enhet => dispatch(hentVeiledereForEnhet(enhet)),
     velgEnhet: enhetid => dispatch(velgEnhetForVeileder({ enhetId: enhetid }))
 });
 

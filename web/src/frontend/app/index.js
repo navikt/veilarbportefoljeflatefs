@@ -33,7 +33,7 @@ render(
                     <Route path="/" component={Application}>
                         <Route path="enhet" component={EnhetSide}/>
                         <Route path="veiledere" component={VeiledereSide}/>
-                        <Route path="portefolje" component={PortefoljeSide}/>
+                        <Route path="portefolje(/:ident)" component={PortefoljeSide} />
                         <Route path="tilbaketilenhet" component={TilbakeTilEnhetportefolje}/>
                         <Route path="tilbaketilportefolje" component={TilbakeTilVeilederportefolje}/>
                     </Route>

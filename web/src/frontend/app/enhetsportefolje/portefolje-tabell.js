@@ -62,7 +62,8 @@ class PortefoljeTabell extends Component {
                                 <a
                                     onClick={this.settSorteringOgHentPortefolje}
                                     role="button"
-                                    className="sortering-link">
+                                    className="sortering-link"
+                                >
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </a>
                             </th>

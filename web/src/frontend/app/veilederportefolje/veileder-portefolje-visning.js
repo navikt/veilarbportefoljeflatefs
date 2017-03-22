@@ -194,8 +194,7 @@ VeilederPortefoljeVisning.propTypes = {
 const mapStateToProps = state => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
-    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
-    veileder: state.portefolje.veileder
+    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge
 });
 
 const mapDispatchToProps = dispatch => ({

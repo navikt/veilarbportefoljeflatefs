@@ -23,7 +23,9 @@ const initialState = {
         fraIndex: 0
     },
     sorteringsrekkefolge: 'ikke_satt',
-    veileder: 'ikke_satt'
+    veileder: {
+        ident: 'ikke_satt'
+    }
 };
 
 function updateVeilederForBruker(brukere, veilederId, feilende) {
