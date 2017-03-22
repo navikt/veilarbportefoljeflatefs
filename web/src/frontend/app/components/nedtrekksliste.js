@@ -100,9 +100,12 @@ function nedtrekkslisteWrapper(ListeComponent) {
 
             return (
                 <section className={`nedtrekksliste-container ${this.props.uniqueName}`} role="listbox">
-                    <button className="nedtrekksliste-toggle" onClick={this.toggleDialog}>
+                    <button className={`nedtrekksliste-toggle-${this.props.uniqueName}`} onClick={this.toggleDialog}>
                         <FormattedMessage id={this.props.navnId} />
                     </button>
+                    <label htmlFor={`nedtrekksliste-toggle-${this.props.uniqueName}`} className="text-hide">
+                        <FormattedMessage id={this.props.navnId} />
+                    </label>
                     <div className="nedtrekksliste">
                         <form>
                             <ListeComponent

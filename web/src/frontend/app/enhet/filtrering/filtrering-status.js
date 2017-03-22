@@ -21,9 +21,9 @@ class FiltreringStatus extends Component {
     render() {
         const { nyeBrukere, inaktiveBrukere } = this.props;
 
-        const checkboxNyeBrukere = (<div className="nav-input">
+        const checkboxNyeBrukere = (<div className="skjema__input">
             <input
-                className="nav-checkbox"
+                className="checkboks"
                 id="checkbox-filtrering-oversikt-nye-brukere"
                 type="checkbox"
                 onChange={this.handleChange}
@@ -34,9 +34,9 @@ class FiltreringStatus extends Component {
             </label>
         </div>);
 
-        const checkboxInaktiveBrukere = (<div className="nav-input">
+        const checkboxInaktiveBrukere = (<div className="skjema__input">
             <input
-                className="nav-checkbox"
+                className="checkboks"
                 id="checkbox-filtrering-oversikt-inaktive-brukere"
                 type="checkbox"
                 onChange={this.handleChange}
