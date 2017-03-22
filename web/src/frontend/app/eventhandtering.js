@@ -49,7 +49,11 @@ const getConfig = (initiellEnhet = undefined) => {
 };
 
 export default () => {
-    window.renderDecoratorHead(getConfig());
+    if (window.renderDecoratorHead) {
+        window.renderDecoratorHead(getConfig());
+    } else {
+        window.location.href = 'feilsider/500.html';
+    }
 };
 
 
