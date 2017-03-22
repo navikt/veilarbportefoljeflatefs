@@ -37,7 +37,7 @@ const getConfig = (initiellEnhet = undefined) => {
                 visEnhet: false,
                 visEnhetVelger: true,
                 visSokefelt: true,
-                visSaksbehandler: true
+                visVeileder: true
             },
             handleChangeEnhet,
             initiellEnhet,
