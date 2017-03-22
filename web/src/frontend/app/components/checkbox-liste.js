@@ -22,8 +22,8 @@ function CheckboxListe({ liste, handleChange, uniqueName }) {
 
 CheckboxListe.propTypes = {
     liste: PT.arrayOf(PT.shape({
-        key: PT.string.isRequired,
-        value: PT.oneOfType([PT.string, PT.number]).isRequired,
+        label: PT.string.isRequired,
+        value: PT.oneOfType([PT.number, PT.string]).isRequired,
         checked: PT.bool.isRequired
     })).isRequired,
     handleChange: PT.func.isRequired,
