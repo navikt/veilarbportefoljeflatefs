@@ -47,10 +47,7 @@ class EnhetSide extends Component {
             <div className="enhet-side">
                 <Lenker routes={routes} />
                 <p className="typo-infotekst enhetsingress">
-                    <FormattedMessage
-                        id="enhet.valgt.infotekst"
-                        values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
-                    />
+                    <FormattedMessage id="enhet.ingresstekst" />
                 </p>
                 <FiltreringContainer />
                 <Ekspanderbartpanel

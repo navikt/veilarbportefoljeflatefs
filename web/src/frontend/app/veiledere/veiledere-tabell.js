@@ -35,8 +35,8 @@ class VeilederTabell extends Component {
                 <thead className="extra-head">
                     <tr>
                         <th>Veileder</th>
-                        <th></th>
-                        <th></th>
+                        <th />
+                        <th />
                     </tr>
                 </thead>
                 <thead>

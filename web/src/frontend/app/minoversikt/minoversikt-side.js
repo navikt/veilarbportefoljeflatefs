@@ -5,12 +5,12 @@ import { Link } from 'react-router';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst } from 'nav-frontend-typografi';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
-import VeilederPortefoljeVisning from './veileder-portefolje-visning';
+import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
 import { veilederShape, brukerShape } from '../proptype-shapes';
 import { tildelVeileder } from '../ducks/portefolje';
 
-function PortefoljeSide({ ident, veileder, brukere, veiledere, velgVeileder, routes }) {
+function MinOversiktSide({ ident, veileder, brukere, veiledere, velgVeileder, routes }) {
     // const erAnnenVeileder = veileder !== "ikke_satt" && ident !== veileder.ident;
     const erAnnenVeileder = ident !== veileder.ident;
 
@@ -53,7 +53,7 @@ function PortefoljeSide({ ident, veileder, brukere, veiledere, velgVeileder, rou
     );
 }
 
-PortefoljeSide.propTypes = {
+MinOversiktSide.propTypes = {
     ident: PT.string.isRequired,
     veileder: veilederShape.isRequired,
     routes: PT.arrayOf(PT.object),
@@ -73,5 +73,5 @@ const mapDispatchToProps = dispatch => ({
     velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeSide);
+export default connect(mapStateToProps, mapDispatchToProps)(MinOversiktSide);
 
