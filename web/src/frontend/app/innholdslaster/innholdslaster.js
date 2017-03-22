@@ -13,9 +13,9 @@ const medFeil = avhengigheter => avhengigheter.find(harStatus(STATUS.ERROR));
 const Innholdslaster = ({ avhengigheter, className, feilmeldingKey, intl, children }) => {
     if (alleLastet(avhengigheter)) {
         if (typeof children === 'function') {
-            return <div className={className}>{children(avhengigheter)}</div>;
+            return <section className={className}>{children(avhengigheter)}</section>;
         }
-        return <div className={className}>{children}</div>;
+        return <section className={className}>{children}</section>;
     }
 
     if (noenHarFeil(avhengigheter)) {
