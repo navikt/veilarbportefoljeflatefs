@@ -52,7 +52,7 @@ function nedtrekkslisteWrapper(ListeComponent) {
                             this.hideDialog();
                             break;
                         default:
-                            return;
+                            break;
                     }
                 };
                 callback = callback.bind(this);

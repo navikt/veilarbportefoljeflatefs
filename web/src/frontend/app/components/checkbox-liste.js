@@ -4,7 +4,7 @@ function CheckboxListe({ liste, handleChange, uniqueName }) {
     return (
         <ul className="nedtrekksliste-liste">
             {liste.map((listeElement, indeks) => (
-                <li key={indeks}>
+                <li key={`${listeElement.value}-${uniqueName}`}>
                     <input
                         id={`${uniqueName}-${indeks}-checkbox`}
                         type="checkbox"
@@ -22,11 +22,11 @@ function CheckboxListe({ liste, handleChange, uniqueName }) {
 
 CheckboxListe.propTypes = {
     liste: PT.arrayOf(PT.shape({
-        key: PT.string,
-        value: PT.oneOfType([PT.string, PT.number]),
-        checked: PT.bool
-    })),
-    handleChange: PT.func,
+        key: PT.string.isRequired,
+        value: PT.oneOfType([PT.string, PT.number]).isRequired,
+        checked: PT.bool.isRequired
+    })).isRequired,
+    handleChange: PT.func.isRequired,
     uniqueName: PT.string.isRequired
 };
 
