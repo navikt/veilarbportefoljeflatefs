@@ -1,5 +1,6 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import {
     veiledereShape,
     portefoljestorrelserShape,
@@ -7,6 +8,7 @@ import {
     valgtEnhetShape
 } from './../proptype-shapes';
 import VeiledereTabell from './veiledere-tabell';
+import { Undertittel } from 'nav-frontend-typografi';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import PagineringForvalter from '../paginering/pagineringforvalter';
 import Lenker from './../lenker/lenker';
@@ -41,6 +43,15 @@ class VeiledereSide extends Component {
         return (
             <div className="veiledere-side">
                 <Lenker routes={routes} />
+                <p className="typo-infotekst enhetsingress">
+                    <FormattedMessage id="enhet.ingresstekst"/>
+                </p>
+                <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
+                    <FormattedMessage
+                        id="enhet.veiledere.tittel"
+                        values={{antallVeiledere: veilederListe.length}}
+                    />
+                </Undertittel>
                 <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
                     <PagineringForvalter
                         liste={veilederListe}
