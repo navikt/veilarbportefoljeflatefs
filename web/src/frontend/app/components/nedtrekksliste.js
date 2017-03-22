@@ -115,9 +115,9 @@ function nedtrekkslisteWrapper(ListeComponent) {
 
     Nedtrekksliste.propTypes = {
         liste: PT.arrayOf(PT.shape({
-            label: PT.string,
-            value: PT.oneOfType([PT.number, PT.string]),
-            checked: PT.bool
+            label: PT.string.isRequired,
+            value: PT.oneOfType([PT.number, PT.string]).isRequired,
+            checked: PT.bool.isRequired
         })).isRequired,
         handleChange: PT.func.isRequired,
         onSubmit: PT.func.isRequired,
