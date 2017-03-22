@@ -21,7 +21,7 @@ public class PortefoljeEndpointConfig {
                 if (connection.getResponseCode() == 200) {
                     return Pingable.Ping.lyktes("VeilArbPortefolje");
                 }
-                return (Pingable.Ping.feilet("VeilArbPortefolje", new Exception("Statuskode: " + connection.getResponseCode())));
+                return Pingable.Ping.feilet("VeilArbPortefolje", new Exception("Statuskode: " + connection.getResponseCode()));
             } catch (Exception e) {
                 return Pingable.Ping.feilet("VeilArbPortefolje", e);
             }
