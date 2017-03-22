@@ -76,6 +76,33 @@ describe('Utils', () => {
             expect(filterUrlBuilder(filtervalg)).to.equal('');
         });
 
+        it('skal legge til formidlingsgruppe 0', () => {
+            const filtervalg = { formidlingsgruppe: [0] };
+            expect(filterUrlBuilder(filtervalg)).to.equal('&formidlingsgruppe[]=0');
+        });
+
+        it('skal legge til formidlingsgruppe 0 og 1', () => {
+            const filtervalg = { formidlingsgruppe: [0, 1] };
+            expect(filterUrlBuilder(filtervalg)).to.equal('&formidlingsgruppe[]=0&formidlingsgruppe[]=1');
+        });
+
+        it('skal legge til formidlingsgruppe 1, 2 og 3', () => {
+            const filtervalg = { formidlingsgruppe: [1, 2, 3] };
+            expect(filterUrlBuilder(filtervalg)).to.equal(
+                '&formidlingsgruppe[]=1&formidlingsgruppe[]=2&formidlingsgruppe[]=3'
+            );
+        });
+
+        it('skal ikke legge til formidlingsgruppe hvis ikke valgt', () => {
+            const filtervalg = { formidlingsgruppe: [] };
+            expect(filterUrlBuilder(filtervalg)).to.equal('');
+        });
+
+        it('skal ikke legge til formidlingsgruppe hvis ugyldige verdier', () => {
+            const filtervalg = { formidlingsgruppe: [-1, 3000] };
+            expect(filterUrlBuilder(filtervalg)).to.equal('');
+        });
+
         it('skal ikke legge til filtre i url hvis det ikke finnes filtre', () => {
             const filtervalg = {};
             expect(filterUrlBuilder(filtervalg)).to.equal('');

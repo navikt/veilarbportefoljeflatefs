@@ -3,6 +3,7 @@ export const VALGT_ALDER = 'filtrering-mellomlagring/VALGT_ALDER';
 export const VALGT_KJONN = 'filtrering-mellomlagring/VALGT_KJONN';
 export const VALGT_FODSELSDAG = 'filtrering-mellomlagring/VALGT_FODSELSDAG';
 export const VALGT_INNSATSGRUPPE = 'filtrering-mellomlagring/VALGT_INNSATSGRUPPE';
+export const VALGT_FORMIDLINGSGRUPPE = 'filtrering-mellomlagring/VALGT_FORMIDLINGSGRUPPE';
 
 //  Reducer
 const initialState = {
@@ -10,7 +11,8 @@ const initialState = {
         alder: [],
         kjonn: [],
         fodselsdagIMnd: [],
-        innsatsgruppe: []
+        innsatsgruppe: [],
+        formidlingsgruppe: []
     }
 };
 
@@ -44,6 +46,13 @@ export default function reducer(state = initialState, action) {
                     innsatsgruppe: action.innsatsgruppe
                 }
             };
+        case VALGT_FORMIDLINGSGRUPPE:
+            return { ...state,
+                filtervalg: {
+                    ...state.filtervalg,
+                    formidlingsgruppe: action.formidlingsgruppe
+                }
+            };
         default:
             return state;
     }
@@ -59,5 +68,7 @@ export function endreFiltervalgMellomlagring(filterId, filtervalg) { // eslint-d
         return { type: VALGT_FODSELSDAG, fodselsdagIMnd: filtervalg };
     } else if (filterId === 'innsatsgruppe') {
         return { type: VALGT_INNSATSGRUPPE, innsatsgruppe: filtervalg };
+    } else if (filterId === 'formidlingsgruppe') {
+        return { type: VALGT_FORMIDLINGSGRUPPE, formidlingsgruppe: filtervalg };
     }
 }

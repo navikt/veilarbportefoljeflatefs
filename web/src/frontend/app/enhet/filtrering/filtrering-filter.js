@@ -16,7 +16,8 @@ class FiltreringFilter extends Component {
         if (prevProps.filtervalg.alder !== this.props.filtervalg.alder ||
             prevProps.filtervalg.fodselsdagIMnd !== this.props.filtervalg.fodselsdagIMnd ||
             prevProps.filtervalg.kjonn !== this.props.filtervalg.kjonn ||
-            prevProps.filtervalg.innsatsgruppe !== this.props.filtervalg.innsatsgruppe) {
+            prevProps.filtervalg.innsatsgruppe !== this.props.filtervalg.innsatsgruppe ||
+            prevProps.filtervalg.formidlingsgruppe !== this.props.filtervalg.formidlingsgruppe) {
             this.props.oppdaterDatagrunnlag();
         }
     }
