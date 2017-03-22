@@ -113,6 +113,7 @@ class EnhetsportefoljeVisning extends Component {
                             antall,
                             filtervalg
                         )}
+                    tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
             </Innholdslaster>
