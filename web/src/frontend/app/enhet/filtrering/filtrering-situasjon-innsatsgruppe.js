@@ -1,6 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import Nedtrekksliste from '../../components/nedtrekksliste';
 import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
+import { arraysHaveEqualContent } from '../../utils/utils';
 
 const innsatsgrupper = [
     'Spesielt tilpasset innsats',
@@ -26,8 +27,9 @@ function FiltreringInnsatsgruppe({ filtervalg, filtervalgMellomlagring, handleCh
                 onSubmit={endreFilter}
                 navnId={'filtrering.filtrer-brukere.situasjon-innsatsgruppe'}
                 uniqueName="innsatsgruppe"
-                filtervalgMellomlagring={filtervalgMellomlagring}
-                filtervalg={filtervalg}
+                renderVelgKnapp={
+                    !arraysHaveEqualContent(filtervalg.innsatsgruppe, filtervalgMellomlagring.innsatsgruppe)
+                }
             />
         </div>
     );

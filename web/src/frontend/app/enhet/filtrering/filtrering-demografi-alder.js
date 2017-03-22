@@ -1,6 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import Nedtrekksliste from '../../components/nedtrekksliste';
 import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
+import { arraysHaveEqualContent } from '../../utils/utils';
 
 const aldersIntervaller = [
     '19 og under',
@@ -30,8 +31,7 @@ function FiltreringAlder({ filtervalg, filtervalgMellomlagring, handleChange, en
                 onSubmit={endreFilter}
                 navnId={'filtrering.filtrer-brukere.demografi.alder'}
                 uniqueName="alder"
-                filtervalgMellomlagring={filtervalgMellomlagring}
-                filtervalg={filtervalg}
+                renderVelgKnapp={!arraysHaveEqualContent(filtervalg.alder, filtervalgMellomlagring.alder)}
             />
         </div>
     );

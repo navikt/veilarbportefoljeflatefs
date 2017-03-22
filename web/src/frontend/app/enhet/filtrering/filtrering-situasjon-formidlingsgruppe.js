@@ -1,6 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import Nedtrekksliste from '../../components/nedtrekksliste';
 import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
+import { arraysHaveEqualContent } from '../../utils/utils';
 
 const formidlingsgrupper = [
     'Arbeidssøker',
@@ -27,8 +28,9 @@ function FiltreringFormidlingsgruppe({ filtervalg, filtervalgMellomlagring, hand
                 onSubmit={endreFilter}
                 navnId={'filtrering.filtrer-brukere.situasjon-formidlingsgruppe'}
                 uniqueName="formidlingsgruppe"
-                filtervalgMellomlagring={filtervalgMellomlagring}
-                filtervalg={filtervalg}
+                renderVelgKnapp={
+                    !arraysHaveEqualContent(filtervalg.formidlingsgruppe, filtervalgMellomlagring.formidlingsgruppe)
+                }
             />
         </div>
     );
