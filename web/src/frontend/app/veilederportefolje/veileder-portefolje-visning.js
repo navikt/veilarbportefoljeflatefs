@@ -16,6 +16,12 @@ import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
 
+const settSammenNavn = (bruker) => {
+    if (bruker.etternavn === '' && bruker.fornavn === '') {
+        return '';
+    }
+    return `${bruker.etternavn}, ${bruker.fornavn}`;
+};
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
@@ -26,7 +32,6 @@ class VeilederPortefoljeVisning extends Component {
     componentDidMount() {
         eksporterVeilederportefoljeTilLocalStorage();
     }
-
 
     settSorteringOgHentPortefolje() {
         const { sorteringsrekkefolge, settSortering, fraIndex,
@@ -144,7 +149,7 @@ class VeilederPortefoljeVisning extends Component {
                                             `/veilarbpersonflatefs/${bruker.fnr}`}
                                             className="til-bruker-link"
                                         >
-                                            {`${bruker.etternavn}, ${bruker.fornavn}`}
+                                            {settSammenNavn(bruker)}
                                         </a>
                                     </td>
                                     {bruker.fnr != null ?

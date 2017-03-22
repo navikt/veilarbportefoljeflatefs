@@ -8,6 +8,13 @@ import { markerAlleBrukere } from './../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
 
+const settSammenNavn = (bruker) => {
+    if (bruker.etternavn === '' && bruker.fornavn === '') {
+        return '';
+    }
+    return `${bruker.etternavn}, ${bruker.fornavn}`;
+};
+
 class PortefoljeTabell extends Component {
 
     componentWillMount() {
@@ -98,7 +105,7 @@ class PortefoljeTabell extends Component {
                                     href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
                                     className="til-bruker-link"
                                 >
-                                    {`${bruker.etternavn}, ${bruker.fornavn}`}
+                                    {settSammenNavn(bruker)}
                                 </a>
                             </th>
                             <td>{bruker.fnr}</td>
