@@ -26,7 +26,7 @@ function FiltreringInnsatsgruppe({ filtervalg, filtervalgMellomlagring, handleCh
                 onSubmit={endreFilter}
                 navnId={'filtrering.filtrer-brukere.situasjon-innsatsgruppe'}
                 uniqueName="innsatsgruppe"
-                filtervalgMellomlagring={filtervalg}
+                filtervalgMellomlagring={filtervalgMellomlagring}
                 filtervalg={filtervalg}
             />
         </div>
