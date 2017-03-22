@@ -54,7 +54,8 @@ export const filtervalgMellomlagringShape = PT.shape({
     alder: PT.arrayOf(PT.number).isRequired,
     kjonn: PT.arrayOf(PT.number).isRequired,
     fodselsdagIMnd: PT.arrayOf(PT.number).isRequired,
-    innsatsgruppe: PT.arrayOf(PT.number).isRequired
+    innsatsgruppe: PT.arrayOf(PT.number).isRequired,
+    formidlingsgruppe: PT.arrayOf(PT.number).isRequired
 });
 
 export const filtervalgShape = PT.shape({
@@ -63,5 +64,6 @@ export const filtervalgShape = PT.shape({
     alder: PT.arrayOf(PT.number).isRequired,
     kjonn: PT.arrayOf(PT.number).isRequired,
     fodselsdagIMnd: PT.arrayOf(PT.number).isRequired,
-    innsatsgruppe: PT.arrayOf(PT.number).isRequired
+    innsatsgruppe: PT.arrayOf(PT.number).isRequired,
+    formidlingsgruppe: PT.arrayOf(PT.number).isRequired
 });

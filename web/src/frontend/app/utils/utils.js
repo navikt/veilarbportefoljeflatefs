@@ -61,6 +61,12 @@ export function filterUrlBuilder(filtervalg) {
             result += `&innsatsgruppe[]=${i}`;
         });
     }
+
+    if (filtervalg.formidlingsgruppe && filtervalg.formidlingsgruppe.length > 0) {
+        filtervalg.formidlingsgruppe.filter(i => erMellom(i, 0, 4)).forEach((i) => {
+            result += `&formidlingsgruppe[]=${i}`;
+        });
+    }
     return result;
 }
 
