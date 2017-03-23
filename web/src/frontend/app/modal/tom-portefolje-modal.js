@@ -1,41 +1,39 @@
 import React, { PropTypes as PT } from 'react';
-import AriaModal from 'react-aria-modal';
-import { FormattedMessage } from 'react-intl';
+import Modal from '../modal/modal';
+import { IntlMessage } from '../utils/IntlUtils';
+import {
+    Innholdstittel,
+    Normaltekst
+} from 'nav-frontend-typografi';
 
 function TomPortefoljeModal({ skjulModal, visModal }) {
     const modal = (
-        <AriaModal
-            titleText="modal"
-            mounted={visModal}
-            onExit={() => {}}
+        <Modal
+            className="begrenset-bredde"
+            contentLabel="Modal tom portefølje"
+            isOpen={visModal}
+            onRequestClose={skjulModal}
+            closeButton={false}
         >
-            <div className="side-innhold">
-                <div className="modal-bakteppe" />
-                <div className="modal-alert modal-vindu">
-                    <div className="panel">
-                        <h2 className="hode hode-feil hode-dekorert hode-advarsel blokk-s" >
-                            <p className="blokk-s text-center"><FormattedMessage id="modal.tittel" /></p>
-                            <p className="modaltekst"><FormattedMessage id="modal.infotekst" /></p>
-                            <button className="knapp knapp-hoved" onClick={skjulModal}>
-                                <FormattedMessage id="modal.knapptekst" />
-                            </button>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-        </AriaModal>
+            <Innholdstittel tag="h1" style={{ paddingRight: '3rem' }}>
+                <IntlMessage id="modal.tittel"/>
+            </Innholdstittel>
+            <Normaltekst className="blokk-s">
+                <IntlMessage id="modal.infotekst"/>
+            </Normaltekst>
+            <button className="knapp knapp--hoved" onClick={skjulModal}>
+                <IntlMessage id="modal.knapptekst"/>
+            </button>
+        </Modal>
     );
     return (
-        <div>
-            {modal}
-        </div>
+        <div>{modal}</div>
     );
 }
 
 TomPortefoljeModal.propTypes = {
     skjulModal: PT.func.isRequired,
-    visModal: PT.bool.isRequired
+    visModal  : PT.bool.isRequired
 };
-
 
 export default TomPortefoljeModal;
