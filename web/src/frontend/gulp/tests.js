@@ -6,11 +6,7 @@ module.exports = {
             const mocha = require('gulp-mocha');
 
             return gulp.src(['app/**/**-test.js*'])
-                .pipe(mocha(
-                    {
-                        compilers: 'js:babel-core/register'
-                    }
-                ))
+                .pipe(mocha())
                 .once('error', function (error) {
                     gutil.log(error.name, error.message);
                     if(!tdd) {
