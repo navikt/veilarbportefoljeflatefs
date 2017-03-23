@@ -19,7 +19,9 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
     return (
         <div className="paginering">
             <Element className="info" tag="h1">
-                {antallTotalt === 0 ? null : tekst}
+                <strong>
+                    {antallTotalt === 0 ? null : tekst}
+                </strong>
             </Element>
             {antallTotalt <= sideStorrelse ? null :
             <div className="bytt-side">
@@ -27,7 +29,7 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
                 {fraIndex === 0 ?
                     <button className="not-active" tabIndex="-1">
                         <i className="chevron--venstre">
-                            <span className="text-hide prev">{'Forrige'}</span>
+                            <span className="text-hide prev ">{'Forrige'}</span>
                         </i>
                     </button> :
                     <button

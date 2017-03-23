@@ -3,13 +3,14 @@
         margin-right: 2rem;
     }
     a.valgt {
-        border-bottom: 0.15rem solid @blue-interaction;
-        color: @blue-interaction;
+        border-bottom: 0.15rem solid @navMorkGra;
+        color: @navMorkGra;
         padding-bottom: 0.7rem;
         background-color: inherit;
         text-decoration: none;
+        cursor: default;
         &:visited, &:active {
-            color: @blue-interaction;
+            color: @navMorkGra;
         }
     }
 
@@ -18,6 +19,9 @@
         text-decoration: none;
         &:visited, &:active {
             color: @navMorkGra;
+        }
+        &:hover {
+            color: @blue-interaction;
         }
     }
 }

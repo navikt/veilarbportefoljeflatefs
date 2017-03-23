@@ -4,7 +4,6 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import queryString from 'query-string';
 import { hentLedetekster } from './ducks/ledetekster';
-import Lenker from './lenker/lenker';
 import DevTools from './devtools';
 import { hentEnheterForVeileder, velgEnhetForVeileder } from './ducks/enheter';
 import Innholdslaster from './innholdslaster/innholdslaster';
@@ -59,7 +58,7 @@ class Application extends Component {
     }
 
     render() {
-        const { ledetekster = {}, enheter, children, routes } = this.props;
+        const { ledetekster = {}, enheter, children } = this.props;
         return (
             <IntlProvider
                 defaultLocale="nb"
@@ -69,7 +68,6 @@ class Application extends Component {
                 <div className="portefolje">
                     <Innholdslaster avhengigheter={[ledetekster, enheter, enheter.valgtEnhet]}>
                         <div className="container maincontent side-innhold">
-                            <Lenker routes={routes} />
                             {children}
                         </div>
                     </Innholdslaster>
@@ -84,7 +82,6 @@ class Application extends Component {
 
 Application.propTypes = {
     children: PT.object,
-    routes: PT.arrayOf(PT.object),
     hentTekster: PT.func.isRequired,
     velgEnhet: PT.func.isRequired,
     hentEnheter: PT.func.isRequired,

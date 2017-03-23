@@ -63,10 +63,12 @@ class VeilederPortefoljeVisning extends Component {
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         const pagineringTekst = (
-            <FormattedMessage
-                id="enhet.portefolje.paginering.tekst"
-                values={{ fraIndex: `${fraIndex}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
-            />
+            antallTotalt > 0 ?
+                (<FormattedMessage
+                    id="enhet.portefolje.paginering.tekst"
+                    values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
+                />) :
+                <FormattedMessage id="enhet.portefolje.paginering.ingen.brukere.tekst" />
         );
 
         const feil = portefolje.feilendeTilordninger;
@@ -89,7 +91,7 @@ class VeilederPortefoljeVisning extends Component {
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
-                <table className="tabell portefolje-tabell" tabIndex="0">
+                <table className="tabell portefolje-tabell typo-undertekst" tabIndex="0">
                     <thead className="extra-head">
                         <tr>
                             <th />
@@ -143,7 +145,7 @@ class VeilederPortefoljeVisning extends Component {
                                             <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
                                         </div>
                                     </td>
-                                    <td>
+                                    <th>
                                         <a
                                             href={`https://${window.location.hostname}` +
                                             `/veilarbpersonflatefs/${bruker.fnr}`}
@@ -151,7 +153,7 @@ class VeilederPortefoljeVisning extends Component {
                                         >
                                             {settSammenNavn(bruker)}
                                         </a>
-                                    </td>
+                                    </th>
                                     {bruker.fnr != null ?
                                         <td className="fodselsnummer-td">{bruker.fnr}</td> :
                                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>

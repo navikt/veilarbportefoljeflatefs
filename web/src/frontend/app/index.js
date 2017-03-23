@@ -15,7 +15,7 @@ import createStore from "./store.js";
 import history from "./history";
 import EnhetSide from "./enhet/enhet-side";
 import VeiledereSide from "./veiledere/veiledere-side";
-import PortefoljeSide from "./veilederportefolje/portefolje-side";
+import MinOversiktSide from "./minoversikt/minoversikt-side";
 import TilbakeTilEnhetportefolje from './tilbakenavigering/tilbakenavigering-enhet';
 import TilbakeTilVeilederportefolje from './tilbakenavigering/tilbakenavigering-veileder';
 
@@ -33,7 +33,7 @@ render(
                     <Route path="/" component={Application}>
                         <Route path="enhet" component={EnhetSide}/>
                         <Route path="veiledere" component={VeiledereSide}/>
-                        <Route path="portefolje(/:ident)" component={PortefoljeSide} />
+                        <Route path="portefolje(/:ident)" component={MinOversiktSide} />
                         <Route path="tilbaketilenhet" component={TilbakeTilEnhetportefolje}/>
                         <Route path="tilbaketilportefolje" component={TilbakeTilVeilederportefolje}/>
                     </Route>

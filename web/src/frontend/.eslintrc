@@ -7,6 +7,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/forbid-prop-types": [1, {"forbid": ["any", "array"]}],
     "react/no-unused-prop-types": ["error", {"customValidators": [], "skipShapeProps": true}],
+    "react/require-default-props": [1],
     "comma-dangle": [2, "never"],
     "max-len": [2, 120, 4],
     "no-unused-vars": [2, {"varsIgnorePattern": "_", "argsIgnorePattern": "_"}],
