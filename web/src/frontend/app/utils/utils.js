@@ -25,8 +25,8 @@ export function leggEnhetIUrl(enhet) { // eslint-disable-line consistent-return
     window.history.replaceState({}, null, `${pathname}?${stringified}`);
 }
 
-export function erMellom(variabel, fra, til) {
-    return variabel >= fra && variabel <= til;
+export function erMellom(verdi, fra, til) {
+    return verdi >= fra && verdi <= til;
 }
 
 export function filterUrlBuilder(filtervalg) {
@@ -41,9 +41,9 @@ export function filterUrlBuilder(filtervalg) {
     }
 
     if (filtervalg.alder && filtervalg.alder.length > 0) {
-        filtervalg.alder.filter(i => erMellom(i, 0, 7)).forEach((i) => {
-            result += `&alder[]=${i}`;
-        });
+        result = filtervalg.alder
+            .filter(i => erMellom(i, 0, 7))
+            .reduce((curr, i) => `${curr}&alder[]=${i}`, result);
     }
 
     if (filtervalg.kjonn && filtervalg.kjonn.length === 1) {
@@ -51,21 +51,21 @@ export function filterUrlBuilder(filtervalg) {
     }
 
     if (filtervalg.fodselsdagIMnd && filtervalg.fodselsdagIMnd.length > 0) {
-        filtervalg.fodselsdagIMnd.filter(i => erMellom(i, 0, 30)).forEach((i) => {
-            result += `&fodselsdagIMnd[]=${i}`;
-        });
+        result = filtervalg.fodselsdagIMnd
+            .filter(i => erMellom(i, 0, 30))
+            .reduce((curr, i) => `${curr}&fodselsdagIMnd[]=${i}`, result);
     }
 
     if (filtervalg.innsatsgruppe && filtervalg.innsatsgruppe.length > 0) {
-        filtervalg.innsatsgruppe.filter(i => erMellom(i, 0, 3)).forEach((i) => {
-            result += `&innsatsgruppe[]=${i}`;
-        });
+        result = filtervalg.innsatsgruppe
+            .filter(i => erMellom(i, 0, 3))
+            .reduce((curr, i) => `${curr}&innsatsgruppe[]=${i}`, result);
     }
 
     if (filtervalg.formidlingsgruppe && filtervalg.formidlingsgruppe.length > 0) {
-        filtervalg.formidlingsgruppe.filter(i => erMellom(i, 0, 4)).forEach((i) => {
-            result += `&formidlingsgruppe[]=${i}`;
-        });
+        result = filtervalg.formidlingsgruppe
+            .filter(i => erMellom(i, 0, 4))
+            .reduce((curr, i) => `${curr}&formidlingsgruppe[]=${i}`, result);
     }
     return result;
 }
