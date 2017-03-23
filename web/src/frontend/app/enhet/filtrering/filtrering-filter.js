@@ -5,6 +5,7 @@ import { endreFiltervalg } from '../../ducks/filtrering';
 import FiltreringDemografi from './filtrering-demografi';
 import FiltreringSituasjon from './filtrering-situasjon';
 import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
+import { erFiltervalgEndret } from '../../utils/utils';
 
 class FiltreringFilter extends Component {
     constructor(props) {
@@ -13,11 +14,7 @@ class FiltreringFilter extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.filtervalg.alder !== this.props.filtervalg.alder ||
-            prevProps.filtervalg.fodselsdagIMnd !== this.props.filtervalg.fodselsdagIMnd ||
-            prevProps.filtervalg.kjonn !== this.props.filtervalg.kjonn ||
-            prevProps.filtervalg.innsatsgruppe !== this.props.filtervalg.innsatsgruppe ||
-            prevProps.filtervalg.formidlingsgruppe !== this.props.filtervalg.formidlingsgruppe) {
+        if (erFiltervalgEndret(prevProps.filtervalg, this.props.filtervalg)) {
             this.props.oppdaterDatagrunnlag();
         }
     }

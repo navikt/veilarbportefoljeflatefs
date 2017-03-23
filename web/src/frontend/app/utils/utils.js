@@ -90,3 +90,8 @@ export function arraysHaveEqualContent(arr1, arr2) {
 
     return true;
 }
+
+export const erFiltervalgEndret = (prevFiltervalg, filtervalg) => {
+    const felter = ['alder', 'fodselsdagIMnd', 'kjonn', 'innsatsgruppe', 'formidlingsgruppe'];
+    return felter.some(felt => prevFiltervalg[felt] !== filtervalg[felt]);
+};
