@@ -12,22 +12,21 @@ function nedtrekkslisteWrapper(ListeComponent) {
                 index: 0
             };
 
-            let skjulHvisKlikkUtenfor = (e) => {
+            const skjulHvisKlikkUtenfor = (e) => {
                 let target = e.target;
-                let isCalWrap = false;
+                let erGjeldendeNedtrekksliste = false;
                 while (target.parentNode) {
                     if (target.classList.contains(this.props.uniqueName)) {
-                        isCalWrap = true;
+                        erGjeldendeNedtrekksliste = true;
                         break;
                     }
                     target = target.parentNode;
                 }
-                if (!isCalWrap) {
+                if (!erGjeldendeNedtrekksliste) {
                     this.hideDialog();
                 }
             };
-            skjulHvisKlikkUtenfor = skjulHvisKlikkUtenfor.bind(this);
-            document.querySelector('body').addEventListener('click', skjulHvisKlikkUtenfor);
+            document.querySelector('body').addEventListener('click', e => skjulHvisKlikkUtenfor(e));
 
             this.toggleDialog = this.toggleDialog.bind(this);
         }
