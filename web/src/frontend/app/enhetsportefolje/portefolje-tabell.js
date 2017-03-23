@@ -47,13 +47,21 @@ class PortefoljeTabell extends Component {
                             </div>
                         </th>
                         <th>
-                        {portefolje.sorteringsrekkefolge !== 'ikke_satt' ?
-                            <a onClick={this.settSorteringOgHentPortefolje} role="button" className="sortering-link valgt">
-                                <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
-                            </a> :
-                            <a onClick={this.settSorteringOgHentPortefolje} role="button" className="sortering-link">
-                                <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
-                            </a>
+                            {portefolje.sorteringsrekkefolge !== 'ikke_satt' ?
+                                <a
+                                    onClick={this.settSorteringOgHentPortefolje}
+                                    role="button"
+                                    className="sortering-link valgt"
+                                >
+                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                                </a> :
+                                <a
+                                    onClick={this.settSorteringOgHentPortefolje}
+                                    role="button"
+                                    className="sortering-link"
+                                >
+                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                                </a>
                         }
                             <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                         </th>
