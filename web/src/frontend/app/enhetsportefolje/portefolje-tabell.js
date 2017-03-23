@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/onclick-has-focus*/
 /* eslint-disable jsx-a11y/no-static-element-interactions*/
 import React, { Component, PropTypes as PT } from 'react';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { veilederShape, brukerShape, portefoljeShape } from '../proptype-shapes';
@@ -23,8 +24,8 @@ class PortefoljeTabell extends Component {
         this.visModalDersomPortefoljeErTom();
     }
 
-    settSorteringOgHentPortefolje() {
-        this.props.settSorteringForPortefolje();
+    settSorteringOgHentPortefolje(felt) {
+        this.props.settSorteringForPortefolje(felt);
     }
 
     visModalDersomPortefoljeErTom() {
@@ -37,6 +38,8 @@ class PortefoljeTabell extends Component {
     render() {
         const { brukere, veiledere, settSomMarkertAlle,
             settSomMarkert, portefolje, modalSkalVises, toggleSkjulModal } = this.props;
+        const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
+        const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
 
         const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
         return (
@@ -68,36 +71,27 @@ class PortefoljeTabell extends Component {
                                 </div>
                             </th>
                             <th>
-                                {portefolje.sorteringsrekkefolge !== 'ikke_satt' ?
-                                    <a
-                                        onClick={this.settSorteringOgHentPortefolje}
-                                        role="button"
-                                        className="sortering-link valgt"
-                                    >
-                                        <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
-                                    </a> :
-                                    <a
-                                        onClick={this.settSorteringOgHentPortefolje}
-                                        role="button"
-                                        className="sortering-link"
-                                    >
-                                        <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
-                                    </a>
-                        }
+                                <a
+                                    onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
+                                    role="button"
+                                    className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
+                                >
+                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                                </a>
                                 <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                             </th>
                             <th>
                                 <a
-                                    onClick={this.settSorteringOgHentPortefolje}
+                                    onClick={() => this.settSorteringOgHentPortefolje('fodselsdato')}
                                     role="button"
-                                    className="sortering-link"
+                                    className={classNames({ 'sortering-link': true, valgt: sorterFodelsnummer })}
                                 >
                                     <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                                 </a>
                             </th>
                             <th>
                                 <a
-                                    onClick={this.settSorteringOgHentPortefolje}
+                                    onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
                                     role="button"
                                     className="sortering-link"
                                 >
@@ -165,6 +159,7 @@ PortefoljeTabell.propTypes = {
     brukere: PT.arrayOf(brukerShape).isRequired,
     portefolje: PT.shape({
         data: portefoljeShape.isRequired,
+        sorteringsfelt: PT.string.isRequired,
         sorteringsrekkefolge: PT.string.isRequired
     }).isRequired,
     settSorteringForPortefolje: PT.func.isRequired,
