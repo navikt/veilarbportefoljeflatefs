@@ -22,7 +22,7 @@ class VeilederTabell extends Component {
     settValgtVeileder(veileder) {
         const { settVeileder } = this.props;
         settVeileder(veileder);
-        history.push('/portefolje');
+        history.push(`/portefolje/${veileder.ident}`);
     }
 
     visModalDersomIngenVeiledere() {
