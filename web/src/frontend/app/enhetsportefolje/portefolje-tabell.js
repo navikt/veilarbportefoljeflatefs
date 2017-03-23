@@ -3,7 +3,7 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { veilederShape, brukerShape } from '../proptype-shapes';
+import { veilederShape, brukerShape, portefoljeShape } from '../proptype-shapes';
 import { markerAlleBrukere } from './../ducks/portefolje';
 
 class PortefoljeTabell extends Component {
@@ -17,7 +17,7 @@ class PortefoljeTabell extends Component {
     }
 
     render() {
-        const { brukere, veiledere, settSomMarkertAlle, settSomMarkert } = this.props;
+        const { brukere, veiledere, settSomMarkertAlle, settSomMarkert, portefolje } = this.props;
 
         const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
         return (
@@ -47,9 +47,14 @@ class PortefoljeTabell extends Component {
                             </div>
                         </th>
                         <th>
+                        {portefolje.sorteringsrekkefolge !== 'ikke_satt' ?
+                            <a onClick={this.settSorteringOgHentPortefolje} role="button" className="sortering-link valgt">
+                                <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                            </a> :
                             <a onClick={this.settSorteringOgHentPortefolje} role="button" className="sortering-link">
                                 <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                             </a>
+                        }
                             <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                         </th>
                         <th>
@@ -119,6 +124,10 @@ class PortefoljeTabell extends Component {
 PortefoljeTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
+    portefolje: PT.shape({
+        data: portefoljeShape.isRequired,
+        sorteringsrekkefolge: PT.string.isRequired
+    }).isRequired,
     settSorteringForPortefolje: PT.func.isRequired,
     settSomMarkert: PT.func.isRequired,
     settSomMarkertAlle: PT.func.isRequired
