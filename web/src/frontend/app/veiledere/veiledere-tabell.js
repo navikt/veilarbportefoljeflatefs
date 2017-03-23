@@ -43,40 +43,40 @@ class VeilederTabell extends Component {
             <div>
                 <TomPortefoljeModal skjulModal={toggleSkjulModal} visModal={modalSkalVises} />
                 <table className="tabell portefolje-tabell typo-undertekst" tabIndex="0">
-                <thead className="extra-head">
-                    <tr>
-                        <th>Veileder</th>
-                        <th />
-                        <th />
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <th scope="col">
-                            <a onClick={this.props.sorterPaaEtternavn} role="button" className="sortering-link">
-                                <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
-                            </a>
-                            <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
-                        </th>
-                        <th scope="col">
-                            <FormattedMessage id="enhet.veiledere.tabell.ident" />
-                        </th>
-                        <th scope="col">
-                            <FormattedMessage id="enhet.veiledere.tabell.brukere" />
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {veiledere.map(veileder =>
-                        <tr key={veileder.ident}>
-                            <th>
-                                <a onClick={() => this.settValgtVeileder(veileder)} className="til-veileder-link">
-                                    {`${veileder.navn}`}
-                                </a>
-                            </th>
-                            <td>{`${veileder.ident}`}</td>
-                            <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
+                    <thead className="extra-head">
+                        <tr>
+                            <th>Veileder</th>
+                            <th />
+                            <th />
                         </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <a onClick={this.props.sorterPaaEtternavn} role="button" className="sortering-link">
+                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                                </a>
+                                <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
+                            </th>
+                            <th scope="col">
+                                <FormattedMessage id="enhet.veiledere.tabell.ident" />
+                            </th>
+                            <th scope="col">
+                                <FormattedMessage id="enhet.veiledere.tabell.brukere" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {veiledere.map(veileder =>
+                            <tr key={veileder.ident}>
+                                <th>
+                                    <a onClick={() => this.settValgtVeileder(veileder)} className="til-veileder-link">
+                                        {`${veileder.navn}`}
+                                    </a>
+                                </th>
+                                <td>{`${veileder.ident}`}</td>
+                                <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
+                            </tr>
                 )}
                     </tbody>
                 </table>

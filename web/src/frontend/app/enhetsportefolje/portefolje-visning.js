@@ -103,6 +103,7 @@ class PortefoljeVisning extends Component {
                     brukere={portefolje.data.brukere}
                     settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
                     settSomMarkert={settMarkert}
+                    portefolje={portefolje}
                 />
                 <Paginering
                     antallTotalt={antallTotalt}

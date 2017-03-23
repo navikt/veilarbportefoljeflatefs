@@ -1,4 +1,4 @@
-import React, { createElement, PropTypes as PT } from 'react';
+import React, { PropTypes as PT } from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 function getDisplayName(comp) {
@@ -6,9 +6,9 @@ function getDisplayName(comp) {
 }
 
 function intlWrapper(Formatter) {
-    const Wrapped =  ({ id, values, tagName, className }) => (
+    const Wrapped = ({ id, values, tagName, className }) => (
         <Formatter id={id} values={values}>
-            {(msg) => React.createElement(tagName, { className }, msg) }
+            {msg => React.createElement(tagName, { className }, msg) }
         </Formatter>
     );
 
