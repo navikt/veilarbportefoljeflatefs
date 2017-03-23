@@ -3,7 +3,7 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { veilederShape, brukerShape } from '../proptype-shapes';
+import { veilederShape, brukerShape, portefoljeShape } from '../proptype-shapes';
 import { markerAlleBrukere } from './../ducks/portefolje';
 
 class EnhetsportefoljeTabell extends Component {
@@ -17,11 +17,11 @@ class EnhetsportefoljeTabell extends Component {
     }
 
     render() {
-        const { brukere, veiledere, settSomMarkertAlle, settSomMarkert } = this.props;
+        const { brukere, veiledere, settSomMarkertAlle, settSomMarkert, portefolje } = this.props;
 
         const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
         return (
-            <table className="tabell portefolje-tabell" tabIndex="0">
+            <table className="tabell portefolje-tabell typo-undertekst" tabIndex="0">
                 <thead className="extra-head">
                     <tr>
                         <th />
@@ -47,15 +47,34 @@ class EnhetsportefoljeTabell extends Component {
                             </div>
                         </th>
                         <th>
+                            {portefolje.sorteringsrekkefolge !== 'ikke_satt' ?
+                                <a
+                                    onClick={this.settSorteringOgHentPortefolje}
+                                    role="button"
+                                    className="sortering-link valgt"
+                                >
+                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                                </a> :
+                                <a
+                                    onClick={this.settSorteringOgHentPortefolje}
+                                    role="button"
+                                    className="sortering-link"
+                                >
+                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                                </a>
+                        }
+                            <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
+                        </th>
+                        <th>
                             <a onClick={this.settSorteringOgHentPortefolje} role="button" className="sortering-link">
-                                <FormattedMessage id="portefolje.tabell.navn" />
+                                <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                             </a>
                         </th>
                         <th>
-                            <FormattedMessage id="portefolje.tabell.fodselsnummer" />
-                        </th>
-                        <th>
-                            <FormattedMessage id="portefolje.tabell.navn" />
+                            <a onClick={this.settSorteringOgHentPortefolje} role="button" className="sortering-link">
+                                <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                            </a>
+                            <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                         </th>
                         <th>
                             <FormattedMessage id="portefolje.tabell.navident" />
@@ -113,6 +132,10 @@ class EnhetsportefoljeTabell extends Component {
 EnhetsportefoljeTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
+    portefolje: PT.shape({
+        data: portefoljeShape.isRequired,
+        sorteringsrekkefolge: PT.string.isRequired
+    }).isRequired,
     settSorteringForPortefolje: PT.func.isRequired,
     settSomMarkert: PT.func.isRequired,
     settSomMarkertAlle: PT.func.isRequired

@@ -2,6 +2,7 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { FormattedMessage } from 'react-intl';
+import Lenker from './../lenker/lenker';
 import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import TildelVeilederVelger from './tildel-veileder-velger';
 import { veilederShape, brukerShape } from './../proptype-shapes';
@@ -26,7 +27,8 @@ class EnhetSide extends Component {
             veiledere,
             valgtVeileder,
             velgVeileder,
-            brukere
+            brukere,
+            routes
         } = this.props;
 
 
@@ -44,17 +46,15 @@ class EnhetSide extends Component {
 
         return (
             <div className="enhet-side">
+                <Lenker routes={routes} />
                 <p className="typo-infotekst enhetsingress">
-                    <FormattedMessage
-                        id="enhet.valgt.infotekst"
-                        values={{ enhetId: valgtEnhet.enhetId, enhetnavn: valgtEnhet.navn }}
-                    />
+                    <FormattedMessage id="enhet.ingresstekst" />
                 </p>
                 <FiltreringContainer />
                 <Ekspanderbartpanel
                     tittel="Tildel veileder" tittelProps={{
                         tag: 'span',
-                        type: 'systemtittel'
+                        type: 'undertittel'
                     }}
                 >
                     {tildelVeilederVelger}
@@ -68,6 +68,7 @@ class EnhetSide extends Component {
 EnhetSide.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
+    routes: PT.arrayOf(PT.object),
     valgtEnhet: PT.object,
     filtervalg: PT.object,
     valgtVeileder: PT.object,

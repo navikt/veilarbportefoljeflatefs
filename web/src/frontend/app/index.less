@@ -6,7 +6,7 @@ body {
     margin: 0;
     height: 100%;
     width: 100%;
-    background-color: #efefef;
+    background-color: @navLysGra !important;
 
     #mainapp {
         margin: 0 auto;
@@ -20,11 +20,11 @@ html {
     height:100%;
 }
 
+@import "./node_modules/nav-frontend-typografi-style/src/index";
 @import "./node_modules/nav-frontend-core/less/core";
 @import "./node_modules/nav-frontend-ekspanderbartpanel-style/src/index";
 @import "./node_modules/nav-frontend-etiketter-style/src/index";
 @import "./node_modules/nav-frontend-etiketter-style/src/_mixins";
-@import "./node_modules/nav-frontend-typografi-style/src/index";
 @import "./node_modules/nav-frontend-skjema-style/src/index";
 @import "./node_modules/nav-frontend-chevron-style/src/index";
 
@@ -36,4 +36,5 @@ html {
     @import "./veiledere/veiledere";
     @import "enhet/enhet";
     @import "enhet/filtrering/filtrering";
+    @import "minoversikt/minoversikt";
 }
