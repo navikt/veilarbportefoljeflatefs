@@ -1,5 +1,5 @@
 import React, { PropTypes as PT } from 'react';
-import Modal from '../modal/modal';
+import Modal from 'nav-frontend-modal';
 import { IntlMessage } from '../utils/IntlUtils';
 import {
     Innholdstittel,
