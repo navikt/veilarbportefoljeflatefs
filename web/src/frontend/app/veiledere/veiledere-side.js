@@ -1,5 +1,7 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+import { Undertittel } from 'nav-frontend-typografi';
 import {
     veiledereShape,
     portefoljestorrelserShape,
@@ -9,6 +11,7 @@ import {
 import VeiledereTabell from './veiledere-tabell';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import PagineringForvalter from '../paginering/pagineringforvalter';
+import Lenker from './../lenker/lenker';
 import { settSorteringRekkefolge, settSubListeForPaginering } from '../ducks/paginering';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
@@ -31,18 +34,35 @@ class VeiledereSide extends Component {
         hentVeiledere(valgtEnhet.enhet.enhetId);
         hentPortefoljestorrelser(valgtEnhet.enhet.enhetId);
     }
+
     render() {
-        const { veiledere, portefoljestorrelser, veiledereSomSkalVises, sorterPaaEtternavn,
-            currentSorteringsRekkefolge } = this.props;
+        const {
+            veiledere, portefoljestorrelser, veiledereSomSkalVises, sorterPaaEtternavn,
+            currentSorteringsRekkefolge, routes
+        } = this.props;
         const { veilederListe } = veiledere.data;
         const { facetResults } = portefoljestorrelser.data;
 
         return (
             <div className="veiledere-side">
+                <Lenker routes={routes} />
+                <p className="typo-infotekst enhetsingress">
+                    <FormattedMessage id="enhet.ingresstekst" />
+                </p>
+                <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
+                    <FormattedMessage
+                        id="enhet.veiledere.tittel"
+                        values={{ antallVeiledere: veilederListe.length }}
+                    />
+                </Undertittel>
                 <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
                     <PagineringForvalter
                         liste={veilederListe}
-                        pagineringTekstId="enhet.veiledere.paginering.tekst"
+                        pagineringTekstId={
+                            veilederListe.length > 0 ?
+                                'enhet.veiledere.paginering.tekst' :
+                                'enhet.veiledere.paginering.ingen.veiledere.tekst'
+                        }
                     />
                     <VeiledereTabell
                         veiledere={veiledereSomSkalVises}
@@ -65,6 +85,7 @@ VeiledereSide.propTypes = {
     }).isRequired,
     veiledereSomSkalVises: PT.arrayOf(veilederShape).isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
+    routes: PT.arrayOf(PT.object),
     hentVeiledere: PT.func.isRequired,
     hentPortefoljestorrelser: PT.func.isRequired,
     currentSorteringsRekkefolge: PT.string.isRequired,

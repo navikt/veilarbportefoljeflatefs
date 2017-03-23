@@ -66,10 +66,12 @@ class EnhetsportefoljeVisning extends Component {
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
 
         const pagineringTekst = (
-            <FormattedMessage
-                id="enhet.portefolje.paginering.tekst"
-                values={{ fraIndex: `${fraIndex}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
-            />
+            antallTotalt > 0 ?
+                (<FormattedMessage
+                    id="enhet.portefolje.paginering.tekst"
+                    values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
+                />) :
+                <FormattedMessage id="enhet.portefolje.paginering.ingen.brukere.tekst" />
         );
 
         const feil = portefolje.feilendeTilordninger;

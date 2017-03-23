@@ -24,7 +24,7 @@ class PagineringForvalter extends Component {
             <FormattedMessage
                 id={pagineringTekstId}
                 values={{
-                    fraIndex: `${fraIndeksForSubListe}`,
+                    fraIndex: `${fraIndeksForSubListe + 1}`,
                     tilIndex: fraIndeksForSubListe + subListe.length,
                     antallTotalt: liste.length
                 }}

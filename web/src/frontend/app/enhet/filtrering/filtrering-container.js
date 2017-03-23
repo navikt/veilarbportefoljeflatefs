@@ -26,12 +26,16 @@ class FiltreringContainer extends Component {
     render() {
         return (
             <div className="filtrering-container">
-                <Ekspanderbartpanel tittel="Status" tittelProps={{ type: 'systemtittel', tag: 'span' }}>
-                    <FiltreringStatus oppdaterDatagrunnlag={this.oppdaterDatagrunnlag} />
-                </Ekspanderbartpanel>
-                <Ekspanderbartpanel tittel="Filter" tittelProps={{ type: 'systemtittel', tag: 'span' }}>
-                    <FiltreringFilter oppdaterDatagrunnlag={this.oppdaterDatagrunnlag} />
-                </Ekspanderbartpanel>
+                <div className="filtrering-container-element">
+                    <Ekspanderbartpanel tittel="Status" tittelProps={{ type: 'undertittel', tag: 'span' }}>
+                        <FiltreringStatus oppdaterDatagrunnlag={this.oppdaterDatagrunnlag} />
+                    </Ekspanderbartpanel>
+                </div>
+                <div className="filtrering-container-element">
+                    <Ekspanderbartpanel tittel="Filter" tittelProps={{ type: 'undertittel', tag: 'span' }}>
+                        <FiltreringFilter oppdaterDatagrunnlag={this.oppdaterDatagrunnlag} />
+                    </Ekspanderbartpanel>
+                </div>
             </div>
         );
     }
