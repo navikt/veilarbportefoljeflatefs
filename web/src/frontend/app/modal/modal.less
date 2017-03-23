@@ -1,20 +1,75 @@
-.modal-vindu {
-    .hode {
-        padding-top: 2rem;
-    }
-    background-color: @white;
-    min-height: 25em;
+@import '@{nodeModulesPath}/nav-frontend-paneler-style/src/mixins';
 
-    .knapp {
-        position: relative;
-        top: 2rem;
-    }
+.ReactModal__Body--open {
+  overflow: hidden;
 }
 
-.modal-vindu {
-    border-radius: 4px;
+.modal {
+  .panel-mixin();
+  .panel-focus-mixin();
+  position: relative;
+  flex-grow: 0;
+  overflow: auto;
+  max-height: 100%;
+  margin-bottom: 0;
+  z-index: 1010;
 }
 
-.hode-feil:after {
-    display: none;
+.modal__overlay {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(61, 56, 49, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.modal__lukkknapp { // TODO: Samkjør lukkknapp implementasjon med hjelpetekster
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  color: @navBla;
+  border: 1px solid currentColor;
+  background: transparent;
+  padding: 1rem 0.5rem;
+  border-radius: @border-radius-small;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 1px;
+    background-color: currentColor;
+    right: 3px;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+
+  &:hover {
+    color: @navBlaLighten20;
+  }
+
+  &:active {
+    color: @navBlaDarken40;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px @orangeFocus;
+  }
 }

@@ -9,7 +9,6 @@ import {
 function TomPortefoljeModal({ skjulModal, visModal }) {
     const modal = (
         <Modal
-            className="begrenset-bredde"
             contentLabel="Modal tom portefølje"
             isOpen={visModal}
             onRequestClose={skjulModal}
