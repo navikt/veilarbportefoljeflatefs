@@ -22,7 +22,7 @@ const initialState = {
         antallReturnert: 0,
         fraIndex: 0
     },
-    sorteringsrekkefolge: 'ikke_satt',
+    sorteringsrekkefolge: 'ascending',
     veileder: {
         ident: 'ikke_satt'
     }
