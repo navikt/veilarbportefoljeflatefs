@@ -2,7 +2,7 @@ import React, { PropTypes as PT } from 'react';
 
 function CheckboxListe({ liste, handleChange, uniqueName }) {
     return (
-        <ul className="nedtrekksliste-liste">
+        <ul className="checkbox-liste">
             {liste.map((listeElement, indeks) => (
                 <li key={`${listeElement.value}-${uniqueName}`}>
                     <input
