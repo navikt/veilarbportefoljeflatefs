@@ -1,1 +1,1 @@
-Viser fra {fraIndex} til {tilIndex} av totalt {antallTotalt} brukere
+Viser {fraIndex}-{tilIndex} av {antallTotalt} brukere

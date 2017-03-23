@@ -1,1 +1,1 @@
-Veiledere ({antallVeiledere})
+Totalt {antallVeiledere} veiledere
