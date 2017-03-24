@@ -149,7 +149,7 @@ class VeilederPortefoljeVisning extends Component {
                                     <th>
                                         <a
                                             href={`https://${window.location.hostname}` +
-                                            `/veilarbpersonflatefs/${bruker.fnr}`}
+                                            `/veilarbpersonflatefs/${bruker.fnr}?enhet=${valgtEnhet.enhet.enhetId}`}
                                             className="til-bruker-link"
                                         >
                                             {settSammenNavn(bruker)}
