@@ -12,26 +12,24 @@ const innsatsgrupper = [
 
 function FiltreringInnsatsgruppe({ filtervalg, filtervalgMellomlagring, handleChange, endreFilter }) {
     return (
-        <div className="select-container">
-            <Nedtrekksliste
-                liste={[
-                    ...innsatsgrupper.map(
-                        (innsatsString, index) => ({
-                            value: index,
-                            label: innsatsString,
-                            checked: filtervalgMellomlagring.innsatsgruppe.includes(index)
-                        })
-                    )
-                ]}
-                handleChange={e => handleChange(e, 'innsatsgruppe')}
-                onSubmit={endreFilter}
-                navnId={'filtrering.filtrer-brukere.situasjon-innsatsgruppe'}
-                uniqueName="innsatsgruppe"
-                renderVelgKnapp={
-                    !arraysHaveEqualContent(filtervalg.innsatsgruppe, filtervalgMellomlagring.innsatsgruppe)
-                }
-            />
-        </div>
+        <Nedtrekksliste
+            liste={[
+                ...innsatsgrupper.map(
+                    (innsatsString, index) => ({
+                        value: index,
+                        label: innsatsString,
+                        checked: filtervalgMellomlagring.innsatsgruppe.includes(index)
+                    })
+                )
+            ]}
+            handleChange={e => handleChange(e, 'innsatsgruppe')}
+            onSubmit={endreFilter}
+            navnId={'filtrering.filtrer-brukere.situasjon-innsatsgruppe'}
+            uniqueName="innsatsgruppe"
+            renderVelgKnapp={
+                !arraysHaveEqualContent(filtervalg.innsatsgruppe, filtervalgMellomlagring.innsatsgruppe)
+            }
+        />
     );
 }
 

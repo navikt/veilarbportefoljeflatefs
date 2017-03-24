@@ -36,18 +36,10 @@ class EnhetSide extends Component {
             return <noscript />;
         }
 
-        const tildelVeilederVelger =
-            (<TildelVeilederVelger
-                valgtVeileder={valgtVeileder}
-                veiledere={veiledere}
-                brukere={brukere}
-                velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
-            />);
-
         return (
             <div className="enhet-side">
                 <Lenker routes={routes} />
-                <p className="typo-infotekst enhetsingress">
+                <p className="typo-infotekst enhetsingress blokk-m">
                     <FormattedMessage id="enhet.ingresstekst" />
                 </p>
                 <FiltreringContainer />
@@ -57,7 +49,12 @@ class EnhetSide extends Component {
                         type: 'undertittel'
                     }}
                 >
-                    {tildelVeilederVelger}
+                    <TildelVeilederVelger
+                        valgtVeileder={valgtVeileder}
+                        veiledere={veiledere}
+                        brukere={brukere}
+                        velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
+                    />
                 </Ekspanderbartpanel>
                 <EnhetsportefoljeVisning />
             </div>

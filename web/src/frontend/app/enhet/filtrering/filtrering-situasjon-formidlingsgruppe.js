@@ -13,26 +13,24 @@ const formidlingsgrupper = [
 
 function FiltreringFormidlingsgruppe({ filtervalg, filtervalgMellomlagring, handleChange, endreFilter }) {
     return (
-        <div className="select-container">
-            <Nedtrekksliste
-                liste={[
-                    ...formidlingsgrupper.map(
-                        (formidlingsString, index) => ({
-                            value: index,
-                            label: formidlingsString,
-                            checked: filtervalgMellomlagring.formidlingsgruppe.includes(index)
-                        })
-                    )
-                ]}
-                handleChange={e => handleChange(e, 'formidlingsgruppe')}
-                onSubmit={endreFilter}
-                navnId={'filtrering.filtrer-brukere.situasjon-formidlingsgruppe'}
-                uniqueName="formidlingsgruppe"
-                renderVelgKnapp={
-                    !arraysHaveEqualContent(filtervalg.formidlingsgruppe, filtervalgMellomlagring.formidlingsgruppe)
-                }
-            />
-        </div>
+        <Nedtrekksliste
+            liste={[
+                ...formidlingsgrupper.map(
+                    (formidlingsString, index) => ({
+                        value: index,
+                        label: formidlingsString,
+                        checked: filtervalgMellomlagring.formidlingsgruppe.includes(index)
+                    })
+                )
+            ]}
+            handleChange={e => handleChange(e, 'formidlingsgruppe')}
+            onSubmit={endreFilter}
+            navnId={'filtrering.filtrer-brukere.situasjon-formidlingsgruppe'}
+            uniqueName="formidlingsgruppe"
+            renderVelgKnapp={
+                !arraysHaveEqualContent(filtervalg.formidlingsgruppe, filtervalgMellomlagring.formidlingsgruppe)
+            }
+        />
     );
 }
 
