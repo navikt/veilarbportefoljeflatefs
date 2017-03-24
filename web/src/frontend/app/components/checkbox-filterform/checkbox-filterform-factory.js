@@ -45,7 +45,9 @@ function create(name, checkbokser) {
                     <div className="checkbox-filterform__valg">
                         {names}
                     </div>
-                    <button type="submit" className={knappCls}>{knappText}</button>
+                    <div className="knapperad">
+                        <button type="submit" className={knappCls}>{knappText}</button>
+                    </div>
                 </form>
             );
         }

@@ -25,7 +25,9 @@ const initialState = {
         kjonn: [],
         fodselsdagIMnd: [],
         innsatsgruppe: [],
-        formidlingsgruppe: []
+        formidlingsgruppe: [],
+        servicegruppe: [],
+        ytelse: []
     }
 };
 
