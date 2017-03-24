@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { Element } from 'nav-frontend-typografi';
 import { endreFiltervalgMellomlagring } from '../../ducks/filtrering-mellomlagring';
 import { endreFiltervalg } from '../../ducks/filtrering';
-import FiltreringDemografi from './filtrering-demografi';
-import FiltreringSituasjon from './filtrering-situasjon';
 import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
 import { erFiltervalgEndret } from '../../utils/utils';
 import DropdownContainer from './../../components/dropdown/dropdown-container';
@@ -12,7 +10,11 @@ import Dropdown from './../../components/dropdown/dropdown';
 import checkboksform from './../../components/checkbox-filterform/checkbox-filterform-factory';
 import { range, lag2Sifret } from '../../utils/utils';
 
-const aldersIntervaller = [
+function lagChecklistdata(arr) {
+    return arr.map((label, index) => ({ value: index, label: label, checked: false }));
+}
+
+const aldersIntervaller = lagChecklistdata([
     '19 og under',
     '20-24',
     '25-29',
@@ -21,19 +23,26 @@ const aldersIntervaller = [
     '50-59',
     '60-66',
     '67-70'
-].map((alder, index) => ({ value: index, label: alder, checked: false }));
+]);
 const fodselsdagIMnd = range(1, 31, true).map((x, index) => ({
     value: index,
     label: lag2Sifret(x),
     checked: false
 }));
-const kjonn = ['Kvinne', 'Mann'].map(
-    (kjonn, index) => ({
-        value: index,
-        label: kjonn,
-        checked: false
-    })
-);
+const kjonn = lagChecklistdata(['Kvinne', 'Mann']);
+const innsatsgrupper = lagChecklistdata([
+    'Spesielt tilpasset innsats',
+    'Situasjonsbestemt innsats',
+    'Standardinnsats',
+    'Varig tilpasset'
+]);
+const formidlingsgrupper = lagChecklistdata([
+    'Arbeidssøker',
+    'Ikke arbeidssøker',
+    'Ikke servicebehov',
+    'Pre arbeidssøker',
+    'Pre reaktivert arbeidssøker'
+]);
 
 function prepFormdata(data, filtervalg) {
     // data: [{ value, label, checked }]
@@ -91,6 +100,8 @@ class FiltreringFilter extends Component {
         const AlderFilter = checkboksform('alder', prepFormdata(aldersIntervaller, this.props.filtervalg.alder));
         const FodselsdatoFilter = checkboksform('fodselsdato', prepFormdata(fodselsdagIMnd, this.props.filtervalg.fodselsdagIMnd));
         const KjonnsFilter = checkboksform('kjonn', prepFormdata(kjonn, this.props.filtervalg.kjonn));
+        const InnsatsgrupppeFilter = checkboksform('innsatsgruppe', prepFormdata(innsatsgrupper, this.props.filtervalg.innsatsgruppe));
+        const FormidlingsgruppeFilter = checkboksform('formidlingsgruppe', prepFormdata(formidlingsgrupper, this.props.filtervalg.formidlingsgruppe));
 
         return (
             <div className="filtrering-filter">
@@ -110,14 +121,11 @@ class FiltreringFilter extends Component {
                         </div>
                         <div className="col-sm-3">
                             <Element>Situasjon</Element>
-                            <Dropdown name="dropdown-4">
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur aut dicta ducimus maxime, nostrum pariatur quam rem repellendus veritatis. Doloribus esse expedita hic, itaque iure laudantium nostrum quas repellendus sunt.</span>
+                            <Dropdown name="Innsatsgruppe">
+                                <InnsatsgrupppeFilter onSubmit={this.onSubmitHandler('innsatsgruppe')} />
                             </Dropdown>
-                            <Dropdown name="dropdown-5">
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur aut dicta ducimus maxime, nostrum pariatur quam rem repellendus veritatis. Doloribus esse expedita hic, itaque iure laudantium nostrum quas repellendus sunt.</span>
-                            </Dropdown>
-                            <Dropdown name="dropdown-6">
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur aut dicta ducimus maxime, nostrum pariatur quam rem repellendus veritatis. Doloribus esse expedita hic, itaque iure laudantium nostrum quas repellendus sunt.</span>
+                            <Dropdown name="Formidlingsgruppe">
+                                <FormidlingsgruppeFilter onSubmit={this.onSubmitHandler('formidlingsgruppe')} />
                             </Dropdown>
                         </div>
                         <div className="col-sm-3">
@@ -146,18 +154,6 @@ class FiltreringFilter extends Component {
                         </div>
                     </div>
                 </DropdownContainer>
-                <FiltreringDemografi
-                    filtervalg={this.props.filtervalg}
-                    filtervalgMellomlagring={this.props.filtervalgMellomlagring}
-                    handleChange={this.handleChange}
-                    endreFilter={this.props.endreFilter}
-                />
-                <FiltreringSituasjon
-                    filtervalg={this.props.filtervalg}
-                    filtervalgMellomlagring={this.props.filtervalgMellomlagring}
-                    handleChange={this.handleChange}
-                    endreFilter={this.props.endreFilter}
-                />
             </div>
         );
     }
