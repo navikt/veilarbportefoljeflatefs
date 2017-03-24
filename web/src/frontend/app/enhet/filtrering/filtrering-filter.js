@@ -71,7 +71,7 @@ function prepFormdata(data, filtervalg) {
     return data
         .map((valg) => {
             if (filtervalg.includes(valg.value)) {
-                valg.checked = true;
+                return { ...valg, checked: true };
             }
             return valg;
         })
