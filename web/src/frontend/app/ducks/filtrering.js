@@ -15,6 +15,7 @@ export const VALGT_KJONN = 'filtrering/VALGT_KJONN';
 export const VALGT_FODSELSDAG = 'filtrering/VALGT_FODSELSDAG';
 export const VALGT_INNSATSGRUPPE = 'filtrering/VALGT_INNSATSGRUPPE';
 export const VALGT_FORMIDLINGSGRUPPE = 'filtrering/VALGT_FORMIDLINGSGRUPPE';
+export const VALGT_SERVICEGRUPPE = 'filtrering/VALGT_SERVICEGRUPPE';
 
 //  Reducer
 const initialState = {
@@ -96,6 +97,13 @@ export default function reducer(state = initialState, action) {
                     formidlingsgruppe: action.formidlingsgruppe
                 }
             };
+        case VALGT_SERVICEGRUPPE:
+            return { ...state,
+                filtervalg: {
+                    ...state.filtervalg,
+                    servicegruppe: action.servicegruppe
+                }
+            };
         case SETT_FILTERVALG:
             return { ...state,
                 filtervalg: action.filtervalg
@@ -121,6 +129,8 @@ export function endreFiltervalg(filterId, filtervalg) { // eslint-disable-line c
         return { type: VALGT_INNSATSGRUPPE, innsatsgruppe: filtervalg };
     } else if (filterId === 'formidlingsgruppe') {
         return { type: VALGT_FORMIDLINGSGRUPPE, formidlingsgruppe: filtervalg };
+    } else if (filterId === 'servicegruppe') {
+        return { type: VALGT_SERVICEGRUPPE, servicegruppe: filtervalg };
     }
 }
 

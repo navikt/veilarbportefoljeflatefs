@@ -67,6 +67,12 @@ export function filterUrlBuilder(filtervalg) {
             .filter(i => erMellom(i, 0, 4))
             .reduce((curr, i) => `${curr}&formidlingsgruppe[]=${i}`, result);
     }
+
+    if (filtervalg.servicegruppe && filtervalg.servicegruppe.length > 0) {
+        result = filtervalg.servicegruppe
+            .filter(i => erMellom(i, 0, 5))
+            .reduce((curr, i) => `${curr}&servicegruppe[]=${i}`, result);
+    }
     return result;
 }
 
@@ -92,6 +98,6 @@ export function arraysHaveEqualContent(arr1, arr2) {
 }
 
 export const erFiltervalgEndret = (prevFiltervalg, filtervalg) => {
-    const felter = ['alder', 'fodselsdagIMnd', 'kjonn', 'innsatsgruppe', 'formidlingsgruppe'];
+    const felter = ['alder', 'fodselsdagIMnd', 'kjonn', 'innsatsgruppe', 'formidlingsgruppe', 'servicegruppe'];
     return felter.some(felt => prevFiltervalg[felt] !== filtervalg[felt]);
 };
