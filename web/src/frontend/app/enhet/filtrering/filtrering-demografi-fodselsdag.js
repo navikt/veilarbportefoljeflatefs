@@ -5,24 +5,22 @@ import { range, lag2Sifret, arraysHaveEqualContent } from '../../utils/utils';
 
 function FiltreringFodselsdag({ filtervalg, filtervalgMellomlagring, handleChange, endreFilter }) {
     return (
-        <div className="select-container">
-            <Nedtrekksliste
-                liste={
-                    range(1, 31, true).map((x, index) => ({
-                        value: index,
-                        label: lag2Sifret(x),
-                        checked: filtervalgMellomlagring.fodselsdagIMnd.includes(index)
-                    }))
-                }
-                handleChange={e => handleChange(e, 'fodselsdagIMnd')}
-                onSubmit={endreFilter}
-                navnId="filtrering.filtrer-brukere.demografi.fodselsdato"
-                uniqueName="fodselsdagIMnd"
-                renderVelgKnapp={
-                    !arraysHaveEqualContent(filtervalg.fodselsdagIMnd, filtervalgMellomlagring.fodselsdagIMnd)
-                }
-            />
-        </div>
+        <Nedtrekksliste
+            liste={
+                range(1, 31, true).map((x, index) => ({
+                    value: index,
+                    label: lag2Sifret(x),
+                    checked: filtervalgMellomlagring.fodselsdagIMnd.includes(index)
+                }))
+            }
+            handleChange={e => handleChange(e, 'fodselsdagIMnd')}
+            onSubmit={endreFilter}
+            navnId="filtrering.filtrer-brukere.demografi.fodselsdato"
+            uniqueName="fodselsdagIMnd"
+            renderVelgKnapp={
+                !arraysHaveEqualContent(filtervalg.fodselsdagIMnd, filtervalgMellomlagring.fodselsdagIMnd)
+            }
+        />
     );
 }
 

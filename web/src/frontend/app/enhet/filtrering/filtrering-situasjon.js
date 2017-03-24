@@ -5,7 +5,7 @@ import FiltreringFormidlingsgruppe from './filtrering-situasjon-formidlingsgrupp
 
 function FiltreringSituasjon({ filtervalg, handleChange, filtervalgMellomlagring, endreFilter }) {
     return (
-        <div className="filtrering-situasjon panel blokk-m">
+        <div className="filtrering-situasjon panel">
             <FiltreringInnsatsgruppe
                 filtervalgMellomlagring={filtervalgMellomlagring}
                 handleChange={handleChange}

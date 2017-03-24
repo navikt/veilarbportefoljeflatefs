@@ -48,7 +48,7 @@ class FiltreringStatus extends Component {
         </div>);
 
         return (
-            <div className="filtrering-oversikt panel blokk-m">
+            <div className="filtrering-oversikt panel">
                 {checkboxNyeBrukere}
                 {checkboxInaktiveBrukere}
             </div>

@@ -16,24 +16,22 @@ const aldersIntervaller = [
 
 function FiltreringAlder({ filtervalg, filtervalgMellomlagring, handleChange, endreFilter }) {
     return (
-        <div className="select-container">
-            <Nedtrekksliste
-                liste={[
-                    ...aldersIntervaller.map(
-                        (alderString, index) => ({
-                            value: index,
-                            label: alderString,
-                            checked: filtervalgMellomlagring.alder.includes(index)
-                        })
-                    )
-                ]}
-                handleChange={e => handleChange(e, 'alder')}
-                onSubmit={endreFilter}
-                navnId={'filtrering.filtrer-brukere.demografi.alder'}
-                uniqueName="alder"
-                renderVelgKnapp={!arraysHaveEqualContent(filtervalg.alder, filtervalgMellomlagring.alder)}
-            />
-        </div>
+        <Nedtrekksliste
+            liste={[
+                ...aldersIntervaller.map(
+                    (alderString, index) => ({
+                        value: index,
+                        label: alderString,
+                        checked: filtervalgMellomlagring.alder.includes(index)
+                    })
+                )
+            ]}
+            handleChange={e => handleChange(e, 'alder')}
+            onSubmit={endreFilter}
+            navnId={'filtrering.filtrer-brukere.demografi.alder'}
+            uniqueName="alder"
+            renderVelgKnapp={!arraysHaveEqualContent(filtervalg.alder, filtervalgMellomlagring.alder)}
+        />
     );
 }
 
