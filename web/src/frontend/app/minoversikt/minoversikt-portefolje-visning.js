@@ -30,7 +30,8 @@ class VeilederPortefoljeVisning extends Component {
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
     componentDidMount() {
-        eksporterVeilederportefoljeTilLocalStorage();
+        const { valgtEnhet, veileder } = this.props;
+        eksporterVeilederportefoljeTilLocalStorage(veileder, valgtEnhet.enhet, location.pathname);
     }
 
     settSorteringOgHentPortefolje() {

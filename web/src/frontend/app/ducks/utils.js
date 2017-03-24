@@ -74,7 +74,7 @@ export function eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet,
     localStorage.setItem('previousEnhetState', JSON.stringify({ filtervalg, valgtEnhet, path }));
 }
 
-export function eksporterVeilederportefoljeTilLocalStorage(state) {
-    localStorage.setItem('previousVeilederState', JSON.stringify(state));
+export function eksporterVeilederportefoljeTilLocalStorage(veileder, valgtEnhet, path) {
+    localStorage.setItem('previousVeilederState', JSON.stringify({ veileder, valgtEnhet, path }));
 }
 
