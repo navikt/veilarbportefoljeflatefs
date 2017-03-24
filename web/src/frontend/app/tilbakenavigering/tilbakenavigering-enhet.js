@@ -5,20 +5,43 @@ import { settFiltervalg } from '../ducks/filtrering';
 import { velgEnhetForVeileder } from '../ducks/enheter';
 import { settEnhetIDekorator } from '../eventhandtering';
 
+const getLagretPath = () => {
+    if (localStorage.previousEnhetState) {
+        return JSON.parse(localStorage.previousEnhetState).path.split('/')[2];
+    }
+    return '';
+};
+
+const getLagretEnhet = () => {
+    if (localStorage.previousEnhetState) {
+        return JSON.parse(localStorage.previousEnhetState).valgtEnhet;
+    }
+    return '';
+};
+
+const getLagredeFiltervalg = () => {
+    if (localStorage.previousEnhetState) {
+        return JSON.parse(localStorage.previousEnhetState).filtervalg;
+    }
+    return '';
+};
+
+const sendUserToPreviousPage = () => {
+    history.replace(getLagretPath());
+};
+
 class TilbakenavigeringEnhet extends Component {
     componentWillMount() {
-        const { settLagredeFiltervalg, lagredeFiltervalg, lagretValgtEnhet, velgEnhet } = this.props;
-        if (lagredeFiltervalg) {
-            settLagredeFiltervalg(lagredeFiltervalg);
+        const { settLagredeFiltervalg, velgEnhet } = this.props;
+        if (getLagretEnhet() === '' || getLagretPath() === '') {
+            window.location.href = '/veilarbportefoljeflatefs/enhet';
         }
-        velgEnhet(lagretValgtEnhet);
-        settEnhetIDekorator(lagretValgtEnhet.enhetId);
-        this.sendUserToPreviousPage();
-    }
-
-    sendUserToPreviousPage() {
-        const { lagretPath } = this.props;
-        history.replace(lagretPath);
+        if (getLagredeFiltervalg() !== '') {
+            settLagredeFiltervalg(getLagredeFiltervalg());
+        }
+        velgEnhet(getLagretEnhet());
+        settEnhetIDekorator(getLagretEnhet().enhetId);
+        sendUserToPreviousPage();
     }
 
     render() {
@@ -27,9 +50,6 @@ class TilbakenavigeringEnhet extends Component {
 }
 
 const mapToProps = () => ({
-    lagredeFiltervalg: JSON.parse(localStorage.previousEnhetState).filtervalg,
-    lagretPath: JSON.parse(localStorage.previousEnhetState).path.split('/')[2],
-    lagretValgtEnhet: JSON.parse(localStorage.previousEnhetState).valgtEnhet
 });
 const mapDispatchToProps = dispatch => ({
     velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet)),
@@ -38,9 +58,6 @@ const mapDispatchToProps = dispatch => ({
 
 
 TilbakenavigeringEnhet.propTypes = {
-    lagredeFiltervalg: PT.object,
-    lagretPath: PT.string,
-    lagretValgtEnhet: PT.object,
     velgEnhet: PT.func,
     settLagredeFiltervalg: PT.func
 };
