@@ -37,7 +37,7 @@ class PortefoljeTabell extends Component {
 
     render() {
         const { brukere, veiledere, settSomMarkertAlle,
-            settSomMarkert, portefolje, modalSkalVises, toggleSkjulModal } = this.props;
+            settSomMarkert, portefolje, modalSkalVises, toggleSkjulModal, valgtEnhet } = this.props;
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
 
@@ -121,7 +121,8 @@ class PortefoljeTabell extends Component {
                             </td>
                             <th>
                                 <a
-                                    href={`https://${window.location.hostname}/veilarbpersonflatefs/${bruker.fnr}`}
+                                    href={`https://${window.location.hostname}/veilarbpersonflatefs/` +
+                                    `${bruker.fnr}?enhet=${valgtEnhet}`}
                                     className="til-bruker-link"
                                 >
                                     {settSammenNavn(bruker)}
@@ -168,13 +169,15 @@ PortefoljeTabell.propTypes = {
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
     toggleVisModal: PT.func.isRequired,
-    filtervalg: PT.object
+    filtervalg: PT.object,
+    valgtEnhet: PT.string.isRequired
 };
 
 const mapStateToProps = state => ({
     antallTotalt: state.portefolje.data.antallTotalt,
     modalSkalVises: state.modal.visModal,
-    filtervalg: state.filtrering.filtervalg
+    filtervalg: state.filtrering.filtervalg,
+    valgtEnhet: state.enheter.valgtEnhet.enhet.enhetId
 });
 
 const mapDispatchToProps = dispatch => ({

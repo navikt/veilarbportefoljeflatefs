@@ -11,8 +11,8 @@ const getConfig = (initiellEnhet = undefined) => {
         {
             lenker: [
                 ['/mia', 'Arbeidsmarkedet'],
-                ['/veilarbportefoljeflatefs/enhet/', 'Enhetsportefolje'],
-                ['/veilarbportefoljeflatefs/portefolje', 'Veilederportefølje'],
+                [`/veilarbportefoljeflatefs/enhet?enhet=${initiellEnhet}`, 'Enhetsportefolje'],
+                [`/veilarbportefoljeflatefs/portefolje?enhet=${initiellEnhet}`, 'Veilederportefølje'],
                 ['/modiabrukerdialog', 'Modia']
             ],
             tittel: ''

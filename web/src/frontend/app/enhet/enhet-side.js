@@ -10,11 +10,13 @@ import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
 import FiltreringContainer from './filtrering/filtrering-container';
 import { tildelVeileder } from '../ducks/portefolje';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
+import { leggEnhetIUrl } from '../utils/utils';
 
 class EnhetSide extends Component {
     componentWillMount() {
         const { valgtEnhet, hentVeiledere } = this.props;
         hentVeiledere(valgtEnhet.enhet.enhetId);
+        leggEnhetIUrl(valgtEnhet.enhet.enhetId);
     }
     componentDidUpdate() {
         const { filtervalg, valgtEnhet } = this.props;

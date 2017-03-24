@@ -15,6 +15,7 @@ import {
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
+import { leggEnhetIUrl } from '../utils/utils';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -25,14 +26,14 @@ const settSammenNavn = (bruker) => {
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
-        const { hentPortefolje, valgtEnhet, veileder, sorteringsfelt, sorteringsrekkefolge } = this.props;
-        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, sorteringsrekkefolge, sorteringsfelt);
+        const { hentPortefolje, valgtEnhet, veileder } = this.props;
+        hentPortefolje(valgtEnhet.enhet.enhetId, veileder);
+        leggEnhetIUrl(valgtEnhet.enhet.enhetId);
         this.settSorteringNavnOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this, 'etternavn');
-        // eslint-disable-next-line max-len
-        // this.settSorteringFodselsnummerOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this, 'fodselsdato');
     }
     componentDidMount() {
-        eksporterVeilederportefoljeTilLocalStorage();
+        const { valgtEnhet, veileder } = this.props;
+        eksporterVeilederportefoljeTilLocalStorage(veileder, valgtEnhet.enhet, location.pathname);
     }
 
     settSorteringOgHentPortefolje(felt) {
@@ -158,7 +159,7 @@ class VeilederPortefoljeVisning extends Component {
                                     <th>
                                         <a
                                             href={`https://${window.location.hostname}` +
-                                            `/veilarbpersonflatefs/${bruker.fnr}`}
+                                            `/veilarbpersonflatefs/${bruker.fnr}?enhet=${valgtEnhet.enhet.enhetId}`}
                                             className="til-bruker-link"
                                         >
                                             {settSammenNavn(bruker)}
