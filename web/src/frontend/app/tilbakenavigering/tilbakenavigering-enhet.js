@@ -4,6 +4,7 @@ import history from '../history';
 import { settFiltervalg } from '../ducks/filtrering';
 import { velgEnhetForVeileder } from '../ducks/enheter';
 import { settEnhetIDekorator } from '../eventhandtering';
+import { leggEnhetIUrl } from '../utils/utils';
 
 const getLagretPath = () => {
     if (localStorage.previousEnhetState) {
@@ -28,6 +29,7 @@ const getLagredeFiltervalg = () => {
 
 const sendUserToPreviousPage = () => {
     history.replace(getLagretPath());
+    leggEnhetIUrl(getLagretEnhet().enhetId);
 };
 
 class TilbakenavigeringEnhet extends Component {
