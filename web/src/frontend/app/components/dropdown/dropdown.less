@@ -36,7 +36,7 @@
         padding: 0.45rem 1.5em 0.45rem 0.45rem;
         background: @hvit;
         border: 1px solid @ikonGraa;
-        border-radius: @border-radius-base;
+        border-radius: @border-radius-small;
 
         &:focus {
             outline: none;
@@ -50,14 +50,8 @@
         top: ~"calc(100% - 1px)";
         background-color: @hvit;
         padding: 0.5rem;
-        border-radius: 0 @border-radius-base @border-radius-base @border-radius-base;
-        max-height: 15rem;
-        overflow-y: auto;
+        border-radius: 0 0 @border-radius-small @border-radius-small;
         width: 100%;
-
-        @media (min-width: @screen-sm-min) {
-            width: 120%;
-        }
     }
     &--apen {
         .dropdown__btnwrapper {
@@ -78,7 +72,10 @@
     &--alignright {
         .dropdown__innhold {
             right: 0;
-            border-radius: @border-radius-base 0 @border-radius-base @border-radius-base;
+            border-radius: @border-radius-small 0 @border-radius-small @border-radius-small;
         }
+    }
+    .knapperad {
+        padding: 0;
     }
 }

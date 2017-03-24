@@ -43,6 +43,27 @@ const formidlingsgrupper = lagChecklistdata([
     'Pre arbeidssøker',
     'Pre reaktivert arbeidssøker'
 ]);
+const servicegrupper = lagChecklistdata([
+    'Behov for arbeidsevnevurdering',
+    'Ikke vurdert',
+    'Helserelatert arbeidsrettet oppfølging i NAV',
+    'Varig tilpasset innsats',
+    'Sykmeldt, oppfølging på arbeidsplassen',
+    'Sykmeldt uten arbeidsgiver'
+]);
+const ytelser = [
+    'ORDINARE_DAGPENGER',
+    'DAGPENGER_MED_PERMITTERING',
+    'DAGPENGER_OVRIGE',
+    'AAP_MAXTID',
+    'AAP_UNNTAK',
+    'TILTAKSPENGER'
+].map((ytelse) => ({
+    name: 'ytelse',
+    value: ytelse,
+    label: ytelse.toLocaleLowerCase().replace(/\_/g, ' '),
+    checked: false
+}));
 
 function prepFormdata(data, filtervalg) {
     // data: [{ value, label, checked }]
@@ -102,6 +123,8 @@ class FiltreringFilter extends Component {
         const KjonnsFilter = checkboksform('kjonn', prepFormdata(kjonn, this.props.filtervalg.kjonn));
         const InnsatsgrupppeFilter = checkboksform('innsatsgruppe', prepFormdata(innsatsgrupper, this.props.filtervalg.innsatsgruppe));
         const FormidlingsgruppeFilter = checkboksform('formidlingsgruppe', prepFormdata(formidlingsgrupper, this.props.filtervalg.formidlingsgruppe));
+        const ServicegruppeFilter = checkboksform('servicegruppe', prepFormdata(servicegrupper, this.props.filtervalg.servicegruppe));
+        const YtelseFilter = checkboksform('ytelse', prepFormdata(ytelser, this.props.filtervalg.ytelse));
 
         return (
             <div className="filtrering-filter">
@@ -127,29 +150,14 @@ class FiltreringFilter extends Component {
                             <Dropdown name="Formidlingsgruppe">
                                 <FormidlingsgruppeFilter onSubmit={this.onSubmitHandler('formidlingsgruppe')} />
                             </Dropdown>
-                        </div>
-                        <div className="col-sm-3">
-                            <Element>Situasjon</Element>
-                            <Dropdown name="dropdown-7">
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur aut dicta ducimus maxime, nostrum pariatur quam rem repellendus veritatis. Doloribus esse expedita hic, itaque iure laudantium nostrum quas repellendus sunt.</span>
-                            </Dropdown>
-                            <Dropdown name="dropdown-8">
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur aut dicta ducimus maxime, nostrum pariatur quam rem repellendus veritatis. Doloribus esse expedita hic, itaque iure laudantium nostrum quas repellendus sunt.</span>
-                            </Dropdown>
-                            <Dropdown name="dropdown-9">
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur aut dicta ducimus maxime, nostrum pariatur quam rem repellendus veritatis. Doloribus esse expedita hic, itaque iure laudantium nostrum quas repellendus sunt.</span>
+                            <Dropdown name="Servicegruppe">
+                                <ServicegruppeFilter onSubmit={this.onSubmitHandler('servicegruppe')} />
                             </Dropdown>
                         </div>
                         <div className="col-sm-3">
-                            <Element>Aktivitetsplan</Element>
-                            <Dropdown name="dropdown-10" className="dropdown--alignright">
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur aut dicta ducimus maxime, nostrum pariatur quam rem repellendus veritatis. Doloribus esse expedita hic, itaque iure laudantium nostrum quas repellendus sunt.</span>
-                            </Dropdown>
-                            <Dropdown name="dropdown-11" className="dropdown--alignright">
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur aut dicta ducimus maxime, nostrum pariatur quam rem repellendus veritatis. Doloribus esse expedita hic, itaque iure laudantium nostrum quas repellendus sunt.</span>
-                            </Dropdown>
-                            <Dropdown name="dropdown-12" className="dropdown--alignright">
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur aut dicta ducimus maxime, nostrum pariatur quam rem repellendus veritatis. Doloribus esse expedita hic, itaque iure laudantium nostrum quas repellendus sunt.</span>
+                            <Element>Ytelse</Element>
+                            <Dropdown name="Ytelse">
+                                <YtelseFilter onSubmit={this.onSubmitHandler('ytelse')} />
                             </Dropdown>
                         </div>
                     </div>

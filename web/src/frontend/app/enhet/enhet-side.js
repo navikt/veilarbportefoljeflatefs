@@ -44,9 +44,10 @@ class EnhetSide extends Component {
                 </p>
                 <FiltreringContainer />
                 <Ekspanderbartpanel
+                    className="custom-ekspanderbartpanel"
                     tittel="Tildel veileder" tittelProps={{
                         tag: 'span',
-                        type: 'undertittel'
+                        type: 'systemtittel'
                     }}
                 >
                     <TildelVeilederVelger
