@@ -15,6 +15,7 @@ import {
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
+import { ytelseFilterErAktiv } from '../utils/utils';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -57,7 +58,8 @@ class VeilederPortefoljeVisning extends Component {
             valgtEnhet,
             settMarkert,
             clearFeilendeTilordninger,
-            settSomMarkertAlle
+            settSomMarkertAlle,
+            filtervalg
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
@@ -80,6 +82,13 @@ class VeilederPortefoljeVisning extends Component {
         }
 
         const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
+
+        const utlopsdatoHeader = ytelseFilterErAktiv(filtervalg) ?
+            (<th>
+                <FormattedMessage id="portefolje.tabell.utlopsdato" />
+            </th>)
+            :
+            null;
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -123,6 +132,7 @@ class VeilederPortefoljeVisning extends Component {
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </a>
                             </th>
+                            {utlopsdatoHeader}
                             <th>
                                 <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                             </th>
@@ -154,14 +164,14 @@ class VeilederPortefoljeVisning extends Component {
                                             {settSammenNavn(bruker)}
                                         </a>
                                     </th>
-                                    {bruker.fnr != null ?
+                                    {bruker.fnr !== null ?
                                         <td className="fodselsnummer-td">{bruker.fnr}</td> :
                                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
                                     }
                                     <td className="sikkerhetstiltak-td">
                                         {bruker.sikkerhetstiltak.length > 0 ?
                                             <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
-                                        {bruker.diskresjonskode != null ?
+                                        {bruker.diskresjonskode !== null ?
                                             <span className="diskresjonskode">
                                                 {`Kode ${bruker.diskresjonskode}`}
                                             </span> :
@@ -195,13 +205,15 @@ VeilederPortefoljeVisning.propTypes = {
     fraIndex: PT.number,
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
-    settSomMarkertAlle: PT.func.isRequired
+    settSomMarkertAlle: PT.func.isRequired,
+    filtervalg: PT.object
 };
 
 const mapStateToProps = state => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
-    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge
+    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
+    filtervalg: state.filtrering.filtervalg
 });
 
 const mapDispatchToProps = dispatch => ({
