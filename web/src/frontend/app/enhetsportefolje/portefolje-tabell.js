@@ -9,11 +9,11 @@ import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
 import { initialState } from '../ducks/filtrering';
 
-const settSammenNavn = ( bruker ) => {
-    if(bruker.etternavn === '' && bruker.fornavn === ''){
+const settSammenNavn = (bruker) => {
+    if (bruker.etternavn === '' && bruker.fornavn === '') {
         return '';
     }
-    return `${bruker.etternavn}, ${bruker.fornavn}`
+    return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
 class PortefoljeTabell extends Component {
