@@ -7,6 +7,7 @@ import { veilederShape, brukerShape, portefoljeShape } from '../proptype-shapes'
 import { markerAlleBrukere } from './../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
+import { initialState } from '../ducks/filtrering';
 
 class PortefoljeTabell extends Component {
 
@@ -20,8 +21,10 @@ class PortefoljeTabell extends Component {
     }
 
     visModalDersomPortefoljeErTom() {
-        const { toggleVisModal, antallTotalt } = this.props;
-        if (antallTotalt === 0) {
+        const { toggleVisModal, antallTotalt, filtervalg } = this.props;
+        console.log('filtervalg', filtervalg);
+        console.log('initialState', initialState);
+        if (antallTotalt === 0 && JSON.stringify(filtervalg) === JSON.stringify(initialState.filtervalg)) {
             toggleVisModal();
         }
     }
@@ -164,12 +167,14 @@ PortefoljeTabell.propTypes = {
     settSomMarkertAlle: PT.func.isRequired,
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
-    toggleVisModal: PT.func.isRequired
+    toggleVisModal: PT.func.isRequired,
+    filtervalg: PT.object
 };
 
 const mapStateToProps = state => ({
     antallTotalt: state.portefolje.data.antallTotalt,
-    modalSkalVises: state.modal.visModal
+    modalSkalVises: state.modal.visModal,
+    filtervalg: state.filtrering.filtervalg
 });
 
 const mapDispatchToProps = dispatch => ({

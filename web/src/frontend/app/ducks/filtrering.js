@@ -15,7 +15,7 @@ export const VALGT_KJONN = 'VALGT_KJONN';
 export const VALGT_FODSELSDAG = 'VALGT_FODSELSDAG';
 
 //  Reducer
-const initialState = {
+export const initialState = {
     filtervalg: {
         nyeBrukere: false,
         inaktiveBrukere: false,

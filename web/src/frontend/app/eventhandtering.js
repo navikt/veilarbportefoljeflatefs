@@ -1,11 +1,11 @@
-import {velgEnhetForVeileder} from './ducks/enheter';
-import {store} from './index';
-import {hentVeiledereForEnhet} from './ducks/veiledere';
-import {hentPortefoljeForEnhet} from './ducks/portefolje';
-import {hentPortefoljeStorrelser} from './ducks/portefoljestorrelser';
+ import { velgEnhetForVeileder } from './ducks/enheter';
+import { store } from './index';
+import { hentVeiledereForEnhet } from './ducks/veiledere';
+import { hentPortefoljeForEnhet } from './ducks/portefolje';
+import { hentPortefoljeStorrelser } from './ducks/portefoljestorrelser';
 
 const hentOgDispatchAllInformasjonOmEnhet = (enhet) => {
-    store.dispatch(velgEnhetForVeileder({enhetId: enhet}));
+    store.dispatch(velgEnhetForVeileder({ enhetId: enhet }));
     store.dispatch(hentPortefoljeForEnhet(enhet));
     store.dispatch(hentVeiledereForEnhet(enhet));
     store.dispatch(hentPortefoljeStorrelser(enhet));
