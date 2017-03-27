@@ -26,10 +26,18 @@ class FiltreringContainer extends Component {
     render() {
         return (
             <div>
-                <Ekspanderbartpanel className="custom-ekspanderbartpanel" tittel="Status" tittelProps={{ type: 'systemtittel', tag: 'span' }}>
+                <Ekspanderbartpanel
+                    className="custom-ekspanderbartpanel"
+                    tittel="Status"
+                    tittelProps={{ type: 'systemtittel', tag: 'span' }}
+                >
                     <FiltreringStatus oppdaterDatagrunnlag={this.oppdaterDatagrunnlag} />
                 </Ekspanderbartpanel>
-                <Ekspanderbartpanel className="custom-ekspanderbartpanel" tittel="Filter" tittelProps={{ type: 'systemtittel', tag: 'span' }}>
+                <Ekspanderbartpanel
+                    className="custom-ekspanderbartpanel"
+                    tittel="Filter"
+                    tittelProps={{ type: 'systemtittel', tag: 'span' }}
+                >
                     <FiltreringFilter oppdaterDatagrunnlag={this.oppdaterDatagrunnlag} />
                 </Ekspanderbartpanel>
             </div>
@@ -38,11 +46,11 @@ class FiltreringContainer extends Component {
 }
 
 FiltreringContainer.propTypes = {
-    filtervalg: PT.object,
-    sorteringsrekkefolge: PT.string,
-    fraIndex: PT.number,
-    antall: PT.number,
-    valgtEnhet: PT.string,
+    filtervalg: PT.object.isRequired,
+    sorteringsrekkefolge: PT.string.isRequired,
+    fraIndex: PT.number.isRequired,
+    antall: PT.number.isRequired,
+    valgtEnhet: PT.string.isRequired,
     hentPortefolje: PT.func.isRequired
 };
 

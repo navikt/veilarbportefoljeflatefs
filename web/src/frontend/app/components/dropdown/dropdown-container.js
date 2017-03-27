@@ -1,4 +1,4 @@
-import React, { Component, PropTypes as PT } from 'react';
+import { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { closeAll } from './dropdown-reducer';
@@ -9,11 +9,11 @@ function isChildOf(selector, element) {
         return false;
     }
 
-    element.matches = element.matches ||
-        element.webkitMatchesSelector ||
-        element.mozMatchesSelector ||
-        element.msMatchesSelector ||
-        element.oMatchesSelector;
+    element.matches = element.matches ||     // eslint-disable-line no-param-reassign
+        element.webkitMatchesSelector ||    // eslint-disable-line no-param-reassign
+        element.mozMatchesSelector ||    // eslint-disable-line no-param-reassign
+        element.msMatchesSelector ||    // eslint-disable-line no-param-reassign
+        element.oMatchesSelector;    // eslint-disable-line no-param-reassign
 
 
     if (element.matches(selector)) {
@@ -47,10 +47,16 @@ class DropdownContainer extends Component {
 }
 
 DropdownContainer.propTypes = {
-    children: PT.node.isRequired
+    children: PT.node.isRequired,
+    apen: PT.string,
+    actions: PT.objectOf(PT.func).isRequired
 };
-const mapStateToProps = (state) => ({ apen: state.ui.dropdown.name });
-const mapDispatchToProps = (dispatch) => ({
+
+DropdownContainer.defaultProps = {
+    apen: ''
+};
+const mapStateToProps = state => ({ apen: state.ui.dropdown.name });
+const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators({ closeAll }, dispatch)
 });
 
