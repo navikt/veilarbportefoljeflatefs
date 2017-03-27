@@ -15,6 +15,7 @@ import Lenker from './../lenker/lenker';
 import { settSorteringRekkefolge, settSubListeForPaginering } from '../ducks/paginering';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
+import { leggEnhetIUrl } from '../utils/utils';
 
 export function compareEtternavn(a, b) {
     const aUpper = a.etternavn.toUpperCase();
@@ -33,6 +34,7 @@ class VeiledereSide extends Component {
         const { hentVeiledere, hentPortefoljestorrelser, valgtEnhet } = this.props;
         hentVeiledere(valgtEnhet.enhet.enhetId);
         hentPortefoljestorrelser(valgtEnhet.enhet.enhetId);
+        leggEnhetIUrl(valgtEnhet.enhet.enhetId);
     }
 
     render() {

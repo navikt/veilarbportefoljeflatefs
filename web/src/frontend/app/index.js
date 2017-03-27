@@ -35,7 +35,7 @@ render(
                         <Route path="veiledere" component={VeiledereSide}/>
                         <Route path="portefolje(/:ident)" component={MinOversiktSide} />
                         <Route path="tilbaketilenhet" component={TilbakeTilEnhetportefolje}/>
-                        <Route path="tilbaketilportefolje" component={TilbakeTilVeilederportefolje}/>
+                        <Route path="tilbaketilveileder" component={TilbakeTilVeilederportefolje}/>
                     </Route>
                 </Router>
             </IntlProvider>

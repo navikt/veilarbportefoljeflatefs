@@ -63,7 +63,7 @@ MinOversiktSide.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    veilederFraState: state.portefolje.veileder,
+    veilederFraState: { ident: state.enheter.ident },
     brukere: state.portefolje.data.brukere,
     veiledere: state.veiledere.data.veilederListe
 });

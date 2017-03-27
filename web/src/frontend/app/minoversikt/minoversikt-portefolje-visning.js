@@ -6,8 +6,8 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
-    hentPortefoljeForVeileder,
-    settSorterRekkefolge,
+    hentPortefoljeForEnhet,
+    settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
     markerAlleBrukere
@@ -15,6 +15,7 @@ import {
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
+import { leggEnhetIUrl } from '../utils/utils';
 import { ytelseFilterErAktiv } from '../utils/utils';
 
 const settSammenNavn = (bruker) => {
@@ -28,24 +29,32 @@ class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
         const { hentPortefolje, valgtEnhet, veileder } = this.props;
         hentPortefolje(valgtEnhet.enhet.enhetId, veileder);
-        this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
+        leggEnhetIUrl(valgtEnhet.enhet.enhetId);
+        this.settSorteringNavnOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this, 'etternavn');
     }
     componentDidMount() {
-        eksporterVeilederportefoljeTilLocalStorage();
+        const { valgtEnhet, veileder } = this.props;
+        eksporterVeilederportefoljeTilLocalStorage(veileder, valgtEnhet.enhet, location.pathname);
     }
 
-    settSorteringOgHentPortefolje() {
-        const { sorteringsrekkefolge, settSortering, fraIndex,
-                hentPortefolje, veileder, valgtEnhet } = this.props;
+    settSorteringOgHentPortefolje(felt) {
+        const {
+            sorteringsrekkefolge,
+            sorteringsfelt,
+            settSortering, // eslint-disable-line no-shadow
+            fraIndex,
+            hentPortefolje,
+            veileder,
+            valgtEnhet
+        } = this.props;
         let valgtRekkefolge = '';
-        if (sorteringsrekkefolge === 'ascending') {
-            valgtRekkefolge = 'descending';
-            settSortering('descending');
-        } else {
+        if (felt !== sorteringsfelt) {
             valgtRekkefolge = 'ascending';
-            settSortering('ascending');
+        } else {
+            valgtRekkefolge = sorteringsrekkefolge === 'ascending' ? 'descending' : 'ascending';
         }
-        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, valgtRekkefolge, fraIndex);
+        settSortering(valgtRekkefolge, felt);
+        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, valgtRekkefolge, felt, fraIndex);
     }
 
 
@@ -55,6 +64,7 @@ class VeilederPortefoljeVisning extends Component {
             hentPortefolje,
             veileder,
             sorteringsrekkefolge,
+            sorteringsfelt,
             valgtEnhet,
             settMarkert,
             clearFeilendeTilordninger,
@@ -96,7 +106,8 @@ class VeilederPortefoljeVisning extends Component {
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
                     hentListe={(fra, antall) =>
-                        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, sorteringsrekkefolge, fra, antall)}
+                        hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
+                            sorteringsrekkefolge, sorteringsfelt, fra, antall)}
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
@@ -125,7 +136,7 @@ class VeilederPortefoljeVisning extends Component {
                             </th>
                             <th>
                                 <a
-                                    onClick={this.settSorteringOgHentPortefolje}
+                                    onClick={this.settSorteringNavnOgHentPortefolje}
                                     role="button"
                                     className="sortering-link"
                                 >
@@ -158,7 +169,7 @@ class VeilederPortefoljeVisning extends Component {
                                     <th>
                                         <a
                                             href={`https://${window.location.hostname}` +
-                                            `/veilarbpersonflatefs/${bruker.fnr}`}
+                                            `/veilarbpersonflatefs/${bruker.fnr}?enhet=${valgtEnhet.enhet.enhetId}`}
                                             className="til-bruker-link"
                                         >
                                             {settSammenNavn(bruker)}
@@ -202,6 +213,7 @@ VeilederPortefoljeVisning.propTypes = {
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
+    sorteringsfelt: PT.string.isRequired,
     fraIndex: PT.number,
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
@@ -213,13 +225,15 @@ const mapStateToProps = state => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
-    filtervalg: state.filtrering.filtervalg
+    sorteringsfelt: state.portefolje.sorteringsfelt,
+    filtervalg: state.filtrering.filtervalg,
+    veileder: state.portefolje.veileder
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, veileder, rekkefolge, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, fra, antall)),
-    settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
+    hentPortefolje: (enhet, rekkefolge, felt, fra = 0, antall = 20, filtervalg) =>
+        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, felt, fra, antall, filtervalg)),
+    settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
     settSomMarkertAlle: markert => dispatch(markerAlleBrukere(markert))

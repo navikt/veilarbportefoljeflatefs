@@ -27,6 +27,9 @@ export function leggEnhetIUrl(enhet) { // eslint-disable-line consistent-return
 
 export function filterUrlBuilder(filtervalg) {
     let result = '';
+    if (filtervalg === null || filtervalg === undefined) {
+        return result;
+    }
 
     if (filtervalg.nyeBrukere) {
         result += `&nyeBrukere=${filtervalg.nyeBrukere}`;

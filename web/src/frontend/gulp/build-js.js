@@ -91,5 +91,4 @@ function buildJsWatchify(gulp) {
 module.exports = {
     buildJs: (gulp) => buildJs(gulp),
     buildJsWatchify: (gulp) => buildJsWatchify(gulp)
-
 };
