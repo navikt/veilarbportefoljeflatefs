@@ -5,6 +5,8 @@
   "author": "NAV",
   "license": "MIT",
   "devDependencies": {
+    "@types/react": "15.0.20",
+    "@types/react-dom": "0.14.23",
     "babel-eslint": "7.2.1",
     "chai": "3.5.0",
     "core-js": "2.4.1",
@@ -66,14 +68,16 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "test": "npm run dep:test && npm run js:test",
-    "test:js": "mocha",
+    "test": "npm run test:dep && npm run test:ts",
+    "test:ts": "mocha",
     "test:dep": "npm-check-updates -e 2 -x history,react-router --packageFile ./package.json",
     "eslint": "eslint ./app/",
-    "build": "npm run build:js && npm run build:css && npm run build:html",
-    "build:js": "tsc && webpack -p && rimraf -rf temp/",
+    "build": "npm run build:ts && npm run build:css && npm run build:html",
+    "build:ts": "tsc && webpack -p && rimraf -rf temp/",
     "build:css": "lessc app/index.less ../main/webapp/css/index.css",
     "build:html": "node script/copy-html.js",
-    "dev": "tsc --sourceMap && webpack && rimraf temp/  "
+    "dev:ts": "tsc --sourceMap && webpack && rimraf temp/",
+    "dev:html": "NODE_ENV=development node script/copy-html.js",
+    "dev": "npm run dev:ts && npm run build:css && npm run dev:html"
   }
 }
