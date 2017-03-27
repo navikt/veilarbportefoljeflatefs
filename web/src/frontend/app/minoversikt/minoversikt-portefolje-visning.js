@@ -26,7 +26,7 @@ const settSammenNavn = (bruker) => {
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
-        const { sorteringsrekkefolge, sorteringsfelt,hentPortefolje, valgtEnhet, veileder } = this.props;
+        const { sorteringsrekkefolge, sorteringsfelt, hentPortefolje, valgtEnhet, veileder } = this.props;
         hentPortefolje(valgtEnhet.enhet.enhetId, veileder, sorteringsrekkefolge, sorteringsfelt);
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
         this.settSorteringNavnOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this, 'etternavn');
