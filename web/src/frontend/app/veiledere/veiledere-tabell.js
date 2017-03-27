@@ -84,7 +84,7 @@ VeilederTabell.propTypes = {
 
 const mapStateToProps = state => ({
     valgtEnhet: state.enheter.valgtEnhet.enhet,
-    filtervalg: state.filtrering.filtervalg
+    filtervalg: state.filtrering
 });
 
 const mapDispatchToProps = dispatch => ({

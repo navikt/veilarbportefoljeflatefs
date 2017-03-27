@@ -14,43 +14,38 @@ class FiltreringStatus extends Component {
     }
 
     handleChange(e) {
-        const { endreFilter } = this.props;
-        endreFilter(e.target.id, e.target.checked);
+        this.props.endreFilter(e.target.id, e.target.checked);
     }
 
     render() {
         const { nyeBrukere, inaktiveBrukere } = this.props;
 
-        const checkboxNyeBrukere = (<div className="skjema__input">
-            <input
-                className="checkboks"
-                id="checkbox-filtrering-oversikt-nye-brukere"
-                type="checkbox"
-                onChange={this.handleChange}
-                checked={nyeBrukere}
-            />
-            <label htmlFor="checkbox-filtrering-oversikt-nye-brukere">
-                <FormattedMessage id="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox" />
-            </label>
-        </div>);
-
-        const checkboxInaktiveBrukere = (<div className="skjema__input">
-            <input
-                className="checkboks"
-                id="checkbox-filtrering-oversikt-inaktive-brukere"
-                type="checkbox"
-                onChange={this.handleChange}
-                checked={inaktiveBrukere}
-            />
-            <label htmlFor="checkbox-filtrering-oversikt-inaktive-brukere">
-                <FormattedMessage id="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox" />
-            </label>
-        </div>);
-
         return (
             <div className="filtrering-oversikt panel">
-                {checkboxNyeBrukere}
-                {checkboxInaktiveBrukere}
+                <div className="skjema__input">
+                    <input
+                        className="checkboks"
+                        id="nyeBrukere"
+                        type="checkbox"
+                        onChange={this.handleChange}
+                        checked={nyeBrukere}
+                    />
+                    <label htmlFor="nyeBrukere">
+                        <FormattedMessage id="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox" />
+                    </label>
+                </div>
+                <div className="skjema__input">
+                    <input
+                        className="checkboks"
+                        id="inaktiveBrukere"
+                        type="checkbox"
+                        onChange={this.handleChange}
+                        checked={inaktiveBrukere}
+                    />
+                    <label htmlFor="inaktiveBrukere">
+                        <FormattedMessage id="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox" />
+                    </label>
+                </div>
             </div>
         );
     }
@@ -64,8 +59,8 @@ FiltreringStatus.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    nyeBrukere: state.filtrering.filtervalg.nyeBrukere,
-    inaktiveBrukere: state.filtrering.filtervalg.inaktiveBrukere
+    nyeBrukere: state.filtrering.nyeBrukere,
+    inaktiveBrukere: state.filtrering.inaktiveBrukere
 });
 
 const mapDispatchToProps = dispatch => ({
