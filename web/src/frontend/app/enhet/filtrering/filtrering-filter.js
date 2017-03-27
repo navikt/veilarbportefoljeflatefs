@@ -8,6 +8,7 @@ import { erFiltervalgEndret } from '../../utils/utils';
 import DropdownContainer from './../../components/dropdown/dropdown-container';
 import Dropdown from './../../components/dropdown/dropdown';
 import checkboksform from './../../components/checkbox-filterform/checkbox-filterform-factory';
+import radioform from './../../components/radio-filterform/radio-filterform-factory';
 import { range, lag2Sifret } from '../../utils/utils';
 
 function lagChecklistdata(arr) {
@@ -77,6 +78,16 @@ function prepFormdata(data, filtervalg) {
         })
 }
 
+function prepRadioFormdata(data, filtervalg) {
+    return data
+        .map((valg) => {
+            if (valg.value === filtervalg) {
+                return { ...valg, checked: true };
+            }
+            return valg;
+        })
+}
+
 function hentFilter(data) {
     return Object.entries(data)
         .filter(([_, value]) => value)
@@ -124,7 +135,7 @@ class FiltreringFilter extends Component {
         const InnsatsgrupppeFilter = checkboksform('innsatsgruppe', prepFormdata(innsatsgrupper, this.props.filtervalg.innsatsgruppe));
         const FormidlingsgruppeFilter = checkboksform('formidlingsgruppe', prepFormdata(formidlingsgrupper, this.props.filtervalg.formidlingsgruppe));
         const ServicegruppeFilter = checkboksform('servicegruppe', prepFormdata(servicegrupper, this.props.filtervalg.servicegruppe));
-        const YtelseFilter = checkboksform('ytelse', prepFormdata(ytelser, this.props.filtervalg.ytelse));
+        const YtelseFilter = radioform('ytelse', prepRadioFormdata(ytelser, this.props.filtervalg.ytelse));
 
         return (
             <div className="filtrering-filter">
@@ -157,7 +168,10 @@ class FiltreringFilter extends Component {
                         <div className="col-sm-3">
                             <Element>Ytelse</Element>
                             <Dropdown name="Ytelse">
-                                <YtelseFilter onSubmit={this.onSubmitHandler('ytelse')} />
+                                <YtelseFilter onSubmit={(data) => {
+                                    this.props.endreFilter('ytelse', data.ytelse);
+                                    return false;
+                                }} />
                             </Dropdown>
                         </div>
                     </div>

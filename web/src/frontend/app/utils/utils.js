@@ -73,6 +73,11 @@ export function filterUrlBuilder(filtervalg) {
             .filter(i => erMellom(i, 0, 5))
             .reduce((curr, i) => `${curr}&servicegruppe[]=${i}`, result);
     }
+
+    if (filtervalg.ytelse) {
+        result += `&ytelse=${filtervalg.ytelse}`;
+    }
+
     return result;
 }
 
@@ -98,6 +103,6 @@ export function arraysHaveEqualContent(arr1, arr2) {
 }
 
 export const erFiltervalgEndret = (prevFiltervalg, filtervalg) => {
-    const felter = ['alder', 'fodselsdagIMnd', 'kjonn', 'innsatsgruppe', 'formidlingsgruppe', 'servicegruppe'];
+    const felter = ['alder', 'fodselsdagIMnd', 'kjonn', 'innsatsgruppe', 'formidlingsgruppe', 'servicegruppe', 'ytelse'];
     return felter.some(felt => prevFiltervalg[felt] !== filtervalg[felt]);
 };
