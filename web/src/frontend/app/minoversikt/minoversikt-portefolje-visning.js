@@ -15,14 +15,18 @@ import {
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
-import { leggEnhetIUrl } from '../utils/utils';
-import { ytelseFilterErAktiv } from '../utils/utils';
+import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
         return '';
     }
     return `${bruker.etternavn}, ${bruker.fornavn}`;
+};
+
+const renderUtlopsdato = (utlopsdato) => {
+    const { dayOfMonth, monthValue, year } = utlopsdato;
+    return <td>`${dayOfMonth}.${monthValue}.${year}`</td>;
 };
 
 class VeilederPortefoljeVisning extends Component {
@@ -179,6 +183,11 @@ class VeilederPortefoljeVisning extends Component {
                                         <td className="fodselsnummer-td">{bruker.fnr}</td> :
                                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
                                     }
+                                    {
+                                        ytelseFilterErAktiv(filtervalg) && bruker.utlopsdato !== null ?
+                                            renderUtlopsdato(bruker.utlopsdato)
+                                            : null
+                                    }
                                     <td className="sikkerhetstiltak-td">
                                         {bruker.sikkerhetstiltak.length > 0 ?
                                             <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
@@ -196,6 +205,7 @@ class VeilederPortefoljeVisning extends Component {
             </Innholdslaster>
         );
     }
+
 }
 
 VeilederPortefoljeVisning.propTypes = {
