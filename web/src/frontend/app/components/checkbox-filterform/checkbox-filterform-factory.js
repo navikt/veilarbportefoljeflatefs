@@ -4,18 +4,23 @@ import { reduxForm, Field } from 'redux-form';
 function lagUnikId({ value, label }) {
     return `${value}--${label}`;
 }
-const tilObject = (acc, val) => ({...acc, ...val});
+const tilObject = (acc, val) => ({ ...acc, ...val });
 
 function lagCheckboks({ value, label }) {
     const id = lagUnikId({ value, label });
 
     return (
         <div className="skjema__input" key={id}>
-            <Field type="checkbox" name={id} id={id} component="input" className="checkboks"/>
+            <Field type="checkbox" name={id} id={id} component="input" className="checkboks" />
             <label htmlFor={id}>{label}</label>
         </div>
     );
 }
+
+lagCheckboks.propTypes = {
+    value: PT.number.isRequired,
+    label: PT.string.isRequired
+};
 
 
 function create(name, checkbokser) {
@@ -54,10 +59,16 @@ function create(name, checkbokser) {
     }
 
     CheckboxFilterform.propTypes = {
+        closeDropdown: PT.func.isRequired,
+        pristine: PT.bool.isRequired,
+        onSubmit: PT.func.isRequired,
+        handleSubmit: PT.func.isRequired
     };
     CheckboxFilterform.displayName = `CheckboxFilterForm(${name})`;
 
-    const initialValues = checkbokser.map((checkboks) => ({[lagUnikId(checkboks)]: checkboks.checked})).reduce(tilObject, {});
+    const initialValues = checkbokser.map(checkboks => (
+        { [lagUnikId(checkboks)]: checkboks.checked })).reduce(tilObject, {}
+    );
 
     return reduxForm({
         form: name,

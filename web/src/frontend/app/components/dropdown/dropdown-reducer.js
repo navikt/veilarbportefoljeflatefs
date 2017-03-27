@@ -11,12 +11,11 @@ export default function reducer(state = initalState, action) {
         case CLOSE_ALL:
             return { name: undefined };
         case TOGGLE:
-            const name = data === state.name ? undefined : data;
-            return { name };
+            return { name: (data === state.name ? undefined : data) };
         default:
             return state;
     }
-};
+}
 
 export function toggleDropdown(name) {
     return { type: TOGGLE, data: name };

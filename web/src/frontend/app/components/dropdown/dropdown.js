@@ -10,8 +10,12 @@ const btnCls = (erApen, className) => classNames('dropdown', className, {
 
 
 function Dropdown({ name, apen, className, children, actions }) {
-    const augmentedChild = Children.map(children, (child) => cloneElement(child, { closeDropdown: () => actions.toggleDropdown(name)}));
-    const innhold = apen ? (<div className="dropdown__innhold" id={`${name}-dropdown__innhold`}>{augmentedChild}</div>) : null;
+    const augmentedChild = Children.map(children, child =>
+        cloneElement(child, { closeDropdown: () => actions.toggleDropdown(name) })
+    );
+    const innhold = apen ?
+        (<div className="dropdown__innhold" id={`${name}-dropdown__innhold`}>{augmentedChild}</div>) :
+        null;
     return (
         <div className={btnCls(apen, className)}>
             <div className="dropdown__btnwrapper">
@@ -33,7 +37,12 @@ Dropdown.propTypes = {
     apen: PT.bool.isRequired,
     name: PT.string.isRequired,
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.node)]).isRequired,
-    className: PT.string
+    className: PT.string,
+    actions: PT.objectOf(PT.func).isRequired
+};
+
+Dropdown.defaultProps = {
+    className: ''
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -43,7 +52,7 @@ const mapStateToProps = (state, ownProps) => {
         apen: state.ui.dropdown.name === dropdownName
     };
 };
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators({ toggleDropdown }, dispatch)
 });
 

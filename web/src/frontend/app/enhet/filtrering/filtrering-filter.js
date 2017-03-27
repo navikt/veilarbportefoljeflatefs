@@ -1,17 +1,16 @@
-import React, { PropTypes as PT, createElement, Component } from 'react';
+import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { Element } from 'nav-frontend-typografi';
 import { endreFiltervalgMellomlagring } from '../../ducks/filtrering-mellomlagring';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
-import { erFiltervalgEndret } from '../../utils/utils';
 import DropdownContainer from './../../components/dropdown/dropdown-container';
 import Dropdown from './../../components/dropdown/dropdown';
 import checkboksform from './../../components/checkbox-filterform/checkbox-filterform-factory';
-import { range, lag2Sifret } from '../../utils/utils';
+import { range, lag2Sifret, erFiltervalgEndret } from '../../utils/utils';
 
 function lagChecklistdata(arr) {
-    return arr.map((label, index) => ({ value: index, label: label, checked: false }));
+    return arr.map((label, index) => ({ value: index, label, checked: false }));
 }
 
 const aldersIntervaller = lagChecklistdata([
@@ -58,10 +57,10 @@ const ytelser = [
     'AAP_MAXTID',
     'AAP_UNNTAK',
     'TILTAKSPENGER'
-].map((ytelse) => ({
+].map(ytelse => ({
     name: 'ytelse',
     value: ytelse,
-    label: ytelse.toLocaleLowerCase().replace(/\_/g, ' '),
+    label: ytelse.toLocaleLowerCase().replace(/_/g, ' '),
     checked: false
 }));
 
@@ -71,10 +70,10 @@ function prepFormdata(data, filtervalg) {
     return data
         .map((valg) => {
             if (filtervalg.includes(valg.value)) {
-                valg.checked = true;
+                return { ...valg, checked: true };
             }
             return valg;
-        })
+        });
 }
 
 function hentFilter(data) {
@@ -97,6 +96,13 @@ class FiltreringFilter extends Component {
         }
     }
 
+    onSubmitHandler(filterId) {
+        return (data) => {
+            this.props.endreFilter(filterId, hentFilter(data));
+            return false;
+        };
+    }
+
     handleChange(e, filter) {
         const { endreFilterMellomlagring, filtervalgMellomlagring } = this.props;
 
@@ -110,21 +116,28 @@ class FiltreringFilter extends Component {
         endreFilterMellomlagring(filter, newArray);
     }
 
-    onSubmitHandler(filterId) {
-        return (data) => {
-            this.props.endreFilter(filterId, hentFilter(data));
-            return false;
-        };
-    }
-
     render() {
-        const AlderFilter = checkboksform('alder', prepFormdata(aldersIntervaller, this.props.filtervalg.alder));
-        const FodselsdatoFilter = checkboksform('fodselsdato', prepFormdata(fodselsdagIMnd, this.props.filtervalg.fodselsdagIMnd));
-        const KjonnsFilter = checkboksform('kjonn', prepFormdata(kjonn, this.props.filtervalg.kjonn));
-        const InnsatsgrupppeFilter = checkboksform('innsatsgruppe', prepFormdata(innsatsgrupper, this.props.filtervalg.innsatsgruppe));
-        const FormidlingsgruppeFilter = checkboksform('formidlingsgruppe', prepFormdata(formidlingsgrupper, this.props.filtervalg.formidlingsgruppe));
-        const ServicegruppeFilter = checkboksform('servicegruppe', prepFormdata(servicegrupper, this.props.filtervalg.servicegruppe));
-        const YtelseFilter = checkboksform('ytelse', prepFormdata(ytelser, this.props.filtervalg.ytelse));
+        const AlderFilter = checkboksform(
+            'alder', prepFormdata(aldersIntervaller, this.props.filtervalg.alder)
+        );
+        const FodselsdatoFilter = checkboksform(
+            'fodselsdato', prepFormdata(fodselsdagIMnd, this.props.filtervalg.fodselsdagIMnd)
+        );
+        const KjonnsFilter = checkboksform(
+            'kjonn', prepFormdata(kjonn, this.props.filtervalg.kjonn)
+        );
+        const InnsatsgrupppeFilter = checkboksform(
+            'innsatsgruppe', prepFormdata(innsatsgrupper, this.props.filtervalg.innsatsgruppe)
+        );
+        const FormidlingsgruppeFilter = checkboksform(
+            'formidlingsgruppe', prepFormdata(formidlingsgrupper, this.props.filtervalg.formidlingsgruppe)
+        );
+        const ServicegruppeFilter = checkboksform(
+            'servicegruppe', prepFormdata(servicegrupper, this.props.filtervalg.servicegruppe)
+        );
+        const YtelseFilter = checkboksform(
+            'ytelse', prepFormdata(ytelser, this.props.filtervalg.ytelse)
+        );
 
         return (
             <div className="filtrering-filter">
@@ -133,13 +146,13 @@ class FiltreringFilter extends Component {
                         <div className="col-sm-3">
                             <Element>Demografi</Element>
                             <Dropdown name="Alder">
-                                <AlderFilter onSubmit={this.onSubmitHandler('alder')}/>
+                                <AlderFilter onSubmit={this.onSubmitHandler('alder')} />
                             </Dropdown>
                             <Dropdown name="Fødselsdato">
-                                <FodselsdatoFilter onSubmit={this.onSubmitHandler('fodselsdagIMnd')}/>
+                                <FodselsdatoFilter onSubmit={this.onSubmitHandler('fodselsdagIMnd')} />
                             </Dropdown>
                             <Dropdown name="Kjønn">
-                                <KjonnsFilter onSubmit={this.onSubmitHandler('kjonn')}/>
+                                <KjonnsFilter onSubmit={this.onSubmitHandler('kjonn')} />
                             </Dropdown>
                         </div>
                         <div className="col-sm-3">
