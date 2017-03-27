@@ -1,9 +1,8 @@
 import React, { PropTypes as PT, createElement, Component } from 'react';
 import { connect } from 'react-redux';
 import { Element } from 'nav-frontend-typografi';
-import { endreFiltervalgMellomlagring } from '../../ducks/filtrering-mellomlagring';
 import { endreFiltervalg } from '../../ducks/filtrering';
-import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
+import { filtervalgShape } from '../../proptype-shapes';
 import { erFiltervalgEndret, range, lag2Sifret } from '../../utils/utils';
 import Dropdown from './../../components/dropdown/dropdown';
 import checkboksform from './../../components/checkbox-filterform/checkbox-filterform-factory';
@@ -96,7 +95,6 @@ class FiltreringFilter extends Component {
     constructor(props) {
         super(props);
 
-        this.handleChange = this.handleChange.bind(this);
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
     }
 
@@ -104,19 +102,6 @@ class FiltreringFilter extends Component {
         if (erFiltervalgEndret(prevProps.filtervalg, this.props.filtervalg)) {
             this.props.oppdaterDatagrunnlag();
         }
-    }
-
-    handleChange(e, filter) {
-        const { endreFilterMellomlagring, filtervalgMellomlagring } = this.props;
-
-        const newArray = Array.from(filtervalgMellomlagring[filter]);
-        if (e.target.checked === true) {
-            newArray.push(Number(e.target.value));
-        } else {
-            newArray.splice(newArray.indexOf(Number(e.target.value)), 1);
-        }
-
-        endreFilterMellomlagring(filter, newArray);
     }
 
     onSubmitHandler(filterId) {
@@ -127,6 +112,7 @@ class FiltreringFilter extends Component {
     }
 
     render() {
+        // eslint-disable max-len
         const AlderFilter = checkboksform('alder', prepFormdata(aldersIntervaller, this.props.filtervalg.alder));
         const FodselsdatoFilter = checkboksform('fodselsdato', prepFormdata(fodselsdagIMnd, this.props.filtervalg.fodselsdagIMnd));
         const KjonnsFilter = checkboksform('kjonn', prepFormdata(kjonn, this.props.filtervalg.kjonn));
@@ -134,6 +120,7 @@ class FiltreringFilter extends Component {
         const FormidlingsgruppeFilter = checkboksform('formidlingsgruppe', prepFormdata(formidlingsgrupper, this.props.filtervalg.formidlingsgruppe));
         const ServicegruppeFilter = checkboksform('servicegruppe', prepFormdata(servicegrupper, this.props.filtervalg.servicegruppe));
         const YtelseFilter = radioform('ytelse', prepRadioFormdata(ytelser, this.props.filtervalg.ytelse));
+        // eslint-enable max-len
 
         return (
             <div className="filtrering-filter">
@@ -178,20 +165,16 @@ class FiltreringFilter extends Component {
 }
 
 FiltreringFilter.propTypes = {
-    endreFilterMellomlagring: PT.func.isRequired,
     endreFilter: PT.func.isRequired,
     filtervalg: filtervalgShape.isRequired,
-    filtervalgMellomlagring: filtervalgMellomlagringShape.isRequired,
     oppdaterDatagrunnlag: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
     filtervalg: state.filtrering.filtervalg,
-    filtervalgMellomlagring: state.filtreringMellomlagring.filtervalg
 });
 
 const mapDispatchToProps = dispatch => ({
-    endreFilterMellomlagring: (filterId, filtervalg) => dispatch(endreFiltervalgMellomlagring(filterId, filtervalg)),
     endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(filterId, filtervalg))
 });
 
