@@ -67,3 +67,9 @@ export const filtervalgShape = PT.shape({
     innsatsgruppe: PT.arrayOf(PT.number).isRequired,
     formidlingsgruppe: PT.arrayOf(PT.number).isRequired
 });
+
+export const statustallShape = PT.shape({
+    totalt: PT.number.isRequired,
+    nyeBrukere: PT.number.isRequired,
+    inaktiveBrukere: PT.number.isRequired
+});

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import enheterReducer from './ducks/enheter';
 import ledeteksterReducer from './ducks/ledetekster';
 import portefoljeReducer from './ducks/portefolje';
@@ -7,8 +8,8 @@ import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
 import pagineringReducer from './ducks/paginering';
 import filtreringReducer from './ducks/filtrering';
 import filtreringMellomlagringReducer from './ducks/filtrering-mellomlagring';
+import statustallReducer from './ducks/statustall';
 import dropdownReducer from './components/dropdown/dropdown-reducer';
-import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
     enheter: enheterReducer,
@@ -17,6 +18,7 @@ export default combineReducers({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     paginering: pagineringReducer,
+    statustall: statustallReducer,
     filtrering: filtreringReducer,
     filtreringMellomlagring: filtreringMellomlagringReducer,
     form: formReducer,

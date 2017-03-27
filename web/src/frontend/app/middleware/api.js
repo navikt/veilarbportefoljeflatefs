@@ -53,3 +53,8 @@ export function tilordneVeileder(tilordninger) {
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(tilordninger) };
     return fetch(url, config).then(sjekkStatuskode);
 }
+
+export function hentStatusTall(enhetId) {
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhetId}/statustall`;
+    return fetchToJson(url, MED_CREDENTIALS);
+}
