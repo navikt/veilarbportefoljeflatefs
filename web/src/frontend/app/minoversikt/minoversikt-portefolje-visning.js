@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
-    hentPortefoljeForEnhet,
+    hentPortefoljeForVeileder,
     settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
@@ -26,8 +26,8 @@ const settSammenNavn = (bruker) => {
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
-        const { hentPortefolje, valgtEnhet, veileder } = this.props;
-        hentPortefolje(valgtEnhet.enhet.enhetId, veileder);
+        const { sorteringsrekkefolge, sorteringsfelt,hentPortefolje, valgtEnhet, veileder } = this.props;
+        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, sorteringsrekkefolge, sorteringsfelt);
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
         this.settSorteringNavnOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this, 'etternavn');
     }
@@ -220,7 +220,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     hentPortefolje: (enhet, rekkefolge, felt, fra = 0, antall = 20, filtervalg) =>
-        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, felt, fra, antall, filtervalg)),
+        dispatch(hentPortefoljeForVeileder(enhet, rekkefolge, felt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
