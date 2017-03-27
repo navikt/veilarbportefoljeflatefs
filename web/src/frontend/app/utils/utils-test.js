@@ -65,7 +65,7 @@ describe('Utils', () => {
                 aapMaxtid: false,
                 aapUnntak: false
             };
-            expect(ytelseFilterErAktiv(filtervalg).to.equal(true));
+            expect(ytelseFilterErAktiv(filtervalg)).to.equal(true);
         });
     });
 });
