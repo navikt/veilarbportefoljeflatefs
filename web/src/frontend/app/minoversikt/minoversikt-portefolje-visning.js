@@ -219,8 +219,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, rekkefolge, felt, fra = 0, antall = 20, filtervalg) =>
-        dispatch(hentPortefoljeForVeileder(enhet, rekkefolge, felt, fra, antall, filtervalg)),
+    hentPortefolje: (enhet, ident, rekkefolge, felt, fra = 0, antall = 20, filtervalg) =>
+        dispatch(hentPortefoljeForVeileder(enhet, ident, rekkefolge, felt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
