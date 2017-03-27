@@ -7,12 +7,6 @@
   "devDependencies": {
     "babel-core": "6.24.0",
     "babel-eslint": "7.2.1",
-    "babel-preset-es2015": "6.24.0",
-    "babel-preset-react": "6.23.0",
-    "babel-preset-stage-2": "6.22.0",
-    "babelify": "7.3.0",
-    "browserify": "14.1.0",
-    "browserify-file-filter": "1.0.0",
     "chai": "3.5.0",
     "core-js": "2.4.1",
     "del": "2.2.2",
@@ -21,27 +15,17 @@
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.10.3",
-    "gulp": "3.9.1",
-    "gulp-eslint": "3.0.1",
-    "gulp-if": "2.0.2",
-    "gulp-less": "3.3.0",
-    "gulp-mocha": "4.1.0",
-    "gulp-rename": "1.2.2",
-    "gulp-replace": "0.5.4",
-    "gulp-streamify": "1.0.2",
-    "gulp-uglify": "2.1.2",
-    "gulp-util": "3.0.8",
-    "ignore-styles": "5.0.1",
+    "ignore-loader": "0.1.2",
     "jsdom": "9.12.0",
+    "less": "2.7.2",
     "mocha": "3.2.0",
     "npm-check-updates": "2.10.4",
     "redux-devtools": "3.3.2",
     "redux-devtools-dock-monitor": "1.1.1",
     "redux-devtools-log-monitor": "1.2.0",
-    "vinyl-buffer": "1.0.0",
-    "vinyl-source-stream": "1.1.0",
-    "watchify": "3.9.0",
-    "yargs": "7.0.2"
+    "rimraf": "2.6.1",
+    "typescript": "2.2.1",
+    "webpack": "2.3.2"
   },
   "dependencies": {
     "babel-polyfill": "6.23.0",
@@ -81,12 +65,14 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "js:test": "mocha",
-    "dep:test": "npm-check-updates -e 2 -x history,react-router --packageFile ./package.json",
     "test": "npm run dep:test && npm run js:test",
-    "eslint": "gulp eslint",
-    "build": "gulp build",
-    "watch": "gulp watch",
-    "build-html": "gulp build-html"
+    "test:js": "mocha",
+    "test:dep": "npm-check-updates -e 2 -x history,react-router --packageFile ./package.json",
+    "eslint": "eslint ./app/",
+    "build": "npm run build:js && npm run build:css && npm run build:html",
+    "build:js": "tsc && webpack -p && rimraf -rf temp/",
+    "build:css": "lessc app/index.less ../main/webapp/css/index.css",
+    "build:html": "node script/copy-html.js",
+    "dev": "tsc --sourceMap && webpack && rimraf temp/  "
   }
 }
