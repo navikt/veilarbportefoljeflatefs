@@ -2,6 +2,16 @@
     a {
         margin-right: 2rem;
     }
+    a {
+        border-bottom: none;
+        text-decoration: none;
+        &:visited, &:active {
+            color: @navMorkGra;
+        }
+        &:hover {
+            color: @blue-interaction;
+        }
+    }
     a.valgt {
         border-bottom: 0.15rem solid @navMorkGra;
         color: @navMorkGra;
@@ -11,17 +21,6 @@
         cursor: default;
         &:visited, &:active {
             color: @navMorkGra;
-        }
-    }
-
-    a.ikke-valgt {
-        border-bottom: none;
-        text-decoration: none;
-        &:visited, &:active {
-            color: @navMorkGra;
-        }
-        &:hover {
-            color: @blue-interaction;
         }
     }
 }
