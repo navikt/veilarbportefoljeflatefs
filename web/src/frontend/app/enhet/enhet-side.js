@@ -79,7 +79,7 @@ const mapStateToProps = state => ({
     brukere: state.portefolje.data.brukere,
     valgtVeileder: state.enheter.valgtVeileder,
     valgtEnhet: state.enheter.valgtEnhet,
-    filtervalg: state.filtrering.filtervalg
+    filtervalg: state.filtrering
 });
 
 const mapDispatchToProps = dispatch => ({

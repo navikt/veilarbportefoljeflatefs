@@ -1,7 +1,7 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import { hentPortefoljeForEnhet } from '../../ducks/filtrering';
+import { hentPortefoljeForEnhet } from '../../ducks/portefolje';
 import FiltreringStatus from './filtrering-status';
 import FiltreringFilter from './filtrering-filter';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../../ducks/utils';
@@ -47,7 +47,7 @@ FiltreringContainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    filtervalg: state.filtrering.filtervalg,
+    filtervalg: state.filtrering,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     fraIndex: state.portefolje.data.fraIndex,
     antall: state.paginering.sideStorrelse,

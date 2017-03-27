@@ -151,7 +151,7 @@ const mapStateToProps = state => ({
     veiledere: state.veiledere,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     antall: state.paginering.sideStorrelse,
-    filtervalg: state.filtrering.filtervalg
+    filtervalg: state.filtrering
 });
 
 const mapDispatchToProps = dispatch => ({

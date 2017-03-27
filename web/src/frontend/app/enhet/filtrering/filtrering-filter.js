@@ -171,7 +171,7 @@ FiltreringFilter.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    filtervalg: state.filtrering.filtervalg,
+    filtervalg: state.filtrering
 });
 
 const mapDispatchToProps = dispatch => ({
