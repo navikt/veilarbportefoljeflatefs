@@ -1,50 +1,93 @@
-import React, { PropTypes as PT, Children, cloneElement } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { PropTypes as PT, Children, Component, cloneElement } from 'react';
 import classNames from 'classnames';
-import { toggleDropdown } from './dropdown-reducer';
 
 const btnCls = (erApen, className) => classNames('dropdown', className, {
     'dropdown--apen': erApen
 });
 
+function isChildOf(parent, element) {
+    if (element === document) {
+        return false;
+    }
 
-function Dropdown({ name, apen, className, children, actions }) {
-    const augmentedChild = Children.map(children, (child) => cloneElement(child, { closeDropdown: () => actions.toggleDropdown(name)}));
-    const innhold = apen ? (<div className="dropdown__innhold" id={`${name}-dropdown__innhold`}>{augmentedChild}</div>) : null;
-    return (
-        <div className={btnCls(apen, className)}>
-            <div className="dropdown__btnwrapper">
-                <button
-                    className="dropdown__btn"
-                    onClick={() => actions.toggleDropdown(name)}
-                    aria-pressed={apen}
-                    aria-controls={`${name}-dropdown__innhold`}
-                >
-                    {name}
-                </button>
+    if (element === parent) {
+        return true;
+    }
+    return isChildOf(parent, element.parentNode);
+}
+
+class Dropdown extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { apen: this.props.apen };
+
+        this.toggleDropdown = this.toggleDropdown.bind(this);
+        this.lukkDropdown = this.lukkDropdown.bind(this);
+        this.bindComponent = this.bindComponent.bind(this);
+        this.handler = (e) => {
+            if (this.state.apen && !isChildOf(this.component, e.target)) {
+                this.lukkDropdown();
+            }
+        };
+    }
+
+    bindComponent(component) {
+        this.component = component;
+    }
+
+    toggleDropdown() {
+        this.setState({ apen: !this.state.apen });
+    }
+
+    lukkDropdown() {
+        this.setState({ apen: false });
+    }
+
+    componentDidMount() {
+        document.body.addEventListener('click', this.handler);
+    }
+
+    componentWillUnmount() {
+        document.body.removeEventListener('click', this.handler);
+    }
+
+    render() {
+        const { name, className, children } = this.props;
+        const { apen } = this.state;
+
+        const augmentedChild = Children.map(children, (child) => cloneElement(child, {
+            closeDropdown: this.lukkDropdown
+        }));
+        const innhold = !apen ? null : (
+                <div className="dropdown__innhold" id={`${name}-dropdown__innhold`}>{augmentedChild}</div>
+            );
+        return (
+            <div className={btnCls(apen, className)} ref={this.bindComponent}>
+                <div className="dropdown__btnwrapper">
+                    <button
+                        className="dropdown__btn"
+                        onClick={this.toggleDropdown}
+                        aria-pressed={apen}
+                        aria-controls={`${name}-dropdown__innhold`}
+                    >
+                        {name}
+                    </button>
+                </div>
+                {innhold}
             </div>
-            {innhold}
-        </div>
-    );
+        );
+    }
 }
 
 Dropdown.propTypes = {
-    apen: PT.bool.isRequired,
+    apen: PT.bool,
     name: PT.string.isRequired,
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.node)]).isRequired,
     className: PT.string
 };
-
-const mapStateToProps = (state, ownProps) => {
-    const dropdownName = ownProps.name;
-
-    return {
-        apen: state.ui.dropdown.name === dropdownName
-    };
+Dropdown.defaultProps = {
+    apen: false
 };
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ toggleDropdown }, dispatch)
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dropdown);
+export default Dropdown;
