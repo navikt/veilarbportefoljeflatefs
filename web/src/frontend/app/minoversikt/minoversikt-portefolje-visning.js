@@ -6,8 +6,8 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
-    hentPortefoljeForVeileder,
-    settSorterRekkefolge,
+    hentPortefoljeForEnhet,
+    settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
     markerAlleBrukere
@@ -29,25 +29,31 @@ class VeilederPortefoljeVisning extends Component {
         const { hentPortefolje, valgtEnhet, veileder } = this.props;
         hentPortefolje(valgtEnhet.enhet.enhetId, veileder);
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
-        this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
+        this.settSorteringNavnOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this, 'etternavn');
     }
     componentDidMount() {
         const { valgtEnhet, veileder } = this.props;
         eksporterVeilederportefoljeTilLocalStorage(veileder, valgtEnhet.enhet, location.pathname);
     }
 
-    settSorteringOgHentPortefolje() {
-        const { sorteringsrekkefolge, settSortering, fraIndex,
-                hentPortefolje, veileder, valgtEnhet } = this.props;
+    settSorteringOgHentPortefolje(felt) {
+        const {
+            sorteringsrekkefolge,
+            sorteringsfelt,
+            settSortering, // eslint-disable-line no-shadow
+            fraIndex,
+            hentPortefolje,
+            veileder,
+            valgtEnhet
+        } = this.props;
         let valgtRekkefolge = '';
-        if (sorteringsrekkefolge === 'ascending') {
-            valgtRekkefolge = 'descending';
-            settSortering('descending');
-        } else {
+        if (felt !== sorteringsfelt) {
             valgtRekkefolge = 'ascending';
-            settSortering('ascending');
+        } else {
+            valgtRekkefolge = sorteringsrekkefolge === 'ascending' ? 'descending' : 'ascending';
         }
-        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, valgtRekkefolge, fraIndex);
+        settSortering(valgtRekkefolge, felt);
+        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, valgtRekkefolge, felt, fraIndex);
     }
 
 
@@ -57,6 +63,7 @@ class VeilederPortefoljeVisning extends Component {
             hentPortefolje,
             veileder,
             sorteringsrekkefolge,
+            sorteringsfelt,
             valgtEnhet,
             settMarkert,
             clearFeilendeTilordninger,
@@ -90,7 +97,8 @@ class VeilederPortefoljeVisning extends Component {
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
                     hentListe={(fra, antall) =>
-                        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, sorteringsrekkefolge, fra, antall)}
+                        hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
+                            sorteringsrekkefolge, sorteringsfelt, fra, antall)}
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
@@ -119,7 +127,7 @@ class VeilederPortefoljeVisning extends Component {
                             </th>
                             <th>
                                 <a
-                                    onClick={this.settSorteringOgHentPortefolje}
+                                    onClick={this.settSorteringNavnOgHentPortefolje}
                                     role="button"
                                     className="sortering-link"
                                 >
@@ -195,6 +203,7 @@ VeilederPortefoljeVisning.propTypes = {
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
+    sorteringsfelt: PT.string.isRequired,
     fraIndex: PT.number,
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
@@ -204,13 +213,15 @@ VeilederPortefoljeVisning.propTypes = {
 const mapStateToProps = state => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
-    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge
+    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
+    sorteringsfelt: state.portefolje.sorteringsfelt,
+    veileder: state.portefolje.veileder
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, veileder, rekkefolge, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, fra, antall)),
-    settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
+    hentPortefolje: (enhet, rekkefolge, felt, fra = 0, antall = 20, filtervalg) =>
+        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, felt, fra, antall, filtervalg)),
+    settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
     settSomMarkertAlle: markert => dispatch(markerAlleBrukere(markert))

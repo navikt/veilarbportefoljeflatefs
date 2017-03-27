@@ -11,8 +11,17 @@ class FiltreringContainer extends Component {
     }
 
     oppdaterDatagrunnlag() {
-        const { hentPortefolje, filtervalg, sorteringsrekkefolge, fraIndex, antall, valgtEnhet } = this.props;
-        hentPortefolje(valgtEnhet, sorteringsrekkefolge, fraIndex, antall, filtervalg);
+        const {
+            hentPortefolje,
+            filtervalg,
+            sorteringsrekkefolge,
+            sorteringsfelt,
+            fraIndex,
+            antall,
+            valgtEnhet
+        } = this.props;
+
+        hentPortefolje(valgtEnhet, sorteringsrekkefolge, sorteringsfelt, fraIndex, antall, filtervalg);
     }
 
     render() {
@@ -36,6 +45,7 @@ class FiltreringContainer extends Component {
 FiltreringContainer.propTypes = {
     filtervalg: PT.object,
     sorteringsrekkefolge: PT.string,
+    sorteringsfelt: PT.string,
     fraIndex: PT.number,
     antall: PT.number,
     valgtEnhet: PT.string,
@@ -45,14 +55,15 @@ FiltreringContainer.propTypes = {
 const mapStateToProps = state => ({
     filtervalg: state.filtrering.filtervalg,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
+    sorteringsfelt: state.portefolje.sorteringsfelt,
     fraIndex: state.portefolje.data.fraIndex,
     antall: state.paginering.sideStorrelse,
     valgtEnhet: state.enheter.valgtEnhet.enhet.enhetId
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, rekkefolge, fra, antall, filtervalg) =>
-        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, filtervalg))
+    hentPortefolje: (enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg) =>
+        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltreringContainer);
