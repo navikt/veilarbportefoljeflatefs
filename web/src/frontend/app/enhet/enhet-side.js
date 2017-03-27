@@ -27,8 +27,7 @@ class EnhetSide extends Component {
             veiledere,
             valgtVeileder,
             velgVeileder,
-            brukere,
-            routes
+            brukere
         } = this.props;
 
 
@@ -38,7 +37,7 @@ class EnhetSide extends Component {
 
         return (
             <div className="enhet-side">
-                <Lenker routes={routes} />
+                <Lenker />
                 <p className="typo-infotekst enhetsingress blokk-m">
                     <FormattedMessage id="enhet.ingresstekst" />
                 </p>
@@ -66,7 +65,6 @@ class EnhetSide extends Component {
 EnhetSide.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
-    routes: PT.arrayOf(PT.object),
     valgtEnhet: PT.object,
     filtervalg: PT.object,
     valgtVeileder: PT.object,
