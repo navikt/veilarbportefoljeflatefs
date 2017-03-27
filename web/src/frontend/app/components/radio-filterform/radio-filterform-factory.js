@@ -2,12 +2,11 @@ import React, { Component, PropTypes as PT } from 'react';
 import { reduxForm, Field } from 'redux-form';
 
 function lagUnikId({ value, label }) {
-    return `${value}`;
+    return `${value}--${label}`;
 }
-const tilObject = (acc, val) => ({...acc, ...val});
 
 function lagRadio({ value, label, name }) {
-    const id = lagUnikId({ value, label });
+    const id = value;
 
     return (
         <div className="skjema__input" key={id}>

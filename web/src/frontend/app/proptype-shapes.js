@@ -50,14 +50,6 @@ export const valgtEnhetShape = PT.shape({
     status: PT.string.isRequired
 });
 
-export const filtervalgMellomlagringShape = PT.shape({
-    alder: PT.arrayOf(PT.number).isRequired,
-    kjonn: PT.arrayOf(PT.number).isRequired,
-    fodselsdagIMnd: PT.arrayOf(PT.number).isRequired,
-    innsatsgruppe: PT.arrayOf(PT.number).isRequired,
-    formidlingsgruppe: PT.arrayOf(PT.number).isRequired
-});
-
 export const filtervalgShape = PT.shape({
     nyeBrukere: PT.bool.isRequired,
     inaktiveBrukere: PT.bool.isRequired,
