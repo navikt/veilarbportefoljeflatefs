@@ -1,8 +1,16 @@
-.lenker {
-    a {
-        margin-right: 2rem;
+.oversiktslenke {
+    margin-right: 2rem;
+
+    border-bottom: none;
+    text-decoration: none;
+    &:visited, &:active {
+        color: @navMorkGra;
     }
-    a.valgt {
+    &:hover {
+        color: @blue-interaction;
+    }
+
+    &--valgt {
         border-bottom: 0.15rem solid @navMorkGra;
         color: @navMorkGra;
         padding-bottom: 0.7rem;
@@ -11,17 +19,6 @@
         cursor: default;
         &:visited, &:active {
             color: @navMorkGra;
-        }
-    }
-
-    a.ikke-valgt {
-        border-bottom: none;
-        text-decoration: none;
-        &:visited, &:active {
-            color: @navMorkGra;
-        }
-        &:hover {
-            color: @blue-interaction;
         }
     }
 }
