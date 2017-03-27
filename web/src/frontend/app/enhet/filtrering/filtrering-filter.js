@@ -4,12 +4,10 @@ import { Element } from 'nav-frontend-typografi';
 import { endreFiltervalgMellomlagring } from '../../ducks/filtrering-mellomlagring';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import { filtervalgMellomlagringShape, filtervalgShape } from '../../proptype-shapes';
-import { erFiltervalgEndret } from '../../utils/utils';
-import DropdownContainer from './../../components/dropdown/dropdown-container';
+import { erFiltervalgEndret, range, lag2Sifret } from '../../utils/utils';
 import Dropdown from './../../components/dropdown/dropdown';
 import checkboksform from './../../components/checkbox-filterform/checkbox-filterform-factory';
 import radioform from './../../components/radio-filterform/radio-filterform-factory';
-import { range, lag2Sifret } from '../../utils/utils';
 
 function lagChecklistdata(arr) {
     return arr.map((label, index) => ({ value: index, label: label, checked: false }));
@@ -139,43 +137,41 @@ class FiltreringFilter extends Component {
 
         return (
             <div className="filtrering-filter">
-                <DropdownContainer>
-                    <div className="row">
-                        <div className="col-sm-3">
-                            <Element>Demografi</Element>
-                            <Dropdown name="Alder">
-                                <AlderFilter onSubmit={this.onSubmitHandler('alder')}/>
-                            </Dropdown>
-                            <Dropdown name="Fødselsdato">
-                                <FodselsdatoFilter onSubmit={this.onSubmitHandler('fodselsdagIMnd')}/>
-                            </Dropdown>
-                            <Dropdown name="Kjønn">
-                                <KjonnsFilter onSubmit={this.onSubmitHandler('kjonn')}/>
-                            </Dropdown>
-                        </div>
-                        <div className="col-sm-3">
-                            <Element>Situasjon</Element>
-                            <Dropdown name="Innsatsgruppe">
-                                <InnsatsgrupppeFilter onSubmit={this.onSubmitHandler('innsatsgruppe')} />
-                            </Dropdown>
-                            <Dropdown name="Formidlingsgruppe">
-                                <FormidlingsgruppeFilter onSubmit={this.onSubmitHandler('formidlingsgruppe')} />
-                            </Dropdown>
-                            <Dropdown name="Servicegruppe">
-                                <ServicegruppeFilter onSubmit={this.onSubmitHandler('servicegruppe')} />
-                            </Dropdown>
-                        </div>
-                        <div className="col-sm-3">
-                            <Element>Ytelse</Element>
-                            <Dropdown name="Ytelse">
-                                <YtelseFilter onSubmit={(data) => {
-                                    this.props.endreFilter('ytelse', data.ytelse);
-                                    return false;
-                                }} />
-                            </Dropdown>
-                        </div>
+                <div className="row">
+                    <div className="col-sm-3">
+                        <Element>Demografi</Element>
+                        <Dropdown name="Alder">
+                            <AlderFilter onSubmit={this.onSubmitHandler('alder')}/>
+                        </Dropdown>
+                        <Dropdown name="Fødselsdato">
+                            <FodselsdatoFilter onSubmit={this.onSubmitHandler('fodselsdagIMnd')}/>
+                        </Dropdown>
+                        <Dropdown name="Kjønn">
+                            <KjonnsFilter onSubmit={this.onSubmitHandler('kjonn')}/>
+                        </Dropdown>
                     </div>
-                </DropdownContainer>
+                    <div className="col-sm-3">
+                        <Element>Situasjon</Element>
+                        <Dropdown name="Innsatsgruppe">
+                            <InnsatsgrupppeFilter onSubmit={this.onSubmitHandler('innsatsgruppe')}/>
+                        </Dropdown>
+                        <Dropdown name="Formidlingsgruppe">
+                            <FormidlingsgruppeFilter onSubmit={this.onSubmitHandler('formidlingsgruppe')}/>
+                        </Dropdown>
+                        <Dropdown name="Servicegruppe">
+                            <ServicegruppeFilter onSubmit={this.onSubmitHandler('servicegruppe')}/>
+                        </Dropdown>
+                    </div>
+                    <div className="col-sm-3">
+                        <Element>Ytelse</Element>
+                        <Dropdown name="Ytelse">
+                            <YtelseFilter onSubmit={(data) => {
+                                this.props.endreFilter('ytelse', data.ytelse);
+                                return false;
+                            }}/>
+                        </Dropdown>
+                    </div>
+                </div>
             </div>
         );
     }
