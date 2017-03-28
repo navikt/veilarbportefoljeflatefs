@@ -108,9 +108,9 @@ export function settFiltervalg(filtervalg) {
 }
 
 
-export function hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, filtervalg) {
+export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg) {
     return doThenDispatch(() =>
-        Api.hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, filtervalg), {
+        Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg), {
             OK, FEILET, PENDING
         });
 }
