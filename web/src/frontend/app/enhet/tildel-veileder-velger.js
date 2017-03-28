@@ -42,6 +42,10 @@ function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder, brukere 
     );
 }
 
+TildelVeilederVelger.defaultProps = {
+    valgtVeileder: {}
+};
+
 TildelVeilederVelger.propTypes = {
     brukere: PT.arrayOf(brukerShape).isRequired,
     veiledere: PT.arrayOf(PT.object).isRequired,

@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter from './../filtrering/filter-konstanter';
-import {
-    slettEnkeltFilter as slettEnkeltFilterRaw,
-    clearFiltervalg as clearFiltervalgRaw
-} from '../../ducks/filtrering';
+import { slettEnkeltFilter, clearFiltervalg } from '../../ducks/filtrering';
 import { filtervalgShape } from '../../proptype-shapes';
 
-function FiltreringLabelContainer({ filtervalg, actions: { clearFiltervalg, slettEnkeltFilter } }) {
+function FiltreringLabelContainer({ filtervalg, actions: { slettAlle, slettEnkelt } }) {
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
             if (value === true) {
@@ -17,7 +14,7 @@ function FiltreringLabelContainer({ filtervalg, actions: { clearFiltervalg, slet
                     <FiltreringLabel
                         key={key}
                         label={FilterKonstanter[key]}
-                        slettFilter={() => slettEnkeltFilter(key, false)}
+                        slettFilter={() => slettEnkelt(key, false)}
                     />
                 ];
             } else if (Array.isArray(value)) {
@@ -25,7 +22,7 @@ function FiltreringLabelContainer({ filtervalg, actions: { clearFiltervalg, slet
                     <FiltreringLabel
                         key={`${key}--${singleValue}`}
                         label={FilterKonstanter[key][singleValue]}
-                        slettFilter={() => slettEnkeltFilter(key, singleValue)}
+                        slettFilter={() => slettEnkelt(key, singleValue)}
                     />
                     ));
             } else if (value) {
@@ -33,14 +30,14 @@ function FiltreringLabelContainer({ filtervalg, actions: { clearFiltervalg, slet
                     <FiltreringLabel
                         key={`${key}--${value}`}
                         label={FilterKonstanter[key][value]}
-                        slettFilter={() => slettEnkeltFilter(key, null)}
+                        slettFilter={() => slettEnkelt(key, null)}
                     />
                 ];
             }
             return [];
         }).reduce((acc, l) => [...acc, ...l], []);
 
-    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={clearFiltervalg} />;
+    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} />;
 
     return (
         <section className="filtrering-label-container">
@@ -52,8 +49,8 @@ function FiltreringLabelContainer({ filtervalg, actions: { clearFiltervalg, slet
 
 FiltreringLabelContainer.propTypes = {
     actions: PT.shape({
-        clearFiltervalg: PT.func.isRequired,
-        slettEnkeltFilter: PT.func.isRequired
+        slettAlle: PT.func.isRequired,
+        slettEnkelt: PT.func.isRequired
     }).isRequired,
     filtervalg: filtervalgShape.isRequired
 };
@@ -62,7 +59,7 @@ const mapStateToProps = (state) => ({
     filtervalg: state.filtrering
 });
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ clearFiltervalgRaw, slettEnkeltFilterRaw }, dispatch)
+    actions: bindActionCreators({ slettAlle: clearFiltervalg, slettEnkelt: slettEnkeltFilter }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltreringLabelContainer);
