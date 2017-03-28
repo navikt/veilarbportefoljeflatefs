@@ -57,10 +57,11 @@ function oppdaterPortefolje(getState, dispatch) {
     const state = getState();
     const enhet = state.enheter.valgtEnhet.enhet.enhetId;
     const rekkefolge = state.portefolje.sorteringsrekkefolge;
+    const sorteringfelt = state.portefolje.sorteringsfelt;
     const fra = state.portefolje.data.fraIndex;
     const antall = state.paginering.sideStorrelse;
     const nyeFiltervalg = state.filtrering;
-    hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, nyeFiltervalg)(dispatch);
+    hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
 }
 
 export function endreFiltervalg(filterId, filterVerdi) {
