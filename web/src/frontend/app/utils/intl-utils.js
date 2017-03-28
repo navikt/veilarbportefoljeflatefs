@@ -14,7 +14,7 @@ function intlWrapper(Formatter) {
 
     Wrapped.propTypes = {
         id: PT.string.isRequired,
-        values: PT.string,
+        values: PT.object,
         tagName: PT.string,
         className: PT.string
     };

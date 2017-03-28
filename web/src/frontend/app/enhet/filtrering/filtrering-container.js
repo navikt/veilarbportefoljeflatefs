@@ -46,12 +46,16 @@ class FiltreringContainer extends Component {
     }
 }
 
+FiltreringContainer.defaultProps = {
+    valgtVeileder: {}
+};
+
 FiltreringContainer.propTypes = {
     filtervalg: PT.object.isRequired,
     valgtEnhet: PT.string.isRequired,
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
-    valgtVeileder: PT.object.isRequired,
+    valgtVeileder: PT.object,
     velgVeileder: PT.func.isRequired
 };
 
