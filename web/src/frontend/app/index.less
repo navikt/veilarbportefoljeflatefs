@@ -2,7 +2,6 @@
 @nodeModulesPath: './../../../node_modules';
 @import "tabell";
 
-
 body {
     margin: 0;
     height: 100%;
@@ -17,8 +16,9 @@ body {
         margin-top: 2rem;
     }
 }
+
 html {
-    height:100%;
+    height: 100%;
 }
 
 @import "./node_modules/nav-frontend-typografi-style/src/index";
@@ -41,6 +41,13 @@ html {
     @import "enhet/filtrering/filtrering";
     @import "minoversikt/minoversikt";
 }
+
 .modal__overlay {
     z-index: 1000; // TODO: Be KAB commite tinga sine
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 956px;
+    }
 }
