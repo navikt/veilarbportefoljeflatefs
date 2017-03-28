@@ -8,6 +8,7 @@ import pagineringReducer from './ducks/paginering';
 import filtreringReducer from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import { reducer as formReducer } from 'redux-form';
+import modalReducer from './ducks/modal';
 
 export default combineReducers({
     enheter: enheterReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
     paginering: pagineringReducer,
     statustall: statustallReducer,
     filtrering: filtreringReducer,
+    modal: modalReducer,
     form: formReducer
 });

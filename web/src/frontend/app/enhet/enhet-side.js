@@ -7,6 +7,7 @@ import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visnin
 import FiltreringContainer from './filtrering/filtrering-container';
 import FiltreringLabelContainer from './filtrering/filtrering-label-container';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
+import { leggEnhetIUrl } from '../utils/utils';
 
 class EnhetSide extends Component {
     componentWillMount() {
@@ -14,6 +15,7 @@ class EnhetSide extends Component {
 
         // TODO hent enhet, og veiledere for enhet kan skje i Application
         hentVeiledere(valgtEnhet.enhet.enhetId);
+        leggEnhetIUrl(valgtEnhet.enhet.enhetId);
     }
 
     componentDidUpdate() {

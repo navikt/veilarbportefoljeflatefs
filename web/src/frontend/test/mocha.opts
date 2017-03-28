@@ -1,4 +1,5 @@
---compilers js:babel-core/register
+--compilers js:ts-node/register,ts:ts-node/register
 --require ignore-styles
 --require ./test/DOM-setup.js
---recursive app/**/*-test.@(js|jsx)
+--require test/tshook.js
+--recursive app/**/*-test.@(js|ts)

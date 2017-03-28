@@ -10,10 +10,11 @@ import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
 import { veilederShape, brukerShape } from '../proptype-shapes';
 import { tildelVeileder } from '../ducks/portefolje';
 
-function MinOversiktSide({ ident, veileder, brukere, veiledere, velgVeileder, routes }) {
-    const erAnnenVeileder = veileder.ident !== undefined && ident !== veileder.ident;
+function MinOversiktSide({ veilederFraState, brukere, veiledere, velgVeileder, routes, ...props }) {
+    const veilederFraUrl = veiledere.find(veileder => (veileder.ident === props.params.ident));
+    const veileder = veilederFraUrl || veilederFraState;
 
-    const annenVeilederVarsel = (<Normaltekst tag="h1" type="normal" className="blokk-s">
+    const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s">
         <FormattedMessage
             id="annen.veileder.portefolje.advarsel"
             tagName="em"
@@ -33,19 +34,19 @@ function MinOversiktSide({ ident, veileder, brukere, veiledere, velgVeileder, ro
 
     return (
         <div>
-            {erAnnenVeileder ?
+            {veilederFraUrl ?
                 <Link to="veiledere" className="typo-normal tilbaketilveileder">
                     <i className="chevron--venstre" />
                     <span>Til veilederoversikt</span>
                 </Link> : null}
-            <section className={erAnnenVeileder ? 'annen-veileder' : ''}>
-                {erAnnenVeileder ? annenVeilederVarsel : null}
+            <section className={veilederFraUrl ? 'annen-veileder' : ''}>
+                {veilederFraUrl ? annenVeilederVarsel : null}
                 <div className="portefolje-side">
                     <LenkerMinoversikt routes={routes} />
                     <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="undertittel">
                         {tildelVeilederVelger}
                     </Ekspanderbartpanel>
-                    <VeilederPortefoljeVisning />
+                    <VeilederPortefoljeVisning veileder={veileder} />
                 </div>
             </section>
         </div>
@@ -53,17 +54,16 @@ function MinOversiktSide({ ident, veileder, brukere, veiledere, velgVeileder, ro
 }
 
 MinOversiktSide.propTypes = {
-    ident: PT.string.isRequired,
-    veileder: veilederShape.isRequired,
+    veilederFraState: veilederShape.isRequired,
     routes: PT.arrayOf(PT.object),
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
-    velgVeileder: PT.func.isRequired
+    velgVeileder: PT.func.isRequired,
+    params: PT.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    ident: state.enheter.ident,
-    veileder: state.portefolje.veileder,
+    veilederFraState: { ident: state.enheter.ident },
     brukere: state.portefolje.data.brukere,
     veiledere: state.veiledere.data.veilederListe
 });

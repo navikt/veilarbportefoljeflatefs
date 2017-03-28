@@ -15,9 +15,11 @@ target
 **/webapp/js/**/*
 **/webapp/*.html
 **/npm-debug.log
+**/temp/**/*
 
 npm-debug.log
 
 .classpath
 .project
 .settings
+.DS_Store

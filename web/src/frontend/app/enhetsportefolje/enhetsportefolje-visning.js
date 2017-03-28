@@ -1,13 +1,10 @@
-/* eslint-disable jsx-a11y/onclick-has-focus*/
-/* eslint-disable jsx-a11y/onclick-has-role*/
-/* eslint-disable jsx-a11y/no-static-element-interactions*/
 import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
     hentPortefoljeForEnhet,
-    settSorterRekkefolge,
+    settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger
 } from '../ducks/portefolje';
@@ -18,11 +15,12 @@ import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
 class EnhetsportefoljeVisning extends Component {
     componentWillMount() {
         const {
-            valgtEnhet, hentPortefolje, sorteringsrekkefolge, fraIndex, antall, filtervalg
+            valgtEnhet, hentPortefolje, sorteringsrekkefolge, sorteringsfelt, fraIndex, antall, filtervalg
         } = this.props;
         hentPortefolje(
             valgtEnhet.enhet.enhetId,
             sorteringsrekkefolge,
+            sorteringsfelt,
             fraIndex,
             antall,
             filtervalg
@@ -30,21 +28,29 @@ class EnhetsportefoljeVisning extends Component {
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
-    settSorteringOgHentPortefolje() {
+    settSorteringOgHentPortefolje(felt) {
         const {
-            sorteringsrekkefolge, settSortering, fraIndex, antall, valgtEnhet, hentPortefolje, filtervalg
+            sorteringsrekkefolge,
+            sorteringsfelt,
+            settSortering, // eslint-disable-line no-shadow
+            fraIndex,
+            antall,
+            valgtEnhet,
+            hentPortefolje,
+            filtervalg
         } = this.props;
+
         let valgtRekkefolge = '';
-        if (sorteringsrekkefolge === 'ascending') {
-            valgtRekkefolge = 'descending';
-            settSortering('descending');
-        } else {
+        if (felt !== sorteringsfelt) {
             valgtRekkefolge = 'ascending';
-            settSortering('ascending');
+        } else {
+            valgtRekkefolge = sorteringsrekkefolge === 'ascending' ? 'descending' : 'ascending';
         }
+        settSortering(valgtRekkefolge, felt);
         hentPortefolje(
             valgtEnhet.enhet.enhetId,
             valgtRekkefolge,
+            felt,
             fraIndex,
             antall,
             filtervalg
@@ -58,6 +64,7 @@ class EnhetsportefoljeVisning extends Component {
             veiledere,
             hentPortefolje,
             sorteringsrekkefolge,
+            sorteringsfelt,
             settMarkert,
             filtervalg,
             clearFeilendeTilordninger
@@ -91,6 +98,7 @@ class EnhetsportefoljeVisning extends Component {
                         hentPortefolje(
                             valgtEnhet.enhet.enhetId,
                             sorteringsrekkefolge,
+                            sorteringsfelt,
                             fra,
                             antall,
                             filtervalg
@@ -103,6 +111,7 @@ class EnhetsportefoljeVisning extends Component {
                     brukere={portefolje.data.brukere}
                     settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
                     settSomMarkert={settMarkert}
+                    portefolje={portefolje}
                 />
                 <Paginering
                     antallTotalt={antallTotalt}
@@ -111,6 +120,7 @@ class EnhetsportefoljeVisning extends Component {
                         hentPortefolje(
                             valgtEnhet.enhet.enhetId,
                             sorteringsrekkefolge,
+                            sorteringsfelt,
                             fra,
                             antall,
                             filtervalg
@@ -138,6 +148,7 @@ EnhetsportefoljeVisning.propTypes = {
     }).isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
+    sorteringsfelt: PT.string.isRequired,
     fraIndex: PT.number,
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
@@ -150,14 +161,15 @@ const mapStateToProps = state => ({
     valgtEnhet: state.enheter.valgtEnhet,
     veiledere: state.veiledere,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
+    sorteringsfelt: state.portefolje.sorteringsfelt,
     antall: state.paginering.sideStorrelse,
     filtervalg: state.filtrering
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, rekkefolge, fra = 0, antall = 20, filtervalg) =>
-        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, filtervalg)),
-    settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
+    hentPortefolje: (enhet, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg) =>
+        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)),
+    settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
 });

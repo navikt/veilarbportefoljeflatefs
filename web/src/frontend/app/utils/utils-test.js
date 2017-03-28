@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { filterUrlBuilder, arraysHaveEqualContent, erMellom } from '../utils/utils';
+import { filterUrlBuilder, arraysHaveEqualContent, erMellom,ytelseFilterErAktiv } from '../utils/utils';
 
 describe('Utils', () => {
     describe('filterUrlBuilder', () => {
@@ -106,6 +106,16 @@ describe('Utils', () => {
         it('skal ikke legge til filtre i url hvis det ikke finnes filtre', () => {
             const filtervalg = {};
             expect(filterUrlBuilder(filtervalg)).to.equal('');
+        });
+
+        it('skal kunne avgjøre om ytelsesfilter er aktive', () => {
+            const filtervalg = {
+                ordinaereDagpenger: true,
+                dagpengerUnderPermittering: false,
+                aapMaxtid: false,
+                aapUnntak: false
+            };
+            expect(ytelseFilterErAktiv(filtervalg)).to.equal(true);
         });
     });
     describe('erMellom', () => {

@@ -15,14 +15,15 @@ export function lag2Sifret(n) {
     return n < 10 ? `0${n}` : `${n}`;
 }
 
-export function leggEnhetIUrl(enhet) { // eslint-disable-line consistent-return
-    if (!enhet) return null;
-    const parsed = queryString.parse(location.search);
-    parsed.enhet = enhet;
+export function leggEnhetIUrl(enhet) {
+    if (enhet) {
+        const parsed = queryString.parse(location.search);
+        parsed.enhet = enhet;
 
-    const stringified = queryString.stringify(parsed);
-    const pathname = window.location.pathname;
-    window.history.replaceState({}, null, `${pathname}?${stringified}`);
+        const stringified = queryString.stringify(parsed);
+        const pathname = window.location.pathname;
+        window.history.replaceState({}, null, `${pathname}?${stringified}`);
+    }
 }
 
 export function erMellom(verdi, fra, til) {
@@ -31,6 +32,9 @@ export function erMellom(verdi, fra, til) {
 
 export function filterUrlBuilder(filtervalg) {
     let result = '';
+    if (filtervalg === null || filtervalg === undefined) {
+        return result;
+    }
 
     if (filtervalg.nyeBrukere) {
         result += `&nyeBrukere=${filtervalg.nyeBrukere}`;
@@ -79,6 +83,11 @@ export function filterUrlBuilder(filtervalg) {
     }
 
     return result;
+}
+
+export function ytelseFilterErAktiv(ytelse) {
+    const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid, aapUnntak } = ytelse;
+    return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid || aapUnntak;
 }
 
 export function arraysHaveEqualContent(arr1, arr2) {

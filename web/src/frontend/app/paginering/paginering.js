@@ -16,12 +16,11 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
     const fraIndeksNesteSide = antallTotalt % sideStorrelse === 0 ? antallTotalt - sideStorrelse
         : antallTotalt - (antallTotalt % sideStorrelse);
     const fraIndeksSisteSide = fraIndex + sideStorrelse >= antallTotalt ? fraIndex : fraIndex + sideStorrelse;
-
     return (
         <div className="paginering">
             <Element className="info" tag="h1">
                 <strong>
-                    {tekst}
+                    {antallTotalt === 0 ? null : tekst}
                 </strong>
             </Element>
             {antallTotalt <= sideStorrelse ? null :
@@ -75,7 +74,7 @@ Paginering.propTypes = {
     antallTotalt: PT.number.isRequired,
     fraIndex: PT.number.isRequired,
     hentListe: PT.func.isRequired,
-    tekst: PT.node.isRequired,
+    tekst: PT.node,
     sideStorrelse: PT.number.isRequired
 };
 

@@ -5,7 +5,7 @@ import { STATUS, doThenDispatch, handterFeil, toJson } from './utils';
 const OK = 'veilarbportefolje/portefolje/OK';
 const FEILET = 'veilarbportefolje/portefolje/FEILET';
 const PENDING = 'veilarbportefolje/portefolje/PENDING';
-const SETT_SORTERINGSREKKEFOLGE = 'veilarbportefolje/portefolje/SETT_SORTERINGSREKKEFOLGE';
+const SETT_SORTERING = 'veilarbportefolje/portefolje/SETT_SORTERING';
 const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
 const SETT_MARKERT_BRUKER_ALLE = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER_ALLE';
 const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
@@ -23,7 +23,10 @@ const initialState = {
         fraIndex: 0
     },
     sorteringsrekkefolge: 'ikke_satt',
-    veileder: {}
+    sorteringsfelt: 'ikke_satt',
+    veileder: {
+        ident: 'ikke_satt'
+    }
 };
 
 function updateVeilederForBruker(brukere, veilederId, feilende) {
@@ -61,8 +64,12 @@ export default function reducer(state = initialState, action) {
             return { ...state, status: STATUS.ERROR, data: action.data };
         case OK:
             return { ...state, status: STATUS.OK, data: action.data };
-        case SETT_SORTERINGSREKKEFOLGE: {
-            return { ...state, sorteringsrekkefolge: action.sorteringsrekkefolge };
+        case SETT_SORTERING: {
+            return {
+                ...state,
+                sorteringsrekkefolge: action.sorteringsrekkefolge,
+                sorteringsfelt: action.sorteringsfelt
+            };
         }
         case SETT_VALGTVEILEDER: {
             return { ...state, veileder: action.veileder };
@@ -108,8 +115,8 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function hentPortefoljeForEnhet(enhet, rekkefolge, fra = 0, antall = 20, filtervalg = {}) {
-    return doThenDispatch(() => Api.hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, filtervalg), {
+export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
+    return doThenDispatch(() => Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg), {
         OK,
         FEILET,
         PENDING
@@ -117,19 +124,20 @@ export function hentPortefoljeForEnhet(enhet, rekkefolge, fra = 0, antall = 20, 
 }
 
 // Action Creators
-export function hentPortefoljeForVeileder(enhet, veileder, rekkefolge, fra = 0, antall = 20) {
-    return doThenDispatch(() => Api.hentVeiledersPortefolje(enhet, veileder.ident, rekkefolge, fra, antall), {
+export function hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringsfelt, fra = 0, antall = 20) {
+    // eslint-disable-next-line max-len
+    return doThenDispatch(() => Api.hentVeiledersPortefolje(enhet, veileder.ident, rekkefolge, sorteringsfelt, fra, antall), {
         OK,
         FEILET,
         PENDING
     });
 }
 
-export function settSorterRekkefolge(rekkefolge) {
+export function settSortering(rekkefolge, felt) {
     return dispatch => dispatch({
-        type: SETT_SORTERINGSREKKEFOLGE,
-        sorteringsrekkefolge: rekkefolge
-
+        type: SETT_SORTERING,
+        sorteringsrekkefolge: rekkefolge,
+        sorteringsfelt: felt
     });
 }
 
