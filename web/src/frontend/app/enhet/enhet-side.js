@@ -5,6 +5,7 @@ import Lenker from './../lenker/lenker';
 import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringContainer from './filtrering/filtrering-container';
+import FiltreringLabelContainer from './filtrering/filtrering-label-container';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 
 class EnhetSide extends Component {
@@ -34,6 +35,7 @@ class EnhetSide extends Component {
                     <FormattedMessage id="enhet.ingresstekst"/>
                 </p>
                 <FiltreringContainer />
+                <FiltreringLabelContainer />
                 <EnhetsportefoljeVisning />
             </div>
         );

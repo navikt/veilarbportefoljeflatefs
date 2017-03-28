@@ -6,6 +6,7 @@ import veiledereReducer from './ducks/veiledere';
 import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
 import pagineringReducer from './ducks/paginering';
 import filtreringReducer from './ducks/filtrering';
+import statustallReducer from './ducks/statustall';
 import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
@@ -15,6 +16,7 @@ export default combineReducers({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     paginering: pagineringReducer,
+    statustall: statustallReducer,
     filtrering: filtreringReducer,
     form: formReducer
 });

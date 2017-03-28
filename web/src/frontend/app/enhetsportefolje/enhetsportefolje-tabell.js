@@ -121,6 +121,8 @@ class EnhetsportefoljeTabell extends Component {
                             : null}
                             {bruker.egenAnsatt === true ?
                                 <span className="etikett etikett--fokus">Egen ansatt</span> : null}
+                            {bruker.erDoed === true ?
+                                <span className="etikett etikett--fokus">Død</span> : null}
                         </td>
                     </tr>)}
                 </tbody>
