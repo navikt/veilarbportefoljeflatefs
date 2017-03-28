@@ -76,8 +76,8 @@ FiltreringStatus.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    nyeBrukere: state.filtrering.filtervalg.nyeBrukere,
-    inaktiveBrukere: state.filtrering.filtervalg.inaktiveBrukere,
+    nyeBrukere: state.filtrering.nyeBrukere,
+    inaktiveBrukere: state.filtrering.inaktiveBrukere,
     enhet: state.enheter.valgtEnhet.enhet.enhetId,
     statustall: state.statustall
 });

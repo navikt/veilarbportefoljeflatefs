@@ -53,11 +53,13 @@ export const valgtEnhetShape = PT.shape({
 export const filtervalgShape = PT.shape({
     nyeBrukere: PT.bool.isRequired,
     inaktiveBrukere: PT.bool.isRequired,
-    alder: PT.arrayOf(PT.number).isRequired,
-    kjonn: PT.arrayOf(PT.number).isRequired,
-    fodselsdagIMnd: PT.arrayOf(PT.number).isRequired,
-    innsatsgruppe: PT.arrayOf(PT.number).isRequired,
-    formidlingsgruppe: PT.arrayOf(PT.number).isRequired
+    alder: PT.arrayOf(PT.string).isRequired,
+    kjonn: PT.arrayOf(PT.string).isRequired,
+    fodselsdagIMnd: PT.arrayOf(PT.string).isRequired,
+    innsatsgruppe: PT.arrayOf(PT.string).isRequired,
+    formidlingsgruppe: PT.arrayOf(PT.string).isRequired,
+    servicegruppe: PT.arrayOf(PT.string).isRequired,
+    ytelse: PT.string
 });
 
 export const statustallShape = PT.shape({
