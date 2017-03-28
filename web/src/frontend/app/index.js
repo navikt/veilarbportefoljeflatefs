@@ -1,21 +1,19 @@
-/* eslint-disable */
 if (!window._babelPolyfill) {
     require('babel-polyfill');
 }
-import "whatwg-fetch";
-import React from "react";
-import {render} from "react-dom";
-import {Provider} from "react-redux";
-import {useRouterHistory, Router, Route, IndexRoute} from "react-router";
-import {createHistory} from "history";
-import {IntlProvider, addLocaleData} from "react-intl";
-import nb from "react-intl/locale-data/nb";
-import Application from "./application.js";
-import createStore from "./store.js";
-import history from "./history";
-import EnhetSide from "./enhet/enhet-side";
-import VeiledereSide from "./veiledere/veiledere-side";
-import MinOversiktSide from "./minoversikt/minoversikt-side";
+import 'whatwg-fetch';
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { Router, Route } from 'react-router';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import nb from 'react-intl/locale-data/nb';
+import Application from './application.js';
+import createStore from './store.js';
+import history from './history';
+import EnhetSide from './enhet/enhet-side';
+import VeiledereSide from './veiledere/veiledere-side';
+import MinOversiktSide from './minoversikt/minoversikt-side';
 import TilbakeTilEnhetportefolje from './tilbakenavigering/tilbakenavigering-enhet';
 import TilbakeTilVeilederportefolje from './tilbakenavigering/tilbakenavigering-veileder';
 
@@ -23,7 +21,7 @@ import TilbakeTilVeilederportefolje from './tilbakenavigering/tilbakenavigering-
 addLocaleData(nb);
 
 export const store = createStore();
-const tekster = {nb: {spinner: 'spinner'}};
+const tekster = { nb: { spinner: 'spinner' } };
 
 render(
     (

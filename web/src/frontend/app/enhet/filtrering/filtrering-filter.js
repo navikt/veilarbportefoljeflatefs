@@ -1,181 +1,57 @@
-import React, { PropTypes as PT, createElement, Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { Element } from 'nav-frontend-typografi';
-import { endreFiltervalg } from '../../ducks/filtrering';
-import { filtervalgShape } from '../../proptype-shapes';
-import { erFiltervalgEndret, range, lag2Sifret } from '../../utils/utils';
 import Dropdown from './../../components/dropdown/dropdown';
-import checkboksform from './../../components/checkbox-filterform/checkbox-filterform-factory';
-import radioform from './../../components/radio-filterform/radio-filterform-factory';
+import CheckboxFilterform from './../../components/checkbox-filterform/checkbox-filterform';
+import RadioFilterform from './../../components/radio-filterform/radio-filterform';
+import {
+    alder,
+    fodselsdag,
+    kjonn,
+    innsatsgrupper,
+    formidlingsgrupper,
+    servicegrupper,
+    ytelser
+} from './filterKonstanter';
 
-function lagChecklistdata(arr) {
-    return arr.map((label, index) => ({ value: index, label: label, checked: false }));
-}
-
-const aldersIntervaller = lagChecklistdata([
-    '19 og under',
-    '20-24',
-    '25-29',
-    '30-39',
-    '40-49',
-    '50-59',
-    '60-66',
-    '67-70'
-]);
-const fodselsdagIMnd = range(1, 31, true).map((x, index) => ({
-    value: index,
-    label: lag2Sifret(x),
-    checked: false
-}));
-const kjonn = lagChecklistdata(['Kvinne', 'Mann']);
-const innsatsgrupper = lagChecklistdata([
-    'Spesielt tilpasset innsats',
-    'Situasjonsbestemt innsats',
-    'Standardinnsats',
-    'Varig tilpasset'
-]);
-const formidlingsgrupper = lagChecklistdata([
-    'Arbeidssøker',
-    'Ikke arbeidssøker',
-    'Ikke servicebehov',
-    'Pre arbeidssøker',
-    'Pre reaktivert arbeidssøker'
-]);
-const servicegrupper = lagChecklistdata([
-    'Behov for arbeidsevnevurdering',
-    'Ikke vurdert',
-    'Helserelatert arbeidsrettet oppfølging i NAV',
-    'Varig tilpasset innsats',
-    'Sykmeldt, oppfølging på arbeidsplassen',
-    'Sykmeldt uten arbeidsgiver'
-]);
-const ytelser = [
-    'ORDINARE_DAGPENGER',
-    'DAGPENGER_MED_PERMITTERING',
-    'DAGPENGER_OVRIGE',
-    'AAP_MAXTID',
-    'AAP_UNNTAK',
-    'TILTAKSPENGER'
-].map((ytelse) => ({
-    name: 'ytelse',
-    value: ytelse,
-    label: ytelse.toLocaleLowerCase().replace(/\_/g, ' '),
-    checked: false
-}));
-
-function prepFormdata(data, filtervalg) {
-    // data: [{ value, label, checked }]
-    // filtervalg: [ 1 ]
-    return data
-        .map((valg) => {
-            if (filtervalg.includes(valg.value)) {
-                return { ...valg, checked: true };
-            }
-            return valg;
-        })
-}
-
-function prepRadioFormdata(data, filtervalg) {
-    return data
-        .map((valg) => {
-            if (valg.value === filtervalg) {
-                return { ...valg, checked: true };
-            }
-            return valg;
-        })
-}
-
-function hentFilter(data) {
-    return Object.entries(data)
-        .filter(([_, value]) => value)
-        .map(([key]) => parseInt(key.split('--')[0], 10));
-}
-
-class FiltreringFilter extends Component {
-    constructor(props) {
-        super(props);
-
-        this.onSubmitHandler = this.onSubmitHandler.bind(this);
-    }
-
-    componentDidUpdate(prevProps) {
-        if (erFiltervalgEndret(prevProps.filtervalg, this.props.filtervalg)) {
-            this.props.oppdaterDatagrunnlag();
-        }
-    }
-
-    onSubmitHandler(filterId) {
-        return (data) => {
-            this.props.endreFilter(filterId, hentFilter(data));
-            return false;
-        };
-    }
-
-    render() {
-        // eslint-disable max-len
-        const AlderFilter = checkboksform('alder', prepFormdata(aldersIntervaller, this.props.filtervalg.alder));
-        const FodselsdatoFilter = checkboksform('fodselsdato', prepFormdata(fodselsdagIMnd, this.props.filtervalg.fodselsdagIMnd));
-        const KjonnsFilter = checkboksform('kjonn', prepFormdata(kjonn, this.props.filtervalg.kjonn));
-        const InnsatsgrupppeFilter = checkboksform('innsatsgruppe', prepFormdata(innsatsgrupper, this.props.filtervalg.innsatsgruppe));
-        const FormidlingsgruppeFilter = checkboksform('formidlingsgruppe', prepFormdata(formidlingsgrupper, this.props.filtervalg.formidlingsgruppe));
-        const ServicegruppeFilter = checkboksform('servicegruppe', prepFormdata(servicegrupper, this.props.filtervalg.servicegruppe));
-        const YtelseFilter = radioform('ytelse', prepRadioFormdata(ytelser, this.props.filtervalg.ytelse));
-        // eslint-enable max-len
-
-        return (
-            <div className="filtrering-filter">
-                <div className="row">
-                    <div className="col-sm-3">
-                        <Element>Demografi</Element>
-                        <Dropdown name="Alder">
-                            <AlderFilter onSubmit={this.onSubmitHandler('alder')}/>
-                        </Dropdown>
-                        <Dropdown name="Fødselsdato">
-                            <FodselsdatoFilter onSubmit={this.onSubmitHandler('fodselsdagIMnd')}/>
-                        </Dropdown>
-                        <Dropdown name="Kjønn">
-                            <KjonnsFilter onSubmit={this.onSubmitHandler('kjonn')}/>
-                        </Dropdown>
-                    </div>
-                    <div className="col-sm-3">
-                        <Element>Situasjon</Element>
-                        <Dropdown name="Innsatsgruppe">
-                            <InnsatsgrupppeFilter onSubmit={this.onSubmitHandler('innsatsgruppe')}/>
-                        </Dropdown>
-                        <Dropdown name="Formidlingsgruppe">
-                            <FormidlingsgruppeFilter onSubmit={this.onSubmitHandler('formidlingsgruppe')}/>
-                        </Dropdown>
-                        <Dropdown name="Servicegruppe">
-                            <ServicegruppeFilter onSubmit={this.onSubmitHandler('servicegruppe')}/>
-                        </Dropdown>
-                    </div>
-                    <div className="col-sm-3">
-                        <Element>Ytelse</Element>
-                        <Dropdown name="Ytelse">
-                            <YtelseFilter onSubmit={(data) => {
-                                this.props.endreFilter('ytelse', data.ytelse);
-                                return false;
-                            }}/>
-                        </Dropdown>
-                    </div>
+function FiltreringFilter() {
+    return (
+        <div className="filtrering-filter">
+            <div className="row">
+                <div className="col-sm-3">
+                    <Element>Demografi</Element>
+                    <Dropdown name="Alder">
+                        <CheckboxFilterform form="alder" valg={alder}/>
+                    </Dropdown>
+                    <Dropdown name="Fødselsdato">
+                        <CheckboxFilterform form="fodselsdagIMnd" valg={fodselsdag}/>
+                    </Dropdown>
+                    <Dropdown name="Kjønn">
+                        <CheckboxFilterform form="kjonn" valg={kjonn}/>
+                    </Dropdown>
+                </div>
+                <div className="col-sm-3">
+                    <Element>Situasjon</Element>
+                    <Dropdown name="Innsatsgruppe">
+                        <CheckboxFilterform form="innsatsgruppe" valg={innsatsgrupper}/>
+                    </Dropdown>
+                    <Dropdown name="Formidlingsgruppe">
+                        <CheckboxFilterform form="formidlingsgruppe" valg={formidlingsgrupper}/>
+                    </Dropdown>
+                    <Dropdown name="Servicegruppe">
+                        <CheckboxFilterform form="servicegruppe" valg={servicegrupper}/>
+                    </Dropdown>
+                </div>
+                <div className="col-sm-3">
+                    <Element>Ytelse</Element>
+                    <Dropdown name="Ytelse">
+                        <RadioFilterform form="ytelse" valg={ytelser}/>
+                    </Dropdown>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
-FiltreringFilter.propTypes = {
-    endreFilter: PT.func.isRequired,
-    filtervalg: filtervalgShape.isRequired,
-    oppdaterDatagrunnlag: PT.func.isRequired
-};
+FiltreringFilter.propTypes = {};
 
-const mapStateToProps = state => ({
-    filtervalg: state.filtrering
-});
-
-const mapDispatchToProps = dispatch => ({
-    endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(filterId, filtervalg))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FiltreringFilter);
+export default FiltreringFilter;

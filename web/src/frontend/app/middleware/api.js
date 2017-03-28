@@ -27,8 +27,8 @@ export function hentLedetekster() {
 export function hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, filtervalg) {
     let url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
         `portefolje?fra=${fra}&antall=${antall}&sortByLastName=${rekkefolge}`;
-    url += filterUrlBuilder(filtervalg);
-    return fetchToJson(url, MED_CREDENTIALS);
+    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
+    return fetchToJson(url, config);
 }
 
 export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, fra, antall) {
