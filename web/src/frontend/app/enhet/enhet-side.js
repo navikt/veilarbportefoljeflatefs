@@ -8,6 +8,7 @@ import TildelVeilederVelger from './tildel-veileder-velger';
 import { veilederShape, brukerShape } from './../proptype-shapes';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringContainer from './filtrering/filtrering-container';
+import FiltreringLabelContainer from './filtrering/filtrering-label-container';
 import { tildelVeileder } from '../ducks/portefolje';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 
@@ -57,6 +58,7 @@ class EnhetSide extends Component {
                         velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
                     />
                 </Ekspanderbartpanel>
+                <FiltreringLabelContainer />
                 <EnhetsportefoljeVisning />
             </div>
         );

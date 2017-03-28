@@ -18,7 +18,7 @@ export const VALGT_FORMIDLINGSGRUPPE = 'filtrering/VALGT_FORMIDLINGSGRUPPE';
 export const VALGT_SERVICEGRUPPE = 'filtrering/VALGT_SERVICEGRUPPE';
 
 //  Reducer
-const initialState = {
+export const initialState = {
     filtervalg: {
         nyeBrukere: false,
         inaktiveBrukere: false,
