@@ -2,7 +2,7 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { veilederShape, brukerShape } from './../../proptype-shapes';
-import { hentPortefoljeForEnhet, tildelVeileder } from './../../ducks/portefolje';
+import { tildelVeileder } from './../../ducks/portefolje';
 import FiltreringStatus from './filtrering-status';
 import FiltreringFilter from './filtrering-filter';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../../ducks/utils';
@@ -47,10 +47,10 @@ class FiltreringContainer extends Component {
 FiltreringContainer.propTypes = {
     filtervalg: PT.object,
     sorteringsrekkefolge: PT.string,
+    sorteringsfelt: PT.string,
     fraIndex: PT.number,
     antall: PT.number,
     valgtEnhet: PT.string,
-    hentPortefolje: PT.func.isRequired,
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
     routes: PT.arrayOf(PT.object),
@@ -61,6 +61,7 @@ FiltreringContainer.propTypes = {
 const mapStateToProps = state => ({
     filtervalg: state.filtrering,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
+    sorteringsfelt: state.portefolje.sorteringsfelt,
     fraIndex: state.portefolje.data.fraIndex,
     antall: state.paginering.sideStorrelse,
     valgtEnhet: state.enheter.valgtEnhet.enhet.enhetId,
@@ -70,9 +71,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder)),
-    hentPortefolje: (enhet, rekkefolge, fra, antall, filtervalg) =>
-        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, filtervalg))
+    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltreringContainer);

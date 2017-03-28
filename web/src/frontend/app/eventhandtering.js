@@ -1,34 +1,21 @@
-import { velgEnhetForVeileder } from './ducks/enheter';
-import { store } from './index';
-import { hentVeiledereForEnhet } from './ducks/veiledere';
-import { hentPortefoljeForEnhet } from './ducks/portefolje';
-import { hentPortefoljeStorrelser } from './ducks/portefoljestorrelser';
-
-const hentOgDispatchAllInformasjonOmEnhet = (enhet) => {
-    store.dispatch(velgEnhetForVeileder({ enhetId: enhet }));
-    store.dispatch(hentPortefoljeForEnhet(enhet));
-    store.dispatch(hentVeiledereForEnhet(enhet));
-    store.dispatch(hentPortefoljeStorrelser(enhet));
+const handlePersonsokSubmit = (fnr) => {
+    window.location.pathname = `veilarbpersonflatefs/${fnr}`;
 };
 
-const handleChangeEnhet = (event, enhet) => {
-    if (event.type === 'change') {
-        hentOgDispatchAllInformasjonOmEnhet(enhet);
-    }
+const handleChangeEnhet = (enhet) => {
+    window.location.search = (`?enhet=${enhet}`);
 };
 
 const getConfig = (initiellEnhet = undefined) => {
     const lenker =
         {
-            lenker:
-            [
-                    ['/mia', 'Arbeidsmarkedet'],
-                    ['/veilarbportefoljeflatefs/enhet/', 'Enhetsportefolje'],
-                    ['/veilarbportefoljeflatefs/portefolje', 'Veilederportefølje'],
-                    ['/modiabrukerdialog', 'Modia']
+            lenker: [
+                ['/mia', 'Arbeidsmarkedet'],
+                [`/veilarbportefoljeflatefs/enhet?enhet=${initiellEnhet}`, 'Enhetsportefolje'],
+                [`/veilarbportefoljeflatefs/portefolje?enhet=${initiellEnhet}`, 'Veilederportefølje'],
+                ['/modiabrukerdialog', 'Modia']
             ],
-            tittel:
-                ''
+            tittel: ''
         };
 
     const config = {
@@ -37,9 +24,10 @@ const getConfig = (initiellEnhet = undefined) => {
                 visEnhet: false,
                 visEnhetVelger: true,
                 visSokefelt: true,
-                visSaksbehandler: true
+                visVeileder: true
             },
             handleChangeEnhet,
+            handlePersonsokSubmit,
             initiellEnhet,
             egendefinerteLenker: lenker,
             applicationName: 'Oppfølging'
@@ -49,7 +37,11 @@ const getConfig = (initiellEnhet = undefined) => {
 };
 
 export default () => {
-    window.renderDecoratorHead(getConfig());
+    if (window.renderDecoratorHead) {
+        window.renderDecoratorHead(getConfig());
+    } else {
+        window.location.href = 'feilsider/500.html';
+    }
 };
 
 

@@ -10,6 +10,9 @@ export function sjekkStatuskode(response) {
     if (response.status >= 200 && response.status < 300 && response.ok) {
         return response;
     }
+    if (response.status === 401) {
+        window.location.href = 'feilsider/401.html';
+    }
     const error = new Error(response.statusText);
     error.response = response;
     throw error;
@@ -51,7 +54,7 @@ export function handterFeil(dispatch, action) {
 }
 
 export function fetchToJson(url, config = {}) {
-    return fetch(url, config) //eslint-disable-line
+    return fetch(url, config)
         .then(sjekkStatuskode)
         .then(toJson);
 }
@@ -68,12 +71,10 @@ export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
 }
 
 export function eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, path) {
-    console.log('skriver to localeStorage');
     localStorage.setItem('previousEnhetState', JSON.stringify({ filtervalg, valgtEnhet, path }));
 }
 
-export function eksporterVeilederportefoljeTilLocalStorage(state) {
-    console.log('skriver to localeStorage');
-    localStorage.setItem('previousVeilederState', JSON.stringify(state));
+export function eksporterVeilederportefoljeTilLocalStorage(veileder, valgtEnhet, path) {
+    localStorage.setItem('previousVeilederState', JSON.stringify({ veileder, valgtEnhet, path }));
 }
 

@@ -1,13 +1,10 @@
-/* eslint-disable jsx-a11y/onclick-has-focus*/
-/* eslint-disable jsx-a11y/onclick-has-role*/
-/* eslint-disable jsx-a11y/no-static-element-interactions*/
 import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
     hentPortefoljeForVeileder,
-    settSorterRekkefolge,
+    settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
     markerAlleBrukere
@@ -15,31 +12,50 @@ import {
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
+import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 
+const settSammenNavn = (bruker) => {
+    if (bruker.etternavn === '' && bruker.fornavn === '') {
+        return '';
+    }
+    return `${bruker.etternavn}, ${bruker.fornavn}`;
+};
+
+const renderUtlopsdato = (utlopsdato) => {
+    const { dayOfMonth, monthValue, year } = utlopsdato;
+    return <td>`${dayOfMonth}.${monthValue}.${year}`</td>;
+};
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
-        const { hentPortefolje, valgtEnhet, veileder } = this.props;
-        hentPortefolje(valgtEnhet.enhet.enhetId, veileder);
-        this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
+        const { sorteringsrekkefolge, sorteringsfelt, hentPortefolje, valgtEnhet, veileder } = this.props;
+        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, sorteringsrekkefolge, sorteringsfelt);
+        leggEnhetIUrl(valgtEnhet.enhet.enhetId);
+        this.settSorteringNavnOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this, 'etternavn');
     }
     componentDidMount() {
-        eksporterVeilederportefoljeTilLocalStorage();
+        const { valgtEnhet, veileder } = this.props;
+        eksporterVeilederportefoljeTilLocalStorage(veileder, valgtEnhet.enhet, location.pathname);
     }
 
-
-    settSorteringOgHentPortefolje() {
-        const { sorteringsrekkefolge, settSortering, fraIndex,
-                hentPortefolje, veileder, valgtEnhet } = this.props;
+    settSorteringOgHentPortefolje(felt) {
+        const {
+            sorteringsrekkefolge,
+            sorteringsfelt,
+            settSortering, // eslint-disable-line no-shadow
+            fraIndex,
+            hentPortefolje,
+            veileder,
+            valgtEnhet
+        } = this.props;
         let valgtRekkefolge = '';
-        if (sorteringsrekkefolge === 'ascending') {
-            valgtRekkefolge = 'descending';
-            settSortering('descending');
-        } else {
+        if (felt !== sorteringsfelt) {
             valgtRekkefolge = 'ascending';
-            settSortering('ascending');
+        } else {
+            valgtRekkefolge = sorteringsrekkefolge === 'ascending' ? 'descending' : 'ascending';
         }
-        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, valgtRekkefolge, fraIndex);
+        settSortering(valgtRekkefolge, felt);
+        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, valgtRekkefolge, felt, fraIndex);
     }
 
 
@@ -49,10 +65,12 @@ class VeilederPortefoljeVisning extends Component {
             hentPortefolje,
             veileder,
             sorteringsrekkefolge,
+            sorteringsfelt,
             valgtEnhet,
             settMarkert,
             clearFeilendeTilordninger,
-            settSomMarkertAlle
+            settSomMarkertAlle,
+            filtervalg
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
@@ -69,12 +87,18 @@ class VeilederPortefoljeVisning extends Component {
         const feil = portefolje.feilendeTilordninger;
         if (feil && feil.length > 0) {
             const fnr = feil.map(b => b.brukerFnr).toString();
-            /* eslint-disable no-undef, no-alert*/
             alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`);
             clearFeilendeTilordninger();
         }
 
         const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
+
+        const utlopsdatoHeader = ytelseFilterErAktiv(filtervalg.ytelse) ?
+            (<th>
+                <FormattedMessage id="portefolje.tabell.utlopsdato" />
+            </th>)
+            :
+            null;
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -82,7 +106,8 @@ class VeilederPortefoljeVisning extends Component {
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
                     hentListe={(fra, antall) =>
-                        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, sorteringsrekkefolge, fra, antall)}
+                        hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
+                            sorteringsrekkefolge, sorteringsfelt, fra, antall)}
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
@@ -111,13 +136,14 @@ class VeilederPortefoljeVisning extends Component {
                             </th>
                             <th>
                                 <a
-                                    onClick={this.settSorteringOgHentPortefolje}
+                                    onClick={this.settSorteringNavnOgHentPortefolje}
                                     role="button"
                                     className="sortering-link"
                                 >
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </a>
                             </th>
+                            {utlopsdatoHeader}
                             <th>
                                 <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                             </th>
@@ -143,20 +169,25 @@ class VeilederPortefoljeVisning extends Component {
                                     <th>
                                         <a
                                             href={`https://${window.location.hostname}` +
-                                            `/veilarbpersonflatefs/${bruker.fnr}`}
+                                            `/veilarbpersonflatefs/${bruker.fnr}?enhet=${valgtEnhet.enhet.enhetId}`}
                                             className="til-bruker-link"
                                         >
-                                            {`${bruker.etternavn}, ${bruker.fornavn}`}
+                                            {settSammenNavn(bruker)}
                                         </a>
                                     </th>
-                                    {bruker.fnr != null ?
+                                    {bruker.fnr !== null ?
                                         <td className="fodselsnummer-td">{bruker.fnr}</td> :
                                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
+                                    }
+                                    {
+                                        ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
+                                            renderUtlopsdato(bruker.utlopsdato)
+                                            : null
                                     }
                                     <td className="sikkerhetstiltak-td">
                                         {bruker.sikkerhetstiltak.length > 0 ?
                                             <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
-                                        {bruker.diskresjonskode != null ?
+                                        {bruker.diskresjonskode !== null ?
                                             <span className="diskresjonskode">
                                                 {`Kode ${bruker.diskresjonskode}`}
                                             </span> :
@@ -170,6 +201,7 @@ class VeilederPortefoljeVisning extends Component {
             </Innholdslaster>
         );
     }
+
 }
 
 VeilederPortefoljeVisning.propTypes = {
@@ -187,23 +219,27 @@ VeilederPortefoljeVisning.propTypes = {
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
+    sorteringsfelt: PT.string.isRequired,
     fraIndex: PT.number,
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
-    settSomMarkertAlle: PT.func.isRequired
+    settSomMarkertAlle: PT.func.isRequired,
+    filtervalg: PT.object
 };
 
 const mapStateToProps = state => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
+    sorteringsfelt: state.portefolje.sorteringsfelt,
+    filtervalg: state.filtrering.filtervalg,
     veileder: state.portefolje.veileder
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, veileder, rekkefolge, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, fra, antall)),
-    settSortering: rekkefolge => dispatch(settSorterRekkefolge(rekkefolge)),
+    hentPortefolje: (enhet, ident, rekkefolge, felt, fra = 0, antall = 20, filtervalg) =>
+        dispatch(hentPortefoljeForVeileder(enhet, ident, rekkefolge, felt, fra, antall, filtervalg)),
+    settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
     settSomMarkertAlle: markert => dispatch(markerAlleBrukere(markert))

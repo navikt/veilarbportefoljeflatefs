@@ -264,16 +264,16 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>gulp build</id>
+                        <id>npm run build</id>
                         <goals>
                             <goal>exec</goal>
                         </goals>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <executable>node</executable>
+                            <executable>npm</executable>
                             <arguments>
-                                <argument>./node_modules/gulp/bin/gulp</argument>
-                                <argument>--prod</argument>
+                                <argument>run</argument>
+                                <argument>build</argument>
                             </arguments>
                             <workingDirectory>src/frontend</workingDirectory>
                         </configuration>
