@@ -1,10 +1,9 @@
-'use-strict';
-
 const fs = require('fs');
 
 const dest = '../main/webapp/index.html';
 
-let src = 'index.html';
+/* eslint-disable no-var*/
+var src = 'index.html';
 if (process.argv.filter(x => x === '--development')) {
     src = 'index-dev.html';
 }
