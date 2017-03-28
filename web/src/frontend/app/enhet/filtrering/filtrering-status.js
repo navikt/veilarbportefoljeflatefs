@@ -39,7 +39,7 @@ class FiltreringStatus extends Component {
             <label htmlFor="checkbox-filtrering-oversikt-nye-brukere">
                 <FormattedMessage
                     id="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox"
-                    values={{ antall: this.props.statustall.data.nyeBrukere }}
+                    values={{ antall: `(${this.props.statustall.data.nyeBrukere})` }}
                 />
             </label>
         </div>);
@@ -55,7 +55,7 @@ class FiltreringStatus extends Component {
             <label htmlFor="checkbox-filtrering-oversikt-inaktive-brukere">
                 <FormattedMessage
                     id="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
-                    values={{ antall: this.props.statustall.data.inaktiveBrukere }}
+                    values={{ antall: `(${this.props.statustall.data.inaktiveBrukere})` }}
                 />
             </label>
         </div>);
