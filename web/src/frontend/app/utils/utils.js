@@ -43,7 +43,7 @@ export function filterUrlBuilder(filtervalg) {
     if (filtervalg.alder && filtervalg.alder.length > 0) {
         result = filtervalg.alder
             .filter(i => erMellom(i, 0, 7))
-            .reduce((curr, i) => `${curr}&alder[]=${i}`, result);
+            .reduce((curr, i) => `${curr}&alder=${i}`, result);
     }
 
     if (filtervalg.kjonn && filtervalg.kjonn.length === 1) {
@@ -53,25 +53,25 @@ export function filterUrlBuilder(filtervalg) {
     if (filtervalg.fodselsdagIMnd && filtervalg.fodselsdagIMnd.length > 0) {
         result = filtervalg.fodselsdagIMnd
             .filter(i => erMellom(i, 0, 30))
-            .reduce((curr, i) => `${curr}&fodselsdagIMnd[]=${i}`, result);
+            .reduce((curr, i) => `${curr}&fodselsdagIMnd=${i}`, result);
     }
 
     if (filtervalg.innsatsgruppe && filtervalg.innsatsgruppe.length > 0) {
         result = filtervalg.innsatsgruppe
             .filter(i => erMellom(i, 0, 3))
-            .reduce((curr, i) => `${curr}&innsatsgruppe[]=${i}`, result);
+            .reduce((curr, i) => `${curr}&innsatsgruppe=${i}`, result);
     }
 
     if (filtervalg.formidlingsgruppe && filtervalg.formidlingsgruppe.length > 0) {
         result = filtervalg.formidlingsgruppe
             .filter(i => erMellom(i, 0, 4))
-            .reduce((curr, i) => `${curr}&formidlingsgruppe[]=${i}`, result);
+            .reduce((curr, i) => `${curr}&formidlingsgruppe=${i}`, result);
     }
 
     if (filtervalg.servicegruppe && filtervalg.servicegruppe.length > 0) {
         result = filtervalg.servicegruppe
             .filter(i => erMellom(i, 0, 5))
-            .reduce((curr, i) => `${curr}&servicegruppe[]=${i}`, result);
+            .reduce((curr, i) => `${curr}&servicegruppe=${i}`, result);
     }
 
     if (filtervalg.ytelse) {

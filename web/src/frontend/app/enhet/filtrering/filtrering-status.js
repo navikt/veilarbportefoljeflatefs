@@ -9,10 +9,6 @@ class FiltreringStatus extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentDidUpdate() {
-        this.props.oppdaterDatagrunnlag();
-    }
-
     handleChange(e) {
         this.props.endreFilter(e.target.id, e.target.checked);
     }
@@ -53,7 +49,6 @@ class FiltreringStatus extends Component {
 
 FiltreringStatus.propTypes = {
     endreFilter: PT.func.isRequired,
-    oppdaterDatagrunnlag: PT.func.isRequired,
     nyeBrukere: PT.bool.isRequired,
     inaktiveBrukere: PT.bool.isRequired
 };

@@ -68,10 +68,12 @@ export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
 }
 
 export function eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, path) {
+    console.log('skriver to localeStorage');
     localStorage.setItem('previousEnhetState', JSON.stringify({ filtervalg, valgtEnhet, path }));
 }
 
 export function eksporterVeilederportefoljeTilLocalStorage(state) {
+    console.log('skriver to localeStorage');
     localStorage.setItem('previousVeilederState', JSON.stringify(state));
 }
 

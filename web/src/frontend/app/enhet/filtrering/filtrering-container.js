@@ -11,18 +11,11 @@ import TildelVeilederVelger from './../tildel-veileder-velger';
 class FiltreringContainer extends Component {
     constructor(props) {
         super(props);
-
-        this.oppdaterDatagrunnlag = this.oppdaterDatagrunnlag.bind(this);
     }
 
     componentDidUpdate() {
         const { filtervalg, valgtEnhet } = this.props;
         eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
-    }
-
-    oppdaterDatagrunnlag() {
-        const { hentPortefolje, filtervalg, sorteringsrekkefolge, fraIndex, antall, valgtEnhet } = this.props;
-        hentPortefolje(valgtEnhet, sorteringsrekkefolge, fraIndex, antall, filtervalg);
     }
 
     render() {
@@ -31,11 +24,11 @@ class FiltreringContainer extends Component {
             <div>
                 <Ekspanderbartpanel className="custom-ekspanderbartpanel" tittel="Status"
                                     tittelProps={{ type: 'systemtittel', tag: 'span' }}>
-                    <FiltreringStatus oppdaterDatagrunnlag={this.oppdaterDatagrunnlag}/>
+                    <FiltreringStatus />
                 </Ekspanderbartpanel>
-                <Ekspanderbartpanel className="custom-ekspanderbartpanel" tittel="Filter"
+                <Ekspanderbartpanel className="custom-ekspanderbartpanel" tittel="Filter" apen={true}
                                     tittelProps={{ type: 'systemtittel', tag: 'span' }}>
-                    <FiltreringFilter oppdaterDatagrunnlag={this.oppdaterDatagrunnlag}/>
+                    <FiltreringFilter />
                 </Ekspanderbartpanel>
                 <Ekspanderbartpanel className="custom-ekspanderbartpanel" tittel="Tildel veileder"
                                     tittelProps={{ type: 'systemtittel', tag: 'span' }}>
