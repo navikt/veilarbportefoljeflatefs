@@ -272,6 +272,7 @@
                         <configuration>
                             <executable>npm</executable>
                             <arguments>
+                                <argument>run</argument>
                                 <argument>eslint</argument>
                             </arguments>
                             <workingDirectory>src/frontend</workingDirectory>
