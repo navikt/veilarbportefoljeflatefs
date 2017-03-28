@@ -15,7 +15,8 @@ const initialState = {
     subListe: [],
     fraIndeksForSubListe: 0,
     sideStorrelse: 20,
-    sorteringsRekkefolge: 'ikke_satt'
+    sorteringsRekkefolge: 'ikke_satt',
+    visningsmodus: 'tabell'
 };
 
 //  Reducer

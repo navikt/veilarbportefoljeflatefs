@@ -1,7 +1,8 @@
 import React, { PropTypes as PT } from 'react';
 import { Element } from 'nav-frontend-typografi';
+import ButtonRadiogroup from '../buttonradiogroup/buttonradiogroup';
 
-function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse }) {
+function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, visningsmodus}) {
     function createSimpleLink(fraIndeks, tilIndeks, linkTekst) {
         return (
             <button
@@ -23,6 +24,7 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
                     {antallTotalt === 0 ? null : tekst}
                 </strong>
             </Element>
+            <ButtonRadiogroup visningsmodus={visningsmodus} />
             {antallTotalt <= sideStorrelse ? null :
             <div className="bytt-side">
                 {createSimpleLink(0, antallTotalt, 'Se alle')}
@@ -75,7 +77,8 @@ Paginering.propTypes = {
     fraIndex: PT.number.isRequired,
     hentListe: PT.func.isRequired,
     tekst: PT.node,
-    sideStorrelse: PT.number.isRequired
+    sideStorrelse: PT.number.isRequired,
+    visningsmodus: PT.string.isRequired
 };
 
 export default Paginering;
