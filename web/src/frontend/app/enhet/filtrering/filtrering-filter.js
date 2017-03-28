@@ -11,7 +11,7 @@ import {
     formidlingsgruppe,
     servicegruppe,
     ytelse
-} from './filterKonstanter';
+} from './filter-konstanter';
 
 function FiltreringFilter() {
     return (
@@ -20,31 +20,31 @@ function FiltreringFilter() {
                 <div className="col-sm-3">
                     <Element>Demografi</Element>
                     <Dropdown name="Alder">
-                        <CheckboxFilterform form="alder" valg={alder}/>
+                        <CheckboxFilterform form="alder" valg={alder} />
                     </Dropdown>
                     <Dropdown name="Fødselsdato">
-                        <CheckboxFilterform form="fodselsdagIMnd" valg={fodselsdagIMnd}/>
+                        <CheckboxFilterform form="fodselsdagIMnd" valg={fodselsdagIMnd} />
                     </Dropdown>
                     <Dropdown name="Kjønn">
-                        <CheckboxFilterform form="kjonn" valg={kjonn}/>
+                        <CheckboxFilterform form="kjonn" valg={kjonn} />
                     </Dropdown>
                 </div>
                 <div className="col-sm-3">
                     <Element>Situasjon</Element>
                     <Dropdown name="Innsatsgruppe">
-                        <CheckboxFilterform form="innsatsgruppe" valg={innsatsgruppe}/>
+                        <CheckboxFilterform form="innsatsgruppe" valg={innsatsgruppe} />
                     </Dropdown>
                     <Dropdown name="Formidlingsgruppe">
-                        <CheckboxFilterform form="formidlingsgruppe" valg={formidlingsgruppe}/>
+                        <CheckboxFilterform form="formidlingsgruppe" valg={formidlingsgruppe} />
                     </Dropdown>
                     <Dropdown name="Servicegruppe">
-                        <CheckboxFilterform form="servicegruppe" valg={servicegruppe}/>
+                        <CheckboxFilterform form="servicegruppe" valg={servicegruppe} />
                     </Dropdown>
                 </div>
                 <div className="col-sm-3">
                     <Element>Ytelse</Element>
                     <Dropdown name="Ytelse">
-                        <RadioFilterform form="ytelse" valg={ytelse}/>
+                        <RadioFilterform form="ytelse" valg={ytelse} />
                     </Dropdown>
                 </div>
             </div>

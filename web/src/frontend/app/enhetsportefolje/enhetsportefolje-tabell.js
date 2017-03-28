@@ -39,7 +39,7 @@ class EnhetsportefoljeTabell extends Component {
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
 
-        const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
+        const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         return (
             <div>
                 <TomPortefoljeModal skjulModal={toggleSkjulModal} visModal={modalSkalVises} />
@@ -69,32 +69,29 @@ class EnhetsportefoljeTabell extends Component {
                                 </div>
                             </th>
                             <th>
-                                <a
+                                <button
                                     onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
-                                    role="button"
                                     className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
                                 >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
-                                </a>
+                                </button>
                                 <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                             </th>
                             <th>
-                                <a
+                                <button
                                     onClick={() => this.settSorteringOgHentPortefolje('fodselsdato')}
-                                    role="button"
                                     className={classNames({ 'sortering-link': true, valgt: sorterFodelsnummer })}
                                 >
                                     <FormattedMessage id="portefolje.tabell.fodselsnummer" />
-                                </a>
+                                </button>
                             </th>
                             <th>
-                                <a
+                                <button
                                     onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
-                                    role="button"
                                     className="sortering-link"
                                 >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
-                                </a>
+                                </button>
                                 <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                             </th>
                             <th>
@@ -104,7 +101,7 @@ class EnhetsportefoljeTabell extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {brukere.map(bruker => <tr key={bruker.fnr}>
+                        {brukere.map((bruker) => <tr key={bruker.fnr}>
                             <td>
                                 <div className="skjema__input">
                                     <input
@@ -129,8 +126,8 @@ class EnhetsportefoljeTabell extends Component {
                             <td>{bruker.fnr}</td>
                             {
                         bruker.veilederId ? <td className="veileder-td">{veiledere
-                            .filter(veileder => veileder.ident === bruker.veilederId)
-                            .map(veileder => (veileder.navn || veileder.ident))}</td>
+                            .filter((veileder) => veileder.ident === bruker.veilederId)
+                            .map((veileder) => (veileder.navn || veileder.ident))}</td>
                             :
                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
                     }
@@ -173,15 +170,15 @@ EnhetsportefoljeTabell.propTypes = {
     valgtEnhet: PT.string.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     antallTotalt: state.portefolje.data.antallTotalt,
     modalSkalVises: state.modal.visModal,
     filtervalg: state.filtrering,
     valgtEnhet: state.enheter.valgtEnhet.enhet.enhetId
 });
 
-const mapDispatchToProps = dispatch => ({
-    settSomMarkertAlle: markert => dispatch(markerAlleBrukere(markert)),
+const mapDispatchToProps = (dispatch) => ({
+    settSomMarkertAlle: (markert) => dispatch(markerAlleBrukere(markert)),
     toggleVisModal: () => dispatch(visModal()),
     toggleSkjulModal: () => dispatch(skjulModal())
 });

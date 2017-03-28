@@ -83,7 +83,7 @@ class EnhetsportefoljeVisning extends Component {
 
         const feil = portefolje.feilendeTilordninger;
         if (feil && feil.length > 0) {
-            const fnr = feil.map(b => b.brukerFnr).toString();
+            const fnr = feil.map((b) => b.brukerFnr).toString();
             /* eslint-disable no-undef, no-alert*/
             alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`);
             clearFeilendeTilordninger();
@@ -156,7 +156,7 @@ EnhetsportefoljeVisning.propTypes = {
     filtervalg: PT.object
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
     veiledere: state.veiledere,
@@ -166,7 +166,7 @@ const mapStateToProps = state => ({
     filtervalg: state.filtrering
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg) =>
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),

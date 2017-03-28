@@ -32,9 +32,21 @@ class VeilederTabell extends Component {
     render() {
         const { veiledere, portefoljestorrelser, modalSkalVises, toggleSkjulModal } = this.props;
         const portefoljestorrelse = (storrelser, veilederId) => {
-            const currentStorrelse = storrelser.find(storrelse => storrelse.value === veilederId);
+            const currentStorrelse = storrelser.find((storrelse) => storrelse.value === veilederId);
             return currentStorrelse ? currentStorrelse.count : 0;
         };
+
+        const veilederElementer = veiledere.map((veileder) => (
+            <tr key={veileder.ident}>
+                <th>
+                    <button onClick={() => this.settValgtVeileder(veileder)} className="til-veileder-link">
+                        {`${veileder.navn}`}
+                    </button>
+                </th>
+                <td>{`${veileder.ident}`}</td>
+                <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
+            </tr>
+        ));
 
         return (
             <div>
@@ -50,9 +62,9 @@ class VeilederTabell extends Component {
                     <thead>
                         <tr>
                             <th scope="col">
-                                <a onClick={this.props.sorterPaaEtternavn} role="button" className="sortering-link">
+                                <button onClick={this.props.sorterPaaEtternavn} className="sortering-link">
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
-                                </a>
+                                </button>
                                 <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                             </th>
                             <th scope="col">
@@ -64,17 +76,7 @@ class VeilederTabell extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {veiledere.map(veileder =>
-                            <tr key={veileder.ident}>
-                                <th>
-                                    <a onClick={() => this.settValgtVeileder(veileder)} className="til-veileder-link">
-                                        {`${veileder.navn}`}
-                                    </a>
-                                </th>
-                                <td>{`${veileder.ident}`}</td>
-                                <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
-                            </tr>
-                )}
+                        {veilederElementer}
                     </tbody>
                 </table>
             </div>
@@ -83,19 +85,19 @@ class VeilederTabell extends Component {
 }
 
 VeilederTabell.propTypes = {
-    veiledere: PT.arrayOf(veilederShape),
+    veiledere: PT.arrayOf(veilederShape).isRequired,
     settVeileder: PT.func.isRequired,
     portefoljestorrelser: PT.arrayOf(PT.object).isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
-    valgtEnhet: PT.object,
-    filtervalg: PT.object,
+    valgtEnhet: PT.object.isRequired,
+    filtervalg: PT.object.isRequired,
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
     toggleVisModal: PT.func.isRequired,
-    veilederListe: PT.arrayOf(veilederShape)
+    veilederListe: PT.arrayOf(veilederShape).isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet.enhet,
     filtervalg: state.filtrering,
     modalSkalVises: state.modal.visModal,
@@ -103,8 +105,8 @@ const mapStateToProps = state => ({
 
 });
 
-const mapDispatchToProps = dispatch => ({
-    settVeileder: veileder => dispatch(settValgtVeileder(veileder)),
+const mapDispatchToProps = (dispatch) => ({
+    settVeileder: (veileder) => dispatch(settValgtVeileder(veileder)),
     toggleVisModal: () => dispatch(visModal()),
     toggleSkjulModal: () => dispatch(skjulModal())
 });

@@ -30,8 +30,3 @@ export function ytelseFilterErAktiv(ytelse) {
     const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid, aapUnntak } = ytelse;
     return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid || aapUnntak;
 }
-
-export const erFiltervalgEndret = (prevFiltervalg, filtervalg) => {
-    const felter = ['alder', 'fodselsdagIMnd', 'kjonn', 'innsatsgruppe', 'formidlingsgruppe', 'servicegruppe', 'ytelse'];
-    return felter.some(felt => prevFiltervalg[felt] !== filtervalg[felt]);
-};

@@ -8,7 +8,7 @@ function getDisplayName(comp) {
 function intlWrapper(Formatter) {
     const Wrapped = ({ id, values, tagName, className }) => (
         <Formatter id={id} values={values}>
-            {msg => React.createElement(tagName, { className }, msg) }
+            {(msg) => React.createElement(tagName, { className }, msg) }
         </Formatter>
     );
 

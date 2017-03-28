@@ -42,7 +42,7 @@ class Application extends Component {
         const enhetliste = enheter.data;
         const enhetFraUrl = queryString.parse(location.search).enhet;
         const initiellEnhet = enhetliste
-            .map(enhet => (enhet.enhetId))
+            .map((enhet) => (enhet.enhetId))
             .includes(enhetFraUrl) ? enhetFraUrl : enhetliste[0].enhetId;
 
         leggEnhetIUrl(initiellEnhet);
@@ -90,16 +90,16 @@ Application.propTypes = {
     enheter: PT.object
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     ledetekster: state.ledetekster,
     enheter: state.enheter
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     hentTekster: () => dispatch(hentLedetekster()),
-    hentEnheter: ident => dispatch(hentEnheterForVeileder(ident)),
-    hentVeiledere: enhet => dispatch(hentVeiledereForEnhet(enhet)),
-    velgEnhet: enhetid => dispatch(velgEnhetForVeileder({ enhetId: enhetid }))
+    hentEnheter: (ident) => dispatch(hentEnheterForVeileder(ident)),
+    hentVeiledere: (enhet) => dispatch(hentVeiledereForEnhet(enhet)),
+    velgEnhet: (enhetid) => dispatch(velgEnhetForVeileder({ enhetId: enhetid }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application);

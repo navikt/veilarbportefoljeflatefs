@@ -11,7 +11,7 @@ import { veilederShape, brukerShape } from '../proptype-shapes';
 import { tildelVeileder } from '../ducks/portefolje';
 
 function MinOversiktSide({ veilederFraState, brukere, veiledere, velgVeileder, routes, ...props }) {
-    const veilederFraUrl = veiledere.find(veileder => (veileder.ident === props.params.ident));
+    const veilederFraUrl = veiledere.find((veileder) => (veileder.ident === props.params.ident));
     const veileder = veilederFraUrl || veilederFraState;
 
     const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s">
@@ -62,13 +62,13 @@ MinOversiktSide.propTypes = {
     params: PT.object.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     veilederFraState: { ident: state.enheter.ident },
     brukere: state.portefolje.data.brukere,
     veiledere: state.veiledere.data.veilederListe
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder))
 });
 

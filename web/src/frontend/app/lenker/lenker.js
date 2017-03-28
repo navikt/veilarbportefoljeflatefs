@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 
