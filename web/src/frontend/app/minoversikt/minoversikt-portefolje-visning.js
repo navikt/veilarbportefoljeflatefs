@@ -15,13 +15,18 @@ import {
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
-import { leggEnhetIUrl } from '../utils/utils';
+import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
         return '';
     }
     return `${bruker.etternavn}, ${bruker.fornavn}`;
+};
+
+const renderUtlopsdato = (utlopsdato) => {
+    const { dayOfMonth, monthValue, year } = utlopsdato;
+    return <td>`${dayOfMonth}.${monthValue}.${year}`</td>;
 };
 
 class VeilederPortefoljeVisning extends Component {
@@ -67,7 +72,8 @@ class VeilederPortefoljeVisning extends Component {
             valgtEnhet,
             settMarkert,
             clearFeilendeTilordninger,
-            settSomMarkertAlle
+            settSomMarkertAlle,
+            filtervalg
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
@@ -90,6 +96,13 @@ class VeilederPortefoljeVisning extends Component {
         }
 
         const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
+
+        const utlopsdatoHeader = ytelseFilterErAktiv(filtervalg.ytelse) ?
+            (<th>
+                <FormattedMessage id="portefolje.tabell.utlopsdato" />
+            </th>)
+            :
+            null;
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -134,6 +147,7 @@ class VeilederPortefoljeVisning extends Component {
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </a>
                             </th>
+                            {utlopsdatoHeader}
                             <th>
                                 <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                             </th>
@@ -165,14 +179,19 @@ class VeilederPortefoljeVisning extends Component {
                                             {settSammenNavn(bruker)}
                                         </a>
                                     </th>
-                                    {bruker.fnr != null ?
+                                    {bruker.fnr !== null ?
                                         <td className="fodselsnummer-td">{bruker.fnr}</td> :
                                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
+                                    }
+                                    {
+                                        ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
+                                            renderUtlopsdato(bruker.utlopsdato)
+                                            : null
                                     }
                                     <td className="sikkerhetstiltak-td">
                                         {bruker.sikkerhetstiltak.length > 0 ?
                                             <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
-                                        {bruker.diskresjonskode != null ?
+                                        {bruker.diskresjonskode !== null ?
                                             <span className="diskresjonskode">
                                                 {`Kode ${bruker.diskresjonskode}`}
                                             </span> :
@@ -186,6 +205,7 @@ class VeilederPortefoljeVisning extends Component {
             </Innholdslaster>
         );
     }
+
 }
 
 VeilederPortefoljeVisning.propTypes = {
@@ -207,7 +227,8 @@ VeilederPortefoljeVisning.propTypes = {
     fraIndex: PT.number,
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
-    settSomMarkertAlle: PT.func.isRequired
+    settSomMarkertAlle: PT.func.isRequired,
+    filtervalg: PT.object
 };
 
 const mapStateToProps = state => ({
@@ -215,6 +236,7 @@ const mapStateToProps = state => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
+    filtervalg: state.filtrering.filtervalg,
     veileder: state.portefolje.veileder
 });
 
