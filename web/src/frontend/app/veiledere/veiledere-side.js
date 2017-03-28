@@ -10,9 +10,9 @@ import {
 } from './../proptype-shapes';
 import VeiledereTabell from './veiledere-tabell';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import PagineringForvalter from '../paginering/pagineringforvalter';
+import VeilederPaginering from '../paginering/veilederpaginering';
 import Lenker from './../lenker/lenker';
-import { settSorteringRekkefolge, settSubListeForPaginering } from '../ducks/paginering';
+import { settSorteringRekkefolge, settSubListeForPaginering } from '../ducks/veilederpaginering';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { leggEnhetIUrl } from '../utils/utils';
@@ -58,7 +58,7 @@ class VeiledereSide extends Component {
                     />
                 </Undertittel>
                 <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
-                    <PagineringForvalter
+                    <VeilederPaginering
                         liste={veilederListe}
                         pagineringTekstId={
                             veilederListe.length > 0 ?

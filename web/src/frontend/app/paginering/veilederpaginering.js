@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Paginering from './paginering';
 import { settSubListeForPaginering, settListeSomSkalPagineres,
-    klarerPagineringsliste } from '../ducks/paginering';
+    klarerPagineringsliste } from '../ducks/veilederpaginering';
 import { veilederShape } from '../proptype-shapes';
 
-class PagineringForvalter extends Component {
+class VeilederPaginering extends Component {
 
     componentWillMount() {
         this.props.opprettPaginering(this.props.liste);
@@ -45,7 +45,7 @@ class PagineringForvalter extends Component {
     }
 }
 
-PagineringForvalter.propTypes = {
+VeilederPaginering.propTypes = {
     liste: PT.arrayOf(veilederShape),
     pagineringTekstId: PT.string.isRequired,
     fraIndeksForSubListe: PT.number.isRequired,
@@ -68,5 +68,5 @@ const mapDispatchToProps = dispatch => ({
     settSubListe: fra => dispatch(settSubListeForPaginering(fra))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PagineringForvalter);
+export default connect(mapStateToProps, mapDispatchToProps)(VeilederPaginering);
 

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { til } from './paginering';
+import { til } from './veilederpaginering';
 
 describe('PagineringReducer', () => {
     it('finner riktig til-indeks når subliste skal genereres', () => {
