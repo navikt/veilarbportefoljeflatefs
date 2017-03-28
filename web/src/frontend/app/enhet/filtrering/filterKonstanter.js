@@ -1,7 +1,9 @@
 import { range, lag2Sifret } from '../../utils/utils';
+export const inaktiveBrukere = 'Inaktive brukere';
+export const nyeBrukere = 'Nye brukere';
 
 export const alder = {
-    '19-og-under': '19 og under',
+    '19-og-under': '19 år og under',
     '20-24': '20-24 år',
     '25-29': '25-29 år',
     '30-39': '30-39 år',
@@ -11,7 +13,7 @@ export const alder = {
     '67-70': '67-70 år'
 };
 
-export const fodselsdag = range(1, 31, true).reduce((acc, x) => ({
+export const fodselsdagIMnd = range(1, 31, true).reduce((acc, x) => ({
     ...acc,
     [x]: lag2Sifret(x)
 }), {});
@@ -21,29 +23,29 @@ export const kjonn = {
     'M': 'Mann'
 };
 
-export const innsatsgrupper = {
+export const innsatsgruppe = {
     'BATT': 'Spesielt tilpasset innsats',
     'BFORM': 'Situasjonsbestemt innsats',
     'IKVAL': 'Standardinnsats',
     'VARIG': 'Varig tilpasset'
 };
 
-export const formidlingsgrupper = {
+export const formidlingsgruppe = {
     'ARBS': 'Arbeidssøker',
     'IARBS': 'Ikke arbeidssøker',
     'ISERV': 'Ikke servicebehov',
     'PARBS': 'Pre arbeidssøker',
     'RARBS': 'Pre reaktivert arbeidssøker'
 };
-export const servicegrupper = {
-    'Behov-for-arbeidsevnevurdering': 'Behov for arbeidsevnevurdering',
-    'Ikke-vurdert': 'Ikke vurdert',
-    'Helserelatert-arbeidsrettet-oppfolging-i-NAV': 'Helserelatert arbeidsrettet oppfølging i NAV',
-    'Varig-tilpasset-innsats': 'Varig tilpasset innsats',
-    'Sykmeldt-oppfolging-pa-arbeidsplassen': 'Sykmeldt oppfølging på arbeidsplassen',
-    'Sykmeldt-uten-arbeidsgiver': 'Sykmeldt uten arbeidsgiver'
+export const servicegruppe = {
+    'BKART': 'Behov for arbeidsevnevurdering',
+    'IVURD': 'Ikke vurdert',
+    'OPPFI': 'Helserelatert arbeidsrettet oppfølging i NAV',
+    'VARIG': 'Varig tilpasset innsats',
+    'VURDI': 'Sykmeldt oppfølging på arbeidsplassen',
+    'VURDU': 'Sykmeldt uten arbeidsgiver'
 };
-export const ytelser = {
+export const ytelse = {
     'ORDINARE_DAGPENGER': 'Ordinære dagpenger',
     'DAGPENGER_MED_PERMITTERING': 'Dagpenger med permittering',
     'DAGPENGER_OVRIGE': 'Dagpenger øvrige',
@@ -51,3 +53,16 @@ export const ytelser = {
     'AAP_UNNTAK': 'AAP unntak',
     'TILTAKSPENGER': 'Tiltakspenger'
 };
+
+
+export default {
+    inaktiveBrukere,
+    nyeBrukere,
+    alder,
+    fodselsdagIMnd,
+    kjonn,
+    innsatsgruppe,
+    formidlingsgruppe,
+    servicegruppe,
+    ytelse
+}

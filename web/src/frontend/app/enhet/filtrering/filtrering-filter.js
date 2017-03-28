@@ -5,12 +5,12 @@ import CheckboxFilterform from './../../components/checkbox-filterform/checkbox-
 import RadioFilterform from './../../components/radio-filterform/radio-filterform';
 import {
     alder,
-    fodselsdag,
+    fodselsdagIMnd,
     kjonn,
-    innsatsgrupper,
-    formidlingsgrupper,
-    servicegrupper,
-    ytelser
+    innsatsgruppe,
+    formidlingsgruppe,
+    servicegruppe,
+    ytelse
 } from './filterKonstanter';
 
 function FiltreringFilter() {
@@ -23,7 +23,7 @@ function FiltreringFilter() {
                         <CheckboxFilterform form="alder" valg={alder}/>
                     </Dropdown>
                     <Dropdown name="Fødselsdato">
-                        <CheckboxFilterform form="fodselsdagIMnd" valg={fodselsdag}/>
+                        <CheckboxFilterform form="fodselsdagIMnd" valg={fodselsdagIMnd}/>
                     </Dropdown>
                     <Dropdown name="Kjønn">
                         <CheckboxFilterform form="kjonn" valg={kjonn}/>
@@ -32,19 +32,19 @@ function FiltreringFilter() {
                 <div className="col-sm-3">
                     <Element>Situasjon</Element>
                     <Dropdown name="Innsatsgruppe">
-                        <CheckboxFilterform form="innsatsgruppe" valg={innsatsgrupper}/>
+                        <CheckboxFilterform form="innsatsgruppe" valg={innsatsgruppe}/>
                     </Dropdown>
                     <Dropdown name="Formidlingsgruppe">
-                        <CheckboxFilterform form="formidlingsgruppe" valg={formidlingsgrupper}/>
+                        <CheckboxFilterform form="formidlingsgruppe" valg={formidlingsgruppe}/>
                     </Dropdown>
                     <Dropdown name="Servicegruppe">
-                        <CheckboxFilterform form="servicegruppe" valg={servicegrupper}/>
+                        <CheckboxFilterform form="servicegruppe" valg={servicegruppe}/>
                     </Dropdown>
                 </div>
                 <div className="col-sm-3">
                     <Element>Ytelse</Element>
                     <Dropdown name="Ytelse">
-                        <RadioFilterform form="ytelse" valg={ytelser}/>
+                        <RadioFilterform form="ytelse" valg={ytelse}/>
                     </Dropdown>
                 </div>
             </div>

@@ -1,78 +1,67 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { bindActionCreators } from 'redux';
 import FiltreringLabel from './filtrering-label';
-import filtreringsLister from './filtrering-lister';
-import { endreFiltervalg, settFiltervalg, initialState } from '../../ducks/filtrering';
+import FilterKonstanter from './../filtrering/filterKonstanter';
+import { slettEnkeltFilter, clearFiltervalg } from '../../ducks/filtrering';
 import { filtervalgShape } from '../../proptype-shapes';
 
-const FiltreringLabelContainer = ({ filtervalg, endreFilter, slettAlleFiltervalg }) => {
-    const fjernFilter = (filterId, filtervalgTilSletting) => {
-        if (filterId === 'nyeBrukere' || filterId === 'inaktiveBrukere') {
-            endreFilter(filterId, false);
-        } else {
-            const nyFiltervalg = filtervalg[filterId].filter(filter => filter !== filtervalgTilSletting);
-            endreFilter(filterId, nyFiltervalg);
-        }
-    };
-
-    function filtreringLabelForBoolean(id, callback) {
-        return (<FormattedMessage id={id} key={id}>
-            {label => (
-                <FiltreringLabel label={label} slettFilter={callback} />
-            )}
-        </FormattedMessage>);
-    }
-
-    const arrayOfArrays = Object.keys(filtervalg).map((key) => {
-        if (typeof filtervalg[key] === 'boolean' && filtervalg[key] === true) {
-            if (key === 'nyeBrukere') {
-                return filtreringLabelForBoolean(
-                    'enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox',
-                    () => fjernFilter(key)
-                );
-            } else if (key === 'inaktiveBrukere') {
-                return filtreringLabelForBoolean(
-                    'enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox',
-                    () => fjernFilter(key)
-                );
+function FiltreringLabelContainer({ filtervalg, actions:{ clearFiltervalg, slettEnkeltFilter } }) {
+    const filterElementer = Object.entries(filtervalg)
+        .map(([key, value]) => {
+            if (value === true) {
+                return [
+                    <FiltreringLabel
+                        key={key}
+                        label={FilterKonstanter[key]}
+                        slettFilter={() => slettEnkeltFilter(key, false)}
+                    />
+                ];
+            } else if (Array.isArray(value)) {
+                return value.map((singleValue) => {
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={FilterKonstanter[key][singleValue]}
+                            slettFilter={() => slettEnkeltFilter(key, singleValue)}
+                        />
+                    )
+                });
+            } else if (value) {
+                return [
+                    <FiltreringLabel
+                        key={`${key}--${value}`}
+                        label={FilterKonstanter[key][value]}
+                        slettFilter={() => slettEnkeltFilter(key, null)}
+                    />
+                ];
             }
-        } else if (filtervalg[key].constructor === Array) {
-            return filtervalg[key].map(index =>
-                <FiltreringLabel
-                    label={filtreringsLister[key][index].label}
-                    slettFilter={() => { fjernFilter(key, index); }}
-                    key={`${key}-${index}`}
-                />
-            );
-        }
-        return [];
-    });
+            return [];
+        }).reduce((acc, l) => [...acc, ...l], []);
 
-    const filterElementer = [].concat(...arrayOfArrays);
-    const fjernAlleFilterLabel = <FiltreringLabel label="Slett alle filtervalg" slettFilter={slettAlleFiltervalg} />;
+    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={clearFiltervalg}/>;
 
     return (
         <section className="filtrering-label-container">
-            {filterElementer.map(el => el)}
-            {filterElementer.length >= 3 ? fjernAlleFilterLabel : <noscript /> }
+            {filterElementer}
+            {filterElementer.length >= 3 ? fjernAlle : null }
         </section>
     );
-};
+}
 
 FiltreringLabelContainer.propTypes = {
-    endreFilter: PT.func.isRequired,
-    filtervalg: filtervalgShape.isRequired,
-    slettAlleFiltervalg: PT.func.isRequired
+    actions: PT.shape({
+        clearFiltervalg: PT.func.isRequired,
+        slettEnkeltFilter: PT.func.isRequired
+    }).isRequired,
+    filtervalg: filtervalgShape.isRequired
 };
 
 const mapStateToProps = state => ({
-    filtervalg: state.filtrering.filtervalg
+    filtervalg: state.filtrering
 });
-
-const mapDispatchToProps = dispatch => ({
-    endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(filterId, filtervalg)),
-    slettAlleFiltervalg: () => dispatch(settFiltervalg(initialState.filtervalg))
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators({ clearFiltervalg, slettEnkeltFilter }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltreringLabelContainer);
