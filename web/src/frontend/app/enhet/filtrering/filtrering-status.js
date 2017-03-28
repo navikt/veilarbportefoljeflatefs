@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import { hentStatusTall } from '../../ducks/statustall';
 import { statustallShape } from '../../proptype-shapes';
-import Innholdslaster from '../../innholdslaster/innholdslaster';
 
 class FiltreringStatus extends Component {
     constructor(props) {
@@ -75,16 +74,16 @@ FiltreringStatus.propTypes = {
     statustall: PT.shape({ data: statustallShape.isRequired }).isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     nyeBrukere: state.filtrering.nyeBrukere,
     inaktiveBrukere: state.filtrering.inaktiveBrukere,
     enhet: state.enheter.valgtEnhet.enhet.enhetId,
     statustall: state.statustall
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(filterId, filtervalg)),
-    fetchStatusTall: enhet => dispatch(hentStatusTall(enhet))
+    fetchStatusTall: (enhet) => dispatch(hentStatusTall(enhet))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltreringStatus);

@@ -34,7 +34,7 @@ class EnhetSide extends Component {
             <div className="enhet-side">
                 <Lenker />
                 <p className="typo-infotekst enhetsingress blokk-m">
-                    <FormattedMessage id="enhet.ingresstekst"/>
+                    <FormattedMessage id="enhet.ingresstekst" />
                 </p>
                 <FiltreringContainer />
                 <FiltreringLabelContainer />
@@ -50,13 +50,13 @@ EnhetSide.propTypes = {
     hentVeiledere: PT.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     filtervalg: state.filtrering
 });
 
-const mapDispatchToProps = dispatch => ({
-    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId))
+const mapDispatchToProps = (dispatch) => ({
+    hentVeiledere: (enhetId) => dispatch(hentVeiledereForEnhet(enhetId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);

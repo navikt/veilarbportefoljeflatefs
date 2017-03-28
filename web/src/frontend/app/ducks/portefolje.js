@@ -30,7 +30,7 @@ const initialState = {
 };
 
 function updateVeilederForBruker(brukere, veilederId, feilende) {
-    const feilendeFnr = feilende.map(b => b.brukerFnr);
+    const feilendeFnr = feilende.map((b) => b.brukerFnr);
 
     return brukere.map((bruker) => {
         if (bruker.markert && !feilendeFnr.includes(bruker.fnr)) {
@@ -105,7 +105,7 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: state.data.brukere.map(bruker => ({ ...bruker, markert: action.markert }))
+                    brukere: state.data.brukere.map((bruker) => ({ ...bruker, markert: action.markert }))
                 }
             };
         }
@@ -134,7 +134,7 @@ export function hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sortering
 }
 
 export function settSortering(rekkefolge, felt) {
-    return dispatch => dispatch({
+    return (dispatch) => dispatch({
         type: SETT_SORTERING,
         sorteringsrekkefolge: rekkefolge,
         sorteringsfelt: felt
@@ -143,7 +143,7 @@ export function settSortering(rekkefolge, felt) {
 
 
 export function settBrukerSomMarkert(fnr, markert) {
-    return dispatch => dispatch({
+    return (dispatch) => dispatch({
         type: SETT_MARKERT_BRUKER,
         fnr,
         markert
@@ -151,7 +151,7 @@ export function settBrukerSomMarkert(fnr, markert) {
 }
 
 export function markerAlleBrukere(markert) {
-    return dispatch => dispatch({
+    return (dispatch) => dispatch({
         type: SETT_MARKERT_BRUKER_ALLE,
         markert
     });
@@ -162,7 +162,7 @@ export function tildelVeileder(tilordninger, tilVeileder) {
     return (dispatch) => {
         Api.tilordneVeileder(tilordninger)
             .then(toJson)
-            .then(res => dispatch({
+            .then((res) => dispatch({
                 type: TILDEL_VEILEDER,
                 tilVeileder,
                 feilendeTilordninger: res.feilendeTilordninger
@@ -172,13 +172,13 @@ export function tildelVeileder(tilordninger, tilVeileder) {
 }
 
 export function nullstillFeilendeTilordninger() {
-    return dispatch => dispatch({
+    return (dispatch) => dispatch({
         type: NULLSTILL_FEILENDE_TILORDNINGER
     });
 }
 
 export function settValgtVeileder(valgtVeileder) {
-    return dispatch => dispatch({
+    return (dispatch) => dispatch({
         type: SETT_VALGTVEILEDER,
         veileder: valgtVeileder
     });

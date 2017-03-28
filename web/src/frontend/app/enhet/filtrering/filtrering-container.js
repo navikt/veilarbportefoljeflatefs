@@ -9,10 +9,6 @@ import { eksporterEnhetsportefoljeTilLocalStorage } from '../../ducks/utils';
 import TildelVeilederVelger from './../tildel-veileder-velger';
 
 class FiltreringContainer extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidUpdate() {
         const { filtervalg, valgtEnhet } = this.props;
         eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
@@ -22,16 +18,22 @@ class FiltreringContainer extends Component {
         const { veiledere, valgtVeileder, velgVeileder, brukere } = this.props;
         return (
             <div>
-                <Ekspanderbartpanel className="custom-ekspanderbartpanel" tittel="Status"
-                                    tittelProps={{ type: 'systemtittel', tag: 'span' }}>
+                <Ekspanderbartpanel
+                    className="custom-ekspanderbartpanel" tittel="Status"
+                    tittelProps={{ type: 'systemtittel', tag: 'span' }}
+                >
                     <FiltreringStatus />
                 </Ekspanderbartpanel>
-                <Ekspanderbartpanel className="custom-ekspanderbartpanel" tittel="Filter" apen={true}
-                                    tittelProps={{ type: 'systemtittel', tag: 'span' }}>
+                <Ekspanderbartpanel
+                    className="custom-ekspanderbartpanel" tittel="Filter" apen
+                    tittelProps={{ type: 'systemtittel', tag: 'span' }}
+                >
                     <FiltreringFilter />
                 </Ekspanderbartpanel>
-                <Ekspanderbartpanel className="custom-ekspanderbartpanel" tittel="Tildel veileder"
-                                    tittelProps={{ type: 'systemtittel', tag: 'span' }}>
+                <Ekspanderbartpanel
+                    className="custom-ekspanderbartpanel" tittel="Tildel veileder"
+                    tittelProps={{ type: 'systemtittel', tag: 'span' }}
+                >
                     <TildelVeilederVelger
                         valgtVeileder={valgtVeileder}
                         veiledere={veiledere}
@@ -45,32 +47,23 @@ class FiltreringContainer extends Component {
 }
 
 FiltreringContainer.propTypes = {
-    filtervalg: PT.object,
-    sorteringsrekkefolge: PT.string,
-    sorteringsfelt: PT.string,
-    fraIndex: PT.number,
-    antall: PT.number,
-    valgtEnhet: PT.string,
+    filtervalg: PT.object.isRequired,
+    valgtEnhet: PT.string.isRequired,
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
-    routes: PT.arrayOf(PT.object),
-    valgtVeileder: PT.object,
-    velgVeileder: PT.func.isRequired,
+    valgtVeileder: PT.object.isRequired,
+    velgVeileder: PT.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     filtervalg: state.filtrering,
-    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
-    sorteringsfelt: state.portefolje.sorteringsfelt,
-    fraIndex: state.portefolje.data.fraIndex,
-    antall: state.paginering.sideStorrelse,
     valgtEnhet: state.enheter.valgtEnhet.enhet.enhetId,
     veiledere: state.veiledere.data.veilederListe,
     brukere: state.portefolje.data.brukere,
-    valgtVeileder: state.enheter.valgtVeileder,
+    valgtVeileder: state.enheter.valgtVeileder
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder))
 });
 

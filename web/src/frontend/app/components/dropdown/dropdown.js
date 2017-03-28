@@ -32,6 +32,14 @@ class Dropdown extends Component {
         };
     }
 
+    componentDidMount() {
+        document.body.addEventListener('click', this.handler);
+    }
+
+    componentWillUnmount() {
+        document.body.removeEventListener('click', this.handler);
+    }
+
     bindComponent(component) {
         this.component = component;
     }
@@ -44,14 +52,6 @@ class Dropdown extends Component {
         this.setState({ apen: false });
     }
 
-    componentDidMount() {
-        document.body.addEventListener('click', this.handler);
-    }
-
-    componentWillUnmount() {
-        document.body.removeEventListener('click', this.handler);
-    }
-
     render() {
         const { name, className, children } = this.props;
         const { apen } = this.state;
@@ -60,7 +60,7 @@ class Dropdown extends Component {
             closeDropdown: this.lukkDropdown
         }));
         const innhold = !apen ? null : (
-                <div className="dropdown__innhold" id={`${name}-dropdown__innhold`}>{augmentedChild}</div>
+            <div className="dropdown__innhold" id={`${name}-dropdown__innhold`}>{augmentedChild}</div>
             );
         return (
             <div className={btnCls(apen, className)} ref={this.bindComponent}>

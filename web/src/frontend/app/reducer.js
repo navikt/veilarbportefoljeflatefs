@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import enheterReducer from './ducks/enheter';
 import ledeteksterReducer from './ducks/ledetekster';
 import portefoljeReducer from './ducks/portefolje';
@@ -7,7 +8,6 @@ import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
 import pagineringReducer from './ducks/paginering';
 import filtreringReducer from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
-import { reducer as formReducer } from 'redux-form';
 import modalReducer from './ducks/modal';
 
 export default combineReducers({
