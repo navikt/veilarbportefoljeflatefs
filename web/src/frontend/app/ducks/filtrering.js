@@ -5,7 +5,7 @@ export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
 
 //  Reducer
-const initialState = {
+export const initialState = {
     nyeBrukere: false,
     inaktiveBrukere: false,
     alder: [],

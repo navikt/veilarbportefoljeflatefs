@@ -4,17 +4,23 @@ import { reduxForm, Field } from 'redux-form';
 function lagUnikId({ value, label }) {
     return `${value}--${label}`;
 }
+const tilObject = (acc, val) => ({ ...acc, ...val });
 
 function lagRadio({ value, label, name }) {
     const id = value;
 
     return (
         <div className="skjema__input" key={id}>
-            <Field type="radio" name={name} id={id} value={value} component="input" className="radioknapp" />
+            <Field type="checkbox" name={id} id={id} component="input" className="checkboks" />
             <label htmlFor={id}>{label}</label>
         </div>
     );
 }
+
+lagCheckboks.propTypes = {
+    value: PT.number.isRequired,
+    label: PT.string.isRequired
+};
 
 
 function create(name, radioknapper) {
@@ -50,10 +56,18 @@ function create(name, radioknapper) {
         }
     }
 
+    CheckboxFilterform.propTypes = {
+        closeDropdown: PT.func.isRequired,
+        pristine: PT.bool.isRequired,
+        onSubmit: PT.func.isRequired,
+        handleSubmit: PT.func.isRequired
     RadioFilterform.propTypes = {
     };
     RadioFilterform.displayName = `RadioFilterForm(${name})`;
 
+    const initialValues = checkbokser.map(checkboks => (
+        { [lagUnikId(checkboks)]: checkboks.checked })).reduce(tilObject, {}
+    );
     const valgt = radioknapper.find((radio) => radio.checked);
     const initialValues = { [name]: valgt ? valgt.value : undefined };
 
