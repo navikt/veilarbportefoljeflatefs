@@ -51,7 +51,7 @@ class VeilederTabell extends Component {
         return (
             <div>
                 <TomPortefoljeModal skjulModal={toggleSkjulModal} visModal={modalSkalVises} />
-                <table className="tabell portefolje-tabell typo-undertekst" tabIndex="0">
+                <table className="tabell portefolje-tabell typo-undertekst">
                     <thead className="extra-head">
                         <tr>
                             <th>Veileder</th>
