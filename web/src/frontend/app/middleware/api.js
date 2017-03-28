@@ -1,5 +1,5 @@
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
-import { erDev, filterUrlBuilder } from './../utils/utils';
+import { erDev } from './../utils/utils';
 
 const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
 const credentials = erDev() ? 'include' : 'same-origin';

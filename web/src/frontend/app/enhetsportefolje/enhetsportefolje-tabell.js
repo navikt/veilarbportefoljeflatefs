@@ -154,7 +154,7 @@ class EnhetsportefoljeTabell extends Component {
     }
 }
 
-PortefoljeTabell.propTypes = {
+EnhetsportefoljeTabell.propTypes = {
     antallTotalt: PT.number.isRequired,
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
@@ -176,7 +176,7 @@ PortefoljeTabell.propTypes = {
 const mapStateToProps = state => ({
     antallTotalt: state.portefolje.data.antallTotalt,
     modalSkalVises: state.modal.visModal,
-    filtervalg: state.filtrering.filtervalg,
+    filtervalg: state.filtrering,
     valgtEnhet: state.enheter.valgtEnhet.enhet.enhetId
 });
 
