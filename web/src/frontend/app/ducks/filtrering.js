@@ -17,6 +17,12 @@ export const VALGT_FODSELSDAG = 'VALGT_FODSELSDAG';
 //  Reducer
 export const initialState = {
     filtervalg: {
+        ytelse: {
+            ordinaereDagpenger: false,
+            dagpengerUnderPermittering: false,
+            aapMaxtid: false,
+            aapUnntak: false
+        },
         nyeBrukere: false,
         inaktiveBrukere: false,
         alder: 0,
@@ -108,9 +114,9 @@ export function settFiltervalg(filtervalg) {
 }
 
 
-export function hentPortefoljeForEnhet(enhet, rekkefolge, fra, antall, filtervalg) {
+export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg) {
     return doThenDispatch(() =>
-        Api.hentEnhetsPortefolje(enhet, rekkefolge, fra, antall, filtervalg), {
+        Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg), {
             OK, FEILET, PENDING
         });
 }

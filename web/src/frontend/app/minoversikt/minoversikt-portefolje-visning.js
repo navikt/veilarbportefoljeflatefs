@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
-    hentPortefoljeForEnhet,
+    hentPortefoljeForVeileder,
     settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
@@ -15,7 +15,7 @@ import {
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
-import { leggEnhetIUrl } from '../utils/utils';
+import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -24,10 +24,15 @@ const settSammenNavn = (bruker) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
+const renderUtlopsdato = (utlopsdato) => {
+    const { dayOfMonth, monthValue, year } = utlopsdato;
+    return <td>`${dayOfMonth}.${monthValue}.${year}`</td>;
+};
+
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
-        const { hentPortefolje, valgtEnhet, veileder } = this.props;
-        hentPortefolje(valgtEnhet.enhet.enhetId, veileder);
+        const { sorteringsrekkefolge, sorteringsfelt, hentPortefolje, valgtEnhet, veileder } = this.props;
+        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, sorteringsrekkefolge, sorteringsfelt);
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
         this.settSorteringNavnOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this, 'etternavn');
     }
@@ -67,7 +72,8 @@ class VeilederPortefoljeVisning extends Component {
             valgtEnhet,
             settMarkert,
             clearFeilendeTilordninger,
-            settSomMarkertAlle
+            settSomMarkertAlle,
+            filtervalg
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
@@ -90,6 +96,13 @@ class VeilederPortefoljeVisning extends Component {
         }
 
         const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
+
+        const utlopsdatoHeader = ytelseFilterErAktiv(filtervalg.ytelse) ?
+            (<th>
+                <FormattedMessage id="portefolje.tabell.utlopsdato" />
+            </th>)
+            :
+            null;
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -134,6 +147,7 @@ class VeilederPortefoljeVisning extends Component {
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </a>
                             </th>
+                            {utlopsdatoHeader}
                             <th>
                                 <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                             </th>
@@ -165,14 +179,19 @@ class VeilederPortefoljeVisning extends Component {
                                             {settSammenNavn(bruker)}
                                         </a>
                                     </th>
-                                    {bruker.fnr != null ?
+                                    {bruker.fnr !== null ?
                                         <td className="fodselsnummer-td">{bruker.fnr}</td> :
                                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
+                                    }
+                                    {
+                                        ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
+                                            renderUtlopsdato(bruker.utlopsdato)
+                                            : null
                                     }
                                     <td className="sikkerhetstiltak-td">
                                         {bruker.sikkerhetstiltak.length > 0 ?
                                             <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
-                                        {bruker.diskresjonskode != null ?
+                                        {bruker.diskresjonskode !== null ?
                                             <span className="diskresjonskode">
                                                 {`Kode ${bruker.diskresjonskode}`}
                                             </span> :
@@ -186,6 +205,7 @@ class VeilederPortefoljeVisning extends Component {
             </Innholdslaster>
         );
     }
+
 }
 
 VeilederPortefoljeVisning.propTypes = {
@@ -207,7 +227,8 @@ VeilederPortefoljeVisning.propTypes = {
     fraIndex: PT.number,
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
-    settSomMarkertAlle: PT.func.isRequired
+    settSomMarkertAlle: PT.func.isRequired,
+    filtervalg: PT.object
 };
 
 const mapStateToProps = state => ({
@@ -215,12 +236,13 @@ const mapStateToProps = state => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
+    filtervalg: state.filtrering.filtervalg,
     veileder: state.portefolje.veileder
 });
 
 const mapDispatchToProps = dispatch => ({
-    hentPortefolje: (enhet, rekkefolge, felt, fra = 0, antall = 20, filtervalg) =>
-        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, felt, fra, antall, filtervalg)),
+    hentPortefolje: (enhet, ident, rekkefolge, felt, fra = 0, antall = 20, filtervalg) =>
+        dispatch(hentPortefoljeForVeileder(enhet, ident, rekkefolge, felt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),

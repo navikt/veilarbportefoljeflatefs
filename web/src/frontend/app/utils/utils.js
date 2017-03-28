@@ -52,3 +52,8 @@ export function filterUrlBuilder(filtervalg) {
     }
     return result;
 }
+
+export function ytelseFilterErAktiv(ytelse) {
+    const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid, aapUnntak } = ytelse;
+    return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid || aapUnntak;
+}
