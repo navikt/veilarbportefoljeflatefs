@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { FormattedMessage } from 'react-intl';
 import Lenker from './../lenker/lenker';
-import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import TildelVeilederVelger from './tildel-veileder-velger';
 import { veilederShape, brukerShape } from './../proptype-shapes';
 import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
@@ -14,8 +13,7 @@ import { leggEnhetIUrl } from '../utils/utils';
 
 class EnhetSide extends Component {
     componentWillMount() {
-        const { valgtEnhet, hentVeiledere } = this.props;
-        hentVeiledere(valgtEnhet.enhet.enhetId);
+        const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
     }
     componentDidUpdate() {
@@ -73,8 +71,7 @@ EnhetSide.propTypes = {
     valgtEnhet: PT.object,
     filtervalg: PT.object,
     valgtVeileder: PT.object,
-    velgVeileder: PT.func.isRequired,
-    hentVeiledere: PT.func.isRequired
+    velgVeileder: PT.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -86,8 +83,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder)),
-    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId))
+    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);

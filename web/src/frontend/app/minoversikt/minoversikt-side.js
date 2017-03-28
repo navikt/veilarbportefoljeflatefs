@@ -7,7 +7,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
-import { veilederShape, brukerShape } from '../proptype-shapes';
+import { brukerShape } from '../proptype-shapes';
 import { tildelVeileder } from '../ducks/portefolje';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 
@@ -60,7 +60,7 @@ function MinOversiktSide({ enheter, brukere, veiledere, velgVeileder, routes, ..
 MinOversiktSide.propTypes = {
     enheter: PT.object.isRequired,
     routes: PT.arrayOf(PT.object),
-    veiledere: PT.arrayOf(veilederShape).isRequired,
+    veiledere: PT.object,
     brukere: PT.arrayOf(brukerShape).isRequired,
     velgVeileder: PT.func.isRequired,
     params: PT.object.isRequired
