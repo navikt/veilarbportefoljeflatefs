@@ -13,15 +13,16 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 
 function MinOversiktSide({ enheter, brukere, veiledere, velgVeileder, routes, ...props }) {
     const veilederFraUrl = veiledere.data.veilederListe.find(veileder => (veileder.ident === props.params.ident));
-    const veileder = veilederFraUrl || enheter.ident;
+    const innloggetVeileder = { ident: enheter.ident };
+    const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
     const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s">
         <FormattedMessage
             id="annen.veileder.portefolje.advarsel"
             tagName="em"
             values={{
-                fornavn: veileder.fornavn,
-                etternavn: veileder.etternavn
+                fornavn: gjeldendeVeileder.fornavn,
+                etternavn: gjeldendeVeileder.etternavn
             }}
         /></Normaltekst>);
 
@@ -48,7 +49,7 @@ function MinOversiktSide({ enheter, brukere, veiledere, velgVeileder, routes, ..
                         {tildelVeilederVelger}
                     </Ekspanderbartpanel>
                     <Innholdslaster avhengigheter={[veiledere, enheter]}>
-                        <VeilederPortefoljeVisning veileder={veileder} />
+                        <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
                     </Innholdslaster>
                 </div>
             </section>
