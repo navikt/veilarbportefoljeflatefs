@@ -17,10 +17,12 @@ export const VALGT_FODSELSDAG = 'VALGT_FODSELSDAG';
 //  Reducer
 export const initialState = {
     filtervalg: {
-        ordinaereDagpenger: false,
-        dagpengerUnderPermittering: false,
-        aapMaxtid: false,
-        aapUnntak: false,
+        ytelse: {
+            ordinaereDagpenger: false,
+            dagpengerUnderPermittering: false,
+            aapMaxtid: false,
+            aapUnntak: false
+        },
         nyeBrukere: false,
         inaktiveBrukere: false,
         alder: 0,
