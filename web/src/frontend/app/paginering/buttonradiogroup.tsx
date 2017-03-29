@@ -16,7 +16,7 @@ class ButtonRadiogroup extends React.Component<Props, any> {
                     id="diagramvisning"
                     name="visningsmodus"
                     type="radio"
-                    onClick={() => handleClick('diagram')}
+                    onChange={() => handleClick('diagram')}
                     value="diagramvisning"
                     checked={visningsmodus === 'diagram'}
                 />
@@ -25,7 +25,7 @@ class ButtonRadiogroup extends React.Component<Props, any> {
                     id="tabellvisning"
                     name="visningsmodus"
                     type="radio"
-                    onClick={() => handleClick('tabell')}
+                    onChange={() => handleClick('tabell')}
                     value="tabellvisning"
                     checked={visningsmodus === 'tabell'}
                 />
