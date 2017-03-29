@@ -28,9 +28,13 @@ export default function reducer(state = initialState, action) {
         case OK:
             return { ...state, status: STATUS.OK, data: action.data.enhetliste, ident: action.data.ident };
         case VELG_ENHET:
-            return { ...state,
-                valgtEnhet: { enhet: action.valgtEnhet,
-                    status: STATUS.OK } };
+            return {
+                ...state,
+                valgtEnhet: {
+                    enhet: action.valgtEnhet,
+                    status: STATUS.OK
+                }
+            };
         default:
             return state;
     }
