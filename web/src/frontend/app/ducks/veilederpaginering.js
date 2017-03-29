@@ -1,9 +1,9 @@
 // Actions
-export const SETT_LISTE = 'paginering/settliste/OK';
-export const SETT_SUBLISTE = 'paginering/settsubliste/OK';
-export const KLARER = 'paginering/klarer/OK';
-export const SETT_FRA_INDEKS_FOR_SUBLISTE = 'paginering/settfraindeksforsubliste/OK';
-export const SETT_SORTERINGSREKKEFOLGE = 'paginering/settSorteringsRekkefolge/OK';
+export const SETT_LISTE = 'veilederpaginering/settliste/OK';
+export const SETT_SUBLISTE = 'veilederpaginering/settsubliste/OK';
+export const KLARER = 'veilederpaginering/klarer/OK';
+export const SETT_FRA_INDEKS_FOR_SUBLISTE = 'veilederpaginering/settfraindeksforsubliste/OK';
+export const SETT_SORTERINGSREKKEFOLGE = 'veilederpaginering/settSorteringsRekkefolge/OK';
 
 // Utils
 export function til(fra, antall, totalt) {
