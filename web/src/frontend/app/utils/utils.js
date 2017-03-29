@@ -31,3 +31,9 @@ export function ytelseFilterErAktiv(ytelse) {
     const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid, aapUnntak } = ytelse;
     return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid || aapUnntak;
 }
+
+export function ytelseDiagramSkalVises(ytelse) {
+    if (!ytelse) { return false; }
+    const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid } = ytelse;
+    return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid;
+}

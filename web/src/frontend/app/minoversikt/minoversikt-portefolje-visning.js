@@ -12,7 +12,7 @@ import {
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
-import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
+import { leggEnhetIUrl, ytelseFilterErAktiv, ytelseDiagramSkalVises } from '../utils/utils';
 
 import { Diagram } from './diagram';
 
@@ -113,7 +113,7 @@ class VeilederPortefoljeVisning extends Component {
                             sorteringsrekkefolge, sorteringsfelt, fra, antall)}
                     tekst={pagineringTekst}
                     sideStorrelse={20}
-                    visButtongroup
+                    visButtongroup={ytelseDiagramSkalVises(filtervalg.ytelse)}
                 />
                 {
                     visningsmodus === 'tabell' ?
