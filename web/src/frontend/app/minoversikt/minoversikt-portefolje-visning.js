@@ -14,6 +14,8 @@ import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 
+import { Diagram } from './diagram';
+
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
         return '';
@@ -205,7 +207,7 @@ class VeilederPortefoljeVisning extends Component {
                             </tbody>
                         </table>
                         :
-                        <div>Her kommer det et flott diagram (jeg sverger)</div>
+                        <Diagram />
                 }
             </Innholdslaster>
         );
