@@ -5,8 +5,8 @@ import { brukerShape } from './../proptype-shapes';
 function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder, brukere }) {
     const velgNyVeileder = (event) => {
         const tilVeileder = veiledere[event.target.value - 1].ident;
-        const tildelinger = brukere.filter(bruker => bruker.markert)
-                                                    .map(bruker => ({
+        const tildelinger = brukere.filter((bruker) => bruker.markert)
+                                                    .map((bruker) => ({
                                                         fraVeilederId: bruker.veilederId,
                                                         tilVeilederId: tilVeileder,
                                                         brukerFnr: bruker.fnr
@@ -17,7 +17,7 @@ function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder, brukere 
 
     const defaultOption = (
         <FormattedMessage id="portefolje.tildel.veileder.label" key="default">
-            {text => <option value={0}>{text}</option>}
+            {(text) => <option value={0}>{text}</option>}
         </FormattedMessage>);
 
     const veilederListe = veiledere.map((veileder, index) =>
@@ -41,6 +41,10 @@ function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder, brukere 
         </div>
     );
 }
+
+TildelVeilederVelger.defaultProps = {
+    valgtVeileder: {}
+};
 
 TildelVeilederVelger.propTypes = {
     brukere: PT.arrayOf(brukerShape).isRequired,
