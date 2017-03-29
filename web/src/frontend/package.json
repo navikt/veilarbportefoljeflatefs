@@ -72,7 +72,7 @@
     "test": "npm run test:dep && npm run test:ts",
     "test:ts": "mocha",
     "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates -e 2 -x history,react-router --packageFile ./package.json",
-    "eslint": "eslint ./app/",
+    "eslint": "eslint --fix ./app/",
     "build": "npm run build:ts && npm run build:css && npm run build:html",
     "build:ts": "node ./node_modules/typescript/bin/tsc && node ./node_modules/webpack/bin/webpack -p && node ./node_modules/rimraf/rimraf -rf temp/",
     "build:css": "node ./node_modules/less/bin/lessc app/index.less ../main/webapp/css/index.css",
