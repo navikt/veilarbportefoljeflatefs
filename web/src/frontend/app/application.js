@@ -11,7 +11,7 @@ import rendreDekorator, { settEnhetIDekorator } from './eventhandtering';
 import { STATUS } from './ducks/utils';
 import { leggEnhetIUrl } from './utils/utils';
 import { hentVeiledereForEnhet } from './ducks/veiledere';
-
+import history from './history';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(location.search).visTekster;
@@ -27,6 +27,12 @@ class Application extends Component {
         this.props.hentTekster();
         this.props.hentEnheter();
         rendreDekorator();
+    }
+
+    componentDidMount() {
+        if (location.pathname === '/veilarbportefoljeflatefs/') {
+            history.push('/enhet');
+        }
     }
 
     componentDidUpdate() {
