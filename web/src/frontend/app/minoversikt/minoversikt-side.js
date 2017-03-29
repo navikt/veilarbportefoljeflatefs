@@ -17,6 +17,8 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
     const innloggetVeileder = { ident: enheter.ident };
     const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
+    const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
+
     const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s">
         <FormattedMessage
             id="annen.veileder.portefolje.advarsel"
@@ -37,13 +39,13 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
 
     return (
         <div>
-            {veilederFraUrl ?
+            {visesAnnenVeiledersPortefolje ?
                 <Link to="veiledere" className="typo-normal tilbaketilveileder">
                     <i className="chevron--venstre" />
                     <span>Til veilederoversikt</span>
                 </Link> : null}
-            <section className={veilederFraUrl ? 'annen-veileder' : ''}>
-                {veilederFraUrl ? annenVeilederVarsel : null}
+            <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
+                { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
                 <div className="portefolje-side">
                     <LenkerMinoversikt
                         minOversiktOnClick={() =>
