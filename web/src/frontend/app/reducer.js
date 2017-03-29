@@ -10,6 +10,20 @@ import filtreringReducer from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
 
+function named(name, reducer) {
+    return (state, action) => {
+        if (state === undefined) {
+            // For å få satt initialState
+            return reducer(state, action);
+        }
+
+        if (action.name !== name) {
+            return state;
+        }
+        return reducer(state, action);
+    };
+}
+
 export default combineReducers({
     enheter: enheterReducer,
     ledetekster: ledeteksterReducer,
@@ -18,7 +32,8 @@ export default combineReducers({
     portefoljestorrelser: portefoljestorrelserReducer,
     paginering: pagineringReducer,
     statustall: statustallReducer,
-    filtrering: filtreringReducer,
+    filtrering: named('enhet', filtreringReducer),
+    filtreringVeileder: named('veileder', filtreringReducer),
     modal: modalReducer,
     form: formReducer
 });
