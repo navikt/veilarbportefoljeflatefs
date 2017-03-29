@@ -242,7 +242,7 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    filtervalg: state.filtrering.filtervalg,
+    filtervalg: state.filtrering,
     veileder: state.portefolje.veileder,
     visningsmodus: state.paginering.visningsmodus
 });
