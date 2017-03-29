@@ -22,6 +22,7 @@
     "less": "2.7.2",
     "mocha": "3.2.0",
     "npm-check-updates": "2.10.4",
+    "parallelshell": "2.0.0",
     "redux-devtools": "3.3.2",
     "redux-devtools-dock-monitor": "1.1.1",
     "redux-devtools-log-monitor": "1.2.0",
@@ -75,12 +76,13 @@
     "test:ts": "mocha",
     "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates -e 2 -x history,react-router --packageFile ./package.json",
     "eslint": "eslint --fix ./app/",
+    "clean": "node ./node_modules/rimraf/rimraf -rf out/",
     "build": "npm run build:ts && npm run build:css && npm run build:html",
-    "build:ts": "node ./node_modules/typescript/bin/tsc && node ./node_modules/webpack/bin/webpack -p && node ./node_modules/rimraf/rimraf -rf temp/",
+    "build:ts": "node ./node_modules/typescript/bin/tsc && node ./node_modules/webpack/bin/webpack -p && npm run clean",
     "build:css": "node ./node_modules/less/bin/lessc app/index.less ../main/webapp/css/index.css",
     "build:html": "node script/copy-html.js",
-    "dev:ts": "tsc && webpack --devtool 'source-map' && node ./node_modules/rimraf/rimraf -rf temp/",
+    "dev:ts": "tsc && parallelshell \"tsc -w\"  \"webpack -w\"",
     "dev:html": "node script/copy-html.js --development",
-    "dev": "npm run dev:ts && npm run build:css && npm run dev:html"
+    "dev": "npm run build:css && npm run dev:html && npm run dev:ts"
   }
 }
