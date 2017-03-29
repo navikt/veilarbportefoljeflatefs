@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
     hentPortefoljeForVeileder,
@@ -75,6 +76,9 @@ class VeilederPortefoljeVisning extends Component {
 
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
+        const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
+        const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
+
         const pagineringTekst = (
             antallTotalt > 0 ?
                 (<FormattedMessage
@@ -135,7 +139,12 @@ class VeilederPortefoljeVisning extends Component {
                                 </div>
                             </th>
                             <th>
-                                <button onClick={this.settSorteringNavnOgHentPortefolje} className="sortering-link">
+                                <button
+                                    onClick={this.settSorteringNavnOgHentPortefolje}
+                                    role="button"
+                                    className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
+                                    aria-selected={sorterEtternavn}
+                                >
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </button>
                             </th>
@@ -174,11 +183,6 @@ class VeilederPortefoljeVisning extends Component {
                                     {bruker.fnr !== null ?
                                         <td className="fodselsnummer-td">{bruker.fnr}</td> :
                                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
-                                    }
-                                    {
-                                        ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
-                                            renderUtlopsdato(bruker.utlopsdato)
-                                            : null
                                     }
                                     <td className="sikkerhetstiltak-td">
                                         {bruker.sikkerhetstiltak.length > 0 ?
