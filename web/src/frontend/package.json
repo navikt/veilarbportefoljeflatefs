@@ -5,6 +5,7 @@
   "author": "NAV",
   "license": "MIT",
   "devDependencies": {
+    "@types/highcharts": "4.2.50",
     "@types/react": "15.0.20",
     "@types/react-dom": "0.14.23",
     "@types/react-redux": "4.4.38",
@@ -34,6 +35,7 @@
   "dependencies": {
     "babel-polyfill": "6.23.0",
     "classnames": "2.2.5",
+    "highcharts": "5.0.9",
     "history": "2.0.1",
     "intl": "1.2.5",
     "moment": "2.18.1",
