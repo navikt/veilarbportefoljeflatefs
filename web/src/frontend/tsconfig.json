@@ -7,7 +7,7 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": false,
-    "outDir": "temp/",
+    "outDir": "out/",
     "jsx": "react"
   },
   "include": [
