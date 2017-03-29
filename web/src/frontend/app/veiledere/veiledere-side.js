@@ -30,6 +30,7 @@ export function compareEtternavn(a, b) {
 
 class VeiledereSide extends Component {
     componentWillMount() {
+        document.title = 'Veilederoversikt';
         const { hentPortefoljestorrelser, valgtEnhet } = this.props;
         hentPortefoljestorrelser(valgtEnhet.enhet.enhetId);
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
