@@ -12,7 +12,7 @@ import { tildelVeileder } from '../ducks/portefolje';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 
 function MinOversiktSide({ enheter, brukere, veiledere, velgVeileder, routes, ...props }) {
-    const veilederFraUrl = veiledere.data.veilederListe.find(veileder => (veileder.ident === props.params.ident));
+    const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
     const innloggetVeileder = { ident: enheter.ident };
     const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
@@ -66,7 +66,7 @@ MinOversiktSide.propTypes = {
     params: PT.object.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     enheter: state.enheter,
     brukere: state.portefolje.data.brukere,
     veiledere: state.veiledere

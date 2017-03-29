@@ -42,9 +42,7 @@ class EnhetSide extends Component {
 
 EnhetSide.propTypes = {
     valgtEnhet: PT.object,
-    filtervalg: PT.object,
-    valgtVeileder: PT.object,
-    velgVeileder: PT.func.isRequired
+    filtervalg: PT.object
 };
 
 const mapStateToProps = (state) => ({
@@ -52,7 +50,4 @@ const mapStateToProps = (state) => ({
     filtervalg: state.filtrering
 });
 
-const mapDispatchToProps = dispatch => ({
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);
+export default connect(mapStateToProps)(EnhetSide);

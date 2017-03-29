@@ -100,7 +100,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentVeiledere: (enhetId) => dispatch(hentVeiledereForEnhet(enhetId)),
     hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
     sorterPaaEtternavn: (sorteringsFunksjon, sorteringsRekkefolge) => {
         dispatch(settSorteringRekkefolge(sorteringsFunksjon, sorteringsRekkefolge));
