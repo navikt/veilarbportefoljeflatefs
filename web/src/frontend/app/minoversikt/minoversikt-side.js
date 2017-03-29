@@ -72,7 +72,7 @@ const mapStateToProps = state => ({
     veiledere: state.veiledere
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder))
 });
 

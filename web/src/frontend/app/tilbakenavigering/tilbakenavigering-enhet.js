@@ -53,9 +53,9 @@ class TilbakenavigeringEnhet extends Component {
 
 const mapToProps = () => ({
 });
-const mapDispatchToProps = dispatch => ({
-    velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet)),
-    settLagredeFiltervalg: filtervalg => dispatch(settFiltervalg(filtervalg))
+const mapDispatchToProps = (dispatch) => ({
+    velgEnhet: (enhet) => dispatch(velgEnhetForVeileder(enhet)),
+    settLagredeFiltervalg: (filtervalg) => dispatch(settFiltervalg(filtervalg))
 });
 
 

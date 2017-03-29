@@ -54,9 +54,9 @@ class TilbakenavigeringPortefolje extends Component {
 const mapToProps = () => ({
 });
 
-const mapDispatchToProps = dispatch => ({
-    velgEnhet: enhet => dispatch(velgEnhetForVeileder(enhet)),
-    velgVeileder: veileder => dispatch(settValgtVeileder(veileder))
+const mapDispatchToProps = (dispatch) => ({
+    velgEnhet: (enhet) => dispatch(velgEnhetForVeileder(enhet)),
+    velgVeileder: (veileder) => dispatch(settValgtVeileder(veileder))
 });
 
 

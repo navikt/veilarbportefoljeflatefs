@@ -91,7 +91,7 @@ VeiledereSide.propTypes = {
     valgtEnhet: valgtEnhetShape.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
     valgtEnhet: state.enheter.valgtEnhet,
     veiledereSomSkalVises: state.paginering.subListe,
@@ -99,8 +99,9 @@ const mapStateToProps = state => ({
     currentSorteringsRekkefolge: state.paginering.sorteringsRekkefolge
 });
 
-const mapDispatchToProps = dispatch => ({
-    hentPortefoljestorrelser: enhetId => dispatch(hentPortefoljeStorrelser(enhetId)),
+const mapDispatchToProps = (dispatch) => ({
+    hentVeiledere: (enhetId) => dispatch(hentVeiledereForEnhet(enhetId)),
+    hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
     sorterPaaEtternavn: (sorteringsFunksjon, sorteringsRekkefolge) => {
         dispatch(settSorteringRekkefolge(sorteringsFunksjon, sorteringsRekkefolge));
         dispatch(settSubListeForPaginering(0));

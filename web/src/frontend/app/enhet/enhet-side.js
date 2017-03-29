@@ -1,13 +1,10 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { FormattedMessage } from 'react-intl';
 import Lenker from './../lenker/lenker';
-import TildelVeilederVelger from './tildel-veileder-velger';
-import { veilederShape, brukerShape } from './../proptype-shapes';
-import PortefoljeVisning from '../enhetsportefolje/portefolje-visning';
+import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringContainer from './filtrering/filtrering-container';
-import { tildelVeileder } from '../ducks/portefolje';
+import FiltreringLabelContainer from './filtrering/filtrering-label-container';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 import { leggEnhetIUrl } from '../utils/utils';
 
@@ -16,74 +13,46 @@ class EnhetSide extends Component {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
     }
+
     componentDidUpdate() {
+        // TODO dette burde skje som en del av redux sin oppdatering av filter
         const { filtervalg, valgtEnhet } = this.props;
         eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet.enhet, location.pathname);
     }
+
     render() {
-        const {
-            valgtEnhet,
-            veiledere,
-            valgtVeileder,
-            velgVeileder,
-            brukere,
-            routes
-        } = this.props;
-
-
-        if (!valgtEnhet) {
-            return <noscript />;
+        // TODO man må alltid ha en valgtEnhet, denne sjekken kan derfor flyttes ut til Application
+        if (!this.props.valgtEnhet) {
+            return null;
         }
-
-        const tildelVeilederVelger =
-            (<TildelVeilederVelger
-                valgtVeileder={valgtVeileder}
-                veiledere={veiledere}
-                brukere={brukere}
-                velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
-            />);
 
         return (
             <div className="enhet-side">
-                <Lenker routes={routes} />
-                <p className="typo-infotekst enhetsingress">
+                <Lenker />
+                <p className="typo-infotekst enhetsingress blokk-m">
                     <FormattedMessage id="enhet.ingresstekst" />
                 </p>
                 <FiltreringContainer />
-                <Ekspanderbartpanel
-                    tittel="Tildel veileder" tittelProps={{
-                        tag: 'span',
-                        type: 'undertittel'
-                    }}
-                >
-                    {tildelVeilederVelger}
-                </Ekspanderbartpanel>
-                <PortefoljeVisning />
+                <FiltreringLabelContainer />
+                <EnhetsportefoljeVisning />
             </div>
         );
     }
 }
 
 EnhetSide.propTypes = {
-    veiledere: PT.arrayOf(veilederShape).isRequired,
-    brukere: PT.arrayOf(brukerShape).isRequired,
-    routes: PT.arrayOf(PT.object),
     valgtEnhet: PT.object,
     filtervalg: PT.object,
     valgtVeileder: PT.object,
     velgVeileder: PT.func.isRequired
 };
 
-const mapStateToProps = state => ({
-    veiledere: state.veiledere.data.veilederListe,
-    brukere: state.portefolje.data.brukere,
-    valgtVeileder: state.enheter.valgtVeileder,
+const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
-    filtervalg: state.filtrering.filtervalg
+    filtervalg: state.filtrering
 });
 
 const mapDispatchToProps = dispatch => ({
-    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);
