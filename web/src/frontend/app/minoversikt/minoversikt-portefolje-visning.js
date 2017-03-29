@@ -121,46 +121,46 @@ class VeilederPortefoljeVisning extends Component {
                     visningsmodus === 'tabell' ?
                         <table className="tabell portefolje-tabell typo-undertekst" tabIndex="0">
                             <thead className="extra-head">
-                            <tr>
-                                <th />
-                                <th>Bruker</th>
-                                <th />
-                                <th />
-                            </tr>
+                                <tr>
+                                    <th />
+                                    <th>Bruker</th>
+                                    <th />
+                                    <th />
+                                </tr>
                             </thead>
                             <thead>
-                            <tr>
-                                <th>
-                                    <div className="skjema__input">
-                                        <input
-                                            className="checkboks"
-                                            id="checkbox-alle-brukere"
-                                            type="checkbox"
-                                            checked={alleMarkert}
-                                            onClick={() => settSomMarkertAlle(!alleMarkert)}
-                                        />
-                                        <label className="skjema__label" htmlFor="checkbox-alle-brukere"/>
-                                    </div>
-                                </th>
-                                <th>
-                                    <a
-                                        onClick={this.settSorteringNavnOgHentPortefolje}
-                                        role="button"
-                                        className="sortering-link"
-                                    >
-                                        <FormattedMessage id="portefolje.tabell.navn"/>
-                                    </a>
-                                </th>
-                                {utlopsdatoHeader}
-                                <th>
-                                    <FormattedMessage id="portefolje.tabell.fodselsnummer"/>
-                                </th>
-                                <th />
-                            </tr>
+                                <tr>
+                                    <th>
+                                        <div className="skjema__input">
+                                            <input
+                                                className="checkboks"
+                                                id="checkbox-alle-brukere"
+                                                type="checkbox"
+                                                checked={alleMarkert}
+                                                onClick={() => settSomMarkertAlle(!alleMarkert)}
+                                            />
+                                            <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <a
+                                            onClick={this.settSorteringNavnOgHentPortefolje}
+                                            role="button"
+                                            className="sortering-link"
+                                        >
+                                            <FormattedMessage id="portefolje.tabell.navn" />
+                                        </a>
+                                    </th>
+                                    {utlopsdatoHeader}
+                                    <th>
+                                        <FormattedMessage id="portefolje.tabell.fodselsnummer" />
+                                    </th>
+                                    <th />
+                                </tr>
                             </thead>
 
                             <tbody>
-                            {brukere.filter(b => b.veilederId === veileder.ident)
+                                {brukere.filter(b => b.veilederId === veileder.ident)
                                 .map(bruker => <tr key={bruker.fnr}>
                                     <td>
                                         <div className="skjema__input">
@@ -171,7 +171,7 @@ class VeilederPortefoljeVisning extends Component {
                                                 checked={bruker.markert}
                                                 onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
                                             />
-                                            <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`}/>
+                                            <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
                                         </div>
                                     </td>
                                     <th>
