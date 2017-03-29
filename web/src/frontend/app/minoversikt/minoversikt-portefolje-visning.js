@@ -191,6 +191,8 @@ class VeilederPortefoljeVisning extends Component {
                                             null}
                                         {bruker.egenAnsatt === true ?
                                             <span className="egen-ansatt">Egen ansatt</span> : null}
+                                        {bruker.erDoed === true ?
+                                            <span className="etikett etikett--fokus">Død</span> : null}
                                     </td>
                                 </tr>)}
                     </tbody>
