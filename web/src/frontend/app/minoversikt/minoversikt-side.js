@@ -44,7 +44,7 @@ function MinOversiktSide({ enheter, brukere, veiledere, velgVeileder, routes, ..
             <section className={veilederFraUrl ? 'annen-veileder' : ''}>
                 {veilederFraUrl ? annenVeilederVarsel : null}
                 <div className="portefolje-side">
-                    <LenkerMinoversikt routes={routes} />
+                    <LenkerMinoversikt routes={routes} veileder={gjeldendeVeileder}/>
                     <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="undertittel">
                         {tildelVeilederVelger}
                     </Ekspanderbartpanel>

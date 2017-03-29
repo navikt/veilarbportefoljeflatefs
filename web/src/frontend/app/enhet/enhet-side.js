@@ -26,9 +26,11 @@ class EnhetSide extends Component {
             return null;
         }
 
+        const { routes } = this.props;
+
         return (
             <div className="enhet-side">
-                <Lenker />
+                <Lenker routes={routes} />
                 <p className="typo-infotekst enhetsingress blokk-m">
                     <FormattedMessage id="enhet.ingresstekst" />
                 </p>
@@ -42,7 +44,8 @@ class EnhetSide extends Component {
 
 EnhetSide.propTypes = {
     valgtEnhet: PT.object,
-    filtervalg: PT.object
+    filtervalg: PT.object,
+    routes: PT.arrayOf(PT.object),
 };
 
 const mapStateToProps = (state) => ({
