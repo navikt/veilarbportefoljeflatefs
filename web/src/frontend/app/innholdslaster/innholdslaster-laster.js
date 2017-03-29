@@ -1,12 +1,12 @@
 import React from 'react';
-import Spinner from 'nav-react-design/dist/spinner';
 import { FormattedMessage } from 'react-intl';
 
 function Laster() {
+    // TODO Få inn spinner fra nav-frontend
     return (
         <div className="innholdslaster">
             <FormattedMessage id="spinner">
-                {label => <Spinner storrelse="xxl" aria-label={label} />}
+                {(label) => <div className="spinner">ITSA LOADING: {label}</div>}
             </FormattedMessage>
         </div>
     );

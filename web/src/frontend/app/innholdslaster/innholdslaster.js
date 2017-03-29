@@ -4,11 +4,11 @@ import { injectIntl } from 'react-intl';
 import Laster from './innholdslaster-laster';
 import { STATUS } from './../ducks/utils';
 
-const array = value => (Array.isArray(value) ? value : [value]);
-const harStatus = (...status) => element => array(status).includes(element.status);
-const noenHarFeil = avhengigheter => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
-const alleLastet = avhengigheter => avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING));
-const medFeil = avhengigheter => avhengigheter.find(harStatus(STATUS.ERROR));
+const array = (value) => (Array.isArray(value) ? value : [value]);
+const harStatus = (...status) => (element) => array(status).includes(element.status);
+const noenHarFeil = (avhengigheter) => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
+const alleLastet = (avhengigheter) => avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING));
+const medFeil = (avhengigheter) => avhengigheter.find(harStatus(STATUS.ERROR));
 
 const Innholdslaster = ({ avhengigheter, className, feilmeldingKey, intl, children }) => {
     if (alleLastet(avhengigheter)) {

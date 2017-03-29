@@ -7,27 +7,29 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
-import { veilederShape, brukerShape } from '../proptype-shapes';
+import { brukerShape } from '../proptype-shapes';
 import { tildelVeileder } from '../ducks/portefolje';
+import Innholdslaster from '../innholdslaster/innholdslaster';
 
-function MinOversiktSide({ veilederFraState, brukere, veiledere, velgVeileder, routes, ...props }) {
-    const veilederFraUrl = veiledere.find(veileder => (veileder.ident === props.params.ident));
-    const veileder = veilederFraUrl || veilederFraState;
+function MinOversiktSide({ enheter, brukere, veiledere, velgVeileder, routes, ...props }) {
+    const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
+    const innloggetVeileder = { ident: enheter.ident };
+    const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
     const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s">
         <FormattedMessage
             id="annen.veileder.portefolje.advarsel"
             tagName="em"
             values={{
-                fornavn: veileder.fornavn,
-                etternavn: veileder.etternavn
+                fornavn: gjeldendeVeileder.fornavn,
+                etternavn: gjeldendeVeileder.etternavn
             }}
         /></Normaltekst>);
 
 
     const tildelVeilederVelger =
         (<TildelVeilederVelger
-            veiledere={veiledere}
+            veiledere={veiledere.data.veilederListe}
             brukere={brukere}
             velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
         />);
@@ -46,7 +48,9 @@ function MinOversiktSide({ veilederFraState, brukere, veiledere, velgVeileder, r
                     <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="undertittel">
                         {tildelVeilederVelger}
                     </Ekspanderbartpanel>
-                    <VeilederPortefoljeVisning veileder={veileder} />
+                    <Innholdslaster avhengigheter={[veiledere, enheter]}>
+                        <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
+                    </Innholdslaster>
                 </div>
             </section>
         </div>
@@ -54,21 +58,21 @@ function MinOversiktSide({ veilederFraState, brukere, veiledere, velgVeileder, r
 }
 
 MinOversiktSide.propTypes = {
-    veilederFraState: veilederShape.isRequired,
+    enheter: PT.object.isRequired,
     routes: PT.arrayOf(PT.object),
-    veiledere: PT.arrayOf(veilederShape).isRequired,
+    veiledere: PT.object,
     brukere: PT.arrayOf(brukerShape).isRequired,
     velgVeileder: PT.func.isRequired,
     params: PT.object.isRequired
 };
 
-const mapStateToProps = state => ({
-    veilederFraState: { ident: state.enheter.ident },
+const mapStateToProps = (state) => ({
+    enheter: state.enheter,
     brukere: state.portefolje.data.brukere,
-    veiledere: state.veiledere.data.veilederListe
+    veiledere: state.veiledere
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder))
 });
 
