@@ -30,7 +30,8 @@ class Application extends Component {
     }
 
     componentDidMount() {
-        if (location.pathname === '/veilarbportefoljeflatefs/') {
+        console.log('location.pathname', location.pathname);
+        if (location.pathname === '/veilarbportefoljeflatefs/' || location.pathname === '/veilarbportefoljeflatefs') {
             history.push('/enhet');
         }
     }
