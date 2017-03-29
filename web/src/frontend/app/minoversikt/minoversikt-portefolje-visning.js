@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/onclick-has-focus*/
-/* eslint-disable jsx-a11y/onclick-has-role*/
-/* eslint-disable jsx-a11y/no-static-element-interactions*/
 import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -89,15 +86,14 @@ class VeilederPortefoljeVisning extends Component {
 
         const feil = portefolje.feilendeTilordninger;
         if (feil && feil.length > 0) {
-            const fnr = feil.map(b => b.brukerFnr).toString();
-            /* eslint-disable no-undef, no-alert*/
-            alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`);
+            const fnr = feil.map((b) => b.brukerFnr).toString();
+            // TODO en alert???
+            alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`); // eslint-disable-line no-undef
             clearFeilendeTilordninger();
         }
 
-        const alleMarkert = brukere.length > 0 && brukere.every(bruker => bruker.markert);
-
-        const utlopsdatoHeader = ytelseFilterErAktiv(filtervalg.ytelse) ?
+        const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
+        const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
             (<th>
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
@@ -115,7 +111,7 @@ class VeilederPortefoljeVisning extends Component {
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
-                <table className="tabell portefolje-tabell typo-undertekst" tabIndex="0">
+                <table className="tabell portefolje-tabell typo-undertekst">
                     <thead className="extra-head">
                         <tr>
                             <th />
@@ -139,13 +135,9 @@ class VeilederPortefoljeVisning extends Component {
                                 </div>
                             </th>
                             <th>
-                                <a
-                                    onClick={this.settSorteringNavnOgHentPortefolje}
-                                    role="button"
-                                    className="sortering-link"
-                                >
+                                <button onClick={this.settSorteringNavnOgHentPortefolje} className="sortering-link">
                                     <FormattedMessage id="portefolje.tabell.navn" />
-                                </a>
+                                </button>
                             </th>
                             {utlopsdatoHeader}
                             <th>
@@ -156,8 +148,8 @@ class VeilederPortefoljeVisning extends Component {
                     </thead>
 
                     <tbody>
-                        {brukere.filter(b => b.veilederId === veileder.ident)
-                                .map(bruker => <tr key={bruker.fnr}>
+                        {brukere.filter((b) => b.veilederId === veileder.ident)
+                                .map((bruker) => <tr key={bruker.fnr}>
                                     <td>
                                         <div className="skjema__input">
                                             <input
@@ -198,6 +190,8 @@ class VeilederPortefoljeVisning extends Component {
                                             null}
                                         {bruker.egenAnsatt === true ?
                                             <span className="egen-ansatt">Egen ansatt</span> : null}
+                                        {bruker.erDoed === true ?
+                                            <span className="etikett etikett--fokus">Død</span> : null}
                                     </td>
                                 </tr>)}
                     </tbody>
@@ -231,22 +225,22 @@ VeilederPortefoljeVisning.propTypes = {
     filtervalg: PT.object
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    filtervalg: state.filtrering.filtervalg,
+    filtervalg: state.filtrering,
     veileder: state.portefolje.veileder
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, ident, rekkefolge, felt, fra = 0, antall = 20, filtervalg) =>
         dispatch(hentPortefoljeForVeileder(enhet, ident, rekkefolge, felt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
-    settSomMarkertAlle: markert => dispatch(markerAlleBrukere(markert))
+    settSomMarkertAlle: (markert) => dispatch(markerAlleBrukere(markert))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);

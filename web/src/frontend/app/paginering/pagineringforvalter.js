@@ -56,16 +56,16 @@ PagineringForvalter.propTypes = {
     subListe: PT.arrayOf(veilederShape)
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     fraIndeksForSubListe: state.paginering.fraIndeksForSubListe,
     sideStorrelse: state.paginering.sideStorrelse,
     subListe: state.paginering.subListe
 });
 
-const mapDispatchToProps = dispatch => ({
-    opprettPaginering: liste => dispatch(settListeSomSkalPagineres(liste)),
+const mapDispatchToProps = (dispatch) => ({
+    opprettPaginering: (liste) => dispatch(settListeSomSkalPagineres(liste)),
     klarerPaginering: () => dispatch(klarerPagineringsliste()),
-    settSubListe: fra => dispatch(settSubListeForPaginering(fra))
+    settSubListe: (fra) => dispatch(settSubListeForPaginering(fra))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PagineringForvalter);
