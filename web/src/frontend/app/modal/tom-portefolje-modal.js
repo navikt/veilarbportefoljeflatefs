@@ -4,7 +4,7 @@ import {
 Innholdstittel,
 Normaltekst
 } from 'nav-frontend-typografi';
-import { IntlMessage } from '../utils/IntlUtils';
+import { IntlMessage } from '../utils/intl-utils';
 
 function TomPortefoljeModal({ skjulModal, visModal }) {
     const modal = (
