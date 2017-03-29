@@ -1,122 +1,94 @@
-import * as Api from './../middleware/api';
-import { doThenDispatch } from './utils';
+import { hentPortefoljeForEnhet } from './portefolje';
 
 // Actions
-const OK = 'veilarbportefolje/portefolje/OK';
-const FEILET = 'veilarbportefolje/portefolje/FEILET';
-const PENDING = 'veilarbportefolje/portefolje/PENDING';
-export const VALGT_NYE_BRUKERE = 'VALGT_NYE_BRUKERE';
-export const AVVALGT_NYE_BRUKERE = 'AVVALGT_NYE_BRUKERE';
-export const VALGT_INAKTIVE_BRUKERE = 'VALGT_INAKTIVE_BRUKERE';
-export const AVVALGT_INAKTIVE_BRUKERE = 'AVVALGT_INAKTIVE_BRUKERE';
-export const SETT_FILTERVALG = 'SETT_FILTERVALG';
-export const ENDRET_ALDER = 'ENDRET_ALDER';
-export const VALGT_KJONN = 'VALGT_KJONN';
-export const VALGT_FODSELSDAG = 'VALGT_FODSELSDAG';
+export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
+export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
+export const SLETT_ENKELT_FILTER = 'filtrering/SLETT_ENKELT_FILTER';
+export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 
 //  Reducer
 export const initialState = {
-    filtervalg: {
-        ytelse: {
-            ordinaereDagpenger: false,
-            dagpengerUnderPermittering: false,
-            aapMaxtid: false,
-            aapUnntak: false
-        },
-        nyeBrukere: false,
-        inaktiveBrukere: false,
-        alder: 0,
-        kjonn: 'ikke definert',
-        fodselsdagIMnd: 0
-    }
+    nyeBrukere: false,
+    inaktiveBrukere: false,
+    alder: [],
+    kjonn: [],
+    fodselsdagIMnd: [],
+    innsatsgruppe: [],
+    formidlingsgruppe: [],
+    servicegruppe: [],
+    ytelse: null
 };
+
+function fjern(verdi, fjernVerdi) {
+    if (typeof verdi === 'boolean') {
+        return false;
+    } else if (Array.isArray(verdi)) {
+        return verdi.filter((enkeltVerdi) => enkeltVerdi !== fjernVerdi);
+    } else if (fjernVerdi === null) {
+        return null;
+    }
+
+    throw new Error(`Kan ikke håndtere fjerning av ${fjernVerdi} fra ${verdi}`);
+}
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case VALGT_NYE_BRUKERE:
-            return { ...state,
-                filtervalg: {
-                    ...state.filtervalg,
-                    nyeBrukere: true
-                }
+        case CLEAR_FILTER:
+            return initialState;
+        case ENDRE_FILTER:
+            return {
+                ...state,
+                [action.data.filterId]: action.data.filterVerdi
             };
-        case AVVALGT_NYE_BRUKERE:
-            return { ...state,
-                filtervalg: {
-                    ...state.filtervalg,
-                    nyeBrukere: false
-                }
-            };
-        case VALGT_INAKTIVE_BRUKERE:
-            return { ...state,
-                filtervalg: {
-                    ...state.filtervalg,
-                    inaktiveBrukere: true
-                }
-            };
-        case AVVALGT_INAKTIVE_BRUKERE:
-            return { ...state,
-                filtervalg: {
-                    ...state.filtervalg,
-                    inaktiveBrukere: false
-                }
-            };
-        case ENDRET_ALDER:
-            return { ...state,
-                filtervalg: {
-                    ...state.filtervalg,
-                    alder: action.alder
-                }
-            };
-        case VALGT_KJONN:
-            return { ...state,
-                filtervalg: {
-                    ...state.filtervalg,
-                    kjonn: action.kjonn
-                }
-            };
-        case VALGT_FODSELSDAG:
-            return { ...state,
-                filtervalg: {
-                    ...state.filtervalg,
-                    fodselsdagIMnd: action.fodselsdagIMnd
-                }
+        case SLETT_ENKELT_FILTER:
+            return {
+                ...state,
+                [action.data.filterId]: fjern(state[action.data.filterId], action.data.filterVerdi)
             };
         case SETT_FILTERVALG:
-            return { ...state,
-                filtervalg: action.filtervalg
-            };
+            return { ...action.data };
         default:
             return state;
     }
 }
 
 // Action Creators
-export function endreFiltervalg(filterId, filtervalg) { // eslint-disable-line consistent-return
-    if (filterId === 'checkbox-filtrering-oversikt-nye-brukere') {
-        return { type: filtervalg ? VALGT_NYE_BRUKERE : AVVALGT_NYE_BRUKERE };
-    } else if (filterId === 'checkbox-filtrering-oversikt-inaktive-brukere') {
-        return { type: filtervalg ? VALGT_INAKTIVE_BRUKERE : AVVALGT_INAKTIVE_BRUKERE };
-    } else if (filterId === 'alder') {
-        return { type: ENDRET_ALDER, alder: filtervalg };
-    } else if (filterId === 'kjonn') {
-        return { type: VALGT_KJONN, kjonn: filtervalg };
-    } else if (filterId === 'fodselsdagIMnd') {
-        return { type: VALGT_FODSELSDAG, fodselsdagIMnd: filtervalg };
-    }
+function oppdaterPortefolje(getState, dispatch) {
+    const state = getState();
+    const enhet = state.enheter.valgtEnhet.enhet.enhetId;
+    const rekkefolge = state.portefolje.sorteringsrekkefolge;
+    const sorteringfelt = state.portefolje.sorteringsfelt;
+    const fra = state.portefolje.data.fraIndex;
+    const antall = state.paginering.sideStorrelse;
+    const nyeFiltervalg = state.filtrering;
+    hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
 }
 
-export function settFiltervalg(filtervalg) {
-    return {
-        type: SETT_FILTERVALG,
-        filtervalg
+export function endreFiltervalg(filterId, filterVerdi) {
+    return (dispatch, getState) => {
+        dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi } });
+        oppdaterPortefolje(getState, dispatch);
     };
 }
 
+export function slettEnkeltFilter(filterId, filterVerdi) {
+    return (dispatch, getState) => {
+        dispatch({ type: SLETT_ENKELT_FILTER, data: { filterId, filterVerdi } });
+        oppdaterPortefolje(getState, dispatch);
+    };
+}
 
-export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg) {
-    return doThenDispatch(() =>
-        Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg), {
-            OK, FEILET, PENDING
-        });
+export function clearFiltervalg() {
+    return (dispatch, getState) => {
+        dispatch({ type: CLEAR_FILTER });
+        oppdaterPortefolje(getState, dispatch);
+    };
+}
+
+// TODO denne burde fjernes
+export function settFiltervalg(filtervalg) {
+    return (dispatch, getState) => {
+        dispatch({ type: SETT_FILTERVALG, data: filtervalg });
+        oppdaterPortefolje(getState, dispatch);
+    };
 }

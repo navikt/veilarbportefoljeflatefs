@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/onclick-has-focus*/
-/* eslint-disable jsx-a11y/onclick-has-role*/
-/* eslint-disable jsx-a11y/no-static-element-interactions*/
 import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -12,10 +9,10 @@ import {
     nullstillFeilendeTilordninger
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
-import PortefoljeTabell from './portefolje-tabell';
+import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
 import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
 
-class PortefoljeVisning extends Component {
+class EnhetsportefoljeVisning extends Component {
     componentWillMount() {
         const {
             valgtEnhet, hentPortefolje, sorteringsrekkefolge, sorteringsfelt, fraIndex, antall, filtervalg
@@ -86,7 +83,7 @@ class PortefoljeVisning extends Component {
 
         const feil = portefolje.feilendeTilordninger;
         if (feil && feil.length > 0) {
-            const fnr = feil.map(b => b.brukerFnr).toString();
+            const fnr = feil.map((b) => b.brukerFnr).toString();
             /* eslint-disable no-undef, no-alert*/
             alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`);
             clearFeilendeTilordninger();
@@ -109,7 +106,7 @@ class PortefoljeVisning extends Component {
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
-                <PortefoljeTabell
+                <EnhetsportefoljeTabell
                     veiledere={veiledere.data.veilederListe}
                     brukere={portefolje.data.brukere}
                     settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
@@ -136,7 +133,7 @@ class PortefoljeVisning extends Component {
     }
 }
 
-PortefoljeVisning.propTypes = {
+EnhetsportefoljeVisning.propTypes = {
     valgtEnhet: PT.object.isRequired,
     portefolje: PT.shape({
         data: portefoljeShape.isRequired,
@@ -159,17 +156,17 @@ PortefoljeVisning.propTypes = {
     filtervalg: PT.object
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
     veiledere: state.veiledere,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     antall: state.paginering.sideStorrelse,
-    filtervalg: state.filtrering.filtervalg
+    filtervalg: state.filtrering
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg) =>
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
@@ -177,4 +174,4 @@ const mapDispatchToProps = dispatch => ({
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PortefoljeVisning);
+export default connect(mapStateToProps, mapDispatchToProps)(EnhetsportefoljeVisning);
