@@ -64,31 +64,31 @@ function oppdaterPortefolje(getState, dispatch) {
     hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
 }
 
-export function endreFiltervalg(filterId, filterVerdi) {
+export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet') {
     return (dispatch, getState) => {
-        dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi } });
+        dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
         oppdaterPortefolje(getState, dispatch);
     };
 }
 
-export function slettEnkeltFilter(filterId, filterVerdi) {
+export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet') {
     return (dispatch, getState) => {
-        dispatch({ type: SLETT_ENKELT_FILTER, data: { filterId, filterVerdi } });
+        dispatch({ type: SLETT_ENKELT_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
         oppdaterPortefolje(getState, dispatch);
     };
 }
 
-export function clearFiltervalg() {
+export function clearFiltervalg(filtergruppe = 'enhet') {
     return (dispatch, getState) => {
-        dispatch({ type: CLEAR_FILTER });
+        dispatch({ type: CLEAR_FILTER, name: filtergruppe });
         oppdaterPortefolje(getState, dispatch);
     };
 }
 
 // TODO denne burde fjernes
-export function settFiltervalg(filtervalg) {
+export function settFiltervalg(filtervalg, filtergruppe = 'enhet') {
     return (dispatch, getState) => {
-        dispatch({ type: SETT_FILTERVALG, data: filtervalg });
+        dispatch({ type: SETT_FILTERVALG, data: filtervalg, name: filtergruppe });
         oppdaterPortefolje(getState, dispatch);
     };
 }
