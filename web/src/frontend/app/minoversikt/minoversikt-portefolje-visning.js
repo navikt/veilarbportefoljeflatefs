@@ -93,10 +93,6 @@ class VeilederPortefoljeVisning extends Component {
         }
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
-
-        console.log(filtervalg);
-        console.log(filtervalg.ytelse);
-
         const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
             (<th>
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
