@@ -58,7 +58,7 @@ class Application extends Component {
     }
 
     render() {
-        const { ledetekster = {}, enheter, children } = this.props;
+        const { ledetekster = {}, enheter, children, veiledere } = this.props;
         return (
             <IntlProvider
                 defaultLocale="nb"
@@ -66,7 +66,7 @@ class Application extends Component {
                 messages={mapTeksterTilNokkelDersomAngitt(ledetekster.data.nb)}
             >
                 <div className="portefolje">
-                    <Innholdslaster avhengigheter={[ledetekster, enheter, enheter.valgtEnhet]}>
+                    <Innholdslaster avhengigheter={[ledetekster, enheter, enheter.valgtEnhet, veiledere]}>
                         <div className="container maincontent side-innhold">
                             {children}
                         </div>
@@ -87,12 +87,14 @@ Application.propTypes = {
     hentEnheter: PT.func.isRequired,
     hentVeiledere: PT.func.isRequired,
     ledetekster: PT.object,
-    enheter: PT.object
+    enheter: PT.object,
+    veiledere: PT.object
 };
 
 const mapStateToProps = (state) => ({
     ledetekster: state.ledetekster,
-    enheter: state.enheter
+    enheter: state.enheter,
+    veiledere: state.veiledere
 });
 
 const mapDispatchToProps = (dispatch) => ({

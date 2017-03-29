@@ -2,7 +2,6 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Lenker from './../lenker/lenker';
-import { hentVeiledereForEnhet } from './../ducks/veiledere';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringContainer from './filtrering/filtrering-container';
 import FiltreringLabelContainer from './filtrering/filtrering-label-container';
@@ -11,10 +10,7 @@ import { leggEnhetIUrl } from '../utils/utils';
 
 class EnhetSide extends Component {
     componentWillMount() {
-        const { valgtEnhet, hentVeiledere } = this.props;
-
-        // TODO hent enhet, og veiledere for enhet kan skje i Application
-        hentVeiledere(valgtEnhet.enhet.enhetId);
+        const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
     }
 
@@ -46,8 +42,7 @@ class EnhetSide extends Component {
 
 EnhetSide.propTypes = {
     valgtEnhet: PT.object,
-    filtervalg: PT.object,
-    hentVeiledere: PT.func.isRequired
+    filtervalg: PT.object
 };
 
 const mapStateToProps = (state) => ({
@@ -55,8 +50,4 @@ const mapStateToProps = (state) => ({
     filtervalg: state.filtrering
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    hentVeiledere: (enhetId) => dispatch(hentVeiledereForEnhet(enhetId))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);
+export default connect(mapStateToProps)(EnhetSide);

@@ -96,8 +96,7 @@ class VeilederPortefoljeVisning extends Component {
         }
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
-
-        const utlopsdatoHeader = ytelseFilterErAktiv(filtervalg.ytelse) ?
+        const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
             (<th>
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
@@ -202,6 +201,8 @@ class VeilederPortefoljeVisning extends Component {
                                             null}
                                         {bruker.egenAnsatt === true ?
                                             <span className="egen-ansatt">Egen ansatt</span> : null}
+                                        {bruker.erDoed === true ?
+                                            <span className="etikett etikett--fokus">Død</span> : null}
                                     </td>
                                 </tr>)}
                             </tbody>
