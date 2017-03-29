@@ -54,7 +54,7 @@ export function handterFeil(dispatch, action) {
 }
 
 export function fetchToJson(url, config = {}) {
-    return fetch(url, config) //eslint-disable-line
+    return fetch(url, config)
         .then(sjekkStatuskode)
         .then(toJson);
 }

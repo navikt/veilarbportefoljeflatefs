@@ -1,5 +1,5 @@
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
-import { erDev, filterUrlBuilder } from './../utils/utils';
+import { erDev } from './../utils/utils';
 
 const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
 const credentials = erDev() ? 'include' : 'same-origin';
@@ -27,7 +27,8 @@ export function hentLedetekster() {
 export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg) {
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
         `portefolje?fra=${fra}&antall=${antall}&sortDirection=${rekkefolge}&sortField=${sorteringsfelt}`;
-    return fetchToJson(url + filterUrlBuilder(filtervalg), MED_CREDENTIALS);
+    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
+    return fetchToJson(url, config);
 }
 
 export function hentVeiledersPortefolje(enhet, veilederident, sorteringsfelt, rekkefolge, fra, antall) {
@@ -52,4 +53,9 @@ export function tilordneVeileder(tilordninger) {
     const url = `https://${window.location.hostname}${VEILARBSITUASJON_URL}/api/tilordneveileder/`;
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(tilordninger) };
     return fetch(url, config).then(sjekkStatuskode);
+}
+
+export function hentStatusTall(enhetId) {
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhetId}/statustall`;
+    return fetchToJson(url, MED_CREDENTIALS);
 }

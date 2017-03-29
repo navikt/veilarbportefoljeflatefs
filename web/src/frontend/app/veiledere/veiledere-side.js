@@ -13,7 +13,6 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import PagineringForvalter from '../paginering/pagineringforvalter';
 import Lenker from './../lenker/lenker';
 import { settSorteringRekkefolge, settSubListeForPaginering } from '../ducks/paginering';
-import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { leggEnhetIUrl } from '../utils/utils';
 
@@ -31,8 +30,7 @@ export function compareEtternavn(a, b) {
 
 class VeiledereSide extends Component {
     componentWillMount() {
-        const { hentVeiledere, hentPortefoljestorrelser, valgtEnhet } = this.props;
-        hentVeiledere(valgtEnhet.enhet.enhetId);
+        const { hentPortefoljestorrelser, valgtEnhet } = this.props;
         hentPortefoljestorrelser(valgtEnhet.enhet.enhetId);
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
     }
@@ -88,13 +86,12 @@ VeiledereSide.propTypes = {
     veiledereSomSkalVises: PT.arrayOf(veilederShape).isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
     routes: PT.arrayOf(PT.object),
-    hentVeiledere: PT.func.isRequired,
     hentPortefoljestorrelser: PT.func.isRequired,
     currentSorteringsRekkefolge: PT.string.isRequired,
     valgtEnhet: valgtEnhetShape.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
     valgtEnhet: state.enheter.valgtEnhet,
     veiledereSomSkalVises: state.paginering.subListe,
@@ -102,9 +99,8 @@ const mapStateToProps = state => ({
     currentSorteringsRekkefolge: state.paginering.sorteringsRekkefolge
 });
 
-const mapDispatchToProps = dispatch => ({
-    hentVeiledere: enhetId => dispatch(hentVeiledereForEnhet(enhetId)),
-    hentPortefoljestorrelser: enhetId => dispatch(hentPortefoljeStorrelser(enhetId)),
+const mapDispatchToProps = (dispatch) => ({
+    hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
     sorterPaaEtternavn: (sorteringsFunksjon, sorteringsRekkefolge) => {
         dispatch(settSorteringRekkefolge(sorteringsFunksjon, sorteringsRekkefolge));
         dispatch(settSubListeForPaginering(0));
