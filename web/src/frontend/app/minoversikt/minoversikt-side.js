@@ -7,14 +7,17 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
-import { brukerShape } from '../proptype-shapes';
-import { tildelVeileder } from '../ducks/portefolje';
+import { brukerShape, enhetShape } from '../proptype-shapes';
+import { tildelVeileder, hentPortefoljeForVeileder } from '../ducks/portefolje';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 
-function MinOversiktSide({ enheter, brukere, veiledere, velgVeileder, routes, ...props }) {
+function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
+    brukere, veiledere, hentPortefolje, valgtEnhet, velgVeileder, routes, ...props }) {
     const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
     const innloggetVeileder = { ident: enheter.ident };
     const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
+
+    const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
 
     const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s">
         <FormattedMessage
@@ -36,15 +39,20 @@ function MinOversiktSide({ enheter, brukere, veiledere, velgVeileder, routes, ..
 
     return (
         <div>
-            {veilederFraUrl ?
+            {visesAnnenVeiledersPortefolje ?
                 <Link to="veiledere" className="typo-normal tilbaketilveileder">
                     <i className="chevron--venstre" />
                     <span>Til veilederoversikt</span>
                 </Link> : null}
-            <section className={veilederFraUrl ? 'annen-veileder' : ''}>
-                {veilederFraUrl ? annenVeilederVarsel : null}
+            <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
+                { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
                 <div className="portefolje-side">
-                    <LenkerMinoversikt routes={routes} />
+                    <LenkerMinoversikt
+                        minOversiktOnClick={() =>
+                        hentPortefolje(valgtEnhet.enhet.enhetId,
+                            { ident: enheter.ident }, sorteringsrekkefolge, sorteringsfelt)}
+                        routes={routes}
+                    />
                     <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="undertittel">
                         {tildelVeilederVelger}
                     </Ekspanderbartpanel>
@@ -63,17 +71,28 @@ MinOversiktSide.propTypes = {
     veiledere: PT.object,
     brukere: PT.arrayOf(brukerShape).isRequired,
     velgVeileder: PT.func.isRequired,
-    params: PT.object.isRequired
+    params: PT.object.isRequired,
+    hentPortefolje: PT.func.isRequired,
+    valgtEnhet: enhetShape.isRequired,
+    filtervalg: PT.object,
+    sorteringsfelt: PT.string.isRequired,
+    sorteringsrekkefolge: PT.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
     enheter: state.enheter,
     brukere: state.portefolje.data.brukere,
-    veiledere: state.veiledere
+    veiledere: state.veiledere,
+    valgtEnhet: state.enheter.valgtEnhet,
+    filtervalg: state.filtrering,
+    sorteringsfelt: state.portefolje.sorteringsfelt,
+    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder))
+    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder)),
+    hentPortefolje: (enhet, ident, rekkefolge, felt, fra = 0, antall = 20) =>
+        dispatch(hentPortefoljeForVeileder(enhet, ident, rekkefolge, felt, fra, antall))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MinOversiktSide);
