@@ -16,7 +16,7 @@ export default combineReducers({
     portefolje: portefoljeReducer,
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
-    paginering: veilederpagineringReducer,
+    veilederpaginering: veilederpagineringReducer,
     statustall: statustallReducer,
     filtrering: filtreringReducer,
     modal: modalReducer,

@@ -57,9 +57,9 @@ VeilederPaginering.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    fraIndeksForSubListe: state.paginering.fraIndeksForSubListe,
-    sideStorrelse: state.paginering.sideStorrelse,
-    subListe: state.paginering.subListe
+    fraIndeksForSubListe: state.veilederpaginering.fraIndeksForSubListe,
+    sideStorrelse: state.veilederpaginering.sideStorrelse,
+    subListe: state.veilederpaginering.subListe
 });
 
 const mapDispatchToProps = (dispatch) => ({
