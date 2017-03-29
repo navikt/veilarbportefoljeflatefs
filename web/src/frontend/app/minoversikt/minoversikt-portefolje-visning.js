@@ -115,45 +115,47 @@ class VeilederPortefoljeVisning extends Component {
                     visButtongroup
                 />
                 {
-                    visningsmodus === 'tabell' ?<table className="tabell portefolje-tabell typo-undertekst" >
-                    <thead className="extra-head">
-                        <tr>
-                            <th />
-                            <th>Bruker</th>
-                            <th />
-                            <th />
-                        </tr>
-                    </thead>
-                    <thead>
-                        <tr>
-                            <th>
-                                <div className="skjema__input">
-                                    <input
-                                        className="checkboks"
-                                        id="checkbox-alle-brukere"
-                                        type="checkbox"
-                                        checked={alleMarkert}
-                                        onClick={() => settSomMarkertAlle(!alleMarkert)}
-                                    />
-                                    <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
-                                </div>
-                            </th>
-                            <th>
-                                <button
-                                    onClick={this.settSorteringNavnOgHentPortefolje}
+                    visningsmodus === 'tabell' ?
+                        <table className="tabell portefolje-tabell typo-undertekst" >
+                            <thead className="extra-head">
+                                <tr>
+                                    <th />
+                                    <th>Bruker</th>
+                                    <th />
+                                    <th />
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div className="skjema__input">
+                                            <input
+                                                className="checkboks"
+                                                id="checkbox-alle-brukere"
+                                                type="checkbox"
+                                                checked={alleMarkert}
+                                                onClick={() => settSomMarkertAlle(!alleMarkert)}
+                                            />
+                                            <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <button
+                                            onClick={this.settSorteringNavnOgHentPortefolje}
 
-                                    className="sortering-link">
+                                            className="sortering-link"
+                                        >
 
-                                    <FormattedMessage id="portefolje.tabell.navn" />
-                                </button>
-                            </th>
-                            {utlopsdatoHeader}
-                            <th>
-                                <FormattedMessage id="portefolje.tabell.fodselsnummer" />
-                            </th>
-                            <th />
-                        </tr>
-                    </thead>
+                                            <FormattedMessage id="portefolje.tabell.navn" />
+                                        </button>
+                                    </th>
+                                    {utlopsdatoHeader}
+                                    <th>
+                                        <FormattedMessage id="portefolje.tabell.fodselsnummer" />
+                                    </th>
+                                    <th />
+                                </tr>
+                            </thead>
 
                             <tbody>
                                 {brukere.filter((b) => b.veilederId === veileder.ident)
