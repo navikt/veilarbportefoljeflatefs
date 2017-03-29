@@ -27,6 +27,5 @@ export function leggEnhetIUrl(enhet) {
 }
 
 export function ytelseFilterErAktiv(ytelse) {
-    const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid, aapUnntak } = ytelse;
-    return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid || aapUnntak;
+    return !!ytelse;
 }
