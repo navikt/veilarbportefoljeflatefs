@@ -94,9 +94,9 @@ VeiledereSide.propTypes = {
 const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
     valgtEnhet: state.enheter.valgtEnhet,
-    veiledereSomSkalVises: state.paginering.subListe,
+    veiledereSomSkalVises: state.veilederpaginering.subListe,
     portefoljestorrelser: state.portefoljestorrelser,
-    currentSorteringsRekkefolge: state.paginering.sorteringsRekkefolge
+    currentSortering: state.veilederpaginering.currentSortering
 });
 
 const mapDispatchToProps = (dispatch) => ({
