@@ -93,8 +93,7 @@ class VeilederPortefoljeVisning extends Component {
         }
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
-
-        const utlopsdatoHeader = ytelseFilterErAktiv(filtervalg.ytelse) ?
+        const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
             (<th>
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
@@ -231,7 +230,8 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    filtervalg: state.filtrering
+    filtervalg: state.filtrering,
+    veileder: state.portefolje.veileder
 });
 
 const mapDispatchToProps = (dispatch) => ({
