@@ -49,7 +49,7 @@
     "nav-frontend-modal": "0.1.3",
     "nav-frontend-modal-style": "0.1.3",
     "nav-frontend-paneler-style": "0.1.2",
-    "nav-frontend-skjema-style": "0.1.3",
+    "nav-frontend-skjema-style": "0.1.4",
     "nav-frontend-typografi": "0.1.4",
     "nav-frontend-typografi-style": "0.1.3",
     "nav-react-datepicker": "0.0.35",
@@ -79,7 +79,7 @@
     "build:ts": "node ./node_modules/typescript/bin/tsc && node ./node_modules/webpack/bin/webpack -p && node ./node_modules/rimraf/rimraf -rf temp/",
     "build:css": "node ./node_modules/less/bin/lessc app/index.less ../main/webapp/css/index.css",
     "build:html": "node script/copy-html.js",
-    "dev:ts": "tsc && webpack && node ./node_modules/rimraf/rimraf -rf temp/",
+    "dev:ts": "tsc && webpack --devtool 'source-map' && node ./node_modules/rimraf/rimraf -rf temp/",
     "dev:html": "node script/copy-html.js --development",
     "dev": "npm run dev:ts && npm run build:css && npm run dev:html"
   }
