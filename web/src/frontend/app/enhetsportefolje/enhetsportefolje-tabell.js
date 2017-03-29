@@ -72,6 +72,7 @@ class EnhetsportefoljeTabell extends Component {
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
                                     className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
+                                    aria-selected={sorterEtternavn}
                                 >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                                 </button>
@@ -81,6 +82,7 @@ class EnhetsportefoljeTabell extends Component {
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('fodselsdato')}
                                     className={classNames({ 'sortering-link': true, valgt: sorterFodelsnummer })}
+                                    aria-selected={sorterFodelsnummer}
                                 >
                                     <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                                 </button>
