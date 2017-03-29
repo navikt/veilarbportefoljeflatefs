@@ -6,7 +6,6 @@ import { veilederShape } from '../proptype-shapes';
 function LenkerMinoversikt({ routes, veileder }) {
     const valgtSide = routes[1] ? routes[1].path : '';
     function erValgt(lenke) {
-        console.log(valgtSide);
         return lenke === valgtSide;
     }
     return (
