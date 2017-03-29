@@ -7,6 +7,8 @@
   "devDependencies": {
     "@types/react": "15.0.20",
     "@types/react-dom": "0.14.23",
+    "@types/react-redux": "4.4.38",
+    "@types/redux": "3.6.31",
     "babel-eslint": "7.2.1",
     "chai": "3.5.0",
     "core-js": "2.4.1",
@@ -75,7 +77,7 @@
     "build:ts": "node ./node_modules/typescript/bin/tsc && node ./node_modules/webpack/bin/webpack -p && node ./node_modules/rimraf/rimraf -rf temp/",
     "build:css": "node ./node_modules/less/bin/lessc app/index.less ../main/webapp/css/index.css",
     "build:html": "node script/copy-html.js",
-    "dev:ts": "tsc --sourceMap && webpack && node ./node_modules/rimraf/rimraf -rf temp/",
+    "dev:ts": "tsc && webpack && node ./node_modules/rimraf/rimraf -rf temp/",
     "dev:html": "node script/copy-html.js --development",
     "dev": "npm run dev:ts && npm run build:css && npm run dev:html"
   }

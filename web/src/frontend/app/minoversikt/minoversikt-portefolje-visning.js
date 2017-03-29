@@ -114,6 +114,7 @@ class VeilederPortefoljeVisning extends Component {
                             sorteringsrekkefolge, sorteringsfelt, fra, antall)}
                     tekst={pagineringTekst}
                     sideStorrelse={20}
+                    visButtongroup
                 />
                 <table className="tabell portefolje-tabell typo-undertekst" tabIndex="0">
                     <thead className="extra-head">
