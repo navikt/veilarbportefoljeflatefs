@@ -73,7 +73,8 @@ class VeilederPortefoljeVisning extends Component {
             settMarkert,
             clearFeilendeTilordninger,
             settSomMarkertAlle,
-            filtervalg
+            filtervalg,
+            visningsmodus
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
@@ -116,48 +117,50 @@ class VeilederPortefoljeVisning extends Component {
                     sideStorrelse={20}
                     visButtongroup
                 />
-                <table className="tabell portefolje-tabell typo-undertekst" tabIndex="0">
-                    <thead className="extra-head">
-                        <tr>
-                            <th />
-                            <th>Bruker</th>
-                            <th />
-                            <th />
-                        </tr>
-                    </thead>
-                    <thead>
-                        <tr>
-                            <th>
-                                <div className="skjema__input">
-                                    <input
-                                        className="checkboks"
-                                        id="checkbox-alle-brukere"
-                                        type="checkbox"
-                                        checked={alleMarkert}
-                                        onClick={() => settSomMarkertAlle(!alleMarkert)}
-                                    />
-                                    <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
-                                </div>
-                            </th>
-                            <th>
-                                <a
-                                    onClick={this.settSorteringNavnOgHentPortefolje}
-                                    role="button"
-                                    className="sortering-link"
-                                >
-                                    <FormattedMessage id="portefolje.tabell.navn" />
-                                </a>
-                            </th>
-                            {utlopsdatoHeader}
-                            <th>
-                                <FormattedMessage id="portefolje.tabell.fodselsnummer" />
-                            </th>
-                            <th />
-                        </tr>
-                    </thead>
+                {
+                    visningsmodus === 'tabell' ?
+                        <table className="tabell portefolje-tabell typo-undertekst" tabIndex="0">
+                            <thead className="extra-head">
+                            <tr>
+                                <th />
+                                <th>Bruker</th>
+                                <th />
+                                <th />
+                            </tr>
+                            </thead>
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div className="skjema__input">
+                                        <input
+                                            className="checkboks"
+                                            id="checkbox-alle-brukere"
+                                            type="checkbox"
+                                            checked={alleMarkert}
+                                            onClick={() => settSomMarkertAlle(!alleMarkert)}
+                                        />
+                                        <label className="skjema__label" htmlFor="checkbox-alle-brukere"/>
+                                    </div>
+                                </th>
+                                <th>
+                                    <a
+                                        onClick={this.settSorteringNavnOgHentPortefolje}
+                                        role="button"
+                                        className="sortering-link"
+                                    >
+                                        <FormattedMessage id="portefolje.tabell.navn"/>
+                                    </a>
+                                </th>
+                                {utlopsdatoHeader}
+                                <th>
+                                    <FormattedMessage id="portefolje.tabell.fodselsnummer"/>
+                                </th>
+                                <th />
+                            </tr>
+                            </thead>
 
-                    <tbody>
-                        {brukere.filter(b => b.veilederId === veileder.ident)
+                            <tbody>
+                            {brukere.filter(b => b.veilederId === veileder.ident)
                                 .map(bruker => <tr key={bruker.fnr}>
                                     <td>
                                         <div className="skjema__input">
@@ -168,7 +171,7 @@ class VeilederPortefoljeVisning extends Component {
                                                 checked={bruker.markert}
                                                 onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
                                             />
-                                            <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
+                                            <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`}/>
                                         </div>
                                     </td>
                                     <th>
@@ -201,8 +204,11 @@ class VeilederPortefoljeVisning extends Component {
                                             <span className="egen-ansatt">Egen ansatt</span> : null}
                                     </td>
                                 </tr>)}
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                        :
+                        <div>Her kommer det et flott diagram (jeg sverger)</div>
+                }
             </Innholdslaster>
         );
     }
@@ -229,7 +235,8 @@ VeilederPortefoljeVisning.propTypes = {
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
     settSomMarkertAlle: PT.func.isRequired,
-    filtervalg: PT.object
+    filtervalg: PT.object,
+    visningsmodus: PT.string.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -238,7 +245,8 @@ const mapStateToProps = state => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     filtervalg: state.filtrering.filtervalg,
-    veileder: state.portefolje.veileder
+    veileder: state.portefolje.veileder,
+    visningsmodus: state.paginering.visningsmodus
 });
 
 const mapDispatchToProps = dispatch => ({
