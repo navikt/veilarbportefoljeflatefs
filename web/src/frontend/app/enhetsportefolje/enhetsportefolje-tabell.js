@@ -28,7 +28,7 @@ class EnhetsportefoljeTabell extends Component {
 
     visModalDersomPortefoljeErTom() {
         const { toggleVisModal, antallTotalt, filtervalg } = this.props;
-        if (antallTotalt === 0 && JSON.stringify(filtervalg) === JSON.stringify(initialState.filtervalg)) {
+        if (antallTotalt === 0 && JSON.stringify(filtervalg) === JSON.stringify(initialState)) {
             toggleVisModal();
         }
     }

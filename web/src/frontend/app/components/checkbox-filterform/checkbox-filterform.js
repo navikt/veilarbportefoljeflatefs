@@ -57,7 +57,7 @@ CheckboxFilterform.propTypes = {
     pristine: PT.bool.isRequired,
     handleSubmit: PT.func.isRequired,
     form: PT.string.isRequired,
-    valg: PT.arrayOf(PT.string).isRequired,
+    valg: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     closeDropdown: PT.func.isRequired,
     actions: PT.shape({
         endreFiltervalg: PT.func
