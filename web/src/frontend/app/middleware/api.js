@@ -16,7 +16,8 @@ const VEILARBPORTEFOLJE_URL = erDev() ? ':9594/veilarbportefolje' : '/veilarbpor
 const VEILARBSITUASJON_URL = erDev() ? ':8485/veilarbsituasjon' : '/veilarbsituasjon';
 
 export function hentVeiledersEnheter() {
-    const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/veileder/enheter`;
+    // const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/veileder/enheter`;
+    const url = 'http://localhost:3000/enheter';
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
@@ -32,14 +33,17 @@ export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, ant
 }
 
 export function hentVeiledersPortefolje(enhet, veilederident, sorteringsfelt, rekkefolge, fra, antall) {
-    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/veileder/` +
-        `${veilederident}/portefolje?enhet=${enhet}&fra=${fra}&antall=${antall}` +
-        `&sortDirection=${rekkefolge}&sortField=${sorteringsfelt}`;
+    // const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/veileder/` +
+    //     `${veilederident}/portefolje?enhet=${enhet}&fra=${fra}&antall=${antall}` +
+    //     `&sortDirection=${rekkefolge}&sortField=${sorteringsfelt}`;
+
+    const url = 'http://localhost:3000/portefolje';
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
 export function hentEnhetsVeiledere(enhetId) {
-    const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
+    // const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
+    const url = 'http://localhost:3000/veiledere';
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
