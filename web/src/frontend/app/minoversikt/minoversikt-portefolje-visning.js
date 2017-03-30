@@ -136,7 +136,7 @@ class VeilederPortefoljeVisning extends Component {
                                 <button
                                     onClick={this.settSorteringNavnOgHentPortefolje}
                                     role="button"
-                                    className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
+                                    className={classNames('sortering-link', { valgt: sorterEtternavn })}
                                     aria-pressed={sorterEtternavn}
                                     aria-label={sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt' ?
                                         sorteringsrekkefolge : 'inaktiv'}

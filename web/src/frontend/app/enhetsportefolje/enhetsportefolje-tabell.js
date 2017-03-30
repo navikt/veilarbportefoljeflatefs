@@ -81,7 +81,7 @@ class EnhetsportefoljeTabell extends Component {
                             <th>
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
-                                    className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
+                                    className={classNames('sortering-link', { valgt: sorterEtternavn })}
                                     aria-pressed={sorterEtternavn}
                                     aria-label={(sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt') ?
                                         sorteringsrekkefolge : 'inaktiv'}
@@ -93,7 +93,7 @@ class EnhetsportefoljeTabell extends Component {
                             <th>
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('fodselsdato')}
-                                    className={classNames({ 'sortering-link': true, valgt: sorterFodelsnummer })}
+                                    className={classNames('sortering-link', { valgt: sorterFodelsnummer })}
                                     aria-pressed={sorterFodelsnummer}
                                     aria-label={sorterFodelsnummer && sorteringsrekkefolge !== 'ikke_satt' ?
                                         sorteringsrekkefolge : 'inaktiv'}
