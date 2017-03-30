@@ -1,4 +1,4 @@
-import { hentPortefoljeForEnhet } from './portefolje';
+import { hentPortefoljeForEnhet, PORTEFOLJE_SIDESTORRELSE } from './portefolje';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -59,7 +59,7 @@ function oppdaterPortefolje(getState, dispatch) {
     const rekkefolge = state.portefolje.sorteringsrekkefolge;
     const sorteringfelt = state.portefolje.sorteringsfelt;
     const fra = state.portefolje.data.fraIndex;
-    const antall = state.paginering.sideStorrelse;
+    const antall = PORTEFOLJE_SIDESTORRELSE;
     const nyeFiltervalg = state.filtrering;
     hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
 }
