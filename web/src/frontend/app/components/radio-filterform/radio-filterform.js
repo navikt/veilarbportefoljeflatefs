@@ -10,16 +10,18 @@ function renderFieldsFactory(form) {
             .map((field) => {
                 const { name, value: _value, ...handler } = field.input;
                 return (
-                    <div key={field.input.name} className="skjema__input">
+                    <div key={field.input.name} className="skjemaelement skjemaelement--horisontal">
                         <Field
                             id={field.input.name}
                             name={form} value={name}
                             component="input"
                             type="radio"
-                            className="radioknapp"
+                            className="skjemaelement__input radioknapp"
                             {...handler}
                         />
-                        <label htmlFor={field.input.name}>{valg[field.input.name]}</label>
+                        <label htmlFor={field.input.name} className="skjemaelement__label">
+                            {valg[field.input.name]}
+                        </label>
                     </div>
                 );
             });
@@ -50,11 +52,11 @@ function RadioFilterform({ pristine, handleSubmit, form, actions, valg, closeDro
     const submithandler = handleSubmit(prepSubmit(form, actions.endreFiltervalg, closeDropdown));
 
     return (
-        <form className="radio-filterform" onSubmit={submithandler}>
+        <form className="skjema radio-filterform" onSubmit={submithandler}>
             <div className="radio-filterform__valg">
                 <Fields names={Object.keys(valg)} valg={valg} component={renderFieldsFactory(form)} />
             </div>
-            <div className="knapperad">
+            <div className="knapperad blokk-xxs">
                 {submitknapp}
             </div>
         </form>
