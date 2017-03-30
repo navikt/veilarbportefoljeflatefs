@@ -46,7 +46,7 @@ class EnhetsportefoljeTabell extends Component {
         return (
             <div>
                 <TomPortefoljeModal skjulModal={toggleSkjulModal} visModal={modalSkalVises}/>
-                <table className="tabell portefolje-tabell typo-undertekst">
+                <table className="tabell portefolje-tabell typo-avsnitt">
                     <thead className="extra-head">
                     <tr>
                         <th />

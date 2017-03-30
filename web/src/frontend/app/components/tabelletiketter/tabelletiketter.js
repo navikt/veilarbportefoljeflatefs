@@ -7,7 +7,6 @@ const cls = (className, type) => classNames('tabelletikett', className, {
 });
 
 function Tabelletiketter({ className, type, ...props}) {
-    // http://stash.devillo.no/projects/NAVFRONT/repos/nav-frontend-moduler/pull-requests/57/overview legger til typo
     return (<EtikettInfo className={cls(className, type)} {...props} typo="undertekst" />);
 }
 
