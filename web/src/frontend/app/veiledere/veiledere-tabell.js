@@ -67,7 +67,7 @@ class VeilederTabell extends Component {
                             <th scope="col">
                                 <button
                                     onClick={this.props.sorterPaaEtternavn}
-                                    className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
+                                    className={classNames('sortering-link', { valgt: sorterEtternavn })}
                                     aria-pressed={sorterEtternavn}
                                     aria-label={sorterEtternavn && sorteringsRekkefolge !== 'ikke_satt' ?
                                         sorteringsRekkefolge : 'inaktiv'}
