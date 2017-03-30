@@ -7,7 +7,8 @@ import {
     settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
-    markerAlleBrukere
+    markerAlleBrukere,
+    PORTEFOLJE_SIDESTORRELSE
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
@@ -110,7 +111,7 @@ class VeilederPortefoljeVisning extends Component {
                         hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
                             sorteringsrekkefolge, sorteringsfelt, fra, antall)}
                     tekst={pagineringTekst}
-                    sideStorrelse={20}
+                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
                 />
                 <table className="tabell portefolje-tabell typo-undertekst">
                     <thead className="extra-head">
