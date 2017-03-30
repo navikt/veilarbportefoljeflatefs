@@ -16,7 +16,13 @@ export const initialState = {
     innsatsgruppe: [],
     formidlingsgruppe: [],
     servicegruppe: [],
-    ytelse: null
+    ytelse: {
+        ordinaereDagpenger: false,
+        dagpengerUnderPermittering: false,
+        aapMaxtid: false,
+        aapUnntak: false,
+        tiltakspenger: true
+    }
 };
 
 function fjern(verdi, fjernVerdi) {

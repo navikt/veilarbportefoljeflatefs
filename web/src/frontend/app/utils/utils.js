@@ -27,13 +27,34 @@ export function leggEnhetIUrl(enhet) {
 }
 
 export function ytelseFilterErAktiv(ytelse) {
-    if (!ytelse) { return false; }
+    if (!ytelse) {
+        return false;
+    }
     const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid, aapUnntak } = ytelse;
     return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid || aapUnntak;
 }
 
 export function ytelseDiagramSkalVises(ytelse) {
-    if (!ytelse) { return false; }
+    if (!ytelse) {
+        return false;
+    }
     const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid } = ytelse;
     return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid;
+}
+
+export function utledKategoriForDiagram(ytelse) {
+    let kategori = '';
+    if (!ytelse) {
+        return kategori;
+    }
+
+    if (ytelse.aapMaxtid) {
+        kategori = 'AAP Maxtid';
+    } else if (ytelse.ordinaereDagpenger || ytelse.dagpengerUnderPermittering) {
+        kategori = 'Dagpenger';
+    } else if (ytelse.tiltakspenger) {
+        kategori = 'Tiltakspenger';
+    }
+
+    return kategori;
 }
