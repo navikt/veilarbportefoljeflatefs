@@ -25,9 +25,9 @@ export const kjonn = {
 };
 
 export const innsatsgruppe = {
-    BATT: 'Spesielt tilpasset innsats',
-    BFORM: 'Situasjonsbestemt innsats',
     IKVAL: 'Standardinnsats',
+    BFORM: 'Situasjonsbestemt innsats',
+    BATT: 'Spesielt tilpasset innsats',
     VARIG: 'Varig tilpasset'
 };
 
@@ -42,7 +42,6 @@ export const servicegruppe = {
     BKART: 'Behov for arbeidsevnevurdering',
     IVURD: 'Ikke vurdert',
     OPPFI: 'Helserelatert arbeidsrettet oppfølging i NAV',
-    VARIG: 'Varig tilpasset innsats',
     VURDI: 'Sykmeldt oppfølging på arbeidsplassen',
     VURDU: 'Sykmeldt uten arbeidsgiver'
 };
