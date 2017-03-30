@@ -68,7 +68,9 @@ class VeilederTabell extends Component {
                                 <button
                                     onClick={this.props.sorterPaaEtternavn}
                                     className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
-                                    aria-selected={sorterEtternavn}
+                                    aria-pressed={sorterEtternavn}
+                                    aria-label={sorterEtternavn && sorteringsRekkefolge !== 'ikke_satt' ?
+                                        sorteringsRekkefolge : 'inaktiv'}
                                 >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                                 </button>
