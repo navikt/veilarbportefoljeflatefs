@@ -22,11 +22,6 @@ const settSammenNavn = (bruker) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-const renderUtlopsdato = (utlopsdato) => {
-    const { dayOfMonth, monthValue, year } = utlopsdato;
-    return <td>`${dayOfMonth}.${monthValue}.${year}`</td>;
-};
-
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
         const { sorteringsrekkefolge, sorteringsfelt, hentPortefolje, valgtEnhet, veileder } = this.props;
@@ -77,7 +72,6 @@ class VeilederPortefoljeVisning extends Component {
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
-        const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
 
         const pagineringTekst = (
             antallTotalt > 0 ?
@@ -143,7 +137,9 @@ class VeilederPortefoljeVisning extends Component {
                                     onClick={this.settSorteringNavnOgHentPortefolje}
                                     role="button"
                                     className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
-                                    aria-selected={sorterEtternavn}
+                                    aria-pressed={sorterEtternavn}
+                                    aria-label={sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt' ?
+                                        sorteringsrekkefolge : 'inaktiv'}
                                 >
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </button>

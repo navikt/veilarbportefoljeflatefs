@@ -46,7 +46,7 @@ class EnhetSide extends Component {
 EnhetSide.propTypes = {
     valgtEnhet: PT.object,
     filtervalg: PT.object,
-    routes: PT.arrayOf(PT.object),
+    routes: PT.arrayOf(PT.object)
 };
 
 const mapStateToProps = (state) => ({
