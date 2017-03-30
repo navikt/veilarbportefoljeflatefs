@@ -2,6 +2,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
+import DocumentTitle from 'react-document-title';
 import {
     veiledereShape,
     portefoljestorrelserShape,
@@ -30,7 +31,6 @@ export function compareEtternavn(a, b) {
 
 class VeiledereSide extends Component {
     componentWillMount() {
-        document.title = 'Veilederoversikt';
         const { hentPortefoljestorrelser, valgtEnhet } = this.props;
         hentPortefoljestorrelser(valgtEnhet.enhet.enhetId);
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
@@ -46,6 +46,7 @@ class VeiledereSide extends Component {
 
         return (
             <div className="veiledere-side">
+                <DocumentTitle title="Veilederoversikt" />
                 <Lenker routes={routes} />
                 <p className="typo-infotekst enhetsingress">
                     <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />

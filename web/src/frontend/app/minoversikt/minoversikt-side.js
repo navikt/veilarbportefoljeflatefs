@@ -2,6 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
+import DocumentTitle from 'react-document-title';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst } from 'nav-frontend-typografi';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
@@ -13,7 +14,6 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 
 function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
     brukere, veiledere, hentPortefolje, valgtEnhet, velgVeileder, routes, ...props }) {
-    document.title = 'Min oversikt';
     const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
     const innloggetVeileder = { ident: enheter.ident };
     const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
@@ -40,6 +40,7 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
 
     return (
         <div>
+            <DocumentTitle title="Min oversikt" />
             {visesAnnenVeiledersPortefolje ?
                 <Link to="veiledere" className="typo-normal tilbaketilveileder">
                     <i className="chevron--venstre" />
