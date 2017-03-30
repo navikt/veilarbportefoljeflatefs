@@ -2,7 +2,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import history from '../history';
-import { veilederShape } from './../proptype-shapes';
+import { veilederShape, filtervalgShape } from './../proptype-shapes';
 import { settValgtVeileder } from '../ducks/portefolje';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
@@ -71,7 +71,9 @@ class VeilederTabell extends Component {
                                 <FormattedMessage id="enhet.veiledere.tabell.ident" />
                             </th>
                             <th scope="col">
-                                <FormattedMessage id="enhet.veiledere.tabell.brukere" />
+                                <button onClick={this.props.sorterPaaPortefoljestorrelse} className="sortering-link">
+                                    <FormattedMessage id="enhet.veiledere.tabell.brukere" />
+                                </button>
                             </th>
                         </tr>
                     </thead>
@@ -89,12 +91,13 @@ VeilederTabell.propTypes = {
     settVeileder: PT.func.isRequired,
     portefoljestorrelser: PT.arrayOf(PT.object).isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
-    valgtEnhet: PT.object.isRequired,
-    filtervalg: PT.object.isRequired,
+    valgtEnhet: PT.shape({ enhetId: PT.string.isRequired }).isRequired,
+    filtervalg: filtervalgShape.isRequired,
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
     toggleVisModal: PT.func.isRequired,
-    veilederListe: PT.arrayOf(veilederShape).isRequired
+    veilederListe: PT.arrayOf(veilederShape).isRequired,
+    sorterPaaPortefoljestorrelse: PT.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

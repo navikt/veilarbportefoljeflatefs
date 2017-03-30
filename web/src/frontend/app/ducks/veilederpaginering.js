@@ -3,7 +3,7 @@ export const SETT_LISTE = 'veilederpaginering/settliste/OK';
 export const SETT_SUBLISTE = 'veilederpaginering/settsubliste/OK';
 export const KLARER = 'veilederpaginering/klarer/OK';
 export const SETT_FRA_INDEKS_FOR_SUBLISTE = 'veilederpaginering/settfraindeksforsubliste/OK';
-export const SETT_SORTERINGSREKKEFOLGE = 'veilederpaginering/settSorteringsRekkefolge/OK';
+export const SETT_NY_SORTERING = 'veilederpaginering/settNySortering/OK';
 
 // Utils
 export function til(fra, antall, totalt) {
@@ -15,7 +15,10 @@ const initialState = {
     subListe: [],
     fraIndeksForSubListe: 0,
     sideStorrelse: 20,
-    sorteringsRekkefolge: 'ikke_satt'
+    currentSortering: {
+        felt: 'ikke_satt',
+        rekkefolge: 'ikke_satt'
+    }
 };
 
 //  Reducer
@@ -34,14 +37,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, liste: [], subListe: [], fraIndeksForSubListe: 0 };
         case SETT_FRA_INDEKS_FOR_SUBLISTE:
             return { ...state, fraIndeksForSubListe: action.fraIndeks };
-        case SETT_SORTERINGSREKKEFOLGE:
-            return {
-                ...state,
-                sorteringsRekkefolge: action.sorteringsRekkefolge,
-                liste: action.sorteringsRekkefolge === 'descending' ?
-                    state.liste.sort(action.sorteringsFunksjon).reverse() :
-                    state.liste.sort(action.sorteringsFunksjon)
-            };
+        case SETT_NY_SORTERING:
+            return { ...state, currentSortering: action.nySortering };
         default:
             return state;
     }
@@ -68,10 +65,9 @@ export function settSubListeForPaginering(fraIndeks) {
     };
 }
 
-export function settSorteringRekkefolge(sorteringsFunksjon, sorteringsRekkefolge) {
+export function settNySortering(nySortering) {
     return {
-        type: SETT_SORTERINGSREKKEFOLGE,
-        sorteringsFunksjon,
-        sorteringsRekkefolge
+        type: SETT_NY_SORTERING,
+        nySortering
     };
 }
