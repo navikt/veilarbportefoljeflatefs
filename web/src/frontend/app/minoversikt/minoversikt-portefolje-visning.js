@@ -230,8 +230,7 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    filtervalg: state.filtrering,
-    veileder: state.portefolje.veileder
+    filtervalg: state.filtrering
 });
 
 const mapDispatchToProps = (dispatch) => ({
