@@ -11,7 +11,7 @@ class ButtonRadiogroup extends React.Component<Props, any> {
     render() {
         const { visningsmodus, handleClick } = this.props;
         return (
-            <span>
+            <div className="visningsgruppe">
                 <input
                     id="diagramvisning"
                     name="visningsmodus"
@@ -20,7 +20,7 @@ class ButtonRadiogroup extends React.Component<Props, any> {
                     value="diagramvisning"
                     checked={visningsmodus === 'diagram'}
                 />
-                <label htmlFor="diagramvisning">Vis som diagram</label>
+                <label htmlFor="diagramvisning" className="typo-undertekst">Vis som diagram</label>
                 <input
                     id="tabellvisning"
                     name="visningsmodus"
@@ -29,8 +29,8 @@ class ButtonRadiogroup extends React.Component<Props, any> {
                     value="tabellvisning"
                     checked={visningsmodus === 'tabell'}
                 />
-                <label htmlFor="tabellvisning">Vis som tabell</label>
-            </span>
+                <label htmlFor="tabellvisning" className="typo-undertekst">Vis som tabell</label>
+            </div>
         );
     }
 }
