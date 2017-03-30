@@ -38,8 +38,8 @@ export function ytelseDiagramSkalVises(ytelse) {
     if (!ytelse) {
         return false;
     }
-    const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid } = ytelse;
-    return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid;
+    const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid, tiltakspenger } = ytelse;
+    return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid || tiltakspenger;
 }
 
 export function utledKategoriForDiagram(ytelse) {
