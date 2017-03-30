@@ -53,6 +53,9 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
                             { ident: enheter.ident }, sorteringsrekkefolge, sorteringsfelt)}
                         routes={routes}
                     />
+                    <p className="typo-infotekst blokk-m">
+                        <FormattedMessage id="ingresstekst.minoversikt" />
+                    </p>
                     <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="undertittel">
                         {tildelVeilederVelger}
                     </Ekspanderbartpanel>
