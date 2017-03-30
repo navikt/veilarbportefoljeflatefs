@@ -46,14 +46,14 @@ class VeilederPaginering extends Component {
 }
 
 VeilederPaginering.propTypes = {
-    liste: PT.arrayOf(veilederShape),
+    liste: PT.arrayOf(veilederShape).isRequired,
     pagineringTekstId: PT.string.isRequired,
     fraIndeksForSubListe: PT.number.isRequired,
     sideStorrelse: PT.number.isRequired,
     opprettPaginering: PT.func.isRequired,
     klarerPaginering: PT.func.isRequired,
     settSubListe: PT.func.isRequired,
-    subListe: PT.arrayOf(veilederShape)
+    subListe: PT.arrayOf(veilederShape).isRequired
 };
 
 const mapStateToProps = (state) => ({

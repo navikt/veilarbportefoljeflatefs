@@ -12,7 +12,7 @@ import VeiledereTabell from './veiledere-tabell';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import VeilederPaginering from '../paginering/veilederpaginering';
 import Lenker from './../lenker/lenker';
-import { settSorteringRekkefolge, settSubListeForPaginering } from '../ducks/veilederpaginering';
+import { settNySortering, settSubListeForPaginering } from '../ducks/veilederpaginering';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { leggEnhetIUrl } from '../utils/utils';
 
@@ -37,11 +37,50 @@ class VeiledereSide extends Component {
 
     render() {
         const {
-            veiledere, portefoljestorrelser, veiledereSomSkalVises, sorterPaaEtternavn,
-            currentSorteringsRekkefolge, routes
+            veiledere, portefoljestorrelser, veiledereSomSkalVises, currentSortering, routes, settSortering
         } = this.props;
         const { veilederListe } = veiledere.data;
         const { facetResults } = portefoljestorrelser.data;
+
+        const avgjorNySortering = (felt) => {
+            if (currentSortering.felt === felt) {
+                if (currentSortering.rekkefolge === 'descending') {
+                    return { felt, rekkefolge: 'ascending' };
+                }
+                return { felt, rekkefolge: 'descending' };
+            }
+            return { felt, rekkefolge: 'ascending' };
+        };
+
+        const sorterPaaEtternavn =
+            currentSortering === 'descending' ? veilederListe.sort(compareEtternavn).reverse() :
+                veilederListe.sort(compareEtternavn);
+
+        const sorterPaaPortefoljestorrelse = () => {
+            const veiledereMedPortefoljestorrelser = veilederListe.map((veileder) => {
+                console.log(facetResults);
+                const portefoljestorrelse = facetResults.find(
+                    (storrelse) => storrelse.value === veileder.ident
+                );
+                return { ...veileder, portefoljestorrelse };
+            });
+            return currentSortering === 'descending' ?
+                veiledereMedPortefoljestorrelser.sort(compareEtternavn).reverse() :
+                veiledereMedPortefoljestorrelser.sort(compareEtternavn);
+        };
+
+        const ferdigVeilederListe = () => {
+            console.log(currentSortering.felt);
+            console.log(currentSortering.rekkefolge);
+            if (currentSortering.felt === 'ikke_satt') {
+                return veilederListe;
+            } else if (currentSortering.felt === 'etternavn') {
+                return sorterPaaEtternavn;
+            } else if (currentSortering.felt === 'portefoljestorrelse') {
+                return sorterPaaPortefoljestorrelse();
+            }
+            return veilederListe;
+        };
 
         return (
             <div className="veiledere-side">
@@ -57,7 +96,7 @@ class VeiledereSide extends Component {
                 </Undertittel>
                 <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
                     <VeilederPaginering
-                        liste={veilederListe}
+                        liste={ferdigVeilederListe()}
                         pagineringTekstId={
                             veilederListe.length > 0 ?
                                 'enhet.veiledere.paginering.tekst' :
@@ -67,8 +106,8 @@ class VeiledereSide extends Component {
                     <VeiledereTabell
                         veiledere={veiledereSomSkalVises}
                         portefoljestorrelser={facetResults}
-                        sorterPaaEtternavn={() => sorterPaaEtternavn(compareEtternavn,
-                            currentSorteringsRekkefolge === 'ascending' ? 'descending' : 'ascending')}
+                        sorterPaaEtternavn={() => settSortering(avgjorNySortering('etternavn'))}
+                        sorterPaaPortefoljestorrelse={() => settSortering(avgjorNySortering('portefoljestorrelse'))}
                     />
                 </Innholdslaster>
             </div>
@@ -84,10 +123,13 @@ VeiledereSide.propTypes = {
         data: portefoljestorrelserShape.isRequired
     }).isRequired,
     veiledereSomSkalVises: PT.arrayOf(veilederShape).isRequired,
-    sorterPaaEtternavn: PT.func.isRequired,
-    routes: PT.arrayOf(PT.object),
+    settSortering: PT.func.isRequired,
+    routes: PT.arrayOf(PT.object).isRequired,
     hentPortefoljestorrelser: PT.func.isRequired,
-    currentSorteringsRekkefolge: PT.string.isRequired,
+    currentSortering: PT.shape({
+        felt: PT.string.isRequired,
+        rekkefolge: PT.string.isRequired
+    }).isRequired,
     valgtEnhet: valgtEnhetShape.isRequired
 };
 
@@ -101,8 +143,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
-    sorterPaaEtternavn: (sorteringsFunksjon, sorteringsRekkefolge) => {
-        dispatch(settSorteringRekkefolge(sorteringsFunksjon, sorteringsRekkefolge));
+    settSortering: (nySortering) => {
+        dispatch(settNySortering(nySortering));
         dispatch(settSubListeForPaginering(0));
     }
 });
