@@ -9,7 +9,9 @@ function LenkerMinoversikt({ routes, minOversiktOnClick }) {
     }
     return (
         <div className="lenker blokk-m">
-            <Link to="portefolje" onClick={minOversiktOnClick}
+            <Link
+                to="portefolje"
+                onClick={minOversiktOnClick}
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"
                 aria-selected={erValgt('portefolje(/:ident)')}
