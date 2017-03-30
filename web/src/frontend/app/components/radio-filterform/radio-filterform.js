@@ -19,7 +19,7 @@ function renderFieldsFactory(form) {
                             className="skjemaelement__input radioknapp"
                             {...handler}
                         />
-                        <label htmlFor={field.input.name} classname="skjemaelement__label">
+                        <label htmlFor={field.input.name} className="skjemaelement__label">
                             {valg[field.input.name]}
                         </label>
                     </div>

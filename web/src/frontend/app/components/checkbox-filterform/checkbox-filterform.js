@@ -8,7 +8,13 @@ function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-li
     const fieldElements = Object.values(fields)
         .map((field) => (
             <div key={field.input.name} className="skjemaelement skjemaelement--horisontal">
-                <Field id={field.input.name} {...field.input} component="input" type="checkbox" className="skjemaelement__input checkboks" />
+                <Field
+                    id={field.input.name}
+                    component="input"
+                    type="checkbox"
+                    className="skjemaelement__input checkboks"
+                    {...field.input}
+                />
                 <label htmlFor={field.input.name} className="skjemaelement__label">{valg[field.input.name]}</label>
             </div>
         ));

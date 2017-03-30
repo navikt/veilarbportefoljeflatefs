@@ -6,7 +6,7 @@ const cls = (className, type) => classNames('tabelletikett', className, {
     [`tabelletikett--${type}`]: !!type
 });
 
-function Tabelletiketter({ className, type, ...props}) {
+function Tabelletiketter({ className, type, ...props }) {
     return (<EtikettInfo className={cls(className, type)} {...props} typo="undertekst" />);
 }
 

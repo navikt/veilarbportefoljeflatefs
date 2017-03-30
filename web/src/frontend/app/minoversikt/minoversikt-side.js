@@ -12,7 +12,7 @@ import { tildelVeileder, hentPortefoljeForVeileder } from '../ducks/portefolje';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 
 function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
-    brukere, veiledere, hentPortefolje, valgtEnhet, velgVeileder, routes, ...props }) {
+    brukere, veiledere, hentPortefolje, valgtEnhet, velgVeileder, ...props }) {
     const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
     const innloggetVeileder = { ident: enheter.ident };
     const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
@@ -69,7 +69,6 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
 
 MinOversiktSide.propTypes = {
     enheter: PT.object.isRequired,
-    routes: PT.arrayOf(PT.object),
     veiledere: PT.object,
     brukere: PT.arrayOf(brukerShape).isRequired,
     velgVeileder: PT.func.isRequired,
