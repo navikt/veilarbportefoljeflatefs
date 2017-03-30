@@ -34,9 +34,18 @@ class EnhetsportefoljeTabell extends Component {
     }
 
     render() {
-        const { brukere, veiledere, settSomMarkertAlle,
-            settSomMarkert, portefolje, modalSkalVises,
-            toggleSkjulModal, valgtEnhet, sorteringsrekkefolge } = this.props;
+        const {
+            brukere,
+            veiledere,
+            settSomMarkertAlle,
+            settSomMarkert,
+            portefolje,
+            modalSkalVises,
+            toggleSkjulModal,
+            valgtEnhet,
+            sorteringsrekkefolge
+        } = this.props;
+
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
 
