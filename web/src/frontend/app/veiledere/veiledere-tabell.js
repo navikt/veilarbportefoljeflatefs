@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 import history from '../history';
 import { veilederShape } from './../proptype-shapes';
 import { settValgtVeileder } from '../ducks/portefolje';
@@ -30,11 +31,13 @@ class VeilederTabell extends Component {
     }
 
     render() {
-        const { veiledere, portefoljestorrelser, modalSkalVises, toggleSkjulModal } = this.props;
+        const { veiledere, portefoljestorrelser, modalSkalVises, toggleSkjulModal, sorteringsRekkefolge } = this.props;
         const portefoljestorrelse = (storrelser, veilederId) => {
             const currentStorrelse = storrelser.find((storrelse) => storrelse.value === veilederId);
             return currentStorrelse ? currentStorrelse.count : 0;
         };
+
+        const sorterEtternavn = sorteringsRekkefolge !== 'ikke_satt';
 
         const veilederElementer = veiledere.map((veileder) => (
             <tr key={veileder.ident}>
@@ -62,7 +65,11 @@ class VeilederTabell extends Component {
                     <thead>
                         <tr>
                             <th scope="col">
-                                <button onClick={this.props.sorterPaaEtternavn} className="sortering-link">
+                                <button
+                                    onClick={this.props.sorterPaaEtternavn}
+                                    className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
+                                    aria-selected={sorterEtternavn}
+                                >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                                 </button>
                                 <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
@@ -94,14 +101,16 @@ VeilederTabell.propTypes = {
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
     toggleVisModal: PT.func.isRequired,
-    veilederListe: PT.arrayOf(veilederShape).isRequired
+    veilederListe: PT.arrayOf(veilederShape).isRequired,
+    sorteringsRekkefolge: PT.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet.enhet,
     filtervalg: state.filtrering,
     modalSkalVises: state.modal.visModal,
-    veilederListe: state.veiledere.data.veilederListe
+    veilederListe: state.veiledere.data.veilederListe,
+    sorteringsRekkefolge: state.paginering.sorteringsRekkefolge
 
 });
 
