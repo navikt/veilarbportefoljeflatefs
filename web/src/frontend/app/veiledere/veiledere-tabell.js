@@ -19,7 +19,7 @@ class VeilederTabell extends Component {
     settValgtVeileder(veileder) {
         return () => {
             this.props.settVeileder(veileder);
-        }
+        };
     }
 
     visModalDersomIngenVeiledere() {
@@ -39,8 +39,10 @@ class VeilederTabell extends Component {
         const veilederElementer = veiledere.map((veileder) => (
             <tr key={veileder.ident}>
                 <th>
-                    <Link to={`/portefolje/${veileder.ident}`} onClick={this.settValgtVeileder(veileder)}
-                          className="til-veileder-link">
+                    <Link
+                        to={`/portefolje/${veileder.ident}`} onClick={this.settValgtVeileder(veileder)}
+                        className="til-veileder-link"
+                    >
                         {`${veileder.navn}`}
                     </Link>
                 </th>
@@ -51,33 +53,33 @@ class VeilederTabell extends Component {
 
         return (
             <div>
-                <TomPortefoljeModal skjulModal={toggleSkjulModal} visModal={modalSkalVises}/>
+                <TomPortefoljeModal skjulModal={toggleSkjulModal} visModal={modalSkalVises} />
                 <table className="tabell portefolje-tabell typo-avsnitt">
                     <thead className="extra-head">
-                    <tr>
-                        <th>Veileder</th>
-                        <th />
-                        <th />
-                    </tr>
+                        <tr>
+                            <th>Veileder</th>
+                            <th />
+                            <th />
+                        </tr>
                     </thead>
                     <thead>
-                    <tr>
-                        <th scope="col">
-                            <button onClick={this.props.sorterPaaEtternavn} className="sortering-link">
-                                <FormattedMessage id="enhet.veiledere.tabell.etternavn"/>
-                            </button>
-                            <FormattedMessage id="enhet.veiledere.tabell.fornavn"/>
-                        </th>
-                        <th scope="col">
-                            <FormattedMessage id="enhet.veiledere.tabell.ident"/>
-                        </th>
-                        <th scope="col">
-                            <FormattedMessage id="enhet.veiledere.tabell.brukere"/>
-                        </th>
-                    </tr>
+                        <tr>
+                            <th scope="col">
+                                <button onClick={this.props.sorterPaaEtternavn} className="sortering-link">
+                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                                </button>
+                                <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
+                            </th>
+                            <th scope="col">
+                                <FormattedMessage id="enhet.veiledere.tabell.ident" />
+                            </th>
+                            <th scope="col">
+                                <FormattedMessage id="enhet.veiledere.tabell.brukere" />
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {veilederElementer}
+                        {veilederElementer}
                     </tbody>
                 </table>
             </div>

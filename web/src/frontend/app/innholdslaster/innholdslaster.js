@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import React, { Component, PropTypes as PT } from 'react';
 import { injectIntl } from 'react-intl';
 // import Feilmelding from './../feilmelding/feilmelding'; Legg til feilmeldingskomponent
 import Laster from './innholdslaster-laster';
@@ -7,33 +7,77 @@ import { STATUS } from './../ducks/utils';
 const array = (value) => (Array.isArray(value) ? value : [value]);
 const harStatus = (...status) => (element) => array(status).includes(element.status);
 const noenHarFeil = (avhengigheter) => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
-const alleLastet = (avhengigheter) => avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING));
+const alleLastet = (avhengigheter) => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
+const alleLastetEllerReloading = (avhengigheter) => (
+    avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING))
+);
 const medFeil = (avhengigheter) => avhengigheter.find(harStatus(STATUS.ERROR));
 
-const Innholdslaster = ({ avhengigheter, className, feilmeldingKey, intl, children }) => {
-    if (alleLastet(avhengigheter)) {
+class Innholdslaster extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { timeout: false };
+        this.timer = undefined;
+
+        this.renderChildren = this.renderChildren.bind(this);
+        this.setTimer = this.setTimer.bind(this);
+        this.clearTimer = this.clearTimer.bind(this);
+    }
+
+    setTimer() {
+        if (!this.timer) {
+            this.timer = setTimeout(() => {
+                this.setState({ timeout: true });
+            }, 200);
+        }
+    }
+
+    clearTimer() {
+        if (this.timer) {
+            clearTimeout(this.timer);
+            this.setState({ timeout: false });
+            this.timer = undefined;
+        }
+    }
+
+    renderChildren() {
+        const { avhengigheter, className, children } = this.props;
+
         if (typeof children === 'function') {
             return <section className={className}>{children(avhengigheter)}</section>;
         }
         return <section className={className}>{children}</section>;
     }
 
-    if (noenHarFeil(avhengigheter)) {
-        const feilendeReducer = medFeil(avhengigheter);
-        console.log(feilendeReducer); // eslint-disable-line no-console
+    render() {
+        const { avhengigheter, className, feilmeldingKey, intl } = this.props;
+        if (alleLastet(avhengigheter)) {
+            this.clearTimer();
+            return this.renderChildren();
+        } else if (!this.state.timeout && alleLastetEllerReloading(avhengigheter)) {
+            this.setTimer();
+            return this.renderChildren();
+        }
 
-        const feilmelding = (feilmeldingKey && intl.messages[feilmeldingKey]) || (
-            'Det skjedde en feil ved innlastningen av data'
+        if (noenHarFeil(avhengigheter)) {
+            const feilendeReducer = medFeil(avhengigheter);
+            console.log(feilendeReducer); // eslint-disable-line no-console
+
+            const feilmelding = (feilmeldingKey && intl.messages[feilmeldingKey]) || (
+                    'Det skjedde en feil ved innlastningen av data'
+                );
+
+            return (
+                <div className={className}>
+                    <p>{feilmelding}</p>
+                </div>
             );
+        }
 
-        return (
-            <div className={className}>
-                <p>{feilmelding}</p>
-            </div>
-        );
+        return <Laster className={className} />;
     }
-    return <Laster className={className} />;
-};
+}
 
 Innholdslaster.propTypes = {
     avhengigheter: PT.arrayOf(PT.object),
