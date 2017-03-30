@@ -246,7 +246,6 @@ const mapStateToProps = (state) => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     filtervalg: state.filtrering,
-    veileder: state.portefolje.veileder,
     visningsmodus: state.paginering.visningsmodus
 });
 
