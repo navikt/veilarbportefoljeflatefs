@@ -55,3 +55,33 @@
         }
     }
 }
+
+.visningsgruppe {
+    display: flex;
+    align-items: center;
+    input {
+        height: 0;
+        width: 0;
+        opacity: 0;
+        &:nth-of-type(1) {
+            &:not(:checked) + label {
+                border-right: none;
+            }
+        }
+        &:nth-of-type(2) {
+            &:not(:checked) + label {
+                border-left: none;
+            }
+        }
+        &:checked + label {
+            background-color: @navBla;
+            color: @white;
+            border-color: @navBla;
+        }
+    }
+    label {
+        display: block;
+        padding: 0.3rem 0.5rem;
+        border: 1px solid @navMorkGra;
+    }
+}
