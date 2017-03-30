@@ -51,7 +51,6 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
                         minOversiktOnClick={() =>
                         hentPortefolje(valgtEnhet.enhet.enhetId,
                             { ident: enheter.ident }, sorteringsrekkefolge, sorteringsfelt)}
-                        routes={routes}
                     />
                     <p className="typo-infotekst blokk-m">
                         <FormattedMessage id="ingresstekst.minoversikt" />

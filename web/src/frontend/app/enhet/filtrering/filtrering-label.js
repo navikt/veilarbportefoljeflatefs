@@ -1,12 +1,11 @@
 import React, { PropTypes as PT } from 'react';
-import { EtikettInfo } from 'nav-frontend-etiketter';
 
 function FiltreringLabel({ label, slettFilter }) {
     return (
-        <EtikettInfo className="filtrering-label">
-            {label}
-            <button className="filtrering-label-slett" onClick={slettFilter}>X</button>
-        </EtikettInfo>
+        <button className="filtreringlabel typo-avsnitt" onClick={slettFilter}>
+            <span className="filtreringlabel__label">{label}</span>
+            <span>X</span>
+        </button>
     );
 }
 

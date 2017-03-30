@@ -111,7 +111,7 @@ class VeilederPortefoljeVisning extends Component {
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
-                <table className="tabell portefolje-tabell typo-undertekst">
+                <table className="tabell portefolje-tabell typo-avsnitt">
                     <thead className="extra-head">
                         <tr>
                             <th />

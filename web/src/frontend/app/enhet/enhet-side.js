@@ -27,7 +27,7 @@ class EnhetSide extends Component {
         }
 
         return (
-            <div className="enhet-side">
+            <div className="enhet-side blokk-xl">
                 <Lenker />
                 <p className="typo-infotekst enhetsingress blokk-m">
                     <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
