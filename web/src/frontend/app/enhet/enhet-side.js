@@ -33,7 +33,7 @@ class EnhetSide extends Component {
             <div className="enhet-side">
                 <Lenker routes={routes} />
                 <p className="typo-infotekst enhetsingress blokk-m">
-                    <FormattedMessage id="enhet.ingresstekst" />
+                    <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                 </p>
                 <FiltreringContainer />
                 <FiltreringLabelContainer />

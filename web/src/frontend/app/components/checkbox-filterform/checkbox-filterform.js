@@ -36,7 +36,7 @@ function CheckboxFilterform({ pristine, handleSubmit, form, actions, valg, close
     const submitknapp = !pristine ? (
         <button className={knappCls} type="submit">Velg</button>
         ) : (
-            <button className={knappCls} onClick={closeDropdown}>Lukk</button>
+            <button className={knappCls} type="button" onClick={closeDropdown}>Lukk</button>
         );
 
     const submithandler = handleSubmit(prepSubmit(form, actions.endreFiltervalg, closeDropdown));

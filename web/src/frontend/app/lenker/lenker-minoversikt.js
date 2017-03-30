@@ -1,19 +1,15 @@
 import React, { PropTypes as PT } from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
-import { veilederShape } from '../proptype-shapes';
 
-function LenkerMinoversikt({ routes, veileder }) {
+function LenkerMinoversikt({ routes, minOversiktOnClick }) {
     const valgtSide = routes[1] ? routes[1].path : '';
     function erValgt(lenke) {
         return lenke === valgtSide;
     }
     return (
         <div className="lenker blokk-m">
-            <Link
-                to={{
-                    pathname: `portefolje/${veileder.ident}`
-                }}
+            <Link to="portefolje" onClick={minOversiktOnClick}
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"
                 aria-selected={erValgt('portefolje(/:ident)')}
@@ -26,7 +22,7 @@ function LenkerMinoversikt({ routes, veileder }) {
 
 LenkerMinoversikt.propTypes = {
     routes: PT.arrayOf(PT.object),
-    veileder: veilederShape.isRequired
+    minOversiktOnClick: PT.func.isRequired
 };
 
 export default LenkerMinoversikt;
