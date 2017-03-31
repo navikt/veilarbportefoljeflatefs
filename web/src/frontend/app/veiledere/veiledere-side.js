@@ -70,7 +70,6 @@ class VeiledereSide extends Component {
                             />
                             <VeiledereTabell
                                 veiledere={veiledereSomSkalVises}
-                                portefoljestorrelser={facetResults}
                                 sorterPaaEtternavn={() => sorterPaaEtternavn(avgjorNySortering('etternavn'))}
                                 sorterPaaPortefoljestorrelse={
                                     () => sorterPaaPortefoljestorrelse(avgjorNySortering('portefoljestorrelse'))
