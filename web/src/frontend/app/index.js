@@ -16,7 +16,7 @@ import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
-import { getEnhetFromUrl } from './utils/utils';
+import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/utils';
 /* eslint-enable import/first */
 
 addLocaleData(nb);
@@ -31,7 +31,7 @@ function lagrePath() {
 function redirect() {
     const lastPath = localStorage.getItem('lastpath');
     if (lastPath) {
-        history.replace(`${lastPath}?enhet=${getEnhetFromUrl()}`);
+        sendBrukerTilUrl(`${lastPath}?enhet=${getEnhetFromUrl()}`);
     }
 }
 

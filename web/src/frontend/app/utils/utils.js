@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export*/
 import queryString from 'query-string';
+import history from '../history';
 
 export function erDev() {
     const url = window.location.href;
@@ -43,6 +44,10 @@ export function leggEnhetIUrl(enhet) {
 
 export function getEnhetFromUrl() {
     return queryString.parse(location.search).enhet || '';
+}
+
+export function sendBrukerTilUrl(url) {
+    history.replace(url);
 }
 
 export function ytelseFilterErAktiv(ytelse) {

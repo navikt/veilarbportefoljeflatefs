@@ -3,7 +3,7 @@ const handlePersonsokSubmit = (fnr) => {
 };
 
 const handleChangeEnhet = (enhet) => {
-    window.location.search = (`?enhet=${enhet}`);
+    window.location.search = (`?enhet=${enhet}&clean`);
 };
 
 const getConfig = (initiellEnhet = undefined) => {
