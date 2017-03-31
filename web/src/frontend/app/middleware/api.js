@@ -60,3 +60,9 @@ export function hentStatusTall(enhetId) {
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhetId}/statustall`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
+
+export function hentStatusTallForveileder(enhetId, veileder) {
+    const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/veileder/${veileder}` +
+        `/statustall?enhet=${enhetId}`;
+    return fetchToJson(url, MED_CREDENTIALS);
+}
