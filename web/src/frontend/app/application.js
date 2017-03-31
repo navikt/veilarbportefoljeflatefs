@@ -14,7 +14,7 @@ import { hentVeiledereForEnhet } from './ducks/veiledere';
 import history from './history';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
-    const skalViseTekstnokkel = queryString.parse(location.search).visTekster;
+    const skalViseTekstnokkel = queryString.parse(location.search).visTekster; // eslint-disable-line no-undef
     if (skalViseTekstnokkel) {
         return Object.keys(ledetekster).reduce((obj, curr) => ({ ...obj, [curr]: curr }), {});
     }
@@ -30,7 +30,9 @@ class Application extends Component {
     }
 
     componentDidMount() {
-        if (location.pathname === '/veilarbportefoljeflatefs/' || location.pathname === '/veilarbportefoljeflatefs') {
+        const pathname = location.pathname;// eslint-disable-line no-undef
+        if (pathname === '/veilarbportefoljeflatefs/' ||
+            pathname === '/veilarbportefoljeflatefs') {
             history.push('/enhet');
         }
     }
@@ -46,7 +48,7 @@ class Application extends Component {
         const { enheter, hentVeiledere } = this.props;
 
         const enhetliste = enheter.data;
-        const enhetFraUrl = queryString.parse(location.search).enhet;
+        const enhetFraUrl = queryString.parse(location.search).enhet;// eslint-disable-line no-undef
         const initiellEnhet = enhetliste
             .map((enhet) => (enhet.enhetId))
             .includes(enhetFraUrl) ? enhetFraUrl : enhetliste[0].enhetId;

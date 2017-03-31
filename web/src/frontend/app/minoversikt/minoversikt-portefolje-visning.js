@@ -159,7 +159,7 @@ class VeilederPortefoljeVisning extends Component {
                                     </td>
                                     <th>
                                         <a
-                                            href={`https://${window.location.hostname}` +
+                                            href={`https://${window.location.hostname}` +// eslint-disable-line no-undef
                                             `/veilarbpersonflatefs/${bruker.fnr}?enhet=${valgtEnhet.enhet.enhetId}`}
                                             className="til-bruker-link"
                                         >

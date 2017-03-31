@@ -1,3 +1,4 @@
+/* eslint-disable no-undef*/
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
 import { erDev } from './../utils/utils';
 

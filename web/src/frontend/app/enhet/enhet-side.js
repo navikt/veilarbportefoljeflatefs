@@ -5,19 +5,12 @@ import Lenker from './../lenker/lenker';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringContainer from './filtrering/filtrering-container';
 import FiltreringLabelContainer from './filtrering/filtrering-label-container';
-import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 import { leggEnhetIUrl } from '../utils/utils';
 
 class EnhetSide extends Component {
     componentWillMount() {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
-    }
-
-    componentDidUpdate() {
-        // TODO dette burde skje som en del av redux sin oppdatering av filter
-        const { filtervalg, valgtEnhet } = this.props;
-        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet.enhet, location.pathname);
     }
 
     render() {
@@ -41,13 +34,11 @@ class EnhetSide extends Component {
 }
 
 EnhetSide.propTypes = {
-    valgtEnhet: PT.object,
-    filtervalg: PT.object
+    valgtEnhet: PT.object
 };
 
 const mapStateToProps = (state) => ({
-    valgtEnhet: state.enheter.valgtEnhet,
-    filtervalg: state.filtrering
+    valgtEnhet: state.enheter.valgtEnhet
 });
 
 export default connect(mapStateToProps)(EnhetSide);
