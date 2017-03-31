@@ -1,5 +1,6 @@
 import * as Api from './../middleware/api';
 import { STATUS, doThenDispatch, handterFeil, toJson } from './utils';
+import { IKKE_SATT } from '../konstanter';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -25,10 +26,10 @@ const initialState = {
         antallReturnert: 0,
         fraIndex: 0
     },
-    sorteringsrekkefolge: 'ikke_satt',
-    sorteringsfelt: 'ikke_satt',
+    sorteringsrekkefolge: IKKE_SATT,
+    sorteringsfelt: IKKE_SATT,
     veileder: {
-        ident: 'ikke_satt'
+        ident: IKKE_SATT
     }
 };
 
