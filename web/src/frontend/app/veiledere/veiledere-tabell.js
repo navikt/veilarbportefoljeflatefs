@@ -30,11 +30,7 @@ class VeilederTabell extends Component {
     }
 
     render() {
-        const { veiledere, portefoljestorrelser, modalSkalVises, toggleSkjulModal } = this.props;
-        const portefoljestorrelse = (storrelser, veilederId) => {
-            const currentStorrelse = storrelser.find((storrelse) => storrelse.value === veilederId);
-            return currentStorrelse ? currentStorrelse.count : 0;
-        };
+        const { veiledere, modalSkalVises, toggleSkjulModal } = this.props;
 
         const veilederElementer = veiledere.map((veileder) => (
             <tr key={veileder.ident}>
@@ -44,7 +40,7 @@ class VeilederTabell extends Component {
                     </button>
                 </th>
                 <td>{`${veileder.ident}`}</td>
-                <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
+                <td>{veileder.portefoljestorrelse}</td>
             </tr>
         ));
 
@@ -89,7 +85,6 @@ class VeilederTabell extends Component {
 VeilederTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     settVeileder: PT.func.isRequired,
-    portefoljestorrelser: PT.arrayOf(PT.object).isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
     valgtEnhet: PT.shape({ enhetId: PT.string.isRequired }).isRequired,
     filtervalg: filtervalgShape.isRequired,
