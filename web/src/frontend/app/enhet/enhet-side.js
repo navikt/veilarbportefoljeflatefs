@@ -30,7 +30,7 @@ class EnhetSide extends Component {
         const { routes } = this.props;
 
         return (
-            <div className="enhet-side">
+            <div className="enhet-side blokk-xl">
                 < DocumentTitle title="Enhetens oversikt" />
                 <Lenker routes={routes} />
                 <p className="typo-infotekst enhetsingress blokk-m">

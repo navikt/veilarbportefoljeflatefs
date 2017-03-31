@@ -20,7 +20,7 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
         <div className="paginering">
             <Element className="info" tag="h1">
                 <strong>
-                    {antallTotalt === 0 ? null : tekst}
+                    {tekst}
                 </strong>
             </Element>
             {antallTotalt <= sideStorrelse ? null :

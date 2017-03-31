@@ -2,7 +2,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import history from '../history';
+import { Link } from 'react-router';
 import { veilederShape } from './../proptype-shapes';
 import { settValgtVeileder } from '../ducks/portefolje';
 import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
@@ -18,9 +18,9 @@ class VeilederTabell extends Component {
     }
 
     settValgtVeileder(veileder) {
-        const { settVeileder } = this.props;
-        settVeileder(veileder);
-        history.push(`/portefolje/${veileder.ident}`);
+        return () => {
+            this.props.settVeileder(veileder);
+        };
     }
 
     visModalDersomIngenVeiledere() {
@@ -42,9 +42,12 @@ class VeilederTabell extends Component {
         const veilederElementer = veiledere.map((veileder) => (
             <tr key={veileder.ident}>
                 <th>
-                    <button onClick={() => this.settValgtVeileder(veileder)} className="til-veileder-link">
+                    <Link
+                        to={`/portefolje/${veileder.ident}`} onClick={this.settValgtVeileder(veileder)}
+                        className="til-veileder-link"
+                    >
                         {`${veileder.navn}`}
-                    </button>
+                    </Link>
                 </th>
                 <td>{`${veileder.ident}`}</td>
                 <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
@@ -54,7 +57,7 @@ class VeilederTabell extends Component {
         return (
             <div>
                 <TomPortefoljeModal skjulModal={toggleSkjulModal} visModal={modalSkalVises} />
-                <table className="tabell portefolje-tabell typo-undertekst">
+                <table className="tabell portefolje-tabell typo-avsnitt">
                     <thead className="extra-head">
                         <tr>
                             <th>Veileder</th>
