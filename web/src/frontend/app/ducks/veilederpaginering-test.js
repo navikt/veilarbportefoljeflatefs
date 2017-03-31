@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { ASCENDING, DESCENDING } from '../konstanter';
 
 import { til, compareEtternavn, comparePortefoljestorrelser,
     sorterPaaEtternavn, sorterPaaPortefoljestorrelse } from './veilederpaginering';
@@ -36,7 +37,7 @@ describe('VeilederPagineringReducer', () => {
                 { etternavn: 'Marsvinsen' }
             ];
 
-            expect(sorterPaaEtternavn(veiledere, 'ascending')).to.deep.equal([
+            expect(sorterPaaEtternavn(veiledere, ASCENDING)).to.deep.equal([
                 { etternavn: 'Akselsen' },
                 { etternavn: 'Albertsen' },
                 { etternavn: 'Johnsen' },
@@ -51,7 +52,7 @@ describe('VeilederPagineringReducer', () => {
                 { etternavn: 'Marsvinsen' }
             ];
 
-            expect(sorterPaaEtternavn(veiledere, 'descending')).to.deep.equal([
+            expect(sorterPaaEtternavn(veiledere, DESCENDING)).to.deep.equal([
                 { etternavn: 'Marsvinsen' },
                 { etternavn: 'Johnsen' },
                 { etternavn: 'Albertsen' },
@@ -79,7 +80,7 @@ describe('VeilederPagineringReducer', () => {
                 { portefoljestorrelse: 2 }
             ];
 
-            expect(sorterPaaPortefoljestorrelse(veiledere, 'ascending')).to.deep.equal([
+            expect(sorterPaaPortefoljestorrelse(veiledere, ASCENDING)).to.deep.equal([
                 { portefoljestorrelse: 2 },
                 { portefoljestorrelse: 5 },
                 { portefoljestorrelse: 10 },
@@ -94,7 +95,7 @@ describe('VeilederPagineringReducer', () => {
                 { portefoljestorrelse: 2 }
             ];
 
-            expect(sorterPaaPortefoljestorrelse(veiledere, 'ascending')).to.deep.equal([
+            expect(sorterPaaPortefoljestorrelse(veiledere, ASCENDING)).to.deep.equal([
                 { portefoljestorrelse: 2 },
                 { portefoljestorrelse: 5 },
                 { portefoljestorrelse: 10 },

@@ -14,6 +14,7 @@ import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
+import { ASCENDING, DESCENDING } from '../konstanter';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -51,9 +52,9 @@ class VeilederPortefoljeVisning extends Component {
         } = this.props;
         let valgtRekkefolge = '';
         if (felt !== sorteringsfelt) {
-            valgtRekkefolge = 'ascending';
+            valgtRekkefolge = ASCENDING;
         } else {
-            valgtRekkefolge = sorteringsrekkefolge === 'ascending' ? 'descending' : 'ascending';
+            valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
         settSortering(valgtRekkefolge, felt);
         hentPortefolje(valgtEnhet.enhet.enhetId, veileder, valgtRekkefolge, felt, fraIndex);

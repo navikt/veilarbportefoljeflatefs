@@ -12,6 +12,7 @@ import {
 import Paginering from '../paginering/paginering';
 import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
 import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
+import { ASCENDING, DESCENDING } from '../konstanter';
 
 class EnhetsportefoljeVisning extends Component {
     componentWillMount() {
@@ -42,9 +43,9 @@ class EnhetsportefoljeVisning extends Component {
 
         let valgtRekkefolge = '';
         if (felt !== sorteringsfelt) {
-            valgtRekkefolge = 'ascending';
+            valgtRekkefolge = ASCENDING;
         } else {
-            valgtRekkefolge = sorteringsrekkefolge === 'ascending' ? 'descending' : 'ascending';
+            valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
         settSortering(valgtRekkefolge, felt);
         hentPortefolje(

@@ -14,6 +14,7 @@ import {
 } from '../ducks/veilederpaginering';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { leggEnhetIUrl } from '../utils/utils';
+import { ASCENDING, DESCENDING } from '../konstanter';
 
 class VeiledereSide extends Component {
     componentWillMount() {
@@ -32,12 +33,12 @@ class VeiledereSide extends Component {
 
         const avgjorNySortering = (felt) => {
             if (currentSortering.felt === felt) {
-                if (currentSortering.rekkefolge === 'descending') {
-                    return { felt, rekkefolge: 'ascending' };
+                if (currentSortering.rekkefolge === DESCENDING) {
+                    return { felt, rekkefolge: ASCENDING };
                 }
-                return { felt, rekkefolge: 'descending' };
+                return { felt, rekkefolge: DESCENDING };
             }
-            return { felt, rekkefolge: 'ascending' };
+            return { felt, rekkefolge: ASCENDING };
         };
         const veiledereMedPortefoljestorrelser = (veilederListeParam, portefoljestorrelserParam) =>
             veilederListeParam.map((veileder) => {

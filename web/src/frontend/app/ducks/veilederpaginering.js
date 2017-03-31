@@ -1,3 +1,5 @@
+import { DESCENDING, IKKE_SATT } from '../konstanter';
+
 // Actions
 export const SETT_LISTE = 'veilederpaginering/settliste/OK';
 export const SETT_SUBLISTE = 'veilederpaginering/settsubliste/OK';
@@ -27,11 +29,11 @@ export function comparePortefoljestorrelser(a, b) {
 }
 
 export function sorterPaaEtternavn(veiledere, rekkefolge) {
-    return rekkefolge === 'descending' ? veiledere.sort(compareEtternavn).reverse() : veiledere.sort(compareEtternavn);
+    return rekkefolge === DESCENDING ? veiledere.sort(compareEtternavn).reverse() : veiledere.sort(compareEtternavn);
 }
 
 export function sorterPaaPortefoljestorrelse(veiledere, rekkefolge) {
-    return rekkefolge === 'descending' ?
+    return rekkefolge === DESCENDING ?
         veiledere.sort(comparePortefoljestorrelser).reverse() :
         veiledere.sort(comparePortefoljestorrelser);
 }
@@ -42,8 +44,8 @@ const initialState = {
     fraIndeksForSubListe: 0,
     sideStorrelse: 20,
     currentSortering: {
-        felt: 'ikke_satt',
-        rekkefolge: 'ikke_satt'
+        felt: IKKE_SATT,
+        rekkefolge: IKKE_SATT
     }
 };
 
