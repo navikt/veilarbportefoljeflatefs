@@ -4,10 +4,36 @@ export const SETT_SUBLISTE = 'veilederpaginering/settsubliste/OK';
 export const KLARER = 'veilederpaginering/klarer/OK';
 export const SETT_FRA_INDEKS_FOR_SUBLISTE = 'veilederpaginering/settfraindeksforsubliste/OK';
 export const SETT_NY_SORTERING = 'veilederpaginering/settNySortering/OK';
+export const SORTER_PAA_ETTERNAVN = 'veilederpaginering/sorterPaaEtternavn/OK';
+export const SORTER_PAA_PORTEFOLJESTORRELSE = 'veilederpaginering/sorterPaaPortefoljestorrelse/OK';
 
 // Utils
 export function til(fra, antall, totalt) {
     return fra + antall < totalt ? fra + antall : totalt;
+}
+
+export function compareEtternavn(a, b) {
+    return a.etternavn.localeCompare(b.etternavn, 'no-bok', { sensitivity: 'accent' });
+}
+
+export function comparePortefoljestorrelser(a, b) {
+    if (a.portefoljestorrelse < b.portefoljestorrelse) {
+        return -1;
+    }
+    if (a.portefoljestorrelse > b.portefoljestorrelse) {
+        return 1;
+    }
+    return 0;
+}
+
+export function sorterPaaEtternavn(veiledere, rekkefolge) {
+    return rekkefolge === 'descending' ? veiledere.sort(compareEtternavn).reverse() : veiledere.sort(compareEtternavn);
+}
+
+export function sorterPaaPortefoljestorrelse(veiledere, rekkefolge) {
+    return rekkefolge === 'descending' ?
+        veiledere.sort(comparePortefoljestorrelser).reverse() :
+        veiledere.sort(comparePortefoljestorrelser);
 }
 
 const initialState = {
@@ -39,6 +65,18 @@ export default function reducer(state = initialState, action) {
             return { ...state, fraIndeksForSubListe: action.fraIndeks };
         case SETT_NY_SORTERING:
             return { ...state, currentSortering: action.nySortering };
+        case SORTER_PAA_ETTERNAVN:
+            return {
+                ...state,
+                liste: sorterPaaEtternavn(state.liste, action.nySortering.rekkefolge),
+                currentSortering: action.nySortering
+            };
+        case SORTER_PAA_PORTEFOLJESTORRELSE:
+            return {
+                ...state,
+                liste: sorterPaaPortefoljestorrelse(state.liste, action.nySortering.rekkefolge),
+                currentSortering: action.nySortering
+            };
         default:
             return state;
     }
@@ -65,9 +103,16 @@ export function settSubListeForPaginering(fraIndeks) {
     };
 }
 
-export function settNySortering(nySortering) {
+export function sorterListePaaEtternavn(nySortering) {
     return {
-        type: SETT_NY_SORTERING,
+        type: SORTER_PAA_ETTERNAVN,
+        nySortering
+    };
+}
+
+export function sorterListePaaPortefoljestorrelse(nySortering) {
+    return {
+        type: SORTER_PAA_PORTEFOLJESTORRELSE,
         nySortering
     };
 }
