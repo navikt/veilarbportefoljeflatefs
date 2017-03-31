@@ -63,6 +63,9 @@ function updateBrukerInArray(brukere, action) {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case PENDING:
+            if (state.status === STATUS.OK) {
+                return { ...state, status: STATUS.RELOADING };
+            }
             return { ...state, status: STATUS.PENDING };
         case FEILET:
             return { ...state, status: STATUS.ERROR, data: action.data };

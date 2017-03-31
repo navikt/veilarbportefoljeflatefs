@@ -2,6 +2,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
 import { veilederShape, brukerShape, portefoljeShape } from '../proptype-shapes';
 import { markerAlleBrukere } from './../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
@@ -34,8 +35,10 @@ class EnhetsportefoljeTabell extends Component {
     }
 
     render() {
-        const { brukere, veiledere, settSomMarkertAlle,
-            settSomMarkert, portefolje, modalSkalVises, toggleSkjulModal, valgtEnhet } = this.props;
+        const {
+            brukere, veiledere, settSomMarkertAlle,
+            settSomMarkert, portefolje, modalSkalVises, toggleSkjulModal, valgtEnhet
+        } = this.props;
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
 
@@ -43,20 +46,18 @@ class EnhetsportefoljeTabell extends Component {
         return (
             <div>
                 <TomPortefoljeModal skjulModal={toggleSkjulModal} visModal={modalSkalVises} />
-                <table className="tabell portefolje-tabell typo-undertekst">
+                <table className="tabell portefolje-tabell typo-avsnitt">
                     <thead className="extra-head">
                         <tr>
                             <th />
-                            <th>Bruker</th>
-                            <th />
-                            <th>Veileder</th>
-                            <th />
-                            <th />
+                            <th colSpan="2">Bruker</th>
+                            <th colSpan="3">Veileder</th>
                         </tr>
                     </thead>
                     <thead>
                         <tr>
                             <th>
+                                { /* TODO hent checkbokser fra nav-frontend-skjema */}
                                 <div className="skjema__input">
                                     <input
                                         className="checkboks"
@@ -117,7 +118,7 @@ class EnhetsportefoljeTabell extends Component {
                             <th>
                                 <a
                                     href={`https://${window.location.hostname}/veilarbpersonflatefs/` +
-                                    `${bruker.fnr}?enhet=${valgtEnhet}`}
+                                `${bruker.fnr}?enhet=${valgtEnhet}`}
                                     className="til-bruker-link"
                                 >
                                     {settSammenNavn(bruker)}
@@ -125,19 +126,21 @@ class EnhetsportefoljeTabell extends Component {
                             </th>
                             <td>{bruker.fnr}</td>
                             {
-                        bruker.veilederId ? <td className="veileder-td">{veiledere
-                            .filter((veileder) => veileder.ident === bruker.veilederId)
-                            .map((veileder) => (veileder.navn || veileder.ident))}</td>
-                            :
-                        <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
-                    }
+                            bruker.veilederId ? <td className="veileder-td">{veiledere
+                                    .filter((veileder) => veileder.ident === bruker.veilederId)
+                                    .map((veileder) => (veileder.navn || veileder.ident))}</td>
+                                :
+                            <td>
+                                <Tabelletiketter type="nybruker">Ny bruker</Tabelletiketter>
+                            </td>
+                        }
                             <td />
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ?
                                     <span className="etikett etikett--fokus">Sikkerhetstiltak</span> : null}
                                 {bruker.diskresjonskode != null ?
                                     <span className="etikett etikett--fokus">{`Kode ${bruker.diskresjonskode}`}</span>
-                            : null}
+                                : null}
                                 {bruker.egenAnsatt === true ?
                                     <span className="etikett etikett--fokus">Egen ansatt</span> : null}
                                 {bruker.erDoed === true ?
