@@ -2,7 +2,7 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { endreFiltervalg } from '../ducks/filtrering';
-import { hentStatusTall } from '../ducks/statustall';
+import { hentStatusTall, hentStatusTallForVeileder } from '../ducks/statustall';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 
 class FiltreringStatus extends Component {
@@ -21,7 +21,21 @@ class FiltreringStatus extends Component {
 
     render() {
         const { nyeBrukere, inaktiveBrukere } = this.props.filtervalg;
-
+        const nyeBrukereCheckbox = (
+            <div className="skjema__input">
+                <input
+                    className="checkboks"
+                    id="nyeBrukere"
+                    type="checkbox"
+                    onChange={this.handleChange}
+                    checked={nyeBrukere}
+                />
+                <label htmlFor="nyeBrukere">
+                    <FormattedMessage id="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox" />
+                    &nbsp;({this.props.statustall.data.nyeBrukere})
+                </label>
+            </div>
+        );
         return (
             <div className="filtrering-oversikt panel">
                 <div className="typo-element blokk-xs">
@@ -30,19 +44,7 @@ class FiltreringStatus extends Component {
                         values={{ antall: this.props.statustall.data.totalt }}
                     />
                 </div>
-                <div className="skjema__input">
-                    <input
-                        className="checkboks"
-                        id="nyeBrukere"
-                        type="checkbox"
-                        onChange={this.handleChange}
-                        checked={nyeBrukere}
-                    />
-                    <label htmlFor="nyeBrukere">
-                        <FormattedMessage id="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox" />
-                        &nbsp;({this.props.statustall.data.nyeBrukere})
-                    </label>
-                </div>
+                { this.props.statustall.data.nyeBrukere !== null ? nyeBrukereCheckbox : null }
                 <div className="skjema__input">
                     <input
                         className="checkboks"
@@ -85,10 +87,18 @@ const mapStateToProps = (state) => ({
     statustall: state.statustall
 });
 
+const statusTallHenter = (dispatch, enhet, veileder, filtergruppe) => {
+    if (filtergruppe === 'enhet') {
+        dispatch(hentStatusTall(enhet));
+    } else {
+        dispatch(hentStatusTallForVeileder(enhet, veileder.ident));
+    }
+};
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
     endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(
         filterId, filtervalg, ownProps.filtergruppe, ownProps.veileder)),
-    fetchStatusTall: (enhet) => dispatch(hentStatusTall(enhet))
+    fetchStatusTall: (enhet) => statusTallHenter(dispatch, enhet, ownProps.veileder, ownProps.filtergruppe)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltreringStatus);

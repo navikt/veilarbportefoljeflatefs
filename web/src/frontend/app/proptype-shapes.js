@@ -64,6 +64,6 @@ export const filtervalgShape = PT.shape({
 
 export const statustallShape = PT.shape({
     totalt: PT.number.isRequired,
-    nyeBrukere: PT.number.isRequired,
+    nyeBrukere: PT.number,
     inaktiveBrukere: PT.number.isRequired
 });
