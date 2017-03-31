@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { hentStatusTall } from '../ducks/statustall';
-import { statustallShape, veilederShape } from '../proptype-shapes';
+import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 
 class FiltreringStatus extends Component {
     constructor(props) {
@@ -20,7 +20,7 @@ class FiltreringStatus extends Component {
     }
 
     render() {
-        const { nyeBrukere, inaktiveBrukere } = this.props;
+        const { nyeBrukere, inaktiveBrukere } = this.props.filtervalg;
 
         return (
             <div className="filtrering-oversikt panel">
@@ -63,29 +63,24 @@ class FiltreringStatus extends Component {
 
 FiltreringStatus.defaultProps = {
     veileder: {
-        veileder: {
-            ident: '',
-            navn: '',
-            fornavn: '',
-            etternavn: ''
-        }
+        ident: '',
+        navn: '',
+        fornavn: '',
+        etternavn: ''
     }
 };
 
 FiltreringStatus.propTypes = {
     endreFilter: PT.func.isRequired,
-    nyeBrukere: PT.bool.isRequired,
-    inaktiveBrukere: PT.bool.isRequired,
     fetchStatusTall: PT.func.isRequired,
     enhet: PT.string.isRequired,
     statustall: PT.shape({ data: statustallShape.isRequired }).isRequired,
     filtergruppe: PT.string.isRequired,
-    veileder: veilederShape
+    veileder: veilederShape,
+    filtervalg: filtervalgShape.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    nyeBrukere: state.filtrering.nyeBrukere,
-    inaktiveBrukere: state.filtrering.inaktiveBrukere,
     enhet: state.enheter.valgtEnhet.enhet.enhetId,
     statustall: state.statustall
 });

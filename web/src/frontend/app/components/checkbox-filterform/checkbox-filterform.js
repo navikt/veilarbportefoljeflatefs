@@ -7,9 +7,15 @@ import { veilederShape } from '../../proptype-shapes';
 function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-line react/prop-types
     const fieldElements = Object.values(fields)
         .map((field) => (
-            <div key={field.input.name} className="skjema__input">
-                <Field id={field.input.name} {...field.input} component="input" type="checkbox" className="checkboks" />
-                <label htmlFor={field.input.name}>{valg[field.input.name]}</label>
+            <div key={field.input.name} className="skjemaelement skjemaelement--horisontal">
+                <Field
+                    id={field.input.name}
+                    component="input"
+                    type="checkbox"
+                    className="skjemaelement__input checkboks"
+                    {...field.input}
+                />
+                <label htmlFor={field.input.name} className="skjemaelement__label">{valg[field.input.name]}</label>
             </div>
         ));
 
@@ -36,17 +42,17 @@ function CheckboxFilterform({ pristine, handleSubmit, form, actions, valg, close
     const submitknapp = !pristine ? (
         <button className={knappCls} type="submit">Velg</button>
         ) : (
-            <button className={knappCls} onClick={closeDropdown}>Lukk</button>
+            <button className={knappCls} type="button" onClick={closeDropdown}>Lukk</button>
         );
 
     const submithandler = handleSubmit(prepSubmit(form, actions.endreFiltervalg, closeDropdown));
 
     return (
-        <form className="checkbox-filterform" onSubmit={submithandler}>
+        <form className="skjema checkbox-filterform" onSubmit={submithandler}>
             <div className="checkbox-filterform__valg">
                 <Fields names={Object.keys(valg)} valg={valg} component={renderFields} />
             </div>
-            <div className="knapperad">
+            <div className="knapperad blokk-xxs">
                 {submitknapp}
             </div>
         </form>

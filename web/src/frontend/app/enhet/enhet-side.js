@@ -27,10 +27,10 @@ class EnhetSide extends Component {
         }
 
         return (
-            <div className="enhet-side">
+            <div className="enhet-side blokk-xl">
                 <Lenker />
                 <p className="typo-infotekst enhetsingress blokk-m">
-                    <FormattedMessage id="enhet.ingresstekst" />
+                    <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                 </p>
                 <FiltreringContainer filtervalg={this.props.filtervalg} />
                 <FiltreringLabelContainer filtervalg={this.props.filtervalg} filtergruppe="enhet" />
