@@ -12,12 +12,11 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import Application from './application';
 import createStore from './store';
-import history from './history';
+import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
-import TilbakeTilEnhetportefolje from './tilbakenavigering/tilbakenavigering-enhet';
-import TilbakeTilVeilederportefolje from './tilbakenavigering/tilbakenavigering-veileder';
+import { getEnhetFromUrl } from './utils/utils';
 /* eslint-enable import/first */
 
 addLocaleData(nb);
@@ -25,17 +24,27 @@ addLocaleData(nb);
 const store = createStore();
 const tekster = { nb: { spinner: 'spinner' } };
 
+function lagrePath() {
+    localStorage.setItem('lastpath', window.location.pathname.replace(basename, ''));
+}
+
+function redirect() {
+    const lastPath = localStorage.getItem('lastpath');
+    if (lastPath) {
+        history.replace(`${lastPath}?enhet=${getEnhetFromUrl()}`);
+    }
+}
+
 render(
     (
         <Provider store={store}>
             <IntlProvider defaultLocale="nb" locale="nb" messages={tekster}>
                 <Router history={history}>
                     <Route path="/" component={Application}>
-                        <Route path="enhet" component={EnhetSide} />
-                        <Route path="veiledere" component={VeiledereSide} />
-                        <Route path="portefolje(/:ident)" component={MinOversiktSide} />
-                        <Route path="tilbaketilenhet" component={TilbakeTilEnhetportefolje} />
-                        <Route path="tilbaketilveileder" component={TilbakeTilVeilederportefolje} />
+                        <Route onEnter={lagrePath} path="enhet" component={EnhetSide} />
+                        <Route onEnter={lagrePath} path="veiledere" component={VeiledereSide} />
+                        <Route onEnter={lagrePath} path="portefolje(/:ident)" component={MinOversiktSide} />
+                        <Route onEnter={redirect} path="tilbake" />
                     </Route>
                 </Router>
             </IntlProvider>

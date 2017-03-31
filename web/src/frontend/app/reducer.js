@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import persistent from './utils/persistentReducer';
 import enheterReducer from './ducks/enheter';
 import ledeteksterReducer from './ducks/ledetekster';
 import portefoljeReducer from './ducks/portefolje';
@@ -9,6 +10,7 @@ import pagineringReducer from './ducks/paginering';
 import filtreringReducer from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
+import { slettCleanIUrl } from './utils/utils';
 
 export default combineReducers({
     enheter: enheterReducer,
@@ -18,7 +20,8 @@ export default combineReducers({
     portefoljestorrelser: portefoljestorrelserReducer,
     paginering: pagineringReducer,
     statustall: statustallReducer,
-    filtrering: filtreringReducer,
+    filtrering: persistent('finstadsLokaleLagringsmedium', location, filtreringReducer, slettCleanIUrl),
     modal: modalReducer,
     form: formReducer
 });
+
