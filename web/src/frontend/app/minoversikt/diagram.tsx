@@ -1,7 +1,7 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import Chart from './chart';
 
-const Diagram = ({ kategori }) => {
+export function Diagram (props: { kategori: string }) {
     const chartsConfig = {
         chart: {
             type: 'column'
@@ -62,14 +62,10 @@ const Diagram = ({ kategori }) => {
     };
     return (
         <div>
-            <h1>{kategori}</h1>
+            <h1>{props.kategori}</h1>
             <Chart type="Chart" options={chartsConfig} container="chart" />
         </div>
     );
-};
-
-Diagram.propTypes = {
-    kategori: PT.string.isRequired
-};
+}
 
 export default Diagram;
