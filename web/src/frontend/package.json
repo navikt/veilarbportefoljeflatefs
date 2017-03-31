@@ -85,7 +85,7 @@
     "build:html": "node script/copy-html.js",
     "dev:less": "autoless --interval 100 ./app ./../main/webapp/css",
     "dev:ts": "tsc && parallelshell \"tsc -w\"  \"webpack -w\" \"npm run dev:less\"",
-    "dev:html": "node script/copy-html.js --development",
+    "dev:html": "node script/copy-html-dev.js --development",
     "dev": "npm run dev:html && npm run dev:ts"
   }
 }
