@@ -11,8 +11,8 @@ const getConfig = (initiellEnhet = undefined) => {
         {
             lenker: [
                 ['/mia', 'Arbeidsmarkedet'],
-                [`/veilarbportefoljeflatefs/enhet?enhet=${initiellEnhet}`, 'Enhetsportefolje'],
-                [`/veilarbportefoljeflatefs/portefolje?enhet=${initiellEnhet}`, 'Veilederportefølje'],
+                [`/veilarbportefoljeflatefs/enhet?enhet=${initiellEnhet}`, 'Enhetens oversikt'],
+                [`/veilarbportefoljeflatefs/portefolje?enhet=${initiellEnhet}`, 'Min oversikt'],
                 ['/modiabrukerdialog', 'Modia']
             ],
             tittel: ''
@@ -30,7 +30,7 @@ const getConfig = (initiellEnhet = undefined) => {
             handlePersonsokSubmit,
             initiellEnhet,
             egendefinerteLenker: lenker,
-            applicationName: 'Oppfølging'
+            applicationName: 'Arbeidsrettet oppfølging'
         }
     };
     return config;

@@ -17,7 +17,7 @@ class FiltreringContainer extends Component {
     render() {
         const { veiledere, valgtVeileder, velgVeileder, brukere } = this.props;
         return (
-            <div>
+            <div className="blokk-m">
                 <Ekspanderbartpanel
                     className="custom-ekspanderbartpanel" tittel="Status"
                     tittelProps={{ type: 'systemtittel', tag: 'span' }}

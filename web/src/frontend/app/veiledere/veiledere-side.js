@@ -50,7 +50,7 @@ class VeiledereSide extends Component {
             <div className="veiledere-side">
                 <Lenker routes={routes} />
                 <p className="typo-infotekst enhetsingress">
-                    <FormattedMessage id="enhet.ingresstekst" />
+                    <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
                 </p>
                 <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
                     <FormattedMessage

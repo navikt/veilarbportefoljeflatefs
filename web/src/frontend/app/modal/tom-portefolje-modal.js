@@ -6,6 +6,8 @@ Normaltekst
 } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 
+Modal.setAppElement('#applikasjon');
+
 function TomPortefoljeModal({ skjulModal, visModal }) {
     const modal = (
         <Modal
