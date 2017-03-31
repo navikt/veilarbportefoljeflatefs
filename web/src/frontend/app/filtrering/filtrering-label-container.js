@@ -1,10 +1,9 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import FiltreringLabel from './filtrering-label';
-import FilterKonstanter from './../filtrering/filter-konstanter';
-import { slettEnkeltFilter, clearFiltervalg } from '../../ducks/filtrering';
-import { filtervalgShape } from '../../proptype-shapes';
+import FilterKonstanter from './filter-konstanter';
+import { slettEnkeltFilter, clearFiltervalg } from '../ducks/filtrering';
+import { filtervalgShape, veilederShape } from '../proptype-shapes';
 
 function FiltreringLabelContainer({ filtervalg, actions: { slettAlle, slettEnkelt } }) {
     const filterElementer = Object.entries(filtervalg)
@@ -47,19 +46,30 @@ function FiltreringLabelContainer({ filtervalg, actions: { slettAlle, slettEnkel
     );
 }
 
+FiltreringLabelContainer.defaultProps = {
+    veileder: {
+        ident: '',
+        navn: '',
+        fornavn: '',
+        etternavn: ''
+    }
+};
+
 FiltreringLabelContainer.propTypes = {
     actions: PT.shape({
         slettAlle: PT.func.isRequired,
         slettEnkelt: PT.func.isRequired
     }).isRequired,
-    filtervalg: filtervalgShape.isRequired
+    filtervalg: filtervalgShape.isRequired,
+    filtergruppe: PT.string.isRequired,
+    veileder: veilederShape
 };
 
-const mapStateToProps = (state) => ({
-    filtervalg: state.filtrering
-});
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ slettAlle: clearFiltervalg, slettEnkelt: slettEnkeltFilter }, dispatch)
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    actions: {
+        slettAlle: () => dispatch(clearFiltervalg(ownProps.filtergruppe, ownProps.veileder)),
+        slettEnkelt: (...args) => dispatch(slettEnkeltFilter(...args, ownProps.filtergruppe, ownProps.veileder))
+    }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FiltreringLabelContainer);
+export default connect(null, mapDispatchToProps)(FiltreringLabelContainer);

@@ -10,8 +10,8 @@ import {
     markerAlleBrukere
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
-import { enhetShape, veilederShape } from './../proptype-shapes';
-import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
+import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
+import { eksporterPortefoljeTilLocalStorage } from '../ducks/utils';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 
 const settSammenNavn = (bruker) => {
@@ -28,14 +28,27 @@ const renderUtlopsdato = (utlopsdato) => {
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
-        const { sorteringsrekkefolge, sorteringsfelt, hentPortefolje, valgtEnhet, veileder } = this.props;
-        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, sorteringsrekkefolge, sorteringsfelt);
+        const {
+            sorteringsrekkefolge,
+            sorteringsfelt,
+            hentPortefolje,
+            valgtEnhet,
+            veileder,
+            filtervalg,
+            fraIndex,
+            antall
+        } = this.props;
+
+        hentPortefolje(
+            valgtEnhet.enhet.enhetId, veileder, sorteringsfelt, sorteringsrekkefolge, fraIndex, antall, filtervalg
+        );
+
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
         this.settSorteringNavnOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this, 'etternavn');
     }
     componentDidMount() {
         const { valgtEnhet, veileder } = this.props;
-        eksporterVeilederportefoljeTilLocalStorage(veileder, valgtEnhet.enhet, location.pathname);
+        eksporterPortefoljeTilLocalStorage(veileder, valgtEnhet.enhet, location.pathname, 'previousVeilederState');
     }
 
     settSorteringOgHentPortefolje(felt) {
@@ -46,7 +59,9 @@ class VeilederPortefoljeVisning extends Component {
             fraIndex,
             hentPortefolje,
             veileder,
-            valgtEnhet
+            valgtEnhet,
+            filtervalg,
+            antall
         } = this.props;
         let valgtRekkefolge = '';
         if (felt !== sorteringsfelt) {
@@ -55,7 +70,9 @@ class VeilederPortefoljeVisning extends Component {
             valgtRekkefolge = sorteringsrekkefolge === 'ascending' ? 'descending' : 'ascending';
         }
         settSortering(valgtRekkefolge, felt);
-        hentPortefolje(valgtEnhet.enhet.enhetId, veileder, valgtRekkefolge, felt, fraIndex);
+        hentPortefolje(
+            valgtEnhet.enhet.enhetId, veileder, sorteringsfelt, valgtRekkefolge, fraIndex, antall, filtervalg
+        );
     }
 
 
@@ -105,9 +122,9 @@ class VeilederPortefoljeVisning extends Component {
                 <Paginering
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
-                    hentListe={(fra, antall) =>
+                hentListe={(fra, antall) =>
                         hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
-                            sorteringsrekkefolge, sorteringsfelt, fra, antall)}
+                            sorteringsfelt, sorteringsrekkefolge, fra, antall, filtervalg)}
                     tekst={pagineringTekst}
                     sideStorrelse={20}
                 />
@@ -222,7 +239,8 @@ VeilederPortefoljeVisning.propTypes = {
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
     settSomMarkertAlle: PT.func.isRequired,
-    filtervalg: PT.object
+    filtervalg: filtervalgShape.isRequired,
+    antall: PT.number,
 };
 
 const mapStateToProps = (state) => ({
@@ -230,12 +248,12 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    filtervalg: state.filtrering,
-    veileder: state.portefolje.veileder
+    filtervalg: state.filtreringVeileder,
+    antall: state.paginering.sideStorrelse,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentPortefolje: (enhet, ident, rekkefolge, felt, fra = 0, antall = 20, filtervalg) =>
+    hentPortefolje: (enhet, ident, felt, rekkefolge, fra = 0, antall = 20, filtervalg) =>
         dispatch(hentPortefoljeForVeileder(enhet, ident, rekkefolge, felt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import history from '../history';
 import { veilederShape } from './../proptype-shapes';
 import { settValgtVeileder } from '../ducks/portefolje';
-import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
+import { eksporterPortefoljeTilLocalStorage } from '../ducks/utils';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
 
@@ -12,11 +12,11 @@ import { visModal, skjulModal } from '../ducks/modal';
 class VeilederTabell extends Component {
     componentDidMount() {
         const { valgtEnhet, filtervalg } = this.props;
-        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
+        eksporterPortefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
         this.visModalDersomIngenVeiledere();
     }
 
-    settValgtVeileder(veileder) {
+    settOgNavigerTilValgtVeileder(veileder) {
         const { settVeileder } = this.props;
         settVeileder(veileder);
         history.push(`/portefolje/${veileder.ident}`);
@@ -39,7 +39,7 @@ class VeilederTabell extends Component {
         const veilederElementer = veiledere.map((veileder) => (
             <tr key={veileder.ident}>
                 <th>
-                    <button onClick={() => this.settValgtVeileder(veileder)} className="til-veileder-link">
+                    <button onClick={() => this.settOgNavigerTilValgtVeileder(veileder)} className="til-veileder-link">
                         {`${veileder.navn}`}
                     </button>
                 </th>

@@ -31,11 +31,12 @@ export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, ant
     return fetchToJson(url, config);
 }
 
-export function hentVeiledersPortefolje(enhet, veilederident, sorteringsfelt, rekkefolge, fra, antall) {
+export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, sorteringsfelt, fra, antall, filtervalg) {
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/veileder/` +
         `${veilederident}/portefolje?enhet=${enhet}&fra=${fra}&antall=${antall}` +
         `&sortDirection=${rekkefolge}&sortField=${sorteringsfelt}`;
-    return fetchToJson(url, MED_CREDENTIALS);
+    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
+    return fetchToJson(url, config);
 }
 
 export function hentEnhetsVeiledere(enhetId) {

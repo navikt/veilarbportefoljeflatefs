@@ -1,4 +1,4 @@
-import { range, lag2Sifret } from '../../utils/utils';
+import { range, lag2Sifret } from '../utils/utils';
 
 export const inaktiveBrukere = 'Inaktive brukere';
 export const nyeBrukere = 'Nye brukere';

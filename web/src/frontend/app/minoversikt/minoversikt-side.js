@@ -2,16 +2,15 @@ import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst } from 'nav-frontend-typografi';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
-import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
-import { brukerShape } from '../proptype-shapes';
+import { brukerShape, filtervalgShape } from '../proptype-shapes';
 import { tildelVeileder } from '../ducks/portefolje';
-import Innholdslaster from '../innholdslaster/innholdslaster';
+import FiltreringContainer from '../filtrering/filtrering-container';
+import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 
-function MinOversiktSide({ enheter, brukere, veiledere, velgVeileder, routes, ...props }) {
+function MinOversiktSide({ enheter, veiledere, routes, ...props }) {
     const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
     const innloggetVeileder = { ident: enheter.ident };
     const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
@@ -26,14 +25,6 @@ function MinOversiktSide({ enheter, brukere, veiledere, velgVeileder, routes, ..
             }}
         /></Normaltekst>);
 
-
-    const tildelVeilederVelger =
-        (<TildelVeilederVelger
-            veiledere={veiledere.data.veilederListe}
-            brukere={brukere}
-            velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
-        />);
-
     return (
         <div>
             {veilederFraUrl ?
@@ -45,12 +36,17 @@ function MinOversiktSide({ enheter, brukere, veiledere, velgVeileder, routes, ..
                 {veilederFraUrl ? annenVeilederVarsel : null}
                 <div className="portefolje-side">
                     <LenkerMinoversikt routes={routes} />
-                    <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="undertittel">
-                        {tildelVeilederVelger}
-                    </Ekspanderbartpanel>
-                    <Innholdslaster avhengigheter={[veiledere, enheter]}>
-                        <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
-                    </Innholdslaster>
+                    <FiltreringContainer
+                        filtervalg={props.filtervalg}
+                        filtergruppe="veileder"
+                        veileder={gjeldendeVeileder}
+                    />
+                    <FiltreringLabelContainer
+                        filtervalg={props.filtervalg}
+                        filtergruppe="veileder"
+                        veileder={gjeldendeVeileder}
+                    />
+                    <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
                 </div>
             </section>
         </div>
@@ -63,13 +59,15 @@ MinOversiktSide.propTypes = {
     veiledere: PT.object,
     brukere: PT.arrayOf(brukerShape).isRequired,
     velgVeileder: PT.func.isRequired,
-    params: PT.object.isRequired
+    params: PT.object.isRequired,
+    filtervalg: filtervalgShape.isRequired
 };
 
 const mapStateToProps = (state) => ({
     enheter: state.enheter,
     brukere: state.portefolje.data.brukere,
-    veiledere: state.veiledere
+    veiledere: state.veiledere,
+    filtervalg: state.filtreringVeileder
 });
 
 const mapDispatchToProps = (dispatch) => ({
