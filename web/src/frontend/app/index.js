@@ -1,3 +1,4 @@
+/* eslint-disable no-undef*/
 if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
     require('babel-polyfill'); // eslint-disable-line global-require
 }
@@ -18,6 +19,7 @@ import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
 import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/utils';
 /* eslint-enable import/first */
+/* eslint-disable no-undef */
 
 addLocaleData(nb);
 

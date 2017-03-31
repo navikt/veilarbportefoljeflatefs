@@ -116,7 +116,7 @@ class EnhetsportefoljeTabell extends Component {
                                 </div>
                             </td>
                             <th>
-                                <a
+                                <a// eslint-disable-next-line no-undef
                                     href={`https://${window.location.hostname}/veilarbpersonflatefs/` +
                                 `${bruker.fnr}?enhet=${valgtEnhet}`}
                                     className="til-bruker-link"

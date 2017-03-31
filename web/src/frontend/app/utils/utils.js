@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export*/
+/* eslint-disable import/prefer-default-export, no-undef*/
 import queryString from 'query-string';
 import history from '../history';
 
@@ -17,7 +17,7 @@ export function lag2Sifret(n) {
 }
 
 export function slettCleanIUrl() {
-    const parsed = queryString.parse(location.search);
+    const parsed = queryString.parse(location.search);// eslint-disable-line no-undef
 
     // Objektet returnert fra `queryString.parse` er ikke et ekte objekt. Så derfor denne omstendlige sjekken
     if (!Object.keys(parsed).includes('clean')) {
@@ -38,7 +38,7 @@ export function leggEnhetIUrl(enhet) {
 
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname;
-        window.history.replaceState({}, null, `${pathname}?${stringified}`);
+        window.history.replaceState({}, null, `${pathname}?${stringified}`);// eslint-disable-line no-undef
     }
 }
 

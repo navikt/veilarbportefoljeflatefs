@@ -1,5 +1,5 @@
 function read(scope) {
-    const content = localStorage.getItem(scope);
+    const content = localStorage.getItem(scope);// eslint-disable-line no-undef
     if (!content || content === 'undefined') {
         return undefined;
     }
@@ -7,7 +7,7 @@ function read(scope) {
 }
 
 function write(scope, content) {
-    return localStorage.setItem(scope, JSON.stringify(content));
+    return localStorage.setItem(scope, JSON.stringify(content));// eslint-disable-line no-undef
 }
 
 export default (scope, location, reducer, onClean = () => {}) => (state, action) => {

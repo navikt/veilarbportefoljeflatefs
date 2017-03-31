@@ -19,7 +19,7 @@ export default combineReducers({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     paginering: pagineringReducer,
-    statustall: statustallReducer,
+    statustall: statustallReducer, // eslint-disable-next-line no-undef
     filtrering: persistent('finstadsLokaleLagringsmedium', location, filtreringReducer, slettCleanIUrl),
     modal: modalReducer,
     form: formReducer
