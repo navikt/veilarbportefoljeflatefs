@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import persistent from './utils/persistentReducer';
 import enheterReducer from './ducks/enheter';
 import ledeteksterReducer from './ducks/ledetekster';
 import portefoljeReducer from './ducks/portefolje';
@@ -9,6 +10,7 @@ import pagineringReducer from './ducks/paginering';
 import filtreringReducer from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
+import { slettCleanIUrl } from './utils/utils';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -32,8 +34,8 @@ export default combineReducers({
     portefoljestorrelser: portefoljestorrelserReducer,
     paginering: pagineringReducer,
     statustall: statustallReducer,
-    filtrering: named('enhet', filtreringReducer),
-    filtreringVeileder: named('veileder', filtreringReducer),
+    filtrering: persistent('enhetsState', location, named('enhet', filtreringReducer),slettCleanIUrl),
+    filtreringVeileder: persistent('enhetsState', location, named('veileder', filtreringReducer),slettCleanIUrl),
     modal: modalReducer,
     form: formReducer
 });

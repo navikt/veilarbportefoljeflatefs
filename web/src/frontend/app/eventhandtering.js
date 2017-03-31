@@ -1,9 +1,10 @@
+/* eslint-disable no-undef*/
 const handlePersonsokSubmit = (fnr) => {
     window.location.pathname = `veilarbpersonflatefs/${fnr}`;
 };
 
 const handleChangeEnhet = (enhet) => {
-    window.location.search = (`?enhet=${enhet}`);
+    window.location.search = (`?enhet=${enhet}&clean`);
 };
 
 const getConfig = (initiellEnhet = undefined) => {
