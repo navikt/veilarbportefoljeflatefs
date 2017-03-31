@@ -1,5 +1,6 @@
-/* eslint-disable import/prefer-default-export*/
+/* eslint-disable import/prefer-default-export, no-undef*/
 import queryString from 'query-string';
+import history from '../history';
 
 export function erDev() {
     const url = window.location.href;
@@ -15,6 +16,21 @@ export function lag2Sifret(n) {
     return n < 10 ? `0${n}` : `${n}`;
 }
 
+export function slettCleanIUrl() {
+    const parsed = queryString.parse(location.search);// eslint-disable-line no-undef
+
+    // Objektet returnert fra `queryString.parse` er ikke et ekte objekt. Så derfor denne omstendlige sjekken
+    if (!Object.keys(parsed).includes('clean')) {
+        return;
+    }
+
+    delete parsed.clean;
+
+    const stringified = queryString.stringify(parsed);
+    const pathname = window.location.pathname;
+    window.history.replaceState({}, null, `${pathname}?${stringified}`);
+}
+
 export function leggEnhetIUrl(enhet) {
     if (enhet) {
         const parsed = queryString.parse(location.search);
@@ -22,8 +38,16 @@ export function leggEnhetIUrl(enhet) {
 
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname;
-        window.history.replaceState({}, null, `${pathname}?${stringified}`);
+        window.history.replaceState({}, null, `${pathname}?${stringified}`);// eslint-disable-line no-undef
     }
+}
+
+export function getEnhetFromUrl() {
+    return queryString.parse(location.search).enhet || '';
+}
+
+export function sendBrukerTilUrl(url) {
+    history.replace(url);
 }
 
 export function ytelseFilterErAktiv(ytelse) {

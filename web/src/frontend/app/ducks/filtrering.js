@@ -90,11 +90,3 @@ export function clearFiltervalg(filtergruppe = 'enhet', veileder) {
         oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
     };
 }
-
-// TODO denne burde fjernes
-export function settFiltervalg(filtervalg, filtergruppe = 'enhet', veileder) {
-    return (dispatch, getState) => {
-        dispatch({ type: SETT_FILTERVALG, data: filtervalg, name: filtergruppe });
-        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
-    };
-}

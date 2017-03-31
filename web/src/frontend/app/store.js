@@ -8,7 +8,7 @@ import { erDev } from './utils/utils';
 
 
 function getDebugSessionKey() {
-    const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
+    const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);// eslint-disable-line no-undef
     return (matches && matches.length > 0) ? matches[1] : null;
 }
 

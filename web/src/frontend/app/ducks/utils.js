@@ -11,7 +11,7 @@ export function sjekkStatuskode(response) {
         return response;
     }
     if (response.status === 401) {
-        window.location.href = 'feilsider/401.html';
+        window.location.href = 'feilsider/401.html';// eslint-disable-line no-undef
     }
     const error = new Error(response.statusText);
     error.response = response;
@@ -54,7 +54,7 @@ export function handterFeil(dispatch, action) {
 }
 
 export function fetchToJson(url, config = {}) {
-    return fetch(url, config)
+    return fetch(url, config)// eslint-disable-line no-undef
         .then(sjekkStatuskode)
         .then(toJson);
 }
@@ -68,13 +68,5 @@ export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
             .then(sendResultatTilDispatch(dispatch, OK))
             .catch(handterFeil(dispatch, FEILET));
     };
-}
-
-export function eksporterPortefoljeTilLocalStorage(
-    filtervalg,
-    valgtEnhet,
-    path,
-    localStorageItem = 'previousEnhetState') {
-    localStorage.setItem(localStorageItem, JSON.stringify({ filtervalg, valgtEnhet, path }));
 }
 
