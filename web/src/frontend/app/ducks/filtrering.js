@@ -84,11 +84,3 @@ export function clearFiltervalg() {
         oppdaterPortefolje(getState, dispatch);
     };
 }
-
-// TODO denne burde fjernes
-export function settFiltervalg(filtervalg) {
-    return (dispatch, getState) => {
-        dispatch({ type: SETT_FILTERVALG, data: filtervalg });
-        oppdaterPortefolje(getState, dispatch);
-    };
-}

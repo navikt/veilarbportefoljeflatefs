@@ -11,7 +11,6 @@ import {
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
-import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 
 const settSammenNavn = (bruker) => {
@@ -32,10 +31,6 @@ class VeilederPortefoljeVisning extends Component {
         hentPortefolje(valgtEnhet.enhet.enhetId, veileder, sorteringsrekkefolge, sorteringsfelt);
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
         this.settSorteringNavnOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this, 'etternavn');
-    }
-    componentDidMount() {
-        const { valgtEnhet, veileder } = this.props;
-        eksporterVeilederportefoljeTilLocalStorage(veileder, valgtEnhet.enhet, location.pathname);
     }
 
     settSorteringOgHentPortefolje(felt) {

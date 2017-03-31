@@ -15,6 +15,21 @@ export function lag2Sifret(n) {
     return n < 10 ? `0${n}` : `${n}`;
 }
 
+export function slettCleanIUrl() {
+    const parsed = queryString.parse(location.search);
+
+    // Objektet returnert fra `queryString.parse` er ikke et ekte objekt. Så derfor denne omstendlige sjekken
+    if (!Object.keys(parsed).includes('clean')) {
+        return;
+    }
+
+    delete parsed.clean;
+
+    const stringified = queryString.stringify(parsed);
+    const pathname = window.location.pathname;
+    window.history.replaceState({}, null, `${pathname}?${stringified}`);
+}
+
 export function leggEnhetIUrl(enhet) {
     if (enhet) {
         const parsed = queryString.parse(location.search);
@@ -24,6 +39,10 @@ export function leggEnhetIUrl(enhet) {
         const pathname = window.location.pathname;
         window.history.replaceState({}, null, `${pathname}?${stringified}`);
     }
+}
+
+export function getEnhetFromUrl() {
+    return queryString.parse(location.search).enhet || '';
 }
 
 export function ytelseFilterErAktiv(ytelse) {
