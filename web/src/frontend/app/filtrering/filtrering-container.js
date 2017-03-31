@@ -15,14 +15,14 @@ class FiltreringContainer extends Component {
     }
 
     render() {
-        const { veiledere, valgtVeileder, velgVeileder, brukere, filtergruppe, veileder } = this.props;
+        const { veiledere, valgtVeileder, velgVeileder, brukere, filtergruppe, veileder, filtervalg } = this.props;
         return (
-            <div>
+            <div className="blokk-m">
                 <Ekspanderbartpanel
                     className="custom-ekspanderbartpanel" tittel="Status"
                     tittelProps={{ type: 'systemtittel', tag: 'span' }}
                 >
-                    <FiltreringStatus filtergruppe={this.props.filtergruppe} veileder={veileder} />
+                    <FiltreringStatus filtergruppe={this.props.filtergruppe} veileder={veileder} filtervalg={filtervalg}/>
                 </Ekspanderbartpanel>
                 <Ekspanderbartpanel
                     className="custom-ekspanderbartpanel" tittel="Filter" apen
