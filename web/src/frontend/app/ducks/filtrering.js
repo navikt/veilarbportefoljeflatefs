@@ -1,4 +1,4 @@
-import { hentPortefoljeForEnhet } from './portefolje';
+import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -53,42 +53,48 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-function oppdaterPortefolje(getState, dispatch) {
+function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = {}) {
     const state = getState();
     const enhet = state.enheter.valgtEnhet.enhet.enhetId;
     const rekkefolge = state.portefolje.sorteringsrekkefolge;
     const sorteringfelt = state.portefolje.sorteringsfelt;
     const fra = state.portefolje.data.fraIndex;
     const antall = state.paginering.sideStorrelse;
-    const nyeFiltervalg = state.filtrering;
-    hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
+    let nyeFiltervalg;
+    if (filtergruppe === 'enhet') {
+        nyeFiltervalg = state.filtrering;
+        hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
+    } else if (filtergruppe === 'veileder') {
+        nyeFiltervalg = state.filtreringVeileder;
+        hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
+    }
 }
 
-export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet') {
+export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
     return (dispatch, getState) => {
         dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
-        oppdaterPortefolje(getState, dispatch);
+        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
     };
 }
 
-export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet') {
+export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
     return (dispatch, getState) => {
         dispatch({ type: SLETT_ENKELT_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
-        oppdaterPortefolje(getState, dispatch);
+        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
     };
 }
 
-export function clearFiltervalg(filtergruppe = 'enhet') {
+export function clearFiltervalg(filtergruppe = 'enhet', veileder) {
     return (dispatch, getState) => {
         dispatch({ type: CLEAR_FILTER, name: filtergruppe });
-        oppdaterPortefolje(getState, dispatch);
+        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
     };
 }
 
 // TODO denne burde fjernes
-export function settFiltervalg(filtervalg, filtergruppe = 'enhet') {
+export function settFiltervalg(filtervalg, filtergruppe = 'enhet', veileder) {
     return (dispatch, getState) => {
         dispatch({ type: SETT_FILTERVALG, data: filtervalg, name: filtergruppe });
-        oppdaterPortefolje(getState, dispatch);
+        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
     };
 }

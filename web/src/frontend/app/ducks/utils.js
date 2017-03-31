@@ -70,11 +70,11 @@ export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
     };
 }
 
-export function eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, path) {
-    localStorage.setItem('previousEnhetState', JSON.stringify({ filtervalg, valgtEnhet, path }));
-}
-
-export function eksporterVeilederportefoljeTilLocalStorage(veileder, valgtEnhet, path) {
-    localStorage.setItem('previousVeilederState', JSON.stringify({ veileder, valgtEnhet, path }));
+export function eksporterPortefoljeTilLocalStorage(
+    filtervalg,
+    valgtEnhet,
+    path,
+    localStorageItem = 'previousEnhetState') {
+    localStorage.setItem(localStorageItem, JSON.stringify({ filtervalg, valgtEnhet, path }));
 }
 

@@ -124,9 +124,10 @@ export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 
 }
 
 // Action Creators
-export function hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringsfelt, fra = 0, antall = 20) {
-    // eslint-disable-next-line max-len
-    return doThenDispatch(() => Api.hentVeiledersPortefolje(enhet, veileder.ident, rekkefolge, sorteringsfelt, fra, antall), {
+export function hentPortefoljeForVeileder(
+    enhet, veileder, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
+    return doThenDispatch(() => Api.hentVeiledersPortefolje(
+        enhet, veileder.ident, rekkefolge, sorteringsfelt, fra, antall, filtervalg), {
         OK,
         FEILET,
         PENDING

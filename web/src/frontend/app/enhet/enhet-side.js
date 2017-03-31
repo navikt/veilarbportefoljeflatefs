@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Lenker from './../lenker/lenker';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
-import FiltreringContainer from './filtrering/filtrering-container';
-import FiltreringLabelContainer from './filtrering/filtrering-label-container';
-import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
+import FiltreringContainer from '../filtrering/filtrering-container';
+import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
+import { eksporterPortefoljeTilLocalStorage } from '../ducks/utils';
 import { leggEnhetIUrl } from '../utils/utils';
 
 class EnhetSide extends Component {
@@ -17,7 +17,7 @@ class EnhetSide extends Component {
     componentDidUpdate() {
         // TODO dette burde skje som en del av redux sin oppdatering av filter
         const { filtervalg, valgtEnhet } = this.props;
-        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet.enhet, location.pathname);
+        eksporterPortefoljeTilLocalStorage(filtervalg, valgtEnhet.enhet, location.pathname);
     }
 
     render() {
@@ -32,8 +32,8 @@ class EnhetSide extends Component {
                 <p className="typo-infotekst enhetsingress blokk-m">
                     <FormattedMessage id="enhet.ingresstekst" />
                 </p>
-                <FiltreringContainer />
-                <FiltreringLabelContainer />
+                <FiltreringContainer filtervalg={this.props.filtervalg} />
+                <FiltreringLabelContainer filtervalg={this.props.filtervalg} filtergruppe="enhet" />
                 <EnhetsportefoljeVisning />
             </div>
         );

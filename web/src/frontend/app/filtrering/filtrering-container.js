@@ -1,34 +1,34 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import { veilederShape, brukerShape } from './../../proptype-shapes';
-import { tildelVeileder } from './../../ducks/portefolje';
+import { veilederShape, brukerShape } from '../proptype-shapes';
+import { tildelVeileder } from '../ducks/portefolje';
 import FiltreringStatus from './filtrering-status';
 import FiltreringFilter from './filtrering-filter';
-import { eksporterEnhetsportefoljeTilLocalStorage } from '../../ducks/utils';
-import TildelVeilederVelger from './../tildel-veileder-velger';
+import { eksporterPortefoljeTilLocalStorage } from '../ducks/utils';
+import TildelVeilederVelger from '../enhet/tildel-veileder-velger';
 
 class FiltreringContainer extends Component {
     componentDidUpdate() {
         const { filtervalg, valgtEnhet } = this.props;
-        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
+        eksporterPortefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
     }
 
     render() {
-        const { veiledere, valgtVeileder, velgVeileder, brukere } = this.props;
+        const { veiledere, valgtVeileder, velgVeileder, brukere, filtergruppe, veileder } = this.props;
         return (
             <div>
                 <Ekspanderbartpanel
                     className="custom-ekspanderbartpanel" tittel="Status"
                     tittelProps={{ type: 'systemtittel', tag: 'span' }}
                 >
-                    <FiltreringStatus />
+                    <FiltreringStatus filtergruppe={this.props.filtergruppe} veileder={veileder} />
                 </Ekspanderbartpanel>
                 <Ekspanderbartpanel
                     className="custom-ekspanderbartpanel" tittel="Filter" apen
                     tittelProps={{ type: 'systemtittel', tag: 'span' }}
                 >
-                    <FiltreringFilter />
+                    <FiltreringFilter filtergruppe={filtergruppe} veileder={veileder} />
                 </Ekspanderbartpanel>
                 <Ekspanderbartpanel
                     className="custom-ekspanderbartpanel" tittel="Tildel veileder"
@@ -47,7 +47,14 @@ class FiltreringContainer extends Component {
 }
 
 FiltreringContainer.defaultProps = {
-    valgtVeileder: {}
+    valgtVeileder: {},
+    filtergruppe: 'enhet',
+    veileder: {
+        ident: '',
+        navn: '',
+        fornavn: '',
+        etternavn: ''
+    }
 };
 
 FiltreringContainer.propTypes = {
@@ -56,11 +63,12 @@ FiltreringContainer.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
     valgtVeileder: PT.object,
-    velgVeileder: PT.func.isRequired
+    velgVeileder: PT.func.isRequired,
+    filtergruppe: PT.string,
+    veileder: veilederShape
 };
 
 const mapStateToProps = (state) => ({
-    filtervalg: state.filtrering,
     valgtEnhet: state.enheter.valgtEnhet.enhet.enhetId,
     veiledere: state.veiledere.data.veilederListe,
     brukere: state.portefolje.data.brukere,

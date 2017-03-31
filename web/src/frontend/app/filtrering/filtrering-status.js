@@ -1,9 +1,9 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { endreFiltervalg } from '../../ducks/filtrering';
-import { hentStatusTall } from '../../ducks/statustall';
-import { statustallShape } from '../../proptype-shapes';
+import { endreFiltervalg } from '../ducks/filtrering';
+import { hentStatusTall } from '../ducks/statustall';
+import { statustallShape, veilederShape } from '../proptype-shapes';
 
 class FiltreringStatus extends Component {
     constructor(props) {
@@ -61,13 +61,26 @@ class FiltreringStatus extends Component {
     }
 }
 
+FiltreringStatus.defaultProps = {
+    veileder: {
+        veileder: {
+            ident: '',
+            navn: '',
+            fornavn: '',
+            etternavn: ''
+        }
+    }
+};
+
 FiltreringStatus.propTypes = {
     endreFilter: PT.func.isRequired,
     nyeBrukere: PT.bool.isRequired,
     inaktiveBrukere: PT.bool.isRequired,
     fetchStatusTall: PT.func.isRequired,
     enhet: PT.string.isRequired,
-    statustall: PT.shape({ data: statustallShape.isRequired }).isRequired
+    statustall: PT.shape({ data: statustallShape.isRequired }).isRequired,
+    filtergruppe: PT.string.isRequired,
+    veileder: veilederShape
 };
 
 const mapStateToProps = (state) => ({
@@ -77,8 +90,9 @@ const mapStateToProps = (state) => ({
     statustall: state.statustall
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(filterId, filtervalg)),
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(
+        filterId, filtervalg, ownProps.filtergruppe, ownProps.veileder)),
     fetchStatusTall: (enhet) => dispatch(hentStatusTall(enhet))
 });
 
