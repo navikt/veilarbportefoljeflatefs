@@ -13,17 +13,13 @@ import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape } from './../proptype-shapes';
 import { eksporterVeilederportefoljeTilLocalStorage } from '../ducks/utils';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
+import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
         return '';
     }
     return `${bruker.etternavn}, ${bruker.fornavn}`;
-};
-
-const renderUtlopsdato = (utlopsdato) => {
-    const { dayOfMonth, monthValue, year } = utlopsdato;
-    return <td>`${dayOfMonth}.${monthValue}.${year}`</td>;
 };
 
 class VeilederPortefoljeVisning extends Component {
@@ -177,8 +173,8 @@ class VeilederPortefoljeVisning extends Component {
                                     }
                                     {
                                         ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
-                                            renderUtlopsdato(bruker.utlopsdato)
-                                            : null
+                                            <Utlopsdatokolonne utlopsdato={bruker.utlopsdato}/>
+                                        : null
                                     }
                                     <td className="sikkerhetstiltak-td">
                                         {bruker.sikkerhetstiltak.length > 0 ?
