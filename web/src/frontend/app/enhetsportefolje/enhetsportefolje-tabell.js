@@ -9,7 +9,7 @@ import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
 import { initialState } from '../ducks/filtrering';
 import { ytelseFilterErAktiv } from '../utils/utils';
-import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
+import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato.tsx';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -144,7 +144,7 @@ class EnhetsportefoljeTabell extends Component {
                             <td>{bruker.fnr}</td>
                             {
                                 ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
-                                    <Utlopsdatokolonne utlopsdato={bruker.utlopsdato}/>
+                                    <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
                                     : null
                             }
                             {
