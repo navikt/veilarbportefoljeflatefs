@@ -15,7 +15,7 @@ const initialState = {
         status: STATUS.NOT_STARTED,
         enhet: undefined
     },
-    ident: queryString.parse(location.search).ident// eslint-disable-line no-undef
+    ident: undefined
 };
 
 //  Reducer
