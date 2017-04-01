@@ -9,7 +9,7 @@ import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
 import { initialState } from '../ducks/filtrering';
 import { ytelseFilterErAktiv } from '../utils/utils';
-import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato.tsx';
+import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
