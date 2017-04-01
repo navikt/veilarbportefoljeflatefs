@@ -1,8 +1,8 @@
 import React, { PropTypes as PT } from 'react';
 import { reduxForm, Fields, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { endreFiltervalg } from './../../ducks/filtrering';
+import { veilederShape } from '../../proptype-shapes';
 
 function renderFieldsFactory(form) {
     return ({ names: _names, valg, ...fields }) => { // eslint-disable-line react/prop-types
@@ -63,6 +63,10 @@ function RadioFilterform({ pristine, handleSubmit, form, actions, valg, closeDro
     );
 }
 
+RadioFilterform.defaultProps = {
+    veileder: {}
+};
+
 RadioFilterform.propTypes = {
     pristine: PT.bool.isRequired,
     handleSubmit: PT.func.isRequired,
@@ -71,7 +75,8 @@ RadioFilterform.propTypes = {
     closeDropdown: PT.func.isRequired,
     actions: PT.shape({
         endreFiltervalg: PT.func
-    }).isRequired
+    }).isRequired,
+    veileder: veilederShape // eslint-disable-line react/no-unused-prop-types
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -80,8 +85,10 @@ const mapStateToProps = (state, ownProps) => {
 
     return { initialValues };
 };
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ endreFiltervalg }, dispatch)
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    actions: { endreFiltervalg: (...args) => dispatch(endreFiltervalg(
+        ...args, ownProps.filtergruppe, ownProps.veileder))
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm()(RadioFilterform));

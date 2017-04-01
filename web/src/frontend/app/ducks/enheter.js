@@ -1,4 +1,3 @@
-import queryString from 'query-string';
 import { hentVeiledersEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { leggEnhetIUrl } from '../utils/utils';
@@ -15,7 +14,7 @@ const initialState = {
         status: STATUS.NOT_STARTED,
         enhet: undefined
     },
-    ident: queryString.parse(location.search).ident// eslint-disable-line no-undef
+    ident: undefined
 };
 
 //  Reducer

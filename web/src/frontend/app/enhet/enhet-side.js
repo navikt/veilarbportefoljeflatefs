@@ -2,9 +2,10 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Lenker from './../lenker/lenker';
+import { filtervalgShape } from '../proptype-shapes';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
-import FiltreringContainer from './filtrering/filtrering-container';
-import FiltreringLabelContainer from './filtrering/filtrering-label-container';
+import FiltreringContainer from '../filtrering/filtrering-container';
+import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { leggEnhetIUrl } from '../utils/utils';
 
 class EnhetSide extends Component {
@@ -25,8 +26,8 @@ class EnhetSide extends Component {
                 <p className="typo-infotekst enhetsingress blokk-m">
                     <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                 </p>
-                <FiltreringContainer />
-                <FiltreringLabelContainer />
+                <FiltreringContainer filtervalg={this.props.filtervalg} />
+                <FiltreringLabelContainer filtervalg={this.props.filtervalg} filtergruppe="enhet" />
                 <EnhetsportefoljeVisning />
             </div>
         );
@@ -34,11 +35,13 @@ class EnhetSide extends Component {
 }
 
 EnhetSide.propTypes = {
-    valgtEnhet: PT.object
+    valgtEnhet: PT.object,
+    filtervalg: filtervalgShape.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    valgtEnhet: state.enheter.valgtEnhet
+    valgtEnhet: state.enheter.valgtEnhet,
+    filtervalg: state.filtrering
 });
 
 export default connect(mapStateToProps)(EnhetSide);

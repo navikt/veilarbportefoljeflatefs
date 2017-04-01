@@ -13,7 +13,7 @@ class VeilederTabell extends Component {
         this.visModalDersomIngenVeiledere();
     }
 
-    settValgtVeileder(veileder) {
+    settOgNavigerTilValgtVeileder(veileder) {
         return () => {
             this.props.settVeileder(veileder);
         };
@@ -37,7 +37,7 @@ class VeilederTabell extends Component {
             <tr key={veileder.ident}>
                 <th>
                     <Link
-                        to={`/portefolje/${veileder.ident}`} onClick={this.settValgtVeileder(veileder)}
+                        to={`/portefolje/${veileder.ident}`} onClick={this.settOgNavigerTilValgtVeileder(veileder)}
                         className="til-veileder-link"
                     >
                         {`${veileder.navn}`}
