@@ -28,18 +28,6 @@
     "jsx-a11y/tabindex-no-positive": 2,
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true}]
   },
-  "globals": {
-    "$": false,
-      "fetch": false,
-      "location": false,
-      "window": false,
-      "document": false,
-      "sessionStorage": false,
-      "jwtExpirationImminent": false,
-      "GLOBAL_JWT_UPDATE_RESOLVE": true,
-      "startLoginSequence": false,
-      "localStorage":false
-  },
   "env": {
     "mocha": true
   },
