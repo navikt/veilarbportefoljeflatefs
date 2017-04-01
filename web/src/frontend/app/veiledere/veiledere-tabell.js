@@ -37,7 +37,8 @@ class VeilederTabell extends Component {
             <tr key={veileder.ident}>
                 <th>
                     <Link
-                        to={`/portefolje/${veileder.ident}?clean`} onClick={this.settOgNavigerTilValgtVeileder(veileder)}
+                        to={`/portefolje/${veileder.ident}?clean`}
+                        onClick={this.settOgNavigerTilValgtVeileder(veileder)}
                         className="til-veileder-link"
                     >
                         {`${veileder.navn}`}
