@@ -137,14 +137,15 @@ class EnhetsportefoljeTabell extends Component {
                             <td />
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ?
-                                    <span className="etikett etikett--fokus">Sikkerhetstiltak</span> : null}
+                                    <Tabelletiketter type="sikkerhetstiltak">Sikkerhetstiltak</Tabelletiketter> : null}
                                 {bruker.diskresjonskode != null ?
-                                    <span className="etikett etikett--fokus">{`Kode ${bruker.diskresjonskode}`}</span>
-                                : null}
+                                    <Tabelletiketter type="diskresjonskode">
+                                        {`Kode ${bruker.diskresjonskode}`}
+                                    </Tabelletiketter> : null}
                                 {bruker.egenAnsatt === true ?
-                                    <span className="etikett etikett--fokus">Egen ansatt</span> : null}
+                                    <Tabelletiketter type="egen-ansatt">Egen ansatt</Tabelletiketter> : null}
                                 {bruker.erDoed === true ?
-                                    <span className="etikett etikett--fokus">Død</span> : null}
+                                    <Tabelletiketter type="doed">Død</Tabelletiketter> : null}
                             </td>
                         </tr>)}
                     </tbody>
