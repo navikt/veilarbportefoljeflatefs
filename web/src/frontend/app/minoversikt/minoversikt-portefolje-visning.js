@@ -1,8 +1,8 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
-import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
+import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
 import {
     hentPortefoljeForVeileder,
     settSortering,
