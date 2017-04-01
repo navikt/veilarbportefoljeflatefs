@@ -1,5 +1,6 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
+import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
@@ -194,16 +195,17 @@ class VeilederPortefoljeVisning extends Component {
                                     }
                                     <td className="sikkerhetstiltak-td">
                                         {bruker.sikkerhetstiltak.length > 0 ?
-                                            <span className="sikkerhetstiltak">Sikkerhetstiltak</span> : null}
+                                            <Tabelletiketter type="sikkerhetstiltak">
+                                                Sikkerhetstiltak
+                                            </Tabelletiketter> : null}
                                         {bruker.diskresjonskode !== null ?
-                                            <span className="diskresjonskode">
+                                            <Tabelletiketter type="diskresjonskode">
                                                 {`Kode ${bruker.diskresjonskode}`}
-                                            </span> :
-                                            null}
+                                            </Tabelletiketter> : null}
                                         {bruker.egenAnsatt === true ?
-                                            <span className="egen-ansatt">Egen ansatt</span> : null}
+                                            <Tabelletiketter type="egen-ansatt">Egen ansatt</Tabelletiketter> : null}
                                         {bruker.erDoed === true ?
-                                            <span className="etikett etikett--fokus">Død</span> : null}
+                                            <Tabelletiketter type="doed">Død</Tabelletiketter> : null}
                                     </td>
                                 </tr>)}
                     </tbody>
