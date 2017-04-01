@@ -5,7 +5,7 @@
   "author": "NAV",
   "license": "MIT",
   "devDependencies": {
-    "@types/react": "15.0.20",
+    "@types/react": "15.0.21",
     "@types/react-dom": "0.14.23",
     "autoless": "0.1.7",
     "babel-eslint": "7.2.1",
