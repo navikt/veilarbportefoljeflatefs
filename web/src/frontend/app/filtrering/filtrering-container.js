@@ -14,7 +14,7 @@ function FiltreringContainer({ veiledere, valgtVeileder, velgVeileder, brukere, 
                 className="custom-ekspanderbartpanel" tittel="Status"
                 tittelProps={{ type: 'systemtittel', tag: 'span' }}
             >
-                <FiltreringStatus filtergruppe={this.props.filtergruppe} veileder={veileder} filtervalg={filtervalg}/>
+                <FiltreringStatus filtergruppe={filtergruppe} veileder={veileder} filtervalg={filtervalg} />
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
                 className="custom-ekspanderbartpanel" tittel="Filter" apen

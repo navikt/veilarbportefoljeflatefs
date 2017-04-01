@@ -117,7 +117,7 @@ class VeilederPortefoljeVisning extends Component {
                 <Paginering
                     antallTotalt={antallTotalt}
                     fraIndex={fraIndex}
-                hentListe={(fra, antall) =>
+                    hentListe={(fra, antall) =>
                         hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
                             sorteringsfelt, sorteringsrekkefolge, fra, antall, filtervalg)}
                     tekst={pagineringTekst}
@@ -235,7 +235,7 @@ VeilederPortefoljeVisning.propTypes = {
     clearFeilendeTilordninger: PT.func.isRequired,
     settSomMarkertAlle: PT.func.isRequired,
     filtervalg: filtervalgShape.isRequired,
-    antall: PT.number,
+    antall: PT.number
 };
 
 const mapStateToProps = (state) => ({
@@ -244,7 +244,7 @@ const mapStateToProps = (state) => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     filtervalg: state.filtreringVeileder,
-    antall: state.paginering.sideStorrelse,
+    antall: state.paginering.sideStorrelse
 });
 
 const mapDispatchToProps = (dispatch) => ({

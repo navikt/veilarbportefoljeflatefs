@@ -8,7 +8,7 @@ import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import { brukerShape, filtervalgShape, enhetShape } from '../proptype-shapes';
-import { tildelVeileder } from '../ducks/portefolje';
+import { tildelVeileder, hentPortefoljeForVeileder } from '../ducks/portefolje';
 
 function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
     veiledere, hentPortefolje, valgtEnhet, ...props }) {

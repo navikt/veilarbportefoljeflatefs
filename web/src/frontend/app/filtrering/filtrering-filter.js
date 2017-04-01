@@ -1,4 +1,4 @@
-import React, { PropTypes as PT, Component }  from 'react';
+import React, { PropTypes as PT } from 'react';
 import { Element } from 'nav-frontend-typografi';
 import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';

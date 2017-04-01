@@ -34,8 +34,10 @@ export default combineReducers({
     portefoljestorrelser: portefoljestorrelserReducer,
     paginering: pagineringReducer,
     statustall: statustallReducer,
-    filtrering: persistent('enhetsState', location, named('enhet', filtreringReducer),slettCleanIUrl),
-    filtreringVeileder: persistent('enhetsState', location, named('veileder', filtreringReducer),slettCleanIUrl),
+    // eslint-disable-next-line no-undef
+    filtrering: persistent('enhetsState', location, named('enhet', filtreringReducer), slettCleanIUrl),
+    // eslint-disable-next-line no-undef
+    filtreringVeileder: persistent('enhetsState', location, named('veileder', filtreringReducer), slettCleanIUrl),
     modal: modalReducer,
     form: formReducer
 });
