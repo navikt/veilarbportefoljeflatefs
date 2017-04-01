@@ -2,7 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { Field, Fields, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { endreFiltervalg } from './../../ducks/filtrering';
-import { veilederShape } from '../../proptype-shapes';
+import { veilederShape, filtervalgShape } from '../../proptype-shapes';
 
 function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-line react/prop-types
     const fieldElements = Object.values(fields)
@@ -73,7 +73,8 @@ CheckboxFilterform.propTypes = {
         endreFiltervalg: PT.func
     }).isRequired,
     filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-    veileder: veilederShape // eslint-disable-line react/no-unused-prop-types
+    veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
+    filtervalg: filtervalgShape.isRequired // eslint-disable-line react/no-unused-prop-types
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -81,7 +82,7 @@ const mapStateToProps = (state, ownProps) => {
 
     const initialValues = Object.keys(ownProps.valg).reduce((acc, v) => ({
         ...acc,
-        [v]: state.filtrering[name].includes(v)
+        [v]: ownProps.filtervalg[name].includes(v)
     }), {});
 
     return { initialValues };
