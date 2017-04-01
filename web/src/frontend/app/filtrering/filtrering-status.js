@@ -44,7 +44,7 @@ class FiltreringStatus extends Component {
                         values={{ antall: this.props.statustall.data.totalt }}
                     />
                 </div>
-                { this.props.statustall.data.nyeBrukere !== null ? nyeBrukereCheckbox : null }
+                { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : null }
                 <div className="skjema__input">
                     <input
                         className="checkboks"
