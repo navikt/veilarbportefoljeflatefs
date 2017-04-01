@@ -4,15 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
 import { veilederShape } from './../proptype-shapes';
 import { settValgtVeileder } from '../ducks/portefolje';
-import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
 
 
 class VeilederTabell extends Component {
     componentDidMount() {
-        const { valgtEnhet, filtervalg } = this.props;
-        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
         this.visModalDersomIngenVeiledere();
     }
 
@@ -92,8 +89,6 @@ VeilederTabell.propTypes = {
     settVeileder: PT.func.isRequired,
     portefoljestorrelser: PT.arrayOf(PT.object).isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
-    valgtEnhet: PT.object.isRequired,
-    filtervalg: PT.object.isRequired,
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
     toggleVisModal: PT.func.isRequired,
@@ -101,8 +96,6 @@ VeilederTabell.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    valgtEnhet: state.enheter.valgtEnhet.enhet,
-    filtervalg: state.filtrering,
     modalSkalVises: state.modal.visModal,
     veilederListe: state.veiledere.data.veilederListe
 
