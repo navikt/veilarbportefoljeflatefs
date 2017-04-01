@@ -53,7 +53,13 @@ export const ytelse = {
     AAP_UNNTAK: 'AAP unntak',
     TILTAKSPENGER: 'Tiltakspenger'
 };
-
+export const rettighetsgruppe = {
+    AAP: 'Arbeidsavklaringspenger',
+    DAGP: 'Dagpenger',
+    IYT: 'Ingen livsoppholdsytelser Arena',
+    VENT: 'Ventestønad',
+    VLONN: 'Ventelønn'
+};
 
 export default {
     inaktiveBrukere,
@@ -64,5 +70,6 @@ export default {
     innsatsgruppe,
     formidlingsgruppe,
     servicegruppe,
-    ytelse
+    ytelse,
+    rettighetsgruppe
 };

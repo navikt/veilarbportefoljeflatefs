@@ -11,7 +11,8 @@ import {
     innsatsgruppe,
     formidlingsgruppe,
     servicegruppe,
-    ytelse
+    ytelse,
+    rettighetsgruppe
 } from './filter-konstanter';
 
 function FiltreringFilter({ filtergruppe, veileder }) {
@@ -67,6 +68,14 @@ function FiltreringFilter({ filtergruppe, veileder }) {
                         <CheckboxFilterform
                             form="servicegruppe"
                             valg={servicegruppe}
+                            filtergruppe={filtergruppe}
+                            veileder={veileder}
+                        />
+                    </Dropdown>
+                    <Dropdown name="Rettighetsgruppe">
+                        <CheckboxFilterform
+                            form="rettighetsgruppe"
+                            valg={rettighetsgruppe}
                             filtergruppe={filtergruppe}
                             veileder={veileder}
                         />
