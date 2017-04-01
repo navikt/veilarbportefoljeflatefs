@@ -38,3 +38,11 @@ export function hentStatusTall(enhet) {
         PENDING
     });
 }
+
+export function hentStatusTallForVeileder(enhet, veileder) {
+    return doThenDispatch(() => Api.hentStatusTallForveileder(enhet, veileder), {
+        OK,
+        FEILET,
+        PENDING
+    });
+}

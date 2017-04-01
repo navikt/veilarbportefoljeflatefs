@@ -12,6 +12,20 @@ import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
 import { slettCleanIUrl } from './utils/utils';
 
+function named(name, reducer) {
+    return (state, action) => {
+        if (state === undefined) {
+            // For å få satt initialState
+            return reducer(state, action);
+        }
+
+        if (action.name !== name) {
+            return state;
+        }
+        return reducer(state, action);
+    };
+}
+
 export default combineReducers({
     enheter: enheterReducer,
     ledetekster: ledeteksterReducer,
@@ -19,9 +33,11 @@ export default combineReducers({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     paginering: pagineringReducer,
-    statustall: statustallReducer, // eslint-disable-next-line no-undef
-    filtrering: persistent('finstadsLokaleLagringsmedium', location, filtreringReducer, slettCleanIUrl),
+    statustall: statustallReducer,
+    // eslint-disable-next-line no-undef
+    filtrering: persistent('enhetsState', location, named('enhet', filtreringReducer), slettCleanIUrl),
+    // eslint-disable-next-line no-undef
+    filtreringVeileder: persistent('enhetsState', location, named('veileder', filtreringReducer), slettCleanIUrl),
     modal: modalReducer,
     form: formReducer
 });
-
