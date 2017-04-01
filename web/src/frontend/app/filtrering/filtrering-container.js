@@ -20,7 +20,7 @@ function FiltreringContainer({ veiledere, valgtVeileder, velgVeileder, brukere, 
                 className="custom-ekspanderbartpanel" tittel="Filter" apen
                 tittelProps={{ type: 'systemtittel', tag: 'span' }}
             >
-                <FiltreringFilter filtergruppe={filtergruppe} veileder={veileder} />
+                <FiltreringFilter filtergruppe={filtergruppe} veileder={veileder} filtervalg={filtervalg} />
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
                 className="custom-ekspanderbartpanel" tittel="Tildel veileder"
