@@ -37,7 +37,7 @@ export default combineReducers({
     // eslint-disable-next-line no-undef
     filtrering: persistent('enhetsState', location, named('enhet', filtreringReducer), slettCleanIUrl),
     // eslint-disable-next-line no-undef
-    filtreringVeileder: persistent('enhetsState', location, named('veileder', filtreringReducer), slettCleanIUrl),
+    filtreringVeileder: persistent('veilederState', location, named('veileder', filtreringReducer), slettCleanIUrl),
     modal: modalReducer,
     form: formReducer
 });
