@@ -12,7 +12,7 @@
     "chai": "3.5.0",
     "core-js": "2.4.1",
     "del": "2.2.2",
-    "eslint": "3.18.0",
+    "eslint": "3.19.0",
     "eslint-config-airbnb": "14.1.0",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
