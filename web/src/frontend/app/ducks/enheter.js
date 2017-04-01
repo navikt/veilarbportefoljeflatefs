@@ -1,4 +1,3 @@
-import queryString from 'query-string';
 import { hentVeiledersEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { leggEnhetIUrl } from '../utils/utils';
