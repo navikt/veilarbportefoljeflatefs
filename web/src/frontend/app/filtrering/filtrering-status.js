@@ -77,8 +77,8 @@ FiltreringStatus.propTypes = {
     fetchStatusTall: PT.func.isRequired,
     enhet: PT.string.isRequired,
     statustall: PT.shape({ data: statustallShape.isRequired }).isRequired,
-    filtergruppe: PT.string.isRequired,
-    veileder: veilederShape,
+    filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+    veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
     filtervalg: filtervalgShape.isRequired
 };
 

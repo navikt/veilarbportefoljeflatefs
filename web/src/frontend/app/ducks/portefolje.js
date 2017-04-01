@@ -131,10 +131,10 @@ export function hentPortefoljeForVeileder(
     enhet, veileder, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
     return doThenDispatch(() => Api.hentVeiledersPortefolje(
         enhet, veileder.ident, rekkefolge, sorteringsfelt, fra, antall, filtervalg), {
-        OK,
-        FEILET,
-        PENDING
-    });
+            OK,
+            FEILET,
+            PENDING
+        });
 }
 
 export function settSortering(rekkefolge, felt) {

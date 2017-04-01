@@ -61,8 +61,8 @@ FiltreringLabelContainer.propTypes = {
         slettEnkelt: PT.func.isRequired
     }).isRequired,
     filtervalg: filtervalgShape.isRequired,
-    filtergruppe: PT.string.isRequired,
-    veileder: veilederShape
+    filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+    veileder: veilederShape // eslint-disable-line react/no-unused-prop-types
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

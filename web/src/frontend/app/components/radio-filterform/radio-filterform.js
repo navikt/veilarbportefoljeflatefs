@@ -1,7 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import { reduxForm, Fields, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { endreFiltervalg } from './../../ducks/filtrering';
 import { veilederShape } from '../../proptype-shapes';
 
@@ -77,7 +76,7 @@ RadioFilterform.propTypes = {
     actions: PT.shape({
         endreFiltervalg: PT.func
     }).isRequired,
-    veileder: veilederShape
+    veileder: veilederShape // eslint-disable-line react/no-unused-prop-types
 };
 
 const mapStateToProps = (state, ownProps) => {

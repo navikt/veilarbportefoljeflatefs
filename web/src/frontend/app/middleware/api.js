@@ -36,7 +36,7 @@ export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, sorter
     const url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/veileder/` +
         `${veilederident}/portefolje?enhet=${enhet}&fra=${fra}&antall=${antall}` +
         `&sortDirection=${rekkefolge}&sortField=${sorteringsfelt}`;
-    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
+    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
     return fetchToJson(url, config);
 }
 

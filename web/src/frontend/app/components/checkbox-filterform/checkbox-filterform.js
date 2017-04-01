@@ -1,7 +1,7 @@
-import React, {PropTypes as PT} from "react";
-import {Field, Fields, reduxForm} from "redux-form";
-import {connect} from "react-redux";
-import {endreFiltervalg} from "./../../ducks/filtrering";
+import React, { PropTypes as PT } from 'react';
+import { Field, Fields, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { endreFiltervalg } from './../../ducks/filtrering';
 import { veilederShape } from '../../proptype-shapes';
 
 function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-line react/prop-types
@@ -72,8 +72,8 @@ CheckboxFilterform.propTypes = {
     actions: PT.shape({
         endreFiltervalg: PT.func
     }).isRequired,
-    filtergruppe: PT.string.isRequired,
-    veileder: veilederShape
+    filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+    veileder: veilederShape // eslint-disable-line react/no-unused-prop-types
 };
 
 const mapStateToProps = (state, ownProps) => {
