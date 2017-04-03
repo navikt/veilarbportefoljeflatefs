@@ -3,17 +3,16 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router';
 import DocumentTitle from 'react-document-title';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst } from 'nav-frontend-typografi';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
+import FiltreringContainer from '../filtrering/filtrering-container';
+import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
-import TildelVeilederVelger from './../enhet/tildel-veileder-velger';
-import { brukerShape, enhetShape } from '../proptype-shapes';
+import { brukerShape, filtervalgShape, enhetShape } from '../proptype-shapes';
 import { tildelVeileder, hentPortefoljeForVeileder } from '../ducks/portefolje';
-import Innholdslaster from '../innholdslaster/innholdslaster';
 
 function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
-    brukere, veiledere, hentPortefolje, valgtEnhet, velgVeileder, intl, ...props }) {
+    veiledere, hentPortefolje, valgtEnhet, intl ...props }) {
     const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
     const innloggetVeileder = { ident: enheter.ident };
     const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
@@ -33,42 +32,39 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
             }}
         /></Normaltekst>);
 
-
-    const tildelVeilederVelger =
-        (<TildelVeilederVelger
-            veiledere={veiledere.data.veilederListe}
-            brukere={brukere}
-            velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
-        />);
-
     return (
         <DocumentTitle title={formatMessage({id: 'lenker.min.oversikt'})}>
             <div className="enhet-side blokk-xl">
-                {visesAnnenVeiledersPortefolje ?
-                    <Link to="veiledere" className="typo-normal tilbaketilveileder">
-                        <i className="chevron--venstre"/>
-                        <span>Til veilederoversikt</span>
-                    </Link> : null}
-                <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
-                    { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
-                    <div className="portefolje-side">
-                        <LenkerMinoversikt
-                            minOversiktOnClick={() =>
-                                hentPortefolje(valgtEnhet.enhet.enhetId,
-                                    {ident: enheter.ident}, sorteringsrekkefolge, sorteringsfelt)}
-                        />
-                        <p className="typo-infotekst blokk-m">
-                            <FormattedMessage id="ingresstekst.minoversikt"/>
-                        </p>
-                        <Ekspanderbartpanel tittel="Tildel veileder" tittelProps="undertittel">
-                            {tildelVeilederVelger}
-                        </Ekspanderbartpanel>
-                        <Innholdslaster avhengigheter={[veiledere, enheter]}>
-                            <VeilederPortefoljeVisning veileder={gjeldendeVeileder}/>
-                        </Innholdslaster>
-                    </div>
-                </section>
-            </div>
+            {visesAnnenVeiledersPortefolje ?
+                <Link to="veiledere" className="typo-normal tilbaketilveileder">
+                    <i className="chevron--venstre" />
+                    <span>Til veilederoversikt</span>
+                </Link> : null}
+            <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
+                { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
+                <div className="portefolje-side">
+                    <LenkerMinoversikt
+                        minOversiktOnClick={() =>
+                        hentPortefolje(valgtEnhet.enhet.enhetId,
+                            { ident: enheter.ident }, sorteringsrekkefolge, sorteringsfelt)}
+                    />
+                    <p className="typo-infotekst blokk-m">
+                        <FormattedMessage id="ingresstekst.minoversikt" />
+                    </p>
+                    <FiltreringContainer
+                        filtervalg={props.filtervalg}
+                        filtergruppe="veileder"
+                        veileder={gjeldendeVeileder}
+                    />
+                    <FiltreringLabelContainer
+                        filtervalg={props.filtervalg}
+                        filtergruppe="veileder"
+                        veileder={gjeldendeVeileder}
+                    />
+                    <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
+                </div>
+            </section>
+        </div>
         </DocumentTitle>
     );
 }
@@ -78,10 +74,10 @@ MinOversiktSide.propTypes = {
     veiledere: PT.object,
     brukere: PT.arrayOf(brukerShape).isRequired,
     velgVeileder: PT.func.isRequired,
+    filtervalg: filtervalgShape.isRequired,
     params: PT.object.isRequired,
     hentPortefolje: PT.func.isRequired,
     valgtEnhet: enhetShape.isRequired,
-    filtervalg: PT.object,
     sorteringsfelt: PT.string.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
     intl: intlShape.isRequired
@@ -91,8 +87,8 @@ const mapStateToProps = (state) => ({
     enheter: state.enheter,
     brukere: state.portefolje.data.brukere,
     veiledere: state.veiledere,
+    filtervalg: state.filtreringVeileder,
     valgtEnhet: state.enheter.valgtEnhet,
-    filtervalg: state.filtrering,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge
 });

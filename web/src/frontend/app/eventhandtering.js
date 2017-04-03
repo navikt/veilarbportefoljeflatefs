@@ -1,9 +1,10 @@
+/* eslint-disable no-undef*/
 const handlePersonsokSubmit = (fnr) => {
     window.location.pathname = `veilarbpersonflatefs/${fnr}`;
 };
 
 const handleChangeEnhet = (enhet) => {
-    window.location.search = (`?enhet=${enhet}`);
+    window.location.search = (`?enhet=${enhet}&clean`);
 };
 
 const getConfig = (initiellEnhet = undefined) => {
@@ -11,8 +12,8 @@ const getConfig = (initiellEnhet = undefined) => {
         {
             lenker: [
                 ['/mia', 'Arbeidsmarkedet'],
-                [`/veilarbportefoljeflatefs/enhet?enhet=${initiellEnhet}`, 'Enhetens oversikt'],
-                [`/veilarbportefoljeflatefs/portefolje?enhet=${initiellEnhet}`, 'Min oversikt'],
+                [`/veilarbportefoljeflatefs/enhet?enhet=${initiellEnhet}&clean`, 'Enhetens oversikt'],
+                [`/veilarbportefoljeflatefs/portefolje?enhet=${initiellEnhet}&clean`, 'Min oversikt'],
                 ['/modiabrukerdialog', 'Modia']
             ],
             tittel: ''

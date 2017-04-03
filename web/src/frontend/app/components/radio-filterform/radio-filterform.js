@@ -1,16 +1,22 @@
 import React, { PropTypes as PT } from 'react';
 import { reduxForm, Fields, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import classNames from 'classnames';
 import { endreFiltervalg } from './../../ducks/filtrering';
+import { veilederShape, filtervalgShape } from '../../proptype-shapes';
+import { lagConfig } from './../../filtrering/filter-konstanter';
 
 function renderFieldsFactory(form) {
+    const fieldCls = (className) => classNames('skjemaelement skjemaelement--horisontal', className);
+
     return ({ names: _names, valg, ...fields }) => { // eslint-disable-line react/prop-types
         const fieldElements = Object.values(fields)
             .map((field) => {
                 const { name, value: _value, ...handler } = field.input;
+                const { label, className, ...fieldProps } = lagConfig(valg[field.input.name]);
+
                 return (
-                    <div key={field.input.name} className="skjemaelement skjemaelement--horisontal">
+                    <div key={field.input.name} className={fieldCls(className)} {...fieldProps}>
                         <Field
                             id={field.input.name}
                             name={form} value={name}
@@ -20,7 +26,7 @@ function renderFieldsFactory(form) {
                             {...handler}
                         />
                         <label htmlFor={field.input.name} className="skjemaelement__label">
-                            {valg[field.input.name]}
+                            {label}
                         </label>
                     </div>
                 );
@@ -63,6 +69,10 @@ function RadioFilterform({ pristine, handleSubmit, form, actions, valg, closeDro
     );
 }
 
+RadioFilterform.defaultProps = {
+    veileder: {}
+};
+
 RadioFilterform.propTypes = {
     pristine: PT.bool.isRequired,
     handleSubmit: PT.func.isRequired,
@@ -71,17 +81,21 @@ RadioFilterform.propTypes = {
     closeDropdown: PT.func.isRequired,
     actions: PT.shape({
         endreFiltervalg: PT.func
-    }).isRequired
+    }).isRequired,
+    veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
+    filtervalg: filtervalgShape.isRequired // eslint-disable-line react/no-unused-prop-types
 };
 
 const mapStateToProps = (state, ownProps) => {
     const name = ownProps.form;
-    const initialValues = { [name]: state.filtrering[name] };
+    const initialValues = { [name]: ownProps.filtervalg[name] };
 
     return { initialValues };
 };
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ endreFiltervalg }, dispatch)
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    actions: { endreFiltervalg: (...args) => dispatch(endreFiltervalg(
+        ...args, ownProps.filtergruppe, ownProps.veileder))
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm()(RadioFilterform));

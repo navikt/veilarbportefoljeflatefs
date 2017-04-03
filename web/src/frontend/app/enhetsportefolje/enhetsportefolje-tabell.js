@@ -8,6 +8,8 @@ import { markerAlleBrukere } from './../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
 import { initialState } from '../ducks/filtrering';
+import { ytelseFilterErAktiv } from '../utils/utils';
+import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -44,11 +46,19 @@ class EnhetsportefoljeTabell extends Component {
             modalSkalVises,
             toggleSkjulModal,
             valgtEnhet,
-            sorteringsrekkefolge
+            sorteringsrekkefolge,
+            filtervalg
         } = this.props;
 
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
+
+        const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
+            (<th>
+                <FormattedMessage id="portefolje.tabell.utlopsdato" />
+            </th>)
+            :
+            null;
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         return (
@@ -100,6 +110,7 @@ class EnhetsportefoljeTabell extends Component {
                                     <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                                 </button>
                             </th>
+                            {utlopsdatoHeader}
                             <th>
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
@@ -130,7 +141,7 @@ class EnhetsportefoljeTabell extends Component {
                                 </div>
                             </td>
                             <th>
-                                <a
+                                <a// eslint-disable-next-line no-undef
                                     href={`https://${window.location.hostname}/veilarbpersonflatefs/` +
                                 `${bruker.fnr}?enhet=${valgtEnhet}`}
                                     className="til-bruker-link"
@@ -139,6 +150,11 @@ class EnhetsportefoljeTabell extends Component {
                                 </a>
                             </th>
                             <td>{bruker.fnr}</td>
+                            {
+                                ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
+                                    <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
+                                    : null
+                            }
                             {
                             bruker.veilederId ? <td className="veileder-td">{veiledere
                                     .filter((veileder) => veileder.ident === bruker.veilederId)
@@ -151,14 +167,15 @@ class EnhetsportefoljeTabell extends Component {
                             <td />
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ?
-                                    <span className="etikett etikett--fokus">Sikkerhetstiltak</span> : null}
+                                    <Tabelletiketter type="sikkerhetstiltak">Sikkerhetstiltak</Tabelletiketter> : null}
                                 {bruker.diskresjonskode != null ?
-                                    <span className="etikett etikett--fokus">{`Kode ${bruker.diskresjonskode}`}</span>
-                                : null}
+                                    <Tabelletiketter type="diskresjonskode">
+                                        {`Kode ${bruker.diskresjonskode}`}
+                                    </Tabelletiketter> : null}
                                 {bruker.egenAnsatt === true ?
-                                    <span className="etikett etikett--fokus">Egen ansatt</span> : null}
+                                    <Tabelletiketter type="egen-ansatt">Egen ansatt</Tabelletiketter> : null}
                                 {bruker.erDoed === true ?
-                                    <span className="etikett etikett--fokus">Død</span> : null}
+                                    <Tabelletiketter type="doed">Død</Tabelletiketter> : null}
                             </td>
                         </tr>)}
                     </tbody>
