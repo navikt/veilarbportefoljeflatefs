@@ -48,7 +48,7 @@ function prepSubmit(name, fn, close) {
 function CheckboxFilterform({ pristine, handleSubmit, form, actions, valg, closeDropdown }) {
     const knappCls = ['knapp', 'knapp--mini', !pristine ? 'knapp--hoved' : ''].join(' ');
     const submitknapp = !pristine ? (
-            <button className={knappCls} type="submit">Velg</button>
+        <button className={knappCls} type="submit">Velg</button>
         ) : (
             <button className={knappCls} type="button" onClick={closeDropdown}>Lukk</button>
         );
@@ -58,7 +58,7 @@ function CheckboxFilterform({ pristine, handleSubmit, form, actions, valg, close
     return (
         <form className="skjema checkbox-filterform" onSubmit={submithandler}>
             <div className="checkbox-filterform__valg">
-                <Fields names={Object.keys(valg)} valg={valg} component={renderFields}/>
+                <Fields names={Object.keys(valg)} valg={valg} component={renderFields} />
             </div>
             <div className="knapperad blokk-xxs">
                 {submitknapp}
