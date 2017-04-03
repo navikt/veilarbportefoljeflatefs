@@ -191,7 +191,7 @@ class VeilederPortefoljeVisning extends Component {
                                             <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
                                         : null
                                     }
-                                    <td className="sikkerhetstiltak-td">
+                                    <td>
                                         {bruker.sikkerhetstiltak.length > 0 ?
                                             <Tabelletiketter type="sikkerhetstiltak">
                                                 Sikkerhetstiltak
