@@ -8,7 +8,16 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.(?:css|less|scss|sass)$/, loader: 'ignore-loader' }
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                options: {
+                    presets: ['env'],
+                    plugins: [require('babel-plugin-transform-object-rest-spread')]
+                }
+            },
+            {test: /\.(?:css|less|scss|sass)$/, loader: 'ignore-loader'}
         ]
     }
 };
