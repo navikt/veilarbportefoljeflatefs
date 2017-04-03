@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { endreFiltervalg } from './../../ducks/filtrering';
 import { veilederShape, filtervalgShape } from '../../proptype-shapes';
+import { lagConfig } from './../../filtrering/filter-konstanter';
 
 function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-line react/prop-types
     const fieldCls = (className) => classNames('skjemaelement skjemaelement--horisontal', className);
