@@ -59,6 +59,9 @@ function updateBrukerInArray(brukere, action) {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case PENDING:
+            if (state.status === STATUS.OK) {
+                return { ...state, status: STATUS.RELOADING };
+            }
             return { ...state, status: STATUS.PENDING };
         case FEILET:
             return { ...state, status: STATUS.ERROR, data: action.data };
@@ -124,13 +127,14 @@ export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 
 }
 
 // Action Creators
-export function hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringsfelt, fra = 0, antall = 20) {
-    // eslint-disable-next-line max-len
-    return doThenDispatch(() => Api.hentVeiledersPortefolje(enhet, veileder.ident, rekkefolge, sorteringsfelt, fra, antall), {
-        OK,
-        FEILET,
-        PENDING
-    });
+export function hentPortefoljeForVeileder(
+    enhet, veileder, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
+    return doThenDispatch(() => Api.hentVeiledersPortefolje(
+        enhet, veileder.ident, rekkefolge, sorteringsfelt, fra, antall, filtervalg), {
+            OK,
+            FEILET,
+            PENDING
+        });
 }
 
 export function settSortering(rekkefolge, felt) {

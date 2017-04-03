@@ -2,22 +2,16 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Lenker from './../lenker/lenker';
+import { filtervalgShape } from '../proptype-shapes';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
-import FiltreringContainer from './filtrering/filtrering-container';
-import FiltreringLabelContainer from './filtrering/filtrering-label-container';
-import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
+import FiltreringContainer from '../filtrering/filtrering-container';
+import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { leggEnhetIUrl } from '../utils/utils';
 
 class EnhetSide extends Component {
     componentWillMount() {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
-    }
-
-    componentDidUpdate() {
-        // TODO dette burde skje som en del av redux sin oppdatering av filter
-        const { filtervalg, valgtEnhet } = this.props;
-        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet.enhet, location.pathname);
     }
 
     render() {
@@ -27,13 +21,13 @@ class EnhetSide extends Component {
         }
 
         return (
-            <div className="enhet-side">
+            <div className="enhet-side blokk-xl">
                 <Lenker />
                 <p className="typo-infotekst enhetsingress blokk-m">
                     <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                 </p>
-                <FiltreringContainer />
-                <FiltreringLabelContainer />
+                <FiltreringContainer filtervalg={this.props.filtervalg} />
+                <FiltreringLabelContainer filtervalg={this.props.filtervalg} filtergruppe="enhet" />
                 <EnhetsportefoljeVisning />
             </div>
         );
@@ -42,7 +36,7 @@ class EnhetSide extends Component {
 
 EnhetSide.propTypes = {
     valgtEnhet: PT.object,
-    filtervalg: PT.object
+    filtervalg: filtervalgShape.isRequired
 };
 
 const mapStateToProps = (state) => ({

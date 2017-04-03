@@ -23,6 +23,7 @@ html {
 
 @import "./node_modules/nav-frontend-typografi-style/src/index";
 @import "./node_modules/nav-frontend-core/less/core";
+@import "./node_modules/nav-frontend-grid-style/src/index";
 @import "./node_modules/nav-frontend-modal-style/src/index";
 @import "./node_modules/nav-frontend-ekspanderbartpanel-style/src/index";
 @import "./node_modules/nav-frontend-etiketter-style/src/index";
@@ -31,6 +32,7 @@ html {
 @import "./node_modules/nav-frontend-chevron-style/src/index";
 @import "./node_modules/nav-frontend-knapper-style/src/index";
 @import "./node_modules/nav-frontend-paneler-style/src/mixins";
+@import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
 
 .veilarbportefoljeflatefs {
     @import "./lenker/lenker";
@@ -38,12 +40,12 @@ html {
     @import "./enhetsportefolje/enhetsportefolje";
     @import "./veiledere/veiledere";
     @import "./minoversikt/minoversikt";
-    @import "./enhet/filtrering/filtrering-label";
+    @import "filtrering/filtrering-label";
+    @import "./components/tabelletiketter/tabelletiketter";
+    @import "./components/dropdown/dropdown";
+    @import "./components/checkbox-filterform/checkbox-filterform";
+    @import "./components/radio-filterform/radio-filterform";
 }
-
-@import "./components/dropdown/dropdown";
-@import "./components/checkbox-filterform/checkbox-filterform";
-@import "./components/radio-filterform/radio-filterform";
 
 
 // TODO dont do this

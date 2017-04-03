@@ -6,7 +6,7 @@ const btnCls = (erApen, className) => classNames('dropdown', className, {
 });
 
 function isChildOf(parent, element) {
-    if (element === document) {
+    if (element === document) { // eslint-disable-line no-undef
         return false;
     }
 
@@ -33,11 +33,11 @@ class Dropdown extends Component {
     }
 
     componentDidMount() {
-        document.body.addEventListener('click', this.handler);
+        document.body.addEventListener('click', this.handler);// eslint-disable-line no-undef
     }
 
     componentWillUnmount() {
-        document.body.removeEventListener('click', this.handler);
+        document.body.removeEventListener('click', this.handler);// eslint-disable-line no-undef
     }
 
     bindComponent(component) {
