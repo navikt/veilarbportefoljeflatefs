@@ -44,7 +44,8 @@ class VeiledereSide extends Component {
             veilederListeParam.map((veileder) => {
                 const portefoljestorrelse = portefoljestorrelserParam.find(
                     (storrelse) => storrelse.value === veileder.ident);
-                return { ...veileder, portefoljestorrelse: portefoljestorrelse.count };
+                const count = portefoljestorrelse ? portefoljestorrelse.count : 0;
+                return { ...veileder, portefoljestorrelse: count };
             });
         return (
             <div className="veiledere-side">
