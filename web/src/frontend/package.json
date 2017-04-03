@@ -19,6 +19,8 @@
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.10.3",
+    "express": "4.15.2",
+    "http-proxy-middleware": "0.17.4",
     "ignore-loader": "0.1.2",
     "ignore-styles": "5.0.1",
     "jsdom": "9.12.0",
@@ -30,10 +32,10 @@
     "redux-devtools": "3.3.2",
     "redux-devtools-dock-monitor": "1.1.1",
     "redux-devtools-log-monitor": "1.2.0",
+    "rimraf": "2.6.1",
     "ts-node": "3.0.2",
     "typescript": "2.2.2",
-    "webpack": "2.3.2",
-    "rimraf": "2.6.1"
+    "webpack": "2.3.2"
   },
   "dependencies": {
     "babel-polyfill": "6.23.0",
@@ -88,6 +90,6 @@
     "build:html": "node script/copy-html.js",
     "dev:ts": "tsc && parallelshell \"tsc -w\"  \"webpack -w\"",
     "dev:html": "node script/copy-html.js --development",
-    "dev": "npm run build:css && npm run dev:html && npm run dev:ts"
+    "dev": "npm run build:css && npm run dev:html && npm run d
   }
 }
