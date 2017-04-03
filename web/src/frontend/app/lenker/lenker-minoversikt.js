@@ -1,30 +1,29 @@
 import React, { PropTypes as PT } from 'react';
-import { Link } from 'react-router';
+import { withRouter } from 'react-router';
 import { FormattedMessage } from 'react-intl';
+import ActiveLink from './active-link';
 
-function LenkerMinoversikt({ routes, minOversiktOnClick }) {
-    const valgtSide = routes[1] ? routes[1].path : '';
-    function erValgt(lenke) {
-        return lenke === valgtSide;
-    }
+function LenkerMinoversikt({ veilederident, minOversiktOnClick }) {
+    const LenkeInnhold = <FormattedMessage id="lenker.min.oversikt" />;
+    const path = veilederident === null ? 'portefolje' : `portefolje/${veilederident}`;
+
     return (
         <div className="lenker blokk-m">
-            <Link
-                to="portefolje"
+            <ActiveLink
+                to={path}
                 onClick={minOversiktOnClick}
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"
-                aria-selected={erValgt('portefolje(/:ident)')}
             >
-                <FormattedMessage id="lenker.min.oversikt" />
-            </Link>
+                {LenkeInnhold}
+            </ActiveLink>
         </div>
     );
 }
 
 LenkerMinoversikt.propTypes = {
-    routes: PT.arrayOf(PT.object),
-    minOversiktOnClick: PT.func.isRequired
+    minOversiktOnClick: PT.func.isRequired,
+    veilederident: PT.string.isRequired
 };
 
-export default LenkerMinoversikt;
+export default withRouter(LenkerMinoversikt);

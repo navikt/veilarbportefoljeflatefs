@@ -1,38 +1,30 @@
-import React, { PropTypes as PT } from 'react';
-import { Link } from 'react-router';
+import React from 'react';
+import { withRouter } from 'react-router';
 import { FormattedMessage } from 'react-intl';
+import ActiveLink from './active-link';
 
-function Lenker({ routes }) {
-    const valgtSide = routes[1] ? routes[1].path : '';
-
-    function erValgt(lenke) {
-        return lenke === valgtSide;
-    }
+function Lenker() {
+    const EnhetensOversikt = <FormattedMessage id="lenker.enhet.oversikt" />;
+    const Veilederoversikt = <FormattedMessage id="lenker.veiledere.oversikt" />;
 
     return (
         <div className="lenker blokk-m">
-            <Link
+            <ActiveLink
                 to="enhet"
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"
-                aria-selected={erValgt('enhet')}
             >
-                <FormattedMessage id="lenker.enhet.oversikt" />
-            </Link>
-            <Link
+                {EnhetensOversikt}
+            </ActiveLink>
+            <ActiveLink
                 to="veiledere"
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"
-                aria-selected={erValgt('veiledere')}
             >
-                <FormattedMessage id="lenker.veiledere.oversikt" />
-            </Link>
+                {Veilederoversikt}
+            </ActiveLink>
         </div>
     );
 }
 
-Lenker.propTypes = {
-    routes: PT.arrayOf(PT.object)
-};
-
-export default Lenker;
+export default withRouter(Lenker);
