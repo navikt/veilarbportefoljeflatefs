@@ -6,6 +6,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/highcharts": "4.2.50",
+    "@types/moment": "2.13.0",
     "@types/react": "15.0.21",
     "@types/react-dom": "0.14.23",
     "@types/react-redux": "4.4.38",
@@ -93,6 +94,7 @@
     "dev:less": "autoless --interval 100 ./app ./../main/webapp/css",
     "dev:ts": "tsc && parallelshell \"tsc -w\"  \"webpack -w\" \"npm run dev:less\"",
     "dev:html": "node script/copy-html-dev.js --development",
-    "dev": "npm run dev:html && npm run"
+    "dev:api": "node script/api.js",
+    "dev": "npm run dev:html && npm run dev:ts"
   }
 }
