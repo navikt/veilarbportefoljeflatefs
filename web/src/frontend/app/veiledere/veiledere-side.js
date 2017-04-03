@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import {
@@ -43,37 +43,39 @@ class VeiledereSide extends Component {
         } = this.props;
         const { veilederListe } = veiledere.data;
         const { facetResults } = portefoljestorrelser.data;
+        const { formatMessage } = this.props.intl;
 
         return (
-            <div className="veiledere-side">
-                <DocumentTitle title="Veilederoversikt" />
-                <Lenker routes={routes} />
-                <p className="typo-infotekst enhetsingress">
-                    <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
-                </p>
-                <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
-                    <FormattedMessage
-                        id="enhet.veiledere.tittel"
-                        values={{ antallVeiledere: veilederListe.length }}
-                    />
-                </Undertittel>
-                <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
-                    <PagineringForvalter
-                        liste={veilederListe}
-                        pagineringTekstId={
-                            veilederListe.length > 0 ?
-                                'enhet.veiledere.paginering.tekst' :
-                                'enhet.veiledere.paginering.ingen.veiledere.tekst'
-                        }
-                    />
-                    <VeiledereTabell
-                        veiledere={veiledereSomSkalVises}
-                        portefoljestorrelser={facetResults}
-                        sorterPaaEtternavn={() => sorterPaaEtternavn(compareEtternavn,
-                            currentSorteringsRekkefolge === 'ascending' ? 'descending' : 'ascending')}
-                    />
-                </Innholdslaster>
-            </div>
+            <DocumentTitle title={formatMessage({ id: 'lenker.veiledere.oversikt' })}>
+                <div className="veiledere-side">
+                    <Lenker routes={routes} />
+                    <p className="typo-infotekst enhetsingress">
+                        <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
+                    </p>
+                    <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
+                        <FormattedMessage
+                            id="enhet.veiledere.tittel"
+                            values={{ antallVeiledere: veilederListe.length }}
+                        />
+                    </Undertittel>
+                    <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
+                        <PagineringForvalter
+                            liste={veilederListe}
+                            pagineringTekstId={
+                                veilederListe.length > 0 ?
+                                    'enhet.veiledere.paginering.tekst' :
+                                    'enhet.veiledere.paginering.ingen.veiledere.tekst'
+                            }
+                        />
+                        <VeiledereTabell
+                            veiledere={veiledereSomSkalVises}
+                            portefoljestorrelser={facetResults}
+                            sorterPaaEtternavn={() => sorterPaaEtternavn(compareEtternavn,
+                                currentSorteringsRekkefolge === 'ascending' ? 'descending' : 'ascending')}
+                        />
+                    </Innholdslaster>
+                </div>
+            </DocumentTitle>
         );
     }
 }
@@ -90,7 +92,8 @@ VeiledereSide.propTypes = {
     routes: PT.arrayOf(PT.object),
     hentPortefoljestorrelser: PT.func.isRequired,
     currentSorteringsRekkefolge: PT.string.isRequired,
-    valgtEnhet: valgtEnhetShape.isRequired
+    valgtEnhet: valgtEnhetShape.isRequired,
+    intl: intlShape.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -109,5 +112,5 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VeiledereSide);
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(VeiledereSide));
 
