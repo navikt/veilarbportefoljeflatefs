@@ -1,10 +1,12 @@
 import React, { PropTypes as PT } from 'react';
+import classNames from 'classnames';
 import { Element } from 'nav-frontend-typografi';
 
-function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse }) {
-    function createSimpleLink(fraIndeks, tilIndeks, linkTekst) {
+function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, antallReturnert }) {
+    function createSimpleLink(fraIndeks, tilIndeks, linkTekst, className) {
         return (
             <button
+                className={className}
                 onClick={(e) => {
                     e.preventDefault();
                     hentListe(fraIndeks, tilIndeks);
@@ -16,6 +18,8 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
     const fraIndeksNesteSide = antallTotalt % sideStorrelse === 0 ? antallTotalt - sideStorrelse
         : antallTotalt - (antallTotalt % sideStorrelse);
     const fraIndeksSisteSide = fraIndex + sideStorrelse >= antallTotalt ? fraIndex : fraIndex + sideStorrelse;
+
+    const ikkeAktiv = classNames({'not-active': antallTotalt === antallReturnert});
     return (
         <div className="paginering">
             <Element className="info" tag="h1">
@@ -45,12 +49,16 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
                     </button>
                     }
                 {fraIndex === 0 ? null :
-                        createSimpleLink(0, sideStorrelse, '1')
+                        createSimpleLink(0, sideStorrelse, '1', ikkeAktiv)
                     }
                 <button><strong>{((fraIndex / sideStorrelse) + 1)}</strong></button>
-                {fraIndex === fraIndeksSisteSide ? null :
-                        createSimpleLink(fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt / sideStorrelse))
-                    }
+                {
+                    antallTotalt === antallReturnert ? null :
+                        (fraIndex === fraIndeksSisteSide ? null :
+                        createSimpleLink(
+                            fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt / sideStorrelse), ikkeAktiv
+                        ))
+                }
                 {fraIndex === fraIndeksSisteSide ?
                     <button className="not-active" tabIndex="-1">
                         <i className="chevron--hoyre">
@@ -58,6 +66,7 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse })
                         </i>
                     </button> :
                     <button
+                        className={ikkeAktiv}
                         onClick={(e) => {
                             e.preventDefault();
                             hentListe(fraIndeksSisteSide, sideStorrelse);
@@ -75,7 +84,8 @@ Paginering.propTypes = {
     fraIndex: PT.number.isRequired,
     hentListe: PT.func.isRequired,
     tekst: PT.node,
-    sideStorrelse: PT.number.isRequired
+    sideStorrelse: PT.number.isRequired,
+    antallReturnert: PT.number.isRequired
 };
 
 export default Paginering;
