@@ -54,14 +54,6 @@ export function ytelseFilterErAktiv(ytelse) {
      return !!ytelse;
 }
 
-export function ytelseDiagramSkalVises(ytelse) {
-    if (!ytelse) {
-        return false;
-    }
-    const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid, tiltakspenger } = ytelse;
-    return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid || tiltakspenger;
-}
-
 export function utledKategoriForDiagram(ytelse) {
     let kategori = '';
     if (!ytelse) {

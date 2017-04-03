@@ -13,7 +13,7 @@ import {
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
-import { leggEnhetIUrl, ytelseFilterErAktiv, ytelseDiagramSkalVises, utledKategoriForDiagram } from '../utils/utils';
+import { leggEnhetIUrl, ytelseFilterErAktiv, utledKategoriForDiagram } from '../utils/utils';
 import Diagram from './diagram';
 
 const settSammenNavn = (bruker) => {
@@ -121,7 +121,7 @@ class VeilederPortefoljeVisning extends Component {
                             sorteringsfelt, sorteringsrekkefolge, fra, antall, filtervalg)}
                     tekst={pagineringTekst}
                     sideStorrelse={20}
-                    visButtongroup={ytelseDiagramSkalVises(filtervalg.ytelse)}
+                    visButtongroup={ytelseFilterErAktiv(filtervalg.ytelse)}
                 />
                 {
                     visningsmodus === 'tabell' ?
@@ -217,7 +217,10 @@ class VeilederPortefoljeVisning extends Component {
                             </tbody>
                         </table>
                         :
-                        <Diagram kategori={utledKategoriForDiagram(filtervalg.ytelse)} />
+                        <Diagram
+                            kategori={utledKategoriForDiagram(filtervalg.ytelse)}
+                            brukere={brukere}
+                        />
                 }
             </Innholdslaster>
         );
