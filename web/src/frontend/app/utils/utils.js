@@ -51,7 +51,5 @@ export function sendBrukerTilUrl(url) {
 }
 
 export function ytelseFilterErAktiv(ytelse) {
-    if (!ytelse) { return false; }
-    const { ordinaereDagpenger, dagpengerUnderPermittering, aapMaxtid, aapUnntak } = ytelse;
-    return ordinaereDagpenger || dagpengerUnderPermittering || aapMaxtid || aapUnntak;
+    return !!ytelse;
 }
