@@ -1,6 +1,6 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import DocumentTitle from 'react-document-title';
 import Lenker from './../lenker/lenker';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
@@ -26,28 +26,30 @@ class EnhetSide extends Component {
         if (!this.props.valgtEnhet) {
             return null;
         }
-
         const { routes } = this.props;
+        const { formatMessage } = this.props.intl;
 
         return (
-            <div className="enhet-side blokk-xl">
-                < DocumentTitle title="Enhetens oversikt" />
-                <Lenker routes={routes} />
-                <p className="typo-infotekst enhetsingress blokk-m">
-                    <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
-                </p>
-                <FiltreringContainer />
-                <FiltreringLabelContainer />
-                <EnhetsportefoljeVisning />
-            </div>
+            <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })} >
+                <div className="enhet-side blokk-xl">
+                    <Lenker routes={routes} />
+                    <p className="typo-infotekst enhetsingress blokk-m">
+                        <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
+                    </p>
+                    <FiltreringContainer />
+                    <FiltreringLabelContainer />
+                    <EnhetsportefoljeVisning />
+                </div>
+            </DocumentTitle>
         );
     }
 }
 
 EnhetSide.propTypes = {
-    valgtEnhet: PT.object,
-    filtervalg: PT.object,
-    routes: PT.arrayOf(PT.object)
+    valgtEnhet: PT.object.isRequired,
+    filtervalg: PT.object.isRequired,
+    routes: PT.arrayOf(PT.object).isRequired,
+    intl: intlShape.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -55,4 +57,4 @@ const mapStateToProps = (state) => ({
     filtervalg: state.filtrering
 });
 
-export default connect(mapStateToProps)(EnhetSide);
+export default injectIntl(connect(mapStateToProps)(EnhetSide));
