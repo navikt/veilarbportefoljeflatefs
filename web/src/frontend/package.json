@@ -5,14 +5,14 @@
   "author": "NAV",
   "license": "MIT",
   "devDependencies": {
-    "@types/react": "15.0.20",
+    "@types/react": "15.0.21",
     "@types/react-dom": "0.14.23",
     "autoless": "0.1.7",
     "babel-eslint": "7.2.1",
     "chai": "3.5.0",
     "core-js": "2.4.1",
     "del": "2.2.2",
-    "eslint": "3.18.0",
+    "eslint": "3.19.0",
     "eslint-config-airbnb": "14.1.0",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
@@ -29,7 +29,7 @@
     "redux-devtools-log-monitor": "1.2.0",
     "ts-node": "3.0.2",
     "typescript": "2.2.2",
-    "webpack": "2.3.2"
+    "webpack": "2.3.3"
   },
   "dependencies": {
     "babel-polyfill": "6.23.0",
@@ -66,7 +66,7 @@
     "react-modal": "1.7.3",
     "react-motion": "0.4.7",
     "react-redux": "5.0.3",
-    "react-router": "3.0.0",
+    "react-router": "3.0.3",
     "react-router-redux": "4.0.8",
     "redux": "3.6.0",
     "redux-form": "6.6.1",
@@ -86,7 +86,7 @@
     "build:html": "node script/copy-html.js",
     "dev:less": "autoless --interval 100 ./app ./../main/webapp/css",
     "dev:ts": "tsc && parallelshell \"tsc -w\"  \"webpack -w\" \"npm run dev:less\"",
-    "dev:html": "node script/copy-html.js --development",
+    "dev:html": "node script/copy-html-dev.js --development",
     "dev": "npm run dev:html && npm run dev:ts"
   }
 }
