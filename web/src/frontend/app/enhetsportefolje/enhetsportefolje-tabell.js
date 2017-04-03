@@ -8,6 +8,8 @@ import { markerAlleBrukere } from './../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
 import { initialState } from '../ducks/filtrering';
+import { ytelseFilterErAktiv } from '../utils/utils';
+import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -36,11 +38,25 @@ class EnhetsportefoljeTabell extends Component {
 
     render() {
         const {
-            brukere, veiledere, settSomMarkertAlle,
-            settSomMarkert, portefolje, modalSkalVises, toggleSkjulModal, valgtEnhet
+            brukere,
+            veiledere,
+            settSomMarkertAlle,
+            settSomMarkert,
+            portefolje,
+            modalSkalVises,
+            toggleSkjulModal,
+            valgtEnhet,
+            filtervalg
         } = this.props;
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
+
+        const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
+            (<th>
+                <FormattedMessage id="portefolje.tabell.utlopsdato" />
+            </th>)
+            :
+            null;
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         return (
@@ -86,6 +102,7 @@ class EnhetsportefoljeTabell extends Component {
                                     <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                                 </button>
                             </th>
+                            {utlopsdatoHeader}
                             <th>
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
@@ -125,6 +142,11 @@ class EnhetsportefoljeTabell extends Component {
                                 </a>
                             </th>
                             <td>{bruker.fnr}</td>
+                            {
+                                ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
+                                    <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
+                                    : null
+                            }
                             {
                             bruker.veilederId ? <td className="veileder-td">{veiledere
                                     .filter((veileder) => veileder.ident === bruker.veilederId)
