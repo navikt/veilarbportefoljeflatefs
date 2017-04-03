@@ -12,13 +12,11 @@ import { brukerShape, filtervalgShape, enhetShape } from '../proptype-shapes';
 import { tildelVeileder, hentPortefoljeForVeileder } from '../ducks/portefolje';
 
 function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
-    veiledere, hentPortefolje, valgtEnhet, intl ...props }) {
+    veiledere, hentPortefolje, valgtEnhet, intl, ...props }) {
     const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
     const innloggetVeileder = { ident: enheter.ident };
     const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
-    console.log("Før intl");
     const { formatMessage } = intl;
-    console.log("Etter intl");
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
 
@@ -33,38 +31,38 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
         /></Normaltekst>);
 
     return (
-        <DocumentTitle title={formatMessage({id: 'lenker.min.oversikt'})}>
+        <DocumentTitle title={formatMessage({ id: 'lenker.min.oversikt' })}>
             <div className="enhet-side blokk-xl">
-            {visesAnnenVeiledersPortefolje ?
-                <Link to="veiledere" className="typo-normal tilbaketilveileder">
-                    <i className="chevron--venstre" />
-                    <span>Til veilederoversikt</span>
-                </Link> : null}
-            <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
-                { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
-                <div className="portefolje-side">
-                    <LenkerMinoversikt
-                        minOversiktOnClick={() =>
-                        hentPortefolje(valgtEnhet.enhet.enhetId,
-                            { ident: enheter.ident }, sorteringsrekkefolge, sorteringsfelt)}
-                    />
-                    <p className="typo-infotekst blokk-m">
-                        <FormattedMessage id="ingresstekst.minoversikt" />
-                    </p>
-                    <FiltreringContainer
-                        filtervalg={props.filtervalg}
-                        filtergruppe="veileder"
-                        veileder={gjeldendeVeileder}
-                    />
-                    <FiltreringLabelContainer
-                        filtervalg={props.filtervalg}
-                        filtergruppe="veileder"
-                        veileder={gjeldendeVeileder}
-                    />
-                    <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
-                </div>
-            </section>
-        </div>
+                {visesAnnenVeiledersPortefolje ?
+                    <Link to="veiledere" className="typo-normal tilbaketilveileder">
+                        <i className="chevron--venstre" />
+                        <span>Til veilederoversikt</span>
+                    </Link> : null}
+                <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
+                    { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
+                    <div className="portefolje-side">
+                        <LenkerMinoversikt
+                            minOversiktOnClick={() =>
+                                hentPortefolje(valgtEnhet.enhet.enhetId,
+                                    { ident: enheter.ident }, sorteringsrekkefolge, sorteringsfelt)}
+                        />
+                        <p className="typo-infotekst blokk-m">
+                            <FormattedMessage id="ingresstekst.minoversikt" />
+                        </p>
+                        <FiltreringContainer
+                            filtervalg={props.filtervalg}
+                            filtergruppe="veileder"
+                            veileder={gjeldendeVeileder}
+                        />
+                        <FiltreringLabelContainer
+                            filtervalg={props.filtervalg}
+                            filtergruppe="veileder"
+                            veileder={gjeldendeVeileder}
+                        />
+                        <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
+                    </div>
+                </section>
+            </div>
         </DocumentTitle>
     );
 }
