@@ -78,7 +78,10 @@ class EnhetsportefoljeVisning extends Component {
                     id="enhet.portefolje.paginering.tekst"
                     values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
                 />) :
-                <FormattedMessage id="enhet.portefolje.paginering.ingen.brukere.tekst" />
+                (<FormattedMessage
+                    id="enhet.portefolje.paginering.tekst"
+                    values={{ fraIndex: '0', tilIndex: '0', antallTotalt: '0' }}
+                />)
         );
 
         const feil = portefolje.feilendeTilordninger;
@@ -125,7 +128,7 @@ class EnhetsportefoljeVisning extends Component {
                             antall,
                             filtervalg
                         )}
-                    tekst={pagineringTekst}
+                    tekst={antallTotalt > 0 ? pagineringTekst : null}
                     sideStorrelse={20}
                 />
             </Innholdslaster>

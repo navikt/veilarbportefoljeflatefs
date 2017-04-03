@@ -1,4 +1,4 @@
-import { range, lag2Sifret } from '../../utils/utils';
+import { range, lag2Sifret } from '../utils/utils';
 
 export const inaktiveBrukere = 'Inaktive brukere';
 export const nyeBrukere = 'Nye brukere';
@@ -25,9 +25,9 @@ export const kjonn = {
 };
 
 export const innsatsgruppe = {
-    BATT: 'Spesielt tilpasset innsats',
-    BFORM: 'Situasjonsbestemt innsats',
     IKVAL: 'Standardinnsats',
+    BFORM: 'Situasjonsbestemt innsats',
+    BATT: 'Spesielt tilpasset innsats',
     VARIG: 'Varig tilpasset'
 };
 
@@ -42,7 +42,6 @@ export const servicegruppe = {
     BKART: 'Behov for arbeidsevnevurdering',
     IVURD: 'Ikke vurdert',
     OPPFI: 'Helserelatert arbeidsrettet oppfølging i NAV',
-    VARIG: 'Varig tilpasset innsats',
     VURDI: 'Sykmeldt oppfølging på arbeidsplassen',
     VURDU: 'Sykmeldt uten arbeidsgiver'
 };
@@ -54,7 +53,13 @@ export const ytelse = {
     AAP_UNNTAK: 'AAP unntak',
     TILTAKSPENGER: 'Tiltakspenger'
 };
-
+export const rettighetsgruppe = {
+    AAP: 'Arbeidsavklaringspenger',
+    DAGP: 'Dagpenger',
+    IYT: 'Ingen livsoppholdsytelser Arena',
+    VENT: 'Ventestønad',
+    VLONN: 'Ventelønn'
+};
 
 export default {
     inaktiveBrukere,
@@ -65,5 +70,6 @@ export default {
     innsatsgruppe,
     formidlingsgruppe,
     servicegruppe,
-    ytelse
+    ytelse,
+    rettighetsgruppe
 };

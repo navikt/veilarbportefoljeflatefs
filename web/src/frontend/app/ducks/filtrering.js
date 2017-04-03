@@ -1,4 +1,4 @@
-import { hentPortefoljeForEnhet } from './portefolje';
+import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -16,13 +16,8 @@ export const initialState = {
     innsatsgruppe: [],
     formidlingsgruppe: [],
     servicegruppe: [],
-    ytelse: {
-        ordinaereDagpenger: false,
-        dagpengerUnderPermittering: false,
-        aapMaxtid: false,
-        aapUnntak: false,
-        tiltakspenger: true
-    }
+    rettighetsgruppe: [],
+    ytelse: null
 };
 
 function fjern(verdi, fjernVerdi) {
@@ -59,42 +54,40 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-function oppdaterPortefolje(getState, dispatch) {
+function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = {}) {
     const state = getState();
     const enhet = state.enheter.valgtEnhet.enhet.enhetId;
     const rekkefolge = state.portefolje.sorteringsrekkefolge;
     const sorteringfelt = state.portefolje.sorteringsfelt;
     const fra = state.portefolje.data.fraIndex;
     const antall = state.paginering.sideStorrelse;
-    const nyeFiltervalg = state.filtrering;
-    hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
+    let nyeFiltervalg;
+    if (filtergruppe === 'enhet') {
+        nyeFiltervalg = state.filtrering;
+        hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
+    } else if (filtergruppe === 'veileder') {
+        nyeFiltervalg = state.filtreringVeileder;
+        hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
+    }
 }
 
-export function endreFiltervalg(filterId, filterVerdi) {
+export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
     return (dispatch, getState) => {
-        dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi } });
-        oppdaterPortefolje(getState, dispatch);
+        dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
+        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
     };
 }
 
-export function slettEnkeltFilter(filterId, filterVerdi) {
+export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
     return (dispatch, getState) => {
-        dispatch({ type: SLETT_ENKELT_FILTER, data: { filterId, filterVerdi } });
-        oppdaterPortefolje(getState, dispatch);
+        dispatch({ type: SLETT_ENKELT_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
+        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
     };
 }
 
-export function clearFiltervalg() {
+export function clearFiltervalg(filtergruppe = 'enhet', veileder) {
     return (dispatch, getState) => {
-        dispatch({ type: CLEAR_FILTER });
-        oppdaterPortefolje(getState, dispatch);
-    };
-}
-
-// TODO denne burde fjernes
-export function settFiltervalg(filtervalg) {
-    return (dispatch, getState) => {
-        dispatch({ type: SETT_FILTERVALG, data: filtervalg });
-        oppdaterPortefolje(getState, dispatch);
+        dispatch({ type: CLEAR_FILTER, name: filtergruppe });
+        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
     };
 }

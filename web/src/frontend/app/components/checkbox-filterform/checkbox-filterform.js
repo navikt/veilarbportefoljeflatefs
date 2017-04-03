@@ -1,15 +1,21 @@
 import React, { PropTypes as PT } from 'react';
-import { reduxForm, Fields, Field } from 'redux-form';
+import { Field, Fields, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { endreFiltervalg } from './../../ducks/filtrering';
+import { veilederShape, filtervalgShape } from '../../proptype-shapes';
 
 function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-line react/prop-types
     const fieldElements = Object.values(fields)
         .map((field) => (
-            <div key={field.input.name} className="skjema__input">
-                <Field id={field.input.name} {...field.input} component="input" type="checkbox" className="checkboks" />
-                <label htmlFor={field.input.name}>{valg[field.input.name]}</label>
+            <div key={field.input.name} className="skjemaelement skjemaelement--horisontal">
+                <Field
+                    id={field.input.name}
+                    component="input"
+                    type="checkbox"
+                    className="skjemaelement__input checkboks"
+                    {...field.input}
+                />
+                <label htmlFor={field.input.name} className="skjemaelement__label">{valg[field.input.name]}</label>
             </div>
         ));
 
@@ -42,16 +48,20 @@ function CheckboxFilterform({ pristine, handleSubmit, form, actions, valg, close
     const submithandler = handleSubmit(prepSubmit(form, actions.endreFiltervalg, closeDropdown));
 
     return (
-        <form className="checkbox-filterform" onSubmit={submithandler}>
+        <form className="skjema checkbox-filterform" onSubmit={submithandler}>
             <div className="checkbox-filterform__valg">
                 <Fields names={Object.keys(valg)} valg={valg} component={renderFields} />
             </div>
-            <div className="knapperad">
+            <div className="knapperad blokk-xxs">
                 {submitknapp}
             </div>
         </form>
     );
 }
+
+CheckboxFilterform.defaultProps = {
+    veileder: {}
+};
 
 CheckboxFilterform.propTypes = {
     pristine: PT.bool.isRequired,
@@ -61,7 +71,10 @@ CheckboxFilterform.propTypes = {
     closeDropdown: PT.func.isRequired,
     actions: PT.shape({
         endreFiltervalg: PT.func
-    }).isRequired
+    }).isRequired,
+    filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+    veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
+    filtervalg: filtervalgShape.isRequired // eslint-disable-line react/no-unused-prop-types
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -69,13 +82,16 @@ const mapStateToProps = (state, ownProps) => {
 
     const initialValues = Object.keys(ownProps.valg).reduce((acc, v) => ({
         ...acc,
-        [v]: state.filtrering[name].includes(v)
+        [v]: ownProps.filtervalg[name].includes(v)
     }), {});
 
     return { initialValues };
 };
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ endreFiltervalg }, dispatch)
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    actions: { endreFiltervalg: (...args) => dispatch(endreFiltervalg(
+        ...args, ownProps.filtergruppe, ownProps.veileder))
+    }
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm()(CheckboxFilterform));
