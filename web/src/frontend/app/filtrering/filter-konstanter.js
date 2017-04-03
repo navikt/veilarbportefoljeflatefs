@@ -1,4 +1,4 @@
-import { range, lag2Sifret } from '../../utils/utils';
+import { range, lag2Sifret } from '../utils/utils';
 
 export const inaktiveBrukere = 'Inaktive brukere';
 export const nyeBrukere = 'Nye brukere';
@@ -53,7 +53,13 @@ export const ytelse = {
     AAP_UNNTAK: 'AAP unntak',
     TILTAKSPENGER: 'Tiltakspenger'
 };
-
+export const rettighetsgruppe = {
+    AAP: 'Arbeidsavklaringspenger',
+    DAGP: 'Dagpenger',
+    IYT: 'Ingen livsoppholdsytelser Arena',
+    VENT: 'Ventestønad',
+    VLONN: 'Ventelønn'
+};
 
 export default {
     inaktiveBrukere,
@@ -64,5 +70,6 @@ export default {
     innsatsgruppe,
     formidlingsgruppe,
     servicegruppe,
-    ytelse
+    ytelse,
+    rettighetsgruppe
 };

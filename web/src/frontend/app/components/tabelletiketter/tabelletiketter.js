@@ -12,7 +12,7 @@ function Tabelletiketter({ className, type, ...props }) {
 
 Tabelletiketter.propTypes = {
     className: PT.string,
-    type: PT.oneOf(['nybruker'])
+    type: PT.oneOf(['nybruker', 'egen-ansatt', 'diskresjonskode', 'sikkerhetstiltak', 'doed'])
 };
 Tabelletiketter.defaultProps = {
     className: undefined,

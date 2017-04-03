@@ -1,8 +1,8 @@
 import React, { PropTypes as PT } from 'react';
-import { reduxForm, Fields, Field } from 'redux-form';
+import { Field, Fields, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { endreFiltervalg } from './../../ducks/filtrering';
+import { veilederShape, filtervalgShape } from '../../proptype-shapes';
 
 function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-line react/prop-types
     const fieldElements = Object.values(fields)
@@ -59,6 +59,10 @@ function CheckboxFilterform({ pristine, handleSubmit, form, actions, valg, close
     );
 }
 
+CheckboxFilterform.defaultProps = {
+    veileder: {}
+};
+
 CheckboxFilterform.propTypes = {
     pristine: PT.bool.isRequired,
     handleSubmit: PT.func.isRequired,
@@ -67,7 +71,10 @@ CheckboxFilterform.propTypes = {
     closeDropdown: PT.func.isRequired,
     actions: PT.shape({
         endreFiltervalg: PT.func
-    }).isRequired
+    }).isRequired,
+    filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+    veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
+    filtervalg: filtervalgShape.isRequired // eslint-disable-line react/no-unused-prop-types
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -75,13 +82,16 @@ const mapStateToProps = (state, ownProps) => {
 
     const initialValues = Object.keys(ownProps.valg).reduce((acc, v) => ({
         ...acc,
-        [v]: state.filtrering[name].includes(v)
+        [v]: ownProps.filtervalg[name].includes(v)
     }), {});
 
     return { initialValues };
 };
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ endreFiltervalg }, dispatch)
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    actions: { endreFiltervalg: (...args) => dispatch(endreFiltervalg(
+        ...args, ownProps.filtergruppe, ownProps.veileder))
+    }
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm()(CheckboxFilterform));
