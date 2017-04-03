@@ -1,5 +1,9 @@
 {
-  "tekster": {
+  "veileder": {
+    "ident": "X111111",
+    "navn": "Arne And",
+    "fornavn": "Arne",
+    "etternavn": "And"
   },
   "enheter": {
     "ident": "Z990610",
