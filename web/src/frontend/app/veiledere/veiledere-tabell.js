@@ -2,21 +2,18 @@ import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
-import { veilederShape, filtervalgShape } from './../proptype-shapes';
+import { veilederShape } from './../proptype-shapes';
 import { settValgtVeileder } from '../ducks/portefolje';
-import { eksporterEnhetsportefoljeTilLocalStorage } from '../ducks/utils';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
 
 
 class VeilederTabell extends Component {
     componentDidMount() {
-        const { valgtEnhet, filtervalg } = this.props;
-        eksporterEnhetsportefoljeTilLocalStorage(filtervalg, valgtEnhet, location.pathname);
         this.visModalDersomIngenVeiledere();
     }
 
-    settValgtVeileder(veileder) {
+    settOgNavigerTilValgtVeileder(veileder) {
         return () => {
             this.props.settVeileder(veileder);
         };
@@ -36,7 +33,8 @@ class VeilederTabell extends Component {
             <tr key={veileder.ident}>
                 <th>
                     <Link
-                        to={`/portefolje/${veileder.ident}`} onClick={this.settValgtVeileder(veileder)}
+                        to={`/portefolje/${veileder.ident}?clean`}
+                        onClick={this.settOgNavigerTilValgtVeileder(veileder)}
                         className="til-veileder-link"
                     >
                         {`${veileder.navn}`}
@@ -89,8 +87,6 @@ VeilederTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     settVeileder: PT.func.isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
-    valgtEnhet: PT.shape({ enhetId: PT.string.isRequired }).isRequired,
-    filtervalg: filtervalgShape.isRequired,
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
     toggleVisModal: PT.func.isRequired,
@@ -99,8 +95,6 @@ VeilederTabell.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    valgtEnhet: state.enheter.valgtEnhet.enhet,
-    filtervalg: state.filtrering,
     modalSkalVises: state.modal.visModal,
     veilederListe: state.veiledere.data.veilederListe
 
