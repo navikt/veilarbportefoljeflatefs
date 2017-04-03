@@ -78,7 +78,7 @@ function FiltreringFilter({ filtergruppe, veileder, filtervalg }) {
                             filtervalg={filtervalg}
                         />
                     </Dropdown>
-                    <Dropdown name="Rettighetsgruppe">
+                    <Dropdown name="Rettighetsgruppe" className="dropdown--130bredde">
                         <CheckboxFilterform
                             form="rettighetsgruppe"
                             valg={rettighetsgruppe}
@@ -90,7 +90,7 @@ function FiltreringFilter({ filtergruppe, veileder, filtervalg }) {
                 </div>
                 <div className="col-sm-3">
                     <Element>Ytelse</Element>
-                    <Dropdown name="Ytelse">
+                    <Dropdown name="Ytelse" className="dropdown--130bredde">
                         <RadioFilterform
                             form="ytelse"
                             valg={ytelse}

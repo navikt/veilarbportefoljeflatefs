@@ -36,8 +36,10 @@ class Innholdslaster extends Component {
     clearTimer() {
         if (this.timer) {
             clearTimeout(this.timer);
-            this.setState({ timeout: false });
             this.timer = undefined;
+
+            // Deferred, slik at setState ikke er en del av render
+            setTimeout(() => this.setState({ timeout: false }), 0);
         }
     }
 
@@ -61,6 +63,7 @@ class Innholdslaster extends Component {
         }
 
         if (noenHarFeil(avhengigheter)) {
+            this.clearTimer();
             const feilendeReducer = medFeil(avhengigheter);
             console.log(feilendeReducer); // eslint-disable-line no-console
 
