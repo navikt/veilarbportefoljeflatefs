@@ -90,6 +90,6 @@
     "build:html": "node script/copy-html.js",
     "dev:ts": "tsc && parallelshell \"tsc -w\"  \"webpack -w\"",
     "dev:html": "node script/copy-html.js --development",
-    "dev": "npm run build:css && npm run dev:html && npm run d
+    "dev": "npm run build:css && npm run dev:html && npm run"
   }
 }
