@@ -3,13 +3,13 @@ import * as Highcharts from 'highcharts';
 
 interface ChartProps {
     type: string,
-    modules: any,
     container: string,
-    options: object
+    options: object,
+    modules?: any,
 }
 
-export default class Chart extends React.Component<any, any> {
-    chart: Highcharts.ChartObject
+export default class Chart extends React.Component<ChartProps, any> {
+    chart: Highcharts.ChartObject;
 
     componentDidMount() {
         if (this.props.modules) {
