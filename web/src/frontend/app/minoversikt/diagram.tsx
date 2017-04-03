@@ -8,37 +8,57 @@ interface Bruker {
     [propName: string]: any;
 }
 
-export function Diagram(props: { kategori: string, brukere: Array<Bruker> }) {
+interface DiagramData {
+    labels: Array<string>,
+    antallMisterYtelse: Array<number>,
+    antallMedYtelse: Array<number>
+}
 
-    moment.locale('nb_no');
-    const xLabels: Array<string> = new Array(12).fill(0).map((_, i) => moment().add(i + 1, 'month').format('MMMM'));
+function maned(brukere: Array<Bruker>): DiagramData {
+    const labels: Array<string> = new Array(12).fill(0).map((_, i) => moment().add(i + 1, 'month').format('MMMM'));
 
     const maaneder: Array<string> = Array(12).fill(0).map((_, i) => `MND${i + 1}`);
 
-
-    let brukereMisterYtelse: Array<number> = Array(12).fill(0);
-    props.brukere
+    let antallMisterYtelse: Array<number> = Array(12).fill(0);
+    brukere
         .filter(bruker => bruker.utlopsdatoFasett)
         .map(bruker => {
             let index = maaneder.findIndex(element => element === bruker.utlopsdatoFasett);
-            let value = brukereMisterYtelse[index];
-            brukereMisterYtelse[index] = value + 1;
+            let value = antallMisterYtelse[index];
+            antallMisterYtelse[index] = value + 1;
         });
 
 
     let runningSum = new Array(12);
-    brukereMisterYtelse.reduce((acc, val, i) => {
+    antallMisterYtelse.reduce((acc, val, i) => {
         return runningSum[i] = acc + val;
     }, 0);
 
-    const brukereMedYtelse: Array<number> = Array(12)
-                                                .fill(props.brukere.length)
-                                                .map((antall, i) => antall - runningSum[i]);
+    const antallMedYtelse: Array<number> = Array(12)
+        .fill(brukere.length)
+        .map((antall, i) => antall - runningSum[i]);
 
+    return {
+        labels,
+        antallMisterYtelse,
+        antallMedYtelse
+    }
+}
 
-    console.log(maaneder);
-    console.log(brukereMisterYtelse);
-    console.log(brukereMedYtelse);
+function kvartal(brukere: Array<Bruker>): DiagramData {
+    const arr = new Array(16).fill(0);
+
+    return {
+        labels: [''],
+        antallMisterYtelse: arr,
+        antallMedYtelse: arr
+    };
+}
+
+export function Diagram(props: { kategori: string, brukere: Array<Bruker> }) {
+    moment.locale('nb_no');
+
+    const data = props.kategori === 'AAP Maxtid' ? kvartal(props.brukere) : maned(props.brukere);
 
     const options: Highcharts.Options = {
         chart: {
@@ -53,7 +73,7 @@ export function Diagram(props: { kategori: string, brukere: Array<Bruker> }) {
             text: ''
         },
         xAxis: {
-            categories: xLabels
+            categories: data.labels
         },
         yAxis: {
             min: 0,
@@ -91,12 +111,12 @@ export function Diagram(props: { kategori: string, brukere: Array<Bruker> }) {
             {
                 index: 1,
                 name: 'Brukere med dagpenger',
-                data: brukereMedYtelse
+                data: data.brukereMedYtelse
             },
             {
                 index: 0,
                 name: 'Brukere med dagpenger som mister ytelse i gjeldende mnd',
-                data: brukereMisterYtelse
+                data: data.brukereMisterYtelse
             }
         ]
     };
