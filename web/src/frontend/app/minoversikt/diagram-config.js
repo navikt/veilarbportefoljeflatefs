@@ -1,4 +1,4 @@
-export default (data) => {
+export default (data, tekster) => {
     return {
         chart: {
             type: 'column',
@@ -52,12 +52,12 @@ export default (data) => {
         series: [
             {
                 index: 1,
-                name: 'Brukere med dagpenger',
+                name: tekster[0],
                 data: data.antallMedYtelse
             },
             {
                 index: 0,
-                name: 'Brukere med dagpenger som mister ytelse i gjeldende mnd',
+                name: tekster[1],
                 data: data.antallMisterYtelse
             }
         ]

@@ -1,11 +1,12 @@
-import React, {Component, PropTypes as PT} from 'react';
-import Chart from './chart';
+import React, { Component, PropTypes as PT } from 'react';
 import moment from 'moment';
-import {brukerShape} from '../proptype-shapes';
-import { headertekst } from './diagram-konstanter';
 import { FormattedMessage } from 'react-intl';
-import { ytelsevalg } from '../filtrering/filter-konstanter'
+import Chart from './chart';
+import { brukerShape } from '../proptype-shapes';
+import { headertekst } from './diagram-konstanter';
+import { ytelsevalg } from '../filtrering/filter-konstanter';
 import config from './diagram-config';
+import MultiFormattedMessage from './multiformattedmessage';
 
 function maned(brukere) {
 
@@ -90,19 +91,22 @@ function utledHeaderTekst(filtreringvalg) {
     }
 }
 
-const Diagram = ({brukere, filtreringsvalg}) => {
+const Diagram = ({ brukere, filtreringsvalg }) => {
     moment.locale('nb_no');
 
     const data = filtreringsvalg === ytelsevalg.AAP_MAXTID ? kvartal(brukere) : maned(brukere);
-    const options = config(data);
     const headerTekst = utledHeaderTekst(filtreringsvalg);
 
     return (
         <div>
             <h1>
-                <FormattedMessage id={headerTekst} />
+                <FormattedMessage id={headerTekst}/>
             </h1>
-            <Chart type="Chart" options={options} container="chart"/>
+            <MultiFormattedMessage id={['serie1', 'serie2']}>
+                {(tekster) => (
+                    <Chart type="Chart" options={config(data, tekster)} container="chart"/>
+                )}
+            </MultiFormattedMessage>
         </div>
     );
 };
