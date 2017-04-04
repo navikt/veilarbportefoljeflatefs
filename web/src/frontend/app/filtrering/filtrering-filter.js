@@ -1,9 +1,11 @@
 import React, { PropTypes as PT } from 'react';
 import { Element } from 'nav-frontend-typografi';
+import { connect } from 'react-redux';
+
 import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import RadioFilterform from '../components/radio-filterform/radio-filterform';
-import { veilederShape, filtervalgShape } from '../proptype-shapes';
+import { filtervalgShape } from '../proptype-shapes';
 import {
     alder,
     fodselsdagIMnd,
@@ -14,8 +16,9 @@ import {
     ytelse,
     rettighetsgruppe
 } from './filter-konstanter';
+import { endreFiltervalg } from '../ducks/filtrering';
 
-function FiltreringFilter({ filtergruppe, veileder, filtervalg }) {
+function FiltreringFilter({ filtervalg, actions }) {
     return (
         <div className="filtrering-filter">
             <div className="row">
@@ -25,8 +28,7 @@ function FiltreringFilter({ filtergruppe, veileder, filtervalg }) {
                         <CheckboxFilterform
                             form="alder"
                             valg={alder}
-                            filtergruppe={filtergruppe}
-                            veileder={veileder}
+                            onSubmit={actions.endreFiltervalg}
                             filtervalg={filtervalg}
                         />
                     </Dropdown>
@@ -34,8 +36,7 @@ function FiltreringFilter({ filtergruppe, veileder, filtervalg }) {
                         <CheckboxFilterform
                             form="fodselsdagIMnd"
                             valg={fodselsdagIMnd}
-                            filtergruppe={filtergruppe}
-                            veileder={veileder}
+                            onSubmit={actions.endreFiltervalg}
                             filtervalg={filtervalg}
                         />
                     </Dropdown>
@@ -43,8 +44,7 @@ function FiltreringFilter({ filtergruppe, veileder, filtervalg }) {
                         <CheckboxFilterform
                             form="kjonn"
                             valg={kjonn}
-                            filtergruppe={filtergruppe}
-                            veileder={veileder}
+                            onSubmit={actions.endreFiltervalg}
                             filtervalg={filtervalg}
                         />
                     </Dropdown>
@@ -55,8 +55,7 @@ function FiltreringFilter({ filtergruppe, veileder, filtervalg }) {
                         <CheckboxFilterform
                             form="innsatsgruppe"
                             valg={innsatsgruppe}
-                            filtergruppe={filtergruppe}
-                            veileder={veileder}
+                            onSubmit={actions.endreFiltervalg}
                             filtervalg={filtervalg}
                         />
                     </Dropdown>
@@ -64,8 +63,7 @@ function FiltreringFilter({ filtergruppe, veileder, filtervalg }) {
                         <CheckboxFilterform
                             form="formidlingsgruppe"
                             valg={formidlingsgruppe}
-                            filtergruppe={filtergruppe}
-                            veileder={veileder}
+                            onSubmit={actions.endreFiltervalg}
                             filtervalg={filtervalg}
                         />
                     </Dropdown>
@@ -73,8 +71,7 @@ function FiltreringFilter({ filtergruppe, veileder, filtervalg }) {
                         <CheckboxFilterform
                             form="servicegruppe"
                             valg={servicegruppe}
-                            filtergruppe={filtergruppe}
-                            veileder={veileder}
+                            onSubmit={actions.endreFiltervalg}
                             filtervalg={filtervalg}
                         />
                     </Dropdown>
@@ -82,8 +79,7 @@ function FiltreringFilter({ filtergruppe, veileder, filtervalg }) {
                         <CheckboxFilterform
                             form="rettighetsgruppe"
                             valg={rettighetsgruppe}
-                            filtergruppe={filtergruppe}
-                            veileder={veileder}
+                            onSubmit={actions.endreFiltervalg}
                             filtervalg={filtervalg}
                         />
                     </Dropdown>
@@ -94,8 +90,7 @@ function FiltreringFilter({ filtergruppe, veileder, filtervalg }) {
                         <RadioFilterform
                             form="ytelse"
                             valg={ytelse}
-                            filtergruppe={filtergruppe}
-                            veileder={veileder}
+                            onSubmit={actions.endreFiltervalg}
                             filtervalg={filtervalg}
                         />
                     </Dropdown>
@@ -117,9 +112,16 @@ FiltreringFilter.defaultProps = {
 };
 
 FiltreringFilter.propTypes = {
-    filtergruppe: PT.string.isRequired,
-    veileder: veilederShape,
-    filtervalg: filtervalgShape.isRequired
+    filtervalg: filtervalgShape.isRequired,
+    actions: PT.shape({
+        endreFiltervalg: PT.func
+    }).isRequired
 };
 
-export default FiltreringFilter;
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    actions: {
+        endreFiltervalg: (...args) => dispatch(endreFiltervalg(...args, ownProps.filtergruppe, ownProps.veileder))
+    }
+});
+
+export default connect(undefined, mapDispatchToProps)(FiltreringFilter);
