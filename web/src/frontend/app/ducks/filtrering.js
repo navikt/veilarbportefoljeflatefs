@@ -59,7 +59,6 @@ function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = {}) {
     const enhet = state.enheter.valgtEnhet.enhet.enhetId;
     const rekkefolge = state.portefolje.sorteringsrekkefolge;
     const sorteringfelt = state.portefolje.sorteringsfelt;
-    const fra = state.portefolje.data.fraIndex;
     const antall = PORTEFOLJE_SIDESTORRELSE;
     let nyeFiltervalg;
     if (filtergruppe === 'enhet') {

@@ -1,5 +1,5 @@
 import React, { PropTypes as PT } from 'react';
-import { lagConfig } from './filter-konstanter'
+import { lagConfig } from './filter-konstanter';
 
 function FiltreringLabel({ label, slettFilter }) {
     return (
