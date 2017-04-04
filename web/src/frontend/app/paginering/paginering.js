@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Element } from 'nav-frontend-typografi';
 
 function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, antallReturnert }) {
-    function createSimpleLink(fraIndeks, tilIndeks, linkTekst, className) {
+    function createSimpleLink(fraIndeks, tilIndeks, child, className) {
         return (
             <button
                 className={className}
@@ -11,7 +11,9 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
                     e.preventDefault();
                     hentListe(fraIndeks, tilIndeks);
                 }}
-            >{linkTekst}</button>);
+            >
+                {child}
+            </button>);
     }
 
     const fraIndeksForrigeSide = fraIndex - sideStorrelse < 0 ? fraIndex : fraIndex - sideStorrelse;
@@ -20,6 +22,75 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
     const fraIndeksSisteSide = fraIndex + sideStorrelse >= antallTotalt ? fraIndex : fraIndex + sideStorrelse;
 
     const ikkeAktiv = classNames({'not-active': antallTotalt === antallReturnert});
+    const seAlleKnapp = createSimpleLink(0, antallTotalt, 'Se alle');
+    const seFaerreKnapp = createSimpleLink(0, sideStorrelse, 'Se færre');
+    const seAlleKnappInactive = createSimpleLink(0, antallTotalt, 'Se alle', 'not-active');
+
+    function lagChevron(isLeft) {
+        if(isLeft) {
+            return (
+                <i className="chevron--venstre">
+                    <span className="text-hide prev">{'Forrige'}</span>
+                </i>
+            );
+        }
+        return (
+            <i className="chevron--hoyre">
+                <span className="text-hide next">{'Neste'}</span>
+            </i>
+        );
+    }
+
+    function visSeAlleKnapp() {
+        if (antallReturnert === antallTotalt && antallReturnert <= sideStorrelse) {
+            return seAlleKnappInactive;
+        } else if (antallReturnert === antallTotalt) {
+            return seFaerreKnapp;
+        } else {
+            return seAlleKnapp;
+        }
+    }
+
+    function visForrigeKnapp() {
+        if (fraIndex === 0) {
+            return (
+                <button className="not-active" tabIndex="-1">
+                    {lagChevron(true)}
+                </button>
+            );
+        }
+        return(createSimpleLink(fraIndeksForrigeSide, sideStorrelse, lagChevron(true), 'prev'));
+    }
+
+    function visSideEnKnapp() {
+        if (fraIndex !== 0) {
+            return createSimpleLink(0, sideStorrelse, '1', ikkeAktiv);
+        }
+    }
+
+    const visCurrentKnapp = <button><strong>{((fraIndex / sideStorrelse) + 1)}</strong></button>;
+
+    function visSisteSideKnapp() {
+        if (antallTotalt === antallReturnert) {
+            return null;
+        } else if (fraIndex < fraIndeksSisteSide) {
+            return createSimpleLink(
+                fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt / sideStorrelse), ikkeAktiv
+            );
+        }
+    }
+
+    function visNesteKnapp() {
+        if (fraIndex === fraIndeksSisteSide) {
+            return (
+                <button className="not-active" tabIndex="-1">
+                    {lagChevron(false)}
+                </button>
+            );
+        }
+        return createSimpleLink(fraIndeksSisteSide, sideStorrelse, lagChevron(false), ikkeAktiv);
+    }
+
     return (
         <div className="paginering">
             <Element className="info" tag="h1">
@@ -27,54 +98,14 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
                     {tekst}
                 </strong>
             </Element>
-            {antallTotalt <= sideStorrelse ? null :
             <div className="bytt-side">
-                {createSimpleLink(0, antallTotalt, 'Se alle')}
-                {fraIndex === 0 ?
-                    <button className="not-active" tabIndex="-1">
-                        <i className="chevron--venstre">
-                            <span className="text-hide prev ">{'Forrige'}</span>
-                        </i>
-                    </button> :
-                    <button
-                        className="prev"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            hentListe(fraIndeksForrigeSide, sideStorrelse);
-                        }}
-                    >
-                        <i className="chevron--venstre">
-                            <span className="text-hide prev">{'Forrige'}</span>
-                        </i>
-                    </button>
-                    }
-                {fraIndex === 0 ? null :
-                        createSimpleLink(0, sideStorrelse, '1', ikkeAktiv)
-                    }
-                <button><strong>{((fraIndex / sideStorrelse) + 1)}</strong></button>
-                {
-                    antallTotalt === antallReturnert ? null :
-                        (fraIndex === fraIndeksSisteSide ? null :
-                        createSimpleLink(
-                            fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt / sideStorrelse), ikkeAktiv
-                        ))
-                }
-                {fraIndex === fraIndeksSisteSide ?
-                    <button className="not-active" tabIndex="-1">
-                        <i className="chevron--hoyre">
-                            <span className="text-hide next">{'Neste'}</span>
-                        </i>
-                    </button> :
-                    <button
-                        className={ikkeAktiv}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            hentListe(fraIndeksSisteSide, sideStorrelse);
-                        }}
-                    ><i className="chevron--hoyre"><span className="text-hide next">{'Neste'}</span></i></button>
-                    }
+                {visSeAlleKnapp()}
+                {visForrigeKnapp()}
+                {visSideEnKnapp()}
+                {visCurrentKnapp}
+                {visSisteSideKnapp()}
+                {visNesteKnapp()}
             </div>
-            }
         </div>
     );
 }
