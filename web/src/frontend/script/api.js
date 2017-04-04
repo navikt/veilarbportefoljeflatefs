@@ -10,7 +10,7 @@ api.use(jsonServer.rewriter({
     "/veilarbveileder/tjenester/veileder/me": "/veileder",
     "/veilarbveileder/tjenester/veileder/enheter": "/enheter",
     "/veilarbportefolje/tjenester/veileder/:veilederident/portefolje": "/portefolje",
-    "/veilarbportefolje/tjenester/veileder/enhet/:id/statusall": "/statusall",
+    "/veilarbportefolje/tjenester/veileder/enhet/:id/statustall": "/statustall",
     "/veilarbveileder/tjenester/enhet/:enhetid/veiledere": "/veiledere",
 }));
 api.use(router);
