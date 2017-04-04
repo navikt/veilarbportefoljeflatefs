@@ -1,4 +1,4 @@
-import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
+import { hentPortefoljeForEnhet, hentPortefoljeForVeileder, PORTEFOLJE_SIDESTORRELSE } from './portefolje';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -60,7 +60,7 @@ function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = {}) {
     const rekkefolge = state.portefolje.sorteringsrekkefolge;
     const sorteringfelt = state.portefolje.sorteringsfelt;
     const fra = state.portefolje.data.fraIndex;
-    const antall = state.paginering.sideStorrelse;
+    const antall = PORTEFOLJE_SIDESTORRELSE;
     let nyeFiltervalg;
     if (filtergruppe === 'enhet') {
         nyeFiltervalg = state.filtrering;

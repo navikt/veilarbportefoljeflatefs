@@ -8,10 +8,13 @@ import {
     settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
-    markerAlleBrukere
+    markerAlleBrukere,
+    PORTEFOLJE_SIDESTORRELSE
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
+import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
+import { ASCENDING, DESCENDING } from '../konstanter';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 import Diagram from './diagram';
@@ -58,9 +61,9 @@ class VeilederPortefoljeVisning extends Component {
         } = this.props;
         let valgtRekkefolge = '';
         if (felt !== sorteringsfelt) {
-            valgtRekkefolge = 'ascending';
+            valgtRekkefolge = ASCENDING;
         } else {
-            valgtRekkefolge = sorteringsrekkefolge === 'ascending' ? 'descending' : 'ascending';
+            valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
         settSortering(valgtRekkefolge, felt);
         hentPortefolje(
@@ -120,7 +123,7 @@ class VeilederPortefoljeVisning extends Component {
                         hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
                             sorteringsfelt, sorteringsrekkefolge, fra, antall, filtervalg)}
                     tekst={pagineringTekst}
-                    sideStorrelse={20}
+                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
                     visButtongroup={ytelseFilterErAktiv(filtervalg.ytelse)}
                 />
                 {
@@ -204,7 +207,7 @@ class VeilederPortefoljeVisning extends Component {
                                             <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
                                         : null
                                     }
-                                    <td className="sikkerhetstiltak-td">
+                                    <td>
                                         {bruker.sikkerhetstiltak.length > 0 ?
                                             <Tabelletiketter type="sikkerhetstiltak">
                                                 Sikkerhetstiltak
@@ -259,8 +262,7 @@ const mapStateToProps = (state) => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     visningsmodus: state.paginering.visningsmodus,
-    filtervalg: state.filtreringVeileder,
-    antall: state.paginering.sideStorrelse
+    filtervalg: state.filtreringVeileder
 });
 
 const mapDispatchToProps = (dispatch) => ({

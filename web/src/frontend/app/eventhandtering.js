@@ -7,14 +7,34 @@ const handleChangeEnhet = (enhet) => {
     window.location.search = (`?enhet=${enhet}&clean`);
 };
 
+function finnMiljoStreng() {
+    const host = window.location.host;
+    const bindestrekIndex = host.indexOf('-');
+    if (bindestrekIndex === -1) {
+        return '';
+    }
+    const dotIndex = host.indexOf('.');
+    return host.substring(bindestrekIndex + 1, dotIndex);
+}
+export function erstattMiljoPlaceholder(lenke) {
+    const miljoStreng = finnMiljoStreng();
+    if (miljoStreng) {
+        return lenke.replace('{{miljoStreng}}', `-${miljoStreng}`);
+    }
+    return lenke.replace('{{miljoStreng}}', miljoStreng);
+}
+
+
 const getConfig = (initiellEnhet = undefined) => {
+    const modiaUrl = erstattMiljoPlaceholder('https://modapp{{miljoStreng}}.adeo.no/modiabrukerdialog');
+
     const lenker =
         {
             lenker: [
                 ['/mia', 'Arbeidsmarkedet'],
                 [`/veilarbportefoljeflatefs/enhet?enhet=${initiellEnhet}&clean`, 'Enhetens oversikt'],
                 [`/veilarbportefoljeflatefs/portefolje?enhet=${initiellEnhet}&clean`, 'Min oversikt'],
-                ['/modiabrukerdialog', 'Modia']
+                [modiaUrl, 'Modiabrukerdialog']
             ],
             tittel: ''
         };
