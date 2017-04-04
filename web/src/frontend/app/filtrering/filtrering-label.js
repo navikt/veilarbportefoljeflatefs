@@ -5,7 +5,7 @@ function FiltreringLabel({ label, slettFilter }) {
     return (
         <button className="filtreringlabel typo-avsnitt" onClick={slettFilter}>
             <span className="filtreringlabel__label">{lagConfig(label).label}</span>
-            <span>X</span>
+            <i className="filter--x" />
         </button>
     );
 }
