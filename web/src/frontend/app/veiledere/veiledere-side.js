@@ -15,21 +15,40 @@ import {
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { leggEnhetIUrl } from '../utils/utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
+import { visAlleVeiledereIListe } from './veiledersok-utils';
+import Dropdown from '../components/dropdown/dropdown';
+import { resetSokeresultater, settVeilederfiltervalg, settVeiledereITabell } from '../ducks/veiledere';
+import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
+import VeiledereSokeliste from './veiledersok';
 
 class VeiledereSide extends Component {
     componentWillMount() {
         const { hentPortefoljestorrelser, valgtEnhet } = this.props;
         hentPortefoljestorrelser(valgtEnhet.enhet.enhetId);
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
+        this.veilederfiltreringOnSubmit = this.veilederfiltreringOnSubmit.bind(this);
+    }
+
+    veilederfiltreringOnSubmit(name, veilederfiltervalg) {
+        const { settFiltervalgForVeieldere, veiledere, settVeiledereSomSkalVises } = this.props;
+        settFiltervalgForVeieldere(veilederfiltervalg);
+        settVeiledereSomSkalVises(veilederfiltervalg
+            .map((ident) => veiledere.data.veilederListe.find((veileder) => veileder.ident === ident)));
     }
 
     render() {
         const {
             veiledere, portefoljestorrelser, veiledereSomSkalVises, currentSortering,
-            routes, sorterPaaPortefoljestorrelse, sorterPaaEtternavn
+            routes, sorterPaaPortefoljestorrelse, sorterPaaEtternavn, resetSok
         } = this.props;
         const { veilederListe } = veiledere.data;
+        const { veiledereITabell, sokeresultat, veilederfiltervalg } = veiledere;
         const { facetResults } = portefoljestorrelser.data;
+        const veiledereTilTabell = veiledereITabell || veiledereSomSkalVises;
+
+        const veiledervalg = sokeresultat.sokIkkeStartet ?
+            visAlleVeiledereIListe(veiledere.data.veilederListe) :
+            sokeresultat;
 
         const avgjorNySortering = (felt) => {
             if (currentSortering.felt === felt) {
@@ -62,6 +81,19 @@ class VeiledereSide extends Component {
                 <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
                     {() => (
                         <div>
+                            <div className="veiledersok__wrapper">
+                                <Dropdown name="Velg veileder" onLukk={resetSok}>
+                                    <VeiledereSokeliste
+                                        veiledere={veilederListe}
+                                    />
+                                    <CheckboxFilterform
+                                        form="veiledervisning"
+                                        valg={veiledervalg}
+                                        filtervalg={{ veiledervisning: veilederfiltervalg }}
+                                        onSubmit={(...args) => this.veilederfiltreringOnSubmit(...args)}
+                                    />
+                                </Dropdown>
+                            </div>
                             <VeilederPaginering
                                 liste={veiledereMedPortefoljestorrelser(veilederListe, facetResults)}
                                 pagineringTekstId={
@@ -71,7 +103,7 @@ class VeiledereSide extends Component {
                                 }
                             />
                             <VeiledereTabell
-                                veiledere={veiledereSomSkalVises}
+                                veiledere={veiledereTilTabell}
                                 sorterPaaEtternavn={() => sorterPaaEtternavn(avgjorNySortering('etternavn'))}
                                 sorterPaaPortefoljestorrelse={
                                     () => sorterPaaPortefoljestorrelse(avgjorNySortering('portefoljestorrelse'))
@@ -101,7 +133,10 @@ VeiledereSide.propTypes = {
         rekkefolge: PT.string.isRequired
     }).isRequired,
     valgtEnhet: valgtEnhetShape.isRequired,
-    sorterPaaEtternavn: PT.func.isRequired
+    sorterPaaEtternavn: PT.func.isRequired,
+    settFiltervalgForVeieldere: PT.func.isRequired,
+    settVeiledereSomSkalVises: PT.func.isRequired,
+    resetSok: PT.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -113,6 +148,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    resetSok: () => dispatch(resetSokeresultater()),
     hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
     sorterPaaPortefoljestorrelse: (nySortering) => {
         dispatch(sorterListePaaPortefoljestorrelse(nySortering));
@@ -121,7 +157,9 @@ const mapDispatchToProps = (dispatch) => ({
     sorterPaaEtternavn: (nySortering) => {
         dispatch(sorterListePaaEtternavn(nySortering));
         dispatch(settSubListeForPaginering(0));
-    }
+    },
+    settFiltervalgForVeieldere: (veilederfiltervalg) => dispatch(settVeilederfiltervalg(veilederfiltervalg)),
+    settVeiledereSomSkalVises: (veiledere) => dispatch(settVeiledereITabell(veiledere))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeiledereSide);

@@ -2,8 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { settSokeresultat } from '../ducks/veiledere';
 import { veilederShape } from './../proptype-shapes';
-import { veiledereSok } from '../utils/utils';
-
+import { veiledereSok } from './veiledersok-utils';
 
 function VeilederSokInput({ veiledere, oppdaterSokeresultat }) {
     return (
