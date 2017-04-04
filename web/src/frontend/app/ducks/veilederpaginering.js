@@ -128,7 +128,6 @@ export function sorterListePaaPortefoljestorrelse(nySortering) {
 }
 
 export function settVisningsmodus(visningsmodus) {
-    console.log('u wot m8?', visningsmodus);
     return {
         type: SETT_VISNINGSMODUS,
         visningsmodus
