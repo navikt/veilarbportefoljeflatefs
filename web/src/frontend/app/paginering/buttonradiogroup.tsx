@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { settVisningsmodus } from '../ducks/paginering';
+import { settVisningsmodus } from '../ducks/veilederpaginering';
 
 interface Props {
     visningsmodus: string,

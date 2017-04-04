@@ -8,6 +8,7 @@ export const SETT_FRA_INDEKS_FOR_SUBLISTE = 'veilederpaginering/settfraindeksfor
 export const SETT_NY_SORTERING = 'veilederpaginering/settNySortering/OK';
 export const SORTER_PAA_ETTERNAVN = 'veilederpaginering/sorterPaaEtternavn/OK';
 export const SORTER_PAA_PORTEFOLJESTORRELSE = 'veilederpaginering/sorterPaaPortefoljestorrelse/OK';
+export const SETT_VISNINGSMODUS = 'veilederpaginering/settvisningsmodus/OK';
 
 // Utils
 export function til(fra, antall, totalt) {
@@ -46,7 +47,8 @@ const initialState = {
     currentSortering: {
         felt: IKKE_SATT,
         rekkefolge: IKKE_SATT
-    }
+    },
+    visningsmodus: 'tabell'
 };
 
 //  Reducer
@@ -118,3 +120,11 @@ export function sorterListePaaPortefoljestorrelse(nySortering) {
         nySortering
     };
 }
+
+export function settVisningsmodus(visningsmodus) {
+    return {
+        type: SETT_VISNINGSMODUS,
+        visningsmodus
+    };
+}
+

@@ -49,24 +49,6 @@ export function getEnhetFromUrl() {
 export function sendBrukerTilUrl(url) {
     history.replace(url);
 }
-
 export function ytelseFilterErAktiv(ytelse) {
      return !!ytelse;
-}
-
-export function utledKategoriForDiagram(ytelse) {
-    let kategori = '';
-    if (!ytelse) {
-        return kategori;
-    }
-
-    if (ytelse.aapMaxtid) {
-        kategori = 'AAP Maxtid';
-    } else if (ytelse.ordinaereDagpenger || ytelse.dagpengerUnderPermittering) {
-        kategori = 'Dagpenger';
-    } else if (ytelse.tiltakspenger) {
-        kategori = 'Tiltakspenger';
-    }
-
-    return kategori;
 }

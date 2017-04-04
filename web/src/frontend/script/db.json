@@ -1,4 +1,9 @@
 {
+  "statusall": {
+    "totalt": 0,
+    "nyeBrukere": 0,
+    "inaktiveBrukere": 0
+  },
   "veileder": {
     "ident": "X111111",
     "navn": "Arne And",
