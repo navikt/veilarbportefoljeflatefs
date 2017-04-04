@@ -6,23 +6,25 @@ import {
     hentPortefoljeForEnhet,
     settSortering,
     settBrukerSomMarkert,
-    nullstillFeilendeTilordninger
+    nullstillFeilendeTilordninger,
+    PORTEFOLJE_SIDESTORRELSE
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
 import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
+import { ASCENDING, DESCENDING } from '../konstanter';
 
 class EnhetsportefoljeVisning extends Component {
     componentWillMount() {
         const {
-            valgtEnhet, hentPortefolje, sorteringsrekkefolge, sorteringsfelt, fraIndex, antall, filtervalg
+            valgtEnhet, hentPortefolje, sorteringsrekkefolge, sorteringsfelt, fraIndex, filtervalg
         } = this.props;
         hentPortefolje(
             valgtEnhet.enhet.enhetId,
             sorteringsrekkefolge,
             sorteringsfelt,
             fraIndex,
-            antall,
+            PORTEFOLJE_SIDESTORRELSE,
             filtervalg
         );
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
@@ -34,7 +36,6 @@ class EnhetsportefoljeVisning extends Component {
             sorteringsfelt,
             settSortering, // eslint-disable-line no-shadow
             fraIndex,
-            antall,
             valgtEnhet,
             hentPortefolje,
             filtervalg
@@ -42,9 +43,9 @@ class EnhetsportefoljeVisning extends Component {
 
         let valgtRekkefolge = '';
         if (felt !== sorteringsfelt) {
-            valgtRekkefolge = 'ascending';
+            valgtRekkefolge = ASCENDING;
         } else {
-            valgtRekkefolge = sorteringsrekkefolge === 'ascending' ? 'descending' : 'ascending';
+            valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
         settSortering(valgtRekkefolge, felt);
         hentPortefolje(
@@ -52,7 +53,7 @@ class EnhetsportefoljeVisning extends Component {
             valgtRekkefolge,
             felt,
             fraIndex,
-            antall,
+            PORTEFOLJE_SIDESTORRELSE,
             filtervalg
         );
     }
@@ -107,7 +108,7 @@ class EnhetsportefoljeVisning extends Component {
                             filtervalg
                         )}
                     tekst={pagineringTekst}
-                    sideStorrelse={20}
+                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
                 />
                 <EnhetsportefoljeTabell
                     veiledere={veiledere.data.veilederListe}
@@ -129,7 +130,7 @@ class EnhetsportefoljeVisning extends Component {
                             filtervalg
                         )}
                     tekst={antallTotalt > 0 ? pagineringTekst : null}
-                    sideStorrelse={20}
+                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
                 />
             </Innholdslaster>
         );
@@ -155,7 +156,6 @@ EnhetsportefoljeVisning.propTypes = {
     fraIndex: PT.number,
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
-    antall: PT.number,
     filtervalg: PT.object
 };
 
@@ -165,7 +165,6 @@ const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    antall: state.paginering.sideStorrelse,
     filtervalg: state.filtrering
 });
 

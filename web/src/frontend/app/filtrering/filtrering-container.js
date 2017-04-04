@@ -11,13 +11,15 @@ function FiltreringContainer({ veiledere, valgtVeileder, velgVeileder, brukere, 
     return (
         <div className="blokk-m">
             <Ekspanderbartpanel
+                apen
                 className="custom-ekspanderbartpanel" tittel="Status"
                 tittelProps={{ type: 'systemtittel', tag: 'span' }}
             >
                 <FiltreringStatus filtergruppe={filtergruppe} veileder={veileder} filtervalg={filtervalg} />
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
-                className="custom-ekspanderbartpanel" tittel="Filter" apen
+                apen
+                className="custom-ekspanderbartpanel" tittel="Filter"
                 tittelProps={{ type: 'systemtittel', tag: 'span' }}
             >
                 <FiltreringFilter filtergruppe={filtergruppe} veileder={veileder} filtervalg={filtervalg} />
