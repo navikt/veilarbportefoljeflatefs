@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { settVisningsmodus } from '../ducks/veilederpaginering';
 
 const ButtonRadiogroup = ({visningsmodus, handleClick}) => {
-    console.log("bg", visningsmodus);
     return (
         <div className="visningsgruppe">
             <input
