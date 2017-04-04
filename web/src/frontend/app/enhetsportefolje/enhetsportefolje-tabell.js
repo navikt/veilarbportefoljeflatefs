@@ -119,7 +119,7 @@ class EnhetsportefoljeTabell extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {brukere.map((bruker, index) => <tr key={`${bruker.fnr}--${index}`}>
+                        {brukere.map((bruker) => <tr key={bruker.guid}>
                             <td>
                                 <div className="skjema__input">
                                     <input
