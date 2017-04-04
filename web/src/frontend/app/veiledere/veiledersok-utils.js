@@ -13,7 +13,8 @@ export function compareEtternavn(a, b) {
 export function visAlleVeiledereIListe(veiledere) {
     return veiledere
         .sort(compareEtternavn)
-        .reduce((obj, veileder) => ({ ...obj, [veileder.ident]: `${veileder.etternavn}, ${veileder.fornavn}` }), {});
+        .reduce((obj, veileder) =>
+            ({ ...obj, [veileder.ident]: { label: `${veileder.etternavn}, ${veileder.fornavn}` } }), {});
 }
 
 export function veiledereSok(soketekst, veiledere) {
@@ -37,8 +38,13 @@ export function veiledereSok(soketekst, veiledere) {
             sokestreng: veileder.navn.toLowerCase() + veileder.ident.toLowerCase()
         }))
         .map((veileder) => finnesInputsISokestreng(soketekster, veileder))
-        .map((veileder) => veileder.ident)
-        .map((ident) => veiledere.find((veileder) => veileder.ident === ident))
+        .map((veileder) => ({ ident: veileder.ident, skalVises: veileder.fantTreff }))
+        .map((v) => ({ ...veiledere.find((veileder) => veileder.ident === v.ident), skalVises: v.skalVises }))
         .sort(compareEtternavn)
-        .reduce((obj, veileder) => ({ ...obj, [veileder.ident]: `${veileder.etternavn}, ${veileder.fornavn}` }), {});
+        .reduce((obj, veileder) =>
+            ({ ...obj,
+                [veileder.ident]:
+                { label: `${veileder.etternavn}, ${veileder.fornavn}`,
+                    className: veileder.skalVises ? '' : 'veileder__hide' }
+            }), {});
 }
