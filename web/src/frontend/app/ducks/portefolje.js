@@ -1,5 +1,6 @@
 import * as Api from './../middleware/api';
 import { STATUS, doThenDispatch, handterFeil, toJson } from './utils';
+import { IKKE_SATT } from '../konstanter';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -12,6 +13,9 @@ const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
 
+export const PORTEFOLJE_SIDESTORRELSE = 20;
+
+
 // Reducer
 
 const initialState = {
@@ -22,10 +26,10 @@ const initialState = {
         antallReturnert: 0,
         fraIndex: 0
     },
-    sorteringsrekkefolge: 'ikke_satt',
-    sorteringsfelt: 'ikke_satt',
+    sorteringsrekkefolge: IKKE_SATT,
+    sorteringsfelt: IKKE_SATT,
     veileder: {
-        ident: 'ikke_satt'
+        ident: IKKE_SATT
     }
 };
 

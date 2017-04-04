@@ -1,5 +1,12 @@
 import { range, lag2Sifret } from '../utils/utils';
 
+export function lagConfig(data) {
+    if (typeof data === 'string') {
+        return { label: data };
+    }
+    return data;
+}
+
 export const inaktiveBrukere = 'Inaktive brukere';
 export const nyeBrukere = 'Nye brukere';
 
@@ -46,11 +53,12 @@ export const servicegruppe = {
     VURDU: 'Sykmeldt uten arbeidsgiver'
 };
 export const ytelse = {
-    ORDINARE_DAGPENGER: 'Ordinære dagpenger',
-    DAGPENGER_MED_PERMITTERING: 'Dagpenger med permittering',
-    DAGPENGER_OVRIGE: 'Dagpenger øvrige',
-    AAP_MAXTID: 'AAP maxtid',
-    AAP_UNNTAK: 'AAP unntak',
+    DAGPENGER: 'Dagpenger',
+    ORDINARE_DAGPENGER: { label: 'Ordinære dagpenger', className: 'skjemaelement--innrykk' },
+    DAGPENGER_MED_PERMITTERING: { label: 'Dagpenger med permittering', className: 'skjemaelement--innrykk' },
+    AAP: "AAP",
+    AAP_MAXTID: { label: 'AAP maxtid', className: 'skjemaelement--innrykk' },
+    AAP_UNNTAK: { label: 'AAP unntak', className: 'skjemaelement--innrykk' },
     TILTAKSPENGER: 'Tiltakspenger'
 };
 export const rettighetsgruppe = {

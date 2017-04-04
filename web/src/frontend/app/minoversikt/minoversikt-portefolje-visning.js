@@ -8,11 +8,13 @@ import {
     settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
-    markerAlleBrukere
+    markerAlleBrukere,
+    PORTEFOLJE_SIDESTORRELSE
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
+import { ASCENDING, DESCENDING } from '../konstanter';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 
 const settSammenNavn = (bruker) => {
@@ -57,9 +59,9 @@ class VeilederPortefoljeVisning extends Component {
         } = this.props;
         let valgtRekkefolge = '';
         if (felt !== sorteringsfelt) {
-            valgtRekkefolge = 'ascending';
+            valgtRekkefolge = ASCENDING;
         } else {
-            valgtRekkefolge = sorteringsrekkefolge === 'ascending' ? 'descending' : 'ascending';
+            valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
         settSortering(valgtRekkefolge, felt);
         hentPortefolje(
@@ -118,7 +120,7 @@ class VeilederPortefoljeVisning extends Component {
                         hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
                             sorteringsfelt, sorteringsrekkefolge, fra, antall, filtervalg)}
                     tekst={pagineringTekst}
-                    sideStorrelse={20}
+                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
                 />
                 <table className="tabell portefolje-tabell typo-avsnitt">
                     <thead className="extra-head">
@@ -241,8 +243,7 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    filtervalg: state.filtreringVeileder,
-    antall: state.paginering.sideStorrelse
+    filtervalg: state.filtreringVeileder
 });
 
 const mapDispatchToProps = (dispatch) => ({
