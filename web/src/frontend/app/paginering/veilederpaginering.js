@@ -23,11 +23,16 @@ class VeilederPaginering extends Component {
         const pagineringTekst = (
             <FormattedMessage
                 id={pagineringTekstId}
-                values={{
+                values={ liste.length > 0 ? {
                     fraIndex: `${fraIndeksForSubListe + 1}`,
                     tilIndex: fraIndeksForSubListe + subListe.length,
                     antallTotalt: liste.length
-                }}
+                } : {
+                    fraIndex: '0',
+                    tilIndex: '0',
+                    antallTotalt: '0'
+                }
+                }
             />
         );
 

@@ -91,8 +91,11 @@ class VeilederPortefoljeVisning extends Component {
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
                     values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
-                />) :
-                <FormattedMessage id="enhet.portefolje.paginering.ingen.brukere.tekst" />
+                />):
+                (<FormattedMessage
+                    id="enhet.portefolje.paginering.tekst"
+                    values={{ fraIndex: '0', tilIndex: '0', antallTotalt: '0' }}
+                />)
         );
 
         const feil = portefolje.feilendeTilordninger;
