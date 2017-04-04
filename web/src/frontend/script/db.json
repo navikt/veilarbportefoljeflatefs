@@ -92,7 +92,7 @@
         },
         "utlopsdatoFasett": "MND2",
         "aapMaxtid": null,
-        "aapMaxtidFasett": null
+        "aapMaxtidFasett": "KV1"
       },
       {
         "fnr": "00000000002",
@@ -188,7 +188,7 @@
         },
         "utlopsdatoFasett": null,
         "aapMaxtid": null,
-        "aapMaxtidFasett": null
+        "aapMaxtidFasett": "KV11"
       },
       {
         "fnr": "00000000004",
@@ -236,7 +236,7 @@
         },
         "utlopsdatoFasett": "MND5",
         "aapMaxtid": null,
-        "aapMaxtidFasett": null
+        "aapMaxtidFasett": "KV16"
       },
       {
         "fnr": "00000000005",
@@ -284,7 +284,7 @@
         },
         "utlopsdatoFasett": "MND5",
         "aapMaxtid": null,
-        "aapMaxtidFasett": null
+        "aapMaxtidFasett": "KV2"
       }
     ]
   }

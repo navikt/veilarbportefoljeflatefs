@@ -5,6 +5,7 @@ import {brukerShape} from '../proptype-shapes';
 
 function maned(brukere) {
 
+    console.log(brukere);
     const labels = new Array(12).fill(0).map((_, i) => moment().add(i + 1, 'month').format('MMMM'));
 
     const maaneder = Array(12).fill(0).map((_, i) => `MND${i + 1}`);
@@ -35,13 +36,40 @@ function maned(brukere) {
     }
 }
 
-function kvartal() {
-    const arr = new Array(16).fill(0);
+function kvartal(brukere) {
+
+    const labels = new Array(16).fill(0).map((_, i) => {
+        const quarter = moment().add(i, 'quarter');
+        return `Q${quarter.quarter()}.${quarter.year()}`
+    });
+
+    const kvartaler = Array(16).fill(0).map((_, i) => `KV${i + 1}`);
+    let antallMisterYtelse = Array(16).fill(0);
+    brukere
+        .filter(bruker => bruker.aapMaxtidFasett)
+        .map(bruker => {
+            let index = kvartaler.findIndex(element => element === bruker.aapMaxtidFasett);
+            let value = antallMisterYtelse[index];
+            antallMisterYtelse[index] = value + 1;
+        });
+
+    let runningSum = new Array(16);
+    antallMisterYtelse.reduce((acc, val, i) => {
+        return runningSum[i] = acc + val;
+    }, 0);
+
+    const antallMedYtelse = Array(16)
+        .fill(brukere.length)
+        .map((antall, i) => antall - runningSum[i]);
+
+    console.log(labels);
+    console.log(antallMisterYtelse);
+    console.log(antallMedYtelse);
 
     return {
-        labels: [''],
-        antallMisterYtelse: arr,
-        antallMedYtelse: arr
+        labels,
+        antallMisterYtelse,
+        antallMedYtelse
     };
 }
 
@@ -49,7 +77,7 @@ const Diagram = ({brukere, kategori}) => {
     moment.locale('nb_no');
 
     // const data = kategori === 'AAP Maxtid' ? kvartal(brukere) : maned(brukere);
-    const data = maned(brukere);
+    const data = kvartal(brukere);
 
     const options = {
         chart: {
