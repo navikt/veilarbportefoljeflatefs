@@ -15,7 +15,10 @@ const initialState = {
     data: {
         veilederListe: [],
         enhet: {}
-    }
+    },
+    sokeresultat: { sokIkkeStartet: true },
+    veilederfiltervalg: [],
+    veiledereITabell: undefined
 };
 
 //  Reducer
