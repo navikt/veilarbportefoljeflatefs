@@ -76,7 +76,8 @@ const Diagram = ({brukere, kategori}) => {
     const options = {
         chart: {
             type: 'column',
-            backgroundColor: '#e9e7e7'
+            backgroundColor: null,
+            spacingBottom: 60
         },
         colors: [
             '#669db4',
@@ -98,15 +99,17 @@ const Diagram = ({brukere, kategori}) => {
             }
         },
         legend: {
-            align: 'right',
-            x: -30,
-            verticalAlign: 'top',
-            y: 25,
+            align: 'left',
+            x: 0,
+            verticalAlign: 'bottom',
+            y: 50,
             floating: true,
-            backgroundColor: '#CCC',
-            borderColor: '#CCC',
-            borderWidth: 1,
-            shadow: false
+            backgroundColor: null,
+            borderColor: null,
+            borderWidth: 0,
+            shadow: false,
+            layout: 'vertical',
+            symbolRadius: 0
         },
         tooltip: {
             headerFormat: '<b>{point.x}</b><br/>',
