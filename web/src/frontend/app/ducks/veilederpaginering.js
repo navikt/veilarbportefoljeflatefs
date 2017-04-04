@@ -81,6 +81,12 @@ export default function reducer(state = initialState, action) {
                 liste: sorterPaaPortefoljestorrelse(state.liste, action.nySortering.rekkefolge),
                 currentSortering: action.nySortering
             };
+
+        case SETT_VISNINGSMODUS:
+            return {
+                ...state,
+                visningsmodus: action.visningsmodus
+            };
         default:
             return state;
     }
@@ -122,6 +128,7 @@ export function sorterListePaaPortefoljestorrelse(nySortering) {
 }
 
 export function settVisningsmodus(visningsmodus) {
+    console.log('u wot m8?', visningsmodus);
     return {
         type: SETT_VISNINGSMODUS,
         visningsmodus

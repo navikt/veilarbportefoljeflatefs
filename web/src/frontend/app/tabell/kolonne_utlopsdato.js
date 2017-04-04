@@ -7,7 +7,7 @@ const KolonneUtlopsdato = ({ utlopsdato }) => {
 };
 
 KolonneUtlopsdato.propTypes = {
-    utlopsdato: PT.string.isRequired
+    utlopsdato: PT.object.isRequired
 };
 
 export default KolonneUtlopsdato;
