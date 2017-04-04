@@ -5,14 +5,15 @@ import {brukerShape} from '../proptype-shapes';
 import { headertekst } from './diagram-konstanter';
 import { FormattedMessage } from 'react-intl';
 import { ytelsevalg } from '../filtrering/filter-konstanter'
+import config from './diagram-config';
 
 function maned(brukere) {
 
     const labels = new Array(12).fill(0).map((_, i) => moment().add(i + 1, 'month').format('MMMM'));
 
-    const maaneder = Array(12).fill(0).map((_, i) => `MND${i + 1}`);
+    const maaneder = new Array(12).fill(0).map((_, i) => `MND${i + 1}`);
 
-    let antallMisterYtelse = Array(12).fill(0);
+    let antallMisterYtelse = new Array(12).fill(0);
     brukere
         .filter(bruker => bruker.utlopsdatoFasett)
         .map(bruker => {
@@ -27,7 +28,7 @@ function maned(brukere) {
         return runningSum[i] = acc + val;
     }, 0);
 
-    const antallMedYtelse = Array(12)
+    const antallMedYtelse = new Array(12)
         .fill(brukere.length)
         .map((antall, i) => antall - runningSum[i]);
 
@@ -45,8 +46,8 @@ function kvartal(brukere) {
         return `Q${quarter.quarter()}.${quarter.year()}`
     });
 
-    const kvartaler = Array(16).fill(0).map((_, i) => `KV${i + 1}`);
-    let antallMisterYtelse = Array(16).fill(0);
+    const kvartaler = new Array(16).fill(0).map((_, i) => `KV${i + 1}`);
+    let antallMisterYtelse = new Array(16).fill(0);
     brukere
         .filter(bruker => bruker.aapMaxtidFasett)
         .map(bruker => {
@@ -60,7 +61,7 @@ function kvartal(brukere) {
         return runningSum[i] = acc + val;
     }, 0);
 
-    const antallMedYtelse = Array(16)
+    const antallMedYtelse = new Array(16)
         .fill(brukere.length)
         .map((antall, i) => antall - runningSum[i]);
 
@@ -72,8 +73,6 @@ function kvartal(brukere) {
 }
 
 function utledHeaderTekst(filtreringvalg) {
-    console.log('filtreringsvalg: ', filtreringvalg);
-    console.log('ytelsesvalg: ', ytelsevalg);
     switch (filtreringvalg) {
         case ytelsevalg.DAGPENGER:
         case ytelsevalg.DAGPENGER_MED_PERMITTERING:
@@ -87,79 +86,15 @@ function utledHeaderTekst(filtreringvalg) {
         case ytelsevalg.AAP_UNNTAK:
             return headertekst.AAP;
         default:
-            return "Feil: kunne ikke finne kategori for ytelse";
+            return 'minoversikt.diagram.header.feil';
     }
 }
 
 const Diagram = ({brukere, filtreringsvalg}) => {
     moment.locale('nb_no');
 
-    const data = filtreringsvalg === 'AAP_MAXTID' ? kvartal(brukere) : maned(brukere);
-
-    const options = {
-        chart: {
-            type: 'column',
-            backgroundColor: null,
-            spacingBottom: 60
-        },
-        colors: [
-            '#669db4',
-            '#d6897d'
-        ],
-        title: {
-            text: ''
-        },
-        xAxis: {
-            categories: data.labels
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Antall personer'
-            },
-            stackLabels: {
-                enabled: false,
-            }
-        },
-        legend: {
-            align: 'left',
-            x: 0,
-            verticalAlign: 'bottom',
-            y: 50,
-            floating: true,
-            backgroundColor: null,
-            borderColor: null,
-            borderWidth: 0,
-            shadow: false,
-            layout: 'vertical',
-            symbolRadius: 0
-        },
-        tooltip: {
-            headerFormat: '<b>{point.x}</b><br/>',
-            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-                dataLabels: {
-                    enabled: false
-                }
-            }
-        },
-        series: [
-            {
-                index: 1,
-                name: 'Brukere med dagpenger',
-                data: data.antallMedYtelse
-            },
-            {
-                index: 0,
-                name: 'Brukere med dagpenger som mister ytelse i gjeldende mnd',
-                data: data.antallMisterYtelse
-            }
-        ]
-    };
-
+    const data = filtreringsvalg === ytelsevalg.AAP_MAXTID ? kvartal(brukere) : maned(brukere);
+    const options = config(data);
     const headerTekst = utledHeaderTekst(filtreringsvalg);
 
     return (
