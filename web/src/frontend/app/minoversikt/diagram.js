@@ -5,7 +5,6 @@ import {brukerShape} from '../proptype-shapes';
 
 function maned(brukere) {
 
-    console.log(brukere);
     const labels = new Array(12).fill(0).map((_, i) => moment().add(i + 1, 'month').format('MMMM'));
 
     const maaneder = Array(12).fill(0).map((_, i) => `MND${i + 1}`);
@@ -62,10 +61,6 @@ function kvartal(brukere) {
         .fill(brukere.length)
         .map((antall, i) => antall - runningSum[i]);
 
-    console.log(labels);
-    console.log(antallMisterYtelse);
-    console.log(antallMedYtelse);
-
     return {
         labels,
         antallMisterYtelse,
@@ -76,8 +71,7 @@ function kvartal(brukere) {
 const Diagram = ({brukere, kategori}) => {
     moment.locale('nb_no');
 
-    // const data = kategori === 'AAP Maxtid' ? kvartal(brukere) : maned(brukere);
-    const data = kvartal(brukere);
+    const data = kategori === 'AAP Maxtid' ? kvartal(brukere) : maned(brukere);
 
     const options = {
         chart: {
