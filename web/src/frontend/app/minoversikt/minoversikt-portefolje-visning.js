@@ -16,7 +16,6 @@ import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
-import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 import Diagram from './diagram';
 
 const settSammenNavn = (bruker) => {
@@ -261,7 +260,7 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    visningsmodus: state.paginering.visningsmodus,
+    visningsmodus: state.veilederpaginering.visningsmodus,
     filtervalg: state.filtreringVeileder
 });
 
