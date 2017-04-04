@@ -1,11 +1,12 @@
 import React, { PropTypes as PT } from 'react';
 import { lagConfig } from './filter-konstanter';
+import { FilterIkon } from '../components/filter-ikon';
 
 function FiltreringLabel({ label, slettFilter }) {
     return (
         <button className="filtreringlabel typo-avsnitt" onClick={slettFilter}>
             <span className="filtreringlabel__label">{lagConfig(label).label}</span>
-            <i className="filter--x" />
+            <FilterIkon />
         </button>
     );
 }
