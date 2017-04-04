@@ -21,13 +21,13 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
         : antallTotalt - (antallTotalt % sideStorrelse);
     const fraIndeksSisteSide = fraIndex + sideStorrelse >= antallTotalt ? fraIndex : fraIndex + sideStorrelse;
 
-    const ikkeAktiv = classNames({'not-active': antallTotalt === antallReturnert});
+    const ikkeAktiv = classNames({ 'not-active': antallTotalt === antallReturnert });
     const seAlleKnapp = createSimpleLink(0, antallTotalt, 'Se alle');
     const seFaerreKnapp = createSimpleLink(0, sideStorrelse, 'Se færre');
     const seAlleKnappInactive = createSimpleLink(0, antallTotalt, 'Se alle', 'not-active');
 
     function lagChevron(isLeft) {
-        if(isLeft) {
+        if (isLeft) {
             return (
                 <i className="chevron--venstre">
                     <span className="text-hide prev">{'Forrige'}</span>
@@ -46,9 +46,8 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
             return seAlleKnappInactive;
         } else if (antallReturnert === antallTotalt) {
             return seFaerreKnapp;
-        } else {
-            return seAlleKnapp;
         }
+        return seAlleKnapp;
     }
 
     function visForrigeKnapp() {
@@ -59,25 +58,25 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
                 </button>
             );
         }
-        return(createSimpleLink(fraIndeksForrigeSide, sideStorrelse, lagChevron(true), 'prev'));
+        return (createSimpleLink(fraIndeksForrigeSide, sideStorrelse, lagChevron(true), 'prev'));
     }
 
     function visSideEnKnapp() {
         if (fraIndex !== 0) {
             return createSimpleLink(0, sideStorrelse, '1', ikkeAktiv);
         }
+        return null;
     }
 
     const visCurrentKnapp = <button><strong>{((fraIndex / sideStorrelse) + 1)}</strong></button>;
 
     function visSisteSideKnapp() {
-        if (antallTotalt === antallReturnert) {
-            return null;
-        } else if (fraIndex < fraIndeksSisteSide) {
+        if (fraIndex < fraIndeksSisteSide && antallTotalt !== antallReturnert) {
             return createSimpleLink(
                 fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt / sideStorrelse), ikkeAktiv
             );
         }
+        return null;
     }
 
     function visNesteKnapp() {
