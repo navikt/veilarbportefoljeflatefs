@@ -2,6 +2,9 @@ import React, {Component, PropTypes as PT} from 'react';
 import Chart from './chart';
 import moment from 'moment';
 import {brukerShape} from '../proptype-shapes';
+import { headertekst } from './diagram-konstanter';
+import { FormattedMessage } from 'react-intl';
+import { ytelsevalg } from '../filtrering/filter-konstanter'
 
 function maned(brukere) {
 
@@ -66,6 +69,26 @@ function kvartal(brukere) {
         antallMisterYtelse,
         antallMedYtelse
     };
+}
+
+function utledHeaderTekst(filtreringvalg) {
+    console.log('filtreringsvalg: ', filtreringvalg);
+    console.log('ytelsesvalg: ', ytelsevalg);
+    switch (filtreringvalg) {
+        case ytelsevalg.DAGPENGER:
+        case ytelsevalg.DAGPENGER_MED_PERMITTERING:
+        case ytelsevalg.ORDINARE_DAGPENGER:
+            return headertekst.DAGPENGER;
+        case ytelsevalg.TILTAKSPENGER:
+            return headertekst.TILTAKSPENGER;
+        case ytelsevalg.AAP_MAXTID:
+            return headertekst.AAP_MAXTID;
+        case ytelsevalg.AAP:
+        case ytelsevalg.AAP_UNNTAK:
+            return headertekst.AAP;
+        default:
+            return "Feil: kunne ikke finne kategori for ytelse";
+    }
 }
 
 const Diagram = ({brukere, filtreringsvalg}) => {
@@ -136,9 +159,14 @@ const Diagram = ({brukere, filtreringsvalg}) => {
             }
         ]
     };
+
+    const headerTekst = utledHeaderTekst(filtreringsvalg);
+
     return (
         <div>
-            <h1>{filtreringsvalg}</h1>
+            <h1>
+                <FormattedMessage id={headerTekst} />
+            </h1>
             <Chart type="Chart" options={options} container="chart"/>
         </div>
     );
