@@ -3,7 +3,7 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import Chart from './chart';
 import { brukerShape } from '../proptype-shapes';
-import { headertekst } from './diagram-konstanter';
+import { headertekst, legendtekst } from './diagram-konstanter';
 import { ytelsevalg } from '../filtrering/filter-konstanter';
 import config from './diagram-config';
 import MultiFormattedMessage from './multiformattedmessage';
@@ -73,21 +73,36 @@ function kvartal(brukere) {
     };
 }
 
-function utledHeaderTekst(filtreringvalg) {
+function utledTekster(filtreringvalg) {
     switch (filtreringvalg) {
         case ytelsevalg.DAGPENGER:
         case ytelsevalg.DAGPENGER_MED_PERMITTERING:
         case ytelsevalg.ORDINARE_DAGPENGER:
-            return headertekst.DAGPENGER;
+            return {
+                headertekst: headertekst.DAGPENGER,
+                legendtekst: legendtekst.DAGPENGER
+            };
         case ytelsevalg.TILTAKSPENGER:
-            return headertekst.TILTAKSPENGER;
+            return {
+                headertekst: headertekst.TILTAKSPENGER,
+                legendtekst: legendtekst.TILTAKSPENGER
+            };
         case ytelsevalg.AAP_MAXTID:
-            return headertekst.AAP_MAXTID;
+            return {
+                headertekst: headertekst.AAP_MAXTID,
+                legendtekst: legendtekst.AAP_MAXTID
+            };
         case ytelsevalg.AAP:
         case ytelsevalg.AAP_UNNTAK:
-            return headertekst.AAP;
+            return {
+                headertekst: headertekst.AAP,
+                legendtekst: legendtekst.AAP
+            };
         default:
-            return 'minoversikt.diagram.header.feil';
+            return {
+                headertekst: 'minoversikt.diagram.header.feil',
+                legendtekst: ['minoversikt.diagram.header.feil', 'minoversikt.diagram.header.feil']
+            };
     }
 }
 
@@ -95,14 +110,14 @@ const Diagram = ({ brukere, filtreringsvalg }) => {
     moment.locale('nb_no');
 
     const data = filtreringsvalg === ytelsevalg.AAP_MAXTID ? kvartal(brukere) : maned(brukere);
-    const headerTekst = utledHeaderTekst(filtreringsvalg);
+    const tekster = utledTekster(filtreringsvalg);
 
     return (
         <div>
             <h1>
-                <FormattedMessage id={headerTekst}/>
+                <FormattedMessage id={tekster.headertekst}/>
             </h1>
-            <MultiFormattedMessage id={['serie1', 'serie2']}>
+            <MultiFormattedMessage id={tekster.legendtekst}>
                 {(tekster) => (
                     <Chart type="Chart" options={config(data, tekster)} container="chart"/>
                 )}
