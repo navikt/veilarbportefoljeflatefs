@@ -1,25 +1,15 @@
-import * as React from 'react';
+import React, {Component, PropTypes as PT} from 'react';
 import Chart from './chart';
-import * as moment from 'moment';
-import * as Highcharts from 'highcharts';
+import moment from 'moment';
+import {brukerShape} from '../proptype-shapes';
 
-interface Bruker {
-    utlopsdatoFasett?: string
-    [propName: string]: any;
-}
+function maned(brukere) {
 
-interface DiagramData {
-    labels: Array<string>,
-    antallMisterYtelse: Array<number>,
-    antallMedYtelse: Array<number>
-}
+    const labels = new Array(12).fill(0).map((_, i) => moment().add(i + 1, 'month').format('MMMM'));
 
-function maned(brukere: Array<Bruker>): DiagramData {
-    const labels: Array<string> = new Array(12).fill(0).map((_, i) => moment().add(i + 1, 'month').format('MMMM'));
+    const maaneder = Array(12).fill(0).map((_, i) => `MND${i + 1}`);
 
-    const maaneder: Array<string> = Array(12).fill(0).map((_, i) => `MND${i + 1}`);
-
-    let antallMisterYtelse: Array<number> = Array(12).fill(0);
+    let antallMisterYtelse = Array(12).fill(0);
     brukere
         .filter(bruker => bruker.utlopsdatoFasett)
         .map(bruker => {
@@ -34,7 +24,7 @@ function maned(brukere: Array<Bruker>): DiagramData {
         return runningSum[i] = acc + val;
     }, 0);
 
-    const antallMedYtelse: Array<number> = Array(12)
+    const antallMedYtelse = Array(12)
         .fill(brukere.length)
         .map((antall, i) => antall - runningSum[i]);
 
@@ -45,7 +35,7 @@ function maned(brukere: Array<Bruker>): DiagramData {
     }
 }
 
-function kvartal(brukere: Array<Bruker>): DiagramData {
+function kvartal() {
     const arr = new Array(16).fill(0);
 
     return {
@@ -55,12 +45,13 @@ function kvartal(brukere: Array<Bruker>): DiagramData {
     };
 }
 
-export function Diagram(props: { kategori: string, brukere: Array<Bruker> }) {
+const Diagram = ({brukere, kategori}) => {
     moment.locale('nb_no');
 
-    const data = props.kategori === 'AAP Maxtid' ? kvartal(props.brukere) : maned(props.brukere);
+    // const data = kategori === 'AAP Maxtid' ? kvartal(brukere) : maned(brukere);
+    const data = maned(brukere);
 
-    const options: Highcharts.Options = {
+    const options = {
         chart: {
             type: 'column',
             backgroundColor: '#e9e7e7'
@@ -111,21 +102,26 @@ export function Diagram(props: { kategori: string, brukere: Array<Bruker> }) {
             {
                 index: 1,
                 name: 'Brukere med dagpenger',
-                data: data.brukereMedYtelse
+                data: data.antallMedYtelse
             },
             {
                 index: 0,
                 name: 'Brukere med dagpenger som mister ytelse i gjeldende mnd',
-                data: data.brukereMisterYtelse
+                data: data.antallMisterYtelse
             }
         ]
     };
     return (
         <div>
-            <h1>{props.kategori}</h1>
+            <h1>{kategori}</h1>
             <Chart type="Chart" options={options} container="chart"/>
         </div>
     );
-}
+};
+
+Diagram.PropTypes = {
+    kategori: PT.string.isRequired,
+    brukere: PT.arrayOf(brukerShape).isRequired
+};
 
 export default Diagram;
