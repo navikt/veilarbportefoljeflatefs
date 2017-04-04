@@ -56,7 +56,7 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
         return null;
     }
 
-    const visCurrentKnapp = <button><strong>{((fraIndex / sideStorrelse) + 1)}</strong></button>;
+    const visCurrentSideKnapp = <button><strong>{((fraIndex / sideStorrelse) + 1)}</strong></button>;
 
     function visSisteSideKnapp() {
         if (fraIndex < fraIndeksSisteSide && antallTotalt !== antallReturnert) {
@@ -89,7 +89,7 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
                 {visSeAlleKnapp()}
                 {visForrigeKnapp()}
                 {visSideEnKnapp()}
-                {visCurrentKnapp}
+                {visCurrentSideKnapp}
                 {visSisteSideKnapp()}
                 {visNesteKnapp()}
             </div>
