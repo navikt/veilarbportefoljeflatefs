@@ -68,10 +68,10 @@ function kvartal(brukere) {
     };
 }
 
-const Diagram = ({brukere, kategori}) => {
+const Diagram = ({brukere, filtreringsvalg}) => {
     moment.locale('nb_no');
 
-    const data = kategori === 'AAP Maxtid' ? kvartal(brukere) : maned(brukere);
+    const data = filtreringsvalg === 'AAP_MAXTID' ? kvartal(brukere) : maned(brukere);
 
     const options = {
         chart: {
@@ -138,7 +138,7 @@ const Diagram = ({brukere, kategori}) => {
     };
     return (
         <div>
-            <h1>{kategori}</h1>
+            <h1>{filtreringsvalg}</h1>
             <Chart type="Chart" options={options} container="chart"/>
         </div>
     );
