@@ -8,7 +8,7 @@ function MultiFormattedMessage({ id, intl, children }) {
 MultiFormattedMessage.propTypes = {
     id: PT.arrayOf(PT.string).isRequired,
     children: PT.func.isRequired,
-    intl: PT.object.isRequired // eslint-disable XXXX
+    intl: PT.object.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
 export default injectIntl(MultiFormattedMessage);
