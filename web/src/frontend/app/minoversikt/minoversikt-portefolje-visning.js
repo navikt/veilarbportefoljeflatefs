@@ -131,6 +131,7 @@ class VeilederPortefoljeVisning extends Component {
                     tekst={pagineringTekst}
                     sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
                     visButtongroup={ytelseFilterErAktiv(filtervalg.ytelse)}
+                    antallReturnert={antallReturnert}
                 />
                 {
                     visningsmodus ===  DIAGRAMVISNING && ytelseFilterErAktiv(filtervalg.ytelse) ?
