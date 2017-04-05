@@ -1,13 +1,11 @@
-import { headertekst, legendtekst } from './diagram-konstanter'
 import moment from 'moment';
+import { headertekst, legendtekst } from './diagram-konstanter';
 import { ytelsevalg } from '../../filtrering/filter-konstanter';
 
 export function runningTotal(arr) {
-    const runningTotal = new Array(arr.length);
-    arr.reduce((acc, val, i) => {
-        return runningTotal[i] = acc + val;
-    }, 0);
-    return runningTotal;
+    const running = new Array(arr.length);
+    arr.reduce((acc, val, i) => running[i] = acc + val, 0);
+    return running;
 }
 
 export function harYtelseSerie(lopendeSum, antallBrukere) {
@@ -23,12 +21,12 @@ export function maned(brukere) {
     const labels = new Array(len).fill(0).map((_, i) => moment().add(i + 1, 'month').format('MMMM'));
     const maaneder = new Array(len).fill(0).map((_, i) => `MND${i + 1}`);
 
-    let antallMisterYtelse = new Array(len).fill(0);
+    const antallMisterYtelse = new Array(len).fill(0);
     brukere
-        .filter(bruker => bruker.utlopsdatoFasett)
-        .map(bruker => {
-            let index = maaneder.findIndex(element => element === bruker.utlopsdatoFasett);
-            let value = antallMisterYtelse[index];
+        .filter((bruker) => bruker.utlopsdatoFasett)
+        .map((bruker) => {
+            const index = maaneder.findIndex((element) => element === bruker.utlopsdatoFasett);
+            const value = antallMisterYtelse[index];
             antallMisterYtelse[index] = value + 1;
         });
 
@@ -38,7 +36,7 @@ export function maned(brukere) {
         labels,
         antallMisterYtelse,
         antallMedYtelse: harYtelseSerie(lopendeSum, brukere.length)
-    }
+    };
 }
 
 export function kvartal(brukere) {
@@ -47,16 +45,16 @@ export function kvartal(brukere) {
     const len = 16;
     const labels = new Array(len).fill(0).map((_, i) => {
         const quarter = moment().add(i, 'quarter');
-        return `Q${quarter.quarter()}.${quarter.year()}`
+        return `Q${quarter.quarter()}.${quarter.year()}`;
     });
     const kvartaler = new Array(len).fill(0).map((_, i) => `KV${i + 1}`);
 
-    let antallMisterYtelse = new Array(len).fill(0);
+    const antallMisterYtelse = new Array(len).fill(0);
     brukere
-        .filter(bruker => bruker.aapMaxtidFasett)
-        .map(bruker => {
-            let index = kvartaler.findIndex(element => element === bruker.aapMaxtidFasett);
-            let value = antallMisterYtelse[index];
+        .filter((bruker) => bruker.aapMaxtidFasett)
+        .map((bruker) => {
+            const index = kvartaler.findIndex((element) => element === bruker.aapMaxtidFasett);
+            const value = antallMisterYtelse[index];
             antallMisterYtelse[index] = value + 1;
         });
 
@@ -108,4 +106,4 @@ export default {
     ledetekster,
     runningTotal,
     harYtelseSerie
-}
+};
