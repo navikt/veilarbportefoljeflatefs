@@ -2,16 +2,22 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
-import Innholdslaster from './../innholdslaster/innholdslaster';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { hentStatusTall, hentStatusTallForVeileder } from '../ducks/statustall';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 
+function calcWidth(antall, max) {
+    if (antall === 0) {
+        return 0;
+    }
+
+    const width = Math.round(Math.min(antall / max, 1) * 100);
+    return Math.max(width, 6);
+}
+
 function Barlabel({ htmlFor, tekstId, antall, max, className }) {
-    const style = { width: `${Math.round(Math.min(antall / max, 1) * 100)}%` };
-    const barface = antall === 0 ? null : (
-            <span className="barlabel__barface" aria-hidden="true" style={style}/>
-        );
+    const style = { width: `${calcWidth(antall, max)}%` };
+
     return (
         <label htmlFor={htmlFor} className={['barlabel', className].join(' ')}>
             <FormattedMessage id={tekstId}/>
@@ -20,7 +26,7 @@ function Barlabel({ htmlFor, tekstId, antall, max, className }) {
                 <Element className="barlabel__antall">{antall}</Element>
                 <div className="barlabel__bar">
                     <span className="barlabel__bartrack" aria-hidden="true"/>
-                    {barface}
+                    <span className="barlabel__barface" aria-hidden="true" style={style}/>
                 </div>
             </div>
         </label>
@@ -61,33 +67,31 @@ class FiltreringStatus extends Component {
             </div>
         );
         return (
-            <Innholdslaster avhengigheter={[this.props.statustall]} storrelse="xxl">
-                <div className="filtrering-oversikt panel">
-                    <div className="typo-element blokk-xs">
-                        <FormattedMessage
-                            id="filtrering.status.totalt-antall-brukere"
-                            values={{ antall: this.props.statustall.data.totalt }}
-                        />
-                    </div>
-                    { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : null }
-                    <div className="skjema__input">
-                        <input
-                            className="checkboks"
-                            id="inaktiveBrukere"
-                            type="checkbox"
-                            onChange={this.handleChange}
-                            checked={inaktiveBrukere}
-                        />
-                        <Barlabel
-                            className="inaktiveBrukere"
-                            htmlFor="inaktiveBrukere"
-                            tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
-                            antall={this.props.statustall.data.inaktiveBrukere}
-                            max={this.props.statustall.data.totalt}
-                        />
-                    </div>
+            <div className="filtrering-oversikt panel">
+                <div className="typo-element blokk-xs">
+                    <FormattedMessage
+                        id="filtrering.status.totalt-antall-brukere"
+                        values={{ antall: this.props.statustall.data.totalt }}
+                    />
                 </div>
-            </Innholdslaster>
+                { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : null }
+                <div className="skjema__input">
+                    <input
+                        className="checkboks"
+                        id="inaktiveBrukere"
+                        type="checkbox"
+                        onChange={this.handleChange}
+                        checked={inaktiveBrukere}
+                    />
+                    <Barlabel
+                        className="inaktiveBrukere"
+                        htmlFor="inaktiveBrukere"
+                        tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
+                        antall={this.props.statustall.data.inaktiveBrukere}
+                        max={this.props.statustall.data.totalt}
+                    />
+                </div>
+            </div>
         );
     }
 }
