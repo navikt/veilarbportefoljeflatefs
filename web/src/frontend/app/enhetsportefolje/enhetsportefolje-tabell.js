@@ -46,8 +46,10 @@ class EnhetsportefoljeTabell extends Component {
             modalSkalVises,
             toggleSkjulModal,
             valgtEnhet,
+            sorteringsrekkefolge,
             filtervalg
         } = this.props;
+
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
 
@@ -88,7 +90,10 @@ class EnhetsportefoljeTabell extends Component {
                             <th>
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
-                                    className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
+                                    className={classNames('sortering-link', { valgt: sorterEtternavn })}
+                                    aria-pressed={sorterEtternavn}
+                                    aria-label={(sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt') ?
+                                        sorteringsrekkefolge : 'inaktiv'}
                                 >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                                 </button>
@@ -97,7 +102,10 @@ class EnhetsportefoljeTabell extends Component {
                             <th>
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('fodselsdato')}
-                                    className={classNames({ 'sortering-link': true, valgt: sorterFodelsnummer })}
+                                    className={classNames('sortering-link', { valgt: sorterFodelsnummer })}
+                                    aria-pressed={sorterFodelsnummer}
+                                    aria-label={sorterFodelsnummer && sorteringsrekkefolge !== 'ikke_satt' ?
+                                        sorteringsrekkefolge : 'inaktiv'}
                                 >
                                     <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                                 </button>
@@ -119,7 +127,7 @@ class EnhetsportefoljeTabell extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {brukere.map((bruker) => <tr key={bruker.fnr}>
+                        {brukere.map((bruker) => <tr key={bruker.guid}>
                             <td>
                                 <div className="skjema__input">
                                     <input
@@ -187,6 +195,7 @@ EnhetsportefoljeTabell.propTypes = {
         sorteringsrekkefolge: PT.string.isRequired
     }).isRequired,
     settSorteringForPortefolje: PT.func.isRequired,
+    sorteringsrekkefolge: PT.string.isRequired,
     settSomMarkert: PT.func.isRequired,
     settSomMarkertAlle: PT.func.isRequired,
     modalSkalVises: PT.bool.isRequired,
@@ -200,6 +209,7 @@ const mapStateToProps = (state) => ({
     antallTotalt: state.portefolje.data.antallTotalt,
     modalSkalVises: state.modal.visModal,
     filtervalg: state.filtrering,
+    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     valgtEnhet: state.enheter.valgtEnhet.enhet.enhetId
 });
 

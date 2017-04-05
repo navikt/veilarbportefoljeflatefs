@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 import { Link } from 'react-router';
 import { veilederShape } from './../proptype-shapes';
 import { settValgtVeileder } from '../ducks/portefolje';
@@ -27,7 +28,10 @@ class VeilederTabell extends Component {
     }
 
     render() {
-        const { veiledere, modalSkalVises, toggleSkjulModal } = this.props;
+        const { veiledere, modalSkalVises, toggleSkjulModal, currentSortering } = this.props;
+
+        const sorterEtternavn = currentSortering.felt === 'etternavn';
+        const sorterPaaPortefoljeStr = currentSortering.felt === 'portefoljestorrelse';
 
         const veilederElementer = veiledere.map((veileder) => (
             <tr key={veileder.ident}>
@@ -59,7 +63,13 @@ class VeilederTabell extends Component {
                     <thead>
                         <tr>
                             <th scope="col">
-                                <button onClick={this.props.sorterPaaEtternavn} className="sortering-link">
+                                <button
+                                    onClick={this.props.sorterPaaEtternavn}
+                                    className={classNames('sortering-link', { valgt: sorterEtternavn })}
+                                    aria-pressed={sorterEtternavn}
+                                    aria-label={sorterEtternavn ?
+                                        currentSortering.rekkefolge : 'inaktiv'}
+                                >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                                 </button>
                                 <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
@@ -68,7 +78,13 @@ class VeilederTabell extends Component {
                                 <FormattedMessage id="enhet.veiledere.tabell.ident" />
                             </th>
                             <th scope="col">
-                                <button onClick={this.props.sorterPaaPortefoljestorrelse} className="sortering-link">
+                                <button
+                                    onClick={this.props.sorterPaaPortefoljestorrelse}
+                                    className={classNames('sortering-link', { valgt: sorterPaaPortefoljeStr })}
+                                    aria-pressed={sorterPaaPortefoljeStr}
+                                    aria-label={sorterPaaPortefoljeStr ?
+                                        currentSortering.rekkefolge : 'inaktiv'}
+                                >
                                     <FormattedMessage id="enhet.veiledere.tabell.brukere" />
                                 </button>
                             </th>
@@ -91,12 +107,17 @@ VeilederTabell.propTypes = {
     toggleSkjulModal: PT.func.isRequired,
     toggleVisModal: PT.func.isRequired,
     veilederListe: PT.arrayOf(veilederShape).isRequired,
-    sorterPaaPortefoljestorrelse: PT.func.isRequired
+    sorterPaaPortefoljestorrelse: PT.func.isRequired,
+    currentSortering: PT.shape({
+        felt: PT.string.isRequired,
+        rekkefolge: PT.string.isRequired
+    }).isRequired
 };
 
 const mapStateToProps = (state) => ({
     modalSkalVises: state.modal.visModal,
-    veilederListe: state.veiledere.data.veilederListe
+    veilederListe: state.veiledere.data.veilederListe,
+    currentSortering: state.veilederpaginering.currentSortering
 
 });
 

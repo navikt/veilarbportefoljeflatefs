@@ -49,7 +49,9 @@ class Dropdown extends Component {
     }
 
     lukkDropdown() {
+        const { onLukk = () => {} } = this.props;
         this.setState({ apen: false });
+        onLukk();
     }
 
     render() {
@@ -84,7 +86,8 @@ Dropdown.propTypes = {
     apen: PT.bool,
     name: PT.string.isRequired,
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.node)]).isRequired,
-    className: PT.string
+    className: PT.string,
+    onLukk: PT.func
 };
 Dropdown.defaultProps = {
     apen: false

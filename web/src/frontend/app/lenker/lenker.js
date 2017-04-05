@@ -1,18 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { withRouter } from 'react-router';
 import { FormattedMessage } from 'react-intl';
+import ActiveLink from './active-link';
 
 function Lenker() {
+    const EnhetensOversikt = <FormattedMessage id="lenker.enhet.oversikt" />;
+    const Veilederoversikt = <FormattedMessage id="lenker.veiledere.oversikt" />;
+
     return (
-        <div className="lenker blokk-m">
-            <Link to="enhet" className="oversiktslenke typo-undertittel" activeClassName="oversiktslenke--valgt">
-                <FormattedMessage id="lenker.enhet.oversikt" />
-            </Link>
-            <Link to="veiledere" className="oversiktslenke typo-undertittel" activeClassName="oversiktslenke--valgt">
-                <FormattedMessage id="lenker.veiledere.oversikt" />
-            </Link>
+        <div className="lenker blokk-m" role="tablist">
+            <ActiveLink
+                to="enhet"
+                className="oversiktslenke typo-undertittel"
+                activeClassName="oversiktslenke--valgt"
+            >
+                {EnhetensOversikt}
+            </ActiveLink>
+            <ActiveLink
+                to="veiledere"
+                className="oversiktslenke typo-undertittel"
+                activeClassName="oversiktslenke--valgt"
+            >
+                {Veilederoversikt}
+            </ActiveLink>
         </div>
     );
 }
 
-export default Lenker;
+export default withRouter(Lenker);

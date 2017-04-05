@@ -1,7 +1,8 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router';
+import DocumentTitle from 'react-document-title';
 import { Normaltekst } from 'nav-frontend-typografi';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
 import FiltreringContainer from '../filtrering/filtrering-container';
@@ -11,10 +12,11 @@ import { brukerShape, filtervalgShape, enhetShape } from '../proptype-shapes';
 import { tildelVeileder, hentPortefoljeForVeileder } from '../ducks/portefolje';
 
 function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
-    veiledere, hentPortefolje, valgtEnhet, ...props }) {
+    veiledere, hentPortefolje, valgtEnhet, intl, ...props }) {
     const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
     const innloggetVeileder = { ident: enheter.ident };
     const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
+    const { formatMessage } = intl;
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
 
@@ -29,37 +31,42 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
         /></Normaltekst>);
 
     return (
-        <div>
-            {visesAnnenVeiledersPortefolje ?
-                <Link to="veiledere" className="typo-normal tilbaketilveileder">
-                    <i className="chevron--venstre" />
-                    <span>Til veilederoversikt</span>
-                </Link> : null}
-            <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
-                { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
-                <div className="portefolje-side">
-                    <LenkerMinoversikt
-                        minOversiktOnClick={() =>
-                        hentPortefolje(valgtEnhet.enhet.enhetId,
-                            { ident: enheter.ident }, sorteringsrekkefolge, sorteringsfelt)}
-                    />
-                    <p className="typo-infotekst blokk-m">
-                        <FormattedMessage id="ingresstekst.minoversikt" />
-                    </p>
-                    <FiltreringContainer
-                        filtervalg={props.filtervalg}
-                        filtergruppe="veileder"
-                        veileder={gjeldendeVeileder}
-                    />
-                    <FiltreringLabelContainer
-                        filtervalg={props.filtervalg}
-                        filtergruppe="veileder"
-                        veileder={gjeldendeVeileder}
-                    />
-                    <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
-                </div>
-            </section>
-        </div>
+        <DocumentTitle title={formatMessage({id: 'lenker.min.oversikt'})}>
+            <div className="enhet-side blokk-xl">
+                {visesAnnenVeiledersPortefolje ?
+                    <Link to="veiledere" className="typo-normal tilbaketilveileder">
+                        <i className="chevron--venstre"/>
+                        <span>Til veilederoversikt</span>
+                    </Link> : null}
+                <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
+                    { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
+                    <div className="portefolje-side">
+                        <LenkerMinoversikt
+                            minOversiktOnClick={() =>
+                                hentPortefolje(valgtEnhet.enhet.enhetId,
+                                    {ident: enheter.ident}, sorteringsrekkefolge, sorteringsfelt)}
+                            veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
+                        />
+                        <div id="oversikt-sideinnhold" role="tabpanel">
+                            <p className="typo-infotekst blokk-m">
+                                <FormattedMessage id="ingresstekst.minoversikt"/>
+                            </p>
+                            <FiltreringContainer
+                                filtervalg={props.filtervalg}
+                                filtergruppe="veileder"
+                                veileder={gjeldendeVeileder}
+                            />
+                            <FiltreringLabelContainer
+                                filtervalg={props.filtervalg}
+                                filtergruppe="veileder"
+                                veileder={gjeldendeVeileder}
+                            />
+                            <VeilederPortefoljeVisning veileder={gjeldendeVeileder}/>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </DocumentTitle>
     );
 }
 
@@ -73,7 +80,8 @@ MinOversiktSide.propTypes = {
     hentPortefolje: PT.func.isRequired,
     valgtEnhet: enhetShape.isRequired,
     sorteringsfelt: PT.string.isRequired,
-    sorteringsrekkefolge: PT.string.isRequired
+    sorteringsrekkefolge: PT.string.isRequired,
+    intl: intlShape.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -92,5 +100,5 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(hentPortefoljeForVeileder(enhet, ident, rekkefolge, felt, fra, antall))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MinOversiktSide);
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(MinOversiktSide));
 
