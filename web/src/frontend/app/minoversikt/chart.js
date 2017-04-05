@@ -1,15 +1,7 @@
-import * as React from 'react';
-import * as Highcharts from 'highcharts';
+import React, { Component } from 'react';
+import Highcharts from 'highcharts';
 
-interface ChartProps {
-    type: string,
-    container: string,
-    options: object,
-    modules?: any,
-}
-
-export default class Chart extends React.Component<ChartProps, any> {
-    chart: Highcharts.ChartObject;
+export default class Chart extends Component {
 
     componentDidMount() {
         if (this.props.modules) {
@@ -32,6 +24,6 @@ export default class Chart extends React.Component<ChartProps, any> {
     }
 
     render() {
-        return <div id={this.props.container} />;
+        return <div id={this.props.container}/>;
     }
 }
