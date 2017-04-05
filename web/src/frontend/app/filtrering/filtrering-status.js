@@ -1,9 +1,31 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { Element } from 'nav-frontend-typografi';
+import Innholdslaster from './../innholdslaster/innholdslaster';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { hentStatusTall, hentStatusTallForVeileder } from '../ducks/statustall';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
+
+function Barlabel({ htmlFor, tekstId, antall, max, className }) {
+    const style = { width: `${Math.round(Math.min(antall / max, 1) * 100)}%` };
+    const barface = antall === 0 ? null : (
+            <span className="barlabel__barface" aria-hidden="true" style={style}/>
+        );
+    return (
+        <label htmlFor={htmlFor} className={['barlabel', className].join(' ')}>
+            <FormattedMessage id={tekstId}/>
+            &nbsp;
+            <div className="barlabel__barwrapper">
+                <Element className="barlabel__antall">{antall}</Element>
+                <div className="barlabel__bar">
+                    <span className="barlabel__bartrack" aria-hidden="true"/>
+                    {barface}
+                </div>
+            </div>
+        </label>
+    );
+}
 
 class FiltreringStatus extends Component {
     constructor(props) {
@@ -30,35 +52,42 @@ class FiltreringStatus extends Component {
                     onChange={this.handleChange}
                     checked={nyeBrukere}
                 />
-                <label htmlFor="nyeBrukere">
-                    <FormattedMessage id="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox" />
-                    &nbsp;({this.props.statustall.data.nyeBrukere})
-                </label>
+                <Barlabel
+                    htmlFor="nyeBrukere"
+                    tekstId="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox"
+                    antall={this.props.statustall.data.nyeBrukere}
+                    max={this.props.statustall.data.totalt}
+                />
             </div>
         );
         return (
-            <div className="filtrering-oversikt panel">
-                <div className="typo-element blokk-xs">
-                    <FormattedMessage
-                        id="filtrering.status.totalt-antall-brukere"
-                        values={{ antall: this.props.statustall.data.totalt }}
-                    />
+            <Innholdslaster avhengigheter={[this.props.statustall]} storrelse="xxl">
+                <div className="filtrering-oversikt panel">
+                    <div className="typo-element blokk-xs">
+                        <FormattedMessage
+                            id="filtrering.status.totalt-antall-brukere"
+                            values={{ antall: this.props.statustall.data.totalt }}
+                        />
+                    </div>
+                    { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : null }
+                    <div className="skjema__input">
+                        <input
+                            className="checkboks"
+                            id="inaktiveBrukere"
+                            type="checkbox"
+                            onChange={this.handleChange}
+                            checked={inaktiveBrukere}
+                        />
+                        <Barlabel
+                            className="inaktiveBrukere"
+                            htmlFor="inaktiveBrukere"
+                            tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
+                            antall={this.props.statustall.data.inaktiveBrukere}
+                            max={this.props.statustall.data.totalt}
+                        />
+                    </div>
                 </div>
-                { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : null }
-                <div className="skjema__input">
-                    <input
-                        className="checkboks"
-                        id="inaktiveBrukere"
-                        type="checkbox"
-                        onChange={this.handleChange}
-                        checked={inaktiveBrukere}
-                    />
-                    <label htmlFor="inaktiveBrukere">
-                        <FormattedMessage id="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox" />
-                        &nbsp;({this.props.statustall.data.inaktiveBrukere})
-                    </label>
-                </div>
-            </div>
+            </Innholdslaster>
         );
     }
 }

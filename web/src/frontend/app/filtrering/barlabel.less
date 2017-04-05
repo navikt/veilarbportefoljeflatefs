@@ -1,0 +1,44 @@
+.barlabel {
+    display: flex;
+    justify-content: space-between;
+
+    &__barwrapper {
+        flex-basis: 70%;
+        flex-shrink: 0;
+        flex-grow: 0;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__antall {
+        flex-basis: 3rem;
+    }
+
+    &__bar {
+        position: relative;
+        flex: 0;
+        display: flex;
+        align-items: center;
+        flex-basis: 55%;
+    }
+
+    &__bartrack {
+        display: block;
+        background-color: #f2f1f1;
+        height: 1.125rem;
+        border-radius: 1rem;
+        width: 100%;
+    }
+
+    &__barface {
+        position: absolute;
+        display: block;
+        min-width: 1.375rem;
+        background-color: @navLysBlaLighten60;
+        height: 1.125rem;
+        border-radius: 1rem;
+    }
+    &.inaktiveBrukere .barlabel__barface {
+        background-color: @navLillaLighten60;
+    }
+}
