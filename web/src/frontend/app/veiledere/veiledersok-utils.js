@@ -1,6 +1,6 @@
 export function compareEtternavn(a, b) {
-    const aUpper = a.etternavn.toUpperCase() + a.fornavn.toUpperCase;
-    const bUpper = b.etternavn.toUpperCase() + b.fornavn.toUpperCase;
+    const aUpper = a.etternavn.toUpperCase() + a.fornavn.toUpperCase();
+    const bUpper = b.etternavn.toUpperCase() + b.fornavn.toUpperCase();
     if (aUpper < bUpper) {
         return -1;
     }
