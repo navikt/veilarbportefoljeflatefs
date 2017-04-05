@@ -38,31 +38,33 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
                         <i className="chevron--venstre" />
                         <span>Til veilederoversikt</span>
                     </Link> : null}
-                <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
-                    { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
-                    <div className="portefolje-side">
-                        <LenkerMinoversikt
-                            minOversiktOnClick={() =>
-                                hentPortefolje(valgtEnhet.enhet.enhetId,
-                                    { ident: enheter.ident }, sorteringsrekkefolge, sorteringsfelt)}
-                            veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
-                        />
-                        <p className="typo-infotekst blokk-m">
-                            <FormattedMessage id="ingresstekst.minoversikt" />
-                        </p>
-                        <FiltreringContainer
-                            filtervalg={props.filtervalg}
-                            filtergruppe="veileder"
-                            veileder={gjeldendeVeileder}
-                        />
-                        <FiltreringLabelContainer
-                            filtervalg={props.filtervalg}
-                            filtergruppe="veileder"
-                            veileder={gjeldendeVeileder}
-                        />
-                        <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
-                    </div>
-                </section>
+                <div id="oversikt-sideinnhold" role="tabpanel">
+                    <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
+                        { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
+                        <div className="portefolje-side">
+                            <LenkerMinoversikt
+                                minOversiktOnClick={() =>
+                                    hentPortefolje(valgtEnhet.enhet.enhetId,
+                                        { ident: enheter.ident }, sorteringsrekkefolge, sorteringsfelt)}
+                                veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
+                            />
+                            <p className="typo-infotekst blokk-m">
+                                <FormattedMessage id="ingresstekst.minoversikt" />
+                            </p>
+                            <FiltreringContainer
+                                filtervalg={props.filtervalg}
+                                filtergruppe="veileder"
+                                veileder={gjeldendeVeileder}
+                            />
+                            <FiltreringLabelContainer
+                                filtervalg={props.filtervalg}
+                                filtergruppe="veileder"
+                                veileder={gjeldendeVeileder}
+                            />
+                            <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
+                        </div>
+                    </section>
+                </div>
             </div>
         </DocumentTitle>
     );
