@@ -30,8 +30,8 @@ class VeiledereSide extends Component {
     }
 
     veilederfiltreringOnSubmit(name, veilederfiltervalg) {
-        const { settFiltervalgForVeieldere, veiledere, settVeiledereSomSkalVises } = this.props;
-        settFiltervalgForVeieldere(veilederfiltervalg);
+        const { settFiltervalgForVeiledere, veiledere, settVeiledereSomSkalVises } = this.props;
+        settFiltervalgForVeiledere(veilederfiltervalg);
         settVeiledereSomSkalVises(veilederfiltervalg
             .map((ident) => veiledere.data.veilederListe.find((veileder) => veileder.ident === ident)));
     }
@@ -134,7 +134,7 @@ VeiledereSide.propTypes = {
     }).isRequired,
     valgtEnhet: valgtEnhetShape.isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
-    settFiltervalgForVeieldere: PT.func.isRequired,
+    settFiltervalgForVeiledere: PT.func.isRequired,
     settVeiledereSomSkalVises: PT.func.isRequired,
     resetSok: PT.func.isRequired
 };
@@ -158,7 +158,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(sorterListePaaEtternavn(nySortering));
         dispatch(settSubListeForPaginering(0));
     },
-    settFiltervalgForVeieldere: (veilederfiltervalg) => dispatch(settVeilederfiltervalg(veilederfiltervalg)),
+    settFiltervalgForVeiledere: (veilederfiltervalg) => dispatch(settVeilederfiltervalg(veilederfiltervalg)),
     settVeiledereSomSkalVises: (veiledere) => dispatch(settVeiledereITabell(veiledere))
 });
 
