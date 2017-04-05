@@ -17,6 +17,7 @@ export const initialState = {
     formidlingsgruppe: [],
     servicegruppe: [],
     rettighetsgruppe: [],
+    veiledere: [],
     ytelse: null
 };
 
