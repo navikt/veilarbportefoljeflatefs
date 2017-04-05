@@ -53,7 +53,7 @@ class Innholdslaster extends Component {
     }
 
     render() {
-        const { avhengigheter, className, feilmeldingKey, intl } = this.props;
+        const { avhengigheter, className, feilmeldingKey, intl, storrelse } = this.props;
         if (alleLastet(avhengigheter)) {
             this.clearTimer();
             return this.renderChildren();
@@ -78,16 +78,23 @@ class Innholdslaster extends Component {
             );
         }
 
-        return <Laster className={className} />;
+        return <Laster className={className} storrelse={storrelse} />;
     }
 }
 
 Innholdslaster.propTypes = {
-    avhengigheter: PT.arrayOf(PT.object),
+    storrelse: PT.oneOf(['xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl']),
+    avhengigheter: PT.arrayOf(PT.object).isRequired,
     className: PT.string,
     children: PT.oneOfType([PT.node, PT.func]).isRequired,
     intl: PT.object.isRequired,
     feilmeldingKey: PT.string
+};
+
+Innholdslaster.defaultProps = {
+    storrelse: 'xxl',
+    className: undefined,
+    feilmeldingKey: undefined
 };
 
 export default injectIntl(Innholdslaster);
