@@ -109,6 +109,7 @@ class EnhetsportefoljeVisning extends Component {
                         )}
                     tekst={pagineringTekst}
                     sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
+                    antallReturnert={antallReturnert}
                 />
                 <EnhetsportefoljeTabell
                     veiledere={veiledere.data.veilederListe}
@@ -131,6 +132,7 @@ class EnhetsportefoljeVisning extends Component {
                         )}
                     tekst={antallTotalt > 0 ? pagineringTekst : null}
                     sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
+                    antallReturnert={antallReturnert}
                 />
             </Innholdslaster>
         );
