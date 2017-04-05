@@ -1,56 +1,86 @@
 import React, { PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { brukerShape } from './../proptype-shapes';
+import { connect } from 'react-redux';
+import { brukerShape, filtervalgShape } from './../proptype-shapes';
+import Dropdown from '../components/dropdown/dropdown';
+import RadioFilterform from '../components/radio-filterform/radio-filterform';
+import { resetSokeresultater } from '../ducks/veiledere';
+import { visAlleVeiledereIListe } from '../veiledere/veiledersok-utils';
+import VeiledereSokeliste from '../veiledere/veiledersok';
+import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 
-function TildelVeilederVelger({ veiledere, valgtVeileder, velgVeileder, brukere }) {
-    const velgNyVeileder = (event) => {
-        const tilVeileder = veiledere[event.target.value - 1].ident;
+function TildelVeilederVelger({ veiledere, velgVeileder, brukere,
+    resetSok, filtervalg, actions, skjulVeilederfilter = false }) {
+    const veilederListe = veiledere.data.veilederListe;
+    const velgNyVeileder = (name, tilVeileder) => {
         const tildelinger = brukere.filter((bruker) => bruker.markert)
-                                                    .map((bruker) => ({
-                                                        fraVeilederId: bruker.veilederId,
-                                                        tilVeilederId: tilVeileder,
-                                                        brukerFnr: bruker.fnr
-                                                    }));
+            .map((bruker) => ({
+                fraVeilederId: bruker.veilederId,
+                tilVeilederId: tilVeileder,
+                brukerFnr: bruker.fnr
+            }));
         velgVeileder(tildelinger, tilVeileder);
     };
-    const indexTilValgtVeileder = valgtVeileder === undefined ? 0 : veiledere.indexOf(valgtVeileder);
 
-    const defaultOption = (
-        <FormattedMessage id="portefolje.tildel.veileder.label" key="default">
-            {(text) => <option value={0}>{text}</option>}
-        </FormattedMessage>);
+    const sokeresultat = veiledere.sokeresultat;
+    const veiledervalg = sokeresultat.sokIkkeStartet ?
+        visAlleVeiledereIListe(veilederListe) :
+        sokeresultat;
 
-    const veilederListe = veiledere.map((veileder, index) =>
-        <option value={index + 1} key={`option-${veileder.ident}`}>{`${veileder.navn}`}</option>
-    );
-    veilederListe.unshift(defaultOption);
+    const tildelveilederComponent = skjulVeilederfilter ? null : (
+        <div className="col-sm-3">
+            <Dropdown name="Veilederfilter">
+                <CheckboxFilterform
+                    form="veiledere"
+                    valg={veiledervalg}
+                    filtervalg={filtervalg}
+                    onSubmit={actions.endreFiltervalg}
+                />
+            </Dropdown>
+        </div>);
 
     return (
-        <div className="TildelVeilederVelger">
-            <div className="selectContainer">
-                <label htmlFor="select-veileder" className="text-hide">Velg veileder</label>
-                <select // eslint-disable-line jsx-a11y/no-onchange
-                    id="select-veileder"
-                    name="valgtVeileder"
-                    onChange={velgNyVeileder}
-                    value={indexTilValgtVeileder}
-                >
-                    {veilederListe}
-                </select>
+        <div className="tildelveileder_wrapper row">
+            <div className="row">
+                <div className="col-sm-3">
+                    <Dropdown name="Tildel veileder" onLukk={resetSok}>
+                        <VeiledereSokeliste
+                            veiledere={veilederListe}
+                        />
+                        <RadioFilterform
+                            form="veiledertildeling"
+                            valg={veiledervalg}
+                            filtervalg={{ veiledervisning: undefined }}
+                            onSubmit={velgNyVeileder}
+                        />
+                    </Dropdown>
+                </div>
+                {tildelveilederComponent}
             </div>
         </div>
     );
 }
 
-TildelVeilederVelger.defaultProps = {
-    valgtVeileder: {}
-};
 
 TildelVeilederVelger.propTypes = {
     brukere: PT.arrayOf(brukerShape).isRequired,
-    veiledere: PT.arrayOf(PT.object).isRequired,
-    valgtVeileder: PT.object,
-    velgVeileder: PT.func.isRequired
+    veiledere: PT.object.isRequired,
+    velgVeileder: PT.func.isRequired,
+    resetSok: PT.func.isRequired,
+    filtervalg: filtervalgShape.isRequired,
+    actions: PT.shape({
+        endreFiltervalg: PT.func
+    }).isRequired,
+    skjulVeilederfilter: PT.bool
+
 };
 
-export default TildelVeilederVelger;
+const mapStateToProps = (state) => ({
+    filtervalg: state.filtrering
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    resetSok: () => dispatch(resetSokeresultater())
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TildelVeilederVelger);

@@ -6,8 +6,11 @@ import { tildelVeileder } from '../ducks/portefolje';
 import FiltreringStatus from './filtrering-status';
 import FiltreringFilter from './filtrering-filter';
 import TildelVeilederVelger from '../enhet/tildel-veileder-velger';
+import { endreFiltervalg } from '../ducks/filtrering';
 
-function FiltreringContainer({ veiledere, valgtVeileder, velgVeileder, brukere, filtergruppe, veileder, filtervalg }) {
+
+function FiltreringContainer({ veiledere, valgtVeileder, velgVeileder,
+        brukere, filtergruppe, veileder, filtervalg, actions }) {
     return (
         <div className="blokk-m">
             <Ekspanderbartpanel
@@ -22,17 +25,19 @@ function FiltreringContainer({ veiledere, valgtVeileder, velgVeileder, brukere, 
                 className="custom-ekspanderbartpanel" tittel="Filter"
                 tittelProps={{ type: 'systemtittel', tag: 'span' }}
             >
-                <FiltreringFilter filtergruppe={filtergruppe} veileder={veileder} filtervalg={filtervalg} />
+                <FiltreringFilter actions={actions} veileder={veileder} filtervalg={filtervalg} />
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
                 className="custom-ekspanderbartpanel" tittel="Tildel veileder"
                 tittelProps={{ type: 'systemtittel', tag: 'span' }}
             >
                 <TildelVeilederVelger
+                    skjulVeilederfilter={filtergruppe !== 'enhet'}
                     valgtVeileder={valgtVeileder}
                     veiledere={veiledere}
                     brukere={brukere}
                     velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
+                    actions={actions}
                 />
             </Ekspanderbartpanel>
         </div>
@@ -52,22 +57,28 @@ FiltreringContainer.defaultProps = {
 
 FiltreringContainer.propTypes = {
     filtervalg: filtervalgShape.isRequired,
-    veiledere: PT.arrayOf(veilederShape).isRequired,
+    veiledere: PT.object.isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
     valgtVeileder: PT.object,
     velgVeileder: PT.func.isRequired,
     filtergruppe: PT.string,
-    veileder: veilederShape
+    veileder: veilederShape,
+    actions: PT.shape({
+        endreFiltervalg: PT.func
+    }).isRequired
 };
 
 const mapStateToProps = (state) => ({
-    veiledere: state.veiledere.data.veilederListe,
+    veiledere: state.veiledere,
     brukere: state.portefolje.data.brukere,
     valgtVeileder: state.enheter.valgtVeileder
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder))
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    velgVeileder: (tildelinger, tilVeileder) => dispatch(tildelVeileder(tildelinger, tilVeileder)),
+    actions: {
+        endreFiltervalg: (...args) => dispatch(endreFiltervalg(...args, ownProps.filtergruppe, ownProps.veileder))
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltreringContainer);

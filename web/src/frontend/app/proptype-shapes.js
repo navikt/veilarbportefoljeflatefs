@@ -51,14 +51,15 @@ export const valgtEnhetShape = PT.shape({
 });
 
 export const filtervalgShape = PT.shape({
-    nyeBrukere: PT.bool.isRequired,
-    inaktiveBrukere: PT.bool.isRequired,
-    alder: PT.arrayOf(PT.string).isRequired,
-    kjonn: PT.arrayOf(PT.string).isRequired,
-    fodselsdagIMnd: PT.arrayOf(PT.string).isRequired,
-    innsatsgruppe: PT.arrayOf(PT.string).isRequired,
-    formidlingsgruppe: PT.arrayOf(PT.string).isRequired,
-    servicegruppe: PT.arrayOf(PT.string).isRequired,
+    nyeBrukere: PT.bool,
+    inaktiveBrukere: PT.bool,
+    alder: PT.arrayOf(PT.string),
+    kjonn: PT.arrayOf(PT.string),
+    fodselsdagIMnd: PT.arrayOf(PT.string),
+    innsatsgruppe: PT.arrayOf(PT.string),
+    formidlingsgruppe: PT.arrayOf(PT.string),
+    servicegruppe: PT.arrayOf(PT.string),
+    veiledere: PT.arrayOf(PT.string),
     ytelse: PT.string
 });
 
