@@ -26,7 +26,7 @@ class EnhetSide extends Component {
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })}>
                 <div className="enhet-side blokk-xl">
-                    <Lenker routes={routes} />
+                    <Lenker />
                     <div id="oversikt-sideinnhold" role="tabpanel">
                         <p className="typo-infotekst enhetsingress blokk-m">
                             <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />

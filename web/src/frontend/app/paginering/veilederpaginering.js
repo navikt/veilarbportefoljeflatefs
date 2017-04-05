@@ -20,14 +20,20 @@ class VeilederPaginering extends Component {
     render() {
         const { liste, fraIndeksForSubListe, sideStorrelse, settSubListe, pagineringTekstId, subListe } = this.props;
 
+        const pagineringTekstValues = liste.length > 0 ? {
+            fraIndex: `${fraIndeksForSubListe + 1}`,
+            tilIndex: fraIndeksForSubListe + subListe.length,
+            antallTotalt: liste.length
+        } : {
+            fraIndex: '0',
+            tilIndex: '0',
+            antallTotalt: '0'
+        };
+
         const pagineringTekst = (
             <FormattedMessage
                 id={pagineringTekstId}
-                values={{
-                    fraIndex: `${fraIndeksForSubListe + 1}`,
-                    tilIndex: fraIndeksForSubListe + subListe.length,
-                    antallTotalt: liste.length
-                }}
+                values={pagineringTekstValues}
             />
         );
 
