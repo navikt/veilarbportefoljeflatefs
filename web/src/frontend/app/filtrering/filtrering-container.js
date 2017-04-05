@@ -52,7 +52,7 @@ FiltreringContainer.defaultProps = {
 
 FiltreringContainer.propTypes = {
     filtervalg: filtervalgShape.isRequired,
-    veiledere: PT.arrayOf(veilederShape).isRequired,
+    veiledere: PT.object.isRequired,
     brukere: PT.arrayOf(brukerShape).isRequired,
     valgtVeileder: PT.object,
     velgVeileder: PT.func.isRequired,
@@ -61,7 +61,7 @@ FiltreringContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    veiledere: state.veiledere.data.veilederListe,
+    veiledere: state.veiledere,
     brukere: state.portefolje.data.brukere,
     valgtVeileder: state.enheter.valgtVeileder
 });
