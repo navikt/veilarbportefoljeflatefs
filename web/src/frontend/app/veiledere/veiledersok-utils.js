@@ -14,7 +14,9 @@ export function visAlleVeiledereIListe(veiledere) {
     return veiledere
         .sort(compareEtternavn)
         .reduce((obj, veileder) =>
-            ({ ...obj, [veileder.ident]: { label: `${veileder.etternavn}, ${veileder.fornavn}` } }), {});
+            ({ ...obj,
+                [veileder.ident]:
+                { label: `${veileder.etternavn}, ${veileder.fornavn} (${veileder.ident})` } }), {});
 }
 
 export function veiledereSok(soketekst, veiledere) {
@@ -44,7 +46,7 @@ export function veiledereSok(soketekst, veiledere) {
         .reduce((obj, veileder) =>
             ({ ...obj,
                 [veileder.ident]:
-                { label: `${veileder.etternavn}, ${veileder.fornavn}`,
+                { label: `${veileder.etternavn}, ${veileder.fornavn} (${veileder.ident})`,
                     className: veileder.skalVises ? '' : 'veileder__hide' }
             }), {});
 }
