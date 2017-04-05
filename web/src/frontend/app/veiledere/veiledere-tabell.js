@@ -28,11 +28,7 @@ class VeilederTabell extends Component {
     }
 
     render() {
-        const { veiledere, portefoljestorrelser, modalSkalVises, toggleSkjulModal, sorteringsRekkefolge } = this.props;
-        const portefoljestorrelse = (storrelser, veilederId) => {
-            const currentStorrelse = storrelser.find((storrelse) => storrelse.value === veilederId);
-            return currentStorrelse ? currentStorrelse.count : 0;
-        };
+        const { veiledere, modalSkalVises, toggleSkjulModal, sorteringsRekkefolge } = this.props;
 
         const sorterEtternavn = sorteringsRekkefolge !== 'ikke_satt';
 
@@ -48,7 +44,7 @@ class VeilederTabell extends Component {
                     </Link>
                 </th>
                 <td>{`${veileder.ident}`}</td>
-                <td>{portefoljestorrelse(portefoljestorrelser, veileder.ident)}</td>
+                <td>{veileder.portefoljestorrelse}</td>
             </tr>
         ));
 
@@ -81,7 +77,9 @@ class VeilederTabell extends Component {
                                 <FormattedMessage id="enhet.veiledere.tabell.ident" />
                             </th>
                             <th scope="col">
-                                <FormattedMessage id="enhet.veiledere.tabell.brukere" />
+                                <button onClick={this.props.sorterPaaPortefoljestorrelse} className="sortering-link">
+                                    <FormattedMessage id="enhet.veiledere.tabell.brukere" />
+                                </button>
                             </th>
                         </tr>
                     </thead>
@@ -97,11 +95,12 @@ class VeilederTabell extends Component {
 VeilederTabell.propTypes = {
     veiledere: PT.arrayOf(veilederShape).isRequired,
     settVeileder: PT.func.isRequired,
-    portefoljestorrelser: PT.arrayOf(PT.object).isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
     toggleVisModal: PT.func.isRequired,
+    veilederListe: PT.arrayOf(veilederShape).isRequired,
+    sorterPaaPortefoljestorrelse: PT.func.isRequired
     veilederListe: PT.arrayOf(veilederShape).isRequired,
     sorteringsRekkefolge: PT.string.isRequired
 };

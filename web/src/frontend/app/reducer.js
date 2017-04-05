@@ -6,7 +6,7 @@ import ledeteksterReducer from './ducks/ledetekster';
 import portefoljeReducer from './ducks/portefolje';
 import veiledereReducer from './ducks/veiledere';
 import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
-import pagineringReducer from './ducks/paginering';
+import veilederpagineringReducer from './ducks/veilederpaginering';
 import filtreringReducer from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
@@ -32,7 +32,7 @@ export default combineReducers({
     portefolje: portefoljeReducer,
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
-    paginering: pagineringReducer,
+    veilederpaginering: veilederpagineringReducer,
     statustall: statustallReducer,
     // eslint-disable-next-line no-undef
     filtrering: persistent('enhetsState', location, named('enhet', filtreringReducer), slettCleanIUrl),

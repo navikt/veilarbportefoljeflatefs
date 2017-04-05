@@ -1,5 +1,6 @@
 import * as Api from './../middleware/api';
 import { STATUS, doThenDispatch, handterFeil, toJson } from './utils';
+import { IKKE_SATT } from '../konstanter';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -12,6 +13,13 @@ const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
 
+export const PORTEFOLJE_SIDESTORRELSE = 20;
+
+function lagBrukerGuid(bruker) {
+    return bruker.fnr === '' ? (`${Math.random()}`).slice(2) : bruker.fnr;
+}
+
+
 // Reducer
 
 const initialState = {
@@ -22,10 +30,10 @@ const initialState = {
         antallReturnert: 0,
         fraIndex: 0
     },
-    sorteringsrekkefolge: 'ikke_satt',
-    sorteringsfelt: 'ikke_satt',
+    sorteringsrekkefolge: IKKE_SATT,
+    sorteringsfelt: IKKE_SATT,
     veileder: {
-        ident: 'ikke_satt'
+        ident: IKKE_SATT
     }
 };
 
@@ -66,7 +74,12 @@ export default function reducer(state = initialState, action) {
         case FEILET:
             return { ...state, status: STATUS.ERROR, data: action.data };
         case OK:
-            return { ...state, status: STATUS.OK, data: action.data };
+            return { ...state,
+                status: STATUS.OK,
+                data: {
+                    ...action.data,
+                    brukere: action.data.brukere.map((bruker) => ({ ...bruker, guid: lagBrukerGuid(bruker) }))
+                } };
         case SETT_SORTERING: {
             return {
                 ...state,
