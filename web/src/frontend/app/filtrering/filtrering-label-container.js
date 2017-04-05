@@ -48,7 +48,6 @@ function FiltreringLabelContainer({ filtervalg, actions: { slettAlle, slettEnkel
 
 FiltreringLabelContainer.defaultProps = {
     veileder: {
-
         ident: '',
         navn: '',
         fornavn: '',
