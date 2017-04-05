@@ -19,10 +19,8 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, v
     const fraIndeksSisteSide = fraIndex + sideStorrelse >= antallTotalt ? fraIndex : fraIndex + sideStorrelse;
     return (
         <div className="paginering">
-            <Element className="info" tag="h1">
-                <strong>
-                    {tekst}
-                </strong>
+            <Element className="info blokk-xs" tag="h1">
+                {tekst}
             </Element>
 
             {
