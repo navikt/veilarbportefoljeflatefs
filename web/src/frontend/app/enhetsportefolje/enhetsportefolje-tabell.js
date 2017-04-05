@@ -87,7 +87,10 @@ class EnhetsportefoljeTabell extends Component {
                             </th>
                             <th>
                                 <button
-                                    onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        this.settSorteringOgHentPortefolje('etternavn');
+                                    }}
                                     className={classNames({ 'sortering-link': true, valgt: sorterEtternavn })}
                                 >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
@@ -96,7 +99,10 @@ class EnhetsportefoljeTabell extends Component {
                             </th>
                             <th>
                                 <button
-                                    onClick={() => this.settSorteringOgHentPortefolje('fodselsdato')}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        this.settSorteringOgHentPortefolje('fodselsdato');
+                                    }}
                                     className={classNames({ 'sortering-link': true, valgt: sorterFodelsnummer })}
                                 >
                                     <FormattedMessage id="portefolje.tabell.fodselsnummer" />
@@ -105,7 +111,10 @@ class EnhetsportefoljeTabell extends Component {
                             {utlopsdatoHeader}
                             <th>
                                 <button
-                                    onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        this.settSorteringOgHentPortefolje('etternavn');
+                                    }}
                                     className="sortering-link"
                                 >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
