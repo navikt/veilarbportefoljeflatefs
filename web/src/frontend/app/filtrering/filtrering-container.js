@@ -32,10 +32,12 @@ function FiltreringContainer({ veiledere, valgtVeileder, velgVeileder,
                 tittelProps={{ type: 'systemtittel', tag: 'span' }}
             >
                 <TildelVeilederVelger
+                    skjulVeilederfilter={filtergruppe !== 'enhet'}
                     valgtVeileder={valgtVeileder}
                     veiledere={veiledere}
                     brukere={brukere}
                     velgVeileder={(tildelinger, tilVeileder) => velgVeileder(tildelinger, tilVeileder)}
+                    actions={actions}
                 />
             </Ekspanderbartpanel>
         </div>

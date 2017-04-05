@@ -59,6 +59,7 @@ export const filtervalgShape = PT.shape({
     innsatsgruppe: PT.arrayOf(PT.string),
     formidlingsgruppe: PT.arrayOf(PT.string),
     servicegruppe: PT.arrayOf(PT.string),
+    veiledere: PT.arrayOf(PT.string),
     ytelse: PT.string
 });
 
