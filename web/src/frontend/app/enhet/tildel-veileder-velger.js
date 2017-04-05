@@ -8,7 +8,8 @@ import { visAlleVeiledereIListe } from '../veiledere/veiledersok-utils';
 import VeiledereSokeliste from '../veiledere/veiledersok';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 
-function TildelVeilederVelger({ veiledere, velgVeileder, brukere, resetSok, filtervalg, actions, skjulVeilederfilter=false }) {
+function TildelVeilederVelger({ veiledere, velgVeileder, brukere,
+    resetSok, filtervalg, actions, skjulVeilederfilter = false }) {
     const veilederListe = veiledere.data.veilederListe;
     const velgNyVeileder = (name, tilVeileder) => {
         const tildelinger = brukere.filter((bruker) => bruker.markert)

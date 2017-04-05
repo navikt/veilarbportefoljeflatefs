@@ -7,7 +7,7 @@ import portefoljeReducer from './ducks/portefolje';
 import veiledereReducer from './ducks/veiledere';
 import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
 import veilederpagineringReducer from './ducks/veilederpaginering';
-import filtreringReducer from './ducks/filtrering';
+import filtreringReducer, { initialState } from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
 import { slettCleanIUrl } from './utils/utils';
@@ -35,9 +35,10 @@ export default combineReducers({
     veilederpaginering: veilederpagineringReducer,
     statustall: statustallReducer,
     // eslint-disable-next-line no-undef
-    filtrering: persistent('enhetsState', location, named('enhet', filtreringReducer), slettCleanIUrl),
+    filtrering: persistent('enhetsState', location, named('enhet', filtreringReducer), slettCleanIUrl, initialState),
     // eslint-disable-next-line no-undef
-    filtreringVeileder: persistent('veilederState', location, named('veileder', filtreringReducer), slettCleanIUrl),
+    filtreringVeileder: persistent('veilederState', location,
+        named('veileder', filtreringReducer), slettCleanIUrl, initialState),
     modal: modalReducer,
     form: formReducer
 });
