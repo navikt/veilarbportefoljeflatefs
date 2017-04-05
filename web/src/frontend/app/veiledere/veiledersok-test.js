@@ -25,11 +25,14 @@ describe('veilederSok', () => {
     });
     it('skal finne paa etternavn', () => {
         expect(veiledereSok('Olsen', veilederliste).X111111.className).to.equal('veileder__hide');
-        expect(veiledereSok('Olsen', veilederliste).X222222.className).to.equal('');    });
+        expect(veiledereSok('Olsen', veilederliste).X222222.className).to.equal('');
+    });
     it('skal finne paa forste fornavn og etternavn', () => {
         expect(veiledereSok('jens olsen', veilederliste).X111111.className).to.equal('veileder__hide');
-        expect(veiledereSok('jens olsen', veilederliste).X222222.className).to.equal('');    });
+        expect(veiledereSok('jens olsen', veilederliste).X222222.className).to.equal('');
+    });
     it('skal finne paa ident', () => {
         expect(veiledereSok('x222222', veilederliste).X111111.className).to.equal('veileder__hide');
-        expect(veiledereSok('x222222', veilederliste).X222222.className).to.equal('');    })
+        expect(veiledereSok('x222222', veilederliste).X222222.className).to.equal('');
+    });
 });
