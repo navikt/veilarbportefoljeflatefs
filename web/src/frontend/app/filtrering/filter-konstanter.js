@@ -64,6 +64,7 @@ export const ytelse = {
 export const rettighetsgruppe = {
     AAP: 'Arbeidsavklaringspenger',
     DAGP: 'Dagpenger',
+    INDS: 'Tiltakspenger',
     IYT: 'Ingen livsoppholdsytelser Arena',
     VENT: 'Ventestønad',
     VLONN: 'Ventelønn'
