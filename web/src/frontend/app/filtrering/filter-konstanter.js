@@ -70,6 +70,10 @@ export const rettighetsgruppe = {
     VLONN: 'Ventelønn'
 };
 
+const veiledere = {
+};
+
+
 export default {
     inaktiveBrukere,
     nyeBrukere,
@@ -80,5 +84,6 @@ export default {
     formidlingsgruppe,
     servicegruppe,
     ytelse,
-    rettighetsgruppe
+    rettighetsgruppe,
+    veiledere
 };
