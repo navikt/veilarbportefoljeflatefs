@@ -17,6 +17,7 @@ import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 import Diagram from './diagram/diagram';
+import { DIAGRAMVISNING } from '../minoversikt/minoversikt-konstanter';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -126,7 +127,7 @@ class VeilederPortefoljeVisning extends Component {
                     visButtongroup={ytelseFilterErAktiv(filtervalg.ytelse)}
                 />
                 {
-                    visningsmodus === 'diagram' && ytelseFilterErAktiv(filtervalg.ytelse) ?
+                    visningsmodus ===  DIAGRAMVISNING && ytelseFilterErAktiv(filtervalg.ytelse) ?
                         <Diagram
                             filtreringsvalg={filtervalg.ytelse}
                             brukere={brukere}

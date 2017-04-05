@@ -1,4 +1,5 @@
 import { DESCENDING, IKKE_SATT } from '../konstanter';
+import { TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 
 // Actions
 export const SETT_LISTE = 'veilederpaginering/settliste/OK';
@@ -48,7 +49,7 @@ const initialState = {
         felt: IKKE_SATT,
         rekkefolge: IKKE_SATT
     },
-    visningsmodus: 'tabell'
+    visningsmodus: TABELLVISNING
 };
 
 //  Reducer
