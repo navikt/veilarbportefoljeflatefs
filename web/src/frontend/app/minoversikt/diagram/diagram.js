@@ -6,7 +6,7 @@ import { brukerShape } from '../../proptype-shapes';
 import { headertekst, legendtekst } from './diagram-konstanter';
 import { ytelsevalg } from '../../filtrering/filter-konstanter';
 import config from './diagram-config';
-import MultiFormattedMessage from './multiformattedmessage';
+import MultiFormattedMessage from '../../components/multiformattedmessage';
 
 function maned(brukere) {
 
