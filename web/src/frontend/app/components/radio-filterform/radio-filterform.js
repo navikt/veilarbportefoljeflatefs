@@ -2,7 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { reduxForm, Fields, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { veilederShape, filtervalgShape } from '../../proptype-shapes';
+import { filtervalgShape } from '../../proptype-shapes';
 import { lagConfig } from './../../filtrering/filter-konstanter';
 
 function renderFieldsFactory(form) {
@@ -68,9 +68,6 @@ function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDr
     );
 }
 
-RadioFilterform.defaultProps = {
-    veileder: {}
-};
 
 RadioFilterform.propTypes = {
     pristine: PT.bool.isRequired,
@@ -78,8 +75,7 @@ RadioFilterform.propTypes = {
     form: PT.string.isRequired,
     valg: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     closeDropdown: PT.func.isRequired,
-    veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
-    filtervalg: filtervalgShape.isRequired, // eslint-disable-line react/no-unused-prop-types
+    filtervalg: filtervalgShape, // eslint-disable-line react/no-unused-prop-types
     onSubmit: PT.func.isRequired
 };
 
