@@ -15,6 +15,10 @@ const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_
 
 export const PORTEFOLJE_SIDESTORRELSE = 20;
 
+function lagBrukerGuid(bruker) {
+    return bruker.fnr === '' ? (`${Math.random()}`).slice(2) : bruker.fnr;
+}
+
 
 // Reducer
 
@@ -70,7 +74,12 @@ export default function reducer(state = initialState, action) {
         case FEILET:
             return { ...state, status: STATUS.ERROR, data: action.data };
         case OK:
-            return { ...state, status: STATUS.OK, data: action.data };
+            return { ...state,
+                status: STATUS.OK,
+                data: {
+                    ...action.data,
+                    brukere: action.data.brukere.map((bruker) => ({ ...bruker, guid: lagBrukerGuid(bruker) }))
+                } };
         case SETT_SORTERING: {
             return {
                 ...state,
