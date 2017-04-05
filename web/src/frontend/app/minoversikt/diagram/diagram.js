@@ -19,7 +19,7 @@ const Diagram = ({ brukere, filtreringsvalg }) => {
             </h1>
             <MultiFormattedMessage id={tekster.legendtekst}>
                 {(tekster) => (
-                    <Chart config={config(data, tekster)} />
+                    <Chart config={config(data, tekster)} pureConfig />
                 )}
             </MultiFormattedMessage>
         </div>
