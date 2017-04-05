@@ -59,15 +59,14 @@ function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = {}) {
     const enhet = state.enheter.valgtEnhet.enhet.enhetId;
     const rekkefolge = state.portefolje.sorteringsrekkefolge;
     const sorteringfelt = state.portefolje.sorteringsfelt;
-    const fra = state.portefolje.data.fraIndex;
     const antall = PORTEFOLJE_SIDESTORRELSE;
     let nyeFiltervalg;
     if (filtergruppe === 'enhet') {
         nyeFiltervalg = state.filtrering;
-        hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
+        hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
     } else if (filtergruppe === 'veileder') {
         nyeFiltervalg = state.filtreringVeileder;
-        hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, fra, antall, nyeFiltervalg)(dispatch);
+        hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
     }
 }
 

@@ -1,6 +1,7 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import DocumentTitle from 'react-document-title';
 import Lenker from './../lenker/lenker';
 import { filtervalgShape } from '../proptype-shapes';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
@@ -19,24 +20,30 @@ class EnhetSide extends Component {
         if (!this.props.valgtEnhet) {
             return null;
         }
+        const { formatMessage } = this.props.intl;
 
         return (
-            <div className="enhet-side blokk-xl">
-                <Lenker />
-                <p className="typo-infotekst enhetsingress blokk-m">
-                    <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
-                </p>
-                <FiltreringContainer filtervalg={this.props.filtervalg} />
-                <FiltreringLabelContainer filtervalg={this.props.filtervalg} filtergruppe="enhet" />
-                <EnhetsportefoljeVisning />
-            </div>
+            <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })}>
+                <div className="enhet-side blokk-xl">
+                    <Lenker />
+                    <div id="oversikt-sideinnhold" role="tabpanel">
+                        <p className="typo-infotekst enhetsingress blokk-m">
+                            <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
+                        </p>
+                        <FiltreringContainer filtervalg={this.props.filtervalg} />
+                        <FiltreringLabelContainer filtervalg={this.props.filtervalg} filtergruppe="enhet" />
+                        <EnhetsportefoljeVisning />
+                    </div>
+                </div>
+            </DocumentTitle>
         );
     }
 }
 
 EnhetSide.propTypes = {
-    valgtEnhet: PT.object,
-    filtervalg: filtervalgShape.isRequired
+    valgtEnhet: PT.object.isRequired,
+    filtervalg: filtervalgShape.isRequired,
+    intl: intlShape.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -44,4 +51,4 @@ const mapStateToProps = (state) => ({
     filtervalg: state.filtrering
 });
 
-export default connect(mapStateToProps)(EnhetSide);
+export default injectIntl(connect(mapStateToProps)(EnhetSide));

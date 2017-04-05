@@ -2,7 +2,6 @@ import React, { PropTypes as PT } from 'react';
 import { reduxForm, Fields, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { endreFiltervalg } from './../../ducks/filtrering';
 import { veilederShape, filtervalgShape } from '../../proptype-shapes';
 import { lagConfig } from './../../filtrering/filter-konstanter';
 
@@ -47,7 +46,7 @@ function prepSubmit(name, fn, close) {
     };
 }
 
-function RadioFilterform({ pristine, handleSubmit, form, actions, valg, closeDropdown }) {
+function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown }) {
     const knappCls = ['knapp', 'knapp--mini', !pristine ? 'knapp--hoved' : ''].join(' ');
     const submitknapp = !pristine ? (
         <button className={knappCls} type="submit">Velg</button>
@@ -55,7 +54,7 @@ function RadioFilterform({ pristine, handleSubmit, form, actions, valg, closeDro
             <button className={knappCls} type="button" onClick={closeDropdown}>Lukk</button>
         );
 
-    const submithandler = handleSubmit(prepSubmit(form, actions.endreFiltervalg, closeDropdown));
+    const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown));
 
     return (
         <form className="skjema radio-filterform" onSubmit={submithandler}>
@@ -79,11 +78,9 @@ RadioFilterform.propTypes = {
     form: PT.string.isRequired,
     valg: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     closeDropdown: PT.func.isRequired,
-    actions: PT.shape({
-        endreFiltervalg: PT.func
-    }).isRequired,
     veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
-    filtervalg: filtervalgShape.isRequired // eslint-disable-line react/no-unused-prop-types
+    filtervalg: filtervalgShape.isRequired, // eslint-disable-line react/no-unused-prop-types
+    onSubmit: PT.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -92,10 +89,5 @@ const mapStateToProps = (state, ownProps) => {
 
     return { initialValues };
 };
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    actions: { endreFiltervalg: (...args) => dispatch(endreFiltervalg(
-        ...args, ownProps.filtergruppe, ownProps.veileder))
-    }
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm()(RadioFilterform));
+export default connect(mapStateToProps)(reduxForm()(RadioFilterform));

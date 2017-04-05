@@ -1,8 +1,14 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
-import { veiledereShape, portefoljestorrelserShape, veilederShape, valgtEnhetShape } from './../proptype-shapes';
+import DocumentTitle from 'react-document-title';
+import {
+    veiledereShape,
+    portefoljestorrelserShape,
+    veilederShape,
+    valgtEnhetShape
+} from './../proptype-shapes';
 import VeiledereTabell from './veiledere-tabell';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import VeilederPaginering from '../paginering/veilederpaginering';
@@ -15,21 +21,41 @@ import {
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { leggEnhetIUrl } from '../utils/utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
+import { visAlleVeiledereIListe } from './veiledersok-utils';
+import Dropdown from '../components/dropdown/dropdown';
+import { resetSokeresultater, settVeilederfiltervalg, settVeiledereITabell } from '../ducks/veiledere';
+import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
+import VeiledereSokeliste from './veiledersok';
 
 class VeiledereSide extends Component {
     componentWillMount() {
         const { hentPortefoljestorrelser, valgtEnhet } = this.props;
         hentPortefoljestorrelser(valgtEnhet.enhet.enhetId);
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
+        this.veilederfiltreringOnSubmit = this.veilederfiltreringOnSubmit.bind(this);
+    }
+
+    veilederfiltreringOnSubmit(name, veilederfiltervalg) {
+        const { settFiltervalgForVeiledere, veiledere, settVeiledereSomSkalVises } = this.props;
+        settFiltervalgForVeiledere(veilederfiltervalg);
+        settVeiledereSomSkalVises(veilederfiltervalg
+            .map((ident) => veiledere.data.veilederListe.find((veileder) => veileder.ident === ident)));
     }
 
     render() {
         const {
             veiledere, portefoljestorrelser, veiledereSomSkalVises, currentSortering,
-            routes, sorterPaaPortefoljestorrelse, sorterPaaEtternavn
+            sorterPaaPortefoljestorrelse, sorterPaaEtternavn, resetSok
         } = this.props;
         const { veilederListe } = veiledere.data;
+        const { veiledereITabell, sokeresultat, veilederfiltervalg } = veiledere;
         const { facetResults } = portefoljestorrelser.data;
+        const { formatMessage } = this.props.intl;
+        const veiledereTilTabell = veiledereITabell || veiledereSomSkalVises;
+
+        const veiledervalg = sokeresultat.sokIkkeStartet ?
+            visAlleVeiledereIListe(veiledere.data.veilederListe) :
+            sokeresultat;
 
         const avgjorNySortering = (felt) => {
             if (currentSortering.felt === felt) {
@@ -48,39 +74,52 @@ class VeiledereSide extends Component {
                 return { ...veileder, portefoljestorrelse: count };
             });
         return (
-            <div className="veiledere-side">
-                <Lenker routes={routes} />
-                <p className="typo-infotekst enhetsingress">
-                    <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
-                </p>
-                <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
-                    <FormattedMessage
-                        id="enhet.veiledere.tittel"
-                        values={{ antallVeiledere: veilederListe.length }}
-                    />
-                </Undertittel>
-                <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
-                    {() => (
-                        <div>
-                            <VeilederPaginering
-                                liste={veiledereMedPortefoljestorrelser(veilederListe, facetResults)}
-                                pagineringTekstId={
-                                    veilederListe.length > 0 ?
-                                        'enhet.veiledere.paginering.tekst' :
-                                        'enhet.veiledere.paginering.ingen.veiledere.tekst'
-                                }
+            <DocumentTitle title={formatMessage({id: 'lenker.veiledere.oversikt'})}>
+                <div className="veiledere-side">
+                    <Lenker />
+                    <div id="oversikt-sideinnhold" role="tabpanel">
+                        <p className="typo-infotekst enhetsingress">
+                            <FormattedMessage id="enhet.ingresstekst.veilederoversikt"/>
+                        </p>
+                        <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
+                            <FormattedMessage
+                                id="enhet.veiledere.tittel"
+                                values={{antallVeiledere: veilederListe.length}}
                             />
-                            <VeiledereTabell
-                                veiledere={veiledereSomSkalVises}
-                                sorterPaaEtternavn={() => sorterPaaEtternavn(avgjorNySortering('etternavn'))}
-                                sorterPaaPortefoljestorrelse={
-                                    () => sorterPaaPortefoljestorrelse(avgjorNySortering('portefoljestorrelse'))
-                                }
-                            />
-                        </div>
-                    )}
-                </Innholdslaster>
-            </div>
+                        </Undertittel>
+                        <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
+                            {() => (
+                                <div>
+                                    <div className="veiledersok__wrapper">
+                                        <Dropdown name="Velg veileder" onLukk={resetSok}>
+                                            <VeiledereSokeliste
+                                                veiledere={veilederListe}
+                                            />
+                                            <CheckboxFilterform
+                                                form="veiledervisning"
+                                                valg={veiledervalg}
+                                                filtervalg={{veiledervisning: veilederfiltervalg}}
+                                                onSubmit={(...args) => this.veilederfiltreringOnSubmit(...args)}
+                                            />
+                                        </Dropdown>
+                                    </div>
+                                    <VeilederPaginering
+                                        liste={veiledereMedPortefoljestorrelser(veilederListe, facetResults)}
+                                        pagineringTekstId={'enhet.veiledere.paginering.tekst'}
+                                    />
+                                    <VeiledereTabell
+                                        veiledere={veiledereTilTabell}
+                                        sorterPaaEtternavn={() => sorterPaaEtternavn(avgjorNySortering('etternavn'))}
+                                        sorterPaaPortefoljestorrelse={
+                                            () => sorterPaaPortefoljestorrelse(avgjorNySortering('portefoljestorrelse'))
+                                        }
+                                    />
+                                </div>
+                            )}
+                        </Innholdslaster>
+                    </div>
+                </div>
+            </DocumentTitle>
         );
     }
 }
@@ -94,14 +133,17 @@ VeiledereSide.propTypes = {
     }).isRequired,
     veiledereSomSkalVises: PT.arrayOf(veilederShape).isRequired,
     sorterPaaPortefoljestorrelse: PT.func.isRequired,
-    routes: PT.arrayOf(PT.object).isRequired,
     hentPortefoljestorrelser: PT.func.isRequired,
     currentSortering: PT.shape({
         felt: PT.string.isRequired,
         rekkefolge: PT.string.isRequired
     }).isRequired,
     valgtEnhet: valgtEnhetShape.isRequired,
-    sorterPaaEtternavn: PT.func.isRequired
+    sorterPaaEtternavn: PT.func.isRequired,
+    settFiltervalgForVeiledere: PT.func.isRequired,
+    settVeiledereSomSkalVises: PT.func.isRequired,
+    resetSok: PT.func.isRequired,
+    intl: intlShape.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -113,6 +155,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    resetSok: () => dispatch(resetSokeresultater()),
     hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
     sorterPaaPortefoljestorrelse: (nySortering) => {
         dispatch(sorterListePaaPortefoljestorrelse(nySortering));
@@ -121,7 +164,9 @@ const mapDispatchToProps = (dispatch) => ({
     sorterPaaEtternavn: (nySortering) => {
         dispatch(sorterListePaaEtternavn(nySortering));
         dispatch(settSubListeForPaginering(0));
-    }
+    },
+    settFiltervalgForVeiledere: (veilederfiltervalg) => dispatch(settVeilederfiltervalg(veilederfiltervalg)),
+    settVeiledereSomSkalVises: (veiledere) => dispatch(settVeiledereITabell(veiledere))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VeiledereSide);
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(VeiledereSide));
