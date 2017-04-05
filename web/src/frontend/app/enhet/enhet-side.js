@@ -20,7 +20,6 @@ class EnhetSide extends Component {
         if (!this.props.valgtEnhet) {
             return null;
         }
-        const { routes } = this.props;
         const { formatMessage } = this.props.intl;
 
         return (
@@ -44,7 +43,6 @@ class EnhetSide extends Component {
 EnhetSide.propTypes = {
     valgtEnhet: PT.object.isRequired,
     filtervalg: filtervalgShape.isRequired,
-    routes: PT.arrayOf(PT.object).isRequired,
     intl: intlShape.isRequired
 };
 

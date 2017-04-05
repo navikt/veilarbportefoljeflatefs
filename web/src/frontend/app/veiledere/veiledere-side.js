@@ -45,7 +45,7 @@ class VeiledereSide extends Component {
     render() {
         const {
             veiledere, portefoljestorrelser, veiledereSomSkalVises, currentSortering,
-            routes, sorterPaaPortefoljestorrelse, sorterPaaEtternavn, resetSok
+            sorterPaaPortefoljestorrelse, sorterPaaEtternavn, resetSok
         } = this.props;
         const { veilederListe } = veiledere.data;
         const { veiledereITabell, sokeresultat, veilederfiltervalg } = veiledere;
@@ -133,7 +133,6 @@ VeiledereSide.propTypes = {
     }).isRequired,
     veiledereSomSkalVises: PT.arrayOf(veilederShape).isRequired,
     sorterPaaPortefoljestorrelse: PT.func.isRequired,
-    routes: PT.arrayOf(PT.object).isRequired,
     hentPortefoljestorrelser: PT.func.isRequired,
     currentSortering: PT.shape({
         felt: PT.string.isRequired,
