@@ -11,3 +11,8 @@ export const legendtekst = {
     AAP: ['minoversikt.diagram.legend.aap.1', 'minoversikt.diagram.legend.aap.2'],
     AAP_MAXTID: ['minoversikt.diagram.legend.aapmaxtid.1', 'minoversikt.diagram.legend.aapmaxtid.2']
 };
+
+export default {
+    headertekst,
+    legendtekst
+}
