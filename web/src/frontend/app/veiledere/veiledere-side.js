@@ -75,52 +75,52 @@ class VeiledereSide extends Component {
             });
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.veiledere.oversikt' })}>
-            <div className="veiledere-side">
-                <Lenker routes={routes} />
-                <p className="typo-infotekst enhetsingress">
-                    <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
-                </p>
-                <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
-                    <FormattedMessage
-                        id="enhet.veiledere.tittel"
-                        values={{ antallVeiledere: veilederListe.length }}
-                    />
-                </Undertittel>
-                <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
-                    {() => (
-                        <div>
-                            <div className="veiledersok__wrapper">
-                                <Dropdown name="Velg veileder" onLukk={resetSok}>
-                                    <VeiledereSokeliste
-                                        veiledere={veilederListe}
-                                    />
-                                    <CheckboxFilterform
-                                        form="veiledervisning"
-                                        valg={veiledervalg}
-                                        filtervalg={{ veiledervisning: veilederfiltervalg }}
-                                        onSubmit={(...args) => this.veilederfiltreringOnSubmit(...args)}
-                                    />
-                                </Dropdown>
-                            </div>
-                            <VeilederPaginering
-                                liste={veiledereMedPortefoljestorrelser(veilederListe, facetResults)}
-                                pagineringTekstId={
+                <div className="veiledere-side">
+                    <Lenker routes={routes} />
+                    <p className="typo-infotekst enhetsingress">
+                        <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
+                    </p>
+                    <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
+                        <FormattedMessage
+                            id="enhet.veiledere.tittel"
+                            values={{ antallVeiledere: veilederListe.length }}
+                        />
+                    </Undertittel>
+                    <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
+                        {() => (
+                            <div>
+                                <div className="veiledersok__wrapper">
+                                    <Dropdown name="Velg veileder" onLukk={resetSok}>
+                                        <VeiledereSokeliste
+                                            veiledere={veilederListe}
+                                        />
+                                        <CheckboxFilterform
+                                            form="veiledervisning"
+                                            valg={veiledervalg}
+                                            filtervalg={{ veiledervisning: veilederfiltervalg }}
+                                            onSubmit={(...args) => this.veilederfiltreringOnSubmit(...args)}
+                                        />
+                                    </Dropdown>
+                                </div>
+                                <VeilederPaginering
+                                    liste={veiledereMedPortefoljestorrelser(veilederListe, facetResults)}
+                                    pagineringTekstId={
                                     veilederListe.length > 0 ?
                                         'enhet.veiledere.paginering.tekst' :
                                         'enhet.veiledere.paginering.ingen.veiledere.tekst'
                                 }
-                            />
-                            <VeiledereTabell
-                                veiledere={veiledereTilTabell}
-                                sorterPaaEtternavn={() => sorterPaaEtternavn(avgjorNySortering('etternavn'))}
-                                sorterPaaPortefoljestorrelse={
+                                />
+                                <VeiledereTabell
+                                    veiledere={veiledereTilTabell}
+                                    sorterPaaEtternavn={() => sorterPaaEtternavn(avgjorNySortering('etternavn'))}
+                                    sorterPaaPortefoljestorrelse={
                                     () => sorterPaaPortefoljestorrelse(avgjorNySortering('portefoljestorrelse'))
                                 }
-                            />
-                        </div>
+                                />
+                            </div>
                     )}
-                </Innholdslaster>
-            </div>
+                    </Innholdslaster>
+                </div>
             </DocumentTitle>
         );
     }

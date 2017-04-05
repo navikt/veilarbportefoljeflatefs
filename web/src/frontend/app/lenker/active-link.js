@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router';
 
 function ActiveLink({ router, ...props }) {
     if (router.isActive(props.to)) {
-        return <span className={`${props.className} ${props.activeClassName}`} >{props.children}</span>;
+        return <Link className={`${props.className} ${props.activeClassName}`} {...props} />;
     }
 
     return (

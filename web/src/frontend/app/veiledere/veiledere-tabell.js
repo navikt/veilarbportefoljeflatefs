@@ -28,9 +28,10 @@ class VeilederTabell extends Component {
     }
 
     render() {
-        const { veiledere, modalSkalVises, toggleSkjulModal, sorteringsRekkefolge } = this.props;
+        const { veiledere, modalSkalVises, toggleSkjulModal, currentSortering } = this.props;
 
-        const sorterEtternavn = sorteringsRekkefolge !== 'ikke_satt';
+        const sorterEtternavn = currentSortering.felt === 'etternavn';
+        const sorterPaaPortefoljeStr = currentSortering.felt === 'portefoljestorrelse';
 
         const veilederElementer = veiledere.map((veileder) => (
             <tr key={veileder.ident}>
@@ -66,8 +67,8 @@ class VeilederTabell extends Component {
                                     onClick={this.props.sorterPaaEtternavn}
                                     className={classNames('sortering-link', { valgt: sorterEtternavn })}
                                     aria-pressed={sorterEtternavn}
-                                    aria-label={sorterEtternavn && sorteringsRekkefolge !== 'ikke_satt' ?
-                                        sorteringsRekkefolge : 'inaktiv'}
+                                    aria-label={sorterEtternavn ?
+                                        currentSortering.rekkefolge : 'inaktiv'}
                                 >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                                 </button>
@@ -77,7 +78,13 @@ class VeilederTabell extends Component {
                                 <FormattedMessage id="enhet.veiledere.tabell.ident" />
                             </th>
                             <th scope="col">
-                                <button onClick={this.props.sorterPaaPortefoljestorrelse} className="sortering-link">
+                                <button
+                                    onClick={this.props.sorterPaaPortefoljestorrelse}
+                                    className={classNames('sortering-link', { valgt: sorterPaaPortefoljeStr })}
+                                    aria-pressed={sorterPaaPortefoljeStr}
+                                    aria-label={sorterPaaPortefoljeStr ?
+                                        currentSortering.rekkefolge : 'inaktiv'}
+                                >
                                     <FormattedMessage id="enhet.veiledere.tabell.brukere" />
                                 </button>
                             </th>
@@ -100,15 +107,17 @@ VeilederTabell.propTypes = {
     toggleSkjulModal: PT.func.isRequired,
     toggleVisModal: PT.func.isRequired,
     veilederListe: PT.arrayOf(veilederShape).isRequired,
-    sorterPaaPortefoljestorrelse: PT.func.isRequired
-    veilederListe: PT.arrayOf(veilederShape).isRequired,
-    sorteringsRekkefolge: PT.string.isRequired
+    sorterPaaPortefoljestorrelse: PT.func.isRequired,
+    currentSortering: PT.shape({
+        felt: PT.string.isRequired,
+        rekkefolge: PT.string.isRequired
+    }).isRequired
 };
 
 const mapStateToProps = (state) => ({
     modalSkalVises: state.modal.visModal,
     veilederListe: state.veiledere.data.veilederListe,
-    sorteringsRekkefolge: state.paginering.sorteringsRekkefolge
+    currentSortering: state.veilederpaginering.currentSortering
 
 });
 
