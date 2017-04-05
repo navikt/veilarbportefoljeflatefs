@@ -1,6 +1,7 @@
 import React, {Component, PropTypes as PT} from 'react';
 import { connect } from 'react-redux';
 import { settVisningsmodus } from '../ducks/veilederpaginering';
+import { DIAGRAMVISNING, TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 
 const ButtonRadiogroup = ({visningsmodus, handleClick}) => {
     return (
@@ -9,18 +10,18 @@ const ButtonRadiogroup = ({visningsmodus, handleClick}) => {
                 id="diagramvisning"
                 name="visningsmodus"
                 type="radio"
-                onChange={() => handleClick('diagram')}
+                onChange={() => handleClick(DIAGRAMVISNING)}
                 value="diagramvisning"
-                checked={visningsmodus === 'diagram'}
+                checked={visningsmodus === DIAGRAMVISNING}
             />
             <label htmlFor="diagramvisning" className="typo-undertekst">Vis som diagram</label>
             <input
                 id="tabellvisning"
                 name="visningsmodus"
                 type="radio"
-                onChange={() => handleClick('tabell')}
+                onChange={() => handleClick(TABELLVISNING)}
                 value="tabellvisning"
-                checked={visningsmodus === 'tabell'}
+                checked={visningsmodus === TABELLVISNING}
             />
             <label htmlFor="tabellvisning" className="typo-undertekst">Vis som tabell</label>
         </div>

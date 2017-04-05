@@ -1,0 +1,7 @@
+export const DIAGRAMVISNING = 'DIAGRAMVISNING';
+export const TABELLVISNING = 'TABELLVISNING';
+
+export default {
+    DIAGRAMVISNING,
+    TABELLVISNING
+};
