@@ -16,7 +16,7 @@ import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
-import Diagram from './diagram';
+import Diagram from './diagram/diagram';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
