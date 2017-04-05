@@ -13,6 +13,7 @@ const ButtonRadiogroup = ({visningsmodus, handleClick}) => {
                 onChange={() => handleClick(DIAGRAMVISNING)}
                 value="diagramvisning"
                 checked={visningsmodus === DIAGRAMVISNING}
+                aria-selected={visningsmodus === DIAGRAMVISNING}
             />
             <label htmlFor="diagramvisning" className="typo-undertekst">Vis som diagram</label>
             <input
@@ -22,6 +23,7 @@ const ButtonRadiogroup = ({visningsmodus, handleClick}) => {
                 onChange={() => handleClick(TABELLVISNING)}
                 value="tabellvisning"
                 checked={visningsmodus === TABELLVISNING}
+                aria-selected={visningsmodus === TABELLVISNING}
             />
             <label htmlFor="tabellvisning" className="typo-undertekst">Vis som tabell</label>
         </div>
