@@ -74,17 +74,17 @@ class VeiledereSide extends Component {
                 return { ...veileder, portefoljestorrelse: count };
             });
         return (
-            <DocumentTitle title={formatMessage({ id: 'lenker.veiledere.oversikt' })}>
+            <DocumentTitle title={formatMessage({id: 'lenker.veiledere.oversikt'})}>
                 <div className="veiledere-side">
-                    <Lenker routes={routes} />
+                    <Lenker />
                     <div id="oversikt-sideinnhold" role="tabpanel">
                         <p className="typo-infotekst enhetsingress">
-                            <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
+                            <FormattedMessage id="enhet.ingresstekst.veilederoversikt"/>
                         </p>
                         <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
                             <FormattedMessage
                                 id="enhet.veiledere.tittel"
-                                values={{ antallVeiledere: veilederListe.length }}
+                                values={{antallVeiledere: veilederListe.length}}
                             />
                         </Undertittel>
                         <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
@@ -98,18 +98,14 @@ class VeiledereSide extends Component {
                                             <CheckboxFilterform
                                                 form="veiledervisning"
                                                 valg={veiledervalg}
-                                                filtervalg={{ veiledervisning: veilederfiltervalg }}
+                                                filtervalg={{veiledervisning: veilederfiltervalg}}
                                                 onSubmit={(...args) => this.veilederfiltreringOnSubmit(...args)}
                                             />
                                         </Dropdown>
                                     </div>
                                     <VeilederPaginering
                                         liste={veiledereMedPortefoljestorrelser(veilederListe, facetResults)}
-                                        pagineringTekstId={
-                                            veilederListe.length > 0 ?
-                                                'enhet.veiledere.paginering.tekst' :
-                                                'enhet.veiledere.paginering.ingen.veiledere.tekst'
-                                        }
+                                        pagineringTekstId={'enhet.veiledere.paginering.tekst'}
                                     />
                                     <VeiledereTabell
                                         veiledere={veiledereTilTabell}

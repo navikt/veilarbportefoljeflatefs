@@ -31,25 +31,25 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
         /></Normaltekst>);
 
     return (
-        <DocumentTitle title={formatMessage({ id: 'lenker.min.oversikt' })}>
+        <DocumentTitle title={formatMessage({id: 'lenker.min.oversikt'})}>
             <div className="enhet-side blokk-xl">
                 {visesAnnenVeiledersPortefolje ?
                     <Link to="veiledere" className="typo-normal tilbaketilveileder">
-                        <i className="chevron--venstre" />
+                        <i className="chevron--venstre"/>
                         <span>Til veilederoversikt</span>
                     </Link> : null}
-                <div id="oversikt-sideinnhold" role="tabpanel">
-                    <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
-                        { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
-                        <div className="portefolje-side">
-                            <LenkerMinoversikt
-                                minOversiktOnClick={() =>
-                                    hentPortefolje(valgtEnhet.enhet.enhetId,
-                                        { ident: enheter.ident }, sorteringsrekkefolge, sorteringsfelt)}
-                                veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
-                            />
+                <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
+                    { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
+                    <div className="portefolje-side">
+                        <LenkerMinoversikt
+                            minOversiktOnClick={() =>
+                                hentPortefolje(valgtEnhet.enhet.enhetId,
+                                    {ident: enheter.ident}, sorteringsrekkefolge, sorteringsfelt)}
+                            veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
+                        />
+                        <div id="oversikt-sideinnhold" role="tabpanel">
                             <p className="typo-infotekst blokk-m">
-                                <FormattedMessage id="ingresstekst.minoversikt" />
+                                <FormattedMessage id="ingresstekst.minoversikt"/>
                             </p>
                             <FiltreringContainer
                                 filtervalg={props.filtervalg}
@@ -61,10 +61,10 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
                                 filtergruppe="veileder"
                                 veileder={gjeldendeVeileder}
                             />
-                            <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
+                            <VeilederPortefoljeVisning veileder={gjeldendeVeileder}/>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </div>
         </DocumentTitle>
     );
