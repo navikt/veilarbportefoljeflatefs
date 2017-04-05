@@ -18,7 +18,7 @@ class VeilederPaginering extends Component {
     }
 
     render() {
-        const { liste, fraIndeksForSubListe, sideStorrelse, settSubListe, pagineringTekstId, subListe } = this.props;
+        const { liste, fraIndeksForSubListe, sideStorrelse, settSubListe, pagineringTekstId, subListe, antallReturnert } = this.props;
 
         const pagineringTekstValues = liste.length > 0 ? {
             fraIndex: `${fraIndeksForSubListe + 1}`,
@@ -45,6 +45,7 @@ class VeilederPaginering extends Component {
                     hentListe={(fra) => { settSubListe(fra); }}
                     tekst={pagineringTekst}
                     sideStorrelse={sideStorrelse}
+                    antallReturnert={antallReturnert}
                 />
             </div>
         );
@@ -59,13 +60,15 @@ VeilederPaginering.propTypes = {
     opprettPaginering: PT.func.isRequired,
     klarerPaginering: PT.func.isRequired,
     settSubListe: PT.func.isRequired,
-    subListe: PT.arrayOf(veilederShape).isRequired
+    subListe: PT.arrayOf(veilederShape).isRequired,
+    antallReturnert: PT.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
     fraIndeksForSubListe: state.veilederpaginering.fraIndeksForSubListe,
     sideStorrelse: state.veilederpaginering.sideStorrelse,
-    subListe: state.veilederpaginering.subListe
+    subListe: state.veilederpaginering.subListe,
+    antallReturnert: state.portefolje.data.antallReturnert
 });
 
 const mapDispatchToProps = (dispatch) => ({

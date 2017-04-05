@@ -4,7 +4,8 @@ import { Element } from 'nav-frontend-typografi';
 import createSimpleLink from '../components/simple-link';
 import ButtonRadiogroup from './buttonradiogroup';
 
-function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, antallReturnert }) {
+function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, antallReturnert, visButtongroup }) {
+
     const fraIndeksForrigeSide = (fraIndex - sideStorrelse < 0) ? fraIndex : (fraIndex - sideStorrelse);
     const fraIndeksNesteSide = (antallTotalt % sideStorrelse === 0) ? (antallTotalt - sideStorrelse)
         : (antallTotalt - (antallTotalt % sideStorrelse));
@@ -92,15 +93,17 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
                     null
             }
 
-            {antallTotalt <= sideStorrelse ? null :
-            <div className="bytt-side">
-                {visSeAlleKnapp()}
-                {visForrigeKnapp()}
-                {visSideEnKnapp()}
-                {visCurrentSideKnapp}
-                {visSisteSideKnapp()}
-                {visNesteKnapp()}
-            </div>
+            {
+                antallTotalt <= sideStorrelse ? null :
+                    <div className="bytt-side">
+                        {visSeAlleKnapp()}
+                        {visForrigeKnapp()}
+                        {visSideEnKnapp()}
+                        {visCurrentSideKnapp}
+                        {visSisteSideKnapp()}
+                        {visNesteKnapp()}
+                    </div>
+            }
         </div>
     );
 }
