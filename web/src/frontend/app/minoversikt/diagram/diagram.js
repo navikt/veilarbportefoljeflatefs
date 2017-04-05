@@ -1,12 +1,12 @@
 import React, { Component, PropTypes as PT } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
-import Chart from './chart';
 import { brukerShape } from '../../proptype-shapes';
 import { headertekst, legendtekst } from './diagram-konstanter';
 import { ytelsevalg } from '../../filtrering/filter-konstanter';
 import config from './diagram-config';
 import MultiFormattedMessage from '../../components/multiformattedmessage';
+import Chart from 'react-highcharts';
 
 function maned(brukere) {
 
@@ -112,6 +112,8 @@ const Diagram = ({ brukere, filtreringsvalg }) => {
     const data = filtreringsvalg === ytelsevalg.AAP_MAXTID ? kvartal(brukere) : maned(brukere);
     const tekster = utledTekster(filtreringsvalg);
 
+    console.log("blip!");
+
     return (
         <div>
             <h1>
@@ -119,7 +121,7 @@ const Diagram = ({ brukere, filtreringsvalg }) => {
             </h1>
             <MultiFormattedMessage id={tekster.legendtekst}>
                 {(tekster) => (
-                    <Chart type="Chart" options={config(data, tekster)} container="chart"/>
+                    <Chart config={config(data, tekster)} />
                 )}
             </MultiFormattedMessage>
         </div>
