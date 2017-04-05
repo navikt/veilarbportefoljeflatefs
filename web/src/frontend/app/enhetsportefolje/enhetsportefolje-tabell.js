@@ -156,7 +156,9 @@ class EnhetsportefoljeTabell extends Component {
                                 <Tabelletiketter type="nybruker">Ny bruker</Tabelletiketter>
                             </td>
                         }
-                            <td />
+                            <td >
+                                {bruker.veilederId || ''}
+                            </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ?
                                     <Tabelletiketter type="sikkerhetstiltak">Sikkerhetstiltak</Tabelletiketter> : null}
