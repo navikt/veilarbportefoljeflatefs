@@ -8,7 +8,7 @@ function Lenker() {
     const Veilederoversikt = <FormattedMessage id="lenker.veiledere.oversikt" />;
 
     return (
-        <div className="lenker blokk-m">
+        <div className="lenker blokk-m" role="tablist">
             <ActiveLink
                 to="enhet"
                 className="oversiktslenke typo-undertittel"

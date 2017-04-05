@@ -24,15 +24,17 @@ class EnhetSide extends Component {
         const { formatMessage } = this.props.intl;
 
         return (
-            <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })} >
+            <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })}>
                 <div className="enhet-side blokk-xl">
                     <Lenker routes={routes} />
-                    <p className="typo-infotekst enhetsingress blokk-m">
-                        <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
-                    </p>
-                    <FiltreringContainer filtervalg={this.props.filtervalg} />
-                    <FiltreringLabelContainer filtervalg={this.props.filtervalg} filtergruppe="enhet" />
-                    <EnhetsportefoljeVisning />
+                    <div id="oversikt-sideinnhold" role="tabpanel">
+                        <p className="typo-infotekst enhetsingress blokk-m">
+                            <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
+                        </p>
+                        <FiltreringContainer filtervalg={this.props.filtervalg} />
+                        <FiltreringLabelContainer filtervalg={this.props.filtervalg} filtergruppe="enhet" />
+                        <EnhetsportefoljeVisning />
+                    </div>
                 </div>
             </DocumentTitle>
         );
