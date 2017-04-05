@@ -20,7 +20,7 @@ function FiltreringLabelContainer({ filtervalg, actions: { slettAlle, slettEnkel
                 return value.map((singleValue) => (
                     <FiltreringLabel
                         key={`${key}--${singleValue}`}
-                        label={FilterKonstanter[key][singleValue]}
+                        label={FilterKonstanter[key][singleValue] || singleValue}
                         slettFilter={() => slettEnkelt(key, singleValue)}
                     />
                     ));

@@ -1,7 +1,5 @@
 import React, { PropTypes as PT } from 'react';
 import { Element } from 'nav-frontend-typografi';
-import { connect } from 'react-redux';
-
 import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import RadioFilterform from '../components/radio-filterform/radio-filterform';
@@ -16,7 +14,6 @@ import {
     ytelse,
     rettighetsgruppe
 } from './filter-konstanter';
-import { endreFiltervalg } from '../ducks/filtrering';
 
 function FiltreringFilter({ filtervalg, actions }) {
     return (
@@ -118,10 +115,4 @@ FiltreringFilter.propTypes = {
     }).isRequired
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    actions: {
-        endreFiltervalg: (...args) => dispatch(endreFiltervalg(...args, ownProps.filtergruppe, ownProps.veileder))
-    }
-});
-
-export default connect(undefined, mapDispatchToProps)(FiltreringFilter);
+export default FiltreringFilter;
