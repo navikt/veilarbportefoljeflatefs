@@ -96,11 +96,7 @@ class VeiledereSide extends Component {
                             </div>
                             <VeilederPaginering
                                 liste={veiledereMedPortefoljestorrelser(veilederListe, facetResults)}
-                                pagineringTekstId={
-                                    veilederListe.length > 0 ?
-                                        'enhet.veiledere.paginering.tekst' :
-                                        'enhet.veiledere.paginering.ingen.veiledere.tekst'
-                                }
+                                pagineringTekstId={'enhet.veiledere.paginering.tekst'}
                             />
                             <VeiledereTabell
                                 veiledere={veiledereTilTabell}
