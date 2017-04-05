@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch) => ({
     handleClick: (modus) => { dispatch(settVisningsmodus(modus)); }
 });
 
-ButtonRadiogroup.PropTypes = {
+ButtonRadiogroup.propTypes = {
     visningsmodus: PT.string.isRequired,
     handleClick: PT.func.isRequired
 };
