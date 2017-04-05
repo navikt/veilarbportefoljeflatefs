@@ -1,4 +1,5 @@
-import React, { PropTypes as PT } from 'react';
+import React from 'react';
+import { utlopsdatoShape } from '../proptype-shapes';
 
 const KolonneUtlopsdato = ({ utlopsdato }) => {
     const dato = new Date(utlopsdato.year, utlopsdato.monthValue, utlopsdato.dayOfMonth);
@@ -7,7 +8,7 @@ const KolonneUtlopsdato = ({ utlopsdato }) => {
 };
 
 KolonneUtlopsdato.propTypes = {
-    utlopsdato: PT.string.isRequired
+    utlopsdato: utlopsdatoShape.isRequired
 };
 
 export default KolonneUtlopsdato;
