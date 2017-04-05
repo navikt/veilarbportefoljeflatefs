@@ -2,9 +2,9 @@ import React, { Component, PropTypes as PT } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import Chart from './chart';
-import { brukerShape } from '../proptype-shapes';
+import { brukerShape } from '../../proptype-shapes';
 import { headertekst, legendtekst } from './diagram-konstanter';
-import { ytelsevalg } from '../filtrering/filter-konstanter';
+import { ytelsevalg } from '../../filtrering/filter-konstanter';
 import config from './diagram-config';
 import MultiFormattedMessage from './multiformattedmessage';
 
