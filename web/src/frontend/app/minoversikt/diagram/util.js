@@ -33,10 +33,31 @@ export function medYtelseSerie(len, brukere, antallMisterYtelse) {
         );
 }
 
-export function maned(brukere) W
+export function maned(brukere) {
+    moment.locale('nb_no');
+
+    const len = 12;
+    const labels = new Array(len).fill(0).map((_, i) => moment().add(i + 1, 'month').format('MMMM'));
+
+    const maaneder = new Array(len)
+                            .fill(0)
+                            .map((_, i) => `MND${i + 1}`)
+                            .reduce((acc, val) => ({ ...acc, [val]: 0 }), {});
+
+    const countMisterYtelse = groupByCount(brukere.filter((b) => b.utlopsdatoFasett), 'utlopsdatoFasett');
+    const antallMisterYtelse = Object.values({ ...maaneder, ...countMisterYtelse });
+    const antallMedYtelse = medYtelseSerie(len, brukere, antallMisterYtelse);
+
+    return {
+        labels,
+        antallMisterYtelse,
+        antallMedYtelse
+    };
+}
+
 export function kvartal(brukere) {
     moment.locale('nb_no');
-    console.log('kvartal');
+
     const len = 16;
 
     const labels = new Array(len).fill(0).map((_, i) => {
@@ -45,18 +66,13 @@ export function kvartal(brukere) {
     });
 
     const kvartaler = new Array(len)
-                                .fill(0)
-                                .map((_, i) => `KV${i + 1}`)
-                                .reduce((acc, val) => ({ ...acc, [val]: 0 }), {});
+                            .fill(0)
+                            .map((_, i) => `KV${i + 1}`)
+                            .reduce((acc, val) => ({ ...acc, [val]: 0 }), {});
 
     const countMisterYtelse = groupByCount(brukere.filter((b) => b.aapMaxtidFasett), 'aapMaxtidFasett');
     const antallMisterYtelse = Object.values({ ...kvartaler, ...countMisterYtelse });
     const antallMedYtelse = medYtelseSerie(len, brukere, antallMisterYtelse);
-
-    console.log('kvartaler', kvartaler);
-    console.log('countMisterYtelse', countMisterYtelse);
-    console.log('antallMisterYtelse', antallMisterYtelse);
-    console.log('antallMedYtelse', antallMedYtelse);
 
     return {
         labels,
