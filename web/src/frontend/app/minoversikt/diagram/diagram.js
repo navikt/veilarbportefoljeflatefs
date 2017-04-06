@@ -5,7 +5,7 @@ import { brukerShape } from '../../proptype-shapes';
 import { ytelsevalg } from '../../filtrering/filter-konstanter';
 import config from './config';
 import MultiFormattedMessage from '../../components/multiformattedmessage';
-import { ledetekster, kvartal, maned } from './util';
+import { ledetekster, kvartal, maned } from './utils';
 
 const Diagram = ({ brukere, filtreringsvalg }) => {
     console.log('filtreringsvalg', filtreringsvalg);
