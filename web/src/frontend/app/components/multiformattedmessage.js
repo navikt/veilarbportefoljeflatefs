@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import { PropTypes as PT } from 'react';
 import { injectIntl } from 'react-intl';
 
 function MultiFormattedMessage({ id, intl, children }) {
