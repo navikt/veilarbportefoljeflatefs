@@ -3,11 +3,12 @@ import { FormattedMessage } from 'react-intl';
 import Chart from 'react-highcharts';
 import { brukerShape } from '../../proptype-shapes';
 import { ytelsevalg } from '../../filtrering/filter-konstanter';
-import config from './diagram-config';
+import config from './config';
 import MultiFormattedMessage from '../../components/multiformattedmessage';
 import { ledetekster, kvartal, maned } from './util';
 
 const Diagram = ({ brukere, filtreringsvalg }) => {
+    console.log('filtreringsvalg', filtreringsvalg);
     const data = filtreringsvalg === ytelsevalg.AAP_MAXTID ? kvartal(brukere) : maned(brukere);
     const tekster = ledetekster(filtreringsvalg);
 
