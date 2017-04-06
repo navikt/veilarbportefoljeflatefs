@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { DIAGRAMVISNING } from '../../minoversikt/minoversikt-konstanter';
-import { ytelsevalg } from '../../filtrering/filter-konstanter';
 import { ytelseFilterErAktiv } from '../../utils/utils';
 
 export function runningTotal(arr) {
