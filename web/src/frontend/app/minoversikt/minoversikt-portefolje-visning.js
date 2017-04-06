@@ -121,6 +121,7 @@ class VeilederPortefoljeVisning extends Component {
             <Innholdslaster avhengigheter={[portefolje]}>
                 <Paginering
                     antallTotalt={antallTotalt}
+                    antallReturnert={antallReturnert}
                     fraIndex={fraIndex}
                     hentListe={(fra, antall) =>
                         hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
