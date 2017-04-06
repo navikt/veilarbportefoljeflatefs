@@ -112,12 +112,7 @@ class EnhetsportefoljeTabell extends Component {
                             </th>
                             {utlopsdatoHeader}
                             <th>
-                                <button
-                                    onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
-                                    className="sortering-link"
-                                >
-                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
-                                </button>
+                                <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                                 <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                             </th>
                             <th>
