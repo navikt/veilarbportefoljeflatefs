@@ -20,7 +20,7 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
 
-    const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s">
+    const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
         <FormattedMessage
             id="annen.veileder.portefolje.advarsel"
             tagName="em"
