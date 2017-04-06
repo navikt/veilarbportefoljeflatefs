@@ -54,7 +54,7 @@ class EnhetsportefoljeTabell extends Component {
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
 
         const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
-            (<th>
+            (<th className="tabell-element-center">
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
             :
@@ -99,7 +99,7 @@ class EnhetsportefoljeTabell extends Component {
                                 </button>
                                 <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                             </th>
-                            <th>
+                            <th className="tabell-element-center">
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('fodselsdato')}
                                     className={classNames('sortering-link', { valgt: sorterFodelsnummer })}
@@ -149,7 +149,7 @@ class EnhetsportefoljeTabell extends Component {
                                     {settSammenNavn(bruker)}
                                 </a>
                             </th>
-                            <td>{bruker.fnr}</td>
+                            <td className="tabell-element-center">{bruker.fnr}</td>
                             {
                                 ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
                                     <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
