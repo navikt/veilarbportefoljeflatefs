@@ -2,8 +2,10 @@ import React, { PropTypes as PT } from 'react';
 import classNames from 'classnames';
 import { Element } from 'nav-frontend-typografi';
 import createSimpleLink from '../components/simple-link';
+import ButtonRadiogroup from './buttonradiogroup';
 
-function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, antallReturnert }) {
+function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, antallReturnert, visButtongroup }) {
+
     const fraIndeksForrigeSide = (fraIndex - sideStorrelse < 0) ? fraIndex : (fraIndex - sideStorrelse);
     const fraIndeksNesteSide = (antallTotalt % sideStorrelse === 0) ? (antallTotalt - sideStorrelse)
         : (antallTotalt - (antallTotalt % sideStorrelse));
@@ -80,19 +82,28 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
 
     return (
         <div className="paginering">
-            <Element className="info" tag="h1">
-                <strong>
-                    {tekst}
-                </strong>
+            <Element className="info blokk-xs" tag="h1">
+                {tekst}
             </Element>
-            <div className="bytt-side">
-                {visSeAlleKnapp()}
-                {visForrigeKnapp()}
-                {visSideEnKnapp()}
-                {visCurrentSideKnapp}
-                {visSisteSideKnapp()}
-                {visNesteKnapp()}
-            </div>
+
+            {
+                visButtongroup ?
+                    <ButtonRadiogroup />
+                    :
+                    null
+            }
+
+            {
+                antallTotalt <= sideStorrelse ? null :
+                    <div className="bytt-side">
+                        {visSeAlleKnapp()}
+                        {visForrigeKnapp()}
+                        {visSideEnKnapp()}
+                        {visCurrentSideKnapp}
+                        {visSisteSideKnapp()}
+                        {visNesteKnapp()}
+                    </div>
+            }
         </div>
     );
 }
@@ -108,6 +119,7 @@ Paginering.propTypes = {
     hentListe: PT.func.isRequired,
     tekst: PT.node,
     sideStorrelse: PT.number.isRequired,
+    visButtongroup: PT.bool,
     antallReturnert: PT.number
 };
 
