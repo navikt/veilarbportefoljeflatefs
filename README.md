@@ -41,6 +41,8 @@ For å watche kjører man `npm run dev`.
 
 Klientkoden i `veilarbportefoljeflatefs` kompileres og bundles ved hjelp av tsc og webpack. Dette kan gjøres ved å stå i `veilarbportefoljeflatefs/web/src/frontend` og kjøre `npm run build`. Merk at `npm run build` kjøres sammen med `mvn clean install`, så den trenger ikke å kjøres i tillegg.
 
+Høyreklikk på den ignorerte `out/` mappen i IDEA og marker den som "excluded" så slipper du å få kompilerte filer herfra ved søk.
+
 ### Chrome
 
 For å muliggjøre kall på tvers av domener må chrome startes med følgende flagg: --disable-web-security --user-data-dir. Dette gjøres ved å høyreklikke på chrome, gå til fanen snarvei, og legge til flaggene under mål. Eks: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir. Merk at chrome skal gi beskjed om at disse flaggene er satt når nettleseren åpnes på nytt.
