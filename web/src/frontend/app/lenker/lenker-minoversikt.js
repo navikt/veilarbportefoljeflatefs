@@ -21,9 +21,13 @@ function LenkerMinoversikt({ veilederident, minOversiktOnClick }) {
     );
 }
 
+LenkerMinoversikt.defaultProps = {
+    veilederident: undefined
+};
+
 LenkerMinoversikt.propTypes = {
     minOversiktOnClick: PT.func.isRequired,
-    veilederident: PT.string.isRequired
+    veilederident: PT.string
 };
 
 export default withRouter(LenkerMinoversikt);
