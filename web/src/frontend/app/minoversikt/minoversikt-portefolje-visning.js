@@ -115,7 +115,15 @@ class VeilederPortefoljeVisning extends Component {
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
             :
-            null;
+            <th />;
+
+        const fodselsdatoHeader = (<th className="tabell-element-center">
+            <FormattedMessage id="portefolje.tabell.fodselsnummer" />
+        </th>);
+
+        const ddmmyyHeader = (<th className="tabell-element-center">
+            <FormattedMessage id="portefolje.tabell.ddmmyy"/>
+        </th>);
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -133,7 +141,7 @@ class VeilederPortefoljeVisning extends Component {
                         <tr>
                             <th />
                             <th>Bruker</th>
-                            <th />
+                            {utlopsdatoHeader}
                             <th />
                         </tr>
                     </thead>
@@ -163,10 +171,8 @@ class VeilederPortefoljeVisning extends Component {
                                     <FormattedMessage id="portefolje.tabell.navn" />
                                 </button>
                             </th>
-                            {utlopsdatoHeader}
-                            <th className="tabell-element-center">
-                                <FormattedMessage id="portefolje.tabell.fodselsnummer" />
-                            </th>
+                            {ytelseFilterErAktiv(filtervalg.ytelse) ? ddmmyyHeader : null}
+                            {fodselsdatoHeader}
                             <th />
                         </tr>
                     </thead>
@@ -195,14 +201,14 @@ class VeilederPortefoljeVisning extends Component {
                                             {settSammenNavn(bruker)}
                                         </a>
                                     </th>
+                                    {
+                                        ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
+                                            <Utlopsdatokolonne utlopsdato={bruker.utlopsdato}/>
+                                            : null
+                                    }
                                     {bruker.fnr !== null ?
                                         <td className="tabell-element-center">{bruker.fnr}</td> :
                                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
-                                    }
-                                    {
-                                        ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
-                                            <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
-                                        : null
                                     }
                                     <td>
                                         {bruker.sikkerhetstiltak.length > 0 ?
