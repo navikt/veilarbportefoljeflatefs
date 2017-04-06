@@ -108,14 +108,19 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
     );
 }
 
+Paginering.defaultProps = {
+    tekst: '',
+    antallReturnert: 0
+};
+
 Paginering.propTypes = {
     antallTotalt: PT.number.isRequired,
     fraIndex: PT.number.isRequired,
     hentListe: PT.func.isRequired,
     tekst: PT.node,
-    antallReturnert: PT.number.isRequired,
     sideStorrelse: PT.number.isRequired,
-    visButtongroup: PT.bool
+    visButtongroup: PT.bool,
+    antallReturnert: PT.number
 };
 
 export default Paginering;
