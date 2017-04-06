@@ -45,7 +45,7 @@ class VeilederTabell extends Component {
                     </Link>
                 </th>
                 <td>{`${veileder.ident}`}</td>
-                <td>{veileder.portefoljestorrelse}</td>
+                <td className="tabell-element-center">{veileder.portefoljestorrelse}</td>
             </tr>
         ));
 
@@ -77,7 +77,7 @@ class VeilederTabell extends Component {
                             <th scope="col">
                                 <FormattedMessage id="enhet.veiledere.tabell.ident" />
                             </th>
-                            <th scope="col">
+                            <th className="tabell-element-center" scope="col">
                                 <button
                                     onClick={this.props.sorterPaaPortefoljestorrelse}
                                     className={classNames('sortering-link', { valgt: sorterPaaPortefoljeStr })}
