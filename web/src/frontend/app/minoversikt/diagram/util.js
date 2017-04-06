@@ -1,103 +1,79 @@
 import moment from 'moment';
-import { headertekst, legendtekst } from './diagram-konstanter';
-import { ytelsevalg } from '../../filtrering/filter-konstanter';
 
 export function runningTotal(arr) {
-    const running = new Array(arr.length);
-    arr.reduce((acc, val, i) => running[i] = acc + val, 0);
-    return running;
+    return arr.reduce(
+        (acc, val) => {
+            const sum = ((acc.length && acc[acc.length - 1]) || 0) + val;
+            acc.push(sum);
+            return acc;
+        },
+        []
+    );
 }
 
-export function harYtelseSerie(lopendeSum, antallBrukere) {
-    return new Array(lopendeSum.length)
-                    .fill(antallBrukere)
-                    .map((antall, i) => antall - lopendeSum[i]);
+export function groupByCount(arr, field) {
+    return arr.reduce((acc, val) => {
+        const key = val[field];
+        const count = acc[key] || 0;
+        acc[key] = count + 1;
+        return acc;
+    }, {});
 }
 
-export function maned(brukere) {
-    moment.locale('nb_no');
-
-    const len = 12;
-    const labels = new Array(len).fill(0).map((_, i) => moment().add(i + 1, 'month').format('MMMM'));
-    const maaneder = new Array(len).fill(0).map((_, i) => `MND${i + 1}`);
-
-    const antallMisterYtelse = new Array(len).fill(0);
-    brukere
-        .filter((bruker) => bruker.utlopsdatoFasett)
-        .map((bruker) => {
-            const index = maaneder.findIndex((element) => element === bruker.utlopsdatoFasett);
-            const value = antallMisterYtelse[index];
-            antallMisterYtelse[index] = value + 1;
-        });
-
+export function medYtelseSerie(len, brukere, antallMisterYtelse) {
     const lopendeSum = runningTotal(antallMisterYtelse);
-
-    return {
-        labels,
-        antallMisterYtelse,
-        antallMedYtelse: harYtelseSerie(lopendeSum, brukere.length)
-    };
+    return new Array(len)
+        .fill(brukere.filter((b) => b.ytelse).length)
+        .reduce(
+            (acc, val, i) => {
+                acc[i] = val - lopendeSum[i];
+                return acc;
+            },
+            []
+        );
 }
 
+export function maned(brukere) W
 export function kvartal(brukere) {
     moment.locale('nb_no');
-
+    console.log('kvartal');
     const len = 16;
+
     const labels = new Array(len).fill(0).map((_, i) => {
         const quarter = moment().add(i, 'quarter');
         return `Q${quarter.quarter()}.${quarter.year()}`;
     });
-    const kvartaler = new Array(len).fill(0).map((_, i) => `KV${i + 1}`);
 
-    const antallMisterYtelse = new Array(len).fill(0);
-    brukere
-        .filter((bruker) => bruker.aapMaxtidFasett)
-        .map((bruker) => {
-            const index = kvartaler.findIndex((element) => element === bruker.aapMaxtidFasett);
-            const value = antallMisterYtelse[index];
-            antallMisterYtelse[index] = value + 1;
-        });
+    const kvartaler = new Array(len)
+                                .fill(0)
+                                .map((_, i) => `KV${i + 1}`)
+                                .reduce((acc, val) => ({ ...acc, [val]: 0 }), {});
 
-    const lopendeSum = runningTotal(antallMisterYtelse);
+    const countMisterYtelse = groupByCount(brukere.filter((b) => b.aapMaxtidFasett), 'aapMaxtidFasett');
+    const antallMisterYtelse = Object.values({ ...kvartaler, ...countMisterYtelse });
+    const antallMedYtelse = medYtelseSerie(len, brukere, antallMisterYtelse);
+
+    console.log('kvartaler', kvartaler);
+    console.log('countMisterYtelse', countMisterYtelse);
+    console.log('antallMisterYtelse', antallMisterYtelse);
+    console.log('antallMedYtelse', antallMedYtelse);
 
     return {
         labels,
         antallMisterYtelse,
-        antallMedYtelse: harYtelseSerie(lopendeSum)
+        antallMedYtelse
     };
 }
 
 export function ledetekster(filtreringvalg) {
-    switch (filtreringvalg) {
-        case ytelsevalg.DAGPENGER:
-        case ytelsevalg.DAGPENGER_MED_PERMITTERING:
-        case ytelsevalg.ORDINARE_DAGPENGER:
-            return {
-                headertekst: headertekst.DAGPENGER,
-                legendtekst: legendtekst.DAGPENGER
-            };
-        case ytelsevalg.TILTAKSPENGER:
-            return {
-                headertekst: headertekst.TILTAKSPENGER,
-                legendtekst: legendtekst.TILTAKSPENGER
-            };
-        case ytelsevalg.AAP_MAXTID:
-            return {
-                headertekst: headertekst.AAP_MAXTID,
-                legendtekst: legendtekst.AAP_MAXTID
-            };
-        case ytelsevalg.AAP:
-        case ytelsevalg.AAP_UNNTAK:
-            return {
-                headertekst: headertekst.AAP,
-                legendtekst: legendtekst.AAP
-            };
-        default:
-            return {
-                headertekst: 'minoversikt.diagram.header.feil',
-                legendtekst: ['minoversikt.diagram.header.feil', 'minoversikt.diagram.header.feil']
-            };
-    }
+    const valg = filtreringvalg.toLowerCase();
+    return {
+        headertekst: `minoversikt.diagram.header.${valg}`,
+        legendtekst: [
+            `minoversikt.diagram.legend.${valg}.1`,
+            `minoversikt.diagram.legend.${valg}.2`
+        ]
+    };
 }
 
 export default {
@@ -105,5 +81,5 @@ export default {
     kvartal,
     ledetekster,
     runningTotal,
-    harYtelseSerie
+    medYtelseSerie
 };
