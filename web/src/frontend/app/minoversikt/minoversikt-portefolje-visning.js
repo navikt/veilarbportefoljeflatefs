@@ -19,6 +19,7 @@ import { ASCENDING, DESCENDING } from '../konstanter';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
+import { ytelsevalg } from '../filtrering/filter-konstanter';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -122,6 +123,7 @@ class VeilederPortefoljeVisning extends Component {
             null;
 
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+        const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -133,7 +135,7 @@ class VeilederPortefoljeVisning extends Component {
                             sorteringsfelt, sorteringsrekkefolge, fra, antall, filtervalg)}
                     tekst={pagineringTekst}
                     sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
-                    visButtongroup={ytelseFilterErAktiv(filtervalg.ytelse)}
+                    visButtongroup={visButtonGroup}
                     antallReturnert={antallReturnert}
                 />
                 {

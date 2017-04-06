@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { DIAGRAMVISNING } from '../../minoversikt/minoversikt-konstanter';
 import { ytelseFilterErAktiv } from '../../utils/utils';
+import { ytelsevalg } from '../../filtrering/filter-konstanter';
 
 export function runningTotal(arr) {
     return arr.reduce(
@@ -95,7 +96,7 @@ export function ledetekster(filtreringvalg) {
 }
 
 export function diagramSkalVises(visningsmodus, filtervalg) {
-    return visningsmodus === DIAGRAMVISNING && ytelseFilterErAktiv(filtervalg);
+    return visningsmodus === DIAGRAMVISNING && ytelseFilterErAktiv(filtervalg) && filtervalg !== ytelsevalg.AAP_UNNTAK;
 }
 
 
