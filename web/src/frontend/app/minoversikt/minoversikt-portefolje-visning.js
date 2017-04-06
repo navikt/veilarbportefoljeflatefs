@@ -116,7 +116,7 @@ class VeilederPortefoljeVisning extends Component {
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
-            (<th>
+            (<th className="tabell-element-center">
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
             :
@@ -180,7 +180,7 @@ class VeilederPortefoljeVisning extends Component {
                                         </button>
                                     </th>
                                     {utlopsdatoHeader}
-                                    <th>
+                                    <th className="tabell-element-center">
                                         <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                                     </th>
                                     <th />
@@ -212,7 +212,7 @@ class VeilederPortefoljeVisning extends Component {
                                         </a>
                                     </th>
                                     {bruker.fnr !== null ?
-                                        <td className="fodselsnummer-td">{bruker.fnr}</td> :
+                                        <td className="tabell-element-center">{bruker.fnr}</td> :
                                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
                                     }
                                     {
