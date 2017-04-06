@@ -48,7 +48,7 @@ function MinOversiktSide({ enheter, sorteringsrekkefolge, sorteringsfelt,
                             veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
                         />
                         <div id="oversikt-sideinnhold" role="tabpanel">
-                            <p className="typo-infotekst blokk-m">
+                            <p className="typo-infotekst begrensetbredde blokk-m">
                                 <FormattedMessage id="ingresstekst.minoversikt"/>
                             </p>
                             <FiltreringContainer

@@ -27,7 +27,7 @@ class EnhetSide extends Component {
                 <div className="enhet-side blokk-xl">
                     <Lenker />
                     <div id="oversikt-sideinnhold" role="tabpanel">
-                        <p className="typo-infotekst enhetsingress blokk-m">
+                        <p className="typo-infotekst begrensetbredde blokk-m">
                             <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                         </p>
                         <FiltreringContainer filtervalg={this.props.filtervalg} />
