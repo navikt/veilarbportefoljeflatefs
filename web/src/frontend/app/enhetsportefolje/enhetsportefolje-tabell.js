@@ -58,7 +58,7 @@ class EnhetsportefoljeTabell extends Component {
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
             :
-            null;
+            <th></th>;
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         return (
@@ -68,7 +68,7 @@ class EnhetsportefoljeTabell extends Component {
                     <thead className="extra-head">
                         <tr>
                             <th />
-                            <th colSpan="2">Bruker</th>
+                            <th colSpan="3">Bruker</th>
                             <th colSpan="3">Veileder</th>
                         </tr>
                     </thead>
@@ -153,7 +153,7 @@ class EnhetsportefoljeTabell extends Component {
                             {
                                 ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
                                     <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
-                                    : null
+                                    : <td></td>
                             }
                             {
                             bruker.veilederId ? <td className="veileder-td">{veiledere
