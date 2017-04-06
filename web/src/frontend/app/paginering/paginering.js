@@ -1,7 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import { Element } from 'nav-frontend-typografi';
 
-function Pagineringknapp({ children, disabled, ...props }) {
+function KnappPanel({ children, disabled, ...props }) {
     return (
         <button
             className={['paginering__knapp', disabled ? 'disabled' : ''].join(' ')}
@@ -26,24 +26,24 @@ function ToggleModusKnapp({ hentListe, sideStorrelse, viserAlle, antallReturnert
 
     if (skalVareInaktiv) {
         return (
-            <Pagineringknapp disabled>
+            <KnappPanel disabled>
                 Se alle
-            </Pagineringknapp>
+            </KnappPanel>
         );
     }
 
     if (viserAlle) {
         return (
-            <Pagineringknapp onClick={() => hentListe(0, sideStorrelse)}>
+            <KnappPanel onClick={() => hentListe(0, sideStorrelse)}>
                 Se færre
-            </Pagineringknapp>
+            </KnappPanel>
         );
     }
 
     return (
-        <Pagineringknapp onClick={() => hentListe(0, antallTotalt)}>
+        <KnappPanel onClick={() => hentListe(0, antallTotalt)}>
             Se alle
-        </Pagineringknapp>
+        </KnappPanel>
     );
 }
 
@@ -83,21 +83,21 @@ function Paginering(props) {
                     antallReturnert={antallReturnert}
                     antallTotalt={antallTotalt}
                 />
-                <Pagineringknapp disabled={navarendeSide === 1} onClick={gaTilSide(navarendeSide - 1)}>
+                <KnappPanel disabled={erPaForsteSide} onClick={gaTilSide(navarendeSide - 1)}>
                     <Chevron retning="venstre">Forrige</Chevron>
-                </Pagineringknapp>
+                </KnappPanel>
 
-                {!erPaForsteSide && <Pagineringknapp onClick={gaTilSide(1)}>1</Pagineringknapp>}
+                {!erPaForsteSide && <KnappPanel onClick={gaTilSide(1)}>1</KnappPanel>}
 
-                <Pagineringknapp>
+                <KnappPanel>
                     <strong>{navarendeSide}</strong>
-                </Pagineringknapp>
+                </KnappPanel>
 
-                {!erPaSisteSide && <Pagineringknapp onClick={gaTilSide(antallSider)}>{antallSider}</Pagineringknapp>}
+                {!erPaSisteSide && <KnappPanel onClick={gaTilSide(antallSider)}>{antallSider}</KnappPanel>}
 
-                <Pagineringknapp disabled={navarendeSide === antallSider} onClick={gaTilSide(navarendeSide + 1)}>
+                <KnappPanel disabled={erPaSisteSide} onClick={gaTilSide(navarendeSide + 1)}>
                     <Chevron retning="hoyre">Neste</Chevron>
-                </Pagineringknapp>
+                </KnappPanel>
             </div>
         </div>
     );
