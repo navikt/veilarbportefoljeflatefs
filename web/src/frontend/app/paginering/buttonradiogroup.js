@@ -1,4 +1,4 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { settVisningsmodus } from '../ducks/veilederpaginering';
 import { DIAGRAMVISNING, TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
