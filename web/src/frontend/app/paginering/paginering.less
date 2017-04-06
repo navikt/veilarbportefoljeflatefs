@@ -1,3 +1,5 @@
+@import "./node_modules/nav-frontend-paneler-style/src/mixins";
+
 .paginering {
     margin: 1rem 0;
 
@@ -5,53 +7,43 @@
         padding: 10px 5px 0;
         display: inline-block;
     }
+}
+.paginering__knapp {
+    border: none;
+    background: none;
 
-    .bytt-side {
-        float: right;
+    .panel-mixin();
+    .panel-focushover-mixin();
 
-        button {
-            background-color: @white;
-            margin: 1px;
-            display: inline-block;
-            padding: 4px 16px;
-            border: none;
-            color: #3e3832;
-            position: relative;
-        }
-        button:first-of-type {
-            border-bottom-left-radius: 2px;
-            border-top-left-radius: 2px;
-        }
-        button:last-of-type {
-            border-bottom-right-radius: 2px;
-            border-top-right-radius: 2px;
-        }
-        button {
-            cursor: pointer;
+    display: inline-block;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-radius: 0;
 
-            .prev, .next {
-                display: inline-block;
-            }
-
-            &:focus {
-                outline: 0;
-                box-shadow: 0 0 0 2px @orangeFocus;
-            }
-
-            i {
-                top: 11px;
-            }
-            i.chevron--hoyre, i.chevron--venstre {
-                width: 18px;
-            }
-        }
-        button.not-active {
-            pointer-events: none;
-            cursor: default;
-            color: lightgray;
-        }
-        button.bold {
-            font-weight: bold;
-        }
+    &:hover {
+        text-decoration: underline;
     }
+
+    &:first-child {
+        border-top-left-radius: @border-radius-small;
+        border-bottom-left-radius: @border-radius-small;
+    }
+
+    &:last-child {
+        border-top-right-radius: @border-radius-small;
+        border-bottom-right-radius: @border-radius-small;
+    }
+
+    &:not(.last-child) {
+        margin-right: 0.25rem;
+    }
+
+    &.disabled {
+        pointer-events: none;
+        cursor: default;
+        color: lightgray;
+    }
+}
+.paginering__knapper {
+    float: right;
 }

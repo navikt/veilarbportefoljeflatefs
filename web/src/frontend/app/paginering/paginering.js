@@ -1,82 +1,72 @@
 import React, { PropTypes as PT } from 'react';
-import classNames from 'classnames';
 import { Element } from 'nav-frontend-typografi';
-import createSimpleLink from '../components/simple-link';
 
-function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, antallReturnert }) {
-    const fraIndeksForrigeSide = (fraIndex - sideStorrelse < 0) ? fraIndex : (fraIndex - sideStorrelse);
-    const fraIndeksNesteSide = (antallTotalt % sideStorrelse === 0) ? (antallTotalt - sideStorrelse)
-        : (antallTotalt - (antallTotalt % sideStorrelse));
-    const fraIndeksSisteSide = (fraIndex + sideStorrelse >= antallTotalt) ? fraIndex : (fraIndex + sideStorrelse);
+function Pagineringknapp({ children, disabled, ...props }) {
+    return (
+        <button
+            className={['paginering__knapp', disabled ? 'disabled' : ''].join(' ')}
+            aria-disabled={disabled}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+}
 
-    const ikkeAktiv = classNames({ 'not-active': antallTotalt === antallReturnert });
-    const seAlleKnapp = createSimpleLink(0, antallTotalt, 'Se alle', hentListe);
-    const seFaerreKnapp = createSimpleLink(0, sideStorrelse, 'Se færre', hentListe);
-    const seAlleKnappInactive = createSimpleLink(0, antallTotalt, 'Se alle', hentListe, 'not-active');
+function Chevron({ retning, children }) {
+    return (
+        <i className={`chevron--${retning}`}>
+            <span className="text-hide prev">{children}</span>
+        </i>
+    );
+}
 
-    function lagChevron(isLeft) {
-        if (isLeft) {
-            return (
-                <i className="chevron--venstre">
-                    <span className="text-hide prev">{'Forrige'}</span>
-                </i>
-            );
-        }
+function ToggleModusKnapp({ hentListe, sideStorrelse, viserAlle, antallReturnert, antallTotalt }) {
+    const skalVareInaktiv = (viserAlle && antallReturnert <= sideStorrelse);
+
+    if (skalVareInaktiv) {
         return (
-            <i className="chevron--hoyre">
-                <span className="text-hide next">{'Neste'}</span>
-            </i>
+            <Pagineringknapp disabled>
+                Se alle
+            </Pagineringknapp>
         );
     }
 
-    function visSeAlleKnapp() {
-        if (antallReturnert === antallTotalt && antallReturnert <= sideStorrelse) {
-            return seAlleKnappInactive;
-        } else if (antallReturnert === antallTotalt) {
-            return seFaerreKnapp;
-        }
-        return seAlleKnapp;
+    if (viserAlle) {
+        return (
+            <Pagineringknapp onClick={() => hentListe(0, sideStorrelse)}>
+                Se færre
+            </Pagineringknapp>
+        );
     }
 
-    function visForrigeKnapp() {
-        if (fraIndex === 0) {
-            return (
-                <button className="not-active" tabIndex="-1">
-                    {lagChevron(true)}
-                </button>
-            );
-        }
-        return (createSimpleLink(fraIndeksForrigeSide, sideStorrelse, lagChevron(true), hentListe, 'prev'));
+    return (
+        <Pagineringknapp onClick={() => hentListe(0, antallTotalt)}>
+            Se alle
+        </Pagineringknapp>
+    );
+}
+
+
+
+function gaTilSideFactory(sideStorrelse, hentListe) {
+    return (side) => () => hentListe((side - 1) * sideStorrelse, sideStorrelse);
+}
+
+function Paginering(props) {
+    const { fraIndex, antallTotalt, hentListe, tekst, antallReturnert, sideStorrelse: antattSideStorrelse } = props;
+
+    // Fordi sideStorrelse tydeligvis ikke endrer seg i staten, selvom den helt klart egentlig gjør det i UI.
+    let sideStorrelse = antattSideStorrelse;
+    if (antattSideStorrelse < antallReturnert) {
+        sideStorrelse = antallReturnert;
     }
 
-    function visSideEnKnapp() {
-        if (fraIndex !== 0) {
-            return createSimpleLink(0, sideStorrelse, '1', hentListe, ikkeAktiv);
-        }
-        return null;
-    }
-
-    const visCurrentSideKnapp = <button><strong>{((fraIndex / sideStorrelse) + 1)}</strong></button>;
-
-    function visSisteSideKnapp() {
-        if (fraIndex < fraIndeksSisteSide && antallTotalt !== antallReturnert) {
-            return createSimpleLink(
-                fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt / sideStorrelse), hentListe, ikkeAktiv
-            );
-        }
-        return null;
-    }
-
-    function visNesteKnapp() {
-        if (fraIndex === fraIndeksSisteSide) {
-            return (
-                <button className="not-active" tabIndex="-1">
-                    {lagChevron(false)}
-                </button>
-            );
-        }
-        return createSimpleLink(fraIndeksSisteSide, sideStorrelse, lagChevron(false), hentListe, ikkeAktiv);
-    }
+    const navarendeSide = Math.round(fraIndex / sideStorrelse) + 1;
+    const antallSider = Math.max(Math.ceil(antallTotalt / sideStorrelse), 1);
+    const erPaForsteSide = navarendeSide === 1;
+    const erPaSisteSide = navarendeSide === antallSider;
+    const gaTilSide = gaTilSideFactory(sideStorrelse, hentListe);
 
     return (
         <div className="paginering">
@@ -85,13 +75,29 @@ function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, a
                     {tekst}
                 </strong>
             </Element>
-            <div className="bytt-side">
-                {visSeAlleKnapp()}
-                {visForrigeKnapp()}
-                {visSideEnKnapp()}
-                {visCurrentSideKnapp}
-                {visSisteSideKnapp()}
-                {visNesteKnapp()}
+            <div className="paginering__knapper">
+                <ToggleModusKnapp
+                    viserAlle={antallSider === 1}
+                    sideStorrelse={antattSideStorrelse}
+                    hentListe={hentListe}
+                    antallReturnert={antallReturnert}
+                    antallTotalt={antallTotalt}
+                />
+                <Pagineringknapp disabled={navarendeSide === 1} onClick={gaTilSide(navarendeSide - 1)}>
+                    <Chevron retning="venstre">Forrige</Chevron>
+                </Pagineringknapp>
+
+                {!erPaForsteSide && <Pagineringknapp onClick={gaTilSide(1)}>1</Pagineringknapp>}
+
+                <Pagineringknapp>
+                    <strong>{navarendeSide}</strong>
+                </Pagineringknapp>
+
+                {!erPaSisteSide && <Pagineringknapp onClick={gaTilSide(antallSider)}>{antallSider}</Pagineringknapp>}
+
+                <Pagineringknapp disabled={navarendeSide === antallSider} onClick={gaTilSide(navarendeSide + 1)}>
+                    <Chevron retning="hoyre">Neste</Chevron>
+                </Pagineringknapp>
             </div>
         </div>
     );
