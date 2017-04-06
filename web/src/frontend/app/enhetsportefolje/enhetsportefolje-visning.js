@@ -93,24 +93,28 @@ class EnhetsportefoljeVisning extends Component {
             clearFeilendeTilordninger();
         }
 
+        const paginering = (
+            <Paginering
+                antallTotalt={antallTotalt}
+                fraIndex={fraIndex}
+                hentListe={(fra, antall) =>
+                    hentPortefolje(
+                        valgtEnhet.enhet.enhetId,
+                        sorteringsrekkefolge,
+                        sorteringsfelt,
+                        fra,
+                        antall,
+                        filtervalg
+                    )}
+                tekst={pagineringTekst}
+                sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
+                antallReturnert={antallReturnert}
+            />
+        );
+
         return (
             <Innholdslaster avhengigheter={[portefolje, veiledere]}>
-                <Paginering
-                    antallTotalt={antallTotalt}
-                    fraIndex={fraIndex}
-                    hentListe={(fra, antall) =>
-                        hentPortefolje(
-                            valgtEnhet.enhet.enhetId,
-                            sorteringsrekkefolge,
-                            sorteringsfelt,
-                            fra,
-                            antall,
-                            filtervalg
-                        )}
-                    tekst={pagineringTekst}
-                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
-                    antallReturnert={antallReturnert}
-                />
+                {paginering}
                 <EnhetsportefoljeTabell
                     veiledere={veiledere.data.veilederListe}
                     brukere={portefolje.data.brukere}
@@ -118,22 +122,7 @@ class EnhetsportefoljeVisning extends Component {
                     settSomMarkert={settMarkert}
                     portefolje={portefolje}
                 />
-                <Paginering
-                    antallTotalt={antallTotalt}
-                    fraIndex={fraIndex}
-                    hentListe={(fra, antall) =>
-                        hentPortefolje(
-                            valgtEnhet.enhet.enhetId,
-                            sorteringsrekkefolge,
-                            sorteringsfelt,
-                            fra,
-                            antall,
-                            filtervalg
-                        )}
-                    tekst={antallTotalt > 0 ? pagineringTekst : null}
-                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
-                    antallReturnert={antallReturnert}
-                />
+                {antallTotalt >= 5 && paginering}
             </Innholdslaster>
         );
     }
