@@ -50,5 +50,5 @@ export function sendBrukerTilUrl(url) {
     history.replace(url);
 }
 export function ytelseFilterErAktiv(ytelse) {
-     return !!ytelse;
+    return !!ytelse;
 }
