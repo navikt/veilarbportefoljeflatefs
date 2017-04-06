@@ -1,4 +1,7 @@
 import moment from 'moment';
+import { DIAGRAMVISNING } from '../../minoversikt/minoversikt-konstanter';
+import { ytelsevalg } from '../../filtrering/filter-konstanter';
+import { ytelseFilterErAktiv } from '../../utils/utils';
 
 export function runningTotal(arr) {
     return arr.reduce(
@@ -92,10 +95,16 @@ export function ledetekster(filtreringvalg) {
     };
 }
 
+export function diagramSkalVises(visningsmodus, filtervalg) {
+    return visningsmodus === DIAGRAMVISNING && ytelseFilterErAktiv(filtervalg);
+}
+
+
 export default {
     maned,
     kvartal,
     ledetekster,
     runningTotal,
-    medYtelseSerie
+    medYtelseSerie,
+    diagramSkalVises
 };

@@ -18,7 +18,7 @@ import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 import Diagram from './diagram/diagram';
-import { DIAGRAMVISNING } from '../minoversikt/minoversikt-konstanter';
+import { diagramSkalVises } from './diagram/util';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -26,6 +26,7 @@ const settSammenNavn = (bruker) => {
     }
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
+
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
@@ -120,6 +121,8 @@ class VeilederPortefoljeVisning extends Component {
             :
             null;
 
+        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
                 <Paginering
@@ -134,7 +137,7 @@ class VeilederPortefoljeVisning extends Component {
                     antallReturnert={antallReturnert}
                 />
                 {
-                    visningsmodus === DIAGRAMVISNING && ytelseFilterErAktiv(filtervalg.ytelse) ?
+                    visDiagram ?
                         <Diagram
                             filtreringsvalg={filtervalg.ytelse}
                             brukere={brukere}
