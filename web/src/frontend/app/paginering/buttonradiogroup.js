@@ -43,7 +43,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    endreVisningsmodus: (modus) => { dispatch(settVisningsmodus(modus)); },
+    endreVisningsmodus: (modus) => { dispatch(settVisningsmodus(modus)); }
 });
 
 ButtonRadiogroup.propTypes = {
