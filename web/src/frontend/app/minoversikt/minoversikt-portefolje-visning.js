@@ -92,6 +92,7 @@ class VeilederPortefoljeVisning extends Component {
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
+        const sorterUtlopsdato = portefolje.sorteringsfelt === 'utlopsdato';
 
         const pagineringTekst = (
             antallTotalt > 0 ?
@@ -126,7 +127,15 @@ class VeilederPortefoljeVisning extends Component {
         </th>);
 
         const ddmmyyHeader = (<th className="tabell-element-center">
-            <FormattedMessage id="portefolje.tabell.ddmmyy"/>
+            <button
+                onClick={() => this.settSorteringOgHentPortefolje('utlopsdato')}
+                className={classNames('sortering-link', { valgt: sorterUtlopsdato })}
+                aria-pressed={sorterUtlopsdato}
+                aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
+                    sorteringsrekkefolge: 'inaktiv'}
+            >
+                <FormattedMessage id="portefolje.tabell.ddmmyy"/>
+            </button>
         </th>);
 
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
