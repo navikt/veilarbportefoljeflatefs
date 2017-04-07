@@ -150,8 +150,8 @@ class VeilederPortefoljeVisning extends Component {
                         <Diagram
                             filtreringsvalg={filtervalg.ytelse}
                             brukere={brukere}
-                        />
-                        :<table className="tabell portefolje-tabell typo-avsnitt">
+                        /> :
+                        <table className="tabell portefolje-tabell typo-avsnitt">
                         <thead className="extra-head">
                             <tr>
                                 <th />
