@@ -47,11 +47,27 @@ class VeiledereSide extends Component {
             veiledere, portefoljestorrelser, veiledereSomSkalVises, currentSortering,
             sorterPaaPortefoljestorrelse, sorterPaaEtternavn, resetSok
         } = this.props;
+
+        const veiledereMedPortefoljestorrelser = (veilederListeParam, portefoljestorrelserParam) =>
+            veilederListeParam.map((veileder) => {
+                const portefoljestorrelse = portefoljestorrelserParam.find(
+                    (storrelse) => storrelse.value === veileder.ident);
+                const count = portefoljestorrelse ? portefoljestorrelse.count : 0;
+                return { ...veileder, portefoljestorrelse: count };
+            });
+
         const { veilederListe } = veiledere.data;
         const { veiledereITabell, sokeresultat, veilederfiltervalg } = veiledere;
         const { facetResults } = portefoljestorrelser.data;
         const { formatMessage } = this.props.intl;
-        const veiledereTilTabell = veiledereITabell || veiledereSomSkalVises;
+
+        let veiledereTilTabell;
+
+        if (veiledereITabell) {
+            veiledereTilTabell = veiledereMedPortefoljestorrelser(veiledereITabell, facetResults);
+        } else {
+            veiledereTilTabell = veiledereSomSkalVises;
+        }
 
         const veiledervalg = sokeresultat.sokIkkeStartet ?
             visAlleVeiledereIListe(veiledere.data.veilederListe) :
@@ -66,13 +82,6 @@ class VeiledereSide extends Component {
             }
             return { felt, rekkefolge: ASCENDING };
         };
-        const veiledereMedPortefoljestorrelser = (veilederListeParam, portefoljestorrelserParam) =>
-            veilederListeParam.map((veileder) => {
-                const portefoljestorrelse = portefoljestorrelserParam.find(
-                    (storrelse) => storrelse.value === veileder.ident);
-                const count = portefoljestorrelse ? portefoljestorrelse.count : 0;
-                return { ...veileder, portefoljestorrelse: count };
-            });
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.veiledere.oversikt' })}>
                 <div className="veiledere-side">
