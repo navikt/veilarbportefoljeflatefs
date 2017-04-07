@@ -1,5 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import { Element } from 'nav-frontend-typografi';
+import ButtonRadiogroup from './buttonradiogroup';
 
 function KnappPanel({ children, disabled, ...props }) {
     return (
@@ -54,7 +55,15 @@ function gaTilSideFactory(sideStorrelse, hentListe) {
 }
 
 function Paginering(props) {
-    const { fraIndex, antallTotalt, hentListe, tekst, antallReturnert, sideStorrelse: antattSideStorrelse } = props;
+    const {
+        fraIndex,
+        antallTotalt,
+        hentListe,
+        tekst,
+        antallReturnert,
+        sideStorrelse: antattSideStorrelse,
+        visButtongroup
+    } = props;
 
     // Fordi sideStorrelse tydeligvis ikke endrer seg i staten, selvom den helt klart egentlig gjør det i UI.
     let sideStorrelse = antattSideStorrelse;
@@ -70,11 +79,17 @@ function Paginering(props) {
 
     return (
         <div className="paginering">
-            <Element className="info" tag="h1">
+            <Element className="info blokk-xs" tag="h1">
                 <strong>
                     {tekst}
                 </strong>
             </Element>
+            {
+                visButtongroup ?
+                    <ButtonRadiogroup />
+                    :
+                    null
+            }
             <div className="paginering__knapper">
                 <ToggleModusKnapp
                     viserAlle={antallSider === 1}
@@ -109,6 +124,7 @@ Paginering.propTypes = {
     hentListe: PT.func.isRequired,
     tekst: PT.node,
     sideStorrelse: PT.number.isRequired,
+    visButtongroup: PT.bool,
     antallReturnert: PT.number.isRequired
 };
 

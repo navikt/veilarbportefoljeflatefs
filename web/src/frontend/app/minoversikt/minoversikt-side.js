@@ -30,11 +30,11 @@ function MinOversiktSide({ enheter, veiledere, intl, filtervalg, ...props }) {
         /></Normaltekst>);
 
     return (
-        <DocumentTitle title={formatMessage({id: 'lenker.min.oversikt'})}>
+        <DocumentTitle title={formatMessage({ id: 'lenker.min.oversikt' })}>
             <div className="enhet-side blokk-xl">
                 {visesAnnenVeiledersPortefolje ?
                     <Link to="veiledere" className="typo-normal tilbaketilveileder">
-                        <i className="chevron--venstre"/>
+                        <i className="chevron--venstre" />
                         <span>Til veilederoversikt</span>
                     </Link> : null}
                 <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
@@ -56,7 +56,7 @@ function MinOversiktSide({ enheter, veiledere, intl, filtervalg, ...props }) {
                                 filtergruppe="veileder"
                                 veileder={gjeldendeVeileder}
                             />
-                            <VeilederPortefoljeVisning veileder={gjeldendeVeileder}/>
+                            <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
                         </div>
                     </div>
                 </section>

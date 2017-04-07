@@ -51,14 +51,15 @@ export const valgtEnhetShape = PT.shape({
 });
 
 export const filtervalgShape = PT.shape({
-    nyeBrukere: PT.bool.isRequired,
-    inaktiveBrukere: PT.bool.isRequired,
-    alder: PT.arrayOf(PT.string).isRequired,
-    kjonn: PT.arrayOf(PT.string).isRequired,
-    fodselsdagIMnd: PT.arrayOf(PT.string).isRequired,
-    innsatsgruppe: PT.arrayOf(PT.string).isRequired,
-    formidlingsgruppe: PT.arrayOf(PT.string).isRequired,
-    servicegruppe: PT.arrayOf(PT.string).isRequired,
+    nyeBrukere: PT.bool,
+    inaktiveBrukere: PT.bool,
+    alder: PT.arrayOf(PT.string),
+    kjonn: PT.arrayOf(PT.string),
+    fodselsdagIMnd: PT.arrayOf(PT.string),
+    innsatsgruppe: PT.arrayOf(PT.string),
+    formidlingsgruppe: PT.arrayOf(PT.string),
+    servicegruppe: PT.arrayOf(PT.string),
+    veiledere: PT.arrayOf(PT.string),
     ytelse: PT.string
 });
 
@@ -66,4 +67,21 @@ export const statustallShape = PT.shape({
     totalt: PT.number.isRequired,
     nyeBrukere: PT.number,
     inaktiveBrukere: PT.number.isRequired
+});
+
+export const utlopsdatoShape = PT.shape({
+    chronology: PT.shape({
+        calendarType: PT.string.isRequired,
+        id: PT.string.isRequired
+    }),
+    dayOfMonth: PT.number.isRequired,
+    dayOfWeek: PT.string.isRequired,
+    dayOfYear: PT.number.isRequired,
+    hour: PT.number.isRequired,
+    minute: PT.number.isRequired,
+    month: PT.string.isRequired,
+    monthValue: PT.number.isRequired,
+    nano: PT.number.isRequired,
+    second: PT.number.isRequired,
+    year: PT.number.isRequired
 });

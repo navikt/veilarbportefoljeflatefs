@@ -17,6 +17,9 @@ import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
+import Diagram from './diagram/diagram';
+import { diagramSkalVises } from './diagram/util';
+import { ytelsevalg } from '../filtrering/filter-konstanter';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -24,6 +27,7 @@ const settSammenNavn = (bruker) => {
     }
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
+
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
@@ -82,7 +86,8 @@ class VeilederPortefoljeVisning extends Component {
             settMarkert,
             clearFeilendeTilordninger,
             settSomMarkertAlle,
-            filtervalg
+            filtervalg,
+            visningsmodus
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
@@ -94,7 +99,7 @@ class VeilederPortefoljeVisning extends Component {
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
                     values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
-                />):
+                />) :
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
                     values={{ fraIndex: '0', tilIndex: '0', antallTotalt: '0' }}
@@ -111,11 +116,14 @@ class VeilederPortefoljeVisning extends Component {
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
-            (<th>
+            (<th className="tabell-element-center">
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
             :
             null;
+
+        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+        const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
 
         return (
             <Innholdslaster avhengigheter={[portefolje]}>
@@ -128,52 +136,60 @@ class VeilederPortefoljeVisning extends Component {
                             sorteringsfelt, sorteringsrekkefolge, fra, antall, filtervalg)}
                     tekst={pagineringTekst}
                     sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
+                    visButtongroup={visButtonGroup}
+                    antallReturnert={antallReturnert}
                 />
-                <table className="tabell portefolje-tabell typo-avsnitt">
-                    <thead className="extra-head">
-                        <tr>
-                            <th />
-                            <th>Bruker</th>
-                            <th />
-                            <th />
-                        </tr>
-                    </thead>
-                    <thead>
-                        <tr>
-                            <th>
-                                <div className="skjema__input">
-                                    <input
-                                        className="checkboks"
-                                        id="checkbox-alle-brukere"
-                                        type="checkbox"
-                                        checked={alleMarkert}
-                                        onClick={() => settSomMarkertAlle(!alleMarkert)}
-                                    />
-                                    <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
-                                </div>
-                            </th>
-                            <th>
-                                <button
-                                    onClick={this.settSorteringNavnOgHentPortefolje}
-                                    role="button"
-                                    className={classNames('sortering-link', { valgt: sorterEtternavn })}
-                                    aria-pressed={sorterEtternavn}
-                                    aria-label={sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt' ?
+                {
+                    visDiagram ?
+                        <Diagram
+                            filtreringsvalg={filtervalg.ytelse}
+                            brukere={brukere}
+                        />
+                        : <table className="tabell portefolje-tabell typo-avsnitt">
+                            <thead className="extra-head">
+                                <tr>
+                                    <th />
+                                    <th>Bruker</th>
+                                    <th />
+                                    <th />
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div className="skjema__input">
+                                            <input
+                                                className="checkboks"
+                                                id="checkbox-alle-brukere"
+                                                type="checkbox"
+                                                checked={alleMarkert}
+                                                onClick={() => settSomMarkertAlle(!alleMarkert)}
+                                            />
+                                            <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <button
+                                            onClick={this.settSorteringNavnOgHentPortefolje}
+                                            role="button"
+                                            className={classNames('sortering-link', { valgt: sorterEtternavn })}
+                                            aria-pressed={sorterEtternavn}
+                                            aria-label={sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt' ?
                                         sorteringsrekkefolge : 'inaktiv'}
-                                >
-                                    <FormattedMessage id="portefolje.tabell.navn" />
-                                </button>
-                            </th>
-                            {utlopsdatoHeader}
-                            <th>
-                                <FormattedMessage id="portefolje.tabell.fodselsnummer" />
-                            </th>
-                            <th />
-                        </tr>
-                    </thead>
+                                        >
+                                            <FormattedMessage id="portefolje.tabell.navn" />
+                                        </button>
+                                    </th>
+                                    {utlopsdatoHeader}
+                                    <th className="tabell-element-center">
+                                        <FormattedMessage id="portefolje.tabell.fodselsnummer" />
+                                    </th>
+                                    <th />
+                                </tr>
+                            </thead>
 
-                    <tbody>
-                        {brukere.filter((b) => b.veilederId === veileder.ident)
+                            <tbody>
+                                {brukere.filter((b) => b.veilederId === veileder.ident)
                                 .map((bruker) => <tr key={bruker.fnr}>
                                     <td>
                                         <div className="skjema__input">
@@ -197,7 +213,7 @@ class VeilederPortefoljeVisning extends Component {
                                         </a>
                                     </th>
                                     {bruker.fnr !== null ?
-                                        <td className="fodselsnummer-td">{bruker.fnr}</td> :
+                                        <td className="tabell-element-center">{bruker.fnr}</td> :
                                         <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
                                     }
                                     {
@@ -220,8 +236,9 @@ class VeilederPortefoljeVisning extends Component {
                                             <Tabelletiketter type="doed">Død</Tabelletiketter> : null}
                                     </td>
                                 </tr>)}
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                }
             </Innholdslaster>
         );
     }
@@ -248,6 +265,7 @@ VeilederPortefoljeVisning.propTypes = {
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
     settSomMarkertAlle: PT.func.isRequired,
+    visningsmodus: PT.string.isRequired,
     filtervalg: filtervalgShape.isRequired,
     antall: PT.number
 };
@@ -257,6 +275,7 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
+    visningsmodus: state.veilederpaginering.visningsmodus,
     filtervalg: state.filtreringVeileder
 });
 

@@ -34,7 +34,7 @@ const getConfig = (initiellEnhet = undefined) => {
                 ['/mia', 'Arbeidsmarkedet'],
                 [`/veilarbportefoljeflatefs/enhet?enhet=${initiellEnhet}&clean`, 'Enhetens oversikt'],
                 [`/veilarbportefoljeflatefs/portefolje?enhet=${initiellEnhet}&clean`, 'Min oversikt'],
-                [modiaUrl, 'Modiabrukerdialog']
+                [modiaUrl, 'Modia']
             ],
             tittel: ''
         };

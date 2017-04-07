@@ -54,11 +54,11 @@ class EnhetsportefoljeTabell extends Component {
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
 
         const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
-            (<th>
+            (<th className="tabell-element-center">
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
             :
-            null;
+            <th></th>;
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         return (
@@ -68,7 +68,7 @@ class EnhetsportefoljeTabell extends Component {
                     <thead className="extra-head">
                         <tr>
                             <th />
-                            <th colSpan="2">Bruker</th>
+                            <th colSpan="3">Bruker</th>
                             <th colSpan="3">Veileder</th>
                         </tr>
                     </thead>
@@ -99,7 +99,7 @@ class EnhetsportefoljeTabell extends Component {
                                 </button>
                                 <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                             </th>
-                            <th>
+                            <th className="tabell-element-center">
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('fodselsdato')}
                                     className={classNames('sortering-link', { valgt: sorterFodelsnummer })}
@@ -144,11 +144,11 @@ class EnhetsportefoljeTabell extends Component {
                                     {settSammenNavn(bruker)}
                                 </a>
                             </th>
-                            <td>{bruker.fnr}</td>
+                            <td className="tabell-element-center">{bruker.fnr}</td>
                             {
                                 ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
                                     <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
-                                    : null
+                                    : <td></td>
                             }
                             {
                             bruker.veilederId ? <td className="veileder-td">{veiledere
@@ -159,7 +159,9 @@ class EnhetsportefoljeTabell extends Component {
                                 <Tabelletiketter type="nybruker">Ny bruker</Tabelletiketter>
                             </td>
                         }
-                            <td />
+                            <td >
+                                {bruker.veilederId || ''}
+                            </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ?
                                     <Tabelletiketter type="sikkerhetstiltak">Sikkerhetstiltak</Tabelletiketter> : null}

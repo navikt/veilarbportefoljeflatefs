@@ -1,4 +1,5 @@
 import { DESCENDING, IKKE_SATT } from '../konstanter';
+import { TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 
 // Actions
 export const SETT_LISTE = 'veilederpaginering/settliste/OK';
@@ -8,6 +9,7 @@ export const SETT_FRA_INDEKS_FOR_SUBLISTE = 'veilederpaginering/settfraindeksfor
 export const SETT_NY_SORTERING = 'veilederpaginering/settNySortering/OK';
 export const SORTER_PAA_ETTERNAVN = 'veilederpaginering/sorterPaaEtternavn/OK';
 export const SORTER_PAA_PORTEFOLJESTORRELSE = 'veilederpaginering/sorterPaaPortefoljestorrelse/OK';
+export const SETT_VISNINGSMODUS = 'veilederpaginering/settvisningsmodus/OK';
 
 // Utils
 export function til(fra, antall, totalt) {
@@ -46,7 +48,8 @@ const initialState = {
     currentSortering: {
         felt: IKKE_SATT,
         rekkefolge: IKKE_SATT
-    }
+    },
+    visningsmodus: TABELLVISNING
 };
 
 //  Reducer
@@ -78,6 +81,12 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 liste: sorterPaaPortefoljestorrelse(state.liste, action.nySortering.rekkefolge),
                 currentSortering: action.nySortering
+            };
+
+        case SETT_VISNINGSMODUS:
+            return {
+                ...state,
+                visningsmodus: action.visningsmodus
             };
         default:
             return state;
@@ -118,3 +127,11 @@ export function sorterListePaaPortefoljestorrelse(nySortering) {
         nySortering
     };
 }
+
+export function settVisningsmodus(visningsmodus) {
+    return {
+        type: SETT_VISNINGSMODUS,
+        visningsmodus
+    };
+}
+

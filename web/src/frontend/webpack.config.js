@@ -8,7 +8,7 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.(?:css|less|scss|sass)$/, loader: 'ignore-loader' }
+            {test: /\.(?:css|less|scss|sass)$/, loader: 'ignore-loader'}
         ]
     }
 };

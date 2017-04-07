@@ -61,6 +61,9 @@ export const ytelse = {
     AAP_UNNTAK: { label: 'AAP unntak', className: 'skjemaelement--innrykk' },
     TILTAKSPENGER: 'Tiltakspenger'
 };
+
+export const ytelsevalg = Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }));
+
 export const rettighetsgruppe = {
     AAP: 'Arbeidsavklaringspenger',
     DAGP: 'Dagpenger',
@@ -69,6 +72,10 @@ export const rettighetsgruppe = {
     VENT: 'Ventestønad',
     VLONN: 'Ventelønn'
 };
+
+const veiledere = {
+};
+
 
 export default {
     inaktiveBrukere,
@@ -80,5 +87,7 @@ export default {
     formidlingsgruppe,
     servicegruppe,
     ytelse,
-    rettighetsgruppe
+    ytelsevalg,
+    rettighetsgruppe,
+    veiledere
 };
