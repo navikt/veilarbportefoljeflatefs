@@ -60,6 +60,10 @@ class EnhetsportefoljeTabell extends Component {
             :
             null;
 
+            const mmddyyHeader = (<th className="tabell-element-center">
+                <FormattedMessage id="portefolje.tabell.ddmmyy"/>
+            </th>);
+
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         return (
             <div>
@@ -69,7 +73,8 @@ class EnhetsportefoljeTabell extends Component {
                         <tr>
                             <th />
                             <th colSpan="2">Bruker</th>
-                            <th colSpan="3">Veileder</th>
+                            {utlopsdatoHeader}
+                            <th colSpan="2">Veileder</th>
                         </tr>
                     </thead>
                     <thead>
@@ -110,7 +115,7 @@ class EnhetsportefoljeTabell extends Component {
                                     <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                                 </button>
                             </th>
-                            {utlopsdatoHeader}
+                            {ytelseFilterErAktiv(filtervalg.ytelse) ? mmddyyHeader : null}
                             <th>
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
