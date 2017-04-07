@@ -23,7 +23,7 @@ function FiltreringFilter({ filtervalg, actions }) {
         <div className="filtrering-filter">
             <div className="row">
                 <div className="col-sm-3">
-                    <Element>Demografi</Element>
+                    <Element className="blokk-xxs">Demografi</Element>
                     <Dropdown name="Alder">
                         <CheckboxFilterform
                             form="alder"
@@ -50,7 +50,7 @@ function FiltreringFilter({ filtervalg, actions }) {
                     </Dropdown>
                 </div>
                 <div className="col-sm-3">
-                    <Element>Situasjon</Element>
+                    <Element className="blokk-xxs">Situasjon</Element>
                     <Dropdown name="Innsatsgruppe">
                         <CheckboxFilterform
                             form="innsatsgruppe"
@@ -85,7 +85,7 @@ function FiltreringFilter({ filtervalg, actions }) {
                     </Dropdown>
                 </div>
                 <div className="col-sm-3">
-                    <Element>Ytelse</Element>
+                    <Element className="blokk-xxs">Ytelse</Element>
                     <Dropdown name="Ytelse" className="dropdown--130bredde">
                         <RadioFilterform
                             form="ytelse"
