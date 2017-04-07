@@ -1,9 +1,8 @@
 import React, { PropTypes as PT } from 'react';
-import { withRouter } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import ActiveLink from './active-link';
 
-function LenkerMinoversikt({ veilederident, minOversiktOnClick }) {
+function LenkerMinoversikt({ veilederident }) {
     const LenkeInnhold = <FormattedMessage id="lenker.min.oversikt" />;
     const path = veilederident === null ? 'portefolje' : `portefolje/${veilederident}`;
 
@@ -11,7 +10,6 @@ function LenkerMinoversikt({ veilederident, minOversiktOnClick }) {
         <div className="lenker blokk-m" role="tablist">
             <ActiveLink
                 to={path}
-                onClick={minOversiktOnClick}
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"
             >
@@ -22,8 +20,11 @@ function LenkerMinoversikt({ veilederident, minOversiktOnClick }) {
 }
 
 LenkerMinoversikt.propTypes = {
-    minOversiktOnClick: PT.func.isRequired,
-    veilederident: PT.string.isRequired
+    veilederident: PT.string
 };
 
-export default withRouter(LenkerMinoversikt);
+LenkerMinoversikt.defaultProps = {
+    veilederident: null
+};
+
+export default LenkerMinoversikt;
