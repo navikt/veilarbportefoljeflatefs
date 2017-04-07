@@ -1,1 +1,1 @@
-Du er inne på {fornavn} {etternavn} sin veilederportefolje
+Du er inne på {fornavn} {etternavn} sin oversikt
