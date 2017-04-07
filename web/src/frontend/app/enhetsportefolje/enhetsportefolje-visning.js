@@ -40,20 +40,31 @@ class EnhetsportefoljeVisning extends Component {
             hentPortefolje,
             filtervalg
         } = this.props;
+        const { antallReturnert, antallTotalt } = this.props.portefolje.data;
 
         let valgtRekkefolge = '';
+
         if (felt !== sorteringsfelt) {
             valgtRekkefolge = ASCENDING;
         } else {
             valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
+
+        let fra = fraIndex;
+        let antallSkalHentes = PORTEFOLJE_SIDESTORRELSE;
+
+        if (antallReturnert === antallTotalt) {
+            fra = 0;
+            antallSkalHentes = antallTotalt;
+        }
+
         settSortering(valgtRekkefolge, felt);
         hentPortefolje(
             valgtEnhet.enhet.enhetId,
             valgtRekkefolge,
             felt,
-            fraIndex,
-            PORTEFOLJE_SIDESTORRELSE,
+            fra,
+            antallSkalHentes,
             filtervalg
         );
     }

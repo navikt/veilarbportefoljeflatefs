@@ -2,10 +2,14 @@
 
 .paginering {
     margin: 1rem 0;
+    text-align: center;
+    min-height: 1.2rem;
 
     .info {
+        float: left;
         padding: 10px 5px 0;
-        display: inline-block;
+        display: block;
+        margin-top: -4px;
     }
 }
 .paginering__knapp {
@@ -46,4 +50,42 @@
 }
 .paginering__knapper {
     float: right;
+}
+
+.visningsgruppe {
+    display: inline-block;
+    text-align: center;
+    input {
+        height: 0;
+        width: 0;
+        opacity: 0;
+        &:nth-of-type(1) {
+            + label {
+                border-bottom-left-radius: 2px;
+                border-top-left-radius: 2px;
+            }
+            &:not(:checked) + label {
+                border-right: none;
+            }
+        }
+        &:nth-of-type(2) {
+            + label {
+                border-bottom-right-radius: 2px;
+                border-top-right-radius: 2px;
+            }
+            &:not(:checked) + label {
+                border-left: none;
+            }
+        }
+        &:checked + label {
+            background-color: @navBla;
+            color: @white;
+            border-color: @navBla;
+        }
+    }
+    label {
+        display: inline-block;
+        padding: 0.3rem 0.5rem;
+        border: 1px solid @navMorkGra;
+    }
 }
