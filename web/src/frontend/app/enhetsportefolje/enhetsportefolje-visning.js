@@ -5,7 +5,6 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
     hentPortefoljeForEnhet,
     settSortering,
-    settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
     PORTEFOLJE_SIDESTORRELSE
 } from '../ducks/portefolje';
@@ -77,7 +76,6 @@ class EnhetsportefoljeVisning extends Component {
             hentPortefolje,
             sorteringsrekkefolge,
             sorteringsfelt,
-            settMarkert,
             filtervalg,
             clearFeilendeTilordninger
         } = this.props;
@@ -126,7 +124,6 @@ class EnhetsportefoljeVisning extends Component {
                     veiledere={veiledere.data.veilederListe}
                     brukere={portefolje.data.brukere}
                     settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
-                    settSomMarkert={settMarkert}
                     portefolje={portefolje}
                 />
                 <Paginering
@@ -167,7 +164,6 @@ EnhetsportefoljeVisning.propTypes = {
     sorteringsrekkefolge: PT.string.isRequired,
     sorteringsfelt: PT.string.isRequired,
     fraIndex: PT.number,
-    settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
     filtervalg: PT.object
 };
@@ -185,7 +181,6 @@ const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg) =>
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
 });
 
