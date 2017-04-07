@@ -62,9 +62,11 @@ class VeiledereSide extends Component {
         const { formatMessage } = this.props.intl;
 
         let veiledereTilTabell;
+        let pagineringSkalVises = true;
 
         if (veiledereITabell) {
             veiledereTilTabell = veiledereMedPortefoljestorrelser(veiledereITabell, facetResults);
+            pagineringSkalVises = false;
         } else {
             veiledereTilTabell = veiledereSomSkalVises;
         }
@@ -82,6 +84,13 @@ class VeiledereSide extends Component {
             }
             return { felt, rekkefolge: ASCENDING };
         };
+
+        const veilederpaginering = pagineringSkalVises ?
+            (<VeilederPaginering
+                liste={veiledereMedPortefoljestorrelser(veilederListe, facetResults)}
+                pagineringTekstId={'enhet.veiledere.paginering.tekst'}
+            />) :
+            null;
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.veiledere.oversikt' })}>
                 <div className="veiledere-side">
@@ -112,10 +121,7 @@ class VeiledereSide extends Component {
                                             />
                                         </Dropdown>
                                     </div>
-                                    <VeilederPaginering
-                                        liste={veiledereMedPortefoljestorrelser(veilederListe, facetResults)}
-                                        pagineringTekstId={'enhet.veiledere.paginering.tekst'}
-                                    />
+                                    {veilederpaginering}
                                     <VeiledereTabell
                                         veiledere={veiledereTilTabell}
                                         sorterPaaEtternavn={() => sorterPaaEtternavn(avgjorNySortering('etternavn'))}

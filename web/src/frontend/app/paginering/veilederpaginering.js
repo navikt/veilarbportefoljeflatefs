@@ -10,7 +10,7 @@ class VeilederPaginering extends Component {
 
     componentWillMount() {
         this.props.opprettPaginering(this.props.liste);
-        this.props.settSubListe(this.props.fraIndeksForSubListe);
+        this.props.settSubListe(this.props.fraIndeksForSubListe, 20);
     }
 
     componentWillUnmount() {
@@ -48,10 +48,10 @@ class VeilederPaginering extends Component {
                 <Paginering
                     antallTotalt={liste.length}
                     fraIndex={fraIndeksForSubListe}
-                    hentListe={(fra) => { settSubListe(fra); }}
+                    hentListe={(fra, til) => { settSubListe(fra, til); }}
                     tekst={pagineringTekst}
                     sideStorrelse={sideStorrelse}
-                    antallReturnert={liste.length}
+                    antallReturnert={subListe.length}
                 />
             </div>
         );
@@ -78,7 +78,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     opprettPaginering: (liste) => dispatch(settListeSomSkalPagineres(liste)),
     klarerPaginering: () => dispatch(klarerPagineringsliste()),
-    settSubListe: (fra) => dispatch(settSubListeForPaginering(fra))
+    settSubListe: (fra, til) => dispatch(settSubListeForPaginering(fra, til))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPaginering);
