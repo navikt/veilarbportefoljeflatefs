@@ -132,9 +132,9 @@ class VeilederPortefoljeVisning extends Component {
                 className={classNames('sortering-link', { valgt: sorterUtlopsdato })}
                 aria-pressed={sorterUtlopsdato}
                 aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
-                    sorteringsrekkefolge: 'inaktiv'}
+                    sorteringsrekkefolge : 'inaktiv'}
             >
-                <FormattedMessage id="portefolje.tabell.ddmmyy"/>
+                <FormattedMessage id="portefolje.tabell.ddmmyy" />
             </button>
         </th>);
 
@@ -161,45 +161,45 @@ class VeilederPortefoljeVisning extends Component {
                             brukere={brukere}
                         /> :
                         <table className="tabell portefolje-tabell typo-avsnitt">
-                        <thead className="extra-head">
-                            <tr>
-                                <th />
-                                <th>Bruker</th>
-                                {utlopsdatoHeader}
-                                <th />
-                            </tr>
-                        </thead>
-                        <thead>
-                            <tr>
-                                <th>
-                                    <div className="skjema__input">
-                                        <input
-                                            className="checkboks"
-                                            id="checkbox-alle-brukere"
-                                            type="checkbox"
-                                            checked={alleMarkert}
-                                            onClick={() => settSomMarkertAlle(!alleMarkert)}
-                                        />
-                                        <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
-                                    </div>
-                                </th>
-                                <th>
-                                    <button
-                                        onClick={this.settSorteringNavnOgHentPortefolje}
-                                        role="button"
-                                        className={classNames('sortering-link', { valgt: sorterEtternavn })}
-                                        aria-pressed={sorterEtternavn}
-                                        aria-label={sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt' ?
+                            <thead className="extra-head">
+                                <tr>
+                                    <th />
+                                    <th>Bruker</th>
+                                    {utlopsdatoHeader}
+                                    <th />
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div className="skjema__input">
+                                            <input
+                                                className="checkboks"
+                                                id="checkbox-alle-brukere"
+                                                type="checkbox"
+                                                checked={alleMarkert}
+                                                onClick={() => settSomMarkertAlle(!alleMarkert)}
+                                            />
+                                            <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <button
+                                            onClick={this.settSorteringNavnOgHentPortefolje}
+                                            role="button"
+                                            className={classNames('sortering-link', { valgt: sorterEtternavn })}
+                                            aria-pressed={sorterEtternavn}
+                                            aria-label={sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt' ?
                                             sorteringsrekkefolge : 'inaktiv'}
-                                    >
-                                        <FormattedMessage id="portefolje.tabell.navn" />
-                                    </button>
-                                </th>
-                                {ytelseFilterErAktiv(filtervalg.ytelse) ? ddmmyyHeader : null}
-                                {fodselsdatoHeader}
-                                <th />
-                            </tr>
-                        </thead>
+                                        >
+                                            <FormattedMessage id="portefolje.tabell.navn" />
+                                        </button>
+                                    </th>
+                                    {ytelseFilterErAktiv(filtervalg.ytelse) ? ddmmyyHeader : null}
+                                    {fodselsdatoHeader}
+                                    <th />
+                                </tr>
+                            </thead>
 
                             <tbody>
                                 {brukere.filter((b) => b.veilederId === veileder.ident)
@@ -218,7 +218,7 @@ class VeilederPortefoljeVisning extends Component {
                                         </td>
                                         <th>
                                             <a
-                                                href={`https://${window.location.hostname}` +// eslint-disable-line no-undef
+                                                href={`https://${window.location.hostname}` +
                                                 `/veilarbpersonflatefs/${bruker.fnr}?enhet=${valgtEnhet.enhet.enhetId}`}
                                                 className="til-bruker-link"
                                             >
@@ -227,12 +227,14 @@ class VeilederPortefoljeVisning extends Component {
                                         </th>
                                         {
                                             ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
-                                            <Utlopsdatokolonne utlopsdato={bruker.utlopsdato}/>
+                                                <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
                                             : null
                                         }
-                                    {bruker.fnr !== null ?
-                                        <td className="tabell-element-center">{bruker.fnr}</td> :
-                                        <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
+                                        {bruker.fnr !== null ?
+                                            <td className="tabell-element-center">{bruker.fnr}</td> :
+                                            <td className="ny-bruker-td">
+                                                <span className="ny-bruker">Ny bruker</span>
+                                            </td>
                                     }
                                         <td>
                                             {bruker.sikkerhetstiltak.length > 0 ?
@@ -244,7 +246,9 @@ class VeilederPortefoljeVisning extends Component {
                                                     {`Kode ${bruker.diskresjonskode}`}
                                                 </Tabelletiketter> : null}
                                             {bruker.egenAnsatt === true ?
-                                                <Tabelletiketter type="egen-ansatt">Egen ansatt</Tabelletiketter> : null}
+                                                <Tabelletiketter type="egen-ansatt">
+                                                    Egen ansatt
+                                                </Tabelletiketter> : null}
                                             {bruker.erDoed === true ?
                                                 <Tabelletiketter type="doed">Død</Tabelletiketter> : null}
                                         </td>

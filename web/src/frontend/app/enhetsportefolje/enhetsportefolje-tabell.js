@@ -61,18 +61,18 @@ class EnhetsportefoljeTabell extends Component {
             :
             null;
 
-            const mmddyyHeader = (
-                <th className="tabell-element-center">
-                    <button
-                        onClick={() => this.settSorteringOgHentPortefolje('utlopsdato')}
-                        className={classNames('sortering-link', { valgt: sorterUtlopsdato })}
-                        aria-pressed={sorterUtlopsdato}
-                        aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
-                            sorteringsrekkefolge: 'inaktiv'}
-                        >
-                        <FormattedMessage id="portefolje.tabell.ddmmyy"/>
-                    </button>
-                </th>
+        const mmddyyHeader = (
+            <th className="tabell-element-center">
+                <button
+                    onClick={() => this.settSorteringOgHentPortefolje('utlopsdato')}
+                    className={classNames('sortering-link', { valgt: sorterUtlopsdato })}
+                    aria-pressed={sorterUtlopsdato}
+                    aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
+                            sorteringsrekkefolge : 'inaktiv'}
+                >
+                    <FormattedMessage id="portefolje.tabell.ddmmyy" />
+                </button>
+            </th>
             );
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
