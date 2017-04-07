@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
 import { veilederShape, brukerShape, portefoljeShape } from '../proptype-shapes';
-import { markerAlleBrukere } from './../ducks/portefolje';
+import { markerAlleBrukere, settBrukerSomMarkert } from './../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
 import { initialState } from '../ducks/filtrering';
@@ -41,7 +41,7 @@ class EnhetsportefoljeTabell extends Component {
             brukere,
             veiledere,
             settSomMarkertAlle,
-            settSomMarkert,
+            settMarkert,
             portefolje,
             modalSkalVises,
             toggleSkjulModal,
@@ -151,7 +151,7 @@ class EnhetsportefoljeTabell extends Component {
                                         id={`checkbox-${bruker.fnr}`}
                                         type="checkbox"
                                         checked={!!bruker.markert}
-                                        onClick={() => settSomMarkert(bruker.fnr, !bruker.markert)}
+                                        onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
                                     />
                                     <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
                                 </div>
@@ -214,7 +214,7 @@ EnhetsportefoljeTabell.propTypes = {
     }).isRequired,
     settSorteringForPortefolje: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
-    settSomMarkert: PT.func.isRequired,
+    settMarkert: PT.func.isRequired,
     settSomMarkertAlle: PT.func.isRequired,
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
@@ -233,6 +233,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     settSomMarkertAlle: (markert) => dispatch(markerAlleBrukere(markert)),
+    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     toggleVisModal: () => dispatch(visModal()),
     toggleSkjulModal: () => dispatch(skjulModal())
 });
