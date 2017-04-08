@@ -181,7 +181,7 @@ const mapStateToProps = (state) => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     filtervalg: state.filtrering,
-    visningsmodus: state.veilederpaginering.visningsmodus,
+    visningsmodus: state.veilederpaginering.visningsmodus
 });
 
 const mapDispatchToProps = (dispatch) => ({
