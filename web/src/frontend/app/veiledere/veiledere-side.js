@@ -178,11 +178,11 @@ const mapDispatchToProps = (dispatch) => ({
     hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
     sorterPaaPortefoljestorrelse: (nySortering) => {
         dispatch(sorterListePaaPortefoljestorrelse(nySortering));
-        dispatch(settSubListeForPaginering(0));
+        dispatch(settSubListeForPaginering(0,20));
     },
     sorterPaaEtternavn: (nySortering) => {
         dispatch(sorterListePaaEtternavn(nySortering));
-        dispatch(settSubListeForPaginering(0));
+        dispatch(settSubListeForPaginering(0, 20));
     },
     settFiltervalgForVeiledere: (veilederfiltervalg) => dispatch(settVeilederfiltervalg(veilederfiltervalg)),
     settVeiledereSomSkalVises: (veiledere) => dispatch(settVeiledereITabell(veiledere))
