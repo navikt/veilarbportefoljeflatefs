@@ -24,7 +24,7 @@ class VeilederPaginering extends Component {
             sideStorrelse,
             settSubListe,
             pagineringTekstId,
-            subListe,
+            subListe
         } = this.props;
         const pagineringTekstValues = liste.length > 0 ? {
             fraIndex: `${fraIndeksForSubListe + 1}`,

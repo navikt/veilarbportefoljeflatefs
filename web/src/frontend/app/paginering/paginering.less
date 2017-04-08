@@ -29,13 +29,13 @@
     }
 
     &:first-child {
-        border-top-left-radius: @border-radius-small;
-        border-bottom-left-radius: @border-radius-small;
+        border-top-left-radius: @border-radius-base;
+        border-bottom-left-radius: @border-radius-base;
     }
 
     &:last-child {
-        border-top-right-radius: @border-radius-small;
-        border-bottom-right-radius: @border-radius-small;
+        border-top-right-radius: @border-radius-base;
+        border-bottom-right-radius: @border-radius-base;
     }
 
     &:not(.last-child) {
@@ -53,39 +53,36 @@
 }
 
 .visningsgruppe {
-    display: inline-block;
+    display: inline-flex;
     text-align: center;
+
     input {
         height: 0;
         width: 0;
         opacity: 0;
-        &:nth-of-type(1) {
-            + label {
-                border-bottom-left-radius: 2px;
-                border-top-left-radius: 2px;
-            }
-            &:not(:checked) + label {
-                border-right: none;
-            }
+    }
+    label {
+        background-color: @white;
+        display: inline-block;
+        padding: 0.3rem 0.5rem;
+        border: 1px solid @navGra20;
+    }
+
+    &__knapp {
+        &:first-child label {
+            border-bottom-left-radius: 2px;
+            border-top-left-radius: 2px;
         }
-        &:nth-of-type(2) {
-            + label {
-                border-bottom-right-radius: 2px;
-                border-top-right-radius: 2px;
-            }
-            &:not(:checked) + label {
-                border-left: none;
-            }
+
+        &:last-child label {
+            border-bottom-right-radius: 2px;
+            border-top-right-radius: 2px;
         }
-        &:checked + label {
+
+        input:checked + label {
             background-color: @navBla;
             color: @white;
             border-color: @navBla;
         }
-    }
-    label {
-        display: inline-block;
-        padding: 0.3rem 0.5rem;
-        border: 1px solid @navMorkGra;
     }
 }

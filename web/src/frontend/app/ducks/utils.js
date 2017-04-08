@@ -60,11 +60,11 @@ export function fetchToJson(url, config = {}) {
 }
 
 export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         if (PENDING) {
             dispatch({ type: PENDING });
         }
-        return fn()
+        return fn(getState)
             .then(sendResultatTilDispatch(dispatch, OK))
             .catch(handterFeil(dispatch, FEILET));
     };

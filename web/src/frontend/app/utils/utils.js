@@ -52,3 +52,13 @@ export function sendBrukerTilUrl(url) {
 export function ytelseFilterErAktiv(ytelse) {
     return !!ytelse;
 }
+
+function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+        .toString()
+        .substring(1);
+}
+
+export function guid() {
+    return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
+}
