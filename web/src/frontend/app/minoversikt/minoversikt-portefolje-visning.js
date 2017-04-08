@@ -137,14 +137,10 @@ class VeilederPortefoljeVisning extends Component {
                     tekst={pagineringTekst}
                     sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
                     visButtongroup={visButtonGroup}
-                    antallReturnert={antallReturnert}
                 />
                 {
                     visDiagram ?
-                        <Diagram
-                            filtreringsvalg={filtervalg.ytelse}
-                            brukere={brukere}
-                        />
+                        <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} veileder={veileder.ident} />
                         : <table className="tabell portefolje-tabell typo-avsnitt">
                             <thead className="extra-head">
                                 <tr>
