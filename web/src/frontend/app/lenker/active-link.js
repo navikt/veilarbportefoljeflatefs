@@ -1,10 +1,11 @@
 import React, { PropTypes as PT } from 'react';
 import { Link, withRouter } from 'react-router';
 import classnames from 'classnames';
+import { omit } from './../utils/utils';
 
 function ActiveLink({ router, className, activeClassName, to, ...props }) {
     const isActive = router.isActive(to);
-    const { params: _params, location: _location, routes: _routes, ...domProps } = props;
+    const domProps = omit(props, 'params', 'location', 'routes');
 
     return (<Link
         to={to}

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router';
@@ -70,7 +70,8 @@ MinOversiktSide.propTypes = {
     enheter: PT.object.isRequired,
     veiledere: PT.object,
     intl: intlShape.isRequired,
-    filtervalg: filtervalgShape.isRequired
+    filtervalg: filtervalgShape.isRequired,
+    params: PT.object.isRequired
 };
 
 const mapStateToProps = (state) => ({

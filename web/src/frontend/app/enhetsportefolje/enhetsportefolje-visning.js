@@ -171,7 +171,8 @@ EnhetsportefoljeVisning.propTypes = {
     fraIndex: PT.number,
     settMarkert: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
-    filtervalg: PT.object
+    filtervalg: PT.object,
+    visningsmodus: PT.string.isRequired
 };
 
 const mapStateToProps = (state) => ({

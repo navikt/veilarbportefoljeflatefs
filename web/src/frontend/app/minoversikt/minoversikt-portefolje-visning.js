@@ -140,7 +140,11 @@ class VeilederPortefoljeVisning extends Component {
                 />
                 {
                     visDiagram ?
-                        <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} veileder={veileder.ident} />
+                        <Diagram
+                            filtreringsvalg={filtervalg}
+                            enhet={valgtEnhet.enhet.enhetId}
+                            veileder={veileder.ident}
+                        />
                         : <table className="tabell portefolje-tabell typo-avsnitt">
                             <thead className="extra-head">
                                 <tr>
