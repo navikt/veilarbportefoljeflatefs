@@ -24,7 +24,6 @@ LenkerMinoversikt.defaultProps = {
 };
 
 LenkerMinoversikt.propTypes = {
-    minOversiktOnClick: PT.func.isRequired,
     veilederident: PT.string
 };
 

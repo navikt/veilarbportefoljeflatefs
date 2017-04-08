@@ -178,7 +178,7 @@ const mapDispatchToProps = (dispatch) => ({
     hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
     sorterPaaPortefoljestorrelse: (nySortering) => {
         dispatch(sorterListePaaPortefoljestorrelse(nySortering));
-        dispatch(settSubListeForPaginering(0,20));
+        dispatch(settSubListeForPaginering(0, 20));
     },
     sorterPaaEtternavn: (nySortering) => {
         dispatch(sorterListePaaEtternavn(nySortering));
