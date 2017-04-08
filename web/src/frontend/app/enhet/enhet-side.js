@@ -10,7 +10,6 @@ import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { leggEnhetIUrl } from '../utils/utils';
 
 
-
 class EnhetSide extends Component {
     componentWillMount() {
         const { valgtEnhet } = this.props;
@@ -25,12 +24,10 @@ class EnhetSide extends Component {
         const { formatMessage } = this.props.intl;
         const { filtervalg, veilederliste } = this.props;
 
-        const leggTilNavn = (identer, veiledere) => {
-            return identer.map( (ident) => {
-                const veileder = veiledere.find( (veileder) => veileder.ident === ident );
-                return { label:`${veileder.etternavn}, ${veileder.fornavn} (${ident})`, key: ident};
-            })
-        };
+        const leggTilNavn = (identer, veiledere) => identer.map((ident) => {
+            const veileder = veiledere.find((v) => v.ident === ident);
+            return { label: `${veileder.etternavn}, ${veileder.fornavn} (${ident})`, key: ident };
+        });
 
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })}>
@@ -41,8 +38,10 @@ class EnhetSide extends Component {
                             <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                         </p>
                         <FiltreringContainer filtervalg={filtervalg} />
-                        <FiltreringLabelContainer filtervalg={{...filtervalg, veiledere:leggTilNavn(filtervalg.veiledere, veilederliste)}}
-                                                  filtergruppe="enhet" />
+                        <FiltreringLabelContainer
+                            filtervalg={{ ...filtervalg, veiledere: leggTilNavn(filtervalg.veiledere, veilederliste) }}
+                            filtergruppe="enhet"
+                        />
                         <EnhetsportefoljeVisning />
                     </div>
                 </div>
