@@ -2,6 +2,7 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
+import classNames from 'classnames';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { hentStatusTall, hentStatusTallForVeileder } from '../ducks/statustall';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
@@ -19,7 +20,7 @@ function Barlabel({ htmlFor, tekstId, antall, max, className }) {
     const style = { width: `${calcWidth(antall, max)}%` };
 
     return (
-        <label htmlFor={htmlFor} className={['barlabel', className].join(' ')}>
+        <label htmlFor={htmlFor} className={classNames('barlabel', className)}>
             <FormattedMessage id={tekstId} />
             &nbsp;
             <div className="barlabel__barwrapper">
@@ -32,6 +33,18 @@ function Barlabel({ htmlFor, tekstId, antall, max, className }) {
         </label>
     );
 }
+
+Barlabel.propTypes = {
+    htmlFor: PT.string.isRequired,
+    tekstId: PT.string.isRequired,
+    antall: PT.number.isRequired,
+    max: PT.number.isRequired,
+    className: PT.string
+};
+
+Barlabel.defaultProps = {
+    className: undefined
+};
 
 class FiltreringStatus extends Component {
     constructor(props) {
