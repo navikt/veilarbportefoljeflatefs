@@ -40,11 +40,12 @@ function MinOversiktSide({ enheter, veiledere, intl, filtervalg, ...props }) {
                 <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
                     { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
                     <div className="portefolje-side">
-                        <LenkerMinoversikt veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
+                        <LenkerMinoversikt
+                            veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
                         />
                         <div id="oversikt-sideinnhold" role="tabpanel">
                             <p className="typo-infotekst begrensetbredde blokk-m">
-                                <FormattedMessage id="ingresstekst.minoversikt"/>
+                                <FormattedMessage id="ingresstekst.minoversikt" />
                             </p>
                             <FiltreringContainer
                                 filtervalg={filtervalg}
@@ -69,7 +70,7 @@ MinOversiktSide.propTypes = {
     enheter: PT.object.isRequired,
     veiledere: PT.object,
     intl: intlShape.isRequired,
-    filtervalg: filtervalgShape.isRequired,
+    filtervalg: filtervalgShape.isRequired
 };
 
 const mapStateToProps = (state) => ({

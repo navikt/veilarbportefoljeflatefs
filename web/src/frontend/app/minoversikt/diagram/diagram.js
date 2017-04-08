@@ -34,8 +34,8 @@ class Diagram extends Component {
                                 <FormattedMessage id={tekster.headertekst} />
                             </h1>
                             <MultiFormattedMessage id={tekster.legendtekst}>
-                            {(diagramtekster) => (
-                                <Chart config={config(data, diagramtekster)} pureConfig />
+                                {(diagramtekster) => (
+                                    <Chart config={config(data, diagramtekster)} pureConfig />
                             )}
                             </MultiFormattedMessage>
                         </div>
@@ -50,7 +50,7 @@ Diagram.propTypes = {
     filtreringsvalg: filtervalgShape.isRequired,
     enhet: PT.string.isRequired,
     veileder: PT.string,
-    hentDiagramdata: PT.func.isRequired,
+    hentDiagramdata: PT.func.isRequired
 };
 Diagram.defaultProps = {
     veileder: null
@@ -62,7 +62,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentDiagramdata: (enhet, veileder, filtervalg) => dispatch(hentDiagramdata(enhet, veileder, filtervalg)),
+    hentDiagramdata: (enhet, veileder, filtervalg) => dispatch(hentDiagramdata(enhet, veileder, filtervalg))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Diagram);
