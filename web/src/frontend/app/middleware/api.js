@@ -40,6 +40,18 @@ export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, sorter
     return fetchToJson(url, config);
 }
 
+export function hentDiagramdata(enhet, veilederident, filtervalg) {
+    let url = `https://${window.location.hostname}${VEILARBPORTEFOLJE_URL}/tjenester/diagram/` +
+        `?enhet=${enhet}`;
+
+    if (veilederident) {
+        url += `&veilederident=${veilederident}`;
+    }
+
+    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
+    return fetchToJson(url, config);
+}
+
 export function hentEnhetsVeiledere(enhetId) {
     const url = `https://${window.location.hostname}${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
     return fetchToJson(url, MED_CREDENTIALS);

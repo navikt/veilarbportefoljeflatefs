@@ -61,7 +61,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 subListe: state.liste.slice(action.fraIndeks, action.fraIndeks + action.antall),
-            fraIndeksForSubListe: action.fraIndeks
+                fraIndeksForSubListe: action.fraIndeks
             };
         case KLARER:
             return { ...state, liste: [], subListe: [], fraIndeksForSubListe: 0 };

@@ -49,7 +49,6 @@ function ToggleModusKnapp({ hentListe, sideStorrelse, viserAlle, antallReturnert
 }
 
 
-
 function gaTilSideFactory(sideStorrelse, hentListe) {
     return (side) => () => hentListe((side - 1) * sideStorrelse, sideStorrelse);
 }
