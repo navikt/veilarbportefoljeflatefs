@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter from './filter-konstanter';
 import { slettEnkeltFilter, clearFiltervalg } from '../ducks/filtrering';
-import { filtervalgShape, veilederShape } from '../proptype-shapes';
+import { filtervalgLabelShape, veilederShape } from '../proptype-shapes';
 
 function FiltreringLabelContainer({ filtervalg, actions: { slettAlle, slettEnkelt } }) {
     const filterElementer = Object.entries(filtervalg)
@@ -19,9 +19,9 @@ function FiltreringLabelContainer({ filtervalg, actions: { slettAlle, slettEnkel
             } else if (Array.isArray(value)) {
                 return value.map((singleValue) => (
                     <FiltreringLabel
-                        key={`${key}--${singleValue}`}
-                        label={FilterKonstanter[key][singleValue] || singleValue}
-                        slettFilter={() => slettEnkelt(key, singleValue)}
+                        key={`${key}--${singleValue.key || singleValue}`}
+                        label={singleValue.label || FilterKonstanter[key][singleValue]}
+                        slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                     />
                     ));
             } else if (value) {
@@ -60,7 +60,7 @@ FiltreringLabelContainer.propTypes = {
         slettAlle: PT.func.isRequired,
         slettEnkelt: PT.func.isRequired
     }).isRequired,
-    filtervalg: filtervalgShape.isRequired,
+    filtervalg: filtervalgLabelShape.isRequired,
     filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
     veileder: veilederShape // eslint-disable-line react/no-unused-prop-types
 };

@@ -109,7 +109,7 @@ class VeiledereSide extends Component {
                             {() => (
                                 <div>
                                     <div className="veiledersok__wrapper">
-                                        <Dropdown name="Velg veileder" onLukk={resetSok}>
+                                        <Dropdown name="Søk på veileder" className="dropdown--130bredde" onLukk={resetSok}>
                                             <VeiledereSokeliste
                                                 veiledere={veilederListe}
                                             />

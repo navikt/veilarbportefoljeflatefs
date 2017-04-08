@@ -63,6 +63,19 @@ export const filtervalgShape = PT.shape({
     ytelse: PT.string
 });
 
+export const filtervalgLabelShape = PT.shape({
+    nyeBrukere: PT.bool,
+    inaktiveBrukere: PT.bool,
+    alder: PT.arrayOf(PT.string),
+    kjonn: PT.arrayOf(PT.string),
+    fodselsdagIMnd: PT.arrayOf(PT.string),
+    innsatsgruppe: PT.arrayOf(PT.string),
+    formidlingsgruppe: PT.arrayOf(PT.string),
+    servicegruppe: PT.arrayOf(PT.string),
+    veiledere: PT.arrayOf(PT.object),
+    ytelse: PT.string
+});
+
 export const statustallShape = PT.shape({
     totalt: PT.number.isRequired,
     nyeBrukere: PT.number,
