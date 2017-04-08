@@ -12,8 +12,8 @@ import Innholdslaster from './../../innholdslaster/innholdslaster';
 
 class Diagram extends Component {
     componentDidMount() {
-        const { filtreringsvalg, enhet, veileder, hentDiagramdata } = this.props;
-        hentDiagramdata(enhet, veileder, filtreringsvalg);
+        const { filtreringsvalg, enhet, veileder, hentDiagram } = this.props;
+        hentDiagram(enhet, veileder, filtreringsvalg);
     }
 
     render() {
@@ -50,10 +50,14 @@ Diagram.propTypes = {
     filtreringsvalg: filtervalgShape.isRequired,
     enhet: PT.string.isRequired,
     veileder: PT.string,
-    hentDiagramdata: PT.func.isRequired
+    hentDiagram: PT.func.isRequired,
+    diagramdata: PT.object,
+    portefolje: PT.object
 };
 Diagram.defaultProps = {
-    veileder: null
+    veileder: null,
+    diagramdata: {},
+    portefolje: {}
 };
 
 const mapStateToProps = (state) => ({
@@ -62,7 +66,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentDiagramdata: (enhet, veileder, filtervalg) => dispatch(hentDiagramdata(enhet, veileder, filtervalg))
+    hentDiagram: (enhet, veileder, filtervalg) => dispatch(hentDiagramdata(enhet, veileder, filtervalg))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Diagram);

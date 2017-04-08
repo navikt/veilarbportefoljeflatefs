@@ -62,3 +62,14 @@ function s4() {
 export function guid() {
     return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
 }
+
+export function addPropToObject(obj, [key, value]) {
+    obj[key] = value; // eslint-disable-line no-param-reassign
+    return obj;
+}
+
+export function omit(obj, ...props) {
+    return Object.entries(obj)
+        .filter(([key]) => !props.includes(key))
+        .reduce(addPropToObject, {});
+}

@@ -14,6 +14,14 @@ function KnappPanel({ children, disabled, ...props }) {
     );
 }
 
+KnappPanel.propTypes = {
+    children: PT.node.isRequired,
+    disabled: PT.bool
+};
+KnappPanel.defaultProps = {
+    disabled: false
+};
+
 function Chevron({ retning, children }) {
     return (
         <i className={`chevron--${retning}`}>
@@ -21,6 +29,11 @@ function Chevron({ retning, children }) {
         </i>
     );
 }
+
+Chevron.propTypes = {
+    children: PT.node.isRequired,
+    retning: PT.string.isRequired
+};
 
 function ToggleModusKnapp({ hentListe, sideStorrelse, viserAlle, antallReturnert, antallTotalt }) {
     const skalVareInaktiv = (viserAlle && antallReturnert <= sideStorrelse);
@@ -47,6 +60,14 @@ function ToggleModusKnapp({ hentListe, sideStorrelse, viserAlle, antallReturnert
         </KnappPanel>
     );
 }
+
+ToggleModusKnapp.propTypes = {
+    hentListe: PT.func.isRequired,
+    sideStorrelse: PT.number.isRequired,
+    viserAlle: PT.bool.isRequired,
+    antallReturnert: PT.number.isRequired,
+    antallTotalt: PT.number.isRequired
+};
 
 
 function gaTilSideFactory(sideStorrelse, hentListe) {
