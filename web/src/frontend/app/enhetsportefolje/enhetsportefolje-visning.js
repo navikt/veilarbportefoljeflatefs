@@ -9,10 +9,14 @@ import {
     nullstillFeilendeTilordninger,
     PORTEFOLJE_SIDESTORRELSE
 } from '../ducks/portefolje';
+import { ytelseFilterErAktiv } from '../utils/utils';
 import Paginering from '../paginering/paginering';
 import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
 import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
+import { ytelsevalg } from '../filtrering/filter-konstanter';
 import { ASCENDING, DESCENDING } from '../konstanter';
+import { diagramSkalVises } from './../minoversikt/diagram/util';
+import Diagram from './../minoversikt/diagram/diagram';
 
 class EnhetsportefoljeVisning extends Component {
     componentWillMount() {
@@ -79,7 +83,8 @@ class EnhetsportefoljeVisning extends Component {
             sorteringsfelt,
             settMarkert,
             filtervalg,
-            clearFeilendeTilordninger
+            clearFeilendeTilordninger,
+            visningsmodus
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
@@ -104,6 +109,9 @@ class EnhetsportefoljeVisning extends Component {
             clearFeilendeTilordninger();
         }
 
+        const visButtongroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
+        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+
         const paginering = (
             <Paginering
                 antallTotalt={antallTotalt}
@@ -120,19 +128,24 @@ class EnhetsportefoljeVisning extends Component {
                 tekst={pagineringTekst}
                 sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
                 antallReturnert={antallReturnert}
+                visButtongroup={visButtongroup}
             />
         );
 
         return (
             <Innholdslaster avhengigheter={[portefolje, veiledere]}>
                 {paginering}
-                <EnhetsportefoljeTabell
-                    veiledere={veiledere.data.veilederListe}
-                    brukere={portefolje.data.brukere}
-                    settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
-                    settSomMarkert={settMarkert}
-                    portefolje={portefolje}
-                />
+                {
+                    visDiagram ?
+                        <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
+                        <EnhetsportefoljeTabell
+                            veiledere={veiledere.data.veilederListe}
+                            brukere={portefolje.data.brukere}
+                            settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
+                            settSomMarkert={settMarkert}
+                            portefolje={portefolje}
+                        />
+                }
                 {antallTotalt >= 5 && paginering}
             </Innholdslaster>
         );
@@ -167,7 +180,8 @@ const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    filtervalg: state.filtrering
+    filtervalg: state.filtrering,
+    visningsmodus: state.veilederpaginering.visningsmodus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
