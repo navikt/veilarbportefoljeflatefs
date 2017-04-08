@@ -29,7 +29,8 @@
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true}]
   },
   "env": {
-    "mocha": true
+    "mocha": true,
+    "browser": true
   },
   "extends": "airbnb"
 }

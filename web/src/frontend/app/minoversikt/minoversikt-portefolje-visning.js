@@ -28,7 +28,6 @@ const settSammenNavn = (bruker) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
         const {
@@ -93,6 +92,7 @@ class VeilederPortefoljeVisning extends Component {
         const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje.data;
 
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
+        const sorterUtlopsdato = portefolje.sorteringsfelt === 'utlopsdato';
 
         const pagineringTekst = (
             antallTotalt > 0 ?
@@ -120,7 +120,23 @@ class VeilederPortefoljeVisning extends Component {
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
             :
-            null;
+            <th />;
+
+        const fodselsdatoHeader = (<th className="tabell-element-center">
+            <FormattedMessage id="portefolje.tabell.fodselsnummer" />
+        </th>);
+
+        const ddmmyyHeader = (<th className="tabell-element-center">
+            <button
+                onClick={() => this.settSorteringOgHentPortefolje('utlopsdato')}
+                className={classNames('sortering-link', { valgt: sorterUtlopsdato })}
+                aria-pressed={sorterUtlopsdato}
+                aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
+                    sorteringsrekkefolge : 'inaktiv'}
+            >
+                <FormattedMessage id="portefolje.tabell.ddmmyy" />
+            </button>
+        </th>);
 
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
         const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
@@ -150,7 +166,7 @@ class VeilederPortefoljeVisning extends Component {
                                 <tr>
                                     <th />
                                     <th>Bruker</th>
-                                    <th />
+                                    {utlopsdatoHeader}
                                     <th />
                                 </tr>
                             </thead>
@@ -175,67 +191,69 @@ class VeilederPortefoljeVisning extends Component {
                                             className={classNames('sortering-link', { valgt: sorterEtternavn })}
                                             aria-pressed={sorterEtternavn}
                                             aria-label={sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt' ?
-                                        sorteringsrekkefolge : 'inaktiv'}
+                                            sorteringsrekkefolge : 'inaktiv'}
                                         >
                                             <FormattedMessage id="portefolje.tabell.navn" />
                                         </button>
                                     </th>
-                                    {utlopsdatoHeader}
-                                    <th className="tabell-element-center">
-                                        <FormattedMessage id="portefolje.tabell.fodselsnummer" />
-                                    </th>
+                                    {ytelseFilterErAktiv(filtervalg.ytelse) ? ddmmyyHeader : null}
+                                    {fodselsdatoHeader}
                                     <th />
                                 </tr>
                             </thead>
 
                             <tbody>
                                 {brukere.filter((b) => b.veilederId === veileder.ident)
-                                .map((bruker) => <tr key={bruker.fnr}>
-                                    <td>
-                                        <div className="skjema__input">
-                                            <input
-                                                className="checkboks"
-                                                id={`checkbox-${bruker.fnr}`}
-                                                type="checkbox"
-                                                checked={bruker.markert}
-                                                onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
-                                            />
-                                            <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
-                                        </div>
-                                    </td>
-                                    <th>
-                                        <a
-                                            href={`https://${window.location.hostname}` +// eslint-disable-line no-undef
-                                            `/veilarbpersonflatefs/${bruker.fnr}?enhet=${valgtEnhet.enhet.enhetId}`}
-                                            className="til-bruker-link"
-                                        >
-                                            {settSammenNavn(bruker)}
-                                        </a>
-                                    </th>
-                                    {bruker.fnr !== null ?
-                                        <td className="tabell-element-center">{bruker.fnr}</td> :
-                                        <td className="ny-bruker-td"><span className="ny-bruker">Ny bruker</span></td>
+                                    .map((bruker) => <tr key={bruker.fnr}>
+                                        <td>
+                                            <div className="skjema__input">
+                                                <input
+                                                    className="checkboks"
+                                                    id={`checkbox-${bruker.fnr}`}
+                                                    type="checkbox"
+                                                    checked={bruker.markert}
+                                                    onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
+                                                />
+                                                <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
+                                            </div>
+                                        </td>
+                                        <th>
+                                            <a
+                                                href={`https://${window.location.hostname}` +
+                                                `/veilarbpersonflatefs/${bruker.fnr}?enhet=${valgtEnhet.enhet.enhetId}`}
+                                                className="til-bruker-link"
+                                            >
+                                                {settSammenNavn(bruker)}
+                                            </a>
+                                        </th>
+                                        {
+                                            ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
+                                                <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
+                                            : null
+                                        }
+                                        {bruker.fnr !== null ?
+                                            <td className="tabell-element-center">{bruker.fnr}</td> :
+                                            <td className="ny-bruker-td">
+                                                <span className="ny-bruker">Ny bruker</span>
+                                            </td>
                                     }
-                                    {
-                                        ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
-                                            <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
-                                        : null
-                                    }
-                                    <td>
-                                        {bruker.sikkerhetstiltak.length > 0 ?
-                                            <Tabelletiketter type="sikkerhetstiltak">
-                                                Sikkerhetstiltak
-                                            </Tabelletiketter> : null}
-                                        {bruker.diskresjonskode !== null ?
-                                            <Tabelletiketter type="diskresjonskode">
-                                                {`Kode ${bruker.diskresjonskode}`}
-                                            </Tabelletiketter> : null}
-                                        {bruker.egenAnsatt === true ?
-                                            <Tabelletiketter type="egen-ansatt">Egen ansatt</Tabelletiketter> : null}
-                                        {bruker.erDoed === true ?
-                                            <Tabelletiketter type="doed">Død</Tabelletiketter> : null}
-                                    </td>
-                                </tr>)}
+                                        <td>
+                                            {bruker.sikkerhetstiltak.length > 0 ?
+                                                <Tabelletiketter type="sikkerhetstiltak">
+                                                    Sikkerhetstiltak
+                                                </Tabelletiketter> : null}
+                                            {bruker.diskresjonskode !== null ?
+                                                <Tabelletiketter type="diskresjonskode">
+                                                    {`Kode ${bruker.diskresjonskode}`}
+                                                </Tabelletiketter> : null}
+                                            {bruker.egenAnsatt === true ?
+                                                <Tabelletiketter type="egen-ansatt">
+                                                    Egen ansatt
+                                                </Tabelletiketter> : null}
+                                            {bruker.erDoed === true ?
+                                                <Tabelletiketter type="doed">Død</Tabelletiketter> : null}
+                                        </td>
+                                    </tr>)}
                             </tbody>
                         </table>
                 }

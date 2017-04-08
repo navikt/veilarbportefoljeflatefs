@@ -52,6 +52,7 @@ class EnhetsportefoljeTabell extends Component {
 
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
+        const sorterUtlopsdato = portefolje.sorteringsfelt === 'utlopsdato';
 
         const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
             (<th className="tabell-element-center">
@@ -59,6 +60,20 @@ class EnhetsportefoljeTabell extends Component {
             </th>)
             :
             <th />;
+
+        const mmddyyHeader = (
+            <th className="tabell-element-center">
+                <button
+                    onClick={() => this.settSorteringOgHentPortefolje('utlopsdato')}
+                    className={classNames('sortering-link', { valgt: sorterUtlopsdato })}
+                    aria-pressed={sorterUtlopsdato}
+                    aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
+                            sorteringsrekkefolge : 'inaktiv'}
+                >
+                    <FormattedMessage id="portefolje.tabell.ddmmyy" />
+                </button>
+            </th>
+            );
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         return (
@@ -68,8 +83,9 @@ class EnhetsportefoljeTabell extends Component {
                     <thead className="extra-head">
                         <tr>
                             <th />
-                            <th colSpan="3">Bruker</th>
-                            <th colSpan="3">Veileder</th>
+                            <th colSpan="2">Bruker</th>
+                            {utlopsdatoHeader}
+                            <th colSpan="2">Veileder</th>
                         </tr>
                     </thead>
                     <thead>
@@ -110,7 +126,7 @@ class EnhetsportefoljeTabell extends Component {
                                     <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                                 </button>
                             </th>
-                            {utlopsdatoHeader}
+                            {ytelseFilterErAktiv(filtervalg.ytelse) ? mmddyyHeader : null}
                             <th>
                                 <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                                 <FormattedMessage id="enhet.veiledere.tabell.fornavn" />

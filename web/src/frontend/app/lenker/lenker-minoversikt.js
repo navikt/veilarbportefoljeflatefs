@@ -19,7 +19,12 @@ function LenkerMinoversikt({ veilederident }) {
     );
 }
 
+LenkerMinoversikt.defaultProps = {
+    veilederident: undefined
+};
+
 LenkerMinoversikt.propTypes = {
+    minOversiktOnClick: PT.func.isRequired,
     veilederident: PT.string
 };
 
