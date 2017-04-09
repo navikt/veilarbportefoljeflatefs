@@ -41,7 +41,7 @@ class VeiledereSide extends Component {
         settVeiledereSomSkalVises(veilederfiltervalg
             .map((ident) => veiledere.data.veilederListe.find((veileder) => veileder.ident === ident)));
     }
-
+    f
     render() {
         const {
             veiledere, portefoljestorrelser, veiledereSomSkalVises, currentSortering,
@@ -128,9 +128,12 @@ class VeiledereSide extends Component {
                                     {veilederpaginering}
                                     <VeiledereTabell
                                         veiledere={veiledereTilTabell}
-                                        sorterPaaEtternavn={() => sorterPaaEtternavn(avgjorNySortering('etternavn'))}
+                                        sorterPaaEtternavn={() =>
+                                            sorterPaaEtternavn(
+                                                avgjorNySortering('etternavn'), veiledereSomSkalVises.length)}
                                         sorterPaaPortefoljestorrelse={
-                                            () => sorterPaaPortefoljestorrelse(avgjorNySortering('portefoljestorrelse'))
+                                            () => sorterPaaPortefoljestorrelse(
+                                                avgjorNySortering('portefoljestorrelse'), veiledereSomSkalVises.length)
                                         }
                                     />
                                 </div>
@@ -176,13 +179,13 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     resetSok: () => dispatch(resetSokeresultater()),
     hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
-    sorterPaaPortefoljestorrelse: (nySortering) => {
+    sorterPaaPortefoljestorrelse: (nySortering, antall) => {
         dispatch(sorterListePaaPortefoljestorrelse(nySortering));
-        dispatch(settSubListeForPaginering(0, 20));
+        dispatch(settSubListeForPaginering(0, antall));
     },
-    sorterPaaEtternavn: (nySortering) => {
+    sorterPaaEtternavn: (nySortering, antall) => {
         dispatch(sorterListePaaEtternavn(nySortering));
-        dispatch(settSubListeForPaginering(0, 20));
+        dispatch(settSubListeForPaginering(0, antall));
     },
     settFiltervalgForVeiledere: (veilederfiltervalg) => dispatch(settVeilederfiltervalg(veilederfiltervalg)),
     settVeiledereSomSkalVises: (veiledere) => dispatch(settVeiledereITabell(veiledere))
