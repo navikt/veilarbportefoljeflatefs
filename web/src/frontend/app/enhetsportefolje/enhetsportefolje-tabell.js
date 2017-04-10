@@ -51,7 +51,7 @@ class EnhetsportefoljeTabell extends Component {
         } = this.props;
 
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
-        const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
+        const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsnummer';
         const sorterUtlopsdato = portefolje.sorteringsfelt === 'utlopsdato';
 
         const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
@@ -117,7 +117,7 @@ class EnhetsportefoljeTabell extends Component {
                             </th>
                             <th className="tabell-element-center">
                                 <button
-                                    onClick={() => this.settSorteringOgHentPortefolje('fodselsdato')}
+                                    onClick={() => this.settSorteringOgHentPortefolje('fodselsnummer')}
                                     className={classNames('sortering-link', { valgt: sorterFodelsnummer })}
                                     aria-pressed={sorterFodelsnummer}
                                     aria-label={sorterFodelsnummer && sorteringsrekkefolge !== 'ikke_satt' ?
