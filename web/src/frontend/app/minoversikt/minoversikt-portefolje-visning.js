@@ -9,13 +9,12 @@ import {
     settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
-    markerAlleBrukere,
-    PORTEFOLJE_SIDESTORRELSE
+    markerAlleBrukere
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
-import { ASCENDING, DESCENDING } from '../konstanter';
+import { ASCENDING, DESCENDING, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
@@ -120,7 +119,7 @@ class VeilederPortefoljeVisning extends Component {
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
             :
-            <th />;
+            null;
 
         const fodselsdatoHeader = (<th className="tabell-element-center">
             <FormattedMessage id="portefolje.tabell.fodselsnummer" />
@@ -145,26 +144,28 @@ class VeilederPortefoljeVisning extends Component {
             <Innholdslaster avhengigheter={[portefolje]}>
                 <Paginering
                     antallTotalt={antallTotalt}
+                    antallReturnert={antallReturnert}
                     fraIndex={fraIndex}
                     hentListe={(fra, antall) =>
                         hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
                             sorteringsfelt, sorteringsrekkefolge, fra, antall, filtervalg)}
                     tekst={pagineringTekst}
-                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
+                    sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
                     visButtongroup={visButtonGroup}
-                    antallReturnert={antallReturnert}
                 />
                 {
                     visDiagram ?
                         <Diagram
-                            filtreringsvalg={filtervalg.ytelse}
-                            brukere={brukere}
-                        /> :
-                        <table className="tabell portefolje-tabell typo-avsnitt">
+                            filtreringsvalg={filtervalg}
+                            enhet={valgtEnhet.enhet.enhetId}
+                            veileder={veileder.ident}
+                        />
+                        : <table className="tabell portefolje-tabell typo-avsnitt">
                             <thead className="extra-head">
                                 <tr>
                                     <th />
                                     <th>Bruker</th>
+                                    <th />
                                     {utlopsdatoHeader}
                                     <th />
                                 </tr>
@@ -195,8 +196,8 @@ class VeilederPortefoljeVisning extends Component {
                                             <FormattedMessage id="portefolje.tabell.navn" />
                                         </button>
                                     </th>
-                                    {ytelseFilterErAktiv(filtervalg.ytelse) ? ddmmyyHeader : null}
                                     {fodselsdatoHeader}
+                                    {ytelseFilterErAktiv(filtervalg.ytelse) ? ddmmyyHeader : null}
                                     <th />
                                 </tr>
                             </thead>
@@ -225,17 +226,18 @@ class VeilederPortefoljeVisning extends Component {
                                                 {settSammenNavn(bruker)}
                                             </a>
                                         </th>
-                                        {
-                                            ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
-                                                <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
-                                            : null
-                                        }
+
                                         {bruker.fnr !== null ?
                                             <td className="tabell-element-center">{bruker.fnr}</td> :
                                             <td className="ny-bruker-td">
                                                 <span className="ny-bruker">Ny bruker</span>
                                             </td>
-                                    }
+                                        }
+                                        {
+                                            ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
+                                                <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
+                                                : null
+                                        }
                                         <td>
                                             {bruker.sikkerhetstiltak.length > 0 ?
                                                 <Tabelletiketter type="sikkerhetstiltak">

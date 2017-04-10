@@ -10,6 +10,7 @@ import veilederpagineringReducer from './ducks/veilederpaginering';
 import filtreringReducer, { initialState } from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
+import diagramReducer from './ducks/diagram';
 import { slettCleanIUrl } from './utils/utils';
 
 function named(name, reducer) {
@@ -40,5 +41,6 @@ export default combineReducers({
     filtreringVeileder: persistent('veilederState', location,
         named('veileder', filtreringReducer), slettCleanIUrl, initialState),
     modal: modalReducer,
+    diagram: diagramReducer,
     form: formReducer
 });

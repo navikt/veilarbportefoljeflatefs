@@ -46,18 +46,18 @@ class VeilederTabell extends Component {
                 </th>
                 <td>{`${veileder.ident}`}</td>
                 <td className="tabell-element-center">{veileder.portefoljestorrelse}</td>
+                <td />
             </tr>
         ));
 
         return (
             <div>
                 <TomPortefoljeModal skjulModal={toggleSkjulModal} visModal={modalSkalVises} />
-                <table className="tabell portefolje-tabell typo-avsnitt">
+                <table className="tabell veileder-tabell portefolje-tabell typo-avsnitt">
                     <thead className="extra-head">
                         <tr>
                             <th>Veileder</th>
-                            <th />
-                            <th />
+                            <th colSpan="3" />
                         </tr>
                     </thead>
                     <thead>
@@ -88,6 +88,7 @@ class VeilederTabell extends Component {
                                     <FormattedMessage id="enhet.veiledere.tabell.brukere" />
                                 </button>
                             </th>
+                            <th />
                         </tr>
                     </thead>
                     <tbody>

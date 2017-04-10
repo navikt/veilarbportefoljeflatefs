@@ -47,11 +47,29 @@ class VeiledereSide extends Component {
             veiledere, portefoljestorrelser, veiledereSomSkalVises, currentSortering,
             sorterPaaPortefoljestorrelse, sorterPaaEtternavn, resetSok
         } = this.props;
+
+        const veiledereMedPortefoljestorrelser = (veilederListeParam, portefoljestorrelserParam) =>
+            veilederListeParam.map((veileder) => {
+                const portefoljestorrelse = portefoljestorrelserParam.find(
+                    (storrelse) => storrelse.value === veileder.ident);
+                const count = portefoljestorrelse ? portefoljestorrelse.count : 0;
+                return { ...veileder, portefoljestorrelse: count };
+            });
+
         const { veilederListe } = veiledere.data;
         const { veiledereITabell, sokeresultat, veilederfiltervalg } = veiledere;
         const { facetResults } = portefoljestorrelser.data;
         const { formatMessage } = this.props.intl;
-        const veiledereTilTabell = veiledereITabell || veiledereSomSkalVises;
+
+        let veiledereTilTabell;
+        let pagineringSkalVises = true;
+
+        if (veiledereITabell) {
+            veiledereTilTabell = veiledereMedPortefoljestorrelser(veiledereITabell, facetResults);
+            pagineringSkalVises = false;
+        } else {
+            veiledereTilTabell = veiledereSomSkalVises;
+        }
 
         const veiledervalg = sokeresultat.sokIkkeStartet ?
             visAlleVeiledereIListe(veiledere.data.veilederListe) :
@@ -66,19 +84,19 @@ class VeiledereSide extends Component {
             }
             return { felt, rekkefolge: ASCENDING };
         };
-        const veiledereMedPortefoljestorrelser = (veilederListeParam, portefoljestorrelserParam) =>
-            veilederListeParam.map((veileder) => {
-                const portefoljestorrelse = portefoljestorrelserParam.find(
-                    (storrelse) => storrelse.value === veileder.ident);
-                const count = portefoljestorrelse ? portefoljestorrelse.count : 0;
-                return { ...veileder, portefoljestorrelse: count };
-            });
+
+        const veilederpaginering = pagineringSkalVises ?
+            (<VeilederPaginering
+                liste={veiledereMedPortefoljestorrelser(veilederListe, facetResults)}
+                pagineringTekstId={'enhet.veiledere.paginering.tekst'}
+            />) :
+            null;
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.veiledere.oversikt' })}>
                 <div className="veiledere-side">
                     <Lenker />
                     <div id="oversikt-sideinnhold" role="tabpanel">
-                        <p className="typo-infotekst enhetsingress">
+                        <p className="typo-infotekst begrensetbredde blokk-m">
                             <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
                         </p>
                         <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
@@ -91,7 +109,11 @@ class VeiledereSide extends Component {
                             {() => (
                                 <div>
                                     <div className="veiledersok__wrapper">
-                                        <Dropdown name="Velg veileder" onLukk={resetSok}>
+                                        <Dropdown
+                                            name="Søk på veileder"
+                                            className="dropdown--130bredde"
+                                            onLukk={resetSok}
+                                        >
                                             <VeiledereSokeliste
                                                 veiledere={veilederListe}
                                             />
@@ -103,15 +125,15 @@ class VeiledereSide extends Component {
                                             />
                                         </Dropdown>
                                     </div>
-                                    <VeilederPaginering
-                                        liste={veiledereMedPortefoljestorrelser(veilederListe, facetResults)}
-                                        pagineringTekstId={'enhet.veiledere.paginering.tekst'}
-                                    />
+                                    {veilederpaginering}
                                     <VeiledereTabell
                                         veiledere={veiledereTilTabell}
-                                        sorterPaaEtternavn={() => sorterPaaEtternavn(avgjorNySortering('etternavn'))}
+                                        sorterPaaEtternavn={() =>
+                                            sorterPaaEtternavn(
+                                                avgjorNySortering('etternavn'), veiledereSomSkalVises.length)}
                                         sorterPaaPortefoljestorrelse={
-                                            () => sorterPaaPortefoljestorrelse(avgjorNySortering('portefoljestorrelse'))
+                                            () => sorterPaaPortefoljestorrelse(
+                                                avgjorNySortering('portefoljestorrelse'), veiledereSomSkalVises.length)
                                         }
                                     />
                                 </div>
@@ -157,13 +179,13 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     resetSok: () => dispatch(resetSokeresultater()),
     hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
-    sorterPaaPortefoljestorrelse: (nySortering) => {
+    sorterPaaPortefoljestorrelse: (nySortering, antall) => {
         dispatch(sorterListePaaPortefoljestorrelse(nySortering));
-        dispatch(settSubListeForPaginering(0));
+        dispatch(settSubListeForPaginering(0, antall));
     },
-    sorterPaaEtternavn: (nySortering) => {
+    sorterPaaEtternavn: (nySortering, antall) => {
         dispatch(sorterListePaaEtternavn(nySortering));
-        dispatch(settSubListeForPaginering(0));
+        dispatch(settSubListeForPaginering(0, antall));
     },
     settFiltervalgForVeiledere: (veilederfiltervalg) => dispatch(settVeilederfiltervalg(veilederfiltervalg)),
     settVeiledereSomSkalVises: (veiledere) => dispatch(settVeiledereITabell(veiledere))

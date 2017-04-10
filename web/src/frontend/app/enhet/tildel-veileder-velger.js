@@ -28,7 +28,10 @@ function TildelVeilederVelger({ veiledere, velgVeileder, brukere,
 
     const tildelveilederComponent = skjulVeilederfilter ? null : (
         <div className="col-sm-3">
-            <Dropdown name="Veilederfilter">
+            <Dropdown name="Søk på veileder" className="dropdown--130bredde" onLukk={resetSok}>
+                <VeiledereSokeliste
+                    veiledere={veilederListe}
+                />
                 <CheckboxFilterform
                     form="veiledere"
                     valg={veiledervalg}
@@ -41,8 +44,9 @@ function TildelVeilederVelger({ veiledere, velgVeileder, brukere,
     return (
         <div className="tildelveileder_wrapper row">
             <div className="row">
+                {tildelveilederComponent}
                 <div className="col-sm-3">
-                    <Dropdown name="Tildel veileder" onLukk={resetSok}>
+                    <Dropdown name="Tildel veileder" className="dropdown--130bredde" onLukk={resetSok}>
                         <VeiledereSokeliste
                             veiledere={veilederListe}
                         />
@@ -54,7 +58,6 @@ function TildelVeilederVelger({ veiledere, velgVeileder, brukere,
                         />
                     </Dropdown>
                 </div>
-                {tildelveilederComponent}
             </div>
         </div>
     );

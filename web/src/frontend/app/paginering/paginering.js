@@ -1,116 +1,142 @@
 import React, { PropTypes as PT } from 'react';
-import classNames from 'classnames';
 import { Element } from 'nav-frontend-typografi';
-import createSimpleLink from '../components/simple-link';
 import ButtonRadiogroup from './buttonradiogroup';
 
-function Paginering({ fraIndex, antallTotalt, hentListe, tekst, sideStorrelse, antallReturnert, visButtongroup }) {
-    const fraIndeksForrigeSide = (fraIndex - sideStorrelse < 0) ? fraIndex : (fraIndex - sideStorrelse);
-    const fraIndeksNesteSide = (antallTotalt % sideStorrelse === 0) ? (antallTotalt - sideStorrelse)
-        : (antallTotalt - (antallTotalt % sideStorrelse));
-    const fraIndeksSisteSide = (fraIndex + sideStorrelse >= antallTotalt) ? fraIndex : (fraIndex + sideStorrelse);
+function KnappPanel({ children, disabled, ...props }) {
+    return (
+        <button
+            className={['paginering__knapp', disabled ? 'disabled' : ''].join(' ')}
+            aria-disabled={disabled}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+}
 
-    const ikkeAktiv = classNames({ 'not-active': antallTotalt === antallReturnert });
-    const seAlleKnapp = createSimpleLink(0, antallTotalt, 'Se alle', hentListe);
-    const seFaerreKnapp = createSimpleLink(0, sideStorrelse, 'Se færre', hentListe);
-    const seAlleKnappInactive = createSimpleLink(0, antallTotalt, 'Se alle', hentListe, 'not-active');
+KnappPanel.propTypes = {
+    children: PT.node.isRequired,
+    disabled: PT.bool
+};
+KnappPanel.defaultProps = {
+    disabled: false
+};
 
-    function lagChevron(isLeft) {
-        if (isLeft) {
-            return (
-                <i className="chevron--venstre">
-                    <span className="text-hide prev">{'Forrige'}</span>
-                </i>
-            );
-        }
+function Chevron({ retning, children }) {
+    return (
+        <i className={`chevron--${retning}`}>
+            <span className="text-hide prev">{children}</span>
+        </i>
+    );
+}
+
+Chevron.propTypes = {
+    children: PT.node.isRequired,
+    retning: PT.string.isRequired
+};
+
+function ToggleModusKnapp({ hentListe, sideStorrelse, viserAlle, antallReturnert, antallTotalt }) {
+    const skalVareInaktiv = (viserAlle && antallReturnert <= sideStorrelse);
+
+    if (skalVareInaktiv) {
         return (
-            <i className="chevron--hoyre">
-                <span className="text-hide next">{'Neste'}</span>
-            </i>
+            <KnappPanel disabled>
+                Se alle
+            </KnappPanel>
         );
     }
 
-    function visSeAlleKnapp() {
-        if (antallReturnert === antallTotalt && antallReturnert <= sideStorrelse) {
-            return seAlleKnappInactive;
-        } else if (antallReturnert === antallTotalt) {
-            return seFaerreKnapp;
-        }
-        return seAlleKnapp;
+    if (viserAlle) {
+        return (
+            <KnappPanel onClick={() => hentListe(0, sideStorrelse)}>
+                Se færre
+            </KnappPanel>
+        );
     }
 
-    function visForrigeKnapp() {
-        if (fraIndex === 0) {
-            return (
-                <button className="not-active" tabIndex="-1">
-                    {lagChevron(true)}
-                </button>
-            );
-        }
-        return (createSimpleLink(fraIndeksForrigeSide, sideStorrelse, lagChevron(true), hentListe, 'prev'));
+    return (
+        <KnappPanel onClick={() => hentListe(0, antallTotalt)}>
+            Se alle
+        </KnappPanel>
+    );
+}
+
+ToggleModusKnapp.propTypes = {
+    hentListe: PT.func.isRequired,
+    sideStorrelse: PT.number.isRequired,
+    viserAlle: PT.bool.isRequired,
+    antallReturnert: PT.number.isRequired,
+    antallTotalt: PT.number.isRequired
+};
+
+
+function gaTilSideFactory(sideStorrelse, hentListe) {
+    return (side) => () => hentListe((side - 1) * sideStorrelse, sideStorrelse);
+}
+
+function Paginering(props) {
+    const {
+        fraIndex,
+        antallTotalt,
+        hentListe,
+        tekst,
+        antallReturnert,
+        sideStorrelse: antattSideStorrelse,
+        visButtongroup
+    } = props;
+
+    // Fordi sideStorrelse tydeligvis ikke endrer seg i staten, selvom den helt klart egentlig gjør det i UI.
+    let sideStorrelse = antattSideStorrelse;
+    if (antattSideStorrelse < antallReturnert) {
+        sideStorrelse = antallReturnert;
     }
 
-    function visSideEnKnapp() {
-        if (fraIndex !== 0) {
-            return createSimpleLink(0, sideStorrelse, '1', hentListe, ikkeAktiv);
-        }
-        return null;
-    }
-
-    const visCurrentSideKnapp = <button><strong>{((fraIndex / sideStorrelse) + 1)}</strong></button>;
-
-    function visSisteSideKnapp() {
-        if (fraIndex < fraIndeksSisteSide && antallTotalt !== antallReturnert) {
-            return createSimpleLink(
-                fraIndeksNesteSide, sideStorrelse, Math.ceil(antallTotalt / sideStorrelse), hentListe, ikkeAktiv
-            );
-        }
-        return null;
-    }
-
-    function visNesteKnapp() {
-        if (fraIndex === fraIndeksSisteSide) {
-            return (
-                <button className="not-active" tabIndex="-1">
-                    {lagChevron(false)}
-                </button>
-            );
-        }
-        return createSimpleLink(fraIndeksSisteSide, sideStorrelse, lagChevron(false), hentListe, ikkeAktiv);
-    }
+    const navarendeSide = Math.round(fraIndex / sideStorrelse) + 1;
+    const antallSider = Math.max(Math.ceil(antallTotalt / sideStorrelse), 1);
+    const erPaForsteSide = navarendeSide === 1;
+    const erPaSisteSide = navarendeSide === antallSider;
+    const gaTilSide = gaTilSideFactory(sideStorrelse, hentListe);
 
     return (
         <div className="paginering">
             <Element className="info blokk-xs" tag="h1">
-                {tekst}
+                <strong>
+                    {tekst}
+                </strong>
             </Element>
-
             {
                 visButtongroup ?
                     <ButtonRadiogroup />
                     :
                     null
             }
+            <div className="paginering__knapper">
+                <ToggleModusKnapp
+                    viserAlle={antallSider === 1}
+                    sideStorrelse={antattSideStorrelse}
+                    hentListe={hentListe}
+                    antallReturnert={antallReturnert}
+                    antallTotalt={antallTotalt}
+                />
+                <KnappPanel disabled={erPaForsteSide} onClick={gaTilSide(navarendeSide - 1)}>
+                    <Chevron retning="venstre">Forrige</Chevron>
+                </KnappPanel>
 
-            {
-                antallTotalt <= sideStorrelse ? null :
-                <div className="bytt-side">
-                    {visSeAlleKnapp()}
-                    {visForrigeKnapp()}
-                    {visSideEnKnapp()}
-                    {visCurrentSideKnapp}
-                    {visSisteSideKnapp()}
-                    {visNesteKnapp()}
-                </div>
-            }
+                {!erPaForsteSide && <KnappPanel onClick={gaTilSide(1)}>1</KnappPanel>}
+
+                <KnappPanel>
+                    <strong>{navarendeSide}</strong>
+                </KnappPanel>
+
+                {!erPaSisteSide && <KnappPanel onClick={gaTilSide(antallSider)}>{antallSider}</KnappPanel>}
+
+                <KnappPanel disabled={erPaSisteSide} onClick={gaTilSide(navarendeSide + 1)}>
+                    <Chevron retning="hoyre">Neste</Chevron>
+                </KnappPanel>
+            </div>
         </div>
     );
 }
-
-Paginering.defaultProps = {
-    tekst: '',
-    antallReturnert: 0
-};
 
 Paginering.propTypes = {
     antallTotalt: PT.number.isRequired,
@@ -119,7 +145,7 @@ Paginering.propTypes = {
     tekst: PT.node,
     sideStorrelse: PT.number.isRequired,
     visButtongroup: PT.bool,
-    antallReturnert: PT.number
+    antallReturnert: PT.number.isRequired
 };
 
 export default Paginering;

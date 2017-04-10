@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { hentStatusTall, hentStatusTallForVeileder } from '../ducks/statustall';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
+import Barlabel from './barlabel';
 
 class FiltreringStatus extends Component {
     constructor(props) {
@@ -30,10 +31,12 @@ class FiltreringStatus extends Component {
                     onChange={this.handleChange}
                     checked={nyeBrukere}
                 />
-                <label htmlFor="nyeBrukere">
-                    <FormattedMessage id="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox" />
-                    &nbsp;({this.props.statustall.data.nyeBrukere})
-                </label>
+                <Barlabel
+                    htmlFor="nyeBrukere"
+                    tekstId="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox"
+                    antall={this.props.statustall.data.nyeBrukere}
+                    max={this.props.statustall.data.totalt}
+                />
             </div>
         );
         return (
@@ -53,10 +56,13 @@ class FiltreringStatus extends Component {
                         onChange={this.handleChange}
                         checked={inaktiveBrukere}
                     />
-                    <label htmlFor="inaktiveBrukere">
-                        <FormattedMessage id="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox" />
-                        &nbsp;({this.props.statustall.data.inaktiveBrukere})
-                    </label>
+                    <Barlabel
+                        className="inaktiveBrukere"
+                        htmlFor="inaktiveBrukere"
+                        tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
+                        antall={this.props.statustall.data.inaktiveBrukere}
+                        max={this.props.statustall.data.totalt}
+                    />
                 </div>
             </div>
         );

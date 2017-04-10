@@ -14,7 +14,7 @@ import { hentVeiledereForEnhet } from './ducks/veiledere';
 import history from './history';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
-    const skalViseTekstnokkel = queryString.parse(location.search).visTekster; // eslint-disable-line no-undef
+    const skalViseTekstnokkel = queryString.parse(location.search).vistekster; // eslint-disable-line no-undef
     if (skalViseTekstnokkel) {
         return Object.keys(ledetekster).reduce((obj, curr) => ({ ...obj, [curr]: curr }), {});
     }

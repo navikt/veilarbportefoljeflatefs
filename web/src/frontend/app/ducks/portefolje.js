@@ -13,8 +13,6 @@ const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
 
-export const PORTEFOLJE_SIDESTORRELSE = 20;
-
 function lagBrukerGuid(bruker) {
     return bruker.fnr === '' ? (`${Math.random()}`).slice(2) : bruker.fnr;
 }

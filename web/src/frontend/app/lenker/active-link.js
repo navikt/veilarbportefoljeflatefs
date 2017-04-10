@@ -1,29 +1,27 @@
 import React, { PropTypes as PT } from 'react';
 import { Link, withRouter } from 'react-router';
+import classnames from 'classnames';
+import { omit } from 'nav-frontend-js-utils';
 
-function ActiveLink({ router, ...props }) {
-    const isActive = router.isActive(props.to);
-    const className = isActive ? `${props.className} ${props.activeClassName}` : props.className;
+function ActiveLink({ router, className, activeClassName, to, ...props }) {
+    const isActive = router.isActive(to);
+    const domProps = omit(props, 'params', 'location', 'routes');
 
     return (<Link
-        to={props.to}
-        className={className}
-        onClick={props.onClick}
+        to={to}
+        className={classnames(className, { [activeClassName]: isActive })}
         aria-controls="oversikt-sideinnhold"
         aria-selected={isActive}
         role="tab"
-    >
-        {props.children}
-    </Link>);
+        {...domProps}
+    />);
 }
 
 ActiveLink.propTypes = {
-    activeClassName: PT.string,
+    router: PT.object,
     className: PT.string,
-    to: PT.string,
-    children: PT.object,
-    onClick: PT.func,
-    router: PT.object
+    activeClassName: PT.string,
+    to: PT.string
 };
 
 export default withRouter(ActiveLink);
