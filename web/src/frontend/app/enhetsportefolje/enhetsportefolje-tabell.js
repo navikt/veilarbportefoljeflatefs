@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
-import { veilederShape, brukerShape, portefoljeShape } from '../proptype-shapes';
+import { veilederShape, brukerShape, portefoljeShape, filtervalgShape } from '../proptype-shapes';
 import { markerAlleBrukere } from './../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
@@ -85,7 +85,7 @@ class EnhetsportefoljeTabell extends Component {
                             <th />
                             <th colSpan="2">Bruker</th>
                             {utlopsdatoHeader}
-                            <th colSpan="2">Veileder</th>
+                            <th colSpan="4">Veileder</th>
                         </tr>
                     </thead>
                     <thead>
@@ -164,24 +164,24 @@ class EnhetsportefoljeTabell extends Component {
                             {
                                 ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
                                     <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
-                                    : <td />
+                                    : null
                             }
                             {
-                            bruker.veilederId ? <td className="veileder-td">{veiledere
-                                    .filter((veileder) => veileder.ident === bruker.veilederId)
-                                    .map((veileder) => (veileder.navn || veileder.ident))}</td>
-                                :
-                            <td>
-                                <Tabelletiketter type="nybruker">Ny bruker</Tabelletiketter>
-                            </td>
-                        }
+                                bruker.veilederId ? <td className="veileder-td">{veiledere
+                                        .filter((veileder) => veileder.ident === bruker.veilederId)
+                                        .map((veileder) => (settSammenNavn(veileder)))}</td>
+                                    :
+                                <td>
+                                    <Tabelletiketter type="nybruker">Ny bruker</Tabelletiketter>
+                                </td>
+                            }
                             <td >
                                 {bruker.veilederId || ''}
                             </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ?
                                     <Tabelletiketter type="sikkerhetstiltak">Sikkerhetstiltak</Tabelletiketter> : null}
-                                {bruker.diskresjonskode != null ?
+                                {bruker.diskresjonskode !== null ?
                                     <Tabelletiketter type="diskresjonskode">
                                         {`Kode ${bruker.diskresjonskode}`}
                                     </Tabelletiketter> : null}
@@ -214,7 +214,7 @@ EnhetsportefoljeTabell.propTypes = {
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
     toggleVisModal: PT.func.isRequired,
-    filtervalg: PT.object,
+    filtervalg: filtervalgShape.isRequired,
     valgtEnhet: PT.string.isRequired
 };
 
