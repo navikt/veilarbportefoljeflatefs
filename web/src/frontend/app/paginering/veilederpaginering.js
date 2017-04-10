@@ -5,12 +5,13 @@ import Paginering from './paginering';
 import { settSubListeForPaginering, settListeSomSkalPagineres,
     klarerPagineringsliste } from '../ducks/veilederpaginering';
 import { veilederShape } from '../proptype-shapes';
+import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
 
 class VeilederPaginering extends Component {
 
     componentWillMount() {
         this.props.opprettPaginering(this.props.liste);
-        this.props.settSubListe(this.props.fraIndeksForSubListe, 20);
+        this.props.settSubListe(this.props.fraIndeksForSubListe, DEFAULT_PAGINERING_STORRELSE);
     }
 
     componentWillUnmount() {

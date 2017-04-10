@@ -13,8 +13,6 @@ const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
 
-export const PORTEFOLJE_SIDESTORRELSE = 20;
-
 function lagBrukerGuid(bruker) {
     return bruker.fnr === '' ? (`${Math.random()}`).slice(2) : bruker.fnr;
 }
@@ -54,7 +52,7 @@ function updateVeilederForBruker(brukere, veilederId, feilende) {
 
 function updateBrukerInArray(brukere, action) {
     return brukere.map((bruker) => {
-        if (bruker.fnr === action.fnr) {
+        if (bruker.guid === action.guid) {
             return {
                 ...bruker,
                 markert: action.markert
@@ -159,10 +157,10 @@ export function settSortering(rekkefolge, felt) {
 }
 
 
-export function settBrukerSomMarkert(fnr, markert) {
+export function settBrukerSomMarkert(guid, markert) {
     return (dispatch) => dispatch({
         type: SETT_MARKERT_BRUKER,
-        fnr,
+        guid,
         markert
     });
 }

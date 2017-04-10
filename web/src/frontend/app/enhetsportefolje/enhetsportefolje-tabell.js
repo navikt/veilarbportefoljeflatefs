@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
 import { veilederShape, brukerShape, portefoljeShape, filtervalgShape } from '../proptype-shapes';
-import { markerAlleBrukere } from './../ducks/portefolje';
+import { markerAlleBrukere, settBrukerSomMarkert } from './../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
 import { initialState } from '../ducks/filtrering';
@@ -41,7 +41,7 @@ class EnhetsportefoljeTabell extends Component {
             brukere,
             veiledere,
             settSomMarkertAlle,
-            settSomMarkert,
+            settMarkert,
             portefolje,
             modalSkalVises,
             toggleSkjulModal,
@@ -140,15 +140,15 @@ class EnhetsportefoljeTabell extends Component {
                     <tbody>
                         {brukere.map((bruker) => <tr key={bruker.guid}>
                             <td>
-                                <div className="skjema__input">
+                                <div className="skjema__input" hidden={bruker.fnr.length === 0}>
                                     <input
                                         className="checkboks"
-                                        id={`checkbox-${bruker.fnr}`}
+                                        id={`checkbox-${bruker.guid}`}
                                         type="checkbox"
                                         checked={!!bruker.markert}
-                                        onClick={() => settSomMarkert(bruker.fnr, !bruker.markert)}
+                                        onClick={() => settMarkert(bruker.guid, !bruker.markert)}
                                     />
-                                    <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
+                                    <label className="skjema__label" htmlFor={`checkbox-${bruker.guid}`} />
                                 </div>
                             </td>
                             <th>
@@ -209,7 +209,7 @@ EnhetsportefoljeTabell.propTypes = {
     }).isRequired,
     settSorteringForPortefolje: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
-    settSomMarkert: PT.func.isRequired,
+    settMarkert: PT.func.isRequired,
     settSomMarkertAlle: PT.func.isRequired,
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
@@ -228,6 +228,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     settSomMarkertAlle: (markert) => dispatch(markerAlleBrukere(markert)),
+    settMarkert: (guid, markert) => dispatch(settBrukerSomMarkert(guid, markert)),
     toggleVisModal: () => dispatch(visModal()),
     toggleSkjulModal: () => dispatch(skjulModal())
 });

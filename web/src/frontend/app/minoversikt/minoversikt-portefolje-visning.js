@@ -9,13 +9,12 @@ import {
     settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
-    markerAlleBrukere,
-    PORTEFOLJE_SIDESTORRELSE
+    markerAlleBrukere
 } from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
-import { ASCENDING, DESCENDING } from '../konstanter';
+import { ASCENDING, DESCENDING, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
@@ -176,7 +175,7 @@ class VeilederPortefoljeVisning extends Component {
                         hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
                             sorteringsfelt, sorteringsrekkefolge, fra, antall, filtervalg)}
                     tekst={pagineringTekst}
-                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
+                    sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
                     visButtongroup={visButtonGroup}
                 />
                 {
