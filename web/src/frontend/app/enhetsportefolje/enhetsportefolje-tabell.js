@@ -148,12 +148,12 @@ class EnhetsportefoljeTabell extends Component {
                                 <div className="skjema__input">
                                     <input
                                         className="checkboks"
-                                        id={`checkbox-${bruker.fnr}`}
+                                        id={`checkbox-${bruker.guid}`}
                                         type="checkbox"
                                         checked={!!bruker.markert}
-                                        onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
+                                        onClick={() => settMarkert(bruker.guid, !bruker.markert)}
                                     />
-                                    <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
+                                    <label className="skjema__label" htmlFor={`checkbox-${bruker.guid}`} />
                                 </div>
                             </td>
                             <th>
@@ -233,7 +233,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     settSomMarkertAlle: (markert) => dispatch(markerAlleBrukere(markert)),
-    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
+    settMarkert: (guid, markert) => dispatch(settBrukerSomMarkert(guid, markert)),
     toggleVisModal: () => dispatch(visModal()),
     toggleSkjulModal: () => dispatch(skjulModal())
 });
