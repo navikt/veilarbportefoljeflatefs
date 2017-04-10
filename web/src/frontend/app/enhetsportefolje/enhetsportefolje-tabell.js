@@ -59,7 +59,7 @@ class EnhetsportefoljeTabell extends Component {
                 <FormattedMessage id="portefolje.tabell.utlopsdato" />
             </th>)
             :
-            <th />;
+            null;
 
         const mmddyyHeader = (
             <th className="tabell-element-center">
