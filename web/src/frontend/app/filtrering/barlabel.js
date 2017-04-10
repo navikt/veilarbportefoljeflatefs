@@ -1,5 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import { Element } from 'nav-frontend-typografi';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
 function calcWidth(antall, max) {
