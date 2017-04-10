@@ -2,7 +2,7 @@ import React from 'react';
 import { utlopsdatoShape } from '../proptype-shapes';
 
 const KolonneUtlopsdato = ({ utlopsdato }) => {
-    const dato = new Date(utlopsdato.year, utlopsdato.monthValue, utlopsdato.dayOfMonth);
+    const dato = new Date(utlopsdato.year, utlopsdato.monthValue - 1, utlopsdato.dayOfMonth);
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
     return (
         <td className="tabell-element-center">
