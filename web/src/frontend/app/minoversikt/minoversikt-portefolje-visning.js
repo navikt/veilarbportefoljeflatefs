@@ -45,7 +45,6 @@ class VeilederPortefoljeVisning extends Component {
         );
 
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
-        this.settSorteringNavnOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this, 'etternavn');
     }
 
     settSorteringOgHentPortefolje(felt) {
@@ -68,7 +67,7 @@ class VeilederPortefoljeVisning extends Component {
         }
         settSortering(valgtRekkefolge, felt);
         hentPortefolje(
-            valgtEnhet.enhet.enhetId, veileder, sorteringsfelt, valgtRekkefolge, fraIndex, antall, filtervalg
+            valgtEnhet.enhet.enhetId, veileder, felt, valgtRekkefolge, fraIndex, antall, filtervalg
         );
     }
 
@@ -92,6 +91,7 @@ class VeilederPortefoljeVisning extends Component {
 
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterUtlopsdato = portefolje.sorteringsfelt === 'utlopsdato';
+        const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsnummer';
 
         const pagineringTekst = (
             antallTotalt > 0 ?
@@ -121,9 +121,19 @@ class VeilederPortefoljeVisning extends Component {
             :
             null;
 
-        const fodselsdatoHeader = (<th className="tabell-element-center">
-            <FormattedMessage id="portefolje.tabell.fodselsnummer" />
-        </th>);
+        const fodselsnummerHeader = (
+            <th className="tabell-element-center">
+                <button
+                    onClick={() => this.settSorteringOgHentPortefolje('fodselsnummer')}
+                    className={classNames('sortering-link', { valgt: sorterFodelsnummer })}
+                    aria-pressed={sorterFodelsnummer}
+                    aria-label={sorterFodelsnummer && sorteringsrekkefolge !== 'ikke_satt' ?
+                        sorteringsrekkefolge : 'inaktiv'}
+                >
+                    <FormattedMessage id="portefolje.tabell.fodselsnummer" />
+                </button>
+            </th>
+        );
 
         const ddmmyyHeader = (<th className="tabell-element-center">
             <button
@@ -136,6 +146,21 @@ class VeilederPortefoljeVisning extends Component {
                 <FormattedMessage id="portefolje.tabell.ddmmyy" />
             </button>
         </th>);
+
+        const navnHeader = (
+            <th>
+                <button
+                    onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
+                    role="button"
+                    className={classNames('sortering-link', { valgt: sorterEtternavn })}
+                    aria-pressed={sorterEtternavn}
+                    aria-label={sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt' ?
+                        sorteringsrekkefolge : 'inaktiv'}
+                >
+                    <FormattedMessage id="portefolje.tabell.navn" />
+                </button>
+            </th>
+        );
 
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
         const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
@@ -184,19 +209,8 @@ class VeilederPortefoljeVisning extends Component {
                                             <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
                                         </div>
                                     </th>
-                                    <th>
-                                        <button
-                                            onClick={this.settSorteringNavnOgHentPortefolje}
-                                            role="button"
-                                            className={classNames('sortering-link', { valgt: sorterEtternavn })}
-                                            aria-pressed={sorterEtternavn}
-                                            aria-label={sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt' ?
-                                            sorteringsrekkefolge : 'inaktiv'}
-                                        >
-                                            <FormattedMessage id="portefolje.tabell.navn" />
-                                        </button>
-                                    </th>
-                                    {fodselsdatoHeader}
+                                    {navnHeader}
+                                    {fodselsnummerHeader}
                                     {ytelseFilterErAktiv(filtervalg.ytelse) ? ddmmyyHeader : null}
                                     <th />
                                 </tr>
