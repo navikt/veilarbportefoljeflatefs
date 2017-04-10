@@ -11,6 +11,7 @@ const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
 const SETT_MARKERT_BRUKER_ALLE = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER_ALLE';
 const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
+const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
 const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
 
 function lagBrukerGuid(bruker) {
@@ -111,6 +112,15 @@ export default function reducer(state = initialState, action) {
                 }
             };
         }
+        case OPPDATER_ANTALL:
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    antallTotalt: parseInt(state.data.antallTotalt) - action.antallTilordninger,
+                    antallReturnert: parseInt(state.data.antallReturnert) - action.antallTilordninger,
+                }
+            };
         case NULLSTILL_FEILENDE_TILORDNINGER: {
             return { ...state, feilendeTilordninger: [] };
         }
@@ -173,15 +183,24 @@ export function markerAlleBrukere(markert) {
 }
 
 
-export function tildelVeileder(tilordninger, tilVeileder) {
+export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
     return (dispatch) => {
         Api.tilordneVeileder(tilordninger)
             .then(toJson)
-            .then((res) => dispatch({
-                type: TILDEL_VEILEDER,
-                tilVeileder,
-                feilendeTilordninger: res.feilendeTilordninger
-            }))
+            .then((res) => {
+                dispatch({
+                    type: TILDEL_VEILEDER,
+                    tilVeileder,
+                    feilendeTilordninger: res.feilendeTilordninger,
+
+                });
+                if(filtergruppe === 'veileder') {
+                    dispatch({
+                        type: OPPDATER_ANTALL,
+                        antallTilordninger: tilordninger.length - res.feilendeTilordninger.length
+                    })
+                }
+            })
             .catch(handterFeil);
     };
 }
