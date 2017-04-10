@@ -5,13 +5,16 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
     hentPortefoljeForEnhet,
     settSortering,
-    nullstillFeilendeTilordninger,
-    PORTEFOLJE_SIDESTORRELSE
+    nullstillFeilendeTilordninger
 } from '../ducks/portefolje';
+import { ytelseFilterErAktiv } from '../utils/utils';
 import Paginering from '../paginering/paginering';
 import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
 import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
-import { ASCENDING, DESCENDING } from '../konstanter';
+import { ytelsevalg } from '../filtrering/filter-konstanter';
+import { ASCENDING, DESCENDING, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
+import { diagramSkalVises } from './../minoversikt/diagram/util';
+import Diagram from './../minoversikt/diagram/diagram';
 
 class EnhetsportefoljeVisning extends Component {
     componentWillMount() {
@@ -23,7 +26,7 @@ class EnhetsportefoljeVisning extends Component {
             sorteringsrekkefolge,
             sorteringsfelt,
             fraIndex,
-            PORTEFOLJE_SIDESTORRELSE,
+            DEFAULT_PAGINERING_STORRELSE,
             filtervalg
         );
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
@@ -50,7 +53,7 @@ class EnhetsportefoljeVisning extends Component {
         }
 
         let fra = fraIndex;
-        let antallSkalHentes = PORTEFOLJE_SIDESTORRELSE;
+        let antallSkalHentes = DEFAULT_PAGINERING_STORRELSE;
 
         if (antallReturnert === antallTotalt) {
             fra = 0;
@@ -77,7 +80,8 @@ class EnhetsportefoljeVisning extends Component {
             sorteringsrekkefolge,
             sorteringsfelt,
             filtervalg,
-            clearFeilendeTilordninger
+            clearFeilendeTilordninger,
+            visningsmodus
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
@@ -102,46 +106,43 @@ class EnhetsportefoljeVisning extends Component {
             clearFeilendeTilordninger();
         }
 
+        const visButtongroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
+        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+
+        const paginering = (
+            <Paginering
+                antallTotalt={antallTotalt}
+                fraIndex={fraIndex}
+                hentListe={(fra, antall) =>
+                    hentPortefolje(
+                        valgtEnhet.enhet.enhetId,
+                        sorteringsrekkefolge,
+                        sorteringsfelt,
+                        fra,
+                        antall,
+                        filtervalg
+                    )}
+                tekst={pagineringTekst}
+                sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
+                antallReturnert={antallReturnert}
+                visButtongroup={visButtongroup}
+            />
+        );
+
         return (
             <Innholdslaster avhengigheter={[portefolje, veiledere]}>
-                <Paginering
-                    antallTotalt={antallTotalt}
-                    fraIndex={fraIndex}
-                    hentListe={(fra, antall) =>
-                        hentPortefolje(
-                            valgtEnhet.enhet.enhetId,
-                            sorteringsrekkefolge,
-                            sorteringsfelt,
-                            fra,
-                            antall,
-                            filtervalg
-                        )}
-                    tekst={pagineringTekst}
-                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
-                    antallReturnert={antallReturnert}
-                />
-                <EnhetsportefoljeTabell
-                    veiledere={veiledere.data.veilederListe}
-                    brukere={portefolje.data.brukere}
-                    settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
-                    portefolje={portefolje}
-                />
-                <Paginering
-                    antallTotalt={antallTotalt}
-                    fraIndex={fraIndex}
-                    hentListe={(fra, antall) =>
-                        hentPortefolje(
-                            valgtEnhet.enhet.enhetId,
-                            sorteringsrekkefolge,
-                            sorteringsfelt,
-                            fra,
-                            antall,
-                            filtervalg
-                        )}
-                    tekst={antallTotalt > 0 ? pagineringTekst : null}
-                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
-                    antallReturnert={antallReturnert}
-                />
+                {paginering}
+                {
+                    visDiagram ?
+                        <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
+                        <EnhetsportefoljeTabell
+                            veiledere={veiledere.data.veilederListe}
+                            brukere={portefolje.data.brukere}
+                            settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
+                            portefolje={portefolje}
+                        />
+                }
+                {antallTotalt >= 5 && paginering}
             </Innholdslaster>
         );
     }
@@ -165,7 +166,8 @@ EnhetsportefoljeVisning.propTypes = {
     sorteringsfelt: PT.string.isRequired,
     fraIndex: PT.number,
     clearFeilendeTilordninger: PT.func.isRequired,
-    filtervalg: PT.object
+    filtervalg: PT.object,
+    visningsmodus: PT.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -174,7 +176,8 @@ const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    filtervalg: state.filtrering
+    filtervalg: state.filtrering,
+    visningsmodus: state.veilederpaginering.visningsmodus
 });
 
 const mapDispatchToProps = (dispatch) => ({

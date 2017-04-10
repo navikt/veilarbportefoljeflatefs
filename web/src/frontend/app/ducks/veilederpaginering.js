@@ -1,4 +1,4 @@
-import { DESCENDING, IKKE_SATT } from '../konstanter';
+import { DESCENDING, IKKE_SATT, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import { TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 
 // Actions
@@ -44,7 +44,7 @@ const initialState = {
     liste: [],
     subListe: [],
     fraIndeksForSubListe: 0,
-    sideStorrelse: 20,
+    sideStorrelse: DEFAULT_PAGINERING_STORRELSE,
     currentSortering: {
         felt: IKKE_SATT,
         rekkefolge: IKKE_SATT
@@ -60,8 +60,7 @@ export default function reducer(state = initialState, action) {
         case SETT_SUBLISTE:
             return {
                 ...state,
-                subListe: state.liste.slice(action.fraIndeks,
-                    til(action.fraIndeks, state.sideStorrelse, state.liste.length)),
+                subListe: state.liste.slice(action.fraIndeks, action.fraIndeks + action.antall),
                 fraIndeksForSubListe: action.fraIndeks
             };
         case KLARER:
@@ -107,10 +106,11 @@ export function klarerPagineringsliste() {
     };
 }
 
-export function settSubListeForPaginering(fraIndeks) {
+export function settSubListeForPaginering(fraIndeks, antall) {
     return {
         type: SETT_SUBLISTE,
-        fraIndeks
+        fraIndeks,
+        antall
     };
 }
 

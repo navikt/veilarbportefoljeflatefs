@@ -5,12 +5,13 @@ import Paginering from './paginering';
 import { settSubListeForPaginering, settListeSomSkalPagineres,
     klarerPagineringsliste } from '../ducks/veilederpaginering';
 import { veilederShape } from '../proptype-shapes';
+import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
 
 class VeilederPaginering extends Component {
 
     componentWillMount() {
         this.props.opprettPaginering(this.props.liste);
-        this.props.settSubListe(this.props.fraIndeksForSubListe);
+        this.props.settSubListe(this.props.fraIndeksForSubListe, DEFAULT_PAGINERING_STORRELSE);
     }
 
     componentWillUnmount() {
@@ -24,9 +25,8 @@ class VeilederPaginering extends Component {
             sideStorrelse,
             settSubListe,
             pagineringTekstId,
-            subListe,
-            antallReturnert } = this.props;
-
+            subListe
+        } = this.props;
         const pagineringTekstValues = liste.length > 0 ? {
             fraIndex: `${fraIndeksForSubListe + 1}`,
             tilIndex: fraIndeksForSubListe + subListe.length,
@@ -49,10 +49,10 @@ class VeilederPaginering extends Component {
                 <Paginering
                     antallTotalt={liste.length}
                     fraIndex={fraIndeksForSubListe}
-                    hentListe={(fra) => { settSubListe(fra); }}
+                    hentListe={(fra, til) => { settSubListe(fra, til); }}
                     tekst={pagineringTekst}
                     sideStorrelse={sideStorrelse}
-                    antallReturnert={antallReturnert}
+                    antallReturnert={subListe.length}
                 />
             </div>
         );
@@ -67,21 +67,19 @@ VeilederPaginering.propTypes = {
     opprettPaginering: PT.func.isRequired,
     klarerPaginering: PT.func.isRequired,
     settSubListe: PT.func.isRequired,
-    subListe: PT.arrayOf(veilederShape).isRequired,
-    antallReturnert: PT.number.isRequired
+    subListe: PT.arrayOf(veilederShape).isRequired
 };
 
 const mapStateToProps = (state) => ({
     fraIndeksForSubListe: state.veilederpaginering.fraIndeksForSubListe,
     sideStorrelse: state.veilederpaginering.sideStorrelse,
-    subListe: state.veilederpaginering.subListe,
-    antallReturnert: state.portefolje.data.antallReturnert
+    subListe: state.veilederpaginering.subListe
 });
 
 const mapDispatchToProps = (dispatch) => ({
     opprettPaginering: (liste) => dispatch(settListeSomSkalPagineres(liste)),
     klarerPaginering: () => dispatch(klarerPagineringsliste()),
-    settSubListe: (fra) => dispatch(settSubListeForPaginering(fra))
+    settSubListe: (fra, til) => dispatch(settSubListeForPaginering(fra, til))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPaginering);

@@ -1,9 +1,15 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
+import { guid } from 'nav-frontend-js-utils';
 import { settVisningsmodus } from '../ducks/veilederpaginering';
 import { DIAGRAMVISNING, TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 
 class ButtonRadiogroup extends Component {
+    constructor(props) {
+        super(props);
+
+        this.guid = guid();
+    }
 
     componentWillUnmount() {
         this.props.endreVisningsmodus(TABELLVISNING);
@@ -11,39 +17,50 @@ class ButtonRadiogroup extends Component {
 
     render() {
         const { visningsmodus, endreVisningsmodus } = this.props;
+
         return (
             <div className="visningsgruppe">
-                <input
-                    id="diagramvisning"
-                    name="visningsmodus"
-                    type="radio"
-                    onChange={() => endreVisningsmodus(DIAGRAMVISNING)}
-                    value="diagramvisning"
-                    checked={visningsmodus === DIAGRAMVISNING}
-                    aria-selected={visningsmodus === DIAGRAMVISNING}
-                />
-                <label htmlFor="diagramvisning" className="typo-undertekst">Vis som diagram</label>
-                <input
-                    id="tabellvisning"
-                    name="visningsmodus"
-                    type="radio"
-                    onChange={() => endreVisningsmodus(TABELLVISNING)}
-                    value="tabellvisning"
-                    checked={visningsmodus === TABELLVISNING}
-                    aria-selected={visningsmodus === TABELLVISNING}
-                />
-                <label htmlFor="tabellvisning" className="typo-undertekst">Vis som tabell</label>
+                <div className="visningsgruppe__knapp">
+                    <input
+                        id={`diagramvisning-${this.guid}`}
+                        name={`visningsmodus-${this.guid}`}
+                        type="radio"
+                        onChange={() => endreVisningsmodus(DIAGRAMVISNING)}
+                        value="diagramvisning"
+                        checked={visningsmodus === DIAGRAMVISNING}
+                        aria-selected={visningsmodus === DIAGRAMVISNING}
+                    />
+                    <label htmlFor={`diagramvisning-${this.guid}`} className="typo-undertekst">Vis som diagram</label>
+                </div>
+                <div className="visningsgruppe__knapp">
+                    <input
+                        id={`tabellvisning-${this.guid}`}
+                        name={`visningsmodus-${this.guid}`}
+                        type="radio"
+                        onChange={() => endreVisningsmodus(TABELLVISNING)}
+                        value="tabellvisning"
+                        checked={visningsmodus === TABELLVISNING}
+                        aria-selected={visningsmodus === TABELLVISNING}
+                    />
+                    <label htmlFor={`tabellvisning-${this.guid}`} className="typo-undertekst">Vis som tabell</label>
+                </div>
             </div>
         );
     }
 }
+
+ButtonRadiogroup.defaultProps = {
+    visningsmodus: TABELLVISNING
+};
 
 const mapStateToProps = (state) => ({
     visningsmodus: state.veilederpaginering.visningsmodus
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    endreVisningsmodus: (modus) => { dispatch(settVisningsmodus(modus)); }
+    endreVisningsmodus: (modus) => {
+        dispatch(settVisningsmodus(modus));
+    }
 });
 
 ButtonRadiogroup.propTypes = {

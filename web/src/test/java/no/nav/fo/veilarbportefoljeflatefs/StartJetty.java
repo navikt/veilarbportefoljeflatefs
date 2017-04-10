@@ -1,5 +1,6 @@
 package no.nav.fo.veilarbportefoljeflatefs;
 
+import no.nav.brukerdialog.security.context.InternbrukerSubjectHandler;
 import no.nav.brukerdialog.security.context.JettySubjectHandler;
 import no.nav.sbl.dialogarena.common.jetty.Jetty;
 import no.nav.sbl.dialogarena.test.SystemProperties;
@@ -17,10 +18,12 @@ public class StartJetty {
         SystemProperties.setFrom("jetty-veilarbportefoljeflatefs.properties");
 
         System.setProperty("develop-local", "true");
-        setProperty("no.nav.modig.core.context.subjectHandlerImplementationClass", JettySubjectHandler.class.getName());
         System.setProperty("org.apache.geronimo.jaspic.configurationFile", "src/test/resources/jaspiconf.xml");
         Security.setProperty(AuthConfigFactory.DEFAULT_FACTORY_SECURITY_PROPERTY, AuthConfigFactoryImpl.class.getCanonicalName());
 
+        InternbrukerSubjectHandler.setVeilederIdent("Z990610");
+        InternbrukerSubjectHandler.setServicebruker("srvveilarbportefoljeflatefs");
+        setProperty("no.nav.modig.core.context.subjectHandlerImplementationClass", InternbrukerSubjectHandler.class.getName());
 
         //Må ha https for csrf-token
         final Jetty jetty = Jetty.usingWar()

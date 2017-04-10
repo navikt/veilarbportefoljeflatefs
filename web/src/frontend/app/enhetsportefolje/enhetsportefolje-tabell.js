@@ -128,12 +128,7 @@ class EnhetsportefoljeTabell extends Component {
                             </th>
                             {ytelseFilterErAktiv(filtervalg.ytelse) ? mmddyyHeader : null}
                             <th>
-                                <button
-                                    onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
-                                    className="sortering-link"
-                                >
-                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
-                                </button>
+                                <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                                 <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
                             </th>
                             <th>
@@ -169,7 +164,7 @@ class EnhetsportefoljeTabell extends Component {
                             {
                                 ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
                                     <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
-                                    : null
+                                    : <td />
                             }
                             {
                             bruker.veilederId ? <td className="veileder-td">{veiledere

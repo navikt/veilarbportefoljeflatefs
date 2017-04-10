@@ -1,3 +1,5 @@
+@import "./node_modules/nav-frontend-paneler-style/src/mixins";
+
 .paginering {
     margin: 1rem 0;
     text-align: center;
@@ -9,91 +11,78 @@
         display: block;
         margin-top: -4px;
     }
+}
+.paginering__knapp {
+    border: none;
+    background: none;
 
-    .bytt-side {
-        float: right;
+    .panel-mixin();
+    .panel-focushover-mixin();
 
-        button {
-            background-color: @white;
-            margin: 1px;
-            display: inline-block;
-            padding: 4px 16px;
-            border: none;
-            color: #3e3832;
-            position: relative;
-        }
-        button:first-of-type {
-            border-bottom-left-radius: 2px;
-            border-top-left-radius: 2px;
-        }
-        button:last-of-type {
-            border-bottom-right-radius: 2px;
-            border-top-right-radius: 2px;
-        }
-        button {
-            cursor: pointer;
+    display: inline-block;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-radius: 0;
 
-            .prev, .next {
-                display: inline-block;
-            }
-
-            &:focus {
-                outline: 0;
-                box-shadow: 0 0 0 2px @orangeFocus;
-            }
-
-            i {
-                top: 11px;
-            }
-            i.chevron--hoyre, i.chevron--venstre {
-                width: 18px;
-            }
-        }
-        button.not-active {
-            pointer-events: none;
-            cursor: default;
-            color: lightgray;
-        }
-        button.bold {
-            font-weight: bold;
-        }
+    &:hover {
+        text-decoration: underline;
     }
+
+    &:first-child {
+        border-top-left-radius: @border-radius-base;
+        border-bottom-left-radius: @border-radius-base;
+    }
+
+    &:last-child {
+        border-top-right-radius: @border-radius-base;
+        border-bottom-right-radius: @border-radius-base;
+    }
+
+    &:not(.last-child) {
+        margin-right: 0.25rem;
+    }
+
+    &.disabled {
+        pointer-events: none;
+        cursor: default;
+        color: lightgray;
+    }
+}
+.paginering__knapper {
+    float: right;
 }
 
 .visningsgruppe {
-    display: inline-block;
+    display: inline-flex;
     text-align: center;
+
     input {
         height: 0;
         width: 0;
         opacity: 0;
-        &:nth-of-type(1) {
-            + label {
-                border-bottom-left-radius: 2px;
-                border-top-left-radius: 2px;
-            }
-            &:not(:checked) + label {
-                border-right: none;
-            }
+    }
+    label {
+        background-color: @white;
+        display: inline-block;
+        padding: 0.3rem 0.5rem;
+        border: 1px solid @navGra20;
+    }
+
+    &__knapp {
+        &:first-child label {
+            border-bottom-left-radius: 2px;
+            border-top-left-radius: 2px;
         }
-        &:nth-of-type(2) {
-            + label {
-                border-bottom-right-radius: 2px;
-                border-top-right-radius: 2px;
-            }
-            &:not(:checked) + label {
-                border-left: none;
-            }
+
+        &:last-child label {
+            border-bottom-right-radius: 2px;
+            border-top-right-radius: 2px;
         }
-        &:checked + label {
+
+        input:checked + label {
             background-color: @navBla;
             color: @white;
             border-color: @navBla;
         }
-    }
-    label {
-        display: inline-block;
-        padding: 0.3rem 0.5rem;
-        border: 1px solid @navMorkGra;
     }
 }

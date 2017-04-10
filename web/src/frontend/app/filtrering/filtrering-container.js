@@ -15,20 +15,23 @@ function FiltreringContainer({ veiledere, valgtVeileder, velgVeileder,
         <div className="blokk-m">
             <Ekspanderbartpanel
                 apen
-                className="custom-ekspanderbartpanel" tittel="Status"
+                className="blokk-xxxs"
+                tittel="Status"
                 tittelProps={{ type: 'systemtittel', tag: 'span' }}
             >
                 <FiltreringStatus filtergruppe={filtergruppe} veileder={veileder} filtervalg={filtervalg} />
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
                 apen
-                className="custom-ekspanderbartpanel" tittel="Filter"
+                className="blokk-xxxs"
+                tittel="Filter"
                 tittelProps={{ type: 'systemtittel', tag: 'span' }}
             >
                 <FiltreringFilter actions={actions} veileder={veileder} filtervalg={filtervalg} />
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
-                className="custom-ekspanderbartpanel" tittel="Tildel veileder"
+                className="blokk-xxxs"
+                tittel="Tildel veileder"
                 tittelProps={{ type: 'systemtittel', tag: 'span' }}
             >
                 <TildelVeilederVelger

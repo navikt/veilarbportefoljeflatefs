@@ -6,9 +6,9 @@ import { veiledereSok } from './veiledersok-utils';
 
 function VeilederSokInput({ veiledere, oppdaterSokeresultat }) {
     return (
-        <div >
+        <div className="veiledersok__input__wrapper">
             <input
-                className="veiledersok__input"
+                className="veiledersok__input skjemaelement__input input--fullbredde"
                 type="text"
                 onInput={(input) =>
                     oppdaterSokeresultat(

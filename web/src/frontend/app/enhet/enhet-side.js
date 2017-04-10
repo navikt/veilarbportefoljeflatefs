@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import DocumentTitle from 'react-document-title';
 import Lenker from './../lenker/lenker';
-import { filtervalgShape } from '../proptype-shapes';
+import { filtervalgShape, veilederShape } from '../proptype-shapes';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { leggEnhetIUrl } from '../utils/utils';
+
 
 class EnhetSide extends Component {
     componentWillMount() {
@@ -21,17 +22,26 @@ class EnhetSide extends Component {
             return null;
         }
         const { formatMessage } = this.props.intl;
+        const { filtervalg, veilederliste } = this.props;
+
+        const leggTilNavn = (identer, veiledere) => identer.map((ident) => {
+            const veileder = veiledere.find((v) => v.ident === ident);
+            return { label: `${veileder.etternavn}, ${veileder.fornavn} (${ident})`, key: ident };
+        });
 
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })}>
                 <div className="enhet-side blokk-xl">
                     <Lenker />
                     <div id="oversikt-sideinnhold" role="tabpanel">
-                        <p className="typo-infotekst enhetsingress blokk-m">
+                        <p className="typo-infotekst begrensetbredde blokk-m">
                             <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                         </p>
-                        <FiltreringContainer filtervalg={this.props.filtervalg} />
-                        <FiltreringLabelContainer filtervalg={this.props.filtervalg} filtergruppe="enhet" />
+                        <FiltreringContainer filtervalg={filtervalg} />
+                        <FiltreringLabelContainer
+                            filtervalg={{ ...filtervalg, veiledere: leggTilNavn(filtervalg.veiledere, veilederliste) }}
+                            filtergruppe="enhet"
+                        />
                         <EnhetsportefoljeVisning />
                     </div>
                 </div>
@@ -43,12 +53,14 @@ class EnhetSide extends Component {
 EnhetSide.propTypes = {
     valgtEnhet: PT.object.isRequired,
     filtervalg: filtervalgShape.isRequired,
+    veilederliste: PT.arrayOf(veilederShape).isRequired,
     intl: intlShape.isRequired
 };
 
 const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
-    filtervalg: state.filtrering
+    filtervalg: state.filtrering,
+    veilederliste: state.veiledere.data.veilederListe
 });
 
 export default injectIntl(connect(mapStateToProps)(EnhetSide));
