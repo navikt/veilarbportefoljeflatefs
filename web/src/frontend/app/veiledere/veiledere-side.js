@@ -136,6 +136,7 @@ class VeiledereSide extends Component {
                                                 avgjorNySortering('portefoljestorrelse'), veiledereSomSkalVises.length)
                                         }
                                     />
+                                    {veiledereTilTabell.length >= 5 && veilederpaginering}
                                 </div>
                             )}
                         </Innholdslaster>
