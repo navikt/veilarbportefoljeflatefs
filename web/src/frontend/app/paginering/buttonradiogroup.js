@@ -2,7 +2,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { settVisningsmodus } from '../ducks/veilederpaginering';
 import { DIAGRAMVISNING, TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
-import { guid } from './../utils/utils';
+import { guid } from 'nav-frontend-js-utils';
 
 class ButtonRadiogroup extends Component {
     constructor(props) {

@@ -9,9 +9,9 @@ import {
     settSortering,
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger,
-    markerAlleBrukere,
-    PORTEFOLJE_SIDESTORRELSE
+    markerAlleBrukere
 } from '../ducks/portefolje';
+import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
@@ -151,7 +151,7 @@ class VeilederPortefoljeVisning extends Component {
                         hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
                             sorteringsfelt, sorteringsrekkefolge, fra, antall, filtervalg)}
                     tekst={pagineringTekst}
-                    sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
+                    sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
                     visButtongroup={visButtonGroup}
                 />
                 {

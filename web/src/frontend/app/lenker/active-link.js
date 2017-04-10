@@ -1,7 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import { Link, withRouter } from 'react-router';
 import classnames from 'classnames';
-import { omit } from './../utils/utils';
+import { omit } from 'nav-frontend-js-utils';
 
 function ActiveLink({ router, className, activeClassName, to, ...props }) {
     const isActive = router.isActive(to);

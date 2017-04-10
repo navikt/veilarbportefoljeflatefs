@@ -1,5 +1,6 @@
 import { DESCENDING, IKKE_SATT } from '../konstanter';
 import { TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
+import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
 
 // Actions
 export const SETT_LISTE = 'veilederpaginering/settliste/OK';
@@ -44,7 +45,7 @@ const initialState = {
     liste: [],
     subListe: [],
     fraIndeksForSubListe: 0,
-    sideStorrelse: 20,
+    sideStorrelse: DEFAULT_PAGINERING_STORRELSE,
     currentSortering: {
         felt: IKKE_SATT,
         rekkefolge: IKKE_SATT
