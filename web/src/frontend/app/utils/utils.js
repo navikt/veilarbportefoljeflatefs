@@ -52,24 +52,3 @@ export function sendBrukerTilUrl(url) {
 export function ytelseFilterErAktiv(ytelse) {
     return !!ytelse;
 }
-
-function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-        .toString()
-        .substring(1);
-}
-
-export function guid() {
-    return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
-}
-
-export function addPropToObject(obj, [key, value]) {
-    obj[key] = value; // eslint-disable-line no-param-reassign
-    return obj;
-}
-
-export function omit(obj, ...props) {
-    return Object.entries(obj)
-        .filter(([key]) => !props.includes(key))
-        .reduce(addPropToObject, {});
-}

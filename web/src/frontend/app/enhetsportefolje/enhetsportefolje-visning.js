@@ -6,9 +6,9 @@ import {
     hentPortefoljeForEnhet,
     settSortering,
     settBrukerSomMarkert,
-    nullstillFeilendeTilordninger,
-    PORTEFOLJE_SIDESTORRELSE
+    nullstillFeilendeTilordninger
 } from '../ducks/portefolje';
+import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Paginering from '../paginering/paginering';
 import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
@@ -28,7 +28,7 @@ class EnhetsportefoljeVisning extends Component {
             sorteringsrekkefolge,
             sorteringsfelt,
             fraIndex,
-            PORTEFOLJE_SIDESTORRELSE,
+            DEFAULT_PAGINERING_STORRELSE,
             filtervalg
         );
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
@@ -55,7 +55,7 @@ class EnhetsportefoljeVisning extends Component {
         }
 
         let fra = fraIndex;
-        let antallSkalHentes = PORTEFOLJE_SIDESTORRELSE;
+        let antallSkalHentes = DEFAULT_PAGINERING_STORRELSE;
 
         if (antallReturnert === antallTotalt) {
             fra = 0;
@@ -126,7 +126,7 @@ class EnhetsportefoljeVisning extends Component {
                         filtervalg
                     )}
                 tekst={pagineringTekst}
-                sideStorrelse={PORTEFOLJE_SIDESTORRELSE}
+                sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
                 antallReturnert={antallReturnert}
                 visButtongroup={visButtongroup}
             />
