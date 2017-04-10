@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
-import { veilederShape, brukerShape, portefoljeShape } from '../proptype-shapes';
+import { veilederShape, brukerShape, portefoljeShape, filtervalgShape } from '../proptype-shapes';
 import { markerAlleBrukere, settBrukerSomMarkert } from './../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { visModal, skjulModal } from '../ducks/modal';
@@ -214,7 +214,7 @@ EnhetsportefoljeTabell.propTypes = {
     modalSkalVises: PT.bool.isRequired,
     toggleSkjulModal: PT.func.isRequired,
     toggleVisModal: PT.func.isRequired,
-    filtervalg: PT.object,
+    filtervalg: filtervalgShape.isRequired,
     valgtEnhet: PT.string.isRequired
 };
 
