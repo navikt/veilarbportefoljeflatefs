@@ -54,7 +54,7 @@ function updateVeilederForBruker(brukere, veilederId, feilende) {
 
 function updateBrukerInArray(brukere, action) {
     return brukere.map((bruker) => {
-        if (bruker.fnr === action.fnr) {
+        if (bruker.guid === action.guid) {
             return {
                 ...bruker,
                 markert: action.markert
@@ -159,10 +159,10 @@ export function settSortering(rekkefolge, felt) {
 }
 
 
-export function settBrukerSomMarkert(fnr, markert) {
+export function settBrukerSomMarkert(guid, markert) {
     return (dispatch) => dispatch({
         type: SETT_MARKERT_BRUKER,
-        fnr,
+        guid,
         markert
     });
 }
