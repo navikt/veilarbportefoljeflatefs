@@ -117,8 +117,8 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 data: {
                     ...state.data,
-                    antallTotalt: parseInt(state.data.antallTotalt) - action.antallTilordninger,
-                    antallReturnert: parseInt(state.data.antallReturnert) - action.antallTilordninger,
+                    antallTotalt: parseInt(state.data.antallTotalt, 10) - action.antallTilordninger,
+                    antallReturnert: parseInt(state.data.antallReturnert, 10) - action.antallTilordninger,
                 }
             };
         case NULLSTILL_FEILENDE_TILORDNINGER: {
