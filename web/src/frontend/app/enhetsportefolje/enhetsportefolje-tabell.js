@@ -145,7 +145,7 @@ class EnhetsportefoljeTabell extends Component {
                     <tbody>
                         {brukere.map((bruker) => <tr key={bruker.guid}>
                             <td>
-                                <div className="skjema__input">
+                                <div className="skjema__input" hidden={bruker.fnr.length === 0}>
                                     <input
                                         className="checkboks"
                                         id={`checkbox-${bruker.guid}`}
