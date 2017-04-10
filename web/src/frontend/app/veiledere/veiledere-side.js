@@ -41,7 +41,7 @@ class VeiledereSide extends Component {
         settVeiledereSomSkalVises(veilederfiltervalg
             .map((ident) => veiledere.data.veilederListe.find((veileder) => veileder.ident === ident)));
     }
-    f
+
     render() {
         const {
             veiledere, portefoljestorrelser, veiledereSomSkalVises, currentSortering,
