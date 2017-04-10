@@ -51,7 +51,7 @@ class EnhetsportefoljeTabell extends Component {
         } = this.props;
 
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
-        const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsdato';
+        const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsnummer';
         const sorterUtlopsdato = portefolje.sorteringsfelt === 'utlopsdato';
 
         const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
@@ -85,7 +85,7 @@ class EnhetsportefoljeTabell extends Component {
                             <th />
                             <th colSpan="2">Bruker</th>
                             {utlopsdatoHeader}
-                            <th colSpan="2">Veileder</th>
+                            <th colSpan="4">Veileder</th>
                         </tr>
                     </thead>
                     <thead>
@@ -117,7 +117,7 @@ class EnhetsportefoljeTabell extends Component {
                             </th>
                             <th className="tabell-element-center">
                                 <button
-                                    onClick={() => this.settSorteringOgHentPortefolje('fodselsdato')}
+                                    onClick={() => this.settSorteringOgHentPortefolje('fodselsnummer')}
                                     className={classNames('sortering-link', { valgt: sorterFodelsnummer })}
                                     aria-pressed={sorterFodelsnummer}
                                     aria-label={sorterFodelsnummer && sorteringsrekkefolge !== 'ikke_satt' ?
@@ -164,24 +164,24 @@ class EnhetsportefoljeTabell extends Component {
                             {
                                 ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
                                     <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
-                                    : <td />
+                                    : null
                             }
                             {
-                            bruker.veilederId ? <td className="veileder-td">{veiledere
-                                    .filter((veileder) => veileder.ident === bruker.veilederId)
-                                    .map((veileder) => (veileder.navn || veileder.ident))}</td>
-                                :
-                            <td>
-                                <Tabelletiketter type="nybruker">Ny bruker</Tabelletiketter>
-                            </td>
-                        }
+                                bruker.veilederId ? <td className="veileder-td">{veiledere
+                                        .filter((veileder) => veileder.ident === bruker.veilederId)
+                                        .map((veileder) => (settSammenNavn(veileder)))}</td>
+                                    :
+                                <td>
+                                    <Tabelletiketter type="nybruker">Ny bruker</Tabelletiketter>
+                                </td>
+                            }
                             <td >
                                 {bruker.veilederId || ''}
                             </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ?
                                     <Tabelletiketter type="sikkerhetstiltak">Sikkerhetstiltak</Tabelletiketter> : null}
-                                {bruker.diskresjonskode != null ?
+                                {bruker.diskresjonskode !== null ?
                                     <Tabelletiketter type="diskresjonskode">
                                         {`Kode ${bruker.diskresjonskode}`}
                                     </Tabelletiketter> : null}
