@@ -1,6 +1,5 @@
-import { DESCENDING, IKKE_SATT } from '../konstanter';
+import { DESCENDING, IKKE_SATT, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import { TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
-import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
 
 // Actions
 export const SETT_LISTE = 'veilederpaginering/settliste/OK';
