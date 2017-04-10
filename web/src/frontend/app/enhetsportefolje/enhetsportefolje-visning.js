@@ -8,13 +8,12 @@ import {
     settBrukerSomMarkert,
     nullstillFeilendeTilordninger
 } from '../ducks/portefolje';
-import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Paginering from '../paginering/paginering';
 import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
 import { enhetShape, veilederShape, portefoljeShape } from '../proptype-shapes';
 import { ytelsevalg } from '../filtrering/filter-konstanter';
-import { ASCENDING, DESCENDING } from '../konstanter';
+import { ASCENDING, DESCENDING, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import { diagramSkalVises } from './../minoversikt/diagram/util';
 import Diagram from './../minoversikt/diagram/diagram';
 
