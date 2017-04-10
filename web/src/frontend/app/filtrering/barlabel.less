@@ -8,6 +8,7 @@
         flex-grow: 0;
         display: flex;
         justify-content: flex-start;
+        align-items: center;
     }
 
     &__antall {
@@ -19,9 +20,8 @@
     &__bar {
         position: relative;
         flex: 0;
-        display: flex;
-        align-items: center;
         flex-basis: 55%;
+        height: 1.125rem;
     }
 
     &__bartrack {
@@ -39,6 +39,8 @@
         height: 1.125rem;
         border-radius: 1rem;
         transition: width cubic-bezier(0.4, 0, 0.2, 1) 1337ms;
+        left: 0;
+        top: 0;
     }
     &.inaktiveBrukere .barlabel__barface {
         background-color: @navLillaLighten60;
