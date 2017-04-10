@@ -37,3 +37,22 @@
 .veileder__hide {
     display:none;
 }
+
+.veileder-tabell {
+    tbody, thead:not(.extra-head) {
+        th,td {
+            &:first-child {
+                width: 15rem;
+                white-space: pre-wrap;
+            }
+            &:nth-child(2) {
+                width: 5rem;
+                white-space: pre-wrap;
+            }
+            &:nth-child(3) {
+                width: 8rem;
+                white-space: pre-wrap;
+            }
+        }
+    }
+}
