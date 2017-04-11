@@ -47,6 +47,16 @@
         cursor: default;
         color: lightgray;
     }
+
+    &:focus {
+        box-shadow: none;
+    }
+
+    &.paginering__knapp--pressed {
+        background-color: @navBla;
+        color: @white;
+        border-color: @navBla;
+    }
 }
 .paginering__knapper {
     float: right;
