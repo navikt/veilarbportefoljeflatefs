@@ -45,6 +45,10 @@ class Dropdown extends Component {
     }
 
     toggleDropdown() {
+        const { onLukk = () => {} } = this.props;
+        if (this.state.apen) {
+            onLukk();
+        }
         this.setState({ apen: !this.state.apen });
     }
 
