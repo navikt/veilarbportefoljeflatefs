@@ -118,7 +118,7 @@ export default function reducer(state = initialState, action) {
                 data: {
                     ...state.data,
                     antallTotalt: parseInt(state.data.antallTotalt, 10) - action.antallTilordninger,
-                    antallReturnert: parseInt(state.data.antallReturnert, 10) - action.antallTilordninger,
+                    antallReturnert: parseInt(state.data.antallReturnert, 10) - action.antallTilordninger
                 }
             };
         case NULLSTILL_FEILENDE_TILORDNINGER: {
@@ -191,14 +191,14 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
                 dispatch({
                     type: TILDEL_VEILEDER,
                     tilVeileder,
-                    feilendeTilordninger: res.feilendeTilordninger,
+                    feilendeTilordninger: res.feilendeTilordninger
 
                 });
-                if(filtergruppe === 'veileder') {
+                if (filtergruppe === 'veileder') {
                     dispatch({
                         type: OPPDATER_ANTALL,
                         antallTilordninger: tilordninger.length - res.feilendeTilordninger.length
-                    })
+                    });
                 }
             })
             .catch(handterFeil);
