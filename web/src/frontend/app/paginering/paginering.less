@@ -1,17 +1,14 @@
 @import "./node_modules/nav-frontend-paneler-style/src/mixins";
 
 .paginering {
-    margin: 1rem 0;
-    text-align: center;
-    min-height: 1.2rem;
-
-    .info {
-        float: left;
-        padding: 10px 5px 0;
-        display: block;
-        margin-top: -4px;
-    }
+    display: flex;
+    align-items: center;
 }
+
+.paginering__knapper {
+    float: right;
+}
+
 .paginering__knapp {
     border: none;
     background: none;
@@ -38,7 +35,7 @@
         border-bottom-right-radius: @border-radius-base;
     }
 
-    &:not(.last-child) {
+    &:not(:last-child) {
         margin-right: 0.25rem;
     }
 
@@ -48,13 +45,9 @@
         color: lightgray;
     }
 }
-.paginering__knapper {
-    float: right;
-}
 
 .visningsgruppe {
     display: inline-flex;
-    text-align: center;
 
     input {
         height: 0;
