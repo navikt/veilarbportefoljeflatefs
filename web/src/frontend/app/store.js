@@ -13,9 +13,12 @@ function getDebugSessionKey() {
 }
 
 function getDevStoreCompose(history) {
-    return compose(
+    const useExtension = window.__REDUX_DEVTOOLS_EXTENSION__ !== undefined;
+    const composer = useExtension ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
+
+    return composer(
         applyMiddleware(thunkMiddleware, routerMiddleware(history)),
-        DevTools.instrument(),
+        useExtension ? c => c : DevTools.instrument(),
         persistState(getDebugSessionKey())
     );
 }
