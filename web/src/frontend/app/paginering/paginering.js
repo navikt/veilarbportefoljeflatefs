@@ -149,10 +149,14 @@ Paginering.propTypes = {
     antallTotalt: PT.number.isRequired,
     fraIndex: PT.number.isRequired,
     hentListe: PT.func.isRequired,
-    tekst: PT.node,
+    tekst: PT.node.isRequired,
     sideStorrelse: PT.number.isRequired,
     visButtongroup: PT.bool,
     antallReturnert: PT.number.isRequired
+};
+
+Paginering.defaultProps = {
+    visButtongroup: false
 };
 
 export default Paginering;
