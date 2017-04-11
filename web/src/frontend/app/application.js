@@ -4,7 +4,6 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import queryString from 'query-string';
 import { hentLedetekster } from './ducks/ledetekster';
-import DevTools from './devtools';
 import { hentEnheterForVeileder, velgEnhetForVeileder } from './ducks/enheter';
 import Innholdslaster from './innholdslaster/innholdslaster';
 import rendreDekorator, { settEnhetIDekorator } from './eventhandtering';
@@ -79,9 +78,6 @@ class Application extends Component {
                             {children}
                         </div>
                     </Innholdslaster>
-                    <div aria-hidden="true">
-                        <DevTools />
-                    </div>
                 </div>
             </IntlProvider>
         );
