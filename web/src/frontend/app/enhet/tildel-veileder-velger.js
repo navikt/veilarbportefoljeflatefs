@@ -44,7 +44,6 @@ function TildelVeilederVelger({ veiledere, velgVeileder, brukere,
     return (
         <div className="tildelveileder_wrapper row">
             <div className="row">
-                {tildelveilederComponent}
                 <div className="col-sm-3">
                     <Dropdown name="Tildel veileder" className="dropdown--130bredde" onLukk={resetSok}>
                         <VeiledereSokeliste
@@ -58,6 +57,7 @@ function TildelVeilederVelger({ veiledere, velgVeileder, brukere,
                         />
                     </Dropdown>
                 </div>
+                {tildelveilederComponent}
             </div>
         </div>
     );
