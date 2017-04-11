@@ -39,7 +39,7 @@ function FiltreringLabelContainer({ filtervalg, actions: { slettAlle, slettEnkel
     const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} />;
 
     return (
-        <section className="filtrering-label-container">
+        <section className="filtrering-label-container blokk-s">
             {filterElementer}
             {filterElementer.length >= 3 ? fjernAlle : null }
         </section>

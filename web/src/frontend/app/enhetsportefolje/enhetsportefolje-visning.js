@@ -76,16 +76,18 @@ class EnhetsportefoljeVisning extends Component {
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
+        const visButtongroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
+        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
 
         const pagineringTekst = (
             antallTotalt > 0 ?
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
-                    values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
+                    values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt, visDiagram }}
                 />) :
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
-                    values={{ fraIndex: '0', tilIndex: '0', antallTotalt: '0' }}
+                    values={{ fraIndex: '0', tilIndex: '0', antallTotalt: '0', visDiagram }}
                 />)
         );
 
@@ -97,8 +99,6 @@ class EnhetsportefoljeVisning extends Component {
             clearFeilendeTilordninger();
         }
 
-        const visButtongroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
-        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
 
         const paginering = (
             <Paginering
@@ -117,6 +117,7 @@ class EnhetsportefoljeVisning extends Component {
                 sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
                 antallReturnert={antallReturnert}
                 visButtongroup={visButtongroup}
+                visDiagram={visDiagram}
             />
         );
 
