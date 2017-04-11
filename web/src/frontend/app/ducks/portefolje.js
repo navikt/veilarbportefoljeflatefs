@@ -10,6 +10,8 @@ const SETT_SORTERING = 'veilarbportefolje/portefolje/SETT_SORTERING';
 const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
 const SETT_MARKERT_BRUKER_ALLE = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER_ALLE';
 const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
+const TILDEL_VEILEDER_RELOAD = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_RELOAD';
+const TILDEL_VEILEDER_OK = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_OK';
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
 const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
@@ -33,7 +35,8 @@ const initialState = {
     sorteringsfelt: IKKE_SATT,
     veileder: {
         ident: IKKE_SATT
-    }
+    },
+    tilordningerstatus: STATUS.OK
 };
 
 function updateVeilederForBruker(brukere, veilederId, feilende) {
@@ -102,6 +105,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 feilendeTilordninger: action.feilendeTilordninger,
+                tilordningerstatus: STATUS.OK,
                 data: {
                     ...state.data,
                     brukere: updateVeilederForBruker(
@@ -121,6 +125,12 @@ export default function reducer(state = initialState, action) {
                     antallReturnert: parseInt(state.data.antallReturnert, 10) - action.antallTilordninger
                 }
             };
+        case TILDEL_VEILEDER_RELOAD: {
+            return { ...state, tilordningerstatus: STATUS.RELOADING };
+        }
+        case TILDEL_VEILEDER_OK: {
+            return { ...state, tilordningerstatus: STATUS.OK };
+        }
         case NULLSTILL_FEILENDE_TILORDNINGER: {
             return { ...state, feilendeTilordninger: [] };
         }
@@ -185,6 +195,7 @@ export function markerAlleBrukere(markert) {
 
 export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
     return (dispatch) => {
+        dispatch({ type: TILDEL_VEILEDER_RELOAD });
         Api.tilordneVeileder(tilordninger)
             .then(toJson)
             .then((res) => {
@@ -201,7 +212,8 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
                     });
                 }
             })
-            .catch(handterFeil);
+            // Setter ok her ettersom innholdslasteren ikke skal håndtere feilmeldingen.
+            .catch(handterFeil(dispatch, TILDEL_VEILEDER_OK));
     };
 }
 
