@@ -121,7 +121,7 @@ class EnhetsportefoljeVisning extends Component {
         );
 
         return (
-            <Innholdslaster avhengigheter={[portefolje, veiledere]}>
+            <Innholdslaster avhengigheter={[portefolje, veiledere, { status: portefolje.tilordningerstatus }]}>
                 {paginering}
                 {
                     visDiagram ?

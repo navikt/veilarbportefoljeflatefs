@@ -93,7 +93,7 @@ class VeilederPortefoljeVisning extends Component {
         const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
 
         return (
-            <Innholdslaster avhengigheter={[portefolje]}>
+            <Innholdslaster avhengigheter={[portefolje, { status: portefolje.tilordningerstatus }]}>
                 <Paginering
                     antallTotalt={antallTotalt}
                     antallReturnert={antallReturnert}
