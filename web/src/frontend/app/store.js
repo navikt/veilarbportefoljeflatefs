@@ -13,8 +13,10 @@ function getDebugSessionKey() {
 }
 
 function getDevStoreCompose(history) {
+    /* eslint-disable no-underscore-dangle */
     const useExtension = window.__REDUX_DEVTOOLS_EXTENSION__ !== undefined;
     const composer = useExtension ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
+    /* eslint-enable */
 
     return composer(
         applyMiddleware(thunkMiddleware, routerMiddleware(history)),
