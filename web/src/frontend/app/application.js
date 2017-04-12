@@ -11,6 +11,7 @@ import { STATUS } from './ducks/utils';
 import { leggEnhetIUrl } from './utils/utils';
 import { hentVeiledereForEnhet } from './ducks/veiledere';
 import history from './history';
+import { enhetShape, valgtEnhetShape, veiledereShape } from './proptype-shapes';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(location.search).vistekster; // eslint-disable-line no-undef
@@ -85,14 +86,28 @@ class Application extends Component {
 }
 
 Application.propTypes = {
-    children: PT.object,
+    children: PT.oneOfType([PT.arrayOf(PT.node), PT.node]).isRequired,
     hentTekster: PT.func.isRequired,
     velgEnhet: PT.func.isRequired,
     hentEnheter: PT.func.isRequired,
     hentVeiledere: PT.func.isRequired,
-    ledetekster: PT.object,
-    enheter: PT.object,
-    veiledere: PT.object
+    ledetekster: PT.shape({
+        status: PT.string.isRequired,
+        data: PT.shape({ nb: PT.objectOf(PT.string).isRequired }).isRequired
+    }).isRequired,
+    enheter: PT.shape({
+        data: PT.arrayOf(enhetShape).isRequired,
+        valgtEnhet: valgtEnhetShape.isRequired,
+        ident: PT.string,
+        status: PT.string.isRequired
+    }).isRequired,
+    veiledere: PT.shape({
+        status: PT.string.isRequired,
+        data: veiledereShape.isRequired,
+        sokeresultat: PT.shape({ sokIkkeStartet: PT.bool.isRequired }).isRequired,
+        veilederfiltervalg: PT.arrayOf(PT.string).isRequired,
+        veiledereITabell: PT.arrayOf(veiledereShape)
+    }).isRequired
 };
 
 const mapStateToProps = (state) => ({
