@@ -80,7 +80,9 @@ class VeilederTabell extends Component {
                             <th className="tabell-element-center" scope="col">
                                 <button
                                     onClick={this.props.sorterPaaPortefoljestorrelse}
-                                    className={classNames('lenke lenke--frittstaende', { valgt: sorterPaaPortefoljeStr })}
+                                    className={
+                                        classNames('lenke lenke--frittstaende', { valgt: sorterPaaPortefoljeStr })
+                                    }
                                     aria-pressed={sorterPaaPortefoljeStr}
                                     aria-label={sorterPaaPortefoljeStr ?
                                         currentSortering.rekkefolge : 'inaktiv'}
