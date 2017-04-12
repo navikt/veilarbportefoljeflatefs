@@ -14,7 +14,8 @@ const initialState = {
         status: STATUS.NOT_STARTED,
         enhet: undefined
     },
-    ident: undefined
+    ident: undefined,
+    status: STATUS.NOT_STARTED
 };
 
 //  Reducer
