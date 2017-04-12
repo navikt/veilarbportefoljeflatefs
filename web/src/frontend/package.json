@@ -26,6 +26,7 @@
     "json-server": "0.9.6",
     "less": "2.7.2",
     "mocha": "3.2.0",
+    "nav-confluence-api": "0.0.9",
     "npm-check-updates": "2.10.5",
     "parallelshell": "2.0.0",
     "react-addons-test-utils": "15.5.1",
@@ -40,6 +41,7 @@
     "highcharts": "5.0.10",
     "history": "2.0.1",
     "intl": "1.2.5",
+    "markdown2confluence": "1.2.0",
     "moment": "2.18.1",
     "nav-frontend-chevron-style": "0.1.7",
     "nav-frontend-core": "3.0.4",
@@ -93,6 +95,7 @@
     "dev:html": "node script/copy-html-dev.js --development",
     "dev:api": "node script/api.js",
     "dev:server": "node script/dev.js",
-    "dev": "npm run dev:html && npm run dev:ts"
+    "dev": "npm run dev:html && npm run dev:ts",
+    "upload:doc": "node documentation/scripts/upload-all"
   }
 }
