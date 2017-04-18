@@ -1,11 +1,16 @@
 import React, { PropTypes as PT } from 'react';
+import classNames from 'classnames';
 import { Element } from 'nav-frontend-typografi';
 import ButtonRadiogroup from './buttonradiogroup';
 
-function KnappPanel({ children, disabled, ...props }) {
+function KnappPanel({ children, disabled, pressed, ...props }) {
+    const classes = classNames('paginering__knapp', {
+        disabled,
+        'paginering__knapp--pressed': pressed
+    });
     return (
         <button
-            className={['paginering__knapp', disabled ? 'disabled' : ''].join(' ')}
+            className={classes}
             aria-disabled={disabled}
             {...props}
         >
@@ -16,10 +21,12 @@ function KnappPanel({ children, disabled, ...props }) {
 
 KnappPanel.propTypes = {
     children: PT.node.isRequired,
-    disabled: PT.bool
+    disabled: PT.bool,
+    pressed: PT.bool
 };
 KnappPanel.defaultProps = {
-    disabled: false
+    disabled: false,
+    pressed: false
 };
 
 function Chevron({ retning, children }) {
@@ -48,8 +55,8 @@ function ToggleModusKnapp({ hentListe, sideStorrelse, viserAlle, antallReturnert
 
     if (viserAlle) {
         return (
-            <KnappPanel onClick={() => hentListe(0, sideStorrelse)}>
-                Se færre
+            <KnappPanel pressed onClick={() => hentListe(0, sideStorrelse)}>
+                Se alle
             </KnappPanel>
         );
     }
@@ -144,7 +151,7 @@ Paginering.propTypes = {
     antallTotalt: PT.number.isRequired,
     fraIndex: PT.number.isRequired,
     hentListe: PT.func.isRequired,
-    tekst: PT.node,
+    tekst: PT.node.isRequired,
     sideStorrelse: PT.number.isRequired,
     visButtongroup: PT.bool,
     antallReturnert: PT.number.isRequired,
@@ -152,6 +159,10 @@ Paginering.propTypes = {
 };
 Paginering.defaultProps = {
     visDiagram: false
+};
+
+Paginering.defaultProps = {
+    visButtongroup: false
 };
 
 export default Paginering;

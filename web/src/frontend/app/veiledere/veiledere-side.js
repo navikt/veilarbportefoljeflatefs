@@ -16,7 +16,9 @@ import Lenker from './../lenker/lenker';
 import {
     sorterListePaaPortefoljestorrelse,
     settSubListeForPaginering,
-    sorterListePaaEtternavn
+    sorterListePaaEtternavn,
+    sorterPaaEtternavn,
+    sorterPaaPortefoljestorrelse
 } from '../ducks/veilederpaginering';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { leggEnhetIUrl } from '../utils/utils';
@@ -43,10 +45,7 @@ class VeiledereSide extends Component {
     }
 
     render() {
-        const {
-            veiledere, portefoljestorrelser, veiledereSomSkalVises, currentSortering,
-            sorterPaaPortefoljestorrelse, sorterPaaEtternavn, resetSok
-        } = this.props;
+        const { veiledere, portefoljestorrelser, veiledereSomSkalVises, currentSortering, resetSok } = this.props;
 
         const veiledereMedPortefoljestorrelser = (veilederListeParam, portefoljestorrelserParam) =>
             veilederListeParam.map((veileder) => {
@@ -55,6 +54,16 @@ class VeiledereSide extends Component {
                 const count = portefoljestorrelse ? portefoljestorrelse.count : 0;
                 return { ...veileder, portefoljestorrelse: count };
             });
+
+        const sorterteVeilederMedPortefoljestorrelser = (veilederListe, storrelser) => {
+            const veiledereMedPortefoljestr = veiledereMedPortefoljestorrelser(veilederListe, storrelser);
+            if (currentSortering.felt === 'etternavn') {
+                return sorterPaaEtternavn(veiledereMedPortefoljestr, currentSortering.rekkefolge);
+            } else if (currentSortering.felt === 'portefoljestorrelse') {
+                return sorterPaaPortefoljestorrelse(veiledereMedPortefoljestr, currentSortering.rekkefolge);
+            }
+            return veiledereMedPortefoljestr;
+        };
 
         const { veilederListe } = veiledere.data;
         const { veiledereITabell, sokeresultat, veilederfiltervalg } = veiledere;
@@ -65,7 +74,7 @@ class VeiledereSide extends Component {
         let pagineringSkalVises = true;
 
         if (veiledereITabell) {
-            veiledereTilTabell = veiledereMedPortefoljestorrelser(veiledereITabell, facetResults);
+            veiledereTilTabell = sorterteVeilederMedPortefoljestorrelser(veiledereITabell, facetResults);
             pagineringSkalVises = false;
         } else {
             veiledereTilTabell = veiledereSomSkalVises;
@@ -129,10 +138,10 @@ class VeiledereSide extends Component {
                                     <VeiledereTabell
                                         veiledere={veiledereTilTabell}
                                         sorterPaaEtternavn={() =>
-                                            sorterPaaEtternavn(
+                                            this.props.sorterPaaEtternavn(
                                                 avgjorNySortering('etternavn'), veiledereSomSkalVises.length)}
                                         sorterPaaPortefoljestorrelse={
-                                            () => sorterPaaPortefoljestorrelse(
+                                            () => this.props.sorterPaaPortefoljestorrelse(
                                                 avgjorNySortering('portefoljestorrelse'), veiledereSomSkalVises.length)
                                         }
                                     />
