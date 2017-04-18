@@ -74,7 +74,12 @@ class VeilederPortefoljeVisning extends Component {
             antallTotalt > 0 ?
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
-                    values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt, visDiagram }}
+                    values={{
+                        fraIndex: `${fraIndex + 1}`,
+                        tilIndex: fraIndex + antallReturnert,
+                        antallTotalt,
+                        visDiagram
+                    }}
                 />) :
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
