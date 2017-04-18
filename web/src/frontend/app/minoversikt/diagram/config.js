@@ -59,5 +59,8 @@ export default (data, tekster) => ({
             name: tekster[1],
             data: data.antallMisterYtelse
         }
-    ]
+    ],
+    credits: {
+        enabled: false
+    }
 });
