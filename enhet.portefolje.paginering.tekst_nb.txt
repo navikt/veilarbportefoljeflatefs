@@ -1,1 +1,4 @@
-Viser {fraIndex}-{tilIndex} av totalt {antallTotalt} brukere
+{ visDiagram, select,
+  true { Totalt {antallTotalt} brukere }
+  other { Viser {fraIndex}-{tilIndex} av totalt {antallTotalt} brukere }
+}
