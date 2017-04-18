@@ -67,7 +67,8 @@ class VeilederPortefoljeVisning extends Component {
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
-
+        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+        const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
 
         const pagineringTekst = (
             antallTotalt > 0 ?
@@ -89,8 +90,6 @@ class VeilederPortefoljeVisning extends Component {
             clearFeilendeTilordninger();
         }
 
-        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
-        const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
 
         return (
             <Innholdslaster avhengigheter={[portefolje, { status: portefolje.tilordningerstatus }]}>
