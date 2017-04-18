@@ -26,7 +26,7 @@ function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-li
         });
 
     return (
-        <div>
+        <div className="field__container">
             {fieldElements}
         </div>
     );
