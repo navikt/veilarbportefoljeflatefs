@@ -65,7 +65,7 @@ class EnhetsportefoljeTabell extends Component {
             <th className="tabell-element-center">
                 <button
                     onClick={() => this.settSorteringOgHentPortefolje('utlopsdato')}
-                    className={classNames('sortering-link', { valgt: sorterUtlopsdato })}
+                    className={classNames('lenke lenke--frittstaende', { valgt: sorterUtlopsdato })}
                     aria-pressed={sorterUtlopsdato}
                     aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
                             sorteringsrekkefolge : 'inaktiv'}
@@ -106,7 +106,7 @@ class EnhetsportefoljeTabell extends Component {
                             <th>
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
-                                    className={classNames('sortering-link', { valgt: sorterEtternavn })}
+                                    className={classNames('lenke lenke--frittstaende', { valgt: sorterEtternavn })}
                                     aria-pressed={sorterEtternavn}
                                     aria-label={(sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt') ?
                                         sorteringsrekkefolge : 'inaktiv'}
@@ -118,7 +118,7 @@ class EnhetsportefoljeTabell extends Component {
                             <th className="tabell-element-center">
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('fodselsnummer')}
-                                    className={classNames('sortering-link', { valgt: sorterFodelsnummer })}
+                                    className={classNames('lenke lenke--frittstaende', { valgt: sorterFodelsnummer })}
                                     aria-pressed={sorterFodelsnummer}
                                     aria-label={sorterFodelsnummer && sorteringsrekkefolge !== 'ikke_satt' ?
                                         sorteringsrekkefolge : 'inaktiv'}
@@ -155,7 +155,7 @@ class EnhetsportefoljeTabell extends Component {
                                 <a// eslint-disable-next-line no-undef
                                     href={`https://${window.location.hostname}/veilarbpersonflatefs/` +
                                 `${bruker.fnr}?enhet=${valgtEnhet}`}
-                                    className="til-bruker-link"
+                                    className="lenke lenke--frittstaende"
                                 >
                                     {settSammenNavn(bruker)}
                                 </a>
