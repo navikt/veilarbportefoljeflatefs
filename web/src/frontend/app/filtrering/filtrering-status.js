@@ -17,19 +17,22 @@ class FiltreringStatus extends Component {
     }
 
     handleChange(e) {
-        this.props.endreFilter(e.target.id, e.target.checked);
+        this.props.endreFilter('brukerstatus', e.target.value);
     }
 
     render() {
-        const { nyeBrukere, inaktiveBrukere } = this.props.filtervalg;
+        const { brukerstatus } = this.props.filtervalg;
+
         const nyeBrukereCheckbox = (
             <div className="skjema__input">
                 <input
-                    className="checkboks"
+                    className="radioknapp"
                     id="nyeBrukere"
-                    type="checkbox"
+                    type="radio"
+                    name="brukerstatus"
+                    value="NYE_BRUKERE"
                     onChange={this.handleChange}
-                    checked={nyeBrukere}
+                    checked={brukerstatus === 'NYE_BRUKERE'}
                 />
                 <Barlabel
                     htmlFor="nyeBrukere"
@@ -50,11 +53,13 @@ class FiltreringStatus extends Component {
                 { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : null }
                 <div className="skjema__input">
                     <input
-                        className="checkboks"
+                        className="radioknapp"
                         id="inaktiveBrukere"
-                        type="checkbox"
+                        type="radio"
+                        name="brukerstatus"
+                        value="INAKTIVE_BRUKERE"
                         onChange={this.handleChange}
-                        checked={inaktiveBrukere}
+                        checked={brukerstatus === 'INAKTIVE_BRUKERE'}
                     />
                     <Barlabel
                         className="inaktiveBrukere"
