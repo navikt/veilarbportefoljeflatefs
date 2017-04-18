@@ -83,7 +83,12 @@ class EnhetsportefoljeVisning extends Component {
             antallTotalt > 0 ?
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
-                    values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt, visDiagram }}
+                    values={{
+                        fraIndex: `${fraIndex + 1}`,
+                        tilIndex: fraIndex + antallReturnert,
+                        antallTotalt,
+                        visDiagram
+                    }}
                 />) :
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
@@ -134,7 +139,7 @@ class EnhetsportefoljeVisning extends Component {
                             portefolje={portefolje}
                         />
                 }
-                {antallTotalt >= 5 && paginering}
+                {(antallTotalt >= 5 && !visDiagram) && paginering}
             </Innholdslaster>
         );
     }
