@@ -3,13 +3,14 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
-import { veilederShape, brukerShape, portefoljeShape, filtervalgShape } from '../proptype-shapes';
+import { brukerShape, filtervalgShape, portefoljeShape, veilederShape } from '../proptype-shapes';
 import { markerAlleBrukere, settBrukerSomMarkert } from './../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
-import { visModal, skjulModal } from '../ducks/modal';
+import { skjulModal, visModal } from '../ducks/modal';
 import { initialState } from '../ducks/filtrering';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
+import { ytelsevalg } from '../filtrering/filter-konstanter';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -50,13 +51,14 @@ class EnhetsportefoljeTabell extends Component {
             filtervalg
         } = this.props;
 
+        const utlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsnummer';
-        const sorterUtlopsdato = portefolje.sorteringsfelt === 'utlopsdato';
+        const sorterUtlopsdato = ['utlopsdato', 'aapmaxtid'].includes(portefolje.sorteringsfelt);
 
         const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
             (<th className="tabell-element-center">
-                <FormattedMessage id="portefolje.tabell.utlopsdato" />
+                <FormattedMessage id={`portefolje.tabell.${utlopsdatoNavn}`} />
             </th>)
             :
             null;
@@ -64,16 +66,16 @@ class EnhetsportefoljeTabell extends Component {
         const mmddyyHeader = (
             <th className="tabell-element-center">
                 <button
-                    onClick={() => this.settSorteringOgHentPortefolje('utlopsdato')}
+                    onClick={() => this.settSorteringOgHentPortefolje(utlopsdatoNavn)}
                     className={classNames('lenke lenke--frittstaende', { valgt: sorterUtlopsdato })}
                     aria-pressed={sorterUtlopsdato}
                     aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
-                            sorteringsrekkefolge : 'inaktiv'}
+                        sorteringsrekkefolge : 'inaktiv'}
                 >
                     <FormattedMessage id="portefolje.tabell.ddmmyy" />
                 </button>
             </th>
-            );
+        );
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         return (
@@ -109,7 +111,7 @@ class EnhetsportefoljeTabell extends Component {
                                     className={classNames('lenke lenke--frittstaende', { valgt: sorterEtternavn })}
                                     aria-pressed={sorterEtternavn}
                                     aria-label={(sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt') ?
-                                        sorteringsrekkefolge : 'inaktiv'}
+                                    sorteringsrekkefolge : 'inaktiv'}
                                 >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                                 </button>
@@ -121,7 +123,7 @@ class EnhetsportefoljeTabell extends Component {
                                     className={classNames('lenke lenke--frittstaende', { valgt: sorterFodelsnummer })}
                                     aria-pressed={sorterFodelsnummer}
                                     aria-label={sorterFodelsnummer && sorteringsrekkefolge !== 'ikke_satt' ?
-                                        sorteringsrekkefolge : 'inaktiv'}
+                                    sorteringsrekkefolge : 'inaktiv'}
                                 >
                                     <FormattedMessage id="portefolje.tabell.fodselsnummer" />
                                 </button>
@@ -162,19 +164,19 @@ class EnhetsportefoljeTabell extends Component {
                             </th>
                             <td className="tabell-element-center">{bruker.fnr}</td>
                             {
-                                ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
-                                    <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
-                                    : null
-                            }
+                            ytelseFilterErAktiv(filtervalg.ytelse) ?
+                                <Utlopsdatokolonne bruker={bruker} ytelse={filtervalg.ytelse} />
+                                : null
+                        }
                             {
-                                bruker.veilederId ? <td className="veileder-td">{veiledere
-                                        .filter((veileder) => veileder.ident === bruker.veilederId)
-                                        .map((veileder) => (settSammenNavn(veileder)))}</td>
-                                    :
-                                <td>
-                                    <Tabelletiketter type="nybruker">Ny bruker</Tabelletiketter>
-                                </td>
-                            }
+                            bruker.veilederId ? <td className="veileder-td">{veiledere
+                                .filter((veileder) => veileder.ident === bruker.veilederId)
+                                .map((veileder) => (settSammenNavn(veileder)))}</td>
+                                :
+                            <td>
+                                <Tabelletiketter type="nybruker">Ny bruker</Tabelletiketter>
+                            </td>
+                        }
                             <td >
                                 {bruker.veilederId || ''}
                             </td>
