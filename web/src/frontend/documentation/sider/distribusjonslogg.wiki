@@ -1,2 +1,0 @@
-||Applikasjon||Versjon||
-|veilarbportefoljeflatefs|{{versjon}}|

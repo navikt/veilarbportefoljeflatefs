@@ -8,6 +8,7 @@ const args = process.argv.slice(2);
 const username = args[0];
 const password = args[1];
 const versjon = args[2];
+const byggdato = args[3];
 
 const instance = new ConfluenceAPI('http://confluence.adeo.no', username, password);
 
@@ -15,25 +16,34 @@ const logError = (error) => {
     console.log('[ERROR] ', error);
 };
 
-function settInnVersjon(data, versjon) {
-    return data.replace('{{versjon}}', `${versjon}`);
-}
+const versjonsTabell =
+    `<ac:structured-macro ac:macro-id="9c3e564f-ad36-471a-b288-88d1a7282081" ac:name="details" ac:schema-version="1">
+        <ac:parameter ac:name="id">Distribusjonslogg</ac:parameter>
+        <ac:rich-text-body>
+            <table class="confluenceTable">
+                <tbody>
+                    <tr>
+                        <th class="confluenceTd">Applikasjonverdi</th>
+                        <td class="confluenceTd">${versjon}</td>
+                    </tr>
+                    <tr>
+                        <th class="confluenceTd">Byggdato</th>
+                        <td class="confluenceTd">${byggdato}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ac:rich-text-body>
+    </ac:structured-macro>`;
 
-function hentContent() {
-    const data = fs.readFileSync('./documentation/sider/distribusjonslogg.wiki', 'UTF-8');
-    return settInnVersjon(data, versjon);
-}
-
-instance.updatePage({
-    id: 213061646,
-    title: 'Nyeste versjon',
+instance.newPage({
+    title: `2017-veilarbportefoljeflatefs-${versjon}`,
     space: 'EAF',
-    content: hentContent(),
-    message: `ny versjon: veilarbportefoljeflatefs - ${versjon}`
+    parent: 201272624,
+    content: versjonsTabell,
+    representation: 'storage'
+}).then(resp => {
+    instance.addLabel({
+        id: resp.id,
+        label: 'doc_distribusjonsversjon'
+    });
 }).catch(logError);
-
-/*
-var cont = instance.getPage('201272624', true).then(function(content) {
-    console.log(content.body.storage.value);
-}).catch(logError);
-*/
