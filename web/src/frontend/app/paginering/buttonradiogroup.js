@@ -11,10 +11,6 @@ class ButtonRadiogroup extends Component {
         this.guid = guid();
     }
 
-    componentWillUnmount() {
-        this.props.endreVisningsmodus(TABELLVISNING);
-    }
-
     render() {
         const { visningsmodus, endreVisningsmodus } = this.props;
 
