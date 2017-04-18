@@ -127,20 +127,22 @@ class EnhetsportefoljeVisning extends Component {
         );
 
         return (
-            <Innholdslaster avhengigheter={[portefolje, veiledere, { status: portefolje.tilordningerstatus }]}>
-                {paginering}
-                {
-                    visDiagram ?
-                        <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
-                        <EnhetsportefoljeTabell
-                            veiledere={veiledere.data.veilederListe}
-                            brukere={portefolje.data.brukere}
-                            settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
-                            portefolje={portefolje}
-                        />
-                }
-                {(antallTotalt >= 5 && !visDiagram) && paginering}
-            </Innholdslaster>
+            <div className="portefolje__container">
+                <Innholdslaster avhengigheter={[portefolje, veiledere, { status: portefolje.tilordningerstatus }]}>
+                    {paginering}
+                    {
+                        visDiagram ?
+                            <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
+                            <EnhetsportefoljeTabell
+                                veiledere={veiledere.data.veilederListe}
+                                brukere={portefolje.data.brukere}
+                                settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
+                                portefolje={portefolje}
+                            />
+                    }
+                    {(antallTotalt >= 5 && !visDiagram) && paginering}
+                </Innholdslaster>
+            </div>
         );
     }
 }

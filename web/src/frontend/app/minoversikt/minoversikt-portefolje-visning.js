@@ -97,33 +97,35 @@ class VeilederPortefoljeVisning extends Component {
 
 
         return (
-            <Innholdslaster avhengigheter={[portefolje, { status: portefolje.tilordningerstatus }]}>
-                <Paginering
-                    antallTotalt={antallTotalt}
-                    antallReturnert={antallReturnert}
-                    fraIndex={fraIndex}
-                    hentListe={(fra, antall) =>
-                        hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
-                            sorteringsfelt, sorteringsrekkefolge, filtervalg, antall, fra)}
-                    tekst={pagineringTekst}
-                    sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
-                    visButtongroup={visButtonGroup}
-                    visDiagram={visDiagram}
-                />
-                {
-                    visDiagram ?
-                        <Diagram
-                            filtreringsvalg={filtervalg}
-                            enhet={valgtEnhet.enhet.enhetId}
-                            veileder={veileder.ident}
-                        />
-                        :
-                        <MinoversiktTabell
-                            veileder={veileder}
-                            settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
-                        />
-                }
-            </Innholdslaster>
+            <div className="portefolje__container">
+                <Innholdslaster avhengigheter={[portefolje, { status: portefolje.tilordningerstatus }]}>
+                    <Paginering
+                        antallTotalt={antallTotalt}
+                        antallReturnert={antallReturnert}
+                        fraIndex={fraIndex}
+                        hentListe={(fra, antall) =>
+                            hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
+                                sorteringsfelt, sorteringsrekkefolge, filtervalg, antall, fra)}
+                        tekst={pagineringTekst}
+                        sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
+                        visButtongroup={visButtonGroup}
+                        visDiagram={visDiagram}
+                    />
+                    {
+                        visDiagram ?
+                            <Diagram
+                                filtreringsvalg={filtervalg}
+                                enhet={valgtEnhet.enhet.enhetId}
+                                veileder={veileder.ident}
+                            />
+                            :
+                            <MinoversiktTabell
+                                veileder={veileder}
+                                settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
+                            />
+                    }
+                </Innholdslaster>
+            </div>
         );
     }
 
