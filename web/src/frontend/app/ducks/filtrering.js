@@ -9,8 +9,7 @@ export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 
 //  Reducer
 export const initialState = {
-    nyeBrukere: false,
-    inaktiveBrukere: false,
+    brukerstatus: null,
     alder: [],
     kjonn: [],
     fodselsdagIMnd: [],

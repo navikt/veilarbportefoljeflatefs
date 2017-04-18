@@ -114,10 +114,10 @@ function Paginering(props) {
                     </strong>
                 </Element>
             </div>
-            <div className="col-sm-4">
+            <div className="col-sm-3">
                 { visButtongroup && <ButtonRadiogroup /> }
             </div>
-            <div className="col-sm-4">
+            <div className="col-sm-5">
                 { !visDiagram && <div className="paginering__knapper">
                     <ToggleModusKnapp
                         viserAlle={antallSider === 1}
