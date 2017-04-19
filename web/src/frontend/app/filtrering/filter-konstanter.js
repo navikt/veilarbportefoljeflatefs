@@ -7,8 +7,10 @@ export function lagConfig(data) {
     return data;
 }
 
-export const inaktiveBrukere = 'Inaktive brukere';
-export const nyeBrukere = 'Nye brukere';
+export const brukerstatus = {
+    NYE_BRUKERE: 'Nye brukere',
+    INAKTIVE_BRUKERE: 'Inaktive brukere'
+};
 
 export const alder = {
     '19-og-under': '19 år og under',
@@ -78,8 +80,7 @@ const veiledere = {
 
 
 export default {
-    inaktiveBrukere,
-    nyeBrukere,
+    brukerstatus,
     alder,
     fodselsdagIMnd,
     kjonn,

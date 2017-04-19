@@ -32,7 +32,7 @@ function renderFieldsFactory(form) {
             });
 
         return (
-            <div>
+            <div className="field__container">
                 {fieldElements}
             </div>
         );
