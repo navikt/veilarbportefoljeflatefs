@@ -7,7 +7,7 @@ export function lagConfig(data) {
     return data;
 }
 
-export const brukerstatus ={
+export const brukerstatus = {
     NYE_BRUKERE: 'Nye brukere',
     INAKTIVE_BRUKERE: 'Inaktive brukere'
 };
