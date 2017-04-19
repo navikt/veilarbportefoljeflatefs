@@ -2,7 +2,6 @@
 "use strict";
 const fs = require('fs');
 const ConfluenceAPI = require('nav-confluence-api');
-const wikiConverter = require('markdown2confluence');
 
 const args = process.argv.slice(2);
 const username = args[0];
