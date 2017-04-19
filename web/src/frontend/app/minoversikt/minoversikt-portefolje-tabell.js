@@ -7,6 +7,7 @@ import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
+import { ytelsevalg } from './../filtrering/filter-konstanter';
 
 function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veileder, settSorteringOgHentPortefolje,
     filtervalg, sorteringsrekkefolge, valgtEnhet }) {
@@ -18,16 +19,16 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
         return `${bruker.etternavn}, ${bruker.fornavn}`;
     };
 
+    const utlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
     const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
-    const sorterUtlopsdato = portefolje.sorteringsfelt === 'utlopsdato';
     const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsnummer';
-
+    const sorterUtlopsdato = ['utlopsdato', 'aapmaxtid'].includes(portefolje.sorteringsfelt);
 
     const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
 
     const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
         (<th className="tabell-element-center">
-            <FormattedMessage id="portefolje.tabell.utlopsdato" />
+            <FormattedMessage id={`portefolje.tabell.${utlopsdatoNavn}`} />
         </th>)
         :
         null;
@@ -48,7 +49,7 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
 
     const ddmmyyHeader = (<th className="tabell-element-center">
         <button
-            onClick={() => settSorteringOgHentPortefolje('utlopsdato')}
+            onClick={() => settSorteringOgHentPortefolje(utlopsdatoNavn)}
             className={classNames('lenke lenke--frittstaende', { valgt: sorterUtlopsdato })}
             aria-pressed={sorterUtlopsdato}
             aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
@@ -137,8 +138,8 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                             </td>
                         }
                         {
-                            ytelseFilterErAktiv(filtervalg.ytelse) && bruker.utlopsdato !== null ?
-                                <Utlopsdatokolonne utlopsdato={bruker.utlopsdato} />
+                            ytelseFilterErAktiv(filtervalg.ytelse) ?
+                                <Utlopsdatokolonne bruker={bruker} ytelse={filtervalg.ytelse} />
                                 : null
                         }
                         <td>
