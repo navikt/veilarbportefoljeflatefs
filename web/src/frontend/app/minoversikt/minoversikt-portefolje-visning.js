@@ -67,17 +67,23 @@ class VeilederPortefoljeVisning extends Component {
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
-
+        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+        const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
 
         const pagineringTekst = (
             antallTotalt > 0 ?
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
-                    values={{ fraIndex: `${fraIndex + 1}`, tilIndex: fraIndex + antallReturnert, antallTotalt }}
+                    values={{
+                        fraIndex: `${fraIndex + 1}`,
+                        tilIndex: fraIndex + antallReturnert,
+                        antallTotalt,
+                        visDiagram
+                    }}
                 />) :
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
-                    values={{ fraIndex: '0', tilIndex: '0', antallTotalt: '0' }}
+                    values={{ fraIndex: '0', tilIndex: '0', antallTotalt: '0', visDiagram }}
                 />)
         );
 
@@ -89,36 +95,37 @@ class VeilederPortefoljeVisning extends Component {
             clearFeilendeTilordninger();
         }
 
-        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
-        const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
 
         return (
-            <Innholdslaster avhengigheter={[portefolje, { status: portefolje.tilordningerstatus }]}>
-                <Paginering
-                    antallTotalt={antallTotalt}
-                    antallReturnert={antallReturnert}
-                    fraIndex={fraIndex}
-                    hentListe={(fra, antall) =>
-                        hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
-                            sorteringsfelt, sorteringsrekkefolge, filtervalg, antall, fra)}
-                    tekst={pagineringTekst}
-                    sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
-                    visButtongroup={visButtonGroup}
-                />
-                {
-                    visDiagram ?
-                        <Diagram
-                            filtreringsvalg={filtervalg}
-                            enhet={valgtEnhet.enhet.enhetId}
-                            veileder={veileder.ident}
-                        />
-                        :
-                        <MinoversiktTabell
-                            veileder={veileder}
-                            settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
-                        />
-                }
-            </Innholdslaster>
+            <div className="portefolje__container">
+                <Innholdslaster avhengigheter={[portefolje, { status: portefolje.tilordningerstatus }]}>
+                    <Paginering
+                        antallTotalt={antallTotalt}
+                        antallReturnert={antallReturnert}
+                        fraIndex={fraIndex}
+                        hentListe={(fra, antall) =>
+                            hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
+                                sorteringsfelt, sorteringsrekkefolge, filtervalg, antall, fra)}
+                        tekst={pagineringTekst}
+                        sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
+                        visButtongroup={visButtonGroup}
+                        visDiagram={visDiagram}
+                    />
+                    {
+                        visDiagram ?
+                            <Diagram
+                                filtreringsvalg={filtervalg}
+                                enhet={valgtEnhet.enhet.enhetId}
+                                veileder={veileder.ident}
+                            />
+                            :
+                            <MinoversiktTabell
+                                veileder={veileder}
+                                settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
+                            />
+                    }
+                </Innholdslaster>
+            </div>
         );
     }
 

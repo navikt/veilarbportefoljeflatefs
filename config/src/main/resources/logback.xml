@@ -83,7 +83,6 @@
     </logger>
 
     <logger name="org.apache.http.client.protocol.ResponseProcessCookies" level="ERROR"/>
-    <logger name="no.nav.modig.security.loginmodule.SimpleLoginModule" level="DEBUG"/>
 
     <logger name="org.apache.cxf" level="OFF"/>
 

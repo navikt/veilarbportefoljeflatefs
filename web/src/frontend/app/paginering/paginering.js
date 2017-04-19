@@ -89,7 +89,8 @@ function Paginering(props) {
         tekst,
         antallReturnert,
         sideStorrelse: antattSideStorrelse,
-        visButtongroup
+        visButtongroup,
+        visDiagram
     } = props;
 
     // Fordi sideStorrelse tydeligvis ikke endrer seg i staten, selvom den helt klart egentlig gjør det i UI.
@@ -105,41 +106,42 @@ function Paginering(props) {
     const gaTilSide = gaTilSideFactory(sideStorrelse, hentListe);
 
     return (
-        <div className="paginering">
-            <Element className="info blokk-xs" tag="h1">
-                <strong>
-                    {tekst}
-                </strong>
-            </Element>
-            {
-                visButtongroup ?
-                    <ButtonRadiogroup />
-                    :
-                    null
-            }
-            <div className="paginering__knapper">
-                <ToggleModusKnapp
-                    viserAlle={antallSider === 1}
-                    sideStorrelse={antattSideStorrelse}
-                    hentListe={hentListe}
-                    antallReturnert={antallReturnert}
-                    antallTotalt={antallTotalt}
-                />
-                <KnappPanel disabled={erPaForsteSide} onClick={gaTilSide(navarendeSide - 1)}>
-                    <Chevron retning="venstre">Forrige</Chevron>
-                </KnappPanel>
+        <div className="paginering row blokk-s">
+            <div className="col-sm-4">
+                <Element tag="h1">
+                    <strong>
+                        {tekst}
+                    </strong>
+                </Element>
+            </div>
+            <div className="col-sm-3">
+                { visButtongroup && <ButtonRadiogroup /> }
+            </div>
+            <div className="col-sm-5">
+                { !visDiagram && <div className="paginering__knapper">
+                    <ToggleModusKnapp
+                        viserAlle={antallSider === 1}
+                        sideStorrelse={antattSideStorrelse}
+                        hentListe={hentListe}
+                        antallReturnert={antallReturnert}
+                        antallTotalt={antallTotalt}
+                    />
+                    <KnappPanel disabled={erPaForsteSide} onClick={gaTilSide(navarendeSide - 1)}>
+                        <Chevron retning="venstre">Forrige</Chevron>
+                    </KnappPanel>
 
-                {!erPaForsteSide && <KnappPanel onClick={gaTilSide(1)}>1</KnappPanel>}
+                    {!erPaForsteSide && <KnappPanel onClick={gaTilSide(1)}>1</KnappPanel>}
 
-                <KnappPanel>
-                    <strong>{navarendeSide}</strong>
-                </KnappPanel>
+                    <KnappPanel>
+                        <strong>{navarendeSide}</strong>
+                    </KnappPanel>
 
-                {!erPaSisteSide && <KnappPanel onClick={gaTilSide(antallSider)}>{antallSider}</KnappPanel>}
+                    {!erPaSisteSide && <KnappPanel onClick={gaTilSide(antallSider)}>{antallSider}</KnappPanel>}
 
-                <KnappPanel disabled={erPaSisteSide} onClick={gaTilSide(navarendeSide + 1)}>
-                    <Chevron retning="hoyre">Neste</Chevron>
-                </KnappPanel>
+                    <KnappPanel disabled={erPaSisteSide} onClick={gaTilSide(navarendeSide + 1)}>
+                        <Chevron retning="hoyre">Neste</Chevron>
+                    </KnappPanel>
+                </div> }
             </div>
         </div>
     );
@@ -152,7 +154,11 @@ Paginering.propTypes = {
     tekst: PT.node.isRequired,
     sideStorrelse: PT.number.isRequired,
     visButtongroup: PT.bool,
-    antallReturnert: PT.number.isRequired
+    antallReturnert: PT.number.isRequired,
+    visDiagram: PT.bool
+};
+Paginering.defaultProps = {
+    visDiagram: false
 };
 
 Paginering.defaultProps = {

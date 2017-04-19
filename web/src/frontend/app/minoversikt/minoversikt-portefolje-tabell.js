@@ -36,7 +36,7 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
         <th className="tabell-element-center">
             <button
                 onClick={() => settSorteringOgHentPortefolje('fodselsnummer')}
-                className={classNames('sortering-link', { valgt: sorterFodelsnummer })}
+                className={classNames('lenke lenke--frittstaende', { valgt: sorterFodelsnummer })}
                 aria-pressed={sorterFodelsnummer}
                 aria-label={sorterFodelsnummer && sorteringsrekkefolge !== 'ikke_satt' ?
                     sorteringsrekkefolge : 'inaktiv'}
@@ -49,7 +49,7 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
     const ddmmyyHeader = (<th className="tabell-element-center">
         <button
             onClick={() => settSorteringOgHentPortefolje('utlopsdato')}
-            className={classNames('sortering-link', { valgt: sorterUtlopsdato })}
+            className={classNames('lenke lenke--frittstaende', { valgt: sorterUtlopsdato })}
             aria-pressed={sorterUtlopsdato}
             aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
                 sorteringsrekkefolge : 'inaktiv'}
@@ -63,7 +63,7 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
             <button
                 onClick={() => settSorteringOgHentPortefolje('etternavn')}
                 role="button"
-                className={classNames('sortering-link', { valgt: sorterEtternavn })}
+                className={classNames('lenke lenke--frittstaende', { valgt: sorterEtternavn })}
                 aria-pressed={sorterEtternavn}
                 aria-label={sorterEtternavn && sorteringsrekkefolge !== 'ikke_satt' ?
                     sorteringsrekkefolge : 'inaktiv'}
@@ -124,7 +124,7 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                             <a
                                 href={`https://${window.location.hostname}` +
                                 `/veilarbpersonflatefs/${bruker.fnr}?enhet=${valgtEnhet.enhet.enhetId}`}
-                                className="til-bruker-link"
+                                className="lenke lenke--frittstaende"
                             >
                                 {settSammenNavn(bruker)}
                             </a>

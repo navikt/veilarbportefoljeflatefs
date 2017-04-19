@@ -1,7 +1,6 @@
 package no.nav.fo.veilarbportefoljeflatefs;
 
 import no.nav.brukerdialog.security.context.InternbrukerSubjectHandler;
-import no.nav.brukerdialog.security.context.JettySubjectHandler;
 import no.nav.sbl.dialogarena.common.jetty.Jetty;
 import no.nav.sbl.dialogarena.test.SystemProperties;
 import org.apache.geronimo.components.jaspi.AuthConfigFactoryImpl;
