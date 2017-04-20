@@ -24,6 +24,7 @@
         <baseUrl alias="isso-host"/>
         <baseUrl alias="isso-jwks"/>
         <baseUrl alias="isso-issuer"/>
+        <baseUrl alias="isso.isalive"/>
         <credential alias="isso-rp-user"/>
     </resources>
 
