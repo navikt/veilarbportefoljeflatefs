@@ -14,26 +14,41 @@ function renderFieldsFactory(form) {
                 const { name, value: _value, ...handler } = field.input;
                 const { label, className, ...fieldProps } = lagConfig(valg[field.input.name]);
 
-                return (
-                    <div key={field.input.name} className={fieldCls(className)} {...fieldProps}>
-                        <Field
-                            id={field.input.name}
-                            name={form} value={name}
-                            component="input"
-                            type="radio"
-                            className="skjemaelement__input radioknapp"
-                            {...handler}
-                        />
-                        <label htmlFor={field.input.name} className="skjemaelement__label">
-                            {label}
-                        </label>
-                    </div>
-                );
+                return {
+                    element: (
+                        <div key={field.input.name} className={fieldCls(className)} {...fieldProps}>
+                            <Field
+                                id={field.input.name}
+                                name={form} value={name}
+                                component="input"
+                                type="radio"
+                                className="skjemaelement__input radioknapp"
+                                {...handler}
+                            />
+                            <label htmlFor={field.input.name} className="skjemaelement__label">
+                                {label}
+                            </label>
+                        </div>
+                    ),
+                    hidden: (className || '').endsWith('__hide')
+                };
             });
+
+        const elements = fieldElements.map((fieldConfig) => fieldConfig.element);
+        const visibleElements = fieldElements
+            .reduce((antall, fieldConfig) => {
+                if (fieldConfig.hidden) {
+                    return antall;
+                }
+                return antall + 1;
+            }, 0);
 
         return (
             <div className="field__container">
-                {fieldElements}
+                {elements}
+                <span className="text-hide" aria-live="polite" aria-atomic="true">
+                Viser {visibleElements} treff
+            </span>
             </div>
         );
     };
