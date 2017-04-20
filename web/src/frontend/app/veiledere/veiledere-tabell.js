@@ -60,7 +60,7 @@ class VeilederTabell extends Component {
                             <th colSpan="3" />
                         </tr>
                     </thead>
-                    <thead>
+                    <thead className="tabell__subhead">
                         <tr>
                             <th scope="col">
                                 <button
