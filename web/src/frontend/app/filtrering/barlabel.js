@@ -17,7 +17,9 @@ function Barlabel({ htmlFor, tekstId, antall, max, className }) {
 
     return (
         <label htmlFor={htmlFor} className={classNames('barlabel', className)}>
-            <FormattedMessage id={tekstId} />
+            <span className="barlabel__labeltext" >
+                <FormattedMessage id={tekstId} />
+            </span>
             &nbsp;
             <div className="barlabel__barwrapper">
                 <Element className="barlabel__antall">{antall}</Element>
