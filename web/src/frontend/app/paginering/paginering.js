@@ -109,7 +109,7 @@ function Paginering(props) {
         <div className="paginering row blokk-s">
             <div className="col-sm-4">
                 <Element tag="h1">
-                    <strong>
+                    <strong aria-live="polite" aria-atomic="true">
                         {tekst}
                     </strong>
                 </Element>
