@@ -84,7 +84,7 @@
   "scripts": {
     "test": "npm run test:dep && npm run test:ts",
     "test:ts": "mocha",
-    "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates -e 2 -x history,react-router,react-router-redux,react-collapse, react-height --packageFile ./package.json",
+    "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates -e 2 -x history,react-router,react-router-redux,react-collapse,react-height --packageFile ./package.json",
     "eslint": "eslint --fix ./app/",
     "clean": "node ./node_modules/rimraf/rimraf -rf out/",
     "build": "npm run build:ts && npm run build:css && npm run build:html",
