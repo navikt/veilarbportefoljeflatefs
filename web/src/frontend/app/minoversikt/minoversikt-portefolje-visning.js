@@ -95,22 +95,26 @@ class VeilederPortefoljeVisning extends Component {
             clearFeilendeTilordninger();
         }
 
+        const paginering = (
+            <Paginering
+                antallTotalt={antallTotalt}
+                antallReturnert={antallReturnert}
+                fraIndex={fraIndex}
+                hentListe={(fra, antall) =>
+                    hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
+                        sorteringsfelt, sorteringsrekkefolge, filtervalg, antall, fra)}
+                tekst={pagineringTekst}
+                sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
+                visButtongroup={visButtonGroup}
+                visDiagram={visDiagram}
+            />
+
+        );
 
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, { status: portefolje.tilordningerstatus }]}>
-                    <Paginering
-                        antallTotalt={antallTotalt}
-                        antallReturnert={antallReturnert}
-                        fraIndex={fraIndex}
-                        hentListe={(fra, antall) =>
-                            hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
-                                sorteringsfelt, sorteringsrekkefolge, filtervalg, antall, fra)}
-                        tekst={pagineringTekst}
-                        sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
-                        visButtongroup={visButtonGroup}
-                        visDiagram={visDiagram}
-                    />
+                    {paginering}
                     {
                         visDiagram ?
                             <Diagram
@@ -124,6 +128,7 @@ class VeilederPortefoljeVisning extends Component {
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
+                    {(antallTotalt >= 5 && !visDiagram) && paginering}
                 </Innholdslaster>
             </div>
         );
