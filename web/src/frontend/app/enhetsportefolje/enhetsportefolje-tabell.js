@@ -90,7 +90,7 @@ class EnhetsportefoljeTabell extends Component {
                             <th colSpan="4">Veileder</th>
                         </tr>
                     </thead>
-                    <thead>
+                    <thead className="tabell__subhead">
                         <tr>
                             <th>
                                 { /* TODO hent checkbokser fra nav-frontend-skjema */}

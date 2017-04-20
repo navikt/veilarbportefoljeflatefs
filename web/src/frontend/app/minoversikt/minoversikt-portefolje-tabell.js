@@ -85,7 +85,7 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                     <th />
                 </tr>
             </thead>
-            <thead>
+            <thead className="tabell__subhead">
                 <tr>
                     <th>
                         <div className="skjema__input">
