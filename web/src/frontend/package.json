@@ -68,7 +68,7 @@
     "react-collapse": "2.3.4",
     "react-document-title": "2.0.3",
     "react-dom": "15.5.4",
-    "react-height": "3.0.0",
+    "react-height": "2.2.1",
     "react-highcharts": "11.5.0",
     "react-intl": "2.2.3",
     "react-modal": "1.7.7",
@@ -84,7 +84,7 @@
   "scripts": {
     "test": "npm run test:dep && npm run test:ts",
     "test:ts": "mocha",
-    "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates -e 2 -x history,react-router,react-router-redux,react-collapse --packageFile ./package.json",
+    "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates -e 2 -x history,react-router,react-router-redux,react-collapse, react-height --packageFile ./package.json",
     "eslint": "eslint --fix ./app/",
     "clean": "node ./node_modules/rimraf/rimraf -rf out/",
     "build": "npm run build:ts && npm run build:css && npm run build:html",
