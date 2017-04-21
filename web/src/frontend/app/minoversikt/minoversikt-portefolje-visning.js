@@ -71,7 +71,7 @@ class VeilederPortefoljeVisning extends Component {
         const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
 
         const pagineringTekst = (
-            antallTotalt > 0 ?
+            antallTotalt > 0 && antallReturnert !== 0 ?
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
                     values={{
@@ -83,7 +83,12 @@ class VeilederPortefoljeVisning extends Component {
                 />) :
                 (<FormattedMessage
                     id="enhet.portefolje.paginering.tekst"
-                    values={{ fraIndex: '0', tilIndex: '0', antallTotalt: '0', visDiagram }}
+                    values={{
+                        fraIndex: '0',
+                        tilIndex: '0',
+                        antallTotalt,
+                        visDiagram
+                    }}
                 />)
         );
 
