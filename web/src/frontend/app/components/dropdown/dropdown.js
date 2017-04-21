@@ -72,9 +72,10 @@ class Dropdown extends Component {
             <div className={btnCls(apen, className)} ref={this.bindComponent}>
                 <div className="dropdown__btnwrapper">
                     <button
+                        type="button"
                         className="dropdown__btn"
                         onClick={this.toggleDropdown}
-                        aria-pressed={apen}
+                        aria-expanded={apen}
                         aria-controls={`${name}-dropdown__innhold`}
                     >
                         {name}
