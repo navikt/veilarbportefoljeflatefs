@@ -16,6 +16,13 @@ class Diagram extends Component {
         hentDiagram(enhet, veileder, filtreringsvalg);
     }
 
+    componentWillUpdate(nextProps) {
+        const { filtreringsvalg, enhet, veileder, hentDiagram } = this.props;
+        if (JSON.stringify(filtreringsvalg) !== JSON.stringify(nextProps.filtreringsvalg)) {
+            hentDiagram(enhet, veileder, nextProps.filtreringsvalg);
+        }
+    }
+
     render() {
         const { diagramdata, portefolje, filtreringsvalg } = this.props;
 
