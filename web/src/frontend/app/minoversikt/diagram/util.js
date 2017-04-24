@@ -22,7 +22,7 @@ export function medYtelseSerie(antallBrukere, antallMisterYtelse) {
 export function maned(antallBrukere, diagramdata) {
     moment.locale('nb_no');
 
-    const labels = new Array(12).fill(0).map((_, i) => moment().add(i + 1, 'month').format('MMMM'));
+    const labels = new Array(12).fill(0).map((_, i) => moment().add(i, 'month').format('MMMM'));
 
     const antallMisterYtelse = Object.values(diagramdata);
     const antallMedYtelse = medYtelseSerie(antallBrukere, antallMisterYtelse);
