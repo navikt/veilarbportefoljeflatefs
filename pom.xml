@@ -121,6 +121,11 @@
                 <version>${modig-core-test.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>no.nav.sbl</groupId>
+                <artifactId>innholdshenter</artifactId>
+                <version>4.3</version>
+            </dependency>
 
             <!--Spring-->
             <dependency>

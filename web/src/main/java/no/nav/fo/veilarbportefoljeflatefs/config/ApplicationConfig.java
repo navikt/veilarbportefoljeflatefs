@@ -9,6 +9,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @Configuration
 @Import({
         TeksterServiceConfig.class,
+        DecoratorConfig.class,
         PingConfig.class
 })
 public class ApplicationConfig {
