@@ -26,8 +26,8 @@
 				<artifactId>aura-maven-plugin</artifactId>
 				<version>6.1.54</version>
 				<configuration>
-					***REMOVED***
-					***REMOVED***
+					<username>!!CHANGE ME!!</username>
+					<password>!!CHANGE ME!!</password>
 				</configuration>
 			</plugin>
 		</plugins>
