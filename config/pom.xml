@@ -20,17 +20,6 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		<plugins>
-			<plugin>
-				<groupId>no.nav.maven.plugins</groupId>
-				<artifactId>aura-maven-plugin</artifactId>
-				<version>6.1.54</version>
-				<configuration>
-					<username>!!CHANGE ME!!</username>
-					<password>!!CHANGE ME!!</password>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
 
 </project>
