@@ -85,9 +85,13 @@ class EnhetsportefoljeTabell extends Component {
                     <thead className="extra-head">
                         <tr>
                             <th />
-                            <th colSpan="2">Bruker</th>
+                            <th colSpan="2">
+                                <FormattedMessage id="enhet.portefolje.tabell.bruker" />
+                            </th>
                             {utlopsdatoHeader}
-                            <th colSpan="4">Veileder</th>
+                            <th colSpan="4">
+                                <FormattedMessage id="enhet.portefolje.tabell.veileder" />
+                            </th>
                         </tr>
                     </thead>
                     <thead className="tabell__subhead">
@@ -174,7 +178,9 @@ class EnhetsportefoljeTabell extends Component {
                                 .map((veileder) => (settSammenNavn(veileder)))}</td>
                                 :
                             <td>
-                                <Tabelletiketter type="nybruker">Ny bruker</Tabelletiketter>
+                                <Tabelletiketter type="nybruker">
+                                    <FormattedMessage id="enhet.portefolje.tabelletikett.ny.bruker" />
+                                </Tabelletiketter>
                             </td>
                         }
                             <td >
@@ -182,15 +188,21 @@ class EnhetsportefoljeTabell extends Component {
                             </td>
                             <td>
                                 {bruker.sikkerhetstiltak.length > 0 ?
-                                    <Tabelletiketter type="sikkerhetstiltak">Sikkerhetstiltak</Tabelletiketter> : null}
+                                    <Tabelletiketter type="sikkerhetstiltak">
+                                        <FormattedMessage id="enhet.portefolje.tabelletikett.sikkerhetstiltak" />
+                                    </Tabelletiketter> : null}
                                 {bruker.diskresjonskode !== null ?
                                     <Tabelletiketter type="diskresjonskode">
                                         {`Kode ${bruker.diskresjonskode}`}
                                     </Tabelletiketter> : null}
                                 {bruker.egenAnsatt === true ?
-                                    <Tabelletiketter type="egen-ansatt">Egen ansatt</Tabelletiketter> : null}
+                                    <Tabelletiketter type="egen-ansatt">
+                                        <FormattedMessage id="enhet.portefolje.tabelletikett.egen.ansatt" />
+                                    </Tabelletiketter> : null}
                                 {bruker.erDoed === true ?
-                                    <Tabelletiketter type="doed">Død</Tabelletiketter> : null}
+                                    <Tabelletiketter type="doed">
+                                        <FormattedMessage id="enhet.portefolje.tabelletikett.dod" />
+                                    </Tabelletiketter> : null}
                             </td>
                         </tr>)}
                     </tbody>

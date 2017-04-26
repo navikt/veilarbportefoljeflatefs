@@ -49,7 +49,7 @@ function renderFieldsFactory(form) {
                 <span className="text-hide" aria-live="polite" aria-atomic="true">
                     <FormattedMessage
                         id="components.viser.antall.treff"
-                        values={{antall: visibleElements}}
+                        values={{ antall: visibleElements }}
                     />
                 </span>
             </div>
