@@ -35,7 +35,9 @@ function MinOversiktSide({ enheter, veiledere, intl, filtervalg, ...props }) {
                 {visesAnnenVeiledersPortefolje ?
                     <Link to="veiledere" className="typo-normal tilbaketilveileder">
                         <i className="chevron--venstre" />
-                        <span>Til veilederoversikt</span>
+                        <span>
+                            <FormattedMessage id="minoversikt.link.til.veilederoversikt" />
+                        </span>
                     </Link> : null}
                 <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
                     { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
