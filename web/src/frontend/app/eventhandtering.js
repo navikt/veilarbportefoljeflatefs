@@ -27,11 +27,12 @@ export function erstattMiljoPlaceholder(lenke) {
 
 const getConfig = (initiellEnhet = undefined) => {
     const modiaUrl = erstattMiljoPlaceholder('https://modapp{{miljoStreng}}.adeo.no/modiabrukerdialog');
+    const miaUrl = erstattMiljoPlaceholder('https://modapp{{miljoStreng}}.adeo.no/mia');
 
     const lenker =
         {
             lenker: [
-                ['/mia', 'Arbeidsmarkedet'],
+                [miaUrl, 'Arbeidsmarkedet'],
                 [`/veilarbportefoljeflatefs/enhet?enhet=${initiellEnhet}&clean`, 'Enhetens oversikt'],
                 [`/veilarbportefoljeflatefs/portefolje?enhet=${initiellEnhet}&clean`, 'Min oversikt'],
                 [modiaUrl, 'Modia']
