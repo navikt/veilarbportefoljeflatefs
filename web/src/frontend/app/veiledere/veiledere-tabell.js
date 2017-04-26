@@ -56,7 +56,9 @@ class VeilederTabell extends Component {
                 <table className="tabell veileder-tabell portefolje-tabell typo-avsnitt">
                     <thead className="extra-head">
                         <tr>
-                            <th>Veileder</th>
+                            <th>
+                                <FormattedMessage id="enhet.veiledere.tabell.veileder" />
+                            </th>
                             <th colSpan="3" />
                         </tr>
                     </thead>
