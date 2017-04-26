@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { guid } from 'nav-frontend-js-utils';
+import { FormattedMessage } from 'react-intl'
 import { settVisningsmodus } from '../ducks/veilederpaginering';
 import { DIAGRAMVISNING, TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 
@@ -26,7 +27,9 @@ class ButtonRadiogroup extends Component {
                         checked={visningsmodus === DIAGRAMVISNING}
                         aria-selected={visningsmodus === DIAGRAMVISNING}
                     />
-                    <label htmlFor={`diagramvisning-${this.guid}`} className="typo-undertekst">Vis som diagram</label>
+                    <label htmlFor={`diagramvisning-${this.guid}`} className="typo-undertekst">
+                        <FormattedMessage id="paginering.vis.som.diagram" />
+                    </label>
                 </div>
                 <div className="visningsgruppe__knapp">
                     <input
@@ -38,7 +41,9 @@ class ButtonRadiogroup extends Component {
                         checked={visningsmodus === TABELLVISNING}
                         aria-selected={visningsmodus === TABELLVISNING}
                     />
-                    <label htmlFor={`tabellvisning-${this.guid}`} className="typo-undertekst">Vis som tabell</label>
+                    <label htmlFor={`tabellvisning-${this.guid}`} className="typo-undertekst">
+                        <FormattedMessage id="paginering.vis.som.tabell" />
+                    </label>
                 </div>
             </div>
         );
