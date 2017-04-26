@@ -2,6 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { reduxForm, Fields, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import { FormattedMessage } from 'react-intl';
 import { filtervalgShape } from '../../proptype-shapes';
 import { lagConfig } from './../../filtrering/filter-konstanter';
 

@@ -1,7 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import classNames from 'classnames';
 import { Element } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage } from 'react-intl';
 import ButtonRadiogroup from './buttonradiogroup';
 
 function KnappPanel({ children, disabled, pressed, ...props }) {
