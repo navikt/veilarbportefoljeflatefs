@@ -39,14 +39,13 @@ function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-li
         }, 0);
 
 
-
     return (
         <div className="field__container">
             {elements}
             <span className="text-hide" aria-live="polite" aria-atomic="true">
                 <FormattedMessage
                     id="components.viser.antall.treff"
-                    values={{antall: visibleElements}}
+                    values={{ antall: visibleElements }}
                 />
             </span>
         </div>
