@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { guid } from 'nav-frontend-js-utils';
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage } from 'react-intl';
 import { settVisningsmodus } from '../ducks/veilederpaginering';
 import { DIAGRAMVISNING, TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 
