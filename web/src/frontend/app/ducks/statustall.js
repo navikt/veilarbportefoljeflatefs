@@ -1,5 +1,5 @@
 import * as Api from './../middleware/api';
-import { STATUS, doThenDispatch } from './utils';
+import { doThenDispatch, STATUS } from './utils';
 
 // Actions
 export const OK = 'veilarbportefoljeflatefs/statustall/OK';
@@ -34,18 +34,18 @@ export default function reducer(state = initalState, action) {
 }
 
 // Action Creators
-export function hentStatusTall(enhet) {
-    return doThenDispatch(() => Api.hentStatusTall(enhet), {
-        OK,
-        FEILET,
-        PENDING
-    });
-}
-
-export function hentStatusTallForVeileder(enhet, veileder) {
-    return doThenDispatch(() => Api.hentStatusTallForveileder(enhet, veileder), {
-        OK,
-        FEILET,
-        PENDING
-    });
+export function hentStatusTall(enhet, veileder) {
+    if (veileder === undefined) {
+        return doThenDispatch(() => Api.hentStatusTall(enhet), {
+            OK,
+            FEILET,
+            PENDING
+        });
+    } else {
+        return doThenDispatch(() => Api.hentStatusTallForveileder(enhet, veileder), {
+            OK,
+            FEILET,
+            PENDING
+        });
+    }
 }
