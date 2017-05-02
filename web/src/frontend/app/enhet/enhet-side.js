@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import DocumentTitle from 'react-document-title';
 import Lenker from './../lenker/lenker';
-import { filtervalgShape, veilederShape } from '../proptype-shapes';
+import { filtervalgShape, veilederShape, statustallShape } from '../proptype-shapes';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringContainer from '../filtrering/filtrering-container';
@@ -43,9 +43,9 @@ class EnhetSide extends Component {
                     <Innholdslaster avhengigheter={[statustall]}>
                         <div id="oversikt-sideinnhold" role="tabpanel">
                             <p className="typo-infotekst begrensetbredde blokk-m">
-                                <FormattedMessage id="enhet.ingresstekst.enhetoversikt"/>
+                                <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                             </p>
-                            <FiltreringContainer filtervalg={filtervalg}/>
+                            <FiltreringContainer filtervalg={filtervalg} />
                             <FiltreringLabelContainer
                                 filtervalg={{
                                     ...filtervalg,
@@ -54,7 +54,7 @@ class EnhetSide extends Component {
                                 filtergruppe="enhet"
                             />
                             <EnhetsportefoljeVisning />
-                            <TomPortefoljeModal isOpen={statustall.data.totalt === 0}/>
+                            <TomPortefoljeModal isOpen={statustall.data.totalt === 0} />
                         </div>
                     </Innholdslaster>
                 </div>
@@ -67,6 +67,8 @@ EnhetSide.propTypes = {
     valgtEnhet: PT.object.isRequired,
     filtervalg: filtervalgShape.isRequired,
     veilederliste: PT.arrayOf(veilederShape).isRequired,
+    hentStatusTall: PT.func.isRequired,
+    statustall: statustallShape,
     intl: intlShape.isRequired
 };
 
