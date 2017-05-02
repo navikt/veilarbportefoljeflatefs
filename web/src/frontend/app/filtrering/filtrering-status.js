@@ -2,7 +2,7 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { endreFiltervalg } from '../ducks/filtrering';
-import { hentStatusTall, hentStatusTallForVeileder } from '../ducks/statustall';
+import { hentStatusTall } from '../ducks/statustall';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 import Barlabel from './barlabel';
 
@@ -102,7 +102,7 @@ const statusTallHenter = (dispatch, enhet, veileder, filtergruppe) => {
     if (filtergruppe === 'enhet') {
         dispatch(hentStatusTall(enhet));
     } else {
-        dispatch(hentStatusTallForVeileder(enhet, veileder.ident));
+        dispatch(hentStatusTall(enhet, veileder.ident));
     }
 };
 

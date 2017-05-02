@@ -2,19 +2,26 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import {
-    hentPortefoljeForEnhet,
-    settSortering,
-    nullstillFeilendeTilordninger
-} from '../ducks/portefolje';
+import { hentPortefoljeForEnhet, nullstillFeilendeTilordninger, settSortering } from '../ducks/portefolje';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Paginering from '../paginering/paginering';
 import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
-import { enhetShape, veilederShape, portefoljeShape, valgtEnhetShape, filtervalgShape } from '../proptype-shapes';
+import { enhetShape, filtervalgShape, portefoljeShape, valgtEnhetShape, veilederShape } from '../proptype-shapes';
 import { ytelsevalg } from '../filtrering/filter-konstanter';
-import { ASCENDING, DESCENDING, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
+import { ASCENDING, DEFAULT_PAGINERING_STORRELSE, DESCENDING } from '../konstanter';
 import { diagramSkalVises } from './../minoversikt/diagram/util';
 import Diagram from './../minoversikt/diagram/diagram';
+import VelgfilterMelding from './velg-filter-melding';
+
+function antallFilter(filtervalg) {
+    return Object.entries(filtervalg)
+        .map(([key, value]) => {
+            if (value === true) return 1;
+            else if (Array.isArray(value)) return value.length;
+            else if (value) return 1;
+            return 0;
+        }).reduce((a, b) => a + b, 0);
+}
 
 class EnhetsportefoljeVisning extends Component {
     componentWillMount() {
@@ -126,21 +133,31 @@ class EnhetsportefoljeVisning extends Component {
             />
         );
 
+        const harFilter = antallFilter(filtervalg) !== 0;
+
+        const content = harFilter ? (
+            <div>
+                {paginering}
+                {
+                    visDiagram ?
+                        <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId}/> :
+                        <EnhetsportefoljeTabell
+                            veiledere={veiledere.data.veilederListe}
+                            brukere={portefolje.data.brukere}
+                            settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
+                            portefolje={portefolje}
+                        />
+                }
+                {(antallTotalt >= 5 && !visDiagram) && paginering}
+            </div>
+        ) : (
+            <VelgfilterMelding />
+        );
+
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, veiledere, { status: portefolje.tilordningerstatus }]}>
-                    {paginering}
-                    {
-                        visDiagram ?
-                            <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
-                            <EnhetsportefoljeTabell
-                                veiledere={veiledere.data.veilederListe}
-                                brukere={portefolje.data.brukere}
-                                settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
-                                portefolje={portefolje}
-                            />
-                    }
-                    {(antallTotalt >= 5 && !visDiagram) && paginering}
+                    {content}
                 </Innholdslaster>
             </div>
         );
