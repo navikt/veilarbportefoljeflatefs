@@ -27,13 +27,13 @@ class TomPortefoljeModal extends Component {
                 closeButton={false}
             >
                 <Innholdstittel tag="h1" style={{ paddingRight: '3rem' }}>
-                    <IntlMessage id="modal.tittel"/>
+                    <IntlMessage id="modal.tittel" />
                 </Innholdstittel>
                 <Normaltekst className="blokk-s">
-                    <IntlMessage id="modal.infotekst"/>
+                    <IntlMessage id="modal.infotekst" />
                 </Normaltekst>
                 <button className="knapp knapp--hoved" onClick={this.lukkModal}>
-                    <IntlMessage id="modal.knapptekst"/>
+                    <IntlMessage id="modal.knapptekst" />
                 </button>
             </Modal>
         );

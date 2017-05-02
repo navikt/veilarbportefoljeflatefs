@@ -39,49 +39,49 @@ class VeilederTabell extends Component {
 
         return (
             <div>
-                <TomPortefoljeModal isOpen={veilederListe.length === 0}/>
+                <TomPortefoljeModal isOpen={veilederListe.length === 0} />
                 <table className="tabell veileder-tabell portefolje-tabell typo-avsnitt">
                     <thead className="extra-head">
-                    <tr>
-                        <th>Veileder</th>
-                        <th colSpan="3"/>
-                    </tr>
+                        <tr>
+                            <th>Veileder</th>
+                            <th colSpan="3" />
+                        </tr>
                     </thead>
                     <thead className="tabell__subhead">
-                    <tr>
-                        <th scope="col">
-                            <button
-                                onClick={this.props.sorterPaaEtternavn}
-                                className={classNames('lenke lenke--frittstaende', { valgt: sorterEtternavn })}
-                                aria-pressed={sorterEtternavn}
-                                aria-label={sorterEtternavn ?
+                        <tr>
+                            <th scope="col">
+                                <button
+                                    onClick={this.props.sorterPaaEtternavn}
+                                    className={classNames('lenke lenke--frittstaende', { valgt: sorterEtternavn })}
+                                    aria-pressed={sorterEtternavn}
+                                    aria-label={sorterEtternavn ?
                                     currentSortering.rekkefolge : 'inaktiv'}
-                            >
-                                <FormattedMessage id="enhet.veiledere.tabell.etternavn"/>
-                            </button>
-                            <FormattedMessage id="enhet.veiledere.tabell.fornavn"/>
-                        </th>
-                        <th scope="col">
-                            <FormattedMessage id="enhet.veiledere.tabell.ident"/>
-                        </th>
-                        <th className="tabell-element-center" scope="col">
-                            <button
-                                onClick={this.props.sorterPaaPortefoljestorrelse}
-                                className={
+                                >
+                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                                </button>
+                                <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
+                            </th>
+                            <th scope="col">
+                                <FormattedMessage id="enhet.veiledere.tabell.ident" />
+                            </th>
+                            <th className="tabell-element-center" scope="col">
+                                <button
+                                    onClick={this.props.sorterPaaPortefoljestorrelse}
+                                    className={
                                     classNames('lenke lenke--frittstaende', { valgt: sorterPaaPortefoljeStr })
                                 }
-                                aria-pressed={sorterPaaPortefoljeStr}
-                                aria-label={sorterPaaPortefoljeStr ?
+                                    aria-pressed={sorterPaaPortefoljeStr}
+                                    aria-label={sorterPaaPortefoljeStr ?
                                     currentSortering.rekkefolge : 'inaktiv'}
-                            >
-                                <FormattedMessage id="enhet.veiledere.tabell.brukere"/>
-                            </button>
-                        </th>
-                        <th />
-                    </tr>
+                                >
+                                    <FormattedMessage id="enhet.veiledere.tabell.brukere" />
+                                </button>
+                            </th>
+                            <th />
+                        </tr>
                     </thead>
                     <tbody>
-                    {veilederElementer}
+                        {veilederElementer}
                     </tbody>
                 </table>
             </div>

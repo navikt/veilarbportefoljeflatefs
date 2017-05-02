@@ -15,7 +15,7 @@ import VelgfilterMelding from './velg-filter-melding';
 
 function antallFilter(filtervalg) {
     return Object.entries(filtervalg)
-        .map(([key, value]) => {
+        .map(([_, value]) => {
             if (value === true) return 1;
             else if (Array.isArray(value)) return value.length;
             else if (value) return 1;
@@ -140,7 +140,7 @@ class EnhetsportefoljeVisning extends Component {
                 {paginering}
                 {
                     visDiagram ?
-                        <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId}/> :
+                        <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
                         <EnhetsportefoljeTabell
                             veiledere={veiledere.data.veilederListe}
                             brukere={portefolje.data.brukere}
