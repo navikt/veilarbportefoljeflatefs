@@ -64,8 +64,7 @@ class VeilederPortefoljeVisning extends Component {
             valgtEnhet,
             clearFeilendeTilordninger,
             filtervalg,
-            visningsmodus,
-            modalSkalVises
+            visningsmodus
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
@@ -95,15 +94,9 @@ class VeilederPortefoljeVisning extends Component {
         );
 
         let fnr = '';
-        var tilordningHarFeil = false;
         const feil = portefolje.feilendeTilordninger;
         if (feil && feil.length > 0) {
-            tilordningHarFeil = true;
             fnr = feil.map((b) => b.brukerFnr).toString();
-            console.log('Tilordning feilet');
-            clearFeilendeTilordninger();
-        } else {
-            tilordningHarFeil = false;
         }
 
         const paginering = (
@@ -124,7 +117,7 @@ class VeilederPortefoljeVisning extends Component {
 
         return (
             <div className="portefolje__container">
-               <Innholdslaster avhengigheter={[portefolje, { status: portefolje.tilordningerstatus }]}>
+                <Innholdslaster avhengigheter={[portefolje, { status: portefolje.tilordningerstatus }]}>
                     {paginering}
                     {
                         visDiagram ?
@@ -140,8 +133,12 @@ class VeilederPortefoljeVisning extends Component {
                             />
                     }
                     {(antallTotalt >= 5 && !visDiagram) && paginering}
-                   <TilordningFeiletModal isOpen={tilordningHarFeil} fnr={fnr} />
-               </Innholdslaster>
+                    <TilordningFeiletModal
+                        isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
+                        fnr={fnr}
+                        clearFeilendeTilordninger={clearFeilendeTilordninger}
+                    />
+                </Innholdslaster>
             </div>
         );
     }
@@ -164,9 +161,6 @@ VeilederPortefoljeVisning.propTypes = {
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
     sorteringsfelt: PT.string.isRequired,
-    modalSkalVises: PT.bool.isRequired,
-    toggleSkjulModal: PT.func.isRequired,
-    toggleVisModal: PT.func.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
     visningsmodus: PT.string.isRequired,
     filtervalg: filtervalgShape.isRequired
@@ -174,7 +168,6 @@ VeilederPortefoljeVisning.propTypes = {
 
 const mapStateToProps = (state) => ({
     portefolje: state.portefolje,
-    modalSkalVises: state.modal.visModal,
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
@@ -186,9 +179,7 @@ const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, ident, felt, rekkefolge, filtervalg, antall = 20, fra = 0) =>
         dispatch(hentPortefoljeForVeileder(enhet, ident, rekkefolge, felt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
-    toggleVisModal: () => dispatch(visModal()),
-    toggleSkjulModal: () => dispatch(skjulModal())
+    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);
