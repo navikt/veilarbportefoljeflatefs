@@ -12,6 +12,7 @@ import { ASCENDING, DEFAULT_PAGINERING_STORRELSE, DESCENDING } from '../konstant
 import { diagramSkalVises } from './../minoversikt/diagram/util';
 import Diagram from './../minoversikt/diagram/diagram';
 import VelgfilterMelding from './velg-filter-melding';
+import TilordningFeiletModal from '../modal/tilordning-feilet-modal';
 
 function antallFilter(filtervalg) {
     return Object.entries(filtervalg)
@@ -103,12 +104,10 @@ class EnhetsportefoljeVisning extends Component {
                 />)
         );
 
+        let fnr = '';
         const feil = portefolje.feilendeTilordninger;
         if (feil && feil.length > 0) {
-            const fnr = feil.map((b) => b.brukerFnr).toString();
-            /* eslint-disable no-undef, no-alert*/
-            alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`);
-            clearFeilendeTilordninger();
+            fnr = feil.map((b) => b.brukerFnr).toString();
         }
 
 
@@ -149,6 +148,11 @@ class EnhetsportefoljeVisning extends Component {
                         />
                 }
                 {(antallTotalt >= 5 && !visDiagram) && paginering}
+                <TilordningFeiletModal
+                    isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
+                    fnr={fnr}
+                    clearFeilendeTilordninger={clearFeilendeTilordninger}
+                />
             </div>
         ) : (
             <VelgfilterMelding />
