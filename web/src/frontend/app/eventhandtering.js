@@ -3,8 +3,10 @@ const handlePersonsokSubmit = (fnr) => {
     window.location.pathname = `veilarbpersonflatefs/${fnr}`;
 };
 
-const handleChangeEnhet = (enhet) => {
-    window.location.search = (`?enhet=${enhet}&clean`);
+const handleChangeEnhet = (enhet, type) => {
+    if(type !== 'init') {
+        window.location.search = (`?enhet=${enhet}&clean`);
+    }
 };
 
 function finnMiljoStreng() {
