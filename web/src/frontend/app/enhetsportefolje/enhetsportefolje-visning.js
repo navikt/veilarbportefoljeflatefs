@@ -170,11 +170,11 @@ class EnhetsportefoljeVisning extends Component {
             <VelgfilterMelding />
         );
 
-        const tilordningerStatus =  portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+        const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
         return (
             <div className="portefolje__container">
-                <Innholdslaster avhengigheter={[portefolje, veiledere, , { status: tilordningerStatus }]}>
+                <Innholdslaster avhengigheter={[portefolje, veiledere, { status: tilordningerStatus }]}>
                     {content}
                 </Innholdslaster>
             </div>

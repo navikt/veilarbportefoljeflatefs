@@ -123,7 +123,7 @@ class VeilederPortefoljeVisning extends Component {
 
         );
 
-        const tilordningerStatus =  portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+        const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
         return (
             <div className="portefolje__container">
