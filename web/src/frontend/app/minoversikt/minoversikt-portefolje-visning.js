@@ -18,6 +18,7 @@ import { ytelsevalg } from '../filtrering/filter-konstanter';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import TilordningFeiletModal from '../modal/tilordning-feilet-modal';
 import ServerFeilModal from '../modal/server-feil-modal';
+import { STATUS } from '../ducks/utils';
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
@@ -122,9 +123,11 @@ class VeilederPortefoljeVisning extends Component {
 
         );
 
+        const tilordningerStatus =  portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+
         return (
             <div className="portefolje__container">
-                <Innholdslaster avhengigheter={[portefolje]}>
+                <Innholdslaster avhengigheter={[portefolje, { status: tilordningerStatus }]}>
                     {paginering}
                     {
                         visDiagram ?
