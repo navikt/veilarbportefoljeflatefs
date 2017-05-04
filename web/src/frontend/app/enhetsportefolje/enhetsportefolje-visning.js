@@ -19,6 +19,7 @@ import Diagram from './../minoversikt/diagram/diagram';
 import VelgfilterMelding from './velg-filter-melding';
 import TilordningFeiletModal from '../modal/tilordning-feilet-modal';
 import ServerFeilModal from '../modal/server-feil-modal';
+import { STATUS } from '../ducks/utils';
 
 function antallFilter(filtervalg) {
     return Object.entries(filtervalg)
@@ -169,9 +170,11 @@ class EnhetsportefoljeVisning extends Component {
             <VelgfilterMelding />
         );
 
+        const tilordningerStatus =  portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+
         return (
             <div className="portefolje__container">
-                <Innholdslaster avhengigheter={[portefolje, veiledere]}>
+                <Innholdslaster avhengigheter={[portefolje, veiledere, , { status: tilordningerStatus }]}>
                     {content}
                 </Innholdslaster>
             </div>
