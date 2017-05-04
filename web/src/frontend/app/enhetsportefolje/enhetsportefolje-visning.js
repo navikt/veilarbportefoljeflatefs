@@ -2,7 +2,12 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet, nullstillFeilendeTilordninger, settSortering } from '../ducks/portefolje';
+import {
+    hentPortefoljeForEnhet,
+    nullstillFeilendeTilordninger,
+    settTilordningStatusOk,
+    settSortering
+} from '../ducks/portefolje';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Paginering from '../paginering/paginering';
 import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
@@ -12,6 +17,9 @@ import { ASCENDING, DEFAULT_PAGINERING_STORRELSE, DESCENDING } from '../konstant
 import { diagramSkalVises } from './../minoversikt/diagram/util';
 import Diagram from './../minoversikt/diagram/diagram';
 import VelgfilterMelding from './velg-filter-melding';
+import TilordningFeiletModal from '../modal/tilordning-feilet-modal';
+import ServerFeilModal from '../modal/server-feil-modal';
+import { STATUS } from '../ducks/utils';
 
 function antallFilter(filtervalg) {
     return Object.entries(filtervalg)
@@ -79,6 +87,7 @@ class EnhetsportefoljeVisning extends Component {
             sorteringsfelt,
             filtervalg,
             clearFeilendeTilordninger,
+            clearTilordningFeil,
             visningsmodus
         } = this.props;
 
@@ -103,12 +112,10 @@ class EnhetsportefoljeVisning extends Component {
                 />)
         );
 
+        let fnr = '';
         const feil = portefolje.feilendeTilordninger;
         if (feil && feil.length > 0) {
-            const fnr = feil.map((b) => b.brukerFnr).toString();
-            /* eslint-disable no-undef, no-alert*/
-            alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`);
-            clearFeilendeTilordninger();
+            fnr = feil.map((b) => b.brukerFnr).toString();
         }
 
 
@@ -149,14 +156,25 @@ class EnhetsportefoljeVisning extends Component {
                         />
                 }
                 {(antallTotalt >= 5 && !visDiagram) && paginering}
+                <TilordningFeiletModal
+                    isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
+                    fnr={fnr}
+                    clearFeilendeTilordninger={clearFeilendeTilordninger}
+                />
+                <ServerFeilModal
+                    isOpen={portefolje.tilordningerstatus === 'ERROR'}
+                    clearTilordningFeil={clearTilordningFeil}
+                />
             </div>
         ) : (
             <VelgfilterMelding />
         );
 
+        const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+
         return (
             <div className="portefolje__container">
-                <Innholdslaster avhengigheter={[portefolje, veiledere, { status: portefolje.tilordningerstatus }]}>
+                <Innholdslaster avhengigheter={[portefolje, veiledere, { status: tilordningerStatus }]}>
                     {content}
                 </Innholdslaster>
             </div>
@@ -181,6 +199,7 @@ EnhetsportefoljeVisning.propTypes = {
     sorteringsrekkefolge: PT.string.isRequired,
     sorteringsfelt: PT.string.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
+    clearTilordningFeil: PT.func.isRequired,
     filtervalg: filtervalgShape.isRequired,
     visningsmodus: PT.string.isRequired
 };
@@ -199,7 +218,8 @@ const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, rekkefolge, sorteringsfelt, filtervalg, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
+    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
+    clearTilordningFeil: () => dispatch(settTilordningStatusOk())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetsportefoljeVisning);

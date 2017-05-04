@@ -2,7 +2,12 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForVeileder, settSortering, nullstillFeilendeTilordninger } from '../ducks/portefolje';
+import {
+    hentPortefoljeForVeileder,
+    settSortering,
+    nullstillFeilendeTilordninger,
+    settTilordningStatusOk
+} from '../ducks/portefolje';
 import Paginering from '../paginering/paginering';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
@@ -11,6 +16,9 @@ import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
 import { ytelsevalg } from '../filtrering/filter-konstanter';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
+import TilordningFeiletModal from '../modal/tilordning-feilet-modal';
+import ServerFeilModal from '../modal/server-feil-modal';
+import { STATUS } from '../ducks/utils';
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
@@ -62,6 +70,7 @@ class VeilederPortefoljeVisning extends Component {
             sorteringsfelt,
             valgtEnhet,
             clearFeilendeTilordninger,
+            clearTilordningFeil,
             filtervalg,
             visningsmodus
         } = this.props;
@@ -92,12 +101,10 @@ class VeilederPortefoljeVisning extends Component {
                 />)
         );
 
+        let fnr = '';
         const feil = portefolje.feilendeTilordninger;
         if (feil && feil.length > 0) {
-            const fnr = feil.map((b) => b.brukerFnr).toString();
-            // TODO en alert???
-            alert(`Tilordning av veileder feilet brukere med fnr:${fnr}`); // eslint-disable-line no-undef
-            clearFeilendeTilordninger();
+            fnr = feil.map((b) => b.brukerFnr).toString();
         }
 
         const paginering = (
@@ -116,9 +123,11 @@ class VeilederPortefoljeVisning extends Component {
 
         );
 
+        const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+
         return (
             <div className="portefolje__container">
-                <Innholdslaster avhengigheter={[portefolje, { status: portefolje.tilordningerstatus }]}>
+                <Innholdslaster avhengigheter={[portefolje, { status: tilordningerStatus }]}>
                     {paginering}
                     {
                         visDiagram ?
@@ -134,6 +143,15 @@ class VeilederPortefoljeVisning extends Component {
                             />
                     }
                     {(antallTotalt >= 5 && !visDiagram) && paginering}
+                    <TilordningFeiletModal
+                        isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
+                        fnr={fnr}
+                        clearFeilendeTilordninger={clearFeilendeTilordninger}
+                    />
+                    <ServerFeilModal
+                        isOpen={portefolje.tilordningerstatus === 'ERROR'}
+                        clearTilordningFeil={clearTilordningFeil}
+                    />
                 </Innholdslaster>
             </div>
         );
@@ -158,6 +176,7 @@ VeilederPortefoljeVisning.propTypes = {
     sorteringsrekkefolge: PT.string.isRequired,
     sorteringsfelt: PT.string.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
+    clearTilordningFeil: PT.func.isRequired,
     visningsmodus: PT.string.isRequired,
     filtervalg: filtervalgShape.isRequired
 };
@@ -175,7 +194,8 @@ const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, ident, felt, rekkefolge, filtervalg, antall = 20, fra = 0) =>
         dispatch(hentPortefoljeForVeileder(enhet, ident, rekkefolge, felt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
+    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
+    clearTilordningFeil: () => dispatch(settTilordningStatusOk())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);
