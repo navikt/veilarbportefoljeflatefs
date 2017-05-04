@@ -12,6 +12,7 @@ const SETT_MARKERT_BRUKER_ALLE = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUK
 const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const TILDEL_VEILEDER_RELOAD = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_RELOAD';
 const TILDEL_VEILEDER_OK = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_OK';
+const TILDEL_VEILEDER_FEILET = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_FEILET';
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
 const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
@@ -131,6 +132,9 @@ export default function reducer(state = initialState, action) {
         case TILDEL_VEILEDER_OK: {
             return { ...state, tilordningerstatus: STATUS.OK };
         }
+        case TILDEL_VEILEDER_FEILET: {
+            return { ...state, tilordningerstatus: STATUS.ERROR };
+        }
         case NULLSTILL_FEILENDE_TILORDNINGER: {
             return { ...state, feilendeTilordninger: [] };
         }
@@ -212,9 +216,14 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
                     });
                 }
             })
-            // Setter ok her ettersom innholdslasteren ikke skal håndtere feilmeldingen.
-            .catch(handterFeil(dispatch, TILDEL_VEILEDER_OK));
+            .catch(handterFeil(dispatch, TILDEL_VEILEDER_FEILET));
     };
+}
+
+export function settTilordningStatusOk() {
+    return (dispatch) => dispatch({
+        type: TILDEL_VEILEDER_OK
+    });
 }
 
 export function nullstillFeilendeTilordninger() {

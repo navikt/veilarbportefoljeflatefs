@@ -2,7 +2,12 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet, nullstillFeilendeTilordninger, settSortering } from '../ducks/portefolje';
+import {
+    hentPortefoljeForEnhet,
+    nullstillFeilendeTilordninger,
+    settTilordningStatusOk,
+    settSortering
+} from '../ducks/portefolje';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Paginering from '../paginering/paginering';
 import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
@@ -13,6 +18,7 @@ import { diagramSkalVises } from './../minoversikt/diagram/util';
 import Diagram from './../minoversikt/diagram/diagram';
 import VelgfilterMelding from './velg-filter-melding';
 import TilordningFeiletModal from '../modal/tilordning-feilet-modal';
+import ServerFeilModal from '../modal/server-feil-modal';
 
 function antallFilter(filtervalg) {
     return Object.entries(filtervalg)
@@ -80,6 +86,7 @@ class EnhetsportefoljeVisning extends Component {
             sorteringsfelt,
             filtervalg,
             clearFeilendeTilordninger,
+            clearTilordningFeil,
             visningsmodus
         } = this.props;
 
@@ -153,6 +160,10 @@ class EnhetsportefoljeVisning extends Component {
                     fnr={fnr}
                     clearFeilendeTilordninger={clearFeilendeTilordninger}
                 />
+                <ServerFeilModal
+                    isOpen={portefolje.tilordningerstatus === 'ERROR'}
+                    clearTilordningFeil={clearTilordningFeil}
+                />
             </div>
         ) : (
             <VelgfilterMelding />
@@ -160,7 +171,7 @@ class EnhetsportefoljeVisning extends Component {
 
         return (
             <div className="portefolje__container">
-                <Innholdslaster avhengigheter={[portefolje, veiledere, { status: portefolje.tilordningerstatus }]}>
+                <Innholdslaster avhengigheter={[portefolje, veiledere]}>
                     {content}
                 </Innholdslaster>
             </div>
@@ -185,6 +196,7 @@ EnhetsportefoljeVisning.propTypes = {
     sorteringsrekkefolge: PT.string.isRequired,
     sorteringsfelt: PT.string.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired,
+    clearTilordningFeil: PT.func.isRequired,
     filtervalg: filtervalgShape.isRequired,
     visningsmodus: PT.string.isRequired
 };
@@ -203,7 +215,8 @@ const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, rekkefolge, sorteringsfelt, filtervalg, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger())
+    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
+    clearTilordningFeil: () => dispatch(settTilordningStatusOk())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetsportefoljeVisning);
