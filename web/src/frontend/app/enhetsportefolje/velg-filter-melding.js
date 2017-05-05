@@ -7,7 +7,7 @@ function VelgFilterMelding() {
         <div className="velgfiltermelding">
             <div className="velgfiltermelding__ikon blokk-xxs" />
 
-            <Undertittel aria-live="polite" aria-atomic="true">
+            <Undertittel aria-live="assertive" role="alert" aria-atomic="true">
                 <FormattedMessage id="velgfilter.melding" />
             </Undertittel>
         </div>
