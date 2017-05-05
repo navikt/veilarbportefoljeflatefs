@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FilterIkon = () => (
-    <svg className="filter-ikon-x-svg">
+    <svg aria-hidden="true" className="filter-ikon-x-svg">
         <title>Filter_X</title>
         <desc>Created with Sketch.</desc>
         <path
