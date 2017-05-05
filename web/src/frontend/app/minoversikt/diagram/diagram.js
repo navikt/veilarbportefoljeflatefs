@@ -49,6 +49,9 @@ class Diagram extends Component {
                                 </MultiFormattedMessage>
                             </div>
                             <div className="SR__table">
+                                <h1>
+                                    <FormattedMessage id={tekster.headertekst} />
+                                </h1>
                                 <Diagramtabell
                                     tekster={tekster}
                                     data={data}
