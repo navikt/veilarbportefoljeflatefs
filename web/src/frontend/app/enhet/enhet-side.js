@@ -68,7 +68,7 @@ EnhetSide.propTypes = {
     filtervalg: filtervalgShape.isRequired,
     veilederliste: PT.arrayOf(veilederShape).isRequired,
     hentStatusTall: PT.func.isRequired,
-    statustall: statustallShape,
+    statustall: PT.shape({ data: statustallShape }),
     intl: intlShape.isRequired
 };
 
