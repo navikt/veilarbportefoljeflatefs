@@ -7,19 +7,13 @@ function DiagramTabell({ tekster, data }) {
             <thead>
                 <tr>
                     <th>
-                        <h1>
-                        Fasett
-                    </h1>
+                        Måned/Kvartal
                     </th>
                     <th>
-                        <h1>
-                            <FormattedMessage id={tekster.legendtekst[0]} />
-                        </h1>
+                        <FormattedMessage id={tekster.legendtekst[0]} />
                     </th>
                     <th>
-                        <h1>
-                            <FormattedMessage id={tekster.legendtekst[1]} />
-                        </h1>
+                        <FormattedMessage id={tekster.legendtekst[1]} />
                     </th>
                 </tr>
             </thead>
