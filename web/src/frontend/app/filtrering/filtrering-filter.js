@@ -1,5 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import { Element } from 'nav-frontend-typografi';
+import { FormattedMessage } from 'react-intl';
 import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import RadioFilterform from '../components/radio-filterform/radio-filterform';
@@ -20,7 +21,9 @@ function FiltreringFilter({ filtervalg, actions }) {
         <div className="filtrering-filter">
             <div className="row">
                 <div className="col-sm-3">
-                    <Element className="blokk-xxs" tag="h3">Demografi</Element>
+                    <Element className="blokk-xxs" tag="h3">
+                        <FormattedMessage id="filtrering.filter.tittel.demografi" />
+                    </Element>
                     <Dropdown name="Alder">
                         <CheckboxFilterform
                             form="alder"
@@ -47,7 +50,9 @@ function FiltreringFilter({ filtervalg, actions }) {
                     </Dropdown>
                 </div>
                 <div className="col-sm-3">
-                    <Element className="blokk-xxs" tag="h3">Situasjon</Element>
+                    <Element className="blokk-xxs" tag="h3">
+                        <FormattedMessage id="filtrering.filter.tittel.situasjon" />
+                    </Element>
                     <Dropdown name="Innsatsgruppe">
                         <CheckboxFilterform
                             form="innsatsgruppe"
@@ -82,7 +87,9 @@ function FiltreringFilter({ filtervalg, actions }) {
                     </Dropdown>
                 </div>
                 <div className="col-sm-3">
-                    <Element className="blokk-xxs" tag="h3">Ytelse</Element>
+                    <Element className="blokk-xxs" tag="h3">
+                        <FormattedMessage id="filtrering.filter.tittel.ytelse" />
+                    </Element>
                     <Dropdown name="Ytelse" className="dropdown--130bredde">
                         <RadioFilterform
                             form="ytelse"
