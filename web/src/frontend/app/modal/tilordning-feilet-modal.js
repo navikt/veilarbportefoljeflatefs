@@ -30,7 +30,7 @@ class TilordningFeiletModal extends Component {
         return (
             <Modal
                 contentLabel="Modal tilordning feilet"
-                isOpen={this.state.isOpen}
+                isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
                 closeButton={false}
             >
@@ -49,7 +49,7 @@ class TilordningFeiletModal extends Component {
 }
 
 TilordningFeiletModal.propTypes = {
-    isOpen: PT.bool.isRequired,
+    isOpen: PT.bool,
     fnr: PT.string.isRequired,
     clearFeilendeTilordninger: PT.func.isRequired
 };
