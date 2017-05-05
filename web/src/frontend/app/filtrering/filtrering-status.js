@@ -1,6 +1,7 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { Element } from 'nav-frontend-typografi';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { hentStatusTall } from '../ducks/statustall';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
@@ -45,10 +46,12 @@ class FiltreringStatus extends Component {
         return (
             <div className="filtrering-oversikt panel">
                 <div className="typo-element blokk-xs">
-                    <FormattedMessage
-                        id="filtrering.status.totalt-antall-brukere"
-                        values={{ antall: this.props.statustall.data.totalt }}
-                    />
+                    <Element className="blokk-xxs" tag="h3">
+                        <FormattedMessage
+                            id="filtrering.status.totalt-antall-brukere"
+                            values={{ antall: this.props.statustall.data.totalt }}
+                        />
+                    </Element>
                 </div>
                 { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : null }
                 <div className="skjema__input">
