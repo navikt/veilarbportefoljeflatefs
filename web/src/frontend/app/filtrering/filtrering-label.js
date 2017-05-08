@@ -4,7 +4,7 @@ import FilterIkon from '../components/filter-ikon';
 
 function FiltreringLabel({ label, slettFilter }) {
     return (
-        <button className="filtreringlabel typo-avsnitt" onClick={slettFilter}>
+        <button aria-label="Slett filter" className="filtreringlabel typo-avsnitt" onClick={slettFilter}>
             <span className="filtreringlabel__label">{lagConfig(label).label}</span>
             <FilterIkon />
         </button>

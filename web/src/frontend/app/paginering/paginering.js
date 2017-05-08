@@ -1,6 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import classNames from 'classnames';
 import { Element } from 'nav-frontend-typografi';
+import { FormattedMessage } from 'react-intl';
 import ButtonRadiogroup from './buttonradiogroup';
 
 function KnappPanel({ children, disabled, pressed, ...props }) {
@@ -48,7 +49,7 @@ function ToggleModusKnapp({ hentListe, sideStorrelse, viserAlle, antallReturnert
     if (skalVareInaktiv) {
         return (
             <KnappPanel disabled>
-                Se alle
+                <FormattedMessage id="paginering.se.alle" />
             </KnappPanel>
         );
     }
@@ -56,14 +57,14 @@ function ToggleModusKnapp({ hentListe, sideStorrelse, viserAlle, antallReturnert
     if (viserAlle) {
         return (
             <KnappPanel pressed onClick={() => hentListe(0, sideStorrelse)}>
-                Se alle
+                <FormattedMessage id="paginering.se.alle" />
             </KnappPanel>
         );
     }
 
     return (
         <KnappPanel onClick={() => hentListe(0, antallTotalt)}>
-            Se alle
+            <FormattedMessage id="paginering.se.alle" />
         </KnappPanel>
     );
 }
@@ -127,7 +128,9 @@ function Paginering(props) {
                         antallTotalt={antallTotalt}
                     />
                     <KnappPanel disabled={erPaForsteSide} onClick={gaTilSide(navarendeSide - 1)}>
-                        <Chevron retning="venstre">Forrige</Chevron>
+                        <Chevron retning="venstre">
+                            <FormattedMessage id="paginering.forrige" />
+                        </Chevron>
                     </KnappPanel>
 
                     {!erPaForsteSide && <KnappPanel onClick={gaTilSide(1)}>1</KnappPanel>}
@@ -139,7 +142,9 @@ function Paginering(props) {
                     {!erPaSisteSide && <KnappPanel onClick={gaTilSide(antallSider)}>{antallSider}</KnappPanel>}
 
                     <KnappPanel disabled={erPaSisteSide} onClick={gaTilSide(navarendeSide + 1)}>
-                        <Chevron retning="hoyre">Neste</Chevron>
+                        <Chevron retning="hoyre">
+                            <FormattedMessage id="paginering.neste" />
+                        </Chevron>
                     </KnappPanel>
                 </div> }
             </div>
