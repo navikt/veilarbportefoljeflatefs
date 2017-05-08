@@ -2,6 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { Field, Fields, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import { FormattedMessage } from 'react-intl';
 import { lagConfig } from './../../filtrering/filter-konstanter';
 
 function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-line react/prop-types
@@ -42,7 +43,10 @@ function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-li
         <div className="field__container">
             {elements}
             <span className="text-hide" aria-live="polite" aria-atomic="true">
-                Viser {visibleElements} treff
+                <FormattedMessage
+                    id="components.viser.antall.treff"
+                    values={{ antall: visibleElements }}
+                />
             </span>
         </div>
     );
@@ -62,9 +66,13 @@ function prepSubmit(name, fn, close) {
 function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown }) {
     const knappCls = ['knapp', 'knapp--mini', !pristine ? 'knapp--hoved' : ''].join(' ');
     const submitknapp = !pristine ? (
-        <button className={knappCls} type="submit">Velg</button>
+        <button className={knappCls} type="submit">
+            <FormattedMessage id="components.filterform.button.velg" />
+        </button>
         ) : (
-            <button className={knappCls} type="button" onClick={closeDropdown}>Lukk</button>
+            <button className={knappCls} type="button" onClick={closeDropdown}>
+                <FormattedMessage id="components.filterform.button.lukk" />
+            </button>
         );
 
     const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown));

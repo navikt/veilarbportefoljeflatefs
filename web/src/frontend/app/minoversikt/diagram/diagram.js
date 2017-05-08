@@ -9,6 +9,7 @@ import config from './config';
 import MultiFormattedMessage from '../../components/multiformattedmessage';
 import { ledetekster, kvartal, maned } from './util';
 import Innholdslaster from './../../innholdslaster/innholdslaster';
+import Diagramtabell from './diagram-tabell';
 
 class Diagram extends Component {
     componentDidMount() {
@@ -37,14 +38,25 @@ class Diagram extends Component {
 
                     return (
                         <div>
-                            <h1>
-                                <FormattedMessage id={tekster.headertekst} />
-                            </h1>
-                            <MultiFormattedMessage id={tekster.legendtekst}>
-                                {(diagramtekster) => (
-                                    <Chart config={config(data, diagramtekster)} pureConfig />
-                            )}
-                            </MultiFormattedMessage>
+                            <div aria-hidden="true">
+                                <h1>
+                                    <FormattedMessage id={tekster.headertekst} />
+                                </h1>
+                                <MultiFormattedMessage id={tekster.legendtekst}>
+                                    {(diagramtekster) => (
+                                        <Chart config={config(data, diagramtekster)} pureConfig />
+                                    )}
+                                </MultiFormattedMessage>
+                            </div>
+                            <div className="SR__table">
+                                <h1>
+                                    <FormattedMessage id={tekster.headertekst} />
+                                </h1>
+                                <Diagramtabell
+                                    tekster={tekster}
+                                    data={data}
+                                />
+                            </div>
                         </div>
                     );
                 }}

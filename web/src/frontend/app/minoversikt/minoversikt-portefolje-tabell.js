@@ -79,7 +79,9 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
             <thead className="extra-head">
                 <tr>
                     <th />
-                    <th>Bruker</th>
+                    <th>
+                        <FormattedMessage id="enhet.portefolje.tabell.bruker" />
+                    </th>
                     <th />
                     {utlopsdatoHeader}
                     <th />
@@ -134,7 +136,9 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                         {bruker.fnr !== null ?
                             <td className="tabell-element-center">{bruker.fnr}</td> :
                             <td className="ny-bruker-td">
-                                <span className="ny-bruker">Ny bruker</span>
+                                <span className="ny-bruker">
+                                    <FormattedMessage id="enhet.portefolje.tabelletikett.ny.bruker" />
+                                </span>
                             </td>
                         }
                         {
@@ -145,7 +149,7 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                         <td>
                             {bruker.sikkerhetstiltak.length > 0 ?
                                 <Tabelletiketter type="sikkerhetstiltak">
-                                    Sikkerhetstiltak
+                                    <FormattedMessage id="enhet.portefolje.tabelletikett.sikkerhetstiltak" />
                                 </Tabelletiketter> : null}
                             {bruker.diskresjonskode !== null ?
                                 <Tabelletiketter type="diskresjonskode">
@@ -153,10 +157,12 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                                 </Tabelletiketter> : null}
                             {bruker.egenAnsatt === true ?
                                 <Tabelletiketter type="egen-ansatt">
-                                    Egen ansatt
+                                    <FormattedMessage id="enhet.portefolje.tabelletikett.egen.ansatt" />
                                 </Tabelletiketter> : null}
                             {bruker.erDoed === true ?
-                                <Tabelletiketter type="doed">Død</Tabelletiketter> : null}
+                                <Tabelletiketter type="doed">
+                                    <FormattedMessage id="enhet.portefolje.tabelletikett.dod" />
+                                </Tabelletiketter> : null}
                         </td>
                     </tr>)}
             </tbody>
