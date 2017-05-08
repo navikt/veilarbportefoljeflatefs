@@ -1,6 +1,7 @@
 import * as Api from './../middleware/api';
 import { STATUS, doThenDispatch, handterFeil, toJson } from './utils';
 import { IKKE_SATT } from '../konstanter';
+import { oppdaterPortefolje } from './filtrering';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -198,7 +199,7 @@ export function markerAlleBrukere(markert) {
 
 
 export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch({ type: TILDEL_VEILEDER_RELOAD });
         Api.tilordneVeileder(tilordninger)
             .then(toJson)
@@ -216,7 +217,14 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
                     });
                 }
             })
-            .catch(handterFeil(dispatch, TILDEL_VEILEDER_FEILET));
+            .catch(handterFeil(dispatch, TILDEL_VEILEDER_FEILET))
+            .then(() => {
+                // Venter litt slik at indeks kan komme i sync
+                dispatch({ type: PENDING });
+                setTimeout(() => {
+                    oppdaterPortefolje(getState, dispatch, filtergruppe === 'veileder' ? filtergruppe : 'enhet', { ident: getState().enheter.ident });
+                }, 2000);
+            });
     };
 }
 
