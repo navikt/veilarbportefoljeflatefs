@@ -222,7 +222,9 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
                 // Venter litt slik at indeks kan komme i sync
                 dispatch({ type: PENDING });
                 setTimeout(() => {
-                    oppdaterPortefolje(getState, dispatch, filtergruppe === 'veileder' ? filtergruppe : 'enhet', { ident: getState().enheter.ident });
+                    const side = filtergruppe === 'veileder' ? filtergruppe : 'enhet';
+                    const enhet = { ident: getState().enheter.ident };
+                    oppdaterPortefolje(getState, dispatch, side, enhet);
                 }, 2000);
             });
     };
