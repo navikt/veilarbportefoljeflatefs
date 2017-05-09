@@ -12,7 +12,7 @@ const KolonneUtlopsdato = ({ bruker, ytelse }) => {
         return null;
     }
 
-    const dato = new Date(utlopsdato.year, utlopsdato.monthValue - 1, utlopsdato.dayOfMonth);
+    const dato = new Date(utlopsdato);
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
     return (
         <td className="tabell-element-center">
