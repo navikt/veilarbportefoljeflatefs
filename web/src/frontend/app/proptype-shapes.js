@@ -82,19 +82,3 @@ export const statustallShape = PT.shape({
     inaktiveBrukere: PT.number.isRequired
 });
 
-export const utlopsdatoShape = PT.shape({
-    chronology: PT.shape({
-        calendarType: PT.string.isRequired,
-        id: PT.string.isRequired
-    }),
-    dayOfMonth: PT.number.isRequired,
-    dayOfWeek: PT.string.isRequired,
-    dayOfYear: PT.number.isRequired,
-    hour: PT.number.isRequired,
-    minute: PT.number.isRequired,
-    month: PT.string.isRequired,
-    monthValue: PT.number.isRequired,
-    nano: PT.number.isRequired,
-    second: PT.number.isRequired,
-    year: PT.number.isRequired
-});
