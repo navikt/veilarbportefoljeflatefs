@@ -14,7 +14,7 @@ class FiltreringStatus extends Component {
     }
 
     componentWillMount() {
-        this.props.fetchStatusTall(this.props.enhet);
+        // this.props.fetchStatusTall(this.props.enhet);
     }
 
     handleChange(e) {
