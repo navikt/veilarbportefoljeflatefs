@@ -1,1 +1,1 @@
-Tilordning av veileder feilet brukere med fnr: {fnr}
+Tilordning av veileder til følgende brukere feilet:
