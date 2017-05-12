@@ -1,0 +1,35 @@
+.tilordningfeilet__modal {
+    text-align:center;
+    margin: 2rem 2rem 2rem 2rem;
+
+    .fnr__listitem {
+        width:6rem;
+    }
+
+    .tilordningfeiletmelding {
+        text-align: center;
+
+        &__ikon {
+            position: relative;
+            height: 2.5rem;
+            width: 2.5rem;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 100%;
+            background-color: @navRodDarken20;
+
+            &:after {
+                content: "";
+                position: absolute;
+                width: 70%;
+                height: 0.5rem;
+                display: block;
+                margin-left: 15%;
+                background-color: @white;
+                top: calc(1.25rem - 0.25rem);
+                border-radius: 2px;
+            }
+        }
+    }
+
+}

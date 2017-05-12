@@ -1,9 +1,11 @@
 import React, { Component, PropTypes as PT } from 'react';
 import Modal from 'nav-frontend-modal';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 
 Modal.setAppElement('#applikasjon');
+
+const fnrsToList = (fnrs) => (<ul>{(fnrs.map((fnr) => <li className="fnr__listitem">{fnr}</li>))}</ul>);
 
 class TilordningFeiletModal extends Component {
     constructor(props) {
@@ -34,15 +36,21 @@ class TilordningFeiletModal extends Component {
                 onRequestClose={this.lukkModal}
                 closeButton={false}
             >
-                <Innholdstittel tag="h1" style={{ paddingRight: '3rem' }}>
-                    <IntlMessage id="modal.tilordning.feilet.tittel" />
-                </Innholdstittel>
-                <Normaltekst className="blokk-s">
-                    <IntlMessage id="modal.tilordning.feilet.infotekst" values={{ fnr: this.props.fnr }} />
-                </Normaltekst>
-                <button className="knapp knapp--hoved" onClick={this.lukkModal}>
-                    <IntlMessage id="modal.tilordning.feilet.knapptekst" />
-                </button>
+                <div className="tilordningfeilet__modal">
+                    <div className="tilordningfeiletmelding blokk-m">
+                        <div className="tilordningfeiletmelding__ikon blokk-xxs" />
+                    </div>
+                    <Undertittel tag="h1" className="blokk-xxs">
+                        <IntlMessage id="modal.tilordning.feilet.tittel" />
+                    </Undertittel>
+                    <Normaltekst className="blokk-s">
+                        <IntlMessage id="modal.tilordning.feilet.infotekst" />
+                    </Normaltekst>
+                    {fnrsToList(this.props.fnr)}
+                    <button className="knapp knapp--hoved" onClick={this.lukkModal}>
+                        <IntlMessage id="modal.tilordning.feilet.knapptekst" />
+                    </button>
+                </div>
             </Modal>
         );
     }
@@ -50,7 +58,7 @@ class TilordningFeiletModal extends Component {
 
 TilordningFeiletModal.propTypes = {
     isOpen: PT.bool,
-    fnr: PT.string.isRequired,
+    fnr: PT.arrayOf(PT.string).isRequired,
     clearFeilendeTilordninger: PT.func.isRequired
 };
 
