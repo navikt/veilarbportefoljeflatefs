@@ -13,10 +13,6 @@ class FiltreringStatus extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentWillMount() {
-        // this.props.fetchStatusTall(this.props.enhet);
-    }
-
     handleChange(e) {
         this.props.endreFilter('brukerstatus', e.target.value);
     }
