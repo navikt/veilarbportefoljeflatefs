@@ -20,7 +20,6 @@ class EnhetSide extends Component {
     }
 
     componentDidMount() {
-        console.log('EnhetSide::componentDidMount', this.props.valgtEnhet.enhet.enhetId);
         this.props.hentStatusTall(this.props.valgtEnhet.enhet.enhetId);
     }
 
