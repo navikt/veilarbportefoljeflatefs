@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as PT } from 'react';
 import Modal from 'nav-frontend-modal';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 
 Modal.setAppElement('#applikasjon');
@@ -34,15 +34,20 @@ class ServerFeilModal extends Component {
                 onRequestClose={this.lukkModal}
                 closeButton={false}
             >
-                <Innholdstittel tag="h1" style={{ paddingRight: '3rem' }}>
-                    <IntlMessage id="modal.tittel" />
-                </Innholdstittel>
-                <Normaltekst className="blokk-s">
-                    <IntlMessage id="modal.server.feil.infotekst" />
-                </Normaltekst>
-                <button className="knapp knapp--hoved" onClick={this.lukkModal}>
-                    <IntlMessage id="modal.knapptekst" />
-                </button>
+                <div className="tilordningfeilet__modal">
+                    <div className="tilordningfeiletmelding blokk-m">
+                        <div className="tilordningfeiletmelding__ikon blokk-xxs" />
+                    </div>
+                    <Undertittel tag="h1" className="blokk-xxs">
+                        <IntlMessage id="modal.tittel" />
+                    </Undertittel>
+                    <Normaltekst className="blokk-s">
+                        <IntlMessage id="modal.server.feil.infotekst" />
+                    </Normaltekst>
+                    <button className="knapp knapp--hoved" onClick={this.lukkModal}>
+                        <IntlMessage id="modal.knapptekst" />
+                    </button>
+                </div>
             </Modal>
         );
     }

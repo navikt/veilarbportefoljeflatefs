@@ -14,8 +14,7 @@ import { hentStatusTall } from './../ducks/statustall';
 
 
 class MinOversiktSide extends Component {
-        componentDidMount() {
-        console.log('MinOversiktSide::componentDidMount',this.props.valgtEnhet.enhet.enhetId);
+    componentDidMount() {
         this.props.hentStatusTall(this.props.valgtEnhet.enhet.enhetId);
     }
 
@@ -45,10 +44,10 @@ class MinOversiktSide extends Component {
                     <div className="enhet-side blokk-xl">
                         {visesAnnenVeiledersPortefolje ?
                             <Link to="veiledere" className="typo-normal tilbaketilveileder">
-                                <i className="chevron--venstre"/>
+                                <i className="chevron--venstre" />
                                 <span>
-                            <FormattedMessage id="minoversikt.link.til.veilederoversikt"/>
-                        </span>
+                                    <FormattedMessage id="minoversikt.link.til.veilederoversikt" />
+                                </span>
                             </Link> : null}
                         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
                             { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
@@ -58,7 +57,7 @@ class MinOversiktSide extends Component {
                                 />
                                 <div id="oversikt-sideinnhold" role="tabpanel">
                                     <p className="typo-infotekst begrensetbredde blokk-m">
-                                        <FormattedMessage id="ingresstekst.minoversikt"/>
+                                        <FormattedMessage id="ingresstekst.minoversikt" />
                                     </p>
                                     <FiltreringContainer
                                         filtervalg={filtervalg}
@@ -70,7 +69,7 @@ class MinOversiktSide extends Component {
                                         filtergruppe="veileder"
                                         veileder={gjeldendeVeileder}
                                     />
-                                    <VeilederPortefoljeVisning veileder={gjeldendeVeileder}/>
+                                    <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
                                 </div>
                             </div>
                         </section>
@@ -82,6 +81,7 @@ class MinOversiktSide extends Component {
 }
 
 MinOversiktSide.propTypes = {
+    hentStatusTall: PT.func.isRequired,
     valgtEnhet: PT.object.isRequired,
     enheter: PT.object.isRequired,
     veiledere: PT.object,
