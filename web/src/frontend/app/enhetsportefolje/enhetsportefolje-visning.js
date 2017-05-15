@@ -112,10 +112,10 @@ class EnhetsportefoljeVisning extends Component {
                 />)
         );
 
-        let fnr = '';
+        let fnr = [];
         const feil = portefolje.feilendeTilordninger;
         if (feil && feil.length > 0) {
-            fnr = feil.map((b) => b.brukerFnr).toString();
+            fnr = feil.map((b) => b.brukerFnr);
         }
 
 

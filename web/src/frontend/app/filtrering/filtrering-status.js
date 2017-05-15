@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { endreFiltervalg } from '../ducks/filtrering';
-import { hentStatusTall } from '../ducks/statustall';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 import Barlabel from './barlabel';
 
@@ -11,10 +10,6 @@ class FiltreringStatus extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-    }
-
-    componentWillMount() {
-        this.props.fetchStatusTall(this.props.enhet);
     }
 
     handleChange(e) {
@@ -88,8 +83,6 @@ FiltreringStatus.defaultProps = {
 
 FiltreringStatus.propTypes = {
     endreFilter: PT.func.isRequired,
-    fetchStatusTall: PT.func.isRequired,
-    enhet: PT.string.isRequired,
     statustall: PT.shape({ data: statustallShape.isRequired }).isRequired,
     filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
     veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
@@ -101,18 +94,9 @@ const mapStateToProps = (state) => ({
     statustall: state.statustall
 });
 
-const statusTallHenter = (dispatch, enhet, veileder, filtergruppe) => {
-    if (filtergruppe === 'enhet') {
-        dispatch(hentStatusTall(enhet));
-    } else {
-        dispatch(hentStatusTall(enhet, veileder.ident));
-    }
-};
-
 const mapDispatchToProps = (dispatch, ownProps) => ({
     endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(
-        filterId, filtervalg, ownProps.filtergruppe, ownProps.veileder)),
-    fetchStatusTall: (enhet) => statusTallHenter(dispatch, enhet, ownProps.veileder, ownProps.filtergruppe)
+        filterId, filtervalg, ownProps.filtergruppe, ownProps.veileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltreringStatus);
