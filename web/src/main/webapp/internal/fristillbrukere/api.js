@@ -20,10 +20,10 @@
     }
 
     function hentMe() {
-        return fetchAsJson('https://'+ window.location.hostname + VEILARBVEILEDER_URL + '/tjenester/veileder/me')
+        return fetchAsJson('https://'+ window.location.hostname + VEILARBVEILEDER_URL + '/tjenester/veileder/me', { credentials: credentials, });
     }
     function hentEnheter() {
-        return fetchAsJson('https://'+ window.location.hostname + VEILARBVEILEDER_URL + '/tjenester/veileder/enheter')
+        return fetchAsJson('https://'+ window.location.hostname + VEILARBVEILEDER_URL + '/tjenester/veileder/enheter', { credentials: credentials });
     }
     function hentBrukere(enhet) {
         var filtervalg = {
