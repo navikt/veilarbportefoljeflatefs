@@ -4,7 +4,7 @@ const handlePersonsokSubmit = (fnr) => {
 };
 
 const handleChangeEnhet = (enhet, type) => {
-    if(type !== 'init') {
+    if (type !== 'init') {
         window.location.search = (`?enhet=${enhet}&clean`);
     }
 };
