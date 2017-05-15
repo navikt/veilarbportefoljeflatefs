@@ -67,6 +67,19 @@
         <url-pattern>/internal/isAlive</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>fristillbrukere</servlet-name>
+        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.internal.ApplicationServlet</servlet-class>
+        <init-param>
+            <param-name>applicationFile</param-name>
+            <param-value>internal/fristillbrukere/index.html</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>fristillbrukere</servlet-name>
+        <url-pattern>/internal/fristillbrukere</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>decoratorFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
