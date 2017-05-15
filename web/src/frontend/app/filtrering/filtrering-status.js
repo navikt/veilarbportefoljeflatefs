@@ -40,7 +40,7 @@ class FiltreringStatus extends Component {
         );
         return (
             <div className="filtrering-oversikt panel">
-                <div className="typo-element blokk-xs">
+                <div className="typo-element blokk-m">
                     <Element className="blokk-xxs" tag="h3">
                         <FormattedMessage
                             id="filtrering.status.totalt-antall-brukere"

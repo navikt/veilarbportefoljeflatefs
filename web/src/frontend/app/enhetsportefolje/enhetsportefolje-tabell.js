@@ -66,7 +66,7 @@ class EnhetsportefoljeTabell extends Component {
 
         const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         return (
-            <div>
+            <div className="blokk-s">
                 <table className="tabell portefolje-tabell typo-avsnitt">
                     <thead className="extra-head">
                         <tr>
