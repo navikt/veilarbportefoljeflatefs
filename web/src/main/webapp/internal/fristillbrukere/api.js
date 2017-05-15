@@ -25,7 +25,7 @@
     function hentEnheter() {
         return fetchAsJson('https://'+ window.location.hostname + VEILARBVEILEDER_URL + '/tjenester/veileder/enheter', { credentials: credentials });
     }
-    function hentBrukere(enhet) {
+    function hentBrukere(enhet, veileder) {
         var filtervalg = {
             brukerstatus: "INAKTIVE_BRUKERE"
         };
@@ -38,7 +38,7 @@
             body: JSON.stringify(filtervalg)
         };
 
-        return fetchAsJson('https://'+ window.location.hostname + VEILARBPORTEFOLJE_URL + '/tjenester/enhet/'+ enhet +'/portefolje?fra=0&antall=99999&sortDirection=ikke_satt&sortField=ikke_satt', config);
+        return fetchAsJson('https://'+ window.location.hostname + VEILARBPORTEFOLJE_URL + '/tjenester/veileder/' + veileder + '/portefolje?enhet=' + enhet + '&fra=0&antall=99999&sortDirection=ikke_satt&sortField=ikke_satt', config);
     }
 
     function fjernTilordning(fnrs, fraVeileder) {

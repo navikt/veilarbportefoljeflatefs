@@ -166,11 +166,12 @@ source.listen('click', Source.Event.matches('.fristillBtn', fristillHandler));
 
 
 source.listen('click', Source.Event.matches('.enhetBtn', function (event) {
+    var me = document.querySelector('.saksbehandlerident').dataset.ident;
     var enhetid = event.target.dataset.enhetid;
     var enhetnavn = event.target.dataset.enhetnavn;
 
     source.fromPromise('brukere',
-        api.hentBrukere(event.target.dataset.enhetid)
+        api.hentBrukere(event.target.dataset.enhetid, me)
             .then(function (brukere) {
                 return {
                     enhet: {
