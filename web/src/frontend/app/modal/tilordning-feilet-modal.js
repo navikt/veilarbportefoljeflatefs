@@ -5,7 +5,7 @@ import { IntlMessage } from '../utils/intl-utils';
 
 Modal.setAppElement('#applikasjon');
 
-const fnrsToList = (fnrs) => (<ul>{(fnrs.map((fnr) => <li className="fnr__listitem">{fnr}</li>))}</ul>);
+const fnrsToList = (fnrs) => (<ul>{(fnrs.map((fnr) => <li key={fnr} className="fnr__listitem">{fnr}</li>))}</ul>);
 
 class TilordningFeiletModal extends Component {
     constructor(props) {
