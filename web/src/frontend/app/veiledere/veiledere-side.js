@@ -105,7 +105,7 @@ class VeiledereSide extends Component {
                 <div className="veiledere-side">
                     <Lenker />
                     <div id="oversikt-sideinnhold" role="tabpanel">
-                        <p className="typo-infotekst begrensetbredde blokk-m">
+                        <p className="typo-infotekst begrensetbredde blokk-l">
                             <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
                         </p>
                         <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
