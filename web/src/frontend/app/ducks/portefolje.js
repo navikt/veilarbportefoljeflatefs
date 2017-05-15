@@ -201,6 +201,7 @@ export function markerAlleBrukere(markert) {
 export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
     return (dispatch, getState) => {
         dispatch({ type: TILDEL_VEILEDER_RELOAD });
+        dispatch({ type: PENDING });
         Api.tilordneVeileder(tilordninger)
             .then(toJson)
             .then((res) => {
@@ -220,7 +221,6 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
             .catch(handterFeil(dispatch, TILDEL_VEILEDER_FEILET))
             .then(() => {
                 // Venter litt slik at indeks kan komme i sync
-                dispatch({ type: PENDING });
                 setTimeout(() => {
                     const side = filtergruppe === 'veileder' ? filtergruppe : 'enhet';
                     const enhet = { ident: getState().enheter.ident };
