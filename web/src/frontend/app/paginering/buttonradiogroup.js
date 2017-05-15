@@ -26,6 +26,7 @@ class ButtonRadiogroup extends Component {
                         value="diagramvisning"
                         checked={visningsmodus === DIAGRAMVISNING}
                         aria-selected={visningsmodus === DIAGRAMVISNING}
+                        className="diagramvisning__radio__input"
                     />
                     <label htmlFor={`diagramvisning-${this.guid}`} className="typo-undertekst">
                         <FormattedMessage id="paginering.vis.som.diagram" />
@@ -40,6 +41,7 @@ class ButtonRadiogroup extends Component {
                         value="tabellvisning"
                         checked={visningsmodus === TABELLVISNING}
                         aria-selected={visningsmodus === TABELLVISNING}
+                        className="diagramvisning__radio__input"
                     />
                     <label htmlFor={`tabellvisning-${this.guid}`} className="typo-undertekst">
                         <FormattedMessage id="paginering.vis.som.tabell" />
