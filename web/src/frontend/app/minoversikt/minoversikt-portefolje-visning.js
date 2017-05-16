@@ -107,7 +107,7 @@ class VeilederPortefoljeVisning extends Component {
             fnr = feil.map((b) => b.brukerFnr);
         }
 
-        const paginering = (
+        const paginering = (visDiagramknapper) => (
             <Paginering
                 antallTotalt={antallTotalt}
                 antallReturnert={antallReturnert}
@@ -117,7 +117,7 @@ class VeilederPortefoljeVisning extends Component {
                         sorteringsfelt, sorteringsrekkefolge, filtervalg, antall, fra)}
                 tekst={pagineringTekst}
                 sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
-                visButtongroup={visButtonGroup}
+                visButtongroup={visDiagramknapper}
                 visDiagram={visDiagram}
             />
 
@@ -128,7 +128,7 @@ class VeilederPortefoljeVisning extends Component {
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, { status: tilordningerStatus }]}>
-                    {paginering}
+                    {paginering(visButtonGroup)}
                     {
                         visDiagram ?
                             <Diagram
@@ -142,7 +142,7 @@ class VeilederPortefoljeVisning extends Component {
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
-                    {(antallTotalt >= 5 && !visDiagram) && paginering}
+                    {(antallTotalt >= 5 && !visDiagram) && paginering(false)}
                     <TilordningFeiletModal
                         isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
                         fnr={fnr}

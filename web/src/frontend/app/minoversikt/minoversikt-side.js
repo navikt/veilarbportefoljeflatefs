@@ -56,7 +56,7 @@ class MinOversiktSide extends Component {
                                     veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
                                 />
                                 <div id="oversikt-sideinnhold" role="tabpanel">
-                                    <p className="typo-infotekst begrensetbredde blokk-m">
+                                    <p className="typo-infotekst begrensetbredde blokk-l">
                                         <FormattedMessage id="ingresstekst.minoversikt" />
                                     </p>
                                     <FiltreringContainer
