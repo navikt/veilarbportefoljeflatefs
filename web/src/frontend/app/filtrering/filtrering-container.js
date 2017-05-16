@@ -79,7 +79,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     velgVeileder: (tildelinger, tilVeileder) => dispatch(
-        tildelVeileder(tildelinger, tilVeileder, ownProps.filtergruppe)
+        tildelVeileder(tildelinger, tilVeileder, ownProps.filtergruppe, ownProps.veileder)
     ),
     actions: {
         endreFiltervalg: (...args) => dispatch(endreFiltervalg(...args, ownProps.filtergruppe, ownProps.veileder))

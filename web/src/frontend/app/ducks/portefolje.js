@@ -198,7 +198,7 @@ export function markerAlleBrukere(markert) {
 }
 
 
-export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
+export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder = {}) {
     return (dispatch, getState) => {
         dispatch({ type: TILDEL_VEILEDER_RELOAD });
         dispatch({ type: PENDING });
@@ -223,8 +223,8 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
                 // Venter litt slik at indeks kan komme i sync
                 setTimeout(() => {
                     const side = filtergruppe === 'veileder' ? filtergruppe : 'enhet';
-                    const enhet = { ident: getState().enheter.ident };
-                    oppdaterPortefolje(getState, dispatch, side, enhet);
+                    const ident = { ident: gjeldendeVeileder.ident || getState().enheter.ident };
+                    oppdaterPortefolje(getState, dispatch, side, ident);
                 }, 2000);
             });
     };
