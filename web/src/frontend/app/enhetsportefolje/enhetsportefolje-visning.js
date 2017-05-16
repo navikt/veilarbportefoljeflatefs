@@ -119,7 +119,7 @@ class EnhetsportefoljeVisning extends Component {
         }
 
 
-        const paginering = (
+        const paginering = (visDiagramknapper) => (
             <Paginering
                 antallTotalt={antallTotalt}
                 fraIndex={fraIndex}
@@ -135,7 +135,7 @@ class EnhetsportefoljeVisning extends Component {
                 tekst={pagineringTekst}
                 sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
                 antallReturnert={antallReturnert}
-                visButtongroup={visButtongroup}
+                visButtongroup={visDiagramknapper}
                 visDiagram={visDiagram}
             />
         );
@@ -144,7 +144,7 @@ class EnhetsportefoljeVisning extends Component {
 
         const content = harFilter ? (
             <div>
-                {paginering}
+                {paginering(visButtongroup)}
                 {
                     visDiagram ?
                         <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
@@ -155,7 +155,7 @@ class EnhetsportefoljeVisning extends Component {
                             portefolje={portefolje}
                         />
                 }
-                {(antallTotalt >= 5 && !visDiagram) && paginering}
+                {(antallTotalt >= 5 && !visDiagram) && paginering(false)}
                 <TilordningFeiletModal
                     isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
                     fnr={fnr}
