@@ -2,6 +2,9 @@ var el = Sink.createElement;
 var source = new Source(document);
 var api = new FristillApi();
 
+var state = {
+};
+
 function whoamiRenderer(error, data) {
     if (error) {
         return el('h2', {}, 'Feil ved innlasting av konteksdata...');
@@ -16,8 +19,7 @@ function whoamiRenderer(error, data) {
             el(
                 'span',
                 {
-                    'class': 'saksbehandlerident',
-                    'data-ident': saksbehandler.ident
+                    'class': 'saksbehandlerident'
                 },
                 saksbehandler.ident + ' ' + saksbehandler.navn
             )
@@ -120,6 +122,9 @@ function whoamiHandler(data, error) {
         Sink.of(whoamiRenderer(error, null)).into(container);
     } else {
         Sink.of(whoamiRenderer(null, data)).into(container);
+        state.whoami = {};
+        state.whoami.me = data[0];
+        state.whoami.enheter = data[1].enhetliste;
     }
 }
 
@@ -130,6 +135,7 @@ function brukereHandler(data, error) {
         Sink.of(brukerRenderer(error, null)).into(container);
     } else {
         Sink.of(brukerRenderer(null, data)).into(container);
+        state.brukere = data;
     }
     valgtHandler();
 }
@@ -152,36 +158,49 @@ function fristillHandler() {
         }).join('\n');
 
     if (confirm('Dette vil fjerne følgende brukere fra din og enhetens portefølje.\n\n' + fnrsStr + '\n\n Er du sikker?')) {
-        var me = document.querySelector('.saksbehandlerident').dataset.ident;
-        api.fjernTilordning(fnrs, me)
+        var me = state.whoami.me.ident;
+        source.fromPromise('fjerntilordning', api.fjernTilordning(fnrs, me))
     }
+}
+
+function hentBrukere() {
+    return source.fromPromise('brukere',
+        api.hentBrukere(state.valgtEnhet.enhetid, state.whoami.me.ident)
+            .then(function (brukere) {
+                return {
+                    enhet: {
+                        enhetId: state.valgtEnhet.enhetid,
+                        navn: state.valgtEnhet.enhetnavn
+                    },
+                    brukere: brukere
+                }
+            })
+    );
 }
 
 source.listen('whoami_ERROR', whoamiHandler);
 source.listen('whoami_OK', whoamiHandler);  
 source.listen('brukere_ERROR', brukereHandler);
 source.listen('brukere_OK', brukereHandler);
+source.listen('fjerntilordning_ERROR', () => {
+    alert('Fjerning av tilordning feiled...\nPrøv igjen senere, evt. kontakt brukerstøtte...');
+});
+
+source.listen('fjerntilordning_OK', () => {
+    alert('Fjerning av tilordning OK...\n\n');
+    hentBrukere();
+});
+
 source.listen('click', Source.Event.matches('.fristillcheckbox', valgtHandler));
 source.listen('click', Source.Event.matches('.fristillBtn', fristillHandler));
 
 
 source.listen('click', Source.Event.matches('.enhetBtn', function (event) {
-    var me = document.querySelector('.saksbehandlerident').dataset.ident;
     var enhetid = event.target.dataset.enhetid;
     var enhetnavn = event.target.dataset.enhetnavn;
+    state.valgtEnhet = { enhetid: enhetid, enhetnavn: enhetnavn };
 
-    source.fromPromise('brukere',
-        api.hentBrukere(event.target.dataset.enhetid, me)
-            .then(function (brukere) {
-                return {
-                    enhet: {
-                        enhetId: enhetid,
-                        navn: enhetnavn
-                    },
-                    brukere: brukere
-                }
-            })
-    );
+    hentBrukere();
 }));
 
 source.listen('DOMContentLoaded', function () {
