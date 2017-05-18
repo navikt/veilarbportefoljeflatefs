@@ -15,7 +15,11 @@ import { hentStatusTall } from './../ducks/statustall';
 
 class MinOversiktSide extends Component {
     componentDidMount() {
-        this.props.hentStatusTall(this.props.valgtEnhet.enhet.enhetId);
+        const { veiledere, enheter, ...props } = this.props;
+        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
+        const innloggetVeileder = { ident: enheter.ident };
+        const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
+        this.props.hentStatusTall(this.props.valgtEnhet.enhet.enhetId, gjeldendeVeileder.ident);
     }
 
     render() {
@@ -100,7 +104,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentStatusTall: (enhet) => dispatch(hentStatusTall(enhet))
+    hentStatusTall: (enhet, veileder) => dispatch(hentStatusTall(enhet, veileder))
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(MinOversiktSide));
