@@ -68,16 +68,16 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>fristillbrukere</servlet-name>
+        <servlet-name>fjernebrukere</servlet-name>
         <servlet-class>no.nav.fo.veilarbportefoljeflatefs.internal.ApplicationServlet</servlet-class>
         <init-param>
             <param-name>applicationFile</param-name>
-            <param-value>internal/fristillbrukere/index.html</param-value>
+            <param-value>internal/fjernebrukere/index.html</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>fristillbrukere</servlet-name>
-        <url-pattern>/internal/fristillbrukere</url-pattern>
+        <servlet-name>fjernebrukere</servlet-name>
+        <url-pattern>/internal/fjernebrukere</url-pattern>
     </servlet-mapping>
 
     <filter>
