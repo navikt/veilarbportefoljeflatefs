@@ -182,11 +182,11 @@ source.listen('whoami_ERROR', whoamiHandler);
 source.listen('whoami_OK', whoamiHandler);  
 source.listen('brukere_ERROR', brukereHandler);
 source.listen('brukere_OK', brukereHandler);
-source.listen('fjerntilordning_ERROR', () => {
+source.listen('fjerntilordning_ERROR', function() {
     alert('Fjerning av tilordning feiled...\nPrøv igjen senere, evt. kontakt brukerstøtte...');
 });
 
-source.listen('fjerntilordning_OK', () => {
+source.listen('fjerntilordning_OK', function() {
     alert('Fjerning av tilordning OK...\n\n');
     hentBrukere();
 });
