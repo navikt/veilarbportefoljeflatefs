@@ -9,7 +9,9 @@ export function lagConfig(data) {
 
 export const brukerstatus = {
     NYE_BRUKERE: 'Nye brukere',
-    INAKTIVE_BRUKERE: 'Inaktive brukere'
+    INAKTIVE_BRUKERE: 'Inaktive brukere',
+    VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
+    VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker'
 };
 
 export const alder = {
