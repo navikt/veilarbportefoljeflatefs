@@ -77,8 +77,8 @@ class FiltreringStatus extends Component {
                     value="VENTER_PA_SVAR_FRA_NAV"
                     onChange={this.handleChange}
                     checked={brukerstatus === 'VENTER_PA_SVAR_FRA_NAV'}
-                    tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
-                    antall={this.props.statustall.data.venterPaSvarFraNav}
+                    tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfranav.brukere.checkbox"
+                    antall={this.props.statustall.data.venterPaSvarFraNAV}
                     max={this.props.statustall.data.totalt}
                     barClassname="inaktiveBrukere"
                 />
@@ -88,7 +88,7 @@ class FiltreringStatus extends Component {
                     value="VENTER_PA_SVAR_FRA_BRUKER"
                     onChange={this.handleChange}
                     checked={brukerstatus === 'VENTER_PA_SVAR_FRA_BRUKER'}
-                    tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
+                    tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfrabruker.brukere.checkbox"
                     antall={this.props.statustall.data.venterPaSvarFraBruker}
                     max={this.props.statustall.data.totalt}
                     barClassname="inaktiveBrukere"

@@ -12,7 +12,7 @@ const initalState = {
         totalt: 0,
         nyeBrukere: 0,
         inaktiveBrukere: 0,
-        venterPaSvarFraNav: 0,
+        venterPaSvarFraNAV: 0,
         venterPaSvarFraBruker: 0
     }
 };
