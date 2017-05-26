@@ -15,6 +15,14 @@ function BarInput({ id, tekstId, antall, max, barClassname, ...props }) {
     );
 }
 
+BarInput.propTypes = {
+    id: PT.string.isRequired,
+    tekstId: PT.string.isRequired,
+    antall: PT.number.isRequired,
+    max: PT.number.isRequired,
+    barClassname: PT.string
+};
+
 class FiltreringStatus extends Component {
     constructor(props) {
         super(props);
