@@ -6,6 +6,15 @@ import { endreFiltervalg } from '../ducks/filtrering';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 import Barlabel from './barlabel';
 
+function BarInput({ id, tekstId, antall, max, barClassname, ...props }) {
+    return (
+        <div className="skjema__input">
+            <input type="radio" id={id} className="radioknapp" {...props} />
+            <Barlabel htmlFor={id} tekstid={tekstId} antall={antall} max={max} className={barClassname}/>
+        </div>
+    );
+}
+
 class FiltreringStatus extends Component {
     constructor(props) {
         super(props);
@@ -20,24 +29,18 @@ class FiltreringStatus extends Component {
         const { brukerstatus } = this.props.filtervalg;
 
         const nyeBrukereCheckbox = (
-            <div className="skjema__input">
-                <input
-                    className="radioknapp"
-                    id="nyeBrukere"
-                    type="radio"
-                    name="brukerstatus"
-                    value="NYE_BRUKERE"
-                    onChange={this.handleChange}
-                    checked={brukerstatus === 'NYE_BRUKERE'}
-                />
-                <Barlabel
-                    htmlFor="nyeBrukere"
-                    tekstId="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox"
-                    antall={this.props.statustall.data.nyeBrukere}
-                    max={this.props.statustall.data.totalt}
-                />
-            </div>
+            <BarInput
+                id="nyeBrukere"
+                name="brukerstatus"
+                value="NYE_BRUKERE"
+                onChange={this.handleChange}
+                checked={brukerstatus === 'NYE_BRUKERE'}
+                tekstId="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox"
+                antall={this.props.statustall.data.nyeBrukere}
+                max={this.props.statustall.data.totalt}
+            />
         );
+
         return (
             <div className="filtrering-oversikt panel">
                 <div className="typo-element blokk-m">
@@ -49,24 +52,39 @@ class FiltreringStatus extends Component {
                     </Element>
                 </div>
                 { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : null }
-                <div className="skjema__input">
-                    <input
-                        className="radioknapp"
-                        id="inaktiveBrukere"
-                        type="radio"
-                        name="brukerstatus"
-                        value="INAKTIVE_BRUKERE"
-                        onChange={this.handleChange}
-                        checked={brukerstatus === 'INAKTIVE_BRUKERE'}
-                    />
-                    <Barlabel
-                        className="inaktiveBrukere"
-                        htmlFor="inaktiveBrukere"
-                        tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
-                        antall={this.props.statustall.data.inaktiveBrukere}
-                        max={this.props.statustall.data.totalt}
-                    />
-                </div>
+                <BarInput
+                    id="inaktiveBrukere"
+                    name="brukerstatus"
+                    value="INAKTIVE_BRUKERE"
+                    onChange={this.handleChange}
+                    checked={brukerstatus === 'INAKTIVE_BRUKERE'}
+                    tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
+                    antall={this.props.statustall.data.inaktiveBrukere}
+                    max={this.props.statustall.data.totalt}
+                    barClassname="inaktiveBrukere"
+                />
+                <BarInput
+                    id="venterPaSvarFraNAV"
+                    name="brukerstatus"
+                    value="VENTER_PA_SVAR_FRA_NAV"
+                    onChange={this.handleChange}
+                    checked={brukerstatus === 'VENTER_PA_SVAR_FRA_NAV'}
+                    tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
+                    antall={this.props.statustall.data.venterPaSvarFraNav}
+                    max={this.props.statustall.data.totalt}
+                    barClassname="inaktiveBrukere"
+                />
+                <BarInput
+                    id="venterPaSvarFraBruker"
+                    name="brukerstatus"
+                    value="VENTER_PA_SVAR_FRA_BRUKER"
+                    onChange={this.handleChange}
+                    checked={brukerstatus === 'VENTER_PA_SVAR_FRA_BRUKER'}
+                    tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
+                    antall={this.props.statustall.data.venterPaSvarFraBruker}
+                    max={this.props.statustall.data.totalt}
+                    barClassname="inaktiveBrukere"
+                />
             </div>
         );
     }
