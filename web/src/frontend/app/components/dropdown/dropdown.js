@@ -41,8 +41,11 @@ class Dropdown extends Component {
         document.body.removeEventListener('click', this.handler);// eslint-disable-line no-undef
     }
 
-    bindComponent(component) {
-        this.component = component;
+    settFokus(element) { // eslint-disable-line class-methods-use-this
+        if (element !== null) {
+            const elementer = element.querySelector('button, a, input, select');
+            elementer.focus();
+        }
     }
 
     toggleDropdown() {
@@ -60,11 +63,8 @@ class Dropdown extends Component {
         onLukk();
     }
 
-    settFokus(element) {
-        if (element !== null) {
-            const elementer = element.querySelector('button, a, input, select');
-            elementer.focus();
-        }
+    bindComponent(component) {
+        this.component = component;
     }
 
     render() {
