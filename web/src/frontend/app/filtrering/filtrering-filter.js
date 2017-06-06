@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import RadioFilterform from '../components/radio-filterform/radio-filterform';
+import AktivitetFilterform from './../components/aktivitet-filterform/aktivitet-filterform';
 import { filtervalgShape } from '../proptype-shapes';
 import {
     alder,
@@ -13,7 +14,8 @@ import {
     formidlingsgruppe,
     servicegruppe,
     ytelse,
-    rettighetsgruppe
+    rettighetsgruppe,
+    aktiviteter
 } from './filter-konstanter';
 
 function FiltreringFilter({ filtervalg, actions }) {
@@ -96,6 +98,19 @@ function FiltreringFilter({ filtervalg, actions }) {
                             valg={ytelse}
                             onSubmit={actions.endreFiltervalg}
                             filtervalg={filtervalg}
+                        />
+                    </Dropdown>
+                </div>
+                <div className="col-sm-3">
+                    <Element className="blokk-xxs" tag="h3">
+                        <FormattedMessage id="filtrering.filter.tittel.aktivitet" />
+                    </Element>
+                    <Dropdown name="Aktivitet" className="dropdown--130bredde">
+                        <AktivitetFilterform
+                            form="aktiviteter"
+                            valg={aktiviteter}
+                            filtervalg={filtervalg}
+                            onSubmit={actions.endreFiltervalg}
                         />
                     </Dropdown>
                 </div>

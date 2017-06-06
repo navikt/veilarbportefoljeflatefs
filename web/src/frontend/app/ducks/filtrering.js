@@ -18,6 +18,7 @@ export const initialState = {
     servicegruppe: [],
     rettighetsgruppe: [],
     veiledere: [],
+    aktiviteter: {},
     ytelse: null
 };
 
@@ -26,6 +27,10 @@ function fjern(verdi, fjernVerdi) {
         return false;
     } else if (Array.isArray(verdi)) {
         return verdi.filter((enkeltVerdi) => enkeltVerdi !== fjernVerdi);
+    } else if (fjernVerdi && typeof verdi === 'object') {
+        return Object.entries(verdi)
+            .filter(([key]) => key !== fjernVerdi)
+            .reduce((acc, [key, value]) => ({...acc, [key]: value}), {});
     } else if (fjernVerdi === null) {
         return null;
     }
