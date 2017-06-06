@@ -24,6 +24,16 @@ function FiltreringLabelContainer({ filtervalg, actions: { slettAlle, slettEnkel
                         slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                     />
                     ));
+            } else if (value && typeof value === 'object') {
+                return Object.entries(value)
+                    .filter(([_, aktivitetvalue]) => aktivitetvalue !== 'NA')
+                    .map(([aktivitetkey, aktivitetvalue]) => (
+                        <FiltreringLabel
+                            key={`aktivitet-${aktivitetkey}`}
+                            label={`${FilterKonstanter[key][aktivitetkey]}: ${aktivitetvalue}`}
+                            slettFilter={() => slettEnkelt(key, aktivitetkey)}
+                        />
+                    ));
             } else if (value) {
                 return [
                     <FiltreringLabel

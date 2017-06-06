@@ -1,16 +1,8 @@
 (function() {
-    function includes(base, needle) {
-        return base.indexOf(needle) >= 0;
-    }
-    function erDev() {
-        const url = window.location.href;
-        return includes(url, 'debug=true') || includes(url, 'devillo.no:9592')
-            || includes(url, 'devillo.no:9593') || includes(url, 'localhost:');
-    }
-    var credentials = erDev() ? 'include' : 'same-origin';
-    var VEILARBVEILEDER_URL = erDev() ? ':9590/veilarbveileder' : '/veilarbveileder';
-    var VEILARBPORTEFOLJE_URL = erDev() ? ':9594/veilarbportefolje' : '/veilarbportefolje';
-    var VEILARBSITUASJON_URL = erDev() ? ':8485/veilarbsituasjon' : '/veilarbsituasjon';
+    const credentials = 'same-origin';
+    const VEILARBVEILEDER_URL = '/veilarbveileder';
+    const VEILARBPORTEFOLJE_URL = '/veilarbportefolje';
+    const VEILARBSITUASJON_URL = '/veilarbsituasjon';
 
     function fetchAsJson(url, config) {
         return fetch(url, config)

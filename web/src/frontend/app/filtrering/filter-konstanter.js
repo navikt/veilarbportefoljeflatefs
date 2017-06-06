@@ -77,6 +77,11 @@ export const rettighetsgruppe = {
     VLONN: 'Ventelønn'
 };
 
+export const aktiviteter = {
+    JOBBSOEKING: 'Jobbsøking',
+    EGENAKTIVITET: 'Egen definert'
+};
+
 const veiledere = {
 };
 
@@ -92,5 +97,6 @@ export default {
     ytelse,
     ytelsevalg,
     rettighetsgruppe,
-    veiledere
+    veiledere,
+    aktiviteter
 };
