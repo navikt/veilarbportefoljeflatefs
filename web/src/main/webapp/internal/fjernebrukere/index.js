@@ -159,7 +159,11 @@ function fristillHandler() {
 
     if (confirm('Dette vil fjerne følgende brukere fra din og enhetens portefølje.\n\n' + fnrsStr + '\n\n Er du sikker?')) {
         var me = state.whoami.me.ident;
-        source.fromPromise('fjerntilordning', api.fjernTilordning(fnrs, me))
+        source.fromPromise(
+            'fjerntilordning',
+            api.fjernTilordning(fnrs, me)
+                .then(() => api.slettFraPortefolje(fnrs))
+        )
     }
 }
 
