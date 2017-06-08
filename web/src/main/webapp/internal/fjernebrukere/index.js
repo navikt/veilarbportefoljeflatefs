@@ -162,7 +162,9 @@ function fristillHandler() {
         source.fromPromise(
             'fjerntilordning',
             api.fjernTilordning(fnrs, me)
-                .then(() => api.slettFraPortefolje(fnrs))
+                .then(function() {
+                    api.slettFraPortefolje(fnrs)
+                })
         )
     }
 }
