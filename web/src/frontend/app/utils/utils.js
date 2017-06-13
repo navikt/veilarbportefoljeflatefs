@@ -2,12 +2,6 @@
 import queryString from 'query-string';
 import history from '../history';
 
-export function erDev() {
-    const url = window.location.href;
-    return url.includes('debug=true') || url.includes('devillo.no:9592')
-        || url.includes('devillo.no:9593') || url.includes('localhost:');
-}
-
 export function range(start, end, inclusive = false) {
     return new Array((end - start) + ((inclusive) ? 1 : 0)).fill(0).map((_, i) => start + i);
 }
