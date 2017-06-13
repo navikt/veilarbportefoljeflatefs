@@ -13,7 +13,8 @@ const initalState = {
         nyeBrukere: 0,
         inaktiveBrukere: 0,
         venterPaSvarFraNAV: 0,
-        venterPaSvarFraBruker: 0
+        venterPaSvarFraBruker: 0,
+        minArbeidsliste: 0
     }
 };
 

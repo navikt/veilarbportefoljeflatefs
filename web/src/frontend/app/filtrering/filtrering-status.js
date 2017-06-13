@@ -93,6 +93,24 @@ class FiltreringStatus extends Component {
                     max={this.props.statustall.data.totalt}
                     barClassname="inaktiveBrukere"
                 />
+                <div className="typo-element">
+                    <Element className="blokk-xxs" tag="h3">
+                        <FormattedMessage
+                            id="filtrering.status.arbeidsliste"
+                        />
+                    </Element>
+                </div>
+                <BarInput
+                    id="minArbeidsliste"
+                    name="brukerstatus"
+                    value="MIN_ARBEIDSLISTE"
+                    onChange={this.handleChange}
+                    checked={brukerstatus === 'MIN_ARBEIDSLISTE'}
+                    tekstId="enhet.filtrering.filtrering.oversikt.min.arbeidsliste.checkbox"
+                    antall={this.props.statustall.data.inaktiveBrukere} /* TODO: Må endres til min arbeidsliste */
+                    max={this.props.statustall.data.totalt}
+                    barClassname="inaktiveBrukere"
+                />
             </div>
         );
     }
