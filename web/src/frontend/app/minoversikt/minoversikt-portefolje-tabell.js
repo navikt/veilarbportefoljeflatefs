@@ -23,6 +23,7 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
     const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
     const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsnummer';
     const sorterUtlopsdato = ['utlopsdato', 'aapmaxtid'].includes(portefolje.sorteringsfelt);
+    const sorterArbeidsliste = portefolje.sorteringsfelt === 'arbeidsliste';
 
     const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
 
@@ -47,12 +48,24 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
         </th>
     );
 
-    const ddmmyyHeader = (<th className="tabell-element-center">
+    const ddmmyyUtlopsdatoHeader = (<th className="tabell-element-center">
         <button
             onClick={() => settSorteringOgHentPortefolje(utlopsdatoNavn)}
             className={classNames('lenke lenke--frittstaende', { valgt: sorterUtlopsdato })}
             aria-pressed={sorterUtlopsdato}
             aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
+                sorteringsrekkefolge : 'inaktiv'}
+        >
+            <FormattedMessage id="portefolje.tabell.ddmmyy" />
+        </button>
+    </th>);
+
+    const ddmmyyArbeidslisteHeader = (<th className="tabell-element-center">
+        <button
+            onClick={() => settSorteringOgHentPortefolje(utlopsdatoNavn)}
+            className={classNames('lenke lenke--frittstaende', { valgt: sorterArbeidsliste })}
+            aria-pressed={sorterArbeidsliste}
+            aria-label={(sorterArbeidsliste && sorteringsrekkefolge !== 'ikke_satt') ?
                 sorteringsrekkefolge : 'inaktiv'}
         >
             <FormattedMessage id="portefolje.tabell.ddmmyy" />
@@ -83,6 +96,9 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                         <FormattedMessage id="enhet.portefolje.tabell.bruker" />
                     </th>
                     <th />
+                    <th className="tabell-element-center">
+                        <FormattedMessage id="enhet.portefolje.tabell.arbeidsliste" />
+                    </th>
                     {utlopsdatoHeader}
                     <th />
                 </tr>
@@ -103,7 +119,8 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                     </th>
                     {navnHeader}
                     {fodselsnummerHeader}
-                    {ytelseFilterErAktiv(filtervalg.ytelse) ? ddmmyyHeader : null}
+                    {ddmmyyArbeidslisteHeader}
+                    {ytelseFilterErAktiv(filtervalg.ytelse) ? ddmmyyUtlopsdatoHeader : null}
                     <th />
                 </tr>
             </thead>
@@ -141,6 +158,7 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                                 </span>
                             </td>
                         }
+                        <td></td> /* Dato fra arbeidsliste */
                         {
                             ytelseFilterErAktiv(filtervalg.ytelse) ?
                                 <Utlopsdatokolonne bruker={bruker} ytelse={filtervalg.ytelse} />
