@@ -3,6 +3,12 @@ if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
     require('babel-polyfill'); // eslint-disable-line global-require
 }
 
+if (process.env.NODE_ENV !== 'production') {
+    console.log('Med mock');
+    require('./mocks');
+}
+
+
 /* eslint-disable import/first */
 import 'whatwg-fetch';
 import React from 'react';

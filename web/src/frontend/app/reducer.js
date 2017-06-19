@@ -4,6 +4,7 @@ import persistent from './utils/persistentReducer';
 import enheterReducer from './ducks/enheter';
 import ledeteksterReducer from './ducks/ledetekster';
 import portefoljeReducer from './ducks/portefolje';
+import pagineringReducer from './ducks/paginering';
 import veiledereReducer from './ducks/veiledere';
 import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
 import veilederpagineringReducer from './ducks/veilederpaginering';
@@ -11,6 +12,7 @@ import filtreringReducer, { initialState } from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
 import diagramReducer from './ducks/diagram';
+import sideReducer from './ducks/ui/side';
 import { slettCleanIUrl } from './utils/utils';
 
 function named(name, reducer) {
@@ -28,9 +30,13 @@ function named(name, reducer) {
 }
 
 export default combineReducers({
+    ui: combineReducers({
+        side: sideReducer
+    }),
     enheter: enheterReducer,
     ledetekster: ledeteksterReducer,
     portefolje: portefoljeReducer,
+    paginering: pagineringReducer,
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     veilederpaginering: veilederpagineringReducer,
