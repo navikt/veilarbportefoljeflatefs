@@ -10,6 +10,7 @@ import rendreDekorator, { settEnhetIDekorator } from './eventhandtering';
 import { STATUS } from './ducks/utils';
 import { leggEnhetIUrl } from './utils/utils';
 import { hentVeiledereForEnhet } from './ducks/veiledere';
+import { settSide } from './ducks/ui/side';
 import history from './history';
 import { enhetShape, valgtEnhetShape, veiledereShape } from './proptype-shapes';
 
@@ -30,17 +31,30 @@ class Application extends Component {
     }
 
     componentDidMount() {
+        this.oppdaterSideState();
         const pathname = location.pathname;// eslint-disable-line no-undef
         if (pathname === '/veilarbportefoljeflatefs/' ||
             pathname === '/veilarbportefoljeflatefs') {
             history.push('/enhet');
         }
+
+
     }
 
     componentDidUpdate() {
         const { enheter } = this.props;
         if (enheter.status === STATUS.OK && enheter.valgtEnhet.status !== STATUS.OK) {
             this.oppdaterDekoratorMedInitiellEnhet();
+        }
+        this.oppdaterSideState();
+    }
+
+    oppdaterSideState() {
+        const { routes } = this.props;
+        const lastFragment = routes[routes.length - 1].path;
+
+        if (this.props.side !== lastFragment) {
+            this.props.settSide(lastFragment);
         }
     }
 
@@ -67,6 +81,7 @@ class Application extends Component {
 
     render() {
         const { ledetekster = {}, enheter, children, veiledere } = this.props;
+
         return (
             <IntlProvider
                 defaultLocale="nb"
@@ -86,6 +101,7 @@ class Application extends Component {
 }
 
 Application.propTypes = {
+    side: PT.string.isRequired,
     children: PT.oneOfType([PT.arrayOf(PT.node), PT.node]).isRequired,
     hentTekster: PT.func.isRequired,
     velgEnhet: PT.func.isRequired,
@@ -111,6 +127,7 @@ Application.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+    side: state.ui.side.side,
     ledetekster: state.ledetekster,
     enheter: state.enheter,
     veiledere: state.veiledere
@@ -120,7 +137,8 @@ const mapDispatchToProps = (dispatch) => ({
     hentTekster: () => dispatch(hentLedetekster()),
     hentEnheter: (ident) => dispatch(hentEnheterForVeileder(ident)),
     hentVeiledere: (enhet) => dispatch(hentVeiledereForEnhet(enhet)),
-    velgEnhet: (enhetid) => dispatch(velgEnhetForVeileder({ enhetId: enhetid }))
+    velgEnhet: (enhetid) => dispatch(velgEnhetForVeileder({ enhetId: enhetid })),
+    settSide: (side) => dispatch(settSide(side))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application);
