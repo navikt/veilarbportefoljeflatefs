@@ -61,14 +61,14 @@ class Paginering extends PureComponent {
 }
 
 const mapStateToProps = ({ paginering }) => {
-    const antallSider = Math.floor(paginering.antall / paginering.sideStorrelse) + 1;
+    const antallSider = Math.ceil(paginering.antall / paginering.sideStorrelse);
 
     return ({
         ...paginering,
         antallSider,
         navarendeSide: paginering.side,
         erPaForsteSide: paginering.side === 1,
-        erPaSisteSide: paginering.side === antallSider
+        erPaSisteSide: paginering.side >= antallSider
     })
 };
 
