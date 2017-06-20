@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
 import { brukerShape, filtervalgShape, portefoljeShape, veilederShape } from '../proptype-shapes';
-import { markerAlleBrukere, settBrukerSomMarkert } from './../ducks/portefolje';
+import { settBrukerSomMarkert } from './../ducks/portefolje';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 import { ytelsevalg } from '../filtrering/filter-konstanter';
@@ -30,7 +30,6 @@ class EnhetsportefoljeTabell extends Component {
         const {
             brukere,
             veiledere,
-            settSomMarkertAlle,
             settMarkert,
             portefolje,
             valgtEnhet,
@@ -64,7 +63,6 @@ class EnhetsportefoljeTabell extends Component {
             </th>
         );
 
-        const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
         return (
             <div className="blokk-s">
                 <table className="tabell portefolje-tabell typo-avsnitt">
@@ -82,19 +80,7 @@ class EnhetsportefoljeTabell extends Component {
                     </thead>
                     <thead className="tabell__subhead">
                         <tr>
-                            <th>
-                                { /* TODO hent checkbokser fra nav-frontend-skjema */}
-                                <div className="skjema__input">
-                                    <input
-                                        className="checkboks"
-                                        id="checkbox-alle-brukere"
-                                        type="checkbox"
-                                        checked={alleMarkert}
-                                        onClick={() => settSomMarkertAlle(!alleMarkert)}
-                                    />
-                                    <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
-                                </div>
-                            </th>
+                            <th />
                             <th>
                                 <button
                                     onClick={() => this.settSorteringOgHentPortefolje('etternavn')}
@@ -221,7 +207,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    settSomMarkertAlle: (markert) => dispatch(markerAlleBrukere(markert)),
     settMarkert: (guid, markert) => dispatch(settBrukerSomMarkert(guid, markert))
 });
 

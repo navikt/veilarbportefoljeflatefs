@@ -7,8 +7,6 @@ import DiagramTabellToggle from "./diagram-tabell-toggle";
 import Paginering from "./paginering/paginering";
 
 function Toolbar({ filtergruppe, onPaginering }) {
-    console.log('filtergruppe', filtergruppe);
-
     return (
         <section className="toolbar blokk-xs">
             <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">

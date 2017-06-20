@@ -1,5 +1,4 @@
 import React, { Component, PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
