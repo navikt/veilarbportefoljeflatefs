@@ -4,17 +4,30 @@ import { bindActionCreators } from 'redux';
 import { Checkbox } from 'nav-frontend-skjema';
 import { markerAlleBrukere } from './../../ducks/portefolje';
 
-function VelgalleCheckboks({ markerAlleBrukere, alleMarkert }) {
+function VelgalleCheckboks({ skalSkjules, disabled, markerAlleBrukere, alleMarkert }) {
+    if (skalSkjules) {
+        return null;
+    }
     const onClickHandler = () => markerAlleBrukere(!alleMarkert);
 
     return (
-        <Checkbox label="Velg alle" className="velgalle-checkboks" checked={alleMarkert} onClick={onClickHandler} />
+        <Checkbox
+            label="Velg alle"
+            className="velgalle-checkboks"
+            checked={alleMarkert}
+            disabled={disabled}
+            onClick={onClickHandler}
+        />
     );
 }
 
 const mapStateToProps = (state) => {
-    const alleMarkert = state.portefolje.data.brukere.every((bruker) => bruker.markert === true);
-    return { alleMarkert };
+    const brukere = state.portefolje.data.brukere;
+    const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert === true);
+    const skalSkjules = state.ui.side.side === 'veiledere';
+    const disabled = brukere.length === 0;
+
+    return { skalSkjules, alleMarkert, disabled };
 };
 const mapDispatchToProps = (dispatch) => bindActionCreators({ markerAlleBrukere }, dispatch);
 

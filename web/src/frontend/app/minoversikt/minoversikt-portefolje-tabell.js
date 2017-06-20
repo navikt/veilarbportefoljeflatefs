@@ -194,7 +194,7 @@ const mapStateToProps = (state) => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
-    filtervalg: state.filtreringVeileder
+    filtervalg: state.filtreringMinoversikt
 });
 
 const mapDispatchToProps = (dispatch) => ({

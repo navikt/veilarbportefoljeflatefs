@@ -5,6 +5,11 @@ module.exports = {
         'fornavn': 'Gerd Kristin',
         'etternavn': 'Berget'
     }, {
+        'ident': 'Z990611',
+        'navn': 'F_Z990611 E_Z990611',
+        'fornavn': 'F_Z990611',
+        'etternavn': 'E_Z990611'
+    }, {
         'ident': 'B123241',
         'navn': 'Bruås, Eli Kristin',
         'fornavn': 'Eli Kristin',
@@ -84,11 +89,6 @@ module.exports = {
         'navn': 'F_Z990146 E_Z990146',
         'fornavn': 'F_Z990146',
         'etternavn': 'E_Z990146'
-    }, {
-        'ident': 'Z990152',
-        'navn': 'F_Z990152 E_Z990152',
-        'fornavn': 'F_Z990152',
-        'etternavn': 'E_Z990152'
     }, {
         'ident': 'Z990153',
         'navn': 'F_Z990153 E_Z990153',

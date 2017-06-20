@@ -116,4 +116,4 @@ function lagBruker(sikkerhetstiltak = [], diskresjonskode = null, egenAnsatt = f
     };
 }
 
-export default new Array(15).fill(0).map(() => lagBruker());
+export default new Array(0).fill(0).map(() => lagBruker());

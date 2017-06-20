@@ -5,7 +5,11 @@ import Dropdown from './../dropdown/dropdown';
 import RadioFilterform from './../radio-filterform/radio-filterform';
 import { tildelVeileder } from './../../ducks/portefolje';
 
-function TildelBruker({ tildelTilVeileder, veiledere, brukere }) {
+function TildelBruker({ skalSkjules, tildelTilVeileder, veiledere, brukere }) {
+    if (skalSkjules) {
+        return null;
+    }
+
     const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
 
@@ -46,10 +50,11 @@ function TildelBrukerRenderer({ onSubmit, data, ...props }) {
     );
 }
 
-const mapStateToProps = ({ veiledere, enheter, portefolje }) => ({
+const mapStateToProps = ({ veiledere, enheter, portefolje, ui }) => ({
     veiledere,
     brukere: portefolje.data.brukere,
-    veileder: enheter.valgtVeileder
+    veileder: enheter.valgtVeileder,
+    skalSkjules: ui.side.side === 'veiledere'
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
     tildelTilVeileder: (...args) => dispatch(tildelVeileder(...args, ownProps.filtergruppe, ownProps.veileder))

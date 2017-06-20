@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-toggle';
 import { settVisningsmodus } from './../../ducks/veilederpaginering';
 import * as VK from './../../minoversikt/minoversikt-konstanter';
+import { nameToStateSliceMap } from './../../reducer';
 
 function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules }) {
     if (skalSkjules) {
@@ -26,7 +27,7 @@ function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules })
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const stateSlice = ownProps.filtergruppe === 'enhet' ? 'filtrering' : 'filtreringVeileder';
+    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe];
     const ytelse = state[stateSlice].ytelse;
 
     return ({
