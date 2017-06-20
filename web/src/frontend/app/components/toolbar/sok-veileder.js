@@ -5,7 +5,7 @@ import { endreFiltervalg } from './../../ducks/filtrering';
 import SokFilter from './sok-filter';
 import Dropdown from './../dropdown/dropdown';
 import CheckboxFilterform from './../checkbox-filterform/checkbox-filterform';
-
+import { nameToStateSliceMap } from './../../reducer';
 
 function SokVeileder({ filtervalg, veiledere, sokEtterVeileder }) {
     return (
@@ -34,16 +34,18 @@ function SokVeilederRenderer({ data, filtervalg, onSubmit, ...props}) {
     );
 }
 
-const mapStateToProps = ({ veiledere, filtrering, enheter }, ownProps) => ({
-    veiledere,
-    filtervalg: filtrering,
-    veileder: ownProps.veileder || enheter.valgtVeileder
-});
+const mapStateToProps = (state, ownProps) => {
+    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe];
+
+    return ({
+        veiledere: state.veiledere,
+        filtervalg: state[stateSlice],
+        veileder: ownProps.veileder || state.enheter.valgtVeileder
+    });
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     sokEtterVeileder(...args) {
-        console.log('ownProps', args);
-        console.log('ownProps', ownProps);
         return endreFiltervalg(...args, ownProps.filtergruppe, ownProps.veileder)
     }
 }, dispatch);

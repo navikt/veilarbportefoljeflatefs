@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { brukerShape, filtervalgShape } from './../proptype-shapes';
 import Dropdown from '../components/dropdown/dropdown';
 import RadioFilterform from '../components/radio-filterform/radio-filterform';
-import { resetSokeresultater } from '../ducks/veiledere';
 import { visAlleVeiledereIListe } from '../veiledere/veiledersok-utils';
 import VeiledereSokeliste from '../veiledere/veiledersok';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
+import { nameToStateSliceMap } from './../../reducer';
 
 function TildelVeilederVelger({ veiledere, velgVeileder, brukere,
     resetSok, filtervalg, actions, skjulVeilederfilter = false }) {
@@ -28,7 +28,7 @@ function TildelVeilederVelger({ veiledere, velgVeileder, brukere,
 
     const tildelveilederComponent = skjulVeilederfilter ? null : (
         <div className="col-sm-3">
-            <Dropdown name="Søk på veileder" className="dropdown--130bredde" onLukk={resetSok}>
+            <Dropdown name="Søk på veileder" className="dropdown--130bredde">
                 <VeiledereSokeliste
                     veiledere={veilederListe}
                 />
@@ -77,13 +77,8 @@ TildelVeilederVelger.propTypes = {
 
 };
 
-const mapStateToProps = (state) => ({
-    filtervalg: state.filtrering
+const mapStateToProps = (state, ownProps) => ({
+    filtervalg: state[nameToStateSliceMap[ownProps.filtergruppe]]
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    resetSok: () => dispatch(resetSokeresultater())
-
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TildelVeilederVelger);
+export default connect(mapStateToProps)(TildelVeilederVelger);

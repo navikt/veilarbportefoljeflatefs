@@ -120,8 +120,6 @@ Application.propTypes = {
     veiledere: PT.shape({
         status: PT.string.isRequired,
         data: veiledereShape.isRequired,
-        sokeresultat: PT.shape({ sokIkkeStartet: PT.bool.isRequired }).isRequired,
-        veilederfiltervalg: PT.arrayOf(PT.string).isRequired,
         veiledereITabell: PT.arrayOf(veiledereShape)
     }).isRequired
 };

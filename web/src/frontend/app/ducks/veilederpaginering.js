@@ -1,4 +1,4 @@
-import { DESCENDING, IKKE_SATT, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
+import { DEFAULT_PAGINERING_STORRELSE, IKKE_SATT } from '../konstanter';
 import { TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 
 // Actions
@@ -12,32 +12,12 @@ export const SORTER_PAA_PORTEFOLJESTORRELSE = 'veilederpaginering/sorterPaaPorte
 export const SETT_VISNINGSMODUS = 'veilederpaginering/settvisningsmodus/OK';
 
 // Utils
-export function til(fra, antall, totalt) {
-    return fra + antall < totalt ? fra + antall : totalt;
-}
-
-export function compareEtternavn(a, b) {
-    return a.etternavn.localeCompare(b.etternavn, 'no-bok', { sensitivity: 'accent' });
-}
-
-export function comparePortefoljestorrelser(a, b) {
-    if (a.portefoljestorrelse < b.portefoljestorrelse) {
-        return -1;
-    }
-    if (a.portefoljestorrelse > b.portefoljestorrelse) {
-        return 1;
-    }
-    return 0;
-}
-
 export function sorterPaaEtternavn(veiledere, rekkefolge) {
-    return rekkefolge === DESCENDING ? veiledere.sort(compareEtternavn).reverse() : veiledere.sort(compareEtternavn);
+    return veiledere.sort(sorter('etternavn', rekkefolge));
 }
 
 export function sorterPaaPortefoljestorrelse(veiledere, rekkefolge) {
-    return rekkefolge === DESCENDING ?
-        veiledere.sort(comparePortefoljestorrelser).reverse() :
-        veiledere.sort(comparePortefoljestorrelser);
+    return veiledere.sort(sorter('portefoljestorrelse', rekkefolge));
 }
 
 const initialState = {

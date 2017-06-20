@@ -11,6 +11,7 @@ function KnappPanel({ children, disabled, pressed, ...props }) {
             className={classes}
             aria-disabled={disabled}
             aria-pressed={pressed}
+            disabled={disabled}
             {...props}
         >
             {children}
