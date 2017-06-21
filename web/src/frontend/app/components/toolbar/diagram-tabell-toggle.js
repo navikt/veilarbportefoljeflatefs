@@ -20,11 +20,17 @@ function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules })
                 <FormattedMessage id="paginering.vis.som.tabell" />
             </ToggleKnapp>
             <ToggleKnapp value={VK.DIAGRAMVISNING} checked={visningsmodus === VK.DIAGRAMVISNING}>
-                <FormattedMessage id="paginering.vis.som.diagram"/>
+                <FormattedMessage id="paginering.vis.som.diagram" />
             </ToggleKnapp>
         </ToggleGruppe>
     );
 }
+
+DiagramTabellToggle.propTypes = {
+    visningsmodus: PT.string.isRequired,
+    endreVisningsmodus: PT.func.isRequired,
+    skalSkjules: PT.bool.isRequired
+};
 
 const mapStateToProps = (state, ownProps) => {
     const stateSlice = nameToStateSliceMap[ownProps.filtergruppe];

@@ -115,15 +115,16 @@ class EnhetsportefoljeVisning extends Component {
                         visDiagram={visDiagram}
                         tekst="enhet.portefolje.paginering.tekst"
                     />
-                    <Toolbar filtervalg={filtervalg} onPaginering={(fra, antall) => {
-                        return hentPortefolje(
+                    <Toolbar
+                        filtervalg={filtervalg} onPaginering={(fra, antall) => hentPortefolje(
                             valgtEnhet.enhet.enhetId,
                             sorteringsrekkefolge,
                             sorteringsfelt,
                             filtervalg,
                             fra,
                             antall
-                        )}} />
+                        )}
+                    />
                     {
                         visDiagram ?
                             <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :

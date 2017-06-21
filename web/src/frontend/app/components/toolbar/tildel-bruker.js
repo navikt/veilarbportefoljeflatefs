@@ -37,8 +37,15 @@ function TildelBruker({ skalSkjules, tildelTilVeileder, veiledere, brukere }) {
     );
 }
 
+TildelBruker.propTypes = {
+    skalSkjules: PT.bool.isRequired,
+    tildelTilVeileder: PT.func.isRequired,
+    veiledere: PT.object.isRequired,
+    brukere: PT.array.isrequired
+};
+
 function TildelBrukerRenderer({ onSubmit, data, ...props }) {
-    const datamap = data.reduce((acc, element) => ({ ...acc, [element.ident]: { label: element.navn }}), {});
+    const datamap = data.reduce((acc, element) => ({ ...acc, [element.ident]: { label: element.navn } }), {});
     return (
         <RadioFilterform
             form="veiledertildeling"
@@ -49,6 +56,11 @@ function TildelBrukerRenderer({ onSubmit, data, ...props }) {
         />
     );
 }
+
+TildelBrukerRenderer.propTypes = {
+    onSubmit: PT.func.isRequired,
+    data: PT.array.isRequired
+};
 
 const mapStateToProps = ({ veiledere, enheter, portefolje, ui }) => ({
     veiledere,

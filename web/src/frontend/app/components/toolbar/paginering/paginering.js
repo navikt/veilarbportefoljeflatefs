@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+/* eslint-disable react/prefer-stateless-function*/
+import React, { PropTypes as PT, PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Chevron from 'nav-frontend-chevron';
@@ -16,13 +17,12 @@ class Paginering extends PureComponent {
             navarendeSide,
             erPaSisteSide,
             antallSider,
-            seAlle,
             antall,
             sideStorrelse,
             onChange
         } = this.props;
 
-        const fraIndex = (navarendeSide - 1)* sideStorrelse;
+        const fraIndex = (navarendeSide - 1) * sideStorrelse;
         const nyAntall = antall === sideStorrelse ? DEFAULT_PAGINERING_STORRELSE : antall;
         const seAlleState = sideStorrelse !== DEFAULT_PAGINERING_STORRELSE;
 
@@ -33,12 +33,12 @@ class Paginering extends PureComponent {
                     pressed={seAlleState && antall <= sideStorrelse}
                     onClick={() => onChange(0, nyAntall)}
                 >
-                    <FormattedMessage id="paginering.se.alle"/>
+                    <FormattedMessage id="paginering.se.alle" />
                 </KnappPanel>
 
                 <KnappPanel disabled={erPaForsteSide} onClick={() => onChange(fraIndex - sideStorrelse, sideStorrelse)}>
                     <Chevron orientasjon="venstre">
-                        <FormattedMessage id="paginering.forrige"/>
+                        <FormattedMessage id="paginering.forrige" />
                     </Chevron>
                 </KnappPanel>
 
@@ -48,17 +48,33 @@ class Paginering extends PureComponent {
                     <strong>{navarendeSide}</strong>
                 </KnappPanel>
 
-                {!erPaSisteSide && <KnappPanel onClick={() => onChange((antallSider - 1) * sideStorrelse, sideStorrelse)}>{antallSider}</KnappPanel>}
+                {!erPaSisteSide &&
+                <KnappPanel
+                    onClick={() => onChange((antallSider - 1) * sideStorrelse, sideStorrelse)}
+                >{antallSider}
+                </KnappPanel>
+                }
 
                 <KnappPanel disabled={erPaSisteSide} onClick={() => onChange(fraIndex + sideStorrelse, sideStorrelse)}>
                     <Chevron orientasjon="høyre">
-                        <FormattedMessage id="paginering.neste"/>
+                        <FormattedMessage id="paginering.neste" />
                     </Chevron>
                 </KnappPanel>
             </div>
         );
     }
 }
+
+Paginering.propTypes = {
+    className: PT.string.isRequired,
+    erPaForsteSide: PT.bool.isRequired,
+    navarendeSide: PT.number.isRequired,
+    erPaSisteSide: PT.bool.isRequired,
+    antallSider: PT.number.isRequired,
+    antall: PT.number.isRequired,
+    sideStorrelse: PT.number.isRequired,
+    onChange: PT.func.isRequired
+};
 
 const mapStateToProps = ({ paginering }) => {
     const antallSider = Math.ceil(paginering.antall / paginering.sideStorrelse);
@@ -69,7 +85,7 @@ const mapStateToProps = ({ paginering }) => {
         navarendeSide: paginering.side,
         erPaForsteSide: paginering.side === 1,
         erPaSisteSide: paginering.side >= antallSider
-    })
+    });
 };
 
 export default connect(mapStateToProps)(Paginering);
