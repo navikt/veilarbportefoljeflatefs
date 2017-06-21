@@ -8,7 +8,7 @@ const norskStringSort = (prop) => (a, b) => a[prop].localeCompare(b[prop], 'no-b
 const annetSort = (prop) => (a, b) => a[prop] - b[prop];
 
 export function sorter(property, direction) {
-    const directionBias = direction === DIRECTION.DESC ? 1 : -1;
+    const directionBias = direction === DIRECTION.DESC ? -1 : 1;
     let sortImpl = undefined;
 
     return (a, b) => {
