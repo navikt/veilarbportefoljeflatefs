@@ -18,12 +18,11 @@ function medPortefoljestorrelse(portefoljeStorrelse) {
     if (portefoljeStorrelse.status !== 'OK') {
         // Før vi har fått portefoljestorrele har alle 0
         return (veileder) => ({ ...veileder, portefoljestorrelse: 0 });
-    } else {
-        const storrelseMap = portefoljeStorrelse.data.facetResults
+    }
+    const storrelseMap = portefoljeStorrelse.data.facetResults
             .reduce((acc, { value: ident, count }) => ({ ...acc, [ident]: count }), {});
 
-        return (veileder) => ({ ...veileder, portefoljestorrelse: storrelseMap[veileder.ident] || 0 });
-    }
+    return (veileder) => ({ ...veileder, portefoljestorrelse: storrelseMap[veileder.ident] || 0 });
 }
 function propertySort({ property, direction }) {
     return sorter(property, direction);
@@ -85,7 +84,7 @@ class VeilederesideVisning extends Component {
 
         return (
             <div>
-                <Toolbar filtergruppe="veiledere" onPaginering={this.oppdaterPaginering}/>
+                <Toolbar filtergruppe="veiledere" onPaginering={this.oppdaterPaginering} />
                 <VeiledereTabell
                     veiledere={limitedVeiledere}
                     sorterPaaEtternavn={() => this.props.sortBy('etternavn')}

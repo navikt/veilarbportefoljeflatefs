@@ -1,5 +1,5 @@
 module.exports = {
-    'nb': {
+    nb: {
         'paginering.se.alle': 'Se alle',
         'minoversikt.diagram.header.aap_unntak': 'AAP med unntak',
         'minoversikt.ingresstekst': 'Her får du oversikt over alle brukere som er tildelt deg eller ditt team. Du kan filtrere ytterligere eller flytte brukere til en annen veileder i din enhet.',
@@ -60,7 +60,7 @@ module.exports = {
         'portefolje.tabell.fodselsnummer': 'Fødselsnummer',
         'paginering.forrige': 'Se alle',
         'enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox': 'Inaktive brukere',
-        'spinner': 'Spinner',
+        spinner: 'Spinner',
         'enhet.ingresstekst.enhetoversikt': 'Her får du oversikt over alle brukere som er tilknyttet enheten du er logget inn på. Du kan filtrere ytterligere, søke opp veiledere, og flytte eller fordele brukere.',
         'filtrering.filtrer-brukere.demografi.alder': 'Alder',
         'minoversikt.diagram.legend.aap_unntak.2': 'Brukere med AAP unntak som mister ytelse i gjeldende mnd',

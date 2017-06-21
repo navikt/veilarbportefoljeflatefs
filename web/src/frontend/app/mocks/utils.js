@@ -17,7 +17,7 @@ export function randomFailure(fn) {
             return fn(...args);
         }
         return fn; // Trust me, its data
-    }
+    };
 }
 
 export function delayed(time, response) {
@@ -50,7 +50,7 @@ export function respondWith(handler) {
         console.groupEnd(url);
 
         return response;
-    }
+    };
 }
 
 
@@ -73,13 +73,12 @@ export const mock = ['get', 'post', 'put', 'delete', 'head', 'patch', 'mock']
                         .map((key, index) => {
                             if (key.name && matched[index]) {
                                 return { [key.name]: matched[index] };
-                            } else {
-                                return null;
                             }
+                            return null;
                         })
                         .filter((obj) => obj !== null)
-                        .reduce((acc, obj) => ({ ...acc, ...obj}), {});
-                }
+                        .reduce((acc, obj) => ({ ...acc, ...obj }), {});
+                };
             }
 
             return fetchmock[method](...args, (url, ...handlerArgs) => {

@@ -156,7 +156,7 @@ export default function reducer(state = initialState, action) {
 
 // Action Creators
 export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
-    const  fn = (dispatch) => Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
+    const fn = (dispatch) => Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
         .then((json) => {
             const { antallTotalt } = json;
             const side = Math.floor(fra / antall) + 1;

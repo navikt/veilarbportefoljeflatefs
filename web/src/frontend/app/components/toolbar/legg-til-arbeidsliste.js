@@ -11,6 +11,10 @@ function LeggTilArbeidsliste({ skalSkjules }) {
     );
 }
 
+LeggTilArbeidsliste.propTypes = {
+    skalSkjules: PT.bool.isRequired
+};
+
 const mapStateToProps = ({ ui }) => ({
     skalSkjules: (ui.side.side || '') !== 'veilederoversikt'
 });

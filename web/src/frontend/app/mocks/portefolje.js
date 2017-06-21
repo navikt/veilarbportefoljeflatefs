@@ -38,9 +38,9 @@ function lagGrunndata() {
     return {
         fnr: `${dag.toString().padStart(2, '0')}${mnd.toString().padStart(2, '0')}${ar.toString().padStart(2, '0')}${individsifre}${kontrollsifre}`,
         fodselsdato: {
-            'dayOfMonth': dag,
-            'monthValue': mnd,
-            'year': 1900 + ar,
+            dayOfMonth: dag,
+            monthValue: mnd,
+            year: 1900 + ar
         },
         fornavn: faker.name.firstName(kjonn === 'K' ? 1 : 0),
         etternavn: faker.name.lastName(kjonn === 'K' ? 1 : 0),
@@ -51,7 +51,7 @@ function lagGrunndata() {
 
 function lagYtelse() {
     const maybeYtelse = rnd(0, ytelser.length * 1.5);
-    const ytelse = maybeYtelse  < ytelser.length ? ytelser[maybeYtelse] : null;
+    const ytelse = maybeYtelse < ytelser.length ? ytelser[maybeYtelse] : null;
 
     const out = {
         ytelse,
@@ -70,19 +70,19 @@ function lagYtelse() {
     const ar = rnd(0, 4);
 
     if (ytelse === 'AAP_MAXTID') {
-        out['aapMaxtid'] = {
-            'dayOfMonth': dag,
-            'monthValue': mnd,
-            'year': new Date().getYear() + 1900 + ar,
+        out.aapMaxtid = {
+            dayOfMonth: dag,
+            monthValue: mnd,
+            year: new Date().getYear() + 1900 + ar
         };
-        out['aapMaxtidFasett'] = `KV${rnd(1,16)}`
-    } else{
-        out['utlopsdato'] = {
-            'dayOfMonth': dag,
-            'monthValue': mnd,
-            'year': new Date().getYear() + 1900 + ar,
+        out.aapMaxtidFasett = `KV${rnd(1, 16)}`;
+    } else {
+        out.utlopsdato = {
+            dayOfMonth: dag,
+            monthValue: mnd,
+            year: new Date().getYear() + 1900 + ar
         };
-        out['utlopsdatoFasett'] = `MND${rnd(1,12)}`
+        out.utlopsdatoFasett = `MND${rnd(1, 12)}`;
     }
 
     return out;
@@ -92,27 +92,27 @@ function lagBruker(sikkerhetstiltak = [], diskresjonskode = null, egenAnsatt = f
     const grunndata = lagGrunndata();
 
     const maybeVeileder = rnd(0, veiledere.length * 2);
-    const veilederId = maybeVeileder  < veiledere.length ? veiledere[maybeVeileder].ident : null;
+    const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : null;
 
     const ytelse = lagYtelse();
 
     return {
-        'fnr': grunndata.fnr,
-        'fornavn': grunndata.fornavn,
-        'etternavn': grunndata.etternavn,
-        'veilederId': veilederId,
-        'sikkerhetstiltak': sikkerhetstiltak,
-        'diskresjonskode': diskresjonskode,
-        'egenAnsatt': egenAnsatt,
-        'erDoed': grunndata.erDoed,
-        'fodselsdagIMnd': grunndata.fodselsdato.dayOfMonth,
-        'fodselsdato': grunndata.fodselsdato,
-        'kjonn': grunndata.kjonn,
-        'ytelse': ytelse.ytelse,
-        'utlopsdato': ytelse.utlopsdato,
-        'utlopsdatoFasett': ytelse.utlopsdatoFasett,
-        'aapMaxtid': ytelse.aapMaxtid,
-        'aapMaxtidFasett': ytelse.aapMaxtidFasett
+        fnr: grunndata.fnr,
+        fornavn: grunndata.fornavn,
+        etternavn: grunndata.etternavn,
+        veilederId,
+        sikkerhetstiltak,
+        diskresjonskode,
+        egenAnsatt,
+        erDoed: grunndata.erDoed,
+        fodselsdagIMnd: grunndata.fodselsdato.dayOfMonth,
+        fodselsdato: grunndata.fodselsdato,
+        kjonn: grunndata.kjonn,
+        ytelse: ytelse.ytelse,
+        utlopsdato: ytelse.utlopsdato,
+        utlopsdatoFasett: ytelse.utlopsdatoFasett,
+        aapMaxtid: ytelse.aapMaxtid,
+        aapMaxtidFasett: ytelse.aapMaxtidFasett
     };
 }
 

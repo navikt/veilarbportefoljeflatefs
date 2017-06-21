@@ -37,8 +37,6 @@ class Application extends Component {
             pathname === '/veilarbportefoljeflatefs') {
             history.push('/enhet');
         }
-
-
     }
 
     componentDidUpdate() {
@@ -101,8 +99,10 @@ class Application extends Component {
 }
 
 Application.propTypes = {
+    settSide: PT.func.isRequired,
+    routes: PT.arrayOf(PT.object).isRequired,
     side: PT.string.isRequired,
-    children: PT.oneOfType([PT.arrayOf(PT.node), PT.node]).isRequired,
+    children: PT.oneOfType([PT.arrayOf(PT.node), PT.node]),
     hentTekster: PT.func.isRequired,
     velgEnhet: PT.func.isRequired,
     hentEnheter: PT.func.isRequired,

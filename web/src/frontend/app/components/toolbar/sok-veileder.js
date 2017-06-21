@@ -21,8 +21,14 @@ function SokVeileder({ filtervalg, veiledere, sokEtterVeileder }) {
     );
 }
 
-function SokVeilederRenderer({ data, filtervalg, onSubmit, ...props}) {
-    const datamap = data.reduce((acc, element) => ({ ...acc, [element.ident]: { label: element.navn }}), {});
+SokVeileder.propTypes = {
+    filtervalg: PT.object.isRequired,
+    veiledere: PT.object.isRequired,
+    sokEtterVeileder: PT.func.isRequired
+};
+
+function SokVeilederRenderer({ data, filtervalg, onSubmit, ...props }) {
+    const datamap = data.reduce((acc, element) => ({ ...acc, [element.ident]: { label: element.navn } }), {});
     return (
         <CheckboxFilterform
             form="veiledere"
@@ -33,6 +39,12 @@ function SokVeilederRenderer({ data, filtervalg, onSubmit, ...props}) {
         />
     );
 }
+
+SokVeilederRenderer.propTypes = {
+    data: PT.array,
+    filtervalg: PT.object.isRequired,
+    onSubmit: PT.func.isRequired
+};
 
 const mapStateToProps = (state, ownProps) => {
     const stateSlice = nameToStateSliceMap[ownProps.filtergruppe];
@@ -46,7 +58,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     sokEtterVeileder(...args) {
-        return endreFiltervalg(...args, ownProps.filtergruppe, ownProps.veileder)
+        return endreFiltervalg(...args, ownProps.filtergruppe, ownProps.veileder);
     }
 }, dispatch);
 

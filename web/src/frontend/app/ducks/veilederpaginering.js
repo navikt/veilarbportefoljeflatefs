@@ -1,6 +1,6 @@
 import { DEFAULT_PAGINERING_STORRELSE, IKKE_SATT } from '../konstanter';
 import { TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
-import { sorter } from "../utils/sortering";
+import { sorter } from '../utils/sortering';
 
 // Actions
 export const SETT_LISTE = 'veilederpaginering/settliste/OK';

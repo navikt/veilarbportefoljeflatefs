@@ -9,7 +9,7 @@ const annetSort = (prop) => (a, b) => a[prop] - b[prop];
 
 export function sorter(property, direction) {
     const directionBias = direction === DIRECTION.DESC ? -1 : 1;
-    let sortImpl = undefined;
+    let sortImpl;
 
     return (a, b) => {
         if (sortImpl === undefined) {

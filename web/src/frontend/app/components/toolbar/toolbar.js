@@ -1,10 +1,10 @@
 import React from 'react';
 import VelgalleCheckboks from './velgalle-checkboks';
-import Tildelbruker from "./tildel-bruker";
-import LeggTilArbeidsliste from "./legg-til-arbeidsliste";
-import SokVeilder from "./sok-veileder";
-import DiagramTabellToggle from "./diagram-tabell-toggle";
-import Paginering from "./paginering/paginering";
+import Tildelbruker from './tildel-bruker';
+import LeggTilArbeidsliste from './legg-til-arbeidsliste';
+import SokVeilder from './sok-veileder';
+import DiagramTabellToggle from './diagram-tabell-toggle';
+import Paginering from './paginering/paginering';
 
 function Toolbar({ filtergruppe, onPaginering }) {
     return (
