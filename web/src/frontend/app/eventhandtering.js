@@ -4,7 +4,7 @@ const handlePersonsokSubmit = (fnr) => {
 };
 
 const handleChangeEnhet = (enhet, type) => {
-    if(type !== 'init') {
+    if (type !== 'init') {
         window.location.search = (`?enhet=${enhet}&clean`);
     }
 };
@@ -44,6 +44,10 @@ const getConfig = (initiellEnhet = undefined) => {
 
     const config = {
         config: {
+            dataSources: {
+                veileder: '/veilarbveileder/tjenester/veileder/me',
+                enheter: '/veilarbveileder/tjenester/veileder/enheter'
+            },
             toggles: {
                 visEnhet: false,
                 visEnhetVelger: true,

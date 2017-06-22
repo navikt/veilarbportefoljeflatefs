@@ -11,7 +11,12 @@ const initalState = {
     data: {
         totalt: 0,
         nyeBrukere: 0,
-        inaktiveBrukere: 0
+        inaktiveBrukere: 0,
+        venterPaSvarFraNAV: 0,
+        venterPaSvarFraBruker: 0,
+        utlopteAktiviteter: 0,
+        ikkeIavtaltAktivitet: 0,
+        iavtaltAktivitet: 0
     }
 };
 

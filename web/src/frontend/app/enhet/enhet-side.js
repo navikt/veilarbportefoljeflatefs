@@ -42,7 +42,7 @@ class EnhetSide extends Component {
                     <Lenker />
                     <Innholdslaster avhengigheter={[statustall]}>
                         <div id="oversikt-sideinnhold" role="tabpanel">
-                            <p className="typo-infotekst begrensetbredde blokk-m">
+                            <p className="typo-infotekst begrensetbredde blokk-l">
                                 <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                             </p>
                             <FiltreringContainer filtervalg={filtervalg} />

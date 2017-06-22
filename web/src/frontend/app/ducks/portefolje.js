@@ -2,6 +2,7 @@ import * as Api from './../middleware/api';
 import { STATUS, doThenDispatch, handterFeil, toJson } from './utils';
 import { IKKE_SATT } from '../konstanter';
 import { oppdaterPortefolje } from './filtrering';
+import { pagineringSetup } from './paginering';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -155,7 +156,17 @@ export default function reducer(state = initialState, action) {
 
 // Action Creators
 export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
-    return doThenDispatch(() => Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg), {
+    const fn = (dispatch) => Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
+        .then((json) => {
+            const { antallTotalt } = json;
+            const side = Math.floor(fra / antall) + 1;
+
+            dispatch(pagineringSetup({ side, antall: antallTotalt, sideStorrelse: antall }));
+
+            return json;
+        });
+
+    return doThenDispatch(fn, {
         OK,
         FEILET,
         PENDING
@@ -198,9 +209,10 @@ export function markerAlleBrukere(markert) {
 }
 
 
-export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
+export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder = {}) {
     return (dispatch, getState) => {
         dispatch({ type: TILDEL_VEILEDER_RELOAD });
+        dispatch({ type: PENDING });
         Api.tilordneVeileder(tilordninger)
             .then(toJson)
             .then((res) => {
@@ -208,7 +220,6 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
                     type: TILDEL_VEILEDER,
                     tilVeileder,
                     feilendeTilordninger: res.feilendeTilordninger
-
                 });
                 if (filtergruppe === 'veileder') {
                     dispatch({
@@ -220,11 +231,10 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe) {
             .catch(handterFeil(dispatch, TILDEL_VEILEDER_FEILET))
             .then(() => {
                 // Venter litt slik at indeks kan komme i sync
-                dispatch({ type: PENDING });
                 setTimeout(() => {
                     const side = filtergruppe === 'veileder' ? filtergruppe : 'enhet';
-                    const enhet = { ident: getState().enheter.ident };
-                    oppdaterPortefolje(getState, dispatch, side, enhet);
+                    const ident = { ident: gjeldendeVeileder.ident || getState().enheter.ident };
+                    oppdaterPortefolje(getState, dispatch, side, ident);
                 }, 2000);
             });
     };

@@ -1,5 +1,6 @@
 import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
 import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
+import { nameToStateSliceMap } from './../reducer';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -8,6 +9,7 @@ export const SLETT_ENKELT_FILTER = 'filtrering/SLETT_ENKELT_FILTER';
 export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 
 //  Reducer
+// TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducers
 export const initialState = {
     brukerstatus: null,
     alder: [],
@@ -61,12 +63,11 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = 
     const rekkefolge = state.portefolje.sorteringsrekkefolge;
     const sorteringfelt = state.portefolje.sorteringsfelt;
     const antall = DEFAULT_PAGINERING_STORRELSE;
-    let nyeFiltervalg;
+    const nyeFiltervalg = state[nameToStateSliceMap[filtergruppe]];
+
     if (filtergruppe === 'enhet') {
-        nyeFiltervalg = state.filtrering;
         hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
     } else if (filtergruppe === 'veileder') {
-        nyeFiltervalg = state.filtreringVeileder;
         hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
     }
 }
@@ -74,7 +75,11 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = 
 export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
     return (dispatch, getState) => {
         dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
-        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
+
+        if (filtergruppe !== 'veiledere') {
+            // TODO Fjerne denne fra filter-reducer
+            oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
+        }
     };
 }
 
