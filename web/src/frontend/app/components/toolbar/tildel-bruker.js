@@ -41,7 +41,7 @@ TildelBruker.propTypes = {
     skalSkjules: PT.bool.isRequired,
     tildelTilVeileder: PT.func.isRequired,
     veiledere: PT.object.isRequired,
-    brukere: PT.array.isrequired
+    brukere: PT.array.isRequired
 };
 
 function TildelBrukerRenderer({ onSubmit, data, ...props }) {
@@ -59,7 +59,7 @@ function TildelBrukerRenderer({ onSubmit, data, ...props }) {
 
 TildelBrukerRenderer.propTypes = {
     onSubmit: PT.func.isRequired,
-    data: PT.array.isRequired
+    data: PT.array
 };
 
 const mapStateToProps = ({ veiledere, enheter, portefolje, ui }) => ({

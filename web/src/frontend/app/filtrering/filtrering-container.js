@@ -14,7 +14,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder, actions }) {
                 apen
                 className="blokk-xxxs"
                 tittel="Status"
-                tittelProps={{ type: 'systemtittel', tag: 'span' }}
+                tittelProps="systemtittel"
             >
                 <FiltreringStatus filtergruppe={filtergruppe} veileder={veileder} filtervalg={filtervalg} />
             </Ekspanderbartpanel>
@@ -22,7 +22,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder, actions }) {
                 apen
                 className="blokk-xxxs"
                 tittel="Filter"
-                tittelProps={{ type: 'systemtittel', tag: 'span' }}
+                tittelProps="systemtittel"
             >
                 <FiltreringFilter actions={actions} veileder={veileder} filtervalg={filtervalg} />
             </Ekspanderbartpanel>

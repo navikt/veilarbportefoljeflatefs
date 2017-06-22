@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes as PT } from 'react';
 import VelgalleCheckboks from './velgalle-checkboks';
 import Tildelbruker from './tildel-bruker';
 import LeggTilArbeidsliste from './legg-til-arbeidsliste';
@@ -24,6 +24,11 @@ function Toolbar({ filtergruppe, onPaginering }) {
         </section>
     );
 }
+
+Toolbar.propTypes = {
+    filtergruppe: PT.string.isRequired,
+    onPaginering: PT.func.isRequired
+};
 
 Toolbar.defaultProps = {
     filtergruppe: 'enhet'

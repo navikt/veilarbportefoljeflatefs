@@ -195,7 +195,6 @@ EnhetsportefoljeTabell.propTypes = {
     settSorteringForPortefolje: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
     settMarkert: PT.func.isRequired,
-    settSomMarkertAlle: PT.func,
     filtervalg: filtervalgShape.isRequired,
     valgtEnhet: PT.string.isRequired
 };

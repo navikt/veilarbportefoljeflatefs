@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
-import { portefoljestorrelserShape, veiledereShape } from './../proptype-shapes';
+import { portefoljestorrelserShape, veiledereShape, enhetShape } from './../proptype-shapes';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import Lenker from './../lenker/lenker';
@@ -45,6 +45,8 @@ class VeiledereSide extends Component {
 }
 
 VeiledereSide.propTypes = {
+    valgtEnhet: enhetShape.isRequired,
+    hentPortefoljestorrelser: PT.func.isRequired,
     veiledere: PT.shape({
         data: veiledereShape.isRequired
     }).isRequired,

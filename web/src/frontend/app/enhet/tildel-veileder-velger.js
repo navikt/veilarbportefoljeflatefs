@@ -6,7 +6,7 @@ import RadioFilterform from '../components/radio-filterform/radio-filterform';
 import { visAlleVeiledereIListe } from '../veiledere/veiledersok-utils';
 import VeiledereSokeliste from '../veiledere/veiledersok';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
-import { nameToStateSliceMap } from './../../reducer';
+import { nameToStateSliceMap } from './../reducer';
 
 function TildelVeilederVelger({ veiledere, velgVeileder, brukere,
     resetSok, filtervalg, actions, skjulVeilederfilter = false }) {
