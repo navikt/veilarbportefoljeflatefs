@@ -5,7 +5,7 @@ if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
 
 if (process.env.NODE_ENV !== 'production') {
     console.log('Med mock');
-    require('./mocks');
+    require('./mocks'); // eslint-disable-line global-require
 }
 
 

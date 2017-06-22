@@ -96,6 +96,10 @@ class VeilederesideVisning extends Component {
 }
 
 VeilederesideVisning.propTypes = {
+    pagineringSetup: PT.func.isRequired,
+    paginering: PT.object.isRequired,
+    veilederFilter: PT.array.isRequired,
+    sortBy: PT.func.isRequired,
     veiledere: PT.shape({
         data: veiledereShape.isRequired
     }).isRequired,

@@ -5,7 +5,8 @@ import { sorterPaaEtternavn, sorterPaaPortefoljestorrelse } from './veilederpagi
 
 describe('VeilederPagineringReducer', () => {
     describe('sorterPaaEtternavn', () => {
-        // Dette er den korrekte testen, Aa === å, men node støtter ikke dette enda (verifisert at det fungerer i chrome)
+        // Dette er den korrekte testen, Aa === å,
+        // men node støtter ikke dette enda (verifisert at det fungerer i chrome)
         xit('sjekker at listen blir sortert alfabetisk', () => {
             const veiledere = [
                 { etternavn: 'Johnsen' },
