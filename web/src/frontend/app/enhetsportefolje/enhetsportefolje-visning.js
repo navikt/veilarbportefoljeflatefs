@@ -1,5 +1,4 @@
 import React, { Component, PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
@@ -8,11 +7,10 @@ import {
     settTilordningStatusOk,
     settSortering
 } from '../ducks/portefolje';
-import { ytelseFilterErAktiv } from '../utils/utils';
-import Paginering from '../paginering/paginering';
+import Toolbar from './../components/toolbar/toolbar';
 import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
+import TabellOverskrift from './../components/tabell-overskrift';
 import { enhetShape, filtervalgShape, portefoljeShape, valgtEnhetShape, veilederShape } from '../proptype-shapes';
-import { ytelsevalg } from '../filtrering/filter-konstanter';
 import { ASCENDING, DEFAULT_PAGINERING_STORRELSE, DESCENDING } from '../konstanter';
 import { diagramSkalVises } from './../minoversikt/diagram/util';
 import Diagram from './../minoversikt/diagram/diagram';
@@ -92,90 +90,60 @@ class EnhetsportefoljeVisning extends Component {
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
-        const visButtongroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
 
-        const pagineringTekst = (
-            antallTotalt > 0 ?
-                (<FormattedMessage
-                    id="enhet.portefolje.paginering.tekst"
-                    values={{
-                        fraIndex: `${fraIndex + 1}`,
-                        tilIndex: fraIndex + antallReturnert,
-                        antallTotalt,
-                        visDiagram
-                    }}
-                />) :
-                (<FormattedMessage
-                    id="enhet.portefolje.paginering.tekst"
-                    values={{ fraIndex: '0', tilIndex: '0', antallTotalt: '0', visDiagram }}
-                />)
-        );
-
-        let fnr = '';
+        let fnr = [];
         const feil = portefolje.feilendeTilordninger;
         if (feil && feil.length > 0) {
-            fnr = feil.map((b) => b.brukerFnr).toString();
+            fnr = feil.map((b) => b.brukerFnr);
         }
 
-
-        const paginering = (
-            <Paginering
-                antallTotalt={antallTotalt}
-                fraIndex={fraIndex}
-                hentListe={(fra, antall) =>
-                    hentPortefolje(
-                        valgtEnhet.enhet.enhetId,
-                        sorteringsrekkefolge,
-                        sorteringsfelt,
-                        filtervalg,
-                        fra,
-                        antall
-                    )}
-                tekst={pagineringTekst}
-                sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
-                antallReturnert={antallReturnert}
-                visButtongroup={visButtongroup}
-                visDiagram={visDiagram}
-            />
-        );
-
         const harFilter = antallFilter(filtervalg) !== 0;
-
-        const content = harFilter ? (
-            <div>
-                {paginering}
-                {
-                    visDiagram ?
-                        <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
-                        <EnhetsportefoljeTabell
-                            veiledere={veiledere.data.veilederListe}
-                            brukere={portefolje.data.brukere}
-                            settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
-                            portefolje={portefolje}
-                        />
-                }
-                {(antallTotalt >= 5 && !visDiagram) && paginering}
-                <TilordningFeiletModal
-                    isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
-                    fnr={fnr}
-                    clearFeilendeTilordninger={clearFeilendeTilordninger}
-                />
-                <ServerFeilModal
-                    isOpen={portefolje.tilordningerstatus === 'ERROR'}
-                    clearTilordningFeil={clearTilordningFeil}
-                />
-            </div>
-        ) : (
-            <VelgfilterMelding />
-        );
+        if (!harFilter) {
+            return <VelgfilterMelding />;
+        }
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, veiledere, { status: tilordningerStatus }]}>
-                    {content}
+                    <TabellOverskrift
+                        fraIndex={fraIndex}
+                        antallIVisning={antallReturnert}
+                        antallTotalt={antallTotalt}
+                        visDiagram={visDiagram}
+                        tekst="enhet.portefolje.paginering.tekst"
+                    />
+                    <Toolbar
+                        filtervalg={filtervalg} onPaginering={(fra, antall) => hentPortefolje(
+                            valgtEnhet.enhet.enhetId,
+                            sorteringsrekkefolge,
+                            sorteringsfelt,
+                            filtervalg,
+                            fra,
+                            antall
+                        )}
+                    />
+                    {
+                        visDiagram ?
+                            <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
+                            <EnhetsportefoljeTabell
+                                veiledere={veiledere.data.veilederListe}
+                                brukere={portefolje.data.brukere}
+                                settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
+                                portefolje={portefolje}
+                            />
+                    }
+                    <TilordningFeiletModal
+                        isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
+                        fnr={fnr}
+                        clearFeilendeTilordninger={clearFeilendeTilordninger}
+                    />
+                    <ServerFeilModal
+                        isOpen={portefolje.tilordningerstatus === 'ERROR'}
+                        clearTilordningFeil={clearTilordningFeil}
+                    />
                 </Innholdslaster>
             </div>
         );

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fristilling av ISERV brukere</title>
+    <script type="application/javascript" src="/veilarbportefoljeflatefs/internal/fjernebrukere/promise.min.js"></script>
+    <script type="application/javascript" src="/veilarbportefoljeflatefs/internal/fjernebrukere/fetch.js"></script>
+    <script type="application/javascript" src="/veilarbportefoljeflatefs/internal/fjernebrukere/api.js"></script>
+    <script type="application/javascript" src="/veilarbportefoljeflatefs/internal/fjernebrukere/source.js"></script>
+    <script type="application/javascript" src="/veilarbportefoljeflatefs/internal/fjernebrukere/sink.js"></script>
+    <link rel="stylesheet" href="/veilarbportefoljeflatefs/internal/fjernebrukere/index.css">
+</head>
+<body>
+<h1>Fjerning av brukere med status Ikke Servicebehov(IS)</h1>
+<p>Kun brukere tildelt deg som veileder er mulige å ta ut av lista.</p>
+<p>Alle brukerene listet opp her hadde status "Ikke service behov" i Arena ved sist synkronisering, og vil bli borte ifra din og enhetens portefølje om de fjernes.</p>
+
+<div class="saksbehandler"></div>
+<div class="columncontainer">
+    <div class="column">
+        <div class="brukere"></div>
+    </div>
+    <div class="column">
+        <div class="valgstatus"></div>
+    </div>
+</div>
+
+<script type="application/javascript" src="/veilarbportefoljeflatefs/internal/fjernebrukere/index.js"></script>
+</body>
+</html>
