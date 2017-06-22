@@ -67,21 +67,13 @@ function lagYtelse() {
 
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
-    const ar = rnd(0, 4);
+    const ar = rnd(0, 4) + new Date().getFullYear();
 
     if (ytelse === 'AAP_MAXTID') {
-        out.aapMaxtid = {
-            dayOfMonth: dag,
-            monthValue: mnd,
-            year: new Date().getYear() + 1900 + ar
-        };
+        out.aapMaxtid = new Date(ar, mnd-1, dag).toISOString();
         out.aapMaxtidFasett = `KV${rnd(1, 16)}`;
     } else {
-        out.utlopsdato = {
-            dayOfMonth: dag,
-            monthValue: mnd,
-            year: new Date().getYear() + 1900 + ar
-        };
+        out.utlopsdato = new Date(ar, mnd, dag).toISOString();
         out.utlopsdatoFasett = `MND${rnd(1, 12)}`;
     }
 
