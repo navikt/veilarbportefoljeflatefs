@@ -99,7 +99,7 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     enheter: state.enheter,
     veiledere: state.veiledere,
-    filtervalg: state.filtreringVeileder,
+    filtervalg: state.filtreringMinoversikt,
     statustall: state.statustall
 });
 
