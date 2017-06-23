@@ -54,7 +54,7 @@ class LeggTilArbeidslisteModal extends Component {
                                 className="input-fullbredde"
                             />
                         </div>
-                        <Datovelger  feltNavn="datoFelt" labelId={'id'}/>
+                        <Datovelger  feltNavn="datoFelt" />
                     </form>
                     <div>
                         <button className="knapp knapp--hoved" onClick={this.lukkModal}>
