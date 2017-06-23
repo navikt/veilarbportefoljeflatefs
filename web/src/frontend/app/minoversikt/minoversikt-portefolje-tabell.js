@@ -8,6 +8,7 @@ import { ytelseFilterErAktiv } from '../utils/utils';
 import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
 import { ytelsevalg } from './../filtrering/filter-konstanter';
+import LeggTilArbeidslisteModal from '../modal/legg-til-arbeidsliste-modal';
 
 function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veileder, settSorteringOgHentPortefolje,
     filtervalg, sorteringsrekkefolge, valgtEnhet }) {
@@ -88,45 +89,46 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
     );
 
     return (
-        <table className="tabell portefolje-tabell typo-avsnitt">
-            <thead className="extra-head">
-                <tr>
-                    <th />
-                    <th>
-                        <FormattedMessage id="enhet.portefolje.tabell.bruker" />
-                    </th>
-                    <th />
-                    <th className="tabell-element-center">
-                        <FormattedMessage id="enhet.portefolje.tabell.arbeidsliste" />
-                    </th>
-                    {utlopsdatoHeader}
-                    <th />
-                </tr>
-            </thead>
-            <thead className="tabell__subhead">
-                <tr>
-                    <th>
-                        <div className="skjema__input">
-                            <input
-                                className="checkboks"
-                                id="checkbox-alle-brukere"
-                                type="checkbox"
-                                checked={alleMarkert}
-                                onClick={() => settSomMarkertAlle(!alleMarkert)}
-                            />
-                            <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
-                        </div>
-                    </th>
-                    {navnHeader}
-                    {fodselsnummerHeader}
-                    {ddmmyyArbeidslisteHeader}
-                    {ytelseFilterErAktiv(filtervalg.ytelse) ? ddmmyyUtlopsdatoHeader : null}
-                    <th />
-                </tr>
-            </thead>
+        <div>
+            <table className="tabell portefolje-tabell typo-avsnitt">
+                <thead className="extra-head">
+                    <tr>
+                        <th />
+                        <th>
+                            <FormattedMessage id="enhet.portefolje.tabell.bruker" />
+                        </th>
+                        <th />
+                        <th className="tabell-element-center">
+                            <FormattedMessage id="enhet.portefolje.tabell.arbeidsliste" />
+                        </th>
+                        {utlopsdatoHeader}
+                        <th />
+                    </tr>
+                </thead>
+                <thead className="tabell__subhead">
+                    <tr>
+                        <th>
+                            <div className="skjema__input">
+                                <input
+                                    className="checkboks"
+                                    id="checkbox-alle-brukere"
+                                    type="checkbox"
+                                    checked={alleMarkert}
+                                    onClick={() => settSomMarkertAlle(!alleMarkert)}
+                                />
+                                <label className="skjema__label" htmlFor="checkbox-alle-brukere" />
+                            </div>
+                        </th>
+                        {navnHeader}
+                        {fodselsnummerHeader}
+                        {ddmmyyArbeidslisteHeader}
+                        {ytelseFilterErAktiv(filtervalg.ytelse) ? ddmmyyUtlopsdatoHeader : null}
+                        <th />
+                    </tr>
+                </thead>
 
-            <tbody>
-                {brukere.filter((b) => b.veilederId === veileder.ident)
+                <tbody>
+                    {brukere.filter((b) => b.veilederId === veileder.ident)
                     .map((bruker) => <tr key={bruker.fnr}>
                         <td>
                             <div className="skjema__input">
@@ -158,7 +160,7 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                                 </span>
                             </td>
                         }
-                        <td></td> /* Dato fra arbeidsliste */
+                        <td />
                         {
                             ytelseFilterErAktiv(filtervalg.ytelse) ?
                                 <Utlopsdatokolonne bruker={bruker} ytelse={filtervalg.ytelse} />
@@ -183,8 +185,10 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                                 </Tabelletiketter> : null}
                         </td>
                     </tr>)}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+            <LeggTilArbeidslisteModal isOpen={brukere.length === 0} />
+        </div>
     );
 }
 
