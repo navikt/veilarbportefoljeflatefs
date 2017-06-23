@@ -4,6 +4,7 @@ import classNames from 'classnames';
 const btnCls = (erApen, className) => classNames('dropdown', className, {
     'dropdown--apen': erApen
 });
+const btnWrapperCls = (disabled) => classNames('dropdown__btnwrapper', { 'dropdown__btnwrapper--disabled': disabled });
 
 function isChildOf(parent, element) {
     if (element === document) { // eslint-disable-line no-undef
@@ -68,7 +69,7 @@ class Dropdown extends Component {
     }
 
     render() {
-        const { name, className, children } = this.props;
+        const { name, className, disabled, children } = this.props;
         const { apen } = this.state;
 
         const augmentedChild = Children.map(children, (child) => cloneElement(child, {
@@ -82,7 +83,7 @@ class Dropdown extends Component {
 
         return (
             <div className={btnCls(apen, className)} ref={this.bindComponent}>
-                <div className="dropdown__btnwrapper">
+                <div className={btnWrapperCls(disabled)}>
                     <button
                         ref={(btn) => {
                             this.btn = btn;
@@ -92,6 +93,7 @@ class Dropdown extends Component {
                         onClick={this.toggleDropdown}
                         aria-expanded={apen}
                         aria-controls={`${name}-dropdown__innhold`}
+                        disabled={disabled}
                     >
                         {name}
                     </button>
@@ -104,6 +106,7 @@ class Dropdown extends Component {
 
 Dropdown.propTypes = {
     apen: PT.bool,
+    disabled: PT.bool,
     name: PT.string.isRequired,
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.node)]).isRequired,
     className: PT.string,

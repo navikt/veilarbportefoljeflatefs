@@ -64,7 +64,7 @@ export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
         if (PENDING) {
             dispatch({ type: PENDING });
         }
-        return fn(getState)
+        return fn(dispatch, getState)
             .then(sendResultatTilDispatch(dispatch, OK))
             .catch(handterFeil(dispatch, FEILET));
     };

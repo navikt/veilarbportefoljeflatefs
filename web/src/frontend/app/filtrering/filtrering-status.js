@@ -10,7 +10,7 @@ function BarInput({ id, tekstId, antall, max, barClassname, ...props }) {
     return (
         <div className="skjema__input">
             <input type="radio" id={id} className="radioknapp" {...props} />
-            <Barlabel htmlFor={id} tekstId={tekstId} antall={antall} max={max} className={barClassname}/>
+            <Barlabel htmlFor={id} tekstId={tekstId} antall={antall} max={max} className={barClassname} />
         </div>
     );
 }
@@ -90,6 +90,39 @@ class FiltreringStatus extends Component {
                     checked={brukerstatus === 'VENTER_PA_SVAR_FRA_BRUKER'}
                     tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfrabruker.brukere.checkbox"
                     antall={this.props.statustall.data.venterPaSvarFraBruker}
+                    max={this.props.statustall.data.totalt}
+                    barClassname="inaktiveBrukere"
+                />
+                <BarInput
+                    id="utlopteAktiviteter"
+                    name="brukerstatus"
+                    value="UTLOPTE_AKTIVITETER"
+                    onChange={this.handleChange}
+                    checked={brukerstatus === 'UTLOPTE_AKTIVITETER'}
+                    tekstId="enhet.filtrering.filtrering.oversikt.utlopteaktiviteter.brukere.checkbox"
+                    antall={this.props.statustall.data.utlopteAktiviteter}
+                    max={this.props.statustall.data.totalt}
+                    barClassname="inaktiveBrukere"
+                />
+                <BarInput
+                    id="ikkeIavtaltAktivitet"
+                    name="brukerstatus"
+                    value="IKKE_I_AVTALT_AKTIVITET"
+                    onChange={this.handleChange}
+                    checked={brukerstatus === 'IKKE_I_AVTALT_AKTIVITET'}
+                    tekstId="enhet.filtrering.filtrering.oversikt.ikkeiavtaltaktivitet.brukere.checkbox"
+                    antall={this.props.statustall.data.ikkeIavtaltAktivitet}
+                    max={this.props.statustall.data.totalt}
+                    barClassname="inaktiveBrukere"
+                />
+                <BarInput
+                    id="iavtaltAktivitet"
+                    name="brukerstatus"
+                    value="I_AVTALT_AKTIVITET"
+                    onChange={this.handleChange}
+                    checked={brukerstatus === 'I_AVTALT_AKTIVITET'}
+                    tekstId="enhet.filtrering.filtrering.oversikt.iavtaltaktivitet.brukere.checkbox"
+                    antall={this.props.statustall.data.iavtaltAktivitet}
                     max={this.props.statustall.data.totalt}
                     barClassname="inaktiveBrukere"
                 />

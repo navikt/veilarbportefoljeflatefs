@@ -14,6 +14,9 @@ const initalState = {
         inaktiveBrukere: 0,
         venterPaSvarFraNAV: 0,
         venterPaSvarFraBruker: 0,
+        utlopteAktiviteter: 0,
+        ikkeIavtaltAktivitet: 0,
+        iavtaltAktivitet: 0,
         minArbeidsliste: 0
     }
 };
