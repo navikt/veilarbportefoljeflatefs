@@ -1,5 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 
 function LeggTilArbeidsliste({ skalSkjules }) {
     if (skalSkjules) {
@@ -7,7 +8,11 @@ function LeggTilArbeidsliste({ skalSkjules }) {
     }
 
     return (
-        <div>arbeidsliste</div>
+        <div className="toolbar_btnwrapper">
+            <button type="button" className="toolbar_btn" >
+                <FormattedMessage id="portefolje.legg.til.arbeidsliste.button"/>
+            </button>
+        </div>
     );
 }
 

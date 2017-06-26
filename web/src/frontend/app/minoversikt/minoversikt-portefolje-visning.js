@@ -1,5 +1,4 @@
 import React, { Component, PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {
@@ -8,13 +7,14 @@ import {
     nullstillFeilendeTilordninger,
     settTilordningStatusOk
 } from '../ducks/portefolje';
-import Paginering from '../paginering/paginering';
+import TabellOverskrift from './../components/tabell-overskrift';
+import Toolbar from './../components/toolbar/toolbar';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
 import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 import { ASCENDING, DESCENDING, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
-import { ytelsevalg } from '../filtrering/filter-konstanter';
+
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import TilordningFeiletModal from '../modal/tilordning-feilet-modal';
 import ServerFeilModal from '../modal/server-feil-modal';
@@ -77,29 +77,6 @@ class VeilederPortefoljeVisning extends Component {
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
-        const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
-
-        const pagineringTekst = (
-            antallTotalt > 0 && antallReturnert !== 0 ?
-                (<FormattedMessage
-                    id="enhet.portefolje.paginering.tekst"
-                    values={{
-                        fraIndex: `${fraIndex + 1}`,
-                        tilIndex: fraIndex + antallReturnert,
-                        antallTotalt,
-                        visDiagram
-                    }}
-                />) :
-                (<FormattedMessage
-                    id="enhet.portefolje.paginering.tekst"
-                    values={{
-                        fraIndex: '0',
-                        tilIndex: '0',
-                        antallTotalt,
-                        visDiagram
-                    }}
-                />)
-        );
 
         let fnr = [];
         const feil = portefolje.feilendeTilordninger;
@@ -107,28 +84,28 @@ class VeilederPortefoljeVisning extends Component {
             fnr = feil.map((b) => b.brukerFnr);
         }
 
-        const paginering = (visDiagramknapper) => (
-            <Paginering
-                antallTotalt={antallTotalt}
-                antallReturnert={antallReturnert}
-                fraIndex={fraIndex}
-                hentListe={(fra, antall) =>
-                    hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
-                        sorteringsfelt, sorteringsrekkefolge, filtervalg, antall, fra)}
-                tekst={pagineringTekst}
-                sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
-                visButtongroup={visDiagramknapper}
-                visDiagram={visDiagram}
-            />
-
-        );
-
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, { status: tilordningerStatus }]}>
-                    {paginering(visButtonGroup)}
+                    <TabellOverskrift
+                        fraIndex={fraIndex}
+                        antallIVisning={antallReturnert}
+                        antallTotalt={antallTotalt}
+                        visDiagram={visDiagram}
+                        tekst="enhet.portefolje.paginering.tekst"
+                    />
+                    <Toolbar
+                        filtervalg={filtervalg} onPaginering={(fra, antall) => hentPortefolje(
+                        valgtEnhet.enhet.enhetId,
+                        sorteringsrekkefolge,
+                        sorteringsfelt,
+                        filtervalg,
+                        fra,
+                        antall
+                    )}
+                    />
                     {
                         visDiagram ?
                             <Diagram
@@ -142,7 +119,6 @@ class VeilederPortefoljeVisning extends Component {
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
-                    {(antallTotalt >= 5 && !visDiagram) && paginering(false)}
                     <TilordningFeiletModal
                         isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
                         fnr={fnr}

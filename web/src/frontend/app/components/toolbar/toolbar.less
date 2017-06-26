@@ -94,3 +94,25 @@
         background-position: 99% 130%;
     }
 }
+
+.toolbar_btn {
+    border: none;
+    color: @toolbarTextColor;
+    padding-right: 2rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: @white;
+    margin: 0 0.5rem;
+
+    &:disabled {
+        color: @toolbarInactiveTextColor;
+    }
+
+    &:focus {
+        outline: none;
+        border-radius: 2px;
+        box-shadow: 0 0 0 3px #ffbd66
+    }
+}
+
+
