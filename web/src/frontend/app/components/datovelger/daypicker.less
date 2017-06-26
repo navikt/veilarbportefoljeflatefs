@@ -37,7 +37,7 @@
     cursor: pointer;
     border: 0;
     background-color: transparent;
-    background-image: url('ikoner/pil-videre.svg');
+    background: url(../svg/pil-videre.svg) no-repeat;
     background-size: 1.25em 1.25em;
 
     &:focus {
@@ -47,7 +47,7 @@
 
     &:focus,
     &:hover {
-        background-image: url('ikoner/pil-videre--hover.svg');
+        background: url(../svg/pil-videre--hover.svg) no-repeat;
     }
 
     &--prev {
@@ -238,7 +238,7 @@
             background-color: transparent;
             padding: 0;
             position: absolute;
-            background-image: url('ikoner/kalender.svg');
+            background: url(../svg/kalender.svg) no-repeat;
             background-repeat: no-repeat;
             background-position: center center;
             background-size: 16px 16px;
@@ -250,11 +250,11 @@
 
             &:hover:not(:disabled),
             &:focus {
-                background-image: url('ikoner/kalender--hover.svg');
+                background: url(../svg/kalender--hover.svg) no-repeat;
             }
 
             &:active {
-                background-image: url('ikoner/kalender--aktiv.svg');
+                background: url(../svg/kalender--aktiv.svg) no-repeat;
             }
         }
     }
