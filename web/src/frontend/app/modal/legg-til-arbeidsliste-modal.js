@@ -12,20 +12,29 @@ class LeggTilArbeidslisteModal extends Component {
         super(props);
 
         this.state = {
-            isOpen: this.props.isOpen
+            isOpen: this.props.isOpen,
         };
         this.lukkModal = this.lukkModal.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+
+        console.log('nextProps.isOpen', nextProps.isOpen);
+        if (nextProps.isOpen !== this.state.isOpen) {
+            this.setState({ isOpen: nextProps.isOpen });
+        }
+    }
+
     lukkModal() {
-        this.setState({ isOpen: false });
+        this.setState({ isOpen: false, visArbeidslisteModal: false });
     }
 
     render() {
+        console.log('this.state', this.state);
         return (
             <Modal
                 contentLabel="Legg i arbeidsliste"
-                isOpen={this.state.isOpen}
+                isOpen={this.props.isOpen}
                 onRequestClose={this.lukkModal}
                 closeButton
             >
@@ -54,7 +63,7 @@ class LeggTilArbeidslisteModal extends Component {
                                 className="input-fullbredde"
                             />
                         </div>
-                        <Datovelger  feltNavn="datoFelt" />
+                        <Datovelger feltNavn="datoFelt" />
                     </form>
                     <div>
                         <button className="knapp knapp--hoved" onClick={this.lukkModal}>

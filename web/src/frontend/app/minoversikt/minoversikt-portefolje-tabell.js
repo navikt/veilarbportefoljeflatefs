@@ -8,7 +8,6 @@ import { ytelseFilterErAktiv } from '../utils/utils';
 import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
 import { ytelsevalg } from './../filtrering/filter-konstanter';
-import LeggTilArbeidslisteModal from '../modal/legg-til-arbeidsliste-modal';
 
 function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veileder, settSorteringOgHentPortefolje,
     filtervalg, sorteringsrekkefolge, valgtEnhet }) {
@@ -187,7 +186,6 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
                     </tr>)}
                 </tbody>
             </table>
-            <LeggTilArbeidslisteModal isOpen={brukere.length === 0} />
         </div>
     );
 }
