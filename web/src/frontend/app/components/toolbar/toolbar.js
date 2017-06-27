@@ -12,7 +12,7 @@ function Toolbar({ filtergruppe, onPaginering }) {
             <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
                 <VelgalleCheckboks />
                 <Tildelbruker veileder={{}} filtergruppe={filtergruppe} />
-                <LeggTilArbeidsliste />
+                <LeggTilArbeidsliste visArbeidslisteModal={false}/>
                 <SokVeilder veileder={{}} filtergruppe={filtergruppe} />
             </div>
             <div className="toolbar__element toolbar__midten toolbar--skille-mellom-elementer">

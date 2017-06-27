@@ -14,7 +14,6 @@ import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
 import { ASCENDING, DESCENDING, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
-
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import TilordningFeiletModal from '../modal/tilordning-feilet-modal';
 import ServerFeilModal from '../modal/server-feil-modal';
@@ -77,6 +76,7 @@ class VeilederPortefoljeVisning extends Component {
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+
 
         let fnr = [];
         const feil = portefolje.feilendeTilordninger;
