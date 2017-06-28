@@ -2,36 +2,30 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import LeggTilArbeidslisteModal from '../../modal/legg-til-arbeidsliste-modal';
+import { skjulModal, visModal} from '../../ducks/modal';
 
 class LeggTilArbeidsliste extends Component {
     constructor(props) {
         super(props);
-        const { skalSkjules } = this.props;
-        if (skalSkjules) {
-            return null;
-        }
+
         this.onClickHandler = this.onClickHandler.bind(this);
-        this.state = { visArbeidslisteModal: this.props.visArbeidslisteModal };
     }
 
     onClickHandler() {
-       this.setState({ visArbeidslisteModal: true });
-    }
-
-    componentWillReceiveProps() {
-
+       this.props.visArbeidslisteModal();
     }
 
     render() {
-        console.log("render");
-        console.log(this.state);
-        const { visArbeidslisteModal } = this.state;
+        const { visModal, skalSkjules } = this.props;
+        if (skalSkjules) {
+            return null;
+        }
         return (
             <div className="toolbar_btnwrapper">
                 <button type="button" className="toolbar_btn" onClick={this.onClickHandler}>
                     <FormattedMessage id="portefolje.legg.til.arbeidsliste.button"/>
                 </button>
-                <LeggTilArbeidslisteModal isOpen={visArbeidslisteModal} />
+                <LeggTilArbeidslisteModal isOpen={visModal} />
             </div>
         );
     }
@@ -39,16 +33,20 @@ class LeggTilArbeidsliste extends Component {
 
 LeggTilArbeidsliste.propTypes = {
     skalSkjules: PT.bool.isRequired,
-    visArbeidslisteModal: PT.bool
+    visModal: PT.bool.isRequired,
+    visArbeidslisteModal: PT.func.isRequired,
+    skjulArbeidslisteModal: PT.func.isRequired
 };
 
-LeggTilArbeidsliste.defaultProps = {
-    visArbeidslisteModal: false
-};
-
-const mapStateToProps = ({ ui }) => ({
-    skalSkjules: (ui.side.side || '') !== 'veilederoversikt',
+const mapStateToProps = (state) => ({
+    skalSkjules: (state.ui.side.side || '') !== 'veilederoversikt',
+    visModal: state.modal.visModal,
+    ui: state.ui
 });
 
+const mapDispatchToProps = (dispatch) => ({
+    visArbeidslisteModal: () => dispatch(visModal()),
+    skjulArbeidslisteModal: () => dispatch(skjulModal())
+});
 
-export default connect(mapStateToProps)(LeggTilArbeidsliste);
+export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidsliste);
