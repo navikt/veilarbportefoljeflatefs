@@ -40,8 +40,7 @@ LeggTilArbeidsliste.propTypes = {
 
 const mapStateToProps = (state) => ({
     skalSkjules: (state.ui.side.side || '') !== 'veilederoversikt',
-    visModal: state.modal.visModal,
-    ui: state.ui
+    visModal: state.modal.visModal
 });
 
 const mapDispatchToProps = (dispatch) => ({
