@@ -1,9 +1,11 @@
 import React, { Component, PropTypes as PT } from 'react';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import Modal from 'nav-frontend-modal';
 import { Normaltekst, Undertittel, Innholdstittel } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 import Datovelger from '../components/datovelger/datovelger';
+import { skjulModal } from '../ducks/modal';
 
 Modal.setAppElement('#applikasjon');
 
@@ -12,29 +14,27 @@ class LeggTilArbeidslisteModal extends Component {
         super(props);
 
         this.state = {
-            isOpen: this.props.isOpen,
+            isOpen: this.props.isOpen
         };
         this.lukkModal = this.lukkModal.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-
-        console.log('nextProps.isOpen', nextProps.isOpen);
         if (nextProps.isOpen !== this.state.isOpen) {
             this.setState({ isOpen: nextProps.isOpen });
         }
     }
 
     lukkModal() {
-        this.setState({ isOpen: false, visArbeidslisteModal: false });
+        this.setState({ isOpen: false});
+        this.props.skjulArbeidslisteModal();
     }
 
     render() {
-        console.log('this.state', this.state);
         return (
             <Modal
                 contentLabel="Legg i arbeidsliste"
-                isOpen={this.props.isOpen}
+                isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
                 closeButton
             >
@@ -83,8 +83,17 @@ LeggTilArbeidslisteModal.propTypes = {
     isOpen: PT.bool.isRequired
 };
 
+const mapStateToProps = (state) => ({
+    visModal: state.modal.visModal
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    skjulArbeidslisteModal: () => dispatch(skjulModal())
+});
+
+
 LeggTilArbeidslisteModal = reduxForm({
     form: 'arbeidsliste_kommentar_skjema'
 })(LeggTilArbeidslisteModal);
 
-export default LeggTilArbeidslisteModal;
+export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidslisteModal);
