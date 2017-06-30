@@ -25,6 +25,11 @@ veilarbsituasjon
 ```
 Disse 6 applikasjonene må klones med `git clone` og bygges med `mvn clean install` ved første gangs bruk, og deretter sporadisk. OBS: `veilarbportefoljeflatefs-tekster` må bygges før `veilarbportefoljeflatefs` kjøres opp.
 
+### Ved bruk av dev-proxy
+Ved bruke av dev-proxy må man åpne applikasjonen på port 8080:
+
+`http://localhost:8080/veilarbportefoljeflatefs/enhet?enhet=0100`
+
 ## Frontendbygg
 
 ### Før du bygger
