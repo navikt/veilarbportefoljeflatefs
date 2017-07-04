@@ -1,11 +1,10 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import Modal from 'nav-frontend-modal';
-import { Normaltekst, Undertittel, Innholdstittel } from 'nav-frontend-typografi';
+import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import Datovelger from '../components/datovelger/datovelger';
 import { skjulModal } from '../ducks/modal';
+import LeggTilArbeidslisteForm from './legg-til-arbeidsliste-form';
 
 Modal.setAppElement('#applikasjon');
 
@@ -26,7 +25,7 @@ class LeggTilArbeidslisteModal extends Component {
     }
 
     lukkModal() {
-        this.setState({ isOpen: false});
+        this.setState({isOpen: false});
         this.props.skjulArbeidslisteModal();
     }
 
@@ -50,39 +49,7 @@ class LeggTilArbeidslisteModal extends Component {
                             values={{ antall: valgteBrukere.length }}
                         />
                     </Normaltekst>
-                    {valgteBrukere.map((bruker) =>
-                        <div>
-                            <Undertittel className="blokk-s">
-                                <FormattedMessage
-                                    id="modal.legg.til.arbeidsliste.brukerinfo"
-                                    values={{
-                                        etternavn: bruker.etternavn,
-                                        fornavn: bruker.fornavn,
-                                        fnr: bruker.fnr
-                                    }}
-                                />
-                            </Undertittel>
-                            < form >
-                                < div className="nav-input blokk-s">
-                                <textarea
-                                rows="5"
-                                id="arbeidslistekommentar"
-                                name="arbeidslistekommentar"
-                                className="input-fullbredde"
-                                />
-                                </div>
-                                <Datovelger feltNavn="datoFelt" />
-                            </form>
-                        </div>
-                    )}
-                    <div>
-                        <button className="knapp knapp--hoved" onClick={this.lukkModal}>
-                            <FormattedMessage id="modal.legg.til.arbeidsliste.knapp.lagre" />
-                        </button>
-                        <button className="knapp" onClick={this.lukkModal}>
-                            <FormattedMessage id="modal.legg.til.arbeidsliste.knapp.avbryt" />
-                        </button>
-                    </div>
+                   <LeggTilArbeidslisteForm valgteBrukere={valgteBrukere} lukkModal={this.lukkModal}/>
                 </div>
             </Modal>
         );
@@ -99,12 +66,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    skjulArbeidslisteModal: () => dispatch(skjulModal())
+    skjulArbeidslisteModal: () => dispatch(skjulModal()),
 });
-
-
-LeggTilArbeidslisteModal = reduxForm({
-    form: 'arbeidsliste_kommentar_skjema'
-})(LeggTilArbeidslisteModal);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidslisteModal);

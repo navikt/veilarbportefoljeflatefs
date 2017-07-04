@@ -42,6 +42,10 @@ LeggTilArbeidsliste.propTypes = {
     valgteBrukere: PT.arrayOf(PT.object).isRequired
 };
 
+LeggTilArbeidsliste.defaultProps = {
+    valgteBrukere: []
+};
+
 const mapStateToProps = (state) => ({
     skalSkjules: (state.ui.side.side || '') !== 'veilederoversikt',
     visModal: state.modal.visModal,
