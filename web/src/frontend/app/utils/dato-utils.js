@@ -150,11 +150,10 @@ export function dateGreater(date1, date2) {
 }
 
 export function validerDatoField(input, intl, alternativer) {
-    const { fra, til } = alternativer;
+    const { fra } = alternativer;
     const inputDato = moment(input);
 
     const fraDato = moment(fra);
-    const tilDato = moment(til);
 
     if (input && !erGyldigISODato(input)) {
         return intl.formatMessage({
@@ -162,15 +161,12 @@ export function validerDatoField(input, intl, alternativer) {
         });
     } else if (
         fra &&
-        til &&
-        (inputDato.isAfter(tilDato, 'day') || fraDato.isAfter(inputDato, 'day'))
+        (fraDato.isAfter(inputDato, 'day'))
     ) {
-        tilDato.add(1, 'day');
         fraDato.subtract(1, 'day');
 
         const msgValues = {
-            fradato: toDatePrettyPrint(fraDato.toDate()),
-            tildato: toDatePrettyPrint(tilDato.toDate())
+            fradato: toDatePrettyPrint(fraDato.toDate())
         };
         return intl.formatMessage({
             id: 'datepicker.feilmelding.innenfor-periode',

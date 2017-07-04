@@ -40,17 +40,14 @@ export const NavBar = ({
                            onNextClick,
                            onPreviousClick,
                            showPreviousButton,
-                           showNextButton,
-                           intl
+                           showNextButton
                        }) => {
     const className = 'DayPicker-NavButton';
     return (
         <div role="toolbar">
             <button
                 tabIndex="-1"
-                aria-label={intl.formatMessage({
-                    id: 'datepicker.forrige-maaned'
-                })}
+                aria-label="Forrige måned"
                 className={`${className} DayPicker-NavButton--prev`}
                 disabled={!showPreviousButton}
                 type="button"
@@ -61,9 +58,7 @@ export const NavBar = ({
             />
             <button
                 tabIndex="-1"
-                aria-label={intl.formatMessage({
-                    id: 'datepicker.neste-maaned'
-                })}
+                aria-label="Neste måned"
                 className={`${className} DayPicker-NavButton--next`}
                 disabled={!showNextButton}
                 type="button"
@@ -80,8 +75,7 @@ NavBar.propTypes = {
     onNextClick: PT.func,
     onPreviousClick: PT.func,
     showPreviousButton: PT.bool,
-    showNextButton: PT.bool,
-    intl: intlShape.isRequired
+    showNextButton: PT.bool
 };
 
 NavBar.defaultProps = {
@@ -131,14 +125,13 @@ class DayPickerComponent extends Component {
     }
 
     erDeaktivertDag(day) {
-        const { tidligsteFom, senesteTom } = this.props;
+        const { tidligsteFom } = this.props;
         const tempDay = new Date(
             `${day.getFullYear()}-${pad(day.getMonth() + 1)}-${pad(day.getDate())}`
         );
 
         return (
-            (tidligsteFom && dateGreater(tidligsteFom, tempDay)) ||
-            (senesteTom && dateLess(senesteTom, tempDay))
+            (tidligsteFom && dateGreater(tidligsteFom, tempDay))
         );
     }
 
@@ -174,14 +167,12 @@ DayPickerComponent.propTypes = {
     lukk: PT.func.isRequired,
     ariaControlledBy: PT.string,
     onDayClick: PT.func.isRequired,
-    senesteTom: PT.instanceOf(Date),
     tidligsteFom: PT.instanceOf(Date),
     intl: intlShape.isRequired
 };
 
 DayPickerComponent.defaultProps = {
     ariaControlledBy: undefined,
-    senesteTom: undefined,
     tidligsteFom: undefined
 };
 
