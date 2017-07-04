@@ -4,6 +4,7 @@ import Brukerinformasjon from './brukerinformasjon';
 import Datokolonner from './datokolonner';
 import Etiketter from './etiketter';
 import { filtervalgShape } from './../proptype-shapes';
+import { FormattedMessage } from 'react-intl';
 
 
 function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
@@ -21,6 +22,7 @@ function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
 
     const childrenBody =
         (<div className="brukerpanel__body">
+            <FormattedMessage id="arbeidsliste.kommentar.header"/>
             {bruker.arbeidslisteKommentar}
         </div>
 
