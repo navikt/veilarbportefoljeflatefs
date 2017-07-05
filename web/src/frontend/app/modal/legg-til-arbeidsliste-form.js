@@ -1,23 +1,13 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { formValueSelector, FieldArray } from "redux-form";
-import { validForm, rules } from 'react-redux-form-validation';
+import { FieldArray, reduxForm } from "redux-form";
 import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { lagreArbeidsliste } from '../ducks/arbeidsliste';
 
-
-const KOMMENTAR_MAKS_LENGDE = 2000;
-
-const begrensetKommentarLengde = rules.maxLength(
-    KOMMENTAR_MAKS_LENGDE,
-    <FormattedMessage
-        id="legg-til-arbeidsliste-form.feilmelding.kommentar-lengde"
-        values={{ KOMMENTAR_MAKS_LENGDE }}
-    />
-);
+const KOMMENTAR_MAKS_LENGDE = 5000;
 
 function LeggTilArbeidslisteForm ({  valgteBrukere, lukkModal, handleSubmit }) {
 
@@ -39,7 +29,7 @@ function LeggTilArbeidslisteForm ({  valgteBrukere, lukkModal, handleSubmit }) {
                             <Textarea
                                 feltNavn={`${index}.kommentar`}
                                 placeholder=""
-                                maxLength={2000}
+                                maxLength={KOMMENTAR_MAKS_LENGDE}
                                 disabled={false}
                                 visTellerFra={1}
                             />
@@ -78,45 +68,37 @@ LeggTilArbeidslisteForm.defaultProps = {
 };
 
 export const formNavn = 'arbeidsliste_kommentar_skjema';
-const LeggTilArbeidslisteReduxForm = validForm({
-    form: formNavn,
-    validate: {
-        kommentar: [begrensetKommentarLengde]
-    }
+const LeggTilArbeidslisteReduxForm = reduxForm({
+    form: formNavn
 })(LeggTilArbeidslisteForm);
 
-const selector = formValueSelector(formNavn);
 const mapStateToProps = (state, props) => {
-    const arbeidsliste = props.arbeidsliste || [];
-    const valgteBrukere = props.valgteBrukere;
-    // props.valgteBrukere.every( function(bruker)
-    // {
-    //     const kommentar = {};
-    //     kommentar.veilederId = state.enheter.ident;
-    //     kommentar.brukerFnr = bruker.fnr;
-    //     // kommentar.kommentar = selector(state, `kommentar arbeidslistkommentar_${bruker.fnr}`);
-    //     kommentar.kommentar = selector(state,'kommentar');
-    //     // kommentar.frist = selector(state, `datoFelt datoFelt_${bruker.fnr}`);
-    //     kommentar.frist = selector(state,'datofelt');
-    //     arbeidsliste.push(kommentar);
-    // });
+    const arbeidslisteData = props.arbeidslisteData || [];
+    const brukere = props.valgteBrukere;
+    const veilederId = state.enheter.ident;
+
     return {
         initialValues: {
-            ...arbeidsliste,
-            valgteBrukere
+            ...arbeidslisteData,
+            brukere,
+            veilederId
         },
     }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    onSubmit: (arbeidsliste, valgteBrukere, state) => {
-        console.log(valgteBrukere);
-        valgteBrukere.forEach( function(bruker, index) {
-            arbeidsliste[index].brukerFnr = bruker.fnr;
-            arbeidsliste[index].veilederId = state.enheter.ident;
-        });
-        console.log('arbeidsliste', arbeidsliste);
+const mapDispatchToProps = () => ({
+    onSubmit: (arbeidslisteData, dispatch, props) => {
+        let arbeidsliste = {};
+            arbeidslisteData.brukere.forEach( function(bruker, index) {
+                arbeidsliste[index] = {
+                    kommentar: arbeidslisteData[index].kommentar,
+                    frist: arbeidslisteData[index].frist,
+                    brukerFnr: bruker.fnr,
+                    veilederId: arbeidslisteData.veilederId
+                };
+            });
         lagreArbeidsliste(arbeidsliste)(dispatch);
+        props.lukkModal();
     }
 });
 
