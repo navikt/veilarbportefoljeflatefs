@@ -4,6 +4,7 @@ import Modal from 'nav-frontend-modal';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { skjulModal } from '../ducks/modal';
+import { markerAlleBrukere } from '../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidsliste-form';
 
 Modal.setAppElement('#applikasjon');
@@ -27,6 +28,7 @@ class LeggTilArbeidslisteModal extends Component {
     lukkModal() {
         this.setState({isOpen: false});
         this.props.skjulArbeidslisteModal();
+        this.props.fjernMarkerteBrukere();
     }
 
     render() {
@@ -67,6 +69,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     skjulArbeidslisteModal: () => dispatch(skjulModal()),
+    fjernMarkerteBrukere: () => dispatch(markerAlleBrukere(false)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidslisteModal);
