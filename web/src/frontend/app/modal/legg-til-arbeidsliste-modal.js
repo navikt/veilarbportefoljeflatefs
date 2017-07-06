@@ -26,7 +26,7 @@ class LeggTilArbeidslisteModal extends Component {
     }
 
     lukkModal() {
-        this.setState({isOpen: false});
+        this.setState({ isOpen: false });
         this.props.skjulArbeidslisteModal();
         this.props.fjernMarkerteBrukere();
     }
@@ -51,7 +51,7 @@ class LeggTilArbeidslisteModal extends Component {
                             values={{ antall: valgteBrukere.length }}
                         />
                     </Normaltekst>
-                   <LeggTilArbeidslisteForm valgteBrukere={valgteBrukere} lukkModal={this.lukkModal}/>
+                    <LeggTilArbeidslisteForm valgteBrukere={valgteBrukere} lukkModal={this.lukkModal} />
                 </div>
             </Modal>
         );
@@ -69,7 +69,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     skjulArbeidslisteModal: () => dispatch(skjulModal()),
-    fjernMarkerteBrukere: () => dispatch(markerAlleBrukere(false)),
+    fjernMarkerteBrukere: () => dispatch(markerAlleBrukere(false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidslisteModal);

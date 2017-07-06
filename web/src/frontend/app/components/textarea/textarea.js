@@ -42,7 +42,7 @@ function InnerTextAreaComponent({
             label={labelId && <FormattedMessage id={labelId} />}
             maxLength={maxLength}
             feil={feil}
-            tellerTekst={antallTegn =>
+            tellerTekst={(antallTegn) =>
                 getTellerTekst(antallTegn, maxLength, visTellerFra)}
             {...input}
             {...rest}
@@ -55,14 +55,14 @@ InnerTextAreaComponent.propTypes = {
     errorMessage: PT.arrayOf(PT.oneOfType([PT.string, PT.node])),
     visTellerFra: PT.number,
     meta: PT.object, // eslint-disable-line react/forbid-prop-types
-    input: PT.object, // eslint-disable-line react/forbid-prop-types
+    input: PT.object // eslint-disable-line react/forbid-prop-types
 };
 
 InnerTextAreaComponent.defaultProps = {
     errorMessage: undefined,
     meta: undefined,
     input: undefined,
-    visTellerFra: undefined,
+    visTellerFra: undefined
 };
 
 function Textarea({ feltNavn, ...rest }) {
@@ -76,12 +76,12 @@ function Textarea({ feltNavn, ...rest }) {
 
 Textarea.propTypes = {
     feltNavn: PT.string,
-    visTellerFra: PT.number,
+    visTellerFra: PT.number
 };
 
 Textarea.defaultProps = {
     feltNavn: undefined,
-    visTellerFra: 0,
+    visTellerFra: 0
 };
 
 export default Textarea;
