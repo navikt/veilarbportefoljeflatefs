@@ -10,17 +10,11 @@ function getTellerTekst(antallTegn, maxLength, visTellerFra) {
 
     if (tegnForMange > 0) {
         return (
-            <FormattedMessage
-                id="tekstfelt.antalltegn.for-mange"
-                values={{ antall: `${tegnForMange}` }}
-            />
+           <span>{tegnForMange}</span>
         );
     } else if (visTellerFra === 0 || visTellerFra >= tegnIgjen) {
         return (
-            <FormattedMessage
-                id="tekstfelt.antalltegn.flere-igjen"
-                values={{ antall: `${tegnIgjen}` }}
-            />
+            <span>{tegnIgjen}</span>
         );
     }
     return <span>&nbsp;</span>;

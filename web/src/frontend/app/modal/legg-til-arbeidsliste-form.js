@@ -1,13 +1,22 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { FieldArray, reduxForm } from 'redux-form';
+import { FieldArray } from 'redux-form';
+import { validForm, rules } from 'react-redux-form-validation';
 import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { lagreArbeidsliste } from '../ducks/arbeidsliste';
 
-const KOMMENTAR_MAKS_LENGDE = 5000;
+const KOMMENTAR_MAKS_LENGDE = 50;
+
+const begrensetKommentarLengde = rules.maxLength(
+    KOMMENTAR_MAKS_LENGDE,
+    <FormattedMessage
+        id="legg-til-arbeidsliste-form.feilmelding.kommentar-lengde"
+        values={{ KOMMENTAR_MAKS_LENGDE }}
+    />
+);
 
 function LeggTilArbeidslisteForm({ valgteBrukere, lukkModal, handleSubmit }) {
     const kommentarer = () => (
@@ -30,7 +39,7 @@ function LeggTilArbeidslisteForm({ valgteBrukere, lukkModal, handleSubmit }) {
                             placeholder=""
                             maxLength={KOMMENTAR_MAKS_LENGDE}
                             disabled={false}
-                            visTellerFra={1}
+                            visTellerFra={0}
                         />
                     </div>
                     <Datovelger
@@ -67,8 +76,11 @@ LeggTilArbeidslisteForm.defaultProps = {
 };
 
 export const formNavn = 'arbeidsliste_kommentar_skjema';
-const LeggTilArbeidslisteReduxForm = reduxForm({
-    form: formNavn
+const LeggTilArbeidslisteReduxForm = validForm({
+    form: formNavn,
+    validate: {
+        arbeidslistekommentar: [begrensetKommentarLengde]
+    }
 })(LeggTilArbeidslisteForm);
 
 const mapStateToProps = (state, props) => {
@@ -87,7 +99,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = () => ({
     onSubmit: (arbeidslisteData, dispatch, props) => {
-        const arbeidsliste = {};
+        const arbeidsliste = [];
         arbeidslisteData.brukere.forEach((bruker, index) => {
             arbeidsliste[index] = {
                 kommentar: arbeidslisteData[index].kommentar,
