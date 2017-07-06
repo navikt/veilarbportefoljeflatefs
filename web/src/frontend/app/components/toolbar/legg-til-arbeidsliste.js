@@ -2,7 +2,7 @@ import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import LeggTilArbeidslisteModal from '../../modal/legg-til-arbeidsliste-modal';
-import { skjulModal, visModal} from '../../ducks/modal';
+import { skjulModal, visModal } from '../../ducks/modal';
 
 class LeggTilArbeidsliste extends Component {
     constructor(props) {
@@ -26,9 +26,9 @@ class LeggTilArbeidsliste extends Component {
         return (
             <div className="toolbar_btnwrapper">
                 <button type="button" className="toolbar_btn" disabled={!aktiv} onClick={this.onClickHandler}>
-                    <FormattedMessage id="portefolje.legg.til.arbeidsliste.button"/>
+                    <FormattedMessage id="portefolje.legg.til.arbeidsliste.button" />
                 </button>
-                <LeggTilArbeidslisteModal isOpen={visModal} valgteBrukere={valgteBrukere}/>
+                <LeggTilArbeidslisteModal isOpen={visModal} valgteBrukere={valgteBrukere} />
             </div>
         );
     }

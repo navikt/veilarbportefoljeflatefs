@@ -1,5 +1,5 @@
 import { STATUS, doThenDispatch } from './utils';
-import {leggTilArbeidsliste} from "../middleware/api";
+import { leggTilArbeidsliste } from '../middleware/api';
 
 // Actions
 const LAGRE_ARBEIDSLISTE_OK = 'veilarbportefolje/lagre_arbeidsliste/OK';
@@ -35,5 +35,4 @@ export function lagreArbeidsliste(arbeidsliste) {
         PENDING: LAGRE_ARBEIDSLISTE_PENDING
     });
 }
-
 
