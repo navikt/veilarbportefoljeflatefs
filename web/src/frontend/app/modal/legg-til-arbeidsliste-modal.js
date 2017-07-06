@@ -36,6 +36,7 @@ class LeggTilArbeidslisteModal extends Component {
 
         return (
             <Modal
+                className={valgteBrukere.length < 3 ? "modal_overflow" : null} //
                 contentLabel="Legg i arbeidsliste"
                 isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
