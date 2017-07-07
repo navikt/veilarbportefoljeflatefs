@@ -74,9 +74,9 @@ class FiltreringStatus extends Component {
                 <BarInput
                     id="venterPaSvarFraNAV"
                     name="brukerstatus"
-                    value="VENTER_PA_SVAR_FRA_NAV"
+                    value="DIALOG_IKKE_FERDIG_BEHANDLET"
                     onChange={this.handleChange}
-                    checked={brukerstatus === 'VENTER_PA_SVAR_FRA_NAV'}
+                    checked={brukerstatus === 'DIALOG_IKKE_FERDIG_BEHANDLET'}
                     tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfranav.brukere.checkbox"
                     antall={this.props.statustall.data.venterPaSvarFraNAV}
                     max={this.props.statustall.data.totalt}
