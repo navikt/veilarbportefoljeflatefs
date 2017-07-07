@@ -17,6 +17,10 @@ const begrensetKommentarLengde = rules.maxLength(
         values={{ KOMMENTAR_MAKS_LENGDE }}
     />
 );
+const pakrevdTekst = rules.minLength(
+    0,
+    <FormattedMessage id="legg-til.arbeidsliste-form.feilmelding.tekst.mangler" />
+);
 
 function LeggTilArbeidslisteForm({ valgteBrukere, lukkModal, handleSubmit }) {
     const kommentarer = () => (
@@ -79,7 +83,8 @@ export const formNavn = 'arbeidsliste_kommentar_skjema';
 const LeggTilArbeidslisteReduxForm = validForm({
     form: formNavn,
     validate: {
-        arbeidslistekommentar: [begrensetKommentarLengde]
+        kommentar: [begrensetKommentarLengde, pakrevdTekst],
+        frist: []
     }
 })(LeggTilArbeidslisteForm);
 
