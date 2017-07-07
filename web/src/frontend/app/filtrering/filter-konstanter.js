@@ -10,7 +10,7 @@ export function lagConfig(data) {
 export const brukerstatus = {
     NYE_BRUKERE: 'Nye brukere',
     INAKTIVE_BRUKERE: 'Inaktive brukere',
-    VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
+    DIALOG_IKKE_FERDIG_BEHANDLET: 'Dialog ikke ferdig behandlet fra NAV',
     VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker',
     UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
