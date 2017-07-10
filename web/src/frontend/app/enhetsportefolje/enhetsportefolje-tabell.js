@@ -8,6 +8,7 @@ import { settBrukerSomMarkert } from './../ducks/portefolje';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 import { ytelsevalg } from '../filtrering/filter-konstanter';
+import {Checkbox} from "nav-frontend-skjema";
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -118,16 +119,12 @@ class EnhetsportefoljeTabell extends Component {
                     <tbody>
                         {brukere.map((bruker) => <tr key={bruker.guid}>
                             <td>
-                                <div className="skjema__input" hidden={bruker.fnr.length === 0}>
-                                    <input
-                                        className="checkboks"
+                                    <Checkbox
+                                        label=""
                                         id={`checkbox-${bruker.guid}`}
-                                        type="checkbox"
                                         checked={!!bruker.markert}
                                         onClick={() => settMarkert(bruker.guid, !bruker.markert)}
                                     />
-                                    <label className="skjema__label" htmlFor={`checkbox-${bruker.guid}`} />
-                                </div>
                             </td>
                             <th>
                                 <a// eslint-disable-next-line no-undef
