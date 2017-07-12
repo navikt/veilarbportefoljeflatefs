@@ -64,7 +64,7 @@ export const ytelse = {
     TILTAKSPENGER: 'Tiltakspenger'
 };
 
-export const ytelsevalg = Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }));
+export const ytelsevalg = Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }), {});
 
 export const rettighetsgruppe = {
     AAP: 'Arbeidsavklaringspenger',
