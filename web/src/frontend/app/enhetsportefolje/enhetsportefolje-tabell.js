@@ -16,6 +16,16 @@ const settSammenNavn = (bruker) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
+const ytelseUtlopsSortering = {
+    [ytelsevalg.DAGPENGER]: 'dagputlopUke',
+    [ytelsevalg.ORDINARE_DAGPENGER]: 'dagputlopUke',
+    [ytelsevalg.DAGPENGER_MED_PERMITTERING]: 'permutlopUke',
+    [ytelsevalg.AAP]: 'utlopsdato',
+    [ytelsevalg.AAP_UNNTAK]: 'utlopsdato',
+    [ytelsevalg.AAP_MAXTID]: 'aapmaxtidUke',
+    [ytelsevalg.TILTAKSPENGER]: 'utlopsdato'
+};
+
 class EnhetsportefoljeTabell extends Component {
 
     componentWillMount() {
@@ -42,6 +52,8 @@ class EnhetsportefoljeTabell extends Component {
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsnummer';
         const sorterUtlopsdato = ['utlopsdato', 'aapmaxtid'].includes(portefolje.sorteringsfelt);
+        const ytelseSortering = ytelseUtlopsSortering[filtervalg.ytelse];
+        const ytelseSorteringHeader = ytelseSortering === 'utlopsdato' ? 'ddmmyy' : 'uker';
 
         const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
             (<th className="tabell-element-center">
@@ -53,13 +65,13 @@ class EnhetsportefoljeTabell extends Component {
         const mmddyyHeader = (
             <th className="tabell-element-center">
                 <button
-                    onClick={() => this.settSorteringOgHentPortefolje(utlopsdatoNavn)}
+                    onClick={() => this.settSorteringOgHentPortefolje(ytelseSortering)}
                     className={classNames('lenke lenke--frittstaende', { valgt: sorterUtlopsdato })}
                     aria-pressed={sorterUtlopsdato}
                     aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
                         sorteringsrekkefolge : 'inaktiv'}
                 >
-                    <FormattedMessage id="portefolje.tabell.ddmmyy" />
+                    <FormattedMessage id={`portefolje.tabell.${ytelseSorteringHeader}`} />
                 </button>
             </th>
         );
