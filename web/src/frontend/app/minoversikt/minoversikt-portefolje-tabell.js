@@ -7,7 +7,7 @@ import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
-import { ytelsevalg } from './../filtrering/filter-konstanter';
+import { ytelsevalg, ytelseUtlopsSortering } from './../filtrering/filter-konstanter';
 
 function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veileder, settSorteringOgHentPortefolje,
     filtervalg, sorteringsrekkefolge, valgtEnhet }) {
@@ -22,7 +22,9 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
     const utlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
     const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
     const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsnummer';
-    const sorterUtlopsdato = ['utlopsdato', 'aapmaxtid'].includes(portefolje.sorteringsfelt);
+    const ytelseSortering = ytelseUtlopsSortering[filtervalg.ytelse];
+    const sorterUtlopsdato = portefolje.sorteringsfelt === ytelseSortering;
+    const ytelseSorteringHeader = ytelseSortering === 'utlopsdato' ? 'ddmmyy' : 'uker';
 
     const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert);
 
@@ -49,13 +51,13 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
 
     const ddmmyyHeader = (<th className="tabell-element-center">
         <button
-            onClick={() => settSorteringOgHentPortefolje(utlopsdatoNavn)}
+            onClick={() => settSorteringOgHentPortefolje(ytelseSortering)}
             className={classNames('lenke lenke--frittstaende', { valgt: sorterUtlopsdato })}
             aria-pressed={sorterUtlopsdato}
             aria-label={(sorterUtlopsdato && sorteringsrekkefolge !== 'ikke_satt') ?
                 sorteringsrekkefolge : 'inaktiv'}
         >
-            <FormattedMessage id="portefolje.tabell.ddmmyy" />
+            <FormattedMessage id={`portefolje.tabell.${ytelseSorteringHeader}`} />
         </button>
     </th>);
 
