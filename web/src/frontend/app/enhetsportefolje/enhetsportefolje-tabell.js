@@ -7,23 +7,13 @@ import { brukerShape, filtervalgShape, portefoljeShape, veilederShape } from '..
 import { markerAlleBrukere, settBrukerSomMarkert } from './../ducks/portefolje';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
-import { ytelsevalg } from '../filtrering/filter-konstanter';
+import { ytelsevalg, ytelseUtlopsSortering } from '../filtrering/filter-konstanter';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
         return '';
     }
     return `${bruker.etternavn}, ${bruker.fornavn}`;
-};
-
-const ytelseUtlopsSortering = {
-    [ytelsevalg.DAGPENGER]: 'dagputlopUke',
-    [ytelsevalg.ORDINARE_DAGPENGER]: 'dagputlopUke',
-    [ytelsevalg.DAGPENGER_MED_PERMITTERING]: 'permutlopUke',
-    [ytelsevalg.AAP]: 'utlopsdato',
-    [ytelsevalg.AAP_UNNTAK]: 'utlopsdato',
-    [ytelsevalg.AAP_MAXTID]: 'aapmaxtidUke',
-    [ytelsevalg.TILTAKSPENGER]: 'utlopsdato'
 };
 
 class EnhetsportefoljeTabell extends Component {
@@ -51,8 +41,8 @@ class EnhetsportefoljeTabell extends Component {
         const utlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
         const sorterEtternavn = portefolje.sorteringsfelt === 'etternavn';
         const sorterFodelsnummer = portefolje.sorteringsfelt === 'fodselsnummer';
-        const sorterUtlopsdato = ['utlopsdato', 'aapmaxtid'].includes(portefolje.sorteringsfelt);
         const ytelseSortering = ytelseUtlopsSortering[filtervalg.ytelse];
+        const sorterUtlopsdato = portefolje.sorteringsfelt === ytelseSortering;
         const ytelseSorteringHeader = ytelseSortering === 'utlopsdato' ? 'ddmmyy' : 'uker';
 
         const utlopsdatoHeader = !!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) ?
