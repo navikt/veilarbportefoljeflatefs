@@ -107,10 +107,10 @@ const mapDispatchToProps = () => ({
         const arbeidsliste = [];
         arbeidslisteData.brukere.forEach((bruker, index) => {
             arbeidsliste[index] = {
+                fnr: bruker.fnr,
+                veilederId: arbeidslisteData.veilederId,
                 kommentar: arbeidslisteData[index].kommentar,
-                frist: arbeidslisteData[index].frist,
-                brukerFnr: bruker.fnr,
-                veilederId: arbeidslisteData.veilederId
+                frist: arbeidslisteData[index].frist
             };
         });
         lagreArbeidsliste(arbeidsliste)(dispatch);
