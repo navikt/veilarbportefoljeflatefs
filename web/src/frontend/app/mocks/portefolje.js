@@ -61,10 +61,6 @@ function lagYtelse() {
         aapMaxtidFasett: null
     };
 
-    if (!ytelse) {
-        return out;
-    }
-
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
     const ar = rnd(0, 4);
@@ -88,6 +84,27 @@ function lagYtelse() {
     return out;
 }
 
+function lagArbeidsliste() {
+    const maybeArbeidsliste = rnd(0,1);
+    if(maybeArbeidsliste > 0.5) {
+        return {
+            arbeidslisteEndringstidspunkt: null,
+            erIArbeidsliste: null,
+            arbeidslisteKommentar: null,
+            arbeidslisteFrist: null,
+            isOppfolgendeVeileder: null
+        };
+    }
+
+    return({
+        arbeidslisteEndringstidspunkt: new Date().toLocaleDateString(),
+        erIArbeidsliste: true,
+        arbeidslisteKommentar: 'En random kommentar',
+        arbeidslisteFrist: new Date().toLocaleDateString(),
+        isOppfolgendeVeileder: true
+    })
+}
+
 function lagBruker(sikkerhetstiltak = [], diskresjonskode = null, egenAnsatt = false) {
     const grunndata = lagGrunndata();
 
@@ -95,6 +112,7 @@ function lagBruker(sikkerhetstiltak = [], diskresjonskode = null, egenAnsatt = f
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : null;
 
     const ytelse = lagYtelse();
+    const arbeidsliste = lagArbeidsliste();
 
     return {
         fnr: grunndata.fnr,
@@ -112,7 +130,13 @@ function lagBruker(sikkerhetstiltak = [], diskresjonskode = null, egenAnsatt = f
         utlopsdato: ytelse.utlopsdato,
         utlopsdatoFasett: ytelse.utlopsdatoFasett,
         aapMaxtid: ytelse.aapMaxtid,
-        aapMaxtidFasett: ytelse.aapMaxtidFasett
+        aapMaxtidFasett: ytelse.aapMaxtidFasett,
+        arbeidslisteEndringstidspunkt: arbeidsliste.arbeidslisteEndringstidspunkt,
+        erIArbeidsliste: arbeidsliste.erIArbeidsliste,
+        arbeidslisteKommentar: arbeidsliste.arbeidslisteKommentar,
+        arbeidslisteFrist: arbeidsliste.arbeidslisteFrist,
+        isOppfolgendeVeileder: arbeidsliste.isOppfolgendeVeileder
+
     };
 }
 

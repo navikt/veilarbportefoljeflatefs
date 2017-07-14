@@ -34,3 +34,97 @@
 .portefolje-side {
     background-color: @navLysGra;
 }
+
+.minoversikt-listehode {
+    border-bottom: 1px solid #b7b1a9;
+
+    .minoversikt-overskrifter {
+        border-bottom: 1px solid #b7b1a9;
+        border-top: 1px solid #b7b1a9;
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+        .listeoverskrift {
+            font-weight: bold;
+        }
+
+        .listeoverskrift__bruker {
+            margin-left: 2.6rem;
+            margin-right: 17.3rem;
+        }
+    }
+
+    .minoversikt-sortering-header__wrapper {
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+        .sortering-header__etternavn {
+            margin-left: 2.6rem;
+        }
+        .sortering-header__fodselsnummer {
+            margin-left: 4.2rem;
+        }
+        .sortering-header__dato {
+            margin-left: 1.6rem;
+        }
+    }
+}
+
+.minoversikt-brukere-liste {
+    padding: 0;
+    .minoversikt-brukere-panel {
+        list-style: none;
+        border-bottom: 1px solid #b7b1a9;
+        .hybridPanel__hode, .panel_hode {
+            padding: 10px 10px 10px 10px;
+
+            .brukerpanel {
+                width:100%;
+            }
+
+            .brukerinformasjon__wrapper {
+                display: inline-block;
+                margin-right: 3rem;
+
+                .brukerinformasjon__navn {
+                    display: inline-block;
+                    width: 12rem;
+                }
+                .skjema__input {
+                    position:relative;
+                    top:5px;
+                    display:inline-block;
+                    margin: 0 0 0 0;
+                    width:1.5rem;
+                    margin-right: 0.5rem;
+                }
+            }
+
+            .datokolonner__wrapper {
+                display: inline-block;
+            }
+
+            .etiketter__wrapper {
+                display: inline-block;
+                float: right;
+                margin-right: 5px;
+            }
+        }
+
+        .hybridPanel__hode, .hybridPanel__innhold {
+            background-color: @navLysGra;
+        }
+        .hybridPanel__knapp {
+            cursor: pointer;
+            background-color: @navLysGra;
+            border:none;
+        }
+    }
+}
+.minoversikt-liste__wrapper {
+    .panel_hode {
+        .etikett:last-child {
+            margin-right: 32px;
+        }
+    }
+}
