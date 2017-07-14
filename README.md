@@ -25,6 +25,11 @@ veilarbsituasjon
 ```
 Disse 6 applikasjonene må klones med `git clone` og bygges med `mvn clean install` ved første gangs bruk, og deretter sporadisk. OBS: `veilarbportefoljeflatefs-tekster` må bygges før `veilarbportefoljeflatefs` kjøres opp.
 
+### Ved bruk av dev-proxy
+Ved bruke av dev-proxy må man åpne applikasjonen på port 8080:
+
+`http://localhost:8080/veilarbportefoljeflatefs/enhet?enhet=0100`
+
 ## Frontendbygg
 
 ### Før du bygger
@@ -48,8 +53,6 @@ Høyreklikk på den ignorerte `out/` mappen i IDEA og marker den som "excluded" 
 For å muliggjøre kall på tvers av domener må chrome startes med følgende flagg: --disable-web-security --user-data-dir. Dette gjøres ved å høyreklikke på chrome, gå til fanen snarvei, og legge til flaggene under mål. Eks: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir. Merk at chrome skal gi beskjed om at disse flaggene er satt når nettleseren åpnes på nytt.
 
 For å åpne applikasjonen i nettleseren, gå til `https://localhost:9592/veilarbportefoljeflatefs/enhet`.
-Brukernavn: Z990610
-Passord: 
 
 ### Debugging av frontend
 
