@@ -80,7 +80,7 @@ export function hentStatusTallForveileder(enhetId, veileder) {
 }
 
 export function leggTilArbeidsliste(arbeidsliste) {
-    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/arbeidsliste/${arbeidsliste[0].brukerFnr}`; // TODO: backend må endres så man kan sende på veilderIdent fremfor per bruker (fnr)
+    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/arbeidsliste/`;
     const config = { ...MED_CREDENTIALS, method: 'put', body: JSON.stringify(arbeidsliste) };
     return fetch(url, config).then(sjekkStatuskode);
 }
