@@ -40,7 +40,7 @@ class VeilederTabell extends Component {
         return (
             <div>
                 <TomPortefoljeModal isOpen={veilederListe.length === 0} />
-                <table className="tabell veileder-tabell portefolje-tabell typo-avsnitt">
+                <table className="tabell veileder-tabell portefolje-tabell typo-undertekst">
                     <thead className="extra-head">
                         <tr>
                             <th>
