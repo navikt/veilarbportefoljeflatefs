@@ -18,6 +18,7 @@ const TILDEL_VEILEDER_FEILET = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_FEI
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
 const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
+const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
 
 function lagBrukerGuid(bruker) {
     return bruker.fnr === '' ? (`${Math.random()}`).slice(2) : bruker.fnr;
@@ -67,6 +68,21 @@ function updateBrukerInArray(brukere, action) {
         }
         return bruker;
     });
+}
+
+function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
+
+    return brukere
+        .map(bruker => {
+            const arbeidslisteForBruker = arbeidsliste.filter(a => a.fnr === bruker.fnr);
+            if (arbeidslisteForBruker) {
+                return {
+                    ...bruker,
+                    arbeidsliste: arbeidslisteForBruker[0]
+                }
+            }
+            return bruker;
+        });
 }
 
 export default function reducer(state = initialState, action) {
@@ -148,6 +164,19 @@ export default function reducer(state = initialState, action) {
                     brukere: state.data.brukere.map((bruker) => ({ ...bruker, markert: action.markert }))
                 }
             };
+        }
+        case OPPDATER_ARBEIDSLISTE: {
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    brukere: updateArbeidslisteForBrukere(
+                        state.data.brukere,
+                        action.arbeidsliste
+                    )
+                }
+            };
+
         }
         default:
             return state;
@@ -256,5 +285,12 @@ export function settValgtVeileder(valgtVeileder) {
     return (dispatch) => dispatch({
         type: SETT_VALGTVEILEDER,
         veileder: valgtVeileder
+    });
+}
+
+export function settArbeidslistePaaBruker(arbeidsliste) {
+    return (dispatch) => dispatch({
+        type: OPPDATER_ARBEIDSLISTE,
+        arbeidsliste
     });
 }

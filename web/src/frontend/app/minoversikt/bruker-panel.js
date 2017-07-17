@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import React, {PropTypes as PT} from 'react';
 import Hybridpanel from './hybridpanel/hybridpanel';
 import Brukerinformasjon from './brukerinformasjon';
 import Datokolonner from './datokolonner';
@@ -22,15 +22,17 @@ function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
 
     const childrenBody =
         (<div className="brukerpanel__body">
-            <FormattedMessage id="arbeidsliste.kommentar.header"/>
-            {bruker.arbeidslisteKommentar}
-        </div>
+                <h5>
+                    <FormattedMessage id="arbeidsliste.kommentar.header"/>
+                </h5>
+                {bruker.arbeidsliste.kommentar}
+            </div>
 
         );
 
     return (
-        bruker.erIArbeidsliste ?
-            <Hybridpanel childrenHead={childrenHead} childrenBody={childrenBody} />
+        bruker.arbeidsliste.arbeidslisteAktiv ?
+            <Hybridpanel childrenHead={childrenHead} childrenBody={childrenBody}/>
             :
             <div className="panel_hode">{childrenHead}</div>
     );
