@@ -89,7 +89,7 @@ function lagArbeidsliste() {
     if(maybeArbeidsliste > 0.5) {
         return {
             arbeidslisteEndringstidspunkt: null,
-            erIArbeidsliste: null,
+            arbeidslisteAktiv: null,
             arbeidslisteKommentar: null,
             arbeidslisteFrist: null,
             isOppfolgendeVeileder: null

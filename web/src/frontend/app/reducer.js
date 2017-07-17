@@ -15,6 +15,7 @@ import modalReducer from './ducks/modal';
 import diagramReducer from './ducks/diagram';
 import sideReducer from './ducks/ui/side';
 import { slettCleanIUrl } from './utils/utils';
+import arbeidslisteReducer from './ducks/arbeidsliste';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -60,5 +61,6 @@ export default combineReducers({
     filtreringVeilederoversikt: named('veiledere', filtreringReducer),
     modal: modalReducer,
     diagram: diagramReducer,
+    arbeidsliste: arbeidslisteReducer,
     form: formReducer
 });

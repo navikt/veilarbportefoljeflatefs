@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { lagreArbeidsliste } from '../ducks/arbeidsliste';
+import { settArbeidslistePaaBruker } from '../ducks/portefolje';
 
 const KOMMENTAR_MAKS_LENGDE = 50;
 
@@ -110,10 +111,11 @@ const mapDispatchToProps = () => ({
                 fnr: bruker.fnr,
                 veilederId: arbeidslisteData.veilederId,
                 kommentar: arbeidslisteData[index].kommentar,
-                frist: arbeidslisteData[index].frist
+                frist: arbeidslisteData[index].frist,
+                arbeidslisteAktiv: true
             };
         });
-        lagreArbeidsliste(arbeidsliste)(dispatch);
+        lagreArbeidsliste(arbeidsliste)(dispatch).then(() => settArbeidslistePaaBruker(arbeidsliste)(dispatch));
         props.lukkModal();
     }
 });
