@@ -2,6 +2,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { Checkbox } from 'nav-frontend-skjema';
 import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
 import { brukerShape, filtervalgShape, portefoljeShape, veilederShape } from '../proptype-shapes';
 import { settBrukerSomMarkert } from './../ducks/portefolje';
@@ -65,7 +66,7 @@ class EnhetsportefoljeTabell extends Component {
 
         return (
             <div className="blokk-s">
-                <table className="tabell portefolje-tabell typo-avsnitt">
+                <table className="tabell portefolje-tabell typo-undertekst">
                     <thead className="extra-head">
                         <tr>
                             <th />
@@ -118,16 +119,12 @@ class EnhetsportefoljeTabell extends Component {
                     <tbody>
                         {brukere.map((bruker) => <tr key={bruker.guid}>
                             <td>
-                                <div className="skjema__input" hidden={bruker.fnr.length === 0}>
-                                    <input
-                                        className="checkboks"
-                                        id={`checkbox-${bruker.guid}`}
-                                        type="checkbox"
-                                        checked={!!bruker.markert}
-                                        onClick={() => settMarkert(bruker.guid, !bruker.markert)}
-                                    />
-                                    <label className="skjema__label" htmlFor={`checkbox-${bruker.guid}`} />
-                                </div>
+                                <Checkbox
+                                    label=""
+                                    id={`checkbox-${bruker.guid}`}
+                                    checked={!!bruker.markert}
+                                    onClick={() => settMarkert(bruker.guid, !bruker.markert)}
+                                />
                             </td>
                             <th>
                                 <a// eslint-disable-next-line no-undef
