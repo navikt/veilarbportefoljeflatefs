@@ -2,13 +2,13 @@ import React, { Component, PropTypes as PT } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { Checkbox } from 'nav-frontend-skjema';
 import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
 import { brukerShape, filtervalgShape, portefoljeShape, veilederShape } from '../proptype-shapes';
 import { settBrukerSomMarkert } from './../ducks/portefolje';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Utlopsdatokolonne from '../tabell/kolonne_utlopsdato';
 import { ytelsevalg } from '../filtrering/filter-konstanter';
-import {Checkbox} from "nav-frontend-skjema";
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -119,12 +119,12 @@ class EnhetsportefoljeTabell extends Component {
                     <tbody>
                         {brukere.map((bruker) => <tr key={bruker.guid}>
                             <td>
-                                    <Checkbox
-                                        label=""
-                                        id={`checkbox-${bruker.guid}`}
-                                        checked={!!bruker.markert}
-                                        onClick={() => settMarkert(bruker.guid, !bruker.markert)}
-                                    />
+                                <Checkbox
+                                    label=""
+                                    id={`checkbox-${bruker.guid}`}
+                                    checked={!!bruker.markert}
+                                    onClick={() => settMarkert(bruker.guid, !bruker.markert)}
+                                />
                             </td>
                             <th>
                                 <a// eslint-disable-next-line no-undef
