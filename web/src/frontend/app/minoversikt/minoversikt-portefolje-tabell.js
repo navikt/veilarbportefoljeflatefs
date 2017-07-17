@@ -75,7 +75,7 @@ function MinoversiktTabell({ settMarkert, settSomMarkertAlle, portefolje, veiled
     );
 
     return (
-        <table className="tabell portefolje-tabell typo-avsnitt">
+        <table className="tabell portefolje-tabell typo-undertekst">
             <thead className="extra-head">
                 <tr>
                     <th />
