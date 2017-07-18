@@ -4,10 +4,10 @@ import SorteringHeader from './sortering-header';
 import { ytelsevalg } from './../filtrering/filter-konstanter';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';
-import { filtervalgShape } from './../proptype-shapes';
+import { filtervalgShape, brukerShape } from './../proptype-shapes';
 
 
-function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt }) {
+function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, brukere }) {
     const ytelseUtlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
 
     return (
@@ -47,6 +47,15 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     skalVises={ytelseFilterErAktiv(filtervalg.ytelse)}
                     className={'sortering-header__dato'}
                 />
+                <SorteringHeader
+                    sortering={'arbeidsliste_frist'}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={ sorteringsfelt === 'arbeidsliste_frist' }
+                    tekstId="portefolje.tabell.arbeidsliste"
+                    skalVises={brukere.some( bruker => bruker.arbeidsliste.arbeidslisteAktiv )}
+                    className={'sortering-header__dato'}
+                />
             </div>
         </div>
     );
@@ -56,8 +65,8 @@ MinOversiktListeHode.propTypes = {
     sorteringsrekkefolge: PT.string.isRequired,
     sorteringOnClick: PT.func.isRequired,
     filtervalg: filtervalgShape.isRequired,
-    sorteringsfelt: PT.string.isRequired
-
+    sorteringsfelt: PT.string.isRequired,
+    brukere: PT.arrayOf(brukerShape.isRequired)
 };
 
 export default MinOversiktListeHode;
