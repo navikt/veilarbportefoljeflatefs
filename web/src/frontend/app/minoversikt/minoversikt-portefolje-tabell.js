@@ -19,7 +19,7 @@ function MinoversiktTabell({
                 sorteringOnClick={settSorteringOgHentPortefolje}
                 filtervalg={filtervalg}
                 sorteringsfelt={portefolje.sorteringsfelt}
-                brukere = { brukere }
+                brukere={brukere}
             />
             <ul className="minoversikt-brukere-liste">
                 {brukere.map((bruker) =>

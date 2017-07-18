@@ -2,7 +2,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import { FormattedDate, injectIntl, intlShape } from 'react-intl';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import MomentLocaleUtils from 'react-day-picker/moment';
-import { erGyldigDato, erGyldigDatoformat, dateGreater, dateLess } from '../../utils/dato-utils';
+import { erGyldigDato, erGyldigDatoformat, dateGreater } from '../../utils/dato-utils';
 
 const localeUtils = {
     ...MomentLocaleUtils,
@@ -168,6 +168,7 @@ DayPickerComponent.propTypes = {
     ariaControlledBy: PT.string,
     onDayClick: PT.func.isRequired,
     tidligsteFom: PT.instanceOf(Date),
+    senesteTom: PT.instanceOf(Date),
     intl: intlShape.isRequired
 };
 

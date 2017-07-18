@@ -27,7 +27,7 @@ function LeggTilArbeidslisteForm({ valgteBrukere, lukkModal, handleSubmit }) {
     const kommentarer = () => (
         <div>
             {valgteBrukere.map((bruker, index) =>
-                <div key={index}>
+                <div key={bruker.fnr}>
                     <Undertittel className="blokk-s">
                         <FormattedMessage
                             id="modal.legg.til.arbeidsliste.brukerinfo"

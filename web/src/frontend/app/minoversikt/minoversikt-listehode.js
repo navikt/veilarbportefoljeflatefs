@@ -51,9 +51,9 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     sortering={'arbeidsliste_frist'}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={ sorteringsfelt === 'arbeidsliste_frist' }
+                    erValgt={sorteringsfelt === 'arbeidsliste_frist'}
                     tekstId="portefolje.tabell.arbeidsliste"
-                    skalVises={brukere.some( bruker => bruker.arbeidsliste.arbeidslisteAktiv )}
+                    skalVises={brukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv)}
                     className={'sortering-header__dato'}
                 />
             </div>
