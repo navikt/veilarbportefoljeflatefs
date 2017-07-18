@@ -16,9 +16,10 @@ class LeggTilArbeidsliste extends Component {
     }
 
     render() {
-        const { visModal, skalSkjules, portefolje } = this.props;
+        const { skalSkjules, portefolje } = this.props;
         const valgteBrukere = portefolje.data.brukere.filter((bruker) => bruker.markert === true);
         const aktiv = valgteBrukere.length > 0;
+        const modalSkalVises = this.props.visModal;
 
         if (skalSkjules) {
             return null;
@@ -28,18 +29,17 @@ class LeggTilArbeidsliste extends Component {
                 <button type="button" className="toolbar_btn" disabled={!aktiv} onClick={this.onClickHandler}>
                     <FormattedMessage id="portefolje.legg.til.arbeidsliste.button" />
                 </button>
-                <LeggTilArbeidslisteModal isOpen={visModal} valgteBrukere={valgteBrukere} />
+                <LeggTilArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />
             </div>
         );
     }
 }
 
 LeggTilArbeidsliste.propTypes = {
+    portefolje: PT.object.isRequired,
     skalSkjules: PT.bool.isRequired,
     visModal: PT.bool.isRequired,
-    visArbeidslisteModal: PT.func.isRequired,
-    skjulArbeidslisteModal: PT.func.isRequired,
-    valgteBrukere: PT.arrayOf(PT.object).isRequired
+    visArbeidslisteModal: PT.func.isRequired
 };
 
 LeggTilArbeidsliste.defaultProps = {
@@ -48,7 +48,7 @@ LeggTilArbeidsliste.defaultProps = {
 
 const mapStateToProps = (state) => ({
     skalSkjules: (state.ui.side.side || '') !== 'veilederoversikt',
-    visModal: state.modal.visModal,
+    visModal: state.modal.modalSkalVises,
     portefolje: state.portefolje
 });
 

@@ -10,7 +10,7 @@ import {
 import TabellOverskrift from './../components/tabell-overskrift';
 import Toolbar from './../components/toolbar/toolbar';
 import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
-import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
+import { leggEnhetIUrl } from '../utils/utils';
 import { ASCENDING, DESCENDING, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
@@ -105,6 +105,7 @@ class VeilederPortefoljeVisning extends Component {
                         fra,
                         antall
                     )}
+                        sokVeilederSkalVises={false}
                     />
                     {
                         visDiagram ?

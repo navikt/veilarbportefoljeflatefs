@@ -7,7 +7,10 @@ import Dropdown from './../dropdown/dropdown';
 import CheckboxFilterform from './../checkbox-filterform/checkbox-filterform';
 import { nameToStateSliceMap } from './../../reducer';
 
-function SokVeileder({ filtervalg, veiledere, sokEtterVeileder }) {
+function SokVeileder({ filtervalg, veiledere, sokEtterVeileder, skalVises }) {
+    if (!skalVises) {
+        return null;
+    }
     return (
         <Dropdown name="Søk veileder" className="dropdown--fixed dropdown--toolbar">
             <SokFilter
@@ -24,7 +27,8 @@ function SokVeileder({ filtervalg, veiledere, sokEtterVeileder }) {
 SokVeileder.propTypes = {
     filtervalg: PT.object.isRequired,
     veiledere: PT.object.isRequired,
-    sokEtterVeileder: PT.func.isRequired
+    sokEtterVeileder: PT.func.isRequired,
+    skalVises: PT.bool
 };
 
 function SokVeilederRenderer({ data, filtervalg, onSubmit, ...props }) {
@@ -44,6 +48,10 @@ SokVeilederRenderer.propTypes = {
     data: PT.array,
     filtervalg: PT.object.isRequired,
     onSubmit: PT.func.isRequired
+};
+
+SokVeilederRenderer.defaultProps = {
+    skalVises: true
 };
 
 const mapStateToProps = (state, ownProps) => {

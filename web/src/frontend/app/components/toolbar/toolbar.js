@@ -6,14 +6,14 @@ import SokVeilder from './sok-veileder';
 import DiagramTabellToggle from './diagram-tabell-toggle';
 import Paginering from './paginering/paginering';
 
-function Toolbar({ filtergruppe, onPaginering }) {
+function Toolbar({ filtergruppe, onPaginering, sokVeilederSkalVises }) {
     return (
         <section className="toolbar blokk-xs">
             <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
                 <VelgalleCheckboks />
                 <Tildelbruker veileder={{}} filtergruppe={filtergruppe} />
                 <LeggTilArbeidsliste visArbeidslisteModal={false} />
-                <SokVeilder veileder={{}} filtergruppe={filtergruppe} />
+                <SokVeilder veileder={{}} filtergruppe={filtergruppe} skalVises={sokVeilederSkalVises} />
             </div>
             <div className="toolbar__element toolbar__midten toolbar--skille-mellom-elementer">
                 <DiagramTabellToggle filtergruppe={filtergruppe} />
@@ -27,7 +27,8 @@ function Toolbar({ filtergruppe, onPaginering }) {
 
 Toolbar.propTypes = {
     filtergruppe: PT.string.isRequired,
-    onPaginering: PT.func.isRequired
+    onPaginering: PT.func.isRequired,
+    sokVeilederSkalVises: PT.bool
 };
 
 Toolbar.defaultProps = {
