@@ -43,7 +43,8 @@ LeggTilArbeidsliste.propTypes = {
 };
 
 LeggTilArbeidsliste.defaultProps = {
-    valgteBrukere: []
+    valgteBrukere: [],
+    visModal: false
 };
 
 const mapStateToProps = (state) => ({

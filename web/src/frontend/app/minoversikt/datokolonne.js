@@ -12,8 +12,15 @@ function DatoKolonne({ dato, skalVises }) {
 }
 
 DatoKolonne.propTypes = {
-    dato: PT.string.isRequired,
-    skalVises: PT.bool.isRequired
+    dato: PT.string,
+    skalVises: PT.bool
 };
+
+DatoKolonne.defaultProps = {
+    skalVises: true,
+    dato: null
+};
+
+
 
 export default DatoKolonne;
