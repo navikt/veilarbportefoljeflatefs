@@ -10,7 +10,13 @@ function BarInput({ id, tekstId, antall, max, barClassname, ...props }) {
     return (
         <div className="skjema__input">
             <input type="radio" id={id} className="radioknapp" {...props} />
-            <Barlabel htmlFor={id} tekstId={tekstId} antall={antall} max={max} className={barClassname} />
+            <Barlabel
+                htmlFor={id}
+                tekstId={tekstId}
+                antall={antall}
+                max={max}
+                className={`${barClassname} skjemaelement__label`}
+            />
         </div>
     );
 }
