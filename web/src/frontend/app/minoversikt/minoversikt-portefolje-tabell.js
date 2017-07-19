@@ -13,7 +13,7 @@ function MinoversiktTabell({
     const { brukere } = portefolje.data;
     const { enhetId } = valgtEnhet.enhet;
     return (
-        <div className="minoversikt-liste__wrapper">
+        <div className="minoversikt-liste__wrapper typo-undertekst">
             <MinOversiktListehode
                 sorteringsrekkefolge={sorteringsrekkefolge}
                 sorteringOnClick={settSorteringOgHentPortefolje}
