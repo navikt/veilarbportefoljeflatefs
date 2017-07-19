@@ -15,59 +15,68 @@ const begrensetKommentarLengde = rules.maxLength(
     KOMMENTAR_MAKS_LENGDE,
     <FormattedMessage
         id="legg-til-arbeidsliste-form.feilmelding.kommentar-lengde"
-        values={{ KOMMENTAR_MAKS_LENGDE }}
+        values={{KOMMENTAR_MAKS_LENGDE}}
     />
 );
 const pakrevdTekst = rules.minLength(
     0,
-    <FormattedMessage id="legg-til.arbeidsliste-form.feilmelding.tekst.mangler" />
+    <FormattedMessage id="legg-til.arbeidsliste-form.feilmelding.tekst.mangler"/>
 );
 
-function LeggTilArbeidslisteForm({ valgteBrukere, lukkModal, handleSubmit }) {
-    const kommentarer = () => (
+function renderFelter({ fields }) {
+    const label = <FormattedMessage
+        id="modal.legg.til.arbeidsliste.brukerinfo"
+        values={{
+            // etternavn: bruker.etternavn,
+            // fornavn: bruker.fornavn,
+            // fnr: bruker.fnr
+        }}
+    />;
+    return (
         <div>
-            {valgteBrukere.map((bruker, index) =>
-                <div key={index}>
-                    <Undertittel className="blokk-s">
-                        <FormattedMessage
-                            id="modal.legg.til.arbeidsliste.brukerinfo"
-                            values={{
-                                etternavn: bruker.etternavn,
-                                fornavn: bruker.fornavn,
-                                fnr: bruker.fnr
-                            }}
-                        />
-                    </Undertittel>
-                    <div className="nav-input blokk-s">
-                        <Textarea
-                            feltNavn={`${index}.kommentar`}
-                            placeholder=""
-                            maxLength={KOMMENTAR_MAKS_LENGDE}
-                            disabled={false}
-                            visTellerFra={0}
+            {fields.map((name, index) => {
+                console.log("name", name);
+                return (
+                    <div key={index}>
+                        <Undertittel className="blokk-s">
+
+                        </Undertittel>
+                        <div className="nav-input blokk-s">
+                                <Textarea
+                                    labelId={`${name}.kommentar`}
+                                    label={ label }
+                                    feltNavn={`${name}.kommentar`}
+                                    placeholder=""
+                                    maxLength={KOMMENTAR_MAKS_LENGDE}
+                                    disabled={false}
+                                    visTellerFra={0}
+                                />
+                        </div>
+                        <Datovelger
+                            feltNavn={`${name}.frist`}
+                            labelId="arbeidsliste-form.label.dato"
+                            tidligsteFom={new Date()}
                         />
                     </div>
-                    <Datovelger
-                        feltNavn={`${index}.frist`}
-                        labelId="arbeidsliste-form.label.dato"
-                        tidligsteFom={new Date()}
-                    />
-                </div>)}
+                );
+            })}
         </div>);
+}
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <FieldArray name="arbeidsliste" component={kommentarer} />
-            <div>
-                <button type="submit" className="knapp knapp--hoved" onClick={handleSubmit}>
-                    <FormattedMessage id="modal.legg.til.arbeidsliste.knapp.lagre" />
-                </button>
-                <button type="button" className="knapp" onClick={lukkModal}>
-                    <FormattedMessage id="modal.legg.til.arbeidsliste.knapp.avbryt" />
-                </button>
-            </div>
-        </form>
-    );
+function LeggTilArbeidslisteForm({lukkModal, handleSubmit }) {
+        return (
+            <form onSubmit={handleSubmit}>
+                <FieldArray name="arbeidsliste" component={renderFelter} />
+                <div>
+                    <button type="submit" className="knapp knapp--hoved" onClick={handleSubmit}>
+                        <FormattedMessage id="modal.legg.til.arbeidsliste.knapp.lagre"/>
+                    </button>
+                    <button type="button" className="knapp" onClick={lukkModal}>
+                        <FormattedMessage id="modal.legg.til.arbeidsliste.knapp.avbryt"/>
+                    </button>
+                </div>
+            </form>
+        );
 }
 
 LeggTilArbeidslisteForm.propTypes = {
@@ -90,15 +99,19 @@ const LeggTilArbeidslisteReduxForm = validForm({
 })(LeggTilArbeidslisteForm);
 
 const mapStateToProps = (state, props) => {
-    const arbeidslisteData = props.arbeidslisteData || [];
-    const brukere = props.valgteBrukere;
-    const veilederId = state.enheter.ident;
+    const arbeidslisteData = props.arbeidslisteData || [{
+        kommentar: '',
+        frist: '',
+        bruker: {
+            fornavn: '',
+            etternavn: '',
+            fnr: ''
+        }
+    }];
 
     return {
         initialValues: {
-            ...arbeidslisteData,
-            brukere,
-            veilederId
+            arbeidsliste: [...arbeidslisteData]
         }
     };
 };
