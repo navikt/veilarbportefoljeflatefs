@@ -71,15 +71,14 @@ function updateBrukerInArray(brukere, action) {
 }
 
 function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
-
     return brukere
-        .map(bruker => {
-            const arbeidslisteForBruker = arbeidsliste.filter(a => a.fnr === bruker.fnr);
+        .map((bruker) => {
+            const arbeidslisteForBruker = arbeidsliste.filter((a) => a.fnr === bruker.fnr);
             if (arbeidslisteForBruker) {
                 return {
                     ...bruker,
                     arbeidsliste: arbeidslisteForBruker[0]
-                }
+                };
             }
             return bruker;
         });
@@ -176,7 +175,6 @@ export default function reducer(state = initialState, action) {
                     )
                 }
             };
-
         }
         default:
             return state;
