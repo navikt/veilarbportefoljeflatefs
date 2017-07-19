@@ -7,11 +7,11 @@ function Datokolonner({ bruker, ytelse }) {
     return (
         <div className="datokolonner__wrapper">
             <DatoKolonne
-                dato={ bruker.arbeidsliste.frist }
-                skalVises={ bruker.arbeidsliste.arbeidslisteAktiv }
+                dato={ bruker.arbeidsliste.frist || '' }
+                skalVises={ bruker.arbeidsliste.arbeidslisteAktiv || false }
             />
             <DatoKolonne
-                dato={ytelse === ytelsevalg.AAP_MAXTID ? bruker.aapMaxtid : bruker.utlopsdato}
+                dato={(ytelse === ytelsevalg.AAP_MAXTID ? bruker.aapMaxtid : bruker.utlopsdato) || '' }
                 skalVises={ytelseFilterErAktiv(ytelse)}
             />
         </div>
