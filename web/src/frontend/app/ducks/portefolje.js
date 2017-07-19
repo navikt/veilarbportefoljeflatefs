@@ -74,7 +74,7 @@ function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
     return brukere
         .map((bruker) => {
             const arbeidslisteForBruker = arbeidsliste.filter((a) => a.fnr === bruker.fnr);
-            if (arbeidslisteForBruker) {
+            if (arbeidslisteForBruker.length === 1) {
                 return {
                     ...bruker,
                     arbeidsliste: arbeidslisteForBruker[0]

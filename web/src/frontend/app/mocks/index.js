@@ -1,8 +1,10 @@
 import { MOCK_CONFIG, mock, delayed, respondWith, randomFailure } from './utils';
+
 MOCK_CONFIG.failureRate = -1;
 
 
 import brukere from './portefolje';
+
 const enheter = require('./enheter');
 const veiledere = require('./veiledere');
 const me = require('./me');
@@ -17,10 +19,9 @@ function matcherBruker(query, body) {
 }
 
 function lagPortefoljeForVeileder(queryParams, bodyParams, alleBrukere) {
-    let enhetportefolje = lagPortefolje(queryParams, bodyParams, enheter.enhetliste[0].enhetId, alleBrukere);
-    enhetportefolje.brukere.forEach( (bruker) => bruker.veilederId = me.ident);
+    const enhetportefolje = lagPortefolje(queryParams, bodyParams, enheter.enhetliste[0].enhetId, alleBrukere);
+    enhetportefolje.brukere.forEach((bruker) => bruker.veilederId = me.ident);
     return enhetportefolje;
-
 }
 
 function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
@@ -52,7 +53,7 @@ mock.post('express:/veilarbportefolje/tjenester/enhet/:enhet/portefolje*', respo
 mock.post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, { feilendeTilordninger: [] })));
 mock.post('express:/veilarbportefolje/tjenester/veileder/:ident/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefoljeForVeileder(queryParams, bodyParams, brukere)));
 mock.get('express:/veilarbportefolje/tjenester/veileder/:veileder/statustall*', respondWith(delayed(1000, randomFailure(statustall))));
-
 mock.post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, { feilendeTilordninger: [] })));
+mock.put('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
 
 mock.mock('*', respondWith((url, config) => mock.realFetch.call(window, url, config)));

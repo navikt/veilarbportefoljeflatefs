@@ -26,6 +26,13 @@ export const veiledereShape = PT.shape({
     veilederListe: PT.arrayOf(veilederShape).isRequired
 });
 
+export const arbeidsliste = PT.shape({
+    kommentar: PT.string,
+    frist: PT.string,
+    arbeidslisteAktiv: PT.bool.isRequired,
+    isOppfolgendeVeileder: PT.bool
+});
+
 export const brukerShape = PT.shape({
     diskresjonskode: PT.string,
     egenAnsatt: PT.bool.isRequired,
@@ -35,7 +42,8 @@ export const brukerShape = PT.shape({
     fornavn: PT.string.isRequired,
     sikkerhetstiltak: PT.arrayOf(PT.string).isRequired,
     veilederId: PT.string,
-    veilederNavn: PT.string
+    veilederNavn: PT.string,
+    arbeidsliste: arbeidsliste.isRequired
 });
 
 export const portefoljeShape = PT.shape({
@@ -89,4 +97,3 @@ export const statustallShape = PT.shape({
     venterPaSvarFraNAV: PT.number.isRequired,
     venterPaSvarFraBruker: PT.number.isRequired
 });
-
