@@ -37,7 +37,7 @@ function renderFelter({ fields }) {
             {fields.map((name, index) => {
                 console.log("name", name);
                 return (
-                    <div key={index}>
+                    <div key={bruker.fnr}>
                         <Undertittel className="blokk-s">
 
                         </Undertittel>

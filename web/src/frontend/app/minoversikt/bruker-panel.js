@@ -1,10 +1,10 @@
-import React, {PropTypes as PT} from 'react';
+import React, { PropTypes as PT } from 'react';
+import { FormattedMessage } from 'react-intl';
 import Hybridpanel from './hybridpanel/hybridpanel';
 import Brukerinformasjon from './brukerinformasjon';
 import Datokolonner from './datokolonner';
 import Etiketter from './etiketter';
 import { filtervalgShape } from './../proptype-shapes';
-import { FormattedMessage } from 'react-intl';
 
 
 function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
@@ -22,17 +22,17 @@ function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
 
     const childrenBody =
         (<div className="brukerpanel__body">
-                <h5>
-                    <FormattedMessage id="arbeidsliste.kommentar.header"/>
-                </h5>
-                {bruker.arbeidsliste.kommentar}
-            </div>
+            <h5>
+                <FormattedMessage id="arbeidsliste.kommentar.header" />
+            </h5>
+            {bruker.arbeidsliste.kommentar}
+        </div>
 
         );
 
     return (
         bruker.arbeidsliste.arbeidslisteAktiv ?
-            <Hybridpanel childrenHead={childrenHead} childrenBody={childrenBody}/>
+            <Hybridpanel childrenHead={childrenHead} childrenBody={childrenBody} />
             :
             <div className="panel_hode">{childrenHead}</div>
     );

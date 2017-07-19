@@ -10,7 +10,7 @@ function getTellerTekst(antallTegn, maxLength, visTellerFra) {
 
     if (tegnForMange > 0) {
         return (
-           <span>{tegnForMange}</span>
+            <span>{tegnForMange}</span>
         );
     } else if (visTellerFra === 0 || visTellerFra >= tegnIgjen) {
         return (
