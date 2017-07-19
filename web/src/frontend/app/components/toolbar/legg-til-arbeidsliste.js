@@ -49,7 +49,7 @@ LeggTilArbeidsliste.defaultProps = {
 
 const mapStateToProps = (state) => ({
     skalSkjules: (state.ui.side.side || '') !== 'veilederoversikt',
-    visModal: state.modal.modalSkalVises,
+    visModal: state.modal.visModal,
     portefolje: state.portefolje
 });
 

@@ -22,5 +22,4 @@ DatoKolonne.defaultProps = {
 };
 
 
-
 export default DatoKolonne;

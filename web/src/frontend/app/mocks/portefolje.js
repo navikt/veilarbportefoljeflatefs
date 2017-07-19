@@ -1,5 +1,6 @@
 import faker from 'faker';
 import veiledereResponse from './veiledere';
+
 const veiledere = veiledereResponse.veilederListe;
 
 const ytelser = [
@@ -66,7 +67,7 @@ function lagYtelse() {
     const ar = rnd(0, 4) + new Date().getFullYear();
 
     if (ytelse === 'AAP_MAXTID') {
-        out.aapMaxtid = new Date(ar, mnd-1, dag).toISOString();
+        out.aapMaxtid = new Date(ar, mnd - 1, dag).toISOString();
         out.aapMaxtidFasett = `KV${rnd(1, 16)}`;
     } else {
         out.utlopsdato = new Date(ar, mnd, dag).toISOString();
@@ -77,24 +78,22 @@ function lagYtelse() {
 }
 
 function lagArbeidsliste() {
-    const maybeArbeidsliste = rnd(0,1);
-    if(maybeArbeidsliste > 0.5) {
+    const maybeArbeidsliste = rnd(0, 1);
+    if (maybeArbeidsliste > 0.5) {
         return {
-            arbeidslisteEndringstidspunkt: null,
-            arbeidslisteAktiv: null,
-            arbeidslisteKommentar: null,
-            arbeidslisteFrist: null,
-            isOppfolgendeVeileder: null
+            kommentar: null,
+            frist: null,
+            isOppfolgendeVeileder: null,
+            arbeidslisteAktiv: false
         };
     }
 
-    return({
-        arbeidslisteEndringstidspunkt: new Date().toLocaleDateString(),
-        erIArbeidsliste: true,
-        arbeidslisteKommentar: 'En random kommentar',
-        arbeidslisteFrist: new Date().toLocaleDateString(),
-        isOppfolgendeVeileder: true
-    })
+    return ({
+        kommentar: 'En random kommentar',
+        frist: new Date(),
+        isOppfolgendeVeileder: true,
+        arbeidslisteAktiv: true
+    });
 }
 
 function lagBruker(sikkerhetstiltak = [], diskresjonskode = null, egenAnsatt = false) {
@@ -123,12 +122,7 @@ function lagBruker(sikkerhetstiltak = [], diskresjonskode = null, egenAnsatt = f
         utlopsdatoFasett: ytelse.utlopsdatoFasett,
         aapMaxtid: ytelse.aapMaxtid,
         aapMaxtidFasett: ytelse.aapMaxtidFasett,
-        arbeidslisteEndringstidspunkt: arbeidsliste.arbeidslisteEndringstidspunkt,
-        erIArbeidsliste: arbeidsliste.erIArbeidsliste,
-        arbeidslisteKommentar: arbeidsliste.arbeidslisteKommentar,
-        arbeidslisteFrist: arbeidsliste.arbeidslisteFrist,
-        isOppfolgendeVeileder: arbeidsliste.isOppfolgendeVeileder
-
+        arbeidsliste
     };
 }
 
