@@ -32,7 +32,7 @@ Toolbar.propTypes = {
 };
 
 Toolbar.defaultProps = {
-    filtergruppe: 'enhet'
+    filtergruppe: 'veileder'
 };
 
 export default Toolbar;
