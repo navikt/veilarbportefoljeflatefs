@@ -32,6 +32,10 @@ function lagGrunndata() {
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
     const kjonnsiffer = kjonn === 'K' ? partall() : oddetall();
     const individsifre = `${arhundre}${kjonnsiffer}`;
+    const venterPaSvarFraBruker = randomDate({past:true});
+    const venterPaSvarFraNAV = randomDate({past:true});
+    const nyesteUtlopteAktivitet = randomDate({past:true});
+    const diskresjonskode = rnd(0,10) > 8 ? '7' : null;
 
     const kontrollsifre = `${rnd(0, 9)}${rnd(0, 9)}`;
 
@@ -45,7 +49,10 @@ function lagGrunndata() {
         fornavn: faker.name.firstName(kjonn === 'K' ? 1 : 0),
         etternavn: faker.name.lastName(kjonn === 'K' ? 1 : 0),
         kjonn,
-        erDoed
+        erDoed,
+        nyesteUtlopteAktivitet,
+        venterPaSvarFraBruker,
+        venterPaSvarFraNAV,
     };
 }
 
@@ -97,7 +104,7 @@ function lagArbeidsliste() {
     })
 }
 
-function lagBruker(sikkerhetstiltak = [], diskresjonskode = null, egenAnsatt = false) {
+function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const grunndata = lagGrunndata();
 
     const maybeVeileder = rnd(0, veiledere.length * 2);
@@ -111,8 +118,11 @@ function lagBruker(sikkerhetstiltak = [], diskresjonskode = null, egenAnsatt = f
         fornavn: grunndata.fornavn,
         etternavn: grunndata.etternavn,
         veilederId,
+        diskresjonskode: null,
         sikkerhetstiltak,
-        diskresjonskode,
+        venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,
+        venterPaSvarFraNAV: grunndata.venterPaSvarFraNAV,
+        nyesteUtlopteAktivitet: grunndata.nyesteUtlopteAktivitet,
         egenAnsatt,
         erDoed: grunndata.erDoed,
         fodselsdagIMnd: grunndata.fodselsdato.dayOfMonth,
@@ -130,6 +140,16 @@ function lagBruker(sikkerhetstiltak = [], diskresjonskode = null, egenAnsatt = f
         isOppfolgendeVeileder: arbeidsliste.isOppfolgendeVeileder
 
     };
+}
+
+const randomDate = ({past}) => {
+    const dag = rnd(1, 31);
+    const mnd = rnd(1, 12);
+    let ar = rnd(0, 4) + new Date().getFullYear();
+    if(past) {
+        ar = -rnd(0,4) + new Date().getFullYear();
+    }
+    return new Date(ar, mnd-1, dag).toISOString();
 }
 
 export default new Array(45).fill(0).map(() => lagBruker());

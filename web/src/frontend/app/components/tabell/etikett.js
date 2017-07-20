@@ -1,5 +1,5 @@
 import React, { PropTypes as PT } from 'react';
-import Tabelletiketter from './../components/tabelletiketter/tabelletiketter';
+import Tabelletiketter from '../tabelletiketter/tabelletiketter';
 
 function Etikett({ type, child, skalVises }) {
     if (!skalVises) {

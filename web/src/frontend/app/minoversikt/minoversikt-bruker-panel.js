@@ -1,13 +1,13 @@
 import React, { PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
-import Hybridpanel from './hybridpanel/hybridpanel';
-import Brukerinformasjon from './brukerinformasjon';
-import Datokolonner from './datokolonner';
-import Etiketter from './etiketter';
+import Hybridpanel from '../components/tabell/hybridpanel/hybridpanel';
+import Brukerinformasjon from '../components/tabell/brukerinformasjon';
+import MinoversiktDatokolonner from './minoversikt-datokolonner';
+import Etiketter from '../components/tabell/etiketter';
 import { filtervalgShape } from './../proptype-shapes';
 
 
-function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
+function MinoversiktBrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
     const { ytelse } = filtervalg;
     const childrenHead =
         (<div className="brukerpanel">
@@ -16,7 +16,7 @@ function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
                 enhetId={enhetId}
                 settMarkert={settMarkert}
             />
-            <Datokolonner bruker={bruker} ytelse={ytelse} />
+            <MinoversiktDatokolonner bruker={bruker} ytelse={ytelse} />
             <Etiketter bruker={bruker} />
         </div>);
 
@@ -38,11 +38,11 @@ function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
     );
 }
 
-BrukerPanel.propTypes = {
+MinoversiktBrukerPanel.propTypes = {
     bruker: PT.object.isRequired,
     settMarkert: PT.func.isRequired,
     enhetId: PT.string.isRequired,
     filtervalg: filtervalgShape.isRequired
 };
 
-export default BrukerPanel;
+export default MinoversiktBrukerPanel;

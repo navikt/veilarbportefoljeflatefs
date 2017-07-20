@@ -29,7 +29,7 @@ const checkBox = (bruker, settMarkert) => (<div className="skjema__input">
         checked={!!bruker.markert}
         onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
     />
-    <label className="skjema__label" htmlFor={`checkbox-${bruker.fnr}`} />
+    <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`} />
 </div>);
 
 function Brukerinformasjon({ bruker, enhetId, settMarkert }) {
