@@ -4,10 +4,10 @@ import Hybridpanel from './hybridpanel/hybridpanel';
 import Brukerinformasjon from './brukerinformasjon';
 import Datokolonner from './datokolonner';
 import Etiketter from './etiketter';
-import { filtervalgShape } from './../proptype-shapes';
+import { filtervalgShape, brukerShape } from './../proptype-shapes';
 
 
-function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
+function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg, veilederNavn }) {
     const { ytelse } = filtervalg;
     const childrenHead =
         (<div className="brukerpanel">
@@ -26,6 +26,18 @@ function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
                 <FormattedMessage id="arbeidsliste.kommentar.header" />
             </h5>
             {bruker.arbeidsliste.kommentar}
+            <p className="arbeidsliste--panel-footer">
+                <FormattedMessage
+                    id="arbeidsliste.kommentar.footer"
+                    values={{
+                        dato: bruker.arbeidsliste.endringstidspunkt,
+                        veilederNavn
+                    }}
+                />
+                <a className="lenke lenke--frittstående arbeidsliste--rediger-lenke">
+                    Rediger
+                </a>
+            </p>
         </div>
 
         );
@@ -39,7 +51,8 @@ function BrukerPanel({ bruker, settMarkert, enhetId, filtervalg }) {
 }
 
 BrukerPanel.propTypes = {
-    bruker: PT.object.isRequired,
+    bruker: brukerShape,
+    veilederNavn: PT.string.isRequired,
     settMarkert: PT.func.isRequired,
     enhetId: PT.string.isRequired,
     filtervalg: filtervalgShape.isRequired

@@ -56,6 +56,7 @@ MinoversiktTabell.propTypes = {
 
 const mapStateToProps = (state) => ({
     portefolje: state.portefolje,
+    veiledere: state.veiledere,
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     filtervalg: state.filtreringMinoversikt
