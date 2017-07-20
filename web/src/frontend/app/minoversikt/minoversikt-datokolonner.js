@@ -1,7 +1,7 @@
 import React, { PropTypes as PT } from 'react';
-import DatoKolonne from '../components/tabell/datokolonne';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import { ytelsevalg } from '../filtrering/filter-konstanter';
+import DatoKolonne from '../components/datokolonne';
 
 function MinoversiktDatokolonner({ bruker, ytelse }) {
     return (

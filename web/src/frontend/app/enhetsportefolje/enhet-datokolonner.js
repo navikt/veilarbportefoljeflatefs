@@ -1,16 +1,14 @@
 import React, { PropTypes as PT } from 'react';
-import DatoKolonne from '../components/tabell/datokolonne';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import { ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER } from '../filtrering/filter-konstanter';
 import { filtervalgShape } from '../proptype-shapes';
+import DatoKolonne from '../components/datokolonne';
 
 
 function EnhetDatokolonner({ bruker, ytelse, filtervalg }) {
-    console.log('bruker', bruker);
-    console.log('ytelse', ytelse);
     return (
         <div className="datokolonner__wrapper">
             <DatoKolonne

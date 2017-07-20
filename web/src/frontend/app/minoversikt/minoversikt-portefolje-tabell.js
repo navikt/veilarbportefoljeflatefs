@@ -1,17 +1,23 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { enhetShape, filtervalgShape } from './../proptype-shapes';
+import { enhetShape, filtervalgShape, veilederShape } from './../proptype-shapes';
 import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
 import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
 import MinOversiktListehode from './minoversikt-listehode';
 
+function finnVeilederSistEndretAv(bruker, veiledere) {
+    const veilederId = bruker.arbeidsliste.sistEndretAv.veilederId;
+    const veileder = veiledere.find((x) => x.ident === veilederId);
+    return veileder ? veileder.navn : (veilederId || '');
+}
 
 function MinoversiktTabell({
                                settMarkert, portefolje, settSorteringOgHentPortefolje,
-                               filtervalg, sorteringsrekkefolge, valgtEnhet
+                               filtervalg, sorteringsrekkefolge, valgtEnhet, veiledere
                            }) {
     const { brukere } = portefolje.data;
     const { enhetId } = valgtEnhet.enhet;
+
     return (
         <div className="minoversikt-liste__wrapper typo-undertekst">
             <MinOversiktListehode
@@ -26,6 +32,7 @@ function MinoversiktTabell({
                     <li key={bruker.fnr} className="minoversikt-brukere-panel">
                         <MinoversiktBrukerPanel
                             bruker={bruker}
+                            arbeidslisteSistEndretAv={finnVeilederSistEndretAv(bruker, veiledere)}
                             enhetId={enhetId}
                             settMarkert={settMarkert}
                             filtervalg={filtervalg}
@@ -50,13 +57,14 @@ MinoversiktTabell.propTypes = {
     sorteringsrekkefolge: PT.string.isRequired,
     settMarkert: PT.func.isRequired,
     filtervalg: filtervalgShape.isRequired,
-    settSorteringOgHentPortefolje: PT.func.isRequired
+    settSorteringOgHentPortefolje: PT.func.isRequired,
+    veiledere: PT.arrayOf(veilederShape).isRequired
 };
 
 
 const mapStateToProps = (state) => ({
     portefolje: state.portefolje,
-    veiledere: state.veiledere,
+    veiledere: state.veiledere.data.veilederListe,
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     filtervalg: state.filtreringMinoversikt
