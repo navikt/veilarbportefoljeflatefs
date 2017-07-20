@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { lagreArbeidsliste } from '../ducks/arbeidsliste';
-import { settArbeidslistePaaBruker } from '../ducks/portefolje';
+import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 
 const KOMMENTAR_MAKS_LENGDE = 50;
 
@@ -66,10 +66,10 @@ function LeggTilArbeidslisteForm({ lukkModal, handleSubmit }) {
             <FieldArray name="arbeidsliste" component={renderFelter} />
             <div>
                 <button type="submit" className="knapp knapp--hoved" onClick={handleSubmit}>
-                    <FormattedMessage id="modal.legg.til.arbeidsliste.knapp.lagre" />
+                    <FormattedMessage id="modal.knapp.lagre" />
                 </button>
                 <button type="button" className="knapp" onClick={lukkModal}>
-                    <FormattedMessage id="modal.legg.til.arbeidsliste.knapp.avbryt" />
+                    <FormattedMessage id="modal.knapp.avbryt" />
                 </button>
             </div>
         </form>
@@ -77,12 +77,8 @@ function LeggTilArbeidslisteForm({ lukkModal, handleSubmit }) {
 }
 
 LeggTilArbeidslisteForm.propTypes = {
-    handleSubmit: PT.func.isRequired,
-    lukkModal: PT.func.isRequired
-};
-
-LeggTilArbeidslisteForm.defaultProps = {
-    handleSubmit: undefined
+    lukkModal: PT.func.isRequired,
+    handleSubmit: PT.func.isRequired
 };
 
 export const formNavn = 'arbeidsliste_kommentar_skjema';
@@ -113,17 +109,14 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = () => ({
-    onSubmit: (arbeidslisteData, dispatch, props) => {
-        const arbeidsliste = [];
-        arbeidslisteData.arbeidsliste.forEach((bruker, index) => {
-            arbeidsliste[index] = {
-                fnr: bruker.fnr,
-                kommentar: arbeidslisteData.arbeidsliste[index].kommentar,
-                frist: arbeidslisteData.arbeidsliste[index].frist,
-                arbeidslisteAktiv: true
-            };
-        });
-        lagreArbeidsliste(arbeidsliste)(dispatch).then(() => settArbeidslistePaaBruker(arbeidsliste)(dispatch));
+    onSubmit: (formData, dispatch, props) => {
+        const arbeidsliste = formData.arbeidsliste.map((bruker, index) => ({
+            fnr: bruker.fnr,
+            kommentar: formData.arbeidsliste[index].kommentar,
+            frist: formData.arbeidsliste[index].frist,
+            arbeidslisteAktiv: true
+        }));
+        lagreArbeidsliste(arbeidsliste)(dispatch).then(() => oppdaterArbeidslisteForBruker(arbeidsliste)(dispatch));
         props.lukkModal();
     }
 });

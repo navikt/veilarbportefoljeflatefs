@@ -286,7 +286,7 @@ export function settValgtVeileder(valgtVeileder) {
     });
 }
 
-export function settArbeidslistePaaBruker(arbeidsliste) {
+export function oppdaterArbeidslisteForBruker(arbeidsliste) {
     return (dispatch) => dispatch({
         type: OPPDATER_ARBEIDSLISTE,
         arbeidsliste
