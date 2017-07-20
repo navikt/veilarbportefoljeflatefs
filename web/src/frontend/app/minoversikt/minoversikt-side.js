@@ -73,7 +73,10 @@ class MinOversiktSide extends Component {
                                         filtergruppe="veileder"
                                         veileder={gjeldendeVeileder}
                                     />
-                                    <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
+                                    <VeilederPortefoljeVisning
+                                        veileder={gjeldendeVeileder}
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                    />
                                 </div>
                             </div>
                         </section>

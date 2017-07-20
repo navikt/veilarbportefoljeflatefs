@@ -17,29 +17,22 @@ class LeggTilArbeidsliste extends Component {
 
     arbeidslisteButton(valgteBrukere) {
         const inneholderBrukerMedArbeidsliste = valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
-        if (inneholderBrukerMedArbeidsliste) {
-            return (
-                <button
-                    type="button"
-                    className="toolbar_btn"
-                    disabled={valgteBrukere.length < 1}
-                    onClick={this.onClickHandler}
-                >
-                    <FormattedMessage id="portefolje.slett.arbeidsliste.button" />
-                </button>
-            );
-        }
-
-        return (
+        const arbeidslisteButton = (id) => (
             <button
                 type="button"
                 className="toolbar_btn"
-                disabled={valgteBrukere.length < 1}
+                disabled={valgteBrukere.length < 1 || this.props.visesAnnenVeiledersPortefolje}
                 onClick={this.onClickHandler}
             >
-                <FormattedMessage id="portefolje.legg.til.arbeidsliste.button" />
+                <FormattedMessage id={id} />
             </button>
         );
+
+        if (inneholderBrukerMedArbeidsliste) {
+            return arbeidslisteButton('portefolje.slett.arbeidsliste.button');
+        }
+
+        return arbeidslisteButton('portefolje.legg.til.arbeidsliste.button');
     }
 
     render() {
@@ -63,7 +56,8 @@ LeggTilArbeidsliste.propTypes = {
     portefolje: PT.object.isRequired,
     skalSkjules: PT.bool.isRequired,
     visModal: PT.bool.isRequired,
-    visArbeidslisteModal: PT.func.isRequired
+    visArbeidslisteModal: PT.func.isRequired,
+    visesAnnenVeiledersPortefolje: PT.bool.isRequired
 };
 
 LeggTilArbeidsliste.defaultProps = {

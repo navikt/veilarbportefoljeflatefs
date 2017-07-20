@@ -71,12 +71,12 @@ class VeilederPortefoljeVisning extends Component {
             clearFeilendeTilordninger,
             clearTilordningFeil,
             filtervalg,
-            visningsmodus
+            visningsmodus,
+            visesAnnenVeiledersPortefolje
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
-
 
         let fnr = [];
         const feil = portefolje.feilendeTilordninger;
@@ -97,14 +97,16 @@ class VeilederPortefoljeVisning extends Component {
                         tekst="enhet.portefolje.paginering.tekst"
                     />
                     <Toolbar
-                        filtervalg={filtervalg} onPaginering={(fra, antall) => hentPortefolje(
-                        valgtEnhet.enhet.enhetId,
-                        sorteringsrekkefolge,
-                        sorteringsfelt,
-                        filtervalg,
-                        fra,
-                        antall
-                    )}
+                        filtervalg={filtervalg}
+                        onPaginering={(fra, antall) => hentPortefolje(
+                            valgtEnhet.enhet.enhetId,
+                            sorteringsrekkefolge,
+                            sorteringsfelt,
+                            filtervalg,
+                            fra,
+                            antall
+                        )}
+                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                         sokVeilederSkalVises={false}
                     />
                     {
@@ -155,7 +157,8 @@ VeilederPortefoljeVisning.propTypes = {
     clearFeilendeTilordninger: PT.func.isRequired,
     clearTilordningFeil: PT.func.isRequired,
     visningsmodus: PT.string.isRequired,
-    filtervalg: filtervalgShape.isRequired
+    filtervalg: filtervalgShape.isRequired,
+    visesAnnenVeiledersPortefolje: PT.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
