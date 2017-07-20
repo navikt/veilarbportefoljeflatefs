@@ -1,7 +1,7 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import LeggTilArbeidslisteModal from '../../modal/legg-til-arbeidsliste-modal';
+import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
 import { skjulModal, visModal } from '../../ducks/modal';
 
 class LeggTilArbeidsliste extends Component {
@@ -15,10 +15,36 @@ class LeggTilArbeidsliste extends Component {
         this.props.visArbeidslisteModal();
     }
 
+    arbeidslisteButton(valgteBrukere) {
+        const inneholderBrukerMedArbeidsliste = valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
+        if (inneholderBrukerMedArbeidsliste) {
+            return (
+                <button
+                    type="button"
+                    className="toolbar_btn"
+                    disabled={valgteBrukere.length < 1}
+                    onClick={this.onClickHandler}
+                >
+                    <FormattedMessage id="portefolje.slett.arbeidsliste.button" />
+                </button>
+            );
+        }
+
+        return (
+            <button
+                type="button"
+                className="toolbar_btn"
+                disabled={valgteBrukere.length < 1}
+                onClick={this.onClickHandler}
+            >
+                <FormattedMessage id="portefolje.legg.til.arbeidsliste.button" />
+            </button>
+        );
+    }
+
     render() {
         const { skalSkjules, portefolje } = this.props;
         const valgteBrukere = portefolje.data.brukere.filter((bruker) => bruker.markert === true);
-        const aktiv = valgteBrukere.length > 0;
         const modalSkalVises = this.props.visModal;
 
         if (skalSkjules) {
@@ -26,10 +52,8 @@ class LeggTilArbeidsliste extends Component {
         }
         return (
             <div className="toolbar_btnwrapper">
-                <button type="button" className="toolbar_btn" disabled={!aktiv} onClick={this.onClickHandler}>
-                    <FormattedMessage id="portefolje.legg.til.arbeidsliste.button" />
-                </button>
-                <LeggTilArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />
+                { this.arbeidslisteButton(valgteBrukere) }
+                <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />
             </div>
         );
     }
