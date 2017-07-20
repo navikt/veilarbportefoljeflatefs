@@ -8,7 +8,7 @@ import {
     settSortering
 } from '../ducks/portefolje';
 import Toolbar from './../components/toolbar/toolbar';
-import EnhetsportefoljeTabell from './enhetsportefolje-tabell';
+import EnhetTabell from './enhetsportefolje-tabell';
 import TabellOverskrift from './../components/tabell-overskrift';
 import { enhetShape, filtervalgShape, portefoljeShape, valgtEnhetShape, veilederShape } from '../proptype-shapes';
 import { ASCENDING, DEFAULT_PAGINERING_STORRELSE, DESCENDING } from '../konstanter';
@@ -128,10 +128,10 @@ class EnhetsportefoljeVisning extends Component {
                     {
                         visDiagram ?
                             <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
-                            <EnhetsportefoljeTabell
+                            <EnhetTabell
                                 veiledere={veiledere.data.veilederListe}
                                 brukere={portefolje.data.brukere}
-                                settSorteringForPortefolje={this.settSorteringOgHentPortefolje}
+                                settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                                 portefolje={portefolje}
                             />
                     }

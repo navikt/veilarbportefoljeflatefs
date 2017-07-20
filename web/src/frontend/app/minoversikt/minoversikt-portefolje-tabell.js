@@ -1,7 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { enhetShape, filtervalgShape } from './../proptype-shapes';
-import BrukerPanel from './bruker-panel';
+import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
 import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
 import MinOversiktListehode from './minoversikt-listehode';
 
@@ -24,7 +24,7 @@ function MinoversiktTabell({
             <ul className="minoversikt-brukere-liste">
                 {brukere.map((bruker) =>
                     <li key={bruker.fnr} className="minoversikt-brukere-panel">
-                        <BrukerPanel
+                        <MinoversiktBrukerPanel
                             bruker={bruker}
                             enhetId={enhetId}
                             settMarkert={settMarkert}

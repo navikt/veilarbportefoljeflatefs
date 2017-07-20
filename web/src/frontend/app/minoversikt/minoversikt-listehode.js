@@ -1,6 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
-import SorteringHeader from './sortering-header';
+import SorteringHeader from '../components/tabell/sortering-header';
 import { ytelsevalg } from './../filtrering/filter-konstanter';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';

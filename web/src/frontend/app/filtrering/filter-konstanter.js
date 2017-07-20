@@ -1,5 +1,15 @@
 import { range, lag2Sifret } from '../utils/utils';
 
+export const NYE_BRUKERE = 'NYE_BRUKERE';
+export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
+export const VENTER_PA_SVAR_FRA_NAV = 'VENTER_PA_SVAR_FRA_NAV';
+export const VENTER_PA_SVAR_FRA_BRUKER = 'VENTER_PA_SVAR_FRA_BRUKER';
+export const UTLOPTE_AKTIVITETER = 'UTLOPTE_AKTIVITETER';
+export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
+export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
+export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
+
+
 export function lagConfig(data) {
     if (typeof data === 'string') {
         return { label: data };
