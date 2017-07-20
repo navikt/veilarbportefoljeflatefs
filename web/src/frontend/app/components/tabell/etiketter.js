@@ -14,7 +14,7 @@ function Etiketter({ bruker }) {
             />
             <Etikett
                 type="diskresjonskode"
-                child={<span>`Kode ${bruker.diskresjonskode}`</span>}
+                child={<span>{`Kode ${bruker.diskresjonskode}`}</span>}
                 skalVises={bruker.diskresjonskode !== null}
             />
             <Etikett

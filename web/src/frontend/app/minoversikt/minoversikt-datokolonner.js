@@ -1,9 +1,9 @@
 import React, { PropTypes as PT } from 'react';
-import DatoKolonne from './datokolonne';
+import DatoKolonne from '../components/tabell/datokolonne';
 import { ytelseFilterErAktiv } from '../utils/utils';
-import { ytelsevalg } from './../filtrering/filter-konstanter';
+import { ytelsevalg } from '../filtrering/filter-konstanter';
 
-function Datokolonner({ bruker, ytelse }) {
+function MinoversiktDatokolonner({ bruker, ytelse }) {
     return (
         <div className="datokolonner__wrapper">
             <DatoKolonne
@@ -18,9 +18,9 @@ function Datokolonner({ bruker, ytelse }) {
     );
 }
 
-Datokolonner.propTypes = {
+MinoversiktDatokolonner.propTypes = {
     bruker: PT.object.isRequired,
     ytelse: PT.string
 };
 
-export default Datokolonner;
+export default MinoversiktDatokolonner;

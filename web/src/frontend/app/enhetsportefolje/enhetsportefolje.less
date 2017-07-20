@@ -1,57 +1,129 @@
-.portefolje-tabell {
-    border-collapse: collapse;
-    font-weight: normal;
+.enhet-listehode {
+    border-bottom: 1px solid #b7b1a9;
 
+    .enhet-overskrifter {
+        border-bottom: 1px solid #b7b1a9;
+        border-top: 1px solid #b7b1a9;
+        padding-bottom: 5px;
+        padding-top: 5px;
 
-    thead tr:first-child th {
-        border-top: 1px solid @grayIcon;
-        font-weight: normal;
-    }
+        .listeoverskrift {
+            font-weight: bold;
+        }
 
-    thead.extra-head tr:first-child th {
-        border-top: 1px solid @grayIcon;
-        font-weight: bold;
-    }
-
-    tbody tr:first-child td, tbody tr:first-child th {
-        border-top-width: 1px;
-    }
-
-    th {
-        overflow: hidden;
-        white-space: nowrap;
-    }
-
-    td, th {
-        vertical-align: middle;
-        height: 38px;
-        padding: 0 8px;
-
-        .skjema__input {
-            margin-bottom: 0;
-
-            label {
-                padding-left: 1rem;
-
-                &:before {
-
-                    width: 18px;
-                    height: 18px;
-                    top: 2px;
-                }
-            }
+        .listeoverskrift__bruker {
+            display: inline-block;
+            width: 23rem;
+        }
+        .listeoverskrift__veileder {
+            margin-left: 1rem;
+        }
+        .listeoverskrift__dato {
+            width: 7rem;
+            display: inline-block;
+            margin-left: 0.3rem;
         }
     }
 
-    tbody th {
-        font-weight: normal;
+    .enhet-sortering-header__wrapper {
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+        .sortering-header__etternavn {
+            margin-left: 2.6rem;
+        }
+        .sortering-header__fodselsnummer {
+            margin-left: 5.2rem;
+        }
+        .sortering-header__dato {
+            margin-left: 2.8rem;
+        }
+        .header__veiledernavn {
+            margin-left: 3rem;
+        }
+        .header__veilederident {
+            margin-left: 3rem;
+        }
     }
+}
 
-    .sortering-link {
-        .lenke-mixin();
+.enhet-brukere-liste {
+    padding: 0;
+    margin-top: 0;
 
-        &.valgt {
-            font-weight: bold;
+    .enhet-brukere-panel {
+        list-style: none;
+        border-bottom: 1px solid #b7b1a9;
+        .hybridPanel__hode, .panel_hode {
+            padding: 10px 10px 10px 10px;
+
+            .brukerpanel {
+                width:100%;
+            }
+
+            .brukerinformasjon__wrapper {
+                display: inline-block;
+
+                .brukerinformasjon__navn {
+                    display: inline-block;
+                    width: 12rem;
+                }
+                .brukerinformasjon__fnr {
+                    width: 5rem;
+                    display: inline-block;
+                    margin-left: 0.3rem;
+                }
+                .skjema__input {
+                    position:relative;
+                    top:5px;
+                    display:inline-block;
+                    margin: 0 0 0 0;
+                    width:1.5rem;
+                    margin-right: 0.5rem;
+                }
+            }
+            .veilederinformasjon__wrapper {
+                display:inline-block;
+                margin-left:4rem;
+
+                .veilederinformasjon__navn {
+                    width: 10rem;
+                    display: inline-block;
+                }
+            }
+
+            .datokolonner__wrapper {
+                display: inline-block;
+                :first-child {
+                    margin-left: 4rem;
+                }
+                :not(:first-child) {
+                    margin-left: 3.5rem;
+                }
+            }
+
+            .etiketter__wrapper {
+                display: inline-block;
+                float: right;
+                margin-right: 5px;
+                max-width: 6rem;
+            }
+        }
+
+        .hybridPanel__hode, .hybridPanel__innhold {
+            background-color: @navLysGra;
+        }
+        .hybridPanel__knapp {
+            cursor: pointer;
+            background-color: @navLysGra;
+            border:none;
+        }
+    }
+}
+.enhet-liste__wrapper {
+    .panel_hode {
+        .etikett:last-child {
+            margin-right: 5px;
         }
     }
 }
