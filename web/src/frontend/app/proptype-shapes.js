@@ -30,6 +30,7 @@ export const arbeidsliste = PT.shape({
     kommentar: PT.string,
     frist: PT.string,
     arbeidslisteAktiv: PT.bool.isRequired,
+    endringstidspunkt: PT.string.isRequired,
     isOppfolgendeVeileder: PT.bool
 });
 
