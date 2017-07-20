@@ -29,8 +29,8 @@ export const veiledereShape = PT.shape({
 export const arbeidsliste = PT.shape({
     kommentar: PT.string,
     frist: PT.string,
-    arbeidslisteAktiv: PT.bool.isRequired,
-    endringstidspunkt: PT.string.isRequired,
+    arbeidslisteAktiv: PT.bool,
+    endringstidspunkt: PT.string,
     isOppfolgendeVeileder: PT.bool
 });
 

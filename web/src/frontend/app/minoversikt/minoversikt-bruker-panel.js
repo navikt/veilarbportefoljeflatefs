@@ -7,7 +7,7 @@ import Etiketter from '../components/tabell/etiketter';
 import { filtervalgShape, brukerShape } from './../proptype-shapes';
 
 
-function MinoversiktBrukerPanel({ bruker, settMarkert, enhetId, filtervalg, veilederNavn }) {
+function MinoversiktBrukerPanel({ bruker, settMarkert, enhetId, filtervalg, arbeidslisteSistEndretAv }) {
     const { ytelse } = filtervalg;
     const childrenHead =
         (<div className="brukerpanel">
@@ -20,6 +20,7 @@ function MinoversiktBrukerPanel({ bruker, settMarkert, enhetId, filtervalg, veil
             <Etiketter bruker={bruker} />
         </div>);
 
+    const dato = new Date(bruker.arbeidsliste.endringstidspunkt).toLocaleDateString();
     const childrenBody =
         (<div className="brukerpanel__body">
             <h5>
@@ -30,8 +31,8 @@ function MinoversiktBrukerPanel({ bruker, settMarkert, enhetId, filtervalg, veil
                 <FormattedMessage
                     id="arbeidsliste.kommentar.footer"
                     values={{
-                        dato: bruker.arbeidsliste.endringstidspunkt,
-                        veilederNavn
+                        dato,
+                        veileder: arbeidslisteSistEndretAv
                     }}
                 />
                 <a className="lenke lenke--frittstående arbeidsliste--rediger-lenke">
@@ -52,7 +53,7 @@ function MinoversiktBrukerPanel({ bruker, settMarkert, enhetId, filtervalg, veil
 
 MinoversiktBrukerPanel.propTypes = {
     bruker: brukerShape,
-    veilederNavn: PT.string.isRequired,
+    arbeidslisteSistEndretAv: PT.string.isRequired,
     settMarkert: PT.func.isRequired,
     enhetId: PT.string.isRequired,
     filtervalg: filtervalgShape.isRequired

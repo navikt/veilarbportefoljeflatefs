@@ -66,7 +66,7 @@ MinOversiktListeHode.propTypes = {
     sorteringOnClick: PT.func.isRequired,
     filtervalg: filtervalgShape.isRequired,
     sorteringsfelt: PT.string.isRequired,
-    brukere: PT.arrayOf(brukerShape.isRequired)
+    brukere: PT.arrayOf(brukerShape)
 };
 
 export default MinOversiktListeHode;
