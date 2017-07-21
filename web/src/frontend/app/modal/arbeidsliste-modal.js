@@ -7,6 +7,7 @@ import { skjulModal } from '../ducks/modal';
 import { markerAlleBrukere } from '../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidsliste-form';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
+import { brukerShape } from '../proptype-shapes';
 
 Modal.setAppElement('#applikasjon');
 
@@ -90,7 +91,7 @@ class ArbeidslisteModal extends Component {
 
 ArbeidslisteModal.propTypes = {
     isOpen: PT.bool.isRequired,
-    valgteBrukere: PT.arrayOf(PT.object).isRequired,
+    valgteBrukere: PT.arrayOf(brukerShape).isRequired,
     skjulArbeidslisteModal: PT.func.isRequired,
     fjernMarkerteBrukere: PT.func.isRequired
 };
