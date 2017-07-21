@@ -1,15 +1,33 @@
-import React, { PropTypes as PT } from 'react';
+import React, { PropTypes as PT, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import Hybridpanel from '../components/tabell/hybridpanel/hybridpanel';
 import Brukerinformasjon from '../components/tabell/brukerinformasjon';
 import MinoversiktDatokolonner from './minoversikt-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
 import { filtervalgShape, brukerShape } from './../proptype-shapes';
+import ArbeidslisteModalRediger from '../modal/arbeidsliste-modal-rediger';
 
+class MinoversiktBrukerPanel extends Component {
 
-function MinoversiktBrukerPanel({ bruker, settMarkert, enhetId, filtervalg, arbeidslisteSistEndretAv }) {
-    const { ytelse } = filtervalg;
-    const childrenHead =
+    constructor(props) {
+        super(props);
+        this.state = { redigerArbeidslisteModalIsOpen: false };
+        this.redigerOnClickHandler = this.redigerOnClickHandler.bind(this);
+        this.lukkRedigerArbeidslisteModal = this.lukkRedigerArbeidslisteModal.bind(this);
+    }
+
+    redigerOnClickHandler() {
+        this.setState({ redigerArbeidslisteModalIsOpen: true });
+    }
+
+    lukkRedigerArbeidslisteModal() {
+        this.setState({ redigerArbeidslisteModalIsOpen: false });
+    }
+
+    render() {
+        const { bruker, settMarkert, enhetId, filtervalg, arbeidslisteSistEndretAv } = this.props;
+        const { ytelse } = filtervalg;
+        const childrenHead =
         (<div className="brukerpanel">
             <Brukerinformasjon
                 bruker={bruker}
@@ -20,8 +38,8 @@ function MinoversiktBrukerPanel({ bruker, settMarkert, enhetId, filtervalg, arbe
             <Etiketter bruker={bruker} />
         </div>);
 
-    const dato = new Date(bruker.arbeidsliste.endringstidspunkt).toLocaleDateString();
-    const childrenBody =
+        const dato = new Date(bruker.arbeidsliste.endringstidspunkt).toLocaleDateString();
+        const childrenBody =
         (<div className="brukerpanel__body">
             <h5>
                 <FormattedMessage id="arbeidsliste.kommentar.header" />
@@ -35,20 +53,29 @@ function MinoversiktBrukerPanel({ bruker, settMarkert, enhetId, filtervalg, arbe
                         veileder: arbeidslisteSistEndretAv
                     }}
                 />
-                <a className="lenke lenke--frittstående arbeidsliste--rediger-lenke">
-                    Rediger
-                </a>
+                <button
+                    className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
+                    onClick={this.redigerOnClickHandler}
+                >
+                    <FormattedMessage id="arbeidsliste.kommentar.footer.knapp" />
+                </button>
+                <ArbeidslisteModalRediger
+                    bruker={bruker}
+                    isOpen={this.state.redigerArbeidslisteModalIsOpen}
+                    lukkModal={this.lukkRedigerArbeidslisteModal}
+                />
             </p>
         </div>
 
         );
 
-    return (
+        return (
         bruker.arbeidsliste.arbeidslisteAktiv ?
             <Hybridpanel childrenHead={childrenHead} childrenBody={childrenBody} />
             :
             <div className="panel_hode">{childrenHead}</div>
-    );
+        );
+    }
 }
 
 MinoversiktBrukerPanel.propTypes = {
