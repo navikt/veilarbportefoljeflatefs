@@ -7,6 +7,7 @@ import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { brukerShape } from '../proptype-shapes';
+import { redigerArbeidsliste } from '../ducks/arbeidsliste';
 
 const KOMMENTAR_MAKS_LENGDE = 50;
 
@@ -79,6 +80,10 @@ function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
         </form>
     );
 }
+
+textArea.propTypes = {
+    bruker: PT.object
+};
 
 RedigerArbeidslisteForm.propTypes = {
     lukkModal: PT.func.isRequired,

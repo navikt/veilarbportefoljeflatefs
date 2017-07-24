@@ -108,15 +108,24 @@ const mapStateToProps = (state, props) => {
     };
 };
 
+function prepareForDispatch(arbeidsliste, innloggetVeileder) {
+    return arbeidsliste.map((a) => ({
+        ...a,
+        sistEndretAv: { veilederId: innloggetVeileder },
+        endringstidspunkt: new Date().toISOString(),
+        arbeidslisteAktiv: true
+    }));
+}
 const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
         const arbeidsliste = formData.arbeidsliste.map((bruker, index) => ({
             fnr: bruker.fnr,
             kommentar: formData.arbeidsliste[index].kommentar,
-            frist: formData.arbeidsliste[index].frist,
-            arbeidslisteAktiv: true
+            frist: formData.arbeidsliste[index].frist
         }));
-        lagreArbeidsliste(arbeidsliste)(dispatch).then(() => oppdaterArbeidslisteForBruker(arbeidsliste)(dispatch));
+        lagreArbeidsliste(arbeidsliste)(dispatch)
+        // eslint-disable-next-line max-len
+            .then(() => oppdaterArbeidslisteForBruker(prepareForDispatch(arbeidsliste, props.innloggetVeileder))(dispatch));
         props.lukkModal();
     }
 });

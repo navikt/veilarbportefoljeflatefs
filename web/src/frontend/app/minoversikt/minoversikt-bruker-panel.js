@@ -25,7 +25,7 @@ class MinoversiktBrukerPanel extends Component {
     }
 
     render() {
-        const { bruker, settMarkert, enhetId, filtervalg, arbeidslisteSistEndretAv } = this.props;
+        const { bruker, settMarkert, enhetId, filtervalg } = this.props;
         const { ytelse } = filtervalg;
         const childrenHead =
         (<div className="brukerpanel">
@@ -50,7 +50,7 @@ class MinoversiktBrukerPanel extends Component {
                     id="arbeidsliste.kommentar.footer"
                     values={{
                         dato,
-                        veileder: arbeidslisteSistEndretAv
+                        veileder: bruker.arbeidsliste.sistEndretAv.veilederId
                     }}
                 />
                 <button
@@ -80,7 +80,6 @@ class MinoversiktBrukerPanel extends Component {
 
 MinoversiktBrukerPanel.propTypes = {
     bruker: brukerShape,
-    arbeidslisteSistEndretAv: PT.string.isRequired,
     settMarkert: PT.func.isRequired,
     enhetId: PT.string.isRequired,
     filtervalg: filtervalgShape.isRequired

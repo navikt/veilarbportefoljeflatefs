@@ -77,7 +77,7 @@ function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
             if (arbeidslisteForBruker.length === 1) {
                 return {
                     ...bruker,
-                    arbeidsliste: arbeidslisteForBruker[0]
+                    arbeidsliste: { ...bruker.arbeidsliste, ...arbeidslisteForBruker[0] }
                 };
             }
             return bruker;

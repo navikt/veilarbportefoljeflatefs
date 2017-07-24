@@ -48,6 +48,7 @@ class ArbeidslisteModal extends Component {
                 <LeggTilArbeidslisteForm
                     valgteBrukere={valgteBrukere}
                     lukkModal={this.lukkModal}
+                    innloggetVeileder={this.props.innloggetVeileder}
                 />
             </div>
         );
@@ -93,11 +94,13 @@ ArbeidslisteModal.propTypes = {
     isOpen: PT.bool.isRequired,
     valgteBrukere: PT.arrayOf(brukerShape).isRequired,
     skjulArbeidslisteModal: PT.func.isRequired,
-    fjernMarkerteBrukere: PT.func.isRequired
+    fjernMarkerteBrukere: PT.func.isRequired,
+    innloggetVeileder: PT.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    visModal: state.modal.visModal
+    visModal: state.modal.visModal,
+    innloggetVeileder: state.enheter.ident
 });
 
 const mapDispatchToProps = (dispatch) => ({
