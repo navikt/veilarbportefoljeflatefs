@@ -25,7 +25,7 @@ class MinoversiktBrukerPanel extends Component {
     }
 
     render() {
-        const { bruker, settMarkert, enhetId, filtervalg } = this.props;
+        const { bruker, settMarkert, enhetId, filtervalg, innloggetVeileder } = this.props;
         const { ytelse } = filtervalg;
         const childrenHead =
         (<div className="brukerpanel">
@@ -63,6 +63,7 @@ class MinoversiktBrukerPanel extends Component {
                     bruker={bruker}
                     isOpen={this.state.redigerArbeidslisteModalIsOpen}
                     lukkModal={this.lukkRedigerArbeidslisteModal}
+                    innloggetVeileder={innloggetVeileder}
                 />
             </p>
         </div>
@@ -82,7 +83,8 @@ MinoversiktBrukerPanel.propTypes = {
     bruker: brukerShape,
     settMarkert: PT.func.isRequired,
     enhetId: PT.string.isRequired,
-    filtervalg: filtervalgShape.isRequired
+    filtervalg: filtervalgShape.isRequired,
+    innloggetVeileder: PT.string.isRequired
 };
 
 export default MinoversiktBrukerPanel;

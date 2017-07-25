@@ -2,6 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
+import { reduxForm } from 'redux-form';
 import { slettArbeidsliste } from '../ducks/arbeidsliste';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { brukerShape } from '../proptype-shapes';
@@ -23,9 +24,10 @@ function brukerLabel(bruker) {
     );
 }
 
-function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, fjernFraArbeidsliste }) {
+
+function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit }) {
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <ul>
                 { valgteBrukere.map((bruker) => brukerLabel(bruker)) }
             </ul>
@@ -33,7 +35,7 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, fjernFraArbeidslis
                 <button
                     type="submit"
                     className="knapp knapp--hoved"
-                    onClick={() => fjernFraArbeidsliste(valgteBrukere)}
+                    onClick={handleSubmit}
                 >
                     <FormattedMessage id="modal.knapp.bekreft" />
                 </button>
@@ -45,24 +47,35 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, fjernFraArbeidslis
     );
 }
 
+const FjernFraArbeidslisteReduxForm = reduxForm({
+    form: 'fjern-fra-arbeidsliste-form'
+})(FjernFraArbeidslisteForm);
+
 FjernFraArbeidslisteForm.propTypes = {
     lukkModal: PT.func.isRequired,
     valgteBrukere: PT.arrayOf(brukerShape).isRequired,
-    fjernFraArbeidsliste: PT.func.isRequired
+    handleSubmit: PT.func.isRequired
 };
 
-const mapDispatchToProps = (dispatch, props) => ({
-    fjernFraArbeidsliste: (valgteBrukere) => {
-        const arbeidsliste = valgteBrukere.map((bruker) => ({
+
+function prepareForDispatch(arbeidsliste) {
+    return arbeidsliste.map((a) => ({
+        ...a,
+        arbeidslisteAktiv: false
+    }));
+}
+const mapDispatchToProps = () => ({
+    onSubmit: (formData, dispatch, props) => {
+        const arbeidsliste = props.valgteBrukere.map((bruker) => ({
             fnr: bruker.fnr,
-            kommentar: null,
-            frist: null,
-            arbeidslisteAktiv: false
+            kommentar: bruker.arbeidsliste.kommentar,
+            frist: bruker.arbeidsliste.frist
         }));
-        slettArbeidsliste(arbeidsliste)(dispatch).then(() => oppdaterArbeidslisteForBruker(arbeidsliste)(dispatch));
+        // eslint-disable-next-line max-len
+        slettArbeidsliste(arbeidsliste)(dispatch).then(() => oppdaterArbeidslisteForBruker(prepareForDispatch(arbeidsliste))(dispatch));
         props.lukkModal();
     }
 });
 
-export default connect(null, mapDispatchToProps)(FjernFraArbeidslisteForm);
+export default connect(null, mapDispatchToProps)(FjernFraArbeidslisteReduxForm);
 

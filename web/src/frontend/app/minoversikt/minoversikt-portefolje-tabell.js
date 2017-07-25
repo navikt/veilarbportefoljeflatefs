@@ -13,7 +13,7 @@ function finnVeilederSistEndretAv(bruker, veiledere) {
 
 function MinoversiktTabell({
                                settMarkert, portefolje, settSorteringOgHentPortefolje,
-                               filtervalg, sorteringsrekkefolge, valgtEnhet, veiledere
+                               filtervalg, sorteringsrekkefolge, valgtEnhet, veiledere, innloggetVeileder
                            }) {
     const { brukere } = portefolje.data;
     const { enhetId } = valgtEnhet.enhet;
@@ -36,6 +36,7 @@ function MinoversiktTabell({
                             enhetId={enhetId}
                             settMarkert={settMarkert}
                             filtervalg={filtervalg}
+                            innloggetVeileder={innloggetVeileder}
                         />
                     </li>)}
             </ul>
@@ -58,7 +59,8 @@ MinoversiktTabell.propTypes = {
     settMarkert: PT.func.isRequired,
     filtervalg: filtervalgShape.isRequired,
     settSorteringOgHentPortefolje: PT.func.isRequired,
-    veiledere: PT.arrayOf(veilederShape).isRequired
+    veiledere: PT.arrayOf(veilederShape).isRequired,
+    innloggetVeileder: PT.string.isRequired
 };
 
 

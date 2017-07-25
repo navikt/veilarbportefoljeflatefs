@@ -8,7 +8,7 @@ import { brukerShape } from '../proptype-shapes';
 
 Modal.setAppElement('#applikasjon');
 
-function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal }) {
+function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder }) {
     return (
         <Modal
             className="modal_overflow"
@@ -30,6 +30,7 @@ function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal }) {
                 <RedigerArbeidslisteForm
                     bruker={bruker}
                     lukkModal={lukkModal}
+                    innloggetVeileder={innloggetVeileder}
                 />
             </div>
 
@@ -39,7 +40,8 @@ function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal }) {
 ArbeidslisteModalRediger.propTypes = {
     isOpen: PT.bool.isRequired,
     bruker: brukerShape.isRequired,
-    lukkModal: PT.func.isRequired
+    lukkModal: PT.func.isRequired,
+    innloggetVeileder: PT.string.isRequired
 };
 
 export default ArbeidslisteModalRediger;
