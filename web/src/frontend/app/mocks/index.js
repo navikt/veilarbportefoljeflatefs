@@ -61,5 +61,6 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
 // mock.put('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
 // mock.post('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
 // mock.delete('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
+// mock.post('/veilarbportefolje/tjenester/arbeidsliste/delete', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
 
 mock.mock('*', respondWith((url, config) => mock.realFetch.call(window, url, config)));

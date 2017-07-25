@@ -54,15 +54,15 @@ export function lagreArbeidsliste(arbeidsliste) {
 }
 
 export function slettArbeidsliste(arbeidsliste) {
-    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'delete'), {
+    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'post', 'delete'), {
         OK: ARBEIDSLISTE_SLETT_OK,
         FEILET: ARBEIDSLISTE_SLETT_FEILET,
         PENDING: ARBEIDSLISTE_SLETT_PENDING
     });
 }
 
-export function redigerArbeidsliste(arbeidsliste) {
-    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'post'), {
+export function redigerArbeidsliste(arbeidsliste, fnr) {
+    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'post', fnr), {
         OK: ARBEIDSLISTE_REDIGER_OK,
         FEILET: ARBEIDSLISTE_REDIGER_FEILET,
         PENDING: ARBEIDSLISTE_REDIGER_PENDING

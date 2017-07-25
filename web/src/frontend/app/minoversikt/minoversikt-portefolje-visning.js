@@ -118,7 +118,7 @@ class VeilederPortefoljeVisning extends Component {
                             />
                             :
                             <MinoversiktTabell
-                                veileder={veileder}
+                                innloggetVeileder={veileder.ident}
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }

@@ -1,6 +1,5 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { Field } from 'redux-form';
 import { validForm, rules } from 'react-redux-form-validation';
 import { FormattedMessage } from 'react-intl';
 import Datovelger from '../components/datovelger/datovelger';
@@ -34,40 +33,24 @@ function label(bruker) {
     />);
 }
 
-const textArea = (props) => (
-    <div className="nav-input blokk-s">
-        <Textarea
-            labelId={`${name}.kommentar`}
-            label={label(props.bruker)}
-            feltNavn={'kommentar'}
-            placeholder=""
-            maxLength={KOMMENTAR_MAKS_LENGDE}
-            disabled={false}
-            visTellerFra={0}
-        />
-    </div>
-    );
-
-// eslint-disable-next-line react/prop-types
-function datoVelger() {
-    return (
-        <div>
-            <div key={`${name}`}>
-                <Datovelger
-                    feltNavn={`${name}.frist`}
-                    labelId="arbeidsliste-form.label.dato"
-                    tidligsteFom={new Date()}
-                />
-            </div>
-        </div>);
-}
-
 function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <Field name="kommentar" bruker={bruker} component={textArea} />
-                <Field name="frist" component={datoVelger} />
+                <Textarea
+                    labelId={'kommentar'}
+                    label={label(bruker)}
+                    feltNavn={'kommentar'}
+                    placeholder=""
+                    maxLength={KOMMENTAR_MAKS_LENGDE}
+                    disabled={false}
+                    visTellerFra={0}
+                />
+                <Datovelger
+                    feltNavn={'frist'}
+                    labelId="arbeidsliste-form.label.dato"
+                    tidligsteFom={new Date()}
+                />
             </div>
             <div>
                 <button type="submit" className="knapp knapp--hoved" onClick={handleSubmit}>
@@ -80,10 +63,6 @@ function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
         </form>
     );
 }
-
-textArea.propTypes = {
-    bruker: PT.object
-};
 
 RedigerArbeidslisteForm.propTypes = {
     lukkModal: PT.func.isRequired,
@@ -99,10 +78,24 @@ const RedigerArbeidslisteFormValidation = validForm({
     }
 })(RedigerArbeidslisteForm);
 
+function prepareForDispatch(arbeidsliste, innloggetVeileder, fnr) {
+    return Array.of({
+        ...arbeidsliste,
+        fnr,
+        sistEndretAv: { veilederId: innloggetVeileder },
+        endringstidspunkt: new Date().toISOString()
+    });
+}
+
 const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
-        const arbeidsliste = {};
-        redigerArbeidsliste(arbeidsliste)(dispatch).then(() => oppdaterArbeidslisteForBruker(arbeidsliste)(dispatch));
+        const arbeidsliste = {
+            kommentar: formData.kommentar,
+            frist: formData.frist
+        };
+        redigerArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
+            // eslint-disable-next-line max-len
+            .then(() => oppdaterArbeidslisteForBruker(prepareForDispatch(arbeidsliste, props.innloggetVeileder, props.bruker.fnr))(dispatch));
         props.lukkModal();
     }
 
@@ -110,7 +103,8 @@ const mapDispatchToProps = () => ({
 
 const mapStateToProps = (state, props) => ({
     initialValues: {
-        kommentar: props.bruker.arbeidsliste.kommentar
+        kommentar: props.bruker.arbeidsliste.kommentar,
+        frist: props.bruker.arbeidsliste.frist
     }
 });
 
