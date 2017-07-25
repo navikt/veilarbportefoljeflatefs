@@ -23,38 +23,34 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
     return (
         <div className="enhet-listehode">
             <div className="enhet-overskrifter">
-                <Listeoverskrift className="listeoverskrift__bruker listeoverskrift">
-                    <FormattedMessage id="enhet.portefolje.tabell.bruker" />
-                </Listeoverskrift>
+                <Listeoverskrift
+                    className="listeoverskrift__bruker listeoverskrift"
+                    id="enhet.portefolje.tabell.bruker"
+                />
                 <Listeoverskrift
                     className="listeoverskrift__dato listeoverskrift"
                     skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse)}
-                >
-                    <FormattedMessage id={`portefolje.tabell.${ytelseUtlopsdatoNavn}`} />
-                </Listeoverskrift>
+                    id={`portefolje.tabell.${ytelseUtlopsdatoNavn}`}
+                />
                 <Listeoverskrift
                     className="listeoverskrift__dato listeoverskrift"
                     skalVises={!!filtervalg && filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
-
-                >
-                    <FormattedMessage id={'portefolje.tabell.svarfranav'} />
-                </Listeoverskrift>
+                    id={'portefolje.tabell.svarfranav'}
+                />
                 <Listeoverskrift
                     className="listeoverskrift__dato listeoverskrift"
                     skalVises={!!filtervalg && filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
-                >
-                    <FormattedMessage id={'portefolje.tabell.svarfrabruker'} />
-                </Listeoverskrift>
+                    id={'portefolje.tabell.svarfrabruker'}
+                />
                 <Listeoverskrift
                     className="listeoverskrift__dato listeoverskrift"
                     skalVises={!!filtervalg && filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
-                >
-                    <FormattedMessage id={'portefolje.tabell.utlopaktivitet'} />
-                </Listeoverskrift>
-
-                <Listeoverskrift className="listeoverskrift__veileder listeoverskrift">
-                    <FormattedMessage id="enhet.portefolje.tabell.veileder" />
-                </Listeoverskrift>
+                    id={'portefolje.tabell.utlopaktivitet'}
+                />
+                <Listeoverskrift
+                    className="listeoverskrift__veileder listeoverskrift"
+                    id="enhet.portefolje.tabell.veileder"
+                />
             </div>
             <div className="enhet-sortering-header__wrapper">
                 <SorteringHeader

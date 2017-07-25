@@ -34,7 +34,7 @@ class MinoversiktBrukerPanel extends Component {
                 enhetId={enhetId}
                 settMarkert={settMarkert}
             />
-            <MinoversiktDatokolonner bruker={bruker} ytelse={ytelse} />
+            <MinoversiktDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} />
             <Etiketter bruker={bruker} />
         </div>);
 

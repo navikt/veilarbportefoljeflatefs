@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { MOCK_CONFIG, mock, delayed, respondWith, randomFailure } from './utils';
 
 MOCK_CONFIG.failureRate = -1;

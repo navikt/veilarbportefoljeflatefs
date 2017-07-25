@@ -1,18 +1,20 @@
 import React, { PropTypes as PT } from 'react';
+import { FormattedMessage } from 'react-intl';
 
-function Listeoverskrift({ children, skalVises, className }) {
+
+function Listeoverskrift({ id, skalVises, className }) {
     if (!skalVises) {
         return null;
     }
     return (
         <span className={className}>
-            {children}
+            <FormattedMessage id={id} />
         </span>
     );
 }
 
 Listeoverskrift.propTypes = {
-    children: PT.node.isRequired,
+    id: PT.string.isRequired,
     skalVises: PT.bool,
     className: PT.string
 };
