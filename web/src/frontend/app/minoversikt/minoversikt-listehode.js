@@ -1,27 +1,50 @@
 import React, { PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
 import SorteringHeader from '../components/tabell/sortering-header';
-import { ytelsevalg } from './../filtrering/filter-konstanter';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';
-import { filtervalgShape, brukerShape } from './../proptype-shapes';
+import { filtervalgShape } from './../proptype-shapes';
+import {
+    ytelsevalg,
+    VENTER_PA_SVAR_FRA_NAV,
+    VENTER_PA_SVAR_FRA_BRUKER,
+    UTLOPTE_AKTIVITETER } from '../filtrering/filter-konstanter';
 
 
-function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, brukere }) {
+function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt }) {
     const ytelseUtlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
 
     return (
         <div className="minoversikt-listehode">
             <div className="minoversikt-overskrifter">
-                <Listeoverskrift className="listeoverskrift__bruker listeoverskrift">
-                    <FormattedMessage id="enhet.portefolje.tabell.bruker" />
-                </Listeoverskrift>
+                <Listeoverskrift
+                    className="listeoverskrift__bruker listeoverskrift"
+                    id="enhet.portefolje.tabell.bruker"
+                />
+                <Listeoverskrift
+                    className="listeoverskrift__arbeidsliste listeoverskrift"
+                    id="portefolje.tabell.arbeidsliste"
+                />
+                <Listeoverskrift
+                    className="listeoverskrift__ytelse listeoverskrift"
+                    skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse)}
+                    id={`portefolje.tabell.${ytelseUtlopsdatoNavn}`}
+                />
                 <Listeoverskrift
                     className="listeoverskrift__dato listeoverskrift"
-                    skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse)}
-                >
-                    <FormattedMessage id={`portefolje.tabell.${ytelseUtlopsdatoNavn}`} />
-                </Listeoverskrift>
+                    skalVises={!!filtervalg && filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
+                    id={'portefolje.tabell.svarfranav'}
+
+                />
+                <Listeoverskrift
+                    className="listeoverskrift__dato listeoverskrift"
+                    skalVises={!!filtervalg && filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
+                    id={'portefolje.tabell.svarfrabruker'}
+                />
+                <Listeoverskrift
+                    className="listeoverskrift__dato listeoverskrift"
+                    skalVises={!!filtervalg && filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
+                    id={'portefolje.tabell.utlopaktivitet'}
+                />
             </div>
             <div className="minoversikt-sortering-header__wrapper">
                 <SorteringHeader
@@ -39,6 +62,15 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     tekstId="portefolje.tabell.fodselsnummer"
                 />
                 <SorteringHeader
+                    sortering={'arbeidsliste_frist'}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === 'arbeidsliste_frist'}
+                    tekstId="portefolje.tabell.ddmmyy"
+                    skalVises
+                    className={'sortering-header__dato'}
+                />
+                <SorteringHeader
                     sortering={ytelseUtlopsdatoNavn}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -48,12 +80,30 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     className={'sortering-header__dato'}
                 />
                 <SorteringHeader
-                    sortering={'arbeidsliste_frist'}
+                    sortering={VENTER_PA_SVAR_FRA_NAV}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === 'arbeidsliste_frist'}
-                    tekstId="portefolje.tabell.arbeidsliste"
-                    skalVises={brukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv)}
+                    erValgt={sorteringsfelt === VENTER_PA_SVAR_FRA_NAV}
+                    tekstId="portefolje.tabell.ddmmyy"
+                    skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
+                    className={'sortering-header__dato'}
+                />
+                <SorteringHeader
+                    sortering={VENTER_PA_SVAR_FRA_BRUKER}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === VENTER_PA_SVAR_FRA_BRUKER}
+                    tekstId="portefolje.tabell.ddmmyy"
+                    skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
+                    className={'sortering-header__dato'}
+                />
+                <SorteringHeader
+                    sortering={UTLOPTE_AKTIVITETER}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === UTLOPTE_AKTIVITETER}
+                    tekstId="portefolje.tabell.ddmmyy"
+                    skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
                     className={'sortering-header__dato'}
                 />
             </div>
@@ -65,8 +115,7 @@ MinOversiktListeHode.propTypes = {
     sorteringsrekkefolge: PT.string.isRequired,
     sorteringOnClick: PT.func.isRequired,
     filtervalg: filtervalgShape.isRequired,
-    sorteringsfelt: PT.string.isRequired,
-    brukere: PT.arrayOf(brukerShape)
+    sorteringsfelt: PT.string.isRequired
 };
 
 export default MinOversiktListeHode;

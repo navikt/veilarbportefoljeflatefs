@@ -1,3 +1,4 @@
+/* eslint-disable */
 import faker from 'faker';
 import veiledereResponse from './veiledere';
 
@@ -91,7 +92,8 @@ function lagArbeidsliste() {
             kommentar: null,
             frist: null,
             isOppfolgendeVeileder: null,
-            arbeidslisteAktiv: false
+            arbeidslisteAktiv: false,
+            sistEndretAv: {}
         };
     }
 
@@ -99,7 +101,8 @@ function lagArbeidsliste() {
         kommentar: 'En random kommentar',
         frist: new Date(),
         isOppfolgendeVeileder: true,
-        arbeidslisteAktiv: true
+        arbeidslisteAktiv: true,
+        sistEndretAv: {veilederId: 'Z990761'}
     });
 }
 

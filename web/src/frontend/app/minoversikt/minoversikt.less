@@ -50,7 +50,14 @@
 
         .listeoverskrift__bruker {
             margin-left: 2.6rem;
-            margin-right: 17.3rem;
+            display: inline-block;
+            width: 21.5rem;
+        }
+        .listeoverskrift__ytelse {
+            margin-left: 1.6rem;
+        }
+        .listeoverskrift__dato {
+            margin-left: 1.6rem;
         }
     }
 
@@ -79,29 +86,32 @@
             padding: 10px 10px 10px 10px;
 
             .brukerpanel {
-                width:100%;
+                width: 100%;
             }
 
             .brukerinformasjon__wrapper {
                 display: inline-block;
-                margin-right: 3rem;
+                margin-right: 2.9rem;
 
                 .brukerinformasjon__navn {
                     display: inline-block;
                     width: 14rem;
                 }
                 .skjema__input {
-                    position:relative;
-                    top:5px;
-                    display:inline-block;
+                    position: relative;
+                    top: 5px;
+                    display: inline-block;
                     margin: 0 0 0 0;
-                    width:1.5rem;
+                    width: 1.5rem;
                     margin-right: 0.5rem;
                 }
             }
 
             .datokolonner__wrapper {
                 display: inline-block;
+                :not(:first-child) {
+                    margin-left: 2.3rem;
+                }
             }
 
             .etiketter__wrapper {
@@ -117,10 +127,11 @@
         .hybridPanel__knapp {
             cursor: pointer;
             background-color: @navLysGra;
-            border:none;
+            border: none;
         }
     }
 }
+
 .minoversikt-liste__wrapper {
     .panel_hode {
         .etikett:last-child {
