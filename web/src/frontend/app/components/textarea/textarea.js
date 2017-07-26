@@ -29,7 +29,7 @@ function InnerTextAreaComponent({
                                     meta, // eslint-disable-line no-unused-vars
                                     ...rest
                                 }) {
-    const feil = errorMessage ? { feilmelding: errorMessage[0] } : undefined;
+    const feil = errorMessage ? { feilmelding: errorMessage } : undefined;
     return (
         <NavFrontendTextarea
             textareaClass="skjemaelement__input input--fullbredde arbeidslistekommentar"
@@ -46,7 +46,7 @@ function InnerTextAreaComponent({
 InnerTextAreaComponent.propTypes = {
     labelId: PT.string.isRequired,
     maxLength: PT.number.isRequired,
-    errorMessage: PT.arrayOf(PT.oneOfType([PT.string, PT.node])),
+    errorMessage: PT.node,
     visTellerFra: PT.number,
     meta: PT.object, // eslint-disable-line react/forbid-prop-types
     input: PT.object // eslint-disable-line react/forbid-prop-types
@@ -59,9 +59,10 @@ InnerTextAreaComponent.defaultProps = {
     visTellerFra: undefined
 };
 
-function Textarea({ feltNavn, ...rest }) {
+function Textarea({ feltNavn, validate, ...rest }) {
     return (
         <CustomField
+            validate={validate}
             name={feltNavn}
             customComponent={<InnerTextAreaComponent {...rest} />}
         />
@@ -70,7 +71,8 @@ function Textarea({ feltNavn, ...rest }) {
 
 Textarea.propTypes = {
     feltNavn: PT.string,
-    visTellerFra: PT.number
+    visTellerFra: PT.number,
+    validate: PT.func
 };
 
 Textarea.defaultProps = {
