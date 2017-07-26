@@ -1,6 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { enhetShape, filtervalgShape, veiledereShape } from './../proptype-shapes';
+import { enhetShape, filtervalgShape, veilederShape } from './../proptype-shapes';
 import EnhetBrukerpanel from './enhet-brukerpanel';
 import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
 import EnhetListehode from './enhet-listehode';
@@ -53,7 +53,7 @@ EnhetTabell.propTypes = {
     settMarkert: PT.func.isRequired,
     filtervalg: filtervalgShape.isRequired,
     settSorteringOgHentPortefolje: PT.func.isRequired,
-    veiledere: veiledereShape.isRequired
+    veiledere: PT.arrayOf(veilederShape).isRequired
 };
 
 
