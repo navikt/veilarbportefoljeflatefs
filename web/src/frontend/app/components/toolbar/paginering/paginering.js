@@ -78,7 +78,6 @@ Paginering.propTypes = {
 
 const mapStateToProps = ({ paginering }) => {
     const antallSider = Math.ceil(paginering.antall / paginering.sideStorrelse);
-
     return ({
         ...paginering,
         antallSider,

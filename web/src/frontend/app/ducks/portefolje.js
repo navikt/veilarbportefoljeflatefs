@@ -203,12 +203,22 @@ export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 
 // Action Creators
 export function hentPortefoljeForVeileder(
     enhet, veileder, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
-    return doThenDispatch(() => Api.hentVeiledersPortefolje(
-        enhet, veileder.ident, rekkefolge, sorteringsfelt, fra, antall, filtervalg), {
-            OK,
-            FEILET,
-            PENDING
-        });
+    const fn = (dispatch) =>
+        Api.hentVeiledersPortefolje(enhet, veileder.ident, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
+            .then((json) => {
+                const { antallTotalt } = json;
+                const side = Math.floor(fra / antall) + 1;
+
+                dispatch(pagineringSetup({ side, antall: antallTotalt, sideStorrelse: antall }));
+
+                return json;
+            });
+
+    return doThenDispatch(fn, {
+        OK,
+        FEILET,
+        PENDING
+    });
 }
 
 export function settSortering(rekkefolge, felt) {

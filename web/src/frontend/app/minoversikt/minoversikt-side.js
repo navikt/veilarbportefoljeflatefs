@@ -74,7 +74,7 @@ class MinOversiktSide extends Component {
                                         veileder={gjeldendeVeileder}
                                     />
                                     <VeilederPortefoljeVisning
-                                        veileder={gjeldendeVeileder}
+                                        gjeldendeVeileder={gjeldendeVeileder}
                                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                     />
                                 </div>
