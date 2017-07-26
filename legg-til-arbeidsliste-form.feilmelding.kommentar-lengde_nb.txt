@@ -1,0 +1,1 @@
+Du har skrevet en for lang tekst. Maksimalt antall tegn er {KOMMENTAR_MAKS_LENGDE}.
