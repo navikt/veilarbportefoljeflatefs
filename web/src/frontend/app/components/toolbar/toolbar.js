@@ -32,11 +32,12 @@ Toolbar.propTypes = {
     filtergruppe: PT.string.isRequired,
     onPaginering: PT.func.isRequired,
     sokVeilederSkalVises: PT.bool,
-    visesAnnenVeiledersPortefolje: PT.bool.isRequired
+    visesAnnenVeiledersPortefolje: PT.bool
 };
 
 Toolbar.defaultProps = {
-    filtergruppe: 'veileder'
+    filtergruppe: 'veileder',
+    visesAnnenVeiledersPortefolje: false
 };
 
 export default Toolbar;

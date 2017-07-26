@@ -54,7 +54,7 @@ EnhetBrukerpanel.propTypes = {
     settMarkert: PT.func.isRequired,
     enhetId: PT.string.isRequired,
     filtervalg: filtervalgShape.isRequired,
-    brukersVeileder: veilederShape.isRequired
+    brukersVeileder: veilederShape
 };
 
 EnhetBrukerpanel.defaultProps = {
@@ -63,7 +63,7 @@ EnhetBrukerpanel.defaultProps = {
 
 Veilederinfo.propTypes = {
     bruker: PT.object.isRequired,
-    veileder: veilederShape.isRequired
+    veileder: veilederShape
 };
 
 Veilederinfo.defaultProps = {
