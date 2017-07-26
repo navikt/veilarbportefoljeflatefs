@@ -1,7 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { FormattedMessage } from 'react-intl';
 import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-toggle';
 import { settVisningsmodus } from './../../ducks/veilederpaginering';
 import * as VK from './../../minoversikt/minoversikt-konstanter';
@@ -16,11 +15,20 @@ function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules })
 
     return (
         <ToggleGruppe name="DiagramTabellToggle" onChange={onChange}>
-            <ToggleKnapp value={VK.TABELLVISNING} checked={visningsmodus === VK.TABELLVISNING}>
-                <FormattedMessage id="paginering.vis.som.tabell" />
+            <ToggleKnapp
+                value={VK.TABELLVISNING}
+                className="toggle--tabell"
+                checked={visningsmodus === VK.TABELLVISNING}
+                ariaLabel="Vis som tabell"
+            >
+                <span className="visuallyhidden">Vis som tabell</span>
             </ToggleKnapp>
-            <ToggleKnapp value={VK.DIAGRAMVISNING} checked={visningsmodus === VK.DIAGRAMVISNING}>
-                <FormattedMessage id="paginering.vis.som.diagram" />
+            <ToggleKnapp
+                value={VK.DIAGRAMVISNING}
+                className="toggle--diagram"
+                checked={visningsmodus === VK.DIAGRAMVISNING}
+            >
+                <span className="visuallyhidden">Vis som diagram</span>
             </ToggleKnapp>
         </ToggleGruppe>
     );

@@ -1,6 +1,11 @@
 @toolbarTextColor: #005b82;
 @toolbarInactiveTextColor: @grayInactive;
 
+.visuallyhidden {
+        position: absolute;
+        left: -1000000000px;
+}
+
 .toolbar {
     display: flex;
     justify-content: space-between;
@@ -12,6 +17,30 @@
     .nav-frontend-chevron span {
         .sr-only();
     }
+
+    .toggle__label {
+        min-width: 3rem;
+    }
+
+    .toggle--tabell {
+        background: url(../svg/liste.svg) no-repeat center center;
+    }
+
+    .toggle__input:checked + .toggle--tabell {
+        background-color: @toolbarTextColor;
+        background-image: url(../svg/liste-hvit.svg);
+    }
+
+    .toggle--diagram {
+        background: url(../svg/stolpediagram.svg) no-repeat center center;
+    }
+
+    .toggle__input:checked + .toggle--diagram {
+        background-color: @toolbarTextColor;
+        background-image: url(../svg/stolpediagram-hvit.svg);
+    }
+
+
 }
 
 .toolbar__element {
@@ -47,7 +76,7 @@
 .dropdown--toolbar {
     margin-bottom: 0;
 
-    .dropdown__btn  {
+    .dropdown__btn {
         border: none;
         color: @toolbarTextColor;
         padding-right: 2rem;
