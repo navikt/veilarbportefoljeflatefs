@@ -26,12 +26,12 @@ class VeilederPortefoljeVisning extends Component {
             sorteringsfelt,
             hentPortefolje,
             valgtEnhet,
-            veileder,
+            gjeldendeVeileder,
             filtervalg
         } = this.props;
 
         hentPortefolje(
-            valgtEnhet.enhet.enhetId, veileder, sorteringsfelt, sorteringsrekkefolge, filtervalg
+            valgtEnhet.enhet.enhetId, gjeldendeVeileder, sorteringsfelt, sorteringsrekkefolge, filtervalg
         );
 
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
@@ -44,7 +44,7 @@ class VeilederPortefoljeVisning extends Component {
             sorteringsfelt,
             settSortering, // eslint-disable-line no-shadow
             hentPortefolje,
-            veileder,
+            gjeldendeVeileder,
             valgtEnhet,
             filtervalg
         } = this.props;
@@ -56,7 +56,7 @@ class VeilederPortefoljeVisning extends Component {
         }
         settSortering(valgtRekkefolge, felt);
         hentPortefolje(
-            valgtEnhet.enhet.enhetId, veileder, felt, valgtRekkefolge, filtervalg
+            valgtEnhet.enhet.enhetId, gjeldendeVeileder, valgtRekkefolge, felt, filtervalg
         );
     }
 
@@ -64,7 +64,8 @@ class VeilederPortefoljeVisning extends Component {
         const {
             portefolje,
             hentPortefolje,
-            veileder,
+            gjeldendeVeileder,
+            innloggetVeilederIdent,
             sorteringsrekkefolge,
             sorteringsfelt,
             valgtEnhet,
@@ -84,8 +85,8 @@ class VeilederPortefoljeVisning extends Component {
             fnr = feil.map((b) => b.brukerFnr);
         }
 
-        const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
+        const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, { status: tilordningerStatus }]}>
@@ -100,6 +101,7 @@ class VeilederPortefoljeVisning extends Component {
                         filtervalg={filtervalg}
                         onPaginering={(fra, antall) => hentPortefolje(
                             valgtEnhet.enhet.enhetId,
+                            gjeldendeVeileder,
                             sorteringsrekkefolge,
                             sorteringsfelt,
                             filtervalg,
@@ -114,11 +116,11 @@ class VeilederPortefoljeVisning extends Component {
                             <Diagram
                                 filtreringsvalg={filtervalg}
                                 enhet={valgtEnhet.enhet.enhetId}
-                                veileder={veileder.ident}
+                                veileder={gjeldendeVeileder.ident}
                             />
                             :
                             <MinoversiktTabell
-                                innloggetVeileder={veileder.ident}
+                                innloggetVeileder={innloggetVeilederIdent}
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
@@ -149,7 +151,8 @@ VeilederPortefoljeVisning.propTypes = {
         sorteringsrekkefolge: PT.string.isRequired
     }).isRequired,
     valgtEnhet: enhetShape.isRequired,
-    veileder: veilederShape.isRequired,
+    gjeldendeVeileder: veilederShape.isRequired,
+    innloggetVeilederIdent: PT.string.isRequired,
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
@@ -167,12 +170,13 @@ const mapStateToProps = (state) => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     visningsmodus: state.veilederpaginering.visningsmodus,
-    filtervalg: state.filtreringMinoversikt
+    filtervalg: state.filtreringMinoversikt,
+    innloggetVeilederIdent: state.enheter.ident
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentPortefolje: (enhet, ident, felt, rekkefolge, filtervalg, antall = 20, fra = 0) =>
-        dispatch(hentPortefoljeForVeileder(enhet, ident, rekkefolge, felt, fra, antall, filtervalg)),
+    hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
+        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
     clearTilordningFeil: () => dispatch(settTilordningStatusOk())
