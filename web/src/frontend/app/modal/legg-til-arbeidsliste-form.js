@@ -8,7 +8,7 @@ import Textarea from '../components/textarea/textarea';
 import { lagreArbeidsliste } from '../ducks/arbeidsliste';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 
-const KOMMENTAR_MAKS_LENGDE = 50;
+const KOMMENTAR_MAKS_LENGDE = 200;
 
 const begrensetKommentarLengde = rules.maxLength(
     KOMMENTAR_MAKS_LENGDE,
@@ -48,6 +48,7 @@ function renderFelter({ fields }) {
                             maxLength={KOMMENTAR_MAKS_LENGDE}
                             disabled={false}
                             visTellerFra={0}
+                            validate={(value) => (pakrevdTekst(value) || begrensetKommentarLengde(value))}
                         />
                     </div>
                     <Datovelger
@@ -82,12 +83,10 @@ LeggTilArbeidslisteForm.propTypes = {
 };
 
 export const formNavn = 'arbeidsliste_kommentar_skjema';
+
 const LeggTilArbeidslisteReduxForm = validForm({
     form: formNavn,
-    validate: {
-        kommentar: [begrensetKommentarLengde, pakrevdTekst],
-        frist: []
-    }
+    validate: {}
 })(LeggTilArbeidslisteForm);
 
 const mapStateToProps = (state, props) => {
