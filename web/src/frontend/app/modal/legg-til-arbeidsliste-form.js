@@ -7,6 +7,7 @@ import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { lagreArbeidsliste } from '../ducks/arbeidsliste';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
+import { leggTilStatustall } from '../ducks/statustall';
 
 const KOMMENTAR_MAKS_LENGDE = 200;
 
@@ -123,11 +124,13 @@ const mapDispatchToProps = () => ({
             frist: formData.arbeidsliste[index].frist
         }));
         lagreArbeidsliste(arbeidsliste)(dispatch)
-        // eslint-disable-next-line max-len
+            .then((res) => leggTilStatustall('minArbeidsliste', res.data.data.length)(dispatch))
+            // eslint-disable-next-line max-len
             .then(() => oppdaterArbeidslisteForBruker(prepareForDispatch(arbeidsliste, props.innloggetVeileder))(dispatch));
         props.lukkModal();
     }
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidslisteReduxForm);
 

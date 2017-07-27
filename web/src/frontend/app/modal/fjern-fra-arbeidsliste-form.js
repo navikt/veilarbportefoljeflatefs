@@ -6,6 +6,7 @@ import { reduxForm } from 'redux-form';
 import { slettArbeidsliste } from '../ducks/arbeidsliste';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { brukerShape } from '../proptype-shapes';
+import { leggTilStatustall } from '../ducks/statustall';
 
 function brukerLabel(bruker) {
     return (
@@ -71,8 +72,9 @@ const mapDispatchToProps = () => ({
             kommentar: bruker.arbeidsliste.kommentar,
             frist: bruker.arbeidsliste.frist
         }));
-        // eslint-disable-next-line max-len
-        slettArbeidsliste(arbeidsliste)(dispatch).then(() => oppdaterArbeidslisteForBruker(prepareForDispatch(arbeidsliste))(dispatch));
+        slettArbeidsliste(arbeidsliste)(dispatch)
+            .then((res) => leggTilStatustall('minArbeidsliste', -res.data.data.length)(dispatch))
+            .then(() => oppdaterArbeidslisteForBruker(prepareForDispatch(arbeidsliste))(dispatch));
         props.lukkModal();
     }
 });
