@@ -1,5 +1,10 @@
 import { PropTypes as PT } from 'react';
 
+export const feilmeldingModalShape = PT.shape({
+    aarsak: PT.string,
+    brukereError: PT.arrayOf(PT.string).isRequired
+});
+
 export const enhetShape = PT.shape({
     enhetId: PT.string,
     navn: PT.string

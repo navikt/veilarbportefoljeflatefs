@@ -8,6 +8,7 @@ import Textarea from '../components/textarea/textarea';
 import { lagreArbeidsliste } from '../ducks/arbeidsliste';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { leggTilStatustall } from '../ducks/statustall';
+import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding';
 
 const KOMMENTAR_MAKS_LENGDE = 200;
 
@@ -108,14 +109,30 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-function prepareForDispatch(arbeidsliste, innloggetVeileder) {
-    return arbeidsliste.map((a) => ({
-        ...a,
-        sistEndretAv: { veilederId: innloggetVeileder },
-        endringstidspunkt: new Date().toISOString(),
-        arbeidslisteAktiv: true
-    }));
+function oppdaterState(res, arbeidsliste, innloggetVeileder, dispatch) {
+    const brukereOK = res.data.data;
+    const brukereError = res.data.error;
+
+    const arbeidslisteToDispatch = arbeidsliste
+        .map((a) => ({
+            ...a,
+            sistEndretAv: { veilederId: innloggetVeileder },
+            endringstidspunkt: new Date().toISOString(),
+            arbeidslisteAktiv: true
+        }))
+        .filter((bruker) => brukereOK.includes(bruker.fnr));
+
+    if (brukereError.length > 0) {
+        visFeiletModal({
+            aarsak: LEGG_TIL_ARBEIDSLISTE_FEILET,
+            brukereError
+        })(dispatch);
+    }
+
+    leggTilStatustall('minArbeidsliste', brukereOK.length)(dispatch);
+    return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch, innloggetVeileder)(dispatch);
 }
+
 const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
         const arbeidsliste = formData.arbeidsliste.map((bruker, index) => ({
@@ -124,9 +141,7 @@ const mapDispatchToProps = () => ({
             frist: formData.arbeidsliste[index].frist
         }));
         lagreArbeidsliste(arbeidsliste)(dispatch)
-            .then((res) => leggTilStatustall('minArbeidsliste', res.data.data.length)(dispatch))
-            // eslint-disable-next-line max-len
-            .then(() => oppdaterArbeidslisteForBruker(prepareForDispatch(arbeidsliste, props.innloggetVeileder))(dispatch));
+            .then((res) => oppdaterState(res, arbeidsliste, props.innloggetVeileder, dispatch));
         props.lukkModal();
     }
 });

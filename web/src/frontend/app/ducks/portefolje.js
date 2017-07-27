@@ -3,6 +3,7 @@ import { STATUS, doThenDispatch, handterFeil, toJson } from './utils';
 import { IKKE_SATT } from '../konstanter';
 import { oppdaterPortefolje } from './filtrering';
 import { pagineringSetup } from './paginering';
+import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -122,7 +123,6 @@ export default function reducer(state = initialState, action) {
         case TILDEL_VEILEDER: {
             return {
                 ...state,
-                feilendeTilordninger: action.feilendeTilordninger,
                 tilordningerstatus: STATUS.OK,
                 data: {
                     ...state.data,
@@ -258,6 +258,12 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                     tilVeileder,
                     feilendeTilordninger: res.feilendeTilordninger
                 });
+                if (res.feilendeTilordninger.length > 0) {
+                    visFeiletModal({
+                        aarsak: TILORDNING_FEILET,
+                        brukereError: res.feilendeTilordninger
+                    })(dispatch);
+                }
                 if (filtergruppe === 'veileder') {
                     dispatch({
                         type: OPPDATER_ANTALL,
