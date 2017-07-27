@@ -5,8 +5,13 @@ import { Element } from 'nav-frontend-typografi';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 import Barlabel from './barlabel';
+import { FILTERGRUPPE_ENHET } from './filter-konstanter';
 
-function BarInput({ id, tekstId, antall, max, barClassname, ...props }) {
+
+function BarInput({ skalSkjules, id, tekstId, antall, max, barClassname, ...props }) {
+    if (skalSkjules) {
+        return null;
+    }
     return (
         <div className="skjema__input">
             <input type="radio" id={id} className="radioknapp" {...props} />
@@ -21,12 +26,36 @@ function BarInput({ id, tekstId, antall, max, barClassname, ...props }) {
     );
 }
 
+function ArbeidslisteTittel({ skalSkjules }) {
+    if (skalSkjules) {
+        return null;
+    }
+    return (
+        <div className="typo-element">
+            <Element className="blokk-xxs" tag="h3">
+                <FormattedMessage
+                    id="filtrering.status.arbeidsliste"
+                />
+            </Element>
+        </div>
+    );
+}
+
 BarInput.propTypes = {
     id: PT.string.isRequired,
     tekstId: PT.string.isRequired,
     antall: PT.number.isRequired,
     max: PT.number.isRequired,
-    barClassname: PT.string
+    barClassname: PT.string,
+    skalSkjules: PT.bool
+};
+
+BarInput.defaultProps = {
+    skalSkjules: false
+};
+
+ArbeidslisteTittel.propTypes = {
+    skalSkjules: PT.bool.isRequired
 };
 
 class FiltreringStatus extends Component {
@@ -132,13 +161,7 @@ class FiltreringStatus extends Component {
                     max={this.props.statustall.data.totalt}
                     barClassname="inaktiveBrukere"
                 />
-                <div className="typo-element">
-                    <Element className="blokk-xxs" tag="h3">
-                        <FormattedMessage
-                            id="filtrering.status.arbeidsliste"
-                        />
-                    </Element>
-                </div>
+                <ArbeidslisteTittel skalSkjules={this.props.filtergruppe === FILTERGRUPPE_ENHET} />
                 <BarInput
                     id="minArbeidsliste"
                     name="brukerstatus"
@@ -149,6 +172,7 @@ class FiltreringStatus extends Component {
                     antall={this.props.statustall.data.minArbeidsliste}
                     max={this.props.statustall.data.totalt}
                     barClassname="inaktiveBrukere"
+                    skalSkjules={this.props.filtergruppe === FILTERGRUPPE_ENHET}
                 />
             </div>
         );

@@ -9,6 +9,8 @@ export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 
+export const FILTERGRUPPE_ENHET = 'enhet';
+
 
 export function lagConfig(data) {
     if (typeof data === 'string') {
