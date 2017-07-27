@@ -9,15 +9,16 @@ import {
 } from '../ducks/portefolje';
 import TabellOverskrift from './../components/tabell-overskrift';
 import Toolbar from './../components/toolbar/toolbar';
-import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
+import { enhetShape, veilederShape, filtervalgShape, feilmeldingModalShape } from './../proptype-shapes';
 import { leggEnhetIUrl } from '../utils/utils';
 import { ASCENDING, DESCENDING, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
-import TilordningFeiletModal from '../modal/tilordning-feilet-modal';
+import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
 import ServerFeilModal from '../modal/server-feil-modal';
 import { STATUS } from '../ducks/utils';
+import { LEGG_TIL_ARBEIDSLISTE_FEILET, skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmelding';
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
@@ -69,22 +70,16 @@ class VeilederPortefoljeVisning extends Component {
             sorteringsrekkefolge,
             sorteringsfelt,
             valgtEnhet,
-            clearFeilendeTilordninger,
             clearTilordningFeil,
             filtervalg,
             visningsmodus,
-            visesAnnenVeiledersPortefolje
+            visesAnnenVeiledersPortefolje,
+            closeFeilmeldingModal,
+            feilmeldingModal
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
-
-        let fnr = [];
-        const feil = portefolje.feilendeTilordninger;
-        if (feil && feil.length > 0) {
-            fnr = feil.map((b) => b.brukerFnr);
-        }
-
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         return (
@@ -124,10 +119,20 @@ class VeilederPortefoljeVisning extends Component {
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
-                    <TilordningFeiletModal
-                        isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
-                        fnr={fnr}
-                        clearFeilendeTilordninger={clearFeilendeTilordninger}
+                    <FeilmeldingBrukereModal
+                        isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
+                        fnr={feilmeldingModal.brukereError}
+                        onClose={closeFeilmeldingModal}
+                        tittelTekstID="modal.tilordning.feilet.tittel"
+                        infotekstTekstID="modal.tilordning.feilet.infotekst"
+                    />
+                    <FeilmeldingBrukereModal
+                        isOpen={feilmeldingModal.aarsak === LEGG_TIL_ARBEIDSLISTE_FEILET}
+                        fnr={feilmeldingModal.brukereError}
+                        onClose={closeFeilmeldingModal}
+                        tittelTekstID="modal.opprett.arbeidsliste.feilet.tittel"
+                        infotekstTekstID="modal.opprett.arbeidsliste.feilet.infotekst"
+
                     />
                     <ServerFeilModal
                         isOpen={portefolje.tilordningerstatus === 'ERROR'}
@@ -157,11 +162,12 @@ VeilederPortefoljeVisning.propTypes = {
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
     sorteringsfelt: PT.string.isRequired,
-    clearFeilendeTilordninger: PT.func.isRequired,
+    closeFeilmeldingModal: PT.func.isRequired,
     clearTilordningFeil: PT.func.isRequired,
     visningsmodus: PT.string.isRequired,
     filtervalg: filtervalgShape.isRequired,
-    visesAnnenVeiledersPortefolje: PT.bool.isRequired
+    visesAnnenVeiledersPortefolje: PT.bool.isRequired,
+    feilmeldingModal: feilmeldingModalShape.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -171,7 +177,8 @@ const mapStateToProps = (state) => ({
     sorteringsfelt: state.portefolje.sorteringsfelt,
     visningsmodus: state.veilederpaginering.visningsmodus,
     filtervalg: state.filtreringMinoversikt,
-    innloggetVeilederIdent: state.enheter.ident
+    innloggetVeilederIdent: state.enheter.ident,
+    feilmeldingModal: state.feilmeldingModal
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -179,7 +186,8 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
-    clearTilordningFeil: () => dispatch(settTilordningStatusOk())
+    clearTilordningFeil: () => dispatch(settTilordningStatusOk()),
+    closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);

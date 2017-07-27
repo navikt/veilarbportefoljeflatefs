@@ -51,7 +51,7 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
 //mock.get('/veilarbveileder/tjenester/enhet/0709/veiledere', respondWith(veiledere));
 //mock.get('/veilarbportefolje/tjenester/enhet/0709/statustall', respondWith(delayed(1000, randomFailure(statustall))));
 //mock.post('express:/veilarbportefolje/tjenester/enhet/:enhet/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefolje(queryParams, bodyParams, extra.enhet, brukere)));
-//mock.post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, { feilendeTilordninger: [] })));
+mock.post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, { feilendeTilordninger: ['11111111111','22222222222'] })));
 //mock.post('express:/veilarbportefolje/tjenester/veileder/:ident/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefoljeForVeileder(queryParams, bodyParams, brukere)));
 //mock.get('express:/veilarbportefolje/tjenester/veileder/:veileder/statustall*', respondWith(delayed(1000, randomFailure(statustall))));
 
@@ -59,7 +59,7 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
 //mock.post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, { feilendeTilordninger: [] })));
 
 // arbeidsliste-api
-// mock.put('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
+mock.put('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, { error: ['111111111111', '222222222222'], data: [] })));
 // mock.post('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
 // mock.delete('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
 // mock.post('/veilarbportefolje/tjenester/arbeidsliste/delete', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
