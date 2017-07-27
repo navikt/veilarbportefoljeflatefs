@@ -146,7 +146,7 @@ class FiltreringStatus extends Component {
                     onChange={this.handleChange}
                     checked={brukerstatus === 'MIN_ARBEIDSLISTE'}
                     tekstId="enhet.filtrering.filtrering.oversikt.min.arbeidsliste.checkbox"
-                    antall={this.props.statustall.data.inaktiveBrukere} /* TODO: Må endres til min arbeidsliste */
+                    antall={this.props.statustall.data.minArbeidsliste}
                     max={this.props.statustall.data.totalt}
                     barClassname="inaktiveBrukere"
                 />
