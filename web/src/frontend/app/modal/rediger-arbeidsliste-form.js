@@ -7,6 +7,7 @@ import Textarea from '../components/textarea/textarea';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { brukerShape } from '../proptype-shapes';
 import { redigerArbeidsliste } from '../ducks/arbeidsliste';
+import { visServerfeilModal } from '../ducks/modal-serverfeil';
 
 const KOMMENTAR_MAKS_LENGDE = 50;
 
@@ -78,15 +79,21 @@ const RedigerArbeidslisteFormValidation = validForm({
     }
 })(RedigerArbeidslisteForm);
 
-function prepareForDispatch(arbeidsliste, innloggetVeileder, fnr) {
-    return Array.of({
+
+function oppdaterState(res, arbeidsliste, innloggetVeileder, fnr, dispatch) {
+    if (!res) {
+        return visServerfeilModal()(dispatch);
+    }
+
+    const arbeidslisteToDispatch = Array.of({
         ...arbeidsliste,
         fnr,
         sistEndretAv: { veilederId: innloggetVeileder },
         endringstidspunkt: new Date().toISOString()
     });
-}
 
+    return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
+}
 const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
         const arbeidsliste = {
@@ -94,8 +101,7 @@ const mapDispatchToProps = () => ({
             frist: formData.frist
         };
         redigerArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
-            // eslint-disable-next-line max-len
-            .then(() => oppdaterArbeidslisteForBruker(prepareForDispatch(arbeidsliste, props.innloggetVeileder, props.bruker.fnr))(dispatch));
+            .then((res) => oppdaterState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, dispatch));
         props.lukkModal();
     }
 

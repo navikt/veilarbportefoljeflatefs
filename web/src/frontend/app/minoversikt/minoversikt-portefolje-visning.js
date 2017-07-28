@@ -1,24 +1,25 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import {
-    hentPortefoljeForVeileder,
-    settSortering,
-    nullstillFeilendeTilordninger,
-    settTilordningStatusOk
-} from '../ducks/portefolje';
+import { hentPortefoljeForVeileder, settSortering } from '../ducks/portefolje';
 import TabellOverskrift from './../components/tabell-overskrift';
 import Toolbar from './../components/toolbar/toolbar';
 import { enhetShape, veilederShape, filtervalgShape, feilmeldingModalShape } from './../proptype-shapes';
 import { leggEnhetIUrl } from '../utils/utils';
-import { ASCENDING, DESCENDING, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
+import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
 import ServerFeilModal from '../modal/server-feil-modal';
 import { STATUS } from '../ducks/utils';
-import { LEGG_TIL_ARBEIDSLISTE_FEILET, skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmelding';
+import {
+    skjulFeilmeldingModal,
+    FJERN_FRA_ARBEIDSLISTE_FEILET,
+    LEGG_TIL_ARBEIDSLISTE_FEILET,
+    TILORDNING_FEILET
+} from '../ducks/modal-feilmelding-brukere';
+import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
@@ -70,12 +71,13 @@ class VeilederPortefoljeVisning extends Component {
             sorteringsrekkefolge,
             sorteringsfelt,
             valgtEnhet,
-            clearTilordningFeil,
             filtervalg,
             visningsmodus,
             visesAnnenVeiledersPortefolje,
             closeFeilmeldingModal,
-            feilmeldingModal
+            feilmeldingModal,
+            serverfeilModalSkalVises,
+            closeServerfeilModal
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
@@ -134,9 +136,17 @@ class VeilederPortefoljeVisning extends Component {
                         infotekstTekstID="modal.opprett.arbeidsliste.feilet.infotekst"
 
                     />
+                    <FeilmeldingBrukereModal
+                        isOpen={feilmeldingModal.aarsak === FJERN_FRA_ARBEIDSLISTE_FEILET}
+                        fnr={feilmeldingModal.brukereError}
+                        onClose={closeFeilmeldingModal}
+                        tittelTekstID="modal.fjern.arbeidsliste.feilet.tittel"
+                        infotekstTekstID="modal.fjern.arbeidsliste.feilet.infotekst"
+
+                    />
                     <ServerFeilModal
-                        isOpen={portefolje.tilordningerstatus === 'ERROR'}
-                        clearTilordningFeil={clearTilordningFeil}
+                        isOpen={serverfeilModalSkalVises}
+                        onClose={closeServerfeilModal}
                     />
                 </Innholdslaster>
             </div>
@@ -163,11 +173,12 @@ VeilederPortefoljeVisning.propTypes = {
     sorteringsrekkefolge: PT.string.isRequired,
     sorteringsfelt: PT.string.isRequired,
     closeFeilmeldingModal: PT.func.isRequired,
-    clearTilordningFeil: PT.func.isRequired,
     visningsmodus: PT.string.isRequired,
     filtervalg: filtervalgShape.isRequired,
     visesAnnenVeiledersPortefolje: PT.bool.isRequired,
-    feilmeldingModal: feilmeldingModalShape.isRequired
+    feilmeldingModal: feilmeldingModalShape.isRequired,
+    serverfeilModalSkalVises: PT.bool.isRequired,
+    closeServerfeilModal: PT.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -178,16 +189,16 @@ const mapStateToProps = (state) => ({
     visningsmodus: state.veilederpaginering.visningsmodus,
     filtervalg: state.filtreringMinoversikt,
     innloggetVeilederIdent: state.enheter.ident,
-    feilmeldingModal: state.feilmeldingModal
+    feilmeldingModal: state.feilmeldingModal,
+    serverfeilModalSkalVises: state.serverfeilModal.modalVises
 });
 
 const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
-    clearTilordningFeil: () => dispatch(settTilordningStatusOk()),
-    closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal())
+    closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal()),
+    closeServerfeilModal: () => dispatch(skjulServerfeilModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);

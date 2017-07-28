@@ -1,23 +1,27 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import {
-    hentPortefoljeForEnhet,
-    nullstillFeilendeTilordninger,
-    settTilordningStatusOk,
-    settSortering
-} from '../ducks/portefolje';
+import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
 import Toolbar from './../components/toolbar/toolbar';
 import EnhetTabell from './enhetsportefolje-tabell';
 import TabellOverskrift from './../components/tabell-overskrift';
-import { enhetShape, filtervalgShape, portefoljeShape, valgtEnhetShape, veilederShape } from '../proptype-shapes';
+import {
+    enhetShape,
+    filtervalgShape,
+    portefoljeShape,
+    valgtEnhetShape,
+    veilederShape,
+    feilmeldingModalShape
+} from '../proptype-shapes';
 import { ASCENDING, DEFAULT_PAGINERING_STORRELSE, DESCENDING } from '../konstanter';
 import { diagramSkalVises } from './../minoversikt/diagram/util';
 import Diagram from './../minoversikt/diagram/diagram';
 import VelgfilterMelding from './velg-filter-melding';
-import TilordningFeiletModal from '../modal/tilordning-feilet-modal';
 import ServerFeilModal from '../modal/server-feil-modal';
 import { STATUS } from '../ducks/utils';
+import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
+import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
+import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmelding-brukere';
 
 function antallFilter(filtervalg) {
     return Object.entries(filtervalg)
@@ -84,19 +88,15 @@ class EnhetsportefoljeVisning extends Component {
             sorteringsrekkefolge,
             sorteringsfelt,
             filtervalg,
-            clearFeilendeTilordninger,
-            clearTilordningFeil,
-            visningsmodus
+            visningsmodus,
+            serverfeilModalSkalVises,
+            closeServerfeilModal,
+            feilmeldingModal,
+            closeFeilmeldingModal
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
-
-        let fnr = [];
-        const feil = portefolje.feilendeTilordninger;
-        if (feil && feil.length > 0) {
-            fnr = feil.map((b) => b.brukerFnr);
-        }
 
         const harFilter = antallFilter(filtervalg) !== 0;
         if (!harFilter) {
@@ -116,7 +116,9 @@ class EnhetsportefoljeVisning extends Component {
                         tekst="enhet.portefolje.paginering.tekst"
                     />
                     <Toolbar
-                        filtervalg={filtervalg} onPaginering={(fra, antall) => hentPortefolje(
+                        filtergruppe="enhet"
+                        filtervalg={filtervalg}
+                        onPaginering={(fra, antall) => hentPortefolje(
                             valgtEnhet.enhet.enhetId,
                             sorteringsrekkefolge,
                             sorteringsfelt,
@@ -135,14 +137,16 @@ class EnhetsportefoljeVisning extends Component {
                                 portefolje={portefolje}
                             />
                     }
-                    <TilordningFeiletModal
-                        isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
-                        fnr={fnr}
-                        clearFeilendeTilordninger={clearFeilendeTilordninger}
+                    <FeilmeldingBrukereModal
+                        isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
+                        fnr={feilmeldingModal.brukereError}
+                        onClose={closeFeilmeldingModal}
+                        tittelTekstID="modal.tilordning.feilet.tittel"
+                        infotekstTekstID="modal.tilordning.feilet.infotekst"
                     />
                     <ServerFeilModal
-                        isOpen={portefolje.tilordningerstatus === 'ERROR'}
-                        clearTilordningFeil={clearTilordningFeil}
+                        isOpen={serverfeilModalSkalVises}
+                        onClose={closeServerfeilModal}
                     />
                 </Innholdslaster>
             </div>
@@ -166,10 +170,12 @@ EnhetsportefoljeVisning.propTypes = {
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
     sorteringsfelt: PT.string.isRequired,
-    clearFeilendeTilordninger: PT.func.isRequired,
-    clearTilordningFeil: PT.func.isRequired,
     filtervalg: filtervalgShape.isRequired,
-    visningsmodus: PT.string.isRequired
+    visningsmodus: PT.string.isRequired,
+    serverfeilModalSkalVises: PT.bool.isRequired,
+    closeServerfeilModal: PT.func.isRequired,
+    feilmeldingModal: feilmeldingModalShape.isRequired,
+    closeFeilmeldingModal: PT.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -179,15 +185,17 @@ const mapStateToProps = (state) => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     filtervalg: state.filtrering,
-    visningsmodus: state.veilederpaginering.visningsmodus
+    visningsmodus: state.veilederpaginering.visningsmodus,
+    serverfeilModalSkalVises: state.serverfeilModal.modalVises,
+    feilmeldingModal: state.feilmeldingModal
 });
 
 const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, rekkefolge, sorteringsfelt, filtervalg, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
-    clearTilordningFeil: () => dispatch(settTilordningStatusOk())
+    closeServerfeilModal: () => dispatch(skjulServerfeilModal()),
+    closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetsportefoljeVisning);
