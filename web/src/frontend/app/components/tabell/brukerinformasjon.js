@@ -1,4 +1,5 @@
 import React, { PropTypes as PT } from 'react';
+import classnames from 'classnames';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -10,15 +11,14 @@ const settSammenNavn = (bruker) => {
 const brukerFnr = (bruker) => <span className="brukerinformasjon__fnr">{bruker.fnr}</span>;
 
 const brukerNavn = (bruker, enhetId) => (
-    <div className="brukerinformasjon__navn">
-        <a
-            href={`https://${window.location.hostname}` +
+    <a
+        href={`https://${window.location.hostname}` +
                 `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
-            className="lenke lenke--frittstaende"
-        >
-            {settSammenNavn(bruker)}
-        </a>
-    </div>
+        className={classnames('lenke lenke--frittstaende brukerinformasjon__navn',
+                { arbeidslistebruker: bruker.arbeidsliste.arbeidslisteAktiv })}
+    >
+        {settSammenNavn(bruker)}
+    </a>
 );
 
 const checkBox = (bruker, settMarkert) => (<div className="skjema__input">
