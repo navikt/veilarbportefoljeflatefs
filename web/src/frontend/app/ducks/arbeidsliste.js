@@ -46,7 +46,7 @@ export default function reducer(state = initialState, action) {
 
 // Action Creators
 export function lagreArbeidsliste(arbeidsliste) {
-    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'put'), {
+    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'post'), {
         OK: ARBEIDSLISTE_LAGRE_OK,
         FEILET: ARBEIDSLISTE_LAGRE_FEILET,
         PENDING: ARBEIDSLISTE_LAGRE_PENDING
@@ -62,7 +62,7 @@ export function slettArbeidsliste(arbeidsliste) {
 }
 
 export function redigerArbeidsliste(arbeidsliste, fnr) {
-    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'post', fnr), {
+    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'put', fnr), {
         OK: ARBEIDSLISTE_REDIGER_OK,
         FEILET: ARBEIDSLISTE_REDIGER_FEILET,
         PENDING: ARBEIDSLISTE_REDIGER_PENDING
