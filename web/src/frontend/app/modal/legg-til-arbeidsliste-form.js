@@ -8,7 +8,8 @@ import Textarea from '../components/textarea/textarea';
 import { lagreArbeidsliste } from '../ducks/arbeidsliste';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { leggTilStatustall } from '../ducks/statustall';
-import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding';
+import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
+import { visServerfeilModal } from '../ducks/modal-serverfeil';
 
 const KOMMENTAR_MAKS_LENGDE = 200;
 
@@ -110,6 +111,10 @@ const mapStateToProps = (state, props) => {
 };
 
 function oppdaterState(res, arbeidsliste, innloggetVeileder, dispatch) {
+    if (!res) {
+        return visServerfeilModal()(dispatch);
+    }
+
     const brukereOK = res.data.data;
     const brukereError = res.data.error;
 

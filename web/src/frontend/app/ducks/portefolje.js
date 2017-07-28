@@ -3,7 +3,8 @@ import { STATUS, doThenDispatch, handterFeil, toJson } from './utils';
 import { IKKE_SATT } from '../konstanter';
 import { oppdaterPortefolje } from './filtrering';
 import { pagineringSetup } from './paginering';
-import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding';
+import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
+import { visServerfeilModal } from './modal-serverfeil';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -271,7 +272,11 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                     });
                 }
             })
-            .catch(handterFeil(dispatch, TILDEL_VEILEDER_FEILET))
+            .catch((error) => {
+                visServerfeilModal()(dispatch);
+                // TILDEL_VEILEDER_FEILET setter errorstatus slik at spinner forsvinner
+                return handterFeil(dispatch, TILDEL_VEILEDER_FEILET)(error);
+            })
             .then(() => {
                 // Venter litt slik at indeks kan komme i sync
                 setTimeout(() => {

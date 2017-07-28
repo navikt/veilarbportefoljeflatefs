@@ -12,7 +12,8 @@ import veilederpagineringReducer from './ducks/veilederpaginering';
 import filtreringReducer, { initialState } from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
-import feilmedlingModalReducer from './ducks/modal-feilmelding';
+import serverfeilModalReducer from './ducks/modal-serverfeil';
+import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import diagramReducer from './ducks/diagram';
 import sideReducer from './ducks/ui/side';
 import { slettCleanIUrl } from './utils/utils';
@@ -61,6 +62,7 @@ export default combineReducers({
         named('veileder', filtreringReducer), slettCleanIUrl, initialState),
     filtreringVeilederoversikt: named('veiledere', filtreringReducer),
     modal: modalReducer,
+    serverfeilModal: serverfeilModalReducer,
     feilmeldingModal: feilmedlingModalReducer,
     diagram: diagramReducer,
     arbeidsliste: arbeidslisteReducer,

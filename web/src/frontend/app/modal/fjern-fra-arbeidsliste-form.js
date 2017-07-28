@@ -7,6 +7,8 @@ import { slettArbeidsliste } from '../ducks/arbeidsliste';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { brukerShape } from '../proptype-shapes';
 import { leggTilStatustall } from '../ducks/statustall';
+import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
+import { visServerfeilModal } from '../ducks/modal-serverfeil';
 
 function brukerLabel(bruker) {
     return (
@@ -58,13 +60,32 @@ FjernFraArbeidslisteForm.propTypes = {
     handleSubmit: PT.func.isRequired
 };
 
+function oppdaterState(res, arbeidsliste, dispatch) {
+    if (!res) {
+        return visServerfeilModal()(dispatch);
+    }
+    const brukereOK = res.data.data;
+    const brukereError = res.data.error;
 
-function prepareForDispatch(arbeidsliste) {
-    return arbeidsliste.map((a) => ({
-        ...a,
-        arbeidslisteAktiv: false
-    }));
+    const arbeidslisteToDispatch = arbeidsliste
+        .map((a) => ({
+            ...a,
+            arbeidslisteAktiv: false
+        }))
+        .filter((bruker) => brukereOK.includes(bruker.fnr));
+
+    if (brukereError.length > 0) {
+        visFeiletModal({
+            aarsak: FJERN_FRA_ARBEIDSLISTE_FEILET,
+            brukereError
+        })(dispatch);
+    }
+
+    leggTilStatustall('minArbeidsliste', -brukereOK.length)(dispatch);
+
+    return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
+
 const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
         const arbeidsliste = props.valgteBrukere.map((bruker) => ({
@@ -73,8 +94,7 @@ const mapDispatchToProps = () => ({
             frist: bruker.arbeidsliste.frist
         }));
         slettArbeidsliste(arbeidsliste)(dispatch)
-            .then((res) => leggTilStatustall('minArbeidsliste', -res.data.data.length)(dispatch))
-            .then(() => oppdaterArbeidslisteForBruker(prepareForDispatch(arbeidsliste))(dispatch));
+            .then((res) => oppdaterState(res, arbeidsliste, dispatch));
         props.lukkModal();
     }
 });
