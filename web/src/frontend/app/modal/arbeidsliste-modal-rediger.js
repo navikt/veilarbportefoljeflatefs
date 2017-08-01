@@ -1,7 +1,7 @@
 
 import React, { PropTypes as PT } from 'react';
 import Modal from 'nav-frontend-modal';
-import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
 import { brukerShape } from '../proptype-shapes';
@@ -21,12 +21,6 @@ function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder
                 <Innholdstittel tag="h1" className="blokk-xs">
                     <FormattedMessage id="modal.rediger.arbeidsliste.tittel" />
                 </Innholdstittel>
-                <Normaltekst className="blokk-s">
-                    <FormattedMessage
-                        id="modal.legg.til.arbeidsliste.infotekst"
-                        values={{ antall: bruker.length }}
-                    />
-                </Normaltekst>
                 <RedigerArbeidslisteForm
                     bruker={bruker}
                     lukkModal={lukkModal}
