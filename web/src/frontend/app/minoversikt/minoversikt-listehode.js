@@ -7,7 +7,8 @@ import {
     ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
-    UTLOPTE_AKTIVITETER } from '../filtrering/filter-konstanter';
+    UTLOPTE_AKTIVITETER,
+    MIN_ARBEIDSLISTE} from '../filtrering/filter-konstanter';
 
 
 function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt }) {
@@ -22,6 +23,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                 />
                 <Listeoverskrift
                     className="listeoverskrift__arbeidsliste listeoverskrift"
+                    skalVises={!!filtervalg && filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
                     id="portefolje.tabell.arbeidsliste"
                 />
                 <Listeoverskrift
@@ -67,7 +69,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === 'arbeidsliste_frist'}
                     tekstId="portefolje.tabell.ddmmyy"
-                    skalVises
+                    skalVises={!!filtervalg && filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
                     className={'sortering-header__dato'}
                 />
                 <SorteringHeader
