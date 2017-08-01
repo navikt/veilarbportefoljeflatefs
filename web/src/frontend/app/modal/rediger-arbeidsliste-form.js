@@ -9,7 +9,7 @@ import { brukerShape } from '../proptype-shapes';
 import { redigerArbeidsliste } from '../ducks/arbeidsliste';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 
-const KOMMENTAR_MAKS_LENGDE = 50;
+const KOMMENTAR_MAKS_LENGDE = 250;
 
 const begrensetKommentarLengde = rules.maxLength(
     KOMMENTAR_MAKS_LENGDE,
