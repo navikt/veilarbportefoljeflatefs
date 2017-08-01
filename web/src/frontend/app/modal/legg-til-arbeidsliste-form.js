@@ -11,7 +11,7 @@ import { leggTilStatustall } from '../ducks/statustall';
 import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 
-const KOMMENTAR_MAKS_LENGDE = 200;
+const KOMMENTAR_MAKS_LENGDE = 250;
 
 const begrensetKommentarLengde = rules.maxLength(
     KOMMENTAR_MAKS_LENGDE,
