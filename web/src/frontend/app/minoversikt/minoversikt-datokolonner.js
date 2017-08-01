@@ -4,7 +4,8 @@ import DatoKolonne from '../components/datokolonne';
 import { ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
-    UTLOPTE_AKTIVITETER } from '../filtrering/filter-konstanter';
+    UTLOPTE_AKTIVITETER,
+    MIN_ARBEIDSLISTE} from '../filtrering/filter-konstanter';
 import { filtervalgShape } from '../proptype-shapes';
 
 
@@ -13,7 +14,7 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }) {
         <div className="datokolonner__wrapper">
             <DatoKolonne
                 dato={bruker.arbeidsliste.frist || ''}
-                skalVises={bruker.arbeidsliste.arbeidslisteAktiv || false}
+                skalVises={filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
             />
             <DatoKolonne
                 dato={(ytelse === ytelsevalg.AAP_MAXTID ? bruker.aapMaxtid : bruker.utlopsdato) || ''}
