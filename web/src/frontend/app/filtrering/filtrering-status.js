@@ -115,7 +115,7 @@ class FiltreringStatus extends Component {
                     tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfranav.brukere.checkbox"
                     antall={this.props.statustall.data.venterPaSvarFraNAV}
                     max={this.props.statustall.data.totalt}
-                    barClassname="inaktiveBrukere"
+                    barClassname="venterPaSvarFraNAV"
                 />
                 <BarInput
                     id="venterPaSvarFraBruker"
@@ -126,7 +126,7 @@ class FiltreringStatus extends Component {
                     tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfrabruker.brukere.checkbox"
                     antall={this.props.statustall.data.venterPaSvarFraBruker}
                     max={this.props.statustall.data.totalt}
-                    barClassname="inaktiveBrukere"
+                    barClassname="venterPaSvarFraBruker"
                 />
                 <BarInput
                     id="utlopteAktiviteter"
@@ -137,7 +137,7 @@ class FiltreringStatus extends Component {
                     tekstId="enhet.filtrering.filtrering.oversikt.utlopteaktiviteter.brukere.checkbox"
                     antall={this.props.statustall.data.utlopteAktiviteter}
                     max={this.props.statustall.data.totalt}
-                    barClassname="inaktiveBrukere"
+                    barClassname="utlopteAktiviteter"
                 />
                 <BarInput
                     id="ikkeIavtaltAktivitet"
@@ -148,7 +148,7 @@ class FiltreringStatus extends Component {
                     tekstId="enhet.filtrering.filtrering.oversikt.ikkeiavtaltaktivitet.brukere.checkbox"
                     antall={this.props.statustall.data.ikkeIavtaltAktivitet}
                     max={this.props.statustall.data.totalt}
-                    barClassname="inaktiveBrukere"
+                    barClassname="ikkeIAvtaltAktivitet"
                 />
                 <BarInput
                     id="iavtaltAktivitet"
@@ -159,7 +159,7 @@ class FiltreringStatus extends Component {
                     tekstId="enhet.filtrering.filtrering.oversikt.iavtaltaktivitet.brukere.checkbox"
                     antall={this.props.statustall.data.iavtaltAktivitet}
                     max={this.props.statustall.data.totalt}
-                    barClassname="inaktiveBrukere"
+                    barClassname="iAvtaltAktivitet"
                 />
                 <ArbeidslisteTittel skalSkjules={this.props.filtergruppe === FILTERGRUPPE_ENHET} />
                 <BarInput
@@ -171,7 +171,7 @@ class FiltreringStatus extends Component {
                     tekstId="enhet.filtrering.filtrering.oversikt.min.arbeidsliste.checkbox"
                     antall={this.props.statustall.data.minArbeidsliste}
                     max={this.props.statustall.data.totalt}
-                    barClassname="inaktiveBrukere"
+                    barClassname="minArbeidsliste"
                     skalSkjules={this.props.filtergruppe === FILTERGRUPPE_ENHET}
                 />
             </div>
