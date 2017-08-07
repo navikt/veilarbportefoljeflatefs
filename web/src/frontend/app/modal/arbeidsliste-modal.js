@@ -55,6 +55,8 @@ class ArbeidslisteModal extends Component {
     }
 
     fjernFraModal(valgteBrukere) {
+        const brukereSomSkalFjernes = valgteBrukere.filter((bruker) => !bruker.arbeidsliste.kommentar);
+
         return (
             <div className="arbeidsliste__modal">
                 <Innholdstittel tag="h1" className="blokk-xs">
@@ -63,11 +65,11 @@ class ArbeidslisteModal extends Component {
                 <Normaltekst className="blokk-s">
                     <FormattedMessage
                         id="modal.fjern.fra.arbeidsliste.infotekst"
-                        values={{ antall: valgteBrukere.length }}
+                        values={{ antall: brukereSomSkalFjernes.length }}
                     />
                 </Normaltekst>
                 <FjernFraArbeidslisteForm
-                    valgteBrukere={valgteBrukere}
+                    valgteBrukere={brukereSomSkalFjernes}
                     lukkModal={this.lukkModal}
                 />
             </div>
