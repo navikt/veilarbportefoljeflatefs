@@ -55,7 +55,7 @@ class ArbeidslisteModal extends Component {
     }
 
     fjernFraModal(valgteBrukere) {
-        const brukereSomSkalFjernes = valgteBrukere.filter((bruker) => !bruker.arbeidsliste.kommentar);
+        const brukereSomSkalFjernes = valgteBrukere.filter((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
 
         return (
             <div className="arbeidsliste__modal">
