@@ -8,12 +8,12 @@ import Barlabel from './barlabel';
 import { FILTERGRUPPE_ENHET } from './filter-konstanter';
 
 
-function BarInput({ skalSkjules, id, tekstId, antall, max, barClassname, ...props }) {
+function BarInput({ skalSkjules, id, tekstId, antall, max, barClassname, firstInGroup, ...props }) {
     if (skalSkjules) {
         return null;
     }
     return (
-        <div className="skjema__input">
+        <div className={`skjema__input ${firstInGroup ? 'forsteBarlabelIGruppe': ''}`}>
             <input type="radio" id={id} className="radioknapp" {...props} />
             <Barlabel
                 htmlFor={id}
@@ -31,13 +31,15 @@ function ArbeidslisteTittel({ skalSkjules }) {
         return null;
     }
     return (
-        <div className="typo-element">
-            <Element className="blokk-xxs" tag="h3">
-                <FormattedMessage
-                    id="filtrering.status.arbeidsliste"
-                />
-            </Element>
-        </div>
+        <p className="minArbeidsliste__tittel">
+            <div className="typo-element">
+                <Element className="blokk-xxs" tag="h3">
+                    <FormattedMessage
+                        id="filtrering.status.arbeidsliste"
+                    />
+                </Element>
+            </div>
+        </p>
     );
 }
 
@@ -47,11 +49,13 @@ BarInput.propTypes = {
     antall: PT.number.isRequired,
     max: PT.number.isRequired,
     barClassname: PT.string,
-    skalSkjules: PT.bool
+    skalSkjules: PT.bool,
+    firstInGroup: PT.bool
 };
 
 BarInput.defaultProps = {
-    skalSkjules: false
+    skalSkjules: false,
+    firstInGroup: false
 };
 
 ArbeidslisteTittel.propTypes = {
@@ -96,17 +100,6 @@ class FiltreringStatus extends Component {
                 </div>
                 { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : null }
                 <BarInput
-                    id="inaktiveBrukere"
-                    name="brukerstatus"
-                    value="INAKTIVE_BRUKERE"
-                    onChange={this.handleChange}
-                    checked={brukerstatus === 'INAKTIVE_BRUKERE'}
-                    tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
-                    antall={this.props.statustall.data.inaktiveBrukere}
-                    max={this.props.statustall.data.totalt}
-                    barClassname="inaktiveBrukere"
-                />
-                <BarInput
                     id="venterPaSvarFraNAV"
                     name="brukerstatus"
                     value="VENTER_PA_SVAR_FRA_NAV"
@@ -116,6 +109,7 @@ class FiltreringStatus extends Component {
                     antall={this.props.statustall.data.venterPaSvarFraNAV}
                     max={this.props.statustall.data.totalt}
                     barClassname="venterPaSvarFraNAV"
+                    firstInGroup={true}
                 />
                 <BarInput
                     id="venterPaSvarFraBruker"
@@ -138,6 +132,7 @@ class FiltreringStatus extends Component {
                     antall={this.props.statustall.data.utlopteAktiviteter}
                     max={this.props.statustall.data.totalt}
                     barClassname="utlopteAktiviteter"
+                    firstInGroup={true}
                 />
                 <BarInput
                     id="ikkeIavtaltAktivitet"
@@ -160,6 +155,18 @@ class FiltreringStatus extends Component {
                     antall={this.props.statustall.data.iavtaltAktivitet}
                     max={this.props.statustall.data.totalt}
                     barClassname="iAvtaltAktivitet"
+                />
+                <BarInput
+                    id="inaktiveBrukere"
+                    name="brukerstatus"
+                    value="INAKTIVE_BRUKERE"
+                    onChange={this.handleChange}
+                    checked={brukerstatus === 'INAKTIVE_BRUKERE'}
+                    tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
+                    antall={this.props.statustall.data.inaktiveBrukere}
+                    max={this.props.statustall.data.totalt}
+                    barClassname="inaktiveBrukere"
+                    firstInGroup={true}
                 />
                 <ArbeidslisteTittel skalSkjules={this.props.filtergruppe === FILTERGRUPPE_ENHET} />
                 <BarInput
