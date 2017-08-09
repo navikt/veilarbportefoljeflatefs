@@ -31,7 +31,7 @@ function ArbeidslisteTittel({ skalSkjules }) {
         return null;
     }
     return (
-        <p className="minArbeidsliste__tittel">
+        <div className="minArbeidsliste__tittel">
             <div className="typo-element">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage
@@ -39,7 +39,7 @@ function ArbeidslisteTittel({ skalSkjules }) {
                     />
                 </Element>
             </div>
-        </p>
+        </div>
     );
 }
 
