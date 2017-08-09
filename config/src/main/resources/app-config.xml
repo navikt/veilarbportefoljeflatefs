@@ -29,6 +29,10 @@
         <credential alias="isso-rp-user"/>
     </resources>
 
+    <serverOptions>
+        <memoryParameters resourceAlias="veilarb-memparams"/>
+    </serverOptions>
+
     <loadBalancer isAlive="/veilarbportefoljeflatefs/internal/isAlive" />
 
     <security serviceUserResourceAlias="srvveilarbportefoljeflatefs"/>
