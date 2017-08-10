@@ -13,7 +13,7 @@ function BarInput({ skalSkjules, id, tekstId, antall, max, barClassname, firstIn
         return null;
     }
     return (
-        <div className={`skjema__input ${firstInGroup ? 'forsteBarlabelIGruppe': ''}`}>
+        <div className={`skjema__input ${firstInGroup ? 'forsteBarlabelIGruppe' : ''}`}>
             <input type="radio" id={id} className="radioknapp" {...props} />
             <Barlabel
                 htmlFor={id}
@@ -109,7 +109,7 @@ class FiltreringStatus extends Component {
                     antall={this.props.statustall.data.venterPaSvarFraNAV}
                     max={this.props.statustall.data.totalt}
                     barClassname="venterPaSvarFraNAV"
-                    firstInGroup={true}
+                    firstInGroup
                 />
                 <BarInput
                     id="venterPaSvarFraBruker"
@@ -132,7 +132,7 @@ class FiltreringStatus extends Component {
                     antall={this.props.statustall.data.utlopteAktiviteter}
                     max={this.props.statustall.data.totalt}
                     barClassname="utlopteAktiviteter"
-                    firstInGroup={true}
+                    firstInGroup
                 />
                 <BarInput
                     id="ikkeIavtaltAktivitet"
@@ -166,7 +166,7 @@ class FiltreringStatus extends Component {
                     antall={this.props.statustall.data.inaktiveBrukere}
                     max={this.props.statustall.data.totalt}
                     barClassname="inaktiveBrukere"
-                    firstInGroup={true}
+                    firstInGroup
                 />
                 <ArbeidslisteTittel skalSkjules={this.props.filtergruppe === FILTERGRUPPE_ENHET} />
                 <BarInput
