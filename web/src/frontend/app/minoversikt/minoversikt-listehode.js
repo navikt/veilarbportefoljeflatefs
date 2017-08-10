@@ -8,7 +8,7 @@ import {
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER,
-    MIN_ARBEIDSLISTE} from '../filtrering/filter-konstanter';
+    MIN_ARBEIDSLISTE } from '../filtrering/filter-konstanter';
 
 
 function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt }) {
