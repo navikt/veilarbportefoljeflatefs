@@ -58,7 +58,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === 'etternavn'}
-                    tekstId="portefolje.tabell.navn"
+                    tekstId="portefolje.tabell.etternavn"
                 />
                 <SorteringHeader
                     sortering="fodselsnummer"
