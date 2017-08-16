@@ -18,8 +18,8 @@ function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekstId, ska
             >
                 <FormattedMessage id={tekstId} />
             </button>
-            {sortering === "etternavn" ?
-                <FormattedMessage id="portefolje.tabell.fornavn"/> : null
+            {sortering === 'etternavn' ?
+                <FormattedMessage id="portefolje.tabell.fornavn" /> : null
             }
         </span>
     );
