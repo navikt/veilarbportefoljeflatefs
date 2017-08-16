@@ -2,6 +2,9 @@ import * as Api from './../middleware/api';
 import { STATUS, doThenDispatch, handterFeil, toJson } from './utils';
 import { IKKE_SATT } from '../konstanter';
 import { oppdaterPortefolje } from './filtrering';
+import { pagineringSetup } from './paginering';
+import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
+import { visServerfeilModal } from './modal-serverfeil';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -17,6 +20,7 @@ const TILDEL_VEILEDER_FEILET = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_FEI
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
 const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
+const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
 
 function lagBrukerGuid(bruker) {
     return bruker.fnr === '' ? (`${Math.random()}`).slice(2) : bruker.fnr;
@@ -68,6 +72,20 @@ function updateBrukerInArray(brukere, action) {
     });
 }
 
+function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
+    return brukere
+        .map((bruker) => {
+            const arbeidslisteForBruker = arbeidsliste.filter((a) => a.fnr === bruker.fnr);
+            if (arbeidslisteForBruker.length === 1) {
+                return {
+                    ...bruker,
+                    arbeidsliste: { ...bruker.arbeidsliste, ...arbeidslisteForBruker[0] }
+                };
+            }
+            return bruker;
+        });
+}
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case PENDING:
@@ -106,7 +124,6 @@ export default function reducer(state = initialState, action) {
         case TILDEL_VEILEDER: {
             return {
                 ...state,
-                feilendeTilordninger: action.feilendeTilordninger,
                 tilordningerstatus: STATUS.OK,
                 data: {
                     ...state.data,
@@ -148,6 +165,18 @@ export default function reducer(state = initialState, action) {
                 }
             };
         }
+        case OPPDATER_ARBEIDSLISTE: {
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    brukere: updateArbeidslisteForBrukere(
+                        state.data.brukere,
+                        action.arbeidsliste
+                    )
+                }
+            };
+        }
         default:
             return state;
     }
@@ -155,7 +184,17 @@ export default function reducer(state = initialState, action) {
 
 // Action Creators
 export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
-    return doThenDispatch(() => Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg), {
+    const fn = (dispatch) => Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
+        .then((json) => {
+            const { antallTotalt } = json;
+            const side = Math.floor(fra / antall) + 1;
+
+            dispatch(pagineringSetup({ side, antall: antallTotalt, sideStorrelse: antall }));
+
+            return json;
+        });
+
+    return doThenDispatch(fn, {
         OK,
         FEILET,
         PENDING
@@ -165,12 +204,22 @@ export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 
 // Action Creators
 export function hentPortefoljeForVeileder(
     enhet, veileder, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
-    return doThenDispatch(() => Api.hentVeiledersPortefolje(
-        enhet, veileder.ident, rekkefolge, sorteringsfelt, fra, antall, filtervalg), {
-            OK,
-            FEILET,
-            PENDING
-        });
+    const fn = (dispatch) =>
+        Api.hentVeiledersPortefolje(enhet, veileder.ident, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
+            .then((json) => {
+                const { antallTotalt } = json;
+                const side = Math.floor(fra / antall) + 1;
+
+                dispatch(pagineringSetup({ side, antall: antallTotalt, sideStorrelse: antall }));
+
+                return json;
+            });
+
+    return doThenDispatch(fn, {
+        OK,
+        FEILET,
+        PENDING
+    });
 }
 
 export function settSortering(rekkefolge, felt) {
@@ -209,8 +258,13 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                     type: TILDEL_VEILEDER,
                     tilVeileder,
                     feilendeTilordninger: res.feilendeTilordninger
-
                 });
+                if (res.feilendeTilordninger.length > 0) {
+                    visFeiletModal({
+                        aarsak: TILORDNING_FEILET,
+                        brukereError: res.feilendeTilordninger
+                    })(dispatch);
+                }
                 if (filtergruppe === 'veileder') {
                     dispatch({
                         type: OPPDATER_ANTALL,
@@ -218,7 +272,11 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                     });
                 }
             })
-            .catch(handterFeil(dispatch, TILDEL_VEILEDER_FEILET))
+            .catch((error) => {
+                visServerfeilModal()(dispatch);
+                // TILDEL_VEILEDER_FEILET setter errorstatus slik at spinner forsvinner
+                return handterFeil(dispatch, TILDEL_VEILEDER_FEILET)(error);
+            })
             .then(() => {
                 // Venter litt slik at indeks kan komme i sync
                 setTimeout(() => {
@@ -246,5 +304,12 @@ export function settValgtVeileder(valgtVeileder) {
     return (dispatch) => dispatch({
         type: SETT_VALGTVEILEDER,
         veileder: valgtVeileder
+    });
+}
+
+export function oppdaterArbeidslisteForBruker(arbeidsliste) {
+    return (dispatch) => dispatch({
+        type: OPPDATER_ARBEIDSLISTE,
+        arbeidsliste
     });
 }

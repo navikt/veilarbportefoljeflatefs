@@ -1,24 +1,25 @@
 import React, { Component, PropTypes as PT } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import {
-    hentPortefoljeForVeileder,
-    settSortering,
-    nullstillFeilendeTilordninger,
-    settTilordningStatusOk
-} from '../ducks/portefolje';
-import Paginering from '../paginering/paginering';
-import { enhetShape, veilederShape, filtervalgShape } from './../proptype-shapes';
-import { leggEnhetIUrl, ytelseFilterErAktiv } from '../utils/utils';
-import { ASCENDING, DESCENDING, DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
+import { hentPortefoljeForVeileder, settSortering } from '../ducks/portefolje';
+import TabellOverskrift from './../components/tabell-overskrift';
+import Toolbar from './../components/toolbar/toolbar';
+import { enhetShape, veilederShape, filtervalgShape, feilmeldingModalShape } from './../proptype-shapes';
+import { leggEnhetIUrl } from '../utils/utils';
+import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
-import { ytelsevalg } from '../filtrering/filter-konstanter';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
-import TilordningFeiletModal from '../modal/tilordning-feilet-modal';
+import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
 import ServerFeilModal from '../modal/server-feil-modal';
 import { STATUS } from '../ducks/utils';
+import {
+    skjulFeilmeldingModal,
+    FJERN_FRA_ARBEIDSLISTE_FEILET,
+    LEGG_TIL_ARBEIDSLISTE_FEILET,
+    TILORDNING_FEILET
+} from '../ducks/modal-feilmelding-brukere';
+import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
 
 class VeilederPortefoljeVisning extends Component {
     componentWillMount() {
@@ -27,12 +28,12 @@ class VeilederPortefoljeVisning extends Component {
             sorteringsfelt,
             hentPortefolje,
             valgtEnhet,
-            veileder,
+            gjeldendeVeileder,
             filtervalg
         } = this.props;
 
         hentPortefolje(
-            valgtEnhet.enhet.enhetId, veileder, sorteringsfelt, sorteringsrekkefolge, filtervalg
+            valgtEnhet.enhet.enhetId, gjeldendeVeileder, sorteringsfelt, sorteringsrekkefolge, filtervalg
         );
 
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);
@@ -45,7 +46,7 @@ class VeilederPortefoljeVisning extends Component {
             sorteringsfelt,
             settSortering, // eslint-disable-line no-shadow
             hentPortefolje,
-            veileder,
+            gjeldendeVeileder,
             valgtEnhet,
             filtervalg
         } = this.props;
@@ -57,7 +58,7 @@ class VeilederPortefoljeVisning extends Component {
         }
         settSortering(valgtRekkefolge, felt);
         hentPortefolje(
-            valgtEnhet.enhet.enhetId, veileder, felt, valgtRekkefolge, filtervalg
+            valgtEnhet.enhet.enhetId, gjeldendeVeileder, valgtRekkefolge, felt, filtervalg
         );
     }
 
@@ -65,92 +66,87 @@ class VeilederPortefoljeVisning extends Component {
         const {
             portefolje,
             hentPortefolje,
-            veileder,
+            gjeldendeVeileder,
+            innloggetVeilederIdent,
             sorteringsrekkefolge,
             sorteringsfelt,
             valgtEnhet,
-            clearFeilendeTilordninger,
-            clearTilordningFeil,
             filtervalg,
-            visningsmodus
+            visningsmodus,
+            visesAnnenVeiledersPortefolje,
+            closeFeilmeldingModal,
+            feilmeldingModal,
+            serverfeilModalSkalVises,
+            closeServerfeilModal
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
-        const visButtonGroup = ytelseFilterErAktiv(filtervalg.ytelse) && filtervalg.ytelse !== ytelsevalg.AAP_UNNTAK;
-
-        const pagineringTekst = (
-            antallTotalt > 0 && antallReturnert !== 0 ?
-                (<FormattedMessage
-                    id="enhet.portefolje.paginering.tekst"
-                    values={{
-                        fraIndex: `${fraIndex + 1}`,
-                        tilIndex: fraIndex + antallReturnert,
-                        antallTotalt,
-                        visDiagram
-                    }}
-                />) :
-                (<FormattedMessage
-                    id="enhet.portefolje.paginering.tekst"
-                    values={{
-                        fraIndex: '0',
-                        tilIndex: '0',
-                        antallTotalt,
-                        visDiagram
-                    }}
-                />)
-        );
-
-        let fnr = [];
-        const feil = portefolje.feilendeTilordninger;
-        if (feil && feil.length > 0) {
-            fnr = feil.map((b) => b.brukerFnr);
-        }
-
-        const paginering = (visDiagramknapper) => (
-            <Paginering
-                antallTotalt={antallTotalt}
-                antallReturnert={antallReturnert}
-                fraIndex={fraIndex}
-                hentListe={(fra, antall) =>
-                    hentPortefolje(valgtEnhet.enhet.enhetId, veileder,
-                        sorteringsfelt, sorteringsrekkefolge, filtervalg, antall, fra)}
-                tekst={pagineringTekst}
-                sideStorrelse={DEFAULT_PAGINERING_STORRELSE}
-                visButtongroup={visDiagramknapper}
-                visDiagram={visDiagram}
-            />
-
-        );
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
-
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, { status: tilordningerStatus }]}>
-                    {paginering(visButtonGroup)}
+                    <TabellOverskrift
+                        fraIndex={fraIndex}
+                        antallIVisning={antallReturnert}
+                        antallTotalt={antallTotalt}
+                        visDiagram={visDiagram}
+                        tekst="enhet.portefolje.paginering.tekst"
+                    />
+                    <Toolbar
+                        filtervalg={filtervalg}
+                        onPaginering={(fra, antall) => hentPortefolje(
+                            valgtEnhet.enhet.enhetId,
+                            gjeldendeVeileder,
+                            sorteringsrekkefolge,
+                            sorteringsfelt,
+                            filtervalg,
+                            fra,
+                            antall
+                        )}
+                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                        sokVeilederSkalVises={false}
+                    />
                     {
                         visDiagram ?
                             <Diagram
                                 filtreringsvalg={filtervalg}
                                 enhet={valgtEnhet.enhet.enhetId}
-                                veileder={veileder.ident}
+                                veileder={gjeldendeVeileder.ident}
                             />
                             :
                             <MinoversiktTabell
-                                veileder={veileder}
+                                innloggetVeileder={innloggetVeilederIdent}
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
-                    {(antallTotalt >= 5 && !visDiagram) && paginering(false)}
-                    <TilordningFeiletModal
-                        isOpen={portefolje.feilendeTilordninger && portefolje.feilendeTilordninger.length > 0}
-                        fnr={fnr}
-                        clearFeilendeTilordninger={clearFeilendeTilordninger}
+                    <FeilmeldingBrukereModal
+                        isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
+                        fnr={feilmeldingModal.brukereError}
+                        onClose={closeFeilmeldingModal}
+                        tittelTekstID="modal.tilordning.feilet.tittel"
+                        infotekstTekstID="modal.tilordning.feilet.infotekst"
+                    />
+                    <FeilmeldingBrukereModal
+                        isOpen={feilmeldingModal.aarsak === LEGG_TIL_ARBEIDSLISTE_FEILET}
+                        fnr={feilmeldingModal.brukereError}
+                        onClose={closeFeilmeldingModal}
+                        tittelTekstID="modal.opprett.arbeidsliste.feilet.tittel"
+                        infotekstTekstID="modal.opprett.arbeidsliste.feilet.infotekst"
+
+                    />
+                    <FeilmeldingBrukereModal
+                        isOpen={feilmeldingModal.aarsak === FJERN_FRA_ARBEIDSLISTE_FEILET}
+                        fnr={feilmeldingModal.brukereError}
+                        onClose={closeFeilmeldingModal}
+                        tittelTekstID="modal.fjern.arbeidsliste.feilet.tittel"
+                        infotekstTekstID="modal.fjern.arbeidsliste.feilet.infotekst"
+
                     />
                     <ServerFeilModal
-                        isOpen={portefolje.tilordningerstatus === 'ERROR'}
-                        clearTilordningFeil={clearTilordningFeil}
+                        isOpen={serverfeilModalSkalVises}
+                        onClose={closeServerfeilModal}
                     />
                 </Innholdslaster>
             </div>
@@ -170,15 +166,19 @@ VeilederPortefoljeVisning.propTypes = {
         sorteringsrekkefolge: PT.string.isRequired
     }).isRequired,
     valgtEnhet: enhetShape.isRequired,
-    veileder: veilederShape.isRequired,
+    gjeldendeVeileder: veilederShape.isRequired,
+    innloggetVeilederIdent: PT.string.isRequired,
     hentPortefolje: PT.func.isRequired,
     settSortering: PT.func.isRequired,
     sorteringsrekkefolge: PT.string.isRequired,
     sorteringsfelt: PT.string.isRequired,
-    clearFeilendeTilordninger: PT.func.isRequired,
-    clearTilordningFeil: PT.func.isRequired,
+    closeFeilmeldingModal: PT.func.isRequired,
     visningsmodus: PT.string.isRequired,
-    filtervalg: filtervalgShape.isRequired
+    filtervalg: filtervalgShape.isRequired,
+    visesAnnenVeiledersPortefolje: PT.bool.isRequired,
+    feilmeldingModal: feilmeldingModalShape.isRequired,
+    serverfeilModalSkalVises: PT.bool.isRequired,
+    closeServerfeilModal: PT.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -187,15 +187,18 @@ const mapStateToProps = (state) => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     visningsmodus: state.veilederpaginering.visningsmodus,
-    filtervalg: state.filtreringVeileder
+    filtervalg: state.filtreringMinoversikt,
+    innloggetVeilederIdent: state.enheter.ident,
+    feilmeldingModal: state.feilmeldingModal,
+    serverfeilModalSkalVises: state.serverfeilModal.modalVises
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentPortefolje: (enhet, ident, felt, rekkefolge, filtervalg, antall = 20, fra = 0) =>
-        dispatch(hentPortefoljeForVeileder(enhet, ident, rekkefolge, felt, fra, antall, filtervalg)),
+    hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
+        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, fra, antall, filtervalg)),
     settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    clearFeilendeTilordninger: () => dispatch(nullstillFeilendeTilordninger()),
-    clearTilordningFeil: () => dispatch(settTilordningStatusOk())
+    closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal()),
+    closeServerfeilModal: () => dispatch(skjulServerfeilModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);

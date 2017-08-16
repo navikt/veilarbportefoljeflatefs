@@ -78,3 +78,9 @@ export function hentStatusTallForveileder(enhetId, veileder) {
         `/statustall?enhet=${enhetId}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
+
+export function httpArbeidsliste(arbeidsliste, method, additionalPath = '') {
+    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/arbeidsliste/${additionalPath}`;
+    const config = { ...MED_CREDENTIALS, method, body: JSON.stringify(arbeidsliste) };
+    return fetchToJson(url, config);
+}

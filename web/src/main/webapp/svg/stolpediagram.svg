@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45 (43475) - http://www.bohemiancoding.com/sketch -->
+    <title>Stolpediagram</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Stolpediagram" transform="translate(1.000000, 1.000000)" stroke="#3A3A3A">
+            <path d="M0,16.2916667 L16,16.2916667" id="Stroke-4503-Copy"></path>
+            <polygon id="Stroke-4504-Copy" points="2.7826087 11.3333333 0.695652174 11.3333333 0.695652174 14.875 2.7826087 14.875"></polygon>
+            <polygon id="Stroke-4505-Copy" points="6.95652174 4.95833333 4.86956522 4.95833333 4.86956522 14.8113423 6.95652174 14.8113423"></polygon>
+            <polygon id="Stroke-4506-Copy" points="11.1304348 9.20833333 9.04347826 9.20833333 9.04347826 14.875 11.1304348 14.875"></polygon>
+            <polygon id="Stroke-4507-Copy" points="15.3043478 0 13.2173913 0 13.2173913 14.9612903 15.3043478 14.9612903"></polygon>
+        </g>
+    </g>
+</svg>

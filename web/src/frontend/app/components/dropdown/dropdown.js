@@ -1,9 +1,10 @@
-import React, { PropTypes as PT, Children, Component, cloneElement } from 'react';
+import React, { Children, cloneElement, Component, PropTypes as PT } from 'react';
 import classNames from 'classnames';
 
 const btnCls = (erApen, className) => classNames('dropdown', className, {
     'dropdown--apen': erApen
 });
+const btnWrapperCls = (disabled) => classNames('dropdown__btnwrapper', { 'dropdown__btnwrapper--disabled': disabled });
 
 function isChildOf(parent, element) {
     if (element === document) { // eslint-disable-line no-undef
@@ -25,6 +26,7 @@ class Dropdown extends Component {
         this.toggleDropdown = this.toggleDropdown.bind(this);
         this.lukkDropdown = this.lukkDropdown.bind(this);
         this.bindComponent = this.bindComponent.bind(this);
+        this.settFokus = this.settFokus.bind(this);
         this.handler = (e) => {
             if (this.state.apen && !isChildOf(this.component, e.target)) {
                 this.lukkDropdown();
@@ -40,8 +42,11 @@ class Dropdown extends Component {
         document.body.removeEventListener('click', this.handler);// eslint-disable-line no-undef
     }
 
-    bindComponent(component) {
-        this.component = component;
+    settFokus(element) { // eslint-disable-line class-methods-use-this
+        if (element !== null) {
+            const elementer = element.querySelector('button, a, input, select');
+            elementer.focus();
+        }
     }
 
     toggleDropdown() {
@@ -55,28 +60,40 @@ class Dropdown extends Component {
     lukkDropdown() {
         const { onLukk = () => {} } = this.props;
         this.setState({ apen: false });
+        this.btn.focus();
         onLukk();
     }
 
+    bindComponent(component) {
+        this.component = component;
+    }
+
     render() {
-        const { name, className, children } = this.props;
+        const { name, className, disabled, children } = this.props;
         const { apen } = this.state;
 
         const augmentedChild = Children.map(children, (child) => cloneElement(child, {
             closeDropdown: this.lukkDropdown
         }));
         const innhold = !apen ? null : (
-            <div className="dropdown__innhold" id={`${name}-dropdown__innhold`}>{augmentedChild}</div>
-            );
+            <div className="dropdown__innhold" id={`${name}-dropdown__innhold`} ref={this.settFokus}>
+                {augmentedChild}
+            </div>
+        );
+
         return (
             <div className={btnCls(apen, className)} ref={this.bindComponent}>
-                <div className="dropdown__btnwrapper">
+                <div className={btnWrapperCls(disabled)}>
                     <button
+                        ref={(btn) => {
+                            this.btn = btn;
+                        }}
                         type="button"
                         className="dropdown__btn"
                         onClick={this.toggleDropdown}
                         aria-expanded={apen}
                         aria-controls={`${name}-dropdown__innhold`}
+                        disabled={disabled}
                     >
                         {name}
                     </button>
@@ -89,6 +106,7 @@ class Dropdown extends Component {
 
 Dropdown.propTypes = {
     apen: PT.bool,
+    disabled: PT.bool,
     name: PT.string.isRequired,
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.node)]).isRequired,
     className: PT.string,

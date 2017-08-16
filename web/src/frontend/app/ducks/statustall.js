@@ -5,6 +5,7 @@ import { doThenDispatch, STATUS } from './utils';
 export const OK = 'veilarbportefoljeflatefs/statustall/OK';
 export const FEILET = 'veilarbportefoljeflatefs/statustall/FEILET';
 export const PENDING = 'veilarbportefoljeflatefs/statustall/PENDING';
+export const LEGG_TIL_STATUSTALL = 'LEGG_TIL_STATUSTALL';
 
 const initalState = {
     status: STATUS.NOT_STARTED,
@@ -13,7 +14,11 @@ const initalState = {
         nyeBrukere: 0,
         inaktiveBrukere: 0,
         venterPaSvarFraNAV: 0,
-        venterPaSvarFraBruker: 0
+        venterPaSvarFraBruker: 0,
+        utlopteAktiviteter: 0,
+        ikkeIavtaltAktivitet: 0,
+        iavtaltAktivitet: 0,
+        minArbeidsliste: 0
     }
 };
 
@@ -29,6 +34,14 @@ export default function reducer(state = initalState, action) {
             return { ...state, status: STATUS.ERROR, data: action.data };
         case OK: {
             return { ...state, status: STATUS.OK, data: action.data };
+        }
+        case LEGG_TIL_STATUSTALL: {
+            return {
+                ...state,
+                data: {
+                    ...state.data, [action.statustall]: state.data[action.statustall] + action.antall
+                }
+            };
         }
         default:
             return state;
@@ -48,5 +61,13 @@ export function hentStatusTall(enhet, veileder) {
         OK,
         FEILET,
         PENDING
+    });
+}
+
+export function leggTilStatustall(statustall, antall) {
+    return (dispatch) => dispatch({
+        type: LEGG_TIL_STATUSTALL,
+        statustall,
+        antall
     });
 }

@@ -1,5 +1,17 @@
 import { range, lag2Sifret } from '../utils/utils';
 
+export const NYE_BRUKERE = 'NYE_BRUKERE';
+export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
+export const VENTER_PA_SVAR_FRA_NAV = 'VENTER_PA_SVAR_FRA_NAV';
+export const VENTER_PA_SVAR_FRA_BRUKER = 'VENTER_PA_SVAR_FRA_BRUKER';
+export const UTLOPTE_AKTIVITETER = 'UTLOPTE_AKTIVITETER';
+export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
+export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
+export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
+
+export const FILTERGRUPPE_ENHET = 'enhet';
+
+
 export function lagConfig(data) {
     if (typeof data === 'string') {
         return { label: data };
@@ -11,7 +23,11 @@ export const brukerstatus = {
     NYE_BRUKERE: 'Nye brukere',
     INAKTIVE_BRUKERE: 'Inaktive brukere',
     VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
-    VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker'
+    VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker',
+    UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
+    IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
+    I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
+    MIN_ARBEIDSLISTE: 'Min arbeidsliste'
 };
 
 export const alder = {

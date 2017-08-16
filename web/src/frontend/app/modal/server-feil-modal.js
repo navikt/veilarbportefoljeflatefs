@@ -20,8 +20,8 @@ class ServerFeilModal extends Component {
     }
 
     lukkModal() {
-        const { clearTilordningFeil } = this.props;
-        clearTilordningFeil();
+        const { onClose } = this.props;
+        onClose();
 
         this.setState({ isOpen: false });
     }
@@ -34,9 +34,9 @@ class ServerFeilModal extends Component {
                 onRequestClose={this.lukkModal}
                 closeButton={false}
             >
-                <div className="tilordningfeilet__modal">
-                    <div className="tilordningfeiletmelding blokk-m">
-                        <div className="tilordningfeiletmelding__ikon blokk-xxs" />
+                <div className="feiletbrukere__modal">
+                    <div className="feiledbrukeremelding blokk-m">
+                        <div className="feiledbrukeremelding__ikon blokk-xxs" />
                     </div>
                     <Undertittel tag="h1" className="blokk-xxs">
                         <IntlMessage id="modal.tittel" />
@@ -55,7 +55,7 @@ class ServerFeilModal extends Component {
 
 ServerFeilModal.propTypes = {
     isOpen: PT.bool.isRequired,
-    clearTilordningFeil: PT.func.isRequired
+    onClose: PT.func.isRequired
 };
 
 export default ServerFeilModal;
