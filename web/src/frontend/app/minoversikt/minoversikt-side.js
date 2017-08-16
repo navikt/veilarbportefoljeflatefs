@@ -73,7 +73,10 @@ class MinOversiktSide extends Component {
                                         filtergruppe="veileder"
                                         veileder={gjeldendeVeileder}
                                     />
-                                    <VeilederPortefoljeVisning veileder={gjeldendeVeileder} />
+                                    <VeilederPortefoljeVisning
+                                        gjeldendeVeileder={gjeldendeVeileder}
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                    />
                                 </div>
                             </div>
                         </section>
@@ -99,7 +102,7 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     enheter: state.enheter,
     veiledere: state.veiledere,
-    filtervalg: state.filtreringVeileder,
+    filtervalg: state.filtreringMinoversikt,
     statustall: state.statustall
 });
 

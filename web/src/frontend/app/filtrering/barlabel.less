@@ -1,13 +1,14 @@
 .barlabel {
     display: flex;
     justify-content: space-between;
+    margin-top: 2px;
 
     &__labeltext {
         width: 100%;
     }
 
     &__barwrapper {
-        flex-basis: 70%;
+        flex-basis: 60%;
         flex-shrink: 0;
         flex-grow: 0;
         display: flex;
@@ -24,7 +25,7 @@
     &__bar {
         position: relative;
         flex: 0;
-        flex-basis: 55%;
+        flex-basis: 85%;
         height: 1.125rem;
     }
 
@@ -46,7 +47,33 @@
         left: 0;
         top: 0;
     }
-    &.inaktiveBrukere .barlabel__barface {
-        background-color: @navLillaLighten60;
+    &.venterPaSvarFraNAV .barlabel__barface {
+        background-color: @navLillaLighten20;
     }
+    &.venterPaSvarFraBruker .barlabel__barface {
+        background-color: @navLillaLighten40;
+    }
+    &.utlopteAktiviteter .barlabel__barface {
+        background-color: @navGronnLighten20;
+    }
+    &.ikkeIAvtaltAktivitet .barlabel__barface {
+        background-color: @navGronnLighten40;
+    }
+    &.iAvtaltAktivitet .barlabel__barface {
+        background-color: @navGronnLighten60;
+    }
+    &.inaktiveBrukere .barlabel__barface {
+        background-color: @navLysBlaDarken60;
+    }
+    &.minArbeidsliste .barlabel__barface {
+        background-color: @navLimeGronnLighten40;
+    }
+}
+
+.forsteBarlabelIGruppe {
+    margin-top: 0.6rem;
+}
+
+.minArbeidsliste__tittel {
+    margin-top: 1rem;
 }

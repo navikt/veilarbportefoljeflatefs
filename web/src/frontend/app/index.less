@@ -1,5 +1,5 @@
-@coreModulePath: './../../../node_modules';
-@nodeModulesPath: './../../../node_modules';
+@coreModulePath: './../../../node_modules/';
+@nodeModulesPath: './../../../node_modules/';
 @import "tabell";
 
 body {
@@ -21,7 +21,9 @@ html {
     height: 100%;
 }
 
-@import "./modal/tildeling";
+@import "./modal/feilmelding-brukere";
+@import "./modal/arbeidsliste";
+@import "./components/datovelger/daypicker";
 @import "./node_modules/nav-frontend-typografi-style/src/index";
 @import "./node_modules/nav-frontend-core/less/core";
 @import "./node_modules/nav-frontend-grid-style/src/index";
@@ -34,6 +36,7 @@ html {
 @import "./node_modules/nav-frontend-knapper-style/src/index";
 @import "./node_modules/nav-frontend-paneler-style/src/mixins";
 @import "./node_modules/nav-frontend-lenker-style/src/lenker-style";
+@import "./node_modules/nav-frontend-toggle-style/src/toggle-style";
 @import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
 
 .veilarbportefoljeflatefs {
@@ -47,11 +50,13 @@ html {
     @import "./filtrering/barlabel";
     @import "./components/tabelletiketter/tabelletiketter";
     @import "./components/dropdown/dropdown";
+    @import "./components/toolbar/toolbar";
     @import "./components/checkbox-filterform/checkbox-filterform";
     @import "./components/radio-filterform/radio-filterform";
     @import "./components/aktivitet-filterform/aktivitet-filterform";
     @import "./veiledere/veieldersok";
     @import "./minoversikt/diagram/digram";
+    @import "./components/tabell/hybridpanel/hybridpanel";
 }
 
 

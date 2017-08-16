@@ -34,3 +34,123 @@
 .portefolje-side {
     background-color: @navLysGra;
 }
+
+.minoversikt-listehode {
+    border-bottom: 1px solid #b7b1a9;
+
+    .minoversikt-overskrifter {
+        border-bottom: 1px solid #b7b1a9;
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+        .listeoverskrift {
+            font-weight: bold;
+        }
+
+        .listeoverskrift__bruker {
+            margin-left: 3.6rem;
+            display: inline-block;
+            width: 20.5rem;
+        }
+        .listeoverskrift__ytelse {
+            margin-left: 1.6rem;
+        }
+        .listeoverskrift__dato {
+            margin-left: 1.6rem;
+        }
+    }
+
+    .minoversikt-sortering-header__wrapper {
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+        .sortering-header__etternavn {
+            margin-left: 3.6rem;
+
+            .lenke {
+                padding-top: 1px; //For å aligne med tekst etter lenken
+            }
+        }
+        .sortering-header__fodselsnummer {
+            margin-left: 6.2rem;
+        }
+        .sortering-header__dato {
+            margin-left: 1.6rem;
+        }
+    }
+}
+
+.minoversikt-brukere-liste {
+    padding: 0;
+    margin-top: 0;
+    .minoversikt-brukere-panel {
+        list-style: none;
+        border-bottom: 1px solid #b7b1a9;
+        .hybridPanel__hode, .panel_hode {
+            padding: 10px 10px 10px 10px;
+
+            .brukerpanel {
+                width: 100%;
+            }
+
+            .brukerinformasjon__wrapper {
+                display: inline-block;
+                margin-right: 2.9rem;
+
+                .brukerinformasjon__navn {
+                    display: inline-block;
+                    width: 14rem;
+                    padding-left: 1rem;
+
+                    &.arbeidslistebruker {
+                        background: url(../svg/flagg-filled.svg) no-repeat;
+                    }
+                }
+                .skjema__input {
+                    position: relative;
+                    top: 5px;
+                    display: inline-block;
+                    margin: 0 0 0 0;
+                    width: 1.5rem;
+                    margin-right: 0.5rem;
+                }
+            }
+
+            .datokolonner__wrapper {
+                display: inline-block;
+                :not(:first-child) {
+                    margin-left: 2.3rem;
+                }
+            }
+
+            .etiketter__wrapper {
+                display: inline-block;
+                float: right;
+                margin-right: 5px;
+            }
+        }
+
+        .hybridPanel__hode, .hybridPanel__innhold {
+            background-color: @navLysGra;
+        }
+        .hybridPanel__knapp {
+            cursor: pointer;
+            background-color: @navLysGra;
+            border: none;
+        }
+    }
+}
+
+.minoversikt-liste__wrapper {
+    .panel_hode {
+        .etikett:last-child {
+            margin-right: 32px;
+        }
+    }
+}
+
+.brukerinformasjon__wrapper {
+    .checkboks + label {
+        bottom: 10px;
+    }
+}

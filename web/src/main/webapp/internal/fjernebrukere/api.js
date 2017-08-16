@@ -1,8 +1,8 @@
 (function() {
-    const credentials = 'same-origin';
-    const VEILARBVEILEDER_URL = '/veilarbveileder';
-    const VEILARBPORTEFOLJE_URL = '/veilarbportefolje';
-    const VEILARBSITUASJON_URL = '/veilarbsituasjon';
+    var credentials = 'same-origin';
+    var VEILARBVEILEDER_URL = '/veilarbveileder';
+    var VEILARBPORTEFOLJE_URL = '/veilarbportefolje';
+    var VEILARBSITUASJON_URL = '/veilarbsituasjon';
 
     function fetchAsJson(url, config) {
         return fetch(url, config)
@@ -12,10 +12,10 @@
     }
 
     function hentMe() {
-        return fetchAsJson('https://'+ window.location.hostname + VEILARBVEILEDER_URL + '/tjenester/veileder/me', { credentials: credentials, });
+        return fetchAsJson(VEILARBVEILEDER_URL + '/tjenester/veileder/me', { credentials: credentials, });
     }
     function hentEnheter() {
-        return fetchAsJson('https://'+ window.location.hostname + VEILARBVEILEDER_URL + '/tjenester/veileder/enheter', { credentials: credentials });
+        return fetchAsJson(VEILARBVEILEDER_URL + '/tjenester/veileder/enheter', { credentials: credentials });
     }
     function hentBrukere(enhet, veileder) {
         var filtervalg = {
@@ -30,7 +30,7 @@
             body: JSON.stringify(filtervalg)
         };
 
-        return fetchAsJson('https://'+ window.location.hostname + VEILARBPORTEFOLJE_URL + '/tjenester/veileder/' + veileder + '/portefolje?enhet=' + enhet + '&fra=0&antall=99999&sortDirection=ikke_satt&sortField=ikke_satt', config);
+        return fetchAsJson(VEILARBPORTEFOLJE_URL + '/tjenester/veileder/' + veileder + '/portefolje?enhet=' + enhet + '&fra=0&antall=99999&sortDirection=ikke_satt&sortField=ikke_satt', config);
     }
 
     function fjernTilordning(fnrs, fraVeileder) {
@@ -50,7 +50,22 @@
             body: JSON.stringify(nyeTilordninger)
         };
 
-        return fetchAsJson('https://'+ window.location.hostname + VEILARBSITUASJON_URL + '/api/tilordneveileder/', config);
+        return fetchAsJson(VEILARBSITUASJON_URL + '/api/tilordneveileder/', config);
+    }
+
+    function slettFraPortefolje(fnrs) {
+        var restFnr = fnrs.map(function (input) {
+            return input.dataset.fnr;
+        });
+        var config = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: credentials,
+            method: 'post',
+            body: JSON.stringify(restFnr)
+        };
+        return fetch(VEILARBPORTEFOLJE_URL + '/tjenester/bruker/fjern', config);
     }
 
     function FristillApi() {
@@ -60,6 +75,7 @@
     FristillApi.prototype.hentEnheter = hentEnheter;
     FristillApi.prototype.hentBrukere = hentBrukere;
     FristillApi.prototype.fjernTilordning = fjernTilordning;
+    FristillApi.prototype.slettFraPortefolje = slettFraPortefolje;
 
     window.FristillApi = FristillApi;
 })();

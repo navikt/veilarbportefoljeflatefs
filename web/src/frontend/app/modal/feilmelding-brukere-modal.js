@@ -7,7 +7,7 @@ Modal.setAppElement('#applikasjon');
 
 const fnrsToList = (fnrs) => (<ul>{(fnrs.map((fnr) => <li key={fnr} className="fnr__listitem">{fnr}</li>))}</ul>);
 
-class TilordningFeiletModal extends Component {
+class FeilmeldingBrukereModal extends Component {
     constructor(props) {
         super(props);
 
@@ -22,13 +22,14 @@ class TilordningFeiletModal extends Component {
     }
 
     lukkModal() {
-        const { clearFeilendeTilordninger } = this.props;
-        clearFeilendeTilordninger();
+        const { onClose } = this.props;
+        onClose();
 
         this.setState({ isOpen: false });
     }
 
     render() {
+        const { tittelTekstID, infotekstTekstID, fnr } = this.props;
         return (
             <Modal
                 contentLabel="Modal tilordning feilet"
@@ -36,17 +37,17 @@ class TilordningFeiletModal extends Component {
                 onRequestClose={this.lukkModal}
                 closeButton={false}
             >
-                <div className="tilordningfeilet__modal">
-                    <div className="tilordningfeiletmelding blokk-m">
-                        <div className="tilordningfeiletmelding__ikon blokk-xxs" />
+                <div className="feiletbrukere__modal">
+                    <div className="feiledbrukeremelding blokk-m">
+                        <div className="feiledbrukeremelding__ikon blokk-xxs" />
                     </div>
                     <Undertittel tag="h1" className="blokk-xxs">
-                        <IntlMessage id="modal.tilordning.feilet.tittel" />
+                        <IntlMessage id={tittelTekstID} />
                     </Undertittel>
                     <Normaltekst className="blokk-s">
-                        <IntlMessage id="modal.tilordning.feilet.infotekst" />
+                        <IntlMessage id={infotekstTekstID} />
                     </Normaltekst>
-                    {fnrsToList(this.props.fnr)}
+                    {fnrsToList(fnr)}
                     <button className="knapp knapp--hoved" onClick={this.lukkModal}>
                         <IntlMessage id="modal.tilordning.feilet.knapptekst" />
                     </button>
@@ -56,10 +57,13 @@ class TilordningFeiletModal extends Component {
     }
 }
 
-TilordningFeiletModal.propTypes = {
+FeilmeldingBrukereModal.propTypes = {
     isOpen: PT.bool,
     fnr: PT.arrayOf(PT.string).isRequired,
-    clearFeilendeTilordninger: PT.func.isRequired
+    onClose: PT.func.isRequired,
+    tittelTekstID: PT.string.isRequired,
+    infotekstTekstID: PT.string.isRequired
 };
 
-export default TilordningFeiletModal;
+
+export default FeilmeldingBrukereModal;
