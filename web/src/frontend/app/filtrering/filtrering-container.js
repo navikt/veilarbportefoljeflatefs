@@ -52,7 +52,7 @@ FiltreringContainer.propTypes = {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
         endreFiltervalg: (...args) => {
-            dispatch(endreFiltervalg(...args, ownProps.filtergruppe, ownProps.veileder))
+            dispatch(endreFiltervalg(...args, ownProps.filtergruppe, ownProps.veileder));
         }
     }
 });

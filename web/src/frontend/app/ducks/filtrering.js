@@ -32,7 +32,7 @@ function fjern(verdi, fjernVerdi) {
     } else if (fjernVerdi && typeof verdi === 'object') {
         return Object.entries(verdi)
             .filter(([key]) => key !== fjernVerdi)
-            .reduce((acc, [key, value]) => ({...acc, [key]: value}), {});
+            .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
     } else if (fjernVerdi === null) {
         return null;
     }
