@@ -30,7 +30,7 @@
     </resources>
 
     <serverOptions>
-        <memoryParameters resourceAlias="veilarb-memparams"/>
+        <memoryParameters resourceAlias="veilarb-flate-memparams"/>
     </serverOptions>
 
     <loadBalancer isAlive="/veilarbportefoljeflatefs/internal/isAlive" />
