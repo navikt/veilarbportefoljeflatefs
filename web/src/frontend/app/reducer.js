@@ -18,6 +18,7 @@ import diagramReducer from './ducks/diagram';
 import sideReducer from './ducks/ui/side';
 import { slettCleanIUrl } from './utils/utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
+import enhettilakReducer from './ducks/enhettiltak';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -66,5 +67,6 @@ export default combineReducers({
     feilmeldingModal: feilmedlingModalReducer,
     diagram: diagramReducer,
     arbeidsliste: arbeidslisteReducer,
-    form: formReducer
+    form: formReducer,
+    enhettiltak: enhettilakReducer
 });
