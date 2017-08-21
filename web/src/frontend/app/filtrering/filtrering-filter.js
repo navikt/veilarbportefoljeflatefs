@@ -15,10 +15,12 @@ import {
     servicegruppe,
     ytelse,
     rettighetsgruppe,
-    aktiviteter
+    aktiviteter,
+    tiltakstyper
 } from './filter-konstanter';
 
 function FiltreringFilter({ filtervalg, actions }) {
+    console.log(filtervalg.aktiviteter.TILTAK);
     return (
         <div className="filtrering-filter">
             <div className="row">
@@ -109,6 +111,14 @@ function FiltreringFilter({ filtervalg, actions }) {
                         <AktivitetFilterform
                             form="aktiviteter"
                             valg={aktiviteter}
+                            filtervalg={filtervalg}
+                            onSubmit={actions.endreFiltervalg}
+                        />
+                    </Dropdown>
+                    <Dropdown name="Tiltakstype" className="dropdown--130bredde" disabled={filtervalg.aktiviteter.TILTAK === "JA" ? false : true}>
+                        <CheckboxFilterform
+                            form="tiltakstyper"
+                            valg={tiltakstyper}
                             filtervalg={filtervalg}
                             onSubmit={actions.endreFiltervalg}
                         />
