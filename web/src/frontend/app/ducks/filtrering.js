@@ -21,6 +21,7 @@ export const initialState = {
     rettighetsgruppe: [],
     veiledere: [],
     aktiviteter: {},
+    tiltakstyper: [],
     ytelse: null
 };
 
