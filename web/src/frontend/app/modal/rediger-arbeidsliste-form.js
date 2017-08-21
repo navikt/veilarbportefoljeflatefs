@@ -50,7 +50,6 @@ function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
                 <Datovelger
                     feltNavn={'frist'}
                     labelId="arbeidsliste-form.label.dato"
-                    tidligsteFom={new Date()}
                 />
             </div>
             <div>
@@ -98,7 +97,8 @@ const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
         const arbeidsliste = {
             kommentar: formData.kommentar,
-            frist: formData.frist
+            frist: formData.frist,
+            redigering: true
         };
         redigerArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
             .then((res) => oppdaterState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, dispatch));
