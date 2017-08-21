@@ -20,7 +20,6 @@ import {
 } from './filter-konstanter';
 
 function FiltreringFilter({ filtervalg, actions }) {
-    console.log(filtervalg.aktiviteter.TILTAK);
     return (
         <div className="filtrering-filter">
             <div className="row">
