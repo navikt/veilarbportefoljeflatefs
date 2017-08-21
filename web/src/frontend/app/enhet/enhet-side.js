@@ -10,7 +10,6 @@ import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { leggEnhetIUrl } from '../utils/utils';
 import { hentStatusTall } from './../ducks/statustall';
-import { hentEnhetTiltak } from './../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 
 
@@ -22,7 +21,6 @@ class EnhetSide extends Component {
 
     componentDidMount() {
         this.props.hentStatusTall(this.props.valgtEnhet.enhet.enhetId);
-        this.props.hentEnhetTiltak(this.props.valgtEnhet.enhet.enhetId);
     }
 
     render() {
@@ -31,7 +29,7 @@ class EnhetSide extends Component {
             return null;
         }
         const { formatMessage } = this.props.intl;
-        const { filtervalg, veilederliste, statustall, enhettiltak } = this.props;
+        const { filtervalg, veilederliste, statustall } = this.props;
 
         const leggTilNavn = (identer, veiledere) => identer.map((ident) => {
             const veileder = veiledere.find((v) => v.ident === ident);
@@ -42,7 +40,7 @@ class EnhetSide extends Component {
             <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })}>
                 <div className="enhet-side blokk-xl">
                     <Lenker />
-                    <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
+                    <Innholdslaster avhengigheter={[statustall]}>
                         <div id="oversikt-sideinnhold" role="tabpanel">
                             <p className="typo-infotekst begrensetbredde blokk-l">
                                 <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
@@ -70,9 +68,7 @@ EnhetSide.propTypes = {
     filtervalg: filtervalgShape.isRequired,
     veilederliste: PT.arrayOf(veilederShape).isRequired,
     hentStatusTall: PT.func.isRequired,
-    hentEnhetTiltak: PT.func.isRequired,
     statustall: PT.shape({ data: statustallShape }),
-    enhettiltak: PT.arrayOf(PT.string),
     intl: intlShape.isRequired
 };
 
@@ -80,13 +76,11 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     filtervalg: state.filtrering,
     veilederliste: state.veiledere.data.veilederListe,
-    statustall: state.statustall,
-    enhettiltak: state.enhettiltak
+    statustall: state.statustall
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentStatusTall: (enhet) => dispatch(hentStatusTall(enhet)),
-    hentEnhetTiltak: (enhet) => dispatch(hentEnhetTiltak(enhet))
+    hentStatusTall: (enhet) => dispatch(hentStatusTall(enhet))
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(EnhetSide));

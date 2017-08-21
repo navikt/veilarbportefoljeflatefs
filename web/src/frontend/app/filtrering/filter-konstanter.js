@@ -94,13 +94,8 @@ export const rettighetsgruppe = {
 };
 
 export const aktiviteter = {
-    SOEKEAVTALE: 'Avtale om jobbsøk',
-    JOBBSOEKING: 'Jobbsøk',
-    BEHANDLING: 'Medisinsk behandling',
-    TILTAK: 'Tiltak fra NAV',
-    EGENAKTIVITET: 'Egendefinert',
-    IJOBB: 'Er i arbeid',
-    MOTE: 'Møte'
+    JOBBSOEKING: 'Jobbsøking',
+    EGENAKTIVITET: 'Egen definert'
 };
 
 const veiledere = {

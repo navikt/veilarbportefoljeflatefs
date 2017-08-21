@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export, no-undef */
+/* eslint-disable import/prefer-default-export, no-undef*/
 import queryString from 'query-string';
 import history from '../history';
 
