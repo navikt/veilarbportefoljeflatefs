@@ -8,6 +8,7 @@ import { endreFiltervalg } from '../ducks/filtrering';
 
 
 function FiltreringContainer({ filtergruppe, filtervalg, veileder, actions }) {
+    console.log(filtervalg);
     return (
         <div className="blokk-m">
             <Ekspanderbartpanel

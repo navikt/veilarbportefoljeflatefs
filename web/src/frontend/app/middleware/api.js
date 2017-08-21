@@ -1,4 +1,4 @@
-/* eslint-disable no-undef*/
+/* eslint-disable no-undef */
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
 
 const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
@@ -83,4 +83,9 @@ export function httpArbeidsliste(arbeidsliste, method, additionalPath = '') {
     const url = `${VEILARBPORTEFOLJE_URL}/tjenester/arbeidsliste/${additionalPath}`;
     const config = { ...MED_CREDENTIALS, method, body: JSON.stringify(arbeidsliste) };
     return fetchToJson(url, config);
+}
+
+export function hentEnhetTiltak(enhetId) {
+    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhetId}/tiltak`;
+    return fetchToJson(url, MED_CREDENTIALS);
 }
