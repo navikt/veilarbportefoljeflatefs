@@ -65,6 +65,11 @@
             <groupId>no.nav.sbl</groupId>
             <artifactId>innholdshenter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>no.nav.sbl.dialogarena</groupId>
+            <artifactId>test-config</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <!--Spring-->
         <dependency>
@@ -142,10 +147,6 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-base</artifactId>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
