@@ -58,6 +58,7 @@ function renderFelter({ fields }) {
                         feltNavn={`${name}.frist`}
                         labelId="arbeidsliste-form.label.dato"
                         tidligsteFom={new Date()}
+                        feltErValgfritt
                     />
                 </div>
                 ))}

@@ -50,6 +50,7 @@ function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
                 <Datovelger
                     feltNavn={'frist'}
                     labelId="arbeidsliste-form.label.dato"
+                    feltErValgfritt
                 />
             </div>
             <div>

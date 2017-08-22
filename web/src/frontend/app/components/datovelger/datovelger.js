@@ -195,7 +195,7 @@ function parseDato(dato) {
 const ConnectedDatoField = connect()(DatoField);
 
 function Datovelger(props) {
-    const { feltNavn, tidligsteFom, intl } = props;
+    const { feltNavn, tidligsteFom, intl, feltErValgfritt} = props;
 
     const datoFelt = (
         <ConnectedDatoField
@@ -210,9 +210,12 @@ function Datovelger(props) {
             errorClass="skjemaelement--harFeil"
             customComponent={datoFelt}
             validate={(value) =>
-                validerDatoField(value, intl, {
-                    fra: tidligsteFom
-                })}
+                validerDatoField(
+                    value,
+                    intl,
+                    { fra: tidligsteFom},
+                    feltErValgfritt
+                )}
         />
     );
 }
@@ -220,11 +223,13 @@ function Datovelger(props) {
 Datovelger.propTypes = {
     feltNavn: PT.string.isRequired,
     tidligsteFom: PT.instanceOf(Date),
-    intl: intlShape.isRequired
+    intl: intlShape.isRequired,
+    feltErValgfritt: PT.bool.isRequired
 };
 
 Datovelger.defaultProps = {
-    tidligsteFom: undefined
+    tidligsteFom: undefined,
+    feltErValgfritt: false
 };
 
 export default injectIntl(Datovelger);
