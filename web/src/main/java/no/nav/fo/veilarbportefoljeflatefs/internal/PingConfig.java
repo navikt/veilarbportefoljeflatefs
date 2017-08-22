@@ -23,10 +23,10 @@ public class PingConfig {
         return new IssoIsAliveHelsesjekk();
     }
 
-//    @Bean
-//    public Pingable issoSystemBrukerToken() {
-//        return new IssoSystemBrukerTokenHelsesjekk();
-//    }
+    @Bean
+    public Pingable issoSystemBrukerToken() {
+        return new IssoSystemBrukerTokenHelsesjekk();
+    }
 
     @Bean
     public Pingable portefoljePing() throws IOException {
