@@ -47,13 +47,14 @@ class EnhetSide extends Component {
                             <p className="typo-infotekst begrensetbredde blokk-l">
                                 <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                             </p>
-                            <FiltreringContainer filtervalg={filtervalg} />
+                            <FiltreringContainer filtervalg={filtervalg} enhettiltak={enhettiltak.data.tiltak} />
                             <FiltreringLabelContainer
                                 filtervalg={{
                                     ...filtervalg,
                                     veiledere: leggTilNavn(filtervalg.veiledere, veilederliste)
                                 }}
                                 filtergruppe="enhet"
+                                enhettiltak={enhettiltak.data.tiltak}
                             />
                             <EnhetsportefoljeVisning />
                             <TomPortefoljeModal isOpen={statustall.data.totalt === 0} />

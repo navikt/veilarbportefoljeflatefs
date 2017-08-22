@@ -104,16 +104,6 @@ export const aktiviteter = {
 };
 
 
-export const tiltakstyper = {
-    SOKEAVTALE: 'Avtale om jobbsøk',
-    JOBBSOEKING: 'Jobbsøk',
-    BEHANDLING: 'Medisinsk behandling',
-    TILTAK: 'Tiltak fra NAV',
-    EGENAKTIVITET: 'Egendefinert',
-    IJOBB: 'Er i arbeid',
-    MOTE: 'Møte'
-};
-
 const veiledere = {
 };
 
@@ -130,6 +120,5 @@ export default {
     ytelsevalg,
     rettighetsgruppe,
     veiledere,
-    aktiviteter,
-    tiltakstyper
+    aktiviteter
 };
