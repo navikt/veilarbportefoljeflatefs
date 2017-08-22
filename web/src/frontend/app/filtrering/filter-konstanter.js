@@ -94,7 +94,7 @@ export const rettighetsgruppe = {
 };
 
 export const aktiviteter = {
-    SOEKEAVTALE: 'Avtale om jobbsøk',
+    SOKEAVTALE: 'Avtale om jobbsøk',
     JOBBSOEKING: 'Jobbsøk',
     BEHANDLING: 'Medisinsk behandling',
     TILTAK: 'Tiltak fra NAV',
@@ -105,7 +105,7 @@ export const aktiviteter = {
 
 
 export const tiltakstyper = {
-    SOEKEAVTALE: 'Avtale om jobbsøk',
+    SOKEAVTALE: 'Avtale om jobbsøk',
     JOBBSOEKING: 'Jobbsøk',
     BEHANDLING: 'Medisinsk behandling',
     TILTAK: 'Tiltak fra NAV',
