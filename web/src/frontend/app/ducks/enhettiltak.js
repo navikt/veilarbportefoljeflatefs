@@ -7,7 +7,9 @@ export const FEILET = 'veilarbportefoljeflatefs/enhettiltak/FEILET';
 export const PENDING = 'veilarbportefoljeflatefs/enhettiltak/PENDING';
 
 const initalState = {
-    data: {}
+    data: {
+        tiltak: {}
+    }
 };
 
 // Reducer
