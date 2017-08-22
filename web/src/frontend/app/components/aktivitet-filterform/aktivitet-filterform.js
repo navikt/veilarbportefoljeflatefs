@@ -84,7 +84,7 @@ AktivitetFilterform.propTypes = {
     valg: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     closeDropdown: PT.func.isRequired,
     handleSubmit: PT.func.isRequired,
-    change: PT.object.isRequired,
+    change: PT.func.isRequired,
     onSubmit: PT.func.isRequired
 };
 

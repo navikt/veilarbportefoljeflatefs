@@ -72,7 +72,7 @@ EnhetSide.propTypes = {
     hentStatusTall: PT.func.isRequired,
     hentEnhetTiltak: PT.func.isRequired,
     statustall: PT.shape({ data: statustallShape }),
-    enhettiltak: PT.arrayOf(PT.string),
+    enhettiltak: PT.object.isRequired,
     intl: intlShape.isRequired
 };
 
