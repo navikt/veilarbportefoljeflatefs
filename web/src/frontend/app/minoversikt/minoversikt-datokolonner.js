@@ -13,7 +13,7 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }) {
     return (
         <div className="datokolonner__wrapper">
             <DatoKolonne
-                dato={bruker.arbeidsliste.frist || ''}
+                dato={bruker.arbeidsliste.frist}
                 skalVises={filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
             />
             <DatoKolonne
