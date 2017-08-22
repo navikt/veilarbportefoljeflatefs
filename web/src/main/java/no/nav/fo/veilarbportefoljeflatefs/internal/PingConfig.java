@@ -24,11 +24,6 @@ public class PingConfig {
     }
 
     @Bean
-    public Pingable issoSystemBrukerToken() {
-        return new IssoSystemBrukerTokenHelsesjekk();
-    }
-
-    @Bean
     public Pingable portefoljePing() throws IOException {
         return () -> {
             String url = System.getProperty("veilarbportefolje.hent_portefolje.url");
