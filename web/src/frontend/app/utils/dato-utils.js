@@ -149,13 +149,13 @@ export function dateGreater(date1, date2) {
     return year1 === year2 && mon1 === mon2 && day1 > day2;
 }
 
-export function validerDatoField(input, intl, alternativer) {
+export function validerDatoField(input, intl, alternativer, valgfritt) {
     const { fra } = alternativer;
     const inputDato = moment(input);
 
     const fraDato = moment(fra);
 
-    if (!input) {
+    if (!valgfritt && !input) {
         return intl.formatMessage({
             id: 'datepicker.feilmelding.mangler-dato'
         });
