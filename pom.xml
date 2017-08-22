@@ -23,10 +23,10 @@
     <properties>
         <!-- Egenlagde -->
         <modig.security.version>1.0.24</modig.security.version>
-        <common-jetty.version>2.0.12</common-jetty.version>
-        <common-types.version>1.2</common-types.version>
-        <common-web.version>2.0.4</common-web.version>
-        <common-test.version>1.2</common-test.version>
+        <common-jetty.version>2.0.16</common-jetty.version>
+        <common-types.version>2.0.9</common-types.version>
+        <common-web.version>5.0.15</common-web.version>
+        <common-test.version>2.0.3</common-test.version>
         <modig-log-filter.version>1.1.3</modig-log-filter.version>
         <modig-testcertificates.version>1.1.0</modig-testcertificates.version>
         <modig-core-test.version>1.0.0</modig-core-test.version>
@@ -49,6 +49,7 @@
         <!-- Test -->
         <junit.version>4.11</junit.version>
         <mockito.version>1.10.19</mockito.version>
+        <test-config.version>1.60.80</test-config.version>
     </properties>
 
     <dependencyManagement>
@@ -313,6 +314,12 @@
                 <groupId>org.apache.geronimo.components</groupId>
                 <artifactId>geronimo-jaspi</artifactId>
                 <version>2.0.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>no.nav.sbl.dialogarena</groupId>
+                <artifactId>test-config</artifactId>
+                <version>${test-config.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
