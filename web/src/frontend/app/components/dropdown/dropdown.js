@@ -69,14 +69,14 @@ class Dropdown extends Component {
     }
 
     render() {
-        const { name, className, disabled, children } = this.props;
+        const { name, className, disabled, children, hoyre } = this.props;
         const { apen } = this.state;
 
         const augmentedChild = Children.map(children, (child) => cloneElement(child, {
             closeDropdown: this.lukkDropdown
         }));
         const innhold = !apen ? null : (
-            <div className="dropdown__innhold" id={`${name}-dropdown__innhold`} ref={this.settFokus}>
+            <div className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`} id={`${name}-dropdown__innhold`} ref={this.settFokus}>
                 {augmentedChild}
             </div>
         );
