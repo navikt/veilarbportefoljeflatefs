@@ -98,8 +98,7 @@ const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
         const arbeidsliste = {
             kommentar: formData.kommentar,
-            frist: formData.frist,
-            redigering: true
+            frist: formData.frist
         };
         redigerArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
             .then((res) => oppdaterState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, dispatch));
