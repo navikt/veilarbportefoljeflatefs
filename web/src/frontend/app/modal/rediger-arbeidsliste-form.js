@@ -34,7 +34,7 @@ function label(bruker) {
     />);
 }
 
-function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
+function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker, sistEndretDato, sistEndretAv }) {
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -47,6 +47,15 @@ function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
                     disabled={false}
                     visTellerFra={0}
                 />
+                <p className="arbeidsliste--modal-redigering">
+                    <FormattedMessage
+                        id="arbeidsliste.kommentar.footer"
+                        values={{
+                            dato: sistEndretDato,
+                            veileder: sistEndretAv
+                        }}
+                    />
+                </p>
                 <Datovelger
                     feltNavn={'frist'}
                     labelId="arbeidsliste-form.label.dato"
@@ -68,7 +77,9 @@ function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
 RedigerArbeidslisteForm.propTypes = {
     lukkModal: PT.func.isRequired,
     handleSubmit: PT.func.isRequired,
-    bruker: brukerShape.isRequired
+    bruker: brukerShape.isRequired,
+    sistEndretDato: PT.string.isRequired,
+    sistEndretAv: PT.string.isRequired
 };
 
 const RedigerArbeidslisteFormValidation = validForm({
