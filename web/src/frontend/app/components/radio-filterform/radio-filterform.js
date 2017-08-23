@@ -6,10 +6,9 @@ import { FormattedMessage } from 'react-intl';
 import { filtervalgShape } from '../../proptype-shapes';
 import { lagConfig } from './../../filtrering/filter-konstanter';
 
-function renderFieldsFactory(form) {
+function renderFieldsFactory({ names: _names, valg, skjema, ...fields }) {
     const fieldCls = (className) => classNames('skjemaelement skjemaelement--horisontal', className);
 
-    return ({ names: _names, valg, ...fields }) => { // eslint-disable-line react/prop-types
         const fieldElements = Object.values(fields)
             .map((field) => {
                 const { name, value: _value, ...handler } = field.input;
@@ -20,7 +19,7 @@ function renderFieldsFactory(form) {
                         <div key={field.input.name} className={fieldCls(className)} {...fieldProps}>
                             <Field
                                 id={field.input.name}
-                                name={form} value={name}
+                                name={skjema} value={name}
                                 component="input"
                                 type="radio"
                                 className="skjemaelement__input radioknapp"
@@ -55,7 +54,7 @@ function renderFieldsFactory(form) {
                 </span>
             </div>
         );
-    };
+
 }
 
 function prepSubmit(name, fn, close) {
@@ -82,7 +81,7 @@ function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDr
     return (
         <form className="skjema radio-filterform" onSubmit={submithandler}>
             <div className="radio-filterform__valg">
-                <Fields names={Object.keys(valg)} valg={valg} component={renderFieldsFactory(form)} />
+                <Fields names={Object.keys(valg)} valg={valg} skjema={form} component={renderFieldsFactory}  />
             </div>
             <div className="knapperad blokk-xxs">
                 {submitknapp}
