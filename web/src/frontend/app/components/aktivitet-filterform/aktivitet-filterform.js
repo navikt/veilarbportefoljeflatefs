@@ -64,7 +64,7 @@ function AktivitetFilterform(props) {
                 <span>Nei</span>
             </div>
             {fields}
-
+            <div className="aktivitetfilter_knapper">
             <button type="submit" className="knapp knapp--hoved knapp--mini">
                 Lagre
             </button>
@@ -75,6 +75,7 @@ function AktivitetFilterform(props) {
             >
                 Fjern valg
             </button>
+            </div>
         </form>
     );
 }
