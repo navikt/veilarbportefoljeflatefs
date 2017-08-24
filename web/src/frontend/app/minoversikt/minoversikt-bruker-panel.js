@@ -38,7 +38,7 @@ class MinoversiktBrukerPanel extends Component {
             <Etiketter bruker={bruker} />
         </div>);
 
-        const dato = new Date(bruker.arbeidsliste.endringstidspunkt).toLocaleDateString();
+        const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt).toLocaleDateString();
         const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
         const childrenBody =
             (<div className="brukerpanel__body">
@@ -50,7 +50,7 @@ class MinoversiktBrukerPanel extends Component {
                     <FormattedMessage
                         id="arbeidsliste.kommentar.footer"
                         values={{
-                            dato,
+                            dato: sistEndretDato,
                             veileder: sistEndretAv
                         }}
                     />
@@ -65,7 +65,7 @@ class MinoversiktBrukerPanel extends Component {
                         isOpen={this.state.redigerArbeidslisteModalIsOpen}
                         lukkModal={this.lukkRedigerArbeidslisteModal}
                         innloggetVeileder={innloggetVeileder}
-                        sistEndretDato={dato}
+                        sistEndretDato={sistEndretDato}
                         sistEndretAv={sistEndretAv}
                     />
                 </p>
