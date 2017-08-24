@@ -1,37 +1,76 @@
-.arbeidsliste__modal {
-    margin: 1rem 1rem 1rem 1rem;
 
-    .arbeidslistekommentar {
-        width: 100%;
-        border-top-right-radius: @border-radius-small;
+.modal {
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+    border-radius: 3px;
+
+    .modal-header {
+        height: 4rem;
+        border-bottom: 1px solid #B7B1A9;
+        padding: 1.13rem 1rem;
     }
+    .arbeidsliste__modal {
+        .arbeidsliste-info-tekst {
+            padding: 1rem 2rem 0 2rem;
+        }
+        .input-fields {
+            padding: 1rem 2rem;
+        }
+        .arbeidslistekommentar {
+            width: 100%;
+            //border-top-right-radius: @border-radius-small;
+        }
 
-    .skjemaelement--harFeil textarea {
-        margin-bottom: 0.5rem;
+        .typo-undertittel {
+            margin-bottom: 0.5rem;
+        }
+
+        .skjemaelement--harFeil textarea {
+            margin-bottom: 0.5rem;
+        }
+
+        .knapp--hoved {
+            margin-right: 1rem;
+        }
+
+        .skjemaelement__label {
+                margin-bottom: .25em;
+        }
+
+        .modal-footer {
+            display: flex;
+            border-top: 1px solid #B7B1A9;
+            padding: 1.7rem 2rem;
+        }
+
+        .arbeidsliste--panel-footer {
+            color: @grayInactive;
+            text-align: right;
+            font-style: italic;
+
+            button {
+                font-style: italic;
+                border-bottom: none;
+            }
+        }
+
+        .arbeidsliste--rediger-lenke {
+            margin-left: 1rem;
+        }
+
+        .modal_overflow {
+            overflow-x: visible !important;
+            overflow-y: visible !important;
+        }
     }
-
-
-   .knapp--hoved {
-       margin-right: 1rem;
-   }
 }
-
-.arbeidsliste--panel-footer {
-    color: @gray-inactive;
-    text-align: right;
-    font-style: italic;
-
-    button {
-        font-style: italic;
-        border-bottom: none;
-    }
-}
-
-.arbeidsliste--rediger-lenke {
-    margin-left: 1rem;
-}
-
-.modal_overflow {
-    overflow-x: visible !important;
-    overflow-y: visible !important;
+.modal.arbeidsliste-modal {
+    position: relative;
+    border: 1px solid #B7B1A9;
+    background-color: @grayBackground;
+    outline: none;
+    max-width: 45rem;
+    padding: 0;
+    width: 100%;
 }

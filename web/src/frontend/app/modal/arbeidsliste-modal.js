@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import Modal from 'nav-frontend-modal';
+import NavFrontendModal from 'nav-frontend-modal';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { skjulModal } from '../ducks/modal';
@@ -9,7 +9,7 @@ import LeggTilArbeidslisteForm from './legg-til-arbeidsliste-form';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 import { brukerShape } from '../proptype-shapes';
 
-Modal.setAppElement('#applikasjon');
+NavFrontendModal.setAppElement('#applikasjon');
 
 class ArbeidslisteModal extends Component {
     constructor(props) {
@@ -33,9 +33,20 @@ class ArbeidslisteModal extends Component {
         this.props.fjernMarkerteBrukere();
     }
 
+
+    leggTilHeader() {
+        return (
+            <div className="modal-header-wrapper">
+                <header className="modal-header">
+
+                </header>
+            </div>
+        );
+    }
     leggTilModal(valgteBrukere) {
         return (
             <div className="arbeidsliste__modal">
+                <div className="arbeidsliste-info-tekst">
                 <Innholdstittel tag="h1" className="blokk-xs">
                     <FormattedMessage id="modal.legg.til.arbeidsliste.tittel" />
                 </Innholdstittel>
@@ -45,6 +56,7 @@ class ArbeidslisteModal extends Component {
                         values={{ antall: valgteBrukere.length }}
                     />
                 </Normaltekst>
+            </div>
                 <LeggTilArbeidslisteForm
                     valgteBrukere={valgteBrukere}
                     lukkModal={this.lukkModal}
@@ -80,15 +92,17 @@ class ArbeidslisteModal extends Component {
         const { valgteBrukere } = this.props;
         const fjerne = valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
         return (
-            <Modal
-                className={valgteBrukere.length < 3 ? 'modal_overflow' : null} //
+            <NavFrontendModal
+                className={`arbeidsliste-modal ${valgteBrukere.length < 3 ? 'modal_overflow' : null}`}
                 contentLabel="arbeidsliste"
                 isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
+                // contentClass="arbeidsliste"
                 closeButton
             >
+                {this.leggTilHeader()}
                 { fjerne ? this.fjernFraModal(valgteBrukere) : this.leggTilModal(valgteBrukere) }
-            </Modal>);
+            </NavFrontendModal>);
     }
 }
 
