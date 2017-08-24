@@ -84,7 +84,11 @@ class VeilederesideVisning extends Component {
 
         return (
             <div>
-                <Toolbar filtergruppe="veiledere" onPaginering={this.oppdaterPaginering} />
+                <Toolbar
+                    filtergruppe="veiledere"
+                    onPaginering={this.oppdaterPaginering}
+                    sokVeilederSkalVises
+                />
                 <VeiledereTabell
                     veiledere={limitedVeiledere}
                     sorterPaaEtternavn={() => this.props.sortBy('etternavn')}
