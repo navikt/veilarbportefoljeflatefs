@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { FieldArray } from 'redux-form';
 import { validForm, rules } from 'react-redux-form-validation';
 import { FormattedMessage } from 'react-intl';
+import { Undertittel } from 'nav-frontend-typografi';
 import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { lagreArbeidsliste } from '../ducks/arbeidsliste';
@@ -11,7 +12,7 @@ import { leggTilStatustall } from '../ducks/statustall';
 import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 
-const KOMMENTAR_MAKS_LENGDE = 250;
+const KOMMENTAR_MAKS_LENGDE = 255;
 
 const begrensetKommentarLengde = rules.maxLength(
     KOMMENTAR_MAKS_LENGDE,
@@ -26,14 +27,14 @@ const pakrevdTekst = rules.minLength(
 );
 
 function label(bruker) {
-    return (<FormattedMessage
+    return (<Undertittel><FormattedMessage
         id="modal.legg.til.arbeidsliste.brukerinfo"
         values={{
             etternavn: bruker.etternavn,
             fornavn: bruker.fornavn,
             fnr: bruker.fnr
         }}
-    />);
+    /></Undertittel>);
 }
 
 // eslint-disable-next-line react/prop-types
@@ -41,22 +42,23 @@ function renderFelter({ fields }) {
     return (
         <div>
             {fields.map((name, idx) => (
-                <div key={`${name}`}>
+                <div  className="input-fields" key={`${name}`}>
                     <div className="nav-input blokk-s">
+                        {label(fields.get(idx))}
                         <Textarea
                             labelId={`${name}.kommentar`}
-                            label={label(fields.get(idx))}
+                            label="Kommentar"
                             feltNavn={`${name}.kommentar`}
                             placeholder=""
                             maxLength={KOMMENTAR_MAKS_LENGDE}
                             disabled={false}
-                            visTellerFra={0}
                             validate={(value) => (pakrevdTekst(value) || begrensetKommentarLengde(value))}
                         />
                     </div>
                     <Datovelger
                         feltNavn={`${name}.frist`}
                         labelId="arbeidsliste-form.label.dato"
+                        label="Frist"
                         tidligsteFom={new Date()}
                     />
                 </div>
@@ -69,12 +71,14 @@ function LeggTilArbeidslisteForm({ lukkModal, handleSubmit }) {
         <form onSubmit={handleSubmit}>
             <FieldArray name="arbeidsliste" component={renderFelter} />
             <div>
-                <button type="submit" className="knapp knapp--hoved" onClick={handleSubmit}>
-                    <FormattedMessage id="modal.knapp.lagre" />
-                </button>
-                <button type="button" className="knapp" onClick={lukkModal}>
-                    <FormattedMessage id="modal.knapp.avbryt" />
-                </button>
+                <div className="modal-footer">
+                    <button type="submit" className="knapp knapp--hoved" onClick={handleSubmit}>
+                        <FormattedMessage id="modal.knapp.lagre" />
+                    </button>
+                    <button type="button" className="knapp" onClick={lukkModal}>
+                        <FormattedMessage id="modal.knapp.avbryt" />
+                    </button>
+                </div>
             </div>
         </form>
     );

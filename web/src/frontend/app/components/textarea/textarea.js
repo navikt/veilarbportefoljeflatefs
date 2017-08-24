@@ -7,14 +7,21 @@ import { Textarea as NavFrontendTextarea } from 'nav-frontend-skjema';
 function getTellerTekst(antallTegn, maxLength, visTellerFra) {
     const tegnIgjen = maxLength - antallTegn;
     const tegnForMange = antallTegn - maxLength;
+    const tellerFra = visTellerFra || maxLength / 10;
 
     if (tegnForMange > 0) {
         return (
-            <span>{tegnForMange}</span>
+            <FormattedMessage
+                id="tekstfelt.antalltegn.for-mange"
+                values={{ antall: `${tegnForMange}` }}
+            />
         );
-    } else if (visTellerFra === 0 || visTellerFra >= tegnIgjen) {
+    } else if (tegnIgjen <= tellerFra) {
         return (
-            <span>{tegnIgjen}</span>
+            <FormattedMessage
+                id="tekstfelt.antalltegn.flere-igjen"
+                values={{ antall: `${tegnIgjen}` }}
+            />
         );
     }
     return <span>&nbsp;</span>;

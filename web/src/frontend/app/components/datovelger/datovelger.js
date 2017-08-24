@@ -110,7 +110,7 @@ class DatoField extends Component {
                     this.container = container;
                 }}
             >
-                <label className="skjemaelement__label text-hide" htmlFor={id}>
+                <label className="skjemaelement__label" htmlFor={id}>
                     {label}
                 </label>
                 <div // eslint-disable-line jsx-a11y/no-static-element-interactions, jsx-a11y/onclick-has-role
