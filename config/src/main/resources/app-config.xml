@@ -15,7 +15,7 @@
     <resources>
         <rest mapToProperty="iadecorator" alias="iadecorator-js"/>
         <fileLibrary alias="veilarbportefoljeflatefs.ledetekster" mapToProperty="folder.ledetekster" />
-        <applicationProperties alias="veilarbportefoljeflatefs.properties"/>
+        <rest alias="veilarblogin.redirect-url" mapToProperty="oidc-redirect" />
 
 
         <baseUrl alias="veilarbprotefoljePingURL" mapToProperty="veilarbportefolje.hent_portefolje" />
