@@ -126,6 +126,7 @@ class EnhetsportefoljeVisning extends Component {
                             fra,
                             antall
                         )}
+                        sokVeilederSkalVises
                     />
                     {
                         visDiagram ?
