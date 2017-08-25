@@ -36,7 +36,10 @@ function InnerTextAreaComponent({
                                     meta, // eslint-disable-line no-unused-vars
                                     ...rest
                                 }) {
-    const feil = errorMessage ? { feilmelding: errorMessage } : undefined;
+    let feil = errorMessage ? { feilmelding: errorMessage } : undefined;
+    if (feil === undefined && !meta.pristine && meta.active && !meta.valid) {
+        feil = {feilmelding: meta.error};
+    }
     return (
         <NavFrontendTextarea
             textareaClass="skjemaelement__input input--fullbredde arbeidslistekommentar"
@@ -60,7 +63,7 @@ InnerTextAreaComponent.propTypes = {
 };
 
 InnerTextAreaComponent.defaultProps = {
-    errorMessage: undefined,
+    // errorMessage: undefined,
     meta: undefined,
     input: undefined,
     visTellerFra: undefined

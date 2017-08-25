@@ -88,15 +88,15 @@ NavBar.defaultProps = {
 class DayPickerComponent extends Component {
     componentDidMount() {
         this.lukk = () => {
-            this.props.lukk();
+            // this.props.lukk();
         };
 
-        document.body.click(); // fjern andre datepickere
-        document.addEventListener('click', this.lukk);
+        // document.body.click(); // fjern andre datepickere
+        // document.addEventListener('click', this.lukk);
     }
 
     componentWillUnmount() {
-        document.removeEventListener('click', this.lukk);
+        // document.removeEventListener('click', this.lukk);
     }
 
     getDateFromValue() {
