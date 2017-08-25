@@ -43,14 +43,14 @@ class DatoField extends Component {
     onFocusOut(e) {
         const targetErChildnode = this.container.contains(e.relatedTarget);
         if (!targetErChildnode) {
-            // this.lukk(false);
+            this.lukk(false);
         }
     }
 
     onKeyUp(e) {
         const ESCAPE_KEYCODE = 27;
         if (e.which === ESCAPE_KEYCODE) {
-            // this.lukk();
+            this.lukk();
         }
     }
 
@@ -65,7 +65,7 @@ class DatoField extends Component {
     toggle(e) {
         e.preventDefault();
         if (this.state.erApen) {
-            // this.lukk();
+            this.lukk();
         } else {
             this.apne();
         }
@@ -77,12 +77,12 @@ class DatoField extends Component {
     }
 
     lukk(settFokus = true) {
-        // this.setState({
-        //     erApen: false
-        // });
-        // if (settFokus) {
-        //     this.toggleButton.focus();
-        // }
+        this.setState({
+            erApen: false
+        });
+        if (settFokus) {
+            this.toggleButton.focus();
+        }
     }
 
     render() {
@@ -110,7 +110,7 @@ class DatoField extends Component {
                     this.container = container;
                 }}
             >
-                <label className="skjemaelement__label" htmlFor={id}>
+                <label className="skjemaelement__label text-hide" htmlFor={id}>
                     {label}
                 </label>
                 <div // eslint-disable-line jsx-a11y/no-static-element-interactions, jsx-a11y/onclick-has-role
