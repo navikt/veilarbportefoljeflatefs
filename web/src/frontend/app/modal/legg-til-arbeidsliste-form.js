@@ -127,16 +127,12 @@ const mapStateToProps = (state, props) => {
 };
 
 function oppdaterState(res, arbeidsliste, innloggetVeileder, dispatch) {
-    console.log(res);
     if (!res) {
-        console.log("visServerFeilModal");
         return visServerfeilModal()(dispatch);
     }
 
     const brukereOK = res.data.data;
     const brukereError = res.data.error;
-    console.log("BrukereError:");
-    console.log(brukereError);
 
     const arbeidslisteToDispatch = arbeidsliste
         .map((a) => ({
@@ -148,7 +144,6 @@ function oppdaterState(res, arbeidsliste, innloggetVeileder, dispatch) {
         .filter((bruker) => brukereOK.includes(bruker.fnr));
 
     if (brukereError.length > 0) {
-        console.log("FEIL");
         visFeiletModal({
             aarsak: LEGG_TIL_ARBEIDSLISTE_FEILET,
             brukereError
