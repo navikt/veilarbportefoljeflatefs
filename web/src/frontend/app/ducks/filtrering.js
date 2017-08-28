@@ -93,7 +93,7 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = 
 }
 
 export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
-    if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK !== "NA")) {
+    if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === "JA")) {
         return (dispatch, getState) => {
             dispatch({
                 type: ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,

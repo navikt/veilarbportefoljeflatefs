@@ -113,7 +113,7 @@ function FiltreringFilter({ filtervalg, actions, enhettiltak }) {
                             onSubmit={actions.endreFiltervalg}
                         />
                     </Dropdown>
-                    <Dropdown name="Tiltakstype" className="dropdown--130bredde" hoyre={true} disabled={!(filtervalg.aktiviteter.TILTAK === "JA" || filtervalg.aktiviteter.TILTAK === "NEI")}>
+                    <Dropdown name="Tiltakstype" className="dropdown--130bredde" hoyre={true} disabled={!(filtervalg.aktiviteter.TILTAK === "JA")}>
                         <CheckboxFilterform
                             form="tiltakstyper"
                             valg={enhettiltak}
