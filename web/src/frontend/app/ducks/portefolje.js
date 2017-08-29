@@ -5,7 +5,7 @@ import { oppdaterPortefolje } from './filtrering';
 import { pagineringSetup } from './paginering';
 import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
-import { hentStatusTall } from "../ducks/statustall";
+import { hentStatusTall } from '../ducks/statustall';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';

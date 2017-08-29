@@ -76,7 +76,11 @@ class Dropdown extends Component {
             closeDropdown: this.lukkDropdown
         }));
         const innhold = !apen ? null : (
-            <div className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`} id={`${name}-dropdown__innhold`} ref={this.settFokus}>
+            <div
+                className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`}
+                id={`${name}-dropdown__innhold`}
+                ref={this.settFokus}
+            >
                 {augmentedChild}
             </div>
         );
@@ -110,7 +114,8 @@ Dropdown.propTypes = {
     name: PT.string.isRequired,
     children: PT.oneOfType([PT.node, PT.arrayOf(PT.node)]).isRequired,
     className: PT.string,
-    onLukk: PT.func
+    onLukk: PT.func,
+    hoyre: PT.bool.isRequired
 };
 Dropdown.defaultProps = {
     apen: false

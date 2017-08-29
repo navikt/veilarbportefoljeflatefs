@@ -105,7 +105,7 @@ function FiltreringFilter({ filtervalg, actions, enhettiltak }) {
                     <Element className="blokk-xxs" tag="h3">
                         <FormattedMessage id="filtrering.filter.tittel.aktivitet" />
                     </Element>
-                    <Dropdown name="Aktivitet" className="dropdown--130bredde" hoyre={true}>
+                    <Dropdown name="Aktivitet" className="dropdown--130bredde" hoyre>
                         <AktivitetFilterform
                             form="aktiviteter"
                             valg={aktiviteter}
@@ -113,7 +113,12 @@ function FiltreringFilter({ filtervalg, actions, enhettiltak }) {
                             onSubmit={actions.endreFiltervalg}
                         />
                     </Dropdown>
-                    <Dropdown name="Tiltakstype" className="dropdown--130bredde" hoyre={true} disabled={!(filtervalg.aktiviteter.TILTAK === "JA")}>
+                    <Dropdown
+                        name="Tiltakstype"
+                        className="dropdown--130bredde"
+                        hoyre
+                        disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
+                    >
                         <CheckboxFilterform
                             form="tiltakstyper"
                             valg={enhettiltak}
@@ -139,6 +144,7 @@ FiltreringFilter.defaultProps = {
 };
 
 FiltreringFilter.propTypes = {
+    enhettiltak: PT.object.isRequired,
     filtervalg: filtervalgShape.isRequired,
     actions: PT.shape({
         endreFiltervalg: PT.func

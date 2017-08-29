@@ -9,7 +9,7 @@ import { lagConfig } from './../../filtrering/filter-konstanter';
 function renderFieldsFactory({ names: _names, valg, skjema, ...fields }) {
     const fieldCls = (className) => classNames('skjemaelement skjemaelement--horisontal', className);
 
-        const fieldElements = Object.values(fields)
+    const fieldElements = Object.values(fields)
             .map((field) => {
                 const { name, value: _value, ...handler } = field.input;
                 const { label, className, ...fieldProps } = lagConfig(valg[field.input.name]);
@@ -34,8 +34,8 @@ function renderFieldsFactory({ names: _names, valg, skjema, ...fields }) {
                 };
             });
 
-        const elements = fieldElements.map((fieldConfig) => fieldConfig.element);
-        const visibleElements = fieldElements
+    const elements = fieldElements.map((fieldConfig) => fieldConfig.element);
+    const visibleElements = fieldElements
             .reduce((antall, fieldConfig) => {
                 if (fieldConfig.hidden) {
                     return antall;
@@ -43,18 +43,17 @@ function renderFieldsFactory({ names: _names, valg, skjema, ...fields }) {
                 return antall + 1;
             }, 0);
 
-        return (
-            <div className="field__container">
-                {elements}
-                <span className="text-hide" aria-live="polite" aria-atomic="true">
-                    <FormattedMessage
-                        id="components.viser.antall.treff"
-                        values={{ antall: visibleElements }}
-                    />
-                </span>
-            </div>
-        );
-
+    return (
+        <div className="field__container">
+            {elements}
+            <span className="text-hide" aria-live="polite" aria-atomic="true">
+                <FormattedMessage
+                    id="components.viser.antall.treff"
+                    values={{ antall: visibleElements }}
+                />
+            </span>
+        </div>
+    );
 }
 
 function prepSubmit(name, fn, close) {
@@ -81,7 +80,7 @@ function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDr
     return (
         <form className="skjema radio-filterform" onSubmit={submithandler}>
             <div className="radio-filterform__valg">
-                <Fields names={Object.keys(valg)} valg={valg} skjema={form} component={renderFieldsFactory}  />
+                <Fields names={Object.keys(valg)} valg={valg} skjema={form} component={renderFieldsFactory} />
             </div>
             <div className="knapperad blokk-xxs">
                 {submitknapp}
@@ -100,6 +99,13 @@ RadioFilterform.propTypes = {
     filtervalg: filtervalgShape, // eslint-disable-line react/no-unused-prop-types
     onSubmit: PT.func.isRequired
 };
+
+renderFieldsFactory.propTypes = {
+    names: PT.object.isRequired,
+    valg: PT.arrayOf(PT.string).isRequired,
+    skjema: PT.string.isRequired
+};
+
 
 const mapStateToProps = (state, ownProps) => {
     const name = ownProps.form;

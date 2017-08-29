@@ -7,7 +7,7 @@ import { brukerShape } from '../proptype-shapes';
 
 Modal.setAppElement('#applikasjon');
 
-function ArbeidslisteModalRediger({bruker, isOpen, lukkModal, innloggetVeileder, ...props}) {
+function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder, ...props }) {
     return (
         <Modal
             className="modal_overflow"
@@ -18,7 +18,7 @@ function ArbeidslisteModalRediger({bruker, isOpen, lukkModal, innloggetVeileder,
         >
             <div className="arbeidsliste__modal">
                 <Innholdstittel tag="h1" className="blokk-xs">
-                    <FormattedMessage id="modal.rediger.arbeidsliste.tittel"/>
+                    <FormattedMessage id="modal.rediger.arbeidsliste.tittel" />
                 </Innholdstittel>
                 <RedigerArbeidslisteForm
                     bruker={bruker}
