@@ -48,18 +48,18 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
         this.handler = this.handler.bind(this);
     }
 
-    handler(e: HTMLElementEventMap["click"]) {
+    handler(e: HTMLElementEventMap['click']) {
         if (this.state.apen && !isChildOf(this.component, e.target)) {
             this.lukkDropdown();
         }
     }
 
     componentDidMount() {
-        document.body.addEventListener('click', this.handler);// eslint-disable-line no-undef
+        document.body.addEventListener('click', this.handler); // eslint-disable-line no-undef
     }
 
     componentWillUnmount() {
-        document.body.removeEventListener('click', this.handler);// eslint-disable-line no-undef
+        document.body.removeEventListener('click', this.handler); // eslint-disable-line no-undef
     }
 
     settFokus(element) { // eslint-disable-line class-methods-use-this
@@ -71,8 +71,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
 
     toggleDropdown() {
         const {
-            onLukk = () => {
-            }
+            onLukk = () => void(0)
         } = this.props;
         if (this.state.apen) {
             onLukk();
@@ -82,12 +81,11 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
 
     lukkDropdown() {
         const {
-            onLukk = () => {
-            }
+            onLukk = () => void(0)
         } = this.props;
         this.setState({apen: false});
 
-        if(this.btn != null) {
+        if (this.btn != null) {
             this.btn.focus();
         }
         onLukk();
