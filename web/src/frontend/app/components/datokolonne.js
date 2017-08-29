@@ -1,7 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 
 function DatoKolonne({ dato, skalVises }) {
-    if (!skalVises || dato === null) {
+    if (!skalVises || !dato) {
         return null;
     }
     const date = new Date(dato);

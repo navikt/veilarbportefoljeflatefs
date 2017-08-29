@@ -38,37 +38,40 @@ class MinoversiktBrukerPanel extends Component {
             <Etiketter bruker={bruker} />
         </div>);
 
-        const dato = new Date(bruker.arbeidsliste.endringstidspunkt).toLocaleDateString();
+        const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt).toLocaleDateString();
+        const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
         const childrenBody =
-        (<div className="brukerpanel__body">
-            <h5>
-                <FormattedMessage id="arbeidsliste.kommentar.header" />
-            </h5>
-            {bruker.arbeidsliste.kommentar}
-            <p className="arbeidsliste--panel-footer">
-                <FormattedMessage
-                    id="arbeidsliste.kommentar.footer"
-                    values={{
-                        dato,
-                        veileder: bruker.arbeidsliste.sistEndretAv.veilederId
-                    }}
-                />
-                <button
-                    className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
-                    onClick={this.redigerOnClickHandler}
-                >
-                    <FormattedMessage id="arbeidsliste.kommentar.footer.knapp" />
-                </button>
-                <ArbeidslisteModalRediger
-                    bruker={bruker}
-                    isOpen={this.state.redigerArbeidslisteModalIsOpen}
-                    lukkModal={this.lukkRedigerArbeidslisteModal}
-                    innloggetVeileder={innloggetVeileder}
-                />
-            </p>
-        </div>
+            (<div className="brukerpanel__body">
+                <h5>
+                    <FormattedMessage id="arbeidsliste.kommentar.header" />
+                </h5>
+                {bruker.arbeidsliste.kommentar}
+                <p className="arbeidsliste--panel-footer typo-undertekst">
+                    <FormattedMessage
+                        id="arbeidsliste.kommentar.footer"
+                        values={{
+                            dato: sistEndretDato,
+                            veileder: sistEndretAv
+                        }}
+                    />
+                    <button
+                        className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
+                        onClick={this.redigerOnClickHandler}
+                    >
+                        <FormattedMessage id="arbeidsliste.kommentar.footer.knapp" />
+                    </button>
+                    <ArbeidslisteModalRediger
+                        bruker={bruker}
+                        isOpen={this.state.redigerArbeidslisteModalIsOpen}
+                        lukkModal={this.lukkRedigerArbeidslisteModal}
+                        innloggetVeileder={innloggetVeileder}
+                        sistEndretDato={sistEndretDato}
+                        sistEndretAv={sistEndretAv}
+                    />
+                </p>
+            </div>
 
-        );
+            );
 
         return (
         bruker.arbeidsliste.arbeidslisteAktiv ?

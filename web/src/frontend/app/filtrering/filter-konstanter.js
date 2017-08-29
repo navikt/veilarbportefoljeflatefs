@@ -104,7 +104,6 @@ export const aktiviteter = {
     GRUPPEAKTIVITET: 'Gruppeaktivitet'
 };
 
-
 const veiledere = {
 };
 

@@ -28,6 +28,7 @@ function antallFilter(filtervalg) {
         .map(([_, value]) => {
             if (value === true) return 1;
             else if (Array.isArray(value)) return value.length;
+            else if (typeof value === 'object') return value ? Object.entries(value).length : 0;
             else if (value) return 1;
             return 0;
         }).reduce((a, b) => a + b, 0);
@@ -126,6 +127,7 @@ class EnhetsportefoljeVisning extends Component {
                             fra,
                             antall
                         )}
+                        sokVeilederSkalVises
                     />
                     {
                         visDiagram ?
