@@ -5,6 +5,8 @@
   "author": "NAV",
   "license": "MIT",
   "devDependencies": {
+    "@types/classnames": "2.2.3",
+    "@types/react": "16.0.5",
     "autoless": "0.1.7",
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
@@ -36,7 +38,7 @@
     "react-addons-test-utils": "15.6.0",
     "rimraf": "2.6.1",
     "ts-node": "3.2.0",
-    "typescript": "2.4.0",
+    "typescript": "2.4.2",
     "webpack": "2.6.1"
   },
   "dependencies": {
@@ -106,7 +108,7 @@
     "build:css": "node ./node_modules/less/bin/lessc app/index.less ../main/webapp/css/index.css",
     "build:html": "node script/copy-html.js",
     "dev:less": "autoless --interval 100 ./app ./../main/webapp/css",
-    "dev:ts": "tsc && parallelshell \"tsc -w\"  \"webpack -w\" \"npm run dev:less\"",
+    "dev:ts": "tsc && parallelshell \"tsc -w\"  \"webpack -w --define process.env.production=true\" \"npm run dev:less\"",
     "dev:html": "node script/copy-html-dev.js --development",
     "dev:api": "node script/api.js",
     "dev:server": "node script/dev.js",

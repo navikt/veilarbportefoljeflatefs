@@ -1,4 +1,5 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
+import {FormEvent, PropTypes as PT, StatelessComponent} from 'react'
 import VelgalleCheckboks from './velgalle-checkboks';
 import Tildelbruker from './tildel-bruker';
 import LeggTilArbeidsliste from './legg-til-arbeidsliste';
@@ -6,7 +7,15 @@ import SokVeilder from './sok-veileder';
 import DiagramTabellToggle from './diagram-tabell-toggle';
 import Paginering from './paginering/paginering';
 
-function Toolbar({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenVeiledersPortefolje }) {
+interface ToolbarProps  {
+    filtergruppe: string;
+    onPaginering: (Event: FormEvent<HTMLButtonElement>) => void;
+    sokVeilederSkalVises?: boolean;
+    visesAnnenVeiledersPortefolje?: boolean;
+    children?: React.ReactNode;
+}
+
+const Toolbar: StatelessComponent = ({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenVeiledersPortefolje }: ToolbarProps) => {
     return (
         <section className="toolbar blokk-xs">
             <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
@@ -26,7 +35,7 @@ function Toolbar({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenV
             </div>
         </section>
     );
-}
+};
 
 Toolbar.propTypes = {
     filtergruppe: PT.string.isRequired,
