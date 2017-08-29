@@ -6,6 +6,7 @@ import LeggTilArbeidsliste from './legg-til-arbeidsliste';
 import SokVeilder from './sok-veileder';
 import DiagramTabellToggle from './diagram-tabell-toggle';
 import Paginering from './paginering/paginering';
+import Listevisning from "./listevisning";
 
 interface ToolbarProps {
     filtergruppe: string;
@@ -20,6 +21,7 @@ const Toolbar: StatelessComponent = ({ filtergruppe, onPaginering, sokVeilederSk
         <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
             <VelgalleCheckboks />
             <Tildelbruker veileder={{}} filtergruppe={filtergruppe} />
+            <Listevisning />
             <LeggTilArbeidsliste
                 visArbeidslisteModal={false}
                 visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
@@ -33,7 +35,7 @@ const Toolbar: StatelessComponent = ({ filtergruppe, onPaginering, sokVeilederSk
             <Paginering className="toolbar--skille-mellom-elementer" onChange={onPaginering} />
         </div>
     </section>
-    );
+);
 
 Toolbar.propTypes = {
     filtergruppe: PT.string.isRequired,
