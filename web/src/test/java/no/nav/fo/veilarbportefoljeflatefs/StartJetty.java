@@ -33,8 +33,7 @@ public class StartJetty {
         Jetty jetty = DevelopmentSecurity.setupISSO(Jetty.usingWar()
                 .at("veilarbportefoljeflatefs")
                 .sslPort(9592)
-                .port(9593)
-                .overrideWebXml(), new DevelopmentSecurity.ISSOSecurityConfig(APPLICATION_NAME, TEST_ENV.toString()))
+                .port(9593), new DevelopmentSecurity.ISSOSecurityConfig(APPLICATION_NAME, TEST_ENV.toString()))
                 .configureForJaspic()
                 .buildJetty();
 
