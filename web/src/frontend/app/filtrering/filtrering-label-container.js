@@ -70,6 +70,7 @@ FiltreringLabelContainer.defaultProps = {
 };
 
 FiltreringLabelContainer.propTypes = {
+    enhettiltak: PT.object.isRequired,
     actions: PT.shape({
         slettAlle: PT.func.isRequired,
         slettEnkelt: PT.func.isRequired

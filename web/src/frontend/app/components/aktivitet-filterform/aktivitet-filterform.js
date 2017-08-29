@@ -65,14 +65,14 @@ function AktivitetFilterform(props) {
             </div>
             {fields}
             <div className="aktivitetfilter_knapper">
-            <button type="submit" className="knapp knapp--hoved knapp--mini">
+                <button type="submit" className="knapp knapp--hoved knapp--mini">
                 Lagre
             </button>
-            <button
-                type="button"
-                className="knapp knapp--standard knapp--mini"
-                onClick={reset(props.change, props.valg)}
-            >
+                <button
+                    type="button"
+                    className="knapp knapp--standard knapp--mini"
+                    onClick={reset(props.change, props.valg)}
+                >
                 Fjern valg
             </button>
             </div>

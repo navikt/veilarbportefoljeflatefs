@@ -61,13 +61,13 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 [action.data.filterId]: action.data.filterVerdi,
-                tiltakstyper : []
+                tiltakstyper: []
             };
         case SLETT_AKTIVITETER_OG_TILTAK_FILTER:
             return {
                 ...state,
                 [action.data.filterId]: fjern(state[action.data.filterId], action.data.filterVerdi),
-                tiltakstyper : []
+                tiltakstyper: []
             };
         case SETT_FILTERVALG:
             return { ...action.data };
@@ -93,11 +93,11 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = 
 }
 
 export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
-    if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === "JA")) {
+    if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
         return (dispatch, getState) => {
             dispatch({
                 type: ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
-                data: {filterId, filterVerdi},
+                data: { filterId, filterVerdi },
                 name: filtergruppe
             });
 
@@ -106,36 +106,32 @@ export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', v
                 oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
             }
         };
-    } else {
-        return (dispatch, getState) => {
-            dispatch({type: ENDRE_FILTER, data: {filterId, filterVerdi}, name: filtergruppe});
-
-            if (filtergruppe !== 'veiledere') {
-                // TODO Fjerne denne fra filter-reducer
-                oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
-            }
-        };
     }
+    return (dispatch, getState) => {
+        dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
+
+        if (filtergruppe !== 'veiledere') {
+                // TODO Fjerne denne fra filter-reducer
+            oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
+        }
+    };
 }
 
 export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
-    if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === "JA" || filterVerdi.TILTAK === "NEI")) {
+    if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA' || filterVerdi.TILTAK === 'NEI')) {
         return (dispatch, getState) => {
             dispatch({
                 type: SLETT_AKTIVITETER_OG_TILTAK_FILTER,
-                data: {filterId, filterVerdi},
+                data: { filterId, filterVerdi },
                 name: filtergruppe
             });
             oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
-        }
-    } else {
-        return (dispatch, getState) => {
-            dispatch({ type: SLETT_ENKELT_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
-            oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
         };
-
     }
-
+    return (dispatch, getState) => {
+        dispatch({ type: SLETT_ENKELT_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
+        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
+    };
 }
 
 export function clearFiltervalg(filtergruppe = 'enhet', veileder) {

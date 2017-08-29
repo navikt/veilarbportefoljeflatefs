@@ -195,7 +195,7 @@ function parseDato(dato) {
 const ConnectedDatoField = connect()(DatoField);
 
 function Datovelger(props) {
-    const { feltNavn, tidligsteFom, intl, feltErValgfritt} = props;
+    const { feltNavn, tidligsteFom, intl, feltErValgfritt } = props;
 
     const datoFelt = (
         <ConnectedDatoField
@@ -213,7 +213,7 @@ function Datovelger(props) {
                 validerDatoField(
                     value,
                     intl,
-                    { fra: tidligsteFom},
+                    { fra: tidligsteFom },
                     feltErValgfritt
                 )}
         />
