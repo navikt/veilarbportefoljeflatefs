@@ -1,10 +1,12 @@
-import React, { Children, cloneElement, Component, PropTypes as PT } from 'react';
-import classNames from 'classnames';
+import * as React from 'react';
+import {Children, cloneElement, Component} from 'react';
+import * as classNames from 'classnames';
 
 const btnCls = (erApen, className) => classNames('dropdown', className, {
     'dropdown--apen': erApen
 });
-const btnWrapperCls = (disabled) => classNames('dropdown__btnwrapper', { 'dropdown__btnwrapper--disabled': disabled });
+
+const btnWrapperCls = (disabled) => classNames('dropdown__btnwrapper', {'dropdown__btnwrapper--disabled': disabled});
 
 function isChildOf(parent, element) {
     if (element === document) { // eslint-disable-line no-undef
@@ -17,21 +19,39 @@ function isChildOf(parent, element) {
     return isChildOf(parent, element.parentNode);
 }
 
-class Dropdown extends Component {
+interface DropdownProps {
+    apen?: boolean;
+    disabled?: boolean;
+    name: string;
+    children: React.ReactChild | React.ReactChildren;
+    className?: string;
+    onLukk?: () => void;
+}
+
+interface DropdownState {
+    apen: boolean;
+}
+
+class Dropdown extends Component<DropdownProps, DropdownState> {
+    component: React.ReactNode;
+    btn: HTMLButtonElement | null;
+
     constructor(props) {
         super(props);
 
-        this.state = { apen: this.props.apen };
+        this.state = {apen: this.props.apen === true};
 
         this.toggleDropdown = this.toggleDropdown.bind(this);
         this.lukkDropdown = this.lukkDropdown.bind(this);
         this.bindComponent = this.bindComponent.bind(this);
         this.settFokus = this.settFokus.bind(this);
-        this.handler = (e) => {
-            if (this.state.apen && !isChildOf(this.component, e.target)) {
-                this.lukkDropdown();
-            }
-        };
+        this.handler = this.handler.bind(this);
+    }
+
+    handler(e: HTMLElementEventMap["click"]) {
+        if (this.state.apen && !isChildOf(this.component, e.target)) {
+            this.lukkDropdown();
+        }
     }
 
     componentDidMount() {
@@ -50,17 +70,26 @@ class Dropdown extends Component {
     }
 
     toggleDropdown() {
-        const { onLukk = () => {} } = this.props;
+        const {
+            onLukk = () => {
+            }
+        } = this.props;
         if (this.state.apen) {
             onLukk();
         }
-        this.setState({ apen: !this.state.apen });
+        this.setState({apen: !this.state.apen});
     }
 
     lukkDropdown() {
-        const { onLukk = () => {} } = this.props;
-        this.setState({ apen: false });
-        this.btn.focus();
+        const {
+            onLukk = () => {
+            }
+        } = this.props;
+        this.setState({apen: false});
+
+        if(this.btn != null) {
+            this.btn.focus();
+        }
         onLukk();
     }
 
@@ -69,10 +98,10 @@ class Dropdown extends Component {
     }
 
     render() {
-        const { name, className, disabled, children } = this.props;
-        const { apen } = this.state;
+        const {name, className, disabled, children} = this.props;
+        const {apen} = this.state;
 
-        const augmentedChild = Children.map(children, (child) => cloneElement(child, {
+        const augmentedChild = Children.map(children, (child: React.ReactElement<any>) => cloneElement(child, {
             closeDropdown: this.lukkDropdown
         }));
         const innhold = !apen ? null : (
@@ -103,17 +132,5 @@ class Dropdown extends Component {
         );
     }
 }
-
-Dropdown.propTypes = {
-    apen: PT.bool,
-    disabled: PT.bool,
-    name: PT.string.isRequired,
-    children: PT.oneOfType([PT.node, PT.arrayOf(PT.node)]).isRequired,
-    className: PT.string,
-    onLukk: PT.func
-};
-Dropdown.defaultProps = {
-    apen: false
-};
 
 export default Dropdown;
