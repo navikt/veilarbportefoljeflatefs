@@ -95,12 +95,13 @@ export const rettighetsgruppe = {
 
 export const aktiviteter = {
     SOKEAVTALE: 'Avtale om jobbsøk',
-    JOBBSOEKING: 'Jobbsøk',
+    STILLING: 'Jobbsøk',
     BEHANDLING: 'Medisinsk behandling',
     TILTAK: 'Tiltak fra NAV',
-    EGENAKTIVITET: 'Egendefinert',
+    EGEN: 'Egendefinert',
     IJOBB: 'Er i arbeid',
-    MOTE: 'Møte'
+    MOTE: 'Møte',
+    GRUPPEAKTIVITET: 'Gruppeaktivitet'
 };
 
 
