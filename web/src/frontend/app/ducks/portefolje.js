@@ -5,6 +5,7 @@ import { oppdaterPortefolje } from './filtrering';
 import { pagineringSetup } from './paginering';
 import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
+import { hentStatusTall } from "../ducks/statustall";
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -283,6 +284,13 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                     const side = filtergruppe === 'veileder' ? filtergruppe : 'enhet';
                     const ident = { ident: gjeldendeVeileder.ident || getState().enheter.ident };
                     oppdaterPortefolje(getState, dispatch, side, ident);
+                }, 2000);
+            })
+            .then(() => {
+                // Venter litt slik at indeks kan komme i sync
+                setTimeout(() => {
+                    const enhet = getState().enheter.valgtEnhet.enhet.enhetId;
+                    hentStatusTall(enhet)(dispatch);
                 }, 2000);
             });
     };
