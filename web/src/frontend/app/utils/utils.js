@@ -50,7 +50,8 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer) {
     if (!utlopsdatoer) {
         return null;
     }
-    return Object.values(utlopsdatoer)
+    return Object.keys(utlopsdatoer)
+        .map((key) => utlopsdatoer[key])
         .filter((value) => !!value)
         .map((dateString) => new Date(dateString))
         .sort((d1, d2) => d1 > d2)[0];
