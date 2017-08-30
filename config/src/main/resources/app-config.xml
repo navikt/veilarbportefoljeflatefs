@@ -30,12 +30,8 @@
 
     <loadBalancer isAlive="/veilarbportefoljeflatefs/internal/isAlive" />
 
-    <security>
-        <logins>
-            <openIdConnect moduleClass="no.nav.aura.loginModule.JWTLoginModule">
-                <contextRoot>/veilarbportefoljeflatefs/tjenester/login</contextRoot>
-            </openIdConnect>
-        </logins>
+    <security serviceUserResourceAlias="srvveilarbportefoljeflatefs">
+        <logins/>
     </security>
 
 </application>
