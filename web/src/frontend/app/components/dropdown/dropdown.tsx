@@ -20,7 +20,7 @@ function isChildOf(parent, element) {
 }
 
 interface DropdownProps {
-    hoyre?: boolean
+    hoyre?: boolean;
     apen?: boolean;
     disabled?: boolean;
     name: string;
