@@ -7,7 +7,7 @@ import FiltreringFilter from './filtrering-filter';
 import { endreFiltervalg } from '../ducks/filtrering';
 
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder, actions }) {
+function FiltreringContainer({ filtergruppe, filtervalg, veileder, actions, enhettiltak }) {
     return (
         <div className="blokk-m">
             <Ekspanderbartpanel
@@ -24,7 +24,12 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder, actions }) {
                 tittel="Filter"
                 tittelProps="systemtittel"
             >
-                <FiltreringFilter actions={actions} veileder={veileder} filtervalg={filtervalg} />
+                <FiltreringFilter
+                    actions={actions}
+                    veileder={veileder}
+                    filtervalg={filtervalg}
+                    enhettiltak={enhettiltak}
+                />
             </Ekspanderbartpanel>
         </div>
     );
@@ -41,6 +46,7 @@ FiltreringContainer.defaultProps = {
 };
 
 FiltreringContainer.propTypes = {
+    enhettiltak: PT.object.isRequired,
     filtervalg: filtervalgShape.isRequired,
     filtergruppe: PT.string,
     veileder: veilederShape,

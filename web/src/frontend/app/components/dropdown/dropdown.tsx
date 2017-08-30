@@ -20,6 +20,7 @@ function isChildOf(parent, element) {
 }
 
 interface DropdownProps {
+    hoyre?: boolean;
     apen?: boolean;
     disabled?: boolean;
     name: string;
@@ -96,14 +97,18 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
     }
 
     render() {
-        const {name, className, disabled, children} = this.props;
-        const {apen} = this.state;
+        const { name, className, disabled, children, hoyre } = this.props;
+        const { apen } = this.state;
 
         const augmentedChild = Children.map(children, (child: React.ReactElement<any>) => cloneElement(child, {
             closeDropdown: this.lukkDropdown
         }));
         const innhold = !apen ? null : (
-            <div className="dropdown__innhold" id={`${name}-dropdown__innhold`} ref={this.settFokus}>
+            <div
+                className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`}
+                id={`${name}-dropdown__innhold`}
+                ref={this.settFokus}
+            >
                 {augmentedChild}
             </div>
         );

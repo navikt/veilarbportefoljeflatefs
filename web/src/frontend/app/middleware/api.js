@@ -84,3 +84,8 @@ export function httpArbeidsliste(arbeidsliste, method, additionalPath = '') {
     const config = { ...MED_CREDENTIALS, method, body: JSON.stringify(arbeidsliste) };
     return fetchToJson(url, config);
 }
+
+export function hentEnhetTiltak(enhetId) {
+    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhetId}/tiltak`;
+    return fetchToJson(url, MED_CREDENTIALS);
+}
