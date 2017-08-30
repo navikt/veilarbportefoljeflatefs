@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static java.lang.String.format;
 
 @Configuration
 public class PingConfig {
@@ -22,6 +21,9 @@ public class PingConfig {
     public Pingable issoPing() {
         return new IssoIsAliveHelsesjekk();
     }
+
+    @Bean
+    public Pingable oidcPing() { return new IssoSystemBrukerTokenHelsesjekk(); }
 
     @Bean
     public Pingable portefoljePing() throws IOException {
