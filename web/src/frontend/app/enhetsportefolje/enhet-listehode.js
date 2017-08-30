@@ -8,7 +8,8 @@ import {
     ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
-    UTLOPTE_AKTIVITETER } from '../filtrering/filter-konstanter';
+    UTLOPTE_AKTIVITETER,
+    I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
 
 function Header({ id, className }) {
     return (
@@ -46,6 +47,11 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     className="listeoverskrift__dato listeoverskrift"
                     skalVises={!!filtervalg && filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
                     id={'portefolje.tabell.utlopaktivitet'}
+                />
+                <Listeoverskrift
+                    className="listeoverskrift__dato listeoverskrift"
+                    skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
+                    id={'portefolje.tabell.aktivitet.neste.utlop'}
                 />
                 <Listeoverskrift
                     className="listeoverskrift__veileder listeoverskrift"
@@ -101,6 +107,15 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     erValgt={sorteringsfelt === UTLOPTE_AKTIVITETER}
                     tekstId="portefolje.tabell.ddmmyy"
                     skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
+                    className={'sortering-header__dato'}
+                />
+                <SorteringHeader
+                    sortering={I_AVTALT_AKTIVITET}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === I_AVTALT_AKTIVITET}
+                    tekstId="portefolje.tabell.ddmmyy"
+                    skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
                     className={'sortering-header__dato'}
                 />
                 <Header

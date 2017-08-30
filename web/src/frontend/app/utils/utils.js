@@ -46,3 +46,12 @@ export function sendBrukerTilUrl(url) {
 export function ytelseFilterErAktiv(ytelse) {
     return !!ytelse;
 }
+export function nesteUtlopsdatoEllerNull(utlopsdatoer) {
+    if (!utlopsdatoer) {
+        return null;
+    }
+    return Object.values(utlopsdatoer)
+        .filter((value) => !!value)
+        .map((dateString) => new Date(dateString))
+        .sort((d1, d2) => d1 > d2)[0];
+}
