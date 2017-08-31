@@ -74,6 +74,11 @@ export function utlopsdatoForAktivitetEllerNull(aktiviteter, valgtAktivitetstype
     return aktiviteter[valgtAktivitetstype];
 }
 
+export function erDev() {
+    const host = window.location.host;
+    return host.includes("localhost") || host.includes("127.0.0.1");
+}
+
 export function lagAktiviteterSorteringsfelt(aktivitetstype) {
     return `aktivitet_${aktivitetstype}`;
 }
