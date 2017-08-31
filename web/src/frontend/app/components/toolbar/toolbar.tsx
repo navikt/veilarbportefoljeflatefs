@@ -6,7 +6,7 @@ import LeggTilArbeidsliste from './legg-til-arbeidsliste';
 import SokVeilder from './sok-veileder';
 import DiagramTabellToggle from './diagram-tabell-toggle';
 import Paginering from './paginering/paginering';
-import Listevisning from "./listevisning";
+import Listevisning from './listevisning';
 
 interface ToolbarProps {
     filtergruppe: string;
