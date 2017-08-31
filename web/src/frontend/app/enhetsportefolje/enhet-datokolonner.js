@@ -1,14 +1,20 @@
 import React, { PropTypes as PT } from 'react';
-import { ytelseFilterErAktiv } from '../utils/utils';
+import {
+    nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull,
+    ytelseFilterErAktiv
+} from '../utils/utils';
 import { ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
-    UTLOPTE_AKTIVITETER } from '../filtrering/filter-konstanter';
+    UTLOPTE_AKTIVITETER,
+    I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
 import { filtervalgShape } from '../proptype-shapes';
 import DatoKolonne from '../components/datokolonne';
 
 
 function EnhetDatokolonner({ bruker, ytelse, filtervalg }) {
+    const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
+
     return (
         <div className="datokolonner__wrapper">
             <DatoKolonne
@@ -26,6 +32,14 @@ function EnhetDatokolonner({ bruker, ytelse, filtervalg }) {
             <DatoKolonne
                 dato={bruker.nyesteUtlopteAktivitet}
                 skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
+            />
+            <DatoKolonne
+                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
+                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
+            />
+            <DatoKolonne
+                dato={utlopsdatoForAktivitetEllerNull(bruker.aktiviteter, valgtAktivitetstype)}
+                skalVises={!!valgtAktivitetstype}
             />
         </div>
     );
