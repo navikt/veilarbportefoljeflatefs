@@ -62,12 +62,6 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     values={{ aktivitetstype: valgtAktivitetstype ? valgtAktivitetstype.toLowerCase() : null }}
                 />
                 <Listeoverskrift
-                    className="listeoverskrift__dato listeoverskrift"
-                    skalVises={!!filtervalg && !!valgtAktivitetstype}
-                    id={'portefolje.tabell.aktivitet.neste.utlop.aktivitetstype'}
-                    values={{ aktivitetstype: valgtAktivitetstype ? valgtAktivitetstype.toLowerCase() : null }}
-                />
-                <Listeoverskrift
                     className="listeoverskrift__veileder listeoverskrift"
                     id="enhet.portefolje.tabell.veileder"
                 />
