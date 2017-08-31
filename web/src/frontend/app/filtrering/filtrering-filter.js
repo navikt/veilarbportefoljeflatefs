@@ -17,6 +17,7 @@ import {
     rettighetsgruppe,
     aktiviteter
 } from './filter-konstanter';
+import HjelpetekstAuto from 'nav-frontend-hjelpetekst';
 
 function FiltreringFilter({ filtervalg, actions, enhettiltak }) {
     return (
@@ -104,6 +105,9 @@ function FiltreringFilter({ filtervalg, actions, enhettiltak }) {
                 <div className="col-sm-3">
                     <Element className="blokk-xxs" tag="h3">
                         <FormattedMessage id="filtrering.filter.tittel.aktivitet" />
+                        <HjelpetekstAuto>
+                            <FormattedMessage id="hjelpetekst.aktivitetsfilter"/>
+                        </HjelpetekstAuto>
                     </Element>
                     <Dropdown name="Aktivitet" className="dropdown--130bredde" hoyre>
                         <AktivitetFilterform
