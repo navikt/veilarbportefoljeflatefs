@@ -1,5 +1,5 @@
 import React, { PropTypes as PT } from 'react';
-import { ytelseFilterErAktiv } from '../utils/utils';
+import { utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull, ytelseFilterErAktiv } from '../utils/utils';
 import DatoKolonne from '../components/datokolonne';
 import { ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
@@ -10,6 +10,8 @@ import { filtervalgShape } from '../proptype-shapes';
 
 
 function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }) {
+    const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
+
     return (
         <div className="datokolonner__wrapper">
             <DatoKolonne
@@ -31,6 +33,10 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }) {
             <DatoKolonne
                 dato={bruker.nyesteUtlopteAktivitet}
                 skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
+            />
+            <DatoKolonne
+                dato={utlopsdatoForAktivitetEllerNull(bruker.aktiviteter, valgtAktivitetstype)}
+                skalVises={!!valgtAktivitetstype}
             />
         </div>
     );

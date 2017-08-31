@@ -56,3 +56,24 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer) {
         .map((dateString) => new Date(dateString))
         .sort((d1, d2) => d1 > d2)[0];
 }
+export function utledValgtAktivitetstype(aktiviteterFiltervalg) {
+    if (!aktiviteterFiltervalg || aktiviteterFiltervalg === {}) {
+        return null;
+    }
+    const feltSomErJA = Object.entries(aktiviteterFiltervalg)
+        .filter(([_, value]) => value === 'JA')
+        .map(([key, _]) => key);
+
+    return feltSomErJA.length === 1 ? feltSomErJA[0].toLowerCase() : null;
+}
+
+export function utlopsdatoForAktivitetEllerNull(aktiviteter, valgtAktivitetstype) {
+    if (!aktiviteter || !valgtAktivitetstype) {
+        return null;
+    }
+    return aktiviteter[valgtAktivitetstype];
+}
+
+export function lagAktiviteterSorteringsfelt(aktivitetstype) {
+    return `aktivitet_${aktivitetstype}`;
+}
