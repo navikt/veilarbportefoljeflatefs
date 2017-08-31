@@ -1,7 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 import SorteringHeader from '../components/tabell/sortering-header';
-import { ytelseFilterErAktiv } from '../utils/utils';
+import { lagAktiviteterSorteringsfelt, utledValgtAktivitetstype, ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';
 import { filtervalgShape } from './../proptype-shapes';
 import {
@@ -19,8 +19,10 @@ function Header({ id, className }) {
     );
 }
 
+
 function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt }) {
     const ytelseUtlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
+    const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
     return (
         <div className="enhet-listehode">
             <div className="enhet-overskrifter">
@@ -52,6 +54,18 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     className="listeoverskrift__dato listeoverskrift"
                     skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
                     id={'portefolje.tabell.aktivitet.neste.utlop'}
+                />
+                <Listeoverskrift
+                    className="listeoverskrift__dato listeoverskrift"
+                    skalVises={!!filtervalg && !!valgtAktivitetstype}
+                    id={'portefolje.tabell.aktivitet.neste.utlop.aktivitetstype'}
+                    values={{ aktivitetstype: valgtAktivitetstype ? valgtAktivitetstype.toLowerCase() : null }}
+                />
+                <Listeoverskrift
+                    className="listeoverskrift__dato listeoverskrift"
+                    skalVises={!!filtervalg && !!valgtAktivitetstype}
+                    id={'portefolje.tabell.aktivitet.neste.utlop.aktivitetstype'}
+                    values={{ aktivitetstype: valgtAktivitetstype ? valgtAktivitetstype.toLowerCase() : null }}
                 />
                 <Listeoverskrift
                     className="listeoverskrift__veileder listeoverskrift"
@@ -116,6 +130,15 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     erValgt={sorteringsfelt === I_AVTALT_AKTIVITET}
                     tekstId="portefolje.tabell.ddmmyy"
                     skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
+                    className={'sortering-header__dato'}
+                />
+                <SorteringHeader
+                    sortering={lagAktiviteterSorteringsfelt(valgtAktivitetstype)}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === lagAktiviteterSorteringsfelt(valgtAktivitetstype)}
+                    tekstId="portefolje.tabell.ddmmyy"
+                    skalVises={!!valgtAktivitetstype}
                     className={'sortering-header__dato'}
                 />
                 <Header
