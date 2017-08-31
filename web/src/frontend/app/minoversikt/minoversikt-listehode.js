@@ -1,6 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import { ytelseFilterErAktiv } from '../utils/utils';
+import { lagAktiviteterSorteringsfelt, utledValgtAktivitetstype, ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';
 import { filtervalgShape } from './../proptype-shapes';
 import {
@@ -13,6 +13,7 @@ import {
 
 function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt }) {
     const ytelseUtlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
+    const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
 
     return (
         <div className="minoversikt-listehode">
@@ -46,6 +47,12 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     className="listeoverskrift__dato listeoverskrift"
                     skalVises={!!filtervalg && filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
                     id={'portefolje.tabell.utlopaktivitet'}
+                />
+                <Listeoverskrift
+                    className="listeoverskrift__dato listeoverskrift"
+                    skalVises={!!filtervalg && !!valgtAktivitetstype}
+                    id={'portefolje.tabell.aktivitet.neste.utlop.aktivitetstype'}
+                    values={{ aktivitetstype: valgtAktivitetstype ? valgtAktivitetstype.toLowerCase() : null }}
                 />
             </div>
             <div className="minoversikt-sortering-header__wrapper">
@@ -106,6 +113,15 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     erValgt={sorteringsfelt === UTLOPTE_AKTIVITETER}
                     tekstId="portefolje.tabell.ddmmyy"
                     skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
+                    className={'sortering-header__dato'}
+                />
+                <SorteringHeader
+                    sortering={lagAktiviteterSorteringsfelt(valgtAktivitetstype)}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === lagAktiviteterSorteringsfelt(valgtAktivitetstype)}
+                    tekstId="portefolje.tabell.ddmmyy"
+                    skalVises={!!valgtAktivitetstype}
                     className={'sortering-header__dato'}
                 />
             </div>
