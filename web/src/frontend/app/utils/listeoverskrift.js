@@ -2,13 +2,13 @@ import React, { PropTypes as PT } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 
-function Listeoverskrift({ id, skalVises, className }) {
+function Listeoverskrift({ id, skalVises, className, values }) {
     if (!skalVises) {
         return null;
     }
     return (
         <span className={className}>
-            <FormattedMessage id={id} />
+            <FormattedMessage id={id} values={values} />
         </span>
     );
 }
@@ -16,12 +16,14 @@ function Listeoverskrift({ id, skalVises, className }) {
 Listeoverskrift.propTypes = {
     id: PT.string.isRequired,
     skalVises: PT.bool,
-    className: PT.string
+    className: PT.string,
+    values: PT.object
 };
 
 Listeoverskrift.defaultProps = {
     skalVises: true,
-    className: ''
+    className: '',
+    values: {}
 };
 
 export default Listeoverskrift;
