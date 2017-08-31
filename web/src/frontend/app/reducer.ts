@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import {FormReducer, reducer as formReducer} from 'redux-form';
 import persistent from './utils/persistentReducer';
 import enheterReducer from './ducks/enheter';
 import ledeteksterReducer from './ducks/ledetekster';
@@ -19,6 +19,7 @@ import sideReducer from './ducks/ui/side';
 import { slettCleanIUrl } from './utils/utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer from './ducks/enhettiltak';
+import listevisningReducer, {ListevisningState} from './ducks/ui/listevisning';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -43,9 +44,36 @@ export const nameToStateSliceMap = Object.entries(stateSliceToNameMap)
     .map(([a, b]) => [b, a])
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
-export default combineReducers({
+export interface AppState {
+    ui: {
+        side: any;
+        listevisning: ListevisningState;
+    };
+    enheter: any;
+    ledetekster: any;
+    portefolje: any;
+    paginering: any;
+    sortering: any;
+    veiledere: any;
+    portefoljestorrelser: any;
+    veilederpaginering: any;
+    statustall: any;
+    filtrering: any;
+    filtreringMinoversikt: any;
+    filtreringVeilederoversikt: any;
+    modal: any;
+    serverfeilModal: any;
+    feilmeldingModal: any;
+    diagram: any;
+    arbeidsliste: any;
+    enhettiltak: any;
+    form: FormReducer;
+}
+
+export default combineReducers<AppState>({
     ui: combineReducers({
-        side: sideReducer
+        side: sideReducer,
+        listevisning: listevisningReducer
     }),
     enheter: enheterReducer,
     ledetekster: ledeteksterReducer,
@@ -56,9 +84,7 @@ export default combineReducers({
     portefoljestorrelser: portefoljestorrelserReducer,
     veilederpaginering: veilederpagineringReducer,
     statustall: statustallReducer,
-    // eslint-disable-next-line no-undef
     filtrering: persistent('enhetsState', location, named('enhet', filtreringReducer), slettCleanIUrl, initialState),
-    // eslint-disable-next-line no-undef
     filtreringMinoversikt: persistent('veilederState', location,
         named('veileder', filtreringReducer), slettCleanIUrl, initialState),
     filtreringVeilederoversikt: named('veiledere', filtreringReducer),

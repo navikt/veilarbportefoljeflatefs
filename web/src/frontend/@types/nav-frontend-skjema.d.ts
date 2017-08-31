@@ -13,7 +13,7 @@ declare module "nav-frontend-skjema" {
 
 	type SelectBredde = "fullbredde" | "xxl" | "xl" | "l" | "m" | "s" | "xs";
 
-	interface RadioProps extends React.HTMLProps<Radio> {
+	interface RadioProps extends React.HTMLProps<HTMLInputElement> {
 		className?: string;
 		id?: string;
 		label: React.ReactNode | any;
@@ -40,7 +40,7 @@ declare module "nav-frontend-skjema" {
 		name?: string;
 	}
 
-	interface CheckboxProps extends React.HTMLProps<Checkbox> {
+	interface CheckboxProps extends React.HTMLProps<HTMLInputElement> {
 		label: React.ReactNode | string | any;
 		className?: string;
 		id?: string;
