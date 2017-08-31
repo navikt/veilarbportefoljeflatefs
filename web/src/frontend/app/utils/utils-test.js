@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import 'babel-polyfill';
 import { nesteUtlopsdatoEllerNull, utledValgtAktivitetstype } from './utils';
 
 describe('Date utils', () => {
