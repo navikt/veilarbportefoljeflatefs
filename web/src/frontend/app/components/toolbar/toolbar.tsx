@@ -7,7 +7,7 @@ import SokVeilder from './sok-veileder';
 import DiagramTabellToggle from './diagram-tabell-toggle';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning';
-import {erDev} from "../../utils/utils";
+import {erDev} from '../../utils/utils';
 
 interface ToolbarProps {
     filtergruppe: string;

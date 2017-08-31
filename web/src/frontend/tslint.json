@@ -2,6 +2,7 @@
   "extends": ["tslint:recommended", "tslint-react"],
   "rules": {
     "member-access": false,
+    "object-literal-sort-keys": false,
     "trailing-comma": false,
     "quotemark": [true, "single", "jsx-double"],
     "max-line-length": false,

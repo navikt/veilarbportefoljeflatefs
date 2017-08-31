@@ -1,7 +1,7 @@
 enum ActionTypeKeys {
-    VELG_ALTERNATIV = "listevisning/velg_alternativ",
-    AVVELG_ALTERNATIV = "listevisning/avvelg_alternativ",
-    OTHER_ACTION = "__OTHER_ACTION__"
+    VELG_ALTERNATIV = 'listevisning/velg_alternativ',
+    AVVELG_ALTERNATIV = 'listevisning/avvelg_alternativ',
+    OTHER_ACTION = '__OTHER_ACTION__'
 }
 
 interface VelgEllerAvvelgAction {
@@ -26,11 +26,11 @@ const initialState: ListevisningState = {
 };
 
 export function listevisningReducer(state = initialState, action: ListevisningActionTypes): ListevisningState {
-    switch(action.type) {
+    switch (action.type) {
         case ActionTypeKeys.VELG_ALTERNATIV:
             return { valgte: state.valgte.concat(action.alternativ) };
         case ActionTypeKeys.AVVELG_ALTERNATIV:
-            return { valgte: state.valgte.filter(alternativ => alternativ !== action.alternativ) };
+            return { valgte: state.valgte.filter((alternativ) => alternativ !== action.alternativ) };
         default:
             return state;
     }
@@ -38,5 +38,5 @@ export function listevisningReducer(state = initialState, action: ListevisningAc
 
 export default listevisningReducer;
 
-export const velgAlternativ = (alternativ: String) => ({ type: ActionTypeKeys.VELG_ALTERNATIV, alternativ: alternativ });
-export const avvelgAlternativ = (alternativ: String) => ({ type: ActionTypeKeys.AVVELG_ALTERNATIV, alternativ: alternativ });
+export const velgAlternativ = (alternativ: string) => ({ type: ActionTypeKeys.VELG_ALTERNATIV, alternativ });
+export const avvelgAlternativ = (alternativ: string) => ({ type: ActionTypeKeys.AVVELG_ALTERNATIV, alternativ });

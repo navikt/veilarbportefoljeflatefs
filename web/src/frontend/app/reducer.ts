@@ -19,7 +19,7 @@ import sideReducer from './ducks/ui/side';
 import { slettCleanIUrl } from './utils/utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer from './ducks/enhettiltak';
-import listevisningReducer, {ListevisningState} from "./ducks/ui/listevisning";
+import listevisningReducer, {ListevisningState} from './ducks/ui/listevisning';
 
 function named(name, reducer) {
     return (state, action) => {

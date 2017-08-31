@@ -1,20 +1,20 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {ChangeEvent} from "react";
-import Dropdown from "../dropdown/dropdown";
+import {ChangeEvent} from 'react';
+import Dropdown from '../dropdown/dropdown';
 import { Checkbox } from 'nav-frontend-skjema';
-import {FormattedMessage} from "react-intl";
-import {AppState} from "../../reducer";
-import {Action, Dispatch} from "redux";
-import {avvelgAlternativ, velgAlternativ} from "../../ducks/ui/listevisning";
+import {FormattedMessage} from 'react-intl';
+import {AppState} from '../../reducer';
+import {Action, Dispatch} from 'redux';
+import {avvelgAlternativ, velgAlternativ} from '../../ducks/ui/listevisning';
 
-interface alternativ {
+interface Alternativ {
     value: string;
     tekstid: string;
     allwaysDisabled?: boolean;
 }
 
-const alternativer: alternativ[] = [
+const alternativer: Alternativ[] = [
     {value: 'bruker', tekstid: 'listevisning.valg.bruker', allwaysDisabled: true},
     {value: 'fodselsnr', tekstid: 'listevisning.valg.fodselsnr', allwaysDisabled: true},
     {value: 'veileder', tekstid: 'listevisning.valg.veileder'},
@@ -24,7 +24,7 @@ const alternativer: alternativ[] = [
     {value: 'utlopaktivitet', tekstid: 'listevisning.valg.utlopaktivitet'}
 ];
 
-interface ListevisningRadProps extends alternativ {
+interface ListevisningRadProps extends Alternativ {
     disabled: boolean;
     valgt: boolean;
     onChange: (name: string, checked: boolean) => void;
@@ -49,15 +49,15 @@ interface ListevisningProps {
 
 const Listevisning = (props: ListevisningProps) => {
     function handleChange(name, checked) {
-        if(checked) {
+        if (checked) {
             props.dispatch(velgAlternativ(name));
         } else {
             props.dispatch(avvelgAlternativ(name));
         }
     }
 
-    function erValgt(alternativ) {
-        return props.valgteAlternativ.some(a => a === alternativ.value);
+    function erValgt(alt) {
+        return props.valgteAlternativ.some((a) => a === alt.value);
     }
 
     return (
@@ -67,11 +67,11 @@ const Listevisning = (props: ListevisningProps) => {
                     <FormattedMessage id="listevisning.ingress" />
                 </div>
                 <ul className="ustilet">
-                    { alternativer.map(alternativ => (
+                    { alternativer.map((alt) => (
                         <ListevisningRad
-                            {...alternativ}
-                            valgt={erValgt(alternativ)}
-                            disabled={props.valgteAlternativ.length >= 5 && !erValgt(alternativ)}
+                            {...alt}
+                            valgt={erValgt(alt)}
+                            disabled={props.valgteAlternativ.length >= 5 && !erValgt(alt)}
                             onChange={handleChange}
                         />
                     )) }
@@ -84,7 +84,7 @@ const Listevisning = (props: ListevisningProps) => {
 function mapStateToProps(state: AppState) {
     return {
         valgteAlternativ: state.ui.listevisning.valgte
-    }
+    };
 }
 
 export default connect(mapStateToProps)(Listevisning);
