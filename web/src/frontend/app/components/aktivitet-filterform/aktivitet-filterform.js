@@ -51,7 +51,7 @@ function AktivitetFilterform(props) {
                 >
                     <span className="sr-only">{verdi}</span>
                 </label>
-                <span>{verdi}</span>
+                <span className="aktivitetvalg__tekst">{verdi}</span>
             </div>
         ]);
 
