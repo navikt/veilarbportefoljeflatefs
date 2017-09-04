@@ -35,7 +35,11 @@
 
 .veileder-tabell {
     tbody, thead:not(.extra-head) {
+
         th,td {
+            border-bottom: 1px solid #b7b1a9;
+            border-top: none;
+
             &:first-child {
                 width: 15rem;
                 white-space: pre-wrap;
@@ -49,5 +53,9 @@
                 white-space: pre-wrap;
             }
         }
+    }
+
+    .extra-head  th, td {
+        border-bottom: 1px solid #b7b1a9;
     }
 }
