@@ -1,5 +1,4 @@
 import React, {PropTypes as PT} from 'react';
-import HjelpetekstAuto from 'nav-frontend-hjelpetekst';
 import {Element} from 'nav-frontend-typografi';
 import {FormattedMessage} from 'react-intl';
 import Dropdown from '../components/dropdown/dropdown';
