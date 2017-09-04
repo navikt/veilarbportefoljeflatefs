@@ -1,12 +1,12 @@
-import React, { PropTypes as PT } from 'react';
+import React, {PropTypes as PT} from 'react';
 import HjelpetekstAuto from 'nav-frontend-hjelpetekst';
-import { Element } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
+import {Element} from 'nav-frontend-typografi';
+import {FormattedMessage} from 'react-intl';
 import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import RadioFilterform from '../components/radio-filterform/radio-filterform';
 import AktivitetFilterform from './../components/aktivitet-filterform/aktivitet-filterform';
-import { filtervalgShape } from '../proptype-shapes';
+import {filtervalgShape} from '../proptype-shapes';
 import {
     alder,
     fodselsdagIMnd,
@@ -18,14 +18,15 @@ import {
     rettighetsgruppe,
     aktiviteter
 } from './filter-konstanter';
+import OverskriftMedHjelpeTekst from "../components/overskrift-med-hjelpetekst";
 
-function FiltreringFilter({ filtervalg, actions, enhettiltak }) {
+function FiltreringFilter({filtervalg, actions, enhettiltak}) {
     return (
         <div>
             <div className="row">
                 <div className="col-sm-3">
                     <Element className="blokk-xxs" tag="h3">
-                        <FormattedMessage id="filtrering.filter.tittel.demografi" />
+                        <FormattedMessage id="filtrering.filter.tittel.demografi"/>
                     </Element>
                     <Dropdown name="Alder">
                         <CheckboxFilterform
@@ -54,7 +55,7 @@ function FiltreringFilter({ filtervalg, actions, enhettiltak }) {
                 </div>
                 <div className="col-sm-3">
                     <Element className="blokk-xxs" tag="h3">
-                        <FormattedMessage id="filtrering.filter.tittel.situasjon" />
+                        <FormattedMessage id="filtrering.filter.tittel.situasjon"/>
                     </Element>
                     <Dropdown name="Innsatsgruppe">
                         <CheckboxFilterform
@@ -91,7 +92,7 @@ function FiltreringFilter({ filtervalg, actions, enhettiltak }) {
                 </div>
                 <div className="col-sm-3">
                     <Element className="blokk-xxs" tag="h3">
-                        <FormattedMessage id="filtrering.filter.tittel.ytelse" />
+                        <FormattedMessage id="filtrering.filter.tittel.ytelse"/>
                     </Element>
                     <Dropdown name="Ytelse" className="dropdown--130bredde">
                         <RadioFilterform
@@ -103,14 +104,10 @@ function FiltreringFilter({ filtervalg, actions, enhettiltak }) {
                     </Dropdown>
                 </div>
                 <div className="col-sm-3">
-                    <div className="blokk-xxs filtrering--overskrift-med-hjelpetekst">
-                        <Element tag="h3">
-                            <FormattedMessage id="filtrering.filter.tittel.aktivitet" />
-                        </Element>
-                        <HjelpetekstAuto size="16px">
-                            <FormattedMessage id="hjelpetekst.aktivitetsfilter" />
-                        </HjelpetekstAuto>
-                    </div>
+                    <OverskriftMedHjelpeTekst
+                        overskriftId="filtrering.filter.tittel.aktivitet"
+                        hjelpetekstId="hjelpetekst.aktivitetsfilter"
+                    />
                     <Dropdown name="Aktivitet" className="dropdown--130bredde" hoyre>
                         <AktivitetFilterform
                             form="aktiviteter"
