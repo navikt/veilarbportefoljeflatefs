@@ -17,10 +17,11 @@ import {
     rettighetsgruppe,
     aktiviteter
 } from './filter-konstanter';
+import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 
 function FiltreringFilter({ filtervalg, actions, enhettiltak }) {
     return (
-        <div className="filtrering-filter">
+        <div>
             <div className="row">
                 <div className="col-sm-3">
                     <Element className="blokk-xxs" tag="h3">
@@ -102,9 +103,10 @@ function FiltreringFilter({ filtervalg, actions, enhettiltak }) {
                     </Dropdown>
                 </div>
                 <div className="col-sm-3">
-                    <Element className="blokk-xxs" tag="h3">
-                        <FormattedMessage id="filtrering.filter.tittel.aktivitet" />
-                    </Element>
+                    <OverskriftMedHjelpeTekst
+                        overskriftId="filtrering.filter.tittel.aktivitet"
+                        hjelpetekstId="hjelpetekst.aktivitetsfilter"
+                    />
                     <Dropdown name="Aktivitet" className="dropdown--130bredde" hoyre>
                         <AktivitetFilterform
                             form="aktiviteter"

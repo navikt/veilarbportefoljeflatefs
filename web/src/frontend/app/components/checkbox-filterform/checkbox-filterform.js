@@ -14,7 +14,7 @@ function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-li
 
             return {
                 element: (
-                    <div key={field.input.name} className={fieldCls(className)} {...fieldProps} disabled>
+                    <div key={field.input.name} className={fieldCls(className)} {...fieldProps} >
                         <Field
                             id={field.input.name}
                             component="input"

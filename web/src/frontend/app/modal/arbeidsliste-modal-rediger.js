@@ -37,7 +37,7 @@ ArbeidslisteModalRediger.propTypes = {
     lukkModal: PT.func.isRequired,
     innloggetVeileder: PT.string.isRequired,
     sistEndretDato: PT.string.isRequired,
-    sistEndretAv: PT.string.isRequired
+    sistEndretAv: PT.string
 };
 
 export default ArbeidslisteModalRediger;

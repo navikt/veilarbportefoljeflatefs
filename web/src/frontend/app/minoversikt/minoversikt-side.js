@@ -68,6 +68,7 @@ class MinOversiktSide extends Component {
                                         filtervalg={filtervalg}
                                         filtergruppe="veileder"
                                         veileder={gjeldendeVeileder}
+                                        enhettiltak={enhettiltak.data.tiltak}
                                     />
                                     <FiltreringLabelContainer
                                         filtervalg={filtervalg}
