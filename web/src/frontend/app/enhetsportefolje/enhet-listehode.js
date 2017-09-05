@@ -57,7 +57,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                 />
                 <Listeoverskrift
                     className="listeoverskrift__dato listeoverskrift"
-                    skalVises={!!filtervalg && !!valgtAktivitetstype}
+                    skalVises={!!filtervalg && !!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0}
                     id={'portefolje.tabell.aktivitet.neste.utlop.aktivitetstype'}
                     values={{ aktivitetstype: valgtAktivitetstype ? valgtAktivitetstype.toLowerCase() : null }}
                 />
@@ -132,7 +132,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === lagAktiviteterSorteringsfelt(valgtAktivitetstype)}
                     tekstId="portefolje.tabell.ddmmyy"
-                    skalVises={!!valgtAktivitetstype}
+                    skalVises={!!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0}
                     className={'sortering-header__dato'}
                 />
                 <Header
