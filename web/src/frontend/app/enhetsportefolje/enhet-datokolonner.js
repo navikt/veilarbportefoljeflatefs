@@ -1,7 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import {
-    nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull,
-    ytelseFilterErAktiv
+    nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull
 } from '../utils/utils';
 import { ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
@@ -10,6 +9,7 @@ import { ytelsevalg,
     I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
 import { filtervalgShape } from '../proptype-shapes';
 import DatoKolonne from '../components/datokolonne';
+import UkeKolonne from '../components/ukekolonne';
 
 
 function EnhetDatokolonner({ bruker, ytelse, filtervalg }) {
@@ -17,9 +17,24 @@ function EnhetDatokolonner({ bruker, ytelse, filtervalg }) {
 
     return (
         <div className="datokolonner__wrapper">
+            <UkeKolonne
+                ukerIgjen={bruker.dagputlopUke}
+                minVal={2}
+                skalVises={ytelse === ytelsevalg.DAGPENGER || ytelse === ytelsevalg.ORDINARE_DAGPENGER}
+            />
+            <UkeKolonne
+                ukerIgjen={bruker.permutlopUke}
+                minVal={2}
+                skalVises={ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING}
+            />
+            <UkeKolonne
+                ukerIgjen={bruker.aapmaxtidUke}
+                minVal={12}
+                skalVises={ytelse === ytelsevalg.AAP_MAXTID}
+            />
             <DatoKolonne
-                dato={ytelse === ytelsevalg.AAP_MAXTID ? bruker.aapMaxtid : bruker.utlopsdato}
-                skalVises={ytelseFilterErAktiv(ytelse)}
+                dato={bruker.utlopsdato}
+                skalVises={ytelse === ytelsevalg.TILTAKSPENGER || ytelse === ytelsevalg.AAP_UNNTAK || ytelse === ytelsevalg.AAP}
             />
             <DatoKolonne
                 dato={bruker.venterPaSvarFraBruker}
