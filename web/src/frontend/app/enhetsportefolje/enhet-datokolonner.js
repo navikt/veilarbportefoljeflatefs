@@ -39,7 +39,7 @@ function EnhetDatokolonner({ bruker, ytelse, filtervalg }) {
             />
             <DatoKolonne
                 dato={utlopsdatoForAktivitetEllerNull(bruker.aktiviteter, valgtAktivitetstype)}
-                skalVises={!!valgtAktivitetstype}
+                skalVises={!!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0}
             />
         </div>
     );
