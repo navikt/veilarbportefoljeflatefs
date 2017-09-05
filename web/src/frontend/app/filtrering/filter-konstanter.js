@@ -82,7 +82,17 @@ export const ytelse = {
     TILTAKSPENGER: 'Tiltakspenger'
 };
 
-export const ytelsevalg = Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }));
+export const ytelsevalg = Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }), {});
+
+export const ytelseUtlopsSortering = {
+    [ytelsevalg.DAGPENGER]: 'dagputlopUke',
+    [ytelsevalg.ORDINARE_DAGPENGER]: 'dagputlopUke',
+    [ytelsevalg.DAGPENGER_MED_PERMITTERING]: 'permutlopUke',
+    [ytelsevalg.AAP]: 'utlopsdato',
+    [ytelsevalg.AAP_UNNTAK]: 'utlopsdato',
+    [ytelsevalg.AAP_MAXTID]: 'aapmaxtidUke',
+    [ytelsevalg.TILTAKSPENGER]: 'utlopsdato'
+};
 
 export const rettighetsgruppe = {
     AAP: 'Arbeidsavklaringspenger',
@@ -109,6 +119,7 @@ const veiledere = {
 
 
 export default {
+    ytelseUtlopsSortering,
     brukerstatus,
     alder,
     fodselsdagIMnd,
