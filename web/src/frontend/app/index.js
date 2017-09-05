@@ -48,7 +48,15 @@ render(
         <Provider store={store}>
             <IntlProvider defaultLocale="nb" locale="nb" messages={tekster}>
                 <Router history={history}>
-                    <Route path="/" component={Application}>
+                    <Route
+                        path="/"
+                        component={Application}
+                         onChange={(prevState, nextState) => {
+                             if (nextState.location.action !== "POP") {
+                                 window.scrollTo(0,0);
+                             }
+                         }}
+                    >
                         <Route onEnter={lagrePath} path="enhet" component={EnhetSide} />
                         <Route onEnter={lagrePath} path="veiledere" component={VeiledereSide} />
                         <Route onEnter={lagrePath} path="portefolje(/:ident)" component={MinOversiktSide} />
