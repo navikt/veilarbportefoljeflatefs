@@ -34,7 +34,7 @@ class Paginering extends PureComponent {
                     onClick={() => onChange(0, nyAntall)}
                 >
                     {!seAlleState ? <FormattedMessage id="paginering.se.alle" /> :
-                        <FormattedMessage id="paginering.se.faerre" />
+                    <FormattedMessage id="paginering.se.faerre" />
                     }
                 </KnappPanel>
 

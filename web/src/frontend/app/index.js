@@ -51,11 +51,11 @@ render(
                     <Route
                         path="/"
                         component={Application}
-                         onChange={(prevState, nextState) => {
-                             if (nextState.location.action !== "POP") {
-                                 window.scrollTo(0,0);
-                             }
-                         }}
+                        onChange={(prevState, nextState) => {
+                            if (nextState.location.action !== 'POP') {
+                                window.scrollTo(0, 0);
+                            }
+                        }}
                     >
                         <Route onEnter={lagrePath} path="enhet" component={EnhetSide} />
                         <Route onEnter={lagrePath} path="veiledere" component={VeiledereSide} />

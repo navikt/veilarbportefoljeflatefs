@@ -1,10 +1,10 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { UndertekstBold } from 'nav-frontend-typografi';
 import Hybridpanel from '../components/tabell/hybridpanel/hybridpanel';
 import Brukerinformasjon from '../components/tabell/brukerinformasjon';
 import MinoversiktDatokolonner from './minoversikt-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
-import { UndertekstBold } from 'nav-frontend-typografi';
 import { filtervalgShape, brukerShape } from './../proptype-shapes';
 import ArbeidslisteModalRediger from '../modal/arbeidsliste-modal-rediger';
 
@@ -46,7 +46,7 @@ class MinoversiktBrukerPanel extends Component {
                 <UndertekstBold>
                     <FormattedMessage id="arbeidsliste.kommentar.header" />
                 </UndertekstBold>
-                    <p className="arbeidsliste-kommentar-tekst">{bruker.arbeidsliste.kommentar}</p>
+                <p className="arbeidsliste-kommentar-tekst">{bruker.arbeidsliste.kommentar}</p>
                 <p className="arbeidsliste--panel-footer typo-undertekst">
                     <FormattedMessage
                         id="arbeidsliste.kommentar.footer"
