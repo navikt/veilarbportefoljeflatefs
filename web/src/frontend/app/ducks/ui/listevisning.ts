@@ -36,7 +36,7 @@ const initialState: ListevisningState = {
 };
 
 function addIfNotExists(kolonne: Kolonne, kolonner: Kolonne[]): Kolonne[] {
-    if(kolonner.includes(kolonne)) {
+    if (kolonner.includes(kolonne)) {
         return kolonner;
     }
     return [...kolonner, kolonne];
