@@ -9,7 +9,7 @@ import sorteringReducer from './ducks/sortering';
 import veiledereReducer from './ducks/veiledere';
 import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
 import veilederpagineringReducer from './ducks/veilederpaginering';
-import filtreringReducer, { initialState } from './ducks/filtrering';
+import filtreringReducer, {FiltreringState, initialState} from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
@@ -58,7 +58,7 @@ export interface AppState {
     portefoljestorrelser: any;
     veilederpaginering: any;
     statustall: any;
-    filtrering: any;
+    filtrering: FiltreringState;
     filtreringMinoversikt: any;
     filtreringVeilederoversikt: any;
     modal: any;
