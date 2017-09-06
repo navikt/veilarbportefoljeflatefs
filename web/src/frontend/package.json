@@ -44,6 +44,7 @@
     "webpack": "2.6.1"
   },
   "dependencies": {
+    "@types/react-intl": "2.3.1",
     "babel-polyfill": "6.23.0",
     "classnames": "2.2.5",
     "highcharts": "5.0.12",
