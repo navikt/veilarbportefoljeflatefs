@@ -34,7 +34,7 @@ function EnhetDatokolonner({ bruker, ytelse, filtervalg }) {
             />
             <DatoKolonne
                 dato={bruker.utlopsdato}
-                skalVises={ytelse === ytelsevalg.TILTAKSPENGER || ytelse === ytelsevalg.AAP_UNNTAK || ytelse === ytelsevalg.AAP}
+                skalVises={[ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse)}
             />
             <DatoKolonne
                 dato={bruker.venterPaSvarFraBruker}
