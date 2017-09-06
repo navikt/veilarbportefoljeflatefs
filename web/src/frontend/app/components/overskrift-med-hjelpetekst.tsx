@@ -5,11 +5,11 @@ import { Element } from 'nav-frontend-typografi';
 import { HjelpetekstAuto } from 'nav-frontend-hjelpetekst';
 
 interface OverskriftMedHjelpeTekstProps {
-    overskriftId: string,
-    hjelpetekstId: string
+    overskriftId: string;
+    hjelpetekstId: string;
 }
 
-const OverskriftMedHjelpeTekst = ({ overskriftId, hjelpetekstId } : OverskriftMedHjelpeTekstProps) => (
+const OverskriftMedHjelpeTekst = ({ overskriftId, hjelpetekstId }: OverskriftMedHjelpeTekstProps) => (
     <div className="blokk-xxs filtrering--overskrift-med-hjelpetekst">
         <Element tag="h3">
             <FormattedMessage id={overskriftId} />

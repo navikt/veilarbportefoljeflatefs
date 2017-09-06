@@ -18,13 +18,12 @@ import {
     ytelse
 } from './filter-konstanter';
 
-
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 
 interface FiltreringFilterProps {
-    filtervalg: any,
-    actions: any,
-    enhettiltak: any
+    filtervalg: any;
+    actions: any;
+    enhettiltak: any;
 }
 
 const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterProps) => (
@@ -114,7 +113,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
                     overskriftId="filtrering.filter.tittel.aktivitet"
                     hjelpetekstId="hjelpetekst.aktivitetsfilter"
                 />
-                <Dropdown name="Aktivitet" className="dropdown--130bredde" hoyre>
+                <Dropdown name="Aktivitet" className="dropdown--130bredde" hoyre={true}>
                     <AktivitetFilterform
                         form="aktiviteter"
                         valg={aktiviteter}
@@ -125,7 +124,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
                 <Dropdown
                     name="Tiltakstype"
                     className="dropdown--130bredde"
-                    hoyre
+                    hoyre={true}
                     disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
                 >
                     <CheckboxFilterform
