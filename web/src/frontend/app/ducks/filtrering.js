@@ -118,7 +118,7 @@ export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', v
 }
 
 export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
-    if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA' || filterVerdi.TILTAK === 'NEI')) {
+    if (filterId === 'aktiviteter' && filterVerdi === 'TILTAK') {
         return (dispatch, getState) => {
             dispatch({
                 type: SLETT_AKTIVITETER_OG_TILTAK_FILTER,
