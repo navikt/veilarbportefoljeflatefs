@@ -4,9 +4,19 @@ enum ActionTypeKeys {
     OTHER_ACTION = '__OTHER_ACTION__'
 }
 
-interface VelgEllerAvvelgAction {
+export enum Kolonne {
+    BRUKER = 'bruker',
+    FODSELSNR = 'fodselsnr',
+    VEILEDER = 'veileder',
+    NAVIDENT = 'navident',
+    VENTER_SVAR = 'ventersvar',
+    UTLOP_YTELSE = 'utlopytelse',
+    UTLOP_AKTIVITET = 'utlopaktivitet'
+}
+
+interface ListevisningAction {
     type: ActionTypeKeys.VELG_ALTERNATIV | ActionTypeKeys.AVVELG_ALTERNATIV;
-    alternativ: string;
+    kolonne: Kolonne;
 }
 
 interface OtherAction {
@@ -14,23 +24,30 @@ interface OtherAction {
 }
 
 type ListevisningActionTypes =
-    | VelgEllerAvvelgAction
+    | ListevisningAction
     | OtherAction;
 
 export interface ListevisningState {
-    valgte: string[];
+    valgte: Kolonne[];
 }
 
 const initialState: ListevisningState = {
-    valgte: ['bruker', 'fodselsnr']
+    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.NAVIDENT, Kolonne.VEILEDER],
 };
+
+function addIfNotExists(kolonne: Kolonne, kolonner: Kolonne[]): Kolonne[] {
+    if(kolonner.includes(kolonne)) {
+        return kolonner;
+    }
+    return [...kolonner, kolonne];
+}
 
 export function listevisningReducer(state = initialState, action: ListevisningActionTypes): ListevisningState {
     switch (action.type) {
         case ActionTypeKeys.VELG_ALTERNATIV:
-            return { valgte: state.valgte.concat(action.alternativ) };
+            return {...state, valgte: addIfNotExists(action.kolonne, state.valgte)};
         case ActionTypeKeys.AVVELG_ALTERNATIV:
-            return { valgte: state.valgte.filter((alternativ) => alternativ !== action.alternativ) };
+            return {...state, valgte: state.valgte.filter((alternativ) => alternativ !== action.kolonne)};
         default:
             return state;
     }
@@ -38,5 +55,5 @@ export function listevisningReducer(state = initialState, action: ListevisningAc
 
 export default listevisningReducer;
 
-export const velgAlternativ = (alternativ: string) => ({ type: ActionTypeKeys.VELG_ALTERNATIV, alternativ });
-export const avvelgAlternativ = (alternativ: string) => ({ type: ActionTypeKeys.AVVELG_ALTERNATIV, alternativ });
+export const velgAlternativ = (kolonne: Kolonne) => ({type: ActionTypeKeys.VELG_ALTERNATIV, kolonne});
+export const avvelgAlternativ = (kolonne: Kolonne) => ({type: ActionTypeKeys.AVVELG_ALTERNATIV, kolonne});
