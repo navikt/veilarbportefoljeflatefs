@@ -6,7 +6,8 @@ declare module "nav-frontend-typografi" {
 	}
 
 	export interface ElementProps {
-	    tag: String
+        className?: string;
+        tag: String
     }
 
 	export class Sidetittel extends React.Component<Props, {}> {}
