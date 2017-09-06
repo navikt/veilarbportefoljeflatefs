@@ -5,12 +5,12 @@ import Dropdown from '../../dropdown/dropdown';
 import {Checkbox} from 'nav-frontend-skjema';
 import {FormattedMessage} from 'react-intl';
 import {AppState} from '../../../reducer';
-import {Action, Dispatch} from 'redux';
+import {Action, bindActionCreators, Dispatch} from 'redux';
 import {avvelgAlternativ, Kolonne, velgAlternativ} from '../../../ducks/ui/listevisning';
-import {alternativerConfig} from "./listevisning-utils";
+import {alternativerConfig, getMuligeKolonner} from './listevisning-utils';
 
 interface ListevisningRadProps {
-    kolonne: Kolonne
+    kolonne: Kolonne;
     disabled: boolean;
     valgt: boolean;
     onChange: (name: Kolonne, checked: boolean) => void;
@@ -38,15 +38,16 @@ const ListevisningRad = (props: ListevisningRadProps) => {
 interface ListevisningProps {
     valgteAlternativ: Kolonne[];
     muligeAlternativer: Kolonne[];
-    dispatch: Dispatch<Action>;
+    velgAlternativ: (name: Kolonne) => void;
+    avvelgAlternativ: (name: Kolonne) => void;
 }
 
 const Listevisning = (props: ListevisningProps) => {
     function handleChange(name, checked) {
         if (checked) {
-            props.dispatch(velgAlternativ(name));
+            props.velgAlternativ(name);
         } else {
-            props.dispatch(avvelgAlternativ(name));
+            props.avvelgAlternativ(name);
         }
     }
 
@@ -77,8 +78,15 @@ const Listevisning = (props: ListevisningProps) => {
 
 function mapStateToProps(state: AppState) {
     return {
-        valgteAlternativ: state.ui.listevisning.valgte
+        valgteAlternativ: state.ui.listevisning.valgte,
+        muligeAlternativer: getMuligeKolonner(state.filtrering)
     };
 }
 
-export default connect(mapStateToProps)(Listevisning);
+function mapDispatchToProps(dispatch: Dispatch<Action>) {
+    return bindActionCreators({
+        velgAlternativ, avvelgAlternativ
+    }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Listevisning);

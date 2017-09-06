@@ -10,6 +10,11 @@ export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 export const ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER = 'filtrering/ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER';
 export const SLETT_AKTIVITETER_OG_TILTAK_FILTER = 'filtrering/SLETT_AKTIVITETER_OG_TILTAK_FILTER';
 
+export enum AktiviteterValg {
+    JA = 'JA',
+    NEI = 'NEI',
+    NA = 'NA'
+}
 
 export interface FiltreringState {
     brukerstatus: null;
@@ -21,13 +26,13 @@ export interface FiltreringState {
     servicegruppe: string[];
     rettighetsgruppe: string[];
     veiledere: string[];
-    aktiviteter: Object;
+    aktiviteter: { [aktivitet: string]: AktiviteterValg };
     tiltakstyper: string[];
-    ytelse: null
+    ytelse: null;
 }
 
 //  Reducer
-// TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducers
+// TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducer
 export const initialState = {
     brukerstatus: null,
     alder: [],
