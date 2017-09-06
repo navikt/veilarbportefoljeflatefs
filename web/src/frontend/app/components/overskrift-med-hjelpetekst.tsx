@@ -3,7 +3,6 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { HjelpetekstAuto } from 'nav-frontend-hjelpetekst';
-import {StatelessComponent} from "react";
 
 interface OverskriftMedHjelpeTekstProps {
     overskriftId: string,
