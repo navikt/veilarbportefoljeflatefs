@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export, no-undef*/
+/* eslint-disable import/prefer-default-export, no-undef */
 import queryString from 'query-string';
 import history from '../history';
 
@@ -72,6 +72,11 @@ export function utlopsdatoForAktivitetEllerNull(aktiviteter, valgtAktivitetstype
         return null;
     }
     return aktiviteter[valgtAktivitetstype];
+}
+
+export function erDev() {
+    const host = window.location.host;
+    return host.includes('localhost') || host.includes('127.0.0.1');
 }
 
 export function lagAktiviteterSorteringsfelt(aktivitetstype) {
