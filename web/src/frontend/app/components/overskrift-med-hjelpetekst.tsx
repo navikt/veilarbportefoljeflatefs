@@ -8,10 +8,9 @@ import {StatelessComponent} from "react";
 interface OverskriftMedHjelpeTekstProps {
     overskriftId: string,
     hjelpetekstId: string
-    children?: React.ReactNode,
 }
 
-const OverskriftMedHjelpeTekst : StatelessComponent = ({ overskriftId, hjelpetekstId } : OverskriftMedHjelpeTekstProps) => (
+const OverskriftMedHjelpeTekst = ({ overskriftId, hjelpetekstId } : OverskriftMedHjelpeTekstProps) => (
     <div className="blokk-xxs filtrering--overskrift-med-hjelpetekst">
         <Element tag="h3">
             <FormattedMessage id={overskriftId} />
