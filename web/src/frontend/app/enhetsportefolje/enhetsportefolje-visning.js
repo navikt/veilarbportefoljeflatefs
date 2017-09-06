@@ -25,8 +25,9 @@ import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmel
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
-        return Object.entries(value).map(([aktivitet, verdi]) => {
-            if (verdi === "NA") return 0;
+        return Object.entries(value).map(([_, verdi]) => {
+            if (verdi === 'NA') return 0;
+            return 1;
         }).reduce((a, b) => a + b, 0);
     }
 
@@ -34,9 +35,7 @@ function antallFilter(filtervalg) {
         .map(([filter, value]) => {
             if (value === true) return 1;
             else if (Array.isArray(value)) return value.length;
-            else if (filter === 'aktiviteter') {
-               return mapAktivitetFilter(value);
-            }
+            else if (filter === 'aktiviteter') return mapAktivitetFilter(value);
             else if (typeof value === 'object') return value ? Object.entries(value).length : 0;
             else if (value) return 1;
             return 0;
