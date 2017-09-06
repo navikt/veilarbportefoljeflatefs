@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "es2015",
+    "moduleResolution": "node",
     "allowJs": true,
     "noImplicitAny": false,
     "strictNullChecks": true,
@@ -8,7 +9,13 @@
     "preserveConstEnums": true,
     "sourceMap": false,
     "outDir": "out/",
-    "jsx": "react"
+    "jsx": "react",
+    "lib": [
+      "DOM",
+      "es2015",
+      "es2016",
+      "es2017"
+    ]
   },
   "include": [
     "app/**/*",
