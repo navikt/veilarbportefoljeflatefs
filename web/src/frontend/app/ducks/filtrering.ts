@@ -1,6 +1,6 @@
 import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
 import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
-import { nameToStateSliceMap } from './../reducer';
+import {nameToStateSliceMap} from './../reducer';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -10,8 +10,29 @@ export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 export const ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER = 'filtrering/ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER';
 export const SLETT_AKTIVITETER_OG_TILTAK_FILTER = 'filtrering/SLETT_AKTIVITETER_OG_TILTAK_FILTER';
 
+export enum AktiviteterValg {
+    JA = 'JA',
+    NEI = 'NEI',
+    NA = 'NA'
+}
+
+export interface FiltreringState {
+    brukerstatus: null;
+    alder: string[];
+    kjonn: string[];
+    fodselsdagIMnd: string[];
+    innsatsgruppe: string[];
+    formidlingsgruppe: string[];
+    servicegruppe: string[];
+    rettighetsgruppe: string[];
+    veiledere: string[];
+    aktiviteter: { [aktivitet: string]: AktiviteterValg };
+    tiltakstyper: string[];
+    ytelse: null;
+}
+
 //  Reducer
-// TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducers
+// TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducer
 export const initialState = {
     brukerstatus: null,
     alder: [],
@@ -43,7 +64,7 @@ function fjern(verdi, fjernVerdi) {
     throw new Error(`Kan ikke håndtere fjerning av ${fjernVerdi} fra ${verdi}`);
 }
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state: FiltreringState = initialState, action): FiltreringState {
     switch (action.type) {
         case CLEAR_FILTER:
             return initialState;
