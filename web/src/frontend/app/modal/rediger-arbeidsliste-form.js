@@ -2,6 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { validForm, rules } from 'react-redux-form-validation';
 import { FormattedMessage } from 'react-intl';
+import { Undertittel } from 'nav-frontend-typografi';
 import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
@@ -24,35 +25,37 @@ const pakrevdTekst = rules.minLength(
 );
 
 function label(bruker) {
-    return (<FormattedMessage
+    return (<Undertittel><FormattedMessage
         id="modal.legg.til.arbeidsliste.brukerinfo"
         values={{
             etternavn: bruker.etternavn,
             fornavn: bruker.fornavn,
             fnr: bruker.fnr
         }}
-    />);
+    /></Undertittel>);
 }
 
 function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <Textarea
-                    labelId={'kommentar'}
-                    label={label(bruker)}
-                    feltNavn={'kommentar'}
-                    placeholder=""
-                    maxLength={KOMMENTAR_MAKS_LENGDE}
-                    disabled={false}
-                    visTellerFra={0}
-                />
+            <div  className="input-fields">
+                <div className="nav-input blokk-s">
+                    <Textarea
+                        labelId={'kommentar'}
+                        label={label(bruker)}
+                        feltNavn={'kommentar'}
+                        placeholder=""
+                        maxLength={KOMMENTAR_MAKS_LENGDE}
+                        disabled={false}
+                        visTellerFra={0}
+                    />
+                </div>
                 <Datovelger
                     feltNavn={'frist'}
                     labelId="arbeidsliste-form.label.dato"
                 />
             </div>
-            <div>
+            <div className="modal-footer" >
                 <button type="submit" className="knapp knapp--hoved" onClick={handleSubmit}>
                     <FormattedMessage id="modal.knapp.lagre" />
                 </button>
