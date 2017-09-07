@@ -41,7 +41,7 @@ SokFilter.propTypes = {
 };
 
 SokFilter.defaultProps = {
-    filter: (query) => (dataEntry) => !query || JSON.stringify(dataEntry).toLowerCase().includes(query)
+    filter: (query) => (dataEntry) => !query || JSON.stringify(dataEntry).toLowerCase().includes(query.toLowerCase())
 };
 
 export default SokFilter;
