@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { reducer as formReducer } from 'react-redux-form-validation';
 import persistent from './utils/persistentReducer';
 import enheterReducer from './ducks/enheter';
 import ledeteksterReducer from './ducks/ledetekster';

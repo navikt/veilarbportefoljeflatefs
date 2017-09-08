@@ -154,12 +154,8 @@ export function validerDatoField(input, intl, alternativer) {
     const inputDato = moment(input);
 
     const fraDato = moment(fra);
-
-    if (!input) {
-        return intl.formatMessage({
-            id: 'datepicker.feilmelding.mangler-dato'
-        });
-    } else if (input && !erGyldigISODato(input)) {
+    
+    if (input && !erGyldigISODato(input)) {
         return intl.formatMessage({
             id: 'datepicker.feilmelding.ugyldig-dato'
         });
