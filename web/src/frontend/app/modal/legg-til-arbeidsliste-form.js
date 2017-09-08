@@ -1,30 +1,33 @@
-import React, { PropTypes as PT } from 'react';
-import { connect } from 'react-redux';
-import { FieldArray } from 'redux-form';
-import { validForm, rules } from 'react-redux-form-validation';
-import { FormattedMessage } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
-import Datovelger from '../components/datovelger/datovelger';
-import Textarea from '../components/textarea/textarea';
-import { lagreArbeidsliste } from '../ducks/arbeidsliste';
-import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
-import { leggTilStatustall } from '../ducks/statustall';
-import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
-import { visServerfeilModal } from '../ducks/modal-serverfeil';
+import React, {PropTypes as PT} from 'react';
+import {connect} from 'react-redux';
+import {FieldArray} from 'redux-form';
+import {rules, validForm} from 'react-redux-form-validation';
+import {FormattedMessage} from 'react-intl';
+import {Undertittel} from 'nav-frontend-typografi';
+import {lagreArbeidsliste} from '../ducks/arbeidsliste';
+import {oppdaterArbeidslisteForBruker} from '../ducks/portefolje';
+import {leggTilStatustall} from '../ducks/statustall';
+import {LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal} from '../ducks/modal-feilmelding-brukere';
+import {visServerfeilModal} from '../ducks/modal-serverfeil';
+import Textarea from './../components/textarea/textarea';
+import Datovelger from './../components/datovelger/datovelger';
+import {arbeidsliste} from "../proptype-shapes";
 
-const KOMMENTAR_MAKS_LENGDE = 255;
+const KOMMENTAR_MAKS_LENGDE = 250;
+let NAME = '';
 
 const begrensetKommentarLengde = rules.maxLength(
     KOMMENTAR_MAKS_LENGDE,
     <FormattedMessage
         id="legg-til-arbeidsliste-form.feilmelding.kommentar-lengde"
-        values={{ KOMMENTAR_MAKS_LENGDE }}
+        values={ {KOMMENTAR_MAKS_LENGDE, NAME } }
     />
 );
 const pakrevdTekst = rules.minLength(
     0,
-    <FormattedMessage id="legg-til.arbeidsliste-form.feilmelding.tekst.mangler" />
+    <FormattedMessage id="legg-til.arbeidsliste-form.feilmelding.tekst.mangler"/>
 );
+
 
 function label(bruker) {
     return (<Undertittel><FormattedMessage
@@ -42,41 +45,44 @@ function renderFelter({ fields }) {
     return (
         <div>
             {fields.map((name, idx) => (
-                <div  className="input-fields" key={`${name}`}>
-                    <div className="nav-input blokk-s">
-                        {label(fields.get(idx))}
-                        <Textarea
-                            labelId={`${name}.kommentar`}
-                            label="Kommentar"
-                            feltNavn={`${name}.kommentar`}
-                            placeholder=""
-                            maxLength={KOMMENTAR_MAKS_LENGDE}
-                            disabled={false}
-                            validate={(value) => (pakrevdTekst(value) || begrensetKommentarLengde(value))}
+                    <fieldset className="input-fields" key={`${name}`}>
+                        <div className="nav-input blokk-s">
+                            <legend>
+                                {label(fields.get(idx))}
+                            </legend>
+                            <Textarea
+                                labelId={`${name}.kommentar`}
+                                label="Kommentar"
+                                feltNavn={`${name}.kommentar`}
+                                placeholder=""
+                                maxLength={KOMMENTAR_MAKS_LENGDE}
+                            />
+                        </div>
+                        <Datovelger
+                            feltNavn={`${name}.frist`}
+                            labelId="arbeidsliste-form.label.dato"
+                            label="Frist"
+                            tidligsteFom={new Date()}
                         />
-                    </div>
-                    <Datovelger
-                        feltNavn={`${name}.frist`}
-                        labelId="arbeidsliste-form.label.dato"
-                        label="Frist"
-                        tidligsteFom={new Date()}
-                    />
-                </div>
-                ))}
+                    </fieldset>
+                )
+            )}
         </div>);
 }
 
-function LeggTilArbeidslisteForm({ lukkModal, handleSubmit }) {
+
+function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary }) {
     return (
         <form onSubmit={handleSubmit}>
-            <FieldArray name="arbeidsliste" component={renderFelter} />
+            {errorSummary}
+            <FieldArray name="arbeidsliste" component={renderFelter} test={'test'}/>
             <div>
                 <div className="modal-footer">
-                    <button type="submit" className="knapp knapp--hoved" onClick={handleSubmit}>
-                        <FormattedMessage id="modal.knapp.lagre" />
+                    <button type="submit" className="knapp knapp--hoved">
+                        <FormattedMessage id="modal.knapp.lagre"/>
                     </button>
                     <button type="button" className="knapp" onClick={lukkModal}>
-                        <FormattedMessage id="modal.knapp.avbryt" />
+                        <FormattedMessage id="modal.knapp.avbryt"/>
                     </button>
                 </div>
             </div>
@@ -86,30 +92,28 @@ function LeggTilArbeidslisteForm({ lukkModal, handleSubmit }) {
 
 LeggTilArbeidslisteForm.propTypes = {
     lukkModal: PT.func.isRequired,
-    handleSubmit: PT.func.isRequired
+    handleSubmit: PT.func.isRequired,
+    errorSummary: PT.node.isRequired,
 };
 
 export const formNavn = 'arbeidsliste_kommentar_skjema';
 
 const LeggTilArbeidslisteReduxForm = validForm({
     form: formNavn,
-    validate: {}
+    errorSummaryTitle: (
+        <FormattedMessage id="arbeidsliste.form.feiloppsummering.tittel"/>
+    ),
+    validate: {
+        arbeidsliste: rules.array('arbeidsliste', {
+            kommentar: [begrensetKommentarLengde, pakrevdTekst]
+        })
+    }
+
+
 })(LeggTilArbeidslisteForm);
 
-
-// const LeggTilArbeidslisteFormValidation = validForm({
-//     form: 'arbeidsliste-legg-til',
-//     errorSummaryTitle: (
-//         <FormattedMessage id="arbeidsliste.form.feiloppsummering.tittel" />
-//     ),
-//     validate: {
-//         kommentar: [begrensetKommentarLengde, pakrevd],
-//         frist: [fristErEtterIDag],
-//     },
-// })(LeggTilArbeidslisteForm);
-
 const mapStateToProps = (state, props) => {
-    const arbeidslisteData = props.valgteBrukere.map(({ fornavn, etternavn, fnr }) => ({
+    const arbeidslisteData = props.valgteBrukere.map(({fornavn, etternavn, fnr}) => ({
         fornavn,
         etternavn,
         fnr
@@ -121,7 +125,8 @@ const mapStateToProps = (state, props) => {
 
     return {
         initialValues: {
-            arbeidsliste: [...arbeidslisteData]
+
+        arbeidsliste: [...arbeidslisteData]
         }
     };
 };
@@ -137,7 +142,7 @@ function oppdaterState(res, arbeidsliste, innloggetVeileder, dispatch) {
     const arbeidslisteToDispatch = arbeidsliste
         .map((a) => ({
             ...a,
-            sistEndretAv: { veilederId: innloggetVeileder },
+            sistEndretAv: {veilederId: innloggetVeileder},
             endringstidspunkt: new Date().toISOString(),
             arbeidslisteAktiv: true
         }))

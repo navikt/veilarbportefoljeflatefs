@@ -46,7 +46,7 @@ class LeggTilArbeidsliste extends Component {
         return (
             <div className="toolbar_btnwrapper">
                 { this.arbeidslisteButton(valgteBrukere) }
-                <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />
+                {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
             </div>
         );
     }
