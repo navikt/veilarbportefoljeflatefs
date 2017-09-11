@@ -33,7 +33,9 @@ class Paginering extends PureComponent {
                     pressed={seAlleState && antall <= sideStorrelse}
                     onClick={() => onChange(0, nyAntall)}
                 >
-                    <FormattedMessage id="paginering.se.alle" />
+                    {!seAlleState ? <FormattedMessage id="paginering.se.alle" /> :
+                    <FormattedMessage id="paginering.se.faerre" />
+                    }
                 </KnappPanel>
 
                 <KnappPanel disabled={erPaForsteSide} onClick={() => onChange(fraIndex - sideStorrelse, sideStorrelse)}>
