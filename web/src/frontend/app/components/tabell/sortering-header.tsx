@@ -1,14 +1,23 @@
-import React, { PropTypes as PT } from 'react';
-import classNames from 'classnames';
+import * as React from 'react';
+import * as classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 
+interface SorteringHeaderProps {
+    sortering: string;
+    onClick: Function;
+    rekkefolge: string;
+    erValgt: boolean;
+    tekstId: string;
+    skalVises?: boolean;
+    className?: string;
+}
 
-function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekstId, skalVises, className }) {
+function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekstId, skalVises=true, className='' }: SorteringHeaderProps) {
     if (!skalVises) {
         return null;
     }
     return (
-        <span className={classNames(`sortering-header__${sortering}`, { [className]: className })}>
+        <span className={classNames(`sortering-header__${sortering}`, className)}>
             <button
                 onClick={() => onClick(sortering)}
                 className={classNames('lenke lenke--frittstaende', { valgt: erValgt })}
@@ -24,20 +33,5 @@ function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekstId, ska
         </span>
     );
 }
-
-SorteringHeader.propTypes = {
-    sortering: PT.string.isRequired,
-    onClick: PT.func.isRequired,
-    rekkefolge: PT.string.isRequired,
-    erValgt: PT.bool.isRequired,
-    tekstId: PT.string.isRequired,
-    skalVises: PT.bool.isRequired,
-    className: PT.string
-};
-
-SorteringHeader.defaultProps = {
-    skalVises: true,
-    className: ''
-};
 
 export default SorteringHeader;
