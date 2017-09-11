@@ -28,7 +28,7 @@ class VeiledereSide extends Component {
                         <p className="typo-infotekst begrensetbredde blokk-l">
                             <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
                         </p>
-                        <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel">
+                        <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel blokk-xxs">
                             <FormattedMessage
                                 id="enhet.veiledere.tittel"
                                 values={{ antallVeiledere: veiledere.data.veilederListe.length }}

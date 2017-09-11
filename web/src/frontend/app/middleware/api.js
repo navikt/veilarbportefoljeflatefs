@@ -1,4 +1,4 @@
-/* eslint-disable no-undef*/
+/* eslint-disable no-undef */
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
 
 const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
