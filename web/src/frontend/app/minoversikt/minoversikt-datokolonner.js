@@ -3,6 +3,7 @@ import {
     nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull
 } from '../utils/utils';
 import DatoKolonne from '../components/datokolonne';
+import UkeKolonne from '../components/ukekolonne';
 import {
     ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
