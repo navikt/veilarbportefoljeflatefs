@@ -1,11 +1,16 @@
 import React, { PropTypes as PT } from 'react';
-import { utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull } from '../utils/utils';
+import {
+    nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull
+} from '../utils/utils';
 import DatoKolonne from '../components/datokolonne';
-import { ytelsevalg,
+import {
+    ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER,
-    MIN_ARBEIDSLISTE } from '../filtrering/filter-konstanter';
+    MIN_ARBEIDSLISTE,
+    I_AVTALT_AKTIVITET
+} from '../filtrering/filter-konstanter';
 import { filtervalgShape } from '../proptype-shapes';
 
 
@@ -46,12 +51,16 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }) {
                 skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
             />
             <DatoKolonne
+                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
+                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
+            />
+            <DatoKolonne
                 dato={bruker.nyesteUtlopteAktivitet}
                 skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
             />
             <DatoKolonne
                 dato={utlopsdatoForAktivitetEllerNull(bruker.aktiviteter, valgtAktivitetstype)}
-                skalVises={!!valgtAktivitetstype}
+                skalVises={!!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0}
             />
         </div>
     );

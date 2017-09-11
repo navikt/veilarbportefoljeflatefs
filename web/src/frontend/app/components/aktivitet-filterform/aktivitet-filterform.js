@@ -35,7 +35,7 @@ function AktivitetFilterform(props) {
                     htmlFor={`aktivitet-${kode}-ja`}
                     className="skjemaelement__label aktivitet_radioknapp_label"
                 >
-                    <span className="sr-only">{verdi}</span>
+                    <span className="sr-only">Ja, {verdi}</span>
                 </label>
                 <Field
                     id={`aktivitet-${kode}-nei`}
@@ -49,9 +49,9 @@ function AktivitetFilterform(props) {
                     htmlFor={`aktivitet-${kode}-nei`}
                     className="skjemaelement__label aktivitet_radioknapp_label"
                 >
-                    <span className="sr-only">{verdi}</span>
+                    <span className="sr-only">Nei, {verdi}</span>
                 </label>
-                <span>{verdi}</span>
+                <span className="aktivitetvalg__tekst">{verdi}</span>
             </div>
         ]);
 

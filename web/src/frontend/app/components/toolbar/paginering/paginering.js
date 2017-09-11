@@ -1,4 +1,4 @@
-/* eslint-disable react/prefer-stateless-function*/
+/* eslint-disable react/prefer-stateless-function */
 import React, { PropTypes as PT, PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -33,7 +33,9 @@ class Paginering extends PureComponent {
                     pressed={seAlleState && antall <= sideStorrelse}
                     onClick={() => onChange(0, nyAntall)}
                 >
-                    <FormattedMessage id="paginering.se.alle" />
+                    {!seAlleState ? <FormattedMessage id="paginering.se.alle" /> :
+                    <FormattedMessage id="paginering.se.faerre" />
+                    }
                 </KnappPanel>
 
                 <KnappPanel disabled={erPaForsteSide} onClick={() => onChange(fraIndex - sideStorrelse, sideStorrelse)}>
