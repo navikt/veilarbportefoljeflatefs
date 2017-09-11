@@ -47,6 +47,7 @@ function EnhetTabell({
                             enhetId={enhetId}
                             settMarkert={settMarkert}
                             filtervalg={filtervalg}
+                            valgteKolonner={valgteKolonner}
                             brukersVeileder={finnBrukersVeileder(veiledere, bruker)}
                         />
                     </li>)}
