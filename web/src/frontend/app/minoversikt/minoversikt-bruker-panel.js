@@ -1,5 +1,6 @@
 import React, { PropTypes as PT, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { UndertekstBold } from 'nav-frontend-typografi';
 import Hybridpanel from '../components/tabell/hybridpanel/hybridpanel';
 import Brukerinformasjon from '../components/tabell/brukerinformasjon';
 import MinoversiktDatokolonner from './minoversikt-datokolonner';
@@ -42,10 +43,10 @@ class MinoversiktBrukerPanel extends Component {
         const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
         const childrenBody =
             (<div className="brukerpanel__body">
-                <h5>
+                <UndertekstBold>
                     <FormattedMessage id="arbeidsliste.kommentar.header" />
-                </h5>
-                {bruker.arbeidsliste.kommentar}
+                </UndertekstBold>
+                <p className="arbeidsliste-kommentar-tekst">{bruker.arbeidsliste.kommentar}</p>
                 <p className="arbeidsliste--panel-footer typo-undertekst">
                     <FormattedMessage
                         id="arbeidsliste.kommentar.footer"
