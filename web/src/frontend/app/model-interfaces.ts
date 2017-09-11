@@ -1,3 +1,9 @@
+export enum Sorteringsrekkefolge {
+    ikke_satt = "ikke_satt",
+    ascending = "ascending",
+    descending = "descending"
+}
+
 export interface FiltervalgModell {
     nyeBrukere?: boolean;
     inaktiveBrukere?: boolean;
@@ -15,4 +21,21 @@ export interface FiltervalgModell {
     brukerstatus?: string;
     aktiviteter?: string[];
     tiltakstyper: string[];
+}
+
+export interface EnhetModell {
+    enhetId?: string;
+    navn?: string;
+}
+
+export interface ValgtEnhetModell {
+    enhet: EnhetModell;
+    status: string;
+}
+
+export interface VeilederModell {
+    ident: string;
+    navn?: string;
+    fornavn?: string;
+    etternavn?: string;
 }
