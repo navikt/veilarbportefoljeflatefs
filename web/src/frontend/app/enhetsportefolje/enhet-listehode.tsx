@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import SorteringHeader from '../components/tabell/sortering-header';
 import { lagAktiviteterSorteringsfelt, utledValgtAktivitetstype, ytelseFilterErAktiv } from '../utils/utils';
@@ -10,8 +10,15 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER,
     I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
+import {FiltervalgModell} from "../model-interfaces";
+import {Kolonne} from "../ducks/ui/listevisning";
 
-function Header({ id, className }) {
+interface HeaderProps {
+    id: string;
+    className?: string;
+}
+
+function Header({ id, className }: HeaderProps) {
     return (
         <span className={className}>
             <FormattedMessage id={id} />
@@ -19,8 +26,16 @@ function Header({ id, className }) {
     );
 }
 
+interface EnhetListehodeProps {
+    sorteringsrekkefolge: string;
+    sorteringOnClick: Function;
+    valgteKolonner: Kolonne[];
+    filtervalg: FiltervalgModell;
+    sorteringsfelt: string;
+}
 
-function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt }) {
+
+function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: EnhetListehodeProps) {
     const ytelseUtlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
     const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
     return (
@@ -147,17 +162,5 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
         </div>
     );
 }
-
-EnhetListehode.propTypes = {
-    sorteringsrekkefolge: PT.string.isRequired,
-    sorteringOnClick: PT.func.isRequired,
-    filtervalg: filtervalgShape.isRequired,
-    sorteringsfelt: PT.string.isRequired
-};
-
-Header.propTypes = {
-    id: PT.string.isRequired,
-    className: PT.string
-};
 
 export default EnhetListehode;

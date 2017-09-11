@@ -77,9 +77,10 @@ const Listevisning = (props: ListevisningProps) => {
 };
 
 function mapStateToProps(state: AppState) {
+    const muligeAlternativer = getMuligeKolonner(state.filtrering);
     return {
-        valgteAlternativ: state.ui.listevisning.valgte,
-        muligeAlternativer: getMuligeKolonner(state.filtrering)
+        valgteAlternativ: state.ui.listevisning.valgte.filter(a => muligeAlternativer.includes(a)),
+        muligeAlternativer: muligeAlternativer
     };
 }
 
