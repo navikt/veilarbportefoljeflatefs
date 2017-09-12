@@ -11,7 +11,6 @@ export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 
 export const FILTERGRUPPE_ENHET = 'enhet';
 
-
 export function lagConfig(data) {
     if (typeof data === 'string') {
         return { label: data };
@@ -94,7 +93,6 @@ export const ytelseUtlopsSortering = {
     [ytelsevalg.TILTAKSPENGER]: 'utlopsdato'
 };
 
-
 export const rettighetsgruppe = {
     AAP: 'Arbeidsavklaringspenger',
     DAGP: 'Dagpenger',
@@ -117,7 +115,6 @@ export const aktiviteter = {
 
 const veiledere = {
 };
-
 
 export default {
     ytelseUtlopsSortering,

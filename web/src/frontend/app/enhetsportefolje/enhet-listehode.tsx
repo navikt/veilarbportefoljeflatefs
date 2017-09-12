@@ -10,8 +10,8 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER,
     I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
-import {FiltervalgModell} from "../model-interfaces";
-import {Kolonne} from "../ducks/ui/listevisning";
+import {FiltervalgModell} from '../model-interfaces';
+import {Kolonne} from '../ducks/ui/listevisning';
 
 interface HeaderProps {
     id: string;
@@ -20,7 +20,7 @@ interface HeaderProps {
 }
 
 function Header({ id, className, skalVises }: HeaderProps) {
-    if(!skalVises) {
+    if (!skalVises) {
         return null;
     }
     return (
@@ -42,7 +42,7 @@ const ytelseUtlopsSortering = {
 
 interface EnhetListehodeProps {
     sorteringsrekkefolge: string;
-    sorteringOnClick: Function;
+    sorteringOnClick: (sortering: string) => void;
     valgteKolonner: Kolonne[];
     filtervalg: FiltervalgModell;
     sorteringsfelt: string;

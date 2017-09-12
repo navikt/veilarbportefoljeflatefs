@@ -107,7 +107,7 @@
     "test": "npm run test:ts",
     "test:ts": "mocha",
     "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates --semverLevel major -e 2 -x history,react-router,react-router-redux,react-collapse,react-height,typescript,redux-form --packageFile ./package.json",
-    "eslint": "eslint --fix ./app/**/*.js && tslint ./app/**/*.ts*",
+    "eslint": "eslint --fix ./app/**/*.js && tslint ./app/**/*.ts* --fix",
     "clean": "node ./node_modules/rimraf/rimraf -rf out/",
     "build": "npm run build:ts && npm run build:css && npm run build:html",
     "build:ts": "node ./node_modules/typescript/bin/tsc && node ./node_modules/webpack/bin/webpack -p && npm run clean",
