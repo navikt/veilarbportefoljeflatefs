@@ -5,8 +5,8 @@ import EnhetDatokolonner from './enhet-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
 import { filtervalgShape, veilederShape } from '../proptype-shapes';
 import Etikett from '../components/tabell/etikett';
-import {FiltervalgModell, VeilederModell} from "../model-interfaces";
-import {Kolonne} from "../ducks/ui/listevisning";
+import {FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {Kolonne} from '../ducks/ui/listevisning';
 
 const fm = (id) => <FormattedMessage id={id} />;
 
@@ -39,7 +39,7 @@ function Veilederinfo({ veileder = null, bruker }: VeilederinfoProps) {
 
 interface EnhetBrukerpanelProps {
     bruker: any;
-    settMarkert: (string, boolean) => void;
+    settMarkert: (bruker: string, markert: boolean) => void;
     enhetId?: string;
     filtervalg: FiltervalgModell;
     brukersVeileder?: VeilederModell;

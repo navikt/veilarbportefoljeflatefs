@@ -8,7 +8,7 @@ interface ListeoverskriftProps {
     values?: {[id: string]: any};
 }
 
-function Listeoverskrift({ id, skalVises=true, className='', values={} }: ListeoverskriftProps) {
+function Listeoverskrift({ id, skalVises= true, className= '', values= {} }: ListeoverskriftProps) {
     if (!skalVises) {
         return null;
     }

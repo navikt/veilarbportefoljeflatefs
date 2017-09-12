@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 interface SorteringHeaderProps {
     sortering: string;
-    onClick: Function;
+    onClick: (sortering: string) => void;
     rekkefolge: string;
     erValgt: boolean;
     tekstId: string;
@@ -12,7 +12,7 @@ interface SorteringHeaderProps {
     className?: string;
 }
 
-function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekstId, skalVises=true, className='' }: SorteringHeaderProps) {
+function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekstId, skalVises = true, className = '' }: SorteringHeaderProps) {
     if (!skalVises) {
         return null;
     }

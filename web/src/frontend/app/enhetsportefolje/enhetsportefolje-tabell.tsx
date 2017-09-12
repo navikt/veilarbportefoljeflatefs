@@ -7,17 +7,17 @@ import EnhetListehode from './enhet-listehode';
 import {
     FiltervalgModell, Sorteringsrekkefolge, ValgtEnhetModell,
     VeilederModell
-} from "../model-interfaces";
-import {Kolonne} from "../ducks/ui/listevisning";
-import {selectValgteAlternativer} from "../components/toolbar/listevisning/listevisning-utils";
+} from '../model-interfaces';
+import {Kolonne} from '../ducks/ui/listevisning';
+import {selectValgteAlternativer} from '../components/toolbar/listevisning/listevisning-utils';
 
 interface EnhetTabellProps {
     portefolje: any;
     valgtEnhet: ValgtEnhetModell;
     sorteringsrekkefolge: Sorteringsrekkefolge;
-    settMarkert: (string, boolean) => any;
+    settMarkert: (bruker: string, markert: boolean) => any;
     filtervalg: FiltervalgModell;
-    settSorteringOgHentPortefolje: Function;
+    settSorteringOgHentPortefolje: (sortering: string) => void;
     veiledere: VeilederModell;
     valgteKolonner: Kolonne[];
 }
@@ -56,7 +56,6 @@ function EnhetTabell({
         </div>
     );
 }
-
 
 const mapStateToProps = (state) => ({
     portefolje: state.portefolje,
