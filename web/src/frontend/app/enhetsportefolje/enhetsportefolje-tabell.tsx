@@ -9,6 +9,7 @@ import {
     VeilederModell
 } from "../model-interfaces";
 import {Kolonne} from "../ducks/ui/listevisning";
+import {selectValgteAlternativer} from "../components/toolbar/listevisning/listevisning-utils";
 
 interface EnhetTabellProps {
     portefolje: any;
@@ -62,7 +63,7 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     filtervalg: state.filtrering,
-    valgteKolonner: state.ui.listevisning.valgte
+    valgteKolonner: selectValgteAlternativer(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

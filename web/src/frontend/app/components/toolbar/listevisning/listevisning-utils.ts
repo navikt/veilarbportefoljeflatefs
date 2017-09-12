@@ -1,5 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {AktiviteterValg, FiltreringState} from '../../../ducks/filtrering';
+import {AppState} from "../../../reducer";
 
 export interface Alternativ {
     tekstid: string;
@@ -8,6 +9,18 @@ export interface Alternativ {
 
 function addHvis(kolonne: Kolonne, add: boolean): Kolonne[] {
     return add ? [kolonne] : [];
+}
+
+export function selectMuligeAlternativer(state: AppState): Kolonne[] {
+    return getMuligeKolonner(state.filtrering);
+}
+
+export function selectValgteAlternativer(state: AppState): Kolonne[] {
+    const muligeAlternativer = selectMuligeAlternativer(state);
+    if (muligeAlternativer.length <= 5) {
+        return muligeAlternativer;
+    }
+    return state.ui.listevisning.valgte.filter(a => muligeAlternativer.includes(a));
 }
 
 export const alternativerConfig = new Map<Kolonne, Alternativ>();

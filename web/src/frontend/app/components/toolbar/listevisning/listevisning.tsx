@@ -7,7 +7,10 @@ import {FormattedMessage} from 'react-intl';
 import {AppState} from '../../../reducer';
 import {Action, bindActionCreators, Dispatch} from 'redux';
 import {avvelgAlternativ, Kolonne, velgAlternativ} from '../../../ducks/ui/listevisning';
-import {alternativerConfig, getMuligeKolonner} from './listevisning-utils';
+import {
+    alternativerConfig, getMuligeKolonner, selectMuligeAlternativer,
+    selectValgteAlternativer
+} from './listevisning-utils';
 
 interface ListevisningRadProps {
     kolonne: Kolonne;
@@ -77,10 +80,9 @@ const Listevisning = (props: ListevisningProps) => {
 };
 
 function mapStateToProps(state: AppState) {
-    const muligeAlternativer = getMuligeKolonner(state.filtrering);
     return {
-        valgteAlternativ: state.ui.listevisning.valgte.filter(a => muligeAlternativer.includes(a)),
-        muligeAlternativer: muligeAlternativer
+        valgteAlternativ: selectValgteAlternativer(state),
+        muligeAlternativer: selectMuligeAlternativer(state)
     };
 }
 
