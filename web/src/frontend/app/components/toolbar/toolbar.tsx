@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormEvent, PropTypes as PT, StatelessComponent } from 'react';
+import { FormEvent } from 'react';
 import VelgalleCheckboks from './velgalle-checkboks';
 import Tildelbruker from './tildel-bruker';
 import LeggTilArbeidsliste from './legg-til-arbeidsliste';
@@ -16,7 +16,7 @@ interface ToolbarProps {
     children?: React.ReactNode;
 }
 
-const Toolbar: StatelessComponent = ({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenVeiledersPortefolje }: ToolbarProps) => (
+const Toolbar = ({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenVeiledersPortefolje }: ToolbarProps) => (
     <section className="toolbar blokk-xs">
         <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
             <VelgalleCheckboks />
@@ -36,17 +36,5 @@ const Toolbar: StatelessComponent = ({ filtergruppe, onPaginering, sokVeilederSk
         </div>
     </section>
 );
-
-Toolbar.propTypes = {
-    filtergruppe: PT.string.isRequired,
-    onPaginering: PT.func.isRequired,
-    sokVeilederSkalVises: PT.bool,
-    visesAnnenVeiledersPortefolje: PT.bool
-};
-
-Toolbar.defaultProps = {
-    filtergruppe: 'veileder',
-    visesAnnenVeiledersPortefolje: false
-};
 
 export default Toolbar;
