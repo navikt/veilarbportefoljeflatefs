@@ -17,7 +17,7 @@ export interface FiltervalgModell {
     formidlingsgruppe?: string[];
     servicegruppe?: string[];
     veiledere?: string[];
-    ytelse?: string;
+    ytelse: string;
     brukerstatus?: string;
     aktiviteter?: string[];
     tiltakstyper: string[];

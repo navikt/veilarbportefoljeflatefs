@@ -30,6 +30,16 @@ function Header({ id, className, skalVises }: HeaderProps) {
     );
 }
 
+const ytelseUtlopsSortering = {
+    [ytelsevalg.DAGPENGER]: 'dagputlopUke',
+    [ytelsevalg.ORDINARE_DAGPENGER]: 'dagputlopUke',
+    [ytelsevalg.DAGPENGER_MED_PERMITTERING]: 'permutlopUke',
+    [ytelsevalg.AAP]: 'utlopsdato',
+    [ytelsevalg.AAP_UNNTAK]: 'utlopsdato',
+    [ytelsevalg.AAP_MAXTID]: 'aapmaxtidUke',
+    [ytelsevalg.TILTAKSPENGER]: 'utlopsdato'
+};
+
 interface EnhetListehodeProps {
     sorteringsrekkefolge: string;
     sorteringOnClick: Function;
@@ -38,10 +48,11 @@ interface EnhetListehodeProps {
     sorteringsfelt: string;
 }
 
-
 function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: EnhetListehodeProps) {
-    const ytelseUtlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
+    const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[filtervalg.ytelse];
     const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
+    const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' ? 'ddmmyy' : 'uker';
+
     return (
         <div className="enhet-listehode">
             <div className="enhet-overskrifter">
@@ -52,7 +63,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                 <Listeoverskrift
                     className="listeoverskrift__dato listeoverskrift"
                     skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
-                    id={`portefolje.tabell.${ytelseUtlopsdatoNavn}`}
+                    id={`portefolje.tabell.utlopsdato`}
                 />
                 <Listeoverskrift
                     className="listeoverskrift__dato listeoverskrift"
@@ -105,8 +116,8 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     sortering={ytelseUtlopsdatoNavn}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={['utlopsdato', 'aapmaxtid'].includes(sorteringsfelt)}
-                    tekstId="portefolje.tabell.ddmmyy"
+                    erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
+                    tekstId={`portefolje.tabell.${ytelseSorteringHeader}`}
                     skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                     className={'sortering-header__dato'}
                 />

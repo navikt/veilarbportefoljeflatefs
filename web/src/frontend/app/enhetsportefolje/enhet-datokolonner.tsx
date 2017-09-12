@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
-    nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull,
-    ytelseFilterErAktiv
+    nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull
 } from '../utils/utils';
 import { ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
@@ -12,6 +11,7 @@ import { filtervalgShape } from '../proptype-shapes';
 import DatoKolonne from '../components/datokolonne';
 import {FiltervalgModell} from "../model-interfaces";
 import {Kolonne} from "../ducks/ui/listevisning";
+import UkeKolonne from '../components/ukekolonne';
 
 interface EnhetDatokolonnerProps {
     bruker: any;
@@ -21,14 +21,29 @@ interface EnhetDatokolonnerProps {
 }
 
 
-function EnhetDatokolonner({ bruker, ytelse, filtervalg, valgteKolonner }: EnhetDatokolonnerProps) {
+function EnhetDatokolonner({ bruker, ytelse='', filtervalg, valgteKolonner }: EnhetDatokolonnerProps) {
     const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
 
     return (
         <div className="datokolonner__wrapper">
+            <UkeKolonne
+                ukerIgjen={bruker.dagputlopUke}
+                minVal={2}
+                skalVises={ytelse === ytelsevalg.DAGPENGER || ytelse === ytelsevalg.ORDINARE_DAGPENGER}
+            />
+            <UkeKolonne
+                ukerIgjen={bruker.permutlopUke}
+                minVal={2}
+                skalVises={ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING}
+            />
+            <UkeKolonne
+                ukerIgjen={bruker.aapmaxtidUke}
+                minVal={12}
+                skalVises={ytelse === ytelsevalg.AAP_MAXTID}
+            />
             <DatoKolonne
-                dato={ytelse === ytelsevalg.AAP_MAXTID ? bruker.aapMaxtid : bruker.utlopsdato}
-                skalVises={ytelseFilterErAktiv(ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                dato={bruker.utlopsdato}
+                skalVises={[ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
             />
             <DatoKolonne
                 dato={bruker.venterPaSvarFraBruker}
