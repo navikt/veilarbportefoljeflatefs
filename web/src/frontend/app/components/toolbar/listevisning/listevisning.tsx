@@ -56,7 +56,7 @@ const Listevisning = (props: ListevisningProps) => {
     }
 
     return (
-        <Dropdown name="Listevisning" className="dropdown--fixed dropdown--toolbar">
+        <Dropdown name="Listevisning" disabled={props.muligeAlternativer.length <= 5} className="dropdown--fixed dropdown--toolbar">
             <section className="radio-filterform__valg">
                 <div className="blokk-s">
                     <FormattedMessage id="listevisning.ingress"/>
