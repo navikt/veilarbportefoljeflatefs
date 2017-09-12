@@ -1,9 +1,9 @@
 import React, { PropTypes as PT } from 'react';
 import {
-    nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull,
-    ytelseFilterErAktiv
+    nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull
 } from '../utils/utils';
 import DatoKolonne from '../components/datokolonne';
+import UkeKolonne from '../components/ukekolonne';
 import {
     ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
@@ -20,13 +20,28 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }) {
 
     return (
         <div className="datokolonner__wrapper">
+            <UkeKolonne
+                ukerIgjen={bruker.dagputlopUke}
+                minVal={2}
+                skalVises={ytelse === ytelsevalg.DAGPENGER || ytelse === ytelsevalg.ORDINARE_DAGPENGER}
+            />
+            <UkeKolonne
+                ukerIgjen={bruker.permutlopUke}
+                minVal={2}
+                skalVises={ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING}
+            />
+            <UkeKolonne
+                ukerIgjen={bruker.aapmaxtidUke}
+                minVal={12}
+                skalVises={ytelse === ytelsevalg.AAP_MAXTID}
+            />
             <DatoKolonne
                 dato={bruker.arbeidsliste.frist}
                 skalVises={filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
             />
             <DatoKolonne
-                dato={(ytelse === ytelsevalg.AAP_MAXTID ? bruker.aapMaxtid : bruker.utlopsdato) || ''}
-                skalVises={ytelseFilterErAktiv(ytelse)}
+                dato={bruker.utlopsdato}
+                skalVises={[ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse)}
             />
             <DatoKolonne
                 dato={bruker.venterPaSvarFraBruker}
