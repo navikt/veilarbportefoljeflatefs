@@ -38,7 +38,7 @@ function label(bruker) {
 function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker, sistEndretDato, sistEndretAv }) {
     return (
         <form onSubmit={handleSubmit}>
-            <div  className="input-fields">
+            <div className="input-fields">
                 <div className="nav-input blokk-s">
                     <Textarea
                         labelId={'kommentar'}

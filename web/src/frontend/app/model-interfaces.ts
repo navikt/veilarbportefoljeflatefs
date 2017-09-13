@@ -1,7 +1,7 @@
 export enum Sorteringsrekkefolge {
-    ikke_satt = "ikke_satt",
-    ascending = "ascending",
-    descending = "descending"
+    ikke_satt = 'ikke_satt',
+    ascending = 'ascending',
+    descending = 'descending'
 }
 
 export interface FiltervalgModell {

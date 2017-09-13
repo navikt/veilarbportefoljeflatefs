@@ -38,7 +38,7 @@ function InnerTextAreaComponent({
                                 }) {
     let feil = errorMessage ? { feilmelding: errorMessage } : undefined;
     if (feil === undefined && !meta.pristine && meta.active && !meta.valid) {
-        feil = {feilmelding: meta.error};
+        feil = { feilmelding: meta.error };
     }
     return (
         <NavFrontendTextarea

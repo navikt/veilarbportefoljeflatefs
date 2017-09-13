@@ -17,9 +17,7 @@ function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder
             closeButton
         >
             <div className="modal-header-wrapper">
-                <header className="modal-header">
-
-                </header>
+                <header className="modal-header" />
             </div>
             <div className="arbeidsliste__modal">
                 <div className="arbeidsliste-info-tekst">
