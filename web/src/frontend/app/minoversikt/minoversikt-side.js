@@ -93,14 +93,14 @@ class MinOversiktSide extends Component {
 MinOversiktSide.propTypes = {
     hentStatusTall: PT.func.isRequired,
     hentEnhetTiltak: PT.func.isRequired,
-    valgtEnhet: PT.object.isRequired,
-    enheter: PT.object.isRequired,
-    veiledere: PT.object,
+    valgtEnhet: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    enheter: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    veiledere: PT.object, // eslint-disable-line react/forbid-prop-types
     intl: intlShape.isRequired,
     filtervalg: filtervalgShape.isRequired,
     statustall: PT.shape({ data: statustallShape }),
-    enhettiltak: PT.object.isRequired,
-    params: PT.object.isRequired
+    enhettiltak: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    params: PT.object.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
 const mapStateToProps = (state) => ({

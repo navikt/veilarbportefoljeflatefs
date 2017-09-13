@@ -14,7 +14,7 @@ function intlWrapper(Formatter) {
 
     Wrapped.propTypes = {
         id: PT.string.isRequired,
-        values: PT.object,
+        values: PT.object, // eslint-disable-line react/forbid-prop-types
         tagName: PT.string,
         className: PT.string
     };

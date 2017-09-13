@@ -33,30 +33,20 @@ class ArbeidslisteModal extends Component {
         this.props.fjernMarkerteBrukere();
     }
 
-
-    leggTilHeader() {
-        return (
-            <div className="modal-header-wrapper">
-                <header className="modal-header">
-
-                </header>
-            </div>
-        );
-    }
     leggTilModal(valgteBrukere) {
         return (
             <div className="arbeidsliste__modal">
                 <div className="arbeidsliste-info-tekst">
-                <Innholdstittel tag="h1" className="blokk-xs">
-                    <FormattedMessage id="modal.legg.til.arbeidsliste.tittel" />
-                </Innholdstittel>
-                <Normaltekst className="blokk-s">
-                    <FormattedMessage
-                        id="modal.legg.til.arbeidsliste.infotekst"
-                        values={{ antall: valgteBrukere.length }}
-                    />
-                </Normaltekst>
-            </div>
+                    <Innholdstittel tag="h1" className="blokk-xs">
+                        <FormattedMessage id="modal.legg.til.arbeidsliste.tittel" />
+                    </Innholdstittel>
+                    <Normaltekst className="blokk-s">
+                        <FormattedMessage
+                            id="modal.legg.til.arbeidsliste.infotekst"
+                            values={{ antall: valgteBrukere.length }}
+                        />
+                    </Normaltekst>
+                </div>
                 <LeggTilArbeidslisteForm
                     valgteBrukere={valgteBrukere}
                     lukkModal={this.lukkModal}
@@ -97,10 +87,11 @@ class ArbeidslisteModal extends Component {
                 contentLabel="arbeidsliste"
                 isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
-                // contentClass="arbeidsliste"
                 closeButton
             >
-                {this.leggTilHeader()}
+                <div className="modal-header-wrapper">
+                    <header className="modal-header" />
+                </div>
                 { fjerne ? this.fjernFraModal(valgteBrukere) : this.leggTilModal(valgteBrukere) }
             </NavFrontendModal>);
     }

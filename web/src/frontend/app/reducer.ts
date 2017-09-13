@@ -67,7 +67,7 @@ export interface AppState {
     diagram: any;
     arbeidsliste: any;
     enhettiltak: any;
-    form: FormReducer;
+    form: any;
 }
 
 export default combineReducers<AppState>({

@@ -1,17 +1,16 @@
-import React, {PropTypes as PT} from 'react';
-import {connect} from 'react-redux';
-import {FieldArray} from 'redux-form';
-import {rules, validForm} from 'react-redux-form-validation';
-import {FormattedMessage} from 'react-intl';
-import {Undertittel} from 'nav-frontend-typografi';
-import {lagreArbeidsliste} from '../ducks/arbeidsliste';
-import {oppdaterArbeidslisteForBruker} from '../ducks/portefolje';
-import {leggTilStatustall} from '../ducks/statustall';
-import {LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal} from '../ducks/modal-feilmelding-brukere';
-import {visServerfeilModal} from '../ducks/modal-serverfeil';
+import React, { PropTypes as PT } from 'react';
+import { connect } from 'react-redux';
+import { FieldArray } from 'redux-form';
+import { rules, validForm } from 'react-redux-form-validation';
+import { FormattedMessage } from 'react-intl';
+import { Undertittel } from 'nav-frontend-typografi';
+import { lagreArbeidsliste } from '../ducks/arbeidsliste';
+import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
+import { leggTilStatustall } from '../ducks/statustall';
+import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
+import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import Textarea from './../components/textarea/textarea';
 import Datovelger from './../components/datovelger/datovelger';
-import {arbeidsliste} from "../proptype-shapes";
 
 const KOMMENTAR_MAKS_LENGDE = 250;
 
@@ -43,27 +42,27 @@ function renderFelter({ fields }) {
     return (
         <div>
             {fields.map((name, idx) => (
-                    <fieldset className="input-fields" key={`${name}`}>
-                        <div className="nav-input blokk-s">
-                            <legend>
-                                {label(fields.get(idx))}
-                            </legend>
-                            <Textarea
-                                labelId={`${name}.kommentar`}
-                                label="Kommentar"
-                                feltNavn={`${name}.kommentar`}
-                                placeholder=""
-                                maxLength={KOMMENTAR_MAKS_LENGDE}
-                            />
-                        </div>
-                        <Datovelger
-                            feltNavn={`${name}.frist`}
-                            labelId="arbeidsliste-form.label.dato"
-                            label="Frist"
-                            tidligsteFom={new Date()}
-                            feltErValgfritt
+                <fieldset className="input-fields" key={`${name}`}>
+                    <div className="nav-input blokk-s">
+                        <legend>
+                            {label(fields.get(idx))}
+                        </legend>
+                        <Textarea
+                            labelId={`${name}.kommentar`}
+                            label="Kommentar"
+                            feltNavn={`${name}.kommentar`}
+                            placeholder=""
+                            maxLength={KOMMENTAR_MAKS_LENGDE}
                         />
-                    </fieldset>
+                    </div>
+                    <Datovelger
+                        feltNavn={`${name}.frist`}
+                        labelId="arbeidsliste-form.label.dato"
+                        label="Frist"
+                        tidligsteFom={new Date()}
+                        feltErValgfritt
+                    />
+                </fieldset>
                 )
             )}
         </div>);
@@ -74,14 +73,14 @@ function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary }) {
     return (
         <form onSubmit={handleSubmit}>
             {errorSummary}
-            <FieldArray name="arbeidsliste" component={renderFelter} test={'test'}/>
+            <FieldArray name="arbeidsliste" component={renderFelter} test={'test'} />
             <div>
                 <div className="modal-footer">
                     <button type="submit" className="knapp knapp--hoved">
-                        <FormattedMessage id="modal.knapp.lagre"/>
+                        <FormattedMessage id="modal.knapp.lagre" />
                     </button>
                     <button type="button" className="knapp" onClick={lukkModal}>
-                        <FormattedMessage id="modal.knapp.avbryt"/>
+                        <FormattedMessage id="modal.knapp.avbryt" />
                     </button>
                 </div>
             </div>
@@ -92,7 +91,7 @@ function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary }) {
 LeggTilArbeidslisteForm.propTypes = {
     lukkModal: PT.func.isRequired,
     handleSubmit: PT.func.isRequired,
-    errorSummary: PT.node.isRequired,
+    errorSummary: PT.node.isRequired
 };
 
 export const formNavn = 'arbeidsliste_kommentar_skjema';
@@ -100,7 +99,7 @@ export const formNavn = 'arbeidsliste_kommentar_skjema';
 const LeggTilArbeidslisteReduxForm = validForm({
     form: formNavn,
     errorSummaryTitle: (
-        <FormattedMessage id="arbeidsliste.form.feiloppsummering.tittel"/>
+        <FormattedMessage id="arbeidsliste.form.feiloppsummering.tittel" />
     ),
     validate: {
         arbeidsliste: rules.array('arbeidsliste', {
@@ -129,7 +128,7 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-function oppdaterState(res, arbeidsliste, innloggetVeileder, dispatch) {
+function oppdaterState(res, liste, innloggetVeileder, dispatch) {
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -137,7 +136,7 @@ function oppdaterState(res, arbeidsliste, innloggetVeileder, dispatch) {
     const brukereOK = res.data.data;
     const brukereError = res.data.error;
 
-    const arbeidslisteToDispatch = arbeidsliste
+    const arbeidslisteToDispatch = liste
         .map((a) => ({
             ...a,
             sistEndretAv: { veilederId: innloggetVeileder },
@@ -159,13 +158,13 @@ function oppdaterState(res, arbeidsliste, innloggetVeileder, dispatch) {
 
 const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
-        const arbeidsliste = formData.arbeidsliste.map((bruker, index) => ({
+        const liste = formData.arbeidsliste.map((bruker, index) => ({
             fnr: bruker.fnr,
-            kommentar: formData.arbeidsliste[index].kommentar,
-            frist: formData.arbeidsliste[index].frist
+            kommentar: formData.liste[index].kommentar,
+            frist: formData.liste[index].frist
         }));
-        lagreArbeidsliste(arbeidsliste)(dispatch)
-            .then((res) => oppdaterState(res, arbeidsliste, props.innloggetVeileder, dispatch));
+        lagreArbeidsliste(liste)(dispatch)
+            .then((res) => oppdaterState(res, liste, props.innloggetVeileder, dispatch));
         props.lukkModal();
     }
 });
