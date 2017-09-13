@@ -1,4 +1,3 @@
-
 import React, { PropTypes as PT } from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
@@ -8,8 +7,7 @@ import { brukerShape } from '../proptype-shapes';
 
 NavFrontendModal.setAppElement('#applikasjon');
 
-function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder }) {
-
+function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder, ...props }) {
     return (
         <NavFrontendModal
             className="arbeidsliste-modal modal_overflow"
@@ -33,6 +31,7 @@ function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder
                     bruker={bruker}
                     lukkModal={lukkModal}
                     innloggetVeileder={innloggetVeileder}
+                    {...props}
                 />
             </div>
 
@@ -43,7 +42,9 @@ ArbeidslisteModalRediger.propTypes = {
     isOpen: PT.bool.isRequired,
     bruker: brukerShape.isRequired,
     lukkModal: PT.func.isRequired,
-    innloggetVeileder: PT.string.isRequired
+    innloggetVeileder: PT.string.isRequired,
+    sistEndretDato: PT.string.isRequired,
+    sistEndretAv: PT.string
 };
 
 export default ArbeidslisteModalRediger;

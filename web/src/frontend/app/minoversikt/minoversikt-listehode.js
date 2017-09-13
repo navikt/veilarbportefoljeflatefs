@@ -1,6 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import { ytelseFilterErAktiv } from '../utils/utils';
+import { lagAktiviteterSorteringsfelt, utledValgtAktivitetstype, ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';
 import { filtervalgShape } from './../proptype-shapes';
 import {
@@ -8,11 +8,14 @@ import {
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER,
-    MIN_ARBEIDSLISTE } from '../filtrering/filter-konstanter';
+    MIN_ARBEIDSLISTE,
+    I_AVTALT_AKTIVITET
+} from '../filtrering/filter-konstanter';
 
 
 function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt }) {
     const ytelseUtlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
+    const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
 
     return (
         <div className="minoversikt-listehode">
@@ -46,6 +49,17 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     className="listeoverskrift__dato listeoverskrift"
                     skalVises={!!filtervalg && filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
                     id={'portefolje.tabell.utlopaktivitet'}
+                />
+                <Listeoverskrift
+                    className="listeoverskrift__dato listeoverskrift"
+                    skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
+                    id={'portefolje.tabell.aktivitet.neste.utlop'}
+                />
+                <Listeoverskrift
+                    className="listeoverskrift__dato listeoverskrift"
+                    skalVises={!!filtervalg && !!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0}
+                    id={'portefolje.tabell.aktivitet.neste.utlop.aktivitetstype'}
+                    values={{ aktivitetstype: valgtAktivitetstype ? valgtAktivitetstype.toLowerCase() : null }}
                 />
             </div>
             <div className="minoversikt-sortering-header__wrapper">
@@ -106,6 +120,24 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     erValgt={sorteringsfelt === UTLOPTE_AKTIVITETER}
                     tekstId="portefolje.tabell.ddmmyy"
                     skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
+                    className={'sortering-header__dato'}
+                />
+                <SorteringHeader
+                    sortering={I_AVTALT_AKTIVITET}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === I_AVTALT_AKTIVITET}
+                    tekstId="portefolje.tabell.ddmmyy"
+                    skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
+                    className={'sortering-header__dato'}
+                />
+                <SorteringHeader
+                    sortering={lagAktiviteterSorteringsfelt(valgtAktivitetstype)}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === lagAktiviteterSorteringsfelt(valgtAktivitetstype)}
+                    tekstId="portefolje.tabell.ddmmyy"
+                    skalVises={!!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0}
                     className={'sortering-header__dato'}
                 />
             </div>

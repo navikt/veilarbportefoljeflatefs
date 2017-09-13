@@ -35,7 +35,7 @@ function AktivitetFilterform(props) {
                     htmlFor={`aktivitet-${kode}-ja`}
                     className="skjemaelement__label aktivitet_radioknapp_label"
                 >
-                    <span className="sr-only">{verdi}</span>
+                    <span className="sr-only">Ja, {verdi}</span>
                 </label>
                 <Field
                     id={`aktivitet-${kode}-nei`}
@@ -49,9 +49,9 @@ function AktivitetFilterform(props) {
                     htmlFor={`aktivitet-${kode}-nei`}
                     className="skjemaelement__label aktivitet_radioknapp_label"
                 >
-                    <span className="sr-only">{verdi}</span>
+                    <span className="sr-only">Nei, {verdi}</span>
                 </label>
-                <span>{verdi}</span>
+                <span className="aktivitetvalg__tekst">{verdi}</span>
             </div>
         ]);
 
@@ -64,17 +64,18 @@ function AktivitetFilterform(props) {
                 <span>Nei</span>
             </div>
             {fields}
-
-            <button type="submit" className="knapp knapp--hoved knapp--mini">
+            <div className="aktivitetfilter_knapper">
+                <button type="submit" className="knapp knapp--hoved knapp--mini">
                 Lagre
             </button>
-            <button
-                type="button"
-                className="knapp knapp--standard knapp--mini"
-                onClick={reset(props.change, props.valg)}
-            >
+                <button
+                    type="button"
+                    className="knapp knapp--standard knapp--mini"
+                    onClick={reset(props.change, props.valg)}
+                >
                 Fjern valg
             </button>
+            </div>
         </form>
     );
 }
@@ -84,7 +85,7 @@ AktivitetFilterform.propTypes = {
     valg: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     closeDropdown: PT.func.isRequired,
     handleSubmit: PT.func.isRequired,
-    change: PT.object.isRequired,
+    change: PT.func.isRequired,
     onSubmit: PT.func.isRequired
 };
 

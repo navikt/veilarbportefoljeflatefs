@@ -1,14 +1,21 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Brukerinformasjon from '../components/tabell/brukerinformasjon';
 import EnhetDatokolonner from './enhet-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
 import { filtervalgShape, veilederShape } from '../proptype-shapes';
 import Etikett from '../components/tabell/etikett';
+import {FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {Kolonne} from '../ducks/ui/listevisning';
 
 const fm = (id) => <FormattedMessage id={id} />;
 
-function Veilederinfo({ veileder, bruker }) {
+interface VeilederinfoProps {
+    bruker: any;
+    veileder?: VeilederModell;
+}
+
+function Veilederinfo({ veileder = null, bruker }: VeilederinfoProps) {
     const navn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
     const ident = bruker.veilederId || '';
     return (
@@ -30,7 +37,16 @@ function Veilederinfo({ veileder, bruker }) {
     );
 }
 
-function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder }) {
+interface EnhetBrukerpanelProps {
+    bruker: any;
+    settMarkert: (bruker: string, markert: boolean) => void;
+    enhetId?: string;
+    filtervalg: FiltervalgModell;
+    brukersVeileder?: VeilederModell;
+    valgteKolonner: Kolonne[];
+}
+
+function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner }: EnhetBrukerpanelProps) {
     const { ytelse } = filtervalg;
 
     return (
@@ -41,33 +57,12 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
                     enhetId={enhetId}
                     settMarkert={settMarkert}
                 />
-                <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} />
+                <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} valgteKolonner={valgteKolonner} />
                 <Veilederinfo veileder={brukersVeileder} bruker={bruker} />
                 <Etiketter bruker={bruker} />
             </div>
         </div>
     );
 }
-
-EnhetBrukerpanel.propTypes = {
-    bruker: PT.object.isRequired,
-    settMarkert: PT.func.isRequired,
-    enhetId: PT.string.isRequired,
-    filtervalg: filtervalgShape.isRequired,
-    brukersVeileder: veilederShape
-};
-
-EnhetBrukerpanel.defaultProps = {
-    brukersVeileder: null
-};
-
-Veilederinfo.propTypes = {
-    bruker: PT.object.isRequired,
-    veileder: veilederShape
-};
-
-Veilederinfo.defaultProps = {
-    veileder: null
-};
 
 export default EnhetBrukerpanel;

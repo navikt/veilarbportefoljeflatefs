@@ -1,15 +1,38 @@
 import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
 import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
-import { nameToStateSliceMap } from './../reducer';
+import {nameToStateSliceMap} from './../reducer';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
 export const SLETT_ENKELT_FILTER = 'filtrering/SLETT_ENKELT_FILTER';
 export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
+export const ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER = 'filtrering/ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER';
+export const SLETT_AKTIVITETER_OG_TILTAK_FILTER = 'filtrering/SLETT_AKTIVITETER_OG_TILTAK_FILTER';
+
+export enum AktiviteterValg {
+    JA = 'JA',
+    NEI = 'NEI',
+    NA = 'NA'
+}
+
+export interface FiltreringState {
+    brukerstatus: null;
+    alder: string[];
+    kjonn: string[];
+    fodselsdagIMnd: string[];
+    innsatsgruppe: string[];
+    formidlingsgruppe: string[];
+    servicegruppe: string[];
+    rettighetsgruppe: string[];
+    veiledere: string[];
+    aktiviteter: { [aktivitet: string]: AktiviteterValg };
+    tiltakstyper: string[];
+    ytelse: null;
+}
 
 //  Reducer
-// TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducers
+// TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducer
 export const initialState = {
     brukerstatus: null,
     alder: [],
@@ -21,6 +44,7 @@ export const initialState = {
     rettighetsgruppe: [],
     veiledere: [],
     aktiviteter: {},
+    tiltakstyper: [],
     ytelse: null
 };
 
@@ -40,7 +64,7 @@ function fjern(verdi, fjernVerdi) {
     throw new Error(`Kan ikke håndtere fjerning av ${fjernVerdi} fra ${verdi}`);
 }
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state: FiltreringState = initialState, action): FiltreringState {
     switch (action.type) {
         case CLEAR_FILTER:
             return initialState;
@@ -53,6 +77,18 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 [action.data.filterId]: fjern(state[action.data.filterId], action.data.filterVerdi)
+            };
+        case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
+            return {
+                ...state,
+                [action.data.filterId]: action.data.filterVerdi,
+                tiltakstyper: []
+            };
+        case SLETT_AKTIVITETER_OG_TILTAK_FILTER:
+            return {
+                ...state,
+                [action.data.filterId]: fjern(state[action.data.filterId], action.data.filterVerdi),
+                tiltakstyper: []
             };
         case SETT_FILTERVALG:
             return { ...action.data };
@@ -78,17 +114,41 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = 
 }
 
 export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
+    if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
+        return (dispatch, getState) => {
+            dispatch({
+                type: ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
+                data: { filterId, filterVerdi },
+                name: filtergruppe
+            });
+
+            if (filtergruppe !== 'veiledere') {
+                // TODO Fjerne denne fra filter-reducer
+                oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
+            }
+        };
+    }
     return (dispatch, getState) => {
         dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
 
         if (filtergruppe !== 'veiledere') {
-            // TODO Fjerne denne fra filter-reducer
+                // TODO Fjerne denne fra filter-reducer
             oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
         }
     };
 }
 
 export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
+    if (filterId === 'aktiviteter' && filterVerdi === 'TILTAK') {
+        return (dispatch, getState) => {
+            dispatch({
+                type: SLETT_AKTIVITETER_OG_TILTAK_FILTER,
+                data: { filterId, filterVerdi },
+                name: filtergruppe
+            });
+            oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
+        };
+    }
     return (dispatch, getState) => {
         dispatch({ type: SLETT_ENKELT_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
         oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
