@@ -13,7 +13,7 @@ import {visServerfeilModal} from '../ducks/modal-serverfeil';
 function brukerLabel(bruker) {
     return (
         <li key={bruker.fnr}>
-            <Element className="blokk-xs">
+            <Element>
                 <FormattedMessage
                     id="modal.legg.til.arbeidsliste.brukerinfo"
                     values={{
