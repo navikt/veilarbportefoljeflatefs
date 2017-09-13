@@ -11,7 +11,7 @@ import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import { filtervalgShape, statustallShape } from '../proptype-shapes';
 import { hentStatusTall } from './../ducks/statustall';
-
+import { hentEnhetTiltak } from './../ducks/enhettiltak';
 
 class MinOversiktSide extends Component {
     componentDidMount() {
@@ -20,10 +20,11 @@ class MinOversiktSide extends Component {
         const innloggetVeileder = { ident: enheter.ident };
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
         this.props.hentStatusTall(this.props.valgtEnhet.enhet.enhetId, gjeldendeVeileder.ident);
+        this.props.hentEnhetTiltak(this.props.valgtEnhet.enhet.enhetId);
     }
 
     render() {
-        const { enheter, veiledere, intl, filtervalg, statustall, ...props } = this.props;
+        const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, ...props } = this.props;
 
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
         const innloggetVeileder = { ident: enheter.ident };
@@ -44,7 +45,7 @@ class MinOversiktSide extends Component {
 
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.min.oversikt' })}>
-                <Innholdslaster avhengigheter={[statustall]}>
+                <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                     <div className="enhet-side blokk-xl">
                         {visesAnnenVeiledersPortefolje ?
                             <Link to="veiledere" className="typo-normal tilbaketilveileder">
@@ -67,11 +68,13 @@ class MinOversiktSide extends Component {
                                         filtervalg={filtervalg}
                                         filtergruppe="veileder"
                                         veileder={gjeldendeVeileder}
+                                        enhettiltak={enhettiltak.data.tiltak}
                                     />
                                     <FiltreringLabelContainer
                                         filtervalg={filtervalg}
                                         filtergruppe="veileder"
                                         veileder={gjeldendeVeileder}
+                                        enhettiltak={enhettiltak.data.tiltak}
                                     />
                                     <VeilederPortefoljeVisning
                                         gjeldendeVeileder={gjeldendeVeileder}
@@ -89,12 +92,14 @@ class MinOversiktSide extends Component {
 
 MinOversiktSide.propTypes = {
     hentStatusTall: PT.func.isRequired,
+    hentEnhetTiltak: PT.func.isRequired,
     valgtEnhet: PT.object.isRequired,
     enheter: PT.object.isRequired,
     veiledere: PT.object,
     intl: intlShape.isRequired,
     filtervalg: filtervalgShape.isRequired,
     statustall: PT.shape({ data: statustallShape }),
+    enhettiltak: PT.object.isRequired,
     params: PT.object.isRequired
 };
 
@@ -103,11 +108,13 @@ const mapStateToProps = (state) => ({
     enheter: state.enheter,
     veiledere: state.veiledere,
     filtervalg: state.filtreringMinoversikt,
-    statustall: state.statustall
+    statustall: state.statustall,
+    enhettiltak: state.enhettiltak
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentStatusTall: (enhet, veileder) => dispatch(hentStatusTall(enhet, veileder))
+    hentStatusTall: (enhet, veileder) => dispatch(hentStatusTall(enhet, veileder)),
+    hentEnhetTiltak: (enhet) => dispatch(hentEnhetTiltak(enhet))
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(MinOversiktSide));

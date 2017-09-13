@@ -1,6 +1,7 @@
 /* eslint-disable */
 import faker from 'faker';
 import veiledereResponse from './veiledere';
+import { aktiviteter } from './../filtrering/filter-konstanter';
 
 const veiledere = veiledereResponse.veilederListe;
 
@@ -41,6 +42,9 @@ function lagGrunndata() {
 
     const kontrollsifre = `${rnd(0, 9)}${rnd(0, 9)}`;
 
+    const brukerAktiviteter = Object.keys(aktiviteter)
+        .reduce( (acc, curr) => ({...acc, [curr]: Math.random() > 0.05 ? null : new Date }), {});
+
     return {
         fnr: `${dag.toString().padStart(2, '0')}${mnd.toString().padStart(2, '0')}${ar.toString().padStart(2, '0')}${individsifre}${kontrollsifre}`,
         fodselsdato: {
@@ -55,6 +59,7 @@ function lagGrunndata() {
         nyesteUtlopteAktivitet,
         venterPaSvarFraBruker,
         venterPaSvarFraNAV,
+        aktiviteter: brukerAktiviteter
     };
 }
 
@@ -135,7 +140,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         utlopsdatoFasett: ytelse.utlopsdatoFasett,
         aapMaxtid: ytelse.aapMaxtid,
         aapMaxtidFasett: ytelse.aapMaxtidFasett,
-        arbeidsliste
+        arbeidsliste,
+        aktiviteter: grunndata.aktiviteter
     };
 }
 

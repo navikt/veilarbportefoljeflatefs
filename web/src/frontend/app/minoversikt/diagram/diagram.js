@@ -4,10 +4,9 @@ import { FormattedMessage } from 'react-intl';
 import Chart from 'react-highcharts';
 import { filtervalgShape } from '../../proptype-shapes';
 import { hentDiagramdata } from './../../ducks/diagram';
-import { ytelsevalg } from '../../filtrering/filter-konstanter';
 import config from './config';
 import MultiFormattedMessage from '../../components/multiformattedmessage';
-import { ledetekster, kvartal, maned } from './util';
+import { ledetekster, lagYtelseDataFraFasett } from './util';
 import Innholdslaster from './../../innholdslaster/innholdslaster';
 import Diagramtabell from './diagram-tabell';
 
@@ -32,9 +31,7 @@ class Diagram extends Component {
                 {() => {
                     const antallBrukere = portefolje.data.antallTotalt;
                     const tekster = ledetekster(filtreringsvalg.ytelse);
-                    const data = filtreringsvalg.ytelse === ytelsevalg.AAP_MAXTID ?
-                        kvartal(antallBrukere, diagramdata.data) :
-                        maned(antallBrukere, diagramdata.data);
+                    const data = lagYtelseDataFraFasett(antallBrukere, filtreringsvalg.ytelse, diagramdata.data);
 
                     return (
                         <div>
