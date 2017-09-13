@@ -101,8 +101,8 @@ class VeilederesideVisning extends Component {
 
 VeilederesideVisning.propTypes = {
     pagineringSetup: PT.func.isRequired,
-    paginering: PT.object.isRequired,
-    veilederFilter: PT.array.isRequired,
+    paginering: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    veilederFilter: PT.array.isRequired, // eslint-disable-line react/forbid-prop-types
     sortBy: PT.func.isRequired,
     veiledere: PT.shape({
         data: veiledereShape.isRequired
