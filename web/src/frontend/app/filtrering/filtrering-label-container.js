@@ -5,7 +5,7 @@ import FilterKonstanter from './filter-konstanter';
 import { slettEnkeltFilter, clearFiltervalg } from '../ducks/filtrering';
 import { filtervalgLabelShape, veilederShape } from '../proptype-shapes';
 
-function FiltreringLabelContainer({ filtervalg, actions: { slettAlle, slettEnkelt } }) {
+function FiltreringLabelContainer({ filtervalg, enhettiltak, actions: { slettAlle, slettEnkelt } }) {
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
             if (value === true) {
@@ -20,7 +20,11 @@ function FiltreringLabelContainer({ filtervalg, actions: { slettAlle, slettEnkel
                 return value.map((singleValue) => (
                     <FiltreringLabel
                         key={`${key}--${singleValue.key || singleValue}`}
-                        label={singleValue.label || FilterKonstanter[key][singleValue]}
+                        label={
+                            key === 'tiltakstyper' ?
+                            enhettiltak[singleValue] :
+                            (singleValue.label || FilterKonstanter[key][singleValue])
+                        }
                         slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                     />
                     ));
@@ -66,6 +70,7 @@ FiltreringLabelContainer.defaultProps = {
 };
 
 FiltreringLabelContainer.propTypes = {
+    enhettiltak: PT.object.isRequired,
     actions: PT.shape({
         slettAlle: PT.func.isRequired,
         slettEnkelt: PT.func.isRequired

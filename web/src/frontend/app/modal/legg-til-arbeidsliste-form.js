@@ -60,6 +60,7 @@ function renderFelter({ fields }) {
                         labelId="arbeidsliste-form.label.dato"
                         label="Frist"
                         tidligsteFom={new Date()}
+                        feltErValgfritt
                     />
                 </div>
                 ))}

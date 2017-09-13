@@ -19,6 +19,45 @@ export function medYtelseSerie(antallBrukere, antallMisterYtelse) {
         .map((verdi, index) => verdi - lopendeSum[index]);
 }
 
+function stepper({ min, max, step }) {
+    const arr = [];
+    let start = 0;
+    let end = min - 1;
+
+    while (end <= max) {
+        arr.push({ start, end });
+        start = end + 1;
+        end = start + step;
+    }
+
+    if (start < max) {
+        arr.push({ start, end: max });
+    }
+
+    return arr;
+}
+
+function stepperRangeToDiagramKey({ start, end }) {
+    if (start === 0) return `UKE_UNDER${end + 1}`;
+    return `UKE${start}_${end}`;
+}
+
+function stepperRangeToLabel({ start, end }) {
+    return `${start}-${end}`;
+}
+
+function ukeInndeling(antallBrukere, diagramdata, stepOptions) {
+    const steps = stepper(stepOptions);
+    const labels = steps.map(stepperRangeToLabel);
+    const antallMisterYtelse = steps
+        .map(stepperRangeToDiagramKey)
+        .map((key) => diagramdata[key]);
+
+    const antallMedYtelse = medYtelseSerie(antallBrukere, antallMisterYtelse);
+
+    return { labels, antallMisterYtelse, antallMedYtelse, headerFormatSuffix: ' uker' };
+}
+
 export function maned(antallBrukere, diagramdata) {
     moment.locale('nb_no');
 
@@ -34,22 +73,13 @@ export function maned(antallBrukere, diagramdata) {
     };
 }
 
-export function kvartal(antallBrukere, diagramdata) {
-    moment.locale('nb_no');
-
-    const labels = new Array(16).fill(0).map((_, i) => {
-        const quarter = moment().add(i, 'quarter');
-        return `Q${quarter.quarter()}.${quarter.year()}`;
-    });
-
-    const antallMisterYtelse = Object.values(diagramdata);
-    const antallMedYtelse = medYtelseSerie(antallBrukere, antallMisterYtelse);
-
-    return {
-        labels,
-        antallMisterYtelse,
-        antallMedYtelse
-    };
+export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata) {
+    if (valgtYtelse === ytelsevalg.AAP || valgtYtelse === ytelsevalg.TILTAKSPENGER) {
+        return maned(antallBrukere, diagramdata);
+    } else if (valgtYtelse === ytelsevalg.AAP_MAXTID) {
+        return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 215, step: 11 });
+    }
+    return ukeInndeling(antallBrukere, diagramdata, { min: 2, max: 52, step: 3 });
 }
 
 export function ledetekster(filtreringvalg) {
@@ -67,10 +97,8 @@ export function diagramSkalVises(visningsmodus, filtervalg) {
     return visningsmodus === DIAGRAMVISNING && ytelseFilterErAktiv(filtervalg) && filtervalg !== ytelsevalg.AAP_UNNTAK;
 }
 
-
 export default {
-    maned,
-    kvartal,
+    lagYtelseDataFraFasett,
     ledetekster,
     runningTotal,
     medYtelseSerie,

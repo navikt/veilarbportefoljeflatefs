@@ -51,14 +51,6 @@
         <url-pattern>/internal/selftest</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>selftest-json</servlet-name>
-        <servlet-class>no.nav.fo.veilarbportefoljeflatefs.internal.SelftestJsonServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>selftest-json</servlet-name>
-        <url-pattern>/internal/selftest.json</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>isAlive</servlet-name>
         <servlet-class>no.nav.fo.veilarbportefoljeflatefs.internal.IsAliveServlet</servlet-class>
     </servlet>

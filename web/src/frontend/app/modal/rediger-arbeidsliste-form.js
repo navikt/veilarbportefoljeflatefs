@@ -35,7 +35,7 @@ function label(bruker) {
     /></Undertittel>);
 }
 
-function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
+function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker, sistEndretDato, sistEndretAv }) {
     return (
         <form onSubmit={handleSubmit}>
             <div  className="input-fields">
@@ -50,9 +50,19 @@ function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
                         visTellerFra={0}
                     />
                 </div>
+                <p className="arbeidsliste--modal-redigering">
+                    <FormattedMessage
+                        id="arbeidsliste.kommentar.footer"
+                        values={{
+                            dato: sistEndretDato,
+                            veileder: sistEndretAv
+                        }}
+                    />
+                </p>
                 <Datovelger
                     feltNavn={'frist'}
                     labelId="arbeidsliste-form.label.dato"
+                    feltErValgfritt
                 />
             </div>
             <div className="modal-footer" >
@@ -70,7 +80,9 @@ function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker }) {
 RedigerArbeidslisteForm.propTypes = {
     lukkModal: PT.func.isRequired,
     handleSubmit: PT.func.isRequired,
-    bruker: brukerShape.isRequired
+    bruker: brukerShape.isRequired,
+    sistEndretDato: PT.string.isRequired,
+    sistEndretAv: PT.string.isRequired
 };
 
 const RedigerArbeidslisteFormValidation = validForm({
@@ -100,8 +112,7 @@ const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
         const arbeidsliste = {
             kommentar: formData.kommentar,
-            frist: formData.frist,
-            redigering: true
+            frist: formData.frist
         };
         redigerArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
             .then((res) => oppdaterState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, dispatch));
