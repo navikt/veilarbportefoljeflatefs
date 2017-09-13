@@ -42,7 +42,7 @@ function renderFelter({ fields }) {
     return (
         <div>
             {fields.map((name, idx) => (
-                <div  className="input-fields" key={`${name}`}>
+                <div className="input-fields" key={`${name}`}>
                     <div className="nav-input blokk-s">
                         {label(fields.get(idx))}
                         <Textarea
@@ -96,18 +96,6 @@ const LeggTilArbeidslisteReduxForm = validForm({
     form: formNavn,
     validate: {}
 })(LeggTilArbeidslisteForm);
-
-
-// const LeggTilArbeidslisteFormValidation = validForm({
-//     form: 'arbeidsliste-legg-til',
-//     errorSummaryTitle: (
-//         <FormattedMessage id="arbeidsliste.form.feiloppsummering.tittel" />
-//     ),
-//     validate: {
-//         kommentar: [begrensetKommentarLengde, pakrevd],
-//         frist: [fristErEtterIDag],
-//     },
-// })(LeggTilArbeidslisteForm);
 
 const mapStateToProps = (state, props) => {
     const arbeidslisteData = props.valgteBrukere.map(({ fornavn, etternavn, fnr }) => ({
