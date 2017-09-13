@@ -37,7 +37,7 @@ export default (data, tekster) => ({
         symbolRadius: 0
     },
     tooltip: {
-        headerFormat: '<b>{point.x}</b><br/>',
+        headerFormat: `<b>{point.x}${data.headerFormatSuffix || ''}</b><br/>`,
         pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
     },
     plotOptions: {

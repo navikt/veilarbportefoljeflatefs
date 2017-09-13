@@ -11,7 +11,6 @@ export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 
 export const FILTERGRUPPE_ENHET = 'enhet';
 
-
 export function lagConfig(data) {
     if (typeof data === 'string') {
         return { label: data };
@@ -82,7 +81,17 @@ export const ytelse = {
     TILTAKSPENGER: 'Tiltakspenger'
 };
 
-export const ytelsevalg = Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }));
+export const ytelsevalg: {[id: string]: string} = Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }), {});
+
+export const ytelseUtlopsSortering = {
+    [ytelsevalg.DAGPENGER]: 'dagputlopUke',
+    [ytelsevalg.ORDINARE_DAGPENGER]: 'dagputlopUke',
+    [ytelsevalg.DAGPENGER_MED_PERMITTERING]: 'permutlopUke',
+    [ytelsevalg.AAP]: 'utlopsdato',
+    [ytelsevalg.AAP_UNNTAK]: 'utlopsdato',
+    [ytelsevalg.AAP_MAXTID]: 'aapmaxtidUke',
+    [ytelsevalg.TILTAKSPENGER]: 'utlopsdato'
+};
 
 export const rettighetsgruppe = {
     AAP: 'Arbeidsavklaringspenger',
@@ -94,20 +103,21 @@ export const rettighetsgruppe = {
 };
 
 export const aktiviteter = {
-    SOEKEAVTALE: 'Avtale om jobbsøk',
-    JOBBSOEKING: 'Jobbsøk',
+    SOKEAVTALE: 'Avtale om jobbsøk',
+    STILLING: 'Jobbsøk',
     BEHANDLING: 'Medisinsk behandling',
     TILTAK: 'Tiltak fra NAV',
-    EGENAKTIVITET: 'Egendefinert',
+    EGEN: 'Egendefinert',
     IJOBB: 'Er i arbeid',
-    MOTE: 'Møte'
+    MOTE: 'Møte',
+    GRUPPEAKTIVITET: 'Gruppeaktivitet'
 };
 
 const veiledere = {
 };
 
-
 export default {
+    ytelseUtlopsSortering,
     brukerstatus,
     alder,
     fodselsdagIMnd,

@@ -24,10 +24,19 @@ import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
 import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmelding-brukere';
 
 function antallFilter(filtervalg) {
+    function mapAktivitetFilter(value) {
+        return Object.entries(value).map(([_, verdi]) => {
+            if (verdi === 'NA') return 0;
+            return 1;
+        }).reduce((a, b) => a + b, 0);
+    }
+
     return Object.entries(filtervalg)
-        .map(([_, value]) => {
+        .map(([filter, value]) => {
             if (value === true) return 1;
             else if (Array.isArray(value)) return value.length;
+            else if (filter === 'aktiviteter') return mapAktivitetFilter(value);
+            else if (typeof value === 'object') return value ? Object.entries(value).length : 0;
             else if (value) return 1;
             return 0;
         }).reduce((a, b) => a + b, 0);
@@ -126,6 +135,7 @@ class EnhetsportefoljeVisning extends Component {
                             fra,
                             antall
                         )}
+                        sokVeilederSkalVises
                     />
                     {
                         visDiagram ?

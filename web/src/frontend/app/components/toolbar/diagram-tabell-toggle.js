@@ -46,7 +46,7 @@ const mapStateToProps = (state, ownProps) => {
 
     return ({
         visningsmodus: state.veilederpaginering.visningsmodus,
-        skalSkjules: ytelse === null || ytelse === undefined || ytelse === 'APP_MAXTID'
+        skalSkjules: ytelse === null || ytelse === undefined || ytelse === 'AAP_UNNTAK'
     });
 };
 

@@ -14,20 +14,18 @@ import Datovelger from './../components/datovelger/datovelger';
 import {arbeidsliste} from "../proptype-shapes";
 
 const KOMMENTAR_MAKS_LENGDE = 250;
-let NAME = '';
 
 const begrensetKommentarLengde = rules.maxLength(
     KOMMENTAR_MAKS_LENGDE,
     <FormattedMessage
         id="legg-til-arbeidsliste-form.feilmelding.kommentar-lengde"
-        values={ {KOMMENTAR_MAKS_LENGDE, NAME } }
+        values={{ KOMMENTAR_MAKS_LENGDE }}
     />
 );
 const pakrevdTekst = rules.minLength(
     0,
-    <FormattedMessage id="legg-til.arbeidsliste-form.feilmelding.tekst.mangler"/>
+    <FormattedMessage id="legg-til.arbeidsliste-form.feilmelding.tekst.mangler" />
 );
-
 
 function label(bruker) {
     return (<Undertittel><FormattedMessage
@@ -63,6 +61,7 @@ function renderFelter({ fields }) {
                             labelId="arbeidsliste-form.label.dato"
                             label="Frist"
                             tidligsteFom={new Date()}
+                            feltErValgfritt
                         />
                     </fieldset>
                 )
@@ -113,7 +112,7 @@ const LeggTilArbeidslisteReduxForm = validForm({
 })(LeggTilArbeidslisteForm);
 
 const mapStateToProps = (state, props) => {
-    const arbeidslisteData = props.valgteBrukere.map(({fornavn, etternavn, fnr}) => ({
+    const arbeidslisteData = props.valgteBrukere.map(({ fornavn, etternavn, fnr }) => ({
         fornavn,
         etternavn,
         fnr
@@ -125,8 +124,7 @@ const mapStateToProps = (state, props) => {
 
     return {
         initialValues: {
-
-        arbeidsliste: [...arbeidslisteData]
+            arbeidsliste: [...arbeidslisteData]
         }
     };
 };
@@ -142,7 +140,7 @@ function oppdaterState(res, arbeidsliste, innloggetVeileder, dispatch) {
     const arbeidslisteToDispatch = arbeidsliste
         .map((a) => ({
             ...a,
-            sistEndretAv: {veilederId: innloggetVeileder},
+            sistEndretAv: { veilederId: innloggetVeileder },
             endringstidspunkt: new Date().toISOString(),
             arbeidslisteAktiv: true
         }))

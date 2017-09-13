@@ -5,8 +5,7 @@
     <name>veilarbportefoljeflatefs</name>
 
     <selftest>
-        <path>veilarbportefoljeflatefs/internal/selftest.json</path>
-        <humanReadablePath>veilarbportefoljeflatefs/internal/selftest</humanReadablePath>
+        <path>veilarbportefoljeflatefs/internal/selftest</path>
     </selftest>
 
     <artifacts>
@@ -16,7 +15,7 @@
     <resources>
         <rest mapToProperty="iadecorator" alias="iadecorator-js"/>
         <fileLibrary alias="veilarbportefoljeflatefs.ledetekster" mapToProperty="folder.ledetekster" />
-        <applicationProperties alias="veilarbportefoljeflatefs.properties"/>
+        <rest alias="veilarblogin.redirect-url" mapToProperty="oidc-redirect" />
 
 
         <baseUrl alias="veilarbprotefoljePingURL" mapToProperty="veilarbportefolje.hent_portefolje" />
@@ -31,12 +30,8 @@
 
     <loadBalancer isAlive="/veilarbportefoljeflatefs/internal/isAlive" />
 
-    <security>
-        <logins>
-            <openIdConnect moduleClass="no.nav.aura.loginModule.JWTLoginModule">
-                <contextRoot>/veilarbportefoljeflatefs/tjenester/login</contextRoot>
-            </openIdConnect>
-        </logins>
+    <security serviceUserResourceAlias="srvveilarbportefoljeflatefs">
+        <logins/>
     </security>
 
 </application>

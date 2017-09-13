@@ -5,7 +5,17 @@ import { Element } from 'nav-frontend-typografi';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 import Barlabel from './barlabel';
-import { FILTERGRUPPE_ENHET } from './filter-konstanter';
+import {
+    FILTERGRUPPE_ENHET,
+    I_AVTALT_AKTIVITET,
+    IKKE_I_AVTALT_AKTIVITET,
+    NYE_BRUKERE,
+    UTLOPTE_AKTIVITETER,
+    VENTER_PA_SVAR_FRA_BRUKER,
+    VENTER_PA_SVAR_FRA_NAV,
+    INAKTIVE_BRUKERE,
+    MIN_ARBEIDSLISTE
+} from './filter-konstanter';
 
 
 function BarInput({ skalSkjules, id, tekstId, antall, max, barClassname, firstInGroup, ...props }) {
@@ -81,7 +91,7 @@ class FiltreringStatus extends Component {
                 name="brukerstatus"
                 value="NYE_BRUKERE"
                 onChange={this.handleChange}
-                checked={brukerstatus === 'NYE_BRUKERE'}
+                checked={brukerstatus === NYE_BRUKERE}
                 tekstId="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox"
                 antall={this.props.statustall.data.nyeBrukere}
                 max={this.props.statustall.data.totalt}
@@ -104,7 +114,7 @@ class FiltreringStatus extends Component {
                     name="brukerstatus"
                     value="VENTER_PA_SVAR_FRA_NAV"
                     onChange={this.handleChange}
-                    checked={brukerstatus === 'VENTER_PA_SVAR_FRA_NAV'}
+                    checked={brukerstatus === VENTER_PA_SVAR_FRA_NAV}
                     tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfranav.brukere.checkbox"
                     antall={this.props.statustall.data.venterPaSvarFraNAV}
                     max={this.props.statustall.data.totalt}
@@ -116,7 +126,7 @@ class FiltreringStatus extends Component {
                     name="brukerstatus"
                     value="VENTER_PA_SVAR_FRA_BRUKER"
                     onChange={this.handleChange}
-                    checked={brukerstatus === 'VENTER_PA_SVAR_FRA_BRUKER'}
+                    checked={brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
                     tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfrabruker.brukere.checkbox"
                     antall={this.props.statustall.data.venterPaSvarFraBruker}
                     max={this.props.statustall.data.totalt}
@@ -127,7 +137,7 @@ class FiltreringStatus extends Component {
                     name="brukerstatus"
                     value="UTLOPTE_AKTIVITETER"
                     onChange={this.handleChange}
-                    checked={brukerstatus === 'UTLOPTE_AKTIVITETER'}
+                    checked={brukerstatus === UTLOPTE_AKTIVITETER}
                     tekstId="enhet.filtrering.filtrering.oversikt.utlopteaktiviteter.brukere.checkbox"
                     antall={this.props.statustall.data.utlopteAktiviteter}
                     max={this.props.statustall.data.totalt}
@@ -139,7 +149,7 @@ class FiltreringStatus extends Component {
                     name="brukerstatus"
                     value="IKKE_I_AVTALT_AKTIVITET"
                     onChange={this.handleChange}
-                    checked={brukerstatus === 'IKKE_I_AVTALT_AKTIVITET'}
+                    checked={brukerstatus === IKKE_I_AVTALT_AKTIVITET}
                     tekstId="enhet.filtrering.filtrering.oversikt.ikkeiavtaltaktivitet.brukere.checkbox"
                     antall={this.props.statustall.data.ikkeIavtaltAktivitet}
                     max={this.props.statustall.data.totalt}
@@ -150,7 +160,7 @@ class FiltreringStatus extends Component {
                     name="brukerstatus"
                     value="I_AVTALT_AKTIVITET"
                     onChange={this.handleChange}
-                    checked={brukerstatus === 'I_AVTALT_AKTIVITET'}
+                    checked={brukerstatus === I_AVTALT_AKTIVITET}
                     tekstId="enhet.filtrering.filtrering.oversikt.iavtaltaktivitet.brukere.checkbox"
                     antall={this.props.statustall.data.iavtaltAktivitet}
                     max={this.props.statustall.data.totalt}
@@ -161,7 +171,7 @@ class FiltreringStatus extends Component {
                     name="brukerstatus"
                     value="INAKTIVE_BRUKERE"
                     onChange={this.handleChange}
-                    checked={brukerstatus === 'INAKTIVE_BRUKERE'}
+                    checked={brukerstatus === INAKTIVE_BRUKERE}
                     tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
                     antall={this.props.statustall.data.inaktiveBrukere}
                     max={this.props.statustall.data.totalt}
@@ -174,7 +184,7 @@ class FiltreringStatus extends Component {
                     name="brukerstatus"
                     value="MIN_ARBEIDSLISTE"
                     onChange={this.handleChange}
-                    checked={brukerstatus === 'MIN_ARBEIDSLISTE'}
+                    checked={brukerstatus === MIN_ARBEIDSLISTE}
                     tekstId="enhet.filtrering.filtrering.oversikt.min.arbeidsliste.checkbox"
                     antall={this.props.statustall.data.minArbeidsliste}
                     max={this.props.statustall.data.totalt}
