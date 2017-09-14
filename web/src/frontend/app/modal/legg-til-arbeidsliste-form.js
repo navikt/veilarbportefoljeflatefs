@@ -4,13 +4,13 @@ import { FieldArray } from 'redux-form';
 import { rules, validForm } from 'react-redux-form-validation';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
+import Datovelger from '../components/datovelger/datovelger';
+import Textarea from '../components/textarea/textarea';
 import { lagreArbeidsliste } from '../ducks/arbeidsliste';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { leggTilStatustall } from '../ducks/statustall';
 import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
-import Textarea from './../components/textarea/textarea';
-import Datovelger from './../components/datovelger/datovelger';
 
 const KOMMENTAR_MAKS_LENGDE = 250;
 
