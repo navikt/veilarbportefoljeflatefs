@@ -23,7 +23,7 @@ import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
-import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/utils';
+import { getEnhetFromUrl, sendBrukerTilUrl, leggSideIUrl } from './utils/utils';
 /* eslint-enable import/first */
 /* eslint-disable no-undef */
 
@@ -39,7 +39,12 @@ function lagrePath() {
 function redirect() {
     const lastPath = localStorage.getItem('lastpath');
     if (lastPath) {
-        sendBrukerTilUrl(`${lastPath}?enhet=${getEnhetFromUrl()}`);
+        let url = `${lastPath}?enhet=${getEnhetFromUrl()}`;
+        if (lastPath === "/enhet") {
+            const sideTall = localStorage.getItem('lagretSidetall') || 1;
+            url = `${url}&side=${sideTall}`;
+        }
+        sendBrukerTilUrl(url);
     }
 }
 
