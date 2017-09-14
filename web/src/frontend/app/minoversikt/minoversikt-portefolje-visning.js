@@ -95,6 +95,7 @@ class VeilederPortefoljeVisning extends Component {
                         tekst="enhet.portefolje.paginering.tekst"
                     />
                     <Toolbar
+                        filtergruppe="veileder"
                         filtervalg={filtervalg}
                         onPaginering={(fra, antall) => hentPortefolje(
                             valgtEnhet.enhet.enhetId,
