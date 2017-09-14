@@ -40,6 +40,22 @@ export function getEnhetFromUrl() {
     return queryString.parse(location.search).enhet || '';
 }
 
+export function leggSideIUrl(side) {
+    if (side) {
+        const parsed = queryString.parse(location.search);
+        parsed.side = side;
+
+        const stringified = queryString.stringify(parsed);
+        const pathname = window.location.pathname;
+        window.history.replaceState({}, null, `${pathname}?${stringified}`);// eslint-disable-line no-undef
+        localStorage.setItem('lagretSidetall', side);
+    }
+}
+
+export function getSideFromUrl() {
+    return queryString.parse(location.search).side || '';
+}
+
 export function sendBrukerTilUrl(url) {
     history.replace(url);
 }
