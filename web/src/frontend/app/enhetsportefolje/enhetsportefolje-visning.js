@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
 import Toolbar from './../components/toolbar/toolbar';
+import { getSideFromUrl } from '../utils/utils';
 import EnhetTabell from './enhetsportefolje-tabell';
 import TabellOverskrift from './../components/tabell-overskrift';
 import {
@@ -47,11 +48,15 @@ class EnhetsportefoljeVisning extends Component {
         const {
             valgtEnhet, hentPortefolje, sorteringsrekkefolge, sorteringsfelt, filtervalg
         } = this.props;
+        let side = getSideFromUrl();
+        const fraIndex = side === '' ? 0 : (side-1)*20;
+
         hentPortefolje(
             valgtEnhet.enhet.enhetId,
             sorteringsrekkefolge,
             sorteringsfelt,
-            filtervalg
+            filtervalg,
+            fraIndex
         );
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
