@@ -19,6 +19,15 @@
             background-color: #BA3A26;
             color: #FFF;
             list-style-position: inside;
+            &:focus {
+                outline: 0;
+                box-shadow: 0 0 0 3px #ffbd66;
+            }
+            a {
+                color: #FFF;
+                border-bottom: 1px solid #FFF;
+                text-decoration: none;
+            }
         }
         .arbeidsliste-info-tekst {
             padding: 1rem 2rem 0 2rem;
@@ -41,7 +50,7 @@
         }
         .arbeidslistekommentar {
             width: 100%;
-            //border-top-right-radius: @border-radius-small;
+            padding-bottom: 0.6rem;
         }
 
         .typo-undertittel {
