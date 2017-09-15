@@ -23,7 +23,7 @@ import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
-import { getEnhetFromUrl, sendBrukerTilUrl, leggSideIUrl } from './utils/utils';
+import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/utils';
 /* eslint-enable import/first */
 /* eslint-disable no-undef */
 
@@ -38,6 +38,7 @@ function lagrePath() {
 
 function getSideTallForPath(path) {
     if (path.includes("/portefolje")) path = "/portefolje";
+
     if (path === "/enhet" || path === "/portefolje") {
         const sideTall = localStorage.getItem(`${path.substr(1)}-lagretSidetall`) || 1;
         return `&side=${sideTall}`;
@@ -62,7 +63,7 @@ render(
                         path="/"
                         component={Application}
                         onChange={(prevState, nextState) => {
-                            if (nextState.location.action !== 'POP') {
+                            if (nextState.location.action !== 'POP' && nextState.location.action !== 'REPLACE') {
                                 window.scrollTo(0, 0);
                             }
                         }}
