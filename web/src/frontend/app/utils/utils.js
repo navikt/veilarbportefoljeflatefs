@@ -40,7 +40,7 @@ export function getEnhetFromUrl() {
     return queryString.parse(location.search).enhet || '';
 }
 
-export function leggSideIUrl(side) {
+export function leggSideIUrl(path, side) {
     if (side) {
         const parsed = queryString.parse(location.search);
         parsed.side = side;
@@ -48,7 +48,7 @@ export function leggSideIUrl(side) {
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname;
         window.history.replaceState({}, null, `${pathname}?${stringified}`);// eslint-disable-line no-undef
-        localStorage.setItem('lagretSidetall', side);
+        localStorage.setItem(`${path}-lagretSidetall`, side);
     }
 }
 

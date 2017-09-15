@@ -36,14 +36,19 @@ function lagrePath() {
     localStorage.setItem('lastpath', window.location.pathname.replace(basename, ''));
 }
 
+function getSideTallForPath(path) {
+    if (path.includes("/portefolje")) path = "/portefolje";
+    if (path === "/enhet" || path === "/portefolje") {
+        const sideTall = localStorage.getItem(`${path.substr(1)}-lagretSidetall`) || 1;
+        return `&side=${sideTall}`;
+    }
+    return '';
+}
+
 function redirect() {
     const lastPath = localStorage.getItem('lastpath');
     if (lastPath) {
-        let url = `${lastPath}?enhet=${getEnhetFromUrl()}`;
-        if (lastPath === "/enhet") {
-            const sideTall = localStorage.getItem('lagretSidetall') || 1;
-            url = `${url}&side=${sideTall}`;
-        }
+        const url = `${lastPath}?enhet=${getEnhetFromUrl() + getSideTallForPath(lastPath)}`;
         sendBrukerTilUrl(url);
     }
 }
