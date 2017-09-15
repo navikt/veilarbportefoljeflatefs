@@ -6,7 +6,7 @@ export function selectMuligeAlternativer(state: AppState): Kolonne[] {
     return state.ui.listevisning.mulige;
 }
 
-export function selectValgteVisning(state: AppState): Kolonne[] {
+export function selectValgteAlternativer(state: AppState): Kolonne[] {
     return state.ui.listevisning.valgte;
 }
 
