@@ -6,6 +6,7 @@ import { pagineringSetup } from './paginering';
 import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from '../ducks/statustall';
+import { leggSideIUrl } from '../utils/utils';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -191,6 +192,7 @@ export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 
             const side = Math.floor(fra / antall) + 1;
 
             dispatch(pagineringSetup({ side, antall: antallTotalt, sideStorrelse: antall }));
+            leggSideIUrl("enhet", side);
 
             return json;
         });
@@ -212,6 +214,7 @@ export function hentPortefoljeForVeileder(
                 const side = Math.floor(fra / antall) + 1;
 
                 dispatch(pagineringSetup({ side, antall: antallTotalt, sideStorrelse: antall }));
+                leggSideIUrl("portefolje", side);
 
                 return json;
             });
