@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux';
 import {AppState} from '../../reducer';
-import {selectMuligeAlternativer, selectValgteVisning, getMuligeKolonner} from './listevisning-selectors';
+import {selectMuligeAlternativer, selectValgteAlternativer, getMuligeKolonner} from './listevisning-selectors';
 
 enum ActionTypeKeys {
     VELG_ALTERNATIV = 'listevisning/velg_alternativ',
@@ -79,7 +79,7 @@ export const avvelgAlternativ = (kolonne: Kolonne) => ({type: ActionTypeKeys.AVV
 export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction>, getState: () => AppState) => {
     const appState = getState();
     const muligeAlternativer = selectMuligeAlternativer(appState);
-    const valgteAlternativer = selectValgteVisning(appState);
+    const valgteAlternativer = selectValgteAlternativer(appState);
     const nyeMuligeAlternativer = getMuligeKolonner(appState);
 
     dispatch({
