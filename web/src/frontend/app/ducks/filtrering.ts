@@ -1,6 +1,7 @@
 import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
 import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
 import {nameToStateSliceMap} from './../reducer';
+import {oppdaterAlternativer} from './ui/listevisning';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -126,6 +127,7 @@ export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', v
                 // TODO Fjerne denne fra filter-reducer
                 oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
             }
+            oppdaterAlternativer(dispatch, getState);
         };
     }
     return (dispatch, getState) => {
@@ -135,6 +137,7 @@ export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', v
                 // TODO Fjerne denne fra filter-reducer
             oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
         }
+        oppdaterAlternativer(dispatch, getState);
     };
 }
 
