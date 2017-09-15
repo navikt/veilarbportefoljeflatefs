@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export, no-undef */
 import queryString from 'query-string';
-import history from '../history';
+import history, { basename } from '../history';
 
 export function range(start, end, inclusive = false) {
     return new Array((end - start) + ((inclusive) ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -21,8 +21,8 @@ export function slettCleanIUrl() {
     delete parsed.clean;
 
     const stringified = queryString.stringify(parsed);
-    const pathname = window.location.pathname;
-    window.history.replaceState({}, null, `${pathname}?${stringified}`);
+    const pathname = window.location.pathname.replace(basename,'');
+    history.replace(`${pathname}?${stringified}`);
 }
 
 export function leggEnhetIUrl(enhet) {
@@ -31,8 +31,8 @@ export function leggEnhetIUrl(enhet) {
         parsed.enhet = enhet;
 
         const stringified = queryString.stringify(parsed);
-        const pathname = window.location.pathname;
-        window.history.replaceState({}, null, `${pathname}?${stringified}`);// eslint-disable-line no-undef
+        const pathname = window.location.pathname.replace(basename,'');
+        history.replace(`${pathname}?${stringified}`);
     }
 }
 
@@ -46,8 +46,8 @@ export function leggSideIUrl(path, side) {
         parsed.side = side;
 
         const stringified = queryString.stringify(parsed);
-        const pathname = window.location.pathname;
-        window.history.replaceState({}, null, `${pathname}?${stringified}`);// eslint-disable-line no-undef
+        const pathname = window.location.pathname.replace(basename,'');
+        history.replace(`${pathname}?${stringified}`);
         localStorage.setItem(`${path}-lagretSidetall`, side);
     }
 }
