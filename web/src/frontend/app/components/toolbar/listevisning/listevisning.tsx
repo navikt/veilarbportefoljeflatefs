@@ -7,10 +7,8 @@ import {FormattedMessage} from 'react-intl';
 import {AppState} from '../../../reducer';
 import {Action, bindActionCreators, Dispatch} from 'redux';
 import {avvelgAlternativ, Kolonne, velgAlternativ} from '../../../ducks/ui/listevisning';
-import {
-    alternativerConfig, getMuligeKolonner, selectMuligeAlternativer,
-    selectValgteAlternativer
-} from './listevisning-utils';
+import { alternativerConfig } from './listevisning-utils';
+import {selectMuligeAlternativer, selectValgteVisning} from '../../../ducks/ui/listevisning-selectors';
 
 interface ListevisningRadProps {
     kolonne: Kolonne;
@@ -59,7 +57,8 @@ const Listevisning = (props: ListevisningProps) => {
     }
 
     return (
-        <Dropdown name="Listevisning" disabled={props.muligeAlternativer.length <= 5} className="dropdown--fixed dropdown--toolbar">
+        <Dropdown name="Listevisning" disabled={props.muligeAlternativer.length <= 5}
+                  className="dropdown--fixed dropdown--toolbar">
             <section className="radio-filterform__valg">
                 <div className="blokk-s">
                     <FormattedMessage id="listevisning.ingress"/>
@@ -81,7 +80,7 @@ const Listevisning = (props: ListevisningProps) => {
 
 function mapStateToProps(state: AppState) {
     return {
-        valgteAlternativ: selectValgteAlternativer(state),
+        valgteAlternativ: selectValgteVisning(state),
         muligeAlternativer: selectMuligeAlternativer(state)
     };
 }

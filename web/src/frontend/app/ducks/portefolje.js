@@ -192,7 +192,7 @@ export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 
             const side = Math.floor(fra / antall) + 1;
 
             dispatch(pagineringSetup({ side, antall: antallTotalt, sideStorrelse: antall }));
-            leggSideIUrl("enhet", side);
+            leggSideIUrl('enhet', side);
 
             return json;
         });
@@ -214,7 +214,7 @@ export function hentPortefoljeForVeileder(
                 const side = Math.floor(fra / antall) + 1;
 
                 dispatch(pagineringSetup({ side, antall: antallTotalt, sideStorrelse: antall }));
-                leggSideIUrl("portefolje", side);
+                leggSideIUrl('portefolje', side);
 
                 return json;
             });

@@ -49,7 +49,7 @@ class EnhetsportefoljeVisning extends Component {
             valgtEnhet, hentPortefolje, sorteringsrekkefolge, sorteringsfelt, filtervalg
         } = this.props;
         const side = getSideFromUrl();
-        const fraIndex = side === '' ? 0 : (side-1)*20;
+        const fraIndex = side === '' ? 0 : (side - 1) * 20;
 
         hentPortefolje(
             valgtEnhet.enhet.enhetId,
