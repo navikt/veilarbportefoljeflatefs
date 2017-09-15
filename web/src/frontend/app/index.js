@@ -23,7 +23,7 @@ import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
-import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/utils';
+import { getEnhetFromUrl, sendBrukerTilUrl, leggSideIUrl } from './utils/utils';
 /* eslint-enable import/first */
 /* eslint-disable no-undef */
 
@@ -36,10 +36,20 @@ function lagrePath() {
     localStorage.setItem('lastpath', window.location.pathname.replace(basename, ''));
 }
 
+function getSideTallForPath(path) {
+    if (path.includes("/portefolje")) path = "/portefolje";
+    if (path === "/enhet" || path === "/portefolje") {
+        const sideTall = localStorage.getItem(`${path.substr(1)}-lagretSidetall`) || 1;
+        return `&side=${sideTall}`;
+    }
+    return '';
+}
+
 function redirect() {
     const lastPath = localStorage.getItem('lastpath');
     if (lastPath) {
-        sendBrukerTilUrl(`${lastPath}?enhet=${getEnhetFromUrl()}`);
+        const url = `${lastPath}?enhet=${getEnhetFromUrl() + getSideTallForPath(lastPath)}`;
+        sendBrukerTilUrl(url);
     }
 }
 
