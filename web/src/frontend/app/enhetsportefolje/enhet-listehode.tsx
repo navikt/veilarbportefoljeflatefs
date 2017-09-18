@@ -77,12 +77,12 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                 />
                 <Listeoverskrift
                     className="listeoverskrift__dato listeoverskrift"
-                    skalVises={!!filtervalg && filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                    skalVises={!!filtervalg && filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
                     id={'portefolje.tabell.utlopaktivitet'}
                 />
                 <Listeoverskrift
                     className="listeoverskrift__dato listeoverskrift"
-                    skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                    skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
                     id={'portefolje.tabell.aktivitet.neste.utlop'}
                 />
                 <Listeoverskrift
@@ -145,7 +145,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === UTLOPTE_AKTIVITETER}
                     tekstId="portefolje.tabell.ddmmyy"
-                    skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                    skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
                     className={'sortering-header__dato'}
                 />
                 <SorteringHeader
@@ -154,7 +154,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === I_AVTALT_AKTIVITET}
                     tekstId="portefolje.tabell.ddmmyy"
-                    skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                    skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
                     className={'sortering-header__dato'}
                 />
                 <SorteringHeader

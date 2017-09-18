@@ -15,6 +15,8 @@ export enum Kolonne {
     FODSELSNR = 'fodselsnr',
     VEILEDER = 'veileder',
     NAVIDENT = 'navident',
+    UTLOPTE_AKTIVITETER = 'utlopteaktiviteter',
+    AVTALT_AKTIVITET = 'avtaltaktivitet',
     VENTER_SVAR = 'ventersvar',
     UTLOP_YTELSE = 'utlopytelse',
     UTLOP_AKTIVITET = 'utlopaktivitet'

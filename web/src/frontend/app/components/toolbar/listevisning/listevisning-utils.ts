@@ -13,3 +13,5 @@ alternativerConfig.set(Kolonne.NAVIDENT, {tekstid: 'listevisning.valg.navident'}
 alternativerConfig.set(Kolonne.VENTER_SVAR, {tekstid: 'listevisning.valg.ventersvar'});
 alternativerConfig.set(Kolonne.UTLOP_YTELSE, {tekstid: 'listevisning.valg.utlopytelse'});
 alternativerConfig.set(Kolonne.UTLOP_AKTIVITET, {tekstid: 'listevisning.valg.utlopaktivitet'});
+alternativerConfig.set(Kolonne.UTLOPTE_AKTIVITETER, {tekstid: 'listevisning.valg.utlopteaktiviteter'});
+alternativerConfig.set(Kolonne.AVTALT_AKTIVITET, {tekstid: 'listevisning.valg.avtaltaktivitet'});
