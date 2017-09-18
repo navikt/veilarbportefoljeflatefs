@@ -87,11 +87,18 @@ export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningActi
         kolonner: nyeMuligeAlternativer
     });
 
-    dispatch({
-        type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
-        kolonner: valgteAlternativer
-            .filter((alternativ) => nyeMuligeAlternativer.includes(alternativ))
-            .concat(nyeMuligeAlternativer.filter((alternativ) => !muligeAlternativer.includes(alternativ)))
-            .slice(0, 5)
-    });
+    if(nyeMuligeAlternativer.length <= 5) {
+        dispatch({
+            type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
+            kolonner: nyeMuligeAlternativer
+        });
+    } else {
+        dispatch({
+            type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
+            kolonner: valgteAlternativer
+                .filter((alternativ) => nyeMuligeAlternativer.includes(alternativ))
+                .concat(nyeMuligeAlternativer.filter((alternativ) => !muligeAlternativer.includes(alternativ)))
+                .slice(0, 5)
+        });
+    }
 };
