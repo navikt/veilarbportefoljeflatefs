@@ -112,6 +112,7 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = 
     } else if (filtergruppe === 'veileder') {
         hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
     }
+    oppdaterAlternativer(dispatch, getState);
 }
 
 export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
@@ -127,7 +128,6 @@ export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', v
                 // TODO Fjerne denne fra filter-reducer
                 oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
             }
-            oppdaterAlternativer(dispatch, getState);
         };
     }
     return (dispatch, getState) => {
@@ -137,7 +137,6 @@ export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', v
                 // TODO Fjerne denne fra filter-reducer
             oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
         }
-        oppdaterAlternativer(dispatch, getState);
     };
 }
 
