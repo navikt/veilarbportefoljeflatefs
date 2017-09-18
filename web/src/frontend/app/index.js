@@ -38,6 +38,7 @@ function lagrePath() {
 
 function getSideTallForPath(path) {
     const checkPath = path.includes('/portefolje') ? '/portefolje' : path;
+
     if (checkPath === '/enhet' || checkPath === '/portefolje') {
         const sideTall = localStorage.getItem(`${checkPath.substr(1)}-lagretSidetall`) || 1;
         return `&side=${sideTall}`;
@@ -62,7 +63,7 @@ render(
                         path="/"
                         component={Application}
                         onChange={(prevState, nextState) => {
-                            if (nextState.location.action !== 'POP') {
+                            if (nextState.location.action !== 'POP' && nextState.location.action !== 'REPLACE') {
                                 window.scrollTo(0, 0);
                             }
                         }}
