@@ -89,7 +89,7 @@ export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningActi
         kolonner: nyeMuligeAlternativer
     });
 
-    if(nyeMuligeAlternativer.length <= 5) {
+    if (nyeMuligeAlternativer.length <= 5) {
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
             kolonner: nyeMuligeAlternativer
