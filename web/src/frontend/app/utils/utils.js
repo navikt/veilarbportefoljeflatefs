@@ -21,7 +21,7 @@ export function slettCleanIUrl() {
     delete parsed.clean;
 
     const stringified = queryString.stringify(parsed);
-    const pathname = window.location.pathname.replace(basename,'');
+    const pathname = window.location.pathname.replace(basename, '');
     history.replace(`${pathname}?${stringified}`);
 }
 
@@ -31,7 +31,7 @@ export function leggEnhetIUrl(enhet) {
         parsed.enhet = enhet;
 
         const stringified = queryString.stringify(parsed);
-        const pathname = window.location.pathname.replace(basename,'');
+        const pathname = window.location.pathname.replace(basename, '');
         history.replace(`${pathname}?${stringified}`);
     }
 }
@@ -46,7 +46,7 @@ export function leggSideIUrl(path, side) {
         parsed.side = side;
 
         const stringified = queryString.stringify(parsed);
-        const pathname = window.location.pathname.replace(basename,'');
+        const pathname = window.location.pathname.replace(basename, '');
         history.replace(`${pathname}?${stringified}`);
         localStorage.setItem(`${path}-lagretSidetall`, side);
     }
