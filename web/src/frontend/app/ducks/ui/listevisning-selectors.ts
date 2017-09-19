@@ -20,7 +20,7 @@ function addHvis(kolonne: Kolonne, add: boolean): Kolonne[] {
 
 function harValgtKunEnAktivitet(aktiviteter: FiltreringAktiviteterValg): boolean {
     return Object.entries(aktiviteter)
-        .filter(([key, value]) => value === AktiviteterValg.JA)
+        .filter(([key, value]) => value !== AktiviteterValg.NA)
         .length === 1;
 }
 
