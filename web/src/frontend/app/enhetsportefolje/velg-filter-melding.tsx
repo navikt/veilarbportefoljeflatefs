@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 
@@ -13,6 +13,5 @@ function VelgFilterMelding() {
         </div>
     );
 }
-
 
 export default VelgFilterMelding;

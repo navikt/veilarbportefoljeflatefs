@@ -1,9 +1,9 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 
-function calcWidth(antall, max) {
+function calcWidth(antall: number, max: number): number {
     if (antall === 0) {
         return 0;
     }
@@ -12,7 +12,15 @@ function calcWidth(antall, max) {
     return Math.max(width, 6);
 }
 
-function Barlabel({ htmlFor, tekstId, antall, max, className }) {
+interface BarlabelProps {
+    htmlFor: string;
+    tekstId: string;
+    antall: number;
+    max: number;
+    className?: string;
+}
+
+function Barlabel({ htmlFor, tekstId, antall, max, className }: BarlabelProps) {
     const style = { width: `${calcWidth(antall, max)}%` };
 
     return (
@@ -31,17 +39,5 @@ function Barlabel({ htmlFor, tekstId, antall, max, className }) {
         </label>
     );
 }
-
-Barlabel.propTypes = {
-    htmlFor: PT.string.isRequired,
-    tekstId: PT.string.isRequired,
-    antall: PT.number.isRequired,
-    max: PT.number.isRequired,
-    className: PT.string
-};
-
-Barlabel.defaultProps = {
-    className: undefined
-};
 
 export default Barlabel;

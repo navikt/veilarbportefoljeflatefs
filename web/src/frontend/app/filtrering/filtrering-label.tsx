@@ -1,8 +1,14 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { lagConfig } from './filter-konstanter';
 import FilterIkon from '../components/filter-ikon';
+import {MouseEvent} from 'react';
 
-function FiltreringLabel({ label, slettFilter }) {
+interface FiltreringLabelProps {
+    label: string | { label: string };
+    slettFilter: (event: MouseEvent<HTMLButtonElement>) => void;
+}
+
+function FiltreringLabel({ label, slettFilter }: FiltreringLabelProps) {
     return (
         <button aria-label="Slett filter" className="filtreringlabel typo-undertekst" onClick={slettFilter}>
             <span className="filtreringlabel__label">{lagConfig(label).label}</span>
@@ -10,10 +16,5 @@ function FiltreringLabel({ label, slettFilter }) {
         </button>
     );
 }
-
-FiltreringLabel.propTypes = {
-    label: PT.oneOfType([PT.string, PT.shape({ label: PT.string })]).isRequired,
-    slettFilter: PT.func.isRequired
-};
 
 export default FiltreringLabel;
