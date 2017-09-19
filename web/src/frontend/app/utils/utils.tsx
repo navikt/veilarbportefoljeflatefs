@@ -11,7 +11,7 @@ export function lag2Sifret(n: number): string {
 }
 
 export function slettCleanIUrl() {
-    const parsed = queryString.parse(location.search);// eslint-disable-line no-undef
+    const parsed = queryString.parse(location.search); // eslint-disable-line no-undef
 
     // Objektet returnert fra `queryString.parse` er ikke et ekte objekt. Så derfor denne omstendlige sjekken
     if (!Object.keys(parsed).includes('clean')) {
