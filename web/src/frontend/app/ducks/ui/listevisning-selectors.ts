@@ -2,11 +2,9 @@ import {AppState} from '../../reducer';
 import {Kolonne} from './listevisning';
 import {FiltreringAktiviteterValg, AktiviteterValg, FiltreringState} from '../filtrering';
 import {
-    aktiviteter,
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
-import {FiltervalgModell} from '../../model-interfaces';
 
 export function selectMuligeAlternativer(state: AppState): Kolonne[] {
     return state.ui.listevisning.mulige;

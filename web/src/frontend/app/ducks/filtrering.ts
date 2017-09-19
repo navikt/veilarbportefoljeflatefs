@@ -17,7 +17,7 @@ export enum AktiviteterValg {
     NA = 'NA'
 }
 
-export type FiltreringAktiviteterValg = { [aktivitet: string]: AktiviteterValg };
+export interface FiltreringAktiviteterValg { [aktivitet: string]: AktiviteterValg; }
 
 export interface FiltreringState {
     brukerstatus: null;
