@@ -17,6 +17,8 @@ export enum AktiviteterValg {
     NA = 'NA'
 }
 
+export type FiltreringAktiviteterValg = { [aktivitet: string]: AktiviteterValg };
+
 export interface FiltreringState {
     brukerstatus: null;
     alder: string[];
@@ -27,7 +29,7 @@ export interface FiltreringState {
     servicegruppe: string[];
     rettighetsgruppe: string[];
     veiledere: string[];
-    aktiviteter: { [aktivitet: string]: AktiviteterValg };
+    aktiviteter: FiltreringAktiviteterValg;
     tiltakstyper: string[];
     ytelse: null;
 }
