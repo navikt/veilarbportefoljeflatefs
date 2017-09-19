@@ -1,12 +1,12 @@
 /* eslint-disable import/prefer-default-export, no-undef */
-import queryString from 'query-string';
+import * as queryString from 'query-string';
 import history, { basename } from '../history';
 
-export function range(start, end, inclusive = false) {
+export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array((end - start) + ((inclusive) ? 1 : 0)).fill(0).map((_, i) => start + i);
 }
 
-export function lag2Sifret(n) {
+export function lag2Sifret(n: number): string {
     return n < 10 ? `0${n}` : `${n}`;
 }
 
@@ -25,7 +25,7 @@ export function slettCleanIUrl() {
     history.replace(`${pathname}?${stringified}`);
 }
 
-export function leggEnhetIUrl(enhet) {
+export function leggEnhetIUrl(enhet: string) {
     if (enhet) {
         const parsed = queryString.parse(location.search);
         parsed.enhet = enhet;
@@ -62,7 +62,7 @@ export function sendBrukerTilUrl(url) {
 export function ytelseFilterErAktiv(ytelse) {
     return !!ytelse;
 }
-export function nesteUtlopsdatoEllerNull(utlopsdatoer) {
+export function nesteUtlopsdatoEllerNull(utlopsdatoer): Date | null {
     if (!utlopsdatoer) {
         return null;
     }
@@ -70,7 +70,7 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer) {
         .map((key) => utlopsdatoer[key])
         .filter((value) => !!value)
         .map((dateString) => new Date(dateString))
-        .sort((d1, d2) => d1 > d2)[0];
+        .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
 }
 export function utledValgtAktivitetstype(aktiviteterFiltervalg) {
     if (!aktiviteterFiltervalg || aktiviteterFiltervalg === {}) {
@@ -91,7 +91,7 @@ export function utlopsdatoForAktivitetEllerNull(aktiviteter, valgtAktivitetstype
 }
 
 export function erDev() {
-    const host = window.location.host;
+    const host: string = window.location.host;
     return host.includes('localhost') || host.includes('127.0.0.1');
 }
 
