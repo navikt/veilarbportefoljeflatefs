@@ -54,11 +54,11 @@ function EnhetDatokolonner({ bruker, ytelse= '', filtervalg, valgteKolonner }: E
             />
             <DatoKolonne
                 dato={bruker.nyesteUtlopteAktivitet}
-                skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
             />
             <DatoKolonne
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
-                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
             />
             <DatoKolonne
                 dato={utlopsdatoForAktivitetEllerNull(bruker.aktiviteter, valgtAktivitetstype)}

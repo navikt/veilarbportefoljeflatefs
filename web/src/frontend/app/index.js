@@ -4,7 +4,7 @@ if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
 }
 
 if (process.env.NODE_ENV !== 'production') {
-    console.log('Med mock');
+    console.log('Med mock'); // eslint-disable-line no-console
     require('./mocks'); // eslint-disable-line global-require
 }
 
@@ -36,10 +36,21 @@ function lagrePath() {
     localStorage.setItem('lastpath', window.location.pathname.replace(basename, ''));
 }
 
+function getSideTallForPath(path) {
+    const checkPath = path.includes('/portefolje') ? '/portefolje' : path;
+
+    if (checkPath === '/enhet' || checkPath === '/portefolje') {
+        const sideTall = localStorage.getItem(`${checkPath.substr(1)}-lagretSidetall`) || 1;
+        return `&side=${sideTall}`;
+    }
+    return '';
+}
+
 function redirect() {
     const lastPath = localStorage.getItem('lastpath');
     if (lastPath) {
-        sendBrukerTilUrl(`${lastPath}?enhet=${getEnhetFromUrl()}`);
+        const url = `${lastPath}?enhet=${getEnhetFromUrl() + getSideTallForPath(lastPath)}`;
+        sendBrukerTilUrl(url);
     }
 }
 
@@ -52,7 +63,7 @@ render(
                         path="/"
                         component={Application}
                         onChange={(prevState, nextState) => {
-                            if (nextState.location.action !== 'POP') {
+                            if (nextState.location.action !== 'POP' && nextState.location.action !== 'REPLACE') {
                                 window.scrollTo(0, 0);
                             }
                         }}

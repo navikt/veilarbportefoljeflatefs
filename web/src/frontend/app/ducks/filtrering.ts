@@ -1,6 +1,7 @@
 import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
 import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
 import {nameToStateSliceMap} from './../reducer';
+import {oppdaterAlternativer} from './ui/listevisning';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -16,6 +17,8 @@ export enum AktiviteterValg {
     NA = 'NA'
 }
 
+export interface FiltreringAktiviteterValg { [aktivitet: string]: AktiviteterValg; }
+
 export interface FiltreringState {
     brukerstatus: null;
     alder: string[];
@@ -26,7 +29,7 @@ export interface FiltreringState {
     servicegruppe: string[];
     rettighetsgruppe: string[];
     veiledere: string[];
-    aktiviteter: { [aktivitet: string]: AktiviteterValg };
+    aktiviteter: FiltreringAktiviteterValg;
     tiltakstyper: string[];
     ytelse: null;
 }
@@ -111,6 +114,7 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = 
     } else if (filtergruppe === 'veileder') {
         hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
     }
+    oppdaterAlternativer(dispatch, getState);
 }
 
 export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
