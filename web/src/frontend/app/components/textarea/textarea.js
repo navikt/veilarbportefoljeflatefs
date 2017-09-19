@@ -36,10 +36,7 @@ function InnerTextAreaComponent({
                                     meta, // eslint-disable-line no-unused-vars
                                     ...rest
                                 }) {
-    let feil = errorMessage ? { feilmelding: errorMessage } : undefined;
-    if (feil === undefined && !meta.pristine && meta.active && !meta.valid) {
-        feil = { feilmelding: meta.error };
-    }
+    const feil = errorMessage ? { feilmelding: errorMessage } : undefined;
     return (
         <NavFrontendTextarea
             textareaClass="skjemaelement__input input--fullbredde arbeidslistekommentar"
