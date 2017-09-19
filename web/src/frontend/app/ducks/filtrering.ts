@@ -2,6 +2,7 @@ import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje'
 import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
 import {nameToStateSliceMap} from './../reducer';
 import {oppdaterAlternativer} from './ui/listevisning';
+import {VeilederModell} from '../model-interfaces';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -117,7 +118,7 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = 
     oppdaterAlternativer(dispatch, getState);
 }
 
-export function endreFiltervalg(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
+export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: VeilederModell) {
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
         return (dispatch, getState) => {
             dispatch({
