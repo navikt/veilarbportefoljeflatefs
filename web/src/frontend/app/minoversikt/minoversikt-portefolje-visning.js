@@ -5,7 +5,7 @@ import { hentPortefoljeForVeileder, settSortering } from '../ducks/portefolje';
 import TabellOverskrift from './../components/tabell-overskrift';
 import Toolbar from './../components/toolbar/toolbar';
 import { enhetShape, veilederShape, filtervalgShape, feilmeldingModalShape } from './../proptype-shapes';
-import { leggEnhetIUrl } from '../utils/utils';
+import { leggEnhetIUrl, getSideFromUrl } from '../utils/utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
@@ -31,9 +31,11 @@ class VeilederPortefoljeVisning extends Component {
             gjeldendeVeileder,
             filtervalg
         } = this.props;
+        const side = getSideFromUrl();
+        const fraIndex = side === '' ? 0 : (side - 1) * 20;
 
         hentPortefolje(
-            valgtEnhet.enhet.enhetId, gjeldendeVeileder, sorteringsfelt, sorteringsrekkefolge, filtervalg
+            valgtEnhet.enhet.enhetId, gjeldendeVeileder, sorteringsfelt, sorteringsrekkefolge, filtervalg, fraIndex
         );
 
         leggEnhetIUrl(valgtEnhet.enhet.enhetId);

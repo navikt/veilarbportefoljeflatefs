@@ -6,6 +6,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/classnames": "2.2.3",
+    "@types/query-string": "5.0.0",
     "@types/react": "16.0.5",
     "@types/redux-form": "7.0.3",
     "autoless": "0.1.7",
@@ -38,7 +39,7 @@
     "query-string": "4.3.4",
     "react-addons-test-utils": "15.6.0",
     "rimraf": "2.6.1",
-    "ts-node": "3.2.0",
+    "ts-node": "3.3.0",
     "tslint": "5.7.0",
     "tslint-react": "3.2.0",
     "typescript": "2.4.2",

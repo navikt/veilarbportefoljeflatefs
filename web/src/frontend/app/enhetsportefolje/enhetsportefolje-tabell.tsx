@@ -9,7 +9,7 @@ import {
     VeilederModell
 } from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {selectValgteAlternativer} from '../components/toolbar/listevisning/listevisning-utils';
+import {selectValgteAlternativer} from '../ducks/ui/listevisning-selectors';
 
 interface EnhetTabellProps {
     portefolje: any;
