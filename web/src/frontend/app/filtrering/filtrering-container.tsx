@@ -24,7 +24,7 @@ interface FiltreringContainerProps {
     };
 }
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder=defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
+function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
     return (
         <div className="blokk-m">
             <Ekspanderbartpanel

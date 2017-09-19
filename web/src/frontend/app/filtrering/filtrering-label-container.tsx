@@ -1,11 +1,22 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter from './filter-konstanter';
 import { slettEnkeltFilter, clearFiltervalg } from '../ducks/filtrering';
 import { filtervalgLabelShape, veilederShape } from '../proptype-shapes';
+import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 
-function FiltreringLabelContainer({ filtervalg, enhettiltak, actions: { slettAlle, slettEnkelt } }) {
+interface FiltreringLabelContainerProps {
+    enhettiltak: EnhetModell;
+    actions: {
+      slettAlle: () => void;
+      slettEnkelt: (filterNavn: string, filterValue: boolean | string | null) => void;
+    };
+    filtervalg: FiltervalgModell;
+    filtergruppe: string;
+}
+
+function FiltreringLabelContainer({ filtervalg, enhettiltak, actions: { slettAlle, slettEnkelt } }: FiltreringLabelContainerProps) {
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
             if (value === true) {
@@ -60,30 +71,10 @@ function FiltreringLabelContainer({ filtervalg, enhettiltak, actions: { slettAll
     );
 }
 
-FiltreringLabelContainer.defaultProps = {
-    veileder: {
-        ident: '',
-        navn: '',
-        fornavn: '',
-        etternavn: ''
-    }
-};
-
-FiltreringLabelContainer.propTypes = {
-    enhettiltak: PT.object.isRequired,
-    actions: PT.shape({
-        slettAlle: PT.func.isRequired,
-        slettEnkelt: PT.func.isRequired
-    }).isRequired,
-    filtervalg: filtervalgLabelShape.isRequired,
-    filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-    veileder: veilederShape // eslint-disable-line react/no-unused-prop-types
-};
-
 const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
         slettAlle: () => dispatch(clearFiltervalg(ownProps.filtergruppe, ownProps.veileder)),
-        slettEnkelt: (...args) => dispatch(slettEnkeltFilter(...args, ownProps.filtergruppe, ownProps.veileder))
+        slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.filtergruppe, ownProps.veileder))
     }
 });
 
