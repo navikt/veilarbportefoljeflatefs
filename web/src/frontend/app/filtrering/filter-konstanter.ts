@@ -11,7 +11,7 @@ export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 
 export const FILTERGRUPPE_ENHET = 'enhet';
 
-export function lagConfig(data) {
+export function lagConfig(data: string | {label: string}): {label: string} {
     if (typeof data === 'string') {
         return { label: data };
     }

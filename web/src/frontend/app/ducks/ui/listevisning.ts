@@ -7,6 +7,7 @@ enum ActionTypeKeys {
     AVVELG_ALTERNATIV = 'listevisning/avvelg_alternativ',
     OPPDATER_VALGTE_ALTERNATIV = 'listevisning/oppdater_valgte_alternativ',
     OPPDATER_MULIGE_ALTERNATIV = 'listevisning/oppdater_mulige_alternativ',
+    LUKK_INFOPANEL = 'listevisning/lukk_infopanel',
     OTHER_ACTION = '__OTHER_ACTION__'
 }
 
@@ -32,6 +33,10 @@ interface OppdaterListevisningAction {
     kolonner: Kolonne[];
 }
 
+interface LukkInfopanelAction {
+    type: ActionTypeKeys.LUKK_INFOPANEL;
+}
+
 interface OtherAction {
     type: ActionTypeKeys.OTHER_ACTION;
 }
@@ -39,16 +44,19 @@ interface OtherAction {
 type ListevisningActions =
     | ListevisningAction
     | OppdaterListevisningAction
+    | LukkInfopanelAction
     | OtherAction;
 
 export interface ListevisningState {
     valgte: Kolonne[];
     mulige: Kolonne[];
+    lukketInfopanel: boolean;
 }
 
 export const initialState: ListevisningState = {
     valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.NAVIDENT, Kolonne.VEILEDER],
-    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.NAVIDENT, Kolonne.VEILEDER]
+    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.NAVIDENT, Kolonne.VEILEDER],
+    lukketInfopanel: false
 };
 
 function addIfNotExists(kolonne: Kolonne, kolonner: Kolonne[]): Kolonne[] {
@@ -68,6 +76,8 @@ export function listevisningReducer(state = initialState, action: ListevisningAc
             return {...state, valgte: action.kolonner};
         case ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV:
             return {...state, mulige: action.kolonner};
+        case ActionTypeKeys.LUKK_INFOPANEL:
+            return {...state, lukketInfopanel: true};
         default:
             return state;
     }
@@ -77,6 +87,7 @@ export default listevisningReducer;
 
 export const velgAlternativ = (kolonne: Kolonne) => ({type: ActionTypeKeys.VELG_ALTERNATIV, kolonne});
 export const avvelgAlternativ = (kolonne: Kolonne) => ({type: ActionTypeKeys.AVVELG_ALTERNATIV, kolonne});
+export const lukkInfopanel = () => ({type: ActionTypeKeys.LUKK_INFOPANEL});
 
 export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction>, getState: () => AppState) => {
     const appState = getState();

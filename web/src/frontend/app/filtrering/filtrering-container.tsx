@@ -1,13 +1,30 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { veilederShape, filtervalgShape } from '../proptype-shapes';
 import FiltreringStatus from './filtrering-status';
 import FiltreringFilter from './filtrering-filter';
 import { endreFiltervalg } from '../ducks/filtrering';
+import {EnhetModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 
+const defaultVeileder: VeilederModell = {
+    ident: '',
+    navn: '',
+    fornavn: '',
+    etternavn: ''
+};
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder, actions, enhettiltak }) {
+interface FiltreringContainerProps {
+    enhettiltak: EnhetModell;
+    filtervalg: FiltervalgModell;
+    filtergruppe?: string;
+    veileder: VeilederModell;
+    actions: {
+        endreFiltervalg: (filterId: string, filterVerdi: string) => void;
+    };
+}
+
+function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
     return (
         <div className="blokk-m">
             <Ekspanderbartpanel
@@ -26,7 +43,6 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder, actions, enhe
             >
                 <FiltreringFilter
                     actions={actions}
-                    veileder={veileder}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
                 />
@@ -35,30 +51,10 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder, actions, enhe
     );
 }
 
-FiltreringContainer.defaultProps = {
-    filtergruppe: 'enhet',
-    veileder: {
-        ident: '',
-        navn: '',
-        fornavn: '',
-        etternavn: ''
-    }
-};
-
-FiltreringContainer.propTypes = {
-    enhettiltak: PT.object.isRequired,
-    filtervalg: filtervalgShape.isRequired,
-    filtergruppe: PT.string,
-    veileder: veilederShape,
-    actions: PT.shape({
-        endreFiltervalg: PT.func
-    }).isRequired
-};
-
 const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
-        endreFiltervalg: (...args) => {
-            dispatch(endreFiltervalg(...args, ownProps.filtergruppe, ownProps.veileder));
+        endreFiltervalg: (filterId: string, filterVerdi: string) => {
+            dispatch(endreFiltervalg(filterId, filterVerdi, ownProps.filtergruppe, ownProps.veileder));
         }
     }
 });

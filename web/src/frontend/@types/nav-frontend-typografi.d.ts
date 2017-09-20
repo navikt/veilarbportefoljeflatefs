@@ -3,11 +3,12 @@ declare module "nav-frontend-typografi" {
 
 	export interface Props {
 		className?: string;
+		role?: string;
 	}
 
 	export interface ElementProps {
         className?: string;
-        tag: String
+        tag?: String
     }
 
 	export class Sidetittel extends React.Component<Props, {}> {}
