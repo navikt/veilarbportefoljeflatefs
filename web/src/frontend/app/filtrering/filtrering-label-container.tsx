@@ -1,22 +1,22 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter from './filter-konstanter';
-import { slettEnkeltFilter, clearFiltervalg } from '../ducks/filtrering';
-import { filtervalgLabelShape, veilederShape } from '../proptype-shapes';
+import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg} from '../ducks/filtrering';
+import {filtervalgLabelShape, veilederShape} from '../proptype-shapes';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
     actions: {
-      slettAlle: () => void;
-      slettEnkelt: (filterNavn: string, filterValue: boolean | string | null) => void;
+        slettAlle: () => void;
+        slettEnkelt: (filterNavn: string, filterValue: boolean | string | null) => void;
     };
     filtervalg: FiltervalgModell;
     filtergruppe: string;
 }
 
-function FiltreringLabelContainer({ filtervalg, enhettiltak, actions: { slettAlle, slettEnkelt } }: FiltreringLabelContainerProps) {
+function FiltreringLabelContainer({filtervalg, enhettiltak, actions: {slettAlle, slettEnkelt}}: FiltreringLabelContainerProps) {
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
             if (value === true) {
@@ -33,15 +33,15 @@ function FiltreringLabelContainer({ filtervalg, enhettiltak, actions: { slettAll
                         key={`${key}--${singleValue.key || singleValue}`}
                         label={
                             key === 'tiltakstyper' ?
-                            enhettiltak[singleValue] :
-                            (singleValue.label || FilterKonstanter[key][singleValue])
+                                enhettiltak[singleValue] :
+                                (singleValue.label || FilterKonstanter[key][singleValue])
                         }
                         slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                     />
-                    ));
+                ));
             } else if (value && typeof value === 'object') {
                 return Object.entries(value)
-                    .filter(([_, aktivitetvalue]) => aktivitetvalue !== 'NA')
+                    .filter(([_, aktivitetvalue]) => aktivitetvalue !== AktiviteterValg.NA)
                     .map(([aktivitetkey, aktivitetvalue]) => (
                         <FiltreringLabel
                             key={`aktivitet-${aktivitetkey}`}
@@ -61,12 +61,12 @@ function FiltreringLabelContainer({ filtervalg, enhettiltak, actions: { slettAll
             return [];
         }).reduce((acc, l) => [...acc, ...l], []);
 
-    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} />;
+    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle}/>;
 
     return (
         <section className="filtrering-label-container blokk-s">
             {filterElementer}
-            {filterElementer.length >= 3 ? fjernAlle : null }
+            {filterElementer.length >= 3 ? fjernAlle : null}
         </section>
     );
 }

@@ -12,6 +12,7 @@ import { leggEnhetIUrl } from '../utils/utils';
 import { hentStatusTall } from './../ducks/statustall';
 import { hentEnhetTiltak } from './../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
+import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 
 
 class EnhetSide extends Component {
@@ -56,6 +57,7 @@ class EnhetSide extends Component {
                                 filtergruppe="enhet"
                                 enhettiltak={enhettiltak.data.tiltak}
                             />
+                            <ListevisningInfoPanel />
                             <EnhetsportefoljeVisning />
                             <TomPortefoljeModal isOpen={statustall.data.totalt === 0} />
                         </div>
