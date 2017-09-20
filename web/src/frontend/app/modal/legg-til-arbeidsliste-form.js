@@ -160,8 +160,8 @@ const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
         const liste = formData.arbeidsliste.map((bruker, index) => ({
             fnr: bruker.fnr,
-            kommentar: formData.liste[index].kommentar,
-            frist: formData.liste[index].frist
+            kommentar: formData.arbeidsliste[index].kommentar,
+            frist: formData.arbeidsliste[index].frist
         }));
         lagreArbeidsliste(liste)(dispatch)
             .then((res) => oppdaterState(res, liste, props.innloggetVeileder, dispatch));
