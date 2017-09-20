@@ -1,9 +1,39 @@
 declare module "nav-frontend-alertstriper" {
-    interface AlertStripe {
-        type: "advarsel" | "suksess" | "info";
-        solid?: boolean;
+    import * as React from 'react';
+
+    interface AlertStripeProps {
+        children: React.ReactChildren | React.ReactChild;
         className?: string;
     }
-    const t: new (props: AlertStripe) => React.Component<AlertStripe, any>;
-    export default t;
+
+    interface AlertStripeMedTypeOgSolidProps extends AlertStripeProps {
+        type: 'advarsel' | 'suksess' | 'info';
+        solid?: boolean;
+    }
+
+    export class AlertStripe extends React.Component<AlertStripeMedTypeOgSolidProps, {}>{
+
+    }
+
+    export class AlertStripeAdvarsel extends React.Component<AlertStripeProps, {}>{
+
+    }
+
+    export class AlertStripeSuksessSolid extends React.Component<AlertStripeProps, {}>{
+
+    }
+
+    export class AlertStripeSuksess extends React.Component<AlertStripeProps, {}>{
+
+    }
+
+    export class AlertStripeInfoSolid extends React.Component<AlertStripeProps, {}>{
+
+    }
+
+    export class AlertStripeInfo extends React.Component<AlertStripeProps, {}>{
+
+    }
+
+    export default AlertStripe;
 }
