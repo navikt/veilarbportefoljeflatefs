@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import {Action, bindActionCreators, Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {AppState} from '../../../reducer';
+import {lukkInfopanel} from '../../../ducks/ui/listevisning';
 
 interface ListevisningInfopanelProps {
     skalVises: boolean;
@@ -28,14 +29,16 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
 
 const mapStateToProps = (state: AppState) => {
     const antallMulige = state.ui.listevisning.mulige.length;
+    const harIkkeLukketInfopanel = !state.ui.listevisning.lukketInfopanel;
+
     return {
-        skalVises: antallMulige > 5
+        skalVises: antallMulige > 5 && harIkkeLukketInfopanel
     };
 };
 
 const mapActionsToProps = (dispatch: Dispatch<Action>) => {
     return bindActionCreators({
-        lukkPanel: () => void(0)
+        lukkPanel: lukkInfopanel
     }, dispatch)
 };
 
