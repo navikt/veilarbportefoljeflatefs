@@ -17,7 +17,7 @@ public class StartJetty {
                 .sslPort(9592)
                 .port(9593), new DevelopmentSecurity.ISSOSecurityConfig(APPLICATION_NAME))
                 .buildJetty();
-        System.setProperty("folder.ledetekster.path", "../../veilarbportefoljeflatefs-tekster/target/classes");
+        System.setProperty("folder.ledetekster.path", "../veilarbportefoljeflatefs-tekster/target/classes");
         jetty.startAnd(first(waitFor(gotKeypress())).then(jetty.stop));
     }
 }
