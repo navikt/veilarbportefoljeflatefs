@@ -23,6 +23,11 @@ export enum Kolonne {
     UTLOP_AKTIVITET = 'utlopaktivitet'
 }
 
+export enum ListevisningType {
+    minOversikt = 'minOversikt',
+    enhetensOversikt = 'enhetensOversikt'
+}
+
 interface ListevisningAction {
     type: ActionTypeKeys.VELG_ALTERNATIV | ActionTypeKeys.AVVELG_ALTERNATIV;
     kolonne: Kolonne;
@@ -66,7 +71,7 @@ function addIfNotExists(kolonne: Kolonne, kolonner: Kolonne[]): Kolonne[] {
     return [...kolonner, kolonne];
 }
 
-export function listevisningReducer(state = initialState, action: ListevisningActions): ListevisningState {
+export function listevisningReducer(state = initialState, action: ListevisningActions) {
     switch (action.type) {
         case ActionTypeKeys.VELG_ALTERNATIV:
             return {...state, valgte: addIfNotExists(action.kolonne, state.valgte)};
@@ -85,33 +90,38 @@ export function listevisningReducer(state = initialState, action: ListevisningAc
 
 export default listevisningReducer;
 
-export const velgAlternativ = (kolonne: Kolonne) => ({type: ActionTypeKeys.VELG_ALTERNATIV, kolonne});
-export const avvelgAlternativ = (kolonne: Kolonne) => ({type: ActionTypeKeys.AVVELG_ALTERNATIV, kolonne});
-export const lukkInfopanel = () => ({type: ActionTypeKeys.LUKK_INFOPANEL});
+export const velgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({type: ActionTypeKeys.VELG_ALTERNATIV, kolonne, name});
+export const avvelgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({type: ActionTypeKeys.AVVELG_ALTERNATIV, kolonne, name});
+export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name});
 
 export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction>, getState: () => AppState) => {
-    const appState = getState();
-    const muligeAlternativer = selectMuligeAlternativer(appState);
-    const valgteAlternativer = selectValgteAlternativer(appState);
-    const nyeMuligeAlternativer = getMuligeKolonner(appState);
+    return (name: ListevisningType) => {
+        const appState = getState();
+        const muligeAlternativer = selectMuligeAlternativer(appState, name);
+        const valgteAlternativer = selectValgteAlternativer(appState);
+        const nyeMuligeAlternativer = getMuligeKolonner(appState, name);
 
-    dispatch({
-        type: ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV,
-        kolonner: nyeMuligeAlternativer
-    });
+        dispatch({
+            type: ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV,
+            kolonner: nyeMuligeAlternativer,
+            name
+        });
 
-    if (nyeMuligeAlternativer.length <= 5) {
-        dispatch({
-            type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
-            kolonner: nyeMuligeAlternativer
-        });
-    } else {
-        dispatch({
-            type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
-            kolonner: valgteAlternativer
-                .filter((alternativ) => nyeMuligeAlternativer.includes(alternativ))
-                .concat(nyeMuligeAlternativer.filter((alternativ) => !muligeAlternativer.includes(alternativ)))
-                .slice(0, 5)
-        });
-    }
+        if (nyeMuligeAlternativer.length <= 5) {
+            dispatch({
+                type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
+                kolonner: nyeMuligeAlternativer,
+                name
+            });
+        } else {
+            dispatch({
+                type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
+                name,
+                kolonner: valgteAlternativer
+                    .filter((alternativ) => nyeMuligeAlternativer.includes(alternativ))
+                    .concat(nyeMuligeAlternativer.filter((alternativ) => !muligeAlternativer.includes(alternativ)))
+                    .slice(0, 5)
+            });
+        }
+    };
 };
