@@ -47,7 +47,7 @@ const mapStateToProps = (state: AppState, ownProps: { name: ListevisningType }) 
 const mapActionsToProps = (dispatch: Dispatch<Action>) => {
     return bindActionCreators({
         lukkPanel: lukkInfopanel
-    }, dispatch)
+    }, dispatch);
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(ListevisningInfoPanel);

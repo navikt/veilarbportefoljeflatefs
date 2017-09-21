@@ -9,7 +9,7 @@ export const PENDING = 'veilarbportefoljeflatefs/enhettiltak/PENDING';
 export interface EnhettiltakState {
     data: {
         tiltak: any;
-    },
+    };
     status?: string;
 }
 

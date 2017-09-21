@@ -65,7 +65,6 @@ function TildelBrukerRenderer({ onSubmit, data, ...props }: TildelBrukerRenderer
     );
 }
 
-
 const mapStateToProps = ({ veiledere, enheter, portefolje, ui }: AppState) => ({
     veiledere,
     brukere: portefolje.data.brukere,

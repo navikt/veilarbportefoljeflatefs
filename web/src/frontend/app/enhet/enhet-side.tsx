@@ -17,7 +17,6 @@ import {AppState} from '../reducer';
 import {FiltervalgModell, StatustallModell, ValgtEnhetModell, VeilederModell} from '../model-interfaces';
 import {ListevisningType} from '../ducks/ui/listevisning';
 
-
 interface EnhetSideProps {
     valgtEnhet: ValgtEnhetModell;
     filtervalg: FiltervalgModell;
