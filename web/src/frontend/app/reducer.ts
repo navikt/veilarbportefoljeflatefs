@@ -20,7 +20,9 @@ import { slettCleanIUrl } from './utils/utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
 import listevisningReducer, {
-    ListevisningState, initialState as listevisningInitialState,
+    ListevisningState,
+    initialStateMinOversikt,
+    initialStateEnhetensOversikt,
     ListevisningType
 } from './ducks/ui/listevisning';
 
@@ -78,8 +80,8 @@ export interface AppState {
 export default combineReducers<AppState>({
     ui: combineReducers({
         side: sideReducer,
-        listevisningMinOversikt: persistent('minOversiktListevisningState', location, named(ListevisningType.minOversikt, listevisningReducer), slettCleanIUrl, listevisningInitialState),
-        listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', location, named(ListevisningType.enhetensOversikt, listevisningReducer), slettCleanIUrl, listevisningInitialState)
+        listevisningMinOversikt: persistent('minOversiktListevisningState', location, named(ListevisningType.minOversikt, listevisningReducer), slettCleanIUrl, initialStateMinOversikt),
+        listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', location, named(ListevisningType.enhetensOversikt, listevisningReducer), slettCleanIUrl, initialStateEnhetensOversikt)
     }),
     enheter: enheterReducer,
     ledetekster: ledeteksterReducer,
