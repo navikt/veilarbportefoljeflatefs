@@ -62,15 +62,15 @@ class ArbeidslisteModal extends Component {
         return (
             <div className="arbeidsliste__modal">
                 <div className="arbeidsliste-info-tekst">
-                <Innholdstittel tag="h1" className="blokk-xs">
-                    <FormattedMessage id="modal.fjern.fra.arbeidsliste.tittel" />
-                </Innholdstittel>
-                <Normaltekst className="blokk-s">
-                    <FormattedMessage
-                        id="modal.fjern.fra.arbeidsliste.infotekst"
-                        values={{ antall: brukereSomSkalFjernes.length }}
-                    />
-                </Normaltekst>
+                    <Innholdstittel tag="h1" className="blokk-xs">
+                        <FormattedMessage id="modal.fjern.fra.arbeidsliste.tittel" />
+                    </Innholdstittel>
+                    <Normaltekst className="blokk-s">
+                        <FormattedMessage
+                            id="modal.fjern.fra.arbeidsliste.infotekst"
+                            values={{ antall: brukereSomSkalFjernes.length }}
+                        />
+                    </Normaltekst>
                 </div>
                 <FjernFraArbeidslisteForm
                     valgteBrukere={brukereSomSkalFjernes}

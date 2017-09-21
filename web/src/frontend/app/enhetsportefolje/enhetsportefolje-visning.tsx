@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
+import { hentPortefoljeForEnhet, settSortering as doSettSortering } from '../ducks/portefolje';
 import Toolbar from './../components/toolbar/toolbar';
 import { getSideFromUrl } from '../utils/utils';
 import EnhetTabell from './enhetsportefolje-tabell';
@@ -48,16 +48,16 @@ function antallFilter(filtervalg) {
 interface EnhetsportefoljeVisningProps {
     valgtEnhet: ValgtEnhetModell;
     portefolje: any;
-    hentPortefolje: Function;
+    hentPortefolje: (enhetid: string | undefined, sorteringsrekkefolge: string, sorteringsfelt: string, filtervalg: FiltervalgModell, fraIndex: number, anstall?: number) => any;
     veiledere: any;
-    settSortering: Function;
+    settSortering: (sorteringsrekkefolge: string, felt: string) => void;
     sorteringsrekkefolge: string;
     sorteringsfelt: string;
     filtervalg: FiltervalgModell;
     visningsmodus: string;
     serverfeilModalSkalVises: boolean;
     closeServerfeilModal: () => void;
-    feilmeldingModal: FeilmeldingModalModell,
+    feilmeldingModal: FeilmeldingModalModell;
     closeFeilmeldingModal: () => void;
 }
 
@@ -201,7 +201,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, rekkefolge, sorteringsfelt, filtervalg, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)),
-    settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
+    settSortering: (rekkefolge, felt) => dispatch(doSettSortering(rekkefolge, felt)),
     closeServerfeilModal: () => dispatch(skjulServerfeilModal()),
     closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal())
 });

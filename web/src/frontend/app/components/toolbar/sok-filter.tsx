@@ -4,7 +4,7 @@ import { Input } from 'nav-frontend-skjema';
 
 interface SokFilterProps {
     data: any[];
-    filter?: Function;
+    filter?: (query: any) => any;
     children: React.ReactChild | React.ReactChildren;
     label: string;
     placeholder: string;

@@ -41,7 +41,7 @@ interface ListevisningOwnProps {
 
 }
 
-interface ListevisningProps extends ListevisningOwnProps{
+interface ListevisningProps extends ListevisningOwnProps {
     valgteAlternativ: Kolonne[];
     muligeAlternativer: Kolonne[];
     velgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => void;
