@@ -31,12 +31,6 @@ function brukerLabel(bruker) {
 function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit }) {
     return (
         <form onSubmit={handleSubmit}>
-            <Normaltekst className="blokk-s arbeidsliste-normaltekst">
-                <FormattedMessage
-                    id="modal.fjern.fra.arbeidsliste.infotekst"
-                    values={{ antall: valgteBrukere.length }}
-                />
-            </Normaltekst>
             <div className="arbeidsliste-listetekst">
                 <ul>
                     {valgteBrukere.map((bruker) => brukerLabel(bruker))}
