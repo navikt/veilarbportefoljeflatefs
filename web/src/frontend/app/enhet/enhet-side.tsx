@@ -1,6 +1,6 @@
-import React, { Component, PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
 import DocumentTitle from 'react-document-title';
 import Lenker from './../lenker/lenker';
 import { filtervalgShape, veilederShape, statustallShape } from '../proptype-shapes';
@@ -10,20 +10,34 @@ import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { leggEnhetIUrl } from '../utils/utils';
 import { hentStatusTall } from './../ducks/statustall';
-import { hentEnhetTiltak } from './../ducks/enhettiltak';
+import {EnhettiltakState, hentEnhetTiltak} from './../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
+import {AppState} from '../reducer';
+import {FiltervalgModell, StatustallModell, ValgtEnhetModell, VeilederModell} from '../model-interfaces';
+import {ListevisningType} from '../ducks/ui/listevisning';
 
 
-class EnhetSide extends Component {
+interface EnhetSideProps {
+    valgtEnhet: ValgtEnhetModell;
+    filtervalg: FiltervalgModell;
+    veilederliste: VeilederModell[];
+    hentStatusTall: (enhetId: string) => void;
+    hentEnhetTiltak: (enhetId: string) => void;
+    statustall: { data: StatustallModell };
+    enhettiltak: EnhettiltakState;
+    intl: InjectedIntl;
+}
+
+class EnhetSide extends React.Component<EnhetSideProps, {}> {
     componentWillMount() {
         const { valgtEnhet } = this.props;
-        leggEnhetIUrl(valgtEnhet.enhet.enhetId);
+        leggEnhetIUrl(valgtEnhet.enhet.enhetId!);
     }
 
     componentDidMount() {
-        this.props.hentStatusTall(this.props.valgtEnhet.enhet.enhetId);
-        this.props.hentEnhetTiltak(this.props.valgtEnhet.enhet.enhetId);
+        this.props.hentStatusTall(this.props.valgtEnhet.enhet.enhetId!);
+        this.props.hentEnhetTiltak(this.props.valgtEnhet.enhet.enhetId!);
     }
 
     render() {
@@ -57,7 +71,7 @@ class EnhetSide extends Component {
                                 filtergruppe="enhet"
                                 enhettiltak={enhettiltak.data.tiltak}
                             />
-                            <ListevisningInfoPanel />
+                            <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
                             <EnhetsportefoljeVisning />
                             <TomPortefoljeModal isOpen={statustall.data.totalt === 0} />
                         </div>
@@ -68,18 +82,7 @@ class EnhetSide extends Component {
     }
 }
 
-EnhetSide.propTypes = {
-    valgtEnhet: PT.object.isRequired,
-    filtervalg: filtervalgShape.isRequired,
-    veilederliste: PT.arrayOf(veilederShape).isRequired,
-    hentStatusTall: PT.func.isRequired,
-    hentEnhetTiltak: PT.func.isRequired,
-    statustall: PT.shape({ data: statustallShape }),
-    enhettiltak: PT.object.isRequired,
-    intl: intlShape.isRequired
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     filtervalg: state.filtrering,
     veilederliste: state.veiledere.data.veilederListe,

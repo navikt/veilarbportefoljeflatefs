@@ -6,14 +6,21 @@ export const OK = 'veilarbportefoljeflatefs/enhettiltak/OK';
 export const FEILET = 'veilarbportefoljeflatefs/enhettiltak/FEILET';
 export const PENDING = 'veilarbportefoljeflatefs/enhettiltak/PENDING';
 
-const initalState = {
+export interface EnhettiltakState {
+    data: {
+        tiltak: any;
+    },
+    status?: string;
+}
+
+const initalState: EnhettiltakState = {
     data: {
         tiltak: {}
     }
 };
 
 // Reducer
-export default function reducer(state = initalState, action) {
+export default function reducer(state: EnhettiltakState = initalState, action) {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {
