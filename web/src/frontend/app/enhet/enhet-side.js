@@ -13,6 +13,7 @@ import { hentStatusTall } from './../ducks/statustall';
 import { hentEnhetTiltak } from './../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
+import { Kolonne } from '../ducks/ui/listevisning';
 
 
 class EnhetSide extends Component {
@@ -32,7 +33,7 @@ class EnhetSide extends Component {
             return null;
         }
         const { formatMessage } = this.props.intl;
-        const { filtervalg, veilederliste, statustall, enhettiltak } = this.props;
+        const { filtervalg, veilederliste, statustall, enhettiltak, listevisning } = this.props;
 
         const leggTilNavn = (identer, veiledere) => identer.map((ident) => {
             const veileder = veiledere.find((v) => v.ident === ident);
@@ -56,6 +57,7 @@ class EnhetSide extends Component {
                                 }}
                                 filtergruppe="enhet"
                                 enhettiltak={enhettiltak.data.tiltak}
+                                listevisning={listevisning}
                             />
                             <ListevisningInfoPanel />
                             <EnhetsportefoljeVisning />
@@ -76,6 +78,7 @@ EnhetSide.propTypes = {
     hentEnhetTiltak: PT.func.isRequired,
     statustall: PT.shape({ data: statustallShape }),
     enhettiltak: PT.object.isRequired,
+    listevisning: PT.object,
     intl: intlShape.isRequired
 };
 
@@ -84,7 +87,8 @@ const mapStateToProps = (state) => ({
     filtervalg: state.filtrering,
     veilederliste: state.veiledere.data.veilederListe,
     statustall: state.statustall,
-    enhettiltak: state.enhettiltak
+    enhettiltak: state.enhettiltak,
+    listevisning: state.ui.listevisning
 });
 
 const mapDispatchToProps = (dispatch) => ({
