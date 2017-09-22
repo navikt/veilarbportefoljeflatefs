@@ -1,12 +1,14 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
-import FilterKonstanter from './filter-konstanter';
+import FilterKonstanter, {
+    I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
+    ytelse
+} from './filter-konstanter';
 import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg} from '../ducks/filtrering';
 import {filtervalgLabelShape, veilederShape} from '../proptype-shapes';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne} from "../ducks/ui/listevisning";
-import { lagConfig } from './filter-konstanter';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -16,17 +18,15 @@ interface FiltreringLabelContainerProps {
     };
     filtervalg: FiltervalgModell;
     filtergruppe: string;
-    listevisning: any;
+    listevisning: object;
 }
 
 function getKolonneFraLabel(label) {
-    console.log('Label:', label);
     switch (label) {
-        case FilterKonstanter.brukerstatus.VENTER_PA_SVAR_FRA_BRUKER: return Kolonne.VENTER_SVAR;
-        case FilterKonstanter.brukerstatus.I_AVTALT_AKTIVITET: return Kolonne.AVTALT_AKTIVITET;
-        case FilterKonstanter.brukerstatus.UTLOPTE_AKTIVITETER: return Kolonne.UTLOPTE_AKTIVITETER;
-        case (typeof FilterKonstanter.ytelse): return Kolonne.UTLOP_YTELSE;
-        case (typeof FilterKonstanter.aktiviteter): return Kolonne.UTLOP_AKTIVITET;
+        case VENTER_PA_SVAR_FRA_BRUKER: return Kolonne.VENTER_SVAR;
+        case I_AVTALT_AKTIVITET: return Kolonne.AVTALT_AKTIVITET;
+        case UTLOPTE_AKTIVITETER: return Kolonne.UTLOPTE_AKTIVITETER;
+        case 'ytelse': return Kolonne.UTLOP_YTELSE;
         default: return null;
     }
 }
@@ -47,7 +47,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
         .map(([key, value]) => {
             if (value === true) {
                 labelNavn = FilterKonstanter[key];
-                kolonne = getKolonneFraLabel(labelNavn);
+                kolonne = getKolonneFraLabel(key);
                 muligMenIkkeValgt = erMuligMenIkkeValgt(listevisning, kolonne);
                 return [
                     <FiltreringLabel
@@ -62,7 +62,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     labelNavn = key === 'tiltakstyper' ?
                         enhettiltak[singleValue] :
                         (singleValue.label || FilterKonstanter[key][singleValue]);
-                    kolonne = getKolonneFraLabel(labelNavn);
+                    kolonne = getKolonneFraLabel(key);
                     muligMenIkkeValgt = erMuligMenIkkeValgt(listevisning, kolonne);
                     return (
                     <FiltreringLabel
@@ -90,7 +90,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                         />
                     ));
             } else if (value) {
-                labelNavn = FilterKonstanter[key][value];
+                labelNavn = key === 'ytelse' ? 'ytelse' : value;
                 kolonne = getKolonneFraLabel(labelNavn);
                 muligMenIkkeValgt = erMuligMenIkkeValgt(listevisning, kolonne);
                 return [
