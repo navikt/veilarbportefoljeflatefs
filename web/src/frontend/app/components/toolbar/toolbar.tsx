@@ -7,10 +7,11 @@ import SokVeilder from './sok-veileder';
 import DiagramTabellToggle from './diagram-tabell-toggle';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
+import {ListevisningType} from '../../ducks/ui/listevisning';
 
 interface ToolbarProps {
-    filtergruppe: string;
-    onPaginering: (Event: FormEvent<HTMLButtonElement>) => void;
+    filtergruppe: ListevisningType;
+    onPaginering: (fra: number, antall: number) => void;
     sokVeilederSkalVises?: boolean;
     visesAnnenVeiledersPortefolje?: boolean;
     children?: React.ReactNode;
@@ -21,7 +22,7 @@ const Toolbar = ({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenV
         <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
             <VelgalleCheckboks />
             <Tildelbruker veileder={{}} filtergruppe={filtergruppe} />
-            <Listevisning />
+            <Listevisning filtergruppe={filtergruppe}/>
             <LeggTilArbeidsliste
                 visArbeidslisteModal={false}
                 visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}

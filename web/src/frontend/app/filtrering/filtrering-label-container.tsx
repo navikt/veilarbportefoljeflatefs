@@ -1,10 +1,14 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
-import FilterKonstanter from './filter-konstanter';
+import FilterKonstanter, {
+    I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
+    ytelse
+} from './filter-konstanter';
 import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg} from '../ducks/filtrering';
 import {filtervalgLabelShape, veilederShape} from '../proptype-shapes';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
+import {Kolonne, ListevisningState} from "../ducks/ui/listevisning";
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -14,9 +18,28 @@ interface FiltreringLabelContainerProps {
     };
     filtervalg: FiltervalgModell;
     filtergruppe: string;
+    listevisning: ListevisningState;
 }
 
-function FiltreringLabelContainer({filtervalg, enhettiltak, actions: {slettAlle, slettEnkelt}}: FiltreringLabelContainerProps) {
+function getKolonneFraLabel(label) {
+    switch (label) {
+        case VENTER_PA_SVAR_FRA_BRUKER: return Kolonne.VENTER_SVAR;
+        case I_AVTALT_AKTIVITET: return Kolonne.AVTALT_AKTIVITET;
+        case UTLOPTE_AKTIVITETER: return Kolonne.UTLOPTE_AKTIVITETER;
+        default: return null;
+    }
+}
+
+function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
+    if (listevisning.mulige.indexOf(kolonne) >= 0) {
+        return listevisning.valgte.indexOf(kolonne) < 0;
+    }
+    return false;
+}
+
+function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}}: FiltreringLabelContainerProps) {
+    let muligMenIkkeValgt: boolean;
+    let kolonne: Kolonne | null;
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
             if (value === true) {
@@ -28,7 +51,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, actions: {slettAlle,
                     />
                 ];
             } else if (Array.isArray(value)) {
-                return value.map((singleValue) => (
+                    return value.map((singleValue) => (
                     <FiltreringLabel
                         key={`${key}--${singleValue.key || singleValue}`}
                         label={
@@ -37,9 +60,10 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, actions: {slettAlle,
                                 (singleValue.label || FilterKonstanter[key][singleValue])
                         }
                         slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
-                    />
-                ));
-            } else if (value && typeof value === 'object') {
+                    />)
+                );
+            } else if (value && typeof value === 'object') { // value er aktiviteter
+                muligMenIkkeValgt = harMuligMenIkkeValgtKolonne(listevisning, Kolonne.UTLOP_AKTIVITET);
                 return Object.entries(value)
                     .filter(([_, aktivitetvalue]) => aktivitetvalue !== AktiviteterValg.NA)
                     .map(([aktivitetkey, aktivitetvalue]) => (
@@ -47,21 +71,25 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, actions: {slettAlle,
                             key={`aktivitet-${aktivitetkey}`}
                             label={`${FilterKonstanter[key][aktivitetkey]}: ${aktivitetvalue}`}
                             slettFilter={() => slettEnkelt(key, aktivitetkey)}
+                            harMuligMenIkkeValgtKolonne={muligMenIkkeValgt}
                         />
                     ));
             } else if (value) {
+                kolonne = key === 'ytelse' ? Kolonne.UTLOP_YTELSE : getKolonneFraLabel(value);
+                muligMenIkkeValgt = harMuligMenIkkeValgtKolonne(listevisning, kolonne);
                 return [
                     <FiltreringLabel
                         key={`${key}--${value}`}
                         label={FilterKonstanter[key][value]}
                         slettFilter={() => slettEnkelt(key, null)}
+                        harMuligMenIkkeValgtKolonne={muligMenIkkeValgt}
                     />
                 ];
             }
             return [];
         }).reduce((acc, l) => [...acc, ...l], []);
 
-    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle}/>;
+    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} harMuligMenIkkeValgtKolonne={false}/>;
 
     return (
         <section className="filtrering-label-container blokk-s">
