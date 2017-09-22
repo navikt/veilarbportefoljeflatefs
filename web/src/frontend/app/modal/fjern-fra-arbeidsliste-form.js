@@ -1,7 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import { reduxForm } from 'redux-form';
 import { slettArbeidsliste } from '../ducks/arbeidsliste';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
@@ -31,12 +31,6 @@ function brukerLabel(bruker) {
 function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit }) {
     return (
         <form onSubmit={handleSubmit}>
-            <Normaltekst className="blokk-s arbeidsliste-normaltekst">
-                <FormattedMessage
-                    id="modal.fjern.fra.arbeidsliste.infotekst"
-                    values={{ antall: valgteBrukere.length }}
-                />
-            </Normaltekst>
             <div className="arbeidsliste-listetekst">
                 <ul>
                     {valgteBrukere.map((bruker) => brukerLabel(bruker))}

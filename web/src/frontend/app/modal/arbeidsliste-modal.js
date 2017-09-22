@@ -61,6 +61,7 @@ class ArbeidslisteModal extends Component {
 
         return (
             <div className="arbeidsliste__modal">
+                <div className="arbeidsliste-info-tekst">
                 <Innholdstittel tag="h1" className="blokk-xs">
                     <FormattedMessage id="modal.fjern.fra.arbeidsliste.tittel" />
                 </Innholdstittel>
@@ -70,6 +71,7 @@ class ArbeidslisteModal extends Component {
                         values={{ antall: brukereSomSkalFjernes.length }}
                     />
                 </Normaltekst>
+                </div>
                 <FjernFraArbeidslisteForm
                     valgteBrukere={brukereSomSkalFjernes}
                     lukkModal={this.lukkModal}
