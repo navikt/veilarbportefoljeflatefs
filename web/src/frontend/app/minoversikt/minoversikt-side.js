@@ -24,7 +24,7 @@ class MinOversiktSide extends Component {
     }
 
     render() {
-        const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, ...props } = this.props;
+        const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
 
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
         const innloggetVeileder = { ident: enheter.ident };
@@ -75,6 +75,7 @@ class MinOversiktSide extends Component {
                                         filtergruppe="veileder"
                                         veileder={gjeldendeVeileder}
                                         enhettiltak={enhettiltak.data.tiltak}
+                                        listevisning={listevisning}
                                     />
                                     <VeilederPortefoljeVisning
                                         gjeldendeVeileder={gjeldendeVeileder}
@@ -100,7 +101,8 @@ MinOversiktSide.propTypes = {
     filtervalg: filtervalgShape.isRequired,
     statustall: PT.shape({ data: statustallShape }),
     enhettiltak: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
-    params: PT.object.isRequired // eslint-disable-line react/forbid-prop-types
+    params: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    listevisning: PT.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -109,7 +111,8 @@ const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
     filtervalg: state.filtreringMinoversikt,
     statustall: state.statustall,
-    enhettiltak: state.enhettiltak
+    enhettiltak: state.enhettiltak,
+    listevisning: state.ui.listevisningMinOversikt
 });
 
 const mapDispatchToProps = (dispatch) => ({
