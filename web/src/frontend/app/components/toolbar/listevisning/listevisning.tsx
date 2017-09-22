@@ -38,7 +38,7 @@ const ListevisningRad = (props: ListevisningRadProps) => {
 
 interface ListevisningOwnProps {
     filtergruppe: ListevisningType;
-
+    skalVises: boolean;
 }
 
 interface ListevisningProps extends ListevisningOwnProps {
@@ -59,6 +59,10 @@ const Listevisning = (props: ListevisningProps) => {
 
     function erValgt(kolonne: Kolonne) {
         return props.valgteAlternativ.indexOf(kolonne) > -1;
+    }
+
+    if (!props.skalVises) {
+        return null;
     }
 
     return (
