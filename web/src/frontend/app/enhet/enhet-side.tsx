@@ -15,7 +15,7 @@ import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import {AppState} from '../reducer';
 import {FiltervalgModell, StatustallModell, ValgtEnhetModell, VeilederModell} from '../model-interfaces';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import {ListevisningState, ListevisningType} from '../ducks/ui/listevisning';
 
 interface EnhetSideProps {
     valgtEnhet: ValgtEnhetModell;
@@ -26,6 +26,7 @@ interface EnhetSideProps {
     statustall: { data: StatustallModell };
     enhettiltak: EnhettiltakState;
     intl: InjectedIntl;
+    listevisning: ListevisningState;
 }
 
 class EnhetSide extends React.Component<EnhetSideProps, {}> {
@@ -45,7 +46,7 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
             return null;
         }
         const { formatMessage } = this.props.intl;
-        const { filtervalg, veilederliste, statustall, enhettiltak } = this.props;
+        const { filtervalg, veilederliste, statustall, enhettiltak, listevisning } = this.props;
 
         const leggTilNavn = (identer, veiledere) => identer.map((ident) => {
             const veileder = veiledere.find((v) => v.ident === ident);
@@ -69,6 +70,7 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
                                 }}
                                 filtergruppe="enhet"
                                 enhettiltak={enhettiltak.data.tiltak}
+                                listevisning={listevisning}
                             />
                             <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
                             <EnhetsportefoljeVisning />
@@ -86,7 +88,8 @@ const mapStateToProps = (state: AppState) => ({
     filtervalg: state.filtrering,
     veilederliste: state.veiledere.data.veilederListe,
     statustall: state.statustall,
-    enhettiltak: state.enhettiltak
+    enhettiltak: state.enhettiltak,
+    listevisning: state.ui.listevisningEnhetensOversikt
 });
 
 const mapDispatchToProps = (dispatch) => ({
