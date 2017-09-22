@@ -38,8 +38,8 @@ function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
 }
 
 function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}}: FiltreringLabelContainerProps) {
-    let muligMenIkkeValgt: boolean,
-        kolonne: Kolonne | null;
+    let muligMenIkkeValgt: boolean;
+    let kolonne: Kolonne | null;
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
             if (value === true) {
@@ -51,8 +51,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     />
                 ];
             } else if (Array.isArray(value)) {
-                const values = value.map(function(singleValue) {
-                    return (
+                    return value.map((singleValue) => (
                     <FiltreringLabel
                         key={`${key}--${singleValue.key || singleValue}`}
                         label={
@@ -61,10 +60,9 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                                 (singleValue.label || FilterKonstanter[key][singleValue])
                         }
                         slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
-                    />);
-                });
-                return values;
-            } else if (value && typeof value === 'object') { //value er aktiviteter
+                    />)
+                );
+            } else if (value && typeof value === 'object') { // value er aktiviteter
                 muligMenIkkeValgt = harMuligMenIkkeValgtKolonne(listevisning, Kolonne.UTLOP_AKTIVITET);
                 return Object.entries(value)
                     .filter(([_, aktivitetvalue]) => aktivitetvalue !== AktiviteterValg.NA)
