@@ -46,7 +46,7 @@ function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules }:
 }
 
 function getFiltreringsstate(state: AppState, filtergruppe: ListevisningType) {
-    if(filtergruppe === ListevisningType.enhetensOversikt) {
+    if (filtergruppe === ListevisningType.enhetensOversikt) {
         return state.filtrering;
     } else if (filtergruppe === ListevisningType.minOversikt) {
         return state.filtreringMinoversikt;
