@@ -26,7 +26,6 @@ function getKolonneFraLabel(label) {
         case VENTER_PA_SVAR_FRA_BRUKER: return Kolonne.VENTER_SVAR;
         case I_AVTALT_AKTIVITET: return Kolonne.AVTALT_AKTIVITET;
         case UTLOPTE_AKTIVITETER: return Kolonne.UTLOPTE_AKTIVITETER;
-        case 'ytelse': return Kolonne.UTLOP_YTELSE;
         default: return null;
     }
 }
@@ -40,29 +39,19 @@ function erMuligMenIkkeValgt(listevisning, kolonne) {
 
 function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}}: FiltreringLabelContainerProps) {
     let muligMenIkkeValgt: boolean,
-        kolonne: Kolonne | null,
-        labelNavn: string | typeof FilterKonstanter.brukerstatus;
+        kolonne: Kolonne | null;
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
             if (value === true) {
-                labelNavn = FilterKonstanter[key];
-                kolonne = getKolonneFraLabel(key);
-                muligMenIkkeValgt = erMuligMenIkkeValgt(listevisning, kolonne);
                 return [
                     <FiltreringLabel
                         key={key}
                         label={FilterKonstanter[key]}
                         slettFilter={() => slettEnkelt(key, false)}
-                        harMuligMenIkkeValgtKolonne={muligMenIkkeValgt}
                     />
                 ];
             } else if (Array.isArray(value)) {
                 const values = value.map(function(singleValue) {
-                    labelNavn = key === 'tiltakstyper' ?
-                        enhettiltak[singleValue] :
-                        (singleValue.label || FilterKonstanter[key][singleValue]);
-                    kolonne = getKolonneFraLabel(key);
-                    muligMenIkkeValgt = erMuligMenIkkeValgt(listevisning, kolonne);
                     return (
                     <FiltreringLabel
                         key={`${key}--${singleValue.key || singleValue}`}
@@ -72,7 +61,6 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                                 (singleValue.label || FilterKonstanter[key][singleValue])
                         }
                         slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
-                        harMuligMenIkkeValgtKolonne={muligMenIkkeValgt}
                     />);
                 });
                 return values;
@@ -89,8 +77,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                         />
                     ));
             } else if (value) {
-                labelNavn = key === 'ytelse' ? 'ytelse' : value;
-                kolonne = getKolonneFraLabel(labelNavn);
+                kolonne = key === 'ytelse' ? Kolonne.UTLOP_YTELSE : getKolonneFraLabel(value);
                 muligMenIkkeValgt = erMuligMenIkkeValgt(listevisning, kolonne);
                 return [
                     <FiltreringLabel
