@@ -7,6 +7,7 @@ import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from '../ducks/statustall';
 import { leggSideIUrl } from '../utils/utils';
+import {BrukerModell, VeilederModell} from '../model-interfaces';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -31,7 +32,24 @@ function lagBrukerGuid(bruker) {
 
 // Reducer
 
-const initialState = {
+export interface PortefoljeState {
+    status: string;
+    data: {
+        brukere: BrukerModell[];
+        antallTotalt: number | string;
+        antallReturnert: number | string;
+        fraIndex: number;
+    };
+    sorteringsrekkefolge: string;
+    sorteringsfelt: string;
+    feilendeTilordninger?: any[];
+    veileder: {
+        ident: string;
+    };
+    tilordningerstatus: string;
+}
+
+const initialState: PortefoljeState = {
     status: STATUS.NOT_STARTED,
     data: {
         brukere: [],
@@ -88,7 +106,7 @@ function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
         });
 }
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state = initialState, action): PortefoljeState {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {
@@ -142,8 +160,8 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 data: {
                     ...state.data,
-                    antallTotalt: parseInt(state.data.antallTotalt, 10) - action.antallTilordninger,
-                    antallReturnert: parseInt(state.data.antallReturnert, 10) - action.antallTilordninger
+                    antallTotalt: parseInt(state.data.antallTotalt as string, 10) - action.antallTilordninger,
+                    antallReturnert: parseInt(state.data.antallReturnert as string, 10) - action.antallTilordninger
                 }
             };
         case TILDEL_VEILEDER_RELOAD: {
@@ -251,7 +269,7 @@ export function markerAlleBrukere(markert) {
 }
 
 
-export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder = {}) {
+export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder: VeilederModell = {}) {
     return (dispatch, getState) => {
         dispatch({ type: TILDEL_VEILEDER_RELOAD });
         dispatch({ type: PENDING });

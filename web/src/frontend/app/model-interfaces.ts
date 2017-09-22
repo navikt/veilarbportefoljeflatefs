@@ -34,7 +34,7 @@ export interface ValgtEnhetModell {
 }
 
 export interface VeilederModell {
-    ident: string;
+    ident?: string;
     navn?: string;
     fornavn?: string;
     etternavn?: string;
