@@ -7,7 +7,6 @@ import {
 } from '../../filtrering/filter-konstanter';
 
 export function selectMuligeAlternativer(state: AppState, name: ListevisningType): Kolonne[] {
-    console.log("select", name);
     if (name === ListevisningType.minOversikt) {
         return state.ui.listevisningMinOversikt.mulige;
     }

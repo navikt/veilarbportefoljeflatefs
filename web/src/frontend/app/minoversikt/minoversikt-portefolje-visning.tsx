@@ -21,7 +21,7 @@ import {
 } from '../ducks/modal-feilmelding-brukere';
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
 import {FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell} from '../model-interfaces';
-import {ListevisningType} from "../ducks/ui/listevisning";
+import {ListevisningType} from '../ducks/ui/listevisning';
 
 interface VeilederPortefoljeVisningProps {
     portefolje: PortefoljeState;
@@ -30,7 +30,7 @@ interface VeilederPortefoljeVisningProps {
     gjeldendeVeileder: VeilederModell;
     innloggetVeilederIdent: string;
     hentPortefolje: (...args) => void;
-    settSortering: (rekkefolge: string, felt: string) => void;
+    doSettSortering: (rekkefolge: string, felt: string) => void;
     sorteringsfelt: string;
     closeFeilmeldingModal: () => void;
     visningsmodus: string;
@@ -66,7 +66,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         const {
             sorteringsrekkefolge,
             sorteringsfelt,
-            settSortering, // eslint-disable-line no-shadow
+            doSettSortering,
             hentPortefolje,
             gjeldendeVeileder,
             valgtEnhet,
@@ -78,7 +78,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         } else {
             valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
-        settSortering(valgtRekkefolge, felt);
+        doSettSortering(valgtRekkefolge, felt);
         hentPortefolje(
             valgtEnhet.enhet.enhetId, gjeldendeVeileder, valgtRekkefolge, felt, filtervalg
         );
@@ -192,7 +192,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, fra, antall, filtervalg)),
-    settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
+    doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal()),
     closeServerfeilModal: () => dispatch(skjulServerfeilModal())
 });

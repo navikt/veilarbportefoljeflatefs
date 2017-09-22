@@ -29,7 +29,6 @@ function lagBrukerGuid(bruker) {
     return bruker.fnr === '' ? (`${Math.random()}`).slice(2) : bruker.fnr;
 }
 
-
 // Reducer
 
 export interface PortefoljeState {
@@ -252,7 +251,6 @@ export function settSortering(rekkefolge, felt) {
     });
 }
 
-
 export function settBrukerSomMarkert(guid, markert) {
     return (dispatch) => dispatch({
         type: SETT_MARKERT_BRUKER,
@@ -267,7 +265,6 @@ export function markerAlleBrukere(markert) {
         markert
     });
 }
-
 
 export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder: VeilederModell = {}) {
     return (dispatch, getState) => {
