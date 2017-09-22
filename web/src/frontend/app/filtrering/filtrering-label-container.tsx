@@ -18,7 +18,7 @@ interface FiltreringLabelContainerProps {
     };
     filtervalg: FiltervalgModell;
     filtergruppe: string;
-    listevisning?: ListevisningState;
+    listevisning: ListevisningState;
 }
 
 function getKolonneFraLabel(label) {
@@ -30,7 +30,7 @@ function getKolonneFraLabel(label) {
     }
 }
 
-function erMuligMenIkkeValgt(listevisning, kolonne) {
+function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
     if (listevisning.mulige.indexOf(kolonne) >= 0) {
         return listevisning.valgte.indexOf(kolonne) < 0;
     }
@@ -65,7 +65,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                 });
                 return values;
             } else if (value && typeof value === 'object') { //value er aktiviteter
-                muligMenIkkeValgt = erMuligMenIkkeValgt(listevisning, Kolonne.UTLOP_AKTIVITET);
+                muligMenIkkeValgt = harMuligMenIkkeValgtKolonne(listevisning, Kolonne.UTLOP_AKTIVITET);
                 return Object.entries(value)
                     .filter(([_, aktivitetvalue]) => aktivitetvalue !== AktiviteterValg.NA)
                     .map(([aktivitetkey, aktivitetvalue]) => (
@@ -78,7 +78,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     ));
             } else if (value) {
                 kolonne = key === 'ytelse' ? Kolonne.UTLOP_YTELSE : getKolonneFraLabel(value);
-                muligMenIkkeValgt = erMuligMenIkkeValgt(listevisning, kolonne);
+                muligMenIkkeValgt = harMuligMenIkkeValgtKolonne(listevisning, kolonne);
                 return [
                     <FiltreringLabel
                         key={`${key}--${value}`}
