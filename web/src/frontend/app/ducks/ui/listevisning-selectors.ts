@@ -13,7 +13,7 @@ export function selectMuligeAlternativer(state: AppState, name: ListevisningType
     return state.ui.listevisningEnhetensOversikt.mulige;
 }
 
-export function selectValgteAlternativer(state: AppState): Kolonne[] {
+export function selectValgteAlternativer(state: AppState, name: ListevisningType): Kolonne[] {
     if (name === ListevisningType.minOversikt) {
         return state.ui.listevisningMinOversikt.valgte;
     }
