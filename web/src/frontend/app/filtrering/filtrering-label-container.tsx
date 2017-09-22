@@ -8,7 +8,7 @@ import FilterKonstanter, {
 import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg} from '../ducks/filtrering';
 import {filtervalgLabelShape, veilederShape} from '../proptype-shapes';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne} from "../ducks/ui/listevisning";
+import {Kolonne, ListevisningState} from "../ducks/ui/listevisning";
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -18,7 +18,7 @@ interface FiltreringLabelContainerProps {
     };
     filtervalg: FiltervalgModell;
     filtergruppe: string;
-    listevisning: object;
+    listevisning?: ListevisningState;
 }
 
 function getKolonneFraLabel(label) {
@@ -36,13 +36,12 @@ function erMuligMenIkkeValgt(listevisning, kolonne) {
         return listevisning.valgte.indexOf(kolonne) < 0;
     }
     return false;
-
 }
 
 function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}}: FiltreringLabelContainerProps) {
-    let muligMenIkkeValgt;
-    let kolonne;
-    let labelNavn;
+    let muligMenIkkeValgt: boolean,
+        kolonne: Kolonne | null,
+        labelNavn: string | typeof FilterKonstanter.brukerstatus;
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
             if (value === true) {
