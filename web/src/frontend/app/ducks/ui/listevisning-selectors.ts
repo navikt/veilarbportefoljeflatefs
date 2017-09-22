@@ -7,13 +7,14 @@ import {
 } from '../../filtrering/filter-konstanter';
 
 export function selectMuligeAlternativer(state: AppState, name: ListevisningType): Kolonne[] {
+    console.log("select", name);
     if (name === ListevisningType.minOversikt) {
         return state.ui.listevisningMinOversikt.mulige;
     }
     return state.ui.listevisningEnhetensOversikt.mulige;
 }
 
-export function selectValgteAlternativer(state: AppState): Kolonne[] {
+export function selectValgteAlternativer(state: AppState, name: ListevisningType): Kolonne[] {
     if (name === ListevisningType.minOversikt) {
         return state.ui.listevisningMinOversikt.valgte;
     }

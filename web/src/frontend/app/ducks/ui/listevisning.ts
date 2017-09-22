@@ -103,7 +103,7 @@ export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.
 export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction>, getState: () => AppState, name: ListevisningType) => {
     const appState = getState();
     const muligeAlternativer = selectMuligeAlternativer(appState, name);
-    const valgteAlternativer = selectValgteAlternativer(appState);
+    const valgteAlternativer = selectValgteAlternativer(appState, name);
     const nyeMuligeAlternativer = getMuligeKolonner(appState, name);
 
     dispatch({
