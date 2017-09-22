@@ -48,7 +48,11 @@ class EnhetSide extends Component {
                             <p className="typo-infotekst begrensetbredde blokk-l">
                                 <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                             </p>
-                            <FiltreringContainer filtervalg={filtervalg} enhettiltak={enhettiltak.data.tiltak} />
+                            <FiltreringContainer
+                                filtervalg={filtervalg}
+                                enhettiltak={enhettiltak.data.tiltak}
+                                filtergruppe="enhet"
+                            />
                             <FiltreringLabelContainer
                                 filtervalg={{
                                     ...filtervalg,
