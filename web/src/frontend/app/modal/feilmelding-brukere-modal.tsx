@@ -1,13 +1,25 @@
-import React, { Component, PropTypes as PT } from 'react';
+import * as React from 'react';
 import Modal from 'nav-frontend-modal';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
+
+interface FeilmeldingBrukereModalProps {
+    isOpen?: boolean;
+    fnr: string[];
+    onClose: () => void;
+    tittelTekstID: string;
+    infotekstTekstID: string;
+}
+
+interface FeilmeldingBrukereModalState {
+    isOpen?: boolean;
+}
 
 Modal.setAppElement('#applikasjon');
 
 const fnrsToList = (fnrs) => (<ul>{(fnrs.map((fnr) => <li key={fnr} className="fnr__listitem">{fnr}</li>))}</ul>);
 
-class FeilmeldingBrukereModal extends Component {
+class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalProps, FeilmeldingBrukereModalState> {
     constructor(props) {
         super(props);
 
@@ -56,14 +68,5 @@ class FeilmeldingBrukereModal extends Component {
         );
     }
 }
-
-FeilmeldingBrukereModal.propTypes = {
-    isOpen: PT.bool,
-    fnr: PT.arrayOf(PT.string).isRequired,
-    onClose: PT.func.isRequired,
-    tittelTekstID: PT.string.isRequired,
-    infotekstTekstID: PT.string.isRequired
-};
-
 
 export default FeilmeldingBrukereModal;

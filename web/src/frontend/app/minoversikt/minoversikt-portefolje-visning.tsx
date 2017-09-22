@@ -1,7 +1,7 @@
-import React, { Component, PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForVeileder, settSortering } from '../ducks/portefolje';
+import {hentPortefoljeForVeileder, PortefoljeState, settSortering} from '../ducks/portefolje';
 import TabellOverskrift from './../components/tabell-overskrift';
 import Toolbar from './../components/toolbar/toolbar';
 import { enhetShape, veilederShape, filtervalgShape, feilmeldingModalShape } from './../proptype-shapes';
@@ -20,8 +20,28 @@ import {
     TILORDNING_FEILET
 } from '../ducks/modal-feilmelding-brukere';
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
+import {FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell} from '../model-interfaces';
+import {ListevisningType} from '../ducks/ui/listevisning';
 
-class VeilederPortefoljeVisning extends Component {
+interface VeilederPortefoljeVisningProps {
+    portefolje: PortefoljeState;
+    sorteringsrekkefolge: string;
+    valgtEnhet: ValgtEnhetModell;
+    gjeldendeVeileder: VeilederModell;
+    innloggetVeilederIdent: string;
+    hentPortefolje: (...args) => void;
+    doSettSortering: (rekkefolge: string, felt: string) => void;
+    sorteringsfelt: string;
+    closeFeilmeldingModal: () => void;
+    visningsmodus: string;
+    filtervalg: FiltervalgModell;
+    visesAnnenVeiledersPortefolje: boolean;
+    feilmeldingModal: FeilmeldingModalModell;
+    serverfeilModalSkalVises: boolean;
+    closeServerfeilModal: () => void;
+}
+
+class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps> {
     componentWillMount() {
         const {
             sorteringsrekkefolge,
@@ -38,7 +58,7 @@ class VeilederPortefoljeVisning extends Component {
             valgtEnhet.enhet.enhetId, gjeldendeVeileder, sorteringsfelt, sorteringsrekkefolge, filtervalg, fraIndex
         );
 
-        leggEnhetIUrl(valgtEnhet.enhet.enhetId);
+        leggEnhetIUrl(valgtEnhet.enhet.enhetId!);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
@@ -46,7 +66,7 @@ class VeilederPortefoljeVisning extends Component {
         const {
             sorteringsrekkefolge,
             sorteringsfelt,
-            settSortering, // eslint-disable-line no-shadow
+            doSettSortering,
             hentPortefolje,
             gjeldendeVeileder,
             valgtEnhet,
@@ -58,7 +78,7 @@ class VeilederPortefoljeVisning extends Component {
         } else {
             valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
-        settSortering(valgtRekkefolge, felt);
+        doSettSortering(valgtRekkefolge, felt);
         hentPortefolje(
             valgtEnhet.enhet.enhetId, gjeldendeVeileder, valgtRekkefolge, felt, filtervalg
         );
@@ -97,8 +117,7 @@ class VeilederPortefoljeVisning extends Component {
                         tekst="enhet.portefolje.paginering.tekst"
                     />
                     <Toolbar
-                        filtergruppe="veileder"
-                        filtervalg={filtervalg}
+                        filtergruppe={ListevisningType.minOversikt}
                         onPaginering={(fra, antall) => hentPortefolje(
                             valgtEnhet.enhet.enhetId,
                             gjeldendeVeileder,
@@ -158,32 +177,6 @@ class VeilederPortefoljeVisning extends Component {
 
 }
 
-VeilederPortefoljeVisning.propTypes = {
-    portefolje: PT.shape({
-        data: PT.shape({
-            brukere: PT.arrayOf(PT.object).isRequired,
-            antallTotalt: PT.number.isRequired,
-            antallReturnert: PT.number.isRequired,
-            fraIndex: PT.number.isRequired
-        }).isRequired,
-        sorteringsrekkefolge: PT.string.isRequired
-    }).isRequired,
-    valgtEnhet: enhetShape.isRequired,
-    gjeldendeVeileder: veilederShape.isRequired,
-    innloggetVeilederIdent: PT.string.isRequired,
-    hentPortefolje: PT.func.isRequired,
-    settSortering: PT.func.isRequired,
-    sorteringsrekkefolge: PT.string.isRequired,
-    sorteringsfelt: PT.string.isRequired,
-    closeFeilmeldingModal: PT.func.isRequired,
-    visningsmodus: PT.string.isRequired,
-    filtervalg: filtervalgShape.isRequired,
-    visesAnnenVeiledersPortefolje: PT.bool.isRequired,
-    feilmeldingModal: feilmeldingModalShape.isRequired,
-    serverfeilModalSkalVises: PT.bool.isRequired,
-    closeServerfeilModal: PT.func.isRequired
-};
-
 const mapStateToProps = (state) => ({
     portefolje: state.portefolje,
     valgtEnhet: state.enheter.valgtEnhet,
@@ -199,7 +192,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, fra, antall, filtervalg)),
-    settSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
+    doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal()),
     closeServerfeilModal: () => dispatch(skjulServerfeilModal())
 });

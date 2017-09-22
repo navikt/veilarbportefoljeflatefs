@@ -6,7 +6,7 @@ import {Checkbox} from 'nav-frontend-skjema';
 import {FormattedMessage} from 'react-intl';
 import {AppState} from '../../../reducer';
 import {Action, bindActionCreators, Dispatch} from 'redux';
-import {avvelgAlternativ, Kolonne, velgAlternativ} from '../../../ducks/ui/listevisning';
+import {avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ} from '../../../ducks/ui/listevisning';
 import { alternativerConfig } from './listevisning-utils';
 import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
 
@@ -36,19 +36,24 @@ const ListevisningRad = (props: ListevisningRadProps) => {
     );
 };
 
-interface ListevisningProps {
+interface ListevisningOwnProps {
+    filtergruppe: ListevisningType;
+
+}
+
+interface ListevisningProps extends ListevisningOwnProps {
     valgteAlternativ: Kolonne[];
     muligeAlternativer: Kolonne[];
-    velgAlternativ: (name: Kolonne) => void;
-    avvelgAlternativ: (name: Kolonne) => void;
+    velgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => void;
+    avvelgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => void;
 }
 
 const Listevisning = (props: ListevisningProps) => {
     function handleChange(name, checked) {
         if (checked) {
-            props.velgAlternativ(name);
+            props.velgAlternativ(name, props.filtergruppe);
         } else {
-            props.avvelgAlternativ(name);
+            props.avvelgAlternativ(name, props.filtergruppe);
         }
     }
 
@@ -78,17 +83,18 @@ const Listevisning = (props: ListevisningProps) => {
     );
 };
 
-function mapStateToProps(state: AppState) {
+function mapStateToProps(state: AppState, ownProps: ListevisningOwnProps) {
     return {
-        valgteAlternativ: selectValgteAlternativer(state),
-        muligeAlternativer: selectMuligeAlternativer(state)
+        valgteAlternativ: selectValgteAlternativer(state, ownProps.filtergruppe),
+        muligeAlternativer: selectMuligeAlternativer(state, ownProps.filtergruppe)
     };
 }
 
 function mapDispatchToProps(dispatch: Dispatch<Action>) {
-    return bindActionCreators({
-        velgAlternativ, avvelgAlternativ
-    }, dispatch);
+    return {
+        velgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(velgAlternativ(name, filtergruppe)),
+        avvelgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(avvelgAlternativ(name, filtergruppe))
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Listevisning);

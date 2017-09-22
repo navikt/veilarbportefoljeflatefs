@@ -1,7 +1,22 @@
-import React, { Component, Children, cloneElement, PropTypes as PT } from 'react';
+import * as React from 'react';
+import {Children, cloneElement} from 'react';
 import { Input } from 'nav-frontend-skjema';
 
-class SokFilter extends Component {
+interface SokFilterProps {
+    data: any[];
+    filter?: (query: any) => any;
+    children: React.ReactChild | React.ReactChildren;
+    label: string;
+    placeholder: string;
+}
+
+interface SokFilterState {
+    query?: string;
+}
+
+const defaultFilter = (query) => (dataEntry) => !query || JSON.stringify(dataEntry).toLowerCase().includes(query.toLowerCase());
+
+class SokFilter extends React.Component<SokFilterProps, SokFilterState> {
     constructor(props) {
         super(props);
         this.state = { query: undefined };
@@ -13,9 +28,9 @@ class SokFilter extends Component {
     }
 
     render() {
-        const { data, filter, children, ...props } = this.props;
+        const { data, filter = defaultFilter, children, ...props } = this.props;
         const filteredData = data.filter(filter(this.state.query));
-        const child = Children.map(children, (barn) => cloneElement(barn, { ...props, data: filteredData }));
+        const child = Children.map(children, (barn: React.ReactElement<any>) => cloneElement(barn, { ...props, data: filteredData }));
         return (
             <div>
                 <div className="sokfilter">
@@ -31,17 +46,5 @@ class SokFilter extends Component {
         );
     }
 }
-
-SokFilter.propTypes = {
-    data: PT.arrayOf(PT.object).isRequired,
-    filter: PT.func.isRequired,
-    children: PT.oneOfType([PT.arrayOf(PT.node), PT.node]),
-    label: PT.string.isRequired,
-    placeholder: PT.string.isRequired
-};
-
-SokFilter.defaultProps = {
-    filter: (query) => (dataEntry) => !query || JSON.stringify(dataEntry).toLowerCase().includes(query.toLowerCase())
-};
 
 export default SokFilter;

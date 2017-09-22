@@ -1,12 +1,23 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-toggle';
 import { settVisningsmodus } from './../../ducks/veilederpaginering';
 import * as VK from './../../minoversikt/minoversikt-konstanter';
-import { nameToStateSliceMap } from './../../reducer';
+import { AppState } from './../../reducer';
+import {ListevisningType} from '../../ducks/ui/listevisning';
 
-function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules }) {
+interface DiagramTabellToggleOwnProps {
+    filtergruppe: ListevisningType;
+}
+
+interface DiagramTabellToggleProps extends DiagramTabellToggleOwnProps {
+    visningsmodus: string;
+    endreVisningsmodus: (visning: string) => void;
+    skalSkjules: boolean;
+}
+
+function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules }: DiagramTabellToggleProps) {
     if (skalSkjules) {
         return null;
     }
@@ -34,15 +45,18 @@ function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules })
     );
 }
 
-DiagramTabellToggle.propTypes = {
-    visningsmodus: PT.string.isRequired,
-    endreVisningsmodus: PT.func.isRequired,
-    skalSkjules: PT.bool.isRequired
-};
+function getFiltreringsstate(state: AppState, filtergruppe: ListevisningType) {
+    if (filtergruppe === ListevisningType.enhetensOversikt) {
+        return state.filtrering;
+    } else if (filtergruppe === ListevisningType.minOversikt) {
+        return state.filtreringMinoversikt;
+    }
+    return state.filtreringVeilederoversikt;
+}
 
-const mapStateToProps = (state, ownProps) => {
-    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe];
-    const ytelse = state[stateSlice].ytelse;
+const mapStateToProps = (state, ownProps: DiagramTabellToggleOwnProps) => {
+    const filtreringsstate = getFiltreringsstate(state, ownProps.filtergruppe);
+    const ytelse = filtreringsstate.ytelse;
 
     return ({
         visningsmodus: state.veilederpaginering.visningsmodus,
