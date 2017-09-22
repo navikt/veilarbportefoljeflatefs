@@ -1,11 +1,20 @@
-import React, { Component, PropTypes as PT } from 'react';
+import * as React from 'react';
 import Modal from 'nav-frontend-modal';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 
 Modal.setAppElement('#applikasjon');
 
-class ServerFeilModal extends Component {
+interface ServerFeilModalProps {
+    isOpen?: boolean;
+    onClose: () => void;
+}
+
+interface ServerFeilModalState {
+    isOpen?: boolean;
+}
+
+class ServerFeilModal extends React.Component<ServerFeilModalProps, ServerFeilModalState> {
     constructor(props) {
         super(props);
 
@@ -52,10 +61,5 @@ class ServerFeilModal extends Component {
         );
     }
 }
-
-ServerFeilModal.propTypes = {
-    isOpen: PT.bool.isRequired,
-    onClose: PT.func.isRequired
-};
 
 export default ServerFeilModal;

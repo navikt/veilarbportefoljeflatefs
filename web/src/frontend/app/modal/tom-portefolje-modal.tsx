@@ -1,11 +1,19 @@
-import React, { Component, PropTypes as PT } from 'react';
+import * as React from 'react';
 import Modal from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 
 Modal.setAppElement('#applikasjon');
 
-class TomPortefoljeModal extends Component {
+interface TomPortefoljeModalProps {
+    isOpen: boolean;
+}
+
+interface TomPortefoljeModalState {
+    isOpen: boolean;
+}
+
+class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPortefoljeModalState> {
     constructor(props) {
         super(props);
 
@@ -39,9 +47,5 @@ class TomPortefoljeModal extends Component {
         );
     }
 }
-
-TomPortefoljeModal.propTypes = {
-    isOpen: PT.bool.isRequired
-};
 
 export default TomPortefoljeModal;

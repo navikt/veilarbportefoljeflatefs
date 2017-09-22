@@ -5,11 +5,13 @@ import { FormattedMessage } from 'react-intl';
 import {Action, bindActionCreators, Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {AppState} from '../../../reducer';
-import {lukkInfopanel} from '../../../ducks/ui/listevisning';
+import {ListevisningType, lukkInfopanel} from '../../../ducks/ui/listevisning';
+import {selectMuligeAlternativer} from '../../../ducks/ui/listevisning-selectors';
 
 interface ListevisningInfopanelProps {
     skalVises: boolean;
     lukkPanel: () => void;
+    name: ListevisningType;
 }
 
 const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
@@ -27,19 +29,25 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
     );
 };
 
-const mapStateToProps = (state: AppState) => {
-    const antallMulige = state.ui.listevisning.mulige.length;
-    const harIkkeLukketInfopanel = !state.ui.listevisning.lukketInfopanel;
+const harLukketInfoPanel = (name: ListevisningType, state: AppState) => {
+    if (name === ListevisningType.enhetensOversikt) {
+        return state.ui.listevisningEnhetensOversikt.lukketInfopanel;
+    }
+    return state.ui.listevisningMinOversikt.lukketInfopanel;
+};
+
+const mapStateToProps = (state: AppState, ownProps: { name: ListevisningType }) => {
+    const antallMulige = selectMuligeAlternativer(state, ownProps.name).length;
 
     return {
-        skalVises: antallMulige > 5 && harIkkeLukketInfopanel
+        skalVises: antallMulige > 5 && !harLukketInfoPanel(ownProps.name, state)
     };
 };
 
 const mapActionsToProps = (dispatch: Dispatch<Action>) => {
     return bindActionCreators({
         lukkPanel: lukkInfopanel
-    }, dispatch)
+    }, dispatch);
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(ListevisningInfoPanel);
