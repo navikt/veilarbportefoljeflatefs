@@ -1,7 +1,7 @@
 import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
 import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
 import {nameToStateSliceMap} from './../reducer';
-import {oppdaterAlternativer} from './ui/listevisning';
+import {ListevisningType, oppdaterAlternativer} from './ui/listevisning';
 import {VeilederModell} from '../model-interfaces';
 
 // Actions
@@ -112,10 +112,11 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = 
 
     if (filtergruppe === 'enhet') {
         hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
+        oppdaterAlternativer(dispatch, getState, ListevisningType.enhetensOversikt);
     } else if (filtergruppe === 'veileder') {
         hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
+        oppdaterAlternativer(dispatch, getState, ListevisningType.minOversikt);
     }
-    oppdaterAlternativer(dispatch, getState);
 }
 
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: VeilederModell) {
