@@ -10,7 +10,7 @@ import {selectMuligeAlternativer} from '../../../ducks/ui/listevisning-selectors
 
 interface ListevisningInfopanelProps {
     skalVises: boolean;
-    lukkPanel: () => void;
+    lukkPanel: (name: ListevisningType) => void;
     name: ListevisningType;
 }
 
@@ -23,7 +23,7 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
         <AlertStripeInfoSolid className="blokk-m">
             <div className="listevisning--infopanel">
                 <FormattedMessage id="listevisning.infopanel" tagName="p" />
-                <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={props.lukkPanel}>Lukk</Lukknapp>
+                <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={() => props.lukkPanel(props.name)}>Lukk</Lukknapp>
             </div>
         </AlertStripeInfoSolid>
     );
