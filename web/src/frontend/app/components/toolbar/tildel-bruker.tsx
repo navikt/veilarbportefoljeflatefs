@@ -72,7 +72,7 @@ const mapStateToProps = ({ veiledere, enheter, portefolje, ui }: AppState) => ({
     skalSkjules: ui.side.side === 'veiledere'
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    tildelTilVeileder: (...args) => dispatch(tildelVeileder(...args, ownProps.filtergruppe, ownProps.veileder))
+    tildelTilVeileder: (tilordninger, tilVeileder) => dispatch(tildelVeileder(tilordninger, tilVeileder, ownProps.filtergruppe, ownProps.veileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TildelBruker);

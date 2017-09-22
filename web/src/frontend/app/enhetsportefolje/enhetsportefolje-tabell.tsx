@@ -8,7 +8,7 @@ import {
     FiltervalgModell, Sorteringsrekkefolge, ValgtEnhetModell,
     VeilederModell
 } from '../model-interfaces';
-import {Kolonne} from '../ducks/ui/listevisning';
+import {Kolonne, ListevisningType} from '../ducks/ui/listevisning';
 import {selectValgteAlternativer} from '../ducks/ui/listevisning-selectors';
 
 interface EnhetTabellProps {
@@ -62,7 +62,7 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     filtervalg: state.filtrering,
-    valgteKolonner: selectValgteAlternativer(state)
+    valgteKolonner: selectValgteAlternativer(state, ListevisningType.enhetensOversikt)
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -3,7 +3,7 @@ import { reducer as formReducer } from 'react-redux-form-validation';
 import persistent from './utils/persistentReducer';
 import enheterReducer from './ducks/enheter';
 import ledeteksterReducer from './ducks/ledetekster';
-import portefoljeReducer from './ducks/portefolje';
+import portefoljeReducer, {PortefoljeState} from './ducks/portefolje';
 import pagineringReducer from './ducks/paginering';
 import sorteringReducer from './ducks/sortering';
 import veiledereReducer, {VeiledereState} from './ducks/veiledere';
@@ -58,7 +58,7 @@ export interface AppState {
     };
     enheter: any;
     ledetekster: any;
-    portefolje: any;
+    portefolje: PortefoljeState;
     paginering: any;
     sortering: any;
     veiledere: VeiledereState;

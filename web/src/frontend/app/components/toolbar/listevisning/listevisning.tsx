@@ -85,7 +85,7 @@ const Listevisning = (props: ListevisningProps) => {
 
 function mapStateToProps(state: AppState, ownProps: ListevisningOwnProps) {
     return {
-        valgteAlternativ: selectValgteAlternativer(state),
+        valgteAlternativ: selectValgteAlternativer(state, ownProps.filtergruppe),
         muligeAlternativer: selectMuligeAlternativer(state, ownProps.filtergruppe)
     };
 }
