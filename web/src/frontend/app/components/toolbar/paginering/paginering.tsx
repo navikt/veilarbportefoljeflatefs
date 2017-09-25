@@ -1,4 +1,3 @@
-/* eslint-disable react/prefer-stateless-function */
 import * as React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
