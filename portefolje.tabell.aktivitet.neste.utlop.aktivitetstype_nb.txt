@@ -1,1 +1,1 @@
-Aktivitet {aktivitetstype}
+Sluttdato valgt aktivitet
