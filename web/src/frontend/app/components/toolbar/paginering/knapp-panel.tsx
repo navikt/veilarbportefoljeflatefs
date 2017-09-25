@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 
 interface KnappPanelProps {
-    children?: React.ReactChild | React.ReactChildren;
+    children: React.ReactChild | React.ReactChildren;
     disabled?: boolean;
     pressed?: boolean;
     onClick?: () => void;
