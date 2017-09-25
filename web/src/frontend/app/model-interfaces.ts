@@ -4,6 +4,14 @@ export enum Sorteringsrekkefolge {
     descending = 'descending'
 }
 
+export enum EtikettType {
+    NYBRUKER = 'nybruker',
+    EGEN_ANSATT = 'egen-ansatt',
+    DISKRESJONSKODE = 'diskresjonskode',
+    SIKKERHETSTILTAK = 'sikkerhetstiltak',
+    DOED = 'doed'
+}
+
 export interface FiltervalgModell {
     nyeBrukere?: boolean;
     inaktiveBrukere?: boolean;
