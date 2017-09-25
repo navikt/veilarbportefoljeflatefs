@@ -22,14 +22,7 @@ function Veilederinfo({ veileder = null, bruker }: VeilederinfoProps) {
         <div className="veilederinformasjon__wrapper">
             <div className="veilederinformasjon__navn">
                 {
-                    bruker.veilederId ?
-                        <span>{navn}</span>
-                        :
-                        <Etikett
-                            type="nybruker"
-                            child={fm('enhet.portefolje.tabelletikett.ny.bruker')}
-                            skalVises
-                        />
+                    bruker.veilederId ? <span>{navn}</span> : null
                 }
             </div>
             <span className="veilederinfo__ident">{ident}</span>

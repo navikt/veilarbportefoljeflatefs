@@ -1,39 +1,45 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Etikett from './etikett';
+import {BrukerModell, EtikettType} from '../../model-interfaces';
 
 const fm = (id) => <FormattedMessage id={id} />;
 
-function Etiketter({ bruker }) {
+interface EtiketterProps {
+    bruker: BrukerModell;
+}
+
+function Etiketter({ bruker }: EtiketterProps) {
+    console.log('bruker.veilederId', bruker.veilederId);
     return (
         <div className="etiketter__wrapper">
             <Etikett
-                type="sikkerhetstiltak"
+                type={ EtikettType.SIKKERHETSTILTAK}
                 child={fm('enhet.portefolje.tabelletikett.sikkerhetstiltak')}
                 skalVises={bruker.sikkerhetstiltak.length > 0}
             />
             <Etikett
-                type="diskresjonskode"
+                type={EtikettType.DISKRESJONSKODE}
                 child={<span>{`Kode ${bruker.diskresjonskode}`}</span>}
                 skalVises={bruker.diskresjonskode !== null}
             />
             <Etikett
-                type="egen-ansatt"
+                type={EtikettType.EGEN_ANSATT}
                 child={fm('enhet.portefolje.tabelletikett.egen.ansatt')}
                 skalVises={bruker.egenAnsatt === true}
             />
             <Etikett
-                type="doed"
+                type={EtikettType.DOED}
                 child={fm('enhet.portefolje.tabelletikett.dod')}
                 skalVises={bruker.erDoed === true}
             />
-
+            <Etikett
+                type={EtikettType.NYBRUKER}
+                child={fm('enhet.portefolje.tabelletikett.ny.bruker')}
+                skalVises={bruker.veilederId === null}
+            />
         </div>
     );
 }
-
-Etiketter.propTypes = {
-    bruker: PT.object.isRequired
-};
 
 export default Etiketter;
