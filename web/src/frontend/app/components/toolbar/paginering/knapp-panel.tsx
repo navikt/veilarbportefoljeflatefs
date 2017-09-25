@@ -3,8 +3,9 @@ import * as classNames from 'classnames';
 
 interface KnappPanelProps {
     children?: React.ReactChild | React.ReactChildren;
-    disabled: boolean;
-    pressed: boolean;
+    disabled?: boolean;
+    pressed?: boolean;
+    onClick?: () => void;
 }
 
 function KnappPanel({ children, disabled = false, pressed = false, ...props }: KnappPanelProps) {
