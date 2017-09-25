@@ -1,7 +1,13 @@
-import React, { PropTypes as PT } from 'react';
-import classNames from 'classnames';
+import * as React from 'react';
+import * as classNames from 'classnames';
 
-function KnappPanel({ children, disabled, pressed, ...props }) {
+interface KnappPanelProps {
+    children?: React.ReactChild | React.ReactChildren;
+    disabled: boolean;
+    pressed: boolean;
+}
+
+function KnappPanel({ children, disabled = false, pressed = false, ...props }: KnappPanelProps) {
     const classes = classNames('paginering__knapp', {
         disabled,
         'paginering__knapp--pressed': pressed
@@ -18,15 +24,5 @@ function KnappPanel({ children, disabled, pressed, ...props }) {
         </button>
     );
 }
-
-KnappPanel.propTypes = {
-    children: PT.node.isRequired,
-    disabled: PT.bool,
-    pressed: PT.bool
-};
-KnappPanel.defaultProps = {
-    disabled: false,
-    pressed: false
-};
 
 export default KnappPanel;
