@@ -10,9 +10,8 @@ interface EtiketterProps {
 }
 
 function Etiketter({ bruker }: EtiketterProps) {
-    console.log('bruker.veilederId', bruker.veilederId);
     return (
-        <div className="etiketter__wrapper">
+        <div className="etiketter__wrapper col col-xs-4">
             <Etikett
                 type={ EtikettType.SIKKERHETSTILTAK}
                 child={fm('enhet.portefolje.tabelletikett.sikkerhetstiltak')}
