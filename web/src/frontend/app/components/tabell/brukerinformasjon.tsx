@@ -1,5 +1,12 @@
-import React, { PropTypes as PT } from 'react';
-import classnames from 'classnames';
+import * as React from 'react';
+import * as classnames from 'classnames';
+import {BrukerModell} from '../../model-interfaces';
+
+interface BrukerinformasjonProps {
+    bruker: BrukerModell;
+    settMarkert: (fnr: string, markert: boolean) => void;
+    enhetId?: string;
+}
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -8,13 +15,13 @@ const settSammenNavn = (bruker) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-const brukerFnr = (bruker) => <span className="brukerinformasjon__fnr">{bruker.fnr}</span>;
+const brukerFnr = (bruker) => <span className="brukerinformasjon__fnr col col-xs-2">{bruker.fnr}</span>;
 
 const brukerNavn = (bruker, enhetId) => (
     <a
         href={`https://${window.location.hostname}` +
                 `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
-        className={classnames('lenke lenke--frittstaende brukerinformasjon__navn',
+        className={classnames('lenke lenke--frittstaende brukerinformasjon__navn col col-xs-2',
                 { arbeidslistebruker: bruker.arbeidsliste.arbeidslisteAktiv })}
     >
         {settSammenNavn(bruker)}
@@ -32,20 +39,14 @@ const checkBox = (bruker, settMarkert) => (<div className="skjema__input">
     <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`} />
 </div>);
 
-function Brukerinformasjon({ bruker, enhetId, settMarkert }) {
+function Brukerinformasjon({ bruker, enhetId, settMarkert }: BrukerinformasjonProps) {
     return (
-        <div className="brukerinformasjon__wrapper">
+        <span>
             {checkBox(bruker, settMarkert)}
             {brukerNavn(bruker, enhetId)}
             {brukerFnr(bruker)}
-        </div>
+        </span>
     );
 }
-
-Brukerinformasjon.propTypes = {
-    bruker: PT.object.isRequired,
-    settMarkert: PT.func.isRequired,
-    enhetId: PT.string.isRequired
-};
 
 export default Brukerinformasjon;

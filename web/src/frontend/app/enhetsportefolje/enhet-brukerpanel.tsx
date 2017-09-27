@@ -1,14 +1,10 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import Brukerinformasjon from '../components/tabell/brukerinformasjon';
 import EnhetDatokolonner from './enhet-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
-import { filtervalgShape, veilederShape } from '../proptype-shapes';
-import Etikett from '../components/tabell/etikett';
+import {filtervalgShape, veilederShape} from '../proptype-shapes';
 import {FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
-
-const fm = (id) => <FormattedMessage id={id} />;
 
 interface VeilederinfoProps {
     bruker: any;
@@ -19,7 +15,7 @@ function Veilederinfo({ veileder = null, bruker }: VeilederinfoProps) {
     const navn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
     const ident = bruker.veilederId || '';
     return (
-        <div className="veilederinformasjon__wrapper">
+        <div className="veilederinformasjon__wrapper col col-xs-2">
             <div className="veilederinformasjon__navn">
                 {
                     bruker.veilederId ? <span>{navn}</span> : null
