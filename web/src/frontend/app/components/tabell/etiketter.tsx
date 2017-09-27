@@ -1,10 +1,15 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Etikett from './etikett';
+import {BrukerModell} from '../../model-interfaces';
 
 const fm = (id) => <FormattedMessage id={id} />;
 
-function Etiketter({ bruker }) {
+interface EtiketterProps {
+    bruker: BrukerModell;
+}
+
+function Etiketter({ bruker }: EtiketterProps) {
     return (
         <div className="etiketter__wrapper">
             <Etikett
@@ -31,9 +36,5 @@ function Etiketter({ bruker }) {
         </div>
     );
 }
-
-Etiketter.propTypes = {
-    bruker: PT.object.isRequired
-};
 
 export default Etiketter;

@@ -1,14 +1,22 @@
-import PT from 'prop-types';
-import React from 'react';
-import classnames from 'classnames';
+import * as React from 'react';
+import * as classnames from 'classnames';
 import Collapse from 'react-collapse';
+import {MouseEvent} from 'react';
 
 const cls = (className, props) => classnames('hybridPanel', className, {
     'hybridPanel--lukket': !props.apen,
     'hybridPanel--apen': props.apen
 });
 
-function HybridpanelPure(props) {
+interface HybridpanelPureProps {
+    className?: string;
+    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+    apen: boolean;
+    childrenHead: React.ReactNode[] | React.ReactNode;
+    childrenBody: React.ReactNode[] | React.ReactNode;
+}
+
+function HybridpanelPure(props: HybridpanelPureProps) {
     const { className, childrenHead, childrenBody, apen, onClick, ...renderProps } = props;
 
     return (
@@ -25,22 +33,5 @@ function HybridpanelPure(props) {
         </div>
     );
 }
-
-HybridpanelPure.propTypes = {
-    className: PT.string,
-    onClick: PT.func.isRequired,
-    apen: PT.bool.isRequired,
-    childrenHead: PT.oneOfType([
-        PT.arrayOf(PT.node),
-        PT.node
-    ]).isRequired,
-    childrenBody: PT.oneOfType([
-        PT.arrayOf(PT.node),
-        PT.node
-    ]).isRequired
-};
-HybridpanelPure.defaultProps = {
-    className: undefined
-};
 
 export default HybridpanelPure;
