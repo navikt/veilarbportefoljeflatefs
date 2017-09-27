@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export, no-undef */
 import * as queryString from 'query-string';
 import history, { basename } from '../history';
+import {AktiviteterModell} from "../model-interfaces";
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array((end - start) + ((inclusive) ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -62,7 +63,7 @@ export function sendBrukerTilUrl(url) {
 export function ytelseFilterErAktiv(ytelse) {
     return !!ytelse;
 }
-export function nesteUtlopsdatoEllerNull(utlopsdatoer): Date | null {
+export function nesteUtlopsdatoEllerNull(utlopsdatoer?: AktiviteterModell): Date | null {
     if (!utlopsdatoer) {
         return null;
     }
