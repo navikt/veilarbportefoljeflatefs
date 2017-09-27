@@ -31,7 +31,7 @@ class Hybridpanel extends React.Component<HybridpanelProps, HybridpanelState> {
     handleClick(event) {
         event.preventDefault();
         this.setState({ apen: !this.state.apen });
-        if(this.props.onClick) {
+        if (this.props.onClick) {
             this.props.onClick(event);
         }
     }
