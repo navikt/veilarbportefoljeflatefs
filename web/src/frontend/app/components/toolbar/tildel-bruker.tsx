@@ -35,7 +35,7 @@ function TildelBruker({ skalSkjules, tildelTilVeileder, veiledere, brukere }: Ti
     };
 
     return (
-        <Dropdown name="Tildel bruker" className="dropdown--fixed dropdown--toolbar" disabled={!aktiv}>
+        <Dropdown name="Tildel veileder" className="dropdown--fixed dropdown--toolbar" disabled={!aktiv}>
             <SokFilter
                 label="Tildel brukere"
                 placeholder="Tildel brukere"
