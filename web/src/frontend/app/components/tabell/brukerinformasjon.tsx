@@ -21,14 +21,14 @@ const brukerNavn = (bruker, enhetId) => (
     <a
         href={`https://${window.location.hostname}` +
                 `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
-        className={classnames('lenke lenke--frittstaende brukerinformasjon__navn col col-xs-2',
+        className={classnames('lenke lenke--frittstaende brukerinformasjon__navn col col-xs-3',
                 { arbeidslistebruker: bruker.arbeidsliste.arbeidslisteAktiv })}
     >
         {settSammenNavn(bruker)}
     </a>
 );
 
-const checkBox = (bruker, settMarkert) => (<div className="skjema__input">
+const checkBox = (bruker, settMarkert) => (<span className="skjema__input checkboks__wrapper">
     <input
         className="checkboks"
         id={`checkbox-${bruker.fnr}`}
@@ -37,7 +37,7 @@ const checkBox = (bruker, settMarkert) => (<div className="skjema__input">
         onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
     />
     <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`} />
-</div>);
+</span>);
 
 function Brukerinformasjon({ bruker, enhetId, settMarkert }: BrukerinformasjonProps) {
     return (
