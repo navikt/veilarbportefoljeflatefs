@@ -1,5 +1,6 @@
-import React, { PropTypes as PT } from 'react';
-import classnames from 'classnames';
+import * as React from 'react';
+import * as classnames from 'classnames';
+import {BrukerModell} from '../../model-interfaces';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -32,7 +33,13 @@ const checkBox = (bruker, settMarkert) => (<div className="skjema__input">
     <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`} />
 </div>);
 
-function Brukerinformasjon({ bruker, enhetId, settMarkert }) {
+interface BrukerinformasjonProps {
+    bruker: BrukerModell;
+    settMarkert: (fnr: string, markert: boolean) => void;
+    enhetId: string;
+}
+
+function Brukerinformasjon({ bruker, enhetId, settMarkert }: BrukerinformasjonProps) {
     return (
         <div className="brukerinformasjon__wrapper">
             {checkBox(bruker, settMarkert)}
@@ -41,11 +48,5 @@ function Brukerinformasjon({ bruker, enhetId, settMarkert }) {
         </div>
     );
 }
-
-Brukerinformasjon.propTypes = {
-    bruker: PT.object.isRequired,
-    settMarkert: PT.func.isRequired,
-    enhetId: PT.string.isRequired
-};
 
 export default Brukerinformasjon;
