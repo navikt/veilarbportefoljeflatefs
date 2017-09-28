@@ -42,6 +42,7 @@
     padding: 0;
 
     .enhet-brukere-panel {
+        display: flex;
         list-style: none;
         border-bottom: 1px solid #b7b1a9;
         .hybridPanel__hode, .panel_hode {
@@ -72,7 +73,6 @@
             }
             .veilederinformasjon__wrapper {
                 display:inline-block;
-                margin-left:4rem;
 
                 .veilederinformasjon__navn {
                     width: 10rem;
@@ -144,5 +144,9 @@
 }
 
 .checkboks + label {
-    min-height: 10px;
+    min-height: 13px;
+}
+
+.checkboks__wrapper {
+    float: left;
 }
