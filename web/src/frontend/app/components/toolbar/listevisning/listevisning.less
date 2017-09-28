@@ -7,3 +7,15 @@
     height: 2rem;
     width: 3rem;
 }
+
+.skjemaelement__input:disabled {
+    + label {
+        cursor: default;
+        &::before {
+            background-color: @grayIcon;
+            border-color: @grayIcon;
+        }
+    }
+}
+
+

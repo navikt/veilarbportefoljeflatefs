@@ -40,7 +40,7 @@ function Veilederinfo({ veileder = null, bruker }: VeilederinfoProps) {
 interface EnhetBrukerpanelProps {
     bruker: any;
     settMarkert: (bruker: string, markert: boolean) => void;
-    enhetId?: string;
+    enhetId: string;
     filtervalg: FiltervalgModell;
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];

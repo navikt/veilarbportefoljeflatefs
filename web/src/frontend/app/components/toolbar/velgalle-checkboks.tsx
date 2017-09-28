@@ -1,10 +1,17 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Checkbox } from 'nav-frontend-skjema';
 import { markerAlleBrukere } from './../../ducks/portefolje';
 
-function VelgalleCheckboks({ skalSkjules, disabled, markerAlle, alleMarkert }) {
+interface VelgalleCheckboksProps {
+    skalSkjules: boolean;
+    disabled: boolean;
+    alleMarkert: boolean;
+    markerAlle: (markert: boolean) => void;
+}
+
+function VelgalleCheckboks({ skalSkjules, disabled, markerAlle, alleMarkert }: VelgalleCheckboksProps) {
     if (skalSkjules) {
         return null;
     }
@@ -20,13 +27,6 @@ function VelgalleCheckboks({ skalSkjules, disabled, markerAlle, alleMarkert }) {
         />
     );
 }
-
-VelgalleCheckboks.propTypes = {
-    skalSkjules: PT.bool.isRequired,
-    disabled: PT.bool.isRequired,
-    alleMarkert: PT.bool.isRequired,
-    markerAlle: PT.func.isRequired
-};
 
 const mapStateToProps = (state) => {
     const brukere = state.portefolje.data.brukere;
