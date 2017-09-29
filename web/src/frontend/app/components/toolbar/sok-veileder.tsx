@@ -53,8 +53,7 @@ function SokVeilederRenderer({ data = [], filtervalg, onSubmit, ...props }: SokV
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe];
-
+    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || 'filtrering';
     return ({
         veiledere: state.veiledere,
         filtervalg: state[stateSlice],

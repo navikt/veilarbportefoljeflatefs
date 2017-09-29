@@ -27,7 +27,7 @@ const Toolbar = ({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenV
                 visArbeidslisteModal={false}
                 visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
             />
-            <SokVeilder veileder={{}} filtergruppe={filtergruppe} skalVises={sokVeilederSkalVises} />
+            <SokVeilder veileder={{}} filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe} skalVises={sokVeilederSkalVises} />
         </div>
         <div className="toolbar__element toolbar__midten toolbar--skille-mellom-elementer">
             <DiagramTabellToggle filtergruppe={filtergruppe} />
