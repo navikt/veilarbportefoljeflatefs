@@ -8,8 +8,8 @@ import FilterKonstanter, {
 import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg} from '../ducks/filtrering';
 import {filtervalgLabelShape, veilederShape} from '../proptype-shapes';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne, ListevisningState} from "../ducks/ui/listevisning";
-import * as classNames from "classnames";
+import {Kolonne, ListevisningState} from '../ducks/ui/listevisning';
+import * as classNames from 'classnames';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
