@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { FormEvent } from 'react';
 import VelgalleCheckboks from './velgalle-checkboks';
-import Tildelbruker from './tildel-bruker';
+import TildelVeileder from './tildel-veileder';
 import LeggTilArbeidsliste from './legg-til-arbeidsliste';
 import SokVeilder from './sok-veileder';
 import DiagramTabellToggle from './diagram-tabell-toggle';
@@ -21,7 +20,7 @@ const Toolbar = ({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenV
     <section className="toolbar blokk-xs">
         <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
             <VelgalleCheckboks />
-            <Tildelbruker veileder={{}} filtergruppe={filtergruppe} />
+            <TildelVeileder veileder={{}} filtergruppe={filtergruppe} />
             <Listevisning filtergruppe={filtergruppe} skalVises={filtergruppe === ListevisningType.enhetensOversikt}/>
             <LeggTilArbeidsliste
                 visArbeidslisteModal={false}
