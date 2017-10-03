@@ -8,7 +8,7 @@ import DiagramTabellToggle from './diagram-tabell-toggle';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import {VeilederModell} from "../../model-interfaces";
+import {VeilederModell} from '../../model-interfaces';
 
 interface ToolbarProps {
     filtergruppe: ListevisningType;
