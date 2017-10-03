@@ -1,8 +1,10 @@
 .enhet-listehode {
-    border-bottom: 1px solid #b7b1a9;
+    border-bottom: 1px solid @navGra40;
 
     .enhet-overskrifter {
-        border-bottom: 1px solid #b7b1a9;
+        border-top: 1px solid @navGra40
+    ;
+        border-bottom: 1px solid @navGra40;
         padding-bottom: 5px;
         padding-top: 5px;
 
@@ -27,6 +29,7 @@
     .enhet-sortering-header__wrapper {
         padding-bottom: 5px;
         padding-top: 5px;
+        border-bottom: 1px solid @navGra40;
 
         .sortering-header__etternavn {
             margin-left: 2.6rem;
@@ -47,6 +50,9 @@
         .header__veilederident {
             margin-left: 3rem;
         }
+        .valgt-sortering {
+            font-weight: bold;
+        }
     }
 }
 
@@ -56,7 +62,7 @@
 
     .enhet-brukere-panel {
         list-style: none;
-        border-bottom: 1px solid #b7b1a9;
+        border-bottom: 1px solid @navGra40;
         .hybridPanel__hode, .panel_hode {
             padding: 10px 10px 10px 10px;
 
