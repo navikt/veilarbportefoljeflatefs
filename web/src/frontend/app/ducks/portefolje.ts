@@ -266,7 +266,8 @@ export function markerAlleBrukere(markert) {
     });
 }
 
-export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder: VeilederModell = {}) {
+export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder) {
+    const veilederIdent = gjeldendeVeileder ? gjeldendeVeileder.ident : undefined;
     return (dispatch, getState) => {
         dispatch({ type: TILDEL_VEILEDER_RELOAD });
         dispatch({ type: PENDING });
@@ -300,7 +301,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                 // Venter litt slik at indeks kan komme i sync
                 setTimeout(() => {
                     const side = filtergruppe === 'veileder' ? filtergruppe : 'enhet';
-                    const ident = { ident: gjeldendeVeileder.ident || getState().enheter.ident };
+                    const ident = { ident: veilederIdent || getState().enheter.ident };
                     oppdaterPortefolje(getState, dispatch, side, ident);
                 }, 2000);
             })
@@ -308,7 +309,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                 // Venter litt slik at indeks kan komme i sync
                 setTimeout(() => {
                     const enhet = getState().enheter.valgtEnhet.enhet.enhetId;
-                    hentStatusTall(enhet)(dispatch);
+                    hentStatusTall(enhet, veilederIdent)(dispatch);
                 }, 2000);
             });
     };
