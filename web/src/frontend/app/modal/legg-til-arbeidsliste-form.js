@@ -153,7 +153,7 @@ function oppdaterState(res, liste, innloggetVeileder, dispatch) {
     }
 
     leggTilStatustall('minArbeidsliste', brukereOK.length)(dispatch);
-    return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch, innloggetVeileder)(dispatch);
+    return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
 
 const mapDispatchToProps = () => ({
