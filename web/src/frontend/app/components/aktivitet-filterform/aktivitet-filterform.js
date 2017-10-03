@@ -1,7 +1,7 @@
 import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import {FormattedMessage} from "react-intl";
+import { FormattedMessage } from 'react-intl';
 
 function reset(change, alleValg) {
     return () => {
