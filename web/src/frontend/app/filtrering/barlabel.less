@@ -40,7 +40,7 @@
     &__barface {
         position: absolute;
         display: block;
-        background-color: @navLysBlaLighten60;
+        background-color: @navBlaLighten60;
         height: 1.125rem;
         border-radius: 1rem;
         transition: width cubic-bezier(0.4, 0, 0.2, 1) 1337ms;
@@ -48,30 +48,32 @@
         top: 0;
     }
     &.venterPaSvarFraNAV .barlabel__barface {
-        background-color: @navLillaLighten20;
+        background-color: @navLillaLighten60;
     }
     &.venterPaSvarFraBruker .barlabel__barface {
-        background-color: @navLillaLighten40;
+        background-color: @navLimeGronnLighten60;
     }
     &.utlopteAktiviteter .barlabel__barface {
-        background-color: @navGronnLighten20;
+        background-color: @navGra20;
     }
     &.ikkeIAvtaltAktivitet .barlabel__barface {
-        background-color: @navGronnLighten40;
+        background-color: @navGra20;
     }
     &.iAvtaltAktivitet .barlabel__barface {
-        background-color: @navGronnLighten60;
+        background-color: @navDypBla;
     }
     &.inaktiveBrukere .barlabel__barface {
-        background-color: @navLysBlaDarken60;
+        background-color: @navGra20;
     }
     &.minArbeidsliste .barlabel__barface {
-        background-color: @navLimeGronnLighten40;
+        background-color: @navGra20;
     }
 }
 
 .forsteBarlabelIGruppe {
-    margin-top: 0.6rem;
+    padding-top: 0.3rem;
+    border-top: 1px solid #eee;
+    margin-top: 0.3rem;
 }
 
 .minArbeidsliste__tittel {
