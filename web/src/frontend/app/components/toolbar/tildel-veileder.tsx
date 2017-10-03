@@ -8,14 +8,14 @@ import {VeiledereState} from '../../ducks/veiledere';
 import {BrukerModell} from '../../model-interfaces';
 import {AppState} from '../../reducer';
 
-interface TildelBrukerProps {
+interface TildelVeilederProps {
     skalSkjules: boolean;
     tildelTilVeileder: (tilordninger: any[], ident: string) => void;
     veiledere: VeiledereState;
     brukere: BrukerModell[];
 }
 
-function TildelBruker({ skalSkjules, tildelTilVeileder, veiledere, brukere }: TildelBrukerProps) {
+function TildelVeileder({ skalSkjules, tildelTilVeileder, veiledere, brukere }: TildelVeilederProps) {
     if (skalSkjules) {
         return null;
     }
@@ -35,24 +35,24 @@ function TildelBruker({ skalSkjules, tildelTilVeileder, veiledere, brukere }: Ti
     };
 
     return (
-        <Dropdown name="Tildel bruker" className="dropdown--fixed dropdown--toolbar" disabled={!aktiv}>
+        <Dropdown name="Tildel veileder" className="dropdown--fixed dropdown--toolbar" disabled={!aktiv}>
             <SokFilter
-                label="Tildel brukere"
-                placeholder="Tildel brukere"
+                label="Tildel veileder"
+                placeholder="Tildel veileder"
                 data={veiledere.data.veilederListe}
             >
-                <TildelBrukerRenderer onSubmit={onSubmit} />
+                <TildelVeilederRenderer onSubmit={onSubmit} />
             </SokFilter>
         </Dropdown>
     );
 }
 
-interface TildelBrukerRendererProps {
+interface TildelVeilederRendererProps {
     onSubmit: (_: any, ident: string) => void;
     data?: any[];
 }
 
-function TildelBrukerRenderer({ onSubmit, data, ...props }: TildelBrukerRendererProps) {
+function TildelVeilederRenderer({ onSubmit, data, ...props }: TildelVeilederRendererProps) {
     const datamap = data!.reduce((acc, element) => ({ ...acc, [element.ident]: { label: element.navn } }), {});
     return (
         <RadioFilterform
@@ -75,4 +75,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     tildelTilVeileder: (tilordninger, tilVeileder) => dispatch(tildelVeileder(tilordninger, tilVeileder, ownProps.filtergruppe, ownProps.veileder))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TildelBruker);
+export default connect(mapStateToProps, mapDispatchToProps)(TildelVeileder);

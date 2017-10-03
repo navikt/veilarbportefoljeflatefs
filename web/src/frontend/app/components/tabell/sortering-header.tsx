@@ -20,7 +20,7 @@ function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekstId, ska
         <span className={classNames(`sortering-header__${sortering}`, className)}>
             <button
                 onClick={() => onClick(sortering)}
-                className={classNames('lenke lenke--frittstaende', { valgt: erValgt })}
+                className={classNames('lenke lenke--frittstaende', { valgt: erValgt }, {'valgt-sortering': erValgt})}
                 aria-pressed={erValgt}
                 aria-label={erValgt && rekkefolge !== 'ikke_satt' ?
                 rekkefolge : 'inaktiv'}

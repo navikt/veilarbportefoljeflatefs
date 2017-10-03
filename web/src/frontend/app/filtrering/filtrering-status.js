@@ -119,7 +119,7 @@ class FiltreringStatus extends Component {
                     antall={this.props.statustall.data.venterPaSvarFraNAV}
                     max={this.props.statustall.data.totalt}
                     barClassname="venterPaSvarFraNAV"
-                    firstInGroup
+                    firstInGroup={this.props.filtergruppe === 'enhet'}
                 />
                 <BarInput
                     id="venterPaSvarFraBruker"

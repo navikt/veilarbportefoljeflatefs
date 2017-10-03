@@ -9,6 +9,7 @@ import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg} from '../ducks/filt
 import {filtervalgLabelShape, veilederShape} from '../proptype-shapes';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne, ListevisningState} from '../ducks/ui/listevisning';
+import * as classNames from 'classnames';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -92,7 +93,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
     const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} harMuligMenIkkeValgtKolonne={false}/>;
 
     return (
-        <section className="filtrering-label-container blokk-s">
+        <section className={classNames('filtrering-label-container', {'blokk-s': (filterElementer.length > 0)})}>
             {filterElementer}
             {filterElementer.length >= 3 ? fjernAlle : null}
         </section>
