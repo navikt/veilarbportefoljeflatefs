@@ -13,11 +13,15 @@ const fm = (id) => <FormattedMessage id={id} />;
 interface VeilederinfoProps {
     bruker: any;
     veileder?: VeilederModell;
+    valgteKolonner: Kolonne[];
 }
 
-function Veilederinfo({ veileder = null, bruker }: VeilederinfoProps) {
+function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoProps) {
     const navn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
     const ident = bruker.veilederId || '';
+    if (!valgteKolonner.includes(Kolonne.VEILEDER)) {
+        return null;
+    }
     return (
         <div className="veilederinformasjon__wrapper">
             <div className="veilederinformasjon__navn">
@@ -58,7 +62,7 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
                     settMarkert={settMarkert}
                 />
                 <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} valgteKolonner={valgteKolonner} />
-                <Veilederinfo veileder={brukersVeileder} bruker={bruker} />
+                <Veilederinfo veileder={brukersVeileder} bruker={bruker} valgteKolonner={valgteKolonner}/>
                 <Etiketter bruker={bruker} />
             </div>
         </div>
