@@ -109,7 +109,6 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = 
     const sorteringfelt = state.portefolje.sorteringsfelt;
     const antall = DEFAULT_PAGINERING_STORRELSE;
     const nyeFiltervalg = state[nameToStateSliceMap[filtergruppe]];
-
     if (filtergruppe === 'enhet') {
         hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
         oppdaterAlternativer(dispatch, getState, ListevisningType.enhetensOversikt);

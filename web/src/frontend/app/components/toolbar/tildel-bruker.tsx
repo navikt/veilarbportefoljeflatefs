@@ -5,7 +5,7 @@ import Dropdown from './../dropdown/dropdown';
 import RadioFilterform from './../radio-filterform/radio-filterform';
 import { tildelVeileder } from './../../ducks/portefolje';
 import {VeiledereState} from '../../ducks/veiledere';
-import {BrukerModell} from '../../model-interfaces';
+import {BrukerModell, VeilederModell} from '../../model-interfaces';
 import {AppState} from '../../reducer';
 
 interface TildelBrukerProps {
@@ -19,7 +19,6 @@ function TildelBruker({ skalSkjules, tildelTilVeileder, veiledere, brukere }: Ti
     if (skalSkjules) {
         return null;
     }
-
     const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
 
@@ -71,8 +70,8 @@ const mapStateToProps = ({ veiledere, enheter, portefolje, ui }: AppState) => ({
     veileder: enheter.valgtVeileder,
     skalSkjules: ui.side.side === 'veiledere'
 });
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    tildelTilVeileder: (tilordninger, tilVeileder) => dispatch(tildelVeileder(tilordninger, tilVeileder, ownProps.filtergruppe, ownProps.veileder))
+const mapDispatchToProps = (dispatch, ownProps, gjeldendeVeileder) => ({
+    tildelTilVeileder: (tilordninger, tilVeileder) => dispatch(tildelVeileder(tilordninger, tilVeileder, ownProps.filtergruppe, ownProps.gjeldendeVeileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TildelBruker);

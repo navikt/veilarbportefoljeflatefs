@@ -106,6 +106,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+        console.log('Gjeldedne', gjeldendeVeileder);
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, { status: tilordningerStatus }]}>
@@ -127,6 +128,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                             fra,
                             antall
                         )}
+                        gjeldendeVeileder={gjeldendeVeileder}
                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                         sokVeilederSkalVises={false}
                     />
