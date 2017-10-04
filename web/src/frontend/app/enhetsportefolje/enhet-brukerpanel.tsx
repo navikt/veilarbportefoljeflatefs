@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Brukerinformasjon from '../components/tabell/brukerinformasjon';
 import EnhetDatokolonner from './enhet-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
-import {filtervalgShape, veilederShape} from '../proptype-shapes';
+import { filtervalgShape, veilederShape } from '../proptype-shapes';
 import Etikett from '../components/tabell/etikett';
 import {FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 
-const fm = (id) => <FormattedMessage id={id}/>;
+const fm = (id) => <FormattedMessage id={id} />;
 
 interface VeilederinfoProps {
     bruker: any;
@@ -16,7 +16,7 @@ interface VeilederinfoProps {
     valgteKolonner: Kolonne[];
 }
 
-function Veilederinfo({veileder = null, bruker, valgteKolonner}: VeilederinfoProps) {
+function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoProps) {
     const navn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
     const ident = bruker.veilederId || '';
     if (!(valgteKolonner.includes(Kolonne.VEILEDER) || valgteKolonner.includes(Kolonne.NAVIDENT))) {
@@ -24,7 +24,7 @@ function Veilederinfo({veileder = null, bruker, valgteKolonner}: VeilederinfoPro
     }
     return (
         <div className="veilederinformasjon__wrapper">
-            {valgteKolonner.includes(Kolonne.VEILEDER) &&
+            { valgteKolonner.includes(Kolonne.VEILEDER) &&
             <div className="veilederinformasjon__navn">
                 {
                     bruker.veilederId ?
@@ -36,8 +36,8 @@ function Veilederinfo({veileder = null, bruker, valgteKolonner}: VeilederinfoPro
                             skalVises
                         />
                 }
-            </div>}
-            {valgteKolonner.includes(Kolonne.NAVIDENT) &&
+            </div> }
+            { valgteKolonner.includes(Kolonne.NAVIDENT) &&
             <span className="veilederinfo__ident">{ident}</span>
             }
         </div>
@@ -53,8 +53,8 @@ interface EnhetBrukerpanelProps {
     valgteKolonner: Kolonne[];
 }
 
-function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner}: EnhetBrukerpanelProps) {
-    const {ytelse} = filtervalg;
+function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner }: EnhetBrukerpanelProps) {
+    const { ytelse } = filtervalg;
 
     return (
         <div className="panel_hode">
@@ -64,10 +64,9 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
                     enhetId={enhetId}
                     settMarkert={settMarkert}
                 />
-                <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}
-                                   valgteKolonner={valgteKolonner}/>
+                <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} valgteKolonner={valgteKolonner} />
                 <Veilederinfo veileder={brukersVeileder} bruker={bruker} valgteKolonner={valgteKolonner}/>
-                <Etiketter bruker={bruker}/>
+                <Etiketter bruker={bruker} />
             </div>
         </div>
     );
