@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Modal from 'nav-frontend-modal';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import {IntlMessage} from '../utils/intl-utils';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { IntlMessage } from '../utils/intl-utils';
 
 Modal.setAppElement('#applikasjon');
 
@@ -17,13 +17,13 @@ class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPor
     constructor(props) {
         super(props);
 
-        this.state = {isOpen: this.props.isOpen};
+        this.state = { isOpen: this.props.isOpen };
 
         this.lukkModal = this.lukkModal.bind(this);
     }
 
     lukkModal() {
-        this.setState({isOpen: false});
+        this.setState({ isOpen: false });
     }
 
     render() {
