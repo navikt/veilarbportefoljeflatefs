@@ -29,20 +29,28 @@ class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPor
     render() {
         return (
             <Modal
+                className="tom-portefolje-modal"
                 contentLabel="Enheten har ingen brukere"
                 isOpen={this.state.isOpen}
                 onRequestClose={this.lukkModal}
-                closeButton={false}
+                closeButton
             >
-                <Innholdstittel tag="h1" style={{ paddingRight: '3rem' }}>
-                    <IntlMessage id="modal.tittel" />
-                </Innholdstittel>
-                <Normaltekst className="blokk-s">
-                    <IntlMessage id="modal.infotekst" />
-                </Normaltekst>
-                <button className="knapp knapp--hoved" onClick={this.lukkModal}>
-                    <IntlMessage id="modal.knapptekst" />
-                </button>
+                <div className="modal-header-wrapper">
+                    <header className="modal-header"/>
+                </div>
+                <div className="innhold">
+                    <Innholdstittel className="blokk-s" tag="h1" style={{fontWeight: 'bold'}}>
+                        <IntlMessage id="modal.tittel"/>
+                    </Innholdstittel>
+                    <Normaltekst className="blokk-s">
+                        <IntlMessage id="modal.infotekst"/>
+                    </Normaltekst>
+                </div>
+                <div className="modal-footer">
+                    <button className="knapp knapp--hoved" onClick={this.lukkModal}>
+                        <IntlMessage id="modal.knapptekst"/>
+                    </button>
+                </div>
             </Modal>
         );
     }
