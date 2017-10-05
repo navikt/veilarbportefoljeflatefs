@@ -2,6 +2,7 @@ import * as React from 'react';
 import Modal from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
+import {AlertStripeAdvarsel} from "nav-frontend-alertstriper";
 
 Modal.setAppElement('#applikasjon');
 
@@ -42,9 +43,9 @@ class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPor
                     <Innholdstittel className="blokk-s" tag="h1" style={{fontWeight: 'bold'}}>
                         <IntlMessage id="modal.tittel"/>
                     </Innholdstittel>
-                    <Normaltekst className="blokk-s">
+                    <AlertStripeAdvarsel className="blokk-s">
                         <IntlMessage id="modal.infotekst"/>
-                    </Normaltekst>
+                    </AlertStripeAdvarsel>
                 </div>
                 <div className="modal-footer">
                     <button className="knapp knapp--hoved" onClick={this.lukkModal}>
