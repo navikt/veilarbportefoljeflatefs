@@ -127,6 +127,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                             fra,
                             antall
                         )}
+                        gjeldendeVeileder={gjeldendeVeileder}
                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                         sokVeilederSkalVises={false}
                     />

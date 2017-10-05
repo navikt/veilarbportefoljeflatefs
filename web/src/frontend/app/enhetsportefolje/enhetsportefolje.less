@@ -1,11 +1,16 @@
 .enhet-listehode {
+    border-bottom: 1px solid @navGra40;
+
     .enhet-overskrifter {
         display: flex;
 
+        border-top: 1px solid @navGra40;
+        border-bottom: 1px solid @navGra40;
         padding-bottom: 5px;
         padding-top: 5px;
         padding-left: 32px;
         height: 2rem;
+        display: flex;
 
         .listeoverskrift {
             font-weight: bold;
@@ -24,17 +29,29 @@
 
         padding-bottom: 5px;
         padding-top: 5px;
-        padding-left: 32px;
-        height: 2rem;
-
-        border-bottom: 1px solid #b7b1a9;
-        border-top: 1px solid #b7b1a9;
+        border-bottom: 1px solid @navGra40;
 
         .sortering-header__etternavn {
             .lenke {
                 padding-top: 1px; //For å aligne med tekst etter lenken
             }
         }
+        .sortering-header__fodselsnummer {
+            margin-left: 5.2rem;
+        }
+        .sortering-header__dato {
+            margin-left: 2.8rem;
+        }
+        .header__veiledernavn {
+            margin-left: 3rem;
+        }
+        .header__veilederident {
+            margin-left: 3rem;
+        }
+        .valgt-sortering {
+            font-weight: bold;
+        }
+    }
     }
 }
 
@@ -48,7 +65,7 @@
     .enhet-brukere-panel {
         display: flex;
         list-style: none;
-        border-bottom: 1px solid #b7b1a9;
+        border-bottom: 1px solid @navGra40;
         .hybridPanel__hode, .panel_hode {
             padding: 10px 10px 10px 10px;
 

@@ -29,26 +29,27 @@ function EnhetDatokolonner({ bruker, ytelse= '', filtervalg, valgteKolonner }: E
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
 
+    const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     return (
         <span>
             <UkeKolonne
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
-                skalVises={ytelse === ytelsevalg.DAGPENGER || ytelse === ytelsevalg.ORDINARE_DAGPENGER}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalg.DAGPENGER || ytelse === ytelsevalg.ORDINARE_DAGPENGER)}
             />
             <UkeKolonne
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
-                skalVises={ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING)}
             />
             <UkeKolonne
                 ukerIgjen={bruker.aapmaxtidUke}
                 minVal={12}
-                skalVises={ytelse === ytelsevalg.AAP_MAXTID}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalg.AAP_MAXTID)}
             />
             <DatoKolonne
                 dato={utlopsDato}
-                skalVises={[ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                skalVises={ytelseErValgtKolonne && [ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse)}
             />
             <DatoKolonne
                 dato={venterPaSvarFraBruker}

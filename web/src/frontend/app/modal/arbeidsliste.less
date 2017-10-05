@@ -89,20 +89,31 @@
             }
         }
 
-.arbeidsliste--modal-redigering {
-    color: @gray-inactive;
-    text-align: left;
-    font-style: italic;
-    font-size: smaller;
-    margin-bottom: 0;
-}
+        .arbeidsliste--modal-redigering {
+            color: @gray-inactive;
+            text-align: left;
+            font-style: italic;
+            font-size: smaller;
+            margin-bottom: 0;
+        }
 
-.arbeidsliste--rediger-lenke {
-    margin-left: 1rem;
-}
+        .arbeidsliste--rediger-lenke {
+            margin-left: 1rem;
+        }
+
+    }
+
+    .innhold {
+        padding: 1.7rem 2rem;
+    }
+
+    .modal-footer {
+        border-top: 1px solid #B7B1A9;
+        padding: 1.1rem 2rem;
 
     }
 }
+
 .modal.arbeidsliste-modal {
     position: relative;
     border: 1px solid #B7B1A9;
@@ -111,6 +122,12 @@
     max-width: 45rem;
     padding: 0;
     width: 100%;
+}
+
+.modal.tom-portefolje-modal {
+    padding: 0;
+    width: 50%;
+    background-color: @grayBackground;
 }
 
 .modal_overflow {
