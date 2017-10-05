@@ -34,7 +34,7 @@ export interface FiltervalgModell {
 }
 
 export interface EnhetModell {
-    enhetId?: string;
+    enhetId: string;
     navn?: string;
 }
 

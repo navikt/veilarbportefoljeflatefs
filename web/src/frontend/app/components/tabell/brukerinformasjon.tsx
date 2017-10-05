@@ -39,6 +39,12 @@ const checkBox = (bruker, settMarkert) => (<span className="skjema__input checkb
     <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`} />
 </span>);
 
+interface BrukerinformasjonProps {
+    bruker: BrukerModell;
+    settMarkert: (fnr: string, markert: boolean) => void;
+    enhetId: string;
+}
+
 function Brukerinformasjon({ bruker, enhetId, settMarkert }: BrukerinformasjonProps) {
     return (
         <span>

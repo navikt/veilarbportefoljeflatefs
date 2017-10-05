@@ -9,19 +9,26 @@ import {Kolonne} from '../ducks/ui/listevisning';
 interface VeilederinfoProps {
     bruker: any;
     veileder?: VeilederModell;
+    valgteKolonner: Kolonne[];
 }
 
-function Veilederinfo({ veileder = null, bruker }: VeilederinfoProps) {
+function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoProps) {
     const navn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
     const ident = bruker.veilederId || '';
+    if (!(valgteKolonner.includes(Kolonne.VEILEDER) || valgteKolonner.includes(Kolonne.NAVIDENT))) {
+        return null;
+    }
     return (
         <div className="veilederinformasjon__wrapper col col-xs-2">
+            { valgteKolonner.includes(Kolonne.VEILEDER) &&
             <div className="veilederinformasjon__navn">
                 {
                     bruker.veilederId ? <span>{navn}</span> : null
                 }
-            </div>
+            </div> }
+            { valgteKolonner.includes(Kolonne.NAVIDENT) &&
             <span className="veilederinfo__ident">{ident}</span>
+            }
         </div>
     );
 }
@@ -29,7 +36,7 @@ function Veilederinfo({ veileder = null, bruker }: VeilederinfoProps) {
 interface EnhetBrukerpanelProps {
     bruker: any;
     settMarkert: (bruker: string, markert: boolean) => void;
-    enhetId?: string;
+    enhetId: string;
     filtervalg: FiltervalgModell;
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];
@@ -46,7 +53,7 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
                     settMarkert={settMarkert}
                 />
                 <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} valgteKolonner={valgteKolonner} />
-                <Veilederinfo veileder={brukersVeileder} bruker={bruker} />
+                <Veilederinfo veileder={brukersVeileder} bruker={bruker} valgteKolonner={valgteKolonner}/>
                 <Etiketter bruker={bruker} />
         </div>
     );

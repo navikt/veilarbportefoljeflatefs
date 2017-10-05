@@ -7,9 +7,17 @@ const cls = (className, type) => classNames('tabelletikett', className, {
     [`tabelletikett--${type}`]: !!type
 });
 
+export type TabelletiketterTypes =
+    | 'nybruker'
+    | 'egen-ansatt'
+    | 'diskresjonskode'
+    | 'sikkerhetstiltak'
+    | 'doed';
+
 interface TabelletiketterProps {
     className?: string;
-    type: EtikettType;
+    type?: TabelletiketterTypes;
+
 }
 
 function Tabelletiketter({ className, type, ...props }: TabelletiketterProps) {

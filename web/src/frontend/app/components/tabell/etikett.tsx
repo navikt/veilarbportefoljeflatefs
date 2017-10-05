@@ -1,14 +1,13 @@
 import * as React from 'react';
-import Tabelletiketter from '../tabelletiketter/tabelletiketter';
-import {EtikettType} from '../../model-interfaces';
+import Tabelletiketter, {TabelletiketterTypes} from '../tabelletiketter/tabelletiketter';
 
 interface EtikettProps {
-    type: EtikettType;
+    type: TabelletiketterTypes;
     child: React.ReactChild;
     skalVises: boolean;
 }
 
-export function Etikett({ type, child, skalVises }: EtikettProps) {
+function Etikett({ type, child, skalVises }: EtikettProps) {
     if (!skalVises) {
         return null;
     }
@@ -18,4 +17,5 @@ export function Etikett({ type, child, skalVises }: EtikettProps) {
         </Tabelletiketter>
     );
 }
+
 export default Etikett;

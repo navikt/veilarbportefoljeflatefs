@@ -1,10 +1,19 @@
-import React, { PropTypes as PT, Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
 import { skjulModal, visModal } from '../../ducks/modal';
+import {PortefoljeState} from '../../ducks/portefolje';
 
-class LeggTilArbeidsliste extends Component {
+interface LeggTilArbeidslisteProps {
+    portefolje: PortefoljeState;
+    skalSkjules: boolean;
+    visModal?: boolean;
+    visArbeidslisteModal: () => void;
+    visesAnnenVeiledersPortefolje: boolean;
+}
+
+class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     constructor(props) {
         super(props);
 
@@ -38,7 +47,7 @@ class LeggTilArbeidsliste extends Component {
     render() {
         const { skalSkjules, portefolje } = this.props;
         const valgteBrukere = portefolje.data.brukere.filter((bruker) => bruker.markert === true);
-        const modalSkalVises = this.props.visModal;
+        const modalSkalVises = this.props.visModal === true;
 
         if (skalSkjules) {
             return null;
@@ -51,19 +60,6 @@ class LeggTilArbeidsliste extends Component {
         );
     }
 }
-
-LeggTilArbeidsliste.propTypes = {
-    portefolje: PT.object.isRequired,
-    skalSkjules: PT.bool.isRequired,
-    visModal: PT.bool.isRequired,
-    visArbeidslisteModal: PT.func.isRequired,
-    visesAnnenVeiledersPortefolje: PT.bool.isRequired
-};
-
-LeggTilArbeidsliste.defaultProps = {
-    valgteBrukere: [],
-    visModal: false
-};
 
 const mapStateToProps = (state) => ({
     skalSkjules: (state.ui.side.side || '') !== 'veilederoversikt',
