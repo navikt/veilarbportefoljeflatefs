@@ -70,31 +70,23 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer): Date | null {
         .map((key) => utlopsdatoer[key])
         .filter((value) => !!value)
         .map((dateString) => new Date(dateString))
+        .filter((date) => date.getTime() >= Date.now())
         .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
 }
-export function utledValgtAktivitetstype(aktiviteterFiltervalg) {
+export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFiltervalg) {
     if (!aktiviteterFiltervalg || aktiviteterFiltervalg === {}) {
         return null;
     }
-    const feltSomErJA = Object.entries(aktiviteterFiltervalg)
+    return Object.entries(aktiviteterFiltervalg)
         .filter(([_, value]) => value === 'JA')
-        .map(([key, _]) => key);
-
-    return feltSomErJA.length === 1 ? feltSomErJA[0].toLowerCase() : null;
-}
-
-export function utlopsdatoForAktivitetEllerNull(aktiviteter, valgtAktivitetstype) {
-    if (!aktiviteter || !valgtAktivitetstype) {
-        return null;
-    }
-    return aktiviteter[valgtAktivitetstype];
+        .map(([key, _]) => key.toLowerCase())
+        .reduce((obj, key) => {
+            obj[key] = brukerAktiviteter[key];
+            return obj;
+        }, {});
 }
 
 export function erDev() {
     const host: string = window.location.host;
     return host.includes('localhost') || host.includes('127.0.0.1');
-}
-
-export function lagAktiviteterSorteringsfelt(aktivitetstype) {
-    return `aktivitet_${aktivitetstype}`;
 }
