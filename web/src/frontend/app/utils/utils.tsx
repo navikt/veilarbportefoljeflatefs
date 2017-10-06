@@ -74,7 +74,7 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer): Date | null {
         .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
 }
 export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFiltervalg) {
-    if (!aktiviteterFiltervalg || aktiviteterFiltervalg === {} || !brukerAktiviteter || brukerAktiviteter === {}) {
+    if (!aktiviteterFiltervalg || Object.keys(aktiviteterFiltervalg).length === 0 || !brukerAktiviteter || Object.keys(aktiviteterFiltervalg).length === 0) {
         return null;
     }
     return Object.entries(aktiviteterFiltervalg)

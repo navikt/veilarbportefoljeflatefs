@@ -15,7 +15,7 @@ import {
 
 function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt }) {
     const ytelseUtlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
-    const harValgteAktivitetstyper = filtervalg.aktiviteter ? filtervalg.aktiviteter !== {} : false;
+    const harValgteAktivitetstyper = filtervalg.aktiviteter ? Object.keys(filtervalg.aktiviteter).length > 0 : false;
 
     return (
         <div className="minoversikt-listehode">

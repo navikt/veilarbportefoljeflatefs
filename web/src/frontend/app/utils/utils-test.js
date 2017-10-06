@@ -42,7 +42,7 @@ describe('Date utils', () => {
         });
         it('skal returnere null om objekter er tomt eller null', () => {
             expect(utledValgteAktivitetsTyper(null, null)).to.be.a('null');
-            expect(utledValgteAktivitetsTyper(null, {})).to.be.a('null');
+            expect(utledValgteAktivitetsTyper({}, {})).to.be.a('null');
         });
         it('skal returnere null dersom ingen har status JA', () => {
             const aktivitetFiltervalg = { a1: 'NEI', a2: 'NA', a3: 'NA' };
