@@ -72,7 +72,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                             key={`aktivitet-${aktivitetkey}`}
                             label={`${FilterKonstanter[key][aktivitetkey]}: ${aktivitetvalue}`}
                             slettFilter={() => slettEnkelt(key, aktivitetkey)}
-                            harMuligMenIkkeValgtKolonne={muligMenIkkeValgt}
+                            harMuligMenIkkeValgtKolonne={muligMenIkkeValgt && aktivitetvalue === AktiviteterValg.JA}
                         />
                     ));
             } else if (value) {

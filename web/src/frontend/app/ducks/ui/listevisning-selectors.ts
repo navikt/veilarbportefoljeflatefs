@@ -27,7 +27,7 @@ function addHvis(kolonne: Kolonne, add: boolean): Kolonne[] {
 function harValgtMinstEnAktivitet(aktiviteter: FiltreringAktiviteterValg): boolean {
     return Object.entries(aktiviteter)
         .filter(([key, value]) => value === AktiviteterValg.JA)
-        .length === 1;
+        .length >= 1;
 }
 
 function harIkkeValgtTiltakstype(tiltakstyper: string[]): boolean {
