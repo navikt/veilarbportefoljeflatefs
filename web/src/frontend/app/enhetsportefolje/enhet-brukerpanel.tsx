@@ -46,7 +46,7 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
     const { ytelse } = filtervalg;
 
     return (
-        <div className="panel_hode brukerpanel">
+        <div className="brukerliste__panel">
                 <Brukerinformasjon
                     bruker={bruker}
                     enhetId={enhetId}
