@@ -1,6 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 import {
-    nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull
+    nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper
 } from '../utils/utils';
 import DatoKolonne from '../components/datokolonne';
 import UkeKolonne from '../components/ukekolonne';
@@ -16,7 +16,7 @@ import { filtervalgShape } from '../proptype-shapes';
 
 
 function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }) {
-    const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
+    const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
     return (
         <div className="datokolonner__wrapper">
@@ -60,8 +60,8 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }) {
                 skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
             />
             <DatoKolonne
-                dato={utlopsdatoForAktivitetEllerNull(bruker.aktiviteter, valgtAktivitetstype)}
-                skalVises={!!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0}
+                dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
+                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
             />
         </div>
     );
