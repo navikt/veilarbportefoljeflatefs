@@ -2,12 +2,6 @@ import * as React from 'react';
 import * as classnames from 'classnames';
 import {BrukerModell} from '../../model-interfaces';
 
-interface BrukerinformasjonProps {
-    bruker: BrukerModell;
-    settMarkert: (fnr: string, markert: boolean) => void;
-    enhetId?: string;
-}
-
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
         return '';
@@ -21,14 +15,14 @@ const brukerNavn = (bruker, enhetId) => (
     <a
         href={`https://${window.location.hostname}` +
                 `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
-        className={classnames('lenke lenke--frittstaende brukerinformasjon__navn col col-xs-3',
+        className={classnames('lenke lenke--frittstaende col col-xs-3 brukerliste--panel-checkbox-adjust',
                 { arbeidslistebruker: bruker.arbeidsliste.arbeidslisteAktiv })}
     >
         {settSammenNavn(bruker)}
     </a>
 );
 
-const checkBox = (bruker, settMarkert) => (<span className="skjema__input checkboks__wrapper">
+const checkBox = (bruker, settMarkert) => (<span className="skjema__input checkboks__wrapper brukerliste--checkbox-margin">
     <input
         className="checkboks"
         id={`checkbox-${bruker.fnr}`}

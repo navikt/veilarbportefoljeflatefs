@@ -32,7 +32,7 @@ function EnhetTabell({
     const {enhetId} = valgtEnhet.enhet;
     return (
 
-        <div className="enhet-liste__wrapper typo-undertekst">
+        <div className="brukerliste typo-undertekst">
             <EnhetListehode
                 sorteringsrekkefolge={sorteringsrekkefolge}
                 sorteringOnClick={settSorteringOgHentPortefolje}
@@ -40,9 +40,9 @@ function EnhetTabell({
                 sorteringsfelt={portefolje.sorteringsfelt}
                 valgteKolonner={valgteKolonner}
             />
-            <ul className="enhet-brukere-liste">
+            <ul className="brukerliste__body">
                 {brukere.map((bruker) =>
-                    <li key={bruker.fnr} className="enhet-brukere-panel">
+                    <li key={bruker.fnr} className="brukerliste--li">
                         <EnhetBrukerpanel
                             bruker={bruker}
                             enhetId={enhetId}
