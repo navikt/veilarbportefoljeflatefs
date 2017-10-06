@@ -160,7 +160,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     sortering="valgte_aktiviteter"
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === "valgte_aktiviteter"}
+                    erValgt={sorteringsfelt === 'valgte_aktiviteter'}
                     tekstId="portefolje.tabell.ddmmyy"
                     skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
                     className={'sortering-header__dato'}
