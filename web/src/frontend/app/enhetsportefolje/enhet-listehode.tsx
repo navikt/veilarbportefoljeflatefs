@@ -50,7 +50,7 @@ interface EnhetListehodeProps {
 
 function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: EnhetListehodeProps) {
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[filtervalg.ytelse];
-    const harValgteAktivitetstyper = filtervalg.aktiviteter ? filtervalg.aktiviteter !== {} : false;
+    const harValgteAktivitetstyper = filtervalg.aktiviteter ? Object.keys(filtervalg.aktiviteter).length > 0 : false;
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' ? 'ddmmyy' : 'uker';
 
     return (
