@@ -1,4 +1,4 @@
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import { Kolonne } from '../../../ducks/ui/listevisning';
 
 export interface Alternativ {
     tekstid: string;

@@ -7,7 +7,7 @@ import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from '../ducks/statustall';
 import { leggSideIUrl } from '../utils/utils';
-import {BrukerModell, VeilederModell} from '../model-interfaces';
+import { BrukerModell, VeilederModell } from '../model-interfaces';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
