@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
     ytelse
 } from './filter-konstanter';
-import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg} from '../ducks/filtrering';
-import {filtervalgLabelShape, veilederShape} from '../proptype-shapes';
-import {EnhetModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne, ListevisningState} from '../ducks/ui/listevisning';
+import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg } from '../ducks/filtrering';
+import { filtervalgLabelShape, veilederShape } from '../proptype-shapes';
+import { EnhetModell, FiltervalgModell } from '../model-interfaces';
+import { Kolonne, ListevisningState } from '../ducks/ui/listevisning';
 import * as classNames from 'classnames';
 
 interface FiltreringLabelContainerProps {

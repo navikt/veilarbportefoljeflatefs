@@ -3,13 +3,13 @@ import { reducer as formReducer } from 'react-redux-form-validation';
 import persistent from './utils/persistentReducer';
 import enheterReducer from './ducks/enheter';
 import ledeteksterReducer from './ducks/ledetekster';
-import portefoljeReducer, {PortefoljeState} from './ducks/portefolje';
+import portefoljeReducer, { PortefoljeState } from './ducks/portefolje';
 import pagineringReducer from './ducks/paginering';
 import sorteringReducer from './ducks/sortering';
-import veiledereReducer, {VeiledereState} from './ducks/veiledere';
+import veiledereReducer, { VeiledereState } from './ducks/veiledere';
 import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
 import veilederpagineringReducer from './ducks/veilederpaginering';
-import filtreringReducer, {FiltreringState, initialState} from './ducks/filtrering';
+import filtreringReducer, { FiltreringState, initialState } from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
@@ -18,7 +18,7 @@ import diagramReducer from './ducks/diagram';
 import sideReducer from './ducks/ui/side';
 import { slettCleanIUrl } from './utils/utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
-import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
+import enhetTiltakReducer, { EnhettiltakState } from './ducks/enhettiltak';
 import listevisningReducer, {
     ListevisningState,
     initialStateMinOversikt,

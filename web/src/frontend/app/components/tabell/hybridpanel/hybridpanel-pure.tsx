@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
 import Collapse from 'react-collapse';
-import {MouseEvent} from 'react';
+import { MouseEvent } from 'react';
 
 const cls = (className, props) => classnames('hybridPanel', className, {
     'hybridPanel--lukket': !props.apen,

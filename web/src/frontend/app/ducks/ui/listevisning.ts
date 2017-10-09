@@ -1,6 +1,6 @@
-import {Dispatch} from 'redux';
-import {AppState} from '../../reducer';
-import {selectMuligeAlternativer, selectValgteAlternativer, getMuligeKolonner} from './listevisning-selectors';
+import { Dispatch } from 'redux';
+import { AppState } from '../../reducer';
+import { selectMuligeAlternativer, selectValgteAlternativer, getMuligeKolonner } from './listevisning-selectors';
 
 enum ActionTypeKeys {
     VELG_ALTERNATIV = 'listevisning/velg_alternativ',

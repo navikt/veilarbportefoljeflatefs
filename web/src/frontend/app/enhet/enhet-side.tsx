@@ -10,12 +10,12 @@ import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { leggEnhetIUrl } from '../utils/utils';
 import { hentStatusTall } from './../ducks/statustall';
-import {EnhettiltakState, hentEnhetTiltak} from './../ducks/enhettiltak';
+import { EnhettiltakState, hentEnhetTiltak } from './../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
-import {AppState} from '../reducer';
-import {FiltervalgModell, StatustallModell, ValgtEnhetModell, VeilederModell} from '../model-interfaces';
-import {ListevisningState, ListevisningType} from '../ducks/ui/listevisning';
+import { AppState } from '../reducer';
+import { FiltervalgModell, StatustallModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
+import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 
 interface EnhetSideProps {
     valgtEnhet: ValgtEnhetModell;

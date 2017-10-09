@@ -9,8 +9,8 @@ import { ytelsevalg,
     I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
 import { filtervalgShape } from '../proptype-shapes';
 import DatoKolonne from '../components/datokolonne';
-import {FiltervalgModell} from '../model-interfaces';
-import {Kolonne} from '../ducks/ui/listevisning';
+import { FiltervalgModell } from '../model-interfaces';
+import { Kolonne } from '../ducks/ui/listevisning';
 import UkeKolonne from '../components/ukekolonne';
 
 interface EnhetDatokolonnerProps {
