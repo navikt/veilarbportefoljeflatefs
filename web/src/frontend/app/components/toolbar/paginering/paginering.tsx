@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {FormattedMessage} from 'react-intl';
-import {connect} from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import Chevron from 'nav-frontend-chevron';
 import * as classNames from 'classnames';
-import {DEFAULT_PAGINERING_STORRELSE} from './../../../konstanter';
+import { DEFAULT_PAGINERING_STORRELSE } from './../../../konstanter';
 import KnappPanel from './knapp-panel';
 
 const cls = (className) => classNames('paginering', className);

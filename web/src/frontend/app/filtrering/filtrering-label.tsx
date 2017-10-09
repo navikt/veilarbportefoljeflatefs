@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { lagConfig } from './filter-konstanter';
 import FilterIkon from '../components/filter-ikon';
-import {MouseEvent} from 'react';
+import { MouseEvent } from 'react';
 import * as classNames from 'classnames';
 
 interface FiltreringLabelProps {
