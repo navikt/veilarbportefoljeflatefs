@@ -83,7 +83,7 @@ function AktivitetFilterform(props) {
                     className="knapp knapp--standard knapp--mini"
                     onClick={reset(props.change, props.valg)}
                 >
-                Fjern valg
+                Fjern aktivitet-valg
             </button>
             </div>
         </form>

@@ -30,7 +30,15 @@ function Barlabel({ htmlFor, tekstId, antall, max, className }: BarlabelProps) {
             </span>
             &nbsp;
             <div className="barlabel__barwrapper">
+                {htmlFor === "minArbeidsliste" &&
+                <span className="text-hide" aria-live="polite" aria-atomic="true">
+                    Det er
+                    <Element className="barlabel__antall">{antall}</Element>
+                    {antall === 1 ? 'bruker' : 'brukere'} i Min arbeidsliste.
+                </span>}
+                {htmlFor !== "minArbeidsliste" &&
                 <Element className="barlabel__antall">{antall}</Element>
+                }
                 <div className="barlabel__bar">
                     <span className="barlabel__bartrack" aria-hidden="true" />
                     <span className="barlabel__barface" aria-hidden="true" style={style} />
