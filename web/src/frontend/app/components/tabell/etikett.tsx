@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Tabelletiketter, {TabelletiketterTypes} from '../tabelletiketter/tabelletiketter';
+import Tabelletiketter, { TabelletiketterTypes } from '../tabelletiketter/tabelletiketter';
 
 interface EtikettProps {
     type: TabelletiketterTypes;

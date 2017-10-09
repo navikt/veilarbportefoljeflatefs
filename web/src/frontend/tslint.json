@@ -1,6 +1,7 @@
 {
   "extends": ["tslint:recommended", "tslint-react"],
   "rules": {
+    "whitespace": [true, "check-module"],
     "curly": [true, "ignore-same-line"],
     "member-access": false,
     "object-literal-sort-keys": false,
