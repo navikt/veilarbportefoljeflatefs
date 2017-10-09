@@ -18,7 +18,7 @@ function UkeKolonne({ ukerIgjen, minVal, skalVises }) {
 }
 
 UkeKolonne.propTypes = {
-    ukerIgjen: PT.number.isRequired,
+    ukerIgjen: PT.number,
     minVal: PT.number.isRequired,
     skalVises: PT.bool
 };

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import SorteringHeader from '../components/tabell/sortering-header';
-import { lagAktiviteterSorteringsfelt, utledValgtAktivitetstype, ytelseFilterErAktiv } from '../utils/utils';
+import { ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';
 import { filtervalgShape } from './../proptype-shapes';
 import {
@@ -10,8 +10,8 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER,
     I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
-import {FiltervalgModell} from '../model-interfaces';
-import {Kolonne} from '../ducks/ui/listevisning';
+import { FiltervalgModell } from '../model-interfaces';
+import { Kolonne } from '../ducks/ui/listevisning';
 
 interface HeaderProps {
     id: string;
@@ -50,7 +50,7 @@ interface EnhetListehodeProps {
 
 function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: EnhetListehodeProps) {
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[filtervalg.ytelse];
-    const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
+    const harValgteAktivitetstyper = filtervalg.aktiviteter ? Object.keys(filtervalg.aktiviteter).length > 0 : false;
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' ? 'ddmmyy' : 'uker';
 
     return (
@@ -87,13 +87,12 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                 />
                 <Listeoverskrift
                     className="listeoverskrift__dato listeoverskrift"
-                    skalVises={!!filtervalg && !!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                    skalVises={!!filtervalg && harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
                     id={'portefolje.tabell.aktivitet.neste.utlop.aktivitetstype'}
-                    values={{ aktivitetstype: valgtAktivitetstype ? valgtAktivitetstype.toLowerCase() : null }}
                 />
                 <Listeoverskrift
                     className="listeoverskrift__veileder listeoverskrift"
-                    skalVises={valgteKolonner.includes(Kolonne.VEILEDER) || valgteKolonner.includes(Kolonne.NAVIDENT)}
+                    skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
                     id="enhet.portefolje.tabell.veileder"
                 />
             </div>
@@ -158,12 +157,12 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     className={'sortering-header__dato'}
                 />
                 <SorteringHeader
-                    sortering={lagAktiviteterSorteringsfelt(valgtAktivitetstype)}
+                    sortering="valgte_aktiviteter"
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === lagAktiviteterSorteringsfelt(valgtAktivitetstype)}
+                    erValgt={sorteringsfelt === 'valgte_aktiviteter'}
                     tekstId="portefolje.tabell.ddmmyy"
-                    skalVises={!!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                    skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
                     className={'sortering-header__dato'}
                 />
                 <Header

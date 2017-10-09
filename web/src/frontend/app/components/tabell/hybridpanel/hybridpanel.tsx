@@ -1,6 +1,6 @@
 import * as React from 'react';
 import HybridpanelPure from './hybridpanel-pure';
-import {MouseEvent} from 'react';
+import { MouseEvent } from 'react';
 
 interface HybridpanelProps {
     apen?: boolean;
