@@ -1,6 +1,6 @@
 import { hentEnhetsVeiledere } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
-import {EnhetModell, VeilederModell} from '../model-interfaces';
+import { EnhetModell, VeilederModell } from '../model-interfaces';
 
 // Actions
 export const OK = 'veilarbveileder/veiledere/OK';

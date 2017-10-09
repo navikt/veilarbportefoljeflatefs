@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import {hentPortefoljeForVeileder, PortefoljeState, settSortering} from '../ducks/portefolje';
+import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../ducks/portefolje';
 import TabellOverskrift from './../components/tabell-overskrift';
 import Toolbar from './../components/toolbar/toolbar';
 import { enhetShape, veilederShape, filtervalgShape, feilmeldingModalShape } from './../proptype-shapes';
@@ -20,8 +20,8 @@ import {
     TILORDNING_FEILET
 } from '../ducks/modal-feilmelding-brukere';
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
-import {FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell} from '../model-interfaces';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
+import { ListevisningType } from '../ducks/ui/listevisning';
 
 interface VeilederPortefoljeVisningProps {
     portefolje: PortefoljeState;

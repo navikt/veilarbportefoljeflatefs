@@ -6,8 +6,8 @@ import SokFilter from './sok-filter';
 import Dropdown from './../dropdown/dropdown';
 import CheckboxFilterform from './../checkbox-filterform/checkbox-filterform';
 import { nameToStateSliceMap } from '../../reducer';
-import {FiltervalgModell} from '../../model-interfaces';
-import {VeiledereState} from '../../ducks/veiledere';
+import { FiltervalgModell } from '../../model-interfaces';
+import { VeiledereState } from '../../ducks/veiledere';
 
 interface SokVeilederProps {
     filtervalg: FiltervalgModell;
