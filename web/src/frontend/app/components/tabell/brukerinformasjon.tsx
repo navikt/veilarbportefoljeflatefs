@@ -12,26 +12,17 @@ const settSammenNavn = (bruker) => {
 const brukerFnr = (bruker) => <span className="brukerinformasjon__fnr col col-xs-2">{bruker.fnr}</span>;
 
 const brukerNavn = (bruker, enhetId) => (
-    <a
-        href={`https://${window.location.hostname}` +
-                `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
-        className={classnames('lenke lenke--frittstaende col col-xs-3 brukerliste--panel-checkbox-adjust',
-                { arbeidslistebruker: bruker.arbeidsliste.arbeidslisteAktiv })}
-    >
-        {settSammenNavn(bruker)}
-    </a>
+    <div className="col col-xs-3">
+        <a
+            href={`https://${window.location.hostname}` +
+                    `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
+            className={classnames('lenke lenke--frittstaende',
+                    { arbeidslistebruker: bruker.arbeidsliste.arbeidslisteAktiv })}
+        >
+            {settSammenNavn(bruker)}
+        </a>
+    </div>
 );
-
-const checkBox = (bruker, settMarkert) => (<span className="skjema__input checkboks__wrapper brukerliste--checkbox-margin">
-    <input
-        className="checkboks"
-        id={`checkbox-${bruker.fnr}`}
-        type="checkbox"
-        checked={!!bruker.markert}
-        onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
-    />
-    <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`} />
-</span>);
 
 interface BrukerinformasjonProps {
     bruker: BrukerModell;
@@ -42,7 +33,6 @@ interface BrukerinformasjonProps {
 function Brukerinformasjon({ bruker, enhetId, settMarkert }: BrukerinformasjonProps) {
     return (
         <span>
-            {checkBox(bruker, settMarkert)}
             {brukerNavn(bruker, enhetId)}
             {brukerFnr(bruker)}
         </span>

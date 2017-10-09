@@ -33,6 +33,18 @@ function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoP
     );
 }
 
+const checkBox = (bruker, settMarkert) => (<span className="skjema__input checkboks__wrapper brukerliste--checkbox-margin">
+    <input
+        className="checkboks"
+        id={`checkbox-${bruker.fnr}`}
+        type="checkbox"
+        checked={!!bruker.markert}
+        onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
+    />
+    <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`} />
+</span>);
+
+
 interface EnhetBrukerpanelProps {
     bruker: any;
     settMarkert: (bruker: string, markert: boolean) => void;
@@ -46,15 +58,18 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
     const { ytelse } = filtervalg;
 
     return (
-        <div className="brukerliste__panel">
-                <Brukerinformasjon
-                    bruker={bruker}
-                    enhetId={enhetId}
-                    settMarkert={settMarkert}
-                />
-                <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} valgteKolonner={valgteKolonner} />
-                <Veilederinfo veileder={brukersVeileder} bruker={bruker} valgteKolonner={valgteKolonner}/>
-                <Etiketter bruker={bruker} />
+        <div className="brukerliste--border-bottom-thin">
+            {checkBox(bruker, settMarkert)}
+            <div className="brukerliste__panel">
+                    <Brukerinformasjon
+                        bruker={bruker}
+                        enhetId={enhetId}
+                        settMarkert={settMarkert}
+                    />
+                    <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} valgteKolonner={valgteKolonner} />
+                    <Veilederinfo veileder={brukersVeileder} bruker={bruker} valgteKolonner={valgteKolonner}/>
+                    <Etiketter bruker={bruker} />
+            </div>
         </div>
     );
 }
