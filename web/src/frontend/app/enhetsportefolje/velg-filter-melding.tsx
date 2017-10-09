@@ -8,7 +8,7 @@ function VelgFilterMelding() {
 
         <AlertStripeInfoSolid className="blokk-m" >
             <div className="listevisning--infopanel" aria-live="assertive" role="alert" aria-atomic="true">
-                <FormattedMessage id="velgfilter.melding" tagName="p" />
+                <FormattedMessage id="velgfilter.melding" />
             </div>
         </AlertStripeInfoSolid>
     );

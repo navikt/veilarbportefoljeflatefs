@@ -21,8 +21,8 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
 
     return (
         <AlertStripeInfoSolid className="blokk-m">
-            <div className="listevisning--infopanel">
-                <FormattedMessage id="listevisning.infopanel" tagName="p" />
+            <div className="listevisning--infopanel" aria-live="assertive" role="alert" aria-atomic="true">
+                <FormattedMessage id="listevisning.infopanel" />
                 <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={() => props.lukkPanel(props.name)}>Lukk</Lukknapp>
             </div>
         </AlertStripeInfoSolid>

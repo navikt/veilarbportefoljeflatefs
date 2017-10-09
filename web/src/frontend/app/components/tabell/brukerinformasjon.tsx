@@ -11,12 +11,22 @@ const settSammenNavn = (bruker) => {
 
 const brukerFnr = (bruker) => <span className="brukerinformasjon__fnr">{bruker.fnr}</span>;
 
+const brukerIArbeidslisteNavn = (bruker, enhetId) => (
+        <a
+            href={`https://${window.location.hostname}` +
+            `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
+            className={classnames('lenke lenke--frittstaende brukerinformasjon__navn', 'arbeidslistebruker')}
+            aria-label="Bruker er i Min arbeidsliste"
+        >
+            {settSammenNavn(bruker)}
+        </a>
+)
+
 const brukerNavn = (bruker, enhetId) => (
     <a
         href={`https://${window.location.hostname}` +
-                `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
-        className={classnames('lenke lenke--frittstaende brukerinformasjon__navn',
-                { arbeidslistebruker: bruker.arbeidsliste.arbeidslisteAktiv })}
+        `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
+        className={classnames('lenke lenke--frittstaende brukerinformasjon__navn')}
     >
         {settSammenNavn(bruker)}
     </a>
@@ -30,7 +40,7 @@ const checkBox = (bruker, settMarkert) => (<div className="skjema__input">
         checked={!!bruker.markert}
         onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
     />
-    <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`} />
+    <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`}/>
 </div>);
 
 interface BrukerinformasjonProps {
@@ -39,11 +49,11 @@ interface BrukerinformasjonProps {
     enhetId: string;
 }
 
-function Brukerinformasjon({ bruker, enhetId, settMarkert }: BrukerinformasjonProps) {
+function Brukerinformasjon({bruker, enhetId, settMarkert}: BrukerinformasjonProps) {
     return (
         <div className="brukerinformasjon__wrapper">
             {checkBox(bruker, settMarkert)}
-            {brukerNavn(bruker, enhetId)}
+            {bruker.arbeidsliste.arbeidslisteAktiv ? brukerIArbeidslisteNavn(bruker, enhetId) : brukerNavn(bruker, enhetId)}
             {brukerFnr(bruker)}
         </div>
     );
