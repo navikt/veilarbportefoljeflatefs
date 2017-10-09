@@ -20,7 +20,7 @@ const brukerIArbeidslisteNavn = (bruker, enhetId) => (
         >
             {settSammenNavn(bruker)}
         </a>
-)
+);
 
 const brukerNavn = (bruker, enhetId) => (
     <a
