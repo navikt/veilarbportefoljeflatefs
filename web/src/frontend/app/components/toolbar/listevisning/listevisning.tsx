@@ -73,9 +73,9 @@ const Listevisning = (props: ListevisningProps) => {
                     <FormattedMessage id="listevisning.ingress"/>
                 </div>
                 <ul className="ustilet">
-                    {props.muligeAlternativer.map((kolonne, i) => (
+                    {props.muligeAlternativer.map((kolonne) => (
                         <ListevisningRad
-                            key={i}
+                            key={kolonne}
                             kolonne={kolonne}
                             valgt={erValgt(kolonne)}
                             disabled={props.valgteAlternativ.length >= 5 && !erValgt(kolonne)}
