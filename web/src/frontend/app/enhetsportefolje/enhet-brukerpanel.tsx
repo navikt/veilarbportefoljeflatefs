@@ -3,14 +3,18 @@ import Brukerinformasjon from '../components/tabell/brukerinformasjon';
 import EnhetDatokolonner from './enhet-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
 import {filtervalgShape, veilederShape} from '../proptype-shapes';
-import {FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {EtikettType, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
+import Etikett from "../components/tabell/etikett";
+import { FormattedMessage } from 'react-intl';
 
 interface VeilederinfoProps {
     bruker: any;
     veileder?: VeilederModell;
     valgteKolonner: Kolonne[];
 }
+
+const fm = (id) => <FormattedMessage id={id} />;
 
 function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoProps) {
     const navn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
@@ -23,7 +27,13 @@ function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoP
             { valgteKolonner.includes(Kolonne.VEILEDER) &&
             <div className="veilederinformasjon__navn">
                 {
-                    bruker.veilederId ? <span>{navn}</span> : null
+                    bruker.veilederId ? <span>{navn}</span> : (
+                        <Etikett
+                            type={EtikettType.NYBRUKER}
+                            child={fm('enhet.portefolje.tabelletikett.ny.bruker')}
+                            skalVises={bruker.veilederId === null}
+                        />
+                    )
                 }
             </div> }
             { valgteKolonner.includes(Kolonne.NAVIDENT) &&
