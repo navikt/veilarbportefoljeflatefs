@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
 import { BrukerModell } from '../../model-interfaces';
-import { injectIntl, InjectedIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -48,18 +48,21 @@ interface BrukerinformasjonProps {
     bruker: BrukerModell;
     settMarkert: (fnr: string, markert: boolean) => void;
     enhetId: string;
-    intl?: InjectedIntl;
 }
 
-function Brukerinformasjon({bruker, enhetId, settMarkert, intl}: BrukerinformasjonProps) {
-    const arialabel = intl ? intl.formatMessage({id: 'listevisning.bruker.i.arbeidsliste'}) : 'Bruker er i Min arbeidsliste';
+function Brukerinformasjon({bruker, enhetId, settMarkert}: BrukerinformasjonProps) {
     return (
-        <div className="brukerinformasjon__wrapper">
-            {checkBox(bruker, settMarkert)}
-            {bruker.arbeidsliste.arbeidslisteAktiv ? brukerIArbeidslisteNavn(bruker, enhetId, arialabel) : brukerNavn(bruker, enhetId)}
-            {brukerFnr(bruker)}
-        </div>
+        <FormattedMessage id="listevisning.bruker.i.arbeidsliste">
+            {(label) => (
+                <div className="brukerinformasjon__wrapper">
+                    {checkBox(bruker, settMarkert)}
+                    {bruker.arbeidsliste.arbeidslisteAktiv ? brukerIArbeidslisteNavn(bruker, enhetId, label) : brukerNavn(bruker, enhetId)}
+                    {brukerFnr(bruker)}
+                </div>
+            )}
+        </FormattedMessage>
+
     );
 }
 
-export default injectIntl(Brukerinformasjon);
+export default Brukerinformasjon;
