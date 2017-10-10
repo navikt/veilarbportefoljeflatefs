@@ -25,11 +25,6 @@ export function toJson(response) {
     return response;
 }
 
-export function print(response) {
-    console.log(response); // eslint-disable-line no-console
-    return response;
-}
-
 export function sendResultatTilDispatch(dispatch, action) {
     return (...data) => {
         if (data.length === 1) {
