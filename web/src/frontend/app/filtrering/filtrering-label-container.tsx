@@ -90,7 +90,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
             return [];
         }).reduce((acc, l) => [...acc, ...l], []);
 
-    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} harMuligMenIkkeValgtKolonne={false}/>;
+    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} harMuligMenIkkeValgtKolonne={false} skalHaKryssIkon={false}/>;
 
     return (
         <section className={classNames('filtrering-label-container', {'blokk-s': (filterElementer.length > 0)})}>
