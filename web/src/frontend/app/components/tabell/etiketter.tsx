@@ -32,11 +32,6 @@ function Etiketter({ bruker }: EtiketterProps) {
                 child={fm('enhet.portefolje.tabelletikett.dod')}
                 skalVises={bruker.erDoed === true}
             />
-            <Etikett
-                type={EtikettType.NYBRUKER}
-                child={fm('enhet.portefolje.tabelletikett.ny.bruker')}
-                skalVises={bruker.veilederId === null}
-            />
         </div>
     );
 }
