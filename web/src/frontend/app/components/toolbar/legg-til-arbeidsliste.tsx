@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
 import { skjulModal, visModal } from '../../ducks/modal';
-import {PortefoljeState} from '../../ducks/portefolje';
+import { PortefoljeState } from '../../ducks/portefolje';
 
 interface LeggTilArbeidslisteProps {
     portefolje: PortefoljeState;
