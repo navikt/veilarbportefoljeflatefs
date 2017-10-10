@@ -30,12 +30,16 @@ function Barlabel({ htmlFor, tekstId, antall, max, className }: BarlabelProps) {
             </span>
             &nbsp;
             <div className="barlabel__barwrapper">
-                {htmlFor === 'minArbeidsliste' &&
+                {htmlFor === 'minArbeidsliste' && <div className="arbeidsliste">
                 <span className="text-hide" aria-live="polite" aria-atomic="true">
-                    Det er
-                    <Element className="barlabel__antall">{antall}</Element>
-                    {antall === 1 ? 'bruker' : 'brukere'} i Min arbeidsliste.
-                </span>}
+                    <FormattedMessage
+                        id="filtrering.status.arbeidsliste.viser.antall.brukere"
+                        values={{antall}}
+                    />
+                </span>
+                    <Element className="barlabel__antall" aria-hidden="true">{antall}</Element>
+                </div>
+                }
                 {htmlFor !== 'minArbeidsliste' &&
                 <Element className="barlabel__antall">{antall}</Element>
                 }

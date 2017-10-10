@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
 import { BrukerModell } from '../../model-interfaces';
+import { injectIntl, InjectedIntl } from 'react-intl';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -11,12 +12,12 @@ const settSammenNavn = (bruker) => {
 
 const brukerFnr = (bruker) => <span className="brukerinformasjon__fnr">{bruker.fnr}</span>;
 
-const brukerIArbeidslisteNavn = (bruker, enhetId) => (
+const brukerIArbeidslisteNavn = (bruker, enhetId, arialabel) => (
         <a
             href={`https://${window.location.hostname}` +
             `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
             className={classnames('lenke lenke--frittstaende brukerinformasjon__navn', 'arbeidslistebruker')}
-            aria-label="Bruker er i Min arbeidsliste"
+            aria-label={arialabel}
         >
             {settSammenNavn(bruker)}
         </a>
@@ -47,16 +48,18 @@ interface BrukerinformasjonProps {
     bruker: BrukerModell;
     settMarkert: (fnr: string, markert: boolean) => void;
     enhetId: string;
+    intl?: InjectedIntl;
 }
 
-function Brukerinformasjon({bruker, enhetId, settMarkert}: BrukerinformasjonProps) {
+function Brukerinformasjon({bruker, enhetId, settMarkert, intl}: BrukerinformasjonProps) {
+    const arialabel = intl ? intl.formatMessage({id: 'listevisning.bruker.i.arbeidsliste'}) : 'Bruker er i Min arbeidsliste';
     return (
         <div className="brukerinformasjon__wrapper">
             {checkBox(bruker, settMarkert)}
-            {bruker.arbeidsliste.arbeidslisteAktiv ? brukerIArbeidslisteNavn(bruker, enhetId) : brukerNavn(bruker, enhetId)}
+            {bruker.arbeidsliste.arbeidslisteAktiv ? brukerIArbeidslisteNavn(bruker, enhetId, arialabel) : brukerNavn(bruker, enhetId)}
             {brukerFnr(bruker)}
         </div>
     );
 }
 
-export default Brukerinformasjon;
+export default injectIntl(Brukerinformasjon);
