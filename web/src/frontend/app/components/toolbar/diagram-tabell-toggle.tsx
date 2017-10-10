@@ -5,7 +5,7 @@ import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-toggle';
 import { settVisningsmodus } from './../../ducks/veilederpaginering';
 import * as VK from './../../minoversikt/minoversikt-konstanter';
 import { AppState } from './../../reducer';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import { ListevisningType } from '../../ducks/ui/listevisning';
 
 interface DiagramTabellToggleOwnProps {
     filtergruppe: ListevisningType;

@@ -4,9 +4,9 @@ import SokFilter from './sok-filter';
 import Dropdown from './../dropdown/dropdown';
 import RadioFilterform from './../radio-filterform/radio-filterform';
 import { tildelVeileder } from './../../ducks/portefolje';
-import {VeiledereState} from '../../ducks/veiledere';
-import {BrukerModell} from '../../model-interfaces';
-import {AppState} from '../../reducer';
+import { VeiledereState } from '../../ducks/veiledere';
+import { BrukerModell } from '../../model-interfaces';
+import { AppState } from '../../reducer';
 
 interface TildelVeilederProps {
     skalSkjules: boolean;

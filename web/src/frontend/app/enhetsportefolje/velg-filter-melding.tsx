@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {AlertStripeInfoSolid} from 'nav-frontend-alertstriper';
+import { AlertStripeInfoSolid } from 'nav-frontend-alertstriper';
 import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 

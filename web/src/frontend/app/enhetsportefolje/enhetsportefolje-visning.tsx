@@ -23,8 +23,8 @@ import { STATUS } from '../ducks/utils';
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
 import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
 import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmelding-brukere';
-import {FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell} from '../model-interfaces';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
+import { ListevisningType } from '../ducks/ui/listevisning';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {

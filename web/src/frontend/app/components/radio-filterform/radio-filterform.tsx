@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {reduxForm, Fields, Field, SubmitHandler} from 'redux-form';
+import { reduxForm, Fields, Field, SubmitHandler } from 'redux-form';
 import { connect } from 'react-redux';
 import * as classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { filtervalgShape } from '../../proptype-shapes';
-import {FiltervalgModell} from "../../model-interfaces";
-import {lagConfig} from "../../filtrering/filter-konstanter";
+import { FiltervalgModell } from '../../model-interfaces';
+import { lagConfig } from '../../filtrering/filter-konstanter';
 
 interface RenderFieldProps {
     names: any;

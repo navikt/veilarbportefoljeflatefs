@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
-import {ChangeEvent} from 'react';
+import { connect } from 'react-redux';
+import { ChangeEvent } from 'react';
 import Dropdown from '../../dropdown/dropdown';
-import {Checkbox} from 'nav-frontend-skjema';
-import {FormattedMessage} from 'react-intl';
-import {AppState} from '../../../reducer';
-import {Action, Dispatch} from 'redux';
-import {avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ} from '../../../ducks/ui/listevisning';
+import { Checkbox } from 'nav-frontend-skjema';
+import { FormattedMessage } from 'react-intl';
+import { AppState } from '../../../reducer';
+import { Action, Dispatch } from 'redux';
+import { avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ } from '../../../ducks/ui/listevisning';
 import { alternativerConfig } from './listevisning-utils';
-import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
+import { selectMuligeAlternativer, selectValgteAlternativer } from '../../../ducks/ui/listevisning-selectors';
 
 interface ListevisningRadProps {
     kolonne: Kolonne;
