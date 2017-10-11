@@ -9,10 +9,10 @@ const settSammenNavn = (bruker) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-const brukerFnr = (bruker) => <span className="brukerinformasjon__fnr col col-xs-2">{bruker.fnr}</span>;
+const brukerFnr = (bruker) => <span className="brukerliste__panelelement col col-xs-2">{bruker.fnr}</span>;
 
 const brukerNavn = (bruker, enhetId) => (
-    <div className="col col-xs-3">
+    <div className="brukerliste__panelelement col col-xs-3">
         <a
             href={`https://${window.location.hostname}` +
                     `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}

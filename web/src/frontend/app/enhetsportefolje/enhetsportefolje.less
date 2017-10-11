@@ -1,5 +1,5 @@
 @margin-left: 32px;
-@brukerliste-padding: 5px;o
+@brukerliste-padding: 5px;
 
 .brukerliste {
     width: 100%;
@@ -20,17 +20,22 @@
 
 .brukerliste--checkbox-margin {
     margin-left: 6px;
-}
-
-.brukerliste--li {
-    list-style: none;
+    margin-top: 10px;
 }
 
 .brukerliste__panel {
-    list-style: none;
-    min-height: 2rem;
     margin-top: 10px;
     margin-left: 32px;
+}
+
+.brukerliste__panelelement {
+    background: yellow;
+    min-height: 2rem;
+}
+
+.brukerliste__liste-element {
+    margin: 10px 0 0 0;
+    padding: 0;
 }
 
 .brukerliste__header {
@@ -55,9 +60,9 @@
 .brukerliste__body {
     padding: 0;
     margin: 0;
+    list-style: none;
 
     .enhet-brukere-panel {
-        display: flex;
         list-style: none;
         border-bottom: 1px solid @navGra40;
         .hybridPanel__hode {
@@ -81,10 +86,6 @@
     .innholdslaster {
         min-height: 1000px;
     }
-}
-
-.veilederinformasjon__wrapper {
-    min-height: 2rem;
 }
 
 .velgfiltermelding {

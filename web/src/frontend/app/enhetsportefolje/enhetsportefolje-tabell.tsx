@@ -42,7 +42,7 @@ function EnhetTabell({
             />
             <ul className="brukerliste__body">
                 {brukere.map((bruker) =>
-                    <li key={bruker.fnr} className="brukerliste--li">
+                    <li key={bruker.fnr}>
                         <EnhetBrukerpanel
                             bruker={bruker}
                             enhetId={enhetId}
