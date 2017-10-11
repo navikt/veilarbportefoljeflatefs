@@ -32,7 +32,6 @@ function brukerLabel(bruker) {
 
 function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slettFraArbeidslisteStatus }) {
     const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
-    console.log(slettFraArbeidslisteStatus);
     return (
         <form onSubmit={handleSubmit}>
             <div className="arbeidsliste-listetekst">
