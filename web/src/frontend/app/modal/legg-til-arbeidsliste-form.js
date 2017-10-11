@@ -1,4 +1,5 @@
 import React, { PropTypes as PT } from 'react';
+import { Knapp } from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { FieldArray } from 'redux-form';
 import { rules, validForm } from 'react-redux-form-validation';
@@ -11,6 +12,7 @@ import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { leggTilStatustall } from '../ducks/statustall';
 import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
+import { STATUS } from '../ducks/utils';
 
 const KOMMENTAR_MAKS_LENGDE = 250;
 
@@ -69,16 +71,17 @@ function renderFelter({ fields }) {
 }
 
 
-function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary }) {
+function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary, arbeidslisteStatus }) {
+    const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     return (
         <form onSubmit={handleSubmit}>
             {errorSummary}
             <FieldArray name="arbeidsliste" component={renderFelter} test={'test'} />
             <div>
                 <div className="modal-footer">
-                    <button type="submit" className="knapp knapp--hoved">
+                    <Knapp type="hoved" className="knapp knapp--hoved" spinner={laster}>
                         <FormattedMessage id="modal.knapp.lagre" />
-                    </button>
+                    </Knapp>
                     <button type="button" className="knapp" onClick={lukkModal}>
                         <FormattedMessage id="modal.knapp.avbryt" />
                     </button>
@@ -91,7 +94,8 @@ function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary }) {
 LeggTilArbeidslisteForm.propTypes = {
     lukkModal: PT.func.isRequired,
     handleSubmit: PT.func.isRequired,
-    errorSummary: PT.node.isRequired
+    errorSummary: PT.node.isRequired,
+    arbeidslisteStatus: PT.any
 };
 
 export const formNavn = 'arbeidsliste_kommentar_skjema';
@@ -124,11 +128,13 @@ const mapStateToProps = (state, props) => {
     return {
         initialValues: {
             arbeidsliste: [...arbeidslisteData]
-        }
+        },
+        arbeidslisteStatus: state.arbeidsliste.status
     };
 };
 
-function oppdaterState(res, liste, innloggetVeileder, dispatch) {
+function oppdaterState(res, liste, props, dispatch) {
+    props.lukkModal();
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -139,7 +145,7 @@ function oppdaterState(res, liste, innloggetVeileder, dispatch) {
     const arbeidslisteToDispatch = liste
         .map((a) => ({
             ...a,
-            sistEndretAv: { veilederId: innloggetVeileder },
+            sistEndretAv: { veilederId: props.innloggetVeileder },
             endringstidspunkt: new Date().toISOString(),
             arbeidslisteAktiv: true
         }))
@@ -164,8 +170,7 @@ const mapDispatchToProps = () => ({
             frist: formData.arbeidsliste[index].frist
         }));
         lagreArbeidsliste(liste)(dispatch)
-            .then((res) => oppdaterState(res, liste, props.innloggetVeileder, dispatch));
-        props.lukkModal();
+            .then((res) => oppdaterState(res, liste, props, dispatch));
     }
 });
 
