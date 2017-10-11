@@ -1,6 +1,6 @@
 export type FeatureToggleState = { [feature: string]: boolean };
 
-const initialState:FeatureToggleState = {
+export const initialState: FeatureToggleState = {
     bruker_i_context: false
 };
 
