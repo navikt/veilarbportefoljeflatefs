@@ -4,22 +4,36 @@ import {Checkbox} from 'nav-frontend-skjema';
 import {FeatureToggleState, settFeatureState} from './feature-toggle-reducer';
 import {AppState} from '../../reducer';
 
+interface FeatureProps {
+    navn: string;
+    erAktivert: boolean;
+    onChange: (aktivert: boolean) => void;
+}
+
+function Feature(props: FeatureProps) {
+    return (
+        <li>
+            <Checkbox
+                label={props.navn}
+                checked={props.erAktivert}
+                onChange={(event) => props.onChange(event.currentTarget.checked)}
+            />
+        </li>
+    )
+}
+
+
 interface FeatureToggleAdminProps {
     features: FeatureToggleState;
     doSettFeatureState: (navn: string, aktivert: boolean) => void;
 }
 
 function FeatureToggleAdmin(props: FeatureToggleAdminProps) {
-
     return (
         <ul>
-            {
-                Object.entries(props.features).map(([featureNavn, erAktivert]) => (
-                    <li>
-                        <Checkbox label={featureNavn} checked={erAktivert} onChange={(event) => props.doSettFeatureState(featureNavn, event.currentTarget.checked)}/>
-                    </li>
-                ))
-            }
+            { Object.entries(props.features).map(([featureNavn, erAktivert]) => (
+                <Feature navn={featureNavn} erAktivert={erAktivert} onChange={(aktivert) => props.doSettFeatureState(featureNavn, aktivert)} />
+            ))}
         </ul>
     );
 }
