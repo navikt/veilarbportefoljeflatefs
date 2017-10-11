@@ -4,6 +4,17 @@ import { CustomField } from 'react-redux-form-validation';
 import { FormattedMessage } from 'react-intl';
 import { Textarea as NavFrontendTextarea } from 'nav-frontend-skjema';
 
+Textarea.propTypes = {
+    feltNavn: PT.string,
+    visTellerFra: PT.number,
+    validate: PT.func
+};
+
+interface TextareaProps {
+    feltnavn?: string;
+    visTellerFra?: Number;
+    validate: () => void;
+}
 function getTellerTekst(antallTegn, maxLength, visTellerFra) {
     const tegnIgjen = maxLength - antallTegn;
     const tegnForMange = antallTegn - maxLength;
@@ -76,11 +87,6 @@ function Textarea({ feltNavn, validate, ...rest }) {
     );
 }
 
-Textarea.propTypes = {
-    feltNavn: PT.string,
-    visTellerFra: PT.number,
-    validate: PT.func
-};
 
 Textarea.defaultProps = {
     feltNavn: undefined,
