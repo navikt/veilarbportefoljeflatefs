@@ -23,9 +23,9 @@ function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoP
         return null;
     }
     return (
-        <div className="veilederinformasjon__wrapper col col-xs-2">
+        <span>
             { valgteKolonner.includes(Kolonne.VEILEDER) &&
-            <div className="veilederinformasjon__navn">
+            <div className="brukerliste__panelelement col col-xs-2">
                 {
                     bruker.veilederId ? <span>{navn}</span> : (
                         <Etikett
@@ -37,9 +37,9 @@ function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoP
                 }
             </div> }
             { valgteKolonner.includes(Kolonne.NAVIDENT) &&
-            <span className="veilederinfo__ident">{ident}</span>
+            <div className="brukerliste__panelelement col col-xs-1">{ident}</div>
             }
-        </div>
+        </span>
     );
 }
 
@@ -68,7 +68,7 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
     const { ytelse } = filtervalg;
 
     return (
-        <div className="brukerliste--border-bottom-thin">
+        <div className="brukerliste--border-bottom-thin row brukerliste__liste-element">
             {checkBox(bruker, settMarkert)}
             <div className="brukerliste__panel">
                     <Brukerinformasjon

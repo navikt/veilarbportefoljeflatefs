@@ -19,7 +19,7 @@ function UkeKolonne({ ukerIgjen, minVal, skalVises }: UkekolonneProps) {
     if (!skalVises) {
         return null;
     }
-    return (<span className="col col-xs-2">{lagUkerTekst(ukerIgjen, minVal)}</span>);
+    return (<span className="brukerliste__panelelement col col-xs-1">{lagUkerTekst(ukerIgjen, minVal)}</span>);
 }
 
 export default UkeKolonne;
