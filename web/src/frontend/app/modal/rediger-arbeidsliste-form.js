@@ -106,11 +106,11 @@ const RedigerArbeidslisteFormValidation = validForm({
 
 
 function oppdaterState(res, arbeidsliste, innloggetVeileder, fnr, lukkModal, dispatch) {
-    lukkModal();
+
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
-
+    lukkModal();
     const arbeidslisteToDispatch = Array.of({
         ...arbeidsliste,
         fnr,

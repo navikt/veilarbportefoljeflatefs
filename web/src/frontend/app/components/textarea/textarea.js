@@ -39,7 +39,7 @@ function InnerTextAreaComponent({
     const feil = errorMessage ? { feilmelding: errorMessage } : undefined;
     return (
         <NavFrontendTextarea
-            textareaClass="skjemaelement__input input--fullbredde arbeidslistekommentar"
+            textareaClass="skjemaelement__input arbeidslistekommentar input--fullbredde"
             label={labelId && <FormattedMessage id={labelId} />}
             maxLength={maxLength}
             feil={feil}
