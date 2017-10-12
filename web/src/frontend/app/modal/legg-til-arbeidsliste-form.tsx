@@ -79,7 +79,7 @@ interface LeggTilArbeidslisteFormProps {
 }
 
 function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary, arbeidslisteStatus }: LeggTilArbeidslisteFormProps) {
-    const FieldRenderer = FieldArray as any;
+    const FieldRenderer = FieldArray as any; // TODO: Finn en bedre løsning
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     return (
         <form onSubmit={handleSubmit}>
