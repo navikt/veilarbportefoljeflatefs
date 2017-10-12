@@ -104,6 +104,7 @@ function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDr
 
     const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown));
 
+    // TODO Finne en bedre løsning på dette
     const FieldRenderer = Fields as any;
 
     return (
