@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Element } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import RadioFilterform from '../components/radio-filterform/radio-filterform';
@@ -24,9 +24,10 @@ interface FiltreringFilterProps {
     filtervalg: any;
     actions: any;
     enhettiltak: any;
+    intl?: any;
 }
 
-const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterProps) => (
+const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFilterProps) => (
     <div>
         <div className="row">
             <div className="col-sm-3">
@@ -36,7 +37,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
                 <Dropdown name="Alder">
                     <CheckboxFilterform
                         form="alder"
-                        valg={alder}
+                        valg={alder()}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -44,7 +45,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
                 <Dropdown name="Fødselsdato">
                     <CheckboxFilterform
                         form="fodselsdagIMnd"
-                        valg={fodselsdagIMnd}
+                        valg={fodselsdagIMnd()}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -52,7 +53,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
                 <Dropdown name="Kjønn">
                     <CheckboxFilterform
                         form="kjonn"
-                        valg={kjonn}
+                        valg={kjonn()}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -65,7 +66,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
                 <Dropdown name="Innsatsgruppe">
                     <CheckboxFilterform
                         form="innsatsgruppe"
-                        valg={innsatsgruppe}
+                        valg={innsatsgruppe()}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -73,7 +74,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
                 <Dropdown name="Formidlingsgruppe">
                     <CheckboxFilterform
                         form="formidlingsgruppe"
-                        valg={formidlingsgruppe}
+                        valg={formidlingsgruppe()}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -81,7 +82,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
                 <Dropdown name="Servicegruppe">
                     <CheckboxFilterform
                         form="servicegruppe"
-                        valg={servicegruppe}
+                        valg={servicegruppe()}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -89,7 +90,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
                 <Dropdown name="Rettighetsgruppe" className="dropdown--130bredde">
                     <CheckboxFilterform
                         form="rettighetsgruppe"
-                        valg={rettighetsgruppe}
+                        valg={rettighetsgruppe()}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -102,7 +103,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
                 <Dropdown name="Ytelse" className="dropdown--130bredde">
                     <RadioFilterform
                         form="ytelse"
-                        valg={ytelse}
+                        valg={ytelse()}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -116,7 +117,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
                 <Dropdown name="Aktivitet" className="dropdown--130bredde" hoyre={true}>
                     <AktivitetFilterform
                         form="aktiviteter"
-                        valg={aktiviteter}
+                        valg={aktiviteter(intl)}
                         filtervalg={filtervalg}
                         onSubmit={actions.endreFiltervalg}
                     />
@@ -139,4 +140,4 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak}: FiltreringFilterPr
     </div>
 );
 
-export default FiltreringFilter;
+export default injectIntl(FiltreringFilter);
