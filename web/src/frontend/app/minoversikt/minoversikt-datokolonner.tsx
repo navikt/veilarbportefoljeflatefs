@@ -31,7 +31,7 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }: MinoversiktDato
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
 
     return (
-        <div className="datokolonner__wrapper">
+        <span>
             <UkeKolonne
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
@@ -75,7 +75,7 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }: MinoversiktDato
                 dato={utlopsdatoForAktivitetEllerNull(bruker.aktiviteter, valgtAktivitetstype)}
                 skalVises={!!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0}
             />
-        </div>
+        </span>
     );
 }
 

@@ -7,6 +7,7 @@ import {EtikettType, FiltervalgModell, VeilederModell} from '../model-interfaces
 import {Kolonne} from '../ducks/ui/listevisning';
 import Etikett from "../components/tabell/etikett";
 import { FormattedMessage } from 'react-intl';
+import CheckBox from '../components/tabell/checkbox';
 
 interface VeilederinfoProps {
     bruker: any;
@@ -43,16 +44,7 @@ function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoP
     );
 }
 
-const checkBox = (bruker, settMarkert) => (<span className="skjema__input checkboks__wrapper brukerliste--checkbox-margin">
-    <input
-        className="checkboks"
-        id={`checkbox-${bruker.fnr}`}
-        type="checkbox"
-        checked={!!bruker.markert}
-        onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
-    />
-    <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`} />
-</span>);
+
 
 
 interface EnhetBrukerpanelProps {
@@ -69,7 +61,7 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
 
     return (
         <div className="brukerliste--border-bottom-thin row brukerliste__liste-element">
-            {checkBox(bruker, settMarkert)}
+            <CheckBox bruker={bruker} settMarkert={settMarkert} />
             <div className="brukerliste__panel">
                     <Brukerinformasjon
                         bruker={bruker}
