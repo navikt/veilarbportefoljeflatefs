@@ -65,7 +65,7 @@
         list-style: none;
         border-bottom: 1px solid #b7b1a9;
         .hybridPanel__hode, .panel_hode {
-            padding: 10px; //FIXME: Fjern slike magic numbers!!
+            padding: 10px 10px 0 10px; //FIXME: Fjern slike magic numbers!!
             margin-left: 24px; //FIXME: Fjern slike magic numbers!!
 
             .brukerpanel {
@@ -75,8 +75,6 @@
             }
 
             .brukerinformasjon__wrapper {
-                display: inline-block;
-                margin-right: 2.9rem;
 
                 .brukerinformasjon__navn {
                     display: inline-block;
@@ -111,7 +109,8 @@
             cursor: pointer;
             background-color: @navLysGra;
             border: none;
-            margin-right: 25px;
+            margin-right: 25px; //FIXME: Fjern slike magic numbers!!
+            margin-bottom: 5px; //FIXME: Fjern slike magic numbers!!
         }
 
         .hybridPanel__innhold {
