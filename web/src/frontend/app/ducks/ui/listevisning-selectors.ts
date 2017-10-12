@@ -1,6 +1,6 @@
-import {AppState} from '../../reducer';
-import {Kolonne, ListevisningType} from './listevisning';
-import {FiltreringAktiviteterValg, AktiviteterValg, FiltreringState} from '../filtrering';
+import { AppState } from '../../reducer';
+import { Kolonne, ListevisningType } from './listevisning';
+import { FiltreringAktiviteterValg, AktiviteterValg, FiltreringState } from '../filtrering';
 import {
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
@@ -27,7 +27,7 @@ function addHvis(kolonne: Kolonne, add: boolean): Kolonne[] {
 function harValgtMinstEnAktivitet(aktiviteter: FiltreringAktiviteterValg): boolean {
     return Object.entries(aktiviteter)
         .filter(([key, value]) => value === AktiviteterValg.JA)
-        .length === 1;
+        .length >= 1;
 }
 
 function harIkkeValgtTiltakstype(tiltakstyper: string[]): boolean {

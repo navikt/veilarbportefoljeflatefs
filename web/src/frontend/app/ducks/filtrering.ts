@@ -1,8 +1,8 @@
 import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
 import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
-import {nameToStateSliceMap} from './../reducer';
-import {ListevisningType, oppdaterAlternativer} from './ui/listevisning';
-import {VeilederModell} from '../model-interfaces';
+import { nameToStateSliceMap } from './../reducer';
+import { ListevisningType, oppdaterAlternativer } from './ui/listevisning';
+import { VeilederModell } from '../model-interfaces';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';

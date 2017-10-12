@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Children, cloneElement} from 'react';
+import { Children, cloneElement } from 'react';
 import { Input } from 'nav-frontend-skjema';
 
 interface SokFilterProps {

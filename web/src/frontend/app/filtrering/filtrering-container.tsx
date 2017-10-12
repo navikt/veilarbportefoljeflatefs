@@ -5,7 +5,7 @@ import { veilederShape, filtervalgShape } from '../proptype-shapes';
 import FiltreringStatus from './filtrering-status';
 import FiltreringFilter from './filtrering-filter';
 import { endreFiltervalg } from '../ducks/filtrering';
-import {EnhetModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 
 const defaultVeileder: VeilederModell = {
     ident: '',

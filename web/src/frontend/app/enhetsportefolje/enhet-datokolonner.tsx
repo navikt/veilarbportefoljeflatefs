@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-    nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull
+    nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper
 } from '../utils/utils';
 import { ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
@@ -9,7 +9,7 @@ import { ytelsevalg,
     I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
 import { filtervalgShape } from '../proptype-shapes';
 import DatoKolonne from '../components/datokolonne';
-import {BrukerModell, FiltervalgModell} from '../model-interfaces';
+import {BrukerModell,FiltervalgModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import UkeKolonne from '../components/ukekolonne';
 
@@ -21,14 +21,13 @@ interface EnhetDatokolonnerProps {
 }
 
 function EnhetDatokolonner({ bruker, ytelse= '', filtervalg, valgteKolonner }: EnhetDatokolonnerProps) {
-    const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
+    const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
     // TODO: bør gjøres før data lagres i storen
     const utlopsDato = bruker.utlopsdato ? new Date(bruker.utlopsdato) : null;
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
-
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     return (
         <span>
@@ -68,8 +67,8 @@ function EnhetDatokolonner({ bruker, ytelse= '', filtervalg, valgteKolonner }: E
                 skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
             />
             <DatoKolonne
-                dato={utlopsdatoForAktivitetEllerNull(bruker.aktiviteter, valgtAktivitetstype)}
-                skalVises={!!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0  && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
+                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0  && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
             />
         </span>
     );
