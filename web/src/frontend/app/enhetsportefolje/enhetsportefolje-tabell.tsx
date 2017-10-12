@@ -10,7 +10,7 @@ import {
 } from '../model-interfaces';
 import {Kolonne, ListevisningType} from '../ducks/ui/listevisning';
 import {selectValgteAlternativer} from '../ducks/ui/listevisning-selectors';
-import Checkbox from '../components/tabell/checkbox'
+import Checkbox from '../components/tabell/checkbox';
 
 interface EnhetTabellProps {
     portefolje: any;

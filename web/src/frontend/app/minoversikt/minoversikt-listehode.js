@@ -1,8 +1,8 @@
-import React, {PropTypes as PT} from 'react';
+import React, { PropTypes as PT } from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import {lagAktiviteterSorteringsfelt, utledValgtAktivitetstype, ytelseFilterErAktiv} from '../utils/utils';
+import { lagAktiviteterSorteringsfelt, utledValgtAktivitetstype, ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';
-import {filtervalgShape} from './../proptype-shapes';
+import { filtervalgShape } from './../proptype-shapes';
 import {
     ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
@@ -13,7 +13,7 @@ import {
 } from '../filtrering/filter-konstanter';
 
 
-function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt}) {
+function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt }) {
     const ytelseUtlopsdatoNavn = filtervalg.ytelse === ytelsevalg.AAP_MAXTID ? 'aapMaxtid' : 'utlopsdato';
     const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
 
@@ -60,7 +60,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                         className="listeoverskrift__dato listeoverskrift col col-xs-1"
                         skalVises={!!filtervalg && !!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0}
                         id={'portefolje.tabell.aktivitet.neste.utlop.aktivitetstype'}
-                        values={{aktivitetstype: valgtAktivitetstype ? valgtAktivitetstype.toLowerCase() : null}}
+                        values={{ aktivitetstype: valgtAktivitetstype ? valgtAktivitetstype.toLowerCase() : null }}
                     />
                 </div>
             </div>

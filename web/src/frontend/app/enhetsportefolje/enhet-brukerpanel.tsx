@@ -5,7 +5,7 @@ import Etiketter from '../components/tabell/etiketter';
 import {filtervalgShape, veilederShape} from '../proptype-shapes';
 import {EtikettType, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
-import Etikett from "../components/tabell/etikett";
+import Etikett from '../components/tabell/etikett';
 import { FormattedMessage } from 'react-intl';
 import CheckBox from '../components/tabell/checkbox';
 
@@ -43,9 +43,6 @@ function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoP
         </span>
     );
 }
-
-
-
 
 interface EnhetBrukerpanelProps {
     bruker: any;
