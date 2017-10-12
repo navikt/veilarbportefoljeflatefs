@@ -64,7 +64,7 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }: MinoversiktDato
                 skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
             />
             <DatoKolonne
-                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
+                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
                 skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
             />
             <DatoKolonne
