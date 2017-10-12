@@ -8,16 +8,21 @@ import KnappPanel from './knapp-panel';
 
 const cls = (className) => classNames('paginering', className);
 
-interface PagineringProps {
-    className: string;
+interface StateProps {
     erPaForsteSide: boolean;
     navarendeSide: number;
     erPaSisteSide: boolean;
     antallSider: number;
     antall: number;
     sideStorrelse: number;
+}
+
+interface OwnProps {
+    className: string;
     onChange: (fra: number, til: number) => void;
 }
+
+type PagineringProps = StateProps & OwnProps;
 
 function Paginering({className, erPaForsteSide, navarendeSide, erPaSisteSide, antallSider, antall, sideStorrelse, onChange}: PagineringProps) {
 
@@ -65,7 +70,7 @@ function Paginering({className, erPaForsteSide, navarendeSide, erPaSisteSide, an
     );
 }
 
-const mapStateToProps = ({paginering}) => {
+const mapStateToProps = ({paginering}): StateProps => {
     const antallSider = Math.ceil(paginering.antall / paginering.sideStorrelse);
     return ({
         ...paginering,

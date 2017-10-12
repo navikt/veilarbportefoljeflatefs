@@ -164,9 +164,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                             <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
                             <EnhetTabell
                                 veiledere={veiledere.data.veilederListe}
-                                brukere={portefolje.data.brukere}
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
-                                portefolje={portefolje}
                             />
                     }
                     <FeilmeldingBrukereModal

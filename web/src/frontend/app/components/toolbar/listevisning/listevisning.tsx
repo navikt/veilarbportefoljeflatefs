@@ -36,17 +36,22 @@ const ListevisningRad = (props: ListevisningRadProps) => {
     );
 };
 
-interface ListevisningOwnProps {
+interface OwnProps {
     filtergruppe: ListevisningType;
     skalVises: boolean;
 }
 
-interface ListevisningProps extends ListevisningOwnProps {
+interface StateProps {
     valgteAlternativ: Kolonne[];
     muligeAlternativer: Kolonne[];
+}
+
+interface DispatchProps {
     velgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => void;
     avvelgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => void;
 }
+
+type ListevisningProps = OwnProps & StateProps & DispatchProps;
 
 const Listevisning = (props: ListevisningProps) => {
     function handleChange(name, checked) {
@@ -87,14 +92,14 @@ const Listevisning = (props: ListevisningProps) => {
     );
 };
 
-function mapStateToProps(state: AppState, ownProps: ListevisningOwnProps) {
+function mapStateToProps(state: AppState, ownProps: OwnProps): StateProps {
     return {
         valgteAlternativ: selectValgteAlternativer(state, ownProps.filtergruppe),
         muligeAlternativer: selectMuligeAlternativer(state, ownProps.filtergruppe)
     };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<Action>) {
+function mapDispatchToProps(dispatch: Dispatch<Action>): DispatchProps {
     return {
         velgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(velgAlternativ(name, filtergruppe)),
         avvelgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(avvelgAlternativ(name, filtergruppe))
