@@ -92,7 +92,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                 />
                 <Listeoverskrift
                     className="listeoverskrift__veileder listeoverskrift"
-                    skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
+                    skalVises={valgteKolonner.includes(Kolonne.VEILEDER) || valgteKolonner.includes(Kolonne.NAVIDENT)}
                     id="enhet.portefolje.tabell.veileder"
                 />
             </div>
