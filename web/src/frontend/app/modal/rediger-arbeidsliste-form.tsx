@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Knapp } from 'nav-frontend-knapper';
 import { validForm, rules } from 'react-redux-form-validation';
@@ -7,10 +7,11 @@ import { Undertittel } from 'nav-frontend-typografi';
 import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
-import { brukerShape, statusShape } from '../proptype-shapes';
+import { BrukerModell, Status } from '../model-interfaces';
 import { redigerArbeidsliste } from '../ducks/arbeidsliste';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { STATUS } from '../ducks/utils';
+import { AppState } from '../reducer';
 
 const KOMMENTAR_MAKS_LENGDE = 250;
 
@@ -37,14 +38,21 @@ function label(bruker) {
     /></Undertittel>);
 }
 
-
+interface RedigerArbeidslisteFormProps {
+    lukkModal: () => void;
+    handleSubmit: () => void;
+    bruker: BrukerModell;
+    sistEndretDato: string;
+    sistEndretAv: string;
+    arbeidslisteStatus: Status;
+}
 
 function RedigerArbeidslisteForm({ lukkModal,
                                      handleSubmit,
                                      bruker,
                                      sistEndretDato,
                                      sistEndretAv,
-                                     arbeidslisteStatus }) {
+                                     arbeidslisteStatus }: RedigerArbeidslisteFormProps) {
     const lagrer = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     return (
         <form onSubmit={handleSubmit}>
@@ -76,25 +84,16 @@ function RedigerArbeidslisteForm({ lukkModal,
                 />
             </div>
             <div className="modal-footer" >
-                <Knapp type="hoved" className="knapp knapp--hoved" onClick={handleSubmit} spinner={lagrer}>
+                <Knapp type="hoved" className="knapp knapp--hoved" onClick={ handleSubmit } spinner={ lagrer }>
                     <FormattedMessage id="modal.knapp.lagre" />
                 </Knapp>
-                <button type="button" className="knapp" onClick={lukkModal}>
+                <button type="button" className="knapp" onClick={ lukkModal }>
                     <FormattedMessage id="modal.knapp.avbryt" />
                 </button>
             </div>
         </form>
     );
 }
-
-RedigerArbeidslisteForm.propTypes = {
-    lukkModal: PT.func.isRequired,
-    handleSubmit: PT.func.isRequired,
-    bruker: brukerShape.isRequired,
-    sistEndretDato: PT.string.isRequired,
-    sistEndretAv: PT.string.isRequired,
-    arbeidslisteStatus: statusShape
-};
 
 const RedigerArbeidslisteFormValidation = validForm({
     form: 'arbeidsliste-rediger',
@@ -103,7 +102,6 @@ const RedigerArbeidslisteFormValidation = validForm({
         frist: []
     }
 })(RedigerArbeidslisteForm);
-
 
 function oppdaterState(res, arbeidsliste, innloggetVeileder, fnr, lukkModal, dispatch) {
     lukkModal();
@@ -133,7 +131,7 @@ const mapDispatchToProps = () => ({
 
 });
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state: AppState, props: {bruker: BrukerModell}) => ({
     initialValues: {
         kommentar: props.bruker.arbeidsliste.kommentar,
         frist: props.bruker.arbeidsliste.frist
@@ -142,4 +140,3 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RedigerArbeidslisteFormValidation);
-

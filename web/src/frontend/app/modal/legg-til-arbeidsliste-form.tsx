@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { Knapp } from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { FieldArray } from 'redux-form';
@@ -13,6 +13,8 @@ import { leggTilStatustall } from '../ducks/statustall';
 import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { STATUS } from '../ducks/utils';
+import { AppState } from '../reducer';
+import { BrukerModell, VeilederModell, ArbeidslisteDataModell, Status } from '../model-interfaces';
 
 const KOMMENTAR_MAKS_LENGDE = 250;
 
@@ -39,7 +41,6 @@ function label(bruker) {
     /></Undertittel>);
 }
 
-// eslint-disable-next-line react/prop-types
 function renderFelter({ fields }) {
     return (
         <div>
@@ -70,13 +71,20 @@ function renderFelter({ fields }) {
         </div>);
 }
 
+interface LeggTilArbeidslisteFormProps {
+    lukkModal: () => void;
+    handleSubmit: () => void;
+    errorSummary: any;
+    arbeidslisteStatus?: Status;
+}
 
-function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary, arbeidslisteStatus }) {
+function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary, arbeidslisteStatus }: LeggTilArbeidslisteFormProps) {
+    const FieldRenderer = FieldArray as any;
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     return (
         <form onSubmit={handleSubmit}>
             {errorSummary}
-            <FieldArray name="arbeidsliste" component={renderFelter} test={'test'} />
+            <FieldRenderer name="arbeidsliste" component={renderFelter} test={'test'} />
             <div>
                 <div className="modal-footer">
                     <Knapp type="hoved" className="knapp knapp--hoved" spinner={laster}>
@@ -91,13 +99,6 @@ function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary, arbeid
     );
 }
 
-LeggTilArbeidslisteForm.propTypes = {
-    lukkModal: PT.func.isRequired,
-    handleSubmit: PT.func.isRequired,
-    errorSummary: PT.node.isRequired,
-    arbeidslisteStatus: PT.any
-};
-
 export const formNavn = 'arbeidsliste_kommentar_skjema';
 
 const LeggTilArbeidslisteReduxForm = validForm({
@@ -111,10 +112,9 @@ const LeggTilArbeidslisteReduxForm = validForm({
         })
     }
 
-
 })(LeggTilArbeidslisteForm);
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state: AppState, props: {valgteBrukere: BrukerModell[]}) => {
     const arbeidslisteData = props.valgteBrukere.map(({ fornavn, etternavn, fnr }) => ({
         fornavn,
         etternavn,
@@ -133,7 +133,7 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-function oppdaterState(res, liste, props, dispatch) {
+function oppdaterState(res, liste: ArbeidslisteDataModell[], props: {lukkModal: () => void, innloggetVeileder: VeilederModell, bruker: BrukerModell}, dispatch) {
     props.lukkModal();
     if (!res) {
         return visServerfeilModal()(dispatch);
@@ -164,7 +164,7 @@ function oppdaterState(res, liste, props, dispatch) {
 
 const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
-        const liste = formData.arbeidsliste.map((bruker, index) => ({
+        const liste: ArbeidslisteDataModell[] = formData.arbeidsliste.map((bruker, index) => ({
             fnr: bruker.fnr,
             kommentar: formData.arbeidsliste[index].kommentar,
             frist: formData.arbeidsliste[index].frist
@@ -174,6 +174,4 @@ const mapDispatchToProps = () => ({
     }
 });
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidslisteReduxForm);
-

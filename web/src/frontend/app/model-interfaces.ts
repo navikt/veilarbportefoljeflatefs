@@ -1,3 +1,5 @@
+import { STATUS } from './ducks/utils';
+
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
     ascending = 'ascending',
@@ -73,4 +75,18 @@ export interface StatustallModell {
 export interface FeilmeldingModalModell {
     aarsak: string;
     brukereError: string[];
+}
+
+export enum Status {
+    NOT_STARTED = 'NOT_STARTED',
+    PENDING = 'PENDING',
+    OK = 'OK',
+    RELOADING = 'RELOADING',
+    ERROR = 'ERROR'
+}
+
+export interface ArbeidslisteDataModell {
+    fnr: string;
+    kommentar: string;
+    frist: string;
 }
