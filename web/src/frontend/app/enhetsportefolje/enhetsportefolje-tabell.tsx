@@ -10,6 +10,7 @@ import {
 } from '../model-interfaces';
 import {Kolonne, ListevisningType} from '../ducks/ui/listevisning';
 import {selectValgteAlternativer} from '../ducks/ui/listevisning-selectors';
+import Checkbox from '../components/tabell/checkbox'
 
 interface EnhetTabellProps {
     portefolje: any;
@@ -43,6 +44,7 @@ function EnhetTabell({
             <ul className="brukerliste__body">
                 {brukere.map((bruker) =>
                     <li key={bruker.fnr}>
+                        <Checkbox bruker={bruker} settMarkert={settMarkert}/>
                         <EnhetBrukerpanel
                             bruker={bruker}
                             enhetId={enhetId}
