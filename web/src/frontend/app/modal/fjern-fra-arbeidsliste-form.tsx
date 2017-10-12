@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { Knapp } from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -11,6 +11,7 @@ import { leggTilStatustall } from '../ducks/statustall';
 import { STATUS } from '../ducks/utils';
 import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
+import { ArbeidslisteDataModell, BrukerModell, Status } from '../model-interfaces';
 
 function brukerLabel(bruker) {
     return (
@@ -29,8 +30,14 @@ function brukerLabel(bruker) {
     );
 }
 
+interface FjernFraArbeidslisteFormProps {
+    lukkModal: () => void;
+    valgteBrukere: BrukerModell[];
+    handleSubmit: () => void;
+    slettFraArbeidslisteStatus?: Status;
+}
 
-function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slettFraArbeidslisteStatus }) {
+function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slettFraArbeidslisteStatus }: FjernFraArbeidslisteFormProps) {
     const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
     return (
         <form onSubmit={handleSubmit}>
@@ -51,18 +58,11 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slet
     );
 }
 
-const FjernFraArbeidslisteReduxForm = reduxForm({
+const FjernFraArbeidslisteReduxForm = reduxForm<{}, FjernFraArbeidslisteFormProps>({
     form: 'fjern-fra-arbeidsliste-form'
 })(FjernFraArbeidslisteForm);
 
-FjernFraArbeidslisteForm.propTypes = {
-    lukkModal: PT.func.isRequired,
-    valgteBrukere: PT.arrayOf(brukerShape).isRequired,
-    handleSubmit: PT.func.isRequired,
-    slettFraArbeidslisteStatus: PT.any
-};
-
-function oppdaterState(res, props, arbeidsliste, dispatch) {
+function oppdaterState(res, props: FjernFraArbeidslisteFormProps, arbeidsliste: ArbeidslisteDataModell[], dispatch) {
     props.lukkModal();
     if (!res) {
         return visServerfeilModal()(dispatch);
@@ -95,7 +95,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
-        const arbeidsliste = props.valgteBrukere.map((bruker) => ({
+        const arbeidsliste: ArbeidslisteDataModell[] = props.valgteBrukere.map((bruker) => ({
             fnr: bruker.fnr,
             kommentar: bruker.arbeidsliste.kommentar,
             frist: bruker.arbeidsliste.frist
@@ -106,4 +106,3 @@ const mapDispatchToProps = () => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FjernFraArbeidslisteReduxForm);
-
