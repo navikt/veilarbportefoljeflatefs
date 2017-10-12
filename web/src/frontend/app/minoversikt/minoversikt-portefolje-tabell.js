@@ -31,7 +31,7 @@ function MinoversiktTabell({
             <ul className="minoversikt-brukere-liste">
                 {brukere.map((bruker) =>
                     <li key={bruker.fnr} className="minoversikt-brukere-panel">
-                        <CheckBox bruker={bruker} settMarkert={settMarkert} />
+                        <CheckBox className="minoversikt__checkbox" bruker={bruker} settMarkert={settMarkert} />
                         <MinoversiktBrukerPanel
                             bruker={bruker}
                             arbeidslisteSistEndretAv={finnVeilederSistEndretAv(bruker, veiledere)}
