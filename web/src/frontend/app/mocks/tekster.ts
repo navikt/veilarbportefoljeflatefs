@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     nb: {
         'paginering.se.alle': 'Se alle',
         'minoversikt.diagram.header.aap_unntak': 'AAP med unntak',

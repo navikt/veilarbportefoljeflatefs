@@ -6,6 +6,10 @@ export const MOCK_CONFIG = {
     failureRate: -1
 };
 
+export function rnd(start, stop) {
+    return Math.round(Math.random() * (stop - start) + start);
+}
+
 export function randomFailure(fn) {
     return (...args) => {
         const shouldFail = Math.random() <= MOCK_CONFIG.failureRate;

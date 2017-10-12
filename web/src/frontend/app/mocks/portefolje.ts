@@ -1,7 +1,8 @@
 /* eslint-disable */
 import faker from 'faker';
-import veiledereResponse from './veiledere';
-import { aktiviteter } from './../filtrering/filter-konstanter';
+import veiledereResponse, {innloggetVeileder} from './veiledere';
+import { aktiviteter } from '../filtrering/filter-konstanter';
+import { rnd } from './utils'
 
 const veiledere = veiledereResponse.veilederListe;
 
@@ -14,9 +15,7 @@ const ytelser = [
     'TILTAKSPENGER'
 ];
 
-function rnd(start, stop) {
-    return Math.round(Math.random() * (stop - start) + start);
-}
+
 
 function partall() {
     return rnd(0, 4) * 2;
@@ -69,10 +68,10 @@ function lagYtelse() {
 
     const out = {
         ytelse,
-        utlopsdato: null,
-        utlopsdatoFasett: null,
-        aapMaxtid: null,
-        aapMaxtidFasett: null
+        utlopsdato: '',
+        utlopsdatoFasett: '',
+        aapMaxtid: '',
+        aapMaxtidFasett: ''
     };
 
     const dag = rnd(1, 31);
@@ -107,7 +106,7 @@ function lagArbeidsliste() {
         frist: new Date(),
         isOppfolgendeVeileder: true,
         arbeidslisteAktiv: true,
-        sistEndretAv: {veilederId: 'Z990761'}
+        sistEndretAv: {veilederId: innloggetVeileder.ident}
     });
 }
 
@@ -153,6 +152,6 @@ const randomDate = ({past}) => {
         ar = -rnd(0,4) + new Date().getFullYear();
     }
     return new Date(ar, mnd-1, dag).toISOString();
-}
+};
 
-export default new Array(45).fill(0).map(() => lagBruker());
+export default new Array(123).fill(0).map(() => lagBruker());
