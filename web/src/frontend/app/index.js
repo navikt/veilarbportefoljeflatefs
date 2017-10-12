@@ -24,6 +24,7 @@ import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
 import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/utils';
+import FeatureToggelAdmin from './components/feature-toggle/feature-toggle-admin';
 /* eslint-enable import/first */
 /* eslint-disable no-undef */
 
@@ -72,6 +73,7 @@ render(
                         <Route onEnter={lagrePath} path="veiledere" component={VeiledereSide} />
                         <Route onEnter={lagrePath} path="portefolje(/:ident)" component={MinOversiktSide} />
                         <Route onEnter={redirect} path="tilbake" />
+                        <Route path="feature-toggle" component={FeatureToggelAdmin} />
                     </Route>
                 </Router>
             </IntlProvider>
