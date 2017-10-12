@@ -10,24 +10,33 @@ import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { leggEnhetIUrl } from '../utils/utils';
 import { hentStatusTall } from './../ducks/statustall';
-import { EnhettiltakState, hentEnhetTiltak } from './../ducks/enhettiltak';
+import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import { AppState } from '../reducer';
-import { FiltervalgModell, StatustallModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
+import { StatustallModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
+import {FiltreringState} from '../ducks/filtrering';
 
-interface EnhetSideProps {
+interface StateProps {
     valgtEnhet: ValgtEnhetModell;
-    filtervalg: FiltervalgModell;
+    filtervalg: FiltreringState;
     veilederliste: VeilederModell[];
-    hentStatusTall: (enhetId: string) => void;
-    hentEnhetTiltak: (enhetId: string) => void;
     statustall: { data: StatustallModell };
     enhettiltak: EnhettiltakState;
-    intl: InjectedIntl;
     listevisning: ListevisningState;
 }
+
+interface DispatchProps {
+    hentStatusTall: (enhetId: string) => void;
+    hentEnhetTiltak: (enhetId: string) => void;
+}
+
+interface OwnProps {
+    intl: InjectedIntl;
+}
+
+type EnhetSideProps = StateProps & DispatchProps & OwnProps;
 
 class EnhetSide extends React.Component<EnhetSideProps, {}> {
     componentWillMount() {
@@ -87,7 +96,7 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
     }
 }
 
-const mapStateToProps = (state: AppState) => ({
+const mapStateToProps = (state: AppState): StateProps => ({
     valgtEnhet: state.enheter.valgtEnhet,
     filtervalg: state.filtrering,
     veilederliste: state.veiledere.data.veilederListe,
@@ -96,7 +105,7 @@ const mapStateToProps = (state: AppState) => ({
     listevisning: state.ui.listevisningEnhetensOversikt
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentStatusTall: (enhet) => dispatch(hentStatusTall(enhet)),
     hentEnhetTiltak: (enhet) => dispatch(hentEnhetTiltak(enhet))
 });

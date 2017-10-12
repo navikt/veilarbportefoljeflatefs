@@ -24,10 +24,7 @@ const Toolbar = ({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenV
             <VelgalleCheckboks />
             <TildelVeileder gjeldendeVeileder={gjeldendeVeileder} filtergruppe={filtergruppe === ListevisningType.minOversikt ? 'veileder' : filtergruppe} />
             <Listevisning filtergruppe={filtergruppe} skalVises={filtergruppe === ListevisningType.enhetensOversikt}/>
-            <LeggTilArbeidsliste
-                visArbeidslisteModal={false}
-                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-            />
+            <LeggTilArbeidsliste visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje === true} />
             <SokVeilder veileder={{}} filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe} skalVises={sokVeilederSkalVises} />
         </div>
         <div className="toolbar__element toolbar__midten toolbar--skille-mellom-elementer">
