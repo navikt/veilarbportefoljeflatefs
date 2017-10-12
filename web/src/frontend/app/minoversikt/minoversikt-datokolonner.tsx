@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-    nesteUtlopsdatoEllerNull, utledValgtAktivitetstype, utlopsdatoForAktivitetEllerNull
+    nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper
 } from '../utils/utils';
 import DatoKolonne from '../components/datokolonne';
 import UkeKolonne from '../components/ukekolonne';
@@ -21,7 +21,7 @@ interface MinoversiktDatokolonnerProps {
 }
 
 function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }: MinoversiktDatokolonnerProps) {
-    const valgtAktivitetstype = utledValgtAktivitetstype(filtervalg.aktiviteter);
+    const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
     // TODO: bør gjøres før data lagres i storen
     const arbeidslisteFrist = bruker.arbeidsliste.frist ? new Date(bruker.arbeidsliste.frist) : null;
@@ -72,8 +72,8 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }: MinoversiktDato
                 skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
             />
             <DatoKolonne
-                dato={utlopsdatoForAktivitetEllerNull(bruker.aktiviteter, valgtAktivitetstype)}
-                skalVises={!!valgtAktivitetstype && filtervalg.tiltakstyper.length === 0}
+                dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
+                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
             />
         </span>
     );

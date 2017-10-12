@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Lukknapp from 'nav-frontend-lukknapp';
-import {AlertStripeInfoSolid} from 'nav-frontend-alertstriper';
+import { AlertStripeInfoSolid } from 'nav-frontend-alertstriper';
 import { FormattedMessage } from 'react-intl';
-import {Action, bindActionCreators, Dispatch} from 'redux';
-import {connect} from 'react-redux';
-import {AppState} from '../../../reducer';
-import {ListevisningType, lukkInfopanel} from '../../../ducks/ui/listevisning';
-import {selectMuligeAlternativer} from '../../../ducks/ui/listevisning-selectors';
+import { Action, bindActionCreators, Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { AppState } from '../../../reducer';
+import { ListevisningType, lukkInfopanel } from '../../../ducks/ui/listevisning';
+import { selectMuligeAlternativer } from '../../../ducks/ui/listevisning-selectors';
 
 interface ListevisningInfopanelProps {
     skalVises: boolean;
@@ -21,8 +21,8 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
 
     return (
         <AlertStripeInfoSolid className="blokk-m">
-            <div className="listevisning--infopanel">
-                <FormattedMessage id="listevisning.infopanel" tagName="p" />
+            <div className="listevisning--infopanel" aria-live="assertive" role="alert" aria-atomic="true">
+                <FormattedMessage id="listevisning.infopanel" />
                 <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={() => props.lukkPanel(props.name)}>Lukk</Lukknapp>
             </div>
         </AlertStripeInfoSolid>

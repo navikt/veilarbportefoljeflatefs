@@ -1,15 +1,15 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
-import {enhetShape, filtervalgShape, veilederShape} from './../proptype-shapes';
+import { connect } from 'react-redux';
+import { enhetShape, filtervalgShape, veilederShape } from './../proptype-shapes';
 import EnhetBrukerpanel from './enhet-brukerpanel';
-import {settBrukerSomMarkert, markerAlleBrukere} from '../ducks/portefolje';
+import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
 import EnhetListehode from './enhet-listehode';
 import {
     FiltervalgModell, Sorteringsrekkefolge, ValgtEnhetModell,
     VeilederModell
 } from '../model-interfaces';
-import {Kolonne, ListevisningType} from '../ducks/ui/listevisning';
-import {selectValgteAlternativer} from '../ducks/ui/listevisning-selectors';
+import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
+import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import Checkbox from '../components/tabell/checkbox';
 
 interface EnhetTabellProps {

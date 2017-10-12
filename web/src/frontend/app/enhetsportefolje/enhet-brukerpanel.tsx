@@ -2,11 +2,11 @@ import * as React from 'react';
 import Brukerinformasjon from '../components/tabell/brukerinformasjon';
 import EnhetDatokolonner from './enhet-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
-import {filtervalgShape, veilederShape} from '../proptype-shapes';
-import {EtikettType, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import { filtervalgShape, veilederShape } from '../proptype-shapes';
+import {EtikettType,FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage } from 'react-intl';
 import CheckBox from '../components/tabell/checkbox';
 
 interface VeilederinfoProps {

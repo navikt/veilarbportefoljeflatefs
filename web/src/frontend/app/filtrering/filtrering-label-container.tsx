@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
     ytelse
 } from './filter-konstanter';
-import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg} from '../ducks/filtrering';
-import {filtervalgLabelShape, veilederShape} from '../proptype-shapes';
-import {EnhetModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne, ListevisningState} from '../ducks/ui/listevisning';
+import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg } from '../ducks/filtrering';
+import { filtervalgLabelShape, veilederShape } from '../proptype-shapes';
+import { EnhetModell, FiltervalgModell } from '../model-interfaces';
+import { Kolonne, ListevisningState } from '../ducks/ui/listevisning';
 import * as classNames from 'classnames';
 
 interface FiltreringLabelContainerProps {
@@ -72,7 +72,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                             key={`aktivitet-${aktivitetkey}`}
                             label={`${FilterKonstanter[key][aktivitetkey]}: ${aktivitetvalue}`}
                             slettFilter={() => slettEnkelt(key, aktivitetkey)}
-                            harMuligMenIkkeValgtKolonne={muligMenIkkeValgt}
+                            harMuligMenIkkeValgtKolonne={muligMenIkkeValgt && aktivitetvalue === AktiviteterValg.JA}
                         />
                     ));
             } else if (value) {
@@ -90,7 +90,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
             return [];
         }).reduce((acc, l) => [...acc, ...l], []);
 
-    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} harMuligMenIkkeValgtKolonne={false}/>;
+    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} harMuligMenIkkeValgtKolonne={false} skalHaKryssIkon={false}/>;
 
     return (
         <section className={classNames('filtrering-label-container', {'blokk-s': (filterElementer.length > 0)})}>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import {ReactHTML, StatelessComponent} from 'react';
+import { ReactHTML, StatelessComponent } from 'react';
 
 function getDisplayName(comp) {
     return comp.displayName || comp.name || 'Unknown';
