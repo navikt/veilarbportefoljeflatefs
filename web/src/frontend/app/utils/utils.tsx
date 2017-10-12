@@ -63,7 +63,7 @@ export function sendBrukerTilUrl(url) {
 export function ytelseFilterErAktiv(ytelse) {
     return !!ytelse;
 }
-export function nesteUtlopsdatoEllerNull(utlopsdatoer?: AktiviteterModell): Date | null {
+export function nesteUtlopsdatoEllerNull(utlopsdatoer: AktiviteterModell | null ): Date | null {
     if (!utlopsdatoer) {
         return null;
     }
@@ -74,7 +74,7 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer?: AktiviteterModell): Date
         .filter((date) => date.getTime() >= Date.now())
         .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
 }
-export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFiltervalg) {
+export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFiltervalg): AktiviteterModell | null {
     if (!aktiviteterFiltervalg || Object.keys(aktiviteterFiltervalg).length === 0 || !brukerAktiviteter || Object.keys(aktiviteterFiltervalg).length === 0) {
         return null;
     }
