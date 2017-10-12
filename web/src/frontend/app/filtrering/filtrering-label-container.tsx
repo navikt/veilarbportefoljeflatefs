@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
@@ -20,6 +21,7 @@ interface FiltreringLabelContainerProps {
     filtervalg: FiltervalgModell;
     filtergruppe: string;
     listevisning: ListevisningState;
+    intl: any;
 }
 
 function getKolonneFraLabel(label) {
@@ -38,7 +40,7 @@ function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
     return false;
 }
 
-function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}}: FiltreringLabelContainerProps) {
+function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}, intl}: FiltreringLabelContainerProps) {
     let muligMenIkkeValgt: boolean;
     let kolonne: Kolonne | null;
     const filterElementer = Object.entries(filtervalg)
@@ -47,7 +49,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                 return [
                     <FiltreringLabel
                         key={key}
-                        label={FilterKonstanter[key]}
+                        label={FilterKonstanter[key](intl)}
                         slettFilter={() => slettEnkelt(key, false)}
                     />
                 ];
@@ -58,7 +60,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                         label={
                             key === 'tiltakstyper' ?
                                 enhettiltak[singleValue] :
-                                (singleValue.label || FilterKonstanter[key][singleValue])
+                                (singleValue.label || FilterKonstanter[key](intl)[singleValue])
                         }
                         slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                     />)
@@ -70,7 +72,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     .map(([aktivitetkey, aktivitetvalue]) => (
                         <FiltreringLabel
                             key={`aktivitet-${aktivitetkey}`}
-                            label={`${FilterKonstanter[key][aktivitetkey]}: ${aktivitetvalue}`}
+                            label={`${FilterKonstanter[key](intl)[aktivitetkey]}: ${aktivitetvalue}`}
                             slettFilter={() => slettEnkelt(key, aktivitetkey)}
                             harMuligMenIkkeValgtKolonne={muligMenIkkeValgt && aktivitetvalue === AktiviteterValg.JA}
                         />
@@ -81,7 +83,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                 return [
                     <FiltreringLabel
                         key={`${key}--${value}`}
-                        label={FilterKonstanter[key][value]}
+                        label={FilterKonstanter[key](intl)[value]}
                         slettFilter={() => slettEnkelt(key, null)}
                         harMuligMenIkkeValgtKolonne={muligMenIkkeValgt}
                     />
@@ -107,4 +109,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     }
 });
 
-export default connect(null, mapDispatchToProps)(FiltreringLabelContainer);
+export default connect(null, mapDispatchToProps)(
+    injectIntl(FiltreringLabelContainer)
+);
