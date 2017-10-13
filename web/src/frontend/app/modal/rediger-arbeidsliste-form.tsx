@@ -141,4 +141,4 @@ const mapStateToProps = (state: AppState, props: {bruker: BrukerModell}) => ({
     arbeidslisteStatus: state.arbeidsliste.status
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RedigerArbeidslisteFormValidation);
+export default connect(mapStateToProps, mapDispatchToProps)(RedigerArbeidslisteFormValidation) as any; // todo: fix typing, redux form issues
