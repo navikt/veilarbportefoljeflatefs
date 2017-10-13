@@ -1,4 +1,5 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
+import { Knapp } from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
@@ -7,8 +8,10 @@ import { slettArbeidsliste } from '../ducks/arbeidsliste';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { brukerShape } from '../proptype-shapes';
 import { leggTilStatustall } from '../ducks/statustall';
+import { STATUS } from '../ducks/utils';
 import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
+import { ArbeidslisteDataModell, BrukerModell, Status } from '../model-interfaces';
 
 function brukerLabel(bruker) {
     return (
@@ -27,8 +30,15 @@ function brukerLabel(bruker) {
     );
 }
 
+interface FjernFraArbeidslisteFormProps {
+    lukkModal: () => void;
+    valgteBrukere: BrukerModell[];
+    handleSubmit: () => void;
+    slettFraArbeidslisteStatus?: Status;
+}
 
-function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit }) {
+function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slettFraArbeidslisteStatus }: FjernFraArbeidslisteFormProps) {
+    const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
     return (
         <form onSubmit={handleSubmit}>
             <div className="arbeidsliste-listetekst">
@@ -37,9 +47,9 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit }) {
                 </ul>
             </div>
             <div className="modal-footer">
-                <button type="submit" className="knapp knapp--hoved" onClick={handleSubmit}>
+                <Knapp type="hoved" className="knapp knapp--hoved" spinner={laster} onClick={handleSubmit}>
                     <FormattedMessage id="modal.knapp.lagre" />
-                </button>
+                </Knapp>
                 <button type="button" className="knapp" onClick={lukkModal}>
                     <FormattedMessage id="modal.knapp.avbryt" />
                 </button>
@@ -48,17 +58,12 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit }) {
     );
 }
 
-const FjernFraArbeidslisteReduxForm = reduxForm({
+const FjernFraArbeidslisteReduxForm = reduxForm<{}, FjernFraArbeidslisteFormProps>({
     form: 'fjern-fra-arbeidsliste-form'
 })(FjernFraArbeidslisteForm);
 
-FjernFraArbeidslisteForm.propTypes = {
-    lukkModal: PT.func.isRequired,
-    valgteBrukere: PT.arrayOf(brukerShape).isRequired,
-    handleSubmit: PT.func.isRequired
-};
-
-function oppdaterState(res, arbeidsliste, dispatch) {
+function oppdaterState(res, props: FjernFraArbeidslisteFormProps, arbeidsliste: ArbeidslisteDataModell[], dispatch) {
+    props.lukkModal();
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -84,18 +89,20 @@ function oppdaterState(res, arbeidsliste, dispatch) {
     return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
 
+const mapStateToProps = (state) => ({
+    slettFraArbeidslisteStatus: state.arbeidsliste.status
+});
+
 const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
-        const arbeidsliste = props.valgteBrukere.map((bruker) => ({
+        const arbeidsliste: ArbeidslisteDataModell[] = props.valgteBrukere.map((bruker) => ({
             fnr: bruker.fnr,
             kommentar: bruker.arbeidsliste.kommentar,
             frist: bruker.arbeidsliste.frist
         }));
         slettArbeidsliste(arbeidsliste)(dispatch)
-            .then((res) => oppdaterState(res, arbeidsliste, dispatch));
-        props.lukkModal();
+            .then((res) => oppdaterState(res, props, arbeidsliste, dispatch));
     }
 });
 
-export default connect(null, mapDispatchToProps)(FjernFraArbeidslisteReduxForm);
-
+export default connect(mapStateToProps, mapDispatchToProps)(FjernFraArbeidslisteReduxForm as any); // todo: fix typing

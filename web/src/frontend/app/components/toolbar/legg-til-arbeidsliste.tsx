@@ -4,14 +4,23 @@ import { FormattedMessage } from 'react-intl';
 import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
 import { skjulModal, visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
+import {AppState} from '../../reducer';
 
-interface LeggTilArbeidslisteProps {
+interface StateProps {
     portefolje: PortefoljeState;
     skalSkjules: boolean;
     visModal?: boolean;
+}
+
+interface DispatchProps {
     visArbeidslisteModal: () => void;
+}
+
+interface OwnProps {
     visesAnnenVeiledersPortefolje: boolean;
 }
+
+type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps;
 
 class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     constructor(props) {
@@ -61,15 +70,14 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState): StateProps => ({
     skalSkjules: (state.ui.side.side || '') !== 'veilederoversikt',
     visModal: state.modal.visModal,
     portefolje: state.portefolje
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch): DispatchProps => ({
     visArbeidslisteModal: () => dispatch(visModal()),
-    skjulArbeidslisteModal: () => dispatch(skjulModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidsliste);

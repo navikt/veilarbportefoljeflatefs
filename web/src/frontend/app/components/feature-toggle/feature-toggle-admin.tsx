@@ -30,11 +30,14 @@ interface FeatureToggleAdminProps {
 
 function FeatureToggleAdmin(props: FeatureToggleAdminProps) {
     return (
-        <ul>
-            { Object.entries(props.features).map(([featureNavn, erAktivert]) => (
-                <Feature navn={featureNavn} erAktivert={erAktivert} onChange={(aktivert) => props.doSettFeatureState(featureNavn, aktivert)} />
-            ))}
-        </ul>
+        <section>
+            <h1>Feature-toggles</h1>
+            <ul>
+                { Object.entries(props.features).map(([featureNavn, erAktivert]) => (
+                    <Feature navn={featureNavn} erAktivert={erAktivert} onChange={(aktivert) => props.doSettFeatureState(featureNavn, aktivert)} />
+                ))}
+            </ul>
+        </section>
     );
 }
 

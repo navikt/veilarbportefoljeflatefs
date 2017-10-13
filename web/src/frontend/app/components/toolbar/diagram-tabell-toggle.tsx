@@ -7,15 +7,23 @@ import * as VK from './../../minoversikt/minoversikt-konstanter';
 import { AppState } from './../../reducer';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 
-interface DiagramTabellToggleOwnProps {
+interface OwnProps {
     filtergruppe: ListevisningType;
 }
 
-interface DiagramTabellToggleProps extends DiagramTabellToggleOwnProps {
-    visningsmodus: string;
+interface DispatchProps {
     endreVisningsmodus: (visning: string) => void;
+}
+
+interface StateProps {
+    visningsmodus: string;
     skalSkjules: boolean;
 }
+
+type DiagramTabellToggleProps =
+    & OwnProps
+    & DispatchProps
+    & StateProps;
 
 function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules }: DiagramTabellToggleProps) {
     if (skalSkjules) {
@@ -54,17 +62,17 @@ function getFiltreringsstate(state: AppState, filtergruppe: ListevisningType) {
     return state.filtreringVeilederoversikt;
 }
 
-const mapStateToProps = (state, ownProps: DiagramTabellToggleOwnProps) => {
+const mapStateToProps = (state: AppState, ownProps: OwnProps): StateProps => {
     const filtreringsstate = getFiltreringsstate(state, ownProps.filtergruppe);
     const ytelse = filtreringsstate.ytelse;
 
-    return ({
+    return {
         visningsmodus: state.veilederpaginering.visningsmodus,
         skalSkjules: ytelse === null || ytelse === undefined || ytelse === 'AAP_UNNTAK'
-    });
+    };
 };
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
+const mapDispatchToProps = (dispatch): DispatchProps => bindActionCreators({
     endreVisningsmodus(modus) {
         return settVisningsmodus(modus);
     }

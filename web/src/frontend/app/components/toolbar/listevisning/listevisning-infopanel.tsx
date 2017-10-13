@@ -8,11 +8,19 @@ import { AppState } from '../../../reducer';
 import { ListevisningType, lukkInfopanel } from '../../../ducks/ui/listevisning';
 import { selectMuligeAlternativer } from '../../../ducks/ui/listevisning-selectors';
 
-interface ListevisningInfopanelProps {
+interface StateProps {
     skalVises: boolean;
+}
+
+interface DispatchProps {
     lukkPanel: (name: ListevisningType) => void;
+}
+
+interface OwnProps {
     name: ListevisningType;
 }
+
+type ListevisningInfopanelProps = StateProps & DispatchProps & OwnProps;
 
 const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
     if (!props.skalVises) {
@@ -36,7 +44,7 @@ const harLukketInfoPanel = (name: ListevisningType, state: AppState) => {
     return state.ui.listevisningMinOversikt.lukketInfopanel;
 };
 
-const mapStateToProps = (state: AppState, ownProps: { name: ListevisningType }) => {
+const mapStateToProps = (state: AppState, ownProps: OwnProps): StateProps => {
     const antallMulige = selectMuligeAlternativer(state, ownProps.name).length;
 
     return {
@@ -44,7 +52,7 @@ const mapStateToProps = (state: AppState, ownProps: { name: ListevisningType }) 
     };
 };
 
-const mapActionsToProps = (dispatch: Dispatch<Action>) => {
+const mapActionsToProps = (dispatch: Dispatch<Action>): DispatchProps => {
     return bindActionCreators({
         lukkPanel: lukkInfopanel
     }, dispatch);
