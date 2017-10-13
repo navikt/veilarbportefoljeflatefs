@@ -115,3 +115,17 @@ export interface FeilmeldingModalModell {
     aarsak: string;
     brukereError: string[];
 }
+
+export enum Status {
+    NOT_STARTED = 'NOT_STARTED',
+    PENDING = 'PENDING',
+    OK = 'OK',
+    RELOADING = 'RELOADING',
+    ERROR = 'ERROR'
+}
+
+export interface ArbeidslisteDataModell {
+    fnr: string;
+    kommentar: string;
+    frist: string;
+}

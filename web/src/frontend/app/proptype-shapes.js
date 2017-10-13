@@ -1,4 +1,7 @@
 import { PropTypes as PT } from 'react';
+import { STATUS } from './ducks/utils';
+
+export const statusShape = PT.oneOf(Object.keys(STATUS));
 
 export const feilmeldingModalShape = PT.shape({
     aarsak: PT.string,

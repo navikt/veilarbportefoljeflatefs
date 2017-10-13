@@ -1,31 +1,43 @@
-import React, { PropTypes as PT } from 'react';
-import { reduxForm, Fields, Field } from 'redux-form';
+import * as React from 'react';
+import { reduxForm, Fields, Field, SubmitHandler } from 'redux-form';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { filtervalgShape } from '../../proptype-shapes';
-import { lagConfig } from './../../filtrering/filter-konstanter';
+import { FiltervalgModell } from '../../model-interfaces';
+import { lagConfig } from '../../filtrering/filter-konstanter';
 
-function renderFieldsFactory({ names: _names, valg, skjema, ...fields }) {
+interface RenderFieldProps {
+    names: any;
+    valg: { [id: string]: ValgModell} | string;
+    skjema: string;
+}
+
+interface ValgModell extends Field {
+    className?: string;
+    label: string;
+}
+
+function RenderFields({ names: _names, valg, skjema, ...fields }: RenderFieldProps) {
     const fieldCls = (className) => classNames('skjemaelement skjemaelement--horisontal', className);
 
     const fieldElements = Object.values(fields)
-            .map((field) => {
-                const { name, value: _value, ...handler } = field.input;
-                const { label, className, ...fieldProps } = lagConfig(valg[field.input.name]);
+            .map((value) => {
+                const { name, value: _value, ...handler } = value.input;
+                const { label, className } = lagConfig(valg[value.input.name]);
 
                 return {
                     element: (
-                        <div key={field.input.name} className={fieldCls(className)} {...fieldProps}>
+                        <div key={value.input.name} className={fieldCls(className)}>
                             <Field
-                                id={field.input.name}
+                                id={value.input.name}
                                 name={skjema} value={name}
                                 component="input"
                                 type="radio"
                                 className="skjemaelement__input radioknapp"
                                 {...handler}
                             />
-                            <label htmlFor={field.input.name} className="skjemaelement__label">
+                            <label htmlFor={value.input.name} className="skjemaelement__label">
                                 {label}
                             </label>
                         </div>
@@ -56,14 +68,29 @@ function renderFieldsFactory({ names: _names, valg, skjema, ...fields }) {
     );
 }
 
-function prepSubmit(name, fn, close) {
+type prepSubmitReturnType = (values: any[]) => void;
+
+function prepSubmit(name, fn, close): prepSubmitReturnType {
     return (values) => {
         fn(name, values[name]);
         close();
     };
 }
 
-function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown }) {
+interface RadioFilterformProps {
+    pristine: boolean;
+    handleSubmit: SubmitHandler;
+    form: string;
+}
+
+interface RadioFilterformOwnProps {
+    valg: any;
+    closeDropdown: () => void;
+    filtervalg: FiltervalgModell;
+    onSubmit: () => void;
+}
+
+function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown }: RadioFilterformProps & RadioFilterformOwnProps, context) {
     const knappCls = ['knapp', 'knapp--mini', !pristine ? 'knapp--hoved' : ''].join(' ');
     const submitknapp = !pristine ? (
         <button className={knappCls} type="submit">
@@ -77,10 +104,13 @@ function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDr
 
     const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown));
 
+    // TODO Finne en bedre løsning på dette
+    const FieldRenderer = Fields as any;
+
     return (
         <form className="skjema radio-filterform" onSubmit={submithandler}>
             <div className="radio-filterform__valg">
-                <Fields names={Object.keys(valg)} valg={valg} skjema={form} component={renderFieldsFactory} />
+                <FieldRenderer names={Object.keys(valg)} valg={valg} skjema={form} component={RenderFields} />
             </div>
             <div className="knapperad blokk-xxs">
                 {submitknapp}
@@ -89,29 +119,13 @@ function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDr
     );
 }
 
-
-RadioFilterform.propTypes = {
-    pristine: PT.bool.isRequired,
-    handleSubmit: PT.func.isRequired,
-    form: PT.string.isRequired,
-    valg: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
-    closeDropdown: PT.func.isRequired,
-    filtervalg: filtervalgShape, // eslint-disable-line react/no-unused-prop-types
-    onSubmit: PT.func.isRequired
-};
-
-renderFieldsFactory.propTypes = {
-    names: PT.object.isRequired,
-    valg: PT.arrayOf(PT.string).isRequired,
-    skjema: PT.string.isRequired
-};
-
+const RadioFilterReduxForm = reduxForm<RadioFilterformProps, RadioFilterformOwnProps>({
+    form: 'veiledertildeling'
+})(RadioFilterform);
 
 const mapStateToProps = (state, ownProps) => {
     const name = ownProps.form;
-    const initialValues = { [name]: ownProps.filtervalg[name] };
-
-    return { initialValues };
+    return { [name]: ownProps.filtervalg[name] };
 };
 
-export default connect(mapStateToProps)(reduxForm()(RadioFilterform));
+export default connect(mapStateToProps)(RadioFilterReduxForm);
