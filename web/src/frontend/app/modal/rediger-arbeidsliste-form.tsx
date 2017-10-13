@@ -82,6 +82,7 @@ function RedigerArbeidslisteForm({ lukkModal,
                 <Datovelger
                     feltNavn={'frist'}
                     labelId="arbeidsliste-form.label.dato"
+                    tidligsteFom={new Date()}
                     feltErValgfritt
                 />
             </div>
