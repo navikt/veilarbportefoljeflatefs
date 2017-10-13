@@ -2,22 +2,19 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import {AppState} from '../../reducer';
 
-type Feature = React.ReactChild | React.ReactChildren;
 
-interface FeatureToggleProps {
+interface FeatureToggleProps extends FeatureToggleOwnProps{
     isEnabled: boolean;
-    name: string;
-    children?: Feature;
 }
 
 interface FeatureToggleOwnProps {
     name: string;
-    children?: Feature;
+    children: React.ReactNode;
 }
 
 function FeatureToggle(props: FeatureToggleProps) {
     if (props.isEnabled) {
-        return props.children;
+        return React.Children.only(props.children);
     }
     return null;
 }
