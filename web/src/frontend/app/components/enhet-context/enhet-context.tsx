@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {default as AlertStripe } from 'nav-frontend-alertstriper';
+import AlertStripe from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
 import { beholdAktivEnhet, endreAktivEnhet, settTilkoblingState, visAktivEnhetModal } from './context-reducer';
 import { AppState } from '../../reducer';
@@ -29,9 +29,9 @@ interface DispatchProps {
     doSettTilkoblingState: (state: boolean) => void;
 }
 
-type BrukerContextProps = StateProps & DispatchProps;
+type EnhetContextProps = StateProps & DispatchProps;
 
-class BrukerContext extends React.Component<BrukerContextProps> {
+class EnhetContext extends React.Component<EnhetContextProps> {
     connection: WebSocket;
     connectionState: ConnectionStates;
 
@@ -114,4 +114,4 @@ const mapDispatchToProps = (dispatch): DispatchProps => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BrukerContext);
+export default connect(mapStateToProps, mapDispatchToProps)(EnhetContext);

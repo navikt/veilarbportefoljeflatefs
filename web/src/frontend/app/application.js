@@ -14,7 +14,7 @@ import { settSide } from './ducks/ui/side';
 import history from './history';
 import { enhetShape, valgtEnhetShape, veiledereShape } from './proptype-shapes';
 import FeatureToggle from './components/feature-toggle/feature-toggle';
-import NyContextListener from './components/bruker-i-context/ny-context-listener';
+import EnhetContext from './components/enhet-context/enhet-context';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(location.search).vistekster; // eslint-disable-line no-undef
@@ -91,7 +91,7 @@ class Application extends Component {
                 <div className="portefolje">
                     <Innholdslaster avhengigheter={[ledetekster, enheter, enheter.valgtEnhet, veiledere]}>
                         <FeatureToggle name="bruker_i_context">
-                            <NyContextListener />
+                            <EnhetContext />
                         </FeatureToggle>
                         <div className="container maincontent side-innhold">
                             {children}
