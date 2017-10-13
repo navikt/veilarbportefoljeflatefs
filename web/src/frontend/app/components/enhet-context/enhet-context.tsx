@@ -4,18 +4,10 @@ import { connect } from 'react-redux';
 import { beholdAktivEnhet, endreAktivEnhet, settTilkoblingState, visAktivEnhetModal } from './context-reducer';
 import { AppState } from '../../reducer';
 import NyContextModal from './ny-context-modal';
-
-enum ConnectionStates {
-    CLOSING = 'closing',
-    CONNECTED = 'connected',
-    NOT_CONNECTED = 'not_connected'
-}
-
-enum Messages {
-    ESTABLISHED = 'Connection Established',
-    PING = 'ping!',
-    NY_AKTIV_ENHET = 'NY_AKTIV_ENHET',
-}
+import EnhetContextListener, {
+    EnhetConnectionState, EnhetContextEvent,
+    EnhetContextEventNames
+} from './enhet-context-listener';
 
 interface StateProps {
     nyEnhetSynlig: boolean;
@@ -32,54 +24,32 @@ interface DispatchProps {
 type EnhetContextProps = StateProps & DispatchProps;
 
 class EnhetContext extends React.Component<EnhetContextProps> {
-    connection: WebSocket;
-    connectionState: ConnectionStates;
+    contextListener: EnhetContextListener;
 
     constructor(props) {
         super(props);
-        this.connectionState = ConnectionStates.NOT_CONNECTED;
+        this.enhetContextHandler = this.enhetContextHandler.bind(this);
     }
 
     componentDidMount() {
-        this.lagWebSocketConnection();
+        const uri = `wss://app-t4.adeo.no/modiaeventdistribution/websocket`;
+        this.contextListener = new EnhetContextListener(uri, this.enhetContextHandler);
     }
 
     componentWillUnmount() {
-        this.connectionState = ConnectionStates.CLOSING;
-        this.connection.close();
+        this.contextListener.close();
     }
 
-    lagWebSocketConnection() {
-        if (this.connectionState === ConnectionStates.CLOSING) {
-            return;
-        }
-
-        this.connection = new WebSocket(`wss://app-t4.adeo.no/modiaeventdistribution/websocket`); // TODO: ikke hardkode
-
-        this.connection.onopen = (e) => {
-            this.connection.send('hallo!');
-        };
-
-        this.connection.onmessage = (e: MessageEvent) => {
-            if (e.data === Messages.ESTABLISHED || e.data === Messages.PING) {
-                this.connectionState = ConnectionStates.CONNECTED;
-                this.props.doSettTilkoblingState(true);
-            } else if(e.data === Messages.NY_AKTIV_ENHET) {
+    enhetContextHandler(event: EnhetContextEvent) {
+        switch (event.type) {
+            case EnhetContextEventNames.CONNECTION_STATE_CHANGED:
+                const connected = event.state === EnhetConnectionState.CONNECTED;
+                this.props.doSettTilkoblingState(connected);
+                break;
+            case EnhetContextEventNames.NY_AKTIV_ENHET:
                 this.props.doVisAktivEnhetModal();
-            }
-        };
-
-        this.connection.onerror = (e: ErrorEvent) => {
-            this.props.doSettTilkoblingState(false);
-        };
-
-        this.connection.onclose = () => {
-            this.props.doSettTilkoblingState(false);
-            if (this.connectionState !== ConnectionStates.CLOSING) {
-                this.connectionState = ConnectionStates.NOT_CONNECTED;
-            }
-            setTimeout(() => this.lagWebSocketConnection(), 1000);
-        };
+                break;
+        }
     }
 
     render() {
