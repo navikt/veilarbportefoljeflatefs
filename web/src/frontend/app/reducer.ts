@@ -26,6 +26,7 @@ import listevisningReducer, {
     ListevisningType
 } from './ducks/ui/listevisning';
 import {featureToggleReducer, FeatureToggleState, initialState as featureInitialState} from './components/feature-toggle/feature-toggle-reducer';
+import {default as contextReducer, ContextState} from './components/bruker-i-context/context-reducer';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -75,6 +76,7 @@ export interface AppState {
     diagram: any;
     arbeidsliste: any;
     enhettiltak: EnhettiltakState;
+    nycontext: ContextState;
     features: FeatureToggleState;
     form: any;
 }
@@ -103,6 +105,7 @@ export default combineReducers<AppState>({
     feilmeldingModal: feilmedlingModalReducer,
     diagram: diagramReducer,
     arbeidsliste: arbeidslisteReducer,
+    nycontext: contextReducer,
     enhettiltak: enhetTiltakReducer,
     features: persistent('featureToggles', location, featureToggleReducer, slettCleanIUrl, featureInitialState),
     form: formReducer

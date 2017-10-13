@@ -19,6 +19,10 @@ declare module "nav-frontend-alertstriper" {
 
     }
 
+    export class AlertStripeAdvarselSolid extends React.Component<AlertStripeProps, {}>{
+
+    }
+
     export class AlertStripeSuksessSolid extends React.Component<AlertStripeProps, {}>{
 
     }
