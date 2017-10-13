@@ -58,9 +58,9 @@ declare module "nav-frontend-skjema" {
 		feil?: Feil;
 	}
 
-	interface TextareaProps extends React.HTMLProps<Textarea> {
+	export interface TextareaProps extends React.HTMLProps<Textarea> {
 		label: React.ReactNode | any;
-		value: string;
+		value?: string;
 		maxLength?: number;
 		textareaClass?: string;
 		id?: string;
