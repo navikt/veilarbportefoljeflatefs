@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
 import { skjulModal, visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
-import {AppState} from '../../reducer';
+import { AppState } from '../../reducer';
 
 interface StateProps {
     portefolje: PortefoljeState;

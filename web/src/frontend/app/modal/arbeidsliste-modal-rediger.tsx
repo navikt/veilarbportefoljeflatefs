@@ -4,7 +4,7 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
 import { brukerShape } from '../proptype-shapes';
-import {BrukerModell} from "../model-interfaces";
+import { BrukerModell } from '../model-interfaces';
 
 NavFrontendModal.setAppElement('#applikasjon');
 
@@ -45,6 +45,5 @@ function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder
 
         </NavFrontendModal>);
 }
-
 
 export default ArbeidslisteModalRediger;
