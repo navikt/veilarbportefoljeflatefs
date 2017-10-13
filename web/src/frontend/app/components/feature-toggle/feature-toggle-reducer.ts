@@ -1,4 +1,4 @@
-export type FeatureToggleState = { [feature: string]: boolean };
+export interface FeatureToggleState { [feature: string]: boolean; }
 
 export const initialState: FeatureToggleState = {
     bruker_i_context: false
@@ -37,5 +37,5 @@ export const settFeatureState = (navn: string, aktivert: boolean): FeatureToggle
         type: FeatureToggleActionNames.TOGGLE_FEATURE,
         navn,
         aktivert
-    }
+    };
 };

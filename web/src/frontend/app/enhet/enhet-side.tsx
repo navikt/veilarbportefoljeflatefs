@@ -16,7 +16,7 @@ import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisni
 import { AppState } from '../reducer';
 import { StatustallModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
-import {FiltreringState} from '../ducks/filtrering';
+import { FiltreringState } from '../ducks/filtrering';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;

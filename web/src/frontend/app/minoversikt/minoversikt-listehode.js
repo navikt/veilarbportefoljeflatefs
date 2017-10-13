@@ -39,29 +39,27 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                         className="listeoverskrift__dato listeoverskrift col col-xs-1"
                         skalVises={!!filtervalg && filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
                         id={'portefolje.tabell.svarfranav'}
-
-                />
-                <Listeoverskrift
-                    className="listeoverskrift__dato listeoverskriftcol col-xs-1"
-                    skalVises={!!filtervalg && filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
-                    id={'portefolje.tabell.svarfrabruker'}
-                />
-                <Listeoverskrift
-                    className="listeoverskrift__dato listeoverskriftcol col-xs-1"
-                    skalVises={!!filtervalg && filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
-                    id={'portefolje.tabell.utlopaktivitet'}
-                />
-                <Listeoverskrift
-                    className="listeoverskrift__dato listeoverskriftcol col-xs-1"
-                    skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
-                    id={'portefolje.tabell.aktivitet.neste.utlop'}
-                />
-                <Listeoverskrift
-                    className="listeoverskrift__dato listeoverskriftcol col-xs-1"
-                    skalVises={!!filtervalg && harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
-                    id={'portefolje.tabell.aktivitet.neste.utlop.aktivitetstype'}
-
-                /></div>
+                    />
+                    <Listeoverskrift
+                        className="listeoverskrift__dato listeoverskriftcol col-xs-1"
+                        skalVises={!!filtervalg && filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
+                        id={'portefolje.tabell.svarfrabruker'}
+                    />
+                    <Listeoverskrift
+                        className="listeoverskrift__dato listeoverskriftcol col-xs-1"
+                        skalVises={!!filtervalg && filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
+                        id={'portefolje.tabell.utlopaktivitet'}
+                    />
+                    <Listeoverskrift
+                        className="listeoverskrift__dato listeoverskriftcol col-xs-1"
+                        skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
+                        id={'portefolje.tabell.aktivitet.neste.utlop'}
+                    />
+                    <Listeoverskrift
+                        className="listeoverskrift__dato listeoverskriftcol col-xs-1"
+                        skalVises={!!filtervalg && harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
+                        id={'portefolje.tabell.aktivitet.neste.utlop.aktivitetstype'}
+                    /></div>
             </div>
             <div className="brukerliste--border-bottom">
                 <div className="brukerliste__sorteringheader brukerliste--minoversikt-padding">

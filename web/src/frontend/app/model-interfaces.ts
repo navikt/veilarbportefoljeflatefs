@@ -1,4 +1,4 @@
-import {AktiviteterValg} from "./ducks/filtrering";
+import { AktiviteterValg } from './ducks/filtrering';
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',

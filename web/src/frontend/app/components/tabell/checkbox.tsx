@@ -1,16 +1,16 @@
 import * as React from 'react';
-import {BrukerModell} from "../../model-interfaces";
+import { BrukerModell } from '../../model-interfaces';
 import * as classnames from 'classnames';
 
 interface CheckboxProps {
     bruker: BrukerModell;
-    settMarkert: (string, bool) => void;
+    settMarkert: (felt: string, markert: boolean) => void;
     className?: string;
 }
 
 function Checkbox({bruker, settMarkert, className}: CheckboxProps) {
     return (
-        <span className={classnames("skjema__input", "checkboks__wrapper", "brukerliste--checkbox-margin", className)}>
+        <span className={classnames('skjema__input', 'checkboks__wrapper', 'brukerliste--checkbox-margin', className)}>
             <input className="checkboks"
 
                    id={`checkbox-${bruker.fnr}`}
@@ -23,4 +23,4 @@ function Checkbox({bruker, settMarkert, className}: CheckboxProps) {
     );
 }
 
-export default Checkbox
+export default Checkbox;

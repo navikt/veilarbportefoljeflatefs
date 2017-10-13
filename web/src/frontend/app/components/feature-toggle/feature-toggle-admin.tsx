@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import {Checkbox} from 'nav-frontend-skjema';
-import {FeatureToggleState, settFeatureState} from './feature-toggle-reducer';
-import {AppState} from '../../reducer';
+import { Checkbox } from 'nav-frontend-skjema';
+import { FeatureToggleState, settFeatureState } from './feature-toggle-reducer';
+import { AppState } from '../../reducer';
 
 interface FeatureProps {
     navn: string;
@@ -19,9 +19,8 @@ function Feature(props: FeatureProps) {
                 onChange={(event) => props.onChange(event.currentTarget.checked)}
             />
         </li>
-    )
+    );
 }
-
 
 interface FeatureToggleAdminProps {
     features: FeatureToggleState;
@@ -41,10 +40,10 @@ function FeatureToggleAdmin(props: FeatureToggleAdminProps) {
     );
 }
 
-function mapStateToProps (state: AppState) {
+function mapStateToProps(state: AppState) {
     return {
         features: state.features
-    }
+    };
 }
 
 function mapDispatchToProps(dispatch) {
