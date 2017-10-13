@@ -4,6 +4,7 @@ import { enhetShape, filtervalgShape, veilederShape } from './../proptype-shapes
 import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
 import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
 import MinOversiktListehode from './minoversikt-listehode';
+import CheckBox from '../components/tabell/checkbox';
 
 function finnVeilederSistEndretAv(bruker, veiledere) {
     const veilederId = bruker.arbeidsliste.sistEndretAv.veilederId;
@@ -30,6 +31,7 @@ function MinoversiktTabell({
             <ul className="minoversikt-brukere-liste">
                 {brukere.map((bruker) =>
                     <li key={bruker.fnr} className="minoversikt-brukere-panel">
+                        <CheckBox className="minoversikt__checkbox" bruker={bruker} settMarkert={settMarkert} />
                         <MinoversiktBrukerPanel
                             bruker={bruker}
                             arbeidslisteSistEndretAv={finnVeilederSistEndretAv(bruker, veiledere)}

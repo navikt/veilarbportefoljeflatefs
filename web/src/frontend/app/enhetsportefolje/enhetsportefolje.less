@@ -1,122 +1,70 @@
-.enhet-listehode {
-    border-bottom: 1px solid @navGra40;
+@margin-left: 32px;
+@brukerliste-padding: 5px;
 
-    .enhet-overskrifter {
-        border-top: 1px solid @navGra40;
-        border-bottom: 1px solid @navGra40;
-        padding-bottom: 5px;
-        padding-top: 5px;
-        display: flex;
-
-        .listeoverskrift {
-            font-weight: bold;
-        }
-
-        .listeoverskrift__bruker {
-            display: inline-block;
-            width: 23rem;
-        }
-        .listeoverskrift__veileder {
-            margin-left: 1rem;
-        }
-        .listeoverskrift__dato {
-            width: 7rem;
-            display: inline-block;
-            margin-left: 0.3rem;
-        }
-    }
-
-    .enhet-sortering-header__wrapper {
-        padding-bottom: 5px;
-        padding-top: 5px;
-        border-bottom: 1px solid @navGra40;
-
-        .sortering-header__etternavn {
-            margin-left: 2.6rem;
-
-            .lenke {
-                padding-top: 1px; //For å aligne med tekst etter lenken
-            }
-        }
-        .sortering-header__fodselsnummer {
-            margin-left: 5.2rem;
-        }
-        .sortering-header__dato {
-            margin-left: 2.8rem;
-        }
-        .header__veiledernavn {
-            margin-left: 3rem;
-        }
-        .header__veilederident {
-            margin-left: 3rem;
-        }
-        .valgt-sortering {
-            font-weight: bold;
-        }
-    }
+.brukerliste {
+    width: 100%;
 }
 
-.enhet-brukere-liste {
+.brukerliste--borders {
+    border-top: 1px solid @navGra40;
+    border-bottom: 1px solid @navGra40;
+}
+
+.brukerliste--border-bottom {
+    border-bottom: 2px solid @navGra40;
+}
+
+.brukerliste--border-bottom-thin {
+    border-bottom: 1px solid @navGra40;
+}
+
+//FIXME: Fjern slike magic numbers!!
+.brukerliste--checkbox-margin {
+    margin-left: 6px;
+}
+
+.brukerliste__panel {
+    margin-left: 32px;
+}
+
+.brukerliste__panelelement {
+    min-height: 2rem;
+}
+
+.brukerliste__liste-element {
+    margin: 10px 0 0 0;
     padding: 0;
-    margin-top: 0;
+}
+
+.brukerliste__header {
+    min-height: 4rem;
+}
+
+.brukerliste__overskriftheader {
+    display: flex;
+    font-weight: bold;
+    font-size: 1rem;
+    min-height: 2rem;
+    margin-left: @margin-left;
+    padding: @brukerliste-padding 0;
+}
+
+.brukerliste__sorteringheader {
+    min-height: 2rem;
+    margin-left: @margin-left;
+    padding: @brukerliste-padding 0;
+}
+
+.brukerliste__body {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 
     .enhet-brukere-panel {
         list-style: none;
         border-bottom: 1px solid @navGra40;
-        .hybridPanel__hode, .panel_hode {
+        .hybridPanel__hode {
             padding: 10px 10px 10px 10px;
-
-            .brukerpanel {
-                width:100%;
-            }
-
-            .brukerinformasjon__wrapper {
-                display: inline-block;
-
-                .brukerinformasjon__navn {
-                    display: inline-block;
-                    width: 12rem;
-                }
-                .brukerinformasjon__fnr {
-                    width: 5rem;
-                    display: inline-block;
-                    margin-left: 0.3rem;
-                }
-                .skjema__input {
-                    position:relative;
-                    top:5px;
-                    display:inline-block;
-                    margin: 0 0 0 0;
-                    width:1.5rem;
-                    margin-right: 0.5rem;
-                }
-            }
-            .veilederinformasjon__wrapper {
-                display:inline-block;
-                margin-left:4rem;
-
-                .veilederinformasjon__navn {
-                    width: 10rem;
-                    display: inline-block;
-                }
-            }
-
-            .datokolonner__wrapper {
-                display: inline-block;
-                :first-child {
-                    margin-left: 4rem;
-                }
-                :not(:first-child) {
-                    margin-left: 3.5rem;
-                }
-            }
-
-            .etiketter__wrapper {
-                display: inline-block;
-                float: right;
-                margin-right: 5px;
-                max-width: 6rem;
-            }
         }
 
         .hybridPanel__hode, .hybridPanel__innhold {
@@ -126,13 +74,6 @@
             cursor: pointer;
             background-color: @navLysGra;
             border:none;
-        }
-    }
-}
-.enhet-liste__wrapper {
-    .panel_hode {
-        .etikett:last-child {
-            margin-right: 5px;
         }
     }
 }
@@ -172,5 +113,10 @@
 }
 
 .checkboks + label {
-    min-height: 10px;
+    min-height: 13px;
+}
+
+.checkboks__wrapper {
+    float: left;
+    position: absolute;
 }

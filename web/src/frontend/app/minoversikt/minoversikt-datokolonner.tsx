@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import {
     nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper
 } from '../utils/utils';
@@ -12,14 +12,26 @@ import {
     MIN_ARBEIDSLISTE,
     I_AVTALT_AKTIVITET
 } from '../filtrering/filter-konstanter';
-import { filtervalgShape } from '../proptype-shapes';
+import {BrukerModell, FiltervalgModell} from '../model-interfaces';
 
+interface MinoversiktDatokolonnerProps {
+    bruker: BrukerModell;
+    ytelse: string;
+    filtervalg: FiltervalgModell;
+}
 
-function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }) {
+function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }: MinoversiktDatokolonnerProps) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
+    // TODO: bør gjøres før data lagres i storen
+    const arbeidslisteFrist = bruker.arbeidsliste.frist ? new Date(bruker.arbeidsliste.frist) : null;
+    const utlopsdato = bruker.utlopsdato ? new Date(bruker.utlopsdato) : null;
+    const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
+    const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
+    const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
+
     return (
-        <div className="datokolonner__wrapper">
+        <span>
             <UkeKolonne
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
@@ -36,42 +48,35 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }) {
                 skalVises={ytelse === ytelsevalg.AAP_MAXTID}
             />
             <DatoKolonne
-                dato={bruker.arbeidsliste.frist}
+                dato={arbeidslisteFrist}
                 skalVises={filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
             />
             <DatoKolonne
-                dato={bruker.utlopsdato}
+                dato={utlopsdato}
                 skalVises={[ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse)}
             />
             <DatoKolonne
-                dato={bruker.venterPaSvarFraBruker}
+                dato={venterPaSvarFraBruker}
                 skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
             />
             <DatoKolonne
-                dato={bruker.venterPaSvarFraNAV}
+                dato={venterPaSvarFraNAV}
                 skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
             />
             <DatoKolonne
-                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
+                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
                 skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
             />
             <DatoKolonne
-                dato={bruker.nyesteUtlopteAktivitet}
+                dato={nyesteUtlopteAktivitet}
                 skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
             />
             <DatoKolonne
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
                 skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
             />
-        </div>
+        </span>
     );
 }
-
-MinoversiktDatokolonner.propTypes = {
-    bruker: PT.object.isRequired,
-    ytelse: PT.string,
-    filtervalg: filtervalgShape.isRequired
-
-};
 
 export default MinoversiktDatokolonner;

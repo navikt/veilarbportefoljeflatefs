@@ -12,6 +12,8 @@ import { redigerArbeidsliste } from '../ducks/arbeidsliste';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { STATUS } from '../ducks/utils';
 import { AppState } from '../reducer';
+import * as moment from "moment";
+import _date = moment.unitOfTime._date;
 
 const KOMMENTAR_MAKS_LENGDE = 250;
 
@@ -42,7 +44,7 @@ interface RedigerArbeidslisteFormProps {
     lukkModal: () => void;
     handleSubmit: () => void;
     bruker: BrukerModell;
-    sistEndretDato: string;
+    sistEndretDato: Date;
     sistEndretAv: string;
     arbeidslisteStatus: Status;
 }
@@ -72,7 +74,7 @@ function RedigerArbeidslisteForm({ lukkModal,
                     <FormattedMessage
                         id="arbeidsliste.kommentar.footer"
                         values={{
-                            dato: sistEndretDato,
+                            dato: sistEndretDato.toLocaleDateString(),
                             veileder: sistEndretAv
                         }}
                     />

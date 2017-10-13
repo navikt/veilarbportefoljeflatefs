@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { EtikettInfo } from 'nav-frontend-etiketter';
 import * as classNames from 'classnames';
+import {EtikettType} from '../../model-interfaces';
 
 const cls = (className, type) => classNames('tabelletikett', className, {
     [`tabelletikett--${type}`]: !!type
@@ -16,6 +17,7 @@ export type TabelletiketterTypes =
 interface TabelletiketterProps {
     className?: string;
     type?: TabelletiketterTypes;
+
 }
 
 function Tabelletiketter({ className, type, ...props }: TabelletiketterProps) {
