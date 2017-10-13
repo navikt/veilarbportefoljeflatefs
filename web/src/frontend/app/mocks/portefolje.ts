@@ -1,8 +1,10 @@
 /* eslint-disable */
-import faker from 'faker';
 import veiledereResponse, {innloggetVeileder} from './veiledere';
 import { aktiviteter } from '../filtrering/filter-konstanter';
-import { rnd } from './utils'
+import { rnd, MOCK_CONFIG } from './utils'
+import faker from 'faker/locale/nb_NO';
+
+faker.seed(MOCK_CONFIG.seed);
 
 const veiledere = veiledereResponse.veilederListe;
 
@@ -14,8 +16,6 @@ const ytelser = [
     'AAP_UNNTAK',
     'TILTAKSPENGER'
 ];
-
-
 
 function partall() {
     return rnd(0, 4) * 2;
