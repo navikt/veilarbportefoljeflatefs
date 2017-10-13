@@ -1,20 +1,21 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import Brukerinformasjon from '../components/tabell/brukerinformasjon';
 import EnhetDatokolonner from './enhet-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
 import { filtervalgShape, veilederShape } from '../proptype-shapes';
+import {EtikettType,FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {Kolonne} from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
-import { FiltervalgModell, VeilederModell } from '../model-interfaces';
-import { Kolonne } from '../ducks/ui/listevisning';
-
-const fm = (id) => <FormattedMessage id={id} />;
+import {FormattedMessage } from 'react-intl';
+import CheckBox from '../components/tabell/checkbox';
 
 interface VeilederinfoProps {
     bruker: any;
     veileder?: VeilederModell;
     valgteKolonner: Kolonne[];
 }
+
+const fm = (id) => <FormattedMessage id={id} />;
 
 function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoProps) {
     const navn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
@@ -23,24 +24,23 @@ function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoP
         return null;
     }
     return (
-        <div className="veilederinformasjon__wrapper">
+        <span>
             { valgteKolonner.includes(Kolonne.VEILEDER) &&
-            <div className="veilederinformasjon__navn">
+            <div className="brukerliste__panelelement col col-xs-2">
                 {
-                    bruker.veilederId ?
-                        <span>{navn}</span>
-                        :
+                    bruker.veilederId ? <span>{navn}</span> : (
                         <Etikett
-                            type="nybruker"
+                            type={EtikettType.NYBRUKER}
                             child={fm('enhet.portefolje.tabelletikett.ny.bruker')}
-                            skalVises
+                            skalVises={bruker.veilederId === null}
                         />
+                    )
                 }
             </div> }
             { valgteKolonner.includes(Kolonne.NAVIDENT) &&
-            <span className="veilederinfo__ident">{ident}</span>
+            <div className="brukerliste__panelelement col col-xs-1">{ident}</div>
             }
-        </div>
+        </span>
     );
 }
 
@@ -57,16 +57,17 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
     const { ytelse } = filtervalg;
 
     return (
-        <div className="panel_hode">
-            <div className="brukerpanel">
-                <Brukerinformasjon
-                    bruker={bruker}
-                    enhetId={enhetId}
-                    settMarkert={settMarkert}
-                />
-                <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} valgteKolonner={valgteKolonner} />
-                <Veilederinfo veileder={brukersVeileder} bruker={bruker} valgteKolonner={valgteKolonner}/>
-                <Etiketter bruker={bruker} />
+        <div className="brukerliste--border-bottom-thin row brukerliste__liste-element">
+            <CheckBox bruker={bruker} settMarkert={settMarkert} />
+            <div className="brukerliste__panel">
+                    <Brukerinformasjon
+                        bruker={bruker}
+                        enhetId={enhetId}
+                        settMarkert={settMarkert}
+                    />
+                    <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} valgteKolonner={valgteKolonner} />
+                    <Veilederinfo veileder={brukersVeileder} bruker={bruker} valgteKolonner={valgteKolonner}/>
+                    <Etiketter bruker={bruker} />
             </div>
         </div>
     );

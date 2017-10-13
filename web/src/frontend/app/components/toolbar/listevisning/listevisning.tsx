@@ -5,7 +5,7 @@ import Dropdown from '../../dropdown/dropdown';
 import { Checkbox } from 'nav-frontend-skjema';
 import { FormattedMessage } from 'react-intl';
 import { AppState } from '../../../reducer';
-import { Action, bindActionCreators, Dispatch } from 'redux';
+import { Action, Dispatch } from 'redux';
 import { avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ } from '../../../ducks/ui/listevisning';
 import { alternativerConfig } from './listevisning-utils';
 import { selectMuligeAlternativer, selectValgteAlternativer } from '../../../ducks/ui/listevisning-selectors';
@@ -80,6 +80,7 @@ const Listevisning = (props: ListevisningProps) => {
                 <ul className="ustilet">
                     {props.muligeAlternativer.map((kolonne) => (
                         <ListevisningRad
+                            key={kolonne}
                             kolonne={kolonne}
                             valgt={erValgt(kolonne)}
                             disabled={props.valgteAlternativ.length >= 5 && !erValgt(kolonne)}

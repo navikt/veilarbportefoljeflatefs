@@ -11,14 +11,14 @@ export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 
 export const FILTERGRUPPE_ENHET = 'enhet';
 
-export function lagConfig(data: string | {label: string}): {label: string} {
+export function lagConfig(data: any): any {
     if (typeof data === 'string') {
         return { label: data };
     }
     return data;
 }
 
-export const brukerstatus = {
+export const brukerstatus = ()=> ({
     NYE_BRUKERE: 'Nye brukere',
     INAKTIVE_BRUKERE: 'Inaktive brukere',
     VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
@@ -27,9 +27,9 @@ export const brukerstatus = {
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste'
-};
+});
 
-export const alder = {
+export const alder = () => ({
     '19-og-under': '19 år og under',
     '20-24': '20-24 år',
     '25-29': '25-29 år',
@@ -38,40 +38,40 @@ export const alder = {
     '50-59': '50-59 år',
     '60-66': '60-66 år',
     '67-70': '67-70 år'
-};
+});
 
-export const fodselsdagIMnd = range(1, 31, true).reduce((acc, x) => ({
+export const fodselsdagIMnd = () => range(1, 31, true).reduce((acc, x) => ({
     ...acc,
     [x]: lag2Sifret(x)
 }), {});
 
-export const kjonn = {
+export const kjonn = ()=> ({
     K: 'Kvinne',
     M: 'Mann'
-};
+});
 
-export const innsatsgruppe = {
+export const innsatsgruppe = () => ({
     IKVAL: 'Standardinnsats',
     BFORM: 'Situasjonsbestemt innsats',
     BATT: 'Spesielt tilpasset innsats',
     VARIG: 'Varig tilpasset'
-};
+});
 
-export const formidlingsgruppe = {
+export const formidlingsgruppe = () => ({
     ARBS: 'Arbeidssøker',
     IARBS: 'Ikke arbeidssøker',
     ISERV: 'Ikke servicebehov',
     PARBS: 'Pre arbeidssøker',
     RARBS: 'Pre reaktivert arbeidssøker'
-};
-export const servicegruppe = {
+});
+export const servicegruppe = () => ({
     BKART: 'Behov for arbeidsevnevurdering',
     IVURD: 'Ikke vurdert',
     OPPFI: 'Helserelatert arbeidsrettet oppfølging i NAV',
     VURDI: 'Sykmeldt oppfølging på arbeidsplassen',
     VURDU: 'Sykmeldt uten arbeidsgiver'
-};
-export const ytelse = {
+});
+export const ytelse = () => ({
     DAGPENGER: 'Dagpenger',
     ORDINARE_DAGPENGER: { label: 'Ordinære dagpenger', className: 'skjemaelement--innrykk' },
     DAGPENGER_MED_PERMITTERING: { label: 'Dagpenger med permittering', className: 'skjemaelement--innrykk' },
@@ -79,11 +79,11 @@ export const ytelse = {
     AAP_MAXTID: { label: 'AAP maxtid', className: 'skjemaelement--innrykk' },
     AAP_UNNTAK: { label: 'AAP unntak', className: 'skjemaelement--innrykk' },
     TILTAKSPENGER: 'Tiltakspenger'
-};
+});
 
-export const ytelsevalg: {[id: string]: string} = Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }), {});
+export const ytelsevalg: {[id: string]: string} = Object.keys(ytelse()).reduce((acc, val) => ({ ...acc, [val]: val }), {});
 
-export const ytelseUtlopsSortering = {
+export const ytelseUtlopsSortering = () => ({
     [ytelsevalg.DAGPENGER]: 'dagputlopUke',
     [ytelsevalg.ORDINARE_DAGPENGER]: 'dagputlopUke',
     [ytelsevalg.DAGPENGER_MED_PERMITTERING]: 'permutlopUke',
@@ -91,27 +91,28 @@ export const ytelseUtlopsSortering = {
     [ytelsevalg.AAP_UNNTAK]: 'utlopsdato',
     [ytelsevalg.AAP_MAXTID]: 'aapmaxtidUke',
     [ytelsevalg.TILTAKSPENGER]: 'utlopsdato'
-};
+});
 
-export const rettighetsgruppe = {
+export const rettighetsgruppe = () => ({
     AAP: 'Arbeidsavklaringspenger',
     DAGP: 'Dagpenger',
     INDS: 'Tiltakspenger',
     IYT: 'Ingen livsoppholdsytelser Arena',
     VENT: 'Ventestønad',
     VLONN: 'Ventelønn'
-};
+});
 
-export const aktiviteter = {
-    SOKEAVTALE: 'Avtale om jobbsøk',
-    STILLING: 'Jobbsøk',
-    BEHANDLING: 'Medisinsk behandling',
-    TILTAK: 'Tiltak fra NAV',
-    EGEN: 'Egendefinert',
-    IJOBB: 'Er i arbeid',
-    MOTE: 'Møte',
-    GRUPPEAKTIVITET: 'Gruppeaktivitet'
-};
+export const aktiviteter = (intl) => ({
+    SOKEAVTALE: intl.formatMessage({id:'filtrering.aktiviteter.sokeavtale'}),
+    STILLING: intl.formatMessage({id:'filtrering.aktiviteter.stilling'}),
+    BEHANDLING: intl.formatMessage({id:'filtrering.aktiviteter.medisinsk-behandling'}),
+    TILTAK: intl.formatMessage({id:'filtrering.aktiviteter.tiltak'}),
+    EGEN: intl.formatMessage({id:'filtrering.aktiviteter.egen'}),
+    IJOBB: intl.formatMessage({id:'filtrering.aktiviteter.ijobb'}),
+    MOTE: intl.formatMessage({id:'filtrering.aktiviteter.mote'}),
+    GRUPPEAKTIVITET: intl.formatMessage({id:'filtrering.aktiviteter.gruppeaktivitet'}),
+    UTDANNINGAKTIVITET: intl.formatMessage({id:'filtrering.aktiviteter.utdanningaktivitet'})
+});
 
 const veiledere = {
 };

@@ -1,13 +1,23 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
 import { brukerShape } from '../proptype-shapes';
+import {BrukerModell} from "../model-interfaces";
 
 NavFrontendModal.setAppElement('#applikasjon');
 
-function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder, ...props }) {
+interface ArbeidslisteModalRedigerProps {
+    isOpen: boolean;
+    bruker: BrukerModell;
+    lukkModal: () => void;
+    innloggetVeileder: string;
+    sistEndretDato: Date;
+    sistEndretAv?: string;
+}
+
+function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder, ...props }: ArbeidslisteModalRedigerProps) {
     return (
         <NavFrontendModal
             className="arbeidsliste-modal modal_overflow"
@@ -36,13 +46,5 @@ function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder
         </NavFrontendModal>);
 }
 
-ArbeidslisteModalRediger.propTypes = {
-    isOpen: PT.bool.isRequired,
-    bruker: brukerShape.isRequired,
-    lukkModal: PT.func.isRequired,
-    innloggetVeileder: PT.string.isRequired,
-    sistEndretDato: PT.string.isRequired,
-    sistEndretAv: PT.string
-};
 
 export default ArbeidslisteModalRediger;
