@@ -1,14 +1,19 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
+import { Knapp } from 'nav-frontend-knapper';
 import { validForm, rules } from 'react-redux-form-validation';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
-import { brukerShape } from '../proptype-shapes';
+import { BrukerModell, Status } from '../model-interfaces';
 import { redigerArbeidsliste } from '../ducks/arbeidsliste';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
+import { STATUS } from '../ducks/utils';
+import { AppState } from '../reducer';
+import * as moment from "moment";
+import _date = moment.unitOfTime._date;
 
 const KOMMENTAR_MAKS_LENGDE = 250;
 
@@ -35,7 +40,22 @@ function label(bruker) {
     /></Undertittel>);
 }
 
-function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker, sistEndretDato, sistEndretAv }) {
+interface RedigerArbeidslisteFormProps {
+    lukkModal: () => void;
+    handleSubmit: () => void;
+    bruker: BrukerModell;
+    sistEndretDato: Date;
+    sistEndretAv: string;
+    arbeidslisteStatus: Status;
+}
+
+function RedigerArbeidslisteForm({ lukkModal,
+                                     handleSubmit,
+                                     bruker,
+                                     sistEndretDato,
+                                     sistEndretAv,
+                                     arbeidslisteStatus }: RedigerArbeidslisteFormProps) {
+    const lagrer = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     return (
         <form onSubmit={handleSubmit}>
             <div className="input-fields">
@@ -54,7 +74,7 @@ function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker, sistEndretDa
                     <FormattedMessage
                         id="arbeidsliste.kommentar.footer"
                         values={{
-                            dato: sistEndretDato,
+                            dato: sistEndretDato.toLocaleDateString(),
                             veileder: sistEndretAv
                         }}
                     />
@@ -66,24 +86,16 @@ function RedigerArbeidslisteForm({ lukkModal, handleSubmit, bruker, sistEndretDa
                 />
             </div>
             <div className="modal-footer" >
-                <button type="submit" className="knapp knapp--hoved" onClick={handleSubmit}>
+                <Knapp type="hoved" className="knapp knapp--hoved" onClick={ handleSubmit } spinner={ lagrer }>
                     <FormattedMessage id="modal.knapp.lagre" />
-                </button>
-                <button type="button" className="knapp" onClick={lukkModal}>
+                </Knapp>
+                <button type="button" className="knapp" onClick={ lukkModal }>
                     <FormattedMessage id="modal.knapp.avbryt" />
                 </button>
             </div>
         </form>
     );
 }
-
-RedigerArbeidslisteForm.propTypes = {
-    lukkModal: PT.func.isRequired,
-    handleSubmit: PT.func.isRequired,
-    bruker: brukerShape.isRequired,
-    sistEndretDato: PT.string.isRequired,
-    sistEndretAv: PT.string.isRequired
-};
 
 const RedigerArbeidslisteFormValidation = validForm({
     form: 'arbeidsliste-rediger',
@@ -93,8 +105,8 @@ const RedigerArbeidslisteFormValidation = validForm({
     }
 })(RedigerArbeidslisteForm);
 
-
-function oppdaterState(res, arbeidsliste, innloggetVeileder, fnr, dispatch) {
+function oppdaterState(res, arbeidsliste, innloggetVeileder, fnr, lukkModal, dispatch) {
+    lukkModal();
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -115,18 +127,18 @@ const mapDispatchToProps = () => ({
             frist: formData.frist
         };
         redigerArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
-            .then((res) => oppdaterState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, dispatch));
-        props.lukkModal();
+            .then((res) => oppdaterState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, props.lukkModal,
+                dispatch));
     }
 
 });
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state: AppState, props: {bruker: BrukerModell}) => ({
     initialValues: {
         kommentar: props.bruker.arbeidsliste.kommentar,
         frist: props.bruker.arbeidsliste.frist
-    }
+    },
+    arbeidslisteStatus: state.arbeidsliste.status
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RedigerArbeidslisteFormValidation);
-
