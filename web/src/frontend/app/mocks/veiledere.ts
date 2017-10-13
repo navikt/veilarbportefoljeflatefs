@@ -1,7 +1,7 @@
-import faker from 'faker';
-import {rnd} from './utils';
+import {rnd, MOCK_CONFIG} from './utils';
+import faker from 'faker/locale/nb_NO';
 
-faker.seed(9001);
+faker.seed(MOCK_CONFIG.seed);
 
 function lagVeileder() {
     const ident = `Z${rnd(100000, 999999)}`;
