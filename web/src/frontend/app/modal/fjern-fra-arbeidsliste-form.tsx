@@ -105,4 +105,4 @@ const mapDispatchToProps = () => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FjernFraArbeidslisteReduxForm);
+export default connect(mapStateToProps, mapDispatchToProps)(FjernFraArbeidslisteReduxForm as any); // todo: fix typing
