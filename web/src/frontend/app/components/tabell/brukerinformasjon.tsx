@@ -10,13 +10,13 @@ const settSammenNavn = (bruker) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-const brukerFnr = (bruker) => <span className="brukerinformasjon__fnr">{bruker.fnr}</span>;
+const brukerFnr = (bruker) => <span className="brukerinformasjon__fnr col col-xs-2">{bruker.fnr}</span>;
 
 const brukerIArbeidslisteNavn = (bruker, enhetId, arialabel) => (
         <a
             href={`https://${window.location.hostname}` +
             `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
-            className={classnames('lenke lenke--frittstaende brukerinformasjon__navn', 'arbeidslistebruker')}
+            className={classnames('lenke lenke--frittstaende brukerinformasjon__navn', 'arbeidslistebruker', 'col', 'col-xs-3')}
             aria-label={arialabel}
         >
             {settSammenNavn(bruker)}
@@ -24,25 +24,16 @@ const brukerIArbeidslisteNavn = (bruker, enhetId, arialabel) => (
 );
 
 const brukerNavn = (bruker, enhetId) => (
-    <a
+    <div className="brukerliste__panelelement col col-xs-3">
+        <a
         href={`https://${window.location.hostname}` +
-        `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
-        className={classnames('lenke lenke--frittstaende brukerinformasjon__navn')}
+                `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
+        className={classnames('lenke lenke--frittstaende ')}
+
     >
         {settSammenNavn(bruker)}
-    </a>
+    </a></div>
 );
-
-const checkBox = (bruker, settMarkert) => (<div className="skjema__input">
-    <input
-        className="checkboks"
-        id={`checkbox-${bruker.fnr}`}
-        type="checkbox"
-        checked={!!bruker.markert}
-        onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
-    />
-    <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`}/>
-</div>);
 
 interface BrukerinformasjonProps {
     bruker: BrukerModell;
@@ -50,18 +41,16 @@ interface BrukerinformasjonProps {
     enhetId: string;
 }
 
-function Brukerinformasjon({bruker, enhetId, settMarkert}: BrukerinformasjonProps) {
+function Brukerinformasjon({ bruker, enhetId }: BrukerinformasjonProps) {
     return (
         <FormattedMessage id="listevisning.bruker.i.arbeidsliste">
             {(label) => (
                 <div className="brukerinformasjon__wrapper">
-                    {checkBox(bruker, settMarkert)}
                     {bruker.arbeidsliste.arbeidslisteAktiv ? brukerIArbeidslisteNavn(bruker, enhetId, label) : brukerNavn(bruker, enhetId)}
                     {brukerFnr(bruker)}
                 </div>
             )}
         </FormattedMessage>
-
     );
 }
 

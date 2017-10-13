@@ -1,3 +1,7 @@
+.minoversikt__checkbox {
+    margin-top: 10px;
+}
+
 .annen-veileder {
     padding: 1rem;
     background-color: @navLysBlaLighten40;
@@ -31,6 +35,10 @@
     }
 }
 
+.brukerliste--minoversikt-padding {
+    padding-left: 20px; //FIXME: Fjern slike magic numbers!!
+}
+
 .portefolje-side {
     background-color: @navLysGra;
 }
@@ -47,40 +55,11 @@
             font-weight: bold;
         }
 
-        .listeoverskrift__bruker {
-            margin-left: 3.6rem;
-            display: inline-block;
-            width: 20.5rem;
-        }
-        .listeoverskrift__ytelse {
-            margin-left: 1.6rem;
-        }
-        .listeoverskrift__dato {
-            margin-left: 0.4rem;
-        }
     }
+}
 
-    .minoversikt-sortering-header__wrapper {
-        padding-bottom: 5px;
-        padding-top: 5px;
-
-        .sortering-header__etternavn {
-            margin-left: 3.6rem;
-
-            .lenke {
-                padding-top: 1px; //For å aligne med tekst etter lenken
-            }
-        }
-        .sortering-header__fodselsnummer {
-            margin-left: 6.2rem;
-        }
-        .sortering-header__dato {
-            margin-left: 1.6rem;
-        }
-        .valgt-sortering {
-            font-weight: bold;
-        }
-    }
+.arbeidsliste--ikon {
+    background: url(../svg/flagg-filled.svg) no-repeat;
 }
 
 .minoversikt-brukere-liste {
@@ -90,15 +69,16 @@
         list-style: none;
         border-bottom: 1px solid #b7b1a9;
         .hybridPanel__hode, .panel_hode {
-            padding: 10px 10px 10px 10px;
+            padding: 10px 10px 0 10px; //FIXME: Fjern slike magic numbers!!
+            margin-left: 24px; //FIXME: Fjern slike magic numbers!!
 
             .brukerpanel {
                 width: 100%;
+                min-height: 2rem;
+                margin-left: 14px;
             }
 
             .brukerinformasjon__wrapper {
-                display: inline-block;
-                margin-right: 2.9rem;
 
                 .brukerinformasjon__navn {
                     display: inline-block;
@@ -119,13 +99,6 @@
                 }
             }
 
-            .datokolonner__wrapper {
-                display: inline-block;
-                :not(:first-child) {
-                    margin-left: 2.3rem;
-                }
-            }
-
             .etiketter__wrapper {
                 display: inline-block;
                 float: right;
@@ -140,6 +113,8 @@
             cursor: pointer;
             background-color: @navLysGra;
             border: none;
+            margin-right: 25px; //FIXME: Fjern slike magic numbers!!
+            margin-bottom: 5px; //FIXME: Fjern slike magic numbers!!
         }
 
         .hybridPanel__innhold {

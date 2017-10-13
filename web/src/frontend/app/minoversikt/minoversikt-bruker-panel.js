@@ -39,7 +39,7 @@ class MinoversiktBrukerPanel extends Component {
             <Etiketter bruker={bruker} />
         </div>);
 
-        const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt).toLocaleDateString();
+        const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
         const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
         const childrenBody =
             (<div className="brukerpanel__body">
@@ -51,7 +51,7 @@ class MinoversiktBrukerPanel extends Component {
                     <FormattedMessage
                         id="arbeidsliste.kommentar.footer"
                         values={{
-                            dato: sistEndretDato,
+                            dato: sistEndretDato.toLocaleDateString(),
                             veileder: sistEndretAv
                         }}
                     />
