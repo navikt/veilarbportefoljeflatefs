@@ -12,7 +12,7 @@ import {
     MIN_ARBEIDSLISTE,
     I_AVTALT_AKTIVITET
 } from '../filtrering/filter-konstanter';
-import {BrukerModell, FiltervalgModell} from '../model-interfaces';
+import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 
 interface MinoversiktDatokolonnerProps {
     bruker: BrukerModell;

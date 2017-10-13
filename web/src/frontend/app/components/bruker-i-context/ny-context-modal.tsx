@@ -1,11 +1,13 @@
 import * as React from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
-import {Innholdstittel, Normaltekst} from "nav-frontend-typografi";
-import {AlertStripeAdvarselSolid} from 'nav-frontend-alertstriper';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { AlertStripeAdvarselSolid } from 'nav-frontend-alertstriper';
+import Knapp, { Hovedknapp } from 'nav-frontend-knapper';
 
 interface NyContextModalProps {
     isOpen: boolean;
+    doEndreAktivEnhet: () => void;
+    doBeholdAktivEnhet: () => void;
 }
 
 class NyContextModal extends React.Component<NyContextModalProps> {
@@ -30,6 +32,10 @@ class NyContextModal extends React.Component<NyContextModalProps> {
                     <Normaltekst className="blokk-s">
                         Ønsker du å fortsette å jobbe på enheten "navn-på-enhet"?
                     </Normaltekst>
+                    <div className="modal-footer" >
+                        <Hovedknapp onClick={this.props.doBeholdAktivEnhet}>Bekreft</Hovedknapp>
+                        <Knapp type="standard" onClick={this.props.doEndreAktivEnhet}>Avbryt</Knapp>
+                    </div>
                 </div>
             </NavFrontendModal>
         );

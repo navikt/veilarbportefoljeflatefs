@@ -18,12 +18,12 @@ interface ValgModell extends Field {
     label: string;
 }
 
-function RenderFields({ names: _names, valg, skjema, ...fields }: RenderFieldProps) {
+function RenderFields({ names: unusedNames, valg, skjema, ...fields }: RenderFieldProps) {
     const fieldCls = (className) => classNames('skjemaelement skjemaelement--horisontal', className);
 
     const fieldElements = Object.values(fields)
             .map((value) => {
-                const { name, value: _value, ...handler } = value.input;
+                const { name, value: unusedValue, ...handler } = value.input;
                 const { label, className } = lagConfig(valg[value.input.name]);
 
                 return {
