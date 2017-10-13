@@ -39,7 +39,7 @@ class ServerFeilModal extends React.Component<ServerFeilModalProps, ServerFeilMo
         return (
             <Modal
                 contentLabel="Fikk feil fra server"
-                isOpen={this.state.isOpen}
+                isOpen={this.state.isOpen === true}
                 onRequestClose={this.lukkModal}
                 closeButton={false}
             >

@@ -13,6 +13,8 @@ import { hentVeiledereForEnhet } from './ducks/veiledere';
 import { settSide } from './ducks/ui/side';
 import history from './history';
 import { enhetShape, valgtEnhetShape, veiledereShape } from './proptype-shapes';
+import FeatureToggle from './components/feature-toggle/feature-toggle';
+import NyContextListener from './components/bruker-i-context/ny-context-listener';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(location.search).vistekster; // eslint-disable-line no-undef
@@ -88,6 +90,9 @@ class Application extends Component {
             >
                 <div className="portefolje">
                     <Innholdslaster avhengigheter={[ledetekster, enheter, enheter.valgtEnhet, veiledere]}>
+                        <FeatureToggle name="bruker_i_context">
+                            <NyContextListener />
+                        </FeatureToggle>
                         <div className="container maincontent side-innhold">
                             {children}
                         </div>
@@ -99,6 +104,7 @@ class Application extends Component {
 }
 
 Application.propTypes = {
+
     settSide: PT.func.isRequired,
     routes: PT.arrayOf(PT.object).isRequired,
     side: PT.string.isRequired,
