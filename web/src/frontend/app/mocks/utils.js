@@ -3,8 +3,13 @@ import qs from 'query-string';
 import pathRegex from 'path-to-regexp';
 
 export const MOCK_CONFIG = {
-    failureRate: -1
+    failureRate: -1,
+    seed: 9001
 };
+
+export function rnd(start, stop) {
+    return Math.round(Math.random() * (stop - start) + start);
+}
 
 export function randomFailure(fn) {
     return (...args) => {
