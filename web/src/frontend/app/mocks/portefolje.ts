@@ -1,7 +1,7 @@
 /* eslint-disable */
-import veiledereResponse, {innloggetVeileder} from './veiledere';
+import veiledereResponse, { innloggetVeileder } from './veiledere';
 import { aktiviteter } from '../filtrering/filter-konstanter';
-import { rnd, MOCK_CONFIG } from './utils'
+import { rnd, MOCK_CONFIG } from './utils';
 import faker from 'faker/locale/nb_NO';
 
 faker.seed(MOCK_CONFIG.seed);

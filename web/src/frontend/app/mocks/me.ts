@@ -1,3 +1,3 @@
-import { innloggetVeileder } from "./veiledere";
+import { innloggetVeileder } from './veiledere';
 
 export default innloggetVeileder;

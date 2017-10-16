@@ -1,4 +1,4 @@
-import { innloggetVeileder } from "./veiledere";
+import { innloggetVeileder } from './veiledere';
 
 export const inloggetEnhet = {
     enhetId: '1234',
