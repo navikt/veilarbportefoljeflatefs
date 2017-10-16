@@ -32,17 +32,20 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
 
 // Hvis du vil hente tekster fra applikasjonen, så la linjen nedenfor være kommentert ut.
 mock.get('/veilarbportefoljeflatefs/tjenester/tekster', respondWith(tekster));
+
+// veileder-api
 mock.get('/veilarbveileder/tjenester/veileder/enheter', respondWith(enheter));
 mock.get('/veilarbveileder/tjenester/veileder/me', respondWith(me));
 mock.get('/veilarbveileder/tjenester/enhet/1234/veiledere', respondWith(veiledere));
+
+// portefolje-api
 mock.get('/veilarbportefolje/tjenester/enhet/1234/statustall', respondWith(delayed(1000, randomFailure(statustall))));
 mock.post('express:/veilarbportefolje/tjenester/enhet/:enhet/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefolje(queryParams, bodyParams, extra.enhet, brukere)));
-mock.post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, randomFailure({ feilendeTilordninger: ['11111111111','22222222222'] }))));
 mock.post('express:/veilarbportefolje/tjenester/veileder/:ident/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefoljeForVeileder(queryParams, bodyParams, brukere)));
 mock.get('express:/veilarbportefolje/tjenester/veileder/:veileder/statustall*', respondWith(delayed(1000, randomFailure(statustall))));
 
-//
-mock.post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, { feilendeTilordninger: [] })));
+// situasjon-api
+mock.post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, randomFailure({ feilendeTilordninger: ['11111111111','22222222222'] }))));
 
 // arbeidsliste-api
 mock.post('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'], data: [] }))));
