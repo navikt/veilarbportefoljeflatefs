@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { EtikettInfo } from 'nav-frontend-etiketter';
 import * as classNames from 'classnames';
-import {EtikettType} from '../../model-interfaces';
+import { EtikettType } from '../../model-interfaces';
 
 const cls = (className, type) => classNames('tabelletikett', className, {
     [`tabelletikett--${type}`]: !!type

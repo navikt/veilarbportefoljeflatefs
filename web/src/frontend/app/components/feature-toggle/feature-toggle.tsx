@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import {AppState} from '../../reducer';
+import { AppState } from '../../reducer';
 
-
-interface FeatureToggleProps extends FeatureToggleOwnProps{
+interface FeatureToggleProps extends FeatureToggleOwnProps {
     isEnabled: boolean;
 }
 
@@ -19,10 +18,10 @@ function FeatureToggle(props: FeatureToggleProps) {
     return null;
 }
 
-function mapStateToProps (state: AppState, ownProps: FeatureToggleOwnProps) {
+function mapStateToProps(state: AppState, ownProps: FeatureToggleOwnProps) {
     return {
         isEnabled: state.features[ownProps.name]
-    }
+    };
 }
 
 export default connect(mapStateToProps)(FeatureToggle);
