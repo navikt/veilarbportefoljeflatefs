@@ -15,8 +15,8 @@ function lagPortefoljeForVeileder(queryParams, bodyParams, alleBrukere) {
 
 function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
     const { fra, antall } = queryParams;
-    const fraInt = parseInt(fra);
-    const antallInt = parseInt(antall);
+    const fraInt = parseInt(fra, 10);
+    const antallInt = parseInt(antall, 10);
 
     const filtrerteBrukere = alleBrukere.splice(fraInt, antallInt);
 
@@ -24,7 +24,7 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
         enhet,
         antallTotalt: alleBrukere.length,
         antallReturnert: filtrerteBrukere.length,
-        fraIndex: parseInt(queryParams.fra),
+        fraIndex: parseInt(queryParams.fra, 10),
         brukere: filtrerteBrukere
     };
 }
