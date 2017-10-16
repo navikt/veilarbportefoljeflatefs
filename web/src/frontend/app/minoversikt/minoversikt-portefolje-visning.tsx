@@ -55,10 +55,10 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         const fraIndex = side === '' ? 0 : (side - 1) * 20;
 
         hentPortefolje(
-            valgtEnhet.enhet.enhetId, gjeldendeVeileder, sorteringsfelt, sorteringsrekkefolge, filtervalg, fraIndex
+            valgtEnhet.enhet!.enhetId, gjeldendeVeileder, sorteringsfelt, sorteringsrekkefolge, filtervalg, fraIndex
         );
 
-        leggEnhetIUrl(valgtEnhet.enhet.enhetId!);
+        leggEnhetIUrl(valgtEnhet.enhet!.enhetId!);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
@@ -80,7 +80,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         }
         doSettSortering(valgtRekkefolge, felt);
         hentPortefolje(
-            valgtEnhet.enhet.enhetId, gjeldendeVeileder, valgtRekkefolge, felt, filtervalg
+            valgtEnhet.enhet!.enhetId, gjeldendeVeileder, valgtRekkefolge, felt, filtervalg
         );
     }
 
@@ -119,7 +119,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                     <Toolbar
                         filtergruppe={ListevisningType.minOversikt}
                         onPaginering={(fra, antall) => hentPortefolje(
-                            valgtEnhet.enhet.enhetId,
+                            valgtEnhet.enhet!.enhetId,
                             gjeldendeVeileder,
                             sorteringsrekkefolge,
                             sorteringsfelt,
@@ -135,7 +135,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         visDiagram ?
                             <Diagram
                                 filtreringsvalg={filtervalg}
-                                enhet={valgtEnhet.enhet.enhetId}
+                                enhet={valgtEnhet.enhet!.enhetId}
                                 veileder={gjeldendeVeileder.ident}
                             />
                             :

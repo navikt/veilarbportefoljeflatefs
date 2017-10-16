@@ -30,7 +30,7 @@ function EnhetTabell({
                          filtervalg, sorteringsrekkefolge, valgtEnhet, veiledere, valgteKolonner
                      }: EnhetTabellProps) {
     const {brukere} = portefolje.data;
-    const {enhetId} = valgtEnhet.enhet;
+    const {enhetId} = valgtEnhet.enhet!;
     return (
 
         <div className="brukerliste typo-undertekst">

@@ -1,21 +1,24 @@
 import * as React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
-import { beholdAktivEnhet, endreAktivEnhet, settTilkoblingState, visAktivEnhetModal } from './context-reducer';
+import { beholdAktivEnhet, endreAktivEnhet, settTilkoblingState, visAktivEnhetModal, lukkAktivEnhetModal } from './context-reducer';
 import { AppState } from '../../reducer';
 import NyContextModal from './ny-context-modal';
 import EnhetContextListener, {
     EnhetConnectionState, EnhetContextEvent,
     EnhetContextEventNames
 } from './enhet-context-listener';
+import {hentAktivEnhet} from './context-api';
 
 interface StateProps {
     nyEnhetSynlig: boolean;
     tilkoblet: boolean;
+    aktivEnhet: string;
 }
 
 interface DispatchProps {
     doVisAktivEnhetModal: () => void;
+    doLukkAktivEnhetModal: () => void;
     doEndreAktivEnhet: () => void;
     doBeholdAktivEnhet: () => void;
     doSettTilkoblingState: (state: boolean) => void;
@@ -40,6 +43,16 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         this.contextListener.close();
     }
 
+    handleNyAktivEnhet() {
+        hentAktivEnhet().then(nyEnhet => {
+            if (nyEnhet !== this.props.aktivEnhet) {
+                this.props.doVisAktivEnhetModal();
+            } else {
+                this.props.doLukkAktivEnhetModal();
+            }
+        });
+    }
+
     enhetContextHandler(event: EnhetContextEvent) {
         switch (event.type) {
             case EnhetContextEventNames.CONNECTION_STATE_CHANGED:
@@ -47,7 +60,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
                 this.props.doSettTilkoblingState(connected);
                 break;
             case EnhetContextEventNames.NY_AKTIV_ENHET:
-                this.props.doVisAktivEnhetModal();
+                this.handleNyAktivEnhet();
                 break;
         }
     }
@@ -60,6 +73,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
                 </AlertStripe>
                 <NyContextModal
                     isOpen={this.props.nyEnhetSynlig}
+                    aktivEnhet={this.props.aktivEnhet}
                     doEndreAktivEnhet={this.props.doEndreAktivEnhet}
                     doBeholdAktivEnhet={this.props.doBeholdAktivEnhet}
                 />
@@ -69,15 +83,18 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => {
+    const valgtEnhet = state.enheter.valgtEnhet.enhet;
     return {
         nyEnhetSynlig: state.nycontext.nyEnhetModalSynlig,
-        tilkoblet: state.nycontext.connected
+        tilkoblet: state.nycontext.connected,
+        aktivEnhet: valgtEnhet == null ? '' : valgtEnhet.enhetId
     };
 };
 
 const mapDispatchToProps = (dispatch): DispatchProps => {
     return {
         doVisAktivEnhetModal: () => dispatch(visAktivEnhetModal()),
+        doLukkAktivEnhetModal: () => dispatch(lukkAktivEnhetModal()),
         doEndreAktivEnhet: () => dispatch(endreAktivEnhet()),
         doBeholdAktivEnhet: () => dispatch(beholdAktivEnhet()),
         doSettTilkoblingState: (state: boolean) => dispatch(settTilkoblingState(state))

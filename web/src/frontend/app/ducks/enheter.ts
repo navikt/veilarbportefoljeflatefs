@@ -1,6 +1,7 @@
 import { hentVeiledersEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { leggEnhetIUrl } from '../utils/utils';
+import {ValgtEnhetModell} from '../model-interfaces';
 
 // Actions
 const OK = 'veilarbportefolje/enheter/OK';
@@ -8,7 +9,14 @@ const FEILET = 'veilarbportefolje/enheter/FEILET';
 const PENDING = 'veilarbportefolje/enheter/PENDING';
 const VELG_ENHET = 'VELG_ENHET';
 
-const initialState = {
+export interface EnheterState {
+    data: any[];
+    valgtEnhet: ValgtEnhetModell,
+    ident?: string;
+    status: string;
+}
+
+const initialState: EnheterState = {
     data: [],
     valgtEnhet: {
         status: STATUS.NOT_STARTED,
@@ -19,7 +27,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state = initialState, action) {
+export default function reducer(state: EnheterState = initialState, action): EnheterState {
     switch (action.type) {
         case PENDING:
             return { ...state, status: STATUS.PENDING };

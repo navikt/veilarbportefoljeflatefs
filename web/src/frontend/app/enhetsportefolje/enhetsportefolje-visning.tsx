@@ -70,7 +70,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         const fraIndex = side === '' ? 0 : (side - 1) * 20;
 
         hentPortefolje(
-            valgtEnhet.enhet.enhetId,
+            valgtEnhet.enhet!.enhetId,
             sorteringsrekkefolge,
             sorteringsfelt,
             filtervalg,
@@ -102,7 +102,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
 
         doSettSortering(valgtRekkefolge, felt);
         hentPortefolje(
-            valgtEnhet.enhet.enhetId,
+            valgtEnhet.enhet!.enhetId,
             valgtRekkefolge,
             felt,
             filtervalg,
@@ -150,7 +150,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     <Toolbar
                         filtergruppe={ListevisningType.enhetensOversikt}
                         onPaginering={(fra, antall) => hentPortefolje(
-                            valgtEnhet.enhet.enhetId,
+                            valgtEnhet.enhet!.enhetId,
                             sorteringsrekkefolge,
                             sorteringsfelt,
                             filtervalg,
@@ -161,7 +161,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     />
                     {
                         visDiagram ?
-                            <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet.enhetId} /> :
+                            <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet!.enhetId} /> :
                             <EnhetTabell
                                 veiledere={veiledere.data.veilederListe}
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}

@@ -9,6 +9,7 @@ interface NyContextModalProps {
     isOpen: boolean;
     doEndreAktivEnhet: () => void;
     doBeholdAktivEnhet: () => void;
+    aktivEnhet: string;
 }
 
 class NyContextModal extends React.Component<NyContextModalProps> {
@@ -28,7 +29,7 @@ class NyContextModal extends React.Component<NyContextModalProps> {
                         <FormattedMessage id="nyenhet.modal.alertmelding" />
                     </AlertStripeAdvarselSolid>
                     <Normaltekst className="blokk-s">
-                        <FormattedMessage id="nyenhet.modal.sporsmal" />
+                        <FormattedMessage id="nyenhet.modal.sporsmal" values={{ enhet: this.props.aktivEnhet }}/>
                     </Normaltekst>
                     <div className="modal-footer" >
                         <Hovedknapp onClick={this.props.doBeholdAktivEnhet}>
