@@ -121,8 +121,6 @@
     "dev:less": "autoless --interval 100 ./app ./../main/webapp/css",
     "dev:ts": "tsc && parallelshell \"tsc -w\"  \"webpack -w --define process.env.production=true\" \"npm run dev:less\"",
     "dev:html": "node script/copy-html-dev.js --development",
-    "dev:api": "node script/api.js",
-    "dev:server": "node script/dev.js",
     "dev": "npm run dev:html && npm run dev:ts",
     "upload:doc": "node documentation/scripts/upload-all"
   }
