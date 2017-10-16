@@ -1,4 +1,3 @@
-import { AktiviteterValg } from './ducks/filtrering';
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -39,7 +38,7 @@ export interface EnhetModell {
 }
 
 export interface ValgtEnhetModell {
-    enhet: EnhetModell;
+    enhet?: EnhetModell;
     status: string;
 }
 
