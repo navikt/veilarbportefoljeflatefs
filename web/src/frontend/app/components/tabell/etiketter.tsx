@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Etikett from './etikett';
-import {BrukerModell, EtikettType} from '../../model-interfaces';
+import { BrukerModell, EtikettType } from '../../model-interfaces';
 
 const fm = (id) => <FormattedMessage id={id} />;
 
