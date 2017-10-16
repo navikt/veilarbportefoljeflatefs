@@ -3,9 +3,9 @@ import { MOCK_CONFIG, mock, delayed, respondWith, randomFailure } from './utils'
 import enheter from './enheter';
 import me from './me';
 import brukere from './portefolje';
-import veiledere from'./veiledere';
-import statustall from'./statustall';
-import tekster from'./tekster';
+import veiledere from './veiledere';
+import statustall from './statustall';
+import tekster from './tekster';
 
 function lagPortefoljeForVeileder(queryParams, bodyParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, bodyParams, enheter.enhetliste[0].enhetId, alleBrukere);
