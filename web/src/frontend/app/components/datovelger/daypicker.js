@@ -140,7 +140,7 @@ class DayPickerComponent extends Component {
         return (
             <div // eslint-disable-line jsx-a11y/no-static-element-interactions
                 className="datovelger__DayPicker"
-                aria-controlledby={ariaControlledBy} // eslint-disable-line jsx-a11y/aria-props
+                // aria-controlledby={ariaControlledBy} // eslint-disable-line jsx-a11y/aria-props
                 onKeyUp={(e) => {
                     onKeyUp(e);
                 }}
