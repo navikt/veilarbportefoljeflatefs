@@ -29,7 +29,6 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
     };
 }
 
-
 // Hvis du vil hente tekster fra applikasjonen, så la linjen nedenfor være kommentert ut.
 mock.get('/veilarbportefoljeflatefs/tjenester/tekster', respondWith(tekster));
 

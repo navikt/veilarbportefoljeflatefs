@@ -1,7 +1,7 @@
 import { hentVeiledersEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { leggEnhetIUrl } from '../utils/utils';
-import {ValgtEnhetModell} from '../model-interfaces';
+import { ValgtEnhetModell } from '../model-interfaces';
 
 // Actions
 const OK = 'veilarbportefolje/enheter/OK';
@@ -11,7 +11,7 @@ const VELG_ENHET = 'VELG_ENHET';
 
 export interface EnheterState {
     data: any[];
-    valgtEnhet: ValgtEnhetModell,
+    valgtEnhet: ValgtEnhetModell;
     ident?: string;
     status: string;
 }
@@ -64,4 +64,3 @@ export function velgEnhetForVeileder(valgtEnhet) {
         valgtEnhet
     };
 }
-

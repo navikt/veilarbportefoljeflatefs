@@ -45,18 +45,18 @@ export function handterFeil(dispatch, action) {
     return (error) => {
         if (error.response) {
             error.response.text().then((data) => {
-                console.error(error, error.stack, data); // eslint-disable-line no-console
+                console.error(error, error.stack, data); // tslint:disable-line no-console
                 dispatch({ type: action, data: { response: error.response, data } });
             });
         } else {
-            console.error(error, error.stack); // eslint-disable-line no-console
+            console.error(error, error.stack); // tslint:disable-line no-console
             dispatch({ type: action, data: error.toString() });
         }
     };
 }
 
 export function fetchToJson<ResponseInterface>(url: string, config: RequestInit = {}): Promise<ResponseInterface> {
-    return fetch(url, config)// eslint-disable-line no-undef
+    return fetch(url, config)
         .then(sjekkStatuskode)
         .then(toJson);
 }
@@ -71,4 +71,3 @@ export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
             .catch(handterFeil(dispatch, FEILET));
     };
 }
-

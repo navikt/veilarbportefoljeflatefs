@@ -1,4 +1,4 @@
-import {rnd} from './utils';
+import { rnd } from './utils';
 import portefolje from './portefolje';
 
 export default {

@@ -8,7 +8,7 @@ import EnhetContextListener, {
     EnhetConnectionState, EnhetContextEvent,
     EnhetContextEventNames
 } from './enhet-context-listener';
-import {hentAktivEnhet} from './context-api';
+import { hentAktivEnhet } from './context-api';
 
 interface StateProps {
     nyEnhetSynlig: boolean;
@@ -44,7 +44,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     handleNyAktivEnhet() {
-        hentAktivEnhet().then(nyEnhet => {
+        hentAktivEnhet().then((nyEnhet) => {
             if (nyEnhet !== this.props.aktivEnhet) {
                 this.props.doVisAktivEnhetModal();
             } else {
