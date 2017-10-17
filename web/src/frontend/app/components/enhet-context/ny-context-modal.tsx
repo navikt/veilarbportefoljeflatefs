@@ -35,7 +35,7 @@ class NyContextModal extends React.Component<NyContextModalProps> {
                         <Hovedknapp onClick={this.props.doBeholdAktivEnhet}>
                             <FormattedMessage id="nyenhet.modal.bekreft" />
                         </Hovedknapp>
-                        <Knapp type="standard" onClick={this.props.doEndreAktivEnhet}>
+                        <Knapp type="standard" onClick={() => this.props.doEndreAktivEnhet()}>
                             <FormattedMessage id="nyenhet.modal.avbryt" />
                         </Knapp>
                     </div>

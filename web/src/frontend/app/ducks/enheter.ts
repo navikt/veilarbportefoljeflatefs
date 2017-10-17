@@ -39,7 +39,9 @@ export default function reducer(state: EnheterState = initialState, action): Enh
             return {
                 ...state,
                 valgtEnhet: {
-                    enhet: action.valgtEnhet,
+                    enhet: {
+                        enhetId: action.valgtEnhet
+                    },
                     status: STATUS.OK
                 }
             };
@@ -58,9 +60,10 @@ export function hentEnheterForVeileder() {
 }
 
 export function velgEnhetForVeileder(valgtEnhet) {
-    leggEnhetIUrl(valgtEnhet.enhetId ? valgtEnhet.enhetId : valgtEnhet);
+    const enhetId = valgtEnhet.enhetId ? valgtEnhet.enhetId : valgtEnhet;
+    leggEnhetIUrl(enhetId);
     return {
         type: VELG_ENHET,
-        valgtEnhet
+        valgtEnhet: enhetId
     };
 }
