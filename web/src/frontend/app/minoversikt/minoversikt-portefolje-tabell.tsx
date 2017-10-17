@@ -30,10 +30,10 @@ interface MinOversiktTabellProps {
 
 function MinoversiktTabell({
                                settMarkert, portefolje, settSorteringOgHentPortefolje,
-                               filtervalg, sorteringsrekkefolge, valgtEnhet, veiledere, innloggetVeileder
+                               filtervalg, sorteringsrekkefolge, valgtEnhet, innloggetVeileder
                            }: MinOversiktTabellProps) {
     const brukere = portefolje.data.brukere;
-    const enhetId = valgtEnhet.enhet.enhetId;
+    const {enhetId} = valgtEnhet.enhet!;
 
     return (
         <div className="minoversikt-liste__wrapper typo-undertekst">
