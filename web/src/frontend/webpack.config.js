@@ -1,14 +1,50 @@
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const paths = {
+    WEBAPP: path.resolve(__dirname, '../main/webapp'),
+    JS: path.resolve(__dirname, 'app')
+};
+
 module.exports = {
-    entry: './out/index.js',
+    entry: path.join(paths.JS, 'index.js'),
     output: {
-        filename: '../main/webapp/js/bundle.js'
+        path: paths.WEBAPP,
+        filename: 'js/bundle.js'
     },
-    resolve: {
-        extensions: ['.js']
-    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'index.html')
+        }),
+        new ExtractTextPlugin('css/index.css')
+    ],
     module: {
         rules: [
-            {test: /\.(?:css|less|scss|sass)$/, loader: 'ignore-loader'}
+            {
+                test: /\.js$|\.tsx?$/,
+                exclude: /node_modules/,
+                loader: 'awesome-typescript-loader'
+            },
+            {
+                test: /\.less$/,
+                loader: ExtractTextPlugin.extract({
+                    use: [{
+                        loader: 'css-loader'
+                    }, {
+                        loader: 'less-loader',
+                        options: {
+                            globalVars: {
+                                coreModulePath: "'./../../../node_modules/'",
+                                nodeModulesPath: "'./../../../node_modules/'"
+                            }
+                        }
+                    }]
+                })
+            }
         ]
+    },
+    resolve: {
+        extensions: ['.js', '.ts', '.tsx', '.less']
     }
 };
