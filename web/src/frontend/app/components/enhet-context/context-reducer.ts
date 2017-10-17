@@ -1,5 +1,4 @@
-import {getEnhetFromUrl} from "../../utils/utils";
-
+import { getEnhetFromUrl } from '../../utils/utils';
 
 export interface ContextState {
     connected: boolean;
@@ -35,6 +34,8 @@ export default function contextReducer(state: ContextState = initialState, actio
     switch(action.type) {
         case ContextActionKeys.SETT_TILKOBLING_STATE:
             return { ...state, connected: action.connected };
+        case ContextActionKeys.SETT_AKTIV_ENHET:
+            return { ...state, aktivEnhet: action.enhet };
         default:
             return state;
     }
