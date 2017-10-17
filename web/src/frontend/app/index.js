@@ -25,6 +25,7 @@ import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
 import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/utils';
 import FeatureToggelAdmin from './components/feature-toggle/feature-toggle-admin';
+import './style';
 /* eslint-enable import/first */
 /* eslint-disable no-undef */
 
