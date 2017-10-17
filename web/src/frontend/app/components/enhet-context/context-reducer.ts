@@ -37,7 +37,7 @@ export default function contextReducer(state: ContextState = initialState, actio
         case ContextActionKeys.OPPDATER_AKTIV_ENHET:
             return { ...state, nyEnhetModalSynlig: true };
         case ContextActionKeys.LUKK_MODAL:
-            return{ ...state, nyEnhetModalSynlig: false };
+            return { ...state, nyEnhetModalSynlig: false };
         case ContextActionKeys.SETT_TILKOBLING_STATE:
             return { ...state, connected: action.connected };
         default:
@@ -51,26 +51,10 @@ export function visAktivEnhetModal() {
     };
 }
 
-export function lukkAktivEnhetModal() {
-    return (dispatch: Dispatch<NyContextAction>) => {
-        dispatch({ type: ContextActionKeys.LUKK_MODAL });
-    };
+export function lukkAktivEnhetModal(): NyContextAction {
+    return { type: ContextActionKeys.LUKK_MODAL };
 }
 
-export function endreAktivEnhet() {
-    return (dispatch: Dispatch<NyContextAction>) => {
-        dispatch({ type: ContextActionKeys.LUKK_MODAL });
-    };
-}
-
-export function beholdAktivEnhet() {
-    return (dispatch: Dispatch<NyContextAction>) => {
-        dispatch({ type: ContextActionKeys.LUKK_MODAL });
-    };
-}
-
-export function settTilkoblingState(tilkoblet: boolean) {
-    return (dispatch: Dispatch<ConnectionStateAction>) => {
-        dispatch({ type: ContextActionKeys.SETT_TILKOBLING_STATE, connected: tilkoblet });
-    };
+export function settTilkoblingState(tilkoblet: boolean): ConnectionStateAction {
+    return { type: ContextActionKeys.SETT_TILKOBLING_STATE, connected: tilkoblet };
 }

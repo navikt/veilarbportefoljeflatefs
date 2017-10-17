@@ -1,14 +1,14 @@
 import * as React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
-import { beholdAktivEnhet, endreAktivEnhet, settTilkoblingState, visAktivEnhetModal, lukkAktivEnhetModal } from './context-reducer';
+import { settTilkoblingState, visAktivEnhetModal, lukkAktivEnhetModal } from './context-reducer';
 import { AppState } from '../../reducer';
 import NyContextModal from './ny-context-modal';
 import EnhetContextListener, {
     EnhetConnectionState, EnhetContextEvent,
     EnhetContextEventNames
 } from './enhet-context-listener';
-import { hentAktivEnhet } from './context-api';
+import {hentAktivEnhet, oppdaterAktivEnhet} from './context-api';
 
 interface StateProps {
     nyEnhetSynlig: boolean;
@@ -19,8 +19,6 @@ interface StateProps {
 interface DispatchProps {
     doVisAktivEnhetModal: () => void;
     doLukkAktivEnhetModal: () => void;
-    doEndreAktivEnhet: () => void;
-    doBeholdAktivEnhet: () => void;
     doSettTilkoblingState: (state: boolean) => void;
 }
 
@@ -32,6 +30,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     constructor(props) {
         super(props);
         this.enhetContextHandler = this.enhetContextHandler.bind(this);
+        this.handleEndreAktivEnhet = this.handleEndreAktivEnhet.bind(this);
+        this.handleBeholdAktivEnhet = this.handleBeholdAktivEnhet.bind(this);
     }
 
     componentDidMount() {
@@ -41,6 +41,15 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 
     componentWillUnmount() {
         this.contextListener.close();
+    }
+
+    handleEndreAktivEnhet(nyAktivEnhet: string) {
+        this.props.doLukkAktivEnhetModal();
+    }
+
+    handleBeholdAktivEnhet() {
+        oppdaterAktivEnhet(this.props.aktivEnhet)
+            .then(() => this.props.doLukkAktivEnhetModal());
     }
 
     handleNyAktivEnhet() {
@@ -74,8 +83,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
                 <NyContextModal
                     isOpen={this.props.nyEnhetSynlig}
                     aktivEnhet={this.props.aktivEnhet}
-                    doEndreAktivEnhet={this.props.doEndreAktivEnhet}
-                    doBeholdAktivEnhet={this.props.doBeholdAktivEnhet}
+                    doEndreAktivEnhet={this.handleEndreAktivEnhet}
+                    doBeholdAktivEnhet={this.handleBeholdAktivEnhet}
                 />
             </div>
         );
@@ -95,8 +104,6 @@ const mapDispatchToProps = (dispatch): DispatchProps => {
     return {
         doVisAktivEnhetModal: () => dispatch(visAktivEnhetModal()),
         doLukkAktivEnhetModal: () => dispatch(lukkAktivEnhetModal()),
-        doEndreAktivEnhet: () => dispatch(endreAktivEnhet()),
-        doBeholdAktivEnhet: () => dispatch(beholdAktivEnhet()),
         doSettTilkoblingState: (state: boolean) => dispatch(settTilkoblingState(state))
     };
 };
