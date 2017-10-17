@@ -1,25 +1,24 @@
+import {getEnhetFromUrl} from "../../utils/utils";
 
-import { Dispatch } from 'redux';
 
 export interface ContextState {
-    nyEnhetModalSynlig: boolean;
     connected: boolean;
+    aktivEnhet: string;
 }
 
 const initialState: ContextState = {
-    nyEnhetModalSynlig: false,
-    connected: false
+    connected: false,
+    aktivEnhet: getEnhetFromUrl()
 };
 
 enum ContextActionKeys {
-    OPPDATER_AKTIV_ENHET = 'context/oppdater-aktiv-enhet',
     SETT_TILKOBLING_STATE = 'context/sett-tilkobling-state',
-    LUKK_MODAL = 'context/lukk-modal'
+    SETT_AKTIV_ENHET = 'context/sett-aktiv-enhet',
 }
 
-interface NyContextAction {
-    type: ContextActionKeys.OPPDATER_AKTIV_ENHET
-        | ContextActionKeys.LUKK_MODAL;
+interface SettAktivEnhetAction {
+    type: ContextActionKeys.SETT_AKTIV_ENHET;
+    enhet: string;
 }
 
 interface ConnectionStateAction {
@@ -28,16 +27,12 @@ interface ConnectionStateAction {
 }
 
 type ContextActions =
-    | NyContextAction
+    | SettAktivEnhetAction
     | ConnectionStateAction
     | { type: '__OTHER_ACTION__' };
 
 export default function contextReducer(state: ContextState = initialState, action: ContextActions): ContextState {
     switch(action.type) {
-        case ContextActionKeys.OPPDATER_AKTIV_ENHET:
-            return { ...state, nyEnhetModalSynlig: true };
-        case ContextActionKeys.LUKK_MODAL:
-            return { ...state, nyEnhetModalSynlig: false };
         case ContextActionKeys.SETT_TILKOBLING_STATE:
             return { ...state, connected: action.connected };
         default:
@@ -45,14 +40,8 @@ export default function contextReducer(state: ContextState = initialState, actio
     }
 }
 
-export function visAktivEnhetModal() {
-    return (dispatch: Dispatch<NyContextAction>) => {
-        dispatch({ type: ContextActionKeys.OPPDATER_AKTIV_ENHET });
-    };
-}
-
-export function lukkAktivEnhetModal(): NyContextAction {
-    return { type: ContextActionKeys.LUKK_MODAL };
+export function settNyAktivEnhet(nyAktivEnhet: string): SettAktivEnhetAction {
+    return { type: ContextActionKeys.SETT_AKTIV_ENHET, enhet: nyAktivEnhet };
 }
 
 export function settTilkoblingState(tilkoblet: boolean): ConnectionStateAction {
