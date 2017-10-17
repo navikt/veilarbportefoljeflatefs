@@ -7,7 +7,7 @@ import Knapp, { Hovedknapp } from 'nav-frontend-knapper';
 
 interface NyContextModalProps {
     isOpen: boolean;
-    doEndreAktivEnhet: (nyEnhet: string) => void;
+    doEndreAktivEnhet: () => void;
     doBeholdAktivEnhet: () => void;
     aktivEnhet: string;
 }
@@ -35,7 +35,7 @@ class NyContextModal extends React.Component<NyContextModalProps> {
                         <Hovedknapp onClick={this.props.doBeholdAktivEnhet}>
                             <FormattedMessage id="nyenhet.modal.bekreft" />
                         </Hovedknapp>
-                        <Knapp type="standard" onClick={() => this.props.doEndreAktivEnhet(this.props.aktivEnhet)}>
+                        <Knapp type="standard" onClick={() => this.props.doEndreAktivEnhet()}>
                             <FormattedMessage id="nyenhet.modal.avbryt" />
                         </Knapp>
                     </div>
