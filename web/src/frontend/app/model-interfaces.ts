@@ -1,9 +1,23 @@
-import { AktiviteterValg } from './ducks/filtrering';
-
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
     ascending = 'ascending',
     descending = 'descending'
+}
+
+export enum Sorteringsfelt {
+    IKKE_SATT = 'ikke_satt',
+    VALGTE_AKTIVITETER = 'valgteaktiviteter',
+    ETTERNAVN = 'etternavn',
+    FODSELSNUMMER = 'fodselsnummer',
+    UTLOPSDATO = 'utlopsdato',
+    DAGPENGER_UTLOP_UKE = 'dagputlopuke',
+    DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
+    AAP_MAXTID_UKE = 'aapmaxtiduke',
+    ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
+    VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
+    VENTER_PA_SVAR_FRA_BRUKER = 'venterpasvarfrabruker',
+    UTLOPTE_AKTIVITETER = 'utlopteaktiviteter',
+    I_AVTALT_AKTIVITET = 'iavtaltaktivitet'
 }
 
 export enum EtikettType {

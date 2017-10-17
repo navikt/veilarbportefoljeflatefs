@@ -7,7 +7,7 @@ import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from '../ducks/statustall';
 import { leggSideIUrl } from '../utils/utils';
-import { BrukerModell, VeilederModell } from '../model-interfaces';
+import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -56,8 +56,8 @@ const initialState: PortefoljeState = {
         antallReturnert: 0,
         fraIndex: 0
     },
-    sorteringsrekkefolge: IKKE_SATT,
-    sorteringsfelt: IKKE_SATT,
+    sorteringsrekkefolge: Sorteringsrekkefolge.ikke_satt,
+    sorteringsfelt: Sorteringsfelt.IKKE_SATT,
     veileder: {
         ident: IKKE_SATT
     },

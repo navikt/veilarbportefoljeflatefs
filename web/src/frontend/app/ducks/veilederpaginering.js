@@ -1,6 +1,7 @@
-import { DEFAULT_PAGINERING_STORRELSE, IKKE_SATT } from '../konstanter';
+import { DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import { TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 import { sorter } from '../utils/sortering';
+import { Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 
 // Actions
 export const SETT_LISTE = 'veilederpaginering/settliste/OK';
@@ -27,8 +28,8 @@ const initialState = {
     fraIndeksForSubListe: 0,
     sideStorrelse: DEFAULT_PAGINERING_STORRELSE,
     currentSortering: {
-        felt: IKKE_SATT,
-        rekkefolge: IKKE_SATT
+        felt: Sorteringsfelt.IKKE_SATT,
+        rekkefolge: Sorteringsrekkefolge.ikke_satt
     },
     visningsmodus: TABELLVISNING
 };
