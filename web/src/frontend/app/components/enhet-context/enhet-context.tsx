@@ -9,7 +9,8 @@ import EnhetContextListener, {
     EnhetContextEventNames
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
-import { leggEnhetIUrl } from '../../utils/utils';
+import { velgEnhetForVeileder } from '../../ducks/enheter';
+import { hentVeiledereForEnhet } from '../../ducks/veiledere';
 
 interface StateProps {
     modalSynlig: boolean;
@@ -21,6 +22,8 @@ interface StateProps {
 interface DispatchProps {
     doSettTilkoblingState: (state: boolean) => void;
     doSettNyAktivEnhet: (enhet: string) => void;
+    doVelgEnhetForVeileder: (enhet: string) => void;
+    doHentVeiledereForEnhet: (enhet: string) => void;
 }
 
 type EnhetContextProps = StateProps & DispatchProps;
@@ -45,7 +48,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     handleEndreAktivEnhet() {
-        leggEnhetIUrl(this.props.aktivEnhetContext);
+        this.props.doVelgEnhetForVeileder(this.props.aktivEnhetContext);
+        this.props.doHentVeiledereForEnhet(this.props.aktivEnhetContext);
     }
 
     handleBeholdAktivEnhet() {
@@ -104,7 +108,9 @@ const mapStateToProps = (state: AppState): StateProps => {
 const mapDispatchToProps = (dispatch): DispatchProps => {
     return {
         doSettTilkoblingState: (state: boolean) => dispatch(settTilkoblingState(state)),
-        doSettNyAktivEnhet: (enhet: string) => dispatch(settNyAktivEnhet(enhet))
+        doSettNyAktivEnhet: (enhet: string) => dispatch(settNyAktivEnhet(enhet)),
+        doVelgEnhetForVeileder: (enhet: string) => dispatch(velgEnhetForVeileder(enhet)),
+        doHentVeiledereForEnhet: (enhet: string) => dispatch(hentVeiledereForEnhet(enhet))
     };
 };
 
