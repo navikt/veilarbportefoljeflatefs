@@ -33,7 +33,12 @@ function FeatureToggleAdmin(props: FeatureToggleAdminProps) {
             <h1>Feature-toggles</h1>
             <ul>
                 { Object.entries(props.features).map(([featureNavn, erAktivert]) => (
-                    <Feature navn={featureNavn} erAktivert={erAktivert} onChange={(aktivert) => props.doSettFeatureState(featureNavn, aktivert)} />
+                    <Feature
+                        key={featureNavn}
+                        navn={featureNavn}
+                        erAktivert={erAktivert}
+                        onChange={(aktivert) => props.doSettFeatureState(featureNavn, aktivert)}
+                    />
                 ))}
             </ul>
         </section>

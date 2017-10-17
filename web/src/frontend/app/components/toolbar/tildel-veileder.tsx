@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SokFilter from './sok-filter';
 import Dropdown from './../dropdown/dropdown';
 import RadioFilterform from './../radio-filterform/radio-filterform';
-import { tildelVeileder } from './../../ducks/portefolje';
+import { tildelVeileder } from '../../ducks/portefolje';
 import { VeiledereState } from '../../ducks/veiledere';
 import { BrukerModell } from '../../model-interfaces';
 import { AppState } from '../../reducer';
@@ -67,7 +67,6 @@ function TildelVeilederRenderer({ onSubmit, data, ...props }: TildelVeilederRend
 const mapStateToProps = ({ veiledere, enheter, portefolje, ui }: AppState) => ({
     veiledere,
     brukere: portefolje.data.brukere,
-    veileder: enheter.valgtVeileder,
     skalSkjules: ui.side.side === 'veiledere'
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({

@@ -51,6 +51,12 @@ export function visAktivEnhetModal() {
     };
 }
 
+export function lukkAktivEnhetModal() {
+    return (dispatch: Dispatch<NyContextAction>) => {
+        dispatch({ type: ContextActionKeys.LUKK_MODAL });
+    };
+}
+
 export function endreAktivEnhet() {
     return (dispatch: Dispatch<NyContextAction>) => {
         dispatch({ type: ContextActionKeys.LUKK_MODAL });

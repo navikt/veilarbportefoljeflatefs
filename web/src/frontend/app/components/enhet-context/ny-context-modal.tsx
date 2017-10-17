@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { AlertStripeAdvarselSolid } from 'nav-frontend-alertstriper';
@@ -8,6 +9,7 @@ interface NyContextModalProps {
     isOpen: boolean;
     doEndreAktivEnhet: () => void;
     doBeholdAktivEnhet: () => void;
+    aktivEnhet: string;
 }
 
 class NyContextModal extends React.Component<NyContextModalProps> {
@@ -21,20 +23,21 @@ class NyContextModal extends React.Component<NyContextModalProps> {
             >
                 <div className="brukercontext__modal">
                     <Innholdstittel tag="h1" className="blokk-s">
-                        Du har endret Enhet
+                        <FormattedMessage id="nyenhet.modal.overskrift" />
                     </Innholdstittel>
                     <AlertStripeAdvarselSolid className="blokk-s">
-                        <span>
-                            Du har enret enhet i et annet vindu. Du kan ikke jobbe i 2 enheter samtidig. Velger du
-                            avbryt mister du arbeidet du ikke har lagret.
-                        </span>
+                        <FormattedMessage id="nyenhet.modal.alertmelding" />
                     </AlertStripeAdvarselSolid>
                     <Normaltekst className="blokk-s">
-                        Ønsker du å fortsette å jobbe på enheten "navn-på-enhet"?
+                        <FormattedMessage id="nyenhet.modal.sporsmal" values={{ enhet: this.props.aktivEnhet }}/>
                     </Normaltekst>
                     <div className="modal-footer" >
-                        <Hovedknapp onClick={this.props.doBeholdAktivEnhet}>Bekreft</Hovedknapp>
-                        <Knapp type="standard" onClick={this.props.doEndreAktivEnhet}>Avbryt</Knapp>
+                        <Hovedknapp onClick={this.props.doBeholdAktivEnhet}>
+                            <FormattedMessage id="nyenhet.modal.bekreft" />
+                        </Hovedknapp>
+                        <Knapp type="standard" onClick={this.props.doEndreAktivEnhet}>
+                            <FormattedMessage id="nyenhet.modal.avbryt" />
+                        </Knapp>
                     </div>
                 </div>
             </NavFrontendModal>
