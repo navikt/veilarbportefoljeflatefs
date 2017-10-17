@@ -1,6 +1,7 @@
 export enum EnhetConnectionState {
     CONNECTED = 'connected',
-    NOT_CONNECTED = 'not_connected'
+    NOT_CONNECTED = 'not_connected',
+    FAILED = 'failed'
 }
 
 enum EventMessages {
@@ -64,15 +65,19 @@ export default class EnhetContextListener {
         };
 
         this.connection.onerror = (e: ErrorEvent) => {
-            this.connectionState = EnhetConnectionState.NOT_CONNECTED;
-            this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.NOT_CONNECTED });
+            this.connectionState = EnhetConnectionState.FAILED;
+            this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.FAILED });
         };
 
         this.connection.onclose = () => {
-            this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.NOT_CONNECTED });
             if (!this.closing) {
-                this.connectionState = EnhetConnectionState.NOT_CONNECTED;
+                this.connectionState = EnhetConnectionState.FAILED;
+                this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.FAILED });
                 this.retryTimeout = setTimeout(() => this.lagWebSocketConnection(uri), 1000);
+            }
+            else {
+                this.connectionState = EnhetConnectionState.NOT_CONNECTED;
+                this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.NOT_CONNECTED });
             }
         };
     }

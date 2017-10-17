@@ -1,27 +1,30 @@
 import * as React from 'react';
-import AlertStripe from 'nav-frontend-alertstriper';
+import {AlertStripeAdvarselSolid} from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
-import { beholdAktivEnhet, endreAktivEnhet, settTilkoblingState, visAktivEnhetModal, lukkAktivEnhetModal } from './context-reducer';
+import {FormattedMessage} from 'react-intl';
+import {settNyAktivEnhet, settTilkoblingState} from './context-reducer';
 import { AppState } from '../../reducer';
 import NyContextModal from './ny-context-modal';
 import EnhetContextListener, {
     EnhetConnectionState, EnhetContextEvent,
     EnhetContextEventNames
 } from './enhet-context-listener';
-import { hentAktivEnhet } from './context-api';
+import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
+import { velgEnhetForVeileder } from '../../ducks/enheter';
+import { hentVeiledereForEnhet } from '../../ducks/veiledere';
 
 interface StateProps {
-    nyEnhetSynlig: boolean;
-    tilkoblet: boolean;
+    modalSynlig: boolean;
+    feilet: boolean;
     aktivEnhet: string;
+    aktivEnhetContext: string;
 }
 
 interface DispatchProps {
-    doVisAktivEnhetModal: () => void;
-    doLukkAktivEnhetModal: () => void;
-    doEndreAktivEnhet: () => void;
-    doBeholdAktivEnhet: () => void;
-    doSettTilkoblingState: (state: boolean) => void;
+    doSettTilkoblingState: (state: EnhetConnectionState) => void;
+    doSettNyAktivEnhet: (enhet: string) => void;
+    doVelgEnhetForVeileder: (enhet: string) => void;
+    doHentVeiledereForEnhet: (enhet: string) => void;
 }
 
 type EnhetContextProps = StateProps & DispatchProps;
@@ -32,6 +35,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     constructor(props) {
         super(props);
         this.enhetContextHandler = this.enhetContextHandler.bind(this);
+        this.handleEndreAktivEnhet = this.handleEndreAktivEnhet.bind(this);
+        this.handleBeholdAktivEnhet = this.handleBeholdAktivEnhet.bind(this);
     }
 
     componentDidMount() {
@@ -43,21 +48,26 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         this.contextListener.close();
     }
 
+    handleEndreAktivEnhet() {
+        this.props.doVelgEnhetForVeileder(this.props.aktivEnhetContext);
+        this.props.doHentVeiledereForEnhet(this.props.aktivEnhetContext);
+    }
+
+    handleBeholdAktivEnhet() {
+        oppdaterAktivEnhet(this.props.aktivEnhet)
+            .then(() => this.props.doSettNyAktivEnhet(this.props.aktivEnhet));
+    }
+
     handleNyAktivEnhet() {
         hentAktivEnhet().then((nyEnhet) => {
-            if (nyEnhet !== this.props.aktivEnhet) {
-                this.props.doVisAktivEnhetModal();
-            } else {
-                this.props.doLukkAktivEnhetModal();
-            }
+            this.props.doSettNyAktivEnhet(nyEnhet);
         });
     }
 
     enhetContextHandler(event: EnhetContextEvent) {
         switch (event.type) {
             case EnhetContextEventNames.CONNECTION_STATE_CHANGED:
-                const connected = event.state === EnhetConnectionState.CONNECTED;
-                this.props.doSettTilkoblingState(connected);
+                this.props.doSettTilkoblingState(event.state);
                 break;
             case EnhetContextEventNames.NY_AKTIV_ENHET:
                 this.handleNyAktivEnhet();
@@ -66,16 +76,21 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     render() {
+
+        const alertIkkeTilkoblet = (
+            <AlertStripeAdvarselSolid>
+                <FormattedMessage id="nyenhet.tilkobling.feilet" />
+            </AlertStripeAdvarselSolid>
+        );
+
         return (
             <div>
-                <AlertStripe solid={true} type={ this.props.tilkoblet ? 'suksess' : 'advarsel' }>
-                    <span>Bruker i context: { this.props.tilkoblet ? 'TILKOBLET' : 'IKKE TILKOBLET' }</span>
-                </AlertStripe>
+                { this.props.feilet ? alertIkkeTilkoblet : null }
                 <NyContextModal
-                    isOpen={this.props.nyEnhetSynlig}
+                    isOpen={this.props.modalSynlig}
                     aktivEnhet={this.props.aktivEnhet}
-                    doEndreAktivEnhet={this.props.doEndreAktivEnhet}
-                    doBeholdAktivEnhet={this.props.doBeholdAktivEnhet}
+                    doEndreAktivEnhet={this.handleEndreAktivEnhet}
+                    doBeholdAktivEnhet={this.handleBeholdAktivEnhet}
                 />
             </div>
         );
@@ -84,20 +99,23 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 
 const mapStateToProps = (state: AppState): StateProps => {
     const valgtEnhet = state.enheter.valgtEnhet.enhet;
+    const valgtEnhetId = valgtEnhet ? valgtEnhet.enhetId : '';
+    const valgtEnhetContext = state.nycontext.aktivEnhet;
+
     return {
-        nyEnhetSynlig: state.nycontext.nyEnhetModalSynlig,
-        tilkoblet: state.nycontext.connected,
-        aktivEnhet: valgtEnhet == null ? '' : valgtEnhet.enhetId
+        modalSynlig: valgtEnhetId !== valgtEnhetContext,
+        feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
+        aktivEnhet: valgtEnhet == null ? '' : valgtEnhet.enhetId,
+        aktivEnhetContext: valgtEnhetContext
     };
 };
 
 const mapDispatchToProps = (dispatch): DispatchProps => {
     return {
-        doVisAktivEnhetModal: () => dispatch(visAktivEnhetModal()),
-        doLukkAktivEnhetModal: () => dispatch(lukkAktivEnhetModal()),
-        doEndreAktivEnhet: () => dispatch(endreAktivEnhet()),
-        doBeholdAktivEnhet: () => dispatch(beholdAktivEnhet()),
-        doSettTilkoblingState: (state: boolean) => dispatch(settTilkoblingState(state))
+        doSettTilkoblingState: (state: EnhetConnectionState) => dispatch(settTilkoblingState(state)),
+        doSettNyAktivEnhet: (enhet: string) => dispatch(settNyAktivEnhet(enhet)),
+        doVelgEnhetForVeileder: (enhet: string) => dispatch(velgEnhetForVeileder(enhet)),
+        doHentVeiledereForEnhet: (enhet: string) => dispatch(hentVeiledereForEnhet(enhet))
     };
 };
 
