@@ -1,23 +1,39 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { enhetShape, filtervalgShape, veilederShape } from './../proptype-shapes';
 import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
 import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
 import MinOversiktListehode from './minoversikt-listehode';
 import CheckBox from '../components/tabell/checkbox';
+import {
+    BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge, ValgtEnhetModell, VeilederModell
+} from '../model-interfaces';
 
-function finnVeilederSistEndretAv(bruker, veiledere) {
-    const veilederId = bruker.arbeidsliste.sistEndretAv.veilederId;
-    const veileder = veiledere.find((x) => x.ident === veilederId);
-    return veileder ? veileder.navn : (veilederId || '');
+interface MinOversiktTabellProps {
+    portefolje: {
+        data: {
+            brukere: BrukerModell[];
+            antallTotalt: number;
+            antallReturnert: number;
+            fraIndex: number;
+        };
+        sorteringsfelt: Sorteringsfelt;
+    };
+        valgtEnhet: ValgtEnhetModell;
+        sorteringsrekkefolge: Sorteringsrekkefolge;
+        settMarkert: () => void;
+        filtervalg: FiltervalgModell;
+        settSorteringOgHentPortefolje: (sortering: string) => void;
+        veiledere: VeilederModell[];
+        innloggetVeileder: string;
 }
 
 function MinoversiktTabell({
                                settMarkert, portefolje, settSorteringOgHentPortefolje,
                                filtervalg, sorteringsrekkefolge, valgtEnhet, veiledere, innloggetVeileder
-                           }) {
-    const { brukere } = portefolje.data;
-    const { enhetId } = valgtEnhet.enhet;
+                           }: MinOversiktTabellProps) {
+    const brukere = portefolje.data.brukere;
+    const enhetId = valgtEnhet.enhet.enhetId;
 
     return (
         <div className="minoversikt-liste__wrapper typo-undertekst">
@@ -34,7 +50,6 @@ function MinoversiktTabell({
                         <CheckBox className="minoversikt__checkbox" bruker={bruker} settMarkert={settMarkert} />
                         <MinoversiktBrukerPanel
                             bruker={bruker}
-                            arbeidslisteSistEndretAv={finnVeilederSistEndretAv(bruker, veiledere)}
                             enhetId={enhetId}
                             settMarkert={settMarkert}
                             filtervalg={filtervalg}
@@ -45,26 +60,6 @@ function MinoversiktTabell({
         </div>
     );
 }
-
-MinoversiktTabell.propTypes = {
-    portefolje: PT.shape({
-        data: PT.shape({
-            brukere: PT.arrayOf(PT.object).isRequired,
-            antallTotalt: PT.number.isRequired,
-            antallReturnert: PT.number.isRequired,
-            fraIndex: PT.number.isRequired
-        }).isRequired,
-        sorteringsrekkefolge: PT.string.isRequired
-    }).isRequired,
-    valgtEnhet: enhetShape.isRequired,
-    sorteringsrekkefolge: PT.string.isRequired,
-    settMarkert: PT.func.isRequired,
-    filtervalg: filtervalgShape.isRequired,
-    settSorteringOgHentPortefolje: PT.func.isRequired,
-    veiledere: PT.arrayOf(veilederShape).isRequired,
-    innloggetVeileder: PT.string.isRequired
-};
-
 
 const mapStateToProps = (state) => ({
     portefolje: state.portefolje,
