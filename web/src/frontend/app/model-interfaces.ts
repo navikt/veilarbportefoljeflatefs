@@ -53,7 +53,7 @@ export interface EnhetModell {
 }
 
 export interface ValgtEnhetModell {
-    enhet: EnhetModell;
+    enhet?: EnhetModell;
     status: string;
 }
 

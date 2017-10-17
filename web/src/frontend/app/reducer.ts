@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'react-redux-form-validation';
 import persistent from './utils/persistentReducer';
-import enheterReducer from './ducks/enheter';
+import enheterReducer, { EnheterState } from './ducks/enheter';
 import ledeteksterReducer from './ducks/ledetekster';
 import portefoljeReducer, { PortefoljeState } from './ducks/portefolje';
 import pagineringReducer from './ducks/paginering';
@@ -58,7 +58,7 @@ export interface AppState {
         listevisningMinOversikt: ListevisningState;
         listevisningEnhetensOversikt: ListevisningState;
     };
-    enheter: any;
+    enheter: EnheterState;
     ledetekster: any;
     portefolje: PortefoljeState;
     paginering: any;

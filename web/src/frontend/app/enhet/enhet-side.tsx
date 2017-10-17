@@ -41,12 +41,12 @@ type EnhetSideProps = StateProps & DispatchProps & OwnProps;
 class EnhetSide extends React.Component<EnhetSideProps, {}> {
     componentWillMount() {
         const { valgtEnhet } = this.props;
-        leggEnhetIUrl(valgtEnhet.enhet.enhetId!);
+        leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
     }
 
     componentDidMount() {
-        this.props.hentStatusTall(this.props.valgtEnhet.enhet.enhetId!);
-        this.props.hentEnhetTiltak(this.props.valgtEnhet.enhet.enhetId!);
+        this.props.hentStatusTall(this.props.valgtEnhet.enhet!.enhetId);
+        this.props.hentEnhetTiltak(this.props.valgtEnhet.enhet!.enhetId);
     }
 
     render() {

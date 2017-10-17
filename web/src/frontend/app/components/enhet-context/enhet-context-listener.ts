@@ -34,7 +34,7 @@ export default class EnhetContextListener {
 
     constructor(uri: string, cb: (action: EnhetContextEvent) => void) {
         this.callback = cb;
-        this.lagWebSocketConnection(uri); // TODO: ikke hardkode
+        this.lagWebSocketConnection(uri);
     }
 
     public close() {
