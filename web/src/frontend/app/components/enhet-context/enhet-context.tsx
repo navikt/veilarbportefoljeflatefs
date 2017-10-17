@@ -1,7 +1,8 @@
 import * as React from 'react';
-import AlertStripe from 'nav-frontend-alertstriper';
+import {AlertStripeAdvarselSolid} from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
-import { settNyAktivEnhet, settTilkoblingState } from './context-reducer';
+import {FormattedMessage} from 'react-intl';
+import {settNyAktivEnhet, settTilkoblingState} from './context-reducer';
 import { AppState } from '../../reducer';
 import NyContextModal from './ny-context-modal';
 import EnhetContextListener, {
@@ -14,13 +15,13 @@ import { hentVeiledereForEnhet } from '../../ducks/veiledere';
 
 interface StateProps {
     modalSynlig: boolean;
-    tilkoblet: boolean;
+    feilet: boolean;
     aktivEnhet: string;
     aktivEnhetContext: string;
 }
 
 interface DispatchProps {
-    doSettTilkoblingState: (state: boolean) => void;
+    doSettTilkoblingState: (state: EnhetConnectionState) => void;
     doSettNyAktivEnhet: (enhet: string) => void;
     doVelgEnhetForVeileder: (enhet: string) => void;
     doHentVeiledereForEnhet: (enhet: string) => void;
@@ -66,8 +67,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     enhetContextHandler(event: EnhetContextEvent) {
         switch (event.type) {
             case EnhetContextEventNames.CONNECTION_STATE_CHANGED:
-                const connected = event.state === EnhetConnectionState.CONNECTED;
-                this.props.doSettTilkoblingState(connected);
+                this.props.doSettTilkoblingState(event.state);
                 break;
             case EnhetContextEventNames.NY_AKTIV_ENHET:
                 this.handleNyAktivEnhet();
@@ -76,11 +76,16 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     render() {
+
+        const alertIkkeTilkoblet = (
+            <AlertStripeAdvarselSolid>
+                <FormattedMessage id="nyenhet.tilkobling.feilet" />
+            </AlertStripeAdvarselSolid>
+        );
+
         return (
             <div>
-                <AlertStripe solid={true} type={ this.props.tilkoblet ? 'suksess' : 'advarsel' }>
-                    <span>Bruker i context: { this.props.tilkoblet ? 'TILKOBLET' : 'IKKE TILKOBLET' }</span>
-                </AlertStripe>
+                { this.props.feilet ? alertIkkeTilkoblet : null }
                 <NyContextModal
                     isOpen={this.props.modalSynlig}
                     aktivEnhet={this.props.aktivEnhet}
@@ -99,7 +104,7 @@ const mapStateToProps = (state: AppState): StateProps => {
 
     return {
         modalSynlig: valgtEnhetId !== valgtEnhetContext,
-        tilkoblet: state.nycontext.connected,
+        feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
         aktivEnhet: valgtEnhet == null ? '' : valgtEnhet.enhetId,
         aktivEnhetContext: valgtEnhetContext
     };
@@ -107,7 +112,7 @@ const mapStateToProps = (state: AppState): StateProps => {
 
 const mapDispatchToProps = (dispatch): DispatchProps => {
     return {
-        doSettTilkoblingState: (state: boolean) => dispatch(settTilkoblingState(state)),
+        doSettTilkoblingState: (state: EnhetConnectionState) => dispatch(settTilkoblingState(state)),
         doSettNyAktivEnhet: (enhet: string) => dispatch(settNyAktivEnhet(enhet)),
         doVelgEnhetForVeileder: (enhet: string) => dispatch(velgEnhetForVeileder(enhet)),
         doHentVeiledereForEnhet: (enhet: string) => dispatch(hentVeiledereForEnhet(enhet))

@@ -1,12 +1,13 @@
 import { getEnhetFromUrl } from '../../utils/utils';
+import {EnhetConnectionState} from './enhet-context-listener';
 
 export interface ContextState {
-    connected: boolean;
+    connected: EnhetConnectionState;
     aktivEnhet: string;
 }
 
 const initialState: ContextState = {
-    connected: false,
+    connected: EnhetConnectionState.NOT_CONNECTED,
     aktivEnhet: getEnhetFromUrl()
 };
 
@@ -22,7 +23,7 @@ interface SettAktivEnhetAction {
 
 interface ConnectionStateAction {
     type: ContextActionKeys.SETT_TILKOBLING_STATE;
-    connected: boolean;
+    connected: EnhetConnectionState;
 }
 
 type ContextActions =
@@ -45,6 +46,6 @@ export function settNyAktivEnhet(nyAktivEnhet: string): SettAktivEnhetAction {
     return { type: ContextActionKeys.SETT_AKTIV_ENHET, enhet: nyAktivEnhet };
 }
 
-export function settTilkoblingState(tilkoblet: boolean): ConnectionStateAction {
+export function settTilkoblingState(tilkoblet: EnhetConnectionState): ConnectionStateAction {
     return { type: ContextActionKeys.SETT_TILKOBLING_STATE, connected: tilkoblet };
 }
