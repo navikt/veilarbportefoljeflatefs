@@ -1,3 +1,5 @@
+import { render } from 'react-dom';
+
 /* eslint-disable no-undef */
 if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
     require('babel-polyfill'); // eslint-disable-line global-require
@@ -12,7 +14,6 @@ if (process.env.NODE_ENV !== 'production') {
 /* eslint-disable import/first */
 import 'whatwg-fetch';
 import React from 'react';
-import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router';
 import { IntlProvider, addLocaleData } from 'react-intl';
