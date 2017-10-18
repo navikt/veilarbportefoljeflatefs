@@ -26,7 +26,7 @@ export function slettCleanIUrl() {
     history.replace(`${pathname}?${stringified}`);
 }
 
-export function leggEnhetIUrl(enhet: string) {
+export function leggEnhetIUrl(enhet: string, refresh: boolean = false) {
     if (enhet) {
         const parsed = queryString.parse(location.search);
         parsed.enhet = enhet;
@@ -34,6 +34,9 @@ export function leggEnhetIUrl(enhet: string) {
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname.replace(basename, '');
         history.replace(`${pathname}?${stringified}`);
+        if(refresh) {
+            window.location.reload(true);
+        }
     }
 }
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {AlertStripeAdvarselSolid} from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import {settNyAktivEnhet, settTilkoblingState} from './context-reducer';
+import {settNyAktivEnhet, settTilkoblingState, settIsPending} from './context-reducer';
 import { AppState } from '../../reducer';
 import NyContextModal from './ny-context-modal';
 import EnhetContextListener, {
@@ -10,12 +10,12 @@ import EnhetContextListener, {
     EnhetContextEventNames
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
-import { velgEnhetForVeileder } from '../../ducks/enheter';
-import { hentVeiledereForEnhet } from '../../ducks/veiledere';
+import {leggEnhetIUrl} from '../../utils/utils';
 
 interface StateProps {
     modalSynlig: boolean;
     feilet: boolean;
+    isPending: boolean;
     aktivEnhet: string;
     aktivEnhetContext: string;
 }
@@ -23,8 +23,7 @@ interface StateProps {
 interface DispatchProps {
     doSettTilkoblingState: (state: EnhetConnectionState) => void;
     doSettNyAktivEnhet: (enhet: string) => void;
-    doVelgEnhetForVeileder: (enhet: string) => void;
-    doHentVeiledereForEnhet: (enhet: string) => void;
+    doSettIsPending: (pending: boolean) => void;
 }
 
 type EnhetContextProps = StateProps & DispatchProps;
@@ -49,13 +48,14 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     handleEndreAktivEnhet() {
-        this.props.doVelgEnhetForVeileder(this.props.aktivEnhetContext);
-        this.props.doHentVeiledereForEnhet(this.props.aktivEnhetContext);
+        leggEnhetIUrl(this.props.aktivEnhetContext, true);
     }
 
     handleBeholdAktivEnhet() {
+        this.props.doSettIsPending(true);
         oppdaterAktivEnhet(this.props.aktivEnhet)
-            .then(() => this.props.doSettNyAktivEnhet(this.props.aktivEnhet));
+            .then(() => this.props.doSettNyAktivEnhet(this.props.aktivEnhet))
+            .then(() => this.props.doSettIsPending(false));
     }
 
     handleNyAktivEnhet() {
@@ -89,6 +89,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
                 <NyContextModal
                     isOpen={this.props.modalSynlig}
                     aktivEnhet={this.props.aktivEnhet}
+                    isPending={this.props.isPending}
                     doEndreAktivEnhet={this.handleEndreAktivEnhet}
                     doBeholdAktivEnhet={this.handleBeholdAktivEnhet}
                 />
@@ -104,6 +105,7 @@ const mapStateToProps = (state: AppState): StateProps => {
 
     return {
         modalSynlig: valgtEnhetId !== valgtEnhetContext,
+        isPending: state.nycontext.isPending,
         feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
         aktivEnhet: valgtEnhet == null ? '' : valgtEnhet.enhetId,
         aktivEnhetContext: valgtEnhetContext
@@ -114,8 +116,7 @@ const mapDispatchToProps = (dispatch): DispatchProps => {
     return {
         doSettTilkoblingState: (state: EnhetConnectionState) => dispatch(settTilkoblingState(state)),
         doSettNyAktivEnhet: (enhet: string) => dispatch(settNyAktivEnhet(enhet)),
-        doVelgEnhetForVeileder: (enhet: string) => dispatch(velgEnhetForVeileder(enhet)),
-        doHentVeiledereForEnhet: (enhet: string) => dispatch(hentVeiledereForEnhet(enhet))
+        doSettIsPending: (pending: boolean) => dispatch(settIsPending(pending)),
     };
 };
 
