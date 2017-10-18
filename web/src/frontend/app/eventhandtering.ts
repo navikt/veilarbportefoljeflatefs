@@ -48,7 +48,7 @@ const getConfig = (initiellEnhet = undefined) => {
         tittel: ''
     };
 
-    const config = {
+    return {
         config: {
             dataSources: {
                 veileder: '/veilarbveileder/tjenester/veileder/me',
@@ -67,7 +67,6 @@ const getConfig = (initiellEnhet = undefined) => {
             applicationName: 'Arbeidsrettet oppfølging'
         }
     };
-    return config;
 };
 
 export default () => {
