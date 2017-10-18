@@ -71,7 +71,7 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer: AktiviteterModell | null 
         return null;
     }
 
-    let dagensDato = new Date();
+    const dagensDato = new Date();
     dagensDato.setHours(0,0,0,0);
     return Object.keys(utlopsdatoer)
         .map((key) => utlopsdatoer[key])

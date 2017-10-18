@@ -1,27 +1,35 @@
 import { getEnhetFromUrl } from '../../utils/utils';
-import {EnhetConnectionState} from './enhet-context-listener';
+import { EnhetConnectionState } from './enhet-context-listener';
 
 export interface ContextState {
     connected: EnhetConnectionState;
     aktivEnhet: string;
     isPending: boolean;
+    visFeilmodal: boolean;
 }
 
 const initialState: ContextState = {
     connected: EnhetConnectionState.NOT_CONNECTED,
     aktivEnhet: getEnhetFromUrl(),
-    isPending: false
+    isPending: false,
+    visFeilmodal: false
 };
 
 enum ContextActionKeys {
     SETT_TILKOBLING_STATE = 'context/sett-tilkobling-state',
     SETT_AKTIV_ENHET = 'context/sett-aktiv-enhet',
-    SETT_PENDING_STATE = 'context/sett-pending'
+    SETT_PENDING_STATE = 'context/sett-pending',
+    VIS_FEILMODAL = 'context/vis-feilmodal',
+    SKJUL_FEILMODAL = 'context/skjul-feilmodal'
 }
 
 interface SettAktivEnhetAction {
     type: ContextActionKeys.SETT_AKTIV_ENHET;
     enhet: string;
+}
+
+interface FeilmodalAction {
+    type: ContextActionKeys.VIS_FEILMODAL | ContextActionKeys.SKJUL_FEILMODAL;
 }
 
 interface SettPendingAction {
@@ -54,7 +62,7 @@ export default function contextReducer(state: ContextState = initialState, actio
 }
 
 export function settIsPending(pending: boolean): SettPendingAction {
-    return { type: ContextActionKeys.SETT_PENDING_STATE, pending: pending };
+    return { type: ContextActionKeys.SETT_PENDING_STATE, pending };
 }
 
 export function settNyAktivEnhet(nyAktivEnhet: string): SettAktivEnhetAction {
@@ -63,4 +71,12 @@ export function settNyAktivEnhet(nyAktivEnhet: string): SettAktivEnhetAction {
 
 export function settTilkoblingState(tilkoblet: EnhetConnectionState): ConnectionStateAction {
     return { type: ContextActionKeys.SETT_TILKOBLING_STATE, connected: tilkoblet };
+}
+
+export function visFeilmodal(): FeilmodalAction {
+    return { type: ContextActionKeys.VIS_FEILMODAL };
+}
+
+export function skjulFeilmodal(): FeilmodalAction {
+    return { type: ContextActionKeys.SKJUL_FEILMODAL };
 }

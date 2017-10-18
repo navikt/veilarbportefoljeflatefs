@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {AlertStripeAdvarselSolid} from 'nav-frontend-alertstriper';
+import { AlertStripeAdvarselSolid } from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
-import {FormattedMessage} from 'react-intl';
-import {settNyAktivEnhet, settTilkoblingState, settIsPending} from './context-reducer';
+import { FormattedMessage } from 'react-intl';
+import { settNyAktivEnhet, settTilkoblingState, settIsPending } from './context-reducer';
 import { AppState } from '../../reducer';
 import NyContextModal from './ny-context-modal';
 import EnhetContextListener, {
@@ -10,7 +10,7 @@ import EnhetContextListener, {
     EnhetContextEventNames
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
-import {leggEnhetIUrl} from '../../utils/utils';
+import { leggEnhetIUrl } from '../../utils/utils';
 
 interface StateProps {
     modalSynlig: boolean;
@@ -43,7 +43,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         const uri = `wss://app-t4.adeo.no/modiaeventdistribution/websocket`;
         this.contextListener = new EnhetContextListener(uri, this.enhetContextHandler);
 
-        hentAktivEnhet().then(enhet => {
+        hentAktivEnhet().then((enhet) => {
             if (!enhet) {
                 oppdaterAktivEnhet(this.props.aktivEnhet);
             } else {
@@ -110,7 +110,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 const mapStateToProps = (state: AppState): StateProps => {
     const valgtEnhet = state.enheter.valgtEnhet.enhet;
     const valgtEnhetId = valgtEnhet ? valgtEnhet.enhetId : '';
-    const valgtEnhetNavn = valgtEnhet ? state.enheter.data.find(enhet => enhet.enhetId === valgtEnhetId).navn : '';
+    const valgtEnhetNavn = valgtEnhet ? state.enheter.data.find((enhet) => enhet.enhetId === valgtEnhetId).navn : '';
     const valgtEnhetContext = state.nycontext.aktivEnhet;
 
     return {
