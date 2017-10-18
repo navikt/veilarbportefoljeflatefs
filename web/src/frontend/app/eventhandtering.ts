@@ -1,11 +1,18 @@
+import getStore from './store';
+import { oppdaterAktivEnhet } from './components/enhet-context/context-api';
+import { visFeilmodal } from './components/enhet-context/context-reducer';
+
 /* eslint-disable no-undef */
 const handlePersonsokSubmit = (fnr) => {
     window.location.pathname = `veilarbpersonflatefs/${fnr}`;
 };
 
 const handleChangeEnhet = (enhet, type) => {
+    const onSuccess = () => window.location.search = (`?enhet=${enhet}&clean`);
+    const onError = () => getStore().dispatch(visFeilmodal());
+
     if (type !== 'init') {
-        window.location.search = (`?enhet=${enhet}&clean`);
+        oppdaterAktivEnhet(enhet).then(onSuccess, onError);
     }
 };
 
@@ -18,6 +25,7 @@ function finnMiljoStreng() {
     const dotIndex = host.indexOf('.');
     return host.substring(bindestrekIndex + 1, dotIndex);
 }
+
 export function erstattMiljoPlaceholder(lenke) {
     const miljoStreng = finnMiljoStreng();
     if (miljoStreng) {
@@ -26,21 +34,19 @@ export function erstattMiljoPlaceholder(lenke) {
     return lenke.replace('{{miljoStreng}}', miljoStreng);
 }
 
-
 const getConfig = (initiellEnhet = undefined) => {
     const modiaUrl = erstattMiljoPlaceholder('https://modapp{{miljoStreng}}.adeo.no/modiabrukerdialog');
     const miaUrl = erstattMiljoPlaceholder('https://modapp{{miljoStreng}}.adeo.no/mia');
 
-    const lenker =
-        {
-            lenker: [
-                [miaUrl, 'Arbeidsmarkedet'],
-                [`/veilarbportefoljeflatefs/enhet?enhet=${initiellEnhet}&clean`, 'Enhetens oversikt'],
-                [`/veilarbportefoljeflatefs/portefolje?enhet=${initiellEnhet}&clean`, 'Min oversikt'],
-                [modiaUrl, 'Modia']
-            ],
-            tittel: ''
-        };
+    const lenker = {
+        lenker: [
+            [miaUrl, 'Arbeidsmarkedet'],
+            [`/veilarbportefoljeflatefs/enhet?enhet=${initiellEnhet}&clean`, 'Enhetens oversikt'],
+            [`/veilarbportefoljeflatefs/portefolje?enhet=${initiellEnhet}&clean`, 'Min oversikt'],
+            [modiaUrl, 'Modia']
+        ],
+        tittel: ''
+    };
 
     const config = {
         config: {
@@ -65,14 +71,13 @@ const getConfig = (initiellEnhet = undefined) => {
 };
 
 export default () => {
-    if (window.renderDecoratorHead) {
-        window.renderDecoratorHead(getConfig());
+    if ((window as any).renderDecoratorHead) {
+        (window as any).renderDecoratorHead(getConfig());
     } else {
         window.location.href = 'feilsider/500.html';
     }
 };
 
-
 export const settEnhetIDekorator = (initiellEnhet) => {
-    window.renderDecoratorHead(getConfig(initiellEnhet));
+    (window as any).renderDecoratorHead(getConfig(initiellEnhet));
 };

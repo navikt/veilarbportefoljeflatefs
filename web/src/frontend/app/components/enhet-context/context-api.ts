@@ -1,7 +1,7 @@
 import { fetchToJson } from '../../ducks/utils';
 
 const MED_CREDENTIALS: RequestInit = {
-    credentials: "same-origin",
+    credentials: 'same-origin',
     headers: {
         'Content-Type': 'application/json'
     }

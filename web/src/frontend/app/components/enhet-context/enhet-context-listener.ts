@@ -74,8 +74,7 @@ export default class EnhetContextListener {
                 this.connectionState = EnhetConnectionState.FAILED;
                 this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.FAILED });
                 this.retryTimeout = setTimeout(() => this.lagWebSocketConnection(uri), 1000);
-            }
-            else {
+            } else {
                 this.connectionState = EnhetConnectionState.NOT_CONNECTED;
                 this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.NOT_CONNECTED });
             }
