@@ -1,8 +1,7 @@
 const path = require('path');
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const paths = {
     WEBAPP: path.resolve(__dirname, '../main/webapp'),
@@ -16,9 +15,10 @@ module.exports = {
         filename: 'js/bundle.js'
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'index.html')
-        }),
+        new CopyWebpackPlugin([
+            { from: './index.dev.html', to: path.join(paths.WEBAPP, 'index.html') },
+            { from: './head.min.js', to: path.join(paths.WEBAPP, 'js/') },
+        ]),
         new ExtractTextPlugin('css/index.css'),
         new OptimizeCssAssetsPlugin()
     ],
@@ -49,5 +49,8 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.less']
+    },
+    devServer: {
+        port: 3000
     }
 };
