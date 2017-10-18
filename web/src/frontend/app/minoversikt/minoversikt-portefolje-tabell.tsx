@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { enhetShape, filtervalgShape, veilederShape } from './../proptype-shapes';
 import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
-import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
+import { settBrukerSomMarkert } from '../ducks/portefolje';
 import MinOversiktListehode from './minoversikt-listehode';
 import CheckBox from '../components/tabell/checkbox';
 import {
@@ -71,7 +71,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
-    settSomMarkertAlle: (markert) => dispatch(markerAlleBrukere(markert))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MinoversiktTabell);

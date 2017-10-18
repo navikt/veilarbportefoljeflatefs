@@ -4,21 +4,29 @@ import {EnhetConnectionState} from './enhet-context-listener';
 export interface ContextState {
     connected: EnhetConnectionState;
     aktivEnhet: string;
+    isPending: boolean;
 }
 
 const initialState: ContextState = {
     connected: EnhetConnectionState.NOT_CONNECTED,
-    aktivEnhet: getEnhetFromUrl()
+    aktivEnhet: getEnhetFromUrl(),
+    isPending: false
 };
 
 enum ContextActionKeys {
     SETT_TILKOBLING_STATE = 'context/sett-tilkobling-state',
     SETT_AKTIV_ENHET = 'context/sett-aktiv-enhet',
+    SETT_PENDING_STATE = 'context/sett-pending'
 }
 
 interface SettAktivEnhetAction {
     type: ContextActionKeys.SETT_AKTIV_ENHET;
     enhet: string;
+}
+
+interface SettPendingAction {
+    type: ContextActionKeys.SETT_PENDING_STATE;
+    pending: boolean;
 }
 
 interface ConnectionStateAction {
@@ -29,6 +37,7 @@ interface ConnectionStateAction {
 type ContextActions =
     | SettAktivEnhetAction
     | ConnectionStateAction
+    | SettPendingAction
     | { type: '__OTHER_ACTION__' };
 
 export default function contextReducer(state: ContextState = initialState, action: ContextActions): ContextState {
@@ -37,9 +46,15 @@ export default function contextReducer(state: ContextState = initialState, actio
             return { ...state, connected: action.connected };
         case ContextActionKeys.SETT_AKTIV_ENHET:
             return { ...state, aktivEnhet: action.enhet };
+        case ContextActionKeys.SETT_PENDING_STATE:
+            return { ...state, isPending: action.pending };
         default:
             return state;
     }
+}
+
+export function settIsPending(pending: boolean): SettPendingAction {
+    return { type: ContextActionKeys.SETT_PENDING_STATE, pending: pending };
 }
 
 export function settNyAktivEnhet(nyAktivEnhet: string): SettAktivEnhetAction {

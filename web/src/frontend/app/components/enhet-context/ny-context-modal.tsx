@@ -7,6 +7,7 @@ import Knapp, { Hovedknapp } from 'nav-frontend-knapper';
 
 interface NyContextModalProps {
     isOpen: boolean;
+    isPending: boolean;
     doEndreAktivEnhet: () => void;
     doBeholdAktivEnhet: () => void;
     aktivEnhet: string;
@@ -32,10 +33,10 @@ class NyContextModal extends React.Component<NyContextModalProps> {
                         <FormattedMessage id="nyenhet.modal.sporsmal" values={{ enhet: this.props.aktivEnhet }}/>
                     </Normaltekst>
                     <div className="modal-footer" >
-                        <Hovedknapp onClick={this.props.doBeholdAktivEnhet}>
+                        <Hovedknapp onClick={this.props.doBeholdAktivEnhet} spinner={this.props.isPending} autoDisableVedSpinner>
                             <FormattedMessage id="nyenhet.modal.bekreft" />
                         </Hovedknapp>
-                        <Knapp type="standard" onClick={() => this.props.doEndreAktivEnhet()}>
+                        <Knapp disabled={this.props.isPending} type="standard" onClick={() => this.props.doEndreAktivEnhet()}>
                             <FormattedMessage id="nyenhet.modal.avbryt" />
                         </Knapp>
                     </div>
