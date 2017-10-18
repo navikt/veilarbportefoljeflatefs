@@ -1,6 +1,8 @@
 const path = require('path');
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const paths = {
     WEBAPP: path.resolve(__dirname, '../main/webapp'),
@@ -17,7 +19,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'index.html')
         }),
-        new ExtractTextPlugin('css/index.css')
+        new ExtractTextPlugin('css/index.css'),
+        new OptimizeCssAssetsPlugin()
     ],
     module: {
         rules: [
