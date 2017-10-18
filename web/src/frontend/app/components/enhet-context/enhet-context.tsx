@@ -17,6 +17,7 @@ interface StateProps {
     feilet: boolean;
     isPending: boolean;
     aktivEnhet: string;
+    aktivEnhetNavn: string;
     aktivEnhetContext: string;
 }
 
@@ -96,7 +97,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
                 { this.props.feilet ? alertIkkeTilkoblet : null }
                 <NyContextModal
                     isOpen={this.props.modalSynlig}
-                    aktivEnhet={this.props.aktivEnhet}
+                    aktivEnhet={this.props.aktivEnhetNavn}
                     isPending={this.props.isPending}
                     doEndreAktivEnhet={this.handleEndreAktivEnhet}
                     doBeholdAktivEnhet={this.handleBeholdAktivEnhet}
@@ -109,13 +110,15 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 const mapStateToProps = (state: AppState): StateProps => {
     const valgtEnhet = state.enheter.valgtEnhet.enhet;
     const valgtEnhetId = valgtEnhet ? valgtEnhet.enhetId : '';
+    const valgtEnhetNavn = valgtEnhet ? state.enheter.data.find(enhet => enhet.enhetId === valgtEnhetId).navn : '';
     const valgtEnhetContext = state.nycontext.aktivEnhet;
 
     return {
         modalSynlig: valgtEnhetId !== valgtEnhetContext,
         isPending: state.nycontext.isPending,
         feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
-        aktivEnhet: valgtEnhet == null ? '' : valgtEnhet.enhetId,
+        aktivEnhet: valgtEnhetId,
+        aktivEnhetNavn: `${valgtEnhetId} ${valgtEnhetNavn}`,
         aktivEnhetContext: valgtEnhetContext
     };
 };
