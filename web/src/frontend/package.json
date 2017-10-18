@@ -34,6 +34,7 @@
     "mocha": "3.4.2",
     "nav-confluence-api": "0.0.9",
     "npm-check-updates": "2.12.1",
+    "optimize-css-assets-webpack-plugin": "^3.2.0",
     "path-to-regexp": "1.7.0",
     "query-string": "4.3.4",
     "react-addons-test-utils": "15.6.0",
@@ -105,8 +106,8 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "build": "webpack -p",
-    "dev": "webpack --watch",
+    "build": "./node_modules/webpack/bin/webpack -p",
+    "dev": "./node_modules/webpack/bin/webpack --watch",
     "test": "mocha",
     "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates --semverLevel major -e 2 -x history,react-router,react-router-redux,react-collapse,react-height,typescript,redux-form --packageFile ./package.json",
     "eslint": "eslint --fix ./app/**/*.js && tslint ./app/**/*.ts* --fix",
