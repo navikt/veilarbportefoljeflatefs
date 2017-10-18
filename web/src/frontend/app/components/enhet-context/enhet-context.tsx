@@ -41,6 +41,14 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     componentDidMount() {
         const uri = `wss://app-t4.adeo.no/modiaeventdistribution/websocket`;
         this.contextListener = new EnhetContextListener(uri, this.enhetContextHandler);
+
+        hentAktivEnhet().then(enhet => {
+            if (!enhet) {
+                oppdaterAktivEnhet(this.props.aktivEnhet);
+            } else {
+                this.props.doSettNyAktivEnhet(enhet);
+            }
+        });
     }
 
     componentWillUnmount() {
