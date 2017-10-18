@@ -5,7 +5,12 @@ export const inloggetEnhet = {
     navn: 'NAV Testheim'
 };
 
+const alternativEnhet = {
+    enhetId: '0219',
+    navn: 'NAV Bærum'
+};
+
 export default {
     ident: innloggetVeileder.ident,
-    enhetliste: [inloggetEnhet]
+    enhetliste: [inloggetEnhet, alternativEnhet]
 };
