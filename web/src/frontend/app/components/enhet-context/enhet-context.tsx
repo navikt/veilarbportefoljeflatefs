@@ -10,7 +10,7 @@ import EnhetContextListener, {
     EnhetContextEventNames
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
-import { leggEnhetIUrl } from '../../utils/utils';
+import {erDev, leggEnhetIUrl} from '../../utils/utils';
 
 interface StateProps {
     modalSynlig: boolean;
@@ -40,7 +40,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     componentDidMount() {
-        const uri = `wss://app-t4.adeo.no/modiaeventdistribution/websocket`;
+        const host = erDev() ? 'app-t4.adeo.no' : window.location.hostname;
+        const uri = `wss://${host}/modiaeventdistribution/websocket`;
         this.contextListener = new EnhetContextListener(uri, this.enhetContextHandler);
 
         hentAktivEnhet().then((enhet) => {
