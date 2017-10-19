@@ -3,8 +3,12 @@ import faker from 'faker/locale/nb_NO';
 
 faker.seed(MOCK_CONFIG.seed);
 
+export function lagTilfeldigVeilederId() {
+    return `Z${rnd(100000, 999999)}`
+}
+
 function lagVeileder() {
-    const ident = `Z${rnd(100000, 999999)}`;
+    const ident = lagTilfeldigVeilederId();
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
     const fornavn = faker.name.firstName(kjonn === 'K' ? 1 : 0);
     const etternavn = faker.name.lastName(kjonn === 'K' ? 1 : 0);
