@@ -44,8 +44,8 @@ const getConfig = (initiellEnhet = undefined) => {
     return {
         config: {
             dataSources: {
-                veileder: '/veilarbveileder/tjenester/veileder/me',
-                enheter: '/veilarbveileder/tjenester/veileder/enheter'
+                veileder: '/veilarbveileder/api/veileder/me',
+                enheter: '/veilarbveileder/api/veileder/enheter'
             },
             toggles: {
                 visEnhet: false,
