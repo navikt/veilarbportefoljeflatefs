@@ -125,7 +125,8 @@ const RadioFilterReduxForm = reduxForm<RadioFilterformProps, RadioFilterformOwnP
 
 const mapStateToProps = (state, ownProps) => {
     const name = ownProps.form;
-    return { [name]: ownProps.filtervalg[name] };
+    const initialValues = { [name]: ownProps.filtervalg[name] };
+    return { initialValues };
 };
 
 export default connect(mapStateToProps)(RadioFilterReduxForm);
