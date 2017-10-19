@@ -60,11 +60,11 @@ function AktivitetFilterform(props) {
 
     return (
         <form className="skjema aktivitetfilterform" onSubmit={submithandler}>
+            <div className="aktivitetvalg__header blokk-xxs">
+                <span className="aktivitetvalg__header--first">Ja</span>
+                <span>Nei</span>
+            </div>
             <div className="aktivitetfilterform__valg">
-                <div className="aktivitetvalg__header blokk-xxs">
-                    <span className="aktivitetvalg__header--first">Ja</span>
-                    <span>Nei</span>
-                </div>
                 {fields}
 
                 <span className="text-hide" aria-live="polite" aria-atomic="true">
@@ -76,8 +76,8 @@ function AktivitetFilterform(props) {
             </div>
             <div className="aktivitetfilter_knapper blokk-xxs">
                 <button type="submit" className="knapp knapp--hoved knapp--mini">
-                Velg
-            </button>
+                    Velg
+                </button>
                 <button
                     type="button"
                     className="knapp knapp--standard knapp--mini"

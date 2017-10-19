@@ -2,12 +2,15 @@
     label {
         display: inline-block;
     }
-    .aktivitetvalg__header--first {
-        padding-right: 0.4rem;
+    .aktivitetvalg__header {
+        padding: 0.5rem 0 0 1.2rem;
+        &--first {
+            padding-right: 0.4rem;
+        }
     }
+
     .aktivitetvalg {
-        display: block;
-        align-items: center;
+        display: flex;
     }
 
     .aktivitet_radioknapp_label {
@@ -16,6 +19,7 @@
 
     .radioknapp + label {
         padding-left: 1.5rem;
+        margin-top: 0.15rem;
     }
 
     .radioknapp:checked + label:before {
@@ -30,12 +34,12 @@
         }
     }
 
-    .aktivitetvalg__tekst  {
+    .aktivitetvalg__tekst {
         margin-left: 0.5rem;
     }
 
     &__valg {
-        padding: 0.5rem 0.5rem 0.5rem 1.2rem;
+        padding: 0 0.5rem 0.5rem 1.2rem;
         max-height: 15rem;
         margin-bottom: 0.5rem;
         overflow-x: auto;
