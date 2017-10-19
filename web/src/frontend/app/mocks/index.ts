@@ -7,6 +7,7 @@ import veiledere from './veiledere';
 import statustall from './statustall';
 import tekster from './tekster';
 import tiltak from './tiltak';
+import lagPortefoljeStorrelser from './portefoljestorrelser';
 
 function lagPortefoljeForVeileder(queryParams, bodyParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, bodyParams, enheter.enhetliste[0].enhetId, alleBrukere);
@@ -18,7 +19,6 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
     const { fra, antall } = queryParams;
     const fraInt = parseInt(fra, 10);
     const antallInt = parseInt(antall, 10);
-
     const filtrerteBrukere = alleBrukere.splice(fraInt, antallInt);
 
     return {
@@ -41,6 +41,7 @@ mock.get('express:/veilarbveileder/tjenester/enhet/:enhet/veiledere', respondWit
 // portefolje-api
 mock.get('express:/veilarbportefolje/api/enhet/:enhet/statustall', respondWith(delayed(1000, randomFailure(statustall))));
 mock.post('express:/veilarbportefolje/api/enhet/:enhet/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefolje(queryParams, bodyParams, extra.enhet, brukere)));
+mock.get('express:/veilarbportefolje/api/enhet/:enhet/portefoljestorrelser*', respondWith(() => lagPortefoljeStorrelser()));
 mock.post('express:/veilarbportefolje/api/veileder/:ident/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefoljeForVeileder(queryParams, bodyParams, brukere)));
 mock.get('express:/veilarbportefolje/tjenester/veileder/:veileder/statustall*', respondWith(delayed(1000, randomFailure(statustall))));
 mock.get('express:/veilarbportefolje/api/enhet/:enhet/tiltak', () => respondWith(tiltak));
