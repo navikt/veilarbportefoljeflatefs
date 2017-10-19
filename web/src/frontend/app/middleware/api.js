@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
 
-const API_BASE_URL = '/veilarbportefoljeflatefs/tjenester';
+const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
 
 const MED_CREDENTIALS = {
@@ -16,7 +16,7 @@ const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 const VEILARBSITUASJON_URL = '/veilarbsituasjon';
 
 export function hentVeiledersEnheter() {
-    const url = `${VEILARBVEILEDER_URL}/tjenester/veileder/enheter`;
+    const url = `${VEILARBVEILEDER_URL}/api/veileder/enheter`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
@@ -52,7 +52,7 @@ export function hentDiagramdata(enhet, veilederident, filtervalg) {
 }
 
 export function hentEnhetsVeiledere(enhetId) {
-    const url = `${VEILARBVEILEDER_URL}/tjenester/enhet/${enhetId}/veiledere`;
+    const url = `${VEILARBVEILEDER_URL}/api/enhet/${enhetId}/veiledere`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
