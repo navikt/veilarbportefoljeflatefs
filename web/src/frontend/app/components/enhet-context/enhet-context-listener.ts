@@ -32,6 +32,7 @@ export default class EnhetContextListener {
     callback: (event: EnhetContextEvent) => void;
     closing: boolean = false;
     retryTimeout: number;
+    hearthbeatInterval: number;
 
     constructor(uri: string, cb: (action: EnhetContextEvent) => void) {
         this.callback = cb;
@@ -41,6 +42,7 @@ export default class EnhetContextListener {
     public close() {
         this.closing = true;
         clearTimeout(this.retryTimeout);
+        clearInterval(this.hearthbeatInterval);
         this.connection.close();
     }
 
@@ -53,6 +55,9 @@ export default class EnhetContextListener {
 
         this.connection.onopen = (e) => {
             this.connection.send('Hello, World!');
+            this.hearthbeatInterval = setInterval(() => {
+                this.connection.send('Hello, World!');
+            }, 10000);
         };
 
         this.connection.onmessage = (e: MessageEvent) => {
@@ -70,6 +75,7 @@ export default class EnhetContextListener {
         };
 
         this.connection.onclose = () => {
+            clearInterval(this.hearthbeatInterval);
             if (!this.closing) {
                 this.connectionState = EnhetConnectionState.FAILED;
                 this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.FAILED });
