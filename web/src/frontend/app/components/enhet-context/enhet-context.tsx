@@ -114,8 +114,10 @@ const mapStateToProps = (state: AppState): StateProps => {
     const valgtEnhetNavn = valgtEnhet ? state.enheter.data.find((enhet) => enhet.enhetId === valgtEnhetId).navn : '';
     const valgtEnhetContext = state.nycontext.aktivEnhet;
 
+    const harValgtEnhet = valgtEnhetId != null && valgtEnhetId != '';
+
     return {
-        modalSynlig: valgtEnhetId !== valgtEnhetContext,
+        modalSynlig: harValgtEnhet && (valgtEnhetId !== valgtEnhetContext),
         isPending: state.nycontext.isPending,
         feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
         aktivEnhet: valgtEnhetId,
