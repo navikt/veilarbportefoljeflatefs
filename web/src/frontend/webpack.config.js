@@ -51,6 +51,9 @@ module.exports = {
         extensions: ['.js', '.ts', '.tsx', '.less']
     },
     devServer: {
-        port: 3000
+        port: 3000,
+        publicPath: '/veilarbportefoljeflatefs/enhet/',
+        hot: true,
+        inline: true
     }
 };
