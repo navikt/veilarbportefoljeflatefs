@@ -12,7 +12,7 @@ const MED_CREDENTIALS = {
 };
 
 const VEILARBVEILEDER_URL = '/veilarbveileder';
-const VEILARBPORTEFOLJE_URL = '/veilarbportefolje';
+const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 const VEILARBSITUASJON_URL = '/veilarbsituasjon';
 
 export function hentVeiledersEnheter() {
@@ -25,14 +25,14 @@ export function hentLedetekster() {
 }
 
 export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg) {
-    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhet}/` +
+    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/` +
         `portefolje?fra=${fra}&antall=${antall}&sortDirection=${rekkefolge}&sortField=${sorteringsfelt}`;
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
     return fetchToJson(url, config);
 }
 
 export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, sorteringsfelt, fra, antall, filtervalg) {
-    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/veileder/` +
+    const url = `${VEILARBPORTEFOLJE_URL}/veileder/` +
         `${veilederident}/portefolje?enhet=${enhet}&fra=${fra}&antall=${antall}` +
         `&sortDirection=${rekkefolge}&sortField=${sorteringsfelt}`;
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
@@ -40,7 +40,7 @@ export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, sorter
 }
 
 export function hentDiagramdata(enhet, veilederident, filtervalg) {
-    let url = `${VEILARBPORTEFOLJE_URL}/tjenester/diagram/` +
+    let url = `${VEILARBPORTEFOLJE_URL}/diagram/` +
         `?enhet=${enhet}`;
 
     if (veilederident) {
@@ -57,7 +57,7 @@ export function hentEnhetsVeiledere(enhetId) {
 }
 
 export function fetchPortefoljeStorrelser(enhetId) {
-    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhetId}` +
+    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}` +
         '/portefoljestorrelser';
     return fetchToJson(url, MED_CREDENTIALS);
 }
@@ -69,23 +69,23 @@ export function tilordneVeileder(tilordninger) {
 }
 
 export function hentStatusTall(enhetId) {
-    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhetId}/statustall`;
+    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/statustall`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
 export function hentStatusTallForveileder(enhetId, veileder) {
-    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/veileder/${veileder}` +
+    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}` +
         `/statustall?enhet=${enhetId}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
 export function httpArbeidsliste(arbeidsliste, method, additionalPath = '') {
-    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/arbeidsliste/${additionalPath}`;
+    const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/${additionalPath}`;
     const config = { ...MED_CREDENTIALS, method, body: JSON.stringify(arbeidsliste) };
     return fetchToJson(url, config);
 }
 
 export function hentEnhetTiltak(enhetId) {
-    const url = `${VEILARBPORTEFOLJE_URL}/tjenester/enhet/${enhetId}/tiltak`;
+    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/tiltak`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
