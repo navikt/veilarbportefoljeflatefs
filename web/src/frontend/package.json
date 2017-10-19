@@ -13,6 +13,7 @@
     "awesome-typescript-loader": "^3.2.3",
     "babel-eslint": "^8.0.1",
     "chai": "3.5.0",
+    "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.1.1",
     "core-js": "2.4.1",
     "css-loader": "^0.28.7",
@@ -110,7 +111,8 @@
   },
   "scripts": {
     "build": "./node_modules/webpack/bin/webpack -p",
-    "dev": "./node_modules/webpack/bin/webpack --watch",
+    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --env.dev",
+    "watch": "./node_modules/webpack/bin/webpack --watch",
     "test": "mocha",
     "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates --semverLevel major -e 2 -x history,react-router,react-router-redux,react-collapse,react-height,typescript,redux-form --packageFile ./package.json",
     "eslint": "eslint --fix ./app/**/*.js && tslint ./app/**/*.ts* --fix",
