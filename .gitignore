@@ -1,4 +1,5 @@
-.idea
+.idea/*
+!.idea/runConfigurations
 *.iml
 *.ipr
 *.iws
@@ -16,7 +17,6 @@ target
 **/webapp/*.html
 **/npm-debug.log
 **/temp/**/*
-web/src/frontend/out/
 
 npm-debug.log
 
