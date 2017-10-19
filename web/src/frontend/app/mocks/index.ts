@@ -6,6 +6,7 @@ import brukere from './portefolje';
 import veiledere from './veiledere';
 import statustall from './statustall';
 import tekster from './tekster';
+import tiltak from './tiltak';
 
 function lagPortefoljeForVeileder(queryParams, bodyParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, bodyParams, enheter.enhetliste[0].enhetId, alleBrukere);
@@ -31,7 +32,6 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
 
 // Hvis du vil hente tekster fra applikasjonen, så la linjen nedenfor være kommentert ut.
 mock.get('/veilarbportefoljeflatefs/tjenester/tekster', respondWith(tekster));
-mock.get('/veilarbportefoljeflatefs/?enhet=*', () => 200);
 
 // veileder-api
 mock.get('/veilarbveileder/tjenester/veileder/enheter', respondWith(enheter));
@@ -43,6 +43,7 @@ mock.get('/veilarbportefolje/tjenester/enhet/1234/statustall', respondWith(delay
 mock.post('express:/veilarbportefolje/tjenester/enhet/:enhet/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefolje(queryParams, bodyParams, extra.enhet, brukere)));
 mock.post('express:/veilarbportefolje/tjenester/veileder/:ident/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefoljeForVeileder(queryParams, bodyParams, brukere)));
 mock.get('express:/veilarbportefolje/tjenester/veileder/:veileder/statustall*', respondWith(delayed(1000, randomFailure(statustall))));
+mock.get('/veilarbportefolje/tjenester/enhet/1234/tiltak', () => respondWith(tiltak));
 
 // situasjon-api
 mock.post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, randomFailure({ feilendeTilordninger: ['11111111111','22222222222'] }))));
