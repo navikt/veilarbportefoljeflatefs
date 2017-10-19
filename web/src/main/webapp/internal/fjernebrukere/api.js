@@ -12,10 +12,10 @@
     }
 
     function hentMe() {
-        return fetchAsJson(VEILARBVEILEDER_URL + '/tjenester/veileder/me', { credentials: credentials, });
+        return fetchAsJson(VEILARBVEILEDER_URL + '/api/veileder/me', { credentials: credentials, });
     }
     function hentEnheter() {
-        return fetchAsJson(VEILARBVEILEDER_URL + '/tjenester/veileder/enheter', { credentials: credentials });
+        return fetchAsJson(VEILARBVEILEDER_URL + '/api/veileder/enheter', { credentials: credentials });
     }
     function hentBrukere(enhet, veileder) {
         var filtervalg = {
@@ -30,7 +30,7 @@
             body: JSON.stringify(filtervalg)
         };
 
-        return fetchAsJson(VEILARBPORTEFOLJE_URL + '/tjenester/veileder/' + veileder + '/portefolje?enhet=' + enhet + '&fra=0&antall=99999&sortDirection=ikke_satt&sortField=ikke_satt', config);
+        return fetchAsJson(VEILARBPORTEFOLJE_URL + '/api/veileder/' + veileder + '/portefolje?enhet=' + enhet + '&fra=0&antall=99999&sortDirection=ikke_satt&sortField=ikke_satt', config);
     }
 
     function fjernTilordning(fnrs, fraVeileder) {
@@ -65,7 +65,7 @@
             method: 'post',
             body: JSON.stringify(restFnr)
         };
-        return fetch(VEILARBPORTEFOLJE_URL + '/tjenester/bruker/fjern', config);
+        return fetch(VEILARBPORTEFOLJE_URL + '/api/bruker/fjern', config);
     }
 
     function FristillApi() {
