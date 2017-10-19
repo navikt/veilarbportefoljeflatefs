@@ -1,7 +1,7 @@
-import React, { PropTypes as PT } from 'react';
-import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
+import React, {PropTypes as PT} from 'react';
+import {connect} from 'react-redux';
+import {reduxForm, Field} from 'redux-form';
+import {FormattedMessage} from 'react-intl';
 
 function reset(change, alleValg) {
     return () => {
@@ -14,7 +14,7 @@ function prepSubmit(name, fn, alleValg, close) {
     const valgKoder = Object.keys(alleValg);
     return (values) => {
         const data = valgKoder
-            .reduce((acc, key) => ({ ...acc, [key]: values[key] ? values[key] : 'NA' }), {});
+            .reduce((acc, key) => ({...acc, [key]: values[key] ? values[key] : 'NA'}), {});
         fn(name, data);
         close();
     };
@@ -24,34 +24,36 @@ function AktivitetFilterform(props) {
     const fields = Object.entries(props.valg)
         .map(([kode, verdi]) => [
             <div key={`skjemaelement skjemaelement--horisontal aktivitet-${kode}`} className="aktivitetvalg blokk-xxs">
-                <Field
-                    id={`aktivitet-${kode}-ja`}
-                    name={kode}
-                    value="JA"
-                    type="radio"
-                    className="skjemaelement__input radioknapp"
-                    component="input"
-                />
-                <label
-                    htmlFor={`aktivitet-${kode}-ja`}
-                    className="skjemaelement__label aktivitet_radioknapp_label"
-                >
-                    <span className="sr-only">Ja, {verdi}</span>
-                </label>
-                <Field
-                    id={`aktivitet-${kode}-nei`}
-                    name={kode}
-                    value="NEI"
-                    type="radio"
-                    className="skjemaelement__input radioknapp"
-                    component="input"
-                />
-                <label
-                    htmlFor={`aktivitet-${kode}-nei`}
-                    className="skjemaelement__label aktivitet_radioknapp_label"
-                >
-                    <span className="sr-only">Nei, {verdi}</span>
-                </label>
+                <div className="radioknapp-gruppe">
+                    <Field
+                        id={`aktivitet-${kode}-ja`}
+                        name={kode}
+                        value="JA"
+                        type="radio"
+                        className="skjemaelement__input radioknapp"
+                        component="input"
+                    />
+                    <label
+                        htmlFor={`aktivitet-${kode}-ja`}
+                        className="skjemaelement__label aktivitet_radioknapp_label"
+                    >
+                        <span className="sr-only">Ja, {verdi}</span>
+                    </label>
+                    <Field
+                        id={`aktivitet-${kode}-nei`}
+                        name={kode}
+                        value="NEI"
+                        type="radio"
+                        className="skjemaelement__input radioknapp"
+                        component="input"
+                    />
+                    <label
+                        htmlFor={`aktivitet-${kode}-nei`}
+                        className="skjemaelement__label aktivitet_radioknapp_label"
+                    >
+                        <span className="sr-only">Nei, {verdi}</span>
+                    </label>
+                </div>
                 <span className="aktivitetvalg__tekst">{verdi}</span>
             </div>
         ]);
@@ -70,7 +72,7 @@ function AktivitetFilterform(props) {
                 <span className="text-hide" aria-live="polite" aria-atomic="true">
                     <FormattedMessage
                         id="components.viser.antall.treff"
-                        values={{ antall: fields.length }}
+                        values={{antall: fields.length}}
                     />
                 </span>
             </div>
@@ -83,7 +85,7 @@ function AktivitetFilterform(props) {
                     className="knapp knapp--standard knapp--mini"
                     onClick={reset(props.change, props.valg)}
                 >
-                    <FormattedMessage id="components.aktivitet-filterform.button.fjern" />
+                    <FormattedMessage id="components.aktivitet-filterform.button.fjern"/>
                 </button>
             </div>
         </form>
@@ -103,7 +105,7 @@ const mapStateToProps = (state, ownProps) => {
     const name = ownProps.form;
     const initialValues = ownProps.filtervalg[name];
 
-    return { initialValues };
+    return {initialValues};
 };
 
 export default connect(mapStateToProps)(reduxForm()(AktivitetFilterform));
