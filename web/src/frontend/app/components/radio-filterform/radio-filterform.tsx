@@ -84,6 +84,7 @@ interface RadioFilterformProps {
 }
 
 interface RadioFilterformOwnProps {
+    initialValues: { [key: string]: string };
     valg: any;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
