@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import DocumentTitle from 'react-document-title';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Innholdslaster from './../innholdslaster/innholdslaster';
@@ -10,13 +10,13 @@ import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import { filtervalgShape, statustallShape } from '../proptype-shapes';
-import {hentStatusTall, StatustallState} from '../ducks/statustall';
-import {EnhettiltakState, hentEnhetTiltak} from '../ducks/enhettiltak';
-import {settValgtVeileder} from '../ducks/portefolje';
-import {EnheterState} from '../ducks/enheter';
-import {VeiledereState} from '../ducks/veiledere';
-import {FiltervalgModell, ValgtEnhetModell, } from '../model-interfaces';
-import {ListevisningState} from '../ducks/ui/listevisning';
+import { hentStatusTall, StatustallState } from '../ducks/statustall';
+import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
+import { settValgtVeileder } from '../ducks/portefolje';
+import { EnheterState } from '../ducks/enheter';
+import { VeiledereState } from '../ducks/veiledere';
+import { FiltervalgModell, ValgtEnhetModell, } from '../model-interfaces';
+import { ListevisningState } from '../ducks/ui/listevisning';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -141,4 +141,3 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(MinOversiktSide));
-
