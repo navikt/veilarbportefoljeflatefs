@@ -10,7 +10,7 @@ import EnhetContextListener, {
     EnhetContextEventNames
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
-import {erDev} from '../../utils/utils';
+import { erDev } from '../../utils/utils';
 
 interface StateProps {
     modalSynlig: boolean;
@@ -115,7 +115,7 @@ const mapStateToProps = (state: AppState): StateProps => {
     const valgtEnhetNavn = valgtEnhet ? state.enheter.data.find((enhet) => enhet.enhetId === valgtEnhetId).navn : '';
     const valgtEnhetContext = state.nycontext.aktivEnhet;
 
-    const harValgtEnhet = valgtEnhetId != null && valgtEnhetId != '';
+    const harValgtEnhet = valgtEnhetId != null && valgtEnhetId !== '';
 
     return {
         modalSynlig: harValgtEnhet && (valgtEnhetId !== valgtEnhetContext),

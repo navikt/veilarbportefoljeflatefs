@@ -1,5 +1,5 @@
 import * as Api from './../middleware/api';
-import {doThenDispatch, STATUS} from './utils';
+import { doThenDispatch, STATUS } from './utils';
 
 // Actions
 export const OK = 'veilarbportefoljeflatefs/statustall/OK';
@@ -19,7 +19,7 @@ export interface StatustallState {
         ikkeIavtaltAktivitet: number;
         iavtaltAktivitet: number;
         minArbeidsliste: number;
-    }
+    };
 }
 
 const initalState: StatustallState = {

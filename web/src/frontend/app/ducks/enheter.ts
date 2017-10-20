@@ -2,14 +2,14 @@ import { hentVeiledersEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { leggEnhetIUrl } from '../utils/utils';
 import { ValgtEnhetModell } from '../model-interfaces';
-import {Action, Dispatch} from 'redux';
-import {AppState} from '../reducer';
-import {settNyAktivEnhet} from '../components/enhet-context/context-reducer';
-import {hentStatusTall} from './statustall';
-import {hentEnhetTiltak} from './enhettiltak';
-import {hentVeiledereForEnhet} from './veiledere';
-import {hentPortefoljeForEnhet, hentPortefoljeForVeileder} from './portefolje';
-import {IKKE_SATT} from '../konstanter';
+import { Action, Dispatch } from 'redux';
+import { AppState } from '../reducer';
+import { settNyAktivEnhet } from '../components/enhet-context/context-reducer';
+import { hentStatusTall } from './statustall';
+import { hentEnhetTiltak } from './enhettiltak';
+import { hentVeiledereForEnhet } from './veiledere';
+import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
+import { IKKE_SATT } from '../konstanter';
 
 // Actions
 const OK = 'veilarbportefolje/enheter/OK';
@@ -95,5 +95,5 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
         } else if(uri.includes('/veiledere')) {
             dispatch(hentVeiledereForEnhet(nyEnhet));
         }
-    }
+    };
 }

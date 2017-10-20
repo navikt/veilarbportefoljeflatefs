@@ -1,4 +1,4 @@
-import {oppdaterPortefolje} from './portefolje';
+import { oppdaterPortefolje } from './portefolje';
 import { VeilederModell } from '../model-interfaces';
 
 // Actions

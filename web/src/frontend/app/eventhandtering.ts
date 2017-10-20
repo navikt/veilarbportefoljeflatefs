@@ -1,7 +1,7 @@
 import getStore from './store';
 import { oppdaterAktivEnhet } from './components/enhet-context/context-api';
-import {visFeilmodal} from './components/enhet-context/context-reducer';
-import {oppdaterValgtEnhet} from './ducks/enheter';
+import { visFeilmodal } from './components/enhet-context/context-reducer';
+import { oppdaterValgtEnhet } from './ducks/enheter';
 
 /* eslint-disable no-undef */
 const handlePersonsokSubmit = (fnr) => {
@@ -11,9 +11,9 @@ const handlePersonsokSubmit = (fnr) => {
 const handleChangeEnhet = (enhet, type) => {
     const store = getStore();
 
-    function endreAktivEnhet(enhet: string) {
-        settEnhetIDekorator(enhet);
-        oppdaterValgtEnhet(enhet)(store.dispatch, store.getState);
+    function endreAktivEnhet(nyEnhet: string) {
+        settEnhetIDekorator(nyEnhet);
+        oppdaterValgtEnhet(nyEnhet)(store.dispatch, store.getState);
     }
 
     const onSuccess = () => endreAktivEnhet(enhet);
