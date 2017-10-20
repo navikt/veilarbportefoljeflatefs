@@ -1,13 +1,13 @@
-export const DIRECTION = {
-    ASC: 'ascending',
-    DESC: 'descending',
-    NA: 'na'
-};
+export enum DIRECTION {
+    ASC = 'ascending',
+    DESC = 'descending',
+    NA = 'na'
+}
 
-const norskStringSort = (prop) => (a, b) => a[prop].localeCompare(b[prop], 'no-bok', { sensitivity: 'accent' });
-const annetSort = (prop) => (a, b) => a[prop] - b[prop];
+const norskStringSort = (prop: string) => (a, b) => a[prop].localeCompare(b[prop], 'no-bok', { sensitivity: 'accent' });
+const annetSort = (prop: string) => (a, b) => a[prop] - b[prop];
 
-export function sorter(property, direction) {
+export function sorter(property: string, direction: string) {
     const directionBias = direction === DIRECTION.DESC ? -1 : 1;
     let sortImpl;
 

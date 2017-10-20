@@ -1,19 +1,23 @@
-/* eslint-disable no-case-declarations */
-import { DIRECTION } from './../utils/sortering';
+import { DIRECTION } from '../utils/sortering';
 
 // Actions
 export const SORTERT_PA = 'veilarbportefoljeflatefs/sortering/SORTERT_PA';
 
-const initialState = {
-    property: null,
+interface SorteringState {
+    property: string;
+    direction: DIRECTION
+}
+
+const initialState: SorteringState = {
+    property: '',
     direction: DIRECTION.NA
 };
 
 // Reducer
-export default function reducer(state = initialState, action) {
+export default function reducer(state: SorteringState = initialState, action) {
     switch (action.type) {
         case SORTERT_PA:
-            const { property } = action.data;
+            const property  = action.property;
 
             let direction = DIRECTION.ASC;
             if (property === state.property) {
@@ -28,6 +32,8 @@ export default function reducer(state = initialState, action) {
 
 // Action Creators
 export function sortBy(property) {
-    return { type: SORTERT_PA, data: { property } };
+    return {
+        type: SORTERT_PA,
+        property
+    };
 }
-
