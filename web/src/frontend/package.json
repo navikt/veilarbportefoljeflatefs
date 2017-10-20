@@ -112,7 +112,8 @@
   "scripts": {
     "build": "./node_modules/webpack/bin/webpack -p",
     "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --env.dev",
-    "watch": "./node_modules/webpack/bin/webpack --watch",
+    "watch": "./node_modules/webpack/bin/webpack.js -p --watch",
+    "watch:dev": "./node_modules/webpack/bin/webpack.js --watch",
     "test": "mocha",
     "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates --semverLevel major -e 2 -x history,react-router,react-router-redux,react-collapse,react-height,typescript,redux-form --packageFile ./package.json",
     "eslint": "eslint --fix ./app/**/*.js && tslint ./app/**/*.ts* --fix",
