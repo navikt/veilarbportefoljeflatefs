@@ -2,6 +2,14 @@ import { hentVeiledersEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { leggEnhetIUrl } from '../utils/utils';
 import { ValgtEnhetModell } from '../model-interfaces';
+import {Action, Dispatch} from 'redux';
+import {AppState} from '../reducer';
+import {settNyAktivEnhet} from '../components/enhet-context/context-reducer';
+import {hentStatusTall} from './statustall';
+import {hentEnhetTiltak} from './enhettiltak';
+import {hentVeiledereForEnhet} from './veiledere';
+import {hentPortefoljeForEnhet, hentPortefoljeForVeileder} from './portefolje';
+import {IKKE_SATT} from '../konstanter';
 
 // Actions
 const OK = 'veilarbportefolje/enheter/OK';
@@ -66,4 +74,26 @@ export function velgEnhetForVeileder(valgtEnhet) {
         type: VELG_ENHET,
         valgtEnhet: enhetId
     };
+}
+
+export function oppdaterValgtEnhet(nyEnhet: string) {
+    return (dispatch: Dispatch<Action>, getState: () => AppState) => {
+        const state = getState();
+        const valgtVeileder = state.portefolje.veileder.ident;
+        const veilederIdent = valgtVeileder === IKKE_SATT ? state.enheter.ident : valgtVeileder;
+
+        dispatch(velgEnhetForVeileder(nyEnhet));
+        dispatch(settNyAktivEnhet(nyEnhet));
+        dispatch(hentEnhetTiltak(nyEnhet));
+        dispatch(hentStatusTall(nyEnhet, veilederIdent));
+
+        const uri = window.location.pathname;
+        if (uri.includes('/portefolje')) {
+            dispatch(hentPortefoljeForVeileder(nyEnhet, veilederIdent, IKKE_SATT, IKKE_SATT));
+        } else if(uri.includes('/enhet')) {
+            dispatch(hentPortefoljeForEnhet(nyEnhet, IKKE_SATT, IKKE_SATT));
+        } else if(uri.includes('/veiledere')) {
+            dispatch(hentVeiledereForEnhet(nyEnhet));
+        }
+    }
 }
