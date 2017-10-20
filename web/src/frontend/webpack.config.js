@@ -78,6 +78,7 @@ module.exports = function(env) {
         devServer: {
             port: 3000,
             open: true,
+            overlay: true,
             publicPath: CONTEXT_PATH,
             before: (app) => {
                 app.get('/', function(req, res) {
