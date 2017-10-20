@@ -1,6 +1,8 @@
-import fetchmock from 'fetch-mock';
-import qs from 'query-string';
-import pathRegex from 'path-to-regexp';
+/*tslint:disable*/
+import * as fetchmock from 'fetch-mock';
+import * as qs from 'query-string';
+import * as pathRegex from 'path-to-regexp';
+import { Key } from 'path-to-regexp';
 
 export const MOCK_CONFIG = {
     failureRate: -1,
@@ -49,17 +51,16 @@ export function respondWith(handler) {
         console.log('queryParams', queryParams);
         console.log('bodyParams', bodyParams);
         console.log('extra', extra);
-        console.groupEnd('config');
+        console.groupEnd();
 
         console.log('response', response);
-        console.groupEnd(url);
+        console.groupEnd();
 
         return response;
     };
 }
 
-
-fetchmock._mock(); // Må kalles slik at window.fetch blir byttet ut
+(fetchmock as any)._mock(); // Må kalles slik at window.fetch blir byttet ut
 export const mock = ['get', 'post', 'put', 'delete', 'head', 'patch', 'mock']
     .map((method) => ({
         [method]: (...args) => {
@@ -69,20 +70,20 @@ export const mock = ['get', 'post', 'put', 'delete', 'head', 'patch', 'mock']
             let preprocessor;
             if (routeurl.startsWith('express:')) {
                 const pureUrl = routeurl.replace(/^express:/, '');
-                const keys = [];
+                const keys: Key[] = [];
                 const regexp = pathRegex(pureUrl, keys);
 
                 preprocessor = (url) => {
-                    const [fullMatch, ...matched] = regexp.exec(url);
-                    return fullMatch && keys
+                    const result = regexp.exec(url);
+                    return result && keys
                         .map((key, index) => {
-                            if (key.name && matched[index]) {
-                                return { [key.name]: matched[index] };
+                            if (key.name && result[index]) {
+                                return { [key.name]: result[index] };
                             }
                             return null;
                         })
                         .filter((obj) => obj !== null)
-                        .reduce((acc, obj) => ({ ...acc, ...obj }), {});
+                        .reduce((acc: any, obj: any) => ({ ...acc, ...obj }), {});
                 };
             }
 
@@ -95,4 +96,4 @@ export const mock = ['get', 'post', 'put', 'delete', 'head', 'patch', 'mock']
     }))
     .reduce((acc, method) => ({ ...acc, ...method }), {});
 
-mock.realFetch = fetchmock.realFetch;
+(mock as any).realFetch = (fetchmock as any).realFetch;

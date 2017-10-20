@@ -1,4 +1,3 @@
-import { rnd } from './utils';
 import portefolje from './portefolje';
 
 export default {
@@ -9,5 +8,6 @@ export default {
     venterPaSvarFraBruker: 231,
     utlopteAktiviteter: 123,
     ikkeIavtaltAktivitet: 1231,
-    iavtaltAktivitet: 2323
+    iavtaltAktivitet: 2323,
+    minArbeidsliste: 10,
 };
