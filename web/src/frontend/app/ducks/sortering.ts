@@ -3,7 +3,7 @@ import { DIRECTION } from '../utils/sortering';
 // Actions
 export const SORTERT_PA = 'veilarbportefoljeflatefs/sortering/SORTERT_PA';
 
-interface SorteringState {
+export interface SorteringState {
     property: string;
     direction: DIRECTION
 }

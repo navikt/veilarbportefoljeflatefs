@@ -2,7 +2,7 @@
 // Actions
 export const SETUP = 'veilarbportefoljeflatefs/paginering/SETUP';
 
-interface PagineringState {
+export interface PagineringState {
     side: number;
     antall: number;
     sideStorrelse: number;
