@@ -14,7 +14,7 @@ const initialState: SorteringState = {
 };
 
 // Reducer
-export default function reducer(state: SorteringState = initialState, action) {
+export default function reducer(state: SorteringState = initialState, action):SorteringState {
     switch (action.type) {
         case SORTERT_PA:
             const property  = action.property;

@@ -15,7 +15,7 @@ const initialState: PagineringState = {
 };
 
 // Reducer
-export default function reducer(state: PagineringState = initialState, action) {
+export default function reducer(state: PagineringState = initialState, action):PagineringState {
     switch (action.type) {
         case SETUP:
             return { ...initialState, ...action.data };
