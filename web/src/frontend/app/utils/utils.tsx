@@ -1,7 +1,9 @@
 /* eslint-disable import/prefer-default-export, no-undef */
 import * as queryString from 'query-string';
-import history, { basename } from '../history';
-import { AktiviteterModell } from '../model-interfaces';
+import history, {basename} from '../history';
+import {AktiviteterModell} from '../model-interfaces';
+import * as React from "react";
+import {FormattedMessage} from 'react-intl';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array((end - start) + ((inclusive) ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -34,7 +36,7 @@ export function leggEnhetIUrl(enhet: string, refresh: boolean = false) {
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname.replace(basename, '');
         history.replace(`${pathname}?${stringified}`);
-        if(refresh) {
+        if (refresh) {
             window.location.reload(true);
         }
     }
@@ -63,16 +65,18 @@ export function getSideFromUrl() {
 export function sendBrukerTilUrl(url) {
     history.replace(url);
 }
+
 export function ytelseFilterErAktiv(ytelse) {
     return !!ytelse;
 }
-export function nesteUtlopsdatoEllerNull(utlopsdatoer: AktiviteterModell | null ): Date | null {
+
+export function nesteUtlopsdatoEllerNull(utlopsdatoer: AktiviteterModell | null): Date | null {
     if (!utlopsdatoer) {
         return null;
     }
 
     const dagensDato = new Date();
-    dagensDato.setHours(0,0,0,0);
+    dagensDato.setHours(0, 0, 0, 0);
     return Object.keys(utlopsdatoer)
         .map((key) => utlopsdatoer[key])
         .filter((value) => !!value)
@@ -80,6 +84,7 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer: AktiviteterModell | null 
         .filter((date) => date.getTime() >= dagensDato.getTime())
         .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
 }
+
 export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFiltervalg): AktiviteterModell | null {
     if (!aktiviteterFiltervalg || Object.keys(aktiviteterFiltervalg).length === 0 || !brukerAktiviteter || Object.keys(aktiviteterFiltervalg).length === 0) {
         return null;
@@ -97,3 +102,4 @@ export function erDev() {
     const host: string = window.location.host;
     return host.includes('localhost') || host.includes('127.0.0.1');
 }
+

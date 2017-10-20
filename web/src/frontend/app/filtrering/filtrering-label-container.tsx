@@ -51,6 +51,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                         key={key}
                         label={FilterKonstanter[key](intl)}
                         slettFilter={() => slettEnkelt(key, false)}
+                        intl={intl}
                     />
                 ];
             } else if (Array.isArray(value)) {
@@ -63,6 +64,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                                 (singleValue.label || FilterKonstanter[key](intl)[singleValue])
                         }
                         slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
+                        intl={intl}
                     />)
                 );
             } else if (value && typeof value === 'object') { // value er aktiviteter
@@ -75,6 +77,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                             label={`${FilterKonstanter[key](intl)[aktivitetkey]}: ${aktivitetvalue}`}
                             slettFilter={() => slettEnkelt(key, aktivitetkey)}
                             harMuligMenIkkeValgtKolonne={muligMenIkkeValgt && aktivitetvalue === AktiviteterValg.JA}
+                            intl={intl}
                         />
                     ));
             } else if (value) {
@@ -86,13 +89,14 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                         label={FilterKonstanter[key](intl)[value]}
                         slettFilter={() => slettEnkelt(key, null)}
                         harMuligMenIkkeValgtKolonne={muligMenIkkeValgt}
+                        intl={intl}
                     />
                 ];
             }
             return [];
         }).reduce((acc, l) => [...acc, ...l], []);
 
-    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} harMuligMenIkkeValgtKolonne={false} skalHaKryssIkon={false}/>;
+    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} harMuligMenIkkeValgtKolonne={false} skalHaKryssIkon={false} intl={intl}/>;
 
     return (
         <section className={classNames('filtrering-label-container', {'blokk-s': (filterElementer.length > 0)})}>
