@@ -158,6 +158,8 @@ export default {
     'enhet.filtrering.filtrering.oversikt.ikkeiavtaltaktivitet.brukere.checkbox': 'Ikke i avtalt aktivitet',
     'spinner': 'Spinner',
     'enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox': 'Nye brukere',
-    'legg-til-arbeidsliste-form.feilmelding.kommentar-lengde': 'Kommentaren kan ikke være lenger enn {KOMMENTAR_MAKS_LENGDE}'
+    'legg-til-arbeidsliste-form.feilmelding.kommentar-lengde': 'Kommentaren kan ikke være lenger enn {KOMMENTAR_MAKS_LENGDE}',
+      'filtrering.label.slett-filter': 'Slett filter',
+      'filtrering.label.slett-alle-filter': 'Slett alle filtervalg',
   }
 };
