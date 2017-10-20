@@ -1,7 +1,8 @@
+/*tslint:disable*/
 import * as fetchmock from 'fetch-mock';
 import * as qs from 'query-string';
 import * as pathRegex from 'path-to-regexp';
-import {Key} from "path-to-regexp";
+import { Key } from 'path-to-regexp';
 
 export const MOCK_CONFIG = {
     failureRate: -1,
@@ -58,7 +59,6 @@ export function respondWith(handler) {
         return response;
     };
 }
-
 
 (fetchmock as any)._mock(); // Må kalles slik at window.fetch blir byttet ut
 export const mock = ['get', 'post', 'put', 'delete', 'head', 'patch', 'mock']
