@@ -15,14 +15,6 @@ export function autobind(ctx) {
         });
 }
 
-function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000).toString().substring(1);
-}
-
-export function guid() {
-    return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
-}
-
 export const erGyldigISODato = (isoDato) => !!(isoDato && moment(isoDato, moment.ISO_8601).isValid());
 
 export const erGyldigFormattertDato = (formattertDato) => !!(formattertDato &&

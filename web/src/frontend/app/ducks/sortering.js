@@ -3,7 +3,6 @@ import { DIRECTION } from './../utils/sortering';
 
 // Actions
 export const SORTERT_PA = 'veilarbportefoljeflatefs/sortering/SORTERT_PA';
-export const RESET = 'veilarbportefoljeflatefs/sortering/SETUP';
 
 const initialState = {
     property: null,
@@ -22,8 +21,6 @@ export default function reducer(state = initialState, action) {
             }
 
             return { property, direction };
-        case RESET:
-            return { ...initialState };
         default:
             return state;
     }
@@ -34,6 +31,3 @@ export function sortBy(property) {
     return { type: SORTERT_PA, data: { property } };
 }
 
-export function resetSort() {
-    return { type: RESET };
-}
