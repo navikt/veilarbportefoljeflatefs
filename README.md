@@ -1,6 +1,10 @@
 # Portefølje-klientside
 
-## Kjøre applikasjonen lokalt
+Applikasjonen benytter seg av fetchmock-biblioteket for å kunne mocke ut avhengigheter. Se i `mocks/`.
+
+Det er lagt ved idea
+
+## Kjøre applikasjonen stand alone
 
 Fra `web/src/frontend/`, kjør:
 
@@ -19,7 +23,9 @@ P.S. Husk og kjøre en `npm i` før du bygger
 
 ### Watching
 
-For å watche kjører man `npm run watch`. 
+For å watche uten mocking kjører man `npm run watch`. 
+
+For å aktivere mocking kjør `npm run watch:dev`
 
 ### Chrome
 
