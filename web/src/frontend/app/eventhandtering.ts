@@ -1,11 +1,18 @@
+import getStore from './store';
+import { oppdaterAktivEnhet } from './components/enhet-context/context-api';
+import { visFeilmodal } from './components/enhet-context/context-reducer';
+
 /* eslint-disable no-undef */
 const handlePersonsokSubmit = (fnr) => {
     window.location.pathname = `veilarbpersonflatefs/${fnr}`;
 };
 
 const handleChangeEnhet = (enhet, type) => {
+    const onSuccess = () => window.location.search = (`?enhet=${enhet}&clean`);
+    const onError = () => getStore().dispatch(visFeilmodal());
+
     if (type !== 'init') {
-        window.location.search = (`?enhet=${enhet}&clean`);
+        oppdaterAktivEnhet(enhet).then(onSuccess, onError);
     }
 };
 
