@@ -4,7 +4,7 @@ import faker from 'faker/locale/nb_NO';
 faker.seed(MOCK_CONFIG.seed);
 
 export function lagTilfeldigVeilederId() {
-    return `Z${rnd(100000, 999999)}`
+    return `Z${rnd(100000, 999999)}`;
 }
 
 function lagVeileder() {
