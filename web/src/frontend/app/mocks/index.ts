@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { MOCK_CONFIG, mock, delayed, respondWith, randomFailure } from './utils';
 import enheter from './enheter';
 import me from './me';

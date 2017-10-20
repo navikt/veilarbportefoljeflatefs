@@ -1,4 +1,3 @@
-/* eslint-disable */
 import veiledereResponse, { innloggetVeileder } from './veiledere';
 import { aktiviteter } from '../filtrering/filter-konstanter';
 import { rnd, MOCK_CONFIG } from './utils';
