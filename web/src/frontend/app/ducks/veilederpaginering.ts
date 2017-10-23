@@ -16,7 +16,7 @@ export interface CurrentSorteringState {
     rekkefolge: Sorteringsrekkefolge;
 }
 
-interface VeilederpagineringState {
+export interface VeilederpagineringState {
     liste: VeilederModell[];
     subListe: VeilederModell[];
     fraIndeksForSubListe: number;

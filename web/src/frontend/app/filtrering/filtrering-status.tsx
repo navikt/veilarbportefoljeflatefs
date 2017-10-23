@@ -1,4 +1,4 @@
-import React, { PropTypes as PT, Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
@@ -16,9 +16,26 @@ import {
     INAKTIVE_BRUKERE,
     MIN_ARBEIDSLISTE
 } from './filter-konstanter';
+import {FiltervalgModell, VeilederModell} from "../model-interfaces";
+import {ChangeEvent} from "react";
+import {StatustallState} from "../ducks/statustall";
+import {AppState} from "../reducer";
 
+interface BarInputProps {
+    id: string;
+    tekstId: string;
+    antall: number;
+    max: number;
+    barClassname?: string;
+    skalSkjules?: boolean;
+    firstInGroup?: boolean;
+    name?: string;
+    value?: string;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    checked?: boolean;
+}
 
-function BarInput({ skalSkjules, id, tekstId, antall, max, barClassname, firstInGroup, ...props }) {
+function BarInput({ skalSkjules = false, id, tekstId, antall, max, barClassname, firstInGroup = false, ...props }: BarInputProps) {
     if (skalSkjules) {
         return null;
     }
@@ -36,7 +53,11 @@ function BarInput({ skalSkjules, id, tekstId, antall, max, barClassname, firstIn
     );
 }
 
-function ArbeidslisteTittel({ skalSkjules }) {
+interface ArbeidslisteTittelProps {
+    skalSkjules: boolean;
+}
+
+function ArbeidslisteTittel({ skalSkjules }: ArbeidslisteTittelProps) {
     if (skalSkjules) {
         return null;
     }
@@ -53,33 +74,30 @@ function ArbeidslisteTittel({ skalSkjules }) {
     );
 }
 
-BarInput.propTypes = {
-    id: PT.string.isRequired,
-    tekstId: PT.string.isRequired,
-    antall: PT.number.isRequired,
-    max: PT.number.isRequired,
-    barClassname: PT.string,
-    skalSkjules: PT.bool,
-    firstInGroup: PT.bool
-};
+interface StateProps {
+    statustall: StatustallState;
+}
 
-BarInput.defaultProps = {
-    skalSkjules: false,
-    firstInGroup: false
-};
+interface DispatchProps {
+    doEndreFilter: (filterId: string, filtervalg: FiltervalgModell) => void;
+}
 
-ArbeidslisteTittel.propTypes = {
-    skalSkjules: PT.bool.isRequired
-};
+interface OwnProps {
+    filtergruppe: string;
+    veileder: VeilederModell;
+    filtervalg: FiltervalgModell;
+}
 
-class FiltreringStatus extends Component {
+type FiltreringStatusProps = StateProps & DispatchProps & OwnProps;
+
+class FiltreringStatus extends React.Component<FiltreringStatusProps> {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(e) {
-        this.props.endreFilter('brukerstatus', e.target.value);
+        this.props.doEndreFilter('brukerstatus', e.target.value);
     }
 
     render() {
@@ -196,30 +214,12 @@ class FiltreringStatus extends Component {
     }
 }
 
-FiltreringStatus.defaultProps = {
-    veileder: {
-        ident: '',
-        navn: '',
-        fornavn: '',
-        etternavn: ''
-    }
-};
-
-FiltreringStatus.propTypes = {
-    endreFilter: PT.func.isRequired,
-    statustall: PT.shape({ data: statustallShape.isRequired }).isRequired,
-    filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-    veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
-    filtervalg: filtervalgShape.isRequired
-};
-
-const mapStateToProps = (state) => ({
-    enhet: state.enheter.valgtEnhet.enhet.enhetId,
+const mapStateToProps = (state: AppState): StateProps => ({
     statustall: state.statustall
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(
+const mapDispatchToProps = (dispatch, ownProps): DispatchProps => ({
+    doEndreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(
         filterId, filtervalg, ownProps.filtergruppe, ownProps.veileder))
 });
 
