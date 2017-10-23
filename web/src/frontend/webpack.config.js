@@ -59,7 +59,7 @@ const RULES = [
 
 module.exports = function(env) {
     const isDev = env && env.dev;
-    const CONTEXT_PATH = '/veilarbportefoljeflatefs/';
+    const CONTEXT_PATH = '/veilarbportefoljeflatefs/enhet/';
 
     return {
         entry: path.join(PATHS.JS, 'index.js'),
