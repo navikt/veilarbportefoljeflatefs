@@ -87,7 +87,7 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
                             />
                             <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
                             <EnhetsportefoljeVisning />
-                            <TomPortefoljeModal isOpen={true} />
+                            <TomPortefoljeModal isOpen={statustall.data.totalt === 0} />
                         </div>
                     </Innholdslaster>
                 </div>
