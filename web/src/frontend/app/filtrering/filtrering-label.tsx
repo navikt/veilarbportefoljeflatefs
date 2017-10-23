@@ -3,6 +3,7 @@ import { lagConfig } from './filter-konstanter';
 import FilterIkon from '../components/filter-ikon';
 import { MouseEvent } from 'react';
 import * as classNames from 'classnames';
+import { InjectedIntl } from 'react-intl';
 
 interface FiltreringLabelProps {
     label: string | { label: string };
@@ -10,7 +11,7 @@ interface FiltreringLabelProps {
     markert?: boolean;
     harMuligMenIkkeValgtKolonne?: boolean;
     skalHaKryssIkon?: boolean;
-    intl: any;
+    intl: InjectedIntl;
 }
 
 function FiltreringLabel({label, slettFilter, harMuligMenIkkeValgtKolonne = false, markert = false, skalHaKryssIkon = true, intl}: FiltreringLabelProps) {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Modal from 'nav-frontend-modal';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
-import { injectIntl } from 'react-intl';
+import { injectIntl, InjectedIntl } from 'react-intl';
 
 interface FeilmeldingBrukereModalProps {
     isOpen?: boolean;
@@ -10,7 +10,7 @@ interface FeilmeldingBrukereModalProps {
     onClose: () => void;
     tittelTekstID: string;
     infotekstTekstID: string;
-    intl: any;
+    intl: InjectedIntl;
 }
 
 interface FeilmeldingBrukereModalState {

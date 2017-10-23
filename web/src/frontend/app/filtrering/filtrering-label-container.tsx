@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { InjectedIntl, injectIntl } from 'react-intl';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
@@ -21,7 +21,7 @@ interface FiltreringLabelContainerProps {
     filtervalg: FiltervalgModell;
     filtergruppe: string;
     listevisning: ListevisningState;
-    intl: any;
+    intl: InjectedIntl;
 }
 
 function getKolonneFraLabel(label) {
