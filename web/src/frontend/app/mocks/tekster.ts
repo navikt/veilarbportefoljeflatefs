@@ -161,5 +161,12 @@ export default {
     'legg-til-arbeidsliste-form.feilmelding.kommentar-lengde': 'Kommentaren kan ikke være lenger enn {KOMMENTAR_MAKS_LENGDE}',
       'filtrering.label.slett-filter': 'Slett filter',
       'filtrering.label.slett-alle-filter': 'Slett alle filtervalg',
+      'datepicker.neste.maned': 'Neste måned',
+      'datepicker.forrige.maned': 'Forrige måned',
+      'datepicker.skjul': 'Skjul datovelger',
+      'datepicker.vis': 'Vis datovelger',
+      'datepicker.arbeidsliste.velg.dato': 'Velg dato for arbeidsliste',
+      'modal.feilmelding.brukere': 'Modal tilordning feilet',
+      'modal.feilmelding.tom.portefolje': 'Enheten har ingen brukere'
   }
 };

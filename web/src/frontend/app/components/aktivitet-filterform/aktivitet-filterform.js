@@ -85,7 +85,7 @@ function AktivitetFilterform(props) {
                     className="knapp knapp--standard knapp--mini"
                     onClick={reset(props.change, props.valg)}
                 >
-                    <FormattedMessage id="components.aktivitet-filterform.button.fjern"/>
+                    <FormattedMessage id="components.aktivitet-filterform.button.fjern" />
                 </button>
             </div>
         </form>
