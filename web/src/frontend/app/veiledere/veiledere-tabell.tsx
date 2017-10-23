@@ -1,13 +1,24 @@
-import React, { Component, PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 import { Link } from 'react-router';
 import { veilederShape } from './../proptype-shapes';
 import { settValgtVeileder } from '../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
+import {VeilederModell, VisningType} from "../model-interfaces";
+import {CurrentSorteringState} from "../ducks/veilederpaginering";
 
-class VeilederTabell extends Component {
+interface VeilederTabellProps {
+    veiledere: VeilederModell[];
+    settVeileder: (veileder: VeilederModell) => void;
+    sorterPaaEtternavn: () => void;
+    veilederListe: VeilederModell[];
+    sorterPaaPortefoljestorrelse: () => void;
+    currentSortering: CurrentSorteringState;
+}
+
+class VeilederTabell extends React.Component<VeilederTabellProps> {
     settOgNavigerTilValgtVeileder(veileder) {
         return () => {
             this.props.settVeileder(veileder);
@@ -46,7 +57,7 @@ class VeilederTabell extends Component {
                             <th>
                                 <FormattedMessage id="enhet.veiledere.tabell.veileder" />
                             </th>
-                            <th colSpan="3" />
+                            <th colSpan={3} />
                         </tr>
                     </thead>
                     <thead className="tabell__subhead">
@@ -90,18 +101,6 @@ class VeilederTabell extends Component {
         );
     }
 }
-
-VeilederTabell.propTypes = {
-    veiledere: PT.arrayOf(veilederShape).isRequired,
-    settVeileder: PT.func.isRequired,
-    sorterPaaEtternavn: PT.func.isRequired,
-    veilederListe: PT.arrayOf(veilederShape).isRequired,
-    sorterPaaPortefoljestorrelse: PT.func.isRequired,
-    currentSortering: PT.shape({
-        felt: PT.string.isRequired,
-        rekkefolge: PT.string.isRequired
-    }).isRequired
-};
 
 const mapStateToProps = (state) => ({
     veilederListe: state.veiledere.data.veilederListe,

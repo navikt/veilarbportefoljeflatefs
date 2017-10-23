@@ -4,7 +4,7 @@ export enum Sorteringsrekkefolge {
     descending = 'descending'
 }
 
-export enum Sorteringsfelt {
+export enum SorteringsfeltEnhetPortefolje {
     IKKE_SATT = 'ikke_satt',
     VALGTE_AKTIVITETER = 'valgteaktiviteter',
     ETTERNAVN = 'etternavn',
@@ -20,12 +20,23 @@ export enum Sorteringsfelt {
     I_AVTALT_AKTIVITET = 'iavtaltaktivitet'
 }
 
+export enum SorteringfeltVeilederOversikt {
+    IKKE_SATT = 'ikke_satt',
+    ETTERNAVN = 'etternavn',
+    PORTEFOLJESTORRELSE = 'portefoljestorrelse'
+}
+
 export enum EtikettType {
     NYBRUKER = 'nybruker',
     EGEN_ANSATT = 'egen-ansatt',
     DISKRESJONSKODE = 'diskresjonskode',
     SIKKERHETSTILTAK = 'sikkerhetstiltak',
     DOED = 'doed'
+}
+
+export enum VisningType {
+    DIAGRAMVISNING = 'DIAGRAMVISNING',
+    TABELLVISNING = 'TABELLVISNING'
 }
 
 export interface FiltervalgModell {
@@ -62,6 +73,7 @@ export interface VeilederModell {
     navn?: string;
     fornavn?: string;
     etternavn?: string;
+    portefoljestorrelse: number;
 }
 
 export interface BrukerModell {

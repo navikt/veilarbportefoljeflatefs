@@ -6,7 +6,7 @@ import { settBrukerSomMarkert } from '../ducks/portefolje';
 import MinOversiktListehode from './minoversikt-listehode';
 import CheckBox from '../components/tabell/checkbox';
 import {
-    BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge, ValgtEnhetModell, VeilederModell
+    BrukerModell, FiltervalgModell, SorteringsfeltEnhetPortefolje, Sorteringsrekkefolge, ValgtEnhetModell, VeilederModell
 } from '../model-interfaces';
 
 interface MinOversiktTabellProps {
@@ -17,7 +17,7 @@ interface MinOversiktTabellProps {
             antallReturnert: number;
             fraIndex: number;
         };
-        sorteringsfelt: Sorteringsfelt;
+        sorteringsfelt: SorteringsfeltEnhetPortefolje;
     };
         valgtEnhet: ValgtEnhetModell;
         sorteringsrekkefolge: Sorteringsrekkefolge;

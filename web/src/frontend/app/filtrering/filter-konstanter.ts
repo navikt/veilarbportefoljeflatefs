@@ -1,5 +1,5 @@
 import { range, lag2Sifret } from '../utils/utils';
-import { Sorteringsfelt } from '../model-interfaces';
+import { SorteringsfeltEnhetPortefolje } from '../model-interfaces';
 
 export const NYE_BRUKERE = 'NYE_BRUKERE';
 export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
@@ -85,13 +85,13 @@ export const ytelse = () => ({
 export const ytelsevalg: {[id: string]: string} = Object.keys(ytelse()).reduce((acc, val) => ({ ...acc, [val]: val }), {});
 
 export const ytelseUtlopsSortering = {
-    [ytelsevalg.DAGPENGER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [ytelsevalg.ORDINARE_DAGPENGER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [ytelsevalg.DAGPENGER_MED_PERMITTERING]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
-    [ytelsevalg.AAP]: Sorteringsfelt.UTLOPSDATO,
-    [ytelsevalg.AAP_UNNTAK]: Sorteringsfelt.UTLOPSDATO,
-    [ytelsevalg.AAP_MAXTID]: Sorteringsfelt.AAP_MAXTID_UKE,
-    [ytelsevalg.TILTAKSPENGER]: Sorteringsfelt.UTLOPSDATO
+    [ytelsevalg.DAGPENGER]: SorteringsfeltEnhetPortefolje.DAGPENGER_UTLOP_UKE,
+    [ytelsevalg.ORDINARE_DAGPENGER]: SorteringsfeltEnhetPortefolje.DAGPENGER_UTLOP_UKE,
+    [ytelsevalg.DAGPENGER_MED_PERMITTERING]: SorteringsfeltEnhetPortefolje.DAGPENGER_PERM_UTLOP_UKE,
+    [ytelsevalg.AAP]: SorteringsfeltEnhetPortefolje.UTLOPSDATO,
+    [ytelsevalg.AAP_UNNTAK]: SorteringsfeltEnhetPortefolje.UTLOPSDATO,
+    [ytelsevalg.AAP_MAXTID]: SorteringsfeltEnhetPortefolje.AAP_MAXTID_UKE,
+    [ytelsevalg.TILTAKSPENGER]: SorteringsfeltEnhetPortefolje.UTLOPSDATO
 };
 
 export const rettighetsgruppe = () => ({

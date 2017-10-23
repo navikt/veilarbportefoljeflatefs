@@ -2,7 +2,7 @@ import * as React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';
-import { BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
+import { BrukerModell, FiltervalgModell, SorteringsfeltEnhetPortefolje, Sorteringsrekkefolge } from '../model-interfaces';
 import { AktiviteterValg } from '../ducks/filtrering';
 import {
     ytelseUtlopsSortering,
@@ -25,7 +25,7 @@ interface MinOversiktListehodeProps {
     sorteringsrekkefolge: Sorteringsrekkefolge;
     sorteringOnClick: (sortering: string) => void;
     filtervalg: FiltervalgModell;
-    sorteringsfelt: Sorteringsfelt;
+    sorteringsfelt: SorteringsfeltEnhetPortefolje;
     brukere: BrukerModell[];
 }
 
@@ -81,25 +81,25 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                 <div className="brukerliste__sorteringheader brukerliste--minoversikt-padding">
                     <SorteringHeader
                         className="col col-xs-3"
-                        sortering={Sorteringsfelt.ETTERNAVN}
+                        sortering={SorteringsfeltEnhetPortefolje.ETTERNAVN}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.ETTERNAVN}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.ETTERNAVN}
                         tekstId="portefolje.tabell.etternavn"
                     />
                     <SorteringHeader
                         className="col col-xs-2"
-                        sortering={Sorteringsfelt.FODSELSNUMMER}
+                        sortering={SorteringsfeltEnhetPortefolje.FODSELSNUMMER}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.FODSELSNUMMER}
                         tekstId="portefolje.tabell.fodselsnummer"
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
+                        sortering={SorteringsfeltEnhetPortefolje.ARBEIDSLISTE_FRIST}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.ARBEIDSLISTE_FRIST}
                         tekstId="portefolje.tabell.ddmmyy"
                         skalVises={!!filtervalg && filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
                         className={'sortering-header__dato col col-xs-1'}
@@ -114,46 +114,46 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                         className={'sortering-header__dato col col-xs-1'}
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
+                        sortering={SorteringsfeltEnhetPortefolje.VENTER_PA_SVAR_FRA_NAV}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.VENTER_PA_SVAR_FRA_NAV}
                         tekstId="portefolje.tabell.ddmmyy"
                         skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
                         className={'sortering-header__dato col col-xs-1'}
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
+                        sortering={SorteringsfeltEnhetPortefolje.VENTER_PA_SVAR_FRA_BRUKER}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.VENTER_PA_SVAR_FRA_BRUKER}
                         tekstId="portefolje.tabell.ddmmyy"
                         skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
                         className={'sortering-header__dato col col-xs-1'}
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
+                        sortering={SorteringsfeltEnhetPortefolje.UTLOPTE_AKTIVITETER}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.UTLOPTE_AKTIVITETER}
                         tekstId="portefolje.tabell.ddmmyy"
                         skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
                         className={'sortering-header__dato col col-xs-1'}
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
+                        sortering={SorteringsfeltEnhetPortefolje.I_AVTALT_AKTIVITET}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.I_AVTALT_AKTIVITET}
                         tekstId="portefolje.tabell.ddmmyy"
                         skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
                         className={'sortering-header__dato col col-xs-1'}
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
+                        sortering={SorteringsfeltEnhetPortefolje.VALGTE_AKTIVITETER}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.VALGTE_AKTIVITETER}
                         tekstId="portefolje.tabell.ddmmyy"
                         skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
                         className={'sortering-header__dato col col-xs-1'}

@@ -6,12 +6,11 @@ import Listeoverskrift from '../utils/listeoverskrift';
 import { filtervalgShape } from './../proptype-shapes';
 import {
     ytelseUtlopsSortering,
-    ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER,
     I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
-import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
+import { FiltervalgModell, SorteringsfeltEnhetPortefolje, Sorteringsrekkefolge } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import { AktiviteterValg } from '../ducks/filtrering';
 
@@ -100,18 +99,18 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
             <div className="brukerliste--border-bottom">
                 <div className="brukerliste__sorteringheader typo-undertekst">
                     <SorteringHeader
-                        sortering={Sorteringsfelt.ETTERNAVN}
+                        sortering={SorteringsfeltEnhetPortefolje.ETTERNAVN}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.ETTERNAVN}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.ETTERNAVN}
                         tekstId="portefolje.tabell.etternavn"
                         className={'col col-xs-3'}
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.FODSELSNUMMER}
+                        sortering={SorteringsfeltEnhetPortefolje.FODSELSNUMMER}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.FODSELSNUMMER}
                         tekstId="portefolje.tabell.fodselsnummer"
                         className={'col col-xs-2'}
                     />
@@ -125,46 +124,46 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                         className={'sortering-header__dato col col-xs-2'}
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
+                        sortering={SorteringsfeltEnhetPortefolje.VENTER_PA_SVAR_FRA_NAV}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.VENTER_PA_SVAR_FRA_NAV}
                         tekstId="portefolje.tabell.ddmmyy"
                         skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
                         className={'sortering-header__dato col col-xs-2'}
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
+                        sortering={SorteringsfeltEnhetPortefolje.VENTER_PA_SVAR_FRA_BRUKER}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.VENTER_PA_SVAR_FRA_BRUKER}
                         tekstId="portefolje.tabell.ddmmyy"
                         skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
                         className={'sortering-header__dato col col-xs-2'}
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
+                        sortering={SorteringsfeltEnhetPortefolje.UTLOPTE_AKTIVITETER}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.UTLOPTE_AKTIVITETER}
                         tekstId="portefolje.tabell.ddmmyy"
                         skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
                         className={'sortering-header__dato col col-xs-2'}
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
+                        sortering={SorteringsfeltEnhetPortefolje.I_AVTALT_AKTIVITET}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.I_AVTALT_AKTIVITET}
                         tekstId="portefolje.tabell.ddmmyy"
                         skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
                         className={'sortering-header__dato col col-xs-2'}
                     />
                     <SorteringHeader
-                        sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
+                        sortering={SorteringsfeltEnhetPortefolje.VALGTE_AKTIVITETER}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
+                        erValgt={sorteringsfelt === SorteringsfeltEnhetPortefolje.VALGTE_AKTIVITETER}
                         tekstId="portefolje.tabell.ddmmyy"
                         skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
                         className={'sortering-header__dato col col-xs-2'}

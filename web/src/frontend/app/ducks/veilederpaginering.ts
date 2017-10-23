@@ -1,6 +1,9 @@
 import { DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import { TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
-import { Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
+import {
+    SorteringfeltVeilederOversikt, Sorteringsrekkefolge, VeilederModell,
+    VisningType
+} from '../model-interfaces';
 
 // Actions
 const SETT_LISTE = 'veilederpaginering/settliste/OK';
@@ -8,16 +11,30 @@ const SETT_SUBLISTE = 'veilederpaginering/settsubliste/OK';
 const KLARER = 'veilederpaginering/klarer/OK';
 const SETT_VISNINGSMODUS = 'veilederpaginering/settvisningsmodus/OK';
 
-const initialState = {
+export interface CurrentSorteringState {
+    felt: SorteringfeltVeilederOversikt;
+    rekkefolge: Sorteringsrekkefolge;
+}
+
+interface VeilederpagineringState {
+    liste: VeilederModell[];
+    subListe: VeilederModell[];
+    fraIndeksForSubListe: number;
+    sideStorrelse: number;
+    currentSortering: CurrentSorteringState
+    visningsmodus: VisningType
+}
+
+const initialState: VeilederpagineringState = {
     liste: [],
     subListe: [],
     fraIndeksForSubListe: 0,
     sideStorrelse: DEFAULT_PAGINERING_STORRELSE,
     currentSortering: {
-        felt: Sorteringsfelt.IKKE_SATT,
+        felt: SorteringfeltVeilederOversikt.IKKE_SATT,
         rekkefolge: Sorteringsrekkefolge.ikke_satt
     },
-    visningsmodus: TABELLVISNING
+    visningsmodus: VisningType.TABELLVISNING
 };
 
 //  Reducer

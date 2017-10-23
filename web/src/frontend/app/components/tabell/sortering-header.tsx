@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import { Sorteringsfelt, Sorteringsrekkefolge } from '../../model-interfaces';
+import { SorteringsfeltEnhetPortefolje, Sorteringsrekkefolge } from '../../model-interfaces';
 
 interface SorteringHeaderProps {
-    sortering: Sorteringsfelt;
+    sortering: SorteringsfeltEnhetPortefolje;
     onClick: (sortering: string) => void;
     rekkefolge: Sorteringsrekkefolge;
     erValgt: boolean;

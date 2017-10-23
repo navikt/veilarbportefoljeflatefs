@@ -11,7 +11,8 @@ const defaultVeileder: VeilederModell = {
     ident: '',
     navn: '',
     fornavn: '',
-    etternavn: ''
+    etternavn: '',
+    portefoljestorrelse: 0
 };
 
 interface FiltreringContainerProps {

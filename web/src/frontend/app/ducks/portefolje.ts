@@ -7,7 +7,7 @@ import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from '../ducks/statustall';
 import { leggSideIUrl } from '../utils/utils';
-import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
+import { BrukerModell, SorteringsfeltEnhetPortefolje, Sorteringsrekkefolge } from '../model-interfaces';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -57,7 +57,7 @@ const initialState: PortefoljeState = {
         fraIndex: 0
     },
     sorteringsrekkefolge: Sorteringsrekkefolge.ikke_satt,
-    sorteringsfelt: Sorteringsfelt.IKKE_SATT,
+    sorteringsfelt: SorteringsfeltEnhetPortefolje.IKKE_SATT,
     veileder: {
         ident: IKKE_SATT
     },
@@ -313,18 +313,6 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                 }, 2000);
             });
     };
-}
-
-export function settTilordningStatusOk() {
-    return (dispatch) => dispatch({
-        type: TILDEL_VEILEDER_OK
-    });
-}
-
-export function nullstillFeilendeTilordninger() {
-    return (dispatch) => dispatch({
-        type: NULLSTILL_FEILENDE_TILORDNINGER
-    });
 }
 
 export function settValgtVeileder(valgtVeileder) {
