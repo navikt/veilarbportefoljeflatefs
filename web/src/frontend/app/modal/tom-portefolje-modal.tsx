@@ -3,13 +3,13 @@ import Modal from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
-import { injectIntl } from 'react-intl';
+import { injectIntl, InjectedIntl } from 'react-intl';
 
 Modal.setAppElement('#applikasjon');
 
 interface TomPortefoljeModalProps {
     isOpen: boolean;
-    intl: any;
+    intl: InjectedIntl;
 }
 
 interface TomPortefoljeModalState {
