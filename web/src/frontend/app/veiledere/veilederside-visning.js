@@ -5,7 +5,7 @@ import VeiledereTabell from './veiledere-tabell';
 import { portefoljestorrelserShape, veiledereShape } from './../proptype-shapes';
 import { pagineringSetup } from '../ducks/paginering';
 import { sortBy } from '../ducks/sortering';
-import { nameToStateSliceMap } from './../reducer';
+import { nameToStateSliceMap } from '../ducks/utils';
 import { sorter } from './../utils/sortering';
 
 function erValgtHvisFiltrering(veiledere) {
