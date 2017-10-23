@@ -69,11 +69,11 @@ export interface ValgtEnhetModell {
 }
 
 export interface VeilederModell {
-    ident?: string;
-    navn?: string;
-    fornavn?: string | undefined;
-    etternavn?: string | undefined;
-    portefoljestorrelse?: number;
+    ident: string;
+    navn: string;
+    fornavn: string;
+    etternavn: string;
+    portefoljestorrelse: number;
 }
 
 export interface BrukerModell {

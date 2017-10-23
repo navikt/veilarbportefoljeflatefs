@@ -60,7 +60,7 @@ class MinOversiktSide extends React.Component<MinoversiktSideProps> {
         const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
 
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
-        const innloggetVeileder = { ident: enheter.ident };
+        const innloggetVeileder = { ident: enheter.ident, fornavn: '', etternavn: '' };
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
         const { formatMessage } = intl;
 
@@ -71,8 +71,8 @@ class MinOversiktSide extends React.Component<MinoversiktSideProps> {
                 id="annen.veileder.portefolje.advarsel"
                 tagName="em"
                 values={{
-                    fornavn: gjeldendeVeileder.fornavn || '',
-                    etternavn: gjeldendeVeileder.etternavn || ''
+                    fornavn: gjeldendeVeileder.fornavn,
+                    etternavn: gjeldendeVeileder.etternavn
                 }}
             /></Normaltekst>);
 
