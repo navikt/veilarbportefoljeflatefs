@@ -5,7 +5,7 @@ import { endreFiltervalg } from '../../ducks/filtrering';
 import SokFilter from './sok-filter';
 import Dropdown from './../dropdown/dropdown';
 import CheckboxFilterform from './../checkbox-filterform/checkbox-filterform';
-import { nameToStateSliceMap } from '../../reducer';
+import { nameToStateSliceMap } from '../../ducks/utils';
 import { FiltervalgModell } from '../../model-interfaces';
 import { VeiledereState } from '../../ducks/veiledere';
 

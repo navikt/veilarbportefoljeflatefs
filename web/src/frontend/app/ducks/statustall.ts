@@ -7,7 +7,22 @@ export const FEILET = 'veilarbportefoljeflatefs/statustall/FEILET';
 export const PENDING = 'veilarbportefoljeflatefs/statustall/PENDING';
 export const LEGG_TIL_STATUSTALL = 'LEGG_TIL_STATUSTALL';
 
-const initalState = {
+export interface StatustallState {
+    status: string;
+    data: {
+        totalt: number;
+        nyeBrukere: number;
+        inaktiveBrukere: number;
+        venterPaSvarFraNAV: number;
+        venterPaSvarFraBruker: number;
+        utlopteAktiviteter: number;
+        ikkeIavtaltAktivitet: number;
+        iavtaltAktivitet: number;
+        minArbeidsliste: number;
+    };
+}
+
+const initalState: StatustallState = {
     status: STATUS.NOT_STARTED,
     data: {
         totalt: 0,
@@ -23,17 +38,17 @@ const initalState = {
 };
 
 // Reducer
-export default function reducer(state = initalState, action) {
+export default function reducer(state: StatustallState = initalState, action): StatustallState {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {
-                return { ...state, status: STATUS.RELOADING };
+                return {...state, status: STATUS.RELOADING};
             }
-            return { ...state, status: STATUS.PENDING };
+            return {...state, status: STATUS.PENDING};
         case FEILET:
-            return { ...state, status: STATUS.ERROR, data: action.data };
+            return {...state, status: STATUS.ERROR, data: action.data};
         case OK: {
-            return { ...state, status: STATUS.OK, data: action.data };
+            return {...state, status: STATUS.OK, data: action.data};
         }
         case LEGG_TIL_STATUSTALL: {
             return {
@@ -49,7 +64,7 @@ export default function reducer(state = initalState, action) {
 }
 
 // Action Creators
-export function hentStatusTall(enhet, veileder) {
+export function hentStatusTall(enhet: string, veileder?: string) {
     if (veileder === undefined) {
         return doThenDispatch(() => Api.hentStatusTall(enhet), {
             OK,

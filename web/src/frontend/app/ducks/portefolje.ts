@@ -1,13 +1,13 @@
 import * as Api from './../middleware/api';
-import { STATUS, doThenDispatch, handterFeil, toJson } from './utils';
-import { IKKE_SATT } from '../konstanter';
-import { oppdaterPortefolje } from './filtrering';
+import { STATUS, doThenDispatch, handterFeil, toJson, nameToStateSliceMap } from './utils';
+import { DEFAULT_PAGINERING_STORRELSE, IKKE_SATT } from '../konstanter';
 import { pagineringSetup } from './paginering';
 import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from '../ducks/statustall';
 import { leggSideIUrl } from '../utils/utils';
 import { BrukerModell, SorteringsfeltEnhetPortefolje, Sorteringsrekkefolge } from '../model-interfaces';
+import { oppdaterAlternativer, ListevisningType } from './ui/listevisning';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -202,6 +202,23 @@ export default function reducer(state = initialState, action): PortefoljeState {
 }
 
 // Action Creators
+export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = {}) {
+    const state = getState();
+    const enhet = state.enheter.valgtEnhet.enhet.enhetId;
+    const rekkefolge = state.portefolje.sorteringsrekkefolge;
+    const sorteringfelt = state.portefolje.sorteringsfelt;
+    const antall = DEFAULT_PAGINERING_STORRELSE;
+    const nyeFiltervalg = state[nameToStateSliceMap[filtergruppe]];
+
+    if (filtergruppe === 'enhet') {
+        hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
+        oppdaterAlternativer(dispatch, getState, ListevisningType.enhetensOversikt);
+    } else if (filtergruppe === 'veileder') {
+        hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
+        oppdaterAlternativer(dispatch, getState, ListevisningType.minOversikt);
+    }
+}
+
 export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
     const fn = (dispatch) => Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
         .then((json) => {
