@@ -1,7 +1,4 @@
-import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
-import { DEFAULT_PAGINERING_STORRELSE } from './../konstanter';
-import { nameToStateSliceMap } from './../reducer';
-import { ListevisningType, oppdaterAlternativer } from './ui/listevisning';
+import { oppdaterPortefolje } from './portefolje';
 import { VeilederModell } from '../model-interfaces';
 
 // Actions
@@ -102,23 +99,6 @@ export default function reducer(state: FiltreringState = initialState, action): 
 }
 
 // Action Creators
-export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = {}) {
-    const state = getState();
-    const enhet = state.enheter.valgtEnhet.enhet.enhetId;
-    const rekkefolge = state.portefolje.sorteringsrekkefolge;
-    const sorteringfelt = state.portefolje.sorteringsfelt;
-    const antall = DEFAULT_PAGINERING_STORRELSE;
-    const nyeFiltervalg = state[nameToStateSliceMap[filtergruppe]];
-
-    if (filtergruppe === 'enhet') {
-        hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
-        oppdaterAlternativer(dispatch, getState, ListevisningType.enhetensOversikt);
-    } else if (filtergruppe === 'veileder') {
-        hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
-        oppdaterAlternativer(dispatch, getState, ListevisningType.minOversikt);
-    }
-}
-
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: VeilederModell) {
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
         return (dispatch, getState) => {
