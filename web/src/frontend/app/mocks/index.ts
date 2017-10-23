@@ -30,26 +30,26 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
 }
 
 // Hvis du vil hente tekster fra applikasjonen, så la linjen nedenfor være kommentert ut.
-mock.get('/veilarbportefoljeflatefs/tjenester/tekster', respondWith(tekster));
+mock.get('/veilarbportefoljeflatefs/api/tekster', respondWith(tekster));
 
 // veileder-api
-mock.get('/veilarbveileder/tjenester/veileder/enheter', respondWith(enheter));
-mock.get('/veilarbveileder/tjenester/veileder/me', respondWith(me));
-mock.get('/veilarbveileder/tjenester/enhet/1234/veiledere', respondWith(veiledere));
+mock.get('/veilarbveileder/api/veileder/enheter', respondWith(enheter));
+mock.get('/veilarbveileder/api/veileder/me', respondWith(me));
+mock.get('/veilarbveileder/api/enhet/1234/veiledere', respondWith(veiledere));
 
 // portefolje-api
-mock.get('/veilarbportefolje/tjenester/enhet/1234/statustall', respondWith(delayed(1000, randomFailure(statustall))));
-mock.post('express:/veilarbportefolje/tjenester/enhet/:enhet/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefolje(queryParams, bodyParams, extra.enhet, brukere)));
-mock.post('express:/veilarbportefolje/tjenester/veileder/:ident/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefoljeForVeileder(queryParams, bodyParams, brukere)));
-mock.get('express:/veilarbportefolje/tjenester/veileder/:veileder/statustall*', respondWith(delayed(1000, randomFailure(statustall))));
+mock.get('/veilarbportefolje/api/enhet/1234/statustall', respondWith(delayed(1000, randomFailure(statustall))));
+mock.post('express:/veilarbportefolje/api/enhet/:enhet/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefolje(queryParams, bodyParams, extra.enhet, brukere)));
+mock.post('express:/veilarbportefolje/api/veileder/:ident/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefoljeForVeileder(queryParams, bodyParams, brukere)));
+mock.get('express:/veilarbportefolje/api/veileder/:veileder/statustall*', respondWith(delayed(1000, randomFailure(statustall))));
 
 // situasjon-api
 mock.post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, randomFailure({ feilendeTilordninger: ['11111111111','22222222222'] }))));
 
 // arbeidsliste-api
-mock.post('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'], data: [] }))));
-mock.put('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'] }))));
-mock.delete('/veilarbportefolje/tjenester/arbeidsliste/', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
-mock.post('/veilarbportefolje/tjenester/arbeidsliste/delete', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'], data: [] }))));
+mock.post('/veilarbportefolje/api/arbeidsliste/', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'], data: [] }))));
+mock.put('/veilarbportefolje/api/arbeidsliste/', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'] }))));
+mock.delete('/veilarbportefolje/api/arbeidsliste/', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
+mock.post('/veilarbportefolje/api/arbeidsliste/delete', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'], data: [] }))));
 
 mock.mock('*', respondWith((url, config) => mock.realFetch.call(window, url, config)));
