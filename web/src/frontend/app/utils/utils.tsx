@@ -1,9 +1,8 @@
 /* eslint-disable import/prefer-default-export, no-undef */
 import * as queryString from 'query-string';
-import history, {basename} from '../history';
-import {AktiviteterModell} from '../model-interfaces';
-import * as React from "react";
-import {FormattedMessage} from 'react-intl';
+import history, { basename } from '../history';
+import { AktiviteterModell } from '../model-interfaces';
+import * as React from 'react';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array((end - start) + ((inclusive) ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -102,4 +101,3 @@ export function erDev() {
     const host: string = window.location.host;
     return host.includes('localhost') || host.includes('127.0.0.1');
 }
-
