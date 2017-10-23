@@ -114,7 +114,7 @@
   },
   "scripts": {
     "build": "webpack -p",
-    "dev": "/webpack-dev-server --env.dev",
+    "dev": "webpack-dev-server --env.dev",
     "watch": "webpack -p --watch",
     "watch:dev": "webpack --watch",
     "test": "mocha",
