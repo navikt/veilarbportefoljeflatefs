@@ -134,8 +134,8 @@ class DatoField extends Component {
                             className="js-toggle datovelger__toggleDayPicker"
                             aria-label={
                                 this.state.erApen
-                                    ? 'Skjul datovelger'
-                                    : 'Vis datovelger'
+                                    ? this.props.intl.formatMessage({ id: 'datepicker.skjul' })
+                                    : this.props.intl.formatMessage({ id: 'datepicker.vis' })
                             }
                             ref={(toggle) => {
                                 this.toggleButton = toggle;
@@ -179,7 +179,8 @@ DatoField.propTypes = {
     dispatch: PT.func.isRequired, // eslint-disable-line react/no-unused-prop-types
     disabled: PT.bool,
     tidligsteFom: PT.instanceOf(Date),
-    errorMessage: PT.oneOfType([PT.arrayOf(PT.node), PT.node])
+    errorMessage: PT.oneOfType([PT.arrayOf(PT.node), PT.node]),
+    intl: intlShape.isRequired
 };
 
 DatoField.defaultProps = {
@@ -199,7 +200,7 @@ function Datovelger(props) {
 
     const datoFelt = (
         <ConnectedDatoField
-            label={<span>Velg dato for arbeidsliste</span>}
+            label={<span>{intl.formatMessage({ id: 'datepicker.arbeidsliste.velg.dato' })}</span>}
             {...props}
         />
     );

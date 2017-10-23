@@ -3,11 +3,13 @@ import Modal from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
+import { injectIntl, InjectedIntl } from 'react-intl';
 
 Modal.setAppElement('#applikasjon');
 
 interface TomPortefoljeModalProps {
     isOpen: boolean;
+    intl: InjectedIntl;
 }
 
 interface TomPortefoljeModalState {
@@ -31,7 +33,7 @@ class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPor
         return (
             <Modal
                 className="tom-portefolje-modal"
-                contentLabel="Enheten har ingen brukere"
+                contentLabel={this.props.intl.formatMessage({ id: 'modal.feilmelding.tom.portefolje' })}
                 isOpen={this.state.isOpen}
                 onRequestClose={this.lukkModal}
                 closeButton
@@ -57,4 +59,4 @@ class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPor
     }
 }
 
-export default TomPortefoljeModal;
+export default injectIntl(TomPortefoljeModal);

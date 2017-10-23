@@ -40,14 +40,15 @@ export const NavBar = ({
                            onNextClick,
                            onPreviousClick,
                            showPreviousButton,
-                           showNextButton
+                           showNextButton,
+                           formatMessage
                        }) => {
     const className = 'DayPicker-NavButton';
     return (
         <div role="toolbar">
             <button
                 tabIndex="-1"
-                aria-label="Forrige måned"
+                aria-label={formatMessage({ id: 'datepicker.forrige.maned' })}
                 className={`${className} DayPicker-NavButton--prev`}
                 disabled={!showPreviousButton}
                 type="button"
@@ -58,7 +59,7 @@ export const NavBar = ({
             />
             <button
                 tabIndex="-1"
-                aria-label="Neste måned"
+                aria-label={formatMessage({ id: 'datepicker.neste.maned' })}
                 className={`${className} DayPicker-NavButton--next`}
                 disabled={!showNextButton}
                 type="button"
@@ -75,14 +76,16 @@ NavBar.propTypes = {
     onNextClick: PT.func,
     onPreviousClick: PT.func,
     showPreviousButton: PT.bool,
-    showNextButton: PT.bool
+    showNextButton: PT.bool,
+    formatMessage: PT.func
 };
 
 NavBar.defaultProps = {
     onNextClick: undefined,
     onPreviousClick: undefined,
     showPreviousButton: false,
-    showNextButton: false
+    showNextButton: false,
+    formatMessage: undefined
 };
 
 class DayPickerComponent extends Component {
@@ -151,7 +154,7 @@ class DayPickerComponent extends Component {
                     localeUtils={localeUtils}
                     firstDayOfWeek={1}
                     captionElement={<Caption />}
-                    navbarElement={<NavBar intl={this.props.intl} />}
+                    navbarElement={<NavBar intl={this.props.intl} formatMessage={this.props.intl.formatMessage} />}
                     selectedDays={(day) => this.selectedDays(day)}
                     onDayClick={(event, jsDato) =>
                         this.props.onDayClick(event, jsDato)}
