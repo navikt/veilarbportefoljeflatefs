@@ -4,12 +4,12 @@ import { rnd } from './utils';
 function lagPortefoljeStorrelse() {
     return {
         value: lagTilfeldigVeilederId(),
-        count: rnd(0, 100)
+        count: rnd(0, 50)
     };
 }
 
 export default function lagPortefoljeStorrelser() {
     return {
-        facetResults: new Array(40).map(() => lagPortefoljeStorrelse())
+        facetResults: new Array(40).fill(lagPortefoljeStorrelse())
     };
 }
