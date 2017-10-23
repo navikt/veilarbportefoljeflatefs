@@ -38,7 +38,7 @@ const initialState: VeilederpagineringState = {
 };
 
 //  Reducer
-export default function reducer(state = initialState, action) {
+export default function reducer(state = initialState, action): VeilederpagineringState {
     switch (action.type) {
         case SETT_LISTE:
             return { ...state, liste: action.liste };

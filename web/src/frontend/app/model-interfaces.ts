@@ -71,9 +71,9 @@ export interface ValgtEnhetModell {
 export interface VeilederModell {
     ident?: string;
     navn?: string;
-    fornavn?: string;
-    etternavn?: string;
-    portefoljestorrelse: number;
+    fornavn?: string | undefined;
+    etternavn?: string | undefined;
+    portefoljestorrelse?: number;
 }
 
 export interface BrukerModell {

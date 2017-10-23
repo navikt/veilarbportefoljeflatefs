@@ -8,15 +8,24 @@ import { settValgtVeileder } from '../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import {VeilederModell, VisningType} from "../model-interfaces";
 import {CurrentSorteringState} from "../ducks/veilederpaginering";
+import {AppState} from "../reducer";
 
-interface VeilederTabellProps {
-    veiledere: VeilederModell[];
-    settVeileder: (veileder: VeilederModell) => void;
-    sorterPaaEtternavn: () => void;
+interface StateProps {
     veilederListe: VeilederModell[];
-    sorterPaaPortefoljestorrelse: () => void;
     currentSortering: CurrentSorteringState;
 }
+
+interface DispatchProps {
+    settVeileder: (veileder: VeilederModell) => void;
+}
+
+interface OwnProps {
+    veiledere: VeilederModell[];
+    sorterPaaEtternavn: () => void;
+    sorterPaaPortefoljestorrelse: () => void;
+}
+
+type VeilederTabellProps = StateProps & DispatchProps & OwnProps;
 
 class VeilederTabell extends React.Component<VeilederTabellProps> {
     settOgNavigerTilValgtVeileder(veileder) {
@@ -102,13 +111,13 @@ class VeilederTabell extends React.Component<VeilederTabellProps> {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState): StateProps => ({
     veilederListe: state.veiledere.data.veilederListe,
     currentSortering: state.veilederpaginering.currentSortering
 
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch): DispatchProps => ({
     settVeileder: (veileder) => dispatch(settValgtVeileder(veileder))
 });
 
