@@ -2,6 +2,7 @@ import * as React from 'react';
 import Modal from 'nav-frontend-modal';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
+import { injectIntl, InjectedIntl } from 'react-intl';
 
 interface FeilmeldingBrukereModalProps {
     isOpen?: boolean;
@@ -9,6 +10,7 @@ interface FeilmeldingBrukereModalProps {
     onClose: () => void;
     tittelTekstID: string;
     infotekstTekstID: string;
+    intl: InjectedIntl;
 }
 
 interface FeilmeldingBrukereModalState {
@@ -41,10 +43,10 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
     }
 
     render() {
-        const { tittelTekstID, infotekstTekstID, fnr } = this.props;
+        const { tittelTekstID, infotekstTekstID, fnr, intl } = this.props;
         return (
             <Modal
-                contentLabel="Modal tilordning feilet"
+                contentLabel={intl.formatMessage({ id: 'modal.feilmelding.brukere' })}
                 isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
                 closeButton={false}
@@ -69,4 +71,4 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
     }
 }
 
-export default FeilmeldingBrukereModal;
+export default injectIntl(FeilmeldingBrukereModal);
