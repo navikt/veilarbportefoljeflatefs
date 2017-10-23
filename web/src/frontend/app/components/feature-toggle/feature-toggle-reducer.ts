@@ -1,4 +1,6 @@
-export interface FeatureToggleState { [feature: string]: boolean; }
+export interface FeatureToggleState {
+    bruker_i_context: boolean;
+}
 
 export const initialState: FeatureToggleState = {
     bruker_i_context: false

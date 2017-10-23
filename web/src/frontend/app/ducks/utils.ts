@@ -71,3 +71,13 @@ export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
             .catch(handterFeil(dispatch, FEILET));
     };
 }
+
+export const stateSliceToNameMap = {
+    filtrering: 'enhet',
+    filtreringMinoversikt: 'veileder',
+    filtreringVeilederoversikt: 'veiledere'
+};
+
+export const nameToStateSliceMap = Object.entries(stateSliceToNameMap)
+    .map(([a, b]) => [b, a])
+    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
