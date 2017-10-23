@@ -1,11 +1,34 @@
+import getStore from './store';
+import { oppdaterAktivEnhet } from './components/enhet-context/context-api';
+import { visFeilmodal } from './components/enhet-context/context-reducer';
+import { oppdaterValgtEnhet } from './ducks/enheter';
+
 /* eslint-disable no-undef */
 const handlePersonsokSubmit = (fnr) => {
     window.location.pathname = `veilarbpersonflatefs/${fnr}`;
 };
 
 const handleChangeEnhet = (enhet, type) => {
+    const store = getStore();
+
+    function endreAktivEnhet(nyEnhet: string) {
+        settEnhetIDekorator(nyEnhet);
+        oppdaterValgtEnhet(nyEnhet)(store.dispatch, store.getState);
+    }
+
+    const onSuccess = () => endreAktivEnhet(enhet);
+    const onError = () => {
+        store.dispatch(visFeilmodal());
+        endreAktivEnhet(enhet);
+    };
+
     if (type !== 'init') {
-        window.location.search = (`?enhet=${enhet}&clean`);
+        const featureEnabled = store.getState().features.bruker_i_context;
+        if (featureEnabled) {
+            oppdaterAktivEnhet(enhet).then(onSuccess, onError);
+        } else {
+            window.location.search = (`?enhet=${enhet}&clean`);
+        }
     }
 };
 
@@ -44,8 +67,8 @@ const getConfig = (initiellEnhet = undefined) => {
     return {
         config: {
             dataSources: {
-                veileder: '/veilarbveileder/tjenester/veileder/me',
-                enheter: '/veilarbveileder/tjenester/veileder/enheter'
+                veileder: '/veilarbveileder/api/veileder/me',
+                enheter: '/veilarbveileder/api/veileder/enheter'
             },
             toggles: {
                 visEnhet: false,
