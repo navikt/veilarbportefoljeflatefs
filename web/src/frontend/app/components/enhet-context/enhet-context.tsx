@@ -11,6 +11,8 @@ import EnhetContextListener, {
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
 import { erDev } from '../../utils/utils';
+import { oppdaterValgtEnhet } from '../../ducks/enheter';
+import { settEnhetIDekorator } from '../../eventhandtering';
 
 interface StateProps {
     modalSynlig: boolean;
@@ -25,7 +27,7 @@ interface DispatchProps {
     doSettTilkoblingState: (state: EnhetConnectionState) => void;
     doSettNyAktivEnhet: (enhet: string) => void;
     doSettIsPending: (pending: boolean) => void;
-    oppdaterValgtEnhet: (enhet: string) => void;
+    doOppdaterValgtEnhet: (enhet: string) => void;
 }
 
 type EnhetContextProps = StateProps & DispatchProps;
@@ -59,7 +61,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     handleEndreAktivEnhet() {
-        this.props.oppdaterValgtEnhet(this.props.aktivEnhetContext);
+        settEnhetIDekorator(this.props.aktivEnhetContext);
+        this.props.doOppdaterValgtEnhet(this.props.aktivEnhetContext);
     }
 
     handleBeholdAktivEnhet() {
@@ -132,7 +135,7 @@ const mapDispatchToProps = (dispatch): DispatchProps => {
         doSettTilkoblingState: (state: EnhetConnectionState) => dispatch(settTilkoblingState(state)),
         doSettNyAktivEnhet: (enhet: string) => dispatch(settNyAktivEnhet(enhet)),
         doSettIsPending: (pending: boolean) => dispatch(settIsPending(pending)),
-        oppdaterValgtEnhet: (enhet: string) => dispatch(oppdaterAktivEnhet(enhet))
+        doOppdaterValgtEnhet: (enhet: string) => dispatch(oppdaterValgtEnhet(enhet))
     };
 };
 
