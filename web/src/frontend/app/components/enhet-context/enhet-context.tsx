@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AlertStripeAdvarselSolid } from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import {settNyAktivEnhet, settTilkoblingState, settIsPending, skjulFeilmodal, visFeilmodal} from './context-reducer';
+import { settNyAktivEnhet, settTilkoblingState, settIsPending, skjulFeilmodal, visFeilmodal } from './context-reducer';
 import { AppState } from '../../reducer';
 import NyContextModal from './ny-context-modal';
 import EnhetContextListener, {
@@ -128,7 +128,7 @@ const mapStateToProps = (state: AppState): StateProps => {
     const valgtEnhetNavn = valgtEnhet ? state.enheter.data.find((enhet) => enhet.enhetId === valgtEnhetId).navn : '';
     const valgtEnhetContext = state.nycontext.aktivEnhet;
 
-    const harValgtEnhet = valgtEnhetId != null && valgtEnhetId !== '';
+    const harValgtEnhet = valgtEnhetId != null && valgtEnhetId !== '' && valgtEnhetContext !== '';
 
     return {
         modalSynlig: harValgtEnhet && (valgtEnhetId !== valgtEnhetContext),

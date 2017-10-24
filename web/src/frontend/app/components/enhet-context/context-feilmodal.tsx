@@ -15,6 +15,7 @@ class ContextFeilmodal extends React.Component<ContextFeilmodalProps> {
         return (
             <NavFrontendModal
                 contentLabel="ContextFeilmodal"
+                shouldCloseOnOverlayClick={false}
                 isOpen={this.props.isOpen}
                 closeButton
                 onRequestClose={this.props.onClose}

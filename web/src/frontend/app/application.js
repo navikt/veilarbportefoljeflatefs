@@ -71,7 +71,7 @@ class Application extends Component {
         }
 
 
-        return hentAktivEnhet().then(enhet => {
+        return hentAktivEnhet().then((enhet) => {
             if (enhet == null || enhet === '') {
                 return Promise.resolve(enhetIdListe[0]);
             }
@@ -81,7 +81,7 @@ class Application extends Component {
 
     oppdaterDekoratorMedInitiellEnhet() {
         const { velgEnhet, hentVeiledere } = this.props;
-        this.finnInitiellEnhet().then(initiellEnhet => {
+        this.finnInitiellEnhet().then((initiellEnhet) => {
             velgEnhet(initiellEnhet);
             leggEnhetIUrl(initiellEnhet);
             hentVeiledere(initiellEnhet);
