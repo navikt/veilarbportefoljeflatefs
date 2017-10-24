@@ -15,6 +15,7 @@ import history from './history';
 import { enhetShape, valgtEnhetShape, veiledereShape } from './proptype-shapes';
 import FeatureToggle from './components/feature-toggle/feature-toggle';
 import EnhetContext from './components/enhet-context/enhet-context';
+import { hentAktivEnhet } from './components/enhet-context/context-api';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(location.search).vistekster; // eslint-disable-line no-undef
@@ -59,24 +60,33 @@ class Application extends Component {
     }
 
     finnInitiellEnhet() {
-        const { enheter, hentVeiledere } = this.props;
+        const { enheter } = this.props;
 
         const enhetliste = enheter.data;
         const enhetFraUrl = queryString.parse(location.search).enhet;// eslint-disable-line no-undef
-        const initiellEnhet = enhetliste
-            .map((enhet) => (enhet.enhetId))
-            .includes(enhetFraUrl) ? enhetFraUrl : enhetliste[0].enhetId;
+        const enhetIdListe = enhetliste.map((enhet) => (enhet.enhetId));
 
-        leggEnhetIUrl(initiellEnhet);
-        hentVeiledere(initiellEnhet);
-        return initiellEnhet;
+        if (enhetIdListe.includes(enhetFraUrl)) {
+            return Promise.resolve(enhetFraUrl);
+        }
+
+
+        return hentAktivEnhet().then(enhet => {
+            if (enhet == null || enhet === '') {
+                return Promise.resolve(enhetIdListe[0]);
+            }
+            return Promise.resolve(enhet);
+        });
     }
 
     oppdaterDekoratorMedInitiellEnhet() {
-        const { velgEnhet } = this.props;
-        const initiellEnhet = this.finnInitiellEnhet();
-        velgEnhet(initiellEnhet);
-        settEnhetIDekorator(initiellEnhet);
+        const { velgEnhet, hentVeiledere } = this.props;
+        this.finnInitiellEnhet().then(initiellEnhet => {
+            velgEnhet(initiellEnhet);
+            leggEnhetIUrl(initiellEnhet);
+            hentVeiledere(initiellEnhet);
+            settEnhetIDekorator(initiellEnhet);
+        });
     }
 
     render() {
