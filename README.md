@@ -2,8 +2,6 @@
 
 Applikasjonen benytter seg av fetchmock-biblioteket for å kunne mocke ut avhengigheter. Se i `mocks/`.
 
-Det er lagt ved idea
-
 ## Kjøre applikasjonen stand alone
 
 Fra `web/src/frontend/`, kjør:
