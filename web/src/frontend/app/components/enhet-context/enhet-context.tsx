@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AlertStripeAdvarselSolid } from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { settNyAktivEnhet, settTilkoblingState, settIsPending } from './context-reducer';
+import {settNyAktivEnhet, settTilkoblingState, settIsPending, skjulFeilmodal, visFeilmodal} from './context-reducer';
 import { AppState } from '../../reducer';
 import NyContextModal from './ny-context-modal';
 import EnhetContextListener, {
@@ -13,6 +13,7 @@ import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
 import { erDev } from '../../utils/utils';
 import { oppdaterValgtEnhet } from '../../ducks/enheter';
 import { settEnhetIDekorator } from '../../eventhandtering';
+import ContextFeilmodal from './context-feilmodal';
 
 interface StateProps {
     modalSynlig: boolean;
@@ -21,6 +22,7 @@ interface StateProps {
     aktivEnhet: string;
     aktivEnhetNavn: string;
     aktivEnhetContext: string;
+    feilmodalSynlig: boolean;
 }
 
 interface DispatchProps {
@@ -28,6 +30,8 @@ interface DispatchProps {
     doSettNyAktivEnhet: (enhet: string) => void;
     doSettIsPending: (pending: boolean) => void;
     doOppdaterValgtEnhet: (enhet: string) => void;
+    doVisFeilmodal: () => void;
+    doSkjulFeilmodal: () => void;
 }
 
 type EnhetContextProps = StateProps & DispatchProps;
@@ -49,7 +53,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 
         hentAktivEnhet().then((enhet) => {
             if (!enhet) {
-                oppdaterAktivEnhet(this.props.aktivEnhet);
+                oppdaterAktivEnhet(this.props.aktivEnhet)
+                    .catch(() => this.props.doVisFeilmodal());
             } else {
                 this.props.doSettNyAktivEnhet(enhet);
             }
@@ -69,13 +74,14 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         this.props.doSettIsPending(true);
         oppdaterAktivEnhet(this.props.aktivEnhet)
             .then(() => this.props.doSettNyAktivEnhet(this.props.aktivEnhet))
+            .catch(() => this.props.doVisFeilmodal())
             .then(() => this.props.doSettIsPending(false));
     }
 
     handleNyAktivEnhet() {
-        hentAktivEnhet().then((nyEnhet) => {
-            this.props.doSettNyAktivEnhet(nyEnhet);
-        });
+        hentAktivEnhet()
+            .then((nyEnhet) => this.props.doSettNyAktivEnhet(nyEnhet))
+            .catch(() => this.props.doVisFeilmodal());
     }
 
     enhetContextHandler(event: EnhetContextEvent) {
@@ -100,6 +106,10 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         return (
             <div>
                 { this.props.feilet ? alertIkkeTilkoblet : null }
+                <ContextFeilmodal
+                    isOpen={this.props.feilmodalSynlig}
+                    onClose={this.props.doSkjulFeilmodal}
+                />
                 <NyContextModal
                     isOpen={this.props.modalSynlig}
                     aktivEnhet={this.props.aktivEnhetNavn}
@@ -122,6 +132,7 @@ const mapStateToProps = (state: AppState): StateProps => {
 
     return {
         modalSynlig: harValgtEnhet && (valgtEnhetId !== valgtEnhetContext),
+        feilmodalSynlig: state.nycontext.visFeilmodal,
         isPending: state.nycontext.isPending,
         feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
         aktivEnhet: valgtEnhetId,
@@ -135,7 +146,9 @@ const mapDispatchToProps = (dispatch): DispatchProps => {
         doSettTilkoblingState: (state: EnhetConnectionState) => dispatch(settTilkoblingState(state)),
         doSettNyAktivEnhet: (enhet: string) => dispatch(settNyAktivEnhet(enhet)),
         doSettIsPending: (pending: boolean) => dispatch(settIsPending(pending)),
-        doOppdaterValgtEnhet: (enhet: string) => dispatch(oppdaterValgtEnhet(enhet))
+        doOppdaterValgtEnhet: (enhet: string) => dispatch(oppdaterValgtEnhet(enhet)),
+        doVisFeilmodal: () => dispatch(visFeilmodal()),
+        doSkjulFeilmodal: () => dispatch(skjulFeilmodal())
     };
 };
 
