@@ -57,7 +57,7 @@ export default class EnhetContextListener {
             this.connection.send('Hello, World!');
             this.hearthbeatInterval = setInterval(() => {
                 this.connection.send('Hello, World!');
-            }, 10000);
+            }, 30000);
         };
 
         this.connection.onmessage = (e: MessageEvent) => {
