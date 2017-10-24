@@ -71,12 +71,13 @@ class Application extends Component {
         }
 
 
-        return hentAktivEnhet().then((enhet) => {
-            if (enhet == null || enhet === '') {
-                return Promise.resolve(enhetIdListe[0]);
-            }
-            return Promise.resolve(enhet);
-        });
+        return hentAktivEnhet()
+            .then((enhet) => {
+                if (enhet == null || enhet === '') {
+                    return Promise.resolve(enhetIdListe[0]);
+                }
+                return Promise.resolve(enhet);
+            }).catch(() => Promise.resolve(enhetIdListe[0]));
     }
 
     oppdaterDekoratorMedInitiellEnhet() {

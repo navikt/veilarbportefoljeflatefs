@@ -1,6 +1,5 @@
 import getStore from './store';
 import { oppdaterAktivEnhet } from './components/enhet-context/context-api';
-import { visFeilmodal } from './components/enhet-context/context-reducer';
 import { oppdaterValgtEnhet } from './ducks/enheter';
 
 /* eslint-disable no-undef */
@@ -17,18 +16,12 @@ const handleChangeEnhet = (enhet, type) => {
     }
 
     const onSuccess = () => endreAktivEnhet(enhet);
-    const onError = () => {
-        store.dispatch(visFeilmodal());
-        endreAktivEnhet(enhet);
-    };
+    const onError = () => endreAktivEnhet(enhet);
 
     if (type !== 'init') {
-        const featureEnabled = store.getState().features.bruker_i_context;
-        if (featureEnabled) {
-            oppdaterAktivEnhet(enhet).then(onSuccess, onError);
-        } else {
-            window.location.search = (`?enhet=${enhet}&clean`);
-        }
+        oppdaterAktivEnhet(enhet)
+            .then(onSuccess)
+            .catch(onError);
     }
 };
 
