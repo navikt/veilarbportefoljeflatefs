@@ -79,19 +79,20 @@ export function velgEnhetForVeileder(valgtEnhet) {
 export function oppdaterValgtEnhet(nyEnhet: string) {
     return (dispatch: Dispatch<Action>, getState: () => AppState) => {
         const state = getState();
-        const valgtVeileder = state.portefolje.veileder.ident;
-        const veilederIdent = valgtVeileder === IKKE_SATT ? state.enheter.ident : valgtVeileder;
 
         dispatch(velgEnhetForVeileder(nyEnhet));
         dispatch(settNyAktivEnhet(nyEnhet));
         dispatch(hentEnhetTiltak(nyEnhet));
-        dispatch(hentStatusTall(nyEnhet, veilederIdent));
 
         const uri = window.location.pathname;
         if (uri.includes('/portefolje')) {
+            const valgtVeileder = state.portefolje.veileder.ident;
+            const veilederIdent = valgtVeileder === IKKE_SATT ? state.enheter.ident : valgtVeileder;
             dispatch(hentPortefoljeForVeileder(nyEnhet, veilederIdent, IKKE_SATT, IKKE_SATT));
+            dispatch(hentStatusTall(nyEnhet, veilederIdent));
         } else if(uri.includes('/enhet')) {
             dispatch(hentPortefoljeForEnhet(nyEnhet, IKKE_SATT, IKKE_SATT));
+            dispatch(hentStatusTall(nyEnhet));
         } else if(uri.includes('/veiledere')) {
             dispatch(hentVeiledereForEnhet(nyEnhet));
         }

@@ -65,7 +65,7 @@ export default function reducer(state: StatustallState = initalState, action): S
 
 // Action Creators
 export function hentStatusTall(enhet: string, veileder?: string) {
-    if (veileder === undefined) {
+    if (veileder == null) {
         return doThenDispatch(() => Api.hentStatusTall(enhet), {
             OK,
             FEILET,
