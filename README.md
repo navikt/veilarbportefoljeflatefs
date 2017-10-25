@@ -2,6 +2,14 @@
 
 Applikasjonen benytter seg av fetchmock-biblioteket for å kunne mocke ut avhengigheter. Se i `mocks/`.
 
+## Oppsett på internt utviklerimage
+
+For å kunne laste ned avhengigheter internt, fjern alle interne url-er i din `~/.npmrc` og legg til webproxy i din `.bashrc`/`.zshrc`:
+
+Se proxy-oppsett for Linux i confluence som utgangspunkt (I Windows trenger du bare eksportere de samme miljøvariablene nevnt her):
+
+https://confluence.adeo.no/x/PQJ8DQ
+
 ## Kjøre applikasjonen stand alone
 
 Fra `web/src/frontend/`, kjør:
