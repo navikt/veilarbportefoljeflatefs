@@ -2,7 +2,7 @@
 
 Applikasjonen benytter seg av fetchmock-biblioteket for å kunne mocke ut avhengigheter. Se i `mocks/`.
 
-## Oppsett internt
+## Oppsett på internt utviklerimage
 
 For å kunne laste ned avhengigheter internt, fjern alle interne url-er i din `~/.npmrc` og legg til webproxy i din `.bashrc`/`.zshrc`:
 
