@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Brukerinformasjon from '../components/tabell/brukerinformasjon';
 import EnhetDatokolonner from './enhet-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
 import { filtervalgShape, veilederShape } from '../proptype-shapes';
@@ -8,6 +7,8 @@ import { Kolonne } from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
 import { FormattedMessage } from 'react-intl';
 import CheckBox from '../components/tabell/checkbox';
+import BrukerNavn from "../components/tabell/brukernavn";
+import BrukerFnr from "../components/tabell/brukerfnr";
 
 interface VeilederinfoProps {
     bruker: any;
@@ -60,11 +61,11 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
         <div className="brukerliste--border-bottom-thin row brukerliste__liste-element">
             <CheckBox bruker={bruker} settMarkert={settMarkert} />
             <div className="brukerliste__panel">
-                    <Brukerinformasjon
+                    <BrukerNavn
                         bruker={bruker}
                         enhetId={enhetId}
-                        settMarkert={settMarkert}
                     />
+                    <BrukerFnr bruker={bruker} />
                     <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} valgteKolonner={valgteKolonner} />
                     <Veilederinfo veileder={brukersVeileder} bruker={bruker} valgteKolonner={valgteKolonner}/>
                     <Etiketter bruker={bruker} />

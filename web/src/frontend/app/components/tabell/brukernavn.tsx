@@ -10,8 +10,6 @@ const settSammenNavn = (bruker) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-const brukerFnr = (bruker) => <span className="brukerinformasjon__fnr col col-xs-2">{bruker.fnr}</span>;
-
 const brukerIArbeidslisteNavn = (bruker, enhetId, arialabel) => (
         <a
             href={`https://${window.location.hostname}` +
@@ -35,23 +33,21 @@ const brukerNavn = (bruker, enhetId) => (
     </a></div>
 );
 
-interface BrukerinformasjonProps {
+interface BrukerNavnProps {
     bruker: BrukerModell;
-    settMarkert: (fnr: string, markert: boolean) => void;
     enhetId: string;
 }
 
-function Brukerinformasjon({ bruker, enhetId }: BrukerinformasjonProps) {
+function BrukerNavn({ bruker, enhetId }: BrukerNavnProps) {
     return (
         <FormattedMessage id="listevisning.bruker.i.arbeidsliste">
             {(label) => (
                 <div className="brukerinformasjon__wrapper">
                     {bruker.arbeidsliste.arbeidslisteAktiv ? brukerIArbeidslisteNavn(bruker, enhetId, label) : brukerNavn(bruker, enhetId)}
-                    {brukerFnr(bruker)}
                 </div>
             )}
         </FormattedMessage>
     );
 }
 
-export default Brukerinformasjon;
+export default BrukerNavn;
