@@ -43,6 +43,24 @@ public class PingConfig {
         };
     }
 
+    @Bean
+    public Pingable modiacontextholderPing() throws IOException {
+        return () -> {
+            String url = System.getProperty("veiledercontext-isalive.url");
+            PingMetadata metadata = new PingMetadata(url, "Holder status om enhet og bruker i context.", false);
+            return ping(url, metadata);
+        };
+    }
+
+    @Bean
+    public Pingable modiaeventdistributionPing() throws IOException {
+        return () -> {
+            String url = System.getProperty("modiaeventdistribution-isalive.url");
+            PingMetadata metadata = new PingMetadata(url, "Distribuerer events om endringer av bruker i context over websocket.", false);
+            return ping(url, metadata);
+        };
+    }
+
     private Ping ping(String url, PingMetadata metadata) {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
