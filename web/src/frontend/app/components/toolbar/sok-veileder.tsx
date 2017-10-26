@@ -63,7 +63,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     sokEtterVeileder(filterId: string, filterverdi: string) {
-        return endreFiltervalg(filterId, filterverdi, ownProps.filtergruppe, ownProps.veileder);
+        return endreFiltervalg(filterId, filterverdi, ownProps.filtergruppe, ownProps.veileder.ident);
     }
 }, dispatch);
 

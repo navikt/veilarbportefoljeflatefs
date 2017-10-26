@@ -109,7 +109,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         filtergruppe={ListevisningType.minOversikt}
                         onPaginering={(fra, antall) => hentPortefolje(
                             valgtEnhet.enhet!.enhetId,
-                            gjeldendeVeileder,
+                            gjeldendeVeileder.ident,
                             sorteringsrekkefolge,
                             sorteringsfelt,
                             filtervalg,
@@ -180,6 +180,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
+        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, fra, antall, filtervalg)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal()),
     closeServerfeilModal: () => dispatch(skjulServerfeilModal())

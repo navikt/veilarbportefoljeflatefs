@@ -220,7 +220,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     endreFilter: (filterId, filtervalg) => dispatch(endreFiltervalg(
-        filterId, filtervalg, ownProps.filtergruppe, ownProps.veileder))
+        filterId, filtervalg, ownProps.filtergruppe, ownProps.veileder.ident))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltreringStatus);
