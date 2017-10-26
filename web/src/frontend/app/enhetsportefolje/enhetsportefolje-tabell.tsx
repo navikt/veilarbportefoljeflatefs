@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { enhetShape, filtervalgShape, veilederShape } from './../proptype-shapes';
 import EnhetBrukerpanel from './enhet-brukerpanel';
-import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
+import { settBrukerSomMarkert } from '../ducks/portefolje';
 import EnhetListehode from './enhet-listehode';
 import {
     FiltervalgModell, Sorteringsrekkefolge, ValgtEnhetModell,
@@ -10,7 +10,6 @@ import {
 } from '../model-interfaces';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
-import Checkbox from '../components/tabell/checkbox';
 
 interface EnhetTabellProps {
     portefolje: any;
@@ -44,7 +43,6 @@ function EnhetTabell({
             <ul className="brukerliste__body">
                 {brukere.map((bruker) =>
                     <li key={bruker.fnr}>
-                        <Checkbox bruker={bruker} settMarkert={settMarkert}/>
                         <EnhetBrukerpanel
                             bruker={bruker}
                             enhetId={enhetId}

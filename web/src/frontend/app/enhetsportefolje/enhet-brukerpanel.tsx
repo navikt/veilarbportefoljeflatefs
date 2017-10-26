@@ -59,8 +59,7 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
 
     return (
         <div className="brukerliste--border-bottom-thin row brukerliste__liste-element">
-            <CheckBox bruker={bruker} settMarkert={settMarkert} />
-            <div className="brukerliste__panel">
+                   <CheckBox className="flex col col-xs-1" bruker={bruker} settMarkert={settMarkert} />
                     <BrukerNavn
                         bruker={bruker}
                         enhetId={enhetId}
@@ -69,7 +68,6 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
                     <EnhetDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} valgteKolonner={valgteKolonner} />
                     <Veilederinfo veileder={brukersVeileder} bruker={bruker} valgteKolonner={valgteKolonner}/>
                     <Etiketter bruker={bruker} />
-            </div>
         </div>
     );
 }

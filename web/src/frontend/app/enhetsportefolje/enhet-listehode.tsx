@@ -56,6 +56,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
         <div className="brukerliste__header">
             <div className="brukerliste--borders">
                 <div className="brukerliste__overskriftheader">
+                <div className={"col col-xs-1"}/>
                 <Listeoverskrift
                     className="listeoverskrift__bruker listeoverskriftcol col-xs-5"
                     id="enhet.portefolje.tabell.bruker"
@@ -99,6 +100,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
             </div>
             <div className="brukerliste--border-bottom">
                 <div className="brukerliste__sorteringheader typo-undertekst">
+                    <div className={"col col-xs-1"}/>
                     <SorteringHeader
                         sortering={Sorteringsfelt.ETTERNAVN}
                         onClick={sorteringOnClick}

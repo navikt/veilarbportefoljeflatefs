@@ -1,7 +1,3 @@
-.minoversikt__checkbox {
-    margin-top: 10px;
-}
-
 .annen-veileder {
     padding: 1rem;
     background-color: @navLysBlaLighten40;
@@ -60,6 +56,8 @@
 
 .arbeidsliste--ikon {
     background: data-uri('./flagg-filled.svg') no-repeat;
+    min-width: 1rem;
+    float:left;
 }
 
 .minoversikt-brukere-liste {
@@ -70,12 +68,10 @@
         border-bottom: 1px solid #b7b1a9;
         .hybridPanel__hode, .panel_hode {
             padding: 10px 10px 0 10px; //FIXME: Fjern slike magic numbers!!
-            margin-left: 24px; //FIXME: Fjern slike magic numbers!!
 
             .brukerpanel {
                 width: 100%;
                 min-height: 2rem;
-                margin-left: 14px;
             }
 
             .brukerinformasjon__wrapper {
@@ -84,10 +80,6 @@
                     display: inline-block;
                     width: 14rem;
                     padding-left: 1rem;
-
-                    &.arbeidslistebruker {
-                        background: data-uri('./flagg-filled.svg') no-repeat;
-                    }
                 }
                 .skjema__input {
                     position: relative;
@@ -142,11 +134,5 @@
         .etikett:last-child {
             margin-right: 32px;
         }
-    }
-}
-
-.brukerinformasjon__wrapper {
-    .checkboks + label {
-        bottom: 10px;
     }
 }

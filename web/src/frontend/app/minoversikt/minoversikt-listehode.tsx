@@ -37,6 +37,8 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
         <div className="brukerliste__header">
             <div className="brukerliste--borders">
                 <div className="brukerliste__overskriftheader brukerliste--minoversikt-padding">
+                    <div className="col col-xs-1" />
+                    <div className="col col-xs-1" />
                     <Listeoverskrift
                         className="listeoverskrift__bruker listeoverskrift col col-xs-5"
                         id="enhet.portefolje.tabell.bruker"
@@ -79,6 +81,8 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
             </div>
             <div className="brukerliste--border-bottom">
                 <div className="brukerliste__sorteringheader brukerliste--minoversikt-padding">
+                    <div className="col col-xs-1" />
+                    <div className="col col-xs-1" />
                     <SorteringHeader
                         className="col col-xs-3"
                         sortering={Sorteringsfelt.ETTERNAVN}

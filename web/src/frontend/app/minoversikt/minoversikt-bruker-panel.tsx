@@ -4,6 +4,8 @@ import { UndertekstBold } from 'nav-frontend-typografi';
 import Hybridpanel from '../components/tabell/hybridpanel/hybridpanel';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
+import CheckBox from '../components/tabell/checkbox';
+import ArbeidslisteIkon from '../components/tabell/arbeidslisteikon';
 import MinoversiktDatokolonner from './minoversikt-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
 import { filtervalgShape, brukerShape } from './../proptype-shapes';
@@ -39,16 +41,14 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
         this.setState({redigerArbeidslisteModalIsOpen: false});
     }
 
-
     render() {
-        const {bruker, enhetId, filtervalg, innloggetVeileder} = this.props;
+        const {bruker, enhetId, filtervalg, innloggetVeileder, settMarkert} = this.props;
         const {ytelse} = filtervalg;
         const childrenHead =
             (<div className="brukerpanel">
-                <BrukerNavn
-                    bruker={bruker}
-                    enhetId={enhetId}
-                />
+                <CheckBox className="flex col col-xs-1" bruker={bruker} settMarkert={settMarkert} />
+                <ArbeidslisteIkon bruker={bruker} className="col col-xs-1"/>
+                <BrukerNavn bruker={bruker} enhetId={enhetId} />
                 <BrukerFnr bruker={bruker}/>
                 <MinoversiktDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}/>
                 <Etiketter bruker={bruker}/>
