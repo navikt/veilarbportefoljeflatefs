@@ -69,7 +69,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         }
         doSettSortering(valgtRekkefolge, felt);
         hentPortefolje(
-            valgtEnhet.enhet!.enhetId, gjeldendeVeileder, valgtRekkefolge, felt, filtervalg
+            valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, valgtRekkefolge, felt, filtervalg
         );
     }
 
