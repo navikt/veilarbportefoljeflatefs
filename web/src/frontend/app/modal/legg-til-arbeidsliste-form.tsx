@@ -78,6 +78,23 @@ interface LeggTilArbeidslisteFormProps {
     arbeidslisteStatus?: Status;
 }
 
+function scrollOnFeedbackClick(name) {
+    return (event) => {
+        event.preventDefault();
+        window.location.href = `#${name}`;
+        const modalElement = document.getElementsByClassName('arbeidsliste-modal')[0];
+        modalElement.scroll(modalElement.scrollLeft, modalElement.scrollTop - 85);
+    };
+}
+
+function FeedbackElementCreator({name, error}) {
+    return (
+        <li key={`${name}`}>
+            <a onClick={scrollOnFeedbackClick(name)} href={`#${name}`}>{error}</a>
+        </li>
+    );
+}
+
 function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary, arbeidslisteStatus }: LeggTilArbeidslisteFormProps) {
     const FieldRenderer = FieldArray as any; // TODO: Finn en bedre løsning
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
@@ -102,6 +119,7 @@ function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary, arbeid
 export const formNavn = 'arbeidsliste_kommentar_skjema';
 
 const LeggTilArbeidslisteReduxForm = validForm({
+    elementCreator: FeedbackElementCreator,
     form: formNavn,
     errorSummaryTitle: (
         <FormattedMessage id="arbeidsliste.form.feiloppsummering.tittel" />
