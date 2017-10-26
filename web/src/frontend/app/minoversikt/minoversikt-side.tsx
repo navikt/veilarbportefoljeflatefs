@@ -12,11 +12,12 @@ import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import { filtervalgShape, statustallShape } from '../proptype-shapes';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
-import { settValgtVeileder } from '../ducks/portefolje';
+import { hentPortefoljeForVeileder, settValgtVeileder } from '../ducks/portefolje';
 import { EnheterState } from '../ducks/enheter';
 import { VeiledereState } from '../ducks/veiledere';
-import { FiltervalgModell, ValgtEnhetModell, } from '../model-interfaces';
+import { FiltervalgModell, ValgtEnhetModell, VeilederModell, } from '../model-interfaces';
 import { ListevisningState } from '../ducks/ui/listevisning';
+import { getSideFromUrl } from '../utils/utils';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -26,12 +27,15 @@ interface StateProps {
     statustall: StatustallState;
     enhettiltak: EnhettiltakState;
     listevisning: ListevisningState;
+    sorteringsfelt: string;
+    sorteringsrekkefolge: string;
 }
 
 interface DispatchProps {
     hentStatusTall: (enhet: string, veileder?: string) => void;
     hentEnhetTiltak: (enhet: string) => void;
-    doSettValgtVeileder: (veileder: string) => void;
+    doSettValgtVeileder: (veileder: VeilederModell) => void;
+    hentPortefolje: (...args) => void;
 }
 
 interface OwnProps {
@@ -44,16 +48,22 @@ type MinoversiktSideProps = StateProps & DispatchProps & OwnProps & InjectedIntl
 
 class MinOversiktSide extends React.Component<MinoversiktSideProps> {
     componentDidMount() {
-        const { veiledere, enheter, ...props } = this.props;
+        const { veiledere, enheter, valgtEnhet, sorteringsfelt, sorteringsrekkefolge, filtervalg, hentPortefolje, ...props } = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
         const innloggetVeileder = { ident: enheter.ident };
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
-        this.props.hentStatusTall(this.props.valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident);
-        this.props.hentEnhetTiltak(this.props.valgtEnhet.enhet!.enhetId);
+        this.props.hentStatusTall(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident);
+        this.props.hentEnhetTiltak(valgtEnhet.enhet!.enhetId);
 
-        if (veilederFraUrl != null && veilederFraUrl.ident != null) {
-            this.props.doSettValgtVeileder(veilederFraUrl.ident);
-        }
+        this.props.doSettValgtVeileder(gjeldendeVeileder);
+
+        const side = getSideFromUrl();
+        const fraIndex = side === '' ? 0 : (side - 1) * 20;
+
+        hentPortefolje(
+            valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, sorteringsfelt, sorteringsrekkefolge, filtervalg, fraIndex
+        );
+
     }
 
     render() {
@@ -131,13 +141,17 @@ const mapStateToProps = (state): StateProps => ({
     filtervalg: state.filtreringMinoversikt,
     statustall: state.statustall,
     enhettiltak: state.enhettiltak,
-    listevisning: state.ui.listevisningMinOversikt
+    listevisning: state.ui.listevisningMinOversikt,
+    sorteringsfelt: state.portefolje.sorteringsfelt,
+    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
 });
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
+    hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
+        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, fra, antall, filtervalg)),
     hentStatusTall: (enhet: string, veileder: string) => dispatch(hentStatusTall(enhet, veileder)),
     hentEnhetTiltak: (enhet: string) => dispatch(hentEnhetTiltak(enhet)),
-    doSettValgtVeileder: (veileder: string) => dispatch(settValgtVeileder(veileder))
+    doSettValgtVeileder: (veileder: VeilederModell) => dispatch(settValgtVeileder(veileder))
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(MinOversiktSide));

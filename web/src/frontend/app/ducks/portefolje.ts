@@ -242,7 +242,7 @@ export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 
 export function hentPortefoljeForVeileder(
     enhet, veileder, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
     const fn = (dispatch) =>
-        Api.hentVeiledersPortefolje(enhet, veileder.ident, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
+        Api.hentVeiledersPortefolje(enhet, veileder, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
             .then((json) => {
                 const { antallTotalt } = json;
                 const side = Math.floor(fra / antall) + 1;

@@ -44,19 +44,8 @@ interface VeilederPortefoljeVisningProps {
 class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps> {
     componentWillMount() {
         const {
-            sorteringsrekkefolge,
-            sorteringsfelt,
-            hentPortefolje,
             valgtEnhet,
-            gjeldendeVeileder,
-            filtervalg
         } = this.props;
-        const side = getSideFromUrl();
-        const fraIndex = side === '' ? 0 : (side - 1) * 20;
-
-        hentPortefolje(
-            valgtEnhet.enhet!.enhetId, gjeldendeVeileder, sorteringsfelt, sorteringsrekkefolge, filtervalg, fraIndex
-        );
 
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId!);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
@@ -191,8 +180,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, fra, antall, filtervalg)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal()),
     closeServerfeilModal: () => dispatch(skjulServerfeilModal())
