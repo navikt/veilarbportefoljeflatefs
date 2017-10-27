@@ -108,8 +108,8 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
-        slettAlle: () => dispatch(clearFiltervalg(ownProps.filtergruppe, ownProps.veileder)),
-        slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.filtergruppe, ownProps.veileder))
+        slettAlle: () => dispatch(clearFiltervalg(ownProps.filtergruppe, ownProps.veileder.ident)),
+        slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.filtergruppe, ownProps.veileder.ident))
     }
 });
 

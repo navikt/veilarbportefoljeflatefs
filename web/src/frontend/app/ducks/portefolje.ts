@@ -202,7 +202,11 @@ export default function reducer(state = initialState, action): PortefoljeState {
 }
 
 // Action Creators
-export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder = {}) {
+export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder) {
+    if(typeof veileder === 'object' ) {
+        console.warn('Veielder should be a string, not an object'); // tslint:disable-line
+        veileder = veileder.ident;
+    }
     const state = getState();
     const enhet = state.enheter.valgtEnhet.enhet.enhetId;
     const rekkefolge = state.portefolje.sorteringsrekkefolge;
