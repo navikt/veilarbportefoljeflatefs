@@ -14,6 +14,7 @@ import ArbeidslisteModalRediger from '../modal/arbeidsliste-modal-rediger';
 import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import { MouseEvent } from 'react';
 import Collapse from 'react-collapse';
+import * as classnames from 'classnames';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -105,17 +106,17 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
         return (
             <div>
                 <li key={bruker.fnr} className="brukerliste__element brukerliste--border-bottom-thin">
-                <CheckBox className="flex col col-xs-1" bruker={bruker} settMarkert={settMarkert} />
-                    <ArbeidslisteIkon skalVises={arbeidslisteBruker} className="col col-xs-1"/>
+                    <CheckBox className="flex col col-xs-1" bruker={bruker} settMarkert={settMarkert} />
+                    <ArbeidslisteIkon className="col col-xs-1" skalVises={arbeidslisteBruker} />
                     <BrukerNavn bruker={bruker} enhetId={enhetId} />
                     <BrukerFnr bruker={bruker} />
                     <MinoversiktDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}/>
                     <Etiketter bruker={bruker}/>
                     <ArbeidslisteButton skalVises={arbeidslisteBruker} apen={this.state.apen} onClick={this.handleArbeidslisteButtonClick} className="col col-xs-1"/>
+                    <Collapse isOpened={this.state.apen}>
+                        <article className="brukerliste__arbeidslisteinnhold">{arbeidslisteBody}</article>
+                    </Collapse>
                 </li>
-                <Collapse isOpened={this.state.apen}>
-                    <article className="brukerliste__arbeidslisteinnhold brukerliste--border-bottom-thin">{arbeidslisteBody}</article>
-                </Collapse>
             </div>
         );
     }
