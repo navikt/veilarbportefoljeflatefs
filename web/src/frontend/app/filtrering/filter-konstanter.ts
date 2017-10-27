@@ -75,7 +75,7 @@ export const servicegruppe = () => ({
 export const ytelse = () => ({
     DAGPENGER: 'Dagpenger',
     ORDINARE_DAGPENGER: { label: 'Ordinære dagpenger', className: 'skjemaelement--innrykk' },
-    DAGPENGER_MED_PERMITTERING: { label: 'Dagpenger med permittering', className: 'skjemaelement--innrykk' },
+    DAGPENGER_MED_PERMITTERING: { label: 'Dagpenger ved permittering', className: 'skjemaelement--innrykk' },
     AAP: 'AAP',
     AAP_MAXTID: { label: 'AAP maxtid', className: 'skjemaelement--innrykk' },
     AAP_UNNTAK: { label: 'AAP unntak', className: 'skjemaelement--innrykk' },
