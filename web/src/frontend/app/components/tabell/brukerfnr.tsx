@@ -5,4 +5,4 @@ interface BrukerFnrProps {
     bruker: BrukerModell
 }
 
-export default ({ bruker }: BrukerFnrProps) => <span className="brukerinformasjon__fnr col col-xs-2">{bruker.fnr}</span>
+export default ({ bruker }: BrukerFnrProps) => <span className="col col-xs-2">{bruker.fnr}</span>

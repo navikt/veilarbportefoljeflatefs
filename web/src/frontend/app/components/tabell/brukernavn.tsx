@@ -11,7 +11,7 @@ const settSammenNavn = (bruker) => {
 };
 
 const brukerNavn = (bruker, enhetId) => (
-    <div className="brukerliste__panelelement col col-xs-3">
+    <div className="col col-xs-3">
         <a
         href={`https://${window.location.hostname}` +
                 `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}

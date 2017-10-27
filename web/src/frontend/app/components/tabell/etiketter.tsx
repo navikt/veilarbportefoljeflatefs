@@ -11,7 +11,7 @@ interface EtiketterProps {
 
 function Etiketter({ bruker }: EtiketterProps) {
     return (
-        <div className="brukerliste__panelelement col col-xs-1">
+        <div className="col col-xs-1">
             <Etikett
                 type={ EtikettType.SIKKERHETSTILTAK}
                 child={fm('enhet.portefolje.tabelletikett.sikkerhetstiltak')}

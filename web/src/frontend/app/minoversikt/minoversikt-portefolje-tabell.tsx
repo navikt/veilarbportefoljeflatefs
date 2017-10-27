@@ -43,17 +43,17 @@ function MinoversiktTabell({
                 sorteringsfelt={portefolje.sorteringsfelt}
                 brukere={brukere}
             />
-            <ul className="minoversikt-brukere-liste">
+            <ul className="brukerliste">
                 {brukere.map((bruker) =>
-                    <li key={bruker.fnr} className="minoversikt-brukere-panel">
                         <MinoversiktBrukerPanel
+                            key={bruker.fnr}
                             bruker={bruker}
                             enhetId={enhetId}
                             settMarkert={settMarkert}
                             filtervalg={filtervalg}
                             innloggetVeileder={innloggetVeileder}
                         />
-                    </li>)}
+                    )}
             </ul>
         </div>
     );

@@ -31,10 +31,6 @@
     }
 }
 
-.brukerliste--minoversikt-padding {
-    padding-left: 20px; //FIXME: Fjern slike magic numbers!!
-}
-
 .portefolje-side {
     background-color: @navLysGra;
 }
@@ -58,81 +54,4 @@
     background: data-uri('./flagg-filled.svg') no-repeat;
     min-width: 1rem;
     float:left;
-}
-
-.minoversikt-brukere-liste {
-    padding: 0;
-    margin-top: 0;
-    .minoversikt-brukere-panel {
-        list-style: none;
-        border-bottom: 1px solid #b7b1a9;
-        .hybridPanel__hode, .panel_hode {
-            padding: 10px 10px 0 10px; //FIXME: Fjern slike magic numbers!!
-
-            .brukerpanel {
-                width: 100%;
-                min-height: 2rem;
-            }
-
-            .brukerinformasjon__wrapper {
-
-                .brukerinformasjon__navn {
-                    display: inline-block;
-                    width: 14rem;
-                    padding-left: 1rem;
-                }
-                .skjema__input {
-                    position: relative;
-                    top: 5px;
-                    display: inline-block;
-                    margin: 0 0 0 0;
-                    width: 1.5rem;
-                    margin-right: 0.5rem;
-                }
-            }
-
-            .etiketter__wrapper {
-                display: inline-block;
-                float: right;
-                margin-right: 5px;
-            }
-        }
-
-        .hybridPanel__hode, .hybridPanel__innhold {
-            background-color: @navLysGra;
-        }
-        .hybridPanel__knapp {
-            cursor: pointer;
-            background-color: @navLysGra;
-            border: none;
-            margin-right: 25px; //FIXME: Fjern slike magic numbers!!
-            margin-bottom: 5px; //FIXME: Fjern slike magic numbers!!
-        }
-
-        .hybridPanel__innhold {
-            padding-left: 3.6rem;
-            padding-right: 20rem;
-
-            .arbeidsliste--panel-footer {
-                text-align: left;
-            }
-        }
-
-        .brukerpanel__body {
-            h5 {
-                margin: 0;
-            }
-            .arbeidsliste-kommentar-tekst {
-                overflow-wrap: break-word;
-            }
-        }
-    }
-}
-
-.minoversikt-liste__wrapper {
-    .panel_hode {
-        .etikett:last-child {
-            margin-right: 32px;
-        }
-    }
 }

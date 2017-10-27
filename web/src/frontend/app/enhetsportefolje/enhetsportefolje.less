@@ -1,7 +1,15 @@
 @brukerliste-padding: 5px;
 
 .brukerliste {
-    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.brukerliste__element {
+    display: flex;
+    min-height: 3rem;
+    padding: 8px 0;
 }
 
 .brukerliste--borders {
@@ -15,19 +23,6 @@
 
 .brukerliste--border-bottom-thin {
     border-bottom: 1px solid @navGra40;
-}
-
-//FIXME: Fjern slike magic numbers!!
-.brukerliste--checkbox-margin {
-    margin-left: 6px;
-}
-
-.brukerliste__panel {
-    margin-left: 32px;
-}
-
-.brukerliste__panelelement {
-    min-height: 2rem;
 }
 
 .brukerliste__liste-element {
@@ -50,6 +45,38 @@
 .brukerliste__sorteringheader {
     min-height: 2rem;
     padding: @brukerliste-padding 0;
+}
+
+.brukerliste__arbeidslisteknapp {
+    cursor: pointer;
+    background-color: @navLysGra;
+    border:none;
+}
+
+.brukerliste__arbeidslisteinnhold {
+    padding: 1rem 0;
+    .clearfix();
+}
+
+.brukerliste__arbeidslisteinnhold-footer {
+    color: @grayInactive;
+    text-align: right;
+    font-style: italic;
+
+    button {
+        font-style: italic;
+        border-bottom: none;
+    }
+}
+
+.brukerliste__arbeidslisteknapp--chevron-apen {
+    .chevron-mixin();
+    .chevron-orientasjon-mixin(opp);
+}
+
+.brukerliste__arbeidslisteknapp--chevron-lukket {
+    .chevron-mixin();
+    .chevron-orientasjon-mixin(ned);
 }
 
 .valgt-sortering {

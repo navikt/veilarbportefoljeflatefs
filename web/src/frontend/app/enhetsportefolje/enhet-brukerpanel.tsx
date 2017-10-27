@@ -27,7 +27,7 @@ function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoP
     return (
         <span>
             { valgteKolonner.includes(Kolonne.VEILEDER) &&
-            <div className="brukerliste__panelelement col col-xs-2">
+            <div className="col col-xs-2">
                 {
                     bruker.veilederId ? <span>{navn}</span> : (
                         <Etikett
@@ -39,7 +39,7 @@ function Veilederinfo({ veileder = null, bruker, valgteKolonner }: VeilederinfoP
                 }
             </div> }
             { valgteKolonner.includes(Kolonne.NAVIDENT) &&
-            <div className="brukerliste__panelelement col col-xs-1">{ident}</div>
+            <div className="col col-xs-1">{ident}</div>
             }
         </span>
     );
