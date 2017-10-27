@@ -13,7 +13,8 @@ const MED_CREDENTIALS = {
 
 const VEILARBVEILEDER_URL = '/veilarbveileder';
 const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
-const VEILARBSITUASJON_URL = '/veilarbsituasjon';
+const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
+const VEILARBOPPFOLGING_OLD_URL = '/veilarbsituasjon';
 
 export function hentVeiledersEnheter() {
     const url = `${VEILARBVEILEDER_URL}/api/veileder/enheter`;
@@ -63,9 +64,12 @@ export function fetchPortefoljeStorrelser(enhetId) {
 }
 
 export function tilordneVeileder(tilordninger) {
-    const url = `${VEILARBSITUASJON_URL}/api/tilordneveileder/`;
+    const url = `${VEILARBOPPFOLGING_URL}/api/tilordneveileder/`;
+    const url_old = `${VEILARBOPPFOLGING_OLD_URL}/api/tilordneveileder/`;
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(tilordninger) };
-    return fetch(url, config).then(sjekkStatuskode);
+    return fetch(url, config)
+        .then((r) => r.status === 404 ? fetch(url_old, config) : r)
+        .then(sjekkStatuskode);
 }
 
 export function hentStatusTall(enhetId) {
