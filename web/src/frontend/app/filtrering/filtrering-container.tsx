@@ -54,7 +54,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
 const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
         endreFiltervalg: (filterId: string, filterVerdi: string) => {
-            dispatch(endreFiltervalg(filterId, filterVerdi, ownProps.filtergruppe, ownProps.veileder.ident));
+            dispatch(endreFiltervalg(filterId, filterVerdi, ownProps.filtergruppe, ownProps.veileder && ownProps.veileder.ident));
         }
     }
 });
