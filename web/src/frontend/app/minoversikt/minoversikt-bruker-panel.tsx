@@ -14,7 +14,6 @@ import ArbeidslisteModalRediger from '../modal/arbeidsliste-modal-rediger';
 import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import { MouseEvent } from 'react';
 import Collapse from 'react-collapse';
-import * as classnames from 'classnames';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
