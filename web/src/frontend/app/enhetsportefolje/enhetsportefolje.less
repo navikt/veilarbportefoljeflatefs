@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     min-height: 3rem;
-    padding: 8px 0;
+    padding: 0 0.5rem;
 }
 
 .brukerliste__checkbox {
@@ -28,11 +28,6 @@
 
 .brukerliste--border-bottom-thin {
     border-bottom: 1px solid @navGra40;
-}
-
-.brukerliste__liste-element {
-    margin: 10px 0 0 0;
-    padding: 0;
 }
 
 .brukerliste__header {
@@ -55,31 +50,30 @@
 .brukerliste__gutter-left {
     display: flex;
     align-items: center;
-    width: 4%;
-    border: solid yellow;
+    min-width: 3rem;
 }
 
 .brukerliste__innhold {
     display: flex;
     align-items: center;
     width: 80%;
-    border: solid tomato;
 }
 
 .brukerliste__gutter-right {
     display: flex;
     flex-direction: row-reverse;
+    flex-grow: 1;
     align-items: center;
-    width: 16%;
-    border: solid green;
+    min-width: 4rem;
 }
 
 .brukerliste__arbeidslisteknapp {
     cursor: pointer;
     padding: 0;
+    margin-left: 1rem;
     background-color: @navLysGra;
     border:none;
-    min-width: 1rem;
+    min-width: 2rem;
 }
 
 .brukerliste__arbeidslisteinnhold {
