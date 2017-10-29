@@ -103,26 +103,24 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
             );
 
         return (
-            <div>
-                <li key={bruker.fnr} className="brukerliste__element brukerliste--border-bottom-thin">
-                    <div className="brukerliste__gutter-left">
-                        <CheckBox bruker={bruker} settMarkert={settMarkert} />
-                        <ArbeidslisteIkon skalVises={arbeidslisteBruker} />
-                    </div>
-                    <div className="brukerliste__innhold">
-                        <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId} />
-                        <BrukerFnr className="col col-xs-2" bruker={bruker} />
-                        <MinoversiktDatokolonner className="col col-xs-7 row" bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}/>
-                    </div>
-                    <div className="brukerliste__gutter-right">
-                        <ArbeidslisteButton skalVises={arbeidslisteBruker} apen={this.state.apen} onClick={this.handleArbeidslisteButtonClick} />
-                        <Etiketter bruker={bruker}/>
-                    </div>
-                    <Collapse isOpened={this.state.apen}>
-                        <article className="brukerliste__arbeidslisteinnhold">{arbeidslisteBody}</article>
-                    </Collapse>
-                </li>
-            </div>
+            <li key={bruker.fnr} className="brukerliste__element brukerliste--border-bottom-thin">
+                <div className="brukerliste__gutter-left">
+                    <CheckBox bruker={bruker} settMarkert={settMarkert} />
+                    <ArbeidslisteIkon skalVises={arbeidslisteBruker} />
+                </div>
+                <div className="brukerliste__innhold">
+                    <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId} />
+                    <BrukerFnr className="col col-xs-2" bruker={bruker} />
+                    <MinoversiktDatokolonner className="col col-xs-7 row" bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}/>
+                </div>
+                <div className="brukerliste__gutter-right">
+                    <ArbeidslisteButton skalVises={arbeidslisteBruker} apen={this.state.apen} onClick={this.handleArbeidslisteButtonClick} />
+                    <Etiketter bruker={bruker}/>
+                </div>
+                <Collapse isOpened={this.state.apen}>
+                    <article className="brukerliste__arbeidslisteinnhold">{arbeidslisteBody}</article>
+                </Collapse>
+            </li>
         );
     }
 }
