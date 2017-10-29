@@ -63,13 +63,12 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
         const {ytelse} = filtervalg;
         const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
         const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
-        const arbeidslisteBruker = bruker.arbeidsliste.arbeidslisteAktiv;
+        const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
 
         const arbeidslisteBody =
-            ( <div>
-                <div className="col col-xs-1"/>
-                <div className="col col-xs-1"/>
-                <div className="col col-xs-9">
+            (<span className="flex">
+                    <span className="brukerliste__gutter-left"/>
+                    <span className="brukerliste__innhold brukerliste__arbeidslisteinnhold flex--grow">
                         <UndertekstBold>
                             <FormattedMessage id="arbeidsliste.kommentar.header"/>
                         </UndertekstBold>
@@ -97,28 +96,29 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                                 sistEndretAv={sistEndretAv}
                             />
                         </p>
-                </div>
-                <div className="col col-xs-1"/>
-                </div>
+                    </span>
+                </span>
             );
 
         return (
-            <li key={bruker.fnr} className="brukerliste__element brukerliste--border-bottom-thin">
-                <div className="brukerliste__gutter-left">
-                    <CheckBox bruker={bruker} settMarkert={settMarkert} />
-                    <ArbeidslisteIkon skalVises={arbeidslisteBruker} />
-                </div>
-                <div className="brukerliste__innhold">
-                    <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId} />
-                    <BrukerFnr className="col col-xs-2" bruker={bruker} />
-                    <MinoversiktDatokolonner className="col col-xs-7 row" bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}/>
-                </div>
-                <div className="brukerliste__gutter-right">
-                    <ArbeidslisteButton skalVises={arbeidslisteBruker} apen={this.state.apen} onClick={this.handleArbeidslisteButtonClick} />
-                    <Etiketter bruker={bruker}/>
+            <li key={bruker.fnr} className="brukerliste--border-bottom-thin">
+                <div className="brukerliste__element">
+                    <div className="brukerliste__gutter-left">
+                        <CheckBox bruker={bruker} settMarkert={settMarkert} />
+                        <ArbeidslisteIkon skalVises={arbeidslisteAktiv} />
+                    </div>
+                    <div className="brukerliste__innhold flex flex--center">
+                        <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId} />
+                        <BrukerFnr className="col col-xs-2" bruker={bruker} />
+                        <MinoversiktDatokolonner className="col col-xs-7 row" bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}/>
+                    </div>
+                    <div className="brukerliste__gutter-right">
+                        <ArbeidslisteButton skalVises={arbeidslisteAktiv} apen={this.state.apen} onClick={this.handleArbeidslisteButtonClick} />
+                        <Etiketter bruker={bruker}/>
+                    </div>
                 </div>
                 <Collapse isOpened={this.state.apen}>
-                    <article className="brukerliste__arbeidslisteinnhold">{arbeidslisteBody}</article>
+                    <article className="brukerliste__arbeidslistepanel">{arbeidslisteBody}</article>
                 </Collapse>
             </li>
         );
