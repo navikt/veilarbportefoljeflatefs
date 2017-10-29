@@ -112,7 +112,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                     <div className="brukerliste__innhold">
                         <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId} />
                         <BrukerFnr className="col col-xs-2" bruker={bruker} />
-                        <MinoversiktDatokolonner className="col col-xs-7" bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}/>
+                        <MinoversiktDatokolonner className="col col-xs-7 row" bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}/>
                     </div>
                     <div className="brukerliste__gutter-right">
                         <ArbeidslisteButton skalVises={arbeidslisteBruker} apen={this.state.apen} onClick={this.handleArbeidslisteButtonClick} />

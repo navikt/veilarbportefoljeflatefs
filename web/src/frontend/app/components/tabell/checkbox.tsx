@@ -10,7 +10,7 @@ interface CheckboxProps {
 
 function Checkbox({bruker, settMarkert, className}: CheckboxProps) {
     return (
-        <span className={className}>
+        <span className={className + " flex"}>
             <input className="checkboks"
 
                    id={`checkbox-${bruker.fnr}`}

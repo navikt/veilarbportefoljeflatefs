@@ -14,7 +14,7 @@
 }
 
 .brukerliste__checkbox {
-    display: block;
+    top: -10px;
 }
 
 .brukerliste--borders {
@@ -48,28 +48,30 @@
 }
 
 .brukerliste__sorteringheader {
+    display: flex;
     min-height: 2rem;
-    padding: @brukerliste-padding 0;
 }
 
 .brukerliste__gutter-left {
     display: flex;
-    width: 6%;
-    background: yellow;
+    align-items: center;
+    width: 4%;
+    border: solid yellow;
 }
 
 .brukerliste__innhold {
     display: flex;
+    align-items: center;
     width: 80%;
-    background: tomato;
+    border: solid tomato;
 }
 
 .brukerliste__gutter-right {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    width: 14%;
-    background: green;
+    width: 16%;
+    border: solid green;
 }
 
 .brukerliste__arbeidslisteknapp {
