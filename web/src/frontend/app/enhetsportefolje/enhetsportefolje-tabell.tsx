@@ -40,10 +40,10 @@ function EnhetTabell({
                 sorteringsfelt={portefolje.sorteringsfelt}
                 valgteKolonner={valgteKolonner}
             />
-            <ul className="brukerliste__body">
+            <ul className="brukerliste">
                 {brukere.map((bruker) =>
-                    <li key={bruker.fnr}>
                         <EnhetBrukerpanel
+                            key={bruker.fnr}
                             bruker={bruker}
                             enhetId={enhetId}
                             settMarkert={settMarkert}
@@ -51,7 +51,7 @@ function EnhetTabell({
                             valgteKolonner={valgteKolonner}
                             brukersVeileder={finnBrukersVeileder(veiledere, bruker)}
                         />
-                    </li>)}
+                )}
             </ul>
         </div>
     );

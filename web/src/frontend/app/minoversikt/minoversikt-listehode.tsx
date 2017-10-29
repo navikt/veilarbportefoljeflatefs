@@ -37,7 +37,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
         <div className="brukerliste__header">
             <div className="brukerliste--borders">
                 <div className="brukerliste__overskriftheader brukerliste--minoversikt-padding">
-                    <div className="brukerliste__gutter-left" />
+                    <div className="brukerliste__gutter-left brukerliste--min-width-3" />
                     <div className="brukerliste__innhold">
                         <Listeoverskrift
                             className="listeoverskrift__bruker listeoverskrift col col-xs-5"
@@ -84,7 +84,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
             </div>
             <div className="brukerliste--border-bottom">
                 <div className="brukerliste__sorteringheader brukerliste--minoversikt-padding">
-                    <div className="brukerliste__gutter-left"/>
+                    <div className="brukerliste__gutter-left brukerliste--min-width-3"/>
                     <div className="brukerliste__innhold">
                         <SorteringHeader
                             className="col col-xs-3"

@@ -67,7 +67,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
 
         const arbeidslisteBody =
             (<span className="flex">
-                    <span className="brukerliste__gutter-left"/>
+                    <span className="brukerliste__gutter-left brukerliste--min-width-3"/>
                     <span className="brukerliste__innhold brukerliste__arbeidslisteinnhold flex--grow">
                         <UndertekstBold>
                             <FormattedMessage id="arbeidsliste.kommentar.header"/>
@@ -101,9 +101,9 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
             );
 
         return (
-            <li key={bruker.fnr} className="brukerliste--border-bottom-thin">
+            <li className="brukerliste--border-bottom-thin">
                 <div className="brukerliste__element">
-                    <div className="brukerliste__gutter-left">
+                    <div className="brukerliste__gutter-left brukerliste--min-width-3">
                         <CheckBox bruker={bruker} settMarkert={settMarkert} />
                         <ArbeidslisteIkon skalVises={arbeidslisteAktiv} />
                     </div>
