@@ -2,7 +2,8 @@ import * as React from 'react';
 import {BrukerModell} from "../../model-interfaces";
 
 interface BrukerFnrProps {
+    className?: string;
     bruker: BrukerModell
 }
 
-export default ({ bruker }: BrukerFnrProps) => <span className="col col-xs-2">{bruker.fnr}</span>
+export default ({ className, bruker }: BrukerFnrProps) => <span className={className}>{bruker.fnr}</span>

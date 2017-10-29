@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 interface UkekolonneProps {
+    className?: string;
     ukerIgjen?: number;
     minVal: number;
     skalVises: boolean;
@@ -15,11 +16,11 @@ function lagUkerTekst(ukerIgjen, minVal) {
     return `${ukerIgjen} uker`;
 }
 
-function UkeKolonne({ ukerIgjen, minVal, skalVises }: UkekolonneProps) {
+function UkeKolonne({ className, ukerIgjen, minVal, skalVises }: UkekolonneProps) {
     if (!skalVises) {
         return null;
     }
-    return (<span className="col col-xs-2">{lagUkerTekst(ukerIgjen, minVal)}</span>);
+    return (<span className={className}>{lagUkerTekst(ukerIgjen, minVal)}</span>);
 }
 
 export default UkeKolonne;

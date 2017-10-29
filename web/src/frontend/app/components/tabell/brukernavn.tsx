@@ -10,8 +10,8 @@ const settSammenNavn = (bruker) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-const brukerNavn = (bruker, enhetId) => (
-    <div className="col col-xs-3">
+const brukerNavn = (className, bruker, enhetId) => (
+    <div className={className}>
         <a
         href={`https://${window.location.hostname}` +
                 `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
@@ -23,15 +23,16 @@ const brukerNavn = (bruker, enhetId) => (
 );
 
 interface BrukerNavnProps {
+    className?: string;
     bruker: BrukerModell;
     enhetId: string;
 }
 
-function BrukerNavn({ bruker, enhetId }: BrukerNavnProps) {
+function BrukerNavn({ className, bruker, enhetId }: BrukerNavnProps) {
     return (
         <FormattedMessage id="listevisning.bruker.i.arbeidsliste">
             {(label) => (
-                    brukerNavn(bruker, enhetId)
+                    brukerNavn(className,bruker, enhetId)
             )}
         </FormattedMessage>
     );

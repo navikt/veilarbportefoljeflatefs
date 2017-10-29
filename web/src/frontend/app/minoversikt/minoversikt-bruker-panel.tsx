@@ -107,11 +107,11 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                 <li key={bruker.fnr} className="brukerliste__element brukerliste--border-bottom-thin">
                     <CheckBox className="flex col col-xs-1" bruker={bruker} settMarkert={settMarkert} />
                     <ArbeidslisteIkon className="col col-xs-1" skalVises={arbeidslisteBruker} />
-                    <BrukerNavn bruker={bruker} enhetId={enhetId} />
-                    <BrukerFnr bruker={bruker} />
-                    <MinoversiktDatokolonner bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}/>
-                    <Etiketter bruker={bruker}/>
-                    <ArbeidslisteButton skalVises={arbeidslisteBruker} apen={this.state.apen} onClick={this.handleArbeidslisteButtonClick} className="col col-xs-1"/>
+                    <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId} />
+                    <BrukerFnr className="col col-xs-2" bruker={bruker} />
+                    <MinoversiktDatokolonner classNamePerColumn="col col-xs-2" bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}/>
+                    <Etiketter className="col col-xs-1" bruker={bruker}/>
+                    <ArbeidslisteButton className="col col-xs-1" skalVises={arbeidslisteBruker} apen={this.state.apen} onClick={this.handleArbeidslisteButtonClick} />
                     <Collapse isOpened={this.state.apen}>
                         <article className="brukerliste__arbeidslisteinnhold">{arbeidslisteBody}</article>
                     </Collapse>

@@ -6,12 +6,13 @@ import { BrukerModell, EtikettType } from '../../model-interfaces';
 const fm = (id) => <FormattedMessage id={id} />;
 
 interface EtiketterProps {
+    className?: string;
     bruker: BrukerModell;
 }
 
-function Etiketter({ bruker }: EtiketterProps) {
+function Etiketter({ className, bruker }: EtiketterProps) {
     return (
-        <div className="col col-xs-1">
+        <div className={className}>
             <Etikett
                 type={ EtikettType.SIKKERHETSTILTAK}
                 child={fm('enhet.portefolje.tabelletikett.sikkerhetstiltak')}
