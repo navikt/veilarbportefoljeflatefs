@@ -12,7 +12,7 @@ interface EtiketterProps {
 
 function Etiketter({ className, bruker }: EtiketterProps) {
     return (
-        <div className={className}>
+        <span className={className}>
             <Etikett
                 type={ EtikettType.SIKKERHETSTILTAK}
                 child={fm('enhet.portefolje.tabelletikett.sikkerhetstiltak')}
@@ -33,7 +33,7 @@ function Etiketter({ className, bruker }: EtiketterProps) {
                 child={fm('enhet.portefolje.tabelletikett.dod')}
                 skalVises={bruker.erDoed === true}
             />
-        </div>
+        </span>
     );
 }
 

@@ -9,17 +9,17 @@ interface ArbeidslisteButtonProps {
     skalVises: boolean
 }
 
-const cls = (className) => classnames('brukerliste__arbeidslisteknapp pull-right', className);
+const cls = (className) => classnames('brukerliste__arbeidslisteknapp', className);
 
 const arbeidslisteButton = ({ className, onClick, apen}: ArbeidslisteButtonProps) => {
     const chevronCls = apen ? "brukerliste__arbeidslisteknapp--chevron-apen" : "brukerliste__arbeidslisteknapp--chevron-lukket";
     return <button
-        className={cls(className)}
-        onClick={onClick}
-        aria-expanded={apen}
-    >
-        <span className={chevronCls}/>
-    </button>
+            className={cls(className)}
+            onClick={onClick}
+            aria-expanded={apen}
+        >
+            <span className={chevronCls}/>
+        </button>
 };
 
-export default (props: ArbeidslisteButtonProps) => props.skalVises ? arbeidslisteButton(props) : null;
+export default (props: ArbeidslisteButtonProps) => props.skalVises ? arbeidslisteButton(props) : <div className="brukerliste__arbeidslisteknapp"/>;

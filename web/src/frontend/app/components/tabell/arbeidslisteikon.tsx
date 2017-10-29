@@ -9,5 +9,5 @@ interface ArbeidslisteikonProps {
 const cls = (className?: string) => classNames('arbeidsliste--ikon', className);
 
 export default ({ className, skalVises}: ArbeidslisteikonProps) => {
-    return <div className={ skalVises ? cls(className) : className}>&nbsp;</div>;
+    return <span className={ skalVises ? cls(className) : className}>&nbsp;</span>;
 }

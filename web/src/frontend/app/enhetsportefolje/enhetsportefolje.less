@@ -7,8 +7,14 @@
 }
 
 .brukerliste__element {
+    display: flex;
+    align-items: center;
     min-height: 3rem;
     padding: 8px 0;
+}
+
+.brukerliste__checkbox {
+    display: block;
 }
 
 .brukerliste--borders {
@@ -46,10 +52,32 @@
     padding: @brukerliste-padding 0;
 }
 
+.brukerliste__gutter-left {
+    display: flex;
+    width: 6%;
+    background: yellow;
+}
+
+.brukerliste__innhold {
+    display: flex;
+    width: 80%;
+    background: tomato;
+}
+
+.brukerliste__gutter-right {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: 14%;
+    background: green;
+}
+
 .brukerliste__arbeidslisteknapp {
     cursor: pointer;
+    padding: 0;
     background-color: @navLysGra;
     border:none;
+    min-width: 1rem;
 }
 
 .brukerliste__arbeidslisteinnhold {
