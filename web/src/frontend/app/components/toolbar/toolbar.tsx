@@ -6,7 +6,7 @@ import SokVeilder from './sok-veileder';
 import DiagramTabellToggle from './diagram-tabell-toggle';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
-import { ListevisningType } from '../../ducks/ui/listevisning';
+import { ListevisningType, Veilederpaginering } from '../../ducks/ui/listevisning';
 import { VeilederModell } from '../../model-interfaces';
 
 interface ToolbarProps {
@@ -16,9 +16,10 @@ interface ToolbarProps {
     visesAnnenVeiledersPortefolje?: boolean;
     children?: React.ReactNode;
     gjeldendeVeileder?: VeilederModell;
+    veilederpaginering: string;
 }
 
-const Toolbar = ({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenVeiledersPortefolje, gjeldendeVeileder }: ToolbarProps) => (
+const Toolbar = ({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenVeiledersPortefolje, gjeldendeVeileder, veilederpaginering }: ToolbarProps) => (
     <section className="toolbar blokk-xs">
         <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
             <VelgalleCheckboks />
@@ -31,7 +32,7 @@ const Toolbar = ({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenV
             <DiagramTabellToggle filtergruppe={filtergruppe} />
         </div>
         <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
-            <Paginering className="toolbar--skille-mellom-elementer" onChange={onPaginering} />
+            <Paginering className="toolbar--skille-mellom-elementer" onChange={onPaginering} skjul={veilederpaginering === Veilederpaginering.DIAGRAMVISNING} />
         </div>
     </section>
 );
