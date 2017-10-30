@@ -322,7 +322,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                 // Venter litt slik at indeks kan komme i sync
                 setTimeout(() => {
                     const side = filtergruppe === 'veileder' ? filtergruppe : 'enhet';
-                    const ident = { ident: veilederIdent || getState().enheter.ident };
+                    const ident = veilederIdent || getState().enheter.ident ;
                     oppdaterPortefolje(getState, dispatch, side, ident);
                 }, 2000);
             })
