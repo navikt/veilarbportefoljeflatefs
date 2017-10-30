@@ -15,6 +15,7 @@ interface StateProps {
     antallSider: number;
     antall: number;
     sideStorrelse: number;
+    skjul: boolean;
 }
 
 interface OwnProps {
@@ -24,12 +25,15 @@ interface OwnProps {
 
 type PagineringProps = StateProps & OwnProps;
 
-function Paginering({className, erPaForsteSide, navarendeSide, erPaSisteSide, antallSider, antall, sideStorrelse, onChange}: PagineringProps) {
+function Paginering({skjul, className, erPaForsteSide, navarendeSide, erPaSisteSide, antallSider, antall, sideStorrelse, onChange}: PagineringProps) {
 
     const fraIndex = (navarendeSide - 1) * sideStorrelse;
     const nyAntall = antall === sideStorrelse ? DEFAULT_PAGINERING_STORRELSE : antall;
     const seAlleState = sideStorrelse !== DEFAULT_PAGINERING_STORRELSE;
 
+    if(skjul) {
+        return null;
+    }
     return (
         <div className={cls(className)}>
             <KnappPanel
