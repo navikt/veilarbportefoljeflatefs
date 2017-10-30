@@ -85,7 +85,7 @@ class ArbeidslisteModal extends Component {
         const fjerne = valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
         return (
             <NavFrontendModal
-                className={`arbeidsliste-modal ${valgteBrukere.length < 3 ? 'modal_overflow' : null}`}
+                className={`arbeidsliste-modal`}
                 contentLabel="arbeidsliste"
                 isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
