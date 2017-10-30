@@ -9,7 +9,7 @@ import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visnin
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { leggEnhetIUrl } from '../utils/utils';
-import { hentStatusTall } from './../ducks/statustall';
+import { hentStatusTall } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
@@ -50,10 +50,6 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
     }
 
     render() {
-        // TODO man må alltid ha en valgtEnhet, denne sjekken kan derfor flyttes ut til Application
-        if (!this.props.valgtEnhet) {
-            return null;
-        }
         const { formatMessage } = this.props.intl;
         const { filtervalg, veilederliste, statustall, enhettiltak, listevisning } = this.props;
 
