@@ -1,19 +1,17 @@
 import * as React from 'react';
+import {MouseEvent} from 'react';
 
-import { FormattedMessage } from 'react-intl';
-import { UndertekstBold } from 'nav-frontend-typografi';
-import BrukerNavn from '../components/tabell/brukernavn';
-import BrukerFnr from '../components/tabell/brukerfnr';
+import {FormattedMessage} from 'react-intl';
+import {UndertekstBold} from 'nav-frontend-typografi';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import CheckBox from '../components/tabell/checkbox';
 import ArbeidslisteIkon from '../components/tabell/arbeidslisteikon';
-import MinoversiktDatokolonner from './minoversikt-datokolonner';
 import Etiketter from '../components/tabell/etiketter';
-import { filtervalgShape, brukerShape } from './../proptype-shapes';
+import {brukerShape, filtervalgShape} from './../proptype-shapes';
 import ArbeidslisteModalRediger from '../modal/arbeidsliste-modal-rediger';
-import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
-import { MouseEvent } from 'react';
+import {BrukerModell, FiltervalgModell} from '../model-interfaces';
 import Collapse from 'react-collapse';
+import MinOversiktKolonner from "./minoversikt-kolonner";
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -107,11 +105,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                         <CheckBox bruker={bruker} settMarkert={settMarkert} />
                         <ArbeidslisteIkon skalVises={arbeidslisteAktiv} />
                     </div>
-                    <div className="brukerliste__innhold flex flex--center">
-                        <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId} />
-                        <BrukerFnr className="col col-xs-2" bruker={bruker} />
-                        <MinoversiktDatokolonner className="col col-xs-7 row" bruker={bruker} ytelse={ytelse} filtervalg={filtervalg}/>
-                    </div>
+                    <MinOversiktKolonner className="brukerliste__innhold flex flex--center" bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} enhetId={enhetId}/>
                     <div className="brukerliste__gutter-right">
                         <ArbeidslisteButton skalVises={arbeidslisteAktiv} apen={this.state.apen} onClick={this.handleArbeidslisteButtonClick} />
                         <Etiketter bruker={bruker}/>

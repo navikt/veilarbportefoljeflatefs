@@ -1,27 +1,24 @@
 import * as React from 'react';
+import {nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper} from "../utils/utils";
+import BrukerNavn from "../components/tabell/brukernavn";
+import BrukerFnr from "../components/tabell/brukerfnr";
+import UkeKolonne from "../components/ukekolonne";
 import {
-    nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper
-} from '../utils/utils';
-import DatoKolonne from '../components/datokolonne';
-import UkeKolonne from '../components/ukekolonne';
-import {
-    ytelsevalg,
-    VENTER_PA_SVAR_FRA_NAV,
-    VENTER_PA_SVAR_FRA_BRUKER,
-    UTLOPTE_AKTIVITETER,
-    MIN_ARBEIDSLISTE,
-    I_AVTALT_AKTIVITET
-} from '../filtrering/filter-konstanter';
-import { BrukerModell, FiltervalgModell } from '../model-interfaces';
+    I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER, VENTER_PA_SVAR_FRA_NAV,
+    ytelsevalg
+} from "../filtrering/filter-konstanter";
+import DatoKolonne from "../components/datokolonne";
+import {BrukerModell, FiltervalgModell} from "../model-interfaces";
 
-interface MinoversiktDatokolonnerProps {
+interface MinOversiktKolonnerProps {
     className?: string;
     bruker: BrukerModell;
     ytelse: string;
     filtervalg: FiltervalgModell;
+    enhetId: string;
 }
 
-function MinoversiktDatokolonner({ className, bruker, ytelse, filtervalg }: MinoversiktDatokolonnerProps) {
+export default function MinOversiktKolonner({className, bruker, ytelse, filtervalg, enhetId} : MinOversiktKolonnerProps) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
     // TODO: bør gjøres før data lagres i storen
@@ -32,7 +29,9 @@ function MinoversiktDatokolonner({ className, bruker, ytelse, filtervalg }: Mino
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
 
     return (
-        <span className={className}>
+        <div className={className}>
+            <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId} />
+            <BrukerFnr className="col col-xs-2" bruker={bruker} />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
@@ -40,10 +39,10 @@ function MinoversiktDatokolonner({ className, bruker, ytelse, filtervalg }: Mino
                 skalVises={ytelse === ytelsevalg.DAGPENGER || ytelse === ytelsevalg.ORDINARE_DAGPENGER}
             />
             <UkeKolonne
-                className="col col-xs-2"
-                ukerIgjen={bruker.permutlopUke}
-                minVal={2}
-                skalVises={ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING}
+            className="col col-xs-2"
+            ukerIgjen={bruker.permutlopUke}
+            minVal={2}
+            skalVises={ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -52,9 +51,9 @@ function MinoversiktDatokolonner({ className, bruker, ytelse, filtervalg }: Mino
                 skalVises={ytelse === ytelsevalg.AAP_MAXTID}
             />
             <DatoKolonne
-                className="col col-xs-2"
-                dato={arbeidslisteFrist}
-                skalVises={filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
+            className="col col-xs-2"
+            dato={arbeidslisteFrist}
+            skalVises={filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -62,9 +61,9 @@ function MinoversiktDatokolonner({ className, bruker, ytelse, filtervalg }: Mino
                 skalVises={[ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse)}
             />
             <DatoKolonne
-                className="col col-xs-2"
-                dato={venterPaSvarFraBruker}
-                skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
+            className="col col-xs-2"
+            dato={venterPaSvarFraBruker}
+            skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -72,9 +71,9 @@ function MinoversiktDatokolonner({ className, bruker, ytelse, filtervalg }: Mino
                 skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
             />
             <DatoKolonne
-                className="col col-xs-2"
-                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
-                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
+            className="col col-xs-2"
+            dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
+            skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -82,12 +81,10 @@ function MinoversiktDatokolonner({ className, bruker, ytelse, filtervalg }: Mino
                 skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
             />
             <DatoKolonne
-                className="col col-xs-2"
-                dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
+            className="col col-xs-2"
+            dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
+            skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
             />
-        </span>
+        </div>
     );
 }
-
-export default MinoversiktDatokolonner;
