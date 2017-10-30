@@ -13,12 +13,11 @@ import {BrukerModell, FiltervalgModell} from "../model-interfaces";
 interface MinOversiktKolonnerProps {
     className?: string;
     bruker: BrukerModell;
-    ytelse: string;
     filtervalg: FiltervalgModell;
     enhetId: string;
 }
 
-export default function MinOversiktKolonner({className, bruker, ytelse, filtervalg, enhetId} : MinOversiktKolonnerProps) {
+export default function MinOversiktKolonner({className, bruker, filtervalg, enhetId} : MinOversiktKolonnerProps) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
     // TODO: bør gjøres før data lagres i storen
@@ -27,6 +26,7 @@ export default function MinOversiktKolonner({className, bruker, ytelse, filterva
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
+    const { ytelse } = filtervalg;
 
     return (
         <div className={className}>

@@ -58,7 +58,6 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
 
     render() {
         const {bruker, enhetId, filtervalg, innloggetVeileder, settMarkert, onClick} = this.props;
-        const {ytelse} = filtervalg;
         const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
         const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
         const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
@@ -105,7 +104,12 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                         <CheckBox bruker={bruker} settMarkert={settMarkert} />
                         <ArbeidslisteIkon skalVises={arbeidslisteAktiv} />
                     </div>
-                    <MinOversiktKolonner className="brukerliste__innhold flex flex--center" bruker={bruker} ytelse={ytelse} filtervalg={filtervalg} enhetId={enhetId}/>
+                    <MinOversiktKolonner
+                        className="brukerliste__innhold flex flex--center"
+                        bruker={bruker}
+                        filtervalg={filtervalg}
+                        enhetId={enhetId}
+                    />
                     <div className="brukerliste__gutter-right">
                         <ArbeidslisteButton skalVises={arbeidslisteAktiv} apen={this.state.apen} onClick={this.handleArbeidslisteButtonClick} />
                         <Etiketter bruker={bruker}/>
