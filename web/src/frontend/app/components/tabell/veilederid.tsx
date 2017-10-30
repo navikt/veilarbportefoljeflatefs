@@ -9,9 +9,8 @@ interface VeilederidProps {
 }
 
 function VeilederId({className, bruker, valgteKolonner}: VeilederidProps) {
-    const ident = bruker.veilederId || '';
-    if (valgteKolonner.includes(Kolonne.NAVIDENT)) {
-        return <div className={className}>{ident}</div>
+    if (valgteKolonner.includes(Kolonne.NAVIDENT) && bruker.veilederId != null) {
+        return <div className={className}>{bruker.veilederId}</div>
     } else {
         return null;
     }
