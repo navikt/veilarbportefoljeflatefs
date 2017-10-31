@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import Chart from 'react-highcharts';
 import { filtervalgShape } from '../../proptype-shapes';
 import { hentDiagramdata } from './../../ducks/diagram';
@@ -24,14 +24,14 @@ class Diagram extends Component {
     }
 
     render() {
-        const { diagramdata, portefolje, filtreringsvalg } = this.props;
+        const { diagramdata, portefolje, filtreringsvalg, intl } = this.props;
 
         return (
             <Innholdslaster avhengigheter={[diagramdata]}>
                 {() => {
                     const antallBrukere = portefolje.data.antallTotalt;
                     const tekster = ledetekster(filtreringsvalg.ytelse);
-                    const data = lagYtelseDataFraFasett(antallBrukere, filtreringsvalg.ytelse, diagramdata.data);
+                    const data = lagYtelseDataFraFasett(antallBrukere, filtreringsvalg.ytelse, diagramdata.data, intl);
 
                     return (
                         <div>
@@ -68,7 +68,8 @@ Diagram.propTypes = {
     veileder: PT.string,
     hentDiagram: PT.func.isRequired,
     diagramdata: PT.object,
-    portefolje: PT.object
+    portefolje: PT.object,
+    intl: intlShape
 };
 Diagram.defaultProps = {
     veileder: null,
@@ -85,4 +86,6 @@ const mapDispatchToProps = (dispatch) => ({
     hentDiagram: (enhet, veileder, filtervalg) => dispatch(hentDiagramdata(enhet, veileder, filtervalg))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Diagram);
+export default connect(mapStateToProps, mapDispatchToProps)(
+    injectIntl(Diagram)
+);

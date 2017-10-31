@@ -30,15 +30,15 @@ export const brukerstatus = ()=> ({
     MIN_ARBEIDSLISTE: 'Min arbeidsliste'
 });
 
-export const alder = () => ({
-    '19-og-under': '19 år og under',
-    '20-24': '20-24 år',
-    '25-29': '25-29 år',
-    '30-39': '30-39 år',
-    '40-49': '40-49 år',
-    '50-59': '50-59 år',
-    '60-66': '60-66 år',
-    '67-70': '67-70 år'
+export const alder = (intl) => ({
+    '19-og-under': intl.formatMessage({id: 'filter.alder.under19'}),
+    '20-24': intl.formatMessage({id: 'filter.alder.20-24'}),
+    '25-29': intl.formatMessage({id: 'filter.alder.25-29'}),
+    '30-39': intl.formatMessage({id: 'filter.alder.30-39'}),
+    '40-49': intl.formatMessage({id: 'filter.alder.40-49'}),
+    '50-59': intl.formatMessage({id: 'filter.alder.50-59'}),
+    '60-66': intl.formatMessage({id: 'filter.alder.60-66'}),
+    '67-70': intl.formatMessage({id: 'filter.alder.60-66'})
 });
 
 export const fodselsdagIMnd = () => range(1, 31, true).reduce((acc, x) => ({
@@ -51,56 +51,56 @@ export const kjonn = ()=> ({
     M: 'Mann'
 });
 
-export const innsatsgruppe = () => ({
-    IKVAL: 'Standardinnsats',
-    BFORM: 'Situasjonsbestemt innsats',
-    BATT: 'Spesielt tilpasset innsats',
-    VARIG: 'Varig tilpasset'
+export const innsatsgruppe = (intl) => ({
+    IKVAL: intl.formatMessage({id: 'filter.innsatsgruppe.ikval'}),
+    BFORM: intl.formatMessage({id: 'filter.innsatsgruppe.bform'}),
+    BATT: intl.formatMessage({id: 'filter.innsatsgruppe.batt'}),
+    VARIG: intl.formatMessage({id: 'filter.innsatsgruppe.varig'})
 });
 
-export const formidlingsgruppe = () => ({
-    ARBS: 'Arbeidssøker',
-    IARBS: 'Ikke arbeidssøker',
-    ISERV: 'Ikke servicebehov',
-    PARBS: 'Pre arbeidssøker',
-    RARBS: 'Pre reaktivert arbeidssøker'
+export const formidlingsgruppe = (intl) => ({
+    ARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.arbs'}),
+    IARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.arbs'}),
+    ISERV: intl.formatMessage({id: 'filter.formidlingsgruppe.iserv'}),
+    PARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.parbs'}),
+    RARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.rarbs'})
 });
-export const servicegruppe = () => ({
-    BKART: 'Behov for arbeidsevnevurdering',
-    IVURD: 'Ikke vurdert',
-    OPPFI: 'Helserelatert arbeidsrettet oppfølging i NAV',
-    VURDI: 'Sykmeldt oppfølging på arbeidsplassen',
-    VURDU: 'Sykmeldt uten arbeidsgiver'
+export const servicegruppe = (intl) => ({
+    BKART: intl.formatMessage({id: 'filter.servicegruppe.bkart'}),
+    IVURD: intl.formatMessage({id: 'filter.servicegruppe.ivurd'}),
+    OPPFI: intl.formatMessage({id: 'filter.servicegruppe.oppfi'}),
+    VURDI: intl.formatMessage({id: 'filter.servicegruppe.vurdi'}),
+    VURDU: intl.formatMessage({id: 'filter.servicegruppe.vurdu'})
 });
-export const ytelse = () => ({
-    DAGPENGER: 'Dagpenger',
-    ORDINARE_DAGPENGER: { label: 'Ordinære dagpenger', className: 'skjemaelement--innrykk' },
-    DAGPENGER_MED_PERMITTERING: { label: 'Dagpenger ved permittering', className: 'skjemaelement--innrykk' },
-    AAP: 'AAP',
-    AAP_MAXTID: { label: 'AAP maxtid', className: 'skjemaelement--innrykk' },
-    AAP_UNNTAK: { label: 'AAP unntak', className: 'skjemaelement--innrykk' },
-    TILTAKSPENGER: 'Tiltakspenger'
+export const ytelse = (intl) => ({
+    DAGPENGER: intl.formatMessage({id: 'filter.ytelse.dagpenger'}),
+    ORDINARE_DAGPENGER: { label: intl.formatMessage({id: 'filter.ytelse.ord-dagpenger'}), className: 'skjemaelement--innrykk' },
+    DAGPENGER_MED_PERMITTERING: { label: intl.formatMessage({id: 'filter.ytelse.dagpenger-permitering'}), className: 'skjemaelement--innrykk' },
+    AAP: intl.formatMessage({id: 'filter.ytelse.aap'}),
+    AAP_MAXTID: { label: intl.formatMessage({id: 'filter.ytelse.aap-maxtid'}), className: 'skjemaelement--innrykk' },
+    AAP_UNNTAK: { label: intl.formatMessage({id: 'filter.ytelse.aap-unntak'}), className: 'skjemaelement--innrykk' },
+    TILTAKSPENGER: intl.formatMessage({id: 'filter.ytelse.tiltakspenger'})
 });
 
-export const ytelsevalg: {[id: string]: string} = Object.keys(ytelse()).reduce((acc, val) => ({ ...acc, [val]: val }), {});
+export const ytelsevalg: (intl?: any) => {[id: string]: string} = (intl) => Object.keys(ytelse(intl)).reduce((acc, val) => ({ ...acc, [val]: val }), {});
 
-export const ytelseUtlopsSortering = {
-    [ytelsevalg.DAGPENGER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [ytelsevalg.ORDINARE_DAGPENGER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [ytelsevalg.DAGPENGER_MED_PERMITTERING]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
-    [ytelsevalg.AAP]: Sorteringsfelt.UTLOPSDATO,
-    [ytelsevalg.AAP_UNNTAK]: Sorteringsfelt.UTLOPSDATO,
-    [ytelsevalg.AAP_MAXTID]: Sorteringsfelt.AAP_MAXTID_UKE,
-    [ytelsevalg.TILTAKSPENGER]: Sorteringsfelt.UTLOPSDATO
-};
+export const ytelseUtlopsSortering = (intl) => ({
+    [ytelsevalg(intl).DAGPENGER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
+    [ytelsevalg(intl).ORDINARE_DAGPENGER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
+    [ytelsevalg(intl).DAGPENGER_MED_PERMITTERING]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
+    [ytelsevalg(intl).AAP]: Sorteringsfelt.UTLOPSDATO,
+    [ytelsevalg(intl).AAP_UNNTAK]: Sorteringsfelt.UTLOPSDATO,
+    [ytelsevalg(intl).AAP_MAXTID]: Sorteringsfelt.AAP_MAXTID_UKE,
+    [ytelsevalg(intl).TILTAKSPENGER]: Sorteringsfelt.UTLOPSDATO
+});
 
-export const rettighetsgruppe = () => ({
-    AAP: 'Arbeidsavklaringspenger',
-    DAGP: 'Dagpenger',
-    INDS: 'Tiltakspenger',
-    IYT: 'Ingen livsoppholdsytelser Arena',
-    VENT: 'Ventestønad',
-    VLONN: 'Ventelønn'
+export const rettighetsgruppe = (intl) => ({
+    AAP: intl.formatMessage({id: 'filter.rettighetsgruppe.aap'}),
+    DAGP: intl.formatMessage({id: 'filter.rettighetsgruppe.dagp'}),
+    INDS: intl.formatMessage({id: 'filter.rettighetsgruppe.inds'}),
+    IYT: intl.formatMessage({id: 'filter.rettighetsgruppe.iyt'}),
+    VENT: intl.formatMessage({id: 'filter.rettighetsgruppe.vent'}),
+    VLONN: intl.formatMessage({id: 'filter.rettighetsgruppe.vlonn'})
 });
 
 export const aktiviteter = (intl) => ({

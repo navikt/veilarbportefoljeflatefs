@@ -2,6 +2,7 @@ import * as React from 'react';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/ukekolonne';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import {
     I_AVTALT_AKTIVITET,
     UTLOPTE_AKTIVITETER,
@@ -25,7 +26,10 @@ interface EnhetKolonnerProps {
     brukersVeileder?: VeilederModell;
 }
 
-export default function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
+type Props = EnhetKolonnerProps & InjectedIntlProps;
+
+function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder, intl}: Props) {
+    const ytelsevalgIntl = ytelsevalg(intl);
     const { ytelse } = filtervalg;
     const utlopsDato = bruker.utlopsdato ? new Date(bruker.utlopsdato) : null;
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
@@ -42,24 +46,24 @@ export default function EnhetKolonner({ className, bruker, enhetId, filtervalg, 
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalg.DAGPENGER || ytelse === ytelsevalg.ORDINARE_DAGPENGER)}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.DAGPENGER || ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER)}
             />
             <UkeKolonne
             className="col col-xs-2"
             ukerIgjen={bruker.permutlopUke}
             minVal={2}
-            skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING)}
+            skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.aapmaxtidUke}
                 minVal={12}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalg.AAP_MAXTID)}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_MAXTID)}
             />
             <DatoKolonne
             className="col col-xs-2"
             dato={utlopsDato}
-            skalVises={ytelseErValgtKolonne && [ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse)}
+            skalVises={ytelseErValgtKolonne && [ytelsevalgIntl.TILTAKSPENGER, ytelsevalgIntl.AAP_UNNTAK, ytelsevalgIntl.AAP].includes(ytelse)}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -91,3 +95,5 @@ export default function EnhetKolonner({ className, bruker, enhetId, filtervalg, 
         </div>
     );
 }
+
+export default injectIntl(EnhetKolonner);

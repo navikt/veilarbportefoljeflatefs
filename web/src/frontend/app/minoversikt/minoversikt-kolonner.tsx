@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper } from '../utils/utils';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
@@ -17,9 +18,11 @@ interface MinOversiktKolonnerProps {
     enhetId: string;
 }
 
-export default function MinOversiktKolonner({className, bruker, filtervalg, enhetId}: MinOversiktKolonnerProps) {
-    const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
+type Props = MinOversiktKolonnerProps & InjectedIntlProps;
 
+function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}: Props) {
+    const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
+    const ytelsevalgIntl = ytelsevalg(intl);
     // TODO: bør gjøres før data lagres i storen
     const arbeidslisteFrist = bruker.arbeidsliste.frist ? new Date(bruker.arbeidsliste.frist) : null;
     const utlopsdato = bruker.utlopsdato ? new Date(bruker.utlopsdato) : null;
@@ -36,19 +39,19 @@ export default function MinOversiktKolonner({className, bruker, filtervalg, enhe
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
-                skalVises={ytelse === ytelsevalg.DAGPENGER || ytelse === ytelsevalg.ORDINARE_DAGPENGER}
+                skalVises={ytelse === ytelsevalgIntl.DAGPENGER || ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER}
             />
             <UkeKolonne
             className="col col-xs-2"
             ukerIgjen={bruker.permutlopUke}
             minVal={2}
-            skalVises={ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING}
+            skalVises={ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.aapmaxtidUke}
                 minVal={12}
-                skalVises={ytelse === ytelsevalg.AAP_MAXTID}
+                skalVises={ytelse === ytelsevalgIntl.AAP_MAXTID}
             />
             <DatoKolonne
             className="col col-xs-2"
@@ -58,7 +61,7 @@ export default function MinOversiktKolonner({className, bruker, filtervalg, enhe
             <DatoKolonne
                 className="col col-xs-2"
                 dato={utlopsdato}
-                skalVises={[ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse)}
+                skalVises={[ytelsevalgIntl.TILTAKSPENGER, ytelsevalgIntl.AAP_UNNTAK, ytelsevalgIntl.AAP].includes(ytelse)}
             />
             <DatoKolonne
             className="col col-xs-2"
@@ -88,3 +91,5 @@ export default function MinOversiktKolonner({className, bruker, filtervalg, enhe
         </div>
     );
 }
+
+export default injectIntl(MinoversiktDatokolonner);
