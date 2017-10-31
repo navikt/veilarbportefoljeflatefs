@@ -26,7 +26,7 @@ interface EnhetKolonnerProps {
     brukersVeileder?: VeilederModell;
 }
 
-type Props = EnhetDatokolonnerProps & InjectedIntlProps;
+type Props = EnhetKolonnerProps & InjectedIntlProps;
 
 function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder, intl}: Props) {
     const ytelsevalgIntl = ytelsevalg(intl);

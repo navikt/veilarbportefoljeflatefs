@@ -18,7 +18,7 @@ interface MinOversiktKolonnerProps {
     enhetId: string;
 }
 
-type Props = MinoversiktDatokolonnerProps & InjectedIntlProps;
+type Props = MinOversiktKolonnerProps & InjectedIntlProps;
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}: Props) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
