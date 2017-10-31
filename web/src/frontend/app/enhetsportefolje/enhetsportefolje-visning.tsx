@@ -59,6 +59,7 @@ interface EnhetsportefoljeVisningProps {
     closeServerfeilModal: () => void;
     feilmeldingModal: FeilmeldingModalModell;
     closeFeilmeldingModal: () => void;
+    veilederpaginering: string;
 }
 
 class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningProps> {
@@ -124,7 +125,8 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             serverfeilModalSkalVises,
             closeServerfeilModal,
             feilmeldingModal,
-            closeFeilmeldingModal
+            closeFeilmeldingModal,
+            veilederpaginering
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
@@ -158,6 +160,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                             antall
                         )}
                         sokVeilederSkalVises
+                        veilederpaginering={veilederpaginering}
                     />
                     {
                         visDiagram ?
@@ -193,7 +196,8 @@ const mapStateToProps = (state) => ({
     filtervalg: state.filtrering,
     visningsmodus: state.veilederpaginering.visningsmodus,
     serverfeilModalSkalVises: state.serverfeilModal.modalVises,
-    feilmeldingModal: state.feilmeldingModal
+    feilmeldingModal: state.feilmeldingModal,
+    veilederpaginering: state.veilederpaginering.visningsmodus
 });
 
 const mapDispatchToProps = (dispatch) => ({

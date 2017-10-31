@@ -20,7 +20,7 @@ interface ArbeidslisteModalRedigerProps {
 function ArbeidslisteModalRediger({ bruker, isOpen, lukkModal, innloggetVeileder, ...props }: ArbeidslisteModalRedigerProps) {
     return (
         <NavFrontendModal
-            className="arbeidsliste-modal modal_overflow"
+            className="arbeidsliste-modal"
             contentLabel="arbeidsliste"
             isOpen={isOpen || false}
             onRequestClose={lukkModal}

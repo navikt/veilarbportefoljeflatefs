@@ -4,7 +4,6 @@ import { enhetShape, filtervalgShape, veilederShape } from './../proptype-shapes
 import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
 import { settBrukerSomMarkert } from '../ducks/portefolje';
 import MinOversiktListehode from './minoversikt-listehode';
-import CheckBox from '../components/tabell/checkbox';
 import {
     BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge, ValgtEnhetModell, VeilederModell
 } from '../model-interfaces';
@@ -44,18 +43,17 @@ function MinoversiktTabell({
                 sorteringsfelt={portefolje.sorteringsfelt}
                 brukere={brukere}
             />
-            <ul className="minoversikt-brukere-liste">
+            <ul className="brukerliste">
                 {brukere.map((bruker) =>
-                    <li key={bruker.fnr} className="minoversikt-brukere-panel">
-                        <CheckBox className="minoversikt__checkbox" bruker={bruker} settMarkert={settMarkert} />
                         <MinoversiktBrukerPanel
+                            key={bruker.fnr}
                             bruker={bruker}
                             enhetId={enhetId}
                             settMarkert={settMarkert}
                             filtervalg={filtervalg}
                             innloggetVeileder={innloggetVeileder}
                         />
-                    </li>)}
+                    )}
             </ul>
         </div>
     );
