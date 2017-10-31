@@ -56,7 +56,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
         <div className="brukerliste__header">
             <div className="brukerliste--borders">
                 <div className="brukerliste__overskriftheader">
-                    <div className="brukerliste__gutter-left brukerliste--min-width-2"/>
+                    <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>
                     <div className="brukerliste__innhold">
                         <Listeoverskrift
                             className="listeoverskrift__bruker listeoverskriftcol col-xs-5"
@@ -104,7 +104,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
             </div>
             <div className="brukerliste--border-bottom">
                 <div className="brukerliste__sorteringheader typo-undertekst">
-                    <div className="brukerliste__gutter-left brukerliste--min-width-2"/>
+                    <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>
                     <div className="brukerliste__innhold">
                         <SorteringHeader
                             sortering={Sorteringsfelt.ETTERNAVN}

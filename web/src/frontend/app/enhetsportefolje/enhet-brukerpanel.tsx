@@ -20,7 +20,7 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
 
     return (
         <li className="brukerliste__element brukerliste--border-bottom-thin">
-                <div className="brukerliste__gutter-left brukerliste--min-width-2">
+                <div className="brukerliste__gutter-left brukerliste--min-width-enhet">
                     <CheckBox bruker={bruker} settMarkert={settMarkert} />
                 </div>
                 <EnhetKolonner

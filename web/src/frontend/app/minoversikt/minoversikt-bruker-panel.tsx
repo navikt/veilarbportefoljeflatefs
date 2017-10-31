@@ -61,7 +61,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
         return (
             <li className="brukerliste--border-bottom-thin">
                 <div className="brukerliste__element">
-                    <div className="brukerliste__gutter-left brukerliste--min-width-3">
+                    <div className="brukerliste__gutter-left brukerliste--min-width-minside">
                         <CheckBox bruker={bruker} settMarkert={settMarkert} />
                         <ArbeidslisteIkon skalVises={arbeidslisteAktiv} />
                     </div>
