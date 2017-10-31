@@ -73,10 +73,11 @@ export function maned(antallBrukere, diagramdata) {
     };
 }
 
-export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata) {
-    if (valgtYtelse === ytelsevalg.AAP || valgtYtelse === ytelsevalg.TILTAKSPENGER) {
+export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata, intl) {
+    const ytelsevalgIntl = ytelsevalg(intl);
+    if (valgtYtelse === ytelsevalgIntl.AAP || valgtYtelse === ytelsevalgIntl.TILTAKSPENGER) {
         return maned(antallBrukere, diagramdata);
-    } else if (valgtYtelse === ytelsevalg.AAP_MAXTID) {
+    } else if (valgtYtelse === ytelsevalgIntl.AAP_MAXTID) {
         return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 215, step: 11 });
     }
     return ukeInndeling(antallBrukere, diagramdata, { min: 2, max: 52, step: 3 });

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import {
     nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper
 } from '../utils/utils';
@@ -20,9 +21,11 @@ interface MinoversiktDatokolonnerProps {
     filtervalg: FiltervalgModell;
 }
 
-function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }: MinoversiktDatokolonnerProps) {
-    const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
+type Props = MinoversiktDatokolonnerProps & InjectedIntlProps;
 
+function MinoversiktDatokolonner({ bruker, ytelse, filtervalg, intl }: Props) {
+    const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
+    const ytelsevalgIntl = ytelsevalg(intl);
     // TODO: bør gjøres før data lagres i storen
     const arbeidslisteFrist = bruker.arbeidsliste.frist ? new Date(bruker.arbeidsliste.frist) : null;
     const utlopsdato = bruker.utlopsdato ? new Date(bruker.utlopsdato) : null;
@@ -35,17 +38,17 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }: MinoversiktDato
             <UkeKolonne
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
-                skalVises={ytelse === ytelsevalg.DAGPENGER || ytelse === ytelsevalg.ORDINARE_DAGPENGER}
+                skalVises={ytelse === ytelsevalgIntl.DAGPENGER || ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER}
             />
             <UkeKolonne
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
-                skalVises={ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING}
+                skalVises={ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
             />
             <UkeKolonne
                 ukerIgjen={bruker.aapmaxtidUke}
                 minVal={12}
-                skalVises={ytelse === ytelsevalg.AAP_MAXTID}
+                skalVises={ytelse === ytelsevalgIntl.AAP_MAXTID}
             />
             <DatoKolonne
                 dato={arbeidslisteFrist}
@@ -53,7 +56,7 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }: MinoversiktDato
             />
             <DatoKolonne
                 dato={utlopsdato}
-                skalVises={[ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse)}
+                skalVises={[ytelsevalgIntl.TILTAKSPENGER, ytelsevalgIntl.AAP_UNNTAK, ytelsevalgIntl.AAP].includes(ytelse)}
             />
             <DatoKolonne
                 dato={venterPaSvarFraBruker}
@@ -79,4 +82,4 @@ function MinoversiktDatokolonner({ bruker, ytelse, filtervalg }: MinoversiktDato
     );
 }
 
-export default MinoversiktDatokolonner;
+export default injectIntl(MinoversiktDatokolonner);

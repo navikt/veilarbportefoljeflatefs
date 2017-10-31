@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ChangeEvent } from 'react';
 import Dropdown from '../../dropdown/dropdown';
 import { Checkbox } from 'nav-frontend-skjema';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { AppState } from '../../../reducer';
 import { Action, Dispatch } from 'redux';
 import { avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ } from '../../../ducks/ui/listevisning';
@@ -17,7 +17,8 @@ interface ListevisningRadProps {
     onChange: (name: Kolonne, checked: boolean) => void;
 }
 
-const ListevisningRad = (props: ListevisningRadProps) => {
+type Props = ListevisningRadProps;
+const ListevisningRad = (props: Props) => {
     const alternativ = alternativerConfig.get(props.kolonne);
     if (alternativ == null) {
         return null;
@@ -51,7 +52,7 @@ interface DispatchProps {
     avvelgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => void;
 }
 
-type ListevisningProps = OwnProps & StateProps & DispatchProps;
+type ListevisningProps = OwnProps & StateProps & DispatchProps & InjectedIntlProps;
 
 const Listevisning = (props: ListevisningProps) => {
     function handleChange(name, checked) {
@@ -71,7 +72,7 @@ const Listevisning = (props: ListevisningProps) => {
     }
 
     return (
-        <Dropdown name="Listevisning" disabled={props.muligeAlternativer.length <= 5}
+        <Dropdown name={props.intl.formatMessage({id: 'toolbar.listevisning'})} disabled={props.muligeAlternativer.length <= 5}
                   className="dropdown--fixed dropdown--toolbar">
             <section className="radio-filterform__valg">
                 <div className="blokk-s">
@@ -107,4 +108,6 @@ function mapDispatchToProps(dispatch: Dispatch<Action>): DispatchProps {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Listevisning);
+export default connect(mapStateToProps, mapDispatchToProps)(
+    injectIntl(Listevisning)
+);

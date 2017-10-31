@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
     nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper
 } from '../utils/utils';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { ytelsevalg,
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -20,8 +21,11 @@ interface EnhetDatokolonnerProps {
     valgteKolonner: Kolonne[];
 }
 
-function EnhetDatokolonner({ bruker, ytelse= '', filtervalg, valgteKolonner }: EnhetDatokolonnerProps) {
+type Props = EnhetDatokolonnerProps & InjectedIntlProps;
+
+function EnhetDatokolonner({ bruker, ytelse= '', filtervalg, valgteKolonner, intl }: Props) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
+    const ytelsevalgIntl = ytelsevalg(intl);
 
     // TODO: bør gjøres før data lagres i storen
     const utlopsDato = bruker.utlopsdato ? new Date(bruker.utlopsdato) : null;
@@ -34,21 +38,21 @@ function EnhetDatokolonner({ bruker, ytelse= '', filtervalg, valgteKolonner }: E
             <UkeKolonne
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalg.DAGPENGER || ytelse === ytelsevalg.ORDINARE_DAGPENGER)}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.DAGPENGER || ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER)}
             />
             <UkeKolonne
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING)}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING)}
             />
             <UkeKolonne
                 ukerIgjen={bruker.aapmaxtidUke}
                 minVal={12}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalg.AAP_MAXTID)}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_MAXTID)}
             />
             <DatoKolonne
                 dato={utlopsDato}
-                skalVises={ytelseErValgtKolonne && [ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse)}
+                skalVises={ytelseErValgtKolonne && [ytelsevalgIntl.TILTAKSPENGER, ytelsevalgIntl.AAP_UNNTAK, ytelsevalgIntl.AAP].includes(ytelse)}
             />
             <DatoKolonne
                 dato={venterPaSvarFraBruker}
@@ -74,4 +78,4 @@ function EnhetDatokolonner({ bruker, ytelse= '', filtervalg, valgteKolonner }: E
     );
 }
 
-export default EnhetDatokolonner;
+export default injectIntl(EnhetDatokolonner);

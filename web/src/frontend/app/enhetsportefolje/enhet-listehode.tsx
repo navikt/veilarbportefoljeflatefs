@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import SorteringHeader from '../components/tabell/sortering-header';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';
@@ -48,8 +48,10 @@ interface EnhetListehodeProps {
     sorteringsfelt: string;
 }
 
-function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: EnhetListehodeProps) {
-    const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[filtervalg.ytelse];
+type Props = EnhetListehodeProps & InjectedIntlProps;
+
+function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner, intl }: Props) {
+    const ytelseUtlopsdatoNavn = ytelseUtlopsSortering(intl)[filtervalg.ytelse];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' ? 'ddmmyy' : 'uker';
     return (
@@ -185,4 +187,4 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
     );
 }
 
-export default EnhetListehode;
+export default injectIntl(EnhetListehode);
