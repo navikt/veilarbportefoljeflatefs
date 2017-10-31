@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {MouseEvent} from 'react';
+import { MouseEvent } from 'react';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import CheckBox from '../components/tabell/checkbox';
 import ArbeidslisteIkon from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
-import {brukerShape, filtervalgShape} from './../proptype-shapes';
-import {BrukerModell, FiltervalgModell} from '../model-interfaces';
+import { brukerShape, filtervalgShape } from './../proptype-shapes';
+import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import Collapse from 'react-collapse';
-import MinOversiktKolonner from "./minoversikt-kolonner";
-import ArbeidslistePanel from "./minoversikt-arbeidslistepanel";
+import MinOversiktKolonner from './minoversikt-kolonner';
+import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -34,7 +34,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
         };
         this.redigerOnClickHandler = this.redigerOnClickHandler.bind(this);
         this.lukkRedigerArbeidslisteModal = this.lukkRedigerArbeidslisteModal.bind(this);
-        this.handleArbeidslisteButtonClick = this.handleArbeidslisteButtonClick.bind(this)
+        this.handleArbeidslisteButtonClick = this.handleArbeidslisteButtonClick.bind(this);
     }
 
     handleArbeidslisteButtonClick(event) {

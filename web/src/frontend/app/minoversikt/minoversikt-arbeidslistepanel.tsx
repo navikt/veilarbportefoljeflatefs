@@ -1,8 +1,8 @@
-import * as React from 'react'
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import ArbeidslisteModalRediger from "../modal/arbeidsliste-modal-rediger";
-import {UndertekstBold} from "nav-frontend-typografi";
-import {BrukerModell} from "../model-interfaces";
+import ArbeidslisteModalRediger from '../modal/arbeidsliste-modal-rediger';
+import { UndertekstBold } from 'nav-frontend-typografi';
+import { BrukerModell } from '../model-interfaces';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
@@ -50,5 +50,5 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder, redigerArb
                         </span>
                     </span>
         </article>
-    )
+    );
 }

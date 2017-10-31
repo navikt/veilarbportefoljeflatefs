@@ -1,18 +1,20 @@
-import * as React from 'react'
-import BrukerNavn from "../components/tabell/brukernavn";
-import BrukerFnr from "../components/tabell/brukerfnr";
-import UkeKolonne from "../components/ukekolonne";
+import * as React from 'react';
+import BrukerNavn from '../components/tabell/brukernavn';
+import BrukerFnr from '../components/tabell/brukerfnr';
+import UkeKolonne from '../components/ukekolonne';
 import {
     I_AVTALT_AKTIVITET,
-    UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER, VENTER_PA_SVAR_FRA_NAV, ytelse,
+    UTLOPTE_AKTIVITETER,
+    VENTER_PA_SVAR_FRA_BRUKER,
+    VENTER_PA_SVAR_FRA_NAV,
     ytelsevalg
-} from "../filtrering/filter-konstanter";
-import DatoKolonne from "../components/datokolonne";
-import {Kolonne} from "../ducks/ui/listevisning";
-import {BrukerModell, FiltervalgModell, VeilederModell} from "../model-interfaces";
-import {nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper} from "../utils/utils";
-import VeilederNavn from "../components/tabell/veiledernavn";
-import VeilederId from "../components/tabell/veilederid";
+} from '../filtrering/filter-konstanter';
+import DatoKolonne from '../components/datokolonne';
+import { Kolonne } from '../ducks/ui/listevisning';
+import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
+import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper } from '../utils/utils';
+import VeilederNavn from '../components/tabell/veiledernavn';
+import VeilederId from '../components/tabell/veilederid';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -87,5 +89,5 @@ export default function EnhetKolonner({ className, bruker, enhetId, filtervalg, 
             <VeilederNavn className="col col-xs-3" bruker={bruker} valgteKolonner={valgteKolonner} veileder={brukersVeileder}/>
             <VeilederId className="col col-xs-2" bruker={bruker} valgteKolonner={valgteKolonner}/>
         </div>
-    )
+    );
 }

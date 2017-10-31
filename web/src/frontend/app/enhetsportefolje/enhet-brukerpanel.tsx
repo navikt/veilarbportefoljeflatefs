@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Etiketter from '../components/tabell/etiketter';
-import {filtervalgShape, veilederShape} from '../proptype-shapes';
-import {FiltervalgModell, VeilederModell} from '../model-interfaces';
-import {Kolonne} from '../ducks/ui/listevisning';
+import { filtervalgShape, veilederShape } from '../proptype-shapes';
+import { FiltervalgModell, VeilederModell } from '../model-interfaces';
+import { Kolonne } from '../ducks/ui/listevisning';
 import CheckBox from '../components/tabell/checkbox';
-import EnhetKolonner from "./enhet-kolonner";
+import EnhetKolonner from './enhet-kolonner';
 
 interface EnhetBrukerpanelProps {
     bruker: any;
@@ -16,7 +16,6 @@ interface EnhetBrukerpanelProps {
 }
 
 function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner }: EnhetBrukerpanelProps) {
-
 
     return (
         <li className="brukerliste__element brukerliste--border-bottom-thin">

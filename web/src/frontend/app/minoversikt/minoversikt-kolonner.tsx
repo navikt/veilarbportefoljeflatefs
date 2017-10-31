@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper} from "../utils/utils";
-import BrukerNavn from "../components/tabell/brukernavn";
-import BrukerFnr from "../components/tabell/brukerfnr";
-import UkeKolonne from "../components/ukekolonne";
+import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper } from '../utils/utils';
+import BrukerNavn from '../components/tabell/brukernavn';
+import BrukerFnr from '../components/tabell/brukerfnr';
+import UkeKolonne from '../components/ukekolonne';
 import {
     I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER, VENTER_PA_SVAR_FRA_NAV,
     ytelsevalg
-} from "../filtrering/filter-konstanter";
-import DatoKolonne from "../components/datokolonne";
-import {BrukerModell, FiltervalgModell} from "../model-interfaces";
+} from '../filtrering/filter-konstanter';
+import DatoKolonne from '../components/datokolonne';
+import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -17,7 +17,7 @@ interface MinOversiktKolonnerProps {
     enhetId: string;
 }
 
-export default function MinOversiktKolonner({className, bruker, filtervalg, enhetId} : MinOversiktKolonnerProps) {
+export default function MinOversiktKolonner({className, bruker, filtervalg, enhetId}: MinOversiktKolonnerProps) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
     // TODO: bør gjøres før data lagres i storen
