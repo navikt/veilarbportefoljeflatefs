@@ -1,11 +1,12 @@
 import * as React from 'react';
 
 interface DatokolonneProps {
+    className?: string;
     dato?: Date | null;
     skalVises: boolean;
 }
 
-function DatoKolonne({ dato, skalVises = true}: DatokolonneProps) {
+function DatoKolonne({ className, dato, skalVises = true}: DatokolonneProps) {
     if (!skalVises) {
         return null;
     }
@@ -13,7 +14,7 @@ function DatoKolonne({ dato, skalVises = true}: DatokolonneProps) {
     if (!dato) {
         return (
             //  Sørger med dette for at spanen tar akkurat like mye plass som et felt med dato
-            <span style={{ visibility: 'hidden' }} className="brukerliste__panelelement col col-xs-2">
+            <span style={{ visibility: 'hidden' }} className={className}>
                 {new Date(0).toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options)}
             </span>);
     }
@@ -24,7 +25,7 @@ function DatoKolonne({ dato, skalVises = true}: DatokolonneProps) {
     }
 
     return (
-        <span className="brukerliste__panelelement col col-xs-2">{dato.toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options)}</span>
+        <span className={className}>{dato.toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options)}</span>
     );
 }
 

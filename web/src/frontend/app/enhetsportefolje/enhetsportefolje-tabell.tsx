@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { enhetShape, filtervalgShape, veilederShape } from './../proptype-shapes';
 import EnhetBrukerpanel from './enhet-brukerpanel';
-import { settBrukerSomMarkert, markerAlleBrukere } from '../ducks/portefolje';
+import { settBrukerSomMarkert } from '../ducks/portefolje';
 import EnhetListehode from './enhet-listehode';
 import {
     FiltervalgModell, Sorteringsrekkefolge, ValgtEnhetModell,
@@ -10,7 +10,6 @@ import {
 } from '../model-interfaces';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
-import Checkbox from '../components/tabell/checkbox';
 
 interface EnhetTabellProps {
     portefolje: any;
@@ -41,11 +40,10 @@ function EnhetTabell({
                 sorteringsfelt={portefolje.sorteringsfelt}
                 valgteKolonner={valgteKolonner}
             />
-            <ul className="brukerliste__body">
+            <ul className="brukerliste">
                 {brukere.map((bruker) =>
-                    <li key={bruker.fnr}>
-                        <Checkbox bruker={bruker} settMarkert={settMarkert}/>
                         <EnhetBrukerpanel
+                            key={bruker.fnr}
                             bruker={bruker}
                             enhetId={enhetId}
                             settMarkert={settMarkert}
@@ -53,7 +51,7 @@ function EnhetTabell({
                             valgteKolonner={valgteKolonner}
                             brukersVeileder={finnBrukersVeileder(veiledere, bruker)}
                         />
-                    </li>)}
+                )}
             </ul>
         </div>
     );
