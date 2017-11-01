@@ -8,7 +8,6 @@ import rendreDekorator from './eventhandtering';
 import { settSide } from './ducks/ui/side';
 import history from './history';
 import { enhetShape, valgtEnhetShape, veiledereShape } from './proptype-shapes';
-import FeatureToggle from './components/feature-toggle/feature-toggle';
 import EnhetContext from './components/enhet-context/enhet-context';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
@@ -54,9 +53,7 @@ class Application extends Component {
             >
                 <div className="portefolje">
                     <Innholdslaster avhengigheter={[ledetekster, enheter, enheter.valgtEnhet, veiledere]}>
-                        <FeatureToggle name="bruker_i_context">
-                            <EnhetContext />
-                        </FeatureToggle>
+                        <EnhetContext />
                         <div className="container maincontent side-innhold">
                             {children}
                         </div>
