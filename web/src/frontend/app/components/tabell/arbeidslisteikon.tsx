@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import * as classNames from 'classnames';
 
 interface ArbeidslisteikonProps {
@@ -9,5 +9,5 @@ interface ArbeidslisteikonProps {
 const cls = (className?: string) => className ? classNames('arbeidsliste--ikon', className) : 'arbeidsliste--ikon';
 
 export default ({ className, skalVises}: ArbeidslisteikonProps) => {
-    return <span className={ skalVises ? cls(className) : className}/>
-}
+    return <span className={ skalVises ? cls(className) : className}/>;
+};

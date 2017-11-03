@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {BrukerModell, EtikettType, VeilederModell} from '../../model-interfaces';
+import { BrukerModell, EtikettType, VeilederModell } from '../../model-interfaces';
 import { FormattedMessage } from 'react-intl';
-import {Kolonne} from "../../ducks/ui/listevisning";
-import Etikett from "./etikett";
-
+import { Kolonne } from '../../ducks/ui/listevisning';
+import Etikett from './etikett';
 
 interface VeiledernavnProps {
     className?: string;
@@ -30,7 +29,7 @@ function VeilederNavn({ className, bruker, valgteKolonner, veileder }: Veiledern
                         />
                 }
             </div>
-        )
+        );
     } else {
         return null;
     }

@@ -1,5 +1,7 @@
+/*tslint:disable*/
 export interface FeatureToggleState {
 }
+/*tslint:enable*/
 
 export const initialState: FeatureToggleState = {
 };

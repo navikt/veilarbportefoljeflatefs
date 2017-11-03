@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {BrukerModell} from "../../model-interfaces";
-import {Kolonne} from "../../ducks/ui/listevisning";
+import { BrukerModell } from '../../model-interfaces';
+import { Kolonne } from '../../ducks/ui/listevisning';
 
 interface VeilederidProps {
     className?: string;
@@ -10,10 +10,10 @@ interface VeilederidProps {
 
 function VeilederId({className, bruker, valgteKolonner}: VeilederidProps) {
     if (valgteKolonner.includes(Kolonne.NAVIDENT) && bruker.veilederId != null) {
-        return <div className={className}>{bruker.veilederId}</div>
+        return <div className={className}>{bruker.veilederId}</div>;
     } else {
         return null;
     }
 }
 
-export default VeilederId
+export default VeilederId;
