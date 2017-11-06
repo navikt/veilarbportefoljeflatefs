@@ -125,8 +125,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 const mapStateToProps = (state: AppState): StateProps => {
     const valgtEnhet = state.enheter.valgtEnhet.enhet;
     const valgtEnhetId = valgtEnhet ? valgtEnhet.enhetId : '';
-    const valgtEnhetNavn = valgtEnhet ? state.enheter.data.find((enhet) => enhet.enhetId === valgtEnhetId).navn : '';
     const aktivEnhetIdFraContext = state.nycontext.aktivEnhetId;
+    const aktivEnhetNavnFraContext = aktivEnhetIdFraContext && state.enheter.data.find((enhet) => enhet.enhetId === aktivEnhetIdFraContext).navn;
 
     const harValgtEnhet = valgtEnhetId != null && valgtEnhetId !== '' && aktivEnhetIdFraContext !== '';
 
@@ -136,8 +136,8 @@ const mapStateToProps = (state: AppState): StateProps => {
         isPending: state.nycontext.isPending,
         feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
         aktivEnhet: valgtEnhetId,
-        aktivEnhetNavn: `${valgtEnhetId} ${valgtEnhetNavn}`,
         aktivEnhetIdFraContext: aktivEnhetIdFraContext
+        aktivEnhetNavn: `${aktivEnhetIdFraContext} ${aktivEnhetNavnFraContext}`,
     };
 };
 
