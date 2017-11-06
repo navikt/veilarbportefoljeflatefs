@@ -13,13 +13,13 @@ const settSammenNavn = (bruker) => {
 const brukerNavn = (className, bruker, enhetId) => (
     <div className={className}>
         <a
-        href={`https://${window.location.hostname}` +
-                `/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
-        className={classnames('lenke lenke--frittstaende ')}
+            href={`${window.location.origin}/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
+            className={classnames('lenke lenke--frittstaende ')}
 
-    >
+        >
         {settSammenNavn(bruker)}
-    </a></div>
+        </a>
+    </div>
 );
 
 interface BrukerNavnProps {
