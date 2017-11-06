@@ -136,8 +136,8 @@ const mapStateToProps = (state: AppState): StateProps => {
         isPending: state.nycontext.isPending,
         feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
         aktivEnhet: valgtEnhetId,
-        aktivEnhetIdFraContext: aktivEnhetIdFraContext
         aktivEnhetNavn: `${aktivEnhetIdFraContext} ${aktivEnhetNavnFraContext}`,
+        aktivEnhetIdFraContext
     };
 };
 
