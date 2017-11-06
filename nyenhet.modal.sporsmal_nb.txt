@@ -1,1 +1,1 @@
-Ønsker du å fortsette å jobbe på {enhet}?
+Ønsker du å endre enhet til {enhet}?
