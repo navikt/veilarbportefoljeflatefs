@@ -33,11 +33,11 @@ class NyContextModal extends React.Component<NyContextModalProps> {
                         <FormattedMessage id="nyenhet.modal.sporsmal" values={{ enhet: this.props.aktivEnhet }}/>
                     </Normaltekst>
                     <div className="modal-footer" >
-                        <Hovedknapp onClick={this.props.doBeholdAktivEnhet} spinner={this.props.isPending} autoDisableVedSpinner>
-                            <FormattedMessage id="nyenhet.modal.bekreft" />
+                        <Hovedknapp disabled={this.props.isPending} onClick={() => this.props.doEndreAktivEnhet()}>
+                            <FormattedMessage id="nyenhet.modal.endre" />
                         </Hovedknapp>
-                        <Knapp disabled={this.props.isPending} type="standard" onClick={() => this.props.doEndreAktivEnhet()}>
-                            <FormattedMessage id="nyenhet.modal.avbryt" />
+                        <Knapp onClick={this.props.doBeholdAktivEnhet} type="standard" spinner={this.props.isPending} autoDisableVedSpinner>
+                            <FormattedMessage id="nyenhet.modal.behold" />
                         </Knapp>
                     </div>
                 </div>

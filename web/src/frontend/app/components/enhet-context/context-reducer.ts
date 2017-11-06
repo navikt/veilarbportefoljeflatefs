@@ -3,14 +3,14 @@ import { EnhetConnectionState } from './enhet-context-listener';
 
 export interface ContextState {
     connected: EnhetConnectionState;
-    aktivEnhet: string;
+    aktivEnhetId: string;
     isPending: boolean;
     visFeilmodal: boolean;
 }
 
 const initialState: ContextState = {
     connected: EnhetConnectionState.NOT_CONNECTED,
-    aktivEnhet: getEnhetFromUrl(),
+    aktivEnhetId: getEnhetFromUrl(),
     isPending: false,
     visFeilmodal: false
 };
@@ -53,7 +53,7 @@ export default function contextReducer(state: ContextState = initialState, actio
         case ContextActionKeys.SETT_TILKOBLING_STATE:
             return { ...state, connected: action.connected };
         case ContextActionKeys.SETT_AKTIV_ENHET:
-            return { ...state, aktivEnhet: action.enhet };
+            return { ...state, aktivEnhetId: action.enhet };
         case ContextActionKeys.SETT_PENDING_STATE:
             return { ...state, isPending: action.pending };
         default:

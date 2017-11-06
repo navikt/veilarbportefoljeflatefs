@@ -21,7 +21,7 @@ interface StateProps {
     isPending: boolean;
     aktivEnhet: string;
     aktivEnhetNavn: string;
-    aktivEnhetContext: string;
+    aktivEnhetIdFraContext: string;
     feilmodalSynlig: boolean;
 }
 
@@ -66,8 +66,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     handleEndreAktivEnhet() {
-        settEnhetIDekorator(this.props.aktivEnhetContext);
-        this.props.doOppdaterValgtEnhet(this.props.aktivEnhetContext);
+        settEnhetIDekorator(this.props.aktivEnhetIdFraContext);
+        this.props.doOppdaterValgtEnhet(this.props.aktivEnhetIdFraContext);
     }
 
     handleBeholdAktivEnhet() {
@@ -125,19 +125,19 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 const mapStateToProps = (state: AppState): StateProps => {
     const valgtEnhet = state.enheter.valgtEnhet.enhet;
     const valgtEnhetId = valgtEnhet ? valgtEnhet.enhetId : '';
-    const valgtEnhetNavn = valgtEnhet ? state.enheter.data.find((enhet) => enhet.enhetId === valgtEnhetId).navn : '';
-    const valgtEnhetContext = state.nycontext.aktivEnhet;
+    const aktivEnhetIdFraContext = state.nycontext.aktivEnhetId;
+    const aktivEnhetNavnFraContext = aktivEnhetIdFraContext && state.enheter.data.find((enhet) => enhet.enhetId === aktivEnhetIdFraContext).navn;
 
-    const harValgtEnhet = valgtEnhetId != null && valgtEnhetId !== '' && valgtEnhetContext !== '';
+    const harValgtEnhet = valgtEnhetId != null && valgtEnhetId !== '' && aktivEnhetIdFraContext !== '';
 
     return {
-        modalSynlig: harValgtEnhet && (valgtEnhetId !== valgtEnhetContext),
+        modalSynlig: harValgtEnhet && (valgtEnhetId !== aktivEnhetIdFraContext),
         feilmodalSynlig: state.nycontext.visFeilmodal,
         isPending: state.nycontext.isPending,
         feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
         aktivEnhet: valgtEnhetId,
-        aktivEnhetNavn: `${valgtEnhetId} ${valgtEnhetNavn}`,
-        aktivEnhetContext: valgtEnhetContext
+        aktivEnhetNavn: `${aktivEnhetIdFraContext} ${aktivEnhetNavnFraContext}`,
+        aktivEnhetIdFraContext
     };
 };
 
