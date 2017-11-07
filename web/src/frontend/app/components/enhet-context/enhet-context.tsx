@@ -10,7 +10,7 @@ import EnhetContextListener, {
     EnhetContextEventNames
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
-import { erDev, getEnhetFromUrl } from '../../utils/utils';
+import { getEnhetFromUrl, MILJO, miljoFraUrl} from '../../utils/utils';
 import { oppdaterValgtEnhet } from '../../ducks/enheter';
 import { settEnhetIDekorator } from '../../eventhandtering';
 import ContextFeilmodal from './context-feilmodal';
@@ -47,15 +47,24 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     componentDidMount() {
-        const host = erDev() ? 'app-t4.adeo.no' : window.location.hostname;
-        const uri = `wss://${host}/modiaeventdistribution/websocket`;
-        this.contextListener = new EnhetContextListener(uri, this.enhetContextHandler);
+        this.contextListener = new EnhetContextListener(this.websocketUri(), this.enhetContextHandler);
 
         this.finnOgSettEnhetIKontekst();
     }
 
     componentWillUnmount() {
         this.contextListener.close();
+    }
+
+    websocketUri() {
+        const miljo = miljoFraUrl();
+        if(miljo === MILJO.P) {
+            return 'wss://veilederflatehendelser.adeo.no/modiaeventdistribution/websocket';
+        } else if(miljo === MILJO.LOCALHOST) {
+            return 'wss://veilederflatehendelser-t4.adeo.no/modiaeventdistribution/websocket';
+        } else {
+            return `wss://veilederflatehendelser-${miljo}.adeo.no/modiaeventdistribution/websocket`;
+        }
     }
 
     finnOgSettEnhetIKontekst() {
