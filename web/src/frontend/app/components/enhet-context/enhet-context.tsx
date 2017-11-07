@@ -10,7 +10,7 @@ import EnhetContextListener, {
     EnhetContextEventNames
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
-import { erDev } from '../../utils/utils';
+import {erDev, getEnhetFromUrl} from '../../utils/utils';
 import { oppdaterValgtEnhet } from '../../ducks/enheter';
 import { settEnhetIDekorator } from '../../eventhandtering';
 import ContextFeilmodal from './context-feilmodal';
@@ -21,7 +21,7 @@ interface StateProps {
     isPending: boolean;
     aktivEnhet: string;
     aktivEnhetNavn: string;
-    aktivEnhetContext: string;
+    aktivEnhetIdFraContext: string;
     feilmodalSynlig: boolean;
 }
 
@@ -51,14 +51,23 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         const uri = `wss://${host}/modiaeventdistribution/websocket`;
         this.contextListener = new EnhetContextListener(uri, this.enhetContextHandler);
 
-        hentAktivEnhet().then((enhet) => {
-            if (!enhet) {
-                oppdaterAktivEnhet(this.props.aktivEnhet)
-                    .catch(() => this.props.doVisFeilmodal());
-            } else {
-                this.props.doSettNyAktivEnhet(enhet);
-            }
-        });
+        const enhetFraUrl = getEnhetFromUrl();
+
+        if(enhetFraUrl !== '') {
+            oppdaterAktivEnhet(enhetFraUrl)
+                .then(() => this.props.doSettNyAktivEnhet(enhetFraUrl))
+                .catch(() => this.props.doVisFeilmodal());
+        } else {
+            hentAktivEnhet().then((enhet) => {
+                if (!enhet) {
+                    oppdaterAktivEnhet(this.props.aktivEnhet)
+                        .then(() => this.props.doSettNyAktivEnhet(this.props.aktivEnhet))
+                        .catch(() => this.props.doVisFeilmodal());
+                } else {
+                    this.props.doSettNyAktivEnhet(enhet);
+                }
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -66,8 +75,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     handleEndreAktivEnhet() {
-        settEnhetIDekorator(this.props.aktivEnhetContext);
-        this.props.doOppdaterValgtEnhet(this.props.aktivEnhetContext);
+        settEnhetIDekorator(this.props.aktivEnhetIdFraContext);
+        this.props.doOppdaterValgtEnhet(this.props.aktivEnhetIdFraContext);
     }
 
     handleBeholdAktivEnhet() {
@@ -125,19 +134,19 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 const mapStateToProps = (state: AppState): StateProps => {
     const valgtEnhet = state.enheter.valgtEnhet.enhet;
     const valgtEnhetId = valgtEnhet ? valgtEnhet.enhetId : '';
-    const valgtEnhetNavn = valgtEnhet ? state.enheter.data.find((enhet) => enhet.enhetId === valgtEnhetId).navn : '';
-    const valgtEnhetContext = state.nycontext.aktivEnhet;
+    const aktivEnhetIdFraContext = state.nycontext.aktivEnhetId;
+    const aktivEnhetNavnFraContext = aktivEnhetIdFraContext && state.enheter.data.find((enhet) => enhet.enhetId === aktivEnhetIdFraContext).navn;
 
-    const harValgtEnhet = valgtEnhetId != null && valgtEnhetId !== '' && valgtEnhetContext !== '';
+    const harValgtEnhet = valgtEnhetId != null && valgtEnhetId !== '' && aktivEnhetIdFraContext !== '';
 
     return {
-        modalSynlig: harValgtEnhet && (valgtEnhetId !== valgtEnhetContext),
+        modalSynlig: harValgtEnhet && (valgtEnhetId !== aktivEnhetIdFraContext),
         feilmodalSynlig: state.nycontext.visFeilmodal,
         isPending: state.nycontext.isPending,
         feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
         aktivEnhet: valgtEnhetId,
-        aktivEnhetNavn: `${valgtEnhetId} ${valgtEnhetNavn}`,
-        aktivEnhetContext: valgtEnhetContext
+        aktivEnhetNavn: `${aktivEnhetIdFraContext} ${aktivEnhetNavnFraContext}`,
+        aktivEnhetIdFraContext
     };
 };
 

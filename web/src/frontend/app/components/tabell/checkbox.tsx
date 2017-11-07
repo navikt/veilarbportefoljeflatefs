@@ -10,7 +10,7 @@ interface CheckboxProps {
 
 function Checkbox({bruker, settMarkert, className}: CheckboxProps) {
     return (
-        <span className={classnames('skjema__input', 'checkboks__wrapper', 'brukerliste--checkbox-margin', className)}>
+        <span className={className + ' flex'}>
             <input className="checkboks"
 
                    id={`checkbox-${bruker.fnr}`}
@@ -18,7 +18,7 @@ function Checkbox({bruker, settMarkert, className}: CheckboxProps) {
                    checked={bruker.markert}
                    onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
             />
-        <label className="skjemaelement__label" htmlFor={`checkbox-${bruker.fnr}`}/>
+            <label className="skjemaelement__label brukerliste__checkbox" htmlFor={`checkbox-${bruker.fnr}`}/>
         </span>
     );
 }

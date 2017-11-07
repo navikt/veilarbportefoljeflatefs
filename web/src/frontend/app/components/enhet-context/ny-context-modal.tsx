@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { AlertStripeAdvarselSolid } from 'nav-frontend-alertstriper';
+import { AlertStripeInfoSolid } from 'nav-frontend-alertstriper';
 import Knapp, { Hovedknapp } from 'nav-frontend-knapper';
 
 interface NyContextModalProps {
@@ -26,18 +26,18 @@ class NyContextModal extends React.Component<NyContextModalProps> {
                     <Innholdstittel tag="h1" className="blokk-s">
                         <FormattedMessage id="nyenhet.modal.overskrift" />
                     </Innholdstittel>
-                    <AlertStripeAdvarselSolid className="blokk-s">
+                    <AlertStripeInfoSolid className="blokk-s">
                         <FormattedMessage id="nyenhet.modal.alertmelding" />
-                    </AlertStripeAdvarselSolid>
+                    </AlertStripeInfoSolid>
                     <Normaltekst className="blokk-s">
                         <FormattedMessage id="nyenhet.modal.sporsmal" values={{ enhet: this.props.aktivEnhet }}/>
                     </Normaltekst>
                     <div className="modal-footer" >
-                        <Hovedknapp onClick={this.props.doBeholdAktivEnhet} spinner={this.props.isPending} autoDisableVedSpinner>
-                            <FormattedMessage id="nyenhet.modal.bekreft" />
+                        <Hovedknapp disabled={this.props.isPending} onClick={() => this.props.doEndreAktivEnhet()}>
+                            <FormattedMessage id="nyenhet.modal.endre" />
                         </Hovedknapp>
-                        <Knapp disabled={this.props.isPending} type="standard" onClick={() => this.props.doEndreAktivEnhet()}>
-                            <FormattedMessage id="nyenhet.modal.avbryt" />
+                        <Knapp onClick={this.props.doBeholdAktivEnhet} type="standard" spinner={this.props.isPending} autoDisableVedSpinner>
+                            <FormattedMessage id="nyenhet.modal.behold" />
                         </Knapp>
                     </div>
                 </div>

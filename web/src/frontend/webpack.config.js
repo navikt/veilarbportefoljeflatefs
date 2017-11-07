@@ -67,6 +67,9 @@ module.exports = function(env) {
             path: PATHS.WEBAPP,
             filename: 'js/bundle.js'
         },
+        stats: {
+            children: false
+        },
         plugins: plugins(isDev),
         module: {
             rules: RULES

@@ -39,6 +39,7 @@ interface VeilederPortefoljeVisningProps {
     feilmeldingModal: FeilmeldingModalModell;
     serverfeilModalSkalVises: boolean;
     closeServerfeilModal: () => void;
+    veilederpaginering: string;
 }
 
 class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps> {
@@ -88,7 +89,8 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             closeFeilmeldingModal,
             feilmeldingModal,
             serverfeilModalSkalVises,
-            closeServerfeilModal
+            closeServerfeilModal,
+            veilederpaginering
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
@@ -119,6 +121,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         gjeldendeVeileder={gjeldendeVeileder}
                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                         sokVeilederSkalVises={false}
+                        veilederpaginering={veilederpaginering}
                     />
                     {
                         visDiagram ?
@@ -176,7 +179,8 @@ const mapStateToProps = (state) => ({
     filtervalg: state.filtreringMinoversikt,
     innloggetVeilederIdent: state.enheter.ident,
     feilmeldingModal: state.feilmeldingModal,
-    serverfeilModalSkalVises: state.serverfeilModal.modalVises
+    serverfeilModalSkalVises: state.serverfeilModal.modalVises,
+    veilederpaginering: state.veilederpaginering.visningsmodus
 });
 
 const mapDispatchToProps = (dispatch) => ({

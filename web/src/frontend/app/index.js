@@ -18,7 +18,7 @@ import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
-import Application from './application';
+import InitalDataProvider from './providers/initial-data-provider';
 import createStore from './store';
 import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
@@ -64,7 +64,7 @@ render(
                 <Router history={history}>
                     <Route
                         path="/"
-                        component={Application}
+                        component={InitalDataProvider}
                         onChange={(prevState, nextState) => {
                             if (nextState.location.action !== 'POP' && nextState.location.action !== 'REPLACE') {
                                 window.scrollTo(0, 0);
