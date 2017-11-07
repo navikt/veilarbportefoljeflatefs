@@ -51,6 +51,14 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         const uri = `wss://${host}/modiaeventdistribution/websocket`;
         this.contextListener = new EnhetContextListener(uri, this.enhetContextHandler);
 
+        this.finnOgSettEnhetIKontekst();
+    }
+
+    componentWillUnmount() {
+        this.contextListener.close();
+    }
+
+    finnOgSettEnhetIKontekst() {
         const enhetFraUrl = getEnhetFromUrl();
 
         if(enhetFraUrl !== '') {
@@ -64,10 +72,6 @@ class EnhetContext extends React.Component<EnhetContextProps> {
                 }
             });
         }
-    }
-
-    componentWillUnmount() {
-        this.contextListener.close();
     }
 
     oppdaterEnhetIKontekstOgState(enhetId) {
