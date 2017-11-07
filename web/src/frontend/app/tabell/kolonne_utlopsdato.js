@@ -11,14 +11,20 @@ function lagUkerTekst(ukerIgjen, minVal) {
     return `${ukerIgjen} uker`;
 }
 
+function harValgtYtelseUtlopsdato(ytelse) {
+    return [ ytelsevalg.TILTAKSPENGER, ytelsevalg.AAP_UNNTAK, ytelsevalg.AAP].includes(ytelse);
+}
+
 const KolonneUtlopsdato = ({ bruker, ytelse }) => {
     let content = null;
-    if (ytelse === ytelsevalg.TILTAKSPENGER || ytelse === ytelsevalg.AAP_UNNTAK || ytelse === ytelsevalg.AAP) {
+    if (harValgtYtelseUtlopsdato(ytelse)) {
         const { utlopsdato } = bruker;
-        const dato = new Date(utlopsdato.year, utlopsdato.monthValue - 1, utlopsdato.dayOfMonth);
-        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        if (utlopsdato) {
+            const dato = new Date(utlopsdato.year, utlopsdato.monthValue - 1, utlopsdato.dayOfMonth);
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
 
-        content = dato.toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options);
+            content = dato.toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options);
+        }
     } else if (ytelse === ytelsevalg.DAGPENGER || ytelse === ytelsevalg.ORDINARE_DAGPENGER) {
         content = lagUkerTekst(bruker.dagputlopUke, 2);
     } else if (ytelse === ytelsevalg.DAGPENGER_MED_PERMITTERING) {
