@@ -10,7 +10,7 @@ import EnhetContextListener, {
     EnhetContextEventNames
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
-import { erDev } from '../../utils/utils';
+import {erDev, getEnhetFromUrl} from '../../utils/utils';
 import { oppdaterValgtEnhet } from '../../ducks/enheter';
 import { settEnhetIDekorator } from '../../eventhandtering';
 import ContextFeilmodal from './context-feilmodal';
@@ -51,14 +51,23 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         const uri = `wss://${host}/modiaeventdistribution/websocket`;
         this.contextListener = new EnhetContextListener(uri, this.enhetContextHandler);
 
-        hentAktivEnhet().then((enhet) => {
-            if (!enhet) {
-                oppdaterAktivEnhet(this.props.aktivEnhet)
-                    .catch(() => this.props.doVisFeilmodal());
-            } else {
-                this.props.doSettNyAktivEnhet(enhet);
-            }
-        });
+        const enhetFraUrl = getEnhetFromUrl();
+
+        if(enhetFraUrl !== '') {
+            oppdaterAktivEnhet(enhetFraUrl)
+                .then(() => this.props.doSettNyAktivEnhet(enhetFraUrl))
+                .catch(() => this.props.doVisFeilmodal());
+        } else {
+            hentAktivEnhet().then((enhet) => {
+                if (!enhet) {
+                    oppdaterAktivEnhet(this.props.aktivEnhet)
+                        .then(() => this.props.doSettNyAktivEnhet(this.props.aktivEnhet))
+                        .catch(() => this.props.doVisFeilmodal());
+                } else {
+                    this.props.doSettNyAktivEnhet(enhet);
+                }
+            });
+        }
     }
 
     componentWillUnmount() {
