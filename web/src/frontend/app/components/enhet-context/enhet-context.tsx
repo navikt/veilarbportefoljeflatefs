@@ -87,7 +87,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
             .then(() => this.props.doSettIsPending(false));
     }
 
-    handleNyAktivEnhet() {
+    doHentNyAktivEnhet() {
         hentAktivEnhet()
             .then((nyEnhet) => this.props.doSettNyAktivEnhet(nyEnhet))
             .catch(() => this.props.doVisFeilmodal());
@@ -99,7 +99,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
                 this.props.doSettTilkoblingState(event.state);
                 break;
             case EnhetContextEventNames.NY_AKTIV_ENHET:
-                this.handleNyAktivEnhet();
+                this.doHentNyAktivEnhet();
                 break;
         }
     }
