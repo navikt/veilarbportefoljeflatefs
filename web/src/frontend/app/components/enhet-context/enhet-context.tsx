@@ -10,7 +10,7 @@ import EnhetContextListener, {
     EnhetContextEventNames
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
-import {erDev, getEnhetFromUrl} from '../../utils/utils';
+import { erDev, getEnhetFromUrl } from '../../utils/utils';
 import { oppdaterValgtEnhet } from '../../ducks/enheter';
 import { settEnhetIDekorator } from '../../eventhandtering';
 import ContextFeilmodal from './context-feilmodal';
@@ -51,18 +51,22 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         const uri = `wss://${host}/modiaeventdistribution/websocket`;
         this.contextListener = new EnhetContextListener(uri, this.enhetContextHandler);
 
+        this.finnOgSettEnhetIKontekst();
+    }
+
+    componentWillUnmount() {
+        this.contextListener.close();
+    }
+
+    finnOgSettEnhetIKontekst() {
         const enhetFraUrl = getEnhetFromUrl();
 
         if(enhetFraUrl !== '') {
-            oppdaterAktivEnhet(enhetFraUrl)
-                .then(() => this.props.doSettNyAktivEnhet(enhetFraUrl))
-                .catch(() => this.props.doVisFeilmodal());
+            this.oppdaterEnhetIKontekstOgState(enhetFraUrl);
         } else {
             hentAktivEnhet().then((enhet) => {
                 if (!enhet) {
-                    oppdaterAktivEnhet(this.props.aktivEnhet)
-                        .then(() => this.props.doSettNyAktivEnhet(this.props.aktivEnhet))
-                        .catch(() => this.props.doVisFeilmodal());
+                    this.oppdaterEnhetIKontekstOgState(this.props.aktivEnhet);
                 } else {
                     this.props.doSettNyAktivEnhet(enhet);
                 }
@@ -70,8 +74,10 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         }
     }
 
-    componentWillUnmount() {
-        this.contextListener.close();
+    oppdaterEnhetIKontekstOgState(enhetId) {
+        return oppdaterAktivEnhet(enhetId)
+            .then(() => this.props.doSettNyAktivEnhet(enhetId))
+            .catch(() => this.props.doVisFeilmodal());
     }
 
     handleEndreAktivEnhet() {
@@ -81,13 +87,11 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 
     handleBeholdAktivEnhet() {
         this.props.doSettIsPending(true);
-        oppdaterAktivEnhet(this.props.aktivEnhet)
-            .then(() => this.props.doSettNyAktivEnhet(this.props.aktivEnhet))
-            .catch(() => this.props.doVisFeilmodal())
+        this.oppdaterEnhetIKontekstOgState(this.props.aktivEnhet)
             .then(() => this.props.doSettIsPending(false));
     }
 
-    handleNyAktivEnhet() {
+    doHentNyAktivEnhet() {
         hentAktivEnhet()
             .then((nyEnhet) => this.props.doSettNyAktivEnhet(nyEnhet))
             .catch(() => this.props.doVisFeilmodal());
@@ -99,7 +103,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
                 this.props.doSettTilkoblingState(event.state);
                 break;
             case EnhetContextEventNames.NY_AKTIV_ENHET:
-                this.handleNyAktivEnhet();
+                this.doHentNyAktivEnhet();
                 break;
         }
     }
