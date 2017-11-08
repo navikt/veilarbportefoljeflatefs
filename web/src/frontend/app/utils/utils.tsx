@@ -106,22 +106,7 @@ export function miljoFraUrl() {
     return utledMiljoFraHost(window.location.host);
 }
 
-function utledMiljoFraHost(host): MILJO {
-    if(erDev()) {
-        return MILJO.LOCALHOST;
-    }
-    const underdomene = host.split('.')[0];
-    if(!underdomene.includes('-')) {
-        return MILJO.P;
-    }
-    return underdomene.split('-')[1];
-}
-
-export enum MILJO {
-    LOCALHOST = 'localhost',
-    T4 = 't4',
-    Q4 = 'q4',
-    Q1 = 'q1',
-    Q0 = 'q0',
-    P = 'p'
+function utledMiljoFraHost(host) {
+    const matches = host.match(/-[a-zA-Z][0-9]+/);
+    return matches == null ? '' : matches[0];
 }

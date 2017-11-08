@@ -10,7 +10,7 @@ import EnhetContextListener, {
     EnhetContextEventNames
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
-import { getEnhetFromUrl, MILJO, miljoFraUrl} from '../../utils/utils';
+import {erDev, getEnhetFromUrl, miljoFraUrl} from '../../utils/utils';
 import { oppdaterValgtEnhet } from '../../ducks/enheter';
 import { settEnhetIDekorator } from '../../eventhandtering';
 import ContextFeilmodal from './context-feilmodal';
@@ -57,14 +57,9 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     websocketUri() {
-        const miljo = miljoFraUrl();
-        if(miljo === MILJO.P) {
-            return 'wss://veilederflatehendelser.adeo.no/modiaeventdistribution/websocket';
-        } else if(miljo === MILJO.LOCALHOST) {
-            return 'wss://veilederflatehendelser-t4.adeo.no/modiaeventdistribution/websocket';
-        } else {
-            return `wss://veilederflatehendelser-${miljo}.adeo.no/modiaeventdistribution/websocket`;
-        }
+        return erDev() ?
+            'wss://veilederflatehendelser-t4.adeo.no/modiaeventdistribution/websocket' :
+            `wss://veilederflatehendelser${miljoFraUrl()}.adeo.no/modiaeventdistribution/websocket`;
     }
 
     finnOgSettEnhetIKontekst() {
