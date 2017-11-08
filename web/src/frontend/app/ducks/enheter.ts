@@ -1,6 +1,6 @@
 import { hentVeiledersEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
-import { leggEnhetIUrl } from '../utils/utils';
+import { leggEnhetIUrl } from '../utils/url-utils';
 import { ValgtEnhetModell } from '../model-interfaces';
 import { Action, Dispatch } from 'redux';
 import { AppState } from '../reducer';

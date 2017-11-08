@@ -6,7 +6,7 @@ import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import { hentLedetekster } from './../ducks/ledetekster';
 import { hentAktivEnhet } from '../components/enhet-context/context-api';
 import { STATUS } from '../ducks/utils';
-import { leggEnhetIUrl } from '../utils/utils';
+import { leggEnhetIUrl } from '../utils/url-utils';
 import { settEnhetIDekorator } from '../eventhandtering';
 import { enhetShape, valgtEnhetShape } from '../proptype-shapes';
 import Application from './../application';

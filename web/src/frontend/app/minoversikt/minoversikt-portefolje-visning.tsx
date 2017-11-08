@@ -5,7 +5,7 @@ import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../du
 import TabellOverskrift from './../components/tabell-overskrift';
 import Toolbar from './../components/toolbar/toolbar';
 import { enhetShape, veilederShape, filtervalgShape, feilmeldingModalShape } from './../proptype-shapes';
-import { leggEnhetIUrl, getSideFromUrl } from '../utils/utils';
+import { leggEnhetIUrl, getSideFromUrl } from '../utils/url-utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';

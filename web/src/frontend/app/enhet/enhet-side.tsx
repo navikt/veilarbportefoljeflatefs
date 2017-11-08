@@ -8,7 +8,7 @@ import Innholdslaster from './../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
-import { leggEnhetIUrl } from '../utils/utils';
+import { leggEnhetIUrl } from '../utils/url-utils';
 import { hentStatusTall } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';

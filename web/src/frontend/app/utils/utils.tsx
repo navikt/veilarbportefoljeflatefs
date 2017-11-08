@@ -1,6 +1,3 @@
-/* eslint-disable import/prefer-default-export, no-undef */
-import * as queryString from 'query-string';
-import history, { basename } from '../history';
 import { AktiviteterModell } from '../model-interfaces';
 import * as React from 'react';
 
@@ -10,59 +7,6 @@ export function range(start: number, end: number, inclusive: boolean = false): n
 
 export function lag2Sifret(n: number): string {
     return n < 10 ? `0${n}` : `${n}`;
-}
-
-export function slettCleanIUrl() {
-    const parsed = queryString.parse(location.search); // eslint-disable-line no-undef
-
-    // Objektet returnert fra `queryString.parse` er ikke et ekte objekt. Så derfor denne omstendlige sjekken
-    if (!Object.keys(parsed).includes('clean')) {
-        return;
-    }
-
-    delete parsed.clean;
-
-    const stringified = queryString.stringify(parsed);
-    const pathname = window.location.pathname.replace(basename, '');
-    history.replace(`${pathname}?${stringified}`);
-}
-
-export function leggEnhetIUrl(enhet: string, refresh: boolean = false) {
-    if (enhet) {
-        const parsed = queryString.parse(location.search);
-        parsed.enhet = enhet;
-
-        const stringified = queryString.stringify(parsed);
-        const pathname = window.location.pathname.replace(basename, '');
-        history.replace(`${pathname}?${stringified}`);
-        if (refresh) {
-            window.location.reload(true);
-        }
-    }
-}
-
-export function getEnhetFromUrl() {
-    return queryString.parse(location.search).enhet || '';
-}
-
-export function leggSideIUrl(path, side) {
-    if (side) {
-        const parsed = queryString.parse(location.search);
-        parsed.side = side;
-
-        const stringified = queryString.stringify(parsed);
-        const pathname = window.location.pathname.replace(basename, '');
-        history.replace(`${pathname}?${stringified}`);
-        localStorage.setItem(`${path}-lagretSidetall`, side);
-    }
-}
-
-export function getSideFromUrl() {
-    return queryString.parse(location.search).side || '';
-}
-
-export function sendBrukerTilUrl(url) {
-    history.replace(url);
 }
 
 export function ytelseFilterErAktiv(ytelse) {
@@ -100,13 +44,4 @@ export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFilterv
 export function erDev() {
     const host: string = window.location.host;
     return host.includes('localhost') || host.includes('127.0.0.1');
-}
-
-export function miljoFraUrl() {
-    return utledMiljoFraHost(window.location.host);
-}
-
-export function utledMiljoFraHost(host) {
-    const matches = host.match(/-[a-zA-Z][0-9]+/);
-    return matches == null ? '' : matches[0];
 }

@@ -8,7 +8,7 @@ import { portefoljestorrelserShape, veiledereShape, enhetShape } from './../prop
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import Lenker from './../lenker/lenker';
-import { leggEnhetIUrl } from '../utils/utils';
+import { leggEnhetIUrl } from '../utils/url-utils';
 
 class VeiledereSide extends Component {
     componentWillMount() {

@@ -1,4 +1,4 @@
-import { getEnhetFromUrl } from '../../utils/utils';
+import { getEnhetFromUrl } from '../../utils/url-utils';
 import { EnhetConnectionState } from './enhet-context-listener';
 
 export interface ContextState {
