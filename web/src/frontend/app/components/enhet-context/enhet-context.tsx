@@ -57,9 +57,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     websocketUri() {
-        return erDev() ?
-            'wss://veilederflatehendelser-t4.adeo.no/modiaeventdistribution/websocket' :
-            `wss://veilederflatehendelser${miljoFraUrl()}.adeo.no/modiaeventdistribution/websocket`;
+        const miljo = erDev() ? '-t4' : miljoFraUrl();
+        return `wss://veilederflatehendelser${miljo}.adeo.no/modiaeventdistribution/websocket`;
     }
 
     finnOgSettEnhetIKontekst() {
