@@ -60,7 +60,7 @@ export const innsatsgruppe = (intl) => ({
 
 export const formidlingsgruppe = (intl) => ({
     ARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.arbs'}),
-    IARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.arbs'}),
+    IARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.iarbs'}),
     ISERV: intl.formatMessage({id: 'filter.formidlingsgruppe.iserv'}),
     PARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.parbs'}),
     RARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.rarbs'})
