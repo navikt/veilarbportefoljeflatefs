@@ -67,7 +67,7 @@ function RedigerArbeidslisteForm({ lukkModal,
                         placeholder=""
                         maxLength={KOMMENTAR_MAKS_LENGDE}
                         disabled={false}
-                        visTellerFra={0}
+                        visTellerFra={500}
                     />
                 </div>
                 <p className="arbeidsliste--modal-redigering">
