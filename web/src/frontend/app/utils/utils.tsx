@@ -101,3 +101,12 @@ export function erDev() {
     const host: string = window.location.host;
     return host.includes('localhost') || host.includes('127.0.0.1');
 }
+
+export function miljoFraUrl() {
+    return utledMiljoFraHost(window.location.host);
+}
+
+export function utledMiljoFraHost(host) {
+    const matches = host.match(/-[a-zA-Z][0-9]+/);
+    return matches == null ? '' : matches[0];
+}
