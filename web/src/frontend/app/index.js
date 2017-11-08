@@ -24,7 +24,7 @@ import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
-import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/utils';
+import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
 import FeatureToggelAdmin from './components/feature-toggle/feature-toggle-admin';
 import './style';
 /* eslint-enable import/first */

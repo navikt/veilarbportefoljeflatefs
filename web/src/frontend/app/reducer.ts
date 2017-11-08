@@ -16,7 +16,7 @@ import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import diagramReducer from './ducks/diagram';
 import sideReducer from './ducks/ui/side';
-import { slettCleanIUrl } from './utils/utils';
+import { slettCleanIUrl } from './utils/url-utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer, { EnhettiltakState } from './ducks/enhettiltak';
 import listevisningReducer, {

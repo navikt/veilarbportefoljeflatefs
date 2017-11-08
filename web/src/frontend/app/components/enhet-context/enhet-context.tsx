@@ -10,7 +10,8 @@ import EnhetContextListener, {
     EnhetContextEventNames
 } from './enhet-context-listener';
 import { hentAktivEnhet, oppdaterAktivEnhet } from './context-api';
-import { erDev, getEnhetFromUrl, miljoFraUrl } from '../../utils/utils';
+import { erDev } from '../../utils/utils';
+import { getEnhetFromUrl, miljoFraUrl } from '../../utils/url-utils';
 import { oppdaterValgtEnhet } from '../../ducks/enheter';
 import { settEnhetIDekorator } from '../../eventhandtering';
 import ContextFeilmodal from './context-feilmodal';

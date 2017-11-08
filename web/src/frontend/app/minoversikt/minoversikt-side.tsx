@@ -17,7 +17,7 @@ import { EnheterState } from '../ducks/enheter';
 import { VeiledereState } from '../ducks/veiledere';
 import { FiltervalgModell, ValgtEnhetModell, VeilederModell, } from '../model-interfaces';
 import { ListevisningState } from '../ducks/ui/listevisning';
-import { getSideFromUrl } from '../utils/utils';
+import { getSideFromUrl } from '../utils/url-utils';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
