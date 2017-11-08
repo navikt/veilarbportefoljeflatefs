@@ -56,6 +56,7 @@ function renderFelter({ fields }) {
                             feltNavn={`${name}.kommentar`}
                             placeholder=""
                             maxLength={KOMMENTAR_MAKS_LENGDE}
+                            visTellerFra={500}
                         />
                     </div>
                     <Datovelger
