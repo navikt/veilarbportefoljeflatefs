@@ -6,12 +6,14 @@ import { Link } from 'react-router';
 import { veilederShape } from './../proptype-shapes';
 import { settValgtVeileder } from '../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
+import { settSide } from '../ducks/ui/side';
 
 class VeilederTabell extends Component {
     settOgNavigerTilValgtVeileder(veileder) {
-        return () => {
-            this.props.settVeileder(veileder);
-        };
+        if (this.props.innloggetVeileder === veileder.ident) {
+            this.props.oppdaterSide('veilederoversikt');
+        }
+        this.props.settVeileder(veileder);
     }
 
     render() {
@@ -25,7 +27,7 @@ class VeilederTabell extends Component {
                 <th>
                     <Link
                         to={`/portefolje/${veileder.ident}?clean`}
-                        onClick={this.settOgNavigerTilValgtVeileder(veileder)}
+                        onClick={() => this.settOgNavigerTilValgtVeileder(veileder)}
                         className="lenke lenke--frittstaende"
                     >
                         {`${veileder.navn}`}
@@ -92,6 +94,8 @@ class VeilederTabell extends Component {
 }
 
 VeilederTabell.propTypes = {
+    innloggetVeileder: PT.string,
+    oppdaterSide: PT.func,
     veiledere: PT.arrayOf(veilederShape).isRequired,
     settVeileder: PT.func.isRequired,
     sorterPaaEtternavn: PT.func.isRequired,
@@ -104,12 +108,14 @@ VeilederTabell.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+    innloggetVeileder: state.enheter.ident,
     veilederListe: state.veiledere.data.veilederListe,
     currentSortering: state.veilederpaginering.currentSortering
 
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    oppdaterSide: (side) => dispatch(settSide(side)),
     settVeileder: (veileder) => dispatch(settValgtVeileder(veileder))
 });
 
