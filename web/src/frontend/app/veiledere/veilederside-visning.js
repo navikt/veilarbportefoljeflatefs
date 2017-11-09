@@ -7,6 +7,7 @@ import { pagineringSetup } from '../ducks/paginering';
 import { sortBy } from '../ducks/sortering';
 import { nameToStateSliceMap } from '../ducks/utils';
 import { sorter } from './../utils/sortering';
+import { settSide } from '../ducks/ui/side';
 
 function erValgtHvisFiltrering(veiledere) {
     if (veiledere && veiledere.length > 0) {
@@ -41,6 +42,10 @@ class VeilederesideVisning extends Component {
         this.oppdaterVeilederListe = this.oppdaterVeilederListe.bind(this);
         this.oppdaterPaginering = this.oppdaterPaginering.bind(this);
     }
+    componentWillMount() {
+        this.props.settSide('enhet');
+    }
+
     componentDidMount() {
         this.oppdaterVeilederListe();
     }
@@ -104,6 +109,7 @@ VeilederesideVisning.propTypes = {
     paginering: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     veilederFilter: PT.array.isRequired, // eslint-disable-line react/forbid-prop-types
     sortBy: PT.func.isRequired,
+    settSide: PT.func.isRequired,
     veiledere: PT.shape({
         data: veiledereShape.isRequired
     }).isRequired,
@@ -126,7 +132,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     pagineringSetup: (...args) => dispatch(pagineringSetup(...args)),
-    sortBy: (...args) => dispatch(sortBy(...args))
+    sortBy: (...args) => dispatch(sortBy(...args)),
+    settSide: (side) => dispatch(settSide(side))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederesideVisning);
