@@ -38,7 +38,7 @@ export const alder = (intl) => ({
     '40-49': intl.formatMessage({id: 'filter.alder.40-49'}),
     '50-59': intl.formatMessage({id: 'filter.alder.50-59'}),
     '60-66': intl.formatMessage({id: 'filter.alder.60-66'}),
-    '67-70': intl.formatMessage({id: 'filter.alder.60-66'})
+    '67-70': intl.formatMessage({id: 'filter.alder.67-70'})
 });
 
 export const fodselsdagIMnd = () => range(1, 31, true).reduce((acc, x) => ({
