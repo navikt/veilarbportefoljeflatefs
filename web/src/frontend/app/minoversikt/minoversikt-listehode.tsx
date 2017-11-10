@@ -10,8 +10,9 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER,
     MIN_ARBEIDSLISTE,
-    I_AVTALT_AKTIVITET
+    I_AVTALT_AKTIVITET,
 } from '../filtrering/filter-konstanter';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -29,8 +30,10 @@ interface MinOversiktListehodeProps {
     brukere: BrukerModell[];
 }
 
-function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt }: MinOversiktListehodeProps) {
-    const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[filtervalg.ytelse];
+type Props = MinOversiktListehodeProps & InjectedIntlProps;
+
+function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, intl }: Props) {
+    const ytelseUtlopsdatoNavn = ytelseUtlopsSortering(intl)[filtervalg.ytelse];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' ? 'ddmmyy' : 'uker';
     return (
@@ -173,4 +176,4 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
     );
 }
 
-export default MinOversiktListeHode;
+export default injectIntl(MinOversiktListeHode);
