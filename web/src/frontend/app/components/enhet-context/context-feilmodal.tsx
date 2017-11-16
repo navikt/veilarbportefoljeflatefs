@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { AlertStripeAdvarselSolid } from 'nav-frontend-alertstriper';
+import { AlertStripeNavansatt } from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 interface ContextFeilmodalProps {
@@ -25,9 +25,9 @@ class ContextFeilmodal extends React.Component<ContextFeilmodalProps> {
                         <FormattedMessage id="nyenhet.feilmodal.overskrift" />
                     </Innholdstittel>
                     <div className="modal-content modal-test">
-                        <AlertStripeAdvarselSolid className="blokk-s">
+                        <AlertStripeNavansatt className="blokk-s">
                             <FormattedMessage id="nyenhet.feilmodal.tekst" />
-                        </AlertStripeAdvarselSolid>
+                        </AlertStripeNavansatt>
                     </div>
                     <div className="modal-footer" >
                         <Hovedknapp onClick={this.props.onClose}>
