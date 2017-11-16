@@ -4,7 +4,7 @@ import { DEFAULT_PAGINERING_STORRELSE, IKKE_SATT } from '../konstanter';
 import { pagineringSetup } from './paginering';
 import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
-import { hentStatusTall } from '../ducks/statustall';
+import { hentStatusTall } from './statustall';
 import { leggSideIUrl } from '../utils/url-utils';
 import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { oppdaterAlternativer, ListevisningType } from './ui/listevisning';
