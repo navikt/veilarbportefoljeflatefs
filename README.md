@@ -31,7 +31,7 @@ P.S. Husk og kjøre en `npm i` før du bygger
 
 For å watche uten mocking kjører man `npm run watch`. 
 
-For å aktivere mocking kjør `npm run watch:dev`
+For å aktivere mocking kjør `npm run watch:mock`
 
 ### Chrome
 
