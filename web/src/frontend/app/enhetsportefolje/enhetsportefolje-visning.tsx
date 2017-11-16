@@ -25,6 +25,7 @@ import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
 import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmelding-brukere';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -62,7 +63,7 @@ interface EnhetsportefoljeVisningProps {
     veilederpaginering: string;
 }
 
-class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningProps> {
+class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningProps & InjectedIntlProps> {
     componentWillMount() {
         const {
             valgtEnhet, hentPortefolje, sorteringsrekkefolge, sorteringsfelt, filtervalg
@@ -89,7 +90,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             hentPortefolje,
             filtervalg
         } = this.props;
-        const { antallReturnert, antallTotalt } = this.props.portefolje.data;
+        const {antallReturnert, antallTotalt} = this.props.portefolje.data;
 
         let valgtRekkefolge = '';
 
@@ -126,22 +127,23 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             closeServerfeilModal,
             feilmeldingModal,
             closeFeilmeldingModal,
-            veilederpaginering
+            veilederpaginering,
+            intl
         } = this.props;
 
-        const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
-        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+        const {antallTotalt, antallReturnert, fraIndex} = portefolje.data;
+        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse, intl);
 
         const harFilter = antallFilter(filtervalg) !== 0;
         if (!harFilter) {
-            return <VelgfilterMelding />;
+            return <VelgfilterMelding/>;
         }
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
         return (
             <div className="portefolje__container">
-                <Innholdslaster avhengigheter={[portefolje, veiledere, { status: tilordningerStatus }]}>
+                <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
                     <TabellOverskrift
                         fraIndex={fraIndex}
                         antallIVisning={antallReturnert}
@@ -164,7 +166,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     />
                     {
                         visDiagram ?
-                            <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet!.enhetId} /> :
+                            <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet!.enhetId}/> :
                             <EnhetTabell
                                 veiledere={veiledere.data.veilederListe}
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
@@ -208,4 +210,4 @@ const mapDispatchToProps = (dispatch) => ({
     closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EnhetsportefoljeVisning);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(EnhetsportefoljeVisning));

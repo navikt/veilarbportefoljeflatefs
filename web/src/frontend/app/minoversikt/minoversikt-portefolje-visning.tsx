@@ -22,6 +22,7 @@ import {
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 interface VeilederPortefoljeVisningProps {
     portefolje: PortefoljeState;
@@ -42,7 +43,7 @@ interface VeilederPortefoljeVisningProps {
     veilederpaginering: string;
 }
 
-class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps> {
+class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps & InjectedIntlProps> {
     componentWillMount() {
         const {
             valgtEnhet,
@@ -90,11 +91,12 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             feilmeldingModal,
             serverfeilModalSkalVises,
             closeServerfeilModal,
-            veilederpaginering
+            veilederpaginering,
+            intl
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
-        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse, intl);
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         return (
@@ -191,4 +193,4 @@ const mapDispatchToProps = (dispatch) => ({
     closeServerfeilModal: () => dispatch(skjulServerfeilModal())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(VeilederPortefoljeVisning));

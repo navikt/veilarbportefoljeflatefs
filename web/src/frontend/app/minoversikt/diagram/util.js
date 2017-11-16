@@ -94,8 +94,8 @@ export function ledetekster(filtreringvalg) {
     };
 }
 
-export function diagramSkalVises(visningsmodus, filtervalg) {
-    return visningsmodus === DIAGRAMVISNING && ytelseFilterErAktiv(filtervalg) && filtervalg !== ytelsevalg.AAP_UNNTAK;
+export function diagramSkalVises(visningsmodus, filtervalg, intl) {
+    return visningsmodus === DIAGRAMVISNING && ytelseFilterErAktiv(filtervalg) && filtervalg !== ytelsevalg(intl).AAP_UNNTAK;
 }
 
 export default {
