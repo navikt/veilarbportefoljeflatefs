@@ -18,7 +18,6 @@ import ContextFeilmodal from './context-feilmodal';
 
 interface StateProps {
     modalSynlig: boolean;
-    feilet: boolean;
     isPending: boolean;
     aktivEnhet: string;
     aktivEnhetNavn: string;
@@ -150,7 +149,6 @@ const mapStateToProps = (state: AppState): StateProps => {
         modalSynlig: harValgtEnhet && (valgtEnhetId !== aktivEnhetIdFraContext),
         feilmodalSynlig: state.nycontext.visFeilmodal,
         isPending: state.nycontext.isPending,
-        feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
         connected: state.nycontext.connected,
         aktivEnhet: valgtEnhetId,
         aktivEnhetNavn: `${aktivEnhetIdFraContext} ${aktivEnhetNavnFraContext}`,
