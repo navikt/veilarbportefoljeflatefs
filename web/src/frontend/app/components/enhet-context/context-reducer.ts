@@ -44,12 +44,10 @@ interface ConnectionStateAction {
 
 interface VisFeilmodalAction {
     type: ContextActionKeys.VIS_FEILMODAL;
-    connected: EnhetConnectionState;
 }
 
 interface SkjulFeilmodalAction {
     type: ContextActionKeys.SKJUL_FEILMODAL;
-    connected: EnhetConnectionState;
 }
 
 type ContextActions =
