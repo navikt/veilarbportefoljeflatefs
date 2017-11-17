@@ -42,10 +42,22 @@ interface ConnectionStateAction {
     connected: EnhetConnectionState;
 }
 
+interface VisFeilmodalAction {
+    type: ContextActionKeys.VIS_FEILMODAL;
+    connected: EnhetConnectionState;
+}
+
+interface SkjulFeilmodalAction {
+    type: ContextActionKeys.SKJUL_FEILMODAL;
+    connected: EnhetConnectionState;
+}
+
 type ContextActions =
     | SettAktivEnhetAction
     | ConnectionStateAction
     | SettPendingAction
+    | VisFeilmodalAction
+    | SkjulFeilmodalAction
     | { type: '__OTHER_ACTION__' };
 
 export default function contextReducer(state: ContextState = initialState, action: ContextActions): ContextState {
@@ -56,6 +68,10 @@ export default function contextReducer(state: ContextState = initialState, actio
             return { ...state, aktivEnhetId: action.enhet };
         case ContextActionKeys.SETT_PENDING_STATE:
             return { ...state, isPending: action.pending };
+        case ContextActionKeys.VIS_FEILMODAL:
+            return { ...state, visFeilmodal: true };
+        case ContextActionKeys.SKJUL_FEILMODAL:
+            return { ...state, visFeilmodal: false };
         default:
             return state;
     }

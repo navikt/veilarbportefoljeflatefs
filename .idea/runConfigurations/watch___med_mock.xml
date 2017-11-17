@@ -3,7 +3,7 @@
     <package-json value="$PROJECT_DIR$/web/src/frontend/package.json" />
     <command value="run" />
     <scripts>
-      <script value="watch:dev" />
+      <script value="watch:mock" />
     </scripts>
     <node-interpreter value="project" />
     <envs />
