@@ -80,7 +80,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     oppdaterEnhetIKontekstOgState(enhetId) {
         return oppdaterAktivEnhet(enhetId)
             .then(() => this.props.doSettNyAktivEnhet(enhetId))
-            .catch(() => this.props.doVisFeilmodal("nyenhet.feilmodal.tekst"));
+            .catch(() => this.props.doVisFeilmodal("nyenhet.kontekstholder.tilkobling.feilet"));
     }
 
     handleEndreAktivEnhet() {
@@ -97,7 +97,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     doHentNyAktivEnhet() {
         hentAktivEnhet()
             .then((nyEnhet) => this.props.doSettNyAktivEnhet(nyEnhet))
-            .catch(() => this.props.doVisFeilmodal("nyenhet.feilmodal.tekst"));
+            .catch(() => this.props.doVisFeilmodal("nyenhet.kontekstholder.tilkobling.feilet"));
     }
 
     enhetContextHandler(event: EnhetContextEvent) {
@@ -105,7 +105,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
             case EnhetContextEventNames.CONNECTION_STATE_CHANGED:
                 if(event.state === EnhetConnectionState.FAILED &&
                     this.props.connected === EnhetConnectionState.NOT_CONNECTED) {
-                    this.props.doVisFeilmodal("nyenhet.tilkobling.feilet");
+                    this.props.doVisFeilmodal("nyenhet.eventlytter.tilkobling.feilet");
                 }
                 this.props.doSettTilkoblingState(event.state);
                 break;
