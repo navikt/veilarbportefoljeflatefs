@@ -6,13 +6,15 @@ export interface ContextState {
     aktivEnhetId: string;
     isPending: boolean;
     visFeilmodal: boolean;
+    feilmodalTekstId: string;
 }
 
 const initialState: ContextState = {
     connected: EnhetConnectionState.NOT_CONNECTED,
     aktivEnhetId: getEnhetFromUrl(),
     isPending: false,
-    visFeilmodal: false
+    visFeilmodal: false,
+    feilmodalTekstId: "",
 };
 
 enum ContextActionKeys {
@@ -28,10 +30,6 @@ interface SettAktivEnhetAction {
     enhet: string;
 }
 
-interface FeilmodalAction {
-    type: ContextActionKeys.VIS_FEILMODAL | ContextActionKeys.SKJUL_FEILMODAL;
-}
-
 interface SettPendingAction {
     type: ContextActionKeys.SETT_PENDING_STATE;
     pending: boolean;
@@ -44,6 +42,7 @@ interface ConnectionStateAction {
 
 interface VisFeilmodalAction {
     type: ContextActionKeys.VIS_FEILMODAL;
+    tekstId: string;
 }
 
 interface SkjulFeilmodalAction {
@@ -67,7 +66,7 @@ export default function contextReducer(state: ContextState = initialState, actio
         case ContextActionKeys.SETT_PENDING_STATE:
             return { ...state, isPending: action.pending };
         case ContextActionKeys.VIS_FEILMODAL:
-            return { ...state, visFeilmodal: true };
+            return { ...state, visFeilmodal: true, feilmodalTekstId: action.tekstId };
         case ContextActionKeys.SKJUL_FEILMODAL:
             return { ...state, visFeilmodal: false };
         default:
@@ -87,10 +86,13 @@ export function settTilkoblingState(tilkoblet: EnhetConnectionState): Connection
     return { type: ContextActionKeys.SETT_TILKOBLING_STATE, connected: tilkoblet };
 }
 
-export function visFeilmodal(): FeilmodalAction {
-    return { type: ContextActionKeys.VIS_FEILMODAL };
+export function visFeilmodal(tekstId: string): VisFeilmodalAction {
+    return {
+        type: ContextActionKeys.VIS_FEILMODAL,
+        tekstId
+    };
 }
 
-export function skjulFeilmodal(): FeilmodalAction {
-    return { type: ContextActionKeys.SKJUL_FEILMODAL };
+export function skjulFeilmodal(): SkjulFeilmodalAction {
+    return { type: ContextActionKeys.SKJUL_FEILMODAL }
 }

@@ -24,6 +24,8 @@ interface StateProps {
     aktivEnhetNavn: string;
     aktivEnhetIdFraContext: string;
     feilmodalSynlig: boolean;
+    connected: EnhetConnectionState;
+    feilmeldingTekstId: string;
 }
 
 interface DispatchProps {
@@ -31,7 +33,7 @@ interface DispatchProps {
     doSettNyAktivEnhet: (enhet: string) => void;
     doSettIsPending: (pending: boolean) => void;
     doOppdaterValgtEnhet: (enhet: string) => void;
-    doVisFeilmodal: () => void;
+    doVisFeilmodal: (tekstId: string) => void;
     doSkjulFeilmodal: () => void;
 }
 
@@ -81,7 +83,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     oppdaterEnhetIKontekstOgState(enhetId) {
         return oppdaterAktivEnhet(enhetId)
             .then(() => this.props.doSettNyAktivEnhet(enhetId))
-            .catch(() => this.props.doVisFeilmodal());
+            .catch(() => this.props.doVisFeilmodal("nyenhet.feilmodal.tekst"));
     }
 
     handleEndreAktivEnhet() {
@@ -98,12 +100,16 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     doHentNyAktivEnhet() {
         hentAktivEnhet()
             .then((nyEnhet) => this.props.doSettNyAktivEnhet(nyEnhet))
-            .catch(() => this.props.doVisFeilmodal());
+            .catch(() => this.props.doVisFeilmodal("nyenhet.feilmodal.tekst"));
     }
 
     enhetContextHandler(event: EnhetContextEvent) {
         switch (event.type) {
             case EnhetContextEventNames.CONNECTION_STATE_CHANGED:
+                if(event.state === EnhetConnectionState.FAILED &&
+                    this.props.connected === EnhetConnectionState.NOT_CONNECTED) {
+                    this.props.doVisFeilmodal("nyenhet.tilkobling.feilet");
+                }
                 this.props.doSettTilkoblingState(event.state);
                 break;
             case EnhetContextEventNames.NY_AKTIV_ENHET:
@@ -113,19 +119,12 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     render() {
-
-        const alertIkkeTilkoblet = (
-            <AlertStripeAdvarselSolid>
-                <FormattedMessage id="nyenhet.tilkobling.feilet" />
-            </AlertStripeAdvarselSolid>
-        );
-
         return (
             <div>
-                { this.props.feilet ? alertIkkeTilkoblet : null }
                 <ContextFeilmodal
                     isOpen={this.props.feilmodalSynlig}
                     onClose={this.props.doSkjulFeilmodal}
+                    feilmeldingTekstId={this.props.feilmeldingTekstId}
                 />
                 <NyContextModal
                     isOpen={this.props.modalSynlig}
@@ -152,9 +151,11 @@ const mapStateToProps = (state: AppState): StateProps => {
         feilmodalSynlig: state.nycontext.visFeilmodal,
         isPending: state.nycontext.isPending,
         feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
+        connected: state.nycontext.connected,
         aktivEnhet: valgtEnhetId,
         aktivEnhetNavn: `${aktivEnhetIdFraContext} ${aktivEnhetNavnFraContext}`,
-        aktivEnhetIdFraContext
+        aktivEnhetIdFraContext,
+        feilmeldingTekstId: state.nycontext.feilmodalTekstId
     };
 };
 
@@ -164,7 +165,7 @@ const mapDispatchToProps = (dispatch): DispatchProps => {
         doSettNyAktivEnhet: (enhet: string) => dispatch(settNyAktivEnhet(enhet)),
         doSettIsPending: (pending: boolean) => dispatch(settIsPending(pending)),
         doOppdaterValgtEnhet: (enhet: string) => dispatch(oppdaterValgtEnhet(enhet)),
-        doVisFeilmodal: () => dispatch(visFeilmodal()),
+        doVisFeilmodal: (tekstId: string) => dispatch(visFeilmodal(tekstId)),
         doSkjulFeilmodal: () => dispatch(skjulFeilmodal())
     };
 };
