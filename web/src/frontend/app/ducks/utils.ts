@@ -22,7 +22,7 @@ export function sjekkStatuskode(response) {
     if (response.status === 401) {
         window.location.href = 'feilsider/401.html';// eslint-disable-line no-undef
     }
-    return new FetchError(response.statusText, response);
+    return Promise.reject(new FetchError(response.statusText, response));
 }
 
 export function toJson(response) {
