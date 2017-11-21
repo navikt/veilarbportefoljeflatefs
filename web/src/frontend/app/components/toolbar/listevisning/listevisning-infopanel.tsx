@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Lukknapp from 'nav-frontend-lukknapp';
-import { AlertStripeInfoSolid } from 'nav-frontend-alertstriper';
+import Ikon from 'nav-frontend-ikoner-assets';
 import { FormattedMessage } from 'react-intl';
 import { Action, bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -28,12 +28,15 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
     }
 
     return (
-        <AlertStripeInfoSolid className="blokk-m">
+        <div className="alertstripe alertstripe--solid alertstripe--info blokk-m">
+            <span className="alertstripe__ikon" aria-label="info">
+                <Ikon kind="info-sirkel-fylt" size="1.5em" />
+            </span>
             <div className="listevisning--infopanel" aria-live="assertive" role="alert" aria-atomic="true">
                 <FormattedMessage id="listevisning.infopanel" />
                 <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={() => props.lukkPanel(props.name)}>Lukk</Lukknapp>
             </div>
-        </AlertStripeInfoSolid>
+        </div>
     );
 };
 
