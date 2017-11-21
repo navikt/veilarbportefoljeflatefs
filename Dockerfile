@@ -10,4 +10,7 @@ COPY --from=npm-build /main/webapp /source/web/src/main/webapp
 RUN build
 
 
+FROM docker.adeo.no:5000/bekkci/skya-deployer as deployer
+FROM docker.adeo.no:5000/bekkci/frontend-smoketest as smoketest
+
 # TODO oppsett for nais
