@@ -26,7 +26,7 @@ class ContextFeilmodal extends React.Component<ContextFeilmodalProps> {
                     </Innholdstittel>
                     <div className="modal-content modal-test">
                         <AlertStripeNavansatt className="blokk-s">
-                            <FormattedMessage id="nyenhet.feilmodal.tekst" />
+                            <FormattedMessage id="nyenhet.kontekstholder.tilkobling.feilet" />
                         </AlertStripeNavansatt>
                     </div>
                     <div className="modal-footer" >

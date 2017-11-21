@@ -116,7 +116,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 
         const alertIkkeTilkoblet = (
             <AlertStripeAdvarselSolid>
-                <FormattedMessage id="nyenhet.tilkobling.feilet" />
+                <FormattedMessage id="nyenhet.eventlytter.tilkobling.feilet" />
             </AlertStripeAdvarselSolid>
         );
 
