@@ -17,7 +17,7 @@
     "chai": "3.5.0",
     "clean-webpack-plugin": "0.1.17",
     "copy-webpack-plugin": "4.1.1",
-    "core-js": "2.4.1",
+    "core-js": "2.5.0",
     "css-loader": "0.28.7",
     "del": "2.2.2",
     "eslint": "3.19.0",
