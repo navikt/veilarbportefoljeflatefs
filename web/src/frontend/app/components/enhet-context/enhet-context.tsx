@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { AlertStripeAdvarselSolid } from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import { settNyAktivEnhet, settTilkoblingState, settIsPending, skjulFeilmodal, visFeilmodal } from './context-reducer';
 import { AppState } from '../../reducer';
 import NyContextModal from './ny-context-modal';
