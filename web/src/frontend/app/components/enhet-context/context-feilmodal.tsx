@@ -8,7 +8,6 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 interface ContextFeilmodalProps {
     isOpen: boolean;
     onClose: () => void;
-    feilmeldingTekstId: string;
 }
 
 class ContextFeilmodal extends React.Component<ContextFeilmodalProps> {
@@ -27,7 +26,7 @@ class ContextFeilmodal extends React.Component<ContextFeilmodalProps> {
                     </Innholdstittel>
                     <div className="modal-content modal-test">
                         <AlertStripeNavansatt className="blokk-s">
-                            <FormattedMessage id={this.props.feilmeldingTekstId} />
+                            <FormattedMessage id="nyenhet.feilmodal.tekst" />
                         </AlertStripeNavansatt>
                     </div>
                     <div className="modal-footer" >
