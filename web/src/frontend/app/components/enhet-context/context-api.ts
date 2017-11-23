@@ -1,4 +1,4 @@
-import { fetchToJson } from '../../ducks/utils';
+import {fetchToJson, sjekkStatuskode} from '../../ducks/utils';
 
 const MED_CREDENTIALS: RequestInit = {
     credentials: 'same-origin',
@@ -27,5 +27,5 @@ export function oppdaterAktivEnhet(enhet: string): Promise<Response> {
             verdi: enhet,
             eventType: 'NY_AKTIV_ENHET'
         })
-    });
+    }).then(sjekkStatuskode);
 }

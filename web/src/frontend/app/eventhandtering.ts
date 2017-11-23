@@ -1,6 +1,7 @@
 import getStore from './store';
 import { oppdaterAktivEnhet } from './components/enhet-context/context-api';
 import { oppdaterValgtEnhet } from './ducks/enheter';
+import {visFeilmodal} from "./components/enhet-context/context-reducer";
 
 /* eslint-disable no-undef */
 const handlePersonsokSubmit = (fnr) => {
@@ -16,7 +17,10 @@ const handleChangeEnhet = (enhet, type) => {
     }
 
     const onSuccess = () => endreAktivEnhet(enhet);
-    const onError = () => endreAktivEnhet(enhet);
+    const onError = () => {
+        store.dispatch(visFeilmodal());
+        endreAktivEnhet(enhet);
+    };
 
     if (type !== 'init') {
         oppdaterAktivEnhet(enhet)

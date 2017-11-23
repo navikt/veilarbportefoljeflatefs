@@ -2,13 +2,12 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { AlertStripeNavansatt } from 'nav-frontend-alertstriper';
+import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 interface ContextFeilmodalProps {
     isOpen: boolean;
     onClose: () => void;
-    feilmeldingTekstId: string;
 }
 
 class ContextFeilmodal extends React.Component<ContextFeilmodalProps> {
@@ -26,9 +25,9 @@ class ContextFeilmodal extends React.Component<ContextFeilmodalProps> {
                         <FormattedMessage id="nyenhet.feilmodal.overskrift" />
                     </Innholdstittel>
                     <div className="modal-content modal-test">
-                        <AlertStripeNavansatt className="blokk-s">
-                            <FormattedMessage id={this.props.feilmeldingTekstId} />
-                        </AlertStripeNavansatt>
+                        <AlertStripeNavAnsatt className="blokk-s">
+                            <FormattedMessage id="nyenhet.kontekstholder.tilkobling.feilet" />
+                        </AlertStripeNavAnsatt>
                     </div>
                     <div className="modal-footer" >
                         <Hovedknapp onClick={this.props.onClose}>

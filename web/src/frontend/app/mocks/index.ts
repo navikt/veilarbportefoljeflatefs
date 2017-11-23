@@ -1,4 +1,4 @@
-import { MOCK_CONFIG, mock, delayed, respondWith, randomFailure } from './utils';
+import {MOCK_CONFIG, mock, delayed, respondWith, randomFailure } from './utils';
 import enheter from './enheter';
 import me from './me';
 import brukere from './portefolje';
@@ -57,5 +57,8 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
 (mock as any).put('/veilarbportefolje/api/arbeidsliste/', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'] }))));
 (mock as any).delete('/veilarbportefolje/api/arbeidsliste/', respondWith(delayed(1000, { aktoerIds: ['111111111111', '222222222222'] })));
 (mock as any).post('/veilarbportefolje/api/arbeidsliste/delete', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'], data: [] }))));
+
+// modiacontextholder-api
+(mock as any).post('/modiacontextholder/api/context', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'], data: [] }))));
 
 (mock as any).mock('*', respondWith((url, config) => (mock as any).realFetch.call(window, url, config)));
