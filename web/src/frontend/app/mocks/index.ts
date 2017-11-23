@@ -6,6 +6,7 @@ import veiledere from './veiledere';
 import statustall from './statustall';
 import tekster from './tekster';
 import tiltak from './tiltak';
+import diagramdata from './diagramdata';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 
 function lagPortefoljeForVeileder(queryParams, bodyParams, alleBrukere) {
@@ -44,6 +45,9 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
 (mock as any).post('express:/veilarbportefolje/api/veileder/:ident/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefoljeForVeileder(queryParams, bodyParams, brukere)));
 (mock as any).get('express:/veilarbportefolje/api/veileder/:veileder/statustall*', respondWith(delayed(1000, randomFailure(statustall))));
 (mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/tiltak', () => respondWith(tiltak));
+
+// diagram-api
+(mock as any).post('express:/veilarbportefolje/api/diagram*', () => respondWith(diagramdata));
 
 // situasjon-api
 (mock as any).post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, randomFailure({ feilendeTilordninger: ['11111111111','22222222222'] }))));

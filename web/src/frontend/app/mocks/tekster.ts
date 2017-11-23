@@ -34,7 +34,7 @@ export default {
     'enhet.veiledere.paginering.ingen.veiledere.tekst': 'Ingen veiledere funnet',
     'listevisning.tittel': 'Listevisning',
     'listevisning.valg.fodselsnr': 'Fodselsnr',
-    'minoversikt.diagram.header.aap_unntak': 'AAP med unntak',
+    'minoversikt.diagram.header.aap_unntak': 'AAP Unntak',
     'minoversikt.diagram.legend.aap_maxtid.2': 'Brukere med AAP innenfor maxtid som mister ytelse i gjeldende periode',
     'filtrering.filtrer-brukere.demografi.alder': 'Alder',
     'datepicker.feilmelding.ugyldig-dato': 'Ugyldig dato',

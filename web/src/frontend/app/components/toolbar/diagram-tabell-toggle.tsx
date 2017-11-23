@@ -68,7 +68,7 @@ const mapStateToProps = (state: AppState, ownProps: OwnProps): StateProps => {
 
     return {
         visningsmodus: state.veilederpaginering.visningsmodus,
-        skalSkjules: ytelse === null || ytelse === undefined || ytelse === 'AAP_UNNTAK'
+        skalSkjules: ytelse === null || ytelse === undefined
     };
 };
 
