@@ -1,4 +1,4 @@
-import {fetchToJson, sjekkStatuskode} from '../../ducks/utils';
+import { fetchToJson, sjekkStatuskode } from '../../ducks/utils';
 
 const MED_CREDENTIALS: RequestInit = {
     credentials: 'same-origin',
