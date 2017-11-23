@@ -79,10 +79,10 @@ function lagYtelse() {
     const ar = rnd(0, 4) + new Date().getFullYear();
 
     if (ytelse === 'AAP_MAXTID' || ytelse === 'AAP_UNNTAK') {
-        const randomDate = new Date(ar, mnd - 1, dag).getTime();
+        const rndDate = new Date(ar, mnd - 1, dag).getTime();
         const todayDate =  new Date().getTime();
 
-        const aaptidUke = Math.round((randomDate - todayDate) / (1000*60*60*24*7));
+        const aaptidUke = Math.round((rndDate - todayDate) / (1000*60*60*24*7));
         const aaptidUkeFasett = `KV${rnd(1, 16)}`;
 
         out.aapmaxtidUke = aaptidUke.toString();
