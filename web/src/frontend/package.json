@@ -118,6 +118,7 @@
     "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates --semverLevel major -e 2 -x history,react-router,react-router-redux,react-collapse,react-height,typescript,redux-form --packageFile ./package.json",
     "eslint": "eslint --fix ./app/**/*.js && npm run tslint",
     "tslint": "tslint ./app/**/*.ts* --fix",
+    "lint": "eslint --fix ./app/**/*.js && npm run tslint",
     "upload:doc": "node documentation/scripts/upload-all"
   }
 }
