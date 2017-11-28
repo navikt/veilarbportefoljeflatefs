@@ -60,7 +60,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}:
             />
             <UkeKolonne
                 className="col col-xs-2"
-                ukerIgjen={bruker.aapAntallDagerIgjenUnntak}
+                ukerIgjen={bruker.aapUnntakDagerIgjen}
                 minVal={12}
                 skalVises={[ytelsevalgIntl.TILTAKSPENGER, ytelsevalgIntl.AAP_UNNTAK, ytelsevalgIntl.AAP].includes(ytelse)}
             />

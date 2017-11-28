@@ -62,7 +62,7 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             />
             <UkeKolonne
                 className="col col-xs-2"
-                ukerIgjen={bruker.aapAntallDagerIgjenUnntak}
+                ukerIgjen={bruker.aapUnntakDagerIgjen}
                 minVal={12}
                 skalVises={ytelseErValgtKolonne && [ytelsevalgIntl.TILTAKSPENGER, ytelsevalgIntl.AAP_UNNTAK, ytelsevalgIntl.AAP].includes(ytelse)}
             />

@@ -70,7 +70,7 @@ function lagYtelse() {
         utlopsdatoFasett: '',
         aapmaxtidUke: '',
         aapmaxtidUkeFasett: '',
-        aapAntallDagerIgjenUnntak: '',
+        aapUnntakDagerIgjen: '',
         aapUnntakDagerIgjenFasett:''
     };
 
@@ -87,7 +87,7 @@ function lagYtelse() {
 
         out.aapmaxtidUke = aaptidUke.toString();
         out.aapmaxtidUkeFasett = aaptidUkeFasett;
-        out.aapAntallDagerIgjenUnntak = aaptidUke.toString();
+        out.aapUnntakDagerIgjen = aaptidUke.toString();
         out.aapUnntakDagerIgjenFasett = aaptidUkeFasett;
     } else {
         out.utlopsdato = new Date(ar, mnd, dag).toISOString();
@@ -149,7 +149,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         aapmaxtidUkeFasett: ytelse.aapmaxtidUkeFasett,
         arbeidsliste,
         aktiviteter: grunndata.aktiviteter,
-        aapAntallDagerIgjenUnntak: ytelse.aapAntallDagerIgjenUnntak,
+        aapUnntakDagerIgjen: ytelse.aapUnntakDagerIgjen,
         aapUnntakDagerIgjenFasett: ytelse.aapUnntakDagerIgjenFasett
     };
 }
