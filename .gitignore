@@ -24,3 +24,4 @@ npm-debug.log
 .project
 .settings
 .DS_Store
+web/src/frontend/.nyc_output/
