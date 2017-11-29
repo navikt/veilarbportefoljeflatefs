@@ -1,4 +1,4 @@
-import {MOCK_CONFIG, mock, delayed, respondWith, randomFailure } from './utils';
+import { MOCK_CONFIG, mock, delayed, respondWith, randomFailure } from './utils';
 import enheter from './enheter';
 import me from './me';
 import brukere from './portefolje';
