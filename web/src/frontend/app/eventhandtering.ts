@@ -1,7 +1,7 @@
 import getStore from './store';
 import { oppdaterAktivEnhet } from './components/enhet-context/context-api';
 import { oppdaterValgtEnhet } from './ducks/enheter';
-import {visFeilmodal} from "./components/enhet-context/context-reducer";
+import { visFeilmodal } from './components/enhet-context/context-reducer';
 
 /* eslint-disable no-undef */
 const handlePersonsokSubmit = (fnr) => {
