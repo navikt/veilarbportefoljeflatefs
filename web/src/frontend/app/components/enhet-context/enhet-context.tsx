@@ -15,6 +15,7 @@ import { getEnhetFromUrl, miljoFraUrl } from '../../utils/url-utils';
 import { oppdaterValgtEnhet } from '../../ducks/enheter';
 import { settEnhetIDekorator } from '../../eventhandtering';
 import ContextFeilmodal from './context-feilmodal';
+import { EnhetModell } from '../../model-interfaces';
 
 interface StateProps {
     modalSynlig: boolean;
@@ -24,6 +25,7 @@ interface StateProps {
     aktivEnhetNavn: string;
     aktivEnhetIdFraContext: string;
     feilmodalSynlig: boolean;
+    enheter: EnhetModell[];
 }
 
 interface DispatchProps {
@@ -63,10 +65,11 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     finnOgSettEnhetIKontekst() {
+        const { enheter } = this.props;
         const enhetFraUrl = getEnhetFromUrl();
-
-        if(enhetFraUrl !== '') {
-            this.oppdaterEnhetIKontekstOgState(enhetFraUrl);
+        const nyEnhet = enheter.map((enhet) => enhet.enhetId).includes(enhetFraUrl) ? enhetFraUrl : enheter[0].enhetId;
+        if(nyEnhet !== '') {
+            this.oppdaterEnhetIKontekstOgState(nyEnhet);
         } else {
             hentAktivEnhet().then((enhet) => {
                 if (!enhet) {
@@ -143,11 +146,11 @@ const mapStateToProps = (state: AppState): StateProps => {
     const valgtEnhet = state.enheter.valgtEnhet.enhet;
     const valgtEnhetId = valgtEnhet ? valgtEnhet.enhetId : '';
     const aktivEnhetIdFraContext = state.nycontext.aktivEnhetId;
-    const aktivEnhetNavnFraContext = aktivEnhetIdFraContext && state.enheter.data.find((enhet) => enhet.enhetId === aktivEnhetIdFraContext).navn;
-
+    const aktivEnhetNavnFraContext = state.enheter.data.map((enhet) => enhet.enhetId).includes(aktivEnhetIdFraContext)
+        && state.enheter.data.find((enhet) => enhet.enhetId === aktivEnhetIdFraContext).navn;
     const harValgtEnhet = valgtEnhetId != null && valgtEnhetId !== '' && aktivEnhetIdFraContext !== '';
-
     return {
+        enheter: state.enheter.data,
         modalSynlig: harValgtEnhet && (valgtEnhetId !== aktivEnhetIdFraContext),
         feilmodalSynlig: state.nycontext.visFeilmodal,
         isPending: state.nycontext.isPending,
