@@ -1,6 +1,7 @@
 {
   "name": "veilarbportefoljeflatefs",
   "version": "0.0.1",
+  "private": true,
   "description": "veilarbportefoljeflatefs",
   "author": "NAV",
   "license": "MIT",
@@ -38,6 +39,7 @@
     "less-loader": "4.0.5",
     "mocha": "3.4.2",
     "npm-check-updates": "2.12.1",
+    "nyc": "11.3.0",
     "optimize-css-assets-webpack-plugin": "3.2.0",
     "path-to-regexp": "1.7.0",
     "react-addons-test-utils": "15.6.0",
@@ -115,9 +117,13 @@
     "watch": "webpack --watch --env.dev",
     "watch:mock": "webpack --watch --env.dev --env.mock",
     "test": "mocha",
+    "test:coverage": "nyc npm run test",
     "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates --semverLevel major -e 2 -x history,react-router,react-router-redux,react-collapse,react-height,typescript,redux-form --packageFile ./package.json",
-    "eslint": "eslint --fix ./app/**/*.js && npm run tslint",
-    "tslint": "tslint ./app/**/*.ts* --fix",
+    "lint": "eslint ./app/**/*.js && npm run tslint",
+    "eslint": "eslint ./app/**/*.js && npm run tslint",
+    "eslint:fix": "eslint --fix ./app/**/*.js && npm run tslint",
+    "tslint": "tslint ./app/**/*.ts*",
+    "tslint:fix": "tslint ./app/**/*.ts* --fix",
     "upload:doc": "node documentation/scripts/upload-all"
   }
 }
