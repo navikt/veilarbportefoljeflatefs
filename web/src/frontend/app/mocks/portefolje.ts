@@ -11,7 +11,7 @@ const ytelser = [
     'ORDINARE_DAGPENGER',
     'DAGPENGER_MED_PERMITTERING',
     'DAGPENGER_OVRIGE',
-    'APP_MAXTID',
+    'AAP_MAXTID',
     'AAP_UNNTAK',
     'TILTAKSPENGER'
 ];
@@ -64,22 +64,31 @@ function lagGrunndata() {
 function lagYtelse() {
     const maybeYtelse = rnd(0, ytelser.length * 1.5);
     const ytelse = maybeYtelse < ytelser.length ? ytelser[maybeYtelse] : null;
-
     const out = {
         ytelse,
         utlopsdato: '',
         utlopsdatoFasett: '',
-        aapMaxtid: '',
-        aapMaxtidFasett: ''
+        aapmaxtidUke: '',
+        aapmaxtidUkeFasett: '',
+        aapUnntakDagerIgjen: '',
+        aapUnntakDagerIgjenFasett:''
     };
 
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
     const ar = rnd(0, 4) + new Date().getFullYear();
 
-    if (ytelse === 'AAP_MAXTID') {
-        out.aapMaxtid = new Date(ar, mnd - 1, dag).toISOString();
-        out.aapMaxtidFasett = `KV${rnd(1, 16)}`;
+    if (ytelse === 'AAP_MAXTID' || ytelse === 'AAP_UNNTAK') {
+        const rndDate = new Date(ar, mnd - 1, dag).getTime();
+        const todayDate =  new Date().getTime();
+
+        const aaptidUke = Math.round((rndDate - todayDate) / (1000*60*60*24*7));
+        const aaptidUkeFasett = `KV${rnd(1, 16)}`;
+
+        out.aapmaxtidUke = aaptidUke.toString();
+        out.aapmaxtidUkeFasett = aaptidUkeFasett;
+        out.aapUnntakDagerIgjen = aaptidUke.toString();
+        out.aapUnntakDagerIgjenFasett = aaptidUkeFasett;
     } else {
         out.utlopsdato = new Date(ar, mnd, dag).toISOString();
         out.utlopsdatoFasett = `MND${rnd(1, 12)}`;
@@ -136,10 +145,12 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         ytelse: ytelse.ytelse,
         utlopsdato: ytelse.utlopsdato,
         utlopsdatoFasett: ytelse.utlopsdatoFasett,
-        aapMaxtid: ytelse.aapMaxtid,
-        aapMaxtidFasett: ytelse.aapMaxtidFasett,
+        aapmaxtidUke: ytelse.aapmaxtidUke,
+        aapmaxtidUkeFasett: ytelse.aapmaxtidUkeFasett,
         arbeidsliste,
-        aktiviteter: grunndata.aktiviteter
+        aktiviteter: grunndata.aktiviteter,
+        aapUnntakDagerIgjen: ytelse.aapUnntakDagerIgjen,
+        aapUnntakDagerIgjenFasett: ytelse.aapUnntakDagerIgjenFasett
     };
 }
 

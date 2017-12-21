@@ -42,10 +42,10 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}:
                 skalVises={ytelse === ytelsevalgIntl.DAGPENGER || ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER}
             />
             <UkeKolonne
-            className="col col-xs-2"
-            ukerIgjen={bruker.permutlopUke}
-            minVal={2}
-            skalVises={ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
+                className="col col-xs-2"
+                ukerIgjen={bruker.permutlopUke}
+                minVal={2}
+                skalVises={ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -54,13 +54,14 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}:
                 skalVises={ytelse === ytelsevalgIntl.AAP_MAXTID}
             />
             <DatoKolonne
-            className="col col-xs-2"
-            dato={arbeidslisteFrist}
-            skalVises={filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
-            />
-            <DatoKolonne
                 className="col col-xs-2"
-                dato={utlopsdato}
+                dato={arbeidslisteFrist}
+                skalVises={filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
+            />
+            <UkeKolonne
+                className="col col-xs-2"
+                ukerIgjen={bruker.aapUnntakDagerIgjen}
+                minVal={12}
                 skalVises={[ytelsevalgIntl.TILTAKSPENGER, ytelsevalgIntl.AAP_UNNTAK, ytelsevalgIntl.AAP].includes(ytelse)}
             />
             <DatoKolonne

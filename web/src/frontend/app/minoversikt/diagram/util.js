@@ -77,7 +77,7 @@ export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata, 
     const ytelsevalgIntl = ytelsevalg(intl);
     if (valgtYtelse === ytelsevalgIntl.AAP || valgtYtelse === ytelsevalgIntl.TILTAKSPENGER) {
         return maned(antallBrukere, diagramdata);
-    } else if (valgtYtelse === ytelsevalgIntl.AAP_MAXTID) {
+    } else if (valgtYtelse === ytelsevalgIntl.AAP_MAXTID ||  valgtYtelse === ytelsevalgIntl.AAP_UNNTAK) {
         return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 215, step: 11 });
     }
     return ukeInndeling(antallBrukere, diagramdata, { min: 2, max: 52, step: 3 });
@@ -95,8 +95,7 @@ export function ledetekster(filtreringvalg) {
 }
 
 export function diagramSkalVises(visningsmodus, filtervalg, intl) {
-    return visningsmodus === DIAGRAMVISNING &&
-        ytelseFilterErAktiv(filtervalg) && filtervalg !== ytelsevalg(intl).AAP_UNNTAK;
+    return visningsmodus === DIAGRAMVISNING && ytelseFilterErAktiv(filtervalg);
 }
 
 export default {

@@ -89,7 +89,7 @@ export const ytelseUtlopsSortering = (intl) => ({
     [ytelsevalg(intl).ORDINARE_DAGPENGER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
     [ytelsevalg(intl).DAGPENGER_MED_PERMITTERING]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
     [ytelsevalg(intl).AAP]: Sorteringsfelt.UTLOPSDATO,
-    [ytelsevalg(intl).AAP_UNNTAK]: Sorteringsfelt.UTLOPSDATO,
+    [ytelsevalg(intl).AAP_UNNTAK]: Sorteringsfelt.AAP_UNNTAK_UKE,
     [ytelsevalg(intl).AAP_MAXTID]: Sorteringsfelt.AAP_MAXTID_UKE,
     [ytelsevalg(intl).TILTAKSPENGER]: Sorteringsfelt.UTLOPSDATO
 });
