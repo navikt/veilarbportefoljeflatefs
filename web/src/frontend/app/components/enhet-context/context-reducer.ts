@@ -1,4 +1,3 @@
-import { getEnhetFromUrl } from '../../utils/url-utils';
 import { EnhetConnectionState } from './enhet-context-listener';
 
 export interface ContextState {
@@ -10,7 +9,7 @@ export interface ContextState {
 
 const initialState: ContextState = {
     connected: EnhetConnectionState.NOT_CONNECTED,
-    aktivEnhetId: getEnhetFromUrl(),
+    aktivEnhetId: '',
     isPending: false,
     visFeilmodal: false
 };

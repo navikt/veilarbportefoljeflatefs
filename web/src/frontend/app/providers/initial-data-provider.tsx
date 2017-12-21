@@ -44,8 +44,9 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> 
         const enhetFraUrl = parse(location.search).enhet;// eslint-disable-line no-undef
         const enhetIdListe = enhetliste.map((enhet) => (enhet.enhetId));
 
-        if (enhetIdListe.includes(enhetFraUrl)) {
-            return Promise.resolve(enhetFraUrl);
+        if (enhetFraUrl !== '') {
+            const nyEnhet = enhetIdListe.includes(enhetFraUrl) ? enhetFraUrl : enhetIdListe[0];
+            return Promise.resolve(nyEnhet);
         }
         return hentAktivEnhet()
             .then((enhet) => {
