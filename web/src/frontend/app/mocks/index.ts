@@ -18,7 +18,7 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
     const { fra, antall } = queryParams;
     const fraInt = parseInt(fra, 10);
     const antallInt = parseInt(antall, 10);
-    const filtrerteBrukere = alleBrukere.splice(fraInt, antallInt);
+    const filtrerteBrukere = [...alleBrukere].splice(fraInt, antallInt);
 
     return {
         enhet,
@@ -58,3 +58,6 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
 (mock as any).post('/modiacontextholder/api/context', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'], data: [] }))));
 
 (mock as any).mock('*', respondWith((url, config) => (mock as any).realFetch.call(window, url, config)));
+
+//websocket
+(window as any).WebSocket = function MockedWebSocket() {};
