@@ -8,7 +8,7 @@ interface UkekolonneProps {
 }
 
 function lagUkerTekst(ukerIgjen, minVal) {
-    if (ukerIgjen < 0) {
+    if (ukerIgjen < 0 || ukerIgjen === undefined) {
         return null;
     } else if (ukerIgjen < minVal) {
         return `Under ${minVal} uker`;
