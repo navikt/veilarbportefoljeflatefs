@@ -88,10 +88,10 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
         if (uri.includes('/portefolje')) {
             const valgtVeileder = state.portefolje.veileder.ident;
             const veilederIdent = valgtVeileder === IKKE_SATT ? state.enheter.ident : valgtVeileder;
-            dispatch(hentPortefoljeForVeileder(nyEnhet, veilederIdent, IKKE_SATT, IKKE_SATT));
+            dispatch(hentPortefoljeForVeileder(nyEnhet, veilederIdent, IKKE_SATT, IKKE_SATT, state.filtreringMinoversikt));
             dispatch(hentStatusTall(nyEnhet, veilederIdent));
         } else if(uri.includes('/enhet')) {
-            dispatch(hentPortefoljeForEnhet(nyEnhet, IKKE_SATT, IKKE_SATT));
+            dispatch(hentPortefoljeForEnhet(nyEnhet, IKKE_SATT, IKKE_SATT, state.filtrering));
             dispatch(hentStatusTall(nyEnhet));
         } else if(uri.includes('/veiledere')) {
             dispatch(hentVeiledereForEnhet(nyEnhet));

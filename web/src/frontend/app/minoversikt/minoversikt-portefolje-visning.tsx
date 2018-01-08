@@ -187,7 +187,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, fra, antall, filtervalg)),
+        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, filtervalg, fra, antall)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal()),
     closeServerfeilModal: () => dispatch(skjulServerfeilModal())

@@ -148,7 +148,7 @@ const mapStateToProps = (state): StateProps => ({
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, fra, antall, filtervalg)),
+        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, filtervalg, fra, antall)),
     hentStatusTall: (enhet: string, veileder: string) => dispatch(hentStatusTall(enhet, veileder)),
     hentEnhetTiltak: (enhet: string) => dispatch(hentEnhetTiltak(enhet)),
     doSettValgtVeileder: (veileder: VeilederModell) => dispatch(settValgtVeileder(veileder))
