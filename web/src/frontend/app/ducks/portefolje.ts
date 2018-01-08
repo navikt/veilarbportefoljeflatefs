@@ -215,15 +215,15 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder) {
     const nyeFiltervalg = state[nameToStateSliceMap[filtergruppe]];
 
     if (filtergruppe === 'enhet') {
-        hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
+        hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, nyeFiltervalg, 0, antall)(dispatch);
         oppdaterAlternativer(dispatch, getState, ListevisningType.enhetensOversikt);
     } else if (filtergruppe === 'veileder') {
-        hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, 0, antall, nyeFiltervalg)(dispatch);
+        hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, nyeFiltervalg, 0, antall)(dispatch);
         oppdaterAlternativer(dispatch, getState, ListevisningType.minOversikt);
     }
 }
 
-export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
+export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filtervalg, fra = 0, antall = 20) {
     const fn = (dispatch) => Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
         .then((json) => {
             const { antallTotalt } = json;
@@ -244,7 +244,7 @@ export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, fra = 
 
 // Action Creators
 export function hentPortefoljeForVeileder(
-    enhet, veileder, rekkefolge, sorteringsfelt, fra = 0, antall = 20, filtervalg = {}) {
+    enhet, veileder, rekkefolge, sorteringsfelt, filtervalg, fra = 0, antall = 20) {
     const fn = (dispatch) =>
         Api.hentVeiledersPortefolje(enhet, veileder, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
             .then((json) => {
