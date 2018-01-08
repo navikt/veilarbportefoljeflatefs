@@ -13,7 +13,7 @@ export enum Sorteringsfelt {
     DAGPENGER_UTLOP_UKE = 'dagputlopuke',
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
     AAP_MAXTID_UKE = 'aapmaxtiduke',
-    AAP_UNNTAK_UKE = 'aapunntakdagerigjen',
+    AAP_UNNTAK_UKE = 'aapunntakukerigjen',
     ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
     VENTER_PA_SVAR_FRA_BRUKER = 'venterpasvarfrabruker',
@@ -81,7 +81,6 @@ export interface BrukerModell {
     utlopsdato?: string; // dato
     utlopsdatoFasett?: string; // dato
     aapUnntakUkerIgjen?: number
-    aapUnntakDagerIgjenFasett?: string;
     dagputlopUke?: number;
     dagputlopUkeFasett?: string; // dato
     permutlopUke?: number;
