@@ -66,6 +66,10 @@ const Listevisning = (props: ListevisningProps) => {
         return props.valgteAlternativ.indexOf(kolonne) > -1;
     }
 
+    if (![ListevisningType.minOversikt, ListevisningType.enhetensOversikt].includes(props.filtergruppe)){
+        return null;
+    }
+
     return (
         <Dropdown name={props.intl.formatMessage({id: 'toolbar.listevisning'})} disabled={props.muligeAlternativer.length <= 5}
                   className="dropdown--fixed dropdown--toolbar">
