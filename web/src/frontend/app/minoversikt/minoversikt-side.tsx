@@ -16,7 +16,7 @@ import { hentPortefoljeForVeileder, settValgtVeileder } from '../ducks/portefolj
 import { EnheterState } from '../ducks/enheter';
 import { VeiledereState } from '../ducks/veiledere';
 import { FiltervalgModell, ValgtEnhetModell, VeilederModell, } from '../model-interfaces';
-import {ListevisningState, ListevisningType} from '../ducks/ui/listevisning';
+import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import { getSideFromUrl } from '../utils/url-utils';
 

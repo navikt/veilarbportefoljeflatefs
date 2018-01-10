@@ -63,5 +63,5 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 
 (mock as any).mock('*', respondWith((url, config) => (mock as any).realFetch.call(window, url, config)));
 
-//websocket
-(window as any).WebSocket = function MockedWebSocket() {};
+// websocket
+(window as any).WebSocket = function MockedWebSocket() {}; // tslint:disable-line

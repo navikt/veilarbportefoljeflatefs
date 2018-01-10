@@ -66,7 +66,7 @@ const Listevisning = (props: ListevisningProps) => {
         return props.valgteAlternativ.indexOf(kolonne) > -1;
     }
 
-    if (![ListevisningType.minOversikt, ListevisningType.enhetensOversikt].includes(props.filtergruppe)){
+    if (![ListevisningType.minOversikt, ListevisningType.enhetensOversikt].includes(props.filtergruppe)) {
         return null;
     }
 

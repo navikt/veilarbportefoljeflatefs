@@ -80,7 +80,7 @@ export interface BrukerModell {
     ytelse?: string;
     utlopsdato?: string; // dato
     utlopsdatoFasett?: string; // dato
-    aapUnntakUkerIgjen?: number
+    aapUnntakUkerIgjen?: number;
     dagputlopUke?: number;
     dagputlopUkeFasett?: string; // dato
     permutlopUke?: number;
