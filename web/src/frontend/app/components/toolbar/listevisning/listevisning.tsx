@@ -39,7 +39,6 @@ const ListevisningRad = (props: Props) => {
 
 interface OwnProps {
     filtergruppe: ListevisningType;
-    skalVises: boolean;
 }
 
 interface StateProps {
@@ -67,7 +66,7 @@ const Listevisning = (props: ListevisningProps) => {
         return props.valgteAlternativ.indexOf(kolonne) > -1;
     }
 
-    if (!props.skalVises) {
+    if (![ListevisningType.minOversikt, ListevisningType.enhetensOversikt].includes(props.filtergruppe)){
         return null;
     }
 

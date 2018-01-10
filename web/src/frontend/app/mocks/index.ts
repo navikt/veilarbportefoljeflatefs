@@ -1,4 +1,4 @@
-import { MOCK_CONFIG, mock, delayed, respondWith, randomFailure } from './utils';
+import { mock, delayed, respondWith, randomFailure } from './utils';
 import enheter from './enheter';
 import me from './me';
 import brukere from './portefolje';
@@ -9,17 +9,17 @@ import tiltak from './tiltak';
 import diagramdata from './diagramdata';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 
-function lagPortefoljeForVeileder(queryParams, bodyParams, alleBrukere) {
-    const enhetportefolje = lagPortefolje(queryParams, bodyParams, enheter.enhetliste[0].enhetId, alleBrukere);
+function lagPortefoljeForVeileder(queryParams, alleBrukere) {
+    const enhetportefolje = lagPortefolje(queryParams, enheter.enhetliste[0].enhetId, alleBrukere);
     enhetportefolje.brukere.forEach((bruker) => bruker.veilederId = me.ident);
     return enhetportefolje;
 }
 
-function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
+function lagPortefolje(queryParams, enhet, alleBrukere) {
     const { fra, antall } = queryParams;
     const fraInt = parseInt(fra, 10);
     const antallInt = parseInt(antall, 10);
-    const filtrerteBrukere = alleBrukere.splice(fraInt, antallInt);
+    const filtrerteBrukere = alleBrukere.slice(fraInt, fraInt + antallInt);
 
     return {
         enhet,
@@ -40,9 +40,9 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
 
 // portefolje-api
 (mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/statustall', respondWith(delayed(1000, randomFailure(statustall))));
-(mock as any).post('express:/veilarbportefolje/api/enhet/:enhet/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefolje(queryParams, bodyParams, extra.enhet, brukere)));
+(mock as any).post('express:/veilarbportefolje/api/enhet/:enhet/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefolje(queryParams, extra.enhet, brukere)));
 (mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/portefoljestorrelser*', respondWith(() => lagPortefoljeStorrelser()));
-(mock as any).post('express:/veilarbportefolje/api/veileder/:ident/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefoljeForVeileder(queryParams, bodyParams, brukere)));
+(mock as any).post('express:/veilarbportefolje/api/veileder/:ident/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefoljeForVeileder(queryParams, brukere)));
 (mock as any).get('express:/veilarbportefolje/api/veileder/:veileder/statustall*', respondWith(delayed(1000, randomFailure(statustall))));
 (mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/tiltak', () => respondWith(tiltak));
 
@@ -62,3 +62,6 @@ function lagPortefolje(queryParams, bodyParams, enhet, alleBrukere) {
 (mock as any).post('/modiacontextholder/api/context', respondWith(delayed(1000, randomFailure({ error: ['111111111111', '222222222222'], data: [] }))));
 
 (mock as any).mock('*', respondWith((url, config) => (mock as any).realFetch.call(window, url, config)));
+
+//websocket
+(window as any).WebSocket = function MockedWebSocket() {};
