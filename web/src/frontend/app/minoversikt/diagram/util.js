@@ -77,8 +77,10 @@ export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata, 
     const ytelsevalgIntl = ytelsevalg(intl);
     if (valgtYtelse === ytelsevalgIntl.AAP || valgtYtelse === ytelsevalgIntl.TILTAKSPENGER) {
         return maned(antallBrukere, diagramdata);
-    } else if (valgtYtelse === ytelsevalgIntl.AAP_MAXTID ||  valgtYtelse === ytelsevalgIntl.AAP_UNNTAK) {
+    } else if (valgtYtelse === ytelsevalgIntl.AAP_MAXTID) {
         return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 215, step: 11 });
+    } else if (valgtYtelse === ytelsevalgIntl.AAP_UNNTAK) {
+        return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 83, step: 11 })
     }
     return ukeInndeling(antallBrukere, diagramdata, { min: 2, max: 52, step: 3 });
 }
