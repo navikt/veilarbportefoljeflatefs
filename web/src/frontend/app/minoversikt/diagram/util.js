@@ -80,7 +80,7 @@ export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata, 
     } else if (valgtYtelse === ytelsevalgIntl.AAP_MAXTID) {
         return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 215, step: 11 });
     } else if (valgtYtelse === ytelsevalgIntl.AAP_UNNTAK) {
-        return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 83, step: 11 })
+        return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 107, step: 11 })
     }
     return ukeInndeling(antallBrukere, diagramdata, { min: 2, max: 52, step: 3 });
 }
