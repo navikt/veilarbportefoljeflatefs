@@ -47,7 +47,7 @@ export const NavBar = ({
     return (
         <div role="toolbar">
             <button
-                tabIndex="-1"
+                tabIndex="0"
                 aria-label={formatMessage({ id: 'datepicker.forrige.maned' })}
                 className={`${className} DayPicker-NavButton--prev`}
                 disabled={!showPreviousButton}
@@ -58,7 +58,7 @@ export const NavBar = ({
                 }}
             />
             <button
-                tabIndex="-1"
+                tabIndex="0"
                 aria-label={formatMessage({ id: 'datepicker.neste.maned' })}
                 className={`${className} DayPicker-NavButton--next`}
                 disabled={!showNextButton}
