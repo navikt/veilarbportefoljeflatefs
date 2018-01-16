@@ -3,17 +3,17 @@ import Tabelletiketter, { TabelletiketterTypes } from '../tabelletiketter/tabell
 
 interface EtikettProps {
     type: TabelletiketterTypes;
-    child: React.ReactChild;
+    children: React.ReactChild;
     skalVises: boolean;
 }
 
-function Etikett({ type, child, skalVises }: EtikettProps) {
+function Etikett({ type, children, skalVises }: EtikettProps) {
     if (!skalVises) {
         return null;
     }
     return (
         <Tabelletiketter type={type}>
-            {child}
+            {children}
         </Tabelletiketter>
     );
 }

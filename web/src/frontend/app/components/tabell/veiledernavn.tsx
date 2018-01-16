@@ -11,8 +11,6 @@ interface VeiledernavnProps {
     veileder?: VeilederModell;
 }
 
-const fm = (id) => <FormattedMessage id={id} />;
-
 function VeilederNavn({ className, bruker, valgteKolonner, veileder }: VeiledernavnProps) {
     const veilederNavn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
     if (valgteKolonner.includes(Kolonne.VEILEDER)) {
@@ -24,9 +22,10 @@ function VeilederNavn({ className, bruker, valgteKolonner, veileder }: Veiledern
                         :
                         <Etikett
                             type={EtikettType.NYBRUKER}
-                            child={fm('enhet.portefolje.tabelletikett.ny.bruker')}
                             skalVises={bruker.veilederId === null}
-                        />
+                        >
+                            <FormattedMessage id='enhet.portefolje.tabelletikett.ny.bruker' />
+                        </Etikett>
                 }
             </div>
         );

@@ -1,38 +1,40 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import Etikett from './etikett';
-import { BrukerModell, EtikettType } from '../../model-interfaces';
-
-const fm = (id) => <FormattedMessage id={id} />;
+import {BrukerModell, EtikettType} from '../../model-interfaces';
 
 interface EtiketterProps {
     className?: string;
     bruker: BrukerModell;
 }
 
-function Etiketter({ className, bruker }: EtiketterProps) {
+function Etiketter({className, bruker}: EtiketterProps) {
     return (
         <span className={className}>
             <Etikett
-                type={ EtikettType.SIKKERHETSTILTAK}
-                child={fm('enhet.portefolje.tabelletikett.sikkerhetstiltak')}
+                type={EtikettType.SIKKERHETSTILTAK}
                 skalVises={bruker.sikkerhetstiltak.length > 0}
-            />
+            >
+                <FormattedMessage id='enhet.portefolje.tabelletikett.sikkerhetstiltak'/>
+            </Etikett>
             <Etikett
                 type={EtikettType.DISKRESJONSKODE}
-                child={<span>{`Kode ${bruker.diskresjonskode}`}</span>}
                 skalVises={bruker.diskresjonskode !== null}
-            />
+            >
+                <span>{`Kode ${bruker.diskresjonskode}`}</span>
+            </Etikett>
             <Etikett
                 type={EtikettType.EGEN_ANSATT}
-                child={fm('enhet.portefolje.tabelletikett.egen.ansatt')}
                 skalVises={bruker.egenAnsatt === true}
-            />
+            >
+                <FormattedMessage id='enhet.portefolje.tabelletikett.egen.ansatt'/>
+            </Etikett>
             <Etikett
                 type={EtikettType.DOED}
-                child={fm('enhet.portefolje.tabelletikett.dod')}
                 skalVises={bruker.erDoed === true}
-            />
+            >
+                <FormattedMessage id='enhet.portefolje.tabelletikett.dod'/>
+            </Etikett>
         </span>
     );
 }
