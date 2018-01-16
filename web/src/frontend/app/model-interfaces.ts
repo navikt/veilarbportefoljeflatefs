@@ -31,6 +31,7 @@ export enum EtikettType {
 
 export interface FiltervalgModell {
     nyeBrukere?: boolean;
+    nyeBrukereForVeileder?: boolean;
     inaktiveBrukere?: boolean;
     venterPaSvarFraNAV?: boolean;
     venterPaSvarFraBruker?: boolean;
@@ -73,6 +74,7 @@ export interface BrukerModell {
     sikkerhetstiltak: string[];
     diskresjonskode?: string;
     egenAnsatt: boolean;
+    nyForVeileder: boolean;
     erDoed: boolean;
     fodselsdagIMnd: number;
     fodselsdato: string; // dato

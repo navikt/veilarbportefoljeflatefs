@@ -69,6 +69,7 @@ export const valgtEnhetShape = PT.shape({
 
 export const filtervalgShape = PT.shape({
     nyeBrukere: PT.bool,
+    nyeBrukereFraVeileder: PT.bool,
     inaktiveBrukere: PT.bool,
     venterPaSvarFraNAV: PT.bool,
     venterPaSvarFraBruker: PT.bool,
@@ -85,6 +86,7 @@ export const filtervalgShape = PT.shape({
 
 export const filtervalgLabelShape = PT.shape({
     nyeBrukere: PT.bool,
+    nyeBrukereFraVeileder: PT.bool,
     inaktiveBrukere: PT.bool,
     venterPaSvarFraNAV: PT.bool,
     venterPaSvarFraBruker: PT.bool,
@@ -102,6 +104,7 @@ export const filtervalgLabelShape = PT.shape({
 export const statustallShape = PT.shape({
     totalt: PT.number.isRequired,
     nyeBrukere: PT.number,
+    nyeBrukereFraVeileder: PT.number,
     inaktiveBrukere: PT.number.isRequired,
     venterPaSvarFraNAV: PT.number.isRequired,
     venterPaSvarFraBruker: PT.number.isRequired

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper } from '../utils/utils';
 import BrukerNavn from '../components/tabell/brukernavn';
@@ -9,7 +10,8 @@ import {
     ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
-import { BrukerModell, FiltervalgModell } from '../model-interfaces';
+import {BrukerModell, EtikettType, FiltervalgModell} from '../model-interfaces';
+import Etikett from "../components/tabell/etikett";
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -19,6 +21,8 @@ interface MinOversiktKolonnerProps {
 }
 
 type Props = MinOversiktKolonnerProps & InjectedIntlProps;
+const fm = (id) => <FormattedMessage id={id} />;
+
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}: Props) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
@@ -89,6 +93,13 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}:
             dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
             skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
             />
+            <div className="col col-xs-3">
+                <Etikett
+                    type={EtikettType.NYBRUKER}
+                    child={fm('enhet.portefolje.tabelletikett.ny.bruker')}
+                    skalVises={bruker.nyForVeileder}
+                />
+            </div>
         </div>
     );
 }
