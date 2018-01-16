@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {EtikettType} from '../../model-interfaces';
-import {FormattedMessage} from 'react-intl';
+import { EtikettType } from '../../model-interfaces';
+import { FormattedMessage } from 'react-intl';
 import Etikett from './etikett';
 
 interface NyBrukerEtikettProps {
@@ -23,7 +23,7 @@ function NyBruker({nyBruker, skalVises, className}: NyBrukerEtikettProps) {
                 />
             </div> :
             null
-    )
+    );
 }
 
 export default NyBruker;

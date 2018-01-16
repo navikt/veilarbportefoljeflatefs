@@ -10,8 +10,8 @@ import {
     ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
-import {BrukerModell, EtikettType, FiltervalgModell} from '../model-interfaces';
-import NyBruker from "../components/tabell/nybruker";
+import { BrukerModell, FiltervalgModell } from '../model-interfaces';
+import NyBruker from '../components/tabell/nybruker';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -22,7 +22,6 @@ interface MinOversiktKolonnerProps {
 
 type Props = MinOversiktKolonnerProps & InjectedIntlProps;
 const fm = (id) => <FormattedMessage id={id}/>;
-
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}: Props) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
