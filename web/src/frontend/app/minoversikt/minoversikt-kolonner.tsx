@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper } from '../utils/utils';
 import BrukerNavn from '../components/tabell/brukernavn';
@@ -10,6 +11,7 @@ import {
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
 import { BrukerModell, FiltervalgModell } from '../model-interfaces';
+import NyBruker from '../components/tabell/nybruker';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -19,6 +21,7 @@ interface MinOversiktKolonnerProps {
 }
 
 type Props = MinOversiktKolonnerProps & InjectedIntlProps;
+const fm = (id) => <FormattedMessage id={id}/>;
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}: Props) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
@@ -29,12 +32,12 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}:
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
-    const { ytelse } = filtervalg;
+    const {ytelse} = filtervalg;
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId} />
-            <BrukerFnr className="col col-xs-2" bruker={bruker} />
+            <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId}/>
+            <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
@@ -65,9 +68,9 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}:
                 skalVises={[ytelsevalgIntl.TILTAKSPENGER, ytelsevalgIntl.AAP_UNNTAK, ytelsevalgIntl.AAP].includes(ytelse)}
             />
             <DatoKolonne
-            className="col col-xs-2"
-            dato={venterPaSvarFraBruker}
-            skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
+                className="col col-xs-2"
+                dato={venterPaSvarFraBruker}
+                skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -75,9 +78,9 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}:
                 skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
             />
             <DatoKolonne
-            className="col col-xs-2"
-            dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
-            skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
+                className="col col-xs-2"
+                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
+                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -85,9 +88,14 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}:
                 skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
             />
             <DatoKolonne
-            className="col col-xs-2"
-            dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-            skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
+                className="col col-xs-2"
+                dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
+                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
+            />
+            <NyBruker
+                className="col col-xs-3"
+                nyBruker={bruker.nyForVeileder}
+                skalVises={true}
             />
         </div>
     );

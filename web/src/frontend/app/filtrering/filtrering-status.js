@@ -10,6 +10,7 @@ import {
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
     NYE_BRUKERE,
+    NYE_BRUKERE_FOR_VEILEDER,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -98,6 +99,20 @@ class FiltreringStatus extends Component {
             />
         );
 
+        const nyeBrukereForVeilederCheckbox = (
+            <BarInput
+                id="nyeBrukere"
+                name="brukerstatus"
+                value="NYE_BRUKERE_FOR_VEILEDER"
+                onChange={this.handleChange}
+                checked={brukerstatus === NYE_BRUKERE_FOR_VEILEDER}
+                tekstId="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox"
+                antall={this.props.statustall.data.nyeBrukereForVeileder}
+                max={this.props.statustall.data.totalt}
+            />
+        );
+
+
         return (
             <div className="filtrering-oversikt panel">
                 <div className="typo-element blokk-m">
@@ -108,7 +123,7 @@ class FiltreringStatus extends Component {
                         />
                     </Element>
                 </div>
-                { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : null }
+                { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : nyeBrukereForVeilederCheckbox }
                 <BarInput
                     id="venterPaSvarFraNAV"
                     name="brukerstatus"

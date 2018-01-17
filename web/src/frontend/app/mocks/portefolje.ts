@@ -122,6 +122,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const grunndata = lagGrunndata();
 
     const maybeVeileder = rnd(0, veiledere.length * 2);
+    const nyForVeileder = maybeVeileder && Math.random() < 25 / 100;
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : null;
 
     const ytelse = lagYtelse();
@@ -132,6 +133,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         fornavn: grunndata.fornavn,
         etternavn: grunndata.etternavn,
         veilederId,
+        nyForVeileder,
         diskresjonskode: null,
         sikkerhetstiltak,
         venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,
