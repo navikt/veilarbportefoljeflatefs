@@ -21,7 +21,6 @@ interface MinOversiktKolonnerProps {
 }
 
 type Props = MinOversiktKolonnerProps & InjectedIntlProps;
-const fm = (id) => <FormattedMessage id={id}/>;
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}: Props) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
