@@ -19,7 +19,17 @@ interface FeilmeldingBrukereModalState {
 
 Modal.setAppElement('#applikasjon');
 
-const fnrsToList = (fnrs) => (<ul>{(fnrs.map((fnr) => <li key={fnr} className="fnr__listitem">{fnr}</li>))}</ul>);
+function FnrList({ feiledeTilordninger }) {
+    const listElements = feiledeTilordninger.map((tilordning) => (
+        <li key={tilordning.brukerFnr} className="fnr__listitem">{tilordning.brukerFnr}</li>
+    ));
+
+    return (
+        <ul>
+            {listElements}
+        </ul>
+    );
+}
 
 class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalProps, FeilmeldingBrukereModalState> {
     constructor(props) {
@@ -44,6 +54,7 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
 
     render() {
         const { tittelTekstID, infotekstTekstID, fnr, intl } = this.props;
+
         return (
             <Modal
                 contentLabel={intl.formatMessage({ id: 'modal.feilmelding.brukere' })}
@@ -61,7 +72,7 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
                     <Normaltekst className="blokk-s">
                         <IntlMessage id={infotekstTekstID} />
                     </Normaltekst>
-                    {fnrsToList(fnr)}
+                    <FnrList feiledeTilordninger={fnr} />
                     <button className="knapp knapp--hoved" onClick={this.lukkModal}>
                         <IntlMessage id="modal.tilordning.feilet.knapptekst" />
                     </button>
