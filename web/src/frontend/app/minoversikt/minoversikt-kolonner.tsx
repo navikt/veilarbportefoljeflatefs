@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper } from '../utils/utils';
+import {InjectedIntlProps, injectIntl} from 'react-intl';
+import {nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper} from '../utils/utils';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/ukekolonne';
@@ -9,18 +9,20 @@ import {
     ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
-import { BrukerModell, FiltervalgModell } from '../model-interfaces';
+import {BrukerModell, FiltervalgModell} from '../model-interfaces';
+import {Kolonne} from "../ducks/ui/listevisning";
 
 interface MinOversiktKolonnerProps {
     className?: string;
     bruker: BrukerModell;
     filtervalg: FiltervalgModell;
+    valgteKolonner: Kolonne[];
     enhetId: string;
 }
 
 type Props = MinOversiktKolonnerProps & InjectedIntlProps;
 
-function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}: Props) {
+function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, intl}: Props) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const ytelsevalgIntl = ytelsevalg(intl);
     // TODO: bør gjøres før data lagres i storen
@@ -65,9 +67,9 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}:
                 skalVises={[ytelsevalgIntl.TILTAKSPENGER, ytelsevalgIntl.AAP_UNNTAK, ytelsevalgIntl.AAP].includes(ytelse)}
             />
             <DatoKolonne
-            className="col col-xs-2"
-            dato={venterPaSvarFraBruker}
-            skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
+                className="col col-xs-2"
+                dato={venterPaSvarFraBruker}
+                skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -75,9 +77,10 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}:
                 skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
             />
             <DatoKolonne
-            className="col col-xs-2"
-            dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
-            skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET}
+                className="col col-xs-2"
+                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
+                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -85,9 +88,28 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, enhetId, intl}:
                 skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
             />
             <DatoKolonne
-            className="col col-xs-2"
-            dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-            skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0}
+                className="col col-xs-2"
+                dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
+                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 &&
+                valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+            />
+            <DatoKolonne
+                className="col col-xs-2"
+                dato={bruker.aktivitetStart ? new Date(bruker.aktivitetStart) : null}
+                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
+            />
+            <DatoKolonne
+                className="col col-xs-2"
+                dato={bruker.nesteAktivitetStart ? new Date(bruker.nesteAktivitetStart) : null}
+                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
+            />
+            <DatoKolonne
+                className="col col-xs-2"
+                dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
+                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
             />
         </div>
     );

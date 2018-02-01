@@ -9,6 +9,7 @@ import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import Collapse from 'react-collapse';
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
+import {Kolonne} from "../ducks/ui/listevisning";
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -17,6 +18,7 @@ interface MinOversiktBrukerPanelProps {
     filtervalg: FiltervalgModell;
     innloggetVeileder: string;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+    valgteKolonner: Kolonne[];
 }
 
 interface MinOversiktBrukerPanelState {
@@ -54,7 +56,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     }
 
     render() {
-        const {bruker, enhetId, filtervalg, innloggetVeileder, settMarkert} = this.props;
+        const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert} = this.props;
 
         const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
 
@@ -69,6 +71,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                         className="brukerliste__innhold flex flex--center"
                         bruker={bruker}
                         filtervalg={filtervalg}
+                        valgteKolonner={valgteKolonner}
                         enhetId={enhetId}
                     />
                     <div className="brukerliste__gutter-right">
