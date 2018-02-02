@@ -24,7 +24,7 @@ function VeilederNavn({ className, bruker, valgteKolonner, veileder }: Veiledern
                             type={EtikettType.NYBRUKER}
                             skalVises={bruker.veilederId === null}
                         >
-                            <FormattedMessage id='enhet.portefolje.tabelletikett.ny.bruker' />
+                            <FormattedMessage id="enhet.portefolje.tabelletikett.ny.bruker" />
                         </Etikett>
                 }
             </div>

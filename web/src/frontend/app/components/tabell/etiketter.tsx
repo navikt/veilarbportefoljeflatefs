@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Etikett from './etikett';
-import {BrukerModell, EtikettType} from '../../model-interfaces';
+import { BrukerModell, EtikettType } from '../../model-interfaces';
 
 interface EtiketterProps {
     className?: string;
@@ -15,7 +15,7 @@ function Etiketter({className, bruker}: EtiketterProps) {
                 type={EtikettType.SIKKERHETSTILTAK}
                 skalVises={bruker.sikkerhetstiltak.length > 0}
             >
-                <FormattedMessage id='enhet.portefolje.tabelletikett.sikkerhetstiltak'/>
+                <FormattedMessage id="enhet.portefolje.tabelletikett.sikkerhetstiltak"/>
             </Etikett>
             <Etikett
                 type={EtikettType.DISKRESJONSKODE}
@@ -27,13 +27,13 @@ function Etiketter({className, bruker}: EtiketterProps) {
                 type={EtikettType.EGEN_ANSATT}
                 skalVises={bruker.egenAnsatt === true}
             >
-                <FormattedMessage id='enhet.portefolje.tabelletikett.egen.ansatt'/>
+                <FormattedMessage id="enhet.portefolje.tabelletikett.egen.ansatt"/>
             </Etikett>
             <Etikett
                 type={EtikettType.DOED}
                 skalVises={bruker.erDoed === true}
             >
-                <FormattedMessage id='enhet.portefolje.tabelletikett.dod'/>
+                <FormattedMessage id="enhet.portefolje.tabelletikett.dod"/>
             </Etikett>
         </span>
     );

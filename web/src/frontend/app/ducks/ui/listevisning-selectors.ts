@@ -34,8 +34,18 @@ function harIkkeValgtTiltakstype(tiltakstyper: string[]): boolean {
     return tiltakstyper.length === 0;
 }
 
+function getFiltertingState(state: AppState, name: ListevisningType): FiltreringState {
+    switch (name) {
+        case ListevisningType.enhetensOversikt:
+            return state.filtrering;
+        case ListevisningType.minOversikt:
+            return state.filtreringMinoversikt;
+    }
+}
+
 export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolonne[] {
-    const filtervalg: FiltreringState = state.filtrering;
+    const filtervalg: FiltreringState = getFiltertingState(state, name);
+
     return [Kolonne.BRUKER, Kolonne.FODSELSNR]
         .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt))
@@ -43,5 +53,8 @@ export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolo
         .concat(addHvis(Kolonne.AVTALT_AKTIVITET, filtervalg.brukerstatus === I_AVTALT_AKTIVITET))
         .concat(addHvis(Kolonne.VENTER_SVAR, filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER || filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV))
         .concat(addHvis(Kolonne.UTLOP_YTELSE, filtervalg.ytelse !== null))
-        .concat(addHvis(Kolonne.UTLOP_AKTIVITET, harValgtMinstEnAktivitet(filtervalg.aktiviteter) && harIkkeValgtTiltakstype(filtervalg.tiltakstyper)));
+        .concat(addHvis(Kolonne.UTLOP_AKTIVITET, harValgtMinstEnAktivitet(filtervalg.aktiviteter) && harIkkeValgtTiltakstype(filtervalg.tiltakstyper)))
+        .concat(addHvis(Kolonne.START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.brukerstatus === I_AVTALT_AKTIVITET))
+        .concat(addHvis(Kolonne.NESTE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.brukerstatus === I_AVTALT_AKTIVITET))
+        .concat(addHvis(Kolonne.FORRIGE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.brukerstatus === I_AVTALT_AKTIVITET));
 }
