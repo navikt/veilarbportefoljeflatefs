@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {InjectedIntlProps, injectIntl} from 'react-intl';
-import {nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper} from '../utils/utils';
+import { FormattedMessage } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper } from '../utils/utils';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/ukekolonne';
@@ -9,7 +10,8 @@ import {
     ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
-import {BrukerModell, FiltervalgModell} from '../model-interfaces';
+import { BrukerModell, FiltervalgModell } from '../model-interfaces';
+import NyBruker from '../components/tabell/nybruker';
 import {Kolonne} from "../ducks/ui/listevisning";
 
 interface MinOversiktKolonnerProps {
@@ -31,12 +33,12 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
-    const { ytelse } = filtervalg;
+    const {ytelse} = filtervalg;
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId} />
-            <BrukerFnr className="col col-xs-2" bruker={bruker} />
+            <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId}/>
+            <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
@@ -110,6 +112,11 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
                 skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
                 valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
+            />
+            <NyBruker
+                className="col col-xs-3"
+                nyBruker={bruker.nyForVeileder}
+                skalVises={true}
             />
         </div>
     );

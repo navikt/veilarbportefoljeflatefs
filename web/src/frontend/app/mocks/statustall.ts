@@ -3,6 +3,7 @@ import portefolje from './portefolje';
 export default {
     totalt: portefolje.length,
     nyeBrukere: 2032,
+    nyeBrukereForVeileder: 15,
     inaktiveBrukere: 23,
     venterPaSvarFraNAV: 150,
     venterPaSvarFraBruker: 231,

@@ -70,8 +70,8 @@ function lagYtelse() {
         utlopsdatoFasett: '',
         aapmaxtidUke: '',
         aapmaxtidUkeFasett: '',
-        aapUnntakDagerIgjen: '',
-        aapUnntakDagerIgjenFasett:''
+        aapUnntakUkerIgjen: '',
+        aapUnntakUkerIgjenFasett:''
     };
 
     const dag = rnd(1, 31);
@@ -87,8 +87,8 @@ function lagYtelse() {
 
         out.aapmaxtidUke = aaptidUke.toString();
         out.aapmaxtidUkeFasett = aaptidUkeFasett;
-        out.aapUnntakDagerIgjen = aaptidUke.toString();
-        out.aapUnntakDagerIgjenFasett = aaptidUkeFasett;
+        out.aapUnntakUkerIgjen = aaptidUke.toString();
+        out.aapUnntakUkerIgjenFasett = aaptidUkeFasett;
     } else {
         out.utlopsdato = new Date(ar, mnd, dag).toISOString();
         out.utlopsdatoFasett = `MND${rnd(1, 12)}`;
@@ -122,6 +122,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const grunndata = lagGrunndata();
 
     const maybeVeileder = rnd(0, veiledere.length * 2);
+    const nyForVeileder = maybeVeileder && Math.random() < 25 / 100;
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : null;
 
     const ytelse = lagYtelse();
@@ -132,6 +133,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         fornavn: grunndata.fornavn,
         etternavn: grunndata.etternavn,
         veilederId,
+        nyForVeileder,
         diskresjonskode: null,
         sikkerhetstiltak,
         venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,
@@ -147,10 +149,10 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         utlopsdatoFasett: ytelse.utlopsdatoFasett,
         aapmaxtidUke: ytelse.aapmaxtidUke,
         aapmaxtidUkeFasett: ytelse.aapmaxtidUkeFasett,
+        aapUnntakUkerIgjen: ytelse.aapUnntakUkerIgjen,
+        aapUnntakUkerIgjenFasett: ytelse.aapUnntakUkerIgjenFasett,
         arbeidsliste,
-        aktiviteter: grunndata.aktiviteter,
-        aapUnntakDagerIgjen: ytelse.aapUnntakDagerIgjen,
-        aapUnntakDagerIgjenFasett: ytelse.aapUnntakDagerIgjenFasett
+        aktiviteter: grunndata.aktiviteter
     };
 }
 
