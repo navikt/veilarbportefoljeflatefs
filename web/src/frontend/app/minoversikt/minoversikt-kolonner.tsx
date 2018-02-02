@@ -11,7 +11,6 @@ import {
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
 import { BrukerModell, FiltervalgModell } from '../model-interfaces';
-import NyBruker from '../components/tabell/nybruker';
 import {Kolonne} from "../ducks/ui/listevisning";
 
 interface MinOversiktKolonnerProps {
@@ -112,11 +111,6 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
                 skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
                 valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
-            />
-            <NyBruker
-                className="col col-xs-3"
-                nyBruker={bruker.nyForVeileder}
-                skalVises={true}
             />
         </div>
     );
