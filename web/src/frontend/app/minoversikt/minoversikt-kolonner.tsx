@@ -11,7 +11,7 @@ import {
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
 import { BrukerModell, FiltervalgModell } from '../model-interfaces';
-import {Kolonne} from "../ducks/ui/listevisning";
+import { Kolonne } from '../ducks/ui/listevisning';
 
 interface MinOversiktKolonnerProps {
     className?: string;

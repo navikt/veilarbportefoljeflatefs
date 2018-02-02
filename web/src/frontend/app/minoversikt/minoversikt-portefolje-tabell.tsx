@@ -7,8 +7,8 @@ import MinOversiktListehode from './minoversikt-listehode';
 import {
     BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge, ValgtEnhetModell, VeilederModell
 } from '../model-interfaces';
-import {selectValgteAlternativer} from "../ducks/ui/listevisning-selectors";
-import {Kolonne, ListevisningType} from "../ducks/ui/listevisning";
+import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
+import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 
 interface MinOversiktTabellProps {
     portefolje: {

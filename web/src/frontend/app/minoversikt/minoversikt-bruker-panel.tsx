@@ -1,17 +1,17 @@
 import * as React from 'react';
-import {MouseEvent} from 'react';
+import { MouseEvent } from 'react';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import CheckBox from '../components/tabell/checkbox';
 import ArbeidslisteIkon from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
-import {brukerShape, filtervalgShape} from './../proptype-shapes';
-import {BrukerModell, EtikettType, FiltervalgModell} from '../model-interfaces';
+import { brukerShape, filtervalgShape } from './../proptype-shapes';
+import { BrukerModell, EtikettType, FiltervalgModell } from '../model-interfaces';
 import Collapse from 'react-collapse';
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
-import {Kolonne} from "../ducks/ui/listevisning";
-import Etikett from "../components/tabell/etikett";
-import {FormattedMessage} from "react-intl";
+import { Kolonne } from '../ducks/ui/listevisning';
+import Etikett from '../components/tabell/etikett';
+import { FormattedMessage } from 'react-intl';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -88,7 +88,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                                 type={EtikettType.NYBRUKER}
                                 skalVises={bruker.nyForVeileder === true}
                             >
-                                <FormattedMessage id='enhet.portefolje.tabelletikett.ny.bruker'/>
+                                <FormattedMessage id="enhet.portefolje.tabelletikett.ny.bruker"/>
                             </Etikett>
                         </div>
                     </div>

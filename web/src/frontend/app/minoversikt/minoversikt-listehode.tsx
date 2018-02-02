@@ -13,7 +13,7 @@ import {
     I_AVTALT_AKTIVITET,
 } from '../filtrering/filter-konstanter';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import {Kolonne} from "../ducks/ui/listevisning";
+import { Kolonne } from '../ducks/ui/listevisning';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
