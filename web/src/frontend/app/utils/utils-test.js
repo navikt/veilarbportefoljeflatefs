@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import 'babel-polyfill';
-import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper } from './utils';
+import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker } from './utils';
 
 describe('Date utils', () => {
     describe('Utlopsdato aktiviteter', () => {
@@ -47,6 +47,24 @@ describe('Date utils', () => {
         it('skal returnere null dersom ingen har status JA', () => {
             const aktivitetFiltervalg = { a1: 'NEI', a2: 'NA', a3: 'NA' };
             expect(utledValgteAktivitetsTyper(null, aktivitetFiltervalg)).to.be.a('null');
+        });
+    });
+
+    describe('utlopsdatoUker', () => {
+        it('skal håndtere null verdier', () => {
+            expect(utlopsdatoUker(null)).to.be.equal(undefined);
+            expect(utlopsdatoUker(undefined)).to.be.equal(undefined);
+            expect(utlopsdatoUker('ikke gyldig datostreng')).to.be.equal(undefined);
+        });
+
+        it('skal regne ut antall uker', () => {
+            const uker = 7 * 24 * 3600 * 1000;
+            const now = new Date().getTime();
+            const fremtiden = new Date(now + (2 * uker));
+            const fortiden = new Date(now - (2 * uker));
+
+            expect(utlopsdatoUker(`${fremtiden}`)).to.be.equal(2);
+            expect(utlopsdatoUker(`${fortiden}`)).to.be.equal(-2);
         });
     });
 });

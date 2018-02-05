@@ -91,12 +91,11 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             feilmeldingModal,
             serverfeilModalSkalVises,
             closeServerfeilModal,
-            veilederpaginering,
-            intl
+            veilederpaginering
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
-        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse, intl);
+        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         return (
@@ -193,4 +192,4 @@ const mapDispatchToProps = (dispatch) => ({
     closeServerfeilModal: () => dispatch(skjulServerfeilModal())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(VeilederPortefoljeVisning));
+export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);

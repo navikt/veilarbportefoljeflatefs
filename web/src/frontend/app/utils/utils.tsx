@@ -45,3 +45,18 @@ export function erDev() {
     const host: string = window.location.host;
     return host.includes('localhost') || host.includes('127.0.0.1');
 }
+
+export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
+    if (!utlopsdatoStr) {
+        return undefined;
+    }
+
+    const utlopsdato = new Date(utlopsdatoStr);
+    if (Number.isNaN(utlopsdato.getTime())) {
+        return undefined;
+    }
+    const now = new Date();
+    const millisDiff = utlopsdato.getTime() - now.getTime();
+
+    return Math.round(millisDiff / (7 * 24 * 3600 * 1000));
+}
