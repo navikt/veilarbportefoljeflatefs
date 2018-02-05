@@ -96,7 +96,7 @@ export function ledetekster(filtreringvalg) {
     };
 }
 
-export function diagramSkalVises(visningsmodus, filtervalg, intl) {
+export function diagramSkalVises(visningsmodus, filtervalg) {
     return visningsmodus === DIAGRAMVISNING && ytelseFilterErAktiv(filtervalg);
 }
 

@@ -60,11 +60,11 @@ describe('Date utils', () => {
         it('skal regne ut antall uker', () => {
             const uker = 7 * 24 * 3600 * 1000;
             const now = new Date().getTime();
-            const fremtiden = new Date(now + 2 * uker);
-            const fortiden = new Date(now - 2 * uker);
+            const fremtiden = new Date(now + (2 * uker));
+            const fortiden = new Date(now - (2 * uker));
 
-            expect(utlopsdatoUker(''+fremtiden)).to.be.equal(2);
-            expect(utlopsdatoUker(''+fortiden)).to.be.equal(-2);
+            expect(utlopsdatoUker(`${fremtiden}`)).to.be.equal(2);
+            expect(utlopsdatoUker(`${fortiden}`)).to.be.equal(-2);
         });
     });
 });
