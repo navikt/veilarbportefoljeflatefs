@@ -7,8 +7,6 @@ import MinOversiktListehode from './minoversikt-listehode';
 import {
     BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge, ValgtEnhetModell, VeilederModell
 } from '../model-interfaces';
-import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
-import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 
 interface MinOversiktTabellProps {
     portefolje: {
@@ -20,20 +18,18 @@ interface MinOversiktTabellProps {
         };
         sorteringsfelt: Sorteringsfelt;
     };
-    valgtEnhet: ValgtEnhetModell;
-    sorteringsrekkefolge: Sorteringsrekkefolge;
-    settMarkert: () => void;
-    filtervalg: FiltervalgModell;
-    settSorteringOgHentPortefolje: (sortering: string) => void;
-    veiledere: VeilederModell[];
-    innloggetVeileder: string;
-    valgteKolonner: Kolonne[];
-    visesAnnenVeiledersPortefolje: boolean;
+        valgtEnhet: ValgtEnhetModell;
+        sorteringsrekkefolge: Sorteringsrekkefolge;
+        settMarkert: () => void;
+        filtervalg: FiltervalgModell;
+        settSorteringOgHentPortefolje: (sortering: string) => void;
+        veiledere: VeilederModell[];
+        innloggetVeileder: string;
 }
 
 function MinoversiktTabell({
                                settMarkert, portefolje, settSorteringOgHentPortefolje,
-                               filtervalg, sorteringsrekkefolge, valgtEnhet, innloggetVeileder, valgteKolonner
+                               filtervalg, sorteringsrekkefolge, valgtEnhet, innloggetVeileder
                            }: MinOversiktTabellProps) {
     const brukere = portefolje.data.brukere;
     const {enhetId} = valgtEnhet.enhet!;
@@ -45,7 +41,6 @@ function MinoversiktTabell({
                 sorteringOnClick={settSorteringOgHentPortefolje}
                 filtervalg={filtervalg}
                 sorteringsfelt={portefolje.sorteringsfelt}
-                valgteKolonner={valgteKolonner}
                 brukere={brukere}
             />
             <ul className="brukerliste">
@@ -56,7 +51,6 @@ function MinoversiktTabell({
                             enhetId={enhetId}
                             settMarkert={settMarkert}
                             filtervalg={filtervalg}
-                            valgteKolonner={valgteKolonner}
                             innloggetVeileder={innloggetVeileder}
                         />
                     )}
@@ -70,8 +64,7 @@ const mapStateToProps = (state) => ({
     veiledere: state.veiledere.data.veilederListe,
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
-    filtervalg: state.filtreringMinoversikt,
-    valgteKolonner: selectValgteAlternativer(state, ListevisningType.minOversikt)
+    filtervalg: state.filtreringMinoversikt
 });
 
 const mapDispatchToProps = (dispatch) => ({

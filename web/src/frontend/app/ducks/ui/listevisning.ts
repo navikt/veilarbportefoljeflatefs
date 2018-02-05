@@ -25,10 +25,7 @@ export enum Kolonne {
     AVTALT_AKTIVITET = 'avtaltaktivitet',
     VENTER_SVAR = 'ventersvar',
     UTLOP_YTELSE = 'utlopytelse',
-    UTLOP_AKTIVITET = 'utlopaktivitet',
-    START_DATO_AKTIVITET = 'aktivitet_start',
-    NESTE_START_DATO_AKTIVITET = 'neste_aktivitet_start',
-    FORRIGE_START_DATO_AKTIVITET = 'forrige_aktivitet_start'
+    UTLOP_AKTIVITET = 'utlopaktivitet'
 }
 
 export enum ListevisningType {

@@ -5,13 +5,10 @@ import CheckBox from '../components/tabell/checkbox';
 import ArbeidslisteIkon from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
 import { brukerShape, filtervalgShape } from './../proptype-shapes';
-import { BrukerModell, EtikettType, FiltervalgModell } from '../model-interfaces';
+import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import Collapse from 'react-collapse';
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
-import { Kolonne } from '../ducks/ui/listevisning';
-import Etikett from '../components/tabell/etikett';
-import { FormattedMessage } from 'react-intl';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -20,7 +17,6 @@ interface MinOversiktBrukerPanelProps {
     filtervalg: FiltervalgModell;
     innloggetVeileder: string;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
-    valgteKolonner: Kolonne[];
 }
 
 interface MinOversiktBrukerPanelState {
@@ -43,7 +39,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
 
     handleArbeidslisteButtonClick(event) {
         event.preventDefault();
-        this.setState({apen: !this.state.apen});
+        this.setState({ apen: !this.state.apen });
         if (this.props.onClick) {
             this.props.onClick(event);
         }
@@ -58,7 +54,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     }
 
     render() {
-        const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert} = this.props;
+        const {bruker, enhetId, filtervalg, innloggetVeileder, settMarkert} = this.props;
 
         const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
 
@@ -66,14 +62,13 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
             <li className="brukerliste--border-bottom-thin">
                 <div className="brukerliste__element">
                     <div className="brukerliste__gutter-left brukerliste--min-width-minside">
-                        <CheckBox bruker={bruker} settMarkert={settMarkert}/>
-                        <ArbeidslisteIkon skalVises={arbeidslisteAktiv}/>
+                        <CheckBox bruker={bruker} settMarkert={settMarkert} />
+                        <ArbeidslisteIkon skalVises={arbeidslisteAktiv} />
                     </div>
                     <MinOversiktKolonner
                         className="brukerliste__innhold flex flex--center"
                         bruker={bruker}
                         filtervalg={filtervalg}
-                        valgteKolonner={valgteKolonner}
                         enhetId={enhetId}
                     />
                     <div className="brukerliste__gutter-right">
@@ -82,15 +77,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                             apen={this.state.apen}
                             onClick={this.handleArbeidslisteButtonClick}
                         />
-                        <div>
-                            <Etiketter bruker={bruker}/>
-                            <Etikett
-                                type={EtikettType.NYBRUKER}
-                                skalVises={bruker.nyForVeileder === true}
-                            >
-                                <FormattedMessage id="enhet.portefolje.tabelletikett.ny.bruker"/>
-                            </Etikett>
-                        </div>
+                        <Etiketter bruker={bruker}/>
                     </div>
                 </div>
                 <Collapse isOpened={this.state.apen}>

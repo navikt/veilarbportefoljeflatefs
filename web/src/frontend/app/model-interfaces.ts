@@ -18,10 +18,7 @@ export enum Sorteringsfelt {
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
     VENTER_PA_SVAR_FRA_BRUKER = 'venterpasvarfrabruker',
     UTLOPTE_AKTIVITETER = 'utlopteaktiviteter',
-    I_AVTALT_AKTIVITET = 'iavtaltaktivitet',
-    START_DATO_FOR_AVTALT_AKTIVITET = 'aktivitet_start',
-    NESTE_START_DATO_FOR_AVTALT_AKTIVITET = 'neste_aktivitet_start',
-    FORRIGE_DATO_FOR_AVTALT_AKTIVITET = 'forrige_aktivitet_start'
+    I_AVTALT_AKTIVITET = 'iavtaltaktivitet'
 }
 
 export enum EtikettType {
@@ -99,9 +96,6 @@ export interface BrukerModell {
     veilederNavn?: string;
     brukertiltak?: string[];
     aktiviteter?: AktiviteterModell;
-    aktivitetStart?: string; // dato
-    nesteAktivitetStart?: string; // dato
-    forrigeAktivitetStart?: string; // dato
     markert?: boolean;
 }
 
