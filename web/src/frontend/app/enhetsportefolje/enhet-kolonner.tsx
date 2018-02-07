@@ -13,7 +13,7 @@ import {
 import DatoKolonne from '../components/datokolonne';
 import { Kolonne } from '../ducks/ui/listevisning';
 import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
-import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper } from '../utils/utils';
+import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker } from '../utils/utils';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
 
@@ -31,7 +31,7 @@ type Props = EnhetKolonnerProps & InjectedIntlProps;
 function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder, intl}: Props) {
     const ytelsevalgIntl = ytelsevalg(intl);
     const { ytelse } = filtervalg;
-    const utlopsDato = bruker.utlopsdato ? new Date(bruker.utlopsdato) : null;
+    const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
@@ -56,6 +56,12 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             />
             <UkeKolonne
                 className="col col-xs-2"
+                ukerIgjen={utlopsdatoUkerIgjen}
+                minVal={12}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP)}
+            />
+            <UkeKolonne
+                className="col col-xs-2"
                 ukerIgjen={bruker.aapmaxtidUke}
                 minVal={12}
                 skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_MAXTID)}
@@ -64,7 +70,13 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 ukerIgjen={bruker.aapUnntakUkerIgjen}
                 minVal={12}
-                skalVises={ytelseErValgtKolonne && [ytelsevalgIntl.TILTAKSPENGER, ytelsevalgIntl.AAP_UNNTAK, ytelsevalgIntl.AAP].includes(ytelse)}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_UNNTAK)}
+            />
+            <UkeKolonne
+                className="col col-xs-2"
+                ukerIgjen={utlopsdatoUkerIgjen}
+                minVal={12}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.TILTAKSPENGER)}
             />
             <DatoKolonne
                 className="col col-xs-2"

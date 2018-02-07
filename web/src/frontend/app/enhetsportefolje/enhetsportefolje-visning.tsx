@@ -127,12 +127,11 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             closeServerfeilModal,
             feilmeldingModal,
             closeFeilmeldingModal,
-            veilederpaginering,
-            intl
+            veilederpaginering
         } = this.props;
 
         const {antallTotalt, antallReturnert, fraIndex} = portefolje.data;
-        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse, intl);
+        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
 
         const harFilter = antallFilter(filtervalg) !== 0;
         if (!harFilter) {
@@ -210,4 +209,4 @@ const mapDispatchToProps = (dispatch) => ({
     closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(EnhetsportefoljeVisning));
+export default connect(mapStateToProps, mapDispatchToProps)(EnhetsportefoljeVisning);
