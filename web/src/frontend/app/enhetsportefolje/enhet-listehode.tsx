@@ -53,7 +53,7 @@ type Props = EnhetListehodeProps & InjectedIntlProps;
 function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner, intl }: Props) {
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering(intl)[filtervalg.ytelse];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
-    const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' ? 'ddmmyy' : 'uker';
+    const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' ? 'periode' : 'uker';
 
     return (
         <div className="brukerliste__header">

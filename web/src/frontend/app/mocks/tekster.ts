@@ -177,6 +177,7 @@ export default {
         'minoversikt.link.til.veilederoversikt': 'Til veilederoversikt',
         'minoversikt.diagram.header.dagpenger': 'Dagpenger',
         'portefolje.tabell.ddmmyy': 'Dato',
+        'portefolje.tabell.periode': 'Vedtaksperiode',
         'filter.servicegruppe.vurdi': 'Sykmeldt oppfølging på arbeidsplassen',
         'minoversikt.diagram.header.ordinare_dagpenger': 'Ordinære dagpenger',
         'filtrering.aktiviteter.gruppeaktivitet': 'Gruppeaktivitet',
