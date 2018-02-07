@@ -84,9 +84,9 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER  && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
             />
             <DatoKolonne
-            className="col col-xs-2"
-            dato={venterPaSvarFraNAV}
-            skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                className="col col-xs-2"
+                dato={venterPaSvarFraNAV}
+                skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -94,9 +94,9 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
             />
             <DatoKolonne
-            className="col col-xs-2"
-            dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
-            skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                className="col col-xs-2"
+                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
+                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"

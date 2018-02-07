@@ -40,7 +40,7 @@ function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
     return false;
 }
 
-function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}, intl}: FiltreringLabelContainerProps) {
+function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}, filtergruppe, intl}: FiltreringLabelContainerProps) {
     let muligMenIkkeValgt: boolean;
     let kolonne: Kolonne | null;
     const filterElementer = Object.entries(filtervalg)
@@ -82,7 +82,8 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     ));
             } else if (value) {
                 kolonne = key === 'ytelse' ? Kolonne.UTLOP_YTELSE : getKolonneFraLabel(value);
-                muligMenIkkeValgt = harMuligMenIkkeValgtKolonne(listevisning, kolonne);
+                muligMenIkkeValgt = kolonne === Kolonne.AVTALT_AKTIVITET && filtergruppe === 'veileder' ? true :
+                    harMuligMenIkkeValgtKolonne(listevisning, kolonne);
                 return [
                     <FiltreringLabel
                         key={`${key}--${value}`}
