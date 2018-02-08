@@ -56,7 +56,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                         />
                         <Listeoverskrift
                             className="listeoverskrift__ytelse listeoverskrift col col-xs-2"
-                            skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse)}
+                            skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                             id="portefolje.tabell.utlopsdato"
                         />
                         <Listeoverskrift
@@ -143,7 +143,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === ytelseUtlopsdatoNavn}
                             tekstId={`portefolje.tabell.${ytelseSorteringHeader}`}
-                            skalVises={ytelseFilterErAktiv(filtervalg.ytelse)}
+                            skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
                         <SorteringHeader
