@@ -31,6 +31,8 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
+    const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
+
     const {ytelse} = filtervalg;
 
     return (
@@ -41,13 +43,13 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
-                skalVises={ytelse === ytelsevalgIntl.DAGPENGER || ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.DAGPENGER || ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
-                skalVises={ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING)}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -58,25 +60,25 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={12}
-                skalVises={ytelse === ytelsevalgIntl.AAP}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.aapmaxtidUke}
                 minVal={12}
-                skalVises={ytelse === ytelsevalgIntl.AAP_MAXTID}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_MAXTID)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.aapUnntakUkerIgjen}
                 minVal={12}
-                skalVises={ytelse === ytelsevalgIntl.AAP_UNNTAK}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_UNNTAK)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={12}
-                skalVises={ytelse === ytelsevalgIntl.TILTAKSPENGER}
+                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.TILTAKSPENGER)}
             />
             <DatoKolonne
                 className="col col-xs-2"
