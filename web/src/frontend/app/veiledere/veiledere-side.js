@@ -4,11 +4,14 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
-import { portefoljestorrelserShape, veiledereShape, enhetShape } from './../proptype-shapes';
+import { portefoljestorrelserShape, veiledereShape, enhetShape, filtervalgShape } from './../proptype-shapes';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import Lenker from './../lenker/lenker';
 import { leggEnhetIUrl } from '../utils/url-utils';
+import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
+import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
+
 
 class VeiledereSide extends Component {
     componentWillMount() {
@@ -18,7 +21,7 @@ class VeiledereSide extends Component {
     }
 
     render() {
-        const { veiledere, portefoljestorrelser, intl } = this.props;
+        const { veiledere, portefoljestorrelser, filtervalg, intl } = this.props;
 
         return (
             <DocumentTitle title={intl.formatMessage({ id: 'lenker.veiledere.oversikt' })}>
@@ -28,6 +31,16 @@ class VeiledereSide extends Component {
                         <p className="typo-infotekst begrensetbredde blokk-l">
                             <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
                         </p>
+
+                        <FiltreringLabelContainer
+                            filtervalg={{
+                                veiledere: lagLablerTilVeiledereMedIdenter(
+                                    filtervalg.veiledere,
+                                    veiledere.data.veilederListe)
+                            }}
+                            filtergruppe="veiledere"
+                        />
+
                         <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel blokk-xxs">
                             <FormattedMessage
                                 id="enhet.veiledere.tittel"
@@ -45,6 +58,7 @@ class VeiledereSide extends Component {
 }
 
 VeiledereSide.propTypes = {
+    filtervalg: filtervalgShape.isRequired,
     valgtEnhet: enhetShape.isRequired,
     hentPortefoljestorrelser: PT.func.isRequired,
     veiledere: PT.shape({
@@ -59,6 +73,7 @@ VeiledereSide.propTypes = {
 
 const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
+    filtervalg: state.filtreringVeilederoversikt,
     portefoljestorrelser: state.portefoljestorrelser,
     valgtEnhet: state.enheter.valgtEnhet
 });

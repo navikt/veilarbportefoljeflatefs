@@ -10,7 +10,7 @@ import { BrukerModell } from '../../model-interfaces';
 import { AppState } from '../../reducer';
 
 interface TildelVeilederProps {
-    skalSkjules: boolean;
+    skalVises: boolean;
     tildelTilVeileder: (tilordninger: any[], ident: string) => void;
     veiledere: VeiledereState;
     brukere: BrukerModell[];
@@ -18,8 +18,8 @@ interface TildelVeilederProps {
 
 type Props = TildelVeilederProps & InjectedIntlProps;
 
-function TildelVeileder({ skalSkjules, tildelTilVeileder, veiledere, brukere, intl }: Props) {
-    if (skalSkjules) {
+function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere, intl }: Props) {
+    if (!skalVises) {
         return null;
     }
     const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
@@ -70,7 +70,6 @@ function TildelVeilederRenderer({ onSubmit, data, ...props }: TildelVeilederRend
 const mapStateToProps = ({ veiledere, enheter, portefolje, ui }: AppState) => ({
     veiledere,
     brukere: portefolje.data.brukere,
-    skalSkjules: ui.side.side === 'veiledere'
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
     tildelTilVeileder: (tilordninger, tilVeileder) => dispatch(tildelVeileder(tilordninger, tilVeileder, ownProps.filtergruppe, ownProps.gjeldendeVeileder))
