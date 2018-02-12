@@ -11,9 +11,9 @@ import Lenker from './../lenker/lenker';
 import { leggEnhetIUrl } from '../utils/url-utils';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import {VeiledereState} from "../ducks/veiledere";
-import {ValgtEnhetModell} from "../model-interfaces";
-import {FiltreringState} from "../ducks/filtrering";
+import { VeiledereState } from '../ducks/veiledere';
+import { ValgtEnhetModell } from '../model-interfaces';
+import { FiltreringState } from '../ducks/filtrering';
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -27,7 +27,6 @@ interface DispatchProps {
 }
 
 type VeiledereSideProps = StateProps & DispatchProps & InjectedIntlProps;
-
 
 class VeiledereSide extends React.Component<VeiledereSideProps> {
     componentWillMount() {
