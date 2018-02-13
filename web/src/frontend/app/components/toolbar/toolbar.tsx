@@ -19,20 +19,30 @@ interface ToolbarProps {
     veilederpaginering: string;
 }
 
-const Toolbar = ({ filtergruppe, onPaginering, sokVeilederSkalVises, visesAnnenVeiledersPortefolje, gjeldendeVeileder, veilederpaginering }: ToolbarProps) => (
+const Toolbar = ({filtergruppe,
+                     onPaginering,
+                     sokVeilederSkalVises,
+                     visesAnnenVeiledersPortefolje,
+                     gjeldendeVeileder,
+                     veilederpaginering }: ToolbarProps) => (
     <section className="toolbar blokk-xs">
         <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
-            <VelgalleCheckboks />
-            <TildelVeileder gjeldendeVeileder={gjeldendeVeileder} filtergruppe={filtergruppe === ListevisningType.minOversikt ? 'veileder' : filtergruppe} />
+            <VelgalleCheckboks skalVises={filtergruppe in ListevisningType}/>
+            <TildelVeileder
+                skalVises={filtergruppe in ListevisningType}
+                gjeldendeVeileder={gjeldendeVeileder}/>
             <Listevisning filtergruppe={filtergruppe}/>
-            <LeggTilArbeidsliste visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje === true} />
-            <SokVeilder veileder={{}} filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe} skalVises={sokVeilederSkalVises} />
+            <LeggTilArbeidsliste visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje === true}/>
+            <SokVeilder veileder={{}}
+                        filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe}
+                        skalVises={sokVeilederSkalVises}/>
         </div>
         <div className="toolbar__element toolbar__midten toolbar--skille-mellom-elementer">
-            <DiagramTabellToggle filtergruppe={filtergruppe} />
+            <DiagramTabellToggle filtergruppe={filtergruppe}/>
         </div>
         <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
-            <Paginering className="toolbar--skille-mellom-elementer" onChange={onPaginering} skjul={veilederpaginering === Veilederpaginering.DIAGRAMVISNING} />
+            <Paginering className="toolbar--skille-mellom-elementer" onChange={onPaginering}
+                        skjul={veilederpaginering === Veilederpaginering.DIAGRAMVISNING}/>
         </div>
     </section>
 );

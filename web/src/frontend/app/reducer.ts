@@ -59,7 +59,7 @@ export interface AppState {
     statustall: any;
     filtrering: FiltreringState;
     filtreringMinoversikt: any;
-    filtreringVeilederoversikt: any;
+    filtreringVeilederoversikt: FiltreringState;
     modal: any;
     serverfeilModal: any;
     feilmeldingModal: any;

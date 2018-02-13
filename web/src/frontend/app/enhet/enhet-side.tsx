@@ -8,6 +8,7 @@ import Innholdslaster from './../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
+import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { leggEnhetIUrl } from '../utils/url-utils';
 import { hentStatusTall } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
@@ -53,11 +54,6 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
         const { formatMessage } = this.props.intl;
         const { filtervalg, veilederliste, statustall, enhettiltak, listevisning } = this.props;
 
-        const leggTilNavn = (identer, veiledere) => identer.map((ident) => {
-            const veileder = veiledere.find((v) => v.ident === ident);
-            return { label: `${veileder.etternavn}, ${veileder.fornavn} (${ident})`, key: ident };
-        });
-
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })}>
                 <div className="enhet-side blokk-xl">
@@ -75,7 +71,7 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
                             <FiltreringLabelContainer
                                 filtervalg={{
                                     ...filtervalg,
-                                    veiledere: leggTilNavn(filtervalg.veiledere, veilederliste)
+                                    veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste)
                                 }}
                                 filtergruppe="enhet"
                                 enhettiltak={enhettiltak.data.tiltak}

@@ -1,24 +1,41 @@
-import React, { Component, PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
-import { portefoljestorrelserShape, veiledereShape, enhetShape } from './../proptype-shapes';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import Lenker from './../lenker/lenker';
 import { leggEnhetIUrl } from '../utils/url-utils';
+import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
+import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
+import { VeiledereState } from '../ducks/veiledere';
+import { ValgtEnhetModell } from '../model-interfaces';
+import { FiltreringState } from '../ducks/filtrering';
 
-class VeiledereSide extends Component {
+interface StateProps {
+    veiledere: VeiledereState;
+    filtervalg: FiltreringState;
+    portefoljestorrelser: any;
+    valgtEnhet: ValgtEnhetModell;
+}
+
+interface DispatchProps {
+    hentPortefoljestorrelser: (enhetId: string) => void;
+}
+
+type VeiledereSideProps = StateProps & DispatchProps & InjectedIntlProps;
+
+class VeiledereSide extends React.Component<VeiledereSideProps> {
     componentWillMount() {
         const { hentPortefoljestorrelser, valgtEnhet } = this.props;
-        hentPortefoljestorrelser(valgtEnhet.enhet.enhetId);
-        leggEnhetIUrl(valgtEnhet.enhet.enhetId);
+        hentPortefoljestorrelser(valgtEnhet.enhet!.enhetId);
+        leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
     }
 
     render() {
-        const { veiledere, portefoljestorrelser, intl } = this.props;
+        const { veiledere, portefoljestorrelser, filtervalg, intl } = this.props;
 
         return (
             <DocumentTitle title={intl.formatMessage({ id: 'lenker.veiledere.oversikt' })}>
@@ -28,7 +45,17 @@ class VeiledereSide extends Component {
                         <p className="typo-infotekst begrensetbredde blokk-l">
                             <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
                         </p>
-                        <Undertittel tag="h1" type="undertittel" className="veiledere-undertittel blokk-xxs">
+
+                        <FiltreringLabelContainer
+                            filtervalg={{
+                                veiledere: lagLablerTilVeiledereMedIdenter(
+                                    filtervalg.veiledere,
+                                    veiledere.data.veilederListe)
+                            }}
+                            filtergruppe="veiledere"
+                        />
+
+                        <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
                             <FormattedMessage
                                 id="enhet.veiledere.tittel"
                                 values={{ antallVeiledere: veiledere.data.veilederListe.length }}
@@ -44,21 +71,9 @@ class VeiledereSide extends Component {
     }
 }
 
-VeiledereSide.propTypes = {
-    valgtEnhet: enhetShape.isRequired,
-    hentPortefoljestorrelser: PT.func.isRequired,
-    veiledere: PT.shape({
-        data: veiledereShape.isRequired
-    }).isRequired,
-    portefoljestorrelser: PT.shape({
-        status: PT.string.isRequired,
-        data: portefoljestorrelserShape
-    }).isRequired,
-    intl: intlShape.isRequired
-};
-
 const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
+    filtervalg: state.filtreringVeilederoversikt,
     portefoljestorrelser: state.portefoljestorrelser,
     valgtEnhet: state.enheter.valgtEnhet
 });

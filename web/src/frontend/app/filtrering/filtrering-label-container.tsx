@@ -20,7 +20,7 @@ interface FiltreringLabelContainerProps {
     };
     filtervalg: FiltervalgModell;
     filtergruppe: string;
-    listevisning: ListevisningState;
+    listevisning?: ListevisningState;
     intl: InjectedIntl;
 }
 
@@ -34,7 +34,7 @@ function getKolonneFraLabel(label) {
 }
 
 function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
-    if (listevisning.mulige.indexOf(kolonne) >= 0) {
+    if (listevisning && listevisning.mulige.indexOf(kolonne) >= 0) {
         return listevisning.valgte.indexOf(kolonne) < 0;
     }
     return false;
