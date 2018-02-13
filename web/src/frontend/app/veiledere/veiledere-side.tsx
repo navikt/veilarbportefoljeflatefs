@@ -4,7 +4,6 @@ import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
-import { portefoljestorrelserShape, veiledereShape, enhetShape, filtervalgShape } from './../proptype-shapes';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import Lenker from './../lenker/lenker';
