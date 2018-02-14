@@ -20,7 +20,14 @@ function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-li
                             component="input"
                             type="checkbox"
                             className="skjemaelement__input checkboks"
-                            {...field.input}
+                            onDragStart={field.input.onDragStart}
+                            onChange={field.input.onChange}
+                            onDrop={field.input.onDrop}
+                            onFocus={field.input.onFocus}
+                            value={field.input.value}
+                            name={field.input.name}
+                            // onBlur={field.input.onBlur} NB: This causes problems with redux-devtools, So tmp turned off
+                            // https://github.com/erikras/redux-form/issues/3831
                         />
                         <label htmlFor={field.input.name} className="skjemaelement__label">{label}</label>
                     </div>
