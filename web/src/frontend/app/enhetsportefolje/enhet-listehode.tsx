@@ -179,15 +179,19 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
+                        <SorteringHeader
+                            sortering={Sorteringsfelt.NAVIDENT}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.NAVIDENT}
+                            tekstId="enhet.veiledere.tabell.ident"
+                            skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
+                            className="header__veilederident col col-xs-2"
+                        />
                         <Header
                             id="enhet.veiledere.tabell.navn"
                             className="header__veiledernavn col col-xs-3"
                             skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                        />
-                        <Header
-                            id="enhet.veiledere.tabell.ident"
-                            className="header__veilederident col col-xs-2"
-                            skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
                         />
                     </div>
                     <div className="brukerliste__gutter-right"/>

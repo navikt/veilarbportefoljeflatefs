@@ -21,7 +21,8 @@ export enum Sorteringsfelt {
     I_AVTALT_AKTIVITET = 'iavtaltaktivitet',
     START_DATO_FOR_AVTALT_AKTIVITET = 'aktivitet_start',
     NESTE_START_DATO_FOR_AVTALT_AKTIVITET = 'neste_aktivitet_start',
-    FORRIGE_DATO_FOR_AVTALT_AKTIVITET = 'forrige_aktivitet_start'
+    FORRIGE_DATO_FOR_AVTALT_AKTIVITET = 'forrige_aktivitet_start',
+    NAVIDENT = 'veileder_id'
 }
 
 export enum EtikettType {

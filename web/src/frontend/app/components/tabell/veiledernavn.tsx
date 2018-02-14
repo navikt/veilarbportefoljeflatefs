@@ -7,14 +7,17 @@ import Etikett from './etikett';
 interface VeiledernavnProps {
     className?: string;
     bruker: BrukerModell;
-    valgteKolonner: Kolonne[];
+    skalVises: boolean;
     veileder?: VeilederModell;
 }
 
-function VeilederNavn({ className, bruker, valgteKolonner, veileder }: VeiledernavnProps) {
+function VeilederNavn({ className, bruker, skalVises, veileder }: VeiledernavnProps) {
+    if (!skalVises) {
+        return null;
+    }
+
     const veilederNavn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
-    if (valgteKolonner.includes(Kolonne.VEILEDER)) {
-        return (
+    return (
             <div className={className}>
                 {
                     bruker.veilederId ?
@@ -29,9 +32,6 @@ function VeilederNavn({ className, bruker, valgteKolonner, veileder }: Veiledern
                 }
             </div>
         );
-    } else {
-        return null;
-    }
 }
 
 export default VeilederNavn;
