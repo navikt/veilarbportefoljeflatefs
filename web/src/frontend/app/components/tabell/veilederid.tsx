@@ -1,19 +1,20 @@
 import * as React from 'react';
 import { BrukerModell } from '../../model-interfaces';
-import { Kolonne } from '../../ducks/ui/listevisning';
 
 interface VeilederidProps {
     className?: string;
     bruker: BrukerModell;
-    valgteKolonner: Kolonne[];
+    skalVises: boolean;
 }
 
-function VeilederId({className, bruker, valgteKolonner}: VeilederidProps) {
-    if (valgteKolonner.includes(Kolonne.NAVIDENT) && bruker.veilederId != null) {
-        return <div className={className}>{bruker.veilederId}</div>;
-    } else {
+function VeilederId({className, skalVises, bruker}: VeilederidProps) {
+    if (!skalVises) {
         return null;
     }
+
+    return <div className={className}>
+        {bruker.veilederId}
+    </div>;
 }
 
 export default VeilederId;

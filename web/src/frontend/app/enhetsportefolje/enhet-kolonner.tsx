@@ -103,8 +103,15 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
                 skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0  && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
             />
-            <VeilederNavn className="col col-xs-3" bruker={bruker} valgteKolonner={valgteKolonner} veileder={brukersVeileder}/>
-            <VeilederId className="col col-xs-2" bruker={bruker} valgteKolonner={valgteKolonner}/>
+            <VeilederId className="col col-xs-2"
+                        bruker={bruker}
+                        skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
+            />
+            <VeilederNavn className="col col-xs-3"
+                          bruker={bruker}
+                          skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
+                          veileder={brukersVeileder}
+            />
         </div>
     );
 }
