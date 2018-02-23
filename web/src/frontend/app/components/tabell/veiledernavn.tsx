@@ -16,20 +16,18 @@ function VeilederNavn({ className, bruker, skalVises, veileder }: VeiledernavnPr
         return null;
     }
 
-    const veilederNavn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
+    const veilederNavn = <span>{veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : ''}</span>;
+
+    const nyBrukerEtikett = <Etikett
+        type={EtikettType.NYBRUKER}
+        skalVises={bruker.nyForEnhet === true}
+    >
+        <FormattedMessage id="enhet.portefolje.tabelletikett.ny.bruker" />
+    </Etikett>;
+
     return (
             <div className={className}>
-                {
-                    bruker.veilederId ?
-                        <span>{veilederNavn}</span>
-                        :
-                        <Etikett
-                            type={EtikettType.NYBRUKER}
-                            skalVises={bruker.veilederId === null}
-                        >
-                            <FormattedMessage id="enhet.portefolje.tabelletikett.ny.bruker" />
-                        </Etikett>
-                }
+                { bruker.nyForEnhet === true ? nyBrukerEtikett : veilederNavn }
             </div>
         );
 }

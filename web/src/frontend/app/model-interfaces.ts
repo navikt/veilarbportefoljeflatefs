@@ -79,6 +79,7 @@ export interface BrukerModell {
     diskresjonskode?: string;
     egenAnsatt: boolean;
     nyForVeileder: boolean;
+    nyForEnhet: boolean;
     erDoed: boolean;
     fodselsdagIMnd: number;
     fodselsdato: string; // dato
