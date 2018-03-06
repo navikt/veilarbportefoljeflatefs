@@ -1,4 +1,4 @@
-import WebSocketImpl from './websocket-impl';
+import WebSocketImpl, { Status } from './websocket-impl';
 
 export enum EnhetConnectionState {
     CONNECTED = 'connected',
@@ -35,7 +35,11 @@ export default class EnhetContextListener {
 
     constructor(uri: string, cb: (action: EnhetContextEvent) => void) {
         this.callback = cb;
-        this.connection = new WebSocketImpl(uri, this.onMessage.bind(this));
+        this.connection = new WebSocketImpl(uri, {
+            onMessage: this.onMessage.bind(this),
+            onError: this.onError.bind(this),
+            onClose: this.onClose.bind(this)
+        });
         this.connection.open();
     }
 
@@ -50,5 +54,15 @@ export default class EnhetContextListener {
         } else if(e.data === EventMessages.NY_AKTIV_ENHET) {
             this.callback({ type: EnhetContextEventNames.NY_AKTIV_ENHET });
         }
+    }
+
+    private onError(e: ErrorEvent) {
+        this.connectionState = EnhetConnectionState.FAILED;
+        this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.FAILED });
+    }
+
+    private onClose() {
+        const nyState = this.connection.getStatus() === Status.CLOSE ? EnhetConnectionState.NOT_CONNECTED : EnhetConnectionState.FAILED;
+        this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: nyState });
     }
 }

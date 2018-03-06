@@ -2,8 +2,13 @@ const SECONDS: number = 1000;
 const MINUTES: number = 60 * SECONDS;
 const MAX_RETRIES: number = 30;
 
-enum Status {
+export enum Status {
     INIT, OPEN, CLOSE
+}
+export interface Listeners {
+    onMessage(event: MessageEvent): void;
+    onError?(event: ErrorEvent): void;
+    onClose?(event: CloseEvent): void;
 }
 
 function fuzzy(min: number, max: number): number {
@@ -26,23 +31,23 @@ function createRetrytime(tryCount: number): number {
 }
 
 class WebSocketImpl {
-    private state: Status;
+    private status: Status;
     private wsUrl: string;
-    private onMessage: (event: MessageEvent) => void;
+    private listeners: Listeners;
     private connection: WebSocket;
     private resettimer: number | null;
     private retrytimer: number | null;
     private retryCounter: number = 0;
     private debug: boolean = false;
 
-    constructor(wsUrl: string, onMessage: (event: MessageEvent) => void) {
+    constructor(wsUrl: string, listeners: Listeners) {
         this.wsUrl = wsUrl;
-        this.onMessage = onMessage;
-        this.state = Status.INIT;
+        this.listeners = listeners;
+        this.status = Status.INIT;
     }
 
     open() {
-        if (this.state === Status.CLOSE) {
+        if (this.status === Status.CLOSE) {
             this.print('Stopping creation of WS, since it is closed');
             return;
         }
@@ -57,13 +62,17 @@ class WebSocketImpl {
     close() {
         this.clearResetTimer();
         this.clearRetryTimer();
-        this.state = Status.CLOSE;
+        this.status = Status.CLOSE;
         if (this.connection) {
             this.connection.close();
         }
     }
 
-    onWSOpen(event) {
+    getStatus() {
+        return this.status;
+    }
+
+    private onWSOpen(event) {
         this.print('open', event);
         this.clearResetTimer();
         this.clearRetryTimer();
@@ -75,36 +84,42 @@ class WebSocketImpl {
             this.connection.close();
         }, delay);
 
-        this.state = Status.OPEN;
+        this.status = Status.OPEN;
     }
 
-    onWSMessage(event) {
+    private onWSMessage(event) {
         this.print('message', event);
-        this.onMessage(event);
+        this.listeners.onMessage(event);
     }
 
-    onWSError(event) {
+    private onWSError(event) {
         this.print('error', event);
+        if (this.listeners.onError) {
+            this.listeners.onError(event);
+        }
     }
 
-    onWSClose(event) {
+    private onWSClose(event) {
         this.print('close', event);
-        if (this.state !== Status.CLOSE) {
+        if (this.status !== Status.CLOSE) {
             const delay = createRetrytime(this.retryCounter++);
             this.print('Creating retrytimer', delay);
 
             this.retrytimer = setTimeout(this.open, delay);
         }
+        if (this.listeners.onClose) {
+            this.listeners.onClose(event);
+        }
     }
 
-    clearResetTimer() {
+    private clearResetTimer() {
         if (this.resettimer) {
             clearTimeout(this.resettimer);
         }
         this.resettimer = null;
     }
 
-    clearRetryTimer() {
+    private clearRetryTimer() {
         if (this.retrytimer) {
             clearTimeout(this.retrytimer);
         }
@@ -112,7 +127,7 @@ class WebSocketImpl {
         this.retryCounter = 0;
     }
 
-    print(...args) {
+    private print(...args) {
         if (this.debug) {
             console.log(...args); // tslint:disable-line
         }
