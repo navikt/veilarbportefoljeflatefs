@@ -33,7 +33,6 @@ function stepper({ min, max, step }) {
     if (start < max) {
         arr.push({ start, end: max });
     }
-
     return arr;
 }
 
@@ -78,9 +77,9 @@ export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata, 
     if (valgtYtelse === ytelsevalgIntl.AAP || valgtYtelse === ytelsevalgIntl.TILTAKSPENGER) {
         return maned(antallBrukere, diagramdata);
     } else if (valgtYtelse === ytelsevalgIntl.AAP_MAXTID) {
-        return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 215, step: 11 });
+        return ukeInndeling(antallBrukere, diagramdata, { min: 2, max: 215, step: 8 });
     } else if (valgtYtelse === ytelsevalgIntl.AAP_UNNTAK) {
-        return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 107, step: 11 });
+        return ukeInndeling(antallBrukere, diagramdata, { min: 2, max: 104, step: 4 });
     }
     return ukeInndeling(antallBrukere, diagramdata, { min: 2, max: 52, step: 3 });
 }
