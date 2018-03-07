@@ -1,5 +1,6 @@
 import * as queryString from 'query-string';
 import history, { basename } from '../history';
+import {IKKE_SATT} from "../konstanter";
 
 export function slettCleanIUrl() {
     const parsed = queryString.parse(location.search); // eslint-disable-line no-undef
@@ -48,6 +49,28 @@ export function leggSideIUrl(path, side) {
 
 export function getSideFromUrl() {
     return queryString.parse(location.search).side || '';
+}
+
+export function leggSorteringIUrl(sorteringsfelt, sorteringsrekkefolge) {
+    if (sorteringsfelt) {
+        const parsed = queryString.parse(location.search);
+        parsed.sorteringsfelt = sorteringsfelt;
+        parsed.sorteringsrekkefolge = sorteringsrekkefolge ? sorteringsrekkefolge : '';
+
+        const stringified = queryString.stringify(parsed);
+        const pathname = window.location.pathname.replace(basename, '');
+        history.replace(`${pathname}?${stringified}`);
+        localStorage.setItem(`lagretSorteringsfelt`, sorteringsfelt);
+        localStorage.setItem(`lagretSorteringsrekkefolge`, sorteringsrekkefolge);
+    }
+}
+
+export function getSorteringsFeltFromUrl() {
+    return queryString.parse(location.search).sorteringsfelt || IKKE_SATT;
+}
+
+export function getSorteringsRekkefolgeFromUrl() {
+    return queryString.parse(location.search).sorteringsrekkefolge || IKKE_SATT;
 }
 
 export function sendBrukerTilUrl(url) {

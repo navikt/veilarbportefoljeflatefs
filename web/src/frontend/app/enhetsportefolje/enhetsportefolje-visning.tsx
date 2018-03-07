@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
 import Toolbar from './../components/toolbar/toolbar';
-import { getSideFromUrl } from '../utils/url-utils';
+import {getSideFromUrl, getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl} from '../utils/url-utils';
 import EnhetTabell from './enhetsportefolje-tabell';
 import TabellOverskrift from './../components/tabell-overskrift';
 import {
@@ -66,10 +66,15 @@ interface EnhetsportefoljeVisningProps {
 class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningProps & InjectedIntlProps> {
     componentWillMount() {
         const {
-            valgtEnhet, hentPortefolje, sorteringsrekkefolge, sorteringsfelt, filtervalg
+            valgtEnhet, hentPortefolje, filtervalg
         } = this.props;
+
         const side = getSideFromUrl();
         const fraIndex = side === '' ? 0 : (side - 1) * 20;
+
+        const sorteringsfelt = getSorteringsFeltFromUrl();
+        const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
+        this.props.doSettSortering(sorteringsrekkefolge,sorteringsfelt);
 
         hentPortefolje(
             valgtEnhet.enhet!.enhetId,
