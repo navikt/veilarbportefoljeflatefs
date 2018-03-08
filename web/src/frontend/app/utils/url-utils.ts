@@ -1,6 +1,6 @@
 import * as queryString from 'query-string';
 import history, { basename } from '../history';
-import {IKKE_SATT} from "../konstanter";
+import { IKKE_SATT } from '../konstanter';
 
 export function slettCleanIUrl() {
     const parsed = queryString.parse(location.search); // eslint-disable-line no-undef

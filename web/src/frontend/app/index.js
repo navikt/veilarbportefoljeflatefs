@@ -58,7 +58,7 @@ function getSortering(path) {
     if (checkPath === '/enhet' || checkPath === '/portefolje') {
         const lagretSorteringsfelt = localStorage.getItem('lagretSorteringsfelt');
         const lagretSorteringsrekkefolge = localStorage.getItem('lagretSorteringsrekkefolge');
-        return `&sorteringsfelt=${lagretSorteringsfelt}&sorteringsrekkefolge=${lagretSorteringsrekkefolge}`
+        return `&sorteringsfelt=${lagretSorteringsfelt}&sorteringsrekkefolge=${lagretSorteringsrekkefolge}`;
     }
     return '';
 }
