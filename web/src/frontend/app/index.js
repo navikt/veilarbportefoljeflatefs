@@ -51,10 +51,22 @@ function getSideTallForPath(path) {
     return '';
 }
 
+function getSortering(path) {
+    const checkPath = path.includes('/portefolje') ? '/portefolje' : path;
+
+
+    if (checkPath === '/enhet' || checkPath === '/portefolje') {
+        const lagretSorteringsfelt = localStorage.getItem('lagretSorteringsfelt');
+        const lagretSorteringsrekkefolge = localStorage.getItem('lagretSorteringsrekkefolge');
+        return `&sorteringsfelt=${lagretSorteringsfelt}&sorteringsrekkefolge=${lagretSorteringsrekkefolge}`;
+    }
+    return '';
+}
+
 function redirect() {
     const lastPath = localStorage.getItem('lastpath');
     if (lastPath) {
-        const url = `${lastPath}?enhet=${getEnhetFromUrl() + getSideTallForPath(lastPath)}`;
+        const url = `${lastPath}?enhet=${getEnhetFromUrl() + getSideTallForPath(lastPath) + getSortering(lastPath)}`;
         sendBrukerTilUrl(url);
     }
 }
