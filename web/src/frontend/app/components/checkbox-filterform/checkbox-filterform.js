@@ -26,7 +26,7 @@ function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-li
                             onFocus={field.input.onFocus}
                             value={field.input.value}
                             name={field.input.name}
-                            // onBlur={field.input.onBlur} NB: This causes problems with redux-devtools, So tmp turned off
+                            // onBlur={field.input.onBlur} NB: This causes problems with redux-devtools, tmp turned off
                             // https://github.com/erikras/redux-form/issues/3831
                         />
                         <label htmlFor={field.input.name} className="skjemaelement__label">{label}</label>
