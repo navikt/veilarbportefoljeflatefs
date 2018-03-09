@@ -1,4 +1,21 @@
 import { render } from 'react-dom';
+/* eslint-disable import/first */
+import 'whatwg-fetch';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { Route, Router } from 'react-router';
+import { addLocaleData, IntlProvider } from 'react-intl';
+import nb from 'react-intl/locale-data/nb';
+import InitalDataProvider from './providers/initial-data-provider';
+import createStore from './store';
+import history, { basename } from './history';
+import EnhetSide from './enhet/enhet-side';
+import VeiledereSide from './veiledere/veiledere-side';
+import MinOversiktSide from './minoversikt/minoversikt-side';
+import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
+import FeatureToggelAdmin from './components/feature-toggle/feature-toggle-admin';
+import './style';
+import { IKKE_SATT } from "./konstanter";
 
 /* eslint-disable no-undef */
 if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
@@ -13,22 +30,6 @@ if (MOCK) {
 }
 
 
-/* eslint-disable import/first */
-import 'whatwg-fetch';
-import React from 'react';
-import { Provider } from 'react-redux';
-import { Router, Route } from 'react-router';
-import { IntlProvider, addLocaleData } from 'react-intl';
-import nb from 'react-intl/locale-data/nb';
-import InitalDataProvider from './providers/initial-data-provider';
-import createStore from './store';
-import history, { basename } from './history';
-import EnhetSide from './enhet/enhet-side';
-import VeiledereSide from './veiledere/veiledere-side';
-import MinOversiktSide from './minoversikt/minoversikt-side';
-import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
-import FeatureToggelAdmin from './components/feature-toggle/feature-toggle-admin';
-import './style';
 /* eslint-enable import/first */
 /* eslint-disable no-undef */
 
@@ -56,8 +57,8 @@ function getSortering(path) {
 
 
     if (checkPath === '/enhet' || checkPath === '/portefolje') {
-        const lagretSorteringsfelt = localStorage.getItem('lagretSorteringsfelt');
-        const lagretSorteringsrekkefolge = localStorage.getItem('lagretSorteringsrekkefolge');
+        const lagretSorteringsfelt = localStorage.getItem('lagretSorteringsfelt') || IKKE_SATT;
+        const lagretSorteringsrekkefolge = localStorage.getItem('lagretSorteringsrekkefolge') || IKKE_SATT;
         return `&sorteringsfelt=${lagretSorteringsfelt}&sorteringsrekkefolge=${lagretSorteringsrekkefolge}`;
     }
     return '';
@@ -68,6 +69,8 @@ function redirect() {
     if (lastPath) {
         const url = `${lastPath}?enhet=${getEnhetFromUrl() + getSideTallForPath(lastPath) + getSortering(lastPath)}`;
         sendBrukerTilUrl(url);
+    } else {
+        sendBrukerTilUrl(`/enhet?enhet=${getEnhetFromUrl()}`)
     }
 }
 
