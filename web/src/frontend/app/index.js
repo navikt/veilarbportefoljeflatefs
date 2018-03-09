@@ -1,21 +1,21 @@
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 /* eslint-disable import/first */
 import 'whatwg-fetch';
 import React from 'react';
-import {Provider} from 'react-redux';
-import {Route, Router} from 'react-router';
-import {addLocaleData, IntlProvider} from 'react-intl';
+import { Provider } from 'react-redux';
+import { Route, Router } from 'react-router';
+import { addLocaleData, IntlProvider } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import InitalDataProvider from './providers/initial-data-provider';
 import createStore from './store';
-import history, {basename} from './history';
+import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
-import {getEnhetFromUrl, sendBrukerTilUrl} from './utils/url-utils';
+import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
 import FeatureToggelAdmin from './components/feature-toggle/feature-toggle-admin';
 import './style';
-import {IKKE_SATT} from "./konstanter";
+import { IKKE_SATT } from "./konstanter";
 
 /* eslint-disable no-undef */
 if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
