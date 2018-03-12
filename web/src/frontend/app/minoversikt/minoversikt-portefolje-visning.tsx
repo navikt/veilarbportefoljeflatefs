@@ -5,10 +5,7 @@ import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../du
 import TabellOverskrift from './../components/tabell-overskrift';
 import Toolbar from './../components/toolbar/toolbar';
 import { enhetShape, veilederShape, filtervalgShape, feilmeldingModalShape } from './../proptype-shapes';
-import {
-    leggEnhetIUrl, getSideFromUrl, getSorteringsRekkefolgeFromUrl,
-    getSorteringsFeltFromUrl
-} from '../utils/url-utils';
+import { leggEnhetIUrl, getSideFromUrl } from '../utils/url-utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
@@ -51,10 +48,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         const {
             valgtEnhet,
         } = this.props;
-
-        const sorteringsfelt = getSorteringsFeltFromUrl();
-        const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
-        this.props.doSettSortering(sorteringsrekkefolge,sorteringsfelt);
 
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId!);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
