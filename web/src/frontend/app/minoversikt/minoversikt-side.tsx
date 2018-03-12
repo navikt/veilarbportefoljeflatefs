@@ -67,7 +67,7 @@ class MinOversiktSide extends React.Component<MinoversiktSideProps> {
         this.props.doSettSortering(sorteringsrekkefolge,sorteringsfelt);
 
         hentPortefolje(
-            valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, sorteringsfelt, sorteringsrekkefolge, filtervalg, fraIndex
+            valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, sorteringsrekkefolge, sorteringsfelt, filtervalg, fraIndex
         );
 
     }
