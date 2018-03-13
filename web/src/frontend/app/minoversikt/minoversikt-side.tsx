@@ -12,13 +12,13 @@ import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import { filtervalgShape, statustallShape } from '../proptype-shapes';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
-import {hentPortefoljeForVeileder, settSortering, settValgtVeileder} from '../ducks/portefolje';
+import { hentPortefoljeForVeileder, settSortering, settValgtVeileder } from '../ducks/portefolje';
 import { EnheterState } from '../ducks/enheter';
 import { VeiledereState } from '../ducks/veiledere';
 import { FiltervalgModell, ValgtEnhetModell, VeilederModell, } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
-import {getSideFromUrl, getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl} from '../utils/url-utils';
+import { getSideFromUrl, getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl } from '../utils/url-utils';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
