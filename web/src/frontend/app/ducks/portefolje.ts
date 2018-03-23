@@ -5,7 +5,7 @@ import { pagineringSetup } from './paginering';
 import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from './statustall';
-import { leggSideIUrl } from '../utils/url-utils';
+import { leggSideIUrl, leggSorteringIUrl } from '../utils/url-utils';
 import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { oppdaterAlternativer, ListevisningType } from './ui/listevisning';
 
@@ -265,6 +265,7 @@ export function hentPortefoljeForVeileder(
 }
 
 export function settSortering(rekkefolge, felt) {
+    leggSorteringIUrl(felt, rekkefolge);
     return (dispatch) => dispatch({
         type: SETT_SORTERING,
         sorteringsrekkefolge: rekkefolge,
