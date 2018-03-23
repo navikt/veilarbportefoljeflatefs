@@ -40,7 +40,7 @@ export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, sorter
 }
 
 export function hentDiagramdata(enhet, veilederident, filtervalg) {
-    let url = `${VEILARBPORTEFOLJE_URL}/diagram/` +
+    let url = `${VEILARBPORTEFOLJE_URL}/diagram/v2/` +
         `?enhet=${enhet}`;
 
     if (veilederident) {
