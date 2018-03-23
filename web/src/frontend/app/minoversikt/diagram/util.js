@@ -48,9 +48,8 @@ export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata, 
 
     if (valgtYtelse === ytelsevalgIntl.TILTAKSPENGER || valgtYtelse === ytelsevalgIntl.AAP) {
         return manedInndeling(antallBrukere, sorterteDiagramdata);
-    } else {
-        return ukeInndeling(antallBrukere, sorterteDiagramdata);
     }
+    return ukeInndeling(antallBrukere, sorterteDiagramdata);
 }
 
 export function ledetekster(filtreringvalg) {
