@@ -6,9 +6,7 @@ export enum EnhetConnectionState {
     FAILED = 'failed'
 }
 
-enum EventMessages {
-    ESTABLISHED = 'Connection Established',
-    PING = 'ping!',
+export enum EventMessages {
     NY_AKTIV_ENHET = 'NY_AKTIV_ENHET',
 }
 
@@ -30,12 +28,12 @@ export type EnhetContextEvent = ConnectionStateChanged | NyAktivEnhet;
 
 export default class EnhetContextListener {
     connection: WebSocketImpl;
-    connectionState: EnhetConnectionState;
     callback: (event: EnhetContextEvent) => void;
 
     constructor(uri: string, cb: (action: EnhetContextEvent) => void) {
         this.callback = cb;
         this.connection = new WebSocketImpl(uri, {
+            onOpen: this.onOpen.bind(this),
             onMessage: this.onMessage.bind(this),
             onError: this.onError.bind(this),
             onClose: this.onClose.bind(this)
@@ -47,17 +45,17 @@ export default class EnhetContextListener {
         this.connection.close();
     }
 
+    private onOpen(e: Event) {
+        this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.CONNECTED });
+    }
+
     private onMessage(e: MessageEvent) {
-        if (e.data === EventMessages.ESTABLISHED || e.data === EventMessages.PING) {
-            this.connectionState = EnhetConnectionState.CONNECTED;
-            this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.CONNECTED });
-        } else if(e.data === EventMessages.NY_AKTIV_ENHET) {
+         if(e.data === EventMessages.NY_AKTIV_ENHET) {
             this.callback({ type: EnhetContextEventNames.NY_AKTIV_ENHET });
         }
     }
 
     private onError(e: ErrorEvent) {
-        this.connectionState = EnhetConnectionState.FAILED;
         this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.FAILED });
     }
 

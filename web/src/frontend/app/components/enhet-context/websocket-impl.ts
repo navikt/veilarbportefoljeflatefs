@@ -3,11 +3,13 @@ const MINUTES: number = 60 * SECONDS;
 const MAX_RETRIES: number = 30;
 
 export enum Status {
-    INIT, OPEN, CLOSE
+    INIT, OPEN, CLOSE, REFRESH
 }
+
 export interface Listeners {
     onMessage(event: MessageEvent): void;
-    onError?(event: ErrorEvent): void;
+    onOpen?(event: Event): void;
+    onError?(event: Event): void;
     onClose?(event: CloseEvent): void;
 }
 
@@ -81,10 +83,15 @@ class WebSocketImpl {
         this.print('Creating resettimer', delay);
 
         this.resettimer = setTimeout(() => {
+            this.status = Status.REFRESH;
             this.connection.close();
         }, delay);
 
         this.status = Status.OPEN;
+
+        if (this.listeners.onOpen) {
+            this.listeners.onOpen(event);
+        }
     }
 
     private onWSMessage(event) {
@@ -101,11 +108,16 @@ class WebSocketImpl {
 
     private onWSClose(event) {
         this.print('close', event);
+        if (this.status === Status.REFRESH) {
+            this.open();
+            return;
+        }
+
         if (this.status !== Status.CLOSE) {
             const delay = createRetrytime(this.retryCounter++);
             this.print('Creating retrytimer', delay);
 
-            this.retrytimer = setTimeout(this.open, delay);
+            this.retrytimer = setTimeout(this.open.bind(this), delay);
         }
         if (this.listeners.onClose) {
             this.listeners.onClose(event);
