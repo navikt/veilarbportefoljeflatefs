@@ -22,7 +22,6 @@ export function medYtelseSerie(antallBrukere, antallMisterYtelse) {
 function ukeInndeling(antallBrukere, diagramdata) {
     const labels = diagramdata.map(({ fra, til }) => `${fra}-${til}`);
     const antallMisterYtelse = diagramdata.map((a) => a.verdi);
-
     const antallMedYtelse = medYtelseSerie(antallBrukere, antallMisterYtelse);
 
     return { labels, antallMisterYtelse, antallMedYtelse, headerFormatSuffix: ' uker' };

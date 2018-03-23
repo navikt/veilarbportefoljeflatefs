@@ -57,25 +57,25 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
-                minVal={12}
+                minVal={2}
                 skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.aapmaxtidUke}
-                minVal={12}
+                minVal={2}
                 skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_MAXTID)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.aapUnntakUkerIgjen}
-                minVal={12}
+                minVal={2}
                 skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_UNNTAK)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
-                minVal={12}
+                minVal={2}
                 skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.TILTAKSPENGER)}
             />
             <DatoKolonne
