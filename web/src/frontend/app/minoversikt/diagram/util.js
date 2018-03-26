@@ -19,51 +19,19 @@ export function medYtelseSerie(antallBrukere, antallMisterYtelse) {
         .map((verdi, index) => verdi - lopendeSum[index]);
 }
 
-function stepper({ min, max, step }) {
-    const arr = [];
-    let start = 0;
-    let end = min - 1;
-
-    while (end <= max) {
-        arr.push({ start, end });
-        start = end + 1;
-        end = start + step;
-    }
-
-    if (start < max) {
-        arr.push({ start, end: max });
-    }
-
-    return arr;
-}
-
-function stepperRangeToDiagramKey({ start, end }) {
-    if (start === 0) return `UKE_UNDER${end + 1}`;
-    return `UKE${start}_${end}`;
-}
-
-function stepperRangeToLabel({ start, end }) {
-    return `${start}-${end}`;
-}
-
-function ukeInndeling(antallBrukere, diagramdata, stepOptions) {
-    const steps = stepper(stepOptions);
-    const labels = steps.map(stepperRangeToLabel);
-    const antallMisterYtelse = steps
-        .map(stepperRangeToDiagramKey)
-        .map((key) => diagramdata[key]);
-
+function ukeInndeling(antallBrukere, diagramdata) {
+    const labels = diagramdata.map(({ fra, til }) => `${fra}-${til}`);
+    const antallMisterYtelse = diagramdata.map((a) => a.verdi);
     const antallMedYtelse = medYtelseSerie(antallBrukere, antallMisterYtelse);
 
     return { labels, antallMisterYtelse, antallMedYtelse, headerFormatSuffix: ' uker' };
 }
 
-export function maned(antallBrukere, diagramdata) {
+export function manedInndeling(antallBrukere, diagramdata) {
     moment.locale('nb_no');
 
     const labels = new Array(12).fill(0).map((_, i) => moment().add(i, 'month').format('MMMM'));
-
-    const antallMisterYtelse = Object.values(diagramdata);
+    const antallMisterYtelse = diagramdata.map((a) => a.verdi);
     const antallMedYtelse = medYtelseSerie(antallBrukere, antallMisterYtelse);
 
     return {
@@ -75,14 +43,12 @@ export function maned(antallBrukere, diagramdata) {
 
 export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata, intl) {
     const ytelsevalgIntl = ytelsevalg(intl);
-    if (valgtYtelse === ytelsevalgIntl.AAP || valgtYtelse === ytelsevalgIntl.TILTAKSPENGER) {
-        return maned(antallBrukere, diagramdata);
-    } else if (valgtYtelse === ytelsevalgIntl.AAP_MAXTID) {
-        return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 215, step: 11 });
-    } else if (valgtYtelse === ytelsevalgIntl.AAP_UNNTAK) {
-        return ukeInndeling(antallBrukere, diagramdata, { min: 12, max: 107, step: 11 });
+    const sorterteDiagramdata = diagramdata.sort((a, b) => a.fra - b.fra);
+
+    if (valgtYtelse === ytelsevalgIntl.TILTAKSPENGER || valgtYtelse === ytelsevalgIntl.AAP) {
+        return manedInndeling(antallBrukere, sorterteDiagramdata);
     }
-    return ukeInndeling(antallBrukere, diagramdata, { min: 2, max: 52, step: 3 });
+    return ukeInndeling(antallBrukere, sorterteDiagramdata);
 }
 
 export function ledetekster(filtreringvalg) {

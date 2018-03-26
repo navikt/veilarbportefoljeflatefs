@@ -15,7 +15,7 @@ import MinOversiktSide from './minoversikt/minoversikt-side';
 import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
 import FeatureToggelAdmin from './components/feature-toggle/feature-toggle-admin';
 import './style';
-import { IKKE_SATT } from "./konstanter";
+import { IKKE_SATT } from './konstanter';
 
 /* eslint-disable no-undef */
 if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
@@ -70,7 +70,7 @@ function redirect() {
         const url = `${lastPath}?enhet=${getEnhetFromUrl() + getSideTallForPath(lastPath) + getSortering(lastPath)}`;
         sendBrukerTilUrl(url);
     } else {
-        sendBrukerTilUrl(`/enhet?enhet=${getEnhetFromUrl()}`)
+        sendBrukerTilUrl(`/enhet?enhet=${getEnhetFromUrl()}`);
     }
 }
 

@@ -7,6 +7,7 @@ import statustall from './statustall';
 import tekster from './tekster';
 import tiltak from './tiltak';
 import diagramdata from './diagramdata';
+import lagDiagramData from './diagramdataV2';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
@@ -47,6 +48,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 (mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/tiltak', () => respondWith(tiltak));
 
 // diagram-api
+(mock as any).post('express:/veilarbportefolje/api/diagram/v2*', () => respondWith((url, config, { queryParams, bodyParams, extra }) => lagDiagramData(bodyParams)));
 (mock as any).post('express:/veilarbportefolje/api/diagram*', () => respondWith(diagramdata));
 
 // situasjon-api
@@ -64,4 +66,8 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 (mock as any).mock('*', respondWith((url, config) => (mock as any).realFetch.call(window, url, config)));
 
 // websocket
-(window as any).WebSocket = function MockedWebSocket() {}; // tslint:disable-line
+class MockWebSocket {
+    addEventListener() {} // tslint:disable-line
+    close() {} // tslint:disable-line
+}
+(window as any).WebSocket = MockWebSocket; // tslint:disable-line
