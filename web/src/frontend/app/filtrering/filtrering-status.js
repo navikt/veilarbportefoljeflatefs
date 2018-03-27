@@ -9,7 +9,7 @@ import {
     FILTERGRUPPE_ENHET,
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
-    NYE_BRUKERE,
+    UTFORDELTE_BRUKERE,
     NYE_BRUKERE_FOR_VEILEDER,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -19,13 +19,13 @@ import {
 } from './filter-konstanter';
 
 
-function BarInput({ skalSkjules, id, tekstId, antall, max, barClassname, firstInGroup, ...props }) {
+function BarInput({ skalSkjules, id, type, className, tekstId, antall, max, barClassname, firstInGroup, ...props }) {
     if (skalSkjules) {
         return null;
     }
     return (
         <div className={`skjema__input ${firstInGroup ? 'forsteBarlabelIGruppe' : ''}`}>
-            <input type="radio" id={id} className="radioknapp" {...props} />
+            <input type={type} id={id} className={className} {...props} />
             <Barlabel
                 htmlFor={id}
                 tekstId={tekstId}
@@ -77,24 +77,50 @@ class FiltreringStatus extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.fjernFraFerdigFilterListe = this.fjernFraFerdigFilterListe.bind(this);
+        this.leggTilFerdigFilterListe = this.leggTilFerdigFilterListe.bind(this);
+        this.state = {
+            ferdigfilterstatus: '',
+        };
     }
 
     handleChange(e) {
-        this.props.endreFilter('brukerstatus', e.target.value);
+        var ferdigfilterListe = this.props.filtervalg.ferdigfilterListe;
+        if (e.target.type === 'checkbox'){
+            ferdigfilterListe =   e.target.checked ? this.leggTilFerdigFilterListe(ferdigfilterListe, e.target.value)
+                                                   : this.fjernFraFerdigFilterListe(ferdigfilterListe, e.target.value);
+        }else {
+            ferdigfilterListe = this.fjernFraFerdigFilterListe(ferdigfilterListe, this.state.ferdigfilterstatus); //remove last selected radio ferdigfilter from ferdigfilterListe
+            ferdigfilterListe = this.leggTilFerdigFilterListe(ferdigfilterListe, e.target.value); //add current selected radio ferdigfilter in ferdigfilterListe
+            this.setState({ ferdigfilterstatus: e.target.value }); //set current selected radio ferdigfilter in state
+        }
+        this.props.endreFilter('ferdigfilterListe', ferdigfilterListe);
+    }
+
+    leggTilFerdigFilterListe(valgtFilterList, leggFilter){
+        var filterlist = valgtFilterList;
+        filterlist.push(leggFilter);
+        return filterlist;
+    }
+
+    fjernFraFerdigFilterListe(valgtFilterList, removeFilter){
+        return valgtFilterList.filter((filter) => filter !== (removeFilter));
     }
 
     render() {
-        const { brukerstatus } = this.props.filtervalg;
+        const { ferdigfilterListe } = this.props.filtervalg;
 
-        const nyeBrukereCheckbox = (
+        const utfordelteBrukereCheckbox = (
             <BarInput
                 id="nyeBrukere"
-                name="brukerstatus"
-                value="NYE_BRUKERE"
+                type="checkbox"
+                name="utfordeltebruker"
+                className="checkboks"
+                value="UTFORDELTE_BRUKERE"
                 onChange={this.handleChange}
-                checked={brukerstatus === NYE_BRUKERE}
-                tekstId="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox"
-                antall={this.props.statustall.data.nyeBrukere}
+                checked={ferdigfilterListe.includes(UTFORDELTE_BRUKERE)}
+                tekstId="enhet.filtrering.filtrering.oversikt.utfordelte.brukere.checkbox"
+                antall={this.props.statustall.data.utfordelteBrukere}
                 max={this.props.statustall.data.totalt}
             />
         );
@@ -102,16 +128,17 @@ class FiltreringStatus extends Component {
         const nyeBrukereForVeilederCheckbox = (
             <BarInput
                 id="nyeBrukere"
-                name="brukerstatus"
+                type="checkbox"
+                name="nyeBrukere"
+                className="checkboks"
                 value="NYE_BRUKERE_FOR_VEILEDER"
                 onChange={this.handleChange}
-                checked={brukerstatus === NYE_BRUKERE_FOR_VEILEDER}
-                tekstId="enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox"
+                checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
+                tekstId="min_oversikt.filtrering.filtrering.oversikt.nye.brukere.checkbox"
                 antall={this.props.statustall.data.nyeBrukereForVeileder}
                 max={this.props.statustall.data.totalt}
             />
         );
-
 
         return (
             <div className="filtrering-oversikt panel">
@@ -123,13 +150,15 @@ class FiltreringStatus extends Component {
                         />
                     </Element>
                 </div>
-                { this.props.filtergruppe === 'enhet' ? nyeBrukereCheckbox : nyeBrukereForVeilederCheckbox }
+                { this.props.filtergruppe === 'enhet' ? utfordelteBrukereCheckbox : nyeBrukereForVeilederCheckbox }
                 <BarInput
                     id="venterPaSvarFraNAV"
-                    name="brukerstatus"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
                     value="VENTER_PA_SVAR_FRA_NAV"
                     onChange={this.handleChange}
-                    checked={brukerstatus === VENTER_PA_SVAR_FRA_NAV}
+                    checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
                     tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfranav.brukere.checkbox"
                     antall={this.props.statustall.data.venterPaSvarFraNAV}
                     max={this.props.statustall.data.totalt}
@@ -138,10 +167,12 @@ class FiltreringStatus extends Component {
                 />
                 <BarInput
                     id="venterPaSvarFraBruker"
-                    name="brukerstatus"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
                     value="VENTER_PA_SVAR_FRA_BRUKER"
                     onChange={this.handleChange}
-                    checked={brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
+                    checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
                     tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfrabruker.brukere.checkbox"
                     antall={this.props.statustall.data.venterPaSvarFraBruker}
                     max={this.props.statustall.data.totalt}
@@ -149,10 +180,12 @@ class FiltreringStatus extends Component {
                 />
                 <BarInput
                     id="utlopteAktiviteter"
-                    name="brukerstatus"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
                     value="UTLOPTE_AKTIVITETER"
                     onChange={this.handleChange}
-                    checked={brukerstatus === UTLOPTE_AKTIVITETER}
+                    checked={ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
                     tekstId="enhet.filtrering.filtrering.oversikt.utlopteaktiviteter.brukere.checkbox"
                     antall={this.props.statustall.data.utlopteAktiviteter}
                     max={this.props.statustall.data.totalt}
@@ -161,10 +194,12 @@ class FiltreringStatus extends Component {
                 />
                 <BarInput
                     id="ikkeIavtaltAktivitet"
-                    name="brukerstatus"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
                     value="IKKE_I_AVTALT_AKTIVITET"
                     onChange={this.handleChange}
-                    checked={brukerstatus === IKKE_I_AVTALT_AKTIVITET}
+                    checked={ferdigfilterListe.includes(IKKE_I_AVTALT_AKTIVITET)}
                     tekstId="enhet.filtrering.filtrering.oversikt.ikkeiavtaltaktivitet.brukere.checkbox"
                     antall={this.props.statustall.data.ikkeIavtaltAktivitet}
                     max={this.props.statustall.data.totalt}
@@ -172,10 +207,12 @@ class FiltreringStatus extends Component {
                 />
                 <BarInput
                     id="iavtaltAktivitet"
-                    name="brukerstatus"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
                     value="I_AVTALT_AKTIVITET"
                     onChange={this.handleChange}
-                    checked={brukerstatus === I_AVTALT_AKTIVITET}
+                    checked={ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
                     tekstId="enhet.filtrering.filtrering.oversikt.iavtaltaktivitet.brukere.checkbox"
                     antall={this.props.statustall.data.iavtaltAktivitet}
                     max={this.props.statustall.data.totalt}
@@ -183,10 +220,12 @@ class FiltreringStatus extends Component {
                 />
                 <BarInput
                     id="inaktiveBrukere"
-                    name="brukerstatus"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
                     value="INAKTIVE_BRUKERE"
                     onChange={this.handleChange}
-                    checked={brukerstatus === INAKTIVE_BRUKERE}
+                    checked={ferdigfilterListe.includes(INAKTIVE_BRUKERE)}
                     tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
                     antall={this.props.statustall.data.inaktiveBrukere}
                     max={this.props.statustall.data.totalt}
@@ -196,10 +235,12 @@ class FiltreringStatus extends Component {
                 <ArbeidslisteTittel skalSkjules={this.props.filtergruppe === FILTERGRUPPE_ENHET} />
                 <BarInput
                     id="minArbeidsliste"
-                    name="brukerstatus"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
                     value="MIN_ARBEIDSLISTE"
                     onChange={this.handleChange}
-                    checked={brukerstatus === MIN_ARBEIDSLISTE}
+                    checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                     tekstId="enhet.filtrering.filtrering.oversikt.min.arbeidsliste.checkbox"
                     antall={this.props.statustall.data.minArbeidsliste}
                     max={this.props.statustall.data.totalt}

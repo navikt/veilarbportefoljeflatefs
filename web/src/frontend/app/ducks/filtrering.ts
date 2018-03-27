@@ -19,6 +19,7 @@ export interface FiltreringAktiviteterValg { [aktivitet: string]: AktiviteterVal
 
 export interface FiltreringState {
     brukerstatus: null;
+    ferdigfilterListe: string[];
     alder: string[];
     kjonn: string[];
     fodselsdagIMnd: string[];
@@ -36,6 +37,7 @@ export interface FiltreringState {
 // TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducer
 export const initialState = {
     brukerstatus: null,
+    ferdigfilterListe: [],
     alder: [],
     kjonn: [],
     fodselsdagIMnd: [],

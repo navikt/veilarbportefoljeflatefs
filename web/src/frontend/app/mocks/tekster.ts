@@ -146,7 +146,7 @@ export default {
         'enhet.portefolje.tabelletikett.dod': 'Død',
         'enhet.portefolje.paginering.ingen.brukere.tekst': 'Ingen brukere funnet',
         'arbeidsliste.form.feiloppsummering.tittel': 'Du må fylle ut følgende',
-        'enhet.portefolje.tabelletikett.ny.bruker': 'Ny bruker',
+        'enhet.portefolje.tabelletikett.utfordelte.bruker': 'Utfordelte bruker',
         'enhet.portefolje.tabelletikett.sikkerhetstiltak': 'Sikkerhetstiltak',
         'portefolje.tabell.uker': 'Gjenstår',
         'nyenhet.modal.overskrift': 'Du har endret Enhet',
@@ -222,7 +222,8 @@ export default {
         'modal.knapptekst': 'Ok',
         'enhet.filtrering.filtrering.oversikt.ikkeiavtaltaktivitet.brukere.checkbox': 'Ikke i avtalt aktivitet',
         'spinner': 'Spinner',
-        'enhet.filtrering.filtrering.oversikt.nye.brukere.checkbox': 'Nye brukere',
+        'enhet.filtrering.filtrering.oversikt.utfordelte.brukere.checkbox': 'Utfordelte brukere',
+        'min_oversikt.filtrering.filtrering.oversikt.nye.brukere.checkbox':'Nye brukere',
         'datepicker.neste.maned': 'Neste måned',
         'legg-til-arbeidsliste-form.feilmelding.kommentar-lengde': 'Kommentaren kan ikke være lenger enn {KOMMENTAR_MAKS_LENGDE}'
     }
