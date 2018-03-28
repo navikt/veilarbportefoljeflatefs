@@ -103,7 +103,7 @@ export const filtervalgLabelShape = PT.shape({
 
 export const statustallShape = PT.shape({
     totalt: PT.number.isRequired,
-    utfordelteBrukere: PT.number,
+    ufordelteBrukere: PT.number,
     nyeBrukereFraVeileder: PT.number,
     inaktiveBrukere: PT.number.isRequired,
     venterPaSvarFraNAV: PT.number.isRequired,

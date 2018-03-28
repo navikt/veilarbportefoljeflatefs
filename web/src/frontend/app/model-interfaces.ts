@@ -131,7 +131,7 @@ export interface ArbeidslisteModell {
 
 export interface StatustallModell {
     totalt: number;
-    utfordelteBrukere?: number;
+    ufordelteBrukere?: number;
     inaktiveBrukere: number;
     venterPaSvarFraNAV: number;
     venterPaSvarFraBruker: number;

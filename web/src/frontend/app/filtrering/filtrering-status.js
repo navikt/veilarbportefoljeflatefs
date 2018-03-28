@@ -9,7 +9,7 @@ import {
     FILTERGRUPPE_ENHET,
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
-    UTFORDELTE_BRUKERE,
+    UFORDELTE_BRUKERE,
     NYE_BRUKERE_FOR_VEILEDER,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -110,17 +110,17 @@ class FiltreringStatus extends Component {
     render() {
         const { ferdigfilterListe } = this.props.filtervalg;
 
-        const utfordelteBrukereCheckbox = (
+        const ufordelteBrukereCheckbox = (
             <BarInput
                 id="nyeBrukere"
                 type="checkbox"
-                name="utfordeltebruker"
+                name="ufordeltebruker"
                 className="checkboks"
-                value="UTFORDELTE_BRUKERE"
+                value="UFORDELTE_BRUKERE"
                 onChange={this.handleChange}
-                checked={ferdigfilterListe.includes(UTFORDELTE_BRUKERE)}
-                tekstId="enhet.filtrering.filtrering.oversikt.utfordelte.brukere.checkbox"
-                antall={this.props.statustall.data.utfordelteBrukere}
+                checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
+                tekstId="enhet.filtrering.filtrering.oversikt.ufordelte.brukere.checkbox"
+                antall={this.props.statustall.data.ufordelteBrukere}
                 max={this.props.statustall.data.totalt}
             />
         );
@@ -150,7 +150,7 @@ class FiltreringStatus extends Component {
                         />
                     </Element>
                 </div>
-                { this.props.filtergruppe === 'enhet' ? utfordelteBrukereCheckbox : nyeBrukereForVeilederCheckbox }
+                { this.props.filtergruppe === 'enhet' ? ufordelteBrukereCheckbox : nyeBrukereForVeilederCheckbox }
                 <BarInput
                     id="venterPaSvarFraNAV"
                     type="radio"

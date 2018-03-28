@@ -11,7 +11,7 @@ export interface StatustallState {
     status: string;
     data: {
         totalt: number;
-        utfordelteBrukere: number;
+        ufordelteBrukere: number;
         inaktiveBrukere: number;
         venterPaSvarFraNAV: number;
         venterPaSvarFraBruker: number;
@@ -26,7 +26,7 @@ const initalState: StatustallState = {
     status: STATUS.NOT_STARTED,
     data: {
         totalt: 0,
-        utfordelteBrukere: 0,
+        ufordelteBrukere: 0,
         inaktiveBrukere: 0,
         venterPaSvarFraNAV: 0,
         venterPaSvarFraBruker: 0,
