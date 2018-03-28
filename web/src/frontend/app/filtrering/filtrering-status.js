@@ -56,6 +56,8 @@ function ArbeidslisteTittel({ skalSkjules }) {
 
 BarInput.propTypes = {
     id: PT.string.isRequired,
+    type: PT.string.isRequired,
+    className: PT.string.isRequired,
     tekstId: PT.string.isRequired,
     antall: PT.number.isRequired,
     max: PT.number.isRequired,
@@ -74,37 +76,37 @@ ArbeidslisteTittel.propTypes = {
 };
 
 class FiltreringStatus extends Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.fjernFraFerdigFilterListe = this.fjernFraFerdigFilterListe.bind(this);
-        this.leggTilFerdigFilterListe = this.leggTilFerdigFilterListe.bind(this);
-        this.state = {
-            ferdigfilterstatus: '',
-        };
-    }
 
-    handleChange(e) {
-        var ferdigfilterListe = this.props.filtervalg.ferdigfilterListe;
-        if (e.target.type === 'checkbox'){
-            ferdigfilterListe =   e.target.checked ? this.leggTilFerdigFilterListe(ferdigfilterListe, e.target.value)
-                                                   : this.fjernFraFerdigFilterListe(ferdigfilterListe, e.target.value);
-        }else {
-            ferdigfilterListe = this.fjernFraFerdigFilterListe(ferdigfilterListe, this.state.ferdigfilterstatus); //remove last selected radio ferdigfilter from ferdigfilterListe
-            ferdigfilterListe = this.leggTilFerdigFilterListe(ferdigfilterListe, e.target.value); //add current selected radio ferdigfilter in ferdigfilterListe
-            this.setState({ ferdigfilterstatus: e.target.value }); //set current selected radio ferdigfilter in state
-        }
-        this.props.endreFilter('ferdigfilterListe', ferdigfilterListe);
-    }
-
-    leggTilFerdigFilterListe(valgtFilterList, leggFilter){
-        var filterlist = valgtFilterList;
+    static leggFerdigfilter(valgtFilterList, leggFilter) {
+        const filterlist = valgtFilterList;
         filterlist.push(leggFilter);
         return filterlist;
     }
 
-    fjernFraFerdigFilterListe(valgtFilterList, removeFilter){
+    static fjernFerdigfilter(valgtFilterList, removeFilter) {
         return valgtFilterList.filter((filter) => filter !== (removeFilter));
+    }
+
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {
+            ferdigfilterstatus: ''
+        };
+    }
+
+    handleChange(e) {
+        let ferdigfilterListe = this.props.filtervalg.ferdigfilterListe;
+        if (e.target.type === 'checkbox') {
+            ferdigfilterListe = e.target.checked ?
+                FiltreringStatus.leggFerdigfilter(ferdigfilterListe, e.target.value) :
+                FiltreringStatus.fjernFerdigfilter(ferdigfilterListe, e.target.value);
+        } else {
+            ferdigfilterListe = FiltreringStatus.fjernFerdigfilter(ferdigfilterListe, this.state.ferdigfilterstatus);
+            ferdigfilterListe = FiltreringStatus.leggFerdigfilter(ferdigfilterListe, e.target.value);
+            this.setState({ ferdigfilterstatus: e.target.value });
+        }
+        this.props.endreFilter('ferdigfilterListe', ferdigfilterListe);
     }
 
     render() {
