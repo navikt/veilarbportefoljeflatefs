@@ -12,7 +12,7 @@ import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
-import { getEnhetFromUrl, sendBrukerTilUrl, getFrabrukerFraurl } from './utils/url-utils';
+import { getEnhetFromUrl, sendBrukerTilUrl, getFraBrukerFraUrl } from './utils/url-utils';
 import FeatureToggelAdmin from './components/feature-toggle/feature-toggle-admin';
 import './style';
 import { IKKE_SATT } from './konstanter';
@@ -65,7 +65,7 @@ function getSortering(path) {
 }
 
 function getFraBruker() {
-    const fnr = getFrabrukerFraurl();
+    const fnr = getFraBrukerFraUrl();
     if (fnr) {
         return `&fraBruker=${fnr}`;
     }

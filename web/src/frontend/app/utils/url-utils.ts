@@ -31,7 +31,7 @@ export function leggEnhetIUrl(enhet: string, refresh: boolean = false) {
     }
 }
 
-export function getFrabrukerFraurl() {
+export function getFraBrukerFraUrl() {
     return queryString.parse(location.search).fraBruker;
 }
 
