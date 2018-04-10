@@ -49,12 +49,12 @@ export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolo
     return [Kolonne.BRUKER, Kolonne.FODSELSNR]
         .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt))
-        .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.brukerstatus === UTLOPTE_AKTIVITETER))
-        .concat(addHvis(Kolonne.AVTALT_AKTIVITET, filtervalg.brukerstatus === I_AVTALT_AKTIVITET))
-        .concat(addHvis(Kolonne.VENTER_SVAR, filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER || filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV))
+        .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
+        .concat(addHvis(Kolonne.AVTALT_AKTIVITET, filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
+        .concat(addHvis(Kolonne.VENTER_SVAR, filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) || filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)))
         .concat(addHvis(Kolonne.UTLOP_YTELSE, filtervalg.ytelse !== null))
         .concat(addHvis(Kolonne.UTLOP_AKTIVITET, harValgtMinstEnAktivitet(filtervalg.aktiviteter) && harIkkeValgtTiltakstype(filtervalg.tiltakstyper)))
-        .concat(addHvis(Kolonne.START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.brukerstatus === I_AVTALT_AKTIVITET))
-        .concat(addHvis(Kolonne.NESTE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.brukerstatus === I_AVTALT_AKTIVITET))
-        .concat(addHvis(Kolonne.FORRIGE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.brukerstatus === I_AVTALT_AKTIVITET));
+        .concat(addHvis(Kolonne.START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
+        .concat(addHvis(Kolonne.NESTE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
+        .concat(addHvis(Kolonne.FORRIGE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)));
 }

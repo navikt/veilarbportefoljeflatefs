@@ -1,7 +1,7 @@
 import { range, lag2Sifret } from '../utils/utils';
 import { Sorteringsfelt } from '../model-interfaces';
 
-export const NYE_BRUKERE = 'NYE_BRUKERE';
+export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
 export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
 export const VENTER_PA_SVAR_FRA_NAV = 'VENTER_PA_SVAR_FRA_NAV';
@@ -20,8 +20,8 @@ export function lagConfig(data: any): any {
     return data;
 }
 
-export const brukerstatus = ()=> ({
-    NYE_BRUKERE: 'Nye brukere',
+export const ferdigfilterListe = ()=> ({
+    UFORDELTE_BRUKERE: 'Ufordelte brukere',
     NYE_BRUKERE_FOR_VEILEDER: 'Nye brukere',
     INAKTIVE_BRUKERE: 'Inaktive brukere',
     VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
@@ -122,7 +122,7 @@ const veiledere = {
 
 export default {
     ytelseUtlopsSortering,
-    brukerstatus,
+    ferdigfilterListe,
     alder,
     fodselsdagIMnd,
     kjonn,

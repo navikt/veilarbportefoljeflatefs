@@ -34,7 +34,7 @@ export enum EtikettType {
 }
 
 export interface FiltervalgModell {
-    nyeBrukere?: boolean;
+    ferdigfilterListe?: string[];
     nyeBrukereForVeileder?: boolean;
     inaktiveBrukere?: boolean;
     venterPaSvarFraNAV?: boolean;
@@ -48,7 +48,6 @@ export interface FiltervalgModell {
     servicegruppe?: string[];
     veiledere?: string[];
     ytelse: string;
-    brukerstatus?: string;
     aktiviteter?: string[];
     tiltakstyper: string[];
 }
@@ -131,7 +130,7 @@ export interface ArbeidslisteModell {
 
 export interface StatustallModell {
     totalt: number;
-    nyeBrukere?: number;
+    ufordelteBrukere?: number;
     inaktiveBrukere: number;
     venterPaSvarFraNAV: number;
     venterPaSvarFraBruker: number;

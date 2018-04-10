@@ -32,7 +32,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
-
+    const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const {ytelse} = filtervalg;
 
     return (
@@ -54,7 +54,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={arbeidslisteFrist}
-                skalVises={filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -83,23 +83,23 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraBruker}
-                skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraNAV}
-                skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
-                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                 valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nyesteUtlopteAktivitet}
-                skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -110,19 +110,19 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={bruker.aktivitetStart ? new Date(bruker.aktivitetStart) : null}
-                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                 valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={bruker.nesteAktivitetStart ? new Date(bruker.nesteAktivitetStart) : null}
-                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                 valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
-                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                 valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
             />
         </div>

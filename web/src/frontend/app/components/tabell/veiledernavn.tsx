@@ -18,16 +18,16 @@ function VeilederNavn({ className, bruker, skalVises, veileder }: VeiledernavnPr
 
     const veilederNavn = <span>{veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : ''}</span>;
 
-    const nyBrukerEtikett = <Etikett
+    const ufordeltBrukerEtikett = <Etikett
         type={EtikettType.NYBRUKER}
         skalVises={bruker.nyForEnhet === true}
     >
-        <FormattedMessage id="enhet.portefolje.tabelletikett.ny.bruker" />
+        <FormattedMessage id="enhet.portefolje.tabelletikett.ufordelt.bruker" />
     </Etikett>;
 
     return (
             <div className={className}>
-                { bruker.nyForEnhet === true ? nyBrukerEtikett : veilederNavn }
+                { bruker.nyForEnhet === true ? ufordeltBrukerEtikett : veilederNavn }
             </div>
         );
 }
