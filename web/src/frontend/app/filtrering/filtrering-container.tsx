@@ -33,7 +33,11 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                 tittel="Status"
                 tittelProps="systemtittel"
             >
-                <FiltreringStatus filtergruppe={filtergruppe} veileder={veileder} filtervalg={filtervalg} />
+                <FiltreringStatus
+                    filtergruppe={filtergruppe}
+                    veileder={veileder}
+                    filtervalg={filtervalg}
+                />
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
                 apen
