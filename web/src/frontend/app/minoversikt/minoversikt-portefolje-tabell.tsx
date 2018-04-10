@@ -9,7 +9,7 @@ import {
 } from '../model-interfaces';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
-import {fjernFraBrukerFraUrl, getFrabrukerFraurl} from "../utils/url-utils";
+import { fjernFraBrukerFraUrl, getFrabrukerFraurl } from '../utils/url-utils';
 
 interface MinOversiktTabellProps {
     portefolje: {

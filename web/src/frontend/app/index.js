@@ -66,7 +66,7 @@ function getSortering(path) {
 
 function getFraBruker() {
     const fnr = getFrabrukerFraurl();
-    if(fnr){
+    if (fnr) {
         return `&fraBruker=${fnr}`;
     }
     return '';
@@ -76,7 +76,8 @@ function redirect() {
     const lastPath = localStorage.getItem('lastpath');
 
     if (lastPath) {
-        const url = `${lastPath}?enhet=${getEnhetFromUrl() + getSideTallForPath(lastPath) + getSortering(lastPath) + getFraBruker()}`;
+        const optionalParams = getSideTallForPath(lastPath) + getSortering(lastPath) + getFraBruker();
+        const url = `${lastPath}?enhet=${getEnhetFromUrl() + optionalParams}`;
         sendBrukerTilUrl(url);
     } else {
         sendBrukerTilUrl(`/enhet?enhet=${getEnhetFromUrl()}`);

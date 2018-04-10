@@ -17,8 +17,8 @@ interface EnhetBrukerpanelProps {
 }
 
 function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, varForjeBruker }: EnhetBrukerpanelProps) {
-    const forjeBrukerClassName =  varForjeBruker ? " brukerliste--forjeBruker" : "";
-    const classname  = `brukerliste__element brukerliste--border-bottom-thin${forjeBrukerClassName}`;
+    const forjeBrukerClassName =  varForjeBruker ? ' brukerliste--forjeBruker' : '';
+    const classname  = `brukerliste__element brukerliste--border-bottom-thin ${forjeBrukerClassName}`;
 
     return (
         <li className={classname}>
