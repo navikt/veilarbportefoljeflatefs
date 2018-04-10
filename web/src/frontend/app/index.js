@@ -12,7 +12,7 @@ import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
-import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
+import { getEnhetFromUrl, sendBrukerTilUrl, getFrabrukerFraurl } from './utils/url-utils';
 import FeatureToggelAdmin from './components/feature-toggle/feature-toggle-admin';
 import './style';
 import { IKKE_SATT } from './konstanter';
@@ -64,10 +64,19 @@ function getSortering(path) {
     return '';
 }
 
+function getFraBruker() {
+    const fnr = getFrabrukerFraurl();
+    if(fnr){
+        return `&fraBruker=${fnr}`;
+    }
+    return '';
+}
+
 function redirect() {
     const lastPath = localStorage.getItem('lastpath');
+
     if (lastPath) {
-        const url = `${lastPath}?enhet=${getEnhetFromUrl() + getSideTallForPath(lastPath) + getSortering(lastPath)}`;
+        const url = `${lastPath}?enhet=${getEnhetFromUrl() + getSideTallForPath(lastPath) + getSortering(lastPath) + getFraBruker()}`;
         sendBrukerTilUrl(url);
     } else {
         sendBrukerTilUrl(`/enhet?enhet=${getEnhetFromUrl()}`);

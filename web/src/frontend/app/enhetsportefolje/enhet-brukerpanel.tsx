@@ -13,12 +13,15 @@ interface EnhetBrukerpanelProps {
     filtervalg: FiltervalgModell;
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];
+    varForjeBruker: boolean;
 }
 
-function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner }: EnhetBrukerpanelProps) {
+function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, varForjeBruker }: EnhetBrukerpanelProps) {
+    const forjeBrukerClassName =  varForjeBruker ? " brukerliste--forjeBruker" : "";
+    const classname  = `brukerliste__element brukerliste--border-bottom-thin${forjeBrukerClassName}`;
 
     return (
-        <li className="brukerliste__element brukerliste--border-bottom-thin">
+        <li className={classname}>
                 <div className="brukerliste__gutter-left brukerliste--min-width-enhet">
                     <CheckBox bruker={bruker} settMarkert={settMarkert} />
                 </div>

@@ -10,6 +10,7 @@ import {
 } from '../model-interfaces';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
+import { fjernFraBrukerFraUrl, getFrabrukerFraurl } from '../utils/url-utils';
 
 interface EnhetTabellProps {
     portefolje: any;
@@ -30,6 +31,10 @@ function EnhetTabell({
                      }: EnhetTabellProps) {
     const {brukere} = portefolje.data;
     const {enhetId} = valgtEnhet.enhet!;
+
+    const forgjeBruker = getFrabrukerFraurl();
+    fjernFraBrukerFraUrl();
+
     return (
 
         <div className="brukerliste typo-undertekst">
@@ -47,6 +52,7 @@ function EnhetTabell({
                             bruker={bruker}
                             enhetId={enhetId}
                             settMarkert={settMarkert}
+                            varForjeBruker={forgjeBruker === bruker.fnr}
                             filtervalg={filtervalg}
                             valgteKolonner={valgteKolonner}
                             brukersVeileder={finnBrukersVeileder(veiledere, bruker)}

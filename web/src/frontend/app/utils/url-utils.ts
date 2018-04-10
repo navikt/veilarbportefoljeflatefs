@@ -31,6 +31,20 @@ export function leggEnhetIUrl(enhet: string, refresh: boolean = false) {
     }
 }
 
+export function getFrabrukerFraurl() {
+    return queryString.parse(location.search).fraBruker;
+}
+
+export function fjernFraBrukerFraUrl() {
+    const parsed = queryString.parse(location.search);
+    delete parsed.fraBruker;
+
+    const stringified = queryString.stringify(parsed);
+    const pathname = window.location.pathname.replace(basename, '');
+    history.replace(`${pathname}?${stringified}`);
+
+}
+
 export function getEnhetFromUrl() {
     return queryString.parse(location.search).enhet || '';
 }

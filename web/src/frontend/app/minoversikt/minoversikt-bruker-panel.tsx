@@ -21,6 +21,7 @@ interface MinOversiktBrukerPanelProps {
     innloggetVeileder: string;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     valgteKolonner: Kolonne[];
+    varForjeBruker:boolean;
 }
 
 interface MinOversiktBrukerPanelState {
@@ -58,12 +59,15 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     }
 
     render() {
-        const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert} = this.props;
+        const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForjeBruker} = this.props;
 
         const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
 
+        const forjeBrukerClassName = varForjeBruker ? "brukerliste--forjeBruker" : "";
+        const classname = `brukerliste--border-bottom-thin ${forjeBrukerClassName}`;
+
         return (
-            <li className="brukerliste--border-bottom-thin">
+            <li className={classname}>
                 <div className="brukerliste__element">
                     <div className="brukerliste__gutter-left brukerliste--min-width-minside">
                         <CheckBox bruker={bruker} settMarkert={settMarkert}/>
