@@ -48,7 +48,6 @@ export interface FiltervalgModell {
     servicegruppe?: string[];
     veiledere?: string[];
     ytelse: string;
-    brukerstatus?: string;
     aktiviteter?: string[];
     tiltakstyper: string[];
 }

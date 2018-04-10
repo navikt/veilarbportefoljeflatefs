@@ -54,6 +54,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering(intl)[filtervalg.ytelse];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' ? 'periode' : 'uker';
+    const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
 
     return (
         <div className="brukerliste__header">
@@ -72,22 +73,22 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
                             id={'portefolje.tabell.svarfranav'}
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskrift col col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
                             id={'portefolje.tabell.svarfrabruker'}
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskrift col col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER) && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
                             id={'portefolje.tabell.utlopaktivitet'}
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskrift col col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
                             id={'portefolje.tabell.aktivitet.neste.utlop'}
                         />
                         <Listeoverskrift
@@ -140,7 +141,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
                         <SorteringHeader
@@ -149,7 +150,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
                         <SorteringHeader
@@ -158,7 +159,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER) && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
                         <SorteringHeader
@@ -167,7 +168,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
                         <SorteringHeader

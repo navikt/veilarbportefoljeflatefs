@@ -37,6 +37,7 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
+    const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
 
     return (
         <div className={className}>
@@ -81,22 +82,22 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraBruker}
-                skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER  && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)  && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraNAV}
-                skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nyesteUtlopteAktivitet}
-                skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER) && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
-                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"
