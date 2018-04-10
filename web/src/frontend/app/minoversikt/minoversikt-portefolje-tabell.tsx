@@ -9,6 +9,7 @@ import {
 } from '../model-interfaces';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
+import { fjernFraBrukerFraUrl, getFraBrukerFraUrl } from '../utils/url-utils';
 
 interface MinOversiktTabellProps {
     portefolje: {
@@ -38,6 +39,9 @@ function MinoversiktTabell({
     const brukere = portefolje.data.brukere;
     const {enhetId} = valgtEnhet.enhet!;
 
+    const forrigeBruker = getFraBrukerFraUrl();
+    fjernFraBrukerFraUrl();
+
     return (
         <div className="minoversikt-liste__wrapper typo-undertekst">
             <MinOversiktListehode
@@ -55,6 +59,7 @@ function MinoversiktTabell({
                             bruker={bruker}
                             enhetId={enhetId}
                             settMarkert={settMarkert}
+                            varForrigeBruker={forrigeBruker === bruker.fnr}
                             filtervalg={filtervalg}
                             valgteKolonner={valgteKolonner}
                             innloggetVeileder={innloggetVeileder}
