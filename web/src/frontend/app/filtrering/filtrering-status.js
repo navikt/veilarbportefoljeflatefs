@@ -75,12 +75,20 @@ ArbeidslisteTittel.propTypes = {
     skalSkjules: PT.bool.isRequired
 };
 
+const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE', 'NYE_BRUKERE_FOR_VEILEDER'];
+
 class FiltreringStatus extends Component {
 
-    static leggFerdigfilter(valgtFilterList, leggFilter) {
-        const filterlist = valgtFilterList;
-        filterlist.push(leggFilter);
-        return filterlist;
+    static leggTilFerdigFilter(filterListe, filter) {
+        if (filterListe.includes(filter)) {
+            return filter;
+        } else if (CHECKBOX_FILTER.includes(filter)) {
+            return [...filterListe, filter];
+        }
+        const checkboxFilter = filterListe
+            .filter((valgtfilter) => CHECKBOX_FILTER.includes(valgtfilter));
+
+        return [...checkboxFilter, filter];
     }
 
     static fjernFerdigfilter(valgtFilterList, removeFilter) {
@@ -90,21 +98,16 @@ class FiltreringStatus extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.state = {
-            ferdigfilterstatus: ''
-        };
     }
 
     handleChange(e) {
-        let ferdigfilterListe = this.props.filtervalg.ferdigfilterListe;
+        let ferdigfilterListe = [...this.props.filtervalg.ferdigfilterListe];
         if (e.target.type === 'checkbox') {
             ferdigfilterListe = e.target.checked ?
-                FiltreringStatus.leggFerdigfilter(ferdigfilterListe, e.target.value) :
+                FiltreringStatus.leggTilFerdigFilter(ferdigfilterListe, e.target.value) :
                 FiltreringStatus.fjernFerdigfilter(ferdigfilterListe, e.target.value);
         } else {
-            ferdigfilterListe = FiltreringStatus.fjernFerdigfilter(ferdigfilterListe, this.state.ferdigfilterstatus);
-            ferdigfilterListe = FiltreringStatus.leggFerdigfilter(ferdigfilterListe, e.target.value);
-            this.setState({ ferdigfilterstatus: e.target.value });
+            ferdigfilterListe = FiltreringStatus.leggTilFerdigFilter(ferdigfilterListe, e.target.value);
         }
         this.props.endreFilter('ferdigfilterListe', ferdigfilterListe);
     }
