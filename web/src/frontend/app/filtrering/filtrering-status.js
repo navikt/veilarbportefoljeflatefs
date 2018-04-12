@@ -75,7 +75,7 @@ ArbeidslisteTittel.propTypes = {
     skalSkjules: PT.bool.isRequired
 };
 
-const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE'];
+const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE', 'NYE_BRUKERE_FOR_VEILEDER'];
 
 class FiltreringStatus extends Component {
 
