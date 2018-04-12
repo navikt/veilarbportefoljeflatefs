@@ -84,12 +84,11 @@ class FiltreringStatus extends Component {
             return filter;
         } else if (CHECKBOX_FILTER.includes(filter)) {
             return [...filterListe, filter];
-        } else {
-            const checkboxFilter = filterListe
-                .filter((filter) => CHECKBOX_FILTER.includes(filter));
-
-            return [...checkboxFilter, filter];
         }
+        const checkboxFilter = filterListe
+            .filter((valgtfilter) => CHECKBOX_FILTER.includes(valgtfilter));
+
+        return [...checkboxFilter, filter];
     }
 
     static fjernFerdigfilter(valgtFilterList, removeFilter) {
