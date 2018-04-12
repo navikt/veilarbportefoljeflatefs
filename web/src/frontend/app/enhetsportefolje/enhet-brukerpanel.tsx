@@ -1,6 +1,6 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 import Etiketter from '../components/tabell/etiketter';
-import { filtervalgShape, veilederShape } from '../proptype-shapes';
 import { FiltervalgModell, VeilederModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import CheckBox from '../components/tabell/checkbox';
@@ -13,12 +13,17 @@ interface EnhetBrukerpanelProps {
     filtervalg: FiltervalgModell;
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];
+    varForrigeBruker?: boolean;
 }
 
-function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner }: EnhetBrukerpanelProps) {
+function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, varForrigeBruker }: EnhetBrukerpanelProps) {
+
+    const classname  = classNames('brukerliste__element brukerliste--border-bottom-thin', {
+        'brukerliste--forrigeBruker': varForrigeBruker,
+    });
 
     return (
-        <li className="brukerliste__element brukerliste--border-bottom-thin">
+        <li className={classname}>
                 <div className="brukerliste__gutter-left brukerliste--min-width-enhet">
                     <CheckBox bruker={bruker} settMarkert={settMarkert} />
                 </div>
