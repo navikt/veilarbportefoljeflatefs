@@ -80,15 +80,15 @@ const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE', 'NYE_BRUKERE_FOR_VEILEDER'];
 class FiltreringStatus extends Component {
 
     static leggTilFerdigFilter(filterListe, filter) {
-        if (filterListe.includes(filter)) {
-            return filter;
-        } else if (CHECKBOX_FILTER.includes(filter)) {
+        if (CHECKBOX_FILTER.includes(filter)) {
             return [...filterListe, filter];
+        } else if (!filterListe.includes(filter)) {
+            const checkboxFilter = filterListe
+                .filter((valgtfilter) => CHECKBOX_FILTER.includes(valgtfilter));
+            return [...checkboxFilter, filter];
+        } else {
+            return filter;
         }
-        const checkboxFilter = filterListe
-            .filter((valgtfilter) => CHECKBOX_FILTER.includes(valgtfilter));
-
-        return [...checkboxFilter, filter];
     }
 
     static fjernFerdigfilter(valgtFilterList, removeFilter) {
@@ -102,12 +102,12 @@ class FiltreringStatus extends Component {
 
     handleChange(e) {
         let ferdigfilterListe = [...this.props.filtervalg.ferdigfilterListe];
-        if (e.target.type === 'checkbox') {
+        if (e.target.type === 'radio') {
+            ferdigfilterListe = FiltreringStatus.leggTilFerdigFilter(ferdigfilterListe, e.target.value);
+        } else {
             ferdigfilterListe = e.target.checked ?
                 FiltreringStatus.leggTilFerdigFilter(ferdigfilterListe, e.target.value) :
                 FiltreringStatus.fjernFerdigfilter(ferdigfilterListe, e.target.value);
-        } else {
-            ferdigfilterListe = FiltreringStatus.leggTilFerdigFilter(ferdigfilterListe, e.target.value);
         }
         this.props.endreFilter('ferdigfilterListe', ferdigfilterListe);
     }
