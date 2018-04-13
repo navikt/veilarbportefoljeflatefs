@@ -1,11 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { enhetShape, filtervalgShape, veilederShape } from './../proptype-shapes';
 import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
 import { settBrukerSomMarkert } from '../ducks/portefolje';
 import MinOversiktListehode from './minoversikt-listehode';
 import {
-    BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge, ValgtEnhetModell, VeilederModell
+    BrukerModell,
+    FiltervalgModell,
+    Sorteringsfelt,
+    Sorteringsrekkefolge,
+    ValgtEnhetModell,
+    VeilederModell
 } from '../model-interfaces';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
@@ -32,28 +36,36 @@ interface MinOversiktTabellProps {
     visesAnnenVeiledersPortefolje: boolean;
 }
 
-function MinoversiktTabell({
-                               settMarkert, portefolje, settSorteringOgHentPortefolje,
-                               filtervalg, sorteringsrekkefolge, valgtEnhet, innloggetVeileder, valgteKolonner
-                           }: MinOversiktTabellProps) {
-    const brukere = portefolje.data.brukere;
-    const {enhetId} = valgtEnhet.enhet!;
+class MinoversiktTabell extends React.Component<MinOversiktTabellProps, {}> {
+    private forrigeBruker?: string;
 
-    const forrigeBruker = getFraBrukerFraUrl();
-    fjernFraBrukerFraUrl();
+    componentWillMount() {
+        this.forrigeBruker = getFraBrukerFraUrl();
+        fjernFraBrukerFraUrl();
+    }
 
-    return (
-        <div className="minoversikt-liste__wrapper typo-undertekst">
-            <MinOversiktListehode
-                sorteringsrekkefolge={sorteringsrekkefolge}
-                sorteringOnClick={settSorteringOgHentPortefolje}
-                filtervalg={filtervalg}
-                sorteringsfelt={portefolje.sorteringsfelt}
-                valgteKolonner={valgteKolonner}
-                brukere={brukere}
-            />
-            <ul className="brukerliste">
-                {brukere.map((bruker) =>
+    render() {
+        const {
+            settMarkert, portefolje, settSorteringOgHentPortefolje,
+            filtervalg, sorteringsrekkefolge, valgtEnhet, innloggetVeileder, valgteKolonner
+        } = this.props;
+        const brukere = portefolje.data.brukere;
+        const {enhetId} = valgtEnhet.enhet!;
+        const forrigeBruker = this.forrigeBruker;
+        this.forrigeBruker = undefined;
+
+        return (
+            <div className="minoversikt-liste__wrapper typo-undertekst">
+                <MinOversiktListehode
+                    sorteringsrekkefolge={sorteringsrekkefolge}
+                    sorteringOnClick={settSorteringOgHentPortefolje}
+                    filtervalg={filtervalg}
+                    sorteringsfelt={portefolje.sorteringsfelt}
+                    valgteKolonner={valgteKolonner}
+                    brukere={brukere}
+                />
+                <ul className="brukerliste">
+                    {brukere.map((bruker) =>
                         <MinoversiktBrukerPanel
                             key={bruker.fnr}
                             bruker={bruker}
@@ -65,9 +77,10 @@ function MinoversiktTabell({
                             innloggetVeileder={innloggetVeileder}
                         />
                     )}
-            </ul>
-        </div>
-    );
+                </ul>
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = (state) => ({
@@ -79,8 +92,13 @@ const mapStateToProps = (state) => ({
     valgteKolonner: selectValgteAlternativer(state, ListevisningType.minOversikt)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
-});
+const
+    mapDispatchToProps = (dispatch) => ({
+        settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
+    });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MinoversiktTabell);
+export default connect(mapStateToProps, mapDispatchToProps)
+
+(
+    MinoversiktTabell
+);
