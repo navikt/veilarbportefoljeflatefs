@@ -18,7 +18,6 @@ export enum AktiviteterValg {
 export interface FiltreringAktiviteterValg { [aktivitet: string]: AktiviteterValg; }
 
 export interface FiltreringState {
-    brukerstatus: null;
     ferdigfilterListe: string[];
     alder: string[];
     kjonn: string[];
@@ -36,7 +35,6 @@ export interface FiltreringState {
 //  Reducer
 // TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducer
 export const initialState = {
-    brukerstatus: null,
     ferdigfilterListe: [],
     alder: [],
     kjonn: [],
