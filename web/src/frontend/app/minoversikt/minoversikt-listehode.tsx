@@ -11,6 +11,7 @@ import {
     UTLOPTE_AKTIVITETER,
     MIN_ARBEIDSLISTE,
     I_AVTALT_AKTIVITET,
+    ytelseAapSortering
 } from '../filtrering/filter-konstanter';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Kolonne } from '../ducks/ui/listevisning';
@@ -35,9 +36,13 @@ interface MinOversiktListehodeProps {
 type Props = MinOversiktListehodeProps & InjectedIntlProps;
 
 function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner, intl }: Props) {
-    const ytelseUtlopsdatoNavn = ytelseUtlopsSortering(intl)[filtervalg.ytelse];
+    const { ytelse } = filtervalg;
+    const erAapYtelse = Object.keys(ytelseAapSortering()).includes(ytelse);
+    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering()[ytelse].rettighetsperiode : '';
+    const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering()[ytelse].vedtaksperiode : ytelseUtlopsSortering(intl)[filtervalg.ytelse];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
-    const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' ? 'periode' : 'uker';
+    const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'periode' : 'uker';
+    const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
 
     return (
         <div className="brukerliste__header">
@@ -51,32 +56,37 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                         />
                         <Listeoverskrift
                             className="listeoverskrift__arbeidsliste listeoverskrift col col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                             id="portefolje.tabell.arbeidsliste"
                         />
                         <Listeoverskrift
                             className="listeoverskrift__ytelse listeoverskrift col col-xs-2"
-                            skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                            skalVises={!!filtervalg && ytelseFilterErAktiv(ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                            id="portefolje.tabell.utlopsdato"
+                        />
+                        <Listeoverskrift
+                            className="listeoverskrift__ytelse listeoverskrift col col-xs-2"
+                            skalVises={!!filtervalg && ytelseFilterErAktiv(ytelse) && erAapYtelse}
                             id="portefolje.tabell.utlopsdato"
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskrift col col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
                             id={'portefolje.tabell.svarfranav'}
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
                             id={'portefolje.tabell.svarfrabruker'}
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
                             id={'portefolje.tabell.utlopaktivitet'}
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
                             id={'portefolje.tabell.aktivitet.neste.utlop'}
                         />
@@ -88,19 +98,19 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
                             id={'portefolje.tabell.aktivitet.start'}
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
                             id={'portefolje.tabell.aktivitet.neste.start'}
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
                             id={'portefolje.tabell.aktivitet.forrige.start'}
                         />
@@ -134,7 +144,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={!!filtervalg && filtervalg.brukerstatus === MIN_ARBEIDSLISTE}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
                         <SorteringHeader
@@ -143,7 +153,16 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === ytelseUtlopsdatoNavn}
                             tekstId={`portefolje.tabell.${ytelseSorteringHeader}`}
-                            skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                            skalVises={ytelseFilterErAktiv(ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                            className={'sortering-header__dato col col-xs-2'}
+                        />
+                        <SorteringHeader
+                            sortering={aapRettighetsperiode}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === aapRettighetsperiode}
+                            tekstId={"portefolje.tabell.uker"}
+                            skalVises={ytelseFilterErAktiv(ytelse) && erAapYtelse}
                             className={'sortering-header__dato col col-xs-2'}
                         />
                         <SorteringHeader
@@ -152,7 +171,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
                         <SorteringHeader
@@ -161,7 +180,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
                         <SorteringHeader
@@ -170,7 +189,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
                         <SorteringHeader
@@ -179,7 +198,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
@@ -199,7 +218,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
@@ -209,7 +228,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
                             className={'sortering-header__dato col col-xs-2'}
                         />
@@ -219,7 +238,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
                             tekstId="portefolje.tabell.ddmmyy"
-                            skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET &&
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
                             className={'sortering-header__dato col col-xs-2'}
                         />

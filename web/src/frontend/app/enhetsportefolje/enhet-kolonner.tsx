@@ -8,12 +8,13 @@ import {
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
-    ytelsevalg
+    ytelsevalg,
+    ytelseAapSortering
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
 import { Kolonne } from '../ducks/ui/listevisning';
 import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
-import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker } from '../utils/utils';
+import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker, aapRettighetsperiode } from '../utils/utils';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
 
@@ -37,11 +38,16 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
+    const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
+    const erAapYtelse = Object.keys(ytelseAapSortering()).includes(ytelse);
+    const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-3" bruker={bruker} enhetId={enhetId} />
-            <BrukerFnr className="col col-xs-2" bruker={bruker} />
+            <div className="col col-xs-4">
+                <BrukerNavn className="col col-xs-7" bruker={bruker} enhetId={enhetId} />
+                <BrukerFnr className="col col-xs-5" bruker={bruker} />
+            </div>
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
@@ -58,19 +64,13 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP)}
+                skalVises={ytelseErValgtKolonne && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"
-                ukerIgjen={bruker.aapmaxtidUke}
+                ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_MAXTID)}
-            />
-            <UkeKolonne
-                className="col col-xs-2"
-                ukerIgjen={bruker.aapUnntakUkerIgjen}
-                minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_UNNTAK)}
+                skalVises={ytelseErValgtKolonne && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -81,37 +81,39 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraBruker}
-                skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_BRUKER  && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)  && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraNAV}
-                skalVises={filtervalg.brukerstatus === VENTER_PA_SVAR_FRA_NAV && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nyesteUtlopteAktivitet}
-                skalVises={filtervalg.brukerstatus === UTLOPTE_AKTIVITETER && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER) && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
-                skalVises={filtervalg.brukerstatus === I_AVTALT_AKTIVITET && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
                 skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0  && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
             />
-            <VeilederId className="col col-xs-2"
-                        bruker={bruker}
-                        skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
-            />
-            <VeilederNavn className="col col-xs-3"
-                          bruker={bruker}
-                          skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                          veileder={brukersVeileder}
-            />
+            <div className="col col-xs-4">
+                <VeilederId className="col col-xs-4"
+                            bruker={bruker}
+                            skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
+                />
+                <VeilederNavn className="col col-xs-8"
+                              bruker={bruker}
+                              skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
+                              veileder={brukersVeileder}
+                />
+            </div>
         </div>
     );
 }

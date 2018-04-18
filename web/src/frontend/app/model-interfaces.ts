@@ -22,6 +22,7 @@ export enum Sorteringsfelt {
     START_DATO_FOR_AVTALT_AKTIVITET = 'aktivitet_start',
     NESTE_START_DATO_FOR_AVTALT_AKTIVITET = 'neste_aktivitet_start',
     FORRIGE_DATO_FOR_AVTALT_AKTIVITET = 'forrige_aktivitet_start',
+    AAP_RETTIGHETSPERIODE = 'aaprettighetsperiode',
     NAVIDENT = 'veileder_id'
 }
 
@@ -48,7 +49,6 @@ export interface FiltervalgModell {
     servicegruppe?: string[];
     veiledere?: string[];
     ytelse: string;
-    brukerstatus?: string;
     aktiviteter?: string[];
     tiltakstyper: string[];
 }
