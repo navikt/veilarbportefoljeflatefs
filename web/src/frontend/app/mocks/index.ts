@@ -67,6 +67,9 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 
 // websocket
 class MockWebSocket {
+    constructor(uri: string) {
+        console.log("MOCK WS: Tried to connect to: " + uri); // tslint:disable-line
+    }
     addEventListener() {} // tslint:disable-line
     close() {} // tslint:disable-line
 }
