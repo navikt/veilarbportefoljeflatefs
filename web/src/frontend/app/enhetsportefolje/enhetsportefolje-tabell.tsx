@@ -1,13 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { enhetShape, filtervalgShape, veilederShape } from './../proptype-shapes';
 import EnhetBrukerpanel from './enhet-brukerpanel';
 import { settBrukerSomMarkert } from '../ducks/portefolje';
 import EnhetListehode from './enhet-listehode';
-import {
-    FiltervalgModell, Sorteringsrekkefolge, ValgtEnhetModell,
-    VeilederModell
-} from '../model-interfaces';
+import { FiltervalgModell, Sorteringsrekkefolge, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { fjernFraBrukerFraUrl, getFraBrukerFraUrl } from '../utils/url-utils';
@@ -25,28 +21,37 @@ interface EnhetTabellProps {
 
 const finnBrukersVeileder = (veiledere, bruker) => (veiledere.find((veileder) => veileder.ident === bruker.veilederId));
 
-function EnhetTabell({
-                         settMarkert, portefolje, settSorteringOgHentPortefolje,
-                         filtervalg, sorteringsrekkefolge, valgtEnhet, veiledere, valgteKolonner
-                     }: EnhetTabellProps) {
-    const {brukere} = portefolje.data;
-    const {enhetId} = valgtEnhet.enhet!;
+class EnhetTabell extends React.Component<EnhetTabellProps, {}> {
+    private forrigeBruker?: string;
 
-    const forrigeBruker = getFraBrukerFraUrl();
-    fjernFraBrukerFraUrl();
+    componentWillMount() {
+        this.forrigeBruker = getFraBrukerFraUrl();
+        fjernFraBrukerFraUrl();
+    }
 
-    return (
+    render() {
+        const {
+            settMarkert, portefolje, settSorteringOgHentPortefolje,
+            filtervalg, sorteringsrekkefolge, valgtEnhet, veiledere, valgteKolonner
+        } = this.props;
+        const {brukere} = portefolje.data;
+        const {enhetId} = valgtEnhet.enhet!;
+        const forrigeBruker = this.forrigeBruker;
 
-        <div className="brukerliste typo-undertekst">
-            <EnhetListehode
-                sorteringsrekkefolge={sorteringsrekkefolge}
-                sorteringOnClick={settSorteringOgHentPortefolje}
-                filtervalg={filtervalg}
-                sorteringsfelt={portefolje.sorteringsfelt}
-                valgteKolonner={valgteKolonner}
-            />
-            <ul className="brukerliste">
-                {brukere.map((bruker) =>
+        this.forrigeBruker = undefined;
+
+        return (
+
+            <div className="brukerliste typo-undertekst">
+                <EnhetListehode
+                    sorteringsrekkefolge={sorteringsrekkefolge}
+                    sorteringOnClick={settSorteringOgHentPortefolje}
+                    filtervalg={filtervalg}
+                    sorteringsfelt={portefolje.sorteringsfelt}
+                    valgteKolonner={valgteKolonner}
+                />
+                <ul className="brukerliste">
+                    {brukere.map((bruker) =>
                         <EnhetBrukerpanel
                             key={bruker.fnr}
                             bruker={bruker}
@@ -57,10 +62,11 @@ function EnhetTabell({
                             valgteKolonner={valgteKolonner}
                             brukersVeileder={finnBrukersVeileder(veiledere, bruker)}
                         />
-                )}
-            </ul>
-        </div>
-    );
+                    )}
+                </ul>
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = (state) => ({
