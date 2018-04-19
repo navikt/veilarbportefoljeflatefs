@@ -23,7 +23,7 @@ export function lagConfig(data: any): any {
 export const ferdigfilterListe = ()=> ({
     UFORDELTE_BRUKERE: 'Ufordelte brukere',
     NYE_BRUKERE_FOR_VEILEDER: 'Nye brukere',
-    INAKTIVE_BRUKERE: 'Inaktive brukere',
+    INAKTIVE_BRUKERE: 'Ikke servicebehov',
     VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
     VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker',
     UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
