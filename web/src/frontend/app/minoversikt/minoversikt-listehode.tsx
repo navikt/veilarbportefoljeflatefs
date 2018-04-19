@@ -161,7 +161,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === aapRettighetsperiode}
-                            tekstId={"portefolje.tabell.uker"}
+                            tekstId="portefolje.tabell.uker"
                             skalVises={ytelseFilterErAktiv(ytelse) && erAapYtelse}
                             className={'sortering-header__dato col col-xs-2'}
                         />
