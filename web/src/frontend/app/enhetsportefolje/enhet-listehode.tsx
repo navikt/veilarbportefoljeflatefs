@@ -154,7 +154,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === aapRettighetsperiode}
-                            tekstId={"portefolje.tabell.uker"}
+                            tekstId="portefolje.tabell.uker"
                             skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse}
                             className={'sortering-header__dato col col-xs-2'}
                         />
