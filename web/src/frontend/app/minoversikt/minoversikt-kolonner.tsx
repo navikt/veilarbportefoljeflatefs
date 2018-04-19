@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker } from '../utils/utils';
+import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker, aapRettighetsperiode } from '../utils/utils';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/ukekolonne';
 import {
     I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER, VENTER_PA_SVAR_FRA_NAV,
-    ytelsevalg
+    ytelsevalg, ytelseAapSortering
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
 import { BrukerModell, FiltervalgModell } from '../model-interfaces';
@@ -23,8 +23,10 @@ interface MinOversiktKolonnerProps {
 type Props = MinOversiktKolonnerProps & InjectedIntlProps;
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, intl}: Props) {
-    const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
+    const {ytelse} = filtervalg;
     const ytelsevalgIntl = ytelsevalg(intl);
+    const erAapYtelse = Object.keys(ytelseAapSortering()).includes(ytelse);
+    const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     // TODO: bør gjøres før data lagres i storen
     const arbeidslisteFrist = bruker.arbeidsliste.frist ? new Date(bruker.arbeidsliste.frist) : null;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
@@ -33,7 +35,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
-    const {ytelse} = filtervalg;
+    const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
 
     return (
         <div className={className}>
@@ -60,19 +62,13 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP)}
+                skalVises={ytelseErValgtKolonne && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"
-                ukerIgjen={bruker.aapmaxtidUke}
+                ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_MAXTID)}
-            />
-            <UkeKolonne
-                className="col col-xs-2"
-                ukerIgjen={bruker.aapUnntakUkerIgjen}
-                minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.AAP_UNNTAK)}
+                skalVises={ytelseErValgtKolonne && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"

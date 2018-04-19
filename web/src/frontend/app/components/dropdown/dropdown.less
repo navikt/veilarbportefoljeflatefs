@@ -9,6 +9,7 @@
     right: 0.75rem;
     top: @yPos;
     position: absolute;
+    transition: transform .2s;
 }
 
 .dropdown {
@@ -66,8 +67,15 @@
     &--apen {
         margin-bottom: -0.05rem;
         .dropdown__btnwrapper {
-            &:after,
             &:before {
+                .chevronline-mixin();
+                transform: translateX(3px) rotate(45deg);
+                z-index: 200;
+            }
+
+            &:after {
+                .chevronline-mixin();
+                transform: translateX(-3px) rotate(-45deg);
                 z-index: 200;
             }
         }
