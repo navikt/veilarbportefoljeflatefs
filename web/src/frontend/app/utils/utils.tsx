@@ -63,7 +63,7 @@ export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
 
 export function aapRettighetsperiode(ytelse, maxtidukerigjen, unntakukerigjen) {
     if (ytelse === 'AAP') {
-        return maxtidukerigjen !== -1 ? maxtidukerigjen :  unntakukerigjen;
+        return maxtidukerigjen !== -1 ? maxtidukerigjen : unntakukerigjen;
     } else if (ytelse === 'AAP_MAXTID') {
         return maxtidukerigjen;
     } else if (ytelse === 'AAP_UNNTAK') {

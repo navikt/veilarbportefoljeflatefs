@@ -123,22 +123,22 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>
                     <div className="brukerliste__innhold">
                         <div className="col col-xs-4">
-                        <SorteringHeader
-                            sortering={Sorteringsfelt.ETTERNAVN}
-                            onClick={sorteringOnClick}
-                            rekkefolge={sorteringsrekkefolge}
-                            erValgt={sorteringsfelt === Sorteringsfelt.ETTERNAVN}
-                            tekstId="portefolje.tabell.etternavn"
-                            className={'col col-xs-7'}
-                        />
-                        <SorteringHeader
-                            sortering={Sorteringsfelt.FODSELSNUMMER}
-                            onClick={sorteringOnClick}
-                            rekkefolge={sorteringsrekkefolge}
-                            erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
-                            tekstId="portefolje.tabell.fodselsnummer"
-                            className={'col col-xs-5'}
-                        />
+                            <SorteringHeader
+                                sortering={Sorteringsfelt.ETTERNAVN}
+                                onClick={sorteringOnClick}
+                                rekkefolge={sorteringsrekkefolge}
+                                erValgt={sorteringsfelt === Sorteringsfelt.ETTERNAVN}
+                                tekstId="portefolje.tabell.etternavn"
+                                className={'col col-xs-7'}
+                            />
+                            <SorteringHeader
+                                sortering={Sorteringsfelt.FODSELSNUMMER}
+                                onClick={sorteringOnClick}
+                                rekkefolge={sorteringsrekkefolge}
+                                erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
+                                tekstId="portefolje.tabell.fodselsnummer"
+                                className={'col col-xs-5'}
+                            />
                         </div>
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
