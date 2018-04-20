@@ -15,7 +15,8 @@ import {
     kjonn,
     rettighetsgruppe,
     servicegruppe,
-    ytelse
+    ytelse,
+    manuellbrukere
 } from './filter-konstanter';
 
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
@@ -108,8 +109,6 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
-            </div>
-            <div className="col-sm-3">
                 <OverskriftMedHjelpeTekst
                     overskriftId="filtrering.filter.tittel.aktivitet"
                     hjelpetekstId="hjelpetekst.aktivitetsfilter"
@@ -133,6 +132,19 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                         valg={enhettiltak}
                         filtervalg={filtervalg}
                         onSubmit={actions.endreFiltervalg}
+                    />
+                </Dropdown>
+            </div>
+            <div className="col-sm-3">
+                <Element className="blokk-xxs" tag="h3">
+                    <FormattedMessage id="filtrering.filter.tittel.manuellbruker"/>
+                </Element>
+                <Dropdown name="Manuell bruker" className="dropdown--130bredde">
+                    <CheckboxFilterform
+                        form="manuellbrukere"
+                        valg={manuellbrukere(intl)}
+                        onSubmit={actions.endreFiltervalg}
+                        filtervalg={filtervalg}
                     />
                 </Dropdown>
             </div>
