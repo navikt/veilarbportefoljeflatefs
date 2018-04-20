@@ -91,13 +91,16 @@ export const manuellbrukere = (intl) => ({
 export const ytelsevalg: (intl?: any) => {[id: string]: string} = (intl) => Object.keys(ytelse(intl)).reduce((acc, val) => ({ ...acc, [val]: val }), {});
 
 export const ytelseUtlopsSortering = (intl) => ({
-    [ytelsevalg(intl).DAGPENGER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [ytelsevalg(intl).ORDINARE_DAGPENGER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [ytelsevalg(intl).DAGPENGER_MED_PERMITTERING]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
-    [ytelsevalg(intl).AAP]: Sorteringsfelt.UTLOPSDATO,
-    [ytelsevalg(intl).AAP_UNNTAK]: Sorteringsfelt.AAP_UNNTAK_UKE,
-    [ytelsevalg(intl).AAP_MAXTID]: Sorteringsfelt.AAP_MAXTID_UKE,
-    [ytelsevalg(intl).TILTAKSPENGER]: Sorteringsfelt.UTLOPSDATO
+    DAGPENGER: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
+    ORDINARE_DAGPENGER: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
+    DAGPENGER_MED_PERMITTERING: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
+    TILTAKSPENGER: Sorteringsfelt.UTLOPSDATO
+});
+
+export const ytelseAapSortering = ()=> ({
+    AAP: { vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE },
+    AAP_MAXTID: { vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_MAXTID_UKE },
+    AAP_UNNTAK: { vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKE }
 });
 
 export const rettighetsgruppe = (intl) => ({
@@ -138,5 +141,6 @@ export default {
     rettighetsgruppe,
     veiledere,
     aktiviteter,
+    ytelseAapSortering,
     manuellbrukere
 };

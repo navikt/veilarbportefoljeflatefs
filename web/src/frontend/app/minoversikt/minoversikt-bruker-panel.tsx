@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { MouseEvent } from 'react';
+import * as classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import CheckBox from '../components/tabell/checkbox';
 import ArbeidslisteIkon from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
-import { brukerShape, filtervalgShape } from './../proptype-shapes';
 import { BrukerModell, EtikettType, FiltervalgModell } from '../model-interfaces';
 import Collapse from 'react-collapse';
 import MinOversiktKolonner from './minoversikt-kolonner';
@@ -21,6 +21,7 @@ interface MinOversiktBrukerPanelProps {
     innloggetVeileder: string;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     valgteKolonner: Kolonne[];
+    varForrigeBruker?: boolean;
 }
 
 interface MinOversiktBrukerPanelState {
@@ -58,12 +59,16 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     }
 
     render() {
-        const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert} = this.props;
+        const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker} = this.props;
 
         const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
 
+        const classname  = classNames('brukerliste--border-bottom-thin ', {
+            'brukerliste--forrigeBruker': varForrigeBruker,
+        });
+
         return (
-            <li className="brukerliste--border-bottom-thin">
+            <li className={classname}>
                 <div className="brukerliste__element">
                     <div className="brukerliste__gutter-left brukerliste--min-width-minside">
                         <CheckBox bruker={bruker} settMarkert={settMarkert}/>

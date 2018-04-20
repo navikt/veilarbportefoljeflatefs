@@ -20,6 +20,7 @@ import { EnhetModell } from '../../model-interfaces';
 interface StateProps {
     modalSynlig: boolean;
     feilet: boolean;
+    ident?: string;
     isPending: boolean;
     aktivEnhet: string;
     aktivEnhetNavn: string;
@@ -60,8 +61,8 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     websocketUri() {
-        const miljo = erDev() ? '-t4' : miljoFraUrl();
-        return `wss://veilederflatehendelser${miljo}.adeo.no/modiaeventdistribution/websocket`;
+        const miljo = erDev() ? '-t6' : miljoFraUrl();
+        return `wss://veilederflatehendelser${miljo}.adeo.no/modiaeventdistribution/ws/${this.props.ident}`;
     }
 
     finnOgSettEnhetIKontekst() {
@@ -151,6 +152,7 @@ const mapStateToProps = (state: AppState): StateProps => {
     const harValgtEnhet = valgtEnhetId != null && valgtEnhetId !== '' && aktivEnhetIdFraContext !== '';
     return {
         enheter: state.enheter.data,
+        ident: state.enheter.ident,
         modalSynlig: harValgtEnhet && (valgtEnhetId !== aktivEnhetIdFraContext),
         feilmodalSynlig: state.nycontext.visFeilmodal,
         isPending: state.nycontext.isPending,
