@@ -3,9 +3,9 @@ import { reduxForm, Fields, Field, SubmitHandler } from 'redux-form';
 import { connect } from 'react-redux';
 import * as classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import { filtervalgShape } from '../../proptype-shapes';
 import { FiltervalgModell } from '../../model-interfaces';
 import { lagConfig } from '../../filtrering/filter-konstanter';
+import SubmitKnapp from './../submit-knapp';
 
 interface RenderFieldProps {
     names: any;
@@ -92,17 +92,6 @@ interface RadioFilterformOwnProps {
 }
 
 function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown }: RadioFilterformProps & RadioFilterformOwnProps, context) {
-    const knappCls = ['knapp', 'knapp--mini', !pristine ? 'knapp--hoved' : ''].join(' ');
-    const submitknapp = !pristine ? (
-        <button className={knappCls} type="submit">
-            <FormattedMessage id="components.filterform.button.velg" />
-        </button>
-        ) : (
-            <button className={knappCls} type="button" onClick={closeDropdown}>
-                <FormattedMessage id="components.filterform.button.lukk" />
-            </button>
-        );
-
     const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown));
 
     // TODO Finne en bedre løsning på dette
@@ -114,7 +103,7 @@ function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDr
                 <FieldRenderer names={Object.keys(valg)} valg={valg} skjema={form} component={RenderFields} />
             </div>
             <div className="knapperad blokk-xxs">
-                {submitknapp}
+                <SubmitKnapp pristine={pristine} closeDropdown={closeDropdown} />
             </div>
         </form>
     );
