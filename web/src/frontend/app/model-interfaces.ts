@@ -105,6 +105,7 @@ export interface BrukerModell {
     nesteAktivitetStart?: string; // dato
     forrigeAktivitetStart?: string; // dato
     markert?: boolean;
+    manuellBrukere: String;
 }
 
 // TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen?
