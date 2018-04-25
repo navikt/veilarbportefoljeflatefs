@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { lagConfig } from './../../filtrering/filter-konstanter';
+import SubmitKnapp from './../submit-knapp';
 
 function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-line react/prop-types
     const fieldCls = (className) => classNames('skjemaelement skjemaelement--horisontal', className);
@@ -71,17 +72,6 @@ function prepSubmit(name, fn, close) {
 }
 
 function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown }) {
-    const knappCls = ['knapp', 'knapp--mini', !pristine ? 'knapp--hoved' : ''].join(' ');
-    const submitknapp = !pristine ? (
-        <button className={knappCls} type="submit">
-            <FormattedMessage id="components.filterform.button.velg" />
-        </button>
-        ) : (
-            <button className={knappCls} type="button" onClick={closeDropdown}>
-                <FormattedMessage id="components.filterform.button.lukk" />
-            </button>
-        );
-
     const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown));
 
     return (
@@ -90,7 +80,7 @@ function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, clos
                 <Fields names={Object.keys(valg)} valg={valg} component={renderFields} />
             </div>
             <div className="knapperad blokk-xxs">
-                {submitknapp}
+                <SubmitKnapp pristine={pristine} closeDropdown={closeDropdown} />
             </div>
         </form>
     );

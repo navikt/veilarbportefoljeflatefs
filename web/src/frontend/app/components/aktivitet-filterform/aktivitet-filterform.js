@@ -2,6 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+import SubmitKnapp from './../submit-knapp';
 
 function reset(change, alleValg) {
     return () => {
@@ -77,9 +78,7 @@ function AktivitetFilterform(props) {
                 </span>
             </div>
             <div className="aktivitetfilter_knapper blokk-xxs">
-                <button type="submit" className="knapp knapp--hoved knapp--mini">
-                    Velg
-                </button>
+                <SubmitKnapp {...props} />
                 <button
                     type="button"
                     className="knapp knapp--standard knapp--mini"
