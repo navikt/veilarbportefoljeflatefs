@@ -127,7 +127,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
                         aria-controls={`${name}-dropdown__innhold`}
                         disabled={disabled}
                     >
-                        {name}
+                        <span className="dropdown__btntext">{name}</span>
                     </button>
                 </div>
                 {innhold}
