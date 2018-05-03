@@ -16,7 +16,7 @@ import {
     rettighetsgruppe,
     servicegruppe,
     ytelse,
-    manuellbrukere
+    manuellBrukerStatus
 } from './filter-konstanter';
 
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
@@ -141,8 +141,8 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 </Element>
                 <Dropdown name="Manuell bruker" className="dropdown--130bredde">
                     <CheckboxFilterform
-                        form="manuellbrukere"
-                        valg={manuellbrukere(intl)}
+                        form="manuellBrukerStatus"
+                        valg={manuellBrukerStatus(intl)}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />

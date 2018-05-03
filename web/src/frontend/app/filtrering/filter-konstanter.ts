@@ -84,7 +84,7 @@ export const ytelse = (intl) => ({
     TILTAKSPENGER: intl.formatMessage({id: 'filter.ytelse.tiltakspenger'})
 });
 
-export const manuellbrukere = (intl) => ({
+export const manuellBrukerStatus = (intl) => ({
     MANUELL: intl.formatMessage({id: 'filter.manuellbrukere.manuellbruker'})
 });
 
@@ -142,5 +142,5 @@ export default {
     veiledere,
     aktiviteter,
     ytelseAapSortering,
-    manuellbrukere
+    manuellBrukerStatus
 };
