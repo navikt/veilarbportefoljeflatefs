@@ -19,7 +19,7 @@ function VelgalleCheckboks({ skalVises, disabled, markerAlle, alleMarkert }: Vel
 
     return (
         <Checkbox
-            label="Velg alle"
+            label={<span className="velgalle-checkboks__label">Velg alle</span>}
             className="velgalle-checkboks"
             checked={alleMarkert}
             disabled={disabled}

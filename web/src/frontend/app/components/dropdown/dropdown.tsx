@@ -2,8 +2,9 @@ import * as React from 'react';
 import { Children, cloneElement, Component } from 'react';
 import * as classNames from 'classnames';
 
-const btnCls = (erApen, className) => classNames('dropdown', className, {
-    'dropdown--apen': erApen
+const btnCls = (props: DropdownProps, state: DropdownState) => classNames('dropdown', props.className, {
+    'dropdown--apen': state.apen,
+    'dropdown--hover': !props.disabled && state.hover
 });
 
 const btnWrapperCls = (disabled) => classNames('dropdown__btnwrapper', {'dropdown__btnwrapper--disabled': disabled});
@@ -31,6 +32,7 @@ interface DropdownProps {
 
 interface DropdownState {
     apen: boolean;
+    hover: boolean;
 }
 
 class Dropdown extends Component<DropdownProps, DropdownState> {
@@ -40,13 +42,17 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
     constructor(props) {
         super(props);
 
-        this.state = {apen: this.props.apen === true};
+        this.state = {
+            apen: this.props.apen === true,
+            hover: false
+        };
 
         this.toggleDropdown = this.toggleDropdown.bind(this);
         this.lukkDropdown = this.lukkDropdown.bind(this);
         this.bindComponent = this.bindComponent.bind(this);
         this.settFokus = this.settFokus.bind(this);
         this.handler = this.handler.bind(this);
+        this.isHover = this.isHover.bind(this);
     }
 
     handler(e: HTMLElementEventMap['click']) {
@@ -96,6 +102,12 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
         this.component = component;
     }
 
+    isHover(hoverState) {
+        return () => {
+            this.setState({ hover: hoverState });
+        };
+    }
+
     render() {
         const { name, className, disabled, children, hoyre } = this.props;
         const { apen } = this.state;
@@ -114,7 +126,12 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
         );
 
         return (
-            <div className={btnCls(apen, className)} ref={this.bindComponent}>
+            <div
+                className={btnCls(this.props, this.state)}
+                ref={this.bindComponent}
+                onMouseEnter={this.isHover(true)}
+                onMouseLeave={this.isHover(false)}
+            >
                 <div className={btnWrapperCls(disabled)}>
                     <button
                         ref={(btn) => {
@@ -127,7 +144,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
                         aria-controls={`${name}-dropdown__innhold`}
                         disabled={disabled}
                     >
-                        {name}
+                        <span className="dropdown__btntext">{name}</span>
                     </button>
                 </div>
                 {innhold}
