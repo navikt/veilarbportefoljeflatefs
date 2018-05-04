@@ -85,7 +85,8 @@ export const ytelse = (intl) => ({
 });
 
 export const manuellBrukerStatus = (intl) => ({
-    MANUELL: intl.formatMessage({id: 'filter.manuellbrukere.manuellbruker'})
+    MANUELL: intl.formatMessage({id: 'filter.manuellbrukere.manuellbruker'}),
+    KRR: intl.formatMessage({id:'filter.manuellbrukere.krr'})
 });
 
 export const ytelsevalg: (intl?: any) => {[id: string]: string} = (intl) => Object.keys(ytelse(intl)).reduce((acc, val) => ({ ...acc, [val]: val }), {});
