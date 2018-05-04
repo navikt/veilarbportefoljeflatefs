@@ -52,7 +52,12 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.DAGPENGER || ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER)}
+                skalVises={ytelseErValgtKolonne && (
+                    ytelse === ytelsevalgIntl.DAGPENGER ||
+                    ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
+                    ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI ||
+                    ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER
+                )}
             />
             <UkeKolonne
                 className="col col-xs-2"
