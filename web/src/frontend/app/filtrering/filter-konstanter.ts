@@ -78,6 +78,8 @@ export const ytelse = (intl) => ({
     DAGPENGER: intl.formatMessage({id: 'filter.ytelse.dagpenger'}),
     ORDINARE_DAGPENGER: { label: intl.formatMessage({id: 'filter.ytelse.ord-dagpenger'}), className: 'skjemaelement--innrykk' },
     DAGPENGER_MED_PERMITTERING: { label: intl.formatMessage({id: 'filter.ytelse.dagpenger-permitering'}), className: 'skjemaelement--innrykk' },
+    DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI: { label: intl.formatMessage({id: 'filter.ytelse.dagpenger-permittering-fiskeindustri'}), className: 'skjemaelement--innrykk' },
+    LONNSGARANTIMIDLER_DAGPENGER: { label: intl.formatMessage({id: 'filter.ytelse.lonnsgarantimidler-dagpenger'}), className: 'skjemaelement--innrykk' },
     AAP: intl.formatMessage({id: 'filter.ytelse.aap'}),
     AAP_MAXTID: { label: intl.formatMessage({id: 'filter.ytelse.aap-maxtid'}), className: 'skjemaelement--innrykk' },
     AAP_UNNTAK: { label: intl.formatMessage({id: 'filter.ytelse.aap-unntak'}), className: 'skjemaelement--innrykk' },

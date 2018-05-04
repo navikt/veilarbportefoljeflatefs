@@ -10,6 +10,8 @@ const veiledere = veiledereResponse.veilederListe;
 const ytelser = [
     'ORDINARE_DAGPENGER',
     'DAGPENGER_MED_PERMITTERING',
+    'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI',
+    'LONNSGARANTIMIDLER_DAGPENGER',
     'DAGPENGER_OVRIGE',
     'AAP_MAXTID',
     'AAP_UNNTAK',
