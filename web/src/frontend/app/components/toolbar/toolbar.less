@@ -24,42 +24,23 @@
         min-width: 3rem;
     }
 
-    .toggle__label:after {
-        content: "";
-        width: 1rem;
-        height: 99%;
-        transition: all 200ms;
-        transform: scale(1.0);
-    }
-
-    .toggle__label:hover:after {
-        transform: scale(1.1);
-    }
-
-    .toggle--tabell:after {
+    .toggle--tabell {
         background: data-uri('./liste.svg') no-repeat center center;
     }
 
-    .toggle--diagram:after {
+    .toggle__input:checked + .toggle--tabell {
+        background-color: @toolbarTextColor;
+        background-image: data-uri('./liste-hvit.svg');
+    }
+
+    .toggle--diagram {
         background: data-uri('./stolpediagram.svg') no-repeat center center;
     }
 
-    .toggle__input:checked + .toggle--tabell:after {
-        background-image: data-uri('./liste-hvit.svg');
-    }
-    .toggle__input:checked + .toggle--tabell:before {
+    .toggle__input:checked + .toggle--diagram {
         background-color: @toolbarTextColor;
-    }
-
-
-    .toggle__input:checked + .toggle--diagram:after {
         background-image: data-uri('./stolpediagram-hvit.svg');
     }
-    .toggle__input:checked + .toggle--diagram:before {
-        background-color: @toolbarTextColor;
-    }
-
-
 }
 
 .toolbar__element {
