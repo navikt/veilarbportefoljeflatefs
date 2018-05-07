@@ -65,12 +65,10 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                 <div className="brukerliste__overskriftheader">
                     <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>
                     <div className="brukerliste__innhold">
-                        <div className="col col-xs-4">
-                            <Listeoverskrift
-                                className="listeoverskrift__bruker listeoverskriftcol col col-xs-8"
-                                id="enhet.portefolje.tabell.bruker"
-                            />
-                        </div>
+                        <Listeoverskrift
+                            className="listeoverskrift__bruker listeoverskriftcol col col-xs-4"
+                            id="enhet.portefolje.tabell.bruker"
+                        />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskriftcol col col-xs-2"
                             skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
@@ -107,13 +105,11 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             id={'portefolje.tabell.aktivitet.neste.utlop.aktivitetstype'}
 
                         />
-                        <div className="col col-xs-4">
-                            <Listeoverskrift
-                                className="listeoverskrift__veileder listeoverskrift col col-xs-1"
-                                skalVises={valgteKolonner.includes(Kolonne.VEILEDER)|| valgteKolonner.includes(Kolonne.NAVIDENT)}
-                                id="enhet.portefolje.tabell.veileder"
-                            />
-                        </div>
+                        <Listeoverskrift
+                            className="listeoverskrift__veileder listeoverskrift col col-xs-2"
+                            skalVises={valgteKolonner.includes(Kolonne.VEILEDER)|| valgteKolonner.includes(Kolonne.NAVIDENT)}
+                            id="enhet.portefolje.tabell.veileder"
+                        />
                     </div>
                     <div className="brukerliste__gutter-right"/>
                 </div>
@@ -122,24 +118,22 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                 <div className="brukerliste__sorteringheader typo-undertekst">
                     <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>
                     <div className="brukerliste__innhold">
-                        <div className="col col-xs-4">
-                            <SorteringHeader
-                                sortering={Sorteringsfelt.ETTERNAVN}
-                                onClick={sorteringOnClick}
-                                rekkefolge={sorteringsrekkefolge}
-                                erValgt={sorteringsfelt === Sorteringsfelt.ETTERNAVN}
-                                tekstId="portefolje.tabell.etternavn"
-                                className={'col col-xs-7'}
-                            />
-                            <SorteringHeader
-                                sortering={Sorteringsfelt.FODSELSNUMMER}
-                                onClick={sorteringOnClick}
-                                rekkefolge={sorteringsrekkefolge}
-                                erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
-                                tekstId="portefolje.tabell.fodselsnummer"
-                                className={'col col-xs-5'}
-                            />
-                        </div>
+                        <SorteringHeader
+                            sortering={Sorteringsfelt.ETTERNAVN}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.ETTERNAVN}
+                            tekstId="portefolje.tabell.etternavn"
+                            className="col col-xs-2"
+                        />
+                        <SorteringHeader
+                            sortering={Sorteringsfelt.FODSELSNUMMER}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
+                            tekstId="portefolje.tabell.fodselsnummer"
+                            className="col col-xs-2"
+                        />
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
                             onClick={sorteringOnClick}
@@ -147,7 +141,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
                             tekstId={`portefolje.tabell.${ytelseSorteringHeader}`}
                             skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
-                            className={'sortering-header__dato col col-xs-2'}
+                            className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
                             sortering={aapRettighetsperiode}
@@ -156,7 +150,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             erValgt={sorteringsfelt === aapRettighetsperiode}
                             tekstId="portefolje.tabell.uker"
                             skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse}
-                            className={'sortering-header__dato col col-xs-2'}
+                            className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
@@ -165,7 +159,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                             tekstId="portefolje.tabell.ddmmyy"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
-                            className={'sortering-header__dato col col-xs-2'}
+                            className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
@@ -174,7 +168,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                             tekstId="portefolje.tabell.ddmmyy"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
-                            className={'sortering-header__dato col col-xs-2'}
+                            className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
@@ -183,7 +177,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
                             tekstId="portefolje.tabell.ddmmyy"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER) && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
-                            className={'sortering-header__dato col col-xs-2'}
+                            className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
@@ -192,7 +186,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                             tekstId="portefolje.tabell.ddmmyy"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
-                            className={'sortering-header__dato col col-xs-2'}
+                            className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
@@ -201,24 +195,22 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
                             tekstId="portefolje.tabell.ddmmyy"
                             skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
-                            className={'sortering-header__dato col col-xs-2'}
+                            className="sortering-header__dato col col-xs-2"
                         />
-                        <div className="col col-xs-4">
-                            <SorteringHeader
-                                sortering={Sorteringsfelt.NAVIDENT}
-                                onClick={sorteringOnClick}
-                                rekkefolge={sorteringsrekkefolge}
-                                erValgt={sorteringsfelt === Sorteringsfelt.NAVIDENT}
-                                tekstId="enhet.veiledere.tabell.ident"
-                                skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
-                                className="header__veilederident col col-xs-4"
-                            />
-                            <Header
-                                id="enhet.veiledere.tabell.navn"
-                                className="col col-xs-8"
-                                skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                            />
-                        </div>
+                        <SorteringHeader
+                            sortering={Sorteringsfelt.NAVIDENT}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.NAVIDENT}
+                            tekstId="enhet.veiledere.tabell.ident"
+                            skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
+                            className="header__veilederident col col-xs-2"
+                        />
+                        <Header
+                            id="enhet.veiledere.tabell.navn"
+                            className="col col-xs-2"
+                            skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
+                        />
                     </div>
                     <div className="brukerliste__gutter-right"/>
                 </div>

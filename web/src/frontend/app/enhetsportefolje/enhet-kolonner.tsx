@@ -44,10 +44,8 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
 
     return (
         <div className={className}>
-            <div className="col col-xs-4">
-                <BrukerNavn className="col col-xs-7" bruker={bruker} enhetId={enhetId} />
-                <BrukerFnr className="col col-xs-5" bruker={bruker} />
-            </div>
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
+            <BrukerFnr className="col col-xs-2" bruker={bruker} />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
@@ -108,17 +106,15 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
                 skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0  && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
             />
-            <div className="col col-xs-4">
-                <VeilederId className="col col-xs-4"
-                            bruker={bruker}
-                            skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
-                />
-                <VeilederNavn className="col col-xs-8"
-                              bruker={bruker}
-                              skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                              veileder={brukersVeileder}
-                />
-            </div>
+            <VeilederId className="col col-xs-2"
+                        bruker={bruker}
+                        skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
+            />
+            <VeilederNavn className="col col-xs-2"
+                          bruker={bruker}
+                          skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
+                          veileder={brukersVeileder}
+            />
         </div>
     );
 }
