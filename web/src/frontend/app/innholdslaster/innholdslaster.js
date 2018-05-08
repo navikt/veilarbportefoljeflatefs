@@ -22,6 +22,10 @@ function getFeilmeldingForReducer(feilendeReducer, intl) {
         return intl.messages['innholdslaster.ikke.tilgang'];
 }
 
+function medsentFeilmelding(feilmeldingKey, intl) {
+    return (feilmeldingKey && intl.messages[feilmeldingKey]);
+}
+
 class Innholdslaster extends Component {
     constructor(props) {
         super(props);
@@ -76,14 +80,13 @@ class Innholdslaster extends Component {
             const feilendeReducer = medFeil(avhengigheter);
             console.log(feilendeReducer); // eslint-disable-line no-console
 
-            const feilmelding = (feilmeldingKey && intl.messages[feilmeldingKey]) ||
-                getFeilmeldingForReducer(feilendeReducer, intl) || (
-                    'Det skjedde en feil ved innlastningen av data'
-                );
+            const feilmelding = medsentFeilmelding(feilmeldingKey, intl) ||
+                getFeilmeldingForReducer(feilendeReducer, intl) ||
+                ('Det skjedde en feil ved innlastningen av data');
 
             return (
                 <AlertStripeAdvarsel className={className}>
-                        <p>{feilmelding}</p>
+                    <p>{feilmelding}</p>
                 </AlertStripeAdvarsel>
             );
         }
