@@ -86,8 +86,9 @@ export const ytelse = (intl) => ({
     TILTAKSPENGER: intl.formatMessage({id: 'filter.ytelse.tiltakspenger'})
 });
 
-export const manuellbrukere = (intl) => ({
-    MANUELL: intl.formatMessage({id: 'filter.manuellbrukere.manuellbruker'})
+export const manuellBrukerStatus = (intl) => ({
+    MANUELL: intl.formatMessage({id: 'filter.manuellbrukere.manuellbruker'}),
+    KRR: intl.formatMessage({id:'filter.manuellbrukere.krr'})
 });
 
 export const ytelsevalg: (intl?: any) => {[id: string]: string} = (intl) => Object.keys(ytelse(intl)).reduce((acc, val) => ({ ...acc, [val]: val }), {});
@@ -144,5 +145,5 @@ export default {
     veiledere,
     aktiviteter,
     ytelseAapSortering,
-    manuellbrukere
+    manuellBrukerStatus
 };

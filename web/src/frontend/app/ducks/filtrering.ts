@@ -30,7 +30,7 @@ export interface FiltreringState {
     aktiviteter: FiltreringAktiviteterValg;
     tiltakstyper: string[];
     ytelse: null;
-    manuellbrukere: string[];
+    manuellBrukerStatus: string[];
 }
 
 //  Reducer
@@ -48,7 +48,7 @@ export const initialState = {
     aktiviteter: {},
     tiltakstyper: [],
     ytelse: null,
-    manuellbrukere: []
+    manuellBrukerStatus: []
 };
 
 function fjern(verdi, fjernVerdi) {
