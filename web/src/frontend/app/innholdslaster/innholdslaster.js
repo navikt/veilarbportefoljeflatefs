@@ -17,9 +17,9 @@ const medFeil = (avhengigheter) => avhengigheter.find(harStatus(STATUS.ERROR));
 function getFeilmeldingForReducer(feilendeReducer, intl) {
     const status = feilendeReducer.data.response.status;
     if(status >= 500) {
-        return intl.messages['innholdslaster.ikke.tilgang'];
-    } else if(status === 403)
         return intl.messages['innholdslaster.system.nede'];
+    } else if(status === 403)
+        return intl.messages['innholdslaster.ikke.tilgang'];
 }
 
 class Innholdslaster extends Component {
