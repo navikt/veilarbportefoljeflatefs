@@ -3,6 +3,7 @@ import { injectIntl } from 'react-intl';
 // import Feilmelding from './../feilmelding/feilmelding'; Legg til feilmeldingskomponent
 import Laster from './innholdslaster-laster';
 import { STATUS } from './../ducks/utils';
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 
 const array = (value) => (Array.isArray(value) ? value : [value]);
 const harStatus = (...status) => (element) => array(status).includes(element.status);
@@ -12,6 +13,14 @@ const alleLastetEllerReloading = (avhengigheter) => (
     avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING))
 );
 const medFeil = (avhengigheter) => avhengigheter.find(harStatus(STATUS.ERROR));
+
+function getFeilmeldingForReducer(feilendeReducer, intl) {
+    const status = feilendeReducer.data.response.status;
+    if(status >= 500) {
+        return intl.messages['innholdslaster.ikke.tilgang'];
+    } else if(status === 403)
+        return intl.messages['innholdslaster.system.nede'];
+}
 
 class Innholdslaster extends Component {
     constructor(props) {
@@ -67,14 +76,15 @@ class Innholdslaster extends Component {
             const feilendeReducer = medFeil(avhengigheter);
             console.log(feilendeReducer); // eslint-disable-line no-console
 
-            const feilmelding = (feilmeldingKey && intl.messages[feilmeldingKey]) || (
+            const feilmelding = (feilmeldingKey && intl.messages[feilmeldingKey]) ||
+                getFeilmeldingForReducer(feilendeReducer, intl) || (
                     'Det skjedde en feil ved innlastningen av data'
                 );
 
             return (
-                <div className={className}>
-                    <p>{feilmelding}</p>
-                </div>
+                <AlertStripeAdvarsel className={className}>
+                        <p>{feilmelding}</p>
+                </AlertStripeAdvarsel>
             );
         }
 
