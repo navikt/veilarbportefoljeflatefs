@@ -20,7 +20,19 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
     const { fra, antall } = queryParams;
     const fraInt = parseInt(fra, 10);
     const antallInt = parseInt(antall, 10);
-    const filtrerteBrukere = alleBrukere.slice(fraInt, fraInt + antallInt);
+    const filtrerteBrukere = alleBrukere
+        .slice(fraInt, fraInt + antallInt)
+        .map((bruker, index) => {
+            if (index < 5) {
+                bruker.fnr = '';
+                bruker.fornavn = '';
+                bruker.etternavn = '';
+                bruker.kjonn = '';
+                bruker.fodselsdato = null;
+                bruker.diskresjonskode = Math.random() < 0.5 ? '6' : '7';
+            }
+            return bruker;
+        });
 
     return {
         enhet,

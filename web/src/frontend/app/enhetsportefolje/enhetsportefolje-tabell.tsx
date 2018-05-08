@@ -53,7 +53,7 @@ class EnhetTabell extends React.Component<EnhetTabellProps, {}> {
                 <ul className="brukerliste">
                     {brukere.map((bruker) =>
                         <EnhetBrukerpanel
-                            key={bruker.fnr}
+                            key={bruker.fnr || bruker.guid}
                             bruker={bruker}
                             enhetId={enhetId}
                             settMarkert={settMarkert}

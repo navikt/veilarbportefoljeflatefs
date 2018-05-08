@@ -67,7 +67,7 @@ class MinoversiktTabell extends React.Component<MinOversiktTabellProps, {}> {
                 <ul className="brukerliste">
                     {brukere.map((bruker) =>
                         <MinoversiktBrukerPanel
-                            key={bruker.fnr}
+                            key={bruker.fnr || bruker.guid}
                             bruker={bruker}
                             enhetId={enhetId}
                             settMarkert={settMarkert}

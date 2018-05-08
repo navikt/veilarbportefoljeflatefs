@@ -72,6 +72,7 @@ export interface VeilederModell {
 
 export interface BrukerModell {
     fnr: string;
+    guid: string;
     fornavn: string;
     etternavn: string;
     veilederId?: string;
