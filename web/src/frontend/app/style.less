@@ -12,6 +12,12 @@ body {
     color: #3E3832;
     font-family: @font-family;
 
+    @media print {
+        a[href]:after {
+            content: none !important;
+        }
+    }
+
     #mainapp {
         margin: 0 auto;
         height: 100%;
