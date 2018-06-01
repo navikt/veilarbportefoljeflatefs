@@ -3,69 +3,91 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Chevron from 'nav-frontend-chevron';
 import * as classNames from 'classnames';
-import { DEFAULT_PAGINERING_STORRELSE } from './../../../konstanter';
 import KnappPanel from './knapp-panel';
-
-const cls = (className) => classNames('paginering', className);
+import { leggSeAlleIUrl, leggSideIUrl } from '../../../utils/url-utils';
+import { pagineringSetup } from '../../../ducks/paginering';
+import { selectSeAlle, selectSide, selectSideStorrelse } from './paginering-selector';
 
 interface StateProps {
-    erPaForsteSide: boolean;
-    navarendeSide: number;
-    erPaSisteSide: boolean;
-    antallSider: number;
-    antall: number;
+    side: number;
     sideStorrelse: number;
-    skjul: boolean;
+    seAlle: boolean;
+}
+
+interface DispatchProps {
+    endrePaginering: (side: number, seAlle: boolean) => void;
 }
 
 interface OwnProps {
+    skjul: boolean;
     className: string;
-    onChange: (fra: number, til: number) => void;
+    antallTotalt: number;
+    onChange: (fra?: number, til?: number) => void;
 }
 
-type PagineringProps = StateProps & OwnProps;
+type PagineringProps = StateProps & OwnProps & DispatchProps;
 
-function Paginering({skjul, className, erPaForsteSide, navarendeSide, erPaSisteSide, antallSider, antall, sideStorrelse, onChange}: PagineringProps) {
+function Paginering(props: PagineringProps) {
+    const {
+        skjul,
+        className,
+        onChange,
+        side,
+        sideStorrelse,
+        antallTotalt,
+        seAlle,
+        endrePaginering
+    } = props;
 
-    const fraIndex = (navarendeSide - 1) * sideStorrelse;
-    const nyAntall = antall === sideStorrelse ? DEFAULT_PAGINERING_STORRELSE : antall;
-    const seAlleState = sideStorrelse !== DEFAULT_PAGINERING_STORRELSE;
-
-    if(skjul) {
+    if (skjul) {
         return null;
     }
+
+    const antallSider: number = Math.ceil(antallTotalt / sideStorrelse);
+    const erPaForsteSide: boolean = side === 1;
+    const erPaSisteSide: boolean = side >= antallSider;
+
+    const totalPagenering = (sideNumber: number, seAlleBool: boolean): void => {
+        endrePaginering(sideNumber, seAlleBool);
+        leggSideIUrl(sideNumber);
+        onChange();
+    };
+
     return (
-        <div className={cls(className)}>
+        <div className={classNames('paginering', className)}>
             <KnappPanel
-                disabled={!seAlleState && antall <= sideStorrelse}
-                pressed={seAlleState && antall <= sideStorrelse}
-                onClick={() => onChange(0, nyAntall)}
+                disabled={!seAlle && antallTotalt <= sideStorrelse}
+                pressed={seAlle && antallTotalt <= sideStorrelse}
+                onClick={() => {
+                    leggSeAlleIUrl(!seAlle);
+                    totalPagenering(1, !seAlle);
+                }}
             >
-                {!seAlleState ? <FormattedMessage id="paginering.se.alle"/> :
+                {!seAlle ? <FormattedMessage id="paginering.se.alle"/> :
                     <FormattedMessage id="paginering.se.faerre"/>
                 }
             </KnappPanel>
 
-            <KnappPanel disabled={erPaForsteSide} onClick={() => onChange(fraIndex - sideStorrelse, sideStorrelse)}>
+            <KnappPanel disabled={erPaForsteSide} onClick={() => totalPagenering(side - 1, seAlle)}>
                 <Chevron orientasjon="venstre">
                     <FormattedMessage id="paginering.forrige"/>
                 </Chevron>
             </KnappPanel>
 
-            {!erPaForsteSide && <KnappPanel onClick={() => onChange(0, sideStorrelse)}>1</KnappPanel>}
+            {!erPaForsteSide && <KnappPanel onClick={() => totalPagenering(1, seAlle)}>1</KnappPanel>}
 
             <KnappPanel>
-                <strong>{navarendeSide}</strong>
+                <strong>{side}</strong>
             </KnappPanel>
 
-            {!erPaSisteSide &&
+            {(!erPaSisteSide && !seAlle) &&
             <KnappPanel
-                onClick={() => onChange((antallSider - 1) * sideStorrelse, sideStorrelse)}
+                onClick={() => totalPagenering(antallSider, seAlle)}
             >{antallSider}
             </KnappPanel>
             }
 
-            <KnappPanel disabled={erPaSisteSide} onClick={() => onChange(fraIndex + sideStorrelse, sideStorrelse)}>
+            <KnappPanel disabled={erPaSisteSide || seAlle} onClick={() => totalPagenering(side + 1, seAlle)}>
                 <Chevron orientasjon="høyre">
                     <FormattedMessage id="paginering.neste"/>
                 </Chevron>
@@ -74,15 +96,16 @@ function Paginering({skjul, className, erPaForsteSide, navarendeSide, erPaSisteS
     );
 }
 
-const mapStateToProps = ({paginering}): StateProps => {
-    const antallSider = Math.ceil(paginering.antall / paginering.sideStorrelse);
+const mapStateToProps = (state): StateProps => {
     return ({
-        ...paginering,
-        antallSider,
-        navarendeSide: paginering.side,
-        erPaForsteSide: paginering.side === 1,
-        erPaSisteSide: paginering.side >= antallSider
+        side: selectSide(state),
+        sideStorrelse: selectSideStorrelse(state),
+        seAlle: selectSeAlle(state),
     });
 };
 
-export default connect(mapStateToProps)(Paginering);
+const mapDispatchToProps = (dispatch) => ({
+    endrePaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Paginering);

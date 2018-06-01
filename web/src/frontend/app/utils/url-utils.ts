@@ -49,7 +49,7 @@ export function getEnhetFromUrl() {
     return queryString.parse(location.search).enhet || '';
 }
 
-export function leggSideIUrl(path, side) {
+export function leggSideIUrl(side) {
     if (side) {
         const parsed = queryString.parse(location.search);
         parsed.side = side;
@@ -57,12 +57,23 @@ export function leggSideIUrl(path, side) {
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname.replace(basename, '');
         history.replace(`${pathname}?${stringified}`);
-        localStorage.setItem(`${path}-lagretSidetall`, side);
     }
 }
 
 export function getSideFromUrl() {
-    return queryString.parse(location.search).side || '';
+    return parseInt(queryString.parse(location.search).side || '1', 10);
+}
+
+export function leggSeAlleIUrl(seAlle: boolean = false) {
+    const parsed = queryString.parse(location.search);
+    parsed.seAlle = seAlle;
+    const stringified = queryString.stringify(parsed);
+    const pathname = window.location.pathname.replace(basename, '');
+    history.replace(`${pathname}?${stringified}`);
+}
+
+export function getSeAlleFromUrl(): boolean {
+    return queryString.parse(location.search).seAlle === 'true';
 }
 
 export function leggSorteringIUrl(sorteringsfelt, sorteringsrekkefolge) {

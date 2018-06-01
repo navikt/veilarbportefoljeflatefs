@@ -1,10 +1,11 @@
 /* eslint-disable no-undef */
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
+import { PortefoljeData } from '../ducks/portefolje';
 
 const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
 
-const MED_CREDENTIALS = {
+const MED_CREDENTIALS: RequestInit = {
     credentials,
     headers: {
         'Content-Type': 'application/json'
@@ -24,19 +25,28 @@ export function hentLedetekster() {
     return fetchToJson(`${API_BASE_URL}/tekster`, MED_CREDENTIALS);
 }
 
-export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg) {
-    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/` +
-        `portefolje?fra=${fra}&antall=${antall}&sortDirection=${rekkefolge}&sortField=${sorteringsfelt}`;
-    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
-    return fetchToJson(url, config);
+function buildUrl(baseUrl: string, queryParams?: {}): string {
+    if(queryParams) {
+        return baseUrl + '?' + Object.entries(queryParams)
+            .filter(([key, value]) => value !== undefined )
+            .map(([key, value]) => `${key}=${value}`)
+            .join('&');
+    }
+    return baseUrl;
 }
 
-export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, sorteringsfelt, fra, antall, filtervalg) {
-    const url = `${VEILARBPORTEFOLJE_URL}/veileder/` +
-        `${veilederident}/portefolje?enhet=${enhet}&fra=${fra}&antall=${antall}` +
-        `&sortDirection=${rekkefolge}&sortField=${sorteringsfelt}`;
+export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, filtervalg: {}, fra?: number, antall?: number) {
+    const baseUrl = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/portefolje`;
+    const url = buildUrl(baseUrl, {fra, antall, sortDirecton: rekkefolge, sortField: sorteringsfelt});
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
-    return fetchToJson(url, config);
+    return fetchToJson<PortefoljeData>(url, config);
+}
+
+export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, sorteringsfelt, filtervalg, fra?: number, antall?: number) {
+    const baseUrl = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/portefolje`;
+    const url =  buildUrl(baseUrl, {enhet, fra, antall, sortDirecton: rekkefolge, sortField: sorteringsfelt});
+    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
+    return fetchToJson<PortefoljeData>(url, config);
 }
 
 export function hentDiagramdata(enhet, veilederident, filtervalg) {

@@ -16,7 +16,8 @@ interface ToolbarProps {
     visesAnnenVeiledersPortefolje?: boolean;
     children?: React.ReactNode;
     gjeldendeVeileder?: VeilederModell;
-    veilederpaginering: string;
+    visningsmodus: string;
+    antallTotalt: number;
 }
 
 const Toolbar = ({filtergruppe,
@@ -24,7 +25,8 @@ const Toolbar = ({filtergruppe,
                      sokVeilederSkalVises,
                      visesAnnenVeiledersPortefolje,
                      gjeldendeVeileder,
-                     veilederpaginering }: ToolbarProps) => (
+                     visningsmodus,
+                     antallTotalt}: ToolbarProps) => (
     <section className="toolbar blokk-xs">
         <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
             <VelgalleCheckboks skalVises={filtergruppe in ListevisningType}/>
@@ -41,8 +43,11 @@ const Toolbar = ({filtergruppe,
             <DiagramTabellToggle filtergruppe={filtergruppe}/>
         </div>
         <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
-            <Paginering className="toolbar--skille-mellom-elementer" onChange={onPaginering}
-                        skjul={veilederpaginering === Veilederpaginering.DIAGRAMVISNING}/>
+            <Paginering className="toolbar--skille-mellom-elementer"
+                        onChange={onPaginering}
+                        skjul={visningsmodus === Veilederpaginering.DIAGRAMVISNING}
+                        antallTotalt={antallTotalt}
+            />
         </div>
     </section>
 );

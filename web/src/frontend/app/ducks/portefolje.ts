@@ -1,13 +1,14 @@
 import * as Api from './../middleware/api';
-import { STATUS, doThenDispatch, handterFeil, toJson, nameToStateSliceMap } from './utils';
-import { DEFAULT_PAGINERING_STORRELSE, IKKE_SATT } from '../konstanter';
+import { doThenDispatch, handterFeil, nameToStateSliceMap, STATUS, toJson } from './utils';
+import { IKKE_SATT } from '../konstanter';
 import { pagineringSetup } from './paginering';
 import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from './statustall';
 import { leggSideIUrl, leggSorteringIUrl } from '../utils/url-utils';
 import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
-import { oppdaterAlternativer, ListevisningType } from './ui/listevisning';
+import { ListevisningType, oppdaterAlternativer } from './ui/listevisning';
+import { selectFraIndex, selectSeAlle, selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -30,15 +31,16 @@ function lagBrukerGuid(bruker) {
 }
 
 // Reducer
+export interface PortefoljeData {
+    brukere: BrukerModell[];
+    antallTotalt: number;
+    antallReturnert: number;
+    fraIndex: number;
+}
 
 export interface PortefoljeState {
     status: string;
-    data: {
-        brukere: BrukerModell[];
-        antallTotalt: number | string;
-        antallReturnert: number | string;
-        fraIndex: number;
-    };
+    data: PortefoljeData;
     sorteringsrekkefolge: string;
     sorteringsfelt: string;
     feilendeTilordninger?: any[];
@@ -159,8 +161,8 @@ export default function reducer(state = initialState, action): PortefoljeState {
                 ...state,
                 data: {
                     ...state.data,
-                    antallTotalt: parseInt(state.data.antallTotalt as string, 10) - action.antallTilordninger,
-                    antallReturnert: parseInt(state.data.antallReturnert as string, 10) - action.antallTilordninger
+                    antallTotalt: state.data.antallTotalt - action.antallTilordninger,
+                    antallReturnert: state.data.antallReturnert - action.antallTilordninger
                 }
             };
         case TILDEL_VEILEDER_RELOAD: {
@@ -204,37 +206,37 @@ export default function reducer(state = initialState, action): PortefoljeState {
 // Action Creators
 export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder) {
     if(typeof veileder === 'object' ) {
-        console.warn('Veielder should be a string, not an object'); // tslint:disable-line
+        console.warn('Veileder should be a string, not an object'); // tslint:disable-line
         veileder = veileder.ident;
     }
     const state = getState();
     const enhet = state.enheter.valgtEnhet.enhet.enhetId;
     const rekkefolge = state.portefolje.sorteringsrekkefolge;
     const sorteringfelt = state.portefolje.sorteringsfelt;
-    const antall = DEFAULT_PAGINERING_STORRELSE;
     const nyeFiltervalg = state[nameToStateSliceMap[filtergruppe]];
 
+    leggSideIUrl(1);
+    dispatch(pagineringSetup({side: 1}));
+
     if (filtergruppe === 'enhet') {
-        hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, nyeFiltervalg, 0, antall)(dispatch);
+        hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, nyeFiltervalg)(dispatch, getState);
         oppdaterAlternativer(dispatch, getState, ListevisningType.enhetensOversikt);
     } else if (filtergruppe === 'veileder') {
-        hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, nyeFiltervalg, 0, antall)(dispatch);
+        hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, nyeFiltervalg)(dispatch, getState);
         oppdaterAlternativer(dispatch, getState, ListevisningType.minOversikt);
     }
 }
 
-export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filtervalg, fra = 0, antall = 20) {
-    const fn = (dispatch) => Api.hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
-        .then((json) => {
-            const { antallTotalt } = json;
-            const side = Math.floor(fra / antall) + 1;
+function hentPortefolje(hentPorefoljeFn: (...args: any[]) => void, ...args: any[]) {
+    const fn = (dispatch, getState) => {
+        const state = getState();
+        const seAlle = selectSeAlle(state);
+        const fra = seAlle ? undefined : selectFraIndex(state);
+        const antall = seAlle ? undefined : selectSideStorrelse(state);
 
-            dispatch(pagineringSetup({ side, antall: antallTotalt, sideStorrelse: antall }));
-            leggSideIUrl('enhet', side);
-
-            return json;
-        });
-
+        // todo sortering should be read from the state as well
+        return hentPorefoljeFn(...args, fra, antall);
+    };
     return doThenDispatch(fn, {
         OK,
         FEILET,
@@ -243,25 +245,12 @@ export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filter
 }
 
 // Action Creators
-export function hentPortefoljeForVeileder(
-    enhet, veileder, rekkefolge, sorteringsfelt, filtervalg, fra = 0, antall = 20) {
-    const fn = (dispatch) =>
-        Api.hentVeiledersPortefolje(enhet, veileder, rekkefolge, sorteringsfelt, fra, antall, filtervalg)
-            .then((json) => {
-                const { antallTotalt } = json;
-                const side = Math.floor(fra / antall) + 1;
+export function hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filtervalg) {
+    return hentPortefolje(Api.hentEnhetsPortefolje, enhet, rekkefolge, sorteringsfelt, filtervalg);
+}
 
-                dispatch(pagineringSetup({ side, antall: antallTotalt, sideStorrelse: antall }));
-                leggSideIUrl('portefolje', side);
-
-                return json;
-            });
-
-    return doThenDispatch(fn, {
-        OK,
-        FEILET,
-        PENDING
-    });
+export function hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringsfelt, filtervalg) {
+    return hentPortefolje(Api.hentVeiledersPortefolje, enhet, veileder, rekkefolge, sorteringsfelt, filtervalg);
 }
 
 export function settSortering(rekkefolge, felt) {

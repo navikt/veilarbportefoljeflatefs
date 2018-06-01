@@ -1,6 +1,6 @@
 import { hentVeiledersEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
-import { leggEnhetIUrl } from '../utils/url-utils';
+import { leggEnhetIUrl, leggSeAlleIUrl, leggSideIUrl } from '../utils/url-utils';
 import { ValgtEnhetModell } from '../model-interfaces';
 import { Action, Dispatch } from 'redux';
 import { AppState } from '../reducer';
@@ -10,6 +10,7 @@ import { hentEnhetTiltak } from './enhettiltak';
 import { hentVeiledereForEnhet } from './veiledere';
 import { hentPortefoljeForEnhet, hentPortefoljeForVeileder } from './portefolje';
 import { IKKE_SATT } from '../konstanter';
+import { pagineringSetup } from './paginering';
 
 // Actions
 const OK = 'veilarbportefolje/enheter/OK';
@@ -83,6 +84,10 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
         dispatch(velgEnhetForVeileder(nyEnhet));
         dispatch(settNyAktivEnhet(nyEnhet));
         dispatch(hentEnhetTiltak(nyEnhet));
+
+        leggSideIUrl(1);
+        leggSeAlleIUrl(false);
+        dispatch(pagineringSetup({side: 1, seAlle: false}));
 
         const uri = window.location.pathname;
         if (uri.includes('/portefolje')) {

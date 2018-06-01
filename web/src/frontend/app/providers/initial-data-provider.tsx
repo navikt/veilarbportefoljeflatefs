@@ -6,16 +6,18 @@ import { hentVeiledereForEnhet } from '../ducks/veiledere';
 import { hentLedetekster } from './../ducks/ledetekster';
 import { hentAktivEnhet } from '../components/enhet-context/context-api';
 import { STATUS } from '../ducks/utils';
-import { leggEnhetIUrl } from '../utils/url-utils';
+import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
 import { settEnhetIDekorator } from '../eventhandtering';
 import { enhetShape, valgtEnhetShape } from '../proptype-shapes';
 import Application from './../application';
+import { pagineringSetup } from '../ducks/paginering';
 
 interface DispatchProps {
     hentTekster: () => void;
     hentEnheter: () => void;
     hentVeiledere: (enhetId: string) => void;
     velgEnhet: (enhetId: string) => void;
+    initalPaginering: (side: number, seAlle: boolean) => void;
 }
 
 interface StateProps {
@@ -28,6 +30,7 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> 
     componentDidMount() {
         this.props.hentTekster();
         this.props.hentEnheter();
+        this.settInitalStateFraUrl();
     }
 
     componentDidUpdate() {
@@ -35,6 +38,12 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> 
         if (enheter.status === STATUS.OK && enheter.valgtEnhet.status !== STATUS.OK) {
             this.oppdaterDekoratorMedInitiellEnhet();
         }
+    }
+
+    settInitalStateFraUrl() {
+        const side = getSideFromUrl();
+        const seAlle = getSeAlleFromUrl();
+        this.props.initalPaginering(side, seAlle);
     }
 
     finnInitiellEnhet() {
@@ -88,6 +97,7 @@ const mapDispatchToProps = (dispatch) => ({
     hentEnheter: () => dispatch(hentEnheterForVeileder()),
     hentVeiledere: (enhet) => dispatch(hentVeiledereForEnhet(enhet)),
     velgEnhet: (enhetid) => dispatch(velgEnhetForVeileder({enhetId: enhetid})),
+    initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitialDataProvider);

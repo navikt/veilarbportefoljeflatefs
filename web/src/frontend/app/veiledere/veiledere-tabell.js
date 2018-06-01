@@ -19,8 +19,8 @@ class VeilederTabell extends Component {
     render() {
         const { veiledere, veilederListe, currentSortering } = this.props;
 
-        const sorterEtternavn = currentSortering.felt === 'etternavn';
-        const sorterPaaPortefoljeStr = currentSortering.felt === 'portefoljestorrelse';
+        const sorterEtternavn = currentSortering.property === 'etternavn';
+        const sorterPaaPortefoljeStr = currentSortering.property === 'portefoljestorrelse';
 
         const veilederElementer = veiledere.map((veileder) => (
             <tr key={veileder.ident}>
@@ -56,10 +56,11 @@ class VeilederTabell extends Component {
                             <th scope="col">
                                 <button
                                     onClick={this.props.sorterPaaEtternavn}
-                                    className={classNames('lenke lenke--frittstaende', { valgt: sorterEtternavn })}
+                                    className={classNames('lenke lenke--frittstaende',
+                                        { 'valgt-sortering': sorterEtternavn })}
                                     aria-pressed={sorterEtternavn}
                                     aria-label={sorterEtternavn ?
-                                    currentSortering.rekkefolge : 'inaktiv'}
+                                    currentSortering.direction : 'inaktiv'}
                                 >
                                     <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
                                 </button>
@@ -72,11 +73,12 @@ class VeilederTabell extends Component {
                                 <button
                                     onClick={this.props.sorterPaaPortefoljestorrelse}
                                     className={
-                                    classNames('lenke lenke--frittstaende', { valgt: sorterPaaPortefoljeStr })
+                                    classNames('lenke lenke--frittstaende',
+                                        { 'valgt-sortering': sorterPaaPortefoljeStr })
                                 }
                                     aria-pressed={sorterPaaPortefoljeStr}
                                     aria-label={sorterPaaPortefoljeStr ?
-                                    currentSortering.rekkefolge : 'inaktiv'}
+                                    currentSortering.direction : 'inaktiv'}
                                 >
                                     <FormattedMessage id="enhet.veiledere.tabell.brukere" />
                                 </button>
@@ -102,16 +104,15 @@ VeilederTabell.propTypes = {
     veilederListe: PT.arrayOf(veilederShape).isRequired,
     sorterPaaPortefoljestorrelse: PT.func.isRequired,
     currentSortering: PT.shape({
-        felt: PT.string.isRequired,
-        rekkefolge: PT.string.isRequired
+        property: PT.string,
+        direction: PT.string
     }).isRequired
 };
 
 const mapStateToProps = (state) => ({
     innloggetVeileder: state.enheter.ident,
     veilederListe: state.veiledere.data.veilederListe,
-    currentSortering: state.veilederpaginering.currentSortering
-
+    currentSortering: state.sortering
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -59,15 +59,12 @@ class MinOversiktSide extends React.Component<MinoversiktSideProps> {
 
         this.props.doSettValgtVeileder(gjeldendeVeileder);
 
-        const side = getSideFromUrl();
-        const fraIndex = side === '' ? 0 : (side - 1) * 20;
-
         const sorteringsfelt = getSorteringsFeltFromUrl();
         const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
         this.props.doSettSortering(sorteringsrekkefolge,sorteringsfelt);
 
         hentPortefolje(
-            valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, sorteringsrekkefolge, sorteringsfelt, filtervalg, fraIndex
+            valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, sorteringsrekkefolge, sorteringsfelt, filtervalg
         );
 
     }
@@ -155,7 +152,7 @@ const mapStateToProps = (state): StateProps => ({
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, filtervalg, fra, antall)),
+        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, filtervalg)),
     hentStatusTall: (enhet: string, veileder: string) => dispatch(hentStatusTall(enhet, veileder)),
     hentEnhetTiltak: (enhet: string) => dispatch(hentEnhetTiltak(enhet)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),

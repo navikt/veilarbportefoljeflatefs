@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
 import Toolbar from './../components/toolbar/toolbar';
-import { getSideFromUrl, getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl } from '../utils/url-utils';
+import {
+    getSorteringsFeltFromUrl,
+    getSorteringsRekkefolgeFromUrl
+} from '../utils/url-utils';
 import EnhetTabell from './enhetsportefolje-tabell';
 import TabellOverskrift from './../components/tabell-overskrift';
 import {
@@ -14,7 +17,7 @@ import {
     veilederShape,
     feilmeldingModalShape
 } from '../proptype-shapes';
-import { ASCENDING, DEFAULT_PAGINERING_STORRELSE, DESCENDING } from '../konstanter';
+import { ASCENDING, DESCENDING } from '../konstanter';
 import { diagramSkalVises } from './../minoversikt/diagram/util';
 import Diagram from './../minoversikt/diagram/diagram';
 import VelgfilterMelding from './velg-filter-melding';
@@ -25,7 +28,7 @@ import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
 import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmelding-brukere';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { InjectedIntlProps } from 'react-intl';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -49,7 +52,7 @@ function antallFilter(filtervalg) {
 interface EnhetsportefoljeVisningProps {
     valgtEnhet: ValgtEnhetModell;
     portefolje: any;
-    hentPortefolje: (enhetid: string | undefined, sorteringsrekkefolge: string, sorteringsfelt: string, filtervalg: FiltervalgModell, fraIndex: number, anstall?: number) => any;
+    hentPortefolje: (enhetid: string | undefined, sorteringsrekkefolge: string, sorteringsfelt: string, filtervalg: FiltervalgModell) => any;
     veiledere: any;
     doSettSortering: (sorteringsrekkefolge: string, felt: string) => void;
     sorteringsrekkefolge: string;
@@ -60,7 +63,6 @@ interface EnhetsportefoljeVisningProps {
     closeServerfeilModal: () => void;
     feilmeldingModal: FeilmeldingModalModell;
     closeFeilmeldingModal: () => void;
-    veilederpaginering: string;
 }
 
 class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningProps & InjectedIntlProps> {
@@ -68,9 +70,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         const {
             valgtEnhet, hentPortefolje, filtervalg
         } = this.props;
-
-        const side = getSideFromUrl();
-        const fraIndex = side === '' ? 0 : (side - 1) * 20;
 
         const sorteringsfelt = getSorteringsFeltFromUrl();
         const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
@@ -80,8 +79,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             valgtEnhet.enhet!.enhetId,
             sorteringsrekkefolge,
             sorteringsfelt,
-            filtervalg,
-            fraIndex
+            filtervalg
         );
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
@@ -95,7 +93,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             hentPortefolje,
             filtervalg
         } = this.props;
-        const {antallReturnert, antallTotalt} = this.props.portefolje.data;
 
         let valgtRekkefolge = '';
 
@@ -105,16 +102,12 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
 
-        const antallSkalHentes = antallReturnert === antallTotalt ? antallTotalt : DEFAULT_PAGINERING_STORRELSE;
-
         doSettSortering(valgtRekkefolge, felt);
         hentPortefolje(
             valgtEnhet.enhet!.enhetId,
             valgtRekkefolge,
             felt,
             filtervalg,
-            0,
-            antallSkalHentes
         );
     }
 
@@ -132,7 +125,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             closeServerfeilModal,
             feilmeldingModal,
             closeFeilmeldingModal,
-            veilederpaginering
         } = this.props;
 
         const {antallTotalt, antallReturnert, fraIndex} = portefolje.data;
@@ -157,16 +149,15 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     />
                     <Toolbar
                         filtergruppe={ListevisningType.enhetensOversikt}
-                        onPaginering={(fra, antall) => hentPortefolje(
+                        onPaginering={() => hentPortefolje(
                             valgtEnhet.enhet!.enhetId,
                             sorteringsrekkefolge,
                             sorteringsfelt,
-                            filtervalg,
-                            fra,
-                            antall
+                            filtervalg
                         )}
                         sokVeilederSkalVises
-                        veilederpaginering={veilederpaginering}
+                        visningsmodus={visningsmodus}
+                        antallTotalt={antallTotalt}
                     />
                     {
                         visDiagram ?
@@ -200,15 +191,14 @@ const mapStateToProps = (state) => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     filtervalg: state.filtrering,
-    visningsmodus: state.veilederpaginering.visningsmodus,
+    visningsmodus: state.paginering.visningsmodus,
     serverfeilModalSkalVises: state.serverfeilModal.modalVises,
     feilmeldingModal: state.feilmeldingModal,
-    veilederpaginering: state.veilederpaginering.visningsmodus
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentPortefolje: (enhet, rekkefolge, sorteringsfelt, filtervalg, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filtervalg, fra, antall)),
+    hentPortefolje: (enhet, rekkefolge, sorteringsfelt, filtervalg) =>
+        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filtervalg)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     closeServerfeilModal: () => dispatch(skjulServerfeilModal()),
     closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal())
