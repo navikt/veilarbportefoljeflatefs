@@ -35,14 +35,13 @@ export function getFraBrukerFraUrl() {
     return queryString.parse(location.search).fraBruker;
 }
 
-export function fjernFraBrukerFraUrl() {
+export function setFraBrukerIUrl(bruker:string){
     const parsed = queryString.parse(location.search);
-    delete parsed.fraBruker;
+    parsed.fraBruker = bruker;
 
     const stringified = queryString.stringify(parsed);
     const pathname = window.location.pathname.replace(basename, '');
     history.replace(`${pathname}?${stringified}`);
-
 }
 
 export function getEnhetFromUrl() {

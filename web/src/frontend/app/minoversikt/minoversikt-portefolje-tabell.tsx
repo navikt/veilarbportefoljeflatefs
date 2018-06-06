@@ -13,7 +13,7 @@ import {
 } from '../model-interfaces';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
-import { fjernFraBrukerFraUrl, getFraBrukerFraUrl } from '../utils/url-utils';
+import { getFraBrukerFraUrl } from '../utils/url-utils';
 
 interface MinOversiktTabellProps {
     portefolje: {
@@ -41,7 +41,6 @@ class MinoversiktTabell extends React.Component<MinOversiktTabellProps, {}> {
 
     componentWillMount() {
         this.forrigeBruker = getFraBrukerFraUrl();
-        fjernFraBrukerFraUrl();
     }
 
     render() {

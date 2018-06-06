@@ -6,7 +6,7 @@ import EnhetListehode from './enhet-listehode';
 import { FiltervalgModell, Sorteringsrekkefolge, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
-import { fjernFraBrukerFraUrl, getFraBrukerFraUrl } from '../utils/url-utils';
+import { getFraBrukerFraUrl } from '../utils/url-utils';
 
 interface EnhetTabellProps {
     portefolje: any;
@@ -26,7 +26,6 @@ class EnhetTabell extends React.Component<EnhetTabellProps, {}> {
 
     componentWillMount() {
         this.forrigeBruker = getFraBrukerFraUrl();
-        fjernFraBrukerFraUrl();
     }
 
     render() {

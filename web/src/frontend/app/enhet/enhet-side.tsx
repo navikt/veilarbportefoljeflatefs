@@ -9,7 +9,7 @@ import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visnin
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import { leggEnhetIUrl } from '../utils/url-utils';
+import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl} from '../utils/url-utils';
 import { hentStatusTall } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
@@ -18,6 +18,7 @@ import { AppState } from '../reducer';
 import { StatustallModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { FiltreringState } from '../ducks/filtrering';
+import {pagineringSetup} from "../ducks/paginering";
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -31,6 +32,7 @@ interface StateProps {
 interface DispatchProps {
     hentStatusTall: (enhetId: string) => void;
     hentEnhetTiltak: (enhetId: string) => void;
+    initalPaginering: (side: number, seAlle: boolean) => void;
 }
 
 interface OwnProps {
@@ -43,6 +45,13 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
     componentWillMount() {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
+        this.settInitalStateFraUrl()
+    }
+
+    settInitalStateFraUrl() {
+        const side = getSideFromUrl();
+        const seAlle = getSeAlleFromUrl();
+        this.props.initalPaginering(side, seAlle);
     }
 
     componentDidMount() {
@@ -99,7 +108,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentStatusTall: (enhet) => dispatch(hentStatusTall(enhet)),
-    hentEnhetTiltak: (enhet) => dispatch(hentEnhetTiltak(enhet))
+    hentEnhetTiltak: (enhet) => dispatch(hentEnhetTiltak(enhet)),
+    initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(EnhetSide));

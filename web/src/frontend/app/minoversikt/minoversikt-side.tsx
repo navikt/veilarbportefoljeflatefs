@@ -18,7 +18,11 @@ import { VeiledereState } from '../ducks/veiledere';
 import { FiltervalgModell, ValgtEnhetModell, VeilederModell, } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
-import { getSideFromUrl, getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl } from '../utils/url-utils';
+import {
+    getSeAlleFromUrl, getSideFromUrl, getSorteringsFeltFromUrl,
+    getSorteringsRekkefolgeFromUrl
+} from '../utils/url-utils';
+import {pagineringSetup} from "../ducks/paginering";
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -38,6 +42,7 @@ interface DispatchProps {
     doSettValgtVeileder: (veileder: VeilederModell) => void;
     doSettSortering: (rekkefolge: string, felt: string) => void;
     hentPortefolje: (...args) => void;
+    initalPaginering: (side: number, seAlle: boolean) => void;
 }
 
 interface OwnProps {
@@ -54,6 +59,9 @@ class MinOversiktSide extends React.Component<MinoversiktSideProps> {
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
         const innloggetVeileder = { ident: enheter.ident };
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
+
+        this.settInitalStateFraUrl();
+
         this.props.hentStatusTall(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident);
         this.props.hentEnhetTiltak(valgtEnhet.enhet!.enhetId);
 
@@ -68,6 +76,13 @@ class MinOversiktSide extends React.Component<MinoversiktSideProps> {
         );
 
     }
+
+    settInitalStateFraUrl() {
+        const side = getSideFromUrl();
+        const seAlle = getSeAlleFromUrl();
+        this.props.initalPaginering(side, seAlle);
+    }
+
 
     render() {
         const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
@@ -156,7 +171,8 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentStatusTall: (enhet: string, veileder: string) => dispatch(hentStatusTall(enhet, veileder)),
     hentEnhetTiltak: (enhet: string) => dispatch(hentEnhetTiltak(enhet)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    doSettValgtVeileder: (veileder: VeilederModell) => dispatch(settValgtVeileder(veileder))
+    doSettValgtVeileder: (veileder: VeilederModell) => dispatch(settValgtVeileder(veileder)),
+    initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(MinOversiktSide));

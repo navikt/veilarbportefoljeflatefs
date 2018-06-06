@@ -38,9 +38,6 @@ addLocaleData(nb);
 const store = createStore();
 const tekster = { nb: { spinner: 'spinner' } };
 
-function lagrePath() {
-    localStorage.setItem('lastpath', window.location.pathname.replace(basename, ''));
-}
 
 function getSideTallForPath(path) {
     const checkPath = path.includes('/portefolje') ? '/portefolje' : path;
@@ -74,13 +71,18 @@ function getFraBruker() {
 
 function redirect() {
     const lastPath = localStorage.getItem('lastpath');
-
     if (lastPath) {
-        const optionalParams = getSideTallForPath(lastPath) + getSortering(lastPath) + getFraBruker();
-        const url = `${lastPath}?enhet=${getEnhetFromUrl() + optionalParams}`;
-        sendBrukerTilUrl(url);
+        sendBrukerTilUrl(lastPath);
     } else {
         sendBrukerTilUrl(`/enhet?enhet=${getEnhetFromUrl()}`);
+    }
+}
+
+function updateLastPath(){
+    const base = window.location.pathname.replace(basename, '');
+    if(base !== '/tilbake') {
+        const search = window.location.search;
+        localStorage.setItem('lastpath', base + search);
     }
 }
 
@@ -93,14 +95,15 @@ render(
                         path="/"
                         component={InitalDataProvider}
                         onChange={(prevState, nextState) => {
+                            updateLastPath();
                             if (nextState.location.action !== 'POP' && nextState.location.action !== 'REPLACE') {
                                 window.scrollTo(0, 0);
                             }
                         }}
                     >
-                        <Route onEnter={lagrePath} path="enhet" component={EnhetSide} />
-                        <Route onEnter={lagrePath} path="veiledere" component={VeiledereSide} />
-                        <Route onEnter={lagrePath} path="portefolje(/:ident)" component={MinOversiktSide} />
+                        <Route path="enhet" component={EnhetSide} />
+                        <Route path="veiledere" component={VeiledereSide} />
+                        <Route path="portefolje(/:ident)" component={MinOversiktSide} />
                         <Route onEnter={redirect} path="tilbake" />
                         <Route path="feature-toggle" component={FeatureToggelAdmin} />
                     </Route>

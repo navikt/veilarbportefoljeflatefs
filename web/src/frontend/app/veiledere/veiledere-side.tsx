@@ -7,12 +7,13 @@ import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import Lenker from './../lenker/lenker';
-import { leggEnhetIUrl } from '../utils/url-utils';
+import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl} from '../utils/url-utils';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { VeiledereState } from '../ducks/veiledere';
 import { ValgtEnhetModell } from '../model-interfaces';
 import { FiltreringState } from '../ducks/filtrering';
+import {pagineringSetup} from "../ducks/paginering";
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -23,6 +24,7 @@ interface StateProps {
 
 interface DispatchProps {
     hentPortefoljestorrelser: (enhetId: string) => void;
+    initalPaginering: (side: number, seAlle: boolean) => void;
 }
 
 type VeiledereSideProps = StateProps & DispatchProps & InjectedIntlProps;
@@ -32,7 +34,15 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
         const { hentPortefoljestorrelser, valgtEnhet } = this.props;
         hentPortefoljestorrelser(valgtEnhet.enhet!.enhetId);
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
+        this.settInitalStateFraUrl();
     }
+
+    settInitalStateFraUrl() {
+        const side = getSideFromUrl();
+        const seAlle = getSeAlleFromUrl();
+        this.props.initalPaginering(side, seAlle);
+    }
+
 
     render() {
         const { veiledere, portefoljestorrelser, filtervalg, intl } = this.props;
@@ -79,7 +89,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId))
+    hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
+    initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(VeiledereSide));
