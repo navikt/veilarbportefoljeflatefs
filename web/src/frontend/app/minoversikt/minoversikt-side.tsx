@@ -22,7 +22,7 @@ import {
     getSeAlleFromUrl, getSideFromUrl, getSorteringsFeltFromUrl,
     getSorteringsRekkefolgeFromUrl
 } from '../utils/url-utils';
-import {pagineringSetup} from "../ducks/paginering";
+import { pagineringSetup } from '../ducks/paginering';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -82,7 +82,6 @@ class MinOversiktSide extends React.Component<MinoversiktSideProps> {
         const seAlle = getSeAlleFromUrl();
         this.props.initalPaginering(side, seAlle);
     }
-
 
     render() {
         const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;

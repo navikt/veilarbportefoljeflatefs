@@ -35,7 +35,7 @@ export function getFraBrukerFraUrl() {
     return queryString.parse(location.search).fraBruker;
 }
 
-export function setFraBrukerIUrl(bruker:string){
+export function setFraBrukerIUrl(bruker: string) {
     const parsed = queryString.parse(location.search);
     parsed.fraBruker = bruker;
 

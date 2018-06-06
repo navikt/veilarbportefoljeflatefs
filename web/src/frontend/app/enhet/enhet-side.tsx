@@ -9,7 +9,7 @@ import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visnin
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl} from '../utils/url-utils';
+import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
 import { hentStatusTall } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
@@ -18,7 +18,7 @@ import { AppState } from '../reducer';
 import { StatustallModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { FiltreringState } from '../ducks/filtrering';
-import {pagineringSetup} from "../ducks/paginering";
+import { pagineringSetup } from '../ducks/paginering';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -45,7 +45,7 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
     componentWillMount() {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
-        this.settInitalStateFraUrl()
+        this.settInitalStateFraUrl();
     }
 
     settInitalStateFraUrl() {

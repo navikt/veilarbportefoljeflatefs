@@ -7,13 +7,13 @@ import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import Lenker from './../lenker/lenker';
-import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl} from '../utils/url-utils';
+import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { VeiledereState } from '../ducks/veiledere';
 import { ValgtEnhetModell } from '../model-interfaces';
 import { FiltreringState } from '../ducks/filtrering';
-import {pagineringSetup} from "../ducks/paginering";
+import { pagineringSetup } from '../ducks/paginering';
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -42,7 +42,6 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
         const seAlle = getSeAlleFromUrl();
         this.props.initalPaginering(side, seAlle);
     }
-
 
     render() {
         const { veiledere, portefoljestorrelser, filtervalg, intl } = this.props;
