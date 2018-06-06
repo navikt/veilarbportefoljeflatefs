@@ -13,7 +13,6 @@ import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
 import { getEnhetFromUrl, sendBrukerTilUrl, getFraBrukerFraUrl } from './utils/url-utils';
-import FeatureToggelAdmin from './components/feature-toggle/feature-toggle-admin';
 import './style';
 import { IKKE_SATT } from './konstanter';
 
@@ -102,7 +101,6 @@ render(
                         <Route onEnter={lagrePath} path="veiledere" component={VeiledereSide} />
                         <Route onEnter={lagrePath} path="portefolje(/:ident)" component={MinOversiktSide} />
                         <Route onEnter={redirect} path="tilbake" />
-                        <Route path="feature-toggle" component={FeatureToggelAdmin} />
                     </Route>
                 </Router>
             </IntlProvider>
