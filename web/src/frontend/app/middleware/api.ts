@@ -37,14 +37,14 @@ function buildUrl(baseUrl: string, queryParams?: {}): string {
 
 export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, filtervalg: {}, fra?: number, antall?: number) {
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/portefolje`;
-    const url = buildUrl(baseUrl, {fra, antall, sortDirecton: rekkefolge, sortField: sorteringsfelt});
+    const url = buildUrl(baseUrl, {fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
     return fetchToJson<PortefoljeData>(url, config);
 }
 
 export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, sorteringsfelt, filtervalg, fra?: number, antall?: number) {
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/portefolje`;
-    const url =  buildUrl(baseUrl, {enhet, fra, antall, sortDirecton: rekkefolge, sortField: sorteringsfelt});
+    const url =  buildUrl(baseUrl, {enhet, fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
     return fetchToJson<PortefoljeData>(url, config);
 }
