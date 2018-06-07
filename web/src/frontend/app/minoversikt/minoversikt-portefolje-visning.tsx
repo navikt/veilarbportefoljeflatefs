@@ -40,7 +40,6 @@ interface VeilederPortefoljeVisningProps {
     feilmeldingModal: FeilmeldingModalModell;
     serverfeilModalSkalVises: boolean;
     closeServerfeilModal: () => void;
-    veilederpaginering: string;
 }
 
 class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps & InjectedIntlProps> {
@@ -91,7 +90,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             feilmeldingModal,
             serverfeilModalSkalVises,
             closeServerfeilModal,
-            veilederpaginering
         } = this.props;
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
@@ -115,14 +113,13 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                             gjeldendeVeileder.ident,
                             sorteringsrekkefolge,
                             sorteringsfelt,
-                            filtervalg,
-                            fra,
-                            antall
+                            filtervalg
                         )}
                         gjeldendeVeileder={gjeldendeVeileder}
                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                         sokVeilederSkalVises={false}
-                        veilederpaginering={veilederpaginering}
+                        visningsmodus={visningsmodus}
+                        antallTotalt={antallTotalt}
                     />
                     {
                         visDiagram ?
@@ -176,17 +173,16 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    visningsmodus: state.veilederpaginering.visningsmodus,
+    visningsmodus: state.paginering.visningsmodus,
     filtervalg: state.filtreringMinoversikt,
     innloggetVeilederIdent: state.enheter.ident,
     feilmeldingModal: state.feilmeldingModal,
     serverfeilModalSkalVises: state.serverfeilModal.modalVises,
-    veilederpaginering: state.veilederpaginering.visningsmodus
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
-        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, filtervalg, fra, antall)),
+    hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg) =>
+        dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, filtervalg)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal()),
     closeServerfeilModal: () => dispatch(skjulServerfeilModal())

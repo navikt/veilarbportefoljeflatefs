@@ -2,7 +2,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
 import { guid } from 'nav-frontend-js-utils';
 import { FormattedMessage } from 'react-intl';
-import { settVisningsmodus } from '../ducks/veilederpaginering';
+import { settVisningsmodus } from '../ducks/paginering';
 import { DIAGRAMVISNING, TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 
 class ButtonRadiogroup extends Component {
@@ -57,7 +57,7 @@ ButtonRadiogroup.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-    visningsmodus: state.veilederpaginering.visningsmodus
+    visningsmodus: state.paginering.visningsmodus
 });
 
 const mapDispatchToProps = (dispatch) => ({

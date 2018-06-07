@@ -1,4 +1,4 @@
-import { fetchPortefoljeStorrelser } from './../middleware/api';
+import { fetchPortefoljeStorrelser } from '../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 
 // Actions

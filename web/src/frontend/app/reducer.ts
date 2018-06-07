@@ -8,7 +8,6 @@ import pagineringReducer from './ducks/paginering';
 import sorteringReducer from './ducks/sortering';
 import veiledereReducer, { VeiledereState } from './ducks/veiledere';
 import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
-import veilederpagineringReducer from './ducks/veilederpaginering';
 import filtreringReducer, { FiltreringState, initialState } from './ducks/filtrering';
 import statustallReducer from './ducks/statustall';
 import modalReducer from './ducks/modal';
@@ -54,7 +53,6 @@ export interface AppState {
     sortering: any;
     veiledere: VeiledereState;
     portefoljestorrelser: any;
-    veilederpaginering: any;
     statustall: any;
     filtrering: FiltreringState;
     filtreringMinoversikt: any;
@@ -82,7 +80,6 @@ export default combineReducers<AppState>({
     sortering: sorteringReducer,
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
-    veilederpaginering: veilederpagineringReducer,
     statustall: statustallReducer,
     filtrering: persistent('enhetsState', location, named('enhet', filtreringReducer), slettCleanIUrl, initialState),
     filtreringMinoversikt: persistent('veilederState', location,

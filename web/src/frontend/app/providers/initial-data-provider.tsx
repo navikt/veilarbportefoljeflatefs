@@ -87,7 +87,7 @@ const mapDispatchToProps = (dispatch) => ({
     hentTekster: () => dispatch(hentLedetekster()),
     hentEnheter: () => dispatch(hentEnheterForVeileder()),
     hentVeiledere: (enhet) => dispatch(hentVeiledereForEnhet(enhet)),
-    velgEnhet: (enhetid) => dispatch(velgEnhetForVeileder({enhetId: enhetid})),
+    velgEnhet: (enhetid) => dispatch(velgEnhetForVeileder({enhetId: enhetid}))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitialDataProvider);

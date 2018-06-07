@@ -2,10 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-toggle';
-import { settVisningsmodus } from './../../ducks/veilederpaginering';
 import * as VK from './../../minoversikt/minoversikt-konstanter';
 import { AppState } from './../../reducer';
 import { ListevisningType } from '../../ducks/ui/listevisning';
+import { settVisningsmodus } from '../../ducks/paginering';
 
 interface OwnProps {
     filtergruppe: ListevisningType;
@@ -67,7 +67,7 @@ const mapStateToProps = (state: AppState, ownProps: OwnProps): StateProps => {
     const ytelse = filtreringsstate.ytelse;
 
     return {
-        visningsmodus: state.veilederpaginering.visningsmodus,
+        visningsmodus: state.paginering.visningsmodus,
         skalSkjules: ytelse === null || ytelse === undefined
     };
 };

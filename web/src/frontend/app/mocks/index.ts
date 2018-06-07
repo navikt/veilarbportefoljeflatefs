@@ -18,8 +18,12 @@ function lagPortefoljeForVeileder(queryParams, alleBrukere) {
 
 function lagPortefolje(queryParams, enhet, alleBrukere) {
     const { fra, antall } = queryParams;
-    const fraInt = parseInt(fra, 10);
-    const antallInt = parseInt(antall, 10);
+    const maybeFra = parseInt(fra, 10);
+    const maybeAntal = parseInt(antall, 10);
+
+    const fraInt = isNaN(maybeFra) ? 0 : maybeFra;
+    const antallInt = isNaN(maybeAntal) ? alleBrukere.length : maybeAntal;
+
     const filtrerteBrukere = alleBrukere
         .slice(fraInt, fraInt + antallInt)
         .map((bruker, index) => {
@@ -37,8 +41,8 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
     return {
         enhet,
         antallTotalt: alleBrukere.length,
-        antallReturnert: filtrerteBrukere.length,
-        fraIndex: parseInt(queryParams.fra, 10),
+        antallReturnert: antallInt,
+        fraIndex: fraInt,
         brukere: filtrerteBrukere
     };
 }
