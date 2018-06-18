@@ -13,7 +13,7 @@ import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { STATUS } from '../ducks/utils';
 import { AppState } from '../reducer';
 
-const KOMMENTAR_MAKS_LENGDE = 250;
+const KOMMENTAR_MAKS_LENGDE = 500;
 
 const begrensetKommentarLengde = rules.maxLength(
     KOMMENTAR_MAKS_LENGDE,
