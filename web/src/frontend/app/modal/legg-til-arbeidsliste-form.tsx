@@ -16,16 +16,16 @@ import { STATUS } from '../ducks/utils';
 import { AppState } from '../reducer';
 import { BrukerModell, VeilederModell, ArbeidslisteDataModell, Status } from '../model-interfaces';
 
-const KOMMENTAR_MAKS_LENGDE = 250;
+export const KOMMENTAR_MAKS_LENGDE = 500;
 
-const begrensetKommentarLengde = rules.maxLength(
+export const begrensetKommentarLengde = rules.maxLength(
     KOMMENTAR_MAKS_LENGDE,
     <FormattedMessage
         id="legg-til-arbeidsliste-form.feilmelding.kommentar-lengde"
         values={{ KOMMENTAR_MAKS_LENGDE }}
     />
 );
-const pakrevdTekst = rules.minLength(
+export const pakrevdTekst = rules.minLength(
     0,
     <FormattedMessage id="legg-til.arbeidsliste-form.feilmelding.tekst.mangler" />
 );

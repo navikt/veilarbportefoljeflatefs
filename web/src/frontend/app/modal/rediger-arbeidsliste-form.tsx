@@ -12,20 +12,7 @@ import { redigerArbeidsliste } from '../ducks/arbeidsliste';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { STATUS } from '../ducks/utils';
 import { AppState } from '../reducer';
-
-const KOMMENTAR_MAKS_LENGDE = 500;
-
-const begrensetKommentarLengde = rules.maxLength(
-    KOMMENTAR_MAKS_LENGDE,
-    <FormattedMessage
-        id="legg-til-arbeidsliste-form.feilmelding.kommentar-lengde"
-        values={{ KOMMENTAR_MAKS_LENGDE }}
-    />
-);
-const pakrevdTekst = rules.minLength(
-    0,
-    <FormattedMessage id="legg-til.arbeidsliste-form.feilmelding.tekst.mangler" />
-);
+import { KOMMENTAR_MAKS_LENGDE, begrensetKommentarLengde, pakrevdTekst } from './legg-til-arbeidsliste-form';
 
 function label(bruker) {
     return (<Undertittel><FormattedMessage
