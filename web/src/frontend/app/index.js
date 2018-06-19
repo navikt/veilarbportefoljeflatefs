@@ -12,9 +12,8 @@ import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
-import { getEnhetFromUrl, sendBrukerTilUrl, getFraBrukerFraUrl } from './utils/url-utils';
+import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
 import './style';
-import { IKKE_SATT } from './konstanter';
 
 /* eslint-disable no-undef */
 if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
@@ -37,37 +36,6 @@ addLocaleData(nb);
 const store = createStore();
 const tekster = { nb: { spinner: 'spinner' } };
 
-
-function getSideTallForPath(path) {
-    const checkPath = path.includes('/portefolje') ? '/portefolje' : path;
-
-    if (checkPath === '/enhet' || checkPath === '/portefolje') {
-        const sideTall = localStorage.getItem(`${checkPath.substr(1)}-lagretSidetall`) || 1;
-        return `&side=${sideTall}`;
-    }
-    return '';
-}
-
-function getSortering(path) {
-    const checkPath = path.includes('/portefolje') ? '/portefolje' : path;
-
-
-    if (checkPath === '/enhet' || checkPath === '/portefolje') {
-        const lagretSorteringsfelt = localStorage.getItem('lagretSorteringsfelt') || IKKE_SATT;
-        const lagretSorteringsrekkefolge = localStorage.getItem('lagretSorteringsrekkefolge') || IKKE_SATT;
-        return `&sorteringsfelt=${lagretSorteringsfelt}&sorteringsrekkefolge=${lagretSorteringsrekkefolge}`;
-    }
-    return '';
-}
-
-function getFraBruker() {
-    const fnr = getFraBrukerFraUrl();
-    if (fnr) {
-        return `&fraBruker=${fnr}`;
-    }
-    return '';
-}
-
 function redirect() {
     const lastPath = localStorage.getItem('lastpath');
     if (lastPath) {
@@ -77,9 +45,9 @@ function redirect() {
     }
 }
 
-function updateLastPath(){
+function updateLastPath() {
     const base = window.location.pathname.replace(basename, '');
-    if(base !== '/tilbake') {
+    if (base !== '/tilbake') {
         const search = window.location.search;
         localStorage.setItem('lastpath', base + search);
     }
