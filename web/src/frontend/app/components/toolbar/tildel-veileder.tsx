@@ -14,6 +14,7 @@ interface TildelVeilederProps {
     tildelTilVeileder: (tilordninger: any[], ident: string) => void;
     veiledere: VeiledereState;
     brukere: BrukerModell[];
+    filtergruppe?: string;
 }
 
 type Props = TildelVeilederProps & InjectedIntlProps;
