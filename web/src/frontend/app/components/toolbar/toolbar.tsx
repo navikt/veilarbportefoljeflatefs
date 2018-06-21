@@ -32,6 +32,7 @@ const Toolbar = ({filtergruppe,
             <VelgalleCheckboks skalVises={filtergruppe in ListevisningType}/>
             <TildelVeileder
                 skalVises={filtergruppe in ListevisningType}
+                filtergruppe={filtergruppe}
                 gjeldendeVeileder={gjeldendeVeileder}/>
             <Listevisning filtergruppe={filtergruppe}/>
             <LeggTilArbeidsliste visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje === true}/>

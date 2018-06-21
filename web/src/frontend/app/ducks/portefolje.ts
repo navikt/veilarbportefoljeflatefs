@@ -296,7 +296,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                         brukereError: res.feilendeTilordninger
                     })(dispatch);
                 }
-                if (filtergruppe === 'veileder') {
+                if (filtergruppe === 'minOversikt') {
                     dispatch({
                         type: OPPDATER_ANTALL,
                         antallTilordninger: tilordninger.length - res.feilendeTilordninger.length
@@ -311,7 +311,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
             .then(() => {
                 // Venter litt slik at indeks kan komme i sync
                 setTimeout(() => {
-                    const side = filtergruppe === 'veileder' ? filtergruppe : 'enhet';
+                    const side = filtergruppe === 'minOversikt' ? 'veileder' : 'enhet';
                     const ident = veilederIdent || getState().enheter.ident ;
                     oppdaterPortefolje(getState, dispatch, side, ident);
                 }, 2000);
