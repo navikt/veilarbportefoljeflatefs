@@ -12,7 +12,11 @@ import { redigerArbeidsliste } from '../ducks/arbeidsliste';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { STATUS } from '../ducks/utils';
 import { AppState } from '../reducer';
-import { KOMMENTAR_MAKS_LENGDE, begrensetKommentarLengde, pakrevdTekst } from './legg-til-arbeidsliste-form';
+import {
+    KOMMENTAR_MAKS_LENGDE, begrensetKommentarLengde, pakrevdTekst, begrensetOverskriftLengde,
+    pakrevdOverskriftTekst
+} from './legg-til-arbeidsliste-form';
+import Input from "../components/input/input";
 
 function label(bruker) {
     return (<Undertittel><FormattedMessage
@@ -45,6 +49,11 @@ function RedigerArbeidslisteForm({ lukkModal,
         <form onSubmit={handleSubmit}>
             <div className="input-fields">
                 <div className="nav-input blokk-s">
+                    <Input
+                        feltNavn="overskrift"
+                        label="Overskrift/emne"
+                        bredde="10px"
+                    />
                     <Textarea
                         labelId={'kommentar'}
                         label={label(bruker)}
@@ -87,6 +96,7 @@ const RedigerArbeidslisteFormValidation = validForm({
     form: 'arbeidsliste-rediger',
     validate: {
         kommentar: [begrensetKommentarLengde, pakrevdTekst],
+        overskrift: [begrensetOverskriftLengde, pakrevdOverskriftTekst],
         frist: []
     }
 })(RedigerArbeidslisteForm);
@@ -96,6 +106,7 @@ function oppdaterState(res, arbeidsliste, innloggetVeileder, fnr, lukkModal, dis
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
+    console.log('arbeidsliste', arbeidsliste);
 
     const arbeidslisteToDispatch = Array.of({
         ...arbeidsliste,
@@ -110,6 +121,7 @@ const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
         const arbeidsliste = {
             kommentar: formData.kommentar,
+            overskrift: formData.overskrift,
             frist: formData.frist
         };
         redigerArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
@@ -122,7 +134,8 @@ const mapDispatchToProps = () => ({
 const mapStateToProps = (state: AppState, props: {bruker: BrukerModell}) => ({
     initialValues: {
         kommentar: props.bruker.arbeidsliste.kommentar,
-        frist: props.bruker.arbeidsliste.frist
+        frist: props.bruker.arbeidsliste.frist,
+        overskrift: props.bruker.arbeidsliste.overskrift,
     },
     arbeidslisteStatus: state.arbeidsliste.status
 });

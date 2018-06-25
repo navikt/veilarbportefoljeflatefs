@@ -15,8 +15,18 @@ import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { STATUS } from '../ducks/utils';
 import { AppState } from '../reducer';
 import { BrukerModell, VeilederModell, ArbeidslisteDataModell, Status } from '../model-interfaces';
+import Input from "../components/input/input";
 
+export const OVERSKRIFT_MAKS_LENGDE = 15;
 export const KOMMENTAR_MAKS_LENGDE = 500;
+
+export const begrensetOverskriftLengde = rules.maxLength(
+    OVERSKRIFT_MAKS_LENGDE,
+    <FormattedMessage
+        id="legg-til-arbeidsliste-form.feilmelding.overskrift-lengde"
+        values={{ OVERSKRIFT_MAKS_LENGDE }}
+    />
+);
 
 export const begrensetKommentarLengde = rules.maxLength(
     KOMMENTAR_MAKS_LENGDE,
@@ -25,6 +35,12 @@ export const begrensetKommentarLengde = rules.maxLength(
         values={{ KOMMENTAR_MAKS_LENGDE }}
     />
 );
+
+export const pakrevdOverskriftTekst = rules.minLength(
+    0,
+    <FormattedMessage id="legg-til.arbeidsliste-form.feilmelding.overskrift.tekst.mangler" />
+);
+
 export const pakrevdTekst = rules.minLength(
     0,
     <FormattedMessage id="legg-til.arbeidsliste-form.feilmelding.tekst.mangler" />
@@ -50,6 +66,13 @@ function renderFelter({ fields }) {
                         <legend>
                             {label(fields.get(idx))}
                         </legend>
+
+                        <Input
+                            feltNavn={`${name}.overskrift`}
+                            label="Overskrift/emne"
+                            bredde="10px"
+                        />
+
                         <Textarea
                             labelId={`${name}.kommentar`}
                             label="Kommentar"
@@ -127,6 +150,7 @@ const LeggTilArbeidslisteReduxForm = validForm({
     ),
     validate: {
         arbeidsliste: rules.array('arbeidsliste', {
+            overskrift: [begrensetOverskriftLengde, pakrevdOverskriftTekst],
             kommentar: [begrensetKommentarLengde, pakrevdTekst]
         })
     }
@@ -185,6 +209,7 @@ const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
         const liste: ArbeidslisteDataModell[] = formData.arbeidsliste.map((bruker, index) => ({
             fnr: bruker.fnr,
+            overskrift: formData.arbeidsliste[index].overskrift,
             kommentar: formData.arbeidsliste[index].kommentar,
             frist: formData.arbeidsliste[index].frist
         }));
