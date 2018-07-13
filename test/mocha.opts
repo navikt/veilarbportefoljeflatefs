@@ -1,0 +1,5 @@
+--compilers js:ts-node/register,ts:ts-node/register
+--require ignore-styles
+--require ./test/DOM-setup.js
+--require ./test/tshook.js
+--recursive ./src/app/**/*-test.@(js|ts)
