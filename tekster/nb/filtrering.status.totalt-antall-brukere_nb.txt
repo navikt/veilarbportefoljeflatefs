@@ -1,0 +1,5 @@
+{ antall, plural,
+ =0{ Ingen brukere }
+ =1{ Totalt # bruker}
+ other{ Totalt # brukere }
+}

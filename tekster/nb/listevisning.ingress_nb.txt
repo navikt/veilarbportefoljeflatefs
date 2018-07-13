@@ -1,0 +1,1 @@
+Du kan velge hvilke kolonner du ønsker å se i listen. Men du kan maks vise 5 kolonner om gangen.
