@@ -111,7 +111,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "build": "npm run build:tekster && webpack -p",
+    "build": "cp -R feilsider build/ && npm run build:tekster && webpack -p",
     "build:tekster": "node build-tekster.js",
     "dev": "webpack-dev-server --env.dev --env.mock",
     "watch": "webpack --watch --env.dev",
