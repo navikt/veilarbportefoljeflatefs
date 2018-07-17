@@ -86,6 +86,7 @@ export default () => {
     if ((window as any).renderDecoratorHead) {
         (window as any).renderDecoratorHead(getConfig());
     } else {
+        console.error("Finner ikke dekoratør! Går til feilside");
         window.location.href = 'feilsider/500.html';
     }
 };
