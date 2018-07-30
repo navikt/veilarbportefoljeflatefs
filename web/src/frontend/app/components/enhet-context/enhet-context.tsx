@@ -156,7 +156,7 @@ const mapStateToProps = (state: AppState): StateProps => {
         modalSynlig: harValgtEnhet && (valgtEnhetId !== aktivEnhetIdFraContext),
         feilmodalSynlig: state.nycontext.visFeilmodal,
         isPending: state.nycontext.isPending,
-        feilet: state.nycontext.connected === EnhetConnectionState.FAILED,
+        feilet: state.nycontext.failed,
         aktivEnhet: valgtEnhetId,
         aktivEnhetNavn: `${aktivEnhetIdFraContext} ${aktivEnhetNavnFraContext}`,
         aktivEnhetIdFraContext
