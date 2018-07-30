@@ -66,10 +66,6 @@
             <artifactId>modig-core-test</artifactId>
         </dependency>
         <dependency>
-            <groupId>no.nav.sbl</groupId>
-            <artifactId>innholdshenter</artifactId>
-        </dependency>
-        <dependency>
             <groupId>no.nav.sbl.dialogarena</groupId>
             <artifactId>test-config</artifactId>
             <scope>test</scope>
