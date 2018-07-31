@@ -2,6 +2,7 @@ import { EnhetConnectionState } from './enhet-context-listener';
 
 export interface ContextState {
     connected: EnhetConnectionState;
+    failed: boolean;
     aktivEnhetId: string;
     isPending: boolean;
     visFeilmodal: boolean;
@@ -11,6 +12,7 @@ const initialState: ContextState = {
     connected: EnhetConnectionState.NOT_CONNECTED,
     aktivEnhetId: '',
     isPending: false,
+    failed: false,
     visFeilmodal: false
 };
 
@@ -60,7 +62,12 @@ type ContextActions =
 export default function contextReducer(state: ContextState = initialState, action: ContextActions): ContextState {
     switch(action.type) {
         case ContextActionKeys.SETT_TILKOBLING_STATE:
-            return { ...state, connected: action.connected };
+            const connectionState = action.connected;
+            const stillFailing = state.connected === EnhetConnectionState.FAILED && connectionState !== EnhetConnectionState.CONNECTED;
+            return { ...state,
+                connected: connectionState,
+                failed: connectionState === EnhetConnectionState.FAILED || stillFailing
+            };
         case ContextActionKeys.SETT_AKTIV_ENHET:
             return { ...state, aktivEnhetId: action.enhet };
         case ContextActionKeys.SETT_PENDING_STATE:
