@@ -30,11 +30,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>no.nav.sbl</groupId>
-                <artifactId>innholdshenter</artifactId>
-                <version>4.3</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
