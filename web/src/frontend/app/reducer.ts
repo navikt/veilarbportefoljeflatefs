@@ -25,6 +25,7 @@ import listevisningReducer, {
     ListevisningType
 } from './ducks/ui/listevisning';
 import {default as contextReducer, ContextState } from './components/enhet-context/context-reducer';
+import featuresReducer, { FeaturesState } from './ducks/features';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -64,6 +65,7 @@ export interface AppState {
     arbeidsliste: any;
     enhettiltak: EnhettiltakState;
     nycontext: ContextState;
+    features: FeaturesState;
     form: any;
 }
 
@@ -92,5 +94,6 @@ export default combineReducers<AppState>({
     arbeidsliste: arbeidslisteReducer,
     nycontext: contextReducer,
     enhettiltak: enhetTiltakReducer,
+    features: featuresReducer,
     form: formReducer
 });

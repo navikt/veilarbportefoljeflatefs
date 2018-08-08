@@ -107,5 +107,6 @@ export const statustallShape = PT.shape({
     nyeBrukereFraVeileder: PT.number,
     inaktiveBrukere: PT.number.isRequired,
     venterPaSvarFraNAV: PT.number.isRequired,
-    venterPaSvarFraBruker: PT.number.isRequired
+    venterPaSvarFraBruker: PT.number.isRequired,
+    trengerVurdering: PT.number.isRequired
 });

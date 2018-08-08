@@ -3,6 +3,7 @@ import { Sorteringsfelt } from '../model-interfaces';
 
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
+export const TRENGER_VURDERING = 'TRENGER_VURDERING';
 export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
 export const VENTER_PA_SVAR_FRA_NAV = 'VENTER_PA_SVAR_FRA_NAV';
 export const VENTER_PA_SVAR_FRA_BRUKER = 'VENTER_PA_SVAR_FRA_BRUKER';
@@ -23,6 +24,7 @@ export function lagConfig(data: any): any {
 export const ferdigfilterListe = ()=> ({
     UFORDELTE_BRUKERE: 'Ufordelte brukere',
     NYE_BRUKERE_FOR_VEILEDER: 'Nye brukere',
+    TRENGER_VURDERING: 'Trenger vurdering',
     INAKTIVE_BRUKERE: 'Ikke servicebehov',
     VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
     VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker',
