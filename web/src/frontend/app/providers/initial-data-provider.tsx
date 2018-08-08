@@ -3,19 +3,22 @@ import { connect } from 'react-redux';
 import { parse } from 'query-string';
 import { EnheterState, hentEnheterForVeileder, velgEnhetForVeileder } from '../ducks/enheter';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
-import { hentLedetekster } from './../ducks/ledetekster';
+import { hentLedetekster } from '../ducks/ledetekster';
+import { hentFeatureFraUnleash } from '../ducks/features';
 import { hentAktivEnhet } from '../components/enhet-context/context-api';
 import { STATUS } from '../ducks/utils';
 import { leggEnhetIUrl } from '../utils/url-utils';
 import { settEnhetIDekorator } from '../eventhandtering';
 import { enhetShape, valgtEnhetShape } from '../proptype-shapes';
 import Application from './../application';
+import { TRENGER_VURDERING_FEATURE } from '../konstanter';
 
 interface DispatchProps {
-    hentTekster: () => void;
-    hentEnheter: () => void;
-    hentVeiledere: (enhetId: string) => void;
-    velgEnhet: (enhetId: string) => void;
+    hentFeature(feature: string): void;
+    hentTekster(): void;
+    hentEnheter(): void;
+    hentVeiledere(enhetId: string): void;
+    velgEnhet(enhetId: string): void;
 }
 
 interface StateProps {
@@ -28,6 +31,7 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> 
     componentDidMount() {
         this.props.hentTekster();
         this.props.hentEnheter();
+        this.props.hentFeature(TRENGER_VURDERING_FEATURE);
     }
 
     componentDidUpdate() {
@@ -84,6 +88,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    hentFeature: (feature: string) => dispatch(hentFeatureFraUnleash(feature)),
     hentTekster: () => dispatch(hentLedetekster()),
     hentEnheter: () => dispatch(hentEnheterForVeileder()),
     hentVeiledere: (enhet) => dispatch(hentVeiledereForEnhet(enhet)),
