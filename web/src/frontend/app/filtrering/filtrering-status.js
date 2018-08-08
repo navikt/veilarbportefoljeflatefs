@@ -15,7 +15,8 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
     INAKTIVE_BRUKERE,
-    MIN_ARBEIDSLISTE
+    MIN_ARBEIDSLISTE,
+    TRENGER_VURDERING
 } from './filter-konstanter';
 
 
@@ -155,6 +156,19 @@ class FiltreringStatus extends Component {
                     </Element>
                 </div>
                 { this.props.filtergruppe === 'enhet' ? ufordelteBrukereCheckbox : nyeBrukereForVeilederCheckbox }
+                <BarInput
+                    id="trengerVurdering"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
+                    value="TRENGER_VURDERING"
+                    onChange={this.handleChange}
+                    checked={ferdigfilterListe.includes(TRENGER_VURDERING)}
+                    tekstId="enhet.filtering.filtrering.oversikt.trengervurdering.brukere.checkbox"
+                    antall={this.props.statustall.data.trengerVurdering}
+                    max={this.props.statustall.data.totalt}
+                    barClassname="trengerVurdering"
+                />
                 <BarInput
                     id="venterPaSvarFraNAV"
                     type="radio"
