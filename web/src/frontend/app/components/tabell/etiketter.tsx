@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Etikett from './etikett';
-import { BrukerModell, EtikettType } from '../../model-interfaces';
+import { BrukerModell, EtikettType, VurderingsBehov } from '../../model-interfaces';
 
 interface EtiketterProps {
     className?: string;
     bruker: BrukerModell;
+    erVurderingFeaturePa: boolean;
 }
 
-function Etiketter({className, bruker}: EtiketterProps) {
+function Etiketter({className, bruker, erVurderingFeaturePa}: EtiketterProps) {
     return (
         <span className={className}>
             <Etikett
@@ -34,6 +35,18 @@ function Etiketter({className, bruker}: EtiketterProps) {
                 skalVises={bruker.erDoed === true}
             >
                 <FormattedMessage id="enhet.portefolje.tabelletikett.dod"/>
+            </Etikett>
+            <Etikett
+                type={EtikettType.IKKE_VURDERT}
+                skalVises={erVurderingFeaturePa && bruker.trengerVurdering === true && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
+            >
+                <FormattedMessage id="enhet.portefolje.tabelletikett.ikke_vurdert"/>
+            </Etikett>
+            <Etikett
+                type={EtikettType.BEHOV_AEV}
+                skalVises={erVurderingFeaturePa && bruker.trengerVurdering === true && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
+            >
+                <FormattedMessage id="enhet.portefolje.tabelletikett.behov_aev"/>
             </Etikett>
         </span>
     );

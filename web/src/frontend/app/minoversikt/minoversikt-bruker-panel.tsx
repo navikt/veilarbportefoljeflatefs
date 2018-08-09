@@ -22,6 +22,7 @@ interface MinOversiktBrukerPanelProps {
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
+    erVurderingFeaturePa: boolean;
 }
 
 interface MinOversiktBrukerPanelState {
@@ -88,7 +89,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                             onClick={this.handleArbeidslisteButtonClick}
                         />
                         <div>
-                            <Etiketter bruker={bruker}/>
+                            <Etiketter bruker={bruker} erVurderingFeaturePa={this.props.erVurderingFeaturePa}/>
                             <Etikett
                                 type={EtikettType.NYBRUKER}
                                 skalVises={bruker.nyForVeileder === true}
