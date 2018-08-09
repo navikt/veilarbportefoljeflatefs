@@ -14,9 +14,10 @@ interface EnhetBrukerpanelProps {
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
+    erVurderingFeaturePa: boolean;
 }
 
-function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, varForrigeBruker }: EnhetBrukerpanelProps) {
+function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, varForrigeBruker, erVurderingFeaturePa }: EnhetBrukerpanelProps) {
 
     const classname  = classNames('brukerliste__element brukerliste--border-bottom-thin', {
         'brukerliste--forrigeBruker': varForrigeBruker,
@@ -36,7 +37,7 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
                     brukersVeileder={brukersVeileder}
                 />
                 <div className="brukerliste__gutter-right">
-                    <Etiketter bruker={bruker} />
+                    <Etiketter bruker={bruker} erVurderingFeaturePa={erVurderingFeaturePa} />
                 </div>
         </li>
     );

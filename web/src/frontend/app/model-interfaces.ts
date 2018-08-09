@@ -31,7 +31,9 @@ export enum EtikettType {
     EGEN_ANSATT = 'egen-ansatt',
     DISKRESJONSKODE = 'diskresjonskode',
     SIKKERHETSTILTAK = 'sikkerhetstiltak',
-    DOED = 'doed'
+    DOED = 'doed',
+    IKKE_VURDERT = 'ikke_vurdert',
+    BEHOV_AEV = 'behov_aev'
 }
 
 export interface FiltervalgModell {
@@ -70,6 +72,11 @@ export interface VeilederModell {
     etternavn?: string;
 }
 
+export enum VurderingsBehov {
+    ARBEIDSEVNE_VURDERING = 'ARBEIDSEVNE_VURDERING',
+    IKKE_VURDERT = 'IKKE_VURDERT'
+}
+
 export interface BrukerModell {
     fnr: string;
     guid: string;
@@ -81,6 +88,8 @@ export interface BrukerModell {
     egenAnsatt: boolean;
     nyForVeileder: boolean;
     nyForEnhet: boolean;
+    trengerVurdering?: boolean;
+    vurderingsBehov?: VurderingsBehov;
     erDoed: boolean;
     fodselsdagIMnd: number;
     fodselsdato: string; // dato

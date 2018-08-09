@@ -1,8 +1,9 @@
 import * as React from 'react';
-import Tabelletiketter, { TabelletiketterTypes } from '../tabelletiketter/tabelletiketter';
+import Tabelletiketter from '../tabelletiketter/tabelletiketter';
+import { EtikettType } from '../../model-interfaces';
 
 interface EtikettProps {
-    type: TabelletiketterTypes;
+    type: EtikettType;
     children: React.ReactChild;
     skalVises: boolean;
 }
