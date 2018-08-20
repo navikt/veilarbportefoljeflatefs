@@ -113,7 +113,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     overskriftId="filtrering.filter.tittel.aktivitet"
                     hjelpetekstId="hjelpetekst.aktivitetsfilter"
                 />
-                <Dropdown name="Aktivitet" className="dropdown--130bredde" hoyre={true}>
+                <Dropdown name="Aktivitet" className="dropdown--130bredde">
                     <AktivitetFilterform
                         form="aktiviteter"
                         valg={aktiviteter(intl)}
@@ -124,7 +124,6 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown
                     name="Tiltakstype"
                     className="dropdown--130bredde"
-                    hoyre={true}
                     disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
                 >
                     <CheckboxFilterform
@@ -139,7 +138,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.manuellbruker"/>
                 </Element>
-                <Dropdown name="Manuell bruker" className="dropdown--130bredde">
+                <Dropdown name="Manuell bruker">
                     <CheckboxFilterform
                         form="manuellBrukerStatus"
                         valg={manuellBrukerStatus(intl)}

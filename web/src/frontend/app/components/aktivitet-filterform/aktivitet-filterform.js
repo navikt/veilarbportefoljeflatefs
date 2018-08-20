@@ -25,6 +25,7 @@ function AktivitetFilterform(props) {
     const fields = Object.entries(props.valg)
         .map(([kode, verdi]) => [
             <div key={`skjemaelement skjemaelement--horisontal aktivitet-${kode}`} className="aktivitetvalg blokk-xxs">
+                <span className="aktivitetvalg__tekst">{verdi}</span>
                 <div className="radioknapp-gruppe">
                     <Field
                         id={`aktivitet-${kode}-ja`}
@@ -55,7 +56,6 @@ function AktivitetFilterform(props) {
                         <span className="sr-only">Nei, {verdi}</span>
                     </label>
                 </div>
-                <span className="aktivitetvalg__tekst">{verdi}</span>
             </div>
         ]);
 
@@ -69,13 +69,6 @@ function AktivitetFilterform(props) {
             </div>
             <div className="aktivitetfilterform__valg">
                 {fields}
-
-                <span className="text-hide" aria-live="polite" aria-atomic="true">
-                    <FormattedMessage
-                        id="components.viser.antall.treff"
-                        values={{ antall: fields.length }}
-                    />
-                </span>
             </div>
             <div className="aktivitetfilter_knapper blokk-xxs">
                 <SubmitKnapp {...props} />
