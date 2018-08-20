@@ -80,7 +80,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
-                <Dropdown name="Servicegruppe">
+                <Dropdown name="Servicegruppe" className="dropdown--160bredde">
                     <CheckboxFilterform
                         form="servicegruppe"
                         valg={servicegruppe(intl)}
@@ -88,7 +88,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
-                <Dropdown name="Rettighetsgruppe" className="dropdown--130bredde">
+                <Dropdown name="Rettighetsgruppe" className="dropdown--120bredde">
                     <CheckboxFilterform
                         form="rettighetsgruppe"
                         valg={rettighetsgruppe(intl)}
@@ -101,7 +101,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.ytelse"/>
                 </Element>
-                <Dropdown name="Ytelse" className="dropdown--130bredde">
+                <Dropdown name="Ytelse" className="dropdown--140bredde">
                     <RadioFilterform
                         form="ytelse"
                         valg={ytelse(intl)}
@@ -113,7 +113,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     overskriftId="filtrering.filter.tittel.aktivitet"
                     hjelpetekstId="hjelpetekst.aktivitetsfilter"
                 />
-                <Dropdown name="Aktivitet" className="dropdown--130bredde">
+                <Dropdown name="Aktivitet" className="dropdown--140bredde">
                     <AktivitetFilterform
                         form="aktiviteter"
                         valg={aktiviteter(intl)}
@@ -123,7 +123,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 </Dropdown>
                 <Dropdown
                     name="Tiltakstype"
-                    className="dropdown--130bredde"
+                    className="dropdown--160bredde"
                     disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
                 >
                     <CheckboxFilterform
