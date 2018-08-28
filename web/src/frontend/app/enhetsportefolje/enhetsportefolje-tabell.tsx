@@ -44,7 +44,7 @@ class EnhetTabell extends React.Component<EnhetTabellProps, {}> {
 
         return (
 
-            <div className="brukerliste typo-undertekst">
+            <div className="typo-undertekst blokk-xs">
                 <EnhetListehode
                     sorteringsrekkefolge={sorteringsrekkefolge}
                     sorteringOnClick={settSorteringOgHentPortefolje}
