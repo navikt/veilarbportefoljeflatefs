@@ -94,8 +94,23 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
 
         const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
-
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+        const toolbar = (<Toolbar
+            filtergruppe={ListevisningType.minOversikt}
+            onPaginering={(fra, antall) => hentPortefolje(
+                valgtEnhet.enhet!.enhetId,
+                gjeldendeVeileder.ident,
+                sorteringsrekkefolge,
+                sorteringsfelt,
+                filtervalg
+            )}
+            gjeldendeVeileder={gjeldendeVeileder}
+            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+            sokVeilederSkalVises={false}
+            visningsmodus={visningsmodus}
+            antallTotalt={antallTotalt}
+        />);
+
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, { status: tilordningerStatus }]}>
@@ -106,21 +121,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         visDiagram={visDiagram}
                         tekst="enhet.portefolje.paginering.tekst"
                     />
-                    <Toolbar
-                        filtergruppe={ListevisningType.minOversikt}
-                        onPaginering={(fra, antall) => hentPortefolje(
-                            valgtEnhet.enhet!.enhetId,
-                            gjeldendeVeileder.ident,
-                            sorteringsrekkefolge,
-                            sorteringsfelt,
-                            filtervalg
-                        )}
-                        gjeldendeVeileder={gjeldendeVeileder}
-                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                        sokVeilederSkalVises={false}
-                        visningsmodus={visningsmodus}
-                        antallTotalt={antallTotalt}
-                    />
+                    {toolbar}
                     {
                         visDiagram ?
                             <Diagram
@@ -134,6 +135,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
+                    {toolbar}
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}

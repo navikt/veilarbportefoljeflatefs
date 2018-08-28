@@ -57,7 +57,7 @@ class MinoversiktTabell extends React.Component<MinOversiktTabellProps, {}> {
         this.forrigeBruker = undefined;
 
         return (
-            <div className="minoversikt-liste__wrapper typo-undertekst">
+            <div className="minoversikt-liste__wrapper typo-undertekst blokk-xs">
                 <MinOversiktListehode
                     sorteringsrekkefolge={sorteringsrekkefolge}
                     sorteringOnClick={settSorteringOgHentPortefolje}

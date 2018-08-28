@@ -87,19 +87,22 @@ class VeilederesideVisning extends Component {
 
     render() {
         const veiledere = this.getVeiledere();
+        const toolbar = (<Toolbar
+            filtergruppe="veiledere"
+            onPaginering={() => {}}
+            sokVeilederSkalVises
+            antallTotalt={this.state.veiledere.length}
+        />);
+
         return (
             <div>
-                <Toolbar
-                    filtergruppe="veiledere"
-                    onPaginering={() => {}}
-                    sokVeilederSkalVises
-                    antallTotalt={this.state.veiledere.length}
-                />
+                {toolbar}
                 <VeiledereTabell
                     veiledere={veiledere}
                     sorterPaaEtternavn={() => this.props.sortBy('etternavn')}
                     sorterPaaPortefoljestorrelse={() => this.props.sortBy('portefoljestorrelse')}
                 />
+                {toolbar}
             </div>
         );
     }

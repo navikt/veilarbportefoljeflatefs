@@ -137,6 +137,19 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
+        const toolbar = (<Toolbar
+            filtergruppe={ListevisningType.enhetensOversikt}
+            onPaginering={() => hentPortefolje(
+                valgtEnhet.enhet!.enhetId,
+                sorteringsrekkefolge,
+                sorteringsfelt,
+                filtervalg
+            )}
+            sokVeilederSkalVises
+            visningsmodus={visningsmodus}
+            antallTotalt={antallTotalt}
+        />);
+
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
@@ -147,18 +160,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                         visDiagram={visDiagram}
                         tekst="enhet.portefolje.paginering.tekst"
                     />
-                    <Toolbar
-                        filtergruppe={ListevisningType.enhetensOversikt}
-                        onPaginering={() => hentPortefolje(
-                            valgtEnhet.enhet!.enhetId,
-                            sorteringsrekkefolge,
-                            sorteringsfelt,
-                            filtervalg
-                        )}
-                        sokVeilederSkalVises
-                        visningsmodus={visningsmodus}
-                        antallTotalt={antallTotalt}
-                    />
+                    {toolbar}
                     {
                         visDiagram ?
                             <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet!.enhetId}/> :
@@ -167,6 +169,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
+                    {toolbar}
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}
