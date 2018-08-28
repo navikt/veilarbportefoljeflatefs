@@ -20,17 +20,19 @@ function erValgtHvisFiltrering(veiledere) {
     }
     return () => true; // Ikke valgt noe filter, så alle skal være med.
 }
+
 function medPortefoljestorrelse(portefoljeStorrelse) {
     if (portefoljeStorrelse.status !== 'OK') {
         // Før vi har fått portefoljestorrele har alle 0
-        return (veileder) => ({ ...veileder, portefoljestorrelse: 0 });
+        return (veileder) => ({...veileder, portefoljestorrelse: 0});
     }
     const storrelseMap = portefoljeStorrelse.data.facetResults
-            .reduce((acc, { value: ident, count }) => ({ ...acc, [ident]: count }), {});
+        .reduce((acc, {value: ident, count}) => ({...acc, [ident]: count}), {});
 
-    return (veileder) => ({ ...veileder, portefoljestorrelse: storrelseMap[veileder.ident] || 0 });
+    return (veileder) => ({...veileder, portefoljestorrelse: storrelseMap[veileder.ident] || 0});
 }
-function propertySort({ property, direction }) {
+
+function propertySort({property, direction}) {
     return sorter(property, direction);
 }
 
@@ -69,7 +71,7 @@ class VeilederesideVisning extends Component {
             return this.state.veiledere;
         }
 
-        return this.state.veiledere.slice(this.props.fra, this.props.fra + this.props.antall);
+        return this.state.veiledere.slice(this.props.fra, this.props.fra + this.props.sideStorrelse);
     }
 
     oppdaterVeilederListe() {
@@ -82,14 +84,15 @@ class VeilederesideVisning extends Component {
             side: 1
         });
 
-        this.setState({ veiledere });
+        this.setState({veiledere});
     }
 
     render() {
         const veiledere = this.getVeiledere();
         const toolbar = (<Toolbar
             filtergruppe="veiledere"
-            onPaginering={() => {}}
+            onPaginering={() => {
+            }}
             sokVeilederSkalVises
             antallTotalt={this.state.veiledere.length}
         />);
@@ -102,7 +105,7 @@ class VeilederesideVisning extends Component {
                     sorterPaaEtternavn={() => this.props.sortBy('etternavn')}
                     sorterPaaPortefoljestorrelse={() => this.props.sortBy('portefoljestorrelse')}
                 />
-                {toolbar}
+                {veiledere.length >= this.props.sideStorrelse && toolbar}
             </div>
         );
     }
@@ -124,7 +127,7 @@ VeilederesideVisning.propTypes = {
         direction: PT.string
     }).isRequired,
     fra: PT.number.isRequired,
-    antall: PT.number.isRequired,
+    sideStorrelse: PT.number.isRequired,
     seAlle: PT.bool.isRequired
 };
 
@@ -134,8 +137,8 @@ const mapStateToProps = (state) => ({
     sortering: state.sortering,
     veilederFilter: state[nameToStateSliceMap.veiledere].veiledere,
     fra: selectFraIndex(state),
-    antall: selectSideStorrelse(state),
-    seAlle: selectSeAlle(state)
+    sideStorrelse: selectSideStorrelse(state),
+    seAlle: selectSeAlle(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -4,8 +4,7 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../ducks/portefolje';
 import TabellOverskrift from './../components/tabell-overskrift';
 import Toolbar from './../components/toolbar/toolbar';
-import { enhetShape, veilederShape, filtervalgShape, feilmeldingModalShape } from './../proptype-shapes';
-import { leggEnhetIUrl, getSideFromUrl } from '../utils/url-utils';
+import { leggEnhetIUrl } from '../utils/url-utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
@@ -14,15 +13,16 @@ import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
 import ServerFeilModal from '../modal/server-feil-modal';
 import { STATUS } from '../ducks/utils';
 import {
-    skjulFeilmeldingModal,
     FJERN_FRA_ARBEIDSLISTE_FEILET,
     LEGG_TIL_ARBEIDSLISTE_FEILET,
+    skjulFeilmeldingModal,
     TILORDNING_FEILET
 } from '../ducks/modal-feilmelding-brukere';
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { InjectedIntlProps } from 'react-intl';
+import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 
 interface VeilederPortefoljeVisningProps {
     portefolje: PortefoljeState;
@@ -40,6 +40,7 @@ interface VeilederPortefoljeVisningProps {
     feilmeldingModal: FeilmeldingModalModell;
     serverfeilModalSkalVises: boolean;
     closeServerfeilModal: () => void;
+    sideStorrelse: number;
 }
 
 class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps & InjectedIntlProps> {
@@ -90,9 +91,10 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             feilmeldingModal,
             serverfeilModalSkalVises,
             closeServerfeilModal,
+            sideStorrelse,
         } = this.props;
 
-        const { antallTotalt, antallReturnert, fraIndex } = portefolje.data;
+        const {antallTotalt, antallReturnert, fraIndex} = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         const toolbar = (<Toolbar
@@ -113,7 +115,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
 
         return (
             <div className="portefolje__container">
-                <Innholdslaster avhengigheter={[portefolje, { status: tilordningerStatus }]}>
+                <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
                     <TabellOverskrift
                         fraIndex={fraIndex}
                         antallIVisning={antallReturnert}
@@ -135,7 +137,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
-                    {toolbar}
+                    {antallTotalt >= sideStorrelse && toolbar}
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}
@@ -180,6 +182,7 @@ const mapStateToProps = (state) => ({
     innloggetVeilederIdent: state.enheter.ident,
     feilmeldingModal: state.feilmeldingModal,
     serverfeilModalSkalVises: state.serverfeilModal.modalVises,
+    sideStorrelse: selectSideStorrelse(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
