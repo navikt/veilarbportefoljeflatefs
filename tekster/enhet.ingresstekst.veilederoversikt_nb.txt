@@ -1,0 +1,1 @@
+Her får du oversikt over alle veiledere som er hører til den enheten du er logget inn på. Du kan se hvor mange brukere den enkelte veileder har, du kan søke opp veiledere, og du kan gå inn på én veileder for å se denne veilederens oversikt.
