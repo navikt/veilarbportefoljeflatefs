@@ -1,4 +1,4 @@
-{ antallBrukereValgtErFlerEnNull, select,
+{ antallBrukereValgtErFlerEnnNull, select,
   true { {antallValgt} brukere valgt }
   other { Ingen bruker valgt }
 }
