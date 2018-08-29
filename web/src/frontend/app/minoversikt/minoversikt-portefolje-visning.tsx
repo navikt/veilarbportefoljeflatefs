@@ -94,7 +94,8 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             sideStorrelse,
         } = this.props;
 
-        const {antallTotalt, antallReturnert, fraIndex} = portefolje.data;
+        const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
+        const antallValgt = brukere.filter((bruker) => bruker.markert).length;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         const toolbar = (<Toolbar
@@ -120,8 +121,8 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         fraIndex={fraIndex}
                         antallIVisning={antallReturnert}
                         antallTotalt={antallTotalt}
+                        antallValgt={antallValgt}
                         visDiagram={visDiagram}
-                        tekst="enhet.portefolje.paginering.tekst"
                     />
                     {toolbar}
                     {

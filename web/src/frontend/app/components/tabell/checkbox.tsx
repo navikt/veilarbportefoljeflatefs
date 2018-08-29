@@ -16,6 +16,7 @@ function Checkbox({bruker, settMarkert, className}: CheckboxProps) {
                    id={`checkbox-${bruker.fnr}`}
                    type="checkbox"
                    checked={bruker.markert}
+                   disabled={bruker.fnr === ''}
                    onClick={() => settMarkert(bruker.fnr, !bruker.markert)}
             />
             <label className="skjemaelement__label brukerliste__checkbox" htmlFor={`checkbox-${bruker.fnr}`}/>
