@@ -119,7 +119,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             sideStorrelse,
         } = this.props;
 
-        const {antallTotalt, antallReturnert, fraIndex} = portefolje.data;
+        const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
 
         const harFilter = antallFilter(filtervalg) !== 0;
@@ -128,6 +128,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         }
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+        const antallValgt = brukere.filter((bruker) => bruker.markert).length;
 
         const toolbar = (<Toolbar
             filtergruppe={ListevisningType.enhetensOversikt}
@@ -148,9 +149,9 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     <TabellOverskrift
                         fraIndex={fraIndex}
                         antallIVisning={antallReturnert}
+                        antallValgt={antallValgt}
                         antallTotalt={antallTotalt}
                         visDiagram={visDiagram}
-                        tekst="enhet.portefolje.paginering.tekst"
                     />
                     {toolbar}
                     {
