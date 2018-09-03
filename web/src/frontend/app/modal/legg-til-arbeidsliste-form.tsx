@@ -17,7 +17,7 @@ import { AppState } from '../reducer';
 import { BrukerModell, VeilederModell, ArbeidslisteDataModell, Status } from '../model-interfaces';
 import Input from "../components/input/input";
 
-export const OVERSKRIFT_MAKS_LENGDE = 15;
+export const OVERSKRIFT_MAKS_LENGDE = 12;
 export const KOMMENTAR_MAKS_LENGDE = 500;
 
 export const begrensetOverskriftLengde = rules.maxLength(

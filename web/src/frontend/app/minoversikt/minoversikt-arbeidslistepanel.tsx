@@ -21,7 +21,7 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder, redigerArb
                         <span className="brukerliste__gutter-left brukerliste--min-width-minside"/>
                         <span className="brukerliste__innhold brukerliste__arbeidslisteinnhold flex--grow">
                             <UndertekstBold>
-                                <FormattedMessage id="arbeidsliste.kommentar.header"/>
+                                {bruker.arbeidsliste.overskrift}
                             </UndertekstBold>
                             <p>{bruker.arbeidsliste.kommentar}</p>
                             <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
