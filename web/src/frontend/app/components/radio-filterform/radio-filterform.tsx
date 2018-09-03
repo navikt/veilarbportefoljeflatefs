@@ -2,7 +2,6 @@ import * as React from 'react';
 import { reduxForm, Fields, Field, SubmitHandler } from 'redux-form';
 import { connect } from 'react-redux';
 import * as classNames from 'classnames';
-import { FormattedMessage } from 'react-intl';
 import { FiltervalgModell } from '../../model-interfaces';
 import { lagConfig } from '../../filtrering/filter-konstanter';
 import SubmitKnapp from './../submit-knapp';
@@ -21,49 +20,31 @@ interface ValgModell extends Field {
 function RenderFields({ names: unusedNames, valg, skjema, ...fields }: RenderFieldProps) {
     const fieldCls = (className) => classNames('skjemaelement skjemaelement--horisontal', className);
 
-    const fieldElements = Object.values(fields)
+    const elements = Object.values(fields)
             .map((value) => {
                 const { name, value: unusedValue, ...handler } = value.input;
                 const { label, className } = lagConfig(valg[value.input.name]);
 
-                return {
-                    element: (
-                        <div key={value.input.name} className={fieldCls(className)}>
-                            <Field
-                                id={value.input.name}
-                                name={skjema} value={name}
-                                component="input"
-                                type="radio"
-                                className="skjemaelement__input radioknapp"
-                                {...handler}
-                            />
-                            <label htmlFor={value.input.name} className="skjemaelement__label">
-                                {label}
-                            </label>
-                        </div>
-                    ),
-                    hidden: (className || '').endsWith('__hide')
-                };
+                return (
+                    <div key={value.input.name} className={fieldCls(className)}>
+                        <Field
+                            id={value.input.name}
+                            name={skjema} value={name}
+                            component="input"
+                            type="radio"
+                            className="skjemaelement__input radioknapp"
+                            {...handler}
+                        />
+                        <label htmlFor={value.input.name} className="skjemaelement__label">
+                            {label}
+                        </label>
+                    </div>
+                );
             });
-
-    const elements = fieldElements.map((fieldConfig) => fieldConfig.element);
-    const visibleElements = fieldElements
-            .reduce((antall, fieldConfig) => {
-                if (fieldConfig.hidden) {
-                    return antall;
-                }
-                return antall + 1;
-            }, 0);
 
     return (
         <div className="field__container">
             {elements}
-            <span className="text-hide" aria-live="polite" aria-atomic="true">
-                <FormattedMessage
-                    id="components.viser.antall.treff"
-                    values={{ antall: visibleElements }}
-                />
-            </span>
         </div>
     );
 }

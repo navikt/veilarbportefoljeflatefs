@@ -15,6 +15,7 @@ const MED_CREDENTIALS: RequestInit = {
 const VEILARBVEILEDER_URL = '/veilarbveileder';
 const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
+const FEATURE_URL = '/feature';
 
 export function hentVeiledersEnheter() {
     const url = `${VEILARBVEILEDER_URL}/api/veileder/enheter`;
@@ -99,4 +100,8 @@ export function httpArbeidsliste(arbeidsliste, method, additionalPath = '') {
 export function hentEnhetTiltak(enhetId) {
     const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/tiltak`;
     return fetchToJson(url, MED_CREDENTIALS);
+}
+
+export function hentFeature(feature: string) {
+    return fetchToJson(`${FEATURE_URL}/?feature=${feature}`);
 }

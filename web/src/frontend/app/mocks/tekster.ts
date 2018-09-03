@@ -368,7 +368,9 @@ export default {
             'modal.legg.til.arbeidsliste.infotekst':
                 'Du har valgt {antall, number} {antall, plural,\none {bruker}\nother {brukere}\n}. Skriv en kort kommentar og legg inn dato.',
             'enhet.portefolje.paginering.tekst':
-                '{ visDiagram, select,\n  true { Totalt {antallTotalt} brukere }\n  other { Viser {fraIndex}-{tilIndex} av totalt {antallTotalt} brukere }\n}',
+                '{ visDiagram, select,\n  true { Totalt {antallTotalt} brukere.}\n  other { Viser {fraIndex}-{tilIndex} av totalt {antallTotalt} brukere. }\n}',
+            'enhet.portefolje.antallbrukerevalgt':
+                '{ antallValgt, plural,\n =0 {Ingen brukere valgt} \n =1 {1 bruker valgt} other {{antallValgt} brukere valgt }\n }',
             'minoversikt.link.til.veilederoversikt':
                 'Til veilederoversikt',
             'minoversikt.diagram.header.dagpenger':

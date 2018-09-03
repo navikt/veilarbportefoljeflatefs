@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { endreFiltervalg } from '../ducks/filtrering';
+import { sjekkFeature } from '../ducks/features';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 import Barlabel from './barlabel';
 import {
@@ -15,8 +16,10 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
     INAKTIVE_BRUKERE,
-    MIN_ARBEIDSLISTE
+    MIN_ARBEIDSLISTE,
+    TRENGER_VURDERING
 } from './filter-konstanter';
+import { TRENGER_VURDERING_FEATURE } from '../konstanter';
 
 
 function BarInput({ skalSkjules, id, type, className, tekstId, antall, max, barClassname, firstInGroup, ...props }) {
@@ -156,6 +159,20 @@ class FiltreringStatus extends Component {
                 </div>
                 { this.props.filtergruppe === 'enhet' ? ufordelteBrukereCheckbox : nyeBrukereForVeilederCheckbox }
                 <BarInput
+                    id="trengerVurdering"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
+                    value="TRENGER_VURDERING"
+                    onChange={this.handleChange}
+                    checked={ferdigfilterListe.includes(TRENGER_VURDERING)}
+                    tekstId="enhet.filtering.filtrering.oversikt.trengervurdering.brukere.checkbox"
+                    antall={this.props.statustall.data.trengerVurdering}
+                    max={this.props.statustall.data.totalt}
+                    barClassname="trengerVurdering"
+                    skalSkjules={!this.props.sjekkFeature(TRENGER_VURDERING_FEATURE)}
+                />
+                <BarInput
                     id="venterPaSvarFraNAV"
                     type="radio"
                     name="ferdigfilter"
@@ -267,6 +284,7 @@ FiltreringStatus.defaultProps = {
 
 FiltreringStatus.propTypes = {
     endreFilter: PT.func.isRequired,
+    sjekkFeature: PT.func.isRequired,
     statustall: PT.shape({ data: statustallShape.isRequired }).isRequired,
     filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
     veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
@@ -275,7 +293,8 @@ FiltreringStatus.propTypes = {
 
 const mapStateToProps = (state) => ({
     enhet: state.enheter.valgtEnhet.enhet.enhetId,
-    statustall: state.statustall
+    statustall: state.statustall,
+    sjekkFeature: (feature) => sjekkFeature(state, feature)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

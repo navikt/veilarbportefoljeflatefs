@@ -3,22 +3,11 @@ import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
 import Toolbar from './../components/toolbar/toolbar';
-import {
-    getSorteringsFeltFromUrl,
-    getSorteringsRekkefolgeFromUrl
-} from '../utils/url-utils';
+import { getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl } from '../utils/url-utils';
 import EnhetTabell from './enhetsportefolje-tabell';
 import TabellOverskrift from './../components/tabell-overskrift';
-import {
-    enhetShape,
-    filtervalgShape,
-    portefoljeShape,
-    valgtEnhetShape,
-    veilederShape,
-    feilmeldingModalShape
-} from '../proptype-shapes';
 import { ASCENDING, DESCENDING } from '../konstanter';
-import { diagramSkalVises } from './../minoversikt/diagram/util';
+import { diagramSkalVises } from '../minoversikt/diagram/util';
 import Diagram from './../minoversikt/diagram/diagram';
 import VelgfilterMelding from './velg-filter-melding';
 import ServerFeilModal from '../modal/server-feil-modal';
@@ -29,6 +18,7 @@ import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmel
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { InjectedIntlProps } from 'react-intl';
+import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -63,6 +53,7 @@ interface EnhetsportefoljeVisningProps {
     closeServerfeilModal: () => void;
     feilmeldingModal: FeilmeldingModalModell;
     closeFeilmeldingModal: () => void;
+    sideStorrelse: number;
 }
 
 class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningProps & InjectedIntlProps> {
@@ -73,7 +64,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
 
         const sorteringsfelt = getSorteringsFeltFromUrl();
         const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
-        this.props.doSettSortering(sorteringsrekkefolge,sorteringsfelt);
+        this.props.doSettSortering(sorteringsrekkefolge, sorteringsfelt);
 
         hentPortefolje(
             valgtEnhet.enhet!.enhetId,
@@ -125,9 +116,10 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             closeServerfeilModal,
             feilmeldingModal,
             closeFeilmeldingModal,
+            sideStorrelse,
         } = this.props;
 
-        const {antallTotalt, antallReturnert, fraIndex} = portefolje.data;
+        const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
 
         const harFilter = antallFilter(filtervalg) !== 0;
@@ -136,6 +128,20 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         }
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+        const antallValgt = brukere.filter((bruker) => bruker.markert).length;
+
+        const toolbar = (<Toolbar
+            filtergruppe={ListevisningType.enhetensOversikt}
+            onPaginering={() => hentPortefolje(
+                valgtEnhet.enhet!.enhetId,
+                sorteringsrekkefolge,
+                sorteringsfelt,
+                filtervalg
+            )}
+            sokVeilederSkalVises
+            visningsmodus={visningsmodus}
+            antallTotalt={antallTotalt}
+        />);
 
         return (
             <div className="portefolje__container">
@@ -143,22 +149,11 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     <TabellOverskrift
                         fraIndex={fraIndex}
                         antallIVisning={antallReturnert}
+                        antallValgt={antallValgt}
                         antallTotalt={antallTotalt}
                         visDiagram={visDiagram}
-                        tekst="enhet.portefolje.paginering.tekst"
                     />
-                    <Toolbar
-                        filtergruppe={ListevisningType.enhetensOversikt}
-                        onPaginering={() => hentPortefolje(
-                            valgtEnhet.enhet!.enhetId,
-                            sorteringsrekkefolge,
-                            sorteringsfelt,
-                            filtervalg
-                        )}
-                        sokVeilederSkalVises
-                        visningsmodus={visningsmodus}
-                        antallTotalt={antallTotalt}
-                    />
+                    {toolbar}
                     {
                         visDiagram ?
                             <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet!.enhetId}/> :
@@ -167,6 +162,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
+                    {antallTotalt >= sideStorrelse && toolbar}
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}
@@ -194,6 +190,7 @@ const mapStateToProps = (state) => ({
     visningsmodus: state.paginering.visningsmodus,
     serverfeilModalSkalVises: state.serverfeilModal.modalVises,
     feilmeldingModal: state.feilmeldingModal,
+    sideStorrelse: selectSideStorrelse(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

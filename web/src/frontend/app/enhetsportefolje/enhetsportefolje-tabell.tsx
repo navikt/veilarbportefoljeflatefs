@@ -7,6 +7,8 @@ import { FiltervalgModell, Sorteringsrekkefolge, ValgtEnhetModell, VeilederModel
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { getFraBrukerFraUrl } from '../utils/url-utils';
+import { sjekkFeature } from '../ducks/features';
+import { TRENGER_VURDERING_FEATURE } from '../konstanter';
 
 interface EnhetTabellProps {
     portefolje: any;
@@ -17,6 +19,7 @@ interface EnhetTabellProps {
     settSorteringOgHentPortefolje: (sortering: string) => void;
     veiledere: VeilederModell;
     valgteKolonner: Kolonne[];
+    erVurderingFeaturePa: boolean;
 }
 
 const finnBrukersVeileder = (veiledere, bruker) => (veiledere.find((veileder) => veileder.ident === bruker.veilederId));
@@ -41,7 +44,7 @@ class EnhetTabell extends React.Component<EnhetTabellProps, {}> {
 
         return (
 
-            <div className="brukerliste typo-undertekst">
+            <div className="typo-undertekst blokk-xs">
                 <EnhetListehode
                     sorteringsrekkefolge={sorteringsrekkefolge}
                     sorteringOnClick={settSorteringOgHentPortefolje}
@@ -60,6 +63,7 @@ class EnhetTabell extends React.Component<EnhetTabellProps, {}> {
                             filtervalg={filtervalg}
                             valgteKolonner={valgteKolonner}
                             brukersVeileder={finnBrukersVeileder(veiledere, bruker)}
+                            erVurderingFeaturePa={this.props.erVurderingFeaturePa}
                         />
                     )}
                 </ul>
@@ -73,7 +77,8 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     filtervalg: state.filtrering,
-    valgteKolonner: selectValgteAlternativer(state, ListevisningType.enhetensOversikt)
+    valgteKolonner: selectValgteAlternativer(state, ListevisningType.enhetensOversikt),
+    erVurderingFeaturePa: sjekkFeature(state, TRENGER_VURDERING_FEATURE)
 });
 
 const mapDispatchToProps = (dispatch) => ({

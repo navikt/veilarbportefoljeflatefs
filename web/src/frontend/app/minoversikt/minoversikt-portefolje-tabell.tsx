@@ -14,6 +14,8 @@ import {
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { getFraBrukerFraUrl } from '../utils/url-utils';
+import { sjekkFeature } from '../ducks/features';
+import { TRENGER_VURDERING_FEATURE } from '../konstanter';
 
 interface MinOversiktTabellProps {
     portefolje: {
@@ -34,6 +36,7 @@ interface MinOversiktTabellProps {
     innloggetVeileder: string;
     valgteKolonner: Kolonne[];
     visesAnnenVeiledersPortefolje: boolean;
+    erVurderingFeaturePa: boolean;
 }
 
 class MinoversiktTabell extends React.Component<MinOversiktTabellProps, {}> {
@@ -54,7 +57,7 @@ class MinoversiktTabell extends React.Component<MinOversiktTabellProps, {}> {
         this.forrigeBruker = undefined;
 
         return (
-            <div className="minoversikt-liste__wrapper typo-undertekst">
+            <div className="minoversikt-liste__wrapper typo-undertekst blokk-xs">
                 <MinOversiktListehode
                     sorteringsrekkefolge={sorteringsrekkefolge}
                     sorteringOnClick={settSorteringOgHentPortefolje}
@@ -74,6 +77,7 @@ class MinoversiktTabell extends React.Component<MinOversiktTabellProps, {}> {
                             filtervalg={filtervalg}
                             valgteKolonner={valgteKolonner}
                             innloggetVeileder={innloggetVeileder}
+                            erVurderingFeaturePa={this.props.erVurderingFeaturePa}
                         />
                     )}
                 </ul>
@@ -88,7 +92,8 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     filtervalg: state.filtreringMinoversikt,
-    valgteKolonner: selectValgteAlternativer(state, ListevisningType.minOversikt)
+    valgteKolonner: selectValgteAlternativer(state, ListevisningType.minOversikt),
+    erVurderingFeaturePa: sjekkFeature(state, TRENGER_VURDERING_FEATURE)
 });
 
 const
@@ -96,8 +101,4 @@ const
         settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
     });
 
-export default connect(mapStateToProps, mapDispatchToProps)
-
-(
-    MinoversiktTabell
-);
+export default connect(mapStateToProps, mapDispatchToProps)(MinoversiktTabell);

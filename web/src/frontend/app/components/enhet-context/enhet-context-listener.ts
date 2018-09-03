@@ -60,7 +60,6 @@ export default class EnhetContextListener {
     }
 
     private onClose() {
-        const nyState = this.connection.getStatus() === Status.CLOSE ? EnhetConnectionState.NOT_CONNECTED : EnhetConnectionState.FAILED;
-        this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: nyState });
+        this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.NOT_CONNECTED });
     }
 }
