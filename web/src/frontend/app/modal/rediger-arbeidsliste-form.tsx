@@ -16,7 +16,7 @@ import {
     KOMMENTAR_MAKS_LENGDE, begrensetKommentarLengde, pakrevdTekst, begrensetOverskriftLengde,
     pakrevdOverskriftTekst
 } from './legg-til-arbeidsliste-form';
-import Input from "../components/input/input";
+import Input from '../components/input/input';
 
 function label(bruker) {
     return (<Undertittel><FormattedMessage
@@ -106,7 +106,6 @@ function oppdaterState(res, arbeidsliste, innloggetVeileder, fnr, lukkModal, dis
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
-    console.log('arbeidsliste', arbeidsliste);
 
     const arbeidslisteToDispatch = Array.of({
         ...arbeidsliste,
