@@ -27,7 +27,6 @@ function InnerInputComponent({ input, labelId, label, maxLength, errorMessage, .
     );
 }
 
-
 interface InputProps {
     feltNavn: string;
 }

@@ -72,24 +72,24 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 
 // arbeidsliste-api
 (mock as any).post('/veilarbportefolje/api/arbeidsliste/', respondWith((url, config, {bodyParams}) => {
-    return {"error": [], "data": bodyParams.map(arbeidsliste => arbeidsliste.fnr)}
+    return {error: [], data: bodyParams.map((arbeidsliste) => arbeidsliste.fnr)};
 }));
 (mock as any).put('express:/veilarbportefolje/api/arbeidsliste/:fnr', respondWith((url, config, {bodyParams}) => {
     return {
-        "sistEndretAv" : {
-            "veilederId" : "Z990007"
+        sistEndretAv : {
+            veilederId : 'Z990007'
         },
-        "endringstidspunkt" : "2018-06-21T10:39:17.153Z",
-        "kommentar" : `${bodyParams.kommentar}`,
-        "overskrift" : `${bodyParams.overskrift}`,
-        "frist" : `${bodyParams.frist}`,
-        "isOppfolgendeVeileder" : true,
-        "arbeidslisteAktiv" : null,
-        "harVeilederTilgang" : true
-    }
+        endringstidspunkt : '2018-06-21T10:39:17.153Z',
+        kommentar : `${bodyParams.kommentar}`,
+        overskrift : `${bodyParams.overskrift}`,
+        frist : `${bodyParams.frist}`,
+        isOppfolgendeVeileder : true,
+        arbeidslisteAktiv : null,
+        harVeilederTilgang : true
+    };
 }));
 (mock as any).post('/veilarbportefolje/api/arbeidsliste/delete', respondWith((url, config, {bodyParams}) => {
-    return {"error": [], "data": bodyParams.map(arbeidsliste => arbeidsliste.fnr)}
+    return {error: [], data: bodyParams.map((arbeidsliste) => arbeidsliste.fnr)};
 }));
 
 // modiacontextholder-api

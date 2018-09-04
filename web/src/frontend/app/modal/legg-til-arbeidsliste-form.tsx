@@ -15,7 +15,7 @@ import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { STATUS } from '../ducks/utils';
 import { AppState } from '../reducer';
 import { BrukerModell, VeilederModell, ArbeidslisteDataModell, Status } from '../model-interfaces';
-import Input from "../components/input/input";
+import Input from '../components/input/input';
 
 export const OVERSKRIFT_MAKS_LENGDE = 12;
 export const KOMMENTAR_MAKS_LENGDE = 500;

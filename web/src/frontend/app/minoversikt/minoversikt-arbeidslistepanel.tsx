@@ -15,13 +15,14 @@ interface ArbeidslistePanelProps {
 export default function ArbeidslistePanel({bruker, innloggetVeileder, redigerArbeidslisteModalIsOpen, lukkRedigerArbeidslisteModal, redigerOnClickHandler}: ArbeidslistePanelProps) {
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
     const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
+    const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : String.fromCharCode(8212);
     return (
         <article className="brukerliste__arbeidslistepanel">
             <span className="flex">
                         <span className="brukerliste__gutter-left brukerliste--min-width-minside"/>
                         <span className="brukerliste__innhold brukerliste__arbeidslisteinnhold flex--grow">
                             <UndertekstBold>
-                                {bruker.arbeidsliste.overskrift}
+                                {overskrift}
                             </UndertekstBold>
                             <p>{bruker.arbeidsliste.kommentar}</p>
                             <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
