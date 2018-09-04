@@ -133,6 +133,7 @@ export interface AktiviteterModell {
 
 export interface ArbeidslisteModell {
     kommentar?: string;
+    overskrift?: string;
     frist: string;
     arbeidslisteAktiv: boolean;
     endringstidspunkt: string; // dato

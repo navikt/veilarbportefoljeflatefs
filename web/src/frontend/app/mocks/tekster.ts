@@ -349,6 +349,8 @@ export default {
                 'Kommunikasjon med tjenesten for bruker i kontekst feilet. Dette betyr at det er fare for at du kan ha forskjellige brukere i forskjellige flater/vinduer.',
             'legg-til.arbeidsliste-form.feilmelding.tekst.mangler':
                 'Kommentar mangler',
+            'legg-til.arbeidsliste-form.feilmelding.overskrift.tekst.mangler':
+                'Overskrift mangler',
             'enhet.portefolje.tabell.veileder':
                 'Veileder',
             'filter.ytelse.aap':
@@ -474,6 +476,8 @@ export default {
             'datepicker.neste.maned':
                 'Neste måned',
             'legg-til-arbeidsliste-form.feilmelding.kommentar-lengde':
-                'Kommentaren kan ikke være lenger enn {KOMMENTAR_MAKS_LENGDE}'
+                'Kommentaren kan ikke være lenger enn {KOMMENTAR_MAKS_LENGDE}',
+            'legg-til-arbeidsliste-form.feilmelding.overskrift-lengde':
+                'Overskriften kan ikke være lenger enn {OVERSKRIFT_MAKS_LENGDE}'
         }
 };
