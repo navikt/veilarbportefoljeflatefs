@@ -99,9 +99,9 @@ function lagYtelse() {
     return out;
 }
 
-function lagOverskrift(){
+function lagOverskrift() {
     const maybeOverskrift = rnd(0, 1);
-    if(maybeOverskrift > 0.5){
+    if(maybeOverskrift > 0.5) {
         return faker.random.word().substr(0,12);
     }
     return null;

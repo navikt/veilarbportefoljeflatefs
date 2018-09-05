@@ -11,7 +11,7 @@ import {
 import DatoKolonne from '../components/datokolonne';
 import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
-import ArbeidslisteOverskrift from "../components/tabell/arbeidslisteoverskrift";
+import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 
 interface MinOversiktKolonnerProps {
     className?: string;
