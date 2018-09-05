@@ -411,6 +411,8 @@ export default {
                 'Enheten har ingen brukere',
             'veileder.portefolje.tittel':
                 'Portefølje',
+            'portefolje.tabell.arbeidslisteoverskrift':
+                'Kommentar',
             'portefolje.tabell.utlopsdato':
                 'Gjenstår',
             'listevisning.valg.veileder':

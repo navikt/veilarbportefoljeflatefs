@@ -99,6 +99,14 @@ function lagYtelse() {
     return out;
 }
 
+function lagOverskrift(){
+    const maybeOverskrift = rnd(0, 1);
+    if(maybeOverskrift > 0.5){
+        return faker.random.word().substr(0,12);
+    }
+    return null;
+}
+
 function lagArbeidsliste() {
     const maybeArbeidsliste = rnd(0, 1);
     if (maybeArbeidsliste > 0.5) {
@@ -112,6 +120,7 @@ function lagArbeidsliste() {
     }
 
     return ({
+        overskrift: lagOverskrift(),
         kommentar: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure do',
         frist: new Date(),
         isOppfolgendeVeileder: true,

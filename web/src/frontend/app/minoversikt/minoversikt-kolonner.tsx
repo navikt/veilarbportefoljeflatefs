@@ -11,6 +11,7 @@ import {
 import DatoKolonne from '../components/datokolonne';
 import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
+import ArbeidslisteOverskrift from "../components/tabell/arbeidslisteoverskrift";
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -41,6 +42,16 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2" bruker={bruker}/>
+            <DatoKolonne
+                className="col col-xs-2"
+                dato={arbeidslisteFrist}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+            />
+            <ArbeidslisteOverskrift
+                className="col col-xs-2"
+                bruker={bruker}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+            />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
@@ -57,11 +68,6 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
                 skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING)}
-            />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={arbeidslisteFrist}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
             />
             <UkeKolonne
                 className="col col-xs-2"
