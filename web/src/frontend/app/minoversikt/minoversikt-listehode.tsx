@@ -55,7 +55,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             id="enhet.portefolje.tabell.bruker"
                         />
                         <Listeoverskrift
-                            className="listeoverskrift__arbeidsliste listeoverskrift col col-xs-2"
+                            className="listeoverskrift__arbeidsliste listeoverskrift col col-xs-4"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                             id="portefolje.tabell.arbeidsliste"
                         />
@@ -137,6 +137,15 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
                             tekstId="portefolje.tabell.fodselsnummer"
+                        />
+                        <SorteringHeader
+                            sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                            tekstId="portefolje.tabell.arbeidslisteoverskrift"
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                            className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
