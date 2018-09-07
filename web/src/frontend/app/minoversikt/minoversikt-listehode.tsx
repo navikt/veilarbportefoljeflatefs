@@ -157,6 +157,15 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
+                            sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                            tekstId="portefolje.tabell.arbeidslisteoverskrift"
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                            className="sortering-header__dato col col-xs-2"
+                        />
+                        <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
