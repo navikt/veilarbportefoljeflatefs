@@ -139,20 +139,20 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             tekstId="portefolje.tabell.fodselsnummer"
                         />
                         <SorteringHeader
-                            sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                            onClick={sorteringOnClick}
-                            rekkefolge={sorteringsrekkefolge}
-                            erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                            tekstId="portefolje.tabell.arbeidslisteoverskrift"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
-                            className="sortering-header__dato col col-xs-2"
-                        />
-                        <SorteringHeader
                             sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
                             tekstId="portefolje.tabell.ddmmyy"
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                            className="sortering-header__dato col col-xs-2"
+                        />
+                        <SorteringHeader
+                            sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                            tekstId="portefolje.tabell.arbeidslisteoverskrift"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                             className="sortering-header__dato col col-xs-2"
                         />
