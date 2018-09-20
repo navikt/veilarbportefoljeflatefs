@@ -18,8 +18,8 @@
     ]
   },
   "include": [
-    "app/**/*",
-    "@types/*"
+    "src/app/**/*",
+    "src/@types/*"
   ],
   "exclude": [
     "node_modules",

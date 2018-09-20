@@ -6,7 +6,7 @@
   "author": "NAV",
   "license": "MIT",
   "devDependencies": {
-    "@navikt/react-intl-bundler": "^1.0.2",
+    "@navikt/react-intl-bundler": "^1.0.3",
     "@types/classnames": "2.2.3",
     "@types/faker": "4.1.1",
     "@types/fetch-mock": "5.12.0",
@@ -112,9 +112,9 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "build": "webpack -p",
+    "build": "npm run build:tekster && webpack -p",
     "build:tekster": "react-intl-bundler ./tekster ./tekster-built",
-    "dev": " node webpack-dev-server --env.dev --env.mock",
+    "dev": "npm run build:tekster && webpack-dev-server --env.dev --env.mock",
     "watch": "webpack --watch --env.dev",
     "watch:mock": "webpack --watch --env.dev --env.mock",
     "test": "mocha",
