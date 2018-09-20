@@ -1,6 +1,6 @@
 .idea/*
-.tekster-built/
-.build/
+.tekster-built/**/*
+.build/**/*
 !.idea/runConfigurations
 *.iml
 *.ipr

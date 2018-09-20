@@ -1,19 +1,49 @@
 # ref https://raw.githubusercontent.com/nais/naisd/master/nais_example.yaml
 image: docker.adeo.no:5000/fo/veilarbportefoljeflatefs
+team: oppfolging
 replicas:
   min: 2
   max: 4
   cpuThresholdPercentage: 50
-port: 80
+port: 8080
 healthcheck:
   liveness:
-    path: isAlive
-    initialDelay: 10
+    path: veilarbportefoljeflatefs/internal/isAlive
+    initialDelay: 20
   readiness:
-    path: isReady
-    initialDelay: 10
+    path: veilarbportefoljeflatefs/internal/selftest
+    initialDelay: 20
 fasitResources:
   used:
   - alias: loadbalancer:veilarbportefoljeflatefs
     resourceType: loadbalancerconfig
-team: oppfolging
+  - alias: srvveilarbportefoljeflatefs
+    resourceType: credential
+
+  - alias: iadecorator-js
+    resourceType: restservice
+  - alias: modiaeventdistribution-isalive
+    resourceType: restservice
+  - alias: veiledercontext-isalive
+    resourceType: restservice
+
+  - alias: veilarbprotefoljePingURL
+    resourceType: baseUrl
+  - alias: veilarbveilederPingURL
+    resourceType: baseUrl
+
+  - alias: isso-jwks
+    resourceType: baseUrl
+  - alias: isso-rp-user
+    resourceType: credential
+  - alias: isso-host
+    resourceType: baseUrl
+  - alias: isso-issuer
+    resourceType: baseUrl
+  - alias: isso.isalivegit
+    resourceType: baseUrl
+
+  - alias: veilarblogin.redirect-url
+    resourceType: baseUrl
+    propertyMap:
+      url: OIDC_REDIRECT_URL

@@ -70,7 +70,8 @@ module.exports = function(env) {
         devtool: isDev ? 'source-map' : false,
         output: {
             path: PATHS.WEBAPP,
-            filename: 'js/bundle.js'
+            filename: 'js/bundle.js',
+            publicPath: CONTEXTPATH,
         },
         stats: {
             children: false
