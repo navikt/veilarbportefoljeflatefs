@@ -9,10 +9,11 @@ import { settSide } from './ducks/ui/side';
 import history from './history';
 import { enhetShape, valgtEnhetShape, veiledereShape } from './proptype-shapes';
 import EnhetContext from './components/enhet-context/enhet-context';
-import tekstBundle from './../../tekster-built/intl'
+import tekstBundle from './../../tekster-built/bundle'
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(location.search).vistekster; // eslint-disable-line no-undef
+    console.log(ledetekster);
     if (skalViseTekstnokkel) {
         return Object.keys(ledetekster).reduce((obj, curr) => ({ ...obj, [curr]: curr }), {});
     }
@@ -73,10 +74,6 @@ Application.propTypes = {
     routes: PT.arrayOf(PT.object).isRequired,
     side: PT.string.isRequired,
     children: PT.oneOfType([PT.arrayOf(PT.node), PT.node]),
-    ledetekster: PT.shape({
-        status: PT.string.isRequired,
-        data: PT.shape({ nb: PT.objectOf(PT.string).isRequired }).isRequired
-    }).isRequired,
     enheter: PT.shape({
         data: PT.arrayOf(enhetShape).isRequired,
         valgtEnhet: valgtEnhetShape.isRequired,
