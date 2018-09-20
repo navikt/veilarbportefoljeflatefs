@@ -2,4 +2,4 @@
 --require ignore-styles
 --require ./test/DOM-setup.js
 --require test/tshook.js
---recursive app/**/*-test.@(js|ts)
+--recursive src/app/**/*-test.@(js|ts)
