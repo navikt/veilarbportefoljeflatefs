@@ -1,0 +1,1 @@
+{fornavn} {etternavn}, {fnr}

@@ -1,4 +1,6 @@
 .idea/*
+.tekster-built/**/*
+.build/**/*
 !.idea/runConfigurations
 *.iml
 *.ipr
@@ -24,4 +26,4 @@ npm-debug.log
 .project
 .settings
 .DS_Store
-web/src/frontend/.nyc_output/
+.nyc_output/
