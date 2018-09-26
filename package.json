@@ -6,7 +6,7 @@
   "author": "NAV",
   "license": "MIT",
   "devDependencies": {
-    "@navikt/react-intl-bundler": "^1.0.3",
+    "@navikt/react-intl-bundler": "^1.0.4",
     "@types/classnames": "2.2.3",
     "@types/faker": "4.1.1",
     "@types/fetch-mock": "5.12.0",
