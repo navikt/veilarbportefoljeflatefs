@@ -25,6 +25,10 @@ class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPor
         this.lukkModal = this.lukkModal.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({ isOpen: nextProps.isOpen });
+    }
+
     lukkModal() {
         this.setState({ isOpen: false });
     }
