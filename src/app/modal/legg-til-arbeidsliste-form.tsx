@@ -69,8 +69,8 @@ function renderFelter({ fields }) {
 
                         <Input
                             feltNavn={`${name}.overskrift`}
-                            label="Overskrift/emne"
-                            bredde="10px"
+                            label="Tittel"
+                            bredde="M"
                         />
 
                         <Textarea
