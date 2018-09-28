@@ -51,8 +51,8 @@ function RedigerArbeidslisteForm({ lukkModal,
                 <div className="nav-input blokk-s">
                     <Input
                         feltNavn="overskrift"
-                        label="Overskrift/emne"
-                        bredde="10px"
+                        label="Tittel"
+                        bredde="M"
                     />
                     <Textarea
                         labelId={'kommentar'}
