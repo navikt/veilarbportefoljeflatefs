@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import Modal from 'nav-frontend-modal';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import { injectIntl, InjectedIntl } from 'react-intl';
+import {AppState} from "../reducer";
 
 Modal.setAppElement('#applikasjon');
 
@@ -59,4 +61,8 @@ class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPor
     }
 }
 
-export default injectIntl(TomPortefoljeModal);
+const mapStateToProps= (state: AppState): TomPortefoljeModalState =>({
+    isOpen: state.statustall.data.totalt === 0,
+});
+
+export default injectIntl(connect(mapStateToProps, {}) (TomPortefoljeModal));
