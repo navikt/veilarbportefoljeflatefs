@@ -30,7 +30,8 @@ function VelgalleCheckboks({ skalVises, disabled, markerAlle, alleMarkert }: Vel
 
 const mapStateToProps = (state) => {
     const brukere = state.portefolje.data.brukere;
-    const alleMarkert = brukere.length > 0 && brukere.every((bruker) => bruker.markert === true);
+    const alleMarkert = brukere.length > 0 && brukere
+        .every((bruker) => ((bruker.fnr !=='' && bruker.markert) || bruker.fnr === ''));
     const disabled = brukere.length === 0;
 
     return { alleMarkert, disabled };

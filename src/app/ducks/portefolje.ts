@@ -182,7 +182,13 @@ export default function reducer(state = initialState, action): PortefoljeState {
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: state.data.brukere.map((bruker) => ({ ...bruker, markert: action.markert }))
+                    brukere: state.data.brukere
+                        .map((bruker) => {
+                            if(bruker.fnr !== '') {
+                                return {...bruker, markert: action.markert};
+                            }
+                            return {...bruker};
+                        })
                 }
             };
         }
