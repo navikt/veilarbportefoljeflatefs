@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Modal from 'nav-frontend-modal';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import { injectIntl, InjectedIntl } from 'react-intl';
