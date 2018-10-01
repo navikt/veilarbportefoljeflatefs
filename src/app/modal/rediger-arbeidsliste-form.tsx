@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Knapp } from 'nav-frontend-knapper';
 import { validForm, rules } from 'react-redux-form-validation';
 import { FormattedMessage } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Undertittel, Undertekst } from 'nav-frontend-typografi';
 import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
@@ -49,6 +49,7 @@ function RedigerArbeidslisteForm({ lukkModal,
         <form onSubmit={handleSubmit}>
             <div className="input-fields">
                 <div className="nav-input blokk-s">
+                    {label(bruker)}
                     <Input
                         feltNavn="overskrift"
                         label="Tittel"
@@ -56,7 +57,7 @@ function RedigerArbeidslisteForm({ lukkModal,
                     />
                     <Textarea
                         labelId={'kommentar'}
-                        label={label(bruker)}
+                        label="Kommentar"
                         feltNavn={'kommentar'}
                         placeholder=""
                         maxLength={KOMMENTAR_MAKS_LENGDE}
@@ -64,7 +65,7 @@ function RedigerArbeidslisteForm({ lukkModal,
                         visTellerFra={500}
                     />
                 </div>
-                <p className="arbeidsliste--modal-redigering">
+                <Undertekst className="arbeidsliste--modal-redigering">
                     <FormattedMessage
                         id="arbeidsliste.kommentar.footer"
                         values={{
@@ -72,7 +73,7 @@ function RedigerArbeidslisteForm({ lukkModal,
                             veileder: sistEndretAv
                         }}
                     />
-                </p>
+                </Undertekst>
                 <Datovelger
                     feltNavn={'frist'}
                     labelId="arbeidsliste-form.label.dato"
