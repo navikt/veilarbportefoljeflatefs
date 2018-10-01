@@ -143,6 +143,8 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             antallTotalt={antallTotalt}
         />);
 
+        const visNedreToolbar = (antallTotalt >= sideStorrelse && !visDiagram) && toolbar;
+
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
@@ -162,7 +164,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
-                    {antallTotalt >= sideStorrelse && toolbar}
+                    {visNedreToolbar}
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}
