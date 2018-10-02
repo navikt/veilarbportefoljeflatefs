@@ -40,13 +40,13 @@ function Etiketter({className, bruker, erVurderingFeaturePa}: EtiketterProps) {
                 type={EtikettType.IKKE_VURDERT}
                 skalVises={erVurderingFeaturePa && bruker.trengerVurdering === true && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.ikke.vurdert"/>
+                <FormattedMessage id="enhet.portefolje.tabelletikett.ikke_vurdert"/>
             </Etikett>
             <Etikett
                 type={EtikettType.BEHOV_AEV}
                 skalVises={erVurderingFeaturePa && bruker.trengerVurdering === true && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.behov.aev_nb"/>
+                <FormattedMessage id="enhet.portefolje.tabelletikett.behov_aev"/>
             </Etikett>
         </span>
     );
