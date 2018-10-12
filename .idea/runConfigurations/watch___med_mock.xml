@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="watch - med mock" type="js.build_tools.npm" factoryName="npm">
-    <package-json value="$PROJECT_DIR$/web/src/frontend/package.json" />
+    <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
       <script value="watch:mock" />
