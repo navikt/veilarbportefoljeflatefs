@@ -1,5 +1,8 @@
 import WebSocketImpl, { Status } from './websocket-impl';
 
+const frontendlogger = (window as any).frontendlogger;
+const warn = (frontendlogger && frontendlogger.warn) || (() => null);
+
 export enum EnhetConnectionState {
     CONNECTED = 'connected',
     NOT_CONNECTED = 'not_connected',
@@ -55,8 +58,13 @@ export default class EnhetContextListener {
         }
     }
 
-    private onError(e: ErrorEvent) {
+    private onError(errorEvent: ErrorEvent) {
         this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.FAILED });
+        const webSocket = (errorEvent.srcElement as any);
+        warn({
+            ...errorEvent,
+            websocketUrl: webSocket && webSocket.url
+        });
     }
 
     private onClose() {
