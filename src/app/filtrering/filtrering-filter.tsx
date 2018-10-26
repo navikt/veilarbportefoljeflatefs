@@ -16,7 +16,8 @@ import {
     rettighetsgruppe,
     servicegruppe,
     ytelse,
-    manuellBrukerStatus
+    manuellBrukerStatus,
+    hovedmal
 } from './filter-konstanter';
 
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
@@ -68,6 +69,14 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     <CheckboxFilterform
                         form="innsatsgruppe"
                         valg={innsatsgruppe(intl)}
+                        onSubmit={actions.endreFiltervalg}
+                        filtervalg={filtervalg}
+                    />
+                </Dropdown>
+                <Dropdown name="Hovedmal">
+                    <CheckboxFilterform
+                        form="hovedmal"
+                        valg={hovedmal(intl)}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
