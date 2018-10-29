@@ -30,8 +30,8 @@ fasitResources:
     resourceType: baseUrl
   - alias: isso.isalive
     resourceType: baseUrl
-
   - alias: veilarblogin.redirect-url
-    resourceType: baseUrl
+    resourceType: restservice
+
     propertyMap:
       url: OIDC_REDIRECT_URL
