@@ -480,6 +480,12 @@ export default {
             'legg-til-arbeidsliste-form.feilmelding.kommentar-lengde':
                 'Kommentaren kan ikke være lenger enn {KOMMENTAR_MAKS_LENGDE}',
             'legg-til-arbeidsliste-form.feilmelding.overskrift-lengde':
-                'Overskriften kan ikke være lenger enn {OVERSKRIFT_MAKS_LENGDE}'
+                'Overskriften kan ikke være lenger enn {OVERSKRIFT_MAKS_LENGDE}',
+            'filter.hovedmal.skaffe_arbeid':
+                'Skaffe arbeid',
+            'filter.hovedmal.beholde_arbeid':
+                'Beholde arbeid',
+            'filter.hovedmal.oke_deltakelse_om_arbeid':
+                'Øke deltakelse eller mål om arbeid'
         }
 };

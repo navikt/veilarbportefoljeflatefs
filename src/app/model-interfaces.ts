@@ -54,6 +54,7 @@ export interface FiltervalgModell {
     ytelse: string;
     aktiviteter?: string[];
     tiltakstyper: string[];
+    hovedmal?: string[];
 }
 
 export interface EnhetModell {

@@ -62,6 +62,12 @@ export const innsatsgruppe = (intl) => ({
     VARIG: intl.formatMessage({id: 'filter.innsatsgruppe.varig'})
 });
 
+export const hovedmal = (intl) => ({
+    SKAFFEA : intl.formatMessage({id: 'filter.hovedmal.skaffe.arbeid'}),
+    BEHOLDEA: intl.formatMessage({id: 'filter.hovedmal.beholde_arbeid'}),
+    OKEDELT: intl.formatMessage({id: 'filter.hovedmal.oke_deltakelse_om_arbeid'}),
+});
+
 export const formidlingsgruppe = (intl) => ({
     ARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.arbs'}),
     IARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.iarbs'}),
@@ -139,6 +145,7 @@ export default {
     fodselsdagIMnd,
     kjonn,
     innsatsgruppe,
+    hovedmal,
     formidlingsgruppe,
     servicegruppe,
     ytelse,
