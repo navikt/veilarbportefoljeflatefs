@@ -63,7 +63,7 @@ export const innsatsgruppe = (intl) => ({
 });
 
 export const hovedmal = (intl) => ({
-    SKAFFEA : intl.formatMessage({id: 'filter.hovedmal.skaffe.arbeid'}),
+    SKAFFEA : intl.formatMessage({id: 'filter.hovedmal.skaffe_arbeid'}),
     BEHOLDEA: intl.formatMessage({id: 'filter.hovedmal.beholde_arbeid'}),
     OKEDELT: intl.formatMessage({id: 'filter.hovedmal.oke_deltakelse_om_arbeid'}),
 });
