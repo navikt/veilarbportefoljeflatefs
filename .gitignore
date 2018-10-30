@@ -1,5 +1,5 @@
 .idea/*
-.tekster-built/**/*
+tekster-built/
 .build/**/*
 !.idea/runConfigurations
 *.iml

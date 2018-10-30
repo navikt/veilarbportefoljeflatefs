@@ -114,7 +114,8 @@
   "scripts": {
     "build": "npm run build:tekster && webpack -p",
     "build:tekster": "react-intl-bundler ./tekster ./tekster-built",
-    "dev": "npm run build:tekster && webpack-dev-server --env.dev --env.mock",
+    "dev:mock": "npm run build:tekster && webpack-dev-server --env.dev --env.mock",
+    "dev": "npm run build:tekster && webpack-dev-server --env.dev --port 9593",
     "watch": "webpack --watch --env.dev",
     "watch:mock": "webpack --watch --env.dev --env.mock",
     "test": "mocha",
