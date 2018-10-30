@@ -23,8 +23,8 @@ const FILES_TO_COPY_PROD = [
     {from: './index.prod.html', to: path.join(PATHS.WEBAPP, 'index.html')},
 ];
 
-function plugins(isMock) {
-    const FILES_TO_COPY = isMock ? FILES_TO_COPY_MOCK : FILES_TO_COPY_PROD;
+function plugins(isMock, isDev) {
+    const FILES_TO_COPY = isDev ? FILES_TO_COPY_MOCK : FILES_TO_COPY_PROD;
 
     return [
         new ExtractTextPlugin('css/index.css'),
@@ -76,7 +76,7 @@ module.exports = function(env) {
         stats: {
             children: false
         },
-        plugins: plugins(isMock),
+        plugins: plugins(isMock, isDev),
         module: {
             rules: RULES
         },
