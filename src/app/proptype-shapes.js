@@ -81,7 +81,8 @@ export const filtervalgShape = PT.shape({
     formidlingsgruppe: PT.arrayOf(PT.string),
     servicegruppe: PT.arrayOf(PT.string),
     veiledere: PT.arrayOf(PT.string),
-    ytelse: PT.string
+    ytelse: PT.string,
+    hovedmal: PT.arrayOf(PT.string)
 });
 
 export const filtervalgLabelShape = PT.shape({
@@ -98,7 +99,8 @@ export const filtervalgLabelShape = PT.shape({
     formidlingsgruppe: PT.arrayOf(PT.string),
     servicegruppe: PT.arrayOf(PT.string),
     veiledere: PT.arrayOf(PT.object),
-    ytelse: PT.string
+    ytelse: PT.string,
+    hovedmal: PT.arrayOf(PT.string)
 });
 
 export const statustallShape = PT.shape({

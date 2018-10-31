@@ -73,7 +73,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
-                <Dropdown name="Hovedmal">
+                <Dropdown name="Hovedmål">
                     <CheckboxFilterform
                         form="hovedmal"
                         valg={hovedmal(intl)}
