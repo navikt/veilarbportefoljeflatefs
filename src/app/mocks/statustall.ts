@@ -11,4 +11,5 @@ export default {
     ikkeIavtaltAktivitet: 1231,
     iavtaltAktivitet: 2323,
     minArbeidsliste: 10,
+    erSykmeldtMedArbeidsgiver: 20,
 };

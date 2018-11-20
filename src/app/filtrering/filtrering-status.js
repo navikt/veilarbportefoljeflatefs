@@ -17,9 +17,10 @@ import {
     VENTER_PA_SVAR_FRA_NAV,
     INAKTIVE_BRUKERE,
     MIN_ARBEIDSLISTE,
-    TRENGER_VURDERING
+    TRENGER_VURDERING,
+    ER_SYKMELDT_MED_ARBEIDSGIVER
 } from './filter-konstanter';
-import { TRENGER_VURDERING_FEATURE } from '../konstanter';
+import { TRENGER_VURDERING_FEATURE, ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE } from '../konstanter';
 
 
 function BarInput({ skalSkjules, id, type, className, tekstId, antall, max, barClassname, firstInGroup, ...props }) {
@@ -171,6 +172,20 @@ class FiltreringStatus extends Component {
                     max={this.props.statustall.data.totalt}
                     barClassname="trengerVurdering"
                     skalSkjules={!this.props.sjekkFeature(TRENGER_VURDERING_FEATURE)}
+                />
+                <BarInput
+                    id="erSykmeldtMedArbeidsgiver"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
+                    value= "ER_SYKMELDT_MED_ARBEIDSGIVER"
+                    onChange={this.handleChange}
+                    checked={ferdigfilterListe.includes(ER_SYKMELDT_MED_ARBEIDSGIVER)}
+                    tekstId="enhet.filtering.filtrering.oversikt.ersykmeldtmedarbeidsgiver.bruker.checkbox"
+                    antall={this.props.statustall.data.erSykmeldtMedArbeidsgiver}
+                    max={this.props.statustall.data.totalt}
+                    barClassname="erSykmeldtMedArbeidsgiver"
+                    skalSkjules={!this.props.sjekkFeature(ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE)}
                 />
                 <BarInput
                     id="venterPaSvarFraNAV"

@@ -11,6 +11,7 @@ export const UTLOPTE_AKTIVITETER = 'UTLOPTE_AKTIVITETER';
 export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
+export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 
 export const FILTERGRUPPE_ENHET = 'enhet';
 
@@ -31,7 +32,8 @@ export const ferdigfilterListe = ()=> ({
     UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
-    MIN_ARBEIDSLISTE: 'Min arbeidsliste'
+    MIN_ARBEIDSLISTE: 'Min arbeidsliste',
+    ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldte med behov for dialog'
 });
 
 export const alder = (intl) => ({
