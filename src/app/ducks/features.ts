@@ -1,5 +1,6 @@
 import { AppState } from '../reducer';
-import { hentFeature } from '../middleware/api';
+import { hentFeatures } from '../middleware/api';
+import {PORTEFOLJE_FEATURES} from "../konstanter";
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
 
@@ -23,9 +24,12 @@ export default function reducer(state: FeaturesState = initalState, action): Fea
 }
 
 // Action Creators
-export function hentFeatureFraUnleash(feature: string) {
+export function hentFeaturesFraUnleash() {
+    const featureUrl = PORTEFOLJE_FEATURES
+        .map(feature => `feature=${feature}`)
+        .join("&");
     return (dispatch) => {
-        hentFeature(feature)
+        hentFeatures(featureUrl)
             .then((json) => dispatch({
                 type: ADD_FEATURE,
                 features: json
