@@ -102,6 +102,6 @@ export function hentEnhetTiltak(enhetId) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentFeatures(features: string) {
-    return fetchToJson(`${FEATURE_URL}?${features}`);
+export function hentFeatures(featureQueryString: string) {
+    return fetchToJson(`${FEATURE_URL}?${featureQueryString}`);
 }
