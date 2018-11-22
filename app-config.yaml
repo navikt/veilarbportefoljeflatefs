@@ -13,6 +13,7 @@ healthcheck:
   readiness:
     path: veilarbportefoljeflatefs/internal/selftest
     initialDelay: 20
+
 fasitResources:
   used:
   - alias: loadbalancer:veilarbportefoljeflatefs
@@ -35,3 +36,6 @@ fasitResources:
 
     propertyMap:
       url: OIDC_REDIRECT_URL
+
+alertProfiles:
+  - basic

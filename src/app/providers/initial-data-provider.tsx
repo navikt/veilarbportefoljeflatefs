@@ -3,17 +3,16 @@ import { connect } from 'react-redux';
 import { parse } from 'query-string';
 import { EnheterState, hentEnheterForVeileder, velgEnhetForVeileder } from '../ducks/enheter';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
-import { hentFeatureFraUnleash } from '../ducks/features';
+import { hentFeaturesFraUnleash} from '../ducks/features';
 import { hentAktivEnhet } from '../components/enhet-context/context-api';
 import { STATUS } from '../ducks/utils';
 import { leggEnhetIUrl } from '../utils/url-utils';
 import { settEnhetIDekorator } from '../eventhandtering';
 import { enhetShape, valgtEnhetShape } from '../proptype-shapes';
 import Application from './../application';
-import { TRENGER_VURDERING_FEATURE } from '../konstanter';
 
 interface DispatchProps {
-    hentFeature(feature: string): void;
+    hentFeatures(): void;
     hentEnheter(): void;
     hentVeiledere(enhetId: string): void;
     velgEnhet(enhetId: string): void;
@@ -28,7 +27,7 @@ type InitialDataProviderProps = DispatchProps & StateProps;
 class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> {
     componentDidMount() {
         this.props.hentEnheter();
-        this.props.hentFeature(TRENGER_VURDERING_FEATURE);
+        this.props.hentFeatures();
     }
 
     componentDidUpdate() {
@@ -72,8 +71,8 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> 
         const {...props} = this.props;
 
         return <div>
-                <Application {...props}/>
-            </div>;
+            <Application {...props}/>
+        </div>;
     }
 
 }
@@ -84,7 +83,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentFeature: (feature: string) => dispatch(hentFeatureFraUnleash(feature)),
+    hentFeatures: () => dispatch(hentFeaturesFraUnleash()),
     hentEnheter: () => dispatch(hentEnheterForVeileder()),
     hentVeiledere: (enhet) => dispatch(hentVeiledereForEnhet(enhet)),
     velgEnhet: (enhetid) => dispatch(velgEnhetForVeileder({enhetId: enhetid}))
