@@ -19,6 +19,7 @@ export interface StatustallState {
         ikkeIavtaltAktivitet: number;
         iavtaltAktivitet: number;
         minArbeidsliste: number;
+        erSykmeldtMedArbeidsgiver: number;
     };
 }
 
@@ -33,7 +34,8 @@ const initalState: StatustallState = {
         utlopteAktiviteter: 0,
         ikkeIavtaltAktivitet: 0,
         iavtaltAktivitet: 0,
-        minArbeidsliste: 0
+        minArbeidsliste: 0,
+        erSykmeldtMedArbeidsgiver: 0,
     }
 };
 
