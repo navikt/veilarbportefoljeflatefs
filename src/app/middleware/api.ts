@@ -103,5 +103,5 @@ export function hentEnhetTiltak(enhetId) {
 }
 
 export function hentFeatures(featureQueryString: string) {
-    return fetchToJson(`${FEATURE_URL}?${featureQueryString}`);
+    return fetchToJson(`${API_BASE_URL}${FEATURE_URL}?${featureQueryString}`);
 }
