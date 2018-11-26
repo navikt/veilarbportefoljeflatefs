@@ -25,11 +25,11 @@ export default function reducer(state: FeaturesState = initalState, action): Fea
 
 // Action Creators
 export function hentFeaturesFraUnleash() {
-    const featureUrl = PORTEFOLJE_FEATURES
+    const featureQueryString = PORTEFOLJE_FEATURES
         .map(feature => `feature=${feature}`)
         .join("&");
     return (dispatch) => {
-        hentFeatures(featureUrl)
+        hentFeatures(featureQueryString)
             .then((json) => dispatch({
                 type: ADD_FEATURE,
                 features: json
