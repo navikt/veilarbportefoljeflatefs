@@ -32,6 +32,7 @@ export interface FiltreringState {
     ytelse: null;
     manuellBrukerStatus: string[];
     hovedmal: string[];
+    navnEllerFnrQuery : string;
 }
 
 //  Reducer
@@ -51,6 +52,7 @@ export const initialState = {
     ytelse: null,
     manuellBrukerStatus: [],
     hovedmal: [],
+    navnEllerFnrQuery : '',
 };
 
 function fjern(verdi, fjernVerdi) {
@@ -70,6 +72,7 @@ function fjern(verdi, fjernVerdi) {
 }
 
 export default function reducer(state: FiltreringState = initialState, action): FiltreringState {
+    console.log('action', action);
     switch (action.type) {
         case CLEAR_FILTER:
             return initialState;
@@ -150,4 +153,8 @@ export function clearFiltervalg(filtergruppe = 'enhet', veileder) {
         dispatch({ type: CLEAR_FILTER, name: filtergruppe });
         oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
     };
+}
+
+export function dispatchEndreFiltervalg(filterId, filterVerdi, filtergruppe ){
+    return (dispatch) => dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
 }

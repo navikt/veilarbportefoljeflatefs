@@ -2,10 +2,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { veilederShape, filtervalgShape } from '../proptype-shapes';
-import FiltreringStatus from './filtrering-status';
+import FiltreringStatus from  './filtrering-status';
 import FiltreringFilter from './filtrering-filter';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
+import FiltreringNavnOgFnr from "./filtering-navnogfnr";
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -51,6 +52,18 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                     enhettiltak={enhettiltak}
                 />
             </Ekspanderbartpanel>
+            {filtergruppe === 'veileder' &&
+            <Ekspanderbartpanel
+                apen
+                className="blokk-xxxs"
+                tittel="Søk"
+                tittelProps="systemtittel"
+            >
+                <FiltreringNavnOgFnr
+                    veileder={veileder}
+                    filtergruppe={filtergruppe}
+                />
+            </Ekspanderbartpanel>}
         </div>
     );
 }

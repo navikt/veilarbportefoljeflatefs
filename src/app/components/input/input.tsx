@@ -10,6 +10,7 @@ interface InnerInputComponentProps {
     errorMessage?: any;
     input?: any;
     maxLength?: number;
+    placeholder?: string;
 }
 
 // eslint-disable-next-line no-unused-vars
