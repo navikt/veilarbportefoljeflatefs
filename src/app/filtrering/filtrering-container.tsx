@@ -7,6 +7,8 @@ import FiltreringFilter from './filtrering-filter';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import FiltreringNavnOgFnr from "./filtrering-navnellerfnr";
+import {sjekkFeature} from "../ducks/features";
+import {NAVN_ELLER_FNR_SOK_FEATURE} from "../konstanter";
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -23,9 +25,11 @@ interface FiltreringContainerProps {
     actions: {
         endreFiltervalg: (filterId: string, filterVerdi: string) => void;
     };
+    sjekkFeature:(feature: string) => boolean;
 }
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
+function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak, sjekkFeature } : FiltreringContainerProps) {
+    const harSokEllerFnrFeature = sjekkFeature(NAVN_ELLER_FNR_SOK_FEATURE);
     return (
         <div className="blokk-m">
             <Ekspanderbartpanel
@@ -52,7 +56,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                     enhettiltak={enhettiltak}
                 />
             </Ekspanderbartpanel>
-            {filtergruppe === 'veileder' &&
+            {filtergruppe === 'veileder'&& harSokEllerFnrFeature &&
             <Ekspanderbartpanel
                 apen
                 className="blokk-xxxs"
@@ -68,6 +72,10 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
     );
 }
 
+const mapStateToProps = (state) => ({
+    sjekkFeature: (feature) => sjekkFeature(state, feature)
+});
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
         endreFiltervalg: (filterId: string, filterVerdi: string) => {
@@ -76,4 +84,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     }
 });
 
-export default connect(null, mapDispatchToProps)(FiltreringContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(FiltreringContainer);
