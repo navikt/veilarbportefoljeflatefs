@@ -1,6 +1,5 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
@@ -25,10 +24,10 @@ const FILES_TO_COPY_PROD = [
 
 function plugins(isMock, isDev) {
     const FILES_TO_COPY = isDev ? FILES_TO_COPY_MOCK : FILES_TO_COPY_PROD;
-
     return [
-        new ExtractTextPlugin('css/index.css'),
-        new OptimizeCssAssetsPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "./css/index.css"
+        }),
         new CopyWebpackPlugin(FILES_TO_COPY),
         new CleanWebpackPlugin(PATHS_TO_CLEAN, { root: PATHS.WEBAPP }),
         new webpack.DefinePlugin({
@@ -37,28 +36,29 @@ function plugins(isMock, isDev) {
     ]
 }
 
-const RULES = [
-    {
-        test: /\.js$|\.tsx?$/,
-        exclude: /node_modules/,
-        loader: 'awesome-typescript-loader'
-    },   {
+function rules (isDev) {
+    return [
+        {
+            test: /\.js$|\.tsx?$/,
+            exclude: /node_modules/,
+            loader: 'awesome-typescript-loader'
+        },   {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract({
-            use: [{
-                loader: 'css-loader'
-            }, {
-                loader: 'less-loader',
-                options: {
+        use: [
+            isDev ?'style-loader' : MiniCssExtractPlugin.loader,
+            'css-loader',
+            { loader: 'less-loader',options: {
                     globalVars: {
                         coreModulePath: "'./../../../node_modules/'",
                         nodeModulesPath: "'./../../../node_modules/'"
                     }
                 }
-            }]
-        })
+            }
+
+        ]
     }
-];
+    ];
+}
 
 module.exports = function(env) {
     const isDev = env && env.dev;
@@ -66,6 +66,7 @@ module.exports = function(env) {
 
     const CONTEXTPATH = '/veilarbportefoljeflatefs/';
     return {
+        mode: isDev? 'development': 'production',
         entry: path.join(PATHS.JS, 'index.js'),
         devtool: isDev ? 'source-map' : false,
         output: {
@@ -78,7 +79,7 @@ module.exports = function(env) {
         },
         plugins: plugins(isMock, isDev),
         module: {
-            rules: RULES
+            rules: rules(isDev)
         },
         resolve: {
             extensions: ['.js', '.ts', '.tsx', '.less']
