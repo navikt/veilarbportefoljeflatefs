@@ -45,7 +45,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                 />
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
-                apen
+                apen={filtergruppe !== 'veileder'}
                 className="blokk-xxxs"
                 tittel="Filter"
                 tittelProps="systemtittel"
