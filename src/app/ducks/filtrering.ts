@@ -32,6 +32,7 @@ export interface FiltreringState {
     ytelse: null;
     manuellBrukerStatus: string[];
     hovedmal: string[];
+    navnEllerFnrQuery : string;
 }
 
 //  Reducer
@@ -51,6 +52,7 @@ export const initialState = {
     ytelse: null,
     manuellBrukerStatus: [],
     hovedmal: [],
+    navnEllerFnrQuery : '',
 };
 
 function fjern(verdi, fjernVerdi) {

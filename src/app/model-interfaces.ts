@@ -55,6 +55,7 @@ export interface FiltervalgModell {
     aktiviteter?: string[];
     tiltakstyper: string[];
     hovedmal?: string[];
+    navnEllerFnrQuery: string;
 }
 
 export interface EnhetModell {
