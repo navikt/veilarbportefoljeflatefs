@@ -72,7 +72,6 @@ function fjern(verdi, fjernVerdi) {
 }
 
 export default function reducer(state: FiltreringState = initialState, action): FiltreringState {
-    console.log('action', action);
     switch (action.type) {
         case CLEAR_FILTER:
             return initialState;
