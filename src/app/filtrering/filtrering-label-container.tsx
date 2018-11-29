@@ -43,7 +43,8 @@ function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
 function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}, filtergruppe, intl}: FiltreringLabelContainerProps) {
     let muligMenIkkeValgt: boolean;
     let kolonne: Kolonne | null;
-    const filterElementer = Object.entries(filtervalg)
+    const {navnEllerFnrQuery, ...rest} = filtervalg;
+    const filterElementer = Object.entries(rest)
         .map(([key, value]) => {
             if (value === true) {
                 return [

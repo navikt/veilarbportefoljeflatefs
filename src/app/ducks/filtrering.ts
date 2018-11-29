@@ -154,7 +154,3 @@ export function clearFiltervalg(filtergruppe = 'enhet', veileder) {
         oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
     };
 }
-
-export function dispatchEndreFiltervalg(filterId, filterVerdi, filtergruppe ){
-    return (dispatch) => dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
-}

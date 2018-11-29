@@ -6,7 +6,7 @@ import FiltreringStatus from  './filtrering-status';
 import FiltreringFilter from './filtrering-filter';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
-import FiltreringNavnOgFnr from "./filtering-navnogfnr";
+import FiltreringNavnOgFnr from "./filtrering-navnellerfnr";
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -60,8 +60,8 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                 tittelProps="systemtittel"
             >
                 <FiltreringNavnOgFnr
-                    veileder={veileder}
-                    filtergruppe={filtergruppe}
+                    filtervalg={filtervalg}
+                    actions={actions}
                 />
             </Ekspanderbartpanel>}
         </div>
