@@ -56,7 +56,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                     enhettiltak={enhettiltak}
                 />
             </Ekspanderbartpanel>
-            {filtergruppe === 'veileder'&& harSokEllerFnrFeature &&
+            {harSokEllerFnrFeature &&
             <Ekspanderbartpanel
                 apen
                 className="blokk-xxxs"
