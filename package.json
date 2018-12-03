@@ -5,7 +5,16 @@
   "description": "veilarbportefoljeflatefs",
   "author": "NAV",
   "license": "MIT",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
   "devDependencies": {
+    "@babel/core": "7.1.6",
+    "@babel/preset-env": "7.1.6",
+    "@babel/preset-react": "7.0.0",
     "@navikt/react-intl-bundler": "^1.0.4",
     "@types/classnames": "2.2.3",
     "@types/faker": "4.1.1",
@@ -15,8 +24,8 @@
     "@types/react-router": "3.0.5",
     "@types/redux-form": "7.0.3",
     "ajv": "5.5.2",
-    "awesome-typescript-loader": "3.2.3",
     "babel-eslint": "8.0.1",
+    "babel-loader": "8.0.4",
     "chai": "3.5.0",
     "clean-webpack-plugin": "0.1.17",
     "copy-webpack-plugin": "4.6.0",
@@ -43,6 +52,7 @@
     "path-to-regexp": "1.7.0",
     "react-addons-test-utils": "15.6.0",
     "style-loader": "0.23.1",
+    "ts-loader": "5.3.1",
     "ts-node": "3.3.0",
     "tslint": "5.7.0",
     "tslint-react": "3.2.0",

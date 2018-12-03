@@ -39,10 +39,17 @@ function plugins(isMock, isDev) {
 function rules (isDev) {
     return [
         {
-            test: /\.js$|\.tsx?$/,
+            test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'awesome-typescript-loader'
-        },   {
+            loader: 'babel-loader'
+        },
+        {
+            test: /\.tsx?$/,
+            exclude: /node_modules/,
+            loader: 'ts-loader'
+        },
+
+        {
         test: /\.less$/,
         use: [
             isDev ?'style-loader' : MiniCssExtractPlugin.loader,
