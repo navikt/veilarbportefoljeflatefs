@@ -1,3 +1,5 @@
+import {ER_SYKMELDT_MED_ARBEIDSGIVER} from "./filtrering/filter-konstanter";
+
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
     ascending = 'ascending',
@@ -34,7 +36,8 @@ export enum EtikettType {
     SIKKERHETSTILTAK = 'sikkerhetstiltak',
     DOED = 'doed',
     IKKE_VURDERT = 'ikke_vurdert',
-    BEHOV_AEV = 'behov_aev'
+    BEHOV_AEV = 'behov_aev',
+    ER_SYKMELDT_MED_ARBEIDSGIVER = 'er_sykmeldt_med_arbeidsgiver'
 }
 
 export interface FiltervalgModell {

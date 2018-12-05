@@ -139,6 +139,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
 
     const ytelse = lagYtelse();
     const arbeidsliste = lagArbeidsliste();
+    const erSykmeldtMedArbeidsgiver = Math.random()  < 25 / 100;
 
     return {
         fnr: grunndata.fnr,
@@ -168,7 +169,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         aapUnntakUkerIgjen: ytelse.aapUnntakUkerIgjen,
         aapUnntakUkerIgjenFasett: ytelse.aapUnntakUkerIgjenFasett,
         arbeidsliste,
-        aktiviteter: grunndata.aktiviteter
+        aktiviteter: grunndata.aktiviteter,
+        erSykmeldtMedArbeidsgiver
     };
 }
 

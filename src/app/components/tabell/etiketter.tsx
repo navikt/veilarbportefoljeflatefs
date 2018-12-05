@@ -7,9 +7,10 @@ interface EtiketterProps {
     className?: string;
     bruker: BrukerModell;
     erVurderingFeaturePa: boolean;
+    erSykmeldtMedArbeidsgiverFeaturePa: boolean;
 }
 
-function Etiketter({className, bruker, erVurderingFeaturePa}: EtiketterProps) {
+function Etiketter({className, bruker, erVurderingFeaturePa, erSykmeldtMedArbeidsgiverFeaturePa}: EtiketterProps) {
     return (
         <span className={className}>
             <Etikett
@@ -48,6 +49,13 @@ function Etiketter({className, bruker, erVurderingFeaturePa}: EtiketterProps) {
             >
                 <FormattedMessage id="enhet.portefolje.tabelletikett.behov_aev"/>
             </Etikett>
+            <Etikett
+                type={EtikettType.ER_SYKMELDT_MED_ARBEIDSGIVER}
+                skalVises={erSykmeldtMedArbeidsgiverFeaturePa && bruker.erSykmeldtMedArbeidsgiver === true}
+            >
+                <FormattedMessage id="enhet.portefolje.tabelletikett.er_sykmeldt_med_arbeidsgiver"/>
+            </Etikett>
+
         </span>
     );
 }
