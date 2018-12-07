@@ -1,4 +1,3 @@
-import {ER_SYKMELDT_MED_ARBEIDSGIVER} from "./filtrering/filter-konstanter";
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -94,7 +93,7 @@ export interface BrukerModell {
     egenAnsatt: boolean;
     nyForVeileder: boolean;
     nyForEnhet: boolean;
-    trengerVurdering?: boolean;
+    trengerVurdering: boolean;
     vurderingsBehov?: VurderingsBehov;
     erDoed: boolean;
     fodselsdagIMnd: number;

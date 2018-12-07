@@ -61,7 +61,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     }
 
     render() {
-        const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker, } = this.props;
+        const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker } = this.props;
 
         const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
 

@@ -21,37 +21,37 @@ function Etiketter({className, bruker, erVurderingFeaturePa, erSykmeldtMedArbeid
             </Etikett>
             <Etikett
                 type={EtikettType.DISKRESJONSKODE}
-                skalVises={bruker.diskresjonskode !== null}
+                skalVises={!bruker.diskresjonskode}
             >
                 <span>{`Kode ${bruker.diskresjonskode}`}</span>
             </Etikett>
             <Etikett
                 type={EtikettType.EGEN_ANSATT}
-                skalVises={bruker.egenAnsatt === true}
+                skalVises={bruker.egenAnsatt}
             >
                 <FormattedMessage id="enhet.portefolje.tabelletikett.egen.ansatt"/>
             </Etikett>
             <Etikett
                 type={EtikettType.DOED}
-                skalVises={bruker.erDoed === true}
+                skalVises={bruker.erDoed}
             >
                 <FormattedMessage id="enhet.portefolje.tabelletikett.dod"/>
             </Etikett>
             <Etikett
                 type={EtikettType.IKKE_VURDERT}
-                skalVises={erVurderingFeaturePa && bruker.trengerVurdering === true && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
+                skalVises={erVurderingFeaturePa && bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
             >
                 <FormattedMessage id="enhet.portefolje.tabelletikett.ikke_vurdert"/>
             </Etikett>
             <Etikett
                 type={EtikettType.BEHOV_AEV}
-                skalVises={erVurderingFeaturePa && bruker.trengerVurdering === true && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
+                skalVises={erVurderingFeaturePa && bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
             >
                 <FormattedMessage id="enhet.portefolje.tabelletikett.behov_aev"/>
             </Etikett>
             <Etikett
                 type={EtikettType.ER_SYKMELDT_MED_ARBEIDSGIVER}
-                skalVises={erSykmeldtMedArbeidsgiverFeaturePa && bruker.erSykmeldtMedArbeidsgiver === true}
+                skalVises={erSykmeldtMedArbeidsgiverFeaturePa && bruker.erSykmeldtMedArbeidsgiver}
             >
                 <FormattedMessage id="enhet.portefolje.tabelletikett.er_sykmeldt_med_arbeidsgiver"/>
             </Etikett>
