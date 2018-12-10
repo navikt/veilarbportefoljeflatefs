@@ -21,7 +21,7 @@ function Etiketter({className, bruker, erVurderingFeaturePa, erSykmeldtMedArbeid
             </Etikett>
             <Etikett
                 type={EtikettType.DISKRESJONSKODE}
-                skalVises={!bruker.diskresjonskode}
+                skalVises={!!bruker.diskresjonskode}
             >
                 <span>{`Kode ${bruker.diskresjonskode}`}</span>
             </Etikett>
