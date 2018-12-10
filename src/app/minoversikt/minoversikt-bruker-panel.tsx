@@ -23,6 +23,7 @@ interface MinOversiktBrukerPanelProps {
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
     erVurderingFeaturePa: boolean;
+    erSykmeldtMedArbeidsgiverFeaturePa: boolean;
 }
 
 interface MinOversiktBrukerPanelState {
@@ -60,7 +61,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     }
 
     render() {
-        const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker} = this.props;
+        const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker } = this.props;
 
         const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
 
@@ -89,7 +90,11 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                             onClick={this.handleArbeidslisteButtonClick}
                         />
                         <div>
-                            <Etiketter bruker={bruker} erVurderingFeaturePa={this.props.erVurderingFeaturePa}/>
+                            <Etiketter
+                                bruker={bruker}
+                                erVurderingFeaturePa={this.props.erVurderingFeaturePa}
+                                erSykmeldtMedArbeidsgiverFeaturePa={this.props.erSykmeldtMedArbeidsgiverFeaturePa}
+                            />
                             <Etikett
                                 type={EtikettType.NYBRUKER}
                                 skalVises={bruker.nyForVeileder === true}

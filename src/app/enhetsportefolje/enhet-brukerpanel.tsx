@@ -15,9 +15,10 @@ interface EnhetBrukerpanelProps {
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
     erVurderingFeaturePa: boolean;
+    erSykmeldtMedArbeidsgiverFeaturePa: boolean;
 }
 
-function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, varForrigeBruker, erVurderingFeaturePa }: EnhetBrukerpanelProps) {
+function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, varForrigeBruker, erVurderingFeaturePa, erSykmeldtMedArbeidsgiverFeaturePa }: EnhetBrukerpanelProps) {
 
     const classname  = classNames('brukerliste__element brukerliste--border-bottom-thin', {
         'brukerliste--forrigeBruker': varForrigeBruker,
@@ -37,7 +38,11 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
                     brukersVeileder={brukersVeileder}
                 />
                 <div className="brukerliste__gutter-right">
-                    <Etiketter bruker={bruker} erVurderingFeaturePa={erVurderingFeaturePa} />
+                    <Etiketter
+                        bruker={bruker}
+                        erVurderingFeaturePa={erVurderingFeaturePa}
+                        erSykmeldtMedArbeidsgiverFeaturePa={erSykmeldtMedArbeidsgiverFeaturePa}
+                    />
                 </div>
         </li>
     );

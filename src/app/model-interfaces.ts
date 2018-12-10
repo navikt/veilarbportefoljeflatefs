@@ -1,3 +1,4 @@
+
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
     ascending = 'ascending',
@@ -34,7 +35,8 @@ export enum EtikettType {
     SIKKERHETSTILTAK = 'sikkerhetstiltak',
     DOED = 'doed',
     IKKE_VURDERT = 'ikke_vurdert',
-    BEHOV_AEV = 'behov_aev'
+    BEHOV_AEV = 'behov_aev',
+    ER_SYKMELDT_MED_ARBEIDSGIVER = 'er_sykmeldt_med_arbeidsgiver'
 }
 
 export interface FiltervalgModell {
@@ -91,7 +93,7 @@ export interface BrukerModell {
     egenAnsatt: boolean;
     nyForVeileder: boolean;
     nyForEnhet: boolean;
-    trengerVurdering?: boolean;
+    trengerVurdering: boolean;
     vurderingsBehov?: VurderingsBehov;
     erDoed: boolean;
     fodselsdagIMnd: number;
