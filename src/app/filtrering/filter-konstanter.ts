@@ -33,7 +33,7 @@ export const ferdigfilterListe = ()=> ({
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
-    ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldte med behov for dialog'
+    ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver'
 });
 
 export const alder = (intl) => ({
