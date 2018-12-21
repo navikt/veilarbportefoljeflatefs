@@ -93,8 +93,9 @@ function RedigerArbeidslisteForm({ lukkModal,
     );
 }
 
+export const REDIGER_ARBEIDSLISTE_FORM_NAME = 'arbeidsliste-rediger';
 const RedigerArbeidslisteFormValidation = validForm({
-    form: 'arbeidsliste-rediger',
+    form: REDIGER_ARBEIDSLISTE_FORM_NAME,
     validate: {
         kommentar: [begrensetKommentarLengde, pakrevdTekst],
         overskrift: [begrensetOverskriftLengde, pakrevdOverskriftTekst],

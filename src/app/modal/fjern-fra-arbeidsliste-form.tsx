@@ -6,7 +6,6 @@ import { Element } from 'nav-frontend-typografi';
 import { reduxForm } from 'redux-form';
 import { slettArbeidsliste } from '../ducks/arbeidsliste';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
-import { brukerShape } from '../proptype-shapes';
 import { leggTilStatustall } from '../ducks/statustall';
 import { STATUS } from '../ducks/utils';
 import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
@@ -58,8 +57,9 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slet
     );
 }
 
+export const FJERN_FRA_ARBEIDSLISTE_FORM_NAME = 'fjern-fra-arbeidsliste-form';
 const FjernFraArbeidslisteReduxForm = reduxForm<{}, FjernFraArbeidslisteFormProps>({
-    form: 'fjern-fra-arbeidsliste-form'
+    form: FJERN_FRA_ARBEIDSLISTE_FORM_NAME
 })(FjernFraArbeidslisteForm);
 
 function oppdaterState(res, props: FjernFraArbeidslisteFormProps, arbeidsliste: ArbeidslisteDataModell[], dispatch) {

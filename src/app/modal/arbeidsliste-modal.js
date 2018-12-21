@@ -1,11 +1,13 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
+import { isDirty } from 'redux-form';
+import { injectIntl, intlShape } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { skjulModal } from '../ducks/modal';
 import { markerAlleBrukere } from '../ducks/portefolje';
-import LeggTilArbeidslisteForm from './legg-til-arbeidsliste-form';
+import LeggTilArbeidslisteForm, { LEGG_TIL_ARBEIDSLISTE_FORM_NAME } from './legg-til-arbeidsliste-form';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 import { brukerShape } from '../proptype-shapes';
 
@@ -28,9 +30,16 @@ class ArbeidslisteModal extends Component {
     }
 
     lukkModal() {
-        this.setState({ isOpen: false });
-        this.props.skjulArbeidslisteModal();
-        this.props.fjernMarkerteBrukere();
+        const { intl, formIsDirty, skjulArbeidslisteModal, fjernMarkerteBrukere } = this.props;
+        const dialogTekst = intl.formatMessage({
+            id: 'arbeidsliste-skjema.lukk-advarsel',
+        });
+        // eslint-disable-next-line no-alert
+        if (!formIsDirty || confirm(dialogTekst)) {
+            this.setState({ isOpen: false });
+            fjernMarkerteBrukere();
+            skjulArbeidslisteModal();
+        }
     }
 
     leggTilModal(valgteBrukere) {
@@ -104,12 +113,16 @@ ArbeidslisteModal.propTypes = {
     valgteBrukere: PT.arrayOf(brukerShape).isRequired,
     skjulArbeidslisteModal: PT.func.isRequired,
     fjernMarkerteBrukere: PT.func.isRequired,
-    innloggetVeileder: PT.string.isRequired
+    innloggetVeileder: PT.string.isRequired,
+    formIsDirty: PT.bool.isRequired,
+    intl: intlShape.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     visModal: state.modal.visModal,
-    innloggetVeileder: state.enheter.ident
+    innloggetVeileder: state.enheter.ident,
+    formIsDirty:
+        isDirty(LEGG_TIL_ARBEIDSLISTE_FORM_NAME)(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -117,4 +130,4 @@ const mapDispatchToProps = (dispatch) => ({
     fjernMarkerteBrukere: () => dispatch(markerAlleBrukere(false))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArbeidslisteModal);
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(ArbeidslisteModal));

@@ -140,11 +140,11 @@ function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary, arbeid
     );
 }
 
-export const formNavn = 'arbeidsliste_kommentar_skjema';
+export const LEGG_TIL_ARBEIDSLISTE_FORM_NAME = 'arbeidsliste_kommentar_skjema';
 
 const LeggTilArbeidslisteReduxForm = validForm({
     elementCreator: FeedbackElementCreator,
-    form: formNavn,
+    form: LEGG_TIL_ARBEIDSLISTE_FORM_NAME,
     errorSummaryTitle: (
         <FormattedMessage id="arbeidsliste.form.feiloppsummering.tittel" />
     ),
