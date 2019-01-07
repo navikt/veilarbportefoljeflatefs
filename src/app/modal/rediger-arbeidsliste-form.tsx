@@ -93,8 +93,10 @@ function RedigerArbeidslisteForm({ lukkModal,
     );
 }
 
+export const REDIGER_ARBEIDSLISTE_FORM_NAME = 'arbeidsliste-rediger';
 const RedigerArbeidslisteFormValidation = validForm({
-    form: 'arbeidsliste-rediger',
+    form: REDIGER_ARBEIDSLISTE_FORM_NAME,
+    enableReinitialize: true,
     validate: {
         kommentar: [begrensetKommentarLengde, pakrevdTekst],
         overskrift: [begrensetOverskriftLengde, pakrevdOverskriftTekst],
@@ -103,7 +105,6 @@ const RedigerArbeidslisteFormValidation = validForm({
 })(RedigerArbeidslisteForm);
 
 function oppdaterState(res, arbeidsliste, innloggetVeileder, fnr, lukkModal, dispatch) {
-    lukkModal();
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -117,6 +118,16 @@ function oppdaterState(res, arbeidsliste, innloggetVeileder, fnr, lukkModal, dis
 
     return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
+
+const mapStateToProps = (state: AppState, props: { bruker: BrukerModell }) => ({
+    initialValues: {
+        kommentar: props.bruker.arbeidsliste.kommentar,
+        frist: props.bruker.arbeidsliste.frist,
+        overskrift: props.bruker.arbeidsliste.overskrift,
+    },
+    arbeidslisteStatus: state.arbeidsliste.status
+});
+
 const mapDispatchToProps = () => ({
     onSubmit: (formData, dispatch, props) => {
         const arbeidsliste = {
@@ -126,18 +137,10 @@ const mapDispatchToProps = () => ({
         };
         redigerArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
             .then((res) => oppdaterState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, props.lukkModal,
-                dispatch));
+                dispatch))
+            .then(() => props.lukkModal());
     }
 
-});
-
-const mapStateToProps = (state: AppState, props: {bruker: BrukerModell}) => ({
-    initialValues: {
-        kommentar: props.bruker.arbeidsliste.kommentar,
-        frist: props.bruker.arbeidsliste.frist,
-        overskrift: props.bruker.arbeidsliste.overskrift,
-    },
-    arbeidslisteStatus: state.arbeidsliste.status
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RedigerArbeidslisteFormValidation) as any; // todo: fix typing, redux form issues
