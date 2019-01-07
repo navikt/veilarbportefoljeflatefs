@@ -34,7 +34,6 @@ class ArbeidslisteModal extends Component {
         const dialogTekst = intl.formatMessage({
             id: 'arbeidsliste-skjema.lukk-advarsel',
         });
-        // eslint-disable-next-line no-alert
         if (!formIsDirty || confirm(dialogTekst)) {
             this.setState({ isOpen: false });
             fjernMarkerteBrukere();

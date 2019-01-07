@@ -8,7 +8,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { lagreArbeidsliste } from '../ducks/arbeidsliste';
-import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
+import { markerAlleBrukere, oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { leggTilStatustall } from '../ducks/statustall';
 import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
@@ -16,6 +16,7 @@ import { STATUS } from '../ducks/utils';
 import { AppState } from '../reducer';
 import { BrukerModell, VeilederModell, ArbeidslisteDataModell, Status } from '../model-interfaces';
 import Input from '../components/input/input';
+import { skjulModal } from '../ducks/modal';
 
 export const OVERSKRIFT_MAKS_LENGDE = 12;
 export const KOMMENTAR_MAKS_LENGDE = 500;
@@ -176,8 +177,7 @@ const mapStateToProps = (state: AppState, props: {valgteBrukere: BrukerModell[]}
     };
 };
 
-function oppdaterState(res, liste: ArbeidslisteDataModell[], props: {lukkModal: () => void, innloggetVeileder: VeilederModell, bruker: BrukerModell}, dispatch) {
-    props.lukkModal();
+function oppdaterState(res, liste: ArbeidslisteDataModell[], props: {innloggetVeileder: VeilederModell, bruker: BrukerModell}, dispatch) {
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -215,6 +215,8 @@ const mapDispatchToProps = () => ({
         }));
         lagreArbeidsliste(liste)(dispatch)
             .then((res) => oppdaterState(res, liste, props, dispatch));
+        dispatch(skjulModal());
+        dispatch(markerAlleBrukere(false));
     }
 });
 

@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { MouseEvent } from 'react';
+import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
+import { isDirty } from 'redux-form';
 import * as classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import CheckBox from '../components/tabell/checkbox';
@@ -12,8 +15,11 @@ import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
 import { FormattedMessage } from 'react-intl';
+import { REDIGER_ARBEIDSLISTE_FORM_NAME } from '../modal/rediger-arbeidsliste-form';
+import { skjulModal } from '../ducks/modal';
+import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 
-interface MinOversiktBrukerPanelProps {
+interface MinOversiktBrukerPanelProps extends InjectedIntlProps {
     bruker: BrukerModell;
     settMarkert: () => void;
     enhetId: string;
@@ -24,6 +30,8 @@ interface MinOversiktBrukerPanelProps {
     varForrigeBruker?: boolean;
     erVurderingFeaturePa: boolean;
     erSykmeldtMedArbeidsgiverFeaturePa: boolean;
+    formIsDirty: boolean;
+    skjulArbeidslisteModal: () => void;
 }
 
 interface MinOversiktBrukerPanelState {
@@ -57,14 +65,19 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     }
 
     lukkRedigerArbeidslisteModal() {
-        this.setState({redigerArbeidslisteModalIsOpen: false});
+        const { intl, formIsDirty, skjulArbeidslisteModal } = this.props;
+        const dialogTekst = intl.formatMessage({
+            id: 'arbeidsliste-skjema.lukk-advarsel',
+        });
+        if (!formIsDirty || confirm(dialogTekst)) {
+            this.setState({redigerArbeidslisteModalIsOpen: false});
+            skjulArbeidslisteModal();
+        }
     }
 
     render() {
-        const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker } = this.props;
-
+        const { bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker } = this.props;
         const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
-
         const classname  = classNames('brukerliste--border-bottom-thin ', {
             'brukerliste--forrigeBruker': varForrigeBruker,
         });
@@ -118,4 +131,12 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     }
 }
 
-export default MinoversiktBrukerPanel;
+const mapStateToProps = state => ({
+    formIsDirty: isDirty(REDIGER_ARBEIDSLISTE_FORM_NAME)(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    skjulArbeidslisteModal: () => dispatch(skjulModal()),
+});
+
+export default injectIntl<any>(connect(mapStateToProps, mapDispatchToProps)(MinoversiktBrukerPanel));

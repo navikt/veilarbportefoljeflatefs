@@ -19,37 +19,37 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder, redigerArb
     return (
         <article className="brukerliste__arbeidslistepanel">
             <span className="flex">
-                        <span className="brukerliste__gutter-left brukerliste--min-width-minside"/>
-                        <span className="brukerliste__innhold brukerliste__arbeidslisteinnhold flex--grow">
-                            <UndertekstBold>
-                                {overskrift}
-                            </UndertekstBold>
-                            <p>{bruker.arbeidsliste.kommentar}</p>
-                            <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
-                                <FormattedMessage
-                                    id="arbeidsliste.kommentar.footer"
-                                    values={{
-                                        dato: sistEndretDato.toLocaleDateString(),
-                                        veileder: sistEndretAv
-                                    }}
-                                />
-                                <button
-                                    className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
-                                    onClick={redigerOnClickHandler}
-                                >
-                                    <FormattedMessage id="arbeidsliste.kommentar.footer.knapp"/>
-                                </button>
-                                <ArbeidslisteModalRediger
-                                    bruker={bruker}
-                                    isOpen={redigerArbeidslisteModalIsOpen}
-                                    lukkModal={lukkRedigerArbeidslisteModal}
-                                    innloggetVeileder={innloggetVeileder}
-                                    sistEndretDato={sistEndretDato}
-                                    sistEndretAv={sistEndretAv}
-                                />
-                            </p>
-                        </span>
-                    </span>
+                <span className="brukerliste__gutter-left brukerliste--min-width-minside"/>
+                <span className="brukerliste__innhold brukerliste__arbeidslisteinnhold flex--grow">
+                    <UndertekstBold>
+                        {overskrift}
+                    </UndertekstBold>
+                    <p>{bruker.arbeidsliste.kommentar}</p>
+                    <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
+                        <FormattedMessage
+                            id="arbeidsliste.kommentar.footer"
+                            values={{
+                                dato: sistEndretDato.toLocaleDateString(),
+                                veileder: sistEndretAv
+                            }}
+                        />
+                        <button
+                            className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
+                            onClick={redigerOnClickHandler}
+                        >
+                            <FormattedMessage id="arbeidsliste.kommentar.footer.knapp"/>
+                        </button>
+                        <ArbeidslisteModalRediger
+                            bruker={bruker}
+                            isOpen={redigerArbeidslisteModalIsOpen}
+                            lukkModal={lukkRedigerArbeidslisteModal}
+                            innloggetVeileder={innloggetVeileder}
+                            sistEndretDato={sistEndretDato}
+                            sistEndretAv={sistEndretAv}
+                        />
+                    </p>
+                </span>
+            </span>
         </article>
     );
 }

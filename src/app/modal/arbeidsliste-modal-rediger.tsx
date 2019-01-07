@@ -3,7 +3,6 @@ import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
-import { brukerShape } from '../proptype-shapes';
 import { BrukerModell } from '../model-interfaces';
 
 NavFrontendModal.setAppElement('#applikasjon');
