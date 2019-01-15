@@ -21,7 +21,7 @@ import {
     ER_SYKMELDT_MED_ARBEIDSGIVER
 } from './filter-konstanter';
 import { TRENGER_VURDERING_FEATURE, ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE } from '../konstanter';
-
+import './filtrering-status.less';
 
 function BarInput({ skalSkjules, id, type, className, tekstId, antall, max, barClassname, firstInGroup, ...props }) {
     if (skalSkjules) {
@@ -150,7 +150,7 @@ class FiltreringStatus extends Component {
 
         return (
             <div className="filtrering-oversikt panel">
-                <div className="typo-element blokk-m">
+                <div className="typo-element blokk-xs">
                     <Element className="blokk-xxs" tag="h3">
                         <FormattedMessage
                             id="filtrering.status.totalt-antall-brukere"
@@ -178,7 +178,7 @@ class FiltreringStatus extends Component {
                     type="radio"
                     name="ferdigfilter"
                     className="radioknapp"
-                    value= "ER_SYKMELDT_MED_ARBEIDSGIVER"
+                    value="ER_SYKMELDT_MED_ARBEIDSGIVER"
                     onChange={this.handleChange}
                     checked={ferdigfilterListe.includes(ER_SYKMELDT_MED_ARBEIDSGIVER)}
                     tekstId="enhet.filtering.filtrering.oversikt.ersykmeldtmedarbeidsgiver.bruker.checkbox"

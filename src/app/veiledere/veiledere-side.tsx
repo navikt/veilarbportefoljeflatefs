@@ -48,7 +48,7 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
 
         return (
             <DocumentTitle title={intl.formatMessage({ id: 'lenker.veiledere.oversikt' })}>
-                <div className="veiledere-side">
+                <div className="container veiledere-side">
                     <Lenker />
                     <div id="oversikt-sideinnhold" role="tabpanel">
                         <p className="typo-infotekst begrensetbredde blokk-l">

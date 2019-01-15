@@ -10,8 +10,10 @@ import InitalDataProvider from './providers/initial-data-provider';
 import createStore from './store';
 import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
+import EnhetSideVenstreToggle from './enhet/enhet-side-venstre-toggle';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
+import MinOversiktSideVenstreToggle from './minoversikt/minoversikt-side-venstre-toggle';
 import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
 import './style';
 
@@ -53,6 +55,8 @@ function updateLastPath() {
     }
 }
 
+const mockFlyttVenstreToggle = true;
+
 render(
     (
         <Provider store={store}>
@@ -68,9 +72,12 @@ render(
                             }
                         }}
                     >
-                        <Route path="enhet" component={EnhetSide} />
+                        <Route path="enhet" component={mockFlyttVenstreToggle ? EnhetSideVenstreToggle : EnhetSide} />
                         <Route path="veiledere" component={VeiledereSide} />
-                        <Route path="portefolje(/:ident)" component={MinOversiktSide} />
+                        <Route
+                            path="portefolje(/:ident)"
+                            component={mockFlyttVenstreToggle ? MinOversiktSideVenstreToggle : MinOversiktSide}
+                        />
                         <Route onEnter={redirect} path="tilbake" />
                     </Route>
                 </Router>

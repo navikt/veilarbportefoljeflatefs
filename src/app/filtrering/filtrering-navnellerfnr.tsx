@@ -36,10 +36,10 @@ class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps
     render() {
         return (
             <div className="row">
-                <div className="col-md-5">
+                <div className="col-md-8">
                     <Input
                         label=""
-                        placeholder={this.props.intl.formatMessage({id: "filtering-navn-eller-fnr"})}
+                        placeholder={this.props.intl.formatMessage({id: 'filtering-navn-eller-fnr'})}
                         onChange={this.handleChange}
                         value={this.state.navnEllerFnrQuery}
                     />
@@ -50,4 +50,3 @@ class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps
 }
 
 export default injectIntl(FiltreringNavnEllerFnr);
-
