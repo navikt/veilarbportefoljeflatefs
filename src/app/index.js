@@ -12,6 +12,7 @@ import history, { basename } from './history';
 import EnhetSide from './enhet/enhet-side';
 import EnhetSideVenstreToggle from './enhet/enhet-side-venstre-toggle';
 import VeiledereSide from './veiledere/veiledere-side';
+import VeiledereSideVenstreToggle from './veiledere/veiledere-side-venstre-toggle';
 import MinOversiktSide from './minoversikt/minoversikt-side';
 import MinOversiktSideVenstreToggle from './minoversikt/minoversikt-side-venstre-toggle';
 import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
@@ -73,7 +74,10 @@ render(
                         }}
                     >
                         <Route path="enhet" component={mockFlyttVenstreToggle ? EnhetSideVenstreToggle : EnhetSide} />
-                        <Route path="veiledere" component={VeiledereSide} />
+                        <Route
+                            path="veiledere"
+                            component={mockFlyttVenstreToggle ? VeiledereSideVenstreToggle : VeiledereSide}
+                        />
                         <Route
                             path="portefolje(/:ident)"
                             component={mockFlyttVenstreToggle ? MinOversiktSideVenstreToggle : MinOversiktSide}

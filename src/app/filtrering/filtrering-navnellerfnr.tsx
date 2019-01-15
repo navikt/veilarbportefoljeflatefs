@@ -1,15 +1,14 @@
 import * as React from 'react';
-import {Input} from 'nav-frontend-skjema';
+import { Input } from 'nav-frontend-skjema';
 import { injectIntl } from 'react-intl';
-import {FiltervalgModell} from "../model-interfaces";
-
+import { FiltervalgModell } from '../model-interfaces';
 
 interface FiltreringNavnEllerFnrState {
     navnEllerFnrQuery: string;
 }
 
 interface FiltreringNavnEllerFnrProps {
-    filtervalg : FiltervalgModell;
+    filtervalg: FiltervalgModell;
     intl: any;
     actions: {
         endreFiltervalg: (filterId: string, filterVerdi: string) => void;
@@ -30,7 +29,7 @@ class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps
     handleChange(event) {
         this.setState({navnEllerFnrQuery:event.target.value});
         clearTimeout(this.timerId);
-        this.timerId = setTimeout(() => this.props.actions.endreFiltervalg('navnEllerFnrQuery', this.state.navnEllerFnrQuery), 500 )
+        this.timerId = setTimeout(() => this.props.actions.endreFiltervalg('navnEllerFnrQuery', this.state.navnEllerFnrQuery), 500 );
     }
 
     render() {
