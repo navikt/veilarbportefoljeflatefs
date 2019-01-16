@@ -5,7 +5,10 @@ import FiltreringStatus from './filtrering-status';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import FiltreringNavnOgFnr from './filtrering-navnellerfnr';
+import FiltreringFilter from './filtrering-filter-venstre-toggle';
 import FiltreringFilterVenstreToggle from './filtrering-filter-venstre-toggle';
+import { sjekkFeature } from '../ducks/features';
+import { FLYTT_FILTER_VENSTRE } from '../konstanter';
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -18,13 +21,14 @@ interface FiltreringContainerProps {
     enhettiltak: EnhetModell;
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
+    flyttFilterVenstreToggle: boolean;
     veileder: VeilederModell;
     actions: {
         endreFiltervalg: (filterId: string, filterVerdi: string) => void;
     };
 }
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
+function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak, flyttFilterVenstreToggle }: FiltreringContainerProps) {
     return (
         <div className="blokk-m">
             <Ekspanderbartpanel
@@ -45,11 +49,19 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                 tittel="Filter"
                 tittelProps="undertittel"
             >
-                <FiltreringFilterVenstreToggle
-                    actions={actions}
-                    filtervalg={filtervalg}
-                    enhettiltak={enhettiltak}
-                />
+                {flyttFilterVenstreToggle ?
+                    (<FiltreringFilterVenstreToggle
+                        actions={actions}
+                        filtervalg={filtervalg}
+                        enhettiltak={enhettiltak}
+                    />)
+                    :
+                    (<FiltreringFilter
+                        actions={actions}
+                        filtervalg={filtervalg}
+                        enhettiltak={enhettiltak}
+                    />)
+                }
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
                 apen
@@ -66,6 +78,10 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
     );
 }
 
+const mapStateToProps = (state) => ({
+    flyttFilterVenstreToggle: sjekkFeature(state, FLYTT_FILTER_VENSTRE)
+});
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
         endreFiltervalg: (filterId: string, filterVerdi: string) => {
@@ -74,4 +90,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     }
 });
 
-export default connect(null, mapDispatchToProps)(FiltreringContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(FiltreringContainer);

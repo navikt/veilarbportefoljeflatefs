@@ -9,7 +9,7 @@ export interface FeaturesState {
 }
 
 const initalState: FeaturesState = {
-    [FLYTT_FILTER_VENSTRE]: true
+    [FLYTT_FILTER_VENSTRE]: false
 };
 
 // Reducer
