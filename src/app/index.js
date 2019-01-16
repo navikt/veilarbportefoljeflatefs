@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import createStore from './store';
-import Routes from './routes';
+import Router from './router';
 import './style';
 
 /* eslint-disable no-undef */
@@ -33,7 +33,7 @@ render(
     (
         <Provider store={store}>
             <IntlProvider defaultLocale="nb" locale="nb" messages={tekster}>
-                <Routes />
+                <Router />
             </IntlProvider>
         </Provider>
     ), document.getElementById('mainapp'));

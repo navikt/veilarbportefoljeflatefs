@@ -2,9 +2,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import InitalDataProvider from './providers/initial-data-provider';
 import { Route, Router } from 'react-router';
-import EnhetSide from './enhet/enhet-side';
-import VeiledereSide from './veiledere/veiledere-side';
-import MinOversiktSide from './minoversikt/minoversikt-side';
+import EnhetSideVenstreToggle from './enhet/enhet-side-venstre-toggle';
+import VeiledereSideVenstreToggle from './veiledere/veiledere-side-venstre-toggle';
+import MinOversiktSideVenstreToggle from './minoversikt/minoversikt-side-venstre-toggle';
 import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
 import { basename } from './history';
 import history from './history';
@@ -26,7 +26,7 @@ function updateLastPath() {
     }
 }
 
-class Routes extends React.Component {
+class RoutesVenstreToggle extends React.Component {
     render() {
         return (
             <Router history={history}>
@@ -40,14 +40,14 @@ class Routes extends React.Component {
                         }
                     }}
                 >
-                    <Route path="enhet" component={EnhetSide} />
+                    <Route path="enhet" component={EnhetSideVenstreToggle} />
                     <Route
                         path="veiledere"
-                        component={VeiledereSide}
+                        component={VeiledereSideVenstreToggle}
                     />
                     <Route
                         path="portefolje(/:ident)"
-                        component={MinOversiktSide}
+                        component={MinOversiktSideVenstreToggle}
                     />
                     <Route onEnter={redirect} path="tilbake" />
                 </Route>
@@ -56,4 +56,4 @@ class Routes extends React.Component {
     }
 }
 
-export default Routes;
+export default RoutesVenstreToggle;

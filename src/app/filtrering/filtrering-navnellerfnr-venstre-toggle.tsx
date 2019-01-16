@@ -15,7 +15,7 @@ interface FiltreringNavnEllerFnrProps {
     };
 }
 
-class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps, FiltreringNavnEllerFnrState> {
+class FiltreringNavnellerfnrVenstreToggle extends React.Component<FiltreringNavnEllerFnrProps, FiltreringNavnEllerFnrState> {
     private timerId: number = 0;
 
     constructor(props) {
@@ -35,7 +35,7 @@ class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps
     render() {
         return (
             <div className="row">
-                <div className="col-md-5">
+                <div className="col-md-8">
                     <Input
                         label=""
                         placeholder={this.props.intl.formatMessage({id: 'filtering-navn-eller-fnr'})}
@@ -48,4 +48,4 @@ class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps
     }
 }
 
-export default injectIntl(FiltreringNavnEllerFnr);
+export default injectIntl(FiltreringNavnellerfnrVenstreToggle);

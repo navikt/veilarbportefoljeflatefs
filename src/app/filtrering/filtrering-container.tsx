@@ -5,10 +5,11 @@ import FiltreringStatus from './filtrering-status';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import FiltreringNavnOgFnr from './filtrering-navnellerfnr';
-import FiltreringFilter from './filtrering-filter-venstre-toggle';
+import FiltreringFilter from './filtrering-filter';
 import FiltreringFilterVenstreToggle from './filtrering-filter-venstre-toggle';
 import { sjekkFeature } from '../ducks/features';
 import { FLYTT_FILTER_VENSTRE } from '../konstanter';
+import FiltreringNavnellerfnrVenstreToggle from './filtrering-navnellerfnr-venstre-toggle';
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -69,10 +70,17 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                 tittel="Søk"
                 tittelProps="undertittel"
             >
-                <FiltreringNavnOgFnr
-                    filtervalg={filtervalg}
-                    actions={actions}
-                />
+                {flyttFilterVenstreToggle ?
+                    (<FiltreringNavnellerfnrVenstreToggle
+                        filtervalg={filtervalg}
+                        actions={actions}
+                    />)
+                    :
+                    (<FiltreringNavnOgFnr
+                        filtervalg={filtervalg}
+                        actions={actions}
+                    />)
+                }
             </Ekspanderbartpanel>
         </div>
     );

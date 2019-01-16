@@ -2,7 +2,7 @@
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
 import { PortefoljeData } from '../ducks/portefolje';
 
-const API_BASE_URL = '/veilarbportefoljeflatefs/api';
+export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
 
 const MED_CREDENTIALS: RequestInit = {
@@ -12,10 +12,10 @@ const MED_CREDENTIALS: RequestInit = {
     }
 };
 
-const VEILARBVEILEDER_URL = '/veilarbveileder';
-const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
-const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
-const FEATURE_URL = '/feature';
+export const VEILARBVEILEDER_URL = '/veilarbveileder';
+export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
+export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
+export const FEATURE_URL = '/feature';
 
 export function hentVeiledersEnheter() {
     const url = `${VEILARBVEILEDER_URL}/api/veileder/enheter`;

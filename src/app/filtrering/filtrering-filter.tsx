@@ -32,7 +32,7 @@ interface FiltreringFilterProps {
 const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFilterProps) => (
     <div>
         <div className="row">
-            <div className="col-sm-6">
+            <div className="col-sm-3">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.demografi"/>
                 </Element>
@@ -61,7 +61,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     />
                 </Dropdown>
             </div>
-            <div className="col-sm-6">
+            <div className="col-sm-3">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.situasjon"/>
                 </Element>
@@ -106,7 +106,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     />
                 </Dropdown>
             </div>
-            <div className="col-sm-6">
+            <div className="col-sm-3">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.ytelse"/>
                 </Element>
@@ -143,7 +143,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     />
                 </Dropdown>
             </div>
-            <div className="col-sm-6">
+            <div className="col-sm-3">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.manuellbruker"/>
                 </Element>
