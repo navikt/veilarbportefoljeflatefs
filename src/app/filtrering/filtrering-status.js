@@ -21,7 +21,7 @@ import {
     ER_SYKMELDT_MED_ARBEIDSGIVER
 } from './filter-konstanter';
 import { TRENGER_VURDERING_FEATURE, ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE } from '../konstanter';
-
+import './filtrering-status.less';
 
 function BarInput({ skalSkjules, id, type, className, tekstId, antall, max, barClassname, firstInGroup, ...props }) {
     if (skalSkjules) {
@@ -116,7 +116,8 @@ class FiltreringStatus extends Component {
     }
 
     render() {
-        const { ferdigfilterListe } = this.props.filtervalg;
+        const { statustall, filtergruppe, filtervalg } = this.props;
+        const { ferdigfilterListe } = filtervalg;
 
         const ufordelteBrukereCheckbox = (
             <BarInput
@@ -128,8 +129,8 @@ class FiltreringStatus extends Component {
                 onChange={this.handleChange}
                 checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
                 tekstId="enhet.filtrering.filtrering.oversikt.ufordelte.brukere.checkbox"
-                antall={this.props.statustall.data.ufordelteBrukere}
-                max={this.props.statustall.data.totalt}
+                antall={statustall.data.ufordelteBrukere}
+                max={statustall.data.totalt}
             />
         );
 
@@ -143,22 +144,22 @@ class FiltreringStatus extends Component {
                 onChange={this.handleChange}
                 checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
                 tekstId="min_oversikt.filtrering.filtrering.oversikt.nye.brukere.checkbox"
-                antall={this.props.statustall.data.nyeBrukereForVeileder}
-                max={this.props.statustall.data.totalt}
+                antall={statustall.data.nyeBrukereForVeileder}
+                max={statustall.data.totalt}
             />
         );
 
         return (
             <div className="filtrering-oversikt panel">
-                <div className="typo-element blokk-m">
+                <div className="typo-element blokk-xs">
                     <Element className="blokk-xxs" tag="h3">
                         <FormattedMessage
                             id="filtrering.status.totalt-antall-brukere"
-                            values={{ antall: this.props.statustall.data.totalt }}
+                            values={{ antall: statustall.data.totalt }}
                         />
                     </Element>
                 </div>
-                { this.props.filtergruppe === 'enhet' ? ufordelteBrukereCheckbox : nyeBrukereForVeilederCheckbox }
+                { filtergruppe === 'enhet' ? ufordelteBrukereCheckbox : nyeBrukereForVeilederCheckbox }
                 <BarInput
                     id="trengerVurdering"
                     type="radio"
@@ -168,8 +169,8 @@ class FiltreringStatus extends Component {
                     onChange={this.handleChange}
                     checked={ferdigfilterListe.includes(TRENGER_VURDERING)}
                     tekstId="enhet.filtering.filtrering.oversikt.trengervurdering.brukere.checkbox"
-                    antall={this.props.statustall.data.trengerVurdering}
-                    max={this.props.statustall.data.totalt}
+                    antall={statustall.data.trengerVurdering}
+                    max={statustall.data.totalt}
                     barClassname="trengerVurdering"
                     skalSkjules={!this.props.sjekkFeature(TRENGER_VURDERING_FEATURE)}
                 />
@@ -178,7 +179,7 @@ class FiltreringStatus extends Component {
                     type="radio"
                     name="ferdigfilter"
                     className="radioknapp"
-                    value= "ER_SYKMELDT_MED_ARBEIDSGIVER"
+                    value="ER_SYKMELDT_MED_ARBEIDSGIVER"
                     onChange={this.handleChange}
                     checked={ferdigfilterListe.includes(ER_SYKMELDT_MED_ARBEIDSGIVER)}
                     tekstId="enhet.filtering.filtrering.oversikt.ersykmeldtmedarbeidsgiver.bruker.checkbox"
@@ -196,8 +197,8 @@ class FiltreringStatus extends Component {
                     onChange={this.handleChange}
                     checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
                     tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfranav.brukere.checkbox"
-                    antall={this.props.statustall.data.venterPaSvarFraNAV}
-                    max={this.props.statustall.data.totalt}
+                    antall={statustall.data.venterPaSvarFraNAV}
+                    max={statustall.data.totalt}
                     barClassname="venterPaSvarFraNAV"
                     firstInGroup
                 />
@@ -210,8 +211,8 @@ class FiltreringStatus extends Component {
                     onChange={this.handleChange}
                     checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
                     tekstId="enhet.filtrering.filtrering.oversikt.venterpasvarfrabruker.brukere.checkbox"
-                    antall={this.props.statustall.data.venterPaSvarFraBruker}
-                    max={this.props.statustall.data.totalt}
+                    antall={statustall.data.venterPaSvarFraBruker}
+                    max={statustall.data.totalt}
                     barClassname="venterPaSvarFraBruker"
                 />
                 <BarInput
@@ -223,8 +224,8 @@ class FiltreringStatus extends Component {
                     onChange={this.handleChange}
                     checked={ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
                     tekstId="enhet.filtrering.filtrering.oversikt.utlopteaktiviteter.brukere.checkbox"
-                    antall={this.props.statustall.data.utlopteAktiviteter}
-                    max={this.props.statustall.data.totalt}
+                    antall={statustall.data.utlopteAktiviteter}
+                    max={statustall.data.totalt}
                     barClassname="utlopteAktiviteter"
                     firstInGroup
                 />
@@ -237,8 +238,8 @@ class FiltreringStatus extends Component {
                     onChange={this.handleChange}
                     checked={ferdigfilterListe.includes(IKKE_I_AVTALT_AKTIVITET)}
                     tekstId="enhet.filtrering.filtrering.oversikt.ikkeiavtaltaktivitet.brukere.checkbox"
-                    antall={this.props.statustall.data.ikkeIavtaltAktivitet}
-                    max={this.props.statustall.data.totalt}
+                    antall={statustall.data.ikkeIavtaltAktivitet}
+                    max={statustall.data.totalt}
                     barClassname="ikkeIAvtaltAktivitet"
                 />
                 <BarInput
@@ -250,8 +251,8 @@ class FiltreringStatus extends Component {
                     onChange={this.handleChange}
                     checked={ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
                     tekstId="enhet.filtrering.filtrering.oversikt.iavtaltaktivitet.brukere.checkbox"
-                    antall={this.props.statustall.data.iavtaltAktivitet}
-                    max={this.props.statustall.data.totalt}
+                    antall={statustall.data.iavtaltAktivitet}
+                    max={statustall.data.totalt}
                     barClassname="iAvtaltAktivitet"
                 />
                 <BarInput
@@ -263,12 +264,12 @@ class FiltreringStatus extends Component {
                     onChange={this.handleChange}
                     checked={ferdigfilterListe.includes(INAKTIVE_BRUKERE)}
                     tekstId="enhet.filtrering.filtrering.oversikt.inaktive.brukere.checkbox"
-                    antall={this.props.statustall.data.inaktiveBrukere}
-                    max={this.props.statustall.data.totalt}
+                    antall={statustall.data.inaktiveBrukere}
+                    max={statustall.data.totalt}
                     barClassname="inaktiveBrukere"
                     firstInGroup
                 />
-                <ArbeidslisteTittel skalSkjules={this.props.filtergruppe === FILTERGRUPPE_ENHET} />
+                <ArbeidslisteTittel skalSkjules={filtergruppe === FILTERGRUPPE_ENHET} />
                 <BarInput
                     id="minArbeidsliste"
                     type="radio"
@@ -278,10 +279,10 @@ class FiltreringStatus extends Component {
                     onChange={this.handleChange}
                     checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                     tekstId="enhet.filtrering.filtrering.oversikt.min.arbeidsliste.checkbox"
-                    antall={this.props.statustall.data.minArbeidsliste}
-                    max={this.props.statustall.data.totalt}
+                    antall={statustall.data.minArbeidsliste}
+                    max={statustall.data.totalt}
                     barClassname="minArbeidsliste"
-                    skalSkjules={this.props.filtergruppe === FILTERGRUPPE_ENHET}
+                    skalSkjules={filtergruppe === FILTERGRUPPE_ENHET}
                 />
             </div>
         );

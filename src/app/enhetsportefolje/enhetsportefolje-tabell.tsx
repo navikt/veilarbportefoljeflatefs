@@ -8,7 +8,7 @@ import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { getFraBrukerFraUrl } from '../utils/url-utils';
 import { sjekkFeature } from '../ducks/features';
-import {ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE, TRENGER_VURDERING_FEATURE} from '../konstanter';
+import { ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE, TRENGER_VURDERING_FEATURE } from '../konstanter';
 
 interface EnhetTabellProps {
     portefolje: any;

@@ -9,6 +9,8 @@ import tiltak from './tiltak';
 import diagramdata from './diagramdata';
 import lagDiagramData from './diagramdataV2';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
+import features from './features';
+import { API_BASE_URL, FEATURE_URL } from '../middleware/api';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, enheter.enhetliste[0].enhetId, alleBrukere);
@@ -46,6 +48,9 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
         brukere: filtrerteBrukere
     };
 }
+
+// features
+(mock as any).get(`glob:${API_BASE_URL}${FEATURE_URL}*`, respondWith(features));
 
 // Hvis du vil hente tekster fra applikasjonen, så la linjen nedenfor være kommentert ut.
 (mock as any).get('/veilarbportefoljeflatefs/api/tekster', respondWith(tekster));

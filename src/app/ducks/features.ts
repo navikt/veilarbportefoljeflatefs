@@ -1,6 +1,6 @@
 import { AppState } from '../reducer';
 import { hentFeatures } from '../middleware/api';
-import {PORTEFOLJE_FEATURES} from "../konstanter";
+import { FLYTT_FILTER_VENSTRE, PORTEFOLJE_FEATURES } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
 
@@ -8,7 +8,9 @@ export interface FeaturesState {
     [feature: string]: boolean;
 }
 
-const initalState: FeaturesState = {};
+const initalState: FeaturesState = {
+    [FLYTT_FILTER_VENSTRE]: false
+};
 
 // Reducer
 export default function reducer(state: FeaturesState = initalState, action): FeaturesState {
@@ -26,8 +28,8 @@ export default function reducer(state: FeaturesState = initalState, action): Fea
 // Action Creators
 export function hentFeaturesFraUnleash() {
     const featureQueryString = PORTEFOLJE_FEATURES
-        .map(feature => `feature=${feature}`)
-        .join("&");
+        .map((feature) => `feature=${feature}`)
+        .join('&');
     return (dispatch) => {
         hentFeatures(featureQueryString)
             .then((json) => dispatch({
@@ -38,5 +40,5 @@ export function hentFeaturesFraUnleash() {
 }
 
 export function sjekkFeature(state: AppState, feature: string): boolean {
-    return state.features[feature] === true;
+    return state.features[feature];
 }

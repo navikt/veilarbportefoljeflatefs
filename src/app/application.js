@@ -1,5 +1,6 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import queryString from 'query-string';
@@ -9,7 +10,9 @@ import { settSide } from './ducks/ui/side';
 import history from './history';
 import { enhetShape, valgtEnhetShape, veiledereShape } from './proptype-shapes';
 import EnhetContext from './components/enhet-context/enhet-context';
-import tekstBundle from './../../tekster-built/bundle'
+import tekstBundle from './../../tekster-built/bundle';
+import { sjekkFeature } from './ducks/features';
+import { FLYTT_FILTER_VENSTRE, TRENGER_VURDERING_FEATURE } from './konstanter';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(location.search).vistekster; // eslint-disable-line no-undef
@@ -45,7 +48,7 @@ class Application extends Component {
     }
 
     render() {
-        const { enheter, children, veiledere } = this.props;
+        const { enheter, children, veiledere, flyttFilterTilVenstre } = this.props;
 
         return (
             <IntlProvider
@@ -56,7 +59,9 @@ class Application extends Component {
                 <div className="portefolje">
                     <Innholdslaster avhengigheter={[enheter, enheter.valgtEnhet, veiledere]}>
                         <EnhetContext />
-                        <div className="container maincontent side-innhold">
+                        <div
+                            className={classnames({ container: !flyttFilterTilVenstre }, 'maincontent', 'side-innhold')}
+                        >
                             {children}
                         </div>
                     </Innholdslaster>
@@ -67,10 +72,10 @@ class Application extends Component {
 }
 
 Application.propTypes = {
-
     settSide: PT.func.isRequired,
     routes: PT.arrayOf(PT.object).isRequired,
     side: PT.string.isRequired,
+    flyttFilterTilVenstre: PT.bool,
     children: PT.oneOfType([PT.arrayOf(PT.node), PT.node]),
     enheter: PT.shape({
         data: PT.arrayOf(enhetShape).isRequired,
@@ -86,7 +91,8 @@ Application.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    side: state.ui.side.side
+    side: state.ui.side.side,
+    flyttFilterTilVenstre: sjekkFeature(state, FLYTT_FILTER_VENSTRE)
 });
 
 const mapDispatchToProps = (dispatch) => ({

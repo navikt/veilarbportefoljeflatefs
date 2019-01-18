@@ -19,6 +19,8 @@ import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { FiltreringState } from '../ducks/filtrering';
 import { pagineringSetup } from '../ducks/paginering';
 
+import './enhet-side.less';
+
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
     filtervalg: FiltreringState;
@@ -40,7 +42,7 @@ interface OwnProps {
 
 type EnhetSideProps = StateProps & DispatchProps & OwnProps;
 
-class EnhetSide extends React.Component<EnhetSideProps, {}> {
+class EnhetSideVenstreToggle extends React.Component<EnhetSideProps, {}> {
     componentWillMount() {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
@@ -71,23 +73,29 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
                             <p className="typo-infotekst begrensetbredde blokk-l">
                                 <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                             </p>
-                            <FiltreringContainer
-                                filtervalg={filtervalg}
-                                enhettiltak={enhettiltak.data.tiltak}
-                                filtergruppe="enhet"
-                            />
-                            <FiltreringLabelContainer
-                                filtervalg={{
-                                    ...filtervalg,
-                                    veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste)
-                                }}
-                                filtergruppe="enhet"
-                                enhettiltak={enhettiltak.data.tiltak}
-                                listevisning={listevisning}
-                            />
-                            <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
-                            <EnhetsportefoljeVisning />
-                            <TomPortefoljeModal/>
+                            <div className="enhet-side--cols">
+                                <div className="enhet-side--filter-col">
+                                    <FiltreringContainer
+                                        filtervalg={filtervalg}
+                                        enhettiltak={enhettiltak.data.tiltak}
+                                        filtergruppe="enhet"
+                                    />
+                                </div>
+                                <div className="enhet-side--liste-col">
+                                    <FiltreringLabelContainer
+                                        filtervalg={{
+                                            ...filtervalg,
+                                            veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste)
+                                        }}
+                                        filtergruppe="enhet"
+                                        enhettiltak={enhettiltak.data.tiltak}
+                                        listevisning={listevisning}
+                                    />
+                                    <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
+                                    <EnhetsportefoljeVisning />
+                                    <TomPortefoljeModal/>
+                                </div>
+                            </div>
                         </div>
                     </Innholdslaster>
                 </div>
@@ -111,4 +119,4 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(EnhetSide));
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(EnhetSideVenstreToggle));
