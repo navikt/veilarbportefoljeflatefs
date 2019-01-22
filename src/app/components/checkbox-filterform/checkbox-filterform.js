@@ -1,7 +1,9 @@
 import React, { PropTypes as PT } from 'react';
 import { Field, Fields, reduxForm } from 'redux-form';
+import AlertStripe from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import { FormattedMessage } from 'react-intl';
 import { lagConfig } from './../../filtrering/filter-konstanter';
 import SubmitKnapp from './../submit-knapp';
 
@@ -51,16 +53,30 @@ function prepSubmit(name, fn, close) {
     };
 }
 
-function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown }) {
+function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown, justerVenstre }) {
     const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown));
+    const harValg = Object.keys(valg).length > 0;
 
     return (
         <form className="skjema checkbox-filterform" onSubmit={submithandler}>
-            <div className="checkbox-filterform__valg">
-                <Fields names={Object.keys(valg)} valg={valg} component={renderFields} />
-            </div>
-            <div className="knapperad blokk-xxs">
-                <SubmitKnapp pristine={pristine} closeDropdown={closeDropdown} />
+            {harValg &&
+                <div className="checkbox-filterform__valg">
+                    <Fields names={Object.keys(valg)} valg={valg} component={renderFields} />
+                </div>
+            }
+            <div className="checkbox-filterform__under-valg">
+                {harValg ?
+                    <div
+                        className={classNames({ knapperad: !justerVenstre },
+                            'checkbox-filterform__valg-knapp', 'blokk-xxs')}
+                    >
+                        <SubmitKnapp pristine={pristine} closeDropdown={closeDropdown} />
+                    </div>
+                    :
+                    <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+                        <FormattedMessage id="components.filterform.ingen-treff" />
+                    </AlertStripe>
+                }
             </div>
         </form>
     );
@@ -75,8 +91,9 @@ CheckboxFilterform.propTypes = {
     handleSubmit: PT.func.isRequired,
     form: PT.string.isRequired,
     valg: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
-    closeDropdown: PT.func.isRequired,
-    onSubmit: PT.func.isRequired
+    closeDropdown: PT.func,
+    onSubmit: PT.func.isRequired,
+    justerVenstre: PT.bool
 };
 
 const mapStateToProps = (state, ownProps) => {

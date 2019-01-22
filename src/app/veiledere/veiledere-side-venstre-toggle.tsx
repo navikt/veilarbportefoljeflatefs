@@ -13,12 +13,15 @@ import { ValgtEnhetModell } from '../model-interfaces';
 import { pagineringSetup } from '../ducks/paginering';
 import './veiledere-side.less';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import PanelBase from 'nav-frontend-paneler';
+import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
+import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
+import { FiltreringState } from '../ducks/filtrering';
 
 interface StateProps {
     veiledere: VeiledereState;
     portefoljestorrelser: any;
+    filtervalg: FiltreringState;
     valgtEnhet: ValgtEnhetModell;
 }
 
@@ -44,7 +47,7 @@ class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
     }
 
     render() {
-        const { veiledere, portefoljestorrelser, intl } = this.props;
+        const { veiledere, portefoljestorrelser, intl, filtervalg } = this.props;
 
         return (
             <DocumentTitle title={intl.formatMessage({ id: 'lenker.veiledere.oversikt' })}>
@@ -65,6 +68,14 @@ class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
                             </div>
                             <div className="veiledere-side--liste-col">
                                 <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
+                                    <FiltreringLabelContainer
+                                        filtervalg={{
+                                            veiledere: lagLablerTilVeiledereMedIdenter(
+                                                filtervalg.veiledere,
+                                                veiledere.data.veilederListe)
+                                        }}
+                                        filtergruppe="veiledere"
+                                    />
                                     <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
                                         <FormattedMessage
                                             id="enhet.veiledere.tittel"
@@ -84,6 +95,7 @@ class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
 
 const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
+    filtervalg: state.filtreringVeilederoversikt,
     portefoljestorrelser: state.portefoljestorrelser,
     valgtEnhet: state.enheter.valgtEnhet
 });

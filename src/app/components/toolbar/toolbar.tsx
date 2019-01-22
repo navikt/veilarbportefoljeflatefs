@@ -2,7 +2,7 @@ import * as React from 'react';
 import VelgalleCheckboks from './velgalle-checkboks';
 import TildelVeileder from './tildel-veileder';
 import LeggTilArbeidsliste from './legg-til-arbeidsliste';
-import SokVeilder from './sok-veileder';
+import SokVeileder from './sok-veileder';
 import DiagramTabellToggle from './diagram-tabell-toggle';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
@@ -35,10 +35,12 @@ const Toolbar = ({filtergruppe,
                 filtergruppe={filtergruppe}
                 gjeldendeVeileder={gjeldendeVeileder}/>
             <Listevisning filtergruppe={filtergruppe}/>
-            <LeggTilArbeidsliste visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje === true}/>
-            <SokVeilder veileder={{}}
-                        filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe}
-                        skalVises={sokVeilederSkalVises}/>
+            <LeggTilArbeidsliste visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}/>
+            <SokVeileder
+                veileder={{}}
+                filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe}
+                skalVises={sokVeilederSkalVises}
+            />
         </div>
         <div className="toolbar__element toolbar__midten toolbar--skille-mellom-elementer">
             <DiagramTabellToggle filtergruppe={filtergruppe}/>

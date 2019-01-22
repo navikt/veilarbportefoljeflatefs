@@ -13,8 +13,8 @@ import {
     selectSeAlle,
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
-import { FLYTT_FILTER_VENSTRE } from '../konstanter';
 import { sjekkFeature } from '../ducks/features';
+import { FLYTT_FILTER_VENSTRE } from '../konstanter';
 
 function erValgtHvisFiltrering(veiledere) {
     if (veiledere && veiledere.length > 0) {
@@ -69,23 +69,11 @@ class VeilederesideVisning extends Component {
     }
 
     getVeiledere() {
-        const { veiledere } = this.state;
-        const { seAlle, veilederNavnQuery, fra, sideStorrelse } = this.props;
-        const query = veilederNavnQuery ? veilederNavnQuery.toLowerCase().trim() : '';
-
-        let filtrerteVeiledere = [];
-
-        if (query && query.length > 0) {
-            filtrerteVeiledere = veiledere.filter((veileder) => veileder.navn.toLowerCase().indexOf(query) >= 0);
-        } else {
-            filtrerteVeiledere = veiledere;
+        if (this.props.seAlle) {
+            return this.state.veiledere;
         }
 
-        if (seAlle) {
-            return filtrerteVeiledere;
-        }
-
-        return filtrerteVeiledere.slice(fra, fra + sideStorrelse);
+        return this.state.veiledere.slice(this.props.fra, this.props.fra + this.props.sideStorrelse);
     }
 
     oppdaterVeilederListe() {
@@ -105,7 +93,8 @@ class VeilederesideVisning extends Component {
         const veiledere = this.getVeiledere();
         const toolbar = (<Toolbar
             filtergruppe="veiledere"
-            onPaginering={() => {}}
+            onPaginering={() => {
+            }}
             sokVeilederSkalVises={!this.props.flyttFilterTilVenstre}
             antallTotalt={this.state.veiledere.length}
         />);
@@ -127,7 +116,6 @@ class VeilederesideVisning extends Component {
 VeilederesideVisning.propTypes = {
     pagineringSetup: PT.func.isRequired,
     veilederFilter: PT.array.isRequired, // eslint-disable-line react/forbid-prop-types
-    veilederNavnQuery: PT.string,
     sortBy: PT.func.isRequired,
     settSide: PT.func.isRequired,
     flyttFilterTilVenstre: PT.bool,
@@ -150,7 +138,6 @@ const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
     portefoljestorrelser: state.portefoljestorrelser,
     sortering: state.sortering,
-    veilederNavnQuery: state.filtreringVeilederoversikt.veilederNavnQuery,
     veilederFilter: state[nameToStateSliceMap.veiledere].veiledere,
     fra: selectFraIndex(state),
     sideStorrelse: selectSideStorrelse(state),
