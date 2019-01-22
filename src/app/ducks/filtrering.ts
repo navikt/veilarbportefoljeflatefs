@@ -68,6 +68,8 @@ function fjern(verdi, fjernVerdi) {
             .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
     } else if (fjernVerdi === null) {
         return null;
+    } else if (typeof verdi === 'string') {
+        return '';
     }
 
     throw new Error(`Kan ikke håndtere fjerning av ${fjernVerdi} fra ${verdi}`);

@@ -14,6 +14,7 @@ import { pagineringSetup } from '../ducks/paginering';
 import './veiledere-side.less';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import PanelBase from 'nav-frontend-paneler';
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -55,14 +56,12 @@ class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
                         </p>
                         <div className="veiledere-side--cols">
                             <div className="veiledere-side--filter-col">
-                                <Ekspanderbartpanel
-                                    apen
-                                    className="blokk-xxxs"
-                                    tittel="Søk"
-                                    tittelProps="undertittel"
-                                >
+                                <PanelBase className="blokk-xxxs">
+                                    <Undertittel>
+                                        <FormattedMessage id={'filtrering-sok-tittel'}/>
+                                    </Undertittel>
                                     <FiltreringVeiledere intl={intl} />
-                                </Ekspanderbartpanel>
+                                </PanelBase>
                             </div>
                             <div className="veiledere-side--liste-col">
                                 <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>

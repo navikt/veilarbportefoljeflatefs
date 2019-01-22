@@ -1,11 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import FiltreringStatus from './filtrering-status';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
-import FiltreringNavnOgFnr from './filtrering-navnellerfnr';
 import FiltreringFilter from './filtrering-filter';
+import FiltreringFilterVenstreToggle from './filtrering-filter-venstre-toggle';
+import { sjekkFeature } from '../ducks/features';
+import { FLYTT_FILTER_VENSTRE } from '../konstanter';
+import FiltreringNavnellerfnrVenstreToggle from './filtrering-navnellerfnr-venstre-toggle';
+import PanelBase from 'nav-frontend-paneler';
+import { Undertittel } from 'nav-frontend-typografi';
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -24,9 +30,18 @@ interface FiltreringContainerProps {
     };
 }
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
+function FiltreringContainerVenstreToggle({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
     return (
         <div className="blokk-m">
+            <PanelBase className="blokk-xxxs">
+                <Undertittel>
+                    <FormattedMessage id={'filtrering-sok-tittel'}/>
+                </Undertittel>
+                <FiltreringNavnellerfnrVenstreToggle
+                    filtervalg={filtervalg}
+                    actions={actions}
+                />
+            </PanelBase>
             <Ekspanderbartpanel
                 apen
                 className="blokk-xxxs"
@@ -45,21 +60,10 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                 tittel="Filter"
                 tittelProps="undertittel"
             >
-                <FiltreringFilter
+                <FiltreringFilterVenstreToggle
                     actions={actions}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
-                />
-            </Ekspanderbartpanel>
-            <Ekspanderbartpanel
-                apen
-                className="blokk-xxxs"
-                tittel="Søk"
-                tittelProps="undertittel"
-            >
-                <FiltreringNavnOgFnr
-                    filtervalg={filtervalg}
-                    actions={actions}
                 />
             </Ekspanderbartpanel>
         </div>
@@ -74,4 +78,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     }
 });
 
-export default connect(null, mapDispatchToProps)(FiltreringContainer);
+export default connect(null, mapDispatchToProps)(FiltreringContainerVenstreToggle);

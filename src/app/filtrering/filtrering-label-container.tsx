@@ -6,7 +6,7 @@ import FilterKonstanter, {
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
     ytelse
 } from './filter-konstanter';
-import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg } from '../ducks/filtrering';
+import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg } from '../ducks/filtrering';
 import { filtervalgLabelShape, veilederShape } from '../proptype-shapes';
 import { EnhetModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne, ListevisningState } from '../ducks/ui/listevisning';
@@ -43,8 +43,7 @@ function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
 function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}, filtergruppe, intl}: FiltreringLabelContainerProps) {
     let muligMenIkkeValgt: boolean;
     let kolonne: Kolonne | null;
-    const {navnEllerFnrQuery, ...rest} = filtervalg;
-    const filterElementer = Object.entries(rest)
+    const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
             if (value === true) {
                 return [
@@ -81,6 +80,26 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                             intl={intl}
                         />
                     ));
+            } else if (value && typeof value === 'string') {
+
+                const trimmedQuery = value.trim();
+
+                if (trimmedQuery !== '') {
+
+                    const isFnr = !isNaN(parseInt(trimmedQuery, 10));
+                    const labelId = `enhet.portefolje.tabelletikett.sok_${isFnr ? 'fnr' : 'navn'}`;
+
+                    return [
+                        <FiltreringLabel
+                            key={key}
+                            label={intl.formatMessage({ id: labelId })}
+                            slettFilter={() => slettEnkelt(key, '')}
+                            intl={intl}
+                        />
+                    ];
+
+                }
+
             } else if (value) {
                 kolonne = key === 'ytelse' ? Kolonne.UTLOP_YTELSE : getKolonneFraLabel(value);
                 muligMenIkkeValgt = kolonne === Kolonne.AVTALT_AKTIVITET && filtergruppe === 'veileder' ? true :
@@ -95,6 +114,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     />
                 ];
             }
+
             return [];
         }).reduce((acc, l) => [...acc, ...l], []);
 

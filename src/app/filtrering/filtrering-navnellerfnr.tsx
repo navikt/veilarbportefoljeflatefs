@@ -38,7 +38,7 @@ class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps
                 <div className="col-md-5">
                     <Input
                         label=""
-                        placeholder={this.props.intl.formatMessage({id: 'filtering-navn-eller-fnr'})}
+                        placeholder={this.props.intl.formatMessage({id: 'filtrering-navn-eller-fnr'})}
                         onChange={this.handleChange}
                         value={this.state.navnEllerFnrQuery}
                     />

@@ -5,7 +5,6 @@ import DocumentTitle from 'react-document-title';
 import Lenker from './../lenker/lenker';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
-import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
@@ -18,6 +17,7 @@ import { StatustallModell, ValgtEnhetModell, VeilederModell } from '../model-int
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { FiltreringState } from '../ducks/filtrering';
 import { pagineringSetup } from '../ducks/paginering';
+import FiltreringContainerVenstreToggle from '../filtrering/filtrering-container-venstre-toggle';
 
 import './enhet-side.less';
 
@@ -75,7 +75,7 @@ class EnhetSideVenstreToggle extends React.Component<EnhetSideProps, {}> {
                             </p>
                             <div className="enhet-side--cols">
                                 <div className="enhet-side--filter-col">
-                                    <FiltreringContainer
+                                    <FiltreringContainerVenstreToggle
                                         filtervalg={filtervalg}
                                         enhettiltak={enhettiltak.data.tiltak}
                                         filtergruppe="enhet"
