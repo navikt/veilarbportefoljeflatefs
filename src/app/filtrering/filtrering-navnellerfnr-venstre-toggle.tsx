@@ -26,6 +26,16 @@ class FiltreringNavnellerfnrVenstreToggle extends React.Component<FiltreringNavn
         this.handleChange = this.handleChange.bind(this);
     }
 
+    componentWillReceiveProps(prevProps: FiltreringNavnEllerFnrProps) {
+
+        const prevQuery = prevProps.filtervalg.navnEllerFnrQuery;
+
+        if (prevQuery === '') {
+            this.setState({ navnEllerFnrQuery: '' });
+        }
+
+    }
+
     handleChange(event) {
         this.setState({navnEllerFnrQuery:event.target.value});
         clearTimeout(this.timerId);
@@ -35,10 +45,10 @@ class FiltreringNavnellerfnrVenstreToggle extends React.Component<FiltreringNavn
     render() {
         return (
             <div className="row">
-                <div className="col-md-8">
+                <div className="col-md-12">
                     <Input
                         label=""
-                        placeholder={this.props.intl.formatMessage({id: 'filtering-navn-eller-fnr'})}
+                        placeholder={this.props.intl.formatMessage({id: 'filtrering-navn-eller-fnr'})}
                         onChange={this.handleChange}
                         value={this.state.navnEllerFnrQuery}
                     />

@@ -6,10 +6,9 @@ import DocumentTitle from 'react-document-title';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
-import FiltreringContainer from '../filtrering/filtrering-container';
+import FiltreringContainerVenstreToggle from '../filtrering/filtrering-container-venstre-toggle';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
-import { filtervalgShape, statustallShape } from '../proptype-shapes';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import { hentPortefoljeForVeileder, settSortering, settValgtVeileder } from '../ducks/portefolje';
@@ -127,7 +126,7 @@ class MinOversiktSideVenstreToggle extends React.Component<MinoversiktSideProps>
                                     </p>
                                     <div className="minoversikt-side--cols">
                                         <div className="minoversikt-side--filter-col">
-                                            <FiltreringContainer
+                                            <FiltreringContainerVenstreToggle
                                                 filtervalg={filtervalg}
                                                 filtergruppe="veileder"
                                                 veileder={gjeldendeVeileder}
