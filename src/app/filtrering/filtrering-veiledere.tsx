@@ -68,7 +68,9 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
         const query = veilederNavnQuery ? veilederNavnQuery.toLowerCase().trim() : '';
 
         return veiledere.data.veilederListe
-            .filter((veileder) => veileder.navn && veileder.navn.toLowerCase().indexOf(query) >= 0);
+            .filter((veileder) =>
+                veileder.navn && veileder.navn.toLowerCase().indexOf(query) >= 0 ||
+                veileder.ident && veileder.ident.toLowerCase().indexOf(query) >= 0);
 
     }
 
@@ -94,7 +96,7 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
                 <div className="col-md-12">
                     <Input
                         label=""
-                        placeholder={intl.formatMessage({id: 'filtrering-navn'})}
+                        placeholder={intl.formatMessage({id: 'filtrering-navn-eller-ident'})}
                         onChange={this.handleChange}
                         value={veilederNavnQuery}
                         onFocus={() => this.setFocus(true)}

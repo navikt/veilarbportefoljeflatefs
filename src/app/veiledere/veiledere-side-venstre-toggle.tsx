@@ -61,7 +61,7 @@ class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
                             <div className="veiledere-side--filter-col">
                                 <PanelBase className="blokk-xxxs">
                                     <Undertittel>
-                                        <FormattedMessage id={'filtrering-sok-tittel'}/>
+                                        <FormattedMessage id={'filtrering-sok-veileder-tittel'}/>
                                     </Undertittel>
                                     <FiltreringVeiledere intl={intl} />
                                 </PanelBase>
