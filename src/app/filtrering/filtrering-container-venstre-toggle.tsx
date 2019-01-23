@@ -34,9 +34,6 @@ function FiltreringContainerVenstreToggle({ filtergruppe, filtervalg, veileder= 
     return (
         <div className="blokk-m">
             <PanelBase className="blokk-xxxs">
-                <Undertittel>
-                    <FormattedMessage id={'filtrering-sok-tittel'}/>
-                </Undertittel>
                 <FiltreringNavnellerfnrVenstreToggle
                     filtervalg={filtervalg}
                     actions={actions}
