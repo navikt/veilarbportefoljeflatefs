@@ -11,6 +11,25 @@
       "@babel/preset-react"
     ]
   },
+  "scripts": {
+    "build": "npm run build:tekster && webpack -p",
+    "build:tekster": "react-intl-bundler ./tekster ./tekster-built",
+    "dev:mock": "npm run build:tekster && webpack-dev-server --env.dev --env.mock",
+    "dev": "npm run build:tekster && webpack-dev-server --env.dev --port 9593",
+    "watch": "webpack --watch --env.dev",
+    "watch:mock": "webpack --watch --env.dev --env.mock",
+    "test": "mocha",
+    "test:coverage": "nyc npm run test",
+    "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates --semverLevel major -e 2 -x history,react-router,react-router-redux,react-collapse,react-height,typescript,redux-form --packageFile ./package.json",
+    "lint": "eslint ./app/**/*.js && npm run tslint",
+    "eslint": "eslint ./app/**/*.js && npm run tslint",
+    "eslint:fix": "eslint --fix ./app/**/*.js && npm run tslint",
+    "tslint": "tslint ./app/**/*.ts*",
+    "tslint:fix": "tslint ./app/**/*.ts* --fix",
+    "heroku-serve": "node heroku-server.js",
+    "heroku-postbuild": "npm run build",
+    "upload:doc": "node documentation/scripts/upload-all"
+  },
   "devDependencies": {
     "@babel/core": "7.1.6",
     "@babel/preset-env": "7.1.6",
@@ -37,6 +56,7 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.10.3",
+    "express": "^4.16.4",
     "faker": "4.1.0",
     "fetch-mock": "5.12.1",
     "html-webpack-plugin": "3.2.0",
@@ -122,22 +142,5 @@
     "redux-form": "6.6.3",
     "redux-thunk": "2.2.0",
     "whatwg-fetch": "2.0.3"
-  },
-  "scripts": {
-    "build": "npm run build:tekster && webpack -p",
-    "build:tekster": "react-intl-bundler ./tekster ./tekster-built",
-    "dev:mock": "npm run build:tekster && webpack-dev-server --env.dev --env.mock",
-    "dev": "npm run build:tekster && webpack-dev-server --env.dev --port 9593",
-    "watch": "webpack --watch --env.dev",
-    "watch:mock": "webpack --watch --env.dev --env.mock",
-    "test": "mocha",
-    "test:coverage": "nyc npm run test",
-    "test:dep": "node ./node_modules/npm-check-updates/bin/npm-check-updates --semverLevel major -e 2 -x history,react-router,react-router-redux,react-collapse,react-height,typescript,redux-form --packageFile ./package.json",
-    "lint": "eslint ./app/**/*.js && npm run tslint",
-    "eslint": "eslint ./app/**/*.js && npm run tslint",
-    "eslint:fix": "eslint --fix ./app/**/*.js && npm run tslint",
-    "tslint": "tslint ./app/**/*.ts*",
-    "tslint:fix": "tslint ./app/**/*.ts* --fix",
-    "upload:doc": "node documentation/scripts/upload-all"
   }
 }
