@@ -80,7 +80,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                             intl={intl}
                         />
                     ));
-            } else if (value && typeof value === 'string') {
+            } else if (key === 'navnEllerFnrQuery') {
 
                 const trimmedQuery = value.trim();
 

@@ -33,12 +33,22 @@ type AllProps = FiltreringVeiledereProps & StateProps & DispatchProps;
 
 class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereState> {
 
+    private wrapperRef;
+
     constructor(props: AllProps) {
         super(props);
         this.state = {
             hasFocus: false
         };
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
     }
 
     handleChange(event) {
@@ -67,8 +77,10 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
         return data.reduce((acc, element) => ({ ...acc, [element.ident]: { label: element.navn } }), {});
     }
 
-    handleSubmit = (filterId, valgteVeiledere) => {
-        this.props.sokEtterVeileder(filterId, valgteVeiledere);
+    handleClickOutside = (event) => {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            this.setFocus(false);
+        }
     }
 
     render() {
@@ -78,7 +90,7 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
         const valg = this.mapVeiledereTilValg(this.getFiltrerteVeiledere());
 
         return (
-            <div className="row">
+            <div className="row" ref={(ref) => { this.wrapperRef = ref; }}>
                 <div className="col-md-12">
                     <Input
                         label=""
