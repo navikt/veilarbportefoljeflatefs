@@ -1,5 +1,5 @@
 const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
@@ -14,29 +14,29 @@ const PATHS_TO_CLEAN = [
 ];
 
 const FILES_TO_COPY_MOCK = [
-    {from: './index.html', to: path.join(PATHS.WEBAPP, 'index.html')},
-    {from: './head.min.js', to: path.join(PATHS.WEBAPP, 'js/')},
+    { from: './index.html', to: path.join(PATHS.WEBAPP, 'index.html') },
+    { from: './head.min.js', to: path.join(PATHS.WEBAPP, 'js/') },
 ];
 
 const FILES_TO_COPY_PROD = [
-    {from: './index.prod.html', to: path.join(PATHS.WEBAPP, 'index.html')},
+    { from: './index.prod.html', to: path.join(PATHS.WEBAPP, 'index.html') },
 ];
 
 function plugins(isMock, isDev) {
     const FILES_TO_COPY = isDev ? FILES_TO_COPY_MOCK : FILES_TO_COPY_PROD;
     return [
         new MiniCssExtractPlugin({
-            filename: "./css/index.css"
+            filename: './css/index.css'
         }),
         new CopyWebpackPlugin(FILES_TO_COPY),
         new CleanWebpackPlugin(PATHS_TO_CLEAN, { root: PATHS.WEBAPP }),
         new webpack.DefinePlugin({
             MOCK: JSON.stringify(isMock),
         })
-    ]
+    ];
 }
 
-function rules (isDev) {
+function rules(isDev) {
     return [
         {
             test: /\.js$/,
@@ -50,36 +50,37 @@ function rules (isDev) {
         },
 
         {
-        test: /\.less$/,
-        use: [
-            isDev ?'style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader',
-            { loader: 'less-loader',options: {
-                    globalVars: {
-                        coreModulePath: "'./../../../node_modules/'",
-                        nodeModulesPath: "'./../../../node_modules/'"
+            test: /\.less$/,
+            use: [
+                isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+                'css-loader',
+                { loader: 'less-loader', options: {
+                        globalVars: {
+                            coreModulePath: "'./../../../node_modules/'",
+                            nodeModulesPath: "'./../../../node_modules/'"
+                        }
                     }
                 }
-            }
-
-        ]
-    }
+            ]
+        }
     ];
 }
 
-module.exports = function(env) {
+module.exports = function (env) {
     const isDev = env && env.dev;
     const isMock = env && env.mock;
+    const isHeroku = env && env.heroku;
 
     const CONTEXTPATH = '/veilarbportefoljeflatefs/';
     return {
-        mode: isDev? 'development': 'production',
+        watch: !isHeroku,
+        mode: isDev || isHeroku ? 'development' : 'production',
         entry: path.join(PATHS.JS, 'index.js'),
         devtool: isDev ? 'source-map' : false,
         output: {
             path: PATHS.WEBAPP,
             filename: 'js/bundle.js',
-            publicPath: CONTEXTPATH,
+            publicPath: CONTEXTPATH
         },
         stats: {
             children: false
@@ -92,7 +93,7 @@ module.exports = function(env) {
             extensions: ['.js', '.ts', '.tsx', '.less']
         },
         devServer: {
-            port: 3000,
+            port: isHeroku ? 5000 : 3000,
             open: true,
             overlay: true,
             publicPath: CONTEXTPATH,
@@ -101,5 +102,5 @@ module.exports = function(env) {
                 app.get('/', (req, res) => res.redirect(CONTEXTPATH));
             }
         }
-    }
+    };
 };

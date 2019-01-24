@@ -12,6 +12,8 @@ tekster-built/
 
 target
 
+build/
+
 **/webapp/css/**/*
 **/webapp/img/**/*
 **/webapp/build/**/*
