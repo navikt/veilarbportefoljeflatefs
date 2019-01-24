@@ -69,12 +69,10 @@ function rules(isDev) {
 module.exports = function (env) {
     const isDev = env && env.dev;
     const isMock = env && env.mock;
-    const isHeroku = env && env.heroku;
 
     const CONTEXTPATH = '/veilarbportefoljeflatefs/';
     return {
-        watch: !isHeroku,
-        mode: isDev || isHeroku ? 'development' : 'production',
+        mode: isDev ? 'development' : 'production',
         entry: path.join(PATHS.JS, 'index.js'),
         devtool: isDev ? 'source-map' : false,
         output: {
@@ -93,7 +91,7 @@ module.exports = function (env) {
             extensions: ['.js', '.ts', '.tsx', '.less']
         },
         devServer: {
-            port: isHeroku ? 5000 : 3000,
+            port: 3000,
             open: true,
             overlay: true,
             publicPath: CONTEXTPATH,
