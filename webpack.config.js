@@ -73,8 +73,7 @@ module.exports = function (env) {
 
     const CONTEXTPATH = '/veilarbportefoljeflatefs/';
     return {
-        watch: !isHeroku,
-        mode: isDev || isHeroku ? 'development' : 'production',
+        mode: isDev ? 'development' : 'production',
         entry: path.join(PATHS.JS, 'index.js'),
         devtool: isDev ? 'source-map' : false,
         output: {
