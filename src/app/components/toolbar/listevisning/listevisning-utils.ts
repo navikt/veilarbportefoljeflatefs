@@ -15,6 +15,6 @@ alternativerConfig.set(Kolonne.UTLOP_YTELSE, {tekstid: 'listevisning.valg.utlopy
 alternativerConfig.set(Kolonne.UTLOP_AKTIVITET, {tekstid: 'listevisning.valg.utlopaktivitet'});
 alternativerConfig.set(Kolonne.UTLOPTE_AKTIVITETER, {tekstid: 'listevisning.valg.utlopteaktiviteter'});
 alternativerConfig.set(Kolonne.AVTALT_AKTIVITET, {tekstid: 'listevisning.valg.avtaltaktivitet'});
-alternativerConfig.set(Kolonne.START_DATO_AKTIVITET, {tekstid: 'listevisning.valg.aktivitet.start'});
-alternativerConfig.set(Kolonne.NESTE_START_DATO_AKTIVITET, {tekstid: 'listevisning.valg.neste.aktivitet_start'});
-alternativerConfig.set(Kolonne.FORRIGE_START_DATO_AKTIVITET, {tekstid: 'listevisning.valg.forrige.aktivitet_start'});
+alternativerConfig.set(Kolonne.START_DATO_AKTIVITET, {tekstid: 'listevisning.valg.aktivitet_start'});
+alternativerConfig.set(Kolonne.NESTE_START_DATO_AKTIVITET, {tekstid: 'listevisning.valg.neste_aktivitet_start'});
+alternativerConfig.set(Kolonne.FORRIGE_START_DATO_AKTIVITET, {tekstid: 'listevisning.valg.forrige_aktivitet_start'});
