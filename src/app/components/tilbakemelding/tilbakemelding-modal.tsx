@@ -1,8 +1,10 @@
 import * as React from 'react';
-import NavFrontendModal from 'nav-frontend-modal';
-import './tilbakemelding-modal.less';
+import * as classNames from 'classnames';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { ReactChildren } from 'react';
+import { Textarea } from 'nav-frontend-skjema';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import TilfredshetValg from './tilfredshet-valg';
+import './tilbakemelding-modal.less';
 
 export interface Tilbakemelding {
     tilfredshet: number;
@@ -11,7 +13,6 @@ export interface Tilbakemelding {
 
 interface TilbakemeldingModalProps {
     open: boolean;
-    onRequestClose: () => void;
     onTilbakemeldingSendt: (tilbakemelding: Tilbakemelding) => void;
 }
 
@@ -19,6 +20,7 @@ interface TilbakemeldingModalState {
     tilfredshet: number;
     kommentar: string;
     harSendt: boolean;
+    harBlittVist: boolean;
 }
 
 class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, TilbakemeldingModalState> {
@@ -32,7 +34,8 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
         this.state = {
             tilfredshet: 0,
             kommentar: '',
-            harSendt: false
+            harSendt: false,
+            harBlittVist: false
         };
     }
 
@@ -42,30 +45,12 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
 
     handleSendTilbakemeldingClicked = () => {
         const { tilfredshet, kommentar } = this.state;
-        this.props.onTilbakemeldingSendt({ tilfredshet, kommentar });
         this.setState({ harSendt: true });
+        this.props.onTilbakemeldingSendt({ tilfredshet, kommentar });
     }
 
-    handleTilfredshetChanged = (e) => {
-        this.setState({ tilfredshet: parseInt(e.target.value, 10) });
-    }
-
-    renderTilfredshetValg = () => {
-        const { tilfredshet } = this.state;
-        const valg: React.ReactChild[] = [];
-
-        for (let i = 1; i <= 5; i++) {
-            valg.push(<input
-                type="radio"
-                name="satisfactionLevel"
-                key={i}
-                value={i.toString()}
-                checked={tilfredshet === i}
-                onChange={this.handleTilfredshetChanged}
-            />);
-        }
-
-        return valg;
+    handleTilfredshetChanged = (tilfredshet: number) => {
+        this.setState({ tilfredshet });
     }
 
     renderForm = () => {
@@ -75,16 +60,24 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
 
         return (
             <div>
-                <p>Vi har endret layout i oversikten. Hvordan opplever du endringen? Svarene er anonyme.</p>
+                <Innholdstittel className="blokk-xs">
+                    Tilbakemelding
+                </Innholdstittel>
+                <Normaltekst className="tilbakemelding-modal__ingress">
+                    Vi har endret layout i oversikten. Hvordan opplever du endringen? Svarene er anonyme.
+                </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
-                    {this.renderTilfredshetValg()}
+                    <TilfredshetValg
+                        onTilfredshetChanged={this.handleTilfredshetChanged}
+                        defaultTilfredshet={tilfredshet}
+                    />
                 </div>
                 {harBesvartTilfredshet && (
                     <div>
                         <div className="tilbakemelding-modal__kommentar">
-                            <p>Si gjerne litt mer om opplevelsen av endringen.</p>
-                            <textarea
+                            <Textarea
                                 className="tilbakemelding-modal__kommentar-felt"
+                                label="Si gjerne litt mer om opplevelsen av endringen."
                                 rows={this.KOMMENTAR_ROWS}
                                 maxLength={this.KOMMENTAR_MAX_CHAR}
                                 value={kommentar}
@@ -103,27 +96,40 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
     renderTakkMelding = () => {
         return (
             <div className="tilbakemelding-modal__takk-melding">
-                <p>Takk for at du tok deg til til å gi tilbakemelding. Vi bruker innspillene til å forbedre løsningen.</p>
+                <Normaltekst>
+                    Takk for at du tok deg til til å gi tilbakemelding.
+                    Vi bruker innspillene til å forbedre løsningen.
+                </Normaltekst>
             </div>
         );
     }
 
+    componentDidUpdate(prevProps: TilbakemeldingModalProps) {
+        if (prevProps.open) {
+            this.setState({ harBlittVist: true });
+        }
+    }
+
     render() {
 
-        const { open, onRequestClose } = this.props;
-        const { harSendt } = this.state;
+        const { open } = this.props;
+        const { harSendt, harBlittVist } = this.state;
+
+        // Make sure that the animation will trigger when closing instead of returning null (no animation)
+        if (!open && !harBlittVist) {
+            return null;
+        }
 
         return (
-            <NavFrontendModal
-                className="tilbakemelding-modal"
-                isOpen={open}
-                contentLabel="label"
-                onRequestClose={onRequestClose}>
-                <div className="modal-header-wrapper">
-                    <header className="modal-header"/>
+            <div className={classNames('tilbakemelding-modal',
+                { 'tilbakemelding-modal--slide-in': open },
+                { 'tilbakemelding-modal--slide-out': !open })}
+            >
+                <div className={classNames('tilbakemelding-modal__innhold',
+                    { 'tilbakemelding-modal__innhold--takk': harSendt})}>
+                    {harSendt ? this.renderTakkMelding() : this.renderForm()}
                 </div>
-                {harSendt ? this.renderTakkMelding() : this.renderForm()}
-            </NavFrontendModal>
+            </div>
         );
     }
 }

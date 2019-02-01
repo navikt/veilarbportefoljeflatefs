@@ -39,11 +39,9 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
     }
 
     handleFabClicked = () => {
-        this.setState({ isModalOpen: true });
-    }
-
-    handleModalRequestClose = () => {
-        this.setState({ isModalOpen: false });
+        this.setState((prevState: TilbakemeldingFabState) => {
+            return { isModalOpen: !prevState.isModalOpen };
+        });
     }
 
     handleTilbakemeldingSendt = (tilbakemelding: Tilbakemelding) => {
@@ -56,7 +54,7 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
 
         const { harFeature } = this.props;
         const { isModalOpen, harSendtTilbakemelding } = this.state;
-        const harRiktigFeatures = harFeature(SPOR_OM_TILBAKEMELDING) && harFeature(FLYTT_FILTER_VENSTRE);
+        const harRiktigFeatures = harFeature(SPOR_OM_TILBAKEMELDING) && harFeature(FLYTT_FILTER_VENSTRE); // NB: Husk å endre for hver feature
 
         if (!harRiktigFeatures || harSendtTilbakemelding || this.harTidligereSendtTilbakemelding()) {
             return null;
@@ -69,7 +67,6 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
                 </div>
                 <TilbakemeldingModal
                     open={isModalOpen}
-                    onRequestClose={this.handleModalRequestClose}
                     onTilbakemeldingSendt={this.handleTilbakemeldingSendt}
                 />
             </div>
