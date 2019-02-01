@@ -53,7 +53,7 @@ function prepSubmit(name, fn, close) {
     };
 }
 
-function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown, justerVenstre }) {
+function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown }) {
     const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown));
     const harValg = Object.keys(valg).length > 0;
 
@@ -67,8 +67,7 @@ function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, clos
             <div className="checkbox-filterform__under-valg">
                 {harValg ?
                     <div
-                        className={classNames({ knapperad: !justerVenstre },
-                            'checkbox-filterform__valg-knapp', 'blokk-xxs')}
+                        className={classNames('checkbox-filterform__valg-knapp', 'knapperad', 'blokk-xxs')}
                     >
                         <SubmitKnapp pristine={pristine} closeDropdown={closeDropdown} />
                     </div>
@@ -92,8 +91,7 @@ CheckboxFilterform.propTypes = {
     form: PT.string.isRequired,
     valg: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     closeDropdown: PT.func,
-    onSubmit: PT.func.isRequired,
-    justerVenstre: PT.bool
+    onSubmit: PT.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {

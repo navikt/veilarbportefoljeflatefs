@@ -2,11 +2,7 @@ import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { connect } from 'react-redux';
 import { endreFiltervalg } from '../ducks/filtrering';
-import SokFilter from '../components/toolbar/sok-filter';
-import { VeiledereState } from '../ducks/veiledere';
-import { FiltervalgModell, VeilederModell } from '../model-interfaces';
-import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
-import { ListevisningType } from '../ducks/ui/listevisning';
+import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
 
 interface FiltreringVeiledereState {
     veilederNavnQuery?: string;
@@ -18,14 +14,10 @@ interface FiltreringVeiledereProps {
 }
 
 interface StateProps {
-    veiledere: VeiledereState;
-    filtervalg: FiltervalgModell;
     veilederNavnQuery: string;
-    veileder?: VeilederModell;
 }
 
 interface DispatchProps {
-    sokEtterVeileder: (filterId: string, filterverdi: string) => void;
     endreFiltervalg: (filterId: string, filterVerdi: string) => void;
 }
 
@@ -38,7 +30,7 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
     constructor(props: AllProps) {
         super(props);
         this.state = {
-            hasFocus: false
+            hasFocus: false,
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -61,22 +53,8 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
         this.setState({ hasFocus: focus });
     }
 
-    getFiltrerteVeiledere = (): VeilederModell[] => {
-
-        const { veilederNavnQuery, veiledere } = this.props;
-
-        const query = veilederNavnQuery ? veilederNavnQuery.toLowerCase().trim() : '';
-
-        return veiledere.data.veilederListe
-            .filter((veileder) =>
-                veileder.navn && veileder.navn.toLowerCase().indexOf(query) >= 0 ||
-                veileder.ident && veileder.ident.toLowerCase().indexOf(query) >= 0);
-
-    }
-
-    mapVeiledereTilValg = (veiledere: VeilederModell[]): {} => {
-        const data: any[] = veiledere;
-        return data.reduce((acc, element) => ({ ...acc, [element.ident]: { label: element.navn } }), {});
+    handleVeiledereSubmitted = () => {
+        this.setFocus(false);
     }
 
     handleClickOutside = (event) => {
@@ -87,9 +65,8 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
 
     render() {
 
-        const { intl, filtervalg } = this.props;
+        const { intl } = this.props;
         const { hasFocus, veilederNavnQuery } = this.state;
-        const valg = this.mapVeiledereTilValg(this.getFiltrerteVeiledere());
 
         return (
             <div className="row" ref={(ref) => { this.wrapperRef = ref; }}>
@@ -102,13 +79,10 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
                         onFocus={() => this.setFocus(true)}
                     />
                     {hasFocus &&
-                        <CheckboxFilterform
-                            form="veiledere"
-                            valg={valg}
-                            filtervalg={filtervalg}
-                            closeDropdown={() => this.setFocus(false)}
-                            onSubmit={this.props.sokEtterVeileder}
-                            justerVenstre={true}
+                        <VeilederCheckboxListe
+                            open={hasFocus}
+                            onSubmit={this.handleVeiledereSubmitted}
+                            onClose={() => this.setFocus(false)}
                         />
                     }
                 </div>
@@ -118,18 +92,12 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
 }
 
 const mapStateToProps = (state): StateProps => ({
-    filtervalg: state.filtreringVeilederoversikt,
-    veileder: state.veileder,
-    veiledere: state.veiledere,
     veilederNavnQuery: state.filtreringVeilederoversikt.veilederNavnQuery
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
     endreFiltervalg: (filterId: string, filterVerdi: string) => {
         dispatch(endreFiltervalg(filterId, filterVerdi, 'veiledere'));
-    },
-    sokEtterVeileder(filterId: string, valgteVeiledere: string[]) {
-        dispatch(endreFiltervalg(filterId, valgteVeiledere, 'veiledere', {}));
     }
 });
 
