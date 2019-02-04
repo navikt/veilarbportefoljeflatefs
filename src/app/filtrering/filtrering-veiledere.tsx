@@ -40,7 +40,6 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
         this.state = {
             hasFocus: false
         };
-        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -51,7 +50,7 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
         document.removeEventListener('mousedown', this.handleClickOutside);
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         const nyQuery = event.target.value;
         this.setState({ veilederNavnQuery: nyQuery });
         this.props.endreFiltervalg('veilederNavnQuery', nyQuery);

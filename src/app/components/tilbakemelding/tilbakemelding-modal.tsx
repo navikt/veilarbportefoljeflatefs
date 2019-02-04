@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Textarea } from 'nav-frontend-skjema';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import TilfredshetValg from './tilfredshet-valg';
 import './tilbakemelding-modal.less';
 
@@ -13,7 +13,7 @@ export interface Tilbakemelding {
 
 interface TilbakemeldingModalProps {
     open: boolean;
-    onTilbakemeldingSendt: (tilbakemelding: Tilbakemelding) => void;
+    onTilbakemeldingSendt: (tilbakemelding?: Tilbakemelding) => void;
 }
 
 interface TilbakemeldingModalState {
@@ -21,6 +21,7 @@ interface TilbakemeldingModalState {
     kommentar: string;
     harSendt: boolean;
     harBlittVist: boolean;
+    ikkeVisIgjen: boolean;
 }
 
 class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, TilbakemeldingModalState> {
@@ -35,12 +36,19 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
             tilfredshet: 0,
             kommentar: '',
             harSendt: false,
-            harBlittVist: false
+            harBlittVist: false,
+            ikkeVisIgjen: false
         };
     }
 
     handleKommentarChanged = (e) => {
-        this.setState({ kommentar: e.target.value });
+
+        const value = e.target.value;
+
+        if (value.length <= this.KOMMENTAR_MAX_CHAR) {
+            this.setState({ kommentar: value });
+        }
+
     }
 
     handleSendTilbakemeldingClicked = () => {
@@ -53,6 +61,11 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
         this.setState({ tilfredshet });
     }
 
+    handleIkkeVisIgjenClicked = () => {
+        this.setState({ harSendt: true, ikkeVisIgjen: true });
+        this.props.onTilbakemeldingSendt();
+    }
+
     renderForm = () => {
 
         const { tilfredshet, kommentar } = this.state;
@@ -60,7 +73,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
 
         return (
             <div>
-                <Innholdstittel className="blokk-xs">
+                <Innholdstittel className="blokk-xxs tilbakemelding-modal__tittel">
                     Tilbakemelding
                 </Innholdstittel>
                 <Normaltekst className="tilbakemelding-modal__ingress">
@@ -68,9 +81,11 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                 </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
                     <TilfredshetValg
+                        className="blokk-xs"
                         onTilfredshetChanged={this.handleTilfredshetChanged}
                         defaultTilfredshet={tilfredshet}
                     />
+                    {!harBesvartTilfredshet && <a className="lenke" onClick={this.handleIkkeVisIgjenClicked}>Ikke vis dette igjen</a>}
                 </div>
                 {harBesvartTilfredshet && (
                     <div>
@@ -96,16 +111,20 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
     renderTakkMelding = () => {
         return (
             <div className="tilbakemelding-modal__takk-melding">
-                <Normaltekst>
-                    Takk for at du tok deg til til å gi tilbakemelding.
+                <img
+                    className="tilbakemelding-modal__takk-ikon"
+                    src="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAMAAADypuvZAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABQVBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBQMAAAAAAAAAAAADCgYAAAAAAAACBgMAAAAAAAAAAQEAAAAAAAAFEQoAAAAAAAAAAAARMR0fWjYoc0UwilMzlVk2nV4VPCQmbkI1ml04oWEbTi81mFw0mFsWQCYykVcsgE0MIhQUOiI2m10xjlUIGA4JHBEIGQ8TOCIbTy8GEQoQMB0BBQMSNR8JGxAcUjEiYzwEDAcyklguhVA0lloXQigvh1EviFIXQygKHhINJhc3n18PLRsKHREqekkAAgEYRiogXDcnckQgXjgeWDUqeUkBBAIYRyoUOyQ0lVojZT0NJxcgXjkDCgYtg08ncEMwjFQBAwEDCQUMIxUHFAwlakAjZj4ZRysSMx8QLhwTOSIbTS4re0o3n2CSKFGVAAAAHXRSTlMAJWaVvN7s+S+M4jbA/r8kqv4E+v4Tvv4r3f5F8rmg0BYAAAABYktHRACIBR1IAAAACXBIWXMAAAsSAAALEgHS3X78AAAAB3RJTUUH4wIEDg4gBtUn9wAAAjlJREFUSMedVmdj2jAUFBuTQtgEwrFBEMxqQhLIJB1p0126917//wfUCEolGbDRfTvxDktvE2KGw+lye7w+n9fjdjkdxAb8WgACAprfQrJxzTAL5vKFYqlcLhUL+VzQOAhtrJBshoFIpVqjHGrVSgQIby6RRLUY4vUGNWGnHkdMiy7SJJJINXW6EHozhWTCrNlKI9OiS9HKIL0la7azaOt0BfQ2stvSd7LodOlKdDvICt9KpNGhluggzb0rmkS7ay3qtpH870MNGd1aY7wrA20e01iqZUdj+DAV+xflMJr2NJQ2EZ7lG+K2LscuGMc0D0Oo29VQWkeI1QIifL71ru/2eKve7h7PdyLwM9dVeKM+sM/zfaDP8wpzYABV/vAAOOT5IXDA8yoCRm0jKNTPABjyfAgMeF4LwkGcyAkvPQKOeX4MHAkGOTiJC3nh7ASnZzw/O8WJYJCHi7hREJ16PhL56FzkBbiJB0WbIZqhCA/xorSeqAQv8aG8nqgMn5pI6XpKjjC53AoTl8vBtcQkuHIaWWKSRnLCXtyQrW7e4hlLWLk0bl/ekUR3r3jGSkMuwnv3H4iah3jE02kRSuVOH+MJT5+OhT9pTMvd1Fie4fmLOXk5fiVkzKyxmFvY6/Gb+lv26HeXGAr9et7CzM3yff8DPl592hvg8xfxl3mzXNSWR1+/ff/x89fvP+Ix15aVBoDaqFEaamrjU21Qq60EasvHijWnsXzNIUoLFcvD9Vc3NhjXXxIZLNfRv/8qPkEO8w3mAAAAAElFTkSuQmCC"
+                />
+                <Element>
+                    Takk for at du tok deg tid til å gi tilbakemelding.
                     Vi bruker innspillene til å forbedre løsningen.
-                </Normaltekst>
+                </Element>
             </div>
         );
     }
 
     componentDidUpdate(prevProps: TilbakemeldingModalProps) {
-        if (prevProps.open) {
+        if (prevProps.open && !this.state.harBlittVist) {
             this.setState({ harBlittVist: true });
         }
     }
@@ -113,10 +132,10 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
     render() {
 
         const { open } = this.props;
-        const { harSendt, harBlittVist } = this.state;
+        const { harSendt, harBlittVist, ikkeVisIgjen } = this.state;
 
         // Make sure that the animation will trigger when closing instead of returning null (no animation)
-        if (!open && !harBlittVist) {
+        if ((!open && !harBlittVist) || ikkeVisIgjen) {
             return null;
         }
 
