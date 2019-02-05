@@ -19,11 +19,12 @@ import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import {
     getSeAlleFromUrl, getSideFromUrl, getSorteringsFeltFromUrl,
-    getSorteringsRekkefolgeFromUrl
+    getSorteringsRekkefolgeFromUrl, updateLastPath
 } from '../utils/url-utils';
 import { pagineringSetup } from '../ducks/paginering';
 import './minoversikt-side.less';
-import {RouterProps} from "react-router";
+import { RouterProps } from 'react-router';
+import { basename } from '../history';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -55,7 +56,7 @@ interface OwnProps {
 
 type MinoversiktSideProps = StateProps & DispatchProps & OwnProps & RouterProps;
 
-//TODO FIKS TYPERNE
+// TODO FIKS TYPERNE
 class MinOversiktSideVenstreToggle extends React.Component<any> {
     componentDidMount() {
         const { veiledere, enheter, valgtEnhet, filtervalg, hentPortefolje, ...props } = this.props;
@@ -77,6 +78,7 @@ class MinOversiktSideVenstreToggle extends React.Component<any> {
         hentPortefolje(
             valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, sorteringsrekkefolge, sorteringsfelt, filtervalg
         );
+        updateLastPath();
 
     }
 
@@ -88,7 +90,6 @@ class MinOversiktSideVenstreToggle extends React.Component<any> {
 
     render() {
         const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
-        console.log("props.params", this.props);
 
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
         const innloggetVeileder = { ident: enheter.ident };

@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { IntlProvider, addLocaleData } from 'react-intl';
@@ -6,9 +6,7 @@ import nb from 'react-intl/locale-data/nb';
 import queryString from 'query-string';
 import EnhetContext from './components/enhet-context/enhet-context';
 import tekstBundle from './tekster-built/bundle';
-import { sjekkFeature } from './ducks/features';
-import { FLYTT_FILTER_VENSTRE } from './konstanter';
-import {Route, withRouter, Switch, Redirect} from "react-router-dom";
+import {Route, Switch, Redirect, withRouter} from "react-router-dom";
 import EnhetSide from "./enhet/enhet-side";
 import VeiledereSide from "./veiledere/veiledere-side";
 import MinOversiktSide from "./minoversikt/minoversikt-side";
@@ -16,8 +14,8 @@ import EnhetSideVenstreToggle from "./enhet/enhet-side-venstre-toggle";
 import MinOversiktSideVenstreToggle from "./minoversikt/minoversikt-side-venstre-toggle";
 import VeiledereSideVenstreToggle from "./veiledere/veiledere-side-venstre-toggle";
 import TilbakemeldingFab from "./components/tilbakemelding/tilbakemelding-fab";
-import {getEnhetFromUrl, sendBrukerTilUrl} from "./utils/url-utils";
-import {basename} from "./history";
+import {sjekkFeature} from "./ducks/features";
+import {FLYTT_FILTER_VENSTRE} from "./konstanter";
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(window.location.search).vistekster; // eslint-disable-line no-undef
@@ -29,86 +27,68 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
 
 addLocaleData(nb);
 
-
-
-class Application extends Component {
-    componentWillMount() {
-        this.redirect();
-    }
-
-    componentDidUpdate(prevProps) {
-        if(this.props.location !== prevProps.location) {
-            this.updateLastPath();
-        }
-    }
-
-    updateLastPath() {
-        const base = this.props.location.pathname.replace(basename, '');
-        if (base !== '/tilbake') {
-            const search = window.location.search;
-            localStorage.setItem('lastpath', base + search);
-        }
-    }
-    redirect()
-    {
-        const lastPath = localStorage.getItem('lastpath');
-        if (lastPath) {
-            sendBrukerTilUrl(lastPath);
-        }
-    }
-
-    render() {
-        const {flyttFilterTilVenstre } = this.props;
-        return (
-            <IntlProvider
-                defaultLocale="nb"
-                locale="nb"
-                messages={mapTeksterTilNokkelDersomAngitt(tekstBundle.nb)}
-            >
-                <div className="portefolje">
-                    <EnhetContext >
-                        <div
-                            className = {classnames({ container: !flyttFilterTilVenstre }, 'maincontent', 'side-innhold')}
-                        >
-                            <Switch>
-                                <Route
-                                    path="/enhet"
-                                    render={() =>
-                                        flyttFilterTilVenstre ?
-                                            <EnhetSideVenstreToggle/> :
-                                            <EnhetSide/>} />
-                                <Route
-                                    path="/veiledere"
-                                    render={() =>
-                                        flyttFilterTilVenstre ?
-                                            <VeiledereSideVenstreToggle/> :
-                                            <VeiledereSide/>}
-                                />
-                                <Route
-                                    path="/portefolje/:ident"
-                                    render={(props) =>
-                                        flyttFilterTilVenstre ?
-                                            <MinOversiktSideVenstreToggle {...props}/> :
-                                            <MinOversiktSide {...props}/>}
-                                />
-                                <Route
-                                    path="/portefolje"
-                                    render={(props) =>
-                                        flyttFilterTilVenstre ?
-                                            <MinOversiktSideVenstreToggle {...props}/> :
-                                            <MinOversiktSide {...props}/>}
-                                />
-                                <Route
-                                    render={() => <Redirect to ="/enhet"/>}
-                                />
-                            </Switch>
-                            <TilbakemeldingFab/>
-                        </div>
-                    </EnhetContext>
-                </div>
-            </IntlProvider>
-        );
-    }
+function Application ({flyttFilterTilVenstre}) {
+    return (
+        <IntlProvider
+            defaultLocale="nb"
+            locale="nb"
+            messages={mapTeksterTilNokkelDersomAngitt(tekstBundle.nb)}
+        >
+            <div className="portefolje">
+                <EnhetContext >
+                    <div
+                        className = {classnames({ container: !flyttFilterTilVenstre }, 'maincontent', 'side-innhold')}
+                    >
+                        <Switch>
+                            <Route
+                                path="/enhet"
+                                render={() =>
+                                    flyttFilterTilVenstre ?
+                                        <EnhetSideVenstreToggle/> :
+                                        <EnhetSide/>} />
+                            <Route
+                                path="/veiledere"
+                                render={() =>
+                                    flyttFilterTilVenstre ?
+                                        <VeiledereSideVenstreToggle/> :
+                                        <VeiledereSide/>}
+                            />
+                            <Route
+                                path="/portefolje/:ident"
+                                render={(props) =>
+                                    flyttFilterTilVenstre ?
+                                        <MinOversiktSideVenstreToggle {...props}/> :
+                                        <MinOversiktSide {...props}/>}
+                            />
+                            <Route
+                                path="/portefolje"
+                                render={(props) =>
+                                    flyttFilterTilVenstre ?
+                                        <MinOversiktSideVenstreToggle {...props}/> :
+                                        <MinOversiktSide {...props}/>}
+                            />
+                            <Route
+                                render={() => {
+                                    const lastPath = localStorage.getItem('lastpath');
+                                    const lastSearch = localStorage.getItem('lastsearch');
+                                    if (lastPath) {
+                                        return (
+                                            <Redirect to={{
+                                                pathname: lastPath,
+                                                search: lastSearch
+                                            }}/>);
+                                    } else {
+                                        return <Redirect to={'/enhet'}/>;
+                                    }
+                                }}
+                            />
+                        </Switch>
+                        <TilbakemeldingFab/>
+                    </div>
+                </EnhetContext>
+            </div>
+        </IntlProvider>
+    );
 }
 
 /*

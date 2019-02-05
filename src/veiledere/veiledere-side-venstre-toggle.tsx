@@ -7,7 +7,7 @@ import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import Lenker from './../lenker/lenker';
-import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
+import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl, updateLastPath } from '../utils/url-utils';
 import { VeiledereState } from '../ducks/veiledere';
 import { ValgtEnhetModell } from '../model-interfaces';
 import { pagineringSetup } from '../ducks/paginering';
@@ -17,6 +17,8 @@ import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { FiltreringState } from '../ducks/filtrering';
+import { RouterState } from 'react-router';
+import { basename } from '../history';
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -33,11 +35,16 @@ interface DispatchProps {
 type VeiledereSideProps = StateProps & DispatchProps & InjectedIntlProps;
 
 class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
+
     componentWillMount() {
         const { hentPortefoljestorrelser, valgtEnhet } = this.props;
         hentPortefoljestorrelser(valgtEnhet.enhet!.enhetId);
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
         this.settInitalStateFraUrl();
+    }
+
+    componentDidMount() {
+        updateLastPath();
     }
 
     settInitalStateFraUrl() {

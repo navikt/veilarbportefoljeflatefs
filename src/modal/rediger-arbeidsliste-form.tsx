@@ -38,12 +38,13 @@ interface RedigerArbeidslisteFormProps {
     arbeidslisteStatus: Status;
 }
 
-function RedigerArbeidslisteForm({ lukkModal,
-                                     handleSubmit,
-                                     bruker,
-                                     sistEndretDato,
-                                     sistEndretAv,
-                                     arbeidslisteStatus }: RedigerArbeidslisteFormProps) {
+function RedigerArbeidslisteForm({
+    lukkModal,
+    handleSubmit,
+    bruker,
+    sistEndretDato,
+    sistEndretAv,
+    arbeidslisteStatus }: RedigerArbeidslisteFormProps) {
     const lagrer = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     return (
         <form onSubmit={handleSubmit}>
@@ -63,7 +64,7 @@ function RedigerArbeidslisteForm({ lukkModal,
                         maxLength={KOMMENTAR_MAKS_LENGDE}
                         disabled={false}
                         visTellerFra={500}
-                        onChange={(e: any)=> {}}
+                        onChange={(e)=> e} /* tslint:disable:no-empty */
                         value={name}
                     />
                 </div>

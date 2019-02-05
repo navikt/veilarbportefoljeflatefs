@@ -7,7 +7,7 @@ import Innholdslaster from './../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
+import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl, updateLastPath } from '../utils/url-utils';
 import { hentStatusTall } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
@@ -48,7 +48,6 @@ class EnhetSideVenstreToggle extends React.Component<EnhetSideProps, {}> {
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
         this.settInitalStateFraUrl();
     }
-
     settInitalStateFraUrl() {
         const side = getSideFromUrl();
         const seAlle = getSeAlleFromUrl();
@@ -58,6 +57,7 @@ class EnhetSideVenstreToggle extends React.Component<EnhetSideProps, {}> {
     componentDidMount() {
         this.props.hentStatusTall(this.props.valgtEnhet.enhet!.enhetId);
         this.props.hentEnhetTiltak(this.props.valgtEnhet.enhet!.enhetId);
+        updateLastPath();
     }
 
     render() {

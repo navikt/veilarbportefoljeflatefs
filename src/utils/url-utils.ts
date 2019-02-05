@@ -1,7 +1,7 @@
 import * as queryString from 'query-string';
 import history, { basename } from '../history';
 import { IKKE_SATT } from '../konstanter';
-import {string} from "prop-types";
+import { string } from 'prop-types';
 
 export function slettCleanIUrl() {
     const parsed = queryString.parse(location.search); // eslint-disable-line no-undef
@@ -15,7 +15,7 @@ export function slettCleanIUrl() {
 
     const stringified = queryString.stringify(parsed);
     const pathname = window.location.pathname.replace(basename, '');
-    history.replace(`${pathname}?${stringified}`);
+    history.replace(`${window.location.pathname}?${stringified}`);
 }
 
 export function leggEnhetIUrl(enhet: string, refresh: boolean = false) {
@@ -25,7 +25,7 @@ export function leggEnhetIUrl(enhet: string, refresh: boolean = false) {
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname.replace(basename, '');
 
-        history.replace(`${pathname}?${stringified}`);
+        history.replace(`${window.location.pathname}?${stringified}`);
         if (refresh) {
             window.location.reload(true);
         }
@@ -43,7 +43,7 @@ export function setFraBrukerIUrl(bruker: string) {
 
     const stringified = queryString.stringify(parsed);
     const pathname = window.location.pathname.replace(basename, '');
-    history.replace(`${pathname}?${stringified}`);
+    history.replace(`${window.location.pathname}?${stringified}`);
 }
 
 export function getEnhetFromUrl() {
@@ -57,7 +57,7 @@ export function leggSideIUrl(side) {
 
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname.replace(basename, '');
-        history.replace(`${pathname}?${stringified}`);
+        history.replace(`${window.location.pathname}?${stringified}`);
     }
 }
 
@@ -70,7 +70,7 @@ export function leggSeAlleIUrl(seAlle: boolean = false) {
     parsed.seAlle = seAlle;
     const stringified = queryString.stringify(parsed);
     const pathname = window.location.pathname.replace(basename, '');
-    history.replace(`${pathname}?${stringified}`);
+    history.replace(`${ window.location.pathname}?${stringified}`);
 }
 
 export function getSeAlleFromUrl(): boolean {
@@ -85,7 +85,7 @@ export function leggSorteringIUrl(sorteringsfelt, sorteringsrekkefolge) {
 
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname.replace(basename, '');
-        history.replace(`${pathname}?${stringified}`);
+        history.replace(`${window.location.pathname}?${stringified}`);
         localStorage.setItem(`lagretSorteringsfelt`, sorteringsfelt);
         localStorage.setItem(`lagretSorteringsrekkefolge`, sorteringsrekkefolge);
     }
@@ -110,4 +110,13 @@ export function miljoFraUrl() {
 export function utledMiljoFraHost(host) {
     const matches = host.match(/-[a-zA-Z][0-9]+/);
     return matches == null ? '' : matches[0];
+}
+
+export function updateLastPath() {
+    const base = window.location.pathname.replace(basename, '');
+    if (base !== '/tilbake') {
+        const search = window.location.search;
+        localStorage.setItem('lastpath', base);
+        localStorage.setItem('lastsearch', search);
+    }
 }

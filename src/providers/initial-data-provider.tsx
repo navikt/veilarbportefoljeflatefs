@@ -31,7 +31,6 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> 
     componentDidMount() {
         this.props.hentEnheter();
         this.props.hentFeatures();
-        console.log("hvormångerendres");
     }
 
     componentDidUpdate() {
@@ -65,7 +64,6 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> 
     oppdaterDekoratorMedInitiellEnhet() {
         const {velgEnhet, hentVeiledere} = this.props;
         this.finnInitiellEnhet().then((initiellEnhet) => {
-            console.log("initiellEnhet", initiellEnhet);
             velgEnhet(initiellEnhet);
             leggEnhetIUrl(initiellEnhet);
             hentVeiledere(initiellEnhet);
