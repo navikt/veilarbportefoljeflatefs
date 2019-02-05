@@ -1,0 +1,43 @@
+.tilbakemelding-fab {
+    width: 64px;
+    height: 64px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 6px 10px 0 #78706A;
+    transition: all 0.1s ease-in-out;
+    z-index: 999;
+
+    font-size: 50px;
+    color: black;
+    text-align: center;
+    line-height: 70px;
+
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+
+    &__ikon--apne {
+        width: 40px;
+        height: 32px;
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    &__ikon--lukke {
+        width: 25px;
+        height: 25px;
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    &__trykket {
+        //transform: scale(1.15);
+    }
+
+}
+
+.tilbakemelding-fab:hover {
+    box-shadow: 0 6px 14px 0 #78706A;
+    transform: scale(1.15);
+    cursor: pointer;
+}

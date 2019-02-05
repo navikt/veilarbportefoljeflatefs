@@ -1,0 +1,123 @@
+
+.tilbakemelding-modal {
+    width: 350px;
+    position: fixed;
+    right: 25px;
+    border-radius: 2.5%;
+    background-color: white;
+    box-shadow: 0 6px 10px 0 #78706A;
+    z-index: 998;
+
+    &__tittel {
+        font-size: 24px !important;
+        line-height: 28px !important;
+    }
+
+    &--slide-in {
+        bottom: 100px;
+        animation-name: slide-in;
+        animation-duration: 0.33s;
+    }
+
+    &--slide-out {
+        opacity: 0;
+        animation-name: slide-out;
+        animation-duration: 0.33s;
+    }
+
+    &__innhold {
+        padding: 1rem;
+    }
+
+    &__innhold--takk {
+        background-color: #98D0B0;
+        border-radius: 2.5%;
+
+        animation-name: takk-transition;
+        animation-duration: 0.5s;
+    }
+
+    &__tilfredshet {
+         margin: 2rem 0 0.5rem 0;
+    }
+
+    &__takk-melding {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-content: center;
+        text-align: center;
+        margin: 2rem;
+    }
+
+    &__takk-ikon {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 1rem auto;
+    }
+
+    &__kommentar {
+        margin-bottom: 2rem;
+
+        &-felt {
+            resize: none;
+            max-height: 200px;
+            width: 100%;
+        }
+
+    }
+
+    &__ekspander {
+        animation-name: ekspander;
+        animation-duration: 0.5s;
+        overflow: hidden;
+    }
+
+}
+
+@keyframes takk-transition {
+    from {
+        background-color: white;
+        opacity: 0;
+        height: 365px;
+    }
+    to {
+        background-color: #98D0B0;
+        opacity: 1;
+        height: 230px;
+    }
+}
+
+@keyframes ekspander {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: 165px;
+        opacity: 1;
+    }
+}
+
+
+@keyframes slide-in {
+    from {
+        opacity: 0.5;
+        bottom: 50px;
+    }
+    to {
+        opacity: 1;
+        bottom: 100px;
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        bottom: 100px;
+        opacity: 1;
+    }
+    100% {
+        bottom: 80px;
+        opacity: 0;
+    }
+}
