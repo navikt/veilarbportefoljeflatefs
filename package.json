@@ -9,7 +9,7 @@
   "scripts": {
     "start": "react-intl-bundler tekster/ src/tekster-built && craco start",
     "build": "react-intl-bundler tekster/ src/tekster-built && craco build",
-    "test": "react-scripts test",
+    "test:coverage": "nyc npm run test",
     "eject": "react-scripts eject",
     "build:tekster": "react-intl-bundler ./tekster ./tekster-built",
     "heroku-serve": "node heroku-server.js",
