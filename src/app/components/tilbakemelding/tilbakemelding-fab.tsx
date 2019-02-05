@@ -58,9 +58,15 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
     }
 
     handleFabClicked = () => {
+
+        if (!this.state.isModalOpen) {
+            (window as any).frontendlogger.event('portefolje.tilbakemelding_modal_apnet', {}, {});
+        }
+
         this.setState((prevState: TilbakemeldingFabState) => {
             return { isModalOpen: !prevState.isModalOpen };
         });
+
     }
 
     handleTilbakemeldingSendt = (tilbakemelding?: Tilbakemelding) => {
@@ -70,6 +76,7 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
                 { feature: this.TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding }, {});
         } else {
             // Hvis tilbakemelding er undefined så trykket brukeren "ikke vis igjen"
+            (window as any).frontendlogger.event('portefolje.ikke_vis_tilbakemelding_igjen', {}, {});
             this.setState({ ikkeVisIgjen: true });
         }
     }
