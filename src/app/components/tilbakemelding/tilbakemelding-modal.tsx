@@ -51,7 +51,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
 
     }
 
-    handleSendTilbakemeldingClicked = () => {
+    handleFormSubmitted = () => {
         const { tilfredshet, kommentar } = this.state;
         this.setState({ harSendt: true });
         this.props.onTilbakemeldingSendt({ tilfredshet, kommentar });
@@ -88,7 +88,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                     {!harBesvartTilfredshet && <a className="lenke" onClick={this.handleIkkeVisIgjenClicked}>Ikke vis dette igjen</a>}
                 </div>
                 {harBesvartTilfredshet && (
-                    <div>
+                    <form className="tilbakemelding-modal__ekspander"  onSubmit={this.handleFormSubmitted}>
                         <div className="tilbakemelding-modal__kommentar">
                             <Textarea
                                 className="tilbakemelding-modal__kommentar-felt"
@@ -99,10 +99,10 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                                 onChange={this.handleKommentarChanged}
                             />
                         </div>
-                        <Hovedknapp onClick={this.handleSendTilbakemeldingClicked}>
+                        <Hovedknapp type="submit" className="knapp--hoved">
                             Send
                         </Hovedknapp>
-                    </div>
+                    </form>
                 )}
             </div>
         );

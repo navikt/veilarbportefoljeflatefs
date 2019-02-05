@@ -32,6 +32,9 @@
     &__innhold--takk {
         background-color: #98D0B0;
         border-radius: 2.5%;
+
+        animation-name: takk-transition;
+        animation-duration: 0.5s;
     }
 
     &__tilfredshet {
@@ -63,14 +66,45 @@
 
     }
 
+    &__ekspander {
+        animation-name: ekspander;
+        animation-duration: 0.5s;
+        overflow: hidden;
+    }
+
 }
 
+@keyframes takk-transition {
+    from {
+        background-color: white;
+        opacity: 0;
+        height: 365px;
+    }
+    to {
+        background-color: #98D0B0;
+        opacity: 1;
+        height: 230px;
+    }
+}
+
+@keyframes ekspander {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: 165px;
+        opacity: 1;
+    }
+}
+
+
 @keyframes slide-in {
-    0% {
+    from {
         opacity: 0.5;
         bottom: 50px;
     }
-    100% {
+    to {
         opacity: 1;
         bottom: 100px;
     }
