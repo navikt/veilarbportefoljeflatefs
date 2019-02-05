@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Children, cloneElement } from 'react';
+import { Children, cloneElement, ReactElement } from 'react';
 import { Input } from 'nav-frontend-skjema';
 
 interface SokFilterProps {
     data: any[];
     filter?: (query: any) => any;
-    children: React.ReactChild | React.ReactChildren;
+    children: React.ReactChild;
     label: string;
     placeholder: string;
 }
@@ -31,7 +31,7 @@ class SokFilter extends React.Component<SokFilterProps, SokFilterState> {
     render() {
         const { data, filter = defaultFilter, children, ...props } = this.props;
         const filteredData = data.filter(filter(this.state.query));
-        const child = Children.map(children, (barn: React.ReactElement<any>) => cloneElement(barn, { ...props, data: filteredData }));
+        const child = Children.map(children, (barn: React.ReactChild) => cloneElement<any>(barn as ReactElement<any>, { ...props, data: filteredData }));
         return (
             <div>
                 <div className="sokfilter">

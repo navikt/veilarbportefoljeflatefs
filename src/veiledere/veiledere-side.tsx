@@ -6,7 +6,7 @@ import DocumentTitle from 'react-document-title';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import Lenker from '../lenker/lenker';
+import Lenker from './../lenker/lenker';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
@@ -14,6 +14,7 @@ import { VeiledereState } from '../ducks/veiledere';
 import { ValgtEnhetModell } from '../model-interfaces';
 import { FiltreringState } from '../ducks/filtrering';
 import { pagineringSetup } from '../ducks/paginering';
+import {RouterProps} from "react-router";
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -27,12 +28,14 @@ interface DispatchProps {
     initalPaginering: (side: number, seAlle: boolean) => void;
 }
 
-type VeiledereSideProps = StateProps & DispatchProps & InjectedIntlProps;
+type VeiledereSideProps = StateProps & DispatchProps & InjectedIntlProps & RouterProps;
 
 class VeiledereSide extends React.Component<VeiledereSideProps> {
     componentWillMount() {
+        console.log("veilederSide",this.props);
         const { hentPortefoljestorrelser, valgtEnhet } = this.props;
         hentPortefoljestorrelser(valgtEnhet.enhet!.enhetId);
+        console.log("valgtEnhet.enhet!.enhetId", valgtEnhet.enhet!.enhetId);
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
         this.settInitalStateFraUrl();
     }
@@ -45,7 +48,7 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
 
     render() {
         const { veiledere, portefoljestorrelser, filtervalg, intl } = this.props;
-
+        console.log("inne i veildere");
         return (
             <DocumentTitle title={intl.formatMessage({ id: 'lenker.veiledere.oversikt' })}>
                 <div className="container veiledere-side">

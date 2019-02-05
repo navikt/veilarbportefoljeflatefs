@@ -1,9 +1,8 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { Link } from 'react-router';
-import { veilederShape } from '../proptype-shapes';
+import { Link } from 'react-router-dom';
 import { settValgtVeileder } from '../ducks/portefolje';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { settSide } from '../ducks/ui/side';
@@ -94,7 +93,7 @@ class VeilederTabell extends Component {
         );
     }
 }
-
+/*
 VeilederTabell.propTypes = {
     innloggetVeileder: PT.string,
     oppdaterSide: PT.func,
@@ -108,6 +107,7 @@ VeilederTabell.propTypes = {
         direction: PT.string
     }).isRequired
 };
+*/
 
 const mapStateToProps = (state) => ({
     innloggetVeileder: state.enheter.ident,

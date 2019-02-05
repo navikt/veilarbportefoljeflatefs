@@ -8,24 +8,29 @@ import { hentAktivEnhet } from '../components/enhet-context/context-api';
 import { STATUS } from '../ducks/utils';
 import { leggEnhetIUrl } from '../utils/url-utils';
 import { settEnhetIDekorator } from '../eventhandtering';
-import { enhetShape, valgtEnhetShape } from '../proptype-shapes';
 import Application from '../application';
+import {basename} from "../history";
+import Innholdslaster from "../innholdslaster/innholdslaster";
+import {VeilederModell} from "../model-interfaces";
 
 interface DispatchProps {
     hentFeatures(): void;
     hentEnheter(): void;
     hentVeiledere(enhetId: string): void;
     velgEnhet(enhetId: string): void;
+    children: React.ReactNode;
 }
 
 interface StateProps {
     enheter: EnheterState;
+    veiledere: VeilederModell;
 }
 
 type InitialDataProviderProps = DispatchProps & StateProps;
 
 class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> {
-    componentDidMount() {
+
+    componentWillMount() {
         this.props.hentEnheter();
         this.props.hentFeatures();
     }
@@ -35,6 +40,7 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> 
         if (enheter.status === STATUS.OK && enheter.valgtEnhet.status !== STATUS.OK) {
             this.oppdaterDekoratorMedInitiellEnhet();
         }
+
     }
 
     finnInitiellEnhet() {
@@ -68,11 +74,13 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> 
     }
 
     render() {
-        const {...props} = this.props;
+        return (
+            <Innholdslaster avhengigheter={[this.props.enheter, this.props.enheter.valgtEnhet, this.props.veiledere]}>
+                {this.props.children}
+            </Innholdslaster>
+        );
 
-        return <div>
-            <Application {...props}/>
-        </div>;
+
     }
 
 }

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import { Link } from 'react-router';
+import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import { Normaltekst } from 'nav-frontend-typografi';
-import Innholdslaster from '../innholdslaster/innholdslaster';
-import LenkerMinoversikt from '../lenker/lenker-minoversikt';
+import Innholdslaster from './../innholdslaster/innholdslaster';
+import LenkerMinoversikt from './../lenker/lenker-minoversikt';
 import FiltreringContainerVenstreToggle from '../filtrering/filtrering-container-venstre-toggle';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
@@ -34,6 +34,9 @@ interface StateProps {
     listevisning: ListevisningState;
     sorteringsfelt: string;
     sorteringsrekkefolge: string;
+    params: {
+        ident: string;
+    };
 }
 
 interface DispatchProps {
@@ -46,14 +49,12 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-    params: {
-        ident: string;
-    };
+    intl : InjectedIntl
 }
 
-type MinoversiktSideProps = StateProps & DispatchProps & OwnProps & InjectedIntlProps;
+type MinoversiktSideProps = StateProps & DispatchProps & OwnProps;
 
-class MinOversiktSideVenstreToggle extends React.Component<MinoversiktSideProps> {
+class MinOversiktSideVenstreToggle extends React.Component<any> {
     componentDidMount() {
         const { veiledere, enheter, valgtEnhet, filtervalg, hentPortefolje, ...props } = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
@@ -89,22 +90,23 @@ class MinOversiktSideVenstreToggle extends React.Component<MinoversiktSideProps>
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
         const innloggetVeileder = { ident: enheter.ident };
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
-        const { formatMessage } = intl;
 
         const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
+        const fornavn = (gjeldendeVeileder as VeilederModell).fornavn || '';
+        const etternavn = (gjeldendeVeileder as VeilederModell).etternavn || '';
 
         const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
             <FormattedMessage
                 id="annen.veileder.portefolje.advarsel"
                 tagName="em"
                 values={{
-                    fornavn: gjeldendeVeileder.fornavn || '',
-                    etternavn: gjeldendeVeileder.etternavn || ''
+                    fornavn: fornavn,
+                    etternavn: etternavn
                 }}
             /></Normaltekst>);
 
         return (
-            <DocumentTitle title={formatMessage({ id: 'lenker.min.oversikt' })}>
+            <DocumentTitle title={intl.formatMessage({ id: 'lenker.min.oversikt' })}>
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                     <div className="minoversikt-side blokk-xl">
                         {visesAnnenVeiledersPortefolje ?
@@ -158,7 +160,7 @@ class MinOversiktSideVenstreToggle extends React.Component<MinoversiktSideProps>
     }
 }
 
-const mapStateToProps = (state): StateProps => ({
+const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     enheter: state.enheter,
     veiledere: state.veiledere,
@@ -170,7 +172,7 @@ const mapStateToProps = (state): StateProps => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
 });
 
-const mapDispatchToProps = (dispatch): DispatchProps => ({
+const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, filtervalg)),
     hentStatusTall: (enhet: string, veileder: string) => dispatch(hentStatusTall(enhet, veileder)),
@@ -180,4 +182,4 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(MinOversiktSideVenstreToggle));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MinOversiktSideVenstreToggle));

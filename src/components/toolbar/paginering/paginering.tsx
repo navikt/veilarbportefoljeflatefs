@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import Chevron from 'nav-frontend-chevron';
-import * as classNames from 'classnames';
+import Chevron, { HoyreChevron, VenstreChevron } from 'nav-frontend-chevron';
+import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
 import { leggSeAlleIUrl, leggSideIUrl } from '../../../utils/url-utils';
 import { pagineringSetup } from '../../../ducks/paginering';
@@ -69,9 +69,9 @@ function Paginering(props: PagineringProps) {
             </KnappPanel>
 
             <KnappPanel disabled={erPaForsteSide} onClick={() => totalPagenering(side - 1, seAlle)}>
-                <Chevron orientasjon="venstre">
+                <VenstreChevron>
                     <FormattedMessage id="paginering.forrige"/>
-                </Chevron>
+                </VenstreChevron>
             </KnappPanel>
 
             {!erPaForsteSide && <KnappPanel onClick={() => totalPagenering(1, seAlle)}>1</KnappPanel>}
@@ -88,9 +88,9 @@ function Paginering(props: PagineringProps) {
             }
 
             <KnappPanel disabled={erPaSisteSide || seAlle} onClick={() => totalPagenering(side + 1, seAlle)}>
-                <Chevron orientasjon="høyre">
+                <HoyreChevron>
                     <FormattedMessage id="paginering.neste"/>
-                </Chevron>
+                </HoyreChevron>
             </KnappPanel>
         </div>
     );

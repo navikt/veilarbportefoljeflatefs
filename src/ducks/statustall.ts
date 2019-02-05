@@ -1,4 +1,4 @@
-import * as Api from '../middleware/api';
+import * as Api from './../middleware/api';
 import { doThenDispatch, STATUS } from './utils';
 
 // Actions

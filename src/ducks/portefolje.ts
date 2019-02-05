@@ -1,4 +1,4 @@
-import * as Api from '../middleware/api';
+import * as Api from './../middleware/api';
 import { doThenDispatch, handterFeil, nameToStateSliceMap, STATUS, toJson } from './utils';
 import { IKKE_SATT } from '../konstanter';
 import { pagineringSetup } from './paginering';

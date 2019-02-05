@@ -1,21 +1,20 @@
-import React, { PropTypes as PT } from 'react';
-import { Link, withRouter } from 'react-router';
+import * as React from 'react';
+import { NavLink } from 'react-router-dom';
 import classnames from 'classnames';
-import { omit } from 'nav-frontend-js-utils';
 
-function ActiveLink({ router, className, activeClassName, to, ...props }) {
-    const isActive = router.isActive(to);
-    const domProps = omit(props, 'params', 'location', 'routes');
-
-    return (<Link
-        to={to}
-        className={classnames(className, { [activeClassName]: isActive })}
+function ActiveLink({className, activeClassName, to, ...children }) {
+    return (
+        <NavLink
+        to={`${to}`}
+        className={className}
+        activeClassName={classnames(className, activeClassName)}
         aria-controls="oversikt-sideinnhold"
-        aria-selected={isActive}
         role="tab"
-        {...domProps}
+        {...children}
     />);
 }
+
+/*
 
 ActiveLink.propTypes = {
     router: PT.object,
@@ -23,5 +22,6 @@ ActiveLink.propTypes = {
     activeClassName: PT.string,
     to: PT.string
 };
+*/
 
-export default withRouter(ActiveLink);
+export default ActiveLink;

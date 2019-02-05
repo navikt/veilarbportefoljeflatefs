@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CustomField } from 'react-redux-form-validation';
+import { Field } from 'redux-form'
 import { FormattedMessage } from 'react-intl';
 import {Textarea as NavFrontendTextarea, TextareaProps } from 'nav-frontend-skjema';
 
@@ -7,10 +7,11 @@ interface TextAreaProps extends TextareaProps {
     labelId: string;
     errorMessage?: any;
     input?: object;
-    feltNavn?: string;
+    feltNavn: string;
     visTellerFra?: number;
     validate?: () => void;
     meta?: object;
+    label: React.ReactNode | any;
 }
 
 function getTellerTekst( antallTegn, maxLength, visTellerFra ) {
@@ -44,6 +45,8 @@ interface InnerTextareaComponentProps {
     visTellerFra?: number;
     input?: object;
     meta?: object;
+    value: any;
+    onChange: (event: React.SyntheticEvent<EventTarget, Event>) => void;
 }
 
 function InnerTextAreaComponent({
@@ -72,10 +75,10 @@ function InnerTextAreaComponent({
 
 function Textarea({ feltNavn, validate, ...rest }: TextAreaProps) {
     return (
-        <CustomField
+        <Field
             validate={validate}
             name={feltNavn}
-            customComponent={<InnerTextAreaComponent {...rest} />}
+            customComponent={<InnerTextAreaComponent label="" {...rest} />}
         />
     );
 }

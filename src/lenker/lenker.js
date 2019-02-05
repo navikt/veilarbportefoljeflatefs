@@ -1,13 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import ActiveLink from './active-link';
+import ActiveLink from "./active-link";
 
 function Lenker() {
     return (
         <div className="lenker blokk-m" role="tablist">
             <h2 className="h2__lenke">
                 <ActiveLink
-                    to="enhet"
+                    to="/enhet"
                     className="oversiktslenke typo-undertittel"
                     activeClassName="oversiktslenke--valgt"
                 >
@@ -16,7 +16,7 @@ function Lenker() {
             </h2>
             <h2 className="h2__lenke">
                 <ActiveLink
-                    to="veiledere"
+                    to="/veiledere"
                     className="oversiktslenke typo-undertittel"
                     activeClassName="oversiktslenke--valgt"
                 >

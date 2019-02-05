@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { DIRECTION } from '../utils/sortering';
+import { DIRECTION } from './../utils/sortering';
 
 // Actions
 export const SORTERT_PA = 'veilarbportefoljeflatefs/sortering/SORTERT_PA';

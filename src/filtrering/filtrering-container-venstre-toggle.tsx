@@ -1,17 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import FiltreringStatus from './filtrering-status';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
-import FiltreringFilter from './filtrering-filter';
 import FiltreringFilterVenstreToggle from './filtrering-filter-venstre-toggle';
-import { sjekkFeature } from '../ducks/features';
-import { FLYTT_FILTER_VENSTRE } from '../konstanter';
 import FiltreringNavnellerfnrVenstreToggle from './filtrering-navnellerfnr-venstre-toggle';
 import PanelBase from 'nav-frontend-paneler';
-import { Undertittel } from 'nav-frontend-typografi';
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -41,19 +36,20 @@ function FiltreringContainerVenstreToggle({ filtergruppe, filtervalg, veileder= 
             </PanelBase>
             <Ekspanderbartpanel
                 apen
-                className="blokk-xxxs"
                 tittel="Status"
                 tittelProps="undertittel"
             >
                 <FiltreringStatus
-                    filtergruppe={filtergruppe}
+                    filtergruppe={filtergruppe ? filtergruppe : ''}
                     veileder={veileder}
                     filtervalg={filtervalg}
+                    sjekkFeature={{} as any} // TODO: FIX
+                    statustall={{} as any} // TODO: FIX
+                    endreFilter={{} as any} // TODO: FIX
                 />
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
-                className="blokk-xxxs"
                 tittel="Filter"
                 tittelProps="undertittel"
             >

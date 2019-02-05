@@ -1,6 +1,7 @@
 import * as queryString from 'query-string';
 import history, { basename } from '../history';
 import { IKKE_SATT } from '../konstanter';
+import {string} from "prop-types";
 
 export function slettCleanIUrl() {
     const parsed = queryString.parse(location.search); // eslint-disable-line no-undef
@@ -14,6 +15,9 @@ export function slettCleanIUrl() {
 
     const stringified = queryString.stringify(parsed);
     const pathname = window.location.pathname.replace(basename, '');
+    console.log("pathname", pathname);
+    console.log("stingified", stringified);
+    console.log("slettCleanURl");
     history.replace(`${pathname}?${stringified}`);
 }
 
@@ -21,14 +25,15 @@ export function leggEnhetIUrl(enhet: string, refresh: boolean = false) {
     if (enhet) {
         const parsed = queryString.parse(location.search);
         parsed.enhet = enhet;
-
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname.replace(basename, '');
+
         history.replace(`${pathname}?${stringified}`);
         if (refresh) {
             window.location.reload(true);
         }
     }
+
 }
 
 export function getFraBrukerFraUrl() {

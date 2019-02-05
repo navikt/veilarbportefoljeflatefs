@@ -1,7 +1,7 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import { isDirty } from 'redux-form';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
@@ -9,7 +9,6 @@ import { skjulModal } from '../ducks/modal';
 import { markerAlleBrukere } from '../ducks/portefolje';
 import LeggTilArbeidslisteForm, { LEGG_TIL_ARBEIDSLISTE_FORM_NAME } from './legg-til-arbeidsliste-form';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
-import { brukerShape } from '../proptype-shapes';
 
 NavFrontendModal.setAppElement('#applikasjon');
 
@@ -107,6 +106,7 @@ class ArbeidslisteModal extends Component {
     }
 }
 
+/*
 ArbeidslisteModal.propTypes = {
     isOpen: PT.bool.isRequired,
     valgteBrukere: PT.arrayOf(brukerShape).isRequired,
@@ -116,6 +116,7 @@ ArbeidslisteModal.propTypes = {
     formIsDirty: PT.bool.isRequired,
     intl: intlShape.isRequired,
 };
+*/
 
 const mapStateToProps = (state) => ({
     visModal: state.modal.visModal,

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
 import DocumentTitle from 'react-document-title';
-import Lenker from '../lenker/lenker';
-import Innholdslaster from '../innholdslaster/innholdslaster';
+import Lenker from './../lenker/lenker';
+import Innholdslaster from './../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
@@ -59,9 +59,8 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
     }
 
     render() {
-        const { formatMessage } = this.props.intl;
-        const { filtervalg, veilederliste, statustall, enhettiltak, listevisning } = this.props;
-
+        const { filtervalg, veilederliste, statustall, enhettiltak, listevisning, intl } = this.props;
+        const { formatMessage } = intl;
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })}>
                 <div className="enhet-side blokk-xl">
@@ -86,8 +85,8 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
                                 listevisning={listevisning}
                             />
                             <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
-                            <EnhetsportefoljeVisning />
-                            <TomPortefoljeModal/>
+                            <EnhetsportefoljeVisning intl={intl} />
+                            <TomPortefoljeModal />
                         </div>
                     </Innholdslaster>
                 </div>

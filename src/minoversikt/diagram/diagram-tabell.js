@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 function DiagramTabell({ tekster, data }) {
@@ -35,10 +35,11 @@ function DiagramTabell({ tekster, data }) {
         </table>
     );
 }
-
+/*
 DiagramTabell.propTypes = {
     tekster: PT.object.isRequired,
     data: PT.object.isRequired
 };
+*/
 
 export default DiagramTabell;

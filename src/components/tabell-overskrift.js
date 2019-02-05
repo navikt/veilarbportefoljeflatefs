@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
@@ -28,6 +28,7 @@ function TabellOverskrift({ fraIndex, antallIVisning, antallTotalt, visDiagram, 
         </Element>
     );
 }
+/*
 
 TabellOverskrift.propTypes = {
     fraIndex: PT.number.isRequired,
@@ -43,5 +44,5 @@ TabellOverskrift.defaultProps = {
     antallTotalt: 0,
     visDiagram: false
 };
-
+*/
 export default TabellOverskrift;

@@ -5,7 +5,6 @@ import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import RadioFilterform from '../components/radio-filterform/radio-filterform';
 import AktivitetFilterform from '../components/aktivitet-filterform/aktivitet-filterform';
-import { filtervalgShape } from '../proptype-shapes';
 import {
     aktiviteter,
     alder,

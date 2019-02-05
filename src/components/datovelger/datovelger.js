@@ -1,5 +1,5 @@
-import React, { Component, PropTypes as PT } from 'react';
-import { injectIntl, intlShape } from 'react-intl';
+import React, { Component} from 'react';
+import { injectIntl } from 'react-intl';
 import { CustomField } from 'react-redux-form-validation';
 import { connect } from 'react-redux';
 import { change, touch } from 'redux-form';
@@ -170,6 +170,7 @@ class DatoField extends Component {
     }
 }
 
+/*
 DatoField.propTypes = {
     meta: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     id: PT.string.isRequired,
@@ -188,6 +189,7 @@ DatoField.defaultProps = {
     tidligsteFom: undefined,
     errorMessage: undefined
 };
+*/
 
 function parseDato(dato) {
     return erGyldigFormattertDato(dato) ? datePickerToISODate(dato) : dato;
@@ -220,7 +222,7 @@ function Datovelger(props) {
         />
     );
 }
-
+/*
 Datovelger.propTypes = {
     feltNavn: PT.string.isRequired,
     tidligsteFom: PT.instanceOf(Date),
@@ -232,5 +234,5 @@ Datovelger.defaultProps = {
     tidligsteFom: undefined,
     feltErValgfritt: false
 };
-
+*/
 export default injectIntl(Datovelger);

@@ -1,8 +1,8 @@
-import React, { PropTypes as PT } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import SubmitKnapp from '../submit-knapp';
+import SubmitKnapp from './../submit-knapp';
 
 function reset(change, alleValg) {
     return () => {
@@ -83,7 +83,7 @@ function AktivitetFilterform(props) {
         </form>
     );
 }
-
+/*
 AktivitetFilterform.propTypes = {
     form: PT.string.isRequired,
     valg: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
@@ -92,7 +92,7 @@ AktivitetFilterform.propTypes = {
     change: PT.func.isRequired,
     onSubmit: PT.func.isRequired
 };
-
+*/
 const mapStateToProps = (state, ownProps) => {
     const name = ownProps.form;
     const initialValues = ownProps.filtervalg[name];

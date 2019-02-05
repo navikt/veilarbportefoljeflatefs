@@ -2,10 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
-import Toolbar from '../components/toolbar/toolbar';
+import Toolbar from './../components/toolbar/toolbar';
 import { getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl } from '../utils/url-utils';
 import EnhetTabell from './enhetsportefolje-tabell';
-import TabellOverskrift from '../components/tabell-overskrift';
+import TabellOverskrift from './../components/tabell-overskrift';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import { diagramSkalVises } from '../minoversikt/diagram/util';
 import Diagram from '../minoversikt/diagram/diagram';
@@ -25,7 +25,7 @@ function antallFilter(filtervalg) {
         return Object.entries(value).map(([_, verdi]) => {
             if (verdi === 'NA') return 0;
             return 1;
-        }).reduce((a, b) => a + b, 0);
+        }).reduce((a: number, b: number) => a + b, 0);
     }
 
     return Object.entries(filtervalg)

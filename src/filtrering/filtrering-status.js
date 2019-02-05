@@ -1,10 +1,9 @@
-import React, { PropTypes as PT, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { sjekkFeature } from '../ducks/features';
-import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 import Barlabel from './barlabel';
 import {
     FILTERGRUPPE_ENHET,
@@ -57,7 +56,7 @@ function ArbeidslisteTittel({ skalSkjules }) {
         </div>
     );
 }
-
+/*
 BarInput.propTypes = {
     id: PT.string.isRequired,
     type: PT.string.isRequired,
@@ -78,6 +77,7 @@ BarInput.defaultProps = {
 ArbeidslisteTittel.propTypes = {
     skalSkjules: PT.bool.isRequired
 };
+*/
 
 const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE', 'NYE_BRUKERE_FOR_VEILEDER'];
 
@@ -289,6 +289,7 @@ class FiltreringStatus extends Component {
     }
 }
 
+/*
 FiltreringStatus.defaultProps = {
     veileder: {
         ident: '',
@@ -306,7 +307,7 @@ FiltreringStatus.propTypes = {
     veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
     filtervalg: filtervalgShape.isRequired
 };
-
+*/
 const mapStateToProps = (state) => ({
     enhet: state.enheter.valgtEnhet.enhet.enhetId,
     statustall: state.statustall,

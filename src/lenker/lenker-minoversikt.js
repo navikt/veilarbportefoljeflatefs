@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import ActiveLink from './active-link';
 
@@ -18,7 +18,7 @@ function LenkerMinoversikt({ veilederident }) {
         </div>
     );
 }
-
+/*
 LenkerMinoversikt.defaultProps = {
     veilederident: undefined
 };
@@ -30,5 +30,5 @@ LenkerMinoversikt.propTypes = {
 LenkerMinoversikt.defaultProps = {
     veilederident: null
 };
-
+*/
 export default LenkerMinoversikt;

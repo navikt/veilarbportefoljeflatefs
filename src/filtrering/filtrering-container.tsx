@@ -29,19 +29,20 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
         <div className="blokk-m">
             <Ekspanderbartpanel
                 apen
-                className="blokk-xxxs"
                 tittel="Status"
                 tittelProps="undertittel"
             >
                 <FiltreringStatus
-                    filtergruppe={filtergruppe}
+                    filtergruppe={filtergruppe ? filtergruppe : ''}
                     veileder={veileder}
                     filtervalg={filtervalg}
+                    sjekkFeature={{} as any} // TODO: FIX
+                    statustall={{} as any} // TODO: FIX
+                    endreFilter={{} as any} // TODO: FIX
                 />
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
-                className="blokk-xxxs"
                 tittel="Filter"
                 tittelProps="undertittel"
             >
@@ -53,7 +54,6 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
             </Ekspanderbartpanel>
             <Ekspanderbartpanel
                 apen
-                className="blokk-xxxs"
                 tittel="Søk"
                 tittelProps="undertittel"
             >

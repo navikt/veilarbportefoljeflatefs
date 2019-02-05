@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import Etiketter from '../components/tabell/etiketter';
 import { FiltervalgModell, VeilederModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';

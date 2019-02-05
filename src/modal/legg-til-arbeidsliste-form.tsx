@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Knapp } from 'nav-frontend-knapper';
+import {Hovedknapp, Knapp} from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { FieldArray } from 'redux-form';
 import { rules, validForm } from 'react-redux-form-validation';
@@ -17,6 +17,7 @@ import { AppState } from '../reducer';
 import { BrukerModell, VeilederModell, ArbeidslisteDataModell, Status } from '../model-interfaces';
 import Input from '../components/input/input';
 import { skjulModal } from '../ducks/modal';
+import {Textarea as NavFrontendTextarea} from "nav-frontend-skjema";
 
 export const OVERSKRIFT_MAKS_LENGDE = 12;
 export const KOMMENTAR_MAKS_LENGDE = 500;
@@ -81,6 +82,8 @@ function renderFelter({ fields }) {
                             placeholder=""
                             maxLength={KOMMENTAR_MAKS_LENGDE}
                             visTellerFra={500}
+                            onChange={(e :any)=>{}}
+                            value={name}
                         />
                     </div>
                     <Datovelger
@@ -129,9 +132,9 @@ function LeggTilArbeidslisteForm({ lukkModal, handleSubmit, errorSummary, arbeid
             <FieldRenderer name="arbeidsliste" component={renderFelter} test={'test'} />
             <div>
                 <div className="modal-footer">
-                    <Knapp type="hoved" className="knapp knapp--hoved" spinner={laster}>
+                    <Hovedknapp className="knapp knapp--hoved" spinner={laster}>
                         <FormattedMessage id="modal.knapp.lagre" />
-                    </Knapp>
+                    </Hovedknapp>
                     <button type="button" className="knapp" onClick={lukkModal}>
                         <FormattedMessage id="modal.knapp.avbryt" />
                     </button>

@@ -44,7 +44,7 @@ class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPor
                     <header className="modal-header"/>
                 </div>
                 <div className="innhold">
-                    <Innholdstittel className="blokk-s" tag="h1" style={{fontWeight: 'bold'}}>
+                    <Innholdstittel className="blokk-s" tag="h1">
                         <IntlMessage id="modal.tittel"/>
                     </Innholdstittel>
                     <AlertStripeAdvarsel className="blokk-s">

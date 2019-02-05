@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import { Normaltekst } from 'nav-frontend-typografi';
-import Innholdslaster from '../innholdslaster/innholdslaster';
-import LenkerMinoversikt from '../lenker/lenker-minoversikt';
+import Innholdslaster from './../innholdslaster/innholdslaster';
+import LenkerMinoversikt from './../lenker/lenker-minoversikt';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
-import { filtervalgShape, statustallShape } from '../proptype-shapes';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import { hentPortefoljeForVeileder, settSortering, settValgtVeileder } from '../ducks/portefolje';
@@ -53,7 +52,7 @@ interface OwnProps {
 
 type MinoversiktSideProps = StateProps & DispatchProps & OwnProps & InjectedIntlProps;
 
-class MinOversiktSide extends React.Component<MinoversiktSideProps> {
+class MinOversiktSide extends React.Component<any> {
     componentDidMount() {
         const { veiledere, enheter, valgtEnhet, filtervalg, hentPortefolje, ...props } = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
@@ -152,7 +151,7 @@ class MinOversiktSide extends React.Component<MinoversiktSideProps> {
     }
 }
 
-const mapStateToProps = (state): StateProps => ({
+const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     enheter: state.enheter,
     veiledere: state.veiledere,
@@ -164,7 +163,7 @@ const mapStateToProps = (state): StateProps => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
 });
 
-const mapDispatchToProps = (dispatch): DispatchProps => ({
+const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, filtervalg)),
     hentStatusTall: (enhet: string, veileder: string) => dispatch(hentStatusTall(enhet, veileder)),
@@ -174,4 +173,4 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(MinOversiktSide));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MinOversiktSide));

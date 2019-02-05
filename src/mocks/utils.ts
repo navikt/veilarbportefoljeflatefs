@@ -1,8 +1,8 @@
 /*tslint:disable*/
 import * as fetchmock from 'fetch-mock';
 import * as qs from 'query-string';
-import * as pathRegex from 'path-to-regexp';
-import { Key } from 'path-to-regexp';
+import pathRegex from 'path-to-regexp';
+import {Key} from 'path-to-regexp';
 
 export const MOCK_CONFIG = {
     failureRate: -1,
@@ -69,7 +69,7 @@ export const mock = ['get', 'post', 'put', 'delete', 'head', 'patch', 'mock']
 
             let preprocessor;
             if (routeurl.startsWith('express:')) {
-                const pureUrl = routeurl.replace(/^express:/, '');
+                const pureUrl:string = routeurl.replace(/^express:/, '');
                 const keys: Key[] = [];
                 const regexp = pathRegex(pureUrl, keys);
 

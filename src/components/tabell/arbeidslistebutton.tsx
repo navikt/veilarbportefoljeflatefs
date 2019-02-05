@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MouseEvent } from 'react';
-import * as classnames from 'classnames';
+import classnames from 'classnames';
 
 interface ArbeidslisteButtonProps {
     className?: string;

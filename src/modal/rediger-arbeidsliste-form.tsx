@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Knapp } from 'nav-frontend-knapper';
+import {Hovedknapp, Knapp} from 'nav-frontend-knapper';
 import { validForm, rules } from 'react-redux-form-validation';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel, Undertekst } from 'nav-frontend-typografi';
@@ -63,6 +63,8 @@ function RedigerArbeidslisteForm({ lukkModal,
                         maxLength={KOMMENTAR_MAKS_LENGDE}
                         disabled={false}
                         visTellerFra={500}
+                        onChange={(e :any)=>{}}
+                        value={name}
                     />
                 </div>
                 <Undertekst className="arbeidsliste--modal-redigering">
@@ -82,9 +84,9 @@ function RedigerArbeidslisteForm({ lukkModal,
                 />
             </div>
             <div className="modal-footer" >
-                <Knapp type="hoved" className="knapp knapp--hoved" onClick={ handleSubmit } spinner={ lagrer }>
+                <Hovedknapp className="knapp knapp--hoved" onClick={ handleSubmit } spinner={ lagrer }>
                     <FormattedMessage id="modal.knapp.lagre" />
-                </Knapp>
+                </Hovedknapp>
                 <button type="button" className="knapp" onClick={ lukkModal }>
                     <FormattedMessage id="modal.knapp.avbryt" />
                 </button>

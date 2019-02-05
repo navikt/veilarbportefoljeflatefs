@@ -2,8 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../ducks/portefolje';
-import TabellOverskrift from '../components/tabell-overskrift';
-import Toolbar from '../components/toolbar/toolbar';
+import TabellOverskrift from './../components/tabell-overskrift';
+import Toolbar from './../components/toolbar/toolbar';
 import { leggEnhetIUrl } from '../utils/url-utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
@@ -21,7 +21,7 @@ import {
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
-import { InjectedIntlProps } from 'react-intl';
+import {InjectedIntl, injectIntl} from 'react-intl';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 
 interface VeilederPortefoljeVisningProps {
@@ -43,7 +43,11 @@ interface VeilederPortefoljeVisningProps {
     sideStorrelse: number;
 }
 
-class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps & InjectedIntlProps> {
+interface OwnProps {
+    intl: InjectedIntl;
+}
+
+class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps & OwnProps> {
     componentWillMount() {
         const {
             valgtEnhet,
@@ -196,4 +200,4 @@ const mapDispatchToProps = (dispatch) => ({
     closeServerfeilModal: () => dispatch(skjulServerfeilModal())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(VeilederPortefoljeVisning));

@@ -1,5 +1,5 @@
-import React, { Component, PropTypes as PT } from 'react';
-import { FormattedDate, injectIntl, intlShape } from 'react-intl';
+import * as React from 'react';
+import { FormattedDate, injectIntl } from 'react-intl';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import { erGyldigDato, erGyldigDatoformat, dateGreater } from '../../utils/dato-utils';
@@ -27,7 +27,7 @@ export const Caption = ({ date }) => (
         <FormattedDate month="long" year="numeric" value={date} />
     </div>
 );
-
+/*
 Caption.propTypes = {
     date: PT.instanceOf(Date)
 };
@@ -35,7 +35,7 @@ Caption.propTypes = {
 Caption.defaultProps = {
     date: undefined
 };
-
+*/
 export const NavBar = ({
                            onNextClick,
                            onPreviousClick,
@@ -71,7 +71,7 @@ export const NavBar = ({
         </div>
     );
 };
-
+/*
 NavBar.propTypes = {
     onNextClick: PT.func,
     onPreviousClick: PT.func,
@@ -87,8 +87,9 @@ NavBar.defaultProps = {
     showNextButton: false,
     formatMessage: undefined
 };
+*/
 
-class DayPickerComponent extends Component {
+class DayPickerComponent extends React.Component {
     componentDidMount() {
         this.lukk = () => {
             this.props.lukk();
@@ -163,7 +164,7 @@ class DayPickerComponent extends Component {
         );
     }
 }
-
+/*
 DayPickerComponent.propTypes = {
     input: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     onKeyUp: PT.func.isRequired,
@@ -179,5 +180,5 @@ DayPickerComponent.defaultProps = {
     ariaControlledBy: undefined,
     tidligsteFom: undefined
 };
-
+*/
 export default injectIntl(DayPickerComponent);

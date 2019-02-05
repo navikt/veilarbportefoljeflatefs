@@ -1,13 +1,9 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 import InitalDataProvider from './providers/initial-data-provider';
-import { Route, Router } from 'react-router';
-import EnhetSide from './enhet/enhet-side';
-import VeiledereSide from './veiledere/veiledere-side';
-import MinOversiktSide from './minoversikt/minoversikt-side';
+import {BrowserRouter} from 'react-router-dom';
 import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
-import { basename } from './history';
-import history from './history';
+import Application from "./application";
+import {basename} from "./history";
 
 function redirect() {
     const lastPath = localStorage.getItem('lastpath');
@@ -18,40 +14,19 @@ function redirect() {
     }
 }
 
-function updateLastPath() {
-    const base = window.location.pathname.replace(basename, '');
-    if (base !== '/tilbake') {
-        const search = window.location.search;
-        localStorage.setItem('lastpath', base + search);
-    }
-}
-
 class Routes extends React.Component {
+    //KANSKE DIDMOUNT?
+    componentWillMount(){
+        redirect();
+    }
+
     render() {
         return (
-            <Router history={history}>
-                <Route
-                    path="/"
-                    component={InitalDataProvider}
-                    onChange={(prevState, nextState) => {
-                        updateLastPath();
-                        if (nextState.location.action !== 'POP' && nextState.location.action !== 'REPLACE') {
-                            window.scrollTo(0, 0);
-                        }
-                    }}
-                >
-                    <Route path="enhet" component={EnhetSide} />
-                    <Route
-                        path="veiledere"
-                        component={VeiledereSide}
-                    />
-                    <Route
-                        path="portefolje(/:ident)"
-                        component={MinOversiktSide}
-                    />
-                    <Route onEnter={redirect} path="tilbake" />
-                </Route>
-            </Router>
+            <InitalDataProvider>
+                <BrowserRouter>
+                    <Application/>
+                </BrowserRouter>
+            </InitalDataProvider>
         );
     }
 }

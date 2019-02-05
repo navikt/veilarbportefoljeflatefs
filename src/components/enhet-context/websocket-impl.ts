@@ -37,8 +37,8 @@ class WebSocketImpl {
     private wsUrl: string;
     private listeners: Listeners;
     private connection: WebSocket;
-    private resettimer: number | null;
-    private retrytimer: number | null;
+    private resettimer: NodeJS.Timeout | null;
+    private retrytimer: NodeJS.Timeout | null;
     private retryCounter: number = 0;
     private debug: boolean = false;
 

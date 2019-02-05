@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { BrukerModell } from '../../model-interfaces';
-import * as classnames from 'classnames';
 
 interface CheckboxProps {
     bruker: BrukerModell;

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { MouseEvent } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { isDirty } from 'redux-form';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import CheckBox from '../components/tabell/checkbox';
 import ArbeidslisteIkon from '../components/tabell/arbeidslisteikon';
@@ -14,6 +14,7 @@ import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
+import { FormattedMessage } from 'react-intl';
 import { REDIGER_ARBEIDSLISTE_FORM_NAME } from '../modal/rediger-arbeidsliste-form';
 import { skjulModal } from '../ducks/modal';
 
@@ -39,7 +40,7 @@ interface MinOversiktBrukerPanelState {
 
 class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps, MinOversiktBrukerPanelState> {
 
-    constructor(props: MinOversiktBrukerPanelProps) {
+    constructor(props) {
         super(props);
         this.state = {
             redigerArbeidslisteModalIsOpen: false,
@@ -50,7 +51,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
         this.handleArbeidslisteButtonClick = this.handleArbeidslisteButtonClick.bind(this);
     }
 
-    handleArbeidslisteButtonClick(event: any) {
+    handleArbeidslisteButtonClick(event) {
         event.preventDefault();
         this.setState({apen: !this.state.apen});
         if (this.props.onClick) {

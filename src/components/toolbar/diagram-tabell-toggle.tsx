@@ -2,8 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-toggle';
-import * as VK from '../../minoversikt/minoversikt-konstanter';
-import { AppState } from '../../reducer';
+import * as VK from './../../minoversikt/minoversikt-konstanter';
+import { AppState } from './../../reducer';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 import { settVisningsmodus } from '../../ducks/paginering';
 
@@ -33,19 +33,14 @@ function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules }:
     const onChange = (e) => endreVisningsmodus(e.target.value);
 
     return (
-        <ToggleGruppe name="DiagramTabellToggle" onChange={onChange}>
+        <ToggleGruppe defaultToggles={[]} onChange={onChange}>
             <ToggleKnapp
-                value={VK.TABELLVISNING}
-                className="toggle--tabell"
-                checked={visningsmodus === VK.TABELLVISNING}
-                ariaLabel="Vis som tabell"
+                pressed={visningsmodus === VK.TABELLVISNING}
             >
                 <span className="visuallyhidden">Vis som tabell</span>
             </ToggleKnapp>
             <ToggleKnapp
-                value={VK.DIAGRAMVISNING}
-                className="toggle--diagram"
-                checked={visningsmodus === VK.DIAGRAMVISNING}
+                pressed={visningsmodus === VK.DIAGRAMVISNING}
             >
                 <span className="visuallyhidden">Vis som diagram</span>
             </ToggleKnapp>

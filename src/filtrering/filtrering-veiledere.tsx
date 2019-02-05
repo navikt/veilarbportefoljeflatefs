@@ -2,11 +2,9 @@ import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { connect } from 'react-redux';
 import { endreFiltervalg } from '../ducks/filtrering';
-import SokFilter from '../components/toolbar/sok-filter';
 import { VeiledereState } from '../ducks/veiledere';
 import { FiltervalgModell, VeilederModell } from '../model-interfaces';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
-import { ListevisningType } from '../ducks/ui/listevisning';
 
 interface FiltreringVeiledereState {
     veilederNavnQuery?: string;
@@ -133,4 +131,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FiltreringVeiledere);
+export default connect(mapStateToProps, mapDispatchToProps)(FiltreringVeiledere as any);

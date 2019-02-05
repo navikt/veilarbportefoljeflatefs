@@ -1,12 +1,11 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { Component} from 'react';
 import { connect } from 'react-redux';
-import Toolbar from '../components/toolbar/toolbar';
+import Toolbar from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
-import { portefoljestorrelserShape, veiledereShape } from '../proptype-shapes';
 import { pagineringSetup } from '../ducks/paginering';
 import { sortBy } from '../ducks/sortering';
 import { nameToStateSliceMap } from '../ducks/utils';
-import { sorter } from '../utils/sortering';
+import { sorter } from './../utils/sortering';
 import { settSide } from '../ducks/ui/side';
 import {
     selectFraIndex,
@@ -112,7 +111,7 @@ class VeilederesideVisning extends Component {
         );
     }
 }
-
+/*
 VeilederesideVisning.propTypes = {
     pagineringSetup: PT.func.isRequired,
     veilederFilter: PT.array.isRequired, // eslint-disable-line react/forbid-prop-types
@@ -133,7 +132,7 @@ VeilederesideVisning.propTypes = {
     sideStorrelse: PT.number.isRequired,
     seAlle: PT.bool.isRequired
 };
-
+*/
 const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
     portefoljestorrelser: state.portefoljestorrelser,

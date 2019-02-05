@@ -6,11 +6,10 @@ import FilterKonstanter, {
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
     ytelse
 } from './filter-konstanter';
-import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg } from '../ducks/filtrering';
-import { filtervalgLabelShape, veilederShape } from '../proptype-shapes';
+import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne, ListevisningState } from '../ducks/ui/listevisning';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;

@@ -104,11 +104,11 @@ export function listevisningReducer(state = initialStateMinOversikt, action: Lis
 
 export default listevisningReducer;
 
-export const velgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({type: ActionTypeKeys.VELG_ALTERNATIV, kolonne, name});
-export const avvelgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({type: ActionTypeKeys.AVVELG_ALTERNATIV, kolonne, name});
+export const velgAlternativ = (kolonne: Kolonne, name: string) => ({type: ActionTypeKeys.VELG_ALTERNATIV, kolonne, name});
+export const avvelgAlternativ = (kolonne: Kolonne, name: string) => ({type: ActionTypeKeys.AVVELG_ALTERNATIV, kolonne, name});
 export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name});
 
-export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction>, getState: () => AppState, name: ListevisningType) => {
+export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction, AppState>, getState: () => AppState, name: ListevisningType) => {
     const appState = getState();
     const muligeAlternativer = selectMuligeAlternativer(appState, name);
     const valgteAlternativer = selectValgteAlternativer(appState, name);

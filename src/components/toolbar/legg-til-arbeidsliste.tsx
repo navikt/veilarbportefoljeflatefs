@@ -17,7 +17,7 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-    visesAnnenVeiledersPortefolje: boolean;
+    visesAnnenVeiledersPortefolje?: boolean;
 }
 
 type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps;

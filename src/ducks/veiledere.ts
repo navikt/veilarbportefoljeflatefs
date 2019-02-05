@@ -1,4 +1,4 @@
-import { hentEnhetsVeiledere } from '../middleware/api';
+import { hentEnhetsVeiledere } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { EnhetModell, VeilederModell } from '../model-interfaces';
 

@@ -1,13 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
     "allowJs": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
     "skipLibCheck": true,
+    "strictPropertyInitialization": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -21,5 +26,11 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*-spec.js",
+    "**/*-test.js",
+    "**/*.less"
   ]
 }

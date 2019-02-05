@@ -16,7 +16,7 @@ interface FiltreringNavnEllerFnrProps {
 }
 
 class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps, FiltreringNavnEllerFnrState> {
-    private timerId: number = 0;
+    private timerId: NodeJS.Timeout;
 
     constructor(props) {
         super(props);

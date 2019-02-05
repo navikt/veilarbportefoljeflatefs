@@ -14,7 +14,7 @@ const OverskriftMedHjelpeTekst = ({ overskriftId, hjelpetekstId }: OverskriftMed
         <Element tag="h3">
             <FormattedMessage id={overskriftId} />
         </Element>
-        <HjelpetekstAuto>
+        <HjelpetekstAuto id={hjelpetekstId}>
             <FormattedMessage id={hjelpetekstId} />
         </HjelpetekstAuto>
     </div>

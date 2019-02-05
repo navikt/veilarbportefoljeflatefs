@@ -1,18 +1,22 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import queryString from 'query-string';
-import Innholdslaster from './innholdslaster/innholdslaster';
 import rendreDekorator from './eventhandtering';
-import { settSide } from './ducks/ui/side';
-import history from './history';
-import { enhetShape, valgtEnhetShape, veiledereShape } from './proptype-shapes';
 import EnhetContext from './components/enhet-context/enhet-context';
 import tekstBundle from './tekster-built/bundle';
 import { sjekkFeature } from './ducks/features';
 import { FLYTT_FILTER_VENSTRE } from './konstanter';
+import {Route, withRouter, Switch, Redirect} from "react-router-dom";
+import EnhetSide from "./enhet/enhet-side";
+import VeiledereSide from "./veiledere/veiledere-side";
+import MinOversiktSide from "./minoversikt/minoversikt-side";
+import EnhetSideVenstreToggle from "./enhet/enhet-side-venstre-toggle";
+import MinOversiktSideVenstreToggle from "./minoversikt/minoversikt-side-venstre-toggle";
+import VeiledereSideVenstreToggle from "./veiledere/veiledere-side-venstre-toggle";
+import {basename} from "./history";
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(window.location.search).vistekster; // eslint-disable-line no-undef
@@ -24,32 +28,28 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
 
 addLocaleData(nb);
 
+
+
 class Application extends Component {
     componentWillMount() {
         rendreDekorator();
     }
 
-    componentDidMount() {
-        this.oppdaterSideState();
-        const pathname = window.location.pathname;// eslint-disable-line no-undef
-        if (pathname === '/veilarbportefoljeflatefs/' ||
-            pathname === '/veilarbportefoljeflatefs') {
-            history.push('/enhet');
-        }
+    componentDidMount(){
+        this.updateLastPath();
     }
 
-    oppdaterSideState() {
-        const { routes } = this.props;
-        const lastFragment = routes[routes.length - 1].path;
-
-        if (this.props.side !== lastFragment) {
-            this.props.settSide(lastFragment);
+    //TODO WHAT TO DO WITH ZIS?
+    updateLastPath() {
+        const base = this.props.location.pathname.replace(basename, '');
+        if (base !== '/tilbake') {
+            const search = window.location.search;
+            localStorage.setItem('lastpath', base + search);
         }
     }
 
     render() {
-        const { enheter, children, veiledere, flyttFilterTilVenstre } = this.props;
-
+        const {flyttFilterTilVenstre } = this.props;
         return (
             <IntlProvider
                 defaultLocale="nb"
@@ -57,20 +57,44 @@ class Application extends Component {
                 messages={mapTeksterTilNokkelDersomAngitt(tekstBundle.nb)}
             >
                 <div className="portefolje">
-                    <Innholdslaster avhengigheter={[enheter, enheter.valgtEnhet, veiledere]}>
-                        <EnhetContext />
-                        <div
-                            className={classnames({ container: !flyttFilterTilVenstre }, 'maincontent', 'side-innhold')}
-                        >
-                            {children}
-                        </div>
-                    </Innholdslaster>
+                    <EnhetContext />
+                    <div
+                        className = {classnames({ container: !flyttFilterTilVenstre }, 'maincontent', 'side-innhold')}
+                    >
+                        <Switch>
+                            <Route
+                                path="/enhet"
+                                render={() =>
+                                    flyttFilterTilVenstre ?
+                                        <EnhetSideVenstreToggle/> :
+                                        <EnhetSide/>} />
+                            <Route
+                                path="/veiledere"
+                                render={() =>
+                                    flyttFilterTilVenstre ?
+                                        <VeiledereSideVenstreToggle/> :
+                                        <VeiledereSide/>}
+                            />
+                            <Route
+                                path="/portefolje/:ident"
+                                render={() =>
+                                    flyttFilterTilVenstre ?
+                                        <MinOversiktSideVenstreToggle/> :
+                                        <MinOversiktSide/>}
+                            />
+                            <Route
+                                path="/veilarbportefoljeflatefs"
+                                render={() => <Redirect to ="/enhet"/>}
+                            />
+                        </Switch>
+                    </div>
                 </div>
             </IntlProvider>
         );
     }
 }
 
+/*
 Application.propTypes = {
     settSide: PT.func.isRequired,
     routes: PT.arrayOf(PT.object).isRequired,
@@ -89,14 +113,9 @@ Application.propTypes = {
         veiledereITabell: PT.arrayOf(veiledereShape)
     }).isRequired
 };
-
+*/
 const mapStateToProps = (state) => ({
-    side: state.ui.side.side,
-    flyttFilterTilVenstre: sjekkFeature(state, FLYTT_FILTER_VENSTRE)
+    flyttFilterTilVenstre: sjekkFeature(state, FLYTT_FILTER_VENSTRE),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    settSide: (side) => dispatch(settSide(side))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Application);
+export default withRouter(connect(mapStateToProps)(Application));

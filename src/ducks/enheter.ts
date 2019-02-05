@@ -1,4 +1,4 @@
-import { hentVeiledersEnheter } from '../middleware/api';
+import { hentVeiledersEnheter } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { leggEnhetIUrl, leggSeAlleIUrl, leggSideIUrl } from '../utils/url-utils';
 import { ValgtEnhetModell } from '../model-interfaces';
@@ -78,7 +78,7 @@ export function velgEnhetForVeileder(valgtEnhet) {
 }
 
 export function oppdaterValgtEnhet(nyEnhet: string) {
-    return (dispatch: Dispatch<Action>, getState: () => AppState) => {
+    return (dispatch: Dispatch<Action, AppState>, getState: () => AppState) => {
         const state = getState();
 
         dispatch(velgEnhetForVeileder(nyEnhet));

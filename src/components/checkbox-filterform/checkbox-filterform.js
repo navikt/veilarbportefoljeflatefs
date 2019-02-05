@@ -1,11 +1,11 @@
-import React, { PropTypes as PT } from 'react';
+import React from 'react';
 import { Field, Fields, reduxForm } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import { lagConfig } from '../../filtrering/filter-konstanter';
-import SubmitKnapp from '../submit-knapp';
+import { lagConfig } from './../../filtrering/filter-konstanter';
+import SubmitKnapp from './../submit-knapp';
 
 function renderFields({ names: _names, valg, ...fields }) { // eslint-disable-line react/prop-types
     const fieldCls = (className) => classNames('skjemaelement skjemaelement--horisontal', className);
@@ -81,7 +81,7 @@ function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, clos
         </form>
     );
 }
-
+/*
 CheckboxFilterform.defaultProps = {
     veileder: {}
 };
@@ -95,6 +95,7 @@ CheckboxFilterform.propTypes = {
     onSubmit: PT.func.isRequired,
     justerVenstre: PT.bool
 };
+*/
 
 const mapStateToProps = (state, ownProps) => {
     const name = ownProps.form;

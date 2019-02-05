@@ -6,7 +6,7 @@ import DocumentTitle from 'react-document-title';
 import { hentPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import Lenker from '../lenker/lenker';
+import Lenker from './../lenker/lenker';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
 import { VeiledereState } from '../ducks/veiledere';
 import { ValgtEnhetModell } from '../model-interfaces';

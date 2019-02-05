@@ -6,14 +6,14 @@ import {
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
 
-export function selectMuligeAlternativer(state: AppState, name: ListevisningType): Kolonne[] {
+export function selectMuligeAlternativer(state: AppState, name: string): Kolonne[] {
     if (name === ListevisningType.minOversikt) {
         return state.ui.listevisningMinOversikt.mulige;
     }
     return state.ui.listevisningEnhetensOversikt.mulige;
 }
 
-export function selectValgteAlternativer(state: AppState, name: ListevisningType): Kolonne[] {
+export function selectValgteAlternativer(state: AppState, name: string): Kolonne[] {
     if (name === ListevisningType.minOversikt) {
         return state.ui.listevisningMinOversikt.valgte;
     }

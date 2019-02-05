@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { reduxForm, Fields, Field, SubmitHandler } from 'redux-form';
 import { connect } from 'react-redux';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import { FiltervalgModell } from '../../model-interfaces';
 import { lagConfig } from '../../filtrering/filter-konstanter';
-import SubmitKnapp from '../submit-knapp';
+import SubmitKnapp from './../submit-knapp';
 
 interface RenderFieldProps {
     names: any;
@@ -72,8 +72,8 @@ interface RadioFilterformOwnProps {
     onSubmit: () => void;
 }
 
-function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown }: RadioFilterformProps & RadioFilterformOwnProps, context) {
-    const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown));
+function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown }: RadioFilterformProps & RadioFilterformOwnProps) {
+    const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown) as any);
 
     // TODO Finne en bedre løsning på dette
     const FieldRenderer = Fields as any;
@@ -92,7 +92,7 @@ function RadioFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDr
 
 const RadioFilterReduxForm = reduxForm<RadioFilterformProps, RadioFilterformOwnProps>({
     form: 'veiledertildeling'
-})(RadioFilterform);
+})(RadioFilterform as any);
 
 const mapStateToProps = (state, ownProps) => {
     const name = ownProps.form;

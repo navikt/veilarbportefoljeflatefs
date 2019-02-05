@@ -1,9 +1,9 @@
-import React, { Component, PropTypes as PT } from 'react';
+import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 // import Feilmelding from './../feilmelding/feilmelding'; Legg til feilmeldingskomponent
 import Laster from './innholdslaster-laster';
-import { STATUS } from '../ducks/utils';
+import { STATUS } from './../ducks/utils';
 
 const array = (value) => (Array.isArray(value) ? value : [value]);
 const harStatus = (...status) => (element) => array(status).includes(element.status);
@@ -27,7 +27,7 @@ function getFeilmeldingFraKey(feilmeldingKey, intl) {
     return (feilmeldingKey && intl.messages[feilmeldingKey]);
 }
 
-class Innholdslaster extends Component {
+class Innholdslaster extends React.Component {
     constructor(props) {
         super(props);
 
@@ -96,19 +96,5 @@ class Innholdslaster extends Component {
     }
 }
 
-Innholdslaster.propTypes = {
-    storrelse: PT.oneOf(['xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl']),
-    avhengigheter: PT.arrayOf(PT.object).isRequired,
-    className: PT.string,
-    children: PT.oneOfType([PT.node, PT.func]).isRequired,
-    intl: PT.object.isRequired,
-    feilmeldingKey: PT.string
-};
-
-Innholdslaster.defaultProps = {
-    storrelse: 'xxl',
-    className: undefined,
-    feilmeldingKey: undefined
-};
 
 export default injectIntl(Innholdslaster);

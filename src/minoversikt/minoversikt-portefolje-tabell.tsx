@@ -29,18 +29,18 @@ interface MinOversiktTabellProps {
     };
     valgtEnhet: ValgtEnhetModell;
     sorteringsrekkefolge: Sorteringsrekkefolge;
-    settMarkert: () => void;
+    settMarkert: (fnr:string , market:any) => void;
     filtervalg: FiltervalgModell;
     settSorteringOgHentPortefolje: (sortering: string) => void;
     veiledere: VeilederModell[];
     innloggetVeileder: string;
     valgteKolonner: Kolonne[];
-    visesAnnenVeiledersPortefolje: boolean;
+    visesAnnenVeiledersPortefolje?: boolean;
     erVurderingFeaturePa: boolean;
     erSykmeldtMedArbeidsgiverFeaturePa: boolean;
 }
 
-class MinoversiktTabell extends React.Component<MinOversiktTabellProps, {}> {
+class MinoversiktTabell extends React.Component<MinOversiktTabellProps> {
     private forrigeBruker?: string;
 
     componentWillMount() {

@@ -3,7 +3,6 @@ import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import SorteringHeader from '../components/tabell/sortering-header';
 import { ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';
-import { filtervalgShape } from '../proptype-shapes';
 import {
     ytelseUtlopsSortering,
     ytelseAapSortering,

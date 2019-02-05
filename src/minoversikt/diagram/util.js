@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { DIAGRAMVISNING } from '../minoversikt-konstanter';
+import { DIAGRAMVISNING } from '../../minoversikt/minoversikt-konstanter';
 import { ytelseFilterErAktiv } from '../../utils/utils';
 import { ytelsevalg } from '../../filtrering/filter-konstanter';
 

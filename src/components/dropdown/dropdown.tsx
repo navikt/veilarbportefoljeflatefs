@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Children, cloneElement, Component } from 'react';
-import * as classNames from 'classnames';
+import { Children, cloneElement, Component, ReactElement } from 'react';
+import classNames from 'classnames';
 
 const btnCls = (props: DropdownProps, state: DropdownState) => classNames('dropdown', props.className, {
     'dropdown--apen': state.apen,
@@ -25,7 +25,7 @@ interface DropdownProps {
     apen?: boolean;
     disabled?: boolean;
     name: string;
-    children: React.ReactChild | React.ReactChildren;
+    children: React.ReactChild;
     className?: string;
     onLukk?: () => void;
 }
@@ -37,11 +37,10 @@ interface DropdownState {
 
 class Dropdown extends Component<DropdownProps, DropdownState> {
     component: React.ReactNode;
-    btn: HTMLButtonElement | null;
+    btn: HTMLButtonElement | null = null;
 
     constructor(props) {
         super(props);
-
         this.state = {
             apen: this.props.apen === true,
             hover: false
@@ -112,7 +111,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
         const { name, className, disabled, children, hoyre } = this.props;
         const { apen } = this.state;
 
-        const augmentedChild = Children.map(children, (child: React.ReactElement<any>) => cloneElement(child, {
+        const augmentedChild = Children.map(children, (child: React.ReactChild) => cloneElement<any>(child as ReactElement<any>, {
             closeDropdown: this.lukkDropdown
         }));
         const innhold = !apen ? null : (

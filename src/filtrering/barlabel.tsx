@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 
 function calcWidth(antall: number, max: number): number {
     if (antall === 0) {

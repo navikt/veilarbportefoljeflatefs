@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Checkbox } from 'nav-frontend-skjema';
-import { markerAlleBrukere } from '../../ducks/portefolje';
+import { markerAlleBrukere } from './../../ducks/portefolje';
 
 interface VelgalleCheckboksProps {
     skalVises: boolean;

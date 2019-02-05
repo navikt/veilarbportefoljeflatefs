@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Knapp } from 'nav-frontend-knapper';
+import {Hovedknapp, Knapp} from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
@@ -46,9 +46,9 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slet
                 </ul>
             </div>
             <div className="modal-footer">
-                <Knapp type="hoved" className="knapp knapp--hoved" spinner={laster} onClick={handleSubmit}>
+                <Hovedknapp className="knapp knapp--hoved" spinner={laster} onClick={handleSubmit}>
                     <FormattedMessage id="modal.knapp.lagre" />
-                </Knapp>
+                </Hovedknapp>
                 <button type="button" className="knapp" onClick={lukkModal}>
                     <FormattedMessage id="modal.knapp.avbryt" />
                 </button>

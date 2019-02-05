@@ -47,7 +47,7 @@ const harLukketInfoPanel = (name: ListevisningType, state: AppState) => {
     return state.ui.listevisningMinOversikt.lukketInfopanel;
 };
 
-const mapStateToProps = (state: AppState, ownProps: OwnProps): StateProps => {
+const mapStateToProps = (state, ownProps) => {
     const antallMulige = selectMuligeAlternativer(state, ownProps.name).length;
 
     return {
@@ -55,7 +55,7 @@ const mapStateToProps = (state: AppState, ownProps: OwnProps): StateProps => {
     };
 };
 
-const mapActionsToProps = (dispatch: Dispatch<Action>): DispatchProps => {
+const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
         lukkPanel: lukkInfopanel
     }, dispatch);

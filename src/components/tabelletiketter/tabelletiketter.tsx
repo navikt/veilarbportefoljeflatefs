@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { EtikettInfo } from 'nav-frontend-etiketter';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import { EtikettType } from '../../model-interfaces';
 
 const cls = (className, type) => classNames('tabelletikett', className, {
@@ -10,10 +10,15 @@ const cls = (className, type) => classNames('tabelletikett', className, {
 interface TabelletiketterProps {
     className?: string;
     type?: EtikettType;
+    children?: React.ReactChild;
 }
 
-function Tabelletiketter({ className, type, ...props }: TabelletiketterProps) {
-    return (<EtikettInfo className={cls(className, type)} {...props} typo="undertekst" />);
+function Tabelletiketter({ className, type, children, ...props }: TabelletiketterProps) {
+    return (
+        <EtikettInfo className={cls(className, type)} {...props} typo="undertekst">
+            {children}
+        </EtikettInfo>
+    );
 }
 
 export default Tabelletiketter;

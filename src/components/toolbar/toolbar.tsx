@@ -11,7 +11,7 @@ import { VeilederModell } from '../../model-interfaces';
 
 interface ToolbarProps {
     filtergruppe: ListevisningType;
-    onPaginering: (fra: number, antall: number) => void;
+    onPaginering: (fra?: number, antall?: number) => void;
     sokVeilederSkalVises?: boolean;
     visesAnnenVeiledersPortefolje?: boolean;
     children?: React.ReactNode;
@@ -20,39 +20,41 @@ interface ToolbarProps {
     antallTotalt: number;
 }
 
-const Toolbar = ({filtergruppe,
-                     onPaginering,
-                     sokVeilederSkalVises,
-                     visesAnnenVeiledersPortefolje,
-                     gjeldendeVeileder,
-                     visningsmodus,
-                     antallTotalt}: ToolbarProps) => (
-    <section className="toolbar blokk-xs">
-        <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
-            <VelgalleCheckboks skalVises={filtergruppe in ListevisningType}/>
-            <TildelVeileder
-                skalVises={filtergruppe in ListevisningType}
-                filtergruppe={filtergruppe}
-                gjeldendeVeileder={gjeldendeVeileder}/>
-            <Listevisning filtergruppe={filtergruppe}/>
-            <LeggTilArbeidsliste visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}/>
-            <SokVeileder
-                veileder={{}}
-                filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe}
-                skalVises={sokVeilederSkalVises}
-            />
-        </div>
-        <div className="toolbar__element toolbar__midten toolbar--skille-mellom-elementer">
-            <DiagramTabellToggle filtergruppe={filtergruppe}/>
-        </div>
-        <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
-            <Paginering className="toolbar--skille-mellom-elementer"
-                        onChange={onPaginering}
-                        skjul={visningsmodus === Veilederpaginering.DIAGRAMVISNING}
-                        antallTotalt={antallTotalt}
-            />
-        </div>
-    </section>
-);
+function Toolbar ({filtergruppe,
+                      onPaginering,
+                      sokVeilederSkalVises,
+                      visesAnnenVeiledersPortefolje,
+                      gjeldendeVeileder,
+                      visningsmodus,
+                      antallTotalt}: ToolbarProps) {
+    return(
+        <section className="toolbar blokk-xs">
+            <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
+                <VelgalleCheckboks skalVises={filtergruppe in ListevisningType}/>
+                <TildelVeileder
+                    skalVises={filtergruppe in ListevisningType}
+                    filtergruppe={filtergruppe}
+                    gjeldendeVeileder={gjeldendeVeileder}/>
+                <Listevisning filtergruppe={filtergruppe}/>
+                <LeggTilArbeidsliste visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}/>
+                <SokVeileder
+                    veileder={{}}
+                    filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe}
+                    skalVises={sokVeilederSkalVises}
+                />
+            </div>
+            <div className="toolbar__element toolbar__midten toolbar--skille-mellom-elementer">
+                <DiagramTabellToggle filtergruppe={filtergruppe}/>
+            </div>
+            <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
+                <Paginering className="toolbar--skille-mellom-elementer"
+                            onChange={onPaginering}
+                            skjul={visningsmodus === Veilederpaginering.DIAGRAMVISNING}
+                            antallTotalt={antallTotalt}
+                />
+            </div>
+        </section>
+    );
+}
 
 export default Toolbar;

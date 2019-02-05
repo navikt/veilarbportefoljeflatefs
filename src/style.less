@@ -1,5 +1,6 @@
-@coreModulePath: './../../../node_modules/';
-@nodeModulesPath: './../../../node_modules/';
+//@coreModulePath: './../../node_modules/';
+//@nodeModulesPath: './../../node_modules/';
+
 @import "tabell";
 
 body {
@@ -31,47 +32,49 @@ html {
     height: 100%;
 }
 
-@import "modal/feilmelding-brukere";
-@import "modal/arbeidsliste";
-@import "components/enhet-context/enhet-context";
-@import "components/datovelger/daypicker";
-@import "../node_modules/nav-frontend-alertstriper-style/src/index";
-@import "../node_modules/nav-frontend-typografi-style/src/index";
-@import "../node_modules/nav-frontend-core/less/core";
-@import "../node_modules/nav-frontend-grid-style/src/index";
-@import "../node_modules/nav-frontend-modal-style/src/index";
-@import "../node_modules/nav-frontend-paneler-style/src/index";
-@import "../node_modules/nav-frontend-ekspanderbartpanel-style/src/index";
-@import "../node_modules/nav-frontend-etiketter-style/src/index";
-@import "../node_modules/nav-frontend-spinner-style/src/spinner-style";
-@import "../node_modules/nav-frontend-skjema-style/src/index";
-@import "../node_modules/nav-frontend-chevron-style/src/index";
-@import "../node_modules/nav-frontend-knapper-style/src/index";
-@import "../node_modules/nav-frontend-paneler-style/src/mixins";
-@import "../node_modules/nav-frontend-lenker-style/src/lenker-style";
-@import "../node_modules/nav-frontend-toggle-style/src/toggle-style";
-@import "../node_modules/nav-frontend-hjelpetekst-style/src/hjelpetekst-style";
-@import "forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
+@import "~nav-frontend-alertstriper-style/src/index";
+@import "~nav-frontend-typografi-style/src/index";
+@import "~nav-frontend-core/less/core";
+@import "~nav-frontend-grid-style/src/index";
+@import "~nav-frontend-modal-style/src/index";
+@import "~nav-frontend-paneler-style/src/index";
+@import "~nav-frontend-ekspanderbartpanel-style/src/index";
+@import "~nav-frontend-etiketter-style/src/index";
+@import "~nav-frontend-spinner-style/src/spinner-style";
+@import "~nav-frontend-skjema-style/src/index";
+@import "~nav-frontend-chevron-style/src/index";
+@import "~nav-frontend-chevron-style/src/index";
+@import "~nav-frontend-knapper-style/src/index";
+@import "~nav-frontend-paneler-style/src/mixins";
+@import "~nav-frontend-lenker-style/src/lenker-style";
+@import "~nav-frontend-toggle-style/src/toggle-style";
+@import "~nav-frontend-hjelpetekst-style/src/hjelpetekst-style";
+
+@import "./modal/feilmelding-brukere";
+@import "./modal/arbeidsliste";
+@import "./components/enhet-context/enhet-context";
+@import "./components/datovelger/daypicker";
+@import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
 
 
 .veilarbportefoljeflatefs {
-    @import "lenker/lenker";
-    @import "paginering/paginering";
-    @import "enhetsportefolje/enhetsportefolje";
-    @import "enhetsportefolje/brukerliste";
-    @import "veiledere/veiledere";
-    @import "minoversikt/minoversikt";
-    @import "filtrering/filtrering-label";
-    @import "filtrering/filtrering-skjema";
-    @import "filtrering/barlabel";
-    @import "components/tabelletiketter/tabelletiketter";
-    @import "components/dropdown/dropdown";
-    @import "components/toolbar/toolbar";
-    @import "components/checkbox-filterform/checkbox-filterform";
-    @import "components/radio-filterform/radio-filterform";
-    @import "components/aktivitet-filterform/aktivitet-filterform";
-    @import "veiledere/veieldersok";
-    @import "minoversikt/diagram/digram";
+    @import "./lenker/lenker";
+    @import "./paginering/paginering";
+    @import "./enhetsportefolje/enhetsportefolje";
+    @import "./enhetsportefolje/brukerliste";
+    @import "./veiledere/veiledere";
+    @import "./minoversikt/minoversikt";
+    @import "./filtrering/filtrering-label";
+    @import "./filtrering/filtrering-skjema";
+    @import "./filtrering/barlabel";
+    @import "./components/tabelletiketter/tabelletiketter";
+    @import "./components/dropdown/dropdown";
+    @import "./components/toolbar/toolbar";
+    @import "./components/checkbox-filterform/checkbox-filterform";
+    @import "./components/radio-filterform/radio-filterform";
+    @import "./components/aktivitet-filterform/aktivitet-filterform";
+    @import "./veiledere/veieldersok";
+    @import "./minoversikt/diagram/digram";
 }
 
 

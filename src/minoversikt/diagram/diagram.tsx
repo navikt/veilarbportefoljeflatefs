@@ -1,25 +1,42 @@
-import React, { Component, PropTypes as PT } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import Chart from 'react-highcharts';
-import { filtervalgShape } from '../../proptype-shapes';
 import { hentDiagramdata } from '../../ducks/diagram';
 import config from './config';
 import MultiFormattedMessage from '../../components/multiformattedmessage';
 import { ledetekster, lagYtelseDataFraFasett } from './util';
-import Innholdslaster from '../../innholdslaster/innholdslaster';
+import Innholdslaster from './../../innholdslaster/innholdslaster';
 import Diagramtabell from './diagram-tabell';
 
-class Diagram extends Component {
+interface DiagramProps {
+    filtreringsvalg: any;
+    enhet: string;
+    veileder?: string;
+    intl: any
+}
+
+interface StateProps {
+    diagramdata: any;
+    portefolje: any;
+}
+
+interface DispatchProps {
+    hentDiagram: (enhet: string, filtreringsvalg: string, veileder?: string) => any;
+}
+
+type AllProps = DiagramProps & StateProps & DispatchProps;
+
+class Diagram extends React.Component<AllProps> {
     componentDidMount() {
         const { filtreringsvalg, enhet, veileder, hentDiagram } = this.props;
-        hentDiagram(enhet, veileder, filtreringsvalg);
+        hentDiagram(enhet, filtreringsvalg, veileder);
     }
 
     componentWillUpdate(nextProps) {
         const { filtreringsvalg, enhet, veileder, hentDiagram } = this.props;
         if (JSON.stringify(filtreringsvalg) !== JSON.stringify(nextProps.filtreringsvalg)) {
-            hentDiagram(enhet, veileder, nextProps.filtreringsvalg);
+            hentDiagram(enhet, nextProps.filtreringsvalg, veileder);
         }
     }
 
@@ -61,21 +78,6 @@ class Diagram extends Component {
         );
     }
 }
-
-Diagram.propTypes = {
-    filtreringsvalg: filtervalgShape.isRequired,
-    enhet: PT.string.isRequired,
-    veileder: PT.string,
-    hentDiagram: PT.func.isRequired,
-    diagramdata: PT.object,
-    portefolje: PT.object,
-    intl: intlShape
-};
-Diagram.defaultProps = {
-    veileder: null,
-    diagramdata: {},
-    portefolje: {}
-};
 
 const mapStateToProps = (state) => ({
     diagramdata: state.diagram,
