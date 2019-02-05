@@ -27,7 +27,7 @@ interface TilbakemeldingModalState {
 class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, TilbakemeldingModalState> {
 
     private readonly KOMMENTAR_ROWS = 5;
-    private readonly KOMMENTAR_MAX_CHAR = 500;
+    private readonly KOMMENTAR_MAX_CHAR = 750;
 
     constructor(props) {
         super(props);
