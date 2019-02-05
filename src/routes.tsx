@@ -1,29 +1,21 @@
 import * as React from 'react';
 import InitalDataProvider from './providers/initial-data-provider';
 import {BrowserRouter} from 'react-router-dom';
-import { getEnhetFromUrl, sendBrukerTilUrl } from './utils/url-utils';
 import Application from "./application";
 import {basename} from "./history";
+import rendreDekorator from "./eventhandtering";
 
-function redirect() {
-    const lastPath = localStorage.getItem('lastpath');
-    if (lastPath) {
-        sendBrukerTilUrl(lastPath);
-    } else {
-        sendBrukerTilUrl(`/enhet?enhet=${getEnhetFromUrl()}`);
-    }
-}
 
 class Routes extends React.Component {
-    //KANSKE DIDMOUNT?
+
     componentWillMount(){
-        redirect();
+        rendreDekorator();
     }
 
     render() {
         return (
             <InitalDataProvider>
-                <BrowserRouter>
+                <BrowserRouter basename={basename}>
                     <Application/>
                 </BrowserRouter>
             </InitalDataProvider>

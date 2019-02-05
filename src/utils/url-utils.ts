@@ -15,9 +15,6 @@ export function slettCleanIUrl() {
 
     const stringified = queryString.stringify(parsed);
     const pathname = window.location.pathname.replace(basename, '');
-    console.log("pathname", pathname);
-    console.log("stingified", stringified);
-    console.log("slettCleanURl");
     history.replace(`${pathname}?${stringified}`);
 }
 

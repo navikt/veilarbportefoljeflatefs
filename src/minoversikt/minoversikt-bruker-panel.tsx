@@ -130,7 +130,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     formIsDirty: isDirty(REDIGER_ARBEIDSLISTE_FORM_NAME)(state),
 });
 

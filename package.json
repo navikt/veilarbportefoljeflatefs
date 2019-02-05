@@ -14,7 +14,9 @@
     "build:tekster": "react-intl-bundler ./tekster ./tekster-built",
     "heroku-serve": "node heroku-server.js",
     "heroku-postbuild": "npm run build:tekster && webpack -p --env.dev --env.mock",
-    "upload:doc": "node documentation/scripts/upload-all"
+    "upload:doc": "node documentation/scripts/upload-all",
+    "lint": "tslint ./src/**/*.ts*",
+    "lint:fix": "tslint ./src/**/*.ts* --fix"
   },
   "devDependencies": {
     "@navikt/react-intl-bundler": "1.0.4",
@@ -45,7 +47,9 @@
     "mocha": "5.2.0",
     "nyc": "13.1.0",
     "path-to-regexp": "1.7.0",
-    "react-addons-test-utils": "15.6.0"
+    "react-addons-test-utils": "15.6.0",
+    "tslint": "^5.12.1",
+    "tslint-react": "^3.6.0"
   },
   "dependencies": {
     "@craco/craco": "^3.4.1",

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import {Hovedknapp, Knapp} from 'nav-frontend-knapper';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { validForm, rules } from 'react-redux-form-validation';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel, Undertekst } from 'nav-frontend-typografi';
@@ -63,7 +63,7 @@ function RedigerArbeidslisteForm({ lukkModal,
                         maxLength={KOMMENTAR_MAKS_LENGDE}
                         disabled={false}
                         visTellerFra={500}
-                        onChange={(e :any)=>{}}
+                        onChange={(e: any)=> {}}
                         value={name}
                     />
                 </div>

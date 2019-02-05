@@ -21,7 +21,7 @@ import {
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
-import {InjectedIntl, injectIntl} from 'react-intl';
+import { InjectedIntl, injectIntl } from 'react-intl';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 
 interface VeilederPortefoljeVisningProps {

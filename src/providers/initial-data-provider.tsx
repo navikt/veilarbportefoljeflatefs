@@ -3,22 +3,20 @@ import { connect } from 'react-redux';
 import { parse } from 'query-string';
 import { EnheterState, hentEnheterForVeileder, velgEnhetForVeileder } from '../ducks/enheter';
 import { hentVeiledereForEnhet } from '../ducks/veiledere';
-import { hentFeaturesFraUnleash} from '../ducks/features';
+import { hentFeaturesFraUnleash } from '../ducks/features';
 import { hentAktivEnhet } from '../components/enhet-context/context-api';
 import { STATUS } from '../ducks/utils';
 import { leggEnhetIUrl } from '../utils/url-utils';
 import { settEnhetIDekorator } from '../eventhandtering';
-import Application from '../application';
-import {basename} from "../history";
-import Innholdslaster from "../innholdslaster/innholdslaster";
-import {VeilederModell} from "../model-interfaces";
+import Innholdslaster from '../innholdslaster/innholdslaster';
+import { VeilederModell } from '../model-interfaces';
 
 interface DispatchProps {
+    children: React.ReactNode;
     hentFeatures(): void;
     hentEnheter(): void;
     hentVeiledere(enhetId: string): void;
     velgEnhet(enhetId: string): void;
-    children: React.ReactNode;
 }
 
 interface StateProps {
@@ -30,9 +28,10 @@ type InitialDataProviderProps = DispatchProps & StateProps;
 
 class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> {
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.hentEnheter();
         this.props.hentFeatures();
+        console.log("hvormångerendres");
     }
 
     componentDidUpdate() {
@@ -66,6 +65,7 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> 
     oppdaterDekoratorMedInitiellEnhet() {
         const {velgEnhet, hentVeiledere} = this.props;
         this.finnInitiellEnhet().then((initiellEnhet) => {
+            console.log("initiellEnhet", initiellEnhet);
             velgEnhet(initiellEnhet);
             leggEnhetIUrl(initiellEnhet);
             hentVeiledere(initiellEnhet);
@@ -79,7 +79,6 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps, {}> 
                 {this.props.children}
             </Innholdslaster>
         );
-
 
     }
 

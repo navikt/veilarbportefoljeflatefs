@@ -23,6 +23,7 @@ import {
 } from '../utils/url-utils';
 import { pagineringSetup } from '../ducks/paginering';
 import './minoversikt-side.less';
+import {RouterProps} from "react-router";
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -49,15 +50,16 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-    intl : InjectedIntl
+    intl: InjectedIntl;
 }
 
-type MinoversiktSideProps = StateProps & DispatchProps & OwnProps;
+type MinoversiktSideProps = StateProps & DispatchProps & OwnProps & RouterProps;
 
+//TODO FIKS TYPERNE
 class MinOversiktSideVenstreToggle extends React.Component<any> {
     componentDidMount() {
         const { veiledere, enheter, valgtEnhet, filtervalg, hentPortefolje, ...props } = this.props;
-        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
+        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
         const innloggetVeileder = { ident: enheter.ident };
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
@@ -86,8 +88,9 @@ class MinOversiktSideVenstreToggle extends React.Component<any> {
 
     render() {
         const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
+        console.log("props.params", this.props);
 
-        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
+        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
         const innloggetVeileder = { ident: enheter.ident };
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
@@ -100,8 +103,8 @@ class MinOversiktSideVenstreToggle extends React.Component<any> {
                 id="annen.veileder.portefolje.advarsel"
                 tagName="em"
                 values={{
-                    fornavn: fornavn,
-                    etternavn: etternavn
+                    fornavn,
+                    etternavn
                 }}
             /></Normaltekst>);
 

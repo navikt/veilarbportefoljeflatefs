@@ -5,7 +5,7 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import { injectIntl, InjectedIntl } from 'react-intl';
-import {AppState} from "../reducer";
+import { AppState } from '../reducer';
 
 Modal.setAppElement('#applikasjon');
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Hovedknapp, Knapp} from 'nav-frontend-knapper';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';

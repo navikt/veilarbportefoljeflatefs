@@ -38,13 +38,14 @@ interface DispatchProps {
     doSkjulFeilmodal: () => void;
 }
 
-type EnhetContextProps = StateProps & DispatchProps;
+type EnhetContextProps = {children: React.ReactNode} & StateProps & DispatchProps;
 
 class EnhetContext extends React.Component<EnhetContextProps> {
     contextListener: EnhetContextListener;
 
     constructor(props) {
         super(props);
+        console.log("enhetContext");
         this.enhetContextHandler = this.enhetContextHandler.bind(this);
         this.handleEndreAktivEnhet = this.handleEndreAktivEnhet.bind(this);
         this.handleBeholdAktivEnhet = this.handleBeholdAktivEnhet.bind(this);
@@ -89,6 +90,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     handleEndreAktivEnhet() {
+        console.log("aktivitEnhetIdFraContext", this.props.aktivEnhetIdFraContext);
         settEnhetIDekorator(this.props.aktivEnhetIdFraContext);
         this.props.doOppdaterValgtEnhet(this.props.aktivEnhetIdFraContext);
     }
@@ -125,20 +127,23 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         );
 
         return (
-            <div>
-                { this.props.feilet ? alertIkkeTilkoblet : null }
-                <ContextFeilmodal
-                    isOpen={this.props.feilmodalSynlig}
-                    onClose={this.props.doSkjulFeilmodal}
-                />
-                <NyContextModal
-                    isOpen={this.props.modalSynlig}
-                    aktivEnhet={this.props.aktivEnhetNavn}
-                    isPending={this.props.isPending}
-                    doEndreAktivEnhet={this.handleEndreAktivEnhet}
-                    doBeholdAktivEnhet={this.handleBeholdAktivEnhet}
-                />
-            </div>
+            <>
+                <>
+                    { this.props.feilet ? alertIkkeTilkoblet : null }
+                    <ContextFeilmodal
+                        isOpen={this.props.feilmodalSynlig}
+                        onClose={this.props.doSkjulFeilmodal}
+                    />
+                    <NyContextModal
+                        isOpen={this.props.modalSynlig}
+                        aktivEnhet={this.props.aktivEnhetNavn}
+                        isPending={this.props.isPending}
+                        doEndreAktivEnhet={this.handleEndreAktivEnhet}
+                        doBeholdAktivEnhet={this.handleBeholdAktivEnhet}
+                    />
+                </>
+                {this.props.children}
+            </>
         );
     }
 }

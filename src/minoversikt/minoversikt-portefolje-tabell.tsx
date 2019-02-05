@@ -15,7 +15,7 @@ import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { getFraBrukerFraUrl } from '../utils/url-utils';
 import { sjekkFeature } from '../ducks/features';
-import {ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE, TRENGER_VURDERING_FEATURE} from '../konstanter';
+import { ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE, TRENGER_VURDERING_FEATURE } from '../konstanter';
 
 interface MinOversiktTabellProps {
     portefolje: {
@@ -29,7 +29,7 @@ interface MinOversiktTabellProps {
     };
     valgtEnhet: ValgtEnhetModell;
     sorteringsrekkefolge: Sorteringsrekkefolge;
-    settMarkert: (fnr:string , market:any) => void;
+    settMarkert: (fnr: string , market: any) => void;
     filtervalg: FiltervalgModell;
     settSorteringOgHentPortefolje: (sortering: string) => void;
     veiledere: VeilederModell[];

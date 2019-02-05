@@ -14,7 +14,7 @@ import { VeiledereState } from '../ducks/veiledere';
 import { ValgtEnhetModell } from '../model-interfaces';
 import { FiltreringState } from '../ducks/filtrering';
 import { pagineringSetup } from '../ducks/paginering';
-import {RouterProps} from "react-router";
+import { RouterProps } from 'react-router';
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -32,10 +32,8 @@ type VeiledereSideProps = StateProps & DispatchProps & InjectedIntlProps & Route
 
 class VeiledereSide extends React.Component<VeiledereSideProps> {
     componentWillMount() {
-        console.log("veilederSide",this.props);
         const { hentPortefoljestorrelser, valgtEnhet } = this.props;
         hentPortefoljestorrelser(valgtEnhet.enhet!.enhetId);
-        console.log("valgtEnhet.enhet!.enhetId", valgtEnhet.enhet!.enhetId);
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
         this.settInitalStateFraUrl();
     }
@@ -48,7 +46,6 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
 
     render() {
         const { veiledere, portefoljestorrelser, filtervalg, intl } = this.props;
-        console.log("inne i veildere");
         return (
             <DocumentTitle title={intl.formatMessage({ id: 'lenker.veiledere.oversikt' })}>
                 <div className="container veiledere-side">
