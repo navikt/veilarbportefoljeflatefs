@@ -58,9 +58,15 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
     };
 
     handleFabClicked = () => {
+
+        if (!this.state.isModalOpen) {
+            (window as any).frontendlogger.event('portefolje.tilbakemelding_modal_apnet', {}, {});
+        }
+
         this.setState((prevState: TilbakemeldingFabState) => {
             return { isModalOpen: !prevState.isModalOpen };
         });
+
     };
 
     handleTilbakemeldingSendt = (tilbakemelding?: Tilbakemelding) => {
@@ -70,6 +76,7 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
                 { feature: this.TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding }, {});
         } else {
             // Hvis tilbakemelding er undefined så trykket brukeren "ikke vis igjen"
+            (window as any).frontendlogger.event('portefolje.ikke_vis_tilbakemelding_igjen', {}, {});
             this.setState({ ikkeVisIgjen: true });
         }
     };
@@ -86,7 +93,6 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
 
         const lukkeIkon = 'data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAQAAAADQ4RFAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfjAgQNMjf0s2WWAAAAeElEQVQ4y7WUUQ6AMAhDG+/Sw3H/f/TDJW5RpDZxfxt9hHQAABCEeoaWSCRCQgKJBE9ol7AYSs6XkJAoH3qkx8pojb0mfA62pd8FkkmrSPN1EcrIjH1ALqxENjXPD+UZRhiWG59rtJHRsMZoGENojLu1WKwVZizLA5OtpXPPjPcAAAAAAElFTkSuQmCC';
         const apneIkon = 'data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAkCAQAAABY3hDnAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfjAgQQGhbxeetBAAACLklEQVRIx8XWO0xUQRTG8d+urEp8xDc+OjXYiBE0kWBjIsFGYimVaEFprCy00MLORLFweyttxBg1NsTESsBHMEJMMIKxMEQhSkHh7uKOBQtBd+9F2Ztwppib+c75Z+6Zc88dYLusQQWhypE3KKtOyU6YrBq5cExqgzqTgvsOqlGtZTTqEUyqIyu4XzVyofUIsgwKGhMFNwoGyQsyiYIzgnxKQCpRMIF0jLzWE1O6K2rdpjy2Np4eIpSbpfJpKlOaSsqNaGbcjk+W5qNlytxKe3RwHHhXaZ4pU2b+8vhP8FhpHipThv7yiMpHhNIpCHorar2CoDOOGQ2mTYfaikqtjtmOEAVeljquypYBfMx3F2Njz5h2PC4flQ/vkDETDkTG7TXkk8PRzChwyhXTXtpfUd1mXM71iGNfpNxWeizvq1NlCdvtqYJH1sdlIa6OM7J+mPDAaXtssc5Wza56b8YHG+LTGwemxjl9fsr76K033vkmGNVtU0xUEFKKUtKx8I1atdtntbSCKc89NKwY6Z9SFBgR1EvS6gUjaa/RlSi4C69okPPLpYR+qCtd9ktOQwrn3ZKWM6Lwh1NRt3ul5xWuxXSzOcvYZ5WiC27PLrTol69wWXoxv4+ef7699WthYcNcrf6PdOx3x4BmrPFQqx/O+rLIjgtG5BZ7rSOCfmzUJxjXkMgZzIN3GBKM2ZMUdhY8ZlQwbGdy2FlwEAzEfrxLBj+Lv0YtxTb77K5VSw3/DdK0H6HFZvnVAAAAAElFTkSuQmCC';
-
 
         return (
             <div ref={(ref) => { this.wrapperRef = ref; }}>
