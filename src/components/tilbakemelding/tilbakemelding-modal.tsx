@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
+import classNames from 'classnames/dedupe';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Textarea } from 'nav-frontend-skjema';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
@@ -99,7 +99,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                                 onChange={this.handleKommentarChanged}
                             />
                         </div>
-                        <Hovedknapp type="submit" className="knapp--hoved">
+                        <Hovedknapp role="submit" className="knapp--hoved">
                             Send
                         </Hovedknapp>
                     </form>

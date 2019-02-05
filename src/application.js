@@ -17,6 +17,7 @@ import EnhetSideVenstreToggle from "./enhet/enhet-side-venstre-toggle";
 import MinOversiktSideVenstreToggle from "./minoversikt/minoversikt-side-venstre-toggle";
 import VeiledereSideVenstreToggle from "./veiledere/veiledere-side-venstre-toggle";
 import {basename} from "./history";
+import TilbakemeldingFab from "./components/tilbakemelding/tilbakemelding-fab";
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(window.location.search).vistekster; // eslint-disable-line no-undef
@@ -87,6 +88,7 @@ class Application extends Component {
                                 render={() => <Redirect to ="/enhet"/>}
                             />
                         </Switch>
+                        <TilbakemeldingFab/>
                     </div>
                 </div>
             </IntlProvider>
