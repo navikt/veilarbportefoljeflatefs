@@ -12,7 +12,8 @@ import { enhetShape, valgtEnhetShape, veiledereShape } from './proptype-shapes';
 import EnhetContext from './components/enhet-context/enhet-context';
 import tekstBundle from './../../tekster-built/bundle';
 import { sjekkFeature } from './ducks/features';
-import { FLYTT_FILTER_VENSTRE, TRENGER_VURDERING_FEATURE } from './konstanter';
+import { FLYTT_FILTER_VENSTRE } from './konstanter';
+import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(location.search).vistekster; // eslint-disable-line no-undef
@@ -64,6 +65,7 @@ class Application extends Component {
                         >
                             {children}
                         </div>
+                        <TilbakemeldingFab />
                     </Innholdslaster>
                 </div>
             </IntlProvider>
