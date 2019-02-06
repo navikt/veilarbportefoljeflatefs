@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
 import Toolbar from './../components/toolbar/toolbar';
-import {getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl, updateLastPath} from '../utils/url-utils';
+import { getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl, updateLastPath } from '../utils/url-utils';
 import EnhetTabell from './enhetsportefolje-tabell';
 import TabellOverskrift from './../components/tabell-overskrift';
 import { ASCENDING, DESCENDING } from '../konstanter';

@@ -4,7 +4,7 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../ducks/portefolje';
 import TabellOverskrift from './../components/tabell-overskrift';
 import Toolbar from './../components/toolbar/toolbar';
-import {leggEnhetIUrl, updateLastPath} from '../utils/url-utils';
+import { leggEnhetIUrl, updateLastPath } from '../utils/url-utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';

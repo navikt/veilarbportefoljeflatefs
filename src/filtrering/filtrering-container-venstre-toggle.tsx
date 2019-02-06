@@ -34,7 +34,7 @@ function FiltreringContainerVenstreToggle({ filtergruppe, filtervalg, veileder= 
                     actions={actions}
                 />
             </PanelBase>
-            <div className= "blokk-xxxs">
+            <div className="blokk-xxxs">
                 <Ekspanderbartpanel
                     apen
                     tittel="Status"
