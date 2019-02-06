@@ -34,20 +34,22 @@ function FiltreringContainerVenstreToggle({ filtergruppe, filtervalg, veileder= 
                     actions={actions}
                 />
             </PanelBase>
-            <Ekspanderbartpanel
-                apen
-                tittel="Status"
-                tittelProps="undertittel"
-            >
-                <FiltreringStatus
-                    filtergruppe={filtergruppe ? filtergruppe : ''}
-                    veileder={veileder}
-                    filtervalg={filtervalg}
-                    sjekkFeature={{} as any} // TODO: FIX
-                    statustall={{} as any} // TODO: FIX
-                    endreFilter={{} as any} // TODO: FIX
-                />
-            </Ekspanderbartpanel>
+            <div className= "blokk-xxxs">
+                <Ekspanderbartpanel
+                    apen
+                    tittel="Status"
+                    tittelProps="undertittel"
+                >
+                    <FiltreringStatus
+                        filtergruppe={filtergruppe ? filtergruppe : ''}
+                        veileder={veileder}
+                        filtervalg={filtervalg}
+                        sjekkFeature={{} as any} // TODO: FIX
+                        statustall={{} as any} // TODO: FIX
+                        endreFilter={{} as any} // TODO: FIX
+                    />
+                </Ekspanderbartpanel>
+            </div>
             <Ekspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
                 tittel="Filter"
