@@ -70,16 +70,16 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
 
     }
 
-    handleTilbakemeldingSendt = (tilbakemelding?: Tilbakemelding) => {
+    handleTilbakemeldingSendt = (tilbakemelding: Tilbakemelding) => {
         window.localStorage.setItem(this.tilbakemeldingLocalStorageName(), 'true');
-        if (tilbakemelding) {
-            logEvent('portefolje.tilbakemelding',
-                { feature: this.TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding });
-        } else {
-            // Hvis tilbakemelding er undefined så trykket brukeren "ikke vis igjen"
-            logEvent('portefolje.ikke_vis_tilbakemelding_igjen');
-            this.setState({ ikkeVisIgjen: true });
-        }
+        logEvent('portefolje.tilbakemelding',
+            { feature: this.TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding });
+    }
+
+    handleIkkeVisIgjen = () => {
+        window.localStorage.setItem(this.tilbakemeldingLocalStorageName(), 'true');
+        logEvent('portefolje.ikke_vis_tilbakemelding_igjen');
+        this.setState({ ikkeVisIgjen: true });
     }
 
     render() {
@@ -109,6 +109,7 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
                 <TilbakemeldingModal
                     open={isModalOpen}
                     onTilbakemeldingSendt={this.handleTilbakemeldingSendt}
+                    onIkkeVisIgjen={this.handleIkkeVisIgjen}
                 />
             </div>
         );

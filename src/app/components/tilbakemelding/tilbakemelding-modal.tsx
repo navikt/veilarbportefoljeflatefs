@@ -14,6 +14,7 @@ export interface Tilbakemelding {
 interface TilbakemeldingModalProps {
     open: boolean;
     onTilbakemeldingSendt: (tilbakemelding?: Tilbakemelding) => void;
+    onIkkeVisIgjen: () => void;
 }
 
 interface TilbakemeldingModalState {
@@ -63,7 +64,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
 
     handleIkkeVisIgjenClicked = () => {
         this.setState({ harSendt: true, ikkeVisIgjen: true });
-        this.props.onTilbakemeldingSendt();
+        this.props.onIkkeVisIgjen();
     }
 
     renderForm = () => {
