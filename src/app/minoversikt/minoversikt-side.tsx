@@ -23,6 +23,7 @@ import {
     getSorteringsRekkefolgeFromUrl
 } from '../utils/url-utils';
 import { pagineringSetup } from '../ducks/paginering';
+import { loggSkjermMetrikker, Side } from '../utils/skjerm-metrikker';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -61,6 +62,7 @@ class MinOversiktSide extends React.Component<MinoversiktSideProps> {
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
         this.settInitalStateFraUrl();
+        loggSkjermMetrikker(Side.MIN_OVERSIKT);
 
         this.props.hentStatusTall(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident);
         this.props.hentEnhetTiltak(valgtEnhet.enhet!.enhetId);

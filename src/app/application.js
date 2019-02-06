@@ -14,7 +14,6 @@ import tekstBundle from './../../tekster-built/bundle';
 import { sjekkFeature } from './ducks/features';
 import { FLYTT_FILTER_VENSTRE } from './konstanter';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
-import { loggSkjermMetrikker } from './utils/skjerm-metrikker';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(location.search).vistekster; // eslint-disable-line no-undef
@@ -27,11 +26,6 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
 addLocaleData(nb);
 
 class Application extends Component {
-
-    constructor(props) {
-        super(props);
-        loggSkjermMetrikker();
-    }
 
     componentWillMount() {
         rendreDekorator();
