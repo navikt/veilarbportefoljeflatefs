@@ -14,6 +14,7 @@ import {
 } from '../components/toolbar/paginering/paginering-selector';
 import { sjekkFeature } from '../ducks/features';
 import { FLYTT_FILTER_VENSTRE } from '../konstanter';
+import {updateLastPath} from "../utils/url-utils";
 
 function erValgtHvisFiltrering(veiledere) {
     if (veiledere && veiledere.length > 0) {
@@ -97,6 +98,8 @@ class VeilederesideVisning extends Component {
             sokVeilederSkalVises={!this.props.flyttFilterTilVenstre}
             antallTotalt={this.state.veiledere.length}
         />);
+
+        updateLastPath();
 
         return (
             <div>

@@ -7,8 +7,7 @@ import rendreDekorator from "./eventhandtering";
 
 
 class Routes extends React.Component {
-
-    componentWillMount(){
+    componentWillMount() {
         rendreDekorator();
     }
 

@@ -57,13 +57,11 @@ class EnhetSideVenstreToggle extends React.Component<EnhetSideProps, {}> {
     componentDidMount() {
         this.props.hentStatusTall(this.props.valgtEnhet.enhet!.enhetId);
         this.props.hentEnhetTiltak(this.props.valgtEnhet.enhet!.enhetId);
-        updateLastPath();
     }
 
     render() {
         const { filtervalg, veilederliste, statustall, enhettiltak, listevisning, intl } = this.props;
         const { formatMessage } = intl;
-
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })}>
                 <div className="enhet-side blokk-xl">

@@ -43,10 +43,6 @@ class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
         this.settInitalStateFraUrl();
     }
 
-    componentDidMount() {
-        updateLastPath();
-    }
-
     settInitalStateFraUrl() {
         const side = getSideFromUrl();
         const seAlle = getSeAlleFromUrl();
@@ -54,8 +50,8 @@ class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
     }
 
     render() {
+        updateLastPath();
         const { veiledere, portefoljestorrelser, intl, filtervalg } = this.props;
-
         return (
             <DocumentTitle title={intl.formatMessage({ id: 'lenker.veiledere.oversikt' })}>
                 <div className="veiledere-side">

@@ -27,7 +27,8 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
 
 addLocaleData(nb);
 
-function Application ({flyttFilterTilVenstre}) {
+function Application ({flyttFilterTilVenstre, ...props}) {
+    console.log("this.props", props);
     return (
         <IntlProvider
             defaultLocale="nb"
@@ -71,7 +72,7 @@ function Application ({flyttFilterTilVenstre}) {
                                 render={() => {
                                     const lastPath = localStorage.getItem('lastpath');
                                     const lastSearch = localStorage.getItem('lastsearch');
-                                    if (lastPath) {
+                                    if (lastPath && props.location.pathname === "/tilbake") {
                                         return (
                                             <Redirect to={{
                                                 pathname: lastPath,

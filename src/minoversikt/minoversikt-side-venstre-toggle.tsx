@@ -78,7 +78,6 @@ class MinOversiktSideVenstreToggle extends React.Component<any> {
         hentPortefolje(
             valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, sorteringsrekkefolge, sorteringsfelt, filtervalg
         );
-        updateLastPath();
 
     }
 
@@ -114,7 +113,7 @@ class MinOversiktSideVenstreToggle extends React.Component<any> {
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                     <div className="minoversikt-side blokk-xl">
                         {visesAnnenVeiledersPortefolje ?
-                            <Link to="veiledere" className="typo-normal tilbaketilveileder">
+                            <Link to="/veiledere" className="typo-normal tilbaketilveileder">
                                 <i className="chevron--venstre" />
                                 <span>
                                     <FormattedMessage id="minoversikt.link.til.veilederoversikt" />

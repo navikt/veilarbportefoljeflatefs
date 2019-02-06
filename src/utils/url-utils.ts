@@ -15,7 +15,7 @@ export function slettCleanIUrl() {
 
     const stringified = queryString.stringify(parsed);
     const pathname = window.location.pathname.replace(basename, '');
-    history.replace(`${window.location.pathname}?${stringified}`);
+    history.replace(`${ pathname}?${stringified}`);
 }
 
 export function leggEnhetIUrl(enhet: string, refresh: boolean = false) {
@@ -25,7 +25,7 @@ export function leggEnhetIUrl(enhet: string, refresh: boolean = false) {
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname.replace(basename, '');
 
-        history.replace(`${window.location.pathname}?${stringified}`);
+        history.replace(`${ pathname}?${stringified}`);
         if (refresh) {
             window.location.reload(true);
         }
@@ -43,7 +43,7 @@ export function setFraBrukerIUrl(bruker: string) {
 
     const stringified = queryString.stringify(parsed);
     const pathname = window.location.pathname.replace(basename, '');
-    history.replace(`${window.location.pathname}?${stringified}`);
+    history.replace(`${pathname}?${stringified}`);
 }
 
 export function getEnhetFromUrl() {
@@ -57,7 +57,7 @@ export function leggSideIUrl(side) {
 
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname.replace(basename, '');
-        history.replace(`${window.location.pathname}?${stringified}`);
+        history.replace(`${pathname}?${stringified}`);
     }
 }
 
@@ -70,7 +70,7 @@ export function leggSeAlleIUrl(seAlle: boolean = false) {
     parsed.seAlle = seAlle;
     const stringified = queryString.stringify(parsed);
     const pathname = window.location.pathname.replace(basename, '');
-    history.replace(`${ window.location.pathname}?${stringified}`);
+    history.replace(`${ pathname}?${stringified}`);
 }
 
 export function getSeAlleFromUrl(): boolean {
@@ -85,7 +85,7 @@ export function leggSorteringIUrl(sorteringsfelt, sorteringsrekkefolge) {
 
         const stringified = queryString.stringify(parsed);
         const pathname = window.location.pathname.replace(basename, '');
-        history.replace(`${window.location.pathname}?${stringified}`);
+        history.replace(`${ pathname}?${stringified}`);
         localStorage.setItem(`lagretSorteringsfelt`, sorteringsfelt);
         localStorage.setItem(`lagretSorteringsrekkefolge`, sorteringsrekkefolge);
     }
