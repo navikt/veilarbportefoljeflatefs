@@ -14,6 +14,7 @@ import { VeiledereState } from '../ducks/veiledere';
 import { ValgtEnhetModell } from '../model-interfaces';
 import { FiltreringState } from '../ducks/filtrering';
 import { pagineringSetup } from '../ducks/paginering';
+import { loggSkjermMetrikker, Side } from '../utils/skjerm-metrikker';
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -35,6 +36,7 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
         hentPortefoljestorrelser(valgtEnhet.enhet!.enhetId);
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
         this.settInitalStateFraUrl();
+        loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
     }
 
     settInitalStateFraUrl() {

@@ -26,6 +26,7 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
 addLocaleData(nb);
 
 class Application extends Component {
+
     componentWillMount() {
         rendreDekorator();
     }
