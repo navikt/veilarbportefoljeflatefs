@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import { Link } from 'react-router';
 import { veilederShape } from './../proptype-shapes';
 import { settValgtVeileder } from '../ducks/portefolje';
-import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { settSide } from '../ducks/ui/side';
 
 class VeilederTabell extends Component {
@@ -17,7 +16,7 @@ class VeilederTabell extends Component {
     }
 
     render() {
-        const { veiledere, veilederListe, currentSortering } = this.props;
+        const { veiledere, currentSortering } = this.props;
 
         const sorterEtternavn = currentSortering.property === 'etternavn';
         const sorterPaaPortefoljeStr = currentSortering.property === 'portefoljestorrelse';
@@ -41,7 +40,6 @@ class VeilederTabell extends Component {
 
         return (
             <div>
-                <TomPortefoljeModal isOpen={veilederListe.length === 0} />
                 <table className="tabell veileder-tabell portefolje-tabell typo-undertekst blokk-xs">
                     <thead className="extra-head">
                         <tr>
