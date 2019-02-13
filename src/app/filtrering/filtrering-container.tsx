@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import PanelBase from 'nav-frontend-paneler';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import FiltreringStatus from './filtrering-status';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
-import FiltreringNavnOgFnr from './filtrering-navnellerfnr';
 import FiltreringFilter from './filtrering-filter';
+import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -27,6 +28,12 @@ interface FiltreringContainerProps {
 function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
     return (
         <div className="blokk-m">
+            <PanelBase className="blokk-xxxs">
+                <FiltreringNavnellerfnr
+                    filtervalg={filtervalg}
+                    actions={actions}
+                />
+            </PanelBase>
             <Ekspanderbartpanel
                 apen
                 className="blokk-xxxs"
@@ -49,17 +56,6 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                     actions={actions}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
-                />
-            </Ekspanderbartpanel>
-            <Ekspanderbartpanel
-                apen
-                className="blokk-xxxs"
-                tittel="Søk"
-                tittelProps="undertittel"
-            >
-                <FiltreringNavnOgFnr
-                    filtervalg={filtervalg}
-                    actions={actions}
                 />
             </Ekspanderbartpanel>
         </div>

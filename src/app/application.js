@@ -11,8 +11,6 @@ import history from './history';
 import { enhetShape, valgtEnhetShape, veiledereShape } from './proptype-shapes';
 import EnhetContext from './components/enhet-context/enhet-context';
 import tekstBundle from './../../tekster-built/bundle';
-import { sjekkFeature } from './ducks/features';
-import { FLYTT_FILTER_VENSTRE } from './konstanter';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
@@ -50,7 +48,7 @@ class Application extends Component {
     }
 
     render() {
-        const { enheter, children, veiledere, flyttFilterTilVenstre } = this.props;
+        const { enheter, children, veiledere } = this.props;
 
         return (
             <IntlProvider
@@ -62,7 +60,7 @@ class Application extends Component {
                     <Innholdslaster avhengigheter={[enheter, enheter.valgtEnhet, veiledere]}>
                         <EnhetContext />
                         <div
-                            className={classnames({ container: !flyttFilterTilVenstre }, 'maincontent', 'side-innhold')}
+                            className={classnames('maincontent', 'side-innhold')}
                         >
                             {children}
                         </div>
@@ -78,7 +76,6 @@ Application.propTypes = {
     settSide: PT.func.isRequired,
     routes: PT.arrayOf(PT.object).isRequired,
     side: PT.string.isRequired,
-    flyttFilterTilVenstre: PT.bool,
     children: PT.oneOfType([PT.arrayOf(PT.node), PT.node]),
     enheter: PT.shape({
         data: PT.arrayOf(enhetShape).isRequired,
@@ -95,7 +92,6 @@ Application.propTypes = {
 
 const mapStateToProps = (state) => ({
     side: state.ui.side.side,
-    flyttFilterTilVenstre: sjekkFeature(state, FLYTT_FILTER_VENSTRE)
 });
 
 const mapDispatchToProps = (dispatch) => ({

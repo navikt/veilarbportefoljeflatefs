@@ -1,6 +1,6 @@
 import { AppState } from '../reducer';
 import { hentFeatures } from '../middleware/api';
-import { FLYTT_FILTER_VENSTRE, PORTEFOLJE_FEATURES, SPOR_OM_TILBAKEMELDING } from '../konstanter';
+import { PORTEFOLJE_FEATURES, SPOR_OM_TILBAKEMELDING } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
 
@@ -9,7 +9,6 @@ export interface FeaturesState {
 }
 
 const initalState: FeaturesState = {
-    [FLYTT_FILTER_VENSTRE]: false,
     [SPOR_OM_TILBAKEMELDING]: false,
 };
 

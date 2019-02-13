@@ -9,7 +9,6 @@ import LenkerMinoversikt from './../lenker/lenker-minoversikt';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
-import { filtervalgShape, statustallShape } from '../proptype-shapes';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import { hentPortefoljeForVeileder, settSortering, settValgtVeileder } from '../ducks/portefolje';
@@ -23,6 +22,7 @@ import {
     getSorteringsRekkefolgeFromUrl
 } from '../utils/url-utils';
 import { pagineringSetup } from '../ducks/paginering';
+import './minoversikt-side.less';
 import { loggSkjermMetrikker, Side } from '../utils/skjerm-metrikker';
 
 interface StateProps {
@@ -54,7 +54,7 @@ interface OwnProps {
 
 type MinoversiktSideProps = StateProps & DispatchProps & OwnProps & InjectedIntlProps;
 
-class MinOversiktSide extends React.Component<MinoversiktSideProps> {
+class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     componentDidMount() {
         const { veiledere, enheter, valgtEnhet, filtervalg, hentPortefolje, ...props } = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
@@ -108,7 +108,7 @@ class MinOversiktSide extends React.Component<MinoversiktSideProps> {
         return (
             <DocumentTitle title={formatMessage({ id: 'lenker.min.oversikt' })}>
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                    <div className="enhet-side blokk-xl">
+                    <div className="minoversikt-side blokk-xl">
                         {visesAnnenVeiledersPortefolje ?
                             <Link to="veiledere" className="typo-normal tilbaketilveileder">
                                 <i className="chevron--venstre" />
@@ -126,24 +126,30 @@ class MinOversiktSide extends React.Component<MinoversiktSideProps> {
                                     <p className="typo-infotekst begrensetbredde blokk-l">
                                         <FormattedMessage id="ingresstekst.minoversikt" />
                                     </p>
-                                    <FiltreringContainer
-                                        filtervalg={filtervalg}
-                                        filtergruppe="veileder"
-                                        veileder={gjeldendeVeileder}
-                                        enhettiltak={enhettiltak.data.tiltak}
-                                    />
-                                    <FiltreringLabelContainer
-                                        filtervalg={filtervalg}
-                                        filtergruppe="veileder"
-                                        veileder={gjeldendeVeileder}
-                                        enhettiltak={enhettiltak.data.tiltak}
-                                        listevisning={listevisning}
-                                    />
-                                    <ListevisningInfoPanel name={ListevisningType.minOversikt} />
-                                    <VeilederPortefoljeVisning
-                                        gjeldendeVeileder={gjeldendeVeileder}
-                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                    />
+                                    <div className="minoversikt-side--cols">
+                                        <div className="minoversikt-side--filter-col">
+                                            <FiltreringContainer
+                                                filtervalg={filtervalg}
+                                                filtergruppe="veileder"
+                                                veileder={gjeldendeVeileder}
+                                                enhettiltak={enhettiltak.data.tiltak}
+                                            />
+                                        </div>
+                                        <div className="minoversikt-side--liste-col">
+                                            <FiltreringLabelContainer
+                                                filtervalg={filtervalg}
+                                                filtergruppe="veileder"
+                                                veileder={gjeldendeVeileder}
+                                                enhettiltak={enhettiltak.data.tiltak}
+                                                listevisning={listevisning}
+                                            />
+                                            <ListevisningInfoPanel name={ListevisningType.minOversikt} />
+                                            <VeilederPortefoljeVisning
+                                                gjeldendeVeileder={gjeldendeVeileder}
+                                                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -176,4 +182,4 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(MinOversiktSide));
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(MinoversiktSide));
