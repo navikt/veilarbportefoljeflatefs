@@ -100,6 +100,7 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
             dispatch(hentStatusTall(nyEnhet));
         } else if(uri.includes('/veiledere')) {
             dispatch(hentVeiledereForEnhet(nyEnhet));
+            dispatch(hentStatusTall(nyEnhet));
         }
     };
 }

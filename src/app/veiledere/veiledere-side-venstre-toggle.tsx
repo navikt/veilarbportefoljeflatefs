@@ -9,7 +9,7 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import Lenker from './../lenker/lenker';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
 import { VeiledereState } from '../ducks/veiledere';
-import { ValgtEnhetModell } from '../model-interfaces';
+import { StatustallModell, ValgtEnhetModell } from '../model-interfaces';
 import { pagineringSetup } from '../ducks/paginering';
 import './veiledere-side.less';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
@@ -18,17 +18,21 @@ import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { FiltreringState } from '../ducks/filtrering';
 import { loggSkjermMetrikker, Side } from '../utils/skjerm-metrikker';
+import TomPortefoljeModal from '../modal/tom-portefolje-modal';
+import { hentStatusTall } from '../middleware/api';
 
 interface StateProps {
     veiledere: VeiledereState;
     portefoljestorrelser: any;
     filtervalg: FiltreringState;
     valgtEnhet: ValgtEnhetModell;
+    statustall: {data: StatustallModell};
 }
 
 interface DispatchProps {
     hentPortefoljestorrelser: (enhetId: string) => void;
     initalPaginering: (side: number, seAlle: boolean) => void;
+    hentStatusTall: (enhet: string) => void;
 }
 
 type VeiledereSideProps = StateProps & DispatchProps & InjectedIntlProps;
@@ -48,13 +52,17 @@ class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
         this.props.initalPaginering(side, seAlle);
     }
 
-    render() {
-        const { veiledere, portefoljestorrelser, intl, filtervalg } = this.props;
+    componentDidMount() {
+        hentStatusTall(this.props.valgtEnhet.enhet!.enhetId);
+    }
 
+    render() {
+        const { veiledere, portefoljestorrelser, intl, filtervalg, statustall } = this.props;
         return (
             <DocumentTitle title={intl.formatMessage({ id: 'lenker.veiledere.oversikt' })}>
                 <div className="veiledere-side">
                     <Lenker />
+                    <Innholdslaster avhengigheter={[ statustall, veiledere, portefoljestorrelser]}>
                     <div id="oversikt-sideinnhold" role="tabpanel">
                         <p className="typo-infotekst begrensetbredde blokk-l">
                             <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
@@ -69,7 +77,6 @@ class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
                                 </PanelBase>
                             </div>
                             <div className="veiledere-side--liste-col">
-                                <Innholdslaster avhengigheter={[veiledere, portefoljestorrelser]}>
                                     <FiltreringLabelContainer
                                         filtervalg={{
                                             veiledere: lagLablerTilVeiledereMedIdenter(
@@ -85,10 +92,11 @@ class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
                                         />
                                     </Undertittel>
                                     <VeiledersideVisning />
-                                </Innholdslaster>
+                                    <TomPortefoljeModal />
                             </div>
                         </div>
                     </div>
+                    </Innholdslaster>
                 </div>
             </DocumentTitle>
         );
@@ -99,12 +107,14 @@ const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
     filtervalg: state.filtreringVeilederoversikt,
     portefoljestorrelser: state.portefoljestorrelser,
-    valgtEnhet: state.enheter.valgtEnhet
+    valgtEnhet: state.enheter.valgtEnhet,
+    statustall: state.statustall,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     hentPortefoljestorrelser: (enhetId) => dispatch(hentPortefoljeStorrelser(enhetId)),
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
+    hentStatusTall: (enhet) => dispatch(hentStatusTall(enhet))
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(VeiledereSideVenstreToggle));
