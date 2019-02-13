@@ -17,6 +17,7 @@ import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { FiltreringState } from '../ducks/filtrering';
+import { loggSkjermMetrikker, Side } from '../utils/skjerm-metrikker';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { hentStatusTall } from '../middleware/api';
 
@@ -42,6 +43,7 @@ class VeiledereSideVenstreToggle extends React.Component<VeiledereSideProps> {
         hentPortefoljestorrelser(valgtEnhet.enhet!.enhetId);
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
         this.settInitalStateFraUrl();
+        loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
     }
 
     settInitalStateFraUrl() {

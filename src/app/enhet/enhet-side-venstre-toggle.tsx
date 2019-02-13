@@ -20,6 +20,7 @@ import { pagineringSetup } from '../ducks/paginering';
 import FiltreringContainerVenstreToggle from '../filtrering/filtrering-container-venstre-toggle';
 
 import './enhet-side.less';
+import { loggSkjermMetrikker, Side } from '../utils/skjerm-metrikker';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -47,6 +48,7 @@ class EnhetSideVenstreToggle extends React.Component<EnhetSideProps, {}> {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
         this.settInitalStateFraUrl();
+        loggSkjermMetrikker(Side.ENHETENS_OVERSIKT);
     }
 
     settInitalStateFraUrl() {

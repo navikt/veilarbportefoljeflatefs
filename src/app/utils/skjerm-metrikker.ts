@@ -3,6 +3,12 @@ import { logEvent } from './frontend-logger';
 const SKJERM_METRIKKER_LOG_TAG = 'portefolje.skjerm_metrikker';
 const SKJERM_METRIKKER_SESSION_STORAGE_KEY = 'har_logget_skjerm_metrikker';
 
+export enum Side {
+    MIN_OVERSIKT = 'MIN_OVERSIKT',
+    ENHETENS_OVERSIKT = 'ENHETENS_OVERSIKT',
+    VEILEDER_OVERSIKT = 'VEILEDER_OVERSIKT'
+}
+
 interface ScreenSize {
     width: number;
     height: number;
@@ -54,15 +60,18 @@ const erFullskjerm = () => {
     return screen.availWidth - window.innerWidth === 0;
 }
 
-export const loggSkjermMetrikker = (): void => {
+export const loggSkjermMetrikker = (side: Side): void => {
 
-    if (window.sessionStorage.getItem(SKJERM_METRIKKER_SESSION_STORAGE_KEY) != null) {
+    const storageKey = SKJERM_METRIKKER_SESSION_STORAGE_KEY + '-' + side;
+
+    if (window.sessionStorage.getItem(storageKey) != null) {
        return;
     }
 
-    window.sessionStorage.setItem(SKJERM_METRIKKER_SESSION_STORAGE_KEY, 'true');
+    window.sessionStorage.setItem(storageKey, 'true');
 
     logEvent(SKJERM_METRIKKER_LOG_TAG, {
+        side,
         screenSize: finnSkjermStorrelse(window.screen.width, window.screen.height),
         windowWidth: window.innerWidth,
         windowHeight: window.innerHeight,

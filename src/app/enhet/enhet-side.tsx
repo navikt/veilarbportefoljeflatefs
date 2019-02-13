@@ -18,6 +18,7 @@ import { StatustallModell, ValgtEnhetModell, VeilederModell } from '../model-int
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { FiltreringState } from '../ducks/filtrering';
 import { pagineringSetup } from '../ducks/paginering';
+import { loggSkjermMetrikker, Side } from '../utils/skjerm-metrikker';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -45,6 +46,7 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
         this.settInitalStateFraUrl();
+        loggSkjermMetrikker(Side.ENHETENS_OVERSIKT);
     }
 
     settInitalStateFraUrl() {

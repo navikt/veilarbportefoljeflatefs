@@ -86,7 +86,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         onTilfredshetChanged={this.handleTilfredshetChanged}
                         defaultTilfredshet={tilfredshet}
                     />
-                    {!harBesvartTilfredshet && <button className="lenke" onClick={this.handleIkkeVisIgjenClicked}>Ikke vis dette igjen</button>}
+                    {!harBesvartTilfredshet && <a className="lenke" onClick={this.handleIkkeVisIgjenClicked}>Ikke vis dette igjen</a>}
                 </div>
                 {harBesvartTilfredshet && (
                     <form className="tilbakemelding-modal__ekspander"  onSubmit={this.handleFormSubmitted}>
