@@ -40,7 +40,9 @@ class RoutesVenstreToggle extends React.Component {
                         }
                     }}
                 >
-                    <Route path="enhet" component={EnhetSideVenstreToggle} />
+                    <Route path="enhet"
+                           component={EnhetSideVenstreToggle}
+                    />
                     <Route
                         path="veiledere"
                         component={VeiledereSideVenstreToggle}

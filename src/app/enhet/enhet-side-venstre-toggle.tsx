@@ -93,7 +93,7 @@ class EnhetSideVenstreToggle extends React.Component<EnhetSideProps, {}> {
                                     />
                                     <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
                                     <EnhetsportefoljeVisning />
-                                    <TomPortefoljeModal/>
+                                    <TomPortefoljeModal />
                                 </div>
                             </div>
                         </div>
