@@ -1,23 +1,38 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { endreFiltervalg } from '../../ducks/filtrering';
+import { endreFiltervalg, veilederSoktFraToolbar } from '../../ducks/filtrering';
 import SokFilter from './sok-filter';
 import Dropdown from './../dropdown/dropdown';
 import CheckboxFilterform from './../checkbox-filterform/checkbox-filterform';
 import { nameToStateSliceMap } from '../../ducks/utils';
 import { FiltervalgModell } from '../../model-interfaces';
 import { VeiledereState } from '../../ducks/veiledere';
+import { ToolbarPosisjon } from './toolbar';
 
 interface SokVeilederProps {
     filtervalg: FiltervalgModell;
     veiledere: VeiledereState;
-    sokEtterVeileder: (filterId: string, filterverdi: string) => void;
     skalVises?: boolean;
+    toolbarPosisjon?: ToolbarPosisjon;
 }
 
-function SokVeileder({ filtervalg, veiledere, sokEtterVeileder, skalVises }: SokVeilederProps) {
-    if (!skalVises) {
+interface DispatchProps {
+    sokEtterVeileder: (filterId: string, filterverdi: string) => void;
+    veilederSokt: () => void;
+}
+
+type AllProps = SokVeilederProps & DispatchProps;
+
+function createHandleOnSubmit(props: AllProps) {
+    return (filterId: string, filterverdi: string) => {
+        props.sokEtterVeileder(filterId, filterverdi);
+        props.veilederSokt();
+    };
+}
+
+function SokVeileder(props: AllProps) {
+    if (!props.skalVises) {
         return null;
     }
     return (
@@ -25,9 +40,9 @@ function SokVeileder({ filtervalg, veiledere, sokEtterVeileder, skalVises }: Sok
             <SokFilter
                 label="Velg veiledere"
                 placeholder="Søk veileder"
-                data={veiledere.data.veilederListe}
+                data={props.veiledere.data.veilederListe}
             >
-                <SokVeilederRenderer filtervalg={filtervalg} onSubmit={sokEtterVeileder} />
+                <SokVeilederRenderer filtervalg={props.filtervalg} onSubmit={createHandleOnSubmit(props)} />
             </SokFilter>
         </Dropdown>
     );
@@ -64,6 +79,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     sokEtterVeileder(filterId: string, filterverdi: string) {
         return endreFiltervalg(filterId, filterverdi, ownProps.filtergruppe, ownProps.veileder.ident);
+    },
+    veilederSokt() {
+        return veilederSoktFraToolbar(ownProps.toolbarPosisjon);
     }
 }, dispatch);
 

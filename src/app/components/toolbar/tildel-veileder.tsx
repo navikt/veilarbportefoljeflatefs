@@ -8,6 +8,7 @@ import { tildelVeileder } from '../../ducks/portefolje';
 import { VeiledereState } from '../../ducks/veiledere';
 import { BrukerModell } from '../../model-interfaces';
 import { AppState } from '../../reducer';
+import { ToolbarPosisjon } from './toolbar';
 
 interface TildelVeilederProps {
     skalVises: boolean;
@@ -15,6 +16,7 @@ interface TildelVeilederProps {
     veiledere: VeiledereState;
     brukere: BrukerModell[];
     filtergruppe?: string;
+    toolbarPosisjon?: ToolbarPosisjon;
 }
 
 type Props = TildelVeilederProps & InjectedIntlProps;
@@ -73,7 +75,10 @@ const mapStateToProps = ({ veiledere, enheter, portefolje, ui }: AppState) => ({
     brukere: portefolje.data.brukere,
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    tildelTilVeileder: (tilordninger, tilVeileder) => dispatch(tildelVeileder(tilordninger, tilVeileder, ownProps.filtergruppe, ownProps.gjeldendeVeileder))
+    tildelTilVeileder: (tilordninger, tilVeileder) => {
+        return dispatch(tildelVeileder(tilordninger, tilVeileder, ownProps.filtergruppe,
+            ownProps.gjeldendeVeileder, ownProps.toolbarPosisjon));
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

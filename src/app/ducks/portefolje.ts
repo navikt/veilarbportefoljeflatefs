@@ -9,15 +9,16 @@ import { leggSideIUrl, leggSorteringIUrl } from '../utils/url-utils';
 import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { ListevisningType, oppdaterAlternativer } from './ui/listevisning';
 import { selectFraIndex, selectSeAlle, selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
+import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
 const FEILET = 'veilarbportefolje/portefolje/FEILET';
 const PENDING = 'veilarbportefolje/portefolje/PENDING';
-const SETT_SORTERING = 'veilarbportefolje/portefolje/SETT_SORTERING';
+export const SETT_SORTERING = 'veilarbportefolje/portefolje/SETT_SORTERING';
 const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
 const SETT_MARKERT_BRUKER_ALLE = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER_ALLE';
-const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
+export const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const TILDEL_VEILEDER_RELOAD = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_RELOAD';
 const TILDEL_VEILEDER_OK = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_OK';
 const TILDEL_VEILEDER_FEILET = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_FEILET';
@@ -283,7 +284,7 @@ export function markerAlleBrukere(markert) {
     });
 }
 
-export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder) {
+export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder, toolbarPosisjon?: ToolbarPosisjon) {
     const veilederIdent = gjeldendeVeileder ? gjeldendeVeileder.ident : undefined;
     return (dispatch, getState) => {
         dispatch({ type: TILDEL_VEILEDER_RELOAD });
@@ -294,6 +295,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                 dispatch({
                     type: TILDEL_VEILEDER,
                     tilVeileder,
+                    toolbarPosisjon,
                     feilendeTilordninger: res.feilendeTilordninger
                 });
                 if (res.feilendeTilordninger.length > 0) {

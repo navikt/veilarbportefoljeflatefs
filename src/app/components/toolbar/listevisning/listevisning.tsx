@@ -9,6 +9,7 @@ import { Action, Dispatch } from 'redux';
 import { avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ } from '../../../ducks/ui/listevisning';
 import { alternativerConfig } from './listevisning-utils';
 import { selectMuligeAlternativer, selectValgteAlternativer } from '../../../ducks/ui/listevisning-selectors';
+import { ToolbarPosisjon } from '../toolbar';
 
 interface ListevisningRadProps {
     kolonne: Kolonne;
@@ -39,6 +40,7 @@ const ListevisningRad = (props: Props) => {
 
 interface OwnProps {
     filtergruppe: ListevisningType;
+    toolbarPosisjon?: ToolbarPosisjon;
 }
 
 interface StateProps {
@@ -100,9 +102,9 @@ function mapStateToProps(state: AppState, ownProps: OwnProps): StateProps {
     };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<Action>): DispatchProps {
+function mapDispatchToProps(dispatch: Dispatch<Action>, props: ListevisningProps): DispatchProps {
     return {
-        velgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(velgAlternativ(name, filtergruppe)),
+        velgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(velgAlternativ(name, filtergruppe, props.toolbarPosisjon)),
         avvelgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(avvelgAlternativ(name, filtergruppe))
     };
 }
