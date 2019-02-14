@@ -40,7 +40,9 @@ class Routes extends React.Component {
                         }
                     }}
                 >
-                    <Route path="enhet" component={EnhetSide} />
+                    <Route path="enhet"
+                           component={EnhetSide}
+                    />
                     <Route
                         path="veiledere"
                         component={VeiledereSide}

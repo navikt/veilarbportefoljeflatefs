@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { endreFiltervalg } from '../ducks/filtrering';
-import { sjekkFeature } from '../ducks/features';
 import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 import Barlabel from './barlabel';
 import {
@@ -20,7 +19,6 @@ import {
     TRENGER_VURDERING,
     ER_SYKMELDT_MED_ARBEIDSGIVER
 } from './filter-konstanter';
-import { TRENGER_VURDERING_FEATURE, ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE } from '../konstanter';
 import './filtrering-status.less';
 
 function BarInput({ skalSkjules, id, type, className, tekstId, antall, max, barClassname, firstInGroup, ...props }) {
@@ -172,7 +170,6 @@ class FiltreringStatus extends Component {
                     antall={statustall.data.trengerVurdering}
                     max={statustall.data.totalt}
                     barClassname="trengerVurdering"
-                    skalSkjules={!this.props.sjekkFeature(TRENGER_VURDERING_FEATURE)}
                 />
                 <BarInput
                     id="erSykmeldtMedArbeidsgiver"
@@ -186,7 +183,6 @@ class FiltreringStatus extends Component {
                     antall={this.props.statustall.data.erSykmeldtMedArbeidsgiver}
                     max={this.props.statustall.data.totalt}
                     barClassname="erSykmeldtMedArbeidsgiver"
-                    skalSkjules={!this.props.sjekkFeature(ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE)}
                 />
                 <BarInput
                     id="venterPaSvarFraNAV"
@@ -300,7 +296,6 @@ FiltreringStatus.defaultProps = {
 
 FiltreringStatus.propTypes = {
     endreFilter: PT.func.isRequired,
-    sjekkFeature: PT.func.isRequired,
     statustall: PT.shape({ data: statustallShape.isRequired }).isRequired,
     filtergruppe: PT.string.isRequired, // eslint-disable-line react/no-unused-prop-types
     veileder: veilederShape, // eslint-disable-line react/no-unused-prop-types
@@ -310,7 +305,6 @@ FiltreringStatus.propTypes = {
 const mapStateToProps = (state) => ({
     enhet: state.enheter.valgtEnhet.enhet.enhetId,
     statustall: state.statustall,
-    sjekkFeature: (feature) => sjekkFeature(state, feature)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

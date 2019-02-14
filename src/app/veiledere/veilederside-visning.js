@@ -13,8 +13,6 @@ import {
     selectSeAlle,
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
-import { sjekkFeature } from '../ducks/features';
-import { FLYTT_FILTER_VENSTRE } from '../konstanter';
 
 function erValgtHvisFiltrering(veiledere) {
     if (veiledere && veiledere.length > 0) {
@@ -93,10 +91,9 @@ class VeilederesideVisning extends Component {
         const veiledere = this.getVeiledere();
         const toolbar = (<Toolbar
             filtergruppe="veiledere"
-            onPaginering={() => {
-            }}
-            sokVeilederSkalVises={!this.props.flyttFilterTilVenstre}
+            onPaginering={() => {}}
             antallTotalt={this.state.veiledere.length}
+            sokVeilederSkalVises
         />);
 
         return (
@@ -118,7 +115,6 @@ VeilederesideVisning.propTypes = {
     veilederFilter: PT.array.isRequired, // eslint-disable-line react/forbid-prop-types
     sortBy: PT.func.isRequired,
     settSide: PT.func.isRequired,
-    flyttFilterTilVenstre: PT.bool,
     veiledere: PT.shape({
         data: veiledereShape.isRequired
     }).isRequired,
@@ -141,8 +137,7 @@ const mapStateToProps = (state) => ({
     veilederFilter: state[nameToStateSliceMap.veiledere].veiledere,
     fra: selectFraIndex(state),
     sideStorrelse: selectSideStorrelse(state),
-    seAlle: selectSeAlle(state),
-    flyttFilterTilVenstre: sjekkFeature(state, FLYTT_FILTER_VENSTRE)
+    seAlle: selectSeAlle(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,8 +1,7 @@
-import { FLYTT_FILTER_VENSTRE, SPOR_OM_TILBAKEMELDING } from '../konstanter';
+import { SPOR_OM_TILBAKEMELDING } from '../konstanter';
 
 const toggles = {
-    [FLYTT_FILTER_VENSTRE]: true,
-    [SPOR_OM_TILBAKEMELDING]: true,
+    [SPOR_OM_TILBAKEMELDING]: false,
 };
 
 export default toggles;

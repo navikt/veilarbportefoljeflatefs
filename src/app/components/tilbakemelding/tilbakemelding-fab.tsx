@@ -3,7 +3,7 @@ import * as classNames from 'classnames';
 import { connect } from 'react-redux';
 import './tilbakemelding-fab.less';
 import { sjekkFeature } from '../../ducks/features';
-import { FLYTT_FILTER_VENSTRE, SPOR_OM_TILBAKEMELDING } from '../../konstanter';
+import { SPOR_OM_TILBAKEMELDING } from '../../konstanter';
 import TilbakemeldingModal, { Tilbakemelding } from './tilbakemelding-modal';
 import { logEvent } from '../../utils/frontend-logger';
 
@@ -86,7 +86,7 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
 
         const { harFeature } = this.props;
         const { isModalOpen, harSendtTilbakemelding, ikkeVisIgjen } = this.state;
-        const harRiktigFeatures = harFeature(SPOR_OM_TILBAKEMELDING) && harFeature(FLYTT_FILTER_VENSTRE); // NB: Husk å endre for hver feature
+        const harRiktigFeatures = harFeature(SPOR_OM_TILBAKEMELDING); // NB: Husk å endre for hver feature
 
         if (ikkeVisIgjen || !harRiktigFeatures || harSendtTilbakemelding || this.harTidligereSendtTilbakemelding()) {
             return null;

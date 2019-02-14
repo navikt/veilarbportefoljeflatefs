@@ -14,8 +14,6 @@ import {
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { getFraBrukerFraUrl } from '../utils/url-utils';
-import { sjekkFeature } from '../ducks/features';
-import {ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE, TRENGER_VURDERING_FEATURE} from '../konstanter';
 
 interface MinOversiktTabellProps {
     portefolje: {
@@ -36,8 +34,6 @@ interface MinOversiktTabellProps {
     innloggetVeileder: string;
     valgteKolonner: Kolonne[];
     visesAnnenVeiledersPortefolje: boolean;
-    erVurderingFeaturePa: boolean;
-    erSykmeldtMedArbeidsgiverFeaturePa: boolean;
 }
 
 class MinoversiktTabell extends React.Component<MinOversiktTabellProps, {}> {
@@ -78,8 +74,6 @@ class MinoversiktTabell extends React.Component<MinOversiktTabellProps, {}> {
                             filtervalg={filtervalg}
                             valgteKolonner={valgteKolonner}
                             innloggetVeileder={innloggetVeileder}
-                            erVurderingFeaturePa={this.props.erVurderingFeaturePa}
-                            erSykmeldtMedArbeidsgiverFeaturePa={this.props.erSykmeldtMedArbeidsgiverFeaturePa}
                         />
                     )}
                 </ul>
@@ -95,8 +89,6 @@ const mapStateToProps = (state) => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     filtervalg: state.filtreringMinoversikt,
     valgteKolonner: selectValgteAlternativer(state, ListevisningType.minOversikt),
-    erVurderingFeaturePa: sjekkFeature(state, TRENGER_VURDERING_FEATURE),
-    erSykmeldtMedArbeidsgiverFeaturePa: sjekkFeature(state, ER_SYKMELDT_MED_ARBEIDSGIVER_FEATURE)
 });
 
 const

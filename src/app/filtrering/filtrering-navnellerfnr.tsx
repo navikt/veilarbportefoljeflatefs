@@ -15,7 +15,7 @@ interface FiltreringNavnEllerFnrProps {
     };
 }
 
-class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps, FiltreringNavnEllerFnrState> {
+class FiltreringNavnellerfnr extends React.Component<FiltreringNavnEllerFnrProps, FiltreringNavnEllerFnrState> {
     private timerId: number = 0;
 
     constructor(props) {
@@ -24,6 +24,16 @@ class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps
             navnEllerFnrQuery: this.props.filtervalg.navnEllerFnrQuery,
         };
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentWillReceiveProps(prevProps: FiltreringNavnEllerFnrProps) {
+
+        const prevQuery = prevProps.filtervalg.navnEllerFnrQuery;
+
+        if (prevQuery === '') {
+            this.setState({ navnEllerFnrQuery: '' });
+        }
+
     }
 
     handleChange(event) {
@@ -35,7 +45,7 @@ class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps
     render() {
         return (
             <div className="row">
-                <div className="col-md-5">
+                <div className="col-md-12">
                     <Input
                         label=""
                         placeholder={this.props.intl.formatMessage({id: 'filtrering-navn-eller-fnr'})}
@@ -48,4 +58,4 @@ class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps
     }
 }
 
-export default injectIntl(FiltreringNavnEllerFnr);
+export default injectIntl(FiltreringNavnellerfnr);

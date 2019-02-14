@@ -5,7 +5,6 @@ import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import RadioFilterform from '../components/radio-filterform/radio-filterform';
 import AktivitetFilterform from '../components/aktivitet-filterform/aktivitet-filterform';
-import { filtervalgShape } from '../proptype-shapes';
 import {
     aktiviteter,
     alder,
@@ -29,10 +28,11 @@ interface FiltreringFilterProps {
     intl?: any;
 }
 
+// Midlertidig component til feature toggle er fjernet og
 const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFilterProps) => (
     <div>
         <div className="row">
-            <div className="col-sm-3">
+            <div className="col-sm-6 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.demografi"/>
                 </Element>
@@ -61,7 +61,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     />
                 </Dropdown>
             </div>
-            <div className="col-sm-3">
+            <div className="col-sm-6 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.situasjon"/>
                 </Element>
@@ -106,7 +106,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     />
                 </Dropdown>
             </div>
-            <div className="col-sm-3">
+            <div className="col-sm-6 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.ytelse"/>
                 </Element>
@@ -118,6 +118,21 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
+            </div>
+            <div className="col-sm-6 blokk-xs">
+                <Element className="blokk-xxs" tag="h3">
+                    <FormattedMessage id="filtrering.filter.tittel.manuellbruker"/>
+                </Element>
+                <Dropdown name="Manuell bruker">
+                    <CheckboxFilterform
+                        form="manuellBrukerStatus"
+                        valg={manuellBrukerStatus(intl)}
+                        onSubmit={actions.endreFiltervalg}
+                        filtervalg={filtervalg}
+                    />
+                </Dropdown>
+            </div>
+            <div className="col-sm-6">
                 <OverskriftMedHjelpeTekst
                     overskriftId="filtrering.filter.tittel.aktivitet"
                     hjelpetekstId="hjelpetekst.aktivitetsfilter"
@@ -140,19 +155,6 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                         valg={enhettiltak}
                         filtervalg={filtervalg}
                         onSubmit={actions.endreFiltervalg}
-                    />
-                </Dropdown>
-            </div>
-            <div className="col-sm-3">
-                <Element className="blokk-xxs" tag="h3">
-                    <FormattedMessage id="filtrering.filter.tittel.manuellbruker"/>
-                </Element>
-                <Dropdown name="Manuell bruker">
-                    <CheckboxFilterform
-                        form="manuellBrukerStatus"
-                        valg={manuellBrukerStatus(intl)}
-                        onSubmit={actions.endreFiltervalg}
-                        filtervalg={filtervalg}
                     />
                 </Dropdown>
             </div>
