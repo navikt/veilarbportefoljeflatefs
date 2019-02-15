@@ -37,10 +37,6 @@ function finnElementerSomErLagtTil(prevElementer: string[], nyeElementer: string
 
     const elementerLagtTil: string[] = [];
 
-    if (prevElementer.length >= nyeElementer.length) {
-        return elementerLagtTil;
-    }
-
     nyeElementer.forEach((element) => {
         if (prevElementer.indexOf(element) === -1) {
             elementerLagtTil.push(element);
