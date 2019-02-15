@@ -2,15 +2,15 @@ import { STATUS, doThenDispatch } from './utils';
 import { httpArbeidsliste } from '../middleware/api';
 
 // Actions
-const ARBEIDSLISTE_LAGRE_OK = 'veilarbportefolje/lagre_arbeidsliste/OK';
+export const ARBEIDSLISTE_LAGRE_OK = 'veilarbportefolje/lagre_arbeidsliste/OK';
 const ARBEIDSLISTE_LAGRE_FEILET = 'veilarbportefolje/lagre_arbeidsliste/FEILET';
 const ARBEIDSLISTE_LAGRE_PENDING = 'veilarbportefolje/lagre_arbeidsliste/PENDING';
 
-const ARBEIDSLISTE_SLETT_OK = 'veilarbportefolje/slett_arbeidsliste/OK';
+export const ARBEIDSLISTE_SLETT_OK = 'veilarbportefolje/slett_arbeidsliste/OK';
 const ARBEIDSLISTE_SLETT_FEILET = 'veilarbportefolje/slett_arbeidsliste/FEILET';
 const ARBEIDSLISTE_SLETT_PENDING = 'veilarbportefolje/slett_arbeidsliste/PENDING';
 
-const ARBEIDSLISTE_REDIGER_OK = 'veilarbportefolje/rediger_arbeidsliste/OK';
+export const ARBEIDSLISTE_REDIGER_OK = 'veilarbportefolje/rediger_arbeidsliste/OK';
 const ARBEIDSLISTE_REDIGER_FEILET = 'veilarbportefolje/rediger_arbeidsliste/FEILET';
 const ARBEIDSLISTE_REDIGER_PENDING = 'veilarbportefolje/rediger_arbeidsliste/PENDING';
 

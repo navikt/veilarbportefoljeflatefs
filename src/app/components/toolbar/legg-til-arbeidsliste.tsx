@@ -5,6 +5,7 @@ import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
 import { skjulModal, visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
 import { AppState } from '../../reducer';
+import { ToolbarPosisjon } from './toolbar';
 
 interface StateProps {
     portefolje: PortefoljeState;
@@ -18,6 +19,7 @@ interface DispatchProps {
 
 interface OwnProps {
     visesAnnenVeiledersPortefolje: boolean;
+    toolbarPosisjon?: ToolbarPosisjon;
 }
 
 type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps;
@@ -76,8 +78,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
     portefolje: state.portefolje
 });
 
-const mapDispatchToProps = (dispatch): DispatchProps => ({
-    visArbeidslisteModal: () => dispatch(visModal()),
+const mapDispatchToProps = (dispatch, props: OwnProps): DispatchProps => ({
+    visArbeidslisteModal: () => dispatch(visModal(props.toolbarPosisjon)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidsliste);

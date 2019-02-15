@@ -1,5 +1,6 @@
 import { oppdaterPortefolje } from './portefolje';
 import { VeilederModell } from '../model-interfaces';
+import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -8,6 +9,7 @@ export const SLETT_ENKELT_FILTER = 'filtrering/SLETT_ENKELT_FILTER';
 export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 export const ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER = 'filtrering/ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER';
 export const SLETT_AKTIVITETER_OG_TILTAK_FILTER = 'filtrering/SLETT_AKTIVITETER_OG_TILTAK_FILTER';
+export const VEILEDER_SOKT_FRA_TOOLBAR = 'filtrering/VEILEDER_SOKT_FRA_TOOLBAR';
 
 export enum AktiviteterValg {
     JA = 'JA',
@@ -155,5 +157,11 @@ export function clearFiltervalg(filtergruppe = 'enhet', veileder) {
     return (dispatch, getState) => {
         dispatch({ type: CLEAR_FILTER, name: filtergruppe });
         oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
+    };
+}
+
+export function veilederSoktFraToolbar(toolbarPosisjon: ToolbarPosisjon) {
+    return (dispatch) => {
+        dispatch({ type: VEILEDER_SOKT_FRA_TOOLBAR, toolbarPosisjon });
     };
 }

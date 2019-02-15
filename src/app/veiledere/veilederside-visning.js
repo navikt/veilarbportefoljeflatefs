@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as PT } from 'react';
 import { connect } from 'react-redux';
-import Toolbar from './../components/toolbar/toolbar';
+import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
 import { portefoljestorrelserShape, veiledereShape } from './../proptype-shapes';
 import { pagineringSetup } from '../ducks/paginering';
@@ -13,6 +13,7 @@ import {
     selectSeAlle,
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
+import { ListevisningType } from '../ducks/ui/listevisning';
 
 function erValgtHvisFiltrering(veiledere) {
     if (veiledere && veiledere.length > 0) {
@@ -87,24 +88,29 @@ class VeilederesideVisning extends Component {
         this.setState({ veiledere });
     }
 
+    lagToolbar(posisjon) {
+        return (
+            <Toolbar
+                filtergruppe="veiledere"
+                onPaginering={() => {}}
+                antallTotalt={this.state.veiledere.length}
+                sokVeilederSkalVises={false}
+                posisjon={posisjon}
+            />
+        );
+    }
+
     render() {
         const veiledere = this.getVeiledere();
-        const toolbar = (<Toolbar
-            filtergruppe="veiledere"
-            onPaginering={() => {}}
-            antallTotalt={this.state.veiledere.length}
-            sokVeilederSkalVises
-        />);
-
         return (
             <div>
-                {toolbar}
+                {this.lagToolbar(ToolbarPosisjon.OVER)}
                 <VeiledereTabell
                     veiledere={veiledere}
                     sorterPaaEtternavn={() => this.props.sortBy('etternavn')}
                     sorterPaaPortefoljestorrelse={() => this.props.sortBy('portefoljestorrelse')}
                 />
-                {veiledere.length >= this.props.sideStorrelse && toolbar}
+                {veiledere.length >= this.props.sideStorrelse && this.lagToolbar(ToolbarPosisjon.UNDER)}
             </div>
         );
     }

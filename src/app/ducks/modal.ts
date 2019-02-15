@@ -1,4 +1,6 @@
 // Actions
+import { ToolbarPosisjon } from '../components/toolbar/toolbar';
+
 export const SKJUL_MODAL = 'modal/skjul';
 export const VIS_MODAL = 'modal/vis';
 
@@ -19,9 +21,10 @@ export default function reducer(state = initalState, action) {
 }
 
 // Action Creators
-export function visModal() {
+export function visModal(toolbarPosisjon?: ToolbarPosisjon) {
     return {
-        type: VIS_MODAL
+        type: VIS_MODAL,
+        toolbarPosisjon
     };
 }
 export function skjulModal() {
@@ -29,4 +32,3 @@ export function skjulModal() {
         type: SKJUL_MODAL
     };
 }
-

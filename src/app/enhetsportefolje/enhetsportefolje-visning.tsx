@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
-import Toolbar from './../components/toolbar/toolbar';
+import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
 import { getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl } from '../utils/url-utils';
 import EnhetTabell from './enhetsportefolje-tabell';
 import TabellOverskrift from './../components/tabell-overskrift';
@@ -102,14 +102,42 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         );
     }
 
+     lagToolbar = (posisjon: ToolbarPosisjon) => {
+
+         const {
+             portefolje,
+             valgtEnhet,
+             hentPortefolje,
+             sorteringsrekkefolge,
+             sorteringsfelt,
+             filtervalg,
+             visningsmodus,
+         } = this.props;
+
+         const { antallTotalt } = portefolje.data;
+
+         return (
+            <Toolbar
+                filtergruppe={ListevisningType.enhetensOversikt}
+                onPaginering={() => hentPortefolje(
+                    valgtEnhet.enhet!.enhetId,
+                    sorteringsrekkefolge,
+                    sorteringsfelt,
+                    filtervalg
+                )}
+                sokVeilederSkalVises
+                visningsmodus={visningsmodus}
+                antallTotalt={antallTotalt}
+                posisjon={posisjon}
+            />
+         );
+    }
+
     render() {
         const {
             portefolje,
             valgtEnhet,
             veiledere,
-            hentPortefolje,
-            sorteringsrekkefolge,
-            sorteringsfelt,
             filtervalg,
             visningsmodus,
             serverfeilModalSkalVises,
@@ -129,21 +157,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
-
-        const toolbar = (<Toolbar
-            filtergruppe={ListevisningType.enhetensOversikt}
-            onPaginering={() => hentPortefolje(
-                valgtEnhet.enhet!.enhetId,
-                sorteringsrekkefolge,
-                sorteringsfelt,
-                filtervalg
-            )}
-            sokVeilederSkalVises
-            visningsmodus={visningsmodus}
-            antallTotalt={antallTotalt}
-        />);
-
-        const visNedreToolbar = (antallTotalt >= sideStorrelse && !visDiagram) && toolbar;
+        const visNedreToolbar = antallTotalt >= sideStorrelse && !visDiagram;
 
         return (
             <div className="portefolje__container">
@@ -155,7 +169,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                         antallTotalt={antallTotalt}
                         visDiagram={visDiagram}
                     />
-                    {toolbar}
+                    {this.lagToolbar(ToolbarPosisjon.OVER)}
                     {
                         visDiagram ?
                             <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet!.enhetId}/> :
@@ -164,7 +178,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
-                    {visNedreToolbar}
+                    {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}
