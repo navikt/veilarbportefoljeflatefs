@@ -17,7 +17,7 @@ const FEILET = 'veilarbportefolje/portefolje/FEILET';
 const PENDING = 'veilarbportefolje/portefolje/PENDING';
 export const SETT_SORTERING = 'veilarbportefolje/portefolje/SETT_SORTERING';
 const SETT_MARKERT_BRUKER = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER';
-const SETT_MARKERT_BRUKER_ALLE = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER_ALLE';
+export const SETT_MARKERT_BRUKER_ALLE = 'veilarbportefolje/portefolje/SETT_MARKERT_BRUKER_ALLE';
 export const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const TILDEL_VEILEDER_RELOAD = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_RELOAD';
 const TILDEL_VEILEDER_OK = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_OK';
@@ -277,10 +277,11 @@ export function settBrukerSomMarkert(guid, markert) {
     });
 }
 
-export function markerAlleBrukere(markert) {
+export function markerAlleBrukere(markert, toolbarPosisjon?: ToolbarPosisjon) {
     return (dispatch) => dispatch({
         type: SETT_MARKERT_BRUKER_ALLE,
-        markert
+        markert,
+        toolbarPosisjon
     });
 }
 

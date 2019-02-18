@@ -6,10 +6,11 @@ import {
 } from '../ducks/filtrering';
 import { logEvent } from '../utils/frontend-logger';
 import { SETT_VISNINGSMODUS, SETUP } from '../ducks/paginering';
-import { SETT_SORTERING, TILDEL_VEILEDER } from '../ducks/portefolje';
+import { SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER } from '../ducks/portefolje';
 import { ActionTypeKeys } from '../ducks/ui/listevisning';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 import { VIS_MODAL } from '../ducks/modal';
+import { SORTERT_PA } from '../ducks/sortering';
 
 interface FilterEndringData {
     filterId: string;
@@ -17,7 +18,7 @@ interface FilterEndringData {
 }
 
 enum SideNavn {
-    VEILEDER_OVSERIKT = 'VEILEDER_OVSERIKT',
+    VEILEDER_OVSERIKT = 'VEILEDER_OVERSIKT',
     ENHETENS_OVERSIKT = 'ENHETENS_OVERSIKT',
     MIN_OVERSIKT = 'MIN_OVERSIKT',
     UKJENT = 'UKJENT'
@@ -94,8 +95,14 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case SETT_VISNINGSMODUS:
             loggEndreVisningsModus(sideNavn, action.visningsmodus, toolbarPosisjon);
             break;
+        case SORTERT_PA:
+            loggEndreSortering(sideNavn, data.property, '');
+            break;
         case SETT_SORTERING:
             loggEndreSortering(sideNavn, action.sorteringsfelt, action.sorteringsrekkefolge);
+            break;
+        case SETT_MARKERT_BRUKER_ALLE:
+            loggVelgAlle(sideNavn, toolbarPosisjon);
             break;
         case VEILEDER_SOKT_FRA_TOOLBAR:
             loggVeilederSoktFraToolbar(sideNavn, toolbarPosisjon);
@@ -110,6 +117,10 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
 };
 
 const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
+
+    if (data.filterId === 'veilederNavnQuery') {
+        return;
+    }
 
     if (Array.isArray(data.filterVerdi)) {
 
@@ -133,7 +144,9 @@ const loggEndreAktivitetFilter = (sideNavn: SideNavn) => {
 
 const loggPaginering = (sideNavn: SideNavn, data: any, toolbarPosisjon: ToolbarPosisjon) => {
     if (data.side > 1) {
-        logEvent('portefolje.metrikker.paginering', { sideNavn, seAlle: data.seAlle, toolbarPosisjon });
+        logEvent('portefolje.metrikker.paginering', { sideNavn, toolbarPosisjon });
+    } else if (data.seAlle) {
+        logEvent('portefolje.metrikker.se_alle', { sideNavn, toolbarPosisjon });
     }
 };
 
@@ -162,4 +175,8 @@ const loggEndreSortering = (sideNavn: SideNavn, sorteringsfelt: string, rekkefol
 
 const loggVeilederSoktFraToolbar = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
     logEvent('portefolje.metrikker.veileder_sokt_fra_toolbar', { sideNavn, toolbarPosisjon });
+};
+
+const loggVelgAlle = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
+    logEvent('portefolje.metrikker.velg_alle', { sideNavn, toolbarPosisjon });
 };
