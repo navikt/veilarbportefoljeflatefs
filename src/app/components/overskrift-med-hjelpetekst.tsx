@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { HjelpetekstAuto } from 'nav-frontend-hjelpetekst';
 import { logEvent } from '../utils/frontend-logger';
+import { finnSideNavn } from '../middleware/metrics-middleware';
 
 interface OverskriftMedHjelpeTekstProps {
     overskriftId: string;
@@ -23,7 +24,7 @@ class OverskriftMedHjelpetekst extends React.Component<OverskriftMedHjelpeTekstP
     }
 
     handleHjelpetekstClicked = () => {
-        logEvent('portefolje.metrikker.aktivitet_hjelpetekst_trykket');
+        logEvent('portefolje.metrikker.aktivitet_hjelpetekst_trykket', { sideNavn: finnSideNavn() });
     }
 
     render() {
