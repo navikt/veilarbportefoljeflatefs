@@ -7,7 +7,7 @@ import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
-import MetrikkEkspanderbartpanel from '../components/MetrikkEkspanderbartpanel';
+import MetrikkEkspanderbartpanel from '../components/metrikk-ekspanderbartpanel';
 
 const defaultVeileder: VeilederModell = {
     ident: '',

@@ -23,7 +23,7 @@ enum SideNavn {
     UKJENT = 'UKJENT'
 }
 
-function finnSideNavn(): SideNavn {
+export function finnSideNavn(): SideNavn {
     const pathname = window.location.pathname;
 
     if (pathname.endsWith('/veiledere')) {
