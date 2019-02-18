@@ -149,14 +149,12 @@ class FiltreringStatus extends Component {
 
         return (
             <div className="filtrering-oversikt panel">
-                <div className="typo-element blokk-xs">
-                    <Element className="blokk-xxs" tag="h3">
-                        <FormattedMessage
-                            id="filtrering.status.totalt-antall-brukere"
-                            values={{ antall: statustall.data.totalt }}
-                        />
-                    </Element>
-                </div>
+                <Element className="filtrering-oversikt__totalt-antall blokk-xxs" tag="h3">
+                    <FormattedMessage
+                        id="filtrering.status.totalt-antall-brukere"
+                        values={{ antall: statustall.data.totalt }}
+                    />
+                </Element>
                 { filtergruppe === 'enhet' ? ufordelteBrukereCheckbox : nyeBrukereForVeilederCheckbox }
                 <BarInput
                     id="trengerVurdering"

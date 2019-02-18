@@ -3,6 +3,7 @@ import { Input } from 'nav-frontend-skjema';
 import { connect } from 'react-redux';
 import { endreFiltervalg } from '../ducks/filtrering';
 import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
+import './filtrering-veiledere.less';
 
 interface FiltreringVeiledereState {
     veilederNavnQuery?: string;
@@ -68,23 +69,21 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
         const { hasFocus, veilederNavnQuery } = this.state;
 
         return (
-            <div className="row" ref={(ref) => { this.wrapperRef = ref; }}>
-                <div className="col-md-12">
-                    <Input
-                        label=""
-                        placeholder={intl.formatMessage({id: 'filtrering-navn-eller-ident'})}
-                        onChange={this.handleChange}
-                        value={veilederNavnQuery}
-                        onFocus={() => this.setFocus(true)}
+            <div className="filtrering-veiledere" ref={(ref) => { this.wrapperRef = ref; }}>
+                <Input
+                    label=""
+                    placeholder={intl.formatMessage({id: 'filtrering-navn-eller-ident'})}
+                    onChange={this.handleChange}
+                    value={veilederNavnQuery}
+                    onFocus={() => this.setFocus(true)}
+                />
+                {hasFocus &&
+                    <VeilederCheckboxListe
+                        open={hasFocus}
+                        onSubmit={this.handleVeiledereSubmitted}
+                        onClose={() => this.setFocus(false)}
                     />
-                    {hasFocus &&
-                        <VeilederCheckboxListe
-                            open={hasFocus}
-                            onSubmit={this.handleVeiledereSubmitted}
-                            onClose={() => this.setFocus(false)}
-                        />
-                    }
-                </div>
+                }
             </div>
         );
     }
