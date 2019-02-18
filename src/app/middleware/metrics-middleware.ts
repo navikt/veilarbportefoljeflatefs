@@ -1,11 +1,15 @@
-import { ENDRE_FILTER, FiltreringState, VEILEDER_SOKT_FRA_TOOLBAR } from '../ducks/filtrering';
+import {
+    ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
+    ENDRE_FILTER,
+    FiltreringState,
+    VEILEDER_SOKT_FRA_TOOLBAR
+} from '../ducks/filtrering';
 import { logEvent } from '../utils/frontend-logger';
 import { SETT_VISNINGSMODUS, SETUP } from '../ducks/paginering';
 import { SETT_SORTERING, TILDEL_VEILEDER } from '../ducks/portefolje';
 import { ActionTypeKeys } from '../ducks/ui/listevisning';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 import { VIS_MODAL } from '../ducks/modal';
-import { getSorteringsFeltFromUrl } from '../utils/url-utils';
 
 interface FilterEndringData {
     filterId: string;
@@ -96,6 +100,10 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case VEILEDER_SOKT_FRA_TOOLBAR:
             loggVeilederSoktFraToolbar(sideNavn, toolbarPosisjon);
             break;
+        case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
+            loggEndreAktivitetFilter(sideNavn);
+            break;
+
     }
 
     next(action);
@@ -117,6 +125,10 @@ const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any
         logEvent('portefolje.metrikker.endre_filter', { sideNavn, filter: data.filterId, verdi: data.filterVerdi });
     }
 
+};
+
+const loggEndreAktivitetFilter = (sideNavn: SideNavn) => {
+    logEvent('portefolje.metrikker.endre_filter', { sideNavn, filter: 'aktiviteter' });
 };
 
 const loggPaginering = (sideNavn: SideNavn, data: any, toolbarPosisjon: ToolbarPosisjon) => {

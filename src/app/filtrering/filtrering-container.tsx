@@ -7,6 +7,7 @@ import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
+import MetrikkEkspanderbartpanel from '../components/MetrikkEkspanderbartpanel';
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -34,30 +35,32 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                     actions={actions}
                 />
             </PanelBase>
-            <Ekspanderbartpanel
+            <MetrikkEkspanderbartpanel
                 apen
                 className="blokk-xxxs"
                 tittel="Status"
                 tittelProps="undertittel"
+                lamellNavn="status"
             >
                 <FiltreringStatus
                     filtergruppe={filtergruppe}
                     veileder={veileder}
                     filtervalg={filtervalg}
                 />
-            </Ekspanderbartpanel>
-            <Ekspanderbartpanel
+            </MetrikkEkspanderbartpanel>
+            <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
                 className="blokk-xxxs"
                 tittel="Filter"
                 tittelProps="undertittel"
+                lamellNavn="filtergruppe"
             >
                 <FiltreringFilter
                     actions={actions}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
                 />
-            </Ekspanderbartpanel>
+            </MetrikkEkspanderbartpanel>
         </div>
     );
 }
