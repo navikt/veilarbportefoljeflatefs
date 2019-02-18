@@ -36,7 +36,7 @@ const Toolbar = ({filtergruppe,
                      posisjon}: ToolbarProps) => (
     <section className="toolbar blokk-xs">
         <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
-            <VelgalleCheckboks skalVises={filtergruppe in ListevisningType}/>
+            <VelgalleCheckboks skalVises={filtergruppe in ListevisningType} toolbarPosisjon={posisjon}/>
             <TildelVeileder
                 skalVises={filtergruppe in ListevisningType}
                 filtergruppe={filtergruppe}

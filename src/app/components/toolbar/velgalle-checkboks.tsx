@@ -2,20 +2,22 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Checkbox } from 'nav-frontend-skjema';
-import { markerAlleBrukere } from './../../ducks/portefolje';
+import { markerAlleBrukere } from '../../ducks/portefolje';
+import { ToolbarPosisjon } from './toolbar';
 
 interface VelgalleCheckboksProps {
     skalVises: boolean;
     disabled: boolean;
     alleMarkert: boolean;
-    markerAlle: (markert: boolean) => void;
+    markerAlle: (markert: boolean, toolbarPosisjon?: ToolbarPosisjon) => void;
+    toolbarPosisjon?: ToolbarPosisjon;
 }
 
-function VelgalleCheckboks({ skalVises, disabled, markerAlle, alleMarkert }: VelgalleCheckboksProps) {
+function VelgalleCheckboks({ skalVises, disabled, markerAlle, alleMarkert, toolbarPosisjon }: VelgalleCheckboksProps) {
     if (!skalVises) {
         return null;
     }
-    const onClickHandler = () => markerAlle(!alleMarkert);
+    const onClickHandler = () => markerAlle(!alleMarkert, toolbarPosisjon);
 
     return (
         <Checkbox
@@ -36,6 +38,9 @@ const mapStateToProps = (state) => {
 
     return { alleMarkert, disabled };
 };
-const mapDispatchToProps = (dispatch) => bindActionCreators({ markerAlle: markerAlleBrukere }, dispatch);
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    markerAlle: markerAlleBrukere
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(VelgalleCheckboks);
