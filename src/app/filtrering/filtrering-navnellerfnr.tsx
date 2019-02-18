@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { injectIntl } from 'react-intl';
 import { FiltervalgModell } from '../model-interfaces';
+import './filtrering-navnellerfnr.less';
 
 interface FiltreringNavnEllerFnrState {
     navnEllerFnrQuery: string;
@@ -44,15 +45,13 @@ class FiltreringNavnellerfnr extends React.Component<FiltreringNavnEllerFnrProps
 
     render() {
         return (
-            <div className="row">
-                <div className="col-md-12">
-                    <Input
-                        label=""
-                        placeholder={this.props.intl.formatMessage({id: 'filtrering-navn-eller-fnr'})}
-                        onChange={this.handleChange}
-                        value={this.state.navnEllerFnrQuery}
-                    />
-                </div>
+            <div className="filtrering-navn-fnr">
+                <Input
+                    label=""
+                    placeholder={this.props.intl.formatMessage({id: 'filtrering-navn-eller-fnr'})}
+                    onChange={this.handleChange}
+                    value={this.state.navnEllerFnrQuery}
+                />
             </div>
         );
     }
