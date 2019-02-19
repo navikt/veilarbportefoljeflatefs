@@ -57,14 +57,14 @@ function finnFiltreringForSide(store: any, sideNavn: SideNavn) {
     let filtrering;
 
     switch (sideNavn) {
-        case SideNavn.MIN_OVERSIKT:
-            filtrering = state.filtreringMinoversikt;
-            break;
         case SideNavn.ENHETENS_OVERSIKT:
             filtrering = state.filtrering;
             break;
         case SideNavn.VEILEDER_OVSERIKT:
             filtrering = state.filtreringVeilederoversikt;
+            break;
+        default:
+            filtrering = state.filtreringMinoversikt;
             break;
     }
 
