@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import PanelBase from 'nav-frontend-paneler';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import FiltreringStatus from './filtrering-status';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
@@ -29,15 +27,13 @@ interface FiltreringContainerProps {
 function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
     return (
         <div className="blokk-m">
-            <PanelBase className="blokk-xxxs">
-                <FiltreringNavnellerfnr
-                    filtervalg={filtervalg}
-                    actions={actions}
-                />
-            </PanelBase>
+            <FiltreringNavnellerfnr
+                filtervalg={filtervalg}
+                actions={actions}
+            />
             <MetrikkEkspanderbartpanel
                 apen
-                className="blokk-xxxs"
+                className="blokk-xxs"
                 tittel="Status"
                 tittelProps="undertittel"
                 lamellNavn="status"
@@ -50,7 +46,6 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
-                className="blokk-xxxs"
                 tittel="Filter"
                 tittelProps="undertittel"
                 lamellNavn="filtergruppe"
