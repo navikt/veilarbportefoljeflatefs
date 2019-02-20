@@ -27,8 +27,6 @@ interface MinOversiktBrukerPanelProps extends InjectedIntlProps {
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
-    erVurderingFeaturePa: boolean;
-    erSykmeldtMedArbeidsgiverFeaturePa: boolean;
     formIsDirty: boolean;
     skjulArbeidslisteModal: () => void;
 }
@@ -102,14 +100,10 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                             onClick={this.handleArbeidslisteButtonClick}
                         />
                         <div>
-                            <Etiketter
-                                bruker={bruker}
-                                erVurderingFeaturePa={this.props.erVurderingFeaturePa}
-                                erSykmeldtMedArbeidsgiverFeaturePa={this.props.erSykmeldtMedArbeidsgiverFeaturePa}
-                            />
+                            <Etiketter bruker={bruker}/>
                             <Etikett
                                 type={EtikettType.NYBRUKER}
-                                skalVises={bruker.nyForVeileder === true}
+                                skalVises={bruker.nyForVeileder}
                             >
                                 <FormattedMessage id="enhet.portefolje.tabelletikett.ny.bruker"/>
                             </Etikett>

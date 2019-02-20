@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../ducks/portefolje';
 import TabellOverskrift from './../components/tabell-overskrift';
+import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
+import { leggEnhetIUrl } from '../utils/url-utils';
 import Toolbar from './../components/toolbar/toolbar';
 import { leggEnhetIUrl, updateLastPath } from '../utils/url-utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
@@ -79,19 +81,50 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         );
     }
 
-    render() {
-        updateLastPath();
+    lagToolbar = (posisjon: ToolbarPosisjon) => {
+
         const {
             portefolje,
             hentPortefolje,
             gjeldendeVeileder,
-            innloggetVeilederIdent,
             sorteringsrekkefolge,
             sorteringsfelt,
             valgtEnhet,
             filtervalg,
             visningsmodus,
             visesAnnenVeiledersPortefolje,
+        } = this.props;
+
+        const { antallTotalt } = portefolje.data;
+
+        return (
+            <Toolbar
+                filtergruppe={ListevisningType.minOversikt}
+                onPaginering={(fra, antall) => hentPortefolje(
+                    valgtEnhet.enhet!.enhetId,
+                    gjeldendeVeileder.ident,
+                    sorteringsrekkefolge,
+                    sorteringsfelt,
+                    filtervalg
+                )}
+                gjeldendeVeileder={gjeldendeVeileder}
+                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                sokVeilederSkalVises={false}
+                visningsmodus={visningsmodus}
+                antallTotalt={antallTotalt}
+                posisjon={posisjon}
+            />
+        );
+    }
+
+    render() {
+        const {
+            portefolje,
+            gjeldendeVeileder,
+            innloggetVeilederIdent,
+            valgtEnhet,
+            filtervalg,
+            visningsmodus,
             closeFeilmeldingModal,
             feilmeldingModal,
             serverfeilModalSkalVises,
@@ -103,23 +136,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
-        const toolbar = (<Toolbar
-            filtergruppe={ListevisningType.minOversikt}
-            onPaginering={(fra, antall) => hentPortefolje(
-                valgtEnhet.enhet!.enhetId,
-                gjeldendeVeileder.ident,
-                sorteringsrekkefolge,
-                sorteringsfelt,
-                filtervalg
-            )}
-            gjeldendeVeileder={gjeldendeVeileder}
-            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-            sokVeilederSkalVises={false}
-            visningsmodus={visningsmodus}
-            antallTotalt={antallTotalt}
-        />);
-
-        const visNedreToolbar = (antallTotalt >= sideStorrelse && !visDiagram) && toolbar;
+        const visNedreToolbar = antallTotalt >= sideStorrelse && !visDiagram;
 
         return (
             <div className="portefolje__container">
@@ -131,7 +148,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         antallValgt={antallValgt}
                         visDiagram={visDiagram}
                     />
-                    {toolbar}
+                    {this.lagToolbar(ToolbarPosisjon.OVER)}
                     {
                         visDiagram ?
                             <Diagram
@@ -145,7 +162,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
-                    {visNedreToolbar}
+                    {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}

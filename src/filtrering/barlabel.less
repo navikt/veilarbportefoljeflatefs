@@ -5,16 +5,16 @@
 
     &__labeltext {
         width: 100%;
-        padding-right: 1rem;
+        padding-right: 0.5rem;
     }
 
     &__barwrapper {
-        flex-basis: 45%;
-        flex-shrink: 0;
-        flex-grow: 0;
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        flex-basis: 45%;
+        flex-shrink: 0;
+        flex-grow: 0;
 
         .arbeidsliste {
             flex-basis: 3rem;
@@ -29,20 +29,21 @@
     &__antall {
         flex-basis: 3rem;
         text-align: right;
-        padding-right: 1rem;
+        padding-right: 0.5rem;
+        font-weight: 800;
+        margin-top: -0.3rem;
     }
 
     &__bar {
         position: relative;
-        flex: 0;
-        flex-basis: 85%;
-        height: 1.125rem;
+        height: 1rem;
+        flex-grow: 1;
     }
 
     &__bartrack {
         display: block;
-        background-color: #f2f1f1;
-        height: 1.125rem;
+        background-color: #e9e7e7;
+        height: 12px;
         border-radius: 1rem;
         width: 100%;
     }
@@ -50,40 +51,40 @@
     &__barface {
         position: absolute;
         display: block;
-        background-color: @navLysBlaLighten60;
-        height: 1.125rem;
+        background-color: @navLysBlaLighten20;
+        height: 12px;
         border-radius: 1rem;
         transition: width cubic-bezier(0.4, 0, 0.2, 1) 1337ms;
         left: 0;
         top: 0;
     }
     &.venterPaSvarFraNAV .barlabel__barface {
-        background-color: @navLillaLighten60;
+        background-color: @navLillaLighten20;
     }
     &.venterPaSvarFraBruker .barlabel__barface {
-        background-color: @navLimeGronnLighten60;
+        background-color: @navLimeGronnLighten20;
     }
     &.utlopteAktiviteter .barlabel__barface {
-        background-color: @navGra20;
+        background-color: @navGra60;
     }
     &.ikkeIAvtaltAktivitet .barlabel__barface {
-        background-color: @navGra20;
+        background-color: @navGra60;
     }
     &.iAvtaltAktivitet .barlabel__barface {
-        background-color: @navDypBla;
+        background-color: @navDypBlaLighten20;
     }
     &.inaktiveBrukere .barlabel__barface {
-        background-color: @navGra20;
+        background-color: @navGra60;
     }
     &.minArbeidsliste .barlabel__barface {
-        background-color: @navGra20;
+        background-color: @navGra60;
     }
 }
 
 .forsteBarlabelIGruppe {
-    padding-top: 0.3rem;
-    border-top: 1px solid #eee;
-    margin-top: 0.3rem;
+    padding-top: 1rem;
+    border-top: 1px solid @navGra60;
+    margin-top: 1rem;
 }
 
 .minArbeidsliste__tittel {

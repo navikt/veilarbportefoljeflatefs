@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import FiltreringStatus from './filtrering-status';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
-import FiltreringNavnOgFnr from './filtrering-navnellerfnr';
 import FiltreringFilter from './filtrering-filter';
+import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
+import MetrikkEkspanderbartpanel from '../components/metrikk-ekspanderbartpanel';
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -27,41 +27,35 @@ interface FiltreringContainerProps {
 function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
     return (
         <div className="blokk-m">
-            <Ekspanderbartpanel
+            <FiltreringNavnellerfnr
+                filtervalg={filtervalg}
+                actions={actions}
+            />
+            <MetrikkEkspanderbartpanel
                 apen
+                className="blokk-xxs"
                 tittel="Status"
                 tittelProps="undertittel"
+                lamellNavn="status"
             >
                 <FiltreringStatus
-                    filtergruppe={filtergruppe ? filtergruppe : ''}
+                    filtergruppe={filtergruppe }
                     veileder={veileder}
                     filtervalg={filtervalg}
-                    sjekkFeature={{} as any} // TODO: FIX
-                    statustall={{} as any} // TODO: FIX
-                    endreFilter={{} as any} // TODO: FIX
                 />
-            </Ekspanderbartpanel>
-            <Ekspanderbartpanel
+            </MetrikkEkspanderbartpanel>
+            <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
                 tittel="Filter"
                 tittelProps="undertittel"
+                lamellNavn="filtergruppe"
             >
                 <FiltreringFilter
                     actions={actions}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
                 />
-            </Ekspanderbartpanel>
-            <Ekspanderbartpanel
-                apen
-                tittel="Søk"
-                tittelProps="undertittel"
-            >
-                <FiltreringNavnOgFnr
-                    filtervalg={filtervalg}
-                    actions={actions}
-                />
-            </Ekspanderbartpanel>
+            </MetrikkEkspanderbartpanel>
         </div>
     );
 }

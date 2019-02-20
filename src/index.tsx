@@ -5,9 +5,13 @@ import { Provider } from 'react-redux';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import createStore from './store';
-import './style.less';
-import Routes from "./routes";
+import Routes from './routes';
+import './style';
 
+/* eslint-disable no-undef */
+if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
+    require('babel-polyfill'); // eslint-disable-line global-require
+}
 
 if(process.env.NODE_ENV === "development") {
     console.log('=========================='); // eslint-disable-line no-console

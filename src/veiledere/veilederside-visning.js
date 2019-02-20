@@ -1,7 +1,8 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
-import Toolbar from './../components/toolbar/toolbar';
+import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
+import { portefoljestorrelserShape, veiledereShape } from './../proptype-shapes';
 import { pagineringSetup } from '../ducks/paginering';
 import { sortBy } from '../ducks/sortering';
 import { nameToStateSliceMap } from '../ducks/utils';
@@ -12,9 +13,7 @@ import {
     selectSeAlle,
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
-import { sjekkFeature } from '../ducks/features';
-import { FLYTT_FILTER_VENSTRE } from '../konstanter';
-import {updateLastPath} from "../utils/url-utils";
+import { ListevisningType } from '../ducks/ui/listevisning';
 
 function erValgtHvisFiltrering(veiledere) {
     if (veiledere && veiledere.length > 0) {
@@ -89,27 +88,29 @@ class VeilederesideVisning extends Component {
         this.setState({ veiledere });
     }
 
+    lagToolbar(posisjon) {
+        return (
+            <Toolbar
+                filtergruppe="veiledere"
+                onPaginering={() => {}}
+                antallTotalt={this.state.veiledere.length}
+                sokVeilederSkalVises={false}
+                posisjon={posisjon}
+            />
+        );
+    }
+
     render() {
         const veiledere = this.getVeiledere();
-        const toolbar = (<Toolbar
-            filtergruppe="veiledere"
-            onPaginering={() => {
-            }}
-            sokVeilederSkalVises={!this.props.flyttFilterTilVenstre}
-            antallTotalt={this.state.veiledere.length}
-        />);
-
-        updateLastPath();
-
         return (
             <div>
-                {toolbar}
+                {this.lagToolbar(ToolbarPosisjon.OVER)}
                 <VeiledereTabell
                     veiledere={veiledere}
                     sorterPaaEtternavn={() => this.props.sortBy('etternavn')}
                     sorterPaaPortefoljestorrelse={() => this.props.sortBy('portefoljestorrelse')}
                 />
-                {veiledere.length >= this.props.sideStorrelse && toolbar}
+                {veiledere.length >= this.props.sideStorrelse && this.lagToolbar(ToolbarPosisjon.UNDER)}
             </div>
         );
     }
@@ -120,7 +121,6 @@ VeilederesideVisning.propTypes = {
     veilederFilter: PT.array.isRequired, // eslint-disable-line react/forbid-prop-types
     sortBy: PT.func.isRequired,
     settSide: PT.func.isRequired,
-    flyttFilterTilVenstre: PT.bool,
     veiledere: PT.shape({
         data: veiledereShape.isRequired
     }).isRequired,
@@ -143,8 +143,7 @@ const mapStateToProps = (state) => ({
     veilederFilter: state[nameToStateSliceMap.veiledere].veiledere,
     fra: selectFraIndex(state),
     sideStorrelse: selectSideStorrelse(state),
-    seAlle: selectSeAlle(state),
-    flyttFilterTilVenstre: sjekkFeature(state, FLYTT_FILTER_VENSTRE)
+    seAlle: selectSeAlle(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

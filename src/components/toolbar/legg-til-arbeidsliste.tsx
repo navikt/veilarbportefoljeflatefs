@@ -2,9 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
-import { skjulModal, visModal } from '../../ducks/modal';
+import {  visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
 import { AppState } from '../../reducer';
+import { ToolbarPosisjon } from './toolbar';
 
 interface StateProps {
     portefolje: PortefoljeState;
@@ -17,7 +18,8 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-    visesAnnenVeiledersPortefolje?: boolean;
+    visesAnnenVeiledersPortefolje: boolean;
+    toolbarPosisjon?: ToolbarPosisjon;
 }
 
 type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps;
@@ -71,13 +73,13 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    skalSkjules: (state.ui.side.side || '') !== 'veilederoversikt',
+    skalSkjules: false, // TODO FIKS
     visModal: state.modal.visModal,
     portefolje: state.portefolje
 });
 
-const mapDispatchToProps = (dispatch): DispatchProps => ({
-    visArbeidslisteModal: () => dispatch(visModal()),
+const mapDispatchToProps = (dispatch, props: OwnProps): DispatchProps => ({
+    visArbeidslisteModal: () => dispatch(visModal(props.toolbarPosisjon)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidsliste);

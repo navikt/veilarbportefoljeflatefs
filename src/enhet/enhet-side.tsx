@@ -5,7 +5,6 @@ import DocumentTitle from 'react-document-title';
 import Lenker from './../lenker/lenker';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
-import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
@@ -18,6 +17,10 @@ import { StatustallModell, ValgtEnhetModell, VeilederModell } from '../model-int
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { FiltreringState } from '../ducks/filtrering';
 import { pagineringSetup } from '../ducks/paginering';
+import FiltreringContainer from '../filtrering/filtrering-container';
+
+import './enhet-side.less';
+import { loggSkjermMetrikker, Side } from '../utils/skjerm-metrikker';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -70,23 +73,29 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
                             <p className="typo-infotekst begrensetbredde blokk-l">
                                 <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
                             </p>
-                            <FiltreringContainer
-                                filtervalg={filtervalg}
-                                enhettiltak={enhettiltak.data.tiltak}
-                                filtergruppe="enhet"
-                            />
-                            <FiltreringLabelContainer
-                                filtervalg={{
-                                    ...filtervalg,
-                                    veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste)
-                                }}
-                                filtergruppe="enhet"
-                                enhettiltak={enhettiltak.data.tiltak}
-                                listevisning={listevisning}
-                            />
-                            <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
-                            <EnhetsportefoljeVisning intl={intl} />
-                            <TomPortefoljeModal />
+                            <div className="enhet-side--cols">
+                                <div className="enhet-side--filter-col">
+                                    <FiltreringContainer
+                                        filtervalg={filtervalg}
+                                        enhettiltak={enhettiltak.data.tiltak}
+                                        filtergruppe="enhet"
+                                    />
+                                </div>
+                                <div className="enhet-side--liste-col">
+                                    <FiltreringLabelContainer
+                                        filtervalg={{
+                                            ...filtervalg,
+                                            veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste)
+                                        }}
+                                        filtergruppe="enhet"
+                                        enhettiltak={enhettiltak.data.tiltak}
+                                        listevisning={listevisning}
+                                    />
+                                    <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
+                                    <EnhetsportefoljeVisning />
+                                    <TomPortefoljeModal />
+                                </div>
+                            </div>
                         </div>
                     </Innholdslaster>
                 </div>

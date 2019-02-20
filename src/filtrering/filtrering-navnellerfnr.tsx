@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { injectIntl } from 'react-intl';
 import { FiltervalgModell } from '../model-interfaces';
+import './filtrering-navnellerfnr.less';
 
 interface FiltreringNavnEllerFnrState {
     navnEllerFnrQuery: string;
@@ -15,8 +16,8 @@ interface FiltreringNavnEllerFnrProps {
     };
 }
 
-class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps, FiltreringNavnEllerFnrState> {
-    private timerId: NodeJS.Timeout;
+class FiltreringNavnellerfnr extends React.Component<FiltreringNavnEllerFnrProps, FiltreringNavnEllerFnrState> {
+    private timerId: number = 0;
 
     constructor(props) {
         super(props);
@@ -24,6 +25,16 @@ class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps
             navnEllerFnrQuery: this.props.filtervalg.navnEllerFnrQuery,
         };
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentWillReceiveProps(prevProps: FiltreringNavnEllerFnrProps) {
+
+        const prevQuery = prevProps.filtervalg.navnEllerFnrQuery;
+
+        if (prevQuery === '') {
+            this.setState({ navnEllerFnrQuery: '' });
+        }
+
     }
 
     handleChange(event) {
@@ -34,18 +45,16 @@ class FiltreringNavnEllerFnr extends React.Component<FiltreringNavnEllerFnrProps
 
     render() {
         return (
-            <div className="row">
-                <div className="col-md-5">
-                    <Input
-                        label=""
-                        placeholder={this.props.intl.formatMessage({id: 'filtrering-navn-eller-fnr'})}
-                        onChange={this.handleChange}
-                        value={this.state.navnEllerFnrQuery}
-                    />
-                </div>
+            <div className="filtrering-navn-fnr">
+                <Input
+                    label=""
+                    placeholder={this.props.intl.formatMessage({id: 'filtrering-navn-eller-fnr'})}
+                    onChange={this.handleChange}
+                    value={this.state.navnEllerFnrQuery}
+                />
             </div>
         );
     }
 }
 
-export default injectIntl(FiltreringNavnEllerFnr);
+export default injectIntl(FiltreringNavnellerfnr);

@@ -6,11 +6,9 @@ import { BrukerModell, EtikettType, VurderingsBehov } from '../../model-interfac
 interface EtiketterProps {
     className?: string;
     bruker: BrukerModell;
-    erVurderingFeaturePa: boolean;
-    erSykmeldtMedArbeidsgiverFeaturePa: boolean;
 }
 
-function Etiketter({className, bruker, erVurderingFeaturePa, erSykmeldtMedArbeidsgiverFeaturePa}: EtiketterProps) {
+function Etiketter({ className, bruker }: EtiketterProps) {
     return (
         <span className={className}>
             <Etikett
@@ -39,19 +37,19 @@ function Etiketter({className, bruker, erVurderingFeaturePa, erSykmeldtMedArbeid
             </Etikett>
             <Etikett
                 type={EtikettType.IKKE_VURDERT}
-                skalVises={erVurderingFeaturePa && bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
+                skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
             >
                 <FormattedMessage id="enhet.portefolje.tabelletikett.ikke_vurdert"/>
             </Etikett>
             <Etikett
                 type={EtikettType.BEHOV_AEV}
-                skalVises={erVurderingFeaturePa && bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
+                skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
             >
                 <FormattedMessage id="enhet.portefolje.tabelletikett.behov_aev"/>
             </Etikett>
             <Etikett
                 type={EtikettType.ER_SYKMELDT_MED_ARBEIDSGIVER}
-                skalVises={erSykmeldtMedArbeidsgiverFeaturePa && bruker.erSykmeldtMedArbeidsgiver}
+                skalVises={bruker.erSykmeldtMedArbeidsgiver}
             >
                 <FormattedMessage id="enhet.portefolje.tabelletikett.er_sykmeldt_med_arbeidsgiver"/>
             </Etikett>

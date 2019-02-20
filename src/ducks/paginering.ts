@@ -2,6 +2,7 @@
 // Actions
 import { DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import { TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
+import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 
 export const SETUP = 'veilarbportefoljeflatefs/paginering/SETUP';
 export const SETT_VISNINGSMODUS = 'veilarbportefoljeflatefs/paginering/settvisningsmodus';
@@ -42,13 +43,14 @@ interface PageringOppdatering {
 }
 
 // Action Creators
-export function pagineringSetup(data: PageringOppdatering) {
-    return { type: SETUP, data };
+export function pagineringSetup(data: PageringOppdatering, toolbarPosisjon?: ToolbarPosisjon) {
+    return { type: SETUP, data, toolbarPosisjon };
 }
 
-export function settVisningsmodus(visningsmodus) {
+export function settVisningsmodus(visningsmodus, toolbarPosisjon?: ToolbarPosisjon) {
     return {
         type: SETT_VISNINGSMODUS,
-        visningsmodus
+        visningsmodus,
+        toolbarPosisjon
     };
 }

@@ -6,9 +6,11 @@ import * as VK from './../../minoversikt/minoversikt-konstanter';
 import { AppState } from './../../reducer';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 import { settVisningsmodus } from '../../ducks/paginering';
+import { ToolbarPosisjon } from './toolbar';
 
 interface OwnProps {
     filtergruppe: ListevisningType;
+    toolbarPosisjon?: ToolbarPosisjon;
 }
 
 interface DispatchProps {
@@ -67,9 +69,9 @@ const mapStateToProps = (state: AppState, ownProps: OwnProps): StateProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch): DispatchProps => bindActionCreators({
+const mapDispatchToProps = (dispatch, props: OwnProps): DispatchProps => bindActionCreators({
     endreVisningsmodus(modus) {
-        return settVisningsmodus(modus);
+        return settVisningsmodus(modus, props.toolbarPosisjon);
     }
 }, dispatch);
 

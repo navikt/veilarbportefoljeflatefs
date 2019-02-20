@@ -3,8 +3,9 @@ import classNames from 'classnames/dedupe';
 import { connect } from 'react-redux';
 import './tilbakemelding-fab.less';
 import { sjekkFeature } from '../../ducks/features';
-import { FLYTT_FILTER_VENSTRE, SPOR_OM_TILBAKEMELDING } from '../../konstanter';
+import { SPOR_OM_TILBAKEMELDING } from '../../konstanter';
 import TilbakemeldingModal, { Tilbakemelding } from './tilbakemelding-modal';
+import { logEvent } from '../../utils/frontend-logger';
 
 // FAB = Floating Action Button
 
@@ -47,45 +48,45 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
         if (this.state.isModalOpen && this.wrapperRef && !this.wrapperRef.contains(e.target)) {
             this.setState({ isModalOpen: false });
         }
-    };
+    }
 
     tilbakemeldingLocalStorageName = () => {
         return `${this.TILBAKEMELDING_PREFIX}__${this.TILBAKEMELDING_FEATURE_TAG}`;
-    };
+    }
 
     harTidligereSendtTilbakemelding = () => {
         return window.localStorage.getItem(this.tilbakemeldingLocalStorageName()) != null;
-    };
+    }
 
     handleFabClicked = () => {
 
         if (!this.state.isModalOpen) {
-            (window as any).frontendlogger.event('portefolje.tilbakemelding_modal_apnet', {}, {});
+            logEvent('portefolje.tilbakemelding_modal_apnet');
         }
 
         this.setState((prevState: TilbakemeldingFabState) => {
             return { isModalOpen: !prevState.isModalOpen };
         });
 
-    };
+    }
 
-    handleTilbakemeldingSendt = (tilbakemelding?: Tilbakemelding) => {
+    handleTilbakemeldingSendt = (tilbakemelding: Tilbakemelding) => {
         window.localStorage.setItem(this.tilbakemeldingLocalStorageName(), 'true');
-        if (tilbakemelding) {
-            (window as any).frontendlogger.event('portefolje.tilbakemelding',
-                { feature: this.TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding }, {});
-        } else {
-            // Hvis tilbakemelding er undefined så trykket brukeren "ikke vis igjen"
-            (window as any).frontendlogger.event('portefolje.ikke_vis_tilbakemelding_igjen', {}, {});
-            this.setState({ ikkeVisIgjen: true });
-        }
-    };
+        logEvent('portefolje.tilbakemelding',
+            { feature: this.TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding });
+    }
+
+    handleIkkeVisIgjen = () => {
+        window.localStorage.setItem(this.tilbakemeldingLocalStorageName(), 'true');
+        logEvent('portefolje.ikke_vis_tilbakemelding_igjen');
+        this.setState({ ikkeVisIgjen: true });
+    }
 
     render() {
 
         const { harFeature } = this.props;
         const { isModalOpen, harSendtTilbakemelding, ikkeVisIgjen } = this.state;
-        const harRiktigFeatures = harFeature(SPOR_OM_TILBAKEMELDING) && harFeature(FLYTT_FILTER_VENSTRE); // NB: Husk å endre for hver feature
+        const harRiktigFeatures = harFeature(SPOR_OM_TILBAKEMELDING); // NB: Husk å endre for hver feature
 
         if (ikkeVisIgjen || !harRiktigFeatures || harSendtTilbakemelding || this.harTidligereSendtTilbakemelding()) {
             return null;
@@ -96,13 +97,10 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
 
         return (
             <div ref={(ref) => { this.wrapperRef = ref; }}>
-                <div
-                    className= {classNames('tilbakemelding-fab', { 'tilbakemelding-fab__trykket': isModalOpen })}
-                     onClick={this.handleFabClicked}>
+                <div className={classNames('tilbakemelding-fab', { 'tilbakemelding-fab__trykket': isModalOpen })} onClick={this.handleFabClicked}>
                     <img
-                        className={
-                            classNames({
-                                'tilbakemelding-fab__ikon--lukke': isModalOpen,
+                        className={classNames({
+                            'tilbakemelding-fab__ikon--lukke': isModalOpen,
                             'tilbakemelding-fab__ikon--apne': !isModalOpen
                         })}
                         src={isModalOpen ? lukkeIkon : apneIkon}
@@ -111,6 +109,7 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
                 <TilbakemeldingModal
                     open={isModalOpen}
                     onTilbakemeldingSendt={this.handleTilbakemeldingSendt}
+                    onIkkeVisIgjen={this.handleIkkeVisIgjen}
                 />
             </div>
         );
