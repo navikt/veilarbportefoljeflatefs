@@ -4,8 +4,6 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../ducks/portefolje';
 import TabellOverskrift from './../components/tabell-overskrift';
 import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
-import { leggEnhetIUrl } from '../utils/url-utils';
-import Toolbar from './../components/toolbar/toolbar';
 import { leggEnhetIUrl, updateLastPath } from '../utils/url-utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
@@ -23,33 +21,39 @@ import {
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
-import { InjectedIntl, injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 
-interface VeilederPortefoljeVisningProps {
+
+interface DispatchProps {
+    hentPortefolje: (...args) => void;
+    doSettSortering: (rekkefolge: string, felt: string) => void;
+    closeFeilmeldingModal: () => void;
+    closeServerfeilModal: () => void;
+
+}
+
+interface StateProps {
     portefolje: PortefoljeState;
     sorteringsrekkefolge: string;
     valgtEnhet: ValgtEnhetModell;
-    gjeldendeVeileder: VeilederModell;
-    innloggetVeilederIdent: string;
-    hentPortefolje: (...args) => void;
-    doSettSortering: (rekkefolge: string, felt: string) => void;
-    sorteringsfelt: string;
-    closeFeilmeldingModal: () => void;
-    visningsmodus: string;
+    sorteringsfelt: string,
+    visningsmodus: string,
     filtervalg: FiltervalgModell;
-    visesAnnenVeiledersPortefolje: boolean;
+    innloggetVeilederIdent: string,
     feilmeldingModal: FeilmeldingModalModell;
     serverfeilModalSkalVises: boolean;
-    closeServerfeilModal: () => void;
     sideStorrelse: number;
 }
 
 interface OwnProps {
-    intl: InjectedIntl;
+    gjeldendeVeileder: VeilederModell;
+    visesAnnenVeiledersPortefolje: boolean;
 }
 
-class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps & OwnProps> {
+type VeilederPortefoljeVisningProps = OwnProps & StateProps & DispatchProps & InjectedIntlProps;
+
+class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps> {
     componentWillMount() {
         const {
             valgtEnhet,
@@ -131,7 +135,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             closeServerfeilModal,
             sideStorrelse,
         } = this.props;
-
+        updateLastPath();
         const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);

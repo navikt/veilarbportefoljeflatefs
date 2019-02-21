@@ -6,10 +6,10 @@ import { addLocaleData, IntlProvider } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import createStore from './store';
 import Routes from './routes';
-import './style';
+import './style.less';
 
 /* eslint-disable no-undef */
-if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
+if (!(window as any)._babelPolyfill) { // eslint-disable-line no-underscore-dangle
     require('babel-polyfill'); // eslint-disable-line global-require
 }
 
@@ -30,8 +30,7 @@ const store = createStore();
 const tekster = { nb: { spinner: 'spinner' } };
 
 ReactDOM.render(
-    (
-        <Provider store={store}>
+    (<Provider store={store}>
             <IntlProvider defaultLocale="nb" locale="nb" messages={tekster}>
                 <Routes />
             </IntlProvider>

@@ -38,18 +38,19 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    hentStatusTall: (enhet: string, veileder?: string) => void;
+    hentStatusTall: (enhet: string, ident: string|undefined) => void;
     hentEnhetTiltak: (enhet: string) => void;
-    doSettValgtVeileder: (veileder: VeilederModell) => void;
+    doSettValgtVeileder: ({ident: string}) => void;
     doSettSortering: (rekkefolge: string, felt: string) => void;
     hentPortefolje: (...args) => void;
     initalPaginering: (side: number, seAlle: boolean) => void;
 }
 
 interface OwnProps {
-    params: {
-        ident: string;
-    };
+    match:
+        {params:
+                { ident: string; }
+        };
 }
 
 type MinoversiktSideProps = StateProps & DispatchProps & OwnProps & InjectedIntlProps;
@@ -57,14 +58,14 @@ type MinoversiktSideProps = StateProps & DispatchProps & OwnProps & InjectedIntl
 class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     componentDidMount() {
         const { veiledere, enheter, valgtEnhet, filtervalg, hentPortefolje, ...props } = this.props;
-        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
+        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
         const innloggetVeileder = { ident: enheter.ident };
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
         this.settInitalStateFraUrl();
         loggSkjermMetrikker(Side.MIN_OVERSIKT);
 
-        this.props.hentStatusTall(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident);
+        this.props.hentStatusTall(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident );
         this.props.hentEnhetTiltak(valgtEnhet.enhet!.enhetId);
 
         this.props.doSettValgtVeileder(gjeldendeVeileder);
@@ -87,9 +88,10 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
 
     render() {
         const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
-
-        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.params.ident));
-        const innloggetVeileder = { ident: enheter.ident };
+        console.log('veilederListe', veiledere.data.veilederListe);
+        console.log('props params',props);
+        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
+        const innloggetVeileder = { ident: enheter.ident|| '', fornavn: '', etternavn: '', navn: ''};
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
         const { formatMessage } = intl;
 
@@ -175,11 +177,11 @@ const mapStateToProps = (state): StateProps => ({
 const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, filtervalg)),
-    hentStatusTall: (enhet: string, veileder: string) => dispatch(hentStatusTall(enhet, veileder)),
+    hentStatusTall: (enhet: string, veileder: string|undefined) => dispatch(hentStatusTall(enhet, veileder)),
     hentEnhetTiltak: (enhet: string) => dispatch(hentEnhetTiltak(enhet)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    doSettValgtVeileder: (veileder: VeilederModell) => dispatch(settValgtVeileder(veileder)),
+    doSettValgtVeileder: ({ident: string}) => dispatch(settValgtVeileder({ident: string})),
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MinOversiktSide));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MinoversiktSide));

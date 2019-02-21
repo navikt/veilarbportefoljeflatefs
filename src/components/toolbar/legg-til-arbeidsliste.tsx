@@ -4,12 +4,11 @@ import { FormattedMessage } from 'react-intl';
 import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
 import {  visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
-import { AppState } from '../../reducer';
 import { ToolbarPosisjon } from './toolbar';
+import {withRouter, RouteProps, RouteComponentProps} from "react-router-dom";
 
 interface StateProps {
     portefolje: PortefoljeState;
-    skalSkjules: boolean;
     visModal?: boolean;
 }
 
@@ -20,9 +19,14 @@ interface DispatchProps {
 interface OwnProps {
     visesAnnenVeiledersPortefolje: boolean;
     toolbarPosisjon?: ToolbarPosisjon;
+    match: {
+        params: {
+            ident?: string
+        }
+    }
 }
 
-type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps;
+type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps ;
 
 class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     constructor(props) {
@@ -56,8 +60,9 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     }
 
     render() {
-        const { skalSkjules, portefolje } = this.props;
+        const { portefolje } = this.props;
         const valgteBrukere = portefolje.data.brukere.filter((bruker) => bruker.markert === true);
+        const skalSkjules = this.props.match.params.ident;
         const modalSkalVises = this.props.visModal === true;
 
         if (skalSkjules) {
@@ -72,14 +77,13 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     }
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
-    skalSkjules: false, // TODO FIKS
+const mapStateToProps = (state) => ({
     visModal: state.modal.visModal,
     portefolje: state.portefolje
 });
 
-const mapDispatchToProps = (dispatch, props: OwnProps): DispatchProps => ({
+const mapDispatchToProps = (dispatch, props) => ({
     visArbeidslisteModal: () => dispatch(visModal(props.toolbarPosisjon)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidsliste);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidsliste));

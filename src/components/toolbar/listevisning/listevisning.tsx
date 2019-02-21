@@ -1,13 +1,47 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { ChangeEvent } from 'react';
 import Dropdown from '../../dropdown/dropdown';
+import { Checkbox } from 'nav-frontend-skjema';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { AppState } from '../../../reducer';
 import { Action, Dispatch } from 'redux';
 import { avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ } from '../../../ducks/ui/listevisning';
+import { alternativerConfig } from './listevisning-utils';
 import { selectMuligeAlternativer, selectValgteAlternativer } from '../../../ducks/ui/listevisning-selectors';
-import ListevisningRad from "./listvisning-rad";
+import { ToolbarPosisjon } from '../toolbar';
 
+interface ListevisningRadProps {
+    kolonne: Kolonne;
+    disabled: boolean;
+    valgt: boolean;
+    onChange: (name: Kolonne, checked: boolean) => void;
+}
+
+type Props = ListevisningRadProps;
+const ListevisningRad = (props: Props) => {
+    const alternativ = alternativerConfig.get(props.kolonne);
+    if (alternativ == null) {
+        return null;
+    }
+
+    return (
+        <li>
+            <Checkbox
+                label={<FormattedMessage id={alternativ.tekstid}/>}
+                value={props.kolonne.toString()}
+                checked={props.valgt}
+                disabled={props.disabled || alternativ.checkboxDisabled}
+                onChange={((e: ChangeEvent<HTMLInputElement>) => props.onChange(props.kolonne, e.target.checked))}
+            />
+        </li>
+    );
+};
+
+interface OwnProps {
+    filtergruppe: ListevisningType;
+    toolbarPosisjon?: ToolbarPosisjon;
+}
 
 interface StateProps {
     valgteAlternativ: Kolonne[];
@@ -19,69 +53,62 @@ interface DispatchProps {
     avvelgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => void;
 }
 
-interface OwnProps {
-    filtergruppe: ListevisningType;
-}
+type ListevisningProps = OwnProps & StateProps & DispatchProps & InjectedIntlProps;
 
-type ListevisningProps = OwnProps & StateProps & DispatchProps;
-
-class Listevisning extends React.Component<any> {
-
-     handleChange(name, checked) {
+const Listevisning = (props: ListevisningProps) => {
+    function handleChange(name, checked) {
         if (checked) {
-            this.props.velgAlternativ(name, this.props.filtergruppe);
+            props.velgAlternativ(name, props.filtergruppe);
         } else {
-            this.props.avvelgAlternativ(name, this.props.filtergruppe);
+            props.avvelgAlternativ(name, props.filtergruppe);
         }
     }
 
-     erValgt(kolonne: Kolonne) {
-        return this.props.valgteAlternativ.indexOf(kolonne) > -1;
+    function erValgt(kolonne: Kolonne) {
+        return props.valgteAlternativ.indexOf(kolonne) > -1;
     }
 
-    render() {
-
-        if (![ListevisningType.minOversikt, ListevisningType.enhetensOversikt].includes(this.props.filtergruppe as ListevisningType)) {
-            return null;
-        }
-
-        return (
-            <Dropdown name= "Listevisning"
-                      disabled={this.props.muligeAlternativer.length <= 5}
-                      className="dropdown--fixed dropdown--toolbar">
-                <section className="radio-filterform__valg">
-                    <div className="blokk-s">
-                        <FormattedMessage id="listevisning.ingress"/>
-                    </div>
-                    <ul className="ustilet">
-                        {this.props.muligeAlternativer.map((kolonne) => (
-                            <ListevisningRad
-                                key={kolonne}
-                                kolonne={kolonne}
-                                valgt={this.erValgt(kolonne)}
-                                disabled={this.props.valgteAlternativ.length >= 5 && !this.erValgt(kolonne)}
-                                onChange={this.handleChange}
-                            />
-                        ))}
-                    </ul>
-                </section>
-            </Dropdown>
-        );
+    if (![ListevisningType.minOversikt, ListevisningType.enhetensOversikt].includes(props.filtergruppe)) {
+        return null;
     }
+
+    return (
+        <Dropdown name={props.intl.formatMessage({id: 'toolbar.listevisning'})} disabled={props.muligeAlternativer.length <= 5}
+                  className="dropdown--fixed dropdown--toolbar">
+            <section className="radio-filterform__valg">
+                <div className="blokk-s">
+                    <FormattedMessage id="listevisning.ingress"/>
+                </div>
+                <ul className="ustilet">
+                    {props.muligeAlternativer.map((kolonne) => (
+                        <ListevisningRad
+                            key={kolonne}
+                            kolonne={kolonne}
+                            valgt={erValgt(kolonne)}
+                            disabled={props.valgteAlternativ.length >= 5 && !erValgt(kolonne)}
+                            onChange={handleChange}
+                        />
+                    ))}
+                </ul>
+            </section>
+        </Dropdown>
+    );
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps): StateProps {
     return {
         valgteAlternativ: selectValgteAlternativer(state, ownProps.filtergruppe),
         muligeAlternativer: selectMuligeAlternativer(state, ownProps.filtergruppe)
     };
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch, props): DispatchProps {
     return {
-        velgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(velgAlternativ(name, filtergruppe)),
+        velgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(velgAlternativ(name, filtergruppe, props.toolbarPosisjon)),
         avvelgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(avvelgAlternativ(name, filtergruppe))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Listevisning);
+export default connect<StateProps,DispatchProps,OwnProps>(mapStateToProps, mapDispatchToProps)(
+    injectIntl(Listevisning)
+);

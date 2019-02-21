@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Ekspanderbartpanel, { EkspanderbartpanelProps } from 'nav-frontend-ekspanderbartpanel';
-import { logEvent } from '../utils/frontend-logger';
-import { finnSideNavn } from '../middleware/metrics-middleware';
+import { logEvent } from '../../utils/frontend-logger';
+import { finnSideNavn } from '../../middleware/metrics-middleware';
 
 interface MetrikkEkspanderbartpanelProps {
     lamellNavn: string;
@@ -17,7 +17,7 @@ class MetrikkEkspanderbartpanel extends React.Component<AllProps, MetrikkEkspand
 
     constructor(props: AllProps) {
         super(props);
-        this.state = { isApen: props.apen };
+        this.state = { isApen: props.apen || false };
     }
 
     handleOnClick = () => {

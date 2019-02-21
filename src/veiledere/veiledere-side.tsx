@@ -20,7 +20,6 @@ import { loggSkjermMetrikker, Side } from '../utils/skjerm-metrikker';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import { hentPortefoljeStorrelser as fetchPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { hentStatusTall as fetchStatusTall } from '../ducks/statustall';
-import { pagineringSetup } from '../ducks/paginering';
 import { RouterProps } from 'react-router';
 
 interface StateProps {

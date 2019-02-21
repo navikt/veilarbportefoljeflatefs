@@ -15,7 +15,13 @@ import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { getFraBrukerFraUrl } from '../utils/url-utils';
 
-interface MinOversiktTabellProps {
+interface OwnProps {
+    innloggetVeileder: string;
+    visesAnnenVeiledersPortefolje?: boolean;
+    settSorteringOgHentPortefolje: (sortering: string) => void;
+}
+
+interface StateProps {
     portefolje: {
         data: {
             brukere: BrukerModell[];
@@ -25,16 +31,18 @@ interface MinOversiktTabellProps {
         };
         sorteringsfelt: Sorteringsfelt;
     };
-    valgtEnhet: ValgtEnhetModell;
-    sorteringsrekkefolge: Sorteringsrekkefolge;
-    settMarkert: () => void;
-    filtervalg: FiltervalgModell;
-    settSorteringOgHentPortefolje: (sortering: string) => void;
     veiledere: VeilederModell[];
-    innloggetVeileder: string;
-    valgteKolonner: Kolonne[];
-    visesAnnenVeiledersPortefolje: boolean;
+    valgtEnhet: ValgtEnhetModell;
+    sorteringsrekkefolge: Sorteringsrekkefolge,
+    filtervalg: FiltervalgModell,
+    valgteKolonner: Kolonne[],
 }
+
+interface DispatchProps {
+    settMarkert: (fnr:string, markert:string) => void;
+}
+
+type MinOversiktTabellProps  = StateProps & DispatchProps & OwnProps;
 
 class MinoversiktTabell extends React.Component<MinOversiktTabellProps> {
     private forrigeBruker?: string;
@@ -91,9 +99,8 @@ const mapStateToProps = (state) => ({
     valgteKolonner: selectValgteAlternativer(state, ListevisningType.minOversikt),
 });
 
-const
-    mapDispatchToProps = (dispatch) => ({
-        settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
-    });
+const mapDispatchToProps = (dispatch) => ({
+    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert)),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(MinoversiktTabell);
+export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(MinoversiktTabell);

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
@@ -10,12 +9,7 @@ import {Route, Switch, Redirect, withRouter} from "react-router-dom";
 import EnhetSide from "./enhet/enhet-side";
 import VeiledereSide from "./veiledere/veiledere-side";
 import MinOversiktSide from "./minoversikt/minoversikt-side";
-import EnhetSideVenstreToggle from "./enhet/enhet-side-venstre-toggle";
-import MinOversiktSideVenstreToggle from "./minoversikt/minoversikt-side-venstre-toggle";
-import VeiledereSideVenstreToggle from "./veiledere/veiledere-side-venstre-toggle";
 import TilbakemeldingFab from "./components/tilbakemelding/tilbakemelding-fab";
-import {sjekkFeature} from "./ducks/features";
-import {FLYTT_FILTER_VENSTRE} from "./konstanter";
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(window.location.search).vistekster; // eslint-disable-line no-undef
@@ -27,8 +21,7 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
 
 addLocaleData(nb);
 
-function Application ({flyttFilterTilVenstre, ...props}) {
-    console.log("this.props", props);
+function Application (props) {
     return (
         <IntlProvider
             defaultLocale="nb"
@@ -38,35 +31,24 @@ function Application ({flyttFilterTilVenstre, ...props}) {
             <div className="portefolje">
                 <EnhetContext >
                     <div
-                        className = {classnames({ container: !flyttFilterTilVenstre }, 'maincontent', 'side-innhold')}
+                        className = {classnames('maincontent', 'side-innhold')}
                     >
                         <Switch>
                             <Route
                                 path="/enhet"
-                                render={() =>
-                                    flyttFilterTilVenstre ?
-                                        <EnhetSideVenstreToggle/> :
-                                        <EnhetSide/>} />
+                                component={EnhetSide}
+                             />
                             <Route
                                 path="/veiledere"
-                                render={() =>
-                                    flyttFilterTilVenstre ?
-                                        <VeiledereSideVenstreToggle/> :
-                                        <VeiledereSide/>}
+                                component={VeiledereSide}
                             />
                             <Route
                                 path="/portefolje/:ident"
-                                render={(props) =>
-                                    flyttFilterTilVenstre ?
-                                        <MinOversiktSideVenstreToggle {...props}/> :
-                                        <MinOversiktSide {...props}/>}
+                                render={(props) => <MinOversiktSide {...props}/>}
                             />
                             <Route
                                 path="/portefolje"
-                                render={(props) =>
-                                    flyttFilterTilVenstre ?
-                                        <MinOversiktSideVenstreToggle {...props}/> :
-                                        <MinOversiktSide {...props}/>}
+                                render={(props) => <MinOversiktSide {...props}/>}
                             />
                             <Route
                                 render={() => {
@@ -112,8 +94,6 @@ Application.propTypes = {
     }).isRequired
 };
 */
-const mapStateToProps = (state) => ({
-    flyttFilterTilVenstre: sjekkFeature(state, FLYTT_FILTER_VENSTRE),
-});
 
-export default withRouter(connect(mapStateToProps)(Application));
+
+export default withRouter(Application);

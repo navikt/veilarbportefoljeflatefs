@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
 import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
-import { getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl } from '../utils/url-utils';
+import {getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl, updateLastPath} from '../utils/url-utils';
 import EnhetTabell from './enhetsportefolje-tabell';
 import TabellOverskrift from './../components/tabell-overskrift';
 import { ASCENDING, DESCENDING } from '../konstanter';
@@ -56,7 +56,7 @@ interface EnhetsportefoljeVisningProps {
     sideStorrelse: number;
 }
 
-class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningProps & InjectedIntlProps> {
+class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningProps> {
     componentWillMount() {
         const {
             valgtEnhet, hentPortefolje, filtervalg
@@ -146,7 +146,9 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             closeFeilmeldingModal,
             sideStorrelse,
         } = this.props;
+
         updateLastPath();
+
         const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
 

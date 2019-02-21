@@ -71,10 +71,10 @@ export interface ValgtEnhetModell {
 }
 
 export interface VeilederModell {
-    ident?: string;
-    navn?: string;
-    fornavn?: string;
-    etternavn?: string;
+    ident: string;
+    navn: string;
+    fornavn: string;
+    etternavn: string;
 }
 
 export enum VurderingsBehov {

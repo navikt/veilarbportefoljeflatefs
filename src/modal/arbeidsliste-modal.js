@@ -7,7 +7,7 @@ import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { skjulModal } from '../ducks/modal';
 import { markerAlleBrukere } from '../ducks/portefolje';
-import LeggTilArbeidslisteForm, { LEGG_TIL_ARBEIDSLISTE_FORM_NAME } from './legg-til-arbeidsliste-form';
+import LeggTilArbeidslisteForm from './arbeidsliste/legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 
 NavFrontendModal.setAppElement('#applikasjon');
@@ -17,9 +17,12 @@ class ArbeidslisteModal extends Component {
         super(props);
 
         this.state = {
-            isOpen: this.props.isOpen
+            isOpen: this.props.isOpen,
+            formIsDirty: false
+
         };
         this.lukkModal = this.lukkModal.bind(this);
+        this.setFormIsDirty = this.setFormIsDirty.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -28,12 +31,16 @@ class ArbeidslisteModal extends Component {
         }
     }
 
+    setFormIsDirty(formIsDirty) {
+        this.setState({...this.state,formIsDirty})
+    }
+
     lukkModal() {
-        const { intl, formIsDirty, skjulArbeidslisteModal, fjernMarkerteBrukere } = this.props;
+        const { intl, skjulArbeidslisteModal, fjernMarkerteBrukere } = this.props;
         const dialogTekst = intl.formatMessage({
             id: 'arbeidsliste-skjema.lukk-advarsel',
         });
-        if (!formIsDirty || window.confirm(dialogTekst)) {
+        if (!this.state.formIsDirty || window.confirm(dialogTekst)) {
             this.setState({ isOpen: false });
             fjernMarkerteBrukere();
             skjulArbeidslisteModal();
@@ -121,8 +128,6 @@ ArbeidslisteModal.propTypes = {
 const mapStateToProps = (state) => ({
     visModal: state.modal.visModal,
     innloggetVeileder: state.enheter.ident,
-    formIsDirty:
-        isDirty(LEGG_TIL_ARBEIDSLISTE_FORM_NAME)(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -2,7 +2,6 @@ import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
-import { portefoljestorrelserShape, veiledereShape } from './../proptype-shapes';
 import { pagineringSetup } from '../ducks/paginering';
 import { sortBy } from '../ducks/sortering';
 import { nameToStateSliceMap } from '../ducks/utils';
@@ -13,7 +12,6 @@ import {
     selectSeAlle,
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
-import { ListevisningType } from '../ducks/ui/listevisning';
 
 function erValgtHvisFiltrering(veiledere) {
     if (veiledere && veiledere.length > 0) {

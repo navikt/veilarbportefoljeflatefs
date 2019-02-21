@@ -119,4 +119,4 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(EnhetSide));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(EnhetSide));

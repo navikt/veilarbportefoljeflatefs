@@ -35,7 +35,7 @@ class OverskriftMedHjelpetekst extends React.Component<OverskriftMedHjelpeTekstP
                     <FormattedMessage id={overskriftId} />
                 </Element>
                 <div ref={(ref) => { this.catchClickRef = ref; }}>
-                    <HjelpetekstAuto>
+                    <HjelpetekstAuto id={hjelpetekstId}>
                         <FormattedMessage id={hjelpetekstId} />
                     </HjelpetekstAuto>
                 </div>

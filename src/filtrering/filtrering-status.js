@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { endreFiltervalg } from '../ducks/filtrering';
-import { statustallShape, veilederShape, filtervalgShape } from '../proptype-shapes';
 import Barlabel from './barlabel';
 import {
     FILTERGRUPPE_ENHET,
