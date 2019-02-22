@@ -18,6 +18,7 @@ interface OwnProps {
     valgteBrukere: BrukerModell[];
     lukkModal: () => void;
     innloggetVeileder: VeilederModell;
+    setFormIsDirty: (formIsDirty: boolean)=>void;
 }
 
 interface StateProps {
@@ -25,31 +26,24 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    onSubmit: (formData, dispatch, props) => void;
+    onSubmit: (formData) => void;
 }
 
-
-
-function LeggTilArbeidslisteForm({ lukkModal, valgteBrukere, innloggetVeileder, arbeidslisteStatus, onSubmit }: OwnProps & StateProps& DispatchProps) {
+function LeggTilArbeidslisteForm({ lukkModal, valgteBrukere, innloggetVeileder, arbeidslisteStatus, onSubmit, setFormIsDirty }: OwnProps & StateProps& DispatchProps) {
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     const initialValues = valgteBrukere.map(bruker => ({kommentar: '', frist: null, overskrift: '' }));
 
     return (
         <Formik
             initialValues={{ arbeidsliste: initialValues }}
-            onSubmit={values =>
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                }, 500)
-            }
-            render={({values, handleChange, handleBlur, ...rest}) => {
+            onSubmit={values => onSubmit(values.arbeidsliste)}
+            render={({values, dirty}) => {
+                setFormIsDirty(dirty);
                 return (
                     <Form>
                         <ArbeidslisteForm
                             valgteBrukere={valgteBrukere}
                             arbeidsliste={values.arbeidsliste}
-                            handleBlur={handleBlur}
-                            handleChange={handleChange}
                         />
                         <div>
                             <div className="modal-footer">

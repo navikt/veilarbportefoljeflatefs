@@ -1,5 +1,6 @@
 import { STATUS, doThenDispatch } from './utils';
 import { httpArbeidsliste } from '../middleware/api';
+import {ArbeidslisteDataModell} from "../model-interfaces";
 
 // Actions
 export const ARBEIDSLISTE_LAGRE_OK = 'veilarbportefolje/lagre_arbeidsliste/OK';
@@ -44,8 +45,42 @@ export default function reducer(state = initialState, action) {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function lagreArbeidsliste(arbeidsliste, brukere ) {
+    const liste = arbeidsliste.map((elem, index) => ({
+        fnr: brukere[index].fnr,
+        overskrift: elem.overskrift,
+        kommentar: elem.kommentar,
+        frist: elem.frist
+    }));
+    return dispatch =>
+        dispatch(postArbeidsliste(liste))
+            .then(res => )
+
+}
+
+
 // Action Creators
-export function lagreArbeidsliste(arbeidsliste) {
+export function postArbeidsliste(arbeidsliste) {
     return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'post'), {
         OK: ARBEIDSLISTE_LAGRE_OK,
         FEILET: ARBEIDSLISTE_LAGRE_FEILET,

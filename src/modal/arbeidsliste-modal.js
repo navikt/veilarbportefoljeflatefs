@@ -65,6 +65,7 @@ class ArbeidslisteModal extends Component {
                     valgteBrukere={valgteBrukere}
                     lukkModal={this.lukkModal}
                     innloggetVeileder={this.props.innloggetVeileder}
+                    setFormIsDirty={this.setFormIsDirty}
                 />
             </div>
         );

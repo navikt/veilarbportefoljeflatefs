@@ -3,7 +3,9 @@ import FormikDatoVelger from "./formik-datovelger";
 import {BrukerModell} from "../../model-interfaces";
 import {Undertittel} from "nav-frontend-typografi";
 import {FormattedMessage} from "react-intl";
-import {Input, Textarea as NavFrontendTextarea, Textarea} from "nav-frontend-skjema";
+import {Textarea} from "nav-frontend-skjema";
+import FormikInput from "./formik-input";
+import FormikTekstArea from "./formik-tekstarea";
 
 function label(bruker: BrukerModell): React.ReactNode {
     return (<Undertittel><FormattedMessage
@@ -16,39 +18,21 @@ function label(bruker: BrukerModell): React.ReactNode {
     /></Undertittel>);
 }
 
-function ArbeidslisteForm ({arbeidsliste, valgteBrukere, handleChange, handleBlur}) {
+function ArbeidslisteForm ({arbeidsliste, valgteBrukere}) {
     return(
-    <div>
-        {arbeidsliste.map((bruker, index) => (
-            <div className="input-fields">
-                <div className="nav-input blokk-s" key={index}>
-                    <legend>
-                        {label(valgteBrukere[index])}
-                    </legend>
-                    <Input
-                        id={index}
-                        label="Overskrift"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        name={`arbeidsliste[${index}].overskrift`}
-                        bredde="M"
-                    />
-                    <Textarea
-                        id={index}
-                        textareaClass="skjemaelement__input input--fullbredde arbeidslistekommentar"
-                        label="Kommentar"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={arbeidsliste[index].kommentar}
-                        name={`arbeidsliste[${index}].kommentar`}
-                    />
+        <div>
+            {arbeidsliste.map((bruker, index) => (
+                <div className="input-fields">
+                    <div className="nav-input blokk-s" key={index}>
+                        <legend>
+                            {label(valgteBrukere[index])}
+                        </legend>
+                        <FormikInput name={`arbeidsliste[${index}].overskrift`}/>
+                        <FormikTekstArea name = {`arbeidsliste[${index}].kommentar`}/>
+                    </div>
+                    <FormikDatoVelger name={`arbeidsliste[${index}].frist`}/>
                 </div>
-                <FormikDatoVelger
-                    name={`arbeidsliste[${index}].frist`}
-                    id={index}
-                />
-               </div>
-        ))}
+            ))}
         </div>
     )
 

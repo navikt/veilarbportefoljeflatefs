@@ -179,3 +179,24 @@ export function validerDatoField(input, intl, alternativer, valgfritt) {
     }
     return undefined;
 }
+
+
+
+export function validerDatoFeldt(input, fra, valgfritt) {
+    let error;
+    const inputDato = moment(input);
+    const fraDato = moment(fra);
+    if (!valgfritt && !input) {
+        error = 'Du må angi en frist';
+
+    } else if (input && !erGyldigISODato(input)) {
+        error = 'Ugyldig dato';
+    } else if (
+        fra &&
+        (fraDato.isAfter(inputDato, 'day'))
+    ) {
+
+        error = 'Fristen må være i dag eller senere'
+    }
+    return error;
+}
