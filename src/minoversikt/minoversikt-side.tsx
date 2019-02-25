@@ -99,8 +99,6 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
 
         const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
 
-        console.log(veiledere.data.veilederListe);
-
         const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
             <FormattedMessage
                 id="annen.veileder.portefolje.advarsel"

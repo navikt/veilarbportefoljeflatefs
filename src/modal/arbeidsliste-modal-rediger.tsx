@@ -54,11 +54,10 @@ function ArbeidslisteModalRediger({
 
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
 
-
     const initialValues = {
         overskrift: bruker.arbeidsliste.overskrift || '',
         kommentar: bruker.arbeidsliste.kommentar || '',
-        frist: new Date(bruker.arbeidsliste.frist) || null
+        frist: bruker.arbeidsliste.frist ? new Date(bruker.arbeidsliste.frist) : null
     };
 
     return (
@@ -107,7 +106,6 @@ function ArbeidslisteModalRediger({
     );
 }
 export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, fnr, lukkModal, dispatch) {
-    console.log('fnr', fnr);
 
     if (!res) {
         return visServerfeilModal()(dispatch);

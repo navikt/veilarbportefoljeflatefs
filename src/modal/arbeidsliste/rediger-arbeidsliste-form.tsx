@@ -16,28 +16,31 @@ interface RedigerArbeidslisteProps {
 
 
 function RedigerArbeidsliste (props: RedigerArbeidslisteProps) {
+    console.log('heps', props.sistEndretDato);
     return (
         <Form>
-            <FormikInput name="overskrift"/>
-            <FormikTekstArea name ="kommentar"/>
-            <Undertekst className="arbeidsliste--modal-redigering">
-                <FormattedMessage
-                    id="arbeidsliste.kommentar.footer"
-                    values={{
-                        dato: props.sistEndretDato.toLocaleDateString(),
-                        veileder: props.sistEndretAv
-                    }}
-                />
-            </Undertekst>
-            <FormikDatoVelger name="frist"/>
-            <div>
-                <div className="modal-footer">
-                    <Hovedknapp htmlType="submit" className="knapp knapp--hoved" spinner={props.laster}>
-                        <FormattedMessage id="modal.knapp.lagre" />
-                    </Hovedknapp>
-                    <button type="button" className="knapp" onClick={props.lukkModal}>
-                        <FormattedMessage id="modal.knapp.avbryt" />
-                    </button>
+            <div className="input-fields">
+                <FormikInput name="overskrift"/>
+                <FormikTekstArea name ="kommentar"/>
+                <Undertekst className="arbeidsliste--modal-redigering">
+                    <FormattedMessage
+                        id="arbeidsliste.kommentar.footer"
+                        values={{
+                            dato: props.sistEndretDato.toLocaleDateString(),
+                            veileder: props.sistEndretAv
+                        }}
+                    />
+                </Undertekst>
+                <FormikDatoVelger name="frist"/>
+                <div>
+                    <div className="modal-footer">
+                        <Hovedknapp htmlType="submit" className="knapp knapp--hoved" spinner={props.laster}>
+                            <FormattedMessage id="modal.knapp.lagre" />
+                        </Hovedknapp>
+                        <button type="button" className="knapp" onClick={props.lukkModal}>
+                            <FormattedMessage id="modal.knapp.avbryt" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </Form>
