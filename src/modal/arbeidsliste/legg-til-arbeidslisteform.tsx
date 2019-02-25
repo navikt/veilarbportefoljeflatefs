@@ -2,8 +2,7 @@ import {STATUS} from "../../ducks/utils";
 import * as React from "react";
 import {ArbeidslisteDataModell, BrukerModell, Status, VeilederModell} from "../../model-interfaces";
 import {lagreArbeidsliste} from "../../ducks/arbeidsliste";
-import {skjulModal} from "../../ducks/modal";
-import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from "../../ducks/portefolje";
+import {oppdaterArbeidslisteForBruker} from "../../ducks/portefolje";
 import {visServerfeilModal} from "../../ducks/modal-serverfeil";
 import {LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal} from "../../ducks/modal-feilmelding-brukere";
 import {leggTilStatustall} from "../../ducks/statustall";
@@ -57,14 +56,13 @@ function LeggTilArbeidslisteForm({ lukkModal, valgteBrukere, innloggetVeileder, 
                         </div>
                     </Form>
                 )
-
             }}
         />
     );
 }
 
 
-function oppdaterState(res, liste: ArbeidslisteDataModell[], props: {innloggetVeileder: VeilederModell, bruker: BrukerModell}, dispatch) {
+export function oppdaterState(res, liste: ArbeidslisteDataModell[], props: {innloggetVeileder: VeilederModell, bruker: BrukerModell}, dispatch) {
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -98,19 +96,8 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 
-const mapDispatchToProps = () => ({
-    onSubmit: (formData, dispatch, props) => {
-        const liste: ArbeidslisteDataModell[] = formData.arbeidsliste.map((bruker, index) => ({
-            fnr: bruker.fnr,
-            overskrift: formData.arbeidsliste[index].overskrift,
-            kommentar: formData.arbeidsliste[index].kommentar,
-            frist: formData.arbeidsliste[index].frist
-        }));
-        lagreArbeidsliste(liste)(dispatch)
-            .then((res) => oppdaterState(res, liste, props, dispatch));
-        dispatch(skjulModal());
-        dispatch(markerAlleBrukere(false));
-    }
+const mapDispatchToProps = (dispatch, props) => ({
+    onSubmit: (formData) => dispatch(lagreArbeidsliste(formData, props))
 });
 
 

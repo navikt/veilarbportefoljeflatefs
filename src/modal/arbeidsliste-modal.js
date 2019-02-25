@@ -1,6 +1,5 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
-import { isDirty } from 'redux-form';
 import { injectIntl } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';

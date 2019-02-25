@@ -1,6 +1,9 @@
 import { STATUS, doThenDispatch } from './utils';
 import { httpArbeidsliste } from '../middleware/api';
-import {ArbeidslisteDataModell} from "../model-interfaces";
+import {skjulModal} from "./modal";
+import {markerAlleBrukere} from "./portefolje";
+import {oppdaterState} from "../modal/arbeidsliste/legg-til-arbeidslisteform";
+import {oppdaterArbeidsListeState} from "../modal/arbeidsliste-modal-rediger";
 
 // Actions
 export const ARBEIDSLISTE_LAGRE_OK = 'veilarbportefolje/lagre_arbeidsliste/OK';
@@ -46,40 +49,40 @@ export default function reducer(state = initialState, action) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export function lagreArbeidsliste(arbeidsliste, brukere ) {
+// Action Creators
+export function lagreArbeidsliste(arbeidsliste, props){
+    const {valgteBrukere} = props;
     const liste = arbeidsliste.map((elem, index) => ({
-        fnr: brukere[index].fnr,
+        fnr: valgteBrukere[index].fnr,
         overskrift: elem.overskrift,
         kommentar: elem.kommentar,
         frist: elem.frist
     }));
     return dispatch =>
-        dispatch(postArbeidsliste(liste))
-            .then(res => )
-
+        postArbeidsliste(liste)(dispatch)
+            .then((res) => oppdaterState(res, liste, props, dispatch))
+            .then(()=> {
+                    dispatch(skjulModal());
+                    dispatch(markerAlleBrukere(false));
+                }
+            );
 }
 
 
-// Action Creators
+export function redigerArbeidsliste(formData, props) {
+    const arbeidsliste = {
+        kommentar: formData.kommentar,
+        overskrift: formData.overskrift,
+        frist: formData.frist
+    };
+
+    return dispatch =>
+        redigerArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
+            .then((res) => oppdaterArbeidsListeState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, props.lukkModal,
+                dispatch))
+            .then(() => props.lukkModal());
+}
+
 export function postArbeidsliste(arbeidsliste) {
     return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'post'), {
         OK: ARBEIDSLISTE_LAGRE_OK,
@@ -96,7 +99,7 @@ export function slettArbeidsliste(arbeidsliste) {
     });
 }
 
-export function redigerArbeidsliste(arbeidsliste, fnr) {
+export function putArbeidsliste(arbeidsliste, fnr) {
     return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'put', fnr), {
         OK: ARBEIDSLISTE_REDIGER_OK,
         FEILET: ARBEIDSLISTE_REDIGER_FEILET,

@@ -29,6 +29,7 @@ function FormikInput ({name}) {
                         name={name}
                         bredde="M"
                         feil={errors && touched ? {feilmelding: errors} : undefined}
+                        value={field.value}
                     />
                 )
             }}

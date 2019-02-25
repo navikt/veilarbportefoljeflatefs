@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { MouseEvent } from 'react';
-import { connect } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { isDirty } from 'redux-form';
 import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import CheckBox from '../components/tabell/checkbox';
@@ -15,24 +13,19 @@ import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
 import { FormattedMessage } from 'react-intl';
-import { REDIGER_ARBEIDSLISTE_FORM_NAME } from '../modal/rediger-arbeidsliste-form';
-import { skjulModal } from '../ducks/modal';
 
 interface MinOversiktBrukerPanelProps extends InjectedIntlProps {
     bruker: BrukerModell;
-    settMarkert: () => void;
+    settMarkert: (fnr: string, markert: boolean) => void;
     enhetId: string;
     filtervalg: FiltervalgModell;
     innloggetVeileder: string;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
-    formIsDirty: boolean;
-    skjulArbeidslisteModal: () => void;
 }
 
 interface MinOversiktBrukerPanelState {
-    redigerArbeidslisteModalIsOpen: boolean;
     apen: boolean;
 }
 
@@ -41,11 +34,8 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     constructor(props) {
         super(props);
         this.state = {
-            redigerArbeidslisteModalIsOpen: false,
-            apen: false
+            apen: false,
         };
-        this.redigerOnClickHandler = this.redigerOnClickHandler.bind(this);
-        this.lukkRedigerArbeidslisteModal = this.lukkRedigerArbeidslisteModal.bind(this);
         this.handleArbeidslisteButtonClick = this.handleArbeidslisteButtonClick.bind(this);
     }
 
@@ -54,21 +44,6 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
         this.setState({apen: !this.state.apen});
         if (this.props.onClick) {
             this.props.onClick(event);
-        }
-    }
-
-    redigerOnClickHandler() {
-        this.setState({redigerArbeidslisteModalIsOpen: true});
-    }
-
-    lukkRedigerArbeidslisteModal() {
-        const { intl, formIsDirty, skjulArbeidslisteModal } = this.props;
-        const dialogTekst = intl.formatMessage({
-            id: 'arbeidsliste-skjema.lukk-advarsel',
-        });
-        if (!formIsDirty || confirm(dialogTekst)) {
-            this.setState({redigerArbeidslisteModalIsOpen: false});
-            skjulArbeidslisteModal();
         }
     }
 
@@ -114,9 +89,6 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                     <ArbeidslistePanel
                         bruker={bruker}
                         innloggetVeileder={innloggetVeileder}
-                        redigerArbeidslisteModalIsOpen={this.state.redigerArbeidslisteModalIsOpen}
-                        lukkRedigerArbeidslisteModal={this.lukkRedigerArbeidslisteModal}
-                        redigerOnClickHandler={this.redigerOnClickHandler}
                     />
                 </Collapse>
             </li>
@@ -124,12 +96,4 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     }
 }
 
-const mapStateToProps = (state) => ({
-    formIsDirty: isDirty(REDIGER_ARBEIDSLISTE_FORM_NAME)(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    skjulArbeidslisteModal: () => dispatch(skjulModal()),
-});
-
-export default injectIntl<any>(connect(mapStateToProps, mapDispatchToProps)(MinoversiktBrukerPanel));
+export default injectIntl(MinoversiktBrukerPanel);

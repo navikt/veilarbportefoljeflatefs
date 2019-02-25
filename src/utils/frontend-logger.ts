@@ -7,4 +7,4 @@ export const logEvent = (logTag: string, fields?: {}, tags?: {}): void => {
     } else {
         console.log('Event', logTag, 'Fields:', fields, 'Tags:', tags); // tslint:disable-line
     }
-}
+};

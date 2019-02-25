@@ -37,10 +37,14 @@ interface StateProps {
     sorteringsrekkefolge: string;
 }
 
+interface IdentProps {
+    ident?: string;
+}
+
 interface DispatchProps {
     hentStatusTall: (enhet: string, ident: string|undefined) => void;
     hentEnhetTiltak: (enhet: string) => void;
-    doSettValgtVeileder: ({ident: string}) => void;
+    doSettValgtVeileder: (ident: IdentProps) => void;
     doSettSortering: (rekkefolge: string, felt: string) => void;
     hentPortefolje: (...args) => void;
     initalPaginering: (side: number, seAlle: boolean) => void;
@@ -88,8 +92,6 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
 
     render() {
         const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
-        console.log('veilederListe', veiledere.data.veilederListe);
-        console.log('props params',props);
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
         const innloggetVeileder = { ident: enheter.ident|| '', fornavn: '', etternavn: '', navn: ''};
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
@@ -180,7 +182,7 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentStatusTall: (enhet: string, veileder: string|undefined) => dispatch(hentStatusTall(enhet, veileder)),
     hentEnhetTiltak: (enhet: string) => dispatch(hentEnhetTiltak(enhet)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    doSettValgtVeileder: ({ident: string}) => dispatch(settValgtVeileder({ident: string})),
+    doSettValgtVeileder: (identProps: IdentProps) => dispatch(settValgtVeileder(identProps)),
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 

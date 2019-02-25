@@ -27,7 +27,7 @@ const screenSizes: ScreenSize[] = [
 
 const screenSizeToStr = (screenSize: ScreenSize) => {
     return screenSize.width + 'x' + screenSize.height;
-}
+};
 
 const finnSkjermStorrelse = (width: number, height: number): string => {
 
@@ -54,11 +54,11 @@ const finnSkjermStorrelse = (width: number, height: number): string => {
     });
 
     return screenSizeToStr(closestScreenSize);
-}
+};
 
 const erFullskjerm = () => {
     return screen.availWidth - window.innerWidth === 0;
-}
+};
 
 export const loggSkjermMetrikker = (side: Side): void => {
 
@@ -78,4 +78,4 @@ export const loggSkjermMetrikker = (side: Side): void => {
         brukerFullskjerm: erFullskjerm()
     });
 
-}
+};

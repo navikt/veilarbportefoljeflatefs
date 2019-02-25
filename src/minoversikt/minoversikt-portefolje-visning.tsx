@@ -24,7 +24,6 @@ import { ListevisningType } from '../ducks/ui/listevisning';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 
-
 interface DispatchProps {
     hentPortefolje: (...args) => void;
     doSettSortering: (rekkefolge: string, felt: string) => void;
@@ -37,10 +36,10 @@ interface StateProps {
     portefolje: PortefoljeState;
     sorteringsrekkefolge: string;
     valgtEnhet: ValgtEnhetModell;
-    sorteringsfelt: string,
-    visningsmodus: string,
+    sorteringsfelt: string;
+    visningsmodus: string;
     filtervalg: FiltervalgModell;
-    innloggetVeilederIdent: string,
+    innloggetVeilederIdent: string;
     feilmeldingModal: FeilmeldingModalModell;
     serverfeilModalSkalVises: boolean;
     sideStorrelse: number;

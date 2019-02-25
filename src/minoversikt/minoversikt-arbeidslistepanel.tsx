@@ -7,12 +7,12 @@ import { BrukerModell } from '../model-interfaces';
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
     innloggetVeileder: string;
-    redigerArbeidslisteModalIsOpen: boolean;
-    lukkRedigerArbeidslisteModal: () => void;
-    redigerOnClickHandler: () => void;
 }
 
-export default function ArbeidslistePanel({bruker, innloggetVeileder, redigerArbeidslisteModalIsOpen, lukkRedigerArbeidslisteModal, redigerOnClickHandler}: ArbeidslistePanelProps) {
+export default function ArbeidslistePanel({
+   bruker,
+   innloggetVeileder}: ArbeidslistePanelProps) {
+
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
     const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
     const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : String.fromCharCode(8212);
@@ -33,16 +33,8 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder, redigerArb
                                 veileder: sistEndretAv
                             }}
                         />
-                        <button
-                            className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
-                            onClick={redigerOnClickHandler}
-                        >
-                            <FormattedMessage id="arbeidsliste.kommentar.footer.knapp"/>
-                        </button>
                         <ArbeidslisteModalRediger
                             bruker={bruker}
-                            isOpen={redigerArbeidslisteModalIsOpen}
-                            lukkModal={lukkRedigerArbeidslisteModal}
                             innloggetVeileder={innloggetVeileder}
                             sistEndretDato={sistEndretDato}
                             sistEndretAv={sistEndretAv}

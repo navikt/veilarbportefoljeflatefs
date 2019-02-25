@@ -33,13 +33,13 @@ interface StateProps {
     };
     veiledere: VeilederModell[];
     valgtEnhet: ValgtEnhetModell;
-    sorteringsrekkefolge: Sorteringsrekkefolge,
-    filtervalg: FiltervalgModell,
-    valgteKolonner: Kolonne[],
+    sorteringsrekkefolge: Sorteringsrekkefolge;
+    filtervalg: FiltervalgModell;
+    valgteKolonner: Kolonne[];
 }
 
 interface DispatchProps {
-    settMarkert: (fnr:string, markert:string) => void;
+    settMarkert: (fnr: string, markert: boolean) => void;
 }
 
 type MinOversiktTabellProps  = StateProps & DispatchProps & OwnProps;

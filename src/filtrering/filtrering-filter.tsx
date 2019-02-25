@@ -137,7 +137,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     overskriftId="filtrering.filter.tittel.aktivitet"
                     hjelpetekstId="hjelpetekst.aktivitetsfilter"
                 />
-                <Dropdown name="Aktivitet" className="dropdown--140bredde">
+                <Dropdown name="Aktivitet" className="dropdown--160bredde">
                     <AktivitetFilterform
                         form="aktiviteter"
                         valg={aktiviteter(intl)}
