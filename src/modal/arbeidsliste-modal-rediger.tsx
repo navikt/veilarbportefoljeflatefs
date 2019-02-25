@@ -10,7 +10,7 @@ import { Formik } from 'formik';
 import { STATUS } from '../ducks/utils';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
-import { putArbeidsliste } from '../ducks/arbeidsliste';
+import { redigerArbeidsliste } from '../ducks/arbeidsliste';
 
 NavFrontendModal.setAppElement('#applikasjon');
 
@@ -123,16 +123,7 @@ const mapStateToProps= (state) => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-    onSubmit: (formData) => {
-        const arbeidsliste = {
-            kommentar: formData.kommentar,
-            overskrift: formData.overskrift,
-            frist: formData.frist
-        };
-        return dispatch(putArbeidsliste(arbeidsliste, props.fnr))
-            .then((res) => oppdaterArbeidsListeState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr,
-                dispatch))
-    }
+    onSubmit: (formData) => dispatch(redigerArbeidsliste(formData, props))
 });
 
 export default connect<StateProps,DispatchProps,Ownprops>(mapStateToProps, mapDispatchToProps)(ArbeidslisteModalRediger);

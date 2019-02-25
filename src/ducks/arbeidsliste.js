@@ -1,4 +1,4 @@
-import {STATUS, doThenDispatch, toJson} from './utils';
+import {STATUS, doThenDispatch} from './utils';
 import { httpArbeidsliste } from '../middleware/api';
 import {skjulModal} from "./modal";
 import {markerAlleBrukere} from "./portefolje";
@@ -78,7 +78,7 @@ export function redigerArbeidsliste(formData, props) {
 
     return dispatch =>
         putArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
-            .then((res) => oppdaterArbeidsListeState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, props.lukkModal,
+            .then((res) => oppdaterArbeidsListeState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr,
                 dispatch))
             .then(() =>  dispatch(skjulModal()));
 }
