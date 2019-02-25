@@ -99,6 +99,8 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
 
         const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
 
+        console.log(veiledere.data.veilederListe);
+
         const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
             <FormattedMessage
                 id="annen.veileder.portefolje.advarsel"
@@ -114,7 +116,7 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                     <div className="minoversikt-side blokk-xl">
                         {visesAnnenVeiledersPortefolje ?
-                            <Link to="veiledere" className="typo-normal tilbaketilveileder">
+                            <Link to="/veiledere" className="typo-normal tilbaketilveileder">
                                 <i className="chevron--venstre" />
                                 <span>
                                     <FormattedMessage id="minoversikt.link.til.veilederoversikt" />

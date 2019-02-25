@@ -2,7 +2,7 @@ import React from 'react';
 import {Field, getIn} from "formik";
 import Datovelger from "nav-datovelger/dist/datovelger/Datovelger";
 import SkjemaelementFeilmelding from "nav-frontend-skjema/lib/skjemaelement-feilmelding";
-import {validerDatoFeldt} from '../../utils/dato-utils';
+import {validerDatoFeldt, ISODateToDatePicker} from '../../utils/dato-utils';
 
 
 function FormikDatoVelger({name}) {

@@ -54,10 +54,11 @@ function ArbeidslisteModalRediger({
 
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
 
+
     const initialValues = {
         overskrift: bruker.arbeidsliste.overskrift || '',
         kommentar: bruker.arbeidsliste.kommentar || '',
-        frist: bruker.arbeidsliste.frist
+        frist: new Date(bruker.arbeidsliste.frist) || null
     };
 
     return (
@@ -71,7 +72,10 @@ function ArbeidslisteModalRediger({
 
             <Formik
                 initialValues={initialValues}
-                onSubmit={(values) => onSubmit(values)}
+                onSubmit={(values, actions) => {
+                    onSubmit(values);
+                    actions.resetForm();
+                }}
                 render={(formikProps)=> (
                     <NavFrontendModal
                         className="arbeidsliste-modal"
@@ -103,6 +107,8 @@ function ArbeidslisteModalRediger({
     );
 }
 export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, fnr, lukkModal, dispatch) {
+    console.log('fnr', fnr);
+
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -123,7 +129,7 @@ const mapStateToProps= (state) => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
     skjulArbeidslisteModal: () => dispatch(skjulModal()),
-    onSubmit: (formData) => () => dispatch(redigerArbeidsliste(formData, props))
+    onSubmit: (formData) => dispatch(redigerArbeidsliste(formData, props))
 });
 
 export default connect<StateProps,DispatchProps,Ownprops>(mapStateToProps, mapDispatchToProps)(ArbeidslisteModalRediger);

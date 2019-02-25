@@ -77,10 +77,10 @@ export function redigerArbeidsliste(formData, props) {
     };
 
     return dispatch =>
-        redigerArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
+        putArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
             .then((res) => oppdaterArbeidsListeState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, props.lukkModal,
                 dispatch))
-            .then(() => props.lukkModal());
+            .then(() =>  dispatch(skjulModal()));
 }
 
 export function postArbeidsliste(arbeidsliste) {

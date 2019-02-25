@@ -5,7 +5,6 @@ import {Field,getIn} from "formik";
 function FormikTekstArea({name}) {
 
     const validate =  (value:string) => {
-        console.log(value);
         let error: undefined| string;
         if(!value){
             error ='Påkrevd kommentar!';

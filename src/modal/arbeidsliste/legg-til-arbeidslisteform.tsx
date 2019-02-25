@@ -35,7 +35,10 @@ function LeggTilArbeidslisteForm({ lukkModal, valgteBrukere, innloggetVeileder, 
     return (
         <Formik
             initialValues={{ arbeidsliste: initialValues }}
-            onSubmit={values => onSubmit(values.arbeidsliste)}
+            onSubmit={(values,actions) => {
+                onSubmit(values.arbeidsliste)
+                actions.resetForm();
+            }}
             render={({values, dirty}) => {
                 setFormIsDirty(dirty);
                 return (
