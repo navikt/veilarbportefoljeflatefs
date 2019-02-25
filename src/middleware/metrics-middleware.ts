@@ -113,7 +113,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
 
     }
 
-    next(action);
+    return next(action);
 };
 
 const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
