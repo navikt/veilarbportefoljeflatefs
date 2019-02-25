@@ -1,4 +1,4 @@
-import { STATUS, doThenDispatch } from './utils';
+import {STATUS, doThenDispatch, toJson} from './utils';
 import { httpArbeidsliste } from '../middleware/api';
 import {skjulModal} from "./modal";
 import {markerAlleBrukere} from "./portefolje";

@@ -8,7 +8,7 @@ import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { BrukerModell, Status } from '../model-interfaces';
-import { redigerArbeidsliste } from '../ducks/arbeidsliste';
+import { putArbeidsliste } from '../ducks/arbeidsliste';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { STATUS } from '../ducks/utils';
 import { AppState } from '../reducer';
@@ -138,7 +138,7 @@ const mapDispatchToProps = () => ({
             overskrift: formData.overskrift,
             frist: formData.frist
         };
-        redigerArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
+        putArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
             .then((res) => oppdaterState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, props.lukkModal,
                 dispatch))
             .then(() => props.lukkModal());

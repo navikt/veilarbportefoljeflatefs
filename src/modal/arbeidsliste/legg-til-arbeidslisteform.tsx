@@ -1,8 +1,8 @@
 import {STATUS} from "../../ducks/utils";
 import * as React from "react";
 import {ArbeidslisteDataModell, BrukerModell, Status, VeilederModell} from "../../model-interfaces";
-import {lagreArbeidsliste} from "../../ducks/arbeidsliste";
-import {oppdaterArbeidslisteForBruker} from "../../ducks/portefolje";
+import {postArbeidsliste} from "../../ducks/arbeidsliste";
+import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from "../../ducks/portefolje";
 import {visServerfeilModal} from "../../ducks/modal-serverfeil";
 import {LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal} from "../../ducks/modal-feilmelding-brukere";
 import {leggTilStatustall} from "../../ducks/statustall";
@@ -12,6 +12,7 @@ import ArbeidslisteForm from "./arbeidsliste-form";
 import {connect} from "react-redux";
 import {Hovedknapp} from "nav-frontend-knapper";
 import {FormattedMessage} from "react-intl";
+import {skjulModal} from "../../ducks/modal";
 
 interface OwnProps {
     valgteBrukere: BrukerModell[];
@@ -36,7 +37,7 @@ function LeggTilArbeidslisteForm({ lukkModal, valgteBrukere, innloggetVeileder, 
         <Formik
             initialValues={{ arbeidsliste: initialValues }}
             onSubmit={(values,actions) => {
-                onSubmit(values.arbeidsliste)
+                onSubmit(values.arbeidsliste);
                 actions.resetForm();
             }}
             render={({values, dirty}) => {
@@ -100,8 +101,25 @@ const mapStateToProps = (state: AppState) => ({
 
 
 const mapDispatchToProps = (dispatch, props) => ({
-    onSubmit: (formData) => dispatch(lagreArbeidsliste(formData, props))
+    onSubmit: (arbeidsliste) => {
+        const {valgteBrukere} = props;
+        const liste = arbeidsliste.map((elem, index) => ({
+            fnr: valgteBrukere[index].fnr,
+            overskrift: elem.overskrift,
+            kommentar: elem.kommentar,
+            frist: elem.frist
+        }));
+        return postArbeidsliste(liste)(dispatch)
+            .then((data) => {
+                console.log('data', data);
+                oppdaterState(data, liste, props, dispatch)
+            })
+            .then(()=> {
+                    dispatch(skjulModal());
+                    dispatch(markerAlleBrukere(false));
+                }
+            )
+    }
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidslisteForm);

@@ -5,13 +5,12 @@ import { FormattedMessage } from 'react-intl';
 import RedigerArbeidslisteForm from './arbeidsliste/rediger-arbeidsliste-form';
 import { BrukerModell, Status } from '../model-interfaces';
 import { useState } from 'react';
-import { skjulModal } from '../ducks/modal';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { STATUS } from '../ducks/utils';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
-import { redigerArbeidsliste } from '../ducks/arbeidsliste';
+import { putArbeidsliste } from '../ducks/arbeidsliste';
 
 NavFrontendModal.setAppElement('#applikasjon');
 
@@ -23,7 +22,6 @@ interface Ownprops {
 }
 
 interface DispatchProps {
-    skjulArbeidslisteModal: () => void;
     onSubmit: (formdata: any) => void;
 }
 
@@ -39,7 +37,6 @@ function ArbeidslisteModalRediger({
   arbeidslisteStatus,
   sistEndretAv,
   sistEndretDato,
-  skjulArbeidslisteModal,
   onSubmit
 }: ArbeidslisteModalRedigerProps) {
     const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +45,6 @@ function ArbeidslisteModalRediger({
         const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
         if (!dirty || confirm(dialogTekst)) {
             setIsOpen(false);
-            skjulArbeidslisteModal();
         }
     };
 
@@ -72,6 +68,7 @@ function ArbeidslisteModalRediger({
             <Formik
                 initialValues={initialValues}
                 onSubmit={(values, actions) => {
+                    setIsOpen(false);
                     onSubmit(values);
                     actions.resetForm();
                 }}
@@ -105,7 +102,7 @@ function ArbeidslisteModalRediger({
 
     );
 }
-export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, fnr, lukkModal, dispatch) {
+export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, fnr, dispatch) {
 
     if (!res) {
         return visServerfeilModal()(dispatch);
@@ -126,8 +123,16 @@ const mapStateToProps= (state) => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-    skjulArbeidslisteModal: () => dispatch(skjulModal()),
-    onSubmit: (formData) => dispatch(redigerArbeidsliste(formData, props))
+    onSubmit: (formData) => {
+        const arbeidsliste = {
+            kommentar: formData.kommentar,
+            overskrift: formData.overskrift,
+            frist: formData.frist
+        };
+        return dispatch(putArbeidsliste(arbeidsliste, props.fnr))
+            .then((res) => oppdaterArbeidsListeState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr,
+                dispatch))
+    }
 });
 
 export default connect<StateProps,DispatchProps,Ownprops>(mapStateToProps, mapDispatchToProps)(ArbeidslisteModalRediger);

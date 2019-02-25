@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import Datovelger from '../components/datovelger/datovelger';
 import Textarea from '../components/textarea/textarea';
-import { lagreArbeidsliste } from '../ducks/arbeidsliste';
+import { postArbeidsliste } from '../ducks/arbeidsliste';
 import { markerAlleBrukere, oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { leggTilStatustall } from '../ducks/statustall';
 import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
@@ -215,8 +215,11 @@ const mapDispatchToProps = () => ({
             kommentar: formData.arbeidsliste[index].kommentar,
             frist: formData.arbeidsliste[index].frist
         }));
-        lagreArbeidsliste(liste)(dispatch)
-            .then((res) => oppdaterState(res, liste, props, dispatch));
+        postArbeidsliste(liste)(dispatch)
+            .then((res) => {
+                console.log('res', res);
+                oppdaterState(res, liste, props, dispatch)
+            });
         dispatch(skjulModal());
         dispatch(markerAlleBrukere(false));
     }

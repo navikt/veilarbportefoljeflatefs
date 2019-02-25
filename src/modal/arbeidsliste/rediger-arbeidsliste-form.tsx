@@ -16,7 +16,6 @@ interface RedigerArbeidslisteProps {
 
 
 function RedigerArbeidsliste (props: RedigerArbeidslisteProps) {
-    console.log('heps', props.sistEndretDato);
     return (
         <Form>
             <div className="input-fields">
