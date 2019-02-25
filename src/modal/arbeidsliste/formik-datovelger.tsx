@@ -21,8 +21,7 @@ function FormikDatoVelger({name}) {
                                 id: 'fristInput',
                                 name: 'frist',
                                 placeholder: 'dd.mm.åååå',
-                                ariaLabel: 'Frist:',
-                                onChange: (value: string) => setFieldValue(field.name, new Date(value)),
+                                ariaLabel: 'Frist:'
                             }}
                             id="fristDatovelger"
                             onChange={(date: Date) => setFieldValue(field.name, date)}

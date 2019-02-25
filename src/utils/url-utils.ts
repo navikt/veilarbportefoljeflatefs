@@ -42,8 +42,9 @@ export function setFraBrukerIUrl(bruker: string) {
     parsed.fraBruker = bruker;
 
     const lastSearch = localStorage.getItem('lastsearch');
-    lastSearch  &&
-        localStorage.setItem('lastSearch', lastSearch.concat('&fraBruker = bruker'));
+    if(lastSearch) {
+        localStorage.setItem('lastSearch', lastSearch.concat(`&fraBruker=${bruker}`));
+    }
 
     const stringified = queryString.stringify(parsed);
     history.replace(`${ window.location.pathname}?${stringified}`);

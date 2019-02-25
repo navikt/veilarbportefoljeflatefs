@@ -217,8 +217,7 @@ const mapDispatchToProps = () => ({
         }));
         postArbeidsliste(liste)(dispatch)
             .then((res) => {
-                console.log('res', res);
-                oppdaterState(res, liste, props, dispatch)
+                oppdaterState(res, liste, props, dispatch);
             });
         dispatch(skjulModal());
         dispatch(markerAlleBrukere(false));
