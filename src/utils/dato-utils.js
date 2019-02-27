@@ -190,7 +190,7 @@ export function validerDatoFeldt(input, fra, valgfritt) {
         error = 'Du må angi en frist';
 
     } else if (input && !erGyldigISODato(input)) {
-        error = 'Ugyldig dato';
+        error = 'Datoen du har oppgitt er ikke en gyldig dato';
     } else if (
         fra &&
         (fraDato.isAfter(inputDato, 'day'))

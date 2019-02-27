@@ -1,15 +1,24 @@
 import React from 'react';
 import {Textarea} from "nav-frontend-skjema";
 import {Field,getIn} from "formik";
+import {injectIntl} from 'react-intl'
 
-function FormikTekstArea({name}) {
+const KOMMENTAR_MAKS_LENGDE = 500;
+
+function FormikTekstArea({name, intl}) {
 
     const validate =  (value:string) => {
         let error: undefined| string;
         if(!value){
-            error ='Påkrevd kommentar!';
-        }else if(value.length > 500) {
-            error = 'Før langttt!!!';}
+            error = intl.formatMessage({
+                id: 'legg-til.arbeidsliste-form.feilmelding.overskrift.tekst.mangler'
+            });
+        }else if(value.length > KOMMENTAR_MAKS_LENGDE) {
+            error = intl.formatMessage({
+                id: 'legg-til-arbeidsliste-form.feilmelding.kommentar-lengde'},
+           {KOMMENTAR_MAKS_LENGDE}
+                );
+        }
         return error;
     };
 
@@ -28,9 +37,10 @@ function FormikTekstArea({name}) {
                         value={field.value}
                         name={name}
                         feil ={errors && touched ? {feilmelding: errors} : undefined}
+                        maxLength={500}
                     />)}}
         </Field>
     )
 }
 
-export default FormikTekstArea;
+export default injectIntl(FormikTekstArea);

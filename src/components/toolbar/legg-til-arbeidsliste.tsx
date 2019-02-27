@@ -5,7 +5,7 @@ import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
 import {  visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
 import { ToolbarPosisjon } from './toolbar';
-import {withRouter, RouteProps, RouteComponentProps} from "react-router-dom";
+import {withRouter, RouteComponentProps} from "react-router-dom";
 
 interface StateProps {
     portefolje: PortefoljeState;
@@ -20,19 +20,14 @@ interface DispatchProps {
 interface OwnProps {
     visesAnnenVeiledersPortefolje: boolean;
     toolbarPosisjon?: ToolbarPosisjon;
-    match: {
-        params: {
-            ident?: string
-        }
-    }
 }
 
-type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps ;
+type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps & RouteComponentProps< {ident: string}> ;
 
 class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     constructor(props) {
         super(props);
-
+        console.log('props', props);
         this.onClickHandler = this.onClickHandler.bind(this);
     }
 
@@ -63,7 +58,12 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     render() {
         const { portefolje } = this.props;
         const valgteBrukere = portefolje.data.brukere.filter((bruker) => bruker.markert === true);
-        const skalSkjules =  this.props.match.params.ident ? (this.props.veilederIdent !== this.props.veilederIdent) : false;
+        const path = this.props.match.path.split('/')[1];
+        const skalSkjules =
+            path === 'portefolje' ?
+                this.props.match.params.ident ?
+                    this.props.match.params.ident !== this.props.veilederIdent : false
+                : true;
         const modalSkalVises = this.props.visModal === true;
 
         if (skalSkjules) {

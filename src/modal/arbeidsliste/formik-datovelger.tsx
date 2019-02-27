@@ -16,6 +16,9 @@ function FormikDatoVelger({name}) {
                 const error = getIn(errors, name);
                 return(
                     <div className="datovelger skjemaelement">
+                        <label className="skjemaelement__label">
+                            Frist
+                        </label>
                         <Datovelger
                             input={{
                                 id: 'fristInput',
@@ -26,6 +29,7 @@ function FormikDatoVelger({name}) {
                             id="fristDatovelger"
                             onChange={(date: Date) => setFieldValue(field.name, date)}
                             dato={field.value}
+                            dayPickerProps={{className : "datovelger__DayPicker"}}
                         />
                         <SkjemaelementFeilmelding feil={error ? {feilmelding: error}: undefined}/>
                     </div>
