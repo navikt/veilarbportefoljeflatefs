@@ -3,7 +3,7 @@ import {Field, getIn} from "formik";
 import Datovelger from "nav-datovelger/dist/datovelger/Datovelger";
 import SkjemaelementFeilmelding from "nav-frontend-skjema/lib/skjemaelement-feilmelding";
 import {validerDatoFeldt} from '../../utils/dato-utils';
-
+import classNames from 'classnames';
 
 function FormikDatoVelger({name}) {
     return (
@@ -14,8 +14,9 @@ function FormikDatoVelger({name}) {
         >
             {({ field, form: {touched, errors, setFieldValue}}) => {
                 const error = getIn(errors, name);
+                const datePickerClassName = classNames( 'skjemaelement', 'datovelger', { 'datovelger--harFeil': error });
                 return(
-                    <div className="datovelger skjemaelement">
+                    <div className={datePickerClassName}>
                         <label className="skjemaelement__label">
                             Frist
                         </label>
