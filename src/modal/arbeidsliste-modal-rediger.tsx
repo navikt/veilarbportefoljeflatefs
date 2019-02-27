@@ -53,7 +53,7 @@ function ArbeidslisteModalRediger({
     const initialValues = {
         overskrift: bruker.arbeidsliste.overskrift || '',
         kommentar: bruker.arbeidsliste.kommentar || '',
-        frist: bruker.arbeidsliste.frist ? new Date(bruker.arbeidsliste.frist) : null
+        frist: bruker.arbeidsliste.frist ? bruker.arbeidsliste.frist : ''
     };
 
     return (

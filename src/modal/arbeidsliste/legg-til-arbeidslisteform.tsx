@@ -31,7 +31,7 @@ interface DispatchProps {
 
 function LeggTilArbeidslisteForm({ lukkModal, valgteBrukere, innloggetVeileder, arbeidslisteStatus, onSubmit, setFormIsDirty }: OwnProps & StateProps& DispatchProps) {
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
-    const initialValues = valgteBrukere.map(bruker => ({kommentar: '', frist: null, overskrift: '' }));
+    const initialValues = valgteBrukere.map(bruker => ({kommentar: '', frist:  '', overskrift: '' }));
 
     return (
         <Formik
