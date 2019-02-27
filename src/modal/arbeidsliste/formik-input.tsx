@@ -11,7 +11,7 @@ function FormikInput ({name, intl}) {
         let error: undefined| string;
         if(!value){
             error = intl.formatMessage({
-                id: 'legg-til.arbeidsliste-form.feilmelding.tekst.mangler'
+                id: 'legg-til.arbeidsliste-form.feilmelding.overskrift.tekst.mangler'
             });
         }else if(value.length > OVERSKRIFT_MAKS_LENGDE) {
             error = intl.formatMessage({
