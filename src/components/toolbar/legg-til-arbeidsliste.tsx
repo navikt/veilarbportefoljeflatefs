@@ -10,6 +10,7 @@ import {withRouter, RouteProps, RouteComponentProps} from "react-router-dom";
 interface StateProps {
     portefolje: PortefoljeState;
     visModal?: boolean;
+    veilederIdent: string;
 }
 
 interface DispatchProps {
@@ -62,7 +63,7 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     render() {
         const { portefolje } = this.props;
         const valgteBrukere = portefolje.data.brukere.filter((bruker) => bruker.markert === true);
-        const skalSkjules = this.props.match.params.ident;
+        const skalSkjules =  this.props.match.params.ident ? (this.props.veilederIdent !== this.props.veilederIdent) : false;
         const modalSkalVises = this.props.visModal === true;
 
         if (skalSkjules) {
@@ -79,7 +80,8 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
 
 const mapStateToProps = (state) => ({
     visModal: state.modal.visModal,
-    portefolje: state.portefolje
+    portefolje: state.portefolje,
+    veilederIdent: state.enheter.ident
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
