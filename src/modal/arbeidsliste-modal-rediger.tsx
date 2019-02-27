@@ -11,6 +11,7 @@ import { STATUS } from '../ducks/utils';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { redigerArbeidsliste } from '../ducks/arbeidsliste';
+import {ISODateToDatePicker} from '../utils/dato-utils';
 
 NavFrontendModal.setAppElement('#applikasjon');
 
@@ -53,7 +54,7 @@ function ArbeidslisteModalRediger({
     const initialValues = {
         overskrift: bruker.arbeidsliste.overskrift || '',
         kommentar: bruker.arbeidsliste.kommentar || '',
-        frist: bruker.arbeidsliste.frist ? bruker.arbeidsliste.frist : ''
+        frist: bruker.arbeidsliste.frist ? ISODateToDatePicker(new Date(bruker.arbeidsliste.frist)) : ''
     };
 
     return (

@@ -27,6 +27,7 @@ function FormikDatoVelger({name}) {
                             id="fristDatovelger"
                             onChange={(date: string) => setFieldValue(field.name, date)}
                             valgtDato={field.value}
+                            dayPickerProps={{className : "datovelger__DayPicker"}}
                         />
                         <SkjemaelementFeilmelding feil={error ? {feilmelding: error}: undefined}/>
                     </div>

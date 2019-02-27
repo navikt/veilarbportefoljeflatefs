@@ -11,6 +11,11 @@ import VeiledereSide from "./veiledere/veiledere-side";
 import MinOversiktSide from "./minoversikt/minoversikt-side";
 import TilbakemeldingFab from "./components/tilbakemelding/tilbakemelding-fab";
 
+import * as moment from 'moment';
+import 'moment/locale/nb';
+
+moment.locale('nb');
+
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(window.location.search).vistekster; // eslint-disable-line no-undef
     if (skalViseTekstnokkel) {
