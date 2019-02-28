@@ -4,6 +4,7 @@ import {skjulModal} from "./modal";
 import {markerAlleBrukere} from "./portefolje";
 import {oppdaterState} from "../modal/arbeidsliste/legg-til-arbeidslisteform";
 import {oppdaterArbeidsListeState} from "../modal/arbeidsliste-modal-rediger";
+import {dateToISODate} from "../utils/dato-utils";
 
 // Actions
 export const ARBEIDSLISTE_LAGRE_OK = 'veilarbportefolje/lagre_arbeidsliste/OK';
@@ -73,7 +74,7 @@ export function redigerArbeidsliste(formData, props) {
     const arbeidsliste = {
         kommentar: formData.kommentar,
         overskrift: formData.overskrift,
-        frist: formData.frist
+        frist: formData.frist ? dateToISODate(formData.frist) : null
     };
 
     return dispatch =>

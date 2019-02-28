@@ -13,6 +13,7 @@ import {connect} from "react-redux";
 import {Hovedknapp} from "nav-frontend-knapper";
 import {FormattedMessage} from "react-intl";
 import {skjulModal} from "../../ducks/modal";
+import {dateToISODate} from "../../utils/dato-utils";
 
 interface OwnProps {
     valgteBrukere: BrukerModell[];
@@ -107,11 +108,10 @@ const mapDispatchToProps = (dispatch, props) => ({
             fnr: valgteBrukere[index].fnr,
             overskrift: elem.overskrift,
             kommentar: elem.kommentar,
-            frist: elem.frist
+            frist: elem.frist ? dateToISODate(elem.frist) : null
         }));
         return postArbeidsliste(liste)(dispatch)
             .then((data) => {
-                console.log('data', data);
                 oppdaterState(data, liste, props, dispatch)
             })
             .then(()=> {

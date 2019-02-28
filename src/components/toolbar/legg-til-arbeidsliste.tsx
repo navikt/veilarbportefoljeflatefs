@@ -27,7 +27,6 @@ type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps & RouteCom
 class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     constructor(props) {
         super(props);
-        console.log('props', props);
         this.onClickHandler = this.onClickHandler.bind(this);
     }
 
