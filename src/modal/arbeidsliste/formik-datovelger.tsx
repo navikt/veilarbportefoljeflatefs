@@ -2,13 +2,13 @@ import React from 'react';
 import {Field, FieldProps, getIn} from "formik";
 import Datovelger from "nav-datovelger/dist/datovelger/Datovelger";
 import SkjemaelementFeilmelding from "nav-frontend-skjema/lib/skjemaelement-feilmelding";
-import {validerDatoFeldt, dateToISODate} from '../../utils/dato-utils';
+import {validerDatoFeldt} from '../../utils/dato-utils';
 import classNames from 'classnames';
 
 function FormikDatoVelger({name}) {
     return (
         <Field
-            validate={(value: string) => validerDatoFeldt(dateToISODate(value), new Date(), true)}
+            validate={(value: string) => validerDatoFeldt(value, new Date(), true)}
             name={name}
             id={name}
         >
@@ -22,7 +22,7 @@ function FormikDatoVelger({name}) {
                                 id: 'fristInput',
                                 name: 'frist',
                                 placeholder: 'dd.mm.åååå',
-                                ariaLabel: 'Frist:',
+                                ariaLabel: 'Frist:'
                             }}
                             id="fristDatovelger"
                             onChange={(date: string) => setFieldValue(field.name, date)}
