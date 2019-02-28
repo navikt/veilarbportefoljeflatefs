@@ -6,12 +6,12 @@ import RedigerArbeidslisteForm from './arbeidsliste/rediger-arbeidsliste-form';
 import { BrukerModell, Status } from '../model-interfaces';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { Formik } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import { STATUS } from '../ducks/utils';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { redigerArbeidsliste } from '../ducks/arbeidsliste';
-import {ISODateToDatePicker} from '../utils/dato-utils';
+import { ISODateToDatePicker } from '../utils/dato-utils';
 
 NavFrontendModal.setAppElement('#applikasjon');
 
@@ -30,6 +30,13 @@ interface StateProps {
     arbeidslisteStatus: Status;
 }
 
+interface FormikPropsValues {
+    kommentar: string;
+    frist: string | null;
+    overskrift: string;
+
+}
+
 type ArbeidslisteModalRedigerProps = StateProps & Ownprops & DispatchProps;
 
 function ArbeidslisteModalRediger({
@@ -42,10 +49,11 @@ function ArbeidslisteModalRediger({
 }: ArbeidslisteModalRedigerProps) {
     const [isOpen, setIsOpen] = useState(false);
 
-    const lukkModal = (dirty: boolean)=> {
+    const lukkModal = (formikProps: FormikProps<FormikPropsValues>)=> {
         const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
-        if (!dirty || confirm(dialogTekst)) {
+        if (!formikProps.dirty || confirm(dialogTekst)) {
             setIsOpen(false);
+            formikProps.resetForm();
         }
     };
 
@@ -54,7 +62,7 @@ function ArbeidslisteModalRediger({
     const initialValues = {
         overskrift: bruker.arbeidsliste.overskrift || '',
         kommentar: bruker.arbeidsliste.kommentar || '',
-        frist: bruker.arbeidsliste.frist ? ISODateToDatePicker(new Date(bruker.arbeidsliste.frist)) : ''
+        frist: bruker.arbeidsliste.frist ? ISODateToDatePicker(new Date(bruker.arbeidsliste.frist)) : null
     };
 
     return (
@@ -78,7 +86,7 @@ function ArbeidslisteModalRediger({
                         className="arbeidsliste-modal"
                         contentLabel="arbeidsliste"
                         isOpen={isOpen}
-                        onRequestClose={()=> lukkModal(formikProps.dirty)}
+                        onRequestClose={()=> lukkModal(formikProps)}
                         closeButton
                     >
                         <div className="modal-header-wrapper">
@@ -94,7 +102,7 @@ function ArbeidslisteModalRediger({
                                 laster={laster}
                                 sistEndretDato={sistEndretDato}
                                 sistEndretAv={sistEndretAv}
-                                lukkModal={()=>lukkModal(formikProps.dirty)}
+                                lukkModal={()=>lukkModal(formikProps)}
                             />
                         </div>
                     </NavFrontendModal>)}

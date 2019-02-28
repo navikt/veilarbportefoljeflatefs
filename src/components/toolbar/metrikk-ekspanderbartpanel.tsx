@@ -30,12 +30,14 @@ class MetrikkEkspanderbartpanel extends React.Component<AllProps, MetrikkEkspand
         // onClick og lamellNavn er plukket ut slik at de ikke blir sendt videre
         const { children, onClick, lamellNavn, ...rest } = this.props;
         return (
-            <Ekspanderbartpanel
-                onClick={this.handleOnClick}
-                {...rest}
-            >
-                {children}
-            </Ekspanderbartpanel>
+            <div className="blokk-xxs">
+                <Ekspanderbartpanel
+                    onClick={this.handleOnClick}
+                    {...rest}
+                >
+                    {children}
+                </Ekspanderbartpanel>
+            </div>
         );
     }
 }
