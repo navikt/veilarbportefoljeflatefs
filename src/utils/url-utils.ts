@@ -42,8 +42,10 @@ export function setFraBrukerIUrl(bruker: string) {
     parsed.fraBruker = bruker;
 
     const lastSearch = localStorage.getItem('lastsearch');
-    if(lastSearch) {
-        localStorage.setItem('lastSearch', lastSearch.concat(`&fraBruker=${bruker}`));
+    const fnrRegex = new RegExp('^[0-9]{11}$');
+
+    if(lastSearch && fnrRegex.test(lastSearch)) {
+        localStorage.setItem('lastsearch', lastSearch.replace(fnrRegex,parsed));
     }
 
     const stringified = queryString.stringify(parsed);
