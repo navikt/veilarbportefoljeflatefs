@@ -49,12 +49,17 @@ function ArbeidslisteModalRediger({
 }: ArbeidslisteModalRedigerProps) {
     const [isOpen, setIsOpen] = useState(false);
 
-    const lukkModal = (formikProps: FormikProps<FormikPropsValues>)=> {
+    const lukkModalConfirm = (formikProps: FormikProps<FormikPropsValues>)=> {
         const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
         if (!formikProps.dirty || confirm(dialogTekst)) {
             setIsOpen(false);
             formikProps.resetForm();
         }
+    };
+
+    const lukkModal = (formikProps: FormikProps<FormikPropsValues>) => {
+        setIsOpen(false);
+        formikProps.resetForm();
     };
 
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
@@ -86,7 +91,7 @@ function ArbeidslisteModalRediger({
                         className="arbeidsliste-modal"
                         contentLabel="arbeidsliste"
                         isOpen={isOpen}
-                        onRequestClose={()=> lukkModal(formikProps)}
+                        onRequestClose={()=> lukkModalConfirm(formikProps)}
                         closeButton
                     >
                         <div className="modal-header-wrapper">
