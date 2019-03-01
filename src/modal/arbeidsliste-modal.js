@@ -97,6 +97,7 @@ class ArbeidslisteModal extends Component {
     render() {
         const { valgteBrukere } = this.props;
         const fjerne = valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
+        console.log('fjerne', fjerne);
         return (
             <NavFrontendModal
                 className={'arbeidsliste-modal'}
