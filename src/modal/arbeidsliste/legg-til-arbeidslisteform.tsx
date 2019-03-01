@@ -28,9 +28,19 @@ interface StateProps {
 
 interface DispatchProps {
     onSubmit: (formData) => void;
+    lukkModal: () => void;
+    fjernMarkerteBrukere: ()=> void;
 }
 
-function LeggTilArbeidslisteForm({ lukkModal, valgteBrukere, innloggetVeileder, arbeidslisteStatus, onSubmit, setFormIsDirty }: OwnProps & StateProps& DispatchProps) {
+function LeggTilArbeidslisteForm({
+    lukkModal,
+    valgteBrukere,
+    innloggetVeileder,
+    arbeidslisteStatus,
+    onSubmit,
+    setFormIsDirty,
+    fjernMarkerteBrukere}: OwnProps & StateProps& DispatchProps) {
+
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     const initialValues = valgteBrukere.map(bruker => ({kommentar: '', frist:  '', overskrift: '' }));
 
@@ -41,20 +51,24 @@ function LeggTilArbeidslisteForm({ lukkModal, valgteBrukere, innloggetVeileder, 
                 onSubmit(values.arbeidsliste);
                 actions.resetForm();
             }}
-            render={({values, dirty}) => {
-                setFormIsDirty(dirty);
+            render={(formikProps) => {
+                setFormIsDirty(formikProps.dirty);
                 return (
                     <Form>
                         <ArbeidslisteForm
                             valgteBrukere={valgteBrukere}
-                            arbeidsliste={values.arbeidsliste}
+                            arbeidsliste={formikProps.values.arbeidsliste}
                         />
                         <div>
                             <div className="modal-footer">
                                 <Hovedknapp className="knapp knapp--hoved" spinner={laster}>
                                     <FormattedMessage id="modal.knapp.lagre" />
                                 </Hovedknapp>
-                                <button type="button" className="knapp" onClick={lukkModal}>
+                                <button type="button" className="knapp" onClick ={() => {
+                                    formikProps.resetForm();
+                                    fjernMarkerteBrukere();
+                                    lukkModal()
+                                }}>
                                     <FormattedMessage id="modal.knapp.avbryt" />
                                 </button>
                             </div>
@@ -119,7 +133,9 @@ const mapDispatchToProps = (dispatch, props) => ({
                     dispatch(markerAlleBrukere(false));
                 }
             )
-    }
+    },
+    lukkModal: ()=> dispatch(skjulModal()),
+    fjernMarkerteBrukere: () => dispatch(markerAlleBrukere(false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidslisteForm);
