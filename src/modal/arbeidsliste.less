@@ -1,0 +1,114 @@
+
+.modal {
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+    border-radius: 3px;
+
+    .modal-header {
+        height: 4rem;
+        border-bottom: 1px solid #B7B1A9;
+        padding: 1.13rem 1rem;
+    }
+    .arbeidsliste__modal {
+
+        .feedbacksummary {
+            margin: 0 2rem 1rem 2rem;
+            padding: 1.5rem;
+            border-radius: 4px;
+            background-color: #BA3A26;
+            color: #FFF;
+            list-style-position: inside;
+            &:focus {
+                outline: 0;
+                box-shadow: 0 0 0 3px #ffbd66;
+            }
+            a {
+                color: #FFF;
+                border-bottom: 1px solid #FFF;
+                text-decoration: none;
+            }
+        }
+        .arbeidsliste-info-tekst {
+            padding: 1rem 2rem 0 2rem;
+        }
+
+        .arbeidsliste-normaltekst {
+            padding-left: 2rem;
+        }
+        .arbeidsliste-listetekst {
+            padding-left: 1rem;
+            padding-bottom: 0.5rem;
+            p {
+                margin-bottom: 0.2rem;
+            }
+        }
+
+        .input-fields {
+            padding: 1rem 2rem;
+            border: 0;
+        }
+        .arbeidslistekommentar {
+            width: 100%;
+            padding-bottom: 0.6rem;
+        }
+
+        .typo-undertittel {
+            margin-bottom: 0.5rem;
+        }
+
+        .skjemaelement--harFeil textarea {
+            margin-bottom: 0.5rem;
+        }
+
+        .knapp--hoved {
+            margin-right: 1rem;
+        }
+        .datovelger__DayPicker {
+            top: -15rem;
+        }
+
+        .skjemaelement__label {
+            margin-bottom: .25em;
+        }
+
+        .modal-footer {
+            display: flex;
+            border-top: 1px solid #B7B1A9;
+            padding: 1.7rem 2rem;
+        }
+
+
+        .arbeidsliste--modal-redigering {
+            margin-bottom: 0.625rem;
+        }
+    }
+
+    .innhold {
+        padding: 1.7rem 2rem;
+    }
+
+    .modal-footer {
+        border-top: 1px solid #B7B1A9;
+        padding: 1.1rem 2rem;
+
+    }
+}
+.arbeidsliste--rediger-lenke {
+    margin-left: 1rem;
+}
+.modal.arbeidsliste-modal {
+    position: relative;
+    border: 1px solid #B7B1A9;
+    background-color: @grayBackground;
+    outline: none;
+    max-width: 45rem;
+    padding: 0;
+    width: 100%;
+}
+
+.modal.tom-portefolje-modal {
+    padding: 0;
+    width: 50%;
+    background-color: @grayBackground;
+}

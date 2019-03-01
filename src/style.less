@@ -1,0 +1,107 @@
+//@coreModulePath: './../../node_modules/';
+//@nodeModulesPath: './../../node_modules/';
+
+@import "tabell";
+
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: @navLysGra !important;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #3E3832;
+    font-family: @font-family;
+
+    @media print {
+        a[href]:after {
+            content: none !important;
+        }
+    }
+
+    #mainapp {
+        margin: 0 auto;
+        height: 100%;
+    }
+    .side-innhold {
+        margin-top: 2rem;
+    }
+}
+
+html {
+    height: 100%;
+}
+
+@import "./modal/feilmelding-brukere";
+@import "./modal/arbeidsliste";
+@import "./components/enhet-context/enhet-context";
+@import "./components/datovelger/daypicker";
+@import '~nav-datovelger/dist/datovelger/styles/datovelger.css';
+@import "~nav-frontend-alertstriper-style/src/index";
+@import "~nav-frontend-typografi-style/src/index";
+@import "~nav-frontend-core/less/core";
+@import "~nav-frontend-grid-style/src/index";
+@import "~nav-frontend-modal-style/src/index";
+@import "~nav-frontend-paneler-style/src/index";
+@import "~nav-frontend-ekspanderbartpanel-style/src/index";
+@import "~nav-frontend-etiketter-style/src/index";
+@import "~nav-frontend-spinner-style/src/spinner-style";
+@import "~nav-frontend-skjema-style/src/index";
+@import "~nav-frontend-chevron-style/src/index";
+@import "~nav-frontend-chevron-style/src/index";
+@import "~nav-frontend-knapper-style/src/index";
+@import "~nav-frontend-paneler-style/src/mixins";
+@import "~nav-frontend-lenker-style/src/lenker-style";
+@import "~nav-frontend-toggle-style/src/toggle-style";
+@import "~nav-frontend-hjelpetekst-style/src/hjelpetekst-style";
+@import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
+
+
+
+.veilarbportefoljeflatefs {
+    @import "./lenker/lenker";
+    @import "./paginering/paginering";
+    @import "./enhetsportefolje/enhetsportefolje";
+    @import "./enhetsportefolje/brukerliste";
+    @import "./veiledere/veiledere";
+    @import "./minoversikt/minoversikt";
+    @import "./filtrering/filtrering-label";
+    @import "./filtrering/filtrering-skjema";
+    @import "./filtrering/barlabel";
+    @import "./components/tabelletiketter/tabelletiketter";
+    @import "./components/dropdown/dropdown";
+    @import "./components/toolbar/toolbar";
+    @import "./components/checkbox-filterform/checkbox-filterform";
+    @import "./components/radio-filterform/radio-filterform";
+    @import "./components/aktivitet-filterform/aktivitet-filterform";
+    @import "./veiledere/veieldersok";
+    @import "./minoversikt/diagram/digram";
+}
+
+
+.modal__overlay {
+    z-index: 1000; // TODO: Be KAB commite tinga sine
+}
+
+.spinner {
+    display: block;
+    margin:auto;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 956px;
+    }
+}
+
+.flex {
+    display: flex;
+}
+
+.flex--center {
+    align-items: center;
+}
+
+.flex--grow {
+    flex-grow: 1;
+}
