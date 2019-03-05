@@ -4,6 +4,7 @@ import Datovelger from "nav-datovelger/dist/datovelger/Datovelger";
 import SkjemaelementFeilmelding from "nav-frontend-skjema/lib/skjemaelement-feilmelding";
 import {validerDatoFeldt} from '../../utils/dato-utils';
 import classNames from 'classnames';
+import moment from 'moment';
 
 function FormikDatoVelger({name}) {
     return (
@@ -22,10 +23,17 @@ function FormikDatoVelger({name}) {
                                 id: 'fristInput',
                                 name: 'frist',
                                 placeholder: 'dd.mm.åååå',
-                                ariaLabel: 'Frist:'
+                                ariaLabel: 'Frist:',
+                                onChange: (value: string) => setFieldValue(field.name, value)
                             }}
                             id="fristDatovelger"
-                            onChange={(date: string) => setFieldValue(field.name, date)}
+                            onChange={(date: string) => {
+                                // HAKS FØR ATT NAV-DATOVELGER  IKKE STØTTER OPTIONAL DATO
+                                if(!field.value && !moment(date).isValid()) {
+                                    return;
+                                }
+                                setFieldValue(field.name, date)}
+                            }
                             valgtDato={field.value}
                             dayPickerProps={{className : "datovelger__DayPicker"}}
                         />
