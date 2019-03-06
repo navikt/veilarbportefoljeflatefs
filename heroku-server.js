@@ -5,6 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use('/veilarbportefoljeflatefs', express.static(path.join(__dirname, 'build')));
+app.use('/internarbeidsflatedecorator', express.static(path.join(__dirname, 'build/internarbeidsflatedecorator')));
 
 app.get('/veilarbportefoljeflatefs', (req, res) => {
     console.log('dirname', __dirname);
