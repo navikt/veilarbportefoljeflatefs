@@ -8,6 +8,7 @@ app.use('/veilarbportefoljeflatefs', express.static(path.join(__dirname, 'build'
 app.use('/internarbeidsflatedecorator', express.static(path.join(__dirname, 'build/internarbeidsflatedecorator')));
 
 app.get('/veilarbportefoljeflatefs', (req, res) => {
+    console.log('dirname', __dirname);
     res.sendFile(path.join(__dirname, '/build/index.html'));
 });
 

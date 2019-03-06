@@ -13,7 +13,7 @@
     "eject": "react-scripts eject",
     "build:tekster": "react-intl-bundler ./tekster ./tekster-built",
     "heroku-serve": "node heroku-server.js",
-    "heroku-postbuild": "cross-env REACT_APP_MOCK=true npm run build ",
+    "heroku-postbuild": "cross-env REACT_APP_MOCK=true npm run build",
     "upload:doc": "node documentation/scripts/upload-all",
     "lint": "tslint ./src/**/*.ts*",
     "lint:fix": "tslint ./src/**/*.ts* --fix"
