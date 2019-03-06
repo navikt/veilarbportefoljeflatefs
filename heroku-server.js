@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 5000;
 app.use('/veilarbportefoljeflatefs', express.static(path.join(__dirname, 'build')));
 
 app.get('/veilarbportefoljeflatefs', (req, res) => {
+    console.log('dirname', __dirname);
     res.sendFile(path.join(__dirname, '/build/index.html'));
 });
 
