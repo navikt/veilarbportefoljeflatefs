@@ -13,7 +13,7 @@ if (!(window as any)._babelPolyfill) { // eslint-disable-line no-underscore-dang
     require('babel-polyfill'); // eslint-disable-line global-require
 }
 
-if(process.env.NODE_ENV === "development") {
+if(process.env.REACT_APP_MOCK === 'true') {
     console.log('=========================='); // eslint-disable-line no-console
     console.log('======== MED MOCK ========'); // eslint-disable-line no-console
     console.log('=========================='); // eslint-disable-line no-console
