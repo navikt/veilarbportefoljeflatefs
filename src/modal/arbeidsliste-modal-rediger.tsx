@@ -11,7 +11,7 @@ import { STATUS } from '../ducks/utils';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
 import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { redigerArbeidsliste } from '../ducks/arbeidsliste';
-import { ISODateToDatePicker } from '../utils/dato-utils';
+import moment from 'moment';
 
 NavFrontendModal.setAppElement('#applikasjon');
 
@@ -67,7 +67,8 @@ function ArbeidslisteModalRediger({
     const initialValues = {
         overskrift: bruker.arbeidsliste.overskrift || '',
         kommentar: bruker.arbeidsliste.kommentar || '',
-        frist: bruker.arbeidsliste.frist ? ISODateToDatePicker(new Date(bruker.arbeidsliste.frist)) : null
+        frist: bruker.arbeidsliste.frist ?
+            moment(bruker.arbeidsliste.frist).format('YYYY-MM-DD') : ''
     };
 
     return (
@@ -81,10 +82,9 @@ function ArbeidslisteModalRediger({
 
             <Formik
                 initialValues={initialValues}
-                onSubmit={(values, actions) => {
+                onSubmit={(values) => {
                     setIsOpen(false);
                     onSubmit(values);
-                    actions.resetForm();
                 }}
                 render={(formikProps)=> (
                     <NavFrontendModal
