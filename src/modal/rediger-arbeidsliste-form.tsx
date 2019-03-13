@@ -1,11 +1,11 @@
-import * as React from "react";
-import {Form, } from "formik";
-import {Hovedknapp} from "nav-frontend-knapper";
-import {FormattedMessage} from "react-intl";
-import FormikTekstArea from "../components/formik/formik-tekstarea";
-import FormikInput from "../components/formik/formik-input";
-import FormikDatoVelger from "../components/formik/datovelger/formik-datovelger";
-import {Undertekst} from "nav-frontend-typografi";
+import * as React from 'react';
+import { Form, } from 'formik';
+import { Hovedknapp } from 'nav-frontend-knapper';
+import { FormattedMessage } from 'react-intl';
+import FormikTekstArea from '../components/formik/formik-tekstarea';
+import FormikInput from '../components/formik/formik-input';
+import FormikDatoVelger from '../components/formik/formik-datovelger/formik-datovelger';
+import { Undertekst } from 'nav-frontend-typografi';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -14,13 +14,12 @@ interface RedigerArbeidslisteProps {
     lukkModal: ()=> void;
 }
 
-
-function RedigerArbeidsliste (props: RedigerArbeidslisteProps) {
+function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     return (
         <Form>
             <div className="input-fields">
                 <FormikInput name="overskrift"/>
-                <FormikTekstArea name ="kommentar"/>
+                <FormikTekstArea name="kommentar"/>
                 <Undertekst className="arbeidsliste--modal-redigering">
                     <FormattedMessage
                         id="arbeidsliste.kommentar.footer"
@@ -43,9 +42,7 @@ function RedigerArbeidsliste (props: RedigerArbeidslisteProps) {
                 </div>
             </div>
         </Form>
-    )
+    );
 }
-
-
 
 export default RedigerArbeidsliste;
