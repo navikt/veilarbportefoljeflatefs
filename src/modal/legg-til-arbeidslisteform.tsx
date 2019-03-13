@@ -1,19 +1,19 @@
-import {STATUS} from "../../ducks/utils";
+import {STATUS} from "../ducks/utils";
 import * as React from "react";
-import {ArbeidslisteDataModell, BrukerModell, Status, VeilederModell} from "../../model-interfaces";
-import {postArbeidsliste} from "../../ducks/arbeidsliste";
-import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from "../../ducks/portefolje";
-import {visServerfeilModal} from "../../ducks/modal-serverfeil";
-import {LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal} from "../../ducks/modal-feilmelding-brukere";
-import {leggTilStatustall} from "../../ducks/statustall";
-import {AppState} from "../../reducer";
-import {Form, Formik} from "formik";
+import {ArbeidslisteDataModell, BrukerModell, Status, VeilederModell} from "../model-interfaces";
+import {postArbeidsliste} from "../ducks/arbeidsliste";
+import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from "../ducks/portefolje";
+import {visServerfeilModal} from "../ducks/modal-serverfeil";
+import {LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal} from "../ducks/modal-feilmelding-brukere";
+import {leggTilStatustall} from "../ducks/statustall";
+import {AppState} from "../reducer";
+import {Form, Formik, FormikProps} from "formik";
 import ArbeidslisteForm from "./arbeidsliste-form";
 import {connect} from "react-redux";
 import {Hovedknapp} from "nav-frontend-knapper";
 import {FormattedMessage} from "react-intl";
-import {skjulModal} from "../../ducks/modal";
-import {dateToISODate} from "../../utils/dato-utils";
+import {skjulModal} from "../ducks/modal";
+import {dateToISODate} from "../utils/dato-utils";
 
 interface OwnProps {
     valgteBrukere: BrukerModell[];
@@ -32,6 +32,14 @@ interface DispatchProps {
     fjernMarkerteBrukere: ()=> void;
 }
 
+interface FormValues {
+    kommentar: string;
+    overskrift: string;
+    frist?: string;
+}
+
+type LeggTilArbeidslisteFormProps = OwnProps & StateProps& DispatchProps
+
 function LeggTilArbeidslisteForm({
     lukkModal,
     valgteBrukere,
@@ -39,10 +47,16 @@ function LeggTilArbeidslisteForm({
     arbeidslisteStatus,
     onSubmit,
     setFormIsDirty,
-    fjernMarkerteBrukere}: OwnProps & StateProps& DispatchProps) {
+    fjernMarkerteBrukere}: LeggTilArbeidslisteFormProps) {
 
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     const initialValues = valgteBrukere.map(bruker => ({kommentar: '', frist:  '', overskrift: '' }));
+
+    const resetForm = (formikProps: FormikProps<FormValues[]>) => {
+        formikProps.resetForm();
+        fjernMarkerteBrukere();
+        lukkModal()
+    };
 
     return (
         <Formik
@@ -65,9 +79,7 @@ function LeggTilArbeidslisteForm({
                                     <FormattedMessage id="modal.knapp.lagre" />
                                 </Hovedknapp>
                                 <button type="button" className="knapp" onClick ={() => {
-                                    formikProps.resetForm();
-                                    fjernMarkerteBrukere();
-                                    lukkModal()
+
                                 }}>
                                     <FormattedMessage id="modal.knapp.avbryt" />
                                 </button>
@@ -110,13 +122,13 @@ export function oppdaterState(res, liste: ArbeidslisteDataModell[], props: {innl
 }
 
 
-const mapStateToProps = (state: AppState) => ({
+const mapStateToProps = (state: AppState): StateProps => ({
     arbeidslisteStatus: state.arbeidsliste.status
 });
 
 
 const mapDispatchToProps = (dispatch, props) => ({
-    onSubmit: (arbeidsliste) => {
+    onSubmit: (arbeidsliste: FormValues[]) => {
         const {valgteBrukere} = props;
         const liste = arbeidsliste.map((elem, index) => ({
             fnr: valgteBrukere[index].fnr,

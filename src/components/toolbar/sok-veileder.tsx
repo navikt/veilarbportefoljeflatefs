@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { endreFiltervalg, veilederSoktFraToolbar } from '../../ducks/filtrering';
 import SokFilter from './sok-filter';
-import Dropdown from './../dropdown/dropdown';
+import Dropdown from '../dropdown/dropdown';
 import CheckboxFilterform from './../checkbox-filterform/checkbox-filterform';
 import { nameToStateSliceMap } from '../../ducks/utils';
 import { FiltervalgModell } from '../../model-interfaces';
