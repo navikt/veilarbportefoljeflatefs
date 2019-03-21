@@ -130,8 +130,8 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                     <p className="typo-infotekst begrensetbredde blokk-l">
                                         <FormattedMessage id="ingresstekst.minoversikt" />
                                     </p>
-                                    <div className="minoversikt-side--cols">
-                                        <div className="minoversikt-side--filter-col">
+                                    <div className="row">
+                                        <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
                                             <FiltreringContainer
                                                 filtervalg={filtervalg}
                                                 filtergruppe="veileder"
@@ -139,7 +139,7 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                                 enhettiltak={enhettiltak.data.tiltak}
                                             />
                                         </div>
-                                        <div className="minoversikt-side--liste-col">
+                                        <div className="col-lg-9 col-md-12 col-sm-12">
                                             <FiltreringLabelContainer
                                                 filtervalg={filtervalg}
                                                 filtergruppe="veileder"
