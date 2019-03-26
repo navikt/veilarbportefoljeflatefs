@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'react-redux-form-validation';
 import persistent from './utils/persistentReducer';
 import enheterReducer, { EnheterState } from './ducks/enheter';
 import portefoljeReducer, { PortefoljeState } from './ducks/portefolje';
@@ -64,7 +63,6 @@ export interface AppState {
     enhettiltak: EnhettiltakState;
     nycontext: ContextState;
     features: FeaturesState;
-    form: any;
 }
 
 export default combineReducers<AppState>({
@@ -92,5 +90,4 @@ export default combineReducers<AppState>({
     nycontext: contextReducer,
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
-    form: formReducer
 });
