@@ -2,7 +2,7 @@ import * as React from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import RedigerArbeidslisteForm from './arbeidsliste/rediger-arbeidsliste-form';
+import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
 import { BrukerModell, Status } from '../model-interfaces';
 import { useState } from 'react';
 import { connect } from 'react-redux';

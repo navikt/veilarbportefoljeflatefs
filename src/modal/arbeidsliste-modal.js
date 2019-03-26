@@ -6,7 +6,7 @@ import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { skjulModal } from '../ducks/modal';
 import { markerAlleBrukere } from '../ducks/portefolje';
-import LeggTilArbeidslisteForm from './arbeidsliste/legg-til-arbeidslisteform';
+import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 
 NavFrontendModal.setAppElement('#applikasjon');

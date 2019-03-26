@@ -171,5 +171,5 @@ export enum Status {
 export interface ArbeidslisteDataModell {
     fnr: string;
     kommentar: string;
-    frist: string;
+    frist: string|null;
 }
