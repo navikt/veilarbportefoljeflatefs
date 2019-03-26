@@ -29,7 +29,7 @@ function lagGrunndata() {
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
     const ar = rnd(0, 99);
-    const erDoed = Math.random() < ((100 - ar) / 100);
+    const erDoed = Math.random() < ((100 - ar * 20) / 100);
 
     const arhundre = rnd(0, 99).toString().padStart(2, '0');
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
