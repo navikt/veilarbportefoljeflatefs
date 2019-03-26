@@ -87,4 +87,4 @@ const mapDispatchToProps = (dispatch, props) => ({
     visArbeidslisteModal: () => dispatch(visModal(props.toolbarPosisjon)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LeggTilArbeidsliste));
+export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(withRouter(LeggTilArbeidsliste));

@@ -44,7 +44,10 @@ const Toolbar = ({filtergruppe,
                 toolbarPosisjon={posisjon}
             />
             <Listevisning filtergruppe={filtergruppe} toolbarPosisjon={posisjon}/>
-            <LeggTilArbeidsliste visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false} toolbarPosisjon={posisjon}/>
+            <LeggTilArbeidsliste
+                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false}
+                toolbarPosisjon={posisjon}
+            />
             <SokVeileder
                 veileder={{}}
                 filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe}
