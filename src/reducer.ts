@@ -15,6 +15,7 @@ import diagramReducer from './ducks/diagram';
 import sideReducer from './ducks/ui/side';
 import { slettCleanIUrl } from './utils/url-utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
+import {reducer as formReducer} from 'redux-form'
 import enhetTiltakReducer, { EnhettiltakState } from './ducks/enhettiltak';
 import listevisningReducer, {
     ListevisningState,
@@ -63,6 +64,7 @@ export interface AppState {
     enhettiltak: EnhettiltakState;
     nycontext: ContextState;
     features: FeaturesState;
+    form: any; // TODO type
 }
 
 export default combineReducers<AppState>({
@@ -90,4 +92,5 @@ export default combineReducers<AppState>({
     nycontext: contextReducer,
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
+    form: formReducer
 });
