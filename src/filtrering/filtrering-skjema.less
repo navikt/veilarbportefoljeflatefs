@@ -1,3 +1,6 @@
+@lg-screen: 1200px;
+@xl-screen: 1600px;
+
 .skjemaelement--innrykk {
     margin-left: 1.25rem;
 }
@@ -6,19 +9,11 @@
     border-top-right-radius: @border-radius-small;
 }
 
-.dropdown--160bredde .dropdown__innhold {
-    width: 160%;
-    border-top-right-radius: @border-radius-small;
-}
-
-.dropdown--140bredde .dropdown__innhold {
-    width: 140%;
-    border-top-right-radius: @border-radius-small;
-}
-
-.dropdown--120bredde .dropdown__innhold {
-    width: 120%;
-    border-top-right-radius: @border-radius-small;
+@media screen and (min-width: @lg-screen) and (max-width: @xl-screen) {
+    .dropdown--140bredde-responsive .dropdown__innhold {
+        width: 140%;
+        border-top-right-radius: @border-radius-small;
+    }
 }
 
 .filtrering--overskrift-med-hjelpetekst {

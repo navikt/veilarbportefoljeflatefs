@@ -32,7 +32,7 @@ interface FiltreringFilterProps {
 const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFilterProps) => (
     <div>
         <div className="row">
-            <div className="col-sm-6 blokk-xs">
+            <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.demografi"/>
                 </Element>
@@ -61,7 +61,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     />
                 </Dropdown>
             </div>
-            <div className="col-sm-6 blokk-xs">
+            <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.situasjon"/>
                 </Element>
@@ -89,7 +89,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
-                <Dropdown name="Servicegruppe" className="dropdown--160bredde">
+                <Dropdown name="Servicegruppe">
                     <CheckboxFilterform
                         form="servicegruppe"
                         valg={servicegruppe(intl)}
@@ -97,7 +97,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
-                <Dropdown name="Rettighetsgruppe" className="dropdown--120bredde">
+                <Dropdown name="Rettighetsgruppe">
                     <CheckboxFilterform
                         form="rettighetsgruppe"
                         valg={rettighetsgruppe(intl)}
@@ -106,11 +106,11 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     />
                 </Dropdown>
             </div>
-            <div className="col-sm-6 blokk-xs">
+            <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.ytelse"/>
                 </Element>
-                <Dropdown name="Ytelse" className="dropdown--140bredde">
+                <Dropdown name="Ytelse" className="dropdown--140bredde-responsive">
                     <RadioFilterform
                         form="ytelse"
                         valg={ytelse(intl)}
@@ -119,7 +119,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     />
                 </Dropdown>
             </div>
-            <div className="col-sm-6 blokk-xs">
+            <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
                     <FormattedMessage id="filtrering.filter.tittel.manuellbruker"/>
                 </Element>
@@ -132,12 +132,12 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                     />
                 </Dropdown>
             </div>
-            <div className="col-sm-6">
+            <div className="col-sm-12">
                 <OverskriftMedHjelpeTekst
                     overskriftId="filtrering.filter.tittel.aktivitet"
                     hjelpetekstId="hjelpetekst.aktivitetsfilter"
                 />
-                <Dropdown name="Aktivitet" className="dropdown--160bredde">
+                <Dropdown name="Aktivitet" className="dropdown--140bredde-responsive">
                     <AktivitetFilterform
                         form="aktiviteter"
                         valg={aktiviteter(intl)}
@@ -147,7 +147,6 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 </Dropdown>
                 <Dropdown
                     name="Tiltakstype"
-                    className="dropdown--160bredde"
                     disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
                 >
                     <CheckboxFilterform
