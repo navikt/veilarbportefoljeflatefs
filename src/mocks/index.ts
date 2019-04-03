@@ -112,8 +112,3 @@ class MockWebSocket {
 }
 
 (window as any).WebSocket = MockWebSocket; // tslint:disable-line
-(window as any).frontendlogger = {
-    event: (name, fields, tags) => {
-        console.log('frontendlogger', 'name:', name, 'fields:', fields, 'tags:', tags); // tslint:disable-line
-    }
-};

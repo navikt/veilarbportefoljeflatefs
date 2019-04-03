@@ -32,12 +32,9 @@ export const loggBrowserMetrikker = (): void => {
 
     const storageKey = BROWSER_METRIKKER_LOCAL_STORAGE_KEY;
 
-    if (window.localStorage.getItem(storageKey) != null) {
-        return;
+    if (window.localStorage.getItem(storageKey) == null) {
+        window.localStorage.setItem(storageKey, 'true');
+        logEvent(BROWSER_METRIKKER_LOG_TAG, { browser: getBrowserAgent() });
     }
-
-    window.localStorage.setItem(storageKey, 'true');
-
-    logEvent(BROWSER_METRIKKER_LOG_TAG, { browser: getBrowserAgent() });
 
 };
