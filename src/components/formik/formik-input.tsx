@@ -1,19 +1,19 @@
 import React from 'react';
-import {Field, getIn} from "formik";
-import {Input} from "nav-frontend-skjema";
-import {injectIntl} from 'react-intl';
+import { Field, getIn } from 'formik';
+import { Input } from 'nav-frontend-skjema';
+import { injectIntl } from 'react-intl';
 
 const OVERSKRIFT_MAKS_LENGDE = 12;
 
-function FormikInput ({name, intl}) {
+function FormikInput({name, intl}) {
 
     const validate = (value: string): string| undefined => {
         let error: undefined| string;
-        if(!value){
+        if(!value) {
             error = intl.formatMessage({
                 id: 'legg-til.arbeidsliste-form.feilmelding.overskrift.tekst.mangler'
             });
-        }else if(value.length > OVERSKRIFT_MAKS_LENGDE) {
+        } else if(value.length > OVERSKRIFT_MAKS_LENGDE) {
             error = intl.formatMessage({
                     id: 'legg-til-arbeidsliste-form.feilmelding.overskrift-lengde'},
                 {OVERSKRIFT_MAKS_LENGDE}
@@ -38,10 +38,10 @@ function FormikInput ({name, intl}) {
                         feil={errors && touched ? {feilmelding: errors} : undefined}
                         value={field.value}
                     />
-                )
+                );
             }}
         </Field>
-    )
+    );
 }
 
 export default injectIntl(FormikInput);

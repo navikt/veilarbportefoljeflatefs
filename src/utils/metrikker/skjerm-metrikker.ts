@@ -1,17 +1,17 @@
-import { logEvent } from './frontend-logger';
+import { logEvent } from '../frontend-logger';
 
 const SKJERM_METRIKKER_LOG_TAG = 'portefolje.skjerm_metrikker';
 const SKJERM_METRIKKER_SESSION_STORAGE_KEY = 'har_logget_skjerm_metrikker';
+
+interface ScreenSize {
+    width: number;
+    height: number;
+}
 
 export enum Side {
     MIN_OVERSIKT = 'MIN_OVERSIKT',
     ENHETENS_OVERSIKT = 'ENHETENS_OVERSIKT',
     VEILEDER_OVERSIKT = 'VEILEDER_OVERSIKT'
-}
-
-interface ScreenSize {
-    width: number;
-    height: number;
 }
 
 const screenSizes: ScreenSize[] = [

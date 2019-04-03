@@ -8,21 +8,16 @@ import createStore from './store';
 import Routes from './routes';
 import './style.less';
 
-/* eslint-disable no-undef */
-if (!(window as any)._babelPolyfill) { // eslint-disable-line no-underscore-dangle
-    require('babel-polyfill'); // eslint-disable-line global-require
+if (!(window as any)._babelPolyfill) {
+    require('babel-polyfill'); // tslint:disable-line
 }
 
 if(process.env.REACT_APP_MOCK === 'true') {
-    console.log('=========================='); // eslint-disable-line no-console
-    console.log('======== MED MOCK ========'); // eslint-disable-line no-console
-    console.log('=========================='); // eslint-disable-line no-console
-    require('./mocks'); // eslint-disable-line global-require
+    console.log('=========================='); // tslint:disable-line
+    console.log('======== MED MOCK ========'); // tslint:disable-line
+    console.log('=========================='); // tslint:disable-line
+    require('./mocks'); // tslint:disable-line
 }
-
-
-/* eslint-enable import/first */
-/* eslint-disable no-undef */
 
 addLocaleData(nb);
 

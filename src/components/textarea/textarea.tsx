@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Field } from 'redux-form'
+import { Field } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import {Textarea as NavFrontendTextarea, TextareaProps } from 'nav-frontend-skjema';
+import { Textarea as NavFrontendTextarea, TextareaProps } from 'nav-frontend-skjema';
 
 interface TextAreaProps extends TextareaProps {
     labelId: string;
