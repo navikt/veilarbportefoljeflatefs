@@ -48,7 +48,6 @@ export function erstattMiljoPlaceholder(lenke) {
 }
 
 const getConfig = (initiellEnhet = undefined) => {
-    console.log(initiellEnhet);
     const modiaUrl = erstattMiljoPlaceholder('https://modapp{{miljoStreng}}.adeo.no/modiabrukerdialog');
     const miaUrl = erstattMiljoPlaceholder('https://modapp{{miljoStreng}}.adeo.no/mia');
 
@@ -92,6 +91,5 @@ export default () => {
 };
 
 export const settEnhetIDekorator = (initiellEnhet) => {
-    console.log("inneISettEnhet", initiellEnhet);
     (window as any).renderDecoratorHead(getConfig(initiellEnhet));
 };

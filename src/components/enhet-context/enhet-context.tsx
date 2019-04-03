@@ -45,7 +45,6 @@ class EnhetContext extends React.Component<EnhetContextProps> {
 
     constructor(props) {
         super(props);
-        console.log("enhetContext");
         this.enhetContextHandler = this.enhetContextHandler.bind(this);
         this.handleEndreAktivEnhet = this.handleEndreAktivEnhet.bind(this);
         this.handleBeholdAktivEnhet = this.handleBeholdAktivEnhet.bind(this);
@@ -90,7 +89,6 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     handleEndreAktivEnhet() {
-        console.log("aktivitEnhetIdFraContext", this.props.aktivEnhetIdFraContext);
         settEnhetIDekorator(this.props.aktivEnhetIdFraContext);
         this.props.doOppdaterValgtEnhet(this.props.aktivEnhetIdFraContext);
     }

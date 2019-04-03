@@ -5,7 +5,7 @@ import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
 import {  visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
 import { ToolbarPosisjon } from './toolbar';
-import {withRouter, RouteComponentProps} from "react-router-dom";
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 interface StateProps {
     portefolje: PortefoljeState;

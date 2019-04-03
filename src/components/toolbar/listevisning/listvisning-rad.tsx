@@ -1,8 +1,8 @@
-import {Kolonne} from "../../../ducks/ui/listevisning";
-import {alternativerConfig} from "./listevisning-utils";
-import {FormattedMessage} from "react-intl";
-import {ChangeEvent} from "react";
-import * as React from "react";
+import { Kolonne } from '../../../ducks/ui/listevisning';
+import { alternativerConfig } from './listevisning-utils';
+import { FormattedMessage } from 'react-intl';
+import { ChangeEvent } from 'react';
+import * as React from 'react';
 import { Checkbox } from 'nav-frontend-skjema';
 
 interface ListevisningRadProps {
@@ -12,7 +12,7 @@ interface ListevisningRadProps {
     onChange: (name: Kolonne, checked: boolean) => void;
 }
 
-function ListevisningRad (props: ListevisningRadProps) {
+function ListevisningRad(props: ListevisningRadProps) {
     const alternativ = alternativerConfig.get(props.kolonne);
 
     if (alternativ == null) {
@@ -30,6 +30,6 @@ function ListevisningRad (props: ListevisningRadProps) {
             />
         </li>
     );
-};
+}
 
 export default ListevisningRad;

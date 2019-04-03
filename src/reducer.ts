@@ -15,7 +15,7 @@ import diagramReducer from './ducks/diagram';
 import sideReducer from './ducks/ui/side';
 import { slettCleanIUrl } from './utils/url-utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
-import {reducer as formReducer} from 'redux-form'
+import { reducer as formReducer } from 'redux-form';
 import enhetTiltakReducer, { EnhettiltakState } from './ducks/enhettiltak';
 import listevisningReducer, {
     ListevisningState,
@@ -23,7 +23,7 @@ import listevisningReducer, {
     initialStateEnhetensOversikt,
     ListevisningType
 } from './ducks/ui/listevisning';
-import {default as contextReducer, ContextState } from './components/enhet-context/context-reducer';
+import { default as contextReducer, ContextState } from './components/enhet-context/context-reducer';
 import featuresReducer, { FeaturesState } from './ducks/features';
 
 function named(name, reducer) {

@@ -1,4 +1,6 @@
 import * as React from 'react';
+import * as moment from 'moment';
+import 'moment/locale/nb';
 import classnames from 'classnames';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
@@ -10,11 +12,13 @@ import EnhetSide from "./enhet/enhet-side";
 import VeiledereSide from "./veiledere/veiledere-side";
 import MinOversiktSide from "./minoversikt/minoversikt-side";
 import TilbakemeldingFab from "./components/tilbakemelding/tilbakemelding-fab";
-
-import * as moment from 'moment';
-import 'moment/locale/nb';
+import { loggBrowserMetrikker } from './utils/metrikker/browser-metrikker';
 
 moment.locale('nb');
+
+addLocaleData(nb);
+
+loggBrowserMetrikker();
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(window.location.search).vistekster; // eslint-disable-line no-undef
@@ -23,8 +27,6 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     }
     return ledetekster;
 }
-
-addLocaleData(nb);
 
 function Application (props) {
     return (

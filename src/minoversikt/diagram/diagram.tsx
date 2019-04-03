@@ -13,7 +13,7 @@ interface DiagramProps {
     filtreringsvalg: any;
     enhet: string;
     veileder?: string;
-    intl: any
+    intl: any;
 }
 
 interface StateProps {

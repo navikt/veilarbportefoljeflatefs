@@ -23,7 +23,7 @@ import {
 } from '../utils/url-utils';
 import { pagineringSetup } from '../ducks/paginering';
 import './minoversikt-side.less';
-import { loggSkjermMetrikker, Side } from '../utils/skjerm-metrikker';
+import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;

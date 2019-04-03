@@ -50,13 +50,13 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
             this.setState({ kommentar: value });
         }
 
-    };
+    }
 
     handleFormSubmitted = () => {
         const { tilfredshet, kommentar } = this.state;
         this.setState({ harSendt: true });
         this.props.onTilbakemeldingSendt({ tilfredshet, kommentar });
-    };
+    }
 
     handleTilfredshetChanged = (tilfredshet: number) => {
         this.setState({ tilfredshet });
