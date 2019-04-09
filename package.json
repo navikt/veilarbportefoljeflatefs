@@ -7,8 +7,8 @@
   "license": "MIT",
   "homepage": "/veilarbportefoljeflatefs",
   "scripts": {
-    "start": "react-intl-bundler tekster/ src/tekster-built && cross-env REACT_APP_MOCK=true craco start",
-    "dev": "react-intl-bundler tekster/ src/tekster-built && cross-env PORT=9596 craco start",
+    "start": "npm run dev && cross-env REACT_APP_MOCK=true",
+    "dev": "react-intl-bundler tekster/ src/tekster-built && craco start",
     "build": "react-intl-bundler tekster/ src/tekster-built && craco build",
     "test:coverage": "nyc npm run test",
     "eject": "react-scripts eject",
