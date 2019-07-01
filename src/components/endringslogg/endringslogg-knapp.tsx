@@ -1,6 +1,8 @@
 import { default as React, useState } from 'react';
 import Ekspanderbartpanel, { EkspanderbartpanelProps } from 'nav-frontend-ekspanderbartpanel';
 import './endringslogg.less';
+import { Innholdstittel } from 'nav-frontend-typografi';
+import { FormattedMessage } from 'react-intl';
 
 export function EndringsloggKnapp(props) {
     const [open, setOpen] = useState(false);
@@ -9,7 +11,15 @@ export function EndringsloggKnapp(props) {
             <div className="endringslogg-info">
             </div>
             <Ekspanderbartpanel tittel="Oppdateringer" tittelProps="normaltekst" border>
-                Panelet vil da ekspandere og vise innholdet.
+                <Innholdstittel tag="h2" className="blokk-s">
+                    <FormattedMessage id="Min-CV er nå printbar" />
+                </Innholdstittel>
+                <Innholdstittel tag="h2" className="blokk-s">
+                    <FormattedMessage id="Coachmarks er lansert!" />
+                </Innholdstittel>
+               <Innholdstittel tag="h1" className="blokk-s">
+                    <FormattedMessage id="Nytt filter på 'har sykepenger'" />
+                </Innholdstittel>
             </Ekspanderbartpanel>
         </div>
     );
