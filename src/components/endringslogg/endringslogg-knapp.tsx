@@ -3,6 +3,7 @@ import Ekspanderbartpanel, { EkspanderbartpanelProps } from 'nav-frontend-ekspan
 import './endringslogg.less';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
+import NavFrontendChevron from 'nav-frontend-chevron';
 
 export function EndringsloggKnapp(props) {
     const [open, setOpen] = useState(false);
@@ -11,15 +12,15 @@ export function EndringsloggKnapp(props) {
             <div className="endringslogg-info">
             </div>
             <Ekspanderbartpanel tittel="Oppdateringer" tittelProps="normaltekst" border>
-                <Innholdstittel tag="h2" className="blokk-s">
-                    <FormattedMessage id="Min-CV er nå printbar" />
-                </Innholdstittel>
-                <Innholdstittel tag="h2" className="blokk-s">
-                    <FormattedMessage id="Coachmarks er lansert!" />
-                </Innholdstittel>
-               <Innholdstittel tag="h1" className="blokk-s">
-                    <FormattedMessage id="Nytt filter på 'har sykepenger'" />
-                </Innholdstittel>
+                <h4>
+                    <NavFrontendChevron type={'ned'}/>Min-CV er nå printbar
+                </h4>
+                <h4>
+                    <NavFrontendChevron type={'ned'}/>Coachmarks er lansert!
+                </h4>
+                <h4>
+                    <NavFrontendChevron type={'ned'}/>Nytt filter på 'har sykepenger'
+                </h4>
             </Ekspanderbartpanel>
         </div>
     );
