@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import ActiveLink from "./active-link";
+import { EndringsloggKnapp } from "../components/endringslogg/endringslogg-knapp"
 
 function Lenker() {
     return (
@@ -23,6 +24,7 @@ function Lenker() {
                     <FormattedMessage id="lenker.veiledere.oversikt" />
                 </ActiveLink>
             </h2>
+            <EndringsloggKnapp/>
         </div>
     );
 }
