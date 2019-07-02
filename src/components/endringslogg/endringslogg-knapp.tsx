@@ -1,5 +1,5 @@
 import { default as React, useState } from 'react';
-import Ekspanderbartpanel, { EkspanderbartpanelProps } from 'nav-frontend-ekspanderbartpanel';
+import Ekspanderbartpanel, { EkspanderbartpanelBase, EkspanderbartpanelProps } from 'nav-frontend-ekspanderbartpanel';
 import './endringslogg.less';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
@@ -17,7 +17,7 @@ function EndringsloggInnhold(props) {
                        checked={open}
                        onChange={({target: {checked}}) => setOpen(checked)} />
             </label>
-            <h4>{props.innholdsOverskrift}</h4>
+            <h4 onClick={()=>setOpen(!open)}>{props.innholdsOverskrift}</h4>
         </div>
         <Collapse isOpened={open}>
             <div className="text">
@@ -32,9 +32,7 @@ export function EndringsloggKnapp(props) {
     const [open, setOpen] = useState(false);
     return (
         <div className="endringslogg-dropDown endringslogg-container">
-            <div className="endringslogg-info">
-            </div>
-            <Ekspanderbartpanel tittel="Oppdateringer" tittelProps="normaltekst" border>
+            <EkspanderbartpanelBase heading={<div className="endringslogg-info"/>}>
                <EndringsloggInnhold innholdsOverskrift="NY ENDRING!">
                        Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer
                        mange flere om ikke så lenge.
@@ -51,7 +49,7 @@ export function EndringsloggKnapp(props) {
                     Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer
                     mange flere om ikke så lenge.
                 </EndringsloggInnhold>
-            </Ekspanderbartpanel>
+            </EkspanderbartpanelBase>
         </div>
     );
 }
