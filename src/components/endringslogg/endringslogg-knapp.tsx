@@ -5,19 +5,21 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { UnmountClosed, Collapse, CollapseProps } from 'react-collapse';
 import NavFrontendChevron from 'nav-frontend-chevron';
+import { ToggleKnapp } from 'nav-frontend-toggle';
 
 function EndringsloggInnhold(props) {
     const [open, setOpen] = useState(false);
     return (
         <>
         <div className="endringslogg-innhold">
-            <label className="label" style={{marginRight: '1em'}}>
+            {/*<label className="label" style={{marginRight: '1em'}}>
                 <input className="input"
                        type="checkbox"
                        checked={open}
                        onChange={({target: {checked}}) => setOpen(checked)} />
             </label>
-            <h4 onClick={()=>setOpen(!open)}>{props.innholdsOverskrift}</h4>
+            <h4 onClick={()=>setOpen(!open)}>{props.innholdsOverskrift}</h4>*/}
+            <ToggleKnapp kompakt={true} onClick={(pressed) => setOpen(!open)}>{props.innholdsOverskrift}</ToggleKnapp>
         </div>
         <Collapse isOpened={open}>
             <div className="text">
@@ -52,4 +54,13 @@ export function EndringsloggKnapp(props) {
             </EkspanderbartpanelBase>
         </div>
     );
+}
+
+const ENDRING_PREFIX = 'Endringslogg';
+function harSettEndringsinlegg(id: string) {
+    return window.localStorage.getItem(id) != null;
+}
+
+function handleSettEndring(id) {
+    window.localStorage.setItem(id, 'true');
 }
