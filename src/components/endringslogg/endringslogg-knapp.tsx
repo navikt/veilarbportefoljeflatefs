@@ -4,8 +4,8 @@ import './endringslogg.less';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { UnmountClosed, Collapse, CollapseProps } from 'react-collapse';
-import NavFrontendChevron from 'nav-frontend-chevron';
 import { ToggleKnapp } from 'nav-frontend-toggle';
+import classNames from 'classnames/dedupe';
 
 function EndringsloggInnhold(props) {
     const [open, setOpen] = useState(false);
@@ -31,10 +31,11 @@ function EndringsloggInnhold(props) {
 }
 
 export function EndringsloggKnapp(props) {
-    const [open, setOpen] = useState(false);
+    const [nyeNotifikasjoner, setNyeNotifikasjoner] = useState(false);
     return (
         <div className="endringslogg-dropDown endringslogg-container">
-            <EkspanderbartpanelBase heading={<div className="endringslogg-info"/>}>
+            <EkspanderbartpanelBase heading={<div className={classNames({'endringslogg-info-ingen-notifikasjoner': !nyeNotifikasjoner,
+                                                                         'endringslogg-info-nye-notifikasjoner': nyeNotifikasjoner})}/>}>
                <EndringsloggInnhold innholdsOverskrift="NY ENDRING!">
                        Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer
                        mange flere om ikke så lenge.
