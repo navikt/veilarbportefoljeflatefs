@@ -2,17 +2,29 @@
     display: flex;
     align-items: flex-start;
     z-index: 998;
+    box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
+    max-width: 30rem;
 }
 
 .endringslogg-info-ingen-notifikasjoner{
-    background: data-uri('./ikon_info.svg') no-repeat center center;
-    padding: 1em;
+    height: .625rem;
+    width: .625rem;
+    margin-left: auto;
+    margin-right: 0.5em;
 }
 
 .endringslogg-info-nye-notifikasjoner{
-    background: data-uri('./ny_info.svg') no-repeat center center;
-    padding: 1em;
+    height: .625rem;
+    width: .625rem;
+    background-color: #0067c5;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.5em;
+    margin-left: auto
 }
+.endringslogg-info-kolonne {
+    margin-top: 0.25em;
+  }
 
 .endringslogg-dropDown{
     position: absolute;
@@ -27,4 +39,19 @@
     margin-left: 0;
 }
 
+.endringslogg-title{
+    margin-right: auto;
+    margin-left: 0.5em;
+}
 
+
+.endringslogg-kolonne {
+    float: left;
+    max-width: 90%;
+  }
+
+.endringslogg-rad:after {
+    content: "";
+    display: table;
+    clear: both;
+}
