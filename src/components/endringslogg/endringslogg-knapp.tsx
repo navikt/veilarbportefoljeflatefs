@@ -1,19 +1,28 @@
 import { default as React, useState } from 'react';
 import Ekspanderbartpanel, { EkspanderbartpanelBase, EkspanderbartpanelProps } from 'nav-frontend-ekspanderbartpanel';
 import './endringslogg.less';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Element, Normaltekst, EtikettLiten } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { UnmountClosed, Collapse, CollapseProps } from 'react-collapse';
 import { ToggleKnapp } from 'nav-frontend-toggle';
 import classNames from 'classnames/dedupe';
 
 function EndringsloggInnhold(props) {
+    let linkTag: any
+    if(props.url !== undefined){
+        if(props.linkTekst !== undefined){
+            linkTag = <a href={props.url}>{props.linkTekst}</a>
+        }else{
+            linkTag = <a href={props.url}>{props.url}</a>
+        }
+    }
     return (
-        <div>
-            <b><i>{props.dato}</i></b>
-            <h4>{props.innholdsOverskrift}</h4>
-            <div className="text">
-            {props.innholdTekst}
+        <div className="endringslogg-innhold">
+            <EtikettLiten>{props.dato}</EtikettLiten>
+            <div className="endringslogg-indent">
+                <Element> {props.innholdsOverskrift} </Element>
+                <Normaltekst> {props.innholdTekst} </Normaltekst>
+                {linkTag}
             </div>
         </div>
     );
@@ -27,6 +36,9 @@ export function EndringsloggKnapp(props) {
     let mm = "jul";
     let yyyy = today.getFullYear();
     let todayString = `${dd}. ${mm}. ${yyyy}`;
+
+    let navURL = "https://design.nav.no";
+    let navURLTeskt = "Teknisk Informasjon"
     return (
         <div className="endringslogg-dropDown endringslogg-container">
             <EkspanderbartpanelBase heading={<div className={classNames({'endringslogg-info-ingen-notifikasjoner': !nyeNotifikasjoner,
@@ -44,6 +56,8 @@ export function EndringsloggKnapp(props) {
                     innholdsOverskrift="Coachmarks er lansert!"
                     innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer
                     mange flere om ikke så lenge."
+                    url={navURL}
+                    linkTekst={navURLTeskt}
                 />
 
                 <EndringsloggInnhold
@@ -51,6 +65,7 @@ export function EndringsloggKnapp(props) {
                     innholdsOverskrift="Nytt filter på 'har sykepenger'"
                     innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer
                     mange flere om ikke så lenge."
+                    url={navURL}
                />
             </EkspanderbartpanelBase>
         </div>
