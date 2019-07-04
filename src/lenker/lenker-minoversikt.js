@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import ActiveLink from './active-link';
-import {EndringsloggKnapp} from "../components/endringslogg/endringslogg-knapp";
+import { EndringsloggKnapp } from "../components/endringslogg/endringslogg-knapp";
 
 function LenkerMinoversikt({ veilederident }) {
     const LenkeInnhold = <FormattedMessage id="lenker.min.oversikt" />;
     const path = veilederident === null ? 'portefolje' : `portefolje/${veilederident}`;
 
     return (
-        <div className="lenker blokk-m" role="tablist">
+        <div className="min_oversikt_rad blokk-m" role="tablist">
             <ActiveLink
                 to={path}
                 className="oversiktslenke typo-undertittel"
