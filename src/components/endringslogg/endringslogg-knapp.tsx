@@ -15,17 +15,18 @@ function EndringsloggInnhold(props) {
     }
         return (
             <div className="endringslogg-rad">
-                <div className={classNames({'endringslogg-info-ingen-notifikasjoner endringslogg-kolonne ': !props.nyeNotifikasjoner,
-                        'endringslogg-info-nye-notifikasjoner endringslogg-kolonne endringslogg-info-kolonne ': props.nyeNotifikasjoner})}/>
-                <div className="endringslogg-innhold endringslogg-kolonne">
-                    <EtikettLiten>{props.dato}</EtikettLiten>
-                    <div className="endringslogg-indent">
-                    <Element> {props.innholdsOverskrift} </Element>
-                    <Normaltekst> {props.innholdTekst} </Normaltekst>
+                <div className="endringslogg-skille">
+                    <div className={classNames({'endringslogg-info-ingen-notifikasjoner endringslogg-kolonne ': !props.nyeNotifikasjoner,
+                            'endringslogg-info-nye-notifikasjoner endringslogg-kolonne endringslogg-info-kolonne ': props.nyeNotifikasjoner})}/>
+                    <div className="endringslogg-innhold endringslogg-kolonne">
+                        <EtikettLiten>{props.dato}</EtikettLiten>
+                        <div className="endringslogg-indent">
+                        <Element> {props.innholdsOverskrift} </Element>
+                        <Normaltekst> {props.innholdTekst} </Normaltekst>
 
-                    {linkTag}
+                        {linkTag}
+                        </div>
                     </div>
-                    <hr style={{width: "-webkit-fill-available"}}/>
                 </div>
             </div>
         );
