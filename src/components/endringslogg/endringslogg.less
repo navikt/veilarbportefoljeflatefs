@@ -18,29 +18,30 @@
 }
 
 .collapse-container {
+    margin-top: 2.5em;
     right: 1em;
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 30em;
+    z-index: 2;
 }
 
-.collapse-container::after {
-    content: '';
+.collapse-container::after {content: '';
     position: absolute;
     top: 0;
     left: 90%;
     width: 0;
     height: 0;
-    border: 45px solid transparent;
+    border: 30px solid transparent;
     border-color: #3e3832;
-    border-top-left-radius: 80px;
-    border-top-right-radius: 80px;
+    border-top-right-radius: 11px;
     border-top: 0;
     border-left: 0;
     margin-left: -10px;
-    margin-top: -20px;
+    margin-top: -6px;
+    transform: rotate(-60deg) skewX(-30deg) scale(1,.866);
 }
 
 .endringslogg-info-ingen-notifikasjoner{
@@ -73,7 +74,6 @@
     flex-direction: column;
     align-items: baseline;
     margin-left: 0;
-    padding-top: 1em;
 }
 
 .endringslogg-title{
@@ -89,7 +89,7 @@
   }
 
 .endringslogg-rad {
-    margin-bottom: 1em;
+    padding: 1em;
     background-color: white;
 }
 .endringslogg-skille{

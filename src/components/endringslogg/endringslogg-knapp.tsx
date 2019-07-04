@@ -59,6 +59,11 @@ export function EndringsloggKnapp(props) {
                                  innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
                                  nyeNotifikasjoner={nyeNotifikasjoner}
             />
+            <EndringsloggInnhold dato={datoStreng}
+                                     innholdsOverskrift="Min-CV er nå printbar"
+                                     innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
+                                     nyeNotifikasjoner={nyeNotifikasjoner}
+            />
         </div>
         </>
             /*<EkspanderbartpanelBase onClick={() => {
