@@ -24,7 +24,9 @@ function Lenker() {
                     <FormattedMessage id="lenker.veiledere.oversikt" />
                 </ActiveLink>
             </h2>
-            <EndringsloggKnapp/>
+            <div style={{flexGrow: "1", position: "relative"}}>
+                <EndringsloggKnapp/>
+            </div>
         </div>
     );
 }
