@@ -48,8 +48,20 @@ export function EndringsloggKnapp(props) {
     let navURLTeskt = 'Teknisk Informasjon';
 
     return (
-        <div className="endringslogg-dropDown endringslogg-container">
-            <EkspanderbartpanelBase onClick={() => {
+        <>
+        <button className="endringslogg-dropDown endringslogg-container">
+            Oppdateringer
+        </button>
+        <div className={"collapse-container"}>
+        <div className={"collapse-header"}>Oppdateringer</div>
+            <EndringsloggInnhold style={{backgroundColor: "black"}}dato={datoStreng}
+                                 innholdsOverskrift="NY ENDRING!"
+                                 innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
+                                 nyeNotifikasjoner={nyeNotifikasjoner}
+            />
+        </div>
+        </>
+            /*<EkspanderbartpanelBase onClick={() => {
                 if(open){
                     handleSettEndring(versjonsnummer);
                     setNyeNotifikasjoner(false);
@@ -85,8 +97,7 @@ export function EndringsloggKnapp(props) {
                     nyeNotifikasjoner={false}
                     url={navURL}
                />
-            </EkspanderbartpanelBase>
-        </div>
+            </EkspanderbartpanelBase>*/
     );
 }
 

@@ -4,6 +4,43 @@
     z-index: 998;
     box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
     max-width: 30rem;
+    background-color: white;
+}
+
+.collapse-header {
+    background-color: #3E3832;
+    color: white;
+    padding: 1em;
+    border-top-left-radius: 10px;
+    width: -webkit-fill-available;
+    text-align: center;
+    border-top-right-radius: 10px;
+}
+
+.collapse-container {
+    right: 1em;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 30em;
+}
+
+.collapse-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 90%;
+    width: 0;
+    height: 0;
+    border: 45px solid transparent;
+    border-color: #3e3832;
+    border-top-left-radius: 80px;
+    border-top-right-radius: 80px;
+    border-top: 0;
+    border-left: 0;
+    margin-left: -10px;
+    margin-top: -20px;
 }
 
 .endringslogg-info-ingen-notifikasjoner{
@@ -36,6 +73,7 @@
     flex-direction: column;
     align-items: baseline;
     margin-left: 0;
+    padding-top: 1em;
 }
 
 .endringslogg-title{
@@ -52,6 +90,7 @@
 
 .endringslogg-rad {
     margin-bottom: 1em;
+    background-color: white;
 }
 .endringslogg-skille{
     padding-bottom: 1em;
