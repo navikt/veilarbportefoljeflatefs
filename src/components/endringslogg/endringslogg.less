@@ -30,25 +30,26 @@
 }
 
 .collapse-container-enter {
-    opacity: 0.01;
-    transform: scale(1.1);
+    height: 0em;
+    overflow: hidden;
   }
   
   .collapse-container-enter-active {
-    opacity: 1;
-    transform: scale(1);
-    transition: all 300ms;
+    transition: all 400ms;
+
+    height: 40em;
+    overflow: hidden;
   }
   
   .collapse-container-exit {
-    opacity: 1;
-    transform: scale(1);
+    overflow: hidden;
+    height: 40em;
   }
   
   .collapse-container-exit-active {
-    opacity: 0.01;
-    transform: scale(1.1);
-    transition: all 300ms;
+    height: 0em;
+    overflow: hidden;
+    transition: all 400ms;
   }
 
 .collapse-container::after {

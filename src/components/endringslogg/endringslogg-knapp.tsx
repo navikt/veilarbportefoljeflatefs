@@ -64,7 +64,7 @@ export function EndringsloggKnapp(props) {
             </button>
             <TransitionGroup component={null}>
                 {open && (
-                    <CSSTransition classNames="collapse-container" timeout={300}>
+                    <CSSTransition classNames="collapse-container" timeout={400}>
                         <div className='collapse-container'>
                             <div className={'collapse-header'}>
                                 Oppdateringer
