@@ -35,10 +35,9 @@
   }
   
   .collapse-container-enter-active {
-    transition: all 400ms;
-
     height: 40em;
     overflow: hidden;
+    transition: all 400ms ease-in;
   }
   
   .collapse-container-exit {
@@ -49,7 +48,7 @@
   .collapse-container-exit-active {
     height: 0em;
     overflow: hidden;
-    transition: all 400ms;
+    transition: all 400ms ease-out;
   }
 
 .collapse-container::after {
@@ -65,7 +64,7 @@
     border-top: 0;
     border-left: 0;
     margin-left: -10px;
-    margin-top: -6px;
+    margin-top: -4px;
     transform: rotate(-60deg) skewX(-30deg) scale(1,.866);
 }
 
