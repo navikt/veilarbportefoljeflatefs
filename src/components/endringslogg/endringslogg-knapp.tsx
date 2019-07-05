@@ -52,7 +52,7 @@ function getDatoStreng(dato: Date) {
 }
 
 export function EndringsloggKnapp(props) {
-    const versjonsnummer = '0.1.6';
+    const versjonsnummer = '0.1.7';
     const [nyeNotifikasjoner, setNyeNotifikasjoner] = useState(!harSettEndringsinlegg(versjonsnummer));
     const [open, setOpen] = useState(false);
     const datoStreng = getDatoStreng(new Date());
@@ -69,14 +69,19 @@ export function EndringsloggKnapp(props) {
                             <div className={'collapse-header'}>
                                 Oppdateringer
                             </div>
-                            <EndringsloggInnhold dato={datoStreng}
-                                                 innholdsOverskrift="NY ENDRING!"
-                                                 innholdsTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
+                            <EndringsloggInnhold dato={"18. JUN. 2019"}
+                                                 innholdsOverskrift="Laste ned og skrive ut CV"
+                                                 innholdsTekst="Når du går inn på en bruker kan du nå laste ned CV-en under fanen «Detaljer». Da får du en bedre utskrift."
                                                  nyeNotifikasjoner={nyeNotifikasjoner}
                             />
-                            <EndringsloggInnhold dato={datoStreng}
-                                                 innholdsOverskrift="Min-CV er nå printbar"
-                                                 innholdsTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
+                            <EndringsloggInnhold dato={"06. JUN. 2019"}
+                                                 innholdsOverskrift="Visning av profilering i Detaljer"
+                                                 innholdsTekst="Nå kan du se profileringsresultatet fra brukerens registrering. Du finner det under «Registrering» i fanen «Detaljer» når du går inn på en bruker."
+                                                 nyeNotifikasjoner={nyeNotifikasjoner}
+                            />
+                            <EndringsloggInnhold dato={"29. MAR. 2019"}
+                                                 innholdsOverskrift="Manuell registrering"
+                                                 innholdsTekst="Ny løsning for å registrere brukere manuelt i Modia. Når du går inn på en bruker finner du det i Veilederverktøy (tannhjulet). Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
                                                  nyeNotifikasjoner={nyeNotifikasjoner}
                             />
                         </div>
