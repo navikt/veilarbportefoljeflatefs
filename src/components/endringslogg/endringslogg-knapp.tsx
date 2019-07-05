@@ -44,19 +44,10 @@ function EndringsloggInnhold(props: EndringsloggInnholdProps) {
     );
 }
 
-function getDatoStreng(dato: Date) {
-    let dd = String(dato.getDate()).padStart(2, '0');
-    let mm = 'jul'; // TODO: Endre dette til å ikke være hardkodet
-    let yyyy = dato.getFullYear();
-    return `${dd}. ${mm}. ${yyyy}`;
-}
-
 export function EndringsloggKnapp(props) {
     const versjonsnummer = '0.1.9';
     let nyeNotifikasjoner = !harSettEndringsinlegg(versjonsnummer);
     const [open, setOpen] = useState(false);
-    const datoStreng = getDatoStreng(new Date());
-
 
     return (
         <>
