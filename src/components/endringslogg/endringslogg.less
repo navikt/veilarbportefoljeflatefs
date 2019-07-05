@@ -28,7 +28,22 @@
     z-index: 2;
 }
 
-.collapse-container::after {content: '';
+.collapse-container-lukket{
+    height: 0em;
+    overflow: hidden;
+}
+
+.collapse-container-apen{
+    height: auto;
+    overflow: unset;
+    transition: height 0.5s;
+}
+.collapse-container-apen:hover{
+    height: 27em;
+}
+
+.collapse-container::after {
+    content: '';
     position: absolute;
     top: 0;
     left: 90%;
@@ -110,3 +125,5 @@
     display: table;
     clear: both;
 }
+
+

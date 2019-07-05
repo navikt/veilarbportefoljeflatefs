@@ -49,23 +49,73 @@ export function EndringsloggKnapp(props) {
 
     return (
         <>
-        <button className="endringslogg-dropDown endringslogg-container">
-            Oppdateringer
-        </button>
-        <div className={"collapse-container"}>
-        <div className={"collapse-header"}>Oppdateringer</div>
+            <button className="endringslogg-dropDown endringslogg-container" 
+                    onClick={() => setOpen(!open)}>
+                Oppdateringer
+            </button>
+
+            {collapseContainer(open,nyeNotifikasjoner,datoStreng)}
+        </>
+    );
+}
+
+function collapseContainer(apen: boolean, nyeNotifikasjoner:boolean, datoStreng:string) {
+    console.log(apen)
+    if(apen){
+        return(
+            <div className={"collapse-container collapse-container-apen"}>
+                    <div className={"collapse-header"}>
+                        Oppdateringer
+                    </div>
+                    {collapseInnhold(nyeNotifikasjoner,datoStreng)}
+                </div>
+            )
+    }else{
+        return(
+            <div className={"collapse-container collapse-container-lukket"}>
+                    <div className={"collapse-header"}>
+                        Oppdateringer
+                    </div>
+                    {collapseInnhold(nyeNotifikasjoner,datoStreng)}
+                </div>
+            )
+    }
+
+}
+
+function collapseInnhold(nyeNotifikasjoner:boolean, datoStreng:string) {
+    return(
+        <>
             <EndringsloggInnhold style={{backgroundColor: "black"}}dato={datoStreng}
-                                 innholdsOverskrift="NY ENDRING!"
-                                 innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
-                                 nyeNotifikasjoner={nyeNotifikasjoner}
+            innholdsOverskrift="NY ENDRING!"
+            innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
+            nyeNotifikasjoner={nyeNotifikasjoner}
             />
             <EndringsloggInnhold dato={datoStreng}
-                                     innholdsOverskrift="Min-CV er nå printbar"
-                                     innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
-                                     nyeNotifikasjoner={nyeNotifikasjoner}
+                innholdsOverskrift="Min-CV er nå printbar"
+                innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
+                nyeNotifikasjoner={nyeNotifikasjoner}
             />
-        </div>
         </>
+    )
+}
+
+
+
+
+
+
+const ENDRING_PREFIX = 'Endringslogg';
+function harSettEndringsinlegg(versjon: string) {
+    const senesteVersjonSett = window.localStorage.getItem(ENDRING_PREFIX);
+    return senesteVersjonSett != null && senesteVersjonSett === versjon;
+}
+
+function handleSettEndring(versjon) {
+    window.localStorage.setItem(ENDRING_PREFIX, versjon);
+}
+
+
             /*<EkspanderbartpanelBase onClick={() => {
                 if(open){
                     handleSettEndring(versjonsnummer);
@@ -103,15 +153,3 @@ export function EndringsloggKnapp(props) {
                     url={navURL}
                />
             </EkspanderbartpanelBase>*/
-    );
-}
-
-const ENDRING_PREFIX = 'Endringslogg';
-function harSettEndringsinlegg(versjon: string) {
-    const senesteVersjonSett = window.localStorage.getItem(ENDRING_PREFIX);
-    return senesteVersjonSett != null && senesteVersjonSett === versjon;
-}
-
-function handleSettEndring(versjon) {
-    window.localStorage.setItem(ENDRING_PREFIX, versjon);
-}
