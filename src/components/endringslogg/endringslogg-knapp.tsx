@@ -1,8 +1,9 @@
-import { default as React, useEffect, useState } from 'react';
+import { default as React, useEffect, useState} from 'react';
 import Ekspanderbartpanel, { EkspanderbartpanelBase, EkspanderbartpanelProps } from 'nav-frontend-ekspanderbartpanel';
 import './endringslogg.less';
 import { Innholdstittel, Element, Normaltekst, EtikettLiten } from 'nav-frontend-typografi';
 import classNames from 'classnames/dedupe';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 function EndringsloggInnhold(props) {
     let linkTag: any;
@@ -50,22 +51,28 @@ export function EndringsloggKnapp(props) {
             <button className="endringslogg-dropDown endringslogg-container" onClick={() => setOpen(!open)}>
                 Oppdateringer
             </button>
-            <div className={classNames({'collapse-container collapse-container.apen': open,
-                'collapse-container collapse-container-lukket': !open})}>
-                <div className={'collapse-header'}>
-                    Oppdateringer
-                </div>
-                <EndringsloggInnhold dato={datoStreng}
-                                     innholdsOverskrift="NY ENDRING!"
-                                     innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
-                                     nyeNotifikasjoner={nyeNotifikasjoner}
-                />
-                <EndringsloggInnhold dato={datoStreng}
-                                     innholdsOverskrift="Min-CV er nå printbar"
-                                     innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
-                                     nyeNotifikasjoner={nyeNotifikasjoner}
-                />
-            </div>
+
+            <TransitionGroup component={null}>
+                {open && (
+                <CSSTransition classNames="collapse-container" timeout={300}>
+                    <div className='collapse-container'>
+                        <div className={'collapse-header'}>
+                            Oppdateringer
+                        </div>
+                        <EndringsloggInnhold dato={datoStreng}
+                                            innholdsOverskrift="NY ENDRING!"
+                                            innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
+                                            nyeNotifikasjoner={nyeNotifikasjoner}
+                        />
+                        <EndringsloggInnhold dato={datoStreng}
+                                            innholdsOverskrift="Min-CV er nå printbar"
+                                            innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
+                                            nyeNotifikasjoner={nyeNotifikasjoner}
+                        />
+                    </div>
+                </CSSTransition>
+                )}
+            </TransitionGroup>
         </>
     );
 }

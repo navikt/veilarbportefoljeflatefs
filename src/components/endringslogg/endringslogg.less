@@ -26,21 +26,30 @@
     align-items: center;
     max-width: 30em;
     z-index: 2;
+
 }
 
-.collapse-container-lukket{
-    height: 0em;
-    overflow: hidden;
-}
-
-.collapse-container-apen{
-    height: auto;
-    overflow: unset;
-    transition: height 0.5s;
-}
-.collapse-container-apen:hover{
-    height: 27em;
-}
+.collapse-container-enter {
+    opacity: 0.01;
+    transform: scale(1.1);
+  }
+  
+  .collapse-container-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 300ms;
+  }
+  
+  .collapse-container-exit {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .collapse-container-exit-active {
+    opacity: 0.01;
+    transform: scale(1.1);
+    transition: all 300ms;
+  }
 
 .collapse-container::after {
     content: '';
