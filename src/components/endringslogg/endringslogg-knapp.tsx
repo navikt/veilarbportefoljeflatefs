@@ -28,7 +28,7 @@ function EndringsloggInnhold(props: EndringsloggInnholdProps) {
         <div className="endringslogg-rad">
             <div className="endringslogg-skille">
                 <div className={classNames({
-                    'endringslogg-info-ingen-notifikasjoner ': !props.nyeNotifikasjoner,
+                    'endringslogg-info-ingen-notifikasjoner endringslogg-info-kolonne': !props.nyeNotifikasjoner,
                     'endringslogg-info-nye-notifikasjoner endringslogg-info-kolonne ': props.nyeNotifikasjoner
                 })}/>
                 <div className="endringslogg-innhold endringslogg-kolonne">
@@ -52,14 +52,23 @@ function getDatoStreng(dato: Date) {
 }
 
 export function EndringsloggKnapp(props) {
-    const versjonsnummer = '0.1.7';
-    const [nyeNotifikasjoner, setNyeNotifikasjoner] = useState(!harSettEndringsinlegg(versjonsnummer));
+    const versjonsnummer = '0.1.9';
+    let nyeNotifikasjoner = !harSettEndringsinlegg(versjonsnummer);
     const [open, setOpen] = useState(false);
     const datoStreng = getDatoStreng(new Date());
 
+
     return (
         <>
-            <button className="endringslogg-dropDown endringslogg-container" onClick={() => setOpen(!open)}>
+            <button className="endringslogg-dropDown endringslogg-container" onClick={
+                () => {
+                    if(open){
+                        handleSettEndring(versjonsnummer);
+                        nyeNotifikasjoner = false;
+                    }
+                    setOpen(!open); 
+                }
+            }>
                 Oppdateringer
             </button>
             <TransitionGroup component={null}>
