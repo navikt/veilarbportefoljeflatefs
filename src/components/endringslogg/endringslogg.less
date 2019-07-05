@@ -2,7 +2,6 @@
     display: flex;
     align-items: flex-start;
     z-index: 998;
-    box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
     max-width: 30rem;
     background-color: white;
 }
@@ -25,6 +24,7 @@
     flex-direction: column;
     align-items: center;
     max-width: 30em;
+    box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
     z-index: 2;
 
 }
@@ -51,24 +51,16 @@
     transition: all 400ms ease-out;
   }
 
-.collapse-container::after {
+.endringslogg-dropDown-active::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 90%;
+    top: 29px;
+    left: 41%;
     width: 0;
     height: 0;
-    border: 55px solid transparent;
-    border-color: #3e3832;
-    border-top-left-radius: 24px;
-    border-top: 0;
-    border-left: 0;
-    margin-left: -35px;
-    margin-top: -1px;
-    transform: rotate(45deg);
-    border-top-right-radius: 73px;
-    border-bottom-left-radius: 84px;
-    border-bottom-right-radius: 84px;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-bottom: 11px solid #3e3832;
 }
 
 .endringslogg-info-ingen-notifikasjoner{
@@ -96,6 +88,7 @@
 .endringslogg-dropDown{
     position: absolute;
     right: 1em;
+    outline: transparent;
 }
 
 .endringslogg-innhold{

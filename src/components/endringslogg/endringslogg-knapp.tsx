@@ -51,7 +51,7 @@ export function EndringsloggKnapp(props) {
 
     return (
         <>
-            <button className="endringslogg-dropDown endringslogg-container" onClick={
+            <button className={`endringslogg-dropDown endringslogg-container ${open && "endringslogg-dropDown-active"}`} onClick={
                 () => {
                     if(open){
                         handleSettEndring(versjonsnummer);
