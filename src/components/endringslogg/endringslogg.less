@@ -33,18 +33,18 @@
     height: 0em;
     overflow: hidden;
   }
-  
+
   .collapse-container-enter-active {
     height: 40em;
     overflow: hidden;
     transition: all 400ms ease-in;
   }
-  
+
   .collapse-container-exit {
     overflow: hidden;
     height: 40em;
   }
-  
+
   .collapse-container-exit-active {
     height: 0em;
     overflow: hidden;
@@ -63,19 +63,18 @@
     border-bottom: 11px solid #3e3832;
 }
 
-.endringslogg-info-ingen-notifikasjoner{
+.info_mixin {
     height: .625rem;
     width: .625rem;
     margin-left: auto;
     margin-right: 0.5em;
 }
+.endringslogg-info-ingen-notifikasjoner{
+    .info_mixin()
+}
 
 .endringslogg-info-nye-notifikasjoner{
-    height: .625rem;
-    width: .625rem;
-    margin-left: auto;
-    margin-right: 0.5em;
-
+    .info_mixin();
     background-color: #0067c5;
     border-radius: 50%;
     display: inline-block;
@@ -86,9 +85,13 @@
   }
 
 .endringslogg-dropDown{
+    width: 40px;
+    height: 40px;
     position: absolute;
     right: 1em;
     outline: transparent;
+    background-size: cover;
+    background: url('icon.png') no-repeat;
 }
 
 .endringslogg-innhold{

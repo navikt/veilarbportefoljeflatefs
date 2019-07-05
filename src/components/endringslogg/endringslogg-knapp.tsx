@@ -57,10 +57,9 @@ export function EndringsloggKnapp(props) {
                         handleSettEndring(versjonsnummer);
                         nyeNotifikasjoner = false;
                     }
-                    setOpen(!open); 
+                    setOpen(!open);
                 }
             }>
-                Oppdateringer
             </button>
             <TransitionGroup component={null}>
                 {open && (
