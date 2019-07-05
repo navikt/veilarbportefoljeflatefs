@@ -44,65 +44,37 @@ export function EndringsloggKnapp(props) {
     const [nyeNotifikasjoner, setNyeNotifikasjoner] = useState(!harSettEndringsinlegg(versjonsnummer));
     const [open, setOpen] = useState(false);
     const datoStreng = getDatoStreng(new Date());
-    let navURL = 'https://design.nav.no';
-    let navURLTeskt = 'Teknisk Informasjon';
 
     return (
         <>
-            <button className="endringslogg-dropDown endringslogg-container" 
-                    onClick={() => setOpen(!open)}>
+            <button className="endringslogg-dropDown endringslogg-container" onClick={() => setOpen(!open)}>
                 Oppdateringer
             </button>
-
-            {collapseContainer(open,nyeNotifikasjoner,datoStreng)}
+            <div className={classNames({'collapse-container collapse-container.apen': open,
+                'collapse-container collapse-container-lukket': !open})}>
+                <div className={'collapse-header'}>
+                    Oppdateringer
+                </div>
+                <EndringsloggInnhold dato={datoStreng}
+                                     innholdsOverskrift="NY ENDRING!"
+                                     innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
+                                     nyeNotifikasjoner={nyeNotifikasjoner}
+                />
+                <EndringsloggInnhold dato={datoStreng}
+                                     innholdsOverskrift="Min-CV er nå printbar"
+                                     innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
+                                     nyeNotifikasjoner={nyeNotifikasjoner}
+                />
+            </div>
         </>
     );
 }
 
-function collapseContainer(apen: boolean, nyeNotifikasjoner:boolean, datoStreng:string) {
-    console.log(apen)
-    if(apen){
-        return(
-            <div className={"collapse-container collapse-container-apen"}>
-                    <div className={"collapse-header"}>
-                        Oppdateringer
-                    </div>
-                    {collapseInnhold(nyeNotifikasjoner,datoStreng)}
-                </div>
-            )
-    }else{
-        return(
-            <div className={"collapse-container collapse-container-lukket"}>
-                    <div className={"collapse-header"}>
-                        Oppdateringer
-                    </div>
-                    {collapseInnhold(nyeNotifikasjoner,datoStreng)}
-                </div>
-            )
-    }
-
+interface ContainerProps {
+    apen: boolean;
+    nyeNotifikasjoner: boolean;
+    datoStreng: string;
 }
-
-function collapseInnhold(nyeNotifikasjoner:boolean, datoStreng:string) {
-    return(
-        <>
-            <EndringsloggInnhold style={{backgroundColor: "black"}}dato={datoStreng}
-            innholdsOverskrift="NY ENDRING!"
-            innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
-            nyeNotifikasjoner={nyeNotifikasjoner}
-            />
-            <EndringsloggInnhold dato={datoStreng}
-                innholdsOverskrift="Min-CV er nå printbar"
-                innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
-                nyeNotifikasjoner={nyeNotifikasjoner}
-            />
-        </>
-    )
-}
-
-
-
-
 
 
 const ENDRING_PREFIX = 'Endringslogg';
@@ -114,42 +86,3 @@ function harSettEndringsinlegg(versjon: string) {
 function handleSettEndring(versjon) {
     window.localStorage.setItem(ENDRING_PREFIX, versjon);
 }
-
-
-            /*<EkspanderbartpanelBase onClick={() => {
-                if(open){
-                    handleSettEndring(versjonsnummer);
-                    setNyeNotifikasjoner(false);
-                }
-                setOpen(!open);
-            }} heading={<><div className={classNames({'endringslogg-info-ingen-notifikasjoner': !nyeNotifikasjoner,
-                'endringslogg-info-nye-notifikasjoner': nyeNotifikasjoner})}/><div className="endringslogg-title">Oppdateringer</div></>}>
-                <EndringsloggInnhold dato={datoStreng}
-                                     innholdsOverskrift="NY ENDRING!"
-                                     innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
-                                     nyeNotifikasjoner={nyeNotifikasjoner}
-                />
-                <EndringsloggInnhold dato={datoStreng}
-                                     innholdsOverskrift="Min-CV er nå printbar"
-                                     innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer mange flere om ikke så lenge."
-                                     nyeNotifikasjoner={nyeNotifikasjoner}
-                />
-                <EndringsloggInnhold
-                    dato={datoStreng}
-                    innholdsOverskrift="Coachmarks er lansert!"
-                    innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer
-                    mange flere om ikke så lenge."
-                    nyeNotifikasjoner={false}
-                    url={navURL}
-                    linkTekst={navURLTeskt}
-                />
-
-                <EndringsloggInnhold
-                    dato={datoStreng}
-                    innholdsOverskrift="Nytt filter på 'har sykepenger'"
-                    innholdTekst="Dette er en test på hvordan innhold kan se ut! Det er flere nye endringer og det kommer
-                    mange flere om ikke så lenge."
-                    nyeNotifikasjoner={false}
-                    url={navURL}
-               />
-            </EkspanderbartpanelBase>*/
