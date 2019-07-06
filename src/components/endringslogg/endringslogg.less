@@ -65,10 +65,10 @@
 }
 
 .info_mixin {
-    height: .625rem;
-    width: .625rem;
-    margin-left: auto;
-    margin-right: 0.5em;
+    height: 8px;
+    width: 8px;
+    margin-left: 16px;
+    margin-right: 8px;
 }
 .endringslogg-info-ingen-notifikasjoner{
     .info_mixin()
@@ -93,15 +93,21 @@
     background-size: 40px 40px;
     height: 40px;
     background-color: transparent;
-    background-image: url("icon.png");
+    background-image: url("bell.png");
     border-radius: 20px;
-    border-color: black;}
+    border-color: black;
+}
 
 .endringslogg-innhold{
     display: flex;
+    padding: 0 32px 0 32px;
     flex-direction: column;
     align-items: baseline;
     margin-left: 0;
+}
+
+.endringslogg-datolinje {
+    padding-top: 16px;
 }
 
 .endringslogg-title{
@@ -116,8 +122,8 @@
   }
 
 .endringslogg-rad {
-    padding: 16px 32px 0 32px;
     background-color: white;
+    width: 27em;
 }
 .endringslogg-skille{
     padding-bottom: 1em;
@@ -131,11 +137,8 @@
     clear: both;
 }
 
-
 .endringslogg-rad:after {
     content: "";
     display: table;
     clear: both;
 }
-
-
