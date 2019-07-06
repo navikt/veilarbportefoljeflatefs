@@ -51,7 +51,7 @@ export function EndringsloggKnapp(props) {
 
     return (
         <>
-            <button className={`endringslogg-dropDown endringslogg-container ${open && "endringslogg-dropDown-active"}`} onClick={
+            <button className={`endringslogg-dropDown ${open && "endringslogg-dropDown-active"}`} onClick={
                 () => {
                     if(open){
                         handleSettEndring(versjonsnummer);
@@ -59,8 +59,7 @@ export function EndringsloggKnapp(props) {
                     }
                     setOpen(!open);
                 }
-            }>
-            </button>
+            }/>
             <TransitionGroup component={null}>
                 {open && (
                     <CSSTransition classNames="collapse-container" timeout={400}>

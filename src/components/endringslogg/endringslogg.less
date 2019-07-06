@@ -12,12 +12,13 @@
     padding: 1em;
     border-top-left-radius: 10px;
     width: -webkit-fill-available;
+    height: 48px;
     text-align: center;
     border-top-right-radius: 10px;
 }
 
 .collapse-container {
-    margin-top: 2.5em;
+    margin-top: 50px;
     right: 1em;
     position: absolute;
     display: flex;
@@ -54,8 +55,8 @@
 .endringslogg-dropDown-active::after {
     content: '';
     position: absolute;
-    top: 29px;
-    left: 41%;
+    top: 41px;
+    left: 5%;
     width: 0;
     height: 0;
     border-left: 13px solid transparent;
@@ -85,14 +86,16 @@
   }
 
 .endringslogg-dropDown{
-    width: 40px;
-    height: 40px;
     position: absolute;
+    width: 40px;
     right: 1em;
     outline: transparent;
-    background-size: cover;
-    background: url('icon.png') no-repeat;
-}
+    background-size: 40px 40px;
+    height: 40px;
+    background-color: transparent;
+    background-image: url("icon.png");
+    border-radius: 20px;
+    border-color: black;}
 
 .endringslogg-innhold{
     display: flex;
@@ -110,11 +113,10 @@
 
 .endringslogg-kolonne {
     float: left;
-    max-width: 90%;
   }
 
 .endringslogg-rad {
-    padding: 1em;
+    padding: 16px 32px 0 32px;
     background-color: white;
 }
 .endringslogg-skille{
