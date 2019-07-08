@@ -76,6 +76,16 @@ export function EndringsloggKnapp(props) {
     }, [open]);
     return (
         <div ref={ytreNode}>
+            <div style={{float:'right'}}onClick={
+                () => {
+                    if(open) {
+                        handleSettEndring(versjonsnummer);
+                        nyeNotifikasjoner = false;
+                    }
+                    setOpen(!open);
+                }
+            }>
+                {nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}></div>}
             <button className={`endringslogg-dropDown ${open && 'endringslogg-dropDown-active'}`} onClick={
                 () => {
                     if(open) {
@@ -85,6 +95,7 @@ export function EndringsloggKnapp(props) {
                     setOpen(!open);
                 }
             }/>
+            </div>
             <TransitionGroup component={null}>
                 {open && (
                     <CSSTransition classNames="collapse-container" timeout={400}>
