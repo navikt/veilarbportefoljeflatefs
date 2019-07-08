@@ -53,7 +53,7 @@ export function EndringsloggKnapp(props) {
     // Referranse til ytre div
     const ytreNode = useRef(null);
 
-    const handleClickOutside = e => {
+    const handleClickOutside = (e) => {
         // @ts-ignore
         if (ytreNode.current.contains(e.target)) {
             // Klikket er inne i komponenten
@@ -65,13 +65,13 @@ export function EndringsloggKnapp(props) {
 
     useEffect(() => {
         if (open) {
-            document.addEventListener("mousedown", handleClickOutside);
+            document.addEventListener('mousedown', handleClickOutside);
         } else {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
         }
 
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [open]);
     return (
