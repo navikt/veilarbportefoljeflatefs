@@ -9,45 +9,45 @@
 .collapse-header {
     background-color: #3E3832;
     color: white;
-    padding: 1em;
-    border-top-left-radius: 10px;
+    padding: 1rem;
+    border-top-left-radius: 0.625rem;
     width: -webkit-fill-available;
-    height: 48px;
+    height: 3rem;
     text-align: center;
-    border-top-right-radius: 10px;
+    border-top-right-radius: 0.625rem;
 }
 
 .collapse-container {
-    margin-top: 50px;
-    right: 1em;
+    margin-top: 3.125rem;
+    right: 1rem;
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 30em;
+    max-width: 30rem;
     box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
     z-index: 2;
 
 }
 
 .collapse-container-enter {
-    height: 0em;
+    height: 0rem;
     overflow: hidden;
   }
 
   .collapse-container-enter-active {
-    height: 40em;
+    height: 40rem;
     overflow: hidden;
     transition: all 400ms ease-in;
   }
 
   .collapse-container-exit {
     overflow: hidden;
-    height: 40em;
+    height: 40rem;
   }
 
   .collapse-container-exit-active {
-    height: 0em;
+    height: 0rem;
     overflow: hidden;
     transition: all 400ms ease-out;
   }
@@ -55,26 +55,26 @@
 .endringslogg-dropDown-active::after {
     content: '';
     position: absolute;
-    top: 41px;
+    top: 2.5625rem;
     left: 5%;
     width: 0;
     height: 0;
-    border-left: 13px solid transparent;
-    border-right: 13px solid transparent;
-    border-bottom: 11px solid #3e3832;
+    border-left: 0.8125rem solid transparent;
+    border-right: 0.8125rem solid transparent;
+    border-bottom: 0.6875rem solid #3e3832;
 }
 
 .info_mixin {
-    height: 8px;
-    width: 8px;
-    margin-left: 16px;
-    margin-right: 8px;
+    height: 0.5rem;
+    width:  0.5rem;
+    margin-left: 1rem;
+    margin-right:  0.5rem;
 }
-.endringslogg-info-ingen-notifikasjoner{
+.endringslogg-info-ingen-notifikasjoner {
     .info_mixin()
 }
 
-.endringslogg-info-nye-notifikasjoner{
+.endringslogg-info-nye-notifikasjoner {
     .info_mixin();
     background-color: #0067c5;
     border-radius: 50%;
@@ -85,34 +85,34 @@
     float: left;
   }
 
-.endringslogg-dropDown{
+.endringslogg-dropDown {
     position: absolute;
-    width: 40px;
+    width: 2.5rem;
     right: 1em;
     outline: transparent;
-    background-size: 40px 40px;
-    height: 40px;
+    background-size: 2.5rem 2.5rem;
+    height: 2.5rem;
     background-color: transparent;
     background-image: url("bell.png");
     border: none;
 }
 
-.endringslogg-innhold{
+.endringslogg-innhold {
     display: flex;
-    padding: 0 32px 0 32px;
+    padding: 0 2rem 0 2rem;
     flex-direction: column;
     align-items: baseline;
     margin-left: 0;
 }
 
 .endringslogg-datolinje {
-    padding-top: 16px;
+    padding-top: 1rem;
 }
 
-.endringslogg-title{
+.endringslogg-title {
     margin-right: auto;
-    margin-left: 0.2em;
-    padding-right: 0.5em;
+    margin-left: 0.2rem;
+    padding-right: 0.5rem;
 }
 
 
@@ -122,10 +122,10 @@
 
 .endringslogg-rad {
     background-color: white;
-    width: 27em;
+    width: 27rem;
 }
 .endringslogg-skille{
-    padding-bottom: 1em;
+    padding-bottom: 1rem;
     border-bottom: 1px solid rgba(183,177,169);
 
 }
