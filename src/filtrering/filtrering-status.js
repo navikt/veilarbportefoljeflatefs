@@ -16,7 +16,8 @@ import {
     INAKTIVE_BRUKERE,
     MIN_ARBEIDSLISTE,
     TRENGER_VURDERING,
-    ER_SYKMELDT_MED_ARBEIDSGIVER, MOTER_IDAG
+    ER_SYKMELDT_MED_ARBEIDSGIVER,
+    MOTER_IDAG
 } from './filter-konstanter';
 import './filtrering-status.less';
 
@@ -183,20 +184,6 @@ class FiltreringStatus extends Component {
                     barClassname="erSykmeldtMedArbeidsgiver"
                 />
                 <BarInput
-                    id="avtaltMoteMedNav"
-                    type="radio"
-                    name="ferdigfilter"
-                    className="radioknapp"
-                    value="MOTER_IDAG"
-                    onChange={this.handleChange}
-                    checked={ferdigfilterListe.includes(MOTER_IDAG)}
-                    tekstId="enhet.filtrering.oversikt.avtaltmotermednav.brukere.checkbox"
-                    antall={statustall.data.venterPaSvarFraNAV}
-                    max={statustall.data.totalt}
-                    barClassname="avtaltMoteMedNav"
-                    firstInGroup
-                />
-                <BarInput
                     id="venterPaSvarFraNAV"
                     type="radio"
                     name="ferdigfilter"
@@ -208,6 +195,7 @@ class FiltreringStatus extends Component {
                     antall={statustall.data.venterPaSvarFraNAV}
                     max={statustall.data.totalt}
                     barClassname="venterPaSvarFraNAV"
+                    firstInGroup
                 />
                 <BarInput
                     id="venterPaSvarFraBruker"
@@ -222,6 +210,20 @@ class FiltreringStatus extends Component {
                     max={statustall.data.totalt}
                     barClassname="venterPaSvarFraBruker"
                 />
+                {filtergruppe === 'veileder' &&
+                <BarInput
+                    id="avtaltMoteMedNav"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
+                    value="MOTER_IDAG"
+                    onChange={this.handleChange}
+                    checked={ferdigfilterListe.includes(MOTER_IDAG)}
+                    tekstId="enhet.filtrering.oversikt.avtaltmotermednav.brukere.checkbox"
+                    antall={statustall.data.moterMedNavIdag}
+                    max={statustall.data.totalt}
+                    barClassname="avtaltMoteMedNav"
+                /> }
                 <BarInput
                     id="utlopteAktiviteter"
                     type="radio"

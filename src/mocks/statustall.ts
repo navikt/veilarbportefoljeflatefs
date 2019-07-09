@@ -12,5 +12,6 @@ export default {
     iavtaltAktivitet: 2323,
     minArbeidsliste: 10,
     erSykmeldtMedArbeidsgiver: 20,
-    trengerVurdering: 42
+    trengerVurdering: 42,
+    moterMedNavIdag: 40,
 };
