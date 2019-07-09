@@ -50,6 +50,14 @@ export function EndringsloggKnapp(props) {
     let nyeNotifikasjoner = !harSettEndringsinlegg(versjonsnummer);
     const [open, setOpen] = useState(false);
 
+    const setLocalstorageAndOpenStatus = (openStatus: boolean) => {
+        if (open) {
+            handleSettEndring(versjonsnummer);
+            nyeNotifikasjoner = false;
+        }
+        setOpen(openStatus);
+    };
+
     // Referranse til ytre div
     const ytreNode = useRef(null);
 
@@ -60,45 +68,28 @@ export function EndringsloggKnapp(props) {
             return;
         }
         // Klikket er utenfor, oppdater staten
-        if (open) {
-            handleSettEndring(versjonsnummer);
-            nyeNotifikasjoner = false;
-        }
-        setOpen(false);
+        setLocalstorageAndOpenStatus(false);
     };
 
     const escFunction = (event) => {
         if (event.keyCode === 27) {
-            if (open) {
-                handleSettEndring(versjonsnummer);
-                nyeNotifikasjoner = false;
-            }
-            setOpen(false);
+            setLocalstorageAndOpenStatus(false);
         }
     };
 
     const klikk = () => {
-        if (open) {
-            handleSettEndring(versjonsnummer);
-            nyeNotifikasjoner = false;
-        }
-        setOpen(!open);
+        setLocalstorageAndOpenStatus(!open);
     };
 
     useEffect(() => {
-        if (open) {
             document.addEventListener('mousedown', handleClickOutside);
             document.addEventListener('keydown', escFunction, false);
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside);
-            document.removeEventListener('keydown', escFunction, false);
-
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            return () => {
+                document.removeEventListener('mousedown', handleClickOutside);
+                document.removeEventListener('keydown', escFunction, false);
         };
-    }, [open]);
+    }, []);
+
     return (
         <div ref={ytreNode}>
             <div style={{float: 'right'}} onClick={klikk}>
