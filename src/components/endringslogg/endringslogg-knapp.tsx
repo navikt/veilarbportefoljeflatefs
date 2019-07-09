@@ -1,9 +1,9 @@
 import { default as React, useEffect, useRef, useState } from 'react';
-import './endringslogg.less';
 import { Innholdstittel, Element, Normaltekst, EtikettLiten } from 'nav-frontend-typografi';
 import classNames from 'classnames/dedupe';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { UnmountClosed, Collapse, CollapseProps } from 'react-collapse';
+import  {ReactComponent as AlarmIcon} from './alarm.svg';
 
 interface EndringsloggInnholdProps {
     url?: string;
@@ -86,7 +86,9 @@ export function EndringsloggKnapp(props) {
                 }
             }>
                 {nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}></div>}
-            <button className={`endringslogg-dropDown ${open && 'endringslogg-dropDown-active'}`} onClick={
+            
+            
+            <button c-label="Åpner liste med systemoppdateringer." className={`endringslogg-dropDown ${open && 'endringslogg-dropDown-active'}`} onClick={
                 () => {
                     if(open) {
                         handleSettEndring(versjonsnummer);
@@ -94,7 +96,9 @@ export function EndringsloggKnapp(props) {
                     }
                     setOpen(!open);
                 }
-            }/>
+            }>
+                <AlarmIcon/>
+            </button>
             </div>
             <TransitionGroup component={null}>
                 {open && (
