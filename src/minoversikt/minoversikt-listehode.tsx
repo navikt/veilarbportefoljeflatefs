@@ -11,7 +11,7 @@ import {
     UTLOPTE_AKTIVITETER,
     MIN_ARBEIDSLISTE,
     I_AVTALT_AKTIVITET,
-    ytelseAapSortering
+    ytelseAapSortering, MOTER_IDAG
 } from '../filtrering/filter-konstanter';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Kolonne } from '../ducks/ui/listevisning';
@@ -78,6 +78,11 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             className="listeoverskrift__dato listeoverskriftcol col-xs-2"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
                             id={'portefolje.tabell.svarfrabruker'}
+                        />
+                        <Listeoverskrift
+                            className="listeoverskrift col col-xs-2"
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            id="portefolje.tabell.moteridag"
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskriftcol col-xs-2"
@@ -209,6 +214,15 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             tekstId="portefolje.tabell.ddmmyy"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                            className="sortering-header__dato col col-xs-2"
+                        />
+                        <SorteringHeader
+                            sortering={Sorteringsfelt.MOTER_IDAG}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
+                            tekstId="portefolje.tabell.moteridag.klokkeslett"
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
