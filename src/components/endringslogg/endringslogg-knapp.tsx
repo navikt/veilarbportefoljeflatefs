@@ -4,25 +4,34 @@ import classNames from 'classnames/dedupe';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { UnmountClosed, Collapse, CollapseProps } from 'react-collapse';
 import { ReactComponent as AlarmIcon } from './alarm.svg';
+import { ReactComponent as LinkIcon } from './external_link.svg';
 
-interface EndringsloggInnholdProps {
+interface LinkInnholdProps {
     url?: string;
     linkTekst?: string;
+}
+
+interface EndringsloggInnholdProps extends LinkInnholdProps {
     dato: string;
     innholdsTekst: string;
     innholdsOverskrift: string;
     nyeNotifikasjoner: boolean;
 }
 
+// <i> (åpnes i ny fane)</i>
+function LinkTag(props: LinkInnholdProps) {
+    return  (
+        <> {props.url && (
+            <a className="endringslogg-link" href={props.url} target="_blank">
+                {props.linkTekst ? props.linkTekst : props.url}
+                <LinkIcon/>
+            </a>
+            )}
+        </>
+    );
+}
+
 function EndringsloggInnhold(props: EndringsloggInnholdProps) {
-    let linkTag: any;
-    if (props.url !== undefined) {
-        if (props.linkTekst !== undefined) {
-            linkTag = <><br/> <a href={props.url} target="_blank">{props.linkTekst}</a><i> (åpnes i ny fane)</i></>;
-        } else {
-            linkTag = <> <br/><a href={props.url} target="_blank">{props.url}</a><i> (åpnes i ny fane)</i></>;
-        }
-    }
     return (
         <div className="endringslogg-rad" aria-label={'Endringsloggrad'}>
             <div className="endringslogg-skille">
@@ -37,7 +46,7 @@ function EndringsloggInnhold(props: EndringsloggInnholdProps) {
                     <div className="endringslogg-indent">
                         <Element> {props.innholdsOverskrift} </Element>
                         <Normaltekst> {props.innholdsTekst} </Normaltekst>
-                        {linkTag}
+                        <LinkTag url={props.url} linkTekst={props.linkTekst}/>
                     </div>
                 </div>
             </div>
@@ -93,7 +102,6 @@ export function EndringsloggKnapp(props) {
 
     useEffect(() => {
         if (focusRef.current) {
-            console.log('focus this', focusRef.current);
             focusRef.current.focus();
         }
     });

@@ -31,31 +31,32 @@
 }
 
 .collapse-container-enter {
-    height: 0rem;
+    height: 0;
     overflow: hidden;
     box-shadow: none;
   }
 
-  .collapse-container-enter-active {
+.collapse-container-enter-active {
     height: 40rem;
     overflow: hidden;
     transition: all 400ms ease-in;
     box-shadow: none;
-  }
+}
 
-  .collapse-container-exit {
+.collapse-container-exit {
     overflow: hidden;
     height: 40rem;
     box-shadow: none;
-  }
+}
 
 
-  .collapse-container-exit-active {
+
+.collapse-container-exit-active {
     height: 0rem;
     overflow: hidden;
     transition: all 400ms ease-out;
     box-shadow: none;
-  }
+}
 
 .content::after {
     content: '';
@@ -119,7 +120,6 @@
     position: absolute;
     right: 1em;
     outline: transparent;
-    background-size: 40px 40px;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -127,22 +127,21 @@
 .endringslogg-dropDown:focus {
     fill: @navBla;
     border: 1px solid @navOransjeDarken20;
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem;
+
     #Outline {
         fill: @navBla;
     }
 }
 
-.endringslogg-dropDown:hover #Outline{
+.endringslogg-dropDown:hover #Outline {
     fill: @navBla;
 }
-.endringslogg-nye-notifikasjoner-ikon{
+
+.endringslogg-nye-notifikasjoner-ikon {
     height: 0.6rem;
     width: 0.6rem;
-    margin-right: 0.5rem;
-    margin-bottom: 0.3rem;
-    margin-left: -2.2rem;
-    margin-top: 0.33em;
+    margin: 0.33em 0.5rem 0.3rem -2.2rem;
     background-color: @navBla;
     border-radius: 46%;
     display: inline-block;
@@ -152,11 +151,7 @@
 }
 
 .endringslogg-innhold {
-    display: flex;
     padding: 0 2rem 0 2rem;
-    flex-direction: column;
-    align-items: baseline;
-    margin-left: 0;
 }
 
 .endringslogg-datolinje {
@@ -169,6 +164,10 @@
     padding-right: 0.5rem;
 }
 
+.endringslogg-link {
+    margin-top: 1rem;
+    display: block;
+}
 
 .endringslogg-kolonne {
     float: left;
@@ -194,4 +193,9 @@
     content: "";
     display: table;
     clear: both;
+}
+
+#external_link {
+    width: 0.668rem;
+    margin-left: 0.3em;
 }
