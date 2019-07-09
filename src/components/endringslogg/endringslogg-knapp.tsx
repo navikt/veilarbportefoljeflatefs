@@ -18,13 +18,13 @@ function EndringsloggInnhold(props: EndringsloggInnholdProps) {
     let linkTag: any;
     if (props.url !== undefined) {
         if (props.linkTekst !== undefined) {
-            linkTag = <><a href={props.url} target="_blank">{props.linkTekst}</a><i> (Åpnes i ny fane)</i></>;
+            linkTag = <><br/> <a href={props.url} target="_blank">{props.linkTekst}</a><i> (åpnes i ny fane)</i></>;
         } else {
-            linkTag = <><a href={props.url} target="_blank">{props.url}</a><i> (Åpnes i ny fane)</i></>;
+            linkTag = <> <br/><a href={props.url} target="_blank">{props.url}</a><i> (åpnes i ny fane)</i></>;
         }
     }
     return (
-        <div className="endringslogg-rad">
+        <div className="endringslogg-rad" aria-label={'Endringsloggrad'}>
             <div className="endringslogg-skille">
                 <div className="endringslogg-datolinje">
                 <div className={classNames({
@@ -60,14 +60,39 @@ export function EndringsloggKnapp(props) {
             return;
         }
         // Klikket er utenfor, oppdater staten
+        if(open) {
+            handleSettEndring(versjonsnummer);
+            nyeNotifikasjoner = false;
+        }
         setOpen(false);
+    };
+
+    const escFunction = (event) => {
+        if(event.keyCode === 27) {
+            if(open) {
+                handleSettEndring(versjonsnummer);
+                nyeNotifikasjoner = false;
+            }
+            setOpen(false);
+        }
+    };
+
+    const klikk = () => {
+        if(open) {
+            handleSettEndring(versjonsnummer);
+            nyeNotifikasjoner = false;
+        }
+        setOpen(!open);
     };
 
     useEffect(() => {
         if (open) {
             document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('keydown', escFunction, false);
         } else {
             document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', escFunction, false);
+
         }
 
         return () => {
@@ -76,25 +101,9 @@ export function EndringsloggKnapp(props) {
     }, [open]);
     return (
         <div ref={ytreNode}>
-            <div style={{float:'right'}}onClick={
-                () => {
-                    if(open) {
-                        handleSettEndring(versjonsnummer);
-                        nyeNotifikasjoner = false;
-                    }
-                    setOpen(!open);
-                }
-            }>
-                {nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}></div>}
-            <button className={`endringslogg-dropDown ${open && 'endringslogg-dropDown-active'}`} onClick={
-                () => {
-                    if(open) {
-                        handleSettEndring(versjonsnummer);
-                        nyeNotifikasjoner = false;
-                    }
-                    setOpen(!open);
-                }
-            }/>
+            <div style={{float:'right'}}>
+                {nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'} onClick={klikk}></div>}
+            <button className={`endringslogg-dropDown ${open && 'endringslogg-dropDown-active'}`} onClick={klikk}/>
             </div>
             <TransitionGroup component={null}>
                 {open && (
@@ -117,6 +126,8 @@ export function EndringsloggKnapp(props) {
                                                  innholdsOverskrift="Manuell registrering"
                                                  innholdsTekst="Ny løsning for å registrere brukere manuelt i Modia. Når du går inn på en bruker finner du det i Veilederverktøy (tannhjulet). Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
                                                  nyeNotifikasjoner={nyeNotifikasjoner}
+                                                 linkTekst="Les nyhetssak på Navet om den nye manuelle registreringen i Modia"
+                                                 url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
                             />
                         </div>
                     </CSSTransition>
