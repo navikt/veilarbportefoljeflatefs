@@ -2,7 +2,7 @@ import { AppState } from '../../reducer';
 import { Kolonne, ListevisningType } from './listevisning';
 import { FiltreringAktiviteterValg, AktiviteterValg, FiltreringState } from '../filtrering';
 import {
-    I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
+    I_AVTALT_AKTIVITET, MOTER_IDAG, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
 
@@ -49,6 +49,7 @@ export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolo
     return [Kolonne.BRUKER, Kolonne.FODSELSNR]
         .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt))
+        .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
         .concat(addHvis(Kolonne.AVTALT_AKTIVITET, filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
         .concat(addHvis(Kolonne.VENTER_SVAR, filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) || filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)))
