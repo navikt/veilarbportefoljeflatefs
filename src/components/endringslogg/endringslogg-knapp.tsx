@@ -20,36 +20,31 @@ interface EndringsloggInnholdProps extends LinkInnholdProps {
 
 // <i> (åpnes i ny fane)</i>
 function LinkTag(props: LinkInnholdProps) {
-    return  (
+    return (
         <> {props.url && (
             <a className="endringslogg-link" href={props.url} target="_blank">
                 {props.linkTekst ? props.linkTekst : props.url}
                 <LinkIcon/>
             </a>
-            )}
+        )}
         </>
     );
 }
 
 function EndringsloggInnhold(props: EndringsloggInnholdProps) {
     return (
-        <div className="endringslogg-rad" aria-label={'Endringsloggrad'}>
-            <div className="endringslogg-skille">
-                <div className="endringslogg-datolinje">
-                    <div className={classNames({
-                        'endringslogg-info-ingen-notifikasjoner endringslogg-info-kolonne': !props.nyeNotifikasjoner,
-                        'endringslogg-info-nye-notifikasjoner endringslogg-info-kolonne ': props.nyeNotifikasjoner
+        <div className="endringslogg-rad endringslogg-skille" aria-label="Endringsloggrad">
+            <div className="endringslogg-datolinje">
+                    <div className={classNames('endringslogg-info-kolonne', {
+                        'endringslogg-info-nye-notifikasjoner ': props.nyeNotifikasjoner
                     })}/>
                     <EtikettLiten>{props.dato}</EtikettLiten>
                 </div>
                 <div className="endringslogg-innhold endringslogg-kolonne">
-                    <div className="endringslogg-indent">
-                        <Element> {props.innholdsOverskrift} </Element>
-                        <Normaltekst> {props.innholdsTekst} </Normaltekst>
-                        <LinkTag url={props.url} linkTekst={props.linkTekst}/>
-                    </div>
+                    <Element> {props.innholdsOverskrift} </Element>
+                    <Normaltekst> {props.innholdsTekst} </Normaltekst>
+                    <LinkTag url={props.url} linkTekst={props.linkTekst}/>
                 </div>
-            </div>
         </div>
     );
 }
@@ -92,11 +87,11 @@ export function EndringsloggKnapp(props) {
     };
 
     useEffect(() => {
-            document.addEventListener('mousedown', handleClickOutside);
-            document.addEventListener('keydown', escFunction, false);
-            return () => {
-                document.removeEventListener('mousedown', handleClickOutside);
-                document.removeEventListener('keydown', escFunction, false);
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('keydown', escFunction, false);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', escFunction, false);
         };
     }, []);
 
@@ -117,32 +112,32 @@ export function EndringsloggKnapp(props) {
             </div>
             <TransitionGroup component={null}>
                 {open && (
-                        <CSSTransition classNames="collapse-container" timeout={400}>
-                            <div className="collapse-container">
-                                <div className="content" ref={focusRef} tabIndex={-1}>
-                                    <div className={'collapse-header'}>
-                                        Oppdateringer
-                                    </div>
-                                    <EndringsloggInnhold dato={'18. JUN. 2019'}
-                                                         innholdsOverskrift="Laste ned og skrive ut CV"
-                                                         innholdsTekst="Når du går inn på en bruker kan du nå laste ned CV-en under fanen «Detaljer». Da får du en bedre utskrift."
-                                                         nyeNotifikasjoner={nyeNotifikasjoner}
-                                    />
-                                    <EndringsloggInnhold dato={'06. JUN. 2019'}
-                                                         innholdsOverskrift="Visning av profilering i Detaljer"
-                                                         innholdsTekst="Nå kan du se profileringsresultatet fra brukerens registrering. Du finner det under «Registrering» i fanen «Detaljer» når du går inn på en bruker."
-                                                         nyeNotifikasjoner={nyeNotifikasjoner}
-                                    />
-                                    <EndringsloggInnhold dato={'29. MAR. 2019'}
-                                                         innholdsOverskrift="Manuell registrering"
-                                                         innholdsTekst="Ny løsning for å registrere brukere manuelt i Modia. Når du går inn på en bruker finner du det i Veilederverktøy (tannhjulet). Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
-                                                         nyeNotifikasjoner={nyeNotifikasjoner}
-                                                         linkTekst="Les nyhetssak på Navet om den nye manuelle registreringen i Modia"
-                                                         url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
-                                    />
+                    <CSSTransition classNames="collapse-container" timeout={400}>
+                        <div className="collapse-container">
+                            <div className="content" ref={focusRef} tabIndex={-1}>
+                                <div className={'collapse-header'}>
+                                    Oppdateringer
                                 </div>
+                                <EndringsloggInnhold dato={'18. JUN. 2019'}
+                                                     innholdsOverskrift="Laste ned og skrive ut CV"
+                                                     innholdsTekst="Når du går inn på en bruker kan du nå laste ned CV-en under fanen «Detaljer». Da får du en bedre utskrift."
+                                                     nyeNotifikasjoner={nyeNotifikasjoner}
+                                />
+                                <EndringsloggInnhold dato={'06. JUN. 2019'}
+                                                     innholdsOverskrift="Visning av profilering i Detaljer"
+                                                     innholdsTekst="Nå kan du se profileringsresultatet fra brukerens registrering. Du finner det under «Registrering» i fanen «Detaljer» når du går inn på en bruker."
+                                                     nyeNotifikasjoner={nyeNotifikasjoner}
+                                />
+                                <EndringsloggInnhold dato={'29. MAR. 2019'}
+                                                     innholdsOverskrift="Manuell registrering"
+                                                     innholdsTekst="Ny løsning for å registrere brukere manuelt i Modia. Når du går inn på en bruker finner du det i Veilederverktøy (tannhjulet). Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
+                                                     nyeNotifikasjoner={nyeNotifikasjoner}
+                                                     linkTekst="Les nyhetssak på Navet om den nye manuelle registreringen i Modia"
+                                                     url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
+                                />
                             </div>
-                        </CSSTransition>
+                        </div>
+                    </CSSTransition>
                 )}
             </TransitionGroup>
         </div>
