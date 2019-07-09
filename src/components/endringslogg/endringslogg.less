@@ -36,31 +36,31 @@
     box-shadow: none;
   }
 
-  .collapse-container-enter-active {
+.collapse-container-enter-active {
     height: 40rem;
     overflow: hidden;
     transition: all 400ms ease-in;
     box-shadow: none;
-  }
+}
 
-  .collapse-container-exit {
+.collapse-container-exit {
     overflow: hidden;
     height: 40rem;
     box-shadow: none;
-  }
+}
 
-  .collapse-container-exit-active {
+.collapse-container-exit-active {
     height: 0rem;
     overflow: hidden;
     transition: all 400ms ease-out;
     box-shadow: none;
-  }
+}
 
 .endringslogg-dropDown-active::after {
     content: '';
     position: absolute;
     top: 2.5625rem;
-    left: 5%;
+    left: 22%;
     width: 0;
     height: 0;
     border-left: 0.8125rem solid transparent;
@@ -91,23 +91,22 @@
 
 .endringslogg-dropDown {
     position: absolute;
-    width: 40px;
     right: 1em;
     outline: transparent;
-    background-size: 40px 40px;
-    height: 40px;
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
-.endringslogg-dropDown:focus #Outline{
+
+.endringslogg-dropDown:focus #Outline {
     fill: @navBla;
 }
 
-.endringslogg-dropDown:hover #Outline{
+.endringslogg-dropDown:hover #Outline {
     fill: @navBla;
 }
-.endringslogg-nye-notifikasjoner-ikon{
+
+.endringslogg-nye-notifikasjoner-ikon {
     height: 0.6rem;
     width: 0.6rem;
     margin-right: 0.5rem;
@@ -123,11 +122,7 @@
 }
 
 .endringslogg-innhold {
-    display: flex;
     padding: 0 2rem 0 2rem;
-    flex-direction: column;
-    align-items: baseline;
-    margin-left: 0;
 }
 
 .endringslogg-datolinje {
@@ -140,6 +135,10 @@
     padding-right: 0.5rem;
 }
 
+.endringslogg-link {
+    margin-top: 1rem;        
+    display: block;
+}
 
 .endringslogg-kolonne {
     float: left;
@@ -165,4 +164,9 @@
     content: "";
     display: table;
     clear: both;
+}
+
+#external_link {
+    width: 0.668rem;
+    margin-left: 0.3em;
 }
