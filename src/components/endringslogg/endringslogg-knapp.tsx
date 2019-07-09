@@ -59,7 +59,8 @@ export function EndringsloggKnapp(props) {
     };
 
     // Referranse til ytre div
-    const ytreNode = useRef(null);
+    const ytreNode = useRef<HTMLDivElement>(null);
+    const focusRef = useRef<HTMLDivElement>(null);
 
     const handleClickOutside = (e) => {
         // @ts-ignore
@@ -90,6 +91,13 @@ export function EndringsloggKnapp(props) {
         };
     }, []);
 
+    useEffect(() => {
+        if (focusRef.current) {
+            console.log('focus this', focusRef.current);
+            focusRef.current.focus();
+        }
+    });
+
     return (
         <div ref={ytreNode}>
             <div style={{float: 'right'}} onClick={klikk}>
@@ -101,30 +109,32 @@ export function EndringsloggKnapp(props) {
             </div>
             <TransitionGroup component={null}>
                 {open && (
-                    <CSSTransition classNames="collapse-container" timeout={400}>
-                        <div className="collapse-container">
-                            <div className={'collapse-header'}>
-                                Oppdateringer
+                        <CSSTransition classNames="collapse-container" timeout={400}>
+                            <div className="collapse-container">
+                                <div className="content" ref={focusRef} tabIndex={-1}>
+                                    <div className={'collapse-header'}>
+                                        Oppdateringer
+                                    </div>
+                                    <EndringsloggInnhold dato={'18. JUN. 2019'}
+                                                         innholdsOverskrift="Laste ned og skrive ut CV"
+                                                         innholdsTekst="Når du går inn på en bruker kan du nå laste ned CV-en under fanen «Detaljer». Da får du en bedre utskrift."
+                                                         nyeNotifikasjoner={nyeNotifikasjoner}
+                                    />
+                                    <EndringsloggInnhold dato={'06. JUN. 2019'}
+                                                         innholdsOverskrift="Visning av profilering i Detaljer"
+                                                         innholdsTekst="Nå kan du se profileringsresultatet fra brukerens registrering. Du finner det under «Registrering» i fanen «Detaljer» når du går inn på en bruker."
+                                                         nyeNotifikasjoner={nyeNotifikasjoner}
+                                    />
+                                    <EndringsloggInnhold dato={'29. MAR. 2019'}
+                                                         innholdsOverskrift="Manuell registrering"
+                                                         innholdsTekst="Ny løsning for å registrere brukere manuelt i Modia. Når du går inn på en bruker finner du det i Veilederverktøy (tannhjulet). Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
+                                                         nyeNotifikasjoner={nyeNotifikasjoner}
+                                                         linkTekst="Les nyhetssak på Navet om den nye manuelle registreringen i Modia"
+                                                         url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
+                                    />
+                                </div>
                             </div>
-                            <EndringsloggInnhold dato={'18. JUN. 2019'}
-                                                 innholdsOverskrift="Laste ned og skrive ut CV"
-                                                 innholdsTekst="Når du går inn på en bruker kan du nå laste ned CV-en under fanen «Detaljer». Da får du en bedre utskrift."
-                                                 nyeNotifikasjoner={nyeNotifikasjoner}
-                            />
-                            <EndringsloggInnhold dato={'06. JUN. 2019'}
-                                                 innholdsOverskrift="Visning av profilering i Detaljer"
-                                                 innholdsTekst="Nå kan du se profileringsresultatet fra brukerens registrering. Du finner det under «Registrering» i fanen «Detaljer» når du går inn på en bruker."
-                                                 nyeNotifikasjoner={nyeNotifikasjoner}
-                            />
-                            <EndringsloggInnhold dato={'29. MAR. 2019'}
-                                                 innholdsOverskrift="Manuell registrering"
-                                                 innholdsTekst="Ny løsning for å registrere brukere manuelt i Modia. Når du går inn på en bruker finner du det i Veilederverktøy (tannhjulet). Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
-                                                 nyeNotifikasjoner={nyeNotifikasjoner}
-                                                 linkTekst="Les nyhetssak på Navet om den nye manuelle registreringen i Modia"
-                                                 url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
-                            />
-                        </div>
-                    </CSSTransition>
+                        </CSSTransition>
                 )}
             </TransitionGroup>
         </div>
