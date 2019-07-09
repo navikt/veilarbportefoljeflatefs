@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import ActiveLink from "./active-link";
-import { EndringsloggKnapp } from "../components/endringslogg/endringslogg-knapp"
+import { Endringslogg } from "../components/endringslogg/endringslogg"
 
 function Lenker() {
     return (
@@ -25,7 +25,7 @@ function Lenker() {
                 </ActiveLink>
             </h2>
             <div style={{flexGrow: "1", position: "relative"}}>
-                <EndringsloggKnapp/>
+                <Endringslogg/>
             </div>
         </div>
     );
