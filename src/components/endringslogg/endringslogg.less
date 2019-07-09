@@ -80,7 +80,7 @@
 
 .endringslogg-info-nye-notifikasjoner {
     .info_mixin();
-    background-color: #0067c5;
+    background-color: @navBla;
     border-radius: 50%;
     display: inline-block;
 }
@@ -91,18 +91,22 @@
 
 .endringslogg-dropDown {
     position: absolute;
-    width: 2.5rem;
+    width: 40px;
     right: 1em;
     outline: transparent;
-    background-size: 2rem 2rem;
-    height: 2.5rem;
+    background-size: 40px 40px;
+    height: 40px;
     background-color: transparent;
-    background-image: url(./bell.png);
     border: none;
-    background-repeat: no-repeat;
     cursor: pointer;
 }
+.endringslogg-dropDown:focus #Outline{
+    fill: @navBla;
+}
 
+.endringslogg-dropDown:hover #Outline{
+    fill: @navBla;
+}
 .endringslogg-nye-notifikasjoner-ikon{
     height: 0.6rem;
     width: 0.6rem;
@@ -110,7 +114,7 @@
     margin-bottom: 0.3rem;
     margin-left: -2.2rem;
     margin-top: 0.33em;
-    background-color: #0067c5;
+    background-color: @navBla;
     border-radius: 46%;
     display: inline-block;
     z-index: 99;

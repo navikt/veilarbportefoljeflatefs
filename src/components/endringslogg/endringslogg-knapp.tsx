@@ -1,9 +1,9 @@
 import { default as React, useEffect, useRef, useState } from 'react';
-import './endringslogg.less';
 import { Innholdstittel, Element, Normaltekst, EtikettLiten } from 'nav-frontend-typografi';
 import classNames from 'classnames/dedupe';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { UnmountClosed, Collapse, CollapseProps } from 'react-collapse';
+import { ReactComponent as AlarmIcon } from './alarm.svg';
 
 interface EndringsloggInnholdProps {
     url?: string;
@@ -27,10 +27,10 @@ function EndringsloggInnhold(props: EndringsloggInnholdProps) {
         <div className="endringslogg-rad" aria-label={'Endringsloggrad'}>
             <div className="endringslogg-skille">
                 <div className="endringslogg-datolinje">
-                <div className={classNames({
-                    'endringslogg-info-ingen-notifikasjoner endringslogg-info-kolonne': !props.nyeNotifikasjoner,
-                    'endringslogg-info-nye-notifikasjoner endringslogg-info-kolonne ': props.nyeNotifikasjoner
-                })}/>
+                    <div className={classNames({
+                        'endringslogg-info-ingen-notifikasjoner endringslogg-info-kolonne': !props.nyeNotifikasjoner,
+                        'endringslogg-info-nye-notifikasjoner endringslogg-info-kolonne ': props.nyeNotifikasjoner
+                    })}/>
                     <EtikettLiten>{props.dato}</EtikettLiten>
                 </div>
                 <div className="endringslogg-innhold endringslogg-kolonne">
@@ -60,7 +60,7 @@ export function EndringsloggKnapp(props) {
             return;
         }
         // Klikket er utenfor, oppdater staten
-        if(open) {
+        if (open) {
             handleSettEndring(versjonsnummer);
             nyeNotifikasjoner = false;
         }
@@ -68,8 +68,8 @@ export function EndringsloggKnapp(props) {
     };
 
     const escFunction = (event) => {
-        if(event.keyCode === 27) {
-            if(open) {
+        if (event.keyCode === 27) {
+            if (open) {
                 handleSettEndring(versjonsnummer);
                 nyeNotifikasjoner = false;
             }
@@ -78,7 +78,7 @@ export function EndringsloggKnapp(props) {
     };
 
     const klikk = () => {
-        if(open) {
+        if (open) {
             handleSettEndring(versjonsnummer);
             nyeNotifikasjoner = false;
         }
@@ -101,9 +101,12 @@ export function EndringsloggKnapp(props) {
     }, [open]);
     return (
         <div ref={ytreNode}>
-            <div style={{float:'right'}}>
-                {nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'} onClick={klikk}></div>}
-            <button className={`endringslogg-dropDown ${open && 'endringslogg-dropDown-active'}`} onClick={klikk}/>
+            <div style={{float: 'right'}} onClick={klikk}>
+                {nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}/>}
+                <button c-label="Åpner liste med systemoppdateringer."
+                        className={`endringslogg-dropDown ${open && 'endringslogg-dropDown-active'}`} onClick={klikk}>
+                    <AlarmIcon/>
+                </button>
             </div>
             <TransitionGroup component={null}>
                 {open && (
