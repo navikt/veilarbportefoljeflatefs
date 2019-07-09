@@ -6,12 +6,14 @@ import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/ukekolonne';
 import {
     I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER, VENTER_PA_SVAR_FRA_NAV,
-    ytelsevalg, ytelseAapSortering
+    ytelsevalg, ytelseAapSortering, MOTER_IDAG
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
 import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
+import TidKolonne from '../components/tidkolonne';
+import moment from 'moment';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -33,6 +35,9 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
+    const moteStartTid = bruker.moteStartTid ? (moment(bruker.moteStartTid).get('hours') * 60 + moment(bruker.moteStartTid).get('minutes')) : null;
+    const moteSluttTid = bruker.moteSluttTid;
+    const varighet = moteSluttTid && moteStartTid ? moment.duration(moment(moteSluttTid).diff(bruker.moteStartTid)).asMinutes() : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
@@ -96,6 +101,16 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 dato={venterPaSvarFraNAV}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
+            />
+            <TidKolonne
+                className="col col-xs-2"
+                dato={moteStartTid}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+            />
+            <TidKolonne
+                className="col col-xs-2"
+                dato={varighet}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
             />
             <DatoKolonne
                 className="col col-xs-2"

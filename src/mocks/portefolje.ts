@@ -45,6 +45,8 @@ function lagGrunndata() {
     const brukerAktiviteter = Object.keys(aktiviteter)
         .reduce( (acc, curr) => ({...acc, [curr]: Math.random() > 0.05 ? null : new Date() }), {});
 
+    const moteStartTid = Math.random() > 0.5 ? new Date() : null;
+
     return {
         fnr: `${dag.toString().padStart(2, '0')}${mnd.toString().padStart(2, '0')}${ar.toString().padStart(2, '0')}${individsifre}${kontrollsifre}`,
         fodselsdato: {
@@ -59,7 +61,9 @@ function lagGrunndata() {
         nyesteUtlopteAktivitet,
         venterPaSvarFraBruker,
         venterPaSvarFraNAV,
-        aktiviteter: brukerAktiviteter
+        aktiviteter: brukerAktiviteter,
+        moteStartTid,
+        moteSluttTid: moteStartTid && new Date(moteStartTid.getTime() + ((90 * 60 * 1000)))
     };
 }
 
@@ -170,7 +174,9 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         aapUnntakUkerIgjenFasett: ytelse.aapUnntakUkerIgjenFasett,
         arbeidsliste,
         aktiviteter: grunndata.aktiviteter,
-        erSykmeldtMedArbeidsgiver
+        erSykmeldtMedArbeidsgiver,
+        moteStartTid: grunndata.moteStartTid,
+        moteSluttTid: grunndata.moteSluttTid,
     };
 }
 
