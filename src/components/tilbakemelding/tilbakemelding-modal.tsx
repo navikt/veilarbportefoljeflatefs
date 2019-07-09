@@ -78,7 +78,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                     Tilbakemelding
                 </Innholdstittel>
                 <Normaltekst className="tilbakemelding-modal__ingress">
-                    Vi har endret layout i oversikten. Hvordan opplever du endringen? Svarene er anonyme.
+                    Hvor fornøyd er du med måten du får informasjon om endringer i Oversikten? Svarene er anonyme.
                 </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
                     <TilfredshetValg
@@ -93,7 +93,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         <div className="tilbakemelding-modal__kommentar">
                             <Textarea
                                 className="tilbakemelding-modal__kommentar-felt"
-                                label="Si gjerne litt mer om opplevelsen av endringen."
+                                label="Si gjerne litt mer om dette."
                                 rows={this.KOMMENTAR_ROWS}
                                 maxLength={this.KOMMENTAR_MAX_CHAR}
                                 value={kommentar}
