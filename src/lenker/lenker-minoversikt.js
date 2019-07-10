@@ -8,7 +8,7 @@ function LenkerMinoversikt({ veilederident }) {
     const path = veilederident === null ? 'portefolje' : `portefolje/${veilederident}`;
 
     return (
-        <div className="lenker-min blokk-m" role="tablist">
+        <div className="lenker blokk-m" role="tablist">
             <ActiveLink
                 to={path}
                 className="oversiktslenke typo-undertittel"

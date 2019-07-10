@@ -1,5 +1,5 @@
 import classNames from 'classnames/dedupe';
-import { Element, EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
+import { EtikettLiten, Normaltekst, Sidetittel,Undertittel } from 'nav-frontend-typografi';
 import { default as React } from 'react';
 import { ReactComponent as LinkIcon } from './external_link.svg';
 
@@ -37,7 +37,7 @@ export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
                 <EtikettLiten>{props.dato}</EtikettLiten>
             </div>
             <div className="endringslogg-innhold endringslogg-kolonne">
-                <Element> {props.innholdsOverskrift} </Element>
+                <Undertittel tag="h4" > {props.innholdsOverskrift} </Undertittel>
                 <Normaltekst> {props.innholdsTekst} </Normaltekst>
                 <LinkTag url={props.url} linkTekst={props.linkTekst}/>
             </div>

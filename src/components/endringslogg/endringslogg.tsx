@@ -115,7 +115,7 @@ function EndringsloggKnapp(props) {
 function EndringsloggHeader(props) {
     return (
         <div className={'collapse-header'}>
-            Nytt i Modia arbiedsrettet oppfølging
+            Nytt i Arbeidsrettet oppfølging
         </div>
     );
 }
