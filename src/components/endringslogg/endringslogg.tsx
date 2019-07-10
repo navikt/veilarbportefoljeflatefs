@@ -3,12 +3,13 @@ import { Innholdstittel, Element, Normaltekst, EtikettLiten } from 'nav-frontend
 import classNames from 'classnames/dedupe';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { UnmountClosed, Collapse, CollapseProps } from 'react-collapse';
-import { ReactComponent as AlarmIcon } from './alarm.svg';
 import { ReactComponent as LinkIcon } from './external_link.svg';
+import { ReactComponent as AlarmIcon } from './icon.svg';
 import EndringsloggInnhold from './endringslogg_innhold';
 import { connect } from 'react-redux';
 import { ENDRINGSLOGG } from '../../konstanter';
 import { sjekkFeature } from '../../ducks/features';
+import TransitionContainer from './transitionContainer';
 import { hentAktivBruker, hentAktivEnhet } from '../enhet-context/context-api';
 
 interface EndringsloggMetrikker {
@@ -138,43 +139,27 @@ function Endringslogg(props: StateProps) {
     return (
         <div ref={loggNode}>
             <EndringsloggKnapp klikk={klikk} open={open} nyeNotifikasjoner={nyeNotifikasjoner}/>
-            {open && (
-                <TransitionContainer open={open} focusRef={focusRef}>
+                <TransitionContainer visible={open} focusRef={focusRef}>
                     <EndringsloggHeader/>
                     <EndringsloggInnhold dato={'18. JUN. 2019'}
                                          innholdsOverskrift="Laste ned og skrive ut CV"
-                                         innholdsTekst="Når du går inn på en bruker kan du nå laste ned CV-en under fanen «Detaljer». Da får du en bedre utskrift."
+                                         innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."
                                          nyeNotifikasjoner={nyeNotifikasjoner}
                     />
                     <EndringsloggInnhold dato={'06. JUN. 2019'}
                                          innholdsOverskrift="Visning av profilering i Detaljer"
-                                         innholdsTekst="Nå kan du se profileringsresultatet fra brukerens registrering. Du finner det under «Registrering» i fanen «Detaljer» når du går inn på en bruker."
+                                         innholdsTekst= "Nå finner du profileringsresultatet for brukeren under Registrering i Detaljer."
                                          nyeNotifikasjoner={nyeNotifikasjoner}
                     />
                     <EndringsloggInnhold dato={'29. MAR. 2019'}
                                          innholdsOverskrift="Manuell registrering"
-                                         innholdsTekst="Ny løsning for å registrere brukere manuelt i Modia. Når du går inn på en bruker finner du det i Veilederverktøy (tannhjulet). Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
+                                         innholdsTekst= "Du kan nå registrere brukere manuelt i Veilederverktøy (tannhjulet).  Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
                                          nyeNotifikasjoner={nyeNotifikasjoner}
-                                         linkTekst="Les nyhetssak på Navet om den nye manuelle registreringen i Modia"
+                                         linkTekst="Nyhetssak på Navet"
                                          url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
                     />
                 </TransitionContainer>
-            )}
         </div>
-    );
-}
-
-function TransitionContainer(props) {
-    return (
-        <TransitionGroup component={null}>
-            <CSSTransition classNames="collapse-container" timeout={400}>
-                <div className="collapse-container">
-                    <div className="content" ref={props.focusRef} tabIndex={-1}>
-                        {props.children}
-                    </div>
-                </div>
-            </CSSTransition>
-        </TransitionGroup>
     );
 }
 
