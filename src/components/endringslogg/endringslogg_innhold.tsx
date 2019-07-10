@@ -15,7 +15,6 @@ interface LinkInnholdProps {
     linkTekst?: string;
 }
 
-// <i> (åpnes i ny fane)</i>
 function LinkTag(props: LinkInnholdProps) {
     return (
         props.url ? (

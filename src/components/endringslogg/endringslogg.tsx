@@ -100,7 +100,7 @@ export function Endringslogg(props) {
 function EndringsloggHeader(props) {
     return (
         <div className={'collapse-header'}>
-            Oppdateringer
+            Nytt i Modia arbiedsrettet oppfølging
         </div>
     );
 }
