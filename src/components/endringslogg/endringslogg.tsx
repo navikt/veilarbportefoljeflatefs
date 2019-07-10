@@ -9,7 +9,7 @@ import EndringsloggInnhold from './endringslogg_innhold';
 import { connect } from 'react-redux';
 import { ENDRINGSLOGG } from '../../konstanter';
 import { sjekkFeature } from '../../ducks/features';
-import TransitionContainer from './TransitionContainer';
+import TransitionContainer from './transitionContainer';
 
 interface StateProps {
     harFeature: (feature: string) => boolean;
