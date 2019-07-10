@@ -1,16 +1,18 @@
 import { default as React, useEffect, useRef, useState } from 'react';
-import { Innholdstittel, Element, Normaltekst, EtikettLiten } from 'nav-frontend-typografi';
-import classNames from 'classnames/dedupe';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { UnmountClosed, Collapse, CollapseProps } from 'react-collapse';
-import { ReactComponent as LinkIcon } from './external_link.svg';
 import { ReactComponent as AlarmIcon } from './icon.svg';
 import EndringsloggInnhold from './endringslogg_innhold';
 import { connect } from 'react-redux';
 import { ENDRINGSLOGG } from '../../konstanter';
 import { sjekkFeature } from '../../ducks/features';
 import TransitionContainer from './transitionContainer';
-import { hentAktivBruker, hentAktivEnhet } from '../enhet-context/context-api';
+import { hentAktivBruker } from '../enhet-context/context-api';
+import { logEvent } from '../../utils/frontend-logger';
+
+// Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
+const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
+    logEvent('portefolje.endringslogg',
+        { feature: 'pre_tilbakemelding', ...metrikker });
+};
 
 interface EndringsloggMetrikker {
     tidBrukt: number;
@@ -70,21 +72,22 @@ function Endringslogg(props: StateProps) {
     let nyeNotifikasjoner = !harSettEndringsinlegg(versjonsnummer);
 
     let veilederHash =  hentVeilederHash(versjonsnummer).then( (res) => veilederHash = res);
-    console.log(veilederHash);
 
     const {start, stopp} = useTimer();
 
     const setLocalstorageAndOpenStatus = (openStatus: boolean) => {
-        if (open) {
-            handleSettEndring(versjonsnummer);
-            nyeNotifikasjoner = false;
-        }
-
         if (openStatus) {
             start();
         } else {
-            const tid = stopp();
-            alert(`Du brukte ${tid} millisekunder! Blå prikk = ${nyeNotifikasjoner}`);
+            const tidBrukt = stopp();
+            veilederHash.then( (res) => {
+                sendMetrikker({tidBrukt, nyeNotifikasjoner, hash: res});
+            });
+        }
+
+        if (open) {
+            handleSettEndring(versjonsnummer);
+            nyeNotifikasjoner = false;
         }
 
         setOpen(openStatus);
@@ -134,7 +137,6 @@ function Endringslogg(props: StateProps) {
     if ( !harRiktigFeatures ) {
         return null;
     }
-    console.log(veilederHash);
 
     return (
         <div ref={loggNode}>
@@ -148,12 +150,12 @@ function Endringslogg(props: StateProps) {
                     />
                     <EndringsloggInnhold dato={'06. JUN. 2019'}
                                          innholdsOverskrift="Visning av profilering i Detaljer"
-                                         innholdsTekst= "Nå finner du profileringsresultatet for brukeren under Registrering i Detaljer."
+                                         innholdsTekst="Nå finner du profileringsresultatet for brukeren under Registrering i Detaljer."
                                          nyeNotifikasjoner={nyeNotifikasjoner}
                     />
                     <EndringsloggInnhold dato={'29. MAR. 2019'}
                                          innholdsOverskrift="Manuell registrering"
-                                         innholdsTekst= "Du kan nå registrere brukere manuelt i Veilederverktøy (tannhjulet).  Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
+                                         innholdsTekst="Du kan nå registrere brukere manuelt i Veilederverktøy (tannhjulet).  Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
                                          nyeNotifikasjoner={nyeNotifikasjoner}
                                          linkTekst="Nyhetssak på Navet"
                                          url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
