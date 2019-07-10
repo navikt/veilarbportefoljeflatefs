@@ -69,23 +69,23 @@ export function Endringslogg(props) {
                 {open && (
                     <CSSTransition classNames="collapse-container" timeout={400}>
                         <div className="collapse-container">
-                            <div className="content" ref={props.focusRef} tabIndex={-1}>
+                            <div className="content" ref={focusRef} tabIndex={-1}>
                         <EndringsloggHeader/>
                         <EndringsloggInnhold dato={'18. JUN. 2019'}
                                              innholdsOverskrift="Laste ned og skrive ut CV"
-                                             innholdsTekst="Når du går inn på en bruker kan du nå laste ned CV-en under fanen «Detaljer». Da får du en bedre utskrift."
+                                             innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."
                                              nyeNotifikasjoner={nyeNotifikasjoner}
                         />
                         <EndringsloggInnhold dato={'06. JUN. 2019'}
                                              innholdsOverskrift="Visning av profilering i Detaljer"
-                                             innholdsTekst="Nå kan du se profileringsresultatet fra brukerens registrering. Du finner det under «Registrering» i fanen «Detaljer» når du går inn på en bruker."
+                                             innholdsTekst="Nå finner du profileringsresultatet for brukeren under Registrering i Detaljer."
                                              nyeNotifikasjoner={nyeNotifikasjoner}
                         />
                         <EndringsloggInnhold dato={'29. MAR. 2019'}
                                              innholdsOverskrift="Manuell registrering"
-                                             innholdsTekst="Ny løsning for å registrere brukere manuelt i Modia. Når du går inn på en bruker finner du det i Veilederverktøy (tannhjulet). Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
+                                             innholdsTekst="Du kan nå registrere brukere manuelt i Veilederverktøy (tannhjulet). Arena-oppgaven «Motta person» skal ikke lenger benyttes."
                                              nyeNotifikasjoner={nyeNotifikasjoner}
-                                             linkTekst="Les nyhetssak på Navet om den nye manuelle registreringen i Modia"
+                                             linkTekst="Nyhetssak på Navet"
                                              url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
                         />
                             </div>
@@ -100,7 +100,7 @@ export function Endringslogg(props) {
 function EndringsloggHeader(props) {
     return (
         <div className={'collapse-header'}>
-            Nytt i Modia arbiedsrettet oppfølging
+            Nytt i Arbeidsrettet oppfølging
         </div>
     );
 }
