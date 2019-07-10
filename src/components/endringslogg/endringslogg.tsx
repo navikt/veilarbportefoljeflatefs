@@ -73,8 +73,7 @@ function Endringslogg(props: StateProps) {
     return (
         <div ref={loggNode}>
             <EndringsloggKnapp klikk={klikk} open={open} nyeNotifikasjoner={nyeNotifikasjoner}/>
-            {open && (
-                <TransitionContainer open={open} focusRef={focusRef}>
+                <TransitionContainer visible={open} focusRef={focusRef}>
                     <EndringsloggHeader/>
                     <EndringsloggInnhold dato={'18. JUN. 2019'}
                                          innholdsOverskrift="Laste ned og skrive ut CV"
@@ -94,7 +93,6 @@ function Endringslogg(props: StateProps) {
                                          url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
                     />
                 </TransitionContainer>
-            )}
         </div>
     );
 }
@@ -102,13 +100,15 @@ function Endringslogg(props: StateProps) {
 function TransitionContainer(props) {
     return (
         <TransitionGroup component={null}>
-            <CSSTransition classNames="collapse-container" timeout={400}>
-                <div className="collapse-container">
-                    <div className="content" ref={props.focusRef} tabIndex={-1}>
-                        {props.children}
+            {props.visible && (
+                <CSSTransition classNames="collapse-container" timeout={400}>
+                    <div className="collapse-container">
+                        <div className="content" ref={props.focusRef} tabIndex={-1}>
+                            {props.children}
+                        </div>
                     </div>
-                </div>
-            </CSSTransition>
+                </CSSTransition>
+            )}
         </TransitionGroup>
     );
 }
