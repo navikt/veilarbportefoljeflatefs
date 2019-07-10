@@ -1,12 +1,14 @@
+@top-radius: 0.625rem;
+
 .collapse-header {
     background-color: #3E3832;
     color: white;
     padding: 1rem;
-    border-top-left-radius: 0.625rem;
+    border-top-left-radius: @top-radius;
     width: -webkit-fill-available;
     height: 3rem;
     text-align: center;
-    border-top-right-radius: 0.625rem;
+    border-top-right-radius: @top-radius;
 }
 
 .collapse-container {
@@ -53,6 +55,8 @@
     box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
     background-color: white;
     padding-bottom: 0.5rem;
+    border-top-right-radius: @top-radius;
+    border-top-left-radius: @top-radius;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
     max-width: 27rem;
@@ -61,8 +65,6 @@
 .content:focus {
     outline: none;
     box-shadow: 0 0 2px 2px @navOransjeDarken20;
-    border-top-left-radius: 0.625rem;
-    border-top-right-radius: 0.625rem;
 }
 
 .content::after {
@@ -109,6 +111,7 @@
 .endringslogg-dropDown {
     position: absolute;
     right: 1em;
+    padding: 0.5rem;
     outline: transparent;
     background-color: transparent;
     border: none;
@@ -165,14 +168,10 @@
 
 .endringslogg-skille{
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(183,177,169);
-
 }
 
-.endringslogg-skille:after {
-    content: "";
-    display: table;
-    clear: both;
+.endringslogg-skille:not(:last-child){
+    border-bottom: 1px solid rgba(183,177,169);
 }
 
 .endringslogg-rad:after {
