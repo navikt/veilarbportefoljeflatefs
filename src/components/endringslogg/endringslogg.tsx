@@ -3,12 +3,13 @@ import { Innholdstittel, Element, Normaltekst, EtikettLiten } from 'nav-frontend
 import classNames from 'classnames/dedupe';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { UnmountClosed, Collapse, CollapseProps } from 'react-collapse';
-import { ReactComponent as AlarmIcon } from './alarm.svg';
 import { ReactComponent as LinkIcon } from './external_link.svg';
+import { ReactComponent as AlarmIcon } from './icon.svg';
 import EndringsloggInnhold from './endringslogg_innhold';
 import { connect } from 'react-redux';
 import { ENDRINGSLOGG } from '../../konstanter';
 import { sjekkFeature } from '../../ducks/features';
+import TransitionContainer from './TransitionContainer';
 
 interface StateProps {
     harFeature: (feature: string) => boolean;
@@ -77,7 +78,7 @@ function Endringslogg(props: StateProps) {
                     <EndringsloggHeader/>
                     <EndringsloggInnhold dato={'18. JUN. 2019'}
                                          innholdsOverskrift="Laste ned og skrive ut CV"
-                                         innholdsTekst= "For bedre CV-utskrift kan du nå laste ned brukerens CV i Detaljer."
+                                         innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."
                                          nyeNotifikasjoner={nyeNotifikasjoner}
                     />
                     <EndringsloggInnhold dato={'06. JUN. 2019'}
@@ -94,22 +95,6 @@ function Endringslogg(props: StateProps) {
                     />
                 </TransitionContainer>
         </div>
-    );
-}
-
-function TransitionContainer(props) {
-    return (
-        <TransitionGroup component={null}>
-            {props.visible && (
-                <CSSTransition classNames="collapse-container" timeout={400}>
-                    <div className="collapse-container">
-                        <div className="content" ref={props.focusRef} tabIndex={-1}>
-                            {props.children}
-                        </div>
-                    </div>
-                </CSSTransition>
-            )}
-        </TransitionGroup>
     );
 }
 
