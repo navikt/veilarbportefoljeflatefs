@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import ActiveLink from "./active-link";
-import { Endringslogg } from "../components/endringslogg/endringslogg"
+import Endringslogg from "../components/endringslogg/endringslogg"
 
 function Lenker() {
     return (

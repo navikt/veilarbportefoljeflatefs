@@ -6,8 +6,15 @@ import { UnmountClosed, Collapse, CollapseProps } from 'react-collapse';
 import { ReactComponent as AlarmIcon } from './alarm.svg';
 import { ReactComponent as LinkIcon } from './external_link.svg';
 import EndringsloggInnhold from './endringslogg_innhold';
+import { connect } from 'react-redux';
+import { ENDRINGSLOGG } from '../../konstanter';
+import { sjekkFeature } from '../../ducks/features';
 
-export function Endringslogg(props) {
+interface StateProps {
+    harFeature: (feature: string) => boolean;
+}
+
+function Endringslogg(props: StateProps) {
     const versjonsnummer = '0.1.9';
     const [open, setOpen] = useState(false);
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
@@ -56,6 +63,12 @@ export function Endringslogg(props) {
             focusRef.current.focus();
         }
     });
+
+    const { harFeature } = props;
+    const harRiktigFeatures = harFeature(ENDRINGSLOGG);
+    if ( !harRiktigFeatures ) {
+        return null;
+    }
 
     return (
         <div ref={loggNode}>
@@ -130,3 +143,9 @@ function harSettEndringsinlegg(versjon: string) {
 function handleSettEndring(versjon) {
     window.localStorage.setItem(ENDRING_PREFIX, versjon);
 }
+
+const mapStateToProps = (state) => ({
+    harFeature: (feature: string) => sjekkFeature(state, feature)
+});
+
+export default connect(mapStateToProps)(Endringslogg);

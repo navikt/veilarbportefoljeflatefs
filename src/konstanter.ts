@@ -8,6 +8,8 @@ export const DEFAULT_PAGINERING_STORRELSE = 20;
 
 export const SPOR_OM_TILBAKEMELDING = 'veilarbportefoljeflatefs.coachmark_pre_fellesferien';
 
+export const ENDRINGSLOGG = 'veilarbportefoljeflatefs.endringslogg';
+
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING
 ];
