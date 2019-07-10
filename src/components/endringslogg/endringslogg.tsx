@@ -9,9 +9,56 @@ import EndringsloggInnhold from './endringslogg_innhold';
 import { connect } from 'react-redux';
 import { ENDRINGSLOGG } from '../../konstanter';
 import { sjekkFeature } from '../../ducks/features';
+import { hentAktivBruker, hentAktivEnhet } from '../enhet-context/context-api';
+
+interface EndringsloggMetrikker {
+    tidBrukt: number;
+    nyeNotifikasjoner: boolean;
+    hash: number;
+}
+
+function hexString(buffer) {
+    const byteArray = new Uint8Array(buffer);
+
+    const hexCodes = [...byteArray].map((value) => {
+        const hexCode = value.toString(16);
+        const paddedHexCode = hexCode.padStart(2, '0');
+        return paddedHexCode;
+    });
+
+    return hexCodes.join('');
+}
+
+async function hentVeilederHash(versjon: string) {
+    const veileder = await hentAktivBruker();
+    const encoder = new TextEncoder();
+    const data = encoder.encode(`${veileder} - ${versjon}`);
+    const hash = await window.crypto.subtle.digest('SHA-256', data).then( (res) => hexString(res));
+    return hash;
+}
 
 interface StateProps {
     harFeature: (feature: string) => boolean;
+}
+
+function useTimer(): {start: () => void, stopp: () => number} {
+    const ref = useRef<number>(-1);
+
+    function start() {
+        ref.current = Date.now();
+    }
+
+    function stopp() {
+        if (ref.current === -1) {
+            return -1;
+        }
+
+        const ret = Date.now() - ref.current;
+        ref.current = -1;
+        return ret;
+    }
+
+    return {start, stopp};
 }
 
 function Endringslogg(props: StateProps) {
@@ -21,11 +68,24 @@ function Endringslogg(props: StateProps) {
     const focusRef = useRef<HTMLDivElement>(null);
     let nyeNotifikasjoner = !harSettEndringsinlegg(versjonsnummer);
 
+    let veilederHash =  hentVeilederHash(versjonsnummer).then( (res) => veilederHash = res);
+    console.log(veilederHash);
+
+    const {start, stopp} = useTimer();
+
     const setLocalstorageAndOpenStatus = (openStatus: boolean) => {
         if (open) {
             handleSettEndring(versjonsnummer);
             nyeNotifikasjoner = false;
         }
+
+        if (openStatus) {
+            start();
+        } else {
+            const tid = stopp();
+            alert(`Du brukte ${tid} millisekunder! Blå prikk = ${nyeNotifikasjoner}`);
+        }
+
         setOpen(openStatus);
     };
 
@@ -36,25 +96,29 @@ function Endringslogg(props: StateProps) {
             return;
         }
         // Klikket er utenfor, oppdater staten
-        setLocalstorageAndOpenStatus(false);
+        if(open) {
+            setLocalstorageAndOpenStatus(false);
+
+        }
     };
 
-    const escFunction = (event) => {
+    const escHandler = (event) => {
         if (event.keyCode === 27) {
             setLocalstorageAndOpenStatus(false);
         }
     };
 
-    const klikk = () => {
+    const klikk = (event) => {
+        event.stopPropagation();
         setLocalstorageAndOpenStatus(!open);
     };
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
-        document.addEventListener('keydown', escFunction, false);
+        document.addEventListener('keydown', escHandler, false);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
-            document.removeEventListener('keydown', escFunction, false);
+            document.removeEventListener('keydown', escHandler, false);
         };
     }, []);
 
@@ -69,6 +133,7 @@ function Endringslogg(props: StateProps) {
     if ( !harRiktigFeatures ) {
         return null;
     }
+    console.log(veilederHash);
 
     return (
         <div ref={loggNode}>

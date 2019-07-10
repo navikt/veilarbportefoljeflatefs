@@ -11,10 +11,22 @@ interface AktivenhetModell {
     aktivEnhet: string;
 }
 
+interface AktivBrukerModell {
+    ident: string;
+}
+
 export function hentAktivEnhet(): Promise<string> {
     return fetchToJson<AktivenhetModell>(`/modiacontextholder/api/context/aktivenhet`, MED_CREDENTIALS)
         .then((data) => {
                 return data.aktivEnhet;
+            }
+        );
+}
+
+export function hentAktivBruker(): Promise<string> {
+    return fetchToJson<AktivBrukerModell>(`/veilarbveileder/api/veileder/me`, MED_CREDENTIALS)
+        .then((data) => {
+                return data.ident;
             }
         );
 }
