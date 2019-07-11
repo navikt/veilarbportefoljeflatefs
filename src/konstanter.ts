@@ -8,7 +8,6 @@ export const DEFAULT_PAGINERING_STORRELSE = 20;
 
 export const SPOR_OM_TILBAKEMELDING = 'portefolje.spor_om_tilbakemelding';
 export const VIS_MOTER_MED_NAV = 'portefolje.vismotermednav';
-export const SPOR_OM_TILBAKEMELDING = 'veilarbportefoljeflatefs.coachmark_pre_fellesferien';
 
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
