@@ -98,7 +98,7 @@ export function Endringslogg(props: StateProps) {
     }
 
     return (
-        <div ref={loggNode}>
+        <div ref={loggNode} className="endringslogg" >
             <EndringsloggKnapp klikk={klikk} open={open} nyeNotifikasjoner={nyeNotifikasjoner}/>
             <TransitionContainer visible={open} focusRef={focusRef}>
                 <EndringsloggHeader/>
@@ -126,7 +126,7 @@ export function Endringslogg(props: StateProps) {
 
 function EndringsloggKnapp(props) {
     return (
-        <div className={'endringslogg'} onClick={props.klikk}>
+        <div className={'endringslogg-knapp'} onClick={props.klikk}>
             {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}/>}
             <button className={`endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
                     onClick={props.klikk}>

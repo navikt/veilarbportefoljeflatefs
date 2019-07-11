@@ -1,9 +1,12 @@
 @top-radius: 0.625rem;
 
 .endringslogg {
+    margin-left: auto;
+    position: relative;
+}
+.endringslogg-knapp {
     float: right;
 }
-
 .collapse-header {
     background-color: #3E3832;
     color: white;
@@ -19,12 +22,13 @@
 .collapse-container {
     padding-top: 1rem;
     margin-top: 2.8rem;
-    right: 0.6rem;
+    right: -0.5rem;
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 30rem;
+    width: 30rem;
     z-index: 2;
 
 }
@@ -76,7 +80,7 @@
     content: '';
     position: absolute;
     top: 5px;
-    right: 5%;
+    right: 8%;
     width: 0;
     height: 0;
     border-left: 0.8125rem solid transparent;
@@ -89,7 +93,7 @@
     content: '';
     position: absolute;
     top: 3px;
-    right: 5%;
+    right: 8%;
     width: 0;
     height: 0;
     border-left: 0.8125rem solid transparent;

@@ -16,9 +16,7 @@ function LenkerMinoversikt({ veilederident }) {
             >
                 {LenkeInnhold}
             </ActiveLink>
-            <div style={{flexGrow: "1", position: "relative"}}>
-             <Endringslogg/>
-            </div>
+            <Endringslogg/>
         </div>
     );
 }
