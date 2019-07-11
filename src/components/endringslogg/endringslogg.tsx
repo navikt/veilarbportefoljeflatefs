@@ -17,7 +17,7 @@ const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
 interface EndringsloggMetrikker {
     tidBrukt: number;
     nyeNotifikasjoner: boolean;
-    hash: number;
+    hash: string;
 }
 
 function hexString(buffer) {
@@ -71,7 +71,7 @@ function Endringslogg(props: StateProps) {
     const focusRef = useRef<HTMLDivElement>(null);
     let nyeNotifikasjoner = !harSettEndringsinlegg(versjonsnummer);
 
-    let veilederHash =  hentVeilederHash(versjonsnummer).then( (res) => veilederHash = res);
+    let veilederHash =  hentVeilederHash(versjonsnummer)
 
     const {start, stopp} = useTimer();
 
