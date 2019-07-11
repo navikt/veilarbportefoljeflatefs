@@ -44,8 +44,8 @@ export async function hentVeilederHash(versjon: string) {
 const ENDRING_PREFIX = 'Endringslogg';
 
 export function sjekkHarSettEndringslogg(versjon: string) {
-    const senesteVersjonSett = window.localStorage.getItem(ENDRING_PREFIX);
-    return senesteVersjonSett != null && senesteVersjonSett === versjon;
+    const senesteVersjonSett = window.localStorage.getItem(ENDRING_PREFIX) || false;
+    return senesteVersjonSett && senesteVersjonSett === versjon;
 }
 
 export function harLestEndringslogg(versjon) {

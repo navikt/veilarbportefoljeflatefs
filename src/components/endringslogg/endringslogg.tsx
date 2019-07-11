@@ -1,5 +1,5 @@
 import { default as React, useEffect, useRef, useState } from 'react';
-import { ReactComponent as AlarmIcon } from './icon.svg';
+import { ReactComponent as AlarmIcon } from './icon_v3.svg';
 import EndringsloggInnhold from './endringslogg_innhold';
 import { connect } from 'react-redux';
 import { ENDRINGSLOGG } from '../../konstanter';
@@ -27,14 +27,14 @@ interface StateProps {
     harFeature: (feature: string) => boolean;
 }
 
-function Endringslogg(props: StateProps) {
+export function Endringslogg(props: StateProps) {
     const versjonsnummer = '0.1.9';
     const veilederHash = hentVeilederHash(versjonsnummer);
     const {start, stopp} = useTimer();
     const [open, setOpen] = useState(false);
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const focusRef = useRef<HTMLDivElement>(null);
-    let nyeNotifikasjoner = !sjekkHarSettEndringslogg(versjonsnummer);
+    const nyeNotifikasjoner = !sjekkHarSettEndringslogg(versjonsnummer);
 
     const setLocalstorageAndOpenStatus = (openStatus: boolean) => {
         if (openStatus) {
@@ -46,9 +46,8 @@ function Endringslogg(props: StateProps) {
             });
         }
 
-        if (open) {
+        if (open && !openStatus) {
             harLestEndringslogg(versjonsnummer);
-            nyeNotifikasjoner = false;
         }
 
         setOpen(openStatus);
@@ -127,7 +126,7 @@ function Endringslogg(props: StateProps) {
 
 function EndringsloggKnapp(props) {
     return (
-        <div style={{float: 'right'}} onClick={props.klikk}>
+        <div className={'endringslogg'} onClick={props.klikk}>
             {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}/>}
             <button className={`endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
                     onClick={props.klikk}>

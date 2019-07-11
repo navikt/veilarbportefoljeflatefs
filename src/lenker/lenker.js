@@ -1,9 +1,10 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import ActiveLink from "./active-link";
 import Endringslogg from "../components/endringslogg/endringslogg"
 
 function Lenker() {
+    console.log("hello");
     return (
         <div className="lenker blokk-m" role="tablist">
             <h2 className="h2__lenke">
@@ -12,7 +13,7 @@ function Lenker() {
                     className="oversiktslenke typo-undertittel"
                     activeClassName="oversiktslenke--valgt"
                 >
-                    <FormattedMessage id="lenker.enhet.oversikt" />
+                    <FormattedMessage id="lenker.enhet.oversikt"/>
                 </ActiveLink>
             </h2>
             <h2 className="h2__lenke">
@@ -21,12 +22,10 @@ function Lenker() {
                     className="oversiktslenke typo-undertittel"
                     activeClassName="oversiktslenke--valgt"
                 >
-                    <FormattedMessage id="lenker.veiledere.oversikt" />
+                    <FormattedMessage id="lenker.veiledere.oversikt"/>
                 </ActiveLink>
             </h2>
-            <div style={{flexGrow: "1", position: "relative"}}>
-                <Endringslogg/>
-            </div>
+            <Endringslogg/>
         </div>
     );
 }
