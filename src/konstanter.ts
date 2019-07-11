@@ -11,5 +11,6 @@ export const SPOR_OM_TILBAKEMELDING = 'veilarbportefoljeflatefs.coachmark_pre_fe
 export const ENDRINGSLOGG = 'veilarbportefoljeflatefs.endringslogg';
 
 export const PORTEFOLJE_FEATURES = [
-    SPOR_OM_TILBAKEMELDING
+    SPOR_OM_TILBAKEMELDING,
+    ENDRINGSLOGG
 ];
