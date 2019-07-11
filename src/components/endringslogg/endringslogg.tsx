@@ -5,14 +5,12 @@ import { connect } from 'react-redux';
 import { ENDRINGSLOGG } from '../../konstanter';
 import { sjekkFeature } from '../../ducks/features';
 import TransitionContainer from './transitionContainer';
-import { hentAktivBruker } from '../enhet-context/context-api';
 import { logEvent } from '../../utils/frontend-logger';
 import { harLestEndringslogg, sjekkHarSettEndringslogg, hentVeilederHash, useTimer } from './endringslogg_utils';
 
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
-    logEvent('portefolje.endringslogg',
-        {feature: 'pre_tilbakemelding', ...metrikker});
+    logEvent('portefolje.endringslogg',' ',{feature: 'pre_tilbakemelding', ...metrikker});
 };
 
 interface EndringsloggMetrikker {
