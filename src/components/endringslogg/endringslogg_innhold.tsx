@@ -29,7 +29,7 @@ function LinkTag(props: LinkInnholdProps) {
 
 export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
     return (
-        <div className="endringslogg-rad endringslogg-skille" tabIndex={-1}>
+        <div className="endringslogg-rad endringslogg-skille">
             <div className="endringslogg-datolinje">
                 <div className={classNames('endringslogg-info-kolonne', {
                     'endringslogg-info-nye-notifikasjoner ': props.nyeNotifikasjoner
