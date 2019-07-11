@@ -10,7 +10,11 @@ import { harLestEndringslogg, sjekkHarSettEndringslogg, hentVeilederHash, useTim
 
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
-    logEvent('portefolje.endringslogg',' ',{feature: 'pre_tilbakemelding', ...metrikker});
+    logEvent('portefolje.endringslogg', {
+        feature: 'pre_tilbakemelding_2',
+        tidBrukt: metrikker.tidBrukt,
+        nyeNotifikasjoner: metrikker.nyeNotifikasjoner
+    }, {hash: metrikker.hash});
 };
 
 interface EndringsloggMetrikker {
