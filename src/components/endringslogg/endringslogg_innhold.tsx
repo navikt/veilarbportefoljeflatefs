@@ -31,7 +31,9 @@ export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
     return (
         <div className="endringslogg-rad endringslogg-skille">
             <div className="endringslogg-datolinje">
-                <div className={classNames('endringslogg-info-kolonne', {
+                <div role={props.nyeNotifikasjoner ? 'alert' : ''}
+                     aria-label={props.nyeNotifikasjoner ? 'Nye endringer i Arbeidsrettet oppfølging' : ''}
+                     className={classNames('endringslogg-info-kolonne', {
                     'endringslogg-info-nye-notifikasjoner ': props.nyeNotifikasjoner
                 })}/>
                 <EtikettLiten>{props.dato}</EtikettLiten>

@@ -82,7 +82,7 @@ function Endringslogg(props: StateProps) {
             document.removeEventListener('mousedown', handleClickOutside);
             document.removeEventListener('keydown', escHandler, false);
         };
-    });
+    }, [open]);
 
     useEffect(() => {
         if (focusRef.current) {
