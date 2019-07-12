@@ -4,7 +4,6 @@ import ActiveLink from "./active-link";
 import Endringslogg from "../components/endringslogg/endringslogg"
 
 function Lenker() {
-    console.log("hello");
     return (
         <div className="lenker blokk-m" role="tablist">
             <h2 className="h2__lenke">

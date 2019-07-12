@@ -36,8 +36,8 @@ export function Endringslogg(props: StateProps) {
     const focusRef = useRef<HTMLDivElement>(null);
     const nyeNotifikasjoner = !sjekkHarSettEndringslogg(versjonsnummer);
 
-    const setLocalstorageAndOpenStatus = (openStatus: boolean) => {
-        if (openStatus) {
+    const setLocalstorageAndOpenStatus = (setOpenTo: boolean) => {
+        if (setOpenTo) {
             start();
         } else {
             const tidBrukt = stopp();
@@ -46,23 +46,19 @@ export function Endringslogg(props: StateProps) {
             });
         }
 
-        if (open && !openStatus) {
+        if (open && !setOpenTo) {
             harLestEndringslogg(versjonsnummer);
         }
-
-        setOpen(openStatus);
+        setOpen(setOpenTo);
     };
 
     const handleClickOutside = (e) => {
-        // @ts-ignore
-        if (loggNode.current.contains(e.target)) {
+        if (loggNode.current && loggNode.current.contains(e.target)) {
             // Klikket er inne i komponenten
             return;
         }
         // Klikket er utenfor, oppdater staten
-        if (open) {
-            setLocalstorageAndOpenStatus(false);
-        }
+        setLocalstorageAndOpenStatus(false);
     };
 
     const escHandler = (event) => {
