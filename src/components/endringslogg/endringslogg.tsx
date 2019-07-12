@@ -1,4 +1,4 @@
-import { default as React, useEffect, useRef, useState } from 'react';
+import { default as React, useEffect, useRef, useState, RefObject } from 'react';
 import { ReactComponent as AlarmIcon } from './icon_v3.svg';
 import EndringsloggInnhold from './endringslogg_innhold';
 import { connect } from 'react-redux';
@@ -34,6 +34,7 @@ export function Endringslogg(props: StateProps) {
     const [open, setOpen] = useState(false);
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const focusRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
     const nyeNotifikasjoner = !sjekkHarSettEndringslogg(versjonsnummer);
 
     const setLocalstorageAndOpenStatus = (setOpenTo: boolean) => {
@@ -58,12 +59,17 @@ export function Endringslogg(props: StateProps) {
             return;
         }
         // Klikket er utenfor, oppdater staten
-        setLocalstorageAndOpenStatus(false);
+        if(open){
+            setLocalstorageAndOpenStatus(false);
+        }
     };
 
     const escHandler = (event) => {
         if (event.keyCode === 27 && open) {
             setLocalstorageAndOpenStatus(false);
+            if(buttonRef.current){
+                buttonRef.current.focus();
+            }
         }
     };
 
@@ -82,7 +88,7 @@ export function Endringslogg(props: StateProps) {
     }, [open]);
 
     useEffect(() => {
-        if (focusRef.current) {
+        if (focusRef.current && open) {
             focusRef.current.focus();
         }
     });
@@ -95,7 +101,7 @@ export function Endringslogg(props: StateProps) {
 
     return (
         <div ref={loggNode} className="endringslogg" >
-            <EndringsloggKnapp klikk={klikk} open={open} nyeNotifikasjoner={nyeNotifikasjoner}/>
+            <EndringsloggKnapp klikk={klikk} open={open} nyeNotifikasjoner={nyeNotifikasjoner} buttonRef={buttonRef}/>
             <TransitionContainer visible={open} focusRef={focusRef}>
                 <EndringsloggHeader/>
                 <EndringsloggInnhold dato={'18. JUN. 2019'}
@@ -120,19 +126,24 @@ export function Endringslogg(props: StateProps) {
     );
 }
 
-function EndringsloggKnapp(props) {
+interface EndringsloggKnapp{
+    buttonRef: RefObject<HTMLButtonElement>;
+    open:boolean; 
+    nyeNotifikasjoner:boolean;
+    klikk:(e?:any)=>void;
+}
+
+function EndringsloggKnapp(props: EndringsloggKnapp) {
     return (
-        <div className={'endringslogg-knapp'} onClick={props.klikk}>
+        <button ref={props.buttonRef} className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
+                onClick={props.klikk}>
+            <AlarmIcon/>
             {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}/>}
-            <button className={`endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
-                    onClick={props.klikk}>
-                <AlarmIcon/>
-            </button>
-        </div>
+        </button>
     );
 }
 
-function EndringsloggHeader(props) {
+function EndringsloggHeader() {
     return (
         <div className={'collapse-header'}>
             Nytt i Arbeidsrettet oppfølging

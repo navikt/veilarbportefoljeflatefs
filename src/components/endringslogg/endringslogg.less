@@ -8,12 +8,11 @@
     float: right;
 }
 .collapse-header {
-    background-color: #3E3832;
+    background-color: @navMorkGra;
     color: white;
     padding: 1rem;
     border-top-left-radius: @top-radius;
     border-top-right-radius: @top-radius;
-    width: -webkit-fill-available;
     height: 3rem;
     min-height: fit-content;
     text-align: center;
@@ -59,7 +58,7 @@
     box-shadow: none;
 }
 
-.content {
+.endringslogg-content {
     overflow: hidden;
     box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
     background-color: white;
@@ -71,12 +70,12 @@
     max-width: 27rem;
 }
 
-.content:focus {
+.endringslogg-content:focus {
     outline: none;
     box-shadow: 0 0 2px 2px @navOransjeDarken20;
 }
 
-.content::after {
+.endringslogg-content::after {
     content: '';
     position: absolute;
     top: 5px;
@@ -85,11 +84,11 @@
     height: 0;
     border-left: 0.8125rem solid transparent;
     border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid #3e3832;
+    border-bottom: 0.6875rem solid @navMorkGra;
 }
 
 
-.content:focus::before {
+.endringslogg-content:focus::before {
     content: '';
     position: absolute;
     top: 3px;
@@ -144,14 +143,15 @@
 }
 
 .endringslogg-nye-notifikasjoner-ikon {
-    height: 0.9375rem;
-    width: 0.9375rem;
-    margin: 0.5rem 0rem 0rem -2.2rem;
-    background-color: #0067C5;
+    height: 0.875rem;
+    width: 0.875rem;
+    margin: 0rem 0rem 0rem -0.5444rem;
+    background-color:  @navBla;;
     border-radius: 50%;
     display: inline-block;
     z-index: 99;
     position: absolute;
+
     cursor: pointer;
 }
 

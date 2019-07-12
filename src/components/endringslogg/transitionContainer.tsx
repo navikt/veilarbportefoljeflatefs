@@ -7,7 +7,7 @@ export default function TransitionContainer(props) {
             {props.visible && (
                 <CSSTransition classNames="collapse-container" timeout={400}>
                     <div className="collapse-container">
-                        <div className="content" ref={props.focusRef} tabIndex={-1}>
+                        <div className="endringslogg-content" ref={props.focusRef} tabIndex={-1}>
                             {props.children}
                         </div>
                     </div>
