@@ -13,7 +13,7 @@ import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tidkolonne';
-import moment from 'moment';
+import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -35,9 +35,8 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
-    const moteStartTid = bruker.moteStartTid ? (moment(bruker.moteStartTid).get('hours') * 60 + moment(bruker.moteStartTid).get('minutes')) : null;
-    const moteSluttTid = bruker.moteSluttTid;
-    const varighet = moteSluttTid && moteStartTid ? moment.duration(moment(moteSluttTid).diff(bruker.moteStartTid)).asMinutes() : null;
+    const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
+    const varighet = minuttDifferanse(bruker.moteStartTid, bruker.moteSluttTid);
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
