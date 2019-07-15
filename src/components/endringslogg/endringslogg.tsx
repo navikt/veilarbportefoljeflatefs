@@ -6,7 +6,9 @@ import { ENDRINGSLOGG } from '../../konstanter';
 import { sjekkFeature } from '../../ducks/features';
 import TransitionContainer from './transitionContainer';
 import { logEvent } from '../../utils/frontend-logger';
-import { harLestEndringslogg, sjekkHarSettEndringslogg, hentVeilederHash, useTimer } from './endringslogg_utils';
+import { harLestEndringslogg, sjekkHarSettEndringslogg, hentVeilederHash } from './endringslogg_utils';
+import { useTimer } from '../../hooks/use-timer';
+import { useFocus } from '../../hooks/use-focus';
 
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
@@ -59,7 +61,7 @@ export function Endringslogg(props: StateProps) {
             return;
         }
         // Klikket er utenfor, oppdater staten
-        if(open){
+        if(open) {
             setLocalstorageAndOpenStatus(false);
         }
     };
@@ -67,7 +69,7 @@ export function Endringslogg(props: StateProps) {
     const escHandler = (event) => {
         if (event.keyCode === 27 && open) {
             setLocalstorageAndOpenStatus(false);
-            if(buttonRef.current){
+            if(buttonRef.current) {
                 buttonRef.current.focus();
             }
         }
@@ -87,11 +89,7 @@ export function Endringslogg(props: StateProps) {
         };
     }, [open]);
 
-    useEffect(() => {
-        if (focusRef.current && open) {
-            focusRef.current.focus();
-        }
-    });
+    useRef(focusRef);
 
     const {harFeature} = props;
     const harRiktigFeatures = harFeature(ENDRINGSLOGG);
@@ -126,14 +124,14 @@ export function Endringslogg(props: StateProps) {
     );
 }
 
-interface EndringsloggKnapp{
+interface EndringsloggKnappProps {
     buttonRef: RefObject<HTMLButtonElement>;
-    open:boolean; 
-    nyeNotifikasjoner:boolean;
-    klikk:(e?:any)=>void;
+    open: boolean;
+    nyeNotifikasjoner: boolean;
+    klikk: (e?: any)=>void;
 }
 
-function EndringsloggKnapp(props: EndringsloggKnapp) {
+function EndringsloggKnapp(props: EndringsloggKnappProps) {
     return (
         <button ref={props.buttonRef} className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
                 onClick={props.klikk}>
