@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Innholdslaster from './../innholdslaster/innholdslaster';
-import LenkerMinoversikt from './../lenker/lenker-minoversikt';
+import LenkerMinoversikt from '../lenker/lenker-minoversikt';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
@@ -14,7 +14,7 @@ import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import { hentPortefoljeForVeileder, settSortering, settValgtVeileder } from '../ducks/portefolje';
 import { EnheterState } from '../ducks/enheter';
 import { VeiledereState } from '../ducks/veiledere';
-import { FiltervalgModell, ValgtEnhetModell, VeilederModell, } from '../model-interfaces';
+import { FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import {
@@ -110,7 +110,7 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
             /></Normaltekst>);
 
         return (
-            <DocumentTitle title={formatMessage({ id: 'lenker.min.oversikt' })}>
+            <DocumentTitle title="Min oversikt">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                     <div className="minoversikt-side blokk-xl">
                         {visesAnnenVeiledersPortefolje ?

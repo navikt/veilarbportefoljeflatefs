@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { ChangeEvent } from 'react';
 import Dropdown from '../../dropdown/dropdown';
 import { Checkbox } from 'nav-frontend-skjema';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import { AppState } from '../../../reducer';
-import { Action, Dispatch } from 'redux';
+import { FormattedMessage } from 'react-intl';
 import { avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ } from '../../../ducks/ui/listevisning';
 import { alternativerConfig } from './listevisning-utils';
 import { selectMuligeAlternativer, selectValgteAlternativer } from '../../../ducks/ui/listevisning-selectors';
@@ -53,7 +51,7 @@ interface DispatchProps {
     avvelgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => void;
 }
 
-type ListevisningProps = OwnProps & StateProps & DispatchProps & InjectedIntlProps;
+type ListevisningProps = OwnProps & StateProps & DispatchProps;
 
 const Listevisning = (props: ListevisningProps) => {
     function handleChange(name, checked) {
@@ -73,11 +71,11 @@ const Listevisning = (props: ListevisningProps) => {
     }
 
     return (
-        <Dropdown name={props.intl.formatMessage({id: 'toolbar.listevisning'})} disabled={props.muligeAlternativer.length <= 5}
+        <Dropdown name="Listevisning" disabled={props.muligeAlternativer.length <= 5}
                   className="dropdown--fixed dropdown--toolbar">
             <section className="radio-filterform__valg">
                 <div className="blokk-s">
-                    <FormattedMessage id="listevisning.ingress"/>
+                   Du kan velge hvilke kolonner du ønsker å se i listen. Men du kan maks vise 5 kolonner om gangen.
                 </div>
                 <ul className="ustilet">
                     {props.muligeAlternativer.map((kolonne) => (
@@ -109,6 +107,4 @@ function mapDispatchToProps(dispatch, props): DispatchProps {
     };
 }
 
-export default connect<StateProps,DispatchProps,OwnProps>(mapStateToProps, mapDispatchToProps)(
-    injectIntl(Listevisning)
-);
+export default connect<StateProps,DispatchProps,OwnProps>(mapStateToProps, mapDispatchToProps) (Listevisning);

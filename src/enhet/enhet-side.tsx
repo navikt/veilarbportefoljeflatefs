@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
 import DocumentTitle from 'react-document-title';
-import Lenker from './../lenker/lenker';
+import Lenker from '../lenker/lenker';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';

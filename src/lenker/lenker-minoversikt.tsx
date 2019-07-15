@@ -1,9 +1,8 @@
 import * as React from 'react';
 import ActiveLink from './active-link';
-import Endringslogg from "../components/endringslogg/endringslogg";
+import Endringslogg from '../components/endringslogg/endringslogg';
 
-
-function LenkerMinoversikt(props: { veilederident: string }) {
+function LenkerMinoversikt(props: { veilederident: string| null }) {
     const path = props.veilederident === null ? 'portefolje' : `portefolje/${props.veilederident}`;
 
     return (

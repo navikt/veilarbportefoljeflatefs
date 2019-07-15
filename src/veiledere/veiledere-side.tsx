@@ -5,7 +5,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import Lenker from './../lenker/lenker';
+import Lenker from '../lenker/lenker';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
 import { VeiledereState } from '../ducks/veiledere';
 import { StatustallModell, ValgtEnhetModell } from '../model-interfaces';
