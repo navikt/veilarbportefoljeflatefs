@@ -1,7 +1,6 @@
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
-import ActiveLink from "./active-link";
-import Endringslogg from "../components/endringslogg/endringslogg"
+import ActiveLink from './active-link';
+import Endringslogg from '../components/endringslogg/endringslogg';
 
 function Lenker() {
     return (
@@ -12,7 +11,7 @@ function Lenker() {
                     className="oversiktslenke typo-undertittel"
                     activeClassName="oversiktslenke--valgt"
                 >
-                    <FormattedMessage id="lenker.enhet.oversikt"/>
+                    Enhetens oversikt
                 </ActiveLink>
             </h2>
             <h2 className="h2__lenke">
@@ -21,7 +20,7 @@ function Lenker() {
                     className="oversiktslenke typo-undertittel"
                     activeClassName="oversiktslenke--valgt"
                 >
-                    <FormattedMessage id="lenker.veiledere.oversikt"/>
+                    Veilederoversikt
                 </ActiveLink>
             </h2>
             <Endringslogg/>
