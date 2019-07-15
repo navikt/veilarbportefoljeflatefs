@@ -14,10 +14,26 @@ function hexString(buffer) {
 
 export async function hentVeilederHash(versjon: string) {
     const veileder = await hentAktivBruker();
-    const encoder = new TextEncoder();
-    const data = encoder.encode(`${veileder} - ${versjon}`);
-    const hash = await window.crypto.subtle.digest('SHA-256', data).then((res) => hexString(res));
+    const stringToBeEncoded = `${veileder} - ${versjon}`;
+    const utf8Arr: Uint8Array = encodeString(stringToBeEncoded);
+    const hash = await window.crypto.subtle.digest('SHA-256', utf8Arr).then((res) => hexString(res));
     return hash;
+}
+
+function encodeString(stringToBeEncoded: string) {
+    let data;
+    // @ts-ignore
+    if (window.TextEncoder) {
+        const encoder = new TextEncoder();
+        data = encoder.encode();
+    } else {
+        const utf8 = unescape(encodeURIComponent(stringToBeEncoded));
+        data = new Uint8Array(utf8.length);
+        for (let i = 0; i < utf8.length; i++) {
+            data[i] = utf8.charCodeAt(i);
+        }
+    }
+    return data;
 }
 
 const ENDRING_PREFIX = 'Endringslogg';
