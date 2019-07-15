@@ -4,18 +4,16 @@
      x="0px" y="0px"
      viewBox="0 0 12 12" style="enable-background:new 0 0 12 12;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:#78706A;stroke-linecap:round;}
+	.hyperlink-ikon{fill:none;stroke:#78706A;stroke-linecap:round;}
 </style>
-
-    <title>Åpnes i ny fane</title>
     <g id="coachmark---">
 	<g id="A3" transform="translate(-70.000000, -770.000000)">
 		<g id="external-link" transform="translate(71.000000, 771.000000)">
-			<path id="Rectangle-6" class="st0"
+			<path id="Rectangle-6" class="hyperlink-ikon"
                   d="M10,7.1v1.3C10,9.3,9.3,10,8.3,10H1.7C0.7,10,0,9.3,0,8.3V1.7C0,0.7,0.7,0,1.7,0h1.3"/>
             <g id="Group-7" transform="translate(4.000000, 0.000000)">
-				<path id="Line-6" class="st0" d="M0,6l6-6"/>
-                <polyline id="Path-2" class="st0" points="2,0 6,0 6,4.1 				"/>
+				<path id="Line-6" class="hyperlink-ikon" d="M0,6l6-6"/>
+                <polyline id="Path-2" class="hyperlink-ikon" points="2,0 6,0 6,4.1 				"/>
 			</g>
 		</g>
 	</g>

@@ -8,7 +8,7 @@ import TransitionContainer from './transitionContainer';
 import { logEvent } from '../../utils/frontend-logger';
 import { harLestEndringslogg, sjekkHarSettEndringslogg, hentVeilederHash } from './endringslogg_utils';
 import { useTimer } from '../../hooks/use-timer';
-import { useFocus } from '../../hooks/use-focus';
+import { useEventListener } from "../../hooks/use-event-listener"
 
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
@@ -78,18 +78,15 @@ export function Endringslogg(props: StateProps) {
     const klikk = (event) => {
         event.stopPropagation();
         setLocalstorageAndOpenStatus(!open);
+        if(!open){
+            if(buttonRef.current) {
+                buttonRef.current.focus();
+            }
+        }
     };
 
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        document.addEventListener('keydown', escHandler, false);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-            document.removeEventListener('keydown', escHandler, false);
-        };
-    }, [open]);
-
-    useRef(focusRef);
+    useEventListener("mousedown", handleClickOutside, [open])
+    useEventListener("keydown", escHandler, [open])
 
     const {harFeature} = props;
     const harRiktigFeatures = harFeature(ENDRINGSLOGG);

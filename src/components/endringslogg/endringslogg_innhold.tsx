@@ -2,6 +2,7 @@ import classNames from 'classnames/dedupe';
 import { EtikettLiten, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { default as React } from 'react';
 import { ReactComponent as LinkIcon } from './external_link.svg';
+import Lenke from 'nav-frontend-lenker';
 
 interface EndringsloggInnholdProps extends LinkInnholdProps {
     dato: string;
@@ -21,10 +22,11 @@ function LinkTag(props: LinkInnholdProps) {
     }
 
     return (
-        <a className="endringslogg-link" href={props.url} target="_blank">
+        <Lenke className="endringslogg-link" target="_blank" href={props.url}>
             {props.linkTekst ? props.linkTekst : props.url}
             <LinkIcon/>
-        </a>
+        </Lenke>
+
     );
 }
 

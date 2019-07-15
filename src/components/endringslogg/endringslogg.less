@@ -1,5 +1,3 @@
-@top-radius: 0.625rem;
-
 .endringslogg {
     margin-left: auto;
     position: relative;
@@ -11,8 +9,8 @@
     background-color: @navMorkGra;
     color: white;
     padding: 1rem;
-    border-top-left-radius: @top-radius;
-    border-top-right-radius: @top-radius;
+    border-top-left-radius: @border-radius-large;
+    border-top-right-radius: @border-radius-large;
     height: 3rem;
     min-height: fit-content;
     text-align: center;
@@ -32,41 +30,15 @@
 
 }
 
-.collapse-container-enter {
-    height: 0;
-    overflow: hidden;
-    box-shadow: none;
-  }
-
-.collapse-container-enter-active {
-    height: 40rem;
-    overflow: hidden;
-    transition: all 400ms ease-in;
-    box-shadow: none;
-}
-
-.collapse-container-exit {
-    overflow: hidden;
-    height: 40rem;
-    box-shadow: none;
-}
-
-.collapse-container-exit-active {
-    height: 0rem;
-    overflow: hidden;
-    transition: all 400ms ease-out;
-    box-shadow: none;
-}
-
 .endringslogg-content {
     overflow: hidden;
     box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
     background-color: white;
     padding-bottom: 0.5rem;
-    border-top-right-radius: @top-radius;
-    border-top-left-radius: @top-radius;
-    border-bottom-left-radius: @top-radius;
-    border-bottom-right-radius: @top-radius;
+    border-top-right-radius: @border-radius-large;
+    border-top-left-radius: @border-radius-large;
+    border-bottom-left-radius: @border-radius-large;
+    border-bottom-right-radius: @border-radius-large;
     max-width: 27rem;
 }
 
@@ -197,9 +169,6 @@
 }
 
 .hyperlink-ikon{
-    stroke: rgb(6,69,173);
+    stroke: @navBla;
 }
 
-.endringslogg-link:visited .hyperlink-ikon{
-    stroke: rgb(102,51,102);
-}
