@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import ActiveLink from './active-link';
+import Endringslogg from "../components/endringslogg/endringslogg";
 
 function LenkerMinoversikt({ veilederident }) {
     const LenkeInnhold = <FormattedMessage id="lenker.min.oversikt" />;
@@ -15,6 +16,7 @@ function LenkerMinoversikt({ veilederident }) {
             >
                 {LenkeInnhold}
             </ActiveLink>
+            <Endringslogg/>
         </div>
     );
 }
