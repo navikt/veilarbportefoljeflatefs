@@ -9,7 +9,6 @@ import { markerAlleBrukere } from '../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 
-NavFrontendModal.setAppElement('#applikasjon');
 
 class ArbeidslisteModal extends Component {
     constructor(props) {

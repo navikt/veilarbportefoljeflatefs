@@ -12,6 +12,7 @@ export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
+export const MOTER_IDAG = 'MOTER_IDAG';
 
 export const FILTERGRUPPE_ENHET = 'enhet';
 
@@ -33,7 +34,8 @@ export const ferdigfilterListe = ()=> ({
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
-    ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver'
+    ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
+    MOTER_IDAG: 'Møte med NAV'
 });
 
 export const alder = (intl) => ({

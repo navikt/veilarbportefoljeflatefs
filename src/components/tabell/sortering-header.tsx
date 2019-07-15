@@ -2,23 +2,19 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { Sorteringsfelt, Sorteringsrekkefolge } from '../../model-interfaces';
+import Header, {HeaderProps} from "./header";
 
-interface SorteringHeaderProps {
+interface SorteringHeaderProps extends HeaderProps{
     sortering: Sorteringsfelt;
     onClick: (sortering: string) => void;
     rekkefolge: Sorteringsrekkefolge;
     erValgt: boolean;
     tekstId: string;
-    skalVises?: boolean;
-    className?: string;
 }
 
 function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekstId, skalVises = true, className = '' }: SorteringHeaderProps) {
-    if (!skalVises) {
-        return null;
-    }
     return (
-        <span className={classNames(`sortering-header__${sortering}`, className)}>
+        <Header skalVises={skalVises} className={className}>
             <button
                 onClick={() => onClick(sortering)}
                 className={classNames('lenke lenke--frittstaende', { valgt: erValgt }, {'valgt-sortering': erValgt})}
@@ -31,7 +27,7 @@ function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekstId, ska
             {sortering === 'etternavn' ?
                 <FormattedMessage id="portefolje.tabell.fornavn" /> : null
             }
-        </span>
+        </Header>
     );
 }
 
