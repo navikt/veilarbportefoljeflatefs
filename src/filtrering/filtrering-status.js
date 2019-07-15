@@ -16,9 +16,12 @@ import {
     INAKTIVE_BRUKERE,
     MIN_ARBEIDSLISTE,
     TRENGER_VURDERING,
-    ER_SYKMELDT_MED_ARBEIDSGIVER
+    ER_SYKMELDT_MED_ARBEIDSGIVER,
+    MOTER_IDAG
 } from './filter-konstanter';
 import './filtrering-status.less';
+import {sjekkFeature} from '../ducks/features';
+import {VIS_MOTER_MED_NAV} from '../konstanter';
 
 function BarInput({ skalSkjules, id, type, className, tekstId, antall, max, barClassname, firstInGroup, ...props }) {
     if (skalSkjules) {
@@ -114,8 +117,10 @@ class FiltreringStatus extends Component {
     }
 
     render() {
-        const { statustall, filtergruppe, filtervalg } = this.props;
+        const { statustall, filtergruppe, filtervalg,  harFeature} = this.props;
         const { ferdigfilterListe } = filtervalg;
+
+        const visMoterIdagFeature = harFeature(VIS_MOTER_MED_NAV);
 
         const ufordelteBrukereCheckbox = (
             <BarInput
@@ -209,6 +214,20 @@ class FiltreringStatus extends Component {
                     max={statustall.data.totalt}
                     barClassname="venterPaSvarFraBruker"
                 />
+                {filtergruppe === 'veileder' && visMoterIdagFeature &&
+                <BarInput
+                    id="avtaltMoteMedNav"
+                    type="radio"
+                    name="ferdigfilter"
+                    className="radioknapp"
+                    value="MOTER_IDAG"
+                    onChange={this.handleChange}
+                    checked={ferdigfilterListe.includes(MOTER_IDAG)}
+                    tekstId="enhet.filtrering.oversikt.avtaltmotermednav.brukere.checkbox"
+                    antall={statustall.data.moterMedNAVIdag}
+                    max={statustall.data.totalt}
+                    barClassname="avtaltMoteMedNav"
+                /> }
                 <BarInput
                     id="utlopteAktiviteter"
                     type="radio"
@@ -303,7 +322,8 @@ FiltreringStatus.propTypes = {
 */
 const mapStateToProps = (state) => ({
     enhet: state.enheter.valgtEnhet.enhet.enhetId,
-    statustall: state.statustall
+    statustall: state.statustall,
+    harFeature: (feature) => sjekkFeature(state, feature)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

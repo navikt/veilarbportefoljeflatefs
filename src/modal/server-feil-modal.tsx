@@ -3,8 +3,6 @@ import Modal from 'nav-frontend-modal';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { IntlMessage } from '../utils/intl-utils';
 
-Modal.setAppElement('#applikasjon');
-
 interface ServerFeilModalProps {
     isOpen?: boolean;
     onClose: () => void;

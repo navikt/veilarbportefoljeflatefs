@@ -25,7 +25,8 @@ export enum Sorteringsfelt {
     NESTE_START_DATO_FOR_AVTALT_AKTIVITET = 'neste_aktivitet_start',
     FORRIGE_DATO_FOR_AVTALT_AKTIVITET = 'forrige_aktivitet_start',
     AAP_RETTIGHETSPERIODE = 'aaprettighetsperiode',
-    NAVIDENT = 'veileder_id'
+    NAVIDENT = 'veileder_id',
+    MOTER_IDAG = 'moterMedNAVIdag',
 }
 
 export enum EtikettType {
@@ -122,6 +123,8 @@ export interface BrukerModell {
     markert?: boolean;
     manuellBrukerStatus: string;
     erSykmeldtMedArbeidsgiver: boolean;
+    moteStartTid: string;
+    moteSluttTid: string;
 }
 
 // TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen?
@@ -153,6 +156,7 @@ export interface StatustallModell {
     inaktiveBrukere: number;
     venterPaSvarFraNAV: number;
     venterPaSvarFraBruker: number;
+    moterMedNAVIdag: number;
 }
 
 export interface FeilmeldingModalModell {

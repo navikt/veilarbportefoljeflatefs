@@ -29,7 +29,8 @@ export enum Kolonne {
     UTLOP_AKTIVITET = 'utlopaktivitet',
     START_DATO_AKTIVITET = 'aktivitet_start',
     NESTE_START_DATO_AKTIVITET = 'neste_aktivitet_start',
-    FORRIGE_START_DATO_AKTIVITET = 'forrige_aktivitet_start'
+    FORRIGE_START_DATO_AKTIVITET = 'forrige_aktivitet_start',
+    MOTER_IDAG = 'moterMedNavIdag',
 }
 
 export enum ListevisningType {

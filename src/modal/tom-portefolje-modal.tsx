@@ -7,8 +7,6 @@ import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import { injectIntl, InjectedIntl } from 'react-intl';
 import { AppState } from '../reducer';
 
-Modal.setAppElement('#applikasjon');
-
 interface TomPortefoljeModalProps {
     isOpen: boolean;
     intl: InjectedIntl;
