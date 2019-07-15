@@ -1,7 +1,7 @@
 import classNames from 'classnames/dedupe';
 import { EtikettLiten, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { default as React } from 'react';
-import { ReactComponent as LinkIcon } from './external_link.svg';
+import { ReactComponent as LinkIcon } from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
 
 interface EndringsloggInnholdProps extends LinkInnholdProps {

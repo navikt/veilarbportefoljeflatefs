@@ -1,12 +1,12 @@
 import { default as React, useEffect, useRef, useState, RefObject } from 'react';
-import { ReactComponent as AlarmIcon } from './icon_v3.svg';
-import EndringsloggInnhold from './endringslogg_innhold';
+import { ReactComponent as AlarmIcon } from './icon-v3.svg';
+import EndringsloggInnhold from './endringslogg-innhold';
 import { connect } from 'react-redux';
 import { ENDRINGSLOGG } from '../../konstanter';
 import { sjekkFeature } from '../../ducks/features';
-import TransitionContainer from './transitionContainer';
+import TransitionContainer from './transition-container';
 import { logEvent } from '../../utils/frontend-logger';
-import { harLestEndringslogg, sjekkHarSettEndringslogg, hentVeilederHash } from './endringslogg_utils';
+import { harLestEndringslogg, sjekkHarSettEndringslogg, hentVeilederHash } from './endringslogg-utils';
 import { useTimer } from '../../hooks/use-timer';
 import { useEventListener } from "../../hooks/use-event-listener"
 
