@@ -63,7 +63,7 @@ function lagGrunndata() {
         venterPaSvarFraNAV,
         aktiviteter: brukerAktiviteter,
         moteStartTid,
-        moteSluttTid: moteStartTid && new Date(moteStartTid.getTime() + ((90 * 60 * 1000)))
+        moteSluttTid: moteStartTid && new Date(moteStartTid.getTime() + ((30 * 60 * 1000)))
     };
 }
 

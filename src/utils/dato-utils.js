@@ -149,20 +149,11 @@ export function dateGreater(date1, date2) {
 
 
 export function klokkeslettTilMinutter(klokkeSlett) {
-    /*if(!klokkeSlett) {
-        return null;
-    }
-    */
     const tilMoment = moment(klokkeSlett);
-
     return (tilMoment.get('hours') * 60) + tilMoment.get('minutes');
 }
 
-export function minuttDifferanse (klokkeslett1, klokkeslett2) {
-   /* if(!klokkeslett1 || ! klokkeslett2) {
-        return null;
-    }
-    */
+export function minuttDifferanse (klokkeslett2, klokkeslett1) {
     return moment.duration(moment(klokkeslett2).diff(klokkeslett1)).asMinutes()
 }
 

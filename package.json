@@ -10,7 +10,7 @@
     "start": "react-intl-bundler tekster/ src/tekster-built && cross-env REACT_APP_MOCK=true craco start",
     "dev": "react-intl-bundler tekster/ src/tekster-built && cross-env PORT=9596 craco start",
     "build": "react-intl-bundler tekster/ src/tekster-built && craco build",
-    "test:coverage": "nyc npm run test",
+    "test:coverage": "nyc npm test",
     "eject": "react-scripts eject",
     "build:tekster": "react-intl-bundler ./tekster ./tekster-built",
     "heroku-serve": "node heroku-server.js",
@@ -18,7 +18,8 @@
     "upload:doc": "node documentation/scripts/upload-all",
     "lint": "tslint ./src/**/*.ts*",
     "lint:fix": "tslint ./src/**/*.ts* --fix",
-    "precommit": "npm run lint:fix"
+    "precommit": "npm run lint:fix",
+    "test": "craco test --watchAll=false"
   },
   "devDependencies": {
     "@navikt/react-intl-bundler": "1.0.4",

@@ -36,7 +36,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
-    const varighet = minuttDifferanse(bruker.moteStartTid, bruker.moteSluttTid);
+    const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';

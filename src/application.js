@@ -1,9 +1,7 @@
 import * as React from 'react';
-import * as moment from 'moment';
 import 'moment/locale/nb';
 import classnames from 'classnames';
-import { IntlProvider, addLocaleData } from 'react-intl';
-import nb from 'react-intl/locale-data/nb';
+import { IntlProvider } from 'react-intl';
 import queryString from 'query-string';
 import EnhetContext from './components/enhet-context/enhet-context';
 import tekstBundle from './tekster-built/bundle';
@@ -13,12 +11,14 @@ import VeiledereSide from "./veiledere/veiledere-side";
 import MinOversiktSide from "./minoversikt/minoversikt-side";
 import TilbakemeldingFab from "./components/tilbakemelding/tilbakemelding-fab";
 import { loggBrowserMetrikker } from './utils/metrikker/browser-metrikker';
-
-moment.locale('nb');
-
-addLocaleData(nb);
+import Modal from 'nav-frontend-modal';
 
 loggBrowserMetrikker();
+
+
+if (process.env.NODE_ENV !== 'test') {
+    Modal.setAppElement('#applikasjon');
+}
 
 function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     const skalViseTekstnokkel = queryString.parse(window.location.search).vistekster; // eslint-disable-line no-undef

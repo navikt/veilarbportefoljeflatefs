@@ -13,8 +13,6 @@ import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { redigerArbeidsliste } from '../ducks/arbeidsliste';
 import moment from 'moment';
 
-NavFrontendModal.setAppElement('#applikasjon');
-
 interface Ownprops {
     bruker: BrukerModell;
     innloggetVeileder: string;

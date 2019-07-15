@@ -1,10 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'whatwg-fetch';
-import { Provider } from 'react-redux';
-import { addLocaleData, IntlProvider } from 'react-intl';
-import nb from 'react-intl/locale-data/nb';
-import createStore from './store';
 import Routes from './routes';
 import './style.less';
 
@@ -19,15 +15,5 @@ if(process.env.REACT_APP_MOCK === 'true') {
     require('./mocks'); // tslint:disable-line
 }
 
-addLocaleData(nb);
 
-const store = createStore();
-const tekster = { nb: { spinner: 'spinner' } };
-
-ReactDOM.render(
-    (<Provider store={store}>
-            <IntlProvider defaultLocale="nb" locale="nb" messages={tekster}>
-                <Routes />
-            </IntlProvider>
-        </Provider>
-    ), document.getElementById('mainapp'));
+ReactDOM.render(<Routes/>, document.getElementById('mainapp'));

@@ -17,8 +17,6 @@ interface FeilmeldingBrukereModalState {
     isOpen?: boolean;
 }
 
-Modal.setAppElement('#applikasjon');
-
 function FnrList({ feiledeTilordninger }) {
     const listElements = feiledeTilordninger.map((tilordning) => (
         <li key={tilordning.brukerFnr} className="fnr__listitem">{tilordning.brukerFnr}</li>
