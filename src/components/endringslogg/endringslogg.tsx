@@ -8,7 +8,8 @@ import TransitionContainer from './transition-container';
 import { logEvent } from '../../utils/frontend-logger';
 import { harLestEndringslogg, sjekkHarSettEndringslogg, hentVeilederHash } from './endringslogg-utils';
 import { useTimer } from '../../hooks/use-timer';
-import { useEventListener } from "../../hooks/use-event-listener"
+import { useEventListener } from '../../hooks/use-event-listener';
+import { Undertittel } from 'nav-frontend-typografi';
 
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
@@ -61,7 +62,7 @@ export function Endringslogg(props: StateProps) {
             return;
         }
         // Klikket er utenfor, oppdater staten
-        if(open) {
+        if (open) {
             setLocalstorageAndOpenStatus(false);
         }
     };
@@ -69,7 +70,7 @@ export function Endringslogg(props: StateProps) {
     const escHandler = (event) => {
         if (event.keyCode === 27 && open) {
             setLocalstorageAndOpenStatus(false);
-            if(buttonRef.current) {
+            if (buttonRef.current) {
                 buttonRef.current.focus();
             }
         }
@@ -78,15 +79,15 @@ export function Endringslogg(props: StateProps) {
     const klikk = (event) => {
         event.stopPropagation();
         setLocalstorageAndOpenStatus(!open);
-        if(!open){
-            if(buttonRef.current) {
+        if (!open) {
+            if (buttonRef.current) {
                 buttonRef.current.focus();
             }
         }
     };
 
-    useEventListener("mousedown", handleClickOutside, [open])
-    useEventListener("keydown", escHandler, [open])
+    useEventListener('mousedown', handleClickOutside, [open]);
+    useEventListener('keydown', escHandler, [open]);
 
     const {harFeature} = props;
     const harRiktigFeatures = harFeature(ENDRINGSLOGG);
@@ -95,7 +96,7 @@ export function Endringslogg(props: StateProps) {
     }
 
     return (
-        <div ref={loggNode} className="endringslogg" >
+        <div ref={loggNode} className="endringslogg">
             <EndringsloggKnapp klikk={klikk} open={open} nyeNotifikasjoner={nyeNotifikasjoner} buttonRef={buttonRef}/>
             <TransitionContainer visible={open} focusRef={focusRef}>
                 <EndringsloggHeader/>
@@ -125,12 +126,13 @@ interface EndringsloggKnappProps {
     buttonRef: RefObject<HTMLButtonElement>;
     open: boolean;
     nyeNotifikasjoner: boolean;
-    klikk: (e?: any)=>void;
+    klikk: (e?: any) => void;
 }
 
 function EndringsloggKnapp(props: EndringsloggKnappProps) {
     return (
-        <button ref={props.buttonRef} className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
+        <button ref={props.buttonRef}
+                className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
                 onClick={props.klikk}>
             <AlarmIcon/>
             {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}/>}
@@ -140,9 +142,9 @@ function EndringsloggKnapp(props: EndringsloggKnappProps) {
 
 function EndringsloggHeader() {
     return (
-        <div className={'collapse-header'}>
+        <Undertittel className="collapse-header" tag="h2">
             Nytt i Arbeidsrettet oppfølging
-        </div>
+        </Undertittel>
     );
 }
 

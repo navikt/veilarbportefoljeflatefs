@@ -42,7 +42,7 @@ export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
                 <EtikettLiten>{props.dato}</EtikettLiten>
             </div>
             <div className="endringslogg-innhold endringslogg-kolonne">
-                <Undertittel tag="h4"> {props.innholdsOverskrift} </Undertittel>
+                <Undertittel tag="h3"> {props.innholdsOverskrift} </Undertittel>
                 <Normaltekst> {props.innholdsTekst} </Normaltekst>
                 <LinkTag url={props.url} linkTekst={props.linkTekst}/>
             </div>
