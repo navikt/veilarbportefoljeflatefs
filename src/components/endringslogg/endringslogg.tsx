@@ -112,6 +112,12 @@ export function Endringslogg(props: StateProps) {
             <EndringsloggKnapp klikk={klikk} open={open} nyeNotifikasjoner={nyeNotifikasjoner} buttonRef={buttonRef}/>
             <TransitionContainer visible={open} focusRef={focusRef}>
                 <EndringsloggHeader/>
+                <EndringsloggInnhold dato={'16. JUL. 2019'}
+                                     innholdsOverskrift="NAV møte filter"
+                                     innholdsTekst="Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV."
+                                     nyeNotifikasjoner={nyeNotifikasjoner}
+                />
+
                 <EndringsloggInnhold dato={'18. JUN. 2019'}
                                      innholdsOverskrift="Laste ned og skrive ut CV"
                                      innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."

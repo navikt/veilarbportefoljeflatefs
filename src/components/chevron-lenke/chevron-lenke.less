@@ -1,0 +1,36 @@
+@import "~nav-frontend-core/less/_variabler";
+
+.chevron-lenke {
+	background-color: white;
+	outline: none;
+	cursor: pointer;
+	box-sizing: border-box;
+	padding: 0.25rem;
+	border-radius: 5px;
+	border: 2px solid transparent; // Bruk border slik at størrelse ikke endres på :fokus
+
+	.chevronboks {
+		margin-bottom: 0.125rem;
+		color: @navBla;
+	}
+
+	&--hide {
+		visibility: hidden;
+	}
+
+	&__tekst {
+		color: @navBla;
+		padding-bottom: 0.125rem;
+	}
+
+	&:hover {
+		.chevron-lenke__tekst {
+			border-bottom: 1px solid @navBla;
+		}
+	}
+
+	&:focus {
+		border: 2px solid @navOransje;
+	}
+
+}
