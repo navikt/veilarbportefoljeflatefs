@@ -118,13 +118,14 @@ export function Endringslogg(props: StateProps) {
                                      innholdsOverskrift="NAV møte filter"
                                      innholdsTekst="Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV."
                                      nyeNotifikasjoner={nyeNotifikasjoner}
-                                     modalProps={{modal: ModalName.LAST_NED_CV, modalOpen, setModalOpen}}
+                                     modalProps={{modal: ModalName.MOTE_FILTER, modalOpen, setModalOpen}}
                 />
 
                 <EndringsloggInnhold dato={'18. JUN. 2019'}
                                      innholdsOverskrift="Laste ned og skrive ut CV"
                                      innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."
                                      nyeNotifikasjoner={nyeNotifikasjoner}
+                                     modalProps={{modal: ModalName.LAST_NED_CV, modalOpen: modalOpen, setModalOpen: setModalOpen}}
                 />
                 <EndringsloggInnhold dato={'06. JUN. 2019'}
                                      innholdsOverskrift="Visning av profilering i Detaljer"

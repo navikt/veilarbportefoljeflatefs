@@ -12,6 +12,7 @@ import MinOversiktSide from "./minoversikt/minoversikt-side";
 import TilbakemeldingFab from "./components/tilbakemelding/tilbakemelding-fab";
 import { loggBrowserMetrikker } from './utils/metrikker/browser-metrikker';
 import Modal from 'nav-frontend-modal';
+import {default as TourModal,  ModalName } from "./components/tour-modal/tour-modal"
 
 loggBrowserMetrikker();
 
@@ -74,6 +75,10 @@ function Application (props) {
                             />
                         </Switch>
                         <TilbakemeldingFab/>
+                        <TourModal
+                            checkLocalStorage={true}
+                            modalName={ModalName.MOTE_FILTER}
+                        />
                     </div>
                 </EnhetContext>
             </div>

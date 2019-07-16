@@ -7,7 +7,8 @@ import { getTour } from './tour-modal-custom/tour-modal-custom'
 import './tour-modal.less';
 
 export enum ModalName{
-    LAST_NED_CV = 'TOUR_MODAL-LAST_NED_CV'
+    LAST_NED_CV = 'TOUR_MODAL-LAST_NED_CV',
+    MOTE_FILTER = 'TOUR_MODAL-MOTE_FILTER',
 }
 
 export interface Step {
@@ -22,8 +23,6 @@ interface TourModalProps {
 }
 
 function TourModal(props: TourModalProps){
-    console.log("check local: "+props.checkLocalStorage + " in store: "+ hasStored(props.modalName))
-
     const [state, setState] = useState({
             modalOpen: props.checkLocalStorage ? !hasStored(props.modalName): true,
             selectedStepIdx: 0
@@ -56,7 +55,7 @@ function TourModal(props: TourModalProps){
     const handleFinishBtnClicked = () => {
         lukkModal(true);
     };
-
+    
     const steps = getTour(props.modalName);
     const { selectedStepIdx, modalOpen } = state;
     const step = steps[selectedStepIdx];

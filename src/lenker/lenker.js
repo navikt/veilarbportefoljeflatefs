@@ -2,7 +2,6 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import ActiveLink from "./active-link";
 import Endringslogg from "../components/endringslogg/endringslogg"
-import {default as TourModal,  ModalName } from "../components/tour-modal/tour-modal"
 function Lenker() {
     return (
         <div className="lenker blokk-m" role="tablist">
@@ -25,10 +24,6 @@ function Lenker() {
                 </ActiveLink>
             </h2>
             <Endringslogg/>
-            <TourModal
-                checkLocalStorage={true}
-                modalName={ModalName.LAST_NED_CV}
-            />
         </div>
     );
 }
