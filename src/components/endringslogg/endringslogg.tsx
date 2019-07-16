@@ -11,7 +11,7 @@ import { useTimer } from '../../hooks/use-timer';
 import { useEventListener } from '../../hooks/use-event-listener';
 import { Undertittel } from 'nav-frontend-typografi';
 import { hentAktivBruker } from '../enhet-context/context-api';
-import { modalName } from '../tour-modal/tour-modal';
+import { ModalName } from '../tour-modal/tour-modal';
 
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
@@ -118,7 +118,7 @@ export function Endringslogg(props: StateProps) {
                                      innholdsOverskrift="NAV møte filter"
                                      innholdsTekst="Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV."
                                      nyeNotifikasjoner={nyeNotifikasjoner}
-                                     modalProps={{modal: modalName.LAST_NED_CV, modalOpen, setModalOpen}}
+                                     modalProps={{modal: ModalName.LAST_NED_CV, modalOpen, setModalOpen}}
                 />
 
                 <EndringsloggInnhold dato={'18. JUN. 2019'}

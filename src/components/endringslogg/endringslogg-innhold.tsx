@@ -3,9 +3,9 @@ import { EtikettLiten, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { default as React, Dispatch, SetStateAction } from 'react';
 import { ReactComponent as LinkIcon } from './external-link.svg';
 import Lenke from 'nav-frontend-lenker'; 
-import { getTour } from './tour-modal-custom/tour-modal-custom';
-import { default as TourModal, modalName } from '../tour-modal/tour-modal';
-
+import { getTour } from '../tour-modal/tour-modal-custom/tour-modal-custom';
+import { default as TourModal, ModalName } from '../tour-modal/tour-modal';
+import { Knapp } from 'nav-frontend-knapper';
 
 interface EndringsloggInnholdProps extends LinkInnholdProps {
     dato: string;
@@ -21,7 +21,7 @@ interface LinkInnholdProps {
 }
 
 interface ModalStepperProps {
-    modal: modalName;
+    modal: ModalName;
     setModalOpen: Dispatch<SetStateAction<boolean>>;
     modalOpen: boolean;
 }
@@ -43,13 +43,14 @@ function LinkTag(props: LinkInnholdProps) {
 function Modal(props: ModalStepperProps){
     return (
         <>
-            <button onClick={()=>(props.setModalOpen(!props.modalOpen))}>
+            <Knapp mini={true}onClick={()=>(props.setModalOpen(!props.modalOpen))}>
             Se hvordan
-            </button>
+            </Knapp>
 
-            { props.modalOpen &&
+            {props.modalOpen &&
                 <TourModal 
-                    steps={getTour(props.modal)} 
+                    checkLocalStorage={false}
+                    modalName={props.modal}
                     setModalOpen={props.setModalOpen}
                 />
             }

@@ -1,4 +1,4 @@
-import { Step, modalName } from "../../tour-modal/tour-modal"
+import { Step, ModalName } from "../tour-modal"
 import step1Bilde from "./step-1.png";
 
 const stepsLastNedCV: Step[] = [
@@ -21,9 +21,9 @@ const stepsblank: Step[] = [
     }
 ];
 
-export function getTour(modal: modalName){
+export function getTour(modal: ModalName){
     switch(modal) {
-        case modalName.LAST_NED_CV:
+        case ModalName.LAST_NED_CV:
           return stepsLastNedCV;
         default:
           return stepsblank;

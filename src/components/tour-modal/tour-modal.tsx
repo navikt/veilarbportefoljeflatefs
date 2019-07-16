@@ -3,9 +3,10 @@ import NavFrontendModal from 'nav-frontend-modal';
 import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import ChevronLenke, { Retning } from '../chevron-lenke/chevron-lenke';
 import Stegviser from '../stegviser/stegviser';
+import { getTour } from './tour-modal-custom/tour-modal-custom'
 import './tour-modal.less';
 
-export enum modalName{
+export enum ModalName{
     LAST_NED_CV = 'TOUR_MODAL-LAST_NED_CV'
 }
 
@@ -15,18 +16,26 @@ export interface Step {
     bilde: string;
 }
 interface TourModalProps {
-    steps: Step[];
+    checkLocalStorage: boolean;
+    modalName: ModalName;
     setModalOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 function TourModal(props: TourModalProps){
+    console.log("check local: "+props.checkLocalStorage + " in store: "+ hasStored(props.modalName))
+
     const [state, setState] = useState({
-            modalOpen: true,
+            modalOpen: props.checkLocalStorage ? !hasStored(props.modalName): true,
             selectedStepIdx: 0
-        });
+    });
+
+    const lagreIkkeVisModal = () => {
+        window.localStorage.setItem(props.modalName, 'true');
+    };
 
     const lukkModal = (finishedTour: boolean) => {
         setState({ modalOpen: false, selectedStepIdx: state.selectedStepIdx});
+        lagreIkkeVisModal();
         if(props.setModalOpen){
             props.setModalOpen(false);
         }
@@ -48,10 +57,10 @@ function TourModal(props: TourModalProps){
         lukkModal(true);
     };
 
-    
+    const steps = getTour(props.modalName);
     const { selectedStepIdx, modalOpen } = state;
-    const step = props.steps[selectedStepIdx];
-    const isFinalStep = selectedStepIdx === props.steps.length - 1;
+    const step = steps[selectedStepIdx];
+    const isFinalStep = selectedStepIdx === steps.length - 1;
 
     const hidePrevBtn = selectedStepIdx === 0;
     const nextBtnText = isFinalStep ? "Ferdig" : "Neste";
@@ -82,7 +91,7 @@ function TourModal(props: TourModalProps){
             </main>
             <footer className="tour-modal__footer">
                 <ChevronLenke retning={Retning.VENSTRE} hide={hidePrevBtn} tekst="Forrige" onClick={handlePreviousBtnClicked}/>
-                <Stegviser antallSteg={props.steps.length} valgtSteg={selectedStepIdx}/>
+                <Stegviser antallSteg={steps.length} valgtSteg={selectedStepIdx}/>
                 <ChevronLenke retning={Retning.HOYRE} tekst={nextBtnText} onClick={nextBtnHandleClick}/>
             </footer>
         </NavFrontendModal>
