@@ -35,11 +35,13 @@ export function Endringslogg(props: StateProps) {
     const versjonsnummer = '0.1.9';
     const {start, stopp} = useTimer();
     const [open, setOpen] = useState(false);
-    const [veilederIdent, setVeilderIdent] = useState('');
+
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const focusRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const nyeNotifikasjoner = !sjekkHarSettEndringslogg(versjonsnummer);
+
+    const [veilederIdent, setVeilderIdent] = useState('');
 
     const hentAktivVeileder = async () => {
         const veilederId = await hentAktivBruker();
@@ -56,7 +58,8 @@ export function Endringslogg(props: StateProps) {
         } else {
             const tidBrukt = stopp();
             krypterVeilederident(veilederIdent, versjonsnummer)
-                .then((res) => sendMetrikker({tidBrukt, nyeNotifikasjoner, hash: hexString(res)}));
+                .then((res) => sendMetrikker({tidBrukt, nyeNotifikasjoner, hash: hexString(res)}))
+                .catch((e) => console.log(e)); // tslint:disable-line
         }
 
         if (open && !setOpenTo) {

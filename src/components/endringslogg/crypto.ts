@@ -34,7 +34,7 @@ export function getCrypto(): CompatCrypto {
                 const msDigest = (digest as unknown as MsCryptoOperation);
                 return new Promise((resolve, reject) => {
                     msDigest.oncomplete = () => resolve(msDigest.result);
-                    msDigest.onerror = () => reject(Error('Alexandra må fikse denne'));
+                    msDigest.onerror = () => reject(Error('Kunde ikke hashe veileder id'));
                 });
             }
         }
