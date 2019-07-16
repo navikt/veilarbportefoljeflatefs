@@ -6,10 +6,11 @@ import { ENDRINGSLOGG } from '../../konstanter';
 import { sjekkFeature } from '../../ducks/features';
 import TransitionContainer from './transition-container';
 import { logEvent } from '../../utils/frontend-logger';
-import { harLestEndringslogg, sjekkHarSettEndringslogg, hentVeilederHash } from './endringslogg-utils';
+import { harLestEndringslogg, krypterVeilederident, hexString, sjekkHarSettEndringslogg } from './endringslogg-utils';
 import { useTimer } from '../../hooks/use-timer';
 import { useEventListener } from '../../hooks/use-event-listener';
 import { Undertittel } from 'nav-frontend-typografi';
+import { hentAktivBruker } from '../enhet-context/context-api';
 
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
@@ -32,22 +33,30 @@ interface StateProps {
 
 export function Endringslogg(props: StateProps) {
     const versjonsnummer = '0.1.9';
-    const veilederHash = hentVeilederHash(versjonsnummer);
     const {start, stopp} = useTimer();
     const [open, setOpen] = useState(false);
+    const [veilederIdent, setVeilderIdent] = useState('');
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const focusRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const nyeNotifikasjoner = !sjekkHarSettEndringslogg(versjonsnummer);
+
+    const hentAktivVeileder = async () => {
+        const veilederId = await hentAktivBruker();
+        setVeilderIdent(veilederId);
+    };
+
+    useEffect(() => {
+        hentAktivVeileder();
+    }, []);
 
     const setLocalstorageAndOpenStatus = (setOpenTo: boolean) => {
         if (setOpenTo) {
             start();
         } else {
             const tidBrukt = stopp();
-            veilederHash.then((res) => {
-                sendMetrikker({tidBrukt, nyeNotifikasjoner, hash: res});
-            });
+            krypterVeilederident(veilederIdent, versjonsnummer)
+                .then((res) => sendMetrikker({tidBrukt, nyeNotifikasjoner, hash: hexString(res)}));
         }
 
         if (open && !setOpenTo) {

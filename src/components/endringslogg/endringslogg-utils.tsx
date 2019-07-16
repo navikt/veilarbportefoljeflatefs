@@ -1,6 +1,6 @@
-import { hentAktivBruker } from '../enhet-context/context-api';
+import { getCrypto } from './crypto';
 
-function hexString(buffer) {
+export function hexString(buffer) {
     const byteArray = new Uint8Array(buffer);
 
     const hexCodes = [...byteArray].map((value) => {
@@ -12,12 +12,27 @@ function hexString(buffer) {
     return hexCodes.join('');
 }
 
-export async function hentVeilederHash(versjon: string) {
-    const veileder = await hentAktivBruker();
-    const encoder = new TextEncoder();
-    const data = encoder.encode(`${veileder} - ${versjon}`);
-    const hash = await window.crypto.subtle.digest('SHA-256', data).then((res) => hexString(res));
-    return hash;
+export function krypterVeilederident(veileder: string, versjon: string): Promise<ArrayBuffer> {
+    const stringToBeEncoded = `${veileder} - ${versjon}`;
+    const utf8Arr: Uint8Array = encodeString(stringToBeEncoded);
+
+    return getCrypto().subtle.digest('SHA-256', utf8Arr);
+}
+
+function encodeString(stringToBeEncoded: string) {
+    let data;
+    // @ts-ignore
+    if (typeof TextEncoder === 'undefined') {
+        const utf8 = unescape(encodeURIComponent(stringToBeEncoded));
+        data = new Uint8Array(utf8.length);
+        for (let i = 0; i < utf8.length; i++) {
+            data[i] = utf8.charCodeAt(i);
+        }
+    } else {
+        const encoder = new TextEncoder();
+        data = encoder.encode(stringToBeEncoded);
+    }
+    return data;
 }
 
 const ENDRING_PREFIX = 'Endringslogg';
