@@ -1,19 +1,29 @@
 import classNames from 'classnames/dedupe';
 import { EtikettLiten, Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { default as React } from 'react';
+import { default as React, Dispatch, SetStateAction } from 'react';
 import { ReactComponent as LinkIcon } from './external-link.svg';
-import Lenke from 'nav-frontend-lenker';
+import Lenke from 'nav-frontend-lenker'; 
+import { getTour } from './tour-modal-custom/tour-modal-custom';
+import { default as TourModal, modalName } from '../tour-modal/tour-modal';
+
 
 interface EndringsloggInnholdProps extends LinkInnholdProps {
     dato: string;
     innholdsTekst: string;
     innholdsOverskrift: string;
     nyeNotifikasjoner: boolean;
+    modalProps?: ModalStepperProps;
 }
 
 interface LinkInnholdProps {
     url?: string;
     linkTekst?: string;
+}
+
+interface ModalStepperProps {
+    modal: modalName;
+    setModalOpen: Dispatch<SetStateAction<boolean>>;
+    modalOpen: boolean;
 }
 
 function LinkTag(props: LinkInnholdProps) {
@@ -30,7 +40,25 @@ function LinkTag(props: LinkInnholdProps) {
     );
 }
 
+function Modal(props: ModalStepperProps){
+    return (
+        <>
+            <button onClick={()=>(props.setModalOpen(!props.modalOpen))}>
+            Se hvordan
+            </button>
+
+            { props.modalOpen &&
+                <TourModal 
+                    steps={getTour(props.modal)} 
+                    setModalOpen={props.setModalOpen}
+                />
+            }
+        </>
+    )
+}
+
 export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
+
     return (
         <div className="endringslogg-rad endringslogg-skille">
             <div className="endringslogg-datolinje">
@@ -45,7 +73,12 @@ export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
                 <Undertittel tag="h3"> {props.innholdsOverskrift} </Undertittel>
                 <Normaltekst> {props.innholdsTekst} </Normaltekst>
                 <LinkTag url={props.url} linkTekst={props.linkTekst}/>
+                {props.modalProps &&
+                    <Modal modal={props.modalProps.modal} setModalOpen={props.modalProps.setModalOpen} modalOpen={props.modalProps.modalOpen} />
+                }
+                    
             </div>
+
         </div>
     );
 }
