@@ -4,11 +4,11 @@ import { BrowserRouter } from 'react-router-dom';
 import Application from './application';
 import { basename } from './history';
 import rendreDekorator from './eventhandtering';
-import {Provider} from "react-redux";
-import {addLocaleData, IntlProvider} from "react-intl";
-import nb from "react-intl/locale-data/nb";
-import createStore from "./store";
-import * as moment from "moment";
+import { Provider } from 'react-redux';
+import { addLocaleData, IntlProvider } from 'react-intl';
+import nb from 'react-intl/locale-data/nb';
+import createStore from './store';
+import * as moment from 'moment';
 
 moment.locale('nb');
 addLocaleData(nb);

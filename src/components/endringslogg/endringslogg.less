@@ -36,10 +36,7 @@
     box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
     background-color: white;
     padding-bottom: 0.5rem;
-    border-top-right-radius: @border-radius-large;
-    border-top-left-radius: @border-radius-large;
-    border-bottom-left-radius: @border-radius-large;
-    border-bottom-right-radius: @border-radius-large;
+    border-radius: @border-radius-large;
     max-width: 27rem;
 }
 
@@ -94,7 +91,7 @@
     right: 1em;
     padding: 0.5rem;
     outline: transparent;
-    background-color: transparent;
+    background-color: @navLysGra;
     border: none;
     cursor: pointer;
 }
@@ -108,7 +105,8 @@
     }
 }
 #alarm_svg {
-    height: 2.5em;
+    height: 2.5rem;
+    width: 2.5rem;
 }
 
 .endringslogg-dropDown:hover #Outline {
@@ -166,6 +164,7 @@
 
 #external_link {
     width: 0.668rem;
+    height: 0.668rem;
     margin-left: 0.3em;
 }
 
