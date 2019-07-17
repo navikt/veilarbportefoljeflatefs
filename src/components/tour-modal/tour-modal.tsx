@@ -17,62 +17,47 @@ export interface Step {
     bilde: string;
 }
 interface TourModalProps {
-    checkLocalStorage: boolean;
-    modalName: ModalName;
-    setModalOpen?: Dispatch<SetStateAction<boolean>>;
+    modalNavn: ModalName;
+    setApenModal: Dispatch<SetStateAction<boolean>>;
 }
 
 function TourModal(props: TourModalProps) {
-    const [state, setState] = useState({
-            modalOpen: props.checkLocalStorage ? !hasStored(props.modalName): true,
-            selectedStepIdx: 0
-    });
+    const [stepIndex, setStepIndex] = useState(0);
 
     const lagreIkkeVisModal = () => {
-        window.localStorage.setItem(props.modalName, 'true');
+        window.localStorage.setItem(props.modalNavn, 'true');
     };
 
-    const lukkModal = (finishedTour: boolean) => {
-        setState({ modalOpen: false, selectedStepIdx: state.selectedStepIdx});
+    const lukkModal = () => {
         lagreIkkeVisModal();
-        if(props.setModalOpen) {
-            props.setModalOpen(false);
-        }
-    };
-
-    const handleOnRequestClose = () => {
-        lukkModal(false);
+        props.setApenModal(false);
     };
 
     const handlePreviousBtnClicked = () => {
-        setState({modalOpen: state.modalOpen, selectedStepIdx: state.selectedStepIdx - 1 });
+        setStepIndex(stepIndex - 1 );
     };
 
     const handleNextBtnClicked = () => {
-        setState({modalOpen: state.modalOpen, selectedStepIdx: state.selectedStepIdx + 1 });
+        setStepIndex(stepIndex + 1);
     };
 
-    const handleFinishBtnClicked = () => {
-        lukkModal(true);
-    };
 
-    const steps = getTour(props.modalName);
-    const { selectedStepIdx, modalOpen } = state;
-    const step = steps[selectedStepIdx];
-    const isFinalStep = selectedStepIdx === steps.length - 1;
+    const steps = getTour(props.modalNavn);
+    const step = steps[stepIndex];
+    const isFinalStep = stepIndex === steps.length - 1;
 
-    const hidePrevBtn = selectedStepIdx === 0;
+    const hidePrevBtn = stepIndex === 0;
     const nextBtnText = isFinalStep ? 'Ferdig' : 'Neste';
-    const nextBtnHandleClick = isFinalStep ? handleFinishBtnClicked : handleNextBtnClicked;
+    const nextBtnHandleClick = isFinalStep ? lukkModal : handleNextBtnClicked;
 
     return (
         <NavFrontendModal
             className="tour-modal"
             contentLabel="TourModal"
-            isOpen={modalOpen}
+            isOpen={true}
             closeButton={true}
             shouldCloseOnOverlayClick={true}
-            onRequestClose={handleOnRequestClose}
+            onRequestClose={lukkModal}
         >
             <div className="tour-modal__header--wrapper">
             <header className="tour-modal__header">
@@ -90,15 +75,11 @@ function TourModal(props: TourModalProps) {
             </main>
             <footer className="tour-modal__footer">
                 <ChevronLenke retning={Retning.VENSTRE} hide={hidePrevBtn} tekst="Forrige" onClick={handlePreviousBtnClicked}/>
-                <Stegviser antallSteg={steps.length} valgtSteg={selectedStepIdx}/>
+                <Stegviser antallSteg={steps.length} valgtSteg={stepIndex}/>
                 <ChevronLenke retning={Retning.HOYRE} tekst={nextBtnText} onClick={nextBtnHandleClick}/>
             </footer>
         </NavFrontendModal>
     );
-}
-
-export function hasStored(tagName: string) {
-    return window.localStorage.getItem(tagName) !== null;
 }
 
 export default TourModal;

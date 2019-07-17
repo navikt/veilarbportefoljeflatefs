@@ -56,9 +56,8 @@ function Modal(props: ModalStepperProps) {
             </Knapp>
             {open &&
             <TourModal
-                checkLocalStorage={false}
-                modalName={props.modal}
-                setModalOpen={props.setModalOpen}
+                modalNavn={props.modal}
+                setApenModal={props.setModalOpen}
             />
             }
         </>

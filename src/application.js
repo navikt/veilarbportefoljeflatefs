@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import 'moment/locale/nb';
 import classnames from 'classnames';
 import { IntlProvider } from 'react-intl';
@@ -30,6 +31,9 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
 }
 
 function Application (props) {
+    const modalNavn = ModalName.MOTE_FILTER;
+    const [openModal, setApenModal] = useState(!hasStored(modalNavn));
+
     return (
         <IntlProvider
             defaultLocale="nb"
@@ -75,15 +79,21 @@ function Application (props) {
                             />
                         </Switch>
                         <TilbakemeldingFab/>
+                        {openModal &&
                         <TourModal
-                            checkLocalStorage={true}
-                            modalName={ModalName.MOTE_FILTER}
+                            modalNavn = {modalNavn}
+                            setApenModal = {setApenModal}
                         />
+                        }
                     </div>
                 </EnhetContext>
             </div>
         </IntlProvider>
     );
+}
+
+export function hasStored(tagName) {
+    return window.localStorage.getItem(tagName) !== null;
 }
 
 /*

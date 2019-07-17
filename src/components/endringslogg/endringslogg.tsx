@@ -80,6 +80,9 @@ export function Endringslogg(props: StateProps) {
                 .catch((e) => console.log(e)); // tslint:disable-line
             setOverordnetNotifikasjon(false);
             versjoner.forEach((elem) => registrerHarLestEndringslogg(elem));
+            if(modalVarApen){
+                setModalVarApen(false);
+            }
         }
         setOpen(setOpenTo);
     };

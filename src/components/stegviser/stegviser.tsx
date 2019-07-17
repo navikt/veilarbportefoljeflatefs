@@ -7,9 +7,8 @@ interface StegviserProps {
     valgtSteg: number;
 }
 
-class Stegviser extends React.Component<StegviserProps> {
-
-    mapTilSteg = (antall: number, selectedIdx: number) => {
+function Stegviser (props: StegviserProps){
+    const mapTilSteg = (antall: number, selectedIdx: number) => {
         const steg:any[] = [];
 
         for (let i = 0; i < antall; i++) {
@@ -22,14 +21,12 @@ class Stegviser extends React.Component<StegviserProps> {
         return steg;
     };
 
-    render() {
-        const { antallSteg, valgtSteg } = this.props;
-        return (
-            <div className="stegviser">
-                {this.mapTilSteg(antallSteg, valgtSteg)}
-            </div>
-        );
-    }
+    return (
+        <div className="stegviser">
+            {mapTilSteg(props.antallSteg, props.valgtSteg)}
+        </div>
+    );
+    
 
 }
 
