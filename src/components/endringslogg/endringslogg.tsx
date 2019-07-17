@@ -1,6 +1,6 @@
 import { default as React, useEffect, useRef, useState, RefObject } from 'react';
 import { ReactComponent as AlarmIcon } from './icon-v3.svg';
-import EndringsloggInnhold from './endringslogg-innhold';
+import EndringsloggInnhold, { LinkTag, Modal } from './endringslogg-innhold';
 import { connect } from 'react-redux';
 import { ENDRINGSLOGG, VIS_MOTER_MED_NAV } from '../../konstanter';
 import { sjekkFeature } from '../../ducks/features';
@@ -68,7 +68,11 @@ export function Endringslogg(props: StateProps) {
         } else {
             const tidBrukt = stopp();
             krypterVeilederident(veilederIdent, legacyVersion)
-                .then((res) => sendMetrikker({tidBrukt, nyeNotifikasjoner: overordnetNotifikasjon, hash: hexString(res)}))
+                .then((res) => sendMetrikker({
+                    tidBrukt,
+                    nyeNotifikasjoner: overordnetNotifikasjon,
+                    hash: hexString(res)
+                }))
                 .catch((e) => console.log(e)); // tslint:disable-line
             setOverordnetNotifikasjon(false);
             versjoner.forEach((elem) => registrerHarLestEndringslogg(elem));
@@ -135,19 +139,23 @@ export function Endringslogg(props: StateProps) {
                                buttonRef={buttonRef}/>
             <TransitionContainer visible={open} focusRef={focusRef}>
                 <EndringsloggHeader/>
-                {feature && <EndringsloggInnhold dato={'16. JUL. 2019'}
-                                                 innholdsOverskrift="NAV møte filter"
-                                                 innholdsTekst="Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV."
-                                                 nyeNotifikasjoner={!finnesILocalstorage('0.2.0')}
-                                                 modalProps={{modal: ModalName.MOTE_FILTER, modalOpen, setModalOpen}}
-                />}
+                {feature &&
+                <EndringsloggInnhold dato={'16. JUL. 2019'}
+                                     innholdsOverskrift="NAV møte filter"
+                                     innholdsTekst="Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV."
+                                     nyeNotifikasjoner={!finnesILocalstorage('0.2.0')}>
+                    <Modal modal={ModalName.MOTE_FILTER} setModalOpen={setModalOpen}
+                           modalOpen={modalOpen}/>
+                </EndringsloggInnhold>
+                }
 
                 <EndringsloggInnhold dato={'18. JUN. 2019'}
                                      innholdsOverskrift="Laste ned og skrive ut CV"
                                      innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."
-                                     nyeNotifikasjoner={!finnesILocalstorage('0.1.9')}
-                                     modalProps={{modal: ModalName.LAST_NED_CV, modalOpen, setModalOpen}}
-                />
+                                     nyeNotifikasjoner={!finnesILocalstorage('0.1.9')}>
+                    <Modal modal={ModalName.LAST_NED_CV} setModalOpen={setModalOpen}
+                           modalOpen={modalOpen}/>
+                </EndringsloggInnhold>
                 <EndringsloggInnhold dato={'06. JUN. 2019'}
                                      innholdsOverskrift="Visning av profilering i Detaljer"
                                      innholdsTekst="Nå finner du profileringsresultatet for brukeren under Registrering i Detaljer."
@@ -156,10 +164,10 @@ export function Endringslogg(props: StateProps) {
                 <EndringsloggInnhold dato={'29. MAR. 2019'}
                                      innholdsOverskrift="Manuell registrering"
                                      innholdsTekst="Du kan nå registrere brukere manuelt i Veilederverktøy (tannhjulet).  Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
-                                     nyeNotifikasjoner={!finnesILocalstorage('0.1.9')}
-                                     linkTekst="Nyhetssak på Navet"
-                                     url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
-                />
+                                     nyeNotifikasjoner={!finnesILocalstorage('0.1.9')}>
+                    <LinkTag linkTekst={'Nyhetssak på Navet'}
+                             url={'https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx'}/>
+                </EndringsloggInnhold>
             </TransitionContainer>
         </div>
     );

@@ -7,17 +7,12 @@ import { getTour } from '../tour-modal/tour-modal-custom/tour-modal-custom';
 import { default as TourModal, ModalName } from '../tour-modal/tour-modal';
 import { Knapp } from 'nav-frontend-knapper';
 
-interface EndringsloggInnholdProps extends LinkInnholdProps {
+interface EndringsloggInnholdProps {
     dato: string;
     innholdsTekst: string;
     innholdsOverskrift: string;
     nyeNotifikasjoner: boolean;
-    modalProps?: ModalStepperProps;
-}
-
-interface LinkInnholdProps {
-    url?: string;
-    linkTekst?: string;
+    children?: React.ReactNode;
 }
 
 interface ModalStepperProps {
@@ -26,21 +21,16 @@ interface ModalStepperProps {
     modalOpen: boolean;
 }
 
-function LinkTag(props: LinkInnholdProps) {
-    if (!props.url) {
-        return null;
-    }
-
+export function LinkTag(props: { linkTekst: string, url: string }) {
     return (
         <Lenke className="endringslogg-link" target="_blank" href={props.url}>
             {props.linkTekst ? props.linkTekst : props.url}
             <LinkIcon/>
         </Lenke>
-
     );
 }
 
-function Modal(props: ModalStepperProps) {
+export function Modal(props: ModalStepperProps) {
     const [open, setOpen] = useState(false);
     if (!props.modalOpen && open) {
         setOpen(false);
@@ -80,12 +70,7 @@ export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
             <div className="endringslogg-innhold endringslogg-kolonne">
                 <Undertittel tag="h3"> {props.innholdsOverskrift} </Undertittel>
                 <Normaltekst> {props.innholdsTekst} </Normaltekst>
-                <LinkTag url={props.url} linkTekst={props.linkTekst}/>
-                {props.modalProps &&
-                <Modal modal={props.modalProps.modal} setModalOpen={props.modalProps.setModalOpen}
-                       modalOpen={props.modalProps.modalOpen}/>
-                }
-
+                {props.children}
             </div>
         </div>
     );
