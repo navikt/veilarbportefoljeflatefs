@@ -3,10 +3,10 @@ import NavFrontendModal from 'nav-frontend-modal';
 import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import ChevronLenke, { Retning } from '../chevron-lenke/chevron-lenke';
 import Stegviser from '../stegviser/stegviser';
-import { getTour } from './tour-modal-custom/tour-modal-custom'
+import { getTour } from './tour-modal-custom/tour-modal-custom';
 import './tour-modal.less';
 
-export enum ModalName{
+export enum ModalName {
     LAST_NED_CV = 'TOUR_MODAL-LAST_NED_CV',
     MOTE_FILTER = 'TOUR_MODAL-MOTE_FILTER',
 }
@@ -22,7 +22,7 @@ interface TourModalProps {
     setModalOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
-function TourModal(props: TourModalProps){
+function TourModal(props: TourModalProps) {
     const [state, setState] = useState({
             modalOpen: props.checkLocalStorage ? !hasStored(props.modalName): true,
             selectedStepIdx: 0
@@ -35,7 +35,7 @@ function TourModal(props: TourModalProps){
     const lukkModal = (finishedTour: boolean) => {
         setState({ modalOpen: false, selectedStepIdx: state.selectedStepIdx});
         lagreIkkeVisModal();
-        if(props.setModalOpen){
+        if(props.setModalOpen) {
             props.setModalOpen(false);
         }
     };
@@ -55,14 +55,14 @@ function TourModal(props: TourModalProps){
     const handleFinishBtnClicked = () => {
         lukkModal(true);
     };
-    
+
     const steps = getTour(props.modalName);
     const { selectedStepIdx, modalOpen } = state;
     const step = steps[selectedStepIdx];
     const isFinalStep = selectedStepIdx === steps.length - 1;
 
     const hidePrevBtn = selectedStepIdx === 0;
-    const nextBtnText = isFinalStep ? "Ferdig" : "Neste";
+    const nextBtnText = isFinalStep ? 'Ferdig' : 'Neste';
     const nextBtnHandleClick = isFinalStep ? handleFinishBtnClicked : handleNextBtnClicked;
 
     return (
@@ -94,7 +94,7 @@ function TourModal(props: TourModalProps){
                 <ChevronLenke retning={Retning.HOYRE} tekst={nextBtnText} onClick={nextBtnHandleClick}/>
             </footer>
         </NavFrontendModal>
-    );  
+    );
 }
 
 export function hasStored(tagName: string) {

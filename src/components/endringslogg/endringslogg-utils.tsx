@@ -37,11 +37,17 @@ function encodeString(stringToBeEncoded: string) {
 
 const ENDRING_PREFIX = 'Endringslogg';
 
-export function sjekkHarSettEndringslogg(versjon: string) {
-    const senesteVersjonSett = window.localStorage.getItem(ENDRING_PREFIX) || false;
-    return senesteVersjonSett && senesteVersjonSett === versjon;
+export function hentEndringsloggFraLocalstorage() {
+    let a: string[] = [];
+    const tmp = localStorage.getItem(ENDRING_PREFIX);
+    if (tmp) {
+        a = JSON.parse(tmp);
+    }
+    return a;
 }
 
-export function harLestEndringslogg(versjon) {
-    window.localStorage.setItem(ENDRING_PREFIX, versjon);
+export function registrerHarLestEndringslogg(versjon: string) {
+    const a: string[] = hentEndringsloggFraLocalstorage();
+    a.push(versjon);
+    window.localStorage.setItem(ENDRING_PREFIX, JSON.stringify(a));
 }
