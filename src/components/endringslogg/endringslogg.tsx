@@ -21,7 +21,7 @@ import { ModalName } from '../tour-modal/tour-modal';
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
     logEvent('portefolje.endringslogg', {
-        feature: 'pre_tilbakemelding_2',
+        feature: 'pre_tilbakemelding_3',
         tidBrukt: metrikker.tidBrukt,
         nyeNotifikasjoner: metrikker.nyeNotifikasjoner
     }, {hash: metrikker.hash});
