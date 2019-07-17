@@ -1,16 +1,27 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
 import { skjulModal } from '../ducks/modal';
 import { markerAlleBrukere } from '../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
+import { BrukerModell } from '../model-interfaces';
 
+interface ArbeidslisteModalProps {
+    isOpen: boolean;
+    valgteBrukere: BrukerModell[];
+    skjulArbeidslisteModal: () => void;
+    fjernMarkerteBrukere: ()=> void;
+    innloggetVeileder: ()=> void;
+}
 
-class ArbeidslisteModal extends Component {
+interface ArbeidslisteModalState {
+    formIsDirty: boolean;
+    isOpen: boolean;
+}
+
+class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteModalState> {
     constructor(props) {
         super(props);
 
@@ -23,21 +34,19 @@ class ArbeidslisteModal extends Component {
         this.setFormIsDirty = this.setFormIsDirty.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: ArbeidslisteModalProps) {
         if (nextProps.isOpen !== this.state.isOpen) {
             this.setState({ isOpen: nextProps.isOpen });
         }
     }
 
-    setFormIsDirty(formIsDirty) {
-        this.setState({...this.state,formIsDirty})
+    setFormIsDirty(formIsDirty: boolean) {
+        this.setState({...this.state,formIsDirty});
     }
 
     lukkModal() {
-        const { intl, skjulArbeidslisteModal, fjernMarkerteBrukere } = this.props;
-        const dialogTekst = intl.formatMessage({
-            id: 'arbeidsliste-skjema.lukk-advarsel',
-        });
+        const { skjulArbeidslisteModal, fjernMarkerteBrukere } = this.props;
+        const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
         if (!this.state.formIsDirty || window.confirm(dialogTekst)) {
             this.setState({ isOpen: false });
             fjernMarkerteBrukere();
@@ -45,18 +54,15 @@ class ArbeidslisteModal extends Component {
         }
     }
 
-    leggTilModal(valgteBrukere) {
+    leggTilModal(valgteBrukere: BrukerModell[]) {
         return (
             <div className="arbeidsliste__modal">
                 <div className="arbeidsliste-info-tekst">
                     <Innholdstittel tag="h1" className="blokk-xs">
-                        <FormattedMessage id="modal.legg.til.arbeidsliste.tittel" />
+                        Legg i arbeidsliste
                     </Innholdstittel>
                     <Normaltekst className="blokk-s">
-                        <FormattedMessage
-                            id="modal.legg.til.arbeidsliste.infotekst"
-                            values={{ antall: valgteBrukere.length }}
-                        />
+                        {`Du har valgt ${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : 'brukere' }. Skriv en kort kommentar og legg inn dato.`}
                     </Normaltekst>
                 </div>
                 <LeggTilArbeidslisteForm
@@ -76,13 +82,10 @@ class ArbeidslisteModal extends Component {
             <div className="arbeidsliste__modal">
                 <div className="arbeidsliste-info-tekst">
                     <Innholdstittel tag="h1" className="blokk-xs">
-                        <FormattedMessage id="modal.fjern.fra.arbeidsliste.tittel" />
+                        Fjern fra arbeidsliste
                     </Innholdstittel>
                     <Normaltekst className="blokk-s">
-                        <FormattedMessage
-                            id="modal.fjern.fra.arbeidsliste.infotekst"
-                            values={{ antall: brukereSomSkalFjernes.length }}
-                        />
+                        {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'} fra arbeidslisten.`}
                     </Normaltekst>
                 </div>
                 <FjernFraArbeidslisteForm
@@ -96,7 +99,6 @@ class ArbeidslisteModal extends Component {
     render() {
         const { valgteBrukere } = this.props;
         const fjerne = valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
-        console.log('fjerne', fjerne);
         return (
             <NavFrontendModal
                 className={'arbeidsliste-modal'}
@@ -108,22 +110,10 @@ class ArbeidslisteModal extends Component {
                 <div className="modal-header-wrapper">
                     <header className="modal-header" />
                 </div>
-                { fjerne ? this.fjernFraModal(valgteBrukere) : this.leggTilModal(valgteBrukere) }
+                { fjerne ? this.fjernFraModal(valgteBrukere) : this.leggTilModal(valgteBrukere)}
             </NavFrontendModal>);
     }
 }
-
-/*
-ArbeidslisteModal.propTypes = {
-    isOpen: PT.bool.isRequired,
-    valgteBrukere: PT.arrayOf(brukerShape).isRequired,
-    skjulArbeidslisteModal: PT.func.isRequired,
-    fjernMarkerteBrukere: PT.func.isRequired,
-    innloggetVeileder: PT.string.isRequired,
-    formIsDirty: PT.bool.isRequired,
-    intl: intlShape.isRequired,
-};
-*/
 
 const mapStateToProps = (state) => ({
     visModal: state.modal.visModal,
@@ -135,4 +125,4 @@ const mapDispatchToProps = (dispatch) => ({
     fjernMarkerteBrukere: () => dispatch(markerAlleBrukere(false))
 });
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(ArbeidslisteModal));
+export default connect(mapStateToProps, mapDispatchToProps)(ArbeidslisteModal);

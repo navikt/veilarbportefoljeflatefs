@@ -1,4 +1,0 @@
-Du har valgt {antall, number} {antall, plural,
-one {bruker}
-other {brukere}
-}. Skriv en kort kommentar og legg inn dato.

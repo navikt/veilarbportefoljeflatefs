@@ -75,7 +75,7 @@ function ArbeidslisteModalRediger({
                 className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
                 onClick={()=>setIsOpen(true)}
             >
-                <FormattedMessage id="arbeidsliste.kommentar.footer.knapp"/>
+                Rediger
             </button>
 
             <Formik

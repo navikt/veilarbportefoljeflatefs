@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-toggle';
-import * as VK from './../../minoversikt/minoversikt-konstanter';
+import * as VK from '../../minoversikt/minoversikt-konstanter';
 import { AppState } from './../../reducer';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 import { settVisningsmodus } from '../../ducks/paginering';

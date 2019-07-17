@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { lagConfig } from './filter-konstanter';
-import FilterIkon from '../components/filter-ikon';
+import { ReactComponent as FilterIkon } from './filter-ikon.svg';
 import { MouseEvent } from 'react';
 import classNames from 'classnames';
 import { InjectedIntl } from 'react-intl';
@@ -15,14 +15,13 @@ interface FiltreringLabelProps {
 }
 
 function FiltreringLabel({label, slettFilter, harMuligMenIkkeValgtKolonne = false, markert = false, skalHaKryssIkon = true, intl}: FiltreringLabelProps) {
+    const className = classNames('filtreringlabel__label', {'filtreringlabel-slett-filter': !skalHaKryssIkon});
     return (
         <button
             aria-label={skalHaKryssIkon ? intl.formatMessage({id:'filtrering.label.slett-filter'}) : intl.formatMessage({id:'filtrering.label.slett-alle-filter'})}
             className={classNames('filtreringlabel', 'typo-undertekst', {'filtreringlabel--markert': markert}, {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne})}
             onClick={slettFilter}>
-
-                    <span
-                        className={classNames('filtreringlabel__label', {'filtreringlabel-slett-filter': !skalHaKryssIkon})}>{lagConfig(label).label}</span>
+            <span className={className}>{lagConfig(label).label}</span>
             {skalHaKryssIkon && <FilterIkon/>}
         </button>
     );

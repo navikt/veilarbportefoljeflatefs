@@ -21,13 +21,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <FormikInput name="overskrift"/>
                 <FormikTekstArea name="kommentar"/>
                 <Undertekst className="arbeidsliste--modal-redigering">
-                    <FormattedMessage
-                        id="arbeidsliste.kommentar.footer"
-                        values={{
-                            dato: props.sistEndretDato.toLocaleDateString(),
-                            veileder: props.sistEndretAv
-                        }}
-                    />
+                    {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}
                 </Undertekst>
                 <FormikDatoVelger name="frist"/>
                 <div>

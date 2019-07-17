@@ -93,42 +93,22 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     render() {
         const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
-        const innloggetVeileder = { ident: enheter.ident|| '', fornavn: '', etternavn: '', navn: ''};
+        const innloggetVeileder = { ident: enheter.ident || '', fornavn: '', etternavn: '', navn: ''};
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
-        const { formatMessage } = intl;
 
         const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
-
-        const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
-            <FormattedMessage
-                id="annen.veileder.portefolje.advarsel"
-                tagName="em"
-                values={{
-                    fornavn: gjeldendeVeileder.fornavn || '',
-                    etternavn: gjeldendeVeileder.etternavn || ''
-                }}
-            /></Normaltekst>);
 
         return (
             <DocumentTitle title="Min oversikt">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                     <div className="minoversikt-side blokk-xl">
-                        {visesAnnenVeiledersPortefolje ?
-                            <Link to="/veiledere" className="typo-normal tilbaketilveileder">
-                                <i className="chevron--venstre" />
-                                <span>
-                                    <FormattedMessage id="minoversikt.link.til.veilederoversikt" />
-                                </span>
-                            </Link> : null}
-                        <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
-                            { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
+                        <section>
                             <div className="portefolje-side">
-                                <LenkerMinoversikt
-                                    veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
-                                />
+                                <LenkerMinoversikt veilederident={veilederFraUrl ? veilederFraUrl.ident : null}/>
                                 <div id="oversikt-sideinnhold" role="tabpanel">
                                     <p className="typo-infotekst begrensetbredde blokk-l">
-                                        <FormattedMessage id="ingresstekst.minoversikt" />
+                                        Her får du oversikt over alle brukere som er tildelt deg.
+                                        Du kan filtrere ytterligere eller flytte brukere til en annen veileder i din enhet.
                                     </p>
                                     <div className="row">
                                         <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">

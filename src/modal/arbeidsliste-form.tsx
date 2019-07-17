@@ -3,7 +3,6 @@ import FormikDatoVelger from '../components/formik/formik-datovelger/formik-dato
 import { BrukerModell } from '../model-interfaces';
 import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { Textarea } from 'nav-frontend-skjema';
 import FormikInput from '../components/formik/formik-input';
 import FormikTekstArea from '../components/formik/formik-tekstarea';
 
