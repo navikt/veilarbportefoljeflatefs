@@ -19,7 +19,7 @@ export function krypterVeilederident(veileder: string, versjon: string): Promise
     return getCrypto().subtle.digest('SHA-256', utf8Arr);
 }
 
-function encodeString(stringToBeEncoded: string) {
+function encodeString(stringToBeEncoded: string): Uint8Array {
     let data;
     // @ts-ignore
     if (typeof TextEncoder === 'undefined') {
@@ -37,13 +37,25 @@ function encodeString(stringToBeEncoded: string) {
 
 const ENDRING_PREFIX = 'Endringslogg';
 
-export function hentEndringsloggFraLocalstorage() {
+export function hentEndringsloggFraLocalstorage(): string[] {
     let a: string[] = [];
     const tmp = localStorage.getItem(ENDRING_PREFIX);
     if (tmp) {
-        a = JSON.parse(tmp);
+        try {
+            a = JSON.parse(tmp);
+        } catch (e) {
+            // Error handling pga. tidligere versjon som bare lagret en string i LS.
+            if(isString(tmp)) {
+                a.push(tmp);
+            }
+            return a;
+        }
     }
     return a;
+}
+
+function isString(value: any): boolean {
+    return typeof value === 'string' || value instanceof String;
 }
 
 export function registrerHarLestEndringslogg(versjon: string) {
