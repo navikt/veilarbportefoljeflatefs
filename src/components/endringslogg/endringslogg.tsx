@@ -43,24 +43,24 @@ export function Endringslogg(props: StateProps) {
     const versjoner: string[] = [];
     const legacyVersion = '0.1.9';
     const {start, stopp} = useTimer();
-    const [open, setOpen] = useState(false);
 
+    const [open, setOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
+    const [veilederIdent, setVeilderIdent] = useState('');
+    const [overordnetNotifikasjon, setOverordnetNotifikasjon] = useState(false);
+
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const focusRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const [overordnetNotifikasjon, setOverordnetNotifikasjon] = useState(false);
 
-    const [veilederIdent, setVeilderIdent] = useState('');
+    useEffect(() => {
+        hentAktivVeileder();
+    }, []);
 
     const hentAktivVeileder = async () => {
         const veilederId = await hentAktivBruker();
         setVeilderIdent(veilederId);
     };
-
-    useEffect(() => {
-        hentAktivVeileder();
-    }, []);
 
     const setLocalstorageAndOpenStatus = (setOpenTo: boolean) => {
         if (setOpenTo) {
@@ -70,9 +70,9 @@ export function Endringslogg(props: StateProps) {
             krypterVeilederident(veilederIdent, legacyVersion)
                 .then((res) => sendMetrikker({tidBrukt, nyeNotifikasjoner: overordnetNotifikasjon, hash: hexString(res)}))
                 .catch((e) => console.log(e)); // tslint:disable-line
+            setOverordnetNotifikasjon(false);
+            versjoner.forEach((elem) => registrerHarLestEndringslogg(elem));
         }
-        setOverordnetNotifikasjon(false);
-        versjoner.forEach((elem) => registrerHarLestEndringslogg(elem));
         setOpen(setOpenTo);
     };
 
