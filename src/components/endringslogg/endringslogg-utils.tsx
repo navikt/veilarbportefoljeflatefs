@@ -12,8 +12,8 @@ export function hexString(buffer) {
     return hexCodes.join('');
 }
 
-export function krypterVeilederident(veileder: string, versjon: string): Promise<ArrayBuffer> {
-    const stringToBeEncoded = `${veileder} - ${versjon}`;
+export function krypterVeilederident(veileder: string): Promise<ArrayBuffer> {
+    const stringToBeEncoded = `${veileder} - 0.1.9`;
     const utf8Arr: Uint8Array = encodeString(stringToBeEncoded);
 
     return getCrypto().subtle.digest('SHA-256', utf8Arr);
