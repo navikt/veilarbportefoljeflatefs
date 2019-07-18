@@ -1,6 +1,6 @@
 import { default as React, useEffect, useRef, useState, RefObject } from 'react';
 import { ReactComponent as AlarmIcon } from './icon-v3.svg';
-import EndringsloggInnhold, { LinkTag, Modal } from './endringslogg-innhold';
+import EndringsloggInnhold, { LinkTag } from './endringslogg-innhold';
 import { ENDRINGSLOGG, VIS_MOTER_MED_NAV } from '../../konstanter';
 import { sjekkFeature } from '../../ducks/features';
 import TransitionContainer from './transition-container';
@@ -17,6 +17,7 @@ import { hentAktivBruker } from '../enhet-context/context-api';
 import { ModalName } from '../tour-modal/tour-modal';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { connect } from 'react-redux';
+import TourModalButton from '../tour-modal/tour-modal-button'
 
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
@@ -151,7 +152,7 @@ export function Endringslogg(props: StateProps) {
                                      innholdsOverskrift="NAV møte filter"
                                      innholdsTekst="Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV."
                                      nyeNotifikasjoner={!finnesILocalstorage('0.2.0')}>
-                    <Modal modal={ModalName.MOTE_FILTER} setModalOpen={setModalApen}
+                    <TourModalButton modal={ModalName.MOTE_FILTER} setModalOpen={setModalApen}
                            modalOpen={modalApen}/>
                 </EndringsloggInnhold>
                 }
@@ -160,7 +161,7 @@ export function Endringslogg(props: StateProps) {
                                      innholdsOverskrift="Laste ned og skrive ut CV"
                                      innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."
                                      nyeNotifikasjoner={!finnesILocalstorage('0.1.9')}>
-                    <Modal modal={ModalName.LAST_NED_CV} setModalOpen={setModalApen}
+                    <TourModalButton modal={ModalName.LAST_NED_CV} setModalOpen={setModalApen}
                            modalOpen={modalApen}/>
                 </EndringsloggInnhold>
 

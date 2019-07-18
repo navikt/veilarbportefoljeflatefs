@@ -1,11 +1,8 @@
 import classNames from 'classnames/dedupe';
 import { EtikettLiten, Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { default as React, Dispatch, SetStateAction, useState, useEffect } from 'react';
+import { default as React } from 'react';
 import { ReactComponent as LinkIcon } from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
-import { getTour } from '../tour-modal/tour-modal-custom/tour-modal-custom';
-import { default as TourModal, ModalName } from '../tour-modal/tour-modal';
-import { Knapp } from 'nav-frontend-knapper';
 
 interface EndringsloggInnholdProps {
     dato: string;
@@ -15,41 +12,12 @@ interface EndringsloggInnholdProps {
     children?: React.ReactNode;
 }
 
-interface ModalStepperProps {
-    modal: ModalName;
-    setModalOpen: Dispatch<SetStateAction<boolean>>;
-    modalOpen: boolean;
-}
-
 export function LinkTag(props: { linkTekst: string, url: string }) {
     return (
         <Lenke className="endringslogg-link" target="_blank" href={props.url}>
             {props.linkTekst ? props.linkTekst : props.url}
             <LinkIcon/>
         </Lenke>
-    );
-}
-
-export function Modal(props: ModalStepperProps) {
-    const [open, setOpen] = useState(false);
-    if (!props.modalOpen && open) {
-        setOpen(false);
-    }
-
-    return (
-        <>
-            <Knapp className="endringslogg-stepperKnapp" mini={true} onClick={() => {
-                props.setModalOpen(!props.modalOpen);
-                setOpen(!open);
-            }}>
-                Se hvordan
-            </Knapp>
-            <TourModal
-                apen={open}
-                modalNavn={props.modal}
-                setApenModal={props.setModalOpen}
-            />
-        </>
     );
 }
 
