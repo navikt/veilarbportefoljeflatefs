@@ -1,6 +1,5 @@
 import * as React from 'react';
-import cls from 'classnames';
-import './stegviser.less';
+import Stegindikator from 'nav-frontend-stegindikator';
 
 interface StegviserProps {
     antallSteg: number;
@@ -8,18 +7,20 @@ interface StegviserProps {
 }
 
 function Stegviser (props: StegviserProps){
-    const mapTilSteg = (antall: number, selectedIdx: number) => {
+    const mapIndexTilSteg = (antall: number, selectedIdx: number) => {
         return new Array(props.antallSteg)
         .fill(0)
         .map((_, i) => (
-          <div key={i} className={cls('stegviser__steg', { 'stegviser__steg--selected': i == props.valgtSteg})} />
+          {"label": "steg: "+i, "index":i}
         ));
     };
 
     return (
-        <div className="stegviser">
-            {mapTilSteg(props.antallSteg, props.valgtSteg)}
-        </div>
+        <Stegindikator 
+            steg={mapIndexTilSteg(props.antallSteg,props.valgtSteg)}
+            aktivtSteg={props.valgtSteg}
+            kompakt
+        />
     );
 }
 

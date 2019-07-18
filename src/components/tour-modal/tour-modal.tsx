@@ -53,7 +53,7 @@ function TourModal(props: TourModalProps) {
     const hidePrevBtn = stepIndex === 0;
     const nextBtnText = isFinalStep ? 'Ferdig' : 'Neste';
     const nextBtnHandleClick = isFinalStep ? lukkModal : handleNextBtnClicked;
-
+    
     return (
         <NavFrontendModal
             className="tour-modal"
