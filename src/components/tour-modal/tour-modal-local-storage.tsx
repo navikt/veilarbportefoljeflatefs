@@ -8,7 +8,7 @@ export default function TourModalLocalStorage(){
         <TourModal
             apen = { openModal }
             modalNavn = {modalNavn}
-            setApenModal = {setApenModal}
+            setOpen = {setApenModal}
         />
     )
 }

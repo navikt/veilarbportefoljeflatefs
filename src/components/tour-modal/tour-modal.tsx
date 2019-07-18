@@ -19,7 +19,7 @@ export interface Step {
 interface TourModalProps {
     modalNavn: ModalName;
     apen: boolean;
-    setApenModal: Dispatch<SetStateAction<boolean>>;
+    setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 function TourModal(props: TourModalProps) {
@@ -34,7 +34,7 @@ function TourModal(props: TourModalProps) {
         if (isFinalStep) {
             window.localStorage.setItem(`${props.modalNavn} - sett`, 'true');
         }
-        props.setApenModal(false);
+        props.setOpen(false);
     };
 
     const handlePreviousBtnClicked = () => {

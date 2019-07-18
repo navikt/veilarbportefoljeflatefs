@@ -4,28 +4,23 @@ import { Knapp } from 'nav-frontend-knapper';
 
 interface ModalStepperProps {
     modal: ModalName;
-    setModalOpen: Dispatch<SetStateAction<boolean>>;
-    modalOpen: boolean;
+    loggApen: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function TourModalButton(props: ModalStepperProps) {
     const [open, setOpen] = useState(false);
-    if (!props.modalOpen && open) {
-        setOpen(false);
-    }
-
     return (
         <>
             <Knapp className="endringslogg-stepperKnapp" mini={true} onClick={() => {
-                props.setModalOpen(!props.modalOpen);
-                setOpen(!open);
+                setOpen(true);
+                props.loggApen(true);
             }}>
                 Se hvordan
             </Knapp>
             <TourModal
                 apen={open}
                 modalNavn={props.modal}
-                setApenModal={props.setModalOpen}
+                setOpen={setOpen}
             />
         </>
     );

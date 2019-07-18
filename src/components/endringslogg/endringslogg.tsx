@@ -14,7 +14,7 @@ import {
 import { useTimer } from '../../hooks/use-timer';
 import { useEventListener } from '../../hooks/use-event-listener';
 import { hentAktivBruker } from '../enhet-context/context-api';
-import TourModal, { fullfortModal, ModalName } from '../tour-modal/tour-modal';
+import { fullfortModal, ModalName } from '../tour-modal/tour-modal';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { connect } from 'react-redux';
 import TourModalButton from '../tour-modal/tour-modal-button'
@@ -47,7 +47,6 @@ export function Endringslogg(props: StateProps) {
     const {start, stopp} = useTimer();
 
     const [endringsloggApen, setEndringsloggApen] = useState(false);
-    const [stepperApen, setStepperApen] = useState(false);
     const [stepperVarApenMetrikk, setStepperVarApenMetrikk] = useState(false);
     const [veilederIdent, setVeilderIdent] = useState('');
     const [overordnetNotifikasjon, setOverordnetNotifikasjon] = useState(false);
@@ -59,12 +58,6 @@ export function Endringslogg(props: StateProps) {
     useEffect(() => {
         hentAktivVeileder();
     }, []);
-
-    useEffect(() => {
-        if(!stepperVarApenMetrikk && stepperApen) {
-            setStepperVarApenMetrikk(true);
-        }
-    }, [stepperApen]);
 
     const hentAktivVeileder = async () => {
         const veilederId = await hentAktivBruker();
@@ -89,7 +82,7 @@ export function Endringslogg(props: StateProps) {
     };
 
     const handleClickOutside = (e) => {
-        if (stepperApen || loggNode.current && loggNode.current.contains(e.target)) {
+        if (loggNode.current && loggNode.current.contains(e.target)) {
             // Klikket er inne i komponenten
             return;
         }
@@ -100,7 +93,7 @@ export function Endringslogg(props: StateProps) {
     };
 
     const escHandler = (event) => {
-        if (event.keyCode === 27 && endringsloggApen && !stepperApen) {
+        if (event.keyCode === 27 && endringsloggApen) {
             setLocalstorageAndOpenStatus(false);
             if (buttonRef.current) {
                 buttonRef.current.focus();
@@ -118,8 +111,8 @@ export function Endringslogg(props: StateProps) {
         }
     };
 
-    useEventListener('mousedown', handleClickOutside, [endringsloggApen, stepperApen]);
-    useEventListener('keydown', escHandler, [endringsloggApen, stepperApen]);
+    useEventListener('mousedown', handleClickOutside, [endringsloggApen]);
+    useEventListener('keydown', escHandler, [endringsloggApen]);
 
     const locSto = hentSetteVersjonerLocalstorage();
     const finnesILocalstorage = (versjon) => {
@@ -152,8 +145,7 @@ export function Endringslogg(props: StateProps) {
                                      innholdsOverskrift="NAV møte filter"
                                      innholdsTekst="Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV."
                                      nyeNotifikasjoner={!finnesILocalstorage('0.2.0') && !fullfortModal(ModalName.MOTE_FILTER)}>
-                    <TourModalButton modal={ModalName.MOTE_FILTER} setModalOpen={setStepperApen}
-                           modalOpen={stepperApen}/>
+                    <TourModalButton modal={ModalName.MOTE_FILTER} loggApen={setStepperVarApenMetrikk}/>
                 </EndringsloggInnhold>
                 }
 
@@ -161,8 +153,7 @@ export function Endringslogg(props: StateProps) {
                                      innholdsOverskrift="Laste ned og skrive ut CV"
                                      innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."
                                      nyeNotifikasjoner={!finnesILocalstorage('0.1.9') && !fullfortModal(ModalName.LAST_NED_CV)}>
-                    <TourModalButton modal={ModalName.LAST_NED_CV} setModalOpen={setStepperApen}
-                           modalOpen={stepperApen}/>
+                    <TourModalButton modal={ModalName.LAST_NED_CV} loggApen={setStepperVarApenMetrikk}/>
                 </EndringsloggInnhold>
 
                 <EndringsloggInnhold dato={'06. JUN. 2019'}
