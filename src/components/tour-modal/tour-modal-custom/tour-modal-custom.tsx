@@ -14,7 +14,7 @@ const stepsLastNedCV: Step[] = [
 
 const stepsFilter: Step[] = [
     {
-        tittel: 'Nytt status filter' , 
+        tittel: 'Nytt status filter' ,
         bilde: filter1Bilde,
         tekst: 'Det er nå lettere å filtrere på brukere som i dag har møter med NAV.'
     },
@@ -31,13 +31,13 @@ const stepsFilter: Step[] = [
 ];
 const stepsblank: Step[] = [
     {
-        tittel: '' , 
+        tittel: '' ,
         bilde: step1Bilde,
         tekst: ''
     }
 ];
 
-export function getTour(modal: ModalName){
+export function getTour(modal: ModalName) {
     switch(modal) {
         case ModalName.LAST_NED_CV:
           return stepsLastNedCV;
@@ -48,4 +48,3 @@ export function getTour(modal: ModalName){
       }
 
 }
-
