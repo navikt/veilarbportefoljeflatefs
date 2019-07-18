@@ -14,7 +14,7 @@ import {
 import { useTimer } from '../../hooks/use-timer';
 import { useEventListener } from '../../hooks/use-event-listener';
 import { hentAktivBruker } from '../enhet-context/context-api';
-import { ModalName } from '../tour-modal/tour-modal';
+import { fullfortModal, ModalName } from '../tour-modal/tour-modal';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { connect } from 'react-redux';
 
@@ -60,7 +60,7 @@ export function Endringslogg(props: StateProps) {
     }, []);
 
     useEffect(() => {
-        if(!modalVarApen && modalApen){
+        if(!modalVarApen && modalApen) {
             setModalVarApen(true);
         }
     }, [modalApen]);
@@ -80,7 +80,7 @@ export function Endringslogg(props: StateProps) {
                 .catch((e) => console.log(e)); // tslint:disable-line
             setOverordnetNotifikasjon(false);
             versjoner.forEach((elem) => registrerHarLestEndringslogg(elem));
-            if(modalVarApen){
+            if(modalVarApen) {
                 setModalVarApen(false);
             }
         }
@@ -150,7 +150,7 @@ export function Endringslogg(props: StateProps) {
                 <EndringsloggInnhold dato={'16. JUL. 2019'}
                                      innholdsOverskrift="NAV møte filter"
                                      innholdsTekst="Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV."
-                                     nyeNotifikasjoner={!finnesILocalstorage('0.2.0')}>
+                                     nyeNotifikasjoner={!finnesILocalstorage('0.2.0') && !fullfortModal(ModalName.MOTE_FILTER)}>
                     <Modal modal={ModalName.MOTE_FILTER} setModalOpen={setModalApen}
                            modalOpen={modalApen}/>
                 </EndringsloggInnhold>
@@ -159,7 +159,7 @@ export function Endringslogg(props: StateProps) {
                 <EndringsloggInnhold dato={'18. JUN. 2019'}
                                      innholdsOverskrift="Laste ned og skrive ut CV"
                                      innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."
-                                     nyeNotifikasjoner={!finnesILocalstorage('0.1.9')}>
+                                     nyeNotifikasjoner={!finnesILocalstorage('0.1.9') && !fullfortModal(ModalName.LAST_NED_CV)}>
                     <Modal modal={ModalName.LAST_NED_CV} setModalOpen={setModalApen}
                            modalOpen={modalApen}/>
                 </EndringsloggInnhold>

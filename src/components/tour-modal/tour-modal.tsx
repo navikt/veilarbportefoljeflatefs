@@ -31,6 +31,9 @@ function TourModal(props: TourModalProps) {
 
     const lukkModal = () => {
         lagreIkkeVisModal();
+        if (isFinalStep) {
+            window.localStorage.setItem(`${props.modalNavn} - sett`, 'true');
+        }
         props.setApenModal(false);
     };
 
@@ -81,6 +84,10 @@ function TourModal(props: TourModalProps) {
             </footer>
         </NavFrontendModal>
     );
+}
+
+export function fullfortModal(modalnavn: string) {
+    return localStorage.getItem(`${modalnavn} - sett`) !== null;
 }
 
 export default TourModal;
