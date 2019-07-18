@@ -16,25 +16,21 @@ interface ChevronLenkeProps {
 
 const ChevronLenke: React.FunctionComponent<ChevronLenkeProps> = (props: ChevronLenkeProps) => {
     const { retning, tekst, onClick, hide } = props;
-    return (
-        <button className={cls("chevron-lenke", {'chevron-lenke--hide': hide})} onClick={onClick}>
-            {retning === Retning.VENSTRE ?
-                (
-                    <>
-                        <VenstreChevron />
-                        <span className="chevron-lenke__tekst">{tekst}</span>
-                    </>
-                )
-                :
-                (
-                    <>
-                        <span className="chevron-lenke__tekst">{tekst}</span>
-                        <HoyreChevron />
-                    </>
-                )
-            }
-        </button>
-    );
-};
-
+    const clsPar = ["chevron-lenke",{'chevron-lenke--hide':hide}]
+    if(retning === Retning.VENSTRE){
+        return(
+            <button className={cls(clsPar)} onClick={onClick}>
+                <VenstreChevron/>
+                <span className="chevron-lenke__tekst">{tekst}</span>
+            </button>
+        )
+    }else{
+        return(
+            <button className={cls(clsPar)} onClick={onClick}>
+                <span className="chevron-lenke__tekst">{tekst}</span>
+                <HoyreChevron/>
+            </button>
+        )
+    }
+}
 export default ChevronLenke;
