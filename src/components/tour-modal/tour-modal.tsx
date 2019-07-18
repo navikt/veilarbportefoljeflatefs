@@ -18,6 +18,7 @@ export interface Step {
 }
 interface TourModalProps {
     modalNavn: ModalName;
+    apen: boolean;
     setApenModal: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -54,7 +55,7 @@ function TourModal(props: TourModalProps) {
         <NavFrontendModal
             className="tour-modal"
             contentLabel="TourModal"
-            isOpen={true}
+            isOpen={props.apen}
             closeButton={true}
             shouldCloseOnOverlayClick={true}
             onRequestClose={lukkModal}

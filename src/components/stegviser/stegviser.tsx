@@ -9,16 +9,11 @@ interface StegviserProps {
 
 function Stegviser (props: StegviserProps){
     const mapTilSteg = (antall: number, selectedIdx: number) => {
-        const steg:any[] = [];
-
-        for (let i = 0; i < antall; i++) {
-            steg.push(<div
-                key={i}
-                className={cls("stegviser__steg", {'stegviser__steg--selected': i === selectedIdx})}
-            />);
-        }
-
-        return steg;
+        return new Array(props.antallSteg)
+        .fill(0)
+        .map((_, i) => (
+          <div key={i} className={cls('stegviser__steg', { 'stegviser__steg--selected': i == props.valgtSteg})} />
+        ));
     };
 
     return (
@@ -26,8 +21,6 @@ function Stegviser (props: StegviserProps){
             {mapTilSteg(props.antallSteg, props.valgtSteg)}
         </div>
     );
-    
-
 }
 
 export default Stegviser;

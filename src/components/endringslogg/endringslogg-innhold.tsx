@@ -44,12 +44,11 @@ export function Modal(props: ModalStepperProps) {
             }}>
                 Se hvordan
             </Knapp>
-            {open &&
             <TourModal
+                apen={open}
                 modalNavn={props.modal}
                 setApenModal={props.setModalOpen}
             />
-            }
         </>
     );
 }

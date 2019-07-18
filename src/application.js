@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 import 'moment/locale/nb';
 import classnames from 'classnames';
 import { IntlProvider } from 'react-intl';
@@ -13,7 +12,7 @@ import MinOversiktSide from "./minoversikt/minoversikt-side";
 import TilbakemeldingFab from "./components/tilbakemelding/tilbakemelding-fab";
 import { loggBrowserMetrikker } from './utils/metrikker/browser-metrikker';
 import Modal from 'nav-frontend-modal';
-import {default as TourModal,  ModalName } from "./components/tour-modal/tour-modal"
+import TourModalLocalStorage  from "./components/tour-modal/tour-modal-local-storage"
 
 loggBrowserMetrikker();
 
@@ -31,9 +30,6 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
 }
 
 function Application (props) {
-    const modalNavn = ModalName.MOTE_FILTER;
-    const [openModal, setApenModal] = useState(!hasStored(modalNavn));
-
     return (
         <IntlProvider
             defaultLocale="nb"
@@ -79,21 +75,12 @@ function Application (props) {
                             />
                         </Switch>
                         <TilbakemeldingFab/>
-                        {openModal &&
-                        <TourModal
-                            modalNavn = {modalNavn}
-                            setApenModal = {setApenModal}
-                        />
-                        }
+                        <TourModalLocalStorage/>
                     </div>
                 </EnhetContext>
             </div>
         </IntlProvider>
     );
-}
-
-export function hasStored(tagName) {
-    return window.localStorage.getItem(tagName) !== null;
 }
 
 /*

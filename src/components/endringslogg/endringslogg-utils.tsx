@@ -37,21 +37,21 @@ function encodeString(stringToBeEncoded: string): Uint8Array {
 
 const ENDRING_PREFIX = 'Endringslogg';
 
-export function hentEndringsloggFraLocalstorage(): string[] {
-    let a: string[] = [];
+export function hentSetteVersjonerFraLocalstorage(): string[] {
+    let setteVersjoner: string[] = [];
     const tmp = localStorage.getItem(ENDRING_PREFIX);
     if (tmp) {
         try {
-            a = JSON.parse(tmp);
+            setteVersjoner = JSON.parse(tmp);
         } catch (e) {
             // Error handling pga. tidligere versjon som bare lagret en string i LS.
             if(isString(tmp)) {
-                a.push(tmp);
+                setteVersjoner.push(tmp);
             }
-            return a;
+            return setteVersjoner;
         }
     }
-    return a;
+    return setteVersjoner;
 }
 
 function isString(value: any): boolean {
@@ -59,7 +59,7 @@ function isString(value: any): boolean {
 }
 
 export function registrerHarLestEndringslogg(versjon: string) {
-    const a: string[] = hentEndringsloggFraLocalstorage();
-    a.push(versjon);
-    window.localStorage.setItem(ENDRING_PREFIX, JSON.stringify(a));
+    const setteVersjoner: string[] = hentSetteVersjonerFraLocalstorage();
+    setteVersjoner.push(versjon);
+    window.localStorage.setItem(ENDRING_PREFIX, JSON.stringify(setteVersjoner));
 }
