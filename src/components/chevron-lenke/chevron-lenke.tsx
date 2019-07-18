@@ -11,7 +11,7 @@ interface ChevronLenkeProps {
     retning: Retning;
     tekst: string;
     hide?: boolean;
-    onClick?: () => void;
+    onClick(event: React.MouseEvent<HTMLButtonElement>): void;
 }
 
 const ChevronLenke: React.FunctionComponent<ChevronLenkeProps> = (props: ChevronLenkeProps) => {
