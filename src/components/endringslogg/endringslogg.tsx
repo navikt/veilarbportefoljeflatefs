@@ -25,7 +25,7 @@ const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
         feature: 'pre_tilbakemelding_3',
         tidBrukt: metrikker.tidBrukt,
         nyeNotifikasjoner: metrikker.nyeNotifikasjoner,
-        modalVarApen: metrikker.modalVarApen
+        stepperVarApen: metrikker.stepperVarApen
     }, {hash: metrikker.hash});
 };
 
@@ -33,7 +33,7 @@ interface EndringsloggMetrikker {
     tidBrukt: number;
     nyeNotifikasjoner: boolean;
     hash: string;
-    modalVarApen: boolean;
+    stepperVarApen: boolean;
 }
 
 interface StateProps {
@@ -46,9 +46,9 @@ export function Endringslogg(props: StateProps) {
     const versjoner: string[] = [];
     const {start, stopp} = useTimer();
 
-    const [open, setOpen] = useState(false);
-    const [modalApen, setModalApen] = useState(false);
-    const [modalVarApen, setModalVarApen] = useState(false);
+    const [endringsloggApen, setEndringsloggApen] = useState(false);
+    const [stepperApen, setStepperApen] = useState(false);
+    const [stepperVarApenMetrikk, setStepperVarApenMetrikk] = useState(false);
     const [veilederIdent, setVeilderIdent] = useState('');
     const [overordnetNotifikasjon, setOverordnetNotifikasjon] = useState(false);
 
@@ -61,10 +61,10 @@ export function Endringslogg(props: StateProps) {
     }, []);
 
     useEffect(() => {
-        if(!modalVarApen && modalApen) {
-            setModalVarApen(true);
+        if(!stepperVarApenMetrikk && stepperApen) {
+            setStepperVarApenMetrikk(true);
         }
-    }, [modalApen]);
+    }, [stepperApen]);
 
     const hentAktivVeileder = async () => {
         const veilederId = await hentAktivBruker();
@@ -77,30 +77,30 @@ export function Endringslogg(props: StateProps) {
         } else {
             const tidBrukt = stopp();
             krypterVeilederident(veilederIdent)
-                .then((res) => sendMetrikker({tidBrukt, nyeNotifikasjoner: overordnetNotifikasjon, modalVarApen, hash: hexString(res)}))
+                .then((res) => sendMetrikker({tidBrukt, nyeNotifikasjoner: overordnetNotifikasjon, stepperVarApen: stepperVarApenMetrikk, hash: hexString(res)}))
                 .catch((e) => console.log(e)); // tslint:disable-line
             setOverordnetNotifikasjon(false);
             versjoner.forEach((elem) => registrerHarLestEndringslogg(elem));
-            if(modalVarApen) {
-                setModalVarApen(false);
+            if(stepperVarApenMetrikk) {
+                setStepperVarApenMetrikk(false);
             }
         }
-        setOpen(setOpenTo);
+        setEndringsloggApen(setOpenTo);
     };
 
     const handleClickOutside = (e) => {
-        if (modalApen || loggNode.current && loggNode.current.contains(e.target)) {
+        if (stepperApen || loggNode.current && loggNode.current.contains(e.target)) {
             // Klikket er inne i komponenten
             return;
         }
         // Klikket er utenfor, oppdater staten
-        if (open) {
+        if (endringsloggApen) {
             setLocalstorageAndOpenStatus(false);
         }
     };
 
     const escHandler = (event) => {
-        if (event.keyCode === 27 && open && !modalApen) {
+        if (event.keyCode === 27 && endringsloggApen && !stepperApen) {
             setLocalstorageAndOpenStatus(false);
             if (buttonRef.current) {
                 buttonRef.current.focus();
@@ -110,16 +110,16 @@ export function Endringslogg(props: StateProps) {
 
     const klikk = (event) => {
         event.stopPropagation();
-        setLocalstorageAndOpenStatus(!open);
-        if (!open) {
+        setLocalstorageAndOpenStatus(!endringsloggApen);
+        if (!endringsloggApen) {
             if (buttonRef.current) {
                 buttonRef.current.focus();
             }
         }
     };
 
-    useEventListener('mousedown', handleClickOutside, [open, modalApen]);
-    useEventListener('keydown', escHandler, [open, modalApen]);
+    useEventListener('mousedown', handleClickOutside, [endringsloggApen, stepperApen]);
+    useEventListener('keydown', escHandler, [endringsloggApen, stepperApen]);
 
     const locSto = hentSetteVersjonerLocalstorage();
     const finnesILocalstorage = (versjon) => {
@@ -143,17 +143,17 @@ export function Endringslogg(props: StateProps) {
 
     return (
         <div ref={loggNode} className="endringslogg">
-            <EndringsloggKnapp klikk={klikk} open={open} nyeNotifikasjoner={overordnetNotifikasjon}
+            <EndringsloggKnapp klikk={klikk} open={endringsloggApen} nyeNotifikasjoner={overordnetNotifikasjon}
                                buttonRef={buttonRef}/>
-            <TransitionContainer visible={open} focusRef={focusRef}>
+            <TransitionContainer visible={endringsloggApen} focusRef={focusRef}>
                 <EndringsloggHeader/>
                 {feature &&
                 <EndringsloggInnhold dato={'16. JUL. 2019'}
                                      innholdsOverskrift="NAV møte filter"
                                      innholdsTekst="Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV."
                                      nyeNotifikasjoner={!finnesILocalstorage('0.2.0') && !fullfortModal(ModalName.MOTE_FILTER)}>
-                    <TourModalButton modal={ModalName.MOTE_FILTER} setModalOpen={setModalApen}
-                           modalOpen={modalApen}/>
+                    <TourModalButton modal={ModalName.MOTE_FILTER} setModalOpen={setStepperApen}
+                           modalOpen={stepperApen}/>
                 </EndringsloggInnhold>
                 }
 
@@ -161,8 +161,8 @@ export function Endringslogg(props: StateProps) {
                                      innholdsOverskrift="Laste ned og skrive ut CV"
                                      innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."
                                      nyeNotifikasjoner={!finnesILocalstorage('0.1.9') && !fullfortModal(ModalName.LAST_NED_CV)}>
-                    <TourModalButton modal={ModalName.LAST_NED_CV} setModalOpen={setModalApen}
-                           modalOpen={modalApen}/>
+                    <TourModalButton modal={ModalName.LAST_NED_CV} setModalOpen={setStepperApen}
+                           modalOpen={stepperApen}/>
                 </EndringsloggInnhold>
 
                 <EndringsloggInnhold dato={'06. JUN. 2019'}

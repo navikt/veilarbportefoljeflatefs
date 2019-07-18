@@ -78,7 +78,7 @@ function TourModal(props: TourModalProps) {
                 </div>
             </main>
             <footer className="tour-modal__footer">
-                <ChevronLenke retning={Retning.VENSTRE} hide={hidePrevBtn} tekst="Forrige" onClick={handlePreviousBtnClicked}/>
+                <ChevronLenke retning={Retning.VENSTRE} tekst="Forrige" hide={hidePrevBtn} onClick={handlePreviousBtnClicked}/>
                 <Stegviser antallSteg={steps.length} valgtSteg={stepIndex}/>
                 <ChevronLenke retning={Retning.HOYRE} tekst={nextBtnText} onClick={nextBtnHandleClick}/>
             </footer>
