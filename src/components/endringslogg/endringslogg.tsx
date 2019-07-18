@@ -9,7 +9,7 @@ import {
     registrerHarLestEndringslogg,
     krypterVeilederident,
     hexString,
-    hentSetteVersjonerFraLocalstorage
+    hentSetteVersjonerLocalstorage
 } from './endringslogg-utils';
 import { useTimer } from '../../hooks/use-timer';
 import { useEventListener } from '../../hooks/use-event-listener';
@@ -120,7 +120,7 @@ export function Endringslogg(props: StateProps) {
     useEventListener('mousedown', handleClickOutside, [open, modalApen]);
     useEventListener('keydown', escHandler, [open, modalApen]);
 
-    const locSto = hentSetteVersjonerFraLocalstorage();
+    const locSto = hentSetteVersjonerLocalstorage();
     const finnesILocalstorage = (versjon) => {
         if (!locSto.some((ver) => ver === versjon)) {
             if (!overordnetNotifikasjon) {
