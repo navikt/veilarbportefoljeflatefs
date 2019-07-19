@@ -2,7 +2,7 @@ import { default as React, useState, Dispatch, SetStateAction } from 'react';
 import { default as TourModal, ModalName, } from './tour-modal';
 
 interface TourModalLocalStorageProps {
-    completed: Dispatch<SetStateAction<boolean>>;
+    completed: (e: string) => void;
 }
 
 export default function TourModalLocalStorage(props) {

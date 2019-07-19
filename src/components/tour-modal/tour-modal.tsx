@@ -21,7 +21,7 @@ interface TourModalProps {
     modalNavn: ModalName;
     apen: boolean;
     setOpen: Dispatch<SetStateAction<boolean>>;
-    completed?: Dispatch<SetStateAction<boolean>>;
+    completed?: (e) => void;
 }
 
 function TourModal(props: TourModalProps) {
@@ -36,7 +36,7 @@ function TourModal(props: TourModalProps) {
         if (isFinalStep) {
             registrerHarLestEndringslogg(props.modalNavn);
             if (props.completed) {
-                props.completed(true);
+                props.completed(props.modalNavn);
             }
         }
         props.setOpen(false);

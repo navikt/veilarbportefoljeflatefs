@@ -29,8 +29,8 @@ export function LinkTag(props: { linkTekst: string, url: string }) {
 export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
 
     let content:any = [];
-    props.innhold.forEach((endring)=> {
-         content.push(<EndringsloggInlegg dato={endring.dato} innholdsTekst={endring.tekst} innholdsOverskrift={endring.tittel} nyeNotifikasjoner={!endring.sett}/>)
+    props.innhold.forEach((endring, index)=> {
+         content.push(<EndringsloggInlegg key={index} dato={endring.dato} innholdsTekst={endring.tekst} innholdsOverskrift={endring.tittel} nyeNotifikasjoner={false}/>)
    });
 
     return(

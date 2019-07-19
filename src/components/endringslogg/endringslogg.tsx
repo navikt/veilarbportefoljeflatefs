@@ -6,7 +6,6 @@ import { sjekkFeature } from '../../ducks/features';
 import TransitionContainer from './transition-container';
 import { logEvent } from '../../utils/frontend-logger';
 import {
-    registrerHarLestEndringslogg,
     krypterVeilederident,
     hexString
 } from './endringslogg-utils';
@@ -38,6 +37,8 @@ interface StateProps {
 
 interface EndringsProps {
     innhold: Endring[];
+    settListe: {key: Endring, sett: boolean};
+    oppdaterInnhold: ()=>void;
 }
 
 export function Endringslogg(props: StateProps & EndringsProps) {
@@ -47,7 +48,7 @@ export function Endringslogg(props: StateProps & EndringsProps) {
 
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const [veilederIdent, setVeilderIdent] = useState('');
-    const overordnetNotifikasjon = props.innhold.some((e) => !e.sett);
+    const overordnetNotifikasjon = props.innhold.some((e) => !props.settListe[e.id]);
 
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const focusRef = useRef<HTMLDivElement>(null);
@@ -70,7 +71,9 @@ export function Endringslogg(props: StateProps & EndringsProps) {
             krypterVeilederident(veilederIdent)
                 .then((res) => sendMetrikker({ tidBrukt, nyeNotifikasjoner: overordnetNotifikasjon, hash: hexString(res) }))
                 .catch((e) => console.log(e)); // tslint:disable-line
-            props.innhold.forEach((elem) => registrerHarLestEndringslogg(elem.id));
+            if(overordnetNotifikasjon) {
+                props.oppdaterInnhold();
+            }
         }
         setEndringsloggApen(setOpenTo);
     };
