@@ -53,7 +53,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
     const { ytelse } = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering()).includes(ytelse);
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering()[ytelse].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering()[ytelse].vedtaksperiode : ytelseUtlopsSortering(intl)[filtervalg.ytelse];
+    const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering()[ytelse].vedtaksperiode : ytelseUtlopsSortering[filtervalg.ytelse];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'periode' : 'uker';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';

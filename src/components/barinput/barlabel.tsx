@@ -12,21 +12,21 @@ function calcWidth(antall: number, max: number): number {
     return Math.max(width, 6);
 }
 
-interface BarlabelProps {
+export interface BarlabelProps {
     htmlFor: string;
-    tekstId: string;
+    labelTekst: string;
     antall: number;
     max: number;
     className?: string;
 }
 
-function Barlabel({ htmlFor, tekstId, antall, max, className }: BarlabelProps) {
+function Barlabel({ htmlFor, labelTekst, antall, max, className}: BarlabelProps) {
     const style = { width: `${calcWidth(antall, max)}%` };
 
     return (
         <label htmlFor={htmlFor} className={classNames('barlabel', className)}>
             <span className="barlabel__labeltext" >
-                <FormattedMessage id={tekstId} />
+                {labelTekst}
             </span>
             &nbsp;
             <div className="barlabel__barwrapper">

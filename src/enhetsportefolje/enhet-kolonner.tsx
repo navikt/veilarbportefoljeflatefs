@@ -30,7 +30,7 @@ interface EnhetKolonnerProps {
 type Props = EnhetKolonnerProps & InjectedIntlProps;
 
 function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder, intl}: Props) {
-    const ytelsevalgIntl = ytelsevalg(intl);
+    const ytelsevalgIntl = ytelsevalg();
     const { ytelse } = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;

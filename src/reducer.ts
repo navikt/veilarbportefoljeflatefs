@@ -7,7 +7,7 @@ import sorteringReducer from './ducks/sortering';
 import veiledereReducer, { VeiledereState } from './ducks/veiledere';
 import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
 import filtreringReducer, { FiltreringState, initialState } from './ducks/filtrering';
-import statustallReducer from './ducks/statustall';
+import statustallReducer, {Statustall, StatustallState} from './ducks/statustall';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
@@ -52,7 +52,7 @@ export interface AppState {
     sortering: any;
     veiledere: VeiledereState;
     portefoljestorrelser: any;
-    statustall: any;
+    statustall: StatustallState;
     filtrering: FiltreringState;
     filtreringMinoversikt: any;
     filtreringVeilederoversikt: FiltreringState;

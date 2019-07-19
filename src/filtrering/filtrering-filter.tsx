@@ -28,8 +28,7 @@ interface FiltreringFilterProps {
     intl?: any;
 }
 
-// Midlertidig component til feature toggle er fjernet og
-const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFilterProps) => (
+const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterProps) => (
     <div>
         <div className="row">
             <div className="col-sm-12 blokk-xs">
@@ -39,7 +38,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Alder">
                     <CheckboxFilterform
                         form="alder"
-                        valg={alder(intl)}
+                        valg={alder}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -47,7 +46,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Fødselsdato">
                     <CheckboxFilterform
                         form="fodselsdagIMnd"
-                        valg={fodselsdagIMnd()}
+                        valg={fodselsdagIMnd}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -55,7 +54,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Kjønn">
                     <CheckboxFilterform
                         form="kjonn"
-                        valg={kjonn()}
+                        valg={kjonn}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -68,7 +67,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Innsatsgruppe">
                     <CheckboxFilterform
                         form="innsatsgruppe"
-                        valg={innsatsgruppe(intl)}
+                        valg={innsatsgruppe}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -76,7 +75,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Hovedmål">
                     <CheckboxFilterform
                         form="hovedmal"
-                        valg={hovedmal(intl)}
+                        valg={hovedmal}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -84,7 +83,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Formidlingsgruppe">
                     <CheckboxFilterform
                         form="formidlingsgruppe"
-                        valg={formidlingsgruppe(intl)}
+                        valg={formidlingsgruppe}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -92,7 +91,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Servicegruppe">
                     <CheckboxFilterform
                         form="servicegruppe"
-                        valg={servicegruppe(intl)}
+                        valg={servicegruppe}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -100,7 +99,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Rettighetsgruppe">
                     <CheckboxFilterform
                         form="rettighetsgruppe"
-                        valg={rettighetsgruppe(intl)}
+                        valg={rettighetsgruppe}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -113,7 +112,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Ytelse" className="dropdown--140bredde-responsive">
                     <RadioFilterform
                         form="ytelse"
-                        valg={ytelse(intl)}
+                        valg={ytelse}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -126,7 +125,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Manuell bruker">
                     <CheckboxFilterform
                         form="manuellBrukerStatus"
-                        valg={manuellBrukerStatus(intl)}
+                        valg={manuellBrukerStatus}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -140,7 +139,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Aktivitet" className="dropdown--140bredde-responsive">
                     <AktivitetFilterform
                         form="aktiviteter"
-                        valg={aktiviteter(intl)}
+                        valg={aktiviteter}
                         filtervalg={filtervalg}
                         onSubmit={actions.endreFiltervalg}
                     />

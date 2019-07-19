@@ -9,7 +9,6 @@ import FilterKonstanter, {
 import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne, ListevisningState } from '../ducks/ui/listevisning';
-import classNames from 'classnames';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -48,7 +47,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                 return [
                     <FiltreringLabel
                         key={key}
-                        label={FilterKonstanter[key](intl)}
+                        label={FilterKonstanter[key]}
                         slettFilter={() => slettEnkelt(key, false)}
                         intl={intl}
                     />
@@ -60,7 +59,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                         label={
                             key === 'tiltakstyper' ?
                                 enhettiltak[singleValue] :
-                                (singleValue.label || FilterKonstanter[key](intl)[singleValue])
+                                (singleValue.label || FilterKonstanter[key][singleValue])
                         }
                         slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                         intl={intl}
@@ -73,7 +72,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     .map(([aktivitetkey, aktivitetvalue]) => (
                         <FiltreringLabel
                             key={`aktivitet-${aktivitetkey}`}
-                            label={`${FilterKonstanter[key](intl)[aktivitetkey]}: ${aktivitetvalue}`}
+                            label={`${FilterKonstanter[key][aktivitetkey]}: ${aktivitetvalue}`}
                             slettFilter={() => slettEnkelt(key, aktivitetkey)}
                             harMuligMenIkkeValgtKolonne={muligMenIkkeValgt && aktivitetvalue === AktiviteterValg.JA}
                             intl={intl}
@@ -106,7 +105,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                 return [
                     <FiltreringLabel
                         key={`${key}--${value}`}
-                        label={FilterKonstanter[key](intl)[value]}
+                        label={FilterKonstanter[key][value]}
                         slettFilter={() => slettEnkelt(key, null)}
                         harMuligMenIkkeValgtKolonne={muligMenIkkeValgt}
                         intl={intl}

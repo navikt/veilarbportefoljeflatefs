@@ -2,23 +2,13 @@ import React from 'react';
 import Barlabel from './barlabel';
 
 
-interface BarInputProps {
-    skalSkjules: boolean;
-    id: unknown;
-    type: string;
-    className: string;
-}
-
-export function BarInput({ skalSkjules, id, type, className, tekstId, antall, max, barClassname, ...props }) {
-    if (skalSkjules) {
-        return null;
-    }
+function BarInput({ labelTekst, antall, max, barClassname, ...props }) {
     return (
         <div className="skjema__input">
-            <input type={type} id={id} className={className} {...props} />
+            <input {...props} />
             <Barlabel
-                htmlFor={id}
-                tekstId={tekstId}
+                htmlFor={props.id}
+                labelTekst={labelTekst}
                 antall={antall}
                 max={max}
                 className={`${barClassname} skjemaelement__label`}
@@ -26,3 +16,5 @@ export function BarInput({ skalSkjules, id, type, className, tekstId, antall, ma
         </div>
     );
 }
+
+export default BarInput;

@@ -13,7 +13,7 @@ import {
     I_AVTALT_AKTIVITET,
     ytelseAapSortering, MOTER_IDAG
 } from '../filtrering/filter-konstanter';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
 
@@ -34,13 +34,11 @@ interface MinOversiktListehodeProps {
     valgteKolonner: Kolonne[];
 }
 
-type Props = MinOversiktListehodeProps & InjectedIntlProps;
-
-function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner, intl }: Props) {
+function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: MinOversiktListehodeProps) {
     const { ytelse } = filtervalg;
-    const erAapYtelse = Object.keys(ytelseAapSortering()).includes(ytelse);
-    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering()[ytelse].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering()[ytelse].vedtaksperiode : ytelseUtlopsSortering(intl)[filtervalg.ytelse];
+    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse);
+    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
+    const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering[ytelse].vedtaksperiode : ytelseUtlopsSortering[filtervalg.ytelse];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'periode' : 'uker';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
@@ -285,4 +283,4 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
     );
 }
 
-export default injectIntl(MinOversiktListeHode);
+export default MinOversiktListeHode;

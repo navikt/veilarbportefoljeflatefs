@@ -5,13 +5,14 @@ import { IntlProvider } from 'react-intl';
 import queryString from 'query-string';
 import EnhetContext from './components/enhet-context/enhet-context';
 import tekstBundle from './tekster-built/bundle';
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import EnhetSide from "./enhet/enhet-side";
 import VeiledereSide from "./veiledere/veiledere-side";
 import MinOversiktSide from "./minoversikt/minoversikt-side";
 import TilbakemeldingFab from "./components/tilbakemelding/tilbakemelding-fab";
 import { loggBrowserMetrikker } from './utils/metrikker/browser-metrikker';
 import Modal from 'nav-frontend-modal';
+import {VeilarbPortefoljeRedirect} from "./components/redirect/veilarbportefolje-redirect";
 
 loggBrowserMetrikker();
 
@@ -27,7 +28,7 @@ function mapTeksterTilNokkelDersomAngitt(ledetekster) {
     return ledetekster;
 }
 
-function Routes (props) {
+function Routes() {
     return (
         <IntlProvider
             defaultLocale="nb"
@@ -54,18 +55,7 @@ function Routes (props) {
                                 path="/portefolje"
                                 render={(props) => <MinOversiktSide {...props}/>}
                             />
-                            <Route
-                                render={() => {
-                                    const lastPath = localStorage.getItem('lastpath');
-                                    const lastSearch = localStorage.getItem('lastsearch') || '';
-                                    if (lastPath && props.location.pathname === "/tilbake") {
-                                        return (
-                                            <Redirect to={{pathname: lastPath, search: lastSearch}}/>);
-                                    } else {
-                                        return <Redirect to={'/enhet'}/>;
-                                    }
-                                }}
-                            />
+                            <VeilarbPortefoljeRedirect/>
                         </Switch>
                         <TilbakemeldingFab/>
                     </div>

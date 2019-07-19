@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import DocumentTitle from 'react-document-title';
-import { Normaltekst } from 'nav-frontend-typografi';
 import Innholdslaster from './../innholdslaster/innholdslaster';
-import LenkerMinoversikt from '../lenker/lenker-minoversikt';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
@@ -24,6 +21,7 @@ import {
 import { pagineringSetup } from '../ducks/paginering';
 import './minoversikt-side.less';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
+import { RouteChildrenProps } from 'react-router';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -50,19 +48,12 @@ interface DispatchProps {
     initalPaginering: (side: number, seAlle: boolean) => void;
 }
 
-interface OwnProps {
-    match:
-        {params:
-                { ident: string; }
-        };
-}
-
-type MinoversiktSideProps = StateProps & DispatchProps & OwnProps & InjectedIntlProps;
+type MinoversiktSideProps = StateProps & DispatchProps & RouteChildrenProps<{ident: string}> & InjectedIntlProps;
 
 class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     componentDidMount() {
         const { veiledere, enheter, valgtEnhet, filtervalg, hentPortefolje, ...props } = this.props;
-        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
+        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match!.params.ident));
         const innloggetVeileder = { ident: enheter.ident };
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
@@ -91,8 +82,8 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     }
 
     render() {
-        const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
-        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
+        const { enheter, veiledere, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
+        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match!.params.ident));
         const innloggetVeileder = { ident: enheter.ident || '', fornavn: '', etternavn: '', navn: ''};
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
@@ -101,44 +92,33 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
         return (
             <DocumentTitle title="Min oversikt">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                    <div className="minoversikt-side blokk-xl">
-                        <section>
-                            <div className="portefolje-side">
-                                <LenkerMinoversikt veilederident={veilederFraUrl ? veilederFraUrl.ident : null}/>
-                                <div id="oversikt-sideinnhold" role="tabpanel">
-                                    <p className="typo-infotekst begrensetbredde blokk-l">
-                                        Her får du oversikt over alle brukere som er tildelt deg.
-                                        Du kan filtrere ytterligere eller flytte brukere til en annen veileder i din enhet.
-                                    </p>
-                                    <div className="row">
-                                        <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
-                                            <FiltreringContainer
-                                                filtervalg={filtervalg}
-                                                filtergruppe="veileder"
-                                                veileder={gjeldendeVeileder}
-                                                enhettiltak={enhettiltak.data.tiltak}
-                                            />
-                                        </div>
-                                        <div className="col-lg-9 col-md-12 col-sm-12">
-                                            <FiltreringLabelContainer
-                                                filtervalg={filtervalg}
-                                                filtergruppe="veileder"
-                                                veileder={gjeldendeVeileder}
-                                                enhettiltak={enhettiltak.data.tiltak}
-                                                listevisning={listevisning}
-                                            />
-                                            <ListevisningInfoPanel name={ListevisningType.minOversikt} />
-                                            <VeilederPortefoljeVisning
-                                                gjeldendeVeileder={gjeldendeVeileder}
-                                                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+            <MMinOversiktContainer>
+                    <div className="row">
+                        <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
+                            <FiltreringContainer
+                                filtervalg={filtervalg}
+                                filtergruppe="veileder"
+                                veileder={gjeldendeVeileder}
+                                enhettiltak={enhettiltak.data.tiltak}
+                            />
+                        </div>
+                        <div className="col-lg-9 col-md-12 col-sm-12">
+                            <FiltreringLabelContainer
+                                filtervalg={filtervalg}
+                                filtergruppe="veileder"
+                                veileder={gjeldendeVeileder}
+                                enhettiltak={enhettiltak.data.tiltak}
+                                listevisning={listevisning}
+                            />
+                            <ListevisningInfoPanel name={ListevisningType.minOversikt} />
+                            <VeilederPortefoljeVisning
+                                gjeldendeVeileder={gjeldendeVeileder}
+                                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                            />
+                        </div>
                     </div>
-                </Innholdslaster>
+            </MMinOversiktContainer>
+            </Innholdslaster>
             </DocumentTitle>
         );
     }

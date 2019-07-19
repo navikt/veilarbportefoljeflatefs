@@ -27,7 +27,7 @@ type Props = MinOversiktKolonnerProps & InjectedIntlProps;
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, intl}: Props) {
     const {ytelse} = filtervalg;
-    const ytelsevalgIntl = ytelsevalg(intl);
+    const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering()).includes(ytelse);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     // TODO: bør gjøres før data lagres i storen
