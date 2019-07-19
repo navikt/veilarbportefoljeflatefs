@@ -1,7 +1,11 @@
 import { default as React, useState, Dispatch, SetStateAction } from 'react';
 import { default as TourModal, ModalName, } from './tour-modal';
 
-export default function TourModalLocalStorage() {
+interface TourModalLocalStorageProps {
+    completed: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function TourModalLocalStorage(props) {
     const modalNavn = ModalName.MOTE_FILTER;
     const [openModal, setApenModal] = useState(!hasStored(modalNavn));
     return(
@@ -9,6 +13,7 @@ export default function TourModalLocalStorage() {
             apen={ openModal }
             modalNavn={ modalNavn }
             setOpen={ setApenModal }
+            completed={ props.completed }
         />
     );
 }

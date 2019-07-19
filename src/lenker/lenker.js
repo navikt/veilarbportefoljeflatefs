@@ -1,7 +1,8 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import ActiveLink from "./active-link";
-import Endringslogg from "../components/endringslogg/endringslogg"
+import EndringsloggTourWrapper from "../components/endringslogg/endringslogg-tour-wrapper"
+
 function Lenker() {
     return (
         <div className="lenker blokk-m" role="tablist">
@@ -23,7 +24,7 @@ function Lenker() {
                     <FormattedMessage id="lenker.veiledere.oversikt"/>
                 </ActiveLink>
             </h2>
-            <Endringslogg/>
+            <EndringsloggTourWrapper/>
         </div>
     );
 }

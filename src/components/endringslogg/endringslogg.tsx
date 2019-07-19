@@ -1,4 +1,4 @@
-import { default as React, useEffect, useRef, useState, RefObject } from 'react';
+import { default as React, useEffect, useRef, useState, RefObject, Dispatch, SetStateAction } from 'react';
 import { ReactComponent as AlarmIcon } from './icon-v3.svg';
 import EndringsloggInnhold, { LinkTag } from './endringslogg-innhold';
 import { ENDRINGSLOGG, VIS_MOTER_MED_NAV } from '../../konstanter';
@@ -39,8 +39,12 @@ interface EndringsloggMetrikker {
 interface StateProps {
     harFeature: (feature: string) => boolean;
 }
+interface EndringsProps {
+    refresh: boolean;
+    setRefresh: Dispatch<SetStateAction<boolean>>;
+}
 
-export function Endringslogg(props: StateProps) {
+export function Endringslogg(props: StateProps & EndringsProps) {
     const { harFeature } = props;
     const feature = harFeature(VIS_MOTER_MED_NAV);
     const versjoner: string[] = [];
@@ -54,6 +58,12 @@ export function Endringslogg(props: StateProps) {
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const focusRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
+
+    if( props.refresh && overordnetNotifikasjon ) {
+        props.setRefresh(false);
+        setOverordnetNotifikasjon(false);
+        return null;
+    }
 
     useEffect(() => {
         hentAktivVeileder();
