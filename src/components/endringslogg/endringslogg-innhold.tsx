@@ -15,6 +15,7 @@ interface EndringsloggInleggProps {
 
 interface EndringsloggInnholdProps {
     innhold: Endring[];
+    settListe: Array<{key: string, sett: boolean}>;
 }
 
 export function LinkTag(props: { linkTekst: string, url: string }) {
@@ -28,16 +29,19 @@ export function LinkTag(props: { linkTekst: string, url: string }) {
 // NB fix children!
 export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
 
-    let content:any = [];
-    props.innhold.forEach((endring, index)=> {
-         content.push(<EndringsloggInlegg key={index} dato={endring.dato} innholdsTekst={endring.tekst} innholdsOverskrift={endring.tittel} nyeNotifikasjoner={false}/>)
-   });
+    const content = props.innhold.map((endring, index)=> {
+        return (<EndringsloggInlegg key={index}
+                             dato={endring.dato}
+                             innholdsTekst={endring.tekst}
+                             innholdsOverskrift={endring.tittel}
+                             nyeNotifikasjoner={(props.settListe.filter( (el) => el.key === endring.id)).some( (e) => !e.sett)}
+         />);});
 
     return(
         <>
         {content}
         </>
-    )
+    );
 }
 
 function EndringsloggInlegg(props: EndringsloggInleggProps) {

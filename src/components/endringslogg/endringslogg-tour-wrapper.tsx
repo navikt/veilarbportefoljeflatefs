@@ -10,13 +10,16 @@ export default function EndringsloggTourWrapper() {
 
     const oppdaterSettListe = ((name: string)=> setSettListe(settModalEndring(settListe,name)));
 
-    const oppdaterInnhold = () => {
-        innhold.forEach((elem) => registrerHarLestEndringslogg(elem.id));
+    const oppdaterLocalstorageOgState = () => {
+        innhold.forEach((elem) => {
+            oppdaterSettListe(elem.id);
+            registrerHarLestEndringslogg(elem.id);
+        });
     };
 
     return(
         <>
-            <Endringslogg innhold={innhold} oppdaterInnhold={oppdaterInnhold} settListe={settListe} />
+            <Endringslogg innhold={innhold} oppdaterInnhold={oppdaterLocalstorageOgState} settListe={settListe} />
             <TourModalLocalStorage completed={oppdaterSettListe} />
         </>
     );

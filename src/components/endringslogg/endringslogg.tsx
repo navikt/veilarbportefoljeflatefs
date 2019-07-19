@@ -48,6 +48,7 @@ export function Endringslogg(props: StateProps & EndringsProps) {
 
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const [veilederIdent, setVeilderIdent] = useState('');
+    console.table(props.settListe)
     const overordnetNotifikasjon = props.settListe.some( (element) => !element.sett);
 
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
@@ -121,7 +122,7 @@ export function Endringslogg(props: StateProps & EndringsProps) {
                 buttonRef={buttonRef} />
             <TransitionContainer visible={endringsloggApen} focusRef={focusRef}>
                 <EndringsloggHeader />
-                <EndringsloggInnhold innhold={props.innhold} />
+                <EndringsloggInnhold innhold={props.innhold} settListe={props.settListe} />
             </TransitionContainer>
         </div>
     );
