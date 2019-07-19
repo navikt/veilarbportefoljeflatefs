@@ -3,13 +3,18 @@ import { EtikettLiten, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { default as React } from 'react';
 import { ReactComponent as LinkIcon } from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
+import { Endring } from './endringslogg-custom';
 
-interface EndringsloggInnholdProps {
+interface EndringsloggInleggProps {
     dato: string;
     innholdsTekst: string;
     innholdsOverskrift: string;
     nyeNotifikasjoner: boolean;
     children?: React.ReactNode;
+}
+
+interface EndringsloggInnholdProps {
+    innhold: Endring[];
 }
 
 export function LinkTag(props: { linkTekst: string, url: string }) {
@@ -20,9 +25,23 @@ export function LinkTag(props: { linkTekst: string, url: string }) {
         </Lenke>
     );
 }
-
+// NB fix children!
 export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
 
+    let content:any = [];
+    props.innhold.forEach((endring)=> {
+         content.push(<EndringsloggInlegg dato={endring.dato} innholdsTekst={endring.tekst} innholdsOverskrift={endring.tittel} nyeNotifikasjoner={!endring.sett}/>)
+   });
+
+    return(
+        <>
+        {content}
+        </>
+    )
+}
+
+function EndringsloggInlegg(props: EndringsloggInleggProps) {
+    console.log(props);
     return (
         <div className="endringslogg-rad endringslogg-skille">
             <div className="endringslogg-datolinje">
