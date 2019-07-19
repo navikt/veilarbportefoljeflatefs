@@ -5,6 +5,7 @@ import ChevronLenke, { Retning } from '../chevron-lenke/chevron-lenke';
 import Stegviser from '../stegviser/stegviser';
 import { getTour } from './tour-modal-custom/tour-modal-custom';
 import './tour-modal.less';
+import { registrerHarLestEndringslogg } from '../endringslogg/endringslogg-utils';
 
 export enum ModalName {
     LAST_NED_CV = 'TOUR_MODAL-LAST_NED_CV',
@@ -32,19 +33,18 @@ function TourModal(props: TourModalProps) {
     const lukkModal = () => {
         lagreIkkeVisModal();
         if (isFinalStep) {
-            window.localStorage.setItem(`${props.modalNavn} - sett`, 'true');
+            registrerHarLestEndringslogg(props.modalNavn);
         }
         props.setOpen(false);
     };
 
     const handlePreviousBtnClicked = () => {
-        setStepIndex(stepIndex - 1 );
+        setStepIndex(stepIndex - 1);
     };
 
     const handleNextBtnClicked = () => {
         setStepIndex(stepIndex + 1);
     };
-
 
     const steps = getTour(props.modalNavn);
     const step = steps[stepIndex];
@@ -53,7 +53,7 @@ function TourModal(props: TourModalProps) {
     const hidePrevBtn = stepIndex === 0;
     const nextBtnText = isFinalStep ? 'Ferdig' : 'Neste';
     const nextBtnHandleClick = isFinalStep ? lukkModal : handleNextBtnClicked;
-    
+
     return (
         <NavFrontendModal
             className="tour-modal"
@@ -64,13 +64,16 @@ function TourModal(props: TourModalProps) {
             onRequestClose={lukkModal}
         >
             <div className="tour-modal__header--wrapper">
-            <header className="tour-modal__header">
-                <Systemtittel>Ny oppdatering</Systemtittel>
-            </header>
+                <header className="tour-modal__header">
+                    <Systemtittel>Ny oppdatering</Systemtittel>
+                </header>
             </div>
             <main className="tour-modal__main">
                 <div className="tour-modal__main--bilde-wrapper">
-                    <img src={step.bilde} className="tour-modal__main--bilde"/>
+                    <img
+                        src={step.bilde}
+                        className="tour-modal__main--bilde"
+                    />
                 </div>
                 <div className="tour-modal__main--beskrivelse">
                     <Undertittel className="blokk-xxxs">{step.tittel}</Undertittel>
@@ -78,16 +81,12 @@ function TourModal(props: TourModalProps) {
                 </div>
             </main>
             <footer className="tour-modal__footer">
-                <ChevronLenke retning={Retning.VENSTRE} tekst="Forrige" hide={hidePrevBtn} onClick={handlePreviousBtnClicked}/>
-                <Stegviser antallSteg={steps.length} valgtSteg={stepIndex}/>
-                <ChevronLenke retning={Retning.HOYRE} tekst={nextBtnText} onClick={nextBtnHandleClick}/>
+                <ChevronLenke retning={Retning.VENSTRE} tekst="Forrige" hide={hidePrevBtn} onClick={handlePreviousBtnClicked} />
+                <Stegviser antallSteg={steps.length} valgtSteg={stepIndex} />
+                <ChevronLenke retning={Retning.HOYRE} tekst={nextBtnText} onClick={nextBtnHandleClick} />
             </footer>
         </NavFrontendModal>
     );
-}
-
-export function fullfortModal(modalnavn: string) {
-    return localStorage.getItem(`${modalnavn} - sett`) !== null;
 }
 
 export default TourModal;

@@ -60,6 +60,8 @@ function isString(value: any): boolean {
 
 export function registrerHarLestEndringslogg(versjon: string) {
     const setteVersjoner: string[] = hentSetteVersjonerLocalstorage();
-    setteVersjoner.push(versjon);
-    window.localStorage.setItem(ENDRING_PREFIX, JSON.stringify(setteVersjoner));
+    if(!setteVersjoner.some((elem)=>elem === versjon)) {
+        setteVersjoner.push(versjon);
+        window.localStorage.setItem(ENDRING_PREFIX, JSON.stringify(setteVersjoner));
+    }
 }

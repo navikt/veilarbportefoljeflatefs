@@ -14,10 +14,10 @@ import {
 import { useTimer } from '../../hooks/use-timer';
 import { useEventListener } from '../../hooks/use-event-listener';
 import { hentAktivBruker } from '../enhet-context/context-api';
-import { fullfortModal, ModalName } from '../tour-modal/tour-modal';
+import { ModalName } from '../tour-modal/tour-modal';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { connect } from 'react-redux';
-import TourModalButton from '../tour-modal/tour-modal-button'
+import TourModalButton from '../tour-modal/tour-modal-button';
 
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
@@ -26,7 +26,7 @@ const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
         tidBrukt: metrikker.tidBrukt,
         nyeNotifikasjoner: metrikker.nyeNotifikasjoner,
         stepperVarApen: metrikker.stepperVarApen
-    }, {hash: metrikker.hash});
+    }, { hash: metrikker.hash });
 };
 
 interface EndringsloggMetrikker {
@@ -41,10 +41,10 @@ interface StateProps {
 }
 
 export function Endringslogg(props: StateProps) {
-    const {harFeature} = props;
+    const { harFeature } = props;
     const feature = harFeature(VIS_MOTER_MED_NAV);
     const versjoner: string[] = [];
-    const {start, stopp} = useTimer();
+    const { start, stopp } = useTimer();
 
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const [stepperVarApenMetrikk, setStepperVarApenMetrikk] = useState(false);
@@ -70,11 +70,11 @@ export function Endringslogg(props: StateProps) {
         } else {
             const tidBrukt = stopp();
             krypterVeilederident(veilederIdent)
-                .then((res) => sendMetrikker({tidBrukt, nyeNotifikasjoner: overordnetNotifikasjon, stepperVarApen: stepperVarApenMetrikk, hash: hexString(res)}))
+                .then((res) => sendMetrikker({ tidBrukt, nyeNotifikasjoner: overordnetNotifikasjon, stepperVarApen: stepperVarApenMetrikk, hash: hexString(res) }))
                 .catch((e) => console.log(e)); // tslint:disable-line
             setOverordnetNotifikasjon(false);
             versjoner.forEach((elem) => registrerHarLestEndringslogg(elem));
-            if(stepperVarApenMetrikk) {
+            if (stepperVarApenMetrikk) {
                 setStepperVarApenMetrikk(false);
             }
         }
@@ -137,36 +137,36 @@ export function Endringslogg(props: StateProps) {
     return (
         <div ref={loggNode} className="endringslogg">
             <EndringsloggKnapp klikk={klikk} open={endringsloggApen} nyeNotifikasjoner={overordnetNotifikasjon}
-                               buttonRef={buttonRef}/>
+                buttonRef={buttonRef} />
             <TransitionContainer visible={endringsloggApen} focusRef={focusRef}>
-                <EndringsloggHeader/>
+                <EndringsloggHeader />
                 {feature &&
-                <EndringsloggInnhold dato={'16. JUL. 2019'}
-                                     innholdsOverskrift="NAV møte filter"
-                                     innholdsTekst="Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV."
-                                     nyeNotifikasjoner={!finnesILocalstorage('0.2.0') && !fullfortModal(ModalName.MOTE_FILTER)}>
-                    <TourModalButton modal={ModalName.MOTE_FILTER} loggApen={setStepperVarApenMetrikk}/>
-                </EndringsloggInnhold>
+                    <EndringsloggInnhold dato={'16. JUL. 2019'}
+                        innholdsOverskrift="NAV møte filter"
+                        innholdsTekst="Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV."
+                        nyeNotifikasjoner={!finnesILocalstorage(ModalName.MOTE_FILTER)}>
+                        <TourModalButton modal={ModalName.MOTE_FILTER} loggApen={setStepperVarApenMetrikk} />
+                    </EndringsloggInnhold>
                 }
 
                 <EndringsloggInnhold dato={'18. JUN. 2019'}
-                                     innholdsOverskrift="Laste ned og skrive ut CV"
-                                     innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."
-                                     nyeNotifikasjoner={!finnesILocalstorage('0.1.9') && !fullfortModal(ModalName.LAST_NED_CV)}>
-                    <TourModalButton modal={ModalName.LAST_NED_CV} loggApen={setStepperVarApenMetrikk}/>
+                    innholdsOverskrift="Laste ned og skrive ut CV"
+                    innholdsTekst="Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift."
+                    nyeNotifikasjoner={!finnesILocalstorage('0.1.9')}>
+                    <TourModalButton modal={ModalName.LAST_NED_CV} loggApen={setStepperVarApenMetrikk} />
                 </EndringsloggInnhold>
 
                 <EndringsloggInnhold dato={'06. JUN. 2019'}
-                                     innholdsOverskrift="Visning av profilering i Detaljer"
-                                     innholdsTekst="Nå finner du profileringsresultatet for brukeren under Registrering i Detaljer."
-                                     nyeNotifikasjoner={!finnesILocalstorage('0.1.9')}
+                    innholdsOverskrift="Visning av profilering i Detaljer"
+                    innholdsTekst="Nå finner du profileringsresultatet for brukeren under Registrering i Detaljer."
+                    nyeNotifikasjoner={!finnesILocalstorage('0.1.9')}
                 />
                 <EndringsloggInnhold dato={'29. MAR. 2019'}
-                                     innholdsOverskrift="Manuell registrering"
-                                     innholdsTekst="Du kan nå registrere brukere manuelt i Veilederverktøy (tannhjulet).  Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
-                                     nyeNotifikasjoner={!finnesILocalstorage('0.1.9')}>
+                    innholdsOverskrift="Manuell registrering"
+                    innholdsTekst="Du kan nå registrere brukere manuelt i Veilederverktøy (tannhjulet).  Arena-oppgaven «Motta person» skal ikke lenger benyttes. "
+                    nyeNotifikasjoner={!finnesILocalstorage('0.1.9')}>
                     <LinkTag linkTekst={'Nyhetssak på Navet'}
-                             url={'https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx'}/>
+                        url={'https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx'} />
                 </EndringsloggInnhold>
             </TransitionContainer>
         </div>
@@ -183,10 +183,10 @@ interface EndringsloggKnappProps {
 function EndringsloggKnapp(props: EndringsloggKnappProps) {
     return (
         <button ref={props.buttonRef}
-                className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
-                onClick={props.klikk}>
-            <AlarmIcon/>
-            {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}/>}
+            className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
+            onClick={props.klikk}>
+            <AlarmIcon />
+            {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'} />}
         </button>
     );
 }
