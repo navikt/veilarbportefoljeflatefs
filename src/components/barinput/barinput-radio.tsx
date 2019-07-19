@@ -14,8 +14,8 @@ interface BarinputRadioProps {
 }
 
 export function BarInputRadio ({filterNavn, max, handleChange, checked, antall}: BarinputRadioProps) {
-    const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
-    const labelTekst = ferdigfilterListe[filterVerdi];
+    const filterVerdi = mapFilternavnTilFilterValue[filterNavn]; //TODO :SENDE SOM PROPS?
+    const labelTekst = ferdigfilterListe[filterVerdi];  //TODO: SENDE SOM PROPS?
 
     return (
         <BarInput

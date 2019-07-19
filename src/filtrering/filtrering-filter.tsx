@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Element } from 'nav-frontend-typografi';
-import { FormattedMessage, injectIntl } from 'react-intl';
 import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import RadioFilterform from '../components/radio-filterform/radio-filterform';
@@ -33,7 +32,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
         <div className="row">
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
-                    <FormattedMessage id="filtrering.filter.tittel.demografi"/>
+                    Demografi
                 </Element>
                 <Dropdown name="Alder">
                     <CheckboxFilterform
@@ -46,7 +45,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                 <Dropdown name="Fødselsdato">
                     <CheckboxFilterform
                         form="fodselsdagIMnd"
-                        valg={fodselsdagIMnd}
+                        valg={fodselsdagIMnd()}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -62,7 +61,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
             </div>
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
-                    <FormattedMessage id="filtrering.filter.tittel.situasjon"/>
+                    Situasjon
                 </Element>
                 <Dropdown name="Innsatsgruppe">
                     <CheckboxFilterform
@@ -107,7 +106,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
             </div>
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
-                    <FormattedMessage id="filtrering.filter.tittel.ytelse"/>
+                    Ytelse
                 </Element>
                 <Dropdown name="Ytelse" className="dropdown--140bredde-responsive">
                     <RadioFilterform
@@ -120,7 +119,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
             </div>
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
-                    <FormattedMessage id="filtrering.filter.tittel.manuellbruker"/>
+                    Manuell bruker
                 </Element>
                 <Dropdown name="Manuell bruker">
                     <CheckboxFilterform
@@ -160,4 +159,4 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
     </div>
 );
 
-export default injectIntl(FiltreringFilter);
+export default FiltreringFilter;

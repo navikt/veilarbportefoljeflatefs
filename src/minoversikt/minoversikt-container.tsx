@@ -1,7 +1,7 @@
-import LenkerMinoversikt from '../lenker/lenker-minoversikt';
 import React from 'react';
+import LenkerMinoversikt from '../lenker/lenker-minoversikt';
 
-export function MinOversiktContainer(props: {children: React.ReactNode, veilederFraUrl: {ident: string}}) {
+export function MinOversiktContainer(props: {children: React.ReactNode, veilederFraUrl?: {ident: string}}) {
     return (
         <div className="minoversikt-side blokk-xl">
             <section>

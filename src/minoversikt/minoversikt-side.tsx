@@ -22,6 +22,7 @@ import { pagineringSetup } from '../ducks/paginering';
 import './minoversikt-side.less';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { RouteChildrenProps } from 'react-router';
+import { MinOversiktContainer } from './minoversikt-container';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -92,33 +93,33 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
         return (
             <DocumentTitle title="Min oversikt">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-            <MMinOversiktContainer>
-                    <div className="row">
-                        <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
-                            <FiltreringContainer
-                                filtervalg={filtervalg}
-                                filtergruppe="veileder"
-                                veileder={gjeldendeVeileder}
-                                enhettiltak={enhettiltak.data.tiltak}
-                            />
+                    <MinOversiktContainer veilederFraUrl={veilederFraUrl}>
+                        <div className="row">
+                            <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
+                                <FiltreringContainer
+                                    filtervalg={filtervalg}
+                                    filtergruppe="veileder"
+                                    veileder={gjeldendeVeileder}
+                                    enhettiltak={enhettiltak.data.tiltak}
+                                />
+                            </div>
+                            <div className="col-lg-9 col-md-12 col-sm-12">
+                                <FiltreringLabelContainer
+                                    filtervalg={filtervalg}
+                                    filtergruppe="veileder"
+                                    veileder={gjeldendeVeileder}
+                                    enhettiltak={enhettiltak.data.tiltak}
+                                    listevisning={listevisning}
+                                />
+                                <ListevisningInfoPanel name={ListevisningType.minOversikt} />
+                                <VeilederPortefoljeVisning
+                                    gjeldendeVeileder={gjeldendeVeileder}
+                                    visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                />
+                            </div>
                         </div>
-                        <div className="col-lg-9 col-md-12 col-sm-12">
-                            <FiltreringLabelContainer
-                                filtervalg={filtervalg}
-                                filtergruppe="veileder"
-                                veileder={gjeldendeVeileder}
-                                enhettiltak={enhettiltak.data.tiltak}
-                                listevisning={listevisning}
-                            />
-                            <ListevisningInfoPanel name={ListevisningType.minOversikt} />
-                            <VeilederPortefoljeVisning
-                                gjeldendeVeileder={gjeldendeVeileder}
-                                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                            />
-                        </div>
-                    </div>
-            </MMinOversiktContainer>
-            </Innholdslaster>
+                    </MinOversiktContainer>
+                </Innholdslaster>
             </DocumentTitle>
         );
     }

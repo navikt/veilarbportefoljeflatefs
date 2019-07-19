@@ -53,17 +53,19 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     />
                 ];
             } else if (Array.isArray(value)) {
-                    return value.map((singleValue) => (
-                    <FiltreringLabel
+                    return value.map((singleValue) => {
+                    return (
+                        <FiltreringLabel
                         key={`${key}--${singleValue.key || singleValue}`}
                         label={
                             key === 'tiltakstyper' ?
                                 enhettiltak[singleValue] :
-                                (singleValue.label || FilterKonstanter[key][singleValue])
+                                (singleValue.label || FilterKonstanter[key][singleValue] || singleValue)
                         }
                         slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                         intl={intl}
-                    />)
+                    />);
+                        }
                 );
             } else if (value && typeof value === 'object') { // value er aktiviteter
                 muligMenIkkeValgt = harMuligMenIkkeValgtKolonne(listevisning, Kolonne.UTLOP_AKTIVITET);

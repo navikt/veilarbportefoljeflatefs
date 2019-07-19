@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../ducks/portefolje';
-import TabellOverskrift from './../components/tabell-overskrift';
+import TabellOverskrift from '../components/tabell-overskrift';
 import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
 import { leggEnhetIUrl, updateLastPath } from '../utils/url-utils';
 import { ASCENDING, DESCENDING } from '../konstanter';

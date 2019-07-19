@@ -5,7 +5,7 @@ import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfac
 import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
-import { FiltreringStatusEnhet } from '../enhetsportefolje/filtrering-status-enhet';
+import { FiltreringStatus } from './filtrering-status/filtrering-status';
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -37,7 +37,12 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                 tittelProps="undertittel"
                 lamellNavn="status"
             >
-                <FiltreringStatusEnhet/>
+                <FiltreringStatus
+                    filtergruppe={filtergruppe}
+                    veileder={veileder}
+                    filtervalg={filtervalg}
+                />
+
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== 'veileder'}

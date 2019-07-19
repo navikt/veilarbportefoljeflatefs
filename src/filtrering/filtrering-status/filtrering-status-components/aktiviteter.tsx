@@ -1,12 +1,8 @@
-
 import React from "react";
-import {useSelector} from "react-redux";
-import {AppState} from "../../reducer";
-import { Statustall } from "../../ducks/statustall";
-import { selectStatusTallData } from "../../enhetsportefolje/filtrering-status-enhet";
-import {I_AVTALT_AKTIVITET, IKKE_I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER} from "../filter-konstanter";
-import BarInputGruppe from "../../components/barinput/barinput-gruppe";
-import {BarInputRadio} from "../../components/barinput/barinput-radio";
+import {I_AVTALT_AKTIVITET, IKKE_I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER} from "../../filter-konstanter";
+import {BarInputRadio} from "../../../components/barinput/barinput-radio";
+import BarInputGruppe from "../../../components/barinput/barinput-gruppe";
+import {useStatusTallSelector} from "../../../hooks/redux/use-statustall";
 
 interface FiltreringStatusAktivitetProps {
     ferdigfilterListe: string[];
@@ -14,9 +10,7 @@ interface FiltreringStatusAktivitetProps {
 }
 
 export function FiltreringStatusAktiviteter (props: FiltreringStatusAktivitetProps) {
-    const statusTall = useSelector<AppState, Statustall>(state =>
-        selectStatusTallData(state));
-
+    const statusTall = useStatusTallSelector();
     return (
         <BarInputGruppe>
             <BarInputRadio

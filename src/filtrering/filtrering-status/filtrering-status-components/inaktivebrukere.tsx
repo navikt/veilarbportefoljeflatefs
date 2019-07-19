@@ -1,16 +1,12 @@
-import BarInputGruppe from "../../components/barinput/barinput-gruppe";
-import {BarInputRadio} from "../../components/barinput/barinput-radio";
 import React from "react";
 import {FiltreringStatusGruppe} from "./ufordelte-brukere";
-import {useSelector} from "react-redux";
-import {AppState} from "../../reducer";
-import {Statustall} from "../../ducks/statustall";
-import {selectStatusTallData} from "../../enhetsportefolje/filtrering-status-enhet";
-import {INAKTIVE_BRUKERE} from "../filter-konstanter";
+import {BarInputRadio} from "../../../components/barinput/barinput-radio";
+import BarInputGruppe from "../../../components/barinput/barinput-gruppe";
+import {INAKTIVE_BRUKERE} from "../../filter-konstanter";
+import {useStatusTallSelector} from "../../../hooks/redux/use-statustall";
 
 export function FiltreringStatusInavtiveBrukere(props: FiltreringStatusGruppe) {
-    const statusTall = useSelector<AppState, Statustall>(state =>
-        selectStatusTallData(state));
+    const statusTall = useStatusTallSelector();
 
     return (
         <BarInputGruppe>

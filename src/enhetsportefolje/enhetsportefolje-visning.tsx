@@ -5,7 +5,7 @@ import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
 import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
 import { getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl, updateLastPath } from '../utils/url-utils';
 import EnhetTabell from './enhetsportefolje-tabell';
-import TabellOverskrift from './../components/tabell-overskrift';
+import TabellOverskrift from '../components/tabell-overskrift';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import { diagramSkalVises } from '../minoversikt/diagram/util';
 import Diagram from '../minoversikt/diagram/diagram';

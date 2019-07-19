@@ -1,5 +1,0 @@
-{antallValgt, plural,
-    =0 { Ingen brukere valgt }
-    =1 { 1 bruker valgt }
-    other { {antallValgt} brukere valgt }
-}

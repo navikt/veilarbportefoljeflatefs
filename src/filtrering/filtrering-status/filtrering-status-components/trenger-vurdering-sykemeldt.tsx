@@ -1,16 +1,12 @@
-import {BarInputRadio} from "../../components/barinput/barinput-radio";
 import React from "react";
+import {ER_SYKMELDT_MED_ARBEIDSGIVER, TRENGER_VURDERING} from "../../filter-konstanter";
+import {BarInputRadio} from "../../../components/barinput/barinput-radio";
 import {FiltreringStatusGruppe} from "./ufordelte-brukere";
-import {useSelector} from "react-redux";
-import {AppState} from "../../reducer";
-import {Statustall} from "../../ducks/statustall";
-import {selectStatusTallData} from "../../enhetsportefolje/filtrering-status-enhet";
-import {ER_SYKMELDT_MED_ARBEIDSGIVER, TRENGER_VURDERING} from "../filter-konstanter";
+import {useStatusTallSelector} from "../../../hooks/redux/use-statustall";
+
 
 export function FiltreringStatusTrengerVurderingEllerSykmeldt(props: FiltreringStatusGruppe) {
-    const statusTall = useSelector<AppState, Statustall>(state =>
-        selectStatusTallData(state));
-
+    const statusTall = useStatusTallSelector();
     return (
         <>
             <BarInputRadio

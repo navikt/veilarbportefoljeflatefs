@@ -26,7 +26,7 @@ function FiltreringNavnellerfnr(props: FiltreringNavnEllerFnrProps) {
         if (prevQuery === '') {
             setNavnEllerFnrQuery('');
         }
-    },[props.filtervalg.navnEllerFnrQuery, navnEllerFnrQuery]);
+    },[props.filtervalg.navnEllerFnrQuery]);
 
     return (
         <div className="filtrering-navn-fnr">
