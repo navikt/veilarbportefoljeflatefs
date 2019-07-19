@@ -37,7 +37,7 @@ interface StateProps {
 
 interface EndringsProps {
     innhold: Endring[];
-    settListe: {key: Endring, sett: boolean};
+    settListe: Array<{key: string, sett: boolean}>;
     oppdaterInnhold: ()=>void;
 }
 
@@ -48,7 +48,7 @@ export function Endringslogg(props: StateProps & EndringsProps) {
 
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const [veilederIdent, setVeilderIdent] = useState('');
-    const overordnetNotifikasjon = props.innhold.some((e) => !props.settListe[e.id]);
+    const overordnetNotifikasjon = props.settListe.some( (element) => !element.sett);
 
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const focusRef = useRef<HTMLDivElement>(null);

@@ -8,7 +8,7 @@ export interface Endring {
     id: string;
     children: any;
 }
-const locSto = hentSetteVersjonerLocalstorage();
+
 const innhold: Endring[] = [
     {
         dato: '16. JUL. 2019',
@@ -54,20 +54,19 @@ export function getInnhold() {
     return innhold;
 }
 
-export function getSettEndring() {
+export function mapLocaldtoargeTilEndringsinnhold() {
     const locSto = hentSetteVersjonerLocalstorage();
     return innhold.map((endring)=> {
         const harSett = locSto.some((ver) => ver === endring.id);
-        return {key: endring, sett: harSett};
+        return {key: endring.id, sett: harSett};
     });
 }
 
-export function settModalEndring(innholdState:{key: Endring, sett: boolean}[], modal: string): {key: Endring, sett: boolean}[] {
+export function settModalEndring(innholdState:{key: string, sett: boolean}[], modal: string): {key: string, sett: boolean}[] {
     return innholdState.map((el)=> {
-        if(el.key.id === modal) {
+        if(el.key === modal) {
             el.sett = true;
         }
         return el;
-
-    })
+    });
 }
