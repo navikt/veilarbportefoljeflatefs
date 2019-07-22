@@ -18,28 +18,16 @@ export interface Step {
     bilde: string;
 }
 interface TourModalProps {
-    modalNavn: ModalName;
-    apen: boolean;
-    setOpen: Dispatch<SetStateAction<boolean>>;
-    completed?: (e) => void;
+    modalName: ModalName;
+    open: boolean;
+    onClose: (e: boolean) => void;
 }
 
 function TourModal(props: TourModalProps) {
     const [stepIndex, setStepIndex] = useState(0);
 
-    const lagreIkkeVisModal = () => {
-        window.localStorage.setItem(props.modalNavn, 'true');
-    };
-
     const lukkModal = () => {
-        lagreIkkeVisModal();
-        if (isFinalStep) {
-            registrerHarLestEndringslogg(props.modalNavn);
-            if (props.completed) {
-                props.completed(props.modalNavn);
-            }
-        }
-        props.setOpen(false);
+        props.onClose(isFinalStep);
     };
 
     const handlePreviousBtnClicked = () => {
@@ -50,7 +38,7 @@ function TourModal(props: TourModalProps) {
         setStepIndex(stepIndex + 1);
     };
 
-    const steps = getTour(props.modalNavn);
+    const steps = getTour(props.modalName);
     const step = steps[stepIndex];
     const isFinalStep = stepIndex === steps.length - 1;
 
@@ -62,7 +50,7 @@ function TourModal(props: TourModalProps) {
         <NavFrontendModal
             className="tour-modal"
             contentLabel="TourModal"
-            isOpen={props.apen}
+            isOpen={props.open}
             closeButton={true}
             shouldCloseOnOverlayClick={true}
             onRequestClose={lukkModal}

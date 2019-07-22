@@ -1,11 +1,27 @@
 import Endringslogg from './endringslogg';
 import TourModalLocalStorage from '../tour-modal/tour-modal-local-storage';
-import { default as React, useState, useEffect } from 'react';
-import { getInnhold, settModalEndring, getInnholdOgSett } from './endringslogg-custom';
+import { default as React, useState } from 'react';
+import { settModalEndring, getInnholdOgSett } from './endringslogg-custom';
 import { registrerHarLestEndringslogg } from './endringslogg-utils';
+import { connect } from 'react-redux';
+import { sjekkFeature } from '../../ducks/features';
+import { VIS_MOTER_MED_NAV, ENDRINGSLOGG } from '../../konstanter';
+import { ModalName } from '../tour-modal/tour-modal';
 
-export default function EndringsloggTourWrapper() {
+interface StateProps {
+    harFeature: (feature: string) => boolean;
+}
+
+export function EndringsloggTourWrapper(props: StateProps) {
+    const { harFeature } = props;
+    const visCVInnlegg = harFeature(VIS_MOTER_MED_NAV);
+
     const [innholdsListe, setInnholdsliste] = useState(getInnholdOgSett());
+    if(!visCVInnlegg) {
+        if(innholdsListe.some((el)=> el.id === ModalName.MOTE_FILTER)) {
+            setInnholdsliste(innholdsListe.filter((el) => el.id !== ModalName.MOTE_FILTER));
+        }
+    }
 
     const oppdaterSettListe = ((name: string)=> setInnholdsliste(settModalEndring(innholdsListe,name)));
     const oppdaterLocalstorageOgState = () => {
@@ -15,10 +31,19 @@ export default function EndringsloggTourWrapper() {
         });
     };
 
+    const visEndringslogg = harFeature(ENDRINGSLOGG);
     return(
         <>
-            <Endringslogg innhold={innholdsListe} oppdaterInnhold={oppdaterLocalstorageOgState} />
+            {visEndringslogg &&
+                <Endringslogg innhold={innholdsListe} oppdaterInnhold={oppdaterLocalstorageOgState} />
+            }
             <TourModalLocalStorage completed={oppdaterSettListe} />
         </>
     );
 }
+
+const mapStateToProps = (state) => ({
+    harFeature: (feature: string) => sjekkFeature(state, feature)
+});
+
+export default connect(mapStateToProps)(EndringsloggTourWrapper);

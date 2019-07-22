@@ -1,8 +1,6 @@
 import { default as React, useEffect, useRef, useState, RefObject } from 'react';
 import { ReactComponent as AlarmIcon } from './icon-v3.svg';
 import EndringsloggInnhold from './endringslogg-innhold';
-import { ENDRINGSLOGG, VIS_MOTER_MED_NAV } from '../../konstanter';
-import { sjekkFeature } from '../../ducks/features';
 import TransitionContainer from './transition-container';
 import { logEvent } from '../../utils/frontend-logger';
 import {
@@ -13,8 +11,7 @@ import { useTimer } from '../../hooks/use-timer';
 import { useEventListener } from '../../hooks/use-event-listener';
 import { hentAktivBruker } from '../enhet-context/context-api';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import { connect } from 'react-redux';
-import { Endring, EndringOgSett } from './endringslogg-custom';
+import { EndringOgSett } from './endringslogg-custom';
 
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
@@ -31,18 +28,12 @@ interface EndringsloggMetrikker {
     hash: string;
 }
 
-interface StateProps {
-    harFeature: (feature: string) => boolean;
-}
-
 interface EndringsProps {
     innhold: EndringOgSett[];
     oppdaterInnhold: ()=>void;
 }
 
-export function Endringslogg(props: StateProps & EndringsProps) {
-    const { harFeature } = props;
-    const feature = harFeature(VIS_MOTER_MED_NAV);
+export default function Endringslogg(props: EndringsProps) {
     const { start, stopp } = useTimer();
 
     const [endringsloggApen, setEndringsloggApen] = useState(false);
@@ -109,10 +100,6 @@ export function Endringslogg(props: StateProps & EndringsProps) {
 
     useEventListener('mousedown', handleClickOutside, [endringsloggApen]);
     useEventListener('keydown', escHandler, [endringsloggApen]);
-    const harRiktigFeatures = harFeature(ENDRINGSLOGG);
-    if (!harRiktigFeatures) {
-        return null;
-    }
 
     return (
         <div ref={loggNode} className="endringslogg">
@@ -151,9 +138,3 @@ function EndringsloggHeader() {
         </Undertittel>
     );
 }
-
-const mapStateToProps = (state) => ({
-    harFeature: (feature: string) => sjekkFeature(state, feature)
-});
-
-export default connect(mapStateToProps)(Endringslogg);
