@@ -3,7 +3,7 @@ import { EtikettLiten, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { default as React } from 'react';
 import { ReactComponent as LinkIcon } from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
-import { Endring } from './endringslogg-custom';
+import { EndringOgSett } from './endringslogg-custom';
 
 interface EndringsloggInleggProps {
     dato: string;
@@ -14,8 +14,7 @@ interface EndringsloggInleggProps {
 }
 
 interface EndringsloggInnholdProps {
-    innhold: Endring[];
-    settListe: Array<{key: string, sett: boolean}>;
+    innhold: EndringOgSett[];
 }
 
 export function LinkTag(props: { linkTekst: string, url: string }) {
@@ -26,26 +25,26 @@ export function LinkTag(props: { linkTekst: string, url: string }) {
         </Lenke>
     );
 }
-// NB fix children!
-export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
 
+export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
     const content = props.innhold.map((endring, index)=> {
         return (<EndringsloggInlegg key={index}
                              dato={endring.dato}
                              innholdsTekst={endring.tekst}
                              innholdsOverskrift={endring.tittel}
-                             nyeNotifikasjoner={(props.settListe.filter( (el) => el.key === endring.id)).some( (e) => !e.sett)}
-         />);});
+                             nyeNotifikasjoner={!endring.sett}
+                             children={endring.children}
+         />);
+        });
 
     return(
         <>
-        {content}
+            {content}
         </>
     );
 }
 
 function EndringsloggInlegg(props: EndringsloggInleggProps) {
-    console.log(props);
     return (
         <div className="endringslogg-rad endringslogg-skille">
             <div className="endringslogg-datolinje">

@@ -14,7 +14,7 @@ import { useEventListener } from '../../hooks/use-event-listener';
 import { hentAktivBruker } from '../enhet-context/context-api';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { connect } from 'react-redux';
-import { Endring } from './endringslogg-custom';
+import { Endring, EndringOgSett } from './endringslogg-custom';
 
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
@@ -36,8 +36,7 @@ interface StateProps {
 }
 
 interface EndringsProps {
-    innhold: Endring[];
-    settListe: Array<{key: string, sett: boolean}>;
+    innhold: EndringOgSett[];
     oppdaterInnhold: ()=>void;
 }
 
@@ -48,8 +47,7 @@ export function Endringslogg(props: StateProps & EndringsProps) {
 
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const [veilederIdent, setVeilderIdent] = useState('');
-    console.table(props.settListe)
-    const overordnetNotifikasjon = props.settListe.some( (element) => !element.sett);
+    const overordnetNotifikasjon = props.innhold.some( (element) => !element.sett);
 
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const focusRef = useRef<HTMLDivElement>(null);
@@ -122,7 +120,7 @@ export function Endringslogg(props: StateProps & EndringsProps) {
                 buttonRef={buttonRef} />
             <TransitionContainer visible={endringsloggApen} focusRef={focusRef}>
                 <EndringsloggHeader />
-                <EndringsloggInnhold innhold={props.innhold} settListe={props.settListe} />
+                <EndringsloggInnhold innhold={props.innhold} />
             </TransitionContainer>
         </div>
     );

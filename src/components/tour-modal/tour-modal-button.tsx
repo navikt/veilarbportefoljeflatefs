@@ -4,7 +4,7 @@ import { Knapp } from 'nav-frontend-knapper';
 
 interface ModalStepperProps {
     modal: ModalName;
-    loggApen: Dispatch<SetStateAction<boolean>>;
+    loggApen?: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function TourModalButton(props: ModalStepperProps) {
@@ -13,7 +13,6 @@ export default function TourModalButton(props: ModalStepperProps) {
         <>
             <Knapp className="endringslogg-stepperKnapp" mini={true} onClick={() => {
                 setOpen(true);
-                props.loggApen(true);
             }}>
                 Se hvordan
             </Knapp>

@@ -1,11 +1,11 @@
-import { default as React, useState, Dispatch, SetStateAction } from 'react';
+import { default as React, useState } from 'react';
 import { default as TourModal, ModalName, } from './tour-modal';
 
 interface TourModalLocalStorageProps {
     completed: (e: string) => void;
 }
 
-export default function TourModalLocalStorage(props) {
+export default function TourModalLocalStorage(props: TourModalLocalStorageProps) {
     const modalNavn = ModalName.MOTE_FILTER;
     const [openModal, setApenModal] = useState(!hasStored(modalNavn));
     return(

@@ -1,17 +1,15 @@
 import Endringslogg from './endringslogg';
 import TourModalLocalStorage from '../tour-modal/tour-modal-local-storage';
 import { default as React, useState, useEffect } from 'react';
-import { getInnhold, mapLocaldtoargeTilEndringsinnhold, settModalEndring } from './endringslogg-custom';
+import { getInnhold, settModalEndring, getInnholdOgSett } from './endringslogg-custom';
 import { registrerHarLestEndringslogg } from './endringslogg-utils';
 
 export default function EndringsloggTourWrapper() {
-    const innhold = getInnhold();
-    const [settListe, setSettListe] = useState(mapLocaldtoargeTilEndringsinnhold());
+    const [innholdsListe, setInnholdsliste] = useState(getInnholdOgSett());
 
-    const oppdaterSettListe = ((name: string)=> setSettListe(settModalEndring(settListe,name)));
-
+    const oppdaterSettListe = ((name: string)=> setInnholdsliste(settModalEndring(innholdsListe,name)));
     const oppdaterLocalstorageOgState = () => {
-        innhold.forEach((elem) => {
+        innholdsListe.forEach((elem) => {
             oppdaterSettListe(elem.id);
             registrerHarLestEndringslogg(elem.id);
         });
@@ -19,7 +17,7 @@ export default function EndringsloggTourWrapper() {
 
     return(
         <>
-            <Endringslogg innhold={innhold} oppdaterInnhold={oppdaterLocalstorageOgState} settListe={settListe} />
+            <Endringslogg innhold={innholdsListe} oppdaterInnhold={oppdaterLocalstorageOgState} />
             <TourModalLocalStorage completed={oppdaterSettListe} />
         </>
     );
