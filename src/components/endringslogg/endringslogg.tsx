@@ -13,7 +13,7 @@ import { EndringOgSett } from './endringslogg-custom';
 // Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
 const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
     logEvent('portefolje.endringslogg', {
-        feature: 'pre_tilbakemelding_3',
+        feature: 'pre_tilbakemelding_2',
         tidBrukt: metrikker.tidBrukt,
         nyeNotifikasjoner: metrikker.nyeNotifikasjoner,
     }, {hash: metrikker.hash});
