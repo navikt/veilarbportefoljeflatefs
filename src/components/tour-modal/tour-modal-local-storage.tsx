@@ -3,7 +3,7 @@ import { default as TourModal, ModalName, } from './tour-modal';
 import { registrerHarLestEndringslogg } from '../endringslogg/endringslogg-utils';
 
 interface TourModalLocalStorageProps {
-    completed: (e: string) => void;
+    onTourComplete: (e: string) => void;
 }
 
 export default function TourModalLocalStorage(props: TourModalLocalStorageProps) {
@@ -18,9 +18,7 @@ export default function TourModalLocalStorage(props: TourModalLocalStorageProps)
         lagreIkkeVisModal();
         if (isFinalStep) {
             registrerHarLestEndringslogg(modalNavn);
-            if (props.completed) {
-                props.completed(modalNavn);
-            }
+            props.onTourComplete(modalNavn);
         }
         setApenModal(false);
     };
