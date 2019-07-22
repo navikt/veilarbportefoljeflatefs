@@ -13,17 +13,17 @@ interface StateProps {
 }
 
 export function EndringsloggTourWrapper(props: StateProps) {
-    const { harFeature } = props;
+    const {harFeature} = props;
     const visCVInnlegg = harFeature(VIS_MOTER_MED_NAV);
 
     const [innholdsListe, setInnholdsliste] = useState(getInnholdOgSett());
-    if(!visCVInnlegg) {
-        if(innholdsListe.some((el)=> el.id === ModalName.MOTE_FILTER)) {
+    if (!visCVInnlegg) {
+        if (innholdsListe.some((el) => el.id === ModalName.MOTE_FILTER)) {
             setInnholdsliste(innholdsListe.filter((el) => el.id !== ModalName.MOTE_FILTER));
         }
     }
 
-    const oppdaterSettListe = ((name: string)=> setInnholdsliste(settModalEndring(innholdsListe,name)));
+    const oppdaterSettListe = ((name: string) => setInnholdsliste(settModalEndring(innholdsListe, name)));
     const oppdaterLocalstorageOgState = () => {
         innholdsListe.forEach((elem) => {
             oppdaterSettListe(elem.id);
@@ -32,12 +32,12 @@ export function EndringsloggTourWrapper(props: StateProps) {
     };
 
     const visEndringslogg = harFeature(ENDRINGSLOGG);
-    return(
+    return (
         <>
             {visEndringslogg &&
-                <Endringslogg innhold={innholdsListe} oppdaterInnhold={oppdaterLocalstorageOgState} />
+            <Endringslogg innhold={innholdsListe} oppdaterInnhold={oppdaterLocalstorageOgState}/>
             }
-            <TourModalLocalStorage completed={oppdaterSettListe} />
+            <TourModalLocalStorage completed={oppdaterSettListe}/>
         </>
     );
 }

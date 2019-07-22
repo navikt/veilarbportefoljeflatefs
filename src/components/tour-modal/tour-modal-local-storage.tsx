@@ -25,11 +25,11 @@ export default function TourModalLocalStorage(props: TourModalLocalStorageProps)
         setApenModal(false);
     };
 
-    return(
+    return (
         <TourModal
-            open={ openModal }
-            modalName={ modalNavn }
-            onClose={ lukkModal }
+            open={openModal}
+            modalName={modalNavn}
+            onClose={lukkModal}
         />
     );
 }

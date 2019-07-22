@@ -45,7 +45,7 @@ export function hentSetteVersjonerLocalstorage(): string[] {
             setteVersjoner = JSON.parse(tmp);
         } catch (e) {
             // Error handling pga. tidligere versjon som bare lagret en string i LS.
-            if(isString(tmp)) {
+            if (isString(tmp)) {
                 setteVersjoner.push(tmp);
             }
             return setteVersjoner;
@@ -60,7 +60,7 @@ function isString(value: any): boolean {
 
 export function registrerHarLestEndringslogg(versjon: string) {
     const setteVersjoner: string[] = hentSetteVersjonerLocalstorage();
-    if(!setteVersjoner.some((elem)=>elem === versjon)) {
+    if (!setteVersjoner.some((elem) => elem === versjon)) {
         setteVersjoner.push(versjon);
         window.localStorage.setItem(ENDRING_PREFIX, JSON.stringify(setteVersjoner));
     }

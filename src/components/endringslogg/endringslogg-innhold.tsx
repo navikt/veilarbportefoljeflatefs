@@ -10,7 +10,7 @@ interface EndringsloggInleggProps {
     innholdsTekst: string;
     innholdsOverskrift: string;
     nyeNotifikasjoner: boolean;
-    children?: React.ReactNode;
+    children: React.ReactNode;
 }
 
 interface EndringsloggInnholdProps {
@@ -27,17 +27,20 @@ export function LinkTag(props: { linkTekst: string, url: string }) {
 }
 
 export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
-    const content = props.innhold.map((endring, index)=> {
-        return (<EndringsloggInlegg key={index}
-                             dato={endring.dato}
-                             innholdsTekst={endring.tekst}
-                             innholdsOverskrift={endring.tittel}
-                             nyeNotifikasjoner={!endring.sett}
-                             children={endring.children}
-         />);
-        });
+    const content = props.innhold.map((endring, index) => {
+        return (
+            <EndringsloggInlegg
+                key={index}
+                dato={endring.dato}
+                innholdsTekst={endring.tekst}
+                innholdsOverskrift={endring.tittel}
+                nyeNotifikasjoner={!endring.sett}
+                children={endring.children}
+            />
+        );
+    });
 
-    return(
+    return (
         <>
             {content}
         </>

@@ -16,6 +16,7 @@ export interface Step {
     tekst: string;
     bilde: string;
 }
+
 interface TourModalProps {
     modalName: ModalName;
     open: boolean;
@@ -72,9 +73,10 @@ function TourModal(props: TourModalProps) {
                 </div>
             </main>
             <footer className="tour-modal__footer">
-                <ChevronLenke retning={Retning.VENSTRE} tekst="Forrige" hide={hidePrevBtn} onClick={handlePreviousBtnClicked} />
-                <Stegviser antallSteg={steps.length} valgtSteg={stepIndex} />
-                <ChevronLenke retning={Retning.HOYRE} tekst={nextBtnText} onClick={nextBtnHandleClick} />
+                <ChevronLenke retning={Retning.VENSTRE} tekst="Forrige" hide={hidePrevBtn}
+                              onClick={handlePreviousBtnClicked}/>
+                <Stegviser antallSteg={steps.length} valgtSteg={stepIndex}/>
+                <ChevronLenke retning={Retning.HOYRE} tekst={nextBtnText} onClick={nextBtnHandleClick}/>
             </footer>
         </NavFrontendModal>
     );
