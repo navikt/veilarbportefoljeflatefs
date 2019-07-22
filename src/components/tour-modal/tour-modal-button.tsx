@@ -1,4 +1,4 @@
-import { default as React, Dispatch, SetStateAction, useState, useEffect } from 'react';
+import { default as React, useState } from 'react';
 import { default as TourModal, ModalName } from '../tour-modal/tour-modal';
 import { Knapp } from 'nav-frontend-knapper';
 import { logEvent } from '../../utils/frontend-logger';
@@ -22,7 +22,7 @@ export default function TourModalButton(props: ModalStepperProps) {
             <TourModal
                 open={open}
                 modalName={props.modal}
-                onClose={()=>setOpen(false)}
+                onClose={() => setOpen(false)}
             />
         </>
     );

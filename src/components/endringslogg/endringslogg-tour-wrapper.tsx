@@ -1,11 +1,11 @@
 import Endringslogg from './endringslogg';
 import TourModalLocalStorage from '../tour-modal/tour-modal-local-storage';
 import { default as React, useState } from 'react';
-import { settModalEndring, getInnholdOgSett } from './endringslogg-custom';
+import { getInnholdOgSett, settModalEndring } from './endringslogg-custom';
 import { registrerHarLestEndringslogg } from './endringslogg-utils';
 import { connect } from 'react-redux';
 import { sjekkFeature } from '../../ducks/features';
-import { VIS_MOTER_MED_NAV, ENDRINGSLOGG } from '../../konstanter';
+import { ENDRINGSLOGG, VIS_MOTER_MED_NAV } from '../../konstanter';
 import { ModalName } from '../tour-modal/tour-modal';
 
 interface StateProps {

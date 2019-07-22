@@ -1,12 +1,9 @@
-import { default as React, useEffect, useRef, useState, RefObject } from 'react';
+import { default as React, RefObject, useEffect, useRef, useState } from 'react';
 import { ReactComponent as AlarmIcon } from './icon-v3.svg';
 import EndringsloggInnhold from './endringslogg-innhold';
 import TransitionContainer from './transition-container';
 import { logEvent } from '../../utils/frontend-logger';
-import {
-    krypterVeilederident,
-    hexString
-} from './endringslogg-utils';
+import { hexString, krypterVeilederident } from './endringslogg-utils';
 import { useTimer } from '../../hooks/use-timer';
 import { useEventListener } from '../../hooks/use-event-listener';
 import { hentAktivBruker } from '../enhet-context/context-api';
@@ -19,7 +16,7 @@ const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
         feature: 'pre_tilbakemelding_3',
         tidBrukt: metrikker.tidBrukt,
         nyeNotifikasjoner: metrikker.nyeNotifikasjoner,
-    }, { hash: metrikker.hash });
+    }, {hash: metrikker.hash});
 };
 
 interface EndringsloggMetrikker {
@@ -30,15 +27,15 @@ interface EndringsloggMetrikker {
 
 interface EndringsProps {
     innhold: EndringOgSett[];
-    oppdaterInnhold: ()=>void;
+    oppdaterInnhold: () => void;
 }
 
 export default function Endringslogg(props: EndringsProps) {
-    const { start, stopp } = useTimer();
+    const {start, stopp} = useTimer();
 
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const [veilederIdent, setVeilderIdent] = useState('');
-    const overordnetNotifikasjon = props.innhold.some( (element) => !element.sett);
+    const overordnetNotifikasjon = props.innhold.some((element) => !element.sett);
 
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const focusRef = useRef<HTMLDivElement>(null);
@@ -59,9 +56,13 @@ export default function Endringslogg(props: EndringsProps) {
         } else {
             const tidBrukt = stopp();
             krypterVeilederident(veilederIdent)
-                .then((res) => sendMetrikker({ tidBrukt, nyeNotifikasjoner: overordnetNotifikasjon, hash: hexString(res) }))
+                .then((res) => sendMetrikker({
+                    tidBrukt,
+                    nyeNotifikasjoner: overordnetNotifikasjon,
+                    hash: hexString(res)
+                }))
                 .catch((e) => console.log(e)); // tslint:disable-line
-            if(overordnetNotifikasjon) {
+            if (overordnetNotifikasjon) {
                 props.oppdaterInnhold();
             }
         }
@@ -104,10 +105,10 @@ export default function Endringslogg(props: EndringsProps) {
     return (
         <div ref={loggNode} className="endringslogg">
             <EndringsloggKnapp klikk={klikk} open={endringsloggApen} nyeNotifikasjoner={overordnetNotifikasjon}
-                buttonRef={buttonRef} />
+                               buttonRef={buttonRef}/>
             <TransitionContainer visible={endringsloggApen} focusRef={focusRef}>
-                <EndringsloggHeader />
-                <EndringsloggInnhold innhold={props.innhold} />
+                <EndringsloggHeader/>
+                <EndringsloggInnhold innhold={props.innhold}/>
             </TransitionContainer>
         </div>
     );
@@ -123,10 +124,10 @@ interface EndringsloggKnappProps {
 function EndringsloggKnapp(props: EndringsloggKnappProps) {
     return (
         <button ref={props.buttonRef}
-            className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
-            onClick={props.klikk}>
-            <AlarmIcon />
-            {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'} />}
+                className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
+                onClick={props.klikk}>
+            <AlarmIcon/>
+            {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}/>}
         </button>
     );
 }

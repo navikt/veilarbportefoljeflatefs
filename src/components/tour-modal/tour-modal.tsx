@@ -1,11 +1,10 @@
-import { default as React, useState, Dispatch, SetStateAction } from 'react';
+import { default as React, useState } from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import ChevronLenke, { Retning } from '../chevron-lenke/chevron-lenke';
 import Stegviser from '../stegviser/stegviser';
 import { getTour } from './tour-modal-custom/tour-modal-custom';
 import './tour-modal.less';
-import { registrerHarLestEndringslogg } from '../endringslogg/endringslogg-utils';
 
 export enum ModalName {
     LAST_NED_CV = 'TOUR_MODAL-LAST_NED_CV',
