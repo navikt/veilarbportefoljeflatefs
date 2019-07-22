@@ -16,7 +16,7 @@ const stepsFilter: Step[] = [
     {
         tittel: 'Nytt status filter',
         bilde: filter1Bilde,
-        tekst: 'Det er nå lettere å filtrere på brukere som i dag har møter med NAV.'
+        tekst: 'Det er nå lettere å filtrere på brukere som i dag har møter med NAV i Min oversikt.'
     },
     {
         tittel: 'Enklere oversikt',

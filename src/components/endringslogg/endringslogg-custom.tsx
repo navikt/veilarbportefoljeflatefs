@@ -19,7 +19,7 @@ export interface EndringOgSett extends Endring {
 const innhold: Endring[] = [
     {
         dato: '16. JUL. 2019',
-        tittel: 'NAV møte filter',
+        tittel: 'NAV møte filter i Min oversikt',
         tekst: 'Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV.',
         id: ModalName.MOTE_FILTER,
         children: <>
