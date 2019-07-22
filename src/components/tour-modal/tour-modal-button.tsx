@@ -1,6 +1,7 @@
 import { default as React, Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { default as TourModal, ModalName } from '../tour-modal/tour-modal';
 import { Knapp } from 'nav-frontend-knapper';
+import { logEvent } from '../../utils/frontend-logger';
 
 interface ModalStepperProps {
     modal: ModalName;
@@ -14,7 +15,7 @@ export default function TourModalButton(props: ModalStepperProps) {
         <>
             <Knapp className="endringslogg-stepperKnapp" mini={true} onClick={() => {
                 setOpen(true);
-
+                logEvent('portefolje.endringslogg_modal');
             }}>
                 Se hvordan
             </Knapp>
