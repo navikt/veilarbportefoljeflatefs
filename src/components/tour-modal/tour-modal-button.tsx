@@ -5,7 +5,7 @@ import { logEvent } from '../../utils/frontend-logger';
 
 interface ModalStepperProps {
     modal: ModalName;
-    loggApen?: boolean;
+    metrikknavn: string;
 }
 
 export default function TourModalButton(props: ModalStepperProps) {
@@ -15,7 +15,7 @@ export default function TourModalButton(props: ModalStepperProps) {
         <>
             <Knapp className="endringslogg-stepperKnapp" mini={true} onClick={() => {
                 setOpen(true);
-                logEvent('portefolje.endringslogg_modal');
+                logEvent(props.metrikknavn);
             }}>
                 Se hvordan
             </Knapp>

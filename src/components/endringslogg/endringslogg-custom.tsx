@@ -23,7 +23,7 @@ const innhold: Endring[] = [
         tekst: 'Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV.',
         id: ModalName.MOTE_FILTER,
         children: <>
-                    <TourModalButton modal={ModalName.MOTE_FILTER} />
+                    <TourModalButton metrikknavn={'portefolje.endringslogg_modal'} modal={ModalName.MOTE_FILTER} />
                 </>,
     },
     {
@@ -32,7 +32,7 @@ const innhold: Endring[] = [
         tekst: 'Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift.',
         id: '0.1.9',
         children: <>
-                    <TourModalButton modal={ModalName.LAST_NED_CV} />
+                    <TourModalButton metrikknavn={'portefolje.endringslogg_modal'} modal={ModalName.LAST_NED_CV} />
                 </>,
     },
 
