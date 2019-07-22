@@ -25,14 +25,13 @@ function ChevronLenke(props: ChevronLenkeProps) {
                 <span className="chevron-lenke__tekst">{tekst}</span>
             </button>
         );
-    } else {
-        return (
-            <button className={cls(clsPar)} onClick={onClick}>
-                <span className="chevron-lenke__tekst">{tekst}</span>
-                <HoyreChevron/>
-            </button>
-        );
     }
+    return (
+        <button className={cls(clsPar)} onClick={onClick}>
+            <span className="chevron-lenke__tekst">{tekst}</span>
+            <HoyreChevron/>
+        </button>
+    );
 }
 
 export default ChevronLenke;

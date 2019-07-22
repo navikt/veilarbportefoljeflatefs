@@ -14,11 +14,11 @@ interface StateProps {
 
 export function EndringsloggTourWrapper(props: StateProps) {
     const {harFeature} = props;
-    const visCVInnlegg = harFeature(VIS_MOTER_MED_NAV);
+    const visMoteMedNAV = harFeature(VIS_MOTER_MED_NAV);
 
     const [innholdsListe, setInnholdsliste] = useState(getInnholdOgSett());
-    if (!visCVInnlegg) {
-        if (innholdsListe.some((el) => el.id === ModalName.MOTE_FILTER)) {
+    if (!visMoteMedNAV) {
+        if (innholdsListe.find((el) => el.id === ModalName.MOTE_FILTER)) {
             setInnholdsliste(innholdsListe.filter((el) => el.id !== ModalName.MOTE_FILTER));
         }
     }
@@ -37,7 +37,7 @@ export function EndringsloggTourWrapper(props: StateProps) {
             {visEndringslogg &&
             <Endringslogg innhold={innholdsListe} oppdaterInnhold={oppdaterLocalstorageOgState}/>
             }
-            <TourModalLocalStorage completed={oppdaterSettListe}/>
+            <TourModalLocalStorage onTourComplete={oppdaterSettListe}/>
         </>
     );
 }

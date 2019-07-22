@@ -22,18 +22,24 @@ const innhold: Endring[] = [
         tittel: 'NAV møte filter',
         tekst: 'Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV.',
         id: ModalName.MOTE_FILTER,
-        children: <>
-            <TourModalButton metrikknavn={'portefolje.endringslogg_modal'} modal={ModalName.MOTE_FILTER}/>
-        </>,
+        children:
+            <TourModalButton
+                metrikknavn={'portefolje.endringslogg_modal'}
+                modal={ModalName.MOTE_FILTER}
+            />
+        ,
     },
     {
         dato: '18. JUN. 2019',
         tittel: 'Laste ned og skrive ut CV',
         tekst: 'Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift.',
         id: '0.1.9',
-        children: <>
-            <TourModalButton metrikknavn={'portefolje.endringslogg_modal'} modal={ModalName.LAST_NED_CV}/>
-        </>,
+        children:
+            <TourModalButton
+                metrikknavn={'portefolje.endringslogg_modal'}
+                modal={ModalName.LAST_NED_CV}
+            />
+        ,
     },
 
     {
@@ -47,11 +53,12 @@ const innhold: Endring[] = [
         tittel: 'Manuell registrering',
         tekst: 'Du kan nå registrere brukere manuelt i Veilederverktøy (tannhjulet).  Arena-oppgaven «Motta person» skal ikke lenger benyttes.',
         id: '0.1.9',
-        children: <>
+        children:
             <LinkTag
                 url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
-                linkTekst="Nyhetssak på Navet"/>
-        </>,
+                linkTekst="Nyhetssak på Navet"
+            />
+        ,
 
     },
 ];
