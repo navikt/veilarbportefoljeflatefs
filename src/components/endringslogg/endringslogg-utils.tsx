@@ -12,14 +12,14 @@ export function hexString(buffer) {
     return hexCodes.join('');
 }
 
-export function krypterVeilederident(veileder: string, versjon: string): Promise<ArrayBuffer> {
-    const stringToBeEncoded = `${veileder} - ${versjon}`;
+export function krypterVeilederident(veileder: string): Promise<ArrayBuffer> {
+    const stringToBeEncoded = `${veileder} - 0.1.9`;
     const utf8Arr: Uint8Array = encodeString(stringToBeEncoded);
 
     return getCrypto().subtle.digest('SHA-256', utf8Arr);
 }
 
-function encodeString(stringToBeEncoded: string) {
+function encodeString(stringToBeEncoded: string): Uint8Array {
     let data;
     // @ts-ignore
     if (typeof TextEncoder === 'undefined') {
@@ -37,11 +37,31 @@ function encodeString(stringToBeEncoded: string) {
 
 const ENDRING_PREFIX = 'Endringslogg';
 
-export function sjekkHarSettEndringslogg(versjon: string) {
-    const senesteVersjonSett = window.localStorage.getItem(ENDRING_PREFIX) || false;
-    return senesteVersjonSett && senesteVersjonSett === versjon;
+export function hentSetteVersjonerLocalstorage(): string[] {
+    let setteVersjoner: string[] = [];
+    const tmp = localStorage.getItem(ENDRING_PREFIX);
+    if (tmp) {
+        try {
+            setteVersjoner = JSON.parse(tmp);
+        } catch (e) {
+            // Error handling pga. tidligere versjon som bare lagret en string i LS.
+            if (isString(tmp)) {
+                setteVersjoner.push(tmp);
+            }
+            return setteVersjoner;
+        }
+    }
+    return setteVersjoner;
 }
 
-export function harLestEndringslogg(versjon) {
-    window.localStorage.setItem(ENDRING_PREFIX, versjon);
+function isString(value: any): boolean {
+    return typeof value === 'string' || value instanceof String;
+}
+
+export function registrerHarLestEndringslogg(versjon: string) {
+    const setteVersjoner: string[] = hentSetteVersjonerLocalstorage();
+    if (!setteVersjoner.some((elem) => elem === versjon)) {
+        setteVersjoner.push(versjon);
+        window.localStorage.setItem(ENDRING_PREFIX, JSON.stringify(setteVersjoner));
+    }
 }
