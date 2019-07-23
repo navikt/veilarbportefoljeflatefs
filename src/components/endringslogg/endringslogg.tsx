@@ -108,7 +108,9 @@ export default function Endringslogg(props: EndringsProps) {
                                buttonRef={buttonRef}/>
             <TransitionContainer visible={endringsloggApen} focusRef={focusRef}>
                 <EndringsloggHeader/>
+                <div className={'innhold-container'}>
                 <EndringsloggInnhold innhold={props.innhold}/>
+                </div>
             </TransitionContainer>
         </div>
     );
