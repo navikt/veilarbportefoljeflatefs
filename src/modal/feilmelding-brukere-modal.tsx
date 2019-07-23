@@ -1,16 +1,13 @@
 import * as React from 'react';
 import Modal from 'nav-frontend-modal';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { IntlMessage } from '../utils/intl-utils';
-import { injectIntl, InjectedIntl } from 'react-intl';
 
 interface FeilmeldingBrukereModalProps {
     isOpen?: boolean;
     fnr: string[];
     onClose: () => void;
-    tittelTekstID: string;
-    infotekstTekstID: string;
-    intl: InjectedIntl;
+    tittelTekst: string;
+    infotekstTekst: string;
 }
 
 interface FeilmeldingBrukereModalState {
@@ -51,11 +48,11 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
     }
 
     render() {
-        const { tittelTekstID, infotekstTekstID, fnr, intl } = this.props;
+        const { tittelTekst, infotekstTekst, fnr } = this.props;
 
         return (
             <Modal
-                contentLabel={intl.formatMessage({ id: 'modal.feilmelding.brukere' })}
+                contentLabel="Modal tilordning feilet"
                 isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
                 closeButton={false}
@@ -65,14 +62,14 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
                         <div className="feiledbrukeremelding__ikon blokk-xxs" />
                     </div>
                     <Undertittel tag="h1" className="blokk-xxs">
-                        <IntlMessage id={tittelTekstID} />
+                        {tittelTekst}
                     </Undertittel>
                     <Normaltekst className="blokk-s">
-                        <IntlMessage id={infotekstTekstID} />
+                        {infotekstTekst}
                     </Normaltekst>
                     <FnrList feiledeTilordninger={fnr} />
                     <button className="knapp knapp--hoved" onClick={this.lukkModal}>
-                        <IntlMessage id="modal.tilordning.feilet.knapptekst" />
+                       Ok
                     </button>
                 </div>
             </Modal>
@@ -80,4 +77,4 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
     }
 }
 
-export default injectIntl(FeilmeldingBrukereModal);
+export default FeilmeldingBrukereModal;

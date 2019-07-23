@@ -1,1 +1,0 @@
-Viser {fraIndex}-{tilIndex} av totalt {antallTotalt} veiledere

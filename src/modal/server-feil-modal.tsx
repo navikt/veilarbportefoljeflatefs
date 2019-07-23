@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Modal from 'nav-frontend-modal';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { IntlMessage } from '../utils/intl-utils';
 
 interface ServerFeilModalProps {
     isOpen?: boolean;
@@ -9,14 +8,14 @@ interface ServerFeilModalProps {
 }
 
 interface ServerFeilModalState {
-    isOpen?: boolean;
+    isOpen: boolean;
 }
 
 class ServerFeilModal extends React.Component<ServerFeilModalProps, ServerFeilModalState> {
     constructor(props) {
         super(props);
 
-        this.state = { isOpen: this.props.isOpen };
+        this.state = { isOpen: this.props.isOpen || false };
         this.lukkModal = this.lukkModal.bind(this);
     }
 
@@ -37,7 +36,7 @@ class ServerFeilModal extends React.Component<ServerFeilModalProps, ServerFeilMo
         return (
             <Modal
                 contentLabel="Fikk feil fra server"
-                isOpen={this.state.isOpen === true}
+                isOpen={this.state.isOpen}
                 onRequestClose={this.lukkModal}
                 closeButton={false}
             >
@@ -46,13 +45,13 @@ class ServerFeilModal extends React.Component<ServerFeilModalProps, ServerFeilMo
                         <div className="feiledbrukeremelding__ikon blokk-xxs" />
                     </div>
                     <Undertittel tag="h1" className="blokk-xxs">
-                        <IntlMessage id="modal.tittel" />
+                        Handlingen kan ikke utføres
                     </Undertittel>
                     <Normaltekst className="blokk-s">
-                        <IntlMessage id="modal.server.feil.infotekst" />
+                        Noe gikk feil, prøv igjen senere.
                     </Normaltekst>
                     <button className="knapp knapp--hoved" onClick={this.lukkModal}>
-                        <IntlMessage id="modal.knapptekst" />
+                        Ok
                     </button>
                 </div>
             </Modal>

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import { BrukerModell } from '../../model-interfaces';
-import { FormattedMessage } from 'react-intl';
 import { setFraBrukerIUrl } from '../../utils/url-utils';
 
 const settSammenNavn = (bruker) => {
@@ -33,13 +32,7 @@ interface BrukerNavnProps {
 }
 
 function BrukerNavn({ className, bruker, enhetId }: BrukerNavnProps) {
-    return (
-        <FormattedMessage id="listevisning.bruker.i.arbeidsliste">
-            {(label) => (
-                    brukerNavn(className,bruker, enhetId)
-            )}
-        </FormattedMessage>
-    );
+    return brukerNavn(className,bruker, enhetId);
 }
 
 export default BrukerNavn;

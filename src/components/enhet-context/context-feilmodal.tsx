@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
@@ -22,16 +21,17 @@ class ContextFeilmodal extends React.Component<ContextFeilmodalProps> {
             >
                 <div className="brukercontext__modal">
                     <Innholdstittel tag="h1" className="blokk-s">
-                        <FormattedMessage id="nyenhet.feilmodal.overskrift" />
+                        Bruker i kontekst feilet
                     </Innholdstittel>
                     <div className="modal-content modal-test">
                         <AlertStripeNavAnsatt className="blokk-s">
-                            <FormattedMessage id="nyenhet.kontekstholder.tilkobling.feilet" />
+                            Kommunikasjon med tjenesten for bruker i kontekst feilet.
+                            Dette betyr at det er fare for at du kan ha forskjellige brukere i forskjellige flater/vinduer.
                         </AlertStripeNavAnsatt>
                     </div>
                     <div className="modal-footer" >
                         <Hovedknapp onClick={this.props.onClose}>
-                            <FormattedMessage id="nyenhet.feilmodal.bekreft" />
+                            Ok
                         </Hovedknapp>
                     </div>
                 </div>

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import Etikett from './etikett';
 import { BrukerModell, EtikettType, VurderingsBehov } from '../../model-interfaces';
 
@@ -15,7 +14,7 @@ function Etiketter({ className, bruker }: EtiketterProps) {
                 type={EtikettType.SIKKERHETSTILTAK}
                 skalVises={bruker.sikkerhetstiltak.length > 0}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.sikkerhetstiltak"/>
+                <span>Sikkerhetstiltak</span>
             </Etikett>
             <Etikett
                 type={EtikettType.DISKRESJONSKODE}
@@ -27,31 +26,31 @@ function Etiketter({ className, bruker }: EtiketterProps) {
                 type={EtikettType.EGEN_ANSATT}
                 skalVises={bruker.egenAnsatt}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.egen.ansatt"/>
+                <span>Egen ansatt</span>
             </Etikett>
             <Etikett
                 type={EtikettType.DOED}
                 skalVises={bruker.erDoed}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.dod"/>
+                <span>Død</span>
             </Etikett>
             <Etikett
                 type={EtikettType.IKKE_VURDERT}
                 skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.ikke_vurdert"/>
+                <span>Trenger vurdering</span>
             </Etikett>
             <Etikett
                 type={EtikettType.BEHOV_AEV}
                 skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.behov_aev"/>
+                <span>Behov for AEV</span>
             </Etikett>
             <Etikett
                 type={EtikettType.ER_SYKMELDT_MED_ARBEIDSGIVER}
                 skalVises={bruker.erSykmeldtMedArbeidsgiver}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.er_sykmeldt_med_arbeidsgiver"/>
+                <span>Sykmeldt</span>
             </Etikett>
 
         </span>

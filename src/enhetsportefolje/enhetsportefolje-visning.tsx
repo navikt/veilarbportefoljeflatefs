@@ -17,7 +17,6 @@ import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
 import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmelding-brukere';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
-import { InjectedIntlProps } from 'react-intl';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 
 function antallFilter(filtervalg) {
@@ -185,8 +184,8 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
-                        tittelTekstID="modal.tilordning.feilet.tittel"
-                        infotekstTekstID="modal.tilordning.feilet.infotekst"
+                        tittelTekst="Handlingen kan ikke utføres"
+                        infotekstTekst="Tilordning av veileder til følgende brukere feilet:"
                     />
                     <ServerFeilModal
                         isOpen={serverfeilModalSkalVises}

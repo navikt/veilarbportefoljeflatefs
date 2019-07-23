@@ -23,8 +23,6 @@ export interface Statustall {
     nyeBrukereForVeileder: number;
 }
 
-export interface StatustallData {data: Statustall;}
-
 export interface StatustallState {
     status: string;
     data: Statustall;

@@ -70,7 +70,6 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
 
     settFokus(element) { // eslint-disable-line class-methods-use-this
         if (element !== null) {
-            console.log('elementer', element);
             const elementer = element.querySelector('button, a, input, select');
             elementer.focus();
         }

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import ArbeidslisteModalRediger from '../modal/arbeidsliste-modal-rediger';
 import { UndertekstBold } from 'nav-frontend-typografi';
 import { BrukerModell } from '../model-interfaces';

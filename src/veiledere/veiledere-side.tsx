@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
@@ -36,7 +35,7 @@ interface DispatchProps {
     hentStatusTall: (enhet: string) => void;
 }
 
-type VeiledereSideProps = StateProps & DispatchProps & InjectedIntlProps & RouterProps;
+type VeiledereSideProps = StateProps & DispatchProps & RouterProps;
 
 class VeiledereSide extends React.Component<VeiledereSideProps> {
     componentWillMount() {
@@ -59,23 +58,25 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
     }
 
     render() {
-        const { veiledere, portefoljestorrelser, intl, filtervalg, statustall } = this.props;
+        const { veiledere, portefoljestorrelser, filtervalg, statustall } = this.props;
         return (
-            <DocumentTitle title={intl.formatMessage({ id: 'lenker.veiledere.oversikt' })}>
+            <DocumentTitle title="Veilederoversikt">
                 <div className="veiledere-side">
                     <Lenker />
                     <Innholdslaster avhengigheter={[ statustall, veiledere, portefoljestorrelser]}>
                     <div id="oversikt-sideinnhold" role="tabpanel">
                         <p className="typo-infotekst begrensetbredde blokk-l">
-                            <FormattedMessage id="enhet.ingresstekst.veilederoversikt" />
+                            Her får du oversikt over alle veiledere som er hører til den enheten du er logget inn på.
+                            Du kan se hvor mange brukere den enkelte veileder har, du kan søke opp veiledere,
+                            og du kan gå inn på én veileder for å se denne veilederens oversikt.
                         </p>
                         <div className="veiledere-side--cols">
                             <div className="veiledere-side--filter-col">
                                 <PanelBase className="blokk-xxxs">
                                     <Undertittel>
-                                        <FormattedMessage id={'filtrering-sok-veileder-tittel'}/>
+                                        Søk veileder
                                     </Undertittel>
-                                    <FiltreringVeiledere intl={intl} />
+                                    <FiltreringVeiledere/>
                                 </PanelBase>
                             </div>
                             <div className="veiledere-side--liste-col">
@@ -88,10 +89,7 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
                                         filtergruppe="veiledere"
                                     />
                                     <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
-                                        <FormattedMessage
-                                            id="enhet.veiledere.tittel"
-                                            values={{ antallVeiledere: veiledere.data.veilederListe.length }}
-                                        />
+                                        {`Totalt ${veiledere.data.veilederListe.length } veiledere`}
                                     </Undertittel>
                                     <VeiledersideVisning />
                                     <TomPortefoljeModal />
@@ -119,4 +117,4 @@ const mapDispatchToProps = (dispatch) => ({
     hentStatusTall: (enhet) => dispatch(fetchStatusTall(enhet))
 });
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(VeiledereSide));
+export default connect(mapStateToProps, mapDispatchToProps)(VeiledereSide);

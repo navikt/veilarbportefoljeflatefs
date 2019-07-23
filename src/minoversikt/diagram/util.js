@@ -51,14 +51,45 @@ export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata, 
     return ukeInndeling(antallBrukere, sorterteDiagramdata);
 }
 
+const diagramHeaderValg = {
+    aap_maxtid: 'AAP Maxtid',
+    aap: 'AAP',
+    aap_unntak : 'AAP med unntak',
+    dagpenger_med_permittering_fiskeindustri: 'Dagpenger v/perm fiskeindustri',
+    dagpenger_med_permittering: 'Dagpenger ved permittering',
+    dagpenger: 'Dagpenger',
+    lonnsgarantimidler_dagpenger : 'Lønnsgarantimidler dagpenger',
+    ordinare_dagpenger: 'Ordinære dagpenger',
+    tiltakspenger: 'Tiltakspenger',
+};
+
+const diagramLegendValg = {
+    'aap.1': 'Brukere med AAP',
+    'aap.2': 'Brukere med AAP som mister ytelse i gjeldende mnd',
+    'aap_maxtid.1': 'Brukere med AAP innenfor maxtid',
+    'aap_maxtid.2': 'Brukere med AAP innenfor maxtid som har brukt opp rettighet i gjeldende periode',
+    'aap_unntak.1': 'Brukere med AAP unntak',
+    'aap_unntak.2': 'Brukere med AAP unntak som har brukt opp rettighet i gjeldende periode',
+    'dagpenger.1': 'Brukere med dagpenger',
+    'dagpenger.2': 'Brukere med dagpenger som mister ytelse i gjeldende periode ',
+    'dagpenger_med_permittering.1': 'Brukere med dagpenger permittering',
+    'dagpenger_med_permittering.2': 'Brukere med dagpenger permittering som mister ytelse i gjeldende periode',
+    'dagpenger_med_permittering_fiskeindustri.1': 'Brukere med dagpenger v/perm fiskeindustri',
+    'dagpenger_med_permittering_fiskeindustri.2': 'Brukere med dagpenger v/perm fiskeindustri som mister ytelse i gjeldende mnd',
+    'lonnsgarantimidler_dagpenger.1': 'Brukere med lønnsgarantimidler dagpenger',
+    'lonnsgarantimidler_dagpenger.2': 'Brukere med lønnsgarantimidler dagpenger som mister ytelse i gjeldende mnd',
+    'ordinare_dagpenger.1': 'Brukere med ordinære dagpenger',
+    'ordinare_dagpenger.2': 'Brukere med ordinære dagpenger som mister ytelse i gjeldende periode',
+    'tiltakspenger.1': 'Brukere med tiltakspenger',
+    'tiltakspenger.2': 'Brukere med tiltakspenger som mister ytelse i gjeldende mnd',
+};
+
+
 export function ledetekster(filtreringvalg) {
     const valg = filtreringvalg.toLowerCase();
     return {
-        headertekst: `minoversikt.diagram.header.${valg}`,
-        legendtekst: [
-            `minoversikt.diagram.legend.${valg}.1`,
-            `minoversikt.diagram.legend.${valg}.2`
-        ]
+        headertekst: diagramHeaderValg[valg],
+        legendtekst: [diagramLegendValg[`${valg}.1`], diagramLegendValg[`${valg}.2`]]
     };
 }
 

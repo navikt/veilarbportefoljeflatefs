@@ -1,14 +1,15 @@
-import BarInput from "./barinput";
+import React, { ChangeEventHandler } from 'react';
+import BarInput from './barinput';
 import {
     ferdigfilterListe,
     mapFilternavnTilFilterValue
-} from "../../filtrering/filter-konstanter";
-import React from "react";
+} from '../../filtrering/filter-konstanter';
+
 
 interface BarinputRadioProps {
     filterNavn: string,
     max: number,
-    handleChange: (e: any)=> void;
+    handleChange: ChangeEventHandler<HTMLInputElement>;
     checked: boolean;
     antall: number
 }

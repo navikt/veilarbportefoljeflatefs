@@ -132,8 +132,8 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
             </div>
             <div className="col-sm-12">
                 <OverskriftMedHjelpeTekst
-                    overskriftId="filtrering.filter.tittel.aktivitet"
-                    hjelpetekstId="hjelpetekst.aktivitetsfilter"
+                    overskriftTekst="Aktivitet"
+                    hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
                 />
                 <Dropdown name="Aktivitet" className="dropdown--140bredde-responsive">
                     <AktivitetFilterform

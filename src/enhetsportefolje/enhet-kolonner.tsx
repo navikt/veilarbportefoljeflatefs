@@ -2,7 +2,6 @@ import * as React from 'react';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/ukekolonne';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 import {
     I_AVTALT_AKTIVITET,
     UTLOPTE_AKTIVITETER,
@@ -27,9 +26,7 @@ interface EnhetKolonnerProps {
     brukersVeileder?: VeilederModell;
 }
 
-type Props = EnhetKolonnerProps & InjectedIntlProps;
-
-function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder, intl}: Props) {
+function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
     const ytelsevalgIntl = ytelsevalg();
     const { ytelse } = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
@@ -119,4 +116,4 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
     );
 }
 
-export default injectIntl(EnhetKolonner);
+export default EnhetKolonner;

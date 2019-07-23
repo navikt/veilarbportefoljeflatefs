@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { ChangeEvent } from 'react';
 import Dropdown from '../../dropdown/dropdown';
 import { Checkbox } from 'nav-frontend-skjema';
-import { FormattedMessage } from 'react-intl';
 import { avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ } from '../../../ducks/ui/listevisning';
 import { alternativerConfig } from './listevisning-utils';
 import { selectMuligeAlternativer, selectValgteAlternativer } from '../../../ducks/ui/listevisning-selectors';
@@ -26,7 +25,7 @@ const ListevisningRad = (props: Props) => {
     return (
         <li>
             <Checkbox
-                label={<FormattedMessage id={alternativ.tekstid}/>}
+                label={alternativ.tekstlabel}/>}
                 value={props.kolonne.toString()}
                 checked={props.valgt}
                 disabled={props.disabled || alternativ.checkboxDisabled}

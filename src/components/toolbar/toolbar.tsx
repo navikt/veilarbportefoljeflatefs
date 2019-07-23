@@ -16,12 +16,12 @@ export enum ToolbarPosisjon {
 
 interface ToolbarProps {
     filtergruppe: ListevisningType;
-    onPaginering: (fra?: number, antall?: number) => void;
+    onPaginering?: (fra?: number, antall?: number) => void;
     sokVeilederSkalVises?: boolean;
     visesAnnenVeiledersPortefolje?: boolean;
     children?: React.ReactNode;
     gjeldendeVeileder?: VeilederModell;
-    visningsmodus: string;
+    visningsmodus?: string;
     antallTotalt: number;
     posisjon?: ToolbarPosisjon;
 }

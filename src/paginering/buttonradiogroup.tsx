@@ -1,20 +1,24 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { guid } from 'nav-frontend-js-utils';
-import { FormattedMessage } from 'react-intl';
 import { settVisningsmodus } from '../ducks/paginering';
-import { DIAGRAMVISNING, TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
+import { DIAGRAMVISNING, MinoversiktVisning, TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 
-class ButtonRadiogroup extends Component {
+interface ButtonRadiogroupProps {
+    visningsmodus: MinoversiktVisning;
+    endreVisningsmodus: (visning: MinoversiktVisning)=> void;
+}
+
+class ButtonRadiogroup extends Component<ButtonRadiogroupProps> {
+     guid: string;
+
     constructor(props) {
         super(props);
-
         this.guid = guid();
     }
 
     render() {
         const { visningsmodus, endreVisningsmodus } = this.props;
-
         return (
             <div className="visningsgruppe">
                 <div className="visningsgruppe__knapp">
@@ -29,7 +33,7 @@ class ButtonRadiogroup extends Component {
                         className="diagramvisning__radio__input"
                     />
                     <label htmlFor={`diagramvisning-${this.guid}`} className="typo-undertekst">
-                        <FormattedMessage id="paginering.vis.som.diagram" />
+                        Vis som diagram
                     </label>
                 </div>
                 <div className="visningsgruppe__knapp">
@@ -44,17 +48,13 @@ class ButtonRadiogroup extends Component {
                         className="diagramvisning__radio__input"
                     />
                     <label htmlFor={`tabellvisning-${this.guid}`} className="typo-undertekst">
-                        <FormattedMessage id="paginering.vis.som.tabell" />
+                        Vis som tabell
                     </label>
                 </div>
             </div>
         );
     }
 }
-
-ButtonRadiogroup.defaultProps = {
-    visningsmodus: TABELLVISNING
-};
 
 const mapStateToProps = (state) => ({
     visningsmodus: state.paginering.visningsmodus
@@ -65,10 +65,5 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(settVisningsmodus(modus));
     }
 });
-
-ButtonRadiogroup.propTypes = {
-    visningsmodus: PT.string.isRequired,
-    endreVisningsmodus: PT.func.isRequired
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ButtonRadiogroup);

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { ReactNode } from 'react';
 import { connect } from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { FormattedMessage } from 'react-intl';
 import './veileder-checkbox-liste.less';
 import { Checkbox } from 'nav-frontend-skjema';
 import { endreFiltervalg } from '../../ducks/filtrering';
@@ -38,13 +37,13 @@ type AllProps = VeilederCheckboxListeProps & StateProps & DispatchProps;
 
 const LukkeKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
     <button className="knapp knapp--mini checkbox-liste__valg-knapp" type="button" onClick={props.onClick}>
-        <FormattedMessage id="components.filterform.button.lukk"/>
+        Lukk
     </button>
 );
 
 const SubmitKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
     <button className="knapp knapp--mini knapp--hoved checkbox-liste__valg-knapp" type="button" onClick={props.onClick}>
-        <FormattedMessage id="components.filterform.button.velg"/>
+       Velg
     </button>
 );
 
@@ -175,7 +174,7 @@ class VeilederCheckboxListe extends React.Component<AllProps, VeilederCheckboxLi
             return (
                 <div className="checkbox-liste__valg-footer">
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
-                        <FormattedMessage id="components.filterform.ingen-treff" />
+                        Ingen veiledere funnet
                     </AlertStripe>
                 </div>
             );

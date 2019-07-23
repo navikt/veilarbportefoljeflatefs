@@ -3,7 +3,6 @@ import { lagConfig } from './filter-konstanter';
 import { ReactComponent as FilterIkon } from './filter-ikon.svg';
 import { MouseEvent } from 'react';
 import classNames from 'classnames';
-import { InjectedIntl } from 'react-intl';
 
 interface FiltreringLabelProps {
     label: string | { label: string };
@@ -11,15 +10,16 @@ interface FiltreringLabelProps {
     markert?: boolean;
     harMuligMenIkkeValgtKolonne?: boolean;
     skalHaKryssIkon?: boolean;
-    intl: InjectedIntl;
 }
 
-function FiltreringLabel({label, slettFilter, harMuligMenIkkeValgtKolonne = false, markert = false, skalHaKryssIkon = true, intl}: FiltreringLabelProps) {
+function FiltreringLabel({label, slettFilter, harMuligMenIkkeValgtKolonne = false, markert = false, skalHaKryssIkon = true}: FiltreringLabelProps) {
     const className = classNames('filtreringlabel__label', {'filtreringlabel-slett-filter': !skalHaKryssIkon});
+    const arialLabel = skalHaKryssIkon ? 'Slett filter':' Slett alle filtervalg';
+    const buttonClassnames = classNames('filtreringlabel', 'typo-undertekst', {'filtreringlabel--markert': markert}, {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne});
     return (
         <button
-            aria-label={skalHaKryssIkon ? intl.formatMessage({id:'filtrering.label.slett-filter'}) : intl.formatMessage({id:'filtrering.label.slett-alle-filter'})}
-            className={classNames('filtreringlabel', 'typo-undertekst', {'filtreringlabel--markert': markert}, {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne})}
+            aria-label={arialLabel}
+            className={buttonClassnames}
             onClick={slettFilter}>
             <span className={className}>{lagConfig(label).label}</span>
             {skalHaKryssIkon && <FilterIkon/>}

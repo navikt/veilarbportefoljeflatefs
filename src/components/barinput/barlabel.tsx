@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Element } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import {tekstAntallBrukere} from "../../utils/tekst-utils";
 
 function calcWidth(antall: number, max: number): number {
     if (antall === 0) {
@@ -32,10 +32,7 @@ function Barlabel({ htmlFor, labelTekst, antall, max, className}: BarlabelProps)
             <div className="barlabel__barwrapper">
                 {htmlFor === 'minArbeidsliste' && <div className="arbeidsliste">
                 <span className="text-hide" aria-live="polite" aria-atomic="true">
-                    <FormattedMessage
-                        id="filtrering.status.arbeidsliste.viser.antall.brukere"
-                        values={{antall}}
-                    />
+                    {`Det er ${tekstAntallBrukere(antall)} i Min arbeidsliste`}
                 </span>
                     <Element className="barlabel__antall" aria-hidden="true">{antall}</Element>
                 </div>

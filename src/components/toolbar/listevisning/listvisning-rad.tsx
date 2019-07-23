@@ -1,6 +1,5 @@
 import { Kolonne } from '../../../ducks/ui/listevisning';
 import { alternativerConfig } from './listevisning-utils';
-import { FormattedMessage } from 'react-intl';
 import { ChangeEvent } from 'react';
 import * as React from 'react';
 import { Checkbox } from 'nav-frontend-skjema';
@@ -22,7 +21,7 @@ function ListevisningRad(props: ListevisningRadProps) {
     return (
         <li>
             <Checkbox
-                label={<FormattedMessage id={alternativ.tekstid}/>}
+                label={alternativ.tekstlabel}
                 value={props.kolonne.toString()}
                 checked={props.valgt}
                 disabled={props.disabled || alternativ.checkboxDisabled}

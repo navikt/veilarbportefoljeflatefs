@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker, aapRettighetsperiode } from '../utils/utils';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
@@ -23,9 +22,7 @@ interface MinOversiktKolonnerProps {
     enhetId: string;
 }
 
-type Props = MinOversiktKolonnerProps & InjectedIntlProps;
-
-function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, intl}: Props) {
+function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
     const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering()).includes(ytelse);
@@ -150,4 +147,4 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     );
 }
 
-export default injectIntl(MinoversiktDatokolonner);
+export default MinoversiktDatokolonner;

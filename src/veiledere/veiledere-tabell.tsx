@@ -1,12 +1,25 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { settValgtVeileder } from '../ducks/portefolje';
 import { settSide } from '../ducks/ui/side';
 
-class VeilederTabell extends Component {
+interface VeiledereTabellProps {
+    innloggetVeileder: string;
+    settVeileder: (veileder: string) => void;
+    oppdaterSide: (side: string) => void;
+    veiledere: any;
+    currentSortering: {
+        property: string;
+        direction: string;
+    };
+    sorterPaaEtternavn: () => void;
+    sorterPaaPortefoljestorrelse: () => void;
+}
+
+class VeilederTabell extends Component<VeiledereTabellProps> {
+
     settOgNavigerTilValgtVeileder(veileder) {
         if (this.props.innloggetVeileder === veileder.ident) {
             this.props.oppdaterSide('veilederoversikt');
@@ -43,9 +56,9 @@ class VeilederTabell extends Component {
                     <thead className="extra-head">
                         <tr>
                             <th>
-                                <FormattedMessage id="enhet.veiledere.tabell.veileder" />
+                                Veileder
                             </th>
-                            <th colSpan="3" />
+                            <th colSpan={3} />
                         </tr>
                     </thead>
                     <thead className="tabell__subhead">
@@ -59,12 +72,12 @@ class VeilederTabell extends Component {
                                     aria-label={sorterEtternavn ?
                                     currentSortering.direction : 'inaktiv'}
                                 >
-                                    <FormattedMessage id="enhet.veiledere.tabell.etternavn" />
+                                    Etternavn
                                 </button>
-                                <FormattedMessage id="enhet.veiledere.tabell.fornavn" />
+                                , Fornavn
                             </th>
                             <th scope="col">
-                                <FormattedMessage id="enhet.veiledere.tabell.ident" />
+                                NAV-ident
                             </th>
                             <th className="tabell-element-center" scope="col">
                                 <button
@@ -77,7 +90,7 @@ class VeilederTabell extends Component {
                                     aria-label={sorterPaaPortefoljeStr ?
                                     currentSortering.direction : 'inaktiv'}
                                 >
-                                    <FormattedMessage id="enhet.veiledere.tabell.brukere" />
+                                    Antall bruker
                                 </button>
                             </th>
                             <th />
@@ -91,21 +104,6 @@ class VeilederTabell extends Component {
         );
     }
 }
-/*
-VeilederTabell.propTypes = {
-    innloggetVeileder: PT.string,
-    oppdaterSide: PT.func,
-    veiledere: PT.arrayOf(veilederShape).isRequired,
-    settVeileder: PT.func.isRequired,
-    sorterPaaEtternavn: PT.func.isRequired,
-    veilederListe: PT.arrayOf(veilederShape).isRequired,
-    sorterPaaPortefoljestorrelse: PT.func.isRequired,
-    currentSortering: PT.shape({
-        property: PT.string,
-        direction: PT.string
-    }).isRequired
-};
-*/
 
 const mapStateToProps = (state) => ({
     innloggetVeileder: state.enheter.ident,

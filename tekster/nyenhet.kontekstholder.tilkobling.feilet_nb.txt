@@ -1,1 +1,0 @@
-Kommunikasjon med tjenesten for bruker i kontekst feilet. Dette betyr at det er fare for at du kan ha forskjellige brukere i forskjellige flater/vinduer.

@@ -1,5 +1,0 @@
-Det er { antall, plural,
- =0{ Ingen brukere }
- =1{ # bruker}
- other{ # brukere }
-} i Min arbeidsliste.

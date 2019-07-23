@@ -29,7 +29,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
             'ferdigfilterListe', ferdigFilterListe, props.filtergruppe, props.veileder));
     }
 
-    function handleCheckboxChange(e) {
+    function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
         const nyeFerdigfilterListe = e.target.checked
             ? leggTilFerdigFilter(ferdigfilterListe!, e.target.value)
             : fjernFerdigfilter(ferdigfilterListe!, e.target.value);
@@ -37,9 +37,9 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     }
 
-    function handleRadioButtonChange(e) {
+    function handleRadioButtonChange(e: React.ChangeEvent<HTMLInputElement>) {
         const nyeFerdigfilterListe = leggTilFerdigFilter(ferdigfilterListe!, e.target.value);
-        dispatchFiltreringStatusChanged(nyeFerdigfilterListe, props.veileder, props.filtergruppe);
+        dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
     }
 
     return (

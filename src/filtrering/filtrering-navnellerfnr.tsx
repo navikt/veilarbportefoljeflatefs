@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { FiltervalgModell } from '../model-interfaces';
 import './filtrering-navnellerfnr.less';
@@ -33,7 +33,7 @@ function FiltreringNavnellerfnr(props: FiltreringNavnEllerFnrProps) {
             <Input
                 label=""
                 placeholder="Søk etter navn eller fødselsnummer"
-                onChange={(e)=> setNavnEllerFnrQuery(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>)=> setNavnEllerFnrQuery(e.target.value)}
                 value={navnEllerFnrQuery}
             />
         </div>

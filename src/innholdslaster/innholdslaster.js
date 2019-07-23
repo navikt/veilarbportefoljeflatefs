@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { injectIntl } from 'react-intl';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 // import Feilmelding from './../feilmelding/feilmelding'; Legg til feilmeldingskomponent
 import Laster from './innholdslaster-laster';
@@ -16,15 +15,11 @@ const medFeil = (avhengigheter) => avhengigheter.find(harStatus(STATUS.ERROR));
 function getFeilmeldingForReducer(feilendeReducer, intl) {
     const status = feilendeReducer.data.response.status;
     if (status >= 500) {
-        return intl.messages['innholdslaster.system.nede'];
+        return "Beklager, systemet er nede. Prøv igjen senere.";
     } else if (status === 403) {
-        return intl.messages['innholdslaster.ikke.tilgang'];
+        return "Beklager, du har ikke tilgang.";
     }
     return null;
-}
-
-function getFeilmeldingFraKey(feilmeldingKey, intl) {
-    return (feilmeldingKey && intl.messages[feilmeldingKey]);
 }
 
 class Innholdslaster extends React.Component {
@@ -67,7 +62,7 @@ class Innholdslaster extends React.Component {
     }
 
     render() {
-        const { avhengigheter, className, feilmeldingKey, intl, storrelse } = this.props;
+        const { avhengigheter, className, storrelse } = this.props;
         if (alleLastet(avhengigheter)) {
             this.clearTimer();
             return this.renderChildren();
@@ -81,8 +76,7 @@ class Innholdslaster extends React.Component {
             const feilendeReducer = medFeil(avhengigheter);
             console.log(feilendeReducer); // eslint-disable-line no-console
 
-            const feilmelding = getFeilmeldingFraKey(feilmeldingKey, intl) ||
-                getFeilmeldingForReducer(feilendeReducer, intl) ||
+            const feilmelding = getFeilmeldingForReducer(feilendeReducer) ||
                 ('Det skjedde en feil ved innlastningen av data');
 
             return (
@@ -97,4 +91,4 @@ class Innholdslaster extends React.Component {
 }
 
 
-export default injectIntl(Innholdslaster);
+export default Innholdslaster;

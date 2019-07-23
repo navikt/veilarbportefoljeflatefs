@@ -2,14 +2,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { IntlMessage } from '../utils/intl-utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
-import { injectIntl, InjectedIntl } from 'react-intl';
 import { AppState } from '../reducer';
 
 interface TomPortefoljeModalProps {
     isOpen: boolean;
-    intl: InjectedIntl;
 }
 
 interface TomPortefoljeModalState {
@@ -33,7 +30,7 @@ class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPor
         return (
             <Modal
                 className="tom-portefolje-modal"
-                contentLabel={this.props.intl.formatMessage({ id: 'modal.feilmelding.tom.portefolje' })}
+                contentLabel="Enheten har ingen brukere"
                 isOpen={this.state.isOpen}
                 onRequestClose={this.lukkModal}
                 closeButton
@@ -43,15 +40,15 @@ class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPor
                 </div>
                 <div className="innhold">
                     <Innholdstittel className="blokk-s" tag="h1">
-                        <IntlMessage id="modal.tittel"/>
+                        Handlingen kan ikke utføres
                     </Innholdstittel>
                     <AlertStripeAdvarsel className="blokk-s">
-                        <IntlMessage id="modal.infotekst"/>
+                        Enheten har ikke portefølje. Vennligst bytt!
                     </AlertStripeAdvarsel>
                 </div>
                 <div className="modal-footer">
                     <button className="knapp knapp--hoved" onClick={this.lukkModal}>
-                        <IntlMessage id="modal.knapptekst"/>
+                       Ok
                     </button>
                 </div>
             </Modal>
@@ -63,4 +60,4 @@ const mapStateToProps= (state: AppState): TomPortefoljeModalState =>({
     isOpen: state.statustall.data.totalt === 0,
 });
 
-export default injectIntl(connect(mapStateToProps, {}) (TomPortefoljeModal));
+export default connect(mapStateToProps, {}) (TomPortefoljeModal);

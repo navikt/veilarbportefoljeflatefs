@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import Chart from 'react-highcharts';
 import { hentDiagramdata } from '../../ducks/diagram';
 import config from './config';
-import MultiFormattedMessage from '../../components/multiformattedmessage';
 import { ledetekster, lagYtelseDataFraFasett } from './util';
 import Innholdslaster from './../../innholdslaster/innholdslaster';
 import Diagramtabell from './diagram-tabell';
@@ -54,17 +52,13 @@ class Diagram extends React.Component<AllProps> {
                         <div>
                             <div aria-hidden="true">
                                 <h1>
-                                    <FormattedMessage id={tekster.headertekst} />
+                                    {tekster.headertekst}
                                 </h1>
-                                <MultiFormattedMessage id={tekster.legendtekst}>
-                                    {(diagramtekster) => (
-                                        <Chart config={config(data, diagramtekster)} pureConfig />
-                                    )}
-                                </MultiFormattedMessage>
+                                <Chart config={config(data, tekster.legendtekst)} pureConfig />
                             </div>
                             <div className="SR__table">
                                 <h1>
-                                    <FormattedMessage id={tekster.headertekst} />
+                                    {tekster.headertekst}
                                 </h1>
                                 <Diagramtabell
                                     tekster={tekster}
@@ -88,6 +82,4 @@ const mapDispatchToProps = (dispatch) => ({
     hentDiagram: (enhet, veileder, filtervalg) => dispatch(hentDiagramdata(enhet, veileder, filtervalg))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    injectIntl(Diagram)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Diagram);

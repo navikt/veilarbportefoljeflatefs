@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Form, } from 'formik';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { FormattedMessage } from 'react-intl';
 import FormikTekstArea from '../components/formik/formik-tekstarea';
 import FormikInput from '../components/formik/formik-input';
 import FormikDatoVelger from '../components/formik/formik-datovelger/formik-datovelger';
@@ -27,10 +26,10 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <div>
                     <div className="modal-footer">
                         <Hovedknapp htmlType="submit" className="knapp knapp--hoved" spinner={props.laster}>
-                            <FormattedMessage id="modal.knapp.lagre" />
+                           Lagre
                         </Hovedknapp>
                         <button type="button" className="knapp" onClick={props.lukkModal}>
-                            <FormattedMessage id="modal.knapp.avbryt" />
+                           Avbryt
                         </button>
                     </div>
                 </div>

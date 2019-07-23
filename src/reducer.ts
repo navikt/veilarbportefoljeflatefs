@@ -5,7 +5,7 @@ import portefoljeReducer, { PortefoljeState } from './ducks/portefolje';
 import pagineringReducer from './ducks/paginering';
 import sorteringReducer from './ducks/sortering';
 import veiledereReducer, { VeiledereState } from './ducks/veiledere';
-import portefoljestorrelserReducer from './ducks/portefoljestorrelser';
+import portefoljestorrelserReducer, {PortefoljeStorrelser} from './ducks/portefoljestorrelser';
 import filtreringReducer, { FiltreringState, initialState } from './ducks/filtrering';
 import statustallReducer, {Statustall, StatustallState} from './ducks/statustall';
 import modalReducer from './ducks/modal';
@@ -51,7 +51,7 @@ export interface AppState {
     paginering: any;
     sortering: any;
     veiledere: VeiledereState;
-    portefoljestorrelser: any;
+    portefoljestorrelser: PortefoljeStorrelser;
     statustall: StatustallState;
     filtrering: FiltreringState;
     filtreringMinoversikt: any;

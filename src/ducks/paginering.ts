@@ -36,7 +36,7 @@ export default function reducer(state = initialState, action) {
     }
 }
 
-interface PageringOppdatering {
+export interface PageringOppdatering {
     side: number;
     seAlle?: boolean;
     sideStorrelse?: number;

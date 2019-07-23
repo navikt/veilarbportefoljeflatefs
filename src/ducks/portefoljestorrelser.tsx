@@ -6,7 +6,19 @@ const OK = 'veilarbportefolje/portefoljestorrelser/OK';
 const FEILET = 'veilarbportefolje/portefoljestorrelser/FEILET';
 const PENDING = 'veilarbportefolje/portefoljestorrelser/PENDING';
 
-const initialState = {
+interface FacetResults {
+    value: string;
+    count: number;
+}
+
+export interface PortefoljeStorrelser {
+    status: string;
+    data: {
+        facetResults: FacetResults[]
+    };
+}
+
+const initialState: PortefoljeStorrelser = {
     status: STATUS.NOT_STARTED,
     data: {
         facetResults: []
@@ -28,7 +40,7 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function hentPortefoljeStorrelser(enhetId) {
+export function hentPortefoljeStorrelser(enhetId: string) {
     return doThenDispatch(() => fetchPortefoljeStorrelser(enhetId), {
         OK,
         FEILET,

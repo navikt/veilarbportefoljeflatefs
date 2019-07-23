@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
 function DiagramTabell({ tekster, data }) {
     return (
@@ -10,10 +9,10 @@ function DiagramTabell({ tekster, data }) {
                         Måned/Kvartal
                     </th>
                     <th>
-                        <FormattedMessage id={tekster.legendtekst[0]} />
+                        {tekster.legendtekst[0]}
                     </th>
                     <th>
-                        <FormattedMessage id={tekster.legendtekst[1]} />
+                        tekster.legendtekst[1]}
                     </th>
                 </tr>
             </thead>

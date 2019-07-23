@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { MouseEvent } from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import CheckBox from '../components/tabell/checkbox';
@@ -12,9 +11,8 @@ import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
-import { FormattedMessage } from 'react-intl';
 
-interface MinOversiktBrukerPanelProps extends InjectedIntlProps {
+interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
     settMarkert: (fnr: string, markert: boolean) => void;
     enhetId: string;
@@ -80,7 +78,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                                 type={EtikettType.NYBRUKER}
                                 skalVises={bruker.nyForVeileder}
                             >
-                                <FormattedMessage id="enhet.portefolje.tabelletikett.ny.bruker"/>
+                                Ny Bruker
                             </Etikett>
                         </div>
                     </div>
@@ -96,4 +94,4 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
     }
 }
 
-export default injectIntl(MinoversiktBrukerPanel);
+export default MinoversiktBrukerPanel;

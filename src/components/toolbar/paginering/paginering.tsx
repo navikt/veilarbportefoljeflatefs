@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import React from 'react';
 import { connect } from 'react-redux';
-import Chevron, { HoyreChevron, VenstreChevron } from 'nav-frontend-chevron';
+import { HoyreChevron, VenstreChevron } from 'nav-frontend-chevron';
 import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
 import { leggSeAlleIUrl, leggSideIUrl } from '../../../utils/url-utils';
@@ -65,15 +64,13 @@ function Paginering(props: PagineringProps) {
                     totalPagenering(1, !seAlle);
                 }}
             >
-                {!seAlle ? <FormattedMessage id="paginering.se.alle"/> :
-                    <FormattedMessage id="paginering.se.faerre"/>
+                {!seAlle ? "Se alle" :
+                    "Se færre"
                 }
             </KnappPanel>
 
             <KnappPanel disabled={erPaForsteSide} onClick={() => totalPagenering(side - 1, seAlle)}>
-                <VenstreChevron>
-                    <FormattedMessage id="paginering.forrige"/>
-                </VenstreChevron>
+                <VenstreChevron/>
             </KnappPanel>
 
             {!erPaForsteSide && <KnappPanel onClick={() => totalPagenering(1, seAlle)}>1</KnappPanel>}
@@ -85,14 +82,13 @@ function Paginering(props: PagineringProps) {
             {(!erPaSisteSide && !seAlle) &&
             <KnappPanel
                 onClick={() => totalPagenering(antallSider, seAlle)}
-            >{antallSider}
+            >
+                {antallSider}
             </KnappPanel>
             }
 
             <KnappPanel disabled={erPaSisteSide || seAlle} onClick={() => totalPagenering(side + 1, seAlle)}>
-                <HoyreChevron>
-                    <FormattedMessage id="paginering.neste"/>
-                </HoyreChevron>
+                <HoyreChevron/>
             </KnappPanel>
         </div>
     );

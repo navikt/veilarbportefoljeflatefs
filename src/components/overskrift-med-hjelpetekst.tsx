@@ -1,14 +1,12 @@
 import * as React from 'react';
-
-import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { HjelpetekstAuto } from 'nav-frontend-hjelpetekst';
 import { logEvent } from '../utils/frontend-logger';
 import { finnSideNavn } from '../middleware/metrics-middleware';
 
 interface OverskriftMedHjelpeTekstProps {
-    overskriftId: string;
-    hjelpetekstId: string;
+    overskriftTekst: string;
+    hjelpeTekst: string;
 }
 
 class OverskriftMedHjelpetekst extends React.Component<OverskriftMedHjelpeTekstProps> {
@@ -28,15 +26,15 @@ class OverskriftMedHjelpetekst extends React.Component<OverskriftMedHjelpeTekstP
     }
 
     render() {
-        const { overskriftId, hjelpetekstId } = this.props;
+        const { overskriftTekst, hjelpeTekst } = this.props;
         return (
             <div className="blokk-xxs filtrering--overskrift-med-hjelpetekst">
                 <Element tag="h3">
-                    <FormattedMessage id={overskriftId} />
+                    {overskriftTekst}
                 </Element>
                 <div ref={(ref) => { this.catchClickRef = ref; }}>
-                    <HjelpetekstAuto id={hjelpetekstId}>
-                        <FormattedMessage id={hjelpetekstId} />
+                    <HjelpetekstAuto id={hjelpeTekst}>
+                        {hjelpeTekst}
                     </HjelpetekstAuto>
                 </div>
             </div>

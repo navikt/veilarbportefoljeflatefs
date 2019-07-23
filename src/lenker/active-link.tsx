@@ -12,7 +12,7 @@ interface ActiveLinkProps {
 function ActiveLink({className, activeClassName, to, children}: ActiveLinkProps) {
     return (
         <NavLink
-            to={`${to}`}
+            to={to}
             className={className}
             activeClassName={classnames(className, activeClassName)}
             aria-controls="oversikt-sideinnhold"
@@ -22,15 +22,5 @@ function ActiveLink({className, activeClassName, to, children}: ActiveLinkProps)
         </NavLink>
     );
 }
-
-/*
-
-ActiveLink.propTypes = {
-    router: PT.object,
-    className: PT.string,
-    activeClassName: PT.string,
-    to: PT.string
-};
-*/
 
 export default ActiveLink;
