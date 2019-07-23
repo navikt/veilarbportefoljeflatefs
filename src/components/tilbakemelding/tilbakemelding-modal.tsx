@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Textarea } from 'nav-frontend-skjema';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import TilfredshetValg from './tilfredshet-valg';
@@ -91,7 +91,9 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         defaultTilfredshet={tilfredshet}
                     />
                     {!harBesvartTilfredshet &&
-                    <a className="lenke" onClick={this.handleIkkeVisIgjenClicked}>Ikke vis dette igjen</a>}
+                    <Knapp mini={true} onClick={this.handleIkkeVisIgjenClicked}>
+                        Ikke vis dette igjen
+                    </Knapp>}
                 </div>
                 {harBesvartTilfredshet && (
                     <form className="tilbakemelding-modal__ekspander" onSubmit={this.handleFormSubmitted}>
