@@ -1,70 +1,31 @@
-import { default as React, RefObject, useEffect, useRef, useState } from 'react';
+import { default as React, RefObject, useRef, useState } from 'react';
 import { ReactComponent as AlarmIcon } from './icon-v3.svg';
 import EndringsloggInnhold from './endringslogg-innhold';
 import TransitionContainer from './transition-container';
-import { logEvent } from '../../utils/frontend-logger';
-import { hexString, krypterVeilederident } from './endringslogg-utils';
-import { useTimer } from '../../hooks/use-timer';
 import { useEventListener } from '../../hooks/use-event-listener';
-import { hentAktivBruker } from '../enhet-context/context-api';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { EndringOgSett } from './endringslogg-custom';
 
-// Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
-const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
-    logEvent('portefolje.endringslogg', {
-        feature: 'pre_tilbakemelding_2',
-        tidBrukt: metrikker.tidBrukt,
-        nyeNotifikasjoner: metrikker.nyeNotifikasjoner,
-    }, {hash: metrikker.hash});
-};
-
-interface EndringsloggMetrikker {
-    tidBrukt: number;
-    nyeNotifikasjoner: boolean;
-    hash: string;
-}
-
 interface EndringsProps {
     innhold: EndringOgSett[];
-    oppdaterInnhold: () => void;
+    onOpen: () => void;
+    onClose: () => void;
 }
 
 export default function Endringslogg(props: EndringsProps) {
-    const {start, stopp} = useTimer();
 
     const [endringsloggApen, setEndringsloggApen] = useState(false);
-    const [veilederIdent, setVeilderIdent] = useState('');
     const overordnetNotifikasjon = props.innhold.some((element) => !element.sett);
 
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const focusRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
-    useEffect(() => {
-        hentAktivVeileder();
-    }, []);
-
-    const hentAktivVeileder = async () => {
-        const veilederId = await hentAktivBruker();
-        setVeilderIdent(veilederId);
-    };
-
     const setLocalstorageAndOpenStatus = (setOpenTo: boolean) => {
         if (setOpenTo) {
-            start();
+            props.onOpen();
         } else {
-            const tidBrukt = stopp();
-            krypterVeilederident(veilederIdent)
-                .then((res) => sendMetrikker({
-                    tidBrukt,
-                    nyeNotifikasjoner: overordnetNotifikasjon,
-                    hash: hexString(res)
-                }))
-                .catch((e) => console.log(e)); // tslint:disable-line
-            if (overordnetNotifikasjon) {
-                props.oppdaterInnhold();
-            }
+            props.onClose();
         }
         setEndringsloggApen(setOpenTo);
     };
