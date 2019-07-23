@@ -47,29 +47,29 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
         const value = e.target.value;
 
         if (value.length <= this.KOMMENTAR_MAX_CHAR) {
-            this.setState({ kommentar: value });
+            this.setState({kommentar: value});
         }
 
-    }
+    };
 
     handleFormSubmitted = () => {
-        const { tilfredshet, kommentar } = this.state;
-        this.setState({ harSendt: true });
-        this.props.onTilbakemeldingSendt({ tilfredshet, kommentar });
-    }
+        const {tilfredshet, kommentar} = this.state;
+        this.setState({harSendt: true});
+        this.props.onTilbakemeldingSendt({tilfredshet, kommentar});
+    };
 
     handleTilfredshetChanged = (tilfredshet: number) => {
-        this.setState({ tilfredshet });
-    }
+        this.setState({tilfredshet});
+    };
 
     handleIkkeVisIgjenClicked = () => {
-        this.setState({ harSendt: true, ikkeVisIgjen: true });
+        this.setState({harSendt: true, ikkeVisIgjen: true});
         this.props.onIkkeVisIgjen();
-    }
+    };
 
     renderForm = () => {
 
-        const { tilfredshet, kommentar } = this.state;
+        const {tilfredshet, kommentar} = this.state;
         const harBesvartTilfredshet = tilfredshet > 0;
 
         return (
@@ -78,7 +78,11 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                     Tilbakemelding
                 </Innholdstittel>
                 <Normaltekst className="tilbakemelding-modal__ingress">
-                    Hvor fornøyd er du med måten du får informasjon om endringer i Oversikten? Svarene er anonyme.
+                    Dere har fått en ny knapp øverst i høyre hjørne på denne siden.
+                    <br/><br/>
+                    Knappen åpner en liste med informasjon om hva som er nytt i systemet.
+                    <br/><br/>
+                    Hvordan synes du denne listen fungerer som en oversikt for systemendringer?
                 </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
                     <TilfredshetValg
@@ -86,10 +90,11 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         onTilfredshetChanged={this.handleTilfredshetChanged}
                         defaultTilfredshet={tilfredshet}
                     />
-                    {!harBesvartTilfredshet && <a className="lenke" onClick={this.handleIkkeVisIgjenClicked}>Ikke vis dette igjen</a>}
+                    {!harBesvartTilfredshet &&
+                    <a className="lenke" onClick={this.handleIkkeVisIgjenClicked}>Ikke vis dette igjen</a>}
                 </div>
                 {harBesvartTilfredshet && (
-                    <form className="tilbakemelding-modal__ekspander"  onSubmit={this.handleFormSubmitted}>
+                    <form className="tilbakemelding-modal__ekspander" onSubmit={this.handleFormSubmitted}>
                         <div className="tilbakemelding-modal__kommentar">
                             <Textarea
                                 className="tilbakemelding-modal__kommentar-felt"
@@ -107,7 +112,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                 )}
             </div>
         );
-    }
+    };
 
     renderTakkMelding = () => {
         return (
@@ -122,18 +127,18 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                 </Element>
             </div>
         );
-    }
+    };
 
     componentDidUpdate(prevProps: TilbakemeldingModalProps) {
         if (prevProps.open && !this.state.harBlittVist) {
-            this.setState({ harBlittVist: true });
+            this.setState({harBlittVist: true});
         }
     }
 
     render() {
 
-        const { open } = this.props;
-        const { harSendt, harBlittVist, ikkeVisIgjen } = this.state;
+        const {open} = this.props;
+        const {harSendt, harBlittVist, ikkeVisIgjen} = this.state;
 
         // Make sure that the animation will trigger when closing instead of returning null (no animation)
         if ((!open && !harBlittVist) || ikkeVisIgjen) {
@@ -142,11 +147,11 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
 
         return (
             <div className={classNames('tilbakemelding-modal',
-                { 'tilbakemelding-modal--slide-in': open },
-                { 'tilbakemelding-modal--slide-out': !open })}
+                {'tilbakemelding-modal--slide-in': open},
+                {'tilbakemelding-modal--slide-out': !open})}
             >
                 <div className={classNames('tilbakemelding-modal__innhold',
-                    { 'tilbakemelding-modal__innhold--takk': harSendt})}>
+                    {'tilbakemelding-modal__innhold--takk': harSendt})}>
                     {harSendt ? this.renderTakkMelding() : this.renderForm()}
                 </div>
             </div>
