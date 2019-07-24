@@ -1,9 +1,9 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { Sorteringsfelt, Sorteringsrekkefolge } from '../../model-interfaces';
-import Header, {HeaderProps} from "./header";
+import Header, { HeaderProps } from './header';
 
-interface SorteringHeaderProps extends HeaderProps{
+interface SorteringHeaderProps extends HeaderProps {
     sortering: Sorteringsfelt;
     onClick: (sortering: string) => void;
     rekkefolge: Sorteringsrekkefolge;

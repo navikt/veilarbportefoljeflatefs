@@ -1,7 +1,7 @@
-import { SPOR_OM_TILBAKEMELDING, ENDRINGSLOGG , VIS_MOTER_MED_NAV } from '../konstanter';
+import { ENDRINGSLOGG, SPOR_OM_TILBAKEMELDING, VIS_MOTER_MED_NAV } from '../konstanter';
 
 const toggles = {
-    [SPOR_OM_TILBAKEMELDING]: false,
+    [SPOR_OM_TILBAKEMELDING]: true,
     [ENDRINGSLOGG]: true,
     [VIS_MOTER_MED_NAV]: true,
 };

@@ -2,9 +2,11 @@
     margin-left: auto;
     position: relative;
 }
+
 .endringslogg-knapp {
     float: right;
 }
+
 .collapse-header {
     background-color: @navMorkGra;
     color: white;
@@ -28,18 +30,24 @@
     max-width: 30rem;
     width: 30rem;
     z-index: 2;
+}
 
+.collapse-container ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+.collapse-container ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
 .endringslogg-content {
     overflow: hidden;
-    box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
+    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
     background-color: white;
     padding-bottom: 0.5rem;
-    border-top-right-radius: @border-radius-large;
-    border-top-left-radius: @border-radius-large;
-    border-bottom-left-radius: @border-radius-large;
-    border-bottom-right-radius: @border-radius-large;
+    border-radius: @border-radius-large;
     max-width: 27rem;
 }
 
@@ -60,6 +68,10 @@
     border-bottom: 0.6875rem solid @navMorkGra;
 }
 
+.innhold-container {
+    overflow-y: scroll;
+    max-height: 30rem;
+}
 
 .endringslogg-content:focus::before {
     content: '';
@@ -82,9 +94,9 @@
 
 .endringslogg-info-kolonne {
     height: 0.5rem;
-    width:  0.5rem;
+    width: 0.5rem;
     margin-left: 1rem;
-    margin-right:  0.5rem;
+    margin-right: 0.5rem;
     margin-top: 0.3rem;
     float: left;
 }
@@ -94,10 +106,11 @@
     right: 1em;
     padding: 0.5rem;
     outline: transparent;
-    background-color: transparent;
+    background-color: @navLysGra;
     border: none;
     cursor: pointer;
 }
+
 .endringslogg-dropDown:focus {
     fill: @navBla;
     border: 1px solid @navOransjeDarken20;
@@ -107,8 +120,10 @@
         fill: @navBla;
     }
 }
+
 #alarm_svg {
-    height: 2.5em;
+    height: 2.5rem;
+    width: 2.5rem;
 }
 
 .endringslogg-dropDown:hover #Outline {
@@ -119,7 +134,7 @@
     height: 0.875rem;
     width: 0.875rem;
     margin: 0rem 0rem 0rem -0.5444rem;
-    background-color:  @navBla;;
+    background-color: @navBla;;
     border-radius: 50%;
     display: inline-block;
     z-index: 99;
@@ -148,14 +163,14 @@
 
 .endringslogg-kolonne {
     float: left;
-  }
+}
 
-.endringslogg-skille{
+.endringslogg-skille {
     padding-bottom: 1rem;
 }
 
-.endringslogg-skille:not(:last-child){
-    border-bottom: 1px solid rgba(183,177,169);
+.endringslogg-skille:not(:last-child) {
+    border-bottom: 1px solid rgba(183, 177, 169);
 }
 
 .endringslogg-rad:after {
@@ -166,10 +181,14 @@
 
 #external_link {
     width: 0.668rem;
+    height: 0.668rem;
     margin-left: 0.3em;
 }
 
-.hyperlink-ikon{
+.hyperlink-ikon {
     stroke: @navBla;
 }
 
+.endringslogg-stepperKnapp {
+    margin-top: 0.8rem;
+}

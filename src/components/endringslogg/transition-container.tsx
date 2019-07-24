@@ -8,7 +8,7 @@ interface CollapseContainerProps {
 
 }
 
-interface TransitionProps extends CollapseContainerProps{
+interface TransitionProps extends CollapseContainerProps {
     visible: boolean;
 
 }
@@ -27,7 +27,7 @@ export default function TransitionContainer(props: TransitionProps) {
     );
 }
 
-function CollapseContainer(props: CollapseContainerProps){
+function CollapseContainer(props: CollapseContainerProps) {
     useFocus(props.focusRef, []);
     return (
         <div className="collapse-container">
@@ -35,5 +35,5 @@ function CollapseContainer(props: CollapseContainerProps){
                 {props.children}
             </div>
         </div>
-    )
+    );
 }

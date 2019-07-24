@@ -3,34 +3,51 @@ import { EtikettLiten, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { default as React } from 'react';
 import { ReactComponent as LinkIcon } from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
+import { EndringOgSett } from './endringslogg-custom';
 
-interface EndringsloggInnholdProps extends LinkInnholdProps {
+interface EndringsloggInleggProps {
     dato: string;
     innholdsTekst: string;
     innholdsOverskrift: string;
     nyeNotifikasjoner: boolean;
+    children: React.ReactNode;
 }
 
-interface LinkInnholdProps {
-    url?: string;
-    linkTekst?: string;
+interface EndringsloggInnholdProps {
+    innhold: EndringOgSett[];
 }
 
-function LinkTag(props: LinkInnholdProps) {
-    if (!props.url) {
-        return null;
-    }
-
+export function LinkTag(props: { linkTekst: string, url: string }) {
     return (
         <Lenke className="endringslogg-link" target="_blank" href={props.url}>
             {props.linkTekst ? props.linkTekst : props.url}
             <LinkIcon/>
         </Lenke>
-
     );
 }
 
 export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
+    const content = props.innhold.map((endring, index) => {
+        return (
+            <EndringsloggInlegg
+                key={index}
+                dato={endring.dato}
+                innholdsTekst={endring.tekst}
+                innholdsOverskrift={endring.tittel}
+                nyeNotifikasjoner={!endring.sett}
+                children={endring.children}
+            />
+        );
+    });
+
+    return (
+        <>
+            {content}
+        </>
+    );
+}
+
+function EndringsloggInlegg(props: EndringsloggInleggProps) {
     return (
         <div className="endringslogg-rad endringslogg-skille">
             <div className="endringslogg-datolinje">
@@ -44,7 +61,7 @@ export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
             <div className="endringslogg-innhold endringslogg-kolonne">
                 <Undertittel tag="h3"> {props.innholdsOverskrift} </Undertittel>
                 <Normaltekst> {props.innholdsTekst} </Normaltekst>
-                <LinkTag url={props.url} linkTekst={props.linkTekst}/>
+                {props.children}
             </div>
         </div>
     );

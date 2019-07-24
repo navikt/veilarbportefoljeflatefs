@@ -1,6 +1,6 @@
 import React from 'react';
 import ActiveLink from './active-link';
-import Endringslogg from '../components/endringslogg/endringslogg';
+import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tour-wrapper'
 
 function Lenker() {
     return (
@@ -23,7 +23,7 @@ function Lenker() {
                     Veilederoversikt
                 </ActiveLink>
             </h2>
-            <Endringslogg/>
+            <EndringsloggTourWrapper/>
         </div>
     );
 }
