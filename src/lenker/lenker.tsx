@@ -1,6 +1,6 @@
 import React from 'react';
 import ActiveLink from './active-link';
-import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tour-wrapper'
+import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tour-wrapper';
 
 function Lenker() {
     return (

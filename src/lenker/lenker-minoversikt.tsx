@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import ActiveLink from './active-link';
-import Endringslogg from '../components/endringslogg/endringslogg';
+import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tour-wrapper';
 
 function LenkerMinoversikt(props: { veilederident: string | null }) {
     const path = props.veilederident === null ? 'portefolje' : `portefolje/${props.veilederident}`;
@@ -14,7 +14,7 @@ function LenkerMinoversikt(props: { veilederident: string | null }) {
             >
                 Min oversikt
             </ActiveLink>
-            <Endringslogg/>
+            <EndringsloggTourWrapper/>
         </div>
     );
 }

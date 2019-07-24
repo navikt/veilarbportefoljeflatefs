@@ -25,7 +25,7 @@ const ListevisningRad = (props: Props) => {
     return (
         <li>
             <Checkbox
-                label={alternativ.tekstlabel}/>}
+                label={alternativ.tekstlabel}
                 value={props.kolonne.toString()}
                 checked={props.valgt}
                 disabled={props.disabled || alternativ.checkboxDisabled}

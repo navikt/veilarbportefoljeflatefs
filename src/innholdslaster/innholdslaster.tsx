@@ -1,28 +1,41 @@
 import * as React from 'react';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
-// import Feilmelding from './../feilmelding/feilmelding'; Legg til feilmeldingskomponent
 import Laster from './innholdslaster-laster';
 import { STATUS } from './../ducks/utils';
 
 const array = (value) => (Array.isArray(value) ? value : [value]);
 const harStatus = (...status) => (element) => array(status).includes(element.status);
+
 const noenHarFeil = (avhengigheter) => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
+
 const alleLastet = (avhengigheter) => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
+
 const alleLastetEllerReloading = (avhengigheter) => (
     avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING))
 );
 const medFeil = (avhengigheter) => avhengigheter.find(harStatus(STATUS.ERROR));
-function getFeilmeldingForReducer(feilendeReducer, intl) {
+function getFeilmeldingForReducer(feilendeReducer) {
     const status = feilendeReducer.data.response.status;
     if (status >= 500) {
-        return "Beklager, systemet er nede. Prøv igjen senere.";
+        return 'Beklager, systemet er nede. Prøv igjen senere.';
     } else if (status === 403) {
-        return "Beklager, du har ikke tilgang.";
+        return 'Beklager, du har ikke tilgang.';
     }
     return null;
 }
 
-class Innholdslaster extends React.Component {
+interface InnholdslasterProps {
+    className?: string;
+    avhengigheter: any;
+}
+
+interface InnholdslasterState {
+    timeout: boolean;
+}
+
+class Innholdslaster extends React.Component<InnholdslasterProps, InnholdslasterState> {
+    private timer: number | undefined;
+
     constructor(props) {
         super(props);
 
@@ -36,7 +49,7 @@ class Innholdslaster extends React.Component {
 
     setTimer() {
         if (!this.timer) {
-            this.timer = setTimeout(() => {
+            this.timer = window.setTimeout(() => {
                 this.setState({ timeout: true });
             }, 200);
         }
@@ -62,7 +75,7 @@ class Innholdslaster extends React.Component {
     }
 
     render() {
-        const { avhengigheter, className, storrelse } = this.props;
+        const { avhengigheter, className } = this.props;
         if (alleLastet(avhengigheter)) {
             this.clearTimer();
             return this.renderChildren();
@@ -74,7 +87,6 @@ class Innholdslaster extends React.Component {
         if (noenHarFeil(avhengigheter)) {
             this.clearTimer();
             const feilendeReducer = medFeil(avhengigheter);
-            console.log(feilendeReducer); // eslint-disable-line no-console
 
             const feilmelding = getFeilmeldingForReducer(feilendeReducer) ||
                 ('Det skjedde en feil ved innlastningen av data');
@@ -86,9 +98,8 @@ class Innholdslaster extends React.Component {
             );
         }
 
-        return <Laster className={className} storrelse={storrelse} />;
+        return <Laster/>;
     }
 }
-
 
 export default Innholdslaster;

@@ -2,17 +2,17 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import Lenker from '../lenker/lenker';
-import Innholdslaster from './../innholdslaster/innholdslaster';
+import Innholdslaster from '../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
-import { hentStatusTall } from '../ducks/statustall';
+import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import { AppState } from '../reducer';
-import { StatustallModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
+import {  ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { FiltreringState } from '../ducks/filtrering';
 import { pagineringSetup } from '../ducks/paginering';
@@ -24,7 +24,7 @@ interface StateProps {
     valgtEnhet: ValgtEnhetModell;
     filtervalg: FiltreringState;
     veilederliste: VeilederModell[];
-    statustall: { data: StatustallModell };
+    statustall: StatustallState;
     enhettiltak: EnhettiltakState;
     listevisning: ListevisningState;
 }
@@ -37,7 +37,7 @@ interface DispatchProps {
 
 type EnhetSideProps = StateProps & DispatchProps;
 
-class EnhetSide extends React.Component<EnhetSideProps, {}> {
+class EnhetSide extends React.Component<EnhetSideProps> {
     componentWillMount() {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);

@@ -11,7 +11,7 @@ function create() {
         applyMiddleware(thunkMiddleware, metricsMiddleWare)
     );
 
-    return composed(createStore)(reducer, {});
+    return composed(createStore)(reducer);
 }
 
 let store: Store<AppState>;
