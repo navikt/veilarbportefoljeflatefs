@@ -16,7 +16,8 @@ export interface EnhettiltakState {
 const initalState: EnhettiltakState = {
     data: {
         tiltak: {}
-    }
+    },
+    status: STATUS.NOT_STARTED,
 };
 
 // Reducer

@@ -122,8 +122,8 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                 />
                                 <div id="oversikt-sideinnhold" role="tabpanel">
                                     <p className="typo-infotekst begrensetbredde blokk-l">
-                                        'Her får du oversikt over alle brukere som er tildelt deg eller ditt team.
-                                        Du kan filtrere ytterligere eller flytte brukere til en annen veileder i din enhet.',
+                                        Her får du oversikt over alle brukere som er tildelt deg eller ditt team.
+                                        Du kan filtrere ytterligere eller flytte brukere til en annen veileder i din enhet.
                                     </p>
                                     <div className="row">
                                         <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">

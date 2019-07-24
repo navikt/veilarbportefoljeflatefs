@@ -7,7 +7,7 @@ import sorteringReducer from './ducks/sortering';
 import veiledereReducer, { VeiledereState } from './ducks/veiledere';
 import portefoljestorrelserReducer, {PortefoljeStorrelser} from './ducks/portefoljestorrelser';
 import filtreringReducer, { FiltreringState, initialState } from './ducks/filtrering';
-import statustallReducer, {Statustall, StatustallState} from './ducks/statustall';
+import statustallReducer, { StatustallState } from './ducks/statustall';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';

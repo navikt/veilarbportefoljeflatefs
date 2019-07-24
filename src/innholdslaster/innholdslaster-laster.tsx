@@ -1,14 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 
 function Laster() {
     return (
         <div className="innholdslaster">
-            <NavFrontendSpinner storrelse="XXL" />
+            <NavFrontendSpinner type="XL" />
         </div>
     );
 }
-
-
 
 export default Laster;

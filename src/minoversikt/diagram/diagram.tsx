@@ -4,7 +4,7 @@ import Chart from 'react-highcharts';
 import { hentDiagramdata } from '../../ducks/diagram';
 import config from './config';
 import { ledetekster, lagYtelseDataFraFasett } from './util';
-import Innholdslaster from './../../innholdslaster/innholdslaster';
+import Innholdslaster from '../../innholdslaster/innholdslaster';
 import Diagramtabell from './diagram-tabell';
 
 interface DiagramProps {

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { AlertStripeInfoSolid } from 'nav-frontend-alertstriper';
 
 function VelgFilterMelding() {
