@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {ToggleGruppe, ToggleKnapp} from 'nav-frontend-toggle';
 import * as VK from '../../minoversikt/minoversikt-konstanter';
 import { AppState } from './../../reducer';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 import { settVisningsmodus } from '../../ducks/paginering';
 import { ToolbarPosisjon } from './toolbar';
+import { ReactComponent as ListeIkon} from './liste.svg';
+import { ReactComponent as StolpeIkon} from './stolpediagram.svg';
+import {ToggleGruppe } from "nav-frontend-toggle";
 
 interface OwnProps {
     filtergruppe: ListevisningType;
@@ -31,22 +33,21 @@ function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules }:
     if (skalSkjules) {
         return null;
     }
-
-    const onChange = (e) => endreVisningsmodus(e.target.value);
-
     return (
-        <ToggleGruppe defaultToggles={[]} onChange={onChange}>
-            <ToggleKnapp
-                pressed={visningsmodus === VK.TABELLVISNING}
-            >
-                <span className="visuallyhidden">Vis som tabell</span>
-            </ToggleKnapp>
-            <ToggleKnapp
-                pressed={visningsmodus === VK.DIAGRAMVISNING}
-            >
-                <span className="visuallyhidden">Vis som diagram</span>
-            </ToggleKnapp>
-        </ToggleGruppe>
+        <ToggleGruppe
+            defaultToggles={[
+                {
+                    children: <ListeIkon/>,
+                    pressed: visningsmodus === VK.TABELLVISNING,
+                    onClick: () => endreVisningsmodus(VK.TABELLVISNING)
+                },
+                {
+                    children: <StolpeIkon/>,
+                    pressed: visningsmodus === VK.DIAGRAMVISNING,
+                    onClick: () => endreVisningsmodus(VK.DIAGRAMVISNING)
+                },
+            ]as any}
+        />
     );
 }
 
