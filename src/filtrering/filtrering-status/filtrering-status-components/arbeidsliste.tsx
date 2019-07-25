@@ -27,7 +27,7 @@ function FilterStatusMinArbeidsliste(props: FiltreringStatusGruppe) {
                 filterNavn="minArbeidsliste"
                 handleChange={props.handleChange}
                 max={statusTall.totalt}
-                antall={statusTall.inaktiveBrukere}
+                antall={statusTall.minArbeidsliste}
                 checked={props.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
             />
         </>

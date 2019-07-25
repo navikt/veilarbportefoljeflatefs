@@ -41,8 +41,8 @@ export function manedInndeling(antallBrukere, diagramdata) {
     };
 }
 
-export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata, intl) {
-    const ytelsevalgIntl = ytelsevalg(intl);
+export function lagYtelseDataFraFasett(antallBrukere, valgtYtelse, diagramdata) {
+    const ytelsevalgIntl = ytelsevalg();
     const sorterteDiagramdata = diagramdata.sort((a, b) => a.fra - b.fra);
 
     if (valgtYtelse === ytelsevalgIntl.TILTAKSPENGER || valgtYtelse === ytelsevalgIntl.AAP) {

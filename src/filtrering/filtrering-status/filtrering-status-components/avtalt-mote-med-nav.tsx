@@ -13,7 +13,7 @@ function FiltreringStatusAvtaltMoteMedNav(props: FiltreringStatusGruppe) {
                 filterNavn="avtaltMoteMedNav"
                 handleChange={props.handleChange}
                 max={statusTall.totalt}
-                antall={statusTall.inaktiveBrukere}
+                antall={statusTall.moterMedNAVIdag}
                 checked={props.ferdigfilterListe.includes(MOTER_IDAG)}
             />
         </>
