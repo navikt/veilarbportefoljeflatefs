@@ -101,21 +101,21 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         );
     }
 
-     lagToolbar = (posisjon: ToolbarPosisjon) => {
+    lagToolbar = (posisjon: ToolbarPosisjon) => {
 
-         const {
-             portefolje,
-             valgtEnhet,
-             hentPortefolje,
-             sorteringsrekkefolge,
-             sorteringsfelt,
-             filtervalg,
-             visningsmodus,
-         } = this.props;
+        const {
+            portefolje,
+            valgtEnhet,
+            hentPortefolje,
+            sorteringsrekkefolge,
+            sorteringsfelt,
+            filtervalg,
+            visningsmodus,
+        } = this.props;
 
-         const { antallTotalt } = portefolje.data;
+        const { antallTotalt } = portefolje.data;
 
-         return (
+        return (
             <Toolbar
                 filtergruppe={ListevisningType.enhetensOversikt}
                 onPaginering={() => hentPortefolje(
@@ -129,7 +129,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                 antallTotalt={antallTotalt}
                 posisjon={posisjon}
             />
-         );
+        );
     }
 
     render() {
@@ -173,7 +173,11 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     {this.lagToolbar(ToolbarPosisjon.OVER)}
                     {
                         visDiagram ?
-                            <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet!.enhetId}/> :
+                            <Diagram
+                                filtreringsvalg={filtervalg}
+                                enhet={valgtEnhet.enhet!.enhetId}
+                            />
+                            :
                             <EnhetTabell
                                 veiledere={veiledere.data.veilederListe}
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}

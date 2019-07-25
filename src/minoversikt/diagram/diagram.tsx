@@ -39,14 +39,14 @@ class Diagram extends React.Component<AllProps> {
     }
 
     render() {
-        const { diagramdata, portefolje, filtreringsvalg, intl } = this.props;
+        const { diagramdata, portefolje, filtreringsvalg } = this.props;
 
         return (
             <Innholdslaster avhengigheter={[diagramdata]}>
                 {() => {
                     const antallBrukere = portefolje.data.antallTotalt;
                     const tekster = ledetekster(filtreringsvalg.ytelse);
-                    const data = lagYtelseDataFraFasett(antallBrukere, filtreringsvalg.ytelse, diagramdata.data, intl);
+                    const data = lagYtelseDataFraFasett(antallBrukere, filtreringsvalg.ytelse, diagramdata.data);
 
                     return (
                         <div>
@@ -79,7 +79,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    hentDiagram: (enhet, veileder, filtervalg) => dispatch(hentDiagramdata(enhet, veileder, filtervalg))
+    hentDiagram: (enhet, filtervalg, veileder) => dispatch(hentDiagramdata(enhet, filtervalg, veileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Diagram);

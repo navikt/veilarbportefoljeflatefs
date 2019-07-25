@@ -1,7 +1,7 @@
 
 // Actions
 import { DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
-import { TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
+import { MinoversiktVisning, TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 
 export const SETUP = 'veilarbportefoljeflatefs/paginering/SETUP';
@@ -47,7 +47,7 @@ export function pagineringSetup(data: PageringOppdatering, toolbarPosisjon?: Too
     return { type: SETUP, data, toolbarPosisjon };
 }
 
-export function settVisningsmodus(visningsmodus, toolbarPosisjon?: ToolbarPosisjon) {
+export function settVisningsmodus(visningsmodus: MinoversiktVisning, toolbarPosisjon?: ToolbarPosisjon) {
     return {
         type: SETT_VISNINGSMODUS,
         visningsmodus,
