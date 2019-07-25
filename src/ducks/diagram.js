@@ -27,8 +27,8 @@ export default function reducer(state = initalState, action) {
 }
 
 // Action Creators
-export function hentDiagramdata(enhet, ident, filtervalg) {
-    return doThenDispatch(() => Api.hentDiagramdata(enhet, ident, filtervalg), {
+export function hentDiagramdata(enhet, filtervalg, ident) {
+    return doThenDispatch(() => Api.hentDiagramdata(enhet, filtervalg, ident), {
         OK,
         FEILET,
         PENDING
