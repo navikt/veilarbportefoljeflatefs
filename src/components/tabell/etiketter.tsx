@@ -14,43 +14,43 @@ function Etiketter({ className, bruker }: EtiketterProps) {
                 type={EtikettType.SIKKERHETSTILTAK}
                 skalVises={bruker.sikkerhetstiltak.length > 0}
             >
-                <span>Sikkerhetstiltak</span>
+                Sikkerhetstiltak
             </Etikett>
             <Etikett
                 type={EtikettType.DISKRESJONSKODE}
                 skalVises={!!bruker.diskresjonskode}
             >
-                <span>{`Kode ${bruker.diskresjonskode}`}</span>
+                {`Kode ${bruker.diskresjonskode}`}
             </Etikett>
             <Etikett
                 type={EtikettType.EGEN_ANSATT}
                 skalVises={bruker.egenAnsatt}
             >
-                <span>Egen ansatt</span>
+               Egen ansatt
             </Etikett>
             <Etikett
                 type={EtikettType.DOED}
                 skalVises={bruker.erDoed}
             >
-                <span>Død</span>
+                Død
             </Etikett>
             <Etikett
                 type={EtikettType.IKKE_VURDERT}
                 skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
             >
-                <span>Trenger vurdering</span>
+                Trenger vurdering
             </Etikett>
             <Etikett
                 type={EtikettType.BEHOV_AEV}
                 skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
             >
-                <span>Behov for AEV</span>
+                Behov for AEV
             </Etikett>
             <Etikett
                 type={EtikettType.ER_SYKMELDT_MED_ARBEIDSGIVER}
                 skalVises={bruker.erSykmeldtMedArbeidsgiver}
             >
-                <span>Sykmeldt</span>
+                Sykmeldt
             </Etikett>
 
         </span>

@@ -30,7 +30,7 @@ export function FiltreringStatusAktiviteter (props: FiltreringStatusAktivitetPro
             <BarInputRadio
                 filterNavn="iavtaltAktivitet"
                 max={statusTall.totalt}
-                antall={statusTall.ikkeIavtaltAktivitet}
+                antall={statusTall.iavtaltAktivitet}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
             />
