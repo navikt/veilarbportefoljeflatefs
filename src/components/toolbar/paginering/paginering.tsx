@@ -22,7 +22,7 @@ interface OwnProps {
     skjul: boolean;
     className: string;
     antallTotalt: number;
-    onChange: (fra?: number, til?: number) => void;
+    onChange?: (fra?: number, til?: number) => void;
     toolbarPosisjon?: ToolbarPosisjon;
 }
 
@@ -51,7 +51,9 @@ function Paginering(props: PagineringProps) {
     const totalPagenering = (sideNumber: number, seAlleBool: boolean): void => {
         endrePaginering(sideNumber, seAlleBool);
         leggSideIUrl(sideNumber);
-        onChange();
+        if(onChange) {
+            onChange();
+        }
     };
 
     return (
