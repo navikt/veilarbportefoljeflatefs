@@ -65,6 +65,7 @@ class MinoversiktBrukerPanel extends React.Component<MinOversiktBrukerPanelProps
                         filtervalg={filtervalg}
                         valgteKolonner={valgteKolonner}
                         enhetId={enhetId}
+                        skalJusteres={!arbeidslisteAktiv}
                     />
                     <div className="brukerliste__gutter-right">
                         <ArbeidslisteButton
