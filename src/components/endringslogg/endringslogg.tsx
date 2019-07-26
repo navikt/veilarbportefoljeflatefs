@@ -4,10 +4,10 @@ import EndringsloggInnhold from './endringslogg-innhold';
 import TransitionContainer from './transition-container';
 import { useEventListener } from '../../hooks/use-event-listener';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import { EndringOgSett } from './endringslogg-custom';
+import { EndringsloggInleggMedSettStatus } from './endringslogg-custom';
 
 interface EndringsProps {
-    innhold: EndringOgSett[];
+    innhold: EndringsloggInleggMedSettStatus[];
     onOpen: () => void;
     onClose: () => void;
 }
@@ -70,7 +70,7 @@ export default function Endringslogg(props: EndringsProps) {
             <TransitionContainer visible={endringsloggApen} focusRef={focusRef}>
                 <EndringsloggHeader/>
                 <div className={'innhold-container'}>
-                <EndringsloggInnhold innhold={props.innhold}/>
+                    <EndringsloggInnhold innleggsListe={props.innhold}/>
                 </div>
             </TransitionContainer>
         </div>

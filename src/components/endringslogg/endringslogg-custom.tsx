@@ -1,10 +1,11 @@
 import { ModalName } from '../tour-modal/tour-modal';
-import { hentSetteVersjonerLocalstorage } from './endringslogg-utils';
-import { LinkTag } from './endringslogg-innhold';
+import { EndringsloggLinkMedIkon } from './endringslogg-innhold';
 import React from 'react';
+import { ReactComponent as LinkIcon } from './external-link.svg';
 import TourModalButton from '../tour-modal/tour-modal-button';
+import Lenke from 'nav-frontend-lenker';
 
-export interface Endring {
+export interface EndringsloggInnlegg {
     tittel: string;
     dato: string;
     tekst: string;
@@ -12,11 +13,11 @@ export interface Endring {
     children?: React.ReactNode;
 }
 
-export interface EndringOgSett extends Endring {
+export interface EndringsloggInleggMedSettStatus extends EndringsloggInnlegg {
     sett: boolean;
 }
 
-const innhold: Endring[] = [
+const endringslogginnhold: EndringsloggInnlegg[] = [
     {
         dato: '16. JUL. 2019',
         tittel: 'NAV møte filter i Min oversikt',
@@ -54,20 +55,15 @@ const innhold: Endring[] = [
         tekst: 'Du kan nå registrere brukere manuelt i Veilederverktøy (tannhjulet).  Arena-oppgaven «Motta person» skal ikke lenger benyttes.',
         id: '0.1.9',
         children:
-            <LinkTag
+            <EndringsloggLinkMedIkon
                 url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
                 linkTekst="Nyhetssak på Navet"
             />
         ,
-
     },
 ];
 
-export function getInnhold() {
-    return innhold;
-}
-
-export function settModalEndring(innholdState: EndringOgSett[], modal: string): EndringOgSett[] {
+export function settModalEndring(innholdState: EndringsloggInleggMedSettStatus[], modal: string): EndringsloggInleggMedSettStatus[] {
     return innholdState.map((el) => {
         if (el.id === modal) {
             el.sett = true;
@@ -76,10 +72,18 @@ export function settModalEndring(innholdState: EndringOgSett[], modal: string): 
     });
 }
 
-export function getInnholdOgSett(): EndringOgSett[] {
-    const locSto = hentSetteVersjonerLocalstorage();
-    return innhold.map((el) => {
-        const fraLocal = locSto.some((ver) => ver === el.id);
+export function settDefaultSettVerdier() {
+    return endringslogginnhold.map((el) => {
+        return ({
+            ...el,
+            sett: true,
+        });
+    });
+}
+
+export function getInnholdOgSettFraRemote(remotestorage: string[]): EndringsloggInleggMedSettStatus[] {
+    return endringslogginnhold.map((el) => {
+        const fraLocal = remotestorage.some((ver) => ver === el.id);
         return ({
             ...el,
             sett: fraLocal,

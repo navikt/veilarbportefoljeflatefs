@@ -1,4 +1,6 @@
 import { getCrypto } from './crypto';
+import { fetchHarSettInnlegg, registrerSettInnlegg } from '../../middleware/api';
+import { EndringsloggInleggMedSettStatus } from './endringslogg-custom';
 
 export function hexString(buffer) {
     const byteArray = new Uint8Array(buffer);
@@ -36,8 +38,7 @@ function encodeString(stringToBeEncoded: string): Uint8Array {
 }
 
 const ENDRING_PREFIX = 'Endringslogg';
-
-export function hentSetteVersjonerLocalstorage(): string[] {
+export function hentSetteVersjonerLocalstorage(): string[] | string {
     let setteVersjoner: string[] = [];
     const tmp = localStorage.getItem(ENDRING_PREFIX);
     if (tmp) {
@@ -45,23 +46,46 @@ export function hentSetteVersjonerLocalstorage(): string[] {
             setteVersjoner = JSON.parse(tmp);
         } catch (e) {
             // Error handling pga. tidligere versjon som bare lagret en string i LS.
-            if (isString(tmp)) {
-                setteVersjoner.push(tmp);
-            }
+            setteVersjoner.push(tmp);
             return setteVersjoner;
         }
     }
     return setteVersjoner;
 }
 
-function isString(value: any): boolean {
-    return typeof value === 'string' || value instanceof String;
+export async function hentSetteVersjonerRemotestorage(): Promise<string[] | null> {
+    const temp = await(fetchHarSettInnlegg());
+    let result: string[];
+    if (temp === null) {
+        return null;
+    } else if (temp.Endringslogg === undefined) {
+        result = [];
+    } else {
+        result = temp.Endringslogg.split(',');
+    }
+
+    // For å overføre tidligere data fra local storage, kjøres bare hvis remote er tom.
+    if (result.length === 0) {
+        const fraLocal = hentSetteVersjonerLocalstorage();
+        if (fraLocal instanceof String) {
+            // @ts-ignore
+            result.push(fraLocal);
+        } else {
+            result.push(...fraLocal);
+        }
+        registrerSettInnlegg(result.join(','));
+    }
+    return result;
 }
 
-export function registrerHarLestEndringslogg(versjon: string) {
-    const setteVersjoner: string[] = hentSetteVersjonerLocalstorage();
-    if (!setteVersjoner.some((elem) => elem === versjon)) {
-        setteVersjoner.push(versjon);
-        window.localStorage.setItem(ENDRING_PREFIX, JSON.stringify(setteVersjoner));
-    }
+export async function registrerInnholdIRemoteStorage(endringslogg: EndringsloggInleggMedSettStatus[]) {
+    const messege: string[] = [];
+    endringslogg.forEach( (e)=> {
+        if(messege.length === 0) {
+            messege.push(e.id);
+        } else if(!messege.includes(e.id)) {
+            messege.push(e.id);
+        }
+    });
+    await(registrerSettInnlegg(messege.join(',')));
 }

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
+import { fetchToJson, sjekkStatuskode, toJson } from '../ducks/utils';
 import { PortefoljeData } from '../ducks/portefolje';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
@@ -8,7 +8,7 @@ const credentials = 'same-origin';
 const MED_CREDENTIALS: RequestInit = {
     credentials,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
     }
 };
 
@@ -16,6 +16,7 @@ export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
 export const FEATURE_URL = '/feature';
+const endringsloggURL = 'http://localhost:7070/veilarbremotestore/';
 
 export function hentVeiledersEnheter() {
     const url = `${VEILARBVEILEDER_URL}/api/veileder/enheter`;
@@ -100,4 +101,45 @@ export function hentEnhetTiltak(enhetId) {
 
 export function hentFeatures(featureQueryString: string) {
     return fetchToJson(`${API_BASE_URL}${FEATURE_URL}?${featureQueryString}`);
+}
+
+export function fetchHarSettInnlegg(): Promise<{Endringslogg: string}> | null {
+        return fetch(`${endringsloggURL}?ressurs=Endringslogg`, {credentials: 'same-origin'})
+        .then(sjekkStatuskodeAndPost)
+        .then(toJson)
+        .catch(
+            () => {
+                return null;
+            }
+        );
+}
+
+function sjekkStatuskodeAndPost(response) {
+    response = sjekkStatuskode(response);
+    if(response.status === 204) {
+        return postNyRemoteStorage();
+    }
+    return response;
+}
+
+function postNyRemoteStorage(): Promise<Response> {
+    return fetch(endringsloggURL, {
+        ...MED_CREDENTIALS,
+        method: 'POST',
+        body: JSON.stringify({})
+    }).then(sjekkStatuskode);
+}
+
+export function registrerSettInnlegg(message: string) {
+    patchRemoteStorage(message, `${endringsloggURL}`);
+}
+
+function patchRemoteStorage(data: string, url: string): Promise<Response> {
+    return fetch(url, {
+        ...MED_CREDENTIALS,
+        method: 'PATCH',
+        body: JSON.stringify({
+            Endringslogg: data
+        })
+    }).then(sjekkStatuskode);
 }
