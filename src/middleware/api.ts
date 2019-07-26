@@ -22,10 +22,6 @@ export function hentVeiledersEnheter() {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentLedetekster() {
-    return fetchToJson(`${API_BASE_URL}/tekster`, MED_CREDENTIALS);
-}
-
 function buildUrl(baseUrl: string, queryParams?: {}): string {
     if(queryParams) {
         return baseUrl + '?' + Object.entries(queryParams)
@@ -50,7 +46,7 @@ export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, sorter
     return fetchToJson<PortefoljeData>(url, config);
 }
 
-export function hentDiagramdata(enhet, veilederident, filtervalg) {
+export function hentDiagramdata(enhet, filtervalg, veilederident) {
     let url = `${VEILARBPORTEFOLJE_URL}/diagram/v2/` +
         `?enhet=${enhet}`;
 

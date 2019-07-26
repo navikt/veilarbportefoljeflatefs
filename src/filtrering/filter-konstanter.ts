@@ -14,6 +14,21 @@ export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const MOTER_IDAG = 'MOTER_IDAG';
 
+export const mapFilternavnTilFilterValue = {
+    ufordeltebruker : UFORDELTE_BRUKERE,
+    nyeBrukere: NYE_BRUKERE_FOR_VEILEDER,
+    trengerVurdering: TRENGER_VURDERING,
+    erSykmeldtMedArbeidsgiver: ER_SYKMELDT_MED_ARBEIDSGIVER,
+    venterPaSvarFraNAV: VENTER_PA_SVAR_FRA_NAV,
+    venterPaSvarFraBruker: VENTER_PA_SVAR_FRA_BRUKER,
+    avtaltMoteMedNav: MOTER_IDAG,
+    utlopteAktiviteter: UTLOPTE_AKTIVITETER,
+    ikkeIavtaltAktivitet: IKKE_I_AVTALT_AKTIVITET,
+    iavtaltAktivitet: I_AVTALT_AKTIVITET,
+    inaktiveBrukere: INAKTIVE_BRUKERE,
+    minArbeidsliste: MIN_ARBEIDSLISTE,
+};
+
 export const FILTERGRUPPE_ENHET = 'enhet';
 
 export function lagConfig(data: any): any {
@@ -23,7 +38,7 @@ export function lagConfig(data: any): any {
     return data;
 }
 
-export const ferdigfilterListe = ()=> ({
+export const ferdigfilterListe = {
     UFORDELTE_BRUKERE: 'Ufordelte brukere',
     NYE_BRUKERE_FOR_VEILEDER: 'Nye brukere',
     TRENGER_VURDERING: 'Trenger vurdering',
@@ -36,79 +51,81 @@ export const ferdigfilterListe = ()=> ({
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
     ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
     MOTER_IDAG: 'Møte med NAV'
-});
+};
 
-export const alder = (intl) => ({
-    '19-og-under': intl.formatMessage({id: 'filter.alder.under19'}),
-    '20-24': intl.formatMessage({id: 'filter.alder.20-24'}),
-    '25-29': intl.formatMessage({id: 'filter.alder.25-29'}),
-    '30-39': intl.formatMessage({id: 'filter.alder.30-39'}),
-    '40-49': intl.formatMessage({id: 'filter.alder.40-49'}),
-    '50-59': intl.formatMessage({id: 'filter.alder.50-59'}),
-    '60-66': intl.formatMessage({id: 'filter.alder.60-66'}),
-    '67-70': intl.formatMessage({id: 'filter.alder.67-70'})
-});
+export const alder = {
+    '19-og-under':'19 år og under' ,
+    '20-24': '20-24 år',
+    '25-29': '25-29 år',
+    '30-39': '30-39 år',
+    '40-49': '40-49 år',
+    '50-59': '50-59 år',
+    '60-66': '60-66 år',
+    '67-70': '67-70 år',
+};
 
 export const fodselsdagIMnd = () => range(1, 31, true).reduce((acc, x) => ({
     ...acc,
     [x]: lag2Sifret(x)
 }), {});
 
-export const kjonn = ()=> ({
+export const kjonn = {
     K: 'Kvinne',
     M: 'Mann'
-});
+};
 
-export const innsatsgruppe = (intl) => ({
-    IKVAL: intl.formatMessage({id: 'filter.innsatsgruppe.ikval'}),
-    BFORM: intl.formatMessage({id: 'filter.innsatsgruppe.bform'}),
-    BATT: intl.formatMessage({id: 'filter.innsatsgruppe.batt'}),
-    VARIG: intl.formatMessage({id: 'filter.innsatsgruppe.varig'})
-});
+export const innsatsgruppe = {
+    IKVAL: 'Standardinnsats',
+    BFORM: 'Situasjonsbestemt innsats',
+    BATT: 'Spesielt tilpasset innsats',
+    VARIG: 'Varig tilpasset',
+};
 
-export const hovedmal = (intl) => ({
-    SKAFFEA : intl.formatMessage({id: 'filter.hovedmal.skaffe_arbeid'}),
-    BEHOLDEA: intl.formatMessage({id: 'filter.hovedmal.beholde_arbeid'}),
-    OKEDELT: intl.formatMessage({id: 'filter.hovedmal.oke_deltakelse_om_arbeid'}),
-});
+export const hovedmal = {
+    SKAFFEA : 'Skaffe arbeid',
+    BEHOLDEA: 'Beholde arbeid',
+    OKEDELT: 'Øke deltakelse eller mål om arbeid',
+};
 
-export const formidlingsgruppe = (intl) => ({
-    ARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.arbs'}),
-    IARBS: intl.formatMessage({id: 'filter.formidlingsgruppe.iarbs'}),
-    ISERV: intl.formatMessage({id: 'filter.formidlingsgruppe.iserv'}),
-});
-export const servicegruppe = (intl) => ({
-    BKART: intl.formatMessage({id: 'filter.servicegruppe.bkart'}),
-    IVURD: intl.formatMessage({id: 'filter.servicegruppe.ivurd'}),
-    OPPFI: intl.formatMessage({id: 'filter.servicegruppe.oppfi'}),
-    VURDI: intl.formatMessage({id: 'filter.servicegruppe.vurdi'}),
-    VURDU: intl.formatMessage({id: 'filter.servicegruppe.vurdu'})
-});
-export const ytelse = (intl) => ({
-    DAGPENGER: intl.formatMessage({id: 'filter.ytelse.dagpenger'}),
-    ORDINARE_DAGPENGER: { label: intl.formatMessage({id: 'filter.ytelse.ord-dagpenger'}), className: 'skjemaelement--innrykk' },
-    DAGPENGER_MED_PERMITTERING: { label: intl.formatMessage({id: 'filter.ytelse.dagpenger-permitering'}), className: 'skjemaelement--innrykk' },
-    DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI: { label: intl.formatMessage({id: 'filter.ytelse.dagpenger-permittering-fiskeindustri'}), className: 'skjemaelement--innrykk' },
-    LONNSGARANTIMIDLER_DAGPENGER: { label: intl.formatMessage({id: 'filter.ytelse.lonnsgarantimidler-dagpenger'}), className: 'skjemaelement--innrykk' },
-    AAP: intl.formatMessage({id: 'filter.ytelse.aap'}),
-    AAP_MAXTID: { label: intl.formatMessage({id: 'filter.ytelse.aap-maxtid'}), className: 'skjemaelement--innrykk' },
-    AAP_UNNTAK: { label: intl.formatMessage({id: 'filter.ytelse.aap-unntak'}), className: 'skjemaelement--innrykk' },
-    TILTAKSPENGER: intl.formatMessage({id: 'filter.ytelse.tiltakspenger'})
-});
+export const formidlingsgruppe = {
+    ARBS: 'Arbeidssøker',
+    IARBS: 'Ikke arbeidssøker',
+    ISERV: 'Ikke servicebehov',
+};
 
-export const manuellBrukerStatus = (intl) => ({
-    MANUELL: intl.formatMessage({id: 'filter.manuellbrukere.manuellbruker'}),
-    KRR: intl.formatMessage({id:'filter.manuellbrukere.krr'})
-});
+export const servicegruppe = {
+    BKART: 'Behov for arbeidsevnevurdering',
+    IVURD: 'Ikke vurdert',
+    OPPFI: 'Helserelatert arbeidsrettet oppfølging i NAV',
+    VURDI: 'Sykmeldt oppfølging på arbeidsplassen',
+    VURDU: 'Sykmeldt uten arbeidsgiver'
+};
 
-export const ytelsevalg: (intl?: any) => {[id: string]: string} = (intl) => Object.keys(ytelse(intl)).reduce((acc, val) => ({ ...acc, [val]: val }), {});
+export const ytelse = {
+    DAGPENGER: 'Dagpenger',
+    ORDINARE_DAGPENGER: { label: 'Ordinære dagpenger', className: 'skjemaelement--innrykk' },
+    DAGPENGER_MED_PERMITTERING: { label: 'Dagpenger under permittering', className: 'skjemaelement--innrykk' },
+    DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI: { label: 'Dagpenger v/perm fiskeindustri', className: 'skjemaelement--innrykk' },
+    LONNSGARANTIMIDLER_DAGPENGER: { label: 'Lønnsgarantimidler dagpenger', className: 'skjemaelement--innrykk' },
+    AAP: 'AAP',
+    AAP_MAXTID: { label: 'AAP maxtid', className: 'skjemaelement--innrykk' },
+    AAP_UNNTAK: { label: 'AAP unntak', className: 'skjemaelement--innrykk' },
+    TILTAKSPENGER: 'Tiltakspenger'
+};
 
-export const ytelseUtlopsSortering = (intl) => ({
+export const manuellBrukerStatus = {
+    MANUELL: 'Manuell bruker',
+    KRR: 'KRR'
+};
+
+export const ytelsevalg: () => {[id: string]: string} = () => Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }), {});
+
+export const ytelseUtlopsSortering = {
     DAGPENGER: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
     ORDINARE_DAGPENGER: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
     DAGPENGER_MED_PERMITTERING: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
     TILTAKSPENGER: Sorteringsfelt.UTLOPSDATO
-});
+};
 
 export const ytelseAapSortering = ()=> ({
     AAP: { vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE },
@@ -116,26 +133,26 @@ export const ytelseAapSortering = ()=> ({
     AAP_UNNTAK: { vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKE }
 });
 
-export const rettighetsgruppe = (intl) => ({
-    AAP: intl.formatMessage({id: 'filter.rettighetsgruppe.aap'}),
-    DAGP: intl.formatMessage({id: 'filter.rettighetsgruppe.dagp'}),
-    INDS: intl.formatMessage({id: 'filter.rettighetsgruppe.inds'}),
-    IYT: intl.formatMessage({id: 'filter.rettighetsgruppe.iyt'}),
-    VENT: intl.formatMessage({id: 'filter.rettighetsgruppe.vent'}),
-    VLONN: intl.formatMessage({id: 'filter.rettighetsgruppe.vlonn'})
-});
+export const rettighetsgruppe = {
+    AAP: 'Arbeidsavklaringspenger',
+    DAGP: 'Dagpenger',
+    INDS: 'Tiltakspenger',
+    IYT: 'Ingen livsoppholdsytelser Arena',
+    VENT: 'Ventestønad',
+    VLONN: 'Ventelønn'
+};
 
-export const aktiviteter = (intl) => ({
-    SOKEAVTALE: intl.formatMessage({id:'filtrering.aktiviteter.sokeavtale'}),
-    STILLING: intl.formatMessage({id:'filtrering.aktiviteter.stilling'}),
-    BEHANDLING: intl.formatMessage({id:'filtrering.aktiviteter.medisinsk-behandling'}),
-    TILTAK: intl.formatMessage({id:'filtrering.aktiviteter.tiltak'}),
-    EGEN: intl.formatMessage({id:'filtrering.aktiviteter.egen'}),
-    IJOBB: intl.formatMessage({id:'filtrering.aktiviteter.ijobb'}),
-    MOTE: intl.formatMessage({id:'filtrering.aktiviteter.mote'}),
-    GRUPPEAKTIVITET: intl.formatMessage({id:'filtrering.aktiviteter.gruppeaktivitet'}),
-    UTDANNINGAKTIVITET: intl.formatMessage({id:'filtrering.aktiviteter.utdanningaktivitet'})
-});
+export const aktiviteter = {
+    SOKEAVTALE: 'Avtale om å søke jobber',
+    STILLING: 'Stilling bruker skal søke',
+    BEHANDLING: 'Medisinsk behandling',
+    TILTAK: 'Tiltak gjennom NAV',
+    EGEN: 'Jobbrettet egenaktivitet',
+    IJOBB: 'Jobb bruker har nå',
+    MOTE: 'Møte med NAV',
+    GRUPPEAKTIVITET: 'Gruppeaktivitet',
+    UTDANNINGAKTIVITET: 'Utdanning og kurs (for enslige forsørgere eller egenfinansiert)'
+};
 
 const veiledere = {
 };

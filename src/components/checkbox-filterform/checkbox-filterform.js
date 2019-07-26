@@ -3,7 +3,6 @@ import { Field, Fields, reduxForm } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { FormattedMessage } from 'react-intl';
 import { lagConfig } from './../../filtrering/filter-konstanter';
 import SubmitKnapp from './../submit-knapp';
 
@@ -73,7 +72,7 @@ function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, clos
                     </div>
                     :
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
-                        <FormattedMessage id="components.filterform.ingen-treff" />
+                        Ingen veiledere funnet
                     </AlertStripe>
                 }
             </div>

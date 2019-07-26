@@ -11,7 +11,6 @@ import { Form, Formik } from 'formik';
 import ArbeidslisteForm from './arbeidsliste-form';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { FormattedMessage } from 'react-intl';
 import { skjulModal } from '../ducks/modal';
 import { dateToISODate } from '../utils/dato-utils';
 
@@ -70,14 +69,14 @@ function LeggTilArbeidslisteForm({
                         <div>
                             <div className="modal-footer">
                                 <Hovedknapp className="knapp knapp--hoved" spinner={laster}>
-                                    <FormattedMessage id="modal.knapp.lagre" />
+                                    Lagre
                                 </Hovedknapp>
                                 <button type="button" className="knapp" onClick={() => {
                                     formikProps.resetForm();
                                     fjernMarkerteBrukere();
                                     lukkModal();
                                 }}>
-                                    <FormattedMessage id="modal.knapp.avbryt" />
+                                   Avbryt
                                 </button>
                             </div>
                         </div>

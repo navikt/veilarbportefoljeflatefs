@@ -10,10 +10,6 @@ interface FiltreringVeiledereState {
     hasFocus: boolean;
 }
 
-interface FiltreringVeiledereProps {
-    intl: any;
-}
-
 interface StateProps {
     veilederNavnQuery: string;
 }
@@ -22,7 +18,7 @@ interface DispatchProps {
     endreFiltervalg: (filterId: string, filterVerdi: string) => void;
 }
 
-type AllProps = FiltreringVeiledereProps & StateProps & DispatchProps;
+type AllProps = StateProps & DispatchProps;
 
 class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereState> {
 
@@ -65,14 +61,13 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
 
     render() {
 
-        const { intl } = this.props;
         const { hasFocus, veilederNavnQuery } = this.state;
 
         return (
             <div className="filtrering-veiledere" ref={(ref) => { this.wrapperRef = ref; }}>
                 <Input
                     label=""
-                    placeholder={intl.formatMessage({id: 'filtrering-navn-eller-ident'})}
+                    placeholder="Navn eller NAV-ident"
                     onChange={this.handleChange}
                     value={veilederNavnQuery}
                     onFocus={() => this.setFocus(true)}

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { AlertStripeInfoSolid } from 'nav-frontend-alertstriper';
@@ -24,20 +23,21 @@ class NyContextModal extends React.Component<NyContextModalProps> {
             >
                 <div className="brukercontext__modal">
                     <Innholdstittel tag="h1" className="blokk-s">
-                        <FormattedMessage id="nyenhet.modal.overskrift" />
+                        Du har endret Enhet
                     </Innholdstittel>
                     <AlertStripeInfoSolid className="blokk-s">
-                        <FormattedMessage id="nyenhet.modal.alertmelding" />
+                        Du har endret enhet i et annet vindu. Du kan ikke jobbe i 2 enheter samtidig.
+                        Velger du 'endre' mister du arbeidet du ikke har lagret.
                     </AlertStripeInfoSolid>
                     <Normaltekst className="blokk-s">
-                        <FormattedMessage id="nyenhet.modal.sporsmal" values={{ enhet: this.props.aktivEnhet }}/>
+                        {`Ønsker du å endre enhet til ${this.props.aktivEnhet}?`}
                     </Normaltekst>
                     <div className="modal-footer" >
                         <Hovedknapp disabled={this.props.isPending} onClick={() => this.props.doEndreAktivEnhet()}>
-                            <FormattedMessage id="nyenhet.modal.endre" />
+                            Endre
                         </Hovedknapp>
                         <Knapp onClick={this.props.doBeholdAktivEnhet} type="standard" spinner={this.props.isPending} autoDisableVedSpinner>
-                            <FormattedMessage id="nyenhet.modal.behold" />
+                            Behold
                         </Knapp>
                     </div>
                 </div>

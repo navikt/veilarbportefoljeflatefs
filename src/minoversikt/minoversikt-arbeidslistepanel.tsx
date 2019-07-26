@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import ArbeidslisteModalRediger from '../modal/arbeidsliste-modal-rediger';
 import { UndertekstBold } from 'nav-frontend-typografi';
 import { BrukerModell } from '../model-interfaces';
@@ -9,9 +8,7 @@ interface ArbeidslistePanelProps {
     innloggetVeileder: string;
 }
 
-export default function ArbeidslistePanel({
-   bruker,
-   innloggetVeileder}: ArbeidslistePanelProps) {
+export default function ArbeidslistePanel({bruker, innloggetVeileder}: ArbeidslistePanelProps) {
 
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
     const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
@@ -26,13 +23,7 @@ export default function ArbeidslistePanel({
                     </UndertekstBold>
                     <p>{bruker.arbeidsliste.kommentar}</p>
                     <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
-                        <FormattedMessage
-                            id="arbeidsliste.kommentar.footer"
-                            values={{
-                                dato: sistEndretDato.toLocaleDateString(),
-                                veileder: sistEndretAv
-                            }}
-                        />
+                        {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                         <ArbeidslisteModalRediger
                             bruker={bruker}
                             innloggetVeileder={innloggetVeileder}

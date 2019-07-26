@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { reduxForm } from 'redux-form';
 import { slettArbeidsliste } from '../ducks/arbeidsliste';
@@ -16,14 +15,7 @@ function brukerLabel(bruker) {
     return (
         <li key={bruker.fnr}>
             <Element>
-                <FormattedMessage
-                    id="modal.legg.til.arbeidsliste.brukerinfo"
-                    values={{
-                        etternavn: bruker.etternavn,
-                        fornavn: bruker.fornavn,
-                        fnr: bruker.fnr
-                    }}
-                />
+                {`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}
             </Element>
         </li>
     );
@@ -47,10 +39,10 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slet
             </div>
             <div className="modal-footer">
                 <Hovedknapp className="knapp knapp--hoved" spinner={laster} onClick={handleSubmit}>
-                    <FormattedMessage id="modal.knapp.lagre" />
+                    Lagre
                 </Hovedknapp>
                 <button type="button" className="knapp" onClick={lukkModal}>
-                    <FormattedMessage id="modal.knapp.avbryt" />
+                    Avbryt
                 </button>
             </div>
         </form>

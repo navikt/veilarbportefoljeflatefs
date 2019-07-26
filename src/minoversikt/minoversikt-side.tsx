@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -14,7 +13,7 @@ import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import { hentPortefoljeForVeileder, settSortering, settValgtVeileder } from '../ducks/portefolje';
 import { EnheterState } from '../ducks/enheter';
 import { VeiledereState } from '../ducks/veiledere';
-import { FiltervalgModell, ValgtEnhetModell, VeilederModell, } from '../model-interfaces';
+import { FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import {
@@ -57,7 +56,7 @@ interface OwnProps {
         };
 }
 
-type MinoversiktSideProps = StateProps & DispatchProps & OwnProps & InjectedIntlProps;
+type MinoversiktSideProps = StateProps & DispatchProps & OwnProps;
 
 class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     componentDidMount() {
@@ -91,33 +90,28 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     }
 
     render() {
-        const { enheter, veiledere, intl, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
+        const { enheter, veiledere, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
         const innloggetVeileder = { ident: enheter.ident|| '', fornavn: '', etternavn: '', navn: ''};
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
-        const { formatMessage } = intl;
 
         const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
 
-        const annenVeilederVarsel = (<Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
-            <FormattedMessage
-                id="annen.veileder.portefolje.advarsel"
-                tagName="em"
-                values={{
-                    fornavn: gjeldendeVeileder.fornavn || '',
-                    etternavn: gjeldendeVeileder.etternavn || ''
-                }}
-            /></Normaltekst>);
+        const annenVeilederVarsel = (
+            <Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
+                {`Du er inne på ${gjeldendeVeileder.fornavn} ${gjeldendeVeileder.etternavn} sin oversikt`}
+            </Normaltekst>
+        );
 
         return (
-            <DocumentTitle title={formatMessage({ id: 'lenker.min.oversikt' })}>
+            <DocumentTitle title="Min oversikt">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                     <div className="minoversikt-side blokk-xl">
                         {visesAnnenVeiledersPortefolje ?
                             <Link to="/veiledere" className="typo-normal tilbaketilveileder">
                                 <i className="chevron--venstre" />
                                 <span>
-                                    <FormattedMessage id="minoversikt.link.til.veilederoversikt" />
+                                     Til veilederoversikt
                                 </span>
                             </Link> : null}
                         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
@@ -128,7 +122,8 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                 />
                                 <div id="oversikt-sideinnhold" role="tabpanel">
                                     <p className="typo-infotekst begrensetbredde blokk-l">
-                                        <FormattedMessage id="ingresstekst.minoversikt" />
+                                        Her får du oversikt over alle brukere som er tildelt deg eller ditt team.
+                                        Du kan filtrere ytterligere eller flytte brukere til en annen veileder i din enhet.
                                     </p>
                                     <div className="row">
                                         <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
@@ -186,4 +181,4 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MinoversiktSide));
+export default connect(mapStateToProps, mapDispatchToProps)(MinoversiktSide);

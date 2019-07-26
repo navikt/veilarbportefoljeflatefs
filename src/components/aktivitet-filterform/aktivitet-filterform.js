@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
 import SubmitKnapp from './../submit-knapp';
 
 function reset(change, alleValg) {
@@ -77,7 +76,7 @@ function AktivitetFilterform(props) {
                     className="knapp knapp--standard knapp--mini"
                     onClick={reset(props.change, props.valg)}
                 >
-                    <FormattedMessage id="components.aktivitet-filterform.button.fjern" />
+                    Fjern aktiviteter
                 </button>
             </div>
         </form>

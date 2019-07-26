@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import FiltreringStatus from './filtrering-status';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
+import { FiltreringStatus } from './filtrering-status/filtrering-status';
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -24,7 +24,7 @@ interface FiltreringContainerProps {
     };
 }
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
+function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
     return (
         <div className="blokk-m">
             <FiltreringNavnellerfnr
@@ -38,10 +38,11 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder= defaultVeiled
                 lamellNavn="status"
             >
                 <FiltreringStatus
-                    filtergruppe={filtergruppe }
+                    filtergruppe={filtergruppe}
                     veileder={veileder}
                     filtervalg={filtervalg}
                 />
+
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== 'veileder'}

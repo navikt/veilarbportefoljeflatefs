@@ -1,20 +1,18 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 
 interface ListeoverskriftProps {
-    id: string;
     skalVises?: boolean;
     className?: string;
-    values?: {[id: string]: any};
+    tekst?: string;
 }
 
-function Listeoverskrift({ id, skalVises= true, className= '', values= {} }: ListeoverskriftProps) {
+function Listeoverskrift({ skalVises= true, className= '', tekst }: ListeoverskriftProps) {
     if (!skalVises) {
         return null;
     }
     return (
         <span className={className}>
-            <FormattedMessage id={id} values={values} />
+            {tekst}
         </span>
     );
 }

@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-toggle';
-import * as VK from './../../minoversikt/minoversikt-konstanter';
+import * as VK from '../../minoversikt/minoversikt-konstanter';
 import { AppState } from './../../reducer';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 import { settVisningsmodus } from '../../ducks/paginering';
 import { ToolbarPosisjon } from './toolbar';
+import { ReactComponent as ListeIkon} from './liste.svg';
+import { ReactComponent as StolpeIkon} from './stolpediagram.svg';
+import {ToggleGruppe } from "nav-frontend-toggle";
+import {MinoversiktVisning} from "../../minoversikt/minoversikt-konstanter";
 
 interface OwnProps {
     filtergruppe: ListevisningType;
@@ -14,11 +17,11 @@ interface OwnProps {
 }
 
 interface DispatchProps {
-    endreVisningsmodus: (visning: string) => void;
+    endreVisningsmodus: (visning: MinoversiktVisning) => void;
 }
 
 interface StateProps {
-    visningsmodus: string;
+    visningsmodus: MinoversiktVisning;
     skalSkjules: boolean;
 }
 
@@ -31,22 +34,21 @@ function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules }:
     if (skalSkjules) {
         return null;
     }
-
-    const onChange = (e) => endreVisningsmodus(e.target.value);
-
     return (
-        <ToggleGruppe defaultToggles={[]} onChange={onChange}>
-            <ToggleKnapp
-                pressed={visningsmodus === VK.TABELLVISNING}
-            >
-                <span className="visuallyhidden">Vis som tabell</span>
-            </ToggleKnapp>
-            <ToggleKnapp
-                pressed={visningsmodus === VK.DIAGRAMVISNING}
-            >
-                <span className="visuallyhidden">Vis som diagram</span>
-            </ToggleKnapp>
-        </ToggleGruppe>
+        <ToggleGruppe
+            defaultToggles={[
+                {
+                    children: <ListeIkon/>,
+                    pressed: visningsmodus === VK.TABELLVISNING,
+                    onClick: () => endreVisningsmodus(VK.TABELLVISNING)
+                },
+                {
+                    children: <StolpeIkon/>,
+                    pressed: visningsmodus === VK.DIAGRAMVISNING,
+                    onClick: () => endreVisningsmodus(VK.DIAGRAMVISNING)
+                },
+            ]as any}
+        />
     );
 }
 
@@ -70,7 +72,7 @@ const mapStateToProps = (state: AppState, ownProps: OwnProps): StateProps => {
 };
 
 const mapDispatchToProps = (dispatch, props: OwnProps): DispatchProps => bindActionCreators({
-    endreVisningsmodus(modus) {
+    endreVisningsmodus(modus: MinoversiktVisning) {
         return settVisningsmodus(modus, props.toolbarPosisjon);
     }
 }, dispatch);

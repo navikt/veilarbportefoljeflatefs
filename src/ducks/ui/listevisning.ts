@@ -35,7 +35,8 @@ export enum Kolonne {
 
 export enum ListevisningType {
     minOversikt = 'minOversikt',
-    enhetensOversikt = 'enhetensOversikt'
+    enhetensOversikt = 'enhetensOversikt',
+    veilederOversikt = 'veiledere'
 }
 
 interface ListevisningAction {

@@ -1,0 +1,98 @@
+.barlabel {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+
+    &__labeltext {
+        width: 100%;
+        padding-right: 0.5rem;
+    }
+
+    &__barwrapper {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-basis: 45%;
+        flex-shrink: 0;
+        flex-grow: 0;
+
+        .arbeidsliste {
+            flex-basis: 3rem;
+            padding-right: 1rem;
+            display: inline-flex;
+            p {
+                padding-right: 0;
+            }
+        }
+    }
+
+    &__antall {
+        flex-basis: 3rem;
+        text-align: right;
+        padding-right: 0.5rem;
+        font-weight: 800;
+        margin-top: -0.3rem;
+    }
+
+    &__bar {
+        position: relative;
+        height: 1rem;
+        flex-grow: 1;
+    }
+
+    &__bartrack {
+        display: block;
+        background-color: #e9e7e7;
+        height: 12px;
+        border-radius: 1rem;
+        width: 100%;
+    }
+
+    &__barface {
+        position: absolute;
+        display: block;
+        background-color: @navLysBlaLighten20;
+        height: 12px;
+        border-radius: 1rem;
+        transition: width cubic-bezier(0.4, 0, 0.2, 1) 1337ms;
+        left: 0;
+        top: 0;
+    }
+    &.ufordeltebrukere .barlabel__barface {
+        background-color: @navLillaLighten20;
+    }
+    &.venterPaSvarFraNAV .barlabel__barface {
+        background-color: @navLillaLighten20;
+    }
+    &.venterPaSvarFraBruker .barlabel__barface {
+        background-color: @navLimeGronnLighten20;
+    }
+    &.avtaltMoteMedNav .barlabel__barface {
+        background-color: @navDypBlaDarken80;
+    }
+    &.utlopteAktiviteter .barlabel__barface {
+        background-color: @navGra60;
+    }
+    &.ikkeIAvtaltAktivitet .barlabel__barface {
+        background-color: @navGra60;
+    }
+    &.iAvtaltAktivitet .barlabel__barface {
+        background-color: @navDypBlaLighten20;
+    }
+    &.inaktiveBrukere .barlabel__barface {
+        background-color: @navGra60;
+    }
+    &.minArbeidsliste .barlabel__barface {
+        background-color: @navGra60;
+    }
+}
+
+.forsteBarlabelIGruppe {
+    padding-top: 1rem;
+    border-top: 1px solid @navGra60;
+    margin-top: 1rem;
+}
+
+.minArbeidsliste__tittel {
+    margin-top: 1rem;
+}

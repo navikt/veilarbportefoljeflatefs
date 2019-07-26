@@ -7,20 +7,25 @@ export const FEILET = 'veilarbportefoljeflatefs/statustall/FEILET';
 export const PENDING = 'veilarbportefoljeflatefs/statustall/PENDING';
 export const LEGG_TIL_STATUSTALL = 'LEGG_TIL_STATUSTALL';
 
+export interface Statustall {
+    totalt: number;
+    ufordelteBrukere: number;
+    inaktiveBrukere: number;
+    venterPaSvarFraNAV: number;
+    venterPaSvarFraBruker: number;
+    utlopteAktiviteter: number;
+    ikkeIavtaltAktivitet: number;
+    iavtaltAktivitet: number;
+    minArbeidsliste: number;
+    erSykmeldtMedArbeidsgiver: number;
+    moterMedNAVIdag: number;
+    trengerVurdering: number;
+    nyeBrukereForVeileder: number;
+}
+
 export interface StatustallState {
     status: string;
-    data: {
-        totalt: number;
-        ufordelteBrukere: number;
-        inaktiveBrukere: number;
-        venterPaSvarFraNAV: number;
-        venterPaSvarFraBruker: number;
-        utlopteAktiviteter: number;
-        ikkeIavtaltAktivitet: number;
-        iavtaltAktivitet: number;
-        minArbeidsliste: number;
-        erSykmeldtMedArbeidsgiver: number;
-    };
+    data: Statustall;
 }
 
 const initalState: StatustallState = {
@@ -36,6 +41,9 @@ const initalState: StatustallState = {
         iavtaltAktivitet: 0,
         minArbeidsliste: 0,
         erSykmeldtMedArbeidsgiver: 0,
+        nyeBrukereForVeileder:0,
+        moterMedNAVIdag: 0,
+        trengerVurdering: 0,
     }
 };
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routes from '../routes';
+import Application from '../application';
 
 it('renders without crashing', () => {
     const div = document.createElement('mainApp');
-    ReactDOM.render(<Routes/>, div);
+    ReactDOM.render(<Application/>, div);
 });

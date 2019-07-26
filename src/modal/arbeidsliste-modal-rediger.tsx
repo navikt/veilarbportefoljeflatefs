@@ -1,7 +1,6 @@
 import * as React from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
 import { BrukerModell, Status } from '../model-interfaces';
 import { useState } from 'react';
@@ -75,7 +74,7 @@ function ArbeidslisteModalRediger({
                 className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
                 onClick={()=>setIsOpen(true)}
             >
-                <FormattedMessage id="arbeidsliste.kommentar.footer.knapp"/>
+                Rediger
             </button>
 
             <Formik
@@ -98,7 +97,7 @@ function ArbeidslisteModalRediger({
                         <div className="arbeidsliste__modal">
                             <div className="arbeidsliste-info-tekst">
                                 <Innholdstittel tag="h1" className="blokk-xs">
-                                    <FormattedMessage id="modal.rediger.arbeidsliste.tittel"/>
+                                    Rediger
                                 </Innholdstittel>
                             </div>
                             <RedigerArbeidslisteForm

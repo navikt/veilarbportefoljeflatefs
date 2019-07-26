@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { Children, cloneElement, ReactElement } from 'react';
 import { Input } from 'nav-frontend-skjema';
 
@@ -43,10 +42,7 @@ class SokFilter extends React.Component<SokFilterProps, SokFilterState> {
                     />
                 </div>
                 <span className="text-hide" aria-live="polite" aria-atomic="true">
-                    <FormattedMessage
-                        id="components.viser.antall.treff"
-                        values={{ antall: ''+filteredData.length }}
-                    />
+                    {`Viser ${filteredData.length} treff`}
                 </span>
                 {child}
             </div>

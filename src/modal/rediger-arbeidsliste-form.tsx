@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Form, } from 'formik';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { FormattedMessage } from 'react-intl';
 import FormikTekstArea from '../components/formik/formik-tekstarea';
 import FormikInput from '../components/formik/formik-input';
 import FormikDatoVelger from '../components/formik/formik-datovelger/formik-datovelger';
@@ -21,22 +20,16 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <FormikInput name="overskrift"/>
                 <FormikTekstArea name="kommentar"/>
                 <Undertekst className="arbeidsliste--modal-redigering">
-                    <FormattedMessage
-                        id="arbeidsliste.kommentar.footer"
-                        values={{
-                            dato: props.sistEndretDato.toLocaleDateString(),
-                            veileder: props.sistEndretAv
-                        }}
-                    />
+                    {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}
                 </Undertekst>
                 <FormikDatoVelger name="frist"/>
                 <div>
                     <div className="modal-footer">
                         <Hovedknapp htmlType="submit" className="knapp knapp--hoved" spinner={props.laster}>
-                            <FormattedMessage id="modal.knapp.lagre" />
+                           Lagre
                         </Hovedknapp>
                         <button type="button" className="knapp" onClick={props.lukkModal}>
-                            <FormattedMessage id="modal.knapp.avbryt" />
+                           Avbryt
                         </button>
                     </div>
                 </div>

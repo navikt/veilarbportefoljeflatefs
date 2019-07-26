@@ -1,5 +1,0 @@
-Du har valgt å fjerne {antall, number} {antall, plural,
-one {bruker}
-other {brukere}
-}
-fra arbeidslisten.

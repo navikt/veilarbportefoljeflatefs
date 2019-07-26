@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Element } from 'nav-frontend-typografi';
-import { FormattedMessage, injectIntl } from 'react-intl';
 import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import RadioFilterform from '../components/radio-filterform/radio-filterform';
@@ -28,18 +27,17 @@ interface FiltreringFilterProps {
     intl?: any;
 }
 
-// Midlertidig component til feature toggle er fjernet og
-const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFilterProps) => (
+const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterProps) => (
     <div>
         <div className="row">
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
-                    <FormattedMessage id="filtrering.filter.tittel.demografi"/>
+                    Demografi
                 </Element>
                 <Dropdown name="Alder">
                     <CheckboxFilterform
                         form="alder"
-                        valg={alder(intl)}
+                        valg={alder}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -55,7 +53,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Kjønn">
                     <CheckboxFilterform
                         form="kjonn"
-                        valg={kjonn()}
+                        valg={kjonn}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -63,12 +61,12 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
             </div>
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
-                    <FormattedMessage id="filtrering.filter.tittel.situasjon"/>
+                    Situasjon
                 </Element>
                 <Dropdown name="Innsatsgruppe">
                     <CheckboxFilterform
                         form="innsatsgruppe"
-                        valg={innsatsgruppe(intl)}
+                        valg={innsatsgruppe}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -76,7 +74,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Hovedmål">
                     <CheckboxFilterform
                         form="hovedmal"
-                        valg={hovedmal(intl)}
+                        valg={hovedmal}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -84,7 +82,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Formidlingsgruppe">
                     <CheckboxFilterform
                         form="formidlingsgruppe"
-                        valg={formidlingsgruppe(intl)}
+                        valg={formidlingsgruppe}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -92,7 +90,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Servicegruppe">
                     <CheckboxFilterform
                         form="servicegruppe"
-                        valg={servicegruppe(intl)}
+                        valg={servicegruppe}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -100,7 +98,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
                 <Dropdown name="Rettighetsgruppe">
                     <CheckboxFilterform
                         form="rettighetsgruppe"
-                        valg={rettighetsgruppe(intl)}
+                        valg={rettighetsgruppe}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -108,12 +106,12 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
             </div>
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
-                    <FormattedMessage id="filtrering.filter.tittel.ytelse"/>
+                    Ytelse
                 </Element>
                 <Dropdown name="Ytelse" className="dropdown--140bredde-responsive">
                     <RadioFilterform
                         form="ytelse"
-                        valg={ytelse(intl)}
+                        valg={ytelse}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -121,12 +119,12 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
             </div>
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
-                    <FormattedMessage id="filtrering.filter.tittel.manuellbruker"/>
+                    Manuell bruker
                 </Element>
                 <Dropdown name="Manuell bruker">
                     <CheckboxFilterform
                         form="manuellBrukerStatus"
-                        valg={manuellBrukerStatus(intl)}
+                        valg={manuellBrukerStatus}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -134,13 +132,13 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
             </div>
             <div className="col-sm-12">
                 <OverskriftMedHjelpeTekst
-                    overskriftId="filtrering.filter.tittel.aktivitet"
-                    hjelpetekstId="hjelpetekst.aktivitetsfilter"
+                    overskriftTekst="Aktivitet"
+                    hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
                 />
                 <Dropdown name="Aktivitet" className="dropdown--140bredde-responsive">
                     <AktivitetFilterform
                         form="aktiviteter"
-                        valg={aktiviteter(intl)}
+                        valg={aktiviteter}
                         filtervalg={filtervalg}
                         onSubmit={actions.endreFiltervalg}
                     />
@@ -161,4 +159,4 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak, intl}: FiltreringFi
     </div>
 );
 
-export default injectIntl(FiltreringFilter);
+export default FiltreringFilter;

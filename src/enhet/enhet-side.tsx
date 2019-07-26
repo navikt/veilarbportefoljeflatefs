@@ -1,19 +1,18 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
 import DocumentTitle from 'react-document-title';
-import Lenker from './../lenker/lenker';
-import Innholdslaster from './../innholdslaster/innholdslaster';
+import Lenker from '../lenker/lenker';
+import Innholdslaster from '../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
-import { hentStatusTall } from '../ducks/statustall';
+import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import { AppState } from '../reducer';
-import { StatustallModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
+import {  ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { FiltreringState } from '../ducks/filtrering';
 import { pagineringSetup } from '../ducks/paginering';
@@ -25,7 +24,7 @@ interface StateProps {
     valgtEnhet: ValgtEnhetModell;
     filtervalg: FiltreringState;
     veilederliste: VeilederModell[];
-    statustall: { data: StatustallModell };
+    statustall: StatustallState;
     enhettiltak: EnhettiltakState;
     listevisning: ListevisningState;
 }
@@ -36,13 +35,9 @@ interface DispatchProps {
     initalPaginering: (side: number, seAlle: boolean) => void;
 }
 
-interface OwnProps {
-    intl: InjectedIntl;
-}
+type EnhetSideProps = StateProps & DispatchProps;
 
-type EnhetSideProps = StateProps & DispatchProps & OwnProps;
-
-class EnhetSide extends React.Component<EnhetSideProps, {}> {
+class EnhetSide extends React.Component<EnhetSideProps> {
     componentWillMount() {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
@@ -62,16 +57,16 @@ class EnhetSide extends React.Component<EnhetSideProps, {}> {
     }
 
     render() {
-        const { filtervalg, veilederliste, statustall, enhettiltak, listevisning, intl } = this.props;
-        const { formatMessage } = intl;
+        const { filtervalg, veilederliste, statustall, enhettiltak, listevisning } = this.props;
         return (
-            <DocumentTitle title={formatMessage({ id: 'lenker.enhet.oversikt' })}>
+            <DocumentTitle title="Enhetens oversikt">
                 <div className="enhet-side blokk-xl">
                     <Lenker />
                     <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                         <div id="oversikt-sideinnhold" role="tabpanel">
                             <p className="typo-infotekst begrensetbredde blokk-l">
-                                <FormattedMessage id="enhet.ingresstekst.enhetoversikt" />
+                                Her får du oversikt over alle brukere som er tilknyttet enheten du er logget inn på.
+                                Du kan filtrere ytterligere, søke opp veiledere og flytte eller fordele brukere.
                             </p>
                             <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
                                 <FiltreringContainer
@@ -117,4 +112,4 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(EnhetSide));
+export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);

@@ -1,8 +1,11 @@
-import { AppState } from '../../reducer';
-import { Kolonne, ListevisningType } from './listevisning';
-import { FiltreringAktiviteterValg, AktiviteterValg, FiltreringState } from '../filtrering';
+import {AppState} from '../../reducer';
+import {Kolonne, ListevisningType} from './listevisning';
+import {AktiviteterValg, FiltreringAktiviteterValg, FiltreringState} from '../filtrering';
 import {
-    I_AVTALT_AKTIVITET, MOTER_IDAG, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
+    I_AVTALT_AKTIVITET,
+    MOTER_IDAG,
+    UTLOPTE_AKTIVITETER,
+    VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
 
@@ -40,6 +43,8 @@ function getFiltertingState(state: AppState, name: ListevisningType): Filtrering
             return state.filtrering;
         case ListevisningType.minOversikt:
             return state.filtreringMinoversikt;
+        case ListevisningType.veilederOversikt:
+            return state.filtreringVeilederoversikt;
     }
 }
 

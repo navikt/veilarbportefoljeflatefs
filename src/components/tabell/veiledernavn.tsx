@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { BrukerModell, EtikettType, VeilederModell } from '../../model-interfaces';
-import { FormattedMessage } from 'react-intl';
-import { Kolonne } from '../../ducks/ui/listevisning';
 import Etikett from './etikett';
 
 interface VeiledernavnProps {
@@ -22,7 +20,7 @@ function VeilederNavn({ className, bruker, skalVises, veileder }: VeiledernavnPr
         type={EtikettType.NYBRUKER}
         skalVises={bruker.nyForEnhet === true}
     >
-        <FormattedMessage id="enhet.portefolje.tabelletikett.ufordelt.bruker" />
+        Ufordelt bruker
     </Etikett>;
 
     return (

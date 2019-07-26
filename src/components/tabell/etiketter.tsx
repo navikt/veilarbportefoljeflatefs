@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import Etikett from './etikett';
 import { BrukerModell, EtikettType, VurderingsBehov } from '../../model-interfaces';
 
@@ -15,43 +14,43 @@ function Etiketter({ className, bruker }: EtiketterProps) {
                 type={EtikettType.SIKKERHETSTILTAK}
                 skalVises={bruker.sikkerhetstiltak.length > 0}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.sikkerhetstiltak"/>
+                Sikkerhetstiltak
             </Etikett>
             <Etikett
                 type={EtikettType.DISKRESJONSKODE}
                 skalVises={!!bruker.diskresjonskode}
             >
-                <span>{`Kode ${bruker.diskresjonskode}`}</span>
+                {`Kode ${bruker.diskresjonskode}`}
             </Etikett>
             <Etikett
                 type={EtikettType.EGEN_ANSATT}
                 skalVises={bruker.egenAnsatt}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.egen.ansatt"/>
+               Egen ansatt
             </Etikett>
             <Etikett
                 type={EtikettType.DOED}
                 skalVises={bruker.erDoed}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.dod"/>
+                Død
             </Etikett>
             <Etikett
                 type={EtikettType.IKKE_VURDERT}
                 skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.ikke_vurdert"/>
+                Trenger vurdering
             </Etikett>
             <Etikett
                 type={EtikettType.BEHOV_AEV}
                 skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.behov_aev"/>
+                Behov for AEV
             </Etikett>
             <Etikett
                 type={EtikettType.ER_SYKMELDT_MED_ARBEIDSGIVER}
                 skalVises={bruker.erSykmeldtMedArbeidsgiver}
             >
-                <FormattedMessage id="enhet.portefolje.tabelletikett.er_sykmeldt_med_arbeidsgiver"/>
+                Sykmeldt
             </Etikett>
 
         </span>

@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
 import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
 import { getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl, updateLastPath } from '../utils/url-utils';
 import EnhetTabell from './enhetsportefolje-tabell';
-import TabellOverskrift from './../components/tabell-overskrift';
+import TabellOverskrift from '../components/tabell-overskrift';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import { diagramSkalVises } from '../minoversikt/diagram/util';
 import Diagram from '../minoversikt/diagram/diagram';
@@ -17,7 +17,6 @@ import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
 import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmelding-brukere';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
-import { InjectedIntlProps } from 'react-intl';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 
 function antallFilter(filtervalg) {
@@ -102,21 +101,21 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         );
     }
 
-     lagToolbar = (posisjon: ToolbarPosisjon) => {
+    lagToolbar = (posisjon: ToolbarPosisjon) => {
 
-         const {
-             portefolje,
-             valgtEnhet,
-             hentPortefolje,
-             sorteringsrekkefolge,
-             sorteringsfelt,
-             filtervalg,
-             visningsmodus,
-         } = this.props;
+        const {
+            portefolje,
+            valgtEnhet,
+            hentPortefolje,
+            sorteringsrekkefolge,
+            sorteringsfelt,
+            filtervalg,
+            visningsmodus,
+        } = this.props;
 
-         const { antallTotalt } = portefolje.data;
+        const { antallTotalt } = portefolje.data;
 
-         return (
+        return (
             <Toolbar
                 filtergruppe={ListevisningType.enhetensOversikt}
                 onPaginering={() => hentPortefolje(
@@ -130,7 +129,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                 antallTotalt={antallTotalt}
                 posisjon={posisjon}
             />
-         );
+        );
     }
 
     render() {
@@ -174,7 +173,11 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     {this.lagToolbar(ToolbarPosisjon.OVER)}
                     {
                         visDiagram ?
-                            <Diagram filtreringsvalg={filtervalg} enhet={valgtEnhet.enhet!.enhetId}/> :
+                            <Diagram
+                                filtreringsvalg={filtervalg}
+                                enhet={valgtEnhet.enhet!.enhetId}
+                            />
+                            :
                             <EnhetTabell
                                 veiledere={veiledere.data.veilederListe}
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
@@ -185,8 +188,8 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
-                        tittelTekstID="modal.tilordning.feilet.tittel"
-                        infotekstTekstID="modal.tilordning.feilet.infotekst"
+                        tittelTekst="Handlingen kan ikke utføres"
+                        infotekstTekst="Tilordning av veileder til følgende brukere feilet:"
                     />
                     <ServerFeilModal
                         isOpen={serverfeilModalSkalVises}

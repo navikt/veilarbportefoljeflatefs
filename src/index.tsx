@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'whatwg-fetch';
-import Routes from './routes';
+import Application from './application';
 import './style.less';
 
 if (!(window as any)._babelPolyfill) {
@@ -15,4 +15,5 @@ if(process.env.REACT_APP_MOCK === 'true') {
     require('./mocks'); // tslint:disable-line
 }
 
-ReactDOM.render(<Routes/>, document.getElementById('mainapp'));
+
+ReactDOM.render(<Application/>, document.getElementById('mainapp'));

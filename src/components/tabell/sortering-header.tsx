@@ -1,6 +1,5 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import { FormattedMessage } from 'react-intl';
 import { Sorteringsfelt, Sorteringsrekkefolge } from '../../model-interfaces';
 import Header, { HeaderProps } from './header';
 
@@ -9,10 +8,10 @@ interface SorteringHeaderProps extends HeaderProps {
     onClick: (sortering: string) => void;
     rekkefolge: Sorteringsrekkefolge;
     erValgt: boolean;
-    tekstId: string;
+    tekst: string;
 }
 
-function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekstId, skalVises = true, className = '' }: SorteringHeaderProps) {
+function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekst, skalVises = true, className = '' }: SorteringHeaderProps) {
     return (
         <Header skalVises={skalVises} className={className}>
             <button
@@ -22,10 +21,10 @@ function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekstId, ska
                 aria-label={erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ?
                 rekkefolge : 'inaktiv'}
             >
-                <FormattedMessage id={tekstId} />
+                {tekst}
             </button>
             {sortering === 'etternavn' ?
-                <FormattedMessage id="portefolje.tabell.fornavn" /> : null
+                ", Fornavn" : null
             }
         </Header>
     );

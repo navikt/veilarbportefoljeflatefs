@@ -1,1 +1,0 @@
-Du må korte ned teksten til {KOMMENTAR_MAKS_LENGDE} tegn

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 import SokFilter from './sok-filter';
 import Dropdown from '../dropdown/dropdown';
 import RadioFilterform from './../radio-filterform/radio-filterform';
@@ -19,9 +18,7 @@ interface TildelVeilederProps {
     toolbarPosisjon?: ToolbarPosisjon;
 }
 
-type Props = TildelVeilederProps & InjectedIntlProps;
-
-function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere, intl }: Props) {
+function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere }: TildelVeilederProps) {
     if (!skalVises) {
         return null;
     }
@@ -40,10 +37,10 @@ function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere, intl
     };
 
     return (
-        <Dropdown name={intl.formatMessage({id: 'toolbar.tildel-veileder'})} className="dropdown--fixed dropdown--toolbar" disabled={!aktiv}>
+        <Dropdown name="Tildel veileder" className="dropdown--fixed dropdown--toolbar" disabled={!aktiv}>
             <SokFilter
-                label={intl.formatMessage({id: 'toolbar.tildel-veileder'})}
-                placeholder={intl.formatMessage({id: 'toolbar.tildel-veileder'})}
+                label="Tildel veileder"
+                placeholder="Tildel veileder"
                 data={veiledere.data.veilederListe}
             >
                 <TildelVeilederRenderer onSubmit={onSubmit} />
@@ -81,6 +78,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    injectIntl(TildelVeileder)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(TildelVeileder);

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../ducks/portefolje';
-import TabellOverskrift from './../components/tabell-overskrift';
+import TabellOverskrift from '../components/tabell-overskrift';
 import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
 import { leggEnhetIUrl, updateLastPath } from '../utils/url-utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
@@ -21,7 +21,6 @@ import {
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 
 interface DispatchProps {
@@ -50,7 +49,7 @@ interface OwnProps {
     visesAnnenVeiledersPortefolje: boolean;
 }
 
-type VeilederPortefoljeVisningProps = OwnProps & StateProps & DispatchProps & InjectedIntlProps;
+type VeilederPortefoljeVisningProps = OwnProps & StateProps & DispatchProps;
 
 class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisningProps> {
     componentWillMount() {
@@ -170,23 +169,23 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
-                        tittelTekstID="modal.tilordning.feilet.tittel"
-                        infotekstTekstID="modal.tilordning.feilet.infotekst"
+                        tittelTekst="Handlingen kan ikke utføres"
+                        infotekstTekst="Tilordning av veileder til følgende brukere feilet:"
                     />
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === LEGG_TIL_ARBEIDSLISTE_FEILET}
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
-                        tittelTekstID="modal.opprett.arbeidsliste.feilet.tittel"
-                        infotekstTekstID="modal.opprett.arbeidsliste.feilet.infotekst"
+                        tittelTekst="Handlingen kan ikke utføres"
+                        infotekstTekst="Kunne ikke opprette arbeidsliste for følgende brukere:"
 
                     />
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === FJERN_FRA_ARBEIDSLISTE_FEILET}
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
-                        tittelTekstID="modal.fjern.arbeidsliste.feilet.tittel"
-                        infotekstTekstID="modal.fjern.arbeidsliste.feilet.infotekst"
+                        tittelTekst="Handlingen kan ikke utføres"
+                        infotekstTekst="Kunne ikke slette arbeidsliste for følgende brukere:"
 
                     />
                     <ServerFeilModal
@@ -221,4 +220,4 @@ const mapDispatchToProps = (dispatch) => ({
     closeServerfeilModal: () => dispatch(skjulServerfeilModal())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(VeilederPortefoljeVisning));
+export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);

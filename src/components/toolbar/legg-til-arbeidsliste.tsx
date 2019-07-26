@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
 import {  visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
@@ -36,22 +35,22 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
 
     arbeidslisteButton(valgteBrukere) {
         const inneholderBrukerMedArbeidsliste = valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
-        const arbeidslisteButton = (id) => (
+        const arbeidslisteButton = (tekst) => (
             <button
                 type="button"
                 className="toolbar_btn"
                 disabled={valgteBrukere.length < 1 || this.props.visesAnnenVeiledersPortefolje}
                 onClick={this.onClickHandler}
             >
-                <FormattedMessage id={id} />
+                {tekst}
             </button>
         );
 
         if (inneholderBrukerMedArbeidsliste) {
-            return arbeidslisteButton('portefolje.slett.arbeidsliste.button');
+            return arbeidslisteButton('Fjern fra arbeidsliste');
         }
 
-        return arbeidslisteButton('portefolje.legg.til.arbeidsliste.button');
+        return arbeidslisteButton('Legg i arbeidsliste');
     }
 
     render() {
@@ -70,7 +69,7 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
         }
         return (
             <div className="toolbar_btnwrapper">
-                { this.arbeidslisteButton(valgteBrukere) }
+                {this.arbeidslisteButton(valgteBrukere) }
                 {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
             </div>
         );
