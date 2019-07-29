@@ -34,7 +34,6 @@ export function hentAktivBruker(): Promise<string> {
 export function oppdaterAktivEnhet(enhet: string): Promise<Response> {
     return fetch(`/modiacontextholder/api/context`, {
         ...MED_CREDENTIALS,
-        mode: 'cors',
         method: 'post',
         body: JSON.stringify({
             verdi: enhet,
