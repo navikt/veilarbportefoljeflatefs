@@ -47,10 +47,6 @@ function EndringsloggTourWrapper() {
         setVeilderIdent(veilederId);
     };
 
-    if (innholdsListe.find((el) => el.id === ModalName.MOTE_FILTER)) {
-        setInnholdsliste(innholdsListe.filter((el) => el.id !== ModalName.MOTE_FILTER));
-    }
-
     const oppdaterSettListe = (
         (name: string) => {
             setInnholdsliste(settModalEndring(innholdsListe, name));
@@ -92,6 +88,12 @@ function EndringsloggTourWrapper() {
         }
     };
 
+    if (!features.visMoteMedNAV) {
+        if (innholdsListe.find((el) => el.id === ModalName.MOTE_FILTER)) {
+            setInnholdsliste(innholdsListe.filter((el) => el.id !== ModalName.MOTE_FILTER));
+        }
+    }
+
     return (
         <>
             {features.visEndringslogg &&
@@ -109,18 +111,3 @@ function EndringsloggTourWrapper() {
 }
 
 export default EndringsloggTourWrapper;
-
-interface EndringsloggMetrikker {
-    tidBrukt: number;
-    nyeNotifikasjoner: boolean;
-    hash: string;
-}
-
-// Feature kan brukes for å måle før og etter tilbakemeldingskjemaet
-const sendMetrikker = (metrikker: EndringsloggMetrikker) => {
-    logEvent('portefolje.endringslogg', {
-        feature: 'pre_tilbakemelding_2',
-        tidBrukt: metrikker.tidBrukt,
-        nyeNotifikasjoner: metrikker.nyeNotifikasjoner,
-    }, {hash: metrikker.hash});
-};
