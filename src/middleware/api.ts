@@ -16,7 +16,7 @@ export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
 export const FEATURE_URL = '/feature';
-const endringsloggURL = 'http://localhost:7070/veilarbremotestore/';
+export const ENDRINGSLOGG_URL = '/veilarbremotestore/';
 
 export function hentVeiledersEnheter() {
     const url = `${VEILARBVEILEDER_URL}/api/veileder/enheter`;
@@ -104,7 +104,7 @@ export function hentFeatures(featureQueryString: string) {
 }
 
 export function fetchHarSettInnlegg(): Promise<{Endringslogg: string}> | null {
-        return fetch(`${endringsloggURL}?ressurs=Endringslogg`, {credentials: 'same-origin'})
+        return fetch(`${ENDRINGSLOGG_URL}?ressurs=Endringslogg`, {credentials: 'same-origin'})
         .then(sjekkStatuskodeAndPost)
         .then(toJson)
         .catch(
@@ -123,7 +123,7 @@ function sjekkStatuskodeAndPost(response) {
 }
 
 function postNyRemoteStorage(): Promise<Response> {
-    return fetch(endringsloggURL, {
+    return fetch(ENDRINGSLOGG_URL, {
         ...MED_CREDENTIALS,
         method: 'POST',
         body: JSON.stringify({})
@@ -131,7 +131,7 @@ function postNyRemoteStorage(): Promise<Response> {
 }
 
 export function registrerSettInnlegg(message: string) {
-    patchRemoteStorage(message, `${endringsloggURL}`);
+    patchRemoteStorage(message, `${ENDRINGSLOGG_URL}`);
 }
 
 function patchRemoteStorage(data: string, url: string): Promise<Response> {
