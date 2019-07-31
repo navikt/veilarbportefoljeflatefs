@@ -10,21 +10,6 @@ const settSammenNavn = (bruker) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-const brukerNavn = (className, bruker, enhetId, skalJusteres) => (
-    <div className={className}>
-        <a
-            onClick={() => {
-                setFraBrukerIUrl(bruker.fnr);
-            }}
-            href={`${window.location.origin}/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
-            className={classnames('lenke lenke--frittstaende', {'lenke--justert': skalJusteres})}
-
-        >
-        {settSammenNavn(bruker)}
-        </a>
-    </div>
-);
-
 interface BrukerNavnProps {
     className?: string;
     bruker: BrukerModell;
@@ -32,8 +17,21 @@ interface BrukerNavnProps {
     skalJusteres?: boolean;
 }
 
-function BrukerNavn({ className, bruker, enhetId, skalJusteres }: BrukerNavnProps) {
-    return brukerNavn(className,bruker, enhetId, skalJusteres);
+function BrukerNavn({ className, bruker, enhetId}: BrukerNavnProps) {
+    return (
+        <div className={className}>
+            <a
+                onClick={() => {
+                    setFraBrukerIUrl(bruker.fnr);
+                }}
+                href={`${window.location.origin}/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
+                className={classnames('lenke lenke--frittstaende')}
+
+            >
+                {settSammenNavn(bruker)}
+            </a>
+        </div>
+    )
 }
 
 export default BrukerNavn;

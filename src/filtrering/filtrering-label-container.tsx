@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
-    I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
+    I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER, VENTER_PA_SVAR_FRA_NAV,
     ytelse
 } from './filter-konstanter';
 import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg } from '../ducks/filtrering';
@@ -22,7 +22,8 @@ interface FiltreringLabelContainerProps {
 
 function getKolonneFraLabel(label) {
     switch (label) {
-        case VENTER_PA_SVAR_FRA_BRUKER: return Kolonne.VENTER_SVAR;
+        case VENTER_PA_SVAR_FRA_BRUKER: return Kolonne.VENTER_SVAR_FRA_BRUKER;
+        case VENTER_PA_SVAR_FRA_NAV: return Kolonne.VENTER_SVAR_FRA_NAV;
         case I_AVTALT_AKTIVITET: return Kolonne.AVTALT_AKTIVITET;
         case UTLOPTE_AKTIVITETER: return Kolonne.UTLOPTE_AKTIVITETER;
         default: return null;

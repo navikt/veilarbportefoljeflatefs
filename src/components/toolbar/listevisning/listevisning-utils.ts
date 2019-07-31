@@ -10,7 +10,8 @@ alternativerConfig.set(Kolonne.BRUKER, {tekstlabel: 'Bruker', checkboxDisabled: 
 alternativerConfig.set(Kolonne.FODSELSNR, {tekstlabel: 'Fødselsnr', checkboxDisabled: true});
 alternativerConfig.set(Kolonne.VEILEDER, {tekstlabel: 'Veileder'});
 alternativerConfig.set(Kolonne.NAVIDENT, {tekstlabel: 'NAV-ident'});
-alternativerConfig.set(Kolonne.VENTER_SVAR, {tekstlabel: 'Venter på svar fra veileder'});
+alternativerConfig.set(Kolonne.VENTER_SVAR_FRA_NAV, {tekstlabel: 'Venter på svar fra veileder'});
+alternativerConfig.set(Kolonne.VENTER_SVAR_FRA_BRUKER, {tekstlabel: 'Venter på svar fra bruker'});
 alternativerConfig.set(Kolonne.UTLOP_YTELSE, {tekstlabel: 'Utløp ytelse'});
 alternativerConfig.set(Kolonne.UTLOP_AKTIVITET, {tekstlabel: 'Første sluttdato av valgte aktiviteter'});
 alternativerConfig.set(Kolonne.UTLOPTE_AKTIVITETER, {tekstlabel: 'Utløpte aktiviteter'});

@@ -8,7 +8,7 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
     ytelsevalg,
-    ytelseAapSortering
+    ytelseAapSortering, MOTER_IDAG
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
 import { Kolonne } from '../ducks/ui/listevisning';
@@ -16,6 +16,8 @@ import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfa
 import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker, aapRettighetsperiode } from '../utils/utils';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
+import TidKolonne from '../components/tidkolonne';
+import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -31,6 +33,8 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
     const { ytelse } = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
+    const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
+    const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
@@ -81,12 +85,12 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraBruker}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)  && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)  && valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraNAV}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV)}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -111,6 +115,16 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                           bruker={bruker}
                           skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
                           veileder={brukersVeileder}
+            />
+            <TidKolonne
+                className="col col-xs-2"
+                dato={moteStartTid}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+            />
+            <TidKolonne
+                className="col col-xs-2"
+                dato={varighet}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
             />
         </div>
     );

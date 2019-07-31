@@ -9,7 +9,6 @@ import TabellOverskrift from '../components/tabell-overskrift';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import { diagramSkalVises } from '../minoversikt/diagram/util';
 import Diagram from '../minoversikt/diagram/diagram';
-import VelgfilterMelding from './velg-filter-melding';
 import ServerFeilModal from '../modal/server-feil-modal';
 import { STATUS } from '../ducks/utils';
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
@@ -18,25 +17,6 @@ import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmel
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
-
-function antallFilter(filtervalg) {
-    function mapAktivitetFilter(value) {
-        return Object.entries(value).map(([_, verdi]) => {
-            if (verdi === 'NA') return 0;
-            return 1;
-        }).reduce((a: number, b: number) => a + b, 0);
-    }
-
-    return Object.entries(filtervalg)
-        .map(([filter, value]) => {
-            if (value === true) return 1;
-            else if (Array.isArray(value)) return value.length;
-            else if (filter === 'aktiviteter') return mapAktivitetFilter(value);
-            else if (typeof value === 'object') return value ? Object.entries(value).length : 0;
-            else if (value) return 1;
-            return 0;
-        }).reduce((a, b) => a + b, 0);
-}
 
 interface EnhetsportefoljeVisningProps {
     valgtEnhet: ValgtEnhetModell;
@@ -150,11 +130,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
 
         const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
-
-        const harFilter = antallFilter(filtervalg) !== 0;
-        if (!harFilter) {
-            return <VelgfilterMelding/>;
-        }
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;

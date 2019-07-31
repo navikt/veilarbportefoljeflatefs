@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import DocumentTitle from 'react-document-title';
+
 import Lenker from '../lenker/lenker';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
@@ -19,6 +19,7 @@ import { pagineringSetup } from '../ducks/paginering';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import './enhet-side.less';
+import { EnhetSideContainer } from './enhet-side-container';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -59,40 +60,29 @@ class EnhetSide extends React.Component<EnhetSideProps> {
     render() {
         const { filtervalg, veilederliste, statustall, enhettiltak, listevisning } = this.props;
         return (
-            <DocumentTitle title="Enhetens oversikt">
-                <div className="enhet-side blokk-xl">
-                    <Lenker />
-                    <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                        <div id="oversikt-sideinnhold" role="tabpanel">
-                            <p className="typo-infotekst begrensetbredde blokk-l">
-                                Her får du oversikt over alle brukere som er tilknyttet enheten du er logget inn på.
-                                Du kan filtrere ytterligere, søke opp veiledere og flytte eller fordele brukere.
-                            </p>
-                            <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
-                                <FiltreringContainer
-                                    filtervalg={filtervalg}
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    filtergruppe="enhet"
-                                />
-                            </div>
-                            <div className="col-lg-9 col-md-12 col-sm-12">
-                                <FiltreringLabelContainer
-                                    filtervalg={{
-                                        ...filtervalg,
-                                        veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste)
-                                    }}
-                                    filtergruppe="enhet"
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    listevisning={listevisning}
-                                />
-                                <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
-                                <EnhetsportefoljeVisning />
-                                <TomPortefoljeModal />
-                            </div>
-                        </div>
-                    </Innholdslaster>
+            <EnhetSideContainer avhengigheter={[statustall, enhettiltak]}>
+                <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
+                    <FiltreringContainer
+                        filtervalg={filtervalg}
+                        enhettiltak={enhettiltak.data.tiltak}
+                        filtergruppe="enhet"
+                    />
                 </div>
-            </DocumentTitle>
+                <div className="col-lg-9 col-md-12 col-sm-12">
+                    <FiltreringLabelContainer
+                        filtervalg={{
+                            ...filtervalg,
+                            veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste)
+                        }}
+                        filtergruppe="enhet"
+                        enhettiltak={enhettiltak.data.tiltak}
+                        listevisning={listevisning}
+                    />
+                    <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
+                    <EnhetsportefoljeVisning />
+                    <TomPortefoljeModal />
+                </div>
+            </EnhetSideContainer>
         );
     }
 }

@@ -8,7 +8,8 @@ import {
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER,
-    I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
+    I_AVTALT_AKTIVITET, MOTER_IDAG
+} from '../filtrering/filter-konstanter';
 import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import { AktiviteterValg } from '../ducks/filtrering';
@@ -61,12 +62,12 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskriftcol col col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV)}
                             tekst="Svar fra NAV"
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskrift col col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER)}
                             tekst="Svar fra bruker"
                         />
                         <Listeoverskrift
@@ -89,6 +90,16 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             className="listeoverskrift__veileder listeoverskrift col col-xs-2"
                             skalVises={valgteKolonner.includes(Kolonne.VEILEDER)|| valgteKolonner.includes(Kolonne.NAVIDENT)}
                             tekst="Veileder"
+                        />
+                        <Listeoverskrift
+                            className="listeoverskrift col col-xs-2"
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            tekst="Klokkeslett for møtet"
+                        />
+                        <Listeoverskrift
+                            className="listeoverskrift col col-xs-2"
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            tekst="Varighet"
                         />
                     </div>
                     <div className="brukerliste__gutter-right"/>
@@ -138,7 +149,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                             tekst="Dato"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV)}
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
@@ -147,7 +158,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                             tekst="Dato"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER)}
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
@@ -191,6 +202,21 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
                         >
                             Veileder
+                        </Header>
+                        <SorteringHeader
+                            sortering={Sorteringsfelt.MOTER_IDAG}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
+                            tekst="Klokkeslett"
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            className="sortering-header__dato col col-xs-2"
+                        />
+                        <Header
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            className="sortering-header__dato col col-xs-2"
+                        >
+                            Varighet
                         </Header>
                     </div>
                     <div className="brukerliste__gutter-right"/>
