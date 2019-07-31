@@ -9,7 +9,7 @@ export interface EndringsloggInnlegg {
     tittel: string;
     dato: string;
     tekst: string;
-    id: string;
+    versjonId: string;
     children?: React.ReactNode;
 }
 
@@ -22,7 +22,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '16. JUL. 2019',
         tittel: 'NAV møte filter i Min oversikt',
         tekst: 'Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV.',
-        id: ModalName.MOTE_FILTER,
+        versjonId: ModalName.MOTE_FILTER,
         children:
             <TourModalButton
                 metrikknavn={'portefolje.endringslogg_modal'}
@@ -34,7 +34,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '18. JUN. 2019',
         tittel: 'Laste ned og skrive ut CV',
         tekst: 'Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift.',
-        id: '0.1.9',
+        versjonId: '0.1.9',
         children:
             <TourModalButton
                 metrikknavn={'portefolje.endringslogg_modal'}
@@ -47,13 +47,13 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '06. JUN. 2019',
         tittel: 'Visning av profilering i Detaljer',
         tekst: 'Nå finner du profileringsresultatet for brukeren under Registrering i Detaljer.',
-        id: '0.1.9',
+        versjonId: '0.1.9',
     },
     {
         dato: '29. MAR. 2019',
         tittel: 'Manuell registrering',
         tekst: 'Du kan nå registrere brukere manuelt i Veilederverktøy (tannhjulet).  Arena-oppgaven «Motta person» skal ikke lenger benyttes.',
-        id: '0.1.9',
+        versjonId: '0.1.9',
         children:
             <EndringsloggLinkMedIkon
                 url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
@@ -65,7 +65,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
 
 export function settModalEndring(innholdState: EndringsloggInleggMedSettStatus[], modal: string): EndringsloggInleggMedSettStatus[] {
     return innholdState.map((el) => {
-        if (el.id === modal) {
+        if (el.versjonId === modal) {
             el.sett = true;
         }
         return el;
@@ -83,7 +83,7 @@ export function settDefaultSettVerdier() {
 
 export function getInnholdOgSettFraRemote(remotestorage: string[]): EndringsloggInleggMedSettStatus[] {
     return endringslogginnhold.map((el) => {
-        const fraLocal = remotestorage.some((ver) => ver === el.id);
+        const fraLocal = remotestorage.some((ver) => ver === el.versjonId);
         return ({
             ...el,
             sett: fraLocal,

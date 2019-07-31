@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import {AppState} from "../../reducer";
-import {sjekkFeature} from "../../ducks/features";
+import { AppState } from '../../reducer';
+import { sjekkFeature } from '../../ducks/features';
 
 const selectHarFeature = (state: AppState) => (feature: string) => sjekkFeature(state, feature);
 

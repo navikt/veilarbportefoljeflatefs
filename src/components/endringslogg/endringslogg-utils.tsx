@@ -82,9 +82,9 @@ export async function registrerInnholdIRemoteStorage(endringslogg: EndringsloggI
     const messege: string[] = [];
     endringslogg.forEach( (e)=> {
         if(messege.length === 0) {
-            messege.push(e.id);
-        } else if(!messege.includes(e.id)) {
-            messege.push(e.id);
+            messege.push(e.versjonId);
+        } else if(!messege.includes(e.versjonId)) {
+            messege.push(e.versjonId);
         }
     });
     await(registrerSettInnlegg(messege.join(',')));

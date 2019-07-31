@@ -10,6 +10,7 @@ import {
 import { ENDRINGSLOGG, VIS_MOTER_MED_NAV } from '../../konstanter';
 import { ModalName } from '../tour-modal/tour-modal';
 import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
+import { useIdentSelector } from '../../hooks/redux/use-enheter-ident';
 import { useTimer } from '../../hooks/use-timer';
 import {
     hentSetteVersjonerRemotestorage,
@@ -17,22 +18,20 @@ import {
     krypterVeilederident,
     registrerInnholdIRemoteStorage
 } from './endringslogg-utils';
-import { hentAktivBruker } from '../enhet-context/context-api';
 import { logEvent } from '../../utils/frontend-logger';
 
 function EndringsloggTourWrapper() {
     const harFeature = useFeatureSelector();
+    const veilederIdent = useIdentSelector();
     const features = {
         visMoteMedNAV: harFeature(VIS_MOTER_MED_NAV),
         visEndringslogg: harFeature(ENDRINGSLOGG)
     };
 
     const {startTimer, stoppTimer} = useTimer();
-    const [veilederIdent, setVeilderIdent] = useState('');
     const [innholdsListe, setInnholdsliste] = useState<EndringsloggInleggMedSettStatus[]>([]);
 
     useEffect(() => {
-        hentAktivVeileder();
         hentInnhold();
     }, []);
 
@@ -40,11 +39,6 @@ function EndringsloggTourWrapper() {
         const innhold = await hentSetteVersjonerRemotestorage();
         innhold ? setInnholdsliste(getInnholdOgSettFraRemote(innhold))
             : setInnholdsliste(settDefaultSettVerdier);
-    };
-
-    const hentAktivVeileder = async () => {
-        const veilederId = await hentAktivBruker();
-        setVeilderIdent(veilederId);
     };
 
     const oppdaterSettListe = (
@@ -57,7 +51,7 @@ function EndringsloggTourWrapper() {
     const oppdaterRemoteStoreOgState = () => {
         innholdsListe.forEach((elem) => {
             if (!elem.sett) {
-                oppdaterSettListe(elem.id);
+                oppdaterSettListe(elem.versjonId);
             }
         });
     };
@@ -73,15 +67,17 @@ function EndringsloggTourWrapper() {
     const onClose = () => {
         const ulestFelt = innholdsListe.some((element) => !element.sett);
         const tidBrukt = stoppTimer();
-        krypterVeilederident(veilederIdent)
-            .then((res) =>
-                logEvent('portefolje.endringslogg', {
-                    feature: 'pre_tilbakemelding_2',
-                    tidBrukt,
-                    nyeNotifikasjoner: ulestFelt,
-                }, {hash: hexString(res)})
-            )
-            .catch((e) => console.log(e)); // tslint:disable-line
+        if(veilederIdent) {
+            krypterVeilederident(veilederIdent)
+                .then((res) =>
+                    logEvent('portefolje.endringslogg', {
+                        feature: 'pre_tilbakemelding_2',
+                        tidBrukt,
+                        nyeNotifikasjoner: ulestFelt,
+                    }, {hash: hexString(res)})
+                )
+                .catch((e) => console.log(e)); // tslint:disable-line
+        }
         if (ulestFelt) {
             oppdaterRemoteStoreOgState();
             registrerInnhold();
@@ -89,8 +85,8 @@ function EndringsloggTourWrapper() {
     };
 
     if (!features.visMoteMedNAV) {
-        if (innholdsListe.find((el) => el.id === ModalName.MOTE_FILTER)) {
-            setInnholdsliste(innholdsListe.filter((el) => el.id !== ModalName.MOTE_FILTER));
+        if (innholdsListe.find((el) => el.versjonId === ModalName.MOTE_FILTER)) {
+            setInnholdsliste(innholdsListe.filter((el) => el.versjonId !== ModalName.MOTE_FILTER));
         }
     }
 

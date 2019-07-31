@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import {AppState} from "../../reducer";
-import { Statustall } from "../../ducks/statustall";
+import { AppState } from '../../reducer';
+import { Statustall } from '../../ducks/statustall';
 
 const selectStatusTallData = (state: AppState) => state.statustall.data;
 
