@@ -65,8 +65,9 @@ export async function hentSetteVersjonerRemotestorage(): Promise<string[] | null
     }
 
     // For å overføre tidligere data fra local storage, kjøres bare hvis remote er tom.
-    if (result.length === 0) {
-        const fraLocal = hentSetteVersjonerLocalstorage();
+    const fraLocal = hentSetteVersjonerLocalstorage();
+
+    if (result.length === 0 && fraLocal.length !== 0) {
         if (typeof(fraLocal) === 'string' || fraLocal instanceof String) {
             // @ts-ignore
             result.push(fraLocal);

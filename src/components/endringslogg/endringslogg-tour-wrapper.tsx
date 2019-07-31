@@ -41,17 +41,10 @@ function EndringsloggTourWrapper() {
             : setInnholdsliste(settDefaultSettVerdier);
     };
 
-    const oppdaterSettListe = (
-        (name: string) => {
-            setInnholdsliste(settModalEndring(innholdsListe, name));
-            registrerInnhold();
-        }
-    );
-
-    const oppdaterRemoteStoreOgState = () => {
+    const oppdaterState = () => {
         innholdsListe.forEach((elem) => {
             if (!elem.sett) {
-                oppdaterSettListe(elem.versjonId);
+                setInnholdsliste(settModalEndring(innholdsListe, elem.versjonId));
             }
         });
     };
@@ -79,7 +72,7 @@ function EndringsloggTourWrapper() {
                 .catch((e) => console.log(e)); // tslint:disable-line
         }
         if (ulestFelt) {
-            oppdaterRemoteStoreOgState();
+            oppdaterState();
             registrerInnhold();
         }
     };
@@ -100,7 +93,12 @@ function EndringsloggTourWrapper() {
             />
             }
             <TourModalLocalStorage
-                onTourComplete={oppdaterSettListe}
+                onTourComplete={
+                    (name: string) => {
+                        setInnholdsliste(settModalEndring(innholdsListe, name));
+                        registrerInnhold();
+                    }
+                }
             />
         </>
     );

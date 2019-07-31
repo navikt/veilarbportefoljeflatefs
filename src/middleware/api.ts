@@ -16,7 +16,7 @@ export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
 export const FEATURE_URL = '/feature';
-export const ENDRINGSLOGG_URL = '/veilarbremotestore/';
+export const ENDRINGSLOGG_URL = 'http://0.0.0.0:7070/veilarbremotestore/';
 
 export function hentVeiledersEnheter() {
     const url = `${VEILARBVEILEDER_URL}/api/veileder/enheter`;
