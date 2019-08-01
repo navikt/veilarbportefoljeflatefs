@@ -3,7 +3,7 @@ import { EtikettLiten, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { default as React } from 'react';
 import { ReactComponent as LinkIcon } from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
-import { EndringsloggInnleggMedSettStatus } from './endringslogg-custom';
+import { EndringsloggInnleggMedSettStatus } from './utils/endringslogg-custom';
 
 interface EndringsloggInleggProps {
     dato: string;

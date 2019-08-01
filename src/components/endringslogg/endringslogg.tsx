@@ -1,10 +1,10 @@
 import { default as React, RefObject, useRef, useState } from 'react';
 import { ReactComponent as AlarmIcon } from './icon-v3.svg';
 import EndringsloggInnhold from './endringslogg-innhold';
-import TransitionContainer from './transition-container';
+import TransitionContainer from './utils/transition-container';
 import { useEventListener } from '../../hooks/use-event-listener';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import { EndringsloggInnleggMedSettStatus } from './endringslogg-custom';
+import { EndringsloggInnleggMedSettStatus } from './utils/endringslogg-custom';
 
 interface EndringsProps {
     innhold: EndringsloggInnleggMedSettStatus[];

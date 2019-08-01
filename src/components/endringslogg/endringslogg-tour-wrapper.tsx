@@ -6,7 +6,7 @@ import {
     mapRemoteToState,
     setHarSettAlt,
     settModalEndring
-} from './endringslogg-custom';
+} from './utils/endringslogg-custom';
 import { ENDRINGSLOGG, VIS_MOTER_MED_NAV } from '../../konstanter';
 import { ModalName } from '../tour-modal/tour-modal';
 import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
@@ -18,7 +18,7 @@ import {
     krypterVeilederident,
     registrerInnholdIRemoteStorage,
     syncLocalStorageIfInUse
-} from './endringslogg-utils';
+} from './utils/endringslogg-utils';
 import { logEvent } from '../../utils/frontend-logger';
 
 function EndringsloggTourWrapper() {

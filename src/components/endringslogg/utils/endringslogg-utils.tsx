@@ -1,5 +1,5 @@
 import { getCrypto } from './crypto';
-import { fetchHarSettInnlegg, registrerSettInnlegg } from '../../middleware/api';
+import { fetchHarSettInnlegg, registrerSettInnlegg } from './endringslogg-api';
 import { EndringsloggInnleggMedSettStatus } from './endringslogg-custom';
 
 export function hexString(buffer) {

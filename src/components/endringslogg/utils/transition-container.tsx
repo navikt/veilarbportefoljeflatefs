@@ -1,6 +1,6 @@
 import { default as React, RefObject } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { useFocus } from '../../hooks/use-focus';
+import { useFocus } from '../../../hooks/use-focus';
 
 interface CollapseContainerProps {
     focusRef: RefObject<HTMLDivElement>;

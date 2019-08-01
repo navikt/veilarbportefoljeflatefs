@@ -1,9 +1,7 @@
-import { ModalName } from '../tour-modal/tour-modal';
-import { EndringsloggLinkMedIkon } from './endringslogg-innhold';
+import { ModalName } from '../../tour-modal/tour-modal';
+import { EndringsloggLinkMedIkon } from '../endringslogg-innhold';
 import React from 'react';
-import { ReactComponent as LinkIcon } from './external-link.svg';
-import TourModalButton from '../tour-modal/tour-modal-button';
-import Lenke from 'nav-frontend-lenker';
+import TourModalButton from '../../tour-modal/tour-modal-button';
 
 export interface EndringsloggInnlegg {
     tittel: string;
