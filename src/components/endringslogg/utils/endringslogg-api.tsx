@@ -8,38 +8,33 @@ const MED_CREDENTIALS: RequestInit = {
         'Content-Type': 'application/json',
     }
 };
-export const REMOTE_STORE_URL = '/veilarbremotestore/';
+export const REMOTE_STORE_URL = 'http://localhost:7070/veilarbremotestore/';
 
-export function fetchHarSettInnlegg(): Promise<{endringslogg: string}> | null {
+export function fetchHarSettInnlegg(): Promise<{ endringslogg: string }> {
     return fetch(`${REMOTE_STORE_URL}?ressurs=endringslogg`, {credentials: 'same-origin'})
-    .then(responsToJson)
-    .catch(
-        () => {
-            return null;
-        }
-    );
+        .then(responseToJson);
 }
 
-function responsToJson(response) {
-if(response.status === 504) { // Internal error
-    return null;
-}
-if (response.status !== 204) { // No content
-    return response.json();
-}
-return response;
+function responseToJson(response) {
+    if (response.status >= 500) { // Internal error
+        throw Error('Bad response 500');
+    }
+    if (response.status !== 204) { // No content
+        return response.json();
+    }
+    return response;
 }
 
 export function registrerSettInnlegg(message: string) {
-patchRemoteStorage(message, `${REMOTE_STORE_URL}`);
+    patchRemoteStorage(message, `${REMOTE_STORE_URL}`);
 }
 
 function patchRemoteStorage(data: string, url: string): Promise<Response> {
-return fetch(url, {
-    ...MED_CREDENTIALS,
-    method: 'PATCH',
-    body: JSON.stringify({
-        endringslogg: data
-    })
-}).then(sjekkStatuskode);
+    return fetch(url, {
+        ...MED_CREDENTIALS,
+        method: 'PATCH',
+        body: JSON.stringify({
+            endringslogg: data
+        })
+    }).then(sjekkStatuskode);
 }

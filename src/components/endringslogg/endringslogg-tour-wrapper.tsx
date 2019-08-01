@@ -17,9 +17,10 @@ import {
     hexString,
     krypterVeilederident,
     registrerInnholdIRemoteStorage,
-    syncLocalStorageIfInUse
+    hentSetteVersjonerLocalstorage
 } from './utils/endringslogg-utils';
 import { logEvent } from '../../utils/frontend-logger';
+import { registrerSettInnlegg } from './utils/endringslogg-api';
 
 function EndringsloggTourWrapper() {
     const harFeature = useFeatureSelector();
@@ -37,12 +38,19 @@ function EndringsloggTourWrapper() {
     }, []);
 
     const hentInnholdRemote = async () => {
-        let innhold = await hentSetteVersjonerRemotestorage();
-        if(innhold !== null && innhold.length === 0) {
-            innhold = await syncLocalStorageIfInUse();
+        try {
+            let innhold = await hentSetteVersjonerRemotestorage();
+            if (innhold.length === 0) {
+                innhold = await hentSetteVersjonerLocalstorage();
+                if (innhold.length !== 0) {
+                    registrerSettInnlegg(innhold.join(','));
+                }
+            }
+            setInnholdsliste(mapRemoteToState(innhold));
+        } catch (e) {
+            setInnholdsliste(setHarSettAlt);
         }
-        innhold ? setInnholdsliste(mapRemoteToState(innhold))
-            : setInnholdsliste(setHarSettAlt);
+
     };
 
     const registrerInnholdRemote = async (innhold: EndringsloggInnleggMedSettStatus[]) => {

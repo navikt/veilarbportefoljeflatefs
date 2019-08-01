@@ -38,45 +38,30 @@ function encodeString(stringToBeEncoded: string): Uint8Array {
 }
 
 const ENDRING_PREFIX = 'Endringslogg';
-export function hentSetteVersjonerLocalstorage(): string[] | string {
-    let setteVersjoner: string[] = [];
-    const tmp = localStorage.getItem(ENDRING_PREFIX);
-    if (tmp) {
+export function hentSetteVersjonerLocalstorage(): string[] {
+    const setteVersjoner: string[] = [];
+    const localstorageInnhold = localStorage.getItem(ENDRING_PREFIX);
+    if (localstorageInnhold) {
         try {
-            setteVersjoner = JSON.parse(tmp);
+            const parsedLocalstorage = JSON.parse(localstorageInnhold);
+            if (Array.isArray(parsedLocalstorage)) {
+                setteVersjoner.push(...parsedLocalstorage);
+            } else {
+                setteVersjoner.push(parsedLocalstorage);
+            }
         } catch (e) {
             // Error handling pga. tidligere versjon som bare lagret en string i LS.
-            setteVersjoner.push(tmp);
-            return setteVersjoner;
+            setteVersjoner.push(localstorageInnhold);
         }
     }
     return setteVersjoner;
 }
 
-export async function hentSetteVersjonerRemotestorage(): Promise<string[] | null> {
+export async function hentSetteVersjonerRemotestorage(): Promise<string[]> {
     const temp = await(fetchHarSettInnlegg());
-    let result: string[];
-    if (temp === null) {
-        return null;
-    } else if (temp.endringslogg === undefined) {
-        result = [];
-    } else {
+    let result: string[] = [];
+    if (temp.endringslogg !== undefined) {
         result = temp.endringslogg.split(',');
-    }
-    return result;
-}
-
-export async function syncLocalStorageIfInUse() {
-    const result: string[] = [];
-    const fraLocal = hentSetteVersjonerLocalstorage();
-    if (fraLocal.length !== 0) {
-        if (Array.isArray(fraLocal)) {
-            result.push(...fraLocal);
-        } else {
-            // @ts-ignore
-            result.push(fraLocal);
-        }
-        registrerSettInnlegg(result.join(','));
     }
     return result;
 }
