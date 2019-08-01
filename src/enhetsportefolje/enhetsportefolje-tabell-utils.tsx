@@ -1,33 +1,19 @@
 import { BrukerModell } from '../model-interfaces';
-import CheckBox from '../components/tabell/checkbox';
-import { DefaultKolonneType } from '../components/tabell-ny/tabell';
 import BrukerNavn from '../components/tabell/brukernavn';
 import { Kolonne } from '../ducks/ui/listevisning';
 import * as React from 'react';
 
-export const lagTabellKolonneConfig = (enhetId: string, settMarkert: (bruker: string, markert: boolean) => void ) =>  [
-    {
-        tittel: '',
-        kolonner: [
-            {
-                navn: '',
-                mapper: (bruker: BrukerModell) => <CheckBox bruker={bruker} settMarkert={settMarkert} />,
-                id: DefaultKolonneType.Checkboks,
-                erObligatorisk: true
-
-            }
-        ]
-    },
+export const lagTabellKolonneConfig = (enhetId: string) =>  [
     {
         tittel: 'Bruker',
         kolonner: [
             {
-                navn: 'Etternavn, Fornavn',
+                kolonneElement: () => 'Etternavn, Fornavn',
                 mapper: (bruker: BrukerModell) => <BrukerNavn bruker={bruker} enhetId={enhetId}/>,
                 id: Kolonne.BRUKER
             },
             {
-                navn: 'Fodselsnummer',
+                kolonneElement: ()=> 'Fodselsnummer',
                 mapper: (bruker: BrukerModell) => <span>{bruker.etternavn}</span>,
                 id: Kolonne.FODSELSNR
             },
@@ -37,12 +23,12 @@ export const lagTabellKolonneConfig = (enhetId: string, settMarkert: (bruker: st
         tittel: 'Veileder',
         kolonner: [
             {
-                navn: 'Veileder',
+                kolonneElement: () => 'Veileder',
                 mapper: (bruker: BrukerModell) => <span>{bruker.etternavn}</span>,
                 id: Kolonne.VEILEDER
             },
             {
-                navn: 'NAV-ident',
+                kolonneElement: ()=> 'NAV-ident',
                 mapper: (bruker: BrukerModell) => <span>{bruker.etternavn}</span>,
                 id: Kolonne.NAVIDENT
             },
@@ -53,7 +39,7 @@ export const lagTabellKolonneConfig = (enhetId: string, settMarkert: (bruker: st
 ];
 
 export function filtrerValgteKolonner(tabellKolonneObj, valgteKolonner) {
-    const filtreradeKolonner = tabellKolonneObj.kolonner.filter((kol) => valgteKolonner.includes(kol.id) || kol.erObligatorisk );
+    const filtreradeKolonner = tabellKolonneObj.kolonner.filter((kol) => valgteKolonner.includes(kol.id));
     return Object.assign({}, tabellKolonneObj, {kolonner: filtreradeKolonner});
 }
 

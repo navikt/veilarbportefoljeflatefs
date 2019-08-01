@@ -12,14 +12,12 @@ import {
 import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
 import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
 import { getFraBrukerFraUrl } from '../utils/url-utils';
-import { DefaultKolonneType, Tabell } from '../components/tabell-ny/tabell';
+import { Tabell } from '../components/tabell-ny/tabell';
 import {
-    antallFilter,
     filtrerTommeKolonneGruppe,
     filtrerValgteKolonner,
     lagTabellKolonneConfig
 } from './enhetsportefolje-tabell-utils';
-import VelgfilterMelding from './velg-filter-melding';
 
 interface EnhetTabellProps {
     brukere: BrukerModell[];
@@ -46,11 +44,6 @@ function EnhetTabell(props: EnhetTabellProps) {
     useEffect(()=> {
         forrigeBruker = getFraBrukerFraUrl(); // TODO FIX THIS;
     });
-
-    const harFilter = antallFilter(filtervalg) !== 0;
-    if (!harFilter) {
-        return <VelgfilterMelding/>;
-    }
 
     forrigeBruker = undefined;
 

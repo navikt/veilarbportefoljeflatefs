@@ -24,9 +24,11 @@ function getFeilmeldingForReducer(feilendeReducer) {
     return null;
 }
 
+export type Avhengigheter = Array<{status: STATUS}>;
+
 interface InnholdslasterProps {
     className?: string;
-    avhengigheter: any;
+    avhengigheter: Avhengigheter;
 }
 
 interface InnholdslasterState {

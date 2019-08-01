@@ -8,7 +8,7 @@ export const FEILET = 'veilarbveileder/veiledere/FEILET';
 export const PENDING = 'veilarbveileder/veiledere/PENDING';
 
 export interface VeiledereState {
-    status: string;
+    status: STATUS;
     data: {
         veilederListe: VeilederModell[];
         enhet: EnhetModell | {};

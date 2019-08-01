@@ -10,7 +10,7 @@ export interface EnhettiltakState {
     data: {
         tiltak: any;
     };
-    status?: string;
+    status: STATUS;
 }
 
 const initalState: EnhettiltakState = {

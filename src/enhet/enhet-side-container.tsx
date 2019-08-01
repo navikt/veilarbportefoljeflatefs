@@ -1,10 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 import Lenker from '../lenker/lenker';
-import Innholdslaster from '../innholdslaster/innholdslaster';
+import Innholdslaster, { Avhengigheter } from '../innholdslaster/innholdslaster';
 import DocumentTitle from 'react-document-title';
+import { STATUS } from '../ducks/utils';
 
-interface EnhetSideContainerProps<P> {
-    avhengigheter: [];
+interface EnhetSideContainerProps {
+    avhengigheter: Avhengigheter;
 }
 
 export function EnhetSideContainer(props: PropsWithChildren<EnhetSideContainerProps>) {

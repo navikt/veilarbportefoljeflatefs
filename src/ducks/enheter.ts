@@ -22,7 +22,7 @@ export interface EnheterState {
     data: any[];
     valgtEnhet: ValgtEnhetModell;
     ident?: string;
-    status: string;
+    status: STATUS;
 }
 
 const initialState: EnheterState = {

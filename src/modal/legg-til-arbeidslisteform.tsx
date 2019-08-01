@@ -1,6 +1,6 @@
 import { STATUS } from '../ducks/utils';
 import * as React from 'react';
-import { ArbeidslisteDataModell, BrukerModell, Status, VeilederModell } from '../model-interfaces';
+import { ArbeidslisteDataModell, BrukerModell, VeilederModell } from '../model-interfaces';
 import { postArbeidsliste } from '../ducks/arbeidsliste';
 import { markerAlleBrukere, oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
@@ -22,7 +22,7 @@ interface OwnProps {
 }
 
 interface StateProps {
-    arbeidslisteStatus?: Status;
+    arbeidslisteStatus?: STATUS;
 }
 
 interface DispatchProps {

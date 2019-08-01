@@ -9,7 +9,7 @@ import { leggTilStatustall } from '../ducks/statustall';
 import { STATUS } from '../ducks/utils';
 import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
 import { visServerfeilModal } from '../ducks/modal-serverfeil';
-import { ArbeidslisteDataModell, BrukerModell, Status } from '../model-interfaces';
+import { ArbeidslisteDataModell, BrukerModell } from '../model-interfaces';
 
 function brukerLabel(bruker) {
     return (
@@ -25,7 +25,7 @@ interface FjernFraArbeidslisteFormProps {
     lukkModal: () => void;
     valgteBrukere: BrukerModell[];
     handleSubmit: () => void;
-    slettFraArbeidslisteStatus?: Status;
+    slettFraArbeidslisteStatus?: STATUS;
 }
 
 function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slettFraArbeidslisteStatus }: FjernFraArbeidslisteFormProps) {

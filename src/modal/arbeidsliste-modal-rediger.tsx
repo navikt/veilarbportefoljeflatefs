@@ -2,7 +2,7 @@ import * as React from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
-import { BrukerModell, Status } from '../model-interfaces';
+import { BrukerModell } from '../model-interfaces';
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { Formik, FormikProps } from 'formik';
@@ -24,7 +24,7 @@ interface DispatchProps {
 }
 
 interface StateProps {
-    arbeidslisteStatus: Status;
+    arbeidslisteStatus: STATUS;
 }
 
 interface FormikPropsValues {

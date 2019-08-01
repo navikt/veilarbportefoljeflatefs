@@ -1,10 +1,10 @@
-export const STATUS = {
-    NOT_STARTED: 'NOT_STARTED',
-    PENDING: 'PENDING',
-    OK: 'OK',
-    RELOADING: 'RELOADING',
-    ERROR: 'ERROR'
-};
+export enum STATUS  {
+    NOT_STARTED  ='NOT_STARTED',
+    PENDING =  'PENDING',
+    OK = 'OK',
+    RELOADING =  'RELOADING',
+    ERROR = 'ERROR'
+}
 
 class FetchError extends Error {
     public response: Response;

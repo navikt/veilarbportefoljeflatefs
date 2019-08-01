@@ -12,7 +12,7 @@ interface FacetResults {
 }
 
 export interface PortefoljeStorrelser {
-    status: string;
+    status: STATUS;
     data: {
         facetResults: FacetResults[]
     };

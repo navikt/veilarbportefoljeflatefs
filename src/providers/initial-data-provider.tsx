@@ -2,14 +2,13 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { parse } from 'query-string';
 import { EnheterState, hentEnheterForVeileder, velgEnhetForVeileder } from '../ducks/enheter';
-import { hentVeiledereForEnhet } from '../ducks/veiledere';
+import { hentVeiledereForEnhet, VeiledereState } from '../ducks/veiledere';
 import { hentFeaturesFraUnleash } from '../ducks/features';
 import { hentAktivEnhet } from '../components/enhet-context/context-api';
 import { STATUS } from '../ducks/utils';
 import { leggEnhetIUrl } from '../utils/url-utils';
 import { settEnhetIDekorator } from '../eventhandtering';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { VeilederModell } from '../model-interfaces';
 
 interface DispatchProps {
     children: React.ReactNode;
@@ -21,7 +20,7 @@ interface DispatchProps {
 
 interface StateProps {
     enheter: EnheterState;
-    veiledere: VeilederModell;
+    veiledere: VeiledereState;
 }
 
 type InitialDataProviderProps = DispatchProps & StateProps;

@@ -40,7 +40,7 @@ export interface PortefoljeData {
 }
 
 export interface PortefoljeState {
-    status: string;
+    status: STATUS;
     data: PortefoljeData;
     sorteringsrekkefolge: string;
     sorteringsfelt: string;

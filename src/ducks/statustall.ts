@@ -24,7 +24,7 @@ export interface Statustall {
 }
 
 export interface StatustallState {
-    status: string;
+    status: STATUS;
     data: Statustall;
 }
 
