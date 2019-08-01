@@ -59,11 +59,7 @@ export function hentSetteVersjonerLocalstorage(): string[] {
 
 export async function hentSetteVersjonerRemotestorage(): Promise<string[]> {
     const temp = await(fetchHarSettInnlegg());
-    let result: string[] = [];
-    if (temp.endringslogg !== undefined) {
-        result = temp.endringslogg.split(',');
-    }
-    return result;
+    return temp.endringslogg ? temp.endringslogg.split(',') : [];
 }
 
 export async function registrerInnholdIRemoteStorage(endringslogg: EndringsloggInnleggMedSettStatus[]) {

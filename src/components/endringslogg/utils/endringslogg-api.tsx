@@ -8,7 +8,7 @@ const MED_CREDENTIALS: RequestInit = {
         'Content-Type': 'application/json',
     }
 };
-export const REMOTE_STORE_URL = 'http://localhost:7070/veilarbremotestore/';
+export const REMOTE_STORE_URL = '/veilarbremotestore/';
 
 export function fetchHarSettInnlegg(): Promise<{ endringslogg: string }> {
     return fetch(`${REMOTE_STORE_URL}?ressurs=endringslogg`, {credentials: 'same-origin'})
