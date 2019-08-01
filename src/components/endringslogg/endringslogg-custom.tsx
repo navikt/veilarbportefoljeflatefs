@@ -81,12 +81,12 @@ export function setHarSettAlt() {
     });
 }
 
-export function getInnholdOgSettFraRemote(remotestorage: string[]): EndringsloggInnleggMedSettStatus[] {
+export function mapRemoteToState(remotestorage: string[]): EndringsloggInnleggMedSettStatus[] {
     return endringslogginnhold.map((el) => {
-        const fraLocal = remotestorage.some((ver) => ver === el.versjonId);
+        const settRemote = remotestorage.some((ver) => ver === el.versjonId);
         return ({
             ...el,
-            sett: fraLocal,
+            sett: settRemote,
         });
     });
 }

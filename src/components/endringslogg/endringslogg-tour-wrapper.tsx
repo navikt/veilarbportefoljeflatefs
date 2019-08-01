@@ -3,7 +3,7 @@ import TourModalLocalStorage from '../tour-modal/tour-modal-local-storage';
 import { default as React, useEffect, useState } from 'react';
 import {
     EndringsloggInnleggMedSettStatus,
-    getInnholdOgSettFraRemote,
+    mapRemoteToState,
     setHarSettAlt,
     settModalEndring
 } from './endringslogg-custom';
@@ -33,20 +33,20 @@ function EndringsloggTourWrapper() {
     const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
 
     useEffect(() => {
-        hentInnhold();
+        hentInnholdRemote();
     }, []);
 
-    const hentInnhold = async () => {
+    const hentInnholdRemote = async () => {
         let innhold = await hentSetteVersjonerRemotestorage();
         if(innhold !== null && innhold.length === 0) {
             innhold = await syncLocalStorageIfInUse();
         }
-        innhold ? setInnholdsliste(getInnholdOgSettFraRemote(innhold))
+        innhold ? setInnholdsliste(mapRemoteToState(innhold))
             : setInnholdsliste(setHarSettAlt);
     };
 
-    const registrerInnhold = async () => {
-        await registrerInnholdIRemoteStorage(innholdsListe);
+    const registrerInnholdRemote = async (innhold: EndringsloggInnleggMedSettStatus[]) => {
+        await registrerInnholdIRemoteStorage(innhold);
     };
 
     const onOpen = () => {
@@ -68,8 +68,9 @@ function EndringsloggTourWrapper() {
                 .catch((e) => console.log(e)); // tslint:disable-line
         }
         if (ulestFelt) {
-            setInnholdsliste(setHarSettAlt);
-            registrerInnhold();
+            const newList = setHarSettAlt();
+            setInnholdsliste(newList);
+            registrerInnholdRemote(newList);
         }
     };
 
@@ -91,8 +92,9 @@ function EndringsloggTourWrapper() {
             <TourModalLocalStorage
                 onTourComplete={
                     (name: string) => {
-                        setInnholdsliste(settModalEndring(innholdsListe, name));
-                        registrerInnhold();
+                        const newList = settModalEndring(innholdsListe, name);
+                        setInnholdsliste(newList);
+                        registrerInnholdRemote(newList);
                     }
                 }
             />

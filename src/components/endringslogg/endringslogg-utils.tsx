@@ -84,7 +84,7 @@ export async function syncLocalStorageIfInUse() {
 export async function registrerInnholdIRemoteStorage(endringslogg: EndringsloggInnleggMedSettStatus[]) {
     const message: string[] = [];
     endringslogg.forEach( (e)=> {
-        if(!message.includes(e.versjonId)) {
+        if(!message.includes(e.versjonId) && e.sett) {
             message.push(e.versjonId);
         }
     });
