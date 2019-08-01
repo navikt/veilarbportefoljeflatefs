@@ -4,10 +4,10 @@ import EndringsloggInnhold from './endringslogg-innhold';
 import TransitionContainer from './transition-container';
 import { useEventListener } from '../../hooks/use-event-listener';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import { EndringsloggInleggMedSettStatus } from './endringslogg-custom';
+import { EndringsloggInnleggMedSettStatus } from './endringslogg-custom';
 
 interface EndringsProps {
-    innhold: EndringsloggInleggMedSettStatus[];
+    innhold: EndringsloggInnleggMedSettStatus[];
     onOpen: () => void;
     onClose: () => void;
 }
@@ -21,7 +21,7 @@ export default function Endringslogg(props: EndringsProps) {
     const focusRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
-    const setLocalstorageAndOpenStatus = (setOpenTo: boolean) => {
+    const requestSetOpenStatus = (setOpenTo: boolean) => {
         if (setOpenTo) {
             props.onOpen();
         } else {
@@ -37,13 +37,13 @@ export default function Endringslogg(props: EndringsProps) {
         }
         // Klikket er utenfor, oppdater staten
         if (endringsloggApen) {
-            setLocalstorageAndOpenStatus(false);
+            requestSetOpenStatus(false);
         }
     };
 
     const escHandler = (event) => {
         if (event.keyCode === 27 && endringsloggApen) {
-            setLocalstorageAndOpenStatus(false);
+            requestSetOpenStatus(false);
             if (buttonRef.current) {
                 buttonRef.current.focus();
             }
@@ -52,7 +52,7 @@ export default function Endringslogg(props: EndringsProps) {
 
     const klikk = (event) => {
         event.stopPropagation();
-        setLocalstorageAndOpenStatus(!endringsloggApen);
+        requestSetOpenStatus(!endringsloggApen);
         if (!endringsloggApen) {
             if (buttonRef.current) {
                 buttonRef.current.focus();

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { fetchToJson, sjekkStatuskode, toJson } from '../ducks/utils';
+import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
 import { PortefoljeData } from '../ducks/portefolje';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
@@ -16,7 +16,7 @@ export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
 export const FEATURE_URL = '/feature';
-export const ENDRINGSLOGG_URL = '/veilarbremotestore/';
+export const REMOTE_STORE_URL = '/veilarbremotestore/';
 
 export function hentVeiledersEnheter() {
     const url = `${VEILARBVEILEDER_URL}/api/veileder/enheter`;
@@ -103,10 +103,9 @@ export function hentFeatures(featureQueryString: string) {
     return fetchToJson(`${API_BASE_URL}${FEATURE_URL}?${featureQueryString}`);
 }
 
-export function fetchHarSettInnlegg(): Promise<{Endringslogg: string}> | null {
-        return fetch(`${ENDRINGSLOGG_URL}?ressurs=Endringslogg`, {credentials: 'same-origin'})
-        .then(sjekkStatuskodeAndPost)
-        .then(toJson)
+export function fetchHarSettInnlegg(): Promise<{endringslogg: string}> | null {
+        return fetch(`${REMOTE_STORE_URL}?ressurs=endringslogg`, {credentials: 'same-origin'})
+        .then(responsToJson)
         .catch(
             () => {
                 return null;
@@ -114,24 +113,18 @@ export function fetchHarSettInnlegg(): Promise<{Endringslogg: string}> | null {
         );
 }
 
-function sjekkStatuskodeAndPost(response) {
-    response = sjekkStatuskode(response);
-    if(response.status === 204) {
-        return postNyRemoteStorage();
+function responsToJson(response) {
+    if(response.status === 504) { // Internal error
+        return null;
+    }
+    if (response.status !== 204) { // No content
+        return response.json();
     }
     return response;
 }
 
-function postNyRemoteStorage(): Promise<Response> {
-    return fetch(ENDRINGSLOGG_URL, {
-        ...MED_CREDENTIALS,
-        method: 'POST',
-        body: JSON.stringify({})
-    }).then(sjekkStatuskode);
-}
-
 export function registrerSettInnlegg(message: string) {
-    patchRemoteStorage(message, `${ENDRINGSLOGG_URL}`);
+    patchRemoteStorage(message, `${REMOTE_STORE_URL}`);
 }
 
 function patchRemoteStorage(data: string, url: string): Promise<Response> {
@@ -139,7 +132,7 @@ function patchRemoteStorage(data: string, url: string): Promise<Response> {
         ...MED_CREDENTIALS,
         method: 'PATCH',
         body: JSON.stringify({
-            Endringslogg: data
+            endringslogg: data
         })
     }).then(sjekkStatuskode);
 }

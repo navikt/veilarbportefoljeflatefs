@@ -2,9 +2,9 @@ import Endringslogg from './endringslogg';
 import TourModalLocalStorage from '../tour-modal/tour-modal-local-storage';
 import { default as React, useEffect, useState } from 'react';
 import {
-    EndringsloggInleggMedSettStatus,
+    EndringsloggInnleggMedSettStatus,
     getInnholdOgSettFraRemote,
-    settDefaultSettVerdier,
+    setHarSettAlt,
     settModalEndring
 } from './endringslogg-custom';
 import { ENDRINGSLOGG, VIS_MOTER_MED_NAV } from '../../konstanter';
@@ -16,7 +16,8 @@ import {
     hentSetteVersjonerRemotestorage,
     hexString,
     krypterVeilederident,
-    registrerInnholdIRemoteStorage
+    registrerInnholdIRemoteStorage,
+    syncLocalStorageIfInUse
 } from './endringslogg-utils';
 import { logEvent } from '../../utils/frontend-logger';
 
@@ -29,24 +30,19 @@ function EndringsloggTourWrapper() {
     };
 
     const {startTimer, stoppTimer} = useTimer();
-    const [innholdsListe, setInnholdsliste] = useState<EndringsloggInleggMedSettStatus[]>([]);
+    const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
 
     useEffect(() => {
         hentInnhold();
     }, []);
 
     const hentInnhold = async () => {
-        const innhold = await hentSetteVersjonerRemotestorage();
+        let innhold = await hentSetteVersjonerRemotestorage();
+        if(innhold !== null && innhold.length === 0) {
+            innhold = await syncLocalStorageIfInUse();
+        }
         innhold ? setInnholdsliste(getInnholdOgSettFraRemote(innhold))
-            : setInnholdsliste(settDefaultSettVerdier);
-    };
-
-    const oppdaterState = () => {
-        innholdsListe.forEach((elem) => {
-            if (!elem.sett) {
-                setInnholdsliste(settModalEndring(innholdsListe, elem.versjonId));
-            }
-        });
+            : setInnholdsliste(setHarSettAlt);
     };
 
     const registrerInnhold = async () => {
@@ -72,7 +68,7 @@ function EndringsloggTourWrapper() {
                 .catch((e) => console.log(e)); // tslint:disable-line
         }
         if (ulestFelt) {
-            oppdaterState();
+            setInnholdsliste(setHarSettAlt);
             registrerInnhold();
         }
     };

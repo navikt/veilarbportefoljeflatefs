@@ -1,6 +1,6 @@
 import { getCrypto } from './crypto';
 import { fetchHarSettInnlegg, registrerSettInnlegg } from '../../middleware/api';
-import { EndringsloggInleggMedSettStatus } from './endringslogg-custom';
+import { EndringsloggInnleggMedSettStatus } from './endringslogg-custom';
 
 export function hexString(buffer) {
     const byteArray = new Uint8Array(buffer);
@@ -58,35 +58,35 @@ export async function hentSetteVersjonerRemotestorage(): Promise<string[] | null
     let result: string[];
     if (temp === null) {
         return null;
-    } else if (temp.Endringslogg === undefined) {
+    } else if (temp.endringslogg === undefined) {
         result = [];
     } else {
-        result = temp.Endringslogg.split(',');
+        result = temp.endringslogg.split(',');
     }
+    return result;
+}
 
-    // For å overføre tidligere data fra local storage, kjøres bare hvis remote er tom.
+export async function syncLocalStorageIfInUse() {
+    const result: string[] = [];
     const fraLocal = hentSetteVersjonerLocalstorage();
-
-    if (result.length === 0 && fraLocal.length !== 0) {
-        if (typeof(fraLocal) === 'string' || fraLocal instanceof String) {
+    if (fraLocal.length !== 0) {
+        if (Array.isArray(fraLocal)) {
+            result.push(...fraLocal);
+        } else {
             // @ts-ignore
             result.push(fraLocal);
-        } else {
-            result.push(...fraLocal);
         }
         registrerSettInnlegg(result.join(','));
     }
     return result;
 }
 
-export async function registrerInnholdIRemoteStorage(endringslogg: EndringsloggInleggMedSettStatus[]) {
-    const messege: string[] = [];
+export async function registrerInnholdIRemoteStorage(endringslogg: EndringsloggInnleggMedSettStatus[]) {
+    const message: string[] = [];
     endringslogg.forEach( (e)=> {
-        if(messege.length === 0) {
-            messege.push(e.versjonId);
-        } else if(!messege.includes(e.versjonId)) {
-            messege.push(e.versjonId);
+        if(!message.includes(e.versjonId)) {
+            message.push(e.versjonId);
         }
     });
-    await(registrerSettInnlegg(messege.join(',')));
+    await(registrerSettInnlegg(message.join(',')));
 }

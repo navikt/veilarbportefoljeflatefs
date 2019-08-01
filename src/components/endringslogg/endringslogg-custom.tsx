@@ -13,7 +13,7 @@ export interface EndringsloggInnlegg {
     children?: React.ReactNode;
 }
 
-export interface EndringsloggInleggMedSettStatus extends EndringsloggInnlegg {
+export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
     sett: boolean;
 }
 
@@ -63,7 +63,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
     },
 ];
 
-export function settModalEndring(innholdState: EndringsloggInleggMedSettStatus[], modal: string): EndringsloggInleggMedSettStatus[] {
+export function settModalEndring(innholdState: EndringsloggInnleggMedSettStatus[], modal: string): EndringsloggInnleggMedSettStatus[] {
     return innholdState.map((el) => {
         if (el.versjonId === modal) {
             el.sett = true;
@@ -72,7 +72,7 @@ export function settModalEndring(innholdState: EndringsloggInleggMedSettStatus[]
     });
 }
 
-export function settDefaultSettVerdier() {
+export function setHarSettAlt() {
     return endringslogginnhold.map((el) => {
         return ({
             ...el,
@@ -81,7 +81,7 @@ export function settDefaultSettVerdier() {
     });
 }
 
-export function getInnholdOgSettFraRemote(remotestorage: string[]): EndringsloggInleggMedSettStatus[] {
+export function getInnholdOgSettFraRemote(remotestorage: string[]): EndringsloggInnleggMedSettStatus[] {
     return endringslogginnhold.map((el) => {
         const fraLocal = remotestorage.some((ver) => ver === el.versjonId);
         return ({

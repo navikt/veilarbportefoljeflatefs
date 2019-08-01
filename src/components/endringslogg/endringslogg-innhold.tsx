@@ -3,7 +3,7 @@ import { EtikettLiten, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { default as React } from 'react';
 import { ReactComponent as LinkIcon } from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
-import { EndringsloggInleggMedSettStatus } from './endringslogg-custom';
+import { EndringsloggInnleggMedSettStatus } from './endringslogg-custom';
 
 interface EndringsloggInleggProps {
     dato: string;
@@ -14,7 +14,7 @@ interface EndringsloggInleggProps {
 }
 
 interface EndringsloggInnholdProps {
-    innleggsListe: EndringsloggInleggMedSettStatus[];
+    innleggsListe: EndringsloggInnleggMedSettStatus[];
 }
 
 export function EndringsloggLinkMedIkon(props: { linkTekst: string, url: string }) {
