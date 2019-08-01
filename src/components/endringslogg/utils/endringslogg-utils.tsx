@@ -37,10 +37,10 @@ function encodeString(stringToBeEncoded: string): Uint8Array {
     return data;
 }
 
-const ENDRING_PREFIX = 'Endringslogg';
+const LOCALSTORAGE_KEY = 'Endringslogg';
 export function hentSetteVersjonerLocalstorage(): string[] {
     const setteVersjoner: string[] = [];
-    const localstorageInnhold = localStorage.getItem(ENDRING_PREFIX);
+    const localstorageInnhold = localStorage.getItem(LOCALSTORAGE_KEY);
     if (localstorageInnhold) {
         try {
             const parsedLocalstorage = JSON.parse(localstorageInnhold);
