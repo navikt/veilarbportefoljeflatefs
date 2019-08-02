@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-export function useTimer(): { start: () => void, stopp: () => number } {
+export function useTimer(): { startTimer: () => void, stoppTimer: () => number } {
     const ref = useRef<number>(-1);
 
     function start() {
@@ -17,5 +17,5 @@ export function useTimer(): { start: () => void, stopp: () => number } {
         return ret;
     }
 
-    return {start, stopp};
+    return {startTimer: start, stoppTimer: stopp};
 }

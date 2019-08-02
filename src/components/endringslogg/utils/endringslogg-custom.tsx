@@ -1,27 +1,26 @@
-import { ModalName } from '../tour-modal/tour-modal';
-import { hentSetteVersjonerLocalstorage } from './endringslogg-utils';
-import { LinkTag } from './endringslogg-innhold';
+import { ModalName } from '../../tour-modal/tour-modal';
+import { EndringsloggLinkMedIkon } from '../endringslogg-innhold';
 import React from 'react';
-import TourModalButton from '../tour-modal/tour-modal-button';
+import TourModalButton from '../../tour-modal/tour-modal-button';
 
-export interface Endring {
+export interface EndringsloggInnlegg {
     tittel: string;
     dato: string;
     tekst: string;
-    id: string;
+    versjonId: string;
     children?: React.ReactNode;
 }
 
-export interface EndringOgSett extends Endring {
+export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
     sett: boolean;
 }
 
-const innhold: Endring[] = [
+const endringslogginnhold: EndringsloggInnlegg[] = [
     {
         dato: '16. JUL. 2019',
         tittel: 'NAV møte filter i Min oversikt',
         tekst: 'Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV.',
-        id: ModalName.MOTE_FILTER,
+        versjonId: ModalName.MOTE_FILTER,
         children:
             <TourModalButton
                 metrikknavn={'portefolje.endringslogg_modal'}
@@ -33,7 +32,7 @@ const innhold: Endring[] = [
         dato: '18. JUN. 2019',
         tittel: 'Laste ned og skrive ut CV',
         tekst: 'Du kan nå laste ned brukerens CV i Detaljer og få bedre utskrift.',
-        id: '0.1.9',
+        versjonId: '0.1.9',
         children:
             <TourModalButton
                 metrikknavn={'portefolje.endringslogg_modal'}
@@ -46,43 +45,46 @@ const innhold: Endring[] = [
         dato: '06. JUN. 2019',
         tittel: 'Visning av profilering i Detaljer',
         tekst: 'Nå finner du profileringsresultatet for brukeren under Registrering i Detaljer.',
-        id: '0.1.9',
+        versjonId: '0.1.9',
     },
     {
         dato: '29. MAR. 2019',
         tittel: 'Manuell registrering',
         tekst: 'Du kan nå registrere brukere manuelt i Veilederverktøy (tannhjulet).  Arena-oppgaven «Motta person» skal ikke lenger benyttes.',
-        id: '0.1.9',
+        versjonId: '0.1.9',
         children:
-            <LinkTag
+            <EndringsloggLinkMedIkon
                 url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Arena-oppgaven-%C2%ABMotta-person%C2%BB-erstattes-av-ny-l%C3%B8sning-for-manuell-registrering.aspx"
                 linkTekst="Nyhetssak på Navet"
             />
         ,
-
     },
 ];
 
-export function getInnhold() {
-    return innhold;
-}
-
-export function settModalEndring(innholdState: EndringOgSett[], modal: string): EndringOgSett[] {
+export function settModalEndring(innholdState: EndringsloggInnleggMedSettStatus[], modal: string): EndringsloggInnleggMedSettStatus[] {
     return innholdState.map((el) => {
-        if (el.id === modal) {
+        if (el.versjonId === modal) {
             el.sett = true;
         }
         return el;
     });
 }
 
-export function getInnholdOgSett(): EndringOgSett[] {
-    const locSto = hentSetteVersjonerLocalstorage();
-    return innhold.map((el) => {
-        const fraLocal = locSto.some((ver) => ver === el.id);
+export function setHarSettAlt() {
+    return endringslogginnhold.map((el) => {
         return ({
             ...el,
-            sett: fraLocal,
+            sett: true,
+        });
+    });
+}
+
+export function mapRemoteToState(remotestorage: string[]): EndringsloggInnleggMedSettStatus[] {
+    return endringslogginnhold.map((el) => {
+        const settRemote = remotestorage.some((ver) => ver === el.versjonId);
+        return ({
+            ...el,
+            sett: settRemote,
         });
     });
 }

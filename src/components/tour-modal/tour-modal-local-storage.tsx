@@ -1,6 +1,5 @@
 import { default as React, useState } from 'react';
 import { default as TourModal, ModalName, } from './tour-modal';
-import { registrerHarLestEndringslogg } from '../endringslogg/endringslogg-utils';
 
 interface TourModalLocalStorageProps {
     onTourComplete: (e: string) => void;
@@ -17,7 +16,6 @@ export default function TourModalLocalStorage(props: TourModalLocalStorageProps)
     const lukkModal = (isFinalStep: boolean) => {
         lagreIkkeVisModal();
         if (isFinalStep) {
-            registrerHarLestEndringslogg(modalNavn);
             props.onTourComplete(modalNavn);
         }
         setApenModal(false);

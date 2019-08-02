@@ -1,4 +1,6 @@
 import { getCrypto } from './crypto';
+import { fetchHarSettInnlegg, registrerSettInnlegg } from './endringslogg-api';
+import { EndringsloggInnleggMedSettStatus } from './endringslogg-custom';
 
 export function hexString(buffer) {
     const byteArray = new Uint8Array(buffer);
@@ -35,33 +37,37 @@ function encodeString(stringToBeEncoded: string): Uint8Array {
     return data;
 }
 
-const ENDRING_PREFIX = 'Endringslogg';
-
+const LOCALSTORAGE_KEY = 'Endringslogg';
 export function hentSetteVersjonerLocalstorage(): string[] {
-    let setteVersjoner: string[] = [];
-    const tmp = localStorage.getItem(ENDRING_PREFIX);
-    if (tmp) {
+    const setteVersjoner: string[] = [];
+    const localstorageInnhold = localStorage.getItem(LOCALSTORAGE_KEY);
+    if (localstorageInnhold) {
         try {
-            setteVersjoner = JSON.parse(tmp);
+            const parsedLocalstorage = JSON.parse(localstorageInnhold);
+            if (Array.isArray(parsedLocalstorage)) {
+                setteVersjoner.push(...parsedLocalstorage);
+            } else {
+                setteVersjoner.push(parsedLocalstorage);
+            }
         } catch (e) {
             // Error handling pga. tidligere versjon som bare lagret en string i LS.
-            if (isString(tmp)) {
-                setteVersjoner.push(tmp);
-            }
-            return setteVersjoner;
+            setteVersjoner.push(localstorageInnhold);
         }
     }
     return setteVersjoner;
 }
 
-function isString(value: any): boolean {
-    return typeof value === 'string' || value instanceof String;
+export async function hentSetteVersjonerRemotestorage(): Promise<string[]> {
+    const temp = await(fetchHarSettInnlegg());
+    return temp.endringslogg ? temp.endringslogg.split(',') : [];
 }
 
-export function registrerHarLestEndringslogg(versjon: string) {
-    const setteVersjoner: string[] = hentSetteVersjonerLocalstorage();
-    if (!setteVersjoner.some((elem) => elem === versjon)) {
-        setteVersjoner.push(versjon);
-        window.localStorage.setItem(ENDRING_PREFIX, JSON.stringify(setteVersjoner));
-    }
+export async function registrerInnholdIRemoteStorage(endringslogg: EndringsloggInnleggMedSettStatus[]) {
+    const message: string[] = [];
+    endringslogg.forEach( (e)=> {
+        if(!message.includes(e.versjonId) && e.sett) {
+            message.push(e.versjonId);
+        }
+    });
+    await(registrerSettInnlegg(message.join(',')));
 }

@@ -8,7 +8,7 @@ const credentials = 'same-origin';
 const MED_CREDENTIALS: RequestInit = {
     credentials,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
     }
 };
 
