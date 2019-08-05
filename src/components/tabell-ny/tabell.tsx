@@ -2,13 +2,16 @@ import React, {useState} from 'react';
 import {useTable} from 'react-table';
 import {BrukerModell, Sorteringsrekkefolge} from "../../model-interfaces";
 import {Kolonne} from "../../ducks/ui/listevisning";
+import classNames from "classnames";
+import Header from "../tabell/header";
+import {useSorteringSelector} from "../../hooks/redux/use-sortering-selector";
 
 
 type KolonneMapper = (bruker: BrukerModell) => React.ReactNode;
 
 
 export interface KolonneConfig {
-    kolonneElement: (onClick: () => void) => React.ReactNode;
+    kolonneElementer: {tittel: string, sorterbar: boolean}[];
     mapper: KolonneMapper;
     id: Kolonne;
 }
@@ -30,20 +33,51 @@ interface TabellProps {
 function rowMapper (bruker: BrukerModell, kolonneMappers: KolonneMapper[]) {
     return  (
         <tr>
-            <td></td>
             {kolonneMappers.map(kolonneMap => <td>{kolonneMap(bruker)}</td>)}
         </tr>
     );
 }
 
+function mapTilKolonnerHeader (kolonnerElement: any ) {
+    return <div/>
+}
 
-export function Tabell({ konfig, brukere, onSortChanged }: TabellProps) {
+function kolonneHeader (kolonneElementer: {tittel: string, sorterbar: boolean}[], sorter: (kolonneId: any) => void, kolonneId, rekkefolge, sorteringsfelt ) {
+    const erValgt = kolonneId === sorteringsfelt;
+
+    return kolonneElementer.map(kolonnerElement => {
+        if (kolonnerElement.sorterbar) {
+            return (
+                <button
+                onClick={()=> sorter(kolonneId)}
+                className={classNames('lenke lenke--frittstaende', { valgt: erValgt }, {'valgt-sortering': erValgt})}
+                aria-pressed={erValgt}
+                aria-label={erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ?
+                    rekkefolge : 'inaktiv'}
+            >
+                {kolonnerElement.tittel}
+            </button>
+            )
+        }
+        return (
+            <span className="sortering-header">
+                {kolonnerElement.tittel}
+            </span>
+        )
+
+    })
+}
+
+
+export function Tabell({ konfig, brukere, onSortChanged}: TabellProps) {
+    const {sorteringsfelt, sorteringsrekkefolge} = useSorteringSelector();
+
 
     const kolonneMapper = konfig.flatMap(kolonnegruppeKonfig =>
         kolonnegruppeKonfig.kolonner.map(kolonne => kolonne.mapper));
 
     return (
-        <table>
+        <table className="portefoljetabell">
             <thead>
             <tr>
                 {konfig.map(kolonnegruppeKonfig =>
@@ -52,7 +86,7 @@ export function Tabell({ konfig, brukere, onSortChanged }: TabellProps) {
             <tr>
                 {konfig.map(kolonnegruppeKonfig =>
                     kolonnegruppeKonfig.kolonner.map(kolonne =>
-                        <th colSpan={1}>{kolonne.kolonneElement(()=> onSortChanged(kolonne.id))}</th>
+                        <th>{kolonneHeader(kolonne.kolonneElementer, onSortChanged, kolonne.id, sorteringsrekkefolge, sorteringsfelt)}</th>
                     ))}
             </tr>
             </thead>

@@ -4,13 +4,10 @@ import { BrukerModell } from '../../model-interfaces';
 interface VeilederidProps {
     className?: string;
     bruker: BrukerModell;
-    skalVises: boolean;
+    skalVises?: boolean;
 }
 
 function VeilederId({className, skalVises, bruker}: VeilederidProps) {
-    if (!skalVises) {
-        return null;
-    }
 
     return <div className={className}>
         {bruker.veilederId}

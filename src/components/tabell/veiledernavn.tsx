@@ -5,14 +5,11 @@ import Etikett from './etikett';
 interface VeiledernavnProps {
     className?: string;
     bruker: BrukerModell;
-    skalVises: boolean;
+    skalVises?: boolean;
     veileder?: VeilederModell;
 }
 
 function VeilederNavn({ className, bruker, skalVises, veileder }: VeiledernavnProps) {
-    if (!skalVises) {
-        return null;
-    }
 
     const veilederNavn = <span>{veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : ''}</span>;
 

@@ -1,45 +1,10 @@
-import { BrukerModell } from '../model-interfaces';
-import BrukerNavn from '../components/tabell/brukernavn';
-import { Kolonne } from '../ducks/ui/listevisning';
-import * as React from 'react';
-
-export const lagTabellKolonneConfig = (enhetId: string) =>  [
-    {
-        tittel: 'Bruker',
-        kolonner: [
-            {
-                kolonneElement: () => 'Etternavn, Fornavn',
-                mapper: (bruker: BrukerModell) => <BrukerNavn bruker={bruker} enhetId={enhetId}/>,
-                id: Kolonne.BRUKER
-            },
-            {
-                kolonneElement: ()=> 'Fodselsnummer',
-                mapper: (bruker: BrukerModell) => <span>{bruker.etternavn}</span>,
-                id: Kolonne.FODSELSNR
-            },
-        ],
-    },
-    {
-        tittel: 'Veileder',
-        kolonner: [
-            {
-                kolonneElement: () => 'Veileder',
-                mapper: (bruker: BrukerModell) => <span>{bruker.etternavn}</span>,
-                id: Kolonne.VEILEDER
-            },
-            {
-                kolonneElement: ()=> 'NAV-ident',
-                mapper: (bruker: BrukerModell) => <span>{bruker.etternavn}</span>,
-                id: Kolonne.NAVIDENT
-            },
-        ],
-
-    },
-
-];
-
 export function filtrerValgteKolonner(tabellKolonneObj, valgteKolonner) {
     const filtreradeKolonner = tabellKolonneObj.kolonner.filter((kol) => valgteKolonner.includes(kol.id));
+    return Object.assign({}, tabellKolonneObj, {kolonner: filtreradeKolonner});
+}
+
+export function filtrerYtelseKolonner(tabellKolonneObj, valgtYtelse) {
+    const filtreradeKolonner = tabellKolonneObj.kolonner.filter((kol) => kol.filterId ? kol.filterId.includes(valgtYtelse) : true);
     return Object.assign({}, tabellKolonneObj, {kolonner: filtreradeKolonner});
 }
 

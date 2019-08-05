@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from 'react';
 import Lenker from '../lenker/lenker';
 import Innholdslaster, { Avhengigheter } from '../innholdslaster/innholdslaster';
 import DocumentTitle from 'react-document-title';
-import { STATUS } from '../ducks/utils';
 
 interface EnhetSideContainerProps {
     avhengigheter: Avhengigheter;

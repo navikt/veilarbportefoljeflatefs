@@ -15,9 +15,9 @@ import { getFraBrukerFraUrl } from '../utils/url-utils';
 import { Tabell } from '../components/tabell-ny/tabell';
 import {
     filtrerTommeKolonneGruppe,
-    filtrerValgteKolonner,
-    lagTabellKolonneConfig
+    filtrerValgteKolonner, filtrerYtelseKolonner
 } from './enhetsportefolje-tabell-utils';
+import { checkBoksKolonne, etikettKolonne, lagTabellKolonneConfig } from './enhetsportefolje-tabell-config';
 
 interface EnhetTabellProps {
     brukere: BrukerModell[];
@@ -29,6 +29,8 @@ interface EnhetTabellProps {
     veiledere: VeilederModell;
     valgteKolonner: Kolonne[];
 }
+
+const finnBrukersVeileder = (veiledere) => (bruker) => (veiledere.find((veileder) => veileder.ident === bruker.veilederId));
 
 function EnhetTabell(props: EnhetTabellProps) {
     let forrigeBruker: string | undefined;
@@ -47,12 +49,19 @@ function EnhetTabell(props: EnhetTabellProps) {
 
     forrigeBruker = undefined;
 
-    const tabellKolonner = lagTabellKolonneConfig(enhetId, settMarkert)
+    const tabellKolonner = lagTabellKolonneConfig(enhetId, filtervalg.ytelse, finnBrukersVeileder(veiledere))
         .map( (tabellKolonneObj) => filtrerValgteKolonner(tabellKolonneObj, valgteKolonner))
+        .map( (tabellKolonneObj) => filtrerYtelseKolonner(tabellKolonneObj, filtervalg.ytelse))
         .filter((tabellKolonneObj) => filtrerTommeKolonneGruppe(tabellKolonneObj));
 
+    const blabla = [checkBoksKolonne(settMarkert), ...tabellKolonner, etikettKolonne];
+
     return (
-        <Tabell konfig={tabellKolonner} brukere={brukere} onSortChanged={}/>
+        <Tabell
+            konfig={blabla}
+            brukere={brukere}
+            onSortChanged={settSorteringOgHentPortefolje}
+        />
     );
     /*
     return (

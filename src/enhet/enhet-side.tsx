@@ -1,8 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-
-import Lenker from '../lenker/lenker';
-import Innholdslaster from '../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';

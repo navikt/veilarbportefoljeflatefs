@@ -4,7 +4,7 @@ interface UkekolonneProps {
     className?: string;
     ukerIgjen?: number;
     minVal: number;
-    skalVises: boolean;
+    skalVises?: boolean;
 }
 
 function lagUkerTekst(ukerIgjen, minVal) {
@@ -16,10 +16,7 @@ function lagUkerTekst(ukerIgjen, minVal) {
     return `${ukerIgjen} uker`;
 }
 
-function UkeKolonne({ className, ukerIgjen, minVal, skalVises }: UkekolonneProps) {
-    if (!skalVises) {
-        return null;
-    }
+function UkeKolonne({ className, ukerIgjen, minVal }: UkekolonneProps) {
     return (<span className={className}>{lagUkerTekst(ukerIgjen, minVal)}</span>);
 }
 

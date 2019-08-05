@@ -18,7 +18,7 @@ export enum Veilederpaginering {
 }
 
 export enum Kolonne {
-    BRUKER = 'bruker',
+    BRUKER = 'etternavn',
     FODSELSNR = 'fodselsnr',
     VEILEDER = 'veileder',
     NAVIDENT = 'navident',

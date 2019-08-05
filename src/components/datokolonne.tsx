@@ -3,7 +3,7 @@ import * as React from 'react';
 interface DatokolonneProps {
     className?: string;
     dato?: Date | null;
-    skalVises: boolean;
+    skalVises?: boolean;
 }
 
 function DatoKolonne({ className, dato, skalVises = true}: DatokolonneProps) {
