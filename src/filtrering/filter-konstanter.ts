@@ -50,7 +50,7 @@ export const ferdigfilterListe = {
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
     ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
-    MOTER_IDAG: 'Møte med NAV'
+    MOTER_IDAG: 'Møte med NAV idag'
 };
 
 export const alder = {
