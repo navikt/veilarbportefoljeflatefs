@@ -1,36 +1,24 @@
 .portefoljetabell {
-    width: 100%;
-    max-width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-    border-spacing: 40px;
-}
+    margin: 0.5rem;
 
-.portefoljetabell thead tr {
-    border-bottom: 1px solid @navGra40;
-    border-top: 1px solid @navGra40;
-}
+    &__rowcell {
+        padding: 0.5rem 0rem;
+        border-bottom: 1px solid @navGra40;
+    }
 
-.portefoljetabell thead tr th {
-    padding: 0.5rem 0;
-    text-align: left;
-    font-size: 1rem;
-    font-weight: 600;
-}
+    &__header {
+        border-bottom: 1px solid @navGra40;
+        border-top: 1px solid @navGra40;
+        font-weight: 700;
+        padding: 0.5rem 0;
+    }
 
-.portefoljetabell thead tr th span {
-    font-weight: 400;
-}
+    &__kolonne {
+        border-bottom: 2px solid @navGra40;
+        padding: 0.5rem 0;
+    }
 
-.portefoljetabell tbody td {
-    padding: 0.6rem 0;
-    border-bottom: 1px solid @navGra40;
-}
-
-.portefoljetabell tbody td:last-of-type {
-    text-align: right;
-}
-
-.portefoljetabell tbody td .tabellcheckbox {
-    padding-left: 0.5rem;
+    .etikettkolonne {
+        text-align: right;
+    }
 }

@@ -1,12 +1,12 @@
-import React from 'react';
-import './grid.less';
+import React from "react";
 
 interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
     columns: number;
     gap?: string;
 }
 
-function Grid (props: GridProps) {
+
+function TabellLayout(props: GridProps) {
     const columns = new Array(props.columns)
         .fill('1fr')
         .join(props.gap ? ` ${props.gap} ` : ' ');
@@ -40,5 +40,3 @@ function Grid (props: GridProps) {
         </div>
     );
 }
-
-export default Grid;

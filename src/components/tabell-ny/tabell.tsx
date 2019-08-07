@@ -5,13 +5,13 @@ import {Kolonne} from "../../ducks/ui/listevisning";
 import classNames from 'classnames';
 import {useSorteringSelector} from "../../hooks/redux/use-sortering-selector";
 
-
 type KolonneMapper = (bruker: BrukerModell) => React.ReactNode;
 
 export interface KolonneConfig {
     kolonneProps: { tittel: string, sorterbar: boolean}[];
     mapper: KolonneMapper;
     id: Kolonne;
+    kolonneStorrelse?: string;
 }
 
 export interface KolonneGruppeConfig {
@@ -30,8 +30,9 @@ interface TabellProps {
 
 
 export function Tabell({ konfig, brukere, onSortChanged}: TabellProps) {
+
     const kolonneMapper = konfig.flatMap(kolonnegruppeKonfig =>
-        kolonnegruppeKonfig.kolonner.map(kolonne => kolonne.mapper));
+        kolonnegruppeKonfig.kolonner.map(kolonne => ({mapper: kolonne.mapper, id: kolonne.id})));
 
     const headerKonfig = konfig.map(kolonnegruppeKonfig =>
         ({tittel: kolonnegruppeKonfig.tittel, kolumneLengde: kolonnegruppeKonfig.kolonner.length}));
@@ -40,25 +41,32 @@ export function Tabell({ konfig, brukere, onSortChanged}: TabellProps) {
         kolonnegruppeKonfig.kolonner.map(kolonne =>
             ({id: kolonne.id, kolonneProps: kolonne.kolonneProps})));
 
+    const gridTemplateColumns = konfig.flatMap(kolonneKofig =>
+        kolonneKofig.kolonner.map(kol => kol.kolonneStorrelse || '2fr')).join(' ');
+
     return (
-        <table className="portefoljetabell">
-            <thead>
+        <div className="portefoljetabell" style={{display: 'grid', gridTemplateColumns: gridTemplateColumns}}>
             <TabellHeader headerKonfig={headerKonfig}/>
             <TabellKolonner kolonneKofig={kolonneKofig} onSortChanged={onSortChanged}/>
-            </thead>
-            <tbody>
-            {brukere.map(bruker => rowMapper(bruker, kolonneMapper))}
-            </tbody>
-        </table>
+            <TabellBody brukere={brukere} kolonneMapper={kolonneMapper}/>
+        </div>
     )
 }
 
 function TabellHeader(props: {headerKonfig: {tittel: string, kolumneLengde: number}[]}) {
+    const assigNewProperties = props.headerKonfig.reduce( (acc, konf, idx) => {
+        if(idx === 0) {
+            return [{...konf, kolStart: 1, kolEnd: konf.kolumneLengde + 1}]
+        }
+        const [lastElem, rest] = acc;
+        const lastElemKolEnd = lastElem.kolEnd;
+        return [{...konf, kolStart: lastElemKolEnd, kolEnd: lastElemKolEnd + konf.kolumneLengde },...acc]
+
+    }, [] as any).reverse();
+
     return (
-        <tr className="portefoljetabell__header">
-            {props.headerKonfig.map(konfig => <th colSpan={konfig.kolumneLengde}>{konfig.tittel}</th>)}
-        </tr>
-    );
+        assigNewProperties.map(elem => <span className="portefoljetabell__header" style={{gridColumnStart: elem.kolStart, gridColumnEnd: elem.kolEnd}}>{elem.tittel}</span>)
+    )
 }
 
 interface TabellKolonneProps {
@@ -70,27 +78,19 @@ type TabellKolonnerProps = {kolonneKofig: TabellKolonneProps[], onSortChanged: (
 
 function TabellKolonner (props: TabellKolonnerProps) {
     return (
-        <tr>
-            {props.kolonneKofig.flatMap(kolonneKonfig =>
-                <th>
+        <>
+            {props.kolonneKofig.flatMap((kolonneKonfig) =>
+                <div className="portefoljetabell__kolonne">
                     {kolonneKonfig.kolonneProps.map(kolonne =>
                         kolonne.sorterbar
                             ? <SorteringsHeader sorter={props.onSortChanged} kolonneId={kolonneKonfig.id} tittel={kolonne.tittel}/>
                             : <span>{kolonne.tittel}</span>
 
                     )}
-                </th>
+                </div>
             )}
-        </tr>
+        </>
     )
-}
-
-function rowMapper (bruker: BrukerModell, kolonneMappers: KolonneMapper[]) {
-    return  (
-        <tr>
-            {kolonneMappers.map(kolonneMap => <td>{kolonneMap(bruker)}</td>)}
-        </tr>
-    );
 }
 
 function SorteringsHeader (props: {sorter: (kolonneId: Kolonne) => void, kolonneId, tittel} ){
@@ -108,4 +108,14 @@ function SorteringsHeader (props: {sorter: (kolonneId: Kolonne) => void, kolonne
             {props.tittel}
         </button>
     )
+}
+
+function TabellBody (props: {brukere: BrukerModell[], kolonneMapper: any}) {
+    return  (
+        <>
+            {props.brukere.map(bruker =>
+                props.kolonneMapper.map(kolonneMap =>
+                    <div className={classNames('portefoljetabell__rowcell', kolonneMap.id)}>{kolonneMap.mapper(bruker)}</div>))}
+        </>
+    );
 }

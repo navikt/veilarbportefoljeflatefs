@@ -9,7 +9,7 @@ interface EtiketterProps {
 
 function Etiketter({ className, bruker }: EtiketterProps) {
     return (
-        <span className={className}>
+        <>
             <Etikett
                 type={EtikettType.SIKKERHETSTILTAK}
                 skalVises={bruker.sikkerhetstiltak.length > 0}
@@ -53,7 +53,7 @@ function Etiketter({ className, bruker }: EtiketterProps) {
                 Sykmeldt
             </Etikett>
 
-        </span>
+        </>
     );
 }
 

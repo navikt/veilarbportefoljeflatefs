@@ -32,7 +32,8 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
                         }
                     ],
                     mapper: (bruker: BrukerModell) => <BrukerNavn bruker={bruker} enhetId={enhetId}/>,
-                    id: Kolonne.BRUKER
+                    id: Kolonne.BRUKER,
+                    kolonneStorrelse: 'minmax(150px, 200px)',
                 },
                 {
                     kolonneProps: [
@@ -42,7 +43,8 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
                         }
                     ],
                     mapper: (bruker: BrukerModell) => <BrukerFnr bruker={bruker} />,
-                    id: Kolonne.FODSELSNR
+                    id: Kolonne.FODSELSNR,
+                    kolonneStorrelse: 'minmax(150px, 200px)',
                 },
             ],
         },
@@ -229,7 +231,8 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
                         }
                     ],
                     mapper: (bruker: BrukerModell) =>  <VeilederId bruker={bruker}/>,
-                    id: Kolonne.NAVIDENT
+                    id: Kolonne.NAVIDENT,
+                    kolonneStorrelse: '1fr',
                 },
                 {
                     kolonneProps: [
@@ -239,7 +242,8 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
                         }
                     ],
                     mapper: (bruker: BrukerModell) =>  <VeilederNavn bruker={bruker} veileder={brukersVeileder(bruker)}/>,
-                    id: Kolonne.VEILEDER
+                    id: Kolonne.VEILEDER,
+                    kolonneStorrelse: '1fr',
                 },
             ],
 
@@ -258,7 +262,9 @@ export const checkBoksKolonne = (settMarkert: any)=>({
                     sorterbar: false
                 }
             ],
-            mapper: (bruker: BrukerModell) => <CheckBox className="tabellcheckbox" bruker={bruker} settMarkert={settMarkert} />
+            mapper: (bruker: BrukerModell) => <CheckBox bruker={bruker} settMarkert={settMarkert} />,
+            id: 'checkbokskolonne',
+            kolonneStorrelse: 'auto',
         },
     ],
 });
@@ -273,7 +279,8 @@ export const etikettKolonne = {
                     sorterbar: false
                 }
             ],
-            mapper: (bruker: BrukerModell) => <Etiketter bruker={bruker}/>
+            mapper: (bruker: BrukerModell) => <Etiketter bruker={bruker}/>,
+            id: 'etikettkolonne'
         },
     ],
 };
