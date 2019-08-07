@@ -10,6 +10,7 @@ alternativerConfig.set(Kolonne.BRUKER, {tekstlabel: 'Bruker', checkboxDisabled: 
 alternativerConfig.set(Kolonne.FODSELSNR, {tekstlabel: 'Fødselsnr', checkboxDisabled: true});
 alternativerConfig.set(Kolonne.VEILEDER, {tekstlabel: 'Veileder'});
 alternativerConfig.set(Kolonne.NAVIDENT, {tekstlabel: 'NAV-ident'});
+alternativerConfig.set(Kolonne.MOTER_IDAG, {tekstlabel: 'Møte med NAV idag'});
 alternativerConfig.set(Kolonne.VENTER_SVAR_FRA_NAV, {tekstlabel: 'Venter på svar fra veileder'});
 alternativerConfig.set(Kolonne.VENTER_SVAR_FRA_BRUKER, {tekstlabel: 'Venter på svar fra bruker'});
 alternativerConfig.set(Kolonne.UTLOP_YTELSE, {tekstlabel: 'Utløp ytelse'});

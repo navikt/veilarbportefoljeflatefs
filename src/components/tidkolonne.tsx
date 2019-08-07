@@ -4,11 +4,11 @@ import moment from 'moment';
 interface TidKolonneProps {
     className?: string;
     dato: number | null;
-    skalVises: boolean;
+    skalVises?: boolean;
 }
 
-function TidKolonne({ className, dato, skalVises }: TidKolonneProps) {
-    if (!skalVises || !dato) {
+function TidKolonne({ dato }: TidKolonneProps) {
+    if (!dato) {
         return null;
     }
     const duration = moment.duration(dato, 'minutes');
@@ -26,7 +26,7 @@ function TidKolonne({ className, dato, skalVises }: TidKolonneProps) {
     }
 
     return (
-        <span className={className}>
+        <span>
         {`${timmerString}:${minutterString}`}
         </span>
     );

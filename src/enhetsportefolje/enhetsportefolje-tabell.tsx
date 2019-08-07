@@ -32,8 +32,14 @@ interface EnhetTabellProps {
 
 const finnBrukersVeileder = (veiledere) => (bruker) => (veiledere.find((veileder) => veileder.ident === bruker.veilederId));
 
+const leggTilCheckBoksOgEtiketter  = (settMarkert) => (tabellKolonner) => ([checkBoksKolonne(settMarkert), ...tabellKolonner, etikettKolonne]);
+
 function EnhetTabell(props: EnhetTabellProps) {
     let forrigeBruker: string | undefined;
+
+    useEffect(()=> {
+        forrigeBruker = getFraBrukerFraUrl(); // TODO FIX THIS;
+    },[]);
 
     const {
         settMarkert, brukere, settSorteringOgHentPortefolje,
@@ -42,11 +48,6 @@ function EnhetTabell(props: EnhetTabellProps) {
 
     const { enhetId } = valgtEnhet.enhet!;
     const forrigebruker = forrigeBruker;
-
-    useEffect(()=> {
-        forrigeBruker = getFraBrukerFraUrl(); // TODO FIX THIS;
-    });
-
     forrigeBruker = undefined;
 
     const tabellKolonner = lagTabellKolonneConfig(enhetId, filtervalg.ytelse, finnBrukersVeileder(veiledere))
@@ -54,11 +55,12 @@ function EnhetTabell(props: EnhetTabellProps) {
         .map( (tabellKolonneObj) => filtrerYtelseKolonner(tabellKolonneObj, filtervalg.ytelse))
         .filter((tabellKolonneObj) => filtrerTommeKolonneGruppe(tabellKolonneObj));
 
-    const blabla = [checkBoksKolonne(settMarkert), ...tabellKolonner, etikettKolonne];
+    const tabellKonfig = leggTilCheckBoksOgEtiketter(settMarkert)(tabellKolonner);
 
     return (
         <Tabell
-            konfig={blabla}
+            forrigebruker={forrigebruker}
+            konfig={tabellKonfig}
             brukere={brukere}
             onSortChanged={settSorteringOgHentPortefolje}
         />

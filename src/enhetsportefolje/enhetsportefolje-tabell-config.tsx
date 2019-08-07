@@ -11,6 +11,8 @@ import VeilederId from '../components/tabell/veilederid';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import CheckBox from '../components/tabell/checkbox';
 import Etiketter from '../components/tabell/etiketter';
+import TidKolonne from '../components/tidkolonne';
+import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
 
 export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeileder: (b)=> any) =>  {
     const ytelsevalgConfig = ytelsevalg();
@@ -19,22 +21,71 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
             tittel: 'Bruker',
             kolonner: [
                 {
-                    kolonneElementer: [{tittel: 'Etternavn', sorterbar: true}, {tittel: ', Fornavn', sorterbar: false}],
+                    kolonneProps: [
+                        {
+                            tittel: 'Etternavn',
+                            sorterbar: true
+                        },
+                        {
+                            tittel: ', Fornavn',
+                            sorterbar: false
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) => <BrukerNavn bruker={bruker} enhetId={enhetId}/>,
                     id: Kolonne.BRUKER
                 },
                 {
-                    kolonneElementer: [{tittel: 'Fødselsnummer', sorterbar: true}],
+                    kolonneProps: [
+                        {
+                            tittel: 'Fødselsnummer',
+                            sorterbar: true
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) => <BrukerFnr bruker={bruker} />,
                     id: Kolonne.FODSELSNR
                 },
             ],
         },
         {
+            tittel: 'Klokkeslett for møtet',
+            kolonner: [
+                {
+                    kolonneProps: [
+                        {
+                            tittel: 'Klokkeslett',
+                            sorterbar: true
+                        }
+                    ],
+                    mapper: (bruker: BrukerModell) =>  <TidKolonne dato={klokkeslettTilMinutter(bruker.moteStartTid)}/>,
+                    id: Kolonne.MOTER_IDAG
+                },
+            ],
+        },
+        {
+            tittel : 'Varighet',
+            kolonner: [
+                {
+                kolonneProps: [
+                    {
+                        tittel: 'Varighet',
+                        sorterbar: false
+                    }
+                ],
+                mapper: (bruker: BrukerModell) => <TidKolonne dato={minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid)}/>,
+                id: Kolonne.MOTER_IDAG
+            },
+            ]
+        },
+        {
             tittel : 'Svar fra Nav',
             kolonner: [
                 {
-                    kolonneElementer:  [{tittel: 'Dato', sorterbar: true}],
+                    kolonneProps:  [
+                        {
+                            tittel: 'Dato',
+                            sorterbar: true
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) => <DatoKolonne dato={bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null}/>,
                     id: Kolonne.VENTER_SVAR_FRA_NAV
                 }
@@ -44,7 +95,12 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
             tittel : 'Svar fra Bruker',
             kolonner: [
                 {
-                    kolonneElementer:  [{tittel: 'Dato', sorterbar: true}],
+                    kolonneProps:  [
+                        {
+                            tittel: 'Dato',
+                            sorterbar: true
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) => <DatoKolonne dato={bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null}/>,
                     id: Kolonne.VENTER_SVAR_FRA_BRUKER
                 }
@@ -54,7 +110,12 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
             tittel: 'Gjenstår',
             kolonner: [
                 {
-                    kolonneElementer:  [{tittel: 'Rettighetsperiode', sorterbar: true}],
+                    kolonneProps:  [
+                        {
+                            tittel: 'Rettighetsperiode',
+                            sorterbar: true
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) => <UkeKolonne ukerIgjen={bruker.dagputlopUke} minVal={2}/>,
                     id: Kolonne.UTLOP_YTELSE,
                     filterId: [ytelsevalgConfig.DAGPENGER, ytelsevalgConfig.ORDINARE_DAGPENGER, ytelsevalgConfig.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI,
@@ -66,7 +127,12 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
             tittel: 'Gjenstår',
             kolonner: [
                 {
-                    kolonneElementer:  [{tittel: 'Vedtaksperiode', sorterbar: true}],
+                    kolonneProps:  [
+                        {
+                            tittel: 'Vedtaksperiode',
+                            sorterbar: true
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) =>  <UkeKolonne ukerIgjen={utlopsdatoUker(bruker.utlopsdato)} minVal={2}/>,
                     id: Kolonne.UTLOP_YTELSE,
                     filterId: [ytelsevalgConfig.AAP, ytelsevalgConfig.AAP_MAXTID, ytelsevalgConfig.AAP_UNNTAK]
@@ -77,7 +143,12 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
             tittel: 'Gjenstår',
             kolonner: [
                 {
-                    kolonneElementer:  [{tittel: 'Rettighetsperiode', sorterbar: true}],
+                    kolonneProps:  [
+                        {
+                            tittel: 'Rettighetsperiode',
+                            sorterbar: true
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) =>  <UkeKolonne ukerIgjen={aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen)} minVal={2}/>,
                     id: Kolonne.UTLOP_YTELSE,
                     filterId: [ytelsevalgConfig.AAP, ytelsevalgConfig.AAP_MAXTID, ytelsevalgConfig.AAP_UNNTAK]
@@ -88,7 +159,12 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
             tittel: 'Gjenstår',
             kolonner: [
                 {
-                    kolonneElementer:  [{tittel: 'Vedtaksperiode', sorterbar: true}],
+                    kolonneProps:  [
+                        {
+                            tittel: 'Vedtaksperiode',
+                            sorterbar: true
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) => <UkeKolonne ukerIgjen={utlopsdatoUker(bruker.utlopsdato)} minVal={2}/>,
                     id: Kolonne.UTLOP_YTELSE,
                     filterId: [ytelsevalgConfig.TILTAKSPENGER]
@@ -99,7 +175,12 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
             tittel: 'Utløpt aktivitet',
             kolonner: [
                 {
-                    kolonneElementer:  [{tittel: 'Dato', sorterbar: true}],
+                    kolonneProps:  [
+                        {
+                            tittel: 'Dato',
+                            sorterbar: true
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) => <DatoKolonne dato={bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null}/>,
                     id: Kolonne.UTLOPTE_AKTIVITETER
                 }
@@ -109,7 +190,12 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
             tittel: 'Neste utløsdato aktivitet',
             kolonner: [
                 {
-                    kolonneElementer:  [{tittel: 'Dato', sorterbar: true}],
+                    kolonneProps:  [
+                        {
+                            tittel: 'Dato',
+                            sorterbar: true
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) => <DatoKolonne dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}/>,
                     id: Kolonne.AVTALT_AKTIVITET
                 }
@@ -120,7 +206,12 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
             tittel: 'Første sluttdato av valgte aktivitet',
             kolonner: [
                 {
-                    kolonneElementer:  [{tittel: 'Dato', sorterbar: true}],
+                    kolonneProps:  [
+                        {
+                            tittel: 'Dato',
+                            sorterbar: true
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) => <DatoKolonne dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}/>,
                     id: Kolonne.UTLOP_AKTIVITET
                 }
@@ -131,12 +222,22 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: any, brukersVeil
             tittel: 'Veileder',
             kolonner: [
                 {
-                    kolonneElementer: [{tittel: 'NAV-ident', sorterbar: true}],
+                    kolonneProps: [
+                        {
+                            tittel: 'NAV-ident',
+                            sorterbar: true
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) =>  <VeilederId bruker={bruker}/>,
                     id: Kolonne.NAVIDENT
                 },
                 {
-                    kolonneElementer: [{tittel: 'Veileder', sorterbar: false}],
+                    kolonneProps: [
+                        {
+                            tittel: 'Veileder',
+                            sorterbar: false
+                        }
+                    ],
                     mapper: (bruker: BrukerModell) =>  <VeilederNavn bruker={bruker} veileder={brukersVeileder(bruker)}/>,
                     id: Kolonne.VEILEDER
                 },
@@ -151,9 +252,13 @@ export const checkBoksKolonne = (settMarkert: any)=>({
     tittel: '',
     kolonner: [
         {
-            kolonneElementer: [{tittel: '', sorterbar: false}],
-            mapper: (bruker: BrukerModell) =>   <CheckBox bruker={bruker} settMarkert={settMarkert} />,
-            id: Kolonne.VEILEDER
+            kolonneProps: [
+                {
+                    tittel: '',
+                    sorterbar: false
+                }
+            ],
+            mapper: (bruker: BrukerModell) => <CheckBox className="tabellcheckbox" bruker={bruker} settMarkert={settMarkert} />
         },
     ],
 });
@@ -162,9 +267,13 @@ export const etikettKolonne = {
     tittel: '',
     kolonner: [
         {
-            kolonneElementer: [{tittel: '', sorterbar: false}],
-            mapper: (bruker: BrukerModell) => <Etiketter bruker={bruker}/>,
-            id: Kolonne.VEILEDER
+            kolonneProps: [
+                {
+                    tittel: '',
+                    sorterbar: false
+                }
+            ],
+            mapper: (bruker: BrukerModell) => <Etiketter bruker={bruker}/>
         },
     ],
 };
