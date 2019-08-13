@@ -35,9 +35,9 @@ interface MinOversiktListehodeProps {
 
 function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: MinOversiktListehodeProps) {
     const { ytelse } = filtervalg;
-    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse);
-    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering[ytelse].vedtaksperiode : ytelseUtlopsSortering[filtervalg.ytelse];
+    const erAapYtelse = !! ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
+    const aapRettighetsperiode = erAapYtelse ? ytelse && ytelseAapSortering[ytelse].rettighetsperiode : '';
+    const ytelseUtlopsdatoNavn = erAapYtelse ?ytelse && ytelseAapSortering[ytelse].vedtaksperiode : ytelse && ytelseUtlopsSortering[ytelse];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'Vedtaksperiode' : 'Vedtaksperiode';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';

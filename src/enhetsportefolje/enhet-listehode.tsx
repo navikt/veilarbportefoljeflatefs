@@ -8,7 +8,8 @@ import {
     VENTER_PA_SVAR_FRA_NAV,
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER,
-    I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
+    I_AVTALT_AKTIVITET, MOTER_IDAG
+} from '../filtrering/filter-konstanter';
 import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import { AktiviteterValg } from '../ducks/filtrering';
@@ -84,6 +85,11 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             skalVises={!!filtervalg && harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
                             tekst="Første sluttdato av valgte aktiviteter"
 
+                        />
+                        <Listeoverskrift
+                            className="listeoverskrift col col-xs-4"
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            tekst="Varighet"
                         />
                         <Listeoverskrift
                             className="listeoverskrift__veileder listeoverskrift col col-xs-2"
@@ -177,6 +183,21 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
                             className="sortering-header__dato col col-xs-2"
                         />
+                        <SorteringHeader
+                            sortering={Sorteringsfelt.MOTER_IDAG}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
+                            tekst="Klokkeslett"
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            className="sortering-header__dato col col-xs-2"
+                        />
+                        <Header
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            className="sortering-header__dato col col-xs-2"
+                        >
+                            Varighet
+                        </Header>
                         <SorteringHeader
                             sortering={Sorteringsfelt.NAVIDENT}
                             onClick={sorteringOnClick}

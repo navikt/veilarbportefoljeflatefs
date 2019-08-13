@@ -8,7 +8,7 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
     ytelsevalg,
-    ytelseAapSortering
+    ytelseAapSortering, MOTER_IDAG
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
 import { Kolonne } from '../ducks/ui/listevisning';
@@ -16,6 +16,8 @@ import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfa
 import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker, aapRettighetsperiode } from '../utils/utils';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
+import TidKolonne from '../components/tidkolonne';
+import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -36,7 +38,9 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
-    const erAapYtelse = Object.keys(ytelseAapSortering()).includes(ytelse);
+    const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
+    const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
+    const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering()).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
 
     return (
@@ -102,6 +106,16 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
                 skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0  && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+            />
+            <TidKolonne
+                className="col col-xs-2"
+                dato={moteStartTid}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+            />
+            <TidKolonne
+                className="col col-xs-2"
+                dato={varighet}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
             />
             <VeilederId className="col col-xs-2"
                         bruker={bruker}

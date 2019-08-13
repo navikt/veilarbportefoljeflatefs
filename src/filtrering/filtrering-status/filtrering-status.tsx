@@ -65,7 +65,6 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
             <FiltreringStatusAvtaltMoteMedNav
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
-                hidden={props.filtergruppe !== 'veileder'}
             />
             <FiltreringStatusAktiviteter
                 ferdigfilterListe={ferdigfilterListe}
