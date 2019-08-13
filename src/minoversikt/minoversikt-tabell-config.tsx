@@ -3,19 +3,20 @@ import { BrukerModell, VeilederModell } from '../model-interfaces';
 import BrukerNavn from '../components/tabell/brukernavn';
 import { Kolonne } from '../ducks/ui/listevisning';
 import BrukerFnr from '../components/tabell/brukerfnr';
-import DatoKolonne from '../components/datokolonne';
-import { aapRettighetsperiode, nesteUtlopsdatoEllerNull, utlopsdatoUker } from '../utils/utils';
 import { ytelsevalg } from '../filtrering/filter-konstanter';
-import UkeKolonne from '../components/ukekolonne';
-import VeilederId from '../components/tabell/veilederid';
-import VeilederNavn from '../components/tabell/veiledernavn';
-import CheckBox from '../components/tabell/checkbox';
-import Etiketter from '../components/tabell/etiketter';
-import TidKolonne from '../components/tidkolonne';
-import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
 import { Ytelse } from '../ducks/filtrering';
+import ArbeidslisteOverskrift from "../components/tabell/arbeidslisteoverskrift";
+import UkeKolonne from "../components/ukekolonne";
+import {aapRettighetsperiode, nesteUtlopsdatoEllerNull, utlopsdatoUker} from "../utils/utils";
+import Etiketter from "../components/tabell/etiketter";
+import TidKolonne from "../components/tidkolonne";
+import DatoKolonne from "../components/datokolonne";
+import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
+import CheckBox from '../components/tabell/checkbox';
+import {Arbeidslisteikon} from '../components/tabell/arbeidslisteikon';
+import {ArbeidslisteButton} from "../components/tabell/arbeidslistebutton";
 
-export const lagTabellKolonneConfig = (enhetId: string, ytelse: null | Ytelse, brukersVeileder: (bruker: BrukerModell) => VeilederModell) =>  {
+export const lagTabellKolonneConfig = (enhetId: string, ytelse: null | Ytelse) =>  {
     const ytelsevalgConfig = ytelsevalg();
     return [
         {
@@ -48,6 +49,21 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: null | Ytelse, b
             ],
         },
         {
+            tittel: 'Arbeidsliste',
+            kolonner: [
+                {
+                    kolonneProps: [
+                        {
+                            tittel: 'Dato',
+                            sorterbar: true
+                        },
+                    ],
+                    mapper: (bruker: BrukerModell) => <ArbeidslisteOverskrift bruker={bruker}/>,
+                    id: Kolonne.ARBEIDSLISTE,
+                }
+                ]
+        },
+        {
             tittel: 'Klokkeslett for møtet',
             kolonner: [
                 {
@@ -60,22 +76,17 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: null | Ytelse, b
                     mapper: (bruker: BrukerModell) =>  <TidKolonne dato={klokkeslettTilMinutter(bruker.moteStartTid)}/>,
                     id: Kolonne.MOTER_IDAG
                 },
-            ],
-        },
-        {
-            tittel : 'Varighet',
-            kolonner: [
                 {
-                kolonneProps: [
-                    {
-                        tittel: 'Varighet',
-                        sorterbar: false
-                    }
-                ],
-                mapper: (bruker: BrukerModell) => <TidKolonne dato={minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid)}/>,
-                id: Kolonne.MOTER_IDAG
-            },
-            ]
+                    kolonneProps: [
+                        {
+                            tittel: 'Varighet',
+                            sorterbar: false
+                        }
+                    ],
+                    mapper: (bruker: BrukerModell) => <TidKolonne dato={minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid)}/>,
+                    id: Kolonne.MOTER_IDAG
+                },
+            ],
         },
         {
             tittel : 'Svar fra Nav',
@@ -220,29 +231,53 @@ export const lagTabellKolonneConfig = (enhetId: string, ytelse: null | Ytelse, b
 
         },
         {
-            tittel: 'Veileder',
+            tittel: 'Startdato aktivitet',
             kolonner: [
                 {
-                    kolonneProps: [
+                    kolonneProps:  [
                         {
-                            tittel: 'NAV-ident',
+                            tittel: 'Dato',
                             sorterbar: true
                         }
                     ],
-                    mapper: (bruker: BrukerModell) =>  <VeilederId bruker={bruker}/>,
-                    id: Kolonne.NAVIDENT,
-                },
+                    mapper: (bruker: BrukerModell) => <DatoKolonne dato={bruker.aktivitetStart ? new Date(bruker.aktivitetStart) : null}/>,
+                    id: Kolonne.START_DATO_AKTIVITET
+                }
+            ]
+
+        },
+
+        {
+            tittel: 'Neste startdato aktivitet',
+            kolonner: [
                 {
-                    kolonneProps: [
+                    kolonneProps:  [
                         {
-                            tittel: 'Veileder',
-                            sorterbar: false
+                            tittel: 'Dato',
+                            sorterbar: true
                         }
                     ],
-                    mapper: (bruker: BrukerModell) =>  <VeilederNavn bruker={bruker} veileder={brukersVeileder(bruker)}/>,
-                    id: Kolonne.VEILEDER,
-                },
-            ],
+                    mapper: (bruker: BrukerModell) => <DatoKolonne dato={bruker.nesteAktivitetStart ? new Date(bruker.nesteAktivitetStart) : null}/>,
+                    id: Kolonne.NESTE_START_DATO_AKTIVITET
+                }
+            ]
+
+        },
+
+        {
+            tittel: 'Startdato aktivitet passert',
+            kolonner: [
+                {
+                    kolonneProps:  [
+                        {
+                            tittel: 'Dato',
+                            sorterbar: true
+                        }
+                    ],
+                    mapper: (bruker: BrukerModell) => <DatoKolonne dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}/>,
+                    id: Kolonne.FORRIGE_START_DATO_AKTIVITET
+                }
+            ]
 
         },
 
@@ -266,6 +301,24 @@ export const checkBoksKolonne = (settMarkert: (felt: string, markert: boolean) =
     ],
 });
 
+
+export const arbeidslisteKolonne = {
+    tittel: '',
+    kolonner: [
+        {
+            kolonneProps: [
+                {
+                    tittel: '',
+                    sorterbar: false
+                }
+            ],
+            mapper: (bruker: BrukerModell) => <Arbeidslisteikon bruker={bruker}/>,
+            id: 'arbeidslistekolonne',
+            kolonneStorrelse: 'auto'
+        },
+    ],
+};
+
 export const etikettKolonne = {
     tittel: '',
     kolonner: [
@@ -279,6 +332,24 @@ export const etikettKolonne = {
             mapper: (bruker: BrukerModell) => <Etiketter bruker={bruker}/>,
             id: 'etikettkolonne',
             kolonneStorrelse: '2fr'
+        },
+    ],
+};
+
+
+export const arbeidslisteKnapp = {
+    tittel: '',
+    kolonner: [
+        {
+            kolonneProps: [
+                {
+                    tittel: '',
+                    sorterbar: false
+                }
+            ],
+            mapper: (bruker: BrukerModell, apen: boolean, onClick: ()=> void) => <ArbeidslisteButton bruker={bruker} apen={apen} onClick={onClick}
+            />,
+            id: 'arbeidslisteKnapp'
         },
     ],
 };

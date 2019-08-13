@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {BrukerModell, Sorteringsrekkefolge} from '../../model-interfaces';
 import {Kolonne} from '../../ducks/ui/listevisning';
 import classNames from 'classnames';
-import {useSorteringSelector} from "../../hooks/redux/use-sortering-selector";
-import Grid from '../grid/grid';
+import {useSorteringSelector} from '../../hooks/redux/use-sortering-selector';
+import ArbeidslistePanel from "../../minoversikt/minoversikt-arbeidslistepanel";
+import Collapse from 'react-collapse';
 
-type KolonneMapper = (bruker: BrukerModell) => React.ReactNode;
+type KolonneMapper = (bruker: BrukerModell, apen?: boolean, onClick?: ()=> void) => React.ReactNode;
 
 export interface KolonneConfig {
     kolonneProps: { tittel: string, sorterbar: boolean}[];
@@ -26,10 +27,11 @@ interface TabellProps {
     brukere: BrukerModell [];
     onSortChanged: (kolonne: Kolonne) => void;
     forrigebruker: string | undefined;
+    innloggetVeileder: string;
 }
 
 
-export function Tabell({ konfig, brukere, onSortChanged, forrigebruker}: TabellProps) {
+export function EkspanderbarTabell({ konfig, brukere, onSortChanged, forrigebruker, innloggetVeileder}: TabellProps) {
 
     const kolonneMapper = konfig.flatMap(kolonnegruppeKonfig =>
         kolonnegruppeKonfig.kolonner.map(kolonne => ({mapper: kolonne.mapper, id: kolonne.id})));
@@ -42,18 +44,18 @@ export function Tabell({ konfig, brukere, onSortChanged, forrigebruker}: TabellP
             ({id: kolonne.id, kolonneProps: kolonne.kolonneProps})));
 
     const gridTemplateColumns = konfig.flatMap(kolonneKofig =>
-        kolonneKofig.kolonner.map(kol => {
-            console.log('kol', kol);
-            return kol.kolonneStorrelse || '1fr'
-        })).join(' ');
+        kolonneKofig.kolonner.map(kol => kol.kolonneStorrelse || '1fr')).join(' ');
 
-
-    console.log(gridTemplateColumns);
     return (
         <div className="portefoljetabell" style={{display: 'grid', gridTemplateColumns: gridTemplateColumns}}>
             <TabellHeader headerKonfig={headerKonfig}/>
             <TabellKolonner kolonneKofig={kolonneKofig} onSortChanged={onSortChanged}/>
-            <TabellBody brukere={brukere} kolonneMapper={kolonneMapper} forrigebruker={forrigebruker}/>
+            <TabellBody
+                brukere={brukere}
+                kolonneMapper={kolonneMapper}
+                forrigebruker={forrigebruker}
+                innloggetVeileder={innloggetVeileder}
+            />
         </div>
     )
 }
@@ -124,15 +126,46 @@ function SorteringsHeader (props: {sorter: (kolonneId: Kolonne) => void, kolonne
     )
 }
 
-function TabellBody (props: {brukere: BrukerModell[], kolonneMapper: {mapper: KolonneMapper, id: Kolonne} [], forrigebruker: string | undefined} ) {
+interface TabellBodyProps {
+    forrigebruker: string | undefined,
+    brukere: BrukerModell[],
+    kolonneMapper: {mapper: KolonneMapper, id: Kolonne} [],
+    innloggetVeileder: string;
+}
+
+function TabellBody (props: TabellBodyProps ) {
     return  (
         <>
             {props.brukere.map(bruker =>
                 props.kolonneMapper.map(kolonneMap =>
-                    <div className={classNames('portefoljetabell__rowcell', kolonneMap.id,  {'brukerliste--forrigeBruker': props.forrigebruker === bruker.fnr})}>
-                        {kolonneMap.mapper(bruker)}
-                    </div>
+                    <TabellRad
+                        bruker={bruker}
+                        kolonneMap={kolonneMap}
+                        forrigebruker={props.forrigebruker}
+                        innloggetVeileder={props.innloggetVeileder}
+                    />
+
                 ))}
         </>
     );
+}
+
+
+function TabellRad (props: {bruker: BrukerModell, kolonneMap: {mapper: KolonneMapper, id: Kolonne}, forrigebruker: string | undefined, innloggetVeileder: string}) {
+    const [apen, setApen] = useState(false);
+    const onClick = ()=> setApen(prevState => !prevState);
+    return (
+        <div className="portefoljetabell__rowcell">
+            <div className={classNames(props.kolonneMap.id,  {'brukerliste--forrigeBruker': props.forrigebruker === props.bruker.fnr})}>
+                {props.kolonneMap.mapper(props.bruker, apen, onClick)}
+            </div>
+            <Collapse isOpened={apen}>
+                <ArbeidslistePanel
+                    bruker={props.bruker}
+                    innloggetVeileder={props.innloggetVeileder}
+                />
+            </Collapse>
+        </div>
+
+    )
 }

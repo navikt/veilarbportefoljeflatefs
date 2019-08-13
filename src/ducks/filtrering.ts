@@ -19,6 +19,17 @@ export enum AktiviteterValg {
 
 export interface FiltreringAktiviteterValg { [aktivitet: string]: AktiviteterValg; }
 
+export type Ytelse =
+    'DAGPENGER' |
+    'ORDINARE_DAGPENGER' |
+    'DAGPENGER_MED_PERMITTERING' |
+    'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI' |
+    'LONNSGARANTIMIDLER_DAGPENGER' |
+    'AAP' |
+    'AAP_MAXTID' |
+    'AAP_UNNTAK' |
+    'TILTAKSPENGER';
+
 export interface FiltreringState {
     ferdigfilterListe: string[];
     alder: string[];
@@ -31,7 +42,7 @@ export interface FiltreringState {
     veiledere: string[];
     aktiviteter: FiltreringAktiviteterValg;
     tiltakstyper: string[];
-    ytelse: null;
+    ytelse: null | Ytelse;
     manuellBrukerStatus: string[];
     hovedmal: string[];
     navnEllerFnrQuery: string;

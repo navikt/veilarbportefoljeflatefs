@@ -1,4 +1,5 @@
 import {STATUS} from "./ducks/utils";
+import {Ytelse} from "./ducks/filtrering";
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -55,7 +56,7 @@ export interface FiltervalgModell {
     formidlingsgruppe?: string[];
     servicegruppe?: string[];
     veiledere?: string[];
-    ytelse: string;
+    ytelse: null | Ytelse;
     aktiviteter?: string[];
     tiltakstyper: string[];
     hovedmal?: string[];

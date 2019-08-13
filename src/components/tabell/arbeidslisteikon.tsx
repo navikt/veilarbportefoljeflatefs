@@ -1,13 +1,16 @@
-import * as React from 'react';
-import classNames from 'classnames';
+import React from 'react';
+import {BrukerModell} from "../../model-interfaces";
+import { ReactComponent as ArbeidslisteIkon } from './flagg-filled.svg';
 
 interface ArbeidslisteikonProps {
     className?: string;
-    skalVises: boolean;
+    bruker: BrukerModell;
 }
 
-const cls = (className?: string) => className ? classNames('arbeidsliste--ikon', className) : 'arbeidsliste--ikon';
 
-export default ({ className, skalVises}: ArbeidslisteikonProps) => {
-    return <span className={ skalVises ? cls(className) : className}/>;
-};
+export function Arbeidslisteikon (props: ArbeidslisteikonProps) {
+    if(props.bruker.arbeidsliste.arbeidslisteAktiv) {
+        return <ArbeidslisteIkon/>
+    }
+    return null;
+}

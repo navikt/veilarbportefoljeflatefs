@@ -32,6 +32,7 @@ export enum Kolonne {
     NESTE_START_DATO_AKTIVITET = 'neste_aktivitet_start',
     FORRIGE_START_DATO_AKTIVITET = 'forrige_aktivitet_start',
     MOTER_IDAG = 'moterMedNavIdag',
+    ARBEIDSLISTE = 'arbeidsliste',
 }
 
 export enum ListevisningType {

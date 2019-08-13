@@ -15,8 +15,8 @@
     "heroku-serve": "node heroku-server.js",
     "heroku-postbuild": "cross-env REACT_APP_MOCK=true npm run build",
     "upload:doc": "node documentation/scripts/upload-all",
-    "lint": "tslint ./src/**/*.ts*",
-    "lint:fix": "tslint ./src/**/*.ts* --fix",
+    "lint": "tslint ./src/**/**/**/**/*.ts*",
+    "lint:fix": "tslint /src/**/**/*.ts* --fix",
     "precommit": "npm run lint:fix",
     "test": "craco test --watchAll=false"
   },
@@ -110,7 +110,6 @@
     "react-redux": "7.1.0",
     "react-router-dom": "5.0.1",
     "react-scripts": "2.1.5",
-    "react-table": "7.0.0-alpha.12",
     "react-transition-group": "4.2.1",
     "redux": "4.0.4",
     "redux-form": "8.2.4",

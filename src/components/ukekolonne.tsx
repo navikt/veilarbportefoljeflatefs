@@ -4,7 +4,7 @@ interface UkekolonneProps {
     className?: string;
     ukerIgjen?: number;
     minVal: number;
-    skalVises?: boolean;
+    skalVises?: boolean | null;
 }
 
 function lagUkerTekst(ukerIgjen, minVal) {
