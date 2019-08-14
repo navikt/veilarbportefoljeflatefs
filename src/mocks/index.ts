@@ -4,7 +4,6 @@ import me from './me';
 import brukere from './portefolje';
 import veiledere from './veiledere';
 import statustall from './statustall';
-import tekster from './tekster';
 import tiltak from './tiltak';
 import diagramdata from './diagramdata';
 import lagDiagramData from './diagramdataV2';
@@ -49,16 +48,17 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
     };
 }
 
+const endringslogg = {};
+
 // features
 (mock as any).get(`glob:${API_BASE_URL}${FEATURE_URL}*`, respondWith(features));
-
-// Hvis du vil hente tekster fra applikasjonen, så la linjen nedenfor være kommentert ut.
-(mock as any).get('/veilarbportefoljeflatefs/api/tekster', respondWith(tekster));
 
 // veileder-api
 (mock as any).get('/veilarbveileder/api/veileder/enheter', respondWith(enheter));
 (mock as any).get('/veilarbveileder/api/veileder/me', respondWith(me));
 (mock as any).get('express:/veilarbveileder/api/enhet/:enhet/veiledere', respondWith(veiledere));
+(mock as any).patch('/veilarbremotestore/', respondWith((url, config, { queryParams, bodyParams, extra }) => Object.assign(endringslogg, bodyParams)));
+(mock as any).get('/veilarbremotestore/?ressurs=endringslogg', respondWith(endringslogg));
 
 // portefolje-api
 (mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/statustall', respondWith(delayed(1000, randomFailure(statustall))));
@@ -73,7 +73,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 (mock as any).post('express:/veilarbportefolje/api/diagram*', () => respondWith(diagramdata));
 
 // situasjon-api
-(mock as any).post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, randomFailure({ feilendeTilordninger: ['11111111111','22222222222'] }))));
+(mock as any).post('/veilarboppfolging/api/tilordneveileder/', respondWith(delayed(1000, randomFailure({ feilendeTilordninger: ['11111111111','22222222222'] }))));
 
 // arbeidsliste-api
 (mock as any).post('/veilarbportefolje/api/arbeidsliste/', respondWith((url, config, {bodyParams}) => {

@@ -26,7 +26,7 @@ function responseToJson(response) {
 }
 
 export function registrerSettInnlegg(message: string) {
-    patchRemoteStorage(message, `${REMOTE_STORE_URL}`);
+    return patchRemoteStorage(message, `${REMOTE_STORE_URL}`);
 }
 
 function patchRemoteStorage(data: string, url: string): Promise<Response> {
