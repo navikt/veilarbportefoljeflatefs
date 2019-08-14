@@ -7,7 +7,7 @@ import {
     setHarSettAlt,
     settModalEndring
 } from './utils/endringslogg-custom';
-import { ENDRINGSLOGG, VIS_MOTER_MED_NAV } from '../../konstanter';
+import {ENDRINGSLOGG, USE_VEILARBREMOTESTORAGE, VIS_MOTER_MED_NAV} from '../../konstanter';
 import { ModalName } from '../tour-modal/tour-modal';
 import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
 import { useIdentSelector } from '../../hooks/redux/use-enheter-ident';
@@ -27,21 +27,26 @@ function EndringsloggTourWrapper() {
     const veilederIdent = useIdentSelector();
     const features = {
         visMoteMedNAV: harFeature(VIS_MOTER_MED_NAV),
-        visEndringslogg: harFeature(ENDRINGSLOGG)
+        visEndringslogg: harFeature(ENDRINGSLOGG),
+        brukRemoteStorage: harFeature(USE_VEILARBREMOTESTORAGE)
     };
 
     const {startTimer, stoppTimer} = useTimer();
     const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
 
     useEffect(() => {
-        hentInnholdRemote();
+        if(features.brukRemoteStorage) {
+            hentInnholdRemote();
+        } else {
+            hentFraLocalStorage();
+        }
     }, []);
 
     const hentInnholdRemote = async () => {
         try {
             let innhold = await hentSetteVersjonerRemotestorage();
             if (innhold.length === 0) {
-                innhold = await hentSetteVersjonerLocalstorage();
+                innhold = hentSetteVersjonerLocalstorage();
                 if (innhold.length !== 0) {
                     registrerSettInnlegg(innhold.join(','));
                 }
@@ -51,6 +56,14 @@ function EndringsloggTourWrapper() {
             setInnholdsliste(setHarSettAlt);
         }
 
+    };
+
+    const hentFraLocalStorage = ()=>  {
+        let innhold = hentSetteVersjonerLocalstorage();
+        if (innhold.length !== 0) {
+            registrerSettInnlegg(innhold.join(','));
+        }
+        setInnholdsliste(mapRemoteToState(innhold));
     };
 
     const registrerInnholdRemote = async (innhold: EndringsloggInnleggMedSettStatus[]) => {

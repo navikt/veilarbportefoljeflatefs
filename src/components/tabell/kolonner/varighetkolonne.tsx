@@ -26,7 +26,7 @@ function VarighetKolonne({ className, dato, skalVises }: TidKolonneProps) {
     }
 
 
-    const kolonn = hours > 0 && minutes > 0 ? ':' : '';
+    const kolonn = hours > 0 && minutes > 0 ? ' ': '';
 
     return (
         <span className={className}>

@@ -17,6 +17,12 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '14. AUG. 2019',
+        tittel: 'Dagens møter i Enhetens oversikt',
+        tekst: 'Du får nå bedre oversikt over dagens møter på ditt kontor i Enhetens oversikt. Listen viser alle brukere som har møter i dag, sortert på klokkeslett. Du ser også  varighet og brukers veileder.',
+        versjonId: '0.1.10',
+    },
+    {
         dato: '16. JUL. 2019',
         tittel: 'NAV møte filter i Min oversikt',
         tekst: 'Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV.',
