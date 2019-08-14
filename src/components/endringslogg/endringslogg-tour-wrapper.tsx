@@ -17,7 +17,7 @@ import {
     hexString,
     krypterVeilederident,
     registrerInnholdIRemoteStorage,
-    hentSetteVersjonerLocalstorage
+    hentSetteVersjonerLocalstorage, registrerHarLestEndringslogg
 } from './utils/endringslogg-utils';
 import { logEvent } from '../../utils/frontend-logger';
 import { registrerSettInnlegg } from './utils/endringslogg-api';
@@ -91,7 +91,14 @@ function EndringsloggTourWrapper() {
         if (ulestFelt) {
             const newList = setHarSettAlt();
             setInnholdsliste(newList);
-            registrerInnholdRemote(newList);
+            if(features.brukRemoteStorage){
+                registrerInnholdRemote(newList);
+            }
+            else {
+                const versjonIdListe = newList.map(elem => elem.versjonId);
+                const fjernVersjonsIDDuplikater = versjonIdListe.filter((v,i) => versjonIdListe.indexOf(v) === i);
+                registrerHarLestEndringslogg(fjernVersjonsIDDuplikater);
+            }
         }
     };
 
