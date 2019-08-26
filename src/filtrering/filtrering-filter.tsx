@@ -37,6 +37,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                 <Dropdown name="Alder">
                     <CheckboxFilterform
                         form="alder"
+                        kolonner={2}
                         valg={alder}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
