@@ -54,7 +54,7 @@ export const ferdigfilterListe = {
 };
 
 export const alder = {
-    '19-og-under':'19 år og under' ,
+    '19-og-under':'≤ 19 år' ,
     '20-24': '20-24 år',
     '25-29': '25-29 år',
     '30-39': '30-39 år',
