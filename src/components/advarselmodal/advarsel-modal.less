@@ -1,0 +1,40 @@
+.advarsel-modal {
+    .modal__overlay {
+        z-index: 2002;
+
+        .ReactModal__Content {
+            overflow: visible;
+            width: 576px;
+            padding: 0 1rem;
+            text-align: center;
+            font-family: Source Sans Pro, Arial, sans-serif;
+
+            svg {
+                margin-top: -2rem; //placerar en ikon med størrelsen 64x64 i mitten
+            }
+
+            .modal__innehold {
+                padding: 2rem 3rem;
+
+                .arbeidsliste-listetekst {
+                    padding: 0 4.5rem;
+                    p {
+                        margin-bottom: 0.2rem;
+                        display: flex;
+                    }
+                }
+
+                .knapper {
+                    margin-top: 1rem;
+                    display: flex;
+                    justify-content: space-evenly;
+                }
+            }
+
+            .modal__innehold > * {
+                margin-bottom: 0.5rem;
+
+            }
+        }
+    }
+}
