@@ -96,10 +96,10 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
-                <Dropdown name="Rettighetsgruppe">
+                <Dropdown name="Manuell oppfølging">
                     <CheckboxFilterform
-                        form="rettighetsgruppe"
-                        valg={rettighetsgruppe}
+                        form="manuellBrukerStatus"
+                        valg={manuellBrukerStatus}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
@@ -117,15 +117,10 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
-            </div>
-            <div className="col-sm-12 blokk-xs">
-                <Element className="blokk-xxs" tag="h3">
-                    Manuell bruker
-                </Element>
-                <Dropdown name="Manuell bruker">
+                <Dropdown name="Rettighetsgruppe">
                     <CheckboxFilterform
-                        form="manuellBrukerStatus"
-                        valg={manuellBrukerStatus}
+                        form="rettighetsgruppe"
+                        valg={rettighetsgruppe}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
