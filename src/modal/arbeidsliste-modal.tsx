@@ -96,16 +96,18 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
                 onRequestClose={this.lukkModal}
                 contentLabel="Fjern brukere fra arbeidsliste"
             >
-                <Innholdstittel tag="h1" className="blokk-xs">
-                    Fjern fra arbeidsliste
-                </Innholdstittel>
-                <Normaltekst className="blokk-s">
-                    {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'} fra arbeidslisten.`}
-                </Normaltekst>
-                <FjernFraArbeidslisteForm
-                    valgteBrukere={brukereSomSkalFjernes}
-                    lukkModal={this.lukkModal}
-                />
+                <div className="fjern-arbeidsliste">
+                    <Innholdstittel tag="h1" className="blokk-xs">
+                        Fjern fra arbeidsliste
+                    </Innholdstittel>
+                    <Normaltekst className="blokk-s">
+                        {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'} fra arbeidslisten.`}
+                    </Normaltekst>
+                    <FjernFraArbeidslisteForm
+                        valgteBrukere={brukereSomSkalFjernes}
+                        lukkModal={this.lukkModal}
+                    />
+                </div>
             </AdvarselModal>
         );
     }

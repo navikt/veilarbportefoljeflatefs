@@ -1,4 +1,30 @@
 .advarsel-modal {
+    section {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    svg {
+        margin: -2rem auto 0 auto; //placerar en ikon med størrelsen 64x64 i mitten
+    }
+
+    &__innhold {
+        margin: 0.5rem auto;
+
+        h1 {
+            text-align: center;
+        }
+
+        .knapper {
+            margin: auto 0;
+        }
+    }
+
+    &__innhold > * {
+        margin-bottom: 0.5rem;
+
+    }
     .modal__overlay {
         z-index: 2002;
 
@@ -6,37 +32,8 @@
             overflow: visible;
             width: 576px;
             padding: 0 1rem;
-            text-align: center;
             font-family: Source Sans Pro, Arial, sans-serif;
 
-            svg {
-                margin-top: -2rem; //placerar en ikon med størrelsen 64x64 i mitten
-            }
-
-            .modal__innehold {
-                padding: 2rem 3rem;
-
-                .arbeidsliste-listetekst {
-                    margin-left: 3rem;
-                    p {
-                        margin-bottom: 0.2rem;
-                        display: flex;
-                        float: left;
-                    }
-                }
-
-                .knapper {
-                    margin: auto 0;
-                    .knapp--hoved {
-                        margin-right: 1rem;
-                    }
-                }
-            }
-
-            .modal__innehold > * {
-                margin-bottom: 0.5rem;
-
-            }
         }
     }
 }
