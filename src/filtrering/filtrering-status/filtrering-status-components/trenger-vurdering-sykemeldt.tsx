@@ -1,9 +1,8 @@
-import React from "react";
-import {ER_SYKMELDT_MED_ARBEIDSGIVER, TRENGER_VURDERING} from "../../filter-konstanter";
-import {BarInputRadio} from "../../../components/barinput/barinput-radio";
-import {FiltreringStatusGruppe} from "./ufordelte-brukere";
-import {useStatusTallSelector} from "../../../hooks/redux/use-statustall";
-
+import React from 'react';
+import { ER_SYKMELDT_MED_ARBEIDSGIVER, TRENGER_VURDERING } from '../../filter-konstanter';
+import { BarInputRadio } from '../../../components/barinput/barinput-radio';
+import { FiltreringStatusGruppe } from './ufordelte-brukere';
+import { useStatusTallSelector } from '../../../hooks/redux/use-statustall';
 
 export function FiltreringStatusTrengerVurderingEllerSykmeldt(props: FiltreringStatusGruppe) {
     const statusTall = useStatusTallSelector();

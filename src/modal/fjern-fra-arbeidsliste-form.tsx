@@ -37,9 +37,9 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slet
                     {valgteBrukere.map((bruker) => brukerLabel(bruker))}
                 </ul>
             </div>
-            <div className="modal-footer">
-                <Hovedknapp className="knapp knapp--hoved" spinner={laster} onClick={handleSubmit}>
-                    Lagre
+            <div className="knapper">
+                <Hovedknapp className="knapp knapp--hoved mr1" spinner={laster} onClick={handleSubmit}>
+                    Bekreft
                 </Hovedknapp>
                 <button type="button" className="knapp" onClick={lukkModal}>
                     Avbryt

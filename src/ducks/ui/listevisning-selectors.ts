@@ -1,6 +1,6 @@
-import {AppState} from '../../reducer';
-import {Kolonne, ListevisningType} from './listevisning';
-import {AktiviteterValg, FiltreringAktiviteterValg, FiltreringState} from '../filtrering';
+import { AppState } from '../../reducer';
+import { Kolonne, ListevisningType } from './listevisning';
+import { AktiviteterValg, FiltreringAktiviteterValg, FiltreringState } from '../filtrering';
 import {
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,

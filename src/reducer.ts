@@ -5,7 +5,7 @@ import portefoljeReducer, { PortefoljeState } from './ducks/portefolje';
 import pagineringReducer from './ducks/paginering';
 import sorteringReducer from './ducks/sortering';
 import veiledereReducer, { VeiledereState } from './ducks/veiledere';
-import portefoljestorrelserReducer, {PortefoljeStorrelser} from './ducks/portefoljestorrelser';
+import portefoljestorrelserReducer, { PortefoljeStorrelser } from './ducks/portefoljestorrelser';
 import filtreringReducer, { FiltreringState, initialState } from './ducks/filtrering';
 import statustallReducer, { StatustallState } from './ducks/statustall';
 import modalReducer from './ducks/modal';
