@@ -107,20 +107,20 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
             </div>
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
-                    Ytelse
+                    Rettighetsgruppe og ytelse
                 </Element>
-                <Dropdown name="Ytelse" className="dropdown--140bredde-responsive">
-                    <RadioFilterform
-                        form="ytelse"
-                        valg={ytelse}
-                        onSubmit={actions.endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
                 <Dropdown name="Rettighetsgruppe">
                     <CheckboxFilterform
                         form="rettighetsgruppe"
                         valg={rettighetsgruppe}
+                        onSubmit={actions.endreFiltervalg}
+                        filtervalg={filtervalg}
+                    />
+                </Dropdown>
+                <Dropdown name="Ytelse" className="dropdown--140bredde-responsive">
+                    <RadioFilterform
+                        form="ytelse"
+                        valg={ytelse}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />

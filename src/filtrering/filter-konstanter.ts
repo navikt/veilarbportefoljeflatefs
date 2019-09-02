@@ -114,8 +114,8 @@ export const ytelse = {
 };
 
 export const manuellBrukerStatus = {
-    MANUELL: 'Manuell bruker',
-    KRR: 'KRR'
+    MANUELL: 'Manuell oppfølging',
+    KRR: 'Reservert i KRR'
 };
 
 export const ytelsevalg: () => {[id: string]: string} = () => Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }), {});
