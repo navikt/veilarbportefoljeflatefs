@@ -1,18 +1,17 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
-import {endreFiltervalg} from "../../ducks/filtrering";
-import {fjernFerdigfilter, leggTilFerdigFilter} from "./filter-utils";
-import {FiltreringStatusContainer} from "./filtrering-status-components/filtrering-wrapper";
-import {FiltreringStatusTrengerVurderingEllerSykmeldt} from "./filtrering-status-components/trenger-vurdering-sykemeldt";
-import {FiltreringStatusAktiviteter} from "./filtrering-status-components/aktiviteter";
-import {FiltreringStatusDialog} from "./filtrering-status-components/dialog-gruppe";
-import {FiltreringStatusInavtiveBrukere} from "./filtrering-status-components/inaktivebrukere";
-import FiltreringStatusNyeBrukere from "./filtrering-status-components/nyebrukere";
-import FiltreringStatusUfordelteBrukere from "./filtrering-status-components/ufordelte-brukere";
-import FiltreringStatusAvtaltMoteMedNav from "./filtrering-status-components/avtalt-mote-med-nav";
-import FilterStatusMinArbeidsliste from "./filtrering-status-components/arbeidsliste";
-import {FiltervalgModell, VeilederModell} from "../../model-interfaces";
-
+import { useDispatch } from 'react-redux';
+import { endreFiltervalg } from '../../ducks/filtrering';
+import { fjernFerdigfilter, leggTilFerdigFilter } from './filter-utils';
+import { FiltreringStatusContainer } from './filtrering-status-components/filtrering-wrapper';
+import { FiltreringStatusTrengerVurderingEllerSykmeldt } from './filtrering-status-components/trenger-vurdering-sykemeldt';
+import { FiltreringStatusAktiviteter } from './filtrering-status-components/aktiviteter';
+import { FiltreringStatusDialog } from './filtrering-status-components/dialog-gruppe';
+import { FiltreringStatusInavtiveBrukere } from './filtrering-status-components/inaktivebrukere';
+import FiltreringStatusNyeBrukere from './filtrering-status-components/nyebrukere';
+import FiltreringStatusUfordelteBrukere from './filtrering-status-components/ufordelte-brukere';
+import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avtalt-mote-med-nav';
+import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
+import { FiltervalgModell, VeilederModell } from '../../model-interfaces';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;

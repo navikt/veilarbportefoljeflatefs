@@ -15,5 +15,4 @@ if(process.env.REACT_APP_MOCK === 'true') {
     require('./mocks'); // tslint:disable-line
 }
 
-
 ReactDOM.render(<Application/>, document.getElementById('mainapp'));

@@ -9,7 +9,7 @@ function FormikInput({name}) {
     const validate = (value: string): string| undefined => {
         let error: undefined| string;
         if(!value) {
-            error = "Du må fylle ut en tittel"
+            error = 'Du må fylle ut en tittel';
         } else if(value.length > OVERSKRIFT_MAKS_LENGDE) {
             error = `Tittelen kan ikke være lenger enn ${OVERSKRIFT_MAKS_LENGDE}`;
         }
