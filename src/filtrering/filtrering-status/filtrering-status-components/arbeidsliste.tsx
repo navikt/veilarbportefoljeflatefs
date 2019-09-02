@@ -1,10 +1,10 @@
-import React from "react";
-import {MIN_ARBEIDSLISTE} from "../../filter-konstanter";
-import {BarInputRadio} from "../../../components/barinput/barinput-radio";
-import hiddenIf from "../../../components/hidden-if/hidden-if";
-import {FiltreringStatusGruppe} from "./ufordelte-brukere";
+import React from 'react';
+import { MIN_ARBEIDSLISTE } from '../../filter-konstanter';
+import { BarInputRadio } from '../../../components/barinput/barinput-radio';
+import hiddenIf from '../../../components/hidden-if/hidden-if';
+import { FiltreringStatusGruppe } from './ufordelte-brukere';
 import { Element } from 'nav-frontend-typografi';
-import {useStatusTallSelector} from "../../../hooks/redux/use-statustall";
+import { useStatusTallSelector } from '../../../hooks/redux/use-statustall';
 
 function ArbeidslisteTittel() {
     return (
@@ -31,7 +31,7 @@ function FilterStatusMinArbeidsliste(props: FiltreringStatusGruppe) {
                 checked={props.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
             />
         </>
-    )
+    );
 
 }
 
