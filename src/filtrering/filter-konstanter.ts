@@ -127,11 +127,11 @@ export const ytelseUtlopsSortering = {
     TILTAKSPENGER: Sorteringsfelt.UTLOPSDATO
 };
 
-export const ytelseAapSortering = ()=> ({
+export const ytelseAapSortering = {
     AAP: { vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE },
     AAP_MAXTID: { vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_MAXTID_UKE },
     AAP_UNNTAK: { vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKE }
-});
+};
 
 export const rettighetsgruppe = {
     AAP: 'Arbeidsavklaringspenger',
