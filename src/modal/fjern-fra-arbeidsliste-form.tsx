@@ -38,7 +38,7 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slet
                 </ul>
             </div>
             <div className="knapper">
-                <Hovedknapp className="knapp knapp--hoved" spinner={laster} onClick={handleSubmit}>
+                <Hovedknapp className="knapp knapp--hoved mr1" spinner={laster} onClick={handleSubmit}>
                     Bekreft
                 </Hovedknapp>
                 <button type="button" className="knapp" onClick={lukkModal}>

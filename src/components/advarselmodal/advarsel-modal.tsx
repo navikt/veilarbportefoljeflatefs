@@ -26,7 +26,7 @@ export function AdvarselModal({contentLabel, isOpen, onRequestClose, children, c
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         >
             <AdvarselSirkelIkon/>
-            <div className={classNames('modal__innehold', className)}>
+            <div className={classNames('advarsel-modal__innhold', className)}>
                 {children}
             </div>
         </ModalWrapper>
