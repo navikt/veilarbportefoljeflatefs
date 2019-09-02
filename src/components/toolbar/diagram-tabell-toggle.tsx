@@ -6,10 +6,10 @@ import { AppState } from './../../reducer';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 import { settVisningsmodus } from '../../ducks/paginering';
 import { ToolbarPosisjon } from './toolbar';
-import { ReactComponent as ListeIkon} from './liste.svg';
-import { ReactComponent as StolpeIkon} from './stolpediagram.svg';
-import {ToggleGruppe } from "nav-frontend-toggle";
-import {MinoversiktVisning} from "../../minoversikt/minoversikt-konstanter";
+import { ReactComponent as ListeIkon } from './liste.svg';
+import { ReactComponent as StolpeIkon } from './stolpediagram.svg';
+import { ToggleGruppe } from 'nav-frontend-toggle';
+import { MinoversiktVisning } from '../../minoversikt/minoversikt-konstanter';
 
 interface OwnProps {
     filtergruppe: ListevisningType;

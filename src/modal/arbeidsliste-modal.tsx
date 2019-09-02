@@ -97,12 +97,14 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
                 contentLabel="Fjern brukere fra arbeidsliste"
             >
                 <div className="fjern-arbeidsliste">
-                    <Innholdstittel tag="h1" className="blokk-xs">
-                        Fjern fra arbeidsliste
-                    </Innholdstittel>
-                    <Normaltekst className="blokk-s">
-                        {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'} fra arbeidslisten.`}
-                    </Normaltekst>
+                    <div className="arbeidsliste-headertekst">
+                        <Innholdstittel tag="h1" className="blokk-xs">
+                            Fjern fra arbeidsliste
+                        </Innholdstittel>
+                        <Normaltekst className="blokk-s">
+                            {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'} fra arbeidslisten.`}
+                        </Normaltekst>
+                    </div>
                     <FjernFraArbeidslisteForm
                         valgteBrukere={brukereSomSkalFjernes}
                         lukkModal={this.lukkModal}

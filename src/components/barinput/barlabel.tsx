@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import classNames from 'classnames';
-import {tekstAntallBrukere} from "../../utils/tekst-utils";
+import { tekstAntallBrukere } from '../../utils/tekst-utils';
 
 function calcWidth(antall: number, max: number): number {
     if (antall === 0) {
