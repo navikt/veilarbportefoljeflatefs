@@ -24,7 +24,7 @@ function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekst, skalV
                 {tekst}
             </button>
             {sortering === 'etternavn' ?
-                ", Fornavn" : null
+                ', Fornavn' : null
             }
         </Header>
     );

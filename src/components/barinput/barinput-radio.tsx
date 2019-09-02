@@ -5,18 +5,17 @@ import {
     mapFilternavnTilFilterValue
 } from '../../filtrering/filter-konstanter';
 
-
 interface BarinputRadioProps {
-    filterNavn: string,
-    max: number,
+    filterNavn: string;
+    max: number;
     handleChange: ChangeEventHandler<HTMLInputElement>;
     checked: boolean;
-    antall: number
+    antall: number;
 }
 
-export function BarInputRadio ({filterNavn, max, handleChange, checked, antall}: BarinputRadioProps) {
-    const filterVerdi = mapFilternavnTilFilterValue[filterNavn]; //TODO :SENDE SOM PROPS?
-    const labelTekst = ferdigfilterListe[filterVerdi];  //TODO: SENDE SOM PROPS?
+export function BarInputRadio({filterNavn, max, handleChange, checked, antall}: BarinputRadioProps) {
+    const filterVerdi = mapFilternavnTilFilterValue[filterNavn]; // TODO :SENDE SOM PROPS?
+    const labelTekst = ferdigfilterListe[filterVerdi];  // TODO: SENDE SOM PROPS?
 
     return (
         <BarInput
@@ -27,10 +26,10 @@ export function BarInputRadio ({filterNavn, max, handleChange, checked, antall}:
             value={filterVerdi}
             onChange={handleChange}
             checked={checked}
-            labelTekst= {labelTekst}
+            labelTekst={labelTekst}
             antall={antall}
             max={max}
             barClassname={filterNavn}
         />
-    )
+    );
 }
