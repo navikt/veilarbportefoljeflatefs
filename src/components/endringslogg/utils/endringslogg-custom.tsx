@@ -17,15 +17,6 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '02. SEP. 2019',
-        tittel: 'Små endringer i filtrene',
-        tekst: 'Manuell oppfølging ligger i gruppen Situasjon.\n' +
-            'Rettighetsgruppe og Ytelser er i samme gruppe.\n' +
-            'Ventelønn og Ventestønad er tatt bort fra Rettighetsgruppe.\n' +
-            'Valgene i Alder vises i to kolonner.\n',
-        versjonId: '0.2.0'
-    },
-    {
         dato: '16. JUL. 2019',
         tittel: 'NAV møte filter i Min oversikt',
         tekst: 'Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV.',

@@ -48,14 +48,8 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
     };
 }
 
-const endringslogg = {};
-
 // features
 (mock as any).get(`glob:${API_BASE_URL}${FEATURE_URL}*`, respondWith(features));
-
-//endringslogg
-(mock as any).get('/veilarbremotestore/?ressurs=endringslogg', respondWith(endringslogg));
-(mock as any).patch('/veilarbremotestore/', () => respondWith((url, config, { queryParams, bodyParams}) => Object.assign(endringslogg, bodyParams)));
 
 // veileder-api
 (mock as any).get('/veilarbveileder/api/veileder/enheter', respondWith(enheter));
