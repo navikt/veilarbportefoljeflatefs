@@ -9,9 +9,9 @@ function FormikTekstArea({name}) {
     const validate =  (value: string) => {
         let error: undefined| string;
         if(!value) {
-            error = "Du må fylle ut en kommentar"
+            error = 'Du må fylle ut en kommentar';
         } else if(value.length > KOMMENTAR_MAKS_LENGDE) {
-            error = `Du må korte ned teksten til ${KOMMENTAR_MAKS_LENGDE} tegn`
+            error = `Du må korte ned teksten til ${KOMMENTAR_MAKS_LENGDE} tegn`;
         }
         return error;
     };

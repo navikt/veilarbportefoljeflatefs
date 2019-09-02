@@ -50,22 +50,22 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
             this.setState({kommentar: value});
         }
 
-    };
+    }
 
     handleFormSubmitted = () => {
         const {tilfredshet, kommentar} = this.state;
         this.setState({harSendt: true});
         this.props.onTilbakemeldingSendt({tilfredshet, kommentar});
-    };
+    }
 
     handleTilfredshetChanged = (tilfredshet: number) => {
         this.setState({tilfredshet});
-    };
+    }
 
     handleIkkeVisIgjenClicked = () => {
         this.setState({harSendt: true, ikkeVisIgjen: true});
         this.props.onIkkeVisIgjen();
-    };
+    }
 
     renderForm = () => {
 
@@ -114,7 +114,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                 )}
             </div>
         );
-    };
+    }
 
     renderTakkMelding = () => {
         return (
@@ -129,7 +129,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                 </Element>
             </div>
         );
-    };
+    }
 
     componentDidUpdate(prevProps: TilbakemeldingModalProps) {
         if (prevProps.open && !this.state.harBlittVist) {
