@@ -8,10 +8,10 @@ const MED_CREDENTIALS: RequestInit = {
         'Content-Type': 'application/json',
     }
 };
-export const REMOTE_STORE_URL = '/veilarbremotestore/';
+export const REMOTE_STORE_URL = '/veilarbremotestore/api/';
 
 export function fetchHarSettInnlegg(): Promise<{ endringslogg: string }> {
-    return fetch(`${REMOTE_STORE_URL}?ressurs=endringslogg`, {credentials: 'same-origin'})
+    return fetch(`${REMOTE_STORE_URL}?ressurs=endringslogg`, {credentials: 'same-origin', method: 'GET'})
         .then(responseToJson);
 }
 
@@ -26,7 +26,7 @@ function responseToJson(response) {
 }
 
 export function registrerSettInnlegg(message: string) {
-    patchRemoteStorage(message, `${REMOTE_STORE_URL}`);
+    patchRemoteStorage(message, `/veilarbremotestore/`);
 }
 
 function patchRemoteStorage(data: string, url: string): Promise<Response> {

@@ -10,6 +10,7 @@ import lagDiagramData from './diagramdataV2';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
 import { API_BASE_URL, FEATURE_URL } from '../middleware/api';
+import { endringsloggListe, f } from './endringslogg';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, enheter.enhetliste[0].enhetId, alleBrukere);
@@ -50,6 +51,11 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 
 // features
 (mock as any).get(`glob:${API_BASE_URL}${FEATURE_URL}*`, respondWith(features));
+
+// endringslogg
+(mock as any).patch(`/veilarbremotestore/`, respondWith((url, config, {bodyParams}) => f(bodyParams)));
+
+(mock as any).get('/veilarbremotestore/api/?ressurs=endringslogg', respondWith(() => endringsloggListe));
 
 // veileder-api
 (mock as any).get('/veilarbveileder/api/veileder/enheter', respondWith(enheter));
