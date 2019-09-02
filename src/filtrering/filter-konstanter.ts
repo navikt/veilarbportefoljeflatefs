@@ -137,9 +137,7 @@ export const rettighetsgruppe = {
     AAP: 'Arbeidsavklaringspenger',
     DAGP: 'Dagpenger',
     INDS: 'Tiltakspenger',
-    IYT: 'Ingen livsoppholdsytelser Arena'/*,
-    VENT: 'Ventestønad',
-    VLONN: 'Ventelønn'*/
+    IYT: 'Ingen livsoppholdsytelser Arena'
 };
 
 export const aktiviteter = {

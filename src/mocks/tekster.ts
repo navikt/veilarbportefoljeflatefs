@@ -269,8 +269,6 @@ export default {
                 'Helserelatert arbeidsrettet oppfølging i NAV',
             'filtrering.filtrer-brukere.demografi.mann':
                 'Mann',
-/*            'filter.rettighetsgruppe.vlonn':
-                'Ventelønn',*/
             'portefolje.tildel.veileder.label':
                 'Tildel veileder',
             'enhet.filtrering.filtrering.oversikt.venterpasvarfrabruker.brukere.checkbox':
@@ -293,8 +291,6 @@ export default {
                 'Det er fare for at du kan ha forskjellige brukere i forskjellige flater/vinduer. Systemet feiler og klarer ikke oppfatte endringer du eventuelt har gjort i andre vinuer.',
             'filter.alder.60-66':
                 '60-66 år',
-/*            'filter.rettighetsgruppe.vent':
-                'Ventestønad',*/
             'portefolje.tabell.fodselsnummer':
                 'Fødselsnummer',
             'enhet.portefolje.tabelletikett.dod':
