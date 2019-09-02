@@ -66,8 +66,8 @@ function Paginering(props: PagineringProps) {
                     totalPagenering(1, !seAlle);
                 }}
             >
-                {!seAlle ? "Se alle" :
-                    "Se færre"
+                {!seAlle ? 'Se alle' :
+                    'Se færre'
                 }
             </KnappPanel>
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import Barlabel from './barlabel';
-import { guid } from "nav-frontend-js-utils";
+import { guid } from 'nav-frontend-js-utils';
 
-
-interface BarInputProps extends React.InputHTMLAttributes<HTMLInputElement>{
+interface BarInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     labelTekst: string;
     antall: number;
     max: number;
