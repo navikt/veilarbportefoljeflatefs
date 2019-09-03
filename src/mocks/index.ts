@@ -4,7 +4,6 @@ import me from './me';
 import brukere from './portefolje';
 import veiledere from './veiledere';
 import statustall from './statustall';
-import tekster from './tekster';
 import tiltak from './tiltak';
 import diagramdata from './diagramdata';
 import lagDiagramData from './diagramdataV2';
@@ -51,9 +50,6 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 
 // features
 (mock as any).get(`glob:${API_BASE_URL}${FEATURE_URL}*`, respondWith(features));
-
-// Hvis du vil hente tekster fra applikasjonen, så la linjen nedenfor være kommentert ut.
-(mock as any).get('/veilarbportefoljeflatefs/api/tekster', respondWith(tekster));
 
 // veileder-api
 (mock as any).get('/veilarbveileder/api/veileder/enheter', respondWith(enheter));
