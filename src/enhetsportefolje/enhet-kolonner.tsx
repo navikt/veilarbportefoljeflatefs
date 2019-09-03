@@ -12,17 +12,16 @@ import {
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
 import { Kolonne } from '../ducks/ui/listevisning';
-import { BrukerModell, VeilederModell } from '../model-interfaces';
+import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker, aapRettighetsperiode } from '../utils/utils';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
-import { FiltreringState } from '../ducks/filtrering';
 
 interface EnhetKolonnerProps {
     className?: string;
     bruker: BrukerModell;
     enhetId: string;
-    filtervalg: FiltreringState;
+    filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
 }

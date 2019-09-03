@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import EnhetBrukerpanel from './enhet-brukerpanel';
 import { settBrukerSomMarkert } from '../ducks/portefolje';
 import EnhetListehode from './enhet-listehode';
 import { VeilederModell } from '../model-interfaces';
-import { useEnhetsPortefoljeSelector } from '../hooks/redux/use-enhetsportefolje-selector';
-import { getFraBrukerFraUrl } from '../utils/url-utils';
+import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
+import { ListevisningType } from '../ducks/ui/listevisning';
+import { useForrigeBruker } from '../hooks/use-forrige-bruker';
 
 interface EnhetTabellProps {
     settSorteringOgHentPortefolje: (sortering: string) => void;
@@ -15,17 +16,8 @@ interface EnhetTabellProps {
 const finnBrukersVeileder = (veiledere, bruker) => (veiledere.find((veileder) => veileder.ident === bruker.veilederId));
 
 function EnhetTabell(props: EnhetTabellProps) {
-    const [forrigeBruker, setForrigeBruker]= useState<string | undefined>(undefined);
-
-    useEffect(() => {
-        const forrigeBrukerFraUrl = getFraBrukerFraUrl();
-        if(forrigeBrukerFraUrl) {
-            setForrigeBruker(forrigeBrukerFraUrl);
-        }
-    },[forrigeBruker]);
-
-    const { brukere, filtervalg, sorteringsrekkefolge, valgtEnhet, valgteKolonner, sorteringsfelt } = useEnhetsPortefoljeSelector();
-
+    const forrigeBruker = useForrigeBruker();
+    const { brukere, filtervalg, sorteringsrekkefolge, enhetId, valgteKolonner, sorteringsfelt } = usePortefoljeSelector(ListevisningType.enhetensOversikt);
     const dispatch = useDispatch();
 
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
@@ -44,7 +36,7 @@ function EnhetTabell(props: EnhetTabellProps) {
                     <EnhetBrukerpanel
                         key={bruker.fnr || bruker.guid}
                         bruker={bruker}
-                        enhetId={valgtEnhet}
+                        enhetId={enhetId}
                         settMarkert={settMarkert}
                         filtervalg={filtervalg}
                         valgteKolonner={valgteKolonner}

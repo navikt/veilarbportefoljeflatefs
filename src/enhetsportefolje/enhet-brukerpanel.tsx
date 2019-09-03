@@ -1,18 +1,17 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import Etiketter from '../components/tabell/etiketter';
-import { VeilederModell } from '../model-interfaces';
+import { FiltervalgModell, VeilederModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import CheckBox from '../components/tabell/checkbox';
 import EnhetKolonner from './enhet-kolonner';
 import { useLayoutEffect, useRef } from 'react';
-import { FiltreringState } from '../ducks/filtrering';
 
 interface EnhetBrukerpanelProps {
     bruker: any;
     settMarkert: (bruker: string, markert: boolean) => void;
     enhetId: string;
-    filtervalg: FiltreringState;
+    filtervalg: FiltervalgModell;
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];
     forrigeBruker?: string;
@@ -20,18 +19,18 @@ interface EnhetBrukerpanelProps {
 
 function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, forrigeBruker}: EnhetBrukerpanelProps) {
     const liRef = useRef<HTMLLIElement>(null);
-    const vaForrigeBruker = bruker.fnr === forrigeBruker;
+    const varForrigeBruker = bruker.fnr === forrigeBruker;
 
     const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
     useLayoutEffect(() => {
-        if (vaForrigeBruker) {
+        if (varForrigeBruker) {
             scrollToRef(liRef);
         }
     }, [liRef.current, forrigeBruker, bruker]);
 
     const classname  = classNames('brukerliste__element brukerliste--border-bottom-thin', {
-        'brukerliste--forrigeBruker': vaForrigeBruker,
+        'brukerliste--forrigeBruker': varForrigeBruker,
     });
 
     return (
