@@ -38,6 +38,7 @@ interface DispatchProps {
 type EnhetSideProps = StateProps & DispatchProps;
 
 class EnhetSide extends React.Component<EnhetSideProps> {
+
     componentWillMount() {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);

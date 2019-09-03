@@ -12,16 +12,17 @@ import {
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/datokolonne';
 import { Kolonne } from '../ducks/ui/listevisning';
-import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
+import { BrukerModell, VeilederModell } from '../model-interfaces';
 import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker, aapRettighetsperiode } from '../utils/utils';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
+import { FiltreringState } from '../ducks/filtrering';
 
 interface EnhetKolonnerProps {
     className?: string;
     bruker: BrukerModell;
     enhetId: string;
-    filtervalg: FiltervalgModell;
+    filtervalg: FiltreringState;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
 }
@@ -36,7 +37,7 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
-    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse);
+    const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
 
     return (
