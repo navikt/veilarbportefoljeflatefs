@@ -114,8 +114,8 @@ export const ytelse = {
 };
 
 export const manuellBrukerStatus = {
-    MANUELL: 'Manuell bruker',
-    KRR: 'KRR'
+    MANUELL: 'Manuell oppfølging',
+    KRR: 'Reservert i KRR'
 };
 
 export const ytelsevalg: () => {[id: string]: string} = () => Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }), {});
@@ -137,9 +137,7 @@ export const rettighetsgruppe = {
     AAP: 'Arbeidsavklaringspenger',
     DAGP: 'Dagpenger',
     INDS: 'Tiltakspenger',
-    IYT: 'Ingen livsoppholdsytelser Arena',
-    VENT: 'Ventestønad',
-    VLONN: 'Ventelønn'
+    IYT: 'Ingen livsoppholdsytelser Arena'
 };
 
 export const aktiviteter = {

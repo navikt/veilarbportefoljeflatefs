@@ -96,6 +96,19 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
+                <Dropdown name="Manuell oppfølging">
+                    <CheckboxFilterform
+                        form="manuellBrukerStatus"
+                        valg={manuellBrukerStatus}
+                        onSubmit={actions.endreFiltervalg}
+                        filtervalg={filtervalg}
+                    />
+                </Dropdown>
+            </div>
+            <div className="col-sm-12 blokk-xs">
+                <Element className="blokk-xxs" tag="h3">
+                    Rettighetsgruppe og ytelse
+                </Element>
                 <Dropdown name="Rettighetsgruppe">
                     <CheckboxFilterform
                         form="rettighetsgruppe"
@@ -104,28 +117,10 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
-            </div>
-            <div className="col-sm-12 blokk-xs">
-                <Element className="blokk-xxs" tag="h3">
-                    Ytelse
-                </Element>
                 <Dropdown name="Ytelse" className="dropdown--140bredde-responsive">
                     <RadioFilterform
                         form="ytelse"
                         valg={ytelse}
-                        onSubmit={actions.endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
-            </div>
-            <div className="col-sm-12 blokk-xs">
-                <Element className="blokk-xxs" tag="h3">
-                    Manuell bruker
-                </Element>
-                <Dropdown name="Manuell bruker">
-                    <CheckboxFilterform
-                        form="manuellBrukerStatus"
-                        valg={manuellBrukerStatus}
                         onSubmit={actions.endreFiltervalg}
                         filtervalg={filtervalg}
                     />
