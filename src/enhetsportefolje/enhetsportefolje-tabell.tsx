@@ -1,83 +1,59 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import EnhetBrukerpanel from './enhet-brukerpanel';
 import { settBrukerSomMarkert } from '../ducks/portefolje';
 import EnhetListehode from './enhet-listehode';
-import { FiltervalgModell, Sorteringsrekkefolge, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
-import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
-import { selectValgteAlternativer } from '../ducks/ui/listevisning-selectors';
+import { VeilederModell } from '../model-interfaces';
+import { useEnhetsPortefoljeSelector } from '../hooks/redux/use-enhetsportefolje-selector';
 import { getFraBrukerFraUrl } from '../utils/url-utils';
 
 interface EnhetTabellProps {
-    portefolje: any;
-    valgtEnhet: ValgtEnhetModell;
-    sorteringsrekkefolge: Sorteringsrekkefolge;
-    settMarkert: (bruker: string, markert: boolean) => any;
-    filtervalg: FiltervalgModell;
     settSorteringOgHentPortefolje: (sortering: string) => void;
     veiledere: VeilederModell;
-    valgteKolonner: Kolonne[];
 }
 
 const finnBrukersVeileder = (veiledere, bruker) => (veiledere.find((veileder) => veileder.ident === bruker.veilederId));
 
-class EnhetTabell extends React.Component<EnhetTabellProps, {}> {
-    private forrigeBruker?: string;
+function EnhetTabell(props: EnhetTabellProps) {
+    const [forrigeBruker, setForrigeBruker]= useState<string | null>(null);
 
-    componentWillMount() {
-        this.forrigeBruker = getFraBrukerFraUrl();
-    }
+    useEffect(() => {
+        const forrigeBrukerFraUrl = getFraBrukerFraUrl();
+        if(forrigeBrukerFraUrl) {
+            setForrigeBruker(forrigeBrukerFraUrl);
+        }
+    },[forrigeBruker]);
 
-    render() {
-        const {
-            settMarkert, portefolje, settSorteringOgHentPortefolje,
-            filtervalg, sorteringsrekkefolge, valgtEnhet, veiledere, valgteKolonner
-        } = this.props;
-        const {brukere} = portefolje.data;
-        const {enhetId} = valgtEnhet.enhet!;
-        const forrigeBruker = this.forrigeBruker;
+    const { brukere, filtervalg, sorteringsrekkefolge, valgtEnhet, valgteKolonner, sorteringsfelt } = useEnhetsPortefoljeSelector();
 
-        this.forrigeBruker = undefined;
+    const dispatch = useDispatch();
 
-        return (
+    const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
 
-            <div className="typo-undertekst blokk-xs">
-                <EnhetListehode
-                    sorteringsrekkefolge={sorteringsrekkefolge}
-                    sorteringOnClick={settSorteringOgHentPortefolje}
-                    filtervalg={filtervalg}
-                    sorteringsfelt={portefolje.sorteringsfelt}
-                    valgteKolonner={valgteKolonner}
-                />
-                <ul className="brukerliste">
-                    {brukere.map((bruker) =>
-                        <EnhetBrukerpanel
-                            key={bruker.fnr || bruker.guid}
-                            bruker={bruker}
-                            enhetId={enhetId}
-                            settMarkert={settMarkert}
-                            varForrigeBruker={forrigeBruker === bruker.fnr}
-                            filtervalg={filtervalg}
-                            valgteKolonner={valgteKolonner}
-                            brukersVeileder={finnBrukersVeileder(veiledere, bruker)}
-                        />
-                    )}
-                </ul>
-            </div>
-        );
-    }
+    return (
+        <div className="typo-undertekst blokk-xs">
+            <EnhetListehode
+                sorteringsrekkefolge={sorteringsrekkefolge}
+                sorteringOnClick={props.settSorteringOgHentPortefolje}
+                filtervalg={filtervalg}
+                sorteringsfelt={sorteringsfelt}
+                valgteKolonner={valgteKolonner}
+            />
+            <ul className="brukerliste">
+                {brukere.map((bruker) =>
+                    <EnhetBrukerpanel
+                        key={bruker.fnr || bruker.guid}
+                        bruker={bruker}
+                        enhetId={valgtEnhet}
+                        settMarkert={settMarkert}
+                        filtervalg={filtervalg}
+                        valgteKolonner={valgteKolonner}
+                        brukersVeileder={finnBrukersVeileder(props.veiledere, bruker)}
+                    />
+                )}
+            </ul>
+        </div>
+    );
 }
 
-const mapStateToProps = (state) => ({
-    portefolje: state.portefolje,
-    valgtEnhet: state.enheter.valgtEnhet,
-    sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
-    filtervalg: state.filtrering,
-    valgteKolonner: selectValgteAlternativer(state, ListevisningType.enhetensOversikt),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    settMarkert: (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EnhetTabell);
+export default EnhetTabell;
