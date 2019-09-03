@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 
 export interface HeaderProps {
-    skalVises?: boolean;
+    skalVises?: boolean | null;
     className?: string;
     children?: React.ReactNode;
 }

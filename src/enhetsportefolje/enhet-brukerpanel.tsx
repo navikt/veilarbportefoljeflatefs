@@ -1,29 +1,41 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import Etiketter from '../components/tabell/etiketter';
-import { FiltervalgModell, VeilederModell } from '../model-interfaces';
+import { VeilederModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import CheckBox from '../components/tabell/checkbox';
 import EnhetKolonner from './enhet-kolonner';
+import { useLayoutEffect, useRef } from 'react';
+import { FiltreringState } from '../ducks/filtrering';
 
 interface EnhetBrukerpanelProps {
     bruker: any;
     settMarkert: (bruker: string, markert: boolean) => void;
     enhetId: string;
-    filtervalg: FiltervalgModell;
+    filtervalg: FiltreringState;
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];
-    varForrigeBruker?: boolean;
+    forrigeBruker?: string;
 }
 
-function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, varForrigeBruker }: EnhetBrukerpanelProps) {
+function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, forrigeBruker}: EnhetBrukerpanelProps) {
+    const liRef = useRef<HTMLLIElement>(null);
+    const vaForrigeBruker = bruker.fnr === forrigeBruker;
+
+    const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
+    useLayoutEffect(() => {
+        if (vaForrigeBruker) {
+            scrollToRef(liRef);
+        }
+    }, [liRef.current, forrigeBruker, bruker]);
 
     const classname  = classNames('brukerliste__element brukerliste--border-bottom-thin', {
-        'brukerliste--forrigeBruker': varForrigeBruker,
+        'brukerliste--forrigeBruker': forrigeBruker,
     });
 
     return (
-        <li className={classname}>
+        <li className={classname} ref={liRef}>
                 <div className="brukerliste__gutter-left brukerliste--min-width-enhet">
                     <CheckBox bruker={bruker} settMarkert={settMarkert} />
                 </div>

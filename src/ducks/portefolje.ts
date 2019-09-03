@@ -42,8 +42,8 @@ export interface PortefoljeData {
 export interface PortefoljeState {
     status: string;
     data: PortefoljeData;
-    sorteringsrekkefolge: string;
-    sorteringsfelt: string;
+    sorteringsrekkefolge: Sorteringsrekkefolge;
+    sorteringsfelt: Sorteringsfelt;
     feilendeTilordninger?: any[];
     veileder: {
         ident: string;

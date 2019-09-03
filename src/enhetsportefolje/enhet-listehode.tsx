@@ -9,9 +9,9 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     UTLOPTE_AKTIVITETER,
     I_AVTALT_AKTIVITET } from '../filtrering/filter-konstanter';
-import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
+import { Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
-import { AktiviteterValg } from '../ducks/filtrering';
+import { AktiviteterValg, FiltreringState } from '../ducks/filtrering';
 import Header from '../components/tabell/header';
 
 function harValgteAktiviteter(aktiviteter) {
@@ -26,15 +26,15 @@ interface EnhetListehodeProps {
     sorteringsrekkefolge: Sorteringsrekkefolge;
     sorteringOnClick: (sortering: string) => void;
     valgteKolonner: Kolonne[];
-    filtervalg: FiltervalgModell;
+    filtervalg: FiltreringState;
     sorteringsfelt: string;
 }
 
 function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: EnhetListehodeProps) {
     const { ytelse } = filtervalg;
-    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse);
-    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering[ytelse].vedtaksperiode : ytelseUtlopsSortering[filtervalg.ytelse];
+    const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
+    const aapRettighetsperiode = !!ytelse && erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
+    const ytelseUtlopsdatoNavn = !!ytelse && erAapYtelse ? ytelseAapSortering[ytelse].vedtaksperiode : ytelse && ytelseUtlopsSortering[ytelse];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Vedtaksperiode' : 'Rettighetsperiode';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
