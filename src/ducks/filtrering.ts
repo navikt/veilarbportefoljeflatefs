@@ -31,7 +31,7 @@ export interface FiltreringState {
     veiledere: string[];
     aktiviteter: FiltreringAktiviteterValg;
     tiltakstyper: string[];
-    ytelse: null;
+    ytelse: null | string;
     manuellBrukerStatus: string[];
     hovedmal: string[];
     navnEllerFnrQuery: string;
