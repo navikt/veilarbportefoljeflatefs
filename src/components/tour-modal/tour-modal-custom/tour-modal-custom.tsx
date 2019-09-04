@@ -27,7 +27,7 @@ const stepsFilter: Step[] = [
         tekst: 'Med filteret aktivert vil det listes opp personinformasjon, møtetid og varighet.'
     },
     {
-        tittel: 'Viste du at...',
+        tittel: 'Visste du at...',
         bilde: filter3Bilde,
         tekst: 'Man kan også filtrere på ulike aktivteter, som "Møte med NAV" eller "Medisinsk behandling". Dette aktiveres i bunnen av "Filter".'
     },

@@ -14,5 +14,5 @@ export const ENDRINGSLOGG = 'veilarbportefoljeflatefs.endringslogg';
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
     ENDRINGSLOGG,
-    VIS_MOTER_MED_NAV,
+    VIS_MOTER_MED_NAV
 ];

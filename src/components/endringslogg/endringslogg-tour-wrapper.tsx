@@ -1,64 +1,35 @@
 import Endringslogg from './endringslogg';
-import TourModalLocalStorage from '../tour-modal/tour-modal-local-storage';
-import { default as React, useEffect, useState } from 'react';
+import {default as React, useEffect, useState} from 'react';
+import {EndringsloggInnleggMedSettStatus, mapRemoteToState, setHarSettAlt} from './utils/endringslogg-custom';
+import {useIdentSelector} from '../../hooks/redux/use-enheter-ident';
+import {useTimer} from '../../hooks/use-timer';
 import {
-    EndringsloggInnleggMedSettStatus,
-    mapRemoteToState,
-    setHarSettAlt,
-    settModalEndring
-} from './utils/endringslogg-custom';
-import { ENDRINGSLOGG, VIS_MOTER_MED_NAV } from '../../konstanter';
-import { ModalName } from '../tour-modal/tour-modal';
-import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
-import { useIdentSelector } from '../../hooks/redux/use-enheter-ident';
-import { useTimer } from '../../hooks/use-timer';
-import {
+    hentSetteVersjonerLocalstorage,
     hentSetteVersjonerRemotestorage,
     hexString,
     krypterVeilederident,
-    registrerInnholdIRemoteStorage,
-    hentSetteVersjonerLocalstorage
+    registrerInnholdIRemoteStorage
 } from './utils/endringslogg-utils';
-import { logEvent } from '../../utils/frontend-logger';
-import { registrerSettInnlegg } from './utils/endringslogg-api';
+import {logEvent} from '../../utils/frontend-logger';
+import {registrerSettInnlegg} from './utils/endringslogg-api';
 
 function EndringsloggTourWrapper() {
-    const harFeature = useFeatureSelector();
     const veilederIdent = useIdentSelector();
-    const features = {
-        visMoteMedNAV: harFeature(VIS_MOTER_MED_NAV),
-        visEndringslogg: harFeature(ENDRINGSLOGG)
-    };
 
     const {startTimer, stoppTimer} = useTimer();
     const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
 
     useEffect(() => {
-        hentInnholdRemote();
+        const listeEndringsVersjoner = hentSetteVersjonerLocalstorage();
+        registrerSettInnlegg(listeEndringsVersjoner.join(','))
+            .then(() => hentSetteVersjonerRemotestorage()
+                .then(resp => setInnholdsliste(mapRemoteToState(resp))))
+            .catch(() => setInnholdsliste(setHarSettAlt))
     }, []);
 
-    const hentInnholdRemote = async () => {
-        try {
-            let innhold = await hentSetteVersjonerRemotestorage();
-            if (innhold.length === 0) {
-                innhold = await hentSetteVersjonerLocalstorage();
-                if (innhold.length !== 0) {
-                    registrerSettInnlegg(innhold.join(','));
-                }
-            }
-            setInnholdsliste(mapRemoteToState(innhold));
-        } catch (e) {
-            setInnholdsliste(setHarSettAlt);
-        }
-
-    };
 
     const registrerInnholdRemote = async (innhold: EndringsloggInnleggMedSettStatus[]) => {
         await registrerInnholdIRemoteStorage(innhold);
-    };
-
-    const onOpen = () => {
-        startTimer();
     };
 
     const onClose = () => {
@@ -82,31 +53,12 @@ function EndringsloggTourWrapper() {
         }
     };
 
-    if (!features.visMoteMedNAV) {
-        if (innholdsListe.find((el) => el.versjonId === ModalName.MOTE_FILTER)) {
-            setInnholdsliste(innholdsListe.filter((el) => el.versjonId !== ModalName.MOTE_FILTER));
-        }
-    }
-
     return (
-        <>
-            {features.visEndringslogg &&
-            <Endringslogg
-                innhold={innholdsListe}
-                onOpen={onOpen}
-                onClose={onClose}
-            />
-            }
-            <TourModalLocalStorage
-                onTourComplete={
-                    (name: string) => {
-                        const newList = settModalEndring(innholdsListe, name);
-                        setInnholdsliste(newList);
-                        registrerInnholdRemote(newList);
-                    }
-                }
-            />
-        </>
+        <Endringslogg
+            innhold={innholdsListe}
+            onOpen={startTimer}
+            onClose={onClose}
+        />
     );
 }
 

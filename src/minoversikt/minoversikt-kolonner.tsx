@@ -2,17 +2,18 @@ import * as React from 'react';
 import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker, aapRettighetsperiode } from '../utils/utils';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
-import UkeKolonne from '../components/ukekolonne';
+import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER, VENTER_PA_SVAR_FRA_NAV,
     ytelsevalg, ytelseAapSortering, MOTER_IDAG
 } from '../filtrering/filter-konstanter';
-import DatoKolonne from '../components/datokolonne';
+import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
-import TidKolonne from '../components/tidkolonne';
+import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
+import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -104,7 +105,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 dato={moteStartTid}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
             />
-            <TidKolonne
+            <VarighetKolonne
                 className="col col-xs-2"
                 dato={varighet}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
