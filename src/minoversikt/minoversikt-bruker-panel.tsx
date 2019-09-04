@@ -50,7 +50,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     });
 
     return (
-        <li className={classname}>
+        <li className={classname} ref={liRef}>
             <div className="brukerliste__element">
                 <div className="brukerliste__gutter-left brukerliste--min-width-minside">
                     <CheckBox bruker={bruker} settMarkert={settMarkert}/>
