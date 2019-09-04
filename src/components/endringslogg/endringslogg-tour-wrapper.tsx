@@ -8,7 +8,8 @@ import {
     hentSetteVersjonerRemotestorage,
     hexString,
     krypterVeilederident,
-    registrerInnholdIRemoteStorage
+    registrerInnholdIRemoteStorage,
+    slettersjonerLocalstorage
 } from './utils/endringslogg-utils';
 import {logEvent} from '../../utils/frontend-logger';
 import {registrerSettInnlegg} from './utils/endringslogg-api';
@@ -21,10 +22,19 @@ function EndringsloggTourWrapper() {
 
     useEffect(() => {
         const listeEndringsVersjoner = hentSetteVersjonerLocalstorage();
-        registrerSettInnlegg(listeEndringsVersjoner.join(','))
-            .then(() => hentSetteVersjonerRemotestorage()
-                .then(resp => setInnholdsliste(mapRemoteToState(resp))))
-            .catch(() => setInnholdsliste(setHarSettAlt))
+        if(listeEndringsVersjoner.length > 0 ) {
+            registrerSettInnlegg(listeEndringsVersjoner.join(','))
+                .then(() => hentSetteVersjonerRemotestorage()
+                    .then(resp => {
+                        setInnholdsliste(mapRemoteToState(resp));
+                        slettersjonerLocalstorage();
+                    }))
+                .catch(() => setInnholdsliste(setHarSettAlt))
+        } else {
+            hentSetteVersjonerRemotestorage()
+                .then(resp => setInnholdsliste(mapRemoteToState(resp)))
+                .catch(() => setInnholdsliste(setHarSettAlt));
+        }
     }, []);
 
 
