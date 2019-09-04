@@ -37,7 +37,7 @@ const stepsFlytteFilter: Step[] = [
     {
         tittel: 'Dagens møter i Enhetens oversikt',
         bilde: filterendring1Bilde,
-        tekst: 'Avtalte møter på kontoret vises nå i Enhetens oversikt.'
+        tekst: 'Avtalte møter på kontoret vises nå i Enhetens oversikt.\n'
     },
     {
         tittel: 'Manuell oppfølging',
