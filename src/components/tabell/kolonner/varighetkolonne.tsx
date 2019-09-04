@@ -1,36 +1,36 @@
 import * as React from 'react';
 import moment from 'moment';
 
-interface TidKolonneProps {
+interface VarighetKolonneProps {
     className?: string;
     dato: number | null;
     skalVises: boolean;
 }
 
-function VarighetKolonne({ className, dato, skalVises }: TidKolonneProps) {
+function VarighetKolonne({ className, dato, skalVises }: VarighetKolonneProps) {
     if (!skalVises || !dato) {
         return null;
     }
-    const duration = moment.duration(dato, 'minutes');
-    const minutes = duration.get('minutes');
-    const hours = duration.get('hours');
+    const varighet = moment.duration(dato, 'minutes');
+    const minutter = varighet.get('minutes');
+    const timer = varighet.get('hours');
     let minutterString = '';
-    let timmerString = '';
+    let timerString = '';
 
-    if(hours > 0) {
-        timmerString = hours.toString() + "t";
+    if(timer > 0) {
+        timerString = timer.toString() + "t";
     }
 
-    if(minutes > 0) {
-        minutterString = minutes.toString() + "min";
+    if(minutter > 0) {
+        minutterString = minutter.toString() + "min";
     }
 
 
-    const kolonn = hours > 0 && minutes > 0 ? ' ': '';
+    const kolonn = timer > 0 && minutter > 0 ? ' ': '';
 
     return (
         <span className={className}>
-        {`${timmerString}${kolonn}${minutterString}`}
+        {`${timerString}${kolonn}${minutterString}`}
         </span>
     );
 }

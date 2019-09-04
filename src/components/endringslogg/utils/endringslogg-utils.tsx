@@ -62,10 +62,6 @@ export async function hentSetteVersjonerRemotestorage(): Promise<string[]> {
     return temp.endringslogg ? temp.endringslogg.split(',') : [];
 }
 
-export function registrerHarLestEndringslogg(setteVersjoner: string[]) {
-    window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(setteVersjoner));
-}
-
 export async function registrerInnholdIRemoteStorage(endringslogg: EndringsloggInnleggMedSettStatus[]) {
     const message: string[] = [];
     endringslogg.forEach( (e)=> {
