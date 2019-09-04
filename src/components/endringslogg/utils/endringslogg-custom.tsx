@@ -6,7 +6,7 @@ import TourModalButton from '../../tour-modal/tour-modal-button';
 export interface EndringsloggInnlegg {
     tittel: string;
     dato: string;
-    tekst: string;
+    tekst?: string;
     versjonId: string;
     children?: React.ReactNode;
 }
@@ -17,19 +17,22 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '04. SEP. 2019',
-        tittel: 'Små endringer i filtrene',
-        tekst: 'Manuell oppfølging ligger i gruppen Situasjon.\n' +
-            'Rettighetsgruppe og Ytelser er i samme gruppe.\n' +
-            'Ventelønn og Ventestønad er tatt bort fra Rettighetsgruppe.\n' +
-            'Valgene i Alder vises i to kolonner.',
+        dato: '05. SEP. 2019',
+        tittel: 'Endringer i filtrene',
         versjonId: '0.2.0',
         children:
+        <>
+            <ul className={'endringslogg-innhold-liste'}>
+                <li>«Møte med NAV i dag» finnes nå på Enhetens oversikt.</li>
+                <li>Manuell oppfølging ligger nå under «Situasjon».</li>
+                <li>Rettighetsgruppe og ytelser ligger nå i samme gruppe.</li>
+            </ul>
             <TourModalButton
                 metrikknavn={'portefolje.endringslogg_modal'}
                 modal={ModalName.FLYTTE_FILTER}
                 knappeTekst={'Se endringer'}
             />
+        </>
     },
     {
         dato: '16. JUL. 2019',

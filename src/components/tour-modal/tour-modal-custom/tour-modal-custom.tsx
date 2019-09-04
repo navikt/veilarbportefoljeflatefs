@@ -1,8 +1,11 @@
 import { ModalName, Step } from '../tour-modal';
-import step1Bilde from './step-1.png';
-import filter1Bilde from './filter-1.png';
-import filter2Bilde from './filter-2.png';
-import filter3Bilde from './filter-3.png';
+import step1Bilde from './step/step-1.png';
+import filter1Bilde from './filter/filter-1.png';
+import filter2Bilde from './filter/filter-2.png';
+import filter3Bilde from './filter/filter-3.png';
+import filterendring1Bilde from './filterendringer/filterendringer-step1.png';
+import filterendring2Bilde from './filterendringer/filterendringer-step2.png';
+import filterendring3Bilde from './filterendringer/filterendringer-step3.png';
 
 const stepsLastNedCV: Step[] = [
     {
@@ -32,19 +35,19 @@ const stepsFilter: Step[] = [
 
 const stepsFlytteFilter: Step[] = [
     {
-        tittel: 'Tittel',
-        bilde: filter1Bilde,
-        tekst: 'Blablablablabla'
+        tittel: 'Dagens møter i Enhetens oversikt',
+        bilde: filterendring1Bilde,
+        tekst: 'Avtalte møter på kontoret vises nå i Enhetens oversikt.'
     },
     {
-        tittel: 'Enklere oversikt',
-        bilde: filter2Bilde,
-        tekst: 'Med filteret aktivert vil det listes opp personinformasjon, møtetid og varighet.'
+        tittel: 'Manuell oppfølging',
+        bilde: filterendring2Bilde,
+        tekst: 'Filteret “Manuell bruker” heter nå “Manuell oppfølging” og er flyttet til gruppen «Situasjon».'
     },
     {
-        tittel: 'Viste du at...',
-        bilde: filter3Bilde,
-        tekst: 'Man kan også filtrere på ulike aktivteter, som "Møte med NAV" eller "Medisinsk behandling". Dette aktiveres i bunnen av "Filter".'
+        tittel: 'Rettighetsgruppe og ytelser',
+        bilde: filterendring3Bilde,
+        tekst: 'Disse filtrene ligger nå i samme gruppe.'
     },
 ];
 
