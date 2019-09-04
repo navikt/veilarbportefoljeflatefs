@@ -7,7 +7,7 @@ import { EndringsloggInnleggMedSettStatus } from './utils/endringslogg-custom';
 
 interface EndringsloggInleggProps {
     dato: string;
-    innholdsTekst: string;
+    innholdsTekst?: string;
     innholdsOverskrift: string;
     nyeNotifikasjoner: boolean;
     children: React.ReactNode;
@@ -60,7 +60,7 @@ function EndringsloggInlegg(props: EndringsloggInleggProps) {
             </div>
             <div className="endringslogg-innhold endringslogg-kolonne">
                 <Undertittel tag="h3"> {props.innholdsOverskrift} </Undertittel>
-                <Normaltekst> {props.innholdsTekst} </Normaltekst>
+                {props.innholdsTekst && <Normaltekst> {props.innholdsTekst} </Normaltekst>}
                 {props.children}
             </div>
         </div>

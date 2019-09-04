@@ -6,6 +6,7 @@ import { logEvent } from '../../utils/frontend-logger';
 interface ModalStepperProps {
     modal: ModalName;
     metrikknavn: string;
+    knappeTekst ?: string;
 }
 
 export default function TourModalButton(props: ModalStepperProps) {
@@ -17,7 +18,7 @@ export default function TourModalButton(props: ModalStepperProps) {
                 setOpen(true);
                 logEvent(props.metrikknavn);
             }}>
-                Se hvordan
+                {props.knappeTekst ? props.knappeTekst : 'Se hvordan'}
             </Knapp>
             <TourModal
                 open={open}

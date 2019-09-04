@@ -4,13 +4,13 @@ import me from './me';
 import brukere from './portefolje';
 import veiledere from './veiledere';
 import statustall from './statustall';
-import tekster from './tekster';
 import tiltak from './tiltak';
 import diagramdata from './diagramdata';
 import lagDiagramData from './diagramdataV2';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
 import { API_BASE_URL, FEATURE_URL } from '../middleware/api';
+import { endringsloggListe } from './endringslogg';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, enheter.enhetliste[0].enhetId, alleBrukere);
@@ -52,8 +52,10 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 // features
 (mock as any).get(`glob:${API_BASE_URL}${FEATURE_URL}*`, respondWith(features));
 
-// Hvis du vil hente tekster fra applikasjonen, så la linjen nedenfor være kommentert ut.
-(mock as any).get('/veilarbportefoljeflatefs/api/tekster', respondWith(tekster));
+// endringslogg
+(mock as any).patch(`/veilarbremotestore/`, respondWith((url, config, {bodyParams}) => Object.assign(endringsloggListe, bodyParams)));
+
+(mock as any).get('/veilarbremotestore/?ressurs=endringslogg', respondWith(() => endringsloggListe));
 
 // veileder-api
 (mock as any).get('/veilarbveileder/api/veileder/enheter', respondWith(enheter));
