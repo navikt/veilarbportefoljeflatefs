@@ -20,7 +20,7 @@ function Application() {
 
     useEffect(() => {
         rendreDekorator();
-    });
+    }, []);
 
     return (
         <Provider store={store}>
