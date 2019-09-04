@@ -10,6 +10,7 @@ import lagDiagramData from './diagramdataV2';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
 import { API_BASE_URL, FEATURE_URL } from '../middleware/api';
+import { endringsloggListe } from './endringslogg';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, enheter.enhetliste[0].enhetId, alleBrukere);
@@ -48,17 +49,18 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
     };
 }
 
-const endringslogg = {};
-
 // features
 (mock as any).get(`glob:${API_BASE_URL}${FEATURE_URL}*`, respondWith(features));
+
+// endringslogg
+(mock as any).patch(`/veilarbremotestore/`, respondWith((url, config, {bodyParams}) => Object.assign(endringsloggListe, bodyParams)));
+
+(mock as any).get('/veilarbremotestore/?ressurs=endringslogg', respondWith(() => endringsloggListe));
 
 // veileder-api
 (mock as any).get('/veilarbveileder/api/veileder/enheter', respondWith(enheter));
 (mock as any).get('/veilarbveileder/api/veileder/me', respondWith(me));
 (mock as any).get('express:/veilarbveileder/api/enhet/:enhet/veiledere', respondWith(veiledere));
-(mock as any).patch('/veilarbremotestore/', respondWith((url, config, { queryParams, bodyParams, extra }) => Object.assign(endringslogg, bodyParams)));
-(mock as any).get('/veilarbremotestore/?ressurs=endringslogg', respondWith(endringslogg));
 
 // portefolje-api
 (mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/statustall', respondWith(delayed(1000, randomFailure(statustall))));

@@ -9,6 +9,7 @@ import './tour-modal.less';
 export enum ModalName {
     LAST_NED_CV = 'TOUR_MODAL-LAST_NED_CV',
     MOTE_FILTER = 'TOUR_MODAL-MOTE_FILTER',
+    FLYTTE_FILTER = 'TOUR_MODAL-FLYTTE_FILTER'
 }
 
 export interface Step {

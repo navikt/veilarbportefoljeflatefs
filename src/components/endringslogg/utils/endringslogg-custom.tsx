@@ -6,7 +6,7 @@ import TourModalButton from '../../tour-modal/tour-modal-button';
 export interface EndringsloggInnlegg {
     tittel: string;
     dato: string;
-    tekst: string;
+    tekst?: string;
     versjonId: string;
     children?: React.ReactNode;
 }
@@ -17,13 +17,31 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '05. SEP. 2019',
+        tittel: 'Endringer i filtrene',
+        versjonId: '0.2.0',
+        children:
+        <>
+            <ul className="endringslogg-innhold-liste">
+                <li>«Møte med NAV i dag» finnes nå på Enhetens oversikt.</li>
+                <li>Manuell oppfølging ligger nå under «Situasjon».</li>
+                <li>Rettighetsgruppe og ytelser ligger nå i samme gruppe.</li>
+            </ul>
+            <TourModalButton
+                metrikknavn="portefolje.endringslogg_modal"
+                modal={ModalName.FLYTTE_FILTER}
+                knappeTekst="Se endringer"
+            />
+        </>
+    },
+    {
         dato: '16. JUL. 2019',
         tittel: 'NAV møte filter i Min oversikt',
         tekst: 'Vi har flyttet et filter. Det er nå lett å få oversikt over brukere sine møter med NAV.',
         versjonId: ModalName.MOTE_FILTER,
         children:
             <TourModalButton
-                metrikknavn={'portefolje.endringslogg_modal'}
+                metrikknavn="portefolje.endringslogg_modal"
                 modal={ModalName.MOTE_FILTER}
             />
         ,
@@ -35,7 +53,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '0.1.9',
         children:
             <TourModalButton
-                metrikknavn={'portefolje.endringslogg_modal'}
+                metrikknavn="portefolje.endringslogg_modal"
                 modal={ModalName.LAST_NED_CV}
             />
         ,

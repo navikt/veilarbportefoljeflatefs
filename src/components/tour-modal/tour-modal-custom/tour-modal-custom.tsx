@@ -1,8 +1,11 @@
 import { ModalName, Step } from '../tour-modal';
-import step1Bilde from './step-1.png';
-import filter1Bilde from './filter-1.png';
-import filter2Bilde from './filter-2.png';
-import filter3Bilde from './filter-3.png';
+import step1Bilde from './step/step-1.png';
+import filter1Bilde from './filter/filter-1.png';
+import filter2Bilde from './filter/filter-2.png';
+import filter3Bilde from './filter/filter-3.png';
+import filterendring1Bilde from './filterendringer/filterendringer-step1.png';
+import filterendring2Bilde from './filterendringer/filterendringer-step2.png';
+import filterendring3Bilde from './filterendringer/filterendringer-step3.png';
 
 const stepsLastNedCV: Step[] = [
     {
@@ -29,6 +32,25 @@ const stepsFilter: Step[] = [
         tekst: 'Man kan også filtrere på ulike aktivteter, som "Møte med NAV" eller "Medisinsk behandling". Dette aktiveres i bunnen av "Filter".'
     },
 ];
+
+const stepsFlytteFilter: Step[] = [
+    {
+        tittel: 'Dagens møter i Enhetens oversikt',
+        bilde: filterendring1Bilde,
+        tekst: 'Avtalte møter på kontoret vises nå i Enhetens oversikt.\n'
+    },
+    {
+        tittel: 'Manuell oppfølging',
+        bilde: filterendring2Bilde,
+        tekst: 'Filteret “Manuell bruker” heter nå “Manuell oppfølging” og er flyttet til gruppen «Situasjon».'
+    },
+    {
+        tittel: 'Rettighetsgruppe og ytelser',
+        bilde: filterendring3Bilde,
+        tekst: 'Disse filtrene ligger nå i samme gruppe.'
+    },
+];
+
 const stepsblank: Step[] = [
     {
         tittel: '',
@@ -43,6 +65,8 @@ export function getTour(modal: ModalName) {
             return stepsLastNedCV;
         case ModalName.MOTE_FILTER:
             return stepsFilter;
+        case ModalName.FLYTTE_FILTER:
+            return stepsFlytteFilter;
         default:
             return stepsblank;
     }
