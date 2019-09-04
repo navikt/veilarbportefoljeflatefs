@@ -87,7 +87,12 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
 
                         />
                         <Listeoverskrift
-                            className="listeoverskrift col col-xs-4"
+                            className="listeoverskrift col col-xs-2"
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            tekst="Klokkeslett for møtet"
+                        />
+                        <Listeoverskrift
+                            className="listeoverskrift col col-xs-2"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
                             tekst="Varighet"
                         />
