@@ -1,6 +1,6 @@
 import { AppState } from '../../reducer';
 import { Kolonne, ListevisningType } from './listevisning';
-import { AktiviteterValg, FiltreringAktiviteterValg, FiltreringState } from '../filtrering';
+import { AktiviteterValg, FiltreringAktiviteterValg } from '../filtrering';
 import {
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
@@ -8,6 +8,7 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
+import {FiltervalgModell} from "../../model-interfaces";
 
 export function selectMuligeAlternativer(state: AppState, name: string): Kolonne[] {
     if (name === ListevisningType.minOversikt) {
@@ -27,9 +28,9 @@ function addHvis(kolonne: Kolonne, add: boolean): Kolonne[] {
     return add ? [kolonne] : [];
 }
 
-function harValgtMinstEnAktivitet(aktiviteter: FiltreringAktiviteterValg): boolean {
-    return Object.entries(aktiviteter)
-        .filter(([key, value]) => value === AktiviteterValg.JA)
+function harValgtMinstEnAktivitet(aktiviteter?: FiltreringAktiviteterValg): boolean {
+    return !!aktiviteter && Object.entries(aktiviteter)
+        .filter(([_, value]) => value === AktiviteterValg.JA)
         .length >= 1;
 }
 
@@ -37,7 +38,7 @@ function harIkkeValgtTiltakstype(tiltakstyper: string[]): boolean {
     return tiltakstyper.length === 0;
 }
 
-function getFiltertingState(state: AppState, name: ListevisningType): FiltreringState {
+export function getFiltertingState(state: AppState, name: ListevisningType): FiltervalgModell {
     switch (name) {
         case ListevisningType.enhetensOversikt:
             return state.filtrering;
@@ -49,7 +50,7 @@ function getFiltertingState(state: AppState, name: ListevisningType): Filtrering
 }
 
 export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolonne[] {
-    const filtervalg: FiltreringState = getFiltertingState(state, name);
+    const filtervalg: FiltervalgModell = getFiltertingState(state, name);
 
     return [Kolonne.BRUKER, Kolonne.FODSELSNR]
         .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))

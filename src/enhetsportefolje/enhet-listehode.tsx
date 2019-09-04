@@ -32,9 +32,9 @@ interface EnhetListehodeProps {
 
 function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: EnhetListehodeProps) {
     const { ytelse } = filtervalg;
-    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse);
-    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering[ytelse].vedtaksperiode : ytelseUtlopsSortering[filtervalg.ytelse];
+    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
+    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
+    const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : ytelseUtlopsSortering[ytelse!];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Vedtaksperiode' : 'Rettighetsperiode';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
