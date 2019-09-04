@@ -1,5 +1,5 @@
 import { oppdaterPortefolje } from './portefolje';
-import { VeilederModell } from '../model-interfaces';
+import { FiltervalgModell, VeilederModell } from '../model-interfaces';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 
 // Actions
@@ -31,7 +31,7 @@ export interface FiltreringState {
     veiledere: string[];
     aktiviteter: FiltreringAktiviteterValg;
     tiltakstyper: string[];
-    ytelse: null;
+    ytelse: null | string;
     manuellBrukerStatus: string[];
     hovedmal: string[];
     navnEllerFnrQuery: string;
@@ -40,7 +40,7 @@ export interface FiltreringState {
 
 //  Reducer
 // TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducer
-export const initialState = {
+export const initialState: FiltervalgModell = {
     ferdigfilterListe: [],
     alder: [],
     kjonn: [],
@@ -50,7 +50,7 @@ export const initialState = {
     servicegruppe: [],
     rettighetsgruppe: [],
     veiledere: [],
-    aktiviteter: {},
+    aktiviteter: {} as FiltreringAktiviteterValg,
     tiltakstyper: [],
     ytelse: null,
     manuellBrukerStatus: [],
@@ -77,7 +77,7 @@ function fjern(verdi, fjernVerdi) {
     throw new Error(`Kan ikke håndtere fjerning av ${fjernVerdi} fra ${verdi}`);
 }
 
-export default function reducer(state: FiltreringState = initialState, action): FiltreringState {
+export default function reducer(state: FiltervalgModell = initialState, action): FiltervalgModell {
     switch (action.type) {
         case CLEAR_FILTER:
             return initialState;

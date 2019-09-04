@@ -1,17 +1,20 @@
 import { DependencyList, useEffect, useRef } from 'react';
 
 export function useTimeOut(handler: TimerHandler, timeout: number, deps?: DependencyList) {
-    const ref = useRef<number>(-1);
-    useEffect(()=> {
-        if(ref.current !== -1) {
-            clearTimeout(ref.current);
-            ref.current = -1;
-        }
-        ref.current = window.setTimeout(handler, timeout);
-        return () => {
-            clearTimeout(ref.current);
-            ref.current = -1;
-        };
+    const timer = useRef<number | undefined>();
+    const isInitialMount = useRef(true);
 
-    },deps);
+    useEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+        } else {
+            if (!timer.current) {
+                timer.current = window.setTimeout(handler, timeout);
+            }
+            return () => {
+                clearTimeout(timer.current);
+                timer.current = undefined;
+            };
+        }
+    }, deps);
 }

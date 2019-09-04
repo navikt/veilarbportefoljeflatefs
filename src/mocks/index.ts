@@ -75,7 +75,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 (mock as any).post('express:/veilarbportefolje/api/diagram*', () => respondWith(diagramdata));
 
 // situasjon-api
-(mock as any).post('/veilarbsituasjon/api/tilordneveileder/', respondWith(delayed(1000, randomFailure({ feilendeTilordninger: ['11111111111','22222222222'] }))));
+(mock as any).post('/veilarboppfolging/api/tilordneveileder/', respondWith(delayed(1000, randomFailure({ feilendeTilordninger: ['11111111111','22222222222'] }))));
 
 // arbeidsliste-api
 (mock as any).post('/veilarbportefolje/api/arbeidsliste/', respondWith((url, config, {bodyParams}) => {
