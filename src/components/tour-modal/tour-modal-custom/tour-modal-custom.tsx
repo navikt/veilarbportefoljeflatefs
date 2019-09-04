@@ -29,6 +29,25 @@ const stepsFilter: Step[] = [
         tekst: 'Man kan også filtrere på ulike aktivteter, som "Møte med NAV" eller "Medisinsk behandling". Dette aktiveres i bunnen av "Filter".'
     },
 ];
+
+const stepsFlytteFilter: Step[] = [
+    {
+        tittel: 'Tittel',
+        bilde: filter1Bilde,
+        tekst: 'Blablablablabla'
+    },
+    {
+        tittel: 'Enklere oversikt',
+        bilde: filter2Bilde,
+        tekst: 'Med filteret aktivert vil det listes opp personinformasjon, møtetid og varighet.'
+    },
+    {
+        tittel: 'Viste du at...',
+        bilde: filter3Bilde,
+        tekst: 'Man kan også filtrere på ulike aktivteter, som "Møte med NAV" eller "Medisinsk behandling". Dette aktiveres i bunnen av "Filter".'
+    },
+];
+
 const stepsblank: Step[] = [
     {
         tittel: '',
@@ -43,6 +62,8 @@ export function getTour(modal: ModalName) {
             return stepsLastNedCV;
         case ModalName.MOTE_FILTER:
             return stepsFilter;
+        case ModalName.FLYTTE_FILTER:
+            return stepsFlytteFilter;
         default:
             return stepsblank;
     }
