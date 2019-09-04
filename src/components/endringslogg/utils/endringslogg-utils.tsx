@@ -57,6 +57,10 @@ export function hentSetteVersjonerLocalstorage(): string[] {
     return setteVersjoner;
 }
 
+export function slettersjonerLocalstorage() {
+    localStorage.removeItem(LOCALSTORAGE_KEY);
+}
+
 export async function hentSetteVersjonerRemotestorage(): Promise<string[]> {
     const temp = await(fetchHarSettInnlegg());
     return temp.endringslogg ? temp.endringslogg.split(',') : [];
