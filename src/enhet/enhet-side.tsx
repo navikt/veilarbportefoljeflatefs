@@ -12,9 +12,8 @@ import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import TomPortefoljeModal from '../modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import { AppState } from '../reducer';
-import {  ValgtEnhetModell, VeilederModell } from '../model-interfaces';
+import { FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
-import { FiltreringState } from '../ducks/filtrering';
 import { pagineringSetup } from '../ducks/paginering';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
@@ -22,7 +21,7 @@ import './enhet-side.less';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
-    filtervalg: FiltreringState;
+    filtervalg: FiltervalgModell;
     veilederliste: VeilederModell[];
     statustall: StatustallState;
     enhettiltak: EnhettiltakState;
@@ -38,6 +37,7 @@ interface DispatchProps {
 type EnhetSideProps = StateProps & DispatchProps;
 
 class EnhetSide extends React.Component<EnhetSideProps> {
+
     componentWillMount() {
         const { valgtEnhet } = this.props;
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);

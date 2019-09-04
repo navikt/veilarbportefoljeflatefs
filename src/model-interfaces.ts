@@ -1,3 +1,4 @@
+import {FiltreringAktiviteterValg} from "./ducks/filtrering";
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -41,7 +42,7 @@ export enum EtikettType {
 }
 
 export interface FiltervalgModell {
-    ferdigfilterListe?: string[];
+    ferdigfilterListe: string[];
     nyeBrukereForVeileder?: boolean;
     inaktiveBrukere?: boolean;
     venterPaSvarFraNAV?: boolean;
@@ -54,11 +55,14 @@ export interface FiltervalgModell {
     formidlingsgruppe?: string[];
     servicegruppe?: string[];
     veiledere?: string[];
-    ytelse: string;
-    aktiviteter?: string[];
+    ytelse: null | string;
+    aktiviteter?: FiltreringAktiviteterValg;
     tiltakstyper: string[];
     hovedmal?: string[];
     navnEllerFnrQuery: string;
+    rettighetsgruppe?: string[];
+    manuellBrukerStatus?: string[];
+    veilederNavnQuery: string;
 }
 
 export interface EnhetModell {

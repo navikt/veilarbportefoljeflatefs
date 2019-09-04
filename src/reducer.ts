@@ -6,7 +6,7 @@ import pagineringReducer from './ducks/paginering';
 import sorteringReducer from './ducks/sortering';
 import veiledereReducer, { VeiledereState } from './ducks/veiledere';
 import portefoljestorrelserReducer, { PortefoljeStorrelser } from './ducks/portefoljestorrelser';
-import filtreringReducer, { FiltreringState, initialState } from './ducks/filtrering';
+import filtreringReducer, {  initialState } from './ducks/filtrering';
 import statustallReducer, { StatustallState } from './ducks/statustall';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
@@ -25,6 +25,7 @@ import listevisningReducer, {
 } from './ducks/ui/listevisning';
 import { default as contextReducer, ContextState } from './components/enhet-context/context-reducer';
 import featuresReducer, { FeaturesState } from './ducks/features';
+import {FiltervalgModell} from "./model-interfaces";
 
 function named(name, reducer) {
     return (state, action) => {
@@ -53,9 +54,9 @@ export interface AppState {
     veiledere: VeiledereState;
     portefoljestorrelser: PortefoljeStorrelser;
     statustall: StatustallState;
-    filtrering: FiltreringState;
-    filtreringMinoversikt: any;
-    filtreringVeilederoversikt: FiltreringState;
+    filtrering: FiltervalgModell;
+    filtreringMinoversikt: FiltervalgModell;
+    filtreringVeilederoversikt: FiltervalgModell;
     modal: any;
     serverfeilModal: any;
     feilmeldingModal: any;
