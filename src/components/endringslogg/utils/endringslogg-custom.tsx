@@ -22,15 +22,15 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '0.2.0',
         children:
         <>
-            <ul className={'endringslogg-innhold-liste'}>
+            <ul className="endringslogg-innhold-liste">
                 <li>«Møte med NAV i dag» finnes nå på Enhetens oversikt.</li>
                 <li>Manuell oppfølging ligger nå under «Situasjon».</li>
                 <li>Rettighetsgruppe og ytelser ligger nå i samme gruppe.</li>
             </ul>
             <TourModalButton
-                metrikknavn={'portefolje.endringslogg_modal'}
+                metrikknavn="portefolje.endringslogg_modal"
                 modal={ModalName.FLYTTE_FILTER}
-                knappeTekst={'Se endringer'}
+                knappeTekst="Se endringer"
             />
         </>
     },
@@ -41,7 +41,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: ModalName.MOTE_FILTER,
         children:
             <TourModalButton
-                metrikknavn={'portefolje.endringslogg_modal'}
+                metrikknavn="portefolje.endringslogg_modal"
                 modal={ModalName.MOTE_FILTER}
             />
         ,
@@ -53,7 +53,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '0.1.9',
         children:
             <TourModalButton
-                metrikknavn={'portefolje.endringslogg_modal'}
+                metrikknavn="portefolje.endringslogg_modal"
                 modal={ModalName.LAST_NED_CV}
             />
         ,
