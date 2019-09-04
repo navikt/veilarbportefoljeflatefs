@@ -11,6 +11,7 @@ import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
+import { useLayoutEffect, useRef } from 'react';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -24,6 +25,15 @@ interface MinOversiktBrukerPanelProps {
 }
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const [apen, setOpen] = useState<boolean>(false);
+    const liRef = useRef<HTMLLIElement>(null);
+
+    const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
+    useLayoutEffect(() => {
+        if (varForrigeBruker) {
+            scrollToRef(liRef);
+        }
+    }, [liRef.current, props.varForrigeBruker]);
 
     function handleArbeidslisteButtonClick(event) {
         event.preventDefault();
