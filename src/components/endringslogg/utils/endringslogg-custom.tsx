@@ -2,6 +2,7 @@ import { ModalName } from '../../tour-modal/tour-modal';
 import { EndringsloggLinkMedIkon } from '../endringslogg-innhold';
 import React from 'react';
 import TourModalButton from '../../tour-modal/tour-modal-button';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -27,6 +28,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                 <li>Manuell oppfølging ligger nå under «Situasjon».</li>
                 <li>Rettighetsgruppe og ytelser ligger nå i samme gruppe.</li>
             </ul>
+            <Normaltekst>Vi har også justert meldingen du får når du sletter en bruker fra arbeidslista.</Normaltekst>
             <TourModalButton
                 metrikknavn="portefolje.endringslogg_modal"
                 modal={ModalName.FLYTTE_FILTER}
