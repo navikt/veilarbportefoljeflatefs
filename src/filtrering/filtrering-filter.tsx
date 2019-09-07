@@ -19,12 +19,13 @@ import {
 } from './filter-konstanter';
 
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
+import DropdownNy from '../components/dropdown/dropdown-ny';
+import CheckboxFilterformNy from '../components/checkbox-filterform/checkbox-filterform-ny';
 
 interface FiltreringFilterProps {
     filtervalg: any;
     actions: any;
     enhettiltak: any;
-    intl?: any;
 }
 
 const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterProps) => (
@@ -34,15 +35,19 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                 <Element className="blokk-xxs" tag="h3">
                     Demografi
                 </Element>
-                <Dropdown name="Alder">
-                    <CheckboxFilterform
-                        form="alder"
-                        kolonner={2}
-                        valg={alder}
-                        onSubmit={actions.endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
+                <DropdownNy
+                    name="Alder"
+                    render={(lukkDropdown) =>
+                            <CheckboxFilterformNy
+                                filterId="alder"
+                                kolonner={2}
+                                closeDropdown={lukkDropdown}
+                                valg={alder}
+                                onSubmit={actions.endreFiltervalg}
+                                filtervalg={filtervalg}
+                            />
+                        }
+                />
                 <Dropdown name="Fødselsdato">
                     <CheckboxFilterform
                         form="fodselsdagIMnd"

@@ -51,7 +51,7 @@ function SokVeileder(props: AllProps) {
         <DropdownNy
             name="Søk veileder"
             className="dropdown--fixed dropdown--toolbar"
-            render ={ lukkDropDown =>
+            render={ lukkDropDown =>
                 <SokFilterNy
                     label="Velg veiledere"
                     placeholder="Søk veileder"

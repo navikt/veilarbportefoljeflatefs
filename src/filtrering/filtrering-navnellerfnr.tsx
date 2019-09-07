@@ -17,7 +17,7 @@ function FiltreringNavnellerfnr(props: FiltreringNavnEllerFnrProps) {
 
     useTimeOut(
         () => props.actions.endreFiltervalg('navnEllerFnrQuery', navnEllerFnrQuery),
-        500,
+        100,
         [navnEllerFnrQuery]
     );
 
