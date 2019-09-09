@@ -1,16 +1,13 @@
-import { default as React, RefObject } from 'react';
+import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useFocus } from '../../../hooks/use-focus';
 
 interface CollapseContainerProps {
-    focusRef: RefObject<HTMLDivElement>;
     children: React.ReactNode;
-
 }
 
 interface TransitionProps extends CollapseContainerProps {
     visible: boolean;
-
 }
 
 export default function TransitionContainer(props: TransitionProps) {
@@ -18,7 +15,7 @@ export default function TransitionContainer(props: TransitionProps) {
         <TransitionGroup component={null}>
             {props.visible && (
                 <CSSTransition classNames="collapse-container" timeout={400}>
-                    <CollapseContainer focusRef={props.focusRef}>
+                    <CollapseContainer>
                         {props.children}
                     </CollapseContainer>
                 </CSSTransition>
@@ -28,10 +25,10 @@ export default function TransitionContainer(props: TransitionProps) {
 }
 
 function CollapseContainer(props: CollapseContainerProps) {
-    useFocus(props.focusRef, []);
+    const focusRef = useFocus();
     return (
         <div className="collapse-container">
-            <div className="endringslogg-content" ref={props.focusRef} tabIndex={-1}>
+            <div className="endringslogg-content" ref={focusRef} tabIndex={-1}>
                 {props.children}
             </div>
         </div>

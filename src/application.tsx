@@ -24,11 +24,11 @@ function Application() {
 
     return (
         <Provider store={store}>
-            <InitalDataProvider>
-                <BrowserRouter basename={basename}>
+            <BrowserRouter basename={basename}>
+                <InitalDataProvider>
                     <Routes/>
-                </BrowserRouter>
-            </InitalDataProvider>
+                </InitalDataProvider>
+            </BrowserRouter>
         </Provider>
     );
 }

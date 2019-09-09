@@ -81,7 +81,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 (mock as any).post('/veilarbportefolje/api/arbeidsliste/', respondWith((url, config, {bodyParams}) => {
     return {error: [], data: bodyParams.map((arbeidsliste) => arbeidsliste.fnr)};
 }));
-(mock as any).put('express:/veilarbportefolje/api/arbeidsliste/:fnr', respondWith((url, config, {bodyParams}) => {
+(mock as any).put('/veilarbportefolje/api/arbeidsliste/:fnr', respondWith((url, config, {bodyParams}) => {
     return {
         sistEndretAv : {
             veilederId : 'Z990007'
@@ -95,6 +95,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
         harVeilederTilgang : true
     };
 }));
+
 (mock as any).post('/veilarbportefolje/api/arbeidsliste/delete', respondWith((url, config, {bodyParams}) => {
     return {error: [], data: bodyParams.map((arbeidsliste) => arbeidsliste.fnr)};
 }));

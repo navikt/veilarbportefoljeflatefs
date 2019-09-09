@@ -1,9 +1,12 @@
-import { RefObject, useEffect, DependencyList } from 'react';
+import { useEffect, useRef } from 'react';
 
-export function useFocus(loggNode: RefObject<any>, deps?: DependencyList) {
+export function useFocus() {
+    const htmlElemRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
-        if (loggNode.current) {
-            loggNode.current.focus();
+        if (htmlElemRef.current) {
+            htmlElemRef.current.focus();
         }
-    },deps);
+    },[htmlElemRef]);
+
+    return htmlElemRef;
 }

@@ -18,7 +18,6 @@ export default function Endringslogg(props: EndringsProps) {
     const overordnetNotifikasjon = props.innhold.some((element) => !element.sett);
 
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
-    const focusRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     const requestSetOpenStatus = (setOpenTo: boolean) => {
@@ -60,14 +59,18 @@ export default function Endringslogg(props: EndringsProps) {
         }
     };
 
-    useEventListener('mousedown', handleClickOutside, [endringsloggApen]);
-    useEventListener('keydown', escHandler, [endringsloggApen]);
+    useEventListener('mousedown', handleClickOutside);
+    useEventListener('keydown', escHandler);
 
     return (
         <div ref={loggNode} className="endringslogg">
-            <EndringsloggKnapp klikk={klikk} open={endringsloggApen} nyeNotifikasjoner={overordnetNotifikasjon}
-                               buttonRef={buttonRef}/>
-            <TransitionContainer visible={endringsloggApen} focusRef={focusRef}>
+            <EndringsloggKnapp
+                klikk={klikk}
+                open={endringsloggApen}
+                nyeNotifikasjoner={overordnetNotifikasjon}
+                buttonRef={buttonRef}
+            />
+            <TransitionContainer visible={endringsloggApen}>
                 <EndringsloggHeader/>
                 <div className={'innhold-container'}>
                     <EndringsloggInnhold innleggsListe={props.innhold}/>

@@ -29,7 +29,6 @@ class MetrikkEkspanderbartpanel extends React.Component<AllProps, MetrikkEkspand
     render() {
         // onClick og lamellNavn er plukket ut slik at de ikke blir sendt videre
         const { children, onClick, lamellNavn, ...rest } = this.props;
-        console.log('props', this.props);
         return (
             <div className="blokk-xxs portefolje__ekspanderbarpanel">
                 <Ekspanderbartpanel

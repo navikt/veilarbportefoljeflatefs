@@ -27,17 +27,15 @@ interface DispatchProps {
 type AllProps = SokVeilederProps & DispatchProps;
 
 function SokVeileder(props: AllProps) {
+    const [valgteVeileder, setValgteVeileder] = useState<string[]>(props.filtervalg.veiledere || []);
+
+    useEffect(() => {
+        setValgteVeileder(props.filtervalg.veiledere || [])
+    },[props.filtervalg.veiledere]);
+
     if(!props.skalVises) {
         return null;
     }
-
-    const [valgteVeileder, setValgteVeileder] = useState<string[]>(props.filtervalg.veiledere || []);
-
-    useEffect(()=> {
-        if(props.filtervalg.veiledere) {
-            setValgteVeileder(props.filtervalg.veiledere)
-        }
-    },[props.filtervalg.veiledere]);
 
     const harValg = valgteVeileder.length > 0;
 
