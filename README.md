@@ -1,4 +1,6 @@
-# Portefølje-klientside
+[![CircleCI](https://circleci.com/gh/navikt/veilarbportefoljeflatefs.svg?style=svg)](https://circleci.com/gh/navikt/veilarbportefoljeflatefs)
+
+# Portefølje-klientside / "Oversikten"
 
 Applikasjonen benytter seg av fetchmock-biblioteket for å kunne mocke ut avhengigheter. Se i `mocks/`.
 
