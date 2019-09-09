@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
 import { PortefoljeData } from '../ducks/portefolje';
+import { REMOTE_STORE_URL } from '../components/endringslogg/utils/endringslogg-api';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -60,6 +61,11 @@ export function hentDiagramdata(enhet, filtervalg, veilederident) {
 
 export function hentEnhetsVeiledere(enhetId) {
     const url = `${VEILARBVEILEDER_URL}/api/enhet/${enhetId}/veiledere`;
+    return fetchToJson(url, MED_CREDENTIALS);
+}
+
+export function hentEnhetsVeilederGrupper(enhetId) {
+    const url = `${REMOTE_STORE_URL}veiledergrupper/${enhetId}/`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 

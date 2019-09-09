@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
-import { skjulModal } from '../ducks/modal';
-import { markerAlleBrukere } from '../ducks/portefolje';
+import { skjulModal } from '../../ducks/modal';
+import { markerAlleBrukere } from '../../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
-import { BrukerModell } from '../model-interfaces';
-import { AdvarselModal } from '../components/advarselmodal/advarsel-modal';
+import { BrukerModell } from '../../model-interfaces';
+import { AdvarselModal } from '../../components/advarselmodal/advarsel-modal';
 
 interface ArbeidslisteModalProps {
     isOpen: boolean;

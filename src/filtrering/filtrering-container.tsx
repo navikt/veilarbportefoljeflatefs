@@ -1,11 +1,16 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 import { FiltreringStatus } from './filtrering-status/filtrering-status';
+import { useEffect, useState } from 'react';
+import { hentVeilederGrupperForEnhet } from '../ducks/veilerder-grupper';
+import { AppState } from '../reducer';
+import FilteringVeilederGrupper from './filrering-veileder-grupper';
+import Innholdslaster from '../innholdslaster/innholdslaster';
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -25,7 +30,20 @@ interface FiltreringContainerProps {
 }
 
 function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
-    return (
+   const [harTilgangTilEnheten, setHarTilgangTilEnheten] = useState(false);
+   const valgtEnhet = useSelector((state: AppState) => state.veiledere.data.enhet.enhetId );
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+       // hentTilgangTilEnhet.then(resp => {
+       // if (resp){
+       //  ;
+       // }
+       // })
+
+       dispatch(hentVeilederGrupperForEnhet(valgtEnhet));
+   }, []);
+   return (
         <div className="blokk-m">
             <FiltreringNavnellerfnr
                 filtervalg={filtervalg}
@@ -42,6 +60,16 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                     veileder={veileder}
                     filtervalg={filtervalg}
                 />
+
+            </MetrikkEkspanderbartpanel>
+            <MetrikkEkspanderbartpanel
+                apen
+                tittel="Veiledergrupper"
+                tittelProps="undertittel"
+                lamellNavn="status"
+                skalVises={harTilgangTilEnheten && filtergruppe !== 'enhet'}
+            >
+                <FilteringVeilederGrupper/>
 
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel

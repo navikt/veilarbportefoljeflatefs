@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import ArbeidslisteModal from '../../modal/arbeidsliste-modal';
+import ArbeidslisteModal from '../../modal/arbeidsliste/arbeidsliste-modal';
 import {  visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
 import { ToolbarPosisjon } from './toolbar';

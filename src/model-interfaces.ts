@@ -82,6 +82,10 @@ export interface VeilederModell {
     etternavn: string;
 }
 
+export interface VeilederGruppe {
+    [gruppeNavn: string]:  string[];
+}
+
 export enum VurderingsBehov {
     ARBEIDSEVNE_VURDERING = 'ARBEIDSEVNE_VURDERING',
     IKKE_VURDERT = 'IKKE_VURDERT'

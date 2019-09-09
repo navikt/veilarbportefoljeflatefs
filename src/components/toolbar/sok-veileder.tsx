@@ -6,11 +6,9 @@ import { nameToStateSliceMap } from '../../ducks/utils';
 import { FiltervalgModell } from '../../model-interfaces';
 import { VeiledereState } from '../../ducks/veiledere';
 import { ToolbarPosisjon } from './toolbar';
-import {useState} from "react";
-import { Checkbox } from "nav-frontend-skjema";
 import SokFilterNy from "./sok-filter-ny";
-import classNames from "classnames";
 import DropdownNy from "../dropdown/dropdown-ny";
+import VeilederCheckboxes from "./veileder-checkboxes";
 
 interface SokVeilederProps {
     filtervalg: FiltervalgModell;
@@ -27,24 +25,10 @@ interface DispatchProps {
 type AllProps = SokVeilederProps & DispatchProps;
 
 function SokVeileder(props: AllProps) {
-    const [valgteVeileder, setValgteVeileder] = useState<string[]>([]);
 
-    const harValg = valgteVeileder.length > 0;
-
-    const hanterChange = (event) => {
-        const veilederTarget = event.target.value;
-        event.target.checked
-            ? setValgteVeileder([veilederTarget, ...valgteVeileder])
-            : setValgteVeileder(valgteVeileder.filter(veileder => veileder !== veilederTarget))
-    };
-
-    const createHandleOnSubmit = (filterverdi: string[], lukkDropDown: () => void) => {
-        lukkDropDown();
-        if(harValg) {
-            props.sokEtterVeileder('veiledere', filterverdi);
-            props.veilederSokt();
-            setValgteVeileder([]);
-        }
+    const createHandleOnSubmit = (filterverdi: string[]) => {
+        props.sokEtterVeileder('veiledere', filterverdi);
+        props.veilederSokt();
     };
 
     return (
@@ -58,24 +42,12 @@ function SokVeileder(props: AllProps) {
                     data={props.veiledere.data.veilederListe}
                 >
                     {liste =>
-                        <div className="checkbox-filterform">
-                            <div className="checkbox-filterform__valg">
-                                {liste.map(elem =>
-                                    <Checkbox
-                                        key={elem.ident}
-                                        label={`${elem.etternavn}, ${elem.fornavn}`}
-                                        value={elem.ident}
-                                        checked={valgteVeileder.includes(elem.ident)}
-                                        onChange={event => hanterChange(event)}
-                                    />)}
-                            </div>
-                            <div className="checkbox-filterform__valg-knapp knapperad blokk-xxs">
-                                <button onClick={_ => createHandleOnSubmit(valgteVeileder, lukkDropDown)}
-                                        className={classNames('knapp', 'knapp--mini', {'knapp--hoved': harValg})}>
-                                    {harValg ? "Velg" : "Lukk"}
-                                </button>
-                            </div>
-                        </div>
+                        <VeilederCheckboxes
+                            veilederData={liste}
+                            onSubmit={createHandleOnSubmit}
+                            lukk={lukkDropDown}
+                            valgteVeilederProps={props.filtervalg.veiledere}
+                        />
                     }
                 </SokFilterNy>
             }

@@ -33,13 +33,7 @@ function CheckboxFilterformNy({ filterId, onSubmit, valg, closeDropdown, filterv
         <div className = "skjema checkbox-filterform">
             <div className="checkbox-filterform__valg">
                 <Grid columns={kolonner}>
-                    <Checkbox
-                        key={elem.ident}
-                        label={`${elem.etternavn}, ${elem.fornavn}`}
-                        value={elem.ident}
-                        checked={valgteVeileder.includes(elem.ident)}
-                        onChange={event => hanterChange(event)}
-                    />)}
+                   <div/>
                 </Grid>
             </div>
             <div className="checkbox-filterform__under-valg">

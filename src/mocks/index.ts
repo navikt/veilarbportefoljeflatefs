@@ -5,6 +5,7 @@ import brukere from './portefolje';
 import veiledere from './veiledere';
 import statustall from './statustall';
 import tiltak from './tiltak';
+import veilederGrupper from './veileder-grupper';
 import diagramdata from './diagramdata';
 import lagDiagramData from './diagramdataV2';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
@@ -55,6 +56,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 // endringslogg
 (mock as any).patch(`/veilarbremotestore/`, respondWith((url, config, {bodyParams}) => Object.assign(endringsloggListe, bodyParams)));
 
+(mock as any).get('/veilarbremotestore/veiledergrupper/1234/', respondWith(() => veilederGrupper));
 (mock as any).get('/veilarbremotestore/?ressurs=endringslogg', respondWith(() => endringsloggListe));
 
 // veileder-api

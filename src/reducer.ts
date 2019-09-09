@@ -13,6 +13,7 @@ import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import diagramReducer from './ducks/diagram';
 import sideReducer from './ducks/ui/side';
+import veilederGruppeReducer, {VeiledereGruppeState} from './ducks/veilerder-grupper';
 import { slettCleanIUrl } from './utils/url-utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import { reducer as formReducer } from 'redux-form';
@@ -65,6 +66,7 @@ export interface AppState {
     enhettiltak: EnhettiltakState;
     nycontext: ContextState;
     features: FeaturesState;
+    veilederGrupper: VeiledereGruppeState;
     form: any; // TODO type
 }
 
@@ -93,5 +95,6 @@ export default combineReducers<AppState>({
     nycontext: contextReducer,
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
+    veilederGrupper: veilederGruppeReducer,
     form: formReducer
 });

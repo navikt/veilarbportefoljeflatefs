@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ReactNode } from 'react';
+import {ReactNode, useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './veileder-checkbox-liste.less';
@@ -47,37 +47,23 @@ const SubmitKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
     </button>
 );
 
-class VeilederCheckboxListe extends React.Component<AllProps, VeilederCheckboxListeState> {
+function VeilederCheckboxListe (props: any) {
 
-    constructor(props: AllProps) {
-        super(props);
+    const [valgteElementer, setValgteElementer] = useState<string[]>([]);
+    const [open, setOpen] = useState<boolean> (props.open);
 
-        const veiledere = props.filtervalg.veiledere;
-        this.state = {
-            open: props.open,
-            valgteElementer: veiledere ? veiledere : []
-        };
+    useEffect(()=> {
+        setOpen(props.open);
+    }, [props.open]);
 
-    }
 
-    componentDidUpdate(prevProps: AllProps) {
+    const erValgt = (value: string | undefined): boolean => {
+        return !!value && !!valgteElementer.find((valgtElement) => value === valgtElement);
+    };
 
-        const prevOpen = prevProps.open;
-        const open = this.props.open;
+    const getFiltrerteVeiledere = (): VeilederModell[] => {
 
-        if (prevOpen !== open) {
-            this.setState({ open });
-        }
-
-    }
-
-    erValgt = (value: string | undefined): boolean => {
-        return !!value && this.state.valgteElementer.findIndex((valgtElement) => value === valgtElement ) >= 0;
-    }
-
-    getFiltrerteVeiledere = (): VeilederModell[] => {
-
-        const { veilederNavnQuery, veiledere } = this.props;
+        const { veilederNavnQuery, veiledere } = props;
 
         const query = veilederNavnQuery ? veilederNavnQuery.toLowerCase().trim() : '';
 
@@ -86,68 +72,65 @@ class VeilederCheckboxListe extends React.Component<AllProps, VeilederCheckboxLi
                 veileder.navn && veileder.navn.toLowerCase().indexOf(query) >= 0 ||
                 veileder.ident && veileder.ident.toLowerCase().indexOf(query) >= 0);
 
-    }
+    };
 
-    handleCheckboxOnClick = (value: string | undefined) => {
+    const handleCheckboxOnClick = (value: string | undefined) => {
 
         if (!value) {
             return;
         }
 
-        const { valgteElementer } = this.state;
-        const erValgt = this.erValgt(value);
+        const valueErValgt = erValgt(value);
         let valgteElem;
 
-        if (!erValgt) {
+        if (!valueErValgt) {
             valgteElem = [...valgteElementer, value];
-            this.setState({ valgteElementer: valgteElem });
-        } else if(erValgt) {
+            setValgteElementer(valgteElem);
+        } else if(valueErValgt) {
             valgteElem = valgteElementer.filter((valgtElement) => value !== valgtElement);
-            this.setState({ valgteElementer: valgteElem });
+            setValgteElementer(valgteElem);
         }
 
-    }
+    };
 
-    handleSubmitKnappOnClick = (e) => {
+    const handleSubmitKnappOnClick = (e) => {
         e.preventDefault();
 
-        this.props.sokEtterVeileder(this.state.valgteElementer);
+        props.sokEtterVeileder(valgteElementer);
 
-        if (this.props.onSubmit) {
-            this.props.onSubmit();
+        if (props.onSubmit) {
+            props.onSubmit();
         }
-    }
+    };
 
-    handleLukkeKnappOnClick = (e) => {
+    const handleLukkeKnappOnClick = (e) => {
         e.preventDefault();
 
-        if (this.props.onClose) {
-            this.props.onClose();
+        if (props.onClose) {
+            props.onClose();
         }
-    }
+    };
 
-    mapVeiledereToCheckboxList = (veiledere?: VeilederModell[]): ReactNode[] | null => {
+    const mapVeiledereToCheckboxList = (veiledere?: VeilederModell[]): ReactNode[] | null => {
 
         if (!veiledere) {
             return null;
         }
 
         return veiledere.filter((vlg) => vlg.ident && vlg.navn).map((vlg) => {
-            const erValgt =  this.erValgt(vlg.ident);
+            const identErValgt =  erValgt(vlg.ident);
             return (
                 <Checkbox
                     key={vlg.ident}
                     label={vlg.navn}
-                    checked={erValgt}
-                    onChange={() =>  this.handleCheckboxOnClick(vlg.ident)}
+                    checked={identErValgt}
+                    onChange={() =>  handleCheckboxOnClick(vlg.ident)}
                 />
             );
         });
-    }
+    };
 
-    render() {
-        const { open, valgteElementer } = this.state;
-        const valgCheckboxListe = this.mapVeiledereToCheckboxList(this.getFiltrerteVeiledere());
+        const valgCheckboxListe = mapVeiledereToCheckboxList(getFiltrerteVeiledere());
         const harValg = valgCheckboxListe && valgCheckboxListe.length > 0;
         const harValgteElementer = valgteElementer && valgteElementer.length > 0;
 
@@ -163,9 +146,9 @@ class VeilederCheckboxListe extends React.Component<AllProps, VeilederCheckboxLi
                     </div>
                     <div className="checkbox-liste__valg-footer">
                         {harValgteElementer ?
-                            <SubmitKnapp onClick={this.handleSubmitKnappOnClick} />
+                            <SubmitKnapp onClick={handleSubmitKnappOnClick} />
                             :
-                            <LukkeKnapp onClick={this.handleLukkeKnappOnClick} />
+                            <LukkeKnapp onClick={handleLukkeKnappOnClick} />
                         }
                     </div>
                 </form>
@@ -179,8 +162,6 @@ class VeilederCheckboxListe extends React.Component<AllProps, VeilederCheckboxLi
                 </div>
             );
         }
-
-    }
 }
 
 const mapStateToProps = (state): StateProps => ({

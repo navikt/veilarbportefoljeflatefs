@@ -1,46 +1,38 @@
-import * as React from 'react';
+import React from 'react';
 import Ekspanderbartpanel, { EkspanderbartpanelProps } from 'nav-frontend-ekspanderbartpanel';
 import { logEvent } from '../../utils/frontend-logger';
 import { finnSideNavn } from '../../middleware/metrics-middleware';
+import {PropsWithChildren, useState} from 'react';
 
 interface MetrikkEkspanderbartpanelProps {
     lamellNavn: string;
-}
-
-interface MetrikkEkspanderbartpanelState {
-    isApen: boolean;
+    skalVises?: boolean;
 }
 
 type AllProps = MetrikkEkspanderbartpanelProps & EkspanderbartpanelProps;
 
-class MetrikkEkspanderbartpanel extends React.Component<AllProps, MetrikkEkspanderbartpanelState> {
-
-    constructor(props: AllProps) {
-        super(props);
-        this.state = { isApen: props.apen || false };
+function MetrikkEkspanderbartpanel (props: PropsWithChildren<AllProps>){
+    if(!!props.skalVises) {
+        return null;
     }
 
-    handleOnClick = () => {
-        const isApen = !this.state.isApen;
-        this.setState({ isApen });
-        logEvent('portefolje.metrikker.lamell', { navn: this.props.lamellNavn, apen: isApen, sideNavn: finnSideNavn() });
-    }
+    const[isApen, setIsApen] = useState(false);
 
-    render() {
-        // onClick og lamellNavn er plukket ut slik at de ikke blir sendt videre
-        const { children, onClick, lamellNavn, ...rest } = this.props;
-        console.log('props', this.props);
-        return (
-            <div className="blokk-xxs portefolje__ekspanderbarpanel">
-                <Ekspanderbartpanel
-                    onClick={this.handleOnClick}
-                    {...rest}
-                >
-                    {children}
-                </Ekspanderbartpanel>
-            </div>
-        );
-    }
+    const handleOnClick = () => {
+        setIsApen(!isApen);
+        logEvent('portefolje.metrikker.lamell', { navn: props.lamellNavn, apen: isApen, sideNavn: finnSideNavn() });
+    };
+    const { children, onClick, lamellNavn, ...rest } = props;
+    return (
+        <div className="blokk-xxs portefolje__ekspanderbarpanel">
+            <Ekspanderbartpanel
+                onClick={handleOnClick}
+                {...rest}
+            >
+                {children}
+            </Ekspanderbartpanel>
+        </div>
+    );
 }
 
 export default MetrikkEkspanderbartpanel;
