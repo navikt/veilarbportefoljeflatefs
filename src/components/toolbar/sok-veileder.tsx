@@ -6,7 +6,7 @@ import { nameToStateSliceMap } from '../../ducks/utils';
 import { FiltervalgModell } from '../../model-interfaces';
 import { VeiledereState } from '../../ducks/veiledere';
 import { ToolbarPosisjon } from './toolbar';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { Checkbox } from "nav-frontend-skjema";
 import SokFilterNy from "./sok-filter-ny";
 import classNames from "classnames";
@@ -27,7 +27,17 @@ interface DispatchProps {
 type AllProps = SokVeilederProps & DispatchProps;
 
 function SokVeileder(props: AllProps) {
-    const [valgteVeileder, setValgteVeileder] = useState<string[]>([]);
+    if(!props.skalVises) {
+        return null;
+    }
+
+    const [valgteVeileder, setValgteVeileder] = useState<string[]>(props.filtervalg.veiledere || []);
+
+    useEffect(()=> {
+        if(props.filtervalg.veiledere) {
+            setValgteVeileder(props.filtervalg.veiledere)
+        }
+    },[props.filtervalg.veiledere]);
 
     const harValg = valgteVeileder.length > 0;
 
