@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, getIn } from 'formik';
 import { Input } from 'nav-frontend-skjema';
 
-const OVERSKRIFT_MAKS_LENGDE = 12;
+const TITTEL_MAKS_LENGDE = 30;
 
 function FormikInput({name}) {
 
@@ -10,8 +10,8 @@ function FormikInput({name}) {
         let error: undefined| string;
         if(!value) {
             error = 'Du må fylle ut en tittel';
-        } else if(value.length > OVERSKRIFT_MAKS_LENGDE) {
-            error = `Tittelen kan ikke være lenger enn ${OVERSKRIFT_MAKS_LENGDE}`;
+        } else if(value.length > TITTEL_MAKS_LENGDE) {
+            error = `Tittelen kan ikke være lenger enn ${TITTEL_MAKS_LENGDE}`;
         }
         return error;
     };
