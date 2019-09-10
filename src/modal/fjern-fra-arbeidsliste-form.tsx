@@ -23,14 +23,14 @@ function brukerLabel(bruker) {
 interface FjernFraArbeidslisteFormProps {
     lukkModal: () => void;
     valgteBrukere: BrukerModell[];
-    onSubmit: (formData, props) => void;
+    onSubmit: (valgteBrukere: BrukerModell[], props) => void;
     slettFraArbeidslisteStatus?: Status;
 }
 
 function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus }: FjernFraArbeidslisteFormProps) {
     const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
     return (
-        <form onSubmit={()=> onSubmit}>
+        <form onSubmit={()=> onSubmit(valgteBrukere,lukkModal )}>
             <div className="arbeidsliste-listetekst">
                 <ul>
                     {valgteBrukere.map((bruker) => brukerLabel(bruker))}
@@ -48,9 +48,8 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, onSubmit, slettFra
     );
 }
 
-
-function oppdaterState(res, props: FjernFraArbeidslisteFormProps, arbeidsliste: ArbeidslisteDataModell[], dispatch) {
-    props.lukkModal();
+function oppdaterState(res, lukkModal: ()=> void, arbeidsliste: ArbeidslisteDataModell[], dispatch) {
+    lukkModal();
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -81,14 +80,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    onSubmit: (formData, props) => {
-        const arbeidsliste: ArbeidslisteDataModell[] = props.valgteBrukere.map((bruker) => ({
+    onSubmit: (valgteBrukere, lukkModal) => {
+        const arbeidsliste: ArbeidslisteDataModell[] = valgteBrukere.map((bruker) => ({
             fnr: bruker.fnr,
             kommentar: bruker.arbeidsliste.kommentar,
             frist: bruker.arbeidsliste.frist
         }));
         slettArbeidsliste(arbeidsliste)(dispatch)
-            .then((res) => oppdaterState(res, props, arbeidsliste, dispatch));
+            .then((res) => oppdaterState(res, lukkModal, arbeidsliste, dispatch));
     }
 });
 
