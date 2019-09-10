@@ -60,7 +60,7 @@
     "eslint": "^6.1.0",
     "formik": "^1.5.8",
     "highcharts": "6.1.0",
-    "history": "4.7.2",
+    "history": "4.9.0",
     "less-plugin-npm-import": "^2.1.0",
     "moment": "2.24.0",
     "nav-datovelger": "^4.3.0",
