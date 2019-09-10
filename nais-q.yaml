@@ -21,7 +21,7 @@ spec:
     max: 4
     cpuThresholdPercentage: 50
   ingresses:
-    - https://veilarbportefoljeflatefs.nais.preprod.local
+    - https://veilarbportefoljeflatefs-{{namespace}}.nais.preprod.local
     - https://app-{{namespace}}.adeo.no/veilarbportefoljeflatefs
   vault:
     enabled: true
