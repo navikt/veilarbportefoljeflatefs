@@ -73,8 +73,8 @@ export interface AppState {
 export default combineReducers<AppState>({
     ui: combineReducers({
         side: sideReducer,
-        listevisningMinOversikt: persistent('minOversiktListevisningState', location, named(ListevisningType.minOversikt, listevisningReducer), slettCleanIUrl, initialStateMinOversikt),
-        listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', location, named(ListevisningType.enhetensOversikt, listevisningReducer), slettCleanIUrl, initialStateEnhetensOversikt)
+        listevisningMinOversikt: persistent('minOversiktListevisningState', window.location, named(ListevisningType.minOversikt, listevisningReducer), slettCleanIUrl, initialStateMinOversikt),
+        listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', window.location, named(ListevisningType.enhetensOversikt, listevisningReducer), slettCleanIUrl, initialStateEnhetensOversikt)
     }),
     enheter: enheterReducer,
     portefolje: portefoljeReducer,
@@ -83,8 +83,8 @@ export default combineReducers<AppState>({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     statustall: statustallReducer,
-    filtrering: persistent('enhetsState', location, named('enhet', filtreringReducer), slettCleanIUrl, initialState),
-    filtreringMinoversikt: persistent('veilederState', location,
+    filtrering: persistent('enhetsState', window.location, named('enhet', filtreringReducer), slettCleanIUrl, initialState),
+    filtreringMinoversikt: persistent('veilederState', window.location,
         named('veileder', filtreringReducer), slettCleanIUrl, initialState),
     filtreringVeilederoversikt: named('veiledere', filtreringReducer),
     modal: modalReducer,

@@ -160,7 +160,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                            tekst="Kommentar"
+                            tekst="Tittel"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                             className="sortering-header__dato col col-xs-2"
                         />

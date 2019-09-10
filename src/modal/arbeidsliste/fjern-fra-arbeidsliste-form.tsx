@@ -2,14 +2,13 @@ import * as React from 'react';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { Element } from 'nav-frontend-typografi';
-import { reduxForm } from 'redux-form';
-import { slettArbeidsliste } from '../../ducks/arbeidsliste';
-import { oppdaterArbeidslisteForBruker } from '../../ducks/portefolje';
-import { leggTilStatustall } from '../../ducks/statustall';
-import { STATUS } from '../../ducks/utils';
-import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../../ducks/modal-feilmelding-brukere';
-import { visServerfeilModal } from '../../ducks/modal-serverfeil';
-import { ArbeidslisteDataModell, BrukerModell, Status } from '../../model-interfaces';
+import { slettArbeidsliste } from '../ducks/arbeidsliste';
+import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
+import { leggTilStatustall } from '../ducks/statustall';
+import { STATUS } from '../ducks/utils';
+import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
+import { visServerfeilModal } from '../ducks/modal-serverfeil';
+import { ArbeidslisteDataModell, BrukerModell, Status } from '../model-interfaces';
 
 function brukerLabel(bruker) {
     return (
@@ -24,21 +23,21 @@ function brukerLabel(bruker) {
 interface FjernFraArbeidslisteFormProps {
     lukkModal: () => void;
     valgteBrukere: BrukerModell[];
-    handleSubmit: () => void;
+    onSubmit: (valgteBrukere: BrukerModell[], props) => void;
     slettFraArbeidslisteStatus?: Status;
 }
 
-function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slettFraArbeidslisteStatus }: FjernFraArbeidslisteFormProps) {
+function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus }: FjernFraArbeidslisteFormProps) {
     const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={()=> onSubmit(valgteBrukere,lukkModal )}>
             <div className="arbeidsliste-listetekst">
                 <ul>
                     {valgteBrukere.map((bruker) => brukerLabel(bruker))}
                 </ul>
             </div>
             <div className="knapper">
-                <Hovedknapp className="knapp knapp--hoved mr1" spinner={laster} onClick={handleSubmit}>
+                <Hovedknapp className="knapp knapp--hoved mr1" spinner={laster} htmlType="submit">
                     Bekreft
                 </Hovedknapp>
                 <button type="button" className="knapp" onClick={lukkModal}>
@@ -49,13 +48,8 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, handleSubmit, slet
     );
 }
 
-export const FJERN_FRA_ARBEIDSLISTE_FORM_NAME = 'fjern-fra-arbeidsliste-form';
-const FjernFraArbeidslisteReduxForm = reduxForm<{}, FjernFraArbeidslisteFormProps>({
-    form: FJERN_FRA_ARBEIDSLISTE_FORM_NAME
-})(FjernFraArbeidslisteForm);
-
-function oppdaterState(res, props: FjernFraArbeidslisteFormProps, arbeidsliste: ArbeidslisteDataModell[], dispatch) {
-    props.lukkModal();
+function oppdaterState(res, lukkModal: ()=> void, arbeidsliste: ArbeidslisteDataModell[], dispatch) {
+    lukkModal();
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -85,16 +79,16 @@ const mapStateToProps = (state) => ({
     slettFraArbeidslisteStatus: state.arbeidsliste.status
 });
 
-const mapDispatchToProps = () => ({
-    onSubmit: (formData, dispatch, props) => {
-        const arbeidsliste: ArbeidslisteDataModell[] = props.valgteBrukere.map((bruker) => ({
+const mapDispatchToProps = (dispatch) => ({
+    onSubmit: (valgteBrukere, lukkModal) => {
+        const arbeidsliste: ArbeidslisteDataModell[] = valgteBrukere.map((bruker) => ({
             fnr: bruker.fnr,
             kommentar: bruker.arbeidsliste.kommentar,
             frist: bruker.arbeidsliste.frist
         }));
         slettArbeidsliste(arbeidsliste)(dispatch)
-            .then((res) => oppdaterState(res, props, arbeidsliste, dispatch));
+            .then((res) => oppdaterState(res, lukkModal, arbeidsliste, dispatch));
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FjernFraArbeidslisteReduxForm as any); // todo: fix typing
+export default connect(mapStateToProps, mapDispatchToProps)(FjernFraArbeidslisteForm);

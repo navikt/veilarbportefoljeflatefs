@@ -69,8 +69,8 @@ function VeilederCheckboxListe (props: any) {
 
         return veiledere.data.veilederListe
             .filter((veileder) =>
-                veileder.navn && veileder.navn.toLowerCase().indexOf(query) >= 0 ||
-                veileder.ident && veileder.ident.toLowerCase().indexOf(query) >= 0);
+                (veileder.navn && veileder.navn.toLowerCase().indexOf(query) >= 0 ) ||
+                (veileder.ident && veileder.ident.toLowerCase().indexOf(query) >= 0));
 
     };
 

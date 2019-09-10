@@ -57,7 +57,7 @@ const finnSkjermStorrelse = (width: number, height: number): string => {
 };
 
 const erFullskjerm = () => {
-    return screen.availWidth - window.innerWidth === 0;
+    return window.screen.availWidth - window.innerWidth === 0;
 };
 
 export const loggSkjermMetrikker = (side: Side): void => {

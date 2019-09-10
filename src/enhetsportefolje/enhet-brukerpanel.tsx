@@ -27,7 +27,7 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
         if (varForrigeBruker) {
             scrollToRef(liRef);
         }
-    }, [liRef.current, forrigeBruker, bruker]);
+    }, [varForrigeBruker]);
 
     const classname  = classNames('brukerliste__element brukerliste--border-bottom-thin', {
         'brukerliste--forrigeBruker': varForrigeBruker,

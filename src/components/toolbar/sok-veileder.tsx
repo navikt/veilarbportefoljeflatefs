@@ -6,6 +6,8 @@ import { nameToStateSliceMap } from '../../ducks/utils';
 import { FiltervalgModell } from '../../model-interfaces';
 import { VeiledereState } from '../../ducks/veiledere';
 import { ToolbarPosisjon } from './toolbar';
+import {useEffect, useState} from "react";
+import { Checkbox } from "nav-frontend-skjema";
 import SokFilterNy from "./sok-filter-ny";
 import DropdownNy from "../dropdown/dropdown-ny";
 import VeilederCheckboxes from "./veileder-checkboxes";
@@ -25,10 +27,32 @@ interface DispatchProps {
 type AllProps = SokVeilederProps & DispatchProps;
 
 function SokVeileder(props: AllProps) {
+    const [valgteVeileder, setValgteVeileder] = useState<string[]>(props.filtervalg.veiledere || []);
 
-    const createHandleOnSubmit = (filterverdi: string[]) => {
-        props.sokEtterVeileder('veiledere', filterverdi);
-        props.veilederSokt();
+    useEffect(() => {
+        setValgteVeileder(props.filtervalg.veiledere || [])
+    },[props.filtervalg.veiledere]);
+
+    if(!props.skalVises) {
+        return null;
+    }
+
+    const harValg = valgteVeileder.length > 0;
+
+    const hanterChange = (event) => {
+        const veilederTarget = event.target.value;
+        event.target.checked
+            ? setValgteVeileder([veilederTarget, ...valgteVeileder])
+            : setValgteVeileder(valgteVeileder.filter(veileder => veileder !== veilederTarget))
+    };
+
+    const createHandleOnSubmit = (filterverdi: string[], lukkDropDown: () => void) => {
+        lukkDropDown();
+        if(harValg) {
+            props.sokEtterVeileder('veiledere', filterverdi);
+            props.veilederSokt();
+            setValgteVeileder([]);
+        }
     };
 
     return (
