@@ -30,10 +30,10 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
     useLayoutEffect(() => {
-        if (varForrigeBruker) {
+        if (props.varForrigeBruker) {
             scrollToRef(liRef);
         }
-    }, [liRef.current, props.varForrigeBruker]);
+    }, [props.varForrigeBruker]);
 
     function handleArbeidslisteButtonClick(event) {
         event.preventDefault();

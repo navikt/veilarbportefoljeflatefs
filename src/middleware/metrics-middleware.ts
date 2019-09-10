@@ -1,7 +1,6 @@
 import {
     ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
     ENDRE_FILTER,
-    FiltreringState,
     VEILEDER_SOKT_FRA_TOOLBAR
 } from '../ducks/filtrering';
 import { logEvent } from '../utils/frontend-logger';

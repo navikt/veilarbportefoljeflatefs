@@ -48,7 +48,7 @@ function ArbeidslisteModalRediger({
 
     const lukkModalConfirm = (formikProps: FormikProps<FormikPropsValues>)=> {
         const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
-        if (!formikProps.dirty || confirm(dialogTekst)) {
+        if (!formikProps.dirty || window.confirm(dialogTekst)) {
             setIsOpen(false);
             formikProps.resetForm();
         }

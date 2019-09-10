@@ -64,6 +64,7 @@ function TourModal(props: TourModalProps) {
             <main className="tour-modal__main">
                 <div className="tour-modal__main--bilde-wrapper">
                     <img
+                        alt="Bilde på endringen"
                         src={step.bilde}
                         className="tour-modal__main--bilde"
                     />

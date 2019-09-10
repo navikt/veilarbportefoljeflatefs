@@ -38,7 +38,6 @@ function lagGrunndata() {
     const venterPaSvarFraBruker = randomDate({past:true});
     const venterPaSvarFraNAV = randomDate({past:true});
     const nyesteUtlopteAktivitet = randomDate({past:true});
-    const diskresjonskode = rnd(0,10) > 8 ? '7' : null;
 
     const kontrollsifre = `${rnd(0, 9)}${rnd(0, 9)}`;
 

@@ -98,6 +98,7 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
             <div ref={(ref) => { this.wrapperRef = ref; }}>
                 <div className={classNames('tilbakemelding-fab', { 'tilbakemelding-fab__trykket': isModalOpen })} onClick={this.handleFabClicked}>
                     <img
+                        alt="Åpne/Lukk tilbakemeldingform"
                         className={classNames({
                             'tilbakemelding-fab__ikon--lukke': isModalOpen,
                             'tilbakemelding-fab__ikon--apne': !isModalOpen

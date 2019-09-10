@@ -108,7 +108,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
     }
 
     render() {
-        const { name, className, disabled, children, hoyre } = this.props;
+        const { name, disabled, children, hoyre } = this.props;
         const { apen } = this.state;
 
         const augmentedChild = Children.map(children, (child: React.ReactChild) => cloneElement<any>(child as ReactElement<any>, {

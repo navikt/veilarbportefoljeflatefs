@@ -1,5 +1,4 @@
 import { AktiviteterModell } from '../model-interfaces';
-import * as React from 'react';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array((end - start) + ((inclusive) ? 1 : 0)).fill(0).map((_, i) => start + i);

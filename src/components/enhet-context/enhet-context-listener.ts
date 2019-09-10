@@ -1,4 +1,4 @@
-import WebSocketImpl, { Status } from './websocket-impl';
+import WebSocketImpl from './websocket-impl';
 
 const frontendlogger = (window as any).frontendlogger;
 const warn = (frontendlogger && frontendlogger.warn) || (() => null);
