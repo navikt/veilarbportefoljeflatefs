@@ -28,7 +28,7 @@ function FormikInput({name}) {
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         name={name}
-                        bredde="M"
+                        bredde="L"
                         feil={errors && touched ? {feilmelding: errors} : undefined}
                         value={field.value}
                     />
