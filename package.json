@@ -8,7 +8,7 @@
   "homepage": "/veilarbportefoljeflatefs",
   "scripts": {
     "start": "cross-env REACT_APP_MOCK=true craco start",
-    "dev": "cross-env PORT=9596 craco start",
+    "diev": "cross-env PORT=9596 craco start",
     "build": "craco build",
     "test:coverage": "nyc npm test",
     "eject": "react-scripts eject",
