@@ -20,6 +20,9 @@
     "precommit": "npm run lint:fix",
     "test": "craco test --watchAll=false"
   },
+  "resolutions": {
+    "**/fsevents": "^1.2.9"
+  },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
     "@types/faker": "4.1.1",
