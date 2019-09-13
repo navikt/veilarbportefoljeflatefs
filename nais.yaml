@@ -6,7 +6,7 @@ metadata:
   cluster:
     - prod-fss
   labels:
-    team: voff
+    team: pto
 spec:
   image: docker.pkg.github.com/navikt/veilarbportefoljeflatefs/veilarbportefoljeflatefs:{{version}}
   port: 8080
@@ -20,6 +20,9 @@ spec:
     min: 2
     max: 4
     cpuThresholdPercentage: 50
+  prometheus:
+    enabled: true
+    path: veilarbportefoljeflatefs/internal/metrics
   ingresses:
     - https://veilarbportefoljeflatefs.nais.adeo.no
     - https://app.adeo.no/veilarbportefoljeflatefs
