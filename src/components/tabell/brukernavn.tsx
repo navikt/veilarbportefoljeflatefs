@@ -17,7 +17,7 @@ const brukerNavn = (className, bruker, enhetId, skalJusteres) => (
                 setFraBrukerIUrl(bruker.fnr);
             }}
             href={`${window.location.origin}/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
-            className={classnames('lenke lenke--frittstaende', {'lenke--justert': skalJusteres})}
+            className={classnames('lenke lenke--frittstaende')}
 
         >
         {settSammenNavn(bruker)}
