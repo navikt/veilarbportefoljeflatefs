@@ -130,7 +130,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.REGDATO}
-                            tekst="Reg. dato"
+                            tekst="Registreringsdato"
                             className="col col-xs-2"
                         />
                         <SorteringHeader
