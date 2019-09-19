@@ -126,6 +126,14 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             className="col col-xs-2"
                         />
                         <SorteringHeader
+                            sortering={Sorteringsfelt.REGDATO}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.REGDATO}
+                            tekst="Reg. dato"
+                            className="col col-xs-2"
+                        />
+                        <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}

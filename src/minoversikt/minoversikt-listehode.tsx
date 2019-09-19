@@ -147,6 +147,14 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             tekst="Fødselsnummer"
                         />
                         <SorteringHeader
+                            className="col col-xs-2"
+                            sortering={Sorteringsfelt.REGDATO}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.REGDATO}
+                            tekst="Reg. dato"
+                        />
+                        <SorteringHeader
                             sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}

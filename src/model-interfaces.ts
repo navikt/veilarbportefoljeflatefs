@@ -1,4 +1,4 @@
-import {FiltreringAktiviteterValg} from "./ducks/filtrering";
+import { FiltreringAktiviteterValg} from './ducks/filtrering';
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -11,6 +11,7 @@ export enum Sorteringsfelt {
     VALGTE_AKTIVITETER = 'valgteaktiviteter',
     ETTERNAVN = 'etternavn',
     FODSELSNUMMER = 'fodselsnummer',
+    REGDATO = 'registreringsdato',
     UTLOPSDATO = 'utlopsdato',
     DAGPENGER_UTLOP_UKE = 'dagputlopuke',
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
