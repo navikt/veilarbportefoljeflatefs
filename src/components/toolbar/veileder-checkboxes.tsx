@@ -1,37 +1,17 @@
-import React, {useState} from "react";
+import React from "react";
 import {Checkbox} from "nav-frontend-skjema";
 import classNames from "classnames";
 import {VeilederModell} from "../../model-interfaces";
 
 interface VeilederCheckboxes {
     veilederData: VeilederModell[];
-    onSubmit : (valgteVeileder: string[]) => void;
-    lukk?: () => void;
-    valgteVeilederProps?: string[];
+    onSubmit : () => void;
+    valgteVeileder: string[];
+    onVeilederValgt: (event: React.SyntheticEvent) => void;
 }
 
-function VeilederCheckboxes ({veilederData, onSubmit , lukk, valgteVeilederProps}: VeilederCheckboxes) {
-    const [valgteVeileder, setValgteVeileder] = useState<string[]>(valgteVeilederProps || []);
+function VeilederCheckboxes ({veilederData, onSubmit, valgteVeileder, onVeilederValgt}: VeilederCheckboxes) {
     const harValg = valgteVeileder.length > 0;
-
-
-    const hanterChange = (event) => {
-        const veilederTarget = event.target.value;
-        event.target.checked
-            ? setValgteVeileder([veilederTarget, ...valgteVeileder])
-            : setValgteVeileder(valgteVeileder.filter(veileder => veileder !== veilederTarget))
-    };
-
-    const hanterSubmit = () => {
-        if (harValg) {
-            onSubmit(valgteVeileder);
-            setValgteVeileder([]);
-        }
-        if(lukk) {
-            lukk();
-        }
-    };
-
 
     return (
         <div className="checkbox-filterform">
@@ -42,12 +22,12 @@ function VeilederCheckboxes ({veilederData, onSubmit , lukk, valgteVeilederProps
                         label={`${elem.etternavn}, ${elem.fornavn}`}
                         value={elem.ident}
                         checked={valgteVeileder.includes(elem.ident)}
-                        onChange={event => hanterChange(event)}
+                        onChange={event => onVeilederValgt(event)}
                     />)}
             </div>
             <div className="checkbox-filterform__valg-knapp knapperad blokk-xxs">
                 <button
-                    onClick={()=> hanterSubmit()}
+                    onClick={onSubmit}
                     className={classNames('knapp', 'knapp--mini', {'knapp--hoved': harValg})}
                 >
                     {harValg ? "Velg" : "Lukk"}

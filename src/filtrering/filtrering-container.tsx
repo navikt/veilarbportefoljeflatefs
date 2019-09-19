@@ -10,7 +10,9 @@ import { useEffect, useState } from 'react';
 import { hentVeilederGrupperForEnhet } from '../ducks/veilerder-grupper';
 import { AppState } from '../reducer';
 import FilteringVeilederGrupper from './filrering-veileder-grupper';
-import Innholdslaster from '../innholdslaster/innholdslaster';
+import { hentTilgangTilEnhet } from '../middleware/api';
+import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
+import { VIS_VEILEDER_GRUPPER } from '../konstanter';
 
 const defaultVeileder: VeilederModell = {
     ident: '',
@@ -29,21 +31,26 @@ interface FiltreringContainerProps {
     };
 }
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
-   const [harTilgangTilEnheten, setHarTilgangTilEnheten] = useState(false);
-   const valgtEnhet = useSelector((state: AppState) => state.veiledere.data.enhet.enhetId );
-   const dispatch = useDispatch();
+function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeileder, actions, enhettiltak}: FiltreringContainerProps) {
+    const [harTilgangTilEnheten, setHarTilgangTilEnheten] = useState(false);
+    const valgtEnhet = useSelector((state: AppState) => state.veiledere.data.enhet.enhetId );
+    const harVeilederGruppeFeature = useFeatureSelector()(VIS_VEILEDER_GRUPPER);
+    const dispatch = useDispatch();
 
-   useEffect(() => {
-       // hentTilgangTilEnhet.then(resp => {
-       // if (resp){
-       //  ;
-       // }
-       // })
+    useEffect(() => {
+        /*if(harVeilederGruppeFeature) {
+            hentTilgangTilEnhet(valgtEnhet).then(resp => {
+                if (resp) {
+                    setHarTilgangTilEnheten(true);
 
-       dispatch(hentVeilederGrupperForEnhet(valgtEnhet));
-   }, []);
-   return (
+                }
+            });
+        }
+         */
+        dispatch(hentVeilederGrupperForEnhet(valgtEnhet));
+    }, [dispatch, valgtEnhet, harVeilederGruppeFeature]);
+
+    return (
         <div className="blokk-m">
             <FiltreringNavnellerfnr
                 filtervalg={filtervalg}
@@ -67,7 +74,6 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                 tittel="Veiledergrupper"
                 tittelProps="undertittel"
                 lamellNavn="status"
-                skalVises={harTilgangTilEnheten && filtergruppe !== 'enhet'}
             >
                 <FilteringVeilederGrupper/>
 

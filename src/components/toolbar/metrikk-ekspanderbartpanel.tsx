@@ -12,16 +12,17 @@ interface MetrikkEkspanderbartpanelProps {
 type AllProps = MetrikkEkspanderbartpanelProps & EkspanderbartpanelProps;
 
 function MetrikkEkspanderbartpanel (props: PropsWithChildren<AllProps>){
-    if(!!props.skalVises) {
-        return null;
-    }
-
     const[isApen, setIsApen] = useState(false);
 
     const handleOnClick = () => {
         setIsApen(!isApen);
         logEvent('portefolje.metrikker.lamell', { navn: props.lamellNavn, apen: isApen, sideNavn: finnSideNavn() });
     };
+
+    if(!!props.skalVises) {
+        return null;
+    }
+
     const { children, onClick, lamellNavn, ...rest } = props;
     return (
         <div className="blokk-xxs portefolje__ekspanderbarpanel">

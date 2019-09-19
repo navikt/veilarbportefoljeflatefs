@@ -3,7 +3,6 @@ import { Input } from 'nav-frontend-skjema';
 import { FiltervalgModell } from '../model-interfaces';
 import './filtrering-navnellerfnr.less';
 import { useEffect, useState } from 'react';
-import { useTimeOut } from '../hooks/use-timeout';
 
 interface FiltreringNavnEllerFnrProps {
     filtervalg: FiltervalgModell;

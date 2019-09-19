@@ -19,6 +19,7 @@ function getVeilederNavn (veilederePaEnheten: VeilederModell[], veilderId ) {
 
 function VeilederGruppeModalLage (props: VeilederGruppeModalProps & Omit<ModalProps, "contentLabel" | "children">) {
     const [valgteVeileder, setValgteVeileder] = useState<string[]>([]);
+    const [gruppeNavn, setGruppeNavn] = useState<string>("");
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
 
     const hanterChange = (event) => {
@@ -30,28 +31,13 @@ function VeilederGruppeModalLage (props: VeilederGruppeModalProps & Omit<ModalPr
 
     useEffect(() => {
         if(props.veilerderGruppe) {
-            setValgteVeileder(Object.values(props.veilerderGruppe).flat(1))
+            setValgteVeileder(props.veilerderGruppe.veileder);
+            setGruppeNavn(props.veilerderGruppe.gruppeNavn);
         }
     },[props.veilerderGruppe]);
 
+
     const modalTittel = props.veilerderGruppe ? "Rediger veiledergruppe": "Lage veiledergruppe";
-
-    const veiledergruppeNavn = ()=> {
-        if(props.veilerderGruppe) {
-            return (
-                <Element>
-                    {Object.keys(props.veilerderGruppe)[0]}
-                </Element>
-            )
-        }
-
-        return (
-            <Input
-                name="veilederrgruppenavn"
-                label="Veileder gruppenavn"
-            />
-        )
-    };
 
     return (
         <ModalWrapper
@@ -68,18 +54,12 @@ function VeilederGruppeModalLage (props: VeilederGruppeModalProps & Omit<ModalPr
                     <Innholdstittel tag="h1" className="blokk-xs">
                         {modalTittel}
                     </Innholdstittel>
-                    <Normaltekst className="blokk-s">
-                        Her kan du lage en veildergruppe
-                    </Normaltekst>
-                    {veiledergruppeNavn()}
-                    <ul>
-                        {valgteVeileder.map(veilder =>
-                            <li>
-                                <span>{veilder}</span>
-                                <Knapp>Slett fra listen</Knapp>
-                            </li>
-                        )}
-                    </ul>
+                    <Input
+                        label="Gruppe navn:"
+                        value={gruppeNavn}
+                        bredde="L"
+                        onChange={e => setGruppeNavn(e.target.value)}
+                    />
                     <SokFilterNy
                         label="Velg veiledere"
                         placeholder="Søk veileder"
@@ -88,14 +68,14 @@ function VeilederGruppeModalLage (props: VeilederGruppeModalProps & Omit<ModalPr
                         {liste =>
                             <div className="checkbox-filterform">
                                 <div className="checkbox-filterform__valg">
-                                {liste.map( elem =>
-                                    <Checkbox
-                                        key={elem.ident}
-                                        label={`${elem.etternavn}, ${elem.fornavn}`}
-                                        value={elem.ident}
-                                        checked={valgteVeileder.includes(elem.ident)}
-                                        onChange={event => hanterChange(event)}
-                                    />)}
+                                    {liste.map( elem =>
+                                        <Checkbox
+                                            key={elem.ident}
+                                            label={`${elem.etternavn}, ${elem.fornavn}`}
+                                            value={elem.ident}
+                                            checked={valgteVeileder.includes(elem.ident)}
+                                            onChange={event => hanterChange(event)}
+                                        />)}
                                 </div>
                             </div>
                         }

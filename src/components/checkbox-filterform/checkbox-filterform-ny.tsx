@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import classNames from 'classnames';
 import Grid from '../grid/grid';
-import {Checkbox} from "nav-frontend-skjema";
 
 function CheckboxFilterformNy({ filterId, onSubmit, valg, closeDropdown, filtervalg, kolonner = 1 }) {
     const initialValues = Object.keys(valg).reduce((acc, v) => ({
@@ -21,12 +20,14 @@ function CheckboxFilterformNy({ filterId, onSubmit, valg, closeDropdown, filterv
         }
     };
 
+    /*
     const hanterChange = (event) => {
         const veilederTarget = event.target.value;
         event.target.checked
             ? setValgteFilterValg([veilederTarget, ...valgteFilterValg])
             : setValgteFilterValg(valgteFilterValg.filter(veileder => veileder !== veilederTarget))
     };
+    */
 
     const harValg = valgteFilterValg.length > 0;
     return (

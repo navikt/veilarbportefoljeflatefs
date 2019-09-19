@@ -7,7 +7,6 @@ import { FiltervalgModell } from '../../model-interfaces';
 import { VeiledereState } from '../../ducks/veiledere';
 import { ToolbarPosisjon } from './toolbar';
 import {useEffect, useState} from "react";
-import { Checkbox } from "nav-frontend-skjema";
 import SokFilterNy from "./sok-filter-ny";
 import DropdownNy from "../dropdown/dropdown-ny";
 import VeilederCheckboxes from "./veileder-checkboxes";
@@ -67,10 +66,10 @@ function SokVeileder(props: AllProps) {
                 >
                     {liste =>
                         <VeilederCheckboxes
-                            veilederData={liste}
-                            onSubmit={createHandleOnSubmit}
-                            lukk={lukkDropDown}
-                            valgteVeilederProps={props.filtervalg.veiledere}
+                            veilederData = {liste}
+                            onSubmit={() => createHandleOnSubmit(valgteVeileder, lukkDropDown)}
+                            valgteVeileder={valgteVeileder}
+                            onVeilederValgt={hanterChange}
                         />
                     }
                 </SokFilterNy>

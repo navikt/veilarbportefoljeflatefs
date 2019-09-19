@@ -83,7 +83,9 @@ export interface VeilederModell {
 }
 
 export interface VeilederGruppe {
-    [gruppeNavn: string]:  string[];
+    gruppeNavn: string;
+    gruppeId: string;
+    veileder : string[];
 }
 
 export enum VurderingsBehov {

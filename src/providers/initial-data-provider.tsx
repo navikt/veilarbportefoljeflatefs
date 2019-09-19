@@ -10,7 +10,6 @@ import { leggEnhetIUrl } from '../utils/url-utils';
 import { settEnhetIDekorator } from '../eventhandtering';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { VeilederModell } from '../model-interfaces';
-import { withRouter, RouteComponentProps } from 'react-router';
 
 interface DispatchProps {
     children: React.ReactNode;
@@ -25,7 +24,7 @@ interface StateProps {
     veiledere: VeilederModell;
 }
 
-type InitialDataProviderProps = DispatchProps & StateProps & RouteComponentProps<{}>;
+type InitialDataProviderProps = DispatchProps & StateProps;
 
 class InitialDataProvider extends React.Component<InitialDataProviderProps> {
 
@@ -46,7 +45,7 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps> {
         const {enheter} = this.props;
 
         const enhetliste = enheter.data;
-        const enhetFraUrl = parse(this.props.location.search).enhet;// eslint-disable-line no-undef
+        const enhetFraUrl = parse(window.location.search).enhet;// eslint-disable-line no-undef
         const enhetIdListe = enhetliste.map((enhet) => (enhet.enhetId));
 
         if (enhetFraUrl !== '') {
@@ -95,4 +94,4 @@ const mapDispatchToProps = (dispatch) => ({
     velgEnhet: (enhetid) => dispatch(velgEnhetForVeileder({enhetId: enhetid}))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(InitialDataProvider));
+export default connect(mapStateToProps, mapDispatchToProps)(InitialDataProvider);

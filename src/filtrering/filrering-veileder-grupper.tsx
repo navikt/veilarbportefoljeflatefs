@@ -4,9 +4,12 @@ import { AppState } from '../reducer';
 import SokFilterNy from '../components/toolbar/sok-filter-ny';
 import { Radio } from 'nav-frontend-skjema';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { Knapp } from 'nav-frontend-knapper';
+import { Flatknapp, Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import VeilederGruppeModalLage from '../modal/veiledergruppe/veileder-gruppe-modal-lage';
 import { VeilederGruppe } from '../model-interfaces';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import { RedigerKnapp } from '../components/knapper/rediger-knapp';
+import { LeggTilKnapp } from '../components/knapper/legg-til-knapp';
 
 function FilteringVeilederGrupper() {
     const [veilederGruppeModal, setVeilederGruppeModal] = useState(false);
@@ -20,9 +23,11 @@ function FilteringVeilederGrupper() {
                     veilederGruppeModal={veilederGruppeModal}
                     setVeilederGruppeModal={setVeilederGruppeModal}
                 />
-                : <Knapp onClick={()=> setVeilederGruppeModal(true)}>
-                    Lage veiledergruppe
-                </Knapp>
+                :
+                <>
+                    <AlertStripeInfo>Fante inge grupper før enheten. Legg til grupper genom att trykke på pluss-knappen.</AlertStripeInfo>
+                    <LeggTilKnapp onClick={()=> setVeilederGruppeModal(true)}/>
+                </>
 
             }
         </Innholdslaster>
@@ -31,28 +36,27 @@ function FilteringVeilederGrupper() {
 
 function VeilederGruppeInnhold(props: {veilederGrupper: VeilederGruppe[], veilederGruppeModal: boolean, setVeilederGruppeModal: (b: boolean) => void}) {
 
-    const [valgtVeilederGruppe, setValgtVeilederGruppe] = useState<VeilederGruppe | undefined>();
+    const [valgtVeilederGruppe, setValgtVeilederGruppe] = useState<string>('');
 
-    const veilederGrupperNavn  = props.veilederGrupper.map((veilederGruppe) => Object.keys(veilederGruppe)[0]);
+    const hanterVelgGruppe = (gruppeId: any) => setValgtVeilederGruppe(gruppeId);
 
-    const hanterVelgGruppe = (gruppeNavn: string) => {
-        setValgtVeilederGruppe(props.veilederGrupper.find((elem) => Object.keys(elem)[0] === gruppeNavn));
-    };
+    const finnVeilederGruppe = () => props.veilederGrupper.find((elem) => elem.gruppeId === valgtVeilederGruppe);
 
     return (
         <>
             <SokFilterNy
-                data={veilederGrupperNavn}
+                data={props.veilederGrupper}
                 label="Velg veiledergruppe"
                 placeholder="Søk veiledergruppe"
             >
                 {(filteredData) =>
                     filteredData.map((veilederGruppe) =>
                         <Radio
-                            key={veilederGruppe}
-                            name={`${veilederGruppe}-gruppen`}
-                            label={veilederGruppe}
-                            value={veilederGruppe}
+                            key={veilederGruppe.gruppeId}
+                            name={`${veilederGruppe.gruppeNavn}-gruppe`}
+                            label={veilederGruppe.gruppeNavn}
+                            value={veilederGruppe.gruppeId}
+                            checked={veilederGruppe.gruppeId === valgtVeilederGruppe}
                             onChange={(e) => hanterVelgGruppe(e.target.value)}
                         />
                     )
@@ -60,13 +64,15 @@ function VeilederGruppeInnhold(props: {veilederGrupper: VeilederGruppe[], veiled
 
             </SokFilterNy>
             <div>
-                <Knapp>Velg</Knapp>
-                <Knapp onClick={()=> props.setVeilederGruppeModal(true)}>Rediger</Knapp>
-                <Knapp onClick={()=> props.setVeilederGruppeModal(true)}>Lage</Knapp>
+                <div>
+                    <Hovedknapp mini>Velg</Hovedknapp>
+                    <RedigerKnapp onClick={()=> props.setVeilederGruppeModal(true)}/>
+                </div>
+                <LeggTilKnapp onClick={()=> props.setVeilederGruppeModal(true)}/>
             </div>
             <VeilederGruppeModalLage
                 isOpen={props.veilederGruppeModal}
-                veilerderGruppe={valgtVeilederGruppe}
+                veilerderGruppe={finnVeilederGruppe()}
                 onRequestClose={()=> props.setVeilederGruppeModal(false)}
             />
         </>

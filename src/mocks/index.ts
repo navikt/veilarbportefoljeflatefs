@@ -55,14 +55,18 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 
 // endringslogg
 (mock as any).patch(`/veilarbremotestore/`, respondWith((url, config, {bodyParams}) => Object.assign(endringsloggListe, bodyParams)));
+(mock as any).get('/veilarbremotestore/?ressurs=endringslogg', respondWith(endringsloggListe));
 
-(mock as any).get('/veilarbremotestore/veiledergrupper/1234/', respondWith(() => veilederGrupper));
-(mock as any).get('/veilarbremotestore/?ressurs=endringslogg', respondWith(() => endringsloggListe));
+(mock as any).get('/veilarbveiledergrupper/api/enhet/1234/', respondWith(veilederGrupper));
+(mock as any).post('/veilarbveiledergrupper/api/enhet/:enhet', respondWith(() => veilederGrupper));
+(mock as any).put('/veilarbveiledergrupper/api/enhet/:enhet', respondWith(() => veilederGrupper));
+(mock as any).delete('/veilarbveiledergrupper/api/enhet/:enhet', respondWith(() => veilederGrupper));
 
 // veileder-api
 (mock as any).get('/veilarbveileder/api/veileder/enheter', respondWith(enheter));
 (mock as any).get('/veilarbveileder/api/veileder/me', respondWith(me));
 (mock as any).get('express:/veilarbveileder/api/enhet/:enhet/veiledere', respondWith(veiledere));
+(mock as any).get('/veilarbveileder/api/veileder/enhet/:enhet/tilgangTilEnhet', respondWith(true));
 
 // portefolje-api
 (mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/statustall', respondWith(delayed(1000, randomFailure(statustall))));

@@ -20,7 +20,7 @@ const initialState = {
     data: {
         veilederListe: [],
         enhet: {
-            enhetId: "",
+            enhetId: '',
         }
     }
 };
