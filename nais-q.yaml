@@ -20,6 +20,9 @@ spec:
     min: 2
     max: 4
     cpuThresholdPercentage: 50
+  prometheus:
+    enabled: true
+    path: veilarbportefoljeflatefs/internal/metrics
   ingresses:
     - https://veilarbportefoljeflatefs-{{namespace}}.nais.preprod.local
     - https://app-{{namespace}}.adeo.no/veilarbportefoljeflatefs

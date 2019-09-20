@@ -12,7 +12,7 @@ spec:
   port: 8080
   liveness:
     initialDelay: 20
-      path: veilarbportefoljeflatefs/internal/isAlive
+    path: veilarbportefoljeflatefs/internal/isAlive
   readiness:
     path: veilarbportefoljeflatefs/internal/selftest
     initialDelay: 20
