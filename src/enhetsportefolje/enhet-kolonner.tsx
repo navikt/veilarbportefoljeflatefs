@@ -1,6 +1,7 @@
 import * as React from 'react';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
+import BrukerOppfolgingStartet from '../components/tabell/brukeroppfolgingstartet';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     I_AVTALT_AKTIVITET,
@@ -48,6 +49,8 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
+            <BrukerOppfolgingStartet className="col col-xs-2" bruker={bruker} />
+
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}

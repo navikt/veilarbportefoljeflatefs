@@ -20,6 +20,7 @@ export enum Veilederpaginering {
 export enum Kolonne {
     BRUKER = 'bruker',
     FODSELSNR = 'fodselsnr',
+    OPPFOLGINGSTARTET = 'oppfolgingstartet',
     VEILEDER = 'veileder',
     NAVIDENT = 'navident',
     UTLOPTE_AKTIVITETER = 'utlopteaktiviteter',
@@ -70,14 +71,14 @@ export interface ListevisningState {
 }
 
 export const initialStateEnhetensOversikt: ListevisningState = {
-    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.NAVIDENT, Kolonne.VEILEDER],
-    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.NAVIDENT, Kolonne.VEILEDER],
+    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET, Kolonne.NAVIDENT, Kolonne.VEILEDER],
+    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET, Kolonne.NAVIDENT, Kolonne.VEILEDER],
     lukketInfopanel: false
 };
 
 export const initialStateMinOversikt: ListevisningState = {
-    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR],
-    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR],
+    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET,],
+    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET,],
     lukketInfopanel: false
 };
 

@@ -11,7 +11,7 @@ export enum Sorteringsfelt {
     VALGTE_AKTIVITETER = 'valgteaktiviteter',
     ETTERNAVN = 'etternavn',
     FODSELSNUMMER = 'fodselsnummer',
-    REGDATO = 'registreringsdato',
+    OPPFOLGINGSTARTET = 'oppfolgingstartet',
     UTLOPSDATO = 'utlopsdato',
     DAGPENGER_UTLOP_UKE = 'dagputlopuke',
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
@@ -93,6 +93,7 @@ export interface BrukerModell {
     guid: string;
     fornavn: string;
     etternavn: string;
+    oppfolingstartet: string,
     veilederId?: string;
     sikkerhetstiltak: string[];
     diskresjonskode?: string;

@@ -47,7 +47,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>
                     <div className="brukerliste__innhold">
                         <Listeoverskrift
-                            className="listeoverskrift__bruker listeoverskriftcol col col-xs-4"
+                            className="listeoverskrift__bruker listeoverskriftcol col col-xs-6"
                             tekst="Bruker"
                         />
                         <Listeoverskrift
@@ -126,12 +126,12 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             className="col col-xs-2"
                         />
                         <SorteringHeader
-                            sortering={Sorteringsfelt.REGDATO}
+                            sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
-                            erValgt={sorteringsfelt === Sorteringsfelt.REGDATO}
-                            tekst="Registreringsdato"
-                            className="col col-xs-2"
+                            erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
+                            tekst="Oppfølging startet"
+                            className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}

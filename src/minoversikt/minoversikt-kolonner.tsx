@@ -2,6 +2,7 @@ import * as React from 'react';
 import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker, aapRettighetsperiode } from '../utils/utils';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
+import BrukerOppfolgingStartet from '../components/tabell/brukeroppfolgingstartet';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER, VENTER_PA_SVAR_FRA_NAV,
@@ -45,6 +46,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}  skalJusteres={skalJusteres}/>
             <BrukerFnr className="col col-xs-2" bruker={bruker}/>
+            <BrukerOppfolgingStartet className="col col-xs-2" bruker={bruker}/>
             <DatoKolonne
                 className="col col-xs-2"
                 dato={arbeidslisteFrist}

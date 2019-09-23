@@ -49,7 +49,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     <div className="brukerliste__gutter-left brukerliste--min-width-minside" />
                     <div className="brukerliste__innhold">
                         <Listeoverskrift
-                            className="listeoverskrift__bruker listeoverskrift col col-xs-4"
+                            className="listeoverskrift__bruker listeoverskrift col col-xs-6"
                             tekst="Bruker"
                         />
                         <Listeoverskrift
@@ -147,12 +147,12 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             tekst="Fødselsnummer"
                         />
                         <SorteringHeader
-                            className="col col-xs-2"
-                            sortering={Sorteringsfelt.REGDATO}
+                            sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
-                            erValgt={sorteringsfelt === Sorteringsfelt.REGDATO}
-                            tekst="Registreringsdato"
+                            erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
+                            tekst="Oppfølging startet"
+                            className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
