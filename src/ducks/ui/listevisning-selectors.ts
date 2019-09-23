@@ -2,7 +2,7 @@ import { AppState } from '../../reducer';
 import { Kolonne, ListevisningType } from './listevisning';
 import { AktiviteterValg, FiltreringAktiviteterValg } from '../filtrering';
 import {
-    I_AVTALT_AKTIVITET,
+    I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE,
     MOTER_IDAG,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -63,5 +63,7 @@ export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolo
         .concat(addHvis(Kolonne.UTLOP_AKTIVITET, harValgtMinstEnAktivitet(filtervalg.aktiviteter) && harIkkeValgtTiltakstype(filtervalg.tiltakstyper)))
         .concat(addHvis(Kolonne.START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
         .concat(addHvis(Kolonne.NESTE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
-        .concat(addHvis(Kolonne.FORRIGE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)));
+        .concat(addHvis(Kolonne.FORRIGE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
+        .concat(addHvis(Kolonne.ARBEIDSLISTE_FRIST, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)))
+        .concat(addHvis(Kolonne.ARBEIDSLISTE_OVERSKRIFT, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)));
 }

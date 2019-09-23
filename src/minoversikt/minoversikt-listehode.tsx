@@ -41,6 +41,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'Vedtaksperiode' : 'Vedtaksperiode';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
+    const arbeidslisteErAktiv = ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && (valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT) || valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST));
 
     return (
         <div className="brukerliste__header">
@@ -53,8 +54,8 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             tekst="Bruker"
                         />
                         <Listeoverskrift
-                            className="listeoverskrift__arbeidsliste listeoverskrift col col-xs-4"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                            className={"listeoverskrift__arbeidsliste listeoverskrift col col-xs-4"}
+                            skalVises={arbeidslisteErAktiv}
                             tekst="Arbeidsliste"
                         />
                         <Listeoverskrift
@@ -160,7 +161,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
                             tekst="Dato"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)}
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
@@ -169,7 +170,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
                             tekst="Tittel"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)}
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
@@ -233,11 +234,11 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
                             tekst="Klokkeslett"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
                             className="sortering-header__dato col col-xs-2"
                         />
                         <Header
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)&& valgteKolonner.includes(Kolonne.MOTER_IDAG)}
                             className="sortering-header__dato col col-xs-2"
                         >
                             Varighet

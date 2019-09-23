@@ -20,3 +20,5 @@ alternativerConfig.set(Kolonne.START_DATO_AKTIVITET, {tekstlabel: 'Startdato akt
 alternativerConfig.set(Kolonne.NESTE_START_DATO_AKTIVITET, {tekstlabel: 'Neste startdato aktivitet'});
 alternativerConfig.set(Kolonne.FORRIGE_START_DATO_AKTIVITET, {tekstlabel: 'Startdato aktivitet passert'});
 alternativerConfig.set(Kolonne.MOTER_IDAG, {tekstlabel: 'Møte med NAV idag'});
+alternativerConfig.set(Kolonne.ARBEIDSLISTE_FRIST, {tekstlabel: 'Arbeidsliste frist'});
+alternativerConfig.set(Kolonne.ARBEIDSLISTE_OVERSKRIFT, {tekstlabel: 'Arbeidsliste tittel'});

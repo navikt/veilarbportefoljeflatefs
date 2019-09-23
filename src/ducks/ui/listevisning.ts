@@ -32,6 +32,8 @@ export enum Kolonne {
     NESTE_START_DATO_AKTIVITET = 'neste_aktivitet_start',
     FORRIGE_START_DATO_AKTIVITET = 'forrige_aktivitet_start',
     MOTER_IDAG = 'moterMedNavIdag',
+    ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
+    ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
 }
 
 export enum ListevisningType {
@@ -77,8 +79,8 @@ export const initialStateEnhetensOversikt: ListevisningState = {
 };
 
 export const initialStateMinOversikt: ListevisningState = {
-    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET,],
-    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET,],
+    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET],
+    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET],
     lukketInfopanel: false
 };
 

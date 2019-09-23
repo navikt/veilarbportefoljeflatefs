@@ -12,7 +12,7 @@ export function ytelseFilterErAktiv(ytelse) {
     return !!ytelse;
 }
 
-export function nesteUtlopsdatoEllerNull(utlopsdatoer: AktiviteterModell | null): Date | null {
+export function nesteUtlopsdatoEllerNull(utlopsdatoer: AktiviteterModell | null | undefined): Date | null {
     if (!utlopsdatoer) {
         return null;
     }
