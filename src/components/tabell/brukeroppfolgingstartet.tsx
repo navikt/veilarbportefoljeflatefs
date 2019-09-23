@@ -6,4 +6,4 @@ interface BrukerOppfolgingStartetProps {
     bruker: BrukerModell;
 }
 
-export default ({ className, bruker }: BrukerOppfolgingStartetProps) => <span className={className}>{bruker.oppfolingstartet}</span>;
+export default ({ className, bruker }: BrukerOppfolgingStartetProps) => <span className={className}>{bruker.oppfolgingStartDato}</span>;
