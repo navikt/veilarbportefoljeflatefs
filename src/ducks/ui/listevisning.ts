@@ -77,8 +77,8 @@ export const initialStateEnhetensOversikt: ListevisningState = {
 };
 
 export const initialStateMinOversikt: ListevisningState = {
-    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET,],
-    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET,],
+    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET],
+    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET],
     lukketInfopanel: false
 };
 
