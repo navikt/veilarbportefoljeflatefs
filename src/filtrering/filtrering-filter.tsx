@@ -22,12 +22,12 @@ import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 
 interface FiltreringFilterProps {
     filtervalg: any;
-    actions: any;
+    endreFiltervalg: (filterId: string, filterVerdi: string) => void;
     enhettiltak: any;
     intl?: any;
 }
 
-const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterProps) => (
+const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak }: FiltreringFilterProps) => (
     <div>
         <div className="row">
             <div className="col-sm-12 blokk-xs">
@@ -39,7 +39,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                         form="alder"
                         kolonner={2}
                         valg={alder}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
@@ -47,7 +47,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                     <CheckboxFilterform
                         form="fodselsdagIMnd"
                         valg={fodselsdagIMnd()}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
@@ -55,7 +55,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                     <CheckboxFilterform
                         form="kjonn"
                         valg={kjonn}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
@@ -68,7 +68,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                     <CheckboxFilterform
                         form="innsatsgruppe"
                         valg={innsatsgruppe}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
@@ -76,7 +76,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                     <CheckboxFilterform
                         form="hovedmal"
                         valg={hovedmal}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
@@ -84,7 +84,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                     <CheckboxFilterform
                         form="formidlingsgruppe"
                         valg={formidlingsgruppe}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
@@ -92,7 +92,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                     <CheckboxFilterform
                         form="servicegruppe"
                         valg={servicegruppe}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
@@ -100,7 +100,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                     <CheckboxFilterform
                         form="manuellBrukerStatus"
                         valg={manuellBrukerStatus}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
@@ -113,7 +113,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                     <CheckboxFilterform
                         form="rettighetsgruppe"
                         valg={rettighetsgruppe}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
@@ -121,7 +121,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                     <RadioFilterform
                         form="ytelse"
                         valg={ytelse}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
@@ -136,7 +136,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                         form="aktiviteter"
                         valg={aktiviteter}
                         filtervalg={filtervalg}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                     />
                 </Dropdown>
                 <Dropdown
@@ -147,7 +147,7 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                         form="tiltakstyper"
                         valg={enhettiltak}
                         filtervalg={filtervalg}
-                        onSubmit={actions.endreFiltervalg}
+                        onSubmit={endreFiltervalg}
                     />
                 </Dropdown>
             </div>
