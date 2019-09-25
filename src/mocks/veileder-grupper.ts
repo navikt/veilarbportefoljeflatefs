@@ -1,6 +1,12 @@
-import { VeilederGruppe } from '../model-interfaces';
+import { VeilederGruppe, VeilederModell } from '../model-interfaces';
 
-export default [
-    {gruppeNavn : 'Fantastic Four', gruppeId: '12', veileder: ['Z0001', 'Z0002', 'Z0003', 'Z0004']},
-    {gruppeNavn: 'Prinsess Gruppen', gruppeId: '13', veileder: ['Z0006', 'Z0007']}
-] as VeilederGruppe [];
+export const veilederGrupper = (veiledere: VeilederModell [] ) => {
+    const veilederGruppe1 = veiledere.slice(0,4).map((v) => v.ident);
+    const veilederGruppe2 = veiledere.slice(5,10).map((v) => v.ident);
+    return (
+        [
+            {gruppeNavn: 'Fantastic Four', gruppeId: '12', veileder: veilederGruppe1},
+            {gruppeNavn: 'Prinsess Gruppen', gruppeId: '13', veileder: veilederGruppe2}
+        ] as VeilederGruppe []
+    );
+};

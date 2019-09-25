@@ -1,5 +1,67 @@
 .veildergruppe-modal {
     &__form {
         min-width: 35rem;
+        margin-top: 1rem;
+
+        h1 {
+            padding-left: 1rem;
+        }
+    }
+
+    &__content {
+        margin: 0 3rem;
+    }
+
+    &__sokefilter {
+        margin-top: 2rem;
+
+        .checkbox-filterform__valg {
+            border: 1px solid @navGra60;
+            border-radius: 0.25rem;
+        }
+    }
+
+    &__valgteveileder {
+        grid-column-gap: 1rem;
+
+        &__elem {
+            padding: 0.5rem;
+            border-bottom: 1px solid @navGra40;
+            display: flex;
+            justify-content: space-between;
+
+            .fjern--knapp {
+                border: none;
+                text-align: center;
+                background: transparent;
+                padding: 0;
+
+                svg {
+                    g {
+                        stroke: @navGra60;
+                    }
+                }
+            }
+
+            .fjern--knapp:hover {
+                svg {
+                    g {
+                        stroke: @navGra80;
+                    }
+                }
+            }
+
+            .fjern--knapp:focus {
+                border: 1px solid @navDypBlaDarken60;
+                box-shadow: none;
+                svg{
+                    g {
+                        stroke: @navGra80;
+                    }
+                }
+            }
+
+
+        }
     }
 }

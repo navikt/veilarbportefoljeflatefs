@@ -4,7 +4,7 @@ import { AppState } from '../reducer';
 import SokFilterNy from '../components/toolbar/sok-filter-ny';
 import { Radio } from 'nav-frontend-skjema';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { Flatknapp, Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import VeilederGruppeModalLage from '../modal/veiledergruppe/veileder-gruppe-modal-lage';
 import { VeilederGruppe } from '../model-interfaces';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
@@ -64,11 +64,11 @@ function VeilederGruppeInnhold(props: {veilederGrupper: VeilederGruppe[], veiled
 
             </SokFilterNy>
             <div>
+                <LeggTilKnapp onClick={()=> props.setVeilederGruppeModal(true)}/>
                 <div>
                     <Hovedknapp mini>Velg</Hovedknapp>
                     <RedigerKnapp onClick={()=> props.setVeilederGruppeModal(true)}/>
                 </div>
-                <LeggTilKnapp onClick={()=> props.setVeilederGruppeModal(true)}/>
             </div>
             <VeilederGruppeModalLage
                 isOpen={props.veilederGruppeModal}

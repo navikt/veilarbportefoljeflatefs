@@ -5,7 +5,7 @@ import brukere from './portefolje';
 import veiledere from './veiledere';
 import statustall from './statustall';
 import tiltak from './tiltak';
-import veilederGrupper from './veileder-grupper';
+import { veilederGrupper } from './veileder-grupper';
 import diagramdata from './diagramdata';
 import lagDiagramData from './diagramdataV2';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
@@ -57,10 +57,10 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 (mock as any).patch(`/veilarbremotestore/`, respondWith((url, config, {bodyParams}) => Object.assign(endringsloggListe, bodyParams)));
 (mock as any).get('/veilarbremotestore/?ressurs=endringslogg', respondWith(endringsloggListe));
 
-(mock as any).get('/veilarbveiledergrupper/api/enhet/1234/', respondWith(veilederGrupper));
-(mock as any).post('/veilarbveiledergrupper/api/enhet/:enhet', respondWith(() => veilederGrupper));
-(mock as any).put('/veilarbveiledergrupper/api/enhet/:enhet', respondWith(() => veilederGrupper));
-(mock as any).delete('/veilarbveiledergrupper/api/enhet/:enhet', respondWith(() => veilederGrupper));
+(mock as any).get('/veilarbveiledergrupper/api/enhet/1234/', respondWith(veilederGrupper(veiledere.veilederListe)));
+(mock as any).post('/veilarbveiledergrupper/api/enhet/:enhet', respondWith(() => veilederGrupper(veiledere.veilederListe)));
+(mock as any).put('/veilarbveiledergrupper/api/enhet/:enhet', respondWith(() => veilederGrupper(veiledere.veilederListe)));
+(mock as any).delete('/veilarbveiledergrupper/api/enhet/:enhet', respondWith(() => veilederGrupper(veiledere.veilederListe)));
 
 // veileder-api
 (mock as any).get('/veilarbveileder/api/veileder/enheter', respondWith(enheter));
