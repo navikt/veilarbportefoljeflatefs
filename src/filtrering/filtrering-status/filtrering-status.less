@@ -4,9 +4,24 @@
 
 .filtrering-oversikt {
 
+    .ufordeltebrukere {
+        width: 33%;
+    }
+
     &__kolonne {
+        position: relative;
+    }
+
+    &__kolonne:after {
+        content:"";
+        background: #ccc;
+        position: absolute;
+        bottom: 25%;
+        right: 0;
+        top: 5px;
+        height: 85%;
+        width: 1px;
         margin-right: 1rem;
-        border-right: 1px solid @navGra60;
     }
 
     &__totalt-antall {

@@ -2,19 +2,15 @@ import {useDispatch} from "react-redux";
 import {endreFiltervalg} from "../../ducks/filtrering";
 import React from "react";
 import {fjernFerdigfilter, leggTilFerdigFilter} from "./filter-utils";
-import {FiltreringStatusContainer} from "./filtrering-status-components/filtrering-wrapper";
 import {FiltreringStatusProps} from "./filtrering-status";
 import {useStatusTallSelector} from "../../hooks/redux/use-statustall";
-import BarInputCheckbox from "../../components/barinput/barinput-checkbox";
 import {
     ER_SYKMELDT_MED_ARBEIDSGIVER, I_AVTALT_AKTIVITET, IKKE_I_AVTALT_AKTIVITET, INAKTIVE_BRUKERE, MOTER_IDAG,
     TRENGER_VURDERING,
     UFORDELTE_BRUKERE, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from "../filter-konstanter";
-import {BarInputRadio} from "../../components/barinput/barinput-radio";
 import {Checkbox, Radio} from "nav-frontend-skjema";
-import {Element} from "nav-frontend-typografi";
 import {tekstAntallBrukere} from "../../utils/tekst-utils";
 import Grid from "../../components/grid/grid";
 
@@ -46,7 +42,8 @@ export function FiltreringStatusNy (props: FiltreringStatusProps) {
     return (
         <div className="filtrering-oversikt panel">
             <Checkbox
-                label={<span>Ufordelte brukere <span className="filtrering-oversikt__antall">{statusTall.ufordelteBrukere}</span></span>}
+                className="ufordeltebrukere"
+                label={<StatusLabel antall={statusTall.ufordelteBrukere} labelNavn="Ufordelte brukere"/>}
                 onChange={handleCheckboxChange}
                 value={UFORDELTE_BRUKERE}
                 checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}

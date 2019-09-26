@@ -53,8 +53,8 @@ function lagGrunndata() {
             monthValue: mnd,
             year: 1900 + ar
         },
-        fornavn: faker.name.firstName(kjonn === 'K' ? 1 : 0),
-        etternavn: faker.name.lastName(kjonn === 'K' ? 1 : 0),
+        fornavn: faker.name.firstName(kjonn === 'K' ? 0 : 1),
+        etternavn: faker.name.lastName(kjonn === 'K' ? 0 : 1),
         kjonn,
         erDoed,
         nyesteUtlopteAktivitet,

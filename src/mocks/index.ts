@@ -3,7 +3,7 @@ import enheter from './enheter';
 import me from './me';
 import brukere from './portefolje';
 import veiledere from './veiledere';
-import statustall from './statustall';
+import { statustall}  from './statustall';
 import tiltak from './tiltak';
 import diagramdata from './diagramdata';
 import lagDiagramData from './diagramdataV2';
@@ -11,6 +11,7 @@ import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
 import { API_BASE_URL, FEATURE_URL } from '../middleware/api';
 import { endringsloggListe } from './endringslogg';
+import {BrukerModell, FiltervalgModell} from "../model-interfaces";
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, enheter.enhetliste[0].enhetId, alleBrukere);
@@ -18,8 +19,46 @@ function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     return enhetportefolje;
 }
 
-function lagPortefolje(queryParams, enhet, alleBrukere) {
+function kjonnFilter (f: BrukerModell, kjonn: string[]| undefined) {
+    if(!kjonn) {
+        return true;
+    }
+    return kjonn.reduce((acc, elem) => (elem === "K" && f.kjonn === "K") || (elem === "M" && f.kjonn === "M"), true)
+}
+
+function filterIshFerdigFilter (f: BrukerModell, ferdigfilterListe: string[]) {
+    return ferdigfilterListe.reduce((acc, elem) => {
+        switch (elem) {
+            case "UFORDELTE_BRUKERE":
+                return acc && f.nyForEnhet;
+            case "TRENGER_VURDERING":
+                return acc && f.trengerVurdering;
+            case "ER_SYKMELDT_MED_ARBEIDSGIVER":
+                return acc && f.erSykmeldtMedArbeidsgiver;
+            case "MOTER_IDAG" :
+                return acc && !!f.moteStartTid && !!f.moteSluttTid;
+            case "VENTER_PA_SVAR_FRA_BRUKER":
+                return acc && !!f.venterPaSvarFraBruker;
+            case "VENTER_PA_SVAR_FRA_NAV":
+                return acc && !!f.venterPaSvarFraNAV;
+            default:
+                return acc;
+        }
+    } , true);
+}
+
+function filtrerBruker (alleBruker: BrukerModell[] , bodyParams?: FiltervalgModell ) {
+    return bodyParams
+        ? alleBruker
+            .filter(b => filterIshFerdigFilter(b, bodyParams.ferdigfilterListe))
+            .filter(b => kjonnFilter(b, bodyParams.kjonn))
+        : alleBruker;
+}
+
+
+function lagPortefolje(queryParams, enhet, alleBrukere, bodyParams?: FiltervalgModell) {
     const { fra, antall } = queryParams;
+
     const maybeFra = parseInt(fra, 10);
     const maybeAntal = parseInt(antall, 10);
 
@@ -45,7 +84,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
         antallTotalt: alleBrukere.length,
         antallReturnert: antallInt,
         fraIndex: fraInt,
-        brukere: filtrerteBrukere
+        brukere: filtrerBruker(filtrerteBrukere, bodyParams)
     };
 }
 
@@ -63,11 +102,11 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 (mock as any).get('express:/veilarbveileder/api/enhet/:enhet/veiledere', respondWith(veiledere));
 
 // portefolje-api
-(mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/statustall', respondWith(delayed(1000, randomFailure(statustall))));
-(mock as any).post('express:/veilarbportefolje/api/enhet/:enhet/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefolje(queryParams, extra.enhet, brukere)));
+(mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/statustall', respondWith(delayed(1000, randomFailure(statustall(brukere)))));
+(mock as any).post('express:/veilarbportefolje/api/enhet/:enhet/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefolje(queryParams, extra.enhet, brukere, bodyParams)));
 (mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/portefoljestorrelser*', respondWith(() => lagPortefoljeStorrelser()));
 (mock as any).post('express:/veilarbportefolje/api/veileder/:ident/portefolje*', respondWith((url, config, { queryParams, bodyParams, extra }) => lagPortefoljeForVeileder(queryParams, brukere)));
-(mock as any).get('express:/veilarbportefolje/api/veileder/:veileder/statustall*', respondWith(delayed(1000, randomFailure(statustall))));
+(mock as any).get('express:/veilarbportefolje/api/veileder/:veileder/statustall*', respondWith(delayed(1000, randomFailure(statustall(brukere)))));
 (mock as any).get('express:/veilarbportefolje/api/enhet/:enhet/tiltak', () => respondWith(tiltak));
 
 // diagram-api

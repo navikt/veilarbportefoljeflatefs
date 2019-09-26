@@ -5,7 +5,7 @@ import DocumentTitle from 'react-document-title';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
-import FiltreringContainer from '../filtrering/filtrering-container';
+import FiltreringContainer, {defaultVeileder} from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
@@ -24,6 +24,10 @@ import { pagineringSetup } from '../ducks/paginering';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './minoversikt-side.less';
+import {sjekkFeature} from "../ducks/features";
+import {FLYTT_STATUSFILTER} from "../konstanter";
+import MetrikkEkspanderbartpanel from "../components/toolbar/metrikk-ekspanderbartpanel";
+import {FiltreringStatusNy} from "../filtrering/filtrering-status/filtrering-status-ny";
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -36,6 +40,7 @@ interface StateProps {
     sorteringsfelt: string;
     sorteringsrekkefolge: string;
     innloggetVeilederIdent: string | undefined;
+    harFeature: (feature: string) => boolean;
 }
 
 interface IdentProps {
@@ -93,10 +98,11 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     }
 
     render() {
-        const { enheter, veiledere, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
+        const { enheter, veiledere, filtervalg, statustall, enhettiltak, listevisning, harFeature, ...props } = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
         const innloggetVeileder = { ident: enheter.ident|| '', fornavn: '', etternavn: '', navn: ''};
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
+        const harFlyttStatusFeature = harFeature(FLYTT_STATUSFILTER);
 
         const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
 
@@ -109,7 +115,7 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
         return (
             <DocumentTitle title="Min oversikt">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                    <div className="minoversikt-side blokk-xl">
+                    <div className="blokk-xl">
                         {visesAnnenVeiledersPortefolje ?
                             <Link to="/veiledere" className="typo-normal tilbaketilveileder">
                                 <i className="chevron--venstre" />
@@ -123,21 +129,30 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                 <LenkerMinoversikt
                                     veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
                                 />
-                                <div id="oversikt-sideinnhold" role="tabpanel">
-                                    <p className="typo-infotekst begrensetbredde blokk-l">
-                                        Her får du oversikt over alle brukere som er tildelt deg eller ditt team.
-                                        Du kan filtrere ytterligere eller flytte brukere til en annen veileder i din enhet.
-                                    </p>
+                                <div id="oversikt-sideinnhold" className="minoversikt-side" role="tabpanel">
                                     <div className="row">
                                         <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
                                             <FiltreringContainer
                                                 filtervalg={filtervalg}
-                                                filtergruppe="veileder"
-                                                veileder={gjeldendeVeileder}
                                                 enhettiltak={enhettiltak.data.tiltak}
+                                                filtergruppe="enhet"
+                                                harFlyttStatusFeature={harFlyttStatusFeature}
                                             />
                                         </div>
                                         <div className="col-lg-9 col-md-12 col-sm-12">
+                                            <MetrikkEkspanderbartpanel
+                                                apen
+                                                tittel="Status"
+                                                tittelProps="undertittel"
+                                                lamellNavn="status"
+                                                hidden={!harFlyttStatusFeature}
+                                            >
+                                                <FiltreringStatusNy
+                                                    filtergruppe="enhet"
+                                                    filtervalg={filtervalg}
+                                                    veileder={defaultVeileder}
+                                                />
+                                            </MetrikkEkspanderbartpanel>
                                             <FiltreringLabelContainer
                                                 filtervalg={filtervalg}
                                                 filtergruppe="veileder"
@@ -172,7 +187,8 @@ const mapStateToProps = (state): StateProps => ({
     listevisning: state.ui.listevisningMinOversikt,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
-    innloggetVeilederIdent: state.enheter.ident
+    innloggetVeilederIdent: state.enheter.ident,
+    harFeature: (feature: string) => sjekkFeature(state, feature)
 });
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
