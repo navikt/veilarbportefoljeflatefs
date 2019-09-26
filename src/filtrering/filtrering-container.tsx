@@ -19,17 +19,15 @@ interface FiltreringContainerProps {
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
     veileder: VeilederModell;
-    actions: {
-        endreFiltervalg: (filterId: string, filterVerdi: string) => void;
-    };
+    endreFiltervalg: (filterId: string, filterVerdi: string) => void;
 }
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
+function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, endreFiltervalg, enhettiltak }: FiltreringContainerProps) {
     return (
         <div className="blokk-m">
             <FiltreringNavnellerfnr
                 filtervalg={filtervalg}
-                actions={actions}
+                endreFiltervalg={endreFiltervalg}
             />
             <MetrikkEkspanderbartpanel
                 apen
@@ -51,7 +49,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                 lamellNavn="filtergruppe"
             >
                 <FiltreringFilter
-                    actions={actions}
+                    endreFiltervalg={endreFiltervalg}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
                 />
@@ -61,10 +59,8 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    actions: {
-        endreFiltervalg: (filterId: string, filterVerdi: string) => {
-            dispatch(endreFiltervalg(filterId, filterVerdi, ownProps.filtergruppe, ownProps.veileder && ownProps.veileder.ident));
-        }
+    endreFiltervalg: (filterId: string, filterVerdi: string) => {
+        dispatch(endreFiltervalg(filterId, filterVerdi, ownProps.filtergruppe, ownProps.veileder && ownProps.veileder.ident));
     }
 });
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import Lenker from '../lenker/lenker';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
+import EnhetsportefoljeVisning from './enhetsportefolje-visning';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
