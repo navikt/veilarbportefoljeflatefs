@@ -42,7 +42,7 @@ function VeilederGruppeModalLage (props: VeilederGruppeModalProps & Omit<ModalPr
             contentLabel="Lage veildergruppe"
             onRequestClose={()=> {
                 props.onRequestClose();
-                props.veilerderGruppe && setValgteVeileder(props.veilerderGruppe.veileder);
+                props.veilerderGruppe ? setValgteVeileder(props.veilerderGruppe.veileder): setValgteVeileder([]);
 
             }}
             portalClassName="veildergruppe-modal"

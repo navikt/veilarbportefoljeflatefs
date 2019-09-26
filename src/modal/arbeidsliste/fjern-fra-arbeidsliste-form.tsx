@@ -30,9 +30,9 @@ interface FjernFraArbeidslisteFormProps {
 function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus }: FjernFraArbeidslisteFormProps) {
     const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
     return (
-        <form onSubmit={(event)=> {
-            event.preventDefault();
-            onSubmit(valgteBrukere,lukkModal )
+        <form onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit(valgteBrukere, lukkModal);
         }}>
             <div className="arbeidsliste-listetekst">
                 <ul>

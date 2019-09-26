@@ -14,7 +14,7 @@ import { hentTilgangTilEnhet } from '../middleware/api';
 import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
 import { VIS_VEILEDER_GRUPPER } from '../konstanter';
 
-const defaultVeileder: VeilederModell = {
+export const defaultVeileder: VeilederModell = {
     ident: '',
     navn: '',
     fornavn: '',
@@ -26,13 +26,12 @@ interface FiltreringContainerProps {
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
     veileder: VeilederModell;
-    actions: {
-        endreFiltervalg: (filterId: string, filterVerdi: string) => void;
-    };
+    endreFiltervalg: (filterId: string, filterVerdi: string) => void;
 }
 
-function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeileder, actions, enhettiltak}: FiltreringContainerProps) {
+function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, endreFiltervalg, enhettiltak }: FiltreringContainerProps) {
     const [harTilgangTilEnheten, setHarTilgangTilEnheten] = useState(false);
+
     const valgtEnhet = useSelector((state: AppState) => state.veiledere.data.enhet.enhetId );
     const harVeilederGruppeFeature = useFeatureSelector()(VIS_VEILEDER_GRUPPER);
     const dispatch = useDispatch();
@@ -54,7 +53,7 @@ function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeiled
         <div className="blokk-m">
             <FiltreringNavnellerfnr
                 filtervalg={filtervalg}
-                actions={actions}
+                endreFiltervalg={endreFiltervalg}
             />
             <MetrikkEkspanderbartpanel
                 apen
@@ -85,7 +84,7 @@ function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeiled
                 lamellNavn="filtergruppe"
             >
                 <FiltreringFilter
-                    actions={actions}
+                    endreFiltervalg={endreFiltervalg}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
                 />
@@ -95,10 +94,8 @@ function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeiled
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    actions: {
-        endreFiltervalg: (filterId: string, filterVerdi: string) => {
-            dispatch(endreFiltervalg(filterId, filterVerdi, ownProps.filtergruppe, ownProps.veileder && ownProps.veileder.ident));
-        }
+    endreFiltervalg: (filterId: string, filterVerdi: string | string[] ) => {
+        dispatch(endreFiltervalg(filterId, filterVerdi, ownProps.filtergruppe, ownProps.veileder && ownProps.veileder.ident));
     }
 });
 

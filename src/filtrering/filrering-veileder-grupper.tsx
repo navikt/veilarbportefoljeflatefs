@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import { AppState } from '../reducer';
 import SokFilterNy from '../components/toolbar/sok-filter-ny';
 import { Radio } from 'nav-frontend-skjema';
@@ -10,6 +10,8 @@ import { VeilederGruppe } from '../model-interfaces';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { RedigerKnapp } from '../components/knapper/rediger-knapp';
 import { LeggTilKnapp } from '../components/knapper/legg-til-knapp';
+import {endreFiltervalg} from "../ducks/filtrering";
+import {defaultVeileder} from "./filtrering-container";
 
 function FilteringVeilederGrupper() {
     const [veilederGruppeModal, setVeilederGruppeModal] = useState(false);
@@ -34,13 +36,28 @@ function FilteringVeilederGrupper() {
     );
 }
 
-function VeilederGruppeInnhold(props: {veilederGrupper: VeilederGruppe[], veilederGruppeModal: boolean, setVeilederGruppeModal: (b: boolean) => void}) {
 
-    const [valgtVeilederGruppe, setValgtVeilederGruppe] = useState<string>('');
+interface VeilederGruppeInnholdProps {
+    veilederGrupper: VeilederGruppe[],
+    veilederGruppeModal: boolean,
+    setVeilederGruppeModal: (b: boolean) => void
+}
 
-    const hanterVelgGruppe = (gruppeId: any) => setValgtVeilederGruppe(gruppeId);
+function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps ) {
 
-    const finnVeilederGruppe = () => props.veilederGrupper.find((elem) => elem.gruppeId === valgtVeilederGruppe);
+    const [valgtVeilederGruppe, setValgtVeilederGruppe] = useState<VeilederGruppe | undefined>();
+
+    const dispatch = useDispatch();
+
+    const velgGruppe = (filterVerdi)=>
+        dispatch(endreFiltervalg("veiledere", filterVerdi, "enhet", defaultVeileder));
+
+    const hanterVelgGruppe = (gruppeId: any) => {
+        const veilederGruppe = finnVeilederGruppe(gruppeId);
+        setValgtVeilederGruppe(veilederGruppe);
+    }
+
+    const finnVeilederGruppe = (vg) => props.veilederGrupper.find((elem) => elem.gruppeId === vg);
 
     return (
         <>
@@ -56,7 +73,7 @@ function VeilederGruppeInnhold(props: {veilederGrupper: VeilederGruppe[], veiled
                             name={`${veilederGruppe.gruppeNavn}-gruppe`}
                             label={veilederGruppe.gruppeNavn}
                             value={veilederGruppe.gruppeId}
-                            checked={veilederGruppe.gruppeId === valgtVeilederGruppe}
+                            checked={ valgtVeilederGruppe ? valgtVeilederGruppe.gruppeId === veilederGruppe.gruppeId  : false}
                             onChange={(e) => hanterVelgGruppe(e.target.value)}
                         />
                     )
@@ -64,15 +81,20 @@ function VeilederGruppeInnhold(props: {veilederGrupper: VeilederGruppe[], veiled
 
             </SokFilterNy>
             <div>
-                <LeggTilKnapp onClick={()=> props.setVeilederGruppeModal(true)}/>
+                <LeggTilKnapp onClick={()=> {
+                    setValgtVeilederGruppe(undefined);
+                    props.setVeilederGruppeModal(true)
+                }}/>
                 <div>
-                    <Hovedknapp mini>Velg</Hovedknapp>
+                    <Hovedknapp mini onClick={()=> velgGruppe(valgtVeilederGruppe ? valgtVeilederGruppe.veileder : [])}>
+                        Velg
+                    </Hovedknapp>
                     <RedigerKnapp onClick={()=> props.setVeilederGruppeModal(true)}/>
                 </div>
             </div>
             <VeilederGruppeModalLage
                 isOpen={props.veilederGruppeModal}
-                veilerderGruppe={finnVeilederGruppe()}
+                veilerderGruppe={valgtVeilederGruppe}
                 onRequestClose={()=> props.setVeilederGruppeModal(false)}
             />
         </>
