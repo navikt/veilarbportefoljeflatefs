@@ -4,12 +4,28 @@
 
 .filtrering-oversikt {
 
-    .skjema__input {
-        padding: 0.15rem 0;
+    &__kolonne {
+        margin-right: 1rem;
+        border-right: 1px solid @navGra60;
     }
 
     &__totalt-antall {
         font-weight: 800 !important;
     }
+
+    .skjemaelement__label {
+        width: 80%;
+
+        &__filter-status {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .skjema__input {
+        padding: 0.15rem 0;
+    }
+
+
 
 }

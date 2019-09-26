@@ -13,7 +13,7 @@ import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avt
 import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
 import { FiltervalgModell, VeilederModell } from '../../model-interfaces';
 
-interface FiltreringStatusProps {
+export interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
     veileder: VeilederModell;

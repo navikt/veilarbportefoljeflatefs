@@ -10,13 +10,7 @@ export function FiltreringStatusInavtiveBrukere(props: FiltreringStatusGruppe) {
 
     return (
         <BarInputGruppe>
-            <BarInputRadio
-                filterNavn="inaktiveBrukere"
-                handleChange={props.handleChange}
-                max={statusTall.totalt}
-                antall={statusTall.inaktiveBrukere}
-                checked={props.ferdigfilterListe.includes(INAKTIVE_BRUKERE)}
-            />
+
         </BarInputGruppe>
     );
 }

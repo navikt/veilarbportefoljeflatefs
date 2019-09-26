@@ -2,6 +2,7 @@ import * as React from 'react';
 import Ekspanderbartpanel, { EkspanderbartpanelProps } from 'nav-frontend-ekspanderbartpanel';
 import { logEvent } from '../../utils/frontend-logger';
 import { finnSideNavn } from '../../middleware/metrics-middleware';
+import hiddenIf from "../hidden-if/hidden-if";
 
 interface MetrikkEkspanderbartpanelProps {
     lamellNavn: string;
@@ -42,4 +43,4 @@ class MetrikkEkspanderbartpanel extends React.Component<AllProps, MetrikkEkspand
     }
 }
 
-export default MetrikkEkspanderbartpanel;
+export default hiddenIf(MetrikkEkspanderbartpanel);

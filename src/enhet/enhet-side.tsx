@@ -15,10 +15,14 @@ import { AppState } from '../reducer';
 import { FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { pagineringSetup } from '../ducks/paginering';
-import FiltreringContainer from '../filtrering/filtrering-container';
+import FiltreringContainer, {defaultVeileder} from '../filtrering/filtrering-container';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './enhet-side.less';
+import {sjekkFeature} from "../ducks/features";
+import {FLYTT_STATUSFILTER} from "../konstanter";
+import {FiltreringStatusNy} from "../filtrering/filtrering-status/filtrering-status-ny";
+import MetrikkEkspanderbartpanel from "../components/toolbar/metrikk-ekspanderbartpanel";
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -28,6 +32,7 @@ interface StateProps {
     enhettiltak: EnhettiltakState;
     listevisning: ListevisningState;
     innloggetVeilederIdent: string | undefined;
+    harFeature: (feature: string) => boolean;
 }
 
 interface DispatchProps {
@@ -60,25 +65,35 @@ class EnhetSide extends React.Component<EnhetSideProps> {
     }
 
     render() {
-        const { filtervalg, veilederliste, statustall, enhettiltak, listevisning } = this.props;
+        const { filtervalg, veilederliste, statustall, enhettiltak, listevisning, harFeature } = this.props;
+        const harFlyttStatusFeature = harFeature(FLYTT_STATUSFILTER);
         return (
             <DocumentTitle title="Enhetens oversikt">
-                <div className="enhet-side blokk-xl">
+                <div className="blokk-xl">
                     <Lenker />
                     <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                        <div id="oversikt-sideinnhold" role="tabpanel">
-                            <p className="typo-infotekst begrensetbredde blokk-l">
-                                Her får du oversikt over alle brukere som er tilknyttet enheten du er logget inn på.
-                                Du kan filtrere ytterligere, søke opp veiledere og flytte eller fordele brukere.
-                            </p>
+                        <div className="enhet-side">
                             <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
                                 <FiltreringContainer
                                     filtervalg={filtervalg}
                                     enhettiltak={enhettiltak.data.tiltak}
                                     filtergruppe="enhet"
+                                    harFlyttStatusFeature={harFlyttStatusFeature}
                                 />
                             </div>
                             <div className="col-lg-9 col-md-12 col-sm-12">
+                                <MetrikkEkspanderbartpanel
+                                    apen
+                                    tittel="Status"
+                                    tittelProps="undertittel"
+                                    lamellNavn="status"
+                                    hidden={!harFlyttStatusFeature}
+                                >
+                                    <FiltreringStatusNy
+                                        filtervalg={filtervalg}
+                                        veileder={defaultVeileder}
+                                    />
+                                </MetrikkEkspanderbartpanel>
                                 <FiltreringLabelContainer
                                     filtervalg={{
                                         ...filtervalg,
@@ -108,6 +123,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
     enhettiltak: state.enhettiltak,
     listevisning: state.ui.listevisningEnhetensOversikt,
     innloggetVeilederIdent: state.enheter.ident,
+    harFeature: (feature: string) => sjekkFeature(state, feature)
 });
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({

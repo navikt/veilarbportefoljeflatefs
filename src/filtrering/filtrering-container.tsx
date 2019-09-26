@@ -7,7 +7,7 @@ import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 import { FiltreringStatus } from './filtrering-status/filtrering-status';
 
-const defaultVeileder: VeilederModell = {
+export const defaultVeileder: VeilederModell = {
     ident: '',
     navn: '',
     fornavn: '',
@@ -19,12 +19,13 @@ interface FiltreringContainerProps {
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
     veileder: VeilederModell;
+    harFlyttStatusFeature: boolean;
     actions: {
         endreFiltervalg: (filterId: string, filterVerdi: string) => void;
     };
 }
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, actions, enhettiltak }: FiltreringContainerProps) {
+function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, actions, enhettiltak, harFlyttStatusFeature }: FiltreringContainerProps) {
     return (
         <div className="blokk-m">
             <FiltreringNavnellerfnr
@@ -36,6 +37,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                 tittel="Status"
                 tittelProps="undertittel"
                 lamellNavn="status"
+                hidden={harFlyttStatusFeature}
             >
                 <FiltreringStatus
                     filtergruppe={filtergruppe}
