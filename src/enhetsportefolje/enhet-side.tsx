@@ -17,6 +17,7 @@ import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { pagineringSetup } from '../ducks/paginering';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
+import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './enhet-side.less';
 
 interface StateProps {
@@ -26,6 +27,7 @@ interface StateProps {
     statustall: StatustallState;
     enhettiltak: EnhettiltakState;
     listevisning: ListevisningState;
+    innloggetVeilederIdent: string | undefined;
 }
 
 interface DispatchProps {
@@ -43,6 +45,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
         this.settInitalStateFraUrl();
         loggSkjermMetrikker(Side.ENHETENS_OVERSIKT);
+        loggSideVisning(this.props.innloggetVeilederIdent, Side.ENHETENS_OVERSIKT);
     }
 
     settInitalStateFraUrl() {
@@ -103,7 +106,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
     veilederliste: state.veiledere.data.veilederListe,
     statustall: state.statustall,
     enhettiltak: state.enhettiltak,
-    listevisning: state.ui.listevisningEnhetensOversikt
+    listevisning: state.ui.listevisningEnhetensOversikt,
+    innloggetVeilederIdent: state.enheter.ident,
 });
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
