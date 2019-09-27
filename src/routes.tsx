@@ -9,6 +9,7 @@ import MinOversiktSide from './minoversikt/minoversikt-side';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
 import { loggBrowserMetrikker } from './utils/metrikker/browser-metrikker';
 import { VeilarbPortefoljeRedirect } from './components/redirect/veilarbportefolje-redirect';
+import { AlertStripeInfoSolid } from "nav-frontend-alertstriper";
 
 loggBrowserMetrikker();
 
@@ -17,6 +18,7 @@ function Routes() {
         <div className="portefolje">
             <EnhetContext >
                 <div className={classnames('maincontent', 'side-innhold')}>
+                    <AlertStripeInfoSolid> Dette er en testapplikasjon. Alle data er fiktive og ingen endring vil bli lagret.</AlertStripeInfoSolid>
                     <Switch>
                         <Route
                             path="/enhet"

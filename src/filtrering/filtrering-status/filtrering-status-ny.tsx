@@ -16,6 +16,8 @@ import Grid from "../../components/grid/grid";
 
 export function FiltreringStatusNy (props: FiltreringStatusProps) {
     const ferdigfilterListe = props.filtervalg.ferdigfilterListe!;
+    console.log("filtervalg", props.filtervalg);
+
     const dispatch = useDispatch();
 
     const statusTall = useStatusTallSelector();

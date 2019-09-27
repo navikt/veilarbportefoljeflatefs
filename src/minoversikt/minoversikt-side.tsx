@@ -135,7 +135,7 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                             <FiltreringContainer
                                                 filtervalg={filtervalg}
                                                 enhettiltak={enhettiltak.data.tiltak}
-                                                filtergruppe="enhet"
+                                                filtergruppe="veileder"
                                                 harFlyttStatusFeature={harFlyttStatusFeature}
                                             />
                                         </div>
@@ -148,9 +148,9 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                                 hidden={!harFlyttStatusFeature}
                                             >
                                                 <FiltreringStatusNy
-                                                    filtergruppe="enhet"
+                                                    filtergruppe="veileder"
                                                     filtervalg={filtervalg}
-                                                    veileder={defaultVeileder}
+                                                    veileder={gjeldendeVeileder}
                                                 />
                                             </MetrikkEkspanderbartpanel>
                                             <FiltreringLabelContainer

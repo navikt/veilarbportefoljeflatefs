@@ -37,7 +37,6 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                 tittel="Status"
                 tittelProps="undertittel"
                 lamellNavn="status"
-                hidden={harFlyttStatusFeature}
             >
                 <FiltreringStatus
                     filtergruppe={filtergruppe}
