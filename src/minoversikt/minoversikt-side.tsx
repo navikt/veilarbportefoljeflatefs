@@ -5,7 +5,7 @@ import DocumentTitle from 'react-document-title';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import LenkerMinoversikt from './../lenker/lenker-minoversikt';
-import FiltreringContainer, {defaultVeileder} from '../filtrering/filtrering-container';
+import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
@@ -26,8 +26,7 @@ import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './minoversikt-side.less';
 import {sjekkFeature} from "../ducks/features";
 import {FLYTT_STATUSFILTER} from "../konstanter";
-import MetrikkEkspanderbartpanel from "../components/toolbar/metrikk-ekspanderbartpanel";
-import {FiltreringStatusNy} from "../filtrering/filtrering-status/filtrering-status-ny";
+import FiltreringStatusNy from "../filtrering/filtrering-status/filtrering-status-ny";
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -137,22 +136,16 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                                 enhettiltak={enhettiltak.data.tiltak}
                                                 filtergruppe="veileder"
                                                 harFlyttStatusFeature={harFlyttStatusFeature}
+                                                veileder={gjeldendeVeileder}
                                             />
                                         </div>
                                         <div className="col-lg-9 col-md-12 col-sm-12">
-                                            <MetrikkEkspanderbartpanel
-                                                apen
-                                                tittel="Status"
-                                                tittelProps="undertittel"
-                                                lamellNavn="status"
+                                            <FiltreringStatusNy
+                                                filtergruppe="veileder"
+                                                filtervalg={filtervalg}
+                                                veileder={gjeldendeVeileder}
                                                 hidden={!harFlyttStatusFeature}
-                                            >
-                                                <FiltreringStatusNy
-                                                    filtergruppe="veileder"
-                                                    filtervalg={filtervalg}
-                                                    veileder={gjeldendeVeileder}
-                                                />
-                                            </MetrikkEkspanderbartpanel>
+                                            />
                                             <FiltreringLabelContainer
                                                 filtervalg={filtervalg}
                                                 filtergruppe="veileder"

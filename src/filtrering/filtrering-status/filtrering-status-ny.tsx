@@ -10,13 +10,15 @@ import {
     UFORDELTE_BRUKERE, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from "../filter-konstanter";
-import {Checkbox, Radio} from "nav-frontend-skjema";
 import {tekstAntallBrukere} from "../../utils/tekst-utils";
 import Grid from "../../components/grid/grid";
+import {CheckBoxMedAntall} from "../components/checkbox-antall";
+import {RadioMedAntall} from "../components/radio-antall";
+import MetrikkEkspanderbartpanel from "../../components/toolbar/metrikk-ekspanderbartpanel";
+import hiddenIf from "../../components/hidden-if/hidden-if";
 
-export function FiltreringStatusNy (props: FiltreringStatusProps) {
+function FiltreringStatusNy (props: FiltreringStatusProps) {
     const ferdigfilterListe = props.filtervalg.ferdigfilterListe!;
-    console.log("filtervalg", props.filtervalg);
 
     const dispatch = useDispatch();
 
@@ -42,97 +44,95 @@ export function FiltreringStatusNy (props: FiltreringStatusProps) {
     }
 
     return (
-        <div className="filtrering-oversikt panel">
-            <Checkbox
-                className="ufordeltebrukere"
-                label={<StatusLabel antall={statusTall.ufordelteBrukere} labelNavn="Ufordelte brukere"/>}
-                onChange={handleCheckboxChange}
-                value={UFORDELTE_BRUKERE}
-                checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
-            />
-            <Grid columns={3}>
-                <div className="filtrering-oversikt__kolonne">
-                    <Radio
-                        label={<StatusLabel antall={statusTall.trengerVurdering} labelNavn="Trenger vurdering"/>}
-                        onChange={handleRadioButtonChange}
-                        value={TRENGER_VURDERING}
-                        name="Trenger vurdering"
-                        checked={ferdigfilterListe.includes(TRENGER_VURDERING)}
-                    />
-                    <Radio
-                        label={<StatusLabel antall={statusTall.erSykmeldtMedArbeidsgiver} labelNavn="Sykmeldt med arbeidsgiver"/>}
-                        onChange={handleRadioButtonChange}
-                        value={ER_SYKMELDT_MED_ARBEIDSGIVER}
-                        name="Sykmeldt med arbeidsgiver"
-                        checked={ferdigfilterListe.includes(ER_SYKMELDT_MED_ARBEIDSGIVER)}
-                    />
-                    <Radio
-                        label={<StatusLabel labelNavn="Ikke servicebehov" antall={statusTall.inaktiveBrukere}/>}
-                        onChange={handleRadioButtonChange}
-                        value={INAKTIVE_BRUKERE}
-                        name="Ikke servicebehov"
-                        checked={ferdigfilterListe.includes(INAKTIVE_BRUKERE)}
-                    />
-                </div>
-                <div className="filtrering-oversikt__kolonne">
-                    <Radio
-                        label={<StatusLabel antall={statusTall.venterPaSvarFraNAV} labelNavn="Venter på svar fra NAV"/>}
-                        onChange={handleRadioButtonChange}
-                        value={VENTER_PA_SVAR_FRA_NAV}
-                        name="Venter på svar fra NAV"
-                        checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
-                    />
-                    <Radio
-                        label={<StatusLabel antall={statusTall.venterPaSvarFraBruker} labelNavn="Venter på svar fra bruker"/>}
-                        onChange={handleRadioButtonChange}
-                        value={VENTER_PA_SVAR_FRA_BRUKER}
-                        name="Venter på svar fra bruker"
-                        checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
-                    />
-                    <Radio
-                        label={<StatusLabel antall={statusTall.moterMedNAVIdag} labelNavn="Møte med NAV idag"/>}
-                        onChange={handleRadioButtonChange}
-                        value={MOTER_IDAG}
-                        name="Møte med NAV idag"
-                        checked={ferdigfilterListe.includes(MOTER_IDAG)}
-                    />
-                </div>
-                <div>
-                    <Radio
-                        label={<StatusLabel labelNavn="I avtalt aktivitet" antall={statusTall.iavtaltAktivitet}/>}
-                        onChange={handleRadioButtonChange}
-                        value={I_AVTALT_AKTIVITET}
-                        name="I avtalt aktivitet"
-                        checked={ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
-                    />
-                    <Radio
-                        label={<StatusLabel labelNavn="Utløpte aktiviteter" antall={statusTall.utlopteAktiviteter}/>}
-                        onChange={handleRadioButtonChange}
-                        value={UTLOPTE_AKTIVITETER}
-                        name="Utløpte aktiviteter"
-                        checked={ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
-                    />
-                    <Radio
-                        label={<StatusLabel labelNavn="Ikke i avtalt aktivitet" antall={statusTall.ikkeIavtaltAktivitet}/>}
-                        onChange={handleRadioButtonChange}
-                        value={IKKE_I_AVTALT_AKTIVITET}
-                        name="Ikke i avtalt aktivitet"
-                        checked={ferdigfilterListe.includes(IKKE_I_AVTALT_AKTIVITET)}
-                    />
-                </div>
-            </Grid>
-        </div>
+        <MetrikkEkspanderbartpanel
+            apen
+            tittel="Status"
+            tittelProps="undertittel"
+            lamellNavn="status"
+        >
+            <div className="filtrering-oversikt panel">
+                <CheckBoxMedAntall
+                    className="ufordeltebrukere"
+                    labelNavn="Ufordelte brukere"
+                    antall={statusTall.ufordelteBrukere}
+                    onChange={handleCheckboxChange}
+                    value={UFORDELTE_BRUKERE}
+                    checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
+                />
+                <Grid columns={3}>
+                    <div className="filtrering-oversikt__kolonne">
+                        <RadioMedAntall
+                            antall={statusTall.trengerVurdering}
+                            labelNavn="Trenger vurdering"
+                            onChange={handleRadioButtonChange}
+                            value={TRENGER_VURDERING}
+                            checked={ferdigfilterListe.includes(TRENGER_VURDERING)}
+                        />
+                        <RadioMedAntall
+                            antall={statusTall.erSykmeldtMedArbeidsgiver}
+                            labelNavn="Sykmeldt med arbeidsgiver"
+                            onChange={handleRadioButtonChange}
+                            value={ER_SYKMELDT_MED_ARBEIDSGIVER}
+                            checked={ferdigfilterListe.includes(ER_SYKMELDT_MED_ARBEIDSGIVER)}
+                        />
+                        <RadioMedAntall
+                            antall={statusTall.inaktiveBrukere}
+                            onChange={handleRadioButtonChange}
+                            value={INAKTIVE_BRUKERE}
+                            labelNavn="Ikke servicebehov"
+                            checked={ferdigfilterListe.includes(INAKTIVE_BRUKERE)}
+                        />
+                    </div>
+                    <div className="filtrering-oversikt__kolonne">
+                        <RadioMedAntall
+                            antall={statusTall.venterPaSvarFraNAV}
+                            labelNavn="Venter på svar fra NAV"
+                            onChange={handleRadioButtonChange}
+                            value={VENTER_PA_SVAR_FRA_NAV}
+                            checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
+                        />
+                        <RadioMedAntall
+                            antall={statusTall.venterPaSvarFraBruker}
+                            labelNavn="Venter på svar fra bruker"
+                            onChange={handleRadioButtonChange}
+                            value={VENTER_PA_SVAR_FRA_BRUKER}
+                            checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
+                        />
+                        <RadioMedAntall
+                            antall={statusTall.moterMedNAVIdag}
+                            labelNavn="Møte med NAV idag"
+                            onChange={handleRadioButtonChange}
+                            value={MOTER_IDAG}
+                            checked={ferdigfilterListe.includes(MOTER_IDAG)}
+                        />
+                    </div>
+                    <div>
+                        <RadioMedAntall
+                            labelNavn="I avtalt aktivitet"
+                            antall={statusTall.iavtaltAktivitet}
+                            onChange={handleRadioButtonChange}
+                            value={I_AVTALT_AKTIVITET}
+                            checked={ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
+                        />
+                        <RadioMedAntall
+                            labelNavn="Utløpte aktiviteter"
+                            antall={statusTall.utlopteAktiviteter}
+                            onChange={handleRadioButtonChange}
+                            value={UTLOPTE_AKTIVITETER}
+                            checked={ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
+                        />
+                        <RadioMedAntall
+                            labelNavn="Ikke i avtalt aktivitet"
+                            antall={statusTall.ikkeIavtaltAktivitet}
+                            onChange={handleRadioButtonChange}
+                            value={IKKE_I_AVTALT_AKTIVITET}
+                            checked={ferdigfilterListe.includes(IKKE_I_AVTALT_AKTIVITET)}
+                        />
+                    </div>
+                </Grid>
+            </div>
+        </MetrikkEkspanderbartpanel>
     );
 }
 
-
-function StatusLabel (props: {labelNavn: string, antall: number}) {
-    return (
-        <span className="skjemaelement__label__filter-status">
-            {props.labelNavn}
-            <span>
-                {props.antall}
-            </span>
-        </span>
-    )
-}
+export default hiddenIf(FiltreringStatusNy);

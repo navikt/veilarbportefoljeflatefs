@@ -1,8 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import DocumentTitle from 'react-document-title';
-import Lenker from '../lenker/lenker';
-import Innholdslaster from '../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from '../enhetsportefolje/enhetsportefolje-visning';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
@@ -21,8 +18,8 @@ import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './enhet-side.less';
 import {sjekkFeature} from "../ducks/features";
 import {FLYTT_STATUSFILTER} from "../konstanter";
-import {FiltreringStatusNy} from "../filtrering/filtrering-status/filtrering-status-ny";
-import MetrikkEkspanderbartpanel from "../components/toolbar/metrikk-ekspanderbartpanel";
+import FiltreringStatusNy from "../filtrering/filtrering-status/filtrering-status-ny";
+import {EnhetSideWrapper} from "../enhetsportefolje/enhet-side-wrapper";
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -68,49 +65,35 @@ class EnhetSide extends React.Component<EnhetSideProps> {
         const { filtervalg, veilederliste, statustall, enhettiltak, listevisning, harFeature } = this.props;
         const harFlyttStatusFeature = harFeature(FLYTT_STATUSFILTER);
         return (
-            <DocumentTitle title="Enhetens oversikt">
-                <div className="blokk-xl">
-                    <Lenker />
-                    <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                        <div className="enhet-side">
-                            <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
-                                <FiltreringContainer
-                                    filtervalg={filtervalg}
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    filtergruppe="enhet"
-                                    harFlyttStatusFeature={harFlyttStatusFeature}
-                                />
-                            </div>
-                            <div className="col-lg-9 col-md-12 col-sm-12">
-                                <MetrikkEkspanderbartpanel
-                                    apen
-                                    tittel="Status"
-                                    tittelProps="undertittel"
-                                    lamellNavn="status"
-                                    hidden={!harFlyttStatusFeature}
-                                >
-                                    <FiltreringStatusNy
-                                        filtervalg={filtervalg}
-                                        veileder={defaultVeileder}
-                                    />
-                                </MetrikkEkspanderbartpanel>
-                                <FiltreringLabelContainer
-                                    filtervalg={{
-                                        ...filtervalg,
-                                        veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste)
-                                    }}
-                                    filtergruppe="enhet"
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    listevisning={listevisning}
-                                />
-                                <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
-                                <EnhetsportefoljeVisning />
-                                <TomPortefoljeModal />
-                            </div>
-                        </div>
-                    </Innholdslaster>
+            <EnhetSideWrapper avhengigheter={[enhettiltak, statustall]}>
+                <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
+                    <FiltreringContainer
+                        filtervalg={filtervalg}
+                        enhettiltak={enhettiltak.data.tiltak}
+                        filtergruppe="enhet"
+                        harFlyttStatusFeature={harFlyttStatusFeature}
+                    />
                 </div>
-            </DocumentTitle>
+                <div className="col-lg-9 col-md-12 col-sm-12">
+                    <FiltreringStatusNy
+                        filtervalg={filtervalg}
+                        veileder={defaultVeileder}
+                        hidden={!harFlyttStatusFeature}
+                    />
+                    <FiltreringLabelContainer
+                        filtervalg={{
+                            ...filtervalg,
+                            veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste)
+                        }}
+                        filtergruppe="enhet"
+                        enhettiltak={enhettiltak.data.tiltak}
+                        listevisning={listevisning}
+                    />
+                    <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
+                    <EnhetsportefoljeVisning />
+                    <TomPortefoljeModal />
+                </div>
+            </EnhetSideWrapper>
         );
     }
 }

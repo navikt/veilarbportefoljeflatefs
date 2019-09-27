@@ -6,6 +6,7 @@ import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 import { FiltreringStatus } from './filtrering-status/filtrering-status';
+import ArbeidslisteFilter from "./filtrering-arbeidsliste";
 
 export const defaultVeileder: VeilederModell = {
     ident: '',
@@ -32,11 +33,16 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                 filtervalg={filtervalg}
                 actions={actions}
             />
+            <ArbeidslisteFilter
+                veileder={veileder}
+                hidden={!(harFlyttStatusFeature && filtergruppe === 'veileder')}
+            />
             <MetrikkEkspanderbartpanel
                 apen
                 tittel="Status"
                 tittelProps="undertittel"
                 lamellNavn="status"
+                hidden={harFlyttStatusFeature}
             >
                 <FiltreringStatus
                     filtergruppe={filtergruppe}
@@ -46,7 +52,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
 
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
-                apen={filtergruppe !== 'veileder'}
+                apen={harFlyttStatusFeature ?  true : filtergruppe !== 'veileder'}
                 tittel="Filter"
                 tittelProps="undertittel"
                 lamellNavn="filtergruppe"
