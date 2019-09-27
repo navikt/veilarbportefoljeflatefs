@@ -3,13 +3,21 @@
 }
 
 .filtrering-oversikt {
-
+    //TODO FIKS THIS NÅR FLYTT_STATUS_FILTRET ER PÅ
     .ufordeltebrukere {
         width: 33%;
+
+        .skjemaelement__label {
+            width: 80%;
+        }
     }
 
     &__kolonne {
         position: relative;
+
+        .skjemaelement__label {
+            width: 80%;
+        }
     }
 
     &__kolonne:after {
@@ -26,10 +34,6 @@
 
     &__totalt-antall {
         font-weight: 800 !important;
-    }
-
-    .skjemaelement__label {
-        width: 80%;
     }
 
     .skjema__input {

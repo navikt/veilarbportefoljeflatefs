@@ -20,18 +20,16 @@ interface FiltreringContainerProps {
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
     veileder: VeilederModell;
+    endreFiltervalg: (filterId: string, filterVerdi: string) => void;
     harFlyttStatusFeature: boolean;
-    actions: {
-        endreFiltervalg: (filterId: string, filterVerdi: string) => void;
-    };
 }
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, actions, enhettiltak, harFlyttStatusFeature }: FiltreringContainerProps) {
+function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, endreFiltervalg, enhettiltak, harFlyttStatusFeature }: FiltreringContainerProps) {
     return (
         <div className="blokk-m">
             <FiltreringNavnellerfnr
                 filtervalg={filtervalg}
-                actions={actions}
+                endreFiltervalg={endreFiltervalg}
             />
             <ArbeidslisteFilter
                 veileder={veileder}
@@ -58,7 +56,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                 lamellNavn="filtergruppe"
             >
                 <FiltreringFilter
-                    actions={actions}
+                    endreFiltervalg={endreFiltervalg}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
                 />
@@ -68,10 +66,8 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    actions: {
-        endreFiltervalg: (filterId: string, filterVerdi: string) => {
-            dispatch(endreFiltervalg(filterId, filterVerdi, ownProps.filtergruppe, ownProps.veileder && ownProps.veileder.ident));
-        }
+    endreFiltervalg: (filterId: string, filterVerdi: string) => {
+        dispatch(endreFiltervalg(filterId, filterVerdi, ownProps.filtergruppe, ownProps.veileder && ownProps.veileder.ident));
     }
 });
 

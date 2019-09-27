@@ -3,7 +3,7 @@ import 'moment/locale/nb';
 import classnames from 'classnames';
 import EnhetContext from './components/enhet-context/enhet-context';
 import { Route, Switch } from 'react-router-dom';
-import EnhetSide from './enhet/enhet-side';
+import EnhetSide from './enhetsportefolje/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
@@ -14,11 +14,14 @@ import { AlertStripeInfoSolid } from "nav-frontend-alertstriper";
 loggBrowserMetrikker();
 
 function Routes() {
+    //TODO FIKS THIS
+    const erHeroku = process.env.HEROKU_APP === 'true';
+
     return (
         <div className="portefolje">
             <EnhetContext >
                 <div className={classnames('maincontent', 'side-innhold')}>
-                    <AlertStripeInfoSolid> Dette er en testapplikasjon. Alle data er fiktive og ingen endring vil bli lagret.</AlertStripeInfoSolid>
+                    {erHeroku && <AlertStripeInfoSolid> Dette er en testapplikasjon. Alle data er fiktive og ingen endring vil bli lagret.</AlertStripeInfoSolid>}
                     <Switch>
                         <Route
                             path="/enhet"
