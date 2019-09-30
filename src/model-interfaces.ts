@@ -1,4 +1,4 @@
-import { FiltreringAktiviteterValg} from './ducks/filtrering';
+import { FiltreringAktiviteterValg } from './ducks/filtrering';
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -181,5 +181,5 @@ export enum Status {
 export interface ArbeidslisteDataModell {
     fnr: string;
     kommentar: string;
-    frist: string|null;
+    frist: string | null;
 }
