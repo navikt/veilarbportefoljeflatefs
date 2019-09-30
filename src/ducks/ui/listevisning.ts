@@ -74,14 +74,14 @@ export interface ListevisningState {
 }
 
 export const initialStateEnhetensOversikt: ListevisningState = {
-    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET],
-    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET],
+    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR],
+    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR],
     lukketInfopanel: false
 };
 
 export const initialStateMinOversikt: ListevisningState = {
-    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET],
-    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET],
+    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR],
+    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR],
     lukketInfopanel: false
 };
 

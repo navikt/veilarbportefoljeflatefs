@@ -34,7 +34,6 @@ interface MinOversiktListehodeProps {
     valgteKolonner: Kolonne[];
 }
 
-
 export function bereignListeOverskriftStorrelse(valgteKolonner, listeKolonner) {
     return listeKolonner.filter((elem) => valgteKolonner.includes(elem)).length * 2;
 }

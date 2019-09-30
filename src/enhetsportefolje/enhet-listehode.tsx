@@ -14,7 +14,7 @@ import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model
 import { Kolonne } from '../ducks/ui/listevisning';
 import { AktiviteterValg } from '../ducks/filtrering';
 import Header from '../components/tabell/header';
-import {bereignListeOverskriftStorrelse} from "../minoversikt/minoversikt-listehode";
+import { bereignListeOverskriftStorrelse } from '../minoversikt/minoversikt-listehode';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {

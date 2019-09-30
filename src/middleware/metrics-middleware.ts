@@ -6,7 +6,7 @@ import {
 import { logEvent } from '../utils/frontend-logger';
 import { SETT_VISNINGSMODUS, SETUP } from '../ducks/paginering';
 import { SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER } from '../ducks/portefolje';
-import { ActionTypeKeys } from '../ducks/ui/listevisning';
+import { ActionTypeKeys, Kolonne } from '../ducks/ui/listevisning';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 import { VIS_MODAL } from '../ducks/modal';
 import { SORTERT_PA } from '../ducks/sortering';
@@ -72,7 +72,7 @@ function finnFiltreringForSide(store: any, sideNavn: SideNavn) {
 
 export const metricsMiddleWare = (store: any) => (next: any) => (action: any) => {
 
-    const { type, data, toolbarPosisjon } = action;
+    const { type, data, toolbarPosisjon, kolonne} = action;
     const sideNavn = finnSideNavn();
 
     switch (type) {
@@ -86,7 +86,10 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             loggTildelVeileder(sideNavn, toolbarPosisjon);
             break;
         case ActionTypeKeys.VELG_ALTERNATIV:
-            loggEndreListevisning(sideNavn, toolbarPosisjon);
+            loggEndreListevisning(sideNavn, toolbarPosisjon, kolonne);
+            break;
+        case ActionTypeKeys.AVVELG_ALTERNATIV:
+            loggAvvelgListevalg(sideNavn, kolonne);
             break;
         case VIS_MODAL:
             loggArbeidslisteApne(sideNavn, toolbarPosisjon);
@@ -153,9 +156,13 @@ const loggTildelVeileder = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon
     logEvent('portefolje.metrikker.tildel_veileder', { sideNavn, toolbarPosisjon });
 };
 
-const loggEndreListevisning = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
-    logEvent('portefolje.metrikker.listevisning_endret', { sideNavn, toolbarPosisjon });
+const loggEndreListevisning = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon, kolonne: Kolonne) => {
+    logEvent('portefolje.metrikker.listevisning_endret', { sideNavn, toolbarPosisjon, kolonne });
 };
+
+const loggAvvelgListevalg = (sideNavn: SideNavn, kolonne: Kolonne) => {
+    logEvent('portefolje.metrikker.listevisning_avvelget', { sideNavn, kolonne });
+}
 
 const loggArbeidslisteApne = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
     logEvent('portefolje.metrikker.arbeidsliste_apne', { sideNavn, toolbarPosisjon });
@@ -179,3 +186,4 @@ const loggVeilederSoktFraToolbar = (sideNavn: SideNavn, toolbarPosisjon: Toolbar
 const loggVelgAlle = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
     logEvent('portefolje.metrikker.velg_alle', { sideNavn, toolbarPosisjon });
 };
+

@@ -52,7 +52,7 @@ export function getFiltertingState(state: AppState, name: ListevisningType): Fil
 export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolonne[] {
     const filtervalg: FiltervalgModell = getFiltertingState(state, name);
 
-    return [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET]
+    return [Kolonne.BRUKER, Kolonne.FODSELSNR]
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.MOTER_VARIGHET, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
@@ -66,5 +66,6 @@ export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolo
         .concat(addHvis(Kolonne.ARBEIDSLISTE_FRIST, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)))
         .concat(addHvis(Kolonne.ARBEIDSLISTE_OVERSKRIFT, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)))
         .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))
-        .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt));
+        .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt))
+        .concat([Kolonne.OPPFOLGINGSTARTET]);
 }
