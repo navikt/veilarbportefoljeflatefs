@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { AppState } from '../../reducer';
-import { selectMuligeAlternativer, selectValgteAlternativer, getMuligeKolonner } from './listevisning-selectors';
+import { getMuligeKolonner } from './listevisning-selectors';
 import { ToolbarPosisjon } from '../../components/toolbar/toolbar';
 
 export enum ActionTypeKeys {
@@ -117,8 +117,6 @@ export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.
 
 export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction, AppState>, getState: () => AppState, name: ListevisningType) => {
     const appState = getState();
-    const muligeAlternativer = selectMuligeAlternativer(appState, name);
-    const valgteAlternativer = selectValgteAlternativer(appState, name);
     const nyeMuligeAlternativer = getMuligeKolonner(appState, name);
 
     dispatch({
@@ -126,6 +124,7 @@ export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningActi
         kolonner: nyeMuligeAlternativer,
         name
     });
+
 
     if (nyeMuligeAlternativer.length <= 5) {
         dispatch({
@@ -137,11 +136,7 @@ export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningActi
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
             name,
-            kolonner:
-                nyeMuligeAlternativer
-                    .filter((alternativ) => !muligeAlternativer.includes(alternativ))
-                    .concat(valgteAlternativer.filter((alternativ) => nyeMuligeAlternativer.includes(alternativ)))
-                    .slice(0, 5)
+            kolonner: nyeMuligeAlternativer.slice(0, 5)
         });
     }
 };
