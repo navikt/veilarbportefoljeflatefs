@@ -56,7 +56,11 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}  skalJusteres={skalJusteres}/>
             <BrukerFnr className="col col-xs-2" bruker={bruker}/>
-            <DatoKolonne className="col col-xs-2" skalVises={true} dato={bruker.oppfolgingStartDato}/>
+            <DatoKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                dato={bruker.oppfolgingStartDato}
+            />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={arbeidslisteFrist}

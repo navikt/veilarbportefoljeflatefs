@@ -132,6 +132,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
                             tekst="Oppfølging startet"
                             className="sortering-header__dato col col-xs-2"
+                            skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                         />
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
@@ -220,12 +221,16 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
                             className="header__veilederident col col-xs-2"
                         />
-                        <Header
-                            className="col col-xs-2"
+                        <SorteringHeader
+                            sortering={Sorteringsfelt.VEILEDER}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.VEILEDER}
+                            tekst="Veileder"
                             skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                        >
-                            Veileder
-                        </Header>
+                            className="header__veilederident col col-xs-2"
+
+                        />
                     </div>
                     <div className="brukerliste__gutter-right"/>
                 </div>
