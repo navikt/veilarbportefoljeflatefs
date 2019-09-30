@@ -74,8 +74,8 @@ export interface ListevisningState {
 }
 
 export const initialStateEnhetensOversikt: ListevisningState = {
-    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET, Kolonne.NAVIDENT, Kolonne.VEILEDER],
-    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET, Kolonne.NAVIDENT, Kolonne.VEILEDER],
+    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET],
+    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET],
     lukketInfopanel: false
 };
 
@@ -137,10 +137,11 @@ export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningActi
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
             name,
-            kolonner: valgteAlternativer
-                .filter((alternativ) => nyeMuligeAlternativer.includes(alternativ))
-                .concat(nyeMuligeAlternativer.filter((alternativ) => !muligeAlternativer.includes(alternativ)))
-                .slice(0, 5)
+            kolonner:
+                nyeMuligeAlternativer
+                    .filter((alternativ) => !muligeAlternativer.includes(alternativ))
+                    .concat(valgteAlternativer.filter((alternativ) => nyeMuligeAlternativer.includes(alternativ)))
+                    .slice(0, 5)
         });
     }
 };
