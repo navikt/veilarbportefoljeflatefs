@@ -1,9 +1,9 @@
 import * as React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import {ytelseFilterErAktiv} from '../utils/utils';
+import { ytelseFilterErAktiv } from '../utils/utils';
 import Listeoverskrift from '../utils/listeoverskrift';
-import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
-import {AktiviteterValg} from '../ducks/filtrering';
+import { BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
+import { AktiviteterValg } from '../ducks/filtrering';
 import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
@@ -14,7 +14,7 @@ import {
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
-import {Kolonne} from '../ducks/ui/listevisning';
+import { Kolonne } from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
 
 function harValgteAktiviteter(aktiviteter) {
@@ -34,8 +34,8 @@ interface MinOversiktListehodeProps {
     valgteKolonner: Kolonne[];
 }
 
-function bereignArbeidslisteListeOverskriftStorrelse (valgteKolonner) {
-    return [Kolonne.ARBEIDSLISTE_FRIST, Kolonne.ARBEIDSLISTE_OVERSKRIFT].filter(elem => valgteKolonner.includes(elem)).length * 2;
+function bereignArbeidslisteListeOverskriftStorrelse(valgteKolonner) {
+    return [Kolonne.ARBEIDSLISTE_FRIST, Kolonne.ARBEIDSLISTE_OVERSKRIFT].filter((elem) => valgteKolonner.includes(elem)).length * 2;
 }
 
 function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: MinOversiktListehodeProps) {

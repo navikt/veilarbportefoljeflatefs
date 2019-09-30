@@ -19,11 +19,11 @@ import {
     ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
-import {BrukerModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne} from '../ducks/ui/listevisning';
+import { BrukerModell, FiltervalgModell } from '../model-interfaces';
+import { Kolonne } from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import {klokkeslettTilMinutter, minuttDifferanse} from '../utils/dato-utils';
+import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 
 interface MinOversiktKolonnerProps {
