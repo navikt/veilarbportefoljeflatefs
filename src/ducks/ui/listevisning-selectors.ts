@@ -56,6 +56,7 @@ export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolo
         .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
+        .concat(addHvis(Kolonne.MOTER_VARIGHET, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
         .concat(addHvis(Kolonne.AVTALT_AKTIVITET, filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
         .concat(addHvis(Kolonne.VENTER_SVAR, filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) || filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)))

@@ -19,6 +19,8 @@ import {
 } from './filter-konstanter';
 
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
+import {RadioFilterformNy} from "../components/radio-filterform/radio-filterform-ny";
+import DropdownNy from "../components/dropdown/dropdown-ny";
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -117,14 +119,20 @@ const FiltreringFilter = ({filtervalg, actions, enhettiltak }: FiltreringFilterP
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
-                <Dropdown name="Ytelse" className="dropdown--140bredde-responsive">
-                    <RadioFilterform
-                        form="ytelse"
-                        valg={ytelse}
-                        onSubmit={actions.endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
+                <DropdownNy
+                    name="Ytelse"
+                    className="dropdown--140bredde-responsive"
+                    render={lukkDropdown =>
+                        <RadioFilterformNy
+                            valg={ytelse}
+                            onSubmit={actions.endreFiltervalg}
+                            filtervalg={filtervalg}
+                            closeDropdown={lukkDropdown}
+                            filterId="ytelse"
+                        />
+                    }
+                />
+
             </div>
             <div className="col-sm-12">
                 <OverskriftMedHjelpeTekst

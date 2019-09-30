@@ -118,7 +118,7 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             <VarighetKolonne
                 className="col col-xs-2"
                 dato={varighet}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
             <VeilederId className="col col-xs-2"
                         bruker={bruker}

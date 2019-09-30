@@ -57,7 +57,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                         />
                         <Listeoverskrift
                             className="listeoverskrift__dato listeoverskriftcol col col-xs-2"
-                            skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse}
+                            skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                             tekst="Gjenstår"
                         />
                         <Listeoverskrift
@@ -93,7 +93,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                         />
                         <Listeoverskrift
                             className="listeoverskrift col col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
                             tekst="Varighet"
                         />
                         <Listeoverskrift
@@ -148,7 +148,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === aapRettighetsperiode}
                             tekst="Rettighetsperiode"
-                            skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse}
+                            skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
@@ -206,7 +206,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             className="sortering-header__dato col col-xs-2"
                         />
                         <Header
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
                             className="sortering-header__dato col col-xs-2"
                         >
                             Varighet

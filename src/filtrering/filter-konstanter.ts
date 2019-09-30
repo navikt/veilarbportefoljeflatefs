@@ -102,15 +102,15 @@ export const servicegruppe = {
 };
 
 export const ytelse = {
-    DAGPENGER: 'Dagpenger',
+    DAGPENGER: {label: 'Dagpenger'},
     ORDINARE_DAGPENGER: { label: 'Ordinære dagpenger', className: 'skjemaelement--innrykk' },
     DAGPENGER_MED_PERMITTERING: { label: 'Dagpenger under permittering', className: 'skjemaelement--innrykk' },
     DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI: { label: 'Dagpenger v/perm fiskeindustri', className: 'skjemaelement--innrykk' },
     LONNSGARANTIMIDLER_DAGPENGER: { label: 'Lønnsgarantimidler dagpenger', className: 'skjemaelement--innrykk' },
-    AAP: 'AAP',
+    AAP: {label: 'AAP'},
     AAP_MAXTID: { label: 'AAP maxtid', className: 'skjemaelement--innrykk' },
     AAP_UNNTAK: { label: 'AAP unntak', className: 'skjemaelement--innrykk' },
-    TILTAKSPENGER: 'Tiltakspenger'
+    TILTAKSPENGER: {label: 'Tiltakspenger'}
 };
 
 export const manuellBrukerStatus = {
