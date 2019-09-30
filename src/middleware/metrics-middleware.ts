@@ -118,8 +118,16 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
     return next(action);
 };
 
-const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
+function mapVeilederIdentTilNonsens(veilederIdent: string) {
+   return [...veilederIdent]
+       .map(veilederChar => veilederChar.charCodeAt(0) << 6)
+       .map(veilederChar => veilederChar % 255)
+       .map(hexChar => hexChar.toString(16))
+       .join("")
+}
 
+export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
+    const veilederIndent = mapVeilederIdentTilNonsens(store.getState().enheter.ident);
     if (data.filterId === 'veilederNavnQuery') {
         return;
     }
@@ -131,11 +139,11 @@ const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any
         const lagtTilFilterVerdier = finnElementerSomErLagtTil(prevFilter, data.filterVerdi);
 
         lagtTilFilterVerdier.forEach((verdi) => {
-            logEvent('portefolje.metrikker.endre_filter', { sideNavn, filter: data.filterId, verdi });
+            logEvent('portefolje.metrikker.endre_filter', { sideNavn, filter: data.filterId, verdi }, {veilederIdent: veilederIndent});
         });
 
     } else {
-        logEvent('portefolje.metrikker.endre_filter', { sideNavn, filter: data.filterId, verdi: data.filterVerdi });
+        logEvent('portefolje.metrikker.endre_filter', { sideNavn, filter: data.filterId, verdi: data.filterVerdi }, {veilederIdent: veilederIndent});
     }
 
 };

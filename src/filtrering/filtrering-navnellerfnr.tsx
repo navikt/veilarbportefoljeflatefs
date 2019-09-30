@@ -6,21 +6,19 @@ import { useEffect, useState } from 'react';
 
 interface FiltreringNavnEllerFnrProps {
     filtervalg: FiltervalgModell;
-    actions: {
-        endreFiltervalg: (filterId: string, filterVerdi: string) => void;
-    };
+    endreFiltervalg: (filterId: string, filterVerdi: string) => void;
 }
 
-function FiltreringNavnellerfnr(props: FiltreringNavnEllerFnrProps) {
-    const [navnEllerFnrQuery, setNavnEllerFnrQuery] = useState(props.filtervalg.navnEllerFnrQuery);
+function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEllerFnrProps) {
+    const [navnEllerFnrQuery, setNavnEllerFnrQuery] = useState(filtervalg.navnEllerFnrQuery);
     const isInitialMount = useRef(true);
     const timer = useRef<number | undefined>();
     const savedCallback = useRef(null);
 
     useEffect(() => {
         // @ts-ignore
-        savedCallback.current = (b) => props.actions.endreFiltervalg('navnEllerFnrQuery', b);
-    }, [props.actions]);
+        savedCallback.current = (b) => endreFiltervalg('navnEllerFnrQuery', b);
+    }, [endreFiltervalg]);
 
     useEffect(
         () => {
@@ -43,11 +41,11 @@ function FiltreringNavnellerfnr(props: FiltreringNavnEllerFnrProps) {
         }, [navnEllerFnrQuery]);
 
     useEffect(() => {
-        const prevQuery = props.filtervalg.navnEllerFnrQuery;
+        const prevQuery = filtervalg.navnEllerFnrQuery;
         if (prevQuery === '') {
             setNavnEllerFnrQuery('');
         }
-    },[props.filtervalg.navnEllerFnrQuery]);
+    },[filtervalg.navnEllerFnrQuery]);
 
     return (
         <div className="filtrering-navn-fnr">

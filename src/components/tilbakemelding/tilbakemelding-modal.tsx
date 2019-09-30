@@ -1,10 +1,11 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Textarea } from 'nav-frontend-skjema';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import TilfredshetValg from './tilfredshet-valg';
 import './tilbakemelding-modal.less';
+import Lenke from "nav-frontend-lenker";
 
 export interface Tilbakemelding {
     tilfredshet: number;
@@ -71,19 +72,27 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
 
         const {tilfredshet, kommentar} = this.state;
         const harBesvartTilfredshet = tilfredshet > 0;
-
+        const styleTop = {marginTop: "1rem"};
+        const styleBottom = {marginBottom: "1rem"};
         return (
             <div>
                 <Innholdstittel className="blokk-xxs tilbakemelding-modal__tittel">
                     Tilbakemelding
                 </Innholdstittel>
-                <Normaltekst className="tilbakemelding-modal__ingress">
-                    Dere har fått en ny knapp øverst i høyre hjørne på denne siden.
-                    <br/><br/>
-                    Knappen åpner en liste med informasjon om hva som er nytt i systemet.
-                    <br/><br/>
-                    Hvordan synes du denne listen fungerer som en oversikt for systemendringer?
+                <Normaltekst style={styleBottom} className="tilbakemelding-modal__ingress">
+                    Vi jobber med en ny plassering av statusfiltrene i oversikten. Bruk lenken under for å se og prøve ut endringen. Kom tilbake hit og fortell oss hva du synes.
                 </Normaltekst>
+                <Normaltekst>
+                <Lenke
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://veilarbportefoljeflatefs-pr-84.herokuapp.com/veilarbportefoljeflatefs/">
+                    Demo av ny Modia oversikt
+                </Lenke> (krever internett)
+                </Normaltekst>
+               <Normaltekst style={styleTop}>
+                   Hvordan opplever du endringen? Svarene er anonyme.
+               </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
                     <TilfredshetValg
                         className="blokk-xs"
@@ -91,9 +100,9 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         defaultTilfredshet={tilfredshet}
                     />
                     {!harBesvartTilfredshet &&
-                    <Knapp mini={true} onClick={this.handleIkkeVisIgjenClicked}>
+                    <Flatknapp mini={true} onClick={this.handleIkkeVisIgjenClicked}>
                         Ikke vis dette igjen
-                    </Knapp>}
+                    </Flatknapp>}
                 </div>
                 {harBesvartTilfredshet && (
                     <form className="tilbakemelding-modal__ekspander" onSubmit={this.handleFormSubmitted}>

@@ -21,8 +21,9 @@ import {
     getSorteringsRekkefolgeFromUrl
 } from '../utils/url-utils';
 import { pagineringSetup } from '../ducks/paginering';
-import './minoversikt-side.less';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
+import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
+import './minoversikt-side.less';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -34,6 +35,7 @@ interface StateProps {
     listevisning: ListevisningState;
     sorteringsfelt: string;
     sorteringsrekkefolge: string;
+    innloggetVeilederIdent: string | undefined;
 }
 
 interface IdentProps {
@@ -67,6 +69,7 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
 
         this.settInitalStateFraUrl();
         loggSkjermMetrikker(Side.MIN_OVERSIKT);
+        loggSideVisning(props.innloggetVeilederIdent, Side.MIN_OVERSIKT);
 
         this.props.hentStatusTall(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident );
         this.props.hentEnhetTiltak(valgtEnhet.enhet!.enhetId);
@@ -169,6 +172,7 @@ const mapStateToProps = (state): StateProps => ({
     listevisning: state.ui.listevisningMinOversikt,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
+    innloggetVeilederIdent: state.enheter.ident
 });
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({

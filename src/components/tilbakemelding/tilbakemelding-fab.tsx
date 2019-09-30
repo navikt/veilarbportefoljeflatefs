@@ -22,7 +22,7 @@ interface TilbakemeldingFabState {
 class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabState> {
 
     private readonly TILBAKEMELDING_PREFIX = 'har_sendt_tilbakemelding';
-    private readonly TILBAKEMELDING_FEATURE_TAG = 'post_endringslogg'; // NB: Husk å endre for hver nye feature
+    private readonly TILBAKEMELDING_FEATURE_TAG = 'flytt_status_filter'; // NB: Husk å endre for hver nye feature
 
     private wrapperRef;
 
@@ -48,15 +48,15 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
         if (this.state.isModalOpen && this.wrapperRef && !this.wrapperRef.contains(e.target)) {
             this.setState({ isModalOpen: false });
         }
-    }
+    };
 
     tilbakemeldingLocalStorageName = () => {
         return `${this.TILBAKEMELDING_PREFIX}__${this.TILBAKEMELDING_FEATURE_TAG}`;
-    }
+    };
 
     harTidligereSendtTilbakemelding = () => {
         return window.localStorage.getItem(this.tilbakemeldingLocalStorageName()) != null;
-    }
+    };
 
     handleFabClicked = () => {
 
@@ -68,19 +68,19 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
             return { isModalOpen: !prevState.isModalOpen };
         });
 
-    }
+    };
 
     handleTilbakemeldingSendt = (tilbakemelding: Tilbakemelding) => {
         window.localStorage.setItem(this.tilbakemeldingLocalStorageName(), 'true');
         logEvent('portefolje.tilbakemelding',
             { feature: this.TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding });
-    }
+    };
 
     handleIkkeVisIgjen = () => {
         window.localStorage.setItem(this.tilbakemeldingLocalStorageName(), 'true');
         logEvent('portefolje.ikke_vis_tilbakemelding_igjen');
         this.setState({ ikkeVisIgjen: true });
-    }
+    };
 
     render() {
 

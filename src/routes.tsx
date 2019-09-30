@@ -3,7 +3,7 @@ import 'moment/locale/nb';
 import classnames from 'classnames';
 import EnhetContext from './components/enhet-context/enhet-context';
 import { Route, Switch } from 'react-router-dom';
-import EnhetSide from './enhet/enhet-side';
+import EnhetSide from './enhetsportefolje/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
