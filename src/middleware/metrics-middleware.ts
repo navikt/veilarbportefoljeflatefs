@@ -162,7 +162,7 @@ const loggEndreListevisning = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosis
 
 const loggAvvelgListevalg = (sideNavn: SideNavn, kolonne: Kolonne) => {
     logEvent('portefolje.metrikker.listevisning_avvelget', { sideNavn, kolonne });
-}
+};
 
 const loggArbeidslisteApne = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
     logEvent('portefolje.metrikker.arbeidsliste_apne', { sideNavn, toolbarPosisjon });
@@ -186,4 +186,3 @@ const loggVeilederSoktFraToolbar = (sideNavn: SideNavn, toolbarPosisjon: Toolbar
 const loggVelgAlle = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
     logEvent('portefolje.metrikker.velg_alle', { sideNavn, toolbarPosisjon });
 };
-
