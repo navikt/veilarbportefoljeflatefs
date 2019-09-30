@@ -28,6 +28,7 @@ export enum Sorteringsfelt {
     FORRIGE_DATO_FOR_AVTALT_AKTIVITET = 'forrige_aktivitet_start',
     AAP_RETTIGHETSPERIODE = 'aaprettighetsperiode',
     NAVIDENT = 'veileder_id',
+    VEILEDER = 'veileder_navn',
     MOTER_IDAG = 'moterMedNAVIdag',
 }
 
