@@ -17,8 +17,8 @@ import Header from '../components/tabell/header';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
-       const valgteAktiviteter = Object.values(aktiviteter).filter((aktivitetvalg) => aktivitetvalg !== AktiviteterValg.NA);
-       return valgteAktiviteter && valgteAktiviteter.length > 0;
+        const valgteAktiviteter = Object.values(aktiviteter).filter((aktivitetvalg) => aktivitetvalg !== AktiviteterValg.NA);
+        return valgteAktiviteter && valgteAktiviteter.length > 0;
     }
     return false;
 }
@@ -31,8 +31,8 @@ interface EnhetListehodeProps {
     sorteringsfelt: string;
 }
 
-function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: EnhetListehodeProps) {
-    const { ytelse } = filtervalg;
+function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner}: EnhetListehodeProps) {
+    const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
     const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : ytelseUtlopsSortering[ytelse!];
@@ -98,7 +98,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                         />
                         <Listeoverskrift
                             className="listeoverskrift__veileder listeoverskrift col col-xs-2"
-                            skalVises={valgteKolonner.includes(Kolonne.VEILEDER)|| valgteKolonner.includes(Kolonne.NAVIDENT)}
+                            skalVises={valgteKolonner.includes(Kolonne.VEILEDER) || valgteKolonner.includes(Kolonne.NAVIDENT)}
                             tekst="Veileder"
                         />
                     </div>
@@ -229,7 +229,6 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             tekst="Veileder"
                             skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
                             className="header__veilederident col col-xs-2"
-
                         />
                     </div>
                     <div className="brukerliste__gutter-right"/>
