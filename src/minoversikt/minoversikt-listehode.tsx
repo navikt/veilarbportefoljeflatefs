@@ -34,8 +34,8 @@ interface MinOversiktListehodeProps {
     valgteKolonner: Kolonne[];
 }
 
-function bereignArbeidslisteListeOverskriftStorrelse(valgteKolonner) {
-    return [Kolonne.ARBEIDSLISTE_FRIST, Kolonne.ARBEIDSLISTE_OVERSKRIFT].filter((elem) => valgteKolonner.includes(elem)).length * 2;
+export function bereignListeOverskriftStorrelse(valgteKolonner, listeKolonner) {
+    return listeKolonner.filter((elem) => valgteKolonner.includes(elem)).length * 2;
 }
 
 function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: MinOversiktListehodeProps) {
@@ -55,11 +55,11 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     <div className="brukerliste__gutter-left brukerliste--min-width-minside" />
                     <div className="brukerliste__innhold">
                         <Listeoverskrift
-                            className="listeoverskrift__bruker listeoverskrift col col-xs-6"
+                            className={`listeoverskrift__arbeidsliste listeoverskrift col col-xs-${bereignListeOverskriftStorrelse(valgteKolonner, [Kolonne.FODSELSNR, Kolonne.BRUKER, Kolonne.OPPFOLGINGSTARTET])}`}
                             tekst="Bruker"
                         />
                         <Listeoverskrift
-                            className={`listeoverskrift__arbeidsliste listeoverskrift col col-xs-${bereignArbeidslisteListeOverskriftStorrelse(valgteKolonner)}`}
+                            className={`listeoverskrift__arbeidsliste listeoverskrift col col-xs-${bereignListeOverskriftStorrelse(valgteKolonner, [Kolonne.ARBEIDSLISTE_FRIST, Kolonne.ARBEIDSLISTE_OVERSKRIFT])}`}
                             skalVises={arbeidslisteErAktiv}
                             tekst="Arbeidsliste"
                         />
