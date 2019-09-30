@@ -153,6 +153,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
                             tekst="Oppfølging startet"
                             className="sortering-header__dato col col-xs-2"
+                            skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}

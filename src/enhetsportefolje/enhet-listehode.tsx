@@ -132,6 +132,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
                             tekst="Oppfølging startet"
                             className="sortering-header__dato col col-xs-2"
+                            skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                         />
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
