@@ -52,7 +52,8 @@ export function getFiltertingState(state: AppState, name: ListevisningType): Fil
 export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolonne[] {
     const filtervalg: FiltervalgModell = getFiltertingState(state, name);
 
-    return [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.OPPFOLGINGSTARTET]
+    return [Kolonne.BRUKER, Kolonne.FODSELSNR]
+        .concat(addHvis(Kolonne.OPPFOLGINGSTARTET, name === ListevisningType.enhetensOversikt || name === ListevisningType.minOversikt))
         .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
