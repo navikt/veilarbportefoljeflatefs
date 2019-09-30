@@ -14,6 +14,7 @@ import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model
 import { Kolonne } from '../ducks/ui/listevisning';
 import { AktiviteterValg } from '../ducks/filtrering';
 import Header from '../components/tabell/header';
+import {bereignListeOverskriftStorrelse} from "../minoversikt/minoversikt-listehode";
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -47,7 +48,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>
                     <div className="brukerliste__innhold">
                         <Listeoverskrift
-                            className="listeoverskrift__bruker listeoverskriftcol col col-xs-6"
+                            className={`listeoverskrift__arbeidsliste listeoverskrift col col-xs-${bereignListeOverskriftStorrelse(valgteKolonner, [Kolonne.FODSELSNR, Kolonne.BRUKER, Kolonne.OPPFOLGINGSTARTET])}`}
                             tekst="Bruker"
                         />
                         <Listeoverskrift
