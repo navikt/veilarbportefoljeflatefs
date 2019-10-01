@@ -5,14 +5,20 @@ import {fjernFerdigfilter, leggTilFerdigFilter} from "./filter-utils";
 import {FiltreringStatusProps} from "./filtrering-status";
 import {useStatusTallSelector} from "../../hooks/redux/use-statustall";
 import {
-    ER_SYKMELDT_MED_ARBEIDSGIVER, I_AVTALT_AKTIVITET, IKKE_I_AVTALT_AKTIVITET, INAKTIVE_BRUKERE, MOTER_IDAG,
+    ER_SYKMELDT_MED_ARBEIDSGIVER,
+    I_AVTALT_AKTIVITET,
+    IKKE_I_AVTALT_AKTIVITET,
+    INAKTIVE_BRUKERE,
+    MOTER_IDAG,
+    NYE_BRUKERE_FOR_VEILEDER,
     TRENGER_VURDERING,
-    UFORDELTE_BRUKERE, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
+    UFORDELTE_BRUKERE,
+    UTLOPTE_AKTIVITETER,
+    VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from "../filter-konstanter";
-import {tekstAntallBrukere} from "../../utils/tekst-utils";
 import Grid from "../../components/grid/grid";
-import {CheckBoxMedAntall} from "../components/checkbox-antall";
+import CheckBoxMedAntall from "../components/checkbox-antall";
 import {RadioMedAntall} from "../components/radio-antall";
 import MetrikkEkspanderbartpanel from "../../components/toolbar/metrikk-ekspanderbartpanel";
 import hiddenIf from "../../components/hidden-if/hidden-if";
@@ -23,7 +29,6 @@ function FiltreringStatusNy (props: FiltreringStatusProps) {
     const dispatch = useDispatch();
 
     const statusTall = useStatusTallSelector();
-    const brukereTekst = tekstAntallBrukere(statusTall.totalt);
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(endreFiltervalg(
@@ -52,12 +57,22 @@ function FiltreringStatusNy (props: FiltreringStatusProps) {
         >
             <div className="filtrering-oversikt panel">
                 <CheckBoxMedAntall
-                    className="ufordeltebrukere"
+                    className="width33"
+                    labelNavn="Nye brukere"
+                    antall={statusTall.nyeBrukereForVeileder}
+                    onChange={handleCheckboxChange}
+                    value={NYE_BRUKERE_FOR_VEILEDER}
+                    checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
+                    hidden={props.filtergruppe !== 'veileder'}
+                />
+                <CheckBoxMedAntall
+                    className="width33"
                     labelNavn="Ufordelte brukere"
                     antall={statusTall.ufordelteBrukere}
                     onChange={handleCheckboxChange}
                     value={UFORDELTE_BRUKERE}
                     checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
+                    hidden={props.filtergruppe === 'veileder'}
                 />
                 <Grid columns={3}>
                     <div className="filtrering-oversikt__kolonne">

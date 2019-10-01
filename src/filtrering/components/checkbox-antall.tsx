@@ -1,13 +1,14 @@
 import {Checkbox, CheckboxProps} from "nav-frontend-skjema";
 import React from "react";
 import {FilterstatusSpan} from "./filterstatus-span";
+import hiddenIf from "../../components/hidden-if/hidden-if";
 
 interface CheckBoxMedAntallProps {
     antall: number;
     labelNavn: string
 }
 
-export function CheckBoxMedAntall (props: Omit<CheckboxProps & CheckBoxMedAntallProps, "label">) {
+function CheckBoxMedAntall (props: Omit<CheckboxProps & CheckBoxMedAntallProps, "label">) {
     const label = <FilterstatusSpan antall={props.antall} labelNavn={props.labelNavn}/>;
     return (
         <Checkbox
@@ -16,3 +17,6 @@ export function CheckBoxMedAntall (props: Omit<CheckboxProps & CheckBoxMedAntall
         />
     )
 }
+
+
+export default hiddenIf(CheckBoxMedAntall);
