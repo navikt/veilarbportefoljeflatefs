@@ -230,7 +230,6 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             tekst="Veileder"
                             skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
                             className="header__veilederident col col-xs-2"
-
                         />
                     </div>
                     <div className="brukerliste__gutter-right"/>

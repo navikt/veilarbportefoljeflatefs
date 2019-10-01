@@ -124,7 +124,7 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak }: Filtrerin
                     render={(lukkDropdown) =>
                         <RadioFilterformNy
                             valg={ytelse}
-                            onSubmit={actions.endreFiltervalg}
+                            onSubmit={endreFiltervalg}
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
                             filterId="ytelse"
