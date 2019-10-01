@@ -23,7 +23,7 @@ function ListevisningRad(props: ListevisningRadProps) {
             <Checkbox
                 label={alternativ.tekstlabel}
                 value={props.kolonne.toString()}
-                checked={props.valgt || alternativ.checked}
+                checked={props.valgt}
                 disabled={props.disabled || alternativ.checkboxDisabled}
                 onChange={((e: ChangeEvent<HTMLInputElement>) => props.onChange(props.kolonne, e.target.checked))}
             />
