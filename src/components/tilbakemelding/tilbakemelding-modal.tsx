@@ -86,7 +86,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                 <Lenke
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://veilarbportefoljeflatefs-pr-84.herokuapp.com/veilarbportefoljeflatefs/">
+                    href="https://veilarbportefoljeflatefs-pr-87.herokuapp.com/veilarbportefoljeflatefs/">
                     Demo av ny Modia oversikt
                 </Lenke> (krever internett)
                 </Normaltekst>
