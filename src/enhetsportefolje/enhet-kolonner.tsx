@@ -4,16 +4,22 @@ import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     I_AVTALT_AKTIVITET,
+    MOTER_IDAG,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
-    ytelsevalg,
-    ytelseAapSortering, MOTER_IDAG
+    ytelseAapSortering,
+    ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import { Kolonne } from '../ducks/ui/listevisning';
 import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
-import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker, aapRettighetsperiode } from '../utils/utils';
+import {
+    aapRettighetsperiode,
+    nesteUtlopsdatoEllerNull,
+    utledValgteAktivitetsTyper,
+    utlopsdatoUker
+} from '../utils/utils';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
@@ -48,6 +54,11 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
+            <DatoKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                dato={bruker.oppfolgingStartDato}
+            />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
@@ -116,7 +127,7 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             <VarighetKolonne
                 className="col col-xs-2"
                 dato={varighet}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
             <VeilederId className="col col-xs-2"
                         bruker={bruker}

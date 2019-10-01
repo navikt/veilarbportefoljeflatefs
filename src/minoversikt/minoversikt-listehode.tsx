@@ -5,13 +5,14 @@ import Listeoverskrift from '../utils/listeoverskrift';
 import { BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { AktiviteterValg } from '../ducks/filtrering';
 import {
-    ytelseUtlopsSortering,
-    VENTER_PA_SVAR_FRA_NAV,
-    VENTER_PA_SVAR_FRA_BRUKER,
-    UTLOPTE_AKTIVITETER,
-    MIN_ARBEIDSLISTE,
     I_AVTALT_AKTIVITET,
-    ytelseAapSortering, MOTER_IDAG
+    MIN_ARBEIDSLISTE,
+    MOTER_IDAG,
+    UTLOPTE_AKTIVITETER,
+    VENTER_PA_SVAR_FRA_BRUKER,
+    VENTER_PA_SVAR_FRA_NAV,
+    ytelseAapSortering,
+    ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
@@ -33,6 +34,10 @@ interface MinOversiktListehodeProps {
     valgteKolonner: Kolonne[];
 }
 
+export function bereignListeOverskriftStorrelse(valgteKolonner, listeKolonner) {
+    return listeKolonner.filter((elem) => valgteKolonner.includes(elem)).length * 2;
+}
+
 function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: MinOversiktListehodeProps) {
     const { ytelse } = filtervalg;
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
@@ -41,6 +46,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'Vedtaksperiode' : 'Vedtaksperiode';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
+    const arbeidslisteErAktiv = ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && (valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT) || valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST));
 
     return (
         <div className="brukerliste__header">
@@ -49,12 +55,12 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     <div className="brukerliste__gutter-left brukerliste--min-width-minside" />
                     <div className="brukerliste__innhold">
                         <Listeoverskrift
-                            className="listeoverskrift__bruker listeoverskrift col col-xs-4"
+                            className={`listeoverskrift__arbeidsliste listeoverskrift col col-xs-${bereignListeOverskriftStorrelse(valgteKolonner, [Kolonne.FODSELSNR, Kolonne.BRUKER, Kolonne.OPPFOLGINGSTARTET])}`}
                             tekst="Bruker"
                         />
                         <Listeoverskrift
-                            className="listeoverskrift__arbeidsliste listeoverskrift col col-xs-4"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                            className={`listeoverskrift__arbeidsliste listeoverskrift col col-xs-${bereignListeOverskriftStorrelse(valgteKolonner, [Kolonne.ARBEIDSLISTE_FRIST, Kolonne.ARBEIDSLISTE_OVERSKRIFT])}`}
+                            skalVises={arbeidslisteErAktiv}
                             tekst="Arbeidsliste"
                         />
                         <Listeoverskrift
@@ -64,7 +70,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                         />
                         <Listeoverskrift
                             className="listeoverskrift__ytelse listeoverskrift col col-xs-2"
-                            skalVises={!!filtervalg && ytelseFilterErAktiv(ytelse) && erAapYtelse}
+                            skalVises={!!filtervalg && ytelseFilterErAktiv(ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                             tekst="Gjenstår"
                         />
                         <Listeoverskrift
@@ -79,12 +85,12 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                         />
                         <Listeoverskrift
                             className="listeoverskrift col col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
                             tekst="Klokkeslett for møtet"
                         />
                         <Listeoverskrift
                             className="listeoverskrift col col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
                             tekst="Varighet"
                         />
                         <Listeoverskrift
@@ -147,12 +153,21 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             tekst="Fødselsnummer"
                         />
                         <SorteringHeader
+                            sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
+                            tekst="Oppfølging startet"
+                            className="sortering-header__dato col col-xs-2"
+                            skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                        />
+                        <SorteringHeader
                             sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
                             tekst="Dato"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)}
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
@@ -161,7 +176,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
                             tekst="Tittel"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)}
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
@@ -179,7 +194,7 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === aapRettighetsperiode}
                             tekst="Rettighetsperiode"
-                            skalVises={ytelseFilterErAktiv(ytelse) && erAapYtelse}
+                            skalVises={ytelseFilterErAktiv(ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
@@ -225,11 +240,11 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
                             tekst="Klokkeslett"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
                             className="sortering-header__dato col col-xs-2"
                         />
                         <Header
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
                             className="sortering-header__dato col col-xs-2"
                         >
                             Varighet

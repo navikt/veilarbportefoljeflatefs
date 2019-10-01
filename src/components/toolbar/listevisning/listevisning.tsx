@@ -70,7 +70,7 @@ const Listevisning = (props: ListevisningProps) => {
     }
 
     return (
-        <Dropdown name="Listevisning" disabled={props.muligeAlternativer.length <= 5}
+        <Dropdown name="Velg kolonner" disabled={props.muligeAlternativer.length <= 5}
                   className="dropdown--fixed dropdown--toolbar">
             <section className="radio-filterform__valg">
                 <div className="blokk-s">
