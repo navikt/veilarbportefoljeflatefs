@@ -2,7 +2,7 @@ import { AppState } from '../../reducer';
 import { Kolonne, ListevisningType } from './listevisning';
 import { AktiviteterValg, FiltreringAktiviteterValg } from '../filtrering';
 import {
-    I_AVTALT_AKTIVITET,
+    I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE,
     MOTER_IDAG,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -53,9 +53,8 @@ export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolo
     const filtervalg: FiltervalgModell = getFiltertingState(state, name);
 
     return [Kolonne.BRUKER, Kolonne.FODSELSNR]
-        .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))
-        .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
+        .concat(addHvis(Kolonne.MOTER_VARIGHET, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
         .concat(addHvis(Kolonne.AVTALT_AKTIVITET, filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
         .concat(addHvis(Kolonne.VENTER_SVAR, filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) || filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)))
@@ -63,5 +62,10 @@ export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolo
         .concat(addHvis(Kolonne.UTLOP_AKTIVITET, harValgtMinstEnAktivitet(filtervalg.aktiviteter) && harIkkeValgtTiltakstype(filtervalg.tiltakstyper)))
         .concat(addHvis(Kolonne.START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
         .concat(addHvis(Kolonne.NESTE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
-        .concat(addHvis(Kolonne.FORRIGE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)));
+        .concat(addHvis(Kolonne.FORRIGE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
+        .concat(addHvis(Kolonne.ARBEIDSLISTE_FRIST, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)))
+        .concat(addHvis(Kolonne.ARBEIDSLISTE_OVERSKRIFT, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)))
+        .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))
+        .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt))
+        .concat([Kolonne.OPPFOLGINGSTARTET]);
 }

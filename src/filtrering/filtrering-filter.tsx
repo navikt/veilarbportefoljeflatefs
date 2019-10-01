@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import Dropdown from '../components/dropdown/dropdown';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
-import RadioFilterform from '../components/radio-filterform/radio-filterform';
 import AktivitetFilterform from '../components/aktivitet-filterform/aktivitet-filterform';
 import {
     aktiviteter,
@@ -19,6 +18,8 @@ import {
 } from './filter-konstanter';
 
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
+import { RadioFilterformNy } from '../components/radio-filterform/radio-filterform-ny';
+import DropdownNy from '../components/dropdown/dropdown-ny';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -117,14 +118,19 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak }: Filtrerin
                         filtervalg={filtervalg}
                     />
                 </Dropdown>
-                <Dropdown name="Ytelse" className="dropdown--140bredde-responsive">
-                    <RadioFilterform
-                        form="ytelse"
-                        valg={ytelse}
-                        onSubmit={endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
+                <DropdownNy
+                    name="Ytelse"
+                    className="dropdown--140bredde-responsive"
+                    render={(lukkDropdown) =>
+                        <RadioFilterformNy
+                            valg={ytelse}
+                            onSubmit={endreFiltervalg}
+                            filtervalg={filtervalg}
+                            closeDropdown={lukkDropdown}
+                            filterId="ytelse"
+                        />
+                    }
+                />
             </div>
             <div className="col-sm-12">
                 <OverskriftMedHjelpeTekst

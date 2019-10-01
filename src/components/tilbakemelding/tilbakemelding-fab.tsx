@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames/dedupe';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import './tilbakemelding-fab.less';
 import { sjekkFeature } from '../../ducks/features';

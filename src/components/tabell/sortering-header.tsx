@@ -16,7 +16,7 @@ function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekst, skalV
         <Header skalVises={skalVises} className={className}>
             <button
                 onClick={() => onClick(sortering)}
-                className={classNames('lenke lenke--frittstaende', { valgt: erValgt }, {'valgt-sortering': erValgt})}
+                className={classNames('lenke lenke--frittstaende text--left', { valgt: erValgt }, {'valgt-sortering': erValgt})}
                 aria-pressed={erValgt}
                 aria-label={erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ?
                 rekkefolge : 'inaktiv'}

@@ -1,4 +1,4 @@
-import {FiltreringAktiviteterValg} from "./ducks/filtrering";
+import { FiltreringAktiviteterValg } from './ducks/filtrering';
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -11,6 +11,7 @@ export enum Sorteringsfelt {
     VALGTE_AKTIVITETER = 'valgteaktiviteter',
     ETTERNAVN = 'etternavn',
     FODSELSNUMMER = 'fodselsnummer',
+    OPPFOLGINGSTARTET = 'oppfolgingstartet',
     UTLOPSDATO = 'utlopsdato',
     DAGPENGER_UTLOP_UKE = 'dagputlopuke',
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
@@ -27,6 +28,7 @@ export enum Sorteringsfelt {
     FORRIGE_DATO_FOR_AVTALT_AKTIVITET = 'forrige_aktivitet_start',
     AAP_RETTIGHETSPERIODE = 'aaprettighetsperiode',
     NAVIDENT = 'veileder_id',
+    VEILEDER = 'veileder_navn',
     MOTER_IDAG = 'moterMedNAVIdag',
 }
 
@@ -92,6 +94,7 @@ export interface BrukerModell {
     guid: string;
     fornavn: string;
     etternavn: string;
+    oppfolgingStartDato: Date;
     veilederId?: string;
     sikkerhetstiltak: string[];
     diskresjonskode?: string;
@@ -179,5 +182,5 @@ export enum Status {
 export interface ArbeidslisteDataModell {
     fnr: string;
     kommentar: string;
-    frist: string|null;
+    frist: string | null;
 }

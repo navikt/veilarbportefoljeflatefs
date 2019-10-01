@@ -75,6 +75,8 @@
     "nav-frontend-toggle-style": "0.0.22",
     "nav-frontend-typografi": "^2.0.12",
     "nav-frontend-typografi-style": "^1.0.14",
+    "prettier": "^1.18.2",
+    "prop-types": "15.7.2",
     "query-string": "4.3.4",
     "react": "16.8.6",
     "react-collapse": "4.0.3",
@@ -98,6 +100,12 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,json,less,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "browserslist": [
     ">0.2%",
