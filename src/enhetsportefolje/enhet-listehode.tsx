@@ -222,17 +222,14 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
                             className="header__veilederident col col-xs-2"
                         />
-                        <SorteringHeader
-                            sortering={Sorteringsfelt.VEILEDER}
-                            onClick={sorteringOnClick}
-                            rekkefolge={sorteringsrekkefolge}
-                            erValgt={sorteringsfelt === Sorteringsfelt.VEILEDER}
-                            tekst="Veileder"
+                        <Header
+                            className="col col-xs-2"
                             skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                            className="header__veilederident col col-xs-2"
-                        />
+                        >
+                            Veileder
+                        </Header>
                     </div>
-                    <div className="brukerliste__gutter-right"/>
+                <div className="brukerliste__gutter-right"/>
                 </div>
             </div>
         </div>
