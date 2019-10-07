@@ -15,7 +15,7 @@ loggBrowserMetrikker();
 
 function Routes() {
     //TODO FIKS THIS
-    const erHeroku = process.env.HEROKU_APP === 'true';
+    const erHeroku = process.env.REACT_HEROKU_APP === 'true';
 
     return (
         <div className="portefolje">
