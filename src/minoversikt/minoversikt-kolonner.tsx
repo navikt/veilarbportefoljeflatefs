@@ -49,6 +49,8 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
+    const ytelseAapErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE) && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
+
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
 
@@ -88,18 +90,21 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 minVal={2}
                 skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING)}
             />
+
+            {/*AAP*/}
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && erAapYtelse}
+                skalVises={ytelseAapErValgtKolonne && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && erAapYtelse}
+                skalVises={ytelseAapErValgtKolonne && erAapYtelse}
             />
+
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}

@@ -13,6 +13,8 @@ export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const MOTER_IDAG = 'MOTER_IDAG';
+export const UTLOP_YTELSE = 'UTLOP_YTELSE';
+export const AAP_YTELSE = 'AAP_YTELSE';
 
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker : UFORDELTE_BRUKERE,
@@ -27,6 +29,8 @@ export const mapFilternavnTilFilterValue = {
     iavtaltAktivitet: I_AVTALT_AKTIVITET,
     inaktiveBrukere: INAKTIVE_BRUKERE,
     minArbeidsliste: MIN_ARBEIDSLISTE,
+    utlopYtelse: UTLOP_YTELSE,
+    aapYtelse: AAP_YTELSE
 };
 
 export const FILTERGRUPPE_ENHET = 'enhet';
@@ -50,7 +54,8 @@ export const ferdigfilterListe = {
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
     ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
-    MOTER_IDAG: 'Møte med NAV idag'
+    MOTER_IDAG: 'Møte med NAV idag',
+    AAP_YTELSE: 'Aap-ytelse'
 };
 
 export const alder = {
@@ -101,6 +106,11 @@ export const servicegruppe = {
     VURDU: 'Sykmeldt uten arbeidsgiver'
 };
 
+export const manuellBrukerStatus = {
+    MANUELL: 'Manuell oppfølging',
+    KRR: 'Reservert i KRR'
+};
+
 export const ytelse = {
     DAGPENGER: {label: 'Dagpenger'},
     ORDINARE_DAGPENGER: { label: 'Ordinære dagpenger', className: 'skjemaelement--innrykk' },
@@ -111,11 +121,6 @@ export const ytelse = {
     AAP_MAXTID: { label: 'AAP maxtid', className: 'skjemaelement--innrykk' },
     AAP_UNNTAK: { label: 'AAP unntak', className: 'skjemaelement--innrykk' },
     TILTAKSPENGER: {label: 'Tiltakspenger'}
-};
-
-export const manuellBrukerStatus = {
-    MANUELL: 'Manuell oppfølging',
-    KRR: 'Reservert i KRR'
 };
 
 export const ytelsevalg: () => {[id: string]: string} = () => Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }), {});
