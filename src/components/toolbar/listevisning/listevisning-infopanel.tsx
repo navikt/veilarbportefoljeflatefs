@@ -34,7 +34,7 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
             <div className="listevisning--infopanel" aria-live="assertive" role="alert" aria-atomic="true">
                 <span>
                     Listen kan kun vise 5 kolonner av gangen. Du har valgt mer enn ett filter som inneholder visning av dato.
-                    Klikk på listevisning og velg det du ønsker å se.
+                    Klikk på Velg Kolonner og velg det du ønsker å se.
                     Selv om filtervalgene med dato ikke vises i listen, ligger de likevel til grunn for utrekket av brukere.
                 </span>
                 <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={() => props.lukkPanel(props.name)}>Lukk</Lukknapp>
