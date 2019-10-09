@@ -162,6 +162,8 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
                             className="sortering-header__dato col col-xs-2"
                         />
+
+                        {/*trengs denne?*/}
                         <SorteringHeader
                             sortering={aapRettighetsperiode}
                             onClick={sorteringOnClick}
