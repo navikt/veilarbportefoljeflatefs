@@ -43,11 +43,8 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
-
-    //const ytelseAapErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE) && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
-
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
@@ -81,33 +78,24 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 minVal={2}
                 skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING)}
             />
-
-            {/*denne skal vel stå her?*/}
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
                 skalVises={ytelseErValgtKolonne && erAapYtelse}
             />
-
-            {/*AAP DENNE*/}
-            {/*skal kun vises om vedtaksperiode er huket av*/}
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                //skalVises={ytelseErValgtKolonne && erAapYtelse}
                 skalVises={ytelseAapVedtaksperiodeErValgtKolonne && erAapYtelse}
             />
-
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                //skalVises={ytelseErValgtKolonne && erAapYtelse}
                 skalVises={ytelseAapRettighetsperiodeErValgtKolonne && erAapYtelse}
             />
-
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
