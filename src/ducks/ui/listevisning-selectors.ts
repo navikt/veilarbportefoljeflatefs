@@ -6,7 +6,7 @@ import {
     MOTER_IDAG,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV, AAP_YTELSE
+    VENTER_PA_SVAR_FRA_NAV, AAP_YTELSE, AAP_YTELSE_MAXTID, AAP_YTELSE_UNNTAK
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from "../../model-interfaces";
 
@@ -55,17 +55,13 @@ export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolo
     return [Kolonne.BRUKER, Kolonne.FODSELSNR]
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.MOTER_VARIGHET, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
-
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
         .concat(addHvis(Kolonne.AVTALT_AKTIVITET, filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
         .concat(addHvis(Kolonne.VENTER_SVAR, filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) || filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)))
 
-        .concat(addHvis(Kolonne.UTLOP_YTELSE, filtervalg.ytelse !== AAP_YTELSE))
-        //.concat(addHvis(Kolonne.UTLOP_YTELSE, filtervalg.ytelse !== null))
-        .concat(addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ferdigfilterListe.includes(AAP_YTELSE)))
-        //.concat(addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE))
-       .concat(addHvis(Kolonne.RETTIGHETSPERIODE, filtervalg.ferdigfilterListe.includes(AAP_YTELSE)))
-        //.concat(addHvis(Kolonne.RETTIGHETSPERIODE, filtervalg.ytelse === AAP_YTELSE))
+        .concat(addHvis(Kolonne.UTLOP_YTELSE, filtervalg.ytelse !== AAP_YTELSE && filtervalg.ytelse !== AAP_YTELSE_MAXTID && filtervalg.ytelse !== AAP_YTELSE_UNNTAK))
+        .concat(addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_MAXTID || filtervalg.ytelse === AAP_YTELSE_UNNTAK))
+        .concat(addHvis(Kolonne.RETTIGHETSPERIODE, filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_MAXTID || filtervalg.ytelse === AAP_YTELSE_UNNTAK))
 
         .concat(addHvis(Kolonne.UTLOP_AKTIVITET, harValgtMinstEnAktivitet(filtervalg.aktiviteter) && harIkkeValgtTiltakstype(filtervalg.tiltakstyper)))
         .concat(addHvis(Kolonne.START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))

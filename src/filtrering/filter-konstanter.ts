@@ -14,7 +14,9 @@ export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const MOTER_IDAG = 'MOTER_IDAG';
 export const UTLOP_YTELSE = 'UTLOP_YTELSE';
-export const AAP_YTELSE = 'AAP_YTELSE';
+export const AAP_YTELSE = 'AAP';
+export const AAP_YTELSE_MAXTID = 'AAP_MAXTID';
+export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
 
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker : UFORDELTE_BRUKERE,
@@ -30,7 +32,9 @@ export const mapFilternavnTilFilterValue = {
     inaktiveBrukere: INAKTIVE_BRUKERE,
     minArbeidsliste: MIN_ARBEIDSLISTE,
     utlopYtelse: UTLOP_YTELSE,
-    aapYtelse: AAP_YTELSE
+    aapYtelse: AAP_YTELSE,
+    aapYtelseMaxtid: AAP_YTELSE_MAXTID,
+    aapYtelseUnntak: AAP_YTELSE_UNNTAK
 };
 
 export const FILTERGRUPPE_ENHET = 'enhet';
@@ -55,7 +59,6 @@ export const ferdigfilterListe = {
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
     ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
     MOTER_IDAG: 'Møte med NAV idag',
-    AAP_YTELSE: 'Aap-ytelse'
 };
 
 export const alder = {
