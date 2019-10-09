@@ -13,6 +13,8 @@ alternativerConfig.set(Kolonne.VEILEDER, {tekstlabel: 'Veileder'});
 alternativerConfig.set(Kolonne.NAVIDENT, {tekstlabel: 'NAV-ident'});
 alternativerConfig.set(Kolonne.VENTER_SVAR, {tekstlabel: 'Venter på svar'});
 alternativerConfig.set(Kolonne.UTLOP_YTELSE, {tekstlabel: 'Utløp ytelse'});
+alternativerConfig.set(Kolonne.VEDTAKSPERIODE, {tekstlabel: 'Vedtaksperiode'});
+alternativerConfig.set(Kolonne.RETTIGHETSPERIODE, {tekstlabel: 'Rettighetsperiode'});
 alternativerConfig.set(Kolonne.UTLOP_AKTIVITET, {tekstlabel: 'Første sluttdato av valgte aktiviteter'});
 alternativerConfig.set(Kolonne.UTLOPTE_AKTIVITETER, {tekstlabel: 'Utløpte aktiviteter'});
 alternativerConfig.set(Kolonne.AVTALT_AKTIVITET, {tekstlabel: 'Neste utløpsdato aktivitet'});

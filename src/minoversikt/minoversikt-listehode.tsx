@@ -189,14 +189,34 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
+                            sortering={ytelseUtlopsdatoNavn}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
+                            tekst="Vedtaksperiode"
+                            skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
+                            className="sortering-header__dato col col-xs-2"
+                        />
+                        <SorteringHeader
                             sortering={aapRettighetsperiode}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === aapRettighetsperiode}
                             tekst="Rettighetsperiode"
-                            skalVises={ytelseFilterErAktiv(ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                            skalVises={ytelseFilterErAktiv(ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
                             className="sortering-header__dato col col-xs-2"
                         />
+                        {/*trengs denne?*/}
+                        <SorteringHeader
+                            sortering={aapRettighetsperiode}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === aapRettighetsperiode}
+                            tekst="Rettighetsperiode"
+                            skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                            className="sortering-header__dato col col-xs-2"
+                        />
+
                         <SorteringHeader
                             sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                             onClick={sorteringOnClick}

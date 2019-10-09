@@ -145,6 +145,26 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             className="sortering-header__dato col col-xs-2"
                         />
                         <SorteringHeader
+                            sortering={ytelseUtlopsdatoNavn}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
+                            tekst="Vedtaksperiode"
+                            skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
+                            className="sortering-header__dato col col-xs-2"
+                        />
+                        <SorteringHeader
+                            sortering={aapRettighetsperiode}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === aapRettighetsperiode}
+                            tekst="Rettighetsperiode"
+                            skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
+                            className="sortering-header__dato col col-xs-2"
+                        />
+
+                        {/*trengs denne?*/}
+                        <SorteringHeader
                             sortering={aapRettighetsperiode}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
