@@ -76,7 +76,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                             type={EtikettType.NYBRUKER}
                             skalVises={bruker.nyForVeileder}
                         >
-                            Ny Bruker
+                            Ny bruker
                         </Etikett>
                     </div>
                 </div>
