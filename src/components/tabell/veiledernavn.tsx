@@ -17,7 +17,7 @@ function VeilederNavn({ className, bruker, skalVises, veileder }: VeiledernavnPr
     const veilederNavn = <span>{veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : ''}</span>;
 
     const ufordeltBrukerEtikett = <Etikett
-        type={EtikettType.NYBRUKER}
+        type={EtikettType.UFORDELTBRUKER}
         skalVises={bruker.nyForEnhet === true}
     >
         Ufordelt bruker
