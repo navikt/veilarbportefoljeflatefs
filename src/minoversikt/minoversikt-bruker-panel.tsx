@@ -70,7 +70,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         apen={apen}
                         onClick={handleArbeidslisteButtonClick}
                     />
-                    <div>
+                    <div className={"brukerliste__etiketter"}>
                         <Etiketter bruker={bruker}/>
                         <Etikett
                             type={EtikettType.NYBRUKER}
