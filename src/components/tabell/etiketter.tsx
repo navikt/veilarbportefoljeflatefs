@@ -34,7 +34,6 @@ function Etiketter({className, bruker}: EtiketterProps) {
             >
                Egen ansatt
             </Etikett>
-
             <Etikett
                 type={EtikettType.IKKE_VURDERT}
                 skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
