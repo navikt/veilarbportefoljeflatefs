@@ -50,9 +50,9 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
 
     return (
         <div className="brukerliste__header">
-            <div className="brukerliste--borders">
-                <div className="brukerliste__overskriftheader brukerliste--minoversikt-padding">
-                    <div className="brukerliste__gutter-left brukerliste--min-width-minside" />
+            {/*<div className="brukerliste--borders">*/}
+            {/*    <div className="brukerliste__overskriftheader brukerliste--minoversikt-padding">*/}
+            {/*        <div className="brukerliste__gutter-left brukerliste--min-width-minside" />*/}
 
                     {/*<div className="brukerliste__innhold">*/}
                     {/*    <Listeoverskrift*/}
@@ -130,10 +130,9 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                     {/*        tekst="Startdato aktivitet passert"*/}
                     {/*    />*/}
                     {/*</div>*/}
-
-                    <div className="brukerliste__gutter-right"/>
-                </div>
-            </div>
+            {/*        <div className="brukerliste__gutter-right"/>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <div className="brukerliste--border-bottom">
                 <div className="brukerliste__sorteringheader">
                     <div className="brukerliste__gutter-left brukerliste--min-width-minside"/>

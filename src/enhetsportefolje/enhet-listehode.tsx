@@ -43,9 +43,9 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
 
     return (
         <div className="brukerliste__header">
-            <div className="brukerliste--borders">
-                <div className="brukerliste__overskriftheader">
-                    <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>
+            {/*<div className="brukerliste--borders">*/}
+                {/*<div className="brukerliste__overskriftheader">*/}
+                {/*    <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>*/}
 
                     {/*<div className="brukerliste__innhold">*/}
                     {/*    <Listeoverskrift*/}
@@ -105,9 +105,9 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                     {/*    />*/}
                     {/*</div>*/}
 
-                    <div className="brukerliste__gutter-right"/>
-                </div>
-            </div>
+                    {/*<div className="brukerliste__gutter-right"/>*/}
+                {/*</div>*/}
+            {/*</div>*/}
             <div className="brukerliste--border-bottom">
                 <div className="brukerliste__sorteringheader typo-undertekst">
                     <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>
