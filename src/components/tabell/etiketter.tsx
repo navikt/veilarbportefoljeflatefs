@@ -7,9 +7,15 @@ interface EtiketterProps {
     bruker: BrukerModell;
 }
 
-function Etiketter({ className, bruker }: EtiketterProps) {
+function Etiketter({className, bruker}: EtiketterProps) {
     return (
         <span className={className}>
+            <Etikett
+                type={EtikettType.DOED}
+                skalVises={bruker.erDoed}
+            >
+                Død
+            </Etikett>
             <Etikett
                 type={EtikettType.SIKKERHETSTILTAK}
                 skalVises={bruker.sikkerhetstiltak.length > 0}
@@ -28,12 +34,7 @@ function Etiketter({ className, bruker }: EtiketterProps) {
             >
                Egen ansatt
             </Etikett>
-            <Etikett
-                type={EtikettType.DOED}
-                skalVises={bruker.erDoed}
-            >
-                Død
-            </Etikett>
+
             <Etikett
                 type={EtikettType.IKKE_VURDERT}
                 skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
@@ -52,7 +53,6 @@ function Etiketter({ className, bruker }: EtiketterProps) {
             >
                 Sykmeldt
             </Etikett>
-
         </span>
     );
 }
