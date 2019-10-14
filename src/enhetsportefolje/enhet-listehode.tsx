@@ -1,7 +1,6 @@
 import React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
 import { ytelseFilterErAktiv } from '../utils/utils';
-import Listeoverskrift from '../utils/listeoverskrift';
 import {
     ytelseUtlopsSortering,
     ytelseAapSortering,
@@ -14,12 +13,11 @@ import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model
 import { Kolonne } from '../ducks/ui/listevisning';
 import { AktiviteterValg } from '../ducks/filtrering';
 import Header from '../components/tabell/header';
-import { bereignListeOverskriftStorrelse } from '../minoversikt/minoversikt-listehode';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
-       const valgteAktiviteter = Object.values(aktiviteter).filter((aktivitetvalg) => aktivitetvalg !== AktiviteterValg.NA);
-       return valgteAktiviteter && valgteAktiviteter.length > 0;
+        const valgteAktiviteter = Object.values(aktiviteter).filter((aktivitetvalg) => aktivitetvalg !== AktiviteterValg.NA);
+        return valgteAktiviteter && valgteAktiviteter.length > 0;
     }
     return false;
 }
@@ -32,8 +30,8 @@ interface EnhetListehodeProps {
     sorteringsfelt: string;
 }
 
-function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: EnhetListehodeProps) {
-    const { ytelse } = filtervalg;
+function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner}: EnhetListehodeProps) {
+    const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
     const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : ytelseUtlopsSortering[ytelse!];
@@ -43,71 +41,6 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
 
     return (
         <div className="brukerliste__header">
-            {/*<div className="brukerliste--borders">*/}
-                {/*<div className="brukerliste__overskriftheader">*/}
-                {/*    <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>*/}
-
-                    {/*<div className="brukerliste__innhold">*/}
-                    {/*    <Listeoverskrift*/}
-                    {/*        className={`listeoverskrift__arbeidsliste listeoverskrift col col-xs-${bereignListeOverskriftStorrelse(valgteKolonner, [Kolonne.FODSELSNR, Kolonne.BRUKER, Kolonne.OPPFOLGINGSTARTET])}`}*/}
-                    {/*        tekst="Bruker"*/}
-                    {/*    />*/}
-                    {/*    <Listeoverskrift*/}
-                    {/*        className="listeoverskrift__dato listeoverskriftcol col col-xs-2"*/}
-                    {/*        skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}*/}
-                    {/*        tekst="Gjenstår"*/}
-                    {/*    />*/}
-                    {/*    <Listeoverskrift*/}
-                    {/*        className="listeoverskrift__dato listeoverskriftcol col col-xs-2"*/}
-                    {/*        skalVises={!!filtervalg && ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}*/}
-                    {/*        tekst="Gjenstår"*/}
-                    {/*    />*/}
-                    {/*    <Listeoverskrift*/}
-                    {/*        className="listeoverskrift__dato listeoverskriftcol col col-xs-2"*/}
-                    {/*        skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}*/}
-                    {/*        tekst="Svar fra NAV"*/}
-                    {/*    />*/}
-                    {/*    <Listeoverskrift*/}
-                    {/*        className="listeoverskrift__dato listeoverskrift col col-xs-2"*/}
-                    {/*        skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}*/}
-                    {/*        tekst="Svar fra bruker"*/}
-                    {/*    />*/}
-                    {/*    <Listeoverskrift*/}
-                    {/*        className="listeoverskrift__dato listeoverskrift col col-xs-2"*/}
-                    {/*        skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER) && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}*/}
-                    {/*        tekst="Utløpt aktivitet"*/}
-                    {/*    />*/}
-                    {/*    <Listeoverskrift*/}
-                    {/*        className="listeoverskrift__dato listeoverskrift col col-xs-2"*/}
-                    {/*        skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}*/}
-                    {/*        tekst="Neste utløpsdato aktivitet"*/}
-                    {/*    />*/}
-                    {/*    <Listeoverskrift*/}
-                    {/*        className="listeoverskrift__dato listeoverskrift col col-xs-2"*/}
-                    {/*        skalVises={!!filtervalg && harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}*/}
-                    {/*        tekst="Første sluttdato av valgte aktiviteter"*/}
-
-                    {/*    />*/}
-                    {/*    <Listeoverskrift*/}
-                    {/*        className="listeoverskrift col col-xs-2"*/}
-                    {/*        skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}*/}
-                    {/*        tekst="Klokkeslett for møtet"*/}
-                    {/*    />*/}
-                    {/*    <Listeoverskrift*/}
-                    {/*        className="listeoverskrift col col-xs-2"*/}
-                    {/*        skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}*/}
-                    {/*        tekst="Varighet"*/}
-                    {/*    />*/}
-                    {/*    <Listeoverskrift*/}
-                    {/*        className="listeoverskrift__veileder listeoverskrift col col-xs-2"*/}
-                    {/*        skalVises={valgteKolonner.includes(Kolonne.VEILEDER)|| valgteKolonner.includes(Kolonne.NAVIDENT)}*/}
-                    {/*        tekst="Veileder"*/}
-                    {/*    />*/}
-                    {/*</div>*/}
-
-                    {/*<div className="brukerliste__gutter-right"/>*/}
-                {/*</div>*/}
-            {/*</div>*/}
             <div className="brukerliste--border-bottom">
                 <div className="brukerliste__sorteringheader typo-undertekst">
                     <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>
@@ -164,17 +97,6 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
                             className="sortering-header__dato col col-xs-2"
                         />
-
-                        {/*trengs denne?*/}
-                        {/*<SorteringHeader*/}
-                        {/*    sortering={aapRettighetsperiode}*/}
-                        {/*    onClick={sorteringOnClick}*/}
-                        {/*    rekkefolge={sorteringsrekkefolge}*/}
-                        {/*    erValgt={sorteringsfelt === aapRettighetsperiode}*/}
-                        {/*    tekst="Gjenstående uker rettighet"*/}
-                        {/*    skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}*/}
-                        {/*    className="sortering-header__dato col col-xs-2"*/}
-                        {/*/>*/}
                         <SorteringHeader
                             sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                             onClick={sorteringOnClick}
@@ -251,7 +173,7 @@ function EnhetListehode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, so
                             Veileder
                         </Header>
                     </div>
-                <div className="brukerliste__gutter-right"/>
+                    <div className="brukerliste__gutter-right"/>
                 </div>
             </div>
         </div>
