@@ -18,6 +18,12 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '14. OKT. 2019',
+        tittel: 'Tittel på kolonner i oversikten',
+        tekst: 'Vi har justert titlene på noen av kolonnene i oversikten. Funksjonaliteten er den samme som før.',
+        versjonId: '0.2.2',
+    },
+    {
         dato: '26. SEP. 2019',
         tittel: 'Endring i arbeidslisten',
         tekst: 'Tittelfeltet i arbeidslisten er utvidet til 30 tegn. Kolonnetittelen i oversikten er endret fra "Kommentar" til "Tittel".',

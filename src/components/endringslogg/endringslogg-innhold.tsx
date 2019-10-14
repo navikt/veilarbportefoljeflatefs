@@ -5,7 +5,7 @@ import { ReactComponent as LinkIcon } from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
 import { EndringsloggInnleggMedSettStatus } from './utils/endringslogg-custom';
 
-interface EndringsloggInleggProps {
+interface EndringsloggInnleggProps {
     dato: string;
     innholdsTekst?: string;
     innholdsOverskrift: string;
@@ -29,7 +29,7 @@ export function EndringsloggLinkMedIkon(props: { linkTekst: string, url: string 
 export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
     const content = props.innleggsListe.map((endring, index) => {
         return (
-            <EndringsloggInlegg
+            <EndringsloggInnlegg
                 key={index}
                 dato={endring.dato}
                 innholdsTekst={endring.tekst}
@@ -47,7 +47,7 @@ export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
     );
 }
 
-function EndringsloggInlegg(props: EndringsloggInleggProps) {
+function EndringsloggInnlegg(props: EndringsloggInnleggProps) {
     return (
         <div className="endringslogg-rad endringslogg-skille">
             <div className="endringslogg-datolinje">
