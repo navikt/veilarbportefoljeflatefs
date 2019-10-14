@@ -78,7 +78,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
-                            tekst="Arbeidsliste frist" //sjekk med lars
+                            tekst="Arbeidsliste frist"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)}
                             className="sortering-header__dato col col-xs-2"
                         />
@@ -87,7 +87,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                            tekst="Arbeidsliste tittel" //sjekk med lars
+                            tekst="Arbeidsliste tittel"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)}
                             className="sortering-header__dato col col-xs-2"
                         />
@@ -175,7 +175,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                            tekst="Første sluttdato aktivitet" //sjekk med lars
+                            tekst="Første utløpsdato aktivitet"
                             skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 &&
                             valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
                             className="sortering-header__dato col col-xs-2"
@@ -205,7 +205,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
-                            tekst="Startdato aktivitet passert" //sjekk med lars
+                            tekst="Passert startdato aktivitet"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
                             className="sortering-header__dato col col-xs-2"
