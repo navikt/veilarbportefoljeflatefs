@@ -70,6 +70,22 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             className="sortering-header__dato col col-xs-2"
                             skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                         />
+                        <Header
+                            className="col col-xs-2"
+                            skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
+                        >
+                            Veileder
+                        </Header>
+                        <SorteringHeader
+                            sortering={Sorteringsfelt.NAVIDENT}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.NAVIDENT}
+                            tekst="NAV-ident"
+                            skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
+                            className="header__veilederident col col-xs-2"
+                        />
+
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
                             onClick={sorteringOnClick}
@@ -157,21 +173,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                         >
                             Varighet møte
                         </Header>
-                        <SorteringHeader
-                            sortering={Sorteringsfelt.NAVIDENT}
-                            onClick={sorteringOnClick}
-                            rekkefolge={sorteringsrekkefolge}
-                            erValgt={sorteringsfelt === Sorteringsfelt.NAVIDENT}
-                            tekst="NAV-ident"
-                            skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
-                            className="header__veilederident col col-xs-2"
-                        />
-                        <Header
-                            className="col col-xs-2"
-                            skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                        >
-                            Veileder
-                        </Header>
+
                     </div>
                     <div className="brukerliste__gutter-right"/>
                 </div>

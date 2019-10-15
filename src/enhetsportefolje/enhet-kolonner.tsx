@@ -61,6 +61,15 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                 dato={bruker.oppfolgingStartDato}
             />
+            <VeilederNavn className="col col-xs-2"
+                          bruker={bruker}
+                          skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
+                          veileder={brukersVeileder}
+            />
+            <VeilederId className="col col-xs-2"
+                        bruker={bruker}
+                        skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
+            />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
@@ -136,15 +145,6 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 dato={varighet}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
-            />
-            <VeilederId className="col col-xs-2"
-                        bruker={bruker}
-                        skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
-            />
-            <VeilederNavn className="col col-xs-2"
-                          bruker={bruker}
-                          skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                          veileder={brukersVeileder}
             />
         </div>
     );
