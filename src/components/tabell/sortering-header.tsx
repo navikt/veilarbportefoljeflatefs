@@ -9,9 +9,10 @@ interface SorteringHeaderProps extends HeaderProps {
     rekkefolge: Sorteringsrekkefolge;
     erValgt: boolean;
     tekst: string;
+    title?: string;
 }
 
-function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekst, skalVises = true, className = '' }: SorteringHeaderProps) {
+function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekst, skalVises = true, className = '', title }: SorteringHeaderProps) {
     return (
         <Header skalVises={skalVises} className={className}>
             <button
@@ -20,6 +21,7 @@ function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekst, skalV
                 aria-pressed={erValgt}
                 aria-label={erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ?
                 rekkefolge : 'inaktiv'}
+                title = {title}
             >
                 {tekst}
             </button>
