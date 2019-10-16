@@ -123,13 +123,6 @@ function FiltreringStatusNy (props: FiltreringStatusProps) {
                     </div>
                     <div>
                         <RadioMedAntall
-                            labelNavn="I avtalt aktivitet"
-                            antall={statusTall.iavtaltAktivitet}
-                            onChange={handleRadioButtonChange}
-                            value={I_AVTALT_AKTIVITET}
-                            checked={ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
-                        />
-                        <RadioMedAntall
                             labelNavn="Utløpte aktiviteter"
                             antall={statusTall.utlopteAktiviteter}
                             onChange={handleRadioButtonChange}
@@ -142,6 +135,13 @@ function FiltreringStatusNy (props: FiltreringStatusProps) {
                             onChange={handleRadioButtonChange}
                             value={IKKE_I_AVTALT_AKTIVITET}
                             checked={ferdigfilterListe.includes(IKKE_I_AVTALT_AKTIVITET)}
+                        />
+                        <RadioMedAntall
+                            labelNavn="I avtalt aktivitet"
+                            antall={statusTall.iavtaltAktivitet}
+                            onChange={handleRadioButtonChange}
+                            value={I_AVTALT_AKTIVITET}
+                            checked={ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
                         />
                     </div>
                 </Grid>
