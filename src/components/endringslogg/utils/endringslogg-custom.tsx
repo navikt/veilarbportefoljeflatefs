@@ -19,8 +19,8 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
         dato: '17. OKT. 2019',
-        tittel: 'Titler på kolonner i oversikten',
-        tekst: 'Vi har justert titlene på noen av kolonnene i oversikten. Funksjonaliteten er den samme som før.',
+        tittel: 'Kolonner i oversikten',
+        tekst: 'Vi har justert rekkefølge og titler på noen av kolonnene i oversikten. Funksjonaliteten er den samme.',
         versjonId: '0.2.2',
     },
     {
