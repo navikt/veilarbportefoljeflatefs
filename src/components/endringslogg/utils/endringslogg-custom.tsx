@@ -21,7 +21,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '21. OKT. 2019',
         tittel: 'Startdato for oppfølgingsperioden',
         tekst: 'Oversikten har nå en kolonne som viser startdato for oppfølgingsperioden. Vi har også ryddet litt i oversikten og endret på titlene til noen av kolonnene.',
-        versjonId: '0.2.3', //endret navn for å teste blå prikk i q0
+        versjonId: '0.2.2',
         children:
             <TourModalButton
                 metrikknavn="portefolje.endringslogg_modal"
