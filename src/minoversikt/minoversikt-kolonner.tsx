@@ -23,7 +23,7 @@ import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
+import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 
 interface MinOversiktKolonnerProps {
@@ -34,6 +34,7 @@ interface MinOversiktKolonnerProps {
     enhetId: string;
     skalJusteres: boolean;
 }
+
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, skalJusteres}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
@@ -56,12 +57,12 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}  skalJusteres={skalJusteres}/>
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} skalJusteres={skalJusteres}/>
             <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
-                dato={bruker.oppfolgingStartDato}
+                dato={oppfolgingStartetDato(bruker.oppfolgingStartDato)}
             />
             <DatoKolonne
                 className="col col-xs-2"
