@@ -6,6 +6,8 @@ import filter3Bilde from './filter/filter-3.png';
 import filterendring1Bilde from './filterendringer/filterendringer-step1.png';
 import filterendring2Bilde from './filterendringer/filterendringer-step2.png';
 import filterendring3Bilde from './filterendringer/filterendringer-step3.png';
+import oversiktsrydding1Bilde from './oversiktsrydding/oversiktsrydding-step1.png';
+import oversiktsrydding2Bilde from './oversiktsrydding/oversiktsrydding-step2.png';
 
 const stepsLastNedCV: Step[] = [
     {
@@ -59,6 +61,19 @@ const stepsblank: Step[] = [
     }
 ];
 
+const stepsOversiktsrydding: Step[] = [
+    {
+        tittel: 'Startdato for oppfølgingsperiode',
+        bilde: oversiktsrydding1Bilde,
+        tekst: 'Oversikten har en ny kolonne, «Oppfølging startet». Brukere registrert før aktivitetsplanen ble lansert 4. des. 2017 vises uten dato.'
+    },
+    {
+        tittel: 'Velg kolonner',
+        bilde: oversiktsrydding2Bilde,
+        tekst: 'Du kan bruke «Velg kolonne» for å tilpasse visningen i oversikten. Vi har endret navn på noen av kolonnene. Funksjonaliteten er den samme.'
+    },
+];
+
 export function getTour(modal: ModalName) {
     switch (modal) {
         case ModalName.LAST_NED_CV:
@@ -67,6 +82,8 @@ export function getTour(modal: ModalName) {
             return stepsFilter;
         case ModalName.FLYTTE_FILTER:
             return stepsFlytteFilter;
+        case ModalName.OVERSIKTSRYDDING:
+            return stepsOversiktsrydding;
         default:
             return stepsblank;
     }
