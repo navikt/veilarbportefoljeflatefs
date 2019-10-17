@@ -11,6 +11,7 @@ function LenkerMinoversikt(props: { veilederident: string | null }) {
                 to={path}
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"
+                title="Her vises alle brukere som er tildelt deg eller veilederen du er inne på"
             >
                 Min oversikt
             </ActiveLink>

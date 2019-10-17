@@ -10,6 +10,7 @@ function Lenker() {
                     to="/enhet"
                     className="oversiktslenke typo-undertittel"
                     activeClassName="oversiktslenke--valgt"
+                    title="Her vises alle brukere som tilhører enheten"
                 >
                     Enhetens oversikt
                 </ActiveLink>
@@ -19,6 +20,7 @@ function Lenker() {
                     to="/veiledere"
                     className="oversiktslenke typo-undertittel"
                     activeClassName="oversiktslenke--valgt"
+                    title="Her vises alle veilederne som som tilhører enheten"
                 >
                     Veilederoversikt
                 </ActiveLink>
