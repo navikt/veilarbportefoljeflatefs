@@ -65,11 +65,6 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
                     <Lenker />
                     <Innholdslaster avhengigheter={[ statustall, veiledere, portefoljestorrelser]}>
                     <div id="oversikt-sideinnhold" role="tabpanel">
-                        <p className="typo-infotekst begrensetbredde blokk-l">
-                            Her får du oversikt over alle veiledere som er hører til den enheten du er logget inn på.
-                            Du kan se hvor mange brukere den enkelte veileder har, du kan søke opp veiledere,
-                            og du kan gå inn på én veileder for å se denne veilederens oversikt.
-                        </p>
                         <div className="veiledere-side--cols">
                             <div className="veiledere-side--filter-col">
                                 <PanelBase className="blokk-xxxs">

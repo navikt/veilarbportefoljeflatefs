@@ -43,7 +43,7 @@ interface IdentProps {
 }
 
 interface DispatchProps {
-    hentStatusTall: (enhet: string, ident: string|undefined) => void;
+    hentStatusTall: (enhet: string, ident: string | undefined) => void;
     hentEnhetTiltak: (enhet: string) => void;
     doSettValgtVeileder: (ident: IdentProps) => void;
     doSettSortering: (rekkefolge: string, felt: string) => void;
@@ -53,7 +53,8 @@ interface DispatchProps {
 
 interface OwnProps {
     match:
-        {params:
+        {
+            params:
                 { ident: string; }
         };
 }
@@ -62,23 +63,23 @@ type MinoversiktSideProps = StateProps & DispatchProps & OwnProps;
 
 class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     componentDidMount() {
-        const { veiledere, enheter, valgtEnhet, filtervalg, hentPortefolje, ...props } = this.props;
+        const {veiledere, enheter, valgtEnhet, filtervalg, hentPortefolje, ...props} = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
-        const innloggetVeileder = { ident: enheter.ident };
+        const innloggetVeileder = {ident: enheter.ident};
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
         this.settInitalStateFraUrl();
         loggSkjermMetrikker(Side.MIN_OVERSIKT);
         loggSideVisning(props.innloggetVeilederIdent, Side.MIN_OVERSIKT);
 
-        this.props.hentStatusTall(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident );
+        this.props.hentStatusTall(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident);
         this.props.hentEnhetTiltak(valgtEnhet.enhet!.enhetId);
 
         this.props.doSettValgtVeileder(gjeldendeVeileder);
 
         const sorteringsfelt = getSorteringsFeltFromUrl();
         const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
-        this.props.doSettSortering(sorteringsrekkefolge,sorteringsfelt);
+        this.props.doSettSortering(sorteringsrekkefolge, sorteringsfelt);
 
         hentPortefolje(
             valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, sorteringsrekkefolge, sorteringsfelt, filtervalg
@@ -93,9 +94,9 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     }
 
     render() {
-        const { enheter, veiledere, filtervalg, statustall, enhettiltak, listevisning, ...props } = this.props;
+        const {enheter, veiledere, filtervalg, statustall, enhettiltak, listevisning, ...props} = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
-        const innloggetVeileder = { ident: enheter.ident|| '', fornavn: '', etternavn: '', navn: ''};
+        const innloggetVeileder = {ident: enheter.ident || '', fornavn: '', etternavn: '', navn: ''};
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
         const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
@@ -112,22 +113,18 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                     <div className="minoversikt-side blokk-xl">
                         {visesAnnenVeiledersPortefolje ?
                             <Link to="/veiledere" className="typo-normal tilbaketilveileder">
-                                <i className="chevron--venstre" />
+                                <i className="chevron--venstre"/>
                                 <span>
                                      Til veilederoversikt
                                 </span>
                             </Link> : null}
                         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
-                            { visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
+                            {visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
                             <div className="portefolje-side">
                                 <LenkerMinoversikt
                                     veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
                                 />
                                 <div id="oversikt-sideinnhold" role="tabpanel">
-                                    <p className="typo-infotekst begrensetbredde blokk-l">
-                                        Her får du oversikt over alle brukere som er tildelt deg eller ditt team.
-                                        Du kan filtrere ytterligere eller flytte brukere til en annen veileder i din enhet.
-                                    </p>
                                     <div className="row">
                                         <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
                                             <FiltreringContainer
@@ -145,7 +142,7 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                                 enhettiltak={enhettiltak.data.tiltak}
                                                 listevisning={listevisning}
                                             />
-                                            <ListevisningInfoPanel name={ListevisningType.minOversikt} />
+                                            <ListevisningInfoPanel name={ListevisningType.minOversikt}/>
                                             <VeilederPortefoljeVisning
                                                 gjeldendeVeileder={gjeldendeVeileder}
                                                 visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
@@ -178,7 +175,7 @@ const mapStateToProps = (state): StateProps => ({
 const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg, fra = 0, antall = 20) =>
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, filtervalg)),
-    hentStatusTall: (enhet: string, veileder: string|undefined) => dispatch(hentStatusTall(enhet, veileder)),
+    hentStatusTall: (enhet: string, veileder: string | undefined) => dispatch(hentStatusTall(enhet, veileder)),
     hentEnhetTiltak: (enhet: string) => dispatch(hentEnhetTiltak(enhet)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
     doSettValgtVeileder: (identProps: IdentProps) => dispatch(settValgtVeileder(identProps)),
