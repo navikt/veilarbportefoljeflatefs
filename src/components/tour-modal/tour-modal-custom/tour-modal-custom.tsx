@@ -70,7 +70,7 @@ const stepsOversiktsrydding: Step[] = [
     {
         tittel: 'Velg kolonner',
         bilde: oversiktsrydding2Bilde,
-        tekst: 'Du kan bruke «Velg kolonne» for å tilpasse visningen i oversikten. Vi har endret navn på noen av kolonnene. Funksjonaliteten er den samme.'
+        tekst: 'Dersom det ikke er plass til å vise alle kolonner samtidig, kan du bruke «Velg kolonner». Vi har også endret navn på noen av kolonnene. Funksjonaliteten er den samme.'
     },
 ];
 
