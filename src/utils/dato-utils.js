@@ -208,3 +208,17 @@ export function validerDatoFeldt(input, fra, valgfritt) {
     }
     return error;
 }
+
+export function oppfolgingStartetDato(oppfolgingsDato) {
+    const tidligsteDato = new Date('2017-12-04');
+
+    // FIXME: Ugh
+    if (typeof oppfolgingsDato === 'string') {
+        oppfolgingsDato = new Date(oppfolgingsDato);
+    }
+
+    if (oppfolgingsDato <= tidligsteDato || oppfolgingsDato === undefined) {
+        return null;
+    }
+    return oppfolgingsDato;
+}

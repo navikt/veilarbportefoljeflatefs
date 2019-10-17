@@ -23,7 +23,7 @@ import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
+import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 
 interface MinOversiktKolonnerProps {
@@ -33,22 +33,8 @@ interface MinOversiktKolonnerProps {
     valgteKolonner: Kolonne[];
     enhetId: string;
     skalJusteres: boolean;
-    oppfolgingsDato?: Date | null;
 }
 
-function oppfolgingStartetDato(oppfolgingsDato) {
-    const tidligsteDato = new Date('2017-12-04');
-
-    // FIXME: Ugh
-    if (typeof oppfolgingsDato === 'string') {
-        oppfolgingsDato = new Date(oppfolgingsDato);
-    }
-
-    if (oppfolgingsDato <= tidligsteDato || oppfolgingsDato === undefined) {
-        return null;
-    }
-    return oppfolgingsDato;
-}
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, skalJusteres}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;

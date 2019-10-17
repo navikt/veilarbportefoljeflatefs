@@ -23,7 +23,7 @@ import {
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
+import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 
 interface EnhetKolonnerProps {
@@ -33,21 +33,6 @@ interface EnhetKolonnerProps {
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
-    oppfolgingsDato?: Date | null;
-}
-
-function oppfolgingStartetDato(oppfolgingsDato) {
-    const tidligsteDato = new Date('2017-12-04');
-
-    // FIXME: Ugh
-    if (typeof oppfolgingsDato === 'string') {
-        oppfolgingsDato = new Date(oppfolgingsDato);
-    }
-
-    if (oppfolgingsDato <= tidligsteDato || oppfolgingsDato === undefined) {
-        return null;
-    }
-    return oppfolgingsDato;
 }
 
 function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
