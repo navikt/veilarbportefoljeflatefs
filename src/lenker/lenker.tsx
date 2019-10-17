@@ -20,7 +20,7 @@ function Lenker() {
                     to="/veiledere"
                     className="oversiktslenke typo-undertittel"
                     activeClassName="oversiktslenke--valgt"
-                    title="Her vises alle veilederne som som tilhører enheten"
+                    title="Her vises alle veilederne som tilhører enheten"
                 >
                     Veilederoversikt
                 </ActiveLink>
