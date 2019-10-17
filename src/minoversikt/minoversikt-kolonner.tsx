@@ -33,6 +33,21 @@ interface MinOversiktKolonnerProps {
     valgteKolonner: Kolonne[];
     enhetId: string;
     skalJusteres: boolean;
+    oppfolgingsDato?: Date | null;
+}
+
+function oppfolgingStartetDato(oppfolgingsDato) {
+    const tidligsteDato = new Date('2017-12-04');
+
+    // FIXME: Ugh
+    if (typeof oppfolgingsDato === 'string') {
+        oppfolgingsDato = new Date(oppfolgingsDato);
+    }
+
+    if (oppfolgingsDato <= tidligsteDato || oppfolgingsDato === undefined) {
+        return null;
+    }
+    return oppfolgingsDato;
 }
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, skalJusteres}: MinOversiktKolonnerProps) {
@@ -56,12 +71,12 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}  skalJusteres={skalJusteres}/>
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} skalJusteres={skalJusteres}/>
             <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
-                dato={bruker.oppfolgingStartDato}
+                dato={oppfolgingStartetDato(bruker.oppfolgingStartDato)}
             />
             <DatoKolonne
                 className="col col-xs-2"

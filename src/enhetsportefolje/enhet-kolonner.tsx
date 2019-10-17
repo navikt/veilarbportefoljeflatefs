@@ -33,11 +33,26 @@ interface EnhetKolonnerProps {
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
+    oppfolgingsDato?: Date | null;
 }
 
-function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
+function oppfolgingStartetDato(oppfolgingsDato) {
+    const tidligsteDato = new Date('2017-12-04');
+
+    // FIXME: Ugh
+    if (typeof oppfolgingsDato === 'string') {
+        oppfolgingsDato = new Date(oppfolgingsDato);
+    }
+
+    if (oppfolgingsDato <= tidligsteDato || oppfolgingsDato === undefined) {
+        return null;
+    }
+    return oppfolgingsDato;
+}
+
+function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
     const ytelsevalgIntl = ytelsevalg();
-    const { ytelse } = filtervalg;
+    const {ytelse} = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
@@ -54,12 +69,12 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
-            <BrukerFnr className="col col-xs-2" bruker={bruker} />
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}/>
+            <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
-                dato={bruker.oppfolgingStartDato}
+                dato={oppfolgingStartetDato(bruker.oppfolgingStartDato)}
             />
             <VeilederNavn className="col col-xs-2"
                           bruker={bruker}
@@ -114,7 +129,7 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraBruker}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)  && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -134,7 +149,7 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0  && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
             />
             <TidKolonne
                 className="col col-xs-2"
