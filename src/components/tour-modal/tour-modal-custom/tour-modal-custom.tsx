@@ -61,18 +61,18 @@ const stepsblank: Step[] = [
     }
 ];
 
-const stepsOversiktsrydding: Step[] = [
-    {
-        tittel: 'Startdato for oppfølgingsperiode',
-        bilde: oversiktsrydding1Bilde,
-        tekst: 'Oversikten har en ny kolonne, «Oppfølging startet». Brukere registrert før aktivitetsplanen ble lansert 4. des. 2017 vises uten dato.'
-    },
-    {
-        tittel: 'Velg kolonner',
-        bilde: oversiktsrydding2Bilde,
-        tekst: 'Dersom det ikke er plass til å vise alle kolonner samtidig, kan du bruke «Velg kolonner». Vi har også endret navn på noen av kolonnene. Funksjonaliteten er den samme.'
-    },
-];
+// const stepsOversiktsrydding: Step[] = [
+    // {
+    //     tittel: 'Startdato for oppfølgingsperiode',
+    //     bilde: oversiktsrydding1Bilde,
+    //     tekst: 'Oversikten har en ny kolonne, «Oppfølging startet». Brukere registrert før aktivitetsplanen ble lansert 4. des. 2017 vises uten dato.'
+    // },
+//     {
+//         tittel: 'Velg kolonner',
+//         bilde: oversiktsrydding2Bilde,
+//         tekst: 'Dersom det ikke er plass til å vise alle kolonner samtidig, kan du bruke «Velg kolonner». Vi har også endret navn på noen av kolonnene. Funksjonaliteten er den samme.'
+//     },
+// ];
 
 export function getTour(modal: ModalName) {
     switch (modal) {
@@ -82,8 +82,8 @@ export function getTour(modal: ModalName) {
             return stepsFilter;
         case ModalName.FLYTTE_FILTER:
             return stepsFlytteFilter;
-        case ModalName.OVERSIKTSRYDDING:
-            return stepsOversiktsrydding;
+        // case ModalName.OVERSIKTSRYDDING:
+        //     return stepsOversiktsrydding;
         default:
             return stepsblank;
     }

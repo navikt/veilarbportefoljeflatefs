@@ -18,16 +18,10 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '21. OKT. 2019',
-        tittel: 'Startdato for oppfølgingsperioden',
-        tekst: 'Oversikten har nå en kolonne som viser startdato for oppfølgingsperioden. Vi har også ryddet litt i oversikten og endret på titlene til noen av kolonnene.',
+        dato: '22. OKT. 2019',
+        tittel: 'Rydding i oversikten',
+        tekst: 'Vi har ryddet litt i oversikten og endret titler på noen av kolonnene. Funksjonaliteten er den samme.',
         versjonId: '0.2.2',
-        children:
-            <TourModalButton
-                metrikknavn="portefolje.endringslogg_modal"
-                modal={ModalName.OVERSIKTSRYDDING}
-                knappeTekst="Se endringer"
-            />
     },
     {
         dato: '26. SEP. 2019',
