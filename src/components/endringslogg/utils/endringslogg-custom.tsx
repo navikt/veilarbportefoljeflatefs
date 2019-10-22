@@ -22,6 +22,9 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         tittel: 'Rydding i oversikten',
         tekst: 'Vi har ryddet litt i oversikten og endret titler på noen av kolonnene. Funksjonaliteten er den samme.',
         versjonId: '0.2.2',
+        children:
+            <p>Tips: Når det er mer enn fem kolonner kan du klikke på «Velg kolonner» for å endre hvilken informasjon
+                som skal vises i listen.</p>
     },
     {
         dato: '26. SEP. 2019',
