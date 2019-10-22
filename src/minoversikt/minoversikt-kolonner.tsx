@@ -25,6 +25,9 @@ import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift'
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
+import { OPPFOLGING_STARTET } from '../konstanter';
+import { sjekkFeature } from '../ducks/features';
+import { connect } from 'react-redux';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -33,10 +36,11 @@ interface MinOversiktKolonnerProps {
     valgteKolonner: Kolonne[];
     enhetId: string;
     skalJusteres: boolean;
+    harFeature: Function; //fjern etter featuretoggle
 }
 
 
-function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, skalJusteres}: MinOversiktKolonnerProps) {
+function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, skalJusteres, harFeature}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
     const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
@@ -54,6 +58,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
+    const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
     return (
         <div className={className}>
@@ -61,7 +66,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <DatoKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
                 dato={oppfolgingStartetDato(bruker.oppfolgingStartDato)}
             />
             <DatoKolonne
@@ -174,4 +179,11 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     );
 }
 
-export default MinoversiktDatokolonner;
+//fjern etter featuretoggle
+const mapStateToProps = (state) => ({
+    harFeature: (feature: string) => sjekkFeature(state, feature)
+});
+
+export default connect(mapStateToProps)(MinoversiktDatokolonner);
+
+// export default MinoversiktDatokolonner;
