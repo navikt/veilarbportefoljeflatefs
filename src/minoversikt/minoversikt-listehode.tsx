@@ -15,6 +15,9 @@ import {
 } from '../filtrering/filter-konstanter';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
+import { OPPFOLGING_STARTET } from '../konstanter';
+import { connect } from 'react-redux';
+import { sjekkFeature } from '../ducks/features';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -31,9 +34,10 @@ interface MinOversiktListehodeProps {
     sorteringsfelt: Sorteringsfelt;
     brukere: BrukerModell[];
     valgteKolonner: Kolonne[];
+    harFeature: Function; //fjern etter featuretoggle
 }
 
-function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner}: MinOversiktListehodeProps) {
+function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner, harFeature}: MinOversiktListehodeProps) {
     const {ytelse} = filtervalg;
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const aapRettighetsperiode = !!ytelse && erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
@@ -41,6 +45,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'Gjenstående uker vedtak' : 'Gjenstående uker vedtak';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
+    const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
     return (
         <div className="brukerliste__header">
@@ -71,7 +76,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
                             tekst="Oppfølging startet"
                             className="sortering-header__dato col col-xs-2"
-                            skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                            skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
@@ -218,4 +223,11 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
     );
 }
 
-export default MinOversiktListeHode;
+//fjern etter featuretoggle
+const mapStateToProps = (state) => ({
+    harFeature: (feature: string) => sjekkFeature(state, feature)
+});
+
+export default connect(mapStateToProps)(MinOversiktListeHode);
+
+// export default MinOversiktListeHode;
