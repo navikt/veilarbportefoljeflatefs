@@ -21,6 +21,8 @@ import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 import { RadioFilterformNy } from '../components/radio-filterform/radio-filterform-ny';
 import DropdownNy from '../components/dropdown/dropdown-ny';
 
+import '../components/checkbox-filterform/checkbox-filterform.less';
+
 interface FiltreringFilterProps {
     filtervalg: any;
     endreFiltervalg: (filterId: string, filterVerdi: string) => void;
@@ -28,7 +30,7 @@ interface FiltreringFilterProps {
     intl?: any;
 }
 
-const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak }: FiltreringFilterProps) => (
+const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) => (
     <div>
         <div className="row">
             <div className="col-sm-12 blokk-xs">
@@ -37,6 +39,7 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak }: Filtrerin
                 </Element>
                 <Dropdown name="Alder">
                     <CheckboxFilterform
+                        id="grid-alder"
                         form="alder"
                         kolonner={2}
                         valg={alder}

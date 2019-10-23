@@ -5,15 +5,14 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { lagConfig } from './../../filtrering/filter-konstanter';
 import SubmitKnapp from './../submit-knapp';
-import Grid from "../grid/grid";
 
-function renderFields({ names: _names, valg, kolonner, ...fields }) { // eslint-disable-line react/prop-types
+function renderFields({ names: _names, valg, kolonner, id, ...fields }) { // eslint-disable-line react/prop-types
     const fieldCls = (className) => classNames('skjemaelement skjemaelement--horisontal', className);
 
     const elements =
     Object.values(fields)
         .map((field) => {
-            const { label, className, ...fieldProps } = lagConfig(valg[field.input.name]);
+            const { label, className, id, ...fieldProps } = lagConfig(valg[field.input.name]);
 
             return (
                 <div key={field.input.name} className={fieldCls(className)} {...fieldProps} >
@@ -38,9 +37,9 @@ function renderFields({ names: _names, valg, kolonner, ...fields }) { // eslint-
 
 
     return (
-        <Grid columns={kolonner}>
+        <div columns={kolonner} id={id}>
             {elements}
-        </Grid>
+        </div>
     );
 }
 
@@ -55,7 +54,7 @@ function prepSubmit(name, fn, close) {
     };
 }
 
-function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown, kolonner = 1 }) {
+function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, closeDropdown, kolonner = 1, id }) {
     const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown));
     const harValg = Object.keys(valg).length > 0;
 
@@ -63,7 +62,7 @@ function CheckboxFilterform({ pristine, handleSubmit, form, onSubmit, valg, clos
         <form className="skjema checkbox-filterform" onSubmit={submithandler}>
             {harValg &&
                 <div className="checkbox-filterform__valg">
-                    <Fields names={Object.keys(valg)} valg={valg} kolonner={kolonner}component={renderFields} />
+                    <Fields names={Object.keys(valg)} valg={valg} kolonner={kolonner} component={renderFields} id={id}/>
                 </div>
             }
             <div className="checkbox-filterform__under-valg">
