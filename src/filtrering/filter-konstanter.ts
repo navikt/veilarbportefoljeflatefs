@@ -92,7 +92,6 @@ export const innsatsgruppe = {
 export const hovedmal = {
     SKAFFEA : 'Skaffe arbeid',
     BEHOLDEA: 'Beholde arbeid',
-
     OKEDELT: 'Øke deltakelse eller mål om arbeid',
 };
 
