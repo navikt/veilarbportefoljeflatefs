@@ -8,8 +8,6 @@ import SubmitKnapp from './../submit-knapp';
 
 function renderFields({names: _names, valg, kolonner, id, ...fields}) { // eslint-disable-line react/prop-types
     const fieldCls = (className) => classNames('skjemaelement skjemaelement--horisontal', className);
-    //const fieldId = (id) => id(id);
-
 
     const elements =
         Object.values(fields)
@@ -37,7 +35,6 @@ function renderFields({names: _names, valg, kolonner, id, ...fields}) { // eslin
                     </div>
                 );
             })
-
 
     return (
         <div columns={kolonner} id={id}>
