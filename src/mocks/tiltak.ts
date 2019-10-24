@@ -27,6 +27,13 @@ export default {
         ARBTREN: 'Arbeidstrening',
         MIDLONTIL: 'Midlertidig lønnstilskudd',
         PRAKSORD: 'Arbeidspraksis i ordinær virksomhet',
-        ARBRRHDAG: 'Arbeidsrettet rehabilitering (dag)'
+        ARBRRHDAG: 'Arbeidsrettet rehabilitering (dag)',
+        INDJOBSTOT: 'Individuell Jobbstøtte (IPS)',
+        LONNTIL: 'Tidsbegrenset lønnstilskudd',
+        GRUPPEAMO: 'Gruppe AMO',
+        ENKFAGYRKE: 'Enkeltplass Fag- og yrkesopplæring VGS og høyere yrkesfaglig utdanning',
+        HOYEREUTD: 'Høyere utdanning',
+        ENKELAMO: 'Enkeltplass AMO',
+
     }
 };
