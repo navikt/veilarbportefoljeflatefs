@@ -16,7 +16,7 @@ function renderFields({names: _names, valg, kolonner, id, ...fields}) { // eslin
 
                 return (
                     <div key={field.input.name} className={fieldCls(className)}
-                         id={"grid-" + field.input.name} {...fieldProps} >
+                         id={"id_" + field.input.name} {...fieldProps} >
                         <Field
                             id={field.input.name}
                             component="input"
@@ -57,7 +57,6 @@ function prepSubmit(name, fn, close) {
 function CheckboxFilterform({pristine, handleSubmit, form, onSubmit, valg, closeDropdown, kolonner = 1, id}) {
     const submithandler = handleSubmit(prepSubmit(form, onSubmit, closeDropdown));
     const harValg = Object.keys(valg).length > 0;
-
     return (
         <form className="skjema checkbox-filterform" onSubmit={submithandler}>
             {harValg &&
