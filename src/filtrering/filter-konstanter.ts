@@ -19,7 +19,7 @@ export const AAP_YTELSE_MAXTID = 'AAP_MAXTID';
 export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
 
 export const mapFilternavnTilFilterValue = {
-    ufordeltebruker : UFORDELTE_BRUKERE,
+    ufordeltebruker: UFORDELTE_BRUKERE,
     nyeBrukere: NYE_BRUKERE_FOR_VEILEDER,
     trengerVurdering: TRENGER_VURDERING,
     erSykmeldtMedArbeidsgiver: ER_SYKMELDT_MED_ARBEIDSGIVER,
@@ -41,7 +41,7 @@ export const FILTERGRUPPE_ENHET = 'enhet';
 
 export function lagConfig(data: any): any {
     if (typeof data === 'string') {
-        return { label: data };
+        return {label: data};
     }
     return data;
 }
@@ -62,13 +62,13 @@ export const ferdigfilterListe = {
 };
 
 export const alder = {
-    '19-og-under':'≤ 19 år' ,
-    '40-49': '40-49 år',
+    '19-og-under': '≤ 19 år',
     '20-24': '20-24 år',
-    '50-59': '50-59 år',
     '25-29': '25-29 år',
-    '60-66': '60-66 år',
     '30-39': '30-39 år',
+    '40-49': '40-49 år',
+    '50-59': '50-59 år',
+    '60-66': '60-66 år',
     '67-70': '67-70 år',
 };
 
@@ -90,7 +90,7 @@ export const innsatsgruppe = {
 };
 
 export const hovedmal = {
-    SKAFFEA : 'Skaffe arbeid',
+    SKAFFEA: 'Skaffe arbeid',
     BEHOLDEA: 'Beholde arbeid',
     OKEDELT: 'Øke deltakelse eller mål om arbeid',
 };
@@ -116,17 +116,23 @@ export const manuellBrukerStatus = {
 
 export const ytelse = {
     DAGPENGER: {label: 'Dagpenger'},
-    ORDINARE_DAGPENGER: { label: 'Ordinære dagpenger', className: 'skjemaelement--innrykk' },
-    DAGPENGER_MED_PERMITTERING: { label: 'Dagpenger under permittering', className: 'skjemaelement--innrykk' },
-    DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI: { label: 'Dagpenger v/perm fiskeindustri', className: 'skjemaelement--innrykk' },
-    LONNSGARANTIMIDLER_DAGPENGER: { label: 'Lønnsgarantimidler dagpenger', className: 'skjemaelement--innrykk' },
+    ORDINARE_DAGPENGER: {label: 'Ordinære dagpenger', className: 'skjemaelement--innrykk'},
+    DAGPENGER_MED_PERMITTERING: {label: 'Dagpenger under permittering', className: 'skjemaelement--innrykk'},
+    DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI: {
+        label: 'Dagpenger v/perm fiskeindustri',
+        className: 'skjemaelement--innrykk'
+    },
+    LONNSGARANTIMIDLER_DAGPENGER: {label: 'Lønnsgarantimidler dagpenger', className: 'skjemaelement--innrykk'},
     AAP: {label: 'AAP'},
-    AAP_MAXTID: { label: 'AAP maxtid', className: 'skjemaelement--innrykk' },
-    AAP_UNNTAK: { label: 'AAP unntak', className: 'skjemaelement--innrykk' },
+    AAP_MAXTID: {label: 'AAP maxtid', className: 'skjemaelement--innrykk'},
+    AAP_UNNTAK: {label: 'AAP unntak', className: 'skjemaelement--innrykk'},
     TILTAKSPENGER: {label: 'Tiltakspenger'}
 };
 
-export const ytelsevalg: () => {[id: string]: string} = () => Object.keys(ytelse).reduce((acc, val) => ({ ...acc, [val]: val }), {});
+export const ytelsevalg: () => { [id: string]: string } = () => Object.keys(ytelse).reduce((acc, val) => ({
+    ...acc,
+    [val]: val
+}), {});
 
 export const ytelseUtlopsSortering = {
     DAGPENGER: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
@@ -136,9 +142,9 @@ export const ytelseUtlopsSortering = {
 };
 
 export const ytelseAapSortering = {
-    AAP: { vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE },
-    AAP_MAXTID: { vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_MAXTID_UKE },
-    AAP_UNNTAK: { vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKE }
+    AAP: {vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE},
+    AAP_MAXTID: {vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_MAXTID_UKE},
+    AAP_UNNTAK: {vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKE}
 };
 
 export const rettighetsgruppe = {
@@ -160,8 +166,7 @@ export const aktiviteter = {
     UTDANNINGAKTIVITET: 'Utdanning og kurs (for enslige forsørgere eller egenfinansiert)'
 };
 
-const veiledere = {
-};
+const veiledere = {};
 
 export default {
     ytelseUtlopsSortering,
