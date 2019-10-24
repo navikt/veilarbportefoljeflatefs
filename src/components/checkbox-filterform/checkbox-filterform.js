@@ -20,6 +20,7 @@ function renderFields({names: _names, valg, kolonner, id, ...fields}) { // eslin
                     <div key={field.input.name} className={fieldCls(className)}
                          id={"grid-" + field.input.name} {...fieldProps} >
                         <Field
+                            id={field.input.name}
                             component="input"
                             type="checkbox"
                             className="skjemaelement__input checkboks"
@@ -88,7 +89,6 @@ function CheckboxFilterform({pristine, handleSubmit, form, onSubmit, valg, close
 CheckboxFilterform.defaultProps = {
     veileder: {}
 };
-
 CheckboxFilterform.propTypes = {
     pristine: PT.bool.isRequired,
     handleSubmit: PT.func.isRequired,
