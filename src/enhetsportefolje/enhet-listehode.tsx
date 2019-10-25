@@ -79,6 +79,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                         <Header
                             className="col col-xs-2"
                             skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
+                            title='Navn på tildelt veileder'
                         >
                             Veileder
                         </Header>
@@ -185,6 +186,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                         <Header
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
                             className="sortering-header__dato col col-xs-2"
+                            title="Varighet på møtet"
                         >
                             Varighet møte
                         </Header>

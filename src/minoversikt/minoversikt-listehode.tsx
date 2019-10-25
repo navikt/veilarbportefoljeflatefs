@@ -182,6 +182,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                         <Header
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Varighet på møtet'
                         >
                             Varighet møte
                         </Header>
