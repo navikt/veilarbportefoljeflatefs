@@ -154,7 +154,6 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
                 >
                     <CheckboxFilterform
-                        id="id_tiltakstyper"
                         form="tiltakstyper"
                         valg={enhettiltak}
                         filtervalg={filtervalg}
