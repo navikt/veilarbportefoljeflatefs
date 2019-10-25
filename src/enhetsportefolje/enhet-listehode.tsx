@@ -16,6 +16,8 @@ import Header from '../components/tabell/header';
 import { OPPFOLGING_STARTET } from '../konstanter';
 import { sjekkFeature } from '../ducks/features';
 import { connect } from 'react-redux';
+import TittelValg from '../utils/utils'
+
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -43,6 +45,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
+
 
     return (
         <div className="brukerliste__header">
@@ -102,6 +105,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             tekst={ytelseSorteringHeader}
                             skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                             className="sortering-header__dato col col-xs-2"
+                            title={TittelValg(ytelseSorteringHeader)}
                         />
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}

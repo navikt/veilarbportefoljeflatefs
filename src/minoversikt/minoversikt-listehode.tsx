@@ -18,6 +18,7 @@ import Header from '../components/tabell/header';
 import { OPPFOLGING_STARTET } from '../konstanter';
 import { connect } from 'react-redux';
 import { sjekkFeature } from '../ducks/features';
+import TittelValg from '../utils/utils'
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -43,7 +44,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
     const aapRettighetsperiode = !!ytelse && erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
     const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : ytelseUtlopsSortering[filtervalg.ytelse!];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
-    const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'Gjenstående uker vedtak' : 'Gjenstående uker vedtak';
+    const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
@@ -99,6 +100,8 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             className="sortering-header__dato col col-xs-2"
                             title='Tittel som er skrevet i arbeidslisten'
                         />
+
+
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
                             onClick={sorteringOnClick}
@@ -107,6 +110,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             tekst={ytelseSorteringHeader}
                             skalVises={ytelseFilterErAktiv(ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                             className="sortering-header__dato col col-xs-2"
+                            title={TittelValg(ytelseSorteringHeader)}
                         />
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
