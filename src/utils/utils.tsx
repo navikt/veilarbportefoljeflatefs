@@ -74,7 +74,7 @@ export default function TittelValg(ytelseSorteringHeader) {
     if (ytelseSorteringHeader === 'Gjenstående uker vedtak') {
         return 'Gjenstående uker på gjeldende vedtak';
     } else if (ytelseSorteringHeader === 'Gjenstående uker rettighet') {
-        return 'Gjenstående uker av rettighetsperiode for ytelsen';
+        return 'Gjenstående uker av rettighetsperioden for ytelsen';
     }
     return '';
 }

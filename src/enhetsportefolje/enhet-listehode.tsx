@@ -125,7 +125,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             tekst="Gjenstående uker rettighet"
                             skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
                             className="sortering-header__dato col col-xs-2"
-                            title='Gjenstående uker av rettighetsperiode for ytelsen'
+                            title='Gjenstående uker av rettighetsperioden for ytelsen'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
