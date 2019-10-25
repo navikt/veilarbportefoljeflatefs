@@ -210,7 +210,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
                             className="sortering-header__dato col col-xs-2"
-                            title='Startdato på avtalte aktiviteter under "Planlegger" eller "Gjennomfører"'
+                            title='Startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
@@ -221,7 +221,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
                             className="sortering-header__dato col col-xs-2"
-                            title='Neste startdato på avtalte aktiviteter under "Planlegger" eller "Gjennomfører"'
+                            title='Neste startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
