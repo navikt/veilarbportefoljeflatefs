@@ -11,12 +11,8 @@ export const VIS_MOTER_MED_NAV = 'portefolje.vismotermednav';
 
 export const ENDRINGSLOGG = 'veilarbportefoljeflatefs.endringslogg';
 
-export const OPPFOLGING_STARTET = 'veilarbportefoljeflatefs.oppfolging_startet';
-
-
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
     ENDRINGSLOGG,
-    VIS_MOTER_MED_NAV,
-    OPPFOLGING_STARTET
+    VIS_MOTER_MED_NAV
 ];
