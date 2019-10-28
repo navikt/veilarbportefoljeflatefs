@@ -34,6 +34,5 @@ export default {
         ENKFAGYRKE: 'Enkeltplass Fag- og yrkesopplæring VGS og høyere yrkesfaglig utdanning',
         HOYEREUTD: 'Høyere utdanning',
         ENKELAMO: 'Enkeltplass AMO',
-
     }
 };
