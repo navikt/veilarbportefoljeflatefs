@@ -13,6 +13,9 @@ import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model
 import { Kolonne } from '../ducks/ui/listevisning';
 import { AktiviteterValg } from '../ducks/filtrering';
 import Header from '../components/tabell/header';
+import { OPPFOLGING_STARTET } from '../konstanter';
+import { sjekkFeature } from '../ducks/features';
+import { connect } from 'react-redux';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -28,9 +31,10 @@ interface EnhetListehodeProps {
     valgteKolonner: Kolonne[];
     filtervalg: FiltervalgModell;
     sorteringsfelt: string;
+    harFeature: Function; //fjern etter featuretoggle
 }
 
-function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner}: EnhetListehodeProps) {
+function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner, harFeature}: EnhetListehodeProps) {
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
@@ -38,6 +42,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
+    const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
     return (
         <div className="brukerliste__header">
@@ -68,7 +73,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
                             tekst="Oppfølging startet"
                             className="sortering-header__dato col col-xs-2"
-                            skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                            skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
                         />
                         <Header
                             className="col col-xs-2"
@@ -181,5 +186,11 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
         </div>
     );
 }
+//fjern etter featuretoggle
+const mapStateToProps = (state) => ({
+    harFeature: (feature: string) => sjekkFeature(state, feature)
+});
 
-export default EnhetListehode;
+export default connect(mapStateToProps)(EnhetListehode);
+
+// export default EnhetListehode;
