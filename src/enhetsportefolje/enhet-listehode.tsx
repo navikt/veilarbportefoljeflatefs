@@ -202,7 +202,6 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
         </div>
     );
 }
-
 //fjern etter featuretoggle
 const mapStateToProps = (state) => ({
     harFeature: (feature: string) => sjekkFeature(state, feature)

@@ -11,8 +11,7 @@ export interface FeaturesState {
 const initalState: FeaturesState = {
     [SPOR_OM_TILBAKEMELDING]: false,
     [ENDRINGSLOGG]: false,
-    [OPPFOLGING_STARTET]: false,
-
+    [OPPFOLGING_STARTET]: false
 };
 
 // Reducer

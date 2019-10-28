@@ -36,9 +36,8 @@ interface MinOversiktKolonnerProps {
     valgteKolonner: Kolonne[];
     enhetId: string;
     skalJusteres: boolean;
-    harFeature: Function; //fjern etter featuretoggle
+    harFeature: Function;
 }
-
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, skalJusteres, harFeature}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
