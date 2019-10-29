@@ -142,7 +142,6 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
             <DatoKolonne
-                //NESTE UTLØPSDATO AKTIVITET_TILTAK?!!?!?
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
                 skalVises={iAvtaltAktivitet}
@@ -153,7 +152,6 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
             />
             <DatoKolonne
-                //valgte aktivitetstyper
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
                 skalVises={avtaltAktivitetOgTiltak}
