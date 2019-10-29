@@ -43,15 +43,9 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
+    const iAvtaltAktivitet = !!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+    const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
     const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
-
-    function avtaltAktivitetOgTiltak() {
-        // if (valgteKolonner.includes((Kolonne.AVTALT_AKTIVITET))) {
-        if (!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)) {
-            return false;
-        }
-        return (harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET));
-    }
 
     return (
         <div className="brukerliste__header">
@@ -169,7 +163,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                             tekst="Neste utløpsdato aktivitet"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                            skalVises={iAvtaltAktivitet}
                             className="sortering-header__dato col col-xs-2"
                             title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
@@ -179,7 +173,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
                             tekst="Neste utløpsdato aktivitet"
-                            skalVises={avtaltAktivitetOgTiltak()}
+                            skalVises={avtaltAktivitetOgTiltak}
                             className="sortering-header__dato col col-xs-2"
                             title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
