@@ -46,6 +46,8 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
+    const iAvtaltAktivitet = !!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+    const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
     const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
     return (
@@ -166,8 +168,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                             tekst="Neste utløpsdato aktivitet"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                            valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                            skalVises={iAvtaltAktivitet}
                             className="sortering-header__dato col col-xs-2"
                             title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
@@ -193,9 +194,8 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                            tekst="Neste utløpsdato aktivitet" //Første utløpsdato aktivitet - ny
-                            skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 &&
-                            valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                            tekst="Neste utløpsdato aktivitet"
+                            skalVises={avtaltAktivitetOgTiltak}
                             className="sortering-header__dato col col-xs-2"
                             title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
