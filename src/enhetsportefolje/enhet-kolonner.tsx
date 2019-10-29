@@ -26,8 +26,8 @@ import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import { sjekkFeature } from '../ducks/features';
-import { connect } from 'react-redux';
 import { OPPFOLGING_STARTET } from '../konstanter';
+import { connect } from 'react-redux';
 
 interface EnhetKolonnerProps {
     className?: string;
