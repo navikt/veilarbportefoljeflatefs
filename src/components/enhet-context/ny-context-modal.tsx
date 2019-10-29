@@ -1,7 +1,7 @@
 import * as React from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { AlertStripeInfoSolid } from 'nav-frontend-alertstriper';
+import Alertstripe from 'nav-frontend-alertstriper';
 import Knapp, { Hovedknapp } from 'nav-frontend-knapper';
 
 interface NyContextModalProps {
@@ -25,10 +25,10 @@ class NyContextModal extends React.Component<NyContextModalProps> {
                     <Innholdstittel tag="h1" className="blokk-s">
                         Du har endret Enhet
                     </Innholdstittel>
-                    <AlertStripeInfoSolid className="blokk-s">
+                    <Alertstripe type="info" className="blokk-s">
                         Du har endret enhet i et annet vindu. Du kan ikke jobbe i 2 enheter samtidig.
                         Velger du 'endre' mister du arbeidet du ikke har lagret.
-                    </AlertStripeInfoSolid>
+                    </Alertstripe>
                     <Normaltekst className="blokk-s">
                         {`Ønsker du å endre enhet til ${this.props.aktivEnhet}?`}
                     </Normaltekst>
