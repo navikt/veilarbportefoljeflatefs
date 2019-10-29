@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
+import AlertStripe from 'nav-frontend-alertstriper';
 import Laster from './innholdslaster-laster';
-import { STATUS } from './../ducks/utils';
+import { STATUS } from '../ducks/utils';
 
 const array = (value) => (Array.isArray(value) ? value : [value]);
 const harStatus = (...status) => (element) => array(status).includes(element.status);
@@ -92,9 +92,9 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
                 ('Det skjedde en feil ved innlastningen av data');
 
             return (
-                <AlertStripeAdvarsel className={className}>
+                <AlertStripe type="advarsel" className={className}>
                     <p>{feilmelding}</p>
-                </AlertStripeAdvarsel>
+                </AlertStripe>
             );
         }
 

@@ -21,7 +21,7 @@ function NyContextModal ({isOpen, isPending, doBeholdAktivEnhet, doEndreAktivEnh
             portalClassName="brukercontext-modal"
             className="brukercontext-modal__content"
         >
-            <Innholdstittel tag="h1">
+            <Innholdstittel className="blokk-s">
                 Du har endret enhet
             </Innholdstittel>
             <Normaltekst className="blokk-s">
