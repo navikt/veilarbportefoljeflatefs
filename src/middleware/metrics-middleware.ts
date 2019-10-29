@@ -86,7 +86,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             loggTildelVeileder(sideNavn, toolbarPosisjon);
             break;
         case ActionTypeKeys.VELG_ALTERNATIV:
-            loggEndreListevisning(sideNavn, toolbarPosisjon, kolonne);
+            loggEndreListevisning(sideNavn, kolonne);
             break;
         case ActionTypeKeys.AVVELG_ALTERNATIV:
             loggAvvelgListevalg(sideNavn, kolonne);
@@ -164,8 +164,8 @@ const loggTildelVeileder = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon
     logEvent('portefolje.metrikker.tildel_veileder', { sideNavn, toolbarPosisjon });
 };
 
-const loggEndreListevisning = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon, kolonne: Kolonne) => {
-    logEvent('portefolje.metrikker.listevisning_endret', { sideNavn, toolbarPosisjon, kolonne });
+const loggEndreListevisning = (sideNavn: SideNavn, kolonne: Kolonne) => {
+    logEvent('portefolje.metrikker.listevisning_endret', { sideNavn, kolonne });
 };
 
 const loggAvvelgListevalg = (sideNavn: SideNavn, kolonne: Kolonne) => {
