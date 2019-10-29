@@ -57,6 +57,8 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
+    const iAvtaltAktivitet = (!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET));
+    const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : !!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
     const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
     return (
@@ -142,8 +144,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                skalVises={iAvtaltAktivitet}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -153,8 +154,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 &&
-                valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                skalVises={avtaltAktivitetOgTiltak}
             />
             <DatoKolonne
                 className="col col-xs-2"
