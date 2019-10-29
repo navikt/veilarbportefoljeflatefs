@@ -1,13 +1,14 @@
 import React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import { ytelseFilterErAktiv } from '../utils/utils';
+import TittelValg, { ytelseFilterErAktiv } from '../utils/utils';
 import {
-    ytelseUtlopsSortering,
-    ytelseAapSortering,
-    VENTER_PA_SVAR_FRA_NAV,
-    VENTER_PA_SVAR_FRA_BRUKER,
+    I_AVTALT_AKTIVITET,
+    MOTER_IDAG,
     UTLOPTE_AKTIVITETER,
-    I_AVTALT_AKTIVITET, MOTER_IDAG
+    VENTER_PA_SVAR_FRA_BRUKER,
+    VENTER_PA_SVAR_FRA_NAV,
+    ytelseAapSortering,
+    ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
 import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
@@ -16,8 +17,6 @@ import Header from '../components/tabell/header';
 import { OPPFOLGING_STARTET } from '../konstanter';
 import { sjekkFeature } from '../ducks/features';
 import { connect } from 'react-redux';
-import TittelValg from '../utils/utils'
-
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -46,6 +45,13 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
+    function avtaltAktivitetOgTiltak() {
+        // if (valgteKolonner.includes((Kolonne.AVTALT_AKTIVITET))) {
+        if (!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)) {
+            return false;
+        }
+        return (harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET));
+    }
 
     return (
         <div className="brukerliste__header">
@@ -172,10 +178,10 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                            tekst="Første utløpsdato aktivitet"
-                            skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                            tekst="Neste utløpsdato aktivitet"
+                            skalVises={avtaltAktivitetOgTiltak()}
                             className="sortering-header__dato col col-xs-2"
-                            title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
+                            title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.MOTER_IDAG}
@@ -202,6 +208,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
         </div>
     );
 }
+
 //fjern etter featuretoggle
 const mapStateToProps = (state) => ({
     harFeature: (feature: string) => sjekkFeature(state, feature)

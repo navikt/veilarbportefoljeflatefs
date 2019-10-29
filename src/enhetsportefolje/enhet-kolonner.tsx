@@ -26,8 +26,8 @@ import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import { sjekkFeature } from '../ducks/features';
-import { connect } from 'react-redux';
 import { OPPFOLGING_STARTET } from '../konstanter';
+import { connect } from 'react-redux';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -56,6 +56,13 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
+
+    function avtaltAktivitetOgTiltak() {
+        if (valgteKolonner.includes((Kolonne.AVTALT_AKTIVITET)) && ferdigfilterListe.includes(I_AVTALT_AKTIVITET)) {
+            return false;
+        }
+        return (!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET));
+    }
 
     return (
         <div className={className}>
@@ -139,7 +146,8 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                // skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                skalVises={avtaltAktivitetOgTiltak()}
             />
             <TidKolonne
                 className="col col-xs-2"

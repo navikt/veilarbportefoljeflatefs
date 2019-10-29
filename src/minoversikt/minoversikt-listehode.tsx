@@ -100,8 +100,6 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             className="sortering-header__dato col col-xs-2"
                             title='Tittel som er skrevet i arbeidslisten'
                         />
-
-
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
                             onClick={sorteringOnClick}
@@ -195,11 +193,11 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                            tekst="Første utløpsdato aktivitet"
+                            tekst="Neste utløpsdato aktivitet" //Første utløpsdato aktivitet - ny
                             skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 &&
                             valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
                             className="sortering-header__dato col col-xs-2"
-                            title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
+                            title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
