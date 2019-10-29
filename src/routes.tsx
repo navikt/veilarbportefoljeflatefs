@@ -10,6 +10,7 @@ import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
 import { loggBrowserMetrikker } from './utils/metrikker/browser-metrikker';
 import { VeilarbPortefoljeRedirect } from './components/redirect/veilarbportefolje-redirect';
 import ContextFeilmodal from "./components/enhet-context/context-feilmodal";
+import NyContextModal from "./components/enhet-context/ny-context-modal";
 
 loggBrowserMetrikker();
 
@@ -38,7 +39,7 @@ function Routes() {
                         <VeilarbPortefoljeRedirect/>
                     </Switch>
                     <TilbakemeldingFab/>
-                    <ContextFeilmodal isOpen={true} onClose={()=>{}}/>
+                    <NyContextModal isOpen={true} aktivEnhet="1234" doBeholdAktivEnhet={()=> {}} doEndreAktivEnhet={()=>{}} isPending={true}/>
                 </div>
             </EnhetContext>
         </div>

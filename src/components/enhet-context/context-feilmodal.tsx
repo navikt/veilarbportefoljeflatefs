@@ -1,9 +1,7 @@
 import React from 'react';
-import NavFrontendModal from 'nav-frontend-modal';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import Veilederpanel from 'nav-frontend-veilederpanel';
-import {ReactComponent as VeilederSvg} from './veileder.svg';
+import {AdvarselModal} from "../advarselmodal/advarsel-modal";
 
 interface ContextFeilmodalProps {
     isOpen: boolean;
@@ -12,34 +10,27 @@ interface ContextFeilmodalProps {
 
 function ContextFeilmodal ({isOpen, onClose}: ContextFeilmodalProps) {
     return (
-        <NavFrontendModal
-            contentLabel="ContextFeilmodal"
-            shouldCloseOnOverlayClick={false}
+        <AdvarselModal
             isOpen={isOpen}
-            closeButton
             onRequestClose={onClose}
+            portalClassName="brukercontext-modal"
+            className="brukercontext-modal__content"
+            contentLabel="Bruker i kontekst feilet"
         >
-            <div className="brukercontext__modal">
-                <Innholdstittel tag="h1" className="blokk-s">
-                    Bruker i kontekst feilet
-                </Innholdstittel>
-                <div className="modal-content modal-test">
-                    <Veilederpanel
-                        type="plakat"
-                        svg={<VeilederSvg/>}
-                        fargetema="feilmelding"
-                    >
-                        Kommunikasjon med tjenesten for bruker i kontekst feilet.
-                        Dette betyr at det er fare for at du kan ha forskjellige brukere i forskjellige flater/vinduer.
-                    </Veilederpanel>
-                </div>
-                <div className="modal-footer">
-                    <Hovedknapp onClick={onClose}>
-                        Ok
-                    </Hovedknapp>
-                </div>
+            <Innholdstittel tag="h1" className="blokk-s">
+                Bruker i kontekst feilet
+            </Innholdstittel>
+            <Normaltekst className="blokk-s">
+                Kommunikasjon med tjenesten for bruker i kontekst feilet.
+                Dette betyr at det er fare for at du kan ha forskjellige
+                brukere i forskjellige flater/vinduer.
+            </Normaltekst>
+            <div className="blokk-s">
+                <Hovedknapp className="ok-knapp" onClick={onClose}>
+                    Ok
+                </Hovedknapp>
             </div>
-        </NavFrontendModal>
+        </AdvarselModal>
     );
 }
 
