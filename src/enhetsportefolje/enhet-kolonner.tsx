@@ -57,6 +57,13 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
+    function avtaltAktivitetOgTiltak() {
+        if (valgteKolonner.includes((Kolonne.AVTALT_AKTIVITET)) && ferdigfilterListe.includes(I_AVTALT_AKTIVITET)) {
+            return false;
+        }
+        return (!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET));
+    }
+
     return (
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}/>
@@ -139,7 +146,8 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                // skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                skalVises={avtaltAktivitetOgTiltak()}
             />
             <TidKolonne
                 className="col col-xs-2"

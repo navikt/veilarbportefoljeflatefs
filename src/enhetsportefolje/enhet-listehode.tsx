@@ -45,6 +45,13 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
+    function avtaltAktivitetOgTiltak() {
+        // if (valgteKolonner.includes((Kolonne.AVTALT_AKTIVITET))) {
+        if (!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)) {
+            return false;
+        }
+        return (harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET));
+    }
 
     return (
         <div className="brukerliste__header">
@@ -171,8 +178,8 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                            tekst="Neste utløpsdato aktivitet" //Første utløpsdato aktivitet - ny
-                            skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                            tekst="Neste utløpsdato aktivitet"
+                            skalVises={avtaltAktivitetOgTiltak()}
                             className="sortering-header__dato col col-xs-2"
                             title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
@@ -201,6 +208,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
         </div>
     );
 }
+
 //fjern etter featuretoggle
 const mapStateToProps = (state) => ({
     harFeature: (feature: string) => sjekkFeature(state, feature)
