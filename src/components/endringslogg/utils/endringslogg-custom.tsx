@@ -18,12 +18,6 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '29. OKT. 2019',
-        tittel: 'Startdato for oppfølgingsperioden',
-        tekst: 'Oversikten har nå en kolonne som viser startdato for oppfølgingsperioden. Brukere registrert før aktivitetsplanen ble lansert 4. des. 2017 vises uten dato. Du kan sortere listen etter startdato.',
-        versjonId: '0.2.3',
-    },
-    {
         dato: '22. OKT. 2019',
         tittel: 'Rydding i oversikten',
         tekst: 'Vi har ryddet litt i oversikten og endret titler på noen av kolonnene. Funksjonaliteten er den samme.',
