@@ -208,22 +208,15 @@ export function validerDatoFeldt(input, fra, valgfritt) {
     return error;
 }
 
-export function oppfolgingStartetDato(oppfolgingsDato) {
-    const tidligsteDato = new Date('2017-12-04');
-    console.log("type: " + typeof oppfolgingsDato);
-    console.log("pre: " + oppfolgingsDato)
-
-    // FIXME: Ugh
-    if (typeof oppfolgingsDato === "string") {
-        oppfolgingsDato = new Date(oppfolgingsDato);
-    }
-    if (typeof oppfolgingsDato === "undefined" || oppfolgingsDato <= tidligsteDato) {
-        oppfolgingsDato = null;
-        console.log("type første: " + typeof oppfolgingsDato);
-        console.log("første: " + oppfolgingsDato)
-    } else {
-        console.log("type andre: " + typeof oppfolgingsDato);
-        console.log("andre: " + oppfolgingsDato)
-        return oppfolgingsDato;
-    }
-}
+// export function oppfolgingStartetDato(oppfolgingsDato) {
+//     const tidligsteDato = new Date('2017-12-04');
+//     console.log("oppfølgingsdato: " + oppfolgingsDato)
+//     // FIXME: Ugh
+//     if (typeof oppfolgingsDato === "string") {
+//         oppfolgingsDato = new Date(oppfolgingsDato);
+//     }
+//     if (typeof oppfolgingsDato === "undefined" || oppfolgingsDato <= tidligsteDato) {
+//         oppfolgingsDato = new Date(null);
+//     }
+//     return oppfolgingsDato;
+// }
