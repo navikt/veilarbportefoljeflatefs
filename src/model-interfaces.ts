@@ -95,7 +95,7 @@ export interface BrukerModell {
     guid: string;
     fornavn: string;
     etternavn: string;
-    oppfolgingStartDato: Date;
+    oppfolgingStartDato: string; // dato
     veilederId?: string;
     sikkerhetstiltak: string[];
     diskresjonskode?: string;
