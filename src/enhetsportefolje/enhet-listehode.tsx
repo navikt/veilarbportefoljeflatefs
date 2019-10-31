@@ -76,7 +76,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
                             tekst="Oppfølging startet"
                             className="sortering-header__dato col col-xs-2"
-                            skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
+                            skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
                             title='Startdato for pågående oppfølgingsperiode'
                         />
                         <Header
@@ -96,7 +96,6 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             className="header__veilederident col col-xs-2"
                             title='NAV-ident på tildelt veileder'
                         />
-
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
                             onClick={sorteringOnClick}
