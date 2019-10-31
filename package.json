@@ -10,7 +10,6 @@
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "build": "craco build",
     "eject": "craco eject",
-    "heroku-serve": "node heroku-server.js",
     "heroku-postbuild": "cross-env REACT_APP_MOCK=true npm run build",
     "test": "craco test --watchAll=false",
     "lint": "echo not implemented"
