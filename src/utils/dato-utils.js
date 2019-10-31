@@ -211,16 +211,21 @@ export function validerDatoFeldt(input, fra, valgfritt) {
 
 export function oppfolgingStartetDato(oppfolgingsDato) {
     const tidligsteDato = new Date('2017-12-04');
-    console.log("pre: " + oppfolgingsDato)
+    // console.log("type: " + typeof oppfolgingsDato);
+    // console.log("pre: " + oppfolgingsDato)
 
     // FIXME: Ugh
-    if (typeof oppfolgingsDato === 'string') {
+    if (typeof oppfolgingsDato === "string") {
         oppfolgingsDato = new Date(oppfolgingsDato);
     }
-    if (oppfolgingsDato <= tidligsteDato || oppfolgingsDato === undefined) {
+    if (typeof oppfolgingsDato === "undefined" || oppfolgingsDato <= tidligsteDato) {
+        oppfolgingsDato = null;
+        console.log("type første: " + typeof oppfolgingsDato);
         console.log("første: " + oppfolgingsDato)
-        return null;
     }
-    console.log("andre: " + oppfolgingsDato)
-    return oppfolgingsDato;
+    else {
+        console.log("type andre: " + typeof oppfolgingsDato);
+        console.log("andre: " + oppfolgingsDato)
+         return oppfolgingsDato;
+    }
 }
