@@ -9,12 +9,12 @@ interface ArbeidslisteButtonProps {
     skalVises: boolean;
 }
 
-const cls = (className) => classnames('brukerliste__arbeidslisteknapp', className);
+const cls = (className) => classnames('knapp','brukerliste__arbeidslisteknapp', className);
 
 const arbeidslisteButton = ({ className, onClick, apen}: ArbeidslisteButtonProps) => {
     const chevronCls = apen ? 'brukerliste__arbeidslisteknapp--chevron-apen' : 'brukerliste__arbeidslisteknapp--chevron-lukket';
     return <button
-            className={cls(className)}
+            className={cls( className)}
             onClick={onClick}
             aria-expanded={apen}
         >

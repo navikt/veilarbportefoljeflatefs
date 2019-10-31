@@ -13,6 +13,12 @@
         color: @blue-interaction;
     }
 
+    &:focus {
+        box-shadow: 0 0 0 3px @fokusFarge;
+        border-radius: 2px;
+        outline: none;
+    }
+
     &--valgt {
         border-bottom: 0.15rem solid @navMorkGra;
         color: @navMorkGra;
@@ -28,8 +34,9 @@
 .lenker {
     display: flex;
     align-items: normal;
-    padding: 0 3rem;
     background: white;
+    padding: 0 3rem;
+    margin-bottom: 1.25rem;
 }
 
 .lenke--frittstaende {

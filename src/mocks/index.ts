@@ -75,7 +75,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere, bodyParams?: FiltervalgM
                 bruker.kjonn = '';
                 bruker.fodselsdato = null;
                 bruker.diskresjonskode = Math.random() < 0.5 ? '6' : '7';
-                bruker.oppfolgingStartDato = new Date(+(new Date()) - Math.floor(Math.random()*10000000000));
+                bruker.oppfolgingStartdato = new Date( '2019-04-05T15:17:57.329+02:00');
 
             }
             return bruker;

@@ -1,63 +1,37 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import Modal from 'nav-frontend-modal';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
+import React, {useState}  from 'react';
+import {useSelector} from 'react-redux';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import { AppState } from '../reducer';
+import { AdvarselModal } from '../components/advarselmodal/advarsel-modal';
+import { Hovedknapp } from 'nav-frontend-knapper';
 
-interface TomPortefoljeModalProps {
-    isOpen: boolean;
+function TomPortefoljeModal () {
+    const erNullBrukere =  useSelector((state: AppState) => state.statustall.data.totalt === 0);
+    const [isOpen, setIsOpen] = useState(erNullBrukere);
+
+    return (
+        <AdvarselModal
+            portalClassName="brukercontext-modal"
+            className="brukercontext-modal__content"
+            contentLabel="Enheten har ingen brukere"
+            isOpen={isOpen}
+            onRequestClose={()=> setIsOpen(false)}
+            closeButton
+        >
+            <Innholdstittel className="blokk-s" tag="h1">
+                Handlingen kan ikke utføres
+            </Innholdstittel>
+            <Normaltekst className="blokk-s">
+                Enheten har ikke portefølje. Vennligst bytt!
+            </Normaltekst>
+            <div className="blokk-s">
+                <Hovedknapp className="ok-knapp" onClick={()=> setIsOpen(false)}>
+                    Ok
+                </Hovedknapp>
+            </div>
+        </AdvarselModal>
+    );
+
 }
 
-interface TomPortefoljeModalState {
-    isOpen: boolean;
-}
-
-class TomPortefoljeModal extends React.Component<TomPortefoljeModalProps, TomPortefoljeModalState> {
-    constructor(props) {
-        super(props);
-
-        this.state = { isOpen: this.props.isOpen };
-
-        this.lukkModal = this.lukkModal.bind(this);
-    }
-
-    lukkModal() {
-        this.setState({ isOpen: false });
-    }
-
-    render() {
-        return (
-            <Modal
-                className="tom-portefolje-modal"
-                contentLabel="Enheten har ingen brukere"
-                isOpen={this.state.isOpen}
-                onRequestClose={this.lukkModal}
-                closeButton
-            >
-                <div className="modal-header-wrapper">
-                    <header className="modal-header"/>
-                </div>
-                <div className="innhold">
-                    <Innholdstittel className="blokk-s" tag="h1">
-                        Handlingen kan ikke utføres
-                    </Innholdstittel>
-                    <AlertStripeAdvarsel className="blokk-s">
-                        Enheten har ikke portefølje. Vennligst bytt!
-                    </AlertStripeAdvarsel>
-                </div>
-                <div className="modal-footer">
-                    <button className="knapp knapp--hoved" onClick={this.lukkModal}>
-                       Ok
-                    </button>
-                </div>
-            </Modal>
-        );
-    }
-}
-
-const mapStateToProps= (state: AppState): TomPortefoljeModalState =>({
-    isOpen: state.statustall.data.totalt === 0,
-});
-
-export default connect(mapStateToProps, {}) (TomPortefoljeModal);
+export default TomPortefoljeModal;

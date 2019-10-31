@@ -27,6 +27,8 @@ export enum Kolonne {
     AVTALT_AKTIVITET = 'avtaltaktivitet',
     VENTER_SVAR = 'ventersvar',
     UTLOP_YTELSE = 'utlopytelse',
+    VEDTAKSPERIODE = 'vedtaksperiode',
+    RETTIGHETSPERIODE = 'rettighetsperiode',
     UTLOP_AKTIVITET = 'utlopaktivitet',
     START_DATO_AKTIVITET = 'aktivitet_start',
     NESTE_START_DATO_AKTIVITET = 'neste_aktivitet_start',

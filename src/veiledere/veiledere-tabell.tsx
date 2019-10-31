@@ -90,7 +90,7 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
                                     aria-label={sorterPaaPortefoljeStr ?
                                     currentSortering.direction : 'inaktiv'}
                                 >
-                                    Antall bruker
+                                    Antall brukere
                                 </button>
                             </th>
                             <th />

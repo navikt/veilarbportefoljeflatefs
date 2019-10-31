@@ -34,6 +34,7 @@ export enum Sorteringsfelt {
 
 export enum EtikettType {
     NYBRUKER = 'nybruker',
+    UFORDELTBRUKER = 'ufordeltbruker',
     EGEN_ANSATT = 'egen-ansatt',
     DISKRESJONSKODE = 'diskresjonskode',
     SIKKERHETSTILTAK = 'sikkerhetstiltak',
@@ -94,7 +95,7 @@ export interface BrukerModell {
     guid: string;
     fornavn: string;
     etternavn: string;
-    oppfolgingStartDato: Date;
+    oppfolgingStartdato: string; // dato
     veilederId?: string;
     sikkerhetstiltak: string[];
     diskresjonskode?: string;

@@ -1,58 +1,48 @@
 .annen-veileder {
-    padding: 1rem;
-    background-color: @navLysBlaLighten40;
-    .annen-veileder-varsel {
-        text-align: center;
-    }
+  padding: 1rem;
+  background-color: @navLysBlaLighten40;
+
+  .annen-veileder-varsel {
+    text-align: center;
+  }
 
     .portefolje-side {
     }
 }
 
 .tilbaketilveileder {
-    display: inline-block;
-    position: relative;
-    margin-bottom: 2rem;
-    text-decoration: none;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 2rem;
+  text-decoration: none;
+  color: @navBla;
+
+  &:active, &:visited, &:hover {
     color: @navBla;
-    &:active, &:visited, &:hover {
-        color: @navBla;
-    }
-    i {
-        position: absolute;
-        margin-top: 12px;
-    }
-    span {
-        display: inline-block;
-        position: absolute;
-        margin-left: 20px;
-        white-space: nowrap;
-    }
+  }
+
+  i {
+    position: absolute;
+    margin-top: 12px;
+  }
+
+  span {
+    display: inline-block;
+    position: absolute;
+    margin-left: 20px;
+    white-space: nowrap;
+  }
 }
 
 .portefolje-side {
-    background-color: @navLysGra;
-}
-
-.minoversikt-listehode {
-    border-bottom: 1px solid #b7b1a9;
-
-    .minoversikt-overskrifter {
-        border-bottom: 1px solid #b7b1a9;
-        padding-bottom: 5px;
-        padding-top: 5px;
-
-        .listeoverskrift {
-            font-weight: bold;
-        }
-    }
+  background-color: @navLysGra;
 }
 
 .arbeidsliste--ikon {
-    background: data-uri('./flagg-filled.svg') no-repeat;
-    min-width: 1rem;
-    min-height: 20px;
-    margin-top: 4px;
-    position:relative;
-    right: -4px;
+  background: data-uri('./flagg-filled.svg') no-repeat;
+  min-width: 1rem;
+  min-height: 20px;
+  margin-top: 4px;
+  position: relative;
+  right: -4px;
 }

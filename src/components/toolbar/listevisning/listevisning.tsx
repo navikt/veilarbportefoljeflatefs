@@ -74,7 +74,7 @@ const Listevisning = (props: ListevisningProps) => {
                   className="dropdown--fixed dropdown--toolbar">
             <section className="radio-filterform__valg">
                 <div className="blokk-s">
-                   Du kan velge hvilke kolonner du ønsker å se i listen. Men du kan maks vise 5 kolonner om gangen.
+                   Du kan velge hvilke kolonner du ønsker å se i listen, maks 5 kolonner om gangen.
                 </div>
                 <ul className="ustilet">
                     {props.muligeAlternativer.map((kolonne) => (

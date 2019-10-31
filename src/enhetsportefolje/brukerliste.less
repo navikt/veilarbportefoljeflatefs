@@ -17,8 +17,14 @@
 }
 
 .brukerliste .checkboks+.skjemaelement__label:before {
-    width: 24px;
-    height: 24px;
+    margin-top: 2px;
+    width: 20px;
+    height: 20px;
+}
+
+.checkboks + .skjemaelement__label:before, .radioknapp + .skjemaelement__label:before {
+    width: 20px;
+    height: 20px;
 }
 
 .brukerliste--borders {
@@ -36,10 +42,6 @@
 
 .brukerliste--forrigeBruker {
     box-shadow: inset -1px 0 0 2px @navGra60, inset 1px 0 0 2px @navGra40;
-}
-
-.brukerliste__header {
-    min-height: 4rem;
 }
 
 .brukerliste__overskriftheader {
@@ -76,11 +78,14 @@
 
 .brukerliste__gutter-right {
     display: flex;
-    flex-direction: row-reverse;
     flex-grow: 1;
     align-items: center;
     width: 4rem;
     margin-right: 8px;
+}
+
+.brukerliste__etiketter {
+    width: 100%;
 }
 
 .brukerliste__arbeidslisteknapp {
@@ -90,6 +95,7 @@
     background-color: @navLysGra;
     border: none;
     min-width: 2rem;
+    color: @navMorkGra;
 }
 
 .brukerliste__arbeidslistepanel {

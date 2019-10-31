@@ -1,4 +1,3 @@
-import {BrukerModell} from "../model-interfaces";
 import brukerfnr from "../components/tabell/brukerfnr";
 
 export const statustall = (brukere: any) => ({

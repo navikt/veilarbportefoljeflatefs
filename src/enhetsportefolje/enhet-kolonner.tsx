@@ -23,8 +23,11 @@ import {
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
+import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
+import { sjekkFeature } from '../ducks/features';
+import { OPPFOLGING_STARTET } from '../konstanter';
+import { connect } from 'react-redux';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -33,31 +36,47 @@ interface EnhetKolonnerProps {
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
+    harFeature: Function; //fjern etter featuretoggle
 }
 
-function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
+function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder, harFeature}: EnhetKolonnerProps) {
     const ytelsevalgIntl = ytelsevalg();
-    const { ytelse } = filtervalg;
+    const {ytelse} = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
+    const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
+    const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
     const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
+    const iAvtaltAktivitet = !!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+    const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : !!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
+
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
-            <BrukerFnr className="col col-xs-2" bruker={bruker} />
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}/>
+            <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <DatoKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
-                dato={bruker.oppfolgingStartDato}
+                skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
+                dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
+            />
+            <VeilederNavn className="col col-xs-2"
+                          bruker={bruker}
+                          skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
+                          veileder={brukersVeileder}
+            />
+            <VeilederId className="col col-xs-2"
+                        bruker={bruker}
+                        skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -84,9 +103,15 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             />
             <UkeKolonne
                 className="col col-xs-2"
+                ukerIgjen={utlopsdatoUkerIgjen}
+                minVal={2}
+                skalVises={ytelseAapVedtaksperiodeErValgtKolonne && erAapYtelse}
+            />
+            <UkeKolonne
+                className="col col-xs-2"
                 ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && erAapYtelse}
+                skalVises={ytelseAapRettighetsperiodeErValgtKolonne && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -97,7 +122,7 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraBruker}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)  && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -112,12 +137,12 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                skalVises={iAvtaltAktivitet}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0  && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                skalVises={avtaltAktivitetOgTiltak}
             />
             <TidKolonne
                 className="col col-xs-2"
@@ -129,17 +154,15 @@ function EnhetKolonner({ className, bruker, enhetId, filtervalg, valgteKolonner,
                 dato={varighet}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
-            <VeilederId className="col col-xs-2"
-                        bruker={bruker}
-                        skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
-            />
-            <VeilederNavn className="col col-xs-2"
-                          bruker={bruker}
-                          skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                          veileder={brukersVeileder}
-            />
         </div>
     );
 }
 
-export default EnhetKolonner;
+//fjern etter featuretoggle
+const mapStateToProps = (state) => ({
+    harFeature: (feature: string) => sjekkFeature(state, feature)
+});
+
+export default connect(mapStateToProps)(EnhetKolonner);
+
+// export default EnhetKolonner;

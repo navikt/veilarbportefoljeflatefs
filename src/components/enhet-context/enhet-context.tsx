@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AlertStripeAdvarselSolid } from 'nav-frontend-alertstriper';
+import Alertstripe from 'nav-frontend-alertstriper';
 import { connect } from 'react-redux';
 import { settNyAktivEnhet, settTilkoblingState, settIsPending, skjulFeilmodal, visFeilmodal } from './context-reducer';
 import { AppState } from '../../reducer';
@@ -118,10 +118,10 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     render() {
 
         const alertIkkeTilkoblet = (
-            <AlertStripeAdvarselSolid>
+            <Alertstripe type="feil">
                 Det er fare for at du kan ha forskjellige brukere i forskjellige flater/vinduer.
                 Systemet feiler og klarer ikke oppfatte endringer du eventuelt har gjort i andre vinuer.
-            </AlertStripeAdvarselSolid>
+            </Alertstripe>
         );
 
         return (

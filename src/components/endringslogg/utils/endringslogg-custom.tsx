@@ -18,29 +18,45 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '31. OKT. 2019',
+        tittel: 'Startdato for oppfølgingsperioden',
+        tekst: 'Oversikten har nå en kolonne som viser startdato for oppfølgingsperioden. Brukere registrert før aktivitetsplanen ble lansert 4. des. 2017 vises uten dato. Du kan sortere listen etter startdato.',
+        versjonId: '0.2.3',
+    },
+    {
+        dato: '22. OKT. 2019',
+        tittel: 'Rydding i oversikten',
+        tekst: 'Vi har ryddet litt i oversikten og endret titler på noen av kolonnene. Funksjonaliteten er den samme.',
+        versjonId: '0.2.2',
+        children:
+            <p>Tips: Når det er mer enn fem kolonner kan du klikke på «Velg kolonner» for å endre hvilken informasjon
+                som skal vises i listen.</p>
+    },
+    {
         dato: '26. SEP. 2019',
         tittel: 'Endring i arbeidslisten',
         tekst: 'Tittelfeltet i arbeidslisten er utvidet til 30 tegn. Kolonnetittelen i oversikten er endret fra "Kommentar" til "Tittel".',
-        versjonId: '0.2.1',
+        versjonId: '0.2.1'
     },
     {
         dato: '05. SEP. 2019',
         tittel: 'Endringer i filtrene',
         versjonId: '0.2.0',
         children:
-        <>
-            <ul className="endringslogg-innhold-liste">
-                <li>«Møte med NAV i dag» finnes nå på Enhetens oversikt.</li>
-                <li>Manuell oppfølging ligger nå under «Situasjon».</li>
-                <li>Rettighetsgruppe og ytelser ligger nå i samme gruppe.</li>
-            </ul>
-            <Normaltekst>Vi har også justert meldingen du får når du sletter en bruker fra arbeidslista.</Normaltekst>
-            <TourModalButton
-                metrikknavn="portefolje.endringslogg_modal"
-                modal={ModalName.FLYTTE_FILTER}
-                knappeTekst="Se endringer"
-            />
-        </>
+            <>
+                <ul className="endringslogg-innhold-liste">
+                    <li>«Møte med NAV i dag» finnes nå på Enhetens oversikt.</li>
+                    <li>Manuell oppfølging ligger nå under «Situasjon».</li>
+                    <li>Rettighetsgruppe og ytelser ligger nå i samme gruppe.</li>
+                </ul>
+                <Normaltekst>Vi har også justert meldingen du får når du sletter en bruker fra
+                    arbeidslista.</Normaltekst>
+                <TourModalButton
+                    metrikknavn="portefolje.endringslogg_modal"
+                    modal={ModalName.FLYTTE_FILTER}
+                    knappeTekst="Se endringer"
+                />
+            </>
     },
     {
         dato: '16. JUL. 2019',

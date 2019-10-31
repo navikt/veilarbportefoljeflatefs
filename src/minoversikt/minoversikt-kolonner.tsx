@@ -23,8 +23,11 @@ import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
+import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
+import { OPPFOLGING_STARTET } from '../konstanter';
+import { sjekkFeature } from '../ducks/features';
+import { connect } from 'react-redux';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -33,9 +36,10 @@ interface MinOversiktKolonnerProps {
     valgteKolonner: Kolonne[];
     enhetId: string;
     skalJusteres: boolean;
+    harFeature: Function;
 }
 
-function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, skalJusteres}: MinOversiktKolonnerProps) {
+function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, skalJusteres, harFeature}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
     const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
@@ -49,17 +53,22 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
+    const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
+    const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
+    const iAvtaltAktivitet = (!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET));
+    const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : !!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}  skalJusteres={skalJusteres}/>
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} skalJusteres={skalJusteres}/>
             <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <DatoKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
-                dato={bruker.oppfolgingStartDato}
+                skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
+                dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -96,9 +105,15 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             />
             <UkeKolonne
                 className="col col-xs-2"
+                ukerIgjen={utlopsdatoUkerIgjen}
+                minVal={2}
+                skalVises={ytelseAapVedtaksperiodeErValgtKolonne && erAapYtelse}
+            />
+            <UkeKolonne
+                className="col col-xs-2"
                 ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && erAapYtelse}
+                skalVises={ytelseAapRettighetsperiodeErValgtKolonne && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -129,8 +144,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                skalVises={iAvtaltAktivitet}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -140,8 +154,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 &&
-                valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                skalVises={avtaltAktivitetOgTiltak}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -165,4 +178,11 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     );
 }
 
-export default MinoversiktDatokolonner;
+//fjern etter featuretoggle
+const mapStateToProps = (state) => ({
+    harFeature: (feature: string) => sjekkFeature(state, feature)
+});
+
+export default connect(mapStateToProps)(MinoversiktDatokolonner);
+
+// export default MinoversiktDatokolonner;

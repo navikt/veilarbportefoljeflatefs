@@ -153,12 +153,12 @@ export function klokkeslettTilMinutter(klokkeSlett) {
     return (tilMoment.get('hours') * 60) + tilMoment.get('minutes');
 }
 
-export function minuttDifferanse (klokkeslett2, klokkeslett1) {
+export function minuttDifferanse(klokkeslett2, klokkeslett1) {
     return moment.duration(moment(klokkeslett2).diff(klokkeslett1)).asMinutes()
 }
 
 export function validerDatoField(input, intl, alternativer, valgfritt) {
-    const { fra } = alternativer;
+    const {fra} = alternativer;
     const inputDato = moment(input);
 
     const fraDato = moment(fra);
@@ -189,7 +189,6 @@ export function validerDatoField(input, intl, alternativer, valgfritt) {
 }
 
 
-
 export function validerDatoFeldt(input, fra, valgfritt) {
     let error;
     const inputDato = moment(input);
@@ -207,4 +206,20 @@ export function validerDatoFeldt(input, fra, valgfritt) {
         error = 'Fristen må være i dag eller senere'
     }
     return error;
+}
+
+export function oppfolgingStartetDato(oppfolgingsDato) {
+    const tidligsteDato = new Date('2017-12-04');
+    console.log("oppfølgingsdato pre: " + oppfolgingsDato)
+
+    // FIXME: Ugh
+    // if (typeof oppfolgingsDato === "string") {
+    //     console.log("går den inn hit?")
+    //     oppfolgingsDato = new Date(oppfolgingsDato);
+    // }
+    if (typeof oppfolgingsDato === "undefined" || oppfolgingsDato <= tidligsteDato) {
+        oppfolgingsDato = null;
+    }
+    console.log("oppfølgingsdato post: " + oppfolgingsDato)
+    return oppfolgingsDato;
 }

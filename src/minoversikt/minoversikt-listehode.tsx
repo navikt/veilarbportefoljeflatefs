@@ -1,7 +1,6 @@
 import * as React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
 import { ytelseFilterErAktiv } from '../utils/utils';
-import Listeoverskrift from '../utils/listeoverskrift';
 import { BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { AktiviteterValg } from '../ducks/filtrering';
 import {
@@ -16,6 +15,10 @@ import {
 } from '../filtrering/filter-konstanter';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
+import { OPPFOLGING_STARTET } from '../konstanter';
+import { connect } from 'react-redux';
+import { sjekkFeature } from '../ducks/features';
+import TittelValg from '../utils/utils'
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -32,106 +35,23 @@ interface MinOversiktListehodeProps {
     sorteringsfelt: Sorteringsfelt;
     brukere: BrukerModell[];
     valgteKolonner: Kolonne[];
+    harFeature: Function; //fjern etter featuretoggle
 }
 
-export function bereignListeOverskriftStorrelse(valgteKolonner, listeKolonner) {
-    return listeKolonner.filter((elem) => valgteKolonner.includes(elem)).length * 2;
-}
-
-function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner }: MinOversiktListehodeProps) {
-    const { ytelse } = filtervalg;
+function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner, harFeature}: MinOversiktListehodeProps) {
+    const {ytelse} = filtervalg;
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
-    const aapRettighetsperiode = !!ytelse  && erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
+    const aapRettighetsperiode = !!ytelse && erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
     const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : ytelseUtlopsSortering[filtervalg.ytelse!];
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
-    const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'Vedtaksperiode' : 'Vedtaksperiode';
+    const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
-    const arbeidslisteErAktiv = ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && (valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT) || valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST));
+    const iAvtaltAktivitet = !!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+    const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
     return (
         <div className="brukerliste__header">
-            <div className="brukerliste--borders">
-                <div className="brukerliste__overskriftheader brukerliste--minoversikt-padding">
-                    <div className="brukerliste__gutter-left brukerliste--min-width-minside" />
-                    <div className="brukerliste__innhold">
-                        <Listeoverskrift
-                            className={`listeoverskrift__arbeidsliste listeoverskrift col col-xs-${bereignListeOverskriftStorrelse(valgteKolonner, [Kolonne.FODSELSNR, Kolonne.BRUKER, Kolonne.OPPFOLGINGSTARTET])}`}
-                            tekst="Bruker"
-                        />
-                        <Listeoverskrift
-                            className={`listeoverskrift__arbeidsliste listeoverskrift col col-xs-${bereignListeOverskriftStorrelse(valgteKolonner, [Kolonne.ARBEIDSLISTE_FRIST, Kolonne.ARBEIDSLISTE_OVERSKRIFT])}`}
-                            skalVises={arbeidslisteErAktiv}
-                            tekst="Arbeidsliste"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift__ytelse listeoverskrift col col-xs-2"
-                            skalVises={!!filtervalg && ytelseFilterErAktiv(ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
-                            tekst="Gjenstår"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift__ytelse listeoverskrift col col-xs-2"
-                            skalVises={!!filtervalg && ytelseFilterErAktiv(ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
-                            tekst="Gjenstår"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift__dato listeoverskrift col col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
-                            tekst="Svar fra NAV"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
-                            tekst="Svar fra bruker"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift col col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
-                            tekst="Klokkeslett for møtet"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift col col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
-                            tekst="Varighet"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
-                            tekst="Utløpt aktivitet"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                            valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
-                            tekst="Neste utløpsdato aktivitet"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!filtervalg && harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 &&
-                            valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
-                            tekst="Første sluttdato av valgte aktiviteter"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                            valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
-                            tekst="Startdato aktivitet"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                            valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
-                            tekst="Neste startdato aktivitet"
-                        />
-                        <Listeoverskrift
-                            className="listeoverskrift__dato listeoverskriftcol col-xs-2"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                            valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
-                            tekst="Startdato aktivitet passert"
-                        />
-                    </div>
-                    <div className="brukerliste__gutter-right"/>
-                </div>
-            </div>
             <div className="brukerliste--border-bottom">
                 <div className="brukerliste__sorteringheader">
                     <div className="brukerliste__gutter-left brukerliste--min-width-minside"/>
@@ -159,25 +79,28 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
                             tekst="Oppfølging startet"
                             className="sortering-header__dato col col-xs-2"
-                            skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                            skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
+                            title='Startdato for pågående oppfølgingsperiode'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
-                            tekst="Dato"
+                            tekst="Arbeidsliste frist"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Fristdato som er satt i arbeidslisten'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                            tekst="Tittel"
+                            tekst="Arbeidsliste tittel"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Tittel som er skrevet i arbeidslisten'
                         />
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
@@ -187,107 +110,127 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
                             tekst={ytelseSorteringHeader}
                             skalVises={ytelseFilterErAktiv(ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                             className="sortering-header__dato col col-xs-2"
+                            title={TittelValg(ytelseSorteringHeader)}
+                        />
+                        <SorteringHeader
+                            sortering={ytelseUtlopsdatoNavn}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
+                            tekst="Gjenstående uker vedtak"
+                            skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
+                            className="sortering-header__dato col col-xs-2"
+                            title='Gjenstående uker på gjeldende vedtak'
                         />
                         <SorteringHeader
                             sortering={aapRettighetsperiode}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === aapRettighetsperiode}
-                            tekst="Rettighetsperiode"
-                            skalVises={ytelseFilterErAktiv(ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                            tekst="Gjenstående uker rettighet"
+                            skalVises={ytelseFilterErAktiv(ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Gjenstående uker av rettighetsperioden for ytelsen'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
-                            tekst="Dato"
+                            tekst="Dato på melding"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Dato på meldingen som er merket "Venter på svar fra NAV"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
-                            tekst="Dato"
+                            tekst="Dato på melding"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Dato på meldingen som er merket "Venter på svar fra bruker"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
-                            tekst="Dato"
+                            tekst="Utløpsdato aktivitet"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
-                            tekst="Dato"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                            valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                            tekst="Neste utløpsdato aktivitet"
+                            skalVises={iAvtaltAktivitet}
                             className="sortering-header__dato col col-xs-2"
+                            title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.MOTER_IDAG}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
-                            tekst="Klokkeslett"
+                            tekst="Klokkeslett møte"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Tidspunktet møtet starter'
                         />
                         <Header
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Varighet på møtet'
                         >
-                            Varighet
+                            Varighet møte
                         </Header>
                         <SorteringHeader
                             sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                            tekst="Dato"
-                            skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 &&
-                            valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                            tekst="Neste utløpsdato aktivitet"
+                            skalVises={avtaltAktivitetOgTiltak}
                             className="sortering-header__dato col col-xs-2"
+                            title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
-                            tekst="Dato"
+                            tekst="Startdato aktivitet"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
-                            tekst="Dato"
+                            tekst="Neste startdato aktivitet"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Neste startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
-                            tekst="Dato"
+                            tekst="Passert startdato aktivitet"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                             valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                     </div>
                     <div className="brukerliste__gutter-right"/>
@@ -297,4 +240,11 @@ function MinOversiktListeHode({ sorteringsrekkefolge, sorteringOnClick, filterva
     );
 }
 
-export default MinOversiktListeHode;
+//fjern etter featuretoggle
+const mapStateToProps = (state) => ({
+    harFeature: (feature: string) => sjekkFeature(state, feature)
+});
+
+export default connect(mapStateToProps)(MinOversiktListeHode);
+
+// export default MinOversiktListeHode;
