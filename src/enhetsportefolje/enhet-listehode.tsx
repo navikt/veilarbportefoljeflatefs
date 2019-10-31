@@ -14,7 +14,7 @@ import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model
 import { Kolonne } from '../ducks/ui/listevisning';
 import { AktiviteterValg } from '../ducks/filtrering';
 import Header from '../components/tabell/header';
-import { OPPFOLGING_STARTET } from '../konstanter';
+// import { OPPFOLGING_STARTET } from '../konstanter';
 import { sjekkFeature } from '../ducks/features';
 import { connect } from 'react-redux';
 
@@ -45,7 +45,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const iAvtaltAktivitet = !!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
     const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
-    const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
+    // const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
 
     return (
         <div className="brukerliste__header">
