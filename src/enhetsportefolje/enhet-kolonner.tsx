@@ -67,7 +67,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
-                dato={oppfolgingStartetDato(bruker.oppfolgingStartDato)}
+                dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
             />
             <VeilederNavn className="col col-xs-2"
                           bruker={bruker}
