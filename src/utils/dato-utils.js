@@ -210,14 +210,10 @@ export function validerDatoFeldt(input, fra, valgfritt) {
 
 export function oppfolgingStartetDato(oppfolgingsDato) {
     const tidligsteDato = '2017-12-04T00:00:01.883+00:00';
-    console.log("pre: " + oppfolgingsDato)
-
     if (oppfolgingsDato <= tidligsteDato) {
         oppfolgingsDato = tidligsteDato;
-    }
-    else if(oppfolgingsDato === undefined){
+    } else if (oppfolgingsDato === undefined) {
         oppfolgingsDato = null;
     }
-    console.log("post: " + oppfolgingsDato)
     return oppfolgingsDato;
 }

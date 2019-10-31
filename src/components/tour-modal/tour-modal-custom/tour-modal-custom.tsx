@@ -6,6 +6,8 @@ import filter3Bilde from './filter/filter-3.png';
 import filterendring1Bilde from './filterendringer/filterendringer-step1.png';
 import filterendring2Bilde from './filterendringer/filterendringer-step2.png';
 import filterendring3Bilde from './filterendringer/filterendringer-step3.png';
+import nyKolonne1Bilde from './nyKolonne/nyKolonne-step1.png';
+import nyKolonne2Bilde from './nyKolonne/nyKolonne-step2.png';
 
 const stepsLastNedCV: Step[] = [
     {
@@ -51,6 +53,20 @@ const stepsFlytteFilter: Step[] = [
     },
 ];
 
+const stepsNyKolonne: Step[] = [
+    {
+        tittel: 'Startdato for oppfølgingsperioden',
+        bilde: nyKolonne1Bilde,
+        tekst: 'Oversikten har en ny kolonne, «Oppfølging startet». Klikk på kolonnetittelen for å sortere etter startdato.'
+    },
+    {
+        tittel: 'Velg kolonner',
+        bilde: nyKolonne2Bilde,
+        tekst: 'Dersom det ikke er plass til å vise alle kolonner samtidig, kan du bruke «Velg kolonner».'
+    },
+
+];
+
 const stepsblank: Step[] = [
     {
         tittel: '',
@@ -67,6 +83,8 @@ export function getTour(modal: ModalName) {
             return stepsFilter;
         case ModalName.FLYTTE_FILTER:
             return stepsFlytteFilter;
+        case ModalName.NY_KOLONNE:
+            return stepsNyKolonne;
         default:
             return stepsblank;
     }
