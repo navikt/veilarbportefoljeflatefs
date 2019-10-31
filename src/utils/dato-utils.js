@@ -211,14 +211,16 @@ export function validerDatoFeldt(input, fra, valgfritt) {
 
 export function oppfolgingStartetDato(oppfolgingsDato) {
     const tidligsteDato = new Date('2017-12-04');
+    console.log("pre: " + oppfolgingsDato)
 
     // FIXME: Ugh
     if (typeof oppfolgingsDato === 'string') {
         oppfolgingsDato = new Date(oppfolgingsDato);
     }
-
     if (oppfolgingsDato <= tidligsteDato || oppfolgingsDato === undefined) {
+        console.log("første: " + oppfolgingsDato)
         return null;
     }
+    console.log("andre: " + oppfolgingsDato)
     return oppfolgingsDato;
 }
