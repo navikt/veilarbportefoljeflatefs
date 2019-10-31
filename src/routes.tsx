@@ -19,7 +19,7 @@ function Routes() {
 
     return (
         <div className="portefolje">
-            <EnhetContext >
+            <EnhetContext>
                 <div className={classnames('maincontent', 'side-innhold')}>
                     {erHeroku && <AlertStripe type="advarsel"> Dette er en testapplikasjon. Alle data er fiktive og ingen endring vil bli lagret.</AlertStripe>}
                     <Switch>
