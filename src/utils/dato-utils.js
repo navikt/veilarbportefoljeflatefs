@@ -209,15 +209,17 @@ export function validerDatoFeldt(input, fra, valgfritt) {
 }
 
 export function oppfolgingStartetDato(oppfolgingsDato) {
-    const tidligsteDato = new Date('2017-12-04');
-    console.log("oppfølgingsdato pre: " + oppfolgingsDato)
+    const tidligsteDato = '2017-12-04T00:00:01.883+00:00';
 
-    // FIXME: Ugh
-    // if (typeof oppfolgingsDato === "string") {
-    //     console.log("går den inn hit?")
-    //     oppfolgingsDato = new Date(oppfolgingsDato);
-    // }
-    if (typeof oppfolgingsDato === "undefined" || oppfolgingsDato <= tidligsteDato) {
+    if (oppfolgingsDato <= tidligsteDato) {
+        console.log("-----------------");
+        console.log("skal gå inn her når dato er før 04.12.2017");
+        console.log("if-setning oppfølgingsdato før: " + oppfolgingsDato);
+        oppfolgingsDato = tidligsteDato;
+        console.log("if-setning oppfølgingsdato skal være 04.12.2017: " + oppfolgingsDato);
+        console.log("-----------------");
+    }
+    else if(typeof oppfolgingsDato === "undefined"){
         oppfolgingsDato = null;
     }
     console.log("oppfølgingsdato post: " + oppfolgingsDato)
