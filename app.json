@@ -10,6 +10,9 @@
     },
     "YARN_PRODUCTION": {
       "value": "false"
+    },
+    "REACT_HEROKU_APP": {
+      "value": "true"
     }
   },
   "formation": {},
