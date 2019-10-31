@@ -153,12 +153,12 @@ export function klokkeslettTilMinutter(klokkeSlett) {
     return (tilMoment.get('hours') * 60) + tilMoment.get('minutes');
 }
 
-export function minuttDifferanse (klokkeslett2, klokkeslett1) {
+export function minuttDifferanse(klokkeslett2, klokkeslett1) {
     return moment.duration(moment(klokkeslett2).diff(klokkeslett1)).asMinutes()
 }
 
 export function validerDatoField(input, intl, alternativer, valgfritt) {
-    const { fra } = alternativer;
+    const {fra} = alternativer;
     const inputDato = moment(input);
 
     const fraDato = moment(fra);
@@ -189,7 +189,6 @@ export function validerDatoField(input, intl, alternativer, valgfritt) {
 }
 
 
-
 export function validerDatoFeldt(input, fra, valgfritt) {
     let error;
     const inputDato = moment(input);
@@ -211,8 +210,8 @@ export function validerDatoFeldt(input, fra, valgfritt) {
 
 export function oppfolgingStartetDato(oppfolgingsDato) {
     const tidligsteDato = new Date('2017-12-04');
-    // console.log("type: " + typeof oppfolgingsDato);
-    // console.log("pre: " + oppfolgingsDato)
+    console.log("type: " + typeof oppfolgingsDato);
+    console.log("pre: " + oppfolgingsDato)
 
     // FIXME: Ugh
     if (typeof oppfolgingsDato === "string") {
@@ -222,10 +221,9 @@ export function oppfolgingStartetDato(oppfolgingsDato) {
         oppfolgingsDato = null;
         console.log("type første: " + typeof oppfolgingsDato);
         console.log("første: " + oppfolgingsDato)
-    }
-    else {
+    } else {
         console.log("type andre: " + typeof oppfolgingsDato);
         console.log("andre: " + oppfolgingsDato)
-         return oppfolgingsDato;
+        return oppfolgingsDato;
     }
 }
