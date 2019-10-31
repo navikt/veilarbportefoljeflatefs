@@ -11,7 +11,7 @@ export enum Sorteringsfelt {
     VALGTE_AKTIVITETER = 'valgteaktiviteter',
     ETTERNAVN = 'etternavn',
     FODSELSNUMMER = 'fodselsnummer',
-    OPPFOLGINGSTARTET = 'oppfolging_startet',
+    OPPFOLGINGSTARTET = 'oppfolging_startdato',
     UTLOPSDATO = 'utlopsdato',
     DAGPENGER_UTLOP_UKE = 'dagputlopuke',
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
