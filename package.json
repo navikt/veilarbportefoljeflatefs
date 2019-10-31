@@ -11,6 +11,7 @@
     "build": "craco build",
     "eject": "craco eject",
     "heroku-postbuild": "cross-env REACT_APP_MOCK=true npm run build",
+    "heroku-serve": "node heroku-server.js",
     "test": "craco test --watchAll=false",
     "lint": "echo not implemented"
   },
