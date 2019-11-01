@@ -3,8 +3,7 @@ kind: "Application"
 metadata:
   name: veilarbportefoljeflatefs
   namespace: {{namespace}}
-  cluster:
-    - dev-fss
+  cluster: dev-fss
   labels:
     team: voff
 spec:
