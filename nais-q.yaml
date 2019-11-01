@@ -5,6 +5,7 @@ metadata:
   namespace: {{namespace}}
   cluster: dev-fss
   labels:
+    branch: dev
     team: voff
 spec:
   image: docker.pkg.github.com/navikt/veilarbportefoljeflatefs/veilarbportefoljeflatefs:{{version}}

@@ -5,6 +5,7 @@ metadata:
   namespace: default
   cluster: prod-fss
   labels:
+    branch: master
     team: voff
 spec:
   image: docker.pkg.github.com/navikt/veilarbportefoljeflatefs/veilarbportefoljeflatefs:{{version}}
