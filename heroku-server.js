@@ -11,6 +11,10 @@ app.get('/veilarbportefoljeflatefs', (req, res) => {
     res.sendFile(path.join(__dirname, '/build/index.html'));
 });
 
+app.get('/veilarbportefoljeflatefs/portefolje', (req, res) => {
+    res.sendFile(path.join(__dirname, '/build/index.html'));
+});
+
 app.get('*', (req, res) => {
     res.redirect('/veilarbportefoljeflatefs');
 });

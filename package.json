@@ -11,7 +11,7 @@
     "build": "craco build",
     "eject": "craco eject",
     "heroku-postbuild": "cross-env REACT_APP_MOCK=true npm run build",
-    "heroku-serve": "serve -s build -l $PORT",
+    "heroku-serve": "node heroku-server.js",
     "test": "craco test --watchAll=false",
     "lint": "echo not implemented"
   },
@@ -96,7 +96,6 @@
     "redux-form": "^8.2.6",
     "redux-thunk": "2.2.0",
     "reselect": "^4.0.0",
-    "serve": "^11.2.0",
     "typescript": "^3.6.2",
     "whatwg-fetch": "2.0.3"
   },
