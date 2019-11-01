@@ -15,14 +15,12 @@ workflows:
                 - dev
       - pus/bygg-og-deploy-frontend:
           context: pus
-          cluster: dev-fss
           filepath: ./nais-q.yaml
           filters:
             branches:
               only: dev
       - pus/bygg-og-deploy-frontend:
           context: pus
-          cluster: prod-fss
           filepath: ./nais.yaml
           filters:
             branches:
