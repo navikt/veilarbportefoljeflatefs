@@ -21,7 +21,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '04. Nov 2019',
         tittel: 'Startdato for oppfølgingsperioden',
         tekst: 'Oversikten har nå en kolonne som viser startdato for oppfølgingsperioden. Brukere registrert før aktivitetsplanen ble lansert 4. des. 2017 vises med dato "04.12.2017". Du kan sortere listen etter startdato.',
-        versjonId: '0.2.5',
+        versjonId: '04.11.19',
         children:
             <TourModalButton
                 metrikknavn="portefolje.endringslogg_modal"
