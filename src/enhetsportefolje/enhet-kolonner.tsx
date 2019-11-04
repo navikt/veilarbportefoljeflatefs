@@ -25,9 +25,6 @@ import VeilederId from '../components/tabell/veilederid';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import { sjekkFeature } from '../ducks/features';
-import { OPPFOLGING_STARTET } from '../konstanter';
-import { connect } from 'react-redux';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -36,10 +33,9 @@ interface EnhetKolonnerProps {
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
-    harFeature: Function; //fjern etter featuretoggle
 }
 
-function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder, harFeature}: EnhetKolonnerProps) {
+function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
     const ytelsevalgIntl = ytelsevalg();
     const {ytelse} = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
@@ -57,8 +53,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const iAvtaltAktivitet = !!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
     const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : !!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
-    const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
-
 
     return (
         <div className={className}>
@@ -66,7 +60,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <DatoKolonne
                 className="col col-xs-2"
-                skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
+                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                 dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
             />
             <VeilederNavn className="col col-xs-2"
@@ -158,11 +152,4 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     );
 }
 
-//fjern etter featuretoggle
-const mapStateToProps = (state) => ({
-    harFeature: (feature: string) => sjekkFeature(state, feature)
-});
-
-export default connect(mapStateToProps)(EnhetKolonner);
-
-// export default EnhetKolonner;
+export default EnhetKolonner;
