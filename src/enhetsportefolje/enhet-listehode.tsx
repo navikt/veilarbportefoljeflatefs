@@ -1,23 +1,19 @@
 import React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import { ytelseFilterErAktiv } from '../utils/utils';
+import TittelValg, { ytelseFilterErAktiv } from '../utils/utils';
 import {
-    ytelseUtlopsSortering,
-    ytelseAapSortering,
-    VENTER_PA_SVAR_FRA_NAV,
-    VENTER_PA_SVAR_FRA_BRUKER,
+    I_AVTALT_AKTIVITET,
+    MOTER_IDAG,
     UTLOPTE_AKTIVITETER,
-    I_AVTALT_AKTIVITET, MOTER_IDAG
+    VENTER_PA_SVAR_FRA_BRUKER,
+    VENTER_PA_SVAR_FRA_NAV,
+    ytelseAapSortering,
+    ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
 import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import { AktiviteterValg } from '../ducks/filtrering';
 import Header from '../components/tabell/header';
-import { OPPFOLGING_STARTET } from '../konstanter';
-import { sjekkFeature } from '../ducks/features';
-import { connect } from 'react-redux';
-import TittelValg from '../utils/utils'
-
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -33,10 +29,9 @@ interface EnhetListehodeProps {
     valgteKolonner: Kolonne[];
     filtervalg: FiltervalgModell;
     sorteringsfelt: string;
-    harFeature: Function; //fjern etter featuretoggle
 }
 
-function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner, harFeature}: EnhetListehodeProps) {
+function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner}: EnhetListehodeProps) {
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
@@ -44,8 +39,8 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
-    const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
-
+    const iAvtaltAktivitet = !!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+    const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     return (
         <div className="brukerliste__header">
@@ -76,7 +71,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
                             tekst="Oppfølging startet"
                             className="sortering-header__dato col col-xs-2"
-                            skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
+                            skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                             title='Startdato for pågående oppfølgingsperiode'
                         />
                         <Header
@@ -96,7 +91,6 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             className="header__veilederident col col-xs-2"
                             title='NAV-ident på tildelt veileder'
                         />
-
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
                             onClick={sorteringOnClick}
@@ -163,7 +157,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                             tekst="Neste utløpsdato aktivitet"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                            skalVises={iAvtaltAktivitet}
                             className="sortering-header__dato col col-xs-2"
                             title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
@@ -172,10 +166,10 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                            tekst="Første utløpsdato aktivitet"
-                            skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                            tekst="Neste utløpsdato aktivitet"
+                            skalVises={avtaltAktivitetOgTiltak}
                             className="sortering-header__dato col col-xs-2"
-                            title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
+                            title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.MOTER_IDAG}
@@ -202,11 +196,5 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
         </div>
     );
 }
-//fjern etter featuretoggle
-const mapStateToProps = (state) => ({
-    harFeature: (feature: string) => sjekkFeature(state, feature)
-});
 
-export default connect(mapStateToProps)(EnhetListehode);
-
-// export default EnhetListehode;
+export default EnhetListehode;

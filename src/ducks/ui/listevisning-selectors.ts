@@ -64,7 +64,7 @@ export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolo
         .concat(addHvis(Kolonne.UTLOP_YTELSE, filtervalg.ytelse !== null && filtervalg.ytelse !== AAP_YTELSE && filtervalg.ytelse !== AAP_YTELSE_MAXTID && filtervalg.ytelse !== AAP_YTELSE_UNNTAK))
         .concat(addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_MAXTID || filtervalg.ytelse === AAP_YTELSE_UNNTAK))
         .concat(addHvis(Kolonne.RETTIGHETSPERIODE, filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_MAXTID || filtervalg.ytelse === AAP_YTELSE_UNNTAK))
-        .concat(addHvis(Kolonne.UTLOP_AKTIVITET, harValgtMinstEnAktivitet(filtervalg.aktiviteter) && harIkkeValgtTiltakstype(filtervalg.tiltakstyper)))
+        .concat(addHvis(Kolonne.UTLOP_AKTIVITET, !filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && harValgtMinstEnAktivitet(filtervalg.aktiviteter) && harIkkeValgtTiltakstype(filtervalg.tiltakstyper)))
         .concat(addHvis(Kolonne.START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
         .concat(addHvis(Kolonne.NESTE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
         .concat(addHvis(Kolonne.FORRIGE_START_DATO_AKTIVITET, name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))

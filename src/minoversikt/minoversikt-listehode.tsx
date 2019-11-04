@@ -15,9 +15,6 @@ import {
 } from '../filtrering/filter-konstanter';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
-import { OPPFOLGING_STARTET } from '../konstanter';
-import { connect } from 'react-redux';
-import { sjekkFeature } from '../ducks/features';
 import TittelValg from '../utils/utils'
 
 function harValgteAktiviteter(aktiviteter) {
@@ -35,10 +32,9 @@ interface MinOversiktListehodeProps {
     sorteringsfelt: Sorteringsfelt;
     brukere: BrukerModell[];
     valgteKolonner: Kolonne[];
-    harFeature: Function; //fjern etter featuretoggle
 }
 
-function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner, harFeature}: MinOversiktListehodeProps) {
+function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner}: MinOversiktListehodeProps) {
     const {ytelse} = filtervalg;
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const aapRettighetsperiode = !!ytelse && erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
@@ -46,7 +42,8 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = (ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse) ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
-    const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
+    const iAvtaltAktivitet = !!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+    const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     return (
         <div className="brukerliste__header">
@@ -77,7 +74,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
                             tekst="Oppfølging startet"
                             className="sortering-header__dato col col-xs-2"
-                            skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
+                            skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                             title='Startdato for pågående oppfølgingsperiode'
                         />
                         <SorteringHeader
@@ -100,8 +97,6 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             className="sortering-header__dato col col-xs-2"
                             title='Tittel som er skrevet i arbeidslisten'
                         />
-
-
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
                             onClick={sorteringOnClick}
@@ -168,8 +163,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                             tekst="Neste utløpsdato aktivitet"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                            valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                            skalVises={iAvtaltAktivitet}
                             className="sortering-header__dato col col-xs-2"
                             title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
@@ -195,11 +189,10 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                            tekst="Første utløpsdato aktivitet"
-                            skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 &&
-                            valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                            tekst="Neste utløpsdato aktivitet"
+                            skalVises={avtaltAktivitetOgTiltak}
                             className="sortering-header__dato col col-xs-2"
-                            title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
+                            title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
@@ -242,11 +235,4 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
     );
 }
 
-//fjern etter featuretoggle
-const mapStateToProps = (state) => ({
-    harFeature: (feature: string) => sjekkFeature(state, feature)
-});
-
-export default connect(mapStateToProps)(MinOversiktListeHode);
-
-// export default MinOversiktListeHode;
+export default MinOversiktListeHode;

@@ -153,12 +153,12 @@ export function klokkeslettTilMinutter(klokkeSlett) {
     return (tilMoment.get('hours') * 60) + tilMoment.get('minutes');
 }
 
-export function minuttDifferanse (klokkeslett2, klokkeslett1) {
+export function minuttDifferanse(klokkeslett2, klokkeslett1) {
     return moment.duration(moment(klokkeslett2).diff(klokkeslett1)).asMinutes()
 }
 
 export function validerDatoField(input, intl, alternativer, valgfritt) {
-    const { fra } = alternativer;
+    const {fra} = alternativer;
     const inputDato = moment(input);
 
     const fraDato = moment(fra);
@@ -189,7 +189,6 @@ export function validerDatoField(input, intl, alternativer, valgfritt) {
 }
 
 
-
 export function validerDatoFeldt(input, fra, valgfritt) {
     let error;
     const inputDato = moment(input);
@@ -210,15 +209,11 @@ export function validerDatoFeldt(input, fra, valgfritt) {
 }
 
 export function oppfolgingStartetDato(oppfolgingsDato) {
-    const tidligsteDato = new Date('2017-12-04');
-
-    // FIXME: Ugh
-    if (typeof oppfolgingsDato === 'string') {
-        oppfolgingsDato = new Date(oppfolgingsDato);
-    }
-
-    if (oppfolgingsDato <= tidligsteDato || oppfolgingsDato === undefined) {
-        return null;
+    const tidligsteDato = '2017-12-04T00:00:01.883+00:00';
+    if (oppfolgingsDato <= tidligsteDato) {
+        oppfolgingsDato = tidligsteDato;
+    } else if (oppfolgingsDato === undefined) {
+        oppfolgingsDato = null;
     }
     return oppfolgingsDato;
 }
