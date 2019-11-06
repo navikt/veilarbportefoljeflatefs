@@ -147,7 +147,6 @@ export function dateGreater(date1, date2) {
     return year1 === year2 && mon1 === mon2 && day1 > day2;
 }
 
-
 export function klokkeslettTilMinutter(klokkeSlett) {
     const tilMoment = moment(klokkeSlett);
     return (tilMoment.get('hours') * 60) + tilMoment.get('minutes');
