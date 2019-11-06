@@ -27,7 +27,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                     <li className="endringslogg-liste-punkt-topp">Vi tester to ulike design av målet i aktivitetsplanen
                         for å finne ut om flere brukere legger inn sitt mål.
                         <EndringsloggLinkMedIkon
-                            url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Hvordan-f%C3%A5-flere-brukere-til-%C3%A5-opprette-et-m%C3%A5l-i-aktivitetsplanen-.aspx)"
+                            url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Hvordan-f%C3%A5-flere-brukere-til-%C3%A5-opprette-et-m%C3%A5l-i-aktivitetsplanen-.aspx"
                             linkTekst="Nyhetssak på Navet"
                         />
                     </li>
