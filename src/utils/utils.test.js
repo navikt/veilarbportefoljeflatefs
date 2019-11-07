@@ -70,6 +70,7 @@ describe('Date utils', () => {
         it('Dato er før 04.12.2017, skal returnere null', () => {
             expect(oppfolgingStartetDato('2016-02-01')).toStrictEqual(new Date('2017-12-04'));
             expect(oppfolgingStartetDato(undefined)).toBeNull();
+            expect(oppfolgingStartetDato(null)).toBeNull();
         });
         it('skal returnere gitt dato', () => {
             expect(oppfolgingStartetDato('2019-02-01')).toEqual(new Date('2019-02-01'));

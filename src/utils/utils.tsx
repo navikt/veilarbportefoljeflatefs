@@ -12,9 +12,9 @@ export function ytelseFilterErAktiv(ytelse) {
     return !!ytelse;
 }
 
-export function nesteUtlopsdatoEllerNull(utlopsdatoer?: AktiviteterModell | null): Date | null {
+export function nesteUtlopsdatoEllerNull(utlopsdatoer?: AktiviteterModell): Date | undefined {
     if (!utlopsdatoer) {
-        return null;
+        return undefined;
     }
 
     const dagensDato = new Date();
@@ -27,9 +27,9 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer?: AktiviteterModell | null
         .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
 }
 
-export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFiltervalg): AktiviteterModell | null {
+export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFiltervalg): AktiviteterModell | undefined {
     if (!aktiviteterFiltervalg || Object.keys(aktiviteterFiltervalg).length === 0 || !brukerAktiviteter || Object.keys(aktiviteterFiltervalg).length === 0) {
-        return null;
+        return undefined;
     }
     return Object.entries(aktiviteterFiltervalg)
         .filter(([_, value]) => value === 'JA')
