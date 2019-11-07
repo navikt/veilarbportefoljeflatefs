@@ -6,8 +6,8 @@ export const inloggetEnhet = {
 };
 
 const alternativEnhet = {
-    enhetId: '0219',
-    navn: 'NAV Bærum'
+    enhetId: '0001',
+    navn: 'NAV Testdalen'
 };
 
 export default {

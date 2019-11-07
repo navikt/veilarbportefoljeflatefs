@@ -207,12 +207,13 @@ export function validerDatoFeldt(input, fra, valgfritt) {
     return error;
 }
 
-export function oppfolgingStartetDato(oppfolgingsDato) {
-    const tidligsteDato = '2017-12-04T00:00:01.883+00:00';
-    if (oppfolgingsDato <= tidligsteDato) {
-        oppfolgingsDato = tidligsteDato;
-    } else if (oppfolgingsDato === undefined) {
-        oppfolgingsDato = null;
+export function oppfolgingStartetDato(dato: string): Date | null {
+    if (dato === undefined) {
+        return null;
     }
-    return oppfolgingsDato;
+
+    const oppfolgingStartetDato = new Date(dato);
+    const tidligsteDato = new Date('2017-12-04');
+
+    return oppfolgingStartetDato < tidligsteDato ? tidligsteDato : oppfolgingStartetDato
 }
