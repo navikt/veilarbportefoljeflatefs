@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import Knapp, { Hovedknapp } from 'nav-frontend-knapper';
-import {AdvarselModal} from "../advarselmodal/advarsel-modal";
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
+import Knapp, {Hovedknapp} from 'nav-frontend-knapper';
+import {VarselModal, VarselModalType} from "../varselmodal/varselmodal";
 
 interface NyContextModalProps {
     isOpen: boolean;
@@ -13,13 +13,14 @@ interface NyContextModalProps {
 
 function NyContextModal ({isOpen, isPending, doBeholdAktivEnhet, doEndreAktivEnhet, aktivEnhet}: NyContextModalProps) {
     return (
-        <AdvarselModal
+        <VarselModal
             contentLabel="Du har endret enhet advarsel"
             isOpen={isOpen}
             closeButton={false}
             onRequestClose={() => true}
             portalClassName="brukercontext-modal"
             className="brukercontext-modal__content"
+            type={VarselModalType.ADVARSEL}
         >
             <Innholdstittel className="blokk-s">
                 Du har endret enhet
@@ -39,7 +40,7 @@ function NyContextModal ({isOpen, isPending, doBeholdAktivEnhet, doEndreAktivEnh
                     Behold
                 </Knapp>
             </div>
-        </AdvarselModal>
+        </VarselModal>
     );
 }
 

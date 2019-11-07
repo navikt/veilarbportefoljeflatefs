@@ -117,7 +117,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                 posisjon={posisjon}
             />
         );
-    }
+    };
 
     render() {
         const {
@@ -169,7 +169,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
-                        tittelTekst="Handlingen kan ikke utføres"
+                        tittelTekst="@Handlingen kan ikke utføres"
                         infotekstTekst="Tilordning av veileder til følgende brukere feilet:"
                     />
                     <FeilmeldingBrukereModal
