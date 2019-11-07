@@ -1,7 +1,7 @@
 import React from 'react';
 import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import {AdvarselModal} from "../advarselmodal/advarsel-modal";
+import {Hovedknapp} from 'nav-frontend-knapper';
+import {VarselModal, VarselModalType} from "../varselmodal/varselmodal";
 
 interface ContextFeilmodalProps {
     isOpen: boolean;
@@ -10,12 +10,13 @@ interface ContextFeilmodalProps {
 
 function ContextFeilmodal ({isOpen, onClose}: ContextFeilmodalProps) {
     return (
-        <AdvarselModal
+        <VarselModal
             isOpen={isOpen}
             onRequestClose={onClose}
             portalClassName="brukercontext-modal"
             className="brukercontext-modal__content"
             contentLabel="Bruker i kontekst feilet"
+            type={VarselModalType.ADVARSEL}
         >
             <Innholdstittel tag="h1" className="blokk-s">
                 Bruker i kontekst feilet
@@ -30,7 +31,7 @@ function ContextFeilmodal ({isOpen, onClose}: ContextFeilmodalProps) {
                     Ok
                 </Hovedknapp>
             </div>
-        </AdvarselModal>
+        </VarselModal>
     );
 }
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Modal from 'nav-frontend-modal';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { VarselModal, VarselModalType } from '../components/varselmodal/varselmodal';
 
 interface FeilmeldingBrukereModalProps {
     isOpen?: boolean;
@@ -20,7 +20,7 @@ function FnrList({ feiledeTilordninger }) {
     ));
 
     return (
-        <ul>
+        <ul className="blokk-s">
             {listElements}
         </ul>
     );
@@ -51,28 +51,26 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
         const { tittelTekst, infotekstTekst, fnr } = this.props;
 
         return (
-            <Modal
+            <VarselModal
                 contentLabel="Modal tilordning feilet"
                 isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
                 closeButton={false}
+                type={VarselModalType.FEIL}
+                portalClassName="feiletbrukere-modal"
+                className="feiletbrukere-modal__content"
             >
-                <div className="feiletbrukere__modal">
-                    <div className="feiledbrukeremelding blokk-m">
-                        <div className="feiledbrukeremelding__ikon blokk-xxs" />
-                    </div>
-                    <Undertittel tag="h1" className="blokk-xxs">
-                        {tittelTekst}
-                    </Undertittel>
-                    <Normaltekst className="blokk-s">
-                        {infotekstTekst}
-                    </Normaltekst>
-                    <FnrList feiledeTilordninger={fnr} />
-                    <button className="knapp knapp--hoved" onClick={this.lukkModal}>
-                       Ok
-                    </button>
-                </div>
-            </Modal>
+                <Undertittel tag="h1" className="blokk-xxs">
+                    {tittelTekst}
+                </Undertittel>
+                <Normaltekst className="blokk-s">
+                    {infotekstTekst}
+                </Normaltekst>
+                <FnrList feiledeTilordninger={fnr} />
+                <button className="knapp knapp--hoved" onClick={this.lukkModal}>
+                    Ok
+                </button>
+            </VarselModal>
         );
     }
 }

@@ -1,22 +1,23 @@
-import React, {useState}  from 'react';
+import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import { AppState } from '../reducer';
-import { AdvarselModal } from '../components/advarselmodal/advarsel-modal';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import {AppState} from '../reducer';
+import {VarselModal, VarselModalType} from '../components/varselmodal/varselmodal';
+import {Hovedknapp} from 'nav-frontend-knapper';
 
 function TomPortefoljeModal () {
     const erNullBrukere =  useSelector((state: AppState) => state.statustall.data.totalt === 0);
     const [isOpen, setIsOpen] = useState(erNullBrukere);
 
     return (
-        <AdvarselModal
+        <VarselModal
             portalClassName="brukercontext-modal"
             className="brukercontext-modal__content"
             contentLabel="Enheten har ingen brukere"
             isOpen={isOpen}
             onRequestClose={()=> setIsOpen(false)}
             closeButton
+            type={VarselModalType.ADVARSEL}
         >
             <Innholdstittel className="blokk-s" tag="h1">
                 Handlingen kan ikke utføres
@@ -29,7 +30,7 @@ function TomPortefoljeModal () {
                     Ok
                 </Hovedknapp>
             </div>
-        </AdvarselModal>
+        </VarselModal>
     );
 
 }
