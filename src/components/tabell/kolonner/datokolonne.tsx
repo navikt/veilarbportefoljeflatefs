@@ -2,7 +2,7 @@ import * as React from 'react';
 
 interface DatokolonneProps {
     className?: string;
-    dato?: Date | null;
+    dato?: Date;
     skalVises: boolean;
 }
 
@@ -17,11 +17,6 @@ function DatoKolonne({ className, dato, skalVises = true}: DatokolonneProps) {
             <span style={{ visibility: 'hidden' }} className={className}>
                 {new Date(0).toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options)}
             </span>);
-    }
-
-    // FIXME: Ugh
-    if ( typeof dato === 'string') {
-        dato = new Date(dato);
     }
 
     return (
