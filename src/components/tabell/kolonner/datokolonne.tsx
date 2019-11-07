@@ -1,8 +1,9 @@
 import * as React from 'react';
+import {Maybe} from "../../../utils/types";
 
 interface DatokolonneProps {
     className?: string;
-    dato?: Date;
+    dato: Maybe<Date>;
     skalVises: boolean;
 }
 
@@ -10,6 +11,7 @@ function DatoKolonne({ className, dato, skalVises = true}: DatokolonneProps) {
     if (!skalVises) {
         return null;
     }
+
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
     if (!dato) {
         return (

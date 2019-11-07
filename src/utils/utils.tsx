@@ -1,4 +1,5 @@
 import { AktiviteterModell } from '../model-interfaces';
+import {Maybe} from "./types";
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array((end - start) + ((inclusive) ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -12,7 +13,7 @@ export function ytelseFilterErAktiv(ytelse) {
     return !!ytelse;
 }
 
-export function nesteUtlopsdatoEllerNull(utlopsdatoer?: AktiviteterModell | null): Date | null {
+export function nesteUtlopsdatoEllerNull(utlopsdatoer: Maybe<AktiviteterModell>): Maybe<Date> {
     if (!utlopsdatoer) {
         return null;
     }
@@ -27,7 +28,7 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer?: AktiviteterModell | null
         .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
 }
 
-export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFiltervalg): AktiviteterModell | null {
+export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFiltervalg): Maybe<AktiviteterModell> {
     if (!aktiviteterFiltervalg || Object.keys(aktiviteterFiltervalg).length === 0 || !brukerAktiviteter || Object.keys(aktiviteterFiltervalg).length === 0) {
         return null;
     }

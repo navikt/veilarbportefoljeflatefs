@@ -1,8 +1,11 @@
 import moment from 'moment';
+import {Maybe} from "./types";
 
 export function fn(value) {
     return typeof value === 'function' ? value : () => value;
 }
+
+
 
 export function autobind(ctx) {
     Object.getOwnPropertyNames(ctx.constructor.prototype)
@@ -51,23 +54,28 @@ export const erGyldigDato = (dato) => {
     return erGyldigDatoformat(dato);
 };
 
-const erLocalDate = (dato) => dato.year && dato.monthValue && dato.dayOfMonth;
+function erLocalDate(dato): boolean {
+    return dato.year && dato.monthValue && dato.dayOfMonth;
+}
 
-export const toDate = (dato) => {
+export function toDate(dato): Maybe<Date> {
     if (typeof dato === 'undefined' || dato === null) {
         return null;
     }
     return erLocalDate(dato)
         ? new Date(dato.year, dato.monthValue - 1, dato.dayOfMonth)
         : new Date(dato);
-};
+}
 
-export const toDatePrettyPrint = (dato) => {
+export function toDatePrettyPrint(dato): Maybe<string> {
     if (typeof dato === 'undefined' || dato === null) {
         return null;
     }
 
     const date = toDate(dato);
+    if (!date) {
+        return null
+    }
 
     const days = date.getDate() < 10
         ? `0${date.getDate()}`
@@ -207,8 +215,9 @@ export function validerDatoFeldt(input, fra, valgfritt) {
     return error;
 }
 
-export function oppfolgingStartetDato(dato: string): Date | null {
-    if (dato === undefined) {
+export function oppfolgingStartetDato(dato: string): Maybe<Date> {
+
+    if (!dato) {
         return null;
     }
 

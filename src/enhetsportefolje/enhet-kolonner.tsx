@@ -130,7 +130,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
+                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || undefined)}
                 skalVises={iAvtaltAktivitet}
             />
             <DatoKolonne
