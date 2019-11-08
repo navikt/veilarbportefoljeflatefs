@@ -56,6 +56,15 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                 endreFiltervalg={endreFiltervalg}
             />
             <MetrikkEkspanderbartpanel
+                apen={false}
+                tittel="Veiledergrupper"
+                tittelProps="undertittel"
+                lamellNavn="status"
+            >
+                <FilteringVeilederGrupper/>
+
+            </MetrikkEkspanderbartpanel>
+            <MetrikkEkspanderbartpanel
                 apen
                 tittel="Status"
                 tittelProps="undertittel"
@@ -66,15 +75,6 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                     veileder={veileder}
                     filtervalg={filtervalg}
                 />
-
-            </MetrikkEkspanderbartpanel>
-            <MetrikkEkspanderbartpanel
-                apen
-                tittel="Veiledergrupper"
-                tittelProps="undertittel"
-                lamellNavn="status"
-            >
-                <FilteringVeilederGrupper/>
 
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
