@@ -39,7 +39,7 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 </Element>
                 <Dropdown name="Alder">
                     <CheckboxFilterform
-                        id="grid-alder"
+                        id="id_alder"
                         form="alder"
                         kolonner={2}
                         valg={alder}
@@ -57,7 +57,7 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 </Dropdown>
                 <Dropdown name="Kjønn">
                     <CheckboxFilterform
-                        id="grid-kjonn"
+                        id="id_kjonn"
                         form="kjonn"
                         valg={kjonn}
                         onSubmit={endreFiltervalg}

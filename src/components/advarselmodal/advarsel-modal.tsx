@@ -12,9 +12,10 @@ interface VarselModalProps {
     closeButton?: boolean;
     shouldCloseOnOverlayClick?: boolean;
     className?: string;
+    portalClassName?: string;
 }
 
-export function AdvarselModal({contentLabel, isOpen, onRequestClose, children, closeTimeoutMS, closeButton, shouldCloseOnOverlayClick, className}: React.PropsWithChildren<VarselModalProps>) {
+export function AdvarselModal({contentLabel, isOpen, onRequestClose, children, closeTimeoutMS, closeButton, shouldCloseOnOverlayClick, className, portalClassName}: React.PropsWithChildren<VarselModalProps>) {
     return (
         <ModalWrapper
             isOpen={isOpen}
@@ -22,7 +23,7 @@ export function AdvarselModal({contentLabel, isOpen, onRequestClose, children, c
             onRequestClose={onRequestClose}
             closeTimeoutMS={closeTimeoutMS}
             closeButton={closeButton}
-            portalClassName="advarsel-modal"
+            portalClassName={classNames('advarsel-modal', portalClassName)}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         >
             <AdvarselSirkelIkon/>

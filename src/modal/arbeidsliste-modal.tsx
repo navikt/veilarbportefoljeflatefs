@@ -58,7 +58,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
     leggTilModal(valgteBrukere: BrukerModell[]) {
         return (
             <NavFrontendModal
-                className={'arbeidsliste-modal'}
+                className='arbeidsliste-modal'
                 contentLabel="arbeidsliste"
                 isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}

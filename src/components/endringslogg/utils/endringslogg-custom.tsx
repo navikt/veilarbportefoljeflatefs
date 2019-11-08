@@ -18,6 +18,39 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '06. NOV. 2019',
+        tittel: 'Test av nytt mål og logg på tildelt veileder',
+        versjonId: '06.11.19',
+        children:
+            <>
+                <ul className="endringslogg-innhold-liste">
+                    <li className="endringslogg-liste-punkt-topp">Vi tester to ulike design av målet i aktivitetsplanen
+                        for å finne ut om flere brukere legger inn sitt mål.
+                        <EndringsloggLinkMedIkon
+                            url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Hvordan-f%C3%A5-flere-brukere-til-%C3%A5-opprette-et-m%C3%A5l-i-aktivitetsplanen-.aspx"
+                            linkTekst="Nyhetssak på Navet"
+                        />
+                    </li>
+                    <li>Historikken i Veilederverktøy viser nå også tildeling av
+                        veileder. Når tildeling av veileder gjøres under en KVP-periode, er historikken kun synlig for ansatte med tilgang på brukerens
+                        enhet.
+                    </li>
+                </ul>
+            </>
+    },
+    {
+        dato: '04. NOV. 2019',
+        tittel: 'Startdato for oppfølgingsperioden',
+        tekst: 'Oversikten har nå en kolonne som viser startdato for oppfølgingsperioden. Brukere registrert før aktivitetsplanen ble lansert 4. des. 2017 vises med dato "04.12.2017". Du kan sortere listen etter startdato.',
+        versjonId: '0.2.5',
+        children:
+            <TourModalButton
+                metrikknavn="portefolje.endringslogg_modal"
+                modal={ModalName.NY_KOLONNE}
+                knappeTekst="Se hvordan"
+            />
+    },
+    {
         dato: '22. OKT. 2019',
         tittel: 'Rydding i oversikten',
         tekst: 'Vi har ryddet litt i oversikten og endret titler på noen av kolonnene. Funksjonaliteten er den samme.',
@@ -30,7 +63,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '26. SEP. 2019',
         tittel: 'Endring i arbeidslisten',
         tekst: 'Tittelfeltet i arbeidslisten er utvidet til 30 tegn. Kolonnetittelen i oversikten er endret fra "Kommentar" til "Tittel".',
-        versjonId: '0.2.1',
+        versjonId: '0.2.1'
     },
     {
         dato: '05. SEP. 2019',

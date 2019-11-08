@@ -1,21 +1,19 @@
 import React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import { ytelseFilterErAktiv } from '../utils/utils';
+import TittelValg, { ytelseFilterErAktiv } from '../utils/utils';
 import {
-    ytelseUtlopsSortering,
-    ytelseAapSortering,
-    VENTER_PA_SVAR_FRA_NAV,
-    VENTER_PA_SVAR_FRA_BRUKER,
+    I_AVTALT_AKTIVITET,
+    MOTER_IDAG,
     UTLOPTE_AKTIVITETER,
-    I_AVTALT_AKTIVITET, MOTER_IDAG
+    VENTER_PA_SVAR_FRA_BRUKER,
+    VENTER_PA_SVAR_FRA_NAV,
+    ytelseAapSortering,
+    ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
 import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import { AktiviteterValg } from '../ducks/filtrering';
 import Header from '../components/tabell/header';
-import { OPPFOLGING_STARTET } from '../konstanter';
-import { sjekkFeature } from '../ducks/features';
-import { connect } from 'react-redux';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -31,10 +29,9 @@ interface EnhetListehodeProps {
     valgteKolonner: Kolonne[];
     filtervalg: FiltervalgModell;
     sorteringsfelt: string;
-    harFeature: Function; //fjern etter featuretoggle
 }
 
-function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner, harFeature}: EnhetListehodeProps) {
+function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sorteringsfelt, valgteKolonner}: EnhetListehodeProps) {
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
@@ -42,7 +39,8 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
     const harValgteAktivitetstyper = harValgteAktiviteter(filtervalg.aktiviteter);
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
-    const skalViseOppfolgingStartet = harFeature(OPPFOLGING_STARTET); //fjern etter featuretoggle
+    const iAvtaltAktivitet = !!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+    const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     return (
         <div className="brukerliste__header">
@@ -73,11 +71,13 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
                             tekst="Oppfølging startet"
                             className="sortering-header__dato col col-xs-2"
-                            skalVises={skalViseOppfolgingStartet && valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)} //fiks etter featuretoggle
+                            skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                            title='Startdato for pågående oppfølgingsperiode'
                         />
                         <Header
                             className="col col-xs-2"
                             skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
+                            title='Navn på tildelt veileder'
                         >
                             Veileder
                         </Header>
@@ -89,8 +89,8 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             tekst="NAV-ident"
                             skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
                             className="header__veilederident col col-xs-2"
+                            title='NAV-ident på tildelt veileder'
                         />
-
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
                             onClick={sorteringOnClick}
@@ -99,6 +99,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             tekst={ytelseSorteringHeader}
                             skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                             className="sortering-header__dato col col-xs-2"
+                            title={TittelValg(ytelseSorteringHeader)}
                         />
                         <SorteringHeader
                             sortering={ytelseUtlopsdatoNavn}
@@ -108,6 +109,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             tekst="Gjenstående uker vedtak"
                             skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Gjenstående uker på gjeldende vedtak'
                         />
                         <SorteringHeader
                             sortering={aapRettighetsperiode}
@@ -117,6 +119,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             tekst="Gjenstående uker rettighet"
                             skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Gjenstående uker av rettighetsperioden for ytelsen'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
@@ -126,6 +129,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             tekst="Dato på melding"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Dato på meldingen som er merket "Venter på svar fra NAV"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
@@ -135,6 +139,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             tekst="Dato på melding"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Dato på meldingen som er merket "Venter på svar fra bruker"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
@@ -144,6 +149,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             tekst="Utløpsdato aktivitet"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER) && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
@@ -151,17 +157,19 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                             tekst="Neste utløpsdato aktivitet"
-                            skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                            skalVises={iAvtaltAktivitet}
                             className="sortering-header__dato col col-xs-2"
+                            title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
                             onClick={sorteringOnClick}
                             rekkefolge={sorteringsrekkefolge}
                             erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                            tekst="Første utløpsdato aktivitet"
-                            skalVises={harValgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                            tekst="Neste utløpsdato aktivitet"
+                            skalVises={avtaltAktivitetOgTiltak}
                             className="sortering-header__dato col col-xs-2"
+                            title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                         />
                         <SorteringHeader
                             sortering={Sorteringsfelt.MOTER_IDAG}
@@ -171,10 +179,12 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                             tekst="Klokkeslett møte"
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
                             className="sortering-header__dato col col-xs-2"
+                            title='Tidspunktet møtet starter'
                         />
                         <Header
                             skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
                             className="sortering-header__dato col col-xs-2"
+                            title="Varighet på møtet"
                         >
                             Varighet møte
                         </Header>
@@ -187,11 +197,4 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
     );
 }
 
-//fjern etter featuretoggle
-const mapStateToProps = (state) => ({
-    harFeature: (feature: string) => sjekkFeature(state, feature)
-});
-
-export default connect(mapStateToProps)(EnhetListehode);
-
-// export default EnhetListehode;
+export default EnhetListehode;

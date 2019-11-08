@@ -8,14 +8,14 @@ export interface Alternativ {
 export const alternativerConfig = new Map<Kolonne, Alternativ>();
 alternativerConfig.set(Kolonne.BRUKER, {tekstlabel: 'Bruker', checkboxDisabled: true});
 alternativerConfig.set(Kolonne.FODSELSNR, {tekstlabel: 'Fødselsnr', checkboxDisabled: true});
-// alternativerConfig.set(Kolonne.OPPFOLGINGSTARTET, {tekstlabel: 'Oppfølging startet'});
+alternativerConfig.set(Kolonne.OPPFOLGINGSTARTET, {tekstlabel: 'Oppfølging startet'});
 alternativerConfig.set(Kolonne.VEILEDER, {tekstlabel: 'Veileder'});
 alternativerConfig.set(Kolonne.NAVIDENT, {tekstlabel: 'NAV-ident'});
 alternativerConfig.set(Kolonne.VENTER_SVAR, {tekstlabel: 'Dato på melding'});
 alternativerConfig.set(Kolonne.UTLOP_YTELSE, {tekstlabel: 'Utløp ytelse'});
 alternativerConfig.set(Kolonne.VEDTAKSPERIODE, {tekstlabel: 'Gjenstående uker vedtak'});
 alternativerConfig.set(Kolonne.RETTIGHETSPERIODE, {tekstlabel: 'Gjenstående uker rettighet'});
-alternativerConfig.set(Kolonne.UTLOP_AKTIVITET, {tekstlabel: 'Første utløpsdato aktivitet'});
+alternativerConfig.set(Kolonne.UTLOP_AKTIVITET, {tekstlabel: 'Neste utløpsdato aktivitet'});
 alternativerConfig.set(Kolonne.UTLOPTE_AKTIVITETER, {tekstlabel: 'Utløpsdato aktivitet'});
 alternativerConfig.set(Kolonne.AVTALT_AKTIVITET, {tekstlabel: 'Neste utløpsdato aktivitet'});
 alternativerConfig.set(Kolonne.START_DATO_AKTIVITET, {tekstlabel: 'Startdato aktivitet'});

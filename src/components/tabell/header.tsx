@@ -5,14 +5,15 @@ export interface HeaderProps {
     skalVises?: boolean | null;
     className?: string;
     children?: React.ReactNode;
+    title?: string;
 }
 
-function Header({ children, skalVises = true, className = '' }: HeaderProps) {
+function Header({ children, skalVises = true, className = '', title }: HeaderProps) {
     if (!skalVises) {
         return null;
     }
     return (
-        <span className={classNames('sortering-header', className)}>
+        <span title={title} className={classNames('sortering-header', className)}>
             {children}
         </span>
     );

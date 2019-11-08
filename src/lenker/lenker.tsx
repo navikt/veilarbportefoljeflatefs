@@ -4,7 +4,7 @@ import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tou
 
 function Lenker() {
     return (
-        <div className="lenker blokk-m" role="tablist">
+        <div className="lenker" role="tablist">
             <h2 className="h2__lenke">
                 <ActiveLink
                     to="/enhet"

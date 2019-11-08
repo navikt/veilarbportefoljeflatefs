@@ -69,3 +69,12 @@ export function aapRettighetsperiode(ytelse, maxtidukerigjen, unntakukerigjen) {
         return unntakukerigjen;
     }
 }
+
+export default function TittelValg(ytelseSorteringHeader) {
+    if (ytelseSorteringHeader === 'Gjenstående uker vedtak') {
+        return 'Gjenstående uker på gjeldende vedtak';
+    } else if (ytelseSorteringHeader === 'Gjenstående uker rettighet') {
+        return 'Gjenstående uker av rettighetsperioden for ytelsen';
+    }
+    return '';
+}
