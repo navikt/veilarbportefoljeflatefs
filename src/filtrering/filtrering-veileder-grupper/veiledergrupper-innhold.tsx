@@ -1,4 +1,3 @@
-import {VeilederGruppe} from "../../model-interfaces";
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {endreFiltervalg} from "../../ducks/filtrering";
@@ -74,7 +73,6 @@ interface VeilederGruppeRad {
 
 function VeilederGruppeRad ({valgtVeilederGruppe, veilederGruppe, hanterVelgGruppe, onClickRedigerKnapp }: VeilederGruppeRad) {
     const erValgt = valgtVeilederGruppe ? valgtVeilederGruppe.filterId === veilederGruppe.filterId  : false;
-    console.log("valgtVeilederGruppe", valgtVeilederGruppe);
 
     return (
         <div className="veileder-gruppe__rad">
