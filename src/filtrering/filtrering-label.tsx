@@ -1,6 +1,6 @@
 import React from 'react';
 import { lagConfig } from './filter-konstanter';
-import { ReactComponent as FilterIkon } from './filter-ikon.svg';
+import { ReactComponent as FilterIkon } from './filtrering-veileder-grupper/filter-ikon.svg';
 import { MouseEvent } from 'react';
 import classNames from 'classnames';
 

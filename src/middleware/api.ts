@@ -16,7 +16,7 @@ const MED_CREDENTIALS: RequestInit = {
 export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
-export const VEILARBVEILEDERGRUPPER_URL = '/veilarbveiledergrupper/api';
+export const VEILARBFILTER_URL = '/veilarbfilter/api';
 export const FEATURE_URL = '/feature';
 
 export function hentVeiledersEnheter() {
@@ -70,8 +70,9 @@ export function hentEnhetsVeiledere(enhetId) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentEnhetsVeilederGrupper(enhetId) {
-    const url = `${VEILARBVEILEDERGRUPPER_URL}/enhet/${enhetId}/`;
+export function hentEnhetsFilterGrupper(enhetId) {
+    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/`;
+    console.log("url", url);
     return fetchToJson(url, MED_CREDENTIALS);
 }
 

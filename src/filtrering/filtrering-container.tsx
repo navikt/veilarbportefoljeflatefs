@@ -7,9 +7,9 @@ import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 import { FiltreringStatus } from './filtrering-status/filtrering-status';
 import { useEffect, useState } from 'react';
-import { hentVeilederGrupperForEnhet } from '../ducks/veilerder-grupper';
+import { hentLagretFilterForEnhet } from '../ducks/lagret-filter';
 import { AppState } from '../reducer';
-import FilteringVeilederGrupper from './filrering-veileder-grupper';
+import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-veileder-grupper';
 import { hentTilgangTilEnhet } from '../middleware/api';
 import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
 import { VIS_VEILEDER_GRUPPER } from '../konstanter';
@@ -43,10 +43,10 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                     setHarTilgangTilEnheten(true);
 
                 }
-            });
+            });s
         }
          */
-        dispatch(hentVeilederGrupperForEnhet(valgtEnhet));
+        dispatch(hentLagretFilterForEnhet(valgtEnhet));
     }, [dispatch, valgtEnhet, harVeilederGruppeFeature]);
 
     return (

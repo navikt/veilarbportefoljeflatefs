@@ -1,15 +1,22 @@
-import { hentEnhetsVeilederGrupper } from './../middleware/api';
+import { hentEnhetsFilterGrupper } from './../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
-import { VeilederGruppe } from '../model-interfaces';
+import { FiltervalgModell } from '../model-interfaces';
 
 // Actions
 export const OK = 'veiledergrupper/OK';
 export const FEILET = 'veiledergrupper/FEILET';
 export const PENDING = 'veiledergrupper/PENDING';
 
-export interface VeiledereGruppeState {
+export interface LagretFilter {
+    filterNavn: string;
+    filterId: number;
+    filterValg: FiltervalgModell
+}
+
+
+export interface LagretFilterState {
     status: string;
-    data: VeilederGruppe[];
+    data: LagretFilter[];
 }
 
 const initialState = {
@@ -18,7 +25,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: VeiledereGruppeState = initialState, action) {
+export default function reducer(state: LagretFilterState = initialState, action) {
     switch (action.type) {
         case PENDING:
             return { ...state, status: STATUS.PENDING };
@@ -32,8 +39,8 @@ export default function reducer(state: VeiledereGruppeState = initialState, acti
 }
 
 // Action Creators
-export function hentVeilederGrupperForEnhet(enhetId) {
-    return doThenDispatch(() => hentEnhetsVeilederGrupper(enhetId), {
+export function hentLagretFilterForEnhet(enhetId) {
+    return doThenDispatch(() => hentEnhetsFilterGrupper(enhetId), {
         OK,
         FEILET,
         PENDING

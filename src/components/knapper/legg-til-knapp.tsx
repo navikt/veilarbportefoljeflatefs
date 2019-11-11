@@ -1,7 +1,7 @@
 import React from 'react';
 import {ReactComponent as PlussIkon} from './pluss.svg';
 import { Flatknapp } from "nav-frontend-knapper";
-import './veileder-gruppe.less';
+import './knapper.less';
 
 export function LeggTilKnapp(props: {onClick: ()=> void}) {
     return (

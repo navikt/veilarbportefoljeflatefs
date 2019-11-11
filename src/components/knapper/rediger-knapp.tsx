@@ -1,12 +1,15 @@
 import React from 'react';
 import {ReactComponent as RedigerIkon } from './rediger.svg';
 import {Flatknapp } from "nav-frontend-knapper";
+import hiddenIf from "../hidden-if/hidden-if";
 
-export function RedigerKnapp(props: {onClick: ()=> void}) {
+function RedigerKnapp(props: {onClick: ()=> void}) {
     return (
-        <Flatknapp className="veiledergruppe-knapp" onClick={props.onClick}>
+        <button className="rediger-knapp" aria-describedby="Rediger veiledergruppe" onClick={props.onClick}>
             <RedigerIkon/>
-            <span>Rediger gruppe</span>
-        </Flatknapp>
+        </button>
     );
 }
+
+
+export default hiddenIf(RedigerKnapp);
