@@ -169,8 +169,8 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
-                        tittelTekst="@Handlingen kan ikke utføres"
-                        infotekstTekst="Tilordning av veileder til følgende brukere feilet:"
+                        tittelTekst="Handlingen kan ikke utføres"
+                        infotekstTekst="Tildeling av veileder til følgende brukere feilet:"
                     />
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === LEGG_TIL_ARBEIDSLISTE_FEILET}
@@ -178,7 +178,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"
                         infotekstTekst="Kunne ikke opprette arbeidsliste for følgende brukere:"
-
                     />
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === FJERN_FRA_ARBEIDSLISTE_FEILET}
@@ -186,7 +185,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"
                         infotekstTekst="Kunne ikke slette arbeidsliste for følgende brukere:"
-
                     />
                     <ServerFeilModal
                         isOpen={serverfeilModalSkalVises}
