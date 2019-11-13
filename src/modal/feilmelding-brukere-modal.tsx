@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { VarselModal, VarselModalType } from '../components/varselmodal/varselmodal';
 import { logEvent } from '../utils/frontend-logger';
-import { metricsMiddleWare } from '../middleware/metrics-middleware';
 
 interface FeilmeldingBrukereModalProps {
     isOpen?: boolean;
@@ -17,7 +16,7 @@ interface FeilmeldingBrukereModalState {
     isOpen?: boolean;
 }
 
-function FnrList({ feiledeTilordninger }) {
+function FnrList({feiledeTilordninger}) {
     const listElements = feiledeTilordninger.map((tilordning) => (
         <li key={tilordning.brukerFnr} className="fnr__listitem">{tilordning.brukerFnr}</li>
     ));
@@ -29,37 +28,35 @@ function FnrList({ feiledeTilordninger }) {
     );
 }
 
-
-
 class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalProps, FeilmeldingBrukereModalState> {
     constructor(props) {
         super(props);
 
-        this.state = { isOpen: this.props.isOpen };
+        this.state = {isOpen: this.props.isOpen};
         this.lukkModal = this.lukkModal.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.isOpen !== this.state.isOpen) {
-            this.setState({ isOpen: nextProps.isOpen });
+            this.setState({isOpen: nextProps.isOpen});
         }
     }
 
     lukkModal() {
-        const { onClose } = this.props;
+        const {onClose} = this.props;
         onClose();
-        this.setState({ isOpen: false });
+        this.setState({isOpen: false});
     }
 
     lukkModalOgLoggMetrikk(metrikknavn) {
         logEvent(metrikknavn);
-        const { onClose } = this.props;
+        const {onClose} = this.props;
         onClose();
-        this.setState({ isOpen: false });
+        this.setState({isOpen: false});
     }
 
     render() {
-        const { tittelTekst, infotekstTekst, fnr, metrikknavn } = this.props;
+        const {tittelTekst, infotekstTekst, fnr, metrikknavn} = this.props;
 
         return (
             <VarselModal
@@ -77,7 +74,7 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
                 <Normaltekst className="blokk-s">
                     {infotekstTekst}
                 </Normaltekst>
-                <FnrList feiledeTilordninger={fnr} />
+                <FnrList feiledeTilordninger={fnr}/>
                 <button className="knapp knapp--hoved" onClick={() => this.lukkModalOgLoggMetrikk(metrikknavn)}>
                     Ok
                 </button>

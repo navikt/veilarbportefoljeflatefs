@@ -8,7 +8,11 @@ import { hentStatusTall } from './statustall';
 import { leggSideIUrl, leggSorteringIUrl } from '../utils/url-utils';
 import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { ListevisningType, oppdaterAlternativer } from './ui/listevisning';
-import { selectFraIndex, selectSeAlle, selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
+import {
+    selectFraIndex,
+    selectSeAlle,
+    selectSideStorrelse
+} from '../components/toolbar/paginering/paginering-selector';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 
 // Actions
@@ -101,7 +105,7 @@ function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
             if (arbeidslisteForBruker.length === 1) {
                 return {
                     ...bruker,
-                    arbeidsliste: { ...bruker.arbeidsliste, ...arbeidslisteForBruker[0] }
+                    arbeidsliste: {...bruker.arbeidsliste, ...arbeidslisteForBruker[0]}
                 };
             }
             return bruker;
@@ -112,18 +116,20 @@ export default function reducer(state = initialState, action): PortefoljeState {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {
-                return { ...state, status: STATUS.RELOADING };
+                return {...state, status: STATUS.RELOADING};
             }
-            return { ...state, status: STATUS.PENDING };
+            return {...state, status: STATUS.PENDING};
         case FEILET:
-            return { ...state, status: STATUS.ERROR, data: action.data };
+            return {...state, status: STATUS.ERROR, data: action.data};
         case OK:
-            return { ...state,
+            return {
+                ...state,
                 status: STATUS.OK,
                 data: {
                     ...action.data,
-                    brukere: action.data.brukere.map((bruker) => ({ ...bruker, guid: lagBrukerGuid(bruker) }))
-                } };
+                    brukere: action.data.brukere.map((bruker) => ({...bruker, guid: lagBrukerGuid(bruker)}))
+                }
+            };
         case SETT_SORTERING: {
             return {
                 ...state,
@@ -132,7 +138,7 @@ export default function reducer(state = initialState, action): PortefoljeState {
             };
         }
         case SETT_VALGTVEILEDER: {
-            return { ...state, veileder: action.veileder };
+            return {...state, veileder: action.veileder};
         }
         case SETT_MARKERT_BRUKER: {
             return {
@@ -167,16 +173,16 @@ export default function reducer(state = initialState, action): PortefoljeState {
                 }
             };
         case TILDEL_VEILEDER_RELOAD: {
-            return { ...state, tilordningerstatus: STATUS.RELOADING };
+            return {...state, tilordningerstatus: STATUS.RELOADING};
         }
         case TILDEL_VEILEDER_OK: {
-            return { ...state, tilordningerstatus: STATUS.OK };
+            return {...state, tilordningerstatus: STATUS.OK};
         }
         case TILDEL_VEILEDER_FEILET: {
-            return { ...state, tilordningerstatus: STATUS.ERROR };
+            return {...state, tilordningerstatus: STATUS.ERROR};
         }
         case NULLSTILL_FEILENDE_TILORDNINGER: {
-            return { ...state, feilendeTilordninger: [] };
+            return {...state, feilendeTilordninger: []};
         }
         case SETT_MARKERT_BRUKER_ALLE: {
             return {
@@ -185,7 +191,7 @@ export default function reducer(state = initialState, action): PortefoljeState {
                     ...state.data,
                     brukere: state.data.brukere
                         .map((bruker) => {
-                            if(bruker.fnr !== '') {
+                            if (bruker.fnr !== '') {
                                 return {...bruker, markert: action.markert};
                             }
                             return {...bruker};
@@ -212,7 +218,7 @@ export default function reducer(state = initialState, action): PortefoljeState {
 
 // Action Creators
 export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder) {
-    if(typeof veileder === 'object' ) {
+    if (typeof veileder === 'object') {
         console.warn('Veileder should be a string, not an object'); // tslint:disable-line
         veileder = veileder.ident;
     }
@@ -288,8 +294,8 @@ export function markerAlleBrukere(markert, toolbarPosisjon?: ToolbarPosisjon) {
 export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder, toolbarPosisjon?: ToolbarPosisjon) {
     const veilederIdent = gjeldendeVeileder ? gjeldendeVeileder.ident : undefined;
     return (dispatch, getState) => {
-        dispatch({ type: TILDEL_VEILEDER_RELOAD });
-        dispatch({ type: PENDING });
+        dispatch({type: TILDEL_VEILEDER_RELOAD});
+        dispatch({type: PENDING});
         Api.tilordneVeileder(tilordninger)
             .then(toJson)
             .then((res) => {
@@ -321,7 +327,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                 // Venter litt slik at indeks kan komme i sync
                 setTimeout(() => {
                     const side = filtergruppe === 'minOversikt' ? 'veileder' : 'enhet';
-                    const ident = veilederIdent || getState().enheter.ident ;
+                    const ident = veilederIdent || getState().enheter.ident;
                     oppdaterPortefolje(getState, dispatch, side, ident);
                 }, 2000);
             })
@@ -360,4 +366,3 @@ export function oppdaterArbeidslisteForBruker(arbeidsliste) {
         arbeidsliste
     });
 }
-
