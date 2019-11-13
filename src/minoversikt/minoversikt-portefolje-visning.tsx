@@ -170,7 +170,9 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"
-                        infotekstTekst="Tildeling av veileder til følgende brukere feilet:"
+                        infotekstTekst="Tilordning av veileder til følgende brukere feilet:"
+                        merInfoTekst="Det kan skyldes manglende tilgang på brukere, eller at veilederen allerede er tildelt brukeren."
+                        metrikknavn="portefolje.metrikker.lukk-modal-tildel-veileder"
                     />
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === LEGG_TIL_ARBEIDSLISTE_FEILET}
