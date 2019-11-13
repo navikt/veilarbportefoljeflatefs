@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { VarselModal, VarselModalType } from '../components/varselmodal/varselmodal';
+import { logEvent } from '../utils/frontend-logger';
 
 interface FeilmeldingBrukereModalProps {
     isOpen?: boolean;
@@ -41,10 +42,12 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
     }
 
     lukkModal() {
+        logEvent('veilarbvisittkortfs.metrikker.lukk-modal-tildel-veileder');
         const { onClose } = this.props;
         onClose();
 
         this.setState({ isOpen: false });
+
     }
 
     render() {
