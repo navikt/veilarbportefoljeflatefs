@@ -9,6 +9,7 @@ interface FeilmeldingBrukereModalProps {
     onClose: () => void;
     tittelTekst: string;
     infotekstTekst: string;
+    merInfoTekst?: string;
     metrikknavn?: string;
 }
 
@@ -50,7 +51,7 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
     }
 
     render() {
-        const {tittelTekst, infotekstTekst, fnr, metrikknavn} = this.props;
+        const {tittelTekst, infotekstTekst, fnr, metrikknavn, merInfoTekst} = this.props;
 
         return (
             <VarselModal
@@ -68,7 +69,10 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
                 <Normaltekst className="blokk-s">
                     {infotekstTekst}
                 </Normaltekst>
-                <FnrList feiledeTilordninger={fnr}/>
+                <FnrList feiledeTilordninger={fnr} />
+                {merInfoTekst && <Normaltekst className="blokk-s">
+                    {merInfoTekst}
+                </Normaltekst>}
                 <button className="knapp knapp--hoved" onClick={() => this.lukkModal(metrikknavn)}>
                     Ok
                 </button>
