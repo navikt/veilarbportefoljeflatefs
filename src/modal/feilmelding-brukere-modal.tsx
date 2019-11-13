@@ -9,13 +9,14 @@ interface FeilmeldingBrukereModalProps {
     onClose: () => void;
     tittelTekst: string;
     infotekstTekst: string;
+    metrikknavn?: string;
 }
 
 interface FeilmeldingBrukereModalState {
     isOpen?: boolean;
 }
 
-function FnrList({ feiledeTilordninger }) {
+function FnrList({feiledeTilordninger}) {
     const listElements = feiledeTilordninger.map((tilordning) => (
         <li key={tilordning.brukerFnr} className="fnr__listitem">{tilordning.brukerFnr}</li>
     ));
@@ -31,33 +32,31 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
     constructor(props) {
         super(props);
 
-        this.state = { isOpen: this.props.isOpen };
+        this.state = {isOpen: this.props.isOpen};
         this.lukkModal = this.lukkModal.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.isOpen !== this.state.isOpen) {
-            this.setState({ isOpen: nextProps.isOpen });
+            this.setState({isOpen: nextProps.isOpen});
         }
     }
 
-    lukkModal() {
-        logEvent('veilarbvisittkortfs.metrikker.lukk-modal-tildel-veileder');
-        const { onClose } = this.props;
+    lukkModal(metrikknavn) {
+        logEvent(metrikknavn);
+        const {onClose} = this.props;
         onClose();
-
-        this.setState({ isOpen: false });
-
+        this.setState({isOpen: false});
     }
 
     render() {
-        const { tittelTekst, infotekstTekst, fnr } = this.props;
+        const {tittelTekst, infotekstTekst, fnr, metrikknavn} = this.props;
 
         return (
             <VarselModal
                 contentLabel="Modal tilordning feilet"
                 isOpen={this.state.isOpen || false}
-                onRequestClose={this.lukkModal}
+                onRequestClose={() => this.lukkModal(metrikknavn)}
                 closeButton={false}
                 type={VarselModalType.FEIL}
                 portalClassName="feiletbrukere-modal"
@@ -69,8 +68,8 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
                 <Normaltekst className="blokk-s">
                     {infotekstTekst}
                 </Normaltekst>
-                <FnrList feiledeTilordninger={fnr} />
-                <button className="knapp knapp--hoved" onClick={this.lukkModal}>
+                <FnrList feiledeTilordninger={fnr}/>
+                <button className="knapp knapp--hoved" onClick={() => this.lukkModal(metrikknavn)}>
                     Ok
                 </button>
             </VarselModal>
