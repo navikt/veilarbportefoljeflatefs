@@ -189,8 +189,8 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"
-                        infotekstTekst="Tilordning av veileder til følgende brukere feilet:"
-                        merInfoTekst="Det kan skyldes manglende tilgang på brukere, eller at veilederen allerede er tildelt brukeren."
+                        infotekstTekst="Tildeling av veileder til følgende bruker feilet:"
+                        merInfoTekst="Det kan skyldes manglende tilgang på bruker, eller at veilederen allerede er tildelt bruker."
                     />
                     <ServerFeilModal
                         isOpen={serverfeilModalSkalVises}
