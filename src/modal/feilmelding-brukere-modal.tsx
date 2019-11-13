@@ -42,13 +42,7 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
         }
     }
 
-    lukkModal() {
-        const {onClose} = this.props;
-        onClose();
-        this.setState({isOpen: false});
-    }
-
-    lukkModalOgLoggMetrikk(metrikknavn) {
+    lukkModal(metrikknavn) {
         logEvent(metrikknavn);
         const {onClose} = this.props;
         onClose();
@@ -62,7 +56,7 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
             <VarselModal
                 contentLabel="Modal tilordning feilet"
                 isOpen={this.state.isOpen || false}
-                onRequestClose={this.lukkModal}
+                onRequestClose={() => this.lukkModal(metrikknavn)}
                 closeButton={false}
                 type={VarselModalType.FEIL}
                 portalClassName="feiletbrukere-modal"
@@ -75,7 +69,7 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
                     {infotekstTekst}
                 </Normaltekst>
                 <FnrList feiledeTilordninger={fnr}/>
-                <button className="knapp knapp--hoved" onClick={() => this.lukkModalOgLoggMetrikk(metrikknavn)}>
+                <button className="knapp knapp--hoved" onClick={() => this.lukkModal(metrikknavn)}>
                     Ok
                 </button>
             </VarselModal>
