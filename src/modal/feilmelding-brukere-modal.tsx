@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { VarselModal, VarselModalType } from '../components/varselmodal/varselmodal';
-import { logEvent } from '../utils/frontend-logger';
 
 interface FeilmeldingBrukereModalProps {
     isOpen?: boolean;
@@ -10,7 +9,6 @@ interface FeilmeldingBrukereModalProps {
     tittelTekst: string;
     infotekstTekst: string;
     merInfoTekst?: string;
-    metrikknavn?: string;
 }
 
 interface FeilmeldingBrukereModalState {
@@ -43,21 +41,20 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
         }
     }
 
-    lukkModal(metrikknavn) {
-        logEvent(metrikknavn);
+    lukkModal() {
         const {onClose} = this.props;
         onClose();
         this.setState({isOpen: false});
     }
 
     render() {
-        const {tittelTekst, infotekstTekst, fnr, metrikknavn, merInfoTekst} = this.props;
+        const {tittelTekst, infotekstTekst, fnr, merInfoTekst} = this.props;
 
         return (
             <VarselModal
                 contentLabel="Modal tilordning feilet"
                 isOpen={this.state.isOpen || false}
-                onRequestClose={() => this.lukkModal(metrikknavn)}
+                onRequestClose={this.lukkModal}
                 closeButton={false}
                 type={VarselModalType.FEIL}
                 portalClassName="feiletbrukere-modal"
@@ -73,7 +70,7 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
                 {merInfoTekst && <Normaltekst className="blokk-s">
                     {merInfoTekst}
                 </Normaltekst>}
-                <button className="knapp knapp--hoved" onClick={() => this.lukkModal(metrikknavn)}>
+                <button className="knapp knapp--hoved" onClick={this.lukkModal}>
                     Ok
                 </button>
             </VarselModal>

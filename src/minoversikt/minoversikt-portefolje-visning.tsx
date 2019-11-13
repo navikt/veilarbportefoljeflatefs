@@ -172,7 +172,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         tittelTekst="Handlingen kan ikke utføres"
                         infotekstTekst="Tilordning av veileder til følgende brukere feilet:"
                         merInfoTekst="Det kan skyldes manglende tilgang på brukere, eller at veilederen allerede er tildelt brukeren."
-                        metrikknavn="portefolje.metrikker.lukk-modal-tildel-veileder"
                     />
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === LEGG_TIL_ARBEIDSLISTE_FEILET}
@@ -180,7 +179,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"
                         infotekstTekst="Kunne ikke opprette arbeidsliste for følgende brukere:"
-                        metrikknavn="portefolje.metrikker.lukk-modal-legg-til-arbeidsliste-feilet"
                     />
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === FJERN_FRA_ARBEIDSLISTE_FEILET}
@@ -188,7 +186,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"
                         infotekstTekst="Kunne ikke slette arbeidsliste for følgende brukere:"
-                        metrikknavn="portefolje.metrikker.lukk-modal-fjern-fra-arbeidsliste-feilet"
                     />
                     <ServerFeilModal
                         isOpen={serverfeilModalSkalVises}
@@ -198,7 +195,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             </div>
         );
     }
-
 }
 
 const mapStateToProps = (state) => ({
