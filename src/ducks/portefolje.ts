@@ -360,3 +360,4 @@ export function oppdaterArbeidslisteForBruker(arbeidsliste) {
         arbeidsliste
     });
 }
+

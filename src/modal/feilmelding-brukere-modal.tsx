@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { VarselModal, VarselModalType } from '../components/varselmodal/varselmodal';
 import { logEvent } from '../utils/frontend-logger';
+import { metricsMiddleWare } from '../middleware/metrics-middleware';
 
 interface FeilmeldingBrukereModalProps {
     isOpen?: boolean;
@@ -9,6 +10,7 @@ interface FeilmeldingBrukereModalProps {
     onClose: () => void;
     tittelTekst: string;
     infotekstTekst: string;
+    metrikknavn?: string;
 }
 
 interface FeilmeldingBrukereModalState {
@@ -27,6 +29,8 @@ function FnrList({ feiledeTilordninger }) {
     );
 }
 
+
+
 class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalProps, FeilmeldingBrukereModalState> {
     constructor(props) {
         super(props);
@@ -42,16 +46,20 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
     }
 
     lukkModal() {
-        logEvent('veilarbvisittkortfs.metrikker.lukk-modal-tildel-veileder');
         const { onClose } = this.props;
         onClose();
-
         this.setState({ isOpen: false });
+    }
 
+    lukkModalOgLoggMetrikk(metrikknavn) {
+        logEvent(metrikknavn);
+        const { onClose } = this.props;
+        onClose();
+        this.setState({ isOpen: false });
     }
 
     render() {
-        const { tittelTekst, infotekstTekst, fnr } = this.props;
+        const { tittelTekst, infotekstTekst, fnr, metrikknavn } = this.props;
 
         return (
             <VarselModal
@@ -70,7 +78,7 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
                     {infotekstTekst}
                 </Normaltekst>
                 <FnrList feiledeTilordninger={fnr} />
-                <button className="knapp knapp--hoved" onClick={this.lukkModal}>
+                <button className="knapp knapp--hoved" onClick={() => this.lukkModalOgLoggMetrikk(metrikknavn)}>
                     Ok
                 </button>
             </VarselModal>

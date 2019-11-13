@@ -190,6 +190,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"
                         infotekstTekst="Tilordning av veileder til følgende brukere feilet:"
+                        metrikknavn="'veilarbvisittkortfs.metrikker.lukk-modal-tildel-veileder'"
                     />
                     <ServerFeilModal
                         isOpen={serverfeilModalSkalVises}
