@@ -1,6 +1,5 @@
 import React from 'react';
 import {ReactComponent as RedigerIkon } from './rediger.svg';
-import {Flatknapp } from "nav-frontend-knapper";
 import hiddenIf from "../hidden-if/hidden-if";
 
 function RedigerKnapp(props: {onClick: ()=> void}) {

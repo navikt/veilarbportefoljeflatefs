@@ -7,7 +7,7 @@ export function LeggTilKnapp(props: {onClick: ()=> void}) {
     return (
         <Flatknapp className="veiledergruppe-knapp" onClick={props.onClick}>
             <PlussIkon/>
-            <span>Ny Gruppe</span>
+            <span> Ny gruppe</span>
         </Flatknapp>
     );
 }

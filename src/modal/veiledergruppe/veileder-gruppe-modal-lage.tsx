@@ -62,7 +62,7 @@ function VeilederGruppeModalLage (props: VeilederGruppeModalProps & Omit<ModalPr
                 </Innholdstittel>
                 <div className="veildergruppe-modal__content">
                     <Input
-                        label="Gruppe navn:"
+                        label="Gruppenavn:"
                         value={gruppeNavn}
                         bredde="L"
                         onChange={e => setGruppeNavn(e.target.value)}
@@ -81,7 +81,7 @@ function VeilederGruppeModalLage (props: VeilederGruppeModalProps & Omit<ModalPr
                     </div>
                 </div>
                 <div>
-                    <Hovedknapp htmlType="submit">Lagre endringerne</Hovedknapp>
+                    <Hovedknapp htmlType="submit">Lagre endringene</Hovedknapp>
                     <Flatknapp>Avbryt</Flatknapp>
                     <Flatknapp>Slett gruppe</Flatknapp>
                 </div>

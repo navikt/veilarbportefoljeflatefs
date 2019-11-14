@@ -6,11 +6,10 @@ import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 import { FiltreringStatus } from './filtrering-status/filtrering-status';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { hentLagretFilterForEnhet } from '../ducks/lagret-filter';
 import { AppState } from '../reducer';
 import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-veileder-grupper';
-import { hentTilgangTilEnhet } from '../middleware/api';
 import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
 import { VIS_VEILEDER_GRUPPER } from '../konstanter';
 
@@ -30,22 +29,12 @@ interface FiltreringContainerProps {
 }
 
 function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, endreFiltervalg, enhettiltak }: FiltreringContainerProps) {
-    const [harTilgangTilEnheten, setHarTilgangTilEnheten] = useState(false);
 
     const valgtEnhet = useSelector((state: AppState) => state.veiledere.data.enhet.enhetId );
     const harVeilederGruppeFeature = useFeatureSelector()(VIS_VEILEDER_GRUPPER);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        /*if(harVeilederGruppeFeature) {
-            hentTilgangTilEnhet(valgtEnhet).then(resp => {
-                if (resp) {
-                    setHarTilgangTilEnheten(true);
-
-                }
-            });s
-        }
-         */
         dispatch(hentLagretFilterForEnhet(valgtEnhet));
     }, [dispatch, valgtEnhet, harVeilederGruppeFeature]);
 

@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
 import { PortefoljeData } from '../ducks/portefolje';
-import { REMOTE_STORE_URL } from '../components/endringslogg/utils/endringslogg-api';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';

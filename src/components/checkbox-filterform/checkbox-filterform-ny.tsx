@@ -10,7 +10,7 @@ function CheckboxFilterformNy({ filterId, onSubmit, valg, closeDropdown, filterv
 
     console.log("initialValues", initialValues);
 
-    const [valgteFilterValg, setValgteFilterValg] = useState<string[]>([]);
+    const [valgteFilterValg] = useState<string[]>([]);
 
 
     const createHandleOnSubmit = () => {
@@ -19,15 +19,6 @@ function CheckboxFilterformNy({ filterId, onSubmit, valg, closeDropdown, filterv
             onSubmit(filterId, valgteFilterValg);
         }
     };
-
-    /*
-    const hanterChange = (event) => {
-        const veilederTarget = event.target.value;
-        event.target.checked
-            ? setValgteFilterValg([veilederTarget, ...valgteFilterValg])
-            : setValgteFilterValg(valgteFilterValg.filter(veileder => veileder !== veilederTarget))
-    };
-    */
 
     const harValg = valgteFilterValg.length > 0;
     return (
