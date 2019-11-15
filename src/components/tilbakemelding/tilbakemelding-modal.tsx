@@ -64,11 +64,6 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
         this.setState({tilfredshet});
     };
 
-    handleIkkeVisIgjenClicked = () => {
-        this.setState({harSendt: true, ikkeVisIgjen: true});
-        this.props.onIkkeVisIgjen();
-    };
-
     renderForm = () => {
 
         const {tilfredshet, kommentar} = this.state;
@@ -89,10 +84,6 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         onTilfredshetChanged={this.handleTilfredshetChanged}
                         defaultTilfredshet={tilfredshet}
                     />
-                    {!harBesvartTilfredshet &&
-                    <Flatknapp mini={true} onClick={this.handleIkkeVisIgjenClicked}>
-                        Ikke vis dette igjen
-                    </Flatknapp>}
                 </div>
                 {harBesvartTilfredshet && (
                     <form className="tilbakemelding-modal__ekspander" onSubmit={this.handleFormSubmitted}>
