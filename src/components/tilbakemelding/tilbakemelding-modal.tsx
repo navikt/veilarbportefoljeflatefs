@@ -1,12 +1,10 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { Textarea } from 'nav-frontend-skjema';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import TilfredshetValg from './tilfredshet-valg';
 import './tilbakemelding-modal.less';
-import Lenke from 'nav-frontend-lenker';
-import { Input } from 'nav-frontend-skjema';
 
 export interface Tilbakemelding {
     tilfredshet: number;
@@ -68,7 +66,6 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
 
         const {tilfredshet, kommentar} = this.state;
         const harBesvartTilfredshet = tilfredshet > 0;
-        const styleTop = {marginTop: '1rem'};
         const styleBottom = {marginBottom: '1rem'};
         return (
             <div>
