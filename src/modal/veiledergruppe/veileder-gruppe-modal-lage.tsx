@@ -10,7 +10,6 @@ import { ReactComponent as FjernIkon } from './fjern-sirkel-ikon.svg';
 import { LagretFilter } from '../../ducks/lagret-filter';
 import { initialState } from '../../ducks/filtrering';
 import SokVeiledere from '../../components/sok-veiledere/sok-veiledere';
-import SokFilterNy from '../../components/toolbar/sok-filter-ny';
 
 interface VeilederGruppeModalProps {
     lagretFilter?: LagretFilter;
@@ -46,15 +45,16 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
 
     const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Lage veiledergruppe';
 
+    const lukkModal = () => {
+        props.onRequestClose();
+        props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+    };
+
     return (
         <ModalWrapper
             isOpen={props.isOpen}
             contentLabel="Lage veildergruppe"
-            onRequestClose={() => {
-                props.onRequestClose();
-                props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
-
-            }}
+            onRequestClose={lukkModal}
             portalClassName="veildergruppe-modal"
         >
             <div className="veildergruppe-modal__form">
@@ -83,10 +83,14 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                         }
                     />
                 </div>
-                <div>
-                    <Hovedknapp htmlType="submit">Lagre endringene</Hovedknapp>
-                    <Flatknapp>Avbryt</Flatknapp>
-                    <Flatknapp>Slett gruppe</Flatknapp>
+                <div className="veildergruppe-modal__knappegruppe">
+                    <Hovedknapp className="veildergruppe-modal__knappegruppe__lagre" htmlType="submit">Lagre
+                        endringene</Hovedknapp>
+                    <Flatknapp className="veildergruppe-modal__knappegruppe__avbryt"
+                               onClick={lukkModal}>
+                        Avbryt
+                    </Flatknapp>
+                    <Flatknapp className="veildergruppe-modal__knappegruppe__slett">Slett gruppe</Flatknapp>
                 </div>
             </div>
         </ModalWrapper>
