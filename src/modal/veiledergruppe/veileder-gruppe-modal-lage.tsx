@@ -1,25 +1,26 @@
-import ModalWrapper, {ModalProps} from "nav-frontend-modal";
-import { Innholdstittel } from "nav-frontend-typografi";
-import React, {useEffect, useState} from "react";
-import {FiltervalgModell} from "../../model-interfaces";
-import { Input } from "nav-frontend-skjema";
-import {Flatknapp, Hovedknapp } from "nav-frontend-knapper";
-import {useSelector} from "react-redux";
-import {AppState} from "../../reducer";
-import {  ReactComponent as FjernIkon } from './fjern-sirkel-ikon.svg';
-import {LagretFilter} from "../../ducks/lagret-filter";
-import {initialState} from "../../ducks/filtrering";
-import SokVeiledere from "../../components/sok-veiledere/sok-veiledere";
+import ModalWrapper, { ModalProps } from 'nav-frontend-modal';
+import { Innholdstittel } from 'nav-frontend-typografi';
+import React, { useEffect, useState } from 'react';
+import { FiltervalgModell } from '../../model-interfaces';
+import { Input } from 'nav-frontend-skjema';
+import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../reducer';
+import { ReactComponent as FjernIkon } from './fjern-sirkel-ikon.svg';
+import { LagretFilter } from '../../ducks/lagret-filter';
+import { initialState } from '../../ducks/filtrering';
+import SokVeiledere from '../../components/sok-veiledere/sok-veiledere';
+import SokFilterNy from '../../components/toolbar/sok-filter-ny';
 
 interface VeilederGruppeModalProps {
     lagretFilter?: LagretFilter;
 }
 
-function VeilederGruppeModalLage (props: VeilederGruppeModalProps & Omit<ModalProps, "contentLabel" | "children">) {
+function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalProps, 'contentLabel' | 'children'>) {
 
     const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
 
-    const [gruppeNavn, setGruppeNavn] = useState<string>("");
+    const [gruppeNavn, setGruppeNavn] = useState<string>('');
 
     const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) => prevState.veiledere
         ? {...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}
@@ -29,29 +30,29 @@ function VeilederGruppeModalLage (props: VeilederGruppeModalProps & Omit<ModalPr
         const veilederTarget = event.target.value;
         event.target.checked
             ? setFilterValg(prevState => {
-                if(prevState.veiledere) {
+                if (prevState.veiledere) {
                     return ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]});
                 } else {
-                    return ({...prevState, veiledere: [veilederTarget]})
-                }})
-            : setFilterValg( prevState => fjernVeiledereFraListen(prevState, veilederTarget))
+                    return ({...prevState, veiledere: [veilederTarget]});
+                }
+            })
+            : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
     };
 
     useEffect(() => {
         setFilterValg(props.lagretFilter ? props.lagretFilter.filterValg : initialState);
-        setGruppeNavn(props.lagretFilter? props.lagretFilter.filterNavn : "");
-    },[props.lagretFilter]);
+        setGruppeNavn(props.lagretFilter ? props.lagretFilter.filterNavn : '');
+    }, [props.lagretFilter]);
 
-
-    const modalTittel = props.lagretFilter ? "Rediger veiledergruppe": "Lage veiledergruppe";
+    const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Lage veiledergruppe';
 
     return (
         <ModalWrapper
             isOpen={props.isOpen}
             contentLabel="Lage veildergruppe"
-            onRequestClose={()=> {
+            onRequestClose={() => {
                 props.onRequestClose();
-                props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg): setFilterValg(initialState);
+                props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
 
             }}
             portalClassName="veildergruppe-modal"
@@ -67,18 +68,20 @@ function VeilederGruppeModalLage (props: VeilederGruppeModalProps & Omit<ModalPr
                         bredde="L"
                         onChange={e => setGruppeNavn(e.target.value)}
                     />
+
+                    <div className="veildergruppe-modal__sokefilter">
+                        <SokVeiledere
+                            erValgt={(ident) => filterValg.veiledere ? filterValg.veiledere.includes(ident) : false}
+                            hanterChange={event => hanterChange(event)}
+                        />
+                    </div>
+                    <p id="veildergruppe-modal__valgteveileder__label">Valgte veiledere:</p>
                     <ValgtVeilederGruppeListe
                         valgteVeileder={filterValg.veiledere || []}
                         fjernValgtVeileder={(veilederTarget) =>
                             setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget))
                         }
                     />
-                    <div className="veildergruppe-modal__sokefilter">
-                        <SokVeiledere
-                            erValgt={(ident)=> filterValg.veiledere ? filterValg.veiledere.includes(ident): false}
-                            hanterChange={event => hanterChange(event)}
-                        />
-                    </div>
                 </div>
                 <div>
                     <Hovedknapp htmlType="submit">Lagre endringene</Hovedknapp>
@@ -87,16 +90,15 @@ function VeilederGruppeModalLage (props: VeilederGruppeModalProps & Omit<ModalPr
                 </div>
             </div>
         </ModalWrapper>
-    )
+    );
 }
 
 interface ValgtVeilederGruppeListeProps {
-    valgteVeileder : string[],
+    valgteVeileder: string[],
     fjernValgtVeileder: (veilederId: string) => void;
 }
 
-
-function ValgtVeilederGruppeListe (props: ValgtVeilederGruppeListeProps) {
+function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
 
     const veiledere = veilederePaEnheten
@@ -104,9 +106,7 @@ function ValgtVeilederGruppeListe (props: ValgtVeilederGruppeListeProps) {
             props.valgteVeileder.includes(veilederPaEnhet.ident))
         .sort((veileder1, veiledere2) => veileder1.etternavn.localeCompare(veiledere2.etternavn));
 
-
-    const splitArrayITo = [veiledere.slice(0, Math.ceil(veiledere.length/2)), veiledere.slice(Math.ceil(veiledere.length/2), veiledere.length)]
-
+    const splitArrayITo = [veiledere.slice(0, Math.ceil(veiledere.length / 2)), veiledere.slice(Math.ceil(veiledere.length / 2), veiledere.length)];
     return (
         <div className="veildergruppe-modal__valgteveileder">
             {
@@ -124,14 +124,13 @@ function ValgtVeilederGruppeListe (props: ValgtVeilederGruppeListeProps) {
                                         <FjernIkon/>
                                     </Flatknapp>
                                 </div>
-                            )
+                            );
                         })}
                     </div>
                 )
             }
         </div>
-    )
+    );
 }
-
 
 export default VeilederGruppeModalLage;

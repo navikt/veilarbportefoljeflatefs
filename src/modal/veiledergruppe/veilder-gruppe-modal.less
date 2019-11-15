@@ -1,3 +1,7 @@
+#veildergruppe-modal__valgteveileder__label {
+    margin-bottom: 0.5rem;
+}
+
 .veildergruppe-modal {
     &__form {
         min-width: 35rem;
@@ -12,22 +16,18 @@
         margin: 0 3rem;
     }
 
-    &__sokefilter {
-        margin-top: 2rem;
-
-        .checkbox-filterform__valg {
-            border: 1px solid @navGra60;
-            border-radius: 0.25rem;
-        }
-    }
-
     &__valgteveileder {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        overflow-y: scroll;
+        min-height: 7rem;
+        max-height: 7rem;
+        border: 1px solid #78706A;
+        border-radius: 0.25rem;
+        margin: auto auto 2rem auto;
 
         &__elem {
             padding: 0.5rem;
-            border-bottom: 1px solid @navGra40;
             display: flex;
             justify-content: space-between;
 
@@ -36,15 +36,21 @@
                 text-align: center;
                 background: transparent;
                 padding: 0;
+                width: 20px;
+                height: 20px;
 
                 svg {
                     g {
                         stroke: @navGra60;
+                        width: 20px;
+                        height: 20px;
                     }
                 }
             }
 
             .fjern--knapp:hover {
+                border: 1px solid @navDypBlaDarken60 !important;
+
                 svg {
                     g {
                         stroke: @navGra80;
@@ -53,16 +59,43 @@
             }
 
             .fjern--knapp:focus {
-                border: 1px solid @navDypBlaDarken60;
+                border: 1px solid @navDypBlaDarken60 !important;
+                border: none;
                 box-shadow: none;
-                svg{
+
+                svg {
                     g {
                         stroke: @navGra80;
                     }
                 }
             }
+        }
+    }
 
+    &__sokefilter {
+        margin-top: 1rem;
+        max-height: 19rem;
+        min-height: 19rem;
 
+        .checkbox-filterform {
+            max-height: 13rem;
+            min-height: 13rem;
+            display: grid;
+
+            &__valg {
+                max-height: 13rem;
+                min-height: 13rem;
+                border: 1px solid @navGra60;
+                border-radius: 0.25rem;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            &__alertstripe {
+                max-height: 13rem;
+                min-height: 13rem;
+                border: 1px solid @navGra60;
+                border-radius: 0.25rem;
+            }
         }
     }
 }
