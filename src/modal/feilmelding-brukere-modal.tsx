@@ -8,13 +8,14 @@ interface FeilmeldingBrukereModalProps {
     onClose: () => void;
     tittelTekst: string;
     infotekstTekst: string;
+    merInfoTekst?: string;
 }
 
 interface FeilmeldingBrukereModalState {
     isOpen?: boolean;
 }
 
-function FnrList({ feiledeTilordninger }) {
+function FnrList({feiledeTilordninger}) {
     const listElements = feiledeTilordninger.map((tilordning) => (
         <li key={tilordning.brukerFnr} className="fnr__listitem">{tilordning.brukerFnr}</li>
     ));
@@ -30,25 +31,24 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
     constructor(props) {
         super(props);
 
-        this.state = { isOpen: this.props.isOpen };
+        this.state = {isOpen: this.props.isOpen};
         this.lukkModal = this.lukkModal.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.isOpen !== this.state.isOpen) {
-            this.setState({ isOpen: nextProps.isOpen });
+            this.setState({isOpen: nextProps.isOpen});
         }
     }
 
     lukkModal() {
-        const { onClose } = this.props;
+        const {onClose} = this.props;
         onClose();
-
-        this.setState({ isOpen: false });
+        this.setState({isOpen: false});
     }
 
     render() {
-        const { tittelTekst, infotekstTekst, fnr } = this.props;
+        const {tittelTekst, infotekstTekst, fnr, merInfoTekst} = this.props;
 
         return (
             <VarselModal
@@ -67,6 +67,9 @@ class FeilmeldingBrukereModal extends React.Component<FeilmeldingBrukereModalPro
                     {infotekstTekst}
                 </Normaltekst>
                 <FnrList feiledeTilordninger={fnr} />
+                {merInfoTekst && <Normaltekst className="blokk-s">
+                    {merInfoTekst}
+                </Normaltekst>}
                 <button className="knapp knapp--hoved" onClick={this.lukkModal}>
                     Ok
                 </button>

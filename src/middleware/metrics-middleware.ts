@@ -112,7 +112,6 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
             loggEndreAktivitetFilter(sideNavn);
             break;
-
     }
 
     return next(action);
