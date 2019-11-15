@@ -5,7 +5,8 @@ import { Textarea } from 'nav-frontend-skjema';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import TilfredshetValg from './tilfredshet-valg';
 import './tilbakemelding-modal.less';
-import Lenke from "nav-frontend-lenker";
+import Lenke from 'nav-frontend-lenker';
+import { Input } from 'nav-frontend-skjema';
 
 export interface Tilbakemelding {
     tilfredshet: number;
@@ -51,48 +52,37 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
             this.setState({kommentar: value});
         }
 
-    }
+    };
 
     handleFormSubmitted = () => {
         const {tilfredshet, kommentar} = this.state;
         this.setState({harSendt: true});
         this.props.onTilbakemeldingSendt({tilfredshet, kommentar});
-    }
+    };
 
     handleTilfredshetChanged = (tilfredshet: number) => {
         this.setState({tilfredshet});
-    }
+    };
 
     handleIkkeVisIgjenClicked = () => {
         this.setState({harSendt: true, ikkeVisIgjen: true});
         this.props.onIkkeVisIgjen();
-    }
+    };
 
     renderForm = () => {
 
         const {tilfredshet, kommentar} = this.state;
         const harBesvartTilfredshet = tilfredshet > 0;
-        const styleTop = {marginTop: "1rem"};
-        const styleBottom = {marginBottom: "1rem"};
+        const styleTop = {marginTop: '1rem'};
+        const styleBottom = {marginBottom: '1rem'};
         return (
             <div>
                 <Innholdstittel className="blokk-xxs tilbakemelding-modal__tittel">
                     Tilbakemelding
                 </Innholdstittel>
                 <Normaltekst style={styleBottom} className="tilbakemelding-modal__ingress">
-                    Vi jobber med en ny plassering av statusfiltrene i oversikten. Bruk lenken under for å se og prøve ut endringen. Kom tilbake hit og fortell oss hva du synes.
+                    Vi har nylig lagt til en ny kolonne, "oppfølging startet", i oversikten. Hva synes du?
                 </Normaltekst>
-                <Normaltekst>
-                <Lenke
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://veilarbportefoljeflatefs-pr-87.herokuapp.com/veilarbportefoljeflatefs/">
-                    Demo av ny Modia oversikt
-                </Lenke> (krever internett)
-                </Normaltekst>
-               <Normaltekst style={styleTop}>
-                   Hvordan opplever du endringen? Svarene er anonyme.
-               </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
                     <TilfredshetValg
                         className="blokk-xs"
@@ -109,7 +99,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         <div className="tilbakemelding-modal__kommentar">
                             <Textarea
                                 className="tilbakemelding-modal__kommentar-felt"
-                                label="Si gjerne litt mer om dette."
+                                label='Fortell gjerne mer om hvordan du bruker "oppfølging starter", og om det er annen informasjon du savner.'
                                 rows={this.KOMMENTAR_ROWS}
                                 maxLength={this.KOMMENTAR_MAX_CHAR}
                                 value={kommentar}
@@ -123,7 +113,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                 )}
             </div>
         );
-    }
+    };
 
     renderTakkMelding = () => {
         return (
@@ -139,7 +129,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                 </Element>
             </div>
         );
-    }
+    };
 
     componentDidUpdate(prevProps: TilbakemeldingModalProps) {
         if (prevProps.open && !this.state.harBlittVist) {
