@@ -10,16 +10,19 @@ import { ReactComponent as FjernIkon } from './fjern-sirkel-ikon.svg';
 import { LagretFilter } from '../../ducks/lagret-filter';
 import { initialState } from '../../ducks/filtrering';
 import SokVeiledere from '../../components/sok-veiledere/sok-veiledere';
+import SletteVeiledergruppeModal from '../../modal/veiledergruppe/slett-gruppe-modal';
 
 interface VeilederGruppeModalProps {
     lagretFilter?: LagretFilter;
+    setSletteVeilederGruppeModal: (b: boolean) => void;
 }
 
 function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalProps, 'contentLabel' | 'children'>) {
 
     const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
-
     const [gruppeNavn, setGruppeNavn] = useState<string>('');
+    // @ts-ignore
+    const [sletteVeiledergruppeModal, setSletteVeiledergruppeModal, setVisSlettVeiledergruppeModal] = useState(false);
 
     const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) => prevState.veiledere
         ? {...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}
@@ -43,25 +46,35 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
         setGruppeNavn(props.lagretFilter ? props.lagretFilter.filterNavn : '');
     }, [props.lagretFilter]);
 
-    const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Lage veiledergruppe';
+    const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
 
     const lukkModal = () => {
         props.onRequestClose();
         props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
     };
 
+    function slettVeiledergruppeOgLukkModaler() {
+        setSletteVeiledergruppeModal(false);
+        // @ts-ignore
+        setVisSlettVeiledergruppeModal(false);
+    }
+
+    const slettModal = () => {
+        setSletteVeiledergruppeModal(true);
+    };
+
     return (
         <ModalWrapper
             isOpen={props.isOpen}
-            contentLabel="Lage veildergruppe"
+            contentLabel="Ny veiledergruppe"
             onRequestClose={lukkModal}
-            portalClassName="veildergruppe-modal"
+            portalClassName="veiledergruppe-modal"
         >
-            <div className="veildergruppe-modal__form">
+            <div className="veiledergruppe-modal__form">
                 <Innholdstittel tag="h1" className="blokk-xs">
                     {modalTittel}
                 </Innholdstittel>
-                <div className="veildergruppe-modal__content">
+                <div className="veiledergruppe-modal__content">
                     <Input
                         label="Gruppenavn:"
                         value={gruppeNavn}
@@ -69,13 +82,13 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                         onChange={e => setGruppeNavn(e.target.value)}
                     />
 
-                    <div className="veildergruppe-modal__sokefilter">
+                    <div className="veiledergruppe-modal__sokefilter">
                         <SokVeiledere
                             erValgt={(ident) => filterValg.veiledere ? filterValg.veiledere.includes(ident) : false}
                             hanterChange={event => hanterChange(event)}
                         />
                     </div>
-                    <p id="veildergruppe-modal__valgteveileder__label">Valgte veiledere:</p>
+                    <p id="veiledergruppe-modal__valgteveileder__label">Valgte veiledere:</p>
                     <ValgtVeilederGruppeListe
                         valgteVeileder={filterValg.veiledere || []}
                         fjernValgtVeileder={(veilederTarget) =>
@@ -83,17 +96,29 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                         }
                     />
                 </div>
-                <div className="veildergruppe-modal__knappegruppe">
-                    <Hovedknapp className="veildergruppe-modal__knappegruppe__lagre" htmlType="submit">Lagre
-                        endringene</Hovedknapp>
-                    <Flatknapp className="veildergruppe-modal__knappegruppe__avbryt"
+                <div className="veiledergruppe-modal__knappegruppe">
+                    <Hovedknapp className="veiledergruppe-modal__knappegruppe__lagre"
+                                htmlType="submit">
+                        Lagre endringene
+                    </Hovedknapp>
+                    <Flatknapp className="veiledergruppe-modal__knappegruppe__avbryt"
                                onClick={lukkModal}>
                         Avbryt
                     </Flatknapp>
-                    <Flatknapp className="veildergruppe-modal__knappegruppe__slett">Slett gruppe</Flatknapp>
+                    <Flatknapp className="veiledergruppe-modal__knappegruppe__slett"
+                               onClick={slettModal}
+                    >
+                        Slett gruppe
+                    </Flatknapp>
                 </div>
             </div>
+            <SletteVeiledergruppeModal
+                isOpen={sletteVeiledergruppeModal}
+                onRequestClose={() => setSletteVeiledergruppeModal(false)}
+                onSubmit={slettVeiledergruppeOgLukkModaler}
+            />
         </ModalWrapper>
+
     );
 }
 
@@ -112,13 +137,13 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
 
     const splitArrayITo = [veiledere.slice(0, Math.ceil(veiledere.length / 2)), veiledere.slice(Math.ceil(veiledere.length / 2), veiledere.length)];
     return (
-        <div className="veildergruppe-modal__valgteveileder">
+        <div className="veiledergruppe-modal__valgteveileder">
             {
                 splitArrayITo.map(listeMedVeileder =>
                     <div>
                         {listeMedVeileder.map(veileder => {
                             return (
-                                <div className="veildergruppe-modal__valgteveileder__elem">
+                                <div className="veiledergruppe-modal__valgteveileder__elem">
                                     <span>{`${veileder.etternavn}, ${veileder.fornavn}`}</span>
                                     <Flatknapp
                                         className="fjern--knapp"
@@ -138,3 +163,7 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
 }
 
 export default VeilederGruppeModalLage;
+
+
+
+
