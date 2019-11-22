@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { AdvarselModal } from '../../components/advarselmodal/advarsel-modal';
 import hiddenIf from '../../components/hidden-if/hidden-if';
@@ -33,17 +33,17 @@ function SletteVeiledergruppeModal(props: SletteVeiledergruppeModal) {
                 <Hovedknapp
                     htmlType="submit"
                     onClick={() => {
-                        props.onRequestClose();
+                        props.onSubmit();
                     }}
                 >
                     Slett
                 </Hovedknapp>
-                <Knapp
+                <Flatknapp
                     htmlType="button"
                     onClick={props.onRequestClose}
                 >
                     Avbryt
-                </Knapp>
+                </Flatknapp>
             </div>
         </AdvarselModal>
     );

@@ -58,7 +58,6 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
                 isOpen={props.veilederGruppeModal}
                 lagretFilter={valgtVeilederGruppe}
                 onRequestClose={() => props.setVeilederGruppeModal(false)}
-                setSletteVeilederGruppeModal={props.setVeilederGruppeModal}
             />
         </div>
     );

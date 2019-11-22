@@ -11,18 +11,22 @@ import { LagretFilter } from '../../ducks/lagret-filter';
 import { initialState } from '../../ducks/filtrering';
 import SokVeiledere from '../../components/sok-veiledere/sok-veiledere';
 import SletteVeiledergruppeModal from '../../modal/veiledergruppe/slett-gruppe-modal';
+import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
+import hiddenIf from '../../components/hidden-if/hidden-if';
 
 interface VeilederGruppeModalProps {
     lagretFilter?: LagretFilter;
-    setSletteVeilederGruppeModal: (b: boolean) => void;
 }
+
+const HiddenIfFlatknapp = hiddenIf(Flatknapp);
 
 function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalProps, 'contentLabel' | 'children'>) {
 
     const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
     const [gruppeNavn, setGruppeNavn] = useState<string>('');
-    // @ts-ignore
-    const [sletteVeiledergruppeModal, setSletteVeiledergruppeModal, setVisSlettVeiledergruppeModal] = useState(false);
+
+    const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
+    const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
 
     const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) => prevState.veiledere
         ? {...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}
@@ -49,14 +53,44 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
 
     const lukkModal = () => {
-        props.onRequestClose();
-        props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+        let harGjortEndringer;
+        if (props.lagretFilter) {
+            harGjortEndringer = (props.lagretFilter.filterNavn !== gruppeNavn) || (props.lagretFilter.filterValg !== filterValg);
+
+        } else {
+            harGjortEndringer = (filterValg !== initialState || gruppeNavn !== '');
+        }
+        if (harGjortEndringer) {
+            setEndringerIkkeLagretModal(harGjortEndringer);
+        } else {
+            props.onRequestClose();
+            props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+        }
+    };
+
+    const lagreModal = () => {
+        let harGjortEndringer;
+        if (props.lagretFilter) {
+            harGjortEndringer = (props.lagretFilter.filterNavn !== gruppeNavn) || (props.lagretFilter.filterValg !== filterValg);
+
+        } else {
+            harGjortEndringer = (filterValg !== initialState || gruppeNavn !== '');
+        }
+        //lagre endringer og send toast hvis det gikk bra
+        //ikke lagre endringer og send feilmodal om det gikk til helvete
     };
 
     function slettVeiledergruppeOgLukkModaler() {
+        //hva som skjer når man trykker på bekreft på ekstramodalen etter slett gruppe
         setSletteVeiledergruppeModal(false);
-        // @ts-ignore
-        setVisSlettVeiledergruppeModal(false);
+        props.onRequestClose();
+        props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+    }
+
+    function endringerIkkeLagretOgLukkModaler() {
+        setEndringerIkkeLagretModal(false);
+        props.onRequestClose();
+        props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
     }
 
     const slettModal = () => {
@@ -81,14 +115,15 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                         bredde="L"
                         onChange={e => setGruppeNavn(e.target.value)}
                     />
-
                     <div className="veiledergruppe-modal__sokefilter">
                         <SokVeiledere
                             erValgt={(ident) => filterValg.veiledere ? filterValg.veiledere.includes(ident) : false}
                             hanterChange={event => hanterChange(event)}
                         />
                     </div>
-                    <p id="veiledergruppe-modal__valgteveileder__label">Valgte veiledere:</p>
+                    <p id="veiledergruppe-modal__valgteveileder__label">
+                        Valgte veiledere:
+                    </p>
                     <ValgtVeilederGruppeListe
                         valgteVeileder={filterValg.veiledere || []}
                         fjernValgtVeileder={(veilederTarget) =>
@@ -98,27 +133,34 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                 </div>
                 <div className="veiledergruppe-modal__knappegruppe">
                     <Hovedknapp className="veiledergruppe-modal__knappegruppe__lagre"
-                                htmlType="submit">
+                                htmlType="submit"
+                                onClick={lagreModal}>
                         Lagre endringene
                     </Hovedknapp>
                     <Flatknapp className="veiledergruppe-modal__knappegruppe__avbryt"
                                onClick={lukkModal}>
                         Avbryt
                     </Flatknapp>
-                    <Flatknapp className="veiledergruppe-modal__knappegruppe__slett"
-                               onClick={slettModal}
+                    <HiddenIfFlatknapp
+                        className="veiledergruppe-modal__knappegruppe__slett"
+                        onClick={slettModal}
+                        hidden={!props.lagretFilter}
                     >
                         Slett gruppe
-                    </Flatknapp>
+                    </HiddenIfFlatknapp>
                 </div>
             </div>
             <SletteVeiledergruppeModal
-                isOpen={sletteVeiledergruppeModal}
+                isOpen={visSletteVeiledergruppeModal}
                 onRequestClose={() => setSletteVeiledergruppeModal(false)}
                 onSubmit={slettVeiledergruppeOgLukkModaler}
             />
+            <EndringerIkkeLagretModal
+                isOpen={visEndringerIkkeLagretModal}
+                onRequestClose={() => setEndringerIkkeLagretModal(false)}
+                onSubmit={endringerIkkeLagretOgLukkModaler}
+            />
         </ModalWrapper>
-
     );
 }
 
@@ -148,16 +190,14 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
                                     <Flatknapp
                                         className="fjern--knapp"
                                         htmlType="button"
-                                        onClick={() => props.fjernValgtVeileder(veileder.ident)}
-                                    >
+                                        onClick={() => props.fjernValgtVeileder(veileder.ident)}>
                                         <FjernIkon/>
                                     </Flatknapp>
                                 </div>
                             );
                         })}
                     </div>
-                )
-            }
+                )}
         </div>
     );
 }

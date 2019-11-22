@@ -1,6 +1,5 @@
 //@coreModulePath: './../../node_modules/';
 //@nodeModulesPath: './../../node_modules/';
-
 @import "tabell";
 
 
@@ -24,6 +23,7 @@ body {
         margin: 0 auto;
         height: 100%;
     }
+
     .side-innhold {
         margin-top: 2rem;
     }
@@ -33,10 +33,11 @@ html {
     height: 100%;
 }
 
-@import "./modal/feilmelding-brukere";
-@import "./modal/arbeidsliste/arbeidsliste";
-@import "./modal/veiledergruppe/veilder-gruppe-modal";
-@import "./modal/veiledergruppe/slett-gruppe-modal";
+@import "modal/feilmelding-brukere";
+@import "modal/arbeidsliste/arbeidsliste";
+@import "modal/veiledergruppe/veileder-gruppe-modal";
+@import "modal/veiledergruppe/slett-gruppe-modal";
+@import "modal/veiledergruppe/ulagrede-endringer-modal";
 @import "./components/enhet-context/enhet-context";
 @import "components/formik/formik-datovelger/daypicker";
 @import '~nav-datovelger/dist/datovelger/styles/datovelger.css';
@@ -59,7 +60,6 @@ html {
 @import "~nav-frontend-hjelpetekst-style/src/hjelpetekst-style";
 @import "./components/checkbox-filterform/checkbox-filterform";
 @import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
-
 
 
 .veilarbportefoljeflatefs {
@@ -91,7 +91,7 @@ html {
 
 .spinner {
     display: block;
-    margin:auto;
+    margin: auto;
 }
 
 @media (min-width: 1200px) {
