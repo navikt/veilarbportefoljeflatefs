@@ -68,17 +68,17 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
         }
     };
 
-    const lagreModal = () => {
-        let harGjortEndringer;
-        if (props.lagretFilter) {
-            harGjortEndringer = (props.lagretFilter.filterNavn !== gruppeNavn) || (props.lagretFilter.filterValg !== filterValg);
-
-        } else {
-            harGjortEndringer = (filterValg !== initialState || gruppeNavn !== '');
-        }
-        //lagre endringer og send toast hvis det gikk bra
-        //ikke lagre endringer og send feilmodal om det gikk til helvete
-    };
+    // const lagreModal = () => {
+    //     let harGjortEndringer;
+    //     if (props.lagretFilter) {
+    //         harGjortEndringer = (props.lagretFilter.filterNavn !== gruppeNavn) || (props.lagretFilter.filterValg !== filterValg);
+    //
+    //     } else {
+    //         harGjortEndringer = (filterValg !== initialState || gruppeNavn !== '');
+    //     }
+    //     //lagre endringer og send toast hvis det gikk bra
+    //     //ikke lagre endringer og send feilmodal om det gikk til helvete
+    // };
 
     function slettVeiledergruppeOgLukkModaler() {
         //hva som skjer når man trykker på bekreft på ekstramodalen etter slett gruppe
@@ -134,7 +134,8 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                 <div className="veiledergruppe-modal__knappegruppe">
                     <Hovedknapp className="veiledergruppe-modal__knappegruppe__lagre"
                                 htmlType="submit"
-                                onClick={lagreModal}>
+                                // onClick={lagreModal}
+                    >
                         Lagre endringene
                     </Hovedknapp>
                     <Flatknapp className="veiledergruppe-modal__knappegruppe__avbryt"

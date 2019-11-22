@@ -20,20 +20,20 @@ function FilteringVeilederGrupper() {
                 ? <VeilederGruppeInnhold
                     lagretFilter={lagretFilter}
                     veilederGruppeModal={veilederGruppeModal}
-                    setVeilederGruppeModal={setVeilederGruppeModal}
-                />
+                    setVeilederGruppeModal={setVeilederGruppeModal}/>
                 :
                 <div className="veiledergruppe-emptystate">
-                    <Normaltekst className="veiledergruppe-emptystate__tekst">Ingen lagrede veiledergrupper på enheten</Normaltekst>
+                    <Normaltekst className="veiledergruppe-emptystate__tekst">Ingen lagrede veiledergrupper på
+                        enheten</Normaltekst>
                     <LeggTilKnapp onClick={() => {
-                        setVeilederGruppeModal(true);}
-                    }/>
+                        setVeilederGruppeModal(true);
+                    }}/>
+                    <VeilederGruppeModalLage
+                        isOpen={veilederGruppeModal}
+                        onRequestClose={() => setVeilederGruppeModal(false)}
+                    />
                 </div>
             }
-            <VeilederGruppeModalLage
-                isOpen={veilederGruppeModal}
-                onRequestClose={() => setVeilederGruppeModal(false)}
-            />
         </Innholdslaster>
     );
 }
