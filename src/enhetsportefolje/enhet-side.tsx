@@ -19,6 +19,7 @@ import FiltreringContainer from '../filtrering/filtrering-container';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './enhet-side.less';
+import Toasts from '../components/toast/toast';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -41,7 +42,7 @@ type EnhetSideProps = StateProps & DispatchProps;
 class EnhetSide extends React.Component<EnhetSideProps> {
 
     componentWillMount() {
-        const { valgtEnhet } = this.props;
+        const {valgtEnhet} = this.props;
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
         this.settInitalStateFraUrl();
         loggSkjermMetrikker(Side.ENHETENS_OVERSIKT);
@@ -60,17 +61,14 @@ class EnhetSide extends React.Component<EnhetSideProps> {
     }
 
     render() {
-        const { filtervalg, veilederliste, statustall, enhettiltak, listevisning } = this.props;
+        const {filtervalg, veilederliste, statustall, enhettiltak, listevisning} = this.props;
         return (
             <DocumentTitle title="Enhetens oversikt">
                 <div className="enhet-side blokk-xl">
-                    <Lenker />
+                    <Lenker/>
+                    <Toasts/>
                     <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                         <div id="oversikt-sideinnhold" role="tabpanel">
-                            <p className="typo-infotekst begrensetbredde blokk-l">
-                                Her får du oversikt over alle brukere som er tilknyttet enheten du er logget inn på.
-                                Du kan filtrere ytterligere, søke opp veiledere og flytte eller fordele brukere.
-                            </p>
                             <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
                                 <FiltreringContainer
                                     filtervalg={filtervalg}
@@ -88,9 +86,9 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                     enhettiltak={enhettiltak.data.tiltak}
                                     listevisning={listevisning}
                                 />
-                                <ListevisningInfoPanel name={ListevisningType.enhetensOversikt} />
-                                <EnhetsportefoljeVisning />
-                                <TomPortefoljeModal />
+                                <ListevisningInfoPanel name={ListevisningType.enhetensOversikt}/>
+                                <EnhetsportefoljeVisning/>
+                                <TomPortefoljeModal/>
                             </div>
                         </div>
                     </Innholdslaster>

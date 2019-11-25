@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { FiltervalgModell } from '../../model-interfaces';
 import { Input } from 'nav-frontend-skjema';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../reducer';
 import { ReactComponent as FjernIkon } from './fjern-sirkel-ikon.svg';
 import { LagretFilter } from '../../ducks/lagret-filter';
@@ -13,6 +13,7 @@ import SokVeiledere from '../../components/sok-veiledere/sok-veiledere';
 import SletteVeiledergruppeModal from '../../modal/veiledergruppe/slett-gruppe-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
 import hiddenIf from '../../components/hidden-if/hidden-if';
+import { visLagreEndringerToast } from '../../store/toast/actions';
 
 interface VeilederGruppeModalProps {
     lagretFilter?: LagretFilter;
@@ -52,13 +53,15 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
 
     const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
 
-    const lukkModal = () => {
-        let harGjortEndringer;
+    const harGjortEndringer = () => {
         if (props.lagretFilter) {
-            harGjortEndringer = (props.lagretFilter.filterNavn !== gruppeNavn) || (props.lagretFilter.filterValg !== filterValg);
+            return (props.lagretFilter.filterNavn !== gruppeNavn) || (props.lagretFilter.filterValg !== filterValg);
         } else {
-            harGjortEndringer = (filterValg !== initialState || gruppeNavn !== '');
+            return (filterValg !== initialState || gruppeNavn !== '');
         }
+    };
+
+    const lukkModal = () => {
         if (harGjortEndringer) {
             setEndringerIkkeLagretModal(harGjortEndringer);
         } else {
@@ -66,17 +69,18 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
         }
     };
 
-    // const lagreModal = () => {
-    //     let harGjortEndringer;
-    //     if (props.lagretFilter) {
-    //         harGjortEndringer = (props.lagretFilter.filterNavn !== gruppeNavn) || (props.lagretFilter.filterValg !== filterValg);
-    //
-    //     } else {
-    //         harGjortEndringer = (filterValg !== initialState || gruppeNavn !== '');
-    //     }
-    //     //lagre endringer og send toast hvis det gikk bra
-    //     //ikke lagre endringer og send feilmodal om det gikk til helvete
-    // };
+    const dispatch = useDispatch();
+
+    const lagreModal = () => {
+        if (harGjortEndringer) {
+            //lagre endringer og send toast hvis det gikk bra
+            dispatch(visLagreEndringerToast());
+            props.onRequestClose();
+        }
+        // else {
+        //ikke lagre endringer og send feilmodal om det gikk til helvete
+        // }
+    };
 
     function slettVeiledergruppeOgLukkModaler() {
         //hva som skjer når man trykker på bekreft på ekstramodalen etter slett gruppe
@@ -138,7 +142,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                 <div className="veiledergruppe-modal__knappegruppe">
                     <Hovedknapp className="veiledergruppe-modal__knappegruppe__lagre"
                                 htmlType="submit"
-                        // onClick={lagreModal}
+                                onClick={lagreModal}
                     >
                         Lagre endringene
                     </Hovedknapp>

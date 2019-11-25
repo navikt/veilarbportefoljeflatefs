@@ -26,7 +26,9 @@ import listevisningReducer, {
 } from './ducks/ui/listevisning';
 import { default as contextReducer, ContextState } from './components/enhet-context/context-reducer';
 import featuresReducer, { FeaturesState } from './ducks/features';
+import toastReducer, { ToastState } from './store/toast/reducer';
 import {FiltervalgModell} from "./model-interfaces";
+
 
 function named(name, reducer) {
     return (state, action) => {
@@ -68,6 +70,7 @@ export interface AppState {
     features: FeaturesState;
     lagretFilter: LagretFilterState;
     form: any; // TODO type
+    toastReducer: ToastState;
 }
 
 export default combineReducers<AppState>({
@@ -96,5 +99,6 @@ export default combineReducers<AppState>({
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
     lagretFilter: lagretFilterReducer,
-    form: formReducer
+    form: formReducer,
+    toastReducer: toastReducer
 });
