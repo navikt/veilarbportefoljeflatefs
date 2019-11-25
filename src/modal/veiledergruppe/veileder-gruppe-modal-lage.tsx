@@ -1,5 +1,5 @@
 import ModalWrapper, { ModalProps } from 'nav-frontend-modal';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import React, { useEffect, useState } from 'react';
 import { FiltervalgModell } from '../../model-interfaces';
 import { Input } from 'nav-frontend-skjema';
@@ -51,6 +51,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     }, [props.lagretFilter]);
 
     const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
+    // const valgteVeiledereTittel = props.lagretFilter ? '' : 'Ingen veiledere lagt til i gruppen';
 
     const lukkModal = () => {
         let harGjortEndringer;
@@ -134,7 +135,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                 <div className="veiledergruppe-modal__knappegruppe">
                     <Hovedknapp className="veiledergruppe-modal__knappegruppe__lagre"
                                 htmlType="submit"
-                                // onClick={lagreModal}
+                        // onClick={lagreModal}
                     >
                         Lagre endringene
                     </Hovedknapp>
@@ -179,31 +180,71 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
         .sort((veileder1, veiledere2) => veileder1.etternavn.localeCompare(veiledere2.etternavn));
 
     const splitArrayITo = [veiledere.slice(0, Math.ceil(veiledere.length / 2)), veiledere.slice(Math.ceil(veiledere.length / 2), veiledere.length)];
+
+    // function valgteVeilederTittel(listeMedVeileder, veileder) {
+    //     if (listeMedVeileder === []) {
+    //         console.log('listen er tom: ', listeMedVeileder);
+    //         return (<Normaltekst>
+    //             Ingen veiledere lagt til i gruppen
+    //         </Normaltekst>);
+    //     } else {
+    //         return (
+    //             <div className="veiledergruppe-modal__valgteveileder__elem">
+    //                 <span>{`${veileder.etternavn}, ${veileder.fornavn}`}</span>
+    //                 <Flatknapp
+    //                     className="fjern--knapp"
+    //                     htmlType="button"
+    //                     onClick={() => props.fjernValgtVeileder(veileder.ident)}>
+    //                     <FjernIkon/>
+    //                 </Flatknapp>
+    //             </div>
+    //         );
+    //     }
+    // }
+
+    const sjekkTomListe = (veiledere) => {
+        if (veiledere.length === 0) {
+            return (
+                <div className="veiledergruppe-modal__valgteveileder">
+                    <Normaltekst className="veiledergruppe-modal__valgteveileder__tom-liste-tekst">
+                        Ingen veiledere lagt til i gruppen
+                    </Normaltekst>
+                </div>
+            );
+        } else {
+            return (
+                <div className="veiledergruppe-modal__valgteveileder">
+                    {
+                        splitArrayITo.map(listeMedVeileder =>
+                            <div>
+                                {listeMedVeileder.map(veileder => {
+                                    return (
+                                        <div className="veiledergruppe-modal__valgteveileder__elem">
+                                            <span>{`${veileder.etternavn}, ${veileder.fornavn}`}</span>
+                                            <Flatknapp
+                                                className="fjern--knapp"
+                                                htmlType="button"
+                                                onClick={() => props.fjernValgtVeileder(veileder.ident)}>
+                                                <FjernIkon/>
+                                            </Flatknapp>
+                                        </div>
+                                    );
+
+                                })}
+                            </div>
+                        )
+                    }
+                </div>
+            );
+        }
+    };
+
     return (
-        <div className="veiledergruppe-modal__valgteveileder">
-            {
-                splitArrayITo.map(listeMedVeileder =>
-                    <div>
-                        {listeMedVeileder.map(veileder => {
-                            return (
-                                <div className="veiledergruppe-modal__valgteveileder__elem">
-                                    <span>{`${veileder.etternavn}, ${veileder.fornavn}`}</span>
-                                    <Flatknapp
-                                        className="fjern--knapp"
-                                        htmlType="button"
-                                        onClick={() => props.fjernValgtVeileder(veileder.ident)}>
-                                        <FjernIkon/>
-                                    </Flatknapp>
-                                </div>
-                            );
-                        })}
-                    </div>
-                )}
-        </div>
-    );
+        sjekkTomListe(veiledere));
 }
 
 export default VeilederGruppeModalLage;
+
 
 
 
