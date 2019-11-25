@@ -51,7 +51,6 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     }, [props.lagretFilter]);
 
     const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
-    // const valgteVeiledereTittel = props.lagretFilter ? '' : 'Ingen veiledere lagt til i gruppen';
 
     const lukkModal = () => {
         let harGjortEndringer;
@@ -181,27 +180,6 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
 
     const splitArrayITo = [veiledere.slice(0, Math.ceil(veiledere.length / 2)), veiledere.slice(Math.ceil(veiledere.length / 2), veiledere.length)];
 
-    // function valgteVeilederTittel(listeMedVeileder, veileder) {
-    //     if (listeMedVeileder === []) {
-    //         console.log('listen er tom: ', listeMedVeileder);
-    //         return (<Normaltekst>
-    //             Ingen veiledere lagt til i gruppen
-    //         </Normaltekst>);
-    //     } else {
-    //         return (
-    //             <div className="veiledergruppe-modal__valgteveileder__elem">
-    //                 <span>{`${veileder.etternavn}, ${veileder.fornavn}`}</span>
-    //                 <Flatknapp
-    //                     className="fjern--knapp"
-    //                     htmlType="button"
-    //                     onClick={() => props.fjernValgtVeileder(veileder.ident)}>
-    //                     <FjernIkon/>
-    //                 </Flatknapp>
-    //             </div>
-    //         );
-    //     }
-    // }
-
     const sjekkTomListe = (veiledere) => {
         if (veiledere.length === 0) {
             return (
@@ -229,11 +207,9 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
                                             </Flatknapp>
                                         </div>
                                     );
-
                                 })}
                             </div>
-                        )
-                    }
+                        )}
                 </div>
             );
         }
