@@ -37,14 +37,16 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     return (
         <div>
-            {props.lagretFilter.map((veilederGruppe) =>
-                <VeilederGruppeRad
-                    veilederGruppe={veilederGruppe}
-                    valgtVeilederGruppe={valgtVeilederGruppe}
-                    onClickRedigerKnapp={() => props.setVeilederGruppeModal(true)}
-                    hanterVelgGruppe={(e) => hanterVelgGruppe(e.target.value)}
-                />
-            )}
+            <div className="veileder-gruppe__valgfelt">
+                {props.lagretFilter.map((veilederGruppe) =>
+                    <VeilederGruppeRad
+                        veilederGruppe={veilederGruppe}
+                        valgtVeilederGruppe={valgtVeilederGruppe}
+                        onClickRedigerKnapp={() => props.setVeilederGruppeModal(true)}
+                        hanterVelgGruppe={(e) => hanterVelgGruppe(e.target.value)}
+                    />
+                )}
+            </div>
             <div className="veileder-gruppe__knapperad">
                 <Hovedknapp mini onClick={velgGruppe}>
                     Velg
@@ -76,6 +78,7 @@ function VeilederGruppeRad({valgtVeilederGruppe, veilederGruppe, hanterVelgGrupp
     return (
         <div className="veileder-gruppe__rad">
             <Radio
+                className="veileder-gruppe__gruppenavn"
                 key={veilederGruppe.filterId}
                 name={`${veilederGruppe.filterNavn}-gruppe`}
                 label={veilederGruppe.filterNavn}

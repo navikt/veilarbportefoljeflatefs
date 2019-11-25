@@ -62,7 +62,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     };
 
     const lukkModal = () => {
-        if (harGjortEndringer) {
+        if (harGjortEndringer()) {
             setEndringerIkkeLagretModal(harGjortEndringer);
         } else {
             props.onRequestClose();
@@ -72,11 +72,12 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     const dispatch = useDispatch();
 
     const lagreModal = () => {
-        if (harGjortEndringer) {
+        if (harGjortEndringer()) {
+
             //lagre endringer og send toast hvis det gikk bra
             dispatch(visLagreEndringerToast());
-            props.onRequestClose();
         }
+            props.onRequestClose();
         // else {
         //ikke lagre endringer og send feilmodal om det gikk til helvete
         // }
