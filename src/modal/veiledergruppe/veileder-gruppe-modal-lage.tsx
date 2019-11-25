@@ -56,7 +56,6 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
         let harGjortEndringer;
         if (props.lagretFilter) {
             harGjortEndringer = (props.lagretFilter.filterNavn !== gruppeNavn) || (props.lagretFilter.filterValg !== filterValg);
-
         } else {
             harGjortEndringer = (filterValg !== initialState || gruppeNavn !== '');
         }
@@ -64,7 +63,6 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
             setEndringerIkkeLagretModal(harGjortEndringer);
         } else {
             props.onRequestClose();
-            props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
         }
     };
 
@@ -90,7 +88,13 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     function endringerIkkeLagretOgLukkModaler() {
         setEndringerIkkeLagretModal(false);
         props.onRequestClose();
-        props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+        if (props.lagretFilter) {
+            setFilterValg(props.lagretFilter.filterValg);
+            setGruppeNavn(props.lagretFilter.filterNavn);
+        } else {
+            setFilterValg(initialState);
+            setGruppeNavn('');
+        }
     }
 
     const slettModal = () => {
