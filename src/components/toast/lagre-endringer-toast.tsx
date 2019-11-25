@@ -33,7 +33,7 @@ function LagreEndringerToast(props: ToastType) {
     useEffect(() => {
         const timer = setTimeout(() => {
             handleClick();
-        }, 1000000000);
+        }, 10000);
         return () => clearTimeout(timer);
     });
 
