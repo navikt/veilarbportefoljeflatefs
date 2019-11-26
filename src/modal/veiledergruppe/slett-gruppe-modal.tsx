@@ -2,7 +2,6 @@ import React from 'react';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { AdvarselModal } from '../../components/advarselmodal/advarsel-modal';
-import hiddenIf from '../../components/hidden-if/hidden-if';
 
 interface SletteVeiledergruppeModal {
     isOpen: boolean;
@@ -49,4 +48,4 @@ function SletteVeiledergruppeModal(props: SletteVeiledergruppeModal) {
     );
 }
 
-export default hiddenIf(SletteVeiledergruppeModal);
+export default SletteVeiledergruppeModal;

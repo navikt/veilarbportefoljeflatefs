@@ -22,15 +22,15 @@ export const veilederGrupper = (veiledere: VeilederModell []) => {
             {filterNavn: 'Prinsess Gruppen', filterId: 13, filterValg: {...initialState, veiledere: veilederGruppe2}},
             {filterNavn: 'Hallo', filterId: 14, filterValg: {...initialState, veiledere: veilederGruppe3}},
             {filterNavn: 'På do', filterId: 15, filterValg: {...initialState, veiledere: veilederGruppe4}},
-            // {filterNavn: 'Et team som har et veldig, veldig, veldig, veldig, veldig, veldig langt navn', filterId: 16, filterValg: {...initialState, veiledere: veilederGruppe5}},
-            // {filterNavn: 'Prøver å finne maks an', filterId: 17, filterValg: {...initialState, veiledere: veilederGruppe6}},
-            // {filterNavn: 'Prinsess Gruppen', filterId: 18, filterValg: {...initialState, veiledere: veilederGruppe7}},
-            // {filterNavn: 'Prinsess Gruppen', filterId: 19, filterValg: {...initialState, veiledere: veilederGruppe8}},
-            // {filterNavn: 'Prinsess Gruppen', filterId: 20, filterValg: {...initialState, veiledere: veilederGruppe9}},
-            // {filterNavn: 'Prinsess Gruppen', filterId: 21, filterValg: {...initialState, veiledere: veilederGruppe10}},
-            // {filterNavn: 'Prinsess Gruppen', filterId: 22, filterValg: {...initialState, veiledere: veilederGruppe11}},
-            // {filterNavn: 'Prinsess Gruppen', filterId: 23, filterValg: {...initialState, veiledere: veilederGruppe12}},
-            // {filterNavn: 'Prinsess Gruppen', filterId: 24, filterValg: {...initialState, veiledere: veilederGruppe13}}
+            {filterNavn: 'Et team som har et veldig, veldig, veldig, veldig, veldig, veldig langt navn', filterId: 16, filterValg: {...initialState, veiledere: veilederGruppe5}},
+            {filterNavn: 'Prøver å finne maks an', filterId: 17, filterValg: {...initialState, veiledere: veilederGruppe6}},
+            {filterNavn: 'Prinsess Gruppen', filterId: 18, filterValg: {...initialState, veiledere: veilederGruppe7}},
+            {filterNavn: 'Prinsess Gruppen', filterId: 19, filterValg: {...initialState, veiledere: veilederGruppe8}},
+            {filterNavn: 'Prinsess Gruppen', filterId: 20, filterValg: {...initialState, veiledere: veilederGruppe9}},
+            {filterNavn: 'Prinsess Gruppen', filterId: 21, filterValg: {...initialState, veiledere: veilederGruppe10}},
+            {filterNavn: 'Prinsess Gruppen', filterId: 22, filterValg: {...initialState, veiledere: veilederGruppe11}},
+            {filterNavn: 'Prinsess Gruppen', filterId: 23, filterValg: {...initialState, veiledere: veilederGruppe12}},
+            {filterNavn: 'Prinsess Gruppen', filterId: 24, filterValg: {...initialState, veiledere: veilederGruppe13}}
 
         ] as LagretFilter []
     );

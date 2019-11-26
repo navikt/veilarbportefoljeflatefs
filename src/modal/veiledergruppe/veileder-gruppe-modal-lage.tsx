@@ -54,33 +54,50 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
 
     const harGjortEndringer = () => {
+        const redigertListe = filterValg.veiledere;
+        const initialstateNyListe = props.lagretFilter;
+        let initialstateListe;
+        // @ts-ignore
+        initialstateNyListe === undefined ? initialstateListe = [] : initialstateListe = props.lagretFilter.filterValg.veiledere;
+
+        //rediger gruppe
         if (props.lagretFilter) {
-            return (props.lagretFilter.filterNavn !== gruppeNavn) || (props.lagretFilter.filterValg !== filterValg);
-        } else {
-            return (filterValg !== initialState || gruppeNavn !== '');
+            // @ts-ignore
+            if (redigertListe.length !== initialstateListe.length || gruppeNavn !== initialstateNyListe.filterNavn) {
+                return true;
+            }
+            // @ts-ignore
+            return initialstateListe.reduce((acc, currValue) => {
+                // @ts-ignore
+                return acc && redigertListe.includes(currValue);
+            }, true) === false;
         }
+
+        //ny gruppe
+        // @ts-ignore
+        return (redigertListe.length > 0 || gruppeNavn !== '');
     };
 
     const lukkModal = () => {
         if (harGjortEndringer()) {
-            setEndringerIkkeLagretModal(harGjortEndringer);
-        } else {
-            props.onRequestClose();
+            setEndringerIkkeLagretModal(harGjortEndringer());
+            return;
         }
+        return props.onRequestClose();
     };
 
     const dispatch = useDispatch();
 
     const lagreModal = () => {
         if (harGjortEndringer()) {
-
             //lagre endringer og send toast hvis det gikk bra
             dispatch(visLagreEndringerToast());
+            props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+        } else {
+            //ikke lagre endringer og send feilmodal
+            console.log('her skjedde det noe rart');
         }
-            props.onRequestClose();
-        // else {
-        //ikke lagre endringer og send feilmodal om det gikk til helvete
-        // }
+        props.onRequestClose();
     };
 
     function slettVeiledergruppeOgLukkModaler() {
@@ -229,8 +246,3 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
 }
 
 export default VeilederGruppeModalLage;
-
-
-
-
-

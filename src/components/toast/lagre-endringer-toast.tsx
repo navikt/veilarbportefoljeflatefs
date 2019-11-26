@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './toast.less';
 import AlertStripeSuksess from 'nav-frontend-alertstriper/lib/suksess-alertstripe';
-import { logEvent } from '../../utils/frontend-logger';
 import { useDispatch } from 'react-redux';
 import { useTimer } from '../../hooks/use-timer';
 import { fjernLagreEndringerToast } from '../../store/toast/actions';
@@ -12,17 +11,11 @@ export interface ToastType {
 
 function LagreEndringerToast(props: ToastType) {
     const toastRef = useRef<HTMLSpanElement>(null);
-    const {startTimer, stoppTimer} = useTimer();
+    const {startTimer} = useTimer();
 
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        const tidBrukt = stoppTimer();
-        logEvent('veilarbportefoljeflatefs.metrikker.lukk-toast-lagre-endringer', {
-                feature: 'toast-lagre-endringer',
-                tidBrukt,
-            }
-        );
         dispatch(fjernLagreEndringerToast());
     };
 

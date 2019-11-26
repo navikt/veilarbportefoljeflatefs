@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {ToastActionType} from '../../store/toast/actions';
+import { connect } from 'react-redux';
+import { ToastActionType } from '../../store/toast/actions';
 import hiddenIf from '../hidden-if/hidden-if';
 import { AppState } from '../../reducer';
 import LagreEndringerToast from './lagre-endringer-toast';
@@ -16,8 +16,7 @@ function Toasts({toasts}: StateProps) {
                 switch (toast) {
                     case ToastActionType.VIS_LAGRE_ENDRINGER_TOAST:
                         // @ts-ignore
-                        return <LagreEndringerToast key={index}
-                        />;
+                        return <LagreEndringerToast key={index}/>;
                     default:
                         return null;
                 }

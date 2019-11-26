@@ -2,7 +2,6 @@ import React from 'react';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { AdvarselModal } from '../../components/advarselmodal/advarsel-modal';
-import hiddenIf from '../../components/hidden-if/hidden-if';
 
 interface EndringerIkkeLagretModal {
     isOpen: boolean;
@@ -46,4 +45,4 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
     );
 }
 
-export default hiddenIf(EndringerIkkeLagretModal);
+export default EndringerIkkeLagretModal;
