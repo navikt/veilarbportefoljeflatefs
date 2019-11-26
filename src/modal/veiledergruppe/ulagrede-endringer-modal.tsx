@@ -23,6 +23,14 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
             </Innholdstittel>
             <div className="endringer-ikke-lagret-modal__knappegruppe">
                 <Hovedknapp
+                    className="endringer-ikke-lagret-modal__knappegruppe__redigering"
+                    mini
+                    htmlType="button"
+                    onClick={props.onRequestClose}
+                >
+                    Gå tilbake til redigering
+                </Hovedknapp>
+                <Flatknapp
                     className="endringer-ikke-lagret-modal__knappegruppe__avbryt"
                     mini
                     htmlType="submit"
@@ -31,14 +39,6 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
                     }}
                 >
                     Avbryt uten å lagre
-                </Hovedknapp>
-                <Flatknapp
-                    className="endringer-ikke-lagret-modal__knappegruppe__redigering"
-                    mini
-                    htmlType="button"
-                    onClick={props.onRequestClose}
-                >
-                    Gå tilbake til redigering
                 </Flatknapp>
             </div>
         </AdvarselModal>
