@@ -41,6 +41,7 @@ function TourModal(props: TourModalProps) {
     };
 
     const steps = getTour(props.modalName);
+    if(!steps) return  null;
     const step = steps[stepIndex];
     const isFinalStep = stepIndex === steps.length - 1;
 
