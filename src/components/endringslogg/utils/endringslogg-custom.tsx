@@ -17,8 +17,8 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '27. NOV. 2019',
-        versjonId: '27.11.19',
+        dato: '28. NOV. 2019',
+        versjonId: '28.11.19',
         tittel: 'Ny etikett: “Ikke registrert i KRR”',
         tekst: 'Brukere som ikke har oppdatert eller bekreftet kontaktinformasjon de siste 18 månedene i Kontakt-' +
             ' og reservasjonsregisteret (KRR) vises nå med etiketten “Ikke registrert KRR”. Disse brukerne kan ikke varsles fordi de ikke har registrert kontaktinformasjon.'
