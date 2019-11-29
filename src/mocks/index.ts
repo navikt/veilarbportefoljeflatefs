@@ -59,11 +59,11 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 
 //veiledergrupper
 (mock as any).get('/veilarbfilter/api/enhet/1234/', respondWith(veilederGrupper(veiledere.veilederListe)));
-(mock as any).post('/veilarbfilter/api/enhet/', respondWith((url, config, {bodyParams}) => {
+(mock as any).post('/veilarbfilter/api/enhet/1234', respondWith((url, config, {bodyParams}) => {
     const filterId = Math.floor(Math.random() * 100) + 50;
     return {...bodyParams, filterId};
 }));
-(mock as any).put('/veilarbfilter/api/enhet/', respondWith((url, config, {bodyParams}) => bodyParams));
+(mock as any).put('/veilarbfilter/api/enhet/1234', respondWith((url, config, {bodyParams}) => bodyParams));
 (mock as any).delete('/veilarbfilter/api/enhet/1234/filter/12', respondWith(() => ({status: 204})));
 
 // veileder-api

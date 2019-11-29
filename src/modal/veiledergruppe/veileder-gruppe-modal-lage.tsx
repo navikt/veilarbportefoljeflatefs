@@ -114,12 +114,11 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                     filterNavn: gruppeNavn,
                     filterValg,
                     filterId: props.lagretFilter.filterId,
-                    enhetId
                 };
-                dispatch(lagreEndringer(endringer));
+                dispatch(lagreEndringer(endringer,enhetId));
             } else {
-                const endringer: NyGruppe = {filterNavn: gruppeNavn, filterValg, enhetId};
-                dispatch(lageNyGruppe(endringer));
+                const endringer: NyGruppe = {filterNavn: gruppeNavn, filterValg};
+                dispatch(lageNyGruppe(endringer, enhetId));
             }
 
             dispatch(visLagreEndringerToast());

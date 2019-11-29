@@ -72,7 +72,6 @@ export function hentEnhetsVeiledere(enhetId) {
 
 export function hentEnhetsFilterGrupper(enhetId) {
     const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/`;
-    console.log("url", url);
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
@@ -89,14 +88,14 @@ export function tilordneVeileder(tilordninger) {
         .then(sjekkStatuskode);
 }
 
-export function redigerVeiledergruppe(endringer: RedigerGruppe): Promise<RedigerGruppe> {
-    const url = `${VEILARBFILTER_URL}/enhet/`;
+export function redigerVeiledergruppe(endringer: RedigerGruppe, enhetId: string): Promise<RedigerGruppe> {
+    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
     const config = { ...MED_CREDENTIALS, method: 'put', body: JSON.stringify(endringer) };
     return fetchToJson(url, config);
 }
 
-export function nyVeiledergruppe(endringer: NyGruppe): Promise<NyGruppe> {
-    const url = `${VEILARBFILTER_URL}/enhet/`;
+export function nyVeiledergruppe(endringer: NyGruppe, enhetId: string): Promise<NyGruppe> {
+    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(endringer) };
     return fetchToJson(url, config);
 }

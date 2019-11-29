@@ -35,7 +35,9 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(hentLagretFilterForEnhet(valgtEnhet));
+        if(harVeilederGruppeFeature) {
+            dispatch(hentLagretFilterForEnhet(valgtEnhet));
+        }
     }, [dispatch, valgtEnhet, harVeilederGruppeFeature]);
 
     return (

@@ -40,13 +40,11 @@ export interface RedigerGruppe {
     filterNavn: string;
     filterValg: FiltervalgModell;
     filterId: number;
-    enhetId: string;
 }
 
 export interface NyGruppe {
     filterNavn: string;
     filterValg: FiltervalgModell;
-    enhetId: string;
 }
 
 enum VeilederGruppeError {
@@ -114,8 +112,8 @@ export function hentLagretFilterForEnhet(enhetId) {
 }
 
 // Action Creators
-export function lagreEndringer(endringer: RedigerGruppe) {
-    return doThenDispatch(() => redigerVeiledergruppe(endringer), {
+export function lagreEndringer(endringer: RedigerGruppe, enhetId: string) {
+    return doThenDispatch(() => redigerVeiledergruppe(endringer, enhetId), {
         OK: REDIGER_VEILEDERGRUPPER_OK,
         FEILET: REDIGER_VEILEDERGRUPPER_FEILET,
         PENDING: REDIGER_VEILEDERGRUPPER_PENDING
@@ -123,8 +121,8 @@ export function lagreEndringer(endringer: RedigerGruppe) {
 }
 
 // Action Creators
-export function lageNyGruppe(endringer: NyGruppe) {
-    return doThenDispatch(() => nyVeiledergruppe(endringer), {
+export function lageNyGruppe(endringer: NyGruppe, enhetId: string) {
+    return doThenDispatch(() => nyVeiledergruppe(endringer, enhetId), {
         OK: NY_VEILEDERGRUPPER_OK,
         FEILET: NY_VEILEDERGRUPPER_FEILET,
         PENDING: NY_VEILEDERGRUPPER_PENDING
