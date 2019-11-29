@@ -52,6 +52,8 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
                     Velg
                 </Hovedknapp>
                 <LeggTilKnapp onClick={() => {
+                    //må fikses: hvis denne er valgtVeilederGruppe: hvis en gruppe er valgt, så trykker man "ny gruppe" blir den valgte gruppen valgt her.
+                    //gruppen som er valgt skal stå som valgt i listen, men ny gruppe skal være tom
                     setValgtVeilederGruppe(undefined);
                     props.setVeilederGruppeModal(true);
                 }}/>

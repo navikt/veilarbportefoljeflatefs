@@ -1,4 +1,4 @@
-import {FiltreringAktiviteterValg} from "./ducks/filtrering";
+import { FiltreringAktiviteterValg } from './ducks/filtrering';
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -80,12 +80,6 @@ export interface VeilederModell {
     navn: string;
     fornavn: string;
     etternavn: string;
-}
-
-export interface VeilederGruppe {
-    gruppeNavn: string;
-    gruppeId: string;
-    veileder : string[];
 }
 
 export enum VurderingsBehov {
@@ -185,5 +179,5 @@ export enum Status {
 export interface ArbeidslisteDataModell {
     fnr: string;
     kommentar: string;
-    frist: string|null;
+    frist: string | null;
 }

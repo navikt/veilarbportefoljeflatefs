@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
 import { PortefoljeData } from '../ducks/portefolje';
+import { NyGruppe, RedigerGruppe } from '../ducks/lagret-filter';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -86,6 +87,24 @@ export function tilordneVeileder(tilordninger) {
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(tilordninger) };
     return fetch(url, config)
         .then(sjekkStatuskode);
+}
+
+export function redigerVeiledergruppe(endringer: RedigerGruppe): Promise<RedigerGruppe> {
+    const url = `${VEILARBFILTER_URL}/enhet/`;
+    const config = { ...MED_CREDENTIALS, method: 'put', body: JSON.stringify(endringer) };
+    return fetchToJson(url, config);
+}
+
+export function nyVeiledergruppe(endringer: NyGruppe): Promise<NyGruppe> {
+    const url = `${VEILARBFILTER_URL}/enhet/`;
+    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(endringer) };
+    return fetchToJson(url, config);
+}
+
+export function slettVeiledergruppe(enhetId:string, filterId: number): Promise<number> {
+    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/filter/${filterId}`;
+    const config = { ...MED_CREDENTIALS, method: 'delete'};
+    return fetch(url, config).then(sjekkStatuskode).then(_ => Promise.resolve(filterId));
 }
 
 export function hentStatusTall(enhetId) {
