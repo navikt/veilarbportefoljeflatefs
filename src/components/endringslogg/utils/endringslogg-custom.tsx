@@ -17,6 +17,12 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '29. NOV. 2019',
+        versjonId: '29.11.19',
+        tittel: 'Historikk på oppfølgingsenhet',
+        tekst: 'Historikken i Veilederverktøy (tannhjulet) viser nå også brukers oppfølgingsenhet. Ved lansering av denne funksjonen har vi lagt inn gjeldende oppfølgingsenhet med datoen 28. nov. 2019.'
+    },
+    {
         dato: '28. NOV. 2019',
         versjonId: '28.11.19',
         tittel: 'Ny etikett: “Ikke registrert i KRR”',
