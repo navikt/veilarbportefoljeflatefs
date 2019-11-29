@@ -1,18 +1,29 @@
 import * as React from 'react';
-import { nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker, aapRettighetsperiode } from '../utils/utils';
+import {
+    aapRettighetsperiode,
+    nesteUtlopsdatoEllerNull,
+    utledValgteAktivitetsTyper,
+    utlopsdatoUker
+} from '../utils/utils';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
-    I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER, VENTER_PA_SVAR_FRA_NAV,
-    ytelsevalg, ytelseAapSortering, MOTER_IDAG
+    I_AVTALT_AKTIVITET,
+    MIN_ARBEIDSLISTE,
+    MOTER_IDAG,
+    UTLOPTE_AKTIVITETER,
+    VENTER_PA_SVAR_FRA_BRUKER,
+    VENTER_PA_SVAR_FRA_NAV,
+    ytelseAapSortering,
+    ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
+import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 
 interface MinOversiktKolonnerProps {
@@ -38,22 +49,31 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
+    const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
+    const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
+    const iAvtaltAktivitet = (!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET));
+    const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : !!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}  skalJusteres={skalJusteres}/>
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} skalJusteres={skalJusteres}/>
             <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <DatoKolonne
                 className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
+            />
+            <DatoKolonne
+                className="col col-xs-2"
                 dato={arbeidslisteFrist}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)}
             />
             <ArbeidslisteOverskrift
                 className="col col-xs-2"
                 bruker={bruker}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -80,9 +100,15 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             />
             <UkeKolonne
                 className="col col-xs-2"
+                ukerIgjen={utlopsdatoUkerIgjen}
+                minVal={2}
+                skalVises={ytelseAapVedtaksperiodeErValgtKolonne && erAapYtelse}
+            />
+            <UkeKolonne
+                className="col col-xs-2"
                 ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && erAapYtelse}
+                skalVises={ytelseAapRettighetsperiodeErValgtKolonne && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -103,18 +129,17 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <TidKolonne
                 className="col col-xs-2"
                 dato={moteStartTid}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
             />
             <VarighetKolonne
                 className="col col-xs-2"
                 dato={varighet}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || null)}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
+                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
+                skalVises={iAvtaltAktivitet}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -124,8 +149,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={!!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 &&
-                valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
+                skalVises={avtaltAktivitetOgTiltak}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -148,5 +172,4 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
         </div>
     );
 }
-
 export default MinoversiktDatokolonner;

@@ -11,6 +11,7 @@ export enum Sorteringsfelt {
     VALGTE_AKTIVITETER = 'valgteaktiviteter',
     ETTERNAVN = 'etternavn',
     FODSELSNUMMER = 'fodselsnummer',
+    OPPFOLGINGSTARTET = 'oppfolging_startdato',
     UTLOPSDATO = 'utlopsdato',
     DAGPENGER_UTLOP_UKE = 'dagputlopuke',
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
@@ -27,11 +28,13 @@ export enum Sorteringsfelt {
     FORRIGE_DATO_FOR_AVTALT_AKTIVITET = 'forrige_aktivitet_start',
     AAP_RETTIGHETSPERIODE = 'aaprettighetsperiode',
     NAVIDENT = 'veileder_id',
+    VEILEDER = 'veileder_navn',
     MOTER_IDAG = 'moterMedNAVIdag',
 }
 
 export enum EtikettType {
     NYBRUKER = 'nybruker',
+    UFORDELTBRUKER = 'ufordeltbruker',
     EGEN_ANSATT = 'egen-ansatt',
     DISKRESJONSKODE = 'diskresjonskode',
     SIKKERHETSTILTAK = 'sikkerhetstiltak',
@@ -92,6 +95,7 @@ export interface BrukerModell {
     guid: string;
     fornavn: string;
     etternavn: string;
+    oppfolgingStartdato: string; // dato
     veilederId?: string;
     sikkerhetstiltak: string[];
     diskresjonskode?: string;

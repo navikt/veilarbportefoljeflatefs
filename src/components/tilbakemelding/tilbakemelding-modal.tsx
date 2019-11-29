@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { Textarea } from 'nav-frontend-skjema';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import TilfredshetValg from './tilfredshet-valg';
@@ -50,39 +50,30 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
             this.setState({kommentar: value});
         }
 
-    }
+    };
 
     handleFormSubmitted = () => {
         const {tilfredshet, kommentar} = this.state;
         this.setState({harSendt: true});
         this.props.onTilbakemeldingSendt({tilfredshet, kommentar});
-    }
+    };
 
     handleTilfredshetChanged = (tilfredshet: number) => {
         this.setState({tilfredshet});
-    }
-
-    handleIkkeVisIgjenClicked = () => {
-        this.setState({harSendt: true, ikkeVisIgjen: true});
-        this.props.onIkkeVisIgjen();
-    }
+    };
 
     renderForm = () => {
 
         const {tilfredshet, kommentar} = this.state;
         const harBesvartTilfredshet = tilfredshet > 0;
-
+        const styleBottom = {marginBottom: '1rem'};
         return (
             <div>
                 <Innholdstittel className="blokk-xxs tilbakemelding-modal__tittel">
                     Tilbakemelding
                 </Innholdstittel>
-                <Normaltekst className="tilbakemelding-modal__ingress">
-                    Dere har fått en ny knapp øverst i høyre hjørne på denne siden.
-                    <br/><br/>
-                    Knappen åpner en liste med informasjon om hva som er nytt i systemet.
-                    <br/><br/>
-                    Hvordan synes du denne listen fungerer som en oversikt for systemendringer?
+                <Normaltekst style={styleBottom} className="tilbakemelding-modal__ingress">
+                    Vi har nylig lagt til en ny kolonne, "oppfølging startet", i oversikten. Hva synes du?
                 </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
                     <TilfredshetValg
@@ -90,17 +81,13 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         onTilfredshetChanged={this.handleTilfredshetChanged}
                         defaultTilfredshet={tilfredshet}
                     />
-                    {!harBesvartTilfredshet &&
-                    <Knapp mini={true} onClick={this.handleIkkeVisIgjenClicked}>
-                        Ikke vis dette igjen
-                    </Knapp>}
                 </div>
                 {harBesvartTilfredshet && (
                     <form className="tilbakemelding-modal__ekspander" onSubmit={this.handleFormSubmitted}>
                         <div className="tilbakemelding-modal__kommentar">
                             <Textarea
                                 className="tilbakemelding-modal__kommentar-felt"
-                                label="Si gjerne litt mer om dette."
+                                label='Fortell gjerne mer om hvordan du bruker "oppfølging starter", og om det er annen informasjon du savner.'
                                 rows={this.KOMMENTAR_ROWS}
                                 maxLength={this.KOMMENTAR_MAX_CHAR}
                                 value={kommentar}
@@ -114,7 +101,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                 )}
             </div>
         );
-    }
+    };
 
     renderTakkMelding = () => {
         return (
@@ -130,7 +117,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                 </Element>
             </div>
         );
-    }
+    };
 
     componentDidUpdate(prevProps: TilbakemeldingModalProps) {
         if (prevProps.open && !this.state.harBlittVist) {

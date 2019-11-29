@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { AppState } from '../../reducer';
-import { selectMuligeAlternativer, selectValgteAlternativer, getMuligeKolonner } from './listevisning-selectors';
+import { getMuligeKolonner } from './listevisning-selectors';
 import { ToolbarPosisjon } from '../../components/toolbar/toolbar';
 
 export enum ActionTypeKeys {
@@ -20,17 +20,23 @@ export enum Veilederpaginering {
 export enum Kolonne {
     BRUKER = 'bruker',
     FODSELSNR = 'fodselsnr',
+    OPPFOLGINGSTARTET = 'oppfolgingstartet',
     VEILEDER = 'veileder',
     NAVIDENT = 'navident',
     UTLOPTE_AKTIVITETER = 'utlopteaktiviteter',
     AVTALT_AKTIVITET = 'avtaltaktivitet',
     VENTER_SVAR = 'ventersvar',
     UTLOP_YTELSE = 'utlopytelse',
+    VEDTAKSPERIODE = 'vedtaksperiode',
+    RETTIGHETSPERIODE = 'rettighetsperiode',
     UTLOP_AKTIVITET = 'utlopaktivitet',
     START_DATO_AKTIVITET = 'aktivitet_start',
     NESTE_START_DATO_AKTIVITET = 'neste_aktivitet_start',
     FORRIGE_START_DATO_AKTIVITET = 'forrige_aktivitet_start',
     MOTER_IDAG = 'moterMedNavIdag',
+    MOTER_VARIGHET = 'moter_varighet',
+    ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
+    ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
 }
 
 export enum ListevisningType {
@@ -70,8 +76,8 @@ export interface ListevisningState {
 }
 
 export const initialStateEnhetensOversikt: ListevisningState = {
-    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.NAVIDENT, Kolonne.VEILEDER],
-    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR, Kolonne.NAVIDENT, Kolonne.VEILEDER],
+    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR],
+    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR],
     lukketInfopanel: false
 };
 
@@ -113,8 +119,6 @@ export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.
 
 export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction, AppState>, getState: () => AppState, name: ListevisningType) => {
     const appState = getState();
-    const muligeAlternativer = selectMuligeAlternativer(appState, name);
-    const valgteAlternativer = selectValgteAlternativer(appState, name);
     const nyeMuligeAlternativer = getMuligeKolonner(appState, name);
 
     dispatch({
@@ -122,6 +126,7 @@ export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningActi
         kolonner: nyeMuligeAlternativer,
         name
     });
+
 
     if (nyeMuligeAlternativer.length <= 5) {
         dispatch({
@@ -133,10 +138,7 @@ export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningActi
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
             name,
-            kolonner: valgteAlternativer
-                .filter((alternativ) => nyeMuligeAlternativer.includes(alternativ))
-                .concat(nyeMuligeAlternativer.filter((alternativ) => !muligeAlternativer.includes(alternativ)))
-                .slice(0, 5)
+            kolonner: nyeMuligeAlternativer.slice(0, 5)
         });
     }
 };

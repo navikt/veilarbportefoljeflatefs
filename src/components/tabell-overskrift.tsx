@@ -17,7 +17,7 @@ function TabellOverskrift({ fraIndex, antallIVisning, antallTotalt, visDiagram, 
 
     const tekst = visDiagram
         ? `Totalt ${antallTotalt} brukere.`
-        :  `Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere.`;
+        :  `Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere. `;
 
     const antallValgteBrukere = tekstValgteBrukere (antallValgt);
 

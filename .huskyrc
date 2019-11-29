@@ -1,0 +1,6 @@
+"husky": {
+    "hooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "node commit-message-checker.js"
+    }
+}

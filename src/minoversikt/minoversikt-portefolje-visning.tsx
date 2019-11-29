@@ -117,7 +117,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                 posisjon={posisjon}
             />
         );
-    }
+    };
 
     render() {
         const {
@@ -170,7 +170,8 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"
-                        infotekstTekst="Tilordning av veileder til følgende brukere feilet:"
+                        infotekstTekst="Tildeling av veileder til følgende bruker feilet:"
+                        merInfoTekst="Det kan skyldes manglende tilgang på bruker, eller at veilederen allerede er tildelt bruker."
                     />
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === LEGG_TIL_ARBEIDSLISTE_FEILET}
@@ -178,7 +179,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"
                         infotekstTekst="Kunne ikke opprette arbeidsliste for følgende brukere:"
-
                     />
                     <FeilmeldingBrukereModal
                         isOpen={feilmeldingModal.aarsak === FJERN_FRA_ARBEIDSLISTE_FEILET}
@@ -186,7 +186,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"
                         infotekstTekst="Kunne ikke slette arbeidsliste for følgende brukere:"
-
                     />
                     <ServerFeilModal
                         isOpen={serverfeilModalSkalVises}
@@ -196,7 +195,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             </div>
         );
     }
-
 }
 
 const mapStateToProps = (state) => ({

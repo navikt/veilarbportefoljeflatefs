@@ -9,7 +9,8 @@ import './tour-modal.less';
 export enum ModalName {
     LAST_NED_CV = 'TOUR_MODAL-LAST_NED_CV',
     MOTE_FILTER = 'TOUR_MODAL-MOTE_FILTER',
-    FLYTTE_FILTER = 'TOUR_MODAL-FLYTTE_FILTER'
+    FLYTTE_FILTER = 'TOUR_MODAL-FLYTTE_FILTER',
+    NY_KOLONNE = 'TOUR_MODAL-NY_KOLONNE'
 }
 
 export interface Step {
@@ -40,6 +41,7 @@ function TourModal(props: TourModalProps) {
     };
 
     const steps = getTour(props.modalName);
+    if(!steps) return  null;
     const step = steps[stepIndex];
     const isFinalStep = stepIndex === steps.length - 1;
 

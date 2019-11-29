@@ -1,8 +1,11 @@
 import moment from 'moment';
+import {Maybe} from "./types";
 
 export function fn(value) {
     return typeof value === 'function' ? value : () => value;
 }
+
+
 
 export function autobind(ctx) {
     Object.getOwnPropertyNames(ctx.constructor.prototype)
@@ -51,23 +54,28 @@ export const erGyldigDato = (dato) => {
     return erGyldigDatoformat(dato);
 };
 
-const erLocalDate = (dato) => dato.year && dato.monthValue && dato.dayOfMonth;
+function erLocalDate(dato): boolean {
+    return dato.year && dato.monthValue && dato.dayOfMonth;
+}
 
-export const toDate = (dato) => {
+export function toDate(dato): Maybe<Date> {
     if (typeof dato === 'undefined' || dato === null) {
         return null;
     }
     return erLocalDate(dato)
         ? new Date(dato.year, dato.monthValue - 1, dato.dayOfMonth)
         : new Date(dato);
-};
+}
 
-export const toDatePrettyPrint = (dato) => {
+export function toDatePrettyPrint(dato): Maybe<string> {
     if (typeof dato === 'undefined' || dato === null) {
         return null;
     }
 
     const date = toDate(dato);
+    if (!date) {
+        return null
+    }
 
     const days = date.getDate() < 10
         ? `0${date.getDate()}`
@@ -147,18 +155,17 @@ export function dateGreater(date1, date2) {
     return year1 === year2 && mon1 === mon2 && day1 > day2;
 }
 
-
 export function klokkeslettTilMinutter(klokkeSlett) {
     const tilMoment = moment(klokkeSlett);
     return (tilMoment.get('hours') * 60) + tilMoment.get('minutes');
 }
 
-export function minuttDifferanse (klokkeslett2, klokkeslett1) {
+export function minuttDifferanse(klokkeslett2, klokkeslett1) {
     return moment.duration(moment(klokkeslett2).diff(klokkeslett1)).asMinutes()
 }
 
 export function validerDatoField(input, intl, alternativer, valgfritt) {
-    const { fra } = alternativer;
+    const {fra} = alternativer;
     const inputDato = moment(input);
 
     const fraDato = moment(fra);
@@ -189,7 +196,6 @@ export function validerDatoField(input, intl, alternativer, valgfritt) {
 }
 
 
-
 export function validerDatoFeldt(input, fra, valgfritt) {
     let error;
     const inputDato = moment(input);
@@ -207,4 +213,16 @@ export function validerDatoFeldt(input, fra, valgfritt) {
         error = 'Fristen må være i dag eller senere'
     }
     return error;
+}
+
+export function oppfolgingStartetDato(dato: string): Maybe<Date> {
+
+    if (!dato) {
+        return null;
+    }
+
+    const oppfolgingStartetDato = new Date(dato);
+    const tidligsteDato = new Date('2017-12-04');
+
+    return oppfolgingStartetDato < tidligsteDato ? tidligsteDato : oppfolgingStartetDato
 }

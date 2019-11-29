@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import NavFrontendModal from 'nav-frontend-modal';
-import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
-import { skjulModal } from '../../ducks/modal';
-import { markerAlleBrukere } from '../../ducks/portefolje';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
+import {skjulModal} from '../ducks/modal';
+import {markerAlleBrukere} from '../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
-import { BrukerModell } from '../../model-interfaces';
-import { AdvarselModal } from '../../components/advarselmodal/advarsel-modal';
+import {BrukerModell} from '../model-interfaces';
+import {VarselModal, VarselModalType} from '../components/varselmodal/varselmodal';
 
 interface ArbeidslisteModalProps {
     isOpen: boolean;
@@ -58,7 +58,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
     leggTilModal(valgteBrukere: BrukerModell[]) {
         return (
             <NavFrontendModal
-                className={'arbeidsliste-modal'}
+                className='arbeidsliste-modal'
                 contentLabel="arbeidsliste"
                 isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
@@ -91,10 +91,11 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
         const brukereSomSkalFjernes = valgteBrukere.filter((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
 
         return (
-            <AdvarselModal
+            <VarselModal
                 isOpen={this.state.isOpen}
                 onRequestClose={this.lukkModal}
                 contentLabel="Fjern brukere fra arbeidsliste"
+                type={VarselModalType.ADVARSEL}
             >
                 <div className="fjern-arbeidsliste">
                     <div className="arbeidsliste-headertekst">
@@ -110,7 +111,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
                         lukkModal={this.lukkModal}
                     />
                 </div>
-            </AdvarselModal>
+            </VarselModal>
         );
     }
 

@@ -12,6 +12,7 @@ import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
 import { API_BASE_URL, FEATURE_URL } from '../middleware/api';
 import { endringsloggListe } from './endringslogg';
+import * as faker from 'faker/locale/nb_NO';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, enheter.enhetliste[0].enhetId, alleBrukere);
@@ -37,6 +38,8 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
                 bruker.kjonn = '';
                 bruker.fodselsdato = null;
                 bruker.diskresjonskode = Math.random() < 0.5 ? '6' : '7';
+                bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
+
             }
             return bruker;
         });
