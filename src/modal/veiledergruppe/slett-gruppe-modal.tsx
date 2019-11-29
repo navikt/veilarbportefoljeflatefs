@@ -1,7 +1,7 @@
 import React from 'react';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { AdvarselModal } from '../../components/advarselmodal/advarsel-modal';
+import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
+import {VarselModal, VarselModalType} from '../../components/varselmodal/varselmodal';
 
 interface SletteVeiledergruppeModal {
     isOpen: boolean;
@@ -11,11 +11,12 @@ interface SletteVeiledergruppeModal {
 
 function SletteVeiledergruppeModal(props: SletteVeiledergruppeModal) {
     return (
-        <AdvarselModal
+        <VarselModal
             contentLabel="Slette veiledergruppe"
             isOpen={props.isOpen}
             onRequestClose={props.onRequestClose}
             className="slette-veiledergruppe-modal"
+            type={VarselModalType.ADVARSEL}
         >
             <div className="blokk-s slette-veiledergruppe-modal__tekstgruppe">
                 <Innholdstittel className="blokk-s">
@@ -44,7 +45,7 @@ function SletteVeiledergruppeModal(props: SletteVeiledergruppeModal) {
                     Avbryt
                 </Flatknapp>
             </div>
-        </AdvarselModal>
+        </VarselModal>
     );
 }
 

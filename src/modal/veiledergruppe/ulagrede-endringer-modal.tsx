@@ -1,7 +1,7 @@
 import React from 'react';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import { AdvarselModal } from '../../components/advarselmodal/advarsel-modal';
+import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
+import {Innholdstittel} from 'nav-frontend-typografi';
+import {VarselModal, VarselModalType} from '../../components/varselmodal/varselmodal';
 
 interface EndringerIkkeLagretModal {
     isOpen: boolean;
@@ -12,11 +12,12 @@ interface EndringerIkkeLagretModal {
 function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
 
     return (
-        <AdvarselModal
+        <VarselModal
             contentLabel="Endringene er ikke lagret"
             isOpen={props.isOpen}
             onRequestClose={props.onRequestClose}
             className="endringer-ikke-lagret-modal"
+            type={VarselModalType.ADVARSEL}
         >
             <Innholdstittel className="blokk-s endringer-ikke-lagret-modal__innholdstittel">
                 Endringene er ikke lagret
@@ -41,7 +42,7 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
                     Avbryt uten å lagre
                 </Flatknapp>
             </div>
-        </AdvarselModal>
+        </VarselModal>
     );
 }
 
