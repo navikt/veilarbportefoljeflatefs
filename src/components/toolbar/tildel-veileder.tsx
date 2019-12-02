@@ -47,7 +47,7 @@ function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere }: Ti
                     placeholder="Tildel veileder"
                     data={veiledere.data.veilederListe}
                 >
-                    {data => <TildelVeilederRenderer onSubmit={onSubmit} /> }
+                    {data => <TildelVeilederRenderer data={data} onSubmit={onSubmit} /> }
                 </SokFilterNy>
             }
         />
