@@ -17,8 +17,9 @@ import {
 } from '../../../ducks/lagret-filter';
 import { initialState } from '../../../ducks/filtrering';
 import SokVeiledere from '../../sok-veiledere/sok-veiledere';
-import SletteVeiledergruppeModal from './slett-gruppe-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
+import SletteVeiledergruppeModal from './slett-gruppe-modal';
+import SlettingFeiletModal from './sletting-feilet-modal';
 import hiddenIf from '../../hidden-if/hidden-if';
 import { visLagreEndringerToast, visSletteGruppeToast } from '../../../store/toast/actions';
 import { useEnhetIdSelector } from '../../../hooks/redux/use-enhetid-selector';
@@ -36,12 +37,17 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
 
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
+    const [visSlettingFeiletModal, setSlettingFeiletModal] = useState(false);
+
+    const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
 
     const enhetId = useEnhetIdSelector();
 
     const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) => prevState.veiledere
         ? {...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}
         : {...prevState, veiledere: []};
+
+    let veiledergruppeListe = [];
 
     const hanterChange = (event) => {
         const veilederTarget = event.target.value;
@@ -60,6 +66,13 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
         setFilterValg(props.lagretFilter ? props.lagretFilter.filterValg : initialState);
         setGruppeNavn(props.lagretFilter ? props.lagretFilter.filterNavn : '');
     }, [props.lagretFilter]);
+
+    useEffect(() => {
+        for (let i = 0; i < lagretFilterState.data.length; i++) {
+            // @ts-ignore
+            veiledergruppeListe.push(lagretFilterState.data[i].filterNavn);
+        }
+    },);
 
     const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
 
@@ -94,53 +107,46 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
         return props.onRequestClose();
     };
 
-    // const sjekkBruktGruppenavn = () => {
-    //     //     //hent listen med eksisterende gruppenavn
-    //     //     //sjekk det nye gruppenavnet opp mot listen
-    //     // };
-
-    const valideringSkjema = () => {
+    const validerGruppenavn = () => {
         if (gruppeNavn === '') {
             return 'Gruppenavn kan ikke være tomt';
-            // } else if(sjekkBruktGruppenavn()) {
-            //     return "Gruppenavn finnes allerede"
-            // @ts-ignore
-        } else if (filterValg.veiledere.length === 0) {
-            return 'Du må velge minst to veiledere';
         }
-        // hvis true, er gruppenavnet enten tomt eller likt som et annet. send derfor verifisering her
-        console.log('gruppenavn: ', gruppeNavn);
+        for (let i = 0; i < veiledergruppeListe.length; i++) {
+
+            if (gruppeNavn === veiledergruppeListe[i]) {
+                return 'Gruppenavn finnes allerede';
+            }
+        }
+        return '';
+    };
+
+    const valideringSkjema = () => {
+        // @ts-ignore
+        return (validerGruppenavn() || filterValg.veiledere.length === 0);
     };
 
     const lagreModal = () => {
         if (harGjortEndringer()) {
             // @ts-ignore
-            console.log('valgte veiledere: ', filterValg.veiledere.length);
-            // if (filterValg.veiledere.length === 0) {
-            //     console.log('ingen valgte veiledere');
-            // }
-            if (valideringSkjema()) {
-                // hvis true, feiler valideringen
+            // console.log('valgte veiledere: ', filterValg.veiledere.length);
+            valideringSkjema();
+            if (props.lagretFilter) {
+                const endringer: RedigerGruppe = {
+                    filterNavn: gruppeNavn,
+                    filterValg,
+                    filterId: props.lagretFilter.filterId,
+                };
+                dispatch(lagreEndringer(endringer, enhetId));
             } else {
-                if (props.lagretFilter) {
-                    const endringer: RedigerGruppe = {
-                        filterNavn: gruppeNavn,
-                        filterValg,
-                        filterId: props.lagretFilter.filterId,
-                    };
-                    dispatch(lagreEndringer(endringer, enhetId));
-                } else {
-                    const endringer: NyGruppe = {filterNavn: gruppeNavn, filterValg};
-                    dispatch(lageNyGruppe(endringer, enhetId));
-                }
-                dispatch(visLagreEndringerToast());
-                props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
-                props.onRequestClose();
+                const endringer: NyGruppe = {filterNavn: gruppeNavn, filterValg};
+                dispatch(lageNyGruppe(endringer, enhetId));
             }
-            //ikke lagre endringer og send feilmodal
-            // validerGruppenavn();
-            // console.log('her skjedde det noe rart');
+            dispatch(visLagreEndringerToast());
+            props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+            props.onRequestClose();
         }
+        //ikke lagre endringer og send feilmodal
+        // console.log('her skjedde det noe rart');
         props.onRequestClose();
     };
 
@@ -149,15 +155,17 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     };
 
     function slettVeiledergruppeOgLukkModaler() {
-
-        if (props.lagretFilter && dispatch(slettGruppe(enhetId, props.lagretFilter.filterId))) {
-            dispatch(visSletteGruppeToast());
-            setSletteVeiledergruppeModal(false);
-            props.onRequestClose();
-            props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
-        }
-        else {
-
+        if (props.lagretFilter) {
+            if (lagretFilterState.status === 'OK') {
+                dispatch(slettGruppe(enhetId, props.lagretFilter.filterId));
+                dispatch(visSletteGruppeToast());
+                setSletteVeiledergruppeModal(false);
+                props.onRequestClose();
+                props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+            } else if (lagretFilterState.status === 'FEILET') {
+                setSletteVeiledergruppeModal(false);
+                setSlettingFeiletModal(true);
+            }
         }
     }
 
@@ -190,6 +198,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                         value={gruppeNavn}
                         bredde="L"
                         onChange={e => setGruppeNavn(e.target.value)}
+                        maxLength={35}
                     />
                     <div className="veiledergruppe-modal__sokefilter">
                         <SokVeiledere
@@ -239,6 +248,10 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                 isOpen={visEndringerIkkeLagretModal}
                 onRequestClose={() => setEndringerIkkeLagretModal(false)}
                 onSubmit={endringerIkkeLagretOgLukkModaler}
+            />
+            <SlettingFeiletModal
+                isOpen={visSlettingFeiletModal}
+                onRequestClose={() => setSlettingFeiletModal(false)}
             />
         </ModalWrapper>
     );
