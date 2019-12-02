@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
+import {useFocus} from "../../hooks/use-focus";
 
 const btnCls = (props: DropdownProps, apen: boolean, hover: boolean) => classNames('dropdown', props.className, {
     'dropdown--apen': apen,
@@ -25,6 +26,7 @@ function DropdownNy (props: DropdownProps) {
     const [hover, setHover] = useState( false);
     const btnRef = useRef<HTMLButtonElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
+    const focusRef = useFocus();
 
     function handler(e) {
         if (apen && divRef.current &&!divRef.current.contains(e.target)) {
@@ -36,14 +38,6 @@ function DropdownNy (props: DropdownProps) {
         document.body.addEventListener('click', handler);
         return () => document.body.removeEventListener('click', handler);
     });
-
-
-    function settFokus(element) { // eslint-disable-line class-methods-use-this
-        if (element !== null) {
-            const elementer = element.querySelector('button, a, input, select');
-            elementer.focus();
-        }
-    }
 
    function toggleDropdown() {
         const {onLukk = () => void(0)} = props;
@@ -75,7 +69,7 @@ function DropdownNy (props: DropdownProps) {
             <div
                 className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`}
                 id={`${name}-dropdown__innhold`}
-                ref={settFokus}
+                ref={focusRef}
             >
                 {render(lukkDropdown)}
             </div>

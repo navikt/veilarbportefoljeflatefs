@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import RadioFilterform from './../radio-filterform/radio-filterform';
 import { tildelVeileder } from '../../ducks/portefolje';
 import { VeiledereState } from '../../ducks/veiledere';
-import { BrukerModell } from '../../model-interfaces';
+import {BrukerModell, VeilederModell} from '../../model-interfaces';
 import { AppState } from '../../reducer';
 import { ToolbarPosisjon } from './toolbar';
 import DropdownNy from "../dropdown/dropdown-ny";
 import SokFilterNy from "./sok-filter-ny";
+import { useState } from "react";
+import { Radio } from "nav-frontend-skjema";
 
 interface TildelVeilederProps {
     skalVises: boolean;
@@ -19,13 +20,18 @@ interface TildelVeilederProps {
 }
 
 function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere }: TildelVeilederProps) {
+    const [ident, setIdent] = useState("");
+
     if (!skalVises) {
         return null;
     }
+
     const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
 
-    const onSubmit = (_, ident) => {
+
+
+    const onSubmit = (lukkDropdown) => {
         const tilordninger = valgteBrukere
             .map((bruker) => ({
                 fraVeilederId: bruker.veilederId,
@@ -34,7 +40,9 @@ function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere }: Ti
             }));
 
         tildelTilVeileder(tilordninger, ident);
+        lukkDropdown();
     };
+
 
     return (
         <DropdownNy
@@ -47,7 +55,14 @@ function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere }: Ti
                     placeholder="Tildel veileder"
                     data={veiledere.data.veilederListe}
                 >
-                    {data => <TildelVeilederRenderer data={data} onSubmit={onSubmit} /> }
+                    {data =>
+                        <TildelVeilederRenderer
+                            ident={ident}
+                            onChange={setIdent}
+                            data={data}
+                            onSubmit={()=> onSubmit(lukkDropdown)}
+                        />
+                    }
                 </SokFilterNy>
             }
         />
@@ -55,21 +70,30 @@ function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere }: Ti
 }
 
 interface TildelVeilederRendererProps {
-    onSubmit: (_: any, ident: string) => void;
-    data?: any[];
+    onSubmit: ()=> void;
+    data: VeilederModell[];
+    ident: string;
+    onChange: (ident: string) => void;
 }
 
-function TildelVeilederRenderer({ onSubmit, data, ...props }: TildelVeilederRendererProps) {
-    const datamap = data!.reduce((acc, element) => ({ ...acc, [element.ident]: { label: element.navn } }), {});
+function TildelVeilederRenderer({data, onSubmit, ident, onChange}: TildelVeilederRendererProps) {
+
     return (
-        <RadioFilterform
-            form="veiledertildeling"
-            valg={datamap}
-            filtervalg={{ veiledervisning: undefined }}
-            onSubmit={onSubmit}
-            {...props}
-        />
-    );
+        <form className="skjema radio-filterform" onSubmit={onSubmit}>
+            <div className="radio-filterform__valg">
+                {data.map(veileder =>
+                    <Radio
+                        name="veileder"
+                        key={veileder.ident}
+                        label={`${veileder.etternavn}, ${veileder.fornavn}`}
+                        value={veileder.ident}
+                        checked={veileder.ident === ident}
+                        onChange={e => onChange(e.target.value)}
+                    />
+                )}
+            </div>
+        </form>
+    )
 }
 
 const mapStateToProps = ({ veiledere, enheter, portefolje, ui }: AppState) => ({
