@@ -1,11 +1,11 @@
 import ModalWrapper, { ModalProps } from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import React, { useEffect, useState } from 'react';
-import { FiltervalgModell } from '../../model-interfaces';
+import { FiltervalgModell } from '../../../model-interfaces';
 import { Input } from 'nav-frontend-skjema';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../reducer';
+import { AppState } from '../../../reducer';
 import { ReactComponent as SlettIkon } from './remove-circle.svg';
 import {
     lageNyGruppe,
@@ -14,14 +14,14 @@ import {
     NyGruppe,
     RedigerGruppe,
     slettGruppe
-} from '../../ducks/lagret-filter';
-import { initialState } from '../../ducks/filtrering';
-import SokVeiledere from '../../components/sok-veiledere/sok-veiledere';
-import SletteVeiledergruppeModal from '../../modal/veiledergruppe/slett-gruppe-modal';
+} from '../../../ducks/lagret-filter';
+import { initialState } from '../../../ducks/filtrering';
+import SokVeiledere from '../../sok-veiledere/sok-veiledere';
+import SletteVeiledergruppeModal from './slett-gruppe-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
-import hiddenIf from '../../components/hidden-if/hidden-if';
-import { visLagreEndringerToast, visSletteGruppeToast } from '../../store/toast/actions';
-import { useEnhetIdSelector } from '../../hooks/redux/use-enhetid-selector';
+import hiddenIf from '../../hidden-if/hidden-if';
+import { visLagreEndringerToast, visSletteGruppeToast } from '../../../store/toast/actions';
+import { useEnhetIdSelector } from '../../../hooks/redux/use-enhetid-selector';
 
 interface VeilederGruppeModalProps {
     lagretFilter?: LagretFilter;
@@ -95,38 +95,51 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     };
 
     // const sjekkBruktGruppenavn = () => {
-    //     if (props.lagretFilter) {
-    //         console.log('lagretFilter:', props.lagretFilter);
-    //         return gruppeNavn === props.lagretFilter.filterNavn;
-    //     }
-    // };
-    //
-    // const validerGruppenavn = () => {
-    //     return (gruppeNavn === '' || sjekkBruktGruppenavn());
-    // };
+    //     //     //hent listen med eksisterende gruppenavn
+    //     //     //sjekk det nye gruppenavnet opp mot listen
+    //     // };
+
+    const valideringSkjema = () => {
+        if (gruppeNavn === '') {
+            return 'Gruppenavn kan ikke være tomt';
+            // } else if(sjekkBruktGruppenavn()) {
+            //     return "Gruppenavn finnes allerede"
+            // @ts-ignore
+        } else if (filterValg.veiledere.length === 0) {
+            return 'Du må velge minst to veiledere';
+        }
+        // hvis true, er gruppenavnet enten tomt eller likt som et annet. send derfor verifisering her
+        console.log('gruppenavn: ', gruppeNavn);
+    };
 
     const lagreModal = () => {
         if (harGjortEndringer()) {
-            if (props.lagretFilter) {
-                //hvis det mangler gruppenavn eller gruppenavnet som er skrevet inn finnes fra før, ikke lagre
-                //hvis det mangler brukere i gruppen, ikke lagre
-                const endringer: RedigerGruppe = {
-                    filterNavn: gruppeNavn,
-                    filterValg,
-                    filterId: props.lagretFilter.filterId,
-                };
-                dispatch(lagreEndringer(endringer, enhetId));
+            // @ts-ignore
+            console.log('valgte veiledere: ', filterValg.veiledere.length);
+            // if (filterValg.veiledere.length === 0) {
+            //     console.log('ingen valgte veiledere');
+            // }
+            if (valideringSkjema()) {
+                // hvis true, feiler valideringen
             } else {
-                const endringer: NyGruppe = {filterNavn: gruppeNavn, filterValg};
-                dispatch(lageNyGruppe(endringer, enhetId));
+                if (props.lagretFilter) {
+                    const endringer: RedigerGruppe = {
+                        filterNavn: gruppeNavn,
+                        filterValg,
+                        filterId: props.lagretFilter.filterId,
+                    };
+                    dispatch(lagreEndringer(endringer, enhetId));
+                } else {
+                    const endringer: NyGruppe = {filterNavn: gruppeNavn, filterValg};
+                    dispatch(lageNyGruppe(endringer, enhetId));
+                }
+                dispatch(visLagreEndringerToast());
+                props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+                props.onRequestClose();
             }
-
-            dispatch(visLagreEndringerToast());
-            props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
-        } else {
             //ikke lagre endringer og send feilmodal
             // validerGruppenavn();
-            console.log('her skjedde det noe rart');
+            // console.log('her skjedde det noe rart');
         }
         props.onRequestClose();
     };
@@ -136,10 +149,16 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     };
 
     function slettVeiledergruppeOgLukkModaler() {
-        props.lagretFilter && dispatch(slettGruppe(enhetId, props.lagretFilter.filterId));
-        setSletteVeiledergruppeModal(false);
-        props.onRequestClose();
-        props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+
+        if (props.lagretFilter && dispatch(slettGruppe(enhetId, props.lagretFilter.filterId))) {
+            dispatch(visSletteGruppeToast());
+            setSletteVeiledergruppeModal(false);
+            props.onRequestClose();
+            props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+        }
+        else {
+
+        }
     }
 
     function endringerIkkeLagretOgLukkModaler() {

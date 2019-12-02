@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Form, } from 'formik';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import FormikTekstArea from '../../components/formik/formik-tekstarea';
-import FormikInput from '../../components/formik/formik-input';
-import FormikDatoVelger from '../../components/formik/formik-datovelger/formik-datovelger';
+import FormikTekstArea from '../../formik/formik-tekstarea';
+import FormikInput from '../../formik/formik-input';
+import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
 import { Undertekst } from 'nav-frontend-typografi';
 
 interface RedigerArbeidslisteProps {

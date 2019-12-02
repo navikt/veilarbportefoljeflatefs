@@ -16,7 +16,7 @@ import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { FiltreringState } from '../ducks/filtrering';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
-import TomPortefoljeModal from '../modal/tom-portefolje-modal';
+import TomPortefoljeModal from '../components/modal/tom-portefolje-modal';
 import { hentPortefoljeStorrelser as fetchPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { hentStatusTall as fetchStatusTall } from '../ducks/statustall';
 import { RouterProps } from 'react-router';

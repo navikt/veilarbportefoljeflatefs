@@ -2,14 +2,14 @@ import * as React from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
-import { BrukerModell, Status } from '../../model-interfaces';
+import { BrukerModell, Status } from '../../../model-interfaces';
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { Formik, FormikProps } from 'formik';
-import { STATUS } from '../../ducks/utils';
-import { visServerfeilModal } from '../../ducks/modal-serverfeil';
-import { oppdaterArbeidslisteForBruker } from '../../ducks/portefolje';
-import { redigerArbeidsliste } from '../../ducks/arbeidsliste';
+import { STATUS } from '../../../ducks/utils';
+import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
+import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
+import { redigerArbeidsliste } from '../../../ducks/arbeidsliste';
 import moment from 'moment';
 
 interface Ownprops {

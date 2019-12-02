@@ -4,7 +4,7 @@ import { endreFiltervalg } from '../../ducks/filtrering';
 import { defaultVeileder } from '../filtrering-container';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { LeggTilKnapp } from '../../components/knapper/legg-til-knapp';
-import VeilederGruppeModalLage from '../../modal/veiledergruppe/veileder-gruppe-modal-lage';
+import VeilederGruppeModalLage from '../../components/modal/veiledergruppe/veileder-gruppe-modal-lage';
 import { Radio } from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import { LagretFilter } from '../../ducks/lagret-filter';

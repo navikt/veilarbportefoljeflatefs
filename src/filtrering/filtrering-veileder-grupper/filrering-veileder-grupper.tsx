@@ -6,7 +6,7 @@ import { LeggTilKnapp } from '../../components/knapper/legg-til-knapp';
 import VeilederGruppeInnhold from './veiledergrupper-innhold';
 import './veileder-gruppe.less';
 import { Normaltekst } from 'nav-frontend-typografi';
-import VeilederGruppeModalLage from '../../modal/veiledergruppe/veileder-gruppe-modal-lage';
+import VeilederGruppeModalLage from '../../components/modal/veiledergruppe/veileder-gruppe-modal-lage';
 
 function FilteringVeilederGrupper() {
     const [veilederGruppeModal, setVeilederGruppeModal] = useState(false);
