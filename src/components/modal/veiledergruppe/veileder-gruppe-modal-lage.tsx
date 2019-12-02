@@ -127,8 +127,6 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
 
     const lagreModal = () => {
         if (harGjortEndringer()) {
-            // @ts-ignore
-            // console.log('valgte veiledere: ', filterValg.veiledere.length);
             valideringSkjema();
             if (props.lagretFilter) {
                 const endringer: RedigerGruppe = {
