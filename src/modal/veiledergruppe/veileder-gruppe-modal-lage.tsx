@@ -20,7 +20,7 @@ import SokVeiledere from '../../components/sok-veiledere/sok-veiledere';
 import SletteVeiledergruppeModal from '../../modal/veiledergruppe/slett-gruppe-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
 import hiddenIf from '../../components/hidden-if/hidden-if';
-import { visLagreEndringerToast } from '../../store/toast/actions';
+import { visLagreEndringerToast, visSletteGruppeToast } from '../../store/toast/actions';
 import { useEnhetIdSelector } from '../../hooks/redux/use-enhetid-selector';
 
 interface VeilederGruppeModalProps {
@@ -115,7 +115,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                     filterValg,
                     filterId: props.lagretFilter.filterId,
                 };
-                dispatch(lagreEndringer(endringer,enhetId));
+                dispatch(lagreEndringer(endringer, enhetId));
             } else {
                 const endringer: NyGruppe = {filterNavn: gruppeNavn, filterValg};
                 dispatch(lageNyGruppe(endringer, enhetId));
@@ -171,7 +171,6 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                         value={gruppeNavn}
                         bredde="L"
                         onChange={e => setGruppeNavn(e.target.value)}
-                        // feil={validerGruppenavn() ? {feilmelding: 'Feltet kan ikke være tomt'} : undefined}
                     />
                     <div className="veiledergruppe-modal__sokefilter">
                         <SokVeiledere
@@ -190,14 +189,17 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                     />
                 </div>
                 <div className="veiledergruppe-modal__knappegruppe">
-                    <Hovedknapp className="veiledergruppe-modal__knappegruppe__lagre"
-                                htmlType="submit"
-                                onClick={lagreModal}
+                    <Hovedknapp
+                        className="veiledergruppe-modal__knappegruppe__lagre"
+                        htmlType="submit"
+                        onClick={lagreModal}
                     >
                         Lagre endringene
                     </Hovedknapp>
-                    <Flatknapp className="veiledergruppe-modal__knappegruppe__avbryt"
-                               onClick={lukkModal}>
+                    <Flatknapp
+                        className="veiledergruppe-modal__knappegruppe__avbryt"
+                        onClick={lukkModal}
+                    >
                         Avbryt
                     </Flatknapp>
                     <HiddenIfFlatknapp
