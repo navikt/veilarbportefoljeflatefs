@@ -23,6 +23,7 @@ import SlettingFeiletModal from './sletting-feilet-modal';
 import hiddenIf from '../../hidden-if/hidden-if';
 import { visLagreEndringerToast, visSletteGruppeToast } from '../../../store/toast/actions';
 import { useEnhetIdSelector } from '../../../hooks/redux/use-enhetid-selector';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface VeilederGruppeModalProps {
     lagretFilter?: LagretFilter;
@@ -111,11 +112,9 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
         if (gruppeNavn === '') {
             return 'Gruppenavn kan ikke være tomt';
         }
-        for (let i = 0; i < veiledergruppeListe.length; i++) {
-
-            if (gruppeNavn === veiledergruppeListe[i]) {
-                return 'Gruppenavn finnes allerede';
-            }
+        // @ts-ignore
+        if (veiledergruppeListe.includes(gruppeNavn)){
+            return 'Gruppenavn finnes allerede';
         }
         return '';
     };
@@ -139,9 +138,16 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                 const endringer: NyGruppe = {filterNavn: gruppeNavn, filterValg};
                 dispatch(lageNyGruppe(endringer, enhetId));
             }
-            dispatch(visLagreEndringerToast());
-            props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
-            props.onRequestClose();
+            if (lagretFilterState.status === 'PENDING') {
+                //vis spinner
+                return;
+            } else if (lagretFilterState.status === 'OK') {
+                dispatch(visLagreEndringerToast());
+                props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+                props.onRequestClose();
+            } else if (lagretFilterState.status === 'FEILET') {
+                //vis modal med lagring feilet
+            }
         }
         //ikke lagre endringer og send feilmodal
         // console.log('her skjedde det noe rart');
@@ -191,6 +197,8 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                     {modalTittel}
                 </Innholdstittel>
                 <div className="veiledergruppe-modal__content">
+
+                    <NavFrontendSpinner type="XL"/>
                     <Input
                         label="Gruppenavn:"
                         value={gruppeNavn}
@@ -235,6 +243,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                     >
                         Slett gruppe
                     </HiddenIfFlatknapp>
+
                 </div>
             </div>
             <SletteVeiledergruppeModal
