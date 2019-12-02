@@ -109,6 +109,19 @@ export default function reducer(state: FiltervalgModell = initialState, action):
     }
 }
 
+export function lagreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: VeilederModell) {
+    return (dispatch, getState) => {
+        dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
+
+        if (filtergruppe !== 'veiledere') {
+            // TODO Fjerne denne fra filter-reducer
+            oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
+        }
+    };
+}
+
+
+
 // Action Creators
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: VeilederModell) {
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {

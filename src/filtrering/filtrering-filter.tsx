@@ -27,7 +27,6 @@ interface FiltreringFilterProps {
     filtervalg: any;
     endreFiltervalg: (filterId: string, filterVerdi: string) => void;
     enhettiltak: any;
-    intl?: any;
 }
 
 const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) => (

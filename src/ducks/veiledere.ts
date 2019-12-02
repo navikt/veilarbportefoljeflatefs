@@ -11,7 +11,7 @@ export interface VeiledereState {
     status: string;
     data: {
         veilederListe: VeilederModell[];
-        enhet: EnhetModell | {};
+        enhet: EnhetModell;
     };
 }
 
@@ -19,7 +19,9 @@ const initialState = {
     status: STATUS.NOT_STARTED,
     data: {
         veilederListe: [],
-        enhet: {}
+        enhet: {
+            enhetId: '',
+        }
     }
 };
 

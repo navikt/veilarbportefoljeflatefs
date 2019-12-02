@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import SokFilter from './sok-filter';
-import Dropdown from '../dropdown/dropdown';
 import RadioFilterform from './../radio-filterform/radio-filterform';
 import { tildelVeileder } from '../../ducks/portefolje';
 import { VeiledereState } from '../../ducks/veiledere';
 import { BrukerModell } from '../../model-interfaces';
 import { AppState } from '../../reducer';
 import { ToolbarPosisjon } from './toolbar';
+import DropdownNy from "../dropdown/dropdown-ny";
+import SokFilterNy from "./sok-filter-ny";
 
 interface TildelVeilederProps {
     skalVises: boolean;
@@ -37,15 +37,20 @@ function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere }: Ti
     };
 
     return (
-        <Dropdown name="Tildel veileder" className="dropdown--fixed dropdown--toolbar" disabled={!aktiv}>
-            <SokFilter
-                label="Tildel veileder"
-                placeholder="Tildel veileder"
-                data={veiledere.data.veilederListe}
-            >
-                <TildelVeilederRenderer onSubmit={onSubmit} />
-            </SokFilter>
-        </Dropdown>
+        <DropdownNy
+            name="Tildel veileder"
+            className="dropdown--fixed dropdown--toolbar"
+            disabled={!aktiv}
+            render={lukkDropdown =>
+                <SokFilterNy
+                    label="Tildel veileder"
+                    placeholder="Tildel veileder"
+                    data={veiledere.data.veilederListe}
+                >
+                    {data => <TildelVeilederRenderer onSubmit={onSubmit} /> }
+                </SokFilterNy>
+            }
+        />
     );
 }
 

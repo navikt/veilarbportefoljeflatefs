@@ -19,6 +19,7 @@ import FiltreringContainer from '../filtrering/filtrering-container';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './enhet-side.less';
+import Toasts from '../components/toast/toast';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -65,6 +66,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
             <DocumentTitle title="Enhetens oversikt">
                 <div className="enhet-side blokk-xl">
                     <Lenker/>
+                    <Toasts/>
                     <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                         <div id="oversikt-sideinnhold" role="tabpanel">
                             <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">

@@ -7,10 +7,9 @@ import { FiltervalgModell } from '../../model-interfaces';
 import { VeiledereState } from '../../ducks/veiledere';
 import { ToolbarPosisjon } from './toolbar';
 import {useEffect, useState} from "react";
-import { Checkbox } from "nav-frontend-skjema";
-import SokFilterNy from "./sok-filter-ny";
-import classNames from "classnames";
 import DropdownNy from "../dropdown/dropdown-ny";
+import classNames from "classnames";
+import SokVeiledere from "../sok-veiledere/sok-veiledere";
 
 interface SokVeilederProps {
     filtervalg: FiltervalgModell;
@@ -26,7 +25,7 @@ interface DispatchProps {
 
 type AllProps = SokVeilederProps & DispatchProps;
 
-function SokVeileder(props: AllProps) {
+function SokVeilederFilter(props: AllProps) {
     const [valgteVeileder, setValgteVeileder] = useState<string[]>(props.filtervalg.veiledere || []);
 
     useEffect(() => {
@@ -59,33 +58,21 @@ function SokVeileder(props: AllProps) {
         <DropdownNy
             name="Søk veileder"
             className="dropdown--fixed dropdown--toolbar"
-            render ={ lukkDropDown =>
-                <SokFilterNy
-                    label="Velg veiledere"
-                    placeholder="Søk veileder"
-                    data={props.veiledere.data.veilederListe}
-                >
-                    {liste =>
-                        <div className="checkbox-filterform">
-                            <div className="checkbox-filterform__valg">
-                                {liste.map(elem =>
-                                    <Checkbox
-                                        key={elem.ident}
-                                        label={`${elem.etternavn}, ${elem.fornavn}`}
-                                        value={elem.ident}
-                                        checked={valgteVeileder.includes(elem.ident)}
-                                        onChange={event => hanterChange(event)}
-                                    />)}
-                            </div>
-                            <div className="checkbox-filterform__valg-knapp knapperad blokk-xxs">
-                                <button onClick={_ => createHandleOnSubmit(valgteVeileder, lukkDropDown)}
-                                        className={classNames('knapp', 'knapp--mini', {'knapp--hoved': harValg})}>
-                                    {harValg ? "Velg" : "Lukk"}
-                                </button>
-                            </div>
-                        </div>
-                    }
-                </SokFilterNy>
+            render={ lukkDropDown =>
+                <>
+                    <SokVeiledere
+                        erValgt={ident => valgteVeileder.includes(ident)}
+                        hanterChange={hanterChange}
+                    />
+                    <div className="checkbox-filterform__valg-knapp knapperad blokk-xxs">
+                        <button
+                            onClick={()=> createHandleOnSubmit(valgteVeileder, lukkDropDown)}
+                            className={classNames('knapp', 'knapp--mini', {'knapp--hoved': harValg})}
+                        >
+                            {harValg ? "Velg" : "Lukk"}
+                        </button>
+                    </div>
+                </>
             }
         />
     );
@@ -110,4 +97,4 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     }
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(SokVeileder);
+export default connect(mapStateToProps, mapDispatchToProps)(SokVeilederFilter);
