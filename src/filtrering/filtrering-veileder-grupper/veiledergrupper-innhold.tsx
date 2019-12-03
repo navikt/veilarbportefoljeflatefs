@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import { defaultVeileder } from '../filtrering-container';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import { LeggTilKnapp } from '../../components/knapper/legg-til-knapp';
 import VeilederGruppeModalLage from '../../modal/veiledergruppe/veileder-gruppe-modal-lage';
 import { Radio } from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import { LagretFilter } from '../../ducks/lagret-filter';
+import {AppState} from "../../reducer";
 
 interface VeilederGruppeInnholdProps {
     lagretFilter: LagretFilter[],
@@ -17,20 +17,12 @@ interface VeilederGruppeInnholdProps {
 
 function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
-    const [valgtVeilederGruppe, setValgtVeilederGruppe] = useState<LagretFilter | undefined>();
 
     const dispatch = useDispatch();
 
-    const velgGruppe = () => {
-        if (valgtVeilederGruppe) {
-            const filterVerdi = valgtVeilederGruppe.filterValg.veiledere;
-            dispatch(endreFiltervalg('veiledere', filterVerdi, 'enhet', defaultVeileder));
-        }
-    };
-
-    const hanterVelgGruppe = (gruppeId: any) => {
-        const veilederGruppe = finnVeilederGruppe(gruppeId);
-        setValgtVeilederGruppe(veilederGruppe);
+    const velgGruppe = (gruppeId: string) => {
+        const filterVerdi = finnVeilederGruppe(gruppeId);
+        filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, 'enhet', defaultVeileder));
     };
 
     const finnVeilederGruppe = (vg) => props.lagretFilter.find((elem) => elem.filterId === parseInt(vg));
@@ -41,26 +33,21 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
                 {props.lagretFilter.map((veilederGruppe) =>
                     <VeilederGruppeRad
                         veilederGruppe={veilederGruppe}
-                        valgtVeilederGruppe={valgtVeilederGruppe}
                         onClickRedigerKnapp={() => props.setVeilederGruppeModal(true)}
-                        hanterVelgGruppe={(e) => hanterVelgGruppe(e.target.value)}
+                        hanterVelgGruppe={(e) => velgGruppe(e.target.value)}
                     />
                 )}
             </div>
             <div className="veileder-gruppe__knapperad">
-                <Hovedknapp mini onClick={velgGruppe}>
-                    Velg
-                </Hovedknapp>
                 <LeggTilKnapp onClick={() => {
                     //må fikses: hvis denne er valgtVeilederGruppe: hvis en gruppe er valgt, så trykker man "ny gruppe" blir den valgte gruppen valgt her.
                     //gruppen som er valgt skal stå som valgt i listen, men ny gruppe skal være tom
-                    setValgtVeilederGruppe(undefined);
                     props.setVeilederGruppeModal(true);
                 }}/>
             </div>
             <VeilederGruppeModalLage
                 isOpen={props.veilederGruppeModal}
-                lagretFilter={valgtVeilederGruppe}
+                lagretFilter={undefined}
                 onRequestClose={() => props.setVeilederGruppeModal(false)}
             />
         </div>
@@ -68,14 +55,16 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 }
 
 interface VeilederGruppeRad {
-    valgtVeilederGruppe?: LagretFilter;
     hanterVelgGruppe: (e: React.ChangeEvent<HTMLInputElement>) => void;
     veilederGruppe: LagretFilter;
     onClickRedigerKnapp: () => void;
 }
 
-function VeilederGruppeRad({valgtVeilederGruppe, veilederGruppe, hanterVelgGruppe, onClickRedigerKnapp}: VeilederGruppeRad) {
-    const erValgt = valgtVeilederGruppe ? valgtVeilederGruppe.filterId === veilederGruppe.filterId : false;
+function VeilederGruppeRad({veilederGruppe, hanterVelgGruppe, onClickRedigerKnapp}: VeilederGruppeRad) {
+    const veiledereFilter = useSelector((state: AppState)=> state.filtrering.veiledere);
+
+    const lagretVeilederGruppe = veilederGruppe.filterValg.veiledere;
+    const erValgt = lagretVeilederGruppe.length === veiledereFilter.length  && lagretVeilederGruppe.every((v) =>veiledereFilter.includes(v));
 
     return (
         <div className="veileder-gruppe__rad">
@@ -85,8 +74,8 @@ function VeilederGruppeRad({valgtVeilederGruppe, veilederGruppe, hanterVelgGrupp
                 name={`${veilederGruppe.filterNavn}-gruppe`}
                 label={veilederGruppe.filterNavn}
                 value={veilederGruppe.filterId}
-                checked={erValgt}
                 onChange={hanterVelgGruppe}
+                checked={erValgt}
             />
             <RedigerKnapp
                 hidden={!erValgt}
