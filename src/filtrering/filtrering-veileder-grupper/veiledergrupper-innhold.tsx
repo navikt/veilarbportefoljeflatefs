@@ -6,8 +6,8 @@ import { Radio } from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import { LagretFilter } from '../../ducks/lagret-filter';
 import {AppState} from "../../reducer";
-import {veilederlisterErLik} from "../../modal/veiledergruppe/veileder-gruppe-utils";
-import {RedigerVeilederGruppeModal} from "../../modal/veiledergruppe/veileder-gruppe-modal-rediger";
+import {veilederlisterErLik} from "../../components/modal/veiledergruppe/veileder-gruppe-utils";
+import {RedigerVeilederGruppeModal} from "../../components/modal/veiledergruppe/veileder-gruppe-modal-rediger";
 
 interface VeilederGruppeInnholdProps {
     lagretFilter: LagretFilter[]

@@ -1,10 +1,10 @@
 import React, {PropsWithChildren} from "react";
 import {Innholdstittel, Normaltekst} from "nav-frontend-typografi";
 import {Input} from "nav-frontend-skjema";
-import SokVeiledere from "../../components/sok-veiledere/sok-veiledere";
-import {FiltervalgModell} from "../../model-interfaces";
+import SokVeiledere from "../../sok-veiledere/sok-veiledere";
+import {FiltervalgModell} from "../../../model-interfaces";
 import {useSelector} from "react-redux";
-import {AppState} from "../../reducer";
+import {AppState} from "../../../reducer";
 import { Flatknapp } from "nav-frontend-knapper";
 import {ReactComponent as SlettIkon} from "./remove-circle.svg";
 

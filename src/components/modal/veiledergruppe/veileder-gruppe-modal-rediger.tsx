@@ -1,14 +1,14 @@
 import { VeilederGruppeForm } from "./veileder-gruppe-form";
 import React, {useEffect, useState} from "react";
-import {FiltervalgModell} from "../../model-interfaces";
-import {useEnhetIdSelector} from "../../hooks/redux/use-enhetid-selector";
+import {FiltervalgModell} from "../../../model-interfaces";
+import {useEnhetIdSelector} from "../../../hooks/redux/use-enhetid-selector";
 import {useDispatch} from "react-redux";
 import {
     lagreEndringer,
     LagretFilter,
     RedigerGruppe,
     slettGruppe
-} from "../../ducks/lagret-filter";
+} from "../../../ducks/lagret-filter";
 import {harGjortEndringer} from "./veileder-gruppe-utils";
 import ModalWrapper from "nav-frontend-modal";
 import {Flatknapp, Hovedknapp} from "nav-frontend-knapper";
