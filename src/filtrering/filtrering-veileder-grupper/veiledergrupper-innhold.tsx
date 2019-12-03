@@ -24,7 +24,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
         if(harValgtEttLagretFilter) {
             setValgtGruppe(harValgtEttLagretFilter);
         }
-    }, [veiledereFilter, valgtGruppe]);
+    }, [veiledereFilter, valgtGruppe, props.lagretFilter]);
 
     const dispatch = useDispatch();
 

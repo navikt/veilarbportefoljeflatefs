@@ -14,8 +14,6 @@ function FilteringVeilederGrupper() {
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const lagretFilter = lagretFilterState.data;
 
-    const veiledereFilter = useSelector((state: AppState)=> state.filtrering.veiledere);
-
     return (
         <Innholdslaster avhengigheter={[lagretFilterState]}>
             {lagretFilter.length > 0

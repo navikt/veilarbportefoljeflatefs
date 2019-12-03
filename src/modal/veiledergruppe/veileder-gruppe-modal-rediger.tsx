@@ -1,7 +1,6 @@
 import { VeilederGruppeForm } from "./veileder-gruppe-form";
 import React, {useEffect, useState} from "react";
 import {FiltervalgModell} from "../../model-interfaces";
-import {initialState} from "../../ducks/filtrering";
 import {useEnhetIdSelector} from "../../hooks/redux/use-enhetid-selector";
 import {useDispatch} from "react-redux";
 import {

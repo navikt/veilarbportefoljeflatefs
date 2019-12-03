@@ -1,12 +1,11 @@
-import ModalWrapper from "nav-frontend-modal";
+import React, {PropsWithChildren} from "react";
 import {Innholdstittel, Normaltekst} from "nav-frontend-typografi";
 import {Input} from "nav-frontend-skjema";
 import SokVeiledere from "../../components/sok-veiledere/sok-veiledere";
-import React, {PropsWithChildren} from "react";
 import {FiltervalgModell} from "../../model-interfaces";
 import {useSelector} from "react-redux";
 import {AppState} from "../../reducer";
-import {Flatknapp, Hovedknapp} from "nav-frontend-knapper";
+import { Flatknapp } from "nav-frontend-knapper";
 import {ReactComponent as SlettIkon} from "./remove-circle.svg";
 
 interface VeilederGruppeForm {
