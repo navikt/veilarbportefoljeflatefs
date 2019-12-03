@@ -14,27 +14,25 @@ function FilteringVeilederGrupper() {
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const lagretFilter = lagretFilterState.data;
 
+    const veiledereFilter = useSelector((state: AppState)=> state.filtrering.veiledere);
+
     return (
         <Innholdslaster avhengigheter={[lagretFilterState]}>
             {lagretFilter.length > 0
-                ? <VeilederGruppeInnhold
-                    lagretFilter={lagretFilter}
-                    veilederGruppeModal={veilederGruppeModal}
-                    setVeilederGruppeModal={setVeilederGruppeModal}/>
-                :
-                <div className="veiledergruppe-emptystate">
+                ? <VeilederGruppeInnhold lagretFilter={lagretFilter}/>
+                : <div className="veiledergruppe-emptystate">
                     <Normaltekst className="veiledergruppe-emptystate__tekst">
                         Ingen lagrede veiledergrupper på enheten
                     </Normaltekst>
-                    <LeggTilKnapp onClick={() => {
-                        setVeilederGruppeModal(true);
-                    }}/>
-                    <VeilederGruppeModalLage
-                        isOpen={veilederGruppeModal}
-                        onRequestClose={() => setVeilederGruppeModal(false)}
-                    />
                 </div>
             }
+            <LeggTilKnapp onClick={() => {
+                setVeilederGruppeModal(true);
+            }}/>
+            <VeilederGruppeModalLage
+                isOpen={veilederGruppeModal}
+                onRequestClose={() => setVeilederGruppeModal(false)}
+            />
         </Innholdslaster>
     );
 }
