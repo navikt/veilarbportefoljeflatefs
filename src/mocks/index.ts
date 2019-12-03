@@ -129,7 +129,7 @@ mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', tiltak);
 mock.post('/veilarbportefolje/api/diagram/v2', ({body}) => lagDiagramData(body));
 
 // situasjon-api
-(mock as any).post('/veilarboppfolging/api/tilordneveileder/', ResponseUtils.delayed(1000, randomFailure({feilendeTilordninger: ['11111111111', '22222222222']})));
+mock.post('/veilarboppfolging/api/tilordneveileder/', {feilendeTilordninger: []});
 
 // arbeidsliste-api
 mock.post('/veilarbportefolje/api/arbeidsliste/', (args: HandlerArgument)=> {

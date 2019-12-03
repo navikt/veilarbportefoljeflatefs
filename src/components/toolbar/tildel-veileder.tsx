@@ -1,40 +1,53 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import RadioFilterform from './../radio-filterform/radio-filterform';
+import { useDispatch, useSelector} from 'react-redux';
 import { tildelVeileder } from '../../ducks/portefolje';
-import { VeiledereState } from '../../ducks/veiledere';
-import { BrukerModell } from '../../model-interfaces';
+import { VeilederModell } from '../../model-interfaces';
 import { AppState } from '../../reducer';
 import { ToolbarPosisjon } from './toolbar';
 import DropdownNy from "../dropdown/dropdown-ny";
 import SokFilterNy from "./sok-filter-ny";
+import { useState } from "react";
+import { Radio } from "nav-frontend-skjema";
+import classNames from "classnames";
 
 interface TildelVeilederProps {
     skalVises: boolean;
-    tildelTilVeileder: (tilordninger: any[], ident: string) => void;
-    veiledere: VeiledereState;
-    brukere: BrukerModell[];
     filtergruppe?: string;
     toolbarPosisjon?: ToolbarPosisjon;
+    gjeldendeVeileder?: VeilederModell;
 }
 
-function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere }: TildelVeilederProps) {
+function TildelVeileder({ skalVises,  filtergruppe, gjeldendeVeileder, toolbarPosisjon }: TildelVeilederProps) {
+    const [ident, setIdent] = useState<string|null>(null);
+    const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
+    const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
+    const dispatch = useDispatch();
+
+    const doTildelTilVeileder = (tilordninger, tilVeileder) => {
+        return dispatch(tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder, toolbarPosisjon));
+    };
+
     if (!skalVises) {
         return null;
     }
+
     const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
 
-    const onSubmit = (_, ident) => {
-        const tilordninger = valgteBrukere
-            .map((bruker) => ({
-                fraVeilederId: bruker.veilederId,
-                tilVeilederId: ident,
-                brukerFnr: bruker.fnr
-            }));
+    const onSubmit = (lukkDropdown) => {
+        if(ident) {
+            const tilordninger = valgteBrukere
+                .map((bruker) => ({
+                    fraVeilederId: bruker.veilederId,
+                    tilVeilederId: ident,
+                    brukerFnr: bruker.fnr
+                }));
 
-        tildelTilVeileder(tilordninger, ident);
+            doTildelTilVeileder(tilordninger, ident);
+        }
+        lukkDropdown();
     };
+
 
     return (
         <DropdownNy
@@ -45,9 +58,28 @@ function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere }: Ti
                 <SokFilterNy
                     label="Tildel veileder"
                     placeholder="Tildel veileder"
-                    data={veiledere.data.veilederListe}
+                    data={veiledere}
                 >
-                    {data => <TildelVeilederRenderer data={data} onSubmit={onSubmit} /> }
+                    {data =>
+                        <>
+                            <TildelVeilederRenderer
+                                ident={ident}
+                                onChange={setIdent}
+                                data={data}
+                                onSubmit={()=> onSubmit(lukkDropdown)}
+                            />
+                            <div className="checkbox-filterform__under-valg">
+                                <div
+                                    className={classNames('checkbox-filterform__valg-knapp', 'knapperad', 'blokk-xxs')}
+                                >
+                                    <button onClick={()=>onSubmit(lukkDropdown)}
+                                            className={classNames('knapp', 'knapp--mini', {'knapp--hoved': ident})}>
+                                        {ident ? "Velg" : "Lukk"}
+                                    </button>
+                                </div>
+                            </div>
+                        </>
+                    }
                 </SokFilterNy>
             }
         />
@@ -55,32 +87,29 @@ function TildelVeileder({ skalVises, tildelTilVeileder, veiledere, brukere }: Ti
 }
 
 interface TildelVeilederRendererProps {
-    onSubmit: (_: any, ident: string) => void;
-    data?: any[];
+    onSubmit: ()=> void;
+    data: VeilederModell[];
+    ident: string| null;
+    onChange: (ident: string) => void;
 }
 
-function TildelVeilederRenderer({ onSubmit, data, ...props }: TildelVeilederRendererProps) {
-    const datamap = data!.reduce((acc, element) => ({ ...acc, [element.ident]: { label: element.navn } }), {});
+function TildelVeilederRenderer({data, onSubmit, ident, onChange}: TildelVeilederRendererProps) {
     return (
-        <RadioFilterform
-            form="veiledertildeling"
-            valg={datamap}
-            filtervalg={{ veiledervisning: undefined }}
-            onSubmit={onSubmit}
-            {...props}
-        />
-    );
+        <form className="skjema radio-filterform" onSubmit={onSubmit}>
+            <div className="radio-filterform__valg">
+                {data.map(veileder =>
+                    <Radio
+                        name="veileder"
+                        key={veileder.ident}
+                        label={`${veileder.etternavn}, ${veileder.fornavn}`}
+                        value={veileder.ident}
+                        checked={ident? ident ===veileder.ident: false}
+                        onChange={e => onChange(e.target.value)}
+                    />
+                )}
+            </div>
+        </form>
+    )
 }
 
-const mapStateToProps = ({ veiledere, enheter, portefolje, ui }: AppState) => ({
-    veiledere,
-    brukere: portefolje.data.brukere,
-});
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    tildelTilVeileder: (tilordninger, tilVeileder) => {
-        return dispatch(tildelVeileder(tilordninger, tilVeileder, ownProps.filtergruppe,
-            ownProps.gjeldendeVeileder, ownProps.toolbarPosisjon));
-    }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TildelVeileder);
+export default TildelVeileder;

@@ -2,21 +2,21 @@ import React, {useState} from 'react';
 import classNames from 'classnames';
 import {Radio} from "nav-frontend-skjema";
 
-export function RadioFilterformNy({ filterId, onSubmit, valg, closeDropdown, filtervalg, kolonner = 1 }) {
+export function RadioFilterformNy({ filterId, onSubmit, valg, closeDropdown, filtervalg }) {
 
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[filterId]);
 
 
     const createHandleOnSubmit = () => {
-        closeDropdown();
         if(valgtFilterValg) {
             onSubmit(filterId, valgtFilterValg);
         }
+        closeDropdown();
     };
 
     return (
-        <div className = "skjema checkbox-filterform">
-            <div className="checkbox-filterform__valg">
+        <form className="skjema radio-filterform" onSubmit={createHandleOnSubmit}>
+            <div className="radio-filterform__valg">
                 {Object.keys(valg).map(v =>
                     <Radio
                         label={valg[v].label}
@@ -37,6 +37,6 @@ export function RadioFilterformNy({ filterId, onSubmit, valg, closeDropdown, fil
                     </button>
                 </div>
             </div>
-        </div>
+        </form>
     );
 }
