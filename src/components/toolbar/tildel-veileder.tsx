@@ -31,7 +31,6 @@ function TildelVeileder({ skalVises,  filtergruppe, gjeldendeVeileder, toolbarPo
         return null;
     }
 
-
     const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
 
