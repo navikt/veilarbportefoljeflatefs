@@ -6,11 +6,12 @@ import { AppState } from '../../reducer';
 
 interface SokVeiledereProps {
     erValgt: (ident: string) => boolean;
-    hanterChange: (event: React.SyntheticEvent) => void;
+    hanterVeilederValgt: (erValgt: boolean, veilederIdent: string) => void;
 }
 
-function SokVeiledere({erValgt, hanterChange}: SokVeiledereProps) {
+function SokVeiledere({erValgt, hanterVeilederValgt}: SokVeiledereProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
+
     return (
         <SokFilterNy
             label="Velg veiledere:"
@@ -26,7 +27,7 @@ function SokVeiledere({erValgt, hanterChange}: SokVeiledereProps) {
                                 label={`${elem.etternavn}, ${elem.fornavn}`}
                                 value={elem.ident}
                                 checked={erValgt(elem.ident)}
-                                onChange={hanterChange}
+                                onChange={e => hanterVeilederValgt(e.target.checked, e.target.value)}
                             />)}
                     </div>
                 </div>

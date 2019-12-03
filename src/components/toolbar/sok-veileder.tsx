@@ -38,12 +38,10 @@ function SokVeilederFilter(props: AllProps) {
 
     const harValg = valgteVeileder.length > 0;
 
-    const hanterChange = (event) => {
-        const veilederTarget = event.target.value;
-        event.target.checked
+    const hanterChange = (erValgt, veilederTarget) => erValgt
             ? setValgteVeileder([veilederTarget, ...valgteVeileder])
-            : setValgteVeileder(valgteVeileder.filter(veileder => veileder !== veilederTarget))
-    };
+            : setValgteVeileder(valgteVeileder.filter(veileder => veileder !== veilederTarget));
+
 
     const createHandleOnSubmit = (filterverdi: string[], lukkDropDown: () => void) => {
         lukkDropDown();
@@ -62,7 +60,7 @@ function SokVeilederFilter(props: AllProps) {
                 <>
                     <SokVeiledere
                         erValgt={ident => valgteVeileder.includes(ident)}
-                        hanterChange={hanterChange}
+                        hanterVeilederValgt={hanterChange}
                     />
                     <div className="checkbox-filterform__valg-knapp knapperad blokk-xxs">
                         <button
