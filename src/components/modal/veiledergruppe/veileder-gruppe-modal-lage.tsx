@@ -6,7 +6,6 @@ import { Input } from 'nav-frontend-skjema';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../reducer';
-import { ReactComponent as SlettIkon } from './remove-circle.svg';
 import {
     lageNyGruppe,
     lagreEndringer,
@@ -17,10 +16,6 @@ import {
 } from '../../../ducks/lagret-filter';
 import { initialState } from '../../../ducks/filtrering';
 import SokVeiledere from '../../sok-veiledere/sok-veiledere';
-} from '../../../ducks/lagret-filter';
-import { initialState } from '../../../ducks/filtrering';
-import SokVeiledere from '../../sok-veiledere/sok-veiledere';
-import SletteVeiledergruppeModal from './slett-gruppe-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
 import SletteVeiledergruppeModal from './slett-gruppe-modal';
 import SlettingFeiletModal from './sletting-feilet-modal';
@@ -30,8 +25,6 @@ import { visLagreEndringerToast, visSletteGruppeToast } from '../../../store/toa
 import { useEnhetIdSelector } from '../../../hooks/redux/use-enhetid-selector';
 import ValgtVeilederGruppeListe from './valgt-veiledergruppe-liste';
 import Spinner from '../../spinner/spinner';
-import { visLagreEndringerToast } from '../../../store/toast/actions';
-import { useEnhetIdSelector } from '../../../hooks/redux/use-enhetid-selector';
 
 interface VeilederGruppeModalProps {
     lagretFilter?: LagretFilter;
@@ -64,14 +57,14 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     let veiledergruppeListe = [];
 
     const hanterChange = (erValgt: boolean, veilederTarget: string) => erValgt
-            ? setFilterValg(prevState => {
-                if (prevState.veiledere) {
-                    return ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]});
-                } else {
-                    return ({...prevState, veiledere: [veilederTarget]});
-                }
-            })
-            : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
+        ? setFilterValg(prevState => {
+            if (prevState.veiledere) {
+                return ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]});
+            } else {
+                return ({...prevState, veiledere: [veilederTarget]});
+            }
+        })
+        : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
 
     useEffect(() => {
         setFilterValg(props.lagretFilter ? props.lagretFilter.filterValg : initialState);
@@ -141,7 +134,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
             // setSletteVeiledergruppeModal(false);
             setLagringFeiletModal(true);
         }
-    };
+    }
 
     const lagreModal = () => {
         if (harGjortEndringer()) {
