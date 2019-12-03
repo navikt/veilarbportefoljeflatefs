@@ -18,6 +18,14 @@ export const toastReducer = (state: ToastState = initialState, action: ToastActi
             return {
                 toasts: state.toasts.filter(toast => toast !== ToastActionType.VIS_LAGRE_ENDRINGER_TOAST)
             };
+        case ToastActionType.VIS_SLETTE_GRUPPE_TOAST:
+            return {
+                toasts: [...state.toasts, action.type]
+            };
+        case ToastActionType.FJERN_SLETTE_GRUPPE_TOAST:
+            return {
+                toasts: state.toasts.filter(toast => toast !== ToastActionType.VIS_SLETTE_GRUPPE_TOAST)
+            };
         default :
             return state;
     }

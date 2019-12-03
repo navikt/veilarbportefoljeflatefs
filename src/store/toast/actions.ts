@@ -1,6 +1,8 @@
 export enum ToastActionType {
     VIS_LAGRE_ENDRINGER_TOAST = 'veiledergrupper_endre/OK',
-    FJERN_LAGRE_ENDRINGER_TOAST = 'FJERN_LAGRE_ENDRINGER_TOAST'
+    FJERN_LAGRE_ENDRINGER_TOAST = 'FJERN_LAGRE_ENDRINGER_TOAST',
+    VIS_SLETTE_GRUPPE_TOAST = 'VIS_SLETTE_GRUPPE_TOAST',
+    FJERN_SLETTE_GRUPPE_TOAST = 'FJERN_SLETTE_GRUPPE_TOAST'
 }
 
 export interface ToastAction {
@@ -16,3 +18,10 @@ export const visLagreEndringerToast = (): ToastAction =>
 
 export const fjernLagreEndringerToast = (): ToastAction =>
     toastAction(ToastActionType.FJERN_LAGRE_ENDRINGER_TOAST);
+
+export const visSletteGruppeToast = (): ToastAction =>
+    toastAction(ToastActionType.VIS_SLETTE_GRUPPE_TOAST);
+
+export const fjernSletteGruppeToast = (): ToastAction =>
+    toastAction(ToastActionType.FJERN_SLETTE_GRUPPE_TOAST);
+

@@ -4,6 +4,7 @@ import { ToastActionType } from '../../store/toast/actions';
 import hiddenIf from '../hidden-if/hidden-if';
 import { AppState } from '../../reducer';
 import LagreEndringerToast from './lagre-endringer-toast';
+import SletteGruppeToast from './slette-gruppe-toast';
 
 interface StateProps {
     toasts: ToastActionType[];
@@ -15,8 +16,9 @@ function Toasts({toasts}: StateProps) {
             {toasts.map((toast, index) => {
                 switch (toast) {
                     case ToastActionType.VIS_LAGRE_ENDRINGER_TOAST:
-                        // @ts-ignore
                         return <LagreEndringerToast key={index}/>;
+                    case ToastActionType.VIS_SLETTE_GRUPPE_TOAST:
+                        return <SletteGruppeToast key={index}/>;
                     default:
                         return null;
                 }
