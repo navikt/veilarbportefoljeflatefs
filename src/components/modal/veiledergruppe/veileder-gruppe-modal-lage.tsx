@@ -23,6 +23,7 @@ import LagringFeiletModal from './lagring-feilet-modal';
 import hiddenIf from '../../hidden-if/hidden-if';
 import { visLagreEndringerToast, visSletteGruppeToast } from '../../../store/toast/actions';
 import { useEnhetIdSelector } from '../../../hooks/redux/use-enhetid-selector';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 import ValgtVeilederGruppeListe from './valgt-veiledergruppe-liste';
 import Spinner from '../../spinner/spinner';
 
@@ -57,14 +58,14 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     let veiledergruppeListe = [];
 
     const hanterChange = (erValgt: boolean, veilederTarget: string) => erValgt
-        ? setFilterValg(prevState => {
-            if (prevState.veiledere) {
-                return ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]});
-            } else {
-                return ({...prevState, veiledere: [veilederTarget]});
-            }
-        })
-        : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
+            ? setFilterValg(prevState => {
+                if (prevState.veiledere) {
+                    return ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]});
+                } else {
+                    return ({...prevState, veiledere: [veilederTarget]});
+                }
+            })
+            : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
 
     useEffect(() => {
         setFilterValg(props.lagretFilter ? props.lagretFilter.filterValg : initialState);
