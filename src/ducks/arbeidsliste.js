@@ -2,8 +2,8 @@ import {STATUS, doThenDispatch} from './utils';
 import { httpArbeidsliste } from '../middleware/api';
 import {skjulModal} from "./modal";
 import {markerAlleBrukere} from "./portefolje";
-import {oppdaterState} from "../modal/arbeidsliste/legg-til-arbeidslisteform";
-import {oppdaterArbeidsListeState} from "../modal/arbeidsliste/arbeidsliste-modal-rediger";
+import {oppdaterState} from "../components/modal/arbeidsliste/legg-til-arbeidslisteform";
+import {oppdaterArbeidsListeState} from "../components/modal/arbeidsliste/arbeidsliste-modal-rediger";
 import {dateToISODate} from "../utils/dato-utils";
 
 // Actions

@@ -1,11 +1,11 @@
 import ModalWrapper, { ModalProps } from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import React, { useEffect, useState } from 'react';
-import { FiltervalgModell } from '../../model-interfaces';
+import { FiltervalgModell } from '../../../model-interfaces';
 import { Input } from 'nav-frontend-skjema';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../reducer';
+import { AppState } from '../../../reducer';
 import { ReactComponent as SlettIkon } from './remove-circle.svg';
 import {
     lageNyGruppe,
@@ -14,14 +14,14 @@ import {
     NyGruppe,
     RedigerGruppe,
     slettGruppe
-} from '../../ducks/lagret-filter';
-import { initialState } from '../../ducks/filtrering';
-import SokVeiledere from '../../components/sok-veiledere/sok-veiledere';
-import SletteVeiledergruppeModal from '../../modal/veiledergruppe/slett-gruppe-modal';
+} from '../../../ducks/lagret-filter';
+import { initialState } from '../../../ducks/filtrering';
+import SokVeiledere from '../../sok-veiledere/sok-veiledere';
+import SletteVeiledergruppeModal from './slett-gruppe-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
-import hiddenIf from '../../components/hidden-if/hidden-if';
-import { visLagreEndringerToast } from '../../store/toast/actions';
-import { useEnhetIdSelector } from '../../hooks/redux/use-enhetid-selector';
+import hiddenIf from '../../hidden-if/hidden-if';
+import { visLagreEndringerToast } from '../../../store/toast/actions';
+import { useEnhetIdSelector } from '../../../hooks/redux/use-enhetid-selector';
 
 interface VeilederGruppeModalProps {
     lagretFilter?: LagretFilter;

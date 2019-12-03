@@ -1,9 +1,9 @@
 import * as React from 'react';
-import FormikDatoVelger from '../../components/formik/formik-datovelger/formik-datovelger';
-import { BrukerModell } from '../../model-interfaces';
+import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
+import { BrukerModell } from '../../../model-interfaces';
 import { Undertittel } from 'nav-frontend-typografi';
-import FormikInput from '../../components/formik/formik-input';
-import FormikTekstArea from '../../components/formik/formik-tekstarea';
+import FormikInput from '../../formik/formik-input';
+import FormikTekstArea from '../../formik/formik-tekstarea';
 
 function label(bruker: BrukerModell): React.ReactNode {
     return (

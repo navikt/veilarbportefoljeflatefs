@@ -9,8 +9,8 @@ import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
-import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
-import ServerFeilModal from '../modal/server-feil-modal';
+import FeilmeldingBrukereModal from '../components/modal/feilmelding-brukere-modal';
+import ServerFeilModal from '../components/modal/server-feil-modal';
 import { STATUS } from '../ducks/utils';
 import {
     FJERN_FRA_ARBEIDSLISTE_FEILET,

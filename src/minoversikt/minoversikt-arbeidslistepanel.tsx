@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ArbeidslisteModalRediger from '../modal/arbeidsliste/arbeidsliste-modal-rediger';
+import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
 import { UndertekstBold } from 'nav-frontend-typografi';
 import { BrukerModell } from '../model-interfaces';
 
