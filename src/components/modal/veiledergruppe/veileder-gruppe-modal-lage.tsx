@@ -50,16 +50,13 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) => prevState.veiledere
         ? {...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}
         : {...prevState, veiledere: []};
-
     const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
 
     const dispatch = useDispatch();
 
     let veiledergruppeListe = [];
 
-    const hanterChange = (event) => {
-        const veilederTarget = event.target.value;
-        event.target.checked
+    const hanterChange = (erValgt: boolean, veilederTarget: string) => erValgt
             ? setFilterValg(prevState => {
                 if (prevState.veiledere) {
                     return ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]});
@@ -68,7 +65,6 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                 }
             })
             : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
-    };
 
     useEffect(() => {
         setFilterValg(props.lagretFilter ? props.lagretFilter.filterValg : initialState);
@@ -76,7 +72,6 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     }, [props.lagretFilter]);
 
     useEffect(() => {
-        // veiledergruppeListe = lagretFilterState.map(filter => filter.filterNavn)
         for (let i = 0; i < lagretFilterState.data.length; i++) {
             // @ts-ignore
             veiledergruppeListe.push(lagretFilterState.data[i].filterNavn);
@@ -142,12 +137,8 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     };
 
     const lagreModal = () => {
-        // debugger;
         if (harGjortEndringer()) {
-            // validerSkjema();
-            // debugger;
             if (props.lagretFilter) {
-                console.log('færst');
                 sjekkStatus();
                 const endringer: RedigerGruppe = {
                     filterNavn: gruppeNavn,
@@ -157,7 +148,6 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                 dispatch(lagreEndringer(endringer, enhetId));
             } else {
                 sjekkStatus();
-                console.log('andre');
                 const endringer: NyGruppe = {filterNavn: gruppeNavn, filterValg};
                 dispatch(lageNyGruppe(endringer, enhetId));
             }
@@ -171,7 +161,6 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
 
     function slettVeiledergruppeOgLukkModaler() {
         if (props.lagretFilter) {
-            debugger;
             if (lagretFilterState.status === 'FEILET') { //skal hete OK, byttet kun for testing
                 dispatch(slettGruppe(enhetId, props.lagretFilter.filterId));
                 dispatch(visSletteGruppeToast());
@@ -220,7 +209,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                     <div className="veiledergruppe-modal__sokefilter">
                         <SokVeiledere
                             erValgt={(ident) => filterValg.veiledere ? filterValg.veiledere.includes(ident) : false}
-                            hanterChange={event => hanterChange(event)}
+                            hanterVeilederValgt={hanterChange}
                         />
                     </div>
                     <p id="veiledergruppe-modal__valgteveileder__label">
@@ -254,7 +243,6 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                     >
                         Slett gruppe
                     </HiddenIfFlatknapp>
-
                 </div>
             </div>
             <SletteVeiledergruppeModal

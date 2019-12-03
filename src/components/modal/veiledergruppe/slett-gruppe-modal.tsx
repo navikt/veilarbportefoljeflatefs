@@ -32,9 +32,7 @@ function SletteVeiledergruppeModal(props: SletteVeiledergruppeModal) {
             <div className="slette-veiledergruppe-modal__knappegruppe">
                 <Hovedknapp
                     htmlType="submit"
-                    onClick={() => {
-                        props.onSubmit();
-                    }}
+                    onClick={props.onSubmit}
                 >
                     Slett
                 </Hovedknapp>

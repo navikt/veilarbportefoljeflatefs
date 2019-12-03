@@ -17,6 +17,19 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '02. DES. 2019',
+        versjonId: '02.12.19',
+        tittel: 'Nytt design på mål etter test',
+        tekst: 'Testen av to ulike design for inngangen til mål er ferdig, og design B fungerte best. Det ligger nå ute hos alle brukerne som ikke allerede har oppgitt mål i aktivitetsplanen.',
+        children:
+            <>
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Hvordan-f%C3%A5-flere-brukere-til-%C3%A5-opprette-et-m%C3%A5l-i-aktivitetsplanen-.aspx"
+                    linkTekst="Nyhetssak på Navet"
+                />
+            </>
+    },
+    {
         dato: '29. NOV. 2019',
         versjonId: '29.11.19',
         tittel: 'Historikk på oppfølgingsenhet',
@@ -44,7 +57,8 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                         />
                     </li>
                     <li>Historikken i Veilederverktøy viser nå også tildeling av
-                        veileder. Når tildeling av veileder gjøres under en KVP-periode, er historikken kun synlig for ansatte med tilgang på brukerens
+                        veileder. Når tildeling av veileder gjøres under en KVP-periode, er historikken kun synlig for
+                        ansatte med tilgang på brukerens
                         enhet.
                     </li>
                 </ul>

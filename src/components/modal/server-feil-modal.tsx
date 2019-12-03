@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Modal from 'nav-frontend-modal';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import {Normaltekst, Undertittel} from 'nav-frontend-typografi';
+import {VarselModal, VarselModalType} from "../components/varselmodal/varselmodal";
 
 interface ServerFeilModalProps {
     isOpen?: boolean;
@@ -34,27 +34,26 @@ class ServerFeilModal extends React.Component<ServerFeilModalProps, ServerFeilMo
 
     render() {
         return (
-            <Modal
+            <VarselModal
                 contentLabel="Fikk feil fra server"
                 isOpen={this.state.isOpen}
                 onRequestClose={this.lukkModal}
                 closeButton={false}
+                type={VarselModalType.FEIL}
+                portalClassName="feiletbrukere-modal"
             >
-                <div className="feiletbrukere__modal">
-                    <div className="feiledbrukeremelding blokk-m">
-                        <div className="feiledbrukeremelding__ikon blokk-xxs" />
-                    </div>
+                <div style={{margin: "1rem", textAlign: "center"}}>
                     <Undertittel tag="h1" className="blokk-xxs">
                         Handlingen kan ikke utføres
                     </Undertittel>
                     <Normaltekst className="blokk-s">
                         Noe gikk feil, prøv igjen senere.
                     </Normaltekst>
-                    <button className="knapp knapp--hoved" onClick={this.lukkModal}>
+                    <button className="knapp knapp--hoved blokk-s" onClick={this.lukkModal}>
                         Ok
                     </button>
                 </div>
-            </Modal>
+            </VarselModal>
         );
     }
 }
