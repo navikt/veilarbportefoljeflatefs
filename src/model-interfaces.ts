@@ -57,7 +57,7 @@ export interface FiltervalgModell {
     innsatsgruppe?: string[];
     formidlingsgruppe?: string[];
     servicegruppe?: string[];
-    veiledere?: string[];
+    veiledere: string[];
     ytelse: null | string;
     aktiviteter?: FiltreringAktiviteterValg;
     tiltakstyper: string[];

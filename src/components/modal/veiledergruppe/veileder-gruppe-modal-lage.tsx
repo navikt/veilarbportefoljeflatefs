@@ -50,9 +50,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
 
     let veiledergruppeListe = [];
 
-    const hanterChange = (event) => {
-        const veilederTarget = event.target.value;
-        event.target.checked
+    const hanterChange = (erValgt: boolean, veilederTarget: string) => erValgt
             ? setFilterValg(prevState => {
                 if (prevState.veiledere) {
                     return ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]});
@@ -61,7 +59,6 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                 }
             })
             : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
-    };
 
     useEffect(() => {
         setFilterValg(props.lagretFilter ? props.lagretFilter.filterValg : initialState);
@@ -209,7 +206,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                     <div className="veiledergruppe-modal__sokefilter">
                         <SokVeiledere
                             erValgt={(ident) => filterValg.veiledere ? filterValg.veiledere.includes(ident) : false}
-                            hanterChange={event => hanterChange(event)}
+                            hanterVeilederValgt={hanterChange}
                         />
                     </div>
                     <p id="veiledergruppe-modal__valgteveileder__label">
