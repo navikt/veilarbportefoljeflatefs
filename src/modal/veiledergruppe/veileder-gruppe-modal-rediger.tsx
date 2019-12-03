@@ -109,6 +109,7 @@ export function RedigerVeilederGruppeModal (props: RedigerVeilederGruppeModalPro
                         <Flatknapp
                             className="veiledergruppe-modal__knappegruppe__slett"
                             onClick={()=> setSletteVeiledergruppeModal(true)}
+                            htmlType="button"
                         >
                             Slett gruppe
                         </Flatknapp>
