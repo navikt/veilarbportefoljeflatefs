@@ -1,8 +1,10 @@
-import { VeilederModell } from '../model-interfaces';
-import { LagretFilter } from '../ducks/lagret-filter';
 import { initialState } from '../ducks/filtrering';
+import {veiledere} from "./veiledere";
+import {LagretFilter} from "../ducks/lagret-filter";
+import { JSONArray } from "yet-another-fetch-mock";
 
-export const veilederGrupper = (veiledere: VeilederModell []) => {
+
+export const veilederGrupper = () => {
     const veilederGruppe1 = veiledere.slice(0, 4).map((v) => v.ident);
     const veilederGruppe2 = veiledere.slice(5, 10).map((v) => v.ident);
     const veilederGruppe3 = veiledere.slice(11, 15).map((v) => v.ident);
@@ -14,6 +16,6 @@ export const veilederGrupper = (veiledere: VeilederModell []) => {
             {filterNavn: 'Hallo', filterId: 14, filterValg: {...initialState, veiledere: veilederGruppe3}},
             {filterNavn: 'På do', filterId: 15, filterValg: {...initialState, veiledere: veilederGruppe4}},
 
-        ] as LagretFilter []
+        ] as LagretFilter [] & JSONArray
     );
 };
