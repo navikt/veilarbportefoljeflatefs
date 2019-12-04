@@ -1,11 +1,8 @@
 import ModalWrapper, { ModalProps } from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import React, { useEffect, useState } from 'react';
-import { FiltervalgModell } from '../../../model-interfaces';
 import { Input } from 'nav-frontend-skjema';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../reducer';
 import {
     lageNyGruppe,
     lagreEndringer,
@@ -22,10 +19,16 @@ import SlettingFeiletModal from './sletting-feilet-modal';
 import LagringFeiletModal from './lagring-feilet-modal';
 import hiddenIf from '../../hidden-if/hidden-if';
 import { visLagreEndringerToast, visSletteGruppeToast } from '../../../store/toast/actions';
-import { useEnhetIdSelector } from '../../../hooks/redux/use-enhetid-selector';
-import NavFrontendSpinner from 'nav-frontend-spinner';
 import ValgtVeilederGruppeListe from './valgt-veiledergruppe-liste';
 import Spinner from '../../spinner/spinner';
+import {
+    fjernVeiledereFraListen,
+    veiledergruppeListe
+} from './veileder-gruppe-utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../../reducer';
+import { useEnhetIdSelector } from '../../../hooks/redux/use-enhetid-selector';
+import { FiltervalgModell } from '../../../model-interfaces';
 
 interface VeilederGruppeModalProps {
     lagretFilter?: LagretFilter;
@@ -35,7 +38,6 @@ const HiddenIfFlatknapp = hiddenIf(Flatknapp);
 const HiddenIfSpinner = hiddenIf(Spinner);
 
 function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalProps, 'contentLabel' | 'children'>) {
-
     const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
     const [gruppeNavn, setGruppeNavn] = useState<string>('');
 
@@ -47,25 +49,18 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
 
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const enhetId = useEnhetIdSelector();
-
-    const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) => prevState.veiledere
-        ? {...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}
-        : {...prevState, veiledere: []};
+    const dispatch = useDispatch();
     const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
 
-    const dispatch = useDispatch();
-
-    let veiledergruppeListe = [];
-
     const hanterChange = (erValgt: boolean, veilederTarget: string) => erValgt
-            ? setFilterValg(prevState => {
-                if (prevState.veiledere) {
-                    return ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]});
-                } else {
-                    return ({...prevState, veiledere: [veilederTarget]});
-                }
-            })
-            : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
+        ? setFilterValg(prevState => {
+            if (prevState.veiledere) {
+                return ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]});
+            } else {
+                return ({...prevState, veiledere: [veilederTarget]});
+            }
+        })
+        : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
 
     useEffect(() => {
         setFilterValg(props.lagretFilter ? props.lagretFilter.filterValg : initialState);
@@ -97,7 +92,9 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     };
 
     const lukkModal = () => {
+        // @ts-ignore
         if (harGjortEndringer()) {
+            // @ts-ignore
             setEndringerIkkeLagretModal(harGjortEndringer());
             return;
         }
@@ -121,9 +118,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     // };
 
     function sjekkStatus() {
-        if (lagretFilterState.status === 'PENDING') {
-            setSpinner(true);
-        }
+        setSpinner(lagretFilterState.status === 'PENDING');
         if (lagretFilterState.status === 'FEILET') { //skal være ok, kjører denne for å teste modalen for lagring feilet
             setSpinner(false);
             dispatch(visLagreEndringerToast());
@@ -132,7 +127,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
             props.onRequestClose();
         } else if (lagretFilterState.status === 'OK') {
             console.log('heihiehiehei');
-            // setSletteVeiledergruppeModal(false);
+            debugger;
             setLagringFeiletModal(true);
         }
     }
@@ -153,7 +148,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                 dispatch(lageNyGruppe(endringer, enhetId));
             }
         }
-        props.onRequestClose();
+        // props.onRequestClose();
     };
 
     const slettModal = () => {

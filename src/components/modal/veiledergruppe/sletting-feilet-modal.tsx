@@ -11,7 +11,7 @@ interface SlettingFeiletProps {
 function SlettingFeiletModal(props: SlettingFeiletProps) {
     return (
         <VarselModal
-            contentLabel="Slette veiledergruppe"
+            contentLabel="Sletting av veiledergruppe feilet"
             isOpen={props.isOpen}
             onRequestClose={props.onRequestClose}
             className="sletting-feilet-modal"

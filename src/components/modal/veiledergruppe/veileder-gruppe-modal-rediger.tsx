@@ -1,8 +1,7 @@
 import { VeilederGruppeForm } from "./veileder-gruppe-form";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from 'react';
 import {FiltervalgModell} from "../../../model-interfaces";
-import {useEnhetIdSelector} from "../../../hooks/redux/use-enhetid-selector";
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import {
     lagreEndringer,
     LagretFilter,
@@ -14,22 +13,35 @@ import ModalWrapper from "nav-frontend-modal";
 import {Flatknapp, Hovedknapp} from "nav-frontend-knapper";
 import SletteVeiledergruppeModal from "./slett-gruppe-modal";
 import EndringerIkkeLagretModal from "./ulagrede-endringer-modal";
+import SlettingFeiletModal from './sletting-feilet-modal';
+import LagringFeiletModal from './lagring-feilet-modal';
+import { initialState } from '../../../ducks/filtrering';
+import { AppState } from '../../../reducer';
+import { useEnhetIdSelector } from '../../../hooks/redux/use-enhetid-selector';
 
 interface RedigerVeilederGruppeModalProps {
     isOpen: boolean
     redigerGruppe: LagretFilter;
     onRequestClose: ()=> void;
+    lagretFilter?: LagretFilter;
+
 }
 
-
 export function RedigerVeilederGruppeModal (props: RedigerVeilederGruppeModalProps) {
-    const [filterValg, setFilterValg] = useState<FiltervalgModell>(props.redigerGruppe.filterValg);
-    const [gruppeNavn, setGruppeNavn] = useState<string>(props.redigerGruppe.filterNavn);
+
+    const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
+    const [gruppeNavn, setGruppeNavn] = useState<string>('');
 
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
+    const [visSlettingFeiletModal, setSlettingFeiletModal] = useState(false);
+    const [visLagringFeiletModal, setLagringFeiletModal] = useState(false);
+    const [visSpinner, setSpinner] = useState(false);
 
+    const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const enhetId = useEnhetIdSelector();
+    const dispatch = useDispatch();
+    const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
 
     useEffect(() => {
         if(props.redigerGruppe) {
@@ -39,18 +51,20 @@ export function RedigerVeilederGruppeModal (props: RedigerVeilederGruppeModalPro
     }, [props.redigerGruppe]);
 
 
-    const dispatch = useDispatch();
 
     const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) =>
+    // @ts-ignore
         ({...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)});
 
     const hanterChange = (erValgt: boolean, veilederTarget: string) =>
         erValgt
+    // @ts-ignore
             ? setFilterValg(prevState => ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]}))
             : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
 
 
     function lukkModal () {
+        // @ts-ignore
         if (harGjortEndringer(filterValg.veiledere, props.redigerGruppe.filterValg.veiledere, props.redigerGruppe.filterNavn, gruppeNavn)) {
             setEndringerIkkeLagretModal(true);
             return;
@@ -125,6 +139,14 @@ export function RedigerVeilederGruppeModal (props: RedigerVeilederGruppeModalPro
                 isOpen={visEndringerIkkeLagretModal}
                 onRequestClose={() => setEndringerIkkeLagretModal(false)}
                 onSubmit={endringerIkkeLagretOgLukkModaler}
+            />
+            <SlettingFeiletModal
+                isOpen={visSlettingFeiletModal}
+                onRequestClose={() => setSlettingFeiletModal(false)}
+            />
+            <LagringFeiletModal
+                isOpen={visLagringFeiletModal}
+                onRequestClose={() => setLagringFeiletModal(false)}
             />
         </>
     )

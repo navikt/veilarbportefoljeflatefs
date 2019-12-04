@@ -1,12 +1,12 @@
-import React, {PropsWithChildren} from "react";
-import {Innholdstittel, Normaltekst} from "nav-frontend-typografi";
-import {Input} from "nav-frontend-skjema";
-import SokVeiledere from "../../sok-veiledere/sok-veiledere";
-import {FiltervalgModell} from "../../../model-interfaces";
-import {useSelector} from "react-redux";
-import {AppState} from "../../../reducer";
-import { Flatknapp } from "nav-frontend-knapper";
-import {ReactComponent as SlettIkon} from "./remove-circle.svg";
+import React, { PropsWithChildren } from 'react';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Input } from 'nav-frontend-skjema';
+import SokVeiledere from '../../sok-veiledere/sok-veiledere';
+import { FiltervalgModell } from '../../../model-interfaces';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../../reducer';
+import { Flatknapp } from 'nav-frontend-knapper';
+import { ReactComponent as SlettIkon } from './remove-circle.svg';
 
 interface VeilederGruppeForm {
     filterValg: FiltervalgModell;
@@ -17,40 +17,39 @@ interface VeilederGruppeForm {
     onSubmit: () => void;
 }
 
-
-export function VeilederGruppeForm (props: PropsWithChildren<VeilederGruppeForm>) {
+export function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
     return (
-            <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit}>
-                <Innholdstittel tag="h1" className="blokk-xs">
-                    {props.modalTittel}
-                </Innholdstittel>
-                <div className="veiledergruppe-modal__content">
-                    <Input
-                        label="Gruppenavn:"
-                        value={props.gruppeNavn}
-                        bredde="L"
-                        onChange={e => props.setGruppeNavn(e.target.value)}
-                        // feil={validerGruppenavn() ? {feilmelding: 'Feltet kan ikke være tomt'} : undefined}
-                    />
-                    <div className="veiledergruppe-modal__sokefilter">
-                        <SokVeiledere
-                            erValgt={(ident) => props.filterValg.veiledere ? props.filterValg.veiledere.includes(ident) : false}
-                            hanterVeilederValgt={props.hanterVeilederChange}
-                        />
-                    </div>
-                    <Normaltekst>
-                        Valgte veiledere:
-                    </Normaltekst>
-                    <ValgtVeilederGruppeListe
-                        valgteVeileder={props.filterValg.veiledere}
-                        fjernValgtVeileder={(veilederTarget) => props.hanterVeilederChange(false,  veilederTarget)}
+        <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit}>
+            <Innholdstittel tag="h1" className="blokk-xs">
+                {props.modalTittel}
+            </Innholdstittel>
+            <div className="veiledergruppe-modal__content">
+                <Input
+                    label="Gruppenavn:"
+                    value={props.gruppeNavn}
+                    bredde="L"
+                    onChange={e => props.setGruppeNavn(e.target.value)}
+                    // feil={validerGruppenavn() ? {feilmelding: 'Feltet kan ikke være tomt'} : undefined}
+                />
+                <div className="veiledergruppe-modal__sokefilter">
+                    <SokVeiledere
+                        erValgt={(ident) => props.filterValg.veiledere ? props.filterValg.veiledere.includes(ident) : false}
+                        hanterVeilederValgt={props.hanterVeilederChange}
                     />
                 </div>
-                {props.children}
-            </form>
-    )
+                <Normaltekst>
+                    Valgte veiledere:
+                </Normaltekst>
+                <ValgtVeilederGruppeListe
+                    // @ts-ignore
+                    valgteVeileder={props.filterValg.veiledere}
+                    fjernValgtVeileder={(veilederTarget) => props.hanterVeilederChange(false, veilederTarget)}
+                />
+            </div>
+            {props.children}
+        </form>
+    );
 }
-
 
 interface ValgtVeilederGruppeListeProps {
     valgteVeileder: string[],
