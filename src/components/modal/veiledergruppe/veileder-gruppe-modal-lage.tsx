@@ -21,8 +21,8 @@ import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
 import SletteVeiledergruppeModal from './slett-gruppe-modal';
 import SlettingFeiletModal from './sletting-feilet-modal';
 import hiddenIf from '../../hidden-if/hidden-if';
-import { visLagreEndringerToast, visSletteGruppeToast } from '../../../store/toast/actions';
-import { useEnhetIdSelector } from '../../../hooks/redux/use-enhetid-selector';
+import { visSletteGruppeToast } from '../../../store/toast/actions';
+import { useEnhetSelector } from '../../../hooks/redux/use-enhet-selector';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface VeilederGruppeModalProps {
@@ -42,7 +42,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
 
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
 
-    const enhetId = useEnhetIdSelector();
+    const enhet = useEnhetSelector();
 
     const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) => prevState.veiledere
         ? {...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}
@@ -130,16 +130,16 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                     filterValg,
                     filterId: props.lagretFilter.filterId,
                 };
-                dispatch(lagreEndringer(endringer, enhetId));
+                enhet && dispatch(lagreEndringer(endringer, enhet.enhetId));
+
             } else {
                 const endringer: NyGruppe = {filterNavn: gruppeNavn, filterValg};
-                dispatch(lageNyGruppe(endringer, enhetId));
+                enhet && dispatch(lageNyGruppe(endringer, enhet.enhetId));
             }
             if (lagretFilterState.status === 'PENDING') {
                 //vis spinner
                 return;
             } else if (lagretFilterState.status === 'OK') {
-                dispatch(visLagreEndringerToast());
                 props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
                 props.onRequestClose();
             } else if (lagretFilterState.status === 'FEILET') {
@@ -158,7 +158,7 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     function slettVeiledergruppeOgLukkModaler() {
         if (props.lagretFilter) {
             if (lagretFilterState.status === 'OK') {
-                dispatch(slettGruppe(enhetId, props.lagretFilter.filterId));
+                enhet && dispatch(slettGruppe(enhet.enhetId, props.lagretFilter.filterId));
                 dispatch(visSletteGruppeToast());
                 setSletteVeiledergruppeModal(false);
                 props.onRequestClose();

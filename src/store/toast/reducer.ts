@@ -11,6 +11,7 @@ const initialState: ToastState = {
 export const toastReducer = (state: ToastState = initialState, action: ToastAction): ToastState => {
     switch (action.type) {
         case ToastActionType.VIS_LAGRE_ENDRINGER_TOAST:
+        case ToastActionType.VIS_LAGRE_NYTT_FILTER_TOAST:
             return {
                 toasts: [...state.toasts, action.type]
             };
