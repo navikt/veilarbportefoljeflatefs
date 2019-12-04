@@ -14,7 +14,8 @@ interface VeilederGruppeForm {
     gruppeNavn: string;
     setGruppeNavn: (nyttNavn: string) => void;
     modalTittel: string;
-    onSubmit: () => void;
+    onSubmit: (e) => void;
+    errors: any;
 }
 
 export function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
@@ -29,7 +30,8 @@ export function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>)
                     value={props.gruppeNavn}
                     bredde="L"
                     onChange={e => props.setGruppeNavn(e.target.value)}
-                    // feil={validerGruppenavn() ? {feilmelding: 'Feltet kan ikke være tomt'} : undefined}
+                    feil={props.errors.gruppeNavn ? {feilmelding: props.errors.gruppeNavn} : undefined}
+                    maxLength={35}
                 />
                 <div className="veiledergruppe-modal__sokefilter">
                     <SokVeiledere

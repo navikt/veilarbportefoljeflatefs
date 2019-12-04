@@ -100,7 +100,7 @@ export function nyVeiledergruppe(endringer: NyGruppe, enhetId: string): Promise<
     return fetchToJson(url, config);
 }
 
-export function slettVeiledergruppe(enhetId:string, filterId: number): Promise<number> {
+export function slettVeiledergruppe(enhetId: string | undefined | null, filterId: number): Promise<number> {
     const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/filter/${filterId}`;
     const config = { ...MED_CREDENTIALS, method: 'delete'};
     return fetch(url, config).then(sjekkStatuskode).then(_ => Promise.resolve(filterId));
