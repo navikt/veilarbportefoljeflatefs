@@ -15,11 +15,12 @@ import { AppState } from '../reducer';
 import { FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { pagineringSetup } from '../ducks/paginering';
-import FiltreringContainer from '../filtrering/filtrering-container';
+import FiltreringContainer, {defaultVeileder} from '../filtrering/filtrering-container';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './enhet-side.less';
 import Toasts from '../components/toast/toast';
+import {slettEnkeltFilter} from "../ducks/filtrering";
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -35,6 +36,7 @@ interface DispatchProps {
     hentStatusTall: (enhetId: string) => void;
     hentEnhetTiltak: (enhetId: string) => void;
     initalPaginering: (side: number, seAlle: boolean) => void;
+    slettVeilederFilter: (ident: string) => void;
 }
 
 type EnhetSideProps = StateProps & DispatchProps;
@@ -61,7 +63,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
     }
 
     render() {
-        const {filtervalg, veilederliste, statustall, enhettiltak, listevisning} = this.props;
+        const {filtervalg, veilederliste, statustall, enhettiltak, listevisning, slettVeilederFilter} = this.props;
         return (
             <DocumentTitle title="Enhetens oversikt">
                 <div className="enhet-side blokk-xl">
@@ -80,7 +82,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                 <FiltreringLabelContainer
                                     filtervalg={{
                                         ...filtervalg,
-                                        veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste)
+                                        veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
                                     }}
                                     filtergruppe="enhet"
                                     enhettiltak={enhettiltak.data.tiltak}
@@ -111,7 +113,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
 const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentStatusTall: (enhet) => dispatch(hentStatusTall(enhet)),
     hentEnhetTiltak: (enhet) => dispatch(hentEnhetTiltak(enhet)),
-    initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
+    initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
+    slettVeilederFilter: (ident: string) => dispatch( slettEnkeltFilter("veiledere", ident,  'enhet', defaultVeileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);

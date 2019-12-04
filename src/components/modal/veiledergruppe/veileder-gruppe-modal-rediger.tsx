@@ -1,7 +1,7 @@
 import { VeilederGruppeForm } from "./veileder-gruppe-form";
 import React, {useEffect, useState} from "react";
 import {FiltervalgModell} from "../../../model-interfaces";
-import {useEnhetIdSelector} from "../../../hooks/redux/use-enhetid-selector";
+import { useEnhetSelector } from "../../../hooks/redux/use-enhet-selector";
 import {useDispatch} from "react-redux";
 import {
     lagreEndringer,
@@ -29,7 +29,7 @@ export function RedigerVeilederGruppeModal (props: RedigerVeilederGruppeModalPro
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
 
-    const enhetId = useEnhetIdSelector();
+    const enhet = useEnhetSelector();
 
     useEffect(() => {
         if(props.redigerGruppe) {
@@ -65,13 +65,13 @@ export function RedigerVeilederGruppeModal (props: RedigerVeilederGruppeModalPro
             filterId: props.redigerGruppe!.filterId,
         };
 
-        dispatch(lagreEndringer(endringer, enhetId));
+        enhet && dispatch(lagreEndringer(endringer, enhet.enhetId));
 
         props.onRequestClose();
     }
 
     function slettVeiledergruppeOgLukkModaler() {
-        dispatch(slettGruppe(enhetId, props.redigerGruppe!.filterId));
+        enhet && dispatch(slettGruppe(enhet.enhetId, props.redigerGruppe!.filterId));
         setSletteVeiledergruppeModal(false);
         props.onRequestClose();
     }
