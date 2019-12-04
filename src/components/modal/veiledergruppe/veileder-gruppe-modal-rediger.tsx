@@ -1,7 +1,8 @@
 import { VeilederGruppeForm } from "./veileder-gruppe-form";
 import React, { useEffect, useState } from 'react';
 import {FiltervalgModell} from "../../../model-interfaces";
-import { useDispatch, useSelector } from 'react-redux';
+import { useEnhetSelector } from "../../../hooks/redux/use-enhet-selector";
+import {useDispatch} from "react-redux";
 import {
     lagreEndringer,
     LagretFilter,
@@ -24,13 +25,13 @@ interface RedigerVeilederGruppeModalProps {
     redigerGruppe: LagretFilter;
     onRequestClose: ()=> void;
     lagretFilter?: LagretFilter;
-
 }
 
 export function RedigerVeilederGruppeModal (props: RedigerVeilederGruppeModalProps) {
-
-    const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
-    const [gruppeNavn, setGruppeNavn] = useState<string>('');
+    const [filterValg, setFilterValg] = useState<FiltervalgModell>(props.redigerGruppe.filterValg);
+    const [gruppeNavn, setGruppeNavn] = useState<string>(props.redigerGruppe.filterNavn);
+    // const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
+    // const [gruppeNavn, setGruppeNavn] = useState<string>('');
 
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
@@ -38,10 +39,7 @@ export function RedigerVeilederGruppeModal (props: RedigerVeilederGruppeModalPro
     const [visLagringFeiletModal, setLagringFeiletModal] = useState(false);
     const [visSpinner, setSpinner] = useState(false);
 
-    const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
-    const enhetId = useEnhetIdSelector();
-    const dispatch = useDispatch();
-    const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
+    const enhet = useEnhetSelector();
 
     useEffect(() => {
         if(props.redigerGruppe) {
@@ -51,20 +49,18 @@ export function RedigerVeilederGruppeModal (props: RedigerVeilederGruppeModalPro
     }, [props.redigerGruppe]);
 
 
+    const dispatch = useDispatch();
 
     const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) =>
-    // @ts-ignore
         ({...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)});
 
     const hanterChange = (erValgt: boolean, veilederTarget: string) =>
         erValgt
-    // @ts-ignore
             ? setFilterValg(prevState => ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]}))
             : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
 
 
     function lukkModal () {
-        // @ts-ignore
         if (harGjortEndringer(filterValg.veiledere, props.redigerGruppe.filterValg.veiledere, props.redigerGruppe.filterNavn, gruppeNavn)) {
             setEndringerIkkeLagretModal(true);
             return;
@@ -79,13 +75,13 @@ export function RedigerVeilederGruppeModal (props: RedigerVeilederGruppeModalPro
             filterId: props.redigerGruppe!.filterId,
         };
 
-        dispatch(lagreEndringer(endringer, enhetId));
+        enhet && dispatch(lagreEndringer(endringer, enhet.enhetId));
 
         props.onRequestClose();
     }
 
     function slettVeiledergruppeOgLukkModaler() {
-        dispatch(slettGruppe(enhetId, props.redigerGruppe!.filterId));
+        enhet && dispatch(slettGruppe(enhet.enhetId, props.redigerGruppe!.filterId));
         setSletteVeiledergruppeModal(false);
         props.onRequestClose();
     }

@@ -18,6 +18,9 @@ import SletteVeiledergruppeModal from './slett-gruppe-modal';
 import SlettingFeiletModal from './sletting-feilet-modal';
 import LagringFeiletModal from './lagring-feilet-modal';
 import hiddenIf from '../../hidden-if/hidden-if';
+import { visSletteGruppeToast } from '../../../store/toast/actions';
+import { useEnhetSelector } from '../../../hooks/redux/use-enhet-selector';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 import { visLagreEndringerToast, visSletteGruppeToast } from '../../../store/toast/actions';
 import ValgtVeilederGruppeListe from './valgt-veiledergruppe-liste';
 import Spinner from '../../spinner/spinner';
@@ -48,7 +51,15 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
     const [visSpinner, setSpinner] = useState(false);
 
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
-    const enhetId = useEnhetIdSelector();
+
+    const enhet = useEnhetSelector();
+
+    const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) => prevState.veiledere
+        ? {...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}
+        : {...prevState, veiledere: []};
+
+    let veiledergruppeListe = [];
+
     const dispatch = useDispatch();
     const modalTittel = props.lagretFilter ? 'Rediger veiledergruppe' : 'Ny veiledergruppe';
 
@@ -141,11 +152,21 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
                     filterValg,
                     filterId: props.lagretFilter.filterId,
                 };
-                dispatch(lagreEndringer(endringer, enhetId));
+                enhet && dispatch(lagreEndringer(endringer, enhet.enhetId));
+
             } else {
                 sjekkStatus();
                 const endringer: NyGruppe = {filterNavn: gruppeNavn, filterValg};
-                dispatch(lageNyGruppe(endringer, enhetId));
+                enhet && dispatch(lageNyGruppe(endringer, enhet.enhetId));
+            }
+            if (lagretFilterState.status === 'PENDING') {
+                //vis spinner
+                return;
+            } else if (lagretFilterState.status === 'OK') {
+                props.lagretFilter ? setFilterValg(props.lagretFilter.filterValg) : setFilterValg(initialState);
+                props.onRequestClose();
+            } else if (lagretFilterState.status === 'FEILET') {
+                //vis modal med lagring feilet
             }
         }
         // props.onRequestClose();
@@ -157,6 +178,8 @@ function VeilederGruppeModalLage(props: VeilederGruppeModalProps & Omit<ModalPro
 
     function slettVeiledergruppeOgLukkModaler() {
         if (props.lagretFilter) {
+            // if (lagretFilterState.status === 'OK') {
+            //     enhet && dispatch(slettGruppe(enhet.enhetId, props.lagretFilter.filterId));
             if (lagretFilterState.status === 'FEILET') { //skal hete OK, byttet kun for testing
                 dispatch(slettGruppe(enhetId, props.lagretFilter.filterId));
                 dispatch(visSletteGruppeToast());
