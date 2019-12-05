@@ -22,7 +22,7 @@ function SlettingFeiletModal(props: SlettingFeiletProps) {
                     Sletting feilet
                 </Innholdstittel>
                 <Normaltekst>
-                    Det skjedde en feil. Prøv igjen senere.
+                    Beklager, men gruppen kunne ikke slettes. Prøv igjen senere.
                 </Normaltekst>
 
             </div>

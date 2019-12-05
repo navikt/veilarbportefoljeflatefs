@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiltervalgModell } from '../../../model-interfaces';
-import { harGjortEndringer } from './veileder-gruppe-utils';
+import { harGjortEndringer, veilederlisterErLik } from './veileder-gruppe-utils';
 import ModalWrapper from 'nav-frontend-modal';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import SletteVeiledergruppeModal from './slett-gruppe-modal';
@@ -82,28 +82,40 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         props.onRequestClose();
     }
 
-    const validerGrupper = useSelector((state: AppState) => state.lagretFilter.data
-        .filter(v => v.filterId !== props.initialVerdi.filterId)
-        .map(v => v.filterNavn)
-        .map(v => v.trim()));
+    const lagradeGrupper = useSelector((state: AppState) => state.lagretFilter.data
+        .filter(v => v.filterId !== props.initialVerdi.filterId));
 
-    const doValiderGrupper = useCallback(() => {
-        if (!gruppeNavn) {
-            return 'Gruppenavn kan ikke være tomt';
-        }
-        return validerGrupper.includes(gruppeNavn) ? 'Gruppenavn finnes allerede' : undefined;
-    }, [gruppeNavn, validerGrupper]);
+    const lagredeGruppeNavn = lagradeGrupper.map(v => v.filterNavn)
+        .map(v => v.trim());
 
-    const validerSkjema = useCallback(() => {
-        let errors: any = {};
-        errors.gruppeNavn = doValiderGrupper();
-        errors.filterValg = filterValg.veiledere.length === 0 ? 'Valgte veiledere kan ikke være tomt' : undefined;
-        return errors;
-    }, [doValiderGrupper, filterValg.veiledere.length]);
+    const lagredeVeilederGrupper = lagradeGrupper.map(v => ({
+        veiledere: v.filterValg.veiledere,
+        gruppeNavn: v.filterNavn
+    }));
 
     useEffect(() => {
-        setErrors(validerSkjema());
-    }, [gruppeNavn, filterValg, validerSkjema]);
+        let errors: any = {};
+
+        if (!gruppeNavn) {
+            errors.gruppeNavn = 'Gruppen mangler navn, legg inn gruppenavn.';
+        }
+
+        if (lagredeGruppeNavn.includes(gruppeNavn)) {
+            errors.gruppeNavn = 'Gruppenavn er allerede i bruk.';
+        }
+
+        if (filterValg.veiledere.length <= 1) {
+            errors.filterValg = 'Veiledergrupper må ha 2 eller flere veiledere, legg til veiledere.';
+        }
+
+        const finnLikVeilederGruppe = lagredeVeilederGrupper.find(v => veilederlisterErLik(v.veiledere, filterValg.veiledere));
+
+        if (finnLikVeilederGruppe) {
+            errors.filterValg = `Det finnes allerede en gruppe med disse veilederne ved navn "${finnLikVeilederGruppe.gruppeNavn}"`;
+        }
+
+        setErrors(errors);
+    }, [filterValg.veiledere, gruppeNavn, lagredeGruppeNavn, lagredeVeilederGrupper]);
 
     return (
         <>

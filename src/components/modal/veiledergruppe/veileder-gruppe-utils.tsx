@@ -1,9 +1,3 @@
-import { FiltervalgModell } from '../../../model-interfaces';
-
-// export const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) => prevState.veiledere
-//     ? {...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}
-//     : {...prevState, veiledere: []};
-
 export function harGjortEndringerIFilterValg(redigertListe: string[], initialstateListe: string[]) {
     return !veilederlisterErLik(redigertListe, initialstateListe);
 }

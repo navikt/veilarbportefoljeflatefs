@@ -22,7 +22,7 @@ function LagringFeiletModal(props: LagringFeiletProps) {
                     Lagring feilet
                 </Innholdstittel>
                 <Normaltekst>
-                    Det skjedde en feil. Prøv igjen senere.
+                    Beklager, men gruppen kunne ikke lagres.
                 </Normaltekst>
 
             </div>

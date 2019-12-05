@@ -27,7 +27,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
                     value={props.gruppeNavn}
                     bredde="L"
                     onChange={e => props.setGruppeNavn(e.target.value)}
-                    feil={props.errors.gruppeNavn ? {feilmelding: props.errors.gruppeNavn} : undefined}
+                    feil={props.errors.gruppeNavn && {feilmelding: props.errors.gruppeNavn}}
                     maxLength={35}
                 />
                 <div className="veiledergruppe-modal__sokefilter">
@@ -43,6 +43,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
                     // @ts-ignore
                     valgteVeileder={props.filterValg.veiledere}
                     fjernValgtVeileder={(veilederTarget) => props.hanterVeilederChange(false, veilederTarget)}
+                    feil={props.errors.filterValg && {feilmelding: props.errors.filterValg}}
                 />
             </div>
             {props.children}
