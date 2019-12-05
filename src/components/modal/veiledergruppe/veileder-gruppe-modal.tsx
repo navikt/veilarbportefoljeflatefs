@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer';
 import { OrNothing } from '../../../utils/types/types';
 import VeilederGruppeForm from './veileder-gruppe-form';
+import { logEvent } from '../../../utils/frontend-logger';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -69,6 +70,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     }
 
     function slettVeiledergruppeOgLukkModaler() {
+        logEvent('portefolje.metrikker.veiledergrupper.slettknapp');
         props.onSlett && props.onSlett();
         setSletteVeiledergruppeModal(false);
         props.onRequestClose();
@@ -112,6 +114,11 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         setErrors(errors);
     }, [filterValg.veiledere, gruppeNavn, lagredeGruppeNavn, lagredeVeilederGrupper]);
 
+    const avbrytSletting = () => {
+        logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp');
+        setSletteVeiledergruppeModal(false);
+    };
+
     return (
         <>
             <ModalWrapper
@@ -154,7 +161,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             />
             {props.onSlett && <SletteVeiledergruppeModal
                 isOpen={visSletteVeiledergruppeModal}
-                onRequestClose={() => setSletteVeiledergruppeModal(false)}
+                onRequestClose={avbrytSletting}
                 onSubmit={slettVeiledergruppeOgLukkModaler}
             />}
         </>
