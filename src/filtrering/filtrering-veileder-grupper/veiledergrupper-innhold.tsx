@@ -44,7 +44,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
             filterId: valgtGruppe.filterId,
             filterNavn: gruppeNavn,
             filterValg
-        }, enhet.enhetId));
+        }, enhet.enhetId)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', defaultVeileder)));
     };
 
     const sletteKnapp = () => {
