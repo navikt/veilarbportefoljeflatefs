@@ -50,7 +50,6 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
 
     function lukkModal() {
-        // @ts-ignore
         if (harGjortEndringer(filterValg.veiledere, props.initialVerdi.filterValg.veiledere, props.initialVerdi.gruppeNavn, gruppeNavn)) {
             setEndringerIkkeLagretModal(true);
             return;
@@ -99,21 +98,17 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         if (!gruppeNavn) {
             errors.gruppeNavn = 'Gruppen mangler navn, legg inn gruppenavn.';
         }
-
         if (lagredeGruppeNavn.includes(gruppeNavn)) {
             errors.gruppeNavn = 'Gruppenavn er allerede i bruk.';
         }
-
         if (filterValg.veiledere.length <= 1) {
             errors.filterValg = 'Veiledergrupper må ha 2 eller flere veiledere, legg til veiledere.';
         }
-
         const finnLikVeilederGruppe = lagredeVeilederGrupper.find(v => veilederlisterErLik(v.veiledere, filterValg.veiledere));
 
         if (finnLikVeilederGruppe) {
             errors.filterValg = `Det finnes allerede en gruppe med disse veilederne ved navn "${finnLikVeilederGruppe.gruppeNavn}"`;
         }
-
         setErrors(errors);
     }, [filterValg.veiledere, gruppeNavn, lagredeGruppeNavn, lagredeVeilederGrupper]);
 
