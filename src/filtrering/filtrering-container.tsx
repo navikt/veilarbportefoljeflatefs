@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {  useDispatch } from 'react-redux';
 import { endreFiltervalg } from '../ducks/filtrering';
-import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
+import { FiltervalgModell, VeilederModell } from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
@@ -12,6 +12,8 @@ import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-ve
 import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
 import { VIS_VEILEDER_GRUPPER } from '../konstanter';
 import {useEnhetSelector} from "../hooks/redux/use-enhet-selector";
+import {OrNothing} from "../utils/types/types";
+import {Tiltak} from "../ducks/enhettiltak";
 
 export const defaultVeileder: VeilederModell = {
     ident: '',
@@ -21,7 +23,7 @@ export const defaultVeileder: VeilederModell = {
 };
 
 interface FiltreringContainerProps {
-    enhettiltak: EnhetModell;
+    enhettiltak: OrNothing<Tiltak>;
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
     veileder?: VeilederModell;
