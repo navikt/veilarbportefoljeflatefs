@@ -24,6 +24,7 @@ import { pagineringSetup } from '../ducks/paginering';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './minoversikt-side.less';
+import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -107,6 +108,8 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
             </Normaltekst>
         );
 
+        const tiltak = sortTiltak(enhettiltak.data.tiltak);
+
         return (
             <DocumentTitle title="Min oversikt">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
@@ -131,7 +134,7 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                                 filtervalg={filtervalg}
                                                 filtergruppe="veileder"
                                                 veileder={gjeldendeVeileder}
-                                                enhettiltak={enhettiltak.data.tiltak}
+                                                enhettiltak={tiltak}
                                             />
                                         </div>
                                         <div className="col-lg-9 col-md-12 col-sm-12">

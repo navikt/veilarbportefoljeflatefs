@@ -21,6 +21,7 @@ import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './enhet-side.less';
 import Toasts from '../components/toast/toast';
 import {slettEnkeltFilter} from "../ducks/filtrering";
+import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -64,6 +65,8 @@ class EnhetSide extends React.Component<EnhetSideProps> {
 
     render() {
         const {filtervalg, veilederliste, statustall, enhettiltak, listevisning, slettVeilederFilter} = this.props;
+        const tiltak = sortTiltak(enhettiltak.data.tiltak);
+
         return (
             <DocumentTitle title="Enhetens oversikt">
                 <div className="enhet-side blokk-xl">
@@ -74,7 +77,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                             <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
                                 <FiltreringContainer
                                     filtervalg={filtervalg}
-                                    enhettiltak={enhettiltak.data.tiltak}
+                                    enhettiltak={tiltak}
                                     filtergruppe="enhet"
                                 />
                             </div>

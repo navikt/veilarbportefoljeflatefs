@@ -1,21 +1,25 @@
 import * as Api from './../middleware/api';
 import { doThenDispatch, STATUS } from './utils';
+import {OrNothing} from "../utils/types/types";
 
 // Actions
 export const OK = 'veilarbportefoljeflatefs/enhettiltak/OK';
 export const FEILET = 'veilarbportefoljeflatefs/enhettiltak/FEILET';
 export const PENDING = 'veilarbportefoljeflatefs/enhettiltak/PENDING';
 
+export type Tiltak =  {[key: string]: string }
+
+
 export interface EnhettiltakState {
     data: {
-        tiltak: any;
+        tiltak: OrNothing<Tiltak>
     };
     status?: string;
 }
 
 const initalState: EnhettiltakState = {
     data: {
-        tiltak: {}
+        tiltak: null,
     },
     status: STATUS.NOT_STARTED,
 };

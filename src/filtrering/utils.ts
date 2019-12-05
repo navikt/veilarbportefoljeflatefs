@@ -2,8 +2,7 @@ export const lagLablerTilVeiledereMedIdenter = (identer, veiledere, doSlettFilte
     identer.map((ident) => {
             const veileder = veiledere.find((v) => v.ident === ident);
             if(!veileder) {
-                doSlettFilter(ident);
-                return;
+                return doSlettFilter(ident);
             }
             return { label: `${veileder.etternavn}, ${veileder.fornavn} (${ident})`, key: ident };
         }).filter((ident) => ident);
