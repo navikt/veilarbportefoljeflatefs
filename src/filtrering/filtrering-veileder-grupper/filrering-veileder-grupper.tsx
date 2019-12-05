@@ -32,10 +32,12 @@ function FilteringVeilederGrupper() {
         return <Spinner/>;
     }
 
+    const sortertVeiledergruppe = lagretFilter.sort((a,b) => a.filterNavn.localeCompare(b.filterNavn));
+
     return (
         <div>
             {lagretFilter.length > 0
-                ? <VeilederGruppeInnhold lagretFilter={lagretFilter}/>
+                ? <VeilederGruppeInnhold lagretFilter={sortertVeiledergruppe}/>
                 : <div className="veiledergruppe-emptystate">
                     <Normaltekst className="veiledergruppe-emptystate__tekst">
                         Ingen lagrede veiledergrupper på enheten
