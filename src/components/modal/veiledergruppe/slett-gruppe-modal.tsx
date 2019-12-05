@@ -1,7 +1,7 @@
 import React from 'react';
-import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import {VarselModal, VarselModalType} from '../../varselmodal/varselmodal';
+import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { VarselModal, VarselModalType } from '../../varselmodal/varselmodal';
 
 interface SletteVeiledergruppeModal {
     isOpen: boolean;

@@ -1,4 +1,3 @@
-import { VeilederGruppeForm } from './veileder-gruppe-form';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FiltervalgModell } from '../../../model-interfaces';
 import { harGjortEndringer } from './veileder-gruppe-utils';
@@ -9,6 +8,7 @@ import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer';
 import { OrNothing } from '../../../utils/types/types';
+import VeilederGruppeForm from './veileder-gruppe-form';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -24,7 +24,6 @@ interface VeilederModalProps {
     modalTittel: string,
     lagreKnappeTekst: string
     validerGruppenavn?: (gruppenavn: string) => OrNothing<string>;
-
 }
 
 export function VeilederGruppeModal(props: VeilederModalProps) {
@@ -90,17 +89,17 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
 
     const doValiderGrupper = useCallback(() => {
         if (!gruppeNavn) {
-            return 'Mangler navn';
+            return 'Gruppenavn kan ikke være tomt';
         }
         return validerGrupper.includes(gruppeNavn) ? 'Gruppenavn finnes allerede' : undefined;
-    },[gruppeNavn, validerGrupper]);
+    }, [gruppeNavn, validerGrupper]);
 
     const validerSkjema = useCallback(() => {
         let errors: any = {};
         errors.gruppeNavn = doValiderGrupper();
-        errors.filterValg = filterValg.veiledere.length === 0 ? 'Mangler veiledere' : undefined;
+        errors.filterValg = filterValg.veiledere.length === 0 ? 'Valgte veiledere kan ikke være tomt' : undefined;
         return errors;
-    },[doValiderGrupper, filterValg.veiledere.length]);
+    }, [doValiderGrupper, filterValg.veiledere.length]);
 
     useEffect(() => {
         setErrors(validerSkjema());

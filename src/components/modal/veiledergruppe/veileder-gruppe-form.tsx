@@ -3,10 +3,7 @@ import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { Input } from 'nav-frontend-skjema';
 import SokVeiledere from '../../sok-veiledere/sok-veiledere';
 import { FiltervalgModell } from '../../../model-interfaces';
-import { useSelector } from 'react-redux';
-import { AppState } from '../../../reducer';
-import { Flatknapp } from 'nav-frontend-knapper';
-import { ReactComponent as SlettIkon } from './remove-circle.svg';
+import ValgtVeilederGruppeListe from './valgt-veileder-gruppeliste';
 
 interface VeilederGruppeForm {
     filterValg: FiltervalgModell;
@@ -18,7 +15,7 @@ interface VeilederGruppeForm {
     errors: any;
 }
 
-export function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
+function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
     return (
         <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit}>
             <Innholdstittel tag="h1" className="blokk-xs">
@@ -53,48 +50,4 @@ export function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>)
     );
 }
 
-interface ValgtVeilederGruppeListeProps {
-    valgteVeileder: string[],
-    fjernValgtVeileder: (veilederId: string) => void;
-}
-
-function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
-    const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
-
-    const veiledere = veilederePaEnheten
-        .filter(veilederPaEnhet =>
-            props.valgteVeileder.includes(veilederPaEnhet.ident))
-        .sort((veileder1, veiledere2) => veileder1.etternavn.localeCompare(veiledere2.etternavn));
-
-    const splitArrayITo = [veiledere.slice(0, Math.ceil(veiledere.length / 2)), veiledere.slice(Math.ceil(veiledere.length / 2), veiledere.length)];
-
-    if (veiledere.length === 0) {
-        return (
-            <div className="veiledergruppe-modal__valgteveileder">
-                <Normaltekst className="veiledergruppe-modal__valgteveileder__tom-liste-tekst">
-                    Ingen veiledere lagt til i gruppen
-                </Normaltekst>
-            </div>
-        );
-    }
-
-    return (
-        <div className="veiledergruppe-modal__valgteveileder">
-            {splitArrayITo.map(listeMedVeileder =>
-                <div>
-                    {listeMedVeileder.map(veileder =>
-                        <div className="veiledergruppe-modal__valgteveileder__elem">
-                            <span>{`${veileder.etternavn}, ${veileder.fornavn}`}</span>
-                            <Flatknapp
-                                className="fjern--knapp"
-                                htmlType="button"
-                                onClick={() => props.fjernValgtVeileder(veileder.ident)}>
-                                <SlettIkon/>
-                            </Flatknapp>
-                        </div>
-                    )}
-                </div>
-            )}
-        </div>
-    );
-}
+export default VeilederGruppeForm;
