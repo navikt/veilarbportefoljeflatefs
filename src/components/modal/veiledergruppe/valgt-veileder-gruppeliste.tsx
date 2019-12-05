@@ -4,6 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { ReactComponent as SlettIkon } from './remove-circle.svg';
 import React from 'react';
+import {SkjemaGruppe} from "nav-frontend-skjema";
 
 interface ValgtVeilederGruppeListeProps {
     valgteVeileder: string[],
@@ -22,11 +23,11 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
 
     if (veiledere.length === 0) {
         return (
-            <div className="veiledergruppe-modal__valgteveileder">
+            <SkjemaGruppe className="veiledergruppe-modal__valgteveileder">
                 <Normaltekst className="veiledergruppe-modal__valgteveileder__tom-liste-tekst">
                     Ingen veiledere lagt til i gruppen
                 </Normaltekst>
-            </div>
+            </SkjemaGruppe>
         );
     }
 
