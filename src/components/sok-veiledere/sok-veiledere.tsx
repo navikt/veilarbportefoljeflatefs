@@ -12,11 +12,13 @@ interface SokVeiledereProps {
 function SokVeiledere({erValgt, hanterVeilederValgt}: SokVeiledereProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
 
+    const sorterteVeilederePaEtterNavn = veilederePaEnheten.sort((a, b) => a.etternavn.localeCompare(b.etternavn))
+
     return (
         <SokFilterNy
             label="Velg veiledere:"
             placeholder="Søk veileder"
-            data={veilederePaEnheten}
+            data={sorterteVeilederePaEtterNavn}
         >
             {liste =>
                 <div className="checkbox-filterform">

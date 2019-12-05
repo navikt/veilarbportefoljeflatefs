@@ -3,30 +3,30 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { VarselModal, VarselModalType } from '../../varselmodal/varselmodal';
 
-interface SlettingFeiletProps {
+interface LagringFeiletProps {
     isOpen: boolean;
     onRequestClose: () => void;
 }
 
-function SlettingFeiletModal(props: SlettingFeiletProps) {
+function LagringFeiletModal(props: LagringFeiletProps) {
     return (
         <VarselModal
-            contentLabel="Sletting av veiledergruppe feilet"
+            contentLabel="Lagring av veiledergruppe feilet"
             isOpen={props.isOpen}
             onRequestClose={props.onRequestClose}
-            className="sletting-feilet-modal"
+            className="lagring-feilet-modal"
             type={VarselModalType.ADVARSEL}
         >
-            <div className="blokk-s sletting-feilet-modal__tekstgruppe">
+            <div className="blokk-s lagring-feilet-modal__tekstgruppe">
                 <Innholdstittel className="blokk-s">
-                    Sletting feilet
+                    Lagring feilet
                 </Innholdstittel>
                 <Normaltekst>
-                    Beklager, men gruppen kunne ikke slettes. Prøv igjen senere.
+                    Beklager, men gruppen kunne ikke lagres.
                 </Normaltekst>
 
             </div>
-            <div className="sletting-feilet-modal__knappegruppe">
+            <div className="lagring-feilet-modal__knappegruppe">
                 <Hovedknapp
                     htmlType="submit"
                     onClick={props.onRequestClose}
@@ -38,4 +38,4 @@ function SlettingFeiletModal(props: SlettingFeiletProps) {
     );
 }
 
-export default SlettingFeiletModal;
+export default LagringFeiletModal;
