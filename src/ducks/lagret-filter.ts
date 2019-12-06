@@ -130,8 +130,8 @@ export function lageNyGruppe(endringer: NyGruppe, enhetId: string) {
 }
 
 // Action Creators
-export function slettGruppe(enhetId: string, filterId: number) {
-    return doThenDispatch(() => slettVeiledergruppe(enhetId, filterId), {
+export function slettGruppe(enhet: string, filterId: number) {
+    return doThenDispatch(() => slettVeiledergruppe(enhet, filterId), {
         OK: SLETT_VEILEDERGRUPPER_OK,
         FEILET: SLETT_VEILEDERGRUPPER_FEILET,
         PENDING: SLETT_VEILEDERGRUPPER_PENDING
