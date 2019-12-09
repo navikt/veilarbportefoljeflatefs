@@ -9,15 +9,24 @@ import Spinner from '../../components/spinner/spinner';
 import { VeilederGruppeModal } from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
 import { initialState } from '../../ducks/filtrering';
 import { FiltervalgModell } from '../../model-interfaces';
-import { lageNyGruppe } from '../../ducks/lagret-filter';
+import {
+    lageNyGruppe,
+    NY_VEILEDERGRUPPER_OK,
+    NY_VEILEDERGRUPPER_PENDING
+} from '../../ducks/lagret-filter';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
+import { logEvent } from '../../utils/frontend-logger';
 
-function FilteringVeilederGrupper() {
+export interface FiltreringsVeilederGrupperProps {
+    filterValg?: FiltervalgModell;
+}
+
+function FilteringVeilederGrupper(props: FiltreringsVeilederGrupperProps) {
+
     const [visVeilederGruppeModal, setVeilederGruppeModal] = useState(false);
 
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const lagretFilter = lagretFilterState.data;
-    const laster = lagretFilterState.status === 'PENDING';
 
     const dispatch = useDispatch();
     const enhet = useEnhetSelector();
@@ -27,12 +36,17 @@ function FilteringVeilederGrupper() {
             filterNavn: gruppeNavn,
             filterValg
         }, enhet.enhetId));
+        if (NY_VEILEDERGRUPPER_PENDING) {
+            return <Spinner/>;
+        }
+        if (NY_VEILEDERGRUPPER_OK) {
+            logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket', {
+                veiledere: props.filterValg && props.filterValg.veiledere.length
+            });
+        }
     };
-    if (laster) {
-        return <Spinner/>;
-    }
 
-    const sortertVeiledergruppe = lagretFilter.sort((a,b) => a.filterNavn.localeCompare(b.filterNavn));
+    const sortertVeiledergruppe = lagretFilter.sort((a, b) => a.filterNavn.localeCompare(b.filterNavn));
 
     return (
         <div>

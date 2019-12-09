@@ -10,6 +10,11 @@ import { AppState } from '../../../reducer';
 import { OrNothing } from '../../../utils/types/types';
 import VeilederGruppeForm from './veileder-gruppe-form';
 import { logEvent } from '../../../utils/frontend-logger';
+import Spinner from '../../spinner/spinner';
+import {
+    SLETT_VEILEDERGRUPPER_OK,
+    SLETT_VEILEDERGRUPPER_PENDING
+} from '../../../ducks/lagret-filter';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -24,6 +29,7 @@ interface VeilederModalProps {
     modalTittel: string,
     lagreKnappeTekst: string
     validerGruppenavn?: (gruppenavn: string) => OrNothing<string>;
+    filterValg?: FiltervalgModell;
 }
 
 export function VeilederGruppeModal(props: VeilederModalProps) {
@@ -66,7 +72,6 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         }
     };
 
-
     function lukkModal() {
         if (harGjortEndringer(filterValg.veiledere, props.initialVerdi.filterValg.veiledere, props.initialVerdi.gruppeNavn, gruppeNavn)) {
             setEndringerIkkeLagretModal(true);
@@ -94,6 +99,14 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         props.onSlett && props.onSlett();
         setSletteVeiledergruppeModal(false);
         props.onRequestClose();
+        if (SLETT_VEILEDERGRUPPER_PENDING) {
+            return <Spinner/>;
+        }
+        if (SLETT_VEILEDERGRUPPER_OK) {
+            logEvent('portefolje.metrikker.veiledergrupper.sletting-vellykket', {
+                veiledere: props.filterValg && props.filterValg.veiledere.length
+            });
+        }
     }
 
     function endringerIkkeLagretOgLukkModaler() {
