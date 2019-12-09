@@ -82,6 +82,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         setHarForsoktSubmitte(true);
 
         const errors = validate(gruppeNavn, filterValg);
+
         if (Object.values(errors).find(v => v)) {
             return;
         }
@@ -107,7 +108,8 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         .filter(v => v.filterId !== props.initialVerdi.filterId));
 
     const lagredeGruppeNavn = lagradeGrupper.map(v => v.filterNavn)
-        .map(v => v.trim());
+        .map(v => v.trim())
+        .map(v => v.toLowerCase());
 
     const lagredeVeilederGrupper = lagradeGrupper.map(v => ({
         veiledere: v.filterValg.veiledere,
@@ -120,7 +122,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         if (!gruppeNavn) {
             errors.gruppeNavn = 'Gruppen mangler navn, legg inn gruppenavn.';
         }
-        if (lagredeGruppeNavn.includes(gruppeNavn)) {
+        if (lagredeGruppeNavn.includes(gruppeNavn.trim().toLowerCase())) {
             errors.gruppeNavn = 'Gruppenavn er allerede i bruk.';
         }
         if (filterValg.veiledere.length <= 1) {
