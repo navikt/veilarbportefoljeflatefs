@@ -5,9 +5,11 @@ import { useDispatch } from 'react-redux';
 import { useTimer } from '../../hooks/use-timer';
 import { fjernOpprettGruppeToast } from '../../store/toast/actions';
 import { logEvent } from '../../utils/frontend-logger';
+import { FiltervalgModell } from '../../model-interfaces';
 
 export interface ToastType {
     className?: string;
+    filterValg?: FiltervalgModell;
 }
 
 function OpprettGruppeToast(props: ToastType) {
@@ -22,7 +24,8 @@ function OpprettGruppeToast(props: ToastType) {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            logEvent('portefolje.metrikker.veiledergrupper.opprett-toast');
+            logEvent('portefolje.metrikker.veiledergrupper.opprett-toast', {
+                veiledere: props.filterValg && props.filterValg.veiledere.length});
             dispatch(fjernOpprettGruppeToast());
         }, 10000);
         return () => clearTimeout(timer);
