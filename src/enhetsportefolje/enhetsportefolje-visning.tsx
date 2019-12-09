@@ -173,14 +173,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
         const visNedreToolbar = antallTotalt >= sideStorrelse && !visDiagram;
 
-        const loggSlettingFeiletModal = () => {
-            logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet-modal');
-        };
-
-        const loggLagringFeiletModal = () => {
-            logEvent('portefolje.metrikker.veiledergrupper.lagring-feilet-modal');
-        };
-
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
@@ -220,12 +212,12 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     <SlettingFeiletModal
                         isOpen={serverfeilModalSkalVises === SLETTING_FEILET_MODAL}
                         onRequestClose={closeServerfeilModal}
-                        onAfterOpen={loggSlettingFeiletModal}
+                        onAfterOpen={() => logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet-modal')}
                     />
                     <LagringFeiletModal
                         isOpen={serverfeilModalSkalVises === REDIGERING_FEILET_MODAL || serverfeilModalSkalVises === NY_FEILET_MODAL}
                         onRequestClose={closeServerfeilModal}
-                        onAfterOpen={loggLagringFeiletModal}
+                        onAfterOpen={() => logEvent('portefolje.metrikker.veiledergrupper.lagring-feilet-modal')}
                     />
                 </Innholdslaster>
             </div>
