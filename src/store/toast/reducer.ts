@@ -11,10 +11,11 @@ const initialState: ToastState = {
 
 export const toastReducer = (state: ToastState = initialState, action: ToastAction): ToastState => {
     switch (action.type) {
+        case ToastActionType.VIS_OPPRETT_GRUPPE_TOAST:
         case ToastActionType.VIS_LAGRE_ENDRINGER_TOAST:
-        case ToastActionType.VIS_LAGRE_NYTT_FILTER_TOAST:
         case ToastActionType.VIS_SLETTE_GRUPPE_TOAST:
             return ({toasts: action.type});
+        case ToastActionType.FJERN_OPPRETT_GRUPPE_TOAST:
         case ToastActionType.FJERN_LAGRE_ENDRINGER_TOAST:
         case ToastActionType.FJERN_SLETTE_GRUPPE_TOAST:
             return ({toasts: null});
