@@ -26,6 +26,7 @@ import { ListevisningType } from '../ducks/ui/listevisning';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 import SlettingFeiletModal from '../components/modal/veiledergruppe/sletting-feilet-modal';
 import LagringFeiletModal from '../components/modal/veiledergruppe/lagring-feilet-modal';
+import { logEvent } from '../utils/frontend-logger';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -37,11 +38,15 @@ function antallFilter(filtervalg) {
 
     return Object.entries(filtervalg)
         .map(([filter, value]) => {
-            if (value === true) return 1;
-            else if (Array.isArray(value)) return value.length;
-            else if (filter === 'aktiviteter') return mapAktivitetFilter(value);
-            else if (typeof value === 'object') return value ? Object.entries(value).length : 0;
-            else if (value) return 1;
+            if (value === true) {
+                return 1;
+            } else if (Array.isArray(value)) {
+                return value.length;
+            } else if (filter === 'aktiviteter') {
+                return mapAktivitetFilter(value);
+            } else if (typeof value === 'object') {
+                return value ? Object.entries(value).length : 0;
+            } else if (value) return 1;
             return 0;
         }).reduce((a, b) => a + b, 0);
 }
@@ -121,7 +126,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             visningsmodus,
         } = this.props;
 
-        const { antallTotalt } = portefolje.data;
+        const {antallTotalt} = portefolje.data;
 
         return (
             <Toolbar
@@ -138,7 +143,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                 posisjon={posisjon}
             />
         );
-    }
+    };
 
     render() {
         const {
@@ -167,6 +172,14 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
         const visNedreToolbar = antallTotalt >= sideStorrelse && !visDiagram;
+
+        const loggSlettingFeiletModal = () => {
+            logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet-modal');
+        };
+
+        const loggLagringFeiletModal = () => {
+            logEvent('portefolje.metrikker.veiledergrupper.lagring-feilet-modal');
+        };
 
         return (
             <div className="portefolje__container">
@@ -207,10 +220,12 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     <SlettingFeiletModal
                         isOpen={serverfeilModalSkalVises === SLETTING_FEILET_MODAL}
                         onRequestClose={closeServerfeilModal}
+                        onAfterOpen={loggSlettingFeiletModal}
                     />
                     <LagringFeiletModal
                         isOpen={serverfeilModalSkalVises === REDIGERING_FEILET_MODAL || serverfeilModalSkalVises === NY_FEILET_MODAL}
                         onRequestClose={closeServerfeilModal}
+                        onAfterOpen={loggLagringFeiletModal}
                     />
                 </Innholdslaster>
             </div>
