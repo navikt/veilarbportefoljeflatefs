@@ -54,7 +54,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                 apen={false}
                 tittel="Veiledergrupper"
                 tittelProps="undertittel"
-                lamellNavn="status"
+                lamellNavn="veiledergrupper"
             >
                 <FilteringVeilederGrupper/>
 

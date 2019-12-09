@@ -6,6 +6,7 @@ import { VarselModal, VarselModalType } from '../../varselmodal/varselmodal';
 interface LagringFeiletProps {
     isOpen: boolean;
     onRequestClose: () => void;
+    onAfterOpen?: () => void;
 }
 
 function LagringFeiletModal(props: LagringFeiletProps) {
@@ -16,6 +17,7 @@ function LagringFeiletModal(props: LagringFeiletProps) {
             onRequestClose={props.onRequestClose}
             className="lagring-feilet-modal"
             type={VarselModalType.ADVARSEL}
+            onAfterOpen={props.onAfterOpen}
         >
             <div className="blokk-s lagring-feilet-modal__tekstgruppe">
                 <Innholdstittel className="blokk-s">

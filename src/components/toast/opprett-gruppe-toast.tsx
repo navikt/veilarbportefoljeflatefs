@@ -3,14 +3,16 @@ import './toast.less';
 import AlertStripeSuksess from 'nav-frontend-alertstriper/lib/suksess-alertstripe';
 import { useDispatch } from 'react-redux';
 import { useTimer } from '../../hooks/use-timer';
-import { fjernSletteGruppeToast } from '../../store/toast/actions';
+import { fjernOpprettGruppeToast } from '../../store/toast/actions';
 import { logEvent } from '../../utils/frontend-logger';
+import { FiltervalgModell } from '../../model-interfaces';
 
 export interface ToastType {
     className?: string;
+    filterValg?: FiltervalgModell;
 }
 
-function SletteGruppeToast(props: ToastType) {
+function OpprettGruppeToast(props: ToastType) {
     const toastRef = useRef<HTMLSpanElement>(null);
     const {startTimer} = useTimer();
 
@@ -22,8 +24,9 @@ function SletteGruppeToast(props: ToastType) {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            logEvent('portefolje.metrikker.veiledergrupper.sletting-toast');
-            dispatch(fjernSletteGruppeToast());
+            logEvent('portefolje.metrikker.veiledergrupper.opprett-toast', {
+                veiledere: props.filterValg && props.filterValg.veiledere.length});
+            dispatch(fjernOpprettGruppeToast());
         }, 10000);
         return () => clearTimeout(timer);
     });
@@ -33,14 +36,14 @@ function SletteGruppeToast(props: ToastType) {
     });
 
     return (
-        <div className="slette-gruppe-toast" key={new Date().getTime()}>
-            <AlertStripeSuksess className="slette-gruppe-toast__alertstripe">
-                <span ref={toastRef} tabIndex={0} className="slette-gruppe-toast__tekst">
-                    Gruppen er slettet
+        <div className="opprett-gruppe-toast" key={new Date().getTime()}>
+            <AlertStripeSuksess className="opprett-gruppe-toast__alertstripe">
+                <span ref={toastRef} tabIndex={0} className="opprett-gruppe-toast__tekst">
+                    Gruppen er opprettet
                 </span>
             </AlertStripeSuksess>
         </div>
     );
 }
 
-export default SletteGruppeToast;
+export default OpprettGruppeToast;

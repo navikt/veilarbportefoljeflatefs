@@ -4,6 +4,7 @@ import AlertStripeSuksess from 'nav-frontend-alertstriper/lib/suksess-alertstrip
 import { useDispatch } from 'react-redux';
 import { useTimer } from '../../hooks/use-timer';
 import { fjernLagreEndringerToast } from '../../store/toast/actions';
+import { logEvent } from '../../utils/frontend-logger';
 
 export interface ToastType {
     className?: string;
@@ -15,17 +16,14 @@ function LagreEndringerToast(props: ToastType) {
 
     const dispatch = useDispatch();
 
-    const handleClick = () => {
-        dispatch(fjernLagreEndringerToast());
-    };
-
     useEffect(() => {
         (toastRef.current as HTMLSpanElement).focus();
     }, [toastRef]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            handleClick();
+            logEvent('portefolje.metrikker.veiledergrupper.lagring-toast');
+            dispatch(fjernLagreEndringerToast());
         }, 10000);
         return () => clearTimeout(timer);
     });
