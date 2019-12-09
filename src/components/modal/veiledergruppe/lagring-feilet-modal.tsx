@@ -6,7 +6,7 @@ import { VarselModal, VarselModalType } from '../../varselmodal/varselmodal';
 interface LagringFeiletProps {
     isOpen: boolean;
     onRequestClose: () => void;
-    onAfterOpen: () => void;
+    onAfterOpen?: () => void;
 }
 
 function LagringFeiletModal(props: LagringFeiletProps) {
