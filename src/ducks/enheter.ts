@@ -1,4 +1,4 @@
-import { hentVeiledersEnheter } from './../middleware/api';
+import { hentVeiledersEnheter } from '../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { leggEnhetIUrl, leggSeAlleIUrl, leggSideIUrl } from '../utils/url-utils';
 import { ValgtEnhetModell } from '../model-interfaces';
@@ -84,6 +84,7 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
         dispatch(velgEnhetForVeileder(nyEnhet));
         dispatch(settNyAktivEnhet(nyEnhet));
         dispatch(hentEnhetTiltak(nyEnhet));
+        dispatch(hentVeiledereForEnhet(nyEnhet));
 
         leggSideIUrl(1);
         leggSeAlleIUrl(false);
@@ -99,7 +100,6 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
             dispatch(hentPortefoljeForEnhet(nyEnhet, IKKE_SATT, IKKE_SATT, state.filtrering));
             dispatch(hentStatusTall(nyEnhet));
         } else if(uri.includes('/veiledere')) {
-            dispatch(hentVeiledereForEnhet(nyEnhet));
             dispatch(hentStatusTall(nyEnhet));
         }
     };
