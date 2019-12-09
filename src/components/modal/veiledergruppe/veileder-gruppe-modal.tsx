@@ -17,7 +17,6 @@ interface VeilederModalProps {
         filterValg: FiltervalgModell,
         filterId: number
     }
-
     onSubmit: (gruppeNavn: string, filterValg: FiltervalgModell) => void
     onSlett?: () => void;
     onRequestClose: () => void;
@@ -31,6 +30,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     const [filterValg, setFilterValg] = useState<FiltervalgModell>(props.initialVerdi.filterValg);
     const [gruppeNavn, setGruppeNavn] = useState<string>(props.initialVerdi.gruppeNavn);
     const [errors, setErrors] = useState({} as any);
+    const [harForsoktSubmitte, setHarForsoktSubmitte] = useState(false);
 
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
@@ -40,15 +40,32 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         setGruppeNavn(props.initialVerdi.gruppeNavn);
     }, [props.initialVerdi]);
 
-    const fjernVeiledereFraListen = (prevState: FiltervalgModell, veilederTarget: string) =>
-        // @ts-ignore
-        ({...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)});
+    const fjernVeiledereFraListen = (veilederTarget: string) => {
+        setFilterValg(prevState => ({...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}));
+        if (harForsoktSubmitte) {
+            validate(gruppeNavn, {...filterValg, veiledere: filterValg.veiledere.filter(v => v !== veilederTarget)});
+        }
+    };
 
-    const hanterChange = (erValgt: boolean, veilederTarget: string) =>
-        erValgt
-            // @ts-ignore
-            ? setFilterValg(prevState => ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]}))
-            : setFilterValg(prevState => fjernVeiledereFraListen(prevState, veilederTarget));
+    const hanterGruppeNavnChange = (nyttNavn: string) => {
+        setGruppeNavn(nyttNavn);
+        if (harForsoktSubmitte) {
+            validate(nyttNavn, filterValg);
+        }
+    };
+
+    const hanterChange = (erValgt: boolean, veilederTarget: string) => {
+        if (erValgt) {
+            setFilterValg(prevState => ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]}));
+            if (harForsoktSubmitte) {
+                validate(gruppeNavn, {...filterValg, veiledere: [...filterValg.veiledere, veilederTarget]});
+            }
+
+        } else {
+            fjernVeiledereFraListen(veilederTarget);
+        }
+    };
+
 
     function lukkModal() {
         if (harGjortEndringer(filterValg.veiledere, props.initialVerdi.filterValg.veiledere, props.initialVerdi.gruppeNavn, gruppeNavn)) {
@@ -62,6 +79,9 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         e.preventDefault();
         e.stopPropagation();
 
+        setHarForsoktSubmitte(true);
+
+        const errors = validate(gruppeNavn, filterValg);
         if (Object.values(errors).find(v => v)) {
             return;
         }
@@ -94,7 +114,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         gruppeNavn: v.filterNavn
     }));
 
-    useEffect(() => {
+    const validate = (gruppeNavn, filterValg) => {
         let errors: any = {};
 
         if (!gruppeNavn) {
@@ -111,8 +131,10 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         if (finnLikVeilederGruppe) {
             errors.filterValg = `Det finnes allerede en gruppe med disse veilederne ved navn "${finnLikVeilederGruppe.gruppeNavn}"`;
         }
+
         setErrors(errors);
-    }, [filterValg.veiledere, gruppeNavn, lagredeGruppeNavn, lagredeVeilederGrupper]);
+        return errors;
+    };
 
     const avbrytSletting = () => {
         logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp');
@@ -132,7 +154,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                     gruppeNavn={gruppeNavn}
                     modalTittel={props.modalTittel}
                     hanterVeilederChange={hanterChange}
-                    setGruppeNavn={setGruppeNavn}
+                    setGruppeNavn={hanterGruppeNavnChange}
                     onSubmit={lagreVeilederGruppeEndringer}
                     errors={errors}
                 >

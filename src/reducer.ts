@@ -16,7 +16,6 @@ import sideReducer from './ducks/ui/side';
 import lagretFilterReducer, {LagretFilterState} from './ducks/lagret-filter';
 import { slettCleanIUrl } from './utils/url-utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
-import { reducer as formReducer } from 'redux-form';
 import enhetTiltakReducer, { EnhettiltakState } from './ducks/enhettiltak';
 import listevisningReducer, {
     ListevisningState,
@@ -69,7 +68,6 @@ export interface AppState {
     nycontext: ContextState;
     features: FeaturesState;
     lagretFilter: LagretFilterState;
-    form: any; // TODO type
     toastReducer: ToastState;
 }
 
@@ -99,6 +97,5 @@ export default combineReducers<AppState>({
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
     lagretFilter: lagretFilterReducer,
-    form: formReducer,
     toastReducer: toastReducer
 });

@@ -16,7 +16,11 @@ export enum AktiviteterValg {
     NA = 'NA'
 }
 
-export interface FiltreringAktiviteterValg { [aktivitet: string]: AktiviteterValg; }
+type AktivititetNykkel = 'BEHANDLING' | 'EGEN' | 'GRUPPEAKTIVITET'| 'IJOBB' | 'MOTE' | 'SOKEAVTALE' | 'STILLING' | 'TILTAK' | 'UTDANNINGAKTIVITET'
+
+export type FiltreringAktiviteterValg = {
+    [aktivitet in AktivititetNykkel]: AktiviteterValg;
+};
 
 export interface FiltreringState {
     ferdigfilterListe: string[];
