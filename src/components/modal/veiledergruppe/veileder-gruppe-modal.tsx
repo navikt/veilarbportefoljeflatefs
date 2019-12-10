@@ -26,10 +26,15 @@ interface VeilederModalProps {
     validerGruppenavn?: (gruppenavn: string) => OrNothing<string>;
 }
 
+interface VeilederGruppeErrors {
+    gruppeNavn: OrNothing<string>,
+    filterValg: OrNothing<string>
+}
+
 export function VeilederGruppeModal(props: VeilederModalProps) {
     const [filterValg, setFilterValg] = useState<FiltervalgModell>(props.initialVerdi.filterValg);
     const [gruppeNavn, setGruppeNavn] = useState<string>(props.initialVerdi.gruppeNavn);
-    const [errors, setErrors] = useState({} as any);
+    const [errors, setErrors] = useState<VeilederGruppeErrors>({} as VeilederGruppeErrors);
     const [harForsoktSubmitte, setHarForsoktSubmitte] = useState(false);
 
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
@@ -38,6 +43,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     useEffect(() => {
         setFilterValg(props.initialVerdi.filterValg);
         setGruppeNavn(props.initialVerdi.gruppeNavn);
+        setErrors({} as VeilederGruppeErrors)
     }, [props.initialVerdi]);
 
     const fjernVeiledereFraListen = (veilederTarget: string) => {
