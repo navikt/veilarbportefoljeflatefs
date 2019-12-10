@@ -23,7 +23,7 @@ function TildelVeileder({ skalVises,  filtergruppe, gjeldendeVeileder, toolbarPo
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
 
-    const sorterVeiledere = veiledere.sort((a, b) => a.etternavn.localeCompare(b.etternavn));
+    const sorterVeiledere = veiledere.sort((a, b) => a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1);
 
     const doTildelTilVeileder = (tilordninger, tilVeileder) => {
         return dispatch(tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder, toolbarPosisjon));
