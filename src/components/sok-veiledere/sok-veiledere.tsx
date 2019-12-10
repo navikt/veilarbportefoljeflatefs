@@ -12,7 +12,7 @@ interface SokVeiledereProps {
 function SokVeiledere({erValgt, hanterVeilederValgt}: SokVeiledereProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
 
-    const sorterteVeilederePaEtterNavn = veilederePaEnheten.sort((a, b) => a.etternavn.localeCompare(b.etternavn))
+    const sorterteVeilederePaEtterNavn = veilederePaEnheten.sort((a, b) => a.etternavn.localeCompare(b.etternavn));
 
     return (
         <SokFilterNy
