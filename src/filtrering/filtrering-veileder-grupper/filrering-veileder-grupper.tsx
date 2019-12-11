@@ -6,12 +6,13 @@ import VeilederGruppeInnhold from './veiledergrupper-innhold';
 import './veileder-gruppe.less';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { VeilederGruppeModal } from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
-import { initialState } from '../../ducks/filtrering';
+import { endreFiltervalg, initialState } from '../../ducks/filtrering';
 import { FiltervalgModell } from '../../model-interfaces';
 import {
     lageNyGruppe,
 } from '../../ducks/lagret-filter';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
+import { defaultVeileder } from '../filtrering-container';
 
 export interface FiltreringsVeilederGrupperProps {
     filterValg?: FiltervalgModell;
@@ -31,8 +32,7 @@ function FilteringVeilederGrupper(props: FiltreringsVeilederGrupperProps) {
         enhet && dispatch(lageNyGruppe({
             filterNavn: gruppeNavn,
             filterValg
-        }, enhet.enhetId));
-
+        }, enhet.enhetId)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', defaultVeileder)));
     };
 
     const sortertVeiledergruppe = lagretFilter.sort((a, b) => a.filterNavn.localeCompare(b.filterNavn));
