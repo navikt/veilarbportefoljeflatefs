@@ -17,6 +17,20 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '12. DES. 2019',
+        versjonId: '12.12.19',
+        tittel: 'Nå kan du lage avdelinger og team i oversikten',
+        tekst: 'Nå kan du opprette grupper av veiledere i «Enhetens oversikt». Det gjør det enklere å få oversikt over status til brukerne i avdelinger og team på NAV-kontoret.',
+        children:
+            <>
+                <TourModalButton
+                    metrikknavn="portefolje.endringslogg_modal.veiledergrupper"
+                    modal={ModalName.VEILEDERGRUPPER}
+                    knappeTekst="Se hvordan"
+                />
+            </>
+    },
+    {
         dato: '02. DES. 2019',
         versjonId: '02.12.19',
         tittel: 'Nytt design på mål etter test',
