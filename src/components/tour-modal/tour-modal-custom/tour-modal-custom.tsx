@@ -16,10 +16,25 @@ const stepsNyKolonne: Step[] = [
 
 ];
 
+const stepsVeiledergrupper: Step[] = [
+    {
+        tittel: 'blablabla',
+        bilde: nyKolonne1Bilde,
+        tekst: 'Oversikten har en ny kolonne, «Oppfølging startet». Klikk på kolonnetittelen for å sortere etter startdato.'
+    },
+    {
+        tittel: 'Velg kolonner',
+        bilde: nyKolonne2Bilde,
+        tekst: 'Dersom det ikke er plass til å vise alle kolonner samtidig, kan du bruke «Velg kolonner».'
+    }
+]
+
 export function getTour(modal: ModalName) {
     switch (modal) {
         case ModalName.NY_KOLONNE:
             return stepsNyKolonne;
+        case ModalName.VEILEDERGRUPPER:
+            return stepsVeiledergrupper;
         default:
             return null;
     }

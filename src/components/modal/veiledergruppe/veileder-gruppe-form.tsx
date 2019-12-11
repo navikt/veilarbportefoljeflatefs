@@ -23,9 +23,9 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
             </Innholdstittel>
             <div className="veiledergruppe-modal__content">
                 <Input
-                    label="Gruppenavn:"
+                    label={<p className="veiledergruppe-modal__gruppenavntekst">Gruppenavn: <i>(maks 35 tegn)</i></p>}
                     value={props.gruppeNavn}
-                    bredde="L"
+                    bredde="XL"
                     onChange={e => props.setGruppeNavn(e.target.value)}
                     feil={props.errors.gruppeNavn && {feilmelding: props.errors.gruppeNavn}}
                     maxLength={35}
@@ -36,8 +36,8 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
                         hanterVeilederValgt={props.hanterVeilederChange}
                     />
                 </div>
-                <Normaltekst>
-                    Valgte veiledere:
+                <Normaltekst className="veiledergruppe-modal__tekst">
+                    Veiledere i gruppen:
                 </Normaltekst>
                 <ValgtVeilederGruppeListe
                     // @ts-ignore

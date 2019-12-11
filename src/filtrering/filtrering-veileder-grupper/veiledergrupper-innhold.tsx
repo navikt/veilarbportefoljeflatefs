@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import { defaultVeileder } from '../filtrering-container';
@@ -20,6 +20,10 @@ interface VeilederGruppeInnholdProps {
     filterValg?: FiltervalgModell;
 }
 
+function isOverflown(element) {
+    return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+}
+
 function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     const [valgtGruppe, setValgtGruppe] = useState<LagretFilter>();
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
@@ -32,6 +36,8 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
             setValgtGruppe(harValgtEttLagretFilter);
         }
     }, [veiledereFilter, valgtGruppe, props.lagretFilter]);
+
+    const outerDivRef = useRef<HTMLDivElement>(null);
 
     const dispatch = useDispatch();
     const enhet = useEnhetSelector();
@@ -56,8 +62,15 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
         valgtGruppe && enhet && dispatch(slettGruppe(enhet.enhetId, valgtGruppe.filterId));
     };
 
+    useEffect(() => {
+        if (outerDivRef.current && isOverflown(outerDivRef.current)) {
+            outerDivRef.current.style.borderTop = '1px solid #888888';
+            outerDivRef.current.style.borderBottom = '1px solid #888888';
+        }
+    });
+
     return (
-        <div className="veileder-gruppe__valgfelt">
+        <div className="veileder-gruppe__valgfelt" ref={outerDivRef}>
             {props.lagretFilter.map((veilederGruppe) =>
                 <VeilederGruppeRad
                     veilederGruppe={veilederGruppe}
