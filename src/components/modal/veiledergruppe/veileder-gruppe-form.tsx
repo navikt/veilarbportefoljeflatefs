@@ -37,7 +37,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
                     />
                 </div>
                 <Normaltekst className="veiledergruppe-modal__tekst">
-                    Veiledere i gruppen:
+                    Veiledere i gruppen: <i>   ({props.filterValg.veiledere.length} stk)</i>
                 </Normaltekst>
                 <ValgtVeilederGruppeListe
                     // @ts-ignore
