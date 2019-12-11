@@ -19,7 +19,7 @@ function OpprettGruppeToast() {
         startTimer();
         const timer = setTimeout(() => {
             dispatch(fjernOpprettGruppeToast());
-        }, 5000);
+        }, 10000);
         return () => clearTimeout(timer);
     });
 

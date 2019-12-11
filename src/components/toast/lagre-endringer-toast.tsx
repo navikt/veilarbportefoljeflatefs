@@ -19,7 +19,7 @@ function LagreEndringerToast() {
         startTimer();
         const timer = setTimeout(() => {
             dispatch(fjernLagreEndringerToast());
-        }, 5000);
+        }, 10000);
         return () => clearTimeout(timer);
     });
 

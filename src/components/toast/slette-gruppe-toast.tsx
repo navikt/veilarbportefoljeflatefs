@@ -19,7 +19,7 @@ function SletteGruppeToast() {
         startTimer();
         const timer = setTimeout(() => {
             dispatch(fjernSletteGruppeToast());
-        }, 5000);
+        }, 10000);
         return () => clearTimeout(timer);
     });
 
