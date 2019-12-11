@@ -86,18 +86,20 @@ mock.get('/veilarbfilter/api/enhet/:enhetId/', customVeilederGrupper );
 
 
 mock.put('/veilarbfilter/api/enhet/:enhetId', ({ body }) => {
+    let oppdatertGruppe = {};
         customVeilederGrupper= customVeilederGrupper.map(v => {
             if(v.filterId === body.filterId) {
-                return body;
+                oppdatertGruppe = {...v, filterNavn: body.filterNavn, filterValg: body.filterValg};
+                return oppdatertGruppe;
             }
             return v;
         }) as  LagretFilter [] & JSONArray;
-        return {...body}
+        return oppdatertGruppe;
     }
 );
 
 mock.post('/veilarbfilter/api/enhet/:enhetId', (args: HandlerArgument) => {
-    const filterId = Math.floor(Math.random() * 100) + 50;
+    const filterId = Math.floor(Math.random() * 100) + 500;
     customVeilederGrupper = [...customVeilederGrupper, {...args.body, filterId}];
     return {...args.body, filterId};
 });

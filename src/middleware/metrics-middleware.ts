@@ -122,7 +122,6 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
             loggEndreAktivitetFilter(sideNavn);
             break;
-
         case SLETTING_FEILET_MODAL:
             loggSlettVeiledergruppeFeilet();
             break;
@@ -132,17 +131,16 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case NY_FEILET_MODAL:
             loggNyVeiledergruppeFeilet();
             break;
-
         case SLETT_VEILEDERGRUPPER_OK: {
             const opprettetTidpunkt = finnSlettetVeilederGruppe(store, action.data);
             loggSlettVeiledergruppeOK(opprettetTidpunkt);
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            loggNyVeiledergruppeOK();
+            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length);
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
-            loggRedigerVeiledergruppeOK();
+            loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length);
             break;
     }
 
@@ -246,19 +244,17 @@ const loggSlettVeiledergruppeFeilet = () => {
     logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet');
 };
 
-const loggNyVeiledergruppeOK = () => {
+const loggNyVeiledergruppeOK = (antallVeiledere) => {
     logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket',
-        {veiledere: props.filterValg && props.filterValg.veiledere.length})
+        {veiledere: antallVeiledere});
 };
 
-const loggRedigerVeiledergruppeOK = () => {
+const loggRedigerVeiledergruppeOK = (antallVeiledere) => {
     logEvent('portefolje.metrikker.veiledergrupper.lagring-vellykket',
-        {veiledere: props.filterValg && props.filterValg.veiledere.length})
+        {veiledere: antallVeiledere});
 };
 
 const loggSlettVeiledergruppeOK = (opprettetTidspunkt) => {
     logEvent('portefolje.metrikker.veiledergrupper.sletting-vellykket',
         {levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24)});
 };
-
-
