@@ -27,7 +27,6 @@ import { selectSideStorrelse } from '../components/toolbar/paginering/paginering
 import SlettingFeiletModal from '../components/modal/veiledergruppe/sletting-feilet-modal';
 import LagringFeiletModal from '../components/modal/veiledergruppe/lagring-feilet-modal';
 import OpprettingFeiletModal from '../components/modal/veiledergruppe/oppretting-feilet-modal';
-import { logEvent } from '../utils/frontend-logger';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -213,17 +212,14 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     <SlettingFeiletModal
                         isOpen={serverfeilModalSkalVises === SLETTING_FEILET_MODAL}
                         onRequestClose={closeServerfeilModal}
-                        onAfterOpen={() => logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet')}
                     />
                     <LagringFeiletModal
                         isOpen={serverfeilModalSkalVises === REDIGERING_FEILET_MODAL}
                         onRequestClose={closeServerfeilModal}
-                        onAfterOpen={() => logEvent('portefolje.metrikker.veiledergrupper.lagring-feilet')}
                     />
                     <OpprettingFeiletModal
                         isOpen={serverfeilModalSkalVises === NY_FEILET_MODAL}
                         onRequestClose={closeServerfeilModal}
-                        onAfterOpen={() => logEvent('portefolje.metrikker.veiledergrupper.oppretting-feilet')}
                     />
                 </Innholdslaster>
             </div>

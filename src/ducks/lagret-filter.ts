@@ -28,6 +28,7 @@ export interface LagretFilter {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
+    opprettetDato: Date;
 }
 
 export interface LagretFilterState {

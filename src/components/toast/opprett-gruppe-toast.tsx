@@ -16,18 +16,15 @@ function OpprettGruppeToast() {
     }, [toastRef]);
 
     useEffect(() => {
+        startTimer();
         const timer = setTimeout(() => {
             dispatch(fjernOpprettGruppeToast());
         }, 10000);
         return () => clearTimeout(timer);
     });
 
-    useEffect(() => {
-        startTimer();
-    });
-
     return (
-        <div className="opprett-gruppe-toast" key={new Date().getTime()}>
+        <div className="opprett-gruppe-toast">
             <AlertStripeSuksess className="opprett-gruppe-toast__alertstripe">
                 <span ref={toastRef} tabIndex={0} className="opprett-gruppe-toast__tekst">
                     Gruppen er opprettet

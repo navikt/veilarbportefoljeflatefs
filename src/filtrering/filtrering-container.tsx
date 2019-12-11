@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {  useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { endreFiltervalg } from '../ducks/filtrering';
 import { FiltervalgModell, VeilederModell } from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
@@ -11,9 +11,9 @@ import { hentLagretFilterForEnhet } from '../ducks/lagret-filter';
 import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-veileder-grupper';
 import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
 import { VIS_VEILEDER_GRUPPER } from '../konstanter';
-import {useEnhetSelector} from "../hooks/redux/use-enhet-selector";
-import {OrNothing} from "../utils/types/types";
-import {Tiltak} from "../ducks/enhettiltak";
+import { useEnhetSelector } from '../hooks/redux/use-enhet-selector';
+import { OrNothing } from '../utils/types/types';
+import { Tiltak } from '../ducks/enhettiltak';
 
 export const defaultVeileder: VeilederModell = {
     ident: '',
@@ -29,14 +29,14 @@ interface FiltreringContainerProps {
     veileder?: VeilederModell;
 }
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, enhettiltak }: FiltreringContainerProps) {
+function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeileder, enhettiltak}: FiltreringContainerProps) {
 
     const valgtEnhet = useEnhetSelector();
     const harVeilederGruppeFeature = useFeatureSelector()(VIS_VEILEDER_GRUPPER);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(harVeilederGruppeFeature && valgtEnhet) {
+        if (harVeilederGruppeFeature && valgtEnhet) {
             dispatch(hentLagretFilterForEnhet(valgtEnhet.enhetId));
         }
     }, [dispatch, valgtEnhet, harVeilederGruppeFeature]);
@@ -55,6 +55,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                 tittel="Veiledergrupper"
                 tittelProps="undertittel"
                 lamellNavn="veiledergrupper"
+                hidden={filtergruppe === 'veileder'}
             >
                 <FilteringVeilederGrupper/>
 

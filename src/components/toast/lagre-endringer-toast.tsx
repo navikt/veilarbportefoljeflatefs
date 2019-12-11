@@ -16,18 +16,15 @@ function LagreEndringerToast() {
     }, [toastRef]);
 
     useEffect(() => {
+        startTimer();
         const timer = setTimeout(() => {
             dispatch(fjernLagreEndringerToast());
         }, 10000);
         return () => clearTimeout(timer);
     });
 
-    useEffect(() => {
-        startTimer();
-    });
-
     return (
-        <div className="lagre-endringer-toast" key={new Date().getTime()}>
+        <div className="lagre-endringer-toast">
             <AlertStripeSuksess className="lagre-endringer-toast__alertstripe">
                 <span ref={toastRef} tabIndex={0} className="lagre-endringer-toast__tekst">
                     Gruppen er lagret

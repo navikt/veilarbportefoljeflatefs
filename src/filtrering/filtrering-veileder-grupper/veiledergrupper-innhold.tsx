@@ -7,8 +7,6 @@ import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import {
     lagreEndringer,
     LagretFilter,
-    REDIGER_VEILEDERGRUPPER_OK,
-    REDIGER_VEILEDERGRUPPER_PENDING,
     slettGruppe
 } from '../../ducks/lagret-filter';
 import { AppState } from '../../reducer';
@@ -16,8 +14,6 @@ import { veilederlisterErLik } from '../../components/modal/veiledergruppe/veile
 import { VeilederGruppeModal } from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
 import { FiltervalgModell } from '../../model-interfaces';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
-import Spinner from '../../components/spinner/spinner';
-import { logEvent } from '../../utils/frontend-logger';
 
 interface VeilederGruppeInnholdProps {
     lagretFilter: LagretFilter[]
@@ -54,14 +50,6 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
             filterNavn: gruppeNavn,
             filterValg
         }, enhet.enhetId)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', defaultVeileder)));
-        if (REDIGER_VEILEDERGRUPPER_PENDING) {
-            return <Spinner/>;
-        }
-        if (REDIGER_VEILEDERGRUPPER_OK) {
-            logEvent('portefolje.metrikker.veiledergrupper.lagring-vellykket', {
-                veiledere: props.filterValg && props.filterValg.veiledere.length
-            });
-        }
     };
 
     const sletteKnapp = () => {

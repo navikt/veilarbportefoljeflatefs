@@ -6,7 +6,6 @@ import { VarselModal, VarselModalType } from '../../varselmodal/varselmodal';
 interface OpprettingFeiletProps {
     isOpen: boolean;
     onRequestClose: () => void;
-    onAfterOpen: () => void;
 }
 
 function OpprettingFeiletModal(props: OpprettingFeiletProps) {
@@ -17,7 +16,6 @@ function OpprettingFeiletModal(props: OpprettingFeiletProps) {
             onRequestClose={props.onRequestClose}
             className="oppretting-feilet-modal"
             type={VarselModalType.ADVARSEL}
-            onAfterOpen={props.onAfterOpen}
         >
             <div className="blokk-s oppretting-feilet-modal__tekstgruppe">
                 <Innholdstittel className="blokk-s">

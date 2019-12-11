@@ -10,6 +10,8 @@ import { ActionTypeKeys, Kolonne } from '../ducks/ui/listevisning';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 import { VIS_MODAL } from '../ducks/modal';
 import { SORTERT_PA } from '../ducks/sortering';
+import { NY_FEILET_MODAL, REDIGERING_FEILET_MODAL, SLETTING_FEILET_MODAL } from '../ducks/modal-serverfeil';
+import { NY_VEILEDERGRUPPER_OK, REDIGER_VEILEDERGRUPPER_OK, SLETT_VEILEDERGRUPPER_OK } from '../ducks/lagret-filter';
 
 interface FilterEndringData {
     filterId: string;
@@ -70,9 +72,17 @@ function finnFiltreringForSide(store: any, sideNavn: SideNavn) {
     return filtrering;
 }
 
+function finnSlettetVeilederGruppe(store: any, filterId: number) {
+    const lagretGruppe = store.getState().lagretFilter.data.find(v => v.filterId === filterId);
+    if (lagretGruppe) {
+        return lagretGruppe.opprettetDato;
+    }
+    return undefined;
+}
+
 export const metricsMiddleWare = (store: any) => (next: any) => (action: any) => {
 
-    const { type, data, toolbarPosisjon, kolonne} = action;
+    const {type, data, toolbarPosisjon, kolonne} = action;
     const sideNavn = finnSideNavn();
 
     switch (type) {
@@ -112,21 +122,43 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
             loggEndreAktivitetFilter(sideNavn);
             break;
+
+        case SLETTING_FEILET_MODAL:
+            loggSlettVeiledergruppeFeilet();
+            break;
+        case REDIGERING_FEILET_MODAL:
+            loggRedigerVeiledergruppeFeilet();
+            break;
+        case NY_FEILET_MODAL:
+            loggNyVeiledergruppeFeilet();
+            break;
+
+        case SLETT_VEILEDERGRUPPER_OK: {
+            const opprettetTidpunkt = finnSlettetVeilederGruppe(store, action.data);
+            loggSlettVeiledergruppeOK(opprettetTidpunkt);
+            break;
+        }
+        case NY_VEILEDERGRUPPER_OK:
+            loggNyVeiledergruppeOK();
+            break;
+        case REDIGER_VEILEDERGRUPPER_OK:
+            loggRedigerVeiledergruppeOK();
+            break;
     }
 
     return next(action);
 };
 
 function mapVeilederIdentTilNonsens(veilederIdent: string) {
-   return [...veilederIdent]
-       .map(veilederChar => veilederChar.charCodeAt(0) << 6)
-       .map(veilederChar => veilederChar % 255)
-       .map(hexChar => hexChar.toString(16))
-       .join("")
+    return [...veilederIdent]
+        .map(veilederChar => veilederChar.charCodeAt(0) << 6)
+        .map(veilederChar => veilederChar % 255)
+        .map(hexChar => hexChar.toString(16))
+        .join('');
 }
 
 export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
-    const veilederIndent = mapVeilederIdentTilNonsens(store.getState().enheter.ident);
+    const veilederIdent = mapVeilederIdentTilNonsens(store.getState().enheter.ident);
     if (data.filterId === 'veilederNavnQuery') {
         return;
     }
@@ -138,58 +170,95 @@ export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, sto
         const lagtTilFilterVerdier = finnElementerSomErLagtTil(prevFilter, data.filterVerdi);
 
         lagtTilFilterVerdier.forEach((verdi) => {
-            logEvent('portefolje.metrikker.endre_filter', { sideNavn, filter: data.filterId, verdi }, {veilederIdent: veilederIndent});
+            logEvent('portefolje.metrikker.endre_filter', {
+                sideNavn,
+                filter: data.filterId,
+                verdi
+            }, {veilederIdent: veilederIdent});
         });
 
     } else {
-        logEvent('portefolje.metrikker.endre_filter', { sideNavn, filter: data.filterId, verdi: data.filterVerdi }, {veilederIdent: veilederIndent});
+        logEvent('portefolje.metrikker.endre_filter', {
+            sideNavn,
+            filter: data.filterId,
+            verdi: data.filterVerdi
+        }, {veilederIdent: veilederIdent});
     }
 
 };
 
 const loggEndreAktivitetFilter = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.endre_filter', { sideNavn, filter: 'aktiviteter' });
+    logEvent('portefolje.metrikker.endre_filter', {sideNavn, filter: 'aktiviteter'});
 };
 
 const loggPaginering = (sideNavn: SideNavn, data: any, toolbarPosisjon: ToolbarPosisjon) => {
     if (data.side > 1) {
-        logEvent('portefolje.metrikker.paginering', { sideNavn, toolbarPosisjon });
+        logEvent('portefolje.metrikker.paginering', {sideNavn, toolbarPosisjon});
     } else if (data.seAlle) {
-        logEvent('portefolje.metrikker.se_alle', { sideNavn, toolbarPosisjon });
+        logEvent('portefolje.metrikker.se_alle', {sideNavn, toolbarPosisjon});
     }
 };
 
 const loggTildelVeileder = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
-    logEvent('portefolje.metrikker.tildel_veileder', { sideNavn, toolbarPosisjon });
+    logEvent('portefolje.metrikker.tildel_veileder', {sideNavn, toolbarPosisjon});
 };
 
 const loggEndreListevisning = (sideNavn: SideNavn, kolonne: Kolonne) => {
-    logEvent('portefolje.metrikker.listevisning_endret', { sideNavn, kolonne });
+    logEvent('portefolje.metrikker.listevisning_endret', {sideNavn, kolonne});
 };
 
 const loggAvvelgListevalg = (sideNavn: SideNavn, kolonne: Kolonne) => {
-    logEvent('portefolje.metrikker.listevisning_avvelget', { sideNavn, kolonne });
+    logEvent('portefolje.metrikker.listevisning_avvelget', {sideNavn, kolonne});
 };
 
 const loggArbeidslisteApne = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
-    logEvent('portefolje.metrikker.arbeidsliste_apne', { sideNavn, toolbarPosisjon });
+    logEvent('portefolje.metrikker.arbeidsliste_apne', {sideNavn, toolbarPosisjon});
 };
 
 const loggEndreVisningsModus = (sideNavn: SideNavn, visningsmodus: string, toolbarPosisjon: ToolbarPosisjon) => {
-    logEvent('portefolje.metrikker.endre_visningsmodus', { sideNavn, visningsmodus, toolbarPosisjon });
+    logEvent('portefolje.metrikker.endre_visningsmodus', {sideNavn, visningsmodus, toolbarPosisjon});
 };
 
 const loggEndreSortering = (sideNavn: SideNavn, sorteringsfelt: string, rekkefolge: string) => {
     if ((sorteringsfelt !== 'etternavn' || rekkefolge !== 'ascending')
         && (sorteringsfelt !== 'ikke_satt' || rekkefolge !== 'ikke_satt')) {
-        logEvent('portefolje.metrikker.endre_sortering', { sideNavn, sorteringsfelt, rekkefolge });
+        logEvent('portefolje.metrikker.endre_sortering', {sideNavn, sorteringsfelt, rekkefolge});
     }
 };
 
 const loggVeilederSoktFraToolbar = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
-    logEvent('portefolje.metrikker.veileder_sokt_fra_toolbar', { sideNavn, toolbarPosisjon });
+    logEvent('portefolje.metrikker.veileder_sokt_fra_toolbar', {sideNavn, toolbarPosisjon});
 };
 
 const loggVelgAlle = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
-    logEvent('portefolje.metrikker.velg_alle', { sideNavn, toolbarPosisjon });
+    logEvent('portefolje.metrikker.velg_alle', {sideNavn, toolbarPosisjon});
 };
+
+const loggNyVeiledergruppeFeilet = () => {
+    logEvent('portefolje.metrikker.veiledergrupper.oppretting-feilet');
+};
+
+const loggRedigerVeiledergruppeFeilet = () => {
+    logEvent('portefolje.metrikker.veiledergrupper.lagring-feilet');
+};
+
+const loggSlettVeiledergruppeFeilet = () => {
+    logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet');
+};
+
+const loggNyVeiledergruppeOK = () => {
+    logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket',
+        {veiledere: props.filterValg && props.filterValg.veiledere.length})
+};
+
+const loggRedigerVeiledergruppeOK = () => {
+    logEvent('portefolje.metrikker.veiledergrupper.lagring-vellykket',
+        {veiledere: props.filterValg && props.filterValg.veiledere.length})
+};
+
+const loggSlettVeiledergruppeOK = (opprettetTidspunkt) => {
+    logEvent('portefolje.metrikker.veiledergrupper.sletting-vellykket',
+        {levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24)});
+};
+
+

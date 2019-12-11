@@ -16,18 +16,15 @@ function SletteGruppeToast() {
     }, [toastRef]);
 
     useEffect(() => {
+        startTimer();
         const timer = setTimeout(() => {
             dispatch(fjernSletteGruppeToast());
         }, 10000);
         return () => clearTimeout(timer);
     });
 
-    useEffect(() => {
-        startTimer();
-    });
-
     return (
-        <div className="slette-gruppe-toast" key={new Date().getTime()}>
+        <div className="slette-gruppe-toast">
             <AlertStripeSuksess className="slette-gruppe-toast__alertstripe">
                 <span ref={toastRef} tabIndex={0} className="slette-gruppe-toast__tekst">
                     Gruppen er slettet
