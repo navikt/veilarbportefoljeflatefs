@@ -42,10 +42,11 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
 
     useEffect(() => {
-        setFilterValg(props.initialVerdi.filterValg);
-        setGruppeNavn(props.initialVerdi.gruppeNavn);
-        setErrors({} as VeilederGruppeErrors)
-    }, [props.initialVerdi]);
+          setFilterValg(props.initialVerdi.filterValg);
+          setGruppeNavn(props.initialVerdi.gruppeNavn);
+          setErrors({} as VeilederGruppeErrors);
+          setHarForsoktSubmitte(false);
+    },[props.initialVerdi.filterValg, props.initialVerdi.gruppeNavn]);
 
     const fjernVeiledereFraListen = (veilederTarget: string) => {
         setFilterValg(prevState => ({...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}));
