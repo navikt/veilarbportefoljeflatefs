@@ -102,7 +102,7 @@ function VeilederGruppeRad({veilederGruppe, hanterVelgGruppe, onClickRedigerKnap
             <Radio
                 className="veileder-gruppe__gruppenavn"
                 key={veilederGruppe.filterId}
-                name={`${veilederGruppe.filterNavn}-gruppe`}
+                name="veiledergruppe"
                 label={veilederGruppe.filterNavn}
                 value={veilederGruppe.filterId}
                 onChange={hanterVelgGruppe}
