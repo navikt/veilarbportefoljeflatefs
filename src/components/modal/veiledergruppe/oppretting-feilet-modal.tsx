@@ -3,30 +3,30 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { VarselModal, VarselModalType } from '../../varselmodal/varselmodal';
 
-interface LagringFeiletProps {
+interface OpprettingFeiletProps {
     isOpen: boolean;
     onRequestClose: () => void;
 }
 
-function LagringFeiletModal(props: LagringFeiletProps) {
+function OpprettingFeiletModal(props: OpprettingFeiletProps) {
     return (
         <VarselModal
-            contentLabel="Lagring av veiledergruppe feilet"
+            contentLabel="Oppretting av veiledergruppe feilet"
             isOpen={props.isOpen}
             onRequestClose={props.onRequestClose}
-            className="lagring-feilet-modal"
+            className="oppretting-feilet-modal"
             type={VarselModalType.ADVARSEL}
         >
-            <div className="blokk-s lagring-feilet-modal__tekstgruppe">
+            <div className="blokk-s oppretting-feilet-modal__tekstgruppe">
                 <Innholdstittel className="blokk-s">
-                    Lagring feilet
+                    Oppretting av gruppe feilet
                 </Innholdstittel>
                 <Normaltekst>
-                    Beklager, men gruppen kunne ikke lagres.
+                    Beklager, men gruppen kunne ikke opprettes.
                 </Normaltekst>
 
             </div>
-            <div className="lagring-feilet-modal__knappegruppe">
+            <div className="oppretting-feilet-modal__knappegruppe">
                 <Hovedknapp
                     htmlType="submit"
                     onClick={props.onRequestClose}
@@ -38,4 +38,4 @@ function LagringFeiletModal(props: LagringFeiletProps) {
     );
 }
 
-export default LagringFeiletModal;
+export default OpprettingFeiletModal;

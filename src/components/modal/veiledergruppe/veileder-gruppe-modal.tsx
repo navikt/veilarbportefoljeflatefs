@@ -24,6 +24,7 @@ interface VeilederModalProps {
     modalTittel: string,
     lagreKnappeTekst: string
     validerGruppenavn?: (gruppenavn: string) => OrNothing<string>;
+    filterValg?: FiltervalgModell;
 }
 
 interface VeilederGruppeErrors {
@@ -71,7 +72,6 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             fjernVeiledereFraListen(veilederTarget);
         }
     };
-
 
     function lukkModal() {
         if (harGjortEndringer(filterValg.veiledere, props.initialVerdi.filterValg.veiledere, props.initialVerdi.gruppeNavn, gruppeNavn)) {

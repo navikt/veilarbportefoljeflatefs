@@ -4,7 +4,11 @@ import { endreFiltervalg } from '../../ducks/filtrering';
 import { defaultVeileder } from '../filtrering-container';
 import { Radio } from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import { lagreEndringer, LagretFilter, slettGruppe } from '../../ducks/lagret-filter';
+import {
+    lagreEndringer,
+    LagretFilter,
+    slettGruppe
+} from '../../ducks/lagret-filter';
 import { AppState } from '../../reducer';
 import { veilederlisterErLik } from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
 import { VeilederGruppeModal } from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
@@ -13,6 +17,7 @@ import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
 
 interface VeilederGruppeInnholdProps {
     lagretFilter: LagretFilter[]
+    filterValg?: FiltervalgModell;
 }
 
 function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {

@@ -4,13 +4,8 @@ import AlertStripeSuksess from 'nav-frontend-alertstriper/lib/suksess-alertstrip
 import { useDispatch } from 'react-redux';
 import { useTimer } from '../../hooks/use-timer';
 import { fjernSletteGruppeToast } from '../../store/toast/actions';
-import { logEvent } from '../../utils/frontend-logger';
 
-export interface ToastType {
-    className?: string;
-}
-
-function SletteGruppeToast(props: ToastType) {
+function SletteGruppeToast() {
     const toastRef = useRef<HTMLSpanElement>(null);
     const {startTimer} = useTimer();
 
@@ -21,19 +16,15 @@ function SletteGruppeToast(props: ToastType) {
     }, [toastRef]);
 
     useEffect(() => {
+        startTimer();
         const timer = setTimeout(() => {
-            logEvent('portefolje.metrikker.veiledergrupper.sletting-toast');
             dispatch(fjernSletteGruppeToast());
         }, 10000);
         return () => clearTimeout(timer);
     });
 
-    useEffect(() => {
-        startTimer();
-    });
-
     return (
-        <div className="slette-gruppe-toast" key={new Date().getTime()}>
+        <div className="slette-gruppe-toast">
             <AlertStripeSuksess className="slette-gruppe-toast__alertstripe">
                 <span ref={toastRef} tabIndex={0} className="slette-gruppe-toast__tekst">
                     Gruppen er slettet

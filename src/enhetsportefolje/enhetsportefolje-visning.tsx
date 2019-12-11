@@ -26,7 +26,7 @@ import { ListevisningType } from '../ducks/ui/listevisning';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 import SlettingFeiletModal from '../components/modal/veiledergruppe/sletting-feilet-modal';
 import LagringFeiletModal from '../components/modal/veiledergruppe/lagring-feilet-modal';
-import { logEvent } from '../utils/frontend-logger';
+import OpprettingFeiletModal from '../components/modal/veiledergruppe/oppretting-feilet-modal';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -212,12 +212,14 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     <SlettingFeiletModal
                         isOpen={serverfeilModalSkalVises === SLETTING_FEILET_MODAL}
                         onRequestClose={closeServerfeilModal}
-                        onAfterOpen={() => logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet-modal')}
                     />
                     <LagringFeiletModal
-                        isOpen={serverfeilModalSkalVises === REDIGERING_FEILET_MODAL || serverfeilModalSkalVises === NY_FEILET_MODAL}
+                        isOpen={serverfeilModalSkalVises === REDIGERING_FEILET_MODAL}
                         onRequestClose={closeServerfeilModal}
-                        onAfterOpen={() => logEvent('portefolje.metrikker.veiledergrupper.lagring-feilet-modal')}
+                    />
+                    <OpprettingFeiletModal
+                        isOpen={serverfeilModalSkalVises === NY_FEILET_MODAL}
+                        onRequestClose={closeServerfeilModal}
                     />
                 </Innholdslaster>
             </div>
