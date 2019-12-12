@@ -116,6 +116,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         setFilterValg(props.initialVerdi.filterValg);
         setGruppeNavn(props.initialVerdi.gruppeNavn);
         setErrors({} as VeilederGruppeErrors);
+        setHarForsoktSubmitte(false);
         props.onRequestClose();
     }
 
