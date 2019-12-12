@@ -39,7 +39,7 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
                         props.onSubmit();
                     }}
                 >
-                    Avbryt uten å lagre
+                    Lukk uten å lagre
                 </Flatknapp>
             </div>
         </VarselModal>
