@@ -4,7 +4,9 @@ export enum ToastActionType {
     VIS_SLETTE_GRUPPE_TOAST = 'veiledergrupper_slette/OK',
     FJERN_SLETTE_GRUPPE_TOAST = 'FJERN_SLETTE_GRUPPE_TOAST',
     VIS_OPPRETT_GRUPPE_TOAST = 'veiledergrupper_ny/OK',
-    FJERN_OPPRETT_GRUPPE_TOAST = 'FJERN_OPPRETT_GRUPPE_TOAST'
+    FJERN_OPPRETT_GRUPPE_TOAST = 'FJERN_OPPRETT_GRUPPE_TOAST',
+    VIS_INGEN_ENDRINGER_TOAST = 'VIS_INGEN_ENDRINGER_TOAST',
+    FJERN_INGEN_ENDRINGER_TOAST = 'FJERN_INGEN_ENDRINGER_TOAST'
 }
 
 export interface ToastAction {
@@ -23,3 +25,9 @@ export const fjernSletteGruppeToast = (): ToastAction =>
 
 export const fjernOpprettGruppeToast = (): ToastAction =>
     toastAction(ToastActionType.FJERN_OPPRETT_GRUPPE_TOAST);
+
+export const visIngenEndringerToast = (): ToastAction =>
+    toastAction(ToastActionType.VIS_INGEN_ENDRINGER_TOAST);
+
+export const fjernIngenEndringerToast = (): ToastAction =>
+    toastAction(ToastActionType.FJERN_INGEN_ENDRINGER_TOAST);

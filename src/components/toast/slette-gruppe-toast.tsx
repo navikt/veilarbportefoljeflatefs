@@ -6,7 +6,7 @@ import { useTimer } from '../../hooks/use-timer';
 import { fjernSletteGruppeToast } from '../../store/toast/actions';
 
 function SletteGruppeToast() {
-    const toastRef = useRef<HTMLSpanElement>(null);
+    const toastRef = useRef<HTMLDivElement>(null);
     const {startTimer} = useTimer();
 
     const dispatch = useDispatch();
@@ -24,9 +24,9 @@ function SletteGruppeToast() {
     });
 
     return (
-        <div className="slette-gruppe-toast">
+        <div className="slette-gruppe-toast" ref={toastRef} tabIndex={0}>
             <AlertStripeSuksess className="slette-gruppe-toast__alertstripe">
-                <span ref={toastRef} tabIndex={0} className="slette-gruppe-toast__tekst">
+                <span className="slette-gruppe-toast__tekst">
                     Gruppen er slettet
                 </span>
             </AlertStripeSuksess>

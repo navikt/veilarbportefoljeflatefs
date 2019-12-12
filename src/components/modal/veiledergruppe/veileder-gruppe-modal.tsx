@@ -80,6 +80,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             setEndringerIkkeLagretModal(true);
             return;
         }
+        setErrors({} as VeilederGruppeErrors);
         props.onRequestClose();
     }
 
@@ -114,6 +115,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         setEndringerIkkeLagretModal(false);
         setFilterValg(props.initialVerdi.filterValg);
         setGruppeNavn(props.initialVerdi.gruppeNavn);
+        setErrors({} as VeilederGruppeErrors);
         props.onRequestClose();
     }
 

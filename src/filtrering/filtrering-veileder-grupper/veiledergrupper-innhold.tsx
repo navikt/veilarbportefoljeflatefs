@@ -10,19 +10,15 @@ import {
     slettGruppe
 } from '../../ducks/lagret-filter';
 import { AppState } from '../../reducer';
-import { veilederlisterErLik } from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
+import { harGjortEndringer, veilederlisterErLik } from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
 import { VeilederGruppeModal } from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
 import { FiltervalgModell } from '../../model-interfaces';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
+import { visIngenEndringerToast } from '../../store/toast/actions';
 
 interface VeilederGruppeInnholdProps {
     lagretFilter: LagretFilter[]
     filterValg?: FiltervalgModell;
-    initialVerdi?: {
-        gruppeNavn: string,
-        filterValg: FiltervalgModell,
-        filterId: number
-    }
 }
 
 function isOverflown(element) {
@@ -56,14 +52,16 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     const finnVeilederGruppe = (vg) => props.lagretFilter.find((elem) => elem.filterId === parseInt(vg));
 
     const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
-        // if (props.initialVerdi && harGjortEndringer(filterValg.veiledere, props.initialVerdi.filterValg.veiledere, props.initialVerdi.gruppeNavn, gruppeNavn)) {
-        valgtGruppe && enhet && dispatch(lagreEndringer({
-            filterId: valgtGruppe.filterId,
-            filterNavn: gruppeNavn,
-            filterValg
-        }, enhet.enhetId)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', defaultVeileder)));
-        // }
-        // dispatch(visIngenEndringerToast());
+        if (valgtGruppe && enhet && harGjortEndringer(filterValg.veiledere, valgtGruppe.filterValg.veiledere, valgtGruppe.filterNavn, gruppeNavn)) {
+            dispatch(lagreEndringer({
+                filterId: valgtGruppe.filterId,
+                filterNavn: gruppeNavn,
+                filterValg
+            }, enhet.enhetId)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', defaultVeileder)));
+        } else {
+            dispatch(visIngenEndringerToast());
+        }
+
     };
 
     const sletteKnapp = () => {

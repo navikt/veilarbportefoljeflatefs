@@ -6,6 +6,7 @@ import { AppState } from '../../reducer';
 import LagreEndringerToast from './lagre-endringer-toast';
 import SletteGruppeToast from './slette-gruppe-toast';
 import OpprettGruppeToast from './opprett-gruppe-toast';
+import IngenEndringerToast from './ingen-endringer-toast';
 import { OrNothing } from '../../utils/types/types';
 
 interface StateProps {
@@ -21,9 +22,12 @@ function Toasts({toasts}: StateProps) {
                 return <LagreEndringerToast/>;
             case ToastActionType.VIS_SLETTE_GRUPPE_TOAST:
                 return <SletteGruppeToast/>;
+            case ToastActionType.VIS_INGEN_ENDRINGER_TOAST:
+                return <IngenEndringerToast/>;
             case ToastActionType.FJERN_OPPRETT_GRUPPE_TOAST:
             case ToastActionType.FJERN_LAGRE_ENDRINGER_TOAST:
             case ToastActionType.FJERN_SLETTE_GRUPPE_TOAST:
+            case ToastActionType.FJERN_INGEN_ENDRINGER_TOAST:
                 return null;
             default:
                 return null;

@@ -6,7 +6,7 @@ import { useTimer } from '../../hooks/use-timer';
 import { fjernLagreEndringerToast } from '../../store/toast/actions';
 
 function LagreEndringerToast() {
-    const toastRef = useRef<HTMLSpanElement>(null);
+    const toastRef = useRef<HTMLDivElement>(null);
     const {startTimer} = useTimer();
 
     const dispatch = useDispatch();
@@ -24,9 +24,9 @@ function LagreEndringerToast() {
     });
 
     return (
-        <div className="lagre-endringer-toast">
+        <div className="lagre-endringer-toast" ref={toastRef} tabIndex={0}>
             <AlertStripeSuksess className="lagre-endringer-toast__alertstripe">
-                <span ref={toastRef} tabIndex={0} className="lagre-endringer-toast__tekst">
+                <span className="lagre-endringer-toast__tekst">
                     Gruppen er lagret
                 </span>
             </AlertStripeSuksess>

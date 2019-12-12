@@ -6,7 +6,7 @@ import { useTimer } from '../../hooks/use-timer';
 import { fjernOpprettGruppeToast } from '../../store/toast/actions';
 
 function OpprettGruppeToast() {
-    const toastRef = useRef<HTMLSpanElement>(null);
+    const toastRef = useRef<HTMLDivElement>(null);
     const {startTimer} = useTimer();
 
     const dispatch = useDispatch();
@@ -19,14 +19,14 @@ function OpprettGruppeToast() {
         startTimer();
         const timer = setTimeout(() => {
             dispatch(fjernOpprettGruppeToast());
-        }, 10000);
+        }, 10000000);
         return () => clearTimeout(timer);
     });
 
     return (
-        <div className="opprett-gruppe-toast">
+        <div className="opprett-gruppe-toast" tabIndex={0} ref={toastRef}>
             <AlertStripeSuksess className="opprett-gruppe-toast__alertstripe">
-                <span ref={toastRef} tabIndex={0} className="opprett-gruppe-toast__tekst">
+                <span className="opprett-gruppe-toast__tekst">
                     Gruppen er opprettet
                 </span>
             </AlertStripeSuksess>
