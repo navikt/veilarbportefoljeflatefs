@@ -10,14 +10,23 @@ import { ASCENDING, DESCENDING } from '../konstanter';
 import { diagramSkalVises } from '../minoversikt/diagram/util';
 import Diagram from '../minoversikt/diagram/diagram';
 import VelgfilterMelding from './velg-filter-melding';
-import ServerFeilModal from '../modal/server-feil-modal';
+import ServerFeilModal from '../components/modal/server-feil-modal';
 import { STATUS } from '../ducks/utils';
-import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
-import FeilmeldingBrukereModal from '../modal/feilmelding-brukere-modal';
+import {
+    NY_FEILET_MODAL,
+    REDIGERING_FEILET_MODAL,
+    skjulServerfeilModal,
+    SLETTING_FEILET_MODAL,
+    VIS_SERVERFEIL_MODAL
+} from '../ducks/modal-serverfeil';
+import FeilmeldingBrukereModal from '../components/modal/feilmelding-brukere-modal';
 import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmelding-brukere';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
+import SlettingFeiletModal from '../components/modal/veiledergruppe/sletting-feilet-modal';
+import LagringFeiletModal from '../components/modal/veiledergruppe/lagring-feilet-modal';
+import OpprettingFeiletModal from '../components/modal/veiledergruppe/oppretting-feilet-modal';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -29,11 +38,15 @@ function antallFilter(filtervalg) {
 
     return Object.entries(filtervalg)
         .map(([filter, value]) => {
-            if (value === true) return 1;
-            else if (Array.isArray(value)) return value.length;
-            else if (filter === 'aktiviteter') return mapAktivitetFilter(value);
-            else if (typeof value === 'object') return value ? Object.entries(value).length : 0;
-            else if (value) return 1;
+            if (value === true) {
+                return 1;
+            } else if (Array.isArray(value)) {
+                return value.length;
+            } else if (filter === 'aktiviteter') {
+                return mapAktivitetFilter(value);
+            } else if (typeof value === 'object') {
+                return value ? Object.entries(value).length : 0;
+            } else if (value) return 1;
             return 0;
         }).reduce((a, b) => a + b, 0);
 }
@@ -48,7 +61,7 @@ interface EnhetsportefoljeVisningProps {
     sorteringsfelt: string;
     filtervalg: FiltervalgModell;
     visningsmodus: string;
-    serverfeilModalSkalVises: boolean;
+    serverfeilModalSkalVises: string;
     closeServerfeilModal: () => void;
     feilmeldingModal: FeilmeldingModalModell;
     closeFeilmeldingModal: () => void;
@@ -113,7 +126,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             visningsmodus,
         } = this.props;
 
-        const { antallTotalt } = portefolje.data;
+        const {antallTotalt} = portefolje.data;
 
         return (
             <Toolbar
@@ -130,7 +143,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                 posisjon={posisjon}
             />
         );
-    }
+    };
 
     render() {
         const {
@@ -193,8 +206,20 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                         merInfoTekst="Det kan skyldes manglende tilgang på bruker, eller at veilederen allerede er tildelt bruker."
                     />
                     <ServerFeilModal
-                        isOpen={serverfeilModalSkalVises}
+                        isOpen={serverfeilModalSkalVises === VIS_SERVERFEIL_MODAL}
                         onClose={closeServerfeilModal}
+                    />
+                    <SlettingFeiletModal
+                        isOpen={serverfeilModalSkalVises === SLETTING_FEILET_MODAL}
+                        onRequestClose={closeServerfeilModal}
+                    />
+                    <LagringFeiletModal
+                        isOpen={serverfeilModalSkalVises === REDIGERING_FEILET_MODAL}
+                        onRequestClose={closeServerfeilModal}
+                    />
+                    <OpprettingFeiletModal
+                        isOpen={serverfeilModalSkalVises === NY_FEILET_MODAL}
+                        onRequestClose={closeServerfeilModal}
                     />
                 </Innholdslaster>
             </div>
@@ -210,7 +235,7 @@ const mapStateToProps = (state) => ({
     sorteringsfelt: state.portefolje.sorteringsfelt,
     filtervalg: state.filtrering,
     visningsmodus: state.paginering.visningsmodus,
-    serverfeilModalSkalVises: state.serverfeilModal.modalVises,
+    serverfeilModalSkalVises: state.serverfeilModal.aarsak,
     feilmeldingModal: state.feilmeldingModal,
     sideStorrelse: selectSideStorrelse(state),
 });

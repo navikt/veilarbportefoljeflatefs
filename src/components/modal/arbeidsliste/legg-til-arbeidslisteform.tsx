@@ -1,18 +1,18 @@
-import { STATUS } from '../ducks/utils';
+import { STATUS } from '../../../ducks/utils';
 import * as React from 'react';
-import { ArbeidslisteDataModell, BrukerModell, Status, VeilederModell } from '../model-interfaces';
-import { postArbeidsliste } from '../ducks/arbeidsliste';
-import { markerAlleBrukere, oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
-import { visServerfeilModal } from '../ducks/modal-serverfeil';
-import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
-import { leggTilStatustall } from '../ducks/statustall';
-import { AppState } from '../reducer';
+import { ArbeidslisteDataModell, BrukerModell, Status, VeilederModell } from '../../../model-interfaces';
+import { postArbeidsliste } from '../../../ducks/arbeidsliste';
+import { markerAlleBrukere, oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
+import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
+import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../../../ducks/modal-feilmelding-brukere';
+import { leggTilStatustall } from '../../../ducks/statustall';
+import { AppState } from '../../../reducer';
 import { Form, Formik } from 'formik';
 import ArbeidslisteForm from './arbeidsliste-form';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { skjulModal } from '../ducks/modal';
-import { dateToISODate } from '../utils/dato-utils';
+import { skjulModal } from '../../../ducks/modal';
+import { dateToISODate } from '../../../utils/dato-utils';
 
 interface OwnProps {
     valgteBrukere: BrukerModell[];

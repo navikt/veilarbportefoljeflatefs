@@ -49,7 +49,7 @@ function EndringsloggTourWrapper() {
             krypterVeilederident(veilederIdent)
                 .then((res) =>
                     logEvent('portefolje.endringslogg', {
-                        feature: 'pre_tilbakemelding_2',
+                        feature: 'veiledergrupper',
                         tidBrukt,
                         nyeNotifikasjoner: ulestFelt,
                     }, {hash: hexString(res)})

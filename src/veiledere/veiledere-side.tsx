@@ -14,12 +14,13 @@ import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import { FiltreringState } from '../ducks/filtrering';
+import {FiltreringState, slettEnkeltFilter} from '../ducks/filtrering';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
-import TomPortefoljeModal from '../modal/tom-portefolje-modal';
+import TomPortefoljeModal from '../components/modal/tom-portefolje-modal';
 import { hentPortefoljeStorrelser as fetchPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { hentStatusTall as fetchStatusTall } from '../ducks/statustall';
 import { RouterProps } from 'react-router';
+import {defaultVeileder} from "../filtrering/filtrering-container";
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -33,6 +34,7 @@ interface DispatchProps {
     hentPortefoljestorrelser: (enhetId: string) => void;
     initalPaginering: (side: number, seAlle: boolean) => void;
     hentStatusTall: (enhet: string) => void;
+    slettVeilederFilter: (ident: string) => void;
 }
 
 type VeiledereSideProps = StateProps & DispatchProps & RouterProps;
@@ -58,7 +60,7 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
     }
 
     render() {
-        const { veiledere, portefoljestorrelser, filtervalg, statustall } = this.props;
+        const { veiledere, portefoljestorrelser, filtervalg, statustall, slettVeilederFilter } = this.props;
         return (
             <DocumentTitle title="Veilederoversikt">
                 <div className="veiledere-side">
@@ -79,7 +81,9 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
                                         filtervalg={{
                                             veiledere: lagLablerTilVeiledereMedIdenter(
                                                 filtervalg.veiledere,
-                                                veiledere.data.veilederListe)
+                                                veiledere.data.veilederListe,
+                                                slettVeilederFilter
+                                            )
                                         }}
                                         filtergruppe="veiledere"
                                     />
@@ -109,7 +113,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     hentPortefoljestorrelser: (enhetId) => dispatch(fetchPortefoljeStorrelser(enhetId)),
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
-    hentStatusTall: (enhet) => dispatch(fetchStatusTall(enhet))
+    hentStatusTall: (enhet) => dispatch(fetchStatusTall(enhet)),
+    slettVeilederFilter: (ident: string) => dispatch( slettEnkeltFilter("veiledere", ident,  'veiledere', defaultVeileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeiledereSide);

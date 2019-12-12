@@ -10,7 +10,7 @@ import { leggEnhetIUrl } from '../utils/url-utils';
 import { settEnhetIDekorator } from '../eventhandtering';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { VeilederModell } from '../model-interfaces';
-import { withRouter, RouteComponentProps } from 'react-router';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 interface DispatchProps {
     children: React.ReactNode;
@@ -25,7 +25,7 @@ interface StateProps {
     veiledere: VeilederModell;
 }
 
-type InitialDataProviderProps = DispatchProps & StateProps & RouteComponentProps<{}>;
+type InitialDataProviderProps = DispatchProps & StateProps & RouteComponentProps;
 
 class InitialDataProvider extends React.Component<InitialDataProviderProps> {
 
@@ -34,7 +34,7 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps> {
         this.props.hentFeatures();
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         const {enheter} = this.props;
         if (enheter.status === STATUS.OK && enheter.valgtEnhet.status !== STATUS.OK) {
             this.oppdaterDekoratorMedInitiellEnhet();
@@ -46,7 +46,7 @@ class InitialDataProvider extends React.Component<InitialDataProviderProps> {
         const {enheter} = this.props;
 
         const enhetliste = enheter.data;
-        const enhetFraUrl = parse(this.props.location.search).enhet;// eslint-disable-line no-undef
+        const enhetFraUrl = parse(this.props.location.search).enhet;
         const enhetIdListe = enhetliste.map((enhet) => (enhet.enhetId));
 
         if (enhetFraUrl !== '') {

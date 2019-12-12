@@ -16,7 +16,11 @@ export enum AktiviteterValg {
     NA = 'NA'
 }
 
-export interface FiltreringAktiviteterValg { [aktivitet: string]: AktiviteterValg; }
+type AktivititetNykkel = 'BEHANDLING' | 'EGEN' | 'GRUPPEAKTIVITET'| 'IJOBB' | 'MOTE' | 'SOKEAVTALE' | 'STILLING' | 'TILTAK' | 'UTDANNINGAKTIVITET'
+
+export type FiltreringAktiviteterValg = {
+    [aktivitet in AktivititetNykkel]: AktiviteterValg;
+};
 
 export interface FiltreringState {
     ferdigfilterListe: string[];
@@ -108,6 +112,19 @@ export default function reducer(state: FiltervalgModell = initialState, action):
             return state;
     }
 }
+
+export function lagreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: VeilederModell) {
+    return (dispatch, getState) => {
+        dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
+
+        if (filtergruppe !== 'veiledere') {
+            // TODO Fjerne denne fra filter-reducer
+            oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
+        }
+    };
+}
+
+
 
 // Action Creators
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: VeilederModell) {

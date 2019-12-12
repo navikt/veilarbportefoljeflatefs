@@ -2,13 +2,13 @@ import * as React from 'react';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { Element } from 'nav-frontend-typografi';
-import { slettArbeidsliste } from '../ducks/arbeidsliste';
-import { oppdaterArbeidslisteForBruker } from '../ducks/portefolje';
-import { leggTilStatustall } from '../ducks/statustall';
-import { STATUS } from '../ducks/utils';
-import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../ducks/modal-feilmelding-brukere';
-import { visServerfeilModal } from '../ducks/modal-serverfeil';
-import { ArbeidslisteDataModell, BrukerModell, Status } from '../model-interfaces';
+import { slettArbeidsliste } from '../../../ducks/arbeidsliste';
+import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
+import { leggTilStatustall } from '../../../ducks/statustall';
+import { STATUS } from '../../../ducks/utils';
+import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../../../ducks/modal-feilmelding-brukere';
+import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
+import { ArbeidslisteDataModell, BrukerModell, Status } from '../../../model-interfaces';
 
 function brukerLabel(bruker) {
     return (

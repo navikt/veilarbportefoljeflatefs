@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import {AppState} from '../reducer';
-import {VarselModal, VarselModalType} from '../components/varselmodal/varselmodal';
+import {AppState} from '../../reducer';
+import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import {Hovedknapp} from 'nav-frontend-knapper';
 
 function TomPortefoljeModal () {

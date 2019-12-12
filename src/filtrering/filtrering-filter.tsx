@@ -25,9 +25,8 @@ import '../components/checkbox-filterform/checkbox-filterform.less';
 
 interface FiltreringFilterProps {
     filtervalg: any;
-    endreFiltervalg: (filterId: string, filterVerdi: string) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: any) => void;
     enhettiltak: any;
-    intl?: any;
 }
 
 const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) => (
@@ -37,91 +36,126 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Element className="blokk-xxs" tag="h3">
                     Demografi
                 </Element>
-                <Dropdown name="Alder">
-                    <CheckboxFilterform
-                        id="id_alder"
-                        form="alder"
-                        kolonner={2}
-                        valg={alder}
-                        onSubmit={endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
-                <Dropdown name="Fødselsdato">
-                    <CheckboxFilterform
-                        form="fodselsdagIMnd"
-                        valg={fodselsdagIMnd()}
-                        onSubmit={endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
-                <Dropdown name="Kjønn">
-                    <CheckboxFilterform
-                        id="id_kjonn"
-                        form="kjonn"
-                        valg={kjonn}
-                        onSubmit={endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
+                <DropdownNy
+                    name="Alder"
+                    render={(lukkDropdown) =>
+                        <CheckboxFilterform
+                            form="alder"
+                            valg={alder}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                            columns={2}
+                        />
+                    }
+                 />
+                <DropdownNy
+                    name="Fødselsdato"
+                    render={(lukkDropdown) =>
+                        <CheckboxFilterform
+                            form="fodselsdagIMnd"
+                            valg={fodselsdagIMnd()}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                        />
+                    }
+                />
+                <DropdownNy
+                    name="Kjønn"
+                    render={(lukkDropdown) =>
+                        <CheckboxFilterform
+                            form="kjonn"
+                            filtervalg={filtervalg}
+                            valg={kjonn}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                            columns={2}
+                        />
+                    }
+                />
             </div>
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
                     Situasjon
                 </Element>
-                <Dropdown name="Innsatsgruppe">
-                    <CheckboxFilterform
-                        form="innsatsgruppe"
-                        valg={innsatsgruppe}
-                        onSubmit={endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
-                <Dropdown name="Hovedmål">
-                    <CheckboxFilterform
-                        form="hovedmal"
-                        valg={hovedmal}
-                        onSubmit={endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
-                <Dropdown name="Formidlingsgruppe">
-                    <CheckboxFilterform
-                        form="formidlingsgruppe"
-                        valg={formidlingsgruppe}
-                        onSubmit={endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
-                <Dropdown name="Servicegruppe">
-                    <CheckboxFilterform
-                        form="servicegruppe"
-                        valg={servicegruppe}
-                        onSubmit={endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
-                <Dropdown name="Manuell oppfølging">
-                    <CheckboxFilterform
-                        form="manuellBrukerStatus"
-                        valg={manuellBrukerStatus}
-                        onSubmit={endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
+                <DropdownNy
+                    name="Innsatsgruppe"
+                    render={(lukkDropdown) =>
+                        <CheckboxFilterform
+                            form="innsatsgruppe"
+                            valg={innsatsgruppe}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                        />
+                    }
+                />
+                <DropdownNy
+                    name="Hovedmål"
+                    render={(lukkDropdown) =>
+                        <CheckboxFilterform
+                            form="hovedmal"
+                            valg={hovedmal}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                        />
+                    }
+                />
+                <DropdownNy
+                    name="Formidlingsgruppe"
+                    render={(lukkDropdown) =>
+                        <CheckboxFilterform
+                            form="formidlingsgruppe"
+                            valg={formidlingsgruppe}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                        />
+                    }
+                />
+                <DropdownNy
+                    name="Servicegruppe"
+                    render={(lukkDropdown) =>
+                        <CheckboxFilterform
+                            form="servicegruppe"
+                            valg={servicegruppe}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                        />
+                    }
+                />
+                <DropdownNy
+                    name="Manuell oppfølging"
+                    render={(lukkDropdown) =>
+                        <CheckboxFilterform
+                            form="manuellBrukerStatus"
+                            valg={manuellBrukerStatus}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                        />
+                    }
+                />
             </div>
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
                     Rettighetsgruppe og ytelse
                 </Element>
-                <Dropdown name="Rettighetsgruppe">
-                    <CheckboxFilterform
-                        form="rettighetsgruppe"
-                        valg={rettighetsgruppe}
-                        onSubmit={endreFiltervalg}
-                        filtervalg={filtervalg}
-                    />
-                </Dropdown>
+                <DropdownNy
+                    name="Rettighetsgruppe"
+                    render={(lukkDropdown) =>
+                        <CheckboxFilterform
+                            form="rettighetsgruppe"
+                            valg={rettighetsgruppe}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                        />
+                    }
+                />
                 <DropdownNy
                     name="Ytelse"
                     className="dropdown--140bredde-responsive"
@@ -143,23 +177,24 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown name="Aktivitet" className="dropdown--140bredde-responsive">
                     <AktivitetFilterform
-                        form="aktiviteter"
                         valg={aktiviteter}
                         filtervalg={filtervalg}
                         onSubmit={endreFiltervalg}
                     />
                 </Dropdown>
-                <Dropdown
+                <DropdownNy
                     name="Tiltakstype"
                     disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
-                >
-                    <CheckboxFilterform
-                        form="tiltakstyper"
-                        valg={enhettiltak}
-                        filtervalg={filtervalg}
-                        onSubmit={endreFiltervalg}
-                    />
-                </Dropdown>
+                    render={(lukkDropdown) =>
+                        <CheckboxFilterform
+                            form="tiltakstyper"
+                            valg={enhettiltak}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                        />
+                    }
+                />
             </div>
         </div>
     </div>

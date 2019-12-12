@@ -13,9 +13,9 @@ import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import diagramReducer from './ducks/diagram';
 import sideReducer from './ducks/ui/side';
+import lagretFilterReducer, {LagretFilterState} from './ducks/lagret-filter';
 import { slettCleanIUrl } from './utils/url-utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
-import { reducer as formReducer } from 'redux-form';
 import enhetTiltakReducer, { EnhettiltakState } from './ducks/enhettiltak';
 import listevisningReducer, {
     ListevisningState,
@@ -25,7 +25,9 @@ import listevisningReducer, {
 } from './ducks/ui/listevisning';
 import { default as contextReducer, ContextState } from './components/enhet-context/context-reducer';
 import featuresReducer, { FeaturesState } from './ducks/features';
+import toastReducer, { ToastState } from './store/toast/reducer';
 import {FiltervalgModell} from "./model-interfaces";
+
 
 function named(name, reducer) {
     return (state, action) => {
@@ -65,7 +67,8 @@ export interface AppState {
     enhettiltak: EnhettiltakState;
     nycontext: ContextState;
     features: FeaturesState;
-    form: any; // TODO type
+    lagretFilter: LagretFilterState;
+    toastReducer: ToastState;
 }
 
 export default combineReducers<AppState>({
@@ -93,5 +96,6 @@ export default combineReducers<AppState>({
     nycontext: contextReducer,
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
-    form: formReducer
+    lagretFilter: lagretFilterReducer,
+    toastReducer: toastReducer
 });

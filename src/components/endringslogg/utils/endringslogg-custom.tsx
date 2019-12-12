@@ -17,6 +17,26 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '12. DES. 2019',
+        versjonId: '12.12.19',
+        tittel: 'Veiledergrupper',
+        tekst: 'Nå kan du opprette grupper av veiledere i «Enhetens oversikt». Det gjør det enklere å få oversikt over status til brukerne i avdelinger og team på NAV-kontoret.',
+        children:
+            <>
+                <div className="veiledergrupper-navet-tekst">
+                    <EndringsloggLinkMedIkon
+                        url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/N%C3%A5-kan-du-lage-avdelinger-og-team-i-oversikten.aspx?source=https%3A%2F%2Fnavno.sharepoint.com%2Fsites%2Ffag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging"
+                        linkTekst="Nyhetssak på Navet"
+                    />
+                </div>
+                <TourModalButton
+                    metrikknavn="portefolje.endringslogg_modal.veiledergrupper"
+                    modal={ModalName.VEILEDERGRUPPER}
+                    knappeTekst="Se hvordan"
+                />
+            </>
+    },
+    {
         dato: '02. DES. 2019',
         versjonId: '02.12.19',
         tittel: 'Nytt design på mål etter test',

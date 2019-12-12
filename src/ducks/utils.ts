@@ -35,9 +35,9 @@ export function toJson(response) {
 export function sendResultatTilDispatch(dispatch, action) {
     return (...data) => {
         if (data.length === 1) {
-            return dispatch({ type: action, data: data[0] });
+            return dispatch({type: action, data: data[0]});
         }
-        return dispatch({ type: action, data });
+        return dispatch({type: action, data});
     };
 }
 
@@ -46,11 +46,11 @@ export function handterFeil(dispatch, action) {
         if (error.response) {
             error.response.text().then((data) => {
                 console.error(error, error.stack, data); // tslint:disable-line no-console
-                dispatch({ type: action, data: { response: error.response, data } });
+                dispatch({type: action, data: {response: error.response, data}});
             });
         } else {
             console.error(error, error.stack); // tslint:disable-line no-console
-            dispatch({ type: action, data: error.toString() });
+            dispatch({type: action, data: error.toString()});
         }
     };
 }
@@ -61,13 +61,13 @@ export function fetchToJson<ResponseInterface>(url: string, config: RequestInit 
         .then(toJson);
 }
 
-export function doThenDispatch(fn, { OK, FEILET, PENDING }) {
+export function doThenDispatch(fn, {OK, FEILET, PENDING}) {
     return (dispatch, getState?) => {
         if (PENDING) {
-            dispatch({ type: PENDING });
+            dispatch({type: PENDING});
         }
         return fn(dispatch, getState)
-            .then(sendResultatTilDispatch(dispatch, OK))
+            .then(data => sendResultatTilDispatch(dispatch, OK)(data))
             .catch(handterFeil(dispatch, FEILET));
     };
 }
@@ -80,4 +80,4 @@ export const stateSliceToNameMap = {
 
 export const nameToStateSliceMap = Object.entries(stateSliceToNameMap)
     .map(([a, b]) => [b, a])
-    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+    .reduce((acc, [key, value]) => ({...acc, [key]: value}), {});

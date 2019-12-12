@@ -1,13 +1,21 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { endreFiltervalg } from '../ducks/filtrering';
-import { EnhetModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
+import { FiltervalgModell, VeilederModell } from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 import { FiltreringStatus } from './filtrering-status/filtrering-status';
+import { useEffect } from 'react';
+import { hentLagretFilterForEnhet } from '../ducks/lagret-filter';
+import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-veileder-grupper';
+import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
+import { VIS_VEILEDER_GRUPPER } from '../konstanter';
+import { useEnhetSelector } from '../hooks/redux/use-enhet-selector';
+import { OrNothing } from '../utils/types/types';
+import { Tiltak } from '../ducks/enhettiltak';
 
-const defaultVeileder: VeilederModell = {
+export const defaultVeileder: VeilederModell = {
     ident: '',
     navn: '',
     fornavn: '',
@@ -15,20 +23,43 @@ const defaultVeileder: VeilederModell = {
 };
 
 interface FiltreringContainerProps {
-    enhettiltak: EnhetModell;
+    enhettiltak: OrNothing<Tiltak>;
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
-    veileder: VeilederModell;
-    endreFiltervalg: (filterId: string, filterVerdi: string) => void;
+    veileder?: VeilederModell;
 }
 
-function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeileder, endreFiltervalg, enhettiltak }: FiltreringContainerProps) {
+function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeileder, enhettiltak}: FiltreringContainerProps) {
+
+    const valgtEnhet = useEnhetSelector();
+    const harVeilederGruppeFeature = useFeatureSelector()(VIS_VEILEDER_GRUPPER);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (harVeilederGruppeFeature && valgtEnhet) {
+            dispatch(hentLagretFilterForEnhet(valgtEnhet.enhetId));
+        }
+    }, [dispatch, valgtEnhet, harVeilederGruppeFeature]);
+
+    const doEndreFiltervalg = (filterId: string, filterVerdi: string) =>
+        dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe, veileder));
+
     return (
         <div className="blokk-m">
             <FiltreringNavnellerfnr
                 filtervalg={filtervalg}
-                endreFiltervalg={endreFiltervalg}
+                endreFiltervalg={doEndreFiltervalg}
             />
+            <MetrikkEkspanderbartpanel
+                apen={false}
+                tittel="Veiledergrupper"
+                tittelProps="undertittel"
+                lamellNavn="veiledergrupper"
+                hidden={filtergruppe === 'veileder'}
+            >
+                <FilteringVeilederGrupper/>
+
+            </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen
                 tittel="Status"
@@ -49,7 +80,7 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
                 lamellNavn="filtergruppe"
             >
                 <FiltreringFilter
-                    endreFiltervalg={endreFiltervalg}
+                    endreFiltervalg={doEndreFiltervalg}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
                 />
@@ -58,10 +89,4 @@ function FiltreringContainer({ filtergruppe, filtervalg, veileder = defaultVeile
     );
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    endreFiltervalg: (filterId: string, filterVerdi: string) => {
-        dispatch(endreFiltervalg(filterId, filterVerdi, ownProps.filtergruppe, ownProps.veileder && ownProps.veileder.ident));
-    }
-});
-
-export default connect(null, mapDispatchToProps)(FiltreringContainer);
+export default FiltreringContainer;

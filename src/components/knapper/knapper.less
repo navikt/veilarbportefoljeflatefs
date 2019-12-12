@@ -1,0 +1,35 @@
+@import "~nav-frontend-core/less/core";
+
+.veilarbportefoljeflatefs {
+    .rediger-knapp {
+        padding: 0.2rem;
+        background: transparent;
+        border: none;
+        height: fit-content;
+    }
+
+    .rediger-knapp:focus {
+        outline: none;
+        border-radius: 4px;
+        border: 2px solid @fokusFarge;
+        padding-bottom: 0px;
+    }
+
+    .rediger-knapp:hover {
+       #pen {
+           fill: #0067c5;
+       }
+       #symbol {
+           stroke: none;
+       }
+    }
+
+    .veiledergruppe-knapp {
+        padding: 0.3rem 0.5rem;
+        text-transform: none;
+    }
+}
+
+.ny-gruppe-knapp {
+    margin: -2px 0;
+}

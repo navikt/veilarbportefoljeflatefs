@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
 import { PortefoljeData } from '../ducks/portefolje';
+import { NyGruppe, RedigerGruppe } from '../ducks/lagret-filter';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -15,10 +16,16 @@ const MED_CREDENTIALS: RequestInit = {
 export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
+export const VEILARBFILTER_URL = '/veilarbfilter/api';
 export const FEATURE_URL = '/feature';
 
 export function hentVeiledersEnheter() {
     const url = `${VEILARBVEILEDER_URL}/api/veileder/enheter`;
+    return fetchToJson(url, MED_CREDENTIALS);
+}
+
+export function hentTilgangTilEnhet(enhet: string): Promise<boolean> {
+    const url = `${VEILARBVEILEDER_URL}/api/veileder/enhet/${enhet}/tilgangTilEnhet`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
@@ -63,6 +70,11 @@ export function hentEnhetsVeiledere(enhetId) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
+export function hentEnhetsFilterGrupper(enhetId) {
+    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/`;
+    return fetchToJson(url, MED_CREDENTIALS);
+}
+
 export function fetchPortefoljeStorrelser(enhetId) {
     const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}` +
         '/portefoljestorrelser';
@@ -74,6 +86,24 @@ export function tilordneVeileder(tilordninger) {
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(tilordninger) };
     return fetch(url, config)
         .then(sjekkStatuskode);
+}
+
+export function redigerVeiledergruppe(endringer: RedigerGruppe, enhetId: string): Promise<RedigerGruppe> {
+    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
+    const config = { ...MED_CREDENTIALS, method: 'put', body: JSON.stringify(endringer) };
+    return fetchToJson(url, config);
+}
+
+export function nyVeiledergruppe(endringer: NyGruppe, enhetId: string): Promise<NyGruppe> {
+    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
+    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(endringer) };
+    return fetchToJson(url, config);
+}
+
+export function slettVeiledergruppe(enhetId: string | undefined | null, filterId: number): Promise<number> {
+    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/filter/${filterId}`;
+    const config = { ...MED_CREDENTIALS, method: 'delete'};
+    return fetch(url, config).then(sjekkStatuskode).then(_ => Promise.resolve(filterId));
 }
 
 export function hentStatusTall(enhetId) {
