@@ -1,6 +1,8 @@
 @import (reference) '~nav-frontend-core/less/_variabler';
 
 .lagre-endringer-toast, .slette-gruppe-toast, .opprett-gruppe-toast, .ingen-endringer-toast {
+  margin-top: 1rem;
+  margin-right: 2rem;
   display: flex;
   position: absolute;
   width: fit-content;
@@ -9,7 +11,9 @@
   top: 6rem;
 
   &:focus {
+    border-radius: 4px;
     box-shadow: 0 0 0 3px @fokusFarge;
+    outline: none;
   }
 
   &__alertstripe {
