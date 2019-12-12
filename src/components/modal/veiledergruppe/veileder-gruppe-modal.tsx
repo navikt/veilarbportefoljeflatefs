@@ -10,6 +10,7 @@ import { AppState } from '../../../reducer';
 import { OrNothing } from '../../../utils/types/types';
 import VeilederGruppeForm from './veileder-gruppe-form';
 import { logEvent } from '../../../utils/frontend-logger';
+import {initialState} from "../../../ducks/filtrering";
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -33,8 +34,8 @@ interface VeilederGruppeErrors {
 }
 
 export function VeilederGruppeModal(props: VeilederModalProps) {
-    const [filterValg, setFilterValg] = useState<FiltervalgModell>(props.initialVerdi.filterValg);
-    const [gruppeNavn, setGruppeNavn] = useState<string>(props.initialVerdi.gruppeNavn);
+    const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
+    const [gruppeNavn, setGruppeNavn] = useState<string>("");
     const [errors, setErrors] = useState<VeilederGruppeErrors>({} as VeilederGruppeErrors);
     const [harForsoktSubmitte, setHarForsoktSubmitte] = useState(false);
 
@@ -94,6 +95,11 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             return;
         }
         props.onSubmit(gruppeNavn, filterValg);
+
+        setFilterValg(initialState);
+        setGruppeNavn("");
+        setErrors({} as VeilederGruppeErrors);
+        setHarForsoktSubmitte(false);
         props.onRequestClose();
     }
 
