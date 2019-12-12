@@ -18,6 +18,11 @@ import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
 interface VeilederGruppeInnholdProps {
     lagretFilter: LagretFilter[]
     filterValg?: FiltervalgModell;
+    initialVerdi?: {
+        gruppeNavn: string,
+        filterValg: FiltervalgModell,
+        filterId: number
+    }
 }
 
 function isOverflown(element) {
@@ -51,11 +56,14 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     const finnVeilederGruppe = (vg) => props.lagretFilter.find((elem) => elem.filterId === parseInt(vg));
 
     const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
+        // if (props.initialVerdi && harGjortEndringer(filterValg.veiledere, props.initialVerdi.filterValg.veiledere, props.initialVerdi.gruppeNavn, gruppeNavn)) {
         valgtGruppe && enhet && dispatch(lagreEndringer({
             filterId: valgtGruppe.filterId,
             filterNavn: gruppeNavn,
             filterValg
         }, enhet.enhetId)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', defaultVeileder)));
+        // }
+        // dispatch(visIngenEndringerToast());
     };
 
     const sletteKnapp = () => {
