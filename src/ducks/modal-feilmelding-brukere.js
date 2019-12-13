@@ -9,7 +9,8 @@ export const FJERN_FRA_ARBEIDSLISTE_FEILET = 'fjernFraArbeidslisteFeilet';
 // Reducer
 const initalState = {
     aarsak: undefined,
-    brukereError: []
+    brukereError: [],
+    brukereOk: []
 };
 export default function reducer(state = initalState, action) {
     switch (action.type) {

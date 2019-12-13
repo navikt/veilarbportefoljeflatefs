@@ -14,6 +14,7 @@ import {
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
+import {visTilordningOkModal} from "./modal";
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -306,10 +307,16 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                     feilendeTilordninger: res.feilendeTilordninger
                 });
                 if (res.feilendeTilordninger.length > 0) {
+                    const feilendeTilordninger = res.feilendeTilordninger;
                     visFeiletModal({
                         aarsak: TILORDNING_FEILET,
-                        brukereError: res.feilendeTilordninger
+                        brukereError: feilendeTilordninger,
+                        brukereOk: tilordninger
+                            .filter(tillordning => !tillordning.includes(res.tillordning.fnr))
+                            .map(tillordning => ({brukerFnr: tillordning.brukerFnr}))
                     })(dispatch);
+                } else {
+                    dispatch(visTilordningOkModal(tilordninger.map(tillordning => ({brukerFnr: tillordning.brukerFnr}))));
                 }
                 if (filtergruppe === 'minOversikt') {
                     dispatch({
