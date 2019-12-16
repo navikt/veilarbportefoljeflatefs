@@ -133,18 +133,22 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case NY_FEILET_MODAL:
             loggNyVeiledergruppeFeilet();
             break;
+
         case SLETT_VEILEDERGRUPPER_OK: {
             const opprettetTidpunkt = finnSlettetVeilederGruppe(store, action.data);
             loggSlettVeiledergruppeOK(opprettetTidpunkt);
+            loggAntallVeiledergrupper((store.getState().lagretFilter.data.length) - 1, store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            const antallGrupper = (store.getState().lagretFilter.data.length) + 1;
-            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, antallGrupper, store.getState().enheter.valgtEnhet.enhet.enhetId);
+            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().enheter.valgtEnhet.enhet.enhetId);
+            loggAntallVeiledergrupper((store.getState().lagretFilter.data.length) + 1, store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length);
+            loggAntallVeiledergrupper(store.getState().lagretFilter.data.length, store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
+
     }
 
     return next(action);
@@ -247,9 +251,9 @@ const loggSlettVeiledergruppeFeilet = () => {
     logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet');
 };
 
-const loggNyVeiledergruppeOK = (antallVeiledere, antallGrupper, enhetId) => {
-        logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket',
-        {veiledere: antallVeiledere, antallGrupper},
+const loggNyVeiledergruppeOK = (antallVeiledere, enhetId) => {
+    logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket',
+        {veiledere: antallVeiledere},
         {enhetId});
 };
 
@@ -263,3 +267,8 @@ const loggSlettVeiledergruppeOK = (opprettetTidspunkt) => {
         {levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24)});
 };
 
+const loggAntallVeiledergrupper = (antallGrupper, enhetId) => {
+    logEvent('portefolje.metrikker.veiledergrupper.henting-vellykket',
+        {antallGrupper},
+        {enhetId});
+};
