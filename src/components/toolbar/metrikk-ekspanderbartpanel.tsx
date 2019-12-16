@@ -4,7 +4,6 @@ import { logEvent } from '../../utils/frontend-logger';
 import { finnSideNavn } from '../../middleware/metrics-middleware';
 import { PropsWithChildren, useState } from 'react';
 import hiddenIf from '../hidden-if/hidden-if';
-import getStore from '../../store';
 
 interface MetrikkEkspanderbartpanelProps {
     lamellNavn: string;
@@ -19,13 +18,10 @@ function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
     const handleOnClick = () => {
         setIsApen(!isApen);
         logEvent('portefolje.metrikker.lamell', {
-                navn: props.lamellNavn,
-                apen: isApen,
-                sideNavn: finnSideNavn(),
-                antallGrupper: getStore().getState().lagretFilter.data.length
-            },
-            // @ts-ignore
-            {enhetId: getStore().getState().enheter.valgtEnhet.enhet.enhetId});
+            navn: props.lamellNavn,
+            apen: isApen,
+            sideNavn: finnSideNavn(),
+        });
     };
 
     if (!!props.skalVises) {
