@@ -86,6 +86,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
 
     const {type, data, toolbarPosisjon, kolonne} = action;
     const sideNavn = finnSideNavn();
+    const antallGrupper = store.getState().lagretFilter.data.length;
 
     switch (type) {
         case ENDRE_FILTER:
@@ -136,19 +137,17 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
 
         case SLETT_VEILEDERGRUPPER_OK: {
             const opprettetTidpunkt = finnSlettetVeilederGruppe(store, action.data);
-            const antallGrupperSlett = ((store.getState().lagretFilter.data.length) - 1);
             loggSlettVeiledergruppeOK(opprettetTidpunkt);
-            loggAntallVeiledergrupper(antallGrupperSlett, store.getState().enheter.valgtEnhet.enhet.enhetId);
+            loggAntallVeiledergrupper((antallGrupper - 1), store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            const antallGrupperNy = ((store.getState().lagretFilter.data.length) + 1);
             loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length);
-            loggAntallVeiledergrupper(antallGrupperNy, store.getState().enheter.valgtEnhet.enhet.enhetId);
+            loggAntallVeiledergrupper((antallGrupper + 1), store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length);
-            loggAntallVeiledergrupper(store.getState().lagretFilter.data.length, store.getState().enheter.valgtEnhet.enhet.enhetId);
+            loggAntallVeiledergrupper(antallGrupper, store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
 
     }
