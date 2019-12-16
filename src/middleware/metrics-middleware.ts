@@ -12,7 +12,6 @@ import { VIS_MODAL } from '../ducks/modal';
 import { SORTERT_PA } from '../ducks/sortering';
 import { NY_FEILET_MODAL, REDIGERING_FEILET_MODAL, SLETTING_FEILET_MODAL } from '../ducks/modal-serverfeil';
 import {
-    HENT_VEILEDERGRUPPER_OK,
     NY_VEILEDERGRUPPER_OK,
     REDIGER_VEILEDERGRUPPER_OK,
     SLETT_VEILEDERGRUPPER_OK
