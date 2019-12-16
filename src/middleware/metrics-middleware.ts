@@ -16,6 +16,7 @@ import {
     REDIGER_VEILEDERGRUPPER_OK,
     SLETT_VEILEDERGRUPPER_OK
 } from '../ducks/lagret-filter';
+import { hexString } from '../components/endringslogg/utils/endringslogg-utils';
 
 interface FilterEndringData {
     filterId: string;
@@ -139,7 +140,8 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().enheter.valgtEnhet.enhet.enhetId);
+            const antallGrupper = (store.getState().lagretFilter.data.length) + 1;
+            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, antallGrupper, store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length);
@@ -246,10 +248,10 @@ const loggSlettVeiledergruppeFeilet = () => {
     logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet');
 };
 
-const loggNyVeiledergruppeOK = (antallVeiledere, enhetId) => {
-    logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket',
-        {veiledere: antallVeiledere},
-        {enhetId: enhetId});
+const loggNyVeiledergruppeOK = (antallVeiledere, antallGrupper, enhetId) => {
+        logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket',
+        {veiledere: antallVeiledere, antallGrupper},
+        {enhetId});
 };
 
 const loggRedigerVeiledergruppeOK = (antallVeiledere) => {
