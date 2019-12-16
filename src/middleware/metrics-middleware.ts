@@ -16,7 +16,6 @@ import {
     REDIGER_VEILEDERGRUPPER_OK,
     SLETT_VEILEDERGRUPPER_OK
 } from '../ducks/lagret-filter';
-import { hexString } from '../components/endringslogg/utils/endringslogg-utils';
 
 interface FilterEndringData {
     filterId: string;
