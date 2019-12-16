@@ -12,6 +12,7 @@ import { VIS_MODAL } from '../ducks/modal';
 import { SORTERT_PA } from '../ducks/sortering';
 import { NY_FEILET_MODAL, REDIGERING_FEILET_MODAL, SLETTING_FEILET_MODAL } from '../ducks/modal-serverfeil';
 import {
+    HENT_VEILEDERGRUPPER_OK,
     NY_VEILEDERGRUPPER_OK,
     REDIGER_VEILEDERGRUPPER_OK,
     SLETT_VEILEDERGRUPPER_OK
@@ -86,7 +87,6 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
 
     const {type, data, toolbarPosisjon, kolonne} = action;
     const sideNavn = finnSideNavn();
-    const antallGrupper = store.getState().lagretFilter.data.length;
 
     switch (type) {
         case ENDRE_FILTER:
@@ -134,22 +134,17 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case NY_FEILET_MODAL:
             loggNyVeiledergruppeFeilet();
             break;
-
         case SLETT_VEILEDERGRUPPER_OK: {
             const opprettetTidpunkt = finnSlettetVeilederGruppe(store, action.data);
             loggSlettVeiledergruppeOK(opprettetTidpunkt);
-            loggAntallVeiledergrupper((antallGrupper - 1), store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
             loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length);
-            loggAntallVeiledergrupper((antallGrupper + 1), store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length);
-            loggAntallVeiledergrupper(antallGrupper, store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
-
     }
 
     return next(action);
@@ -265,10 +260,4 @@ const loggRedigerVeiledergruppeOK = (antallVeiledere) => {
 const loggSlettVeiledergruppeOK = (opprettetTidspunkt) => {
     logEvent('portefolje.metrikker.veiledergrupper.sletting-vellykket',
         {levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24)});
-};
-
-const loggAntallVeiledergrupper = (antallGrupper, enhetId) => {
-    logEvent('portefolje.metrikker.veiledergrupper.henting-vellykket',
-        {antallGrupper},
-        {enhetId});
 };
