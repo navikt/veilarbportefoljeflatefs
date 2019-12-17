@@ -13,7 +13,7 @@ interface FeilmeldingBrukereModalProps {
 function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
     return (
         <VarselModal
-            contentLabel="Modal tilordning feilet"
+            contentLabel="Modal tildeling feilet"
             isOpen={props.isOpen}
             onRequestClose={props.onClose}
             closeButton={false}
@@ -39,9 +39,8 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
 
                 <FnrList listeMedFnr={props.fnrSuksess}/>
                 <Normaltekst className="blokk-s">
-                    Det kan skyldes manglende tilgang på bruker, eller at veilederen allerede er tildelt brukeren.
+                    Det kan ta noe tid før oversikten blir oppdatert med tildelt veileder
                 </Normaltekst>
-
             </>
 
             }
