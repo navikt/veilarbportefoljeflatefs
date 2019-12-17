@@ -2,7 +2,7 @@ import * as Api from './../middleware/api';
 import { doThenDispatch, handterFeil, nameToStateSliceMap, STATUS, toJson } from './utils';
 import { IKKE_SATT } from '../konstanter';
 import { pagineringSetup } from './paginering';
-import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
+import { TILDELING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from './statustall';
 import { leggSideIUrl, leggSorteringIUrl } from '../utils/url-utils';
@@ -14,6 +14,7 @@ import {
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
+import {visTilordningOkModal} from "./modal";
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -28,7 +29,7 @@ const TILDEL_VEILEDER_OK = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_OK';
 const TILDEL_VEILEDER_FEILET = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_FEILET';
 const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
-const NULLSTILL_FEILENDE_TILORDNINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILORDNINGER';
+const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILDELINGER';
 const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
 
 function lagBrukerGuid(bruker) {
@@ -181,7 +182,7 @@ export default function reducer(state = initialState, action): PortefoljeState {
         case TILDEL_VEILEDER_FEILET: {
             return {...state, tilordningerstatus: STATUS.ERROR};
         }
-        case NULLSTILL_FEILENDE_TILORDNINGER: {
+        case NULLSTILL_FEILENDE_TILDELINGER: {
             return {...state, feilendeTilordninger: []};
         }
         case SETT_MARKERT_BRUKER_ALLE: {
@@ -306,10 +307,16 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                     feilendeTilordninger: res.feilendeTilordninger
                 });
                 if (res.feilendeTilordninger.length > 0) {
+                    const feilendeTilordninger = res.feilendeTilordninger;
                     visFeiletModal({
-                        aarsak: TILORDNING_FEILET,
-                        brukereError: res.feilendeTilordninger
+                        aarsak: TILDELING_FEILET,
+                        brukereError: feilendeTilordninger,
+                        brukereOk: tilordninger
+                            .filter(tillordning => !tillordning.includes(res.tillordning.fnr))
+                            .map(tillordning => ({brukerFnr: tillordning.brukerFnr}))
                     })(dispatch);
+                } else {
+                    dispatch(visTilordningOkModal(tilordninger.map(tillordning => ({brukerFnr: tillordning.brukerFnr}))));
                 }
                 if (filtergruppe === 'minOversikt') {
                     dispatch({
@@ -349,7 +356,7 @@ export function settTilordningStatusOk() {
 
 export function nullstillFeilendeTilordninger() {
     return (dispatch) => dispatch({
-        type: NULLSTILL_FEILENDE_TILORDNINGER
+        type: NULLSTILL_FEILENDE_TILDELINGER
     });
 }
 
