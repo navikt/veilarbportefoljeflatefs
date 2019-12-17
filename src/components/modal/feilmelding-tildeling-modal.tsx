@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
-import {Fnr, FnrList} from "../fnr-list";
+import { Fnr, FnrList } from '../fnr-list';
 
 interface FeilmeldingBrukereModalProps {
     isOpen: boolean;
@@ -10,7 +10,7 @@ interface FeilmeldingBrukereModalProps {
     onClose: () => void;
 }
 
-function FeilmeldingTildelningModal(props: FeilmeldingBrukereModalProps) {
+function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
     return (
         <VarselModal
             contentLabel="Modal tilordning feilet"
@@ -27,7 +27,7 @@ function FeilmeldingTildelningModal(props: FeilmeldingBrukereModalProps) {
             <Normaltekst className="blokk-s">
                 Tildeling av veileder til følgende bruker feilet:
             </Normaltekst>
-            <FnrList listeMedFnr={props.fnrFeil} />
+            <FnrList listeMedFnr={props.fnrFeil}/>
             <Normaltekst className="blokk-s">
                 Det kan skyldes manglende tilgang på bruker, eller at veilederen allerede er tildelt brukeren.
             </Normaltekst>
@@ -37,7 +37,7 @@ function FeilmeldingTildelningModal(props: FeilmeldingBrukereModalProps) {
                     Handling utført
                 </Undertittel>
 
-                <FnrList listeMedFnr={props.fnrSuksess} />
+                <FnrList listeMedFnr={props.fnrSuksess}/>
                 <Normaltekst className="blokk-s">
                     Det kan skyldes manglende tilgang på bruker, eller at veilederen allerede er tildelt brukeren.
                 </Normaltekst>
@@ -52,4 +52,4 @@ function FeilmeldingTildelningModal(props: FeilmeldingBrukereModalProps) {
     );
 }
 
-export default FeilmeldingTildelningModal;
+export default FeilmeldingTildelingModal;

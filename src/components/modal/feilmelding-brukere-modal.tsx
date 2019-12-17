@@ -15,7 +15,7 @@ interface FeilmeldingBrukereModalProps {
 function FeilmeldingBrukereModal (props: FeilmeldingBrukereModalProps){
     return (
         <VarselModal
-            contentLabel="Modal tilordning feilet"
+            contentLabel="Modal tildeling feilet"
             isOpen={props.isOpen}
             onRequestClose={props.onClose}
             closeButton={false}

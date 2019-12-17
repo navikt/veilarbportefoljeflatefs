@@ -1,26 +1,25 @@
 import React from 'react';
-import FeilmeldingBrukereModal from "./feilmelding-brukere-modal";
+import FeilmeldingBrukereModal from './feilmelding-brukere-modal';
 import {
     FJERN_FRA_ARBEIDSLISTE_FEILET,
     LEGG_TIL_ARBEIDSLISTE_FEILET,
-    TILORDNING_FEILET
-} from "../../ducks/modal-feilmelding-brukere";
-import ServerFeilModal from "./server-feil-modal";
-import {ModalSuksess} from "./modal-suksess";
-import {Fnr, FnrList} from "../fnr-list";
-import {Normaltekst} from "nav-frontend-typografi";
-import { VIS_TILORDNING_SUKSESS_MODAL} from "../../ducks/modal";
-import {useModalControllerSelector} from "../../hooks/redux/use-modal-controller.selector";
-import {NY_FEILET_MODAL} from "../../ducks/modal-serverfeil";
-import FeilmeldingTildelningModal from "./feilmelding-tildelning-modal";
+    TILDELING_FEILET
+} from '../../ducks/modal-feilmelding-brukere';
+import ServerFeilModal from './server-feil-modal';
+import { ModalSuksess } from './modal-suksess';
+import { Fnr, FnrList } from '../fnr-list';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { VIS_TILDELING_SUKSESS_MODAL } from '../../ducks/modal';
+import { useModalControllerSelector } from '../../hooks/redux/use-modal-controller.selector';
+import { NY_FEILET_MODAL } from '../../ducks/modal-serverfeil';
+import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
 
-
-export function MinOversiktModalController () {
+export function MinOversiktModalController() {
     const {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal} = useModalControllerSelector();
     return (
         <>
-            <FeilmeldingTildelningModal
-                isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
+            <FeilmeldingTildelingModal
+                isOpen={feilmeldingModal.aarsak === TILDELING_FEILET}
                 fnrFeil={feilmeldingModal.brukereError}
                 fnrSuksess={feilmeldingModal.brukereOk}
                 onClose={closeFeilmeldingModal}
@@ -44,18 +43,17 @@ export function MinOversiktModalController () {
                 onClose={closeServerfeilModal}
             />
             <TildelningerOk
-                isOpen={modal.modal === VIS_TILORDNING_SUKSESS_MODAL}
+                isOpen={modal.modal === VIS_TILDELING_SUKSESS_MODAL}
                 onRequestClose={closeModal}
                 fnr={modal.brukere || []}
             />
         </>
 
-    )
+    );
 
 }
 
-
-function TildelningerOk(props: {isOpen: boolean, onRequestClose: ()=> void; fnr: Fnr[]}) {
+function TildelningerOk(props: { isOpen: boolean, onRequestClose: () => void; fnr: Fnr[] }) {
     return (
         <ModalSuksess
             isOpen={props.isOpen}
@@ -68,5 +66,5 @@ function TildelningerOk(props: {isOpen: boolean, onRequestClose: ()=> void; fnr:
                 <Normaltekst>Det kan ta noe tid før oversikten blir oppdatert med tildelt veileder</Normaltekst>
             </>
         </ModalSuksess>
-    )
+    );
 }

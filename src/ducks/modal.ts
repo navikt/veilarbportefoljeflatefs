@@ -3,7 +3,7 @@ import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 
 export const SKJUL_MODAL = 'modal/skjul';
 export const VIS_ARBEIDSLISTE_MODAL = 'LEGG_I_ARBEIDSLISTE/vis';
-export const VIS_TILORDNING_SUKSESS_MODAL = 'VEILEDER_TILORDNET/vis';
+export const VIS_TILDELING_SUKSESS_MODAL = 'VEILEDER_TILORDNET/vis';
 
 
 const initalState = {
@@ -17,7 +17,7 @@ export default function reducer(state = initalState, action) {
         case SKJUL_MODAL:
             return initalState;
         case VIS_ARBEIDSLISTE_MODAL:
-        case VIS_TILORDNING_SUKSESS_MODAL:
+        case VIS_TILDELING_SUKSESS_MODAL:
             return { modal: action.type, brukere: action.data || []};
         default:
             return state;
@@ -35,7 +35,7 @@ export function visArbeidslisteModal(toolbarPosisjon?: ToolbarPosisjon) {
 // Action Creators
 export function visTilordningOkModal(data) {
     return {
-        type: VIS_TILORDNING_SUKSESS_MODAL,
+        type: VIS_TILDELING_SUKSESS_MODAL,
         data
     };
 }
