@@ -3,7 +3,7 @@ import {
     nyVeiledergruppe,
     redigerVeiledergruppe,
     slettVeiledergruppe
-} from './../middleware/api';
+} from '../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { FiltervalgModell } from '../model-interfaces';
 

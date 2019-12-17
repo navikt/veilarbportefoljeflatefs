@@ -11,7 +11,11 @@ import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 import { VIS_MODAL } from '../ducks/modal';
 import { SORTERT_PA } from '../ducks/sortering';
 import { NY_FEILET_MODAL, REDIGERING_FEILET_MODAL, SLETTING_FEILET_MODAL } from '../ducks/modal-serverfeil';
-import { NY_VEILEDERGRUPPER_OK, REDIGER_VEILEDERGRUPPER_OK, SLETT_VEILEDERGRUPPER_OK } from '../ducks/lagret-filter';
+import {
+    NY_VEILEDERGRUPPER_OK,
+    REDIGER_VEILEDERGRUPPER_OK,
+    SLETT_VEILEDERGRUPPER_OK
+} from '../ducks/lagret-filter';
 
 interface FilterEndringData {
     filterId: string;
@@ -19,7 +23,7 @@ interface FilterEndringData {
 }
 
 enum SideNavn {
-    VEILEDER_OVSERIKT = 'VEILEDER_OVERSIKT',
+    VEILEDER_OVERSIKT = 'VEILEDER_OVERSIKT',
     ENHETENS_OVERSIKT = 'ENHETENS_OVERSIKT',
     MIN_OVERSIKT = 'MIN_OVERSIKT',
     UKJENT = 'UKJENT'
@@ -29,7 +33,7 @@ export function finnSideNavn(): SideNavn {
     const pathname = window.location.pathname;
 
     if (pathname.endsWith('/veiledere')) {
-        return SideNavn.VEILEDER_OVSERIKT;
+        return SideNavn.VEILEDER_OVERSIKT;
     } else if (pathname.endsWith('/enhet')) {
         return SideNavn.ENHETENS_OVERSIKT;
     } else if (pathname.endsWith('/portefolje')) {
@@ -40,7 +44,6 @@ export function finnSideNavn(): SideNavn {
 }
 
 function finnElementerSomErLagtTil(prevElementer: string[], nyeElementer: string[]): string[] {
-
     const elementerLagtTil: string[] = [];
 
     nyeElementer.forEach((element) => {
@@ -53,7 +56,6 @@ function finnElementerSomErLagtTil(prevElementer: string[], nyeElementer: string
 }
 
 function finnFiltreringForSide(store: any, sideNavn: SideNavn) {
-
     const state = store.getState();
     let filtrering;
 
@@ -61,7 +63,7 @@ function finnFiltreringForSide(store: any, sideNavn: SideNavn) {
         case SideNavn.ENHETENS_OVERSIKT:
             filtrering = state.filtrering;
             break;
-        case SideNavn.VEILEDER_OVSERIKT:
+        case SideNavn.VEILEDER_OVERSIKT:
             filtrering = state.filtreringVeilederoversikt;
             break;
         default:
@@ -137,7 +139,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length);
+            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().lagretFilter.data.length, store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length);
@@ -244,9 +246,10 @@ const loggSlettVeiledergruppeFeilet = () => {
     logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet');
 };
 
-const loggNyVeiledergruppeOK = (antallVeiledere) => {
+const loggNyVeiledergruppeOK = (antallVeiledere, antallGrupper, enhetId) => {
     logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket',
-        {veiledere: antallVeiledere});
+        {veiledere: antallVeiledere, antallGrupper},
+        {enhetId});
 };
 
 const loggRedigerVeiledergruppeOK = (antallVeiledere) => {

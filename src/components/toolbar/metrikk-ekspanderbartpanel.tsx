@@ -17,7 +17,11 @@ function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
 
     const handleOnClick = () => {
         setIsApen(!isApen);
-        logEvent('portefolje.metrikker.lamell', {navn: props.lamellNavn, apen: isApen, sideNavn: finnSideNavn()});
+        logEvent('portefolje.metrikker.lamell', {
+            navn: props.lamellNavn,
+            apen: isApen,
+            sideNavn: finnSideNavn(),
+        });
     };
 
     if (!!props.skalVises) {
