@@ -1,11 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import './toast.less';
-import AlertStripeSuksess from 'nav-frontend-alertstriper/lib/suksess-alertstripe';
 import { useDispatch } from 'react-redux';
 import { useTimer } from '../../hooks/use-timer';
-import { fjernLagreEndringerToast } from '../../store/toast/actions';
+import AlertStripe from 'nav-frontend-alertstriper';
 
-function LagreEndringerToast() {
+interface VeiledergruppeToastProps {
+    toastTekst: string;
+    alertstripe: any;
+    fjernToast: any;
+}
+
+function VeiledergruppeToast(props: VeiledergruppeToastProps) {
     const toastRef = useRef<HTMLDivElement>(null);
     const {startTimer} = useTimer();
 
@@ -18,20 +23,20 @@ function LagreEndringerToast() {
     useEffect(() => {
         startTimer();
         const timer = setTimeout(() => {
-            dispatch(fjernLagreEndringerToast());
+            dispatch(props.fjernToast);
         }, 10000);
         return () => clearTimeout(timer);
     });
 
     return (
-        <div className="lagre-endringer-toast" ref={toastRef} tabIndex={0}>
-            <AlertStripeSuksess className="lagre-endringer-toast__alertstripe">
-                <span className="lagre-endringer-toast__tekst">
-                    Gruppen er lagret
+        <div className="veiledergruppe-toast" ref={toastRef} tabIndex={0}>
+            <AlertStripe type={props.alertstripe} className="veiledergruppe-toast__alertstripe">
+                <span className="veiledergruppe-toast__tekst">
+                    {props.toastTekst}
                 </span>
-            </AlertStripeSuksess>
+            </AlertStripe>
         </div>
     );
 }
 
-export default LagreEndringerToast;
+export default VeiledergruppeToast;
