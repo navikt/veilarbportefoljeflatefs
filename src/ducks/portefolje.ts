@@ -3,7 +3,6 @@ import { doThenDispatch, handterFeil, nameToStateSliceMap, STATUS, toJson } from
 import { IKKE_SATT } from '../konstanter';
 import { pagineringSetup } from './paginering';
 import { TILDELING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
-import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from './statustall';
 import { leggSideIUrl, leggSorteringIUrl } from '../utils/url-utils';
 import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
@@ -14,7 +13,7 @@ import {
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
-import {visTilordningOkModal} from "./modal";
+import { visTilordningOkModal } from './modal';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
