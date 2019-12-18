@@ -14,6 +14,7 @@ import {
 } from '../components/toolbar/paginering/paginering-selector';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 import { visTilordningOkModal } from './modal';
+import { visServerfeilModal } from './modal-serverfeil';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -325,7 +326,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                 }
             })
             .catch((error) => {
-                visFeiletModal()(dispatch);
+                visServerfeilModal()(dispatch);
                 // TILDEL_VEILEDER_FEILET setter errorstatus slik at spinner forsvinner
                 return handterFeil(dispatch, TILDEL_VEILEDER_FEILET)(error);
             })
