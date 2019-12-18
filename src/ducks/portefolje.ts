@@ -326,7 +326,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                 }
             })
             .catch((error) => {
-                visServerfeilModal()(dispatch);
+                // visServerfeilModal()(dispatch);
                 // TILDEL_VEILEDER_FEILET setter errorstatus slik at spinner forsvinner
                 return handterFeil(dispatch, TILDEL_VEILEDER_FEILET)(error);
             })
