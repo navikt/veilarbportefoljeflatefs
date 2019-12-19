@@ -1,8 +1,7 @@
-import {VarselModal, VarselModalType} from "../varselmodal/varselmodal";
-import {Innholdstittel, Normaltekst} from "nav-frontend-typografi";
-import {Hovedknapp} from "nav-frontend-knapper";
-import React, {PropsWithChildren} from "react";
-
+import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Hovedknapp } from 'nav-frontend-knapper';
+import React, { PropsWithChildren } from 'react';
 
 interface ModalSuksessProps {
     isOpen: boolean;
@@ -11,13 +10,13 @@ interface ModalSuksessProps {
     tekst: string;
 }
 
-export function ModalSuksess (props: PropsWithChildren<ModalSuksessProps>) {
+export function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
     return (
         <VarselModal
-            contentLabel="Oppretting av veiledergruppe feilet"
+            contentLabel="Tildeling av veileder vellykket"
             isOpen={props.isOpen}
             onRequestClose={props.onRequestClose}
-            portalClassName="feiletbrukere-modal"
+            portalClassName="tildeling-veileder-modal"
             className="feiletbrukere-modal__content"
             type={VarselModalType.SUKSESS}
         >
@@ -31,14 +30,12 @@ export function ModalSuksess (props: PropsWithChildren<ModalSuksessProps>) {
                 {props.children}
 
             </div>
-            <div className="oppretting-feilet-modal__knappegruppe">
-                <Hovedknapp
-                    htmlType="submit"
-                    onClick={props.onRequestClose}
-                >
-                    Ok
-                </Hovedknapp>
-            </div>
+            <Hovedknapp
+                htmlType="submit"
+                onClick={props.onRequestClose}
+            >
+                Ok
+            </Hovedknapp>
         </VarselModal>
-    )
+    );
 }
