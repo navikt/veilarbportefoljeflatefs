@@ -20,8 +20,8 @@ function FeilmeldingBrukereModal (props: FeilmeldingBrukereModalProps){
             onRequestClose={props.onClose}
             closeButton={false}
             type={VarselModalType.FEIL}
-            portalClassName="feiletbrukere-modal"
-            className="feiletbrukere-modal__content"
+            portalClassName="arbeidsliste-modal"
+            className="arbeidsliste-modal__content"
         >
             <Undertittel tag="h1" className="blokk-xxs">
                 {props.tittelTekst}

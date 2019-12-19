@@ -308,12 +308,16 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                 });
                 if (res.feilendeTilordninger.length > 0) {
                     const feilendeTilordninger = res.feilendeTilordninger;
+                    const feiledeFnr = feilendeTilordninger.map(f => f.brukerFnr);
+
+                    const vellykkedeTilordninger = tilordninger
+                        .filter(tillordning => !feiledeFnr.includes(tillordning.brukerFnr))
+                        .map(tillordning => ({brukerFnr: tillordning.brukerFnr}));
+
                     visFeiletModal({
                         aarsak: TILDELING_FEILET,
                         brukereError: feilendeTilordninger,
-                        brukereOk: tilordninger
-                            .filter(tillordning => !tillordning.includes(res.tillordning.fnr))
-                            .map(tillordning => ({brukerFnr: tillordning.brukerFnr}))
+                        brukereOk: vellykkedeTilordninger
                     })(dispatch);
                 } else {
                     dispatch(visTilordningOkModal(tilordninger.map(tillordning => ({brukerFnr: tillordning.brukerFnr}))));
