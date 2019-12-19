@@ -1,13 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ToastActionType } from '../../store/toast/actions';
+import {
+    fjernIngenEndringerToast,
+    fjernLagreEndringerToast,
+    fjernOpprettGruppeToast,
+    fjernSletteGruppeToast,
+    ToastActionType
+} from '../../store/toast/actions';
 import hiddenIf from '../hidden-if/hidden-if';
 import { AppState } from '../../reducer';
-import LagreEndringerToast from './lagre-endringer-toast';
-import SletteGruppeToast from './slette-gruppe-toast';
-import OpprettGruppeToast from './opprett-gruppe-toast';
-import IngenEndringerToast from './ingen-endringer-toast';
 import { OrNothing } from '../../utils/types/types';
+import VeiledergruppeToast from './veiledergruppe-toast';
 
 interface StateProps {
     toasts: OrNothing<ToastActionType>;
@@ -16,14 +19,32 @@ interface StateProps {
 function Toasts({toasts}: StateProps) {
     const toast = () => {
         switch (toasts) {
+
             case ToastActionType.VIS_OPPRETT_GRUPPE_TOAST:
-                return <OpprettGruppeToast/>;
+                return <VeiledergruppeToast
+                    toastTekst="Gruppen er opprettet"
+                    alertstripe="suksess"
+                    fjernToast={fjernOpprettGruppeToast()}
+                />;
             case ToastActionType.VIS_LAGRE_ENDRINGER_TOAST:
-                return <LagreEndringerToast/>;
+                return <VeiledergruppeToast
+                    toastTekst="Gruppen er lagret"
+                    alertstripe="suksess"
+                    fjernToast={fjernLagreEndringerToast()}
+                />;
             case ToastActionType.VIS_SLETTE_GRUPPE_TOAST:
-                return <SletteGruppeToast/>;
+                return <VeiledergruppeToast
+                    toastTekst="Gruppen er slettet"
+                    alertstripe="suksess"
+                    fjernToast={fjernSletteGruppeToast()}
+                />;
             case ToastActionType.VIS_INGEN_ENDRINGER_TOAST:
-                return <IngenEndringerToast/>;
+                return <VeiledergruppeToast
+                    toastTekst="Du har ikke gjort noen endringer"
+                    alertstripe="info"
+                    fjernToast={fjernIngenEndringerToast()}
+                />;
+
             case ToastActionType.FJERN_OPPRETT_GRUPPE_TOAST:
             case ToastActionType.FJERN_LAGRE_ENDRINGER_TOAST:
             case ToastActionType.FJERN_SLETTE_GRUPPE_TOAST:

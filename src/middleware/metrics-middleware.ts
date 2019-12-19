@@ -23,7 +23,7 @@ interface FilterEndringData {
 }
 
 enum SideNavn {
-    VEILEDER_OVSERIKT = 'VEILEDER_OVERSIKT',
+    VEILEDER_OVERSIKT = 'VEILEDER_OVERSIKT',
     ENHETENS_OVERSIKT = 'ENHETENS_OVERSIKT',
     MIN_OVERSIKT = 'MIN_OVERSIKT',
     UKJENT = 'UKJENT'
@@ -33,7 +33,7 @@ export function finnSideNavn(): SideNavn {
     const pathname = window.location.pathname;
 
     if (pathname.endsWith('/veiledere')) {
-        return SideNavn.VEILEDER_OVSERIKT;
+        return SideNavn.VEILEDER_OVERSIKT;
     } else if (pathname.endsWith('/enhet')) {
         return SideNavn.ENHETENS_OVERSIKT;
     } else if (pathname.endsWith('/portefolje')) {
@@ -63,7 +63,7 @@ function finnFiltreringForSide(store: any, sideNavn: SideNavn) {
         case SideNavn.ENHETENS_OVERSIKT:
             filtrering = state.filtrering;
             break;
-        case SideNavn.VEILEDER_OVSERIKT:
+        case SideNavn.VEILEDER_OVERSIKT:
             filtrering = state.filtreringVeilederoversikt;
             break;
         default:
@@ -139,7 +139,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().enheter.valgtEnhet.enhet.enhetId);
+            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().lagretFilter.data.length, action.data.filterNavn.trim().length, store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length);
@@ -246,10 +246,10 @@ const loggSlettVeiledergruppeFeilet = () => {
     logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet');
 };
 
-const loggNyVeiledergruppeOK = (antallVeiledere, enhetId) => {
+const loggNyVeiledergruppeOK = (antallVeiledere, antallGrupper, gruppeNavn, enhetId) => {
     logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket',
-        {veiledere: antallVeiledere},
-        {enhetId: enhetId});
+        {veiledere: antallVeiledere, antallGrupper, gruppeNavn},
+        {enhetId});
 };
 
 const loggRedigerVeiledergruppeOK = (antallVeiledere) => {
@@ -261,4 +261,3 @@ const loggSlettVeiledergruppeOK = (opprettetTidspunkt) => {
     logEvent('portefolje.metrikker.veiledergrupper.sletting-vellykket',
         {levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24)});
 };
-
