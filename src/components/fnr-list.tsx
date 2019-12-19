@@ -19,5 +19,3 @@ export function FnrList(props: FnrList) {
         </ul>
     );
 }
-
-//cherrypick
