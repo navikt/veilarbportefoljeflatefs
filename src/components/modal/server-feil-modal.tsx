@@ -40,7 +40,7 @@ class ServerFeilModal extends React.Component<ServerFeilModalProps, ServerFeilMo
                 onRequestClose={this.lukkModal}
                 closeButton={false}
                 type={VarselModalType.FEIL}
-                portalClassName="feiletbrukere-modal"
+                portalClassName="tildeling-veileder-modal"
             >
                 <div style={{margin: "1rem", textAlign: "center"}}>
                     <Undertittel tag="h1" className="blokk-xxs">
