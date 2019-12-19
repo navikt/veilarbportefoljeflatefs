@@ -1,5 +1,4 @@
 import { FiltreringAktiviteterValg } from './ducks/filtrering';
-import {Fnr} from "./components/fnr-list";
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -170,7 +169,7 @@ export interface StatustallModell {
 
 export interface FeilmeldingModalModell {
     aarsak: string;
-    brukereError: Fnr[];
+    brukereError: string[];
 }
 
 export enum Status {
