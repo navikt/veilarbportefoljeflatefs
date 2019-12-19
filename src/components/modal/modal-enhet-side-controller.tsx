@@ -7,15 +7,13 @@ import {
     SLETTING_FEILET_MODAL,
     VIS_SERVERFEIL_MODAL
 } from '../../ducks/modal-serverfeil';
-import SlettingFeiletModal from './veiledergruppe/sletting-feilet-modal';
-import LagringFeiletModal from './veiledergruppe/lagring-feilet-modal';
-import OpprettingFeiletModal from './veiledergruppe/oppretting-feilet-modal';
 import { ModalSuksess } from './modal-suksess';
 import { Fnr, FnrList } from '../fnr-list';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { VIS_TILDELING_SUKSESS_MODAL } from '../../ducks/modal';
 import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
 import { useModalControllerSelector } from '../../hooks/redux/use-modal-controller.selector';
+import VeiledergruppeendringFeiletModal from './veiledergruppe/veiledergruppeendring-feilet-modal';
 
 export function ModalEnhetSideController() {
     const {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal} = useModalControllerSelector();
@@ -32,22 +30,31 @@ export function ModalEnhetSideController() {
                 isOpen={serverfeilModalSkalVises === VIS_SERVERFEIL_MODAL}
                 onClose={closeServerfeilModal}
             />
-            <SlettingFeiletModal
-                isOpen={serverfeilModalSkalVises === SLETTING_FEILET_MODAL}
-                onRequestClose={closeServerfeilModal}
-            />
-            <LagringFeiletModal
-                isOpen={serverfeilModalSkalVises === REDIGERING_FEILET_MODAL}
-                onRequestClose={closeServerfeilModal}
-            />
-            <OpprettingFeiletModal
-                isOpen={serverfeilModalSkalVises === NY_FEILET_MODAL}
-                onRequestClose={closeServerfeilModal}
-            />
             <TildelingerOk
                 isOpen={modal.modal === VIS_TILDELING_SUKSESS_MODAL}
                 onRequestClose={closeModal}
                 fnr={modal.brukere || []}
+            />
+            <VeiledergruppeendringFeiletModal
+                contentLabel="Sletting av veiledergruppe feilet"
+                isOpen={serverfeilModalSkalVises === SLETTING_FEILET_MODAL}
+                onRequestClose={closeServerfeilModal}
+                innholdstittel="Sletting feilet"
+                tekst="Beklager, men gruppen kunne ikke slettes. Prøv igjen senere."
+            />
+            <VeiledergruppeendringFeiletModal
+                contentLabel="Oppretting av veiledergruppe feilet"
+                isOpen={serverfeilModalSkalVises === NY_FEILET_MODAL}
+                onRequestClose={closeServerfeilModal}
+                innholdstittel="Oppretting av gruppe feilet"
+                tekst="Beklager, men gruppen kunne ikke opprettes."
+            />
+            <VeiledergruppeendringFeiletModal
+                contentLabel="Redigering av veiledergruppe feilet"
+                isOpen={serverfeilModalSkalVises === REDIGERING_FEILET_MODAL}
+                onRequestClose={closeServerfeilModal}
+                innholdstittel="Redigering feilet"
+                tekst="Beklager, men gruppen kunne ikke redigeres."
             />
         </>
 

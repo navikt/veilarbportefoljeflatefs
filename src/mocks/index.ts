@@ -130,8 +130,9 @@ mock.post('/veilarbportefolje/api/diagram/v2', ({body}) => lagDiagramData(body))
 
 // situasjon-api
 function tildel(body: any) {
-    // return {feilendeTilordninger: []}
-    return {feilendeTilordninger: [body[0]]};
+    return {feilendeTilordninger: []} //uten feilende brukere
+    // return {feilendeTilordninger: [body[0]]}; //noen feilende brukere
+    // return {feilendeTilordninger: body}; //alle feilende brukere
 }
 
 mock.post('/veilarboppfolging/api/tilordneveileder/', ({body}) => tildel(body));

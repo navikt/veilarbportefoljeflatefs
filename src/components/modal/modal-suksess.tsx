@@ -17,10 +17,10 @@ export function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
             isOpen={props.isOpen}
             onRequestClose={props.onRequestClose}
             portalClassName="tildeling-veileder-modal"
-            className="feiletbrukere-modal__content"
+            className="tildeling-veileder-modal__content"
             type={VarselModalType.SUKSESS}
         >
-            <div className="blokk-s oppretting-feilet-modal__tekstgruppe">
+            <div className="blokk-s tildeling-veileder-modal__tekstgruppe">
                 <Innholdstittel className="blokk-s">
                     {props.tittel}
                 </Innholdstittel>
