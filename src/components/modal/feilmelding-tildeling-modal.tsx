@@ -31,7 +31,7 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
             <Normaltekst className="blokk-s">
                 Det kan skyldes manglende tilgang på bruker, eller at veilederen allerede er tildelt brukeren.
             </Normaltekst>
-            {props.fnrSuksess.length > 0 &&
+            {props.fnrSuksess && props.fnrSuksess.length > 0 &&
 
             <div className='tildeling-veileder-modal__vellykkedebrukere'>
                 <Undertittel tag='h1' className='blokk-xxs'>
