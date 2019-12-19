@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
 import { Fnr, FnrList } from '../fnr-list';
-import { ReactComponent as SuksessSirkelIkon } from '../varselmodal/ok-sirkel.svg';
 
 interface FeilmeldingBrukereModalProps {
     isOpen: boolean;
@@ -35,7 +34,6 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
             {props.fnrSuksess.length > 0 &&
 
             <div className='tildeling-veileder-modal__vellykkedebrukere'>
-                <SuksessSirkelIkon className='suksessikon'/>
                 <Undertittel tag='h1' className='blokk-xxs'>
                     Handling utført
                 </Undertittel>
