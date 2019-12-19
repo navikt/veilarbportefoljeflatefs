@@ -2,7 +2,7 @@ import * as Api from './../middleware/api';
 import { doThenDispatch, handterFeil, nameToStateSliceMap, STATUS, toJson } from './utils';
 import { IKKE_SATT } from '../konstanter';
 import { pagineringSetup } from './paginering';
-import { TILORDNING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
+import { TILDELING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from './statustall';
 import { leggSideIUrl, leggSorteringIUrl } from '../utils/url-utils';
@@ -307,7 +307,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                 });
                 if (res.feilendeTilordninger.length > 0) {
                     visFeiletModal({
-                        aarsak: TILORDNING_FEILET,
+                        aarsak: TILDELING_FEILET,
                         brukereError: res.feilendeTilordninger
                     })(dispatch);
                 }

@@ -20,7 +20,7 @@ import {
     VIS_SERVERFEIL_MODAL
 } from '../ducks/modal-serverfeil';
 import FeilmeldingBrukereModal from '../components/modal/feilmelding-brukere-modal';
-import { skjulFeilmeldingModal, TILORDNING_FEILET } from '../ducks/modal-feilmelding-brukere';
+import { skjulFeilmeldingModal, TILDELING_FEILET } from '../ducks/modal-feilmelding-brukere';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
@@ -198,7 +198,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     }
                     {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <FeilmeldingBrukereModal
-                        isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
+                        isOpen={feilmeldingModal.aarsak === TILDELING_FEILET}
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"

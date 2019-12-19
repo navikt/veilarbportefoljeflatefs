@@ -2,7 +2,7 @@
 export const SKJUL_FEILMELDING_MODAL = 'feilmelding-modal/skjul';
 export const VIS_FEILMELDING_MODAL = 'feilmelding-modal/vis';
 
-export const TILORDNING_FEILET = 'tilordningFeilet';
+export const TILDELING_FEILET = 'tilordningFeilet';
 export const LEGG_TIL_ARBEIDSLISTE_FEILET = 'leggTilArbeidslisteFeilet';
 export const FJERN_FRA_ARBEIDSLISTE_FEILET = 'fjernFraArbeidslisteFeilet';
 

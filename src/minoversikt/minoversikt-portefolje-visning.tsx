@@ -16,7 +16,7 @@ import {
     FJERN_FRA_ARBEIDSLISTE_FEILET,
     LEGG_TIL_ARBEIDSLISTE_FEILET,
     skjulFeilmeldingModal,
-    TILORDNING_FEILET
+    TILDELING_FEILET
 } from '../ducks/modal-feilmelding-brukere';
 import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
 import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
@@ -166,7 +166,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                     }
                     {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <FeilmeldingBrukereModal
-                        isOpen={feilmeldingModal.aarsak === TILORDNING_FEILET}
+                        isOpen={feilmeldingModal.aarsak === TILDELING_FEILET}
                         fnr={feilmeldingModal.brukereError}
                         onClose={closeFeilmeldingModal}
                         tittelTekst="Handlingen kan ikke utføres"

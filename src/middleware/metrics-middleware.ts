@@ -139,7 +139,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().lagretFilter.data.length, store.getState().enheter.valgtEnhet.enhet.enhetId);
+            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().lagretFilter.data.length, action.data.filterNavn.trim().length, store.getState().enheter.valgtEnhet.enhet.enhetId);
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length);
@@ -246,9 +246,9 @@ const loggSlettVeiledergruppeFeilet = () => {
     logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet');
 };
 
-const loggNyVeiledergruppeOK = (antallVeiledere, antallGrupper, enhetId) => {
+const loggNyVeiledergruppeOK = (antallVeiledere, antallGrupper, gruppeNavn, enhetId) => {
     logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket',
-        {veiledere: antallVeiledere, antallGrupper},
+        {veiledere: antallVeiledere, antallGrupper, gruppeNavn},
         {enhetId});
 };
 
