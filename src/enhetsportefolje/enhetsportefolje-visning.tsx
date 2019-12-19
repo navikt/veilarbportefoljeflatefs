@@ -10,23 +10,11 @@ import { ASCENDING, DESCENDING } from '../konstanter';
 import { diagramSkalVises } from '../minoversikt/diagram/util';
 import Diagram from '../minoversikt/diagram/diagram';
 import VelgfilterMelding from './velg-filter-melding';
-import ServerFeilModal from '../components/modal/server-feil-modal';
 import { STATUS } from '../ducks/utils';
-import {
-    NY_FEILET_MODAL,
-    REDIGERING_FEILET_MODAL,
-    skjulServerfeilModal,
-    SLETTING_FEILET_MODAL,
-    VIS_SERVERFEIL_MODAL
-} from '../ducks/modal-serverfeil';
-import FeilmeldingBrukereModal from '../components/modal/feilmelding-brukere-modal';
-import { skjulFeilmeldingModal, TILDELING_FEILET } from '../ducks/modal-feilmelding-brukere';
-import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
+import { FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
-import SlettingFeiletModal from '../components/modal/veiledergruppe/sletting-feilet-modal';
-import LagringFeiletModal from '../components/modal/veiledergruppe/lagring-feilet-modal';
-import OpprettingFeiletModal from '../components/modal/veiledergruppe/oppretting-feilet-modal';
+import {ModalEnhetSideController} from "../components/modal/modal-enhet-side-controller";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -61,10 +49,6 @@ interface EnhetsportefoljeVisningProps {
     sorteringsfelt: string;
     filtervalg: FiltervalgModell;
     visningsmodus: string;
-    serverfeilModalSkalVises: string;
-    closeServerfeilModal: () => void;
-    feilmeldingModal: FeilmeldingModalModell;
-    closeFeilmeldingModal: () => void;
     sideStorrelse: number;
 }
 
@@ -152,10 +136,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             veiledere,
             filtervalg,
             visningsmodus,
-            serverfeilModalSkalVises,
-            closeServerfeilModal,
-            feilmeldingModal,
-            closeFeilmeldingModal,
             sideStorrelse,
         } = this.props;
 
@@ -197,30 +177,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                             />
                     }
                     {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
-                    <FeilmeldingBrukereModal
-                        isOpen={feilmeldingModal.aarsak === TILDELING_FEILET}
-                        fnr={feilmeldingModal.brukereError}
-                        onClose={closeFeilmeldingModal}
-                        tittelTekst="Handlingen kan ikke utføres"
-                        infotekstTekst="Tildeling av veileder til følgende bruker feilet:"
-                        merInfoTekst="Det kan skyldes manglende tilgang på bruker, eller at veilederen allerede er tildelt bruker."
-                    />
-                    <ServerFeilModal
-                        isOpen={serverfeilModalSkalVises === VIS_SERVERFEIL_MODAL}
-                        onClose={closeServerfeilModal}
-                    />
-                    <SlettingFeiletModal
-                        isOpen={serverfeilModalSkalVises === SLETTING_FEILET_MODAL}
-                        onRequestClose={closeServerfeilModal}
-                    />
-                    <LagringFeiletModal
-                        isOpen={serverfeilModalSkalVises === REDIGERING_FEILET_MODAL}
-                        onRequestClose={closeServerfeilModal}
-                    />
-                    <OpprettingFeiletModal
-                        isOpen={serverfeilModalSkalVises === NY_FEILET_MODAL}
-                        onRequestClose={closeServerfeilModal}
-                    />
+                    <ModalEnhetSideController/>
                 </Innholdslaster>
             </div>
         );
@@ -235,8 +192,6 @@ const mapStateToProps = (state) => ({
     sorteringsfelt: state.portefolje.sorteringsfelt,
     filtervalg: state.filtrering,
     visningsmodus: state.paginering.visningsmodus,
-    serverfeilModalSkalVises: state.serverfeilModal.aarsak,
-    feilmeldingModal: state.feilmeldingModal,
     sideStorrelse: selectSideStorrelse(state),
 });
 
@@ -244,8 +199,6 @@ const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, rekkefolge, sorteringsfelt, filtervalg) =>
         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filtervalg)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
-    closeServerfeilModal: () => dispatch(skjulServerfeilModal()),
-    closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetsportefoljeVisning);

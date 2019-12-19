@@ -14,8 +14,8 @@ import { ModalSuksess } from './modal-suksess';
 import { Fnr, FnrList } from '../fnr-list';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { VIS_TILDELING_SUKSESS_MODAL } from '../../ducks/modal';
-import { useModalControllerSelector } from '../../hooks/redux/use-modal-controller.selector';
 import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
+import { useModalControllerSelector } from '../../hooks/redux/use-modal-controller.selector';
 
 export function ModalEnhetSideController() {
     const {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal} = useModalControllerSelector();

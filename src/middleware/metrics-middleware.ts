@@ -8,7 +8,7 @@ import { SETT_VISNINGSMODUS, SETUP } from '../ducks/paginering';
 import { SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER } from '../ducks/portefolje';
 import { ActionTypeKeys, Kolonne } from '../ducks/ui/listevisning';
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
-import { VIS_MODAL } from '../ducks/modal';
+import { VIS_ARBEIDSLISTE_MODAL } from '../ducks/modal';
 import { SORTERT_PA } from '../ducks/sortering';
 import { NY_FEILET_MODAL, REDIGERING_FEILET_MODAL, SLETTING_FEILET_MODAL } from '../ducks/modal-serverfeil';
 import {
@@ -103,7 +103,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case ActionTypeKeys.AVVELG_ALTERNATIV:
             loggAvvelgListevalg(sideNavn, kolonne);
             break;
-        case VIS_MODAL:
+        case VIS_ARBEIDSLISTE_MODAL:
             loggArbeidslisteApne(sideNavn, toolbarPosisjon);
             break;
         case SETT_VISNINGSMODUS:
