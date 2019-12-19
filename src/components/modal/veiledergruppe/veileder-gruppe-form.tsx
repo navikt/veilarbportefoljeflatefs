@@ -29,6 +29,8 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
                     onChange={e => props.setGruppeNavn(e.target.value)}
                     feil={props.errors.gruppeNavn && {feilmelding: props.errors.gruppeNavn}}
                     maxLength={35}
+                    // @ts-ignore
+                    inputRef={useFocus()}
                 />
                 <div className="veiledergruppe-modal__sokefilter">
                     <SokVeiledere
@@ -37,7 +39,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
                     />
                 </div>
                 <Normaltekst className="veiledergruppe-modal__tekst">
-                    Veiledere i gruppen: <i>   ({props.filterValg.veiledere.length} stk)</i>
+                    Veiledere i gruppen: <i> ({props.filterValg.veiledere.length} stk)</i>
                 </Normaltekst>
                 <ValgtVeilederGruppeListe
                     // @ts-ignore
