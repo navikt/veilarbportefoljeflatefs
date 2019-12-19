@@ -15,6 +15,7 @@ import { VeilederGruppeModal } from '../../components/modal/veiledergruppe/veile
 import { FiltervalgModell } from '../../model-interfaces';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
 import { visIngenEndringerToast } from '../../store/toast/actions';
+import { logEvent } from '../../utils/frontend-logger';
 
 interface VeilederGruppeInnholdProps {
     lagretFilter: LagretFilter[]
@@ -44,6 +45,8 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     const enhet = useEnhetSelector();
 
     const velgGruppe = (gruppeId: string) => {
+        logEvent('portefolje.metrikker.veiledergrupper.velg-gruppe',
+            {}, {gruppeId: gruppeId});
         const filterVerdi = finnVeilederGruppe(gruppeId);
         setValgtGruppe(filterVerdi);
         filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, 'enhet', defaultVeileder));
