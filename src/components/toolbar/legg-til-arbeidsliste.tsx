@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import {VIS_ARBEIDSLISTE_MODAL, visArbeidslisteModal} from '../../ducks/modal';
+import {  visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
 import { ToolbarPosisjon } from './toolbar';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -77,13 +77,13 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
 }
 
 const mapStateToProps = (state) => ({
-    visModal: state.modal.modal === VIS_ARBEIDSLISTE_MODAL,
+    visModal: state.modal.visModal,
     portefolje: state.portefolje,
     veilederIdent: state.enheter.ident
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-    visArbeidslisteModal: () => dispatch(visArbeidslisteModal(props.toolbarPosisjon)),
+    visArbeidslisteModal: () => dispatch(visModal(props.toolbarPosisjon)),
 });
 
 export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(withRouter(LeggTilArbeidsliste));

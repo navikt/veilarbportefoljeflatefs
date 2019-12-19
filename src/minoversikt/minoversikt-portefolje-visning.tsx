@@ -9,15 +9,26 @@ import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
+import FeilmeldingBrukereModal from '../components/modal/feilmelding-brukere-modal';
+import ServerFeilModal from '../components/modal/server-feil-modal';
 import { STATUS } from '../ducks/utils';
-import {  FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
+import {
+    FJERN_FRA_ARBEIDSLISTE_FEILET,
+    LEGG_TIL_ARBEIDSLISTE_FEILET,
+    skjulFeilmeldingModal,
+    TILDELING_FEILET
+} from '../ducks/modal-feilmelding-brukere';
+import { skjulServerfeilModal } from '../ducks/modal-serverfeil';
+import { FeilmeldingModalModell, FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
-import {MinOversiktModalController} from "../components/modal/modal-min-oversikt-controller";
 
 interface DispatchProps {
     hentPortefolje: (...args) => void;
     doSettSortering: (rekkefolge: string, felt: string) => void;
+    closeFeilmeldingModal: () => void;
+    closeServerfeilModal: () => void;
+
 }
 
 interface StateProps {
@@ -28,6 +39,8 @@ interface StateProps {
     visningsmodus: string;
     filtervalg: FiltervalgModell;
     innloggetVeilederIdent: string;
+    feilmeldingModal: FeilmeldingModalModell;
+    serverfeilModalSkalVises: boolean;
     sideStorrelse: number;
 }
 
@@ -114,6 +127,10 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             valgtEnhet,
             filtervalg,
             visningsmodus,
+            closeFeilmeldingModal,
+            feilmeldingModal,
+            serverfeilModalSkalVises,
+            closeServerfeilModal,
             sideStorrelse,
         } = this.props;
         updateLastPath();
@@ -148,7 +165,32 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                             />
                     }
                     {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
-                    <MinOversiktModalController/>
+                    <FeilmeldingBrukereModal
+                        isOpen={feilmeldingModal.aarsak === TILDELING_FEILET}
+                        fnr={feilmeldingModal.brukereError}
+                        onClose={closeFeilmeldingModal}
+                        tittelTekst="Handlingen kan ikke utføres"
+                        infotekstTekst="Tildeling av veileder til følgende bruker feilet:"
+                        merInfoTekst="Det kan skyldes manglende tilgang på bruker, eller at veilederen allerede er tildelt bruker."
+                    />
+                    <FeilmeldingBrukereModal
+                        isOpen={feilmeldingModal.aarsak === LEGG_TIL_ARBEIDSLISTE_FEILET}
+                        fnr={feilmeldingModal.brukereError}
+                        onClose={closeFeilmeldingModal}
+                        tittelTekst="Handlingen kan ikke utføres"
+                        infotekstTekst="Kunne ikke opprette arbeidsliste for følgende brukere:"
+                    />
+                    <FeilmeldingBrukereModal
+                        isOpen={feilmeldingModal.aarsak === FJERN_FRA_ARBEIDSLISTE_FEILET}
+                        fnr={feilmeldingModal.brukereError}
+                        onClose={closeFeilmeldingModal}
+                        tittelTekst="Handlingen kan ikke utføres"
+                        infotekstTekst="Kunne ikke slette arbeidsliste for følgende brukere:"
+                    />
+                    <ServerFeilModal
+                        isOpen={serverfeilModalSkalVises}
+                        onClose={closeServerfeilModal}
+                    />
                 </Innholdslaster>
             </div>
         );
@@ -163,6 +205,8 @@ const mapStateToProps = (state) => ({
     visningsmodus: state.paginering.visningsmodus,
     filtervalg: state.filtreringMinoversikt,
     innloggetVeilederIdent: state.enheter.ident,
+    feilmeldingModal: state.feilmeldingModal,
+    serverfeilModalSkalVises: state.serverfeilModal.modalVises,
     sideStorrelse: selectSideStorrelse(state),
 });
 
@@ -170,6 +214,8 @@ const mapDispatchToProps = (dispatch) => ({
     hentPortefolje: (enhet, veileder, rekkefolge, felt, filtervalg) =>
         dispatch(hentPortefoljeForVeileder(enhet, veileder, rekkefolge, felt, filtervalg)),
     doSettSortering: (rekkefolge, felt) => dispatch(settSortering(rekkefolge, felt)),
+    closeFeilmeldingModal: () => dispatch(skjulFeilmeldingModal()),
+    closeServerfeilModal: () => dispatch(skjulServerfeilModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeilederPortefoljeVisning);

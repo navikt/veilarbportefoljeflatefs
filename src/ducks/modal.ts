@@ -2,45 +2,31 @@
 import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 
 export const SKJUL_MODAL = 'modal/skjul';
-export const VIS_ARBEIDSLISTE_MODAL = 'LEGG_I_ARBEIDSLISTE/vis';
-export const VIS_TILDELING_SUKSESS_MODAL = 'VEILEDER_TILORDNET/vis';
-
+export const VIS_MODAL = 'modal/vis';
 
 const initalState = {
-    modal: undefined,
-    brukere: [],
+    visModal: false
 };
 
 // Reducer
 export default function reducer(state = initalState, action) {
     switch (action.type) {
         case SKJUL_MODAL:
-            return initalState;
-        case VIS_ARBEIDSLISTE_MODAL:
-        case VIS_TILDELING_SUKSESS_MODAL:
-            return { modal: action.type, brukere: action.data || []};
+            return { ...state, visModal: false };
+        case VIS_MODAL:
+            return { ...state, visModal: true };
         default:
             return state;
     }
 }
 
 // Action Creators
-export function visArbeidslisteModal(toolbarPosisjon?: ToolbarPosisjon) {
+export function visModal(toolbarPosisjon?: ToolbarPosisjon) {
     return {
-        type: VIS_ARBEIDSLISTE_MODAL,
+        type: VIS_MODAL,
         toolbarPosisjon
     };
 }
-
-// Action Creators
-export function visTilordningOkModal(data) {
-    return {
-        type: VIS_TILDELING_SUKSESS_MODAL,
-        data
-    };
-}
-
-
 export function skjulModal() {
     return {
         type: SKJUL_MODAL
