@@ -34,11 +34,9 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
             {props.fnrSuksess && props.fnrSuksess.length > 0 &&
 
             <div className='tildeling-veileder-modal__vellykkedebrukere'>
-                <Undertittel tag='h1' className='blokk-xxs'>
-                    Handling utført
-                </Undertittel>
+
                 <Normaltekst className="blokk-s">
-                    Tildeling av veileder til følgende bruker var vellykket:
+                    For de øvrige brukerne var tildeling av veileder vellykket:
                 </Normaltekst>
                 <FnrList listeMedFnr={props.fnrSuksess}/>
                 <Normaltekst className="blokk-s">
@@ -47,7 +45,7 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
             </div>
             }
             <button className="knapp knapp--hoved" onClick={props.onClose}>
-                Ok
+                Lukk
             </button>
         </VarselModal>
     );
