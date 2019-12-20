@@ -7,32 +7,41 @@ import {
     SLETTING_FEILET_MODAL,
     VIS_SERVERFEIL_MODAL
 } from '../../ducks/modal-serverfeil';
-import { ModalSuksess } from './modal-suksess';
-import { Fnr, FnrList } from '../fnr-list';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { TildelingerOk } from './modal-suksess';
 import { VIS_TILDELING_SUKSESS_MODAL } from '../../ducks/modal';
 import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
 import { useModalControllerSelector } from '../../hooks/redux/use-modal-controller.selector';
 import VeiledergruppeendringFeiletModal from './veiledergruppe/veiledergruppeendring-feilet-modal';
+import { logEvent } from '../../utils/frontend-logger';
 
 export function ModalEnhetSideController() {
     const {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal} = useModalControllerSelector();
 
+    const lukkTildelingFeiletModal = () => {
+        closeFeilmeldingModal();
+        logEvent('portefolje.metrikker.tildel-veileder-feilet');
+    };
+
+    const lukkTildelingVellykketModal = () => {
+        closeModal();
+        logEvent('portefolje.metrikker.tildel-veileder-vellykket');
+    };
+
     return (
         <>
-            <FeilmeldingTildelingModal
-                isOpen={feilmeldingModal.aarsak === TILDELING_FEILET}
-                fnrFeil={feilmeldingModal.brukereError}
-                fnrSuksess={feilmeldingModal.brukereOk}
-                onClose={closeFeilmeldingModal}
-            />
             <ServerFeilModal
                 isOpen={serverfeilModalSkalVises === VIS_SERVERFEIL_MODAL}
                 onClose={closeServerfeilModal}
             />
+            <FeilmeldingTildelingModal
+                isOpen={feilmeldingModal.aarsak === TILDELING_FEILET}
+                fnrFeil={feilmeldingModal.brukereError}
+                fnrSuksess={feilmeldingModal.brukereOk}
+                onClose={lukkTildelingFeiletModal}
+            />
             <TildelingerOk
                 isOpen={modal.modal === VIS_TILDELING_SUKSESS_MODAL}
-                onRequestClose={closeModal}
+                onRequestClose={lukkTildelingVellykketModal}
                 fnr={modal.brukere || []}
             />
             <VeiledergruppeendringFeiletModal
@@ -59,21 +68,6 @@ export function ModalEnhetSideController() {
         </>
 
     );
-
 }
 
-function TildelingerOk(props: { isOpen: boolean, onRequestClose: () => void; fnr: Fnr[] }) {
-    return (
-        <ModalSuksess
-            isOpen={props.isOpen}
-            onRequestClose={props.onRequestClose}
-            tittel="Handling utført"
-            tekst="Følgende brukere ble tildelt veileder:"
-        >
-            <>
-                <FnrList listeMedFnr={props.fnr}/>
-                <Normaltekst>Det kan ta noe tid før oversikten blir oppdatert med tildelt veileder</Normaltekst>
-            </>
-        </ModalSuksess>
-    );
-}
+

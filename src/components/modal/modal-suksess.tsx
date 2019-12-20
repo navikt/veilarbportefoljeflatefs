@@ -2,15 +2,19 @@ import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import React, { PropsWithChildren } from 'react';
+import { Fnr, FnrList } from '../fnr-list';
 
 interface ModalSuksessProps {
     isOpen: boolean;
     onRequestClose: () => void;
     tittel: string;
     tekst: string;
+    closeButton?: boolean;
+    hovedknappTekst: string;
+    onAfterOpen?: () => void;
 }
 
-export function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
+function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
     return (
         <VarselModal
             contentLabel="Tildeling av veileder vellykket"
@@ -19,6 +23,8 @@ export function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
             portalClassName="tildeling-veileder-modal"
             className="tildeling-veileder-modal__content"
             type={VarselModalType.SUKSESS}
+            closeButton={props.closeButton}
+            onAfterOpen={props.onAfterOpen}
         >
             <div className="blokk-s tildeling-veileder-modal__tekstgruppe">
                 <Innholdstittel className="blokk-s">
@@ -34,8 +40,26 @@ export function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
                 htmlType="submit"
                 onClick={props.onRequestClose}
             >
-                Ok
+                {props.hovedknappTekst}
             </Hovedknapp>
         </VarselModal>
+    );
+}
+
+export function TildelingerOk(props: { isOpen: boolean, onRequestClose: () => void; fnr: Fnr[] }) {
+    return (
+        <ModalSuksess
+            isOpen={props.isOpen}
+            onRequestClose={props.onRequestClose}
+            tittel="Handling utført"
+            tekst="Følgende bruker(e) ble tildelt veileder:"
+            closeButton={false}
+            hovedknappTekst="Lukk"
+        >
+            <>
+                <FnrList listeMedFnr={props.fnr}/>
+                <Normaltekst>Det kan ta noe tid før oversikten blir oppdatert med tildelt veileder.</Normaltekst>
+            </>
+        </ModalSuksess>
     );
 }
