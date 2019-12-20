@@ -37,7 +37,7 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
             {props.fnrSuksess && props.fnrSuksess.length > 0 &&
             <div className='tildeling-veileder-modal__vellykkedebrukere'>
                 <Normaltekst className="blokk-s">
-                    For øvrige bruker(e) var tildeling av veileder vellykket:
+                    Tildeling av veileder lyktes for følgende bruker(e):
                 </Normaltekst>
                 <FnrList listeMedFnr={props.fnrSuksess}/>
                 <Normaltekst className="blokk-s">
