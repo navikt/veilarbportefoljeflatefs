@@ -13,20 +13,18 @@ import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
 import { useModalControllerSelector } from '../../hooks/redux/use-modal-controller.selector';
 import VeiledergruppeendringFeiletModal from './veiledergruppe/veiledergruppeendring-feilet-modal';
 import { logEvent } from '../../utils/frontend-logger';
-import { finnSideNavn } from '../../middleware/metrics-middleware';
 
 export function ModalEnhetSideController() {
     const {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal} = useModalControllerSelector();
 
-
     const lukkTildelingFeiletModal = () => {
         closeFeilmeldingModal();
-        logEvent('portefolje.metrikker.tildel-veileder-feilet', {sideNavn: finnSideNavn()});
+        logEvent('portefolje.metrikker.tildel-veileder-feilet');
     };
 
     const lukkTildelingVellykketModal = () => {
         closeModal();
-        logEvent('portefolje.metrikker.tildel-veileder-vellykket', {sideNavn: finnSideNavn()});
+        logEvent('portefolje.metrikker.tildel-veileder-vellykket');
     };
 
     return (

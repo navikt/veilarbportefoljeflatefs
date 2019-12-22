@@ -12,19 +12,18 @@ import { NY_FEILET_MODAL } from '../../ducks/modal-serverfeil';
 import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
 import { TildelingerOk } from './modal-suksess';
 import { logEvent } from '../../utils/frontend-logger';
-import { finnSideNavn } from '../../middleware/metrics-middleware';
 
 export function MinOversiktModalController() {
     const {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal} = useModalControllerSelector();
 
     const lukkTildelingFeiletModal = () => {
         closeFeilmeldingModal();
-        logEvent('portefolje.metrikker.tildel-veileder-feilet', {sideNavn: finnSideNavn()});
+        logEvent('portefolje.metrikker.tildel-veileder-feilet');
     };
 
     const lukkTildelingVellykketModal = () => {
         closeModal();
-        logEvent('portefolje.metrikker.tildel-veileder-vellykket', {sideNavn: finnSideNavn()});
+        logEvent('portefolje.metrikker.tildel-veileder-vellykket');
     };
 
     return (
