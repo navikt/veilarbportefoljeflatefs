@@ -11,7 +11,6 @@ interface ModalSuksessProps {
     tekst: string;
     closeButton?: boolean;
     hovedknappTekst: string;
-    onAfterOpen?: () => void;
 }
 
 function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
@@ -24,7 +23,6 @@ function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
             className="tildeling-veileder-modal__content"
             type={VarselModalType.SUKSESS}
             closeButton={props.closeButton}
-            onAfterOpen={props.onAfterOpen}
         >
             <div className="blokk-s tildeling-veileder-modal__tekstgruppe">
                 <Innholdstittel className="blokk-s">
