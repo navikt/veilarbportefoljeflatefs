@@ -16,8 +16,8 @@ import FetchMock, {
     JSONArray,
     MatcherUtils,
     MiddlewareUtils, ResponseUtils
-} from "yet-another-fetch-mock";
-import { LagretFilter } from "../ducks/lagret-filter";
+} from 'yet-another-fetch-mock';
+import { LagretFilter } from '../ducks/lagret-filter';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, enheter.enhetliste[0].enhetId, alleBrukere);
@@ -58,7 +58,6 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
     };
 }
 
-
 let customVeilederGrupper = veilederGrupper();
 
 const mock = FetchMock.configure({
@@ -82,18 +81,17 @@ mock.mock(
 mock.get('/veilarbremotestore/', endringsloggListe);
 
 //veiledergrupper
-mock.get('/veilarbfilter/api/enhet/:enhetId/', customVeilederGrupper );
+mock.get('/veilarbfilter/api/enhet/:enhetId/', customVeilederGrupper);
 
-
-mock.put('/veilarbfilter/api/enhet/:enhetId', ({ body }) => {
-    let oppdatertGruppe = {};
-        customVeilederGrupper= customVeilederGrupper.map(v => {
-            if(v.filterId === body.filterId) {
+mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}) => {
+        let oppdatertGruppe = {};
+        customVeilederGrupper = customVeilederGrupper.map(v => {
+            if (v.filterId === body.filterId) {
                 oppdatertGruppe = {...v, filterNavn: body.filterNavn, filterValg: body.filterValg};
                 return oppdatertGruppe;
             }
             return v;
-        }) as  LagretFilter [] & JSONArray;
+        }) as LagretFilter [] & JSONArray;
         return oppdatertGruppe;
     }
 );
@@ -104,9 +102,9 @@ mock.post('/veilarbfilter/api/enhet/:enhetId', (args: HandlerArgument) => {
     return {...args.body, filterId};
 });
 
-mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId',(args: HandlerArgument) => {
+mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (args: HandlerArgument) => {
     const {pathParams} = args;
-    if(pathParams.filterId) {
+    if (pathParams.filterId) {
         customVeilederGrupper = customVeilederGrupper.filter(v => v.filterId !== pathParams.filterId) as LagretFilter [] & JSONArray;
         return {status: 200};
     }
@@ -131,10 +129,16 @@ mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', tiltak);
 mock.post('/veilarbportefolje/api/diagram/v2', ({body}) => lagDiagramData(body));
 
 // situasjon-api
-mock.post('/veilarboppfolging/api/tilordneveileder/', {feilendeTilordninger: []});
+function tildel(body: any) {
+    return {feilendeTilordninger: []}; //uten feilende brukere
+    //return {feilendeTilordninger: [body[0]]}; //noen feilende brukere
+    //return {feilendeTilordninger: body}; //alle feilende brukere
+}
+
+mock.post('/veilarboppfolging/api/tilordneveileder/', ({body}) => tildel(body));
 
 // arbeidsliste-api
-mock.post('/veilarbportefolje/api/arbeidsliste/', (args: HandlerArgument)=> {
+mock.post('/veilarbportefolje/api/arbeidsliste/', (args: HandlerArgument) => {
     return {error: [], data: args.body.map((arbeidsliste) => arbeidsliste.fnr)};
 });
 
