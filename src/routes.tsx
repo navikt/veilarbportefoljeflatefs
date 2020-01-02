@@ -1,17 +1,45 @@
 import React from 'react';
 import 'moment/locale/nb';
-import {loggBrowserMetrikker} from './utils/metrikker/browser-metrikker';
-import AlertStripe from "nav-frontend-alertstriper";
-import './stengetid.less'
+import classnames from 'classnames';
+import EnhetContext from './components/enhet-context/enhet-context';
+import { Route, Switch } from 'react-router-dom';
+import EnhetSide from './enhetsportefolje/enhet-side';
+import VeiledereSide from './veiledere/veiledere-side';
+import MinOversiktSide from './minoversikt/minoversikt-side';
+import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
+import { loggBrowserMetrikker } from './utils/metrikker/browser-metrikker';
+import { VeilarbPortefoljeRedirect } from './components/redirect/veilarbportefolje-redirect';
 
 loggBrowserMetrikker();
 
-
 function Routes() {
     return (
-        <AlertStripe type="advarsel" className="varsel-om-stengetid" aria-live="assertive" role="alert" aria-atomic="true">
-            <p>Tjenesten er stengt på grunn av arbeid med kommunesammenslåing. Tjenesten skal etter planen åpnes igjen 2. januar.</p>
-        </AlertStripe>
+        <div className="portefolje">
+            <EnhetContext >
+                <div className={classnames('maincontent', 'side-innhold')}>
+                    <Switch>
+                        <Route
+                            path="/enhet"
+                            component={EnhetSide}
+                        />
+                        <Route
+                            path="/veiledere"
+                            component={VeiledereSide}
+                        />
+                        <Route
+                            path="/portefolje/:ident"
+                            component={MinOversiktSide}
+                        />
+                        <Route
+                            path="/portefolje"
+                            component={MinOversiktSide}
+                        />
+                        <VeilarbPortefoljeRedirect/>
+                    </Switch>
+                    <TilbakemeldingFab/>
+                </div>
+            </EnhetContext>
+        </div>
     );
 }
 
