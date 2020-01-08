@@ -5,7 +5,7 @@ import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tou
 function Lenker() {
     return (
         <div className="lenker" role="tablist">
-            <h2 className="h2__lenke">
+            <h2 className="h2__lenke--oversikt">
                 <ActiveLink
                     to="/enhet"
                     className="oversiktslenke typo-undertittel"
@@ -15,7 +15,7 @@ function Lenker() {
                     Enhetens oversikt
                 </ActiveLink>
             </h2>
-            <h2 className="h2__lenke">
+            <h2 className="h2__lenke--oversikt">
                 <ActiveLink
                     to="/veiledere"
                     className="oversiktslenke typo-undertittel"
