@@ -24,7 +24,7 @@ import { pagineringSetup } from '../ducks/paginering';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './minoversikt-side.less';
-import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
+import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -113,6 +113,9 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
         return (
             <DocumentTitle title="Min oversikt">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
+                    <LenkerMinoversikt
+                        veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
+                    />
                     <div className="minoversikt-side blokk-xl">
                         {visesAnnenVeiledersPortefolje ?
                             <Link to="/veiledere" className="typo-normal tilbaketilveileder">
@@ -124,9 +127,6 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
                             {visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
                             <div className="portefolje-side">
-                                <LenkerMinoversikt
-                                    veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
-                                />
                                 <div id="oversikt-sideinnhold" role="tabpanel">
                                     <div className="row">
                                         <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
