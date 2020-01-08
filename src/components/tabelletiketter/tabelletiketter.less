@@ -2,31 +2,22 @@
   text-align: center;
   padding: 0.125rem 0.5rem;
   margin: 0.125rem;
+  width: auto;
 
   &--nybruker, &--ikke_vurdert, &--behov_aev, &--ufordeltbruker {
-    width: 100%;
     background-color: @navLysBlaLighten60;
   }
 
   &--ufordeltbruker {
     margin: 0px;
-    max-width: 7rem;
   }
 
-  &--ikke_vurdert {
-    max-width: 8rem;
-  }
-
-  &--behov_aev {
-    max-width: 6.5rem;
-  }
-
-  &--nybruker {
-    max-width: 4.7rem;
-  }
-
-  &--egen-ansatt, &--diskresjonskode, &--sikkerhetstiltak {
+  &--egen-ansatt, &--diskresjonskode {
     background-color: @navOransjeLighten60;
+  }
+
+  &--sikkerhetstiltak {
+    background-color: #e3b0a8;
   }
 
   &--doed {
@@ -37,5 +28,4 @@
   &--er_sykmeldt_med_arbeidsgiver {
     background-color: @navLysBlaLighten60;
   }
-
 }

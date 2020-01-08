@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import Knapp, {Hovedknapp} from 'nav-frontend-knapper';
-import {VarselModal, VarselModalType} from "../varselmodal/varselmodal";
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import Knapp, { Hovedknapp } from 'nav-frontend-knapper';
+import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
 
 interface NyContextModalProps {
     isOpen: boolean;
@@ -11,7 +11,7 @@ interface NyContextModalProps {
     aktivEnhet: string;
 }
 
-function NyContextModal ({isOpen, isPending, doBeholdAktivEnhet, doEndreAktivEnhet, aktivEnhet}: NyContextModalProps) {
+function NyContextModal({isOpen, isPending, doBeholdAktivEnhet, doEndreAktivEnhet, aktivEnhet}: NyContextModalProps) {
     return (
         <VarselModal
             contentLabel="Du har endret enhet advarsel"
@@ -19,7 +19,7 @@ function NyContextModal ({isOpen, isPending, doBeholdAktivEnhet, doEndreAktivEnh
             closeButton={false}
             onRequestClose={() => true}
             portalClassName="brukercontext-modal"
-            className="brukercontext-modal__content"
+            className="brukercontext-modal__content endret-enhet"
             type={VarselModalType.ADVARSEL}
         >
             <Innholdstittel className="blokk-s">
