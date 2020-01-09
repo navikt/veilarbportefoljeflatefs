@@ -11,10 +11,11 @@ import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
 import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
 import { redigerArbeidsliste } from '../../../ducks/arbeidsliste';
 import moment from 'moment';
+import {OrNothing} from "../../../utils/types/types";
 
 interface Ownprops {
     bruker: BrukerModell;
-    innloggetVeileder: string;
+    innloggetVeileder: OrNothing<string>;
     sistEndretDato: Date;
     sistEndretAv?: string;
 }
@@ -38,7 +39,6 @@ type ArbeidslisteModalRedigerProps = StateProps & Ownprops & DispatchProps;
 
 function ArbeidslisteModalRediger({
   bruker,
-  innloggetVeileder,
   arbeidslisteStatus,
   sistEndretAv,
   sistEndretDato,

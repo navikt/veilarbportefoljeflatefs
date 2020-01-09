@@ -1,4 +1,3 @@
-import { randomFailure } from './utils';
 import enheter from './enheter';
 import me from './me';
 import brukere from './portefolje';
@@ -162,10 +161,33 @@ mock.post('/veilarbportefolje/api/arbeidsliste/delete', ({body}) => {
 });
 
 // modiacontextholder-api
-mock.post('/modiacontextholder/api/context', ResponseUtils.delayed(1000, randomFailure({
-    error: ['111111111111', '222222222222'],
-    data: []
-})));
+mock.get('/modiacontextholder/api/decorator', ResponseUtils.delayed(1000, {
+    "ident":"Z990281",
+    "navn":"F_Z990281 E_Z990281",
+    "fornavn":"F_Z990281",
+    "etternavn":"E_Z990281",
+    "enheter":[
+        {
+            "enhetId":"1234",
+            "navn":"NAV Testheim"
+        },
+        {
+            "enhetId":"0001",
+            "navn":"NAV Testdalen"
+        }
+    ]
+}));
+
+
+mock.get('/modiacontextholder/api/context/aktivenhet', ResponseUtils.delayed(1000, {
+    "aktivBruker": null,
+    "aktivEnhet": "1234"
+}));
+
+mock.get('/modiacontextholder/api/context/aktivbruker', ResponseUtils.delayed(1000, {
+    "aktivBruker": null,
+    "aktivEnhet": null
+}));
 
 // websocket
 class MockWebSocket {

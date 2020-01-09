@@ -4,8 +4,9 @@ import { getFiltertingState, selectValgteAlternativer } from "../../ducks/ui/lis
 import {Kolonne, ListevisningType} from "../../ducks/ui/listevisning";
 import { createSelector } from 'reselect'
 import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from "../../model-interfaces";
+import {OrNothing} from "../../utils/types/types";
 
-const selectValgtEnhetId = (state: AppState): string => state.enheter.valgtEnhet.enhet!.enhetId;
+const selectValgtEnhetId = (state: AppState) => state.valgtEnhet.data.enhetId;
 const selectSorteringsrekkefolge = (state: AppState) => state.portefolje.sorteringsrekkefolge;
 const selectBrukere = (state: AppState) => state.portefolje.data.brukere;
 const selectSorteringsFeldt = (state: AppState) => state.portefolje.sorteringsfelt;
@@ -25,7 +26,7 @@ const selectPortefoljeTabell = createSelector(
 );
 
 interface UsePortefoljeSelector {
-    enhetId: string;
+    enhetId: OrNothing<string>;
     sorteringsrekkefolge: Sorteringsrekkefolge;
     brukere: BrukerModell[],
     filtervalg: FiltervalgModell;

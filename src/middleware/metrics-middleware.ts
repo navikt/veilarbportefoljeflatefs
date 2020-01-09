@@ -139,7 +139,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().lagretFilter.data.length, action.data.filterNavn.trim().length, store.getState().enheter.valgtEnhet.enhet.enhetId);
+            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().lagretFilter.data.length, action.data.filterNavn.trim().length, store.getState().valgtEnhet);
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length);
@@ -158,7 +158,7 @@ function mapVeilederIdentTilNonsens(veilederIdent: string) {
 }
 
 export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
-    const veilederIdent = mapVeilederIdentTilNonsens(store.getState().enheter.ident);
+    const veilederIdent = mapVeilederIdentTilNonsens(store.getState().inloggetVeileder.data.ident);
     if (data.filterId === 'veilederNavnQuery') {
         return;
     }

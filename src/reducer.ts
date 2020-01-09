@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import persistent from './utils/persistentReducer';
-import enheterReducer, { EnheterState } from './ducks/enheter';
+import valgtEnhetReducer, {ValgtEnhetState} from './ducks/valgt-enhet';
 import portefoljeReducer, { PortefoljeState } from './ducks/portefolje';
 import pagineringReducer from './ducks/paginering';
 import sorteringReducer from './ducks/sortering';
@@ -23,10 +23,10 @@ import listevisningReducer, {
     initialStateEnhetensOversikt,
     ListevisningType
 } from './ducks/ui/listevisning';
-import { default as contextReducer, ContextState } from './components/enhet-context/context-reducer';
 import featuresReducer, { FeaturesState } from './ducks/features';
 import toastReducer, { ToastState } from './store/toast/reducer';
 import {FiltervalgModell} from "./model-interfaces";
+import inloggetVeilederReducer, {InloggetVeilederState} from "./ducks/inlogget-veileder";
 
 
 function named(name, reducer) {
@@ -49,7 +49,7 @@ export interface AppState {
         listevisningMinOversikt: ListevisningState;
         listevisningEnhetensOversikt: ListevisningState;
     };
-    enheter: EnheterState;
+    valgtEnhet: ValgtEnhetState;
     portefolje: PortefoljeState;
     paginering: any;
     sortering: any;
@@ -65,10 +65,10 @@ export interface AppState {
     diagram: any;
     arbeidsliste: any;
     enhettiltak: EnhettiltakState;
-    nycontext: ContextState;
     features: FeaturesState;
     lagretFilter: LagretFilterState;
     toastReducer: ToastState;
+    inloggetVeileder: InloggetVeilederState;
 }
 
 export default combineReducers<AppState>({
@@ -77,7 +77,7 @@ export default combineReducers<AppState>({
         listevisningMinOversikt: persistent('minOversiktListevisningState', window.location, named(ListevisningType.minOversikt, listevisningReducer), slettCleanIUrl, initialStateMinOversikt),
         listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', window.location, named(ListevisningType.enhetensOversikt, listevisningReducer), slettCleanIUrl, initialStateEnhetensOversikt)
     }),
-    enheter: enheterReducer,
+    valgtEnhet: valgtEnhetReducer,
     portefolje: portefoljeReducer,
     paginering: pagineringReducer,
     sortering: sorteringReducer,
@@ -93,9 +93,9 @@ export default combineReducers<AppState>({
     feilmeldingModal: feilmedlingModalReducer,
     diagram: diagramReducer,
     arbeidsliste: arbeidslisteReducer,
-    nycontext: contextReducer,
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
     lagretFilter: lagretFilterReducer,
-    toastReducer: toastReducer
+    toastReducer: toastReducer,
+    inloggetVeileder: inloggetVeilederReducer
 });

@@ -10,10 +10,12 @@ import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import { STATUS } from '../ducks/utils';
-import {  FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
+import {  FiltervalgModell, VeilederModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 import {MinOversiktModalController} from "../components/modal/modal-min-oversikt-controller";
+import {AppState} from "../reducer";
+import {OrNothing} from "../utils/types/types";
 
 interface DispatchProps {
     hentPortefolje: (...args) => void;
@@ -23,11 +25,11 @@ interface DispatchProps {
 interface StateProps {
     portefolje: PortefoljeState;
     sorteringsrekkefolge: string;
-    valgtEnhet: ValgtEnhetModell;
+    valgtEnhet: OrNothing<string>;
     sorteringsfelt: string;
     visningsmodus: string;
     filtervalg: FiltervalgModell;
-    innloggetVeilederIdent: string;
+    innloggetVeileder: OrNothing<VeilederModell>;
     sideStorrelse: number;
 }
 
@@ -44,7 +46,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             valgtEnhet,
         } = this.props;
 
-        leggEnhetIUrl(valgtEnhet.enhet!.enhetId!);
+        leggEnhetIUrl(valgtEnhet!);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
@@ -66,7 +68,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         }
         doSettSortering(valgtRekkefolge, felt);
         hentPortefolje(
-            valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, valgtRekkefolge, felt, filtervalg
+            valgtEnhet, gjeldendeVeileder.ident, valgtRekkefolge, felt, filtervalg
         );
     }
 
@@ -90,7 +92,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             <Toolbar
                 filtergruppe={ListevisningType.minOversikt}
                 onPaginering={(fra, antall) => hentPortefolje(
-                    valgtEnhet.enhet!.enhetId,
+                    valgtEnhet,
                     gjeldendeVeileder.ident,
                     sorteringsrekkefolge,
                     sorteringsfelt,
@@ -110,7 +112,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         const {
             portefolje,
             gjeldendeVeileder,
-            innloggetVeilederIdent,
+            innloggetVeileder,
             valgtEnhet,
             filtervalg,
             visningsmodus,
@@ -138,12 +140,12 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         visDiagram ?
                             <Diagram
                                 filtreringsvalg={filtervalg}
-                                enhet={valgtEnhet.enhet!.enhetId}
+                                enhet={valgtEnhet}
                                 veileder={gjeldendeVeileder.ident}
                             />
                             :
                             <MinoversiktTabell
-                                innloggetVeileder={innloggetVeilederIdent}
+                                innloggetVeileder={innloggetVeileder}
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
@@ -155,14 +157,14 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
     portefolje: state.portefolje,
-    valgtEnhet: state.enheter.valgtEnhet,
+    valgtEnhet: state.valgtEnhet.data.enhetId,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     visningsmodus: state.paginering.visningsmodus,
     filtervalg: state.filtreringMinoversikt,
-    innloggetVeilederIdent: state.enheter.ident,
+    innloggetVeileder: state.inloggetVeileder.data,
     sideStorrelse: selectSideStorrelse(state),
 });
 

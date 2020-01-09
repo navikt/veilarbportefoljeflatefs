@@ -1,7 +1,7 @@
 import Endringslogg from './endringslogg';
 import {default as React, useEffect, useState} from 'react';
 import {EndringsloggInnleggMedSettStatus, mapRemoteToState, setHarSettAlt} from './utils/endringslogg-custom';
-import {useIdentSelector} from '../../hooks/redux/use-enheter-ident';
+import {useIdentSelector} from '../../hooks/redux/use-inlogget-ident';
 import {useTimer} from '../../hooks/use-timer';
 import {
     hentSetteVersjonerLocalstorage,
@@ -46,7 +46,7 @@ function EndringsloggTourWrapper() {
         const ulestFelt = innholdsListe.some((element) => !element.sett);
         const tidBrukt = stoppTimer();
         if(veilederIdent) {
-            krypterVeilederident(veilederIdent)
+            krypterVeilederident(veilederIdent.ident)
                 .then((res) =>
                     logEvent('portefolje.endringslogg', {
                         feature: 'veiledergrupper',

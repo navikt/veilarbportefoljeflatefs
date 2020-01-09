@@ -1,7 +1,6 @@
 import React from 'react';
 import 'moment/locale/nb';
 import classnames from 'classnames';
-import EnhetContext from './components/enhet-context/enhet-context';
 import { Route, Switch } from 'react-router-dom';
 import EnhetSide from './enhetsportefolje/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
@@ -15,7 +14,6 @@ loggBrowserMetrikker();
 function Routes() {
     return (
         <div className="portefolje">
-            <EnhetContext >
                 <div className={classnames('maincontent', 'side-innhold')}>
                     <Switch>
                         <Route
@@ -38,7 +36,6 @@ function Routes() {
                     </Switch>
                     <TilbakemeldingFab/>
                 </div>
-            </EnhetContext>
         </div>
     );
 }

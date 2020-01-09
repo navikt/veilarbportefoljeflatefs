@@ -1,28 +1,25 @@
-import { hentEnhetsVeiledere } from '../middleware/api';
+import { hentAktivBruker } from '../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import {  VeilederModell } from '../model-interfaces';
+import {OrNothing} from "../utils/types/types";
 
 // Actions
-export const OK = 'veilarbveileder/veiledere/OK';
-export const FEILET = 'veilarbveileder/veiledere/FEILET';
-export const PENDING = 'veilarbveileder/veiledere/PENDING';
+export const OK = 'veilarbveileder/me/OK';
+export const FEILET = 'veilarbveileder/me/FEILET';
+export const PENDING = 'veilarbveileder/me/PENDING';
 
-export interface VeiledereState {
-    status: string;
-    data: {
-        veilederListe: VeilederModell[];
-    };
+export interface InloggetVeilederState {
+    status: any;
+    data:  OrNothing<VeilederModell>;
 }
 
 const initialState = {
     status: STATUS.NOT_STARTED,
-    data: {
-        veilederListe: [],
-    }
+    data: null
 };
 
 //  Reducer
-export default function reducer(state: VeiledereState = initialState, action) {
+export default function reducer(state: InloggetVeilederState = initialState, action) {
     switch (action.type) {
         case PENDING:
             return { ...state, status: STATUS.PENDING };
@@ -36,8 +33,8 @@ export default function reducer(state: VeiledereState = initialState, action) {
 }
 
 // Action Creators
-export function hentVeiledereForEnhet(enhetId) {
-    return doThenDispatch(() => hentEnhetsVeiledere(enhetId), {
+export function hentInloggetVeileder() {
+    return doThenDispatch(() => hentAktivBruker(), {
         OK,
         FEILET,
         PENDING

@@ -5,20 +5,21 @@ import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import CheckBox from '../components/tabell/checkbox';
 import ArbeidslisteIkon from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
-import { BrukerModell, EtikettType, FiltervalgModell } from '../model-interfaces';
+import {BrukerModell, EtikettType, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import Collapse from 'react-collapse';
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
 import { useLayoutEffect, useRef } from 'react';
+import {OrNothing} from "../utils/types/types";
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
     settMarkert: (fnr: string, markert: boolean) => void;
-    enhetId: string;
+    enhetId: OrNothing<string>;
     filtervalg: FiltervalgModell;
-    innloggetVeileder: string;
+    innloggetVeileder: OrNothing<VeilederModell>;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
@@ -62,7 +63,6 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     filtervalg={filtervalg}
                     valgteKolonner={valgteKolonner}
                     enhetId={enhetId}
-                    skalJusteres={!arbeidslisteAktiv}
                 />
                 <div className="brukerliste__gutter-right">
                     <ArbeidslisteButton
@@ -84,7 +84,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
             <Collapse isOpened={apen}>
                 <ArbeidslistePanel
                     bruker={bruker}
-                    innloggetVeileder={innloggetVeileder}
+                    innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
                 />
             </Collapse>
         </li>

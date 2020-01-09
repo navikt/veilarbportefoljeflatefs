@@ -2,6 +2,7 @@
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
 import { PortefoljeData } from '../ducks/portefolje';
 import { NyGruppe, RedigerGruppe } from '../ducks/lagret-filter';
+import { VeilederModell } from '../model-interfaces';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -19,20 +20,10 @@ export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
 export const VEILARBFILTER_URL = '/veilarbfilter/api';
 export const FEATURE_URL = '/feature';
 
-export function hentVeiledersEnheter() {
-    const url = `${VEILARBVEILEDER_URL}/api/veileder/enheter`;
-    return fetchToJson(url, MED_CREDENTIALS);
-}
-
-export function hentTilgangTilEnhet(enhet: string): Promise<boolean> {
-    const url = `${VEILARBVEILEDER_URL}/api/veileder/enhet/${enhet}/tilgangTilEnhet`;
-    return fetchToJson(url, MED_CREDENTIALS);
-}
-
 function buildUrl(baseUrl: string, queryParams?: {}): string {
     if(queryParams) {
         return baseUrl + '?' + Object.entries(queryParams)
-            .filter(([key, value]) => value !== undefined )
+            .filter(([_, value]) => value !== undefined )
             .map(([key, value]) => `${key}=${value}`)
             .join('&');
     }
@@ -69,6 +60,11 @@ export function hentEnhetsVeiledere(enhetId) {
     const url = `${VEILARBVEILEDER_URL}/api/enhet/${enhetId}/veiledere`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
+
+export function hentAktivBruker(): Promise<VeilederModell> {
+    return fetchToJson<VeilederModell>(`/veilarbveileder/api/veileder/me`, MED_CREDENTIALS)
+}
+
 
 export function hentEnhetsFilterGrupper(enhetId) {
     const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/`;

@@ -4,9 +4,12 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { settValgtVeileder } from '../ducks/portefolje';
 import { settSide } from '../ducks/ui/side';
+import {AppState} from "../reducer";
+import {OrNothing} from "../utils/types/types";
+import {VeilederModell} from "../model-interfaces";
 
 interface VeiledereTabellProps {
-    innloggetVeileder: string;
+    innloggetVeileder: OrNothing<VeilederModell>;
     settVeileder: (veileder: string) => void;
     oppdaterSide: (side: string) => void;
     veiledere: any;
@@ -21,7 +24,7 @@ interface VeiledereTabellProps {
 class VeilederTabell extends Component<VeiledereTabellProps> {
 
     settOgNavigerTilValgtVeileder(veileder) {
-        if (this.props.innloggetVeileder === veileder.ident) {
+        if (this.props.innloggetVeileder && this.props.innloggetVeileder.ident === veileder.ident) {
             this.props.oppdaterSide('veilederoversikt');
         }
         this.props.settVeileder(veileder);
@@ -105,8 +108,8 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
     }
 }
 
-const mapStateToProps = (state) => ({
-    innloggetVeileder: state.enheter.ident,
+const mapStateToProps = (state: AppState) => ({
+    innloggetVeileder: state.inloggetVeileder.data,
     veilederListe: state.veiledere.data.veilederListe,
     currentSortering: state.sortering
 });

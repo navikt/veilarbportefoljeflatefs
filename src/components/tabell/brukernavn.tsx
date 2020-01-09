@@ -2,6 +2,7 @@ import * as React from 'react';
 import classnames from 'classnames';
 import { BrukerModell } from '../../model-interfaces';
 import { setFraBrukerIUrl } from '../../utils/url-utils';
+import {OrNothing} from "../../utils/types/types";
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -10,7 +11,7 @@ const settSammenNavn = (bruker) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-const brukerNavn = (className, bruker, enhetId, skalJusteres) => (
+const brukerNavn = (className, bruker, enhetId) => (
     <div className={className}>
         <a
             onClick={() => {
@@ -28,12 +29,11 @@ const brukerNavn = (className, bruker, enhetId, skalJusteres) => (
 interface BrukerNavnProps {
     className?: string;
     bruker: BrukerModell;
-    enhetId: string;
-    skalJusteres?: boolean;
+    enhetId: OrNothing<string>;
 }
 
-function BrukerNavn({ className, bruker, enhetId, skalJusteres }: BrukerNavnProps) {
-    return brukerNavn(className,bruker, enhetId, skalJusteres);
+function BrukerNavn({ className, bruker, enhetId }: BrukerNavnProps) {
+    return brukerNavn(className,bruker, enhetId);
 }
 
 export default BrukerNavn;

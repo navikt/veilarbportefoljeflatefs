@@ -6,10 +6,11 @@ import config from './config';
 import { ledetekster, lagYtelseDataFraFasett } from './util';
 import Innholdslaster from '../../innholdslaster/innholdslaster';
 import Diagramtabell from './diagram-tabell';
+import {OrNothing} from "../../utils/types/types";
 
 interface DiagramProps {
     filtreringsvalg: any;
-    enhet: string;
+    enhet: OrNothing<string>;
     veileder?: string;
 }
 
@@ -27,12 +28,14 @@ type AllProps = DiagramProps & StateProps & DispatchProps;
 class Diagram extends React.Component<AllProps> {
     componentDidMount() {
         const { filtreringsvalg, enhet, veileder, hentDiagram } = this.props;
-        hentDiagram(enhet, filtreringsvalg, veileder);
+        if(enhet) {
+            hentDiagram(enhet, filtreringsvalg, veileder);
+        }
     }
 
     componentWillUpdate(nextProps) {
         const { filtreringsvalg, enhet, veileder, hentDiagram } = this.props;
-        if (JSON.stringify(filtreringsvalg) !== JSON.stringify(nextProps.filtreringsvalg)) {
+        if (JSON.stringify(filtreringsvalg) !== JSON.stringify(nextProps.filtreringsvalg) && enhet) {
             hentDiagram(enhet, nextProps.filtreringsvalg, veileder);
         }
     }

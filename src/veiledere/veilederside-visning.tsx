@@ -4,12 +4,13 @@ import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
 import { PageringOppdatering, pagineringSetup } from '../ducks/paginering';
 import { sortBy } from '../ducks/sortering';
-import { sorter } from './../utils/sortering';
+import { sorter } from '../utils/sortering';
 import { settSide } from '../ducks/ui/side';
 import { selectFraIndex, selectSeAlle, selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { VeiledereState } from '../ducks/veiledere';
 import { PortefoljeStorrelser } from '../ducks/portefoljestorrelser';
+import {AppState} from "../reducer";
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere && veiledere.length > 0) {
@@ -131,7 +132,7 @@ class VeilederesideVisning extends Component<VeilederesideVisningProps, Veileder
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
     veiledere: state.veiledere,
     portefoljestorrelser: state.portefoljestorrelser,
     sortering: state.sortering,

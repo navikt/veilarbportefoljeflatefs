@@ -25,17 +25,17 @@ import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift'
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
+import {OrNothing} from "../utils/types/types";
 
 interface MinOversiktKolonnerProps {
     className?: string;
     bruker: BrukerModell;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
-    enhetId: string;
-    skalJusteres: boolean;
+    enhetId: OrNothing<string>;
 }
 
-function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, skalJusteres}: MinOversiktKolonnerProps) {
+function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
     const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
@@ -58,7 +58,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} skalJusteres={skalJusteres}/>
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}/>
             <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <DatoKolonne
                 className="col col-xs-2"

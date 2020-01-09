@@ -60,7 +60,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
                 filterId: valgtGruppe.filterId,
                 filterNavn: gruppeNavn,
                 filterValg
-            }, enhet.enhetId)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', defaultVeileder)));
+            }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', defaultVeileder)));
         } else {
             dispatch(visIngenEndringerToast());
         }
@@ -68,8 +68,8 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     };
 
     const sletteKnapp = () => {
-        valgtGruppe && enhet && dispatch(slettGruppe(enhet.enhetId, valgtGruppe.filterId))
-            .then(resp => dispatch(endreFiltervalg('veiledere', [], 'enhet', defaultVeileder)));
+        valgtGruppe && enhet && dispatch(slettGruppe(enhet, valgtGruppe.filterId))
+            .then(() => dispatch(endreFiltervalg('veiledere', [], 'enhet', defaultVeileder)));
     };
 
     useEffect(() => {

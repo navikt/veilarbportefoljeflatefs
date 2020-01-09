@@ -6,9 +6,11 @@ import MinOversiktListehode from './minoversikt-listehode';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
 import { useForrigeBruker } from '../hooks/use-forrige-bruker';
+import {OrNothing} from "../utils/types/types";
+import {VeilederModell} from "../model-interfaces";
 
 interface MinOversiktTabellProps {
-    innloggetVeileder: string;
+    innloggetVeileder: OrNothing<VeilederModell>;
     visesAnnenVeiledersPortefolje?: boolean;
     settSorteringOgHentPortefolje: (sortering: string) => void;
 }

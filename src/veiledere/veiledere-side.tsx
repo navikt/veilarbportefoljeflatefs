@@ -7,26 +7,28 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import Lenker from '../lenker/lenker';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
 import { VeiledereState } from '../ducks/veiledere';
-import { StatustallModell, ValgtEnhetModell } from '../model-interfaces';
+import {FiltervalgModell, StatustallModell} from '../model-interfaces';
 import { pagineringSetup } from '../ducks/paginering';
 import './veiledere-side.less';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import {FiltreringState, slettEnkeltFilter} from '../ducks/filtrering';
+import { slettEnkeltFilter } from '../ducks/filtrering';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import TomPortefoljeModal from '../components/modal/tom-portefolje-modal';
 import { hentPortefoljeStorrelser as fetchPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { hentStatusTall as fetchStatusTall } from '../ducks/statustall';
 import { RouterProps } from 'react-router';
 import {defaultVeileder} from "../filtrering/filtrering-container";
+import {AppState} from "../reducer";
+import {OrNothing} from "../utils/types/types";
 
 interface StateProps {
     veiledere: VeiledereState;
     portefoljestorrelser: any;
-    filtervalg: FiltreringState;
-    valgtEnhet: ValgtEnhetModell;
+    filtervalg: FiltervalgModell;
+    valgtEnhet: OrNothing<string>;
     statustall: {data: StatustallModell};
 }
 
@@ -42,7 +44,7 @@ type VeiledereSideProps = StateProps & DispatchProps & RouterProps;
 class VeiledereSide extends React.Component<VeiledereSideProps> {
     componentWillMount() {
         const { valgtEnhet } = this.props;
-        leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
+        leggEnhetIUrl(valgtEnhet!);
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
         this.settInitalStateFraUrl();
     }
@@ -55,8 +57,8 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
 
     componentDidMount() {
         const { hentPortefoljestorrelser, hentStatusTall, valgtEnhet } = this.props;
-        hentPortefoljestorrelser(valgtEnhet.enhet!.enhetId);
-        hentStatusTall(this.props.valgtEnhet.enhet!.enhetId);
+        hentPortefoljestorrelser(valgtEnhet!);
+        hentStatusTall(valgtEnhet!);
     }
 
     render() {
@@ -102,11 +104,11 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
     veiledere: state.veiledere,
     filtervalg: state.filtreringVeilederoversikt,
     portefoljestorrelser: state.portefoljestorrelser,
-    valgtEnhet: state.enheter.valgtEnhet,
+    valgtEnhet: state.valgtEnhet.data.enhetId,
     statustall: state.statustall,
 });
 

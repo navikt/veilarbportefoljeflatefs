@@ -224,7 +224,7 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder) {
         veileder = veileder.ident;
     }
     const state = getState();
-    const enhet = state.enheter.valgtEnhet.enhet.enhetId;
+    const enhet = state.valgtEnhet.data.enhetId;
     const rekkefolge = state.portefolje.sorteringsrekkefolge;
     const sorteringfelt = state.portefolje.sorteringsfelt;
     const nyeFiltervalg = state[nameToStateSliceMap[filtergruppe]];

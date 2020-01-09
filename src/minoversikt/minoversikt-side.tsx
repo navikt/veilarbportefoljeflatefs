@@ -11,9 +11,8 @@ import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import { hentPortefoljeForVeileder, settSortering, settValgtVeileder } from '../ducks/portefolje';
-import { EnheterState } from '../ducks/enheter';
 import { VeiledereState } from '../ducks/veiledere';
-import { FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
+import { FiltervalgModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import {
@@ -25,10 +24,11 @@ import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './minoversikt-side.less';
 import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
+import {AppState} from "../reducer";
+import {OrNothing} from "../utils/types/types";
 
 interface StateProps {
-    valgtEnhet: ValgtEnhetModell;
-    enheter: EnheterState;
+    valgtEnhetId: OrNothing<string>;
     veiledere: VeiledereState;
     filtervalg: FiltervalgModell;
     statustall: StatustallState;
@@ -64,17 +64,17 @@ type MinoversiktSideProps = StateProps & DispatchProps & OwnProps;
 
 class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     componentDidMount() {
-        const {veiledere, enheter, valgtEnhet, filtervalg, hentPortefolje, ...props} = this.props;
+        const {veiledere , valgtEnhetId, filtervalg, hentPortefolje,innloggetVeilederIdent, ...props} = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
-        const innloggetVeileder = {ident: enheter.ident};
+        const innloggetVeileder = {ident: innloggetVeilederIdent};
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
         this.settInitalStateFraUrl();
         loggSkjermMetrikker(Side.MIN_OVERSIKT);
-        loggSideVisning(props.innloggetVeilederIdent, Side.MIN_OVERSIKT);
+        loggSideVisning(innloggetVeilederIdent, Side.MIN_OVERSIKT);
 
-        this.props.hentStatusTall(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident);
-        this.props.hentEnhetTiltak(valgtEnhet.enhet!.enhetId);
+        this.props.hentStatusTall(valgtEnhetId || '', gjeldendeVeileder.ident);
+        this.props.hentEnhetTiltak(valgtEnhetId || '');
 
         this.props.doSettValgtVeileder(gjeldendeVeileder);
 
@@ -83,7 +83,7 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
         this.props.doSettSortering(sorteringsrekkefolge, sorteringsfelt);
 
         hentPortefolje(
-            valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, sorteringsrekkefolge, sorteringsfelt, filtervalg
+            valgtEnhetId, gjeldendeVeileder.ident, sorteringsrekkefolge, sorteringsfelt, filtervalg
         );
 
     }
@@ -95,9 +95,9 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     }
 
     render() {
-        const {enheter, veiledere, filtervalg, statustall, enhettiltak, listevisning, ...props} = this.props;
+        const { veiledere, filtervalg, statustall, enhettiltak, listevisning, innloggetVeilederIdent, ...props} = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
-        const innloggetVeileder = {ident: enheter.ident || '', fornavn: '', etternavn: '', navn: ''};
+        const innloggetVeileder = {ident: innloggetVeilederIdent || '', fornavn: '', etternavn: '', navn: ''};
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
 
         const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
@@ -162,9 +162,8 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     }
 }
 
-const mapStateToProps = (state): StateProps => ({
-    valgtEnhet: state.enheter.valgtEnhet,
-    enheter: state.enheter,
+const mapStateToProps = (state: AppState): StateProps => ({
+    valgtEnhetId: state.valgtEnhet.data.enhetId,
     veiledere: state.veiledere,
     filtervalg: state.filtreringMinoversikt,
     statustall: state.statustall,
@@ -172,7 +171,7 @@ const mapStateToProps = (state): StateProps => ({
     listevisning: state.ui.listevisningMinOversikt,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
-    innloggetVeilederIdent: state.enheter.ident
+    innloggetVeilederIdent: state.inloggetVeileder.data!.ident,
 });
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({

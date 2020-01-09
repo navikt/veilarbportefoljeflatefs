@@ -11,10 +11,12 @@ import { diagramSkalVises } from '../minoversikt/diagram/util';
 import Diagram from '../minoversikt/diagram/diagram';
 import VelgfilterMelding from './velg-filter-melding';
 import { STATUS } from '../ducks/utils';
-import { FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
+import { FiltervalgModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
 import {ModalEnhetSideController} from "../components/modal/modal-enhet-side-controller";
+import {AppState} from "../reducer";
+import {OrNothing} from "../utils/types/types";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -40,7 +42,7 @@ function antallFilter(filtervalg) {
 }
 
 interface EnhetsportefoljeVisningProps {
-    valgtEnhet: ValgtEnhetModell;
+    valgtEnhet: OrNothing<string>;
     portefolje: any;
     hentPortefolje: (enhetid: string | undefined, sorteringsrekkefolge: string, sorteringsfelt: string, filtervalg: FiltervalgModell) => any;
     veiledere: any;
@@ -63,7 +65,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         this.props.doSettSortering(sorteringsrekkefolge, sorteringsfelt);
 
         hentPortefolje(
-            valgtEnhet.enhet!.enhetId,
+            valgtEnhet!,
             sorteringsrekkefolge,
             sorteringsfelt,
             filtervalg
@@ -91,7 +93,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
 
         doSettSortering(valgtRekkefolge, felt);
         hentPortefolje(
-            valgtEnhet.enhet!.enhetId,
+            valgtEnhet!,
             valgtRekkefolge,
             felt,
             filtervalg,
@@ -116,7 +118,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             <Toolbar
                 filtergruppe={ListevisningType.enhetensOversikt}
                 onPaginering={() => hentPortefolje(
-                    valgtEnhet.enhet!.enhetId,
+                    valgtEnhet!,
                     sorteringsrekkefolge,
                     sorteringsfelt,
                     filtervalg
@@ -168,7 +170,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                         visDiagram ?
                             <Diagram
                                 filtreringsvalg={filtervalg}
-                                enhet={valgtEnhet.enhet!.enhetId}
+                                enhet={valgtEnhet!}
                             />
                             :
                             <EnhetTabell
@@ -184,9 +186,9 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
     portefolje: state.portefolje,
-    valgtEnhet: state.enheter.valgtEnhet,
+    valgtEnhet: state.valgtEnhet.data.enhetId,
     veiledere: state.veiledere,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
