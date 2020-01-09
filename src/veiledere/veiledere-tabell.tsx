@@ -70,11 +70,11 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
                         <th scope="col">
                             NAV-ident
                         </th>
-                        <th scope="col">
+                        <th className="tabell-element-center" scope="col">
                             <button
                                 onClick={this.props.sorterPaaPortefoljestorrelse}
                                 className={
-                                    classNames('lenke lenke--frittstaende tabell-element-center',
+                                    classNames('lenke lenke--frittstaende',
                                         {'valgt-sortering': sorterPaaPortefoljeStr})
                                 }
                                 aria-pressed={sorterPaaPortefoljeStr}
