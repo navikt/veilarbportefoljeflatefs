@@ -125,6 +125,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
 
         return (
             <div className="portefolje__container">
+                {/*<div className="sticky">*/}
                 <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
                     <TabellOverskrift
                         fraIndex={fraIndex}
@@ -150,6 +151,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                     {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <MinOversiktModalController/>
                 </Innholdslaster>
+                {/*</div>*/}
             </div>
         );
     }

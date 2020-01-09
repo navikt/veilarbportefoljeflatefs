@@ -22,7 +22,7 @@ function TabellOverskrift({ fraIndex, antallIVisning, antallTotalt, visDiagram, 
     const antallValgteBrukere = tekstValgteBrukere (antallValgt);
 
     return (
-        <Element tag="h1" className="blokk-xxs">
+        <Element tag="h1" className="blokk-xxs sticky__totalt-brukere">
             <strong aria-live="polite" aria-atomic="true">
                 {tekst}
                 {antallValgteBrukere}

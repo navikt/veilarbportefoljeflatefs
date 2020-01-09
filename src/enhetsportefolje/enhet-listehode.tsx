@@ -45,7 +45,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
     return (
         <div className="brukerliste__header">
             <div className="brukerliste--border-bottom">
-                <div className="brukerliste__sorteringheader typo-undertekst">
+                <div className="brukerliste__sorteringheader typo-undertekst sticky__enhetensoversikt-sorteringsliste">
                     <div className="brukerliste__gutter-left brukerliste--min-width-enhet"/>
                     <div className="brukerliste__innhold">
                         <SorteringHeader

@@ -113,7 +113,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
     const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} harMuligMenIkkeValgtKolonne={false} skalHaKryssIkon={false} />;
 
     return (
-        <section className="filtrering-label-container">
+        <section className="filtrering-label-container sticky__etiketter">
             {filterElementer}
             {filterElementer.length >= 3 ? fjernAlle : null}
         </section>
