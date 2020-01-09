@@ -69,7 +69,7 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
                     <div id="oversikt-sideinnhold" role="tabpanel">
                         <div className="veiledere-side--cols">
                             <div className="veiledere-side--filter-col">
-                                <PanelBase className="blokk-xxxs">
+                                <PanelBase className="blokk-xxxs sok-veileder">
                                     <Undertittel>
                                         Søk veileder
                                     </Undertittel>

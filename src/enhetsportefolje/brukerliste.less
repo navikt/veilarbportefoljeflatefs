@@ -4,12 +4,16 @@
     list-style: none;
     margin: 0;
     padding: 0;
+
+    li:nth-child(odd){
+        background-color: #F4F4F4;
+    }
 }
 
 .enhet-tabell {
     background-color: white;
     border: 1px solid @navGra60;
-    border-radius: @border-radius-base;;
+    border-radius: @border-radius-base;
 }
 
 .brukerliste__element {
@@ -67,7 +71,7 @@
 .brukerliste__gutter-left {
     display: flex;
     align-items: center;
-    margin-left: 8px;
+    margin-left: 1rem;
 }
 
 .brukerliste--min-width-enhet {
@@ -79,7 +83,7 @@
 }
 
 .brukerliste__innhold {
-    width: 78%;
+    width: 70%;
 }
 
 .brukerliste__gutter-right {

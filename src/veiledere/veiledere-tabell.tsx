@@ -28,8 +28,7 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
     }
 
     render() {
-        const { veiledere, currentSortering } = this.props;
-
+        const {veiledere, currentSortering} = this.props;
         const sorterEtternavn = currentSortering.property === 'etternavn';
         const sorterPaaPortefoljeStr = currentSortering.property === 'portefoljestorrelse';
 
@@ -46,58 +45,50 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
                 </th>
                 <td>{`${veileder.ident}`}</td>
                 <td className="tabell-element-center">{veileder.portefoljestorrelse}</td>
-                <td />
+                <td/>
             </tr>
         ));
 
         return (
             <div>
                 <table className="tabell veileder-tabell portefolje-tabell typo-undertekst blokk-xs">
-                    <thead className="extra-head">
-                        <tr>
-                            <th>
-                                Veileder
-                            </th>
-                            <th colSpan={3} />
-                        </tr>
-                    </thead>
                     <thead className="tabell__subhead">
-                        <tr>
-                            <th scope="col">
-                                <button
-                                    onClick={this.props.sorterPaaEtternavn}
-                                    className={classNames('lenke lenke--frittstaende',
-                                        { 'valgt-sortering': sorterEtternavn })}
-                                    aria-pressed={sorterEtternavn}
-                                    aria-label={sorterEtternavn ?
+                    <tr>
+                        <th scope="col">
+                            <button
+                                onClick={this.props.sorterPaaEtternavn}
+                                className={classNames('lenke lenke--frittstaende',
+                                    {'valgt-sortering': sorterEtternavn})}
+                                aria-pressed={sorterEtternavn}
+                                aria-label={sorterEtternavn ?
                                     currentSortering.direction : 'inaktiv'}
-                                >
-                                    Etternavn
-                                </button>
-                                , Fornavn
-                            </th>
-                            <th scope="col">
-                                NAV-ident
-                            </th>
-                            <th className="tabell-element-center" scope="col">
-                                <button
-                                    onClick={this.props.sorterPaaPortefoljestorrelse}
-                                    className={
-                                    classNames('lenke lenke--frittstaende',
-                                        { 'valgt-sortering': sorterPaaPortefoljeStr })
+                            >
+                                Etternavn
+                            </button>
+                            , Fornavn
+                        </th>
+                        <th scope="col">
+                            NAV-ident
+                        </th>
+                        <th scope="col">
+                            <button
+                                onClick={this.props.sorterPaaPortefoljestorrelse}
+                                className={
+                                    classNames('lenke lenke--frittstaende tabell-element-center',
+                                        {'valgt-sortering': sorterPaaPortefoljeStr})
                                 }
-                                    aria-pressed={sorterPaaPortefoljeStr}
-                                    aria-label={sorterPaaPortefoljeStr ?
+                                aria-pressed={sorterPaaPortefoljeStr}
+                                aria-label={sorterPaaPortefoljeStr ?
                                     currentSortering.direction : 'inaktiv'}
-                                >
-                                    Antall brukere
-                                </button>
-                            </th>
-                            <th />
-                        </tr>
+                            >
+                                Antall brukere
+                            </button>
+                        </th>
+                        <th/>
+                    </tr>
                     </thead>
                     <tbody>
-                        {veilederElementer}
+                    {veilederElementer}
                     </tbody>
                 </table>
             </div>
