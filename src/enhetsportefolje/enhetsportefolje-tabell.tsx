@@ -23,7 +23,7 @@ function EnhetTabell(props: EnhetTabellProps) {
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
 
     return (
-        <div className="typo-undertekst blokk-xs">
+        <div className="typo-undertekst blokk-xs enhet-tabell">
             <EnhetListehode
                 sorteringsrekkefolge={sorteringsrekkefolge}
                 sorteringOnClick={props.settSorteringOgHentPortefolje}
