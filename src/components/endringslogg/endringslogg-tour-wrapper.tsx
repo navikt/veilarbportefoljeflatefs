@@ -20,9 +20,14 @@ function EndringsloggTourWrapper() {
 
     useEffect(() => {
         hentSetteVersjonerRemotestorage()
-            .then(resp => setInnholdsliste(mapRemoteToState(resp)))
-            .catch(() => setInnholdsliste(setHarSettAlt))
-            .finally(() => setIsLoading(false))
+            .then(resp => {
+                setInnholdsliste(mapRemoteToState(resp));
+                setIsLoading(false)
+            })
+            .catch(() => {
+                setInnholdsliste(setHarSettAlt);
+                setIsLoading(false)
+            })
     },[]);
 
 
