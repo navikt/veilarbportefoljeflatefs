@@ -53,7 +53,10 @@ export function velgEnhetForVeileder(valgtEnhet) {
 export function oppdaterValgtEnhet(nyEnhet: string) {
     return (dispatch: Dispatch<Action, AppState>, getState: () => AppState) => {
         const state = getState();
-
+        const valgtEnhet = state.valgtEnhet.data;
+        if(valgtEnhet && valgtEnhet.enhetId === nyEnhet ) {
+            return;
+        }
         dispatch(velgEnhetForVeileder(nyEnhet));
         dispatch(hentEnhetTiltak(nyEnhet));
         dispatch(hentVeiledereForEnhet(nyEnhet));

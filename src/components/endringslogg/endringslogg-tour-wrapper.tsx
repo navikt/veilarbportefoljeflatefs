@@ -4,38 +4,26 @@ import {EndringsloggInnleggMedSettStatus, mapRemoteToState, setHarSettAlt} from 
 import {useIdentSelector} from '../../hooks/redux/use-inlogget-ident';
 import {useTimer} from '../../hooks/use-timer';
 import {
-    hentSetteVersjonerLocalstorage,
     hentSetteVersjonerRemotestorage,
     hexString,
     krypterVeilederident,
     registrerInnholdIRemoteStorage,
-    slettersjonerLocalstorage
 } from './utils/endringslogg-utils';
 import {logEvent} from '../../utils/frontend-logger';
-import {registrerSettInnlegg} from './utils/endringslogg-api';
 
 function EndringsloggTourWrapper() {
     const veilederIdent = useIdentSelector();
 
     const {startTimer, stoppTimer} = useTimer();
     const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const listeEndringsVersjoner = hentSetteVersjonerLocalstorage();
-        if(listeEndringsVersjoner.length > 0 ) {
-            registrerSettInnlegg(listeEndringsVersjoner.join(','))
-                .then(() => hentSetteVersjonerRemotestorage()
-                    .then(resp => {
-                        setInnholdsliste(mapRemoteToState(resp));
-                        slettersjonerLocalstorage();
-                    }))
-                .catch(() => setInnholdsliste(setHarSettAlt))
-        } else {
-            hentSetteVersjonerRemotestorage()
-                .then(resp => setInnholdsliste(mapRemoteToState(resp)))
-                .catch(() => setInnholdsliste(setHarSettAlt));
-        }
-    }, []);
+        hentSetteVersjonerRemotestorage()
+            .then(resp => setInnholdsliste(mapRemoteToState(resp)))
+            .catch(() => setInnholdsliste(setHarSettAlt))
+            .finally(() => setIsLoading(false))
+    },[]);
 
 
     const registrerInnholdRemote = async (innhold: EndringsloggInnleggMedSettStatus[]) => {
@@ -62,6 +50,11 @@ function EndringsloggTourWrapper() {
             registrerInnholdRemote(newList);
         }
     };
+
+
+    if(isLoading) {
+        return null
+    }
 
     return (
         <Endringslogg
