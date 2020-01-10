@@ -6,15 +6,17 @@ function LenkerMinoversikt(props: { veilederident: string | null }) {
     const path = props.veilederident === null ? 'portefolje' : `portefolje/${props.veilederident}`;
 
     return (
-        <div className="lenker" role="tablist">
-            <ActiveLink
-                to={path}
-                className="oversiktslenke typo-undertittel"
-                activeClassName="oversiktslenke--valgt"
-                title="Her vises alle brukere som er tildelt deg eller veilederen du er inne på"
-            >
-                Min oversikt
-            </ActiveLink>
+        <div className="lenker overskrift-minoversikt" role="tablist">
+            <h2 className="h2__lenke--minoversikt">
+                <ActiveLink
+                    to={path}
+                    className="oversiktslenke typo-undertittel tekst-minoversikt"
+                    activeClassName="oversiktslenke--valgt"
+                    title="Her vises alle brukere som er tildelt deg eller veilederen du er inne på"
+                >
+                    Min oversikt
+                </ActiveLink>
+            </h2>
             <EndringsloggTourWrapper/>
         </div>
     );
