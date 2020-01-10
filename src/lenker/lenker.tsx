@@ -4,7 +4,7 @@ import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tou
 import { useSelector } from 'react-redux';
 import { AppState } from '../reducer';
 import { useIdentSelector } from '../hooks/redux/use-enheter-ident';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 
 function Lenker() {
     const portefoljeStorrelse = useSelector((state: AppState) => state.statustallInloggetVeileder.data.totalt);
@@ -12,6 +12,10 @@ function Lenker() {
 
     const veilederIdent = useIdentSelector();
     const {ident} = useParams();
+
+    const portefolje = !!useLocation().pathname;
+    const viseMinOversiktLenke = !harPortefolje || (!harPortefolje && portefolje);
+
     const aktivLink = ident ?
         veilederIdent === ident
             ? 'oversiktslenke--valgt'
@@ -26,7 +30,7 @@ function Lenker() {
                     className="oversiktslenke typo-undertittel"
                     activeClassName={aktivLink}
                     title="Her vises alle brukere som er tildelt deg eller veilederen du er inne på"
-                    hidden={!harPortefolje}
+                    hidden={viseMinOversiktLenke}
                 >
                     Min oversikt
                 </ActiveLink>
