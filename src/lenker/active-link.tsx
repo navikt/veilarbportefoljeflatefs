@@ -8,9 +8,10 @@ interface ActiveLinkProps {
     children: React.ReactNode;
     to: string;
     title?: string;
+    hidden?: boolean
 }
 
-function ActiveLink({className, activeClassName, to, children, title}: ActiveLinkProps) {
+function ActiveLink({className, activeClassName, to, children, title, hidden}: ActiveLinkProps) {
     return (
         <NavLink
             to={to}
@@ -19,6 +20,7 @@ function ActiveLink({className, activeClassName, to, children, title}: ActiveLin
             aria-controls="oversikt-sideinnhold"
             role="tab"
             title={title}
+            hidden={hidden}
         >
             {children}
         </NavLink>
