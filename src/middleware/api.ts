@@ -107,7 +107,7 @@ export function hentStatusTall(enhetId) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentStatusTallForveileder(enhetId, veileder) {
+export function hentStatusTallForVeileder(enhetId, veileder) {
     const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}` +
         `/statustall?enhet=${enhetId}`;
     return fetchToJson(url, MED_CREDENTIALS);

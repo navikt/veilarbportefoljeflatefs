@@ -22,7 +22,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
             <Innholdstittel tag="h1" className="blokk-xs">
                 {props.modalTittel}
             </Innholdstittel>
-            <div className="veiledergruppe-modal__content">
+            <div>
                 <Input
                     label={<p className="veiledergruppe-modal__gruppenavntekst">Gruppenavn: <i>(maks 35 tegn)</i></p>}
                     value={props.gruppeNavn}
@@ -43,7 +43,6 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
                     Veiledere i gruppen: <i> ({props.filterValg.veiledere.length} stk)</i>
                 </Normaltekst>
                 <ValgtVeilederGruppeListe
-                    // @ts-ignore
                     valgteVeileder={props.filterValg.veiledere}
                     fjernValgtVeileder={(veilederTarget) => props.hanterVeilederChange(false, veilederTarget)}
                     feil={props.errors.filterValg && {feilmelding: props.errors.filterValg}}

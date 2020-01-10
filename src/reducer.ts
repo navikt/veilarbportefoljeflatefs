@@ -6,14 +6,15 @@ import pagineringReducer from './ducks/paginering';
 import sorteringReducer from './ducks/sortering';
 import veiledereReducer, { VeiledereState } from './ducks/veiledere';
 import portefoljestorrelserReducer, { PortefoljeStorrelser } from './ducks/portefoljestorrelser';
-import filtreringReducer, {  initialState } from './ducks/filtrering';
+import filtreringReducer, { initialState } from './ducks/filtrering';
 import statustallReducer, { StatustallState } from './ducks/statustall';
+import statustallInloggetVeilederReducer from './ducks/statustall-innloggetveileder';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import diagramReducer from './ducks/diagram';
 import sideReducer from './ducks/ui/side';
-import lagretFilterReducer, {LagretFilterState} from './ducks/lagret-filter';
+import lagretFilterReducer, { LagretFilterState } from './ducks/lagret-filter';
 import { slettCleanIUrl } from './utils/url-utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer, { EnhettiltakState } from './ducks/enhettiltak';
@@ -56,6 +57,7 @@ export interface AppState {
     veiledere: VeiledereState;
     portefoljestorrelser: PortefoljeStorrelser;
     statustall: StatustallState;
+    statustallInloggetVeileder: StatustallState;
     filtrering: FiltervalgModell;
     filtreringMinoversikt: FiltervalgModell;
     filtreringVeilederoversikt: FiltervalgModell;
@@ -84,6 +86,7 @@ export default combineReducers<AppState>({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     statustall: statustallReducer,
+    statustallInloggetVeileder: statustallInloggetVeilederReducer,
     filtrering: persistent('enhetsState', window.location, named('enhet', filtreringReducer), slettCleanIUrl, initialState),
     filtreringMinoversikt: persistent('veilederState', window.location,
         named('veileder', filtreringReducer), slettCleanIUrl, initialState),

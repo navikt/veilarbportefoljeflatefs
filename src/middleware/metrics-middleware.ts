@@ -173,16 +173,18 @@ export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, sto
             logEvent('portefolje.metrikker.endre_filter', {
                 sideNavn,
                 filter: data.filterId,
-                verdi
-            }, {veilederIdent: veilederIdent});
+                verdi,
+                veilederIdent
+            });
         });
 
     } else {
         logEvent('portefolje.metrikker.endre_filter', {
             sideNavn,
             filter: data.filterId,
-            verdi: data.filterVerdi
-        }, {veilederIdent: veilederIdent});
+            verdi: data.filterVerdi,
+            veilederIdent
+        });
     }
 
 };
