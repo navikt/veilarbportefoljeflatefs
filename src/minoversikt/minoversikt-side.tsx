@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Innholdslaster from './../innholdslaster/innholdslaster';
