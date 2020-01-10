@@ -13,9 +13,10 @@ function Lenker() {
     const veilederIdent = useIdentSelector();
     const {ident} = useParams();
 
-    const portefoljeUrl = !!useLocation().pathname;
-    const visUtenPortefolje =  !harPortefolje && portefoljeUrl;
-    const viseMinOversiktLenke = harPortefolje || visUtenPortefolje;
+    const portefoljeUrl = useLocation().pathname;
+
+    const visUtenPortefolje = !harPortefolje && portefoljeUrl === '/portefolje';
+    const viseMinOversiktLenke = harPortefolje || !visUtenPortefolje;
 
     const aktivLink = ident ?
         veilederIdent === ident
