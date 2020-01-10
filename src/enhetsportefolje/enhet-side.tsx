@@ -15,13 +15,13 @@ import { AppState } from '../reducer';
 import { FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { pagineringSetup } from '../ducks/paginering';
-import FiltreringContainer, {defaultVeileder} from '../filtrering/filtrering-container';
+import FiltreringContainer, { defaultVeileder } from '../filtrering/filtrering-container';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './enhet-side.less';
 import Toasts from '../components/toast/toast';
-import {slettEnkeltFilter} from "../ducks/filtrering";
-import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
+import { slettEnkeltFilter } from '../ducks/filtrering';
+import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -117,7 +117,7 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentStatusTall: (enhet) => dispatch(hentStatusTall(enhet)),
     hentEnhetTiltak: (enhet) => dispatch(hentEnhetTiltak(enhet)),
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
-    slettVeilederFilter: (ident: string) => dispatch( slettEnkeltFilter("veiledere", ident,  'enhet', defaultVeileder))
+    slettVeilederFilter: (ident: string) => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet', defaultVeileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);
