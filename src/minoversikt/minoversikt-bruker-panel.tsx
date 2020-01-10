@@ -65,12 +65,8 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     skalJusteres={!arbeidslisteAktiv}
                 />
                 <div className="brukerliste__gutter-right">
-                    <ArbeidslisteButton
-                        skalVises={arbeidslisteAktiv}
-                        apen={apen}
-                        onClick={handleArbeidslisteButtonClick}
-                    />
-                    <div className="brukerliste__etiketter">
+
+                    <div className={"brukerliste__etiketter"}>
                         <Etiketter bruker={bruker}/>
                         <Etikett
                             type={EtikettType.NYBRUKER}
@@ -79,6 +75,11 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                             Ny bruker
                         </Etikett>
                     </div>
+                    <ArbeidslisteButton
+                        skalVises={arbeidslisteAktiv}
+                        apen={apen}
+                        onClick={handleArbeidslisteButtonClick}
+                    />
                 </div>
             </div>
             <Collapse isOpened={apen}>

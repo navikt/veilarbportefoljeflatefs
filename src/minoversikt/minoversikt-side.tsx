@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Innholdslaster from './../innholdslaster/innholdslaster';
-import LenkerMinoversikt from './../lenker/lenker-minoversikt';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
@@ -25,6 +23,7 @@ import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './minoversikt-side.less';
 import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
+import Lenker from '../lenker/lenker';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -111,19 +110,10 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
         const tiltak = sortTiltak(enhettiltak.data.tiltak);
 
         return (
-            <DocumentTitle title="Min oversikt">
-                <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                    <LenkerMinoversikt
-                        veilederident={veilederFraUrl ? veilederFraUrl.ident : null}
-                    />
-                    <div className="minoversikt-side blokk-xl">
-                        {visesAnnenVeiledersPortefolje ?
-                            <Link to="/veiledere" className="typo-normal tilbaketilveileder">
-                                <i className="chevron--venstre"/>
-                                <span>
-                                     Til veilederoversikt
-                                </span>
-                            </Link> : null}
+            <div className="minoversikt-side blokk-xl">
+                <DocumentTitle title="Min oversikt">
+                    <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
+                        <Lenker/>
                         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
                             {visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
                             <div className="portefolje-side">
@@ -157,9 +147,9 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                 </div>
                             </div>
                         </section>
-                    </div>
-                </Innholdslaster>
-            </DocumentTitle>
+                    </Innholdslaster>
+                </DocumentTitle>
+            </div>
         );
     }
 }
