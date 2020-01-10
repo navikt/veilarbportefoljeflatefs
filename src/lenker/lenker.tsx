@@ -13,8 +13,9 @@ function Lenker() {
     const veilederIdent = useIdentSelector();
     const {ident} = useParams();
 
-    const portefolje = !!useLocation().pathname;
-    const viseMinOversiktLenke = !harPortefolje || (!harPortefolje && portefolje);
+    const portefoljeUrl = !!useLocation().pathname;
+    const visUtenPortefolje =  !harPortefolje && portefoljeUrl;
+    const viseMinOversiktLenke = harPortefolje || visUtenPortefolje;
 
     const aktivLink = ident ?
         veilederIdent === ident
@@ -30,7 +31,7 @@ function Lenker() {
                     className="oversiktslenke typo-undertittel"
                     activeClassName={aktivLink}
                     title="Her vises alle brukere som er tildelt deg eller veilederen du er inne på"
-                    hidden={viseMinOversiktLenke}
+                    hidden={!viseMinOversiktLenke}
                 >
                     Min oversikt
                 </ActiveLink>
