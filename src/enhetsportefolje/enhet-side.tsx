@@ -9,7 +9,6 @@ import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
-import TomPortefoljeModal from '../components/modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import { AppState } from '../reducer';
 import { FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
@@ -93,7 +92,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                 />
                                 <ListevisningInfoPanel name={ListevisningType.enhetensOversikt}/>
                                 <EnhetsportefoljeVisning/>
-                                <TomPortefoljeModal/>
                             </div>
                         </div>
                     </Innholdslaster>
