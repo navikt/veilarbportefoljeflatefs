@@ -12,17 +12,11 @@ function Lenker() {
 
     const veilederIdent = useIdentSelector();
     const {ident} = useParams();
-    console.log('identUrl', ident);
-    console.log('ident', veilederIdent);
-
     const aktivLink = ident ?
         veilederIdent === ident
             ? 'oversiktslenke--valgt'
             : ''
         : 'oversiktslenke--valgt';
-
-    console.log('aktiv', veilederIdent === ident);
-    console.log('aktivlinkj:', aktivLink);
 
     return (
         <div className="lenker" role="tablist">
