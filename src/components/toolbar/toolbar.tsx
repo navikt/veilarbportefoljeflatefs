@@ -26,15 +26,17 @@ interface ToolbarProps {
     posisjon?: ToolbarPosisjon;
 }
 
-const Toolbar = ({filtergruppe,
+const Toolbar = ({
+                     filtergruppe,
                      onPaginering,
                      sokVeilederSkalVises,
                      visesAnnenVeiledersPortefolje,
                      gjeldendeVeileder,
                      visningsmodus,
                      antallTotalt,
-                     posisjon}: ToolbarProps) => (
-    <section className="toolbar blokk-xs sticky__toolbar">
+                     posisjon
+                 }: ToolbarProps) => (
+    <section className="toolbar blokk-xs">
         <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
             <VelgalleCheckboks skalVises={filtergruppe in ListevisningType} toolbarPosisjon={posisjon}/>
             <TildelVeileder

@@ -10,10 +10,10 @@ import Diagram from './diagram/diagram';
 import { diagramSkalVises } from './diagram/util';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import { STATUS } from '../ducks/utils';
-import {  FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
+import { FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
-import {MinOversiktModalController} from "../components/modal/modal-min-oversikt-controller";
+import { MinOversiktModalController } from '../components/modal/modal-min-oversikt-controller';
 
 interface DispatchProps {
     hentPortefolje: (...args) => void;
@@ -84,7 +84,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             visesAnnenVeiledersPortefolje,
         } = this.props;
 
-        const { antallTotalt } = portefolje.data;
+        const {antallTotalt} = portefolje.data;
 
         return (
             <Toolbar
@@ -125,7 +125,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
 
         return (
             <div className="portefolje__container">
-                {/*<div className="sticky">*/}
                 <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
                     <TabellOverskrift
                         fraIndex={fraIndex}
@@ -151,7 +150,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                     {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <MinOversiktModalController/>
                 </Innholdslaster>
-                {/*</div>*/}
             </div>
         );
     }

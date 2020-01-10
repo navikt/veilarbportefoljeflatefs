@@ -15,7 +15,7 @@ import {
 } from '../filtrering/filter-konstanter';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
-import TittelValg from '../utils/utils'
+import TittelValg from '../utils/utils';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -48,7 +48,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
     return (
         <div className="brukerliste__header">
             <div className="brukerliste--border-bottom">
-                <div className="brukerliste__sorteringheader typo-undertekst sticky__minoversikt-sorteringsliste">
+                <div className="brukerliste__sorteringheader typo-undertekst">
                     <div className="brukerliste__gutter-left brukerliste--min-width-minside"/>
                     <div className="brukerliste__innhold">
                         <SorteringHeader

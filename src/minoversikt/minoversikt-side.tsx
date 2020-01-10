@@ -128,20 +128,18 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                             />
                                         </div>
                                         <div className="col-lg-9 col-md-12 col-sm-12">
-                                            {/*<div className="sticky">*/}
-                                                <FiltreringLabelContainer
-                                                    filtervalg={filtervalg}
-                                                    filtergruppe="veileder"
-                                                    veileder={gjeldendeVeileder}
-                                                    enhettiltak={enhettiltak.data.tiltak}
-                                                    listevisning={listevisning}
-                                                />
-                                                <ListevisningInfoPanel name={ListevisningType.minOversikt}/>
-                                                <VeilederPortefoljeVisning
-                                                    gjeldendeVeileder={gjeldendeVeileder}
-                                                    visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                                />
-                                            {/*</div> */}
+                                            <FiltreringLabelContainer
+                                                filtervalg={filtervalg}
+                                                filtergruppe="veileder"
+                                                veileder={gjeldendeVeileder}
+                                                enhettiltak={enhettiltak.data.tiltak}
+                                                listevisning={listevisning}
+                                            />
+                                            <ListevisningInfoPanel name={ListevisningType.minOversikt}/>
+                                            <VeilederPortefoljeVisning
+                                                gjeldendeVeileder={gjeldendeVeileder}
+                                                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                            />
                                         </div>
                                     </div>
                                 </div>
