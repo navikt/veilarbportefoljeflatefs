@@ -9,19 +9,18 @@ import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
-import TomPortefoljeModal from '../components/modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import { AppState } from '../reducer';
 import { FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import { pagineringSetup } from '../ducks/paginering';
-import FiltreringContainer, {defaultVeileder} from '../filtrering/filtrering-container';
+import FiltreringContainer, { defaultVeileder } from '../filtrering/filtrering-container';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './enhet-side.less';
 import Toasts from '../components/toast/toast';
-import {slettEnkeltFilter} from "../ducks/filtrering";
-import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
+import { slettEnkeltFilter } from '../ducks/filtrering';
+import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -93,7 +92,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                 />
                                 <ListevisningInfoPanel name={ListevisningType.enhetensOversikt}/>
                                 <EnhetsportefoljeVisning/>
-                                <TomPortefoljeModal/>
                             </div>
                         </div>
                     </Innholdslaster>
@@ -117,7 +115,7 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentStatusTall: (enhet) => dispatch(hentStatusTall(enhet)),
     hentEnhetTiltak: (enhet) => dispatch(hentEnhetTiltak(enhet)),
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
-    slettVeilederFilter: (ident: string) => dispatch( slettEnkeltFilter("veiledere", ident,  'enhet', defaultVeileder))
+    slettVeilederFilter: (ident: string) => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet', defaultVeileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);

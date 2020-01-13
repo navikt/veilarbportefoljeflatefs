@@ -28,7 +28,7 @@ export interface StatustallState {
     data: Statustall;
 }
 
-const initalState: StatustallState = {
+export const initalStatusState: StatustallState = {
     status: STATUS.NOT_STARTED,
     data: {
         totalt: 0,
@@ -41,14 +41,14 @@ const initalState: StatustallState = {
         iavtaltAktivitet: 0,
         minArbeidsliste: 0,
         erSykmeldtMedArbeidsgiver: 0,
-        nyeBrukereForVeileder:0,
+        nyeBrukereForVeileder: 0,
         moterMedNAVIdag: 0,
         trengerVurdering: 0,
     }
 };
 
 // Reducer
-export default function reducer(state: StatustallState = initalState, action): StatustallState {
+export default function reducer(state: StatustallState = initalStatusState, action): StatustallState {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {
@@ -82,7 +82,7 @@ export function hentStatusTall(enhet: string, veileder?: string) {
             PENDING
         });
     }
-    return doThenDispatch(() => Api.hentStatusTallForveileder(enhet, veileder), {
+    return doThenDispatch(() => Api.hentStatusTallForVeileder(enhet, veileder), {
         OK,
         FEILET,
         PENDING

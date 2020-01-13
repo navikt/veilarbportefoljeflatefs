@@ -10,6 +10,7 @@
     &:visited, &:active {
         color: @navMorkGra;
     }
+
     &:hover {
         border-bottom: 0.3rem solid @navBla;
         cursor: pointer;
@@ -28,26 +29,15 @@
         color: @navMorkGra;
         background-color: inherit;
         text-decoration: none;
-        cursor: default;
         font-weight: 600;
         opacity: 1;
+        pointer-events: none;
+        cursor: pointer;
+
         &:visited, &:active, &:hover {
             color: @navMorkGra;
         }
     }
-}
-
-.tekst-minoversikt {
-    border-bottom: 0.3rem solid @navBla;
-    opacity: 1;
-    font-weight: 600;
-}
-
-.overskrift-minoversikt {
-    background-color: white;
-    min-height: 5rem;
-    padding: 0.5rem 3.5rem 0 !important;
-    box-shadow: 0 1px 4px 0 rgba(183, 177, 169, 0.5);
 }
 
 .lenker {
@@ -63,12 +53,7 @@
     text-decoration: none;
 }
 
-.h2__lenke--minoversikt {
-    display: inline;
-    margin-block-end: 0;
-}
-
-.h2__lenke--oversikt {
+.h2__lenke {
     display: inline;
     margin-block-end: 0.8rem;
 }

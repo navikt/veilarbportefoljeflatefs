@@ -14,20 +14,19 @@ import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import {FiltreringState, slettEnkeltFilter} from '../ducks/filtrering';
+import { FiltreringState, slettEnkeltFilter } from '../ducks/filtrering';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
-import TomPortefoljeModal from '../components/modal/tom-portefolje-modal';
 import { hentPortefoljeStorrelser as fetchPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { hentStatusTall as fetchStatusTall } from '../ducks/statustall';
 import { RouterProps } from 'react-router';
-import {defaultVeileder} from "../filtrering/filtrering-container";
+import { defaultVeileder } from '../filtrering/filtrering-container';
 
 interface StateProps {
     veiledere: VeiledereState;
     portefoljestorrelser: any;
     filtervalg: FiltreringState;
     valgtEnhet: ValgtEnhetModell;
-    statustall: {data: StatustallModell};
+    statustall: { data: StatustallModell };
 }
 
 interface DispatchProps {
@@ -41,7 +40,7 @@ type VeiledereSideProps = StateProps & DispatchProps & RouterProps;
 
 class VeiledereSide extends React.Component<VeiledereSideProps> {
     componentWillMount() {
-        const { valgtEnhet } = this.props;
+        const {valgtEnhet} = this.props;
         leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
         this.settInitalStateFraUrl();
@@ -54,29 +53,30 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
     }
 
     componentDidMount() {
-        const { hentPortefoljestorrelser, hentStatusTall, valgtEnhet } = this.props;
+        const {hentPortefoljestorrelser, hentStatusTall, valgtEnhet} = this.props;
         hentPortefoljestorrelser(valgtEnhet.enhet!.enhetId);
         hentStatusTall(this.props.valgtEnhet.enhet!.enhetId);
     }
 
     render() {
-        const { veiledere, portefoljestorrelser, filtervalg, statustall, slettVeilederFilter } = this.props;
+        const {veiledere, portefoljestorrelser, filtervalg, statustall, slettVeilederFilter} = this.props;
+
         return (
             <DocumentTitle title="Veilederoversikt">
                 <div className="veiledere-side">
-                    <Lenker />
-                    <Innholdslaster avhengigheter={[ statustall, veiledere, portefoljestorrelser]}>
-                    <div id="oversikt-sideinnhold" role="tabpanel">
-                        <div className="veiledere-side--cols">
-                            <div className="veiledere-side--filter-col">
-                                <PanelBase className="blokk-xxxs">
-                                    <Undertittel>
-                                        Søk veileder
-                                    </Undertittel>
-                                    <FiltreringVeiledere/>
-                                </PanelBase>
-                            </div>
-                            <div className="veiledere-side--liste-col">
+                    <Lenker/>
+                    <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
+                        <div id="oversikt-sideinnhold" role="tabpanel">
+                            <div className="veiledere-side--cols">
+                                <div className="veiledere-side--filter-col">
+                                    <PanelBase className="blokk-xxxs">
+                                        <Undertittel>
+                                            Søk veileder
+                                        </Undertittel>
+                                        <FiltreringVeiledere/>
+                                    </PanelBase>
+                                </div>
+                                <div className="veiledere-side--liste-col">
                                     <FiltreringLabelContainer
                                         filtervalg={{
                                             veiledere: lagLablerTilVeiledereMedIdenter(
@@ -88,13 +88,12 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
                                         filtergruppe="veiledere"
                                     />
                                     <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
-                                        {`Totalt ${veiledere.data.veilederListe.length } veiledere`}
+                                        {`Totalt ${veiledere.data.veilederListe.length} veiledere`}
                                     </Undertittel>
-                                    <VeiledersideVisning />
-                                    <TomPortefoljeModal />
+                                    <VeiledersideVisning/>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </Innholdslaster>
                 </div>
             </DocumentTitle>
@@ -114,7 +113,7 @@ const mapDispatchToProps = (dispatch) => ({
     hentPortefoljestorrelser: (enhetId) => dispatch(fetchPortefoljeStorrelser(enhetId)),
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
     hentStatusTall: (enhet) => dispatch(fetchStatusTall(enhet)),
-    slettVeilederFilter: (ident: string) => dispatch( slettEnkeltFilter("veiledere", ident,  'veiledere', defaultVeileder))
+    slettVeilederFilter: (ident: string) => dispatch(slettEnkeltFilter('veiledere', ident, 'veiledere', defaultVeileder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeiledereSide);
