@@ -2,7 +2,6 @@ import * as React from 'react';
 import TildelVeileder from './tildel-veileder';
 import LeggTilArbeidsliste from './legg-til-arbeidsliste';
 import SokVeileder from './sok-veileder';
-import DiagramTabellToggle from './diagram-tabell-toggle';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
 import { ListevisningType, Veilederpaginering } from '../../ducks/ui/listevisning';
@@ -35,7 +34,6 @@ const Toolbar = ({
                 filtergruppe={filtergruppe}
                 gjeldendeVeileder={gjeldendeVeileder}
             />
-            <Listevisning filtergruppe={filtergruppe}/>
             <LeggTilArbeidsliste
                 visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false}
             />
@@ -45,10 +43,8 @@ const Toolbar = ({
                 skalVises={sokVeilederSkalVises}
             />
         </div>
-        <div className="toolbar__element toolbar__midten toolbar--skille-mellom-elementer">
-            <DiagramTabellToggle filtergruppe={filtergruppe}/>
-        </div>
         <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
+            <Listevisning filtergruppe={filtergruppe}/>
             <Paginering
                 className="toolbar--skille-mellom-elementer"
                 onChange={onPaginering}

@@ -56,7 +56,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
                         erValgt={sorteringsfelt === Sorteringsfelt.ETTERNAVN}
-                        tekst="Etternavn"
+                        tekst="ETTERNAVN"
                         className="col col-xs-2"
                     />
                     <SorteringHeader
@@ -64,7 +64,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
                         erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
-                        tekst="Fødselsnummer"
+                        tekst="FØDSELSNUMMER"
                         className="col col-xs-2"
                     />
                     <SorteringHeader
@@ -72,7 +72,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
                         erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
-                        tekst="Oppfølging startet"
+                        tekst="OPPFØLGING STARTET"
                         className="sortering-header__dato col col-xs-2"
                         skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                         title='Startdato for pågående oppfølgingsperiode'
@@ -82,14 +82,14 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                         skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
                         title='Navn på tildelt veileder'
                     >
-                        Veileder
+                        VEILEDER
                     </Header>
                     <SorteringHeader
                         sortering={Sorteringsfelt.NAVIDENT}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
                         erValgt={sorteringsfelt === Sorteringsfelt.NAVIDENT}
-                        tekst="NAV-ident"
+                        tekst="NAV-IDENT"
                         skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
                         className="header__veilederident col col-xs-2"
                         title='NAV-ident på tildelt veileder'

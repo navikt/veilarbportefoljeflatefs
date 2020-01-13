@@ -12,12 +12,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem;
+    padding: 1rem 1rem 0.5rem;
     border: 1px solid @navGra60;
     border-bottom: none;
-    border-radius: @border-radius-base;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-radius: @border-radius-base @border-radius-base 0 0;
     background-color: @white;
     margin-bottom: 0px;
     position: sticky;
@@ -35,16 +33,18 @@
 
 .toolbar__element {
     display: flex;
+    max-width: 25rem;
 }
 
 .toolbar__venstre {
+    width: 45%;
 }
 
 .toolbar__midten {
 }
 
 .toolbar__hoyre {
-    width: 14rem;
+    width: 45%;
 }
 
 .velgalle-checkboks {
@@ -68,27 +68,29 @@
 }
 
 .dropdown--toolbar {
-    margin-bottom: 0;
-    margin-left: 0.5rem;
+    border-radius: @border-radius-base;
+    width: 100%;
+    height: 100%;
+    margin: 0 1rem 0 0;
 
     .dropdown__btn {
-        border: 1px solid transparent;
+        border: 1px solid @navGra40;
         color: @toolbarTextColor;
-        padding-right: 2rem;
-        padding-top: 0;
-        padding-bottom: 0;
+        padding: 0.5rem;
 
+        &:hover {
+            border-color: @blue-link;
+        }
 
         &:not(:disabled) {
             cursor: pointer;
-
-            &:hover .dropdown__btntext {
-                border-bottom: 1px solid @navGra40;
-            }
+            color: @navGra80;
         }
 
         &:disabled {
             color: @toolbarInactiveTextColor;
+            background-color: @navGra20;
+            border: 1px solid @navGra40;
         }
     }
 
@@ -101,6 +103,7 @@
 
         &:before, &:after {
             .chevronline-mixin(0.75rem);
+            top: 50%;
         }
     }
 
@@ -135,23 +138,36 @@
 }
 
 .toolbar_btn {
-    border: none;
-    color: @toolbarTextColor;
-    padding-right: 2rem;
-    padding-top: 0;
-    padding-bottom: 0;
-    background-color: @white;
-    margin: 0 0.5rem;
+    border: 1px solid @navGra40;
+    padding: 0.5rem;
+    width: 100%;
+    height: 100%;
+    margin: 0 0.5rem 0 0;
+    max-width: 12rem;
+    position: relative;
+    text-align: inherit;
+    color: #59514B;
 
     &:disabled {
         color: @toolbarInactiveTextColor;
+        background-color: @navGra20;
+        border: 1px solid @navGra40;
     }
 
     &:focus {
         outline: none;
         border-radius: 2px;
-        box-shadow: 0 0 0 3px #ffbd66
+        box-shadow: 0 0 0 3px #ffbd66;
+    }
+
+    &:hover {
+        border-color: @blue-link;
+        cursor: pointer;
     }
 }
 
-
+.toolbar__arbeidsliste-ikon {
+    min-width: 1rem;
+    position: absolute;
+    right: 0.75rem;
+}

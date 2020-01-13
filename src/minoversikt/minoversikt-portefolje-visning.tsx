@@ -58,7 +58,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             valgtEnhet,
             filtervalg
         } = this.props;
-        let valgtRekkefolge = '';
+        let valgtRekkefolge: string;
         if (felt !== sorteringsfelt) {
             valgtRekkefolge = ASCENDING;
         } else {
@@ -89,7 +89,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         return (
             <Toolbar
                 filtergruppe={ListevisningType.minOversikt}
-                onPaginering={(fra, antall) => hentPortefolje(
+                onPaginering={() => hentPortefolje(
                     valgtEnhet.enhet!.enhetId,
                     gjeldendeVeileder.ident,
                     sorteringsrekkefolge,
@@ -113,7 +113,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             valgtEnhet,
             filtervalg,
             visningsmodus,
-            sideStorrelse,
         } = this.props;
         updateLastPath();
         const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
