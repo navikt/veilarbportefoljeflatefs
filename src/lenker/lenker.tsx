@@ -30,7 +30,7 @@ function Lenker() {
                     to="/portefolje"
                     className="oversiktslenke typo-undertittel"
                     activeClassName={aktivLink}
-                    title="Her vises alle brukere som er tildelt deg eller veilederen du er inne på"
+                    title="Her vises alle brukere som er tildelt deg"
                     hidden={skjulMinOversiktLenke}
                 >
                     Min oversikt
