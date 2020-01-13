@@ -110,10 +110,10 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
         const tiltak = sortTiltak(enhettiltak.data.tiltak);
 
         return (
-            <div className="minoversikt-side blokk-xl">
-                <DocumentTitle title="Min oversikt">
+            <DocumentTitle title="Min oversikt">
+                <div className="minoversikt-side blokk-xl">
+                    <Lenker/>
                     <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                        <Lenker/>
                         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
                             {visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
                             <div className="portefolje-side">
@@ -146,8 +146,8 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                             </div>
                         </section>
                     </Innholdslaster>
-                </DocumentTitle>
-            </div>
+                </div>
+            </DocumentTitle>
         );
     }
 }
