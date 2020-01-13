@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux';
 import { AppState } from '../../reducer';
 import { getMuligeKolonner } from './listevisning-selectors';
-import { ToolbarPosisjon } from '../../components/toolbar/toolbar';
 
 export enum ActionTypeKeys {
     VELG_ALTERNATIV = 'listevisning/velg_alternativ',
@@ -27,7 +26,7 @@ export enum Kolonne {
     AVTALT_AKTIVITET = 'avtaltaktivitet',
     VENTER_SVAR = 'ventersvar',
     UTLOP_YTELSE = 'utlopytelse',
-    VEDTAKSPERIODE = 'vedtaksperiode',
+    VEDTAKSPERIODE = 'vedtaksperiode',
     RETTIGHETSPERIODE = 'rettighetsperiode',
     UTLOP_AKTIVITET = 'utlopaktivitet',
     START_DATO_AKTIVITET = 'aktivitet_start',
@@ -113,8 +112,16 @@ export function listevisningReducer(state = initialStateMinOversikt, action: Lis
 
 export default listevisningReducer;
 
-export const velgAlternativ = (kolonne: Kolonne, name: ListevisningType, toolbarPosisjon?: ToolbarPosisjon) => ({type: ActionTypeKeys.VELG_ALTERNATIV, kolonne, name, toolbarPosisjon});
-export const avvelgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({type: ActionTypeKeys.AVVELG_ALTERNATIV, kolonne, name});
+export const velgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({
+    type: ActionTypeKeys.VELG_ALTERNATIV,
+    kolonne,
+    name
+});
+export const avvelgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({
+    type: ActionTypeKeys.AVVELG_ALTERNATIV,
+    kolonne,
+    name
+});
 export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name});
 
 export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction, AppState>, getState: () => AppState, name: ListevisningType) => {
@@ -126,7 +133,6 @@ export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningActi
         kolonner: nyeMuligeAlternativer,
         name
     });
-
 
     if (nyeMuligeAlternativer.length <= 5) {
         dispatch({

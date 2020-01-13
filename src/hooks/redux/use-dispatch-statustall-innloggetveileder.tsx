@@ -13,5 +13,5 @@ export function useDispatchStatustallInnloggetveileder() {
         if (valgtEnhet) {
             dispatch(hentStatusTallForInnloggetVeileder(valgtEnhet.enhetId, innloggetVeileder));
         }
-    }, [dispatch, hentStatusTallForInnloggetVeileder, valgtEnhet, innloggetVeileder]);
+    }, [dispatch, valgtEnhet, innloggetVeileder]);
 }

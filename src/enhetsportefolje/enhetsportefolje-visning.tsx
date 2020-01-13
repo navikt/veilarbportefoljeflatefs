@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
-import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
+import Toolbar from './../components/toolbar/toolbar';
 import { getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl, updateLastPath } from '../utils/url-utils';
 import EnhetTabell from './enhetsportefolje-tabell';
 import TabellOverskrift from '../components/tabell-overskrift';
@@ -14,7 +14,7 @@ import { STATUS } from '../ducks/utils';
 import { FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
-import {ModalEnhetSideController} from "../components/modal/modal-enhet-side-controller";
+import { ModalEnhetSideController } from '../components/modal/modal-enhet-side-controller';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -98,8 +98,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         );
     }
 
-    lagToolbar = (posisjon: ToolbarPosisjon) => {
-
+    lagToolbar = () => {
         const {
             portefolje,
             valgtEnhet,
@@ -124,7 +123,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                 sokVeilederSkalVises
                 visningsmodus={visningsmodus}
                 antallTotalt={antallTotalt}
-                posisjon={posisjon}
             />
         );
     };
@@ -136,7 +134,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             veiledere,
             filtervalg,
             visningsmodus,
-            sideStorrelse,
         } = this.props;
 
         updateLastPath();
@@ -151,7 +148,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
-        const visNedreToolbar = antallTotalt >= sideStorrelse && !visDiagram;
 
         return (
             <div className="portefolje__container">
@@ -163,7 +159,7 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                         antallTotalt={antallTotalt}
                         visDiagram={visDiagram}
                     />
-                    {this.lagToolbar(ToolbarPosisjon.OVER)}
+                    {this.lagToolbar()}
                     {
                         visDiagram ?
                             <Diagram
@@ -176,7 +172,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
-                    {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <ModalEnhetSideController/>
                 </Innholdslaster>
             </div>

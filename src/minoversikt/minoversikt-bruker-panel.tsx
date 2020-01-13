@@ -23,6 +23,7 @@ interface MinOversiktBrukerPanelProps {
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
 }
+
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const [apen, setOpen] = useState<boolean>(false);
     const liRef = useRef<HTMLLIElement>(null);
@@ -43,9 +44,9 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
         }
     }
 
-    const { bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker } = props;
+    const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker} = props;
     const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
-    const classname  = classNames('brukerliste--border-bottom-thin ', {
+    const classname = classNames('brukerliste--border-bottom-thin ', {
         'brukerliste--forrigeBruker': varForrigeBruker,
     });
 
@@ -65,8 +66,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     skalJusteres={!arbeidslisteAktiv}
                 />
                 <div className="brukerliste__gutter-right">
-
-                    <div className={"brukerliste__etiketter"}>
+                    <div className="brukerliste__etiketter">
                         <Etiketter bruker={bruker}/>
                         <Etikett
                             type={EtikettType.NYBRUKER}

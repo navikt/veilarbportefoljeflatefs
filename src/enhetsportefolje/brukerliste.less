@@ -13,7 +13,10 @@
 .enhet-tabell {
     background-color: white;
     border: 1px solid @navGra60;
+    border-top-color: white;
     border-radius: @border-radius-base;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .brukerliste__element {
@@ -55,6 +58,14 @@
     box-shadow: inset -1px 0 0 2px @navGra60, inset 1px 0 0 2px @navGra40;
 }
 
+.brukerliste__header {
+    position: sticky;
+    top: 3rem;
+    z-index: 1000;
+    background-color: white;
+    border-bottom: 2px solid @navGra40;
+}
+
 .brukerliste__overskriftheader {
     display: flex;
     font-weight: bold;
@@ -73,10 +84,6 @@
     display: flex;
     align-items: center;
     margin-left: 1rem;
-}
-
-.brukerliste--min-width-enhet {
-    min-width: 2rem;
 }
 
 .brukerliste--min-width-minside {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../ducks/portefolje';
 import TabellOverskrift from '../components/tabell-overskrift';
-import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
+import Toolbar from './../components/toolbar/toolbar';
 import { leggEnhetIUrl, updateLastPath } from '../utils/url-utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import Diagram from './diagram/diagram';
@@ -70,7 +70,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         );
     }
 
-    lagToolbar = (posisjon: ToolbarPosisjon) => {
+    lagToolbar = () => {
 
         const {
             portefolje,
@@ -101,7 +101,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                 sokVeilederSkalVises={false}
                 visningsmodus={visningsmodus}
                 antallTotalt={antallTotalt}
-                posisjon={posisjon}
             />
         );
     };
@@ -121,7 +120,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
-        const visNedreToolbar = antallTotalt >= sideStorrelse && !visDiagram;
 
         return (
             <div className="portefolje__container">
@@ -133,7 +131,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         antallValgt={antallValgt}
                         visDiagram={visDiagram}
                     />
-                    {this.lagToolbar(ToolbarPosisjon.OVER)}
+                    {this.lagToolbar()}
                     {
                         visDiagram ?
                             <Diagram
@@ -147,7 +145,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                                 settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                             />
                     }
-                    {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <MinOversiktModalController/>
                 </Innholdslaster>
             </div>

@@ -15,7 +15,7 @@ interface MinOversiktTabellProps {
 
 function MinoversiktTabell(props: MinOversiktTabellProps) {
     const forrigeBruker = useForrigeBruker();
-    const { brukere, filtervalg, sorteringsrekkefolge, enhetId, valgteKolonner, sorteringsfelt } = usePortefoljeSelector(ListevisningType.minOversikt);
+    const {brukere, filtervalg, sorteringsrekkefolge, enhetId, valgteKolonner, sorteringsfelt} = usePortefoljeSelector(ListevisningType.minOversikt);
 
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
@@ -29,6 +29,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
                 sorteringsfelt={sorteringsfelt}
                 valgteKolonner={valgteKolonner}
                 brukere={brukere}
+                filtergruppe={ListevisningType.enhetensOversikt}
             />
             <ul className="brukerliste">
                 {brukere.map((bruker) =>

@@ -17,7 +17,7 @@ const finnBrukersVeileder = (veiledere, bruker) => (veiledere.find((veileder) =>
 
 function EnhetTabell(props: EnhetTabellProps) {
     const forrigeBruker = useForrigeBruker();
-    const { brukere, filtervalg, sorteringsrekkefolge, enhetId, valgteKolonner, sorteringsfelt } = usePortefoljeSelector(ListevisningType.enhetensOversikt);
+    const {brukere, filtervalg, sorteringsrekkefolge, enhetId, valgteKolonner, sorteringsfelt} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
     const dispatch = useDispatch();
 
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
@@ -30,6 +30,7 @@ function EnhetTabell(props: EnhetTabellProps) {
                 filtervalg={filtervalg}
                 sorteringsfelt={sorteringsfelt}
                 valgteKolonner={valgteKolonner}
+                filtergruppe={ListevisningType.enhetensOversikt}
             />
             <ul className="brukerliste">
                 {brukere.map((bruker) =>

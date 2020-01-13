@@ -5,7 +5,6 @@ import * as VK from '../../minoversikt/minoversikt-konstanter';
 import { AppState } from './../../reducer';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 import { settVisningsmodus } from '../../ducks/paginering';
-import { ToolbarPosisjon } from './toolbar';
 import { ReactComponent as ListeIkon } from './liste.svg';
 import { ReactComponent as StolpeIkon } from './stolpediagram.svg';
 import { ToggleGruppe } from 'nav-frontend-toggle';
@@ -13,7 +12,6 @@ import { MinoversiktVisning } from '../../minoversikt/minoversikt-konstanter';
 
 interface OwnProps {
     filtergruppe: ListevisningType;
-    toolbarPosisjon?: ToolbarPosisjon;
 }
 
 interface DispatchProps {
@@ -30,7 +28,7 @@ type DiagramTabellToggleProps =
     & DispatchProps
     & StateProps;
 
-function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules }: DiagramTabellToggleProps) {
+function DiagramTabellToggle({visningsmodus, endreVisningsmodus, skalSkjules}: DiagramTabellToggleProps) {
     if (skalSkjules) {
         return null;
     }
@@ -47,7 +45,7 @@ function DiagramTabellToggle({ visningsmodus, endreVisningsmodus, skalSkjules }:
                     pressed: visningsmodus === VK.DIAGRAMVISNING,
                     onClick: () => endreVisningsmodus(VK.DIAGRAMVISNING)
                 },
-            ]as any}
+            ] as any}
         />
     );
 }
@@ -71,9 +69,9 @@ const mapStateToProps = (state: AppState, ownProps: OwnProps): StateProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch, props: OwnProps): DispatchProps => bindActionCreators({
+const mapDispatchToProps = (dispatch): DispatchProps => bindActionCreators({
     endreVisningsmodus(modus: MinoversiktVisning) {
-        return settVisningsmodus(modus, props.toolbarPosisjon);
+        return settVisningsmodus(modus);
     }
 }, dispatch);
 

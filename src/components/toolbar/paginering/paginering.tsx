@@ -6,7 +6,6 @@ import KnappPanel from './knapp-panel';
 import { leggSeAlleIUrl, leggSideIUrl } from '../../../utils/url-utils';
 import { pagineringSetup } from '../../../ducks/paginering';
 import { selectSeAlle, selectSide, selectSideStorrelse } from './paginering-selector';
-import { ToolbarPosisjon } from '../toolbar';
 
 interface StateProps {
     side: number;
@@ -23,7 +22,6 @@ interface OwnProps {
     className: string;
     antallTotalt: number;
     onChange?: (fra?: number, til?: number) => void;
-    toolbarPosisjon?: ToolbarPosisjon;
 }
 
 type PagineringProps = StateProps & OwnProps & DispatchProps;
@@ -51,7 +49,7 @@ function Paginering(props: PagineringProps) {
     const totalPagenering = (sideNumber: number, seAlleBool: boolean): void => {
         endrePaginering(sideNumber, seAlleBool);
         leggSideIUrl(sideNumber);
-        if(onChange) {
+        if (onChange) {
             onChange();
         }
     };
@@ -105,7 +103,7 @@ const mapStateToProps = (state): StateProps => {
 };
 
 const mapDispatchToProps = (dispatch, props: OwnProps) => ({
-    endrePaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle }, props.toolbarPosisjon))
+    endrePaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Paginering);

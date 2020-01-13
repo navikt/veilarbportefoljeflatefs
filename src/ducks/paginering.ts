@@ -1,8 +1,6 @@
-
 // Actions
 import { DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
 import { MinoversiktVisning, TABELLVISNING } from '../minoversikt/minoversikt-konstanter';
-import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 
 export const SETUP = 'veilarbportefoljeflatefs/paginering/SETUP';
 export const SETT_VISNINGSMODUS = 'veilarbportefoljeflatefs/paginering/settvisningsmodus';
@@ -25,7 +23,7 @@ const initialState: PagineringState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SETUP:
-            return { ...state, ...action.data };
+            return {...state, ...action.data};
         case SETT_VISNINGSMODUS:
             return {
                 ...state,
@@ -43,14 +41,13 @@ export interface PageringOppdatering {
 }
 
 // Action Creators
-export function pagineringSetup(data: PageringOppdatering, toolbarPosisjon?: ToolbarPosisjon) {
-    return { type: SETUP, data, toolbarPosisjon };
+export function pagineringSetup(data: PageringOppdatering) {
+    return {type: SETUP, data};
 }
 
-export function settVisningsmodus(visningsmodus: MinoversiktVisning, toolbarPosisjon?: ToolbarPosisjon) {
+export function settVisningsmodus(visningsmodus: MinoversiktVisning) {
     return {
         type: SETT_VISNINGSMODUS,
-        visningsmodus,
-        toolbarPosisjon
+        visningsmodus
     };
 }

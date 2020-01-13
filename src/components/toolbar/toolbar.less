@@ -4,8 +4,8 @@
 @import "./listevisning/listevisning";
 
 .visuallyhidden {
-        position: absolute;
-        left: -1000000000px;
+    position: absolute;
+    left: -1000000000px;
 }
 
 .toolbar {
@@ -14,8 +14,15 @@
     align-items: center;
     padding: 0.5rem;
     border: 1px solid @navGra60;
+    border-bottom: none;
     border-radius: @border-radius-base;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     background-color: @white;
+    margin-bottom: 0px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
     .nav-frontend-chevron span {
         .sr-only();
@@ -43,18 +50,21 @@
 .velgalle-checkboks {
     margin: 0;
     color: @toolbarTextColor;
+    padding: 0;
+    width: auto;
+    top: -15px;
+
     .skjemaelement__label:before {
         top: 2px;
     }
+
     input:disabled + label {
         color: @toolbarInactiveTextColor;
     }
+}
 
-    &:not(:disabled):hover {
-        .velgalle-checkboks__label {
-            border-bottom: 1px solid @navGra40;
-        }
-    }
+.minoversikt__velgallecheckbox {
+    margin-right: 1rem;
 }
 
 .dropdown--toolbar {
@@ -81,6 +91,7 @@
             color: @toolbarInactiveTextColor;
         }
     }
+
     .dropdown__btnwrapper {
         color: @toolbarTextColor;
 
@@ -108,6 +119,7 @@
     .sokfilter .skjemaelement__label {
         .sr-only();
     }
+
     .sokfilter .skjemaelement__input {
         height: 1.8rem;
         width: 90%;
