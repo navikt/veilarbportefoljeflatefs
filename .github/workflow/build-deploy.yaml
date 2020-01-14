@@ -1,0 +1,55 @@
+name: Bygg og Deploy Dev
+
+on: [push, pull_request]
+env:
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/veilarbportefoljeflatefs:${{ github.sha }}
+  PRINT_PAYLOAD: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Build Project
+      - run: npm ci
+      - run: npm run test
+      - run: npm run build
+
+      - name: Build and publish Docker image
+        if: github.event_name != 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker build -t ${IMAGE} .
+          echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
+          docker push ${IMAGE}
+
+      - name: deply q0 fss
+        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-fss
+          RESOURCE: nais-q.yaml
+          VAR: namespace=q0
+
+      - name: deply q1 fss
+        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-fss
+          RESOURCE: nais-q.yaml
+          VAR: namespace=q1
+
+      - name: deply prod fss
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-fss
+          RESOURCE: nais.yaml
+          VAR: namespace=default
