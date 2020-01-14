@@ -42,12 +42,13 @@ jobs:
             ${{ runner.os }}-node-cache
       - name: Build production artifact
         run: npm run build
+      - name: Build and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: |
-            docker build -t ${IMAGE}:${IMAGE_TAG} .
-            echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
-            docker push ${IMAGE}:${IMAGE_TAG}
+        run: |
+          docker build -t ${IMAGE}:${IMAGE_TAG} .
+          echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
+          docker push ${IMAGE}:${IMAGE_TAG}
   deploy-q0:
     name: Deply q0 fss
     runs-on: ubuntu-latest
