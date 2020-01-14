@@ -1,18 +1,24 @@
-import { Redirect, Route, RouteProps } from 'react-router';
-import React from 'react';
+import React, {PropsWithChildren, useEffect} from 'react';
+import {useHistory, useLocation} from "react-router";
 
-export function VeilarbPortefoljeRedirect(props: RouteProps) {
+export function CustomRedirect(props: PropsWithChildren<{}>) {
+    const history = useHistory();
+    const pathname = useLocation().pathname;
+
+
+    const lastPath = localStorage.getItem('lastpath');
+    const lastSearch = localStorage.getItem('lastsearch') || '';
+
+    useEffect(()=> {
+        if (lastPath && pathname === '/tilbake') {
+            history.replace({pathname: lastPath, search: lastSearch});
+        }
+    },[history, lastSearch, lastPath, pathname]);
+
     return (
-        <Route
-            render={() => {
-            const lastPath = localStorage.getItem('lastpath');
-            const lastSearch = localStorage.getItem('lastsearch') || '';
-            if (lastPath && props.location!.pathname === '/tilbake') {
-                return (
-                    <Redirect to={{pathname: lastPath, search: lastSearch}}/>);
-            } else {
-                return <Redirect to={'/enhet'}/>;
-            }
-        }}
-    />);
+        <>
+            {props.children}
+        </>
+    )
+
 }

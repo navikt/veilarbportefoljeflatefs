@@ -27,19 +27,20 @@ interface FiltreringContainerProps {
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
     veileder?: VeilederModell;
+    valgtEnhet?: OrNothing<string>
 }
 
-function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeileder, enhettiltak}: FiltreringContainerProps) {
+function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeileder, enhettiltak, valgtEnhet}: FiltreringContainerProps) {
 
-    const valgtEnhet = useEnhetSelector();
-    const harVeilederGruppeFeature = useFeatureSelector()(VIS_VEILEDER_GRUPPER);
     const dispatch = useDispatch();
 
+
     useEffect(() => {
-        if (harVeilederGruppeFeature && valgtEnhet) {
+        if (valgtEnhet) {
+            console.log("hentValgtEnhet", valgtEnhet);
             dispatch(hentLagretFilterForEnhet(valgtEnhet));
         }
-    }, [dispatch, valgtEnhet, harVeilederGruppeFeature]);
+    }, [dispatch, valgtEnhet]);
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: string) =>
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe, veileder));

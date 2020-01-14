@@ -6,9 +6,9 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import EnhetsportefoljeVisning from './enhetsportefolje-visning';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import { getSeAlleFromUrl, getSideFromUrl } from '../utils/url-utils';
+import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl} from '../utils/url-utils';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
-import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
+import { EnhettiltakState } from '../ducks/enhettiltak';
 import TomPortefoljeModal from '../components/modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import { AppState } from '../reducer';
@@ -36,7 +36,6 @@ interface StateProps {
 
 interface DispatchProps {
     hentStatusTall: (enhetId: string) => void;
-    hentEnhetTiltak: (enhetId: string) => void;
     initalPaginering: (side: number, seAlle: boolean) => void;
     slettVeilederFilter: (ident: string) => void;
 }
@@ -59,7 +58,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
 
     componentDidMount() {
         this.props.hentStatusTall(this.props.valgtEnhet!);
-        this.props.hentEnhetTiltak(this.props.valgtEnhet!);
     }
 
     render() {
@@ -78,6 +76,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                     filtervalg={filtervalg}
                                     enhettiltak={tiltak}
                                     filtergruppe="enhet"
+                                    valgtEnhet={this.props.valgtEnhet}
                                 />
                             </div>
                             <div className="col-lg-9 col-md-12 col-sm-12">
@@ -114,7 +113,6 @@ const mapStateToProps = (state: AppState): StateProps => ({
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
     hentStatusTall: (enhet) => dispatch(hentStatusTall(enhet)),
-    hentEnhetTiltak: (enhet) => dispatch(hentEnhetTiltak(enhet)),
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
     slettVeilederFilter: (ident: string) => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet', defaultVeileder))
 });
