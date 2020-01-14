@@ -27,11 +27,5 @@ spec:
     - https://app.adeo.no/veilarbportefoljeflatefs
   vault:
     enabled: true
-  env:
-    - ISSO_JWKS_URL
-    - ISSO_HOST_URL
-    - ISSO_ISSUER_URL
-    - ISSO_ISALIVE_URL
-    - VEILARBLOGIN_REDIRECT_URL_URL
-    - VEILARBLOGIN_REDIRECT_URL_DESCRIPTION
-    - OIDC_REDIRECT_URL
+  envFrom:
+    - configmap: pto-config
