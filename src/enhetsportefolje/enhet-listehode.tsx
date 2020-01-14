@@ -49,14 +49,17 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
             <div className="brukerliste__sorteringheader typo-undertekst">
                 <div className="brukerliste__gutter-left"/>
                 <div className="brukerliste__innhold">
-                    <VelgalleCheckboks skalVises={filtergruppe in ListevisningType}
-                                       className="velgalle-checkboks col col-xs-2"/>
+                    <VelgalleCheckboks
+                        skalVises={filtergruppe in ListevisningType}
+                        className="velgalle-checkboks col col-xs-2"
+                    />
+
                     <SorteringHeader
                         sortering={Sorteringsfelt.ETTERNAVN}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
                         erValgt={sorteringsfelt === Sorteringsfelt.ETTERNAVN}
-                        tekst="ETTERNAVN"
+                        tekst="Etternavn"
                         className="col col-xs-2"
                     />
                     <SorteringHeader
@@ -64,7 +67,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
                         erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
-                        tekst="FØDSELSNUMMER"
+                        tekst="Fødselsnummer"
                         className="col col-xs-2"
                     />
                     <SorteringHeader
@@ -72,7 +75,7 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
                         erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
-                        tekst="OPPFØLGING STARTET"
+                        tekst="Oppfølging startet"
                         className="sortering-header__dato col col-xs-2"
                         skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                         title='Startdato for pågående oppfølgingsperiode'
@@ -82,14 +85,14 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                         skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
                         title='Navn på tildelt veileder'
                     >
-                        VEILEDER
+                        Veileder
                     </Header>
                     <SorteringHeader
                         sortering={Sorteringsfelt.NAVIDENT}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
                         erValgt={sorteringsfelt === Sorteringsfelt.NAVIDENT}
-                        tekst="NAV-IDENT"
+                        tekst="NAV-ident"
                         skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
                         className="header__veilederident col col-xs-2"
                         title='NAV-ident på tildelt veileder'

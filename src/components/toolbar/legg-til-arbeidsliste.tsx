@@ -4,7 +4,7 @@ import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
 import { visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { ReactComponent as ArbeidslisteIkon } from './arbeidsliste.svg';
+import { ReactComponent as ArbeidslisteIkonLinje } from './arbeidslisteikon-linje.svg';
 
 interface StateProps {
     portefolje: PortefoljeState;
@@ -42,7 +42,7 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
                 onClick={this.onClickHandler}
             >
                 {tekst}
-                <ArbeidslisteIkon className="toolbar__arbeidsliste-ikon"/>
+                <ArbeidslisteIkonLinje className="toolbar__arbeidsliste-ikon"/>
             </button>
         );
 

@@ -2,6 +2,8 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { Sorteringsfelt, Sorteringsrekkefolge } from '../../model-interfaces';
 import Header, { HeaderProps } from './header';
+import { ReactComponent as PilAscending } from './arrow-up.svg';
+import { ReactComponent as PilDescending } from './arrow-down.svg';
 
 interface SorteringHeaderProps extends HeaderProps {
     sortering: Sorteringsfelt;
@@ -12,22 +14,37 @@ interface SorteringHeaderProps extends HeaderProps {
     title?: string;
 }
 
-function SorteringHeader({ sortering, onClick, rekkefolge, erValgt, tekst, skalVises = true, className = '', title }: SorteringHeaderProps) {
+function SorteringHeader({sortering, onClick, rekkefolge, erValgt, tekst, skalVises = true, className = '', title}: SorteringHeaderProps) {
+
+    const ariaLabel = erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'inaktiv';
+    const sorteringspil = () => {
+        if (ariaLabel === 'ascending') {
+            return <PilAscending className="sorteringheader__pil-ikke-sortert"/>;
+        } else if (ariaLabel === 'descending') {
+            return <PilDescending className="sorteringheader__pil-ikke-sortert"/>;
+        } else {
+            return null;
+        }
+    };
+
+    console.log('aria-label', erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'inaktiv');
     return (
         <Header skalVises={skalVises} className={className}>
-            <button
-                onClick={() => onClick(sortering)}
-                className={classNames('lenke lenke--frittstaende text--left', { valgt: erValgt }, {'valgt-sortering': erValgt})}
-                aria-pressed={erValgt}
-                aria-label={erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ?
-                rekkefolge : 'inaktiv'}
-                title = {title}
-            >
-                {tekst}
-            </button>
-            {sortering === 'etternavn' ?
-                ', Fornavn' : null
-            }
+            <div className="sorteringheader__lenke">
+                <button
+                    onClick={() => onClick(sortering)}
+                    className={classNames('lenke lenke--frittstaende text--left', {valgt: erValgt}, {'valgt-sortering': erValgt})}
+                    aria-pressed={erValgt}
+                    aria-label={erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'inaktiv'}
+                    title={title}
+                >
+                    {tekst}
+                </button>
+                {sortering === 'etternavn' ?
+                    ', Fornavn' : null
+                }
+            </div>
+            {sorteringspil()}
         </Header>
     );
 }
