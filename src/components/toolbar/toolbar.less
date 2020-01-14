@@ -34,18 +34,18 @@
 
 .toolbar__element {
     display: flex;
-    max-width: 30rem;
+    flex-direction: row;
 }
 
 .toolbar__venstre {
-    width: 45%;
+    margin-right: 1rem;
 }
 
 .toolbar__midten {
 }
 
 .toolbar__hoyre {
-    width: 45%;
+    margin-left: 1rem;
 }
 
 .velgalle-checkboks {
@@ -69,10 +69,10 @@
 
 .dropdown--toolbar {
     border-radius: @border-radius-base;
-    width: 100%;
+    width: auto;
+    min-width: 10rem;
     height: 100%;
     margin: 0 1rem 0 0;
-    display: flex;
 
     .dropdown__btn {
         border: 1px solid @navGra60;

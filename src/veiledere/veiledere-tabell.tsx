@@ -63,12 +63,12 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
                                 aria-label={sorterEtternavn ?
                                     currentSortering.direction : 'inaktiv'}
                             >
-                                ETTERNAVN/FORNAVN
+                                Etternavn
                             </button>
-                            {/*/ FORNAVN*/}
+                            , Fornavn
                         </th>
                         <th scope="col">
-                            NAV-IDENT
+                            NAV-ident
                         </th>
                         <th className="tabell-element-center" scope="col">
                             <button
@@ -81,7 +81,7 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
                                 aria-label={sorterPaaPortefoljeStr ?
                                     currentSortering.direction : 'inaktiv'}
                             >
-                                ANTALL BRUKERE
+                                Antall brukere
                             </button>
                         </th>
                         <th/>
