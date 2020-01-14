@@ -65,6 +65,7 @@ jobs:
     name: Deply q1 fss
     if: github.ref == 'refs/heads/dev'
     needs: build-docker-image
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: nais/deploy/actions/deploy@v1
@@ -77,6 +78,7 @@ jobs:
     name: deply prod fss
     if: github.ref == 'refs/heads/master'
     needs: build-docker-image
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: nais/deploy/actions/deploy@v1
