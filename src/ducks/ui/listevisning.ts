@@ -12,11 +12,6 @@ export enum ActionTypeKeys {
     OTHER_ACTION = '__OTHER_ACTION__'
 }
 
-export enum Veilederpaginering {
-    TABELLVISNING = 'TABELLVISNING',
-    DIAGRAMVISNING = 'DIAGRAMVISNING'
-}
-
 export enum Kolonne {
     BRUKER = 'bruker',
     FODSELSNR = 'fodselsnr',
