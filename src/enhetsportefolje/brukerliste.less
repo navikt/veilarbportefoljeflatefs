@@ -14,9 +14,7 @@
     background-color: white;
     border: 1px solid @navGra60;
     border-top-color: white;
-    border-radius: @border-radius-base;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-radius: 0 0 @border-radius-base @border-radius-base;
 }
 
 .brukerliste__element {
@@ -60,11 +58,11 @@
 
 .brukerliste__header {
     position: sticky;
-    top: 4rem;
+    top: 9rem;
     z-index: 500;
     background-color: white;
-    border-bottom: 2px solid @navGra40;
-
+    border-bottom: 1px solid @navGra60;
+    box-shadow: 0px 3px 8px 0px @navGra40;
 }
 
 .brukerliste__overskriftheader {

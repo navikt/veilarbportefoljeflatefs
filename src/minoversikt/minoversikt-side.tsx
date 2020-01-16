@@ -12,8 +12,7 @@ import { hentPortefoljeForVeileder, settSortering, settValgtVeileder } from '../
 import { EnheterState } from '../ducks/enheter';
 import { VeiledereState } from '../ducks/veiledere';
 import { FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
-import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
-import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
+import { ListevisningState } from '../ducks/ui/listevisning';
 import {
     getSeAlleFromUrl, getSideFromUrl, getSorteringsFeltFromUrl,
     getSorteringsRekkefolgeFromUrl
@@ -135,7 +134,6 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                                 enhettiltak={enhettiltak.data.tiltak}
                                                 listevisning={listevisning}
                                             />
-                                            <ListevisningInfoPanel name={ListevisningType.minOversikt}/>
                                             <VeilederPortefoljeVisning
                                                 gjeldendeVeileder={gjeldendeVeileder}
                                                 visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}

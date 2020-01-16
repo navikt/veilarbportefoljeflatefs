@@ -1,6 +1,7 @@
 import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import { tekstValgteBrukere } from '../utils/tekst-utils';
+import './tabell-overskrift.less';
 
 interface TabellOverskriftProps {
     fraIndex: number;
@@ -22,7 +23,7 @@ function TabellOverskrift({fraIndex, antallIVisning, antallTotalt, visDiagram, a
     const antallValgteBrukere = tekstValgteBrukere(antallValgt);
 
     return (
-        <Element tag="h1" className="blokk-xxs">
+        <Element tag="h1" className="tabelloverskrift blokk-xxs">
             <strong aria-live="polite" aria-atomic="true">
                 {tekst}
                 {antallValgteBrukere}

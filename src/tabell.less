@@ -28,7 +28,6 @@
 @state-warning-bg: @pink-error-bg;
 @state-danger-bg: @pink-error-bg;
 
-
 table {
     caption {
         padding-top: @table-cell-padding;
@@ -39,9 +38,22 @@ table {
 }
 
 // Baseline styles
-
 .tabell {
     background-color: @table-bg;
+    border: 1px solid @navGra60;
+    border-radius: @border-radius-base;
+    border-collapse: collapse;
+    border-top: none;
+    margin-right: 0;
+
+    .tabell__subhead {
+        box-shadow: 0px 5px 8px 1px @navGra40;
+    }
+
+    thead th {
+        background-color: white;
+        border-bottom: 1px solid @navGra60;
+    }
 
     caption {
         position: absolute;
@@ -78,9 +90,34 @@ table {
     }
 
     tbody {
+        tr:nth-child(even) {
+            background-color: white;
+        }
+
         tr:first-child {
             th, td {
                 border-top-width: 2px;
+            }
+        }
+
+        th, td {
+            border-bottom: 1px solid @navGra40;
+            border-top: none;
+            font-weight: normal;
+
+            &:first-child {
+                width: 30%;
+                white-space: pre-wrap;
+            }
+
+            &:nth-child(2) {
+                width: 20%;
+                white-space: pre-wrap;
+            }
+
+            &:nth-child(3) {
+                width: 7rem;
+                white-space: pre-wrap;
             }
         }
     }
@@ -90,19 +127,9 @@ table {
         border-top: 2px solid @color-border;
     }
 
-    // Nesting
-    .tabell {
-        background-color: @gray-background;
-    }
-
-    &__subhead {
-        border-bottom: 2px solid @color-border;
-        margin-bottom: 2rem;
-    }
 }
 
 // Condensed.tabell w/ half padding
-
 .tabell-kompakt {
     th, td {
         padding: @table-condensed-cell-padding;
@@ -110,9 +137,7 @@ table {
 }
 
 // Bordered version
-//
 // Add borders all around the.tabell and between all the columns.
-
 .tabell-ramme {
     border: 1px solid @color-border;
 
@@ -122,9 +147,7 @@ table {
 }
 
 // Zebra-striping
-//
 // Default zebra-stripe styles (alternating gray and transparent backgrounds)
-
 .tabell-striper {
     tbody tr:nth-of-type(odd) {
         background-color: @table-bg-accent;
@@ -134,7 +157,6 @@ table {
 // Tabell med vertikal skillestrek i alle celler
 // Border på topp og bunn
 // Ingen border til venstre og høyre
-
 .tabell-skillestrek {
     border-top: 1px solid @color-border;
     border-bottom: 1px solid @color-border;
@@ -145,9 +167,7 @@ table {
 }
 
 // Hover effect
-//
 // Placed here since it has to come after the potential zebra striping
-
 .tabell-hover {
     tr:hover {
         background-color: @table-bg-hover;
@@ -155,15 +175,12 @@ table {
 }
 
 // Midstiller elementer i tabellen
-
 table .tabell-element-center {
     text-align: center;
 }
 
 // Table cell sizing
-//
 // Reset default.tabell behavior
-
 table col[class*="col-"] {
     position: static; // Prevent border hiding in Firefox and IE9-11 (see https://github.com/twbs/bootstrap/issues/11623)
     float: none;
@@ -171,7 +188,6 @@ table col[class*="col-"] {
 }
 
 // Mixin for vertikal strek
-
 .vertikalstrek() {
     position: relative;
     &:after {

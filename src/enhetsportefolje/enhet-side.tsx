@@ -9,10 +9,9 @@ import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
-import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import { AppState } from '../reducer';
 import { FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
-import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
+import { ListevisningState } from '../ducks/ui/listevisning';
 import { pagineringSetup } from '../ducks/paginering';
 import FiltreringContainer, { defaultVeileder } from '../filtrering/filtrering-container';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
@@ -93,7 +92,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                                 enhettiltak={enhettiltak.data.tiltak}
                                                 listevisning={listevisning}
                                             />
-                                            <ListevisningInfoPanel name={ListevisningType.enhetensOversikt}/>
                                             <EnhetsportefoljeVisning/>
                                         </div>
                                     </div>
