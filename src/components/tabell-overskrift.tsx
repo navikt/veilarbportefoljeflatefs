@@ -6,19 +6,15 @@ interface TabellOverskriftProps {
     fraIndex: number;
     antallIVisning: number;
     antallTotalt: number;
-    visDiagram: boolean;
     antallValgt: number;
 }
 
-function TabellOverskrift({ fraIndex, antallIVisning, antallTotalt, visDiagram, antallValgt }: TabellOverskriftProps) {
+function TabellOverskrift({ fraIndex, antallIVisning, antallTotalt, antallValgt }: TabellOverskriftProps) {
     const fixedFraIndex = antallTotalt === 0 ? 0 : 1;
     const fraIndexMax = Math.max(fraIndex, fixedFraIndex);
     const tilIndex = fraIndex + antallIVisning;
 
-    const tekst = visDiagram
-        ? `Totalt ${antallTotalt} brukere.`
-        :  `Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere. `;
-
+    const tekst = `Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere. `;
     const antallValgteBrukere = tekstValgteBrukere (antallValgt);
 
     return (
