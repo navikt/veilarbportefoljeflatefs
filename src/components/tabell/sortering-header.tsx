@@ -27,7 +27,6 @@ function SorteringHeader({sortering, onClick, rekkefolge, erValgt, tekst, skalVi
         }
     };
 
-    console.log('aria-label', erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'inaktiv');
     return (
         <Header skalVises={skalVises} className={className}>
             <div className="sorteringheader__lenke">

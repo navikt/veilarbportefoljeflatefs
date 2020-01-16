@@ -30,7 +30,10 @@ import { diagramSkalVises } from '../minoversikt/diagram/util';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
-import EnhetsportefoljeVisning from './enhetsportefolje-visning';
+import { ModalEnhetSideController } from '../components/modal/modal-enhet-side-controller';
+import EnhetTabell from './enhetsportefolje-tabell';
+import { STATUS } from '../ducks/utils';
+import EnhetTabellOverskrift from './enhetsportefolje-tabelloverskrift';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -44,6 +47,7 @@ interface StateProps {
     visningsmodus: string;
     sorteringsrekkefolge: string;
     sorteringsfelt: string;
+    veiledere: any;
 }
 
 interface DispatchProps {
@@ -130,13 +134,15 @@ class EnhetSide extends React.Component<EnhetSideProps> {
             hentPortefolje,
             valgtEnhet,
             sorteringsrekkefolge,
-            sorteringsfelt
+            sorteringsfelt,
+            veiledere
         } = this.props;
 
         const tiltak = sortTiltak(enhettiltak.data.tiltak);
         const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
         const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+        const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
         return (
             <DocumentTitle title="Enhetens oversikt">
@@ -173,20 +179,33 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                                     antallTotalt={antallTotalt}
                                                     visDiagram={visDiagram}
                                                 />
-                                                <Toolbar
-                                                    filtergruppe={ListevisningType.enhetensOversikt}
-                                                    onPaginering={() => hentPortefolje(
-                                                        valgtEnhet.enhet!.enhetId,
-                                                        sorteringsrekkefolge,
-                                                        sorteringsfelt,
-                                                        filtervalg
-                                                    )}
-                                                    sokVeilederSkalVises
-                                                    visningsmodus={visningsmodus}
-                                                    antallTotalt={antallTotalt}
-                                                />
+                                                <div className="sticky-container__skygge">
+                                                    <Toolbar
+                                                        filtergruppe={ListevisningType.enhetensOversikt}
+                                                        onPaginering={() => hentPortefolje(
+                                                            valgtEnhet.enhet!.enhetId,
+                                                            sorteringsrekkefolge,
+                                                            sorteringsfelt,
+                                                            filtervalg
+                                                        )}
+                                                        sokVeilederSkalVises
+                                                        visningsmodus={visningsmodus}
+                                                        antallTotalt={antallTotalt}
+                                                    />
+                                                    <EnhetTabellOverskrift
+                                                        settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
+                                                    />
+                                                </div>
                                             </div>
-                                            <EnhetsportefoljeVisning/>
+                                            <Innholdslaster
+                                                avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
+                                                <div className="portefolje__container">
+                                                    <EnhetTabell
+                                                        veiledere={veiledere.data.veilederListe}
+                                                    />
+                                                </div>
+                                            </Innholdslaster>
+                                            <ModalEnhetSideController/>
                                         </div>
                                     </div>
                                 </div>
