@@ -1,4 +1,5 @@
 import React from 'react';
+import "./modal-liste.less";
 
 export interface Fnr {
     brukerFnr: string
