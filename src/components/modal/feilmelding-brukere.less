@@ -1,23 +1,34 @@
-.tildeling-veileder-modal, .arbeidsliste-modal {
-  &__content {
-    text-align: center;
-    margin: 1rem 2rem 2rem 2rem;
-
-    ul {
-      width: 70%;
-      margin: 1rem auto;
-
-      li {
-        width: 2rem;
-      }
+.tildeling-veileder-modal {
+    &__content {
+        margin: 1rem 3rem 2rem;
     }
-  }
+}
 
-  &__vellykkedebrukere {
-    margin-top: 1rem;
-  }
+.arbeidsliste-modal {
+    &__content {
+        margin: 1rem 2rem 2rem;
+    }
+}
 
-  .modal__overlay .ReactModal__Content {
-    width: 480px;
-  }
+.tildeling-veileder-modal, .arbeidsliste-modal {
+    &__content {
+        text-align: center;
+
+        ul {
+            width: 70%;
+            margin: 1rem auto;
+
+            li {
+                width: 2rem;
+            }
+        }
+    }
+
+    &__vellykkedebrukere {
+        margin-top: 1rem;
+    }
+
+    .modal__overlay .ReactModal__Content {
+        width: 480px;
+    }
 }
