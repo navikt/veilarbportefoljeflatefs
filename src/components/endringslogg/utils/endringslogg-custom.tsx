@@ -17,6 +17,12 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '17. DES. 2020',
+        versjonId: '17.01.20',
+        tittel: 'Stolpediagramvisning er fjernet',
+        tekst: 'Når du filtrerer på ytelse har det vært en funksjonalitet for å se et stolpediagram som viser antall personer med ytelsen fordelt på tidsperioder. Funksjonaliteten er lite brukt og er derfor nå fjernet.',
+    },
+    {
         dato: '12. DES. 2019',
         versjonId: '12.12.19',
         tittel: 'Veiledergrupper',
