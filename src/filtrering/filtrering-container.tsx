@@ -38,6 +38,7 @@ function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeiled
     useEffect(() => {
         if (harVeilederGruppeFeature && valgtEnhet) {
             dispatch(hentLagretFilterForEnhet(valgtEnhet.enhetId));
+            console.log('FOO');
         }
     }, [dispatch, valgtEnhet, harVeilederGruppeFeature]);
 
