@@ -6,7 +6,6 @@ import veiledere from './veiledere';
 import statustall from './statustall';
 import tiltak from './tiltak';
 import { veilederGrupper } from './veileder-grupper';
-import lagDiagramData from './diagramdataV2';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
 import { endringsloggListe } from './endringslogg';
@@ -124,9 +123,6 @@ mock.get('/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser', lagPortef
 mock.post('/veilarbportefolje/api/veileder/:ident/portefolje', (args: HandlerArgument) => lagPortefoljeForVeileder(args.queryParams, brukere));
 mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', ResponseUtils.delayed(1000, statustall));
 mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', tiltak);
-
-// diagram-api
-mock.post('/veilarbportefolje/api/diagram/v2', ({body}) => lagDiagramData(body));
 
 // situasjon-api
 function tildel(body: any) {

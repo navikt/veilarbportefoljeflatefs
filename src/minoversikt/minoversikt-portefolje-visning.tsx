@@ -1,18 +1,16 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForVeileder, PortefoljeState, settSortering } from '../ducks/portefolje';
+import {hentPortefoljeForVeileder, PortefoljeState, settSortering} from '../ducks/portefolje';
 import TabellOverskrift from '../components/tabell-overskrift';
-import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
-import { leggEnhetIUrl, updateLastPath } from '../utils/url-utils';
-import { ASCENDING, DESCENDING } from '../konstanter';
-import Diagram from './diagram/diagram';
-import { diagramSkalVises } from './diagram/util';
+import Toolbar, {ToolbarPosisjon} from './../components/toolbar/toolbar';
+import {leggEnhetIUrl, updateLastPath} from '../utils/url-utils';
+import {ASCENDING, DESCENDING} from '../konstanter';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
-import { STATUS } from '../ducks/utils';
-import {  FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
-import { ListevisningType } from '../ducks/ui/listevisning';
-import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
+import {STATUS} from '../ducks/utils';
+import {FiltervalgModell, ValgtEnhetModell, VeilederModell} from '../model-interfaces';
+import {ListevisningType} from '../ducks/ui/listevisning';
+import {selectSideStorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {MinOversiktModalController} from "../components/modal/modal-min-oversikt-controller";
 
 interface DispatchProps {
@@ -25,7 +23,6 @@ interface StateProps {
     sorteringsrekkefolge: string;
     valgtEnhet: ValgtEnhetModell;
     sorteringsfelt: string;
-    visningsmodus: string;
     filtervalg: FiltervalgModell;
     innloggetVeilederIdent: string;
     sideStorrelse: number;
@@ -80,11 +77,10 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             sorteringsfelt,
             valgtEnhet,
             filtervalg,
-            visningsmodus,
             visesAnnenVeiledersPortefolje,
         } = this.props;
 
-        const { antallTotalt } = portefolje.data;
+        const {antallTotalt} = portefolje.data;
 
         return (
             <Toolbar
@@ -99,7 +95,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                 gjeldendeVeileder={gjeldendeVeileder}
                 visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                 sokVeilederSkalVises={false}
-                visningsmodus={visningsmodus}
                 antallTotalt={antallTotalt}
                 posisjon={posisjon}
             />
@@ -113,15 +108,13 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             innloggetVeilederIdent,
             valgtEnhet,
             filtervalg,
-            visningsmodus,
             sideStorrelse,
         } = this.props;
         updateLastPath();
         const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
-        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
-        const visNedreToolbar = antallTotalt >= sideStorrelse && !visDiagram;
+        const visNedreToolbar = antallTotalt >= sideStorrelse
 
         return (
             <div className="portefolje__container">
@@ -131,21 +124,13 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                         antallIVisning={antallReturnert}
                         antallTotalt={antallTotalt}
                         antallValgt={antallValgt}
-                        visDiagram={visDiagram}
                     />
                     {this.lagToolbar(ToolbarPosisjon.OVER)}
                     {
-                        visDiagram ?
-                            <Diagram
-                                filtreringsvalg={filtervalg}
-                                enhet={valgtEnhet.enhet!.enhetId}
-                                veileder={gjeldendeVeileder.ident}
-                            />
-                            :
-                            <MinoversiktTabell
-                                innloggetVeileder={innloggetVeilederIdent}
-                                settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
-                            />
+                        <MinoversiktTabell
+                            innloggetVeileder={innloggetVeilederIdent}
+                            settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
+                        />
                     }
                     {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <MinOversiktModalController/>
@@ -160,7 +145,6 @@ const mapStateToProps = (state) => ({
     valgtEnhet: state.enheter.valgtEnhet,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    visningsmodus: state.paginering.visningsmodus,
     filtervalg: state.filtreringMinoversikt,
     innloggetVeilederIdent: state.enheter.ident,
     sideStorrelse: selectSideStorrelse(state),
