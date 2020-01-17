@@ -67,7 +67,6 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
         return (
             <DocumentTitle title="Veilederoversikt">
                 <div className="veiledere-side">
-                    <Lenker/>
                     <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
                         <div id="oversikt-sideinnhold" role="tabpanel">
                             <div className="veiledere-side--cols">

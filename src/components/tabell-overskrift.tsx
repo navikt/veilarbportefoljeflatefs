@@ -1,6 +1,8 @@
 import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import { tekstValgteBrukere } from '../utils/tekst-utils';
+import {useSelector} from "react-redux";
+import {AppState} from "../reducer";
 
 interface TabellOverskriftProps {
     fraIndex: number;
@@ -10,21 +12,22 @@ interface TabellOverskriftProps {
     antallValgt: number;
 }
 
-function TabellOverskrift({ fraIndex, antallIVisning, antallTotalt, visDiagram, antallValgt }: TabellOverskriftProps) {
+function TabellOverskrift() {
+    const portefolje = useSelector((state: AppState)=> state.portefolje.data);
+
+    const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje;
     const fixedFraIndex = antallTotalt === 0 ? 0 : 1;
     const fraIndexMax = Math.max(fraIndex, fixedFraIndex);
-    const tilIndex = fraIndex + antallIVisning;
+    const antallValgt = brukere.filter((bruker) => bruker.markert).length;
 
-    const tekst = visDiagram
-        ? `Totalt ${antallTotalt} brukere.`
-        :  `Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere. `;
+    const tilIndex = fraIndex + antallReturnert;
 
     const antallValgteBrukere = tekstValgteBrukere (antallValgt);
 
     return (
         <Element tag="h1" className="blokk-xxs">
             <strong aria-live="polite" aria-atomic="true">
-                {tekst}
+                `Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere. `
                 {antallValgteBrukere}
             </strong>
         </Element>

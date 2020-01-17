@@ -111,7 +111,6 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
             <div className="minoversikt-side blokk-xl">
                 <DocumentTitle title="Min oversikt">
                     <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                        <Lenker/>
                         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
                             {visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
                             <div className="portefolje-side">

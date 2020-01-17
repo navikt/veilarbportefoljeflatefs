@@ -117,37 +117,21 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             sideStorrelse,
         } = this.props;
         updateLastPath();
-        const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
-        const antallValgt = brukere.filter((bruker) => bruker.markert).length;
-        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
+
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
-        const visNedreToolbar = antallTotalt >= sideStorrelse && !visDiagram;
+        //const visNedreToolbar = antallTotalt >= sideStorrelse ;
 
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
-                    <TabellOverskrift
-                        fraIndex={fraIndex}
-                        antallIVisning={antallReturnert}
-                        antallTotalt={antallTotalt}
-                        antallValgt={antallValgt}
-                        visDiagram={visDiagram}
-                    />
+                    <TabellOverskrift/>
                     {this.lagToolbar(ToolbarPosisjon.OVER)}
                     {
-                        visDiagram ?
-                            <Diagram
-                                filtreringsvalg={filtervalg}
-                                enhet={valgtEnhet}
-                                veileder={gjeldendeVeileder.ident}
-                            />
-                            :
-                            <MinoversiktTabell
-                                innloggetVeileder={innloggetVeileder}
-                                settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
-                            />
+                        <MinoversiktTabell
+                            innloggetVeileder={innloggetVeileder}
+                            settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
+                        />
                     }
-                    {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <MinOversiktModalController/>
                 </Innholdslaster>
             </div>
