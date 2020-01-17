@@ -105,9 +105,6 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case VIS_ARBEIDSLISTE_MODAL:
             loggArbeidslisteApne(sideNavn);
             break;
-        case SETT_VISNINGSMODUS:
-            loggEndreVisningsModus(sideNavn, action.visningsmodus);
-            break;
         case SORTERT_PA:
             loggEndreSortering(sideNavn, data.property, '');
             break;
@@ -214,10 +211,6 @@ const loggAvvelgListevalg = (sideNavn: SideNavn, kolonne: Kolonne) => {
 
 const loggArbeidslisteApne = (sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.arbeidsliste_apne', {sideNavn});
-};
-
-const loggEndreVisningsModus = (sideNavn: SideNavn, visningsmodus: string) => {
-    logEvent('portefolje.metrikker.endre_visningsmodus', {sideNavn, visningsmodus});
 };
 
 const loggEndreSortering = (sideNavn: SideNavn, sorteringsfelt: string, rekkefolge: string) => {

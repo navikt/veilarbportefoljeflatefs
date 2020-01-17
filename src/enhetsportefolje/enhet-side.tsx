@@ -26,7 +26,6 @@ import { slettEnkeltFilter } from '../ducks/filtrering';
 import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
 import TabellOverskrift from '../components/tabell-overskrift';
 import Toolbar from '../components/toolbar/toolbar';
-import { diagramSkalVises } from '../minoversikt/diagram/util';
 import { ASCENDING, DESCENDING } from '../konstanter';
 import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
 import { selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
@@ -141,7 +140,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
         const tiltak = sortTiltak(enhettiltak.data.tiltak);
         const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
-        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
         return (
@@ -177,7 +175,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                                     antallIVisning={antallReturnert}
                                                     antallValgt={antallValgt}
                                                     antallTotalt={antallTotalt}
-                                                    visDiagram={visDiagram}
                                                 />
                                                 <div className="sticky-container__skygge">
                                                     <Toolbar
