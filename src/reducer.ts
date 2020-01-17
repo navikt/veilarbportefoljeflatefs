@@ -12,7 +12,6 @@ import statustallInloggetVeilederReducer from './ducks/statustall-innloggetveile
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
-import diagramReducer from './ducks/diagram';
 import sideReducer from './ducks/ui/side';
 import lagretFilterReducer, { LagretFilterState } from './ducks/lagret-filter';
 import { slettCleanIUrl } from './utils/url-utils';
@@ -64,7 +63,6 @@ export interface AppState {
     modal: any;
     serverfeilModal: any;
     feilmeldingModal: any;
-    diagram: any;
     arbeidsliste: any;
     enhettiltak: EnhettiltakState;
     features: FeaturesState;
@@ -94,7 +92,6 @@ export default combineReducers<AppState>({
     modal: modalReducer,
     serverfeilModal: serverfeilModalReducer,
     feilmeldingModal: feilmedlingModalReducer,
-    diagram: diagramReducer,
     arbeidsliste: arbeidslisteReducer,
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,

@@ -4,13 +4,6 @@ import { tekstValgteBrukere } from '../utils/tekst-utils';
 import {useSelector} from "react-redux";
 import {AppState} from "../reducer";
 
-interface TabellOverskriftProps {
-    fraIndex: number;
-    antallIVisning: number;
-    antallTotalt: number;
-    visDiagram: boolean;
-    antallValgt: number;
-}
 
 function TabellOverskrift() {
     const portefolje = useSelector((state: AppState)=> state.portefolje.data);

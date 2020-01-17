@@ -6,8 +6,6 @@ import TabellOverskrift from '../components/tabell-overskrift';
 import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
 import { leggEnhetIUrl, updateLastPath } from '../utils/url-utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
-import Diagram from './diagram/diagram';
-import { diagramSkalVises } from './diagram/util';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import { STATUS } from '../ducks/utils';
 import {  FiltervalgModell, VeilederModell } from '../model-interfaces';
@@ -27,7 +25,6 @@ interface StateProps {
     sorteringsrekkefolge: string;
     valgtEnhet: OrNothing<string>;
     sorteringsfelt: string;
-    visningsmodus: string;
     filtervalg: FiltervalgModell;
     innloggetVeileder: OrNothing<VeilederModell>;
     sideStorrelse: number;
@@ -80,7 +77,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             sorteringsfelt,
             valgtEnhet,
             filtervalg,
-            visningsmodus,
             visesAnnenVeiledersPortefolje,
         } = this.props;
 
@@ -99,7 +95,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
                 gjeldendeVeileder={gjeldendeVeileder}
                 visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                 sokVeilederSkalVises={false}
-                visningsmodus={visningsmodus}
                 antallTotalt={antallTotalt}
                 posisjon={posisjon}
             />
@@ -113,7 +108,6 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             innloggetVeileder,
             valgtEnhet,
             filtervalg,
-            visningsmodus,
             sideStorrelse,
         } = this.props;
         updateLastPath();
@@ -144,7 +138,6 @@ const mapStateToProps = (state: AppState) => ({
     valgtEnhet: state.valgtEnhet.data.enhetId,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    visningsmodus: state.paginering.visningsmodus,
     filtervalg: state.filtreringMinoversikt,
     innloggetVeileder: state.inloggetVeileder.data,
     sideStorrelse: selectSideStorrelse(state),

@@ -3,10 +3,9 @@ import VelgalleCheckboks from './velgalle-checkboks';
 import TildelVeileder from './tildel-veileder';
 import LeggTilArbeidsliste from './legg-til-arbeidsliste';
 import SokVeileder from './sok-veileder';
-import DiagramTabellToggle from './diagram-tabell-toggle';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
-import { ListevisningType, Veilederpaginering } from '../../ducks/ui/listevisning';
+import { ListevisningType } from '../../ducks/ui/listevisning';
 import { VeilederModell } from '../../model-interfaces';
 
 export enum ToolbarPosisjon {
@@ -55,14 +54,10 @@ const Toolbar = ({filtergruppe,
                 toolbarPosisjon={posisjon}
             />
         </div>
-        <div className="toolbar__element toolbar__midten toolbar--skille-mellom-elementer">
-            <DiagramTabellToggle filtergruppe={filtergruppe} toolbarPosisjon={posisjon}/>
-        </div>
         <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
             <Paginering
                 className="toolbar--skille-mellom-elementer"
                 onChange={onPaginering}
-                skjul={visningsmodus === Veilederpaginering.DIAGRAMVISNING}
                 antallTotalt={antallTotalt}
                 toolbarPosisjon={posisjon}
             />

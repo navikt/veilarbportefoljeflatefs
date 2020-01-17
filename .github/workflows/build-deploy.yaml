@@ -1,0 +1,116 @@
+name: Bygg og Deploy Dev
+
+on: push
+env:
+  IMAGE_TAG: ${{ github.sha }}
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/veilarbportefoljeflatefs
+  PRINT_PAYLOAD: true
+
+jobs:
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - uses: actions/cache@v1
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-node-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-cache
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test
+  build-docker-image:
+    runs-on: ubuntu-latest
+    name: Build and publish Docker image
+    needs: build
+    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - uses: actions/cache@v1
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-node-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-cache
+      - name: Build production artifact
+        run: npm run build
+      - name: Build and publish Docker image
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker build -t ${IMAGE}:${IMAGE_TAG} .
+          echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
+          docker push ${IMAGE}:${IMAGE_TAG}
+  deploy-q0:
+    name: Deply q0 fss
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
+    needs: build-docker-image
+    steps:
+      - uses: actions/checkout@v1
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-fss
+          RESOURCE: nais-q.yaml
+          VAR: version=${{ env.IMAGE_TAG }},namespace=q0
+  deploy-q1:
+    name: Deply q1 fss
+    if: github.ref == 'refs/heads/dev'
+    needs: build-docker-image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-fss
+          RESOURCE: nais-q.yaml
+          VAR: version=${{ env.IMAGE_TAG }},namespace=q1
+  deploy-prod:
+    name: deply prod fss
+    if: github.ref == 'refs/heads/master'
+    needs: build-docker-image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-fss
+          RESOURCE: nais.yaml
+          VAR: version=${{ env.IMAGE_TAG }}
+  release-dev:
+    name: Create dev release
+    needs: [deploy-q0, deploy-q1]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: release/dev@${{ env.IMAGE_TAG }}
+          release_name: Release to dev
+          prerelease: true
+  release-prod:
+    name: Create prod release
+    needs: deploy-prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: release/prod@${{ env.IMAGE_TAG }}
+          release_name: Release to prod
+          prerelease: false

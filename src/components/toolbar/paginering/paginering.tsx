@@ -19,7 +19,6 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-    skjul: boolean;
     className: string;
     antallTotalt: number;
     onChange?: (fra?: number, til?: number) => void;
@@ -30,7 +29,6 @@ type PagineringProps = StateProps & OwnProps & DispatchProps;
 
 function Paginering(props: PagineringProps) {
     const {
-        skjul,
         className,
         onChange,
         side,
@@ -39,10 +37,6 @@ function Paginering(props: PagineringProps) {
         seAlle,
         endrePaginering
     } = props;
-
-    if (skjul) {
-        return null;
-    }
 
     const antallSider: number = Math.ceil(antallTotalt / sideStorrelse);
     const erPaForsteSide: boolean = side === 1;

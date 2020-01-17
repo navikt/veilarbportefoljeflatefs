@@ -27,14 +27,15 @@ interface FjernFraArbeidslisteFormProps {
     slettFraArbeidslisteStatus?: Status;
 }
 
-function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus }: FjernFraArbeidslisteFormProps) {
+function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus}: FjernFraArbeidslisteFormProps) {
     const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
+    const className = valgteBrukere.length >= 22 ? 'arbeidsliste-listetekst__lang' : 'arbeidsliste-listetekst';
     return (
         <form onSubmit={(e) => {
             e.preventDefault();
             onSubmit(valgteBrukere, lukkModal);
         }}>
-            <div className="arbeidsliste-listetekst">
+            <div className={className}>
                 <ul>
                     {valgteBrukere.map((bruker) => brukerLabel(bruker))}
                 </ul>
@@ -51,7 +52,7 @@ function FjernFraArbeidslisteForm({ lukkModal, valgteBrukere, onSubmit, slettFra
     );
 }
 
-function oppdaterState(res, lukkModal: ()=> void, arbeidsliste: ArbeidslisteDataModell[], dispatch) {
+function oppdaterState(res, lukkModal: () => void, arbeidsliste: ArbeidslisteDataModell[], dispatch) {
     lukkModal();
     if (!res) {
         return visServerfeilModal()(dispatch);

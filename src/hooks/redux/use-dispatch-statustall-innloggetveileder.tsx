@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEnhetSelector } from './use-enhet-selector';
 import { useEffect } from 'react';
 import { useIdentSelector } from './use-inlogget-ident';

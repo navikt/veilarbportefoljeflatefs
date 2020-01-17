@@ -1,14 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { hentPortefoljeForEnhet, settSortering } from '../ducks/portefolje';
-import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
-import { getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl, updateLastPath } from '../utils/url-utils';
+import {hentPortefoljeForEnhet, settSortering} from '../ducks/portefolje';
+import Toolbar, {ToolbarPosisjon} from './../components/toolbar/toolbar';
+import {getSorteringsFeltFromUrl, getSorteringsRekkefolgeFromUrl, updateLastPath} from '../utils/url-utils';
 import EnhetTabell from './enhetsportefolje-tabell';
 import TabellOverskrift from '../components/tabell-overskrift';
-import { ASCENDING, DESCENDING } from '../konstanter';
-import { diagramSkalVises } from '../minoversikt/diagram/util';
-import Diagram from '../minoversikt/diagram/diagram';
+import {ASCENDING, DESCENDING} from '../konstanter';
 import VelgfilterMelding from './velg-filter-melding';
 import { STATUS } from '../ducks/utils';
 import { FiltervalgModell } from '../model-interfaces';
@@ -50,7 +48,6 @@ interface EnhetsportefoljeVisningProps {
     sorteringsrekkefolge: string;
     sorteringsfelt: string;
     filtervalg: FiltervalgModell;
-    visningsmodus: string;
     sideStorrelse: number;
 }
 
@@ -109,7 +106,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             sorteringsrekkefolge,
             sorteringsfelt,
             filtervalg,
-            visningsmodus,
         } = this.props;
 
         const {antallTotalt} = portefolje.data;
@@ -124,7 +120,6 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
                     filtervalg
                 )}
                 sokVeilederSkalVises
-                visningsmodus={visningsmodus}
                 antallTotalt={antallTotalt}
                 posisjon={posisjon}
             />
@@ -137,14 +132,12 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
             valgtEnhet,
             veiledere,
             filtervalg,
-            visningsmodus,
             sideStorrelse,
         } = this.props;
 
         updateLastPath();
 
         const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
-        const visDiagram = diagramSkalVises(visningsmodus, filtervalg.ytelse);
 
         const harFilter = antallFilter(filtervalg) !== 0;
         if (!harFilter) {
@@ -153,31 +146,18 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
-        const visNedreToolbar = antallTotalt >= sideStorrelse && !visDiagram;
+        const visNedreToolbar = antallTotalt >= sideStorrelse;
 
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
-                    <TabellOverskrift
-                        fraIndex={fraIndex}
-                        antallIVisning={antallReturnert}
-                        antallValgt={antallValgt}
-                        antallTotalt={antallTotalt}
-                        visDiagram={visDiagram}
-                    />
+                    <TabellOverskrift/>
                     {this.lagToolbar(ToolbarPosisjon.OVER)}
-                    {
-                        visDiagram ?
-                            <Diagram
-                                filtreringsvalg={filtervalg}
-                                enhet={valgtEnhet!}
-                            />
-                            :
-                            <EnhetTabell
-                                veiledere={veiledere.data.veilederListe}
-                                settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
-                            />
-                    }
+
+                    <EnhetTabell
+                        veiledere={veiledere.data.veilederListe}
+                        settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
+                    />
                     {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <ModalEnhetSideController/>
                 </Innholdslaster>
@@ -193,7 +173,6 @@ const mapStateToProps = (state: AppState) => ({
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     filtervalg: state.filtrering,
-    visningsmodus: state.paginering.visningsmodus,
     sideStorrelse: selectSideStorrelse(state),
 });
 

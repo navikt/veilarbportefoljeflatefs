@@ -50,13 +50,12 @@ export function TildelingerOk(props: { isOpen: boolean, onRequestClose: () => vo
             isOpen={props.isOpen}
             onRequestClose={props.onRequestClose}
             tittel="Handling utført"
-            tekst="Følgende bruker(e) ble tildelt veileder:"
+            tekst="Det kan ta noen minutter før oversikten blir oppdatert. Følgende bruker(e) ble tildelt veileder:"
             closeButton={false}
             hovedknappTekst="Lukk"
         >
             <>
                 <FnrList listeMedFnr={props.fnr}/>
-                <Normaltekst>Det kan ta noe tid før oversikten blir oppdatert med tildelt veileder.</Normaltekst>
             </>
         </ModalSuksess>
     );
