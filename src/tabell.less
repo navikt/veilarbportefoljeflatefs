@@ -40,29 +40,36 @@ table {
 // Baseline styles
 .tabell {
     background-color: @table-bg;
-    border: 1px solid @navGra60;
     border-radius: @border-radius-base;
-    border-collapse: collapse;
+    border-collapse: separate;
     border-top: none;
     margin-right: 0;
+    border-spacing: 0;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: @line-height-computed;
+    border-bottom: 1px solid @navGra60;
 
-    .tabell__subhead {
-        box-shadow: 0px 5px 8px 1px @navGra40;
+    td:first-child, th:first-child {
+        border-left: 1px solid @navGra60;
+    }
+
+    td:last-child, th:last-child {
+        border-right: 1px solid @navGra60;
     }
 
     thead th {
+        box-shadow: 0 6px 5px -4px rgba(0, 0, 0, 0.4);
         background-color: white;
         border-bottom: 1px solid @navGra60;
+        position: sticky;
+        top: 4.5rem;
     }
 
     caption {
         position: absolute;
         left: -3000px;
     }
-
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: @line-height-computed;
 
     // Cells
     th {

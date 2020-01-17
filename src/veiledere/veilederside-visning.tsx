@@ -4,7 +4,7 @@ import Toolbar from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
 import { PageringOppdatering, pagineringSetup } from '../ducks/paginering';
 import { sortBy } from '../ducks/sortering';
-import { sorter } from './../utils/sortering';
+import { sorter } from '../utils/sortering';
 import { settSide } from '../ducks/ui/side';
 import {
     selectFraIndex,
@@ -108,21 +108,16 @@ class VeilederesideVisning extends Component<VeilederesideVisningProps, Veileder
         this.setState({veiledere});
     }
 
-    lagToolbar() {
-        return (
-            <Toolbar
-                filtergruppe={ListevisningType.veilederOversikt}
-                antallTotalt={this.state.veiledere.length}
-                sokVeilederSkalVises={false}
-            />
-        );
-    }
-
     render() {
         const veiledere = this.getVeiledere();
         return (
             <div>
-                {this.lagToolbar()}
+                <Toolbar
+                    filtergruppe={ListevisningType.veilederOversikt}
+                    antallTotalt={this.state.veiledere.length}
+                    sokVeilederSkalVises={false}
+                    id="veilederside-toolbar"
+                />
                 <VeiledereTabell
                     veiledere={veiledere}
                     sorterPaaEtternavn={() => this.props.sortBy('etternavn')}

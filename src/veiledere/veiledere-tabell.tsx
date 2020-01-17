@@ -34,7 +34,7 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
 
         const veilederElementer = veiledere.map((veileder) => (
             <tr key={veileder.ident}>
-                <th>
+                <td>
                     <Link
                         to={`/portefolje/${veileder.ident}?clean`}
                         onClick={() => this.settOgNavigerTilValgtVeileder(veileder)}
@@ -42,7 +42,7 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
                     >
                         {`${veileder.navn}`}
                     </Link>
-                </th>
+                </td>
                 <td>{`${veileder.ident}`}</td>
                 <td className="tabell-element-center">{veileder.portefoljestorrelse}</td>
                 <td/>
@@ -50,48 +50,46 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
         ));
 
         return (
-            <div>
-                <table className="tabell veileder-tabell portefolje-tabell typo-undertekst blokk-xs">
-                    <thead className="tabell__subhead">
-                    <tr>
-                        <th scope="col">
-                            <button
-                                onClick={this.props.sorterPaaEtternavn}
-                                className={classNames('lenke lenke--frittstaende',
-                                    {'valgt-sortering': sorterEtternavn})}
-                                aria-pressed={sorterEtternavn}
-                                aria-label={sorterEtternavn ?
-                                    currentSortering.direction : 'inaktiv'}
-                            >
-                                Etternavn
-                            </button>
-                            , Fornavn
-                        </th>
-                        <th scope="col">
-                            NAV-ident
-                        </th>
-                        <th className="tabell-element-center" scope="col">
-                            <button
-                                onClick={this.props.sorterPaaPortefoljestorrelse}
-                                className={
-                                    classNames('lenke lenke--frittstaende',
-                                        {'valgt-sortering': sorterPaaPortefoljeStr})
-                                }
-                                aria-pressed={sorterPaaPortefoljeStr}
-                                aria-label={sorterPaaPortefoljeStr ?
-                                    currentSortering.direction : 'inaktiv'}
-                            >
-                                Antall brukere
-                            </button>
-                        </th>
-                        <th/>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {veilederElementer}
-                    </tbody>
-                </table>
-            </div>
+            <table className="tabell veileder-tabell portefolje-tabell typo-undertekst blokk-xs">
+                <thead>
+                <tr>
+                    <th scope="col">
+                        <button
+                            onClick={this.props.sorterPaaEtternavn}
+                            className={classNames('lenke lenke--frittstaende',
+                                {'valgt-sortering': sorterEtternavn})}
+                            aria-pressed={sorterEtternavn}
+                            aria-label={sorterEtternavn ?
+                                currentSortering.direction : 'inaktiv'}
+                        >
+                            Etternavn
+                        </button>
+                        , Fornavn
+                    </th>
+                    <th scope="col">
+                        NAV-ident
+                    </th>
+                    <th className="tabell-element-center" scope="col">
+                        <button
+                            onClick={this.props.sorterPaaPortefoljestorrelse}
+                            className={
+                                classNames('lenke lenke--frittstaende',
+                                    {'valgt-sortering': sorterPaaPortefoljeStr})
+                            }
+                            aria-pressed={sorterPaaPortefoljeStr}
+                            aria-label={sorterPaaPortefoljeStr ?
+                                currentSortering.direction : 'inaktiv'}
+                        >
+                            Antall brukere
+                        </button>
+                    </th>
+                    <th/>
+                </tr>
+                </thead>
+                <tbody>
+                {veilederElementer}
+                </tbody>
+            </table>
         );
     }
 }

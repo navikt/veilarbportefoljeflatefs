@@ -79,18 +79,18 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
                                     </div>
 
                                     <div className="col-lg-9 col-md-12 col-sm-12">
+                                        <FiltreringLabelContainer
+                                            filtervalg={{
+                                                veiledere: lagLablerTilVeiledereMedIdenter(
+                                                    filtervalg.veiledere,
+                                                    veiledere.data.veilederListe,
+                                                    slettVeilederFilter
+                                                )
+                                            }}
+                                            filtergruppe="veiledere"
+                                            className="filtrering-label-container"
+                                        />
                                         <div className="sticky-container">
-                                            <FiltreringLabelContainer
-                                                filtervalg={{
-                                                    veiledere: lagLablerTilVeiledereMedIdenter(
-                                                        filtervalg.veiledere,
-                                                        veiledere.data.veilederListe,
-                                                        slettVeilederFilter
-                                                    )
-                                                }}
-                                                filtergruppe="veiledere"
-                                                className="filtrering-label-container"
-                                            />
                                             <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
                                                 {`Totalt ${veiledere.data.veilederListe.length} veiledere`}
                                             </Undertittel>

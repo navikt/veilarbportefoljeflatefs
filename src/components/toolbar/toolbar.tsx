@@ -15,6 +15,7 @@ interface ToolbarProps {
     children?: React.ReactNode;
     gjeldendeVeileder?: VeilederModell;
     antallTotalt: number;
+    id?: string;
 }
 
 const Toolbar = ({
@@ -24,8 +25,9 @@ const Toolbar = ({
                      visesAnnenVeiledersPortefolje,
                      gjeldendeVeileder,
                      antallTotalt,
+                     id
                  }: ToolbarProps) => (
-    <section className="toolbar blokk-xs">
+    <section className="toolbar blokk-xs" id={id}>
         <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
             <TildelVeileder
                 skalVises={filtergruppe in ListevisningType}
