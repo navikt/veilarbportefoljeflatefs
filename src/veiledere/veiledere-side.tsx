@@ -44,7 +44,7 @@ type VeiledereSideProps = StateProps & DispatchProps & RouterProps;
 class VeiledereSide extends React.Component<VeiledereSideProps> {
     componentWillMount() {
         const { valgtEnhet } = this.props;
-        leggEnhetIUrl(valgtEnhet!);
+        //leggEnhetIUrl(valgtEnhet!);
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
         this.settInitalStateFraUrl();
     }

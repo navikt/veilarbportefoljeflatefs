@@ -1,11 +1,11 @@
 import { STATUS } from './utils';
 import { Action, Dispatch } from 'redux';
 import { AppState } from '../reducer';
-import { hentEnhetTiltak } from './enhettiltak';
-import { hentVeiledereForEnhet } from './veiledere';
 import {OrNothing} from "../utils/types/types";
 import {pagineringSetup} from "./paginering";
-import {leggEnhetIUrl} from "../utils/url-utils";
+import {IKKE_SATT} from "../konstanter";
+import {hentPortefoljeForEnhet, hentPortefoljeForVeileder} from "./portefolje";
+import {hentStatusTall} from "./statustall";
 
 // Actions
 const PENDING = 'veilarbportefolje/enheter/PENDING';
@@ -42,14 +42,13 @@ export default function reducer(state: ValgtEnhetState = initialState, action): 
 
 
 export function velgEnhetForVeileder(valgtEnhet) {
-    const enhetId = valgtEnhet.enhetId ? valgtEnhet.enhetId : valgtEnhet;
     return {
         type: OK,
         valgtEnhet: valgtEnhet
     };
 }
 
-export function oppdaterValgtEnhet(nyEnhet: string, history: any) {
+export function oppdaterValgtEnhet(nyEnhet: string) {
     return (dispatch: Dispatch<Action, AppState>, getState: () => AppState) => {
         const state = getState();
         const valgtEnhet = state.valgtEnhet.data;
@@ -57,10 +56,30 @@ export function oppdaterValgtEnhet(nyEnhet: string, history: any) {
         if(valgtEnhet && valgtEnhet.enhetId === nyEnhet ) {
             return;
         }
-        history.push("?enhet=" + nyEnhet);
         dispatch(velgEnhetForVeileder(nyEnhet));
-        //leggSideIUrl(1);
-        //leggSeAlleIUrl(false);
         dispatch(pagineringSetup({side: 1, seAlle: false}));
     };
+}
+
+
+
+export function fetchData (uri: any) {
+    return (dispatch: Dispatch<Action, AppState>, getState: () => AppState) => {
+        const state = getState();
+        const nyEnhet = state.valgtEnhet.data.enhetId;
+        if(!nyEnhet) {
+            return;
+        }
+        if (uri.includes('/portefolje')) {
+            const valgtVeileder = state.portefolje.veileder.ident;
+            const veilederIdent = valgtVeileder === IKKE_SATT ? state.inloggetVeileder.data!.ident : valgtVeileder;
+            dispatch(hentPortefoljeForVeileder(nyEnhet, veilederIdent, IKKE_SATT, IKKE_SATT, state.filtreringMinoversikt));
+            dispatch(hentStatusTall(nyEnhet, veilederIdent));
+        } else if(uri.includes('/enhet')) {
+            dispatch(hentPortefoljeForEnhet(nyEnhet, IKKE_SATT, IKKE_SATT, state.filtrering));
+            dispatch(hentStatusTall(nyEnhet));
+        } else if(uri.includes('/veiledere')) {
+            dispatch(hentStatusTall(nyEnhet));
+        }
+    }
 }

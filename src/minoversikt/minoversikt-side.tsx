@@ -70,10 +70,10 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
 
         this.settInitalStateFraUrl();
         loggSkjermMetrikker(Side.MIN_OVERSIKT);
-        loggSideVisning(innloggetVeilederIdent, Side.MIN_OVERSIKT);
+        //loggSideVisning(innloggetVeilederIdent, Side.MIN_OVERSIKT);
 
-        this.props.hentStatusTall(valgtEnhetId || '', gjeldendeVeileder.ident);
-        this.props.hentEnhetTiltak(valgtEnhetId || '');
+        //this.props.hentStatusTall(valgtEnhetId || '', gjeldendeVeileder.ident);
+        //this.props.hentEnhetTiltak(valgtEnhetId || '');
 
         this.props.doSettValgtVeileder(gjeldendeVeileder);
 
@@ -81,9 +81,7 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
         const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
         this.props.doSettSortering(sorteringsrekkefolge, sorteringsfelt);
 
-        hentPortefolje(
-            valgtEnhetId, gjeldendeVeileder.ident, sorteringsrekkefolge, sorteringsfelt, filtervalg
-        );
+        //hentPortefolje(valgtEnhetId, gjeldendeVeileder.ident, sorteringsrekkefolge, sorteringsfelt, filtervalg);
 
     }
 

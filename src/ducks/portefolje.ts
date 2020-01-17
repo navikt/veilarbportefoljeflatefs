@@ -229,7 +229,7 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder) {
     const sorteringfelt = state.portefolje.sorteringsfelt;
     const nyeFiltervalg = state[nameToStateSliceMap[filtergruppe]];
 
-    leggSideIUrl(1);
+    //leggSideIUrl(1);
     dispatch(pagineringSetup({side: 1}));
 
     if (filtergruppe === 'enhet') {

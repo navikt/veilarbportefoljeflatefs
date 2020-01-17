@@ -115,6 +115,19 @@ mock.get('/veilarbveileder/api/veileder/enheter', enheter);
 mock.get('/veilarbveileder/api/veileder/me', me);
 mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', veiledere);
 mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', true);
+mock.get('//veilarbveileder/api/veileder/enheter', {
+    ident: me.ident,
+    enhetliste: [
+        {
+            "enhetId":"1234",
+            "navn":"NAV Testheim"
+        },
+        {
+            "enhetId":"0001",
+            "navn":"NAV Testdalen"
+        }
+    ]
+});
 
 // portefolje-api
 mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', ResponseUtils.delayed(1000, statustall));

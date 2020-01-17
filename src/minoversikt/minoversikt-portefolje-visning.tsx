@@ -46,7 +46,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             valgtEnhet,
         } = this.props;
 
-        leggEnhetIUrl(valgtEnhet!);
+        //leggEnhetIUrl(valgtEnhet!);
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
@@ -67,9 +67,7 @@ class VeilederPortefoljeVisning extends React.Component<VeilederPortefoljeVisnin
             valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
         doSettSortering(valgtRekkefolge, felt);
-        hentPortefolje(
-            valgtEnhet, gjeldendeVeileder.ident, valgtRekkefolge, felt, filtervalg
-        );
+        //hentPortefolje(valgtEnhet, gjeldendeVeileder.ident, valgtRekkefolge, felt, filtervalg);
     }
 
     lagToolbar = (posisjon: ToolbarPosisjon) => {

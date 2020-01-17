@@ -1,15 +1,10 @@
-import React, {PropsWithChildren, useCallback, useState} from 'react';
+import React, { useCallback } from 'react';
 import NAVSPA from "@navikt/navspa";
-import {DecoratorProps} from "./utils/types/decorator-props";
-import {useDispatch, useSelector} from "react-redux";
-import { oppdaterValgtEnhet } from "./ducks/valgt-enhet";
-import * as queryString from "query-string";
+import { DecoratorProps } from "./utils/types/decorator-props";
+import { useDispatch } from "react-redux";
 import {OrNothing} from "./utils/types/types";
-import {AppState} from "./reducer";
-import {useHistory, useLocation} from "react-router";
-import InitialDataProvider from "./providers/initial-data-provider";
-import Routes from "./routes";
-import {CustomRedirect} from "./components/redirect/veilarbportefolje-redirect";
+import {oppdaterValgtEnhet} from "./ducks/valgt-enhet";
+import {useEnhetSelector} from "./hooks/redux/use-enhet-selector";
 
 
 const InternflateDecorator = NAVSPA.importer<DecoratorProps>('internarbeidsflatefs');
@@ -39,13 +34,10 @@ function getConfig (
 
 export function Decorator() {
     const dispatch = useDispatch();
-
-    const searchQuery = useLocation().search;
-    const enhetId = queryString.parse(searchQuery).enhet;
-    const history = useHistory();
+    const enhetId = useEnhetSelector();
 
     function velgEnhet(enhet) {
-        dispatch(oppdaterValgtEnhet(enhet, history));
+        dispatch(oppdaterValgtEnhet(enhet));
     }
 
     const config = useCallback(getConfig, [enhetId, velgEnhet])(enhetId, velgEnhet);

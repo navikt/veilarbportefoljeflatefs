@@ -9,8 +9,6 @@ import { FiltreringStatus } from './filtrering-status/filtrering-status';
 import { useEffect } from 'react';
 import { hentLagretFilterForEnhet } from '../ducks/lagret-filter';
 import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-veileder-grupper';
-import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
-import { VIS_VEILEDER_GRUPPER } from '../konstanter';
 import { useEnhetSelector } from '../hooks/redux/use-enhet-selector';
 import { OrNothing } from '../utils/types/types';
 import { Tiltak } from '../ducks/enhettiltak';
@@ -27,17 +25,15 @@ interface FiltreringContainerProps {
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
     veileder?: VeilederModell;
-    valgtEnhet?: OrNothing<string>
 }
 
-function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeileder, enhettiltak, valgtEnhet}: FiltreringContainerProps) {
+function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeileder, enhettiltak}: FiltreringContainerProps) {
 
     const dispatch = useDispatch();
-
+    const valgtEnhet = useEnhetSelector();
 
     useEffect(() => {
         if (valgtEnhet) {
-            console.log("hentValgtEnhet", valgtEnhet);
             dispatch(hentLagretFilterForEnhet(valgtEnhet));
         }
     }, [dispatch, valgtEnhet]);

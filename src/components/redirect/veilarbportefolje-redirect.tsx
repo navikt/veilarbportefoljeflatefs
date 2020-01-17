@@ -1,24 +1,14 @@
-import React, {PropsWithChildren, useEffect} from 'react';
-import {useHistory, useLocation} from "react-router";
+import React, {useEffect, useState} from 'react';
+import {RouteProps, useHistory, useLocation} from "react-router";
+import {useOnMount} from "../../hooks/use-on-mount";
+import {useDispatch} from "react-redux";
+import {useQueryParams} from "../../hooks/use-query-params";
+import {velgEnhetForVeileder} from "../../ducks/valgt-enhet";
+import NavFrontendSpinner from "nav-frontend-spinner";
+import {useEnhetSelector} from "../../hooks/redux/use-enhet-selector";
 
-export function CustomRedirect(props: PropsWithChildren<{}>) {
-    const history = useHistory();
-    const pathname = useLocation().pathname;
 
 
-    const lastPath = localStorage.getItem('lastpath');
-    const lastSearch = localStorage.getItem('lastsearch') || '';
-
-    useEffect(()=> {
-        if (lastPath && pathname === '/tilbake') {
-            history.replace({pathname: lastPath, search: lastSearch});
-        }
-    },[history, lastSearch, lastPath, pathname]);
-
-    return (
-        <>
-            {props.children}
-        </>
-    )
+export function VeilarbPortefoljeRedirect(props: RouteProps) {
 
 }

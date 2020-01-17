@@ -7,7 +7,6 @@ import * as moment from 'moment';
 import Modal from 'nav-frontend-modal';
 import {Decorator} from "./decorator";
 import InitialDataProvider from "./providers/initial-data-provider";
-import {CustomRedirect} from "./components/redirect/veilarbportefolje-redirect";
 
 if (process.env.NODE_ENV !== 'test') {
     Modal.setAppElement('#applikasjon');
@@ -21,12 +20,10 @@ function Application() {
     return (
         <Provider store={store}>
             <BrowserRouter basename="/veilarbportefoljeflatefs">
-                <CustomRedirect>
+                <InitialDataProvider>
                     <Decorator/>
-                    <InitialDataProvider>
-                        <Routes/>
-                    </InitialDataProvider>
-                </CustomRedirect>
+                    <Routes/>
+                </InitialDataProvider>
             </BrowserRouter>
         </Provider>
     );

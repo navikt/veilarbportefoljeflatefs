@@ -14,8 +14,8 @@ function Lenker() {
     const veilederIdent = veileder && veileder.ident;
     const {ident} = useParams();
 
-    const aktivLink = ident ?
-        veilederIdent === ident
+    const aktivLink = ident
+        ? veilederIdent === ident
             ? 'oversiktslenke--valgt'
             : ''
         : 'oversiktslenke--valgt';

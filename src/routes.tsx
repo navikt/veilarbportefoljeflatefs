@@ -8,6 +8,10 @@ import MinOversiktSide from './minoversikt/minoversikt-side';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
 import { loggBrowserMetrikker } from './utils/metrikker/browser-metrikker';
 import {useDispatchStatustallInnloggetveileder} from "./hooks/redux/use-dispatch-statustall-innloggetveileder";
+import {VeilarbPortefoljeRedirect} from "./components/redirect/veilarbportefolje-redirect";
+import Lenker from "./lenker/lenker";
+import Toasts from "./components/toast/toast";
+import {ToppMeny} from "./components/topp-meny/topp-meny";
 
 loggBrowserMetrikker();
 
@@ -18,6 +22,7 @@ function Routes() {
     return (
         <div className="portefolje">
             <div className={classnames('maincontent', 'side-innhold')}>
+                <ToppMeny/>
                 <Switch>
                     <Route
                         path="/enhet"
@@ -35,7 +40,6 @@ function Routes() {
                         path="/portefolje"
                         component={MinOversiktSide}
                     />
-                    <Redirect to="/enhet"/>
                 </Switch>
                 <TilbakemeldingFab/>
             </div>

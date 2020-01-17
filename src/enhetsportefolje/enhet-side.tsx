@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import Lenker from '../lenker/lenker';
 import Innholdslaster from '../innholdslaster/innholdslaster';
@@ -8,7 +8,7 @@ import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl} from '../utils/url-utils';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
-import { EnhettiltakState } from '../ducks/enhettiltak';
+import {EnhettiltakState, hentEnhetTiltak} from '../ducks/enhettiltak';
 import TomPortefoljeModal from '../components/modal/tom-portefolje-modal';
 import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import { AppState } from '../reducer';
@@ -19,102 +19,61 @@ import FiltreringContainer, { defaultVeileder } from '../filtrering/filtrering-c
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './enhet-side.less';
-import Toasts from '../components/toast/toast';
-import { slettEnkeltFilter } from '../ducks/filtrering';
 import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
 import { OrNothing } from "../utils/types/types";
+import {EnhetFilter} from "./enhet-filter";
+import {useOnMount} from "../hooks/use-on-mount";
+import {useEffect} from "react";
+import {useEnhetSelector} from "../hooks/redux/use-enhet-selector";
+import {useIdentSelector} from "../hooks/redux/use-inlogget-ident";
+import {EnhetStatusFilter} from "./enhet-status-filter";
 
-interface StateProps {
-    valgtEnhet: OrNothing<string>;
-    filtervalg: FiltervalgModell;
-    veilederliste: VeilederModell[];
-    statustall: StatustallState;
-    enhettiltak: EnhettiltakState;
-    listevisning: ListevisningState;
-    innloggetVeilederIdent: string | undefined;
-}
+function EnhetSide () {
 
-interface DispatchProps {
-    hentStatusTall: (enhetId: string) => void;
-    initalPaginering: (side: number, seAlle: boolean) => void;
-    slettVeilederFilter: (ident: string) => void;
-}
+    const dispatch = useDispatch();
+    const enhet = useEnhetSelector();
+    const innloggetVeilederIdent = useIdentSelector();
+    const statustall = useSelector((state: AppState) => state.statustall);
+    const enhettiltak = useSelector((state: AppState) => state.enhettiltak);
 
-type EnhetSideProps = StateProps & DispatchProps;
-
-class EnhetSide extends React.Component<EnhetSideProps> {
-
-    componentWillMount() {
-        this.settInitalStateFraUrl();
+    useOnMount(()=> {
         loggSkjermMetrikker(Side.ENHETENS_OVERSIKT);
-        loggSideVisning(this.props.innloggetVeilederIdent, Side.ENHETENS_OVERSIKT);
-    }
+        loggSideVisning(innloggetVeilederIdent, Side.ENHETENS_OVERSIKT);
+        leggEnhetIUrl(enhet);
+        settInitalStateFraUrl();
 
-    settInitalStateFraUrl() {
+    });
+
+    function settInitalStateFraUrl() {
         const side = getSideFromUrl();
         const seAlle = getSeAlleFromUrl();
-        this.props.initalPaginering(side, seAlle);
+        dispatch(pagineringSetup({side, seAlle}))
     }
 
-    componentDidMount() {
-        this.props.hentStatusTall(this.props.valgtEnhet!);
-    }
+    useEffect(()=> {
+        if(enhet) {
+            dispatch(hentStatusTall(enhet));
+            dispatch(hentEnhetTiltak(enhet));
+        }
+    },[enhet]);
 
-    render() {
-        const {filtervalg, veilederliste, statustall, enhettiltak, listevisning, slettVeilederFilter} = this.props;
-        const tiltak = sortTiltak(enhettiltak.data.tiltak);
-
-        return (
-            <DocumentTitle title="Enhetens oversikt">
-                <div className="enhet-side blokk-xl">
-                    <Lenker/>
-                    <Toasts/>
-                    <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                        <div id="oversikt-sideinnhold" role="tabpanel">
-                            <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
-                                <FiltreringContainer
-                                    filtervalg={filtervalg}
-                                    enhettiltak={tiltak}
-                                    filtergruppe="enhet"
-                                    valgtEnhet={this.props.valgtEnhet}
-                                />
-                            </div>
-                            <div className="col-lg-9 col-md-12 col-sm-12">
-                                <FiltreringLabelContainer
-                                    filtervalg={{
-                                        ...filtervalg,
-                                        veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
-                                    }}
-                                    filtergruppe="enhet"
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    listevisning={listevisning}
-                                />
-                                <ListevisningInfoPanel name={ListevisningType.enhetensOversikt}/>
-                                <EnhetsportefoljeVisning/>
-                                <TomPortefoljeModal/>
-                            </div>
+    return (
+        <DocumentTitle title="Enhetens oversikt">
+            <div className="enhet-side blokk-xl">
+                <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
+                    <div id="oversikt-sideinnhold" role="tabpanel">
+                        <EnhetStatusFilter/>
+                        <div className="col-lg-9 col-md-12 col-sm-12">
+                            <EnhetFilter/>
+                            <ListevisningInfoPanel name={ListevisningType.enhetensOversikt}/>
+                            <EnhetsportefoljeVisning/>
+                            <TomPortefoljeModal/>
                         </div>
-                    </Innholdslaster>
-                </div>
-            </DocumentTitle>
-        );
-    }
+                    </div>
+                </Innholdslaster>
+            </div>
+        </DocumentTitle>
+    );
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
-    valgtEnhet: state.valgtEnhet.data.enhetId,
-    filtervalg: state.filtrering,
-    veilederliste: state.veiledere.data.veilederListe,
-    statustall: state.statustall,
-    enhettiltak: state.enhettiltak,
-    listevisning: state.ui.listevisningEnhetensOversikt,
-    innloggetVeilederIdent: state.inloggetVeileder.data!.ident,
-});
-
-const mapDispatchToProps = (dispatch): DispatchProps => ({
-    hentStatusTall: (enhet) => dispatch(hentStatusTall(enhet)),
-    initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
-    slettVeilederFilter: (ident: string) => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet', defaultVeileder))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EnhetSide);
+export default EnhetSide;
