@@ -8,9 +8,10 @@ interface TabellOverskriftProps {
     antallIVisning: number;
     antallTotalt: number;
     antallValgt: number;
+    className: string;
 }
 
-function TabellOverskrift({fraIndex, antallIVisning, antallTotalt, antallValgt}: TabellOverskriftProps) {
+function TabellOverskrift({fraIndex, antallIVisning, antallTotalt, antallValgt, className}: TabellOverskriftProps) {
     const fixedFraIndex = antallTotalt === 0 ? 0 : 1;
     const fraIndexMax = Math.max(fraIndex, fixedFraIndex);
     const tilIndex = fraIndex + antallIVisning;
@@ -19,7 +20,7 @@ function TabellOverskrift({fraIndex, antallIVisning, antallTotalt, antallValgt}:
     const antallValgteBrukere = tekstValgteBrukere (antallValgt);
 
     return (
-        <Element tag="h1" className="tabelloverskrift blokk-xxs">
+        <Element tag="h1" className={className}>
             <strong aria-live="polite" aria-atomic="true">
                 {tekst}
                 {antallValgteBrukere}

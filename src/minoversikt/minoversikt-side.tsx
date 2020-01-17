@@ -158,7 +158,6 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
         const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
-
         return (
             <DocumentTitle title="Min oversikt">
                 <div className="minoversikt-side blokk-xl">
@@ -185,12 +184,14 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                                     veileder={gjeldendeVeileder}
                                                     enhettiltak={enhettiltak.data.tiltak}
                                                     listevisning={listevisning}
+                                                    className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                                 />
                                                 <TabellOverskrift
                                                     fraIndex={fraIndex}
                                                     antallIVisning={antallReturnert}
                                                     antallTotalt={antallTotalt}
                                                     antallValgt={antallValgt}
+                                                    className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'} //tabelloverskrift blokk-xxs
                                                 />
                                                 <div className="sticky-container__skygge">
                                                     <Toolbar

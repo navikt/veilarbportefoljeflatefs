@@ -17,6 +17,7 @@ interface FiltreringLabelContainerProps {
     filtervalg: FiltervalgModell;
     filtergruppe: string;
     listevisning?: ListevisningState;
+    className: string;
 }
 
 function getKolonneFraLabel(label) {
@@ -39,7 +40,7 @@ function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
     return false;
 }
 
-function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}, filtergruppe}: FiltreringLabelContainerProps) {
+function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}, filtergruppe, className}: FiltreringLabelContainerProps) {
     let muligMenIkkeValgt: boolean;
     let kolonne: Kolonne | null;
     const filterElementer = Object.entries(filtervalg)
@@ -118,7 +119,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                                        harMuligMenIkkeValgtKolonne={false} skalHaKryssIkon={false}/>;
 
     return (
-        <section className="filtrering-label-container">
+        <section className={className}>
             {filterElementer}
             {filterElementer.length >= 3 ? fjernAlle : null}
         </section>
