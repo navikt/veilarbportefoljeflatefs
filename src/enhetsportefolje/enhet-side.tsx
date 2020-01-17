@@ -43,7 +43,6 @@ interface StateProps {
     listevisning: ListevisningState;
     innloggetVeilederIdent: string | undefined;
     portefolje: any;
-    visningsmodus: string;
     sorteringsrekkefolge: string;
     sorteringsfelt: string;
     veiledere: any;
@@ -129,7 +128,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
             listevisning,
             slettVeilederFilter,
             portefolje,
-            visningsmodus,
             hentPortefolje,
             valgtEnhet,
             sorteringsrekkefolge,
@@ -158,6 +156,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                             filtergruppe="enhet"
                                         />
                                     </div>
+
                                     <div className="col-lg-9 col-md-12 col-sm-12">
                                         <div className="sticky-container">
                                             <FiltreringLabelContainer
@@ -187,7 +186,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                                         filtervalg
                                                     )}
                                                     sokVeilederSkalVises
-                                                    visningsmodus={visningsmodus}
                                                     antallTotalt={antallTotalt}
                                                 />
                                                 <EnhetTabellOverskrift
@@ -227,7 +225,6 @@ const mapStateToProps = (state) => ({
     veiledere: state.veiledere,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
     sorteringsfelt: state.portefolje.sorteringsfelt,
-    visningsmodus: state.paginering.visningsmodus,
     sideStorrelse: selectSideStorrelse(state),
 });
 

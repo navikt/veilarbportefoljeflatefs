@@ -14,7 +14,6 @@ interface ToolbarProps {
     visesAnnenVeiledersPortefolje?: boolean;
     children?: React.ReactNode;
     gjeldendeVeileder?: VeilederModell;
-    visningsmodus?: string;
     antallTotalt: number;
 }
 
@@ -24,7 +23,6 @@ const Toolbar = ({
                      sokVeilederSkalVises,
                      visesAnnenVeiledersPortefolje,
                      gjeldendeVeileder,
-                     visningsmodus,
                      antallTotalt,
                  }: ToolbarProps) => (
     <section className="toolbar blokk-xs">
