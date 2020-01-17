@@ -4,7 +4,7 @@ import {
     VEILEDER_SOKT_FRA_TOOLBAR
 } from '../ducks/filtrering';
 import { logEvent } from '../utils/frontend-logger';
-import { SETT_VISNINGSMODUS, SETUP } from '../ducks/paginering';
+import { SETUP } from '../ducks/paginering';
 import { SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER } from '../ducks/portefolje';
 import { ActionTypeKeys, Kolonne } from '../ducks/ui/listevisning';
 import { VIS_ARBEIDSLISTE_MODAL } from '../ducks/modal';

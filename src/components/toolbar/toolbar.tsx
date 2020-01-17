@@ -4,7 +4,7 @@ import LeggTilArbeidsliste from './legg-til-arbeidsliste';
 import SokVeileder from './sok-veileder';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
-import { ListevisningType, Veilederpaginering } from '../../ducks/ui/listevisning';
+import { ListevisningType } from '../../ducks/ui/listevisning';
 import { VeilederModell } from '../../model-interfaces';
 
 interface ToolbarProps {
@@ -48,7 +48,6 @@ const Toolbar = ({
             <Paginering
                 className="toolbar--skille-mellom-elementer"
                 onChange={onPaginering}
-                skjul={visningsmodus === Veilederpaginering.DIAGRAMVISNING}
                 antallTotalt={antallTotalt}
             />
         </div>
