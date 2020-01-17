@@ -67,40 +67,35 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
                     <Lenker/>
                     <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
                         <section>
-                            <div className="veiledere-side veiledere-side--cols">
-                                <div id="oversikt-sideinnhold" role="tabpanel">
-                                    <div className="row">
+                            <div id="oversikt-sideinnhold" role="tabpanel">
+                                <div className="row">
+                                    <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
+                                        <PanelBase className="blokk-xxxs sok-veileder">
+                                            <Undertittel>
+                                                Søk veileder
+                                            </Undertittel>
+                                            <FiltreringVeiledere/>
+                                        </PanelBase>
+                                    </div>
 
-                                        <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
-                                            {/*<div className="veiledere-side--filter-col">*/}
-                                            <PanelBase className="blokk-xxxs sok-veileder">
-                                                <Undertittel>
-                                                    Søk veileder
-                                                </Undertittel>
-                                                <FiltreringVeiledere/>
-                                            </PanelBase>
+                                    <div className="col-lg-9 col-md-12 col-sm-12">
+                                        <div className="sticky-container">
+                                            <FiltreringLabelContainer
+                                                filtervalg={{
+                                                    veiledere: lagLablerTilVeiledereMedIdenter(
+                                                        filtervalg.veiledere,
+                                                        veiledere.data.veilederListe,
+                                                        slettVeilederFilter
+                                                    )
+                                                }}
+                                                filtergruppe="veiledere"
+                                                className="filtrering-label-container"
+                                            />
+                                            <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
+                                                {`Totalt ${veiledere.data.veilederListe.length} veiledere`}
+                                            </Undertittel>
                                         </div>
-
-                                        {/*<div className="veiledere-side--liste-col">*/}
-                                        <div className="col-lg-9 col-md-12 col-sm-12">
-                                            <div className="sticky-container">
-                                                <FiltreringLabelContainer
-                                                    filtervalg={{
-                                                        veiledere: lagLablerTilVeiledereMedIdenter(
-                                                            filtervalg.veiledere,
-                                                            veiledere.data.veilederListe,
-                                                            slettVeilederFilter
-                                                        )
-                                                    }}
-                                                    filtergruppe="veiledere"
-                                                    className="filtrering-label-container"
-                                                />
-                                                <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
-                                                    {`Totalt ${veiledere.data.veilederListe.length} veiledere`}
-                                                </Undertittel>
-                                                <VeiledersideVisning/>
-                                            </div>
-                                        </div>
+                                        <VeiledersideVisning/>
                                     </div>
                                 </div>
                             </div>

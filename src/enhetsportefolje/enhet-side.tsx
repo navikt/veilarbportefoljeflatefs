@@ -98,7 +98,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
         } else {
             valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
-
         doSettSortering(valgtRekkefolge, felt);
         hentPortefolje(
             valgtEnhet.enhet!.enhetId,
@@ -156,7 +155,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                             filtergruppe="enhet"
                                         />
                                     </div>
-
                                     <div className="col-lg-9 col-md-12 col-sm-12">
                                         <div className="sticky-container">
                                             <FiltreringLabelContainer
