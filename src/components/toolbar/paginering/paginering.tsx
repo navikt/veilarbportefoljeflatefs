@@ -6,6 +6,7 @@ import KnappPanel from './knapp-panel';
 import { leggSeAlleIUrl, leggSideIUrl } from '../../../utils/url-utils';
 import { pagineringSetup } from '../../../ducks/paginering';
 import { selectSeAlle, selectSide, selectSideStorrelse } from './paginering-selector';
+import './paginering.less';
 
 interface StateProps {
     side: number;

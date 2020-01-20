@@ -1,8 +1,8 @@
 import Endringslogg from './endringslogg';
-import {default as React, useEffect, useState} from 'react';
-import {EndringsloggInnleggMedSettStatus, mapRemoteToState, setHarSettAlt} from './utils/endringslogg-custom';
-import {useIdentSelector} from '../../hooks/redux/use-enheter-ident';
-import {useTimer} from '../../hooks/use-timer';
+import { default as React, useEffect, useState } from 'react';
+import { EndringsloggInnleggMedSettStatus, mapRemoteToState, setHarSettAlt } from './utils/endringslogg-custom';
+import { useIdentSelector } from '../../hooks/redux/use-enheter-ident';
+import { useTimer } from '../../hooks/use-timer';
 import {
     hentSetteVersjonerLocalstorage,
     hentSetteVersjonerRemotestorage,
@@ -11,8 +11,10 @@ import {
     registrerInnholdIRemoteStorage,
     slettersjonerLocalstorage
 } from './utils/endringslogg-utils';
-import {logEvent} from '../../utils/frontend-logger';
-import {registrerSettInnlegg} from './utils/endringslogg-api';
+import { logEvent } from '../../utils/frontend-logger';
+import { registrerSettInnlegg } from './utils/endringslogg-api';
+import './endringslogg.less';
+import './collapse-container-transition.less';
 
 function EndringsloggTourWrapper() {
     const veilederIdent = useIdentSelector();
@@ -22,21 +24,20 @@ function EndringsloggTourWrapper() {
 
     useEffect(() => {
         const listeEndringsVersjoner = hentSetteVersjonerLocalstorage();
-        if(listeEndringsVersjoner.length > 0 ) {
+        if (listeEndringsVersjoner.length > 0) {
             registrerSettInnlegg(listeEndringsVersjoner.join(','))
                 .then(() => hentSetteVersjonerRemotestorage()
                     .then(resp => {
                         setInnholdsliste(mapRemoteToState(resp));
                         slettersjonerLocalstorage();
                     }))
-                .catch(() => setInnholdsliste(setHarSettAlt))
+                .catch(() => setInnholdsliste(setHarSettAlt));
         } else {
             hentSetteVersjonerRemotestorage()
                 .then(resp => setInnholdsliste(mapRemoteToState(resp)))
                 .catch(() => setInnholdsliste(setHarSettAlt));
         }
     }, []);
-
 
     const registrerInnholdRemote = async (innhold: EndringsloggInnleggMedSettStatus[]) => {
         await registrerInnholdIRemoteStorage(innhold);
@@ -45,7 +46,7 @@ function EndringsloggTourWrapper() {
     const onClose = () => {
         const ulestFelt = innholdsListe.some((element) => !element.sett);
         const tidBrukt = stoppTimer();
-        if(veilederIdent) {
+        if (veilederIdent) {
             krypterVeilederident(veilederIdent)
                 .then((res) =>
                     logEvent('portefolje.endringslogg', {

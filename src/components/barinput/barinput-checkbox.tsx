@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler } from 'react';
 import BarInput from './barinput';
 import { ferdigfilterListe, mapFilternavnTilFilterValue } from '../../filtrering/filter-konstanter';
+import './barlabel.less';
 
 interface BarInputCheckboxProps {
     filterNavn: string;
@@ -10,7 +11,7 @@ interface BarInputCheckboxProps {
     antall: number;
 }
 
-function BarInputCheckbox({filterNavn, max, handleChange, checked, antall}: BarInputCheckboxProps ) {
+function BarInputCheckbox({filterNavn, max, handleChange, checked, antall}: BarInputCheckboxProps) {
     const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
     const labelTekst = ferdigfilterListe[filterVerdi];
     return (

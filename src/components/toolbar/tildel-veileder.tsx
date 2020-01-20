@@ -8,6 +8,7 @@ import SokFilterNy from './sok-filter-ny';
 import { useState } from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import classNames from 'classnames';
+import './toolbar.less';
 
 interface TildelVeilederProps {
     skalVises: boolean;

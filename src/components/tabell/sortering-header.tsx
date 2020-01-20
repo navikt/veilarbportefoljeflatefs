@@ -4,6 +4,7 @@ import { Sorteringsfelt, Sorteringsrekkefolge } from '../../model-interfaces';
 import Header, { HeaderProps } from './header';
 import { ReactComponent as PilAscending } from './arrow-up.svg';
 import { ReactComponent as PilDescending } from './arrow-down.svg';
+import './tabell.less';
 
 interface SorteringHeaderProps extends HeaderProps {
     sortering: Sorteringsfelt;

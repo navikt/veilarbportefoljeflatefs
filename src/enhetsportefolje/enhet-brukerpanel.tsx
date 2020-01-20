@@ -6,6 +6,8 @@ import { Kolonne } from '../ducks/ui/listevisning';
 import CheckBox from '../components/tabell/checkbox';
 import EnhetKolonner from './enhet-kolonner';
 import { useLayoutEffect, useRef } from 'react';
+import './enhetsportefolje.less';
+import './brukerliste.less';
 
 interface EnhetBrukerpanelProps {
     bruker: any;

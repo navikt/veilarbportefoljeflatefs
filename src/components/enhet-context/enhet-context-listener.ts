@@ -1,4 +1,5 @@
 import WebSocketImpl from './websocket-impl';
+import './enhet-context.less';
 
 const frontendlogger = (window as any).frontendlogger;
 const warn = (frontendlogger && frontendlogger.warn) || (() => null);
@@ -49,17 +50,17 @@ export default class EnhetContextListener {
     }
 
     private onOpen(e: Event) {
-        this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.CONNECTED });
+        this.callback({type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.CONNECTED});
     }
 
     private onMessage(e: MessageEvent) {
-         if(e.data === EventMessages.NY_AKTIV_ENHET) {
-            this.callback({ type: EnhetContextEventNames.NY_AKTIV_ENHET });
+        if (e.data === EventMessages.NY_AKTIV_ENHET) {
+            this.callback({type: EnhetContextEventNames.NY_AKTIV_ENHET});
         }
     }
 
     private onError(errorEvent: ErrorEvent) {
-        this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.FAILED });
+        this.callback({type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.FAILED});
         const webSocket = (errorEvent.srcElement as any);
         warn({
             ...errorEvent,
@@ -68,6 +69,9 @@ export default class EnhetContextListener {
     }
 
     private onClose() {
-        this.callback({ type: EnhetContextEventNames.CONNECTION_STATE_CHANGED, state: EnhetConnectionState.NOT_CONNECTED });
+        this.callback({
+            type: EnhetContextEventNames.CONNECTION_STATE_CHANGED,
+            state: EnhetConnectionState.NOT_CONNECTED
+        });
     }
 }

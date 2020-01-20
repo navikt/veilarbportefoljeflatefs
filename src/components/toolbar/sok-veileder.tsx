@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import DropdownNy from '../dropdown/dropdown-ny';
 import classNames from 'classnames';
 import SokVeiledere from '../sok-veiledere/sok-veiledere';
+import './toolbar.less';
 
 interface SokVeilederProps {
     filtervalg: FiltervalgModell;

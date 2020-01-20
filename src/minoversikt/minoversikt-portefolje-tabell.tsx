@@ -5,6 +5,7 @@ import { settBrukerSomMarkert } from '../ducks/portefolje';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
 import { useForrigeBruker } from '../hooks/use-forrige-bruker';
+import './minoversikt.less';
 
 interface MinOversiktTabellProps {
     innloggetVeileder: string;

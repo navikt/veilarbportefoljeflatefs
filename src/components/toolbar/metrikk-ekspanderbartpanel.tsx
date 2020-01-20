@@ -4,6 +4,7 @@ import { logEvent } from '../../utils/frontend-logger';
 import { finnSideNavn } from '../../middleware/metrics-middleware';
 import { PropsWithChildren, useState } from 'react';
 import hiddenIf from '../hidden-if/hidden-if';
+import './toolbar.less';
 
 interface MetrikkEkspanderbartpanelProps {
     lamellNavn: string;

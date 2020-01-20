@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
-import {Radio} from "nav-frontend-skjema";
+import { Radio } from 'nav-frontend-skjema';
+import './radio-filterform.less';
 
-export function RadioFilterformNy({ filterId, onSubmit, valg, closeDropdown, filtervalg }) {
+export function RadioFilterformNy({filterId, onSubmit, valg, closeDropdown, filtervalg}) {
 
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[filterId]);
 
-
     const createHandleOnSubmit = () => {
-        if(valgtFilterValg) {
+        if (valgtFilterValg) {
             onSubmit(filterId, valgtFilterValg);
         }
         closeDropdown();
@@ -25,7 +25,7 @@ export function RadioFilterformNy({ filterId, onSubmit, valg, closeDropdown, fil
                         className={valg[v].className}
                         checked={valgtFilterValg === v}
                         onChange={e => setValgteFilterValg(e.target.value)}
-                />)}
+                    />)}
             </div>
             <div className="checkbox-filterform__under-valg">
                 <div
@@ -33,7 +33,7 @@ export function RadioFilterformNy({ filterId, onSubmit, valg, closeDropdown, fil
                 >
                     <button onClick={createHandleOnSubmit}
                             className={classNames('knapp', 'knapp--mini', {'knapp--hoved': valgtFilterValg})}>
-                        {valgtFilterValg ? "Velg" : "Lukk"}
+                        {valgtFilterValg ? 'Velg' : 'Lukk'}
                     </button>
                 </div>
             </div>

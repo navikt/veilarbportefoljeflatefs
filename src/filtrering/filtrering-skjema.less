@@ -1,43 +1,46 @@
+@import "~nav-frontend-core/less/core";
 @lg-screen: 1200px;
 @xl-screen: 1600px;
 
-.skjemaelement--innrykk {
-    margin-left: 1.25rem;
-}
+.veilarbportefoljeflatefs {
+    .skjemaelement--innrykk {
+        margin-left: 1.25rem;
+    }
 
-.dropdown--fixed .dropdown__innhold {
-    border-top-right-radius: @border-radius-small;
-}
-
-@media screen and (min-width: @lg-screen) and (max-width: @xl-screen) {
-    .dropdown--140bredde-responsive .dropdown__innhold {
-        width: 140%;
+    .dropdown--fixed .dropdown__innhold {
         border-top-right-radius: @border-radius-small;
     }
-}
 
-.filtrering--overskrift-med-hjelpetekst {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
-    svg {
-        height: 16px;
-        width: 16px;
+    @media screen and (min-width: @lg-screen) and (max-width: @xl-screen) {
+        .dropdown--140bredde-responsive .dropdown__innhold {
+            width: 140%;
+            border-top-right-radius: @border-radius-small;
+        }
     }
 
-    .hjelpetekst {
-        height: 18px;
-        padding-left: 0.5rem;
+    .filtrering--overskrift-med-hjelpetekst {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        svg {
+            height: 16px;
+            width: 16px;
+        }
+
+        .hjelpetekst {
+            height: 18px;
+            padding-left: 0.5rem;
+        }
     }
-}
 
-.filtrering-navn-sok {
-    display: flex;
-}
+    .filtrering-navn-sok {
+        display: flex;
+    }
 
-.sok-knapp {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    height: 2.44rem;
+    .sok-knapp {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        height: 2.44rem;
+    }
 }

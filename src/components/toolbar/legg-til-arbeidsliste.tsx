@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import {VIS_ARBEIDSLISTE_MODAL, visModal} from '../../ducks/modal';
+import { VIS_ARBEIDSLISTE_MODAL, visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { ReactComponent as ArbeidslisteIkonLinje } from './arbeidslisteikon-linje.svg';
+import './toolbar.less';
 
 interface StateProps {
     portefolje: PortefoljeState;

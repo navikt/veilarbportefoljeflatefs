@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from '../reducer';
 import { useIdentSelector } from '../hooks/redux/use-enheter-ident';
 import { useParams } from 'react-router';
+import './lenker.less';
 
 function Lenker() {
     const portefoljeStorrelse = useSelector((state: AppState) => state.statustallInloggetVeileder.data.totalt);

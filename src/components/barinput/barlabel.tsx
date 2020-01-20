@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Element } from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import { tekstAntallBrukere } from '../../utils/tekst-utils';
+import "./barlabel.less";
 
 function calcWidth(antall: number, max: number): number {
     if (antall === 0) {
@@ -20,12 +21,12 @@ export interface BarlabelProps {
     className?: string;
 }
 
-function Barlabel({ htmlFor, labelTekst, antall, max, className}: BarlabelProps) {
-    const style = { width: `${calcWidth(antall, max)}%` };
+function Barlabel({htmlFor, labelTekst, antall, max, className}: BarlabelProps) {
+    const style = {width: `${calcWidth(antall, max)}%`};
 
     return (
         <label htmlFor={htmlFor} className={classNames('barlabel', className)}>
-            <span className="barlabel__labeltext" >
+            <span className="barlabel__labeltext">
                 {labelTekst}
             </span>
             &nbsp;
@@ -41,8 +42,8 @@ function Barlabel({ htmlFor, labelTekst, antall, max, className}: BarlabelProps)
                 <Element className="barlabel__antall">{antall}</Element>
                 }
                 <div className="barlabel__bar">
-                    <span className="barlabel__bartrack" aria-hidden="true" />
-                    <span className="barlabel__barface" aria-hidden="true" style={style} />
+                    <span className="barlabel__bartrack" aria-hidden="true"/>
+                    <span className="barlabel__barface" aria-hidden="true" style={style}/>
                 </div>
             </div>
         </label>

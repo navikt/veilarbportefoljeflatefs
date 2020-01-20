@@ -19,7 +19,6 @@ import {
 import { pagineringSetup } from '../ducks/paginering';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
-import './minoversikt-side.less';
 import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
 import Lenker from '../lenker/lenker';
 import TabellOverskrift from '../components/tabell-overskrift';
@@ -29,6 +28,8 @@ import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import { MinOversiktModalController } from '../components/modal/modal-min-oversikt-controller';
 import { STATUS } from '../ducks/utils';
 import { ASCENDING, DESCENDING } from '../konstanter';
+import './minoversikt-side.less';
+import './minoversikt.less';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;

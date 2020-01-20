@@ -1,29 +1,31 @@
-.brukercontext-modal {
-  &__content {
-    padding: 1.25rem 1.8rem 0 1.8rem;
+.veilarbportefoljeflatefs {
+    .brukercontext-modal {
+        &__content {
+            padding: 1.25rem 1.8rem 0 1.8rem;
 
-    h1, p {
-      text-align: center;
+            h1, p {
+                text-align: center;
+            }
+
+            .ok-knapp {
+                display: block;
+                max-width: 200px;
+                margin: auto;
+            }
+
+            .knappe-rad {
+                display: flex;
+                justify-content: space-evenly;
+                margin: 0 1rem;
+            }
+        }
+
+        .modal__overlay .ReactModal__Content {
+            width: 480px;
+        }
     }
 
-    .ok-knapp {
-      display: block;
-      max-width: 200px;
-      margin: auto;
+    .endret-enhet {
+        margin: 0 1rem 1rem;
     }
-
-    .knappe-rad {
-      display: flex;
-      justify-content: space-evenly;
-      margin: 0 1rem;
-    }
-  }
-
-  .modal__overlay .ReactModal__Content {
-    width: 480px;
-  }
-}
-
-.endret-enhet {
-  margin: 0 1rem 1rem;
 }

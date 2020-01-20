@@ -4,6 +4,7 @@ import { BrukerModell } from '../../../model-interfaces';
 import { Undertittel } from 'nav-frontend-typografi';
 import FormikInput from '../../formik/formik-input';
 import FormikTekstArea from '../../formik/formik-tekstarea';
+import './arbeidsliste.less';
 
 function label(bruker: BrukerModell): React.ReactNode {
     return (
@@ -14,7 +15,7 @@ function label(bruker: BrukerModell): React.ReactNode {
 }
 
 function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
-    return(
+    return (
         <div>
             {arbeidsliste.map((bruker, index) => (
                 <div className="input-fields">

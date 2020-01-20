@@ -14,6 +14,7 @@ import {
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { VeiledereState } from '../ducks/veiledere';
 import { PortefoljeStorrelser } from '../ducks/portefoljestorrelser';
+import './veiledere.less';
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere && veiledere.length > 0) {

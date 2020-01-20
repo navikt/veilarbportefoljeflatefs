@@ -1,28 +1,34 @@
-@gray-icon: #b7b1a9;
+@import "~nav-frontend-core/less/core";
 
-.checkbox-filterform {
-    border-bottom: 1px solid @gray-icon;
-    &__valg {
-        max-height: 15.5rem;
-        overflow-x: auto;
-        padding: 0.5rem;
-    }
-    &__valg-knapp {
-        margin-top: 1rem;
-    }
-    &__under-valg {
-        padding-left: 0.5rem;
-    }
-    &__alertstripe {
-        padding: 0.5rem 0 1rem 0.5rem;
-        border: none;
-    }
-}
+.veilarbportefoljeflatefs {
+    .checkbox-filterform {
+        border-bottom: 1px solid @navGra40;
 
-.field__container {
-    position: relative;
+        &__valg {
+            max-height: 15.5rem;
+            overflow-x: auto;
+            padding: 0.5rem;
+        }
 
-    :last-child {
-        margin-bottom: 0;
+        &__valg-knapp {
+            margin-top: 1rem;
+        }
+
+        &__under-valg {
+            padding-left: 0.5rem;
+        }
+
+        &__alertstripe {
+            padding: 0.5rem 0 1rem 0.5rem;
+            border: none;
+        }
+    }
+
+    .field__container {
+        position: relative;
+
+        :last-child {
+            margin-bottom: 0;
+        }
     }
 }

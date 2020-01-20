@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import Knapp, { Hovedknapp } from 'nav-frontend-knapper';
 import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
+import './enhet-context.less';
 
 interface NyContextModalProps {
     isOpen: boolean;

@@ -1,208 +1,213 @@
-.endringslogg {
-    margin-left: auto;
-    position: relative;
-}
+@import "~nav-frontend-core/less/core";
 
-.endringslogg-knapp {
-    float: right;
-}
+.veilarbportefoljeflatefs {
+    .endringslogg {
+        margin-left: auto;
+        position: relative;
+    }
 
-.collapse-header {
-    background-color: @navMorkGra;
-    color: white;
-    padding: 1rem;
-    border-top-left-radius: @border-radius-large;
-    border-top-right-radius: @border-radius-large;
-    height: 3rem;
-    min-height: fit-content;
-    text-align: center;
-    font-size: 1.1rem;
-}
+    .endringslogg-knapp {
+        float: right;
+    }
 
-.collapse-container {
-    padding-top: 1rem;
-    margin-top: 2.8rem;
-    right: -0.5rem;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 30rem;
-    width: 30rem;
-    z-index: 1337;
-}
+    .collapse-header {
+        background-color: @navMorkGra;
+        color: white;
+        padding: 1rem;
+        border-top-left-radius: @border-radius-large;
+        border-top-right-radius: @border-radius-large;
+        height: 3rem;
+        min-height: fit-content;
+        text-align: center;
+        font-size: 1.1rem;
+    }
 
-.collapse-container ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 7px;
-}
-.collapse-container ::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: rgba(0,0,0,.5);
-    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
-}
+    .collapse-container {
+        padding-top: 1rem;
+        margin-top: 2.8rem;
+        right: -0.5rem;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 30rem;
+        width: 30rem;
+        z-index: 1337;
+    }
 
-.endringslogg-content {
-    overflow: hidden;
-    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
-    background-color: white;
-    border-radius: @border-radius-large;
-    max-width: 27rem;
-}
+    .collapse-container ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 7px;
+    }
 
-.endringslogg-content:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px @fokusFarge;
-}
+    .collapse-container ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, .5);
+        -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    }
 
-.endringslogg-content::after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    right: 8%;
-    width: 0;
-    height: 0;
-    border-left: 0.8125rem solid transparent;
-    border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid @navMorkGra;
-}
+    .endringslogg-content {
+        overflow: hidden;
+        box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+        background-color: white;
+        border-radius: @border-radius-large;
+        max-width: 27rem;
+    }
 
-.innhold-container {
-    overflow-y: scroll;
-    max-height: 30rem;
-}
+    .endringslogg-content:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px @fokusFarge;
+    }
 
-.endringslogg-content:focus::before {
-    content: '';
-    position: absolute;
-    top: 3px;
-    right: 8%;
-    width: 0;
-    height: 0;
-    border-left: 0.8125rem solid transparent;
-    border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid @fokusFarge;
-    opacity: 0.78;
-}
+    .endringslogg-content::after {
+        content: '';
+        position: absolute;
+        top: 5px;
+        right: 8%;
+        width: 0;
+        height: 0;
+        border-left: 0.8125rem solid transparent;
+        border-right: 0.8125rem solid transparent;
+        border-bottom: 0.6875rem solid @navMorkGra;
+    }
 
-.endringslogg-info-nye-notifikasjoner {
-    background-color: @navBla;
-    border-radius: 50%;
-    display: inline-block;
-}
+    .innhold-container {
+        overflow-y: scroll;
+        max-height: 30rem;
+    }
 
-.endringslogg-info-kolonne {
-    height: 0.5rem;
-    width: 0.5rem;
-    margin-left: 1rem;
-    margin-right: 0.5rem;
-    margin-top: 0.3rem;
-    float: left;
-}
+    .endringslogg-content:focus::before {
+        content: '';
+        position: absolute;
+        top: 3px;
+        right: 8%;
+        width: 0;
+        height: 0;
+        border-left: 0.8125rem solid transparent;
+        border-right: 0.8125rem solid transparent;
+        border-bottom: 0.6875rem solid @fokusFarge;
+        opacity: 0.78;
+    }
 
-.endringslogg-dropDown {
-    position: absolute;
-    right: 1em;
-    padding: 0.5rem;
-    outline: transparent;
-    border: none;
-    cursor: pointer;
-    margin-top: 0.5rem;
-    background-color: white;
-}
+    .endringslogg-info-nye-notifikasjoner {
+        background-color: @navBla;
+        border-radius: 50%;
+        display: inline-block;
+    }
 
-.endringslogg-dropDown:focus {
-    fill: @navBla;
-    box-shadow: 0 0 0 3px @fokusFarge;
-    padding: 0.5rem;
-    border-radius: 2px;
+    .endringslogg-info-kolonne {
+        height: 0.5rem;
+        width: 0.5rem;
+        margin-left: 1rem;
+        margin-right: 0.5rem;
+        margin-top: 0.3rem;
+        float: left;
+    }
 
-    #Outline {
+    .endringslogg-dropDown {
+        position: absolute;
+        right: 1em;
+        padding: 0.5rem;
+        outline: transparent;
+        border: none;
+        cursor: pointer;
+        margin-top: 0.5rem;
+        background-color: white;
+    }
+
+    .endringslogg-dropDown:focus {
+        fill: @navBla;
+        box-shadow: 0 0 0 3px @fokusFarge;
+        padding: 0.5rem;
+        border-radius: 2px;
+
+        #Outline {
+            fill: @navBla;
+        }
+    }
+
+    #alarm_svg {
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+
+    .endringslogg-dropDown:hover #Outline {
         fill: @navBla;
     }
-}
 
-#alarm_svg {
-    height: 2.5rem;
-    width: 2.5rem;
-}
+    .endringslogg-nye-notifikasjoner-ikon {
+        height: 0.875rem;
+        width: 0.875rem;
+        margin: 0 0 0 -0.5444rem;
+        background-color: @navBla;;
+        border-radius: 50%;
+        display: inline-block;
+        z-index: 99;
+        position: absolute;
+        cursor: pointer;
+    }
 
-.endringslogg-dropDown:hover #Outline {
-    fill: @navBla;
-}
+    .endringslogg-innhold {
+        padding: 0 2rem 0 2rem;
+    }
 
-.endringslogg-nye-notifikasjoner-ikon {
-    height: 0.875rem;
-    width: 0.875rem;
-    margin: 0 0 0 -0.5444rem;
-    background-color: @navBla;;
-    border-radius: 50%;
-    display: inline-block;
-    z-index: 99;
-    position: absolute;
-    cursor: pointer;
-}
+    .endringslogg-datolinje {
+        padding-top: 1rem;
+    }
 
-.endringslogg-innhold {
-    padding: 0 2rem 0 2rem;
-}
+    .endringslogg-title {
+        margin-right: auto;
+        margin-left: 0.2rem;
+        padding-right: 0.5rem;
+    }
 
-.endringslogg-datolinje {
-    padding-top: 1rem;
-}
+    .endringslogg-link {
+        margin-top: 0.2rem;
+        display: block;
+    }
 
-.endringslogg-title {
-    margin-right: auto;
-    margin-left: 0.2rem;
-    padding-right: 0.5rem;
-}
+    .endringslogg-liste-punkt-topp {
+        margin-bottom: 1rem;
+    }
 
-.endringslogg-link {
-    margin-top: 0.2rem;
-    display: block;
-}
+    .endringslogg-kolonne {
+        float: left;
+    }
 
-.endringslogg-liste-punkt-topp {
-    margin-bottom: 1rem;
-}
+    .endringslogg-skille {
+        padding-bottom: 1rem;
+    }
 
-.endringslogg-kolonne {
-    float: left;
-}
+    .endringslogg-skille:not(:last-child) {
+        border-bottom: 1px solid rgba(183, 177, 169);
+    }
 
-.endringslogg-skille {
-    padding-bottom: 1rem;
-}
+    .endringslogg-rad:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 
-.endringslogg-skille:not(:last-child) {
-    border-bottom: 1px solid rgba(183, 177, 169);
-}
+    #external_link {
+        width: 0.668rem;
+        height: 0.668rem;
+        margin-left: 0.3em;
+    }
 
-.endringslogg-rad:after {
-    content: "";
-    display: table;
-    clear: both;
-}
+    .hyperlink-ikon {
+        stroke: @navBla;
+    }
 
-#external_link {
-    width: 0.668rem;
-    height: 0.668rem;
-    margin-left: 0.3em;
-}
+    .endringslogg-stepperKnapp {
+        margin-top: 0.8rem;
+    }
 
-.hyperlink-ikon {
-    stroke: @navBla;
-}
+    .endringslogg-innhold-liste {
+        padding-left: 1.25rem;
+        margin: 0 0 0.5rem 0;
+    }
 
-.endringslogg-stepperKnapp {
-    margin-top: 0.8rem;
-}
-
-.endringslogg-innhold-liste {
-    padding-left: 1.25rem;
-    margin: 0 0 0.5rem 0;
-}
-
-.veiledergrupper-navet-tekst {
-    margin-top: 0.5rem;
+    .veiledergrupper-navet-tekst {
+        margin-top: 0.5rem;
+    }
 }

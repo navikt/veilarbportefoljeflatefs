@@ -6,6 +6,7 @@ import { ReactComponent as SlettIkon } from './remove-circle.svg';
 import React from 'react';
 import { SkjemaelementFeil } from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 import classNames from 'classnames';
+import './modal.less';
 
 interface ValgtVeilederGruppeListeProps {
     valgteVeileder: string[],

@@ -1,6 +1,8 @@
 import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useFocus } from '../../../hooks/use-focus';
+import '../endringslogg.less';
+import '../collapse-container-transition.less';
 
 interface CollapseContainerProps {
     children: React.ReactNode;
