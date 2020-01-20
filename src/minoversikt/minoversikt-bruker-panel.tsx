@@ -12,6 +12,7 @@ import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
 import { useLayoutEffect, useRef } from 'react';
+import './minoversikt.less';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;

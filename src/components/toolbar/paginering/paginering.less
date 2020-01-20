@@ -1,84 +1,89 @@
-.paginering {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: flex-end;
-}
+@import "~nav-frontend-core/less/core";
+@import "~nav-frontend-paneler-style/src/mixins";
 
-.paginering__knapper {
-    float: right;
-}
-
-.paginering__knapp {
-    border: none;
-    border-left: 1px solid @navGra40;
-    border-bottom: 1px solid transparent;
-    background: none;
-    width: 25%;
-
-    .panel-mixin();
-    .panel-focushover-mixin();
-
-    display: inline-block;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0;
-
-    &:hover {
-        box-shadow: none;
-        border-bottom: 1px solid @navGra40;
-        cursor: pointer;
+.veilarbportefoljeflatefs {
+    .paginering {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: flex-end;
     }
 
-    &:first-child {
-        border-left: none;
-        min-width: fit-content;
+    .paginering__knapper {
+        float: right;
     }
 
-    &:last-child {
-        border-right: 1px solid @navGra40;
-    }
+    .paginering__knapp {
+        border: none;
+        border-left: 1px solid @navGra40;
+        border-bottom: 1px solid transparent;
+        background: none;
+        width: 25%;
 
-    &:not(:last-child) {
-    }
+        .panel-mixin();
+        .panel-focushover-mixin();
 
-    &.disabled {
-        pointer-events: none;
-        cursor: default;
-        color: @navGra20;
-    }
-}
-
-.visningsgruppe {
-    display: inline-flex;
-
-    input {
-        height: 0;
-        width: 0;
-        opacity: 0;
-    }
-
-    label {
-        background-color: @white;
         display: inline-block;
-        padding: 0.3rem 0.5rem;
-        border: 1px solid @navGra20;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0;
+
+        &:hover {
+            box-shadow: none;
+            border-bottom: 1px solid @navGra40;
+            cursor: pointer;
+        }
+
+        &:first-child {
+            border-left: none;
+            min-width: fit-content;
+        }
+
+        &:last-child {
+            border-right: 1px solid @navGra40;
+        }
+
+        &:not(:last-child) {
+        }
+
+        &.disabled {
+            pointer-events: none;
+            cursor: default;
+            color: @navGra20;
+        }
     }
 
-    &__knapp {
-        &:first-child label {
-            border-bottom-left-radius: 2px;
-            border-top-left-radius: 2px;
+    .visningsgruppe {
+        display: inline-flex;
+
+        input {
+            height: 0;
+            width: 0;
+            opacity: 0;
         }
 
-        &:last-child label {
-            border-bottom-right-radius: 2px;
-            border-top-right-radius: 2px;
+        label {
+            background-color: @white;
+            display: inline-block;
+            padding: 0.3rem 0.5rem;
+            border: 1px solid @navGra20;
         }
 
-        input:checked + label {
-            background-color: @navBla;
-            color: @white;
-            border-color: @navBla;
+        &__knapp {
+            &:first-child label {
+                border-bottom-left-radius: 2px;
+                border-top-left-radius: 2px;
+            }
+
+            &:last-child label {
+                border-bottom-right-radius: 2px;
+                border-top-right-radius: 2px;
+            }
+
+            input:checked + label {
+                background-color: @navBla;
+                color: @white;
+                border-color: @navBla;
+            }
         }
     }
 }

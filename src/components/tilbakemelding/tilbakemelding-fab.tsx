@@ -24,7 +24,6 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
     private readonly TILBAKEMELDING_PREFIX = 'har_sendt_tilbakemelding';
     private readonly TILBAKEMELDING_FEATURE_TAG = 'veiledergrupper'; // NB: Husk å endre for hver nye feature
 
-
     private wrapperRef;
 
     constructor(props: StateProps) {
@@ -47,7 +46,7 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
 
     handleClickOutside = (e) => {
         if (this.state.isModalOpen && this.wrapperRef && !this.wrapperRef.contains(e.target)) {
-            this.setState({ isModalOpen: false });
+            this.setState({isModalOpen: false});
         }
     };
 
@@ -66,7 +65,7 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
         }
 
         this.setState((prevState: TilbakemeldingFabState) => {
-            return { isModalOpen: !prevState.isModalOpen };
+            return {isModalOpen: !prevState.isModalOpen};
         });
 
     };
@@ -74,19 +73,19 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
     handleTilbakemeldingSendt = (tilbakemelding: Tilbakemelding) => {
         window.localStorage.setItem(this.tilbakemeldingLocalStorageName(), 'true');
         logEvent('portefolje.tilbakemelding',
-            { feature: this.TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding });
+            {feature: this.TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding});
     };
 
     handleIkkeVisIgjen = () => {
         window.localStorage.setItem(this.tilbakemeldingLocalStorageName(), 'true');
         logEvent('portefolje.ikke_vis_tilbakemelding_igjen');
-        this.setState({ ikkeVisIgjen: true });
+        this.setState({ikkeVisIgjen: true});
     };
 
     render() {
 
-        const { harFeature } = this.props;
-        const { isModalOpen, harSendtTilbakemelding, ikkeVisIgjen } = this.state;
+        const {harFeature} = this.props;
+        const {isModalOpen, harSendtTilbakemelding, ikkeVisIgjen} = this.state;
         const harRiktigFeatures = harFeature(SPOR_OM_TILBAKEMELDING); // NB: Husk å endre for hver feature
         if (ikkeVisIgjen || !harRiktigFeatures || harSendtTilbakemelding || this.harTidligereSendtTilbakemelding()) {
             return null;
@@ -96,8 +95,11 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
         const apneIkon = 'data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAkCAQAAABY3hDnAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfjAgQQGhbxeetBAAACLklEQVRIx8XWO0xUQRTG8d+urEp8xDc+OjXYiBE0kWBjIsFGYimVaEFprCy00MLORLFweyttxBg1NsTESsBHMEJMMIKxMEQhSkHh7uKOBQtBd+9F2Ztwppib+c75Z+6Zc88dYLusQQWhypE3KKtOyU6YrBq5cExqgzqTgvsOqlGtZTTqEUyqIyu4XzVyofUIsgwKGhMFNwoGyQsyiYIzgnxKQCpRMIF0jLzWE1O6K2rdpjy2Np4eIpSbpfJpKlOaSsqNaGbcjk+W5qNlytxKe3RwHHhXaZ4pU2b+8vhP8FhpHipThv7yiMpHhNIpCHorar2CoDOOGQ2mTYfaikqtjtmOEAVeljquypYBfMx3F2Njz5h2PC4flQ/vkDETDkTG7TXkk8PRzChwyhXTXtpfUd1mXM71iGNfpNxWeizvq1NlCdvtqYJH1sdlIa6OM7J+mPDAaXtssc5Wza56b8YHG+LTGwemxjl9fsr76K033vkmGNVtU0xUEFKKUtKx8I1atdtntbSCKc89NKwY6Z9SFBgR1EvS6gUjaa/RlSi4C69okPPLpYR+qCtd9ktOQwrn3ZKWM6Lwh1NRt3ul5xWuxXSzOcvYZ5WiC27PLrTol69wWXoxv4+ef7699WthYcNcrf6PdOx3x4BmrPFQqx/O+rLIjgtG5BZ7rSOCfmzUJxjXkMgZzIN3GBKM2ZMUdhY8ZlQwbGdy2FlwEAzEfrxLBj+Lv0YtxTb77K5VSw3/DdK0H6HFZvnVAAAAAElFTkSuQmCC';
 
         return (
-            <div ref={(ref) => { this.wrapperRef = ref; }}>
-                <div className={classNames('tilbakemelding-fab', { 'tilbakemelding-fab__trykket': isModalOpen })} onClick={this.handleFabClicked}>
+            <div ref={(ref) => {
+                this.wrapperRef = ref;
+            }}>
+                <div className={classNames('tilbakemelding-fab', {'tilbakemelding-fab__trykket': isModalOpen})}
+                     onClick={this.handleFabClicked}>
                     <img
                         alt="Åpne/Lukk tilbakemeldingform"
                         className={classNames({

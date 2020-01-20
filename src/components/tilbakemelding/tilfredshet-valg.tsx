@@ -23,12 +23,12 @@ class TilfredshetValg extends React.Component<TilfredshetValgProps, TilfredshetV
     }
 
     handleTilfredshetChanged = (tilfredshet: number) => {
-        this.setState({ tilfredshet });
+        this.setState({tilfredshet});
         this.props.onTilfredshetChanged(tilfredshet);
-    }
+    };
 
     hentKlasserForIkon = (ikonTilfredshet: number): any => {
-        const { tilfredshet } = this.state;
+        const {tilfredshet} = this.state;
         const erValgt = ikonTilfredshet === tilfredshet;
         const harValgt = tilfredshet > 0;
         return classNames('tilfredshet-valg__ikon',
@@ -36,11 +36,11 @@ class TilfredshetValg extends React.Component<TilfredshetValgProps, TilfredshetV
                 'tilfredshet-valg__ikon--valgt': erValgt,
                 'tilfredshet-valg__ikon--ikke-valgt': harValgt && !erValgt
             }
-            );
-    }
+        );
+    };
 
     render() {
-        const { className } = this.props;
+        const {className} = this.props;
         return (
             <div className={classNames('tilfredshet-valg__wrapper', className)}>
                 <img

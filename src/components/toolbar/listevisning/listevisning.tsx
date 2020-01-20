@@ -4,6 +4,7 @@ import Dropdown from '../../dropdown/dropdown';
 import { avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ } from '../../../ducks/ui/listevisning';
 import { selectMuligeAlternativer, selectValgteAlternativer } from '../../../ducks/ui/listevisning-selectors';
 import ListevisningRad from './listvisning-rad';
+import './listevisning.less';
 
 interface OwnProps {
     filtergruppe: ListevisningType;

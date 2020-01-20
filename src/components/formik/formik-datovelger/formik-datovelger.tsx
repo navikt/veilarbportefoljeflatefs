@@ -5,6 +5,7 @@ import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feil
 import { validerDatoFeldt } from '../../../utils/dato-utils';
 import classNames from 'classnames';
 import moment from 'moment';
+import './daypicker.less';
 
 function FormikDatoVelger({name}) {
     return (
@@ -13,10 +14,10 @@ function FormikDatoVelger({name}) {
             name={name}
             id={name}
         >
-            {({ field, form: {errors, setFieldValue}}: FieldProps) => {
+            {({field, form: {errors, setFieldValue}}: FieldProps) => {
                 const error = getIn(errors, name);
-                const datePickerClassName = classNames( 'skjemaelement', 'datovelger', { 'datovelger--harFeil': error });
-                return(
+                const datePickerClassName = classNames('skjemaelement', 'datovelger', {'datovelger--harFeil': error});
+                return (
                     <div className={datePickerClassName}>
                         <Datovelger
                             input={{
@@ -29,15 +30,16 @@ function FormikDatoVelger({name}) {
                             id="fristDatovelger"
                             onChange={(date: string) => {
                                 // HAKS FØR ATT NAV-DATOVELGER  IKKE STØTTER OPTIONAL DATO
-                                if(!field.value && !moment(date).isValid()) {
+                                if (!field.value && !moment(date).isValid()) {
                                     return;
                                 }
-                                setFieldValue(field.name, date);}
+                                setFieldValue(field.name, date);
+                            }
                             }
                             valgtDato={field.value}
-                            dayPickerProps={{className : 'datovelger__DayPicker'}}
+                            dayPickerProps={{className: 'datovelger__DayPicker'}}
                         />
-                        <SkjemaelementFeilmelding feil={error ? {feilmelding: error}: undefined}/>
+                        <SkjemaelementFeilmelding feil={error ? {feilmelding: error} : undefined}/>
                     </div>
                 );
             }}

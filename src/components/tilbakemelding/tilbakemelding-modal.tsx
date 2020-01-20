@@ -73,7 +73,8 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                     Tilbakemelding
                 </Innholdstittel>
                 <Normaltekst style={styleBottom} className="tilbakemelding-modal__ingress">
-                    Før jul kom det en ny funksjon for veiledergrupper i enhetens oversikt. Hvordan er din opplevelse av den nye funksjonen? Svarene er anonyme.
+                    Før jul kom det en ny funksjon for veiledergrupper i enhetens oversikt. Hvordan er din opplevelse av
+                    den nye funksjonen? Svarene er anonyme.
                 </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
                     <TilfredshetValg

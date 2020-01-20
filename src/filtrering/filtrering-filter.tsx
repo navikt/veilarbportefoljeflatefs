@@ -16,12 +16,11 @@ import {
     manuellBrukerStatus,
     hovedmal
 } from './filter-konstanter';
-
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 import { RadioFilterformNy } from '../components/radio-filterform/radio-filterform-ny';
 import DropdownNy from '../components/dropdown/dropdown-ny';
-
 import '../components/checkbox-filterform/checkbox-filterform.less';
+
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -48,7 +47,7 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             columns={2}
                         />
                     }
-                 />
+                />
                 <DropdownNy
                     name="Fødselsdato"
                     render={(lukkDropdown) =>

@@ -3,6 +3,7 @@ import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import React, { PropsWithChildren } from 'react';
 import { Fnr, FnrList } from '../fnr-list';
+import './feilmelding-brukere.less';
 
 interface ModalSuksessProps {
     isOpen: boolean;

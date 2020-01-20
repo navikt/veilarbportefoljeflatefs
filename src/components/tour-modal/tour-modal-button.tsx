@@ -2,6 +2,7 @@ import { default as React, useState } from 'react';
 import { default as TourModal, ModalName } from '../tour-modal/tour-modal';
 import { Knapp } from 'nav-frontend-knapper';
 import { logEvent } from '../../utils/frontend-logger';
+import './tour-modal.less';
 
 interface ModalStepperProps {
     modal: ModalName;

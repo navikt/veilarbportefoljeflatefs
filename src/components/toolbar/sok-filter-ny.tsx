@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Input } from 'nav-frontend-skjema';
-import AlertStripe from "nav-frontend-alertstriper";
+import AlertStripe from 'nav-frontend-alertstriper';
+import './toolbar.less';
 
 interface SokFilterProps<T> {
     data: T[];
@@ -14,14 +15,14 @@ function limit<T>(liste: T[], antall: number) {
     return liste.slice(0, antall);
 }
 
-function SokFilterNy<T> (props: SokFilterProps<T>) {
-    const { data, limitSize, children} = props;
+function SokFilterNy<T>(props: SokFilterProps<T>) {
+    const {data, limitSize, children} = props;
     const [query, setQuery] = useState('');
     const [rawfilteredData, setRawfilteredData] = useState(data);
 
     useEffect(() => {
         setRawfilteredData(data.filter(elem => !query || JSON.stringify(elem).toLowerCase().includes(query.toLowerCase())));
-    }, [ query, data]);
+    }, [query, data]);
 
     const filteredData =
         limitSize === undefined

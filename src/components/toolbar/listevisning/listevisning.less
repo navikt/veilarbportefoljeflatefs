@@ -1,28 +1,32 @@
-.typo-normal {
-    width: 100%;
-}
-.listevisning--infopanel {
-  display: flex;
-  width: 100%;
-  position: relative;
-}
+@import "~nav-frontend-core/less/core";
 
-.listevisning--infopanel__lukkKnapp {
-    position: absolute;
-    height: 2rem;
-    width: 2rem;
-    right: -0.25rem;
-    top: -0.25rem;
-}
+.veilarbportefoljeflatefs {
+    .typo-normal {
+        width: 100%;
+    }
 
-.skjemaelement__input:disabled {
-    + label {
-        cursor: default;
-        &::before {
-            background-color: @grayIcon;
-            border-color: @grayIcon;
+    .listevisning--infopanel {
+        display: flex;
+        width: 100%;
+        position: relative;
+    }
+
+    .listevisning--infopanel__lukkKnapp {
+        position: absolute;
+        height: 2rem;
+        width: 2rem;
+        right: -0.25rem;
+        top: -0.25rem;
+    }
+
+    .skjemaelement__input:disabled {
+        + label {
+            cursor: default;
+
+            &::before {
+                background-color: @grayIcon;
+                border-color: @grayIcon;
+            }
         }
     }
 }
-
-

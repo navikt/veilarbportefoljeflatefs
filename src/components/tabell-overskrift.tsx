@@ -17,7 +17,7 @@ function TabellOverskrift({fraIndex, antallIVisning, antallTotalt, antallValgt, 
     const tilIndex = fraIndex + antallIVisning;
 
     const tekst = `Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere. `;
-    const antallValgteBrukere = tekstValgteBrukere (antallValgt);
+    const antallValgteBrukere = tekstValgteBrukere(antallValgt);
 
     return (
         <Element tag="h1" className={className}>

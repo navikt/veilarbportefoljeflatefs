@@ -20,7 +20,6 @@ import { pagineringSetup } from '../ducks/paginering';
 import FiltreringContainer, { defaultVeileder } from '../filtrering/filtrering-container';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
-import './enhet-side.less';
 import Toasts from '../components/toast/toast';
 import { slettEnkeltFilter } from '../ducks/filtrering';
 import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
@@ -33,6 +32,8 @@ import { ModalEnhetSideController } from '../components/modal/modal-enhet-side-c
 import EnhetTabell from './enhetsportefolje-tabell';
 import { STATUS } from '../ducks/utils';
 import EnhetTabellOverskrift from './enhetsportefolje-tabelloverskrift';
+import './enhetsportefolje.less';
+import './brukerliste.less';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;

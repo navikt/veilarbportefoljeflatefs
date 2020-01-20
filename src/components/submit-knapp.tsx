@@ -5,11 +5,11 @@ interface Props {
     closeDropdown?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function SubmitKnapp({ pristine, closeDropdown }: Props) {
+function SubmitKnapp({pristine, closeDropdown}: Props) {
     if (pristine) {
         return (
             <button className="knapp knapp--mini" type="button" onClick={closeDropdown}>
-               Lukk
+                Lukk
             </button>
         );
     }
@@ -20,4 +20,5 @@ function SubmitKnapp({ pristine, closeDropdown }: Props) {
         </button>
     );
 }
+
 export default SubmitKnapp;

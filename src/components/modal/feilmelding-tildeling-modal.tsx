@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
 import { Fnr, FnrList } from '../fnr-list';
+import './feilmelding-brukere.less';
 
 interface FeilmeldingBrukereModalProps {
     isOpen: boolean;

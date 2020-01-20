@@ -6,11 +6,11 @@ const KOMMENTAR_MAKS_LENGDE = 500;
 
 function FormikTekstArea({name}) {
 
-    const validate =  (value: string) => {
-        let error: undefined| string;
-        if(!value) {
+    const validate = (value: string) => {
+        let error: undefined | string;
+        if (!value) {
             error = 'Du må fylle ut en kommentar';
-        } else if(value.length > KOMMENTAR_MAKS_LENGDE) {
+        } else if (value.length > KOMMENTAR_MAKS_LENGDE) {
             error = `Du må korte ned teksten til ${KOMMENTAR_MAKS_LENGDE} tegn`;
         }
         return error;
@@ -32,7 +32,8 @@ function FormikTekstArea({name}) {
                         name={name}
                         feil={errors && touched ? {feilmelding: errors} : undefined}
                         maxLength={500}
-                    />);}}
+                    />);
+            }}
         </Field>
     );
 }

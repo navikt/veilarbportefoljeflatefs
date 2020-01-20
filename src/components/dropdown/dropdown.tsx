@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Children, cloneElement, Component, ReactElement } from 'react';
 import classNames from 'classnames';
+import './dropdown.less';
 
 const btnCls = (props: DropdownProps, state: DropdownState) => classNames('dropdown', props.className, {
     'dropdown--apen': state.apen,
@@ -77,7 +78,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
 
     toggleDropdown() {
         const {
-            onLukk = () => void(0)
+            onLukk = () => void (0)
         } = this.props;
         if (this.state.apen) {
             onLukk();
@@ -87,7 +88,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
 
     lukkDropdown() {
         const {
-            onLukk = () => void(0)
+            onLukk = () => void (0)
         } = this.props;
         this.setState({apen: false});
 
@@ -103,13 +104,13 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
 
     isHover(hoverState) {
         return () => {
-            this.setState({ hover: hoverState });
+            this.setState({hover: hoverState});
         };
     }
 
     render() {
-        const { name, disabled, children, hoyre } = this.props;
-        const { apen } = this.state;
+        const {name, disabled, children, hoyre} = this.props;
+        const {apen} = this.state;
 
         const augmentedChild = Children.map(children, (child: React.ReactChild) => cloneElement<any>(child as ReactElement<any>, {
             closeDropdown: this.lukkDropdown

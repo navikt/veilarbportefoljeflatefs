@@ -15,6 +15,7 @@ import { oppdaterValgtEnhet } from '../../ducks/enheter';
 import { settEnhetIDekorator } from '../../eventhandtering';
 import ContextFeilmodal from './context-feilmodal';
 import { EnhetModell } from '../../model-interfaces';
+import './enhet-context.less';
 
 interface StateProps {
     modalSynlig: boolean;
@@ -37,7 +38,7 @@ interface DispatchProps {
     doSkjulFeilmodal: () => void;
 }
 
-type EnhetContextProps = {children: React.ReactNode} & StateProps & DispatchProps;
+type EnhetContextProps = { children: React.ReactNode } & StateProps & DispatchProps;
 
 class EnhetContext extends React.Component<EnhetContextProps> {
     contextListener: EnhetContextListener;
@@ -65,10 +66,10 @@ class EnhetContext extends React.Component<EnhetContextProps> {
     }
 
     finnOgSettEnhetIKontekst() {
-        const { enheter } = this.props;
+        const {enheter} = this.props;
         const enhetFraUrl = getEnhetFromUrl();
         const nyEnhet = enheter.map((enhet) => enhet.enhetId).includes(enhetFraUrl) ? enhetFraUrl : enheter[0].enhetId;
-        if(nyEnhet !== '') {
+        if (nyEnhet !== '') {
             this.oppdaterEnhetIKontekstOgState(nyEnhet);
         } else {
             hentAktivEnhet().then((enhet) => {
@@ -127,7 +128,7 @@ class EnhetContext extends React.Component<EnhetContextProps> {
         return (
             <>
                 <>
-                    { this.props.feilet ? alertIkkeTilkoblet : null }
+                    {this.props.feilet ? alertIkkeTilkoblet : null}
                     <ContextFeilmodal
                         isOpen={this.props.feilmodalSynlig}
                         onClose={this.props.doSkjulFeilmodal}

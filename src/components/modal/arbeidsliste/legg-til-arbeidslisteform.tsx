@@ -13,12 +13,13 @@ import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { skjulModal } from '../../../ducks/modal';
 import { dateToISODate } from '../../../utils/dato-utils';
+import './arbeidsliste.less';
 
 interface OwnProps {
     valgteBrukere: BrukerModell[];
     lukkModal: () => void;
     innloggetVeileder: VeilederModell;
-    setFormIsDirty: (formIsDirty: boolean)=>void;
+    setFormIsDirty: (formIsDirty: boolean) => void;
 }
 
 interface StateProps {
@@ -28,7 +29,7 @@ interface StateProps {
 interface DispatchProps {
     onSubmit: (formData) => void;
     lukkModal: () => void;
-    fjernMarkerteBrukere: ()=> void;
+    fjernMarkerteBrukere: () => void;
 }
 
 interface FormValues {
@@ -37,24 +38,25 @@ interface FormValues {
     frist?: string;
 }
 
-type LeggTilArbeidslisteFormProps = OwnProps & StateProps& DispatchProps;
+type LeggTilArbeidslisteFormProps = OwnProps & StateProps & DispatchProps;
 
 function LeggTilArbeidslisteForm({
-    lukkModal,
-    valgteBrukere,
-    innloggetVeileder,
-    arbeidslisteStatus,
-    onSubmit,
-    setFormIsDirty,
-    fjernMarkerteBrukere}: LeggTilArbeidslisteFormProps) {
+                                     lukkModal,
+                                     valgteBrukere,
+                                     innloggetVeileder,
+                                     arbeidslisteStatus,
+                                     onSubmit,
+                                     setFormIsDirty,
+                                     fjernMarkerteBrukere
+                                 }: LeggTilArbeidslisteFormProps) {
 
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
-    const initialValues = valgteBrukere.map((bruker) => ({kommentar: '', frist:  '', overskrift: '' }));
+    const initialValues = valgteBrukere.map((bruker) => ({kommentar: '', frist: '', overskrift: ''}));
 
     return (
         <Formik
-            initialValues={{ arbeidsliste: initialValues }}
-            onSubmit={(values,actions) => {
+            initialValues={{arbeidsliste: initialValues}}
+            onSubmit={(values, actions) => {
                 onSubmit(values.arbeidsliste);
                 actions.resetForm();
             }}
@@ -76,7 +78,7 @@ function LeggTilArbeidslisteForm({
                                     fjernMarkerteBrukere();
                                     lukkModal();
                                 }}>
-                                   Avbryt
+                                    Avbryt
                                 </button>
                             </div>
                         </div>
@@ -87,7 +89,7 @@ function LeggTilArbeidslisteForm({
     );
 }
 
-export function oppdaterState(res, liste: ArbeidslisteDataModell[], props: {innloggetVeileder: VeilederModell, bruker: BrukerModell}, dispatch) {
+export function oppdaterState(res, liste: ArbeidslisteDataModell[], props: { innloggetVeileder: VeilederModell, bruker: BrukerModell }, dispatch) {
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -98,7 +100,7 @@ export function oppdaterState(res, liste: ArbeidslisteDataModell[], props: {innl
     const arbeidslisteToDispatch = liste
         .map((a) => ({
             ...a,
-            sistEndretAv: { veilederId: props.innloggetVeileder },
+            sistEndretAv: {veilederId: props.innloggetVeileder},
             endringstidspunkt: new Date().toISOString(),
             arbeidslisteAktiv: true
         }))
@@ -132,13 +134,13 @@ const mapDispatchToProps = (dispatch, props) => ({
             .then((data) => {
                 oppdaterState(data, liste, props, dispatch);
             })
-            .then(()=> {
+            .then(() => {
                     dispatch(skjulModal());
                     dispatch(markerAlleBrukere(false));
                 }
             );
     },
-    lukkModal: ()=> dispatch(skjulModal()),
+    lukkModal: () => dispatch(skjulModal()),
     fjernMarkerteBrukere: () => dispatch(markerAlleBrukere(false))
 });
 

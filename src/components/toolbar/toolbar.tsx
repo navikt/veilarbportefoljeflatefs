@@ -6,6 +6,7 @@ import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 import { VeilederModell } from '../../model-interfaces';
+import './toolbar.less';
 
 interface ToolbarProps {
     filtergruppe: ListevisningType;

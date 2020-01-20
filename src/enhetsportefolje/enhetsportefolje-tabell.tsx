@@ -6,6 +6,8 @@ import { VeilederModell } from '../model-interfaces';
 import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { useForrigeBruker } from '../hooks/use-forrige-bruker';
+import './enhetsportefolje.less';
+import './brukerliste.less';
 
 interface EnhetTabellProps {
     veiledere: VeilederModell;

@@ -1,12 +1,7 @@
 // TABELLER
 // --------------------------------------------------
-@pink-error-bg: #f3e3e3;
 @gray-background: #efefef;
 @gray-inactive: #7f756c;
-@gray-icon: #b7b1a9;
-@color-border: @gray-icon;
-@blue-link: #0067c5;
-@blue-interaction: @blue-link;
 
 @rem-as-14px: 0.875rem;
 @line-height-base: 1.428571429;
@@ -25,8 +20,6 @@
 
 @state-success-bg: #dff0d8;
 @state-info-bg: #d9edf7;
-@state-warning-bg: @pink-error-bg;
-@state-danger-bg: @pink-error-bg;
 
 table {
     caption {
@@ -97,7 +90,7 @@ table {
         padding: @table-cell-padding;
         line-height: @line-height-base;
         vertical-align: top;
-        border-top: 1px solid @color-border;
+        border-top: 1px solid @navGra40;
 
         &.vertikal-strek {
             .vertikalstrek();
@@ -148,7 +141,7 @@ table {
 
     // Account for multiple tbody instances
     tbody + tbody {
-        border-top: 2px solid @color-border;
+        border-top: 2px solid @navGra40;
     }
 
 }
@@ -163,10 +156,10 @@ table {
 // Bordered version
 // Add borders all around the.tabell and between all the columns.
 .tabell-ramme {
-    border: 1px solid @color-border;
+    border: 1px solid @navGra40;
 
     th, td {
-        border: 1px solid @color-border;
+        border: 1px solid @navGra40;
     }
 }
 
@@ -182,8 +175,8 @@ table {
 // Border på topp og bunn
 // Ingen border til venstre og høyre
 .tabell-skillestrek {
-    border-top: 1px solid @color-border;
-    border-bottom: 1px solid @color-border;
+    border-top: 1px solid @navGra40;
+    border-bottom: 1px solid @navGra40;
 
     th, td {
         .vertikalstrek();
@@ -218,7 +211,7 @@ table col[class*="col-"] {
         content: "";
         display: inline-block;
         position: absolute;
-        border-right: 1px solid @color-border;
+        border-right: 1px solid @navGra40;
         right: 0;
         top: 25%;
         width: 0;

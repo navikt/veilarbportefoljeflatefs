@@ -1,4 +1,5 @@
 import { EnhetConnectionState } from './enhet-context-listener';
+import './enhet-context.less';
 
 export interface ContextState {
     connected: EnhetConnectionState;
@@ -60,43 +61,44 @@ type ContextActions =
     | { type: '__OTHER_ACTION__' };
 
 export default function contextReducer(state: ContextState = initialState, action: ContextActions): ContextState {
-    switch(action.type) {
+    switch (action.type) {
         case ContextActionKeys.SETT_TILKOBLING_STATE:
             const connectionState = action.connected;
             const stillFailing = state.connected === EnhetConnectionState.FAILED && connectionState !== EnhetConnectionState.CONNECTED;
-            return { ...state,
+            return {
+                ...state,
                 connected: connectionState,
                 failed: connectionState === EnhetConnectionState.FAILED || stillFailing
             };
         case ContextActionKeys.SETT_AKTIV_ENHET:
-            return { ...state, aktivEnhetId: action.enhet };
+            return {...state, aktivEnhetId: action.enhet};
         case ContextActionKeys.SETT_PENDING_STATE:
-            return { ...state, isPending: action.pending };
+            return {...state, isPending: action.pending};
         case ContextActionKeys.VIS_FEILMODAL:
-            return { ...state, visFeilmodal: true };
+            return {...state, visFeilmodal: true};
         case ContextActionKeys.SKJUL_FEILMODAL:
-            return { ...state, visFeilmodal: false };
+            return {...state, visFeilmodal: false};
         default:
             return state;
     }
 }
 
 export function settIsPending(pending: boolean): SettPendingAction {
-    return { type: ContextActionKeys.SETT_PENDING_STATE, pending };
+    return {type: ContextActionKeys.SETT_PENDING_STATE, pending};
 }
 
 export function settNyAktivEnhet(nyAktivEnhet: string): SettAktivEnhetAction {
-    return { type: ContextActionKeys.SETT_AKTIV_ENHET, enhet: nyAktivEnhet };
+    return {type: ContextActionKeys.SETT_AKTIV_ENHET, enhet: nyAktivEnhet};
 }
 
 export function settTilkoblingState(tilkoblet: EnhetConnectionState): ConnectionStateAction {
-    return { type: ContextActionKeys.SETT_TILKOBLING_STATE, connected: tilkoblet };
+    return {type: ContextActionKeys.SETT_TILKOBLING_STATE, connected: tilkoblet};
 }
 
 export function visFeilmodal(): FeilmodalAction {
-    return { type: ContextActionKeys.VIS_FEILMODAL };
+    return {type: ContextActionKeys.VIS_FEILMODAL};
 }
 
 export function skjulFeilmodal(): FeilmodalAction {
-    return { type: ContextActionKeys.SKJUL_FEILMODAL };
+    return {type: ContextActionKeys.SKJUL_FEILMODAL};
 }

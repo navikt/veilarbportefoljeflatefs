@@ -3,6 +3,7 @@ import { Element } from 'nav-frontend-typografi';
 import { HjelpetekstAuto } from 'nav-frontend-hjelpetekst';
 import { logEvent } from '../utils/frontend-logger';
 import { finnSideNavn } from '../middleware/metrics-middleware';
+import '../filtrering/filtrering-skjema.less';
 
 interface OverskriftMedHjelpeTekstProps {
     overskriftTekst: string;
@@ -14,25 +15,27 @@ class OverskriftMedHjelpetekst extends React.Component<OverskriftMedHjelpeTekstP
     private catchClickRef;
 
     componentDidMount() {
-        this.catchClickRef.addEventListener('click', this.handleHjelpetekstClicked, { capture: true });
+        this.catchClickRef.addEventListener('click', this.handleHjelpetekstClicked, {capture: true});
     }
 
     componentWillUnmount() {
-        this.catchClickRef.removeEventListener('click', this.handleHjelpetekstClicked, { capture: true });
+        this.catchClickRef.removeEventListener('click', this.handleHjelpetekstClicked, {capture: true});
     }
 
     handleHjelpetekstClicked = () => {
-        logEvent('portefolje.metrikker.aktivitet_hjelpetekst_trykket', { sideNavn: finnSideNavn() });
-    }
+        logEvent('portefolje.metrikker.aktivitet_hjelpetekst_trykket', {sideNavn: finnSideNavn()});
+    };
 
     render() {
-        const { overskriftTekst, hjelpeTekst } = this.props;
+        const {overskriftTekst, hjelpeTekst} = this.props;
         return (
             <div className="blokk-xxs filtrering--overskrift-med-hjelpetekst">
                 <Element tag="h3">
                     {overskriftTekst}
                 </Element>
-                <div ref={(ref) => { this.catchClickRef = ref; }}>
+                <div ref={(ref) => {
+                    this.catchClickRef = ref;
+                }}>
                     <HjelpetekstAuto id={hjelpeTekst}>
                         {hjelpeTekst}
                     </HjelpetekstAuto>

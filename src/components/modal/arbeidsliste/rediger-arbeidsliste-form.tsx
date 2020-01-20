@@ -5,12 +5,13 @@ import FormikTekstArea from '../../formik/formik-tekstarea';
 import FormikInput from '../../formik/formik-input';
 import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
 import { Undertekst } from 'nav-frontend-typografi';
+import './arbeidsliste.less';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
     sistEndretAv?: string;
     laster: boolean;
-    lukkModal: ()=> void;
+    lukkModal: () => void;
 }
 
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
@@ -26,10 +27,10 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <div>
                     <div className="modal-footer">
                         <Hovedknapp htmlType="submit" className="knapp knapp--hoved" spinner={props.laster}>
-                           Lagre
+                            Lagre
                         </Hovedknapp>
                         <button type="button" className="knapp" onClick={props.lukkModal}>
-                           Avbryt
+                            Avbryt
                         </button>
                     </div>
                 </div>

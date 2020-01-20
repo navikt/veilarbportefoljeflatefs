@@ -9,7 +9,6 @@ import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-ut
 import { VeiledereState } from '../ducks/veiledere';
 import { StatustallModell, ValgtEnhetModell } from '../model-interfaces';
 import { pagineringSetup } from '../ducks/paginering';
-import './veiledere-side.less';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
@@ -20,6 +19,7 @@ import { hentPortefoljeStorrelser as fetchPortefoljeStorrelser } from '../ducks/
 import { hentStatusTall as fetchStatusTall } from '../ducks/statustall';
 import { RouterProps } from 'react-router';
 import { defaultVeileder } from '../filtrering/filtrering-container';
+import './veiledere.less';
 
 interface StateProps {
     veiledere: VeiledereState;
