@@ -5,18 +5,16 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
-import VeilederPortefoljeVisning from './minoversikt-portefolje-visning';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
 import { hentPortefoljeForVeileder, settSortering, settValgtVeileder } from '../ducks/portefolje';
 import { EnheterState } from '../ducks/enheter';
 import { VeiledereState } from '../ducks/veiledere';
-import { FiltervalgModell, ValgtEnhetModell } from '../model-interfaces';
+import { FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-interfaces';
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
-import ListevisningInfoPanel from '../components/toolbar/listevisning/listevisning-infopanel';
 import {
     getSeAlleFromUrl, getSideFromUrl, getSorteringsFeltFromUrl,
-    getSorteringsRekkefolgeFromUrl
+    getSorteringsRekkefolgeFromUrl, leggEnhetIUrl
 } from '../utils/url-utils';
 import { pagineringSetup } from '../ducks/paginering';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
@@ -24,6 +22,13 @@ import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
 import './minoversikt-side.less';
 import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
 import Lenker from '../lenker/lenker';
+import TabellOverskrift from '../components/tabell-overskrift';
+import Toolbar from '../components/toolbar/toolbar';
+import MinoversiktTabellOverskrift from './minoversikt-portefolje-tabelloverskrift';
+import MinoversiktTabell from './minoversikt-portefolje-tabell';
+import { MinOversiktModalController } from '../components/modal/modal-min-oversikt-controller';
+import { STATUS } from '../ducks/utils';
+import { ASCENDING, DESCENDING } from '../konstanter';
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -35,7 +40,8 @@ interface StateProps {
     listevisning: ListevisningState;
     sorteringsfelt: string;
     sorteringsrekkefolge: string;
-    innloggetVeilederIdent: string | undefined;
+    innloggetVeilederIdent: string;
+    portefolje: any;
 }
 
 interface IdentProps {
@@ -57,11 +63,42 @@ interface OwnProps {
             params:
                 { ident: string; }
         };
+    gjeldendeVeileder: VeilederModell;
+    visesAnnenVeiledersPortefolje: boolean;
 }
 
 type MinoversiktSideProps = StateProps & DispatchProps & OwnProps;
 
 class MinoversiktSide extends React.Component<MinoversiktSideProps> {
+    componentWillMount() {
+        const {
+            valgtEnhet,
+        } = this.props;
+
+        leggEnhetIUrl(valgtEnhet.enhet!.enhetId!);
+        this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
+    }
+
+    settSorteringOgHentPortefolje(felt) {
+        const {
+            sorteringsrekkefolge,
+            sorteringsfelt,
+            doSettSortering,
+            hentPortefolje,
+            gjeldendeVeileder,
+            valgtEnhet,
+            filtervalg
+        } = this.props;
+        let valgtRekkefolge: string;
+        if (felt !== sorteringsfelt) {
+            valgtRekkefolge = ASCENDING;
+        } else {
+            valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
+        }
+        doSettSortering(valgtRekkefolge, felt);
+        hentPortefolje(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, valgtRekkefolge, felt, filtervalg);
+    }
+
     componentDidMount() {
         const {veiledere, enheter, valgtEnhet, filtervalg, hentPortefolje, ...props} = this.props;
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
@@ -74,7 +111,6 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
 
         this.props.hentStatusTall(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident);
         this.props.hentEnhetTiltak(valgtEnhet.enhet!.enhetId);
-
         this.props.doSettValgtVeileder(gjeldendeVeileder);
 
         const sorteringsfelt = getSorteringsFeltFromUrl();
@@ -84,7 +120,6 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
         hentPortefolje(
             valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, sorteringsrekkefolge, sorteringsfelt, filtervalg
         );
-
     }
 
     settInitalStateFraUrl() {
@@ -94,26 +129,40 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
     }
 
     render() {
-        const {enheter, veiledere, filtervalg, statustall, enhettiltak, listevisning, ...props} = this.props;
+        const {
+            enheter,
+            veiledere,
+            filtervalg,
+            statustall,
+            enhettiltak,
+            listevisning,
+            portefolje,
+            hentPortefolje,
+            sorteringsrekkefolge,
+            sorteringsfelt,
+            valgtEnhet,
+            innloggetVeilederIdent,
+            ...props
+        } = this.props;
+
         const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
         const innloggetVeileder = {ident: enheter.ident || '', fornavn: '', etternavn: '', navn: ''};
         const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
-
         const visesAnnenVeiledersPortefolje = gjeldendeVeileder.ident !== innloggetVeileder.ident;
-
         const annenVeilederVarsel = (
             <Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
                 {`Du er inne på ${gjeldendeVeileder.fornavn} ${gjeldendeVeileder.etternavn} sin oversikt`}
             </Normaltekst>
         );
-
         const tiltak = sortTiltak(enhettiltak.data.tiltak);
-
+        const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
+        const antallValgt = brukere.filter((bruker) => bruker.markert).length;
+        const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
         return (
-            <div className="minoversikt-side blokk-xl">
-                <DocumentTitle title="Min oversikt">
+            <DocumentTitle title="Min oversikt">
+                <div className="minoversikt-side blokk-xl">
+                    <Lenker/>
                     <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                        <Lenker/>
                         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
                             {visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
                             <div className="portefolje-side">
@@ -128,26 +177,61 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                             />
                                         </div>
                                         <div className="col-lg-9 col-md-12 col-sm-12">
-                                            <FiltreringLabelContainer
-                                                filtervalg={filtervalg}
-                                                filtergruppe="veileder"
-                                                veileder={gjeldendeVeileder}
-                                                enhettiltak={enhettiltak.data.tiltak}
-                                                listevisning={listevisning}
-                                            />
-                                            <ListevisningInfoPanel name={ListevisningType.minOversikt}/>
-                                            <VeilederPortefoljeVisning
-                                                gjeldendeVeileder={gjeldendeVeileder}
-                                                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            />
+                                            <div className="sticky-container">
+                                                <FiltreringLabelContainer
+                                                    filtervalg={filtervalg}
+                                                    filtergruppe="veileder"
+                                                    veileder={gjeldendeVeileder}
+                                                    enhettiltak={enhettiltak.data.tiltak}
+                                                    listevisning={listevisning}
+                                                    className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
+                                                />
+                                                <TabellOverskrift
+                                                    fraIndex={fraIndex}
+                                                    antallIVisning={antallReturnert}
+                                                    antallTotalt={antallTotalt}
+                                                    antallValgt={antallValgt}
+                                                    className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'} //tabelloverskrift blokk-xxs
+                                                />
+                                                <div className="sticky-container__skygge">
+                                                    <Toolbar
+                                                        filtergruppe={ListevisningType.minOversikt}
+                                                        onPaginering={() => hentPortefolje(
+                                                            valgtEnhet.enhet!.enhetId,
+                                                            gjeldendeVeileder.ident,
+                                                            sorteringsrekkefolge,
+                                                            sorteringsfelt,
+                                                            filtervalg
+                                                        )}
+                                                        gjeldendeVeileder={gjeldendeVeileder}
+                                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                                        sokVeilederSkalVises={false}
+                                                        antallTotalt={antallTotalt}
+                                                    />
+                                                    <MinoversiktTabellOverskrift
+                                                        innloggetVeileder={innloggetVeilederIdent}
+                                                        settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <Innholdslaster
+                                                avhengigheter={[portefolje, {status: tilordningerStatus}]}>
+                                                <div className="portefolje__container">
+                                                    <MinoversiktTabell
+                                                        innloggetVeileder={innloggetVeilederIdent}
+                                                        settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
+                                                    />
+                                                </div>
+                                            </Innholdslaster>
+                                            <MinOversiktModalController/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </Innholdslaster>
-                </DocumentTitle>
-            </div>
+                </div>
+            </DocumentTitle>
         );
     }
 }
@@ -162,7 +246,8 @@ const mapStateToProps = (state): StateProps => ({
     listevisning: state.ui.listevisningMinOversikt,
     sorteringsfelt: state.portefolje.sorteringsfelt,
     sorteringsrekkefolge: state.portefolje.sorteringsrekkefolge,
-    innloggetVeilederIdent: state.enheter.ident
+    innloggetVeilederIdent: state.enheter.ident,
+    portefolje: state.portefolje,
 });
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({

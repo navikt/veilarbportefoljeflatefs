@@ -17,14 +17,19 @@ interface FiltreringLabelContainerProps {
     filtervalg: FiltervalgModell;
     filtergruppe: string;
     listevisning?: ListevisningState;
+    className: string;
 }
 
 function getKolonneFraLabel(label) {
     switch (label) {
-        case VENTER_PA_SVAR_FRA_BRUKER: return Kolonne.VENTER_SVAR;
-        case I_AVTALT_AKTIVITET: return Kolonne.AVTALT_AKTIVITET;
-        case UTLOPTE_AKTIVITETER: return Kolonne.UTLOPTE_AKTIVITETER;
-        default: return null;
+        case VENTER_PA_SVAR_FRA_BRUKER:
+            return Kolonne.VENTER_SVAR;
+        case I_AVTALT_AKTIVITET:
+            return Kolonne.AVTALT_AKTIVITET;
+        case UTLOPTE_AKTIVITETER:
+            return Kolonne.UTLOPTE_AKTIVITETER;
+        default:
+            return null;
     }
 }
 
@@ -35,7 +40,7 @@ function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
     return false;
 }
 
-function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}, filtergruppe}: FiltreringLabelContainerProps) {
+function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}, filtergruppe, className}: FiltreringLabelContainerProps) {
     let muligMenIkkeValgt: boolean;
     let kolonne: Kolonne | null;
     const filterElementer = Object.entries(filtervalg)
@@ -49,18 +54,18 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     />
                 ];
             } else if (Array.isArray(value)) {
-                    return value.map((singleValue) => {
-                    return (
-                        <FiltreringLabel
-                        key={`${key}--${singleValue.key || singleValue}`}
-                        label={
-                            key === 'tiltakstyper' ?
-                                enhettiltak[singleValue] :
-                                (singleValue.label || FilterKonstanter[key][singleValue] || singleValue)
-                        }
-                        slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
-                    />);
-                        }
+                return value.map((singleValue) => {
+                        return (
+                            <FiltreringLabel
+                                key={`${key}--${singleValue.key || singleValue}`}
+                                label={
+                                    key === 'tiltakstyper' ?
+                                        enhettiltak[singleValue] :
+                                        (singleValue.label || FilterKonstanter[key][singleValue] || singleValue)
+                                }
+                                slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
+                            />);
+                    }
                 );
             } else if (value && typeof value === 'object') { // value er aktiviteter
                 muligMenIkkeValgt = harMuligMenIkkeValgtKolonne(listevisning, Kolonne.UTLOP_AKTIVITET);
@@ -110,10 +115,11 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
             return [];
         }).reduce((acc, l) => [...acc, ...l], []);
 
-    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle} harMuligMenIkkeValgtKolonne={false} skalHaKryssIkon={false} />;
+    const fjernAlle = <FiltreringLabel key="slett-alle" label="Slett alle filtervalg" slettFilter={slettAlle}
+                                       harMuligMenIkkeValgtKolonne={false} skalHaKryssIkon={false}/>;
 
     return (
-        <section className="filtrering-label-container">
+        <section className={className}>
             {filterElementer}
             {filterElementer.length >= 3 ? fjernAlle : null}
         </section>

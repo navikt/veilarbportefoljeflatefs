@@ -4,6 +4,19 @@
     list-style: none;
     margin: 0;
     padding: 0;
+
+    li:nth-child(odd) {
+        background-color: #F4F4F4;
+    }
+}
+
+.enhet-tabell {
+    background-color: white;
+    border: 1px solid @navGra60;
+    border-top-color: white;
+    border-bottom: none;
+    border-radius: 0 0 @border-radius-base @border-radius-base;
+    margin-bottom: 0;
 }
 
 .brukerliste__element {
@@ -16,7 +29,7 @@
     top: -12px;
 }
 
-.brukerliste .checkboks+.skjemaelement__label:before {
+.brukerliste .checkboks + .skjemaelement__label:before {
     margin-top: 2px;
     width: 20px;
     height: 20px;
@@ -38,10 +51,16 @@
 
 .brukerliste--border-bottom-thin {
     border-bottom: 1px solid @navGra40;
+
 }
 
 .brukerliste--forrigeBruker {
     box-shadow: inset -1px 0 0 2px @navGra60, inset 1px 0 0 2px @navGra40;
+}
+
+.brukerliste__header {
+    z-index: 500;
+    background-color: white;
 }
 
 .brukerliste__overskriftheader {
@@ -61,11 +80,7 @@
 .brukerliste__gutter-left {
     display: flex;
     align-items: center;
-    margin-left: 8px;
-}
-
-.brukerliste--min-width-enhet {
-    min-width: 2rem;
+    margin-left: 1rem;
 }
 
 .brukerliste--min-width-minside {
@@ -73,7 +88,7 @@
 }
 
 .brukerliste__innhold {
-    width: 78%;
+    width: 80%;
 }
 
 .brukerliste__gutter-right {
@@ -92,10 +107,10 @@
     cursor: pointer;
     padding: 0;
     margin-left: 1rem;
-    background-color: @navLysGra;
-    border: none;
+    background-color: transparent;
     min-width: 2rem;
     color: @navMorkGra;
+    border: none;
 }
 
 .brukerliste__arbeidslistepanel {

@@ -5,17 +5,15 @@ import { endreFiltervalg, veilederSoktFraToolbar } from '../../ducks/filtrering'
 import { nameToStateSliceMap } from '../../ducks/utils';
 import { FiltervalgModell } from '../../model-interfaces';
 import { VeiledereState } from '../../ducks/veiledere';
-import { ToolbarPosisjon } from './toolbar';
-import {useEffect, useState} from "react";
-import DropdownNy from "../dropdown/dropdown-ny";
-import classNames from "classnames";
-import SokVeiledere from "../sok-veiledere/sok-veiledere";
+import { useEffect, useState } from 'react';
+import DropdownNy from '../dropdown/dropdown-ny';
+import classNames from 'classnames';
+import SokVeiledere from '../sok-veiledere/sok-veiledere';
 
 interface SokVeilederProps {
     filtervalg: FiltervalgModell;
     veiledere: VeiledereState;
     skalVises?: boolean;
-    toolbarPosisjon?: ToolbarPosisjon;
 }
 
 interface DispatchProps {
@@ -29,23 +27,22 @@ function SokVeilederFilter(props: AllProps) {
     const [valgteVeileder, setValgteVeileder] = useState<string[]>(props.filtervalg.veiledere || []);
 
     useEffect(() => {
-        setValgteVeileder(props.filtervalg.veiledere || [])
-    },[props.filtervalg.veiledere]);
+        setValgteVeileder(props.filtervalg.veiledere || []);
+    }, [props.filtervalg.veiledere]);
 
-    if(!props.skalVises) {
+    if (!props.skalVises) {
         return null;
     }
 
     const harValg = valgteVeileder.length > 0;
 
     const hanterChange = (erValgt, veilederTarget) => erValgt
-            ? setValgteVeileder([veilederTarget, ...valgteVeileder])
-            : setValgteVeileder(valgteVeileder.filter(veileder => veileder !== veilederTarget));
-
+        ? setValgteVeileder([veilederTarget, ...valgteVeileder])
+        : setValgteVeileder(valgteVeileder.filter(veileder => veileder !== veilederTarget));
 
     const createHandleOnSubmit = (filterverdi: string[], lukkDropDown: () => void) => {
         lukkDropDown();
-        if(harValg) {
+        if (harValg) {
             props.sokEtterVeileder('veiledere', filterverdi);
             props.veilederSokt();
             setValgteVeileder([]);
@@ -56,7 +53,7 @@ function SokVeilederFilter(props: AllProps) {
         <DropdownNy
             name="Søk veileder"
             className="dropdown--fixed dropdown--toolbar"
-            render={ lukkDropDown =>
+            render={lukkDropDown =>
                 <>
                     <SokVeiledere
                         erValgt={ident => valgteVeileder.includes(ident)}
@@ -64,10 +61,10 @@ function SokVeilederFilter(props: AllProps) {
                     />
                     <div className="checkbox-filterform__valg-knapp knapperad blokk-xxs">
                         <button
-                            onClick={()=> createHandleOnSubmit(valgteVeileder, lukkDropDown)}
+                            onClick={() => createHandleOnSubmit(valgteVeileder, lukkDropDown)}
                             className={classNames('knapp', 'knapp--mini', {'knapp--hoved': harValg})}
                         >
-                            {harValg ? "Velg" : "Lukk"}
+                            {harValg ? 'Velg' : 'Lukk'}
                         </button>
                     </div>
                 </>
@@ -75,7 +72,6 @@ function SokVeilederFilter(props: AllProps) {
         />
     );
 }
-
 
 const mapStateToProps = (state, ownProps) => {
     const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || 'filtrering';
@@ -91,7 +87,7 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
         return endreFiltervalg(filterId, filterverdi, ownProps.filtergruppe, ownProps.veileder.ident);
     },
     veilederSokt() {
-        return veilederSoktFraToolbar(ownProps.toolbarPosisjon);
+        return veilederSoktFraToolbar();
     }
 }, dispatch);
 

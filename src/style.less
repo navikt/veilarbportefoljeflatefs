@@ -6,7 +6,7 @@ body {
     margin: 0;
     height: 100%;
     width: 100%;
-    background-color: @navLysGra !important;
+    background-color: #F4F4F4;
     font-size: 1rem;
     font-weight: 400;
     color: @navMorkGra;
@@ -23,7 +23,7 @@ body {
         margin: 0 auto;
         height: 100%;
         max-height: 5rem;
-        box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
+        box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
     }
 }
 
@@ -112,4 +112,24 @@ html {
 
 .text--left {
     text-align: left;
+}
+
+.sticky-container {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    .blokk-xxs {
+        margin-bottom: 0;
+    }
+
+    &__skygge {
+        border-bottom: 1px solid @navGra60;
+        box-shadow: 0px 5px 8px 0px @navGra40;
+    }
+}
+
+#veilederside-toolbar {
+    position: sticky;
+    top: 1.5rem;
 }

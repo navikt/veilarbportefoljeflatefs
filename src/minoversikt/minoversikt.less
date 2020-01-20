@@ -1,49 +1,58 @@
+.minoversikt-liste__wrapper {
+    background-color: white;
+    border: 1px solid @navGra60;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 0 0 @border-radius-base @border-radius-base;
+    margin-bottom: 0;
+
+    li:nth-child(odd) {
+        background-color: #F4F4F4;
+    }
+}
+
 .annen-veileder {
-  padding: 1rem;
-  background-color: @navLysBlaLighten40;
+    padding: 1rem;
+    background-color: @navLysBlaLighten40;
 
-  .annen-veileder-varsel {
-    text-align: center;
-  }
+    .annen-veileder-varsel {
+        text-align: center;
+    }
 
-  .portefolje-side {
-    padding: 2rem;
-  }
+    .portefolje-side {
+        padding: 2rem;
+    }
 }
 
 .tilbaketilveileder {
-  display: inline-block;
-  position: relative;
-  margin-bottom: 2rem;
-  text-decoration: none;
-  color: @navBla;
-
-  &:active, &:visited, &:hover {
-    color: @navBla;
-  }
-
-  i {
-    position: absolute;
-    margin-top: 12px;
-  }
-
-  span {
     display: inline-block;
-    position: absolute;
-    margin-left: 20px;
-    white-space: nowrap;
-  }
-}
+    position: relative;
+    margin-bottom: 2rem;
+    text-decoration: none;
+    color: @navBla;
 
-.portefolje-side {
-  background-color: @navLysGra;
+    &:active, &:visited, &:hover {
+        color: @navBla;
+    }
+
+    i {
+        position: absolute;
+        margin-top: 12px;
+    }
+
+    span {
+        display: inline-block;
+        position: absolute;
+        margin-left: 20px;
+        white-space: nowrap;
+    }
 }
 
 .arbeidsliste--ikon {
-  background: data-uri('./flagg-filled.svg') no-repeat;
-  min-width: 1rem;
-  min-height: 20px;
-  margin-top: 4px;
-  position: relative;
-  right: -4px;
+    background: data-uri('./flagg-filled.svg') no-repeat;
+    min-width: 1rem;
+    min-height: 20px;
+    margin-top: 4px;
+    position: relative;
+    right: -4px;
 }

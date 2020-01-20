@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { settValgtVeileder } from '../ducks/portefolje';
 import { settSide } from '../ducks/ui/side';
+import { ReactComponent as PilAscending } from '../components/tabell/arrow-up.svg';
+import { ReactComponent as PilDescending } from '../components/tabell/arrow-down.svg';
 
 interface VeiledereTabellProps {
     innloggetVeileder: string;
@@ -28,14 +30,13 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
     }
 
     render() {
-        const { veiledere, currentSortering } = this.props;
-
+        const {veiledere, currentSortering} = this.props;
         const sorterEtternavn = currentSortering.property === 'etternavn';
         const sorterPaaPortefoljeStr = currentSortering.property === 'portefoljestorrelse';
 
         const veilederElementer = veiledere.map((veileder) => (
             <tr key={veileder.ident}>
-                <th>
+                <td>
                     <Link
                         to={`/portefolje/${veileder.ident}?clean`}
                         onClick={() => this.settOgNavigerTilValgtVeileder(veileder)}
@@ -43,64 +44,74 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
                     >
                         {`${veileder.navn}`}
                     </Link>
-                </th>
+                </td>
                 <td>{`${veileder.ident}`}</td>
                 <td className="tabell-element-center">{veileder.portefoljestorrelse}</td>
-                <td />
+                <td/>
             </tr>
         ));
 
+        const sorteringspil = (sorterPaa) => {
+            const className = 'tabellheader__pil';
+            if (sorterPaa) {
+                if (currentSortering.direction === 'ascending') {
+                    return <PilAscending className={className}/>;
+                } else if (currentSortering.direction === 'descending') {
+                    return <PilDescending className={className}/>;
+                }
+            }
+            return null;
+        };
+
+        console.log('sorteringsrekkefølge:', currentSortering.direction);
+        console.log('sortering:', currentSortering);
+
         return (
-            <div>
-                <table className="tabell veileder-tabell portefolje-tabell typo-undertekst blokk-xs">
-                    <thead className="extra-head">
-                        <tr>
-                            <th>
-                                Veileder
-                            </th>
-                            <th colSpan={3} />
-                        </tr>
-                    </thead>
-                    <thead className="tabell__subhead">
-                        <tr>
-                            <th scope="col">
-                                <button
-                                    onClick={this.props.sorterPaaEtternavn}
-                                    className={classNames('lenke lenke--frittstaende',
-                                        { 'valgt-sortering': sorterEtternavn })}
-                                    aria-pressed={sorterEtternavn}
-                                    aria-label={sorterEtternavn ?
-                                    currentSortering.direction : 'inaktiv'}
-                                >
-                                    Etternavn
-                                </button>
-                                , Fornavn
-                            </th>
-                            <th scope="col">
-                                NAV-ident
-                            </th>
-                            <th className="tabell-element-center" scope="col">
-                                <button
-                                    onClick={this.props.sorterPaaPortefoljestorrelse}
-                                    className={
-                                    classNames('lenke lenke--frittstaende',
-                                        { 'valgt-sortering': sorterPaaPortefoljeStr })
+            <table className="tabell veileder-tabell portefolje-tabell typo-undertekst blokk-xs">
+                <thead>
+                <tr>
+                    <th scope="col" className="tabellheader">
+                        <div className="tabellheader__lenke">
+                            <button
+                                onClick={this.props.sorterPaaEtternavn}
+                                className={classNames('lenke lenke--frittstaende',
+                                    {'valgt-sortering': sorterEtternavn})}
+                                aria-pressed={sorterEtternavn}
+                                aria-label={sorterEtternavn ? currentSortering.direction : 'inaktiv'}
+                            >
+                                Etternavn
+                            </button>
+                            , Fornavn
+                            {sorteringspil(sorterEtternavn)}
+                        </div>
+                    </th>
+                    <th scope="col" className="tabellheader">
+                        NAV-ident
+                    </th>
+                    <th className="tabellheader tabell-element-center" scope="col">
+                        <div className="tabellheader__lenke">
+                            <button
+                                onClick={this.props.sorterPaaPortefoljestorrelse}
+                                className={
+                                    classNames('lenke lenke--frittstaende tabellheader__tekst',
+                                        {'valgt-sortering': sorterPaaPortefoljeStr})
                                 }
-                                    aria-pressed={sorterPaaPortefoljeStr}
-                                    aria-label={sorterPaaPortefoljeStr ?
+                                aria-pressed={sorterPaaPortefoljeStr}
+                                aria-label={sorterPaaPortefoljeStr ?
                                     currentSortering.direction : 'inaktiv'}
-                                >
-                                    Antall brukere
-                                </button>
-                            </th>
-                            <th />
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {veilederElementer}
-                    </tbody>
-                </table>
-            </div>
+                            >
+                                Antall brukere
+                            </button>
+                            {sorteringspil(sorterPaaPortefoljeStr)}
+                        </div>
+                    </th>
+                    <th/>
+                </tr>
+                </thead>
+                <tbody>
+                {veilederElementer}
+                </tbody>
+            </table>
         );
     }
 }

@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Toolbar, { ToolbarPosisjon } from './../components/toolbar/toolbar';
+import Toolbar from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
 import { PageringOppdatering, pagineringSetup } from '../ducks/paginering';
 import { sortBy } from '../ducks/sortering';
-import { sorter } from './../utils/sortering';
+import { sorter } from '../utils/sortering';
 import { settSide } from '../ducks/ui/side';
-import { selectFraIndex, selectSeAlle, selectSideStorrelse } from '../components/toolbar/paginering/paginering-selector';
+import {
+    selectFraIndex,
+    selectSeAlle,
+    selectSideStorrelse
+} from '../components/toolbar/paginering/paginering-selector';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { VeiledereState } from '../ducks/veiledere';
 import { PortefoljeStorrelser } from '../ducks/portefoljestorrelser';
@@ -21,15 +25,15 @@ function erValgtHvisFiltrering(veiledere: string[]) {
 function medPortefoljestorrelse(portefoljeStorrelse) {
     if (portefoljeStorrelse.status !== 'OK') {
         // Før vi har fått portefoljestorrele har alle 0
-        return (veileder) => ({ ...veileder, portefoljestorrelse: 0 });
+        return (veileder) => ({...veileder, portefoljestorrelse: 0});
     }
     const storrelseMap = portefoljeStorrelse.data.facetResults
-        .reduce((acc, { value: ident, count }) => ({ ...acc, [ident]: count }), {});
+        .reduce((acc, {value: ident, count}) => ({...acc, [ident]: count}), {});
 
-    return (veileder) => ({ ...veileder, portefoljestorrelse: storrelseMap[veileder.ident] || 0 });
+    return (veileder) => ({...veileder, portefoljestorrelse: storrelseMap[veileder.ident] || 0});
 }
 
-function propertySort({ property, direction }) {
+function propertySort({property, direction}) {
     return sorter(property, direction);
 }
 
@@ -101,31 +105,24 @@ class VeilederesideVisning extends Component<VeilederesideVisningProps, Veileder
             side: 1
         });
 
-        this.setState({ veiledere });
-    }
-
-    lagToolbar(posisjon) {
-        return (
-            <Toolbar
-                filtergruppe={ListevisningType.veilederOversikt}
-                antallTotalt={this.state.veiledere.length}
-                sokVeilederSkalVises={false}
-                posisjon={posisjon}
-            />
-        );
+        this.setState({veiledere});
     }
 
     render() {
         const veiledere = this.getVeiledere();
         return (
             <div>
-                {this.lagToolbar(ToolbarPosisjon.OVER)}
+                <Toolbar
+                    filtergruppe={ListevisningType.veilederOversikt}
+                    antallTotalt={this.state.veiledere.length}
+                    sokVeilederSkalVises={false}
+                    id="veilederside-toolbar"
+                />
                 <VeiledereTabell
                     veiledere={veiledere}
                     sorterPaaEtternavn={() => this.props.sortBy('etternavn')}
                     sorterPaaPortefoljestorrelse={() => this.props.sortBy('portefoljestorrelse')}
                 />
-                {veiledere.length >= this.props.sideStorrelse && this.lagToolbar(ToolbarPosisjon.UNDER)}
             </div>
         );
     }

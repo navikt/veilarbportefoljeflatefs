@@ -1,5 +1,4 @@
 import * as React from 'react';
-import VelgalleCheckboks from './velgalle-checkboks';
 import TildelVeileder from './tildel-veileder';
 import LeggTilArbeidsliste from './legg-til-arbeidsliste';
 import SokVeileder from './sok-veileder';
@@ -8,11 +7,6 @@ import Listevisning from './listevisning/listevisning';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 import { VeilederModell } from '../../model-interfaces';
 
-export enum ToolbarPosisjon {
-    OVER = 'OVER',
-    UNDER = 'UNDER'
-}
-
 interface ToolbarProps {
     filtergruppe: ListevisningType;
     onPaginering?: (fra?: number, antall?: number) => void;
@@ -20,46 +14,41 @@ interface ToolbarProps {
     visesAnnenVeiledersPortefolje?: boolean;
     children?: React.ReactNode;
     gjeldendeVeileder?: VeilederModell;
-    visningsmodus?: string;
     antallTotalt: number;
-    posisjon?: ToolbarPosisjon;
+    id?: string;
 }
 
-const Toolbar = ({filtergruppe,
+const Toolbar = ({
+                     filtergruppe,
                      onPaginering,
                      sokVeilederSkalVises,
                      visesAnnenVeiledersPortefolje,
                      gjeldendeVeileder,
-                     visningsmodus,
                      antallTotalt,
-                     posisjon}: ToolbarProps) => (
-    <section className="toolbar blokk-xs">
+                     id
+                 }: ToolbarProps) => (
+    <section className="toolbar blokk-xs" id={id}>
         <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
-            <VelgalleCheckboks skalVises={filtergruppe in ListevisningType} toolbarPosisjon={posisjon}/>
             <TildelVeileder
                 skalVises={filtergruppe in ListevisningType}
                 filtergruppe={filtergruppe}
                 gjeldendeVeileder={gjeldendeVeileder}
-                toolbarPosisjon={posisjon}
             />
-            <Listevisning filtergruppe={filtergruppe} toolbarPosisjon={posisjon}/>
             <LeggTilArbeidsliste
                 visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false}
-                toolbarPosisjon={posisjon}
             />
             <SokVeileder
                 veileder={{}}
                 filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe}
                 skalVises={sokVeilederSkalVises}
-                toolbarPosisjon={posisjon}
             />
         </div>
         <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
+            <Listevisning filtergruppe={filtergruppe}/>
             <Paginering
                 className="toolbar--skille-mellom-elementer"
                 onChange={onPaginering}
                 antallTotalt={antallTotalt}
-                toolbarPosisjon={posisjon}
             />
         </div>
     </section>

@@ -21,9 +21,6 @@
         position: relative;
         display: inline-block;
 
-        &--disabled {
-            color: @grayInactive;
-        }
 
         &:before {
             .chevronline-mixin();
@@ -34,23 +31,31 @@
             .chevronline-mixin();
             transform: translateX(-3px) rotate(45deg);
         }
+
+        &--disabled {
+            color: @navGra20;
+        }
     }
+
     &__btn {
         text-align: left;
         width: 100%;
         padding: 0.45rem 1.5em 0.45rem 0.45rem;
         background: @white;
-        border: 1px solid @gray-icon;
+        border: 1px solid @navGra60;
         border-radius: @border-radius-small;
 
         &:focus {
             outline: none;
             box-shadow: 0 0 0 3px @fokusFarge;
         }
+
         &:disabled {
+            border-color: @navGra20;
             color: @navGra20;
         }
     }
+
     &__innhold {
         position: absolute;
         z-index: 110;
@@ -61,29 +66,33 @@
         width: 100%;
     }
 
-     .hoyre {
+    .hoyre {
         margin-left: -30%;
     }
+
     &--hover {
         .dropdown__btn, .dropdown__innhold {
             border-color: @navBla;
         }
     }
+
     &--apen {
         margin-bottom: -0.05rem;
+
         .dropdown__btnwrapper {
             &:before {
                 .chevronline-mixin();
                 transform: translateX(3px) rotate(45deg);
-                z-index: 200;
+                z-index: 2000;
             }
 
             &:after {
                 .chevronline-mixin();
                 transform: translateX(-3px) rotate(-45deg);
-                z-index: 200;
+                z-index: 2000;
             }
         }
+
         .dropdown__btn {
             position: relative;
             z-index: 120;
@@ -93,12 +102,14 @@
             padding-bottom: 1rem;
         }
     }
+
     &--alignright {
         .dropdown__innhold {
             right: 0;
             border-radius: @border-radius-small 0 @border-radius-small @border-radius-small;
         }
     }
+
     .knapperad {
         padding: 0;
     }

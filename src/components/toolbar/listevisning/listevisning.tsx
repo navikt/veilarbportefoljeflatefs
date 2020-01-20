@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import Dropdown from '../../dropdown/dropdown';
 import { avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ } from '../../../ducks/ui/listevisning';
 import { selectMuligeAlternativer, selectValgteAlternativer } from '../../../ducks/ui/listevisning-selectors';
-import { ToolbarPosisjon } from '../toolbar';
 import ListevisningRad from './listvisning-rad';
 
 interface OwnProps {
     filtergruppe: ListevisningType;
-    toolbarPosisjon?: ToolbarPosisjon;
 }
 
 interface StateProps {
@@ -42,7 +40,7 @@ const Listevisning = (props: ListevisningProps) => {
 
     return (
         <Dropdown name="Velg kolonner" disabled={props.muligeAlternativer.length <= 5}
-                  className="dropdown--fixed dropdown--toolbar">
+                  className="dropdown--fixed dropdown--toolbar toolbar__velg-kolonner">
             <section className="radio-filterform__valg">
                 <div className="blokk-s">
                     Du kan velge hvilke kolonner du ønsker å se i listen, maks 5 kolonner om gangen.
@@ -70,9 +68,9 @@ function mapStateToProps(state, ownProps): StateProps {
     };
 }
 
-function mapDispatchToProps(dispatch, props): DispatchProps {
+function mapDispatchToProps(dispatch): DispatchProps {
     return {
-        velgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(velgAlternativ(name, filtergruppe, props.toolbarPosisjon)),
+        velgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(velgAlternativ(name, filtergruppe)),
         avvelgAlternativ: (name: Kolonne, filtergruppe: ListevisningType) => dispatch(avvelgAlternativ(name, filtergruppe))
     };
 }

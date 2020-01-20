@@ -4,17 +4,21 @@
 @import "./listevisning/listevisning";
 
 .visuallyhidden {
-        position: absolute;
-        left: -1000000000px;
+    position: absolute;
+    left: -1000000000px;
 }
 
 .toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem;
-    border-radius: @border-radius-base;
+    padding: 1rem 1rem 0.5rem;
+    border: 1px solid @navGra60;
+    border-bottom: none;
+    border-radius: @border-radius-base @border-radius-base 0 0;
     background-color: @white;
+    margin-bottom: 0px;
+    z-index: 1000;
 
     .nav-frontend-chevron span {
         .sr-only();
@@ -27,68 +31,66 @@
 
 .toolbar__element {
     display: flex;
+    flex-direction: row;
 }
 
 .toolbar__venstre {
+    margin-right: 0.5rem;
 }
 
 .toolbar__midten {
 }
 
 .toolbar__hoyre {
-    width: 14rem;
+    margin-left: 0.5rem;
 }
 
 .velgalle-checkboks {
     margin: 0;
     color: @toolbarTextColor;
+    padding: 0;
+    width: auto;
+    top: -15px;
+
     .skjemaelement__label:before {
         top: 2px;
     }
-    input:disabled + label {
-        color: @toolbarInactiveTextColor;
-    }
 
-    &:not(:disabled):hover {
-        .velgalle-checkboks__label {
-            border-bottom: 1px solid @navGra40;
-        }
+    input:disabled + label {
     }
 }
 
+.minoversikt__velgallecheckbox {
+    margin-right: 1rem;
+}
+
 .dropdown--toolbar {
-    margin-bottom: 0;
-    margin-left: 0.5rem;
+    border-radius: @border-radius-base;
+    width: auto;
+    min-width: 11rem;
+    height: 100%;
+    margin: 0 1rem 0 0;
 
     .dropdown__btn {
-        border: 1px solid transparent;
-        color: @toolbarTextColor;
-        padding-right: 2rem;
-        padding-top: 0;
-        padding-bottom: 0;
+        border: 1px solid @navGra60;
+        color: @navGra80;
+        padding: 0.5rem;
+        cursor: pointer;
 
-
-        &:not(:disabled) {
-            cursor: pointer;
-
-            &:hover .dropdown__btntext {
-                border-bottom: 1px solid @navGra40;
-            }
+        &:hover {
+            border-color: @blue-link;
         }
 
         &:disabled {
-            color: @toolbarInactiveTextColor;
+            color: @navGra20;
+            border: 1px solid @navGra20;
         }
     }
+
     .dropdown__btnwrapper {
-        color: @toolbarTextColor;
-
-        &--disabled {
-            color: @grayInactive;
-        }
-
         &:before, &:after {
             .chevronline-mixin(0.75rem);
+            top: 50%;
         }
     }
 
@@ -107,6 +109,7 @@
     .sokfilter .skjemaelement__label {
         .sr-only();
     }
+
     .sokfilter .skjemaelement__input {
         height: 1.8rem;
         width: 90%;
@@ -122,23 +125,39 @@
 }
 
 .toolbar_btn {
-    border: none;
-    color: @toolbarTextColor;
-    padding-right: 2rem;
-    padding-top: 0;
-    padding-bottom: 0;
-    background-color: @white;
-    margin: 0 0.5rem;
+    border: 1px solid @navGra60;
+    padding: 0.5rem;
+    width: 100%;
+    height: 100%;
+    margin: 0 0.5rem 0 0;
+    max-width: 12rem;
+    position: relative;
+    text-align: inherit;
 
     &:disabled {
-        color: @toolbarInactiveTextColor;
+        border: 1px solid @navGra20;
+
+        #arbeidsliste-svg {
+            opacity: 40%;
+        }
     }
 
     &:focus {
         outline: none;
         border-radius: 2px;
-        box-shadow: 0 0 0 3px #ffbd66
+        box-shadow: 0 0 0 3px #ffbd66;
     }
+
+    &:hover {
+        border-color: @blue-link;
+        cursor: pointer;
+    }
+}
+
+.toolbar__arbeidsliste-ikon {
+    min-width: 1.5rem;
+    position: absolute;
+    right: 0.25rem;
 }
 
 

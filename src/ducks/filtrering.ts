@@ -1,6 +1,5 @@
 import { oppdaterPortefolje } from './portefolje';
 import { FiltervalgModell, VeilederModell } from '../model-interfaces';
-import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -176,8 +175,8 @@ export function clearFiltervalg(filtergruppe = 'enhet', veileder) {
     };
 }
 
-export function veilederSoktFraToolbar(toolbarPosisjon: ToolbarPosisjon) {
+export function veilederSoktFraToolbar() {
     return (dispatch) => {
-        dispatch({ type: VEILEDER_SOKT_FRA_TOOLBAR, toolbarPosisjon });
+        dispatch({ type: VEILEDER_SOKT_FRA_TOOLBAR });
     };
 }

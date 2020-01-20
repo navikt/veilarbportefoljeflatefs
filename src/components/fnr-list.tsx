@@ -1,8 +1,8 @@
 import React from 'react';
-import "./modal-liste.less";
+import './modal-liste.less';
 
 export interface Fnr {
-    brukerFnr: string
+ brukerFnr: string
 }
 
 interface FnrList {
@@ -15,7 +15,6 @@ export function FnrList(props: FnrList) {
     ));
 
     const className = listElements.length >= 18 ? 'blokk-s modal-liste__lang' : 'blokk-s modal-liste';
-
 
     return (
         <ul className={className}>
