@@ -18,10 +18,11 @@ function SorteringHeader({sortering, onClick, rekkefolge, erValgt, tekst, skalVi
 
     const ariaLabel = erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'inaktiv';
     const sorteringspil = () => {
+        const className = 'sorteringheader__pil';
         if (ariaLabel === 'ascending') {
-            return <PilAscending className="sorteringheader__pil-ikke-sortert"/>;
+            return <PilAscending className={className}/>;
         } else if (ariaLabel === 'descending') {
-            return <PilDescending className="sorteringheader__pil-ikke-sortert"/>;
+            return <PilDescending className={className}/>;
         } else {
             return null;
         }
