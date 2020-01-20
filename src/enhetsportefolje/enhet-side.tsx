@@ -91,7 +91,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
             filtervalg
         } = this.props;
 
-        let valgtRekkefolge = '';
+        let valgtRekkefolge: string;
 
         if (felt !== sorteringsfelt) {
             valgtRekkefolge = ASCENDING;
