@@ -5,7 +5,7 @@ import { pagineringSetup } from './paginering';
 import { TILDELING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from './statustall';
-import { leggSideIUrl, leggSorteringIUrl } from '../utils/url-utils';
+import {  leggSorteringIUrl } from '../utils/url-utils';
 import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { ListevisningType, oppdaterAlternativer } from './ui/listevisning';
 import {
@@ -292,8 +292,7 @@ export function markerAlleBrukere(markert, toolbarPosisjon?: ToolbarPosisjon) {
     });
 }
 
-export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder, toolbarPosisjon?: ToolbarPosisjon) {
-    const veilederIdent = gjeldendeVeileder ? gjeldendeVeileder.ident : undefined;
+export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veilederIdent, toolbarPosisjon?: ToolbarPosisjon) {
     return (dispatch, getState) => {
         dispatch({type: TILDEL_VEILEDER_RELOAD});
         dispatch({type: PENDING});

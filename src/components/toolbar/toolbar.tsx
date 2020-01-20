@@ -6,7 +6,6 @@ import SokVeileder from './sok-veileder';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
 import { ListevisningType } from '../../ducks/ui/listevisning';
-import { VeilederModell } from '../../model-interfaces';
 
 export enum ToolbarPosisjon {
     OVER = 'OVER',
@@ -19,7 +18,7 @@ interface ToolbarProps {
     sokVeilederSkalVises?: boolean;
     visesAnnenVeiledersPortefolje?: boolean;
     children?: React.ReactNode;
-    gjeldendeVeileder?: VeilederModell;
+    gjeldendeVeileder?: string;
     visningsmodus?: string;
     antallTotalt: number;
     posisjon?: ToolbarPosisjon;
@@ -30,7 +29,6 @@ const Toolbar = ({filtergruppe,
                      sokVeilederSkalVises,
                      visesAnnenVeiledersPortefolje,
                      gjeldendeVeileder,
-                     visningsmodus,
                      antallTotalt,
                      posisjon}: ToolbarProps) => (
     <section className="toolbar blokk-xs">

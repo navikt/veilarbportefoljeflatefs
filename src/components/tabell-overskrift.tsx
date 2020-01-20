@@ -20,7 +20,7 @@ function TabellOverskrift() {
     return (
         <Element tag="h1" className="blokk-xxs">
             <strong aria-live="polite" aria-atomic="true">
-                `Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere. `
+                {`Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere. `}
                 {antallValgteBrukere}
             </strong>
         </Element>

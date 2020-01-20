@@ -14,7 +14,7 @@ interface TildelVeilederProps {
     skalVises: boolean;
     filtergruppe?: string;
     toolbarPosisjon?: ToolbarPosisjon;
-    gjeldendeVeileder?: VeilederModell;
+    gjeldendeVeileder?: string;
 }
 
 function TildelVeileder({ skalVises,  filtergruppe, gjeldendeVeileder, toolbarPosisjon }: TildelVeilederProps) {

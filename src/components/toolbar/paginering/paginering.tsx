@@ -44,7 +44,7 @@ function Paginering(props: PagineringProps) {
 
     const totalPagenering = (sideNumber: number, seAlleBool: boolean): void => {
         endrePaginering(sideNumber, seAlleBool);
-        //leggSideIUrl(sideNumber);
+        leggSideIUrl(sideNumber);
         if(onChange) {
             onChange();
         }

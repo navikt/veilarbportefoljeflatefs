@@ -11,12 +11,12 @@ import FiltreringStatusNyeBrukere from './filtrering-status-components/nyebruker
 import FiltreringStatusUfordelteBrukere from './filtrering-status-components/ufordelte-brukere';
 import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avtalt-mote-med-nav';
 import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
-import { FiltervalgModell, VeilederModell } from '../../model-interfaces';
+import { FiltervalgModell } from '../../model-interfaces';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
-    veileder: VeilederModell;
+    veileder: string;
 }
 
 export function FiltreringStatus(props: FiltreringStatusProps) {

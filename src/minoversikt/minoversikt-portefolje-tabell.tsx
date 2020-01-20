@@ -8,6 +8,8 @@ import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
 import { useForrigeBruker } from '../hooks/use-forrige-bruker';
 import {OrNothing} from "../utils/types/types";
 import {VeilederModell} from "../model-interfaces";
+import {useOnUnmount} from "../hooks/use-on-unmount";
+import {updateLastPath} from "../utils/url-utils";
 
 interface MinOversiktTabellProps {
     innloggetVeileder: OrNothing<VeilederModell>;
@@ -21,6 +23,10 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
 
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
+
+    useOnUnmount(()=> {
+        updateLastPath();
+    });
 
     return (
         <div className="minoversikt-liste__wrapper typo-undertekst blokk-xs">

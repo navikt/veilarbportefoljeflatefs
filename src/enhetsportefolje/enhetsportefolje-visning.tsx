@@ -129,15 +129,12 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
     render() {
         const {
             portefolje,
-            valgtEnhet,
             veiledere,
             filtervalg,
-            sideStorrelse,
         } = this.props;
 
         updateLastPath();
 
-        const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
 
         const harFilter = antallFilter(filtervalg) !== 0;
         if (!harFilter) {
@@ -145,20 +142,16 @@ class EnhetsportefoljeVisning extends React.Component<EnhetsportefoljeVisningPro
         }
 
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
-        const antallValgt = brukere.filter((bruker) => bruker.markert).length;
-        const visNedreToolbar = antallTotalt >= sideStorrelse;
 
         return (
             <div className="portefolje__container">
                 <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
                     <TabellOverskrift/>
                     {this.lagToolbar(ToolbarPosisjon.OVER)}
-
                     <EnhetTabell
                         veiledere={veiledere.data.veilederListe}
                         settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
                     />
-                    {visNedreToolbar && this.lagToolbar(ToolbarPosisjon.UNDER)}
                     <ModalEnhetSideController/>
                 </Innholdslaster>
             </div>

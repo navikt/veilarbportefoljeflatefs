@@ -6,10 +6,7 @@ import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 import { FiltreringStatus } from './filtrering-status/filtrering-status';
-import { useEffect } from 'react';
-import { hentLagretFilterForEnhet } from '../ducks/lagret-filter';
 import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-veileder-grupper';
-import { useEnhetSelector } from '../hooks/redux/use-enhet-selector';
 import { OrNothing } from '../utils/types/types';
 import { Tiltak } from '../ducks/enhettiltak';
 
@@ -24,19 +21,12 @@ interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
-    veileder?: VeilederModell;
+    veileder?: string;
 }
 
-function FiltreringContainer({filtergruppe, filtervalg, veileder = defaultVeileder, enhettiltak}: FiltreringContainerProps) {
+function FiltreringContainer({filtergruppe, filtervalg, veileder = '', enhettiltak}: FiltreringContainerProps) {
 
     const dispatch = useDispatch();
-    const valgtEnhet = useEnhetSelector();
-
-    useEffect(() => {
-        if (valgtEnhet) {
-            dispatch(hentLagretFilterForEnhet(valgtEnhet));
-        }
-    }, [dispatch, valgtEnhet]);
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: string) =>
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe, veileder));

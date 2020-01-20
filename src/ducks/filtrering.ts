@@ -127,7 +127,7 @@ export function lagreFiltervalg(filterId: string, filterVerdi, filtergruppe: str
 
 
 // Action Creators
-export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: VeilederModell) {
+export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: string) {
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
         return (dispatch, getState) => {
             dispatch({

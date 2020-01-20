@@ -12,7 +12,6 @@ import {
     lageNyGruppe,
 } from '../../ducks/lagret-filter';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
-import { defaultVeileder } from '../filtrering-container';
 
 
 function FilteringVeilederGrupper() {
@@ -29,7 +28,7 @@ function FilteringVeilederGrupper() {
         enhet && dispatch(lageNyGruppe({
             filterNavn: gruppeNavn,
             filterValg
-        }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', defaultVeileder)));
+        }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', '')));
     };
 
     const sortertVeiledergruppe = lagretFilter.sort((a, b) => a.filterNavn.localeCompare(b.filterNavn));

@@ -4,8 +4,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import Lenker from '../lenker/lenker';
-import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
+import { leggEnhetIUrl } from '../utils/url-utils';
 import { VeiledereState } from '../ducks/veiledere';
 import {FiltervalgModell, StatustallModell} from '../model-interfaces';
 import { pagineringSetup } from '../ducks/paginering';
@@ -43,15 +42,8 @@ type VeiledereSideProps = StateProps & DispatchProps & RouterProps;
 class VeiledereSide extends React.Component<VeiledereSideProps> {
     componentWillMount() {
         const { valgtEnhet } = this.props;
-        //leggEnhetIUrl(valgtEnhet!);
+        leggEnhetIUrl(valgtEnhet!);
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
-        this.settInitalStateFraUrl();
-    }
-
-    settInitalStateFraUrl() {
-        const side = getSideFromUrl();
-        const seAlle = getSeAlleFromUrl();
-        this.props.initalPaginering(side, seAlle);
     }
 
     componentDidMount() {
