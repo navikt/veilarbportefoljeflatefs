@@ -1,7 +1,5 @@
-
 // Actions
 import { DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
-import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 
 export const SETUP = 'veilarbportefoljeflatefs/paginering/SETUP';
 
@@ -34,6 +32,6 @@ export interface PageringOppdatering {
 }
 
 // Action Creators
-export function pagineringSetup(data: PageringOppdatering, toolbarPosisjon?: ToolbarPosisjon) {
-    return { type: SETUP, data, toolbarPosisjon };
+export function pagineringSetup(data: PageringOppdatering) {
+    return {type: SETUP, data};
 }

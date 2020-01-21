@@ -13,7 +13,6 @@ import {
     selectSeAlle,
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
-import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 import { visTilordningOkModal } from './modal';
 
 // Actions
@@ -229,7 +228,7 @@ export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder) {
     const sorteringfelt = state.portefolje.sorteringsfelt;
     const nyeFiltervalg = state[nameToStateSliceMap[filtergruppe]];
 
-    //leggSideIUrl(1);
+    leggSideIUrl(1);
     dispatch(pagineringSetup({side: 1}));
 
     if (filtergruppe === 'enhet') {
@@ -284,15 +283,14 @@ export function settBrukerSomMarkert(guid, markert) {
     });
 }
 
-export function markerAlleBrukere(markert, toolbarPosisjon?: ToolbarPosisjon) {
+export function markerAlleBrukere(markert) {
     return (dispatch) => dispatch({
         type: SETT_MARKERT_BRUKER_ALLE,
         markert,
-        toolbarPosisjon
     });
 }
 
-export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veilederIdent, toolbarPosisjon?: ToolbarPosisjon) {
+export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veilederIdent) {
     return (dispatch, getState) => {
         dispatch({type: TILDEL_VEILEDER_RELOAD});
         dispatch({type: PENDING});
@@ -302,7 +300,6 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                 dispatch({
                     type: TILDEL_VEILEDER,
                     tilVeileder,
-                    toolbarPosisjon,
                     feilendeTilordninger: res.feilendeTilordninger
                 });
                 if (res.feilendeTilordninger.length > 0) {

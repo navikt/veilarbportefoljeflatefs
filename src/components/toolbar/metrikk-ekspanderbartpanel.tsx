@@ -4,6 +4,7 @@ import { logEvent } from '../../utils/frontend-logger';
 import { finnSideNavn } from '../../middleware/metrics-middleware';
 import { PropsWithChildren, useState } from 'react';
 import hiddenIf from '../hidden-if/hidden-if';
+import './toolbar.less';
 
 interface MetrikkEkspanderbartpanelProps {
     lamellNavn: string;
@@ -32,6 +33,7 @@ function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
     return (
         <div className="blokk-xxs portefolje__ekspanderbarpanel">
             <Ekspanderbartpanel
+                border={true}
                 onClick={handleOnClick}
                 {...rest}
             >

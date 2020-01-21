@@ -10,7 +10,6 @@ export enum ModalName {
     MOTE_FILTER = 'TOUR_MODAL-MOTE_FILTER',
     NY_KOLONNE = 'TOUR_MODAL-NY_KOLONNE',
     VEILEDERGRUPPER = 'TOUR_MODAL-VEILEDERGRUPPER'
-
 }
 
 export interface Step {
@@ -41,7 +40,7 @@ function TourModal(props: TourModalProps) {
     };
 
     const steps = getTour(props.modalName);
-    if(!steps) return  null;
+    if (!steps) return null;
     const step = steps[stepIndex];
     const isFinalStep = stepIndex === steps.length - 1;
 

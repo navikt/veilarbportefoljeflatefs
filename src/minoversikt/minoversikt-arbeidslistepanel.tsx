@@ -3,6 +3,7 @@ import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsli
 import { UndertekstBold } from 'nav-frontend-typografi';
 import { BrukerModell } from '../model-interfaces';
 import {OrNothing} from "../utils/types/types";
+import './minoversikt.less';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;

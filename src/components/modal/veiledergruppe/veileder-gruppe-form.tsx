@@ -5,6 +5,7 @@ import SokVeiledere from '../../sok-veiledere/sok-veiledere';
 import { FiltervalgModell } from '../../../model-interfaces';
 import ValgtVeilederGruppeListe from './valgt-veileder-gruppeliste';
 import { useFocus } from '../../../hooks/use-focus';
+import './modal.less';
 
 interface VeilederGruppeForm {
     filterValg: FiltervalgModell;

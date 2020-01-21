@@ -1,5 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import './tabell.less';
 
 export interface HeaderProps {
     skalVises?: boolean | null;
@@ -8,12 +9,12 @@ export interface HeaderProps {
     title?: string;
 }
 
-function Header({ children, skalVises = true, className = '', title }: HeaderProps) {
+function Header({children, skalVises = true, className = '', title}: HeaderProps) {
     if (!skalVises) {
         return null;
     }
     return (
-        <span title={title} className={classNames('sortering-header', className)}>
+        <span title={title} className={classNames('sorteringheader', className)}>
             {children}
         </span>
     );

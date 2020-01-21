@@ -1,20 +1,21 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import NavFrontendModal from 'nav-frontend-modal';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import {skjulModal} from '../../../ducks/modal';
-import {markerAlleBrukere} from '../../../ducks/portefolje';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { skjulModal } from '../../../ducks/modal';
+import { markerAlleBrukere } from '../../../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
-import {BrukerModell} from '../../../model-interfaces';
-import {VarselModal, VarselModalType} from '../../varselmodal/varselmodal';
+import { BrukerModell } from '../../../model-interfaces';
+import { VarselModal, VarselModalType } from '../../varselmodal/varselmodal';
+import './arbeidsliste.less';
 
 interface ArbeidslisteModalProps {
     isOpen: boolean;
     valgteBrukere: BrukerModell[];
     skjulArbeidslisteModal: () => void;
-    fjernMarkerteBrukere: ()=> void;
-    innloggetVeileder: ()=> void;
+    fjernMarkerteBrukere: () => void;
+    innloggetVeileder: () => void;
 }
 
 interface ArbeidslisteModalState {

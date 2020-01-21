@@ -1,3 +1,5 @@
+@import "~nav-frontend-core/less/core";
+
 // TODO Denne fila burde samkjører med nav-frontend-skjema-style sin select-styling
 .chevronline-mixin(@yPos: 1.30rem) {
     pointer-events: none; // gjør at en kan klikke igjennom denne (pilen), slik at select åpner seg
@@ -12,94 +14,107 @@
     transition: transform .2s;
 }
 
-.dropdown {
-    position: relative;
-    margin-bottom: 0.5rem;
-
-    &__btnwrapper {
-        width: 100%;
+.veilarbportefoljeflatefs {
+    .dropdown {
         position: relative;
-        display: inline-block;
+        margin-bottom: 0.5rem;
 
-        &--disabled {
-            color: @grayInactive;
-        }
+        &__btnwrapper {
+            width: 100%;
+            position: relative;
+            display: inline-block;
 
-        &:before {
-            .chevronline-mixin();
-            transform: translateX(3px) rotate(-45deg);
-        }
 
-        &:after {
-            .chevronline-mixin();
-            transform: translateX(-3px) rotate(45deg);
-        }
-    }
-    &__btn {
-        text-align: left;
-        width: 100%;
-        padding: 0.45rem 1.5em 0.45rem 0.45rem;
-        background: @white;
-        border: 1px solid @gray-icon;
-        border-radius: @border-radius-small;
-
-        &:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px @fokusFarge;
-        }
-        &:disabled {
-            color: @navGra20;
-        }
-    }
-    &__innhold {
-        position: absolute;
-        z-index: 110;
-        border: 1px solid @gray-icon;
-        top: ~"calc(100% - 1px)";
-        background-color: @white;
-        border-radius: 0 0 @border-radius-small @border-radius-small;
-        width: 100%;
-    }
-
-     .hoyre {
-        margin-left: -30%;
-    }
-    &--hover {
-        .dropdown__btn, .dropdown__innhold {
-            border-color: @navBla;
-        }
-    }
-    &--apen {
-        margin-bottom: -0.05rem;
-        .dropdown__btnwrapper {
             &:before {
                 .chevronline-mixin();
-                transform: translateX(3px) rotate(45deg);
-                z-index: 200;
+                transform: translateX(3px) rotate(-45deg);
             }
 
             &:after {
                 .chevronline-mixin();
-                transform: translateX(-3px) rotate(-45deg);
-                z-index: 200;
+                transform: translateX(-3px) rotate(45deg);
+            }
+
+            &--disabled {
+                color: @navGra20;
             }
         }
-        .dropdown__btn {
-            position: relative;
-            z-index: 120;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            border-bottom: 1px solid @white;
-            padding-bottom: 1rem;
+
+        &__btn {
+            text-align: left;
+            width: 100%;
+            padding: 0.45rem 1.5em 0.45rem 0.45rem;
+            background: @white;
+            border: 1px solid @navGra60;
+            border-radius: @border-radius-small;
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px @fokusFarge;
+            }
+
+            &:disabled {
+                border-color: @navGra20;
+                color: @navGra20;
+            }
         }
-    }
-    &--alignright {
-        .dropdown__innhold {
-            right: 0;
-            border-radius: @border-radius-small 0 @border-radius-small @border-radius-small;
+
+        &__innhold {
+            position: absolute;
+            z-index: 110;
+            border: 1px solid @navGra40;
+            top: ~"calc(100% - 1px)";
+            background-color: @white;
+            border-radius: 0 0 @border-radius-small @border-radius-small;
+            width: 100%;
         }
-    }
-    .knapperad {
-        padding: 0;
+
+        .hoyre {
+            margin-left: -30%;
+        }
+
+        &--hover {
+            .dropdown__btn, .dropdown__innhold {
+                border-color: @navBla;
+            }
+        }
+
+        &--apen {
+            margin-bottom: -0.05rem;
+
+            .dropdown__btnwrapper {
+                &:before {
+                    .chevronline-mixin();
+                    transform: translateX(3px) rotate(45deg);
+                    z-index: 2000;
+                }
+
+                &:after {
+                    .chevronline-mixin();
+                    transform: translateX(-3px) rotate(-45deg);
+                    z-index: 2000;
+                }
+            }
+
+            .dropdown__btn {
+                position: relative;
+                z-index: 120;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                border-bottom: 1px solid @white;
+                padding-bottom: 1rem;
+            }
+        }
+
+        &--alignright {
+            .dropdown__innhold {
+                right: 0;
+                border-radius: @border-radius-small 0 @border-radius-small @border-radius-small;
+            }
+        }
+
+        .knapperad {
+            padding: 0;
+        }
     }
 }

@@ -41,30 +41,32 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
 
     handleChange = (event) => {
         const nyQuery = event.target.value;
-        this.setState({ veilederNavnQuery: nyQuery });
+        this.setState({veilederNavnQuery: nyQuery});
         this.props.endreFiltervalg('veilederNavnQuery', nyQuery);
-    }
+    };
 
     setFocus = (focus: boolean) => {
-        this.setState({ hasFocus: focus });
-    }
+        this.setState({hasFocus: focus});
+    };
 
     handleVeiledereSubmitted = () => {
         this.setFocus(false);
-    }
+    };
 
     handleClickOutside = (event) => {
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
             this.setFocus(false);
         }
-    }
+    };
 
     render() {
 
-        const { hasFocus, veilederNavnQuery } = this.state;
+        const {hasFocus, veilederNavnQuery} = this.state;
 
         return (
-            <div className="filtrering-veiledere" ref={(ref) => { this.wrapperRef = ref; }}>
+            <div className="filtrering-veiledere" ref={(ref) => {
+                this.wrapperRef = ref;
+            }}>
                 <Input
                     label=""
                     placeholder="Navn eller NAV-ident"
@@ -73,11 +75,11 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
                     onFocus={() => this.setFocus(true)}
                 />
                 {hasFocus &&
-                    <VeilederCheckboxListe
-                        open={hasFocus}
-                        onSubmit={this.handleVeiledereSubmitted}
-                        onClose={() => this.setFocus(false)}
-                    />
+                <VeilederCheckboxListe
+                    open={hasFocus}
+                    onSubmit={this.handleVeiledereSubmitted}
+                    onClose={() => this.setFocus(false)}
+                />
                 }
             </div>
         );

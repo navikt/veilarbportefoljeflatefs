@@ -3,23 +3,18 @@ import ActiveLink from './active-link';
 import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tour-wrapper';
 import { useSelector } from 'react-redux';
 import { AppState } from '../reducer';
-import { useIdentSelector } from '../hooks/redux/use-inlogget-ident';
-import { useLocation, useParams } from 'react-router';
+import { useIdentSelector } from '../hooks/redux/use-enheter-ident';
+import { useParams } from 'react-router';
+import './lenker.less';
 
 function Lenker() {
     const portefoljeStorrelse = useSelector((state: AppState) => state.statustallInloggetVeileder.data.totalt);
     const harPortefolje = portefoljeStorrelse > 0;
 
-    const veileder = useIdentSelector();
-    const veilederIdent = veileder && veileder.ident;
+    const veilederIdent = useIdentSelector();
     const {ident} = useParams();
-
-    const portefoljeUrl = useLocation().pathname;
-
-    const skjulMinOversiktLenke = !harPortefolje ? portefoljeUrl !== '/portefolje' : false;
-
-    const aktivLink = ident
-        ? veilederIdent === ident
+    const aktivLink = ident ?
+        veilederIdent === ident
             ? 'oversiktslenke--valgt'
             : ''
         : 'oversiktslenke--valgt';
@@ -32,7 +27,7 @@ function Lenker() {
                     className="oversiktslenke typo-undertittel"
                     activeClassName={aktivLink}
                     title="Her vises alle brukere som er tildelt deg"
-                    hidden={skjulMinOversiktLenke}
+                    hidden={!harPortefolje}
                 >
                     Min oversikt
                 </ActiveLink>

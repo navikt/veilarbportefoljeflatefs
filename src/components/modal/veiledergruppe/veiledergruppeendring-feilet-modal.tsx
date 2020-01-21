@@ -2,6 +2,7 @@ import React from 'react';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { VarselModal, VarselModalType } from '../../varselmodal/varselmodal';
+import './modal.less';
 
 interface VeiledergruppeendringFeiletProps {
     contentLabel: string;

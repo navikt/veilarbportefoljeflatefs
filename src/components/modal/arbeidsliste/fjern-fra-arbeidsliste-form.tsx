@@ -9,6 +9,7 @@ import { STATUS } from '../../../ducks/utils';
 import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../../../ducks/modal-feilmelding-brukere';
 import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
 import { ArbeidslisteDataModell, BrukerModell, Status } from '../../../model-interfaces';
+import './arbeidsliste.less';
 
 function brukerLabel(bruker) {
     return (
@@ -30,6 +31,7 @@ interface FjernFraArbeidslisteFormProps {
 function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus}: FjernFraArbeidslisteFormProps) {
     const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
     const className = valgteBrukere.length >= 22 ? 'arbeidsliste-listetekst__lang' : 'arbeidsliste-listetekst';
+
     return (
         <form onSubmit={(e) => {
             e.preventDefault();

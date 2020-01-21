@@ -1,33 +1,45 @@
-.portefolje__container {
-    min-height: 30rem;
+@import "~nav-frontend-core/less/core";
 
-    .innholdslaster {
-        min-height: 1000px;
+.veilarbportefoljeflatefs {
+    .enhet-side {
+        margin: 0 3rem;
     }
-}
 
-.velgfiltermelding {
-    text-align: center;
+    .portefolje__container {
+        min-height: 30rem;
 
-    &__ikon {
-        position: relative;
-        height: 2.5rem;
-        width: 2.5rem;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 100%;
-        background-color: @navOransjeLighten20;
+        .innholdslaster {
+            min-height: 1000px;
+        }
 
-        &:after {
-            content: "";
-            position: absolute;
-            width: 70%;
-            height: 0.5rem;
-            display: block;
-            margin-left: 15%;
-            background-color: @white;
-            top: calc(1.25rem - 0.25rem);
-            border-radius: 2px;
+        .blokk-xxs {
+            margin-bottom: 0;
+        }
+    }
+
+    .velgfiltermelding {
+        text-align: center;
+
+        &__ikon {
+            position: relative;
+            height: 2.5rem;
+            width: 2.5rem;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 100%;
+            background-color: @navOransjeLighten20;
+
+            &:after {
+                content: "";
+                position: absolute;
+                width: 70%;
+                height: 0.5rem;
+                display: block;
+                margin-left: 15%;
+                background-color: @white;
+                top: calc(1.25rem - 0.25rem);
+                border-radius: 2px;
+            }
         }
     }
 }

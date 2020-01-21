@@ -3,6 +3,7 @@ import { Element } from 'nav-frontend-typografi';
 import { tekstValgteBrukere } from '../utils/tekst-utils';
 import {useSelector} from "react-redux";
 import {AppState} from "../reducer";
+import './tabell-overskrift.less';
 
 
 function TabellOverskrift() {
@@ -18,7 +19,7 @@ function TabellOverskrift() {
     const antallValgteBrukere = tekstValgteBrukere (antallValgt);
 
     return (
-        <Element tag="h1" className="blokk-xxs">
+        <Element tag="h1" className={className}>
             <strong aria-live="polite" aria-atomic="true">
                 {`Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere. `}
                 {antallValgteBrukere}

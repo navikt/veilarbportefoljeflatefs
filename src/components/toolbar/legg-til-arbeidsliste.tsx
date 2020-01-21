@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
+import { VIS_ARBEIDSLISTE_MODAL, visModal } from '../../ducks/modal';
+import { PortefoljeState } from '../../ducks/portefolje';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { ReactComponent as ArbeidslisteIkonLinje } from './arbeidslisteikon-linje.svg';
+import './toolbar.less';
 import {  visModal } from '../../ducks/modal';
 import { useParams } from "react-router";
 import {BrukerModell} from "../../model-interfaces";
@@ -10,7 +15,6 @@ import {ToolbarPosisjon} from "./toolbar";
 
 interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
-    toolbarPosisjon?: ToolbarPosisjon;
 }
 
 

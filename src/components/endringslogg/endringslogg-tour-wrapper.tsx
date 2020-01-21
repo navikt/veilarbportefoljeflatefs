@@ -9,7 +9,10 @@ import {
     krypterVeilederident,
     registrerInnholdIRemoteStorage,
 } from './utils/endringslogg-utils';
-import {logEvent} from '../../utils/frontend-logger';
+import { logEvent } from '../../utils/frontend-logger';
+import { registrerSettInnlegg } from './utils/endringslogg-api';
+import './endringslogg.less';
+import './collapse-container-transition.less';
 
 function EndringsloggTourWrapper() {
     const veilederIdent = useIdentSelector();
@@ -29,7 +32,6 @@ function EndringsloggTourWrapper() {
                 setIsLoading(false)
             })
     },[]);
-
 
     const registrerInnholdRemote = async (innhold: EndringsloggInnleggMedSettStatus[]) => {
         await registrerInnholdIRemoteStorage(innhold);

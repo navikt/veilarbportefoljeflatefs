@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { BrukerModell } from '../../model-interfaces';
+import '../../enhetsportefolje/brukerliste.less';
 
 interface CheckboxProps {
     bruker: BrukerModell;

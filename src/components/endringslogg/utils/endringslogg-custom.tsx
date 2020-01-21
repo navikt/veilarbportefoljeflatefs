@@ -2,6 +2,8 @@ import { ModalName } from '../../tour-modal/tour-modal';
 import { EndringsloggLinkMedIkon } from '../endringslogg-innhold';
 import React from 'react';
 import TourModalButton from '../../tour-modal/tour-modal-button';
+import '../endringslogg.less';
+import '../collapse-container-transition.less';
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -17,7 +19,7 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '17. DES. 2020',
+        dato: '17. JAN. 2020',
         versjonId: '17.01.20',
         tittel: 'Stolpediagramvisning er fjernet',
         tekst: 'Når du filtrerer på ytelse har det vært en funksjonalitet for å se et stolpediagram som viser antall personer med ytelsen fordelt på tidsperioder.',

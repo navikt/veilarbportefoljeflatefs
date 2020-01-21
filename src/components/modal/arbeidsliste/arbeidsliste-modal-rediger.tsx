@@ -12,6 +12,7 @@ import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
 import { redigerArbeidsliste } from '../../../ducks/arbeidsliste';
 import moment from 'moment';
 import {OrNothing} from "../../../utils/types/types";
+import './arbeidsliste.less';
 
 interface Ownprops {
     bruker: BrukerModell;
@@ -46,7 +47,7 @@ function ArbeidslisteModalRediger({
 }: ArbeidslisteModalRedigerProps) {
     const [isOpen, setIsOpen] = useState(false);
 
-    const lukkModalConfirm = (formikProps: FormikProps<FormikPropsValues>)=> {
+    const lukkModalConfirm = (formikProps: FormikProps<FormikPropsValues>) => {
         const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
         if (!formikProps.dirty || window.confirm(dialogTekst)) {
             setIsOpen(false);
@@ -72,7 +73,7 @@ function ArbeidslisteModalRediger({
         <>
             <button
                 className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
-                onClick={()=>setIsOpen(true)}
+                onClick={() => setIsOpen(true)}
             >
                 Rediger
             </button>
@@ -83,12 +84,12 @@ function ArbeidslisteModalRediger({
                     setIsOpen(false);
                     onSubmit(values);
                 }}
-                render={(formikProps)=> (
+                render={(formikProps) => (
                     <NavFrontendModal
                         className="arbeidsliste-modal"
                         contentLabel="arbeidsliste"
                         isOpen={isOpen}
-                        onRequestClose={()=> lukkModalConfirm(formikProps)}
+                        onRequestClose={() => lukkModalConfirm(formikProps)}
                         closeButton
                     >
                         <div className="modal-header-wrapper">
@@ -104,7 +105,7 @@ function ArbeidslisteModalRediger({
                                 laster={laster}
                                 sistEndretDato={sistEndretDato}
                                 sistEndretAv={sistEndretAv}
-                                lukkModal={()=>lukkModal(formikProps)}
+                                lukkModal={() => lukkModal(formikProps)}
                             />
                         </div>
                     </NavFrontendModal>)}
@@ -113,6 +114,7 @@ function ArbeidslisteModalRediger({
 
     );
 }
+
 export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, fnr, dispatch) {
 
     if (!res) {
@@ -122,14 +124,14 @@ export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, 
     const arbeidslisteToDispatch = Array.of({
         ...arbeidsliste,
         fnr,
-        sistEndretAv: { veilederId: innloggetVeileder },
+        sistEndretAv: {veilederId: innloggetVeileder},
         endringstidspunkt: new Date().toISOString()
     });
 
     return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
 
-const mapStateToProps= (state) => ({
+const mapStateToProps = (state) => ({
     arbeidslisteStatus: state.arbeidsliste.status
 });
 
@@ -137,4 +139,4 @@ const mapDispatchToProps = (dispatch, props) => ({
     onSubmit: (formData) => dispatch(redigerArbeidsliste(formData, props))
 });
 
-export default connect<StateProps,DispatchProps,Ownprops>(mapStateToProps, mapDispatchToProps)(ArbeidslisteModalRediger);
+export default connect<StateProps, DispatchProps, Ownprops>(mapStateToProps, mapDispatchToProps)(ArbeidslisteModalRediger);

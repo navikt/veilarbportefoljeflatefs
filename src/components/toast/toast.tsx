@@ -11,6 +11,7 @@ import hiddenIf from '../hidden-if/hidden-if';
 import { AppState } from '../../reducer';
 import { OrNothing } from '../../utils/types/types';
 import VeiledergruppeToast from './veiledergruppe-toast';
+import './toast.less';
 
 interface StateProps {
     toasts: OrNothing<ToastActionType>;

@@ -12,6 +12,7 @@ import FiltreringStatusUfordelteBrukere from './filtrering-status-components/ufo
 import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avtalt-mote-med-nav';
 import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
 import { FiltervalgModell } from '../../model-interfaces';
+import './filtrering-status.less';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;

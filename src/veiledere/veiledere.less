@@ -1,53 +1,39 @@
-.veiledere-side {
-    margin-bottom: 100px;
-}
+@import "~nav-frontend-core/less/core";
 
-.veiledersok__wrapper {
-    margin-top: 1rem;
-    width: 25%;
-    margin-right:75%;
-    .veiledere__soketabell {
-        a {
-            border-bottom: none;
-            color: @blue-interaction;
-            text-decoration: none;
-        }
-    }
+.veilarbportefoljeflatefs {
+    .veiledersok__wrapper {
+        margin-top: 1rem;
+        width: 25%;
+        margin-right: 75%;
 
-}
-
-.tildelveileder_wrapper {
-    min-height: 3rem;
-}
-.veileder__hide {
-    display:none;
-}
-
-.veileder-tabell {
-    border-collapse: collapse;
-    tbody, thead:not(.extra-head) {
-
-        th,td {
-            border-bottom: 1px solid #b7b1a9;
-            border-top: none;
-            font-weight: normal;
-
-            &:first-child {
-                width: 15rem;
-                white-space: pre-wrap;
-            }
-            &:nth-child(2) {
-                width: 5rem;
-                white-space: pre-wrap;
-            }
-            &:nth-child(3) {
-                width: 8rem;
-                white-space: pre-wrap;
+        .veiledere__soketabell {
+            a {
+                border-bottom: none;
+                color: @navBla;
+                text-decoration: none;
             }
         }
     }
 
-    .extra-head  th, td {
-        border-bottom: 2px solid #b7b1a9;
+    .tildelveileder_wrapper {
+        min-height: 3rem;
     }
+
+    .veileder__hide {
+        display: none;
+    }
+
+    .sok-veileder {
+        border: 1px solid @navGra60;
+        border-radius: @border-radius-base;
+    }
+
+    .veiledere-side {
+        margin: 0 3rem;
+    }
+
+    .veiledere-undertittel {
+        background-color: #F4F4F4;
+    }
+
 }
