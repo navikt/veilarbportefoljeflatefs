@@ -5,7 +5,7 @@ import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import Lenker from '../lenker/lenker';
-import { getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl } from '../utils/url-utils';
+import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl, updateLastPath} from '../utils/url-utils';
 import { VeiledereState } from '../ducks/veiledere';
 import { StatustallModell, ValgtEnhetModell } from '../model-interfaces';
 import { pagineringSetup } from '../ducks/paginering';
@@ -50,6 +50,10 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
         const side = getSideFromUrl();
         const seAlle = getSeAlleFromUrl();
         this.props.initalPaginering(side, seAlle);
+    }
+
+    componentDidUpdate(prevProps: Readonly<VeiledereSideProps>, prevState: Readonly<{}>, snapshot?: any): void {
+        updateLastPath();
     }
 
     componentDidMount() {

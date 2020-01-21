@@ -10,7 +10,7 @@ import {
     getSideFromUrl,
     getSorteringsFeltFromUrl,
     getSorteringsRekkefolgeFromUrl,
-    leggEnhetIUrl
+    leggEnhetIUrl, updateLastPath
 } from '../utils/url-utils';
 import { hentStatusTall, StatustallState } from '../ducks/statustall';
 import { EnhettiltakState, hentEnhetTiltak } from '../ducks/enhettiltak';
@@ -80,6 +80,11 @@ class EnhetSide extends React.Component<EnhetSideProps> {
             filtervalg
         );
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
+    }
+
+
+    componentDidUpdate(prevProps: Readonly<EnhetSideProps>, prevState: Readonly<{}>, snapshot?: any): void {
+        updateLastPath();
     }
 
     settSorteringOgHentPortefolje(felt) {

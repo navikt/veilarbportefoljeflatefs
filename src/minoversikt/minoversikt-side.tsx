@@ -14,7 +14,7 @@ import { FiltervalgModell, ValgtEnhetModell, VeilederModell } from '../model-int
 import { ListevisningState, ListevisningType } from '../ducks/ui/listevisning';
 import {
     getSeAlleFromUrl, getSideFromUrl, getSorteringsFeltFromUrl,
-    getSorteringsRekkefolgeFromUrl, leggEnhetIUrl
+    getSorteringsRekkefolgeFromUrl, leggEnhetIUrl, updateLastPath
 } from '../utils/url-utils';
 import { pagineringSetup } from '../ducks/paginering';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
@@ -110,6 +110,11 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
             valgtRekkefolge,
             felt,
             filtervalg);
+    }
+
+
+    componentDidUpdate(prevProps: Readonly<MinoversiktSideProps>, prevState: Readonly<{}>, snapshot?: any): void {
+        updateLastPath();
     }
 
     componentDidMount() {
