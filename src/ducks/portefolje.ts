@@ -5,7 +5,7 @@ import { pagineringSetup } from './paginering';
 import { TILDELING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from './statustall';
-import {  leggSorteringIUrl } from '../utils/url-utils';
+import {leggSideIUrl, leggSorteringIUrl} from '../utils/url-utils';
 import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import { ListevisningType, oppdaterAlternativer } from './ui/listevisning';
 import {

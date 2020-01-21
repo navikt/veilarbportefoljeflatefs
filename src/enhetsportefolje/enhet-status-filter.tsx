@@ -7,6 +7,7 @@ import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
 export function EnhetStatusFilter() {
     const enhettiltak = useSelector((state: AppState) => state.enhettiltak.data.tiltak);
     const filtervalg =  useSelector((state: AppState) => state.filtrering);
+
     const tiltak = sortTiltak(enhettiltak);
 
     return (

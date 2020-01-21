@@ -5,13 +5,15 @@ import {useIdentSelector} from "../hooks/redux/use-inlogget-ident";
 import {useSelector} from "react-redux";
 import {AppState} from "../reducer";
 
-export function MinOversiktFilterLabelContainer() {
+export function MinOversiktFilterLabelContainer(props: {visesAnnenVeiledersPortefolje: boolean}) {
     const {ident} = useParams();
     const innloggetIdent = useIdentSelector();
     const gjeldendeVeileder = ident? ident : innloggetIdent!.ident;
+
     const enhettiltak = useSelector((state: AppState) => state.enhettiltak.data.tiltak);
     const listevisning = useSelector((state: AppState) =>  state.ui.listevisningMinOversikt);
     const filtervalg = useSelector((state: AppState) =>  state.filtreringMinoversikt);
+
 
     return (
         <FiltreringLabelContainer
@@ -20,6 +22,7 @@ export function MinOversiktFilterLabelContainer() {
             veileder={gjeldendeVeileder}
             enhettiltak={enhettiltak}
             listevisning={listevisning}
+            className={props.visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
         />
     )
 }

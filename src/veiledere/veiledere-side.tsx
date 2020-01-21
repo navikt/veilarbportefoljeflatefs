@@ -4,7 +4,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { leggEnhetIUrl } from '../utils/url-utils';
+import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl} from '../utils/url-utils';
 import { VeiledereState } from '../ducks/veiledere';
 import {FiltervalgModell, StatustallModell} from '../model-interfaces';
 import { pagineringSetup } from '../ducks/paginering';

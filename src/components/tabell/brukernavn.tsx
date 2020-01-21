@@ -33,8 +33,8 @@ interface BrukerNavnProps {
     enhetId: OrNothing<string>;
 }
 
-function BrukerNavn({className, bruker, enhetId, skalJusteres}: BrukerNavnProps) {
-    return brukerNavn(className, bruker, enhetId, skalJusteres);
+function BrukerNavn({className, bruker, enhetId}: BrukerNavnProps) {
+    return brukerNavn(className, bruker, enhetId);
 }
 
 export default BrukerNavn;

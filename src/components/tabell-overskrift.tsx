@@ -6,7 +6,7 @@ import {AppState} from "../reducer";
 import './tabell-overskrift.less';
 
 
-function TabellOverskrift() {
+function TabellOverskrift(props: {className: string}) {
     const portefolje = useSelector((state: AppState)=> state.portefolje.data);
 
     const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje;
@@ -19,7 +19,7 @@ function TabellOverskrift() {
     const antallValgteBrukere = tekstValgteBrukere (antallValgt);
 
     return (
-        <Element tag="h1" className={className}>
+        <Element tag="h1" className={props.className}>
             <strong aria-live="polite" aria-atomic="true">
                 {`Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere. `}
                 {antallValgteBrukere}

@@ -21,6 +21,7 @@ function InitialDataProvider(props: PropsWithChildren<{}>) {
 
 
     useRedirectOnMount();
+
     const {isLoading } = useFetchEnheter();
 
     if(isLoading) {

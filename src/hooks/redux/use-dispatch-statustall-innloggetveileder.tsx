@@ -8,7 +8,9 @@ import {hentVeiledereForEnhet} from "../../ducks/veiledere";
 export function useDispatchStatustallInnloggetveileder() {
     const dispatch = useDispatch();
     const innloggetVeileder = useIdentSelector();
+
     const ident = innloggetVeileder && innloggetVeileder.ident;
+
     const valgtEnhet = useEnhetSelector();
 
 

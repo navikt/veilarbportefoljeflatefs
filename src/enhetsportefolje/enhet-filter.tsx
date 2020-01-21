@@ -12,6 +12,7 @@ export function EnhetFilter () {
     const filtervalg =  useSelector((state: AppState) => state.filtrering);
     const veilederliste = useSelector( (state: AppState) => state.veiledere.data.veilederListe);
     const listevisning = useSelector( (state: AppState) => state.ui.listevisningEnhetensOversikt);
+
     const ident = useIdentSelector();
 
     const dispatch = useDispatch();
@@ -30,6 +31,7 @@ export function EnhetFilter () {
             filtergruppe="enhet"
             enhettiltak={enhettiltak}
             listevisning={listevisning}
+            className="filtrering-label-container"
         />
     )
 }

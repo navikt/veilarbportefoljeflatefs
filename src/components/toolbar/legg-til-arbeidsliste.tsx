@@ -1,17 +1,12 @@
 import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import { VIS_ARBEIDSLISTE_MODAL, visModal } from '../../ducks/modal';
-import { PortefoljeState } from '../../ducks/portefolje';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { ReactComponent as ArbeidslisteIkonLinje } from './arbeidslisteikon-linje.svg';
-import './toolbar.less';
 import {  visModal } from '../../ducks/modal';
+import './toolbar.less';
 import { useParams } from "react-router";
 import {BrukerModell} from "../../model-interfaces";
 import {AppState} from "../../reducer";
 import {useIdentSelector} from "../../hooks/redux/use-inlogget-ident";
-import {ToolbarPosisjon} from "./toolbar";
 
 interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
@@ -40,7 +35,7 @@ function LeggTilArbeidsliste (props: LeggTilArbeidslisteProps ) {
         <div className="toolbar_btnwrapper">
             <ArbeidsListeKnapp
                 valgteBrukere={valgteBrukere}
-                onClickHandler={() => dispatch(visModal(props.toolbarPosisjon))}
+                onClickHandler={() => dispatch(visModal())}
                 visesAnnenVeiledersPortefolje={props.visesAnnenVeiledersPortefolje}
             />
             {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}

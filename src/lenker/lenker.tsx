@@ -3,7 +3,7 @@ import ActiveLink from './active-link';
 import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tour-wrapper';
 import { useSelector } from 'react-redux';
 import { AppState } from '../reducer';
-import { useIdentSelector } from '../hooks/redux/use-enheter-ident';
+import { useIdentSelector } from '../hooks/redux/use-inlogget-ident';
 import { useParams } from 'react-router';
 import './lenker.less';
 
@@ -14,7 +14,7 @@ function Lenker() {
     const veilederIdent = useIdentSelector();
     const {ident} = useParams();
     const aktivLink = ident ?
-        veilederIdent === ident
+        veilederIdent!.ident === ident
             ? 'oversiktslenke--valgt'
             : ''
         : 'oversiktslenke--valgt';
