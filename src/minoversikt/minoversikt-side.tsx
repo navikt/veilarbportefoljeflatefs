@@ -20,7 +20,6 @@ import { useEffect } from "react";
 import {useEnhetSelector} from "../hooks/redux/use-enhet-selector";
 import {useIdentSelector} from "../hooks/redux/use-inlogget-ident";
 import {pagineringSetup} from "../ducks/paginering";
-import './minoversikt-side.less';
 import {MinOversiktModalController} from "../components/modal/modal-min-oversikt-controller";
 import MinoversiktTabell from "./minoversikt-portefolje-tabell";
 import MinoversiktTabellOverskrift from "./minoversikt-portefolje-tabelloverskrift";
