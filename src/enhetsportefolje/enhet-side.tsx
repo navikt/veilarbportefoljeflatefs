@@ -63,7 +63,9 @@ function EnhetSide () {
             dispatch(hentLagretFilterForEnhet(enhet));
         }
     },[enhet, dispatch]);
-
+        const antallBrukere = antallReturnert > antallTotalt ? antallTotalt : antallReturnert;
+        const stickyWrapper = antallBrukere >= 5 ? 'col-lg-9 col-md-12 col-sm-12' : 'sticky-div col-lg-9 col-md-12 col-sm-12';
+        const stickyContainer = antallBrukere >= 5 ? 'sticky-container' : 'sticky-container__fjernet';
     return (
         <DocumentTitle title="Enhetens oversikt">
             <div className="enhet-side blokk-xl">
@@ -71,8 +73,8 @@ function EnhetSide () {
                     <div id="oversikt-sideinnhold" role="tabpanel">
                         <div className="row">
                             <EnhetStatusFilter/>
-                            <div className="col-lg-9 col-md-12 col-sm-12">
-                                <div className="sticky-container">
+                            <div className={stickyWrapper}>
+                                <div className={stickyContainer}>
                                     <EnhetFilter/>
                                     <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
                                     <div className="sticky-container__skygge">

@@ -12,11 +12,10 @@ function TabellOverskrift(props: {className: string}) {
     const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje;
     const fixedFraIndex = antallTotalt === 0 ? 0 : 1;
     const fraIndexMax = Math.max(fraIndex, fixedFraIndex);
-    const antallValgt = brukere.filter((bruker) => bruker.markert).length;
-
-    const tilIndex = fraIndex + antallReturnert;
-
-    const antallValgteBrukere = tekstValgteBrukere (antallValgt);
+    const tilIndex = fraIndex + antallIVisning;
+    const maksBrukere = tilIndex > antallTotalt ? antallTotalt : tilIndex;
+    const tekst = `Viser ${fraIndexMax}- ${maksBrukere} av totalt ${antallTotalt} brukere. `;
+    const antallValgteBrukere = tekstValgteBrukere(antallValgt);
 
     return (
         <Element tag="h1" className={props.className}>

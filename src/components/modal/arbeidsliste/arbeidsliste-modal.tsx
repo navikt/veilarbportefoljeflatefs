@@ -7,7 +7,7 @@ import { markerAlleBrukere } from '../../../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 import { BrukerModell } from '../../../model-interfaces';
-import { VarselModal, VarselModalType } from '../../varselmodal/varselmodal';
+import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
 import './arbeidsliste.less';
 
 interface ArbeidslisteModalProps {

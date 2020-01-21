@@ -5,7 +5,6 @@ import veiledergruppe1 from './veiledergrupper/veiledergruppe1.png';
 import veiledergruppe2 from './veiledergrupper/veiledergruppe2.png';
 import veiledergruppe3 from './veiledergrupper/veiledergruppe3.png';
 
-
 const stepsNyKolonne: Step[] = [
     {
         tittel: 'Startdato for oppfølgingsperioden',

@@ -78,15 +78,17 @@ function MinoversiktSide () {
             dispatch(hentEnhetTiltak(enhet));
         }
     },[enhet, dispatch, gjeldendeVeileder]);
-
+    const antallBrukere = antallReturnert > antallTotalt ? antallTotalt : antallReturnert;
+    const stickyWrapper = antallBrukere > 4 ? 'col-lg-9 col-md-12 col-sm-12' : 'sticky-div col-lg-9 col-md-12 col-sm-12';
+    const stickyContainer = antallBrukere > 4 ? 'sticky-container' : 'sticky-container__fjernet';
     return (
         <DocumentTitle title="Min oversikt">
             <div className="minoversikt-side blokk-xl">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                     <MinOversiktWrapper>
                         <MinOversiktStatusFilter/>
-                        <div className="col-lg-9 col-md-12 col-sm-12">
-                            <div className="sticky-container">
+                        <div className={stickyWrapper}>
+                            <div className={stickyContainer}>
                                 <MinOversiktFilterLabelContainer visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}/>
                                 <TabellOverskrift className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
                                 <div className="sticky-container__skygge">

@@ -22,7 +22,7 @@ function SokVeiledere({erValgt, hanterVeilederValgt}: SokVeiledereProps) {
             data={sorterteVeilederePaEtterNavn}
         >
             {liste =>
-                <div className="checkbox-filterform">
+                <div>
                     <div className="checkbox-filterform__valg">
                         {liste.map(elem =>
                             <Checkbox
