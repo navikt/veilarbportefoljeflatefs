@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
+import { VarselModal, VarselModalType } from './varselmodal/varselmodal';
 import './feilmelding-brukere.less';
 
 interface ServerFeilModalProps {

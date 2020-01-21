@@ -139,6 +139,9 @@ class EnhetSide extends React.Component<EnhetSideProps> {
         const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+        const antallBrukere = antallReturnert > antallTotalt ? antallTotalt : antallReturnert;
+        const stickyWrapper = antallBrukere >= 5 ? 'col-lg-9 col-md-12 col-sm-12' : 'sticky-div col-lg-9 col-md-12 col-sm-12';
+        const stickyContainer = antallBrukere >= 5 ? 'sticky-container' : 'sticky-container__fjernet';
 
         return (
             <DocumentTitle title="Enhetens oversikt">
@@ -156,8 +159,8 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                             filtergruppe="enhet"
                                         />
                                     </div>
-                                    <div className="col-lg-9 col-md-12 col-sm-12">
-                                        <div className="sticky-container">
+                                    <div className={stickyWrapper}>
+                                        <div className={stickyContainer}>
                                             <FiltreringLabelContainer
                                                 filtervalg={{
                                                     ...filtervalg,

@@ -64,8 +64,8 @@ interface OwnProps {
             params:
                 { ident: string; }
         };
-    gjeldendeVeileder: VeilederModell;
     visesAnnenVeiledersPortefolje: boolean;
+    gjeldendeVeileder: VeilederModell;
 }
 
 type MinoversiktSideProps = StateProps & DispatchProps & OwnProps;
@@ -86,18 +86,30 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
             sorteringsfelt,
             doSettSortering,
             hentPortefolje,
-            gjeldendeVeileder,
             valgtEnhet,
-            filtervalg
+            filtervalg,
+            veiledere,
+            enheter,
+            ...props
         } = this.props;
+
+        const veilederFraUrl = veiledere.data.veilederListe.find((veileder) => (veileder.ident === props.match.params.ident));
+        const innloggetVeileder = {ident: enheter.ident};
+        const gjeldendeVeileder = veilederFraUrl || innloggetVeileder;
+
         let valgtRekkefolge: string;
+
         if (felt !== sorteringsfelt) {
             valgtRekkefolge = ASCENDING;
         } else {
             valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
         }
         doSettSortering(valgtRekkefolge, felt);
-        hentPortefolje(valgtEnhet.enhet!.enhetId, gjeldendeVeileder.ident, valgtRekkefolge, felt, filtervalg);
+        hentPortefolje(valgtEnhet.enhet!.enhetId,
+            gjeldendeVeileder.ident,
+            valgtRekkefolge,
+            felt,
+            filtervalg);
     }
 
     componentDidMount() {
@@ -159,6 +171,10 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
         const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje.data;
         const antallValgt = brukere.filter((bruker) => bruker.markert).length;
         const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
+        const antallBrukere = antallReturnert > antallTotalt ? antallTotalt : antallReturnert;
+        const stickyWrapper = antallBrukere > 4 ? 'col-lg-9 col-md-12 col-sm-12' : 'sticky-div col-lg-9 col-md-12 col-sm-12';
+        const stickyContainer = antallBrukere > 4 ? 'sticky-container' : 'sticky-container__fjernet';
+
         return (
             <DocumentTitle title="Min oversikt">
                 <div className="minoversikt-side blokk-xl">
@@ -177,8 +193,8 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                                 enhettiltak={tiltak}
                                             />
                                         </div>
-                                        <div className="col-lg-9 col-md-12 col-sm-12">
-                                            <div className="sticky-container">
+                                        <div className={stickyWrapper}>
+                                            <div className={stickyContainer}>
                                                 <FiltreringLabelContainer
                                                     filtervalg={filtervalg}
                                                     filtergruppe="veileder"

@@ -15,8 +15,8 @@ function TabellOverskrift({fraIndex, antallIVisning, antallTotalt, antallValgt, 
     const fixedFraIndex = antallTotalt === 0 ? 0 : 1;
     const fraIndexMax = Math.max(fraIndex, fixedFraIndex);
     const tilIndex = fraIndex + antallIVisning;
-
-    const tekst = `Viser ${fraIndexMax}- ${tilIndex} av totalt ${antallTotalt} brukere. `;
+    const maksBrukere = tilIndex > antallTotalt ? antallTotalt : tilIndex;
+    const tekst = `Viser ${fraIndexMax} - ${maksBrukere} av totalt ${antallTotalt} brukere. `;
     const antallValgteBrukere = tekstValgteBrukere(antallValgt);
 
     return (

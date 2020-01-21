@@ -1,4 +1,4 @@
-import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
+import { VarselModal, VarselModalType } from './varselmodal/varselmodal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import React, { PropsWithChildren } from 'react';

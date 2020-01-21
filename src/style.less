@@ -82,10 +82,23 @@ html {
     text-align: left;
 }
 
+
+.sticky-div {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
 .sticky-container {
     position: sticky;
     top: 0;
     z-index: 1000;
+
+    &__fjernet {
+        position: inherit;
+        top: 0;
+        z-index: 0;
+    }
 
     .blokk-xxs {
         margin-bottom: 0;
