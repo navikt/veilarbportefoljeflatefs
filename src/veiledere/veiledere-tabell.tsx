@@ -67,9 +67,6 @@ class VeilederTabell extends Component<VeiledereTabellProps> {
             return null;
         };
 
-        console.log('sorteringsrekkefølge:', currentSortering.direction);
-        console.log('sortering:', currentSortering);
-
         return (
             <table className="tabell veileder-tabell portefolje-tabell typo-undertekst blokk-xs">
                 <thead>

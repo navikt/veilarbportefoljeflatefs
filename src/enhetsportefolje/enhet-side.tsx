@@ -38,6 +38,7 @@ function EnhetSide () {
     const innloggetVeilederIdent = useIdentSelector();
     const statustall = useSelector((state: AppState) => state.statustall);
     const enhettiltak = useSelector((state: AppState) => state.enhettiltak);
+    const portefoljeData = useSelector((state: AppState) => state.portefolje.data);
 
 
     useOnMount(()=> {
@@ -63,7 +64,7 @@ function EnhetSide () {
             dispatch(hentLagretFilterForEnhet(enhet));
         }
     },[enhet, dispatch]);
-        const antallBrukere = antallReturnert > antallTotalt ? antallTotalt : antallReturnert;
+        const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
         const stickyWrapper = antallBrukere >= 5 ? 'col-lg-9 col-md-12 col-sm-12' : 'sticky-div col-lg-9 col-md-12 col-sm-12';
         const stickyContainer = antallBrukere >= 5 ? 'sticky-container' : 'sticky-container__fjernet';
     return (

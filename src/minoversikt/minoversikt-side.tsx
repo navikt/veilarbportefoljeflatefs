@@ -6,7 +6,6 @@ import { hentStatusTall } from '../ducks/statustall';
 import {  hentEnhetTiltak } from '../ducks/enhettiltak';
 import { hentPortefoljeForVeileder, settSortering } from '../ducks/portefolje';
 import {  ListevisningType } from '../ducks/ui/listevisning';
-import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {
     getSeAlleFromUrl, getSideFromUrl, getSorteringsFeltFromUrl,
     getSorteringsRekkefolgeFromUrl, leggEnhetIUrl
@@ -39,7 +38,7 @@ function MinoversiktSide () {
     const enhettiltak = useSelector((state: AppState)=> state.enhettiltak);
     const statustall = useSelector((state: AppState)=> state.statustall);
     const filtervalg = useSelector((state: AppState)=> state.filtreringMinoversikt);
-    const antallTotalt = useSelector((state: AppState)=> state.portefolje.data.antallTotalt);
+    const portefoljeData = useSelector((state: AppState)=> state.portefolje.data);
 
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
 
@@ -67,6 +66,7 @@ function MinoversiktSide () {
     useOnMount(()=> {
         loggSkjermMetrikker(Side.MIN_OVERSIKT);
         loggSideVisning(innloggetVeilederIdent, Side.MIN_OVERSIKT);
+        leggEnhetIUrl(enhet);
         settInitalStateFraUrl();
         dispatch(settSortering(sorteringsrekkefolge, sorteringsfelt));
         dispatch(hentPortefoljeForVeileder(enhet, gjeldendeVeileder, sorteringsrekkefolge, sorteringsfelt, filtervalg))
@@ -78,7 +78,7 @@ function MinoversiktSide () {
             dispatch(hentEnhetTiltak(enhet));
         }
     },[enhet, dispatch, gjeldendeVeileder]);
-    const antallBrukere = antallReturnert > antallTotalt ? antallTotalt : antallReturnert;
+    const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
     const stickyWrapper = antallBrukere > 4 ? 'col-lg-9 col-md-12 col-sm-12' : 'sticky-div col-lg-9 col-md-12 col-sm-12';
     const stickyContainer = antallBrukere > 4 ? 'sticky-container' : 'sticky-container__fjernet';
     return (
@@ -90,7 +90,9 @@ function MinoversiktSide () {
                         <div className={stickyWrapper}>
                             <div className={stickyContainer}>
                                 <MinOversiktFilterLabelContainer visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}/>
-                                <TabellOverskrift className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
+                                <TabellOverskrift
+                                    className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}
+                                />
                                 <div className="sticky-container__skygge">
                                     <Toolbar
                                         filtergruppe={ListevisningType.minOversikt}
@@ -98,7 +100,7 @@ function MinoversiktSide () {
                                         gjeldendeVeileder={gjeldendeVeileder}
                                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                         sokVeilederSkalVises={false}
-                                        antallTotalt={antallTotalt}
+                                        antallTotalt={portefoljeData.antallTotalt}
                                     />
                                     <MinoversiktTabellOverskrift
                                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
