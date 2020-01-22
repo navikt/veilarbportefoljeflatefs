@@ -3,7 +3,6 @@ import { Input } from 'nav-frontend-skjema';
 import { connect } from 'react-redux';
 import { endreFiltervalg } from '../ducks/filtrering';
 import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
-import './filtrering-veiledere.less';
 
 interface FiltreringVeiledereState {
     veilederNavnQuery?: string;
