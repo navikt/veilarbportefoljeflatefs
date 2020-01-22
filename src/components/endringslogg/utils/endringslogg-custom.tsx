@@ -19,6 +19,20 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '22. JAN. 2020',
+        versjonId: '22.01.20',
+        tittel: 'Visuelle endringer i oversikten',
+        tekst: 'Funksjoner og kolonnetitler i oversikten står nå fast øverst på siden når du blar i listen av brukere. Da ser du dem uansett hvor du er i listen.',
+        children:
+            <>
+                <ul>
+                    <li>Avhukingsboksen for å velge alle brukerne i listen står nå på samme rad som de sorterbare
+                        kolonnetitlene.
+                    </li>
+                </ul>
+            </>
+    },
+    {
         dato: '17. JAN. 2020',
         versjonId: '17.01.20',
         tittel: 'Stolpediagramvisning er fjernet',

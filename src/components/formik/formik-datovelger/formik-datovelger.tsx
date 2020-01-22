@@ -1,11 +1,11 @@
 import React from 'react';
 import { Field, FieldProps, getIn } from 'formik';
 import Datovelger from 'nav-datovelger/dist/datovelger/Datovelger';
-import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 import { validerDatoFeldt } from '../../../utils/dato-utils';
 import classNames from 'classnames';
 import moment from 'moment';
 import './daypicker.less';
+import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 
 function FormikDatoVelger({name}) {
     return (
@@ -39,7 +39,7 @@ function FormikDatoVelger({name}) {
                             valgtDato={field.value}
                             dayPickerProps={{className: 'datovelger__DayPicker'}}
                         />
-                        <SkjemaelementFeilmelding feil={error ? {feilmelding: error} : undefined}/>
+                        <SkjemaelementFeilmelding>{error}</SkjemaelementFeilmelding>
                     </div>
                 );
             }}
