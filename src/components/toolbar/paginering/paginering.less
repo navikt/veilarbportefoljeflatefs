@@ -14,11 +14,11 @@
     }
 
     .paginering__knapp {
-        border: none;
+        border: 1px solid transparent;
         border-left: 1px solid @navGra40;
-        border-bottom: 1px solid transparent;
         background: none;
         width: 25%;
+        margin: 0 1px;
 
         .panel-mixin();
         .panel-focushover-mixin();
@@ -42,13 +42,14 @@
             border-right: 1px solid @navGra40;
         }
 
-        &:not(:last-child) {
-        }
-
         &.disabled {
             pointer-events: none;
             cursor: default;
             color: @navGra20;
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 3px @fokusFarge;
         }
     }
 
