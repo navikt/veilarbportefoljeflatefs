@@ -19,13 +19,15 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '22. JAN. 2020',
-        versjonId: '22.01.20',
+        dato: '23. JAN. 2020',
+        versjonId: '23.01.20',
         tittel: 'Visuelle endringer i oversikten',
-        tekst: 'Funksjoner og kolonnetitler i oversikten står nå fast øverst på siden når du blar i listen av brukere. Da ser du dem uansett hvor du er i listen.',
         children:
             <>
                 <ul>
+                    <li>Kolonnetitler og funksjoner i listen står nå fast øverst på siden når du blar nedover. Da ser du
+                        og kan bruke dem uansett hvor du er i listen.
+                    </li>
                     <li>Avhukingsboksen for å velge alle brukerne i listen står nå på samme rad som de sorterbare
                         kolonnetitlene.
                     </li>
