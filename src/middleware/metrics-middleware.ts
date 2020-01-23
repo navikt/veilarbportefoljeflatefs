@@ -82,7 +82,6 @@ function finnSlettetVeilederGruppe(store: any, filterId: number) {
 }
 
 export const metricsMiddleWare = (store: any) => (next: any) => (action: any) => {
-
     const {type, data, kolonne} = action;
     const sideNavn = finnSideNavn();
 

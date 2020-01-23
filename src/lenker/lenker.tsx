@@ -4,16 +4,12 @@ import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tou
 import { useIdentSelector } from '../hooks/redux/use-inlogget-ident';
 import { useParams } from 'react-router';
 import './lenker.less';
-import {useSelector} from "react-redux";
-import {AppState} from "../reducer";
+import Toasts from "../components/toast/toast";
 
-function Lenker() {
-    const portefoljeStorrelse = useSelector((state: AppState) => state.statustallInloggetVeileder);
+function Lenker(props: {harPortefolje: boolean}) {
+
     const veilederIdent = useIdentSelector();
     const {ident} = useParams();
-
-    const harPortefolje = portefoljeStorrelse > 0;
-
 
     const aktivLink = ident ?
         veilederIdent!.ident === ident
@@ -29,7 +25,7 @@ function Lenker() {
                     className="oversiktslenke typo-undertittel"
                     activeClassName={aktivLink}
                     title="Her vises alle brukere som er tildelt deg"
-                    hidden={!harPortefolje}
+                    hidden={!props.harPortefolje}
                 >
                     Min oversikt
                 </ActiveLink>
@@ -56,6 +52,7 @@ function Lenker() {
                     Veilederoversikt
                 </ActiveLink>
             </h2>
+            <Toasts/>
             <EndringsloggTourWrapper/>
         </div>
     );

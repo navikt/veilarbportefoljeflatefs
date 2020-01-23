@@ -8,11 +8,9 @@ import veiledereReducer, { VeiledereState } from './ducks/veiledere';
 import portefoljestorrelserReducer, { PortefoljeStorrelser } from './ducks/portefoljestorrelser';
 import filtreringReducer, { initialState } from './ducks/filtrering';
 import statustallReducer, { StatustallState } from './ducks/statustall';
-import statustallInloggetVeilederReducer from './ducks/statustall-innloggetveileder';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
-import sideReducer from './ducks/ui/side';
 import lagretFilterReducer, { LagretFilterState } from './ducks/lagret-filter';
 import { slettCleanIUrl } from './utils/url-utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
@@ -45,7 +43,6 @@ function named(name, reducer) {
 
 export interface AppState {
     ui: {
-        side: any;
         listevisningMinOversikt: ListevisningState;
         listevisningEnhetensOversikt: ListevisningState;
     };
@@ -56,7 +53,6 @@ export interface AppState {
     veiledere: VeiledereState;
     portefoljestorrelser: PortefoljeStorrelser;
     statustall: StatustallState;
-    statustallInloggetVeileder: StatustallState;
     filtrering: FiltervalgModell;
     filtreringMinoversikt: FiltervalgModell;
     filtreringVeilederoversikt: FiltervalgModell;
@@ -73,7 +69,6 @@ export interface AppState {
 
 export default combineReducers<AppState>({
     ui: combineReducers({
-        side: sideReducer,
         listevisningMinOversikt: persistent('minOversiktListevisningState', window.location, named(ListevisningType.minOversikt, listevisningReducer), slettCleanIUrl, initialStateMinOversikt),
         listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', window.location, named(ListevisningType.enhetensOversikt, listevisningReducer), slettCleanIUrl, initialStateEnhetensOversikt)
     }),
@@ -84,7 +79,6 @@ export default combineReducers<AppState>({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     statustall: statustallReducer,
-    statustallInloggetVeileder: statustallInloggetVeilederReducer,
     filtrering: persistent('enhetsState', window.location, named('enhet', filtreringReducer), slettCleanIUrl, initialState),
     filtreringMinoversikt: persistent('veilederState', window.location,
         named('veileder', filtreringReducer), slettCleanIUrl, initialState),

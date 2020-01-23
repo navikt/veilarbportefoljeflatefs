@@ -1,6 +1,5 @@
 import * as Api from './../middleware/api';
 import { doThenDispatch, handterFeil, STATUS, toJson } from './utils';
-import { IKKE_SATT } from '../konstanter';
 import { pagineringSetup } from './paginering';
 import { TILDELING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
@@ -25,7 +24,6 @@ export const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const TILDEL_VEILEDER_RELOAD = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_RELOAD';
 const TILDEL_VEILEDER_OK = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_OK';
 const TILDEL_VEILEDER_FEILET = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_FEILET';
-const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
 const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILDELINGER';
 const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
@@ -48,9 +46,6 @@ export interface PortefoljeState {
     sorteringsrekkefolge: Sorteringsrekkefolge;
     sorteringsfelt: Sorteringsfelt;
     feilendeTilordninger?: any[];
-    veileder: {
-        ident: string;
-    };
     tilordningerstatus: string;
 }
 
@@ -64,9 +59,6 @@ const initialState: PortefoljeState = {
     },
     sorteringsrekkefolge: Sorteringsrekkefolge.ikke_satt,
     sorteringsfelt: Sorteringsfelt.IKKE_SATT,
-    veileder: {
-        ident: IKKE_SATT
-    },
     tilordningerstatus: STATUS.OK
 };
 
@@ -135,9 +127,6 @@ export default function reducer(state = initialState, action): PortefoljeState {
                 sorteringsrekkefolge: action.sorteringsrekkefolge,
                 sorteringsfelt: action.sorteringsfelt
             };
-        }
-        case SETT_VALGTVEILEDER: {
-            return {...state, veileder: action.veileder};
         }
         case SETT_MARKERT_BRUKER: {
             return {
@@ -325,13 +314,6 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                 }, 2000);
             });
     };
-}
-
-export function settValgtVeileder(valgtVeileder) {
-    return (dispatch) => dispatch({
-        type: SETT_VALGTVEILEDER,
-        veileder: valgtVeileder
-    });
 }
 
 export function oppdaterArbeidslisteForBruker(arbeidsliste) {

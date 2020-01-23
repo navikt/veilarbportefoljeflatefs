@@ -1,128 +1,93 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { Undertittel } from 'nav-frontend-typografi';
+import {useDispatch, useSelector} from 'react-redux';
+import {Undertittel} from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl} from '../utils/url-utils';
-import { VeiledereState } from '../ducks/veiledere';
-import {FiltervalgModell, StatustallModell} from '../model-interfaces';
-import { pagineringSetup } from '../ducks/paginering';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
-import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import { slettEnkeltFilter } from '../ducks/filtrering';
-import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
-import { hentPortefoljeStorrelser as fetchPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
-import { hentStatusTall as fetchStatusTall } from '../ducks/statustall';
-import { RouterProps } from 'react-router';
+import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
+import {slettEnkeltFilter} from '../ducks/filtrering';
 import './veiledere.less';
-import {AppState} from "../reducer";
-import {OrNothing} from "../utils/types/types";
 import Lenker from "../lenker/lenker";
 import Toasts from "../components/toast/toast";
+import {useFetchStatustallTilltakData} from "../hooks/portefolje/use-fetch-statustall-tilltak-data";
+import {useVeilederHarPortefolje} from "../hooks/portefolje/use-dispatch-statustall-innloggetveileder";
+import {useOnMount} from "../hooks/use-on-mount";
+import {leggEnhetIUrl} from "../utils/url-utils";
+import {loggSkjermMetrikker, Side} from "../utils/metrikker/skjerm-metrikker";
+import {useEnhetSelector} from "../hooks/redux/use-enhet-selector";
+import {AppState} from "../reducer";
 
-interface StateProps {
-    veiledere: VeiledereState;
-    portefoljestorrelser: any;
-    filtervalg: FiltervalgModell;
-    valgtEnhet: OrNothing<string>;
-    statustall: {data: StatustallModell};
-}
 
-interface DispatchProps {
-    hentPortefoljestorrelser: (enhetId: string) => void;
-    initalPaginering: (side: number, seAlle: boolean) => void;
-    hentStatusTall: (enhet: string) => void;
-    slettVeilederFilter: (ident: string) => void;
-}
+function VeiledereSide (){
+    const {statustall, portefoljestorrelser, veiledere} = useFetchStatustallTilltakData();
+    const enhetId = useEnhetSelector();
+    const filtervalg = useSelector((state: AppState)=> state.filtreringVeilederoversikt);
 
-type VeiledereSideProps = StateProps & DispatchProps & RouterProps;
+    const dispatch = useDispatch();
+    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
 
-class VeiledereSide extends React.Component<VeiledereSideProps> {
-    componentWillMount() {
-        const { valgtEnhet } = this.props;
-        leggEnhetIUrl(valgtEnhet!);
+    const {harPortefolje, laster} = useVeilederHarPortefolje();
+
+    useOnMount(() => {
+        leggEnhetIUrl(enhetId);
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
-        this.settInitalStateFraUrl();
+    });
+
+    if(laster) {
+        return null;
     }
+    return (
+        <DocumentTitle title="Veilederoversikt">
+            <div className="veiledere-side">
+                <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
+                    <Lenker harPortefolje={harPortefolje}/>
+                    <Toasts/>
+                    <section>
+                        <div id="oversikt-sideinnhold" role="tabpanel">
+                            <div className="row">
+                                <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
+                                    <PanelBase className="blokk-xxxs sok-veileder">
+                                        <Undertittel>
+                                            Søk veileder
+                                        </Undertittel>
+                                        <FiltreringVeiledere/>
+                                    </PanelBase>
+                                </div>
 
-    settInitalStateFraUrl() {
-        const side = getSideFromUrl();
-        const seAlle = getSeAlleFromUrl();
-        this.props.initalPaginering(side, seAlle);
-    }
-
-    componentDidMount() {
-        const { hentPortefoljestorrelser, hentStatusTall, valgtEnhet } = this.props;
-        hentPortefoljestorrelser(valgtEnhet!);
-        hentStatusTall(valgtEnhet!);
-    }
-
-    render() {
-        const {veiledere, portefoljestorrelser, filtervalg, statustall, slettVeilederFilter} = this.props;
-
-        return (
-            <DocumentTitle title="Veilederoversikt">
-                <div className="veiledere-side">
-                    <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
-                        <Lenker/>
-                        <Toasts/>
-                        <section>
-                            <div id="oversikt-sideinnhold" role="tabpanel">
-                                <div className="row">
-                                    <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
-                                        <PanelBase className="blokk-xxxs sok-veileder">
-                                            <Undertittel>
-                                                Søk veileder
-                                            </Undertittel>
-                                            <FiltreringVeiledere/>
-                                        </PanelBase>
+                                <div className="col-lg-9 col-md-12 col-sm-12">
+                                    <FiltreringLabelContainer
+                                        filtervalg={{
+                                            veiledere: lagLablerTilVeiledereMedIdenter(
+                                                filtervalg.veiledere,
+                                                veiledere.data.veilederListe,
+                                                slettVeilederFilter
+                                            )
+                                        }}
+                                        filtergruppe="veiledere"
+                                        className="filtrering-label-container"
+                                    />
+                                    <div className="sticky-container">
+                                        <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
+                                            {`Totalt ${veiledere.data.veilederListe.length} veiledere`}
+                                        </Undertittel>
                                     </div>
-
-                                    <div className="col-lg-9 col-md-12 col-sm-12">
-                                        <FiltreringLabelContainer
-                                            filtervalg={{
-                                                veiledere: lagLablerTilVeiledereMedIdenter(
-                                                    filtervalg.veiledere,
-                                                    veiledere.data.veilederListe,
-                                                    slettVeilederFilter
-                                                )
-                                            }}
-                                            filtergruppe="veiledere"
-                                            className="filtrering-label-container"
-                                        />
-                                        <div className="sticky-container">
-                                            <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
-                                                {`Totalt ${veiledere.data.veilederListe.length} veiledere`}
-                                            </Undertittel>
-                                        </div>
-                                        <VeiledersideVisning/>
-                                    </div>
+                                    <VeiledersideVisning
+                                        veiledere={veiledere.data.veilederListe}
+                                        portefoljestorrelser={portefoljestorrelser}
+                                        veilederFilter={filtervalg.veiledere}
+                                    />
                                 </div>
                             </div>
-                        </section>
-                    </Innholdslaster>
-                </div>
-            </DocumentTitle>
-        );
-    }
+                        </div>
+                    </section>
+                </Innholdslaster>
+            </div>
+        </DocumentTitle>
+    );
 }
 
-const mapStateToProps = (state: AppState) => ({
-    veiledere: state.veiledere,
-    filtervalg: state.filtreringVeilederoversikt,
-    portefoljestorrelser: state.portefoljestorrelser,
-    valgtEnhet: state.valgtEnhet.data.enhetId,
-    statustall: state.statustall,
-});
 
-const mapDispatchToProps = (dispatch) => ({
-    hentPortefoljestorrelser: (enhetId) => dispatch(fetchPortefoljeStorrelser(enhetId)),
-    initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
-    hentStatusTall: (enhet) => dispatch(fetchStatusTall(enhet)),
-    slettVeilederFilter: (ident: string) => dispatch(slettEnkeltFilter('veiledere', ident, 'veiledere'))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(VeiledereSide);
+export default VeiledereSide;

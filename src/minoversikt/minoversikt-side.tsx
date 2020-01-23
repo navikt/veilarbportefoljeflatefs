@@ -16,23 +16,28 @@ import Toasts from "../components/toast/toast";
 import {useSetStateFromUrl} from "../hooks/portefolje/use-set-state-from-url";
 import {useFetchPortefolje} from "../hooks/portefolje/use-fetch-portefolje";
 import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
-import {useFetchMinOversiktData} from "../hooks/portefolje/use-fetch-min-oversikt-data";
+import {useFetchStatustallTilltakData} from "../hooks/portefolje/use-fetch-statustall-tilltak-data";
 import FiltreringLabelContainer from "../filtrering/filtrering-label-container";
 import {usePortefoljeSelector} from "../hooks/redux/use-portefolje-selector";
 import FiltreringContainer from "../filtrering/filtrering-container";
 import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
+import {useVeilederHarPortefolje} from "../hooks/portefolje/use-dispatch-statustall-innloggetveileder";
 
 function MinoversiktSide () {
     const innloggetVeilederIdent = useIdentSelector();
 
     const {portefolje, filtervalg, listevisning} = usePortefoljeSelector(ListevisningType.minOversikt);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const{ statustall, enhettiltak } = useFetchMinOversiktData();
+    const{ statustall, enhettiltak } = useFetchStatustallTilltakData(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
 
     useSetStateFromUrl();
     useFetchPortefolje(ListevisningType.minOversikt);
+    const {harPortefolje, laster} = useVeilederHarPortefolje();
 
+    if(laster) {
+        return null;
+    }
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
@@ -45,7 +50,7 @@ function MinoversiktSide () {
         <DocumentTitle title="Min oversikt">
             <div className="minoversikt-side blokk-xl">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                    <Lenker/>
+                    <Lenker harPortefolje={harPortefolje}/>
                     <Toasts/>
                     <MinOversiktWrapper>
                         <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">

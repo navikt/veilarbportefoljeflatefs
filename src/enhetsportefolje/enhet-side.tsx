@@ -12,7 +12,6 @@ import Toasts from "../components/toast/toast";
 import {usePortefoljeSelector} from "../hooks/redux/use-portefolje-selector";
 import {ListevisningType} from "../ducks/ui/listevisning";
 import {useSetStateFromUrl} from "../hooks/portefolje/use-set-state-from-url";
-import {useFetchEnhetData} from "../hooks/portefolje/use-fetch-enhet-data";
 import {useFetchPortefolje} from "../hooks/portefolje/use-fetch-portefolje";
 import FiltreringContainer from "../filtrering/filtrering-container";
 import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
@@ -23,17 +22,23 @@ import {AppState} from "../reducer";
 import Toolbar from "../components/toolbar/toolbar";
 import {slettEnkeltFilter} from "../ducks/filtrering";
 import {hentPortefoljeForEnhet} from "../ducks/portefolje";
+import {useFetchStatustallTilltakData} from "../hooks/portefolje/use-fetch-statustall-tilltak-data";
+import {useVeilederHarPortefolje} from "../hooks/portefolje/use-dispatch-statustall-innloggetveileder";
 
 
 function EnhetSide () {
-    const {statustall, enhettiltak} = useFetchEnhetData();
+    const {statustall, enhettiltak} = useFetchStatustallTilltakData();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
     const veilederliste = useSelector( (state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
+    const {harPortefolje, laster} = useVeilederHarPortefolje();
 
     useSetStateFromUrl();
     useFetchPortefolje(ListevisningType.enhetensOversikt);
 
+    if(laster) {
+        return null;
+    }
     const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
 
     const portefoljeData = portefolje.data;
@@ -46,8 +51,7 @@ function EnhetSide () {
         <DocumentTitle title="Enhetens oversikt">
             <div className="enhet-side blokk-xl">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                    <Lenker/>
-                    <Toasts/>
+                    <Lenker harPortefolje={harPortefolje}/>
                     <div id="oversikt-sideinnhold" role="tabpanel">
                         <div className="row">
                             <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">

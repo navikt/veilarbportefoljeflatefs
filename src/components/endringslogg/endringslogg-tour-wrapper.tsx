@@ -20,8 +20,6 @@ function EndringsloggTourWrapper() {
     const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    console.log("veilederIdent", useIdentSelector());
-
     useEffect(() => {
         hentSetteVersjonerRemotestorage()
             .then(resp => {

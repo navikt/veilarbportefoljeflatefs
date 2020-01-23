@@ -55,7 +55,7 @@ export function handterFeil(dispatch, action) {
     };
 }
 
-export function fetchToJson<ResponseInterface>(url: string, config: RequestInit = {}): Promise<ResponseInterface> {
+export function fetchToJson(url: string, config: RequestInit = {}){
     return fetch(url, config)
         .then(sjekkStatuskode)
         .then(toJson);

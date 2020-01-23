@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
-import { PortefoljeData } from '../ducks/portefolje';
 import { NyGruppe, RedigerGruppe } from '../ducks/lagret-filter';
 import { VeilederModell } from '../model-interfaces';
 
@@ -34,24 +33,12 @@ export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, filterva
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/portefolje`;
     const url = buildUrl(baseUrl, {fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
-    return fetchToJson<PortefoljeData>(url, config);
+    return fetchToJson(url, config);
 }
 
 export function hentVeiledersPortefolje(enhet, veilederident, rekkefolge, sorteringsfelt, filtervalg, fra?: number, antall?: number) {
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/portefolje`;
     const url =  buildUrl(baseUrl, {enhet, fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
-    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
-    return fetchToJson<PortefoljeData>(url, config);
-}
-
-export function hentDiagramdata(enhet, filtervalg, veilederident) {
-    let url = `${VEILARBPORTEFOLJE_URL}/diagram/v2/` +
-        `?enhet=${enhet}`;
-
-    if (veilederident) {
-        url += `&veilederident=${veilederident}`;
-    }
-
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg) };
     return fetchToJson(url, config);
 }
@@ -62,7 +49,7 @@ export function hentEnhetsVeiledere(enhetId) {
 }
 
 export function hentAktivBruker(): Promise<VeilederModell> {
-    return fetchToJson<VeilederModell>(`/veilarbveileder/api/veileder/me`, MED_CREDENTIALS)
+    return fetchToJson(`/veilarbveileder/api/veileder/me`, MED_CREDENTIALS)
 }
 
 
