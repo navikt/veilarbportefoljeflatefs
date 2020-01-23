@@ -1,97 +1,71 @@
 import * as React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from './../innholdslaster/innholdslaster';
-import { hentStatusTall } from '../ducks/statustall';
-import {  hentEnhetTiltak } from '../ducks/enhettiltak';
-import { hentPortefoljeForVeileder, settSortering } from '../ducks/portefolje';
-import {  ListevisningType } from '../ducks/ui/listevisning';
-import {
-    getSeAlleFromUrl, getSideFromUrl, getSorteringsFeltFromUrl,
-    getSorteringsRekkefolgeFromUrl, leggEnhetIUrl
-} from '../utils/url-utils';
-import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
-import { loggSideVisning } from '../utils/metrikker/side-visning-metrikker';
+import {ListevisningType} from '../ducks/ui/listevisning';
 import './minoversikt-side.less';
-import {AppState} from "../reducer";
-import {MinOversiktStatusFilter} from "./minoversikt-status-filter";
-import {useOnMount} from "../hooks/use-on-mount";
-import { useEffect } from "react";
-import {useEnhetSelector} from "../hooks/redux/use-enhet-selector";
 import {useIdentSelector} from "../hooks/redux/use-inlogget-ident";
-import {pagineringSetup} from "../ducks/paginering";
 import {MinOversiktModalController} from "../components/modal/modal-min-oversikt-controller";
 import MinoversiktTabell from "./minoversikt-portefolje-tabell";
 import MinoversiktTabellOverskrift from "./minoversikt-portefolje-tabelloverskrift";
 import {MinOversiktWrapper} from "./min-oversikt-wrapper";
-import {MinOversiktFilterLabelContainer} from "./min-oversikt-filterlabel";
 import TabellOverskrift from "../components/tabell-overskrift";
-import {useSelectGjeldendeVeileder} from "../hooks/use-select-gjeldende-veileder";
+import {useSelectGjeldendeVeileder} from "../hooks/portefolje/use-select-gjeldende-veileder";
 import Toolbar from "../components/toolbar/toolbar";
+import Lenker from "../lenker/lenker";
+import Toasts from "../components/toast/toast";
+import {useSetStateFromUrl} from "../hooks/portefolje/use-set-state-from-url";
+import {useFetchPortefolje} from "../hooks/portefolje/use-fetch-portefolje";
+import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
+import {useFetchMinOversiktData} from "../hooks/portefolje/use-fetch-min-oversikt-data";
+import FiltreringLabelContainer from "../filtrering/filtrering-label-container";
+import {usePortefoljeSelector} from "../hooks/redux/use-portefolje-selector";
+import FiltreringContainer from "../filtrering/filtrering-container";
+import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
 
 function MinoversiktSide () {
     const innloggetVeilederIdent = useIdentSelector();
-    const dispatch = useDispatch();
-    const enhet = useEnhetSelector();
 
-    const enhettiltak = useSelector((state: AppState)=> state.enhettiltak);
-    const statustall = useSelector((state: AppState)=> state.statustall);
-    const filtervalg = useSelector((state: AppState)=> state.filtreringMinoversikt);
-    const portefoljeData = useSelector((state: AppState)=> state.portefolje.data);
-
+    const {portefolje, filtervalg, listevisning} = usePortefoljeSelector(ListevisningType.minOversikt);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
+    const{ statustall, enhettiltak } = useFetchMinOversiktData();
+    const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
 
-    const visesAnnenVeiledersPortefolje = gjeldendeVeileder === innloggetVeilederIdent!.ident;
+    useSetStateFromUrl();
+    useFetchPortefolje(ListevisningType.minOversikt);
 
-    const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
-    const sorteringsfelt = getSorteringsFeltFromUrl();
 
-    function settInitalStateFraUrl() {
-        const side = getSideFromUrl();
-        const seAlle = getSeAlleFromUrl();
-        dispatch(pagineringSetup({side, seAlle}))
-    }
-
-    function settSorteringogHentPortefolje () {
-        dispatch(hentPortefoljeForVeileder(
-            enhet,
-            gjeldendeVeileder,
-            sorteringsrekkefolge,
-            sorteringsfelt,
-            filtervalg
-        ));
-    }
-
-    useOnMount(()=> {
-        loggSkjermMetrikker(Side.MIN_OVERSIKT);
-        loggSideVisning(innloggetVeilederIdent, Side.MIN_OVERSIKT);
-        leggEnhetIUrl(enhet);
-        settInitalStateFraUrl();
-        dispatch(settSortering(sorteringsrekkefolge, sorteringsfelt));
-        dispatch(hentPortefoljeForVeileder(enhet, gjeldendeVeileder, sorteringsrekkefolge, sorteringsfelt, filtervalg))
-    });
-
-    useEffect(()=> {
-        if(enhet){
-            dispatch(hentStatusTall(enhet, gjeldendeVeileder));
-            dispatch(hentEnhetTiltak(enhet));
-        }
-    },[enhet, dispatch, gjeldendeVeileder]);
-    const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
+    const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
+    const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
     const stickyWrapper = antallBrukere > 4 ? 'col-lg-9 col-md-12 col-sm-12' : 'sticky-div col-lg-9 col-md-12 col-sm-12';
     const stickyContainer = antallBrukere > 4 ? 'sticky-container' : 'sticky-container__fjernet';
+    const tiltak = sortTiltak(enhettiltak.data.tiltak);
+
+
     return (
         <DocumentTitle title="Min oversikt">
             <div className="minoversikt-side blokk-xl">
                 <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
+                    <Lenker/>
+                    <Toasts/>
                     <MinOversiktWrapper>
-                        <MinOversiktStatusFilter/>
+                        <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
+                            <FiltreringContainer
+                                filtervalg={filtervalg}
+                                filtergruppe="veileder"
+                                veileder={gjeldendeVeileder}
+                                enhettiltak={tiltak}
+                            />
+                        </div>
                         <div className={stickyWrapper}>
                             <div className={stickyContainer}>
-                                <MinOversiktFilterLabelContainer visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}/>
-                                <TabellOverskrift
-                                    className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}
+                                <FiltreringLabelContainer
+                                    filtervalg={filtervalg}
+                                    filtergruppe="veileder"
+                                    enhettiltak={enhettiltak}
+                                    listevisning={listevisning}
+                                    className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                 />
+                                <TabellOverskrift className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
                                 <div className="sticky-container__skygge">
                                     <Toolbar
                                         filtergruppe={ListevisningType.minOversikt}
@@ -99,7 +73,7 @@ function MinoversiktSide () {
                                         gjeldendeVeileder={gjeldendeVeileder}
                                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                         sokVeilederSkalVises={false}
-                                        antallTotalt={portefoljeData.antallTotalt}
+                                        antallTotalt={portefolje.data.antallTotalt}
                                     />
                                     <MinoversiktTabellOverskrift
                                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}

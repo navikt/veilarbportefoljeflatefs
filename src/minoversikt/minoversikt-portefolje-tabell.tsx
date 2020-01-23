@@ -4,7 +4,7 @@ import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
 import { settBrukerSomMarkert } from '../ducks/portefolje';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
-import { useForrigeBruker } from '../hooks/use-forrige-bruker';
+import { useForrigeBruker } from '../hooks/portefolje/use-forrige-bruker';
 import {OrNothing} from "../utils/types/types";
 import {VeilederModell} from "../model-interfaces";
 import {useOnUnmount} from "../hooks/use-on-unmount";
@@ -22,7 +22,7 @@ interface MinOversiktTabellProps {
 
 function MinoversiktTabell(props: MinOversiktTabellProps) {
     const forrigeBruker = useForrigeBruker();
-    const {brukere, filtervalg, enhetId, valgteKolonner} = usePortefoljeSelector(ListevisningType.minOversikt);
+    const {brukere, filtervalg, enhetId, listevisning} = usePortefoljeSelector(ListevisningType.minOversikt);
     const portefolje = useSelector((state: AppState)=> state.portefolje)
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
@@ -30,7 +30,6 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
     useOnUnmount(()=> {
         updateLastPath();
     });
-
 
     const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
@@ -47,7 +46,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
                                 settMarkert={settMarkert}
                                 varForrigeBruker={forrigeBruker === bruker.fnr}
                                 filtervalg={filtervalg}
-                                valgteKolonner={valgteKolonner}
+                                valgteKolonner={listevisning.valgte}
                                 innloggetVeileder={props.innloggetVeileder}
                             />
                         )}

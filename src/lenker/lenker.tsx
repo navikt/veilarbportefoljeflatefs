@@ -1,18 +1,20 @@
 import React from 'react';
 import ActiveLink from './active-link';
 import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tour-wrapper';
-import { useSelector } from 'react-redux';
-import { AppState } from '../reducer';
 import { useIdentSelector } from '../hooks/redux/use-inlogget-ident';
 import { useParams } from 'react-router';
 import './lenker.less';
+import {useSelector} from "react-redux";
+import {AppState} from "../reducer";
 
 function Lenker() {
-    const portefoljeStorrelse = useSelector((state: AppState) => state.statustallInloggetVeileder.data.totalt);
-    const harPortefolje = portefoljeStorrelse > 0;
-
+    const portefoljeStorrelse = useSelector((state: AppState) => state.statustallInloggetVeileder);
     const veilederIdent = useIdentSelector();
     const {ident} = useParams();
+
+    const harPortefolje = portefoljeStorrelse > 0;
+
+
     const aktivLink = ident ?
         veilederIdent!.ident === ident
             ? 'oversiktslenke--valgt'

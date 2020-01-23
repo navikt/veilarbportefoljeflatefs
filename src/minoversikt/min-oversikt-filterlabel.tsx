@@ -13,16 +13,4 @@ export function MinOversiktFilterLabelContainer(props: {visesAnnenVeiledersPorte
     const enhettiltak = useSelector((state: AppState) => state.enhettiltak.data.tiltak);
     const listevisning = useSelector((state: AppState) =>  state.ui.listevisningMinOversikt);
     const filtervalg = useSelector((state: AppState) =>  state.filtreringMinoversikt);
-
-
-    return (
-        <FiltreringLabelContainer
-            filtervalg={filtervalg}
-            filtergruppe="veileder"
-            veileder={gjeldendeVeileder}
-            enhettiltak={enhettiltak}
-            listevisning={listevisning}
-            className={props.visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
-        />
-    )
 }

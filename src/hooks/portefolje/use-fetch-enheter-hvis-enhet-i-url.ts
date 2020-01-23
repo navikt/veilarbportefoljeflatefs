@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {useQueryParams} from "./use-query-params";
-import {velgEnhetForVeileder} from "../ducks/valgt-enhet";
+import {useQueryParams} from "../use-query-params";
+import {velgEnhetForVeileder} from "../../ducks/valgt-enhet";
 import {useDispatch} from "react-redux";
 
 

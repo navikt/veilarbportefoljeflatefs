@@ -73,6 +73,15 @@ export function getSideFromUrl() {
     return parseInt(queryString.parse(window.location.search).side || '1', 10);
 }
 
+export function getInitialStateFromUrl () {
+    const side = getSideFromUrl();
+    const seAlle = getSeAlleFromUrl();
+    const sorteringsfelt = getSorteringsFeltFromUrl();
+    const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
+
+    return {side, seAlle, sorteringsfelt, sorteringsrekkefolge};
+}
+
 export function leggSeAlleIUrl(seAlle: boolean = false) {
     const parsed = queryString.parse(window.location.search);
     parsed.seAlle = seAlle;

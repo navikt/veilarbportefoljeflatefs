@@ -1,5 +1,5 @@
 import { AppState } from '../../reducer';
-import { Kolonne, ListevisningType } from './listevisning';
+import {Kolonne, ListevisningState, ListevisningType} from './listevisning';
 import { AktiviteterValg, FiltreringAktiviteterValg } from '../filtrering';
 import {
     I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE,
@@ -25,6 +25,13 @@ export function selectValgteAlternativer(state: AppState, name: string): Kolonne
         return state.ui.listevisningMinOversikt.valgte;
     }
     return state.ui.listevisningEnhetensOversikt.valgte;
+}
+
+export function selectListeVisning(state: AppState, name: string): ListevisningState {
+    if (name === ListevisningType.minOversikt) {
+        return state.ui.listevisningMinOversikt;
+    }
+    return state.ui.listevisningEnhetensOversikt;
 }
 
 function addHvis(kolonne: Kolonne, add: boolean): Kolonne[] {

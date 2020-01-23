@@ -1,31 +1,15 @@
 import React from 'react';
 import EnhetListehode from './enhet-listehode';
-import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
-import { ListevisningType } from '../ducks/ui/listevisning';
+import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
+import {ListevisningType} from '../ducks/ui/listevisning';
 import './enhetsportefolje.less';
 import './brukerliste.less';
-import {ASCENDING, DESCENDING} from "../konstanter";
-import {useDispatch} from "react-redux";
-import {hentPortefoljeForEnhet, settSortering} from "../ducks/portefolje";
+import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
 
 
 function EnhetTabellOverskrift() {
-    const {filtervalg, sorteringsrekkefolge, valgteKolonner, sorteringsfelt, enhetId} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
-    const dispatch = useDispatch();
-
-    function settSorteringOgHentPortefolje(felt) {
-
-        let valgtRekkefolge = '';
-
-        if (felt !== sorteringsfelt) {
-            valgtRekkefolge = ASCENDING;
-        } else {
-            valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
-        }
-
-        dispatch(settSortering(valgtRekkefolge, felt));
-        dispatch(hentPortefoljeForEnhet(enhetId!, valgtRekkefolge, felt, filtervalg));
-    }
+    const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
+    const settSorteringOgHentPortefolje = useSetPortefoljeSortering(ListevisningType.enhetensOversikt);
 
     return (
         <div className="typo-undertekst blokk-xs enhet-tabell">
@@ -34,7 +18,7 @@ function EnhetTabellOverskrift() {
                 sorteringOnClick={settSorteringOgHentPortefolje}
                 filtervalg={filtervalg}
                 sorteringsfelt={sorteringsfelt}
-                valgteKolonner={valgteKolonner}
+                valgteKolonner={listevisning.valgte}
                 filtergruppe={ListevisningType.enhetensOversikt}
             />
         </div>

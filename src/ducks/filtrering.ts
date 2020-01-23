@@ -1,5 +1,5 @@
 import { oppdaterPortefolje } from './portefolje';
-import { FiltervalgModell, VeilederModell } from '../model-interfaces';
+import { FiltervalgModell } from '../model-interfaces';
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -112,67 +112,41 @@ export default function reducer(state: FiltervalgModell = initialState, action):
     }
 }
 
-export function lagreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: VeilederModell) {
-    return (dispatch, getState) => {
-        dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
-
-        if (filtergruppe !== 'veiledere') {
-            // TODO Fjerne denne fra filter-reducer
-            oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
-        }
-    };
-}
-
 
 
 // Action Creators
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: string) {
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
-        return (dispatch, getState) => {
-            dispatch({
-                type: ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
-                data: { filterId, filterVerdi },
-                name: filtergruppe
-            });
-
-            if (filtergruppe !== 'veiledere') {
-                // TODO Fjerne denne fra filter-reducer
-                oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
-            }
+        return {
+            type: ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
+            data: { filterId, filterVerdi },
+            name: filtergruppe
         };
     }
-    return (dispatch, getState) => {
-        dispatch({ type: ENDRE_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
-
-        if (filtergruppe !== 'veiledere') {
-                // TODO Fjerne denne fra filter-reducer
-            oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
-        }
-    };
+    return {
+        type: ENDRE_FILTER,
+        data: { filterId, filterVerdi },
+        name: filtergruppe
+    }
 }
 
-export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet', veileder) {
+export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet') {
     if (filterId === 'aktiviteter' && filterVerdi === 'TILTAK') {
-        return (dispatch, getState) => {
-            dispatch({
-                type: SLETT_AKTIVITETER_OG_TILTAK_FILTER,
-                data: { filterId, filterVerdi },
-                name: filtergruppe
-            });
-            oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
+        return {
+            type: SLETT_AKTIVITETER_OG_TILTAK_FILTER,
+            data: { filterId, filterVerdi },
+            name: filtergruppe
         };
     }
-    return (dispatch, getState) => {
-        dispatch({ type: SLETT_ENKELT_FILTER, data: { filterId, filterVerdi }, name: filtergruppe });
-        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
-    };
+    return  {
+        type: SLETT_ENKELT_FILTER,
+        data: { filterId, filterVerdi },
+        name: filtergruppe
+    }
 }
 
-export function clearFiltervalg(filtergruppe = 'enhet', veileder) {
-    return (dispatch, getState) => {
-        dispatch({ type: CLEAR_FILTER, name: filtergruppe });
-        oppdaterPortefolje(getState, dispatch, filtergruppe, veileder);
-    };
+export function clearFiltervalg(filtergruppe = 'enhet') {
+        return { type: CLEAR_FILTER, name: filtergruppe }
 }
 
 export function veilederSoktFraToolbar() {

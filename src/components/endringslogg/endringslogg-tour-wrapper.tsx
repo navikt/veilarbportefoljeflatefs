@@ -10,16 +10,17 @@ import {
     registrerInnholdIRemoteStorage,
 } from './utils/endringslogg-utils';
 import { logEvent } from '../../utils/frontend-logger';
-import { registrerSettInnlegg } from './utils/endringslogg-api';
 import './endringslogg.less';
 import './collapse-container-transition.less';
 
 function EndringsloggTourWrapper() {
-    const veilederIdent = useIdentSelector();
+    const veilederIdent = useIdentSelector()!.ident;
 
     const {startTimer, stoppTimer} = useTimer();
     const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    console.log("veilederIdent", useIdentSelector());
 
     useEffect(() => {
         hentSetteVersjonerRemotestorage()
@@ -41,7 +42,7 @@ function EndringsloggTourWrapper() {
         const ulestFelt = innholdsListe.some((element) => !element.sett);
         const tidBrukt = stoppTimer();
         if(veilederIdent) {
-            krypterVeilederident(veilederIdent.ident)
+            krypterVeilederident(veilederIdent)
                 .then((res) =>
                     logEvent('portefolje.endringslogg', {
                         feature: 'veiledergrupper',

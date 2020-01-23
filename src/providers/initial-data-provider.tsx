@@ -7,7 +7,7 @@ import {AppState} from "../reducer";
 import {hentInloggetVeileder} from "../ducks/inlogget-veileder";
 import NavFrontendSpinner from "nav-frontend-spinner";
 import {useRedirectOnMount} from "../hooks/use-redirect-on-mount";
-import {useFetchEnheter} from "../hooks/use-fetch-enheter-hvis-enhet-i-url";
+import {useFetchEnheter} from "../hooks/portefolje/use-fetch-enheter-hvis-enhet-i-url";
 
 
 function InitialDataProvider(props: PropsWithChildren<{}>) {

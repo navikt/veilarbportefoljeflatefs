@@ -17,10 +17,11 @@ import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
 import { hentPortefoljeStorrelser as fetchPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import { hentStatusTall as fetchStatusTall } from '../ducks/statustall';
 import { RouterProps } from 'react-router';
-import { defaultVeileder } from '../filtrering/filtrering-container';
 import './veiledere.less';
 import {AppState} from "../reducer";
 import {OrNothing} from "../utils/types/types";
+import Lenker from "../lenker/lenker";
+import Toasts from "../components/toast/toast";
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -66,6 +67,8 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
             <DocumentTitle title="Veilederoversikt">
                 <div className="veiledere-side">
                     <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
+                        <Lenker/>
+                        <Toasts/>
                         <section>
                             <div id="oversikt-sideinnhold" role="tabpanel">
                                 <div className="row">
@@ -119,7 +122,7 @@ const mapDispatchToProps = (dispatch) => ({
     hentPortefoljestorrelser: (enhetId) => dispatch(fetchPortefoljeStorrelser(enhetId)),
     initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
     hentStatusTall: (enhet) => dispatch(fetchStatusTall(enhet)),
-    slettVeilederFilter: (ident: string) => dispatch(slettEnkeltFilter('veiledere', ident, 'veiledere', defaultVeileder))
+    slettVeilederFilter: (ident: string) => dispatch(slettEnkeltFilter('veiledere', ident, 'veiledere'))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VeiledereSide);
