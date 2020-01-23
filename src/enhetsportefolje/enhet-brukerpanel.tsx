@@ -6,6 +6,8 @@ import { Kolonne } from '../ducks/ui/listevisning';
 import CheckBox from '../components/tabell/checkbox';
 import EnhetKolonner from './enhet-kolonner';
 import { useLayoutEffect, useRef } from 'react';
+import './enhetsportefolje.less';
+import './brukerliste.less';
 
 interface EnhetBrukerpanelProps {
     bruker: any;
@@ -17,7 +19,7 @@ interface EnhetBrukerpanelProps {
     forrigeBruker?: string;
 }
 
-function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, forrigeBruker}: EnhetBrukerpanelProps) {
+function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, forrigeBruker}: EnhetBrukerpanelProps) {
     const liRef = useRef<HTMLLIElement>(null);
     const varForrigeBruker = bruker.fnr === forrigeBruker;
 
@@ -29,26 +31,26 @@ function EnhetBrukerpanel({ bruker, settMarkert, enhetId, filtervalg, brukersVei
         }
     }, [varForrigeBruker]);
 
-    const classname  = classNames('brukerliste__element brukerliste--border-bottom-thin', {
+    const classname = classNames('brukerliste__element brukerliste--border-bottom-thin', {
         'brukerliste--forrigeBruker': varForrigeBruker,
     });
 
     return (
         <li className={classname} ref={liRef}>
-                <div className="brukerliste__gutter-left brukerliste--min-width-enhet">
-                    <CheckBox bruker={bruker} settMarkert={settMarkert} />
-                </div>
-                <EnhetKolonner
-                    className="brukerliste__innhold flex flex--center"
-                    bruker={bruker}
-                    enhetId={enhetId}
-                    filtervalg={filtervalg}
-                    valgteKolonner={valgteKolonner}
-                    brukersVeileder={brukersVeileder}
-                />
-                <div className="brukerliste__gutter-right">
-                    <Etiketter bruker={bruker}/>
-                </div>
+            <div className="brukerliste__gutter-left">
+                <CheckBox bruker={bruker} settMarkert={settMarkert}/>
+            </div>
+            <EnhetKolonner
+                className="brukerliste__innhold flex flex--center"
+                bruker={bruker}
+                enhetId={enhetId}
+                filtervalg={filtervalg}
+                valgteKolonner={valgteKolonner}
+                brukersVeileder={brukersVeileder}
+            />
+            <div className="brukerliste__gutter-right">
+                <Etiketter bruker={bruker}/>
+            </div>
         </li>
     );
 }

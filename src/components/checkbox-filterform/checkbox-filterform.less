@@ -1,29 +1,33 @@
+@import "~nav-frontend-core/less/core";
+
 .checkbox-filterform {
-  &__valg {
-    max-height: 15.5rem;
-    margin-bottom: 0.5rem;
-    overflow-x: auto;
-    padding: 0.5rem;
-  }
+    border-bottom: 1px solid @navGra40;
 
-  &__valg-knapp {
-    margin-top: 1rem;
-  }
+    &__valg {
+        max-height: 15.5rem;
+        overflow-x: auto;
+        padding: 0.5rem;
+        margin-bottom: .5rem;
+    }
 
-  &__under-valg {
-    padding-left: 0.5rem;
-  }
+    &__valg-knapp {
+        margin-top: 1rem;
+    }
 
-  &__alertstripe {
-    padding: 0.5rem 0 1rem 0.5rem;
-    border: none;
-  }
+    &__under-valg {
+        padding-left: 0.5rem;
+    }
+
+    &__alertstripe {
+        padding: 0.5rem 0 1rem 0.5rem;
+        border: none;
+    }
 }
 
 .field__container {
-  position: relative;
+    position: relative;
 
-  :last-child {
-    margin-bottom: 0;
-  }
+    :last-child {
+        margin-bottom: 0;
+    }
 }

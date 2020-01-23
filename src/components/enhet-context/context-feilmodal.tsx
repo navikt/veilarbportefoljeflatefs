@@ -1,14 +1,15 @@
 import React from 'react';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import {Hovedknapp} from 'nav-frontend-knapper';
-import {VarselModal, VarselModalType} from "../varselmodal/varselmodal";
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Hovedknapp } from 'nav-frontend-knapper';
+import { VarselModal, VarselModalType } from '../modal/varselmodal/varselmodal';
+import './enhet-context.less';
 
 interface ContextFeilmodalProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-function ContextFeilmodal ({isOpen, onClose}: ContextFeilmodalProps) {
+function ContextFeilmodal({isOpen, onClose}: ContextFeilmodalProps) {
     return (
         <VarselModal
             isOpen={isOpen}

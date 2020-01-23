@@ -1,0 +1,8 @@
+<svg contentScriptType="text/ecmascript" width="14"
+     xmlns:xlink="http://www.w3.org/1999/xlink" zoomAndPan="magnify"
+     contentStyleType="text/css" viewBox="5 -12 24 24" height="20"
+     preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
+     version="1.0">
+    <path stroke-linecap="round" fill="none" stroke-linejoin="round" id="arbeidsliste-svg"
+          d="M7.5 23.5v-7h-7l16-16 7 7z" stroke="#3e3832" stroke-miterlimit="10" transform="rotate(-45)"/>
+</svg>

@@ -4,6 +4,7 @@ import {
     ferdigfilterListe,
     mapFilternavnTilFilterValue
 } from '../../filtrering/filter-konstanter';
+import "./barlabel.less";
 
 interface BarinputRadioProps {
     filterNavn: string;

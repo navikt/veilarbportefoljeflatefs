@@ -5,6 +5,8 @@ import TransitionContainer from './utils/transition-container';
 import { useEventListener } from '../../hooks/use-event-listener';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { EndringsloggInnleggMedSettStatus } from './utils/endringslogg-custom';
+import './endringslogg.less';
+import './collapse-container-transition.less';
 
 interface EndringsProps {
     innhold: EndringsloggInnleggMedSettStatus[];

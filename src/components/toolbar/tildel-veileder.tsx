@@ -1,24 +1,23 @@
 import * as React from 'react';
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { tildelVeileder } from '../../ducks/portefolje';
 import { VeilederModell } from '../../model-interfaces';
 import { AppState } from '../../reducer';
-import { ToolbarPosisjon } from './toolbar';
-import DropdownNy from "../dropdown/dropdown-ny";
-import SokFilterNy from "./sok-filter-ny";
-import { useState } from "react";
-import { Radio } from "nav-frontend-skjema";
-import classNames from "classnames";
+import DropdownNy from '../dropdown/dropdown-ny';
+import SokFilterNy from './sok-filter-ny';
+import { useState } from 'react';
+import { Radio } from 'nav-frontend-skjema';
+import classNames from 'classnames';
+import './toolbar.less';
 
 interface TildelVeilederProps {
     skalVises: boolean;
     filtergruppe?: string;
-    toolbarPosisjon?: ToolbarPosisjon;
     gjeldendeVeileder?: VeilederModell;
 }
 
-function TildelVeileder({ skalVises,  filtergruppe, gjeldendeVeileder, toolbarPosisjon }: TildelVeilederProps) {
-    const [ident, setIdent] = useState<string|null>(null);
+function TildelVeileder({skalVises, filtergruppe, gjeldendeVeileder}: TildelVeilederProps) {
+    const [ident, setIdent] = useState<string | null>(null);
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
@@ -26,7 +25,7 @@ function TildelVeileder({ skalVises,  filtergruppe, gjeldendeVeileder, toolbarPo
     const sorterVeiledere = veiledere.sort((a, b) => a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1);
 
     const doTildelTilVeileder = (tilordninger, tilVeileder) => {
-        return dispatch(tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder, toolbarPosisjon));
+        return dispatch(tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder));
     };
 
     if (!skalVises) {
@@ -37,7 +36,7 @@ function TildelVeileder({ skalVises,  filtergruppe, gjeldendeVeileder, toolbarPo
     const aktiv = valgteBrukere.length > 0;
 
     const onSubmit = (lukkDropdown) => {
-        if(ident) {
+        if (ident) {
             const tilordninger = valgteBrukere
                 .map((bruker) => ({
                     fraVeilederId: bruker.veilederId,
@@ -50,7 +49,6 @@ function TildelVeileder({ skalVises,  filtergruppe, gjeldendeVeileder, toolbarPo
         lukkDropdown();
     };
 
-
     return (
         <DropdownNy
             name="Tildel veileder"
@@ -59,7 +57,7 @@ function TildelVeileder({ skalVises,  filtergruppe, gjeldendeVeileder, toolbarPo
             render={lukkDropdown =>
                 <SokFilterNy
                     label="Tildel veileder"
-                    placeholder="Tildel veileder"
+                    placeholder="Søk navn eller NAV-ident"
                     data={sorterVeiledere}
                 >
                     {data =>
@@ -68,15 +66,15 @@ function TildelVeileder({ skalVises,  filtergruppe, gjeldendeVeileder, toolbarPo
                                 ident={ident}
                                 onChange={setIdent}
                                 data={data}
-                                onSubmit={()=> onSubmit(lukkDropdown)}
+                                onSubmit={() => onSubmit(lukkDropdown)}
                             />
                             <div className="checkbox-filterform__under-valg">
                                 <div
                                     className={classNames('checkbox-filterform__valg-knapp', 'knapperad', 'blokk-xxs')}
                                 >
-                                    <button onClick={()=>onSubmit(lukkDropdown)}
+                                    <button onClick={() => onSubmit(lukkDropdown)}
                                             className={classNames('knapp', 'knapp--mini', {'knapp--hoved': ident})}>
-                                        {ident ? "Velg" : "Lukk"}
+                                        {ident ? 'Velg' : 'Lukk'}
                                     </button>
                                 </div>
                             </div>
@@ -89,9 +87,9 @@ function TildelVeileder({ skalVises,  filtergruppe, gjeldendeVeileder, toolbarPo
 }
 
 interface TildelVeilederRendererProps {
-    onSubmit: ()=> void;
+    onSubmit: () => void;
     data: VeilederModell[];
-    ident: string| null;
+    ident: string | null;
     onChange: (ident: string) => void;
 }
 
@@ -105,13 +103,13 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange}: TildelVeilede
                         key={veileder.ident}
                         label={`${veileder.etternavn}, ${veileder.fornavn}`}
                         value={veileder.ident}
-                        checked={ident? ident ===veileder.ident: false}
+                        checked={ident ? ident === veileder.ident : false}
                         onChange={e => onChange(e.target.value)}
                     />
                 )}
             </div>
         </form>
-    )
+    );
 }
 
 export default TildelVeileder;

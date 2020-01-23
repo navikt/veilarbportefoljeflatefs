@@ -3,29 +3,30 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Checkbox } from 'nav-frontend-skjema';
 import { markerAlleBrukere } from '../../ducks/portefolje';
-import { ToolbarPosisjon } from './toolbar';
+import './toolbar.less';
 
 interface VelgalleCheckboksProps {
     skalVises: boolean;
     disabled: boolean;
     alleMarkert: boolean;
-    markerAlle: (markert: boolean, toolbarPosisjon?: ToolbarPosisjon) => void;
-    toolbarPosisjon?: ToolbarPosisjon;
+    markerAlle: (markert: boolean) => void;
+    className: string;
 }
 
-function VelgalleCheckboks({ skalVises, disabled, markerAlle, alleMarkert, toolbarPosisjon }: VelgalleCheckboksProps) {
+function VelgalleCheckboks({skalVises, disabled, markerAlle, alleMarkert, className}: VelgalleCheckboksProps) {
     if (!skalVises) {
         return null;
     }
-    const onClickHandler = () => markerAlle(!alleMarkert, toolbarPosisjon);
+    const onClickHandler = () => markerAlle(!alleMarkert);
 
     return (
         <Checkbox
-            label={<span className="velgalle-checkboks__label">Velg alle</span>}
-            className="velgalle-checkboks"
+            label={''}
+            className={className}
             checked={alleMarkert}
             disabled={disabled}
             onClick={onClickHandler}
+            title="Velg alle checkbox"
         />
     );
 }
@@ -33,10 +34,10 @@ function VelgalleCheckboks({ skalVises, disabled, markerAlle, alleMarkert, toolb
 const mapStateToProps = (state) => {
     const brukere = state.portefolje.data.brukere;
     const alleMarkert = brukere.length > 0 && brukere
-        .every((bruker) => ((bruker.fnr !=='' && bruker.markert) || bruker.fnr === ''));
+        .every((bruker) => ((bruker.fnr !== '' && bruker.markert) || bruker.fnr === ''));
     const disabled = brukere.length === 0;
 
-    return { alleMarkert, disabled };
+    return {alleMarkert, disabled};
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

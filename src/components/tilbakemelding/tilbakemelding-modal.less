@@ -1,3 +1,4 @@
+@import "~nav-frontend-core/less/core";
 
 .tilbakemelding-modal {
     width: 350px;
@@ -5,12 +6,12 @@
     right: 25px;
     border-radius: 2.5%;
     background-color: white;
-    box-shadow: 0 6px 10px 0 #78706A;
+    box-shadow: 0 6px 10px 0 @navGra60;
     z-index: 998;
 
     &__tittel {
-        font-size: 24px !important;
-        line-height: 28px !important;
+        font-size: 24px;
+        line-height: 28px;
     }
 
     &--slide-in {
@@ -38,7 +39,7 @@
     }
 
     &__tilfredshet {
-         margin: 2rem 0 0.5rem 0;
+        margin: 2rem 0 0.5rem 0;
     }
 
     &__takk-melding {
@@ -121,3 +122,4 @@
         opacity: 0;
     }
 }
+

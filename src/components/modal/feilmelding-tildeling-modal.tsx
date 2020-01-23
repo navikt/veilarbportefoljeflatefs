@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
-import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
+import { VarselModal, VarselModalType } from './varselmodal/varselmodal';
 import { Fnr, FnrList } from '../fnr-list';
+import './feilmelding-brukere.less';
 
 interface FeilmeldingBrukereModalProps {
     isOpen: boolean;
@@ -32,7 +33,6 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
             <Normaltekst className="blokk-s">
                 Det kan skyldes manglende tilgang på bruker(e), eller at veilederen allerede er tildelt brukeren(e).
             </Normaltekst>
-
 
             {props.fnrSuksess && props.fnrSuksess.length > 0 &&
             <div className='tildeling-veileder-modal__vellykkedebrukere'>

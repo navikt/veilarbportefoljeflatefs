@@ -1,166 +1,169 @@
+@import "~nav-frontend-core/less/core";
+
 .advarsel-modal .modal__overlay .ReactModal__Content {
-  width: 448px !important;
+    width: 448px !important;
 }
 
 .slette-veiledergruppe-modal {
-  text-align: center;
-  padding: 2rem 3rem;
+    text-align: center;
+    padding: 2rem 3rem;
 
-  &__tekstgruppe {
-    margin-bottom: 2rem !important;
-  }
+    &__tekstgruppe {
+        margin-bottom: 2rem !important;
+    }
 
-  &__knappegruppe {
-    display: flex;
-    justify-content: space-evenly;
-  }
+    &__knappegruppe {
+        display: flex;
+        justify-content: space-evenly;
+    }
 }
 
 .endringer-ikke-lagret-modal {
-  text-align: center;
-  padding: 2rem;
-  height: 15rem;
+    text-align: center;
+    padding: 2rem;
+    height: 15rem;
 
-  &__innholdstittel {
-    margin: 1rem 0 3rem 0 !important;
-  }
-
-  &__knappegruppe {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    margin: 0 5rem;
-
-    &__avbryt, &__redigering {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
+    &__innholdstittel {
+        margin: 1rem 0 3rem 0 !important;
     }
-  }
+
+    &__knappegruppe {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        margin: 0 5rem;
+
+        &__avbryt, &__redigering {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
 }
 
 #veiledergruppe-modal__valgteveileder__label {
-  margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .veiledergruppe-modal {
-  &__form {
-    min-width: 35rem;
-    margin-top: 1rem;
-    padding: 0 2rem;
-  }
-
-  &__tekst {
-    margin: 0.5rem 0 !important;
-  }
-
-  &__gruppenavntekst {
-    margin: 0px 0px 8px;
-  }
-
-  &__valgteveileder {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    overflow-y: scroll;
-    min-height: 15rem;
-    max-height: 15rem;
-    border-bottom: 2px solid #ccc5c1;
-    border-top: 2px solid #ccc5c1;
-
-    &__tom-liste-tekst {
-      font-style: italic;
-      color: #78706A;
-      padding: 0.5rem 0 0 1rem;
+    &__form {
+        min-width: 35rem;
+        margin-top: 1rem;
+        padding: 0 2rem;
     }
 
-    &__elem {
-      padding: 0.5rem 0 0 0.5rem;
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 0.5px solid #ccc5c1;
-      margin-right: 1rem;
-
-      .fjern--knapp {
-        border: none !important;
-        padding: 0;
-        width: 20px;
-        height: 20px;
-        margin-bottom: 0.5rem;
-
-        svg {
-          stroke: @navGra60;
-        }
-      }
-
-      .fjern--knapp:hover {
-        svg {
-          g {
-            stroke: @navBla;
-          }
-        }
-      }
-
-      .fjern--knapp:focus {
-        box-shadow: none;
-
-        svg {
-          g {
-            stroke: @navBla;
-          }
-        }
-      }
+    &__tekst {
+        margin: 0.5rem 0 !important;
     }
-  }
 
-  &__sokefilter {
-    margin-top: 1rem;
-    max-height: 19rem;
-    min-height: 19rem;
+    &__gruppenavntekst {
+        margin: 0 0 8px;
+    }
 
-    .checkbox-filterform {
-      max-height: 13rem;
-      min-height: 13rem;
-      display: grid;
-
-      &__valg {
-        max-height: 13rem;
-        min-height: 13rem;
-        border: 1px solid @navGra60;
-        border-radius: 0.25rem;
+    &__valgteveileder {
+        display: grid;
         grid-template-columns: 1fr 1fr;
-      }
+        overflow-y: scroll;
+        min-height: 15rem;
+        max-height: 15rem;
+        border: 1px solid #78706A;
+        border-radius: 4px;
 
-      &__alertstripe {
-        max-height: 13rem;
-        min-height: 13rem;
-        border: 1px solid @navGra60;
-        border-radius: 0.25rem;
-      }
+        &__tom-liste-tekst {
+            font-style: italic;
+            color: @navGra60;
+            padding: 0.5rem 0 0 1rem;
+        }
+
+        &__elem {
+            padding: 0.5rem 0 0 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 0.5px solid #ccc5c1;
+            margin-right: 1rem;
+
+            .fjern--knapp {
+                border: none !important;
+                padding: 0;
+                width: 20px;
+                height: 20px;
+                margin-bottom: 0.5rem;
+
+                svg {
+                    stroke: @navGra60;
+                }
+            }
+
+            .fjern--knapp:hover {
+                svg {
+                    g {
+                        stroke: @navBla;
+                    }
+                }
+            }
+
+            .fjern--knapp:focus {
+                box-shadow: none;
+
+                svg {
+                    g {
+                        stroke: @navBla;
+                    }
+                }
+            }
+        }
     }
-  }
 
-  &__knappegruppe {
-    margin-top: 2rem;
+    &__sokefilter {
+        margin-top: 1rem;
+        max-height: 19rem;
+        min-height: 19rem;
 
-    &__avbryt {
-      margin: 0 0.5rem;
+        .checkbox-filterform {
+            max-height: 13rem;
+            min-height: 13rem;
+            display: grid;
+
+            &__valg {
+                max-height: 13rem;
+                min-height: 13rem;
+                border: 1px solid @navGra60;
+                border-radius: 0.25rem;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            &__alertstripe {
+                max-height: 13rem;
+                min-height: 13rem;
+                border: 1px solid @navGra60;
+                border-radius: 0.25rem;
+            }
+        }
     }
-  }
+
+    &__knappegruppe {
+        margin-top: 2rem;
+
+        &__avbryt {
+            margin: 0 0.5rem;
+        }
+    }
 }
 
 
 .veiledergruppe-feilet-modal {
-  text-align: center;
-  padding: 2rem;
+    text-align: center;
+    padding: 2rem;
 
-  &__tekstgruppe {
-    margin: 1rem 0 2rem 0 !important;
-  }
+    &__tekstgruppe {
+        margin: 1rem 0 2rem 0 !important;
+    }
 
-  &__knappegruppe {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    margin: 0 5rem;
+    &__knappegruppe {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        margin: 0 5rem;
 
-  }
+    }
+
 }

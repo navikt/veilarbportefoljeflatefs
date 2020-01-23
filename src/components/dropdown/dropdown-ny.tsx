@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import {useFocus} from "../../hooks/use-focus";
+import { useFocus } from '../../hooks/use-focus';
+import './dropdown.less';
 
 const btnCls = (props: DropdownProps, apen: boolean, hover: boolean) => classNames('dropdown', props.className, {
     'dropdown--apen': apen,
@@ -20,27 +21,26 @@ interface DropdownProps {
     onLukk?: () => void;
 }
 
-
-function DropdownNy (props: DropdownProps) {
+function DropdownNy(props: DropdownProps) {
     const [apen, setApen] = useState(props.apen || false);
-    const [hover, setHover] = useState( false);
+    const [hover, setHover] = useState(false);
     const btnRef = useRef<HTMLButtonElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
-    const focusRef = useFocus();
+    const {focusRef} = useFocus();
 
     function handler(e) {
-        if (apen && divRef.current &&!divRef.current.contains(e.target)) {
+        if (apen && divRef.current && !divRef.current.contains(e.target)) {
             lukkDropdown();
         }
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         document.body.addEventListener('click', handler);
         return () => document.body.removeEventListener('click', handler);
     });
 
-   function toggleDropdown() {
-        const {onLukk = () => void(0)} = props;
+    function toggleDropdown() {
+        const {onLukk = () => void (0)} = props;
         if (apen) {
             onLukk();
         }
@@ -48,7 +48,7 @@ function DropdownNy (props: DropdownProps) {
     }
 
     function lukkDropdown() {
-        const { onLukk = () => void(0)} = props;
+        const {onLukk = () => void (0)} = props;
         setApen(false);
 
         if (btnRef.current != null) {
@@ -63,41 +63,41 @@ function DropdownNy (props: DropdownProps) {
         };
     }
 
-        const { name, disabled, render, hoyre } = props;
+    const {name, disabled, render, hoyre} = props;
 
-        const innhold = !apen ? null : (
-            <div
-                className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`}
-                id={`${name}-dropdown__innhold`}
-                ref={focusRef}
-            >
-                {render(lukkDropdown)}
-            </div>
-        );
+    const innhold = !apen ? null : (
+        <div
+            className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`}
+            id={`${name}-dropdown__innhold`}
+            ref={inputRef => (focusRef.current = inputRef)}
+        >
+            {render(lukkDropdown)}
+        </div>
+    );
 
-        return (
-            <div
-                className={btnCls(props, apen, hover)}
-                ref={divRef}
-                onMouseEnter={isHover(true)}
-                onMouseLeave={isHover(false)}
-            >
-                <div className={btnWrapperCls(disabled)}>
-                    <button
-                        ref={btnRef}
-                        type="button"
-                        className="dropdown__btn"
-                        onClick={toggleDropdown}
-                        aria-expanded={apen}
-                        aria-controls={`${name}-dropdown__innhold`}
-                        disabled={disabled}
-                    >
-                        <span className="dropdown__btntext">{name}</span>
-                    </button>
-                </div>
-                {innhold}
+    return (
+        <div
+            className={btnCls(props, apen, hover)}
+            ref={divRef}
+            onMouseEnter={isHover(true)}
+            onMouseLeave={isHover(false)}
+        >
+            <div className={btnWrapperCls(disabled)}>
+                <button
+                    ref={btnRef}
+                    type="button"
+                    className="dropdown__btn"
+                    onClick={toggleDropdown}
+                    aria-expanded={apen}
+                    aria-controls={`${name}-dropdown__innhold`}
+                    disabled={disabled}
+                >
+                    <span className="dropdown__btntext">{name}</span>
+                </button>
             </div>
-        );
+            {innhold}
+        </div>
+    );
 }
 
 export default DropdownNy;

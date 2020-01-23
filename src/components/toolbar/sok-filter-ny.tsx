@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Input } from 'nav-frontend-skjema';
-import AlertStripe from "nav-frontend-alertstriper";
+import AlertStripe from 'nav-frontend-alertstriper';
+import './toolbar.less';
+import { useFocus } from '../../hooks/use-focus';
 
 interface SokFilterProps<T> {
     data: T[];
@@ -14,14 +16,14 @@ function limit<T>(liste: T[], antall: number) {
     return liste.slice(0, antall);
 }
 
-function SokFilterNy<T> (props: SokFilterProps<T>) {
-    const { data, limitSize, children} = props;
+function SokFilterNy<T>(props: SokFilterProps<T>) {
+    const {data, limitSize, children} = props;
     const [query, setQuery] = useState('');
     const [rawfilteredData, setRawfilteredData] = useState(data);
 
     useEffect(() => {
         setRawfilteredData(data.filter(elem => !query || JSON.stringify(elem).toLowerCase().includes(query.toLowerCase())));
-    }, [ query, data]);
+    }, [query, data]);
 
     const filteredData =
         limitSize === undefined
@@ -29,6 +31,7 @@ function SokFilterNy<T> (props: SokFilterProps<T>) {
             : limit(rawfilteredData, limitSize || 20);
 
     const harData = filteredData.length > 0;
+    const {focusRef} = useFocus();
 
     return (
         <>
@@ -39,6 +42,7 @@ function SokFilterNy<T> (props: SokFilterProps<T>) {
                     value={query}
                     inputClassName="sokfilter__input"
                     onChange={e => setQuery(e.target.value)}
+                    inputRef={inputRef => (focusRef.current = inputRef)}
                 />
             </div>
             <span className="text-hide" aria-live="polite" aria-atomic="true">

@@ -2,6 +2,7 @@ import * as React from 'react';
 import classnames from 'classnames';
 import { BrukerModell } from '../../model-interfaces';
 import { setFraBrukerIUrl } from '../../utils/url-utils';
+import '../../lenker/lenker.less';
 
 const settSammenNavn = (bruker) => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -20,7 +21,7 @@ const brukerNavn = (className, bruker, enhetId, skalJusteres) => (
             className={classnames('lenke lenke--frittstaende')}
 
         >
-        {settSammenNavn(bruker)}
+            {settSammenNavn(bruker)}
         </a>
     </div>
 );
@@ -32,8 +33,8 @@ interface BrukerNavnProps {
     skalJusteres?: boolean;
 }
 
-function BrukerNavn({ className, bruker, enhetId, skalJusteres }: BrukerNavnProps) {
-    return brukerNavn(className,bruker, enhetId, skalJusteres);
+function BrukerNavn({className, bruker, enhetId, skalJusteres}: BrukerNavnProps) {
+    return brukerNavn(className, bruker, enhetId, skalJusteres);
 }
 
 export default BrukerNavn;

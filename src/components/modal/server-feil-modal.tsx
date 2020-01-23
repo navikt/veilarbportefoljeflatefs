@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {Normaltekst, Undertittel} from 'nav-frontend-typografi';
-import {VarselModal, VarselModalType} from "../varselmodal/varselmodal";
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { VarselModal, VarselModalType } from './varselmodal/varselmodal';
+import './feilmelding-brukere.less';
 
 interface ServerFeilModalProps {
     isOpen?: boolean;
@@ -15,21 +16,21 @@ class ServerFeilModal extends React.Component<ServerFeilModalProps, ServerFeilMo
     constructor(props) {
         super(props);
 
-        this.state = { isOpen: this.props.isOpen || false };
+        this.state = {isOpen: this.props.isOpen || false};
         this.lukkModal = this.lukkModal.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.isOpen !== this.state.isOpen) {
-            this.setState({ isOpen: nextProps.isOpen });
+            this.setState({isOpen: nextProps.isOpen});
         }
     }
 
     lukkModal() {
-        const { onClose } = this.props;
+        const {onClose} = this.props;
         onClose();
 
-        this.setState({ isOpen: false });
+        this.setState({isOpen: false});
     }
 
     render() {
@@ -42,7 +43,7 @@ class ServerFeilModal extends React.Component<ServerFeilModalProps, ServerFeilMo
                 type={VarselModalType.FEIL}
                 portalClassName="tildeling-veileder-modal"
             >
-                <div style={{margin: "1rem", textAlign: "center"}}>
+                <div style={{margin: '1rem', textAlign: 'center'}}>
                     <Undertittel tag="h1" className="blokk-xxs">
                         Handlingen kan ikke utføres
                     </Undertittel>

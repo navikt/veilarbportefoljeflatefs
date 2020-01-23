@@ -1,132 +1,154 @@
-@brukerliste-padding: 5px;
+@import "~nav-frontend-core/less/core";
+@import "~nav-frontend-chevron-style/src/index";
 
-.brukerliste {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+.veilarbportefoljeflatefs {
+    @brukerliste-padding: 5px;
 
-.brukerliste__element {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
-}
+    .brukerliste {
+        list-style: none;
+        margin: 0;
+        padding: 0;
 
-.brukerliste__checkbox {
-    top: -12px;
-}
+        li:nth-child(odd) {
+            background-color: #F4F4F4;
+        }
+    }
 
-.brukerliste .checkboks+.skjemaelement__label:before {
-    margin-top: 2px;
-    width: 20px;
-    height: 20px;
-}
+    .enhet-tabell {
+        background-color: white;
+        border: 1px solid @navGra60;
+        border-top-color: white;
+        border-bottom: none;
+        border-radius: 0 0 @border-radius-base @border-radius-base;
+        margin-bottom: 0;
+    }
 
-.checkboks + .skjemaelement__label:before, .radioknapp + .skjemaelement__label:before {
-    width: 20px;
-    height: 20px;
-}
+    .brukerliste__element {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0;
+    }
 
-.brukerliste--borders {
-    border-top: 1px solid @navGra40;
-    border-bottom: 1px solid @navGra40;
-}
+    .brukerliste__checkbox {
+        top: -12px;
+    }
 
-.brukerliste--border-bottom {
-    border-bottom: 2px solid @navGra40;
-}
+    .brukerliste .checkboks + .skjemaelement__label:before {
+        margin-top: 2px;
+        width: 20px;
+        height: 20px;
+    }
 
-.brukerliste--border-bottom-thin {
-    border-bottom: 1px solid @navGra40;
-}
+    .checkboks + .skjemaelement__label:before, .radioknapp + .skjemaelement__label:before {
+        width: 20px;
+        height: 20px;
+    }
 
-.brukerliste--forrigeBruker {
-    box-shadow: inset -1px 0 0 2px @navGra60, inset 1px 0 0 2px @navGra40;
-}
+    .brukerliste--borders {
+        border-top: 1px solid @navGra40;
+        border-bottom: 1px solid @navGra40;
+    }
 
-.brukerliste__overskriftheader {
-    display: flex;
-    font-weight: bold;
-    font-size: 1rem;
-    min-height: 2rem;
-    padding: @brukerliste-padding 0;
-}
+    .brukerliste--border-bottom {
+        border-bottom: 2px solid @navGra40;
+    }
 
-.brukerliste__sorteringheader {
-    display: flex;
-    min-height: 2rem;
-    padding: 0.5rem 0;
-}
+    .brukerliste--border-bottom-thin {
+        border-bottom: 1px solid @navGra40;
+            &:last-child {
+                border-bottom: none;
+            }
+    }
 
-.brukerliste__gutter-left {
-    display: flex;
-    align-items: center;
-    margin-left: 8px;
-}
+    .brukerliste--forrigeBruker {
+        box-shadow: inset -1px 0 0 2px @navGra60, inset 1px 0 0 2px @navGra40;
+    }
 
-.brukerliste--min-width-enhet {
-    min-width: 2rem;
-}
+    .brukerliste__header {
+        z-index: 500;
+        background-color: white;
+    }
 
-.brukerliste--min-width-minside {
-    min-width: 3rem;
-}
+    .brukerliste__overskriftheader {
+        display: flex;
+        font-weight: bold;
+        font-size: 1rem;
+        min-height: 2rem;
+        padding: @brukerliste-padding 0;
+    }
 
-.brukerliste__innhold {
-    width: 78%;
-}
+    .brukerliste__sorteringheader {
+        display: flex;
+        min-height: 2rem;
+        padding: 0.5rem 0;
+    }
 
-.brukerliste__gutter-right {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    width: 4rem;
-    margin-right: 8px;
-}
+    .brukerliste__gutter-left {
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
+    }
 
-.brukerliste__etiketter {
-    width: 100%;
-}
+    .brukerliste--min-width-minside {
+        min-width: 3rem;
+    }
 
-.brukerliste__arbeidslisteknapp {
-    cursor: pointer;
-    padding: 0;
-    margin-left: 1rem;
-    background-color: @navLysGra;
-    border: none;
-    min-width: 2rem;
-    color: @navMorkGra;
-}
+    .brukerliste__innhold {
+        width: 80%;
+    }
 
-.brukerliste__arbeidslistepanel {
-    padding: 8px;
-}
+    .brukerliste__gutter-right {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        width: 4rem;
+        margin-right: 8px;
+    }
 
-.brukerliste__arbeidslisteinnhold {
-    padding-right: 3rem;
-}
+    .brukerliste__etiketter {
+        width: 100%;
+    }
 
-.brukerliste__arbeidslisteinnhold-footer {
-    color: @grayInactive;
-    text-align: right;
-    font-style: italic;
-
-    button {
-        font-style: italic;
+    .brukerliste__arbeidslisteknapp {
+        cursor: pointer;
+        padding: 0;
+        margin-left: 1rem;
+        background-color: transparent;
+        min-width: 2rem;
+        color: @navMorkGra;
         border: none;
     }
-}
 
-.brukerliste__arbeidslisteknapp--chevron-apen {
-    .chevron-mixin();
-    .chevron-orientasjon-mixin(opp);
-}
+    .brukerliste__arbeidslistepanel {
+        padding: 8px;
+    }
 
-.brukerliste__arbeidslisteknapp--chevron-lukket {
-    .chevron-mixin();
-    .chevron-orientasjon-mixin(ned);
-}
+    .brukerliste__arbeidslisteinnhold {
+        padding-right: 3rem;
+    }
 
-.valgt-sortering {
-    font-weight: bold;
+    .brukerliste__arbeidslisteinnhold-footer {
+        color: @grayInactive;
+        text-align: right;
+        font-style: italic;
+
+        button {
+            font-style: italic;
+            border: none;
+        }
+    }
+
+    .brukerliste__arbeidslisteknapp--chevron-apen {
+        .chevron-mixin();
+        .chevron-orientasjon-mixin(opp);
+    }
+
+    .brukerliste__arbeidslisteknapp--chevron-lukket {
+        .chevron-mixin();
+        .chevron-orientasjon-mixin(ned);
+    }
+
+    .valgt-sortering {
+        font-weight: bold;
+    }
 }

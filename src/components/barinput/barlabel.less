@@ -1,3 +1,5 @@
+@import "~nav-frontend-core/less/core";
+
 .barlabel {
     display: flex;
     justify-content: space-between;
@@ -20,6 +22,7 @@
             flex-basis: 3rem;
             padding-right: 1rem;
             display: inline-flex;
+
             p {
                 padding-right: 0;
             }
@@ -58,30 +61,39 @@
         left: 0;
         top: 0;
     }
+
     &.ufordeltebrukere .barlabel__barface {
         background-color: @navLillaLighten20;
     }
+
     &.venterPaSvarFraNAV .barlabel__barface {
         background-color: @navLillaLighten20;
     }
+
     &.venterPaSvarFraBruker .barlabel__barface {
         background-color: @navLimeGronnLighten20;
     }
+
     &.avtaltMoteMedNav .barlabel__barface {
         background-color: @navDypBlaDarken80;
     }
+
     &.utlopteAktiviteter .barlabel__barface {
         background-color: @navGra60;
     }
+
     &.ikkeIAvtaltAktivitet .barlabel__barface {
         background-color: @navGra60;
     }
+
     &.iAvtaltAktivitet .barlabel__barface {
         background-color: @navDypBlaLighten20;
     }
+
     &.inaktiveBrukere .barlabel__barface {
         background-color: @navGra60;
     }
+
     &.minArbeidsliste .barlabel__barface {
         background-color: @navGra60;
     }

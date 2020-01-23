@@ -1,7 +1,8 @@
 import React from 'react';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { VarselModal, VarselModalType } from '../../varselmodal/varselmodal';
+import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
+import './modal.less';
 
 interface EndringerIkkeLagretModal {
     isOpen: boolean;

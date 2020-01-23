@@ -1,4 +1,5 @@
 import { fetchToJson, sjekkStatuskode } from '../../ducks/utils';
+import './enhet-context.less';
 
 const MED_CREDENTIALS: RequestInit = {
     credentials: 'same-origin',

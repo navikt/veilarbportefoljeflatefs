@@ -1,3 +1,8 @@
+@import "~nav-frontend-core/less/core";
+@import "~nav-frontend-typografi-style/src/index";
+
+@gray-background: #efefef;
+@gray-inactive: #7f756c;
 
 .DayPicker {
     display: flex;
@@ -70,7 +75,7 @@
 }
 
 .DayPicker-Weekdays {
-    border-top: 1px solid @gray-icon;
+    border-top: 1px solid @navGra40;
     display: table-header-group;
 }
 
@@ -131,7 +136,7 @@
 
 .DayPicker-Day--disabled,
 .DayPicker-Day--disabled:last-child {
-    color: @gray-icon;
+    color: @navGra40;
     cursor: default;
     font-weight: normal;
 
@@ -154,7 +159,7 @@
 }
 
 .DayPicker-Day--today {
-    border: 1px solid @gray-icon;
+    border: 1px solid @navGra40;
 }
 
 .DayPicker-Day--sunday:not(.DayPicker-Day--today) {
@@ -198,15 +203,16 @@
 
 .datovelger--harFeil {
     .nav-datovelger__input {
-        border-color: #BA3A26;
-        background-color: #F3E3E3;
+        border-color: @redError;
+        background-color: @pinkErrorBg;
     }
 
     .nav-datovelger__kalenderknapp {
-        border-color: #BA3A26;
-        background-color: #F3E3E3;
+        border-color: @redError;
+        background-color: @pinkErrorBg;
     }
 }
+
 @fjern-ikon-bredde: 768px;
 
 @media (min-width: @fjern-ikon-bredde) {
@@ -218,7 +224,7 @@
             top: 2.5em;
             border-radius: @border-radius-small;
             background-color: @white;
-            border: 1px solid @gray-icon;
+            border: 1px solid @navGra40;
             z-index: 1;
         }
 
@@ -235,13 +241,10 @@
             width: 2.4rem;
             height: 2.1rem; // TODO Mega kjip pixelpushing
             border: 0;
-            border-left: 1px solid @gray-icon;
-            background-color: transparent;
+            border-left: 1px solid @navGra40;
             padding: 0;
             position: absolute;
-            background: data-uri('kalender.svg') no-repeat;
-            background-repeat: no-repeat;
-            background-position: center center;
+            background: transparent no-repeat center center;
             background-size: 18px 18px;
 
             &:focus {
@@ -251,14 +254,12 @@
 
             &:hover:not(:disabled),
             &:focus {
-                background: data-uri('kalender--hover.svg') no-repeat;
-                background-position: center center;
+                background: no-repeat center center;
                 background-size: 18px 18px;
             }
 
             &:active {
-                background: data-uri('kalender--aktiv.svg') no-repeat;
-                background-position: center center;
+                background: no-repeat center center;
                 background-size: 18px 18px;
             }
         }

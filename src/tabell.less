@@ -1,13 +1,7 @@
-
 // TABELLER
 // --------------------------------------------------
-@pink-error-bg: #f3e3e3;
 @gray-background: #efefef;
 @gray-inactive: #7f756c;
-@gray-icon: #b7b1a9;
-@color-border: @gray-icon;
-@blue-link: #0067c5;
-@blue-interaction: @blue-link;
 
 @rem-as-14px: 0.875rem;
 @line-height-base: 1.428571429;
@@ -24,12 +18,8 @@
 
 @table-border-color: #ddd;
 
-@state-success-bg:  #dff0d8;
-@state-info-bg:     #d9edf7;
-@state-warning-bg:  @pink-error-bg;
-@state-danger-bg:   @pink-error-bg;
-
-
+@state-success-bg: #dff0d8;
+@state-info-bg: #d9edf7;
 
 table {
     caption {
@@ -41,63 +31,122 @@ table {
 }
 
 // Baseline styles
-
 .tabell {
     background-color: @table-bg;
+    border-radius: @border-radius-base;
+    border-collapse: separate;
+    border-top: none;
+    margin-right: 0;
+    border-spacing: 0;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: @line-height-computed;
+    border-bottom: 1px solid @navGra60;
+
+    td:first-child, th:first-child {
+        border-left: 1px solid @navGra60;
+    }
+
+    td:last-child, th:last-child {
+        border-right: 1px solid @navGra60;
+    }
+
+    thead th {
+        box-shadow: 0 6px 5px -4px rgba(0, 0, 0, 0.4);
+        background-color: white;
+        border-bottom: 1px solid @navGra60;
+        position: sticky;
+        top: 4.5rem;
+    }
+
     caption {
         position: absolute;
         left: -3000px;
     }
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: @line-height-computed;
 
     // Cells
+    .tabellheader {
+        &__lenke {
+            display: flex;
+        }
+        &__tekst {
+            width: max-content;
+        }
+        &__pil {
+            width: 1rem;
+            height: 1rem;
+            grid-column: 2;
+            float: left;
+            margin-top: 2px;
+        }
+    }
+
     th {
         text-align: left;
+
     }
+
     th, td {
         padding: @table-cell-padding;
         line-height: @line-height-base;
         vertical-align: top;
-        border-top: 1px solid @color-border;
+        border-top: 1px solid @navGra40;
+
         &.vertikal-strek {
             .vertikalstrek();
         }
     }
+
     thead {
         tr:first-child {
             th, td {
                 border-top: none;
+                font-weight: 100;
             }
         }
     }
+
     tbody {
+        tr:nth-child(even) {
+            background-color: white;
+        }
+
         tr:first-child {
             th, td {
                 border-top-width: 2px;
+            }
+        }
+
+        th, td {
+            border-bottom: 1px solid @navGra40;
+            border-top: none;
+            font-weight: normal;
+
+            &:first-child {
+                width: 30%;
+                white-space: pre-wrap;
+            }
+
+            &:nth-child(2) {
+                width: 20%;
+                white-space: pre-wrap;
+            }
+
+            &:nth-child(3) {
+                width: 7rem;
+                white-space: pre-wrap;
             }
         }
     }
 
     // Account for multiple tbody instances
     tbody + tbody {
-        border-top: 2px solid @color-border;
+        border-top: 2px solid @navGra40;
     }
 
-    // Nesting
-    .tabell {
-        background-color: @gray-background;
-    }
-
-    &__subhead {
-        border-bottom: 2px solid @color-border;
-        margin-bottom: 2rem;
-    }
 }
 
 // Condensed.tabell w/ half padding
-
 .tabell-kompakt {
     th, td {
         padding: @table-condensed-cell-padding;
@@ -105,20 +154,17 @@ table {
 }
 
 // Bordered version
-//
 // Add borders all around the.tabell and between all the columns.
-
 .tabell-ramme {
-    border: 1px solid @color-border;
+    border: 1px solid @navGra40;
+
     th, td {
-        border: 1px solid @color-border;
+        border: 1px solid @navGra40;
     }
 }
 
 // Zebra-striping
-//
 // Default zebra-stripe styles (alternating gray and transparent backgrounds)
-
 .tabell-striper {
     tbody tr:nth-of-type(odd) {
         background-color: @table-bg-accent;
@@ -128,19 +174,17 @@ table {
 // Tabell med vertikal skillestrek i alle celler
 // Border på topp og bunn
 // Ingen border til venstre og høyre
-
 .tabell-skillestrek {
-    border-top: 1px solid @color-border;
-    border-bottom: 1px solid @color-border;
+    border-top: 1px solid @navGra40;
+    border-bottom: 1px solid @navGra40;
+
     th, td {
         .vertikalstrek();
     }
 }
 
 // Hover effect
-//
 // Placed here since it has to come after the potential zebra striping
-
 .tabell-hover {
     tr:hover {
         background-color: @table-bg-hover;
@@ -148,15 +192,12 @@ table {
 }
 
 // Midstiller elementer i tabellen
-
 table .tabell-element-center {
     text-align: center;
 }
 
 // Table cell sizing
-//
 // Reset default.tabell behavior
-
 table col[class*="col-"] {
     position: static; // Prevent border hiding in Firefox and IE9-11 (see https://github.com/twbs/bootstrap/issues/11623)
     float: none;
@@ -164,14 +205,13 @@ table col[class*="col-"] {
 }
 
 // Mixin for vertikal strek
-
 .vertikalstrek() {
     position: relative;
     &:after {
         content: "";
         display: inline-block;
         position: absolute;
-        border-right: 1px solid @color-border;
+        border-right: 1px solid @navGra40;
         right: 0;
         top: 25%;
         width: 0;

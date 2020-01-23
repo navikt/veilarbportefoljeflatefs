@@ -25,6 +25,7 @@ import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift'
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
+import './minoversikt.less';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -172,4 +173,5 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
         </div>
     );
 }
+
 export default MinoversiktDatokolonner;

@@ -10,7 +10,8 @@ import { AppState } from '../../../reducer';
 import { OrNothing } from '../../../utils/types/types';
 import VeilederGruppeForm from './veileder-gruppe-form';
 import { logEvent } from '../../../utils/frontend-logger';
-import {initialState} from "../../../ducks/filtrering";
+import { initialState } from '../../../ducks/filtrering';
+import './modal.less';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -35,7 +36,7 @@ interface VeilederGruppeErrors {
 
 export function VeilederGruppeModal(props: VeilederModalProps) {
     const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
-    const [gruppeNavn, setGruppeNavn] = useState<string>("");
+    const [gruppeNavn, setGruppeNavn] = useState<string>('');
     const [errors, setErrors] = useState<VeilederGruppeErrors>({} as VeilederGruppeErrors);
     const [harForsoktSubmitte, setHarForsoktSubmitte] = useState(false);
 
@@ -43,11 +44,11 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
 
     useEffect(() => {
-          setFilterValg(props.initialVerdi.filterValg);
-          setGruppeNavn(props.initialVerdi.gruppeNavn);
-          setErrors({} as VeilederGruppeErrors);
-          setHarForsoktSubmitte(false);
-    },[props.initialVerdi.filterValg, props.initialVerdi.gruppeNavn]);
+        setFilterValg(props.initialVerdi.filterValg);
+        setGruppeNavn(props.initialVerdi.gruppeNavn);
+        setErrors({} as VeilederGruppeErrors);
+        setHarForsoktSubmitte(false);
+    }, [props.initialVerdi.filterValg, props.initialVerdi.gruppeNavn]);
 
     const fjernVeiledereFraListen = (veilederTarget: string) => {
         setFilterValg(prevState => ({...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}));
@@ -98,7 +99,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         props.onSubmit(gruppeNavn, filterValg);
 
         setFilterValg(initialState);
-        setGruppeNavn("");
+        setGruppeNavn('');
         setErrors({} as VeilederGruppeErrors);
         setHarForsoktSubmitte(false);
         props.onRequestClose();

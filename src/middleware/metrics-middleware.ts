@@ -7,7 +7,6 @@ import { logEvent } from '../utils/frontend-logger';
 import { SETUP } from '../ducks/paginering';
 import { SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER } from '../ducks/portefolje';
 import { ActionTypeKeys, Kolonne } from '../ducks/ui/listevisning';
-import { ToolbarPosisjon } from '../components/toolbar/toolbar';
 import { VIS_ARBEIDSLISTE_MODAL } from '../ducks/modal';
 import { SORTERT_PA } from '../ducks/sortering';
 import { NY_FEILET_MODAL, REDIGERING_FEILET_MODAL, SLETTING_FEILET_MODAL } from '../ducks/modal-serverfeil';
@@ -84,7 +83,7 @@ function finnSlettetVeilederGruppe(store: any, filterId: number) {
 
 export const metricsMiddleWare = (store: any) => (next: any) => (action: any) => {
 
-    const {type, data, toolbarPosisjon, kolonne} = action;
+    const {type, data, kolonne} = action;
     const sideNavn = finnSideNavn();
 
     switch (type) {
@@ -92,10 +91,10 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             loggEndreFilter(sideNavn, data, store);
             break;
         case SETUP:
-            loggPaginering(sideNavn, data, toolbarPosisjon);
+            loggPaginering(sideNavn, data);
             break;
         case TILDEL_VEILEDER:
-            loggTildelVeileder(sideNavn, toolbarPosisjon);
+            loggTildelVeileder(sideNavn);
             break;
         case ActionTypeKeys.VELG_ALTERNATIV:
             loggEndreListevisning(sideNavn, kolonne);
@@ -104,7 +103,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             loggAvvelgListevalg(sideNavn, kolonne);
             break;
         case VIS_ARBEIDSLISTE_MODAL:
-            loggArbeidslisteApne(sideNavn, toolbarPosisjon);
+            loggArbeidslisteApne(sideNavn);
             break;
         case SORTERT_PA:
             loggEndreSortering(sideNavn, data.property, '');
@@ -113,10 +112,10 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             loggEndreSortering(sideNavn, action.sorteringsfelt, action.sorteringsrekkefolge);
             break;
         case SETT_MARKERT_BRUKER_ALLE:
-            loggVelgAlle(sideNavn, toolbarPosisjon);
+            loggVelgAlle(sideNavn);
             break;
         case VEILEDER_SOKT_FRA_TOOLBAR:
-            loggVeilederSoktFraToolbar(sideNavn, toolbarPosisjon);
+            loggVeilederSoktFraToolbar(sideNavn);
             break;
         case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
             loggEndreAktivitetFilter(sideNavn);
@@ -190,16 +189,16 @@ const loggEndreAktivitetFilter = (sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.endre_filter', {sideNavn, filter: 'aktiviteter'});
 };
 
-const loggPaginering = (sideNavn: SideNavn, data: any, toolbarPosisjon: ToolbarPosisjon) => {
+const loggPaginering = (sideNavn: SideNavn, data: any) => {
     if (data.side > 1) {
-        logEvent('portefolje.metrikker.paginering', {sideNavn, toolbarPosisjon});
+        logEvent('portefolje.metrikker.paginering', {sideNavn});
     } else if (data.seAlle) {
-        logEvent('portefolje.metrikker.se_alle', {sideNavn, toolbarPosisjon});
+        logEvent('portefolje.metrikker.se_alle', {sideNavn});
     }
 };
 
-const loggTildelVeileder = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
-    logEvent('portefolje.metrikker.tildel_veileder', {sideNavn, toolbarPosisjon});
+const loggTildelVeileder = (sideNavn: SideNavn) => {
+    logEvent('portefolje.metrikker.tildel_veileder', {sideNavn});
 };
 
 const loggEndreListevisning = (sideNavn: SideNavn, kolonne: Kolonne) => {
@@ -210,12 +209,8 @@ const loggAvvelgListevalg = (sideNavn: SideNavn, kolonne: Kolonne) => {
     logEvent('portefolje.metrikker.listevisning_avvelget', {sideNavn, kolonne});
 };
 
-const loggArbeidslisteApne = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
-    logEvent('portefolje.metrikker.arbeidsliste_apne', {sideNavn, toolbarPosisjon});
-};
-
-const loggEndreVisningsModus = (sideNavn: SideNavn, visningsmodus: string, toolbarPosisjon: ToolbarPosisjon) => {
-    logEvent('portefolje.metrikker.endre_visningsmodus', {sideNavn, visningsmodus, toolbarPosisjon});
+const loggArbeidslisteApne = (sideNavn: SideNavn) => {
+    logEvent('portefolje.metrikker.arbeidsliste_apne', {sideNavn});
 };
 
 const loggEndreSortering = (sideNavn: SideNavn, sorteringsfelt: string, rekkefolge: string) => {
@@ -225,12 +220,12 @@ const loggEndreSortering = (sideNavn: SideNavn, sorteringsfelt: string, rekkefol
     }
 };
 
-const loggVeilederSoktFraToolbar = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
-    logEvent('portefolje.metrikker.veileder_sokt_fra_toolbar', {sideNavn, toolbarPosisjon});
+const loggVeilederSoktFraToolbar = (sideNavn: SideNavn) => {
+    logEvent('portefolje.metrikker.veileder_sokt_fra_toolbar', {sideNavn});
 };
 
-const loggVelgAlle = (sideNavn: SideNavn, toolbarPosisjon: ToolbarPosisjon) => {
-    logEvent('portefolje.metrikker.velg_alle', {sideNavn, toolbarPosisjon});
+const loggVelgAlle = (sideNavn: SideNavn) => {
+    logEvent('portefolje.metrikker.velg_alle', {sideNavn});
 };
 
 const loggNyVeiledergruppeFeilet = () => {

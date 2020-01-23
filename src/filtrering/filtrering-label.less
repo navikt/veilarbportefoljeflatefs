@@ -1,66 +1,72 @@
-.filtrering-label-container {
-    display: flex;
-    flex-wrap: wrap;
-}
+@import "~nav-frontend-core/less/core";
 
-.filtreringlabel {
-    border: none;
-    border-radius: @border-radius-small;
-    display: flex;
-    min-width: 7rem;
-    max-width: 13.75rem;
-    background: @navGra20 none;
-    padding: 0.5rem;
-    justify-content: space-between;
-    font-weight: normal; // TODO få designerne til å bruke fonter som faktisk finnes.
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-
-    &:hover {
-        box-shadow: inset 0 -0.125em 0 @navMorkGra;
+.veilarbportefoljeflatefs {
+    .filtrering-label-container {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 1000;
+        background-color: #F4F4F4;
     }
 
-    &:active {
-        background-color: #005b82;
-        color: @white;
+    .filtreringlabel {
+        border: none;
+        border-radius: @border-radius-small;
+        display: flex;
+        min-width: 7rem;
+        max-width: 13.75rem;
+        background: @navGra20 none;
+        padding: 0.5rem;
+        justify-content: space-between;
+        font-weight: normal; // TODO få designerne til å bruke fonter som faktisk finnes.
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+
+        &:hover {
+            box-shadow: inset 0 -0.125em 0 @navMorkGra;
+        }
+
+        &:active {
+            background-color: @navDypBla;
+            color: @white;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px @fokusFarge;
+        }
+
+        &--markert {
+            background-color: @navOransjeLighten60;
+        }
     }
 
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 0px 3px @fokusFarge;
+    .filtreringlabel__label {
+        padding-right: 1rem;
+        max-width: 11.75rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    &--markert {
-        background-color: @navOransjeLighten60;
+    .filtrering-label-slett {
+        margin: 20px 8px 32px 3px;
+        cursor: pointer;
+        background-color: rgb(183, 177, 169);
+        border: none;
+        padding: 5px;
+    }
+
+    .filtreringlabel-slett-filter {
+        padding-right: 0;
+    }
+
+    .filter-ikon-x-svg {
+        width: 0.875rem;
+        height: 0.875rem;
+        align-self: center;
+    }
+
+    .filtreringlabel:active svg path {
+        fill: #ffffff;
     }
 }
-.filtreringlabel__label {
-    padding-right: 1rem;
-    max-width: 11.75rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.filtrering-label-slett {
-    margin: 20px 8px 32px 3px;
-    cursor: pointer;
-    background-color: rgb(183, 177, 169);
-    border: none;
-    padding: 5px;
-}
-
-.filtreringlabel-slett-filter {
-    padding-right: 0;
-}
-
-.filter-ikon-x-svg {
-    width: 0.875rem;
-    height: 0.875rem;
-    align-self: center;
-}
-
-.filtreringlabel:active svg path {
-    fill: #ffffff;
-}
-

@@ -4,13 +4,14 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { ReactComponent as SlettIkon } from './remove-circle.svg';
 import React from 'react';
-import { SkjemaelementFeil } from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 import classNames from 'classnames';
+import './modal.less';
+import { SkjemaelementFeilmelding } from 'nav-frontend-skjema';
 
 interface ValgtVeilederGruppeListeProps {
     valgteVeileder: string[],
     fjernValgtVeileder: (veilederId: string) => void;
-    feil?: SkjemaelementFeil;
+    feil?: string;
 }
 
 function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
@@ -24,8 +25,7 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
 
     return (
         <>
-            <div className={classNames({'skjemaelement__input--harFeil': props.feil})}>
-                <div className="veiledergruppe-modal__valgteveileder">
+                <div className={classNames("veiledergruppe-modal__valgteveileder", {'skjemaelement__input--harFeil': props.feil})}>
                     {veiledere.length === 0 ?
                         (<Normaltekst className="veiledergruppe-modal__valgteveileder__tom-liste-tekst">
                             Ingen veiledere lagt til i gruppen
@@ -47,10 +47,7 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
                             </div>
                         )}
                 </div>
-            </div>
-            {props.feil && <div className='skjemaelement__feilmelding'>
-                {props.feil.feilmelding}
-            </div>}
+            <SkjemaelementFeilmelding>{props.feil}</SkjemaelementFeilmelding>
         </>
     );
 }

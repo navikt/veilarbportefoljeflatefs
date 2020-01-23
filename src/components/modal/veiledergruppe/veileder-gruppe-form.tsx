@@ -1,10 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { Input } from 'nav-frontend-skjema';
-import SokVeiledere from '../../sok-veiledere/sok-veiledere';
 import { FiltervalgModell } from '../../../model-interfaces';
 import ValgtVeilederGruppeListe from './valgt-veileder-gruppeliste';
 import { useFocus } from '../../../hooks/use-focus';
+import './modal.less';
+import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
 
 interface VeilederGruppeForm {
     filterValg: FiltervalgModell;
@@ -17,6 +18,11 @@ interface VeilederGruppeForm {
 }
 
 function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
+    const {focusRef} = useFocus();
+    const hvisFeil = props.errors ? 'veiledergruppe-modal__harFeil' : 'veiledergruppe-modal__valgteveileder';
+    console.log('hvisfeil', hvisFeil);
+    console.log('props.errors', props.errors);
+    console.log('props.errors.gruppeNavn', typeof props.errors.gruppeNavn);
     return (
         <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit}>
             <Innholdstittel tag="h1" className="blokk-xs">
@@ -28,13 +34,12 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
                     value={props.gruppeNavn}
                     bredde="XL"
                     onChange={e => props.setGruppeNavn(e.target.value)}
-                    feil={props.errors.gruppeNavn && {feilmelding: props.errors.gruppeNavn}}
+                    feil={props.errors.gruppeNavn}
                     maxLength={35}
-                    // @ts-ignore
-                    inputRef={useFocus()}
+                    inputRef={inputRef => (focusRef.current = inputRef)}
                 />
                 <div className="veiledergruppe-modal__sokefilter">
-                    <SokVeiledere
+                    <SokVeiledereVeiledergrupper
                         erValgt={(ident) => props.filterValg.veiledere ? props.filterValg.veiledere.includes(ident) : false}
                         hanterVeilederValgt={props.hanterVeilederChange}
                     />
@@ -45,7 +50,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
                 <ValgtVeilederGruppeListe
                     valgteVeileder={props.filterValg.veiledere}
                     fjernValgtVeileder={(veilederTarget) => props.hanterVeilederChange(false, veilederTarget)}
-                    feil={props.errors.filterValg && {feilmelding: props.errors.filterValg}}
+                    feil={props.errors.filterValg}
                 />
             </div>
             {props.children}

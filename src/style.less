@@ -1,12 +1,10 @@
-//@coreModulePath: './../../node_modules/';
-//@nodeModulesPath: './../../node_modules/';
 @import "tabell";
 
 body {
     margin: 0;
     height: 100%;
     width: 100%;
-    background-color: @navLysGra !important;
+    background-color: #F4F4F4;
     font-size: 1rem;
     font-weight: 400;
     color: @navMorkGra;
@@ -23,7 +21,7 @@ body {
         margin: 0 auto;
         height: 100%;
         max-height: 5rem;
-        box-shadow: 0 2px 4px 0 rgba(183,177,169,.5);
+        box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
     }
 }
 
@@ -31,11 +29,6 @@ html {
     height: 100%;
 }
 
-@import "components/modal/feilmelding-brukere";
-@import "components/modal/arbeidsliste/arbeidsliste";
-@import "components/modal/veiledergruppe/modal";
-@import "./components/enhet-context/enhet-context";
-@import "components/formik/formik-datovelger/daypicker";
 @import '~nav-datovelger/dist/datovelger/styles/datovelger.css';
 @import "~nav-frontend-alertstriper-style/src/index";
 @import "~nav-frontend-typografi-style/src/index";
@@ -47,45 +40,20 @@ html {
 @import "~nav-frontend-etiketter-style/src/index";
 @import "~nav-frontend-spinner-style/src/spinner-style";
 @import "~nav-frontend-skjema-style/src/index";
-@import "~nav-frontend-chevron-style/src/index";
-@import "~nav-frontend-chevron-style/src/index";
 @import "~nav-frontend-knapper-style/src/index";
 @import "~nav-frontend-paneler-style/src/mixins";
 @import "~nav-frontend-lenker-style/src/lenker-style";
 @import "~nav-frontend-hjelpetekst-style/src/hjelpetekst-style";
-@import "./components/checkbox-filterform/checkbox-filterform";
 @import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
 
 
 .veilarbportefoljeflatefs {
-    @import "lenker/lenker";
-    @import "./components/toolbar/paginering/paginering";
-    @import "./enhetsportefolje/enhetsportefolje";
-    @import "./enhetsportefolje/brukerliste";
-    @import "./veiledere/veiledere";
-    @import "./minoversikt/minoversikt";
-    @import "./filtrering/filtrering-label";
-    @import "./filtrering/filtrering-skjema";
-    @import "./filtrering/filtrering-status/filtrering-status";
     @import "./components/barinput/barlabel";
-    @import "./components/tabelletiketter/tabelletiketter";
-    @import "./components/dropdown/dropdown";
-    @import "./components/toolbar/toolbar";
-    @import "./components/radio-filterform/radio-filterform";
-    @import "./components/aktivitet-filterform/aktivitet-filterform";
-    @import "./veiledere/veieldersok";
-    @import "./components/endringslogg/endringslogg";
-    @import "./components/endringslogg/collapse-container-transition";
 }
 
 
 .modal__overlay {
     z-index: 2000;
-}
-
-.spinner {
-    display: block;
-    margin: auto;
 }
 
 @media (min-width: 1200px) {
@@ -112,4 +80,41 @@ html {
 
 .text--left {
     text-align: left;
+}
+
+
+.sticky-div {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.sticky-container {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    &__fjernet {
+        position: inherit;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .blokk-xxs {
+        margin-bottom: 0;
+    }
+
+    &__skygge {
+        border-bottom: 1px solid @navGra60;
+        box-shadow: 0 5px 8px 0 @navGra40;
+    }
+}
+
+#veilederside-toolbar {
+    position: sticky;
+    top: 1.5rem;
+}
+
+.skjemaelement {
+    margin-bottom: 1rem;
 }

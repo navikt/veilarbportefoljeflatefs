@@ -1,8 +1,8 @@
 import { default as React, useState } from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
-import ChevronLenke, { Retning } from '../chevron-lenke/chevron-lenke';
-import Stegviser from '../stegviser/stegviser';
+import ChevronLenke, { Retning } from '../../chevron-lenke/chevron-lenke';
+import Stegviser from '../../stegviser/stegviser';
 import { getTour } from './tour-modal-custom/tour-modal-custom';
 import './tour-modal.less';
 
@@ -10,7 +10,6 @@ export enum ModalName {
     MOTE_FILTER = 'TOUR_MODAL-MOTE_FILTER',
     NY_KOLONNE = 'TOUR_MODAL-NY_KOLONNE',
     VEILEDERGRUPPER = 'TOUR_MODAL-VEILEDERGRUPPER'
-
 }
 
 export interface Step {
@@ -41,7 +40,7 @@ function TourModal(props: TourModalProps) {
     };
 
     const steps = getTour(props.modalName);
-    if(!steps) return  null;
+    if (!steps) return null;
     const step = steps[stepIndex];
     const isFinalStep = stepIndex === steps.length - 1;
 

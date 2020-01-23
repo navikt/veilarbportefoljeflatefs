@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import {VIS_ARBEIDSLISTE_MODAL, visModal} from '../../ducks/modal';
+import { VIS_ARBEIDSLISTE_MODAL, visModal } from '../../ducks/modal';
 import { PortefoljeState } from '../../ducks/portefolje';
-import { ToolbarPosisjon } from './toolbar';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { ReactComponent as ArbeidslisteIkonLinje } from './arbeidslisteikon-linje.svg';
+import './toolbar.less';
 
 interface StateProps {
     portefolje: PortefoljeState;
@@ -18,10 +19,9 @@ interface DispatchProps {
 
 interface OwnProps {
     visesAnnenVeiledersPortefolje: boolean;
-    toolbarPosisjon?: ToolbarPosisjon;
 }
 
-type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps & RouteComponentProps< {ident: string}> ;
+type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps & RouteComponentProps<{ ident: string }> ;
 
 class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     constructor(props) {
@@ -43,6 +43,7 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
                 onClick={this.onClickHandler}
             >
                 {tekst}
+                <ArbeidslisteIkonLinje className="toolbar__arbeidsliste-ikon"/>
             </button>
         );
 
@@ -54,7 +55,7 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
     }
 
     render() {
-        const { portefolje } = this.props;
+        const {portefolje} = this.props;
         const valgteBrukere = portefolje.data.brukere.filter((bruker) => bruker.markert === true);
         const path = this.props.match.path.split('/')[1];
         const skalSkjules =
@@ -68,9 +69,9 @@ class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
             return null;
         }
         return (
-            <div className="toolbar_btnwrapper">
-                {this.arbeidslisteButton(valgteBrukere) }
-                {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
+            <div className="toolbar_btnwrapper dropdown--toolbar">
+                {this.arbeidslisteButton(valgteBrukere)}
+                {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere}/>}
             </div>
         );
     }
@@ -82,8 +83,8 @@ const mapStateToProps = (state) => ({
     veilederIdent: state.enheter.ident
 });
 
-const mapDispatchToProps = (dispatch, props) => ({
-    visArbeidslisteModal: () => dispatch(visModal(props.toolbarPosisjon)),
+const mapDispatchToProps = (dispatch) => ({
+    visArbeidslisteModal: () => dispatch(visModal()),
 });
 
 export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(withRouter(LeggTilArbeidsliste));

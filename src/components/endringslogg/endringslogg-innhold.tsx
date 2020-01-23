@@ -4,6 +4,8 @@ import { default as React } from 'react';
 import { ReactComponent as LinkIcon } from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
 import { EndringsloggInnleggMedSettStatus } from './utils/endringslogg-custom';
+import './endringslogg.less';
+import './collapse-container-transition.less';
 
 interface EndringsloggInnleggProps {
     dato: string;

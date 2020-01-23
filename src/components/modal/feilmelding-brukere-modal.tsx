@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
+import { VarselModal, VarselModalType } from './varselmodal/varselmodal';
 import { Fnr, FnrList } from '../fnr-list';
+import './feilmelding-brukere.less';
 
 interface FeilmeldingBrukereModalProps {
     isOpen: boolean;
@@ -12,8 +13,7 @@ interface FeilmeldingBrukereModalProps {
     merInfoTekst?: string;
 }
 
-
-function FeilmeldingBrukereModal (props: FeilmeldingBrukereModalProps){
+function FeilmeldingBrukereModal(props: FeilmeldingBrukereModalProps) {
     return (
         <VarselModal
             contentLabel="Modal tildeling feilet"
@@ -30,7 +30,7 @@ function FeilmeldingBrukereModal (props: FeilmeldingBrukereModalProps){
             <Normaltekst className="blokk-s">
                 {props.infotekstTekst}
             </Normaltekst>
-            <FnrList listeMedFnr={props.fnrFeil} />
+            <FnrList listeMedFnr={props.fnrFeil}/>
             <button className="knapp knapp--hoved" onClick={props.onClose}>
                 Ok
             </button>

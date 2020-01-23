@@ -1,19 +1,20 @@
-import React, {useState} from 'react';
-import { Dictionary } from "../../utils/types/types";
-import { FiltervalgModell } from "../../model-interfaces";
-import Grid from "../grid/grid";
-import AlertStripe from "nav-frontend-alertstriper";
+import React, { useState } from 'react';
+import { Dictionary } from '../../utils/types/types';
+import { FiltervalgModell } from '../../model-interfaces';
+import Grid from '../grid/grid';
+import AlertStripe from 'nav-frontend-alertstriper';
+import './checkbox-filterform.less';
 
 interface CheckboxFilterformProps {
     form: string,
     valg: Dictionary<string>
     endreFilterValg: (form: string, filterVerdi: string[]) => void;
-    closeDropdown: ()=> void;
+    closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     columns?: number
 }
 
-function CheckboxFilterform({ endreFilterValg, valg, closeDropdown, form, filtervalg, columns = 1}: CheckboxFilterformProps) {
+function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filtervalg, columns = 1}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
 
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
@@ -24,7 +25,7 @@ function CheckboxFilterform({ endreFilterValg, valg, closeDropdown, form, filter
             e.target.checked
                 ? setCheckBoxValg(prevState => [...prevState, e.target.value])
                 : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value))
-        )
+        );
     };
 
     return (
@@ -57,10 +58,7 @@ function CheckboxFilterform({ endreFilterValg, valg, closeDropdown, form, filter
     );
 }
 
-
-
-
-function RenderFields(props: {valg: Dictionary<string>,  velgCheckBox: (e) => void, checkBoxValg: string[]}) {
+function RenderFields(props: { valg: Dictionary<string>, velgCheckBox: (e) => void, checkBoxValg: string[] }) {
     return (
         <>
             {Object.entries(props.valg)
