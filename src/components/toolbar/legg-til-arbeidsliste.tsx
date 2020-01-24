@@ -15,7 +15,7 @@ interface LeggTilArbeidslisteProps {
 
 function LeggTilArbeidsliste (props: LeggTilArbeidslisteProps ) {
     const portefolje = useSelector( (state: AppState) => state.portefolje.data);
-    const modalSkalVises = useSelector((state:AppState) => state.modal.visModal) === VIS_ARBEIDSLISTE_MODAL;
+    const modalSkalVises = useSelector((state:AppState) => state.modal.modal) === VIS_ARBEIDSLISTE_MODAL;
     const inloggetVeielder = useIdentSelector();
     const dispatch = useDispatch();
 
