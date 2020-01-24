@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
 import {VIS_ARBEIDSLISTE_MODAL, visModal} from '../../ducks/modal';
 import './toolbar.less';
-import { useParams } from "react-router";
+import {useLocation, useParams} from "react-router";
 import {BrukerModell} from "../../model-interfaces";
 import {AppState} from "../../reducer";
 import {useIdentSelector} from "../../hooks/redux/use-inlogget-ident";
@@ -21,10 +21,12 @@ function LeggTilArbeidsliste (props: LeggTilArbeidslisteProps ) {
     const dispatch = useDispatch();
 
     const {ident} = useParams();
+    const location = useLocation();
+    const pathname = location.pathname;
 
     const valgteBrukere = portefolje.brukere.filter((bruker) => bruker.markert === true);
 
-    const skalSkjules = inloggetVeielder
+    const skalSkjules = inloggetVeielder && pathname === "/portefolje"
         ? ident
             ? ident !== inloggetVeielder.ident
             : false
