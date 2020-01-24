@@ -21,6 +21,8 @@ import FiltreringLabelContainer from "../filtrering/filtrering-label-container";
 import {usePortefoljeSelector} from "../hooks/redux/use-portefolje-selector";
 import FiltreringContainer from "../filtrering/filtrering-container";
 import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
+import {useOnUnmount} from "../hooks/use-on-unmount";
+import {updateLastPath} from "../utils/url-utils";
 
 function MinoversiktSide () {
     const innloggetVeilederIdent = useIdentSelector();
@@ -32,6 +34,9 @@ function MinoversiktSide () {
 
     useSetStateFromUrl();
     useFetchPortefolje(ListevisningType.minOversikt);
+    useOnUnmount(()=> {
+        updateLastPath();
+    });
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;

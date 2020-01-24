@@ -22,6 +22,8 @@ import Toolbar from "../components/toolbar/toolbar";
 import {slettEnkeltFilter} from "../ducks/filtrering";
 import {hentPortefoljeForEnhet} from "../ducks/portefolje";
 import {useFetchStatustallTilltakData} from "../hooks/portefolje/use-fetch-statustall-tilltak-data";
+import {useOnUnmount} from "../hooks/use-on-unmount";
+import {updateLastPath} from "../utils/url-utils";
 
 
 function EnhetSide () {
@@ -32,6 +34,9 @@ function EnhetSide () {
 
     useSetStateFromUrl();
     useFetchPortefolje(ListevisningType.enhetensOversikt);
+    useOnUnmount(()=> {
+        updateLastPath();
+    });
 
     const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
 

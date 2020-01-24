@@ -13,10 +13,11 @@ import './veiledere.less';
 import ToppMeny from "../topp-meny/topp-meny";
 import {useFetchStatustallTilltakData} from "../hooks/portefolje/use-fetch-statustall-tilltak-data";
 import {useOnMount} from "../hooks/use-on-mount";
-import {leggEnhetIUrl} from "../utils/url-utils";
+import {leggEnhetIUrl, updateLastPath} from "../utils/url-utils";
 import {loggSkjermMetrikker, Side} from "../utils/metrikker/skjerm-metrikker";
 import {useEnhetSelector} from "../hooks/redux/use-enhet-selector";
 import {AppState} from "../reducer";
+import {useOnUnmount} from "../hooks/use-on-unmount";
 
 
 function VeiledereSide (){
@@ -31,6 +32,10 @@ function VeiledereSide (){
     useOnMount(() => {
         leggEnhetIUrl(enhetId);
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
+    });
+
+    useOnUnmount(()=> {
+        updateLastPath();
     });
 
     return (

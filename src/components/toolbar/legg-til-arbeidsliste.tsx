@@ -7,6 +7,7 @@ import { useParams } from "react-router";
 import {BrukerModell} from "../../model-interfaces";
 import {AppState} from "../../reducer";
 import {useIdentSelector} from "../../hooks/redux/use-inlogget-ident";
+import { ReactComponent as ArbeidslisteIkonLinje } from './arbeidslisteikon-linje.svg';
 
 interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
@@ -34,7 +35,7 @@ function LeggTilArbeidsliste (props: LeggTilArbeidslisteProps ) {
     }
 
     return (
-        <div className="toolbar_btnwrapper">
+        <div className="toolbar_btnwrapper dropdown--toolbar">
             <ArbeidsListeKnapp
                 valgteBrukere={valgteBrukere}
                 onClickHandler={() => dispatch(visModal())}
@@ -56,6 +57,7 @@ function ArbeidsListeKnapp (props: {valgteBrukere : BrukerModell[], onClickHandl
             onClick={props.onClickHandler}
         >
             {tekst}
+            <ArbeidslisteIkonLinje className="toolbar__arbeidsliste-ikon"/>
         </button>
     );
 
