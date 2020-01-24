@@ -48,7 +48,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
             {}, {gruppeId: gruppeId});
         const filterVerdi = finnVeilederGruppe(gruppeId);
         setValgtGruppe(filterVerdi);
-        filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, 'enhet', ''));
+        filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, 'enhet'));
     };
 
     const finnVeilederGruppe = (vg) => props.lagretFilter.find((elem) => elem.filterId === parseInt(vg));
@@ -59,7 +59,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
                 filterId: valgtGruppe.filterId,
                 filterNavn: gruppeNavn,
                 filterValg
-            }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', '')));
+            }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet')));
         } else {
             dispatch(visIngenEndringerToast());
         }
@@ -68,7 +68,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const sletteKnapp = () => {
         valgtGruppe && enhet && dispatch(slettGruppe(enhet, valgtGruppe.filterId))
-            .then(() => dispatch(endreFiltervalg('veiledere', [], 'enhet', '')));
+            .then(() => dispatch(endreFiltervalg('veiledere', [], 'enhet')));
     };
 
     useEffect(() => {

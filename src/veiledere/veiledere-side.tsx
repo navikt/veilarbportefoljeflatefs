@@ -10,10 +10,8 @@ import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {slettEnkeltFilter} from '../ducks/filtrering';
 import './veiledere.less';
-import Lenker from "../lenker/lenker";
-import Toasts from "../components/toast/toast";
+import ToppMeny from "../topp-meny/topp-meny";
 import {useFetchStatustallTilltakData} from "../hooks/portefolje/use-fetch-statustall-tilltak-data";
-import {useVeilederHarPortefolje} from "../hooks/portefolje/use-dispatch-statustall-innloggetveileder";
 import {useOnMount} from "../hooks/use-on-mount";
 import {leggEnhetIUrl} from "../utils/url-utils";
 import {loggSkjermMetrikker, Side} from "../utils/metrikker/skjerm-metrikker";
@@ -29,61 +27,57 @@ function VeiledereSide (){
     const dispatch = useDispatch();
     const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
 
-    const {harPortefolje, laster} = useVeilederHarPortefolje();
 
     useOnMount(() => {
         leggEnhetIUrl(enhetId);
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
     });
 
-    if(laster) {
-        return null;
-    }
     return (
         <DocumentTitle title="Veilederoversikt">
             <div className="veiledere-side">
-                <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
-                    <Lenker harPortefolje={harPortefolje}/>
-                    <Toasts/>
-                    <section>
-                        <div id="oversikt-sideinnhold" role="tabpanel">
-                            <div className="row">
-                                <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
-                                    <PanelBase className="blokk-xxxs sok-veileder">
-                                        <Undertittel>
-                                            Søk veileder
-                                        </Undertittel>
-                                        <FiltreringVeiledere/>
-                                    </PanelBase>
-                                </div>
-
-                                <div className="col-lg-9 col-md-12 col-sm-12">
-                                    <FiltreringLabelContainer
-                                        filtervalg={{
-                                            veiledere: lagLablerTilVeiledereMedIdenter(
-                                                filtervalg.veiledere,
-                                                veiledere.data.veilederListe,
-                                                slettVeilederFilter
-                                            )
-                                        }}
-                                        filtergruppe="veiledere"
-                                        className="filtrering-label-container"
-                                    />
-                                    <div className="sticky-container">
-                                        <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
-                                            {`Totalt ${veiledere.data.veilederListe.length} veiledere`}
-                                        </Undertittel>
+                <ToppMeny>
+                    <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
+                        <section>
+                            <div id="oversikt-sideinnhold" role="tabpanel">
+                                <div className="row">
+                                    <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
+                                        <PanelBase className="blokk-xxxs sok-veileder">
+                                            <Undertittel>
+                                                Søk veileder
+                                            </Undertittel>
+                                            <FiltreringVeiledere/>
+                                        </PanelBase>
                                     </div>
-                                    <VeiledersideVisning
-                                        veiledere={veiledere.data.veilederListe}
-                                        portefoljestorrelser={portefoljestorrelser}
-                                        veilederFilter={filtervalg.veiledere}
-                                    />
+
+                                    <div className="col-lg-9 col-md-12 col-sm-12">
+                                        <FiltreringLabelContainer
+                                            filtervalg={{
+                                                veiledere: lagLablerTilVeiledereMedIdenter(
+                                                    filtervalg.veiledere,
+                                                    veiledere.data.veilederListe,
+                                                    slettVeilederFilter
+                                                )
+                                            }}
+                                            filtergruppe="veiledere"
+                                            className="filtrering-label-container"
+                                        />
+                                        <div className="sticky-container">
+                                            <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
+                                                {`Totalt ${veiledere.data.veilederListe.length} veiledere`}
+                                            </Undertittel>
+                                        </div>
+                                        <VeiledersideVisning
+                                            veiledere={veiledere.data.veilederListe}
+                                            portefoljestorrelser={portefoljestorrelser}
+                                            veilederFilter={filtervalg.veiledere}
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                </Innholdslaster>
+                        </section>
+                    </Innholdslaster>
+                </ToppMeny>
             </div>
         </DocumentTitle>
     );

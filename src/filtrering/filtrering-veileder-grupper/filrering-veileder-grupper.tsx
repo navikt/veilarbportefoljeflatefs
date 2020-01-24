@@ -28,7 +28,7 @@ function FilteringVeilederGrupper() {
         enhet && dispatch(lageNyGruppe({
             filterNavn: gruppeNavn,
             filterValg
-        }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', '')));
+        }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet')));
     };
 
     const sortertVeiledergruppe = lagretFilter.sort((a, b) => a.filterNavn.localeCompare(b.filterNavn));

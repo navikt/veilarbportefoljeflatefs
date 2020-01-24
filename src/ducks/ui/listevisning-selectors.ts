@@ -59,8 +59,7 @@ export function getFiltertingState(state: AppState, name: ListevisningType): Fil
     }
 }
 
-export function getMuligeKolonner(state: AppState, name: ListevisningType): Kolonne[] {
-    const filtervalg: FiltervalgModell = getFiltertingState(state, name);
+export function getMuligeKolonner(filtervalg: FiltervalgModell, name: ListevisningType): Kolonne[] {
 
     return [Kolonne.BRUKER, Kolonne.FODSELSNR]
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))

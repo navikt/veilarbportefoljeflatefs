@@ -14,6 +14,7 @@ export function useVeilederHarPortefolje() {
 
     useEffect(() => {
         if (valgtEnhet && ident) {
+            console.log("KJØRER VEILEDER HAR PORTEFOLJE!!!");
             hentStatusTallForVeileder(valgtEnhet, ident)
                 .then((statustall: Statustall) => {
                     const harPortefolje = statustall.totalt > 0;

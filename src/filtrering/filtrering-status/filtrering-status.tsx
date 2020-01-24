@@ -17,7 +17,6 @@ import './filtrering-status.less';
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
-    veileder: string;
 }
 
 export function FiltreringStatus(props: FiltreringStatusProps) {
@@ -26,7 +25,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(endreFiltervalg(
-            'ferdigfilterListe', ferdigFilterListe, props.filtergruppe, props.veileder));
+            'ferdigfilterListe', ferdigFilterListe, props.filtergruppe));
     }
 
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import {  visModal } from '../../ducks/modal';
+import {VIS_ARBEIDSLISTE_MODAL, visModal} from '../../ducks/modal';
 import './toolbar.less';
 import { useParams } from "react-router";
 import {BrukerModell} from "../../model-interfaces";
@@ -15,7 +15,7 @@ interface LeggTilArbeidslisteProps {
 
 function LeggTilArbeidsliste (props: LeggTilArbeidslisteProps ) {
     const portefolje = useSelector( (state: AppState) => state.portefolje.data);
-    const modalSkalVises = useSelector((state:AppState) => state.modal.visModal);
+    const modalSkalVises = useSelector((state:AppState) => state.modal.visModal) === VIS_ARBEIDSLISTE_MODAL;
     const inloggetVeielder = useIdentSelector();
     const dispatch = useDispatch();
 
@@ -23,8 +23,10 @@ function LeggTilArbeidsliste (props: LeggTilArbeidslisteProps ) {
 
     const valgteBrukere = portefolje.brukere.filter((bruker) => bruker.markert === true);
 
-    const skalSkjules = ident && inloggetVeielder
-        ? ident !== inloggetVeielder.ident
+    const skalSkjules = inloggetVeielder
+        ? ident
+            ? ident !== inloggetVeielder.ident
+            : false
         : true;
 
     if (skalSkjules) {

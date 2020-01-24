@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { endreFiltervalg } from '../ducks/filtrering';
-import { FiltervalgModell, VeilederModell } from '../model-interfaces';
+import { FiltervalgModell } from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
@@ -10,26 +10,19 @@ import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-ve
 import { OrNothing } from '../utils/types/types';
 import { Tiltak } from '../ducks/enhettiltak';
 
-export const defaultVeileder: VeilederModell = {
-    ident: '',
-    navn: '',
-    fornavn: '',
-    etternavn: ''
-};
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
-    veileder?: string;
 }
 
-function FiltreringContainer({filtergruppe, filtervalg, veileder = '', enhettiltak}: FiltreringContainerProps) {
+function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
 
     const dispatch = useDispatch();
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: string) =>
-        dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe, veileder));
+        dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
 
     return (
         <div className="blokk-m">
@@ -55,7 +48,6 @@ function FiltreringContainer({filtergruppe, filtervalg, veileder = '', enhettilt
             >
                 <FiltreringStatus
                     filtergruppe={filtergruppe}
-                    veileder={veileder}
                     filtervalg={filtervalg}
                 />
 

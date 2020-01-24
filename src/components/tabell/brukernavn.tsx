@@ -2,7 +2,7 @@ import * as React from 'react';
 import classnames from 'classnames';
 import { BrukerModell } from '../../model-interfaces';
 import { setFraBrukerIUrl } from '../../utils/url-utils';
-import '../../lenker/lenker.less';
+import '../../topp-meny/lenker.less';
 import {OrNothing} from "../../utils/types/types";
 
 const settSammenNavn = (bruker) => {

@@ -1,4 +1,3 @@
-import { oppdaterPortefolje } from './portefolje';
 import { FiltervalgModell } from '../model-interfaces';
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -20,25 +19,6 @@ type AktivititetNykkel = 'BEHANDLING' | 'EGEN' | 'GRUPPEAKTIVITET'| 'IJOBB' | 'M
 export type FiltreringAktiviteterValg = {
     [aktivitet in AktivititetNykkel]: AktiviteterValg;
 };
-
-export interface FiltreringState {
-    ferdigfilterListe: string[];
-    alder: string[];
-    kjonn: string[];
-    fodselsdagIMnd: string[];
-    innsatsgruppe: string[];
-    formidlingsgruppe: string[];
-    servicegruppe: string[];
-    rettighetsgruppe: string[];
-    veiledere: string[];
-    aktiviteter: FiltreringAktiviteterValg;
-    tiltakstyper: string[];
-    ytelse: null | string;
-    manuellBrukerStatus: string[];
-    hovedmal: string[];
-    navnEllerFnrQuery: string;
-    veilederNavnQuery: string;
-}
 
 //  Reducer
 // TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducer
@@ -115,7 +95,7 @@ export default function reducer(state: FiltervalgModell = initialState, action):
 
 
 // Action Creators
-export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet', veileder?: string) {
+export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet') {
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
         return {
             type: ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,

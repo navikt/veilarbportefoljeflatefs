@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { skjulModal } from '../../../ducks/modal';
+import {skjulModal, VIS_ARBEIDSLISTE_MODAL} from '../../../ducks/modal';
 import { markerAlleBrukere } from '../../../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
@@ -126,7 +126,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
 }
 
 const mapStateToProps = (state) => ({
-    visModal: state.modal.visModal,
+    visModal: state.modal.visModal === VIS_ARBEIDSLISTE_MODAL,
     innloggetVeileder: state.enheter.ident,
 });
 

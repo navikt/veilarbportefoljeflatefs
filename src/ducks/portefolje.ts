@@ -12,6 +12,7 @@ import {
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
 import { visTilordningOkModal } from './modal';
+import {AppState} from "../reducer";
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -261,7 +262,7 @@ export function markerAlleBrukere(markert) {
 }
 
 export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veilederIdent) {
-    return (dispatch, getState) => {
+    return (dispatch, getState: ()=> AppState) => {
         dispatch({type: TILDEL_VEILEDER_RELOAD});
         dispatch({type: PENDING});
         Api.tilordneVeileder(tilordninger)
@@ -298,7 +299,18 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
             .then(() => {
                 // Venter litt slik at indeks kan komme i sync
                 setTimeout(() => {
+                    const enhet = getState().valgtEnhet.data.enhetId;
+                    const rekkefolge = getState().portefolje.sorteringsrekkefolge;
+                    const sorteringsfelt = getState().portefolje.sorteringsfelt;
                     oppdaterPortefolje(getState, dispatch);
+                    if(filtergruppe === 'minOversikt'){
+                        const filtervalg = getState().filtreringMinoversikt;
+                        dispatch(hentPortefoljeForVeileder(enhet, veilederIdent, rekkefolge, sorteringsfelt, filtervalg))
+                    } else {
+                        const filtervalg = getState().filtrering;
+                        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filtervalg))
+                    }
+
                 }, 2000);
             })
             .catch((error) => {
