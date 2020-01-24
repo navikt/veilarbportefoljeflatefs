@@ -21,6 +21,7 @@ function FormikTekstArea({name}) {
             {({field, form}) => {
                 const touched = getIn(form.touched, name);
                 const errors = getIn(form.errors, name);
+                const feil = touched && errors ? errors : undefined;
                 return (
                     <Textarea
                         id={name}
@@ -30,7 +31,7 @@ function FormikTekstArea({name}) {
                         onBlur={form.handleBlur}
                         value={field.value}
                         name={name}
-                        feil={errors && touched ? {feilmelding: errors} : undefined}
+                        feil={feil}
                         maxLength={500}
                     />);
             }}

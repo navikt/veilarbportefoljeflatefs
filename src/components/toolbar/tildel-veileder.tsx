@@ -57,7 +57,7 @@ function TildelVeileder({skalVises, filtergruppe, gjeldendeVeileder}: TildelVeil
             render={lukkDropdown =>
                 <SokFilterNy
                     label="Tildel veileder"
-                    placeholder="Tildel veileder"
+                    placeholder="Søk navn eller NAV-ident"
                     data={sorterVeiledere}
                 >
                     {data =>

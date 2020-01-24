@@ -1,12 +1,15 @@
 import { useEffect, useRef } from 'react';
 
-export function useFocus() {
-    const htmlElemRef = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        if (htmlElemRef.current) {
-            htmlElemRef.current.focus();
-        }
-    },[htmlElemRef]);
+export function useFocus<T extends HTMLElement>() {
+    const focusRef = useRef<T | null>(null);
 
-    return htmlElemRef;
+    const elem = focusRef.current;
+
+    useEffect(() => {
+        if (elem) {
+            elem.focus();
+        }
+    },[elem]);
+
+    return {focusRef};
 }

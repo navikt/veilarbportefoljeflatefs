@@ -26,7 +26,7 @@ function DropdownNy(props: DropdownProps) {
     const [hover, setHover] = useState(false);
     const btnRef = useRef<HTMLButtonElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
-    const focusRef = useFocus();
+    const {focusRef} = useFocus();
 
     function handler(e) {
         if (apen && divRef.current && !divRef.current.contains(e.target)) {
@@ -69,7 +69,7 @@ function DropdownNy(props: DropdownProps) {
         <div
             className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`}
             id={`${name}-dropdown__innhold`}
-            ref={focusRef}
+            ref={inputRef => (focusRef.current = inputRef)}
         >
             {render(lukkDropdown)}
         </div>

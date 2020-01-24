@@ -21,6 +21,7 @@ function FormikInput({name}) {
             {({field, form}) => {
                 const touched = getIn(form.touched, name);
                 const errors = getIn(form.errors, name);
+                const feil = touched && errors ? errors : undefined;
                 return (
                     <Input
                         id={name}
@@ -29,7 +30,7 @@ function FormikInput({name}) {
                         onBlur={form.handleBlur}
                         name={name}
                         bredde="L"
-                        feil={errors && touched ? {feilmelding: errors} : undefined}
+                        feil={feil}
                         value={field.value}
                     />
                 );
