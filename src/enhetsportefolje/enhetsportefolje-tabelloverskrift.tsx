@@ -12,16 +12,14 @@ interface EnhetTabellProps {
 function EnhetTabellOverskrift(props: EnhetTabellProps) {
     const {filtervalg, sorteringsrekkefolge, valgteKolonner, sorteringsfelt} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
     return (
-        <div className="typo-undertekst blokk-xs enhet-tabell">
-            <EnhetListehode
-                sorteringsrekkefolge={sorteringsrekkefolge}
-                sorteringOnClick={props.settSorteringOgHentPortefolje}
-                filtervalg={filtervalg}
-                sorteringsfelt={sorteringsfelt}
-                valgteKolonner={valgteKolonner}
-                filtergruppe={ListevisningType.enhetensOversikt}
-            />
-        </div>
+        <EnhetListehode
+            sorteringsrekkefolge={sorteringsrekkefolge}
+            sorteringOnClick={props.settSorteringOgHentPortefolje}
+            filtervalg={filtervalg}
+            sorteringsfelt={sorteringsfelt}
+            valgteKolonner={valgteKolonner}
+            filtergruppe={ListevisningType.enhetensOversikt}
+        />
     );
 }
 

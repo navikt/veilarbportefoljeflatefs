@@ -12,11 +12,23 @@
         li:nth-child(odd) {
             background-color: #F4F4F4;
         }
+        li {
+            border-left: 1px solid @navGra60;
+            border-right: 1px solid @navGra60;
+            border-bottom: 1px solid @navGra40;
+            &:first-child {
+                margin-top: 0.5rem;
+                border-top: 1px solid @navGra60;
+            }
+            &:last-child {
+                border-bottom: none;
+            }
+
+        }
     }
 
     .enhet-tabell {
         background-color: white;
-        border: 1px solid @navGra60;
         border-top-color: white;
         border-bottom: none;
         border-radius: 0 0 @border-radius-base @border-radius-base;
@@ -53,13 +65,6 @@
         border-bottom: 2px solid @navGra40;
     }
 
-    .brukerliste--border-bottom-thin {
-        border-bottom: 1px solid @navGra40;
-            &:last-child {
-                border-bottom: none;
-            }
-    }
-
     .brukerliste--forrigeBruker {
         box-shadow: inset -1px 0 0 2px @navGra60, inset 1px 0 0 2px @navGra40;
     }
@@ -94,7 +99,7 @@
     }
 
     .brukerliste__innhold {
-        width: 80%;
+        width: 70%;
     }
 
     .brukerliste__gutter-right {
