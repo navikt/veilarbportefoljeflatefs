@@ -82,7 +82,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
         this.settSorteringOgHentPortefolje = this.settSorteringOgHentPortefolje.bind(this);
     }
 
-
     componentDidUpdate(prevProps: Readonly<EnhetSideProps>, prevState: Readonly<{}>, snapshot?: any): void {
         updateLastPath();
     }
@@ -164,17 +163,17 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                             filtergruppe="enhet"
                                         />
                                     </div>
+                                    <FiltreringLabelContainer
+                                        filtervalg={{
+                                            ...filtervalg,
+                                            veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
+                                        }}
+                                        filtergruppe="enhet"
+                                        enhettiltak={enhettiltak.data.tiltak}
+                                        listevisning={listevisning}
+                                        className="filtrering-label-container"
+                                    />
                                     <div className={stickyWrapper}>
-                                            <FiltreringLabelContainer
-                                                filtervalg={{
-                                                    ...filtervalg,
-                                                    veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
-                                                }}
-                                                filtergruppe="enhet"
-                                                enhettiltak={enhettiltak.data.tiltak}
-                                                listevisning={listevisning}
-                                                className="filtrering-label-container"
-                                            />
                                         <div className={stickyContainer}>
                                             <TabellOverskrift
                                                 fraIndex={fraIndex}
