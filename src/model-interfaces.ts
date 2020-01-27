@@ -30,6 +30,7 @@ export enum Sorteringsfelt {
     NAVIDENT = 'veileder_id',
     VEILEDER = 'veileder_navn',
     MOTER_IDAG = 'moterMedNAVIdag',
+    ARBEIDSLISTEIKON = "arbeidslisteikon"
 }
 
 export enum EtikettType {

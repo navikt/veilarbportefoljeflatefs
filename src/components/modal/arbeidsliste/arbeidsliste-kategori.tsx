@@ -1,25 +1,38 @@
 import * as React from 'react';
-import { ReactComponent as FlaggBla } from '../../../minoversikt/flagg-filled_bla.svg';
-import { ReactComponent as FlaggRod } from '../../../minoversikt/flagg-filled_rod.svg';
-import { ReactComponent as FlaggGronn } from '../../../minoversikt/flagg-filled_gronn.svg';
-import { ReactComponent as FlaggGul } from '../../../minoversikt/flagg-filled_gul.svg';
 import './arbeidsliste-kategori.less';
+import { ReactComponent as ArbeidslisteikonBla } from './arbeidslisteikon/arbeidslisteikon_bla.svg';
+import { ReactComponent as ArbeidslisteikonRod } from './arbeidslisteikon/arbeidslisteikon_rod.svg';
+import { ReactComponent as ArbeidslisteikonGronn } from './arbeidslisteikon/arbeidslisteikon_gronn.svg';
+import { ReactComponent as ArbeidslisteikonGul } from './arbeidslisteikon/arbeidslisteikon_gul.svg';
+import ArbeidslisteIkon from './arbeidslisteikon/arbeidslisteikon';
 
-function ArbeidslisteKategori() {
+interface ArbeidslisteKategoriProps {
+    name: string;
+}
+
+function ArbeidslisteKategori({name}: ArbeidslisteKategoriProps) {
     return (
-        <div className="arbeidslisteikon_wrapper">
-            <button className="arbeidslisteikon__knapp" >
-                <FlaggBla className="arbeidslisteikon__bla"/>
-            </button>
-            <button className="arbeidslisteikon__knapp">
-                <FlaggRod className="arbeidslisteikon__rod"/>
-            </button>
-            <button className="arbeidslisteikon__knapp">
-                <FlaggGronn className="arbeidslisteikon__gronn"/>
-            </button>
-            <button className="arbeidslisteikon__knapp">
-                <FlaggGul className="arbeidslisteikon__gul"/>
-            </button>
+        <div className="arbeidslisteikon">
+            <ArbeidslisteIkon
+                value="bla"
+                arbeidslisteikon={<ArbeidslisteikonBla/>}
+                name={name}
+            />
+            <ArbeidslisteIkon
+                value="rod"
+                arbeidslisteikon={<ArbeidslisteikonRod/>}
+                name={name}
+            />
+            <ArbeidslisteIkon
+                value="gronn"
+                arbeidslisteikon={<ArbeidslisteikonGronn/>}
+                name={name}
+            />
+            <ArbeidslisteIkon
+                value="gul"
+                arbeidslisteikon={<ArbeidslisteikonGul/>}
+                name={name}
+            />
         </div>
     );
 }

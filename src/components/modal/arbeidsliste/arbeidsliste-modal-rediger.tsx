@@ -5,7 +5,7 @@ import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
 import { BrukerModell, Status } from '../../../model-interfaces';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { Formik, FormikProps } from 'formik';
+import { Form, Formik, FormikProps } from 'formik';
 import { STATUS } from '../../../ducks/utils';
 import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
 import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
@@ -101,12 +101,14 @@ function ArbeidslisteModalRediger({
                                     Rediger
                                 </Innholdstittel>
                             </div>
-                            <RedigerArbeidslisteForm
-                                laster={laster}
-                                sistEndretDato={sistEndretDato}
-                                sistEndretAv={sistEndretAv}
-                                lukkModal={() => lukkModal(formikProps)}
-                            />
+                            <Form>
+                                <RedigerArbeidslisteForm
+                                    laster={laster}
+                                    sistEndretDato={sistEndretDato}
+                                    sistEndretAv={sistEndretAv}
+                                    lukkModal={() => lukkModal(formikProps)}
+                                />
+                            </Form>
                         </div>
                     </NavFrontendModal>)}
             />

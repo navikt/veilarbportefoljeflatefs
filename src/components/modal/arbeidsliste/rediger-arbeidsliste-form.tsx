@@ -6,6 +6,7 @@ import FormikInput from '../../formik/formik-input';
 import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
 import { Undertekst } from 'nav-frontend-typografi';
 import './arbeidsliste.less';
+import ArbeidslisteKategori from './arbeidsliste-kategori';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -15,6 +16,7 @@ interface RedigerArbeidslisteProps {
 }
 
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
+    let index = 0;
     return (
         <Form>
             <div className="input-fields">
@@ -23,7 +25,10 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <Undertekst className="arbeidsliste--modal-redigering">
                     {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}
                 </Undertekst>
-                <FormikDatoVelger name="frist"/>
+                <div className="dato-kategori-wrapper">
+                    <FormikDatoVelger name={`arbeidsliste[${index++}].frist`}/>
+                    <ArbeidslisteKategori name={`arbeidsliste[${index++}].radio`}/>
+                </div>
                 <div>
                     <div className="modal-footer">
                         <Hovedknapp htmlType="submit" className="knapp knapp--hoved" spinner={props.laster}>

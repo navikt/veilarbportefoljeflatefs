@@ -28,8 +28,8 @@ function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
                         <FormikTekstArea name={`arbeidsliste[${index}].kommentar`}/>
                     </div>
                     <div className="dato-kategori-wrapper">
-                        <FormikDatoVelger name={`arbeidsliste[${index}].frist`}/>
-                        <ArbeidslisteKategori/>
+                        <FormikDatoVelger name={`arbeidsliste[${index++}].frist`}/>
+                        <ArbeidslisteKategori name={`arbeidsliste[${index++}].radio`}/>
                     </div>
                 </div>
             ))}

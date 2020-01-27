@@ -165,7 +165,6 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                         />
                                     </div>
                                     <div className={stickyWrapper}>
-                                        <div className={stickyContainer}>
                                             <FiltreringLabelContainer
                                                 filtervalg={{
                                                     ...filtervalg,
@@ -176,6 +175,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                                 listevisning={listevisning}
                                                 className="filtrering-label-container"
                                             />
+                                        <div className={stickyContainer}>
                                             <TabellOverskrift
                                                 fraIndex={fraIndex}
                                                 antallIVisning={antallReturnert}
