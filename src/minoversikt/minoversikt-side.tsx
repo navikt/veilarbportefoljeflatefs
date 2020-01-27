@@ -197,15 +197,15 @@ class MinoversiktSide extends React.Component<MinoversiktSideProps> {
                                                 enhettiltak={tiltak}
                                             />
                                         </div>
-                                        <FiltreringLabelContainer
-                                            filtervalg={filtervalg}
-                                            filtergruppe="veileder"
-                                            veileder={gjeldendeVeileder}
-                                            enhettiltak={enhettiltak.data.tiltak}
-                                            listevisning={listevisning}
-                                            className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
-                                        />
                                         <div className={stickyWrapper}>
+                                            <FiltreringLabelContainer
+                                                filtervalg={filtervalg}
+                                                filtergruppe="veileder"
+                                                veileder={gjeldendeVeileder}
+                                                enhettiltak={enhettiltak.data.tiltak}
+                                                listevisning={listevisning}
+                                                className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
+                                            />
                                             <div className={stickyContainer}>
                                                 <TabellOverskrift
                                                     fraIndex={fraIndex}
