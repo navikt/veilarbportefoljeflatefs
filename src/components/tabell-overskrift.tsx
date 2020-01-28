@@ -9,7 +9,7 @@ import './tabell-overskrift.less';
 function TabellOverskrift(props: {className: string}) {
     const portefolje = useSelector((state: AppState)=> state.portefolje.data);
 
-    const { antallTotalt, antallReturnert, fraIndex } = portefolje;
+    const { antallTotalt, antallReturnert, fraIndex, brukere } = portefolje;
 
     const fixedFraIndex = antallTotalt === 0 ? 0 : 1;
     const fraIndexMax = Math.max(fraIndex, fixedFraIndex);
@@ -17,7 +17,7 @@ function TabellOverskrift(props: {className: string}) {
 
     const maksBrukere = tilIndex > antallTotalt ? antallTotalt : tilIndex;
 
-    const antallValgteBrukere = tekstValgteBrukere(portefolje.antallTotalt);
+    const antallValgteBrukere = tekstValgteBrukere(brukere.filter(b => b.markert).length);
 
     return (
         <Element tag="h1" className={props.className}>
