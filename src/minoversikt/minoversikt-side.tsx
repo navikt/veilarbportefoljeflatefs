@@ -59,7 +59,6 @@ function MinoversiktSide () {
                                 />
                             </div>
                             <div className={stickyWrapper}>
-                                <div className={stickyContainer}>
                                     <FiltreringLabelContainer
                                         filtervalg={filtervalg}
                                         filtergruppe="veileder"
@@ -67,6 +66,7 @@ function MinoversiktSide () {
                                         listevisning={listevisning}
                                         className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                     />
+                                    <div className={stickyContainer}>
                                     <TabellOverskrift className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
                                     <div className="sticky-container__skygge">
                                         <Toolbar

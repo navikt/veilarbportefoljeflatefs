@@ -61,7 +61,6 @@ function EnhetSide () {
                                     />
                                 </div>
                                 <div className={stickyWrapper}>
-                                    <div className={stickyContainer}>
                                         <FiltreringLabelContainer
                                             filtervalg={{
                                                 ...filtervalg,
@@ -72,18 +71,19 @@ function EnhetSide () {
                                             listevisning={listevisning}
                                             className="filtrering-label-container"
                                         />
-                                        <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
-                                        <div className="sticky-container__skygge">
-                                            <Toolbar
-                                                onPaginering={()=> dispatch(hentPortefoljeForEnhet(
-                                                    enhetId,
-                                                    sorteringsrekkefolge,
-                                                    sorteringsfelt,
-                                                    filtervalg
-                                                ))}
-                                                filtergruppe={ListevisningType.enhetensOversikt}
-                                                sokVeilederSkalVises
-                                                antallTotalt={portefoljeData.antallTotalt}
+                                        <div className={stickyContainer}>
+                                            <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
+                                            <div className="sticky-container__skygge">
+                                                <Toolbar
+                                                    onPaginering={()=> dispatch(hentPortefoljeForEnhet(
+                                                        enhetId,
+                                                        sorteringsrekkefolge,
+                                                        sorteringsfelt,
+                                                        filtervalg
+                                                    ))}
+                                                    filtergruppe={ListevisningType.enhetensOversikt}
+                                                    sokVeilederSkalVises
+                                                    antallTotalt={portefoljeData.antallTotalt}
                                             />
                                             <EnhetTabellOverskrift/>
                                         </div>

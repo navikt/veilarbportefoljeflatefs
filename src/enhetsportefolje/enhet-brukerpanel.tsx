@@ -32,7 +32,7 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
         }
     }, [varForrigeBruker]);
 
-    const classname = classNames('brukerliste__element brukerliste--border-bottom-thin', {
+    const classname = classNames('brukerliste__element', {
         'brukerliste--forrigeBruker': varForrigeBruker,
     });
 

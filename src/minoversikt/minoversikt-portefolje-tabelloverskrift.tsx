@@ -14,7 +14,6 @@ function MinoversiktTabellOverskrift(props: MinOversiktTabellProps) {
     const {brukere, filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(ListevisningType.minOversikt);
 
     return (
-        <div className="minoversikt-liste__wrapper typo-undertekst blokk-xs">
             <MinOversiktListehode
                 sorteringsrekkefolge={sorteringsrekkefolge}
                 sorteringOnClick={props.settSorteringOgHentPortefolje}
@@ -24,7 +23,6 @@ function MinoversiktTabellOverskrift(props: MinOversiktTabellProps) {
                 brukere={brukere}
                 filtergruppe={ListevisningType.enhetensOversikt}
             />
-        </div>
     );
 }
 

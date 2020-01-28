@@ -48,7 +48,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
 
     const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker} = props;
     const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
-    const classname = classNames('brukerliste--border-bottom-thin ', {
+    const classname = classNames({
         'brukerliste--forrigeBruker': varForrigeBruker,
     });
 

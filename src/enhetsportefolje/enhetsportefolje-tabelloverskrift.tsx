@@ -12,16 +12,14 @@ function EnhetTabellOverskrift() {
     const settSorteringOgHentPortefolje = useSetPortefoljeSortering(ListevisningType.enhetensOversikt);
 
     return (
-        <div className="typo-undertekst blokk-xs enhet-tabell">
-            <EnhetListehode
-                sorteringsrekkefolge={sorteringsrekkefolge}
-                sorteringOnClick={settSorteringOgHentPortefolje}
-                filtervalg={filtervalg}
-                sorteringsfelt={sorteringsfelt}
-                valgteKolonner={listevisning.valgte}
-                filtergruppe={ListevisningType.enhetensOversikt}
-            />
-        </div>
+        <EnhetListehode
+            sorteringsrekkefolge={sorteringsrekkefolge}
+            sorteringOnClick={settSorteringOgHentPortefolje}
+            filtervalg={filtervalg}
+            sorteringsfelt={sorteringsfelt}
+            valgteKolonner={listevisning.valgte}
+            filtergruppe={ListevisningType.enhetensOversikt}
+        />
     );
 }
 
