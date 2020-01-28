@@ -8,8 +8,12 @@ export function useRedirectOnMount() {
     const lastSearch = localStorage.getItem('lastsearch') || '';
 
     useOnMount(() => {
-        if (lastPath && location.pathname === "/tilbake") {
-            history.replace({pathname: lastPath, search: lastSearch});
+        if (location.pathname.includes("/tilbake")) {
+            if(lastPath) {
+                history.replace({pathname: lastPath, search: lastSearch});
+            } else {
+                history.replace({pathname: "/enhet"});
+            }
         }
         else if (location.pathname === "/") {
             history.push("/enhet")
