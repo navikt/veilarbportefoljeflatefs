@@ -34,7 +34,7 @@ function MinoversiktSide () {
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const {ident} = useParams();
 
-    useSetStateFromUrl();
+    //useSetStateFromUrl();
     useFetchPortefolje(ListevisningType.minOversikt);
 
     useOnUnmount(()=> {

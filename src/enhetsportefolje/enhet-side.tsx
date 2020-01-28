@@ -32,7 +32,7 @@ function EnhetSide () {
     const veilederliste = useSelector( (state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
 
-    useSetStateFromUrl();
+    //useSetStateFromUrl();
     useFetchPortefolje(ListevisningType.enhetensOversikt);
     useOnUnmount(()=> {
         updateLastPath();
