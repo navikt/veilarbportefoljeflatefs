@@ -33,9 +33,11 @@ function EnhetSide () {
 
     //useSetStateFromUrl();
     useFetchPortefolje(ListevisningType.enhetensOversikt);
+    /*
     useOnUnmount(()=> {
         updateLastPath();
     });
+     */
 
     const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
 
