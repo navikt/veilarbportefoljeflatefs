@@ -8,7 +8,7 @@ import {hentPortefoljeStorrelser} from "../../ducks/portefoljestorrelser";
 import {hentVeiledereForEnhet} from "../../ducks/veiledere";
 import {hentLagretFilterForEnhet} from "../../ducks/lagret-filter";
 
-export function useFetchStatustallTilltakData(gjeldendeVeileder?: string) {
+export function useFetchPortefoljeData(gjeldendeVeileder?: string) {
     const dispatch = useDispatch();
     const enhet = useEnhetSelector();
 

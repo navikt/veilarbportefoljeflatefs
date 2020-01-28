@@ -11,7 +11,7 @@ import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {slettEnkeltFilter} from '../ducks/filtrering';
 import './veiledere.less';
 import ToppMeny from "../topp-meny/topp-meny";
-import {useFetchStatustallTilltakData} from "../hooks/portefolje/use-fetch-statustall-tilltak-data";
+import {useFetchPortefoljeData} from "../hooks/portefolje/use-fetch-portefolje-data";
 import {useOnMount} from "../hooks/use-on-mount";
 import {leggEnhetIUrl, updateLastPath} from "../utils/url-utils";
 import {loggSkjermMetrikker, Side} from "../utils/metrikker/skjerm-metrikker";
@@ -21,7 +21,7 @@ import {useOnUnmount} from "../hooks/use-on-unmount";
 
 
 function VeiledereSide (){
-    const {statustall, portefoljestorrelser, veiledere} = useFetchStatustallTilltakData();
+    const {statustall, portefoljestorrelser, veiledere} = useFetchPortefoljeData();
     const enhetId = useEnhetSelector();
     const filtervalg = useSelector((state: AppState)=> state.filtreringVeilederoversikt);
 

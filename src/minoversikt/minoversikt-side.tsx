@@ -16,27 +16,34 @@ import ToppMeny from "../topp-meny/topp-meny";
 import {useSetStateFromUrl} from "../hooks/portefolje/use-set-state-from-url";
 import {useFetchPortefolje} from "../hooks/portefolje/use-fetch-portefolje";
 import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
-import {useFetchStatustallTilltakData} from "../hooks/portefolje/use-fetch-statustall-tilltak-data";
+import {useFetchPortefoljeData} from "../hooks/portefolje/use-fetch-portefolje-data";
 import FiltreringLabelContainer from "../filtrering/filtrering-label-container";
 import {usePortefoljeSelector} from "../hooks/redux/use-portefolje-selector";
 import FiltreringContainer from "../filtrering/filtrering-container";
 import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
 import {useOnUnmount} from "../hooks/use-on-unmount";
 import {updateLastPath} from "../utils/url-utils";
+import {Redirect, useParams} from "react-router";
 
 function MinoversiktSide () {
     const innloggetVeilederIdent = useIdentSelector();
 
     const {portefolje, filtervalg, listevisning} = usePortefoljeSelector(ListevisningType.minOversikt);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const{ statustall, enhettiltak } = useFetchStatustallTilltakData(gjeldendeVeileder);
+    const{ statustall, enhettiltak, veiledere } = useFetchPortefoljeData(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
+    const {ident} = useParams();
 
     useSetStateFromUrl();
     useFetchPortefolje(ListevisningType.minOversikt);
+
     useOnUnmount(()=> {
         updateLastPath();
     });
+
+    if(ident && veiledere.data.veilederListe.findIndex(v => v.ident === ident) <0 ) {
+        return <Redirect to="/enhet"/>
+    }
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
@@ -49,7 +56,7 @@ function MinoversiktSide () {
         <DocumentTitle title="Min oversikt">
             <div className="minoversikt-side blokk-xl">
                 <ToppMeny>
-                    <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
+                    <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere]}>
                         <MinOversiktWrapper>
                             <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
                                 <FiltreringContainer

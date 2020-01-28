@@ -21,13 +21,13 @@ import {AppState} from "../reducer";
 import Toolbar from "../components/toolbar/toolbar";
 import {slettEnkeltFilter} from "../ducks/filtrering";
 import {hentPortefoljeForEnhet} from "../ducks/portefolje";
-import {useFetchStatustallTilltakData} from "../hooks/portefolje/use-fetch-statustall-tilltak-data";
+import {useFetchPortefoljeData} from "../hooks/portefolje/use-fetch-portefolje-data";
 import {useOnUnmount} from "../hooks/use-on-unmount";
 import {updateLastPath} from "../utils/url-utils";
 
 
 function EnhetSide () {
-    const {statustall, enhettiltak} = useFetchStatustallTilltakData();
+    const {statustall, enhettiltak} = useFetchPortefoljeData();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
     const veilederliste = useSelector( (state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
