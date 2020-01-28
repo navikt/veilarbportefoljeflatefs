@@ -10,6 +10,7 @@ import './brukerliste.less';
 import ToppMeny from "../topp-meny/topp-meny";
 import {usePortefoljeSelector} from "../hooks/redux/use-portefolje-selector";
 import {ListevisningType} from "../ducks/ui/listevisning";
+import {useSetStateFromUrl} from "../hooks/portefolje/use-set-state-from-url";
 import {useFetchPortefolje} from "../hooks/portefolje/use-fetch-portefolje";
 import FiltreringContainer from "../filtrering/filtrering-container";
 import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
@@ -31,13 +32,11 @@ function EnhetSide () {
     const veilederliste = useSelector( (state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
 
-    //useSetStateFromUrl();
+    useSetStateFromUrl();
     useFetchPortefolje(ListevisningType.enhetensOversikt);
-    /*
     useOnUnmount(()=> {
         updateLastPath();
     });
-     */
 
     const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
 

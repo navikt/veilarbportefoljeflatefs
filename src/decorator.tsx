@@ -24,7 +24,6 @@ function getConfig (
             visVeilder: true
         },
         onSok: (fnr) => {
-            console.log("onFnrsok");
             window.location.pathname = `veilarbpersonflatefs/${fnr}`
         },
         onEnhetChange: (enhet: string) => {

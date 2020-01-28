@@ -12,6 +12,7 @@ import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import lagretFilterReducer, { LagretFilterState } from './ducks/lagret-filter';
+import { slettCleanIUrl } from './utils/url-utils';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer, { EnhettiltakState } from './ducks/enhettiltak';
 import listevisningReducer, {
@@ -68,8 +69,8 @@ export interface AppState {
 
 export default combineReducers<AppState>({
     ui: combineReducers({
-        listevisningMinOversikt: persistent('minOversiktListevisningState', named(ListevisningType.minOversikt, listevisningReducer), initialStateMinOversikt),
-        listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', named(ListevisningType.enhetensOversikt, listevisningReducer), initialStateEnhetensOversikt)
+        listevisningMinOversikt: persistent('minOversiktListevisningState', window.location, named(ListevisningType.minOversikt, listevisningReducer), slettCleanIUrl, initialStateMinOversikt),
+        listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', window.location, named(ListevisningType.enhetensOversikt, listevisningReducer), slettCleanIUrl, initialStateEnhetensOversikt)
     }),
     valgtEnhet: valgtEnhetReducer,
     portefolje: portefoljeReducer,
@@ -78,9 +79,9 @@ export default combineReducers<AppState>({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     statustall: statustallReducer,
-    filtrering: persistent('enhetsState', named('enhet', filtreringReducer), initialState),
-    filtreringMinoversikt: persistent('veilederState',
-        named('veileder', filtreringReducer), initialState),
+    filtrering: persistent('enhetsState', window.location, named('enhet', filtreringReducer), slettCleanIUrl, initialState),
+    filtreringMinoversikt: persistent('veilederState', window.location,
+        named('veileder', filtreringReducer), slettCleanIUrl, initialState),
     filtreringVeilederoversikt: named('veiledere', filtreringReducer),
     modal: modalReducer,
     serverfeilModal: serverfeilModalReducer,

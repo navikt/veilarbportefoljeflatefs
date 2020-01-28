@@ -3,6 +3,21 @@ import history, { basename } from '../history';
 import { IKKE_SATT } from '../konstanter';
 import {OrNothing} from "./types/types";
 
+export function slettCleanIUrl() {
+    const parsed = queryString.parse(window.location.search); // eslint-disable-line no-undef
+
+    // Objektet returnert fra `queryString.parse` er ikke et ekte objekt. Så derfor denne omstendlige sjekken
+    if (!Object.keys(parsed).includes('clean')) {
+        return;
+    }
+
+    delete parsed.clean;
+
+    const stringified = queryString.stringify(parsed);
+    window.location.pathname.replace(basename, '');
+    history.replace(`${window.location.pathname}?${stringified}`);
+}
+
 export function leggEnhetIUrl(enhet: OrNothing<string>, refresh: boolean = false) {
     if (enhet) {
         const parsed = queryString.parse(window.location.search);
