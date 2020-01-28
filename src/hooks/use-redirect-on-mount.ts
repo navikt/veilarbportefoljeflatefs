@@ -6,12 +6,17 @@ export function useRedirectOnMount() {
     const location = useLocation();
     const lastPath = localStorage.getItem('lastpath');
     const lastSearch = localStorage.getItem('lastsearch') || '';
+    const pathname = location.pathname;
 
     useOnMount(() => {
-        if (lastPath && location.pathname === "/tilbake") {
+        if (lastPath && pathname === "/tilbake") {
+            console.log("kjører tilbake");
+            console.log("pathname", pathname);
             history.replace({pathname: lastPath, search: lastSearch});
         }
-        else if (location.pathname === "/") {
+        else if (pathname === "/") {
+            console.log("kjører redirect");
+            console.log("pathname", pathname);
             history.push("/enhet")
         }
     });
