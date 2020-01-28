@@ -13,7 +13,6 @@ import TabellOverskrift from "../components/tabell-overskrift";
 import {useSelectGjeldendeVeileder} from "../hooks/portefolje/use-select-gjeldende-veileder";
 import Toolbar from "../components/toolbar/toolbar";
 import ToppMeny from "../topp-meny/topp-meny";
-import {useSetStateFromUrl} from "../hooks/portefolje/use-set-state-from-url";
 import {useFetchPortefolje} from "../hooks/portefolje/use-fetch-portefolje";
 import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
 import {useFetchPortefoljeData} from "../hooks/portefolje/use-fetch-portefolje-data";

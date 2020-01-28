@@ -10,7 +10,6 @@ import './brukerliste.less';
 import ToppMeny from "../topp-meny/topp-meny";
 import {usePortefoljeSelector} from "../hooks/redux/use-portefolje-selector";
 import {ListevisningType} from "../ducks/ui/listevisning";
-import {useSetStateFromUrl} from "../hooks/portefolje/use-set-state-from-url";
 import {useFetchPortefolje} from "../hooks/portefolje/use-fetch-portefolje";
 import FiltreringContainer from "../filtrering/filtrering-container";
 import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
