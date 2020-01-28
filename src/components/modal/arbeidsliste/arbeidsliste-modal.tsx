@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { skjulModal } from '../../../ducks/modal';
+import {skjulModal, VIS_ARBEIDSLISTE_MODAL} from '../../../ducks/modal';
 import { markerAlleBrukere } from '../../../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 import { BrukerModell } from '../../../model-interfaces';
 import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
 import './arbeidsliste.less';
+import {AppState} from "../../../reducer";
 
 interface ArbeidslisteModalProps {
     isOpen: boolean;
     valgteBrukere: BrukerModell[];
     skjulArbeidslisteModal: () => void;
     fjernMarkerteBrukere: () => void;
-    innloggetVeileder: () => void;
+    innloggetVeileder: string;
 }
 
 interface ArbeidslisteModalState {
@@ -125,9 +126,9 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
     }
 }
 
-const mapStateToProps = (state) => ({
-    visModal: state.modal.visModal,
-    innloggetVeileder: state.enheter.ident,
+const mapStateToProps = (state: AppState) => ({
+    visModal: state.modal.modal === VIS_ARBEIDSLISTE_MODAL,
+    innloggetVeileder: state.inloggetVeileder.data!.ident,
 });
 
 const mapDispatchToProps = (dispatch) => ({

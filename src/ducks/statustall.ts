@@ -1,5 +1,6 @@
 import * as Api from './../middleware/api';
 import { doThenDispatch, STATUS } from './utils';
+import {OrNothing} from "../utils/types/types";
 
 // Actions
 export const OK = 'veilarbportefoljeflatefs/statustall/OK';
@@ -74,7 +75,7 @@ export default function reducer(state: StatustallState = initalStatusState, acti
 }
 
 // Action Creators
-export function hentStatusTall(enhet: string, veileder?: string) {
+export function hentStatusTall(enhet: OrNothing<string>, veileder?: string) {
     if (veileder == null) {
         return doThenDispatch(() => Api.hentStatusTall(enhet), {
             OK,

@@ -1,19 +1,18 @@
 import * as Api from './../middleware/api';
-import { doThenDispatch, handterFeil, nameToStateSliceMap, STATUS, toJson } from './utils';
-import { IKKE_SATT } from '../konstanter';
+import { doThenDispatch, handterFeil, STATUS, toJson } from './utils';
 import { pagineringSetup } from './paginering';
 import { TILDELING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from './statustall';
-import { leggSideIUrl, leggSorteringIUrl } from '../utils/url-utils';
+import {leggSideIUrl, leggSorteringIUrl} from '../utils/url-utils';
 import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
-import { ListevisningType, oppdaterAlternativer } from './ui/listevisning';
 import {
     selectFraIndex,
     selectSeAlle,
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
 import { visTilordningOkModal } from './modal';
+import {AppState} from "../reducer";
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -26,7 +25,6 @@ export const TILDEL_VEILEDER = 'veilarbportefolje/portefolje/TILDEL_VEILEDER';
 const TILDEL_VEILEDER_RELOAD = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_RELOAD';
 const TILDEL_VEILEDER_OK = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_OK';
 const TILDEL_VEILEDER_FEILET = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_FEILET';
-const SETT_VALGTVEILEDER = 'veilarbportefolje/portefolje/SETT_VALGTVEILEDER';
 const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
 const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILDELINGER';
 const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
@@ -49,9 +47,6 @@ export interface PortefoljeState {
     sorteringsrekkefolge: Sorteringsrekkefolge;
     sorteringsfelt: Sorteringsfelt;
     feilendeTilordninger?: any[];
-    veileder: {
-        ident: string;
-    };
     tilordningerstatus: string;
 }
 
@@ -65,9 +60,6 @@ const initialState: PortefoljeState = {
     },
     sorteringsrekkefolge: Sorteringsrekkefolge.ikke_satt,
     sorteringsfelt: Sorteringsfelt.IKKE_SATT,
-    veileder: {
-        ident: IKKE_SATT
-    },
     tilordningerstatus: STATUS.OK
 };
 
@@ -136,9 +128,6 @@ export default function reducer(state = initialState, action): PortefoljeState {
                 sorteringsrekkefolge: action.sorteringsrekkefolge,
                 sorteringsfelt: action.sorteringsfelt
             };
-        }
-        case SETT_VALGTVEILEDER: {
-            return {...state, veileder: action.veileder};
         }
         case SETT_MARKERT_BRUKER: {
             return {
@@ -217,27 +206,9 @@ export default function reducer(state = initialState, action): PortefoljeState {
 }
 
 // Action Creators
-export function oppdaterPortefolje(getState, dispatch, filtergruppe, veileder) {
-    if (typeof veileder === 'object') {
-        console.warn('Veileder should be a string, not an object'); // tslint:disable-line
-        veileder = veileder.ident;
-    }
-    const state = getState();
-    const enhet = state.enheter.valgtEnhet.enhet.enhetId;
-    const rekkefolge = state.portefolje.sorteringsrekkefolge;
-    const sorteringfelt = state.portefolje.sorteringsfelt;
-    const nyeFiltervalg = state[nameToStateSliceMap[filtergruppe]];
-
+export function oppdaterPortefolje(getState, dispatch) {
     leggSideIUrl(1);
     dispatch(pagineringSetup({side: 1}));
-
-    if (filtergruppe === 'enhet') {
-        hentPortefoljeForEnhet(enhet, rekkefolge, sorteringfelt, nyeFiltervalg)(dispatch, getState);
-        oppdaterAlternativer(dispatch, getState, ListevisningType.enhetensOversikt);
-    } else if (filtergruppe === 'veileder') {
-        hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sorteringfelt, nyeFiltervalg)(dispatch, getState);
-        oppdaterAlternativer(dispatch, getState, ListevisningType.minOversikt);
-    }
 }
 
 function hentPortefolje(hentPorefoljeFn: (...args: any[]) => void, ...args: any[]) {
@@ -290,9 +261,8 @@ export function markerAlleBrukere(markert) {
     });
 }
 
-export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder) {
-    const veilederIdent = gjeldendeVeileder ? gjeldendeVeileder.ident : undefined;
-    return (dispatch, getState) => {
+export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veilederIdent) {
+    return (dispatch, getState: ()=> AppState) => {
         dispatch({type: TILDEL_VEILEDER_RELOAD});
         dispatch({type: PENDING});
         Api.tilordneVeileder(tilordninger)
@@ -326,6 +296,23 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
                     });
                 }
             })
+            .then(() => {
+                // Venter litt slik at indeks kan komme i sync
+                setTimeout(() => {
+                    const enhet = getState().valgtEnhet.data.enhetId;
+                    const rekkefolge = getState().portefolje.sorteringsrekkefolge;
+                    const sorteringsfelt = getState().portefolje.sorteringsfelt;
+                    oppdaterPortefolje(getState, dispatch);
+                    if(filtergruppe === 'minOversikt'){
+                        const filtervalg = getState().filtreringMinoversikt;
+                        dispatch(hentPortefoljeForVeileder(enhet, veilederIdent, rekkefolge, sorteringsfelt, filtervalg))
+                    } else {
+                        const filtervalg = getState().filtrering;
+                        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filtervalg))
+                    }
+
+                }, 2000);
+            })
             .catch((error) => {
                 visServerfeilModal()(dispatch);
                 // TILDEL_VEILEDER_FEILET setter errorstatus slik at spinner forsvinner
@@ -334,38 +321,11 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldend
             .then(() => {
                 // Venter litt slik at indeks kan komme i sync
                 setTimeout(() => {
-                    const side = filtergruppe === 'minOversikt' ? 'veileder' : 'enhet';
-                    const ident = veilederIdent || getState().enheter.ident;
-                    oppdaterPortefolje(getState, dispatch, side, ident);
-                }, 2000);
-            })
-            .then(() => {
-                // Venter litt slik at indeks kan komme i sync
-                setTimeout(() => {
-                    const enhet = getState().enheter.valgtEnhet.enhet.enhetId;
+                    const enhet = getState().valgtEnhet.data.enhetId;
                     hentStatusTall(enhet, veilederIdent)(dispatch);
                 }, 2000);
             });
     };
-}
-
-export function settTilordningStatusOk() {
-    return (dispatch) => dispatch({
-        type: TILDEL_VEILEDER_OK
-    });
-}
-
-export function nullstillFeilendeTilordninger() {
-    return (dispatch) => dispatch({
-        type: NULLSTILL_FEILENDE_TILDELINGER
-    });
-}
-
-export function settValgtVeileder(valgtVeileder) {
-    return (dispatch) => dispatch({
-        type: SETT_VALGTVEILEDER,
-        veileder: valgtVeileder
-    });
 }
 
 export function oppdaterArbeidslisteForBruker(arbeidsliste) {

@@ -13,7 +13,7 @@ import './toolbar.less';
 interface TildelVeilederProps {
     skalVises: boolean;
     filtergruppe?: string;
-    gjeldendeVeileder?: VeilederModell;
+    gjeldendeVeileder?: string;
 }
 
 function TildelVeileder({skalVises, filtergruppe, gjeldendeVeileder}: TildelVeilederProps) {

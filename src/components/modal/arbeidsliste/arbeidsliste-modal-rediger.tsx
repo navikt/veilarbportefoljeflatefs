@@ -11,11 +11,12 @@ import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
 import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
 import { redigerArbeidsliste } from '../../../ducks/arbeidsliste';
 import moment from 'moment';
+import {OrNothing} from "../../../utils/types/types";
 import './arbeidsliste.less';
 
 interface Ownprops {
     bruker: BrukerModell;
-    innloggetVeileder: string;
+    innloggetVeileder: OrNothing<string>;
     sistEndretDato: Date;
     sistEndretAv?: string;
 }
@@ -38,13 +39,12 @@ interface FormikPropsValues {
 type ArbeidslisteModalRedigerProps = StateProps & Ownprops & DispatchProps;
 
 function ArbeidslisteModalRediger({
-                                      bruker,
-                                      innloggetVeileder,
-                                      arbeidslisteStatus,
-                                      sistEndretAv,
-                                      sistEndretDato,
-                                      onSubmit
-                                  }: ArbeidslisteModalRedigerProps) {
+  bruker,
+  arbeidslisteStatus,
+  sistEndretAv,
+  sistEndretDato,
+  onSubmit
+}: ArbeidslisteModalRedigerProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const lukkModalConfirm = (formikProps: FormikProps<FormikPropsValues>) => {

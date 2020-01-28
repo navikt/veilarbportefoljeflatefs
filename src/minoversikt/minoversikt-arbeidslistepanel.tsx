@@ -2,11 +2,12 @@ import * as React from 'react';
 import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
 import { UndertekstBold } from 'nav-frontend-typografi';
 import { BrukerModell } from '../model-interfaces';
+import {OrNothing} from "../utils/types/types";
 import './minoversikt.less';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
-    innloggetVeileder: string;
+    innloggetVeileder: OrNothing<string>;
 }
 
 export default function ArbeidslistePanel({bruker, innloggetVeileder}: ArbeidslistePanelProps) {

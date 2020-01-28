@@ -1,10 +1,9 @@
 import { useSelector } from 'react-redux';
 import { AppState } from '../../reducer';
-import { EnhetModell} from "../../model-interfaces";
 import { OrNothing } from "../../utils/types/types";
 
-const selectEnhetId = (state: AppState) => state.enheter.valgtEnhet.enhet;
+const selectEnhetId = (state: AppState) => state.valgtEnhet.data.enhetId;
 
-export function useEnhetSelector(): OrNothing<EnhetModell>  {
+export function useEnhetSelector(): OrNothing<string>  {
     return useSelector(selectEnhetId);
 }

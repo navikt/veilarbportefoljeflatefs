@@ -1,74 +1,47 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { Undertittel } from 'nav-frontend-typografi';
+import {useDispatch, useSelector} from 'react-redux';
+import {Undertittel} from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import Lenker from '../lenker/lenker';
-import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl, updateLastPath} from '../utils/url-utils';
-import { VeiledereState } from '../ducks/veiledere';
-import { StatustallModell, ValgtEnhetModell } from '../model-interfaces';
-import { pagineringSetup } from '../ducks/paginering';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
-import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import { FiltreringState, slettEnkeltFilter } from '../ducks/filtrering';
-import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
-import { hentPortefoljeStorrelser as fetchPortefoljeStorrelser } from '../ducks/portefoljestorrelser';
-import { hentStatusTall as fetchStatusTall } from '../ducks/statustall';
-import { RouterProps } from 'react-router';
-import { defaultVeileder } from '../filtrering/filtrering-container';
+import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
+import {slettEnkeltFilter} from '../ducks/filtrering';
 import './veiledere.less';
+import ToppMeny from "../topp-meny/topp-meny";
+import {useFetchPortefoljeData} from "../hooks/portefolje/use-fetch-portefolje-data";
+import {useOnMount} from "../hooks/use-on-mount";
+import {leggEnhetIUrl, updateLastPath} from "../utils/url-utils";
+import {loggSkjermMetrikker, Side} from "../utils/metrikker/skjerm-metrikker";
+import {useEnhetSelector} from "../hooks/redux/use-enhet-selector";
+import {AppState} from "../reducer";
+import {useOnUnmount} from "../hooks/use-on-unmount";
 
-interface StateProps {
-    veiledere: VeiledereState;
-    portefoljestorrelser: any;
-    filtervalg: FiltreringState;
-    valgtEnhet: ValgtEnhetModell;
-    statustall: { data: StatustallModell };
-}
 
-interface DispatchProps {
-    hentPortefoljestorrelser: (enhetId: string) => void;
-    initalPaginering: (side: number, seAlle: boolean) => void;
-    hentStatusTall: (enhet: string) => void;
-    slettVeilederFilter: (ident: string) => void;
-}
+function VeiledereSide (){
+    const {statustall, portefoljestorrelser, veiledere} = useFetchPortefoljeData();
+    const enhetId = useEnhetSelector();
+    const filtervalg = useSelector((state: AppState)=> state.filtreringVeilederoversikt);
 
-type VeiledereSideProps = StateProps & DispatchProps & RouterProps;
+    const dispatch = useDispatch();
+    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
 
-class VeiledereSide extends React.Component<VeiledereSideProps> {
-    componentWillMount() {
-        const {valgtEnhet} = this.props;
-        leggEnhetIUrl(valgtEnhet.enhet!.enhetId);
+
+    useOnMount(() => {
+        leggEnhetIUrl(enhetId);
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
-        this.settInitalStateFraUrl();
-    }
+    });
 
-    settInitalStateFraUrl() {
-        const side = getSideFromUrl();
-        const seAlle = getSeAlleFromUrl();
-        this.props.initalPaginering(side, seAlle);
-    }
-
-    componentDidUpdate(prevProps: Readonly<VeiledereSideProps>, prevState: Readonly<{}>, snapshot?: any): void {
+    useOnUnmount(()=> {
         updateLastPath();
-    }
+    });
 
-    componentDidMount() {
-        const {hentPortefoljestorrelser, hentStatusTall, valgtEnhet} = this.props;
-        hentPortefoljestorrelser(valgtEnhet.enhet!.enhetId);
-        hentStatusTall(this.props.valgtEnhet.enhet!.enhetId);
-    }
-
-    render() {
-        const {veiledere, portefoljestorrelser, filtervalg, statustall, slettVeilederFilter} = this.props;
-
-        return (
-            <DocumentTitle title="Veilederoversikt">
-                <div className="veiledere-side blokk-xl">
-                    <Lenker/>
+    return (
+        <DocumentTitle title="Veilederoversikt">
+            <div className="veiledere-side">
+                <ToppMeny>
                     <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
                         <section>
                             <div id="oversikt-sideinnhold" role="tabpanel">
@@ -99,31 +72,21 @@ class VeiledereSide extends React.Component<VeiledereSideProps> {
                                                 {`Totalt ${veiledere.data.veilederListe.length} veiledere`}
                                             </Undertittel>
                                         </div>
-                                        <VeiledersideVisning/>
+                                        <VeiledersideVisning
+                                            veiledere={veiledere.data.veilederListe}
+                                            portefoljestorrelser={portefoljestorrelser}
+                                            veilederFilter={filtervalg.veiledere}
+                                        />
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </Innholdslaster>
-                </div>
-            </DocumentTitle>
-        );
-    }
+                </ToppMeny>
+            </div>
+        </DocumentTitle>
+    );
 }
 
-const mapStateToProps = (state) => ({
-    veiledere: state.veiledere,
-    filtervalg: state.filtreringVeilederoversikt,
-    portefoljestorrelser: state.portefoljestorrelser,
-    valgtEnhet: state.enheter.valgtEnhet,
-    statustall: state.statustall,
-});
 
-const mapDispatchToProps = (dispatch) => ({
-    hentPortefoljestorrelser: (enhetId) => dispatch(fetchPortefoljeStorrelser(enhetId)),
-    initalPaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle})),
-    hentStatusTall: (enhet) => dispatch(fetchStatusTall(enhet)),
-    slettVeilederFilter: (ident: string) => dispatch(slettEnkeltFilter('veiledere', ident, 'veiledere', defaultVeileder))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(VeiledereSide);
+export default VeiledereSide;

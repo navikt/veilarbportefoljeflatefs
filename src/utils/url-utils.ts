@@ -1,6 +1,7 @@
 import * as queryString from 'query-string';
 import history, { basename } from '../history';
 import { IKKE_SATT } from '../konstanter';
+import {OrNothing} from "./types/types";
 
 export function slettCleanIUrl() {
     const parsed = queryString.parse(window.location.search); // eslint-disable-line no-undef
@@ -17,7 +18,7 @@ export function slettCleanIUrl() {
     history.replace(`${window.location.pathname}?${stringified}`);
 }
 
-export function leggEnhetIUrl(enhet: string, refresh: boolean = false) {
+export function leggEnhetIUrl(enhet: OrNothing<string>, refresh: boolean = false) {
     if (enhet) {
         const parsed = queryString.parse(window.location.search);
         parsed.enhet = enhet;
@@ -70,6 +71,15 @@ export function leggSideIUrl(side) {
 
 export function getSideFromUrl() {
     return parseInt(queryString.parse(window.location.search).side || '1', 10);
+}
+
+export function getInitialStateFromUrl () {
+    const side = getSideFromUrl();
+    const seAlle = getSeAlleFromUrl();
+    const sorteringsfelt = getSorteringsFeltFromUrl();
+    const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
+
+    return {side, seAlle, sorteringsfelt, sorteringsrekkefolge};
 }
 
 export function leggSeAlleIUrl(seAlle: boolean = false) {

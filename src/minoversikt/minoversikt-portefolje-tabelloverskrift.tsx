@@ -11,18 +11,18 @@ interface MinOversiktTabellProps {
 }
 
 function MinoversiktTabellOverskrift(props: MinOversiktTabellProps) {
-    const {brukere, filtervalg, sorteringsrekkefolge, valgteKolonner, sorteringsfelt} = usePortefoljeSelector(ListevisningType.minOversikt);
+    const {brukere, filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(ListevisningType.minOversikt);
 
     return (
-        <MinOversiktListehode
-            sorteringsrekkefolge={sorteringsrekkefolge}
-            sorteringOnClick={props.settSorteringOgHentPortefolje}
-            filtervalg={filtervalg}
-            sorteringsfelt={sorteringsfelt}
-            valgteKolonner={valgteKolonner}
-            brukere={brukere}
-            filtergruppe={ListevisningType.enhetensOversikt}
-        />
+            <MinOversiktListehode
+                sorteringsrekkefolge={sorteringsrekkefolge}
+                sorteringOnClick={props.settSorteringOgHentPortefolje}
+                filtervalg={filtervalg}
+                sorteringsfelt={sorteringsfelt}
+                valgteKolonner={listevisning.valgte}
+                brukere={brukere}
+                filtergruppe={ListevisningType.enhetensOversikt}
+            />
     );
 }
 
