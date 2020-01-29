@@ -8,11 +8,12 @@ import EnhetKolonner from './enhet-kolonner';
 import { useLayoutEffect, useRef } from 'react';
 import './enhetsportefolje.less';
 import './brukerliste.less';
+import {OrNothing} from "../utils/types/types";
 
 interface EnhetBrukerpanelProps {
     bruker: any;
     settMarkert: (bruker: string, markert: boolean) => void;
-    enhetId: string;
+    enhetId: OrNothing<string>;
     filtervalg: FiltervalgModell;
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];
@@ -31,7 +32,7 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
         }
     }, [varForrigeBruker]);
 
-    const classname = classNames('brukerliste__element brukerliste--border-bottom-thin', {
+    const classname = classNames('brukerliste__element', {
         'brukerliste--forrigeBruker': varForrigeBruker,
     });
 

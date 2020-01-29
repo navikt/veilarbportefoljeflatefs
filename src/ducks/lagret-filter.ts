@@ -69,7 +69,6 @@ export default function reducer(state: LagretFilterState = initialState, action)
         case REDIGER_VEILEDERGRUPPER_PENDING:
         case SLETT_VEILEDERGRUPPER_PENDING:
             return {...state, status: STATUS.PENDING};
-
         case HENT_VEILEDERGRUPPER_FEILET:
             return {...state, status: STATUS.ERROR, error: VeilederGruppeError.HENTING_FEILET};
         case NY_VEILEDERGRUPPER_FEILET:

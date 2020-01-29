@@ -25,13 +25,14 @@ import VeilederId from '../components/tabell/veilederid';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
+import {OrNothing} from "../utils/types/types";
 import './enhetsportefolje.less';
 import './brukerliste.less';
 
 interface EnhetKolonnerProps {
     className?: string;
     bruker: BrukerModell;
-    enhetId: string;
+    enhetId: OrNothing<string>;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;

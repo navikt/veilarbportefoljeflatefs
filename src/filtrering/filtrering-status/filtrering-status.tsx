@@ -11,13 +11,12 @@ import FiltreringStatusNyeBrukere from './filtrering-status-components/nyebruker
 import FiltreringStatusUfordelteBrukere from './filtrering-status-components/ufordelte-brukere';
 import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avtalt-mote-med-nav';
 import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
-import { FiltervalgModell, VeilederModell } from '../../model-interfaces';
+import { FiltervalgModell } from '../../model-interfaces';
 import './filtrering-status.less';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
-    veileder: VeilederModell;
 }
 
 export function FiltreringStatus(props: FiltreringStatusProps) {
@@ -26,7 +25,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(endreFiltervalg(
-            'ferdigfilterListe', ferdigFilterListe, props.filtergruppe, props.veileder));
+            'ferdigfilterListe', ferdigFilterListe, props.filtergruppe));
     }
 
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
