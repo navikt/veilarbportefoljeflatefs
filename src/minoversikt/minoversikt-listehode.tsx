@@ -55,9 +55,9 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
             <div className="brukerliste__innhold">
                 <VelgalleCheckboks
                     skalVises={filtergruppe in ListevisningType}
-                    className="minoversikt__velgallecheckbox velgalle-checkboks col col-xs-2"/>
+                    className="velgalle-checkboks col col-xs-2"/>
                 <SorteringHeader
-                    className="col "
+                    className="arbeidslisteikon__sorteringsheader"
                     sortering={Sorteringsfelt.ARBEIDSLISTEIKON}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}

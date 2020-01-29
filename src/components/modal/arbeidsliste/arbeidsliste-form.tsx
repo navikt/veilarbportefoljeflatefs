@@ -29,13 +29,12 @@ function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
                     </div>
                     <div className="dato-kategori-wrapper">
                         <FormikDatoVelger name={`arbeidsliste[${index++}].frist`}/>
-                        <ArbeidslisteKategori name={`arbeidsliste[${index++}].radio`}/>
+                        <ArbeidslisteKategori name={`arbeidsliste[${index++}].arbeidslisteikon`}/>
                     </div>
                 </div>
             ))}
         </div>
     );
-
 }
 
 export default ArbeidslisteForm;

@@ -2,22 +2,26 @@ import * as React from 'react';
 import '../arbeidsliste-kategori.less';
 import { ReactComponentElement } from 'react';
 
-interface ArbeidslisteIkonProps {
+interface ArbeidslisteikonProps {
     value: string;
     arbeidslisteikon: ReactComponentElement<any>;
     name: string;
-    checked?: boolean;
+    tabIndex: number;
+    checked: boolean;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function ArbeidslisteIkon({value, arbeidslisteikon, checked, name}: ArbeidslisteIkonProps) {
+function ArbeidslisteIkon({value, arbeidslisteikon, name, checked, onChange, tabIndex}: ArbeidslisteikonProps) {
     return (
-        <label className="arbeidslisteikon__container">
+        <label className="arbeidslisteikon__container" tabIndex={0}>
             <input
                 type="radio"
                 name={name}
                 className="arbeidslisteikon__input"
                 value={value}
+                tabIndex={tabIndex}
                 checked={checked}
+                onChange={onChange}
             />
             {arbeidslisteikon}
         </label>
@@ -25,3 +29,4 @@ function ArbeidslisteIkon({value, arbeidslisteikon, checked, name}: Arbeidsliste
 }
 
 export default ArbeidslisteIkon;
+

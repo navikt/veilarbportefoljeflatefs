@@ -18,7 +18,7 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder}: Arbeidsli
         <article className="brukerliste__arbeidslistepanel">
             <span className="flex">
                 <span className="brukerliste__gutter-left brukerliste--min-width-minside"/>
-                <span className="brukerliste__innhold brukerliste__arbeidslisteinnhold flex--grow">
+                <span className="brukerliste__arbeidslisteinnhold flex--grow">
                     <UndertekstBold>
                         {overskrift}
                     </UndertekstBold>
