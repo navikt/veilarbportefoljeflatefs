@@ -24,6 +24,7 @@ function getConfig (
             visSokefelt: true,
             visVeilder: true
         },
+        contextholder: true,
         onSok: (fnr) => {
             window.location.pathname = `veilarbpersonflatefs/${fnr}`
         },
