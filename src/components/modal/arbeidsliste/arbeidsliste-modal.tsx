@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import {skjulModal, VIS_ARBEIDSLISTE_MODAL} from '../../../ducks/modal';
+import { skjulModal, VIS_ARBEIDSLISTE_MODAL } from '../../../ducks/modal';
 import { markerAlleBrukere } from '../../../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 import { BrukerModell } from '../../../model-interfaces';
 import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
 import './arbeidsliste.less';
-import {AppState} from "../../../reducer";
+import { AppState } from '../../../reducer';
 
 interface ArbeidslisteModalProps {
     isOpen: boolean;
@@ -70,12 +70,12 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
                     <header className="modal-header"/>
                 </div>
                 <div className="arbeidsliste__modal">
-                    <div className="arbeidsliste-info-tekst">
+                    <div className="arbeidsliste__info-tekst">
                         <Innholdstittel tag="h1" className="blokk-xs">
                             Legg i arbeidsliste
                         </Innholdstittel>
-                        <Normaltekst className="blokk-s">
-                            {`Du har valgt ${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : 'brukere'}. Skriv en kort kommentar og legg inn dato.`}
+                        <Normaltekst>
+                            {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : 'brukere'} valgt.`}
                         </Normaltekst>
                     </div>
                     <LeggTilArbeidslisteForm

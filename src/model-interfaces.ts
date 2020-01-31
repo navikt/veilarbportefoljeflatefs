@@ -30,7 +30,7 @@ export enum Sorteringsfelt {
     NAVIDENT = 'veileder_id',
     VEILEDER = 'veileder_navn',
     MOTER_IDAG = 'moterMedNAVIdag',
-    ARBEIDSLISTEIKON = "arbeidslisteikon"
+    ARBEIDSLISTEIKON = 'arbeidslisteikon'
 }
 
 export enum EtikettType {
@@ -149,6 +149,13 @@ export interface AktiviteterModell {
     gruppeaktivitet?: string;
 }
 
+export enum ArbeidslisteIkonModell {
+    BLA = 'BLA',
+    ROD = 'ROD',
+    GRONN = 'GRONN',
+    GUL = 'GUL',
+}
+
 export interface ArbeidslisteModell {
     kommentar?: string;
     overskrift?: string;
@@ -157,6 +164,7 @@ export interface ArbeidslisteModell {
     endringstidspunkt: string; // dato
     isOppfolgendeVeileder: boolean;
     sistEndretAv: { veilederId: string };
+    arbeidslisteikon: ArbeidslisteIkonModell;
 }
 
 export interface StatustallModell {

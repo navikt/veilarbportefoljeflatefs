@@ -36,6 +36,7 @@ interface FormValues {
     kommentar: string;
     overskrift: string;
     frist?: string;
+    kategori?: any;
 }
 
 type LeggTilArbeidslisteFormProps = OwnProps & StateProps & DispatchProps;
@@ -51,7 +52,7 @@ function LeggTilArbeidslisteForm({
                                  }: LeggTilArbeidslisteFormProps) {
 
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
-    const initialValues = valgteBrukere.map((bruker) => ({kommentar: '', frist: '', overskrift: ''}));
+    const initialValues = valgteBrukere.map((bruker) => ({kommentar: '', frist: '', overskrift: '', kategori: ''}));
 
     return (
         <Formik
@@ -63,26 +64,28 @@ function LeggTilArbeidslisteForm({
             render={(formikProps) => {
                 setFormIsDirty(formikProps.dirty);
                 return (
-                    <Form>
-                        <ArbeidslisteForm
-                            valgteBrukere={valgteBrukere}
-                            arbeidsliste={formikProps.values.arbeidsliste}
-                        />
-                        <div>
-                            <div className="modal-footer">
-                                <Hovedknapp className="knapp knapp--hoved" spinner={laster}>
-                                    Lagre
-                                </Hovedknapp>
-                                <button type="button" className="knapp" onClick={() => {
-                                    formikProps.resetForm();
-                                    fjernMarkerteBrukere();
-                                    lukkModal();
-                                }}>
-                                    Avbryt
-                                </button>
+                    <div className="input-fields">
+                        <Form>
+                            <ArbeidslisteForm
+                                valgteBrukere={valgteBrukere}
+                                arbeidsliste={formikProps.values.arbeidsliste}
+                            />
+                            <div>
+                                <div className="modal-footer">
+                                    <Hovedknapp className="knapp knapp--hoved" spinner={laster}>
+                                        Lagre
+                                    </Hovedknapp>
+                                    <button type="button" className="knapp" onClick={() => {
+                                        formikProps.resetForm();
+                                        fjernMarkerteBrukere();
+                                        lukkModal();
+                                    }}>
+                                        Avbryt
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </Form>
+                        </Form>
+                    </div>
                 );
             }}
         />
@@ -128,7 +131,8 @@ const mapDispatchToProps = (dispatch, props) => ({
             fnr: valgteBrukere[index].fnr,
             overskrift: elem.overskrift,
             kommentar: elem.kommentar,
-            frist: elem.frist ? dateToISODate(elem.frist) : null
+            frist: elem.frist ? dateToISODate(elem.frist) : null,
+            kategori: elem.kategori
         }));
         return postArbeidsliste(liste)(dispatch)
             .then((data) => {

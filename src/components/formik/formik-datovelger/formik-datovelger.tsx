@@ -7,7 +7,13 @@ import moment from 'moment';
 import './daypicker.less';
 import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 
-function FormikDatoVelger({name}) {
+interface FormikDatepickerProps {
+    name: any;
+    label: string;
+    className?: string;
+}
+
+function FormikDatoVelger({name, label, className}: FormikDatepickerProps) {
     return (
         <Field
             validate={(value: string) => validerDatoFeldt(value, new Date(), true)}
@@ -19,6 +25,7 @@ function FormikDatoVelger({name}) {
                 const datePickerClassName = classNames('skjemaelement', 'datovelger', {'datovelger--harFeil': error});
                 return (
                     <div className={datePickerClassName}>
+                        <span className="skjemaelement__label">{label}</span>
                         <Datovelger
                             input={{
                                 id: 'fristInput',

@@ -17,23 +17,21 @@ function label(bruker: BrukerModell): React.ReactNode {
 
 function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
     return (
-        <div>
+        <>
             {arbeidsliste.map((bruker, index) => (
-                <div className="input-fields">
+                <div className="arbeidsliste__bruker">
                     <div className="nav-input blokk-s" key={index}>
-                        <legend>
-                            {label(valgteBrukere[index])}
-                        </legend>
+                        <legend>{label(valgteBrukere[index])}</legend>
                         <FormikInput name={`arbeidsliste[${index}].overskrift`}/>
                         <FormikTekstArea name={`arbeidsliste[${index}].kommentar`}/>
                     </div>
-                    <div className="dato-kategori-wrapper">
-                        <FormikDatoVelger name={`arbeidsliste[${index++}].frist`}/>
-                        <ArbeidslisteKategori name={`arbeidsliste[${index++}].arbeidslisteikon`}/>
+                    <div className="skjemaelement dato-kategori-wrapper">
+                        <FormikDatoVelger name={`arbeidsliste[${index++}].frist`} label="Frist"/>
+                        <ArbeidslisteKategori name={`arbeidsliste[${index++}].arbeidslisteikon`} label="Kategori"/>
                     </div>
                 </div>
             ))}
-        </div>
+        </>
     );
 }
 

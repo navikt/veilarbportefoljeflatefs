@@ -11,7 +11,7 @@ import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
 import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
 import { redigerArbeidsliste } from '../../../ducks/arbeidsliste';
 import moment from 'moment';
-import {OrNothing} from "../../../utils/types/types";
+import { OrNothing } from '../../../utils/types/types';
 import './arbeidsliste.less';
 
 interface Ownprops {
@@ -39,12 +39,12 @@ interface FormikPropsValues {
 type ArbeidslisteModalRedigerProps = StateProps & Ownprops & DispatchProps;
 
 function ArbeidslisteModalRediger({
-  bruker,
-  arbeidslisteStatus,
-  sistEndretAv,
-  sistEndretDato,
-  onSubmit
-}: ArbeidslisteModalRedigerProps) {
+                                      bruker,
+                                      arbeidslisteStatus,
+                                      sistEndretAv,
+                                      sistEndretDato,
+                                      onSubmit
+                                  }: ArbeidslisteModalRedigerProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const lukkModalConfirm = (formikProps: FormikProps<FormikPropsValues>) => {
@@ -96,7 +96,7 @@ function ArbeidslisteModalRediger({
                             <header className="modal-header"/>
                         </div>
                         <div className="arbeidsliste__modal">
-                            <div className="arbeidsliste-info-tekst">
+                            <div className="arbeidsliste__info-tekst">
                                 <Innholdstittel tag="h1" className="blokk-xs">
                                     Rediger
                                 </Innholdstittel>
@@ -107,6 +107,7 @@ function ArbeidslisteModalRediger({
                                     sistEndretDato={sistEndretDato}
                                     sistEndretAv={sistEndretAv}
                                     lukkModal={() => lukkModal(formikProps)}
+                                    bruker={bruker}
                                 />
                             </Form>
                         </div>

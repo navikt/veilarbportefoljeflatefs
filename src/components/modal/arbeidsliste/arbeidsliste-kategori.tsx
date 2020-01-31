@@ -4,10 +4,11 @@ import { ReactComponent as ArbeidslisteikonBla } from './arbeidslisteikon/arbeid
 import { ReactComponent as ArbeidslisteikonRod } from './arbeidslisteikon/arbeidslisteikon_rod.svg';
 import { ReactComponent as ArbeidslisteikonGronn } from './arbeidslisteikon/arbeidslisteikon_gronn.svg';
 import { ReactComponent as ArbeidslisteikonGul } from './arbeidslisteikon/arbeidslisteikon_gul.svg';
-import ArbeidslisteIkon from './arbeidslisteikon/artbeidslisteikon';
+import ArbeidslisteIkon from './arbeidslisteikon/arbeidslisteikon';
 
 interface ArbeidslisteKategoriProps {
     name: string;
+    label: string;
 }
 
 interface StateProps {
@@ -32,6 +33,7 @@ class ArbeidslisteKategori extends React.Component<ArbeidslisteKategoriProps, St
     render() {
         return (
             <div className="arbeidslisteikon">
+                <span className="skjemaelement__label">{this.props.label}</span>
                 <ArbeidslisteIkon
                     value='BLA'
                     arbeidslisteikon={<ArbeidslisteikonBla/>}
