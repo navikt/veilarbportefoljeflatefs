@@ -69,7 +69,7 @@ function MinoversiktSide () {
                                     <FiltreringLabelContainer
                                         filtervalg={filtervalg}
                                         filtergruppe="veileder"
-                                        enhettiltak={enhettiltak}
+                                        enhettiltak={enhettiltak.data.tiltak}
                                         listevisning={listevisning}
                                         className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                     />

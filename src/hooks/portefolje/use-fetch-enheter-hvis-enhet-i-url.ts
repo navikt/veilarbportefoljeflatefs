@@ -1,7 +1,9 @@
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import {useQueryParams} from "../use-query-params";
 import {velgEnhetForVeileder} from "../../ducks/valgt-enhet";
 import {useDispatch} from "react-redux";
+import {pagineringSetup} from "../../ducks/paginering";
+import {useOnMount} from "../use-on-mount";
 
 
 interface Enheter {
@@ -11,22 +13,32 @@ interface Enheter {
 
 export function useFetchEnheter() {
     const [isLoading, setLoading] = useState(true);
+    const [manglerEnheter, setManglerEnheter ]= useState(false);
+
     const dispatch = useDispatch();
     const enhetId = useQueryParams().enhet;
-    useEffect(() => {
-        if(enhetId) {
-            fetch("/veilarbveileder/api/veileder/enheter")
-                .then(resp => resp.json())
-                .then((resp: Enheter) => {
-                    if (resp.enhetliste.findIndex(enhet => enhet.enhetId === enhetId) >= 0) {
-                        dispatch(velgEnhetForVeileder(enhetId))
-                    }
-                    setLoading(false)
-                }).catch(_ => setLoading(false));
-        } else {
-            setLoading(false)
-        }
-    },[enhetId, dispatch]);
+    const side = useQueryParams().side;
+    const seAlle = useQueryParams().seAlle;
 
-    return {isLoading}
+    useOnMount(() => {
+        fetch("/veilarbveileder/api/veileder/enheter")
+            .then(resp => resp.json())
+            .then((resp: Enheter) => {
+                if(enhetId) {
+                    if (resp.enhetliste.findIndex(enhet => enhet.enhetId === enhetId) >= 0) {
+                        dispatch(velgEnhetForVeileder(enhetId));
+                        dispatch(pagineringSetup({side, seAlle}));
+                    }
+                }
+                else {
+                    if(resp.enhetliste.length === 0 ) {
+                        setManglerEnheter(true);
+                    }
+                }
+                setLoading(false)
+            })
+            .catch(_ => setLoading(false));
+    });
+
+    return {isLoading, manglerEnheter}
 }

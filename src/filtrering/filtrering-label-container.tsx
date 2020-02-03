@@ -55,6 +55,8 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                 ];
             } else if (Array.isArray(value)) {
                 return value.map((singleValue) => {
+                    console.log("singleValue", singleValue);
+                    console.log("enhettiltak", enhettiltak);
                         return (
                             <FiltreringLabel
                                 key={`${key}--${singleValue.key || singleValue}`}

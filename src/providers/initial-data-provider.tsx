@@ -8,6 +8,7 @@ import {hentInloggetVeileder} from "../ducks/inlogget-veileder";
 import NavFrontendSpinner from "nav-frontend-spinner";
 import {useRedirectOnMount} from "../hooks/use-redirect-on-mount";
 import {useFetchEnheter} from "../hooks/portefolje/use-fetch-enheter-hvis-enhet-i-url";
+import {AlertStripeFeil} from "nav-frontend-alertstriper";
 
 
 function InitialDataProvider(props: PropsWithChildren<{}>) {
@@ -22,10 +23,14 @@ function InitialDataProvider(props: PropsWithChildren<{}>) {
 
     useRedirectOnMount();
 
-    const {isLoading } = useFetchEnheter();
+    const {isLoading, manglerEnheter } = useFetchEnheter();
 
-    if(isLoading) {
+    if (isLoading) {
         return <NavFrontendSpinner type="L"/>
+    }
+
+    if(manglerEnheter) {
+        return  <AlertStripeFeil>Kunde ikke finne enheter for veileder</AlertStripeFeil>
     }
 
     return (

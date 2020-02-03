@@ -67,7 +67,7 @@ function EnhetSide () {
                                                 veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
                                             }}
                                             filtergruppe="enhet"
-                                            enhettiltak={enhettiltak}
+                                            enhettiltak={enhettiltak.data.tiltak}
                                             listevisning={listevisning}
                                             className="filtrering-label-container"
                                         />
