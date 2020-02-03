@@ -30,7 +30,7 @@ function InitialDataProvider(props: PropsWithChildren<{}>) {
     }
 
     if(manglerEnheter) {
-        return  <AlertStripeFeil>Kunde ikke finne enheter for veileder</AlertStripeFeil>
+        return <AlertStripeFeil>Du har ikke tilgang til noen enheter.</AlertStripeFeil>
     }
 
     return (
