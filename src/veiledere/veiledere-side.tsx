@@ -13,11 +13,12 @@ import './veiledere.less';
 import ToppMeny from "../topp-meny/topp-meny";
 import {useFetchPortefoljeData} from "../hooks/portefolje/use-fetch-portefolje-data";
 import {useOnMount} from "../hooks/use-on-mount";
-import {leggEnhetIUrl, updateLastPath} from "../utils/url-utils";
+import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl, updateLastPath} from "../utils/url-utils";
 import {loggSkjermMetrikker, Side} from "../utils/metrikker/skjerm-metrikker";
 import {useEnhetSelector} from "../hooks/redux/use-enhet-selector";
 import {AppState} from "../reducer";
 import {useOnUnmount} from "../hooks/use-on-unmount";
+import {pagineringSetup} from "../ducks/paginering";
 
 
 function VeiledereSide (){
@@ -30,6 +31,9 @@ function VeiledereSide (){
 
 
     useOnMount(() => {
+        const side = getSideFromUrl();
+        const seAlle = getSeAlleFromUrl();
+        dispatch(pagineringSetup({side, seAlle}));
         leggEnhetIUrl(enhetId);
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
     });

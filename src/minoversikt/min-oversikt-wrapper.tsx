@@ -1,7 +1,7 @@
 import * as React from "react";
 import {PropsWithChildren} from "react";
 import {Normaltekst} from "nav-frontend-typografi";
-import {useParams} from "react-router";
+import {Redirect, useParams} from "react-router";
 import {useVeilederListeSelector} from "../hooks/redux/use-veilederliste-selector";
 import {useIdentSelector} from "../hooks/redux/use-inlogget-ident";
 
@@ -13,6 +13,9 @@ export function MinOversiktWrapper (props: PropsWithChildren<{}>) {
 
     const visesAnnenVeiledersPortefolje = ident ? ident !== innloggetVeileder!.ident : false ;
 
+    if(ident && veiledere.findIndex(v => v.ident === ident) <0 ) {
+        return <Redirect to="/enhet"/>
+    }
 
     const veilederFraUrl = veiledere.find((veileder) => (veileder.ident === ident)) || {fornavn: '', etternavn: ''};
 
@@ -21,6 +24,7 @@ export function MinOversiktWrapper (props: PropsWithChildren<{}>) {
             {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
         </Normaltekst>
     );
+
 
     return (
         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>

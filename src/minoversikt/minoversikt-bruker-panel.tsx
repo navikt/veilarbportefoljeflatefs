@@ -2,7 +2,6 @@ import * as React from 'react';
 import { MouseEvent, useState } from 'react';
 import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
-import CheckBox from '../components/tabell/checkbox';
 import ArbeidslisteIkon from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, EtikettType, FiltervalgModell, VeilederModell} from '../model-interfaces';
@@ -14,6 +13,7 @@ import Etikett from '../components/tabell/etikett';
 import { useLayoutEffect, useRef } from 'react';
 import {OrNothing} from "../utils/types/types";
 import './minoversikt.less';
+import {Checkbox} from "nav-frontend-skjema";
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -56,7 +56,13 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
         <li className={classname} ref={liRef}>
             <div className="brukerliste__element">
                 <div className="brukerliste__gutter-left brukerliste--min-width-minside">
-                    <CheckBox bruker={bruker} settMarkert={settMarkert}/>
+                    <Checkbox
+                        checked={bruker.markert}
+                        disabled={bruker.fnr === ''}
+                        onChange={()=> settMarkert(bruker.fnr, !bruker.markert)}
+                        label=""
+                        className="brukerliste__checkbox"
+                    />
                     <ArbeidslisteIkon skalVises={arbeidslisteAktiv}/>
                 </div>
                 <MinOversiktKolonner

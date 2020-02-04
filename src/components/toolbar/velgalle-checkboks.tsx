@@ -25,7 +25,7 @@ function VelgalleCheckboks({skalVises, disabled, markerAlle, alleMarkert, classN
             className={className}
             checked={alleMarkert}
             disabled={disabled}
-            onClick={onClickHandler}
+            onChange={onClickHandler}
             title="Velg alle checkbox"
         />
     );

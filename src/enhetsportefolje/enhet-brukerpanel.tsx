@@ -3,12 +3,12 @@ import classNames from 'classnames';
 import Etiketter from '../components/tabell/etiketter';
 import { FiltervalgModell, VeilederModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
-import CheckBox from '../components/tabell/checkbox';
 import EnhetKolonner from './enhet-kolonner';
 import { useLayoutEffect, useRef } from 'react';
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import {OrNothing} from "../utils/types/types";
+import {Checkbox} from "nav-frontend-skjema";
 
 interface EnhetBrukerpanelProps {
     bruker: any;
@@ -39,7 +39,13 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
     return (
         <li className={classname} ref={liRef}>
             <div className="brukerliste__gutter-left">
-                <CheckBox bruker={bruker} settMarkert={settMarkert}/>
+                <Checkbox
+                    checked={bruker.markert}
+                    disabled={bruker.fnr === ''}
+                    onChange={()=> settMarkert(bruker.fnr, !bruker.markert)}
+                    label=""
+                    className="brukerliste__checkbox"
+                />
             </div>
             <EnhetKolonner
                 className="brukerliste__innhold flex flex--center"

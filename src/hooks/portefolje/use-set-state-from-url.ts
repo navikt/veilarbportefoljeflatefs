@@ -34,8 +34,6 @@ export function useSetStateFromUrl() {
                 return Side.MIN_OVERSIKT;
             case "/enhet":
                 return Side.ENHETENS_OVERSIKT;
-            case "/veiledere":
-                return Side.VEILEDER_OVERSIKT;
             default:
                 return Side.MIN_OVERSIKT;
         }

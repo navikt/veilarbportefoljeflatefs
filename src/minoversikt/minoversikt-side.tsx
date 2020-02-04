@@ -23,7 +23,6 @@ import FiltreringContainer from "../filtrering/filtrering-container";
 import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
 import {useOnUnmount} from "../hooks/use-on-unmount";
 import {updateLastPath} from "../utils/url-utils";
-import {Redirect, useParams} from "react-router";
 import { hentPortefoljeForVeileder } from "../ducks/portefolje";
 import {useDispatch} from "react-redux";
 
@@ -33,7 +32,6 @@ function MinoversiktSide () {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const{ statustall, enhettiltak, veiledere } = useFetchPortefoljeData(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
-    const {ident} = useParams();
     const dispatch = useDispatch();
 
     useSetStateFromUrl();
@@ -43,9 +41,6 @@ function MinoversiktSide () {
         updateLastPath();
     });
 
-    if(ident && veiledere.data.veilederListe.findIndex(v => v.ident === ident) <0 ) {
-        return <Redirect to="/enhet"/>
-    }
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
@@ -68,14 +63,14 @@ function MinoversiktSide () {
                                 />
                             </div>
                             <div className={stickyWrapper}>
-                                    <FiltreringLabelContainer
-                                        filtervalg={filtervalg}
-                                        filtergruppe="veileder"
-                                        enhettiltak={enhettiltak.data.tiltak}
-                                        listevisning={listevisning}
-                                        className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
-                                    />
-                                    <div className={stickyContainer}>
+                                <FiltreringLabelContainer
+                                    filtervalg={filtervalg}
+                                    filtergruppe="veileder"
+                                    enhettiltak={enhettiltak.data.tiltak}
+                                    listevisning={listevisning}
+                                    className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
+                                />
+                                <div className={stickyContainer}>
                                     <TabellOverskrift className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
                                     <div className="sticky-container__skygge">
                                         <Toolbar

@@ -7,6 +7,8 @@ import FilterKonstanter, {
 import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne, ListevisningState } from '../ducks/ui/listevisning';
+import {leggSideIUrl} from "../utils/url-utils";
+import {pagineringSetup} from "../ducks/paginering";
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -55,8 +57,6 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                 ];
             } else if (Array.isArray(value)) {
                 return value.map((singleValue) => {
-                    console.log("singleValue", singleValue);
-                    console.log("enhettiltak", enhettiltak);
                         return (
                             <FiltreringLabel
                                 key={`${key}--${singleValue.key || singleValue}`}
@@ -130,9 +130,16 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
-        slettAlle: () => dispatch(clearFiltervalg(ownProps.filtergruppe)),
-        slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => dispatch(
-            slettEnkeltFilter(filterKey, filterValue, ownProps.filtergruppe))
+        slettAlle: () => {
+            leggSideIUrl(1);
+            dispatch(pagineringSetup({side: 1}));
+            dispatch(clearFiltervalg(ownProps.filtergruppe))
+        },
+        slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
+            leggSideIUrl(1);
+            dispatch(pagineringSetup({side: 1}));
+            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.filtergruppe))
+        }
     }
 });
 

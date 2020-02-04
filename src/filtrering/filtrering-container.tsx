@@ -9,6 +9,8 @@ import { FiltreringStatus } from './filtrering-status/filtrering-status';
 import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-veileder-grupper';
 import { OrNothing } from '../utils/types/types';
 import { Tiltak } from '../ducks/enhettiltak';
+import {leggSideIUrl} from "../utils/url-utils";
+import {pagineringSetup} from "../ducks/paginering";
 
 
 interface FiltreringContainerProps {
@@ -21,8 +23,11 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
 
     const dispatch = useDispatch();
 
-    const doEndreFiltervalg = (filterId: string, filterVerdi: string) =>
+    const doEndreFiltervalg = (filterId: string, filterVerdi: string) => {
+        leggSideIUrl(1);
+        dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
+    };
 
     return (
         <div className="blokk-m">
