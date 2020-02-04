@@ -24,15 +24,17 @@ import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
 import {useOnUnmount} from "../hooks/use-on-unmount";
 import {updateLastPath} from "../utils/url-utils";
 import {Redirect, useParams} from "react-router";
+import { hentPortefoljeForVeileder } from "../ducks/portefolje";
+import {useDispatch} from "react-redux";
 
 function MinoversiktSide () {
     const innloggetVeilederIdent = useIdentSelector();
-
-    const {portefolje, filtervalg, listevisning} = usePortefoljeSelector(ListevisningType.minOversikt);
+    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.minOversikt);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const{ statustall, enhettiltak, veiledere } = useFetchPortefoljeData(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const {ident} = useParams();
+    const dispatch = useDispatch();
 
     useSetStateFromUrl();
     useFetchPortefolje(ListevisningType.minOversikt);
@@ -78,7 +80,13 @@ function MinoversiktSide () {
                                     <div className="sticky-container__skygge">
                                         <Toolbar
                                             filtergruppe={ListevisningType.minOversikt}
-                                            onPaginering={settSorteringogHentPortefolje}
+                                            onPaginering={()=> dispatch(hentPortefoljeForVeileder(
+                                                enhetId,
+                                                gjeldendeVeileder,
+                                                sorteringsrekkefolge,
+                                                sorteringsfelt,
+                                                filtervalg
+                                            ))}
                                             gjeldendeVeileder={gjeldendeVeileder}
                                             visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                             sokVeilederSkalVises={false}
