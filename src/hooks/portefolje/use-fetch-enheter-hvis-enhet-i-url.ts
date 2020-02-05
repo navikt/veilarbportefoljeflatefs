@@ -2,8 +2,6 @@ import {useEffect, useState} from "react";
 import {useQueryParams} from "../use-query-params";
 import {velgEnhetForVeileder} from "../../ducks/valgt-enhet";
 import {useDispatch} from "react-redux";
-import {pagineringSetup} from "../../ducks/paginering";
-import {settSortering} from "../../ducks/portefolje";
 
 
 interface Enheter {
@@ -18,10 +16,6 @@ export function useFetchEnheter() {
     const dispatch = useDispatch();
 
     const enhetId = useQueryParams().enhet;
-    const side = useQueryParams().side;
-    const seAlle = useQueryParams().seAlle;
-    const rekkefolge = useQueryParams().sorteringsrekkefolge;
-    const felt = useQueryParams().sorteringsfelt;
 
     useEffect(() => {
         fetch("/veilarbveileder/api/veileder/enheter")
@@ -30,8 +24,6 @@ export function useFetchEnheter() {
                 if(enhetId) {
                     if (resp.enhetliste.findIndex(enhet => enhet.enhetId === enhetId) >= 0) {
                         dispatch(velgEnhetForVeileder(enhetId));
-                        dispatch(pagineringSetup({side, seAlle}));
-                        dispatch(settSortering(rekkefolge, felt));
                     }
                 }
                 else {
@@ -42,7 +34,7 @@ export function useFetchEnheter() {
                 setLoading(false)
             })
             .catch(_ => setLoading(false));
-    },[dispatch, enhetId, felt, rekkefolge, seAlle, side]);
+    },[dispatch, enhetId]);
 
     return {isLoading, manglerEnheter}
 }

@@ -53,7 +53,6 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
         if(valgtEnhet && valgtEnhet.enhetId === nyEnhet ) {
             return;
         }
-
         dispatch(velgEnhetForVeileder(nyEnhet));
         dispatch(pagineringSetup({side: 1, seAlle: false}));
     };

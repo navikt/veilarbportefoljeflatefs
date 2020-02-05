@@ -27,9 +27,7 @@ function InitialDataProvider(props: PropsWithChildren<{}>) {
 
     if (isLoading) {
         return <NavFrontendSpinner type="L"/>
-    }
-
-    if(manglerEnheter) {
+    } else if (manglerEnheter) {
         return <AlertStripeFeil>Du har ikke tilgang til noen enheter.</AlertStripeFeil>
     }
 

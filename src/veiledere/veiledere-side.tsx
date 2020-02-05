@@ -13,12 +13,12 @@ import './veiledere.less';
 import ToppMeny from "../topp-meny/topp-meny";
 import {useFetchPortefoljeData} from "../hooks/portefolje/use-fetch-portefolje-data";
 import {useOnMount} from "../hooks/use-on-mount";
-import {getSeAlleFromUrl, getSideFromUrl, updateLastPath} from "../utils/url-utils";
+import { getSeAlleFromUrl, getSideFromUrl } from "../utils/url-utils";
 import {loggSkjermMetrikker, Side} from "../utils/metrikker/skjerm-metrikker";
 import {AppState} from "../reducer";
-import {useOnUnmount} from "../hooks/use-on-unmount";
 import {pagineringSetup} from "../ducks/paginering";
 import {useSetEnhetIUrl} from "../hooks/portefolje/use-set-enhet-i-url";
+import {useSetLocalStorageOnUnmount} from "../hooks/portefolje/use-set-local-storage-on-unmount";
 
 
 function VeiledereSide (){
@@ -37,9 +37,8 @@ function VeiledereSide (){
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
     });
 
-    useOnUnmount(()=> {
-        updateLastPath();
-    });
+    useSetLocalStorageOnUnmount();
+
 
     return (
         <DocumentTitle title="Veilederoversikt">

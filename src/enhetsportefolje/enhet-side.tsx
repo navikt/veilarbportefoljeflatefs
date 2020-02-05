@@ -22,8 +22,8 @@ import Toolbar from "../components/toolbar/toolbar";
 import {slettEnkeltFilter} from "../ducks/filtrering";
 import {hentPortefoljeForEnhet} from "../ducks/portefolje";
 import {useFetchPortefoljeData} from "../hooks/portefolje/use-fetch-portefolje-data";
-import {useOnUnmount} from "../hooks/use-on-unmount";
-import {updateLastPath} from "../utils/url-utils";
+import {useSyncStateMedUrl} from "../hooks/portefolje/use-sync-state-med-url";
+import {useSetLocalStorageOnUnmount} from "../hooks/portefolje/use-set-local-storage-on-unmount";
 
 
 function EnhetSide () {
@@ -33,10 +33,10 @@ function EnhetSide () {
     const dispatch = useDispatch();
 
     useSetStateFromUrl();
+    useSyncStateMedUrl();
+
     useFetchPortefolje(ListevisningType.enhetensOversikt);
-    useOnUnmount(()=> {
-        updateLastPath();
-    });
+    useSetLocalStorageOnUnmount();
 
     const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
 

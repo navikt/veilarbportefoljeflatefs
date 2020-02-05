@@ -1,21 +1,6 @@
 import * as queryString from 'query-string';
-import history, { basename } from '../history';
+import  { basename } from '../history';
 import { IKKE_SATT } from '../konstanter';
-
-export function slettCleanIUrl() {
-    const parsed = queryString.parse(window.location.search); // eslint-disable-line no-undef
-
-    // Objektet returnert fra `queryString.parse` er ikke et ekte objekt. Så derfor denne omstendlige sjekken
-    if (!Object.keys(parsed).includes('clean')) {
-        return;
-    }
-
-    delete parsed.clean;
-
-    const stringified = queryString.stringify(parsed);
-    window.location.pathname.replace(basename, '');
-    history.replace(`${window.location.pathname}?${stringified}`);
-}
 
 
 export function getFraBrukerFraUrl() {
@@ -34,9 +19,6 @@ export function setFraBrukerIUrl(bruker: string) {
     } else if(lastSearch && !fnrRegex.test(lastSearch)) {
         localStorage.setItem('lastsearch', lastSearch.concat(`&fraBruker=${bruker}`));
     }
-
-    const stringified = queryString.stringify(parsed);
-    history.replace(`${ window.location.pathname}?${stringified}`);
 }
 
 export function getEnhetFromUrl() {
