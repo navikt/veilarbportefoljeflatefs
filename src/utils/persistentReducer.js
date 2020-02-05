@@ -22,11 +22,10 @@ function erFiltreringEndret(scope, initialState) {
         keysFromStorage.every((key) => keysFromInitialState.includes(key)));
 }
 
-export default (scope, location, reducer, onClean = () => {}, initialFilterstate) => (state, action) => {
+export default (scope, location, reducer, initialFilterstate) => (state, action) => {
     let nState = state;
     if (location.search.includes('clean') || erFiltreringEndret(scope, initialFilterstate)) {
         write(scope, undefined);
-        onClean();
     }
     if (state === undefined) {
         nState = read(scope);

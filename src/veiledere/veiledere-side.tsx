@@ -13,34 +13,32 @@ import './veiledere.less';
 import ToppMeny from "../topp-meny/topp-meny";
 import {useFetchPortefoljeData} from "../hooks/portefolje/use-fetch-portefolje-data";
 import {useOnMount} from "../hooks/use-on-mount";
-import {getSeAlleFromUrl, getSideFromUrl, leggEnhetIUrl, updateLastPath} from "../utils/url-utils";
+import { getSeAlleFromUrl, getSideFromUrl } from "../utils/url-utils";
 import {loggSkjermMetrikker, Side} from "../utils/metrikker/skjerm-metrikker";
-import {useEnhetSelector} from "../hooks/redux/use-enhet-selector";
 import {AppState} from "../reducer";
-import {useOnUnmount} from "../hooks/use-on-unmount";
 import {pagineringSetup} from "../ducks/paginering";
+import {useSetEnhetIUrl} from "../hooks/portefolje/use-set-enhet-i-url";
+import {useSetLocalStorageOnUnmount} from "../hooks/portefolje/use-set-local-storage-on-unmount";
 
 
 function VeiledereSide (){
     const {statustall, portefoljestorrelser, veiledere} = useFetchPortefoljeData();
-    const enhetId = useEnhetSelector();
     const filtervalg = useSelector((state: AppState)=> state.filtreringVeilederoversikt);
 
     const dispatch = useDispatch();
     const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
 
+    useSetEnhetIUrl();
 
     useOnMount(() => {
         const side = getSideFromUrl();
         const seAlle = getSeAlleFromUrl();
         dispatch(pagineringSetup({side, seAlle}));
-        leggEnhetIUrl(enhetId);
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
     });
 
-    useOnUnmount(()=> {
-        updateLastPath();
-    });
+    useSetLocalStorageOnUnmount();
+
 
     return (
         <DocumentTitle title="Veilederoversikt">

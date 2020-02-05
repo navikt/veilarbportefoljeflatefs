@@ -3,7 +3,6 @@ import { Action, Dispatch } from 'redux';
 import { AppState } from '../reducer';
 import {OrNothing} from "../utils/types/types";
 import {pagineringSetup} from "./paginering";
-import {leggEnhetIUrl, leggSeAlleIUrl, leggSideIUrl} from "../utils/url-utils";
 
 // Actions
 const PENDING = 'veilarbportefolje/enheter/PENDING';
@@ -40,7 +39,6 @@ export default function reducer(state: ValgtEnhetState = initialState, action): 
 
 
 export function velgEnhetForVeileder(valgtEnhet) {
-    leggEnhetIUrl(valgtEnhet);
     return {
         type: OK,
         valgtEnhet: valgtEnhet
@@ -55,9 +53,6 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
         if(valgtEnhet && valgtEnhet.enhetId === nyEnhet ) {
             return;
         }
-
-        leggSideIUrl(1);
-        leggSeAlleIUrl(false);
         dispatch(velgEnhetForVeileder(nyEnhet));
         dispatch(pagineringSetup({side: 1, seAlle: false}));
     };
