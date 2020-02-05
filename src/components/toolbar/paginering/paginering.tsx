@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { HoyreChevron, VenstreChevron } from 'nav-frontend-chevron';
 import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
-import { leggSeAlleIUrl, leggSideIUrl } from '../../../utils/url-utils';
 import { pagineringSetup } from '../../../ducks/paginering';
 import { selectSeAlle, selectSide, selectSideStorrelse } from './paginering-selector';
 import './paginering.less';
@@ -43,7 +42,6 @@ function Paginering(props: PagineringProps) {
 
     const totalPagenering = (sideNumber: number, seAlleBool: boolean): void => {
         endrePaginering(sideNumber, seAlleBool);
-        leggSideIUrl(sideNumber);
         if (onChange) {
             onChange();
         }
@@ -54,10 +52,7 @@ function Paginering(props: PagineringProps) {
             <KnappPanel
                 disabled={!seAlle && antallTotalt <= sideStorrelse}
                 pressed={seAlle && antallTotalt <= sideStorrelse}
-                onClick={() => {
-                    leggSeAlleIUrl(!seAlle);
-                    totalPagenering(1, !seAlle);
-                }}
+                onClick={() => totalPagenering(1, !seAlle)}
             >
                 {!seAlle ? 'Se alle' :
                     'Se færre'

@@ -4,7 +4,6 @@ import { pagineringSetup } from './paginering';
 import { TILDELING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
 import { visServerfeilModal } from './modal-serverfeil';
 import { hentStatusTall } from './statustall';
-import {leggSideIUrl, leggSorteringIUrl} from '../utils/url-utils';
 import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
 import {
     selectFraIndex,
@@ -205,12 +204,6 @@ export default function reducer(state = initialState, action): PortefoljeState {
     }
 }
 
-// Action Creators
-export function oppdaterPortefolje(getState, dispatch) {
-    leggSideIUrl(1);
-    dispatch(pagineringSetup({side: 1}));
-}
-
 function hentPortefolje(hentPorefoljeFn: (...args: any[]) => void, ...args: any[]) {
     const fn = (dispatch, getState) => {
         const state = getState();
@@ -238,7 +231,6 @@ export function hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sortering
 }
 
 export function settSortering(rekkefolge, felt) {
-    leggSorteringIUrl(felt, rekkefolge);
     return (dispatch) => dispatch({
         type: SETT_SORTERING,
         sorteringsrekkefolge: rekkefolge,
@@ -302,7 +294,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                     const enhet = getState().valgtEnhet.data.enhetId;
                     const rekkefolge = getState().portefolje.sorteringsrekkefolge;
                     const sorteringsfelt = getState().portefolje.sorteringsfelt;
-                    oppdaterPortefolje(getState, dispatch);
+                    dispatch(pagineringSetup({side: 1}));
                     if(filtergruppe === 'minOversikt'){
                         const filtervalg = getState().filtreringMinoversikt;
                         dispatch(hentPortefoljeForVeileder(enhet, veilederIdent, rekkefolge, sorteringsfelt, filtervalg))

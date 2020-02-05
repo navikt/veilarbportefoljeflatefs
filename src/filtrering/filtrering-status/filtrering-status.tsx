@@ -13,7 +13,6 @@ import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avt
 import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
 import { FiltervalgModell } from '../../model-interfaces';
 import './filtrering-status.less';
-import {leggSideIUrl} from "../../utils/url-utils";
 import {pagineringSetup} from "../../ducks/paginering";
 
 interface FiltreringStatusProps {
@@ -26,7 +25,6 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
     const dispatch = useDispatch();
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
-        leggSideIUrl(1);
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(
             'ferdigfilterListe', ferdigFilterListe, props.filtergruppe));
