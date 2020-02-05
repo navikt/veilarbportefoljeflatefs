@@ -280,6 +280,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                     })(dispatch);
                 } else {
                     dispatch(visTilordningOkModal(tilordninger.map(tillordning => ({brukerFnr: tillordning.brukerFnr}))));
+                    dispatch(pagineringSetup({side: 1}));
                 }
                 if (filtergruppe === 'minOversikt') {
                     dispatch({
@@ -294,7 +295,6 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                     const enhet = getState().valgtEnhet.data.enhetId;
                     const rekkefolge = getState().portefolje.sorteringsrekkefolge;
                     const sorteringsfelt = getState().portefolje.sorteringsfelt;
-                    dispatch(pagineringSetup({side: 1}));
                     if(filtergruppe === 'minOversikt'){
                         const filtervalg = getState().filtreringMinoversikt;
                         dispatch(hentPortefoljeForVeileder(enhet, veilederIdent, rekkefolge, sorteringsfelt, filtervalg))
