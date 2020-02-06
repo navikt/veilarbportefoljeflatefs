@@ -34,6 +34,7 @@ import { STATUS } from '../ducks/utils';
 import EnhetTabellOverskrift from './enhetsportefolje-tabelloverskrift';
 import './enhetsportefolje.less';
 import './brukerliste.less';
+import VelgFilterMelding from "./velg-filter-melding";
 
 interface StateProps {
     valgtEnhet: ValgtEnhetModell;
@@ -56,6 +57,29 @@ interface DispatchProps {
     slettVeilederFilter: (ident: string) => void;
     doSettSortering: (sorteringsrekkefolge: string, felt: string) => void;
     hentPortefolje: (enhetid: string | undefined, sorteringsrekkefolge: string, sorteringsfelt: string, filtervalg: FiltervalgModell) => any;
+}
+
+function antallFilter(filtervalg) {
+    function mapAktivitetFilter(value) {
+        return Object.entries(value).map(([_, verdi]) => {
+            if (verdi === 'NA') return 0;
+            return 1;
+        }).reduce((a: number, b: number) => a + b, 0);
+    }
+    return Object.entries(filtervalg)
+        .map(([filter, value]) => {
+            if (value === true) {
+                return 1;
+            } else if (Array.isArray(value)) {
+                return value.length;
+            } else if (filter === 'aktiviteter') {
+                return mapAktivitetFilter(value);
+            } else if (typeof value === 'object') {
+                return value ? Object.entries(value).length : 0;
+            } else if (value) return 1;
+            return 0;
+        }).reduce((a, b) => a + b, 0);
+
 }
 
 type EnhetSideProps = StateProps & DispatchProps;
@@ -146,6 +170,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
         const antallBrukere = antallReturnert > antallTotalt ? antallTotalt : antallReturnert;
         const stickyWrapper = antallBrukere >= 5 ? 'col-lg-9 col-md-12 col-sm-12' : 'sticky-div col-lg-9 col-md-12 col-sm-12';
         const stickyContainer = antallBrukere >= 5 ? 'sticky-container' : 'sticky-container__fjernet';
+        const harFilter = antallFilter(filtervalg) !== 0;
 
         return (
             <DocumentTitle title="Enhetens oversikt">
@@ -163,7 +188,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                             filtergruppe="enhet"
                                         />
                                     </div>
-                                    <div className={stickyWrapper}>
+                                    {harFilter ? <div className={stickyWrapper}>
                                         <FiltreringLabelContainer
                                             filtervalg={{
                                                 ...filtervalg,
@@ -208,7 +233,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                             </div>
                                         </Innholdslaster>
                                         <ModalEnhetSideController/>
-                                    </div>
+                                    </div> : <VelgFilterMelding/> }
                                 </div>
                             </div>
                         </section>
