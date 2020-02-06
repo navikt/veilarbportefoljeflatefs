@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import {useQueryParams} from "../use-query-params";
 import {velgEnhetForVeileder} from "../../ducks/valgt-enhet";
 import {useDispatch} from "react-redux";
+import {useOnMount} from "../use-on-mount";
 
 
-interface Enheter {
+export interface Enheter {
     ident: string;
     enhetliste: {enhetId: string, navn: string}[]
 }
@@ -17,7 +18,7 @@ export function useFetchEnheter() {
 
     const enhetId = useQueryParams().enhet;
 
-    useEffect(() => {
+    useOnMount(() => {
         fetch("/veilarbveileder/api/veileder/enheter")
             .then(resp => resp.json())
             .then((resp: Enheter) => {
@@ -34,7 +35,7 @@ export function useFetchEnheter() {
                 setLoading(false)
             })
             .catch(_ => setLoading(false));
-    },[dispatch, enhetId]);
+    });
 
     return {isLoading, manglerEnheter}
 }
