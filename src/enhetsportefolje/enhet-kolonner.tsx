@@ -4,7 +4,7 @@ import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     I_AVTALT_AKTIVITET,
-    MOTER_IDAG,
+    MOTER_IDAG, UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -23,11 +23,13 @@ import {
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
+import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import {OrNothing} from "../utils/types/types";
 import './enhetsportefolje.less';
 import './brukerliste.less';
+import {VedtakStatusKolonne} from "../components/tabell/vedtakstatus";
+import {DagerSidenKolonne} from "../components/tabell/kolonner/dagersidenkolonne";
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -45,6 +47,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
+    const vedtakStatusEndret = bruker.vedtakStatusEndret ? new Date(bruker.vedtakStatusEndret) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
@@ -151,6 +154,16 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 dato={varighet}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
+            <VedtakStatusKolonne
+                bruker={bruker}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+            />
+            <DagerSidenKolonne
+                className="col col-xs-2"
+                dato={dagerSiden(vedtakStatusEndret)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
+            />
+
         </div>
     );
 }

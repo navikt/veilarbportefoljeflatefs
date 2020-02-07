@@ -11,7 +11,7 @@ import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
-    MOTER_IDAG,
+    MOTER_IDAG, UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -23,10 +23,12 @@ import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
+import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import {OrNothing} from "../utils/types/types";
 import './minoversikt.less';
+import {VedtakStatusKolonne} from "../components/tabell/vedtakstatus";
+import {DagerSidenKolonne} from "../components/tabell/kolonner/dagersidenkolonne";
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -56,6 +58,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const iAvtaltAktivitet = (!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET));
     const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : !!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const vedtakStatusEndret = bruker.vedtakStatusEndret ? new Date(bruker.vedtakStatusEndret) : null;
 
     return (
         <div className={className}>
@@ -169,6 +172,15 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                 valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
+            />
+            <VedtakStatusKolonne
+                bruker={bruker}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+            />
+            <DagerSidenKolonne
+                className="col col-xs-2"
+                dato={dagerSiden(vedtakStatusEndret)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
             />
         </div>
     );

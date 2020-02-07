@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import { fjernFerdigfilter, leggTilFerdigFilter } from './filter-utils';
 import { FiltreringStatusContainer } from './filtrering-status-components/filtrering-wrapper';
-import { FiltreringStatusTrengerVurderingEllerSykmeldt } from './filtrering-status-components/trenger-vurdering-sykemeldt';
+import { FiltreringStatusBehovsVurdering } from './filtrering-status-components/behov-og-arbeidsevnevurdering';
 import { FiltreringStatusAktiviteter } from './filtrering-status-components/aktiviteter';
 import { FiltreringStatusDialog } from './filtrering-status-components/dialog-gruppe';
 import { FiltreringStatusInavtiveBrukere } from './filtrering-status-components/inaktivebrukere';
@@ -55,7 +55,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 ferdigfilterListe={ferdigfilterListe}
                 hidden={props.filtergruppe === 'veileder'}
             />
-            <FiltreringStatusTrengerVurderingEllerSykmeldt
+            <FiltreringStatusBehovsVurdering
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
             />

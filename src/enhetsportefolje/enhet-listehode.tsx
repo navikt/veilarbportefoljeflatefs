@@ -4,6 +4,7 @@ import TittelValg, { ytelseFilterErAktiv } from '../utils/utils';
 import {
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
+    UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -196,6 +197,26 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                 >
                     Varighet møte
                 </Header>
+                <SorteringHeader
+                    sortering={Sorteringsfelt.VEDTAKSTATUS}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS}
+                    skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+                    tekst="Status oppfølgingsvedtak"
+                    className="sortering-header__dato col col-xs-2"
+                    title="Status oppfølgingvedtak"
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.VEDTAKSTATUS_ENDRET}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS_ENDRET}
+                    tekst="Dager siden status"
+                    skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
+                    className="sortering-header__dato col col-xs-2"
+                    title="Dager siden status"
+                />
             </div>
             <div className="brukerliste__gutter-right"/>
         </div>
