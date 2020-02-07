@@ -164,6 +164,10 @@ export function minuttDifferanse(klokkeslett2, klokkeslett1) {
     return moment.duration(moment(klokkeslett2).diff(klokkeslett1)).asMinutes()
 }
 
+export function dagerSiden(dato) {
+    return Math.floor(moment.duration(moment().startOf('day').diff(dato)).asDays());
+}
+
 export function validerDatoField(input, intl, alternativer, valgfritt) {
     const {fra} = alternativer;
     const inputDato = moment(input);

@@ -211,10 +211,10 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS_ENDRET}
-                    tekst="Sist redigert"
+                    tekst="Dager siden status"
                     skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
                     className="sortering-header__dato col col-xs-2"
-                    title='Sist redigert'
+                    title="Dager siden status"
                 />
             </div>
             <div className="brukerliste__gutter-right"/>

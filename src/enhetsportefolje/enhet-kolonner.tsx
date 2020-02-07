@@ -23,12 +23,13 @@ import {
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
+import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import {OrNothing} from "../utils/types/types";
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import {VedtakStatusKolonne} from "../components/tabell/vedtakstatus";
+import {DagerSidenKolonne} from "../components/tabell/kolonner/dagersidenkolonne";
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -157,9 +158,9 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 bruker={bruker}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
             />
-            <DatoKolonne
+            <DagerSidenKolonne
                 className="col col-xs-2"
-                dato={vedtakStatusEndret}
+                dato={dagerSiden(vedtakStatusEndret)}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
             />
 
