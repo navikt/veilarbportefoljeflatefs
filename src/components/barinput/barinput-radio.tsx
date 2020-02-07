@@ -5,6 +5,7 @@ import {
     mapFilternavnTilFilterValue
 } from '../../filtrering/filter-konstanter';
 import "./barlabel.less";
+import hiddenIf from "../hidden-if/hidden-if";
 
 interface BarinputRadioProps {
     filterNavn: string;
@@ -34,3 +35,6 @@ export function BarInputRadio({filterNavn, max, handleChange, checked, antall}: 
         />
     );
 }
+
+
+export const HiddenIfBarInputRadio = hiddenIf(BarInputRadio);

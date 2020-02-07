@@ -9,7 +9,7 @@ import {
     VENTER_PA_SVAR_FRA_NAV,
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
-    AAP_YTELSE_UNNTAK
+    AAP_YTELSE_UNNTAK, UNDER_VURDERING
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from "../../model-interfaces";
 
@@ -67,6 +67,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, name: Listevisni
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
         .concat(addHvis(Kolonne.AVTALT_AKTIVITET, filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
         .concat(addHvis(Kolonne.VENTER_SVAR, filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) || filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)))
+        .concat(addHvis(Kolonne.VEDTAKSTATUS, filtervalg.ferdigfilterListe.includes(UNDER_VURDERING)))
+        .concat(addHvis(Kolonne.VEDTAKSTATUS_ENDRET, filtervalg.ferdigfilterListe.includes(UNDER_VURDERING)))
         .concat(addHvis(Kolonne.UTLOP_YTELSE, filtervalg.ytelse !== null && filtervalg.ytelse !== AAP_YTELSE && filtervalg.ytelse !== AAP_YTELSE_MAXTID && filtervalg.ytelse !== AAP_YTELSE_UNNTAK))
         .concat(addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_MAXTID || filtervalg.ytelse === AAP_YTELSE_UNNTAK))
         .concat(addHvis(Kolonne.RETTIGHETSPERIODE, filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_MAXTID || filtervalg.ytelse === AAP_YTELSE_UNNTAK))

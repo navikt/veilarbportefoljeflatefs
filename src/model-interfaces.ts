@@ -30,6 +30,8 @@ export enum Sorteringsfelt {
     NAVIDENT = 'veileder_id',
     VEILEDER = 'veileder_navn',
     MOTER_IDAG = 'moterMedNAVIdag',
+    VEDTAKSTATUS = 'vedtakstatus',
+    VEDTAKSTATUS_ENDRET = 'vedtak_status_endret',
 }
 
 export enum EtikettType {
@@ -133,6 +135,9 @@ export interface BrukerModell {
     erSykmeldtMedArbeidsgiver: boolean;
     moteStartTid: string;
     moteSluttTid: string;
+    vedtakStatus?: string,
+    vedtakStatusEndret?: string,
+
 }
 
 // TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen?

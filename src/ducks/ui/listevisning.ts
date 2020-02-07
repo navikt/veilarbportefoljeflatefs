@@ -32,6 +32,8 @@ export enum Kolonne {
     MOTER_VARIGHET = 'moter_varighet',
     ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
     ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
+    VEDTAKSTATUS_ENDRET = 'vedtakstatus_endret',
+    VEDTAKSTATUS = 'vedtakstatus'
 }
 
 export enum ListevisningType {

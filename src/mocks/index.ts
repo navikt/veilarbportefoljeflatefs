@@ -42,7 +42,6 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
                 bruker.fodselsdato = null;
                 bruker.diskresjonskode = Math.random() < 0.5 ? '6' : '7';
                 bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
-
             }
             return bruker;
         });

@@ -22,6 +22,7 @@ export interface Statustall {
     moterMedNAVIdag: number;
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
+    underVurdering: number;
 }
 
 export interface StatustallState {
@@ -45,6 +46,7 @@ export const initalStatusState: StatustallState = {
         nyeBrukereForVeileder: 0,
         moterMedNAVIdag: 0,
         trengerVurdering: 0,
+        underVurdering: 0,
     }
 };
 
