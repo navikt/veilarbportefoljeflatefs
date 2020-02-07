@@ -3,7 +3,8 @@ import SorteringHeader from '../components/tabell/sortering-header';
 import TittelValg, { ytelseFilterErAktiv } from '../utils/utils';
 import {
     I_AVTALT_AKTIVITET,
-    MOTER_IDAG, UNDER_VURDERING,
+    MOTER_IDAG,
+    UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
