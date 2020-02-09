@@ -43,7 +43,8 @@ export enum EtikettType {
     DOED = 'doed',
     IKKE_VURDERT = 'ikke_vurdert',
     BEHOV_AEV = 'behov_aev',
-    ER_SYKMELDT_MED_ARBEIDSGIVER = 'er_sykmeldt_med_arbeidsgiver'
+    ER_SYKMELDT_MED_ARBEIDSGIVER = 'er_sykmeldt_med_arbeidsgiver',
+    TRENGER_REVURDERING = 'revurdering'
 }
 
 export interface FiltervalgModell {
@@ -137,6 +138,7 @@ export interface BrukerModell {
     moteSluttTid: string;
     vedtakStatus?: string,
     vedtakStatusEndret?: string,
+    trengerRevurdering: boolean,
 
 }
 

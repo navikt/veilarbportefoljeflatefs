@@ -52,6 +52,12 @@ function Etiketter({className, bruker}: EtiketterProps) {
             >
                 Sykmeldt
             </Etikett>
+            <Etikett
+                type={EtikettType.TRENGER_REVURDERING}
+                skalVises={bruker.trengerRevurdering}
+            >
+                Revurdering
+            </Etikett>
         </span>
     );
 }
