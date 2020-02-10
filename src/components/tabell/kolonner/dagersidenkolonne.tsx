@@ -7,7 +7,7 @@ export function DagerSidenKolonne(props : {skalVises: boolean, dato: number, cla
 
     const datoTekst = () => {
         if(props.dato === 0) {
-            return "Idag";
+            return "I dag";
         } else if(props.dato === 1) {
             return "1 dag siden"
         } else {
