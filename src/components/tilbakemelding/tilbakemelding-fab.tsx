@@ -22,7 +22,7 @@ interface TilbakemeldingFabState {
 class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabState> {
 
     private readonly TILBAKEMELDING_PREFIX = 'har_sendt_tilbakemelding';
-    private readonly TILBAKEMELDING_FEATURE_TAG = 'veiledergrupper'; // NB: Husk å endre for hver nye feature
+    private readonly TILBAKEMELDING_FEATURE_TAG = 'dialog_tilfredshet'; // NB: Husk å endre for hver nye feature
 
     private wrapperRef;
 
