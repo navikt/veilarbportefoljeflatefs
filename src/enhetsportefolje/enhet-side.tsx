@@ -188,7 +188,7 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                             filtergruppe="enhet"
                                         />
                                     </div>
-                                    {harFilter ? <div className={stickyWrapper}>
+                                    <div className={stickyWrapper}>
                                         <FiltreringLabelContainer
                                             filtervalg={{
                                                 ...filtervalg,
@@ -199,41 +199,46 @@ class EnhetSide extends React.Component<EnhetSideProps> {
                                             listevisning={listevisning}
                                             className="filtrering-label-container"
                                         />
-                                        <div className={stickyContainer}>
-                                            <TabellOverskrift
-                                                fraIndex={fraIndex}
-                                                antallIVisning={antallReturnert}
-                                                antallValgt={antallValgt}
-                                                antallTotalt={antallTotalt}
-                                                className="tabelloverskrift blokk-xxs"
-                                            />
-                                            <div className="sticky-container__skygge">
-                                                <Toolbar
-                                                    filtergruppe={ListevisningType.enhetensOversikt}
-                                                    onPaginering={() => hentPortefolje(
-                                                        valgtEnhet.enhet!.enhetId,
-                                                        sorteringsrekkefolge,
-                                                        sorteringsfelt,
-                                                        filtervalg
-                                                    )}
-                                                    sokVeilederSkalVises
-                                                    antallTotalt={antallTotalt}
-                                                />
-                                                <EnhetTabellOverskrift
-                                                    settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
-                                                />
-                                            </div>
-                                        </div>
-                                        <Innholdslaster
-                                            avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
-                                            <div className="portefolje__container">
-                                                <EnhetTabell
-                                                    veiledere={veiledere.data.veilederListe}
-                                                />
-                                            </div>
-                                        </Innholdslaster>
+                                        { harFilter
+                                            ? <>
+                                                <div className={stickyContainer}>
+                                                    <TabellOverskrift
+                                                        fraIndex={fraIndex}
+                                                        antallIVisning={antallReturnert}
+                                                        antallValgt={antallValgt}
+                                                        antallTotalt={antallTotalt}
+                                                        className="tabelloverskrift blokk-xxs"
+                                                    />
+                                                    <div className="sticky-container__skygge">
+                                                        <Toolbar
+                                                            filtergruppe={ListevisningType.enhetensOversikt}
+                                                            onPaginering={() => hentPortefolje(
+                                                                valgtEnhet.enhet!.enhetId,
+                                                                sorteringsrekkefolge,
+                                                                sorteringsfelt,
+                                                                filtervalg
+                                                            )}
+                                                            sokVeilederSkalVises
+                                                            antallTotalt={antallTotalt}
+                                                        />
+                                                        <EnhetTabellOverskrift
+                                                            settSorteringOgHentPortefolje={this.settSorteringOgHentPortefolje}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <Innholdslaster
+                                                    avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
+                                                    <div className="portefolje__container">
+                                                        <EnhetTabell
+                                                            veiledere={veiledere.data.veilederListe}
+                                                        />
+                                                    </div>
+                                                </Innholdslaster>
+                                            </>
+                                            : <VelgFilterMelding/>
+                                        }
                                         <ModalEnhetSideController/>
-                                    </div> : <VelgFilterMelding/> }
+                                    </div>
                                 </div>
                             </div>
                         </section>
