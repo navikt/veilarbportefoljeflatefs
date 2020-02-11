@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export function DagerSidenKolonne(props : {skalVises: boolean, dato: number | null , className: string}) {
-    if (!props.skalVises || !props.dato) {
+    if (!props.skalVises || props.dato === null) {
         return null;
     }
 
