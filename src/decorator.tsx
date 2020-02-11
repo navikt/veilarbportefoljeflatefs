@@ -25,7 +25,8 @@ function getConfig (
             visVeilder: true
         },
         contextholder: {
-            url: '/modiacontextholder/api/context/aktivenhet'
+            url: '/modiacontextholder/api/context/aktivenhet',
+            promptBeforeEnhetChange: true
         },
         onSok: (fnr) => {
             window.location.pathname = `veilarbpersonflatefs/${fnr}`
