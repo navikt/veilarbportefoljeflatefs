@@ -165,7 +165,11 @@ export function minuttDifferanse(klokkeslett2, klokkeslett1) {
 }
 
 export function dagerSiden(dato) {
-    return Math.floor(moment.duration(moment().diff(dato)).asDays());
+    if(!dato) {
+        return null ;
+    }
+    const hentDato = moment(dato, "YYYY-MM-DD");
+    return moment().diff((hentDato), 'days');
 }
 
 export function validerDatoField(input, intl, alternativer, valgfritt) {

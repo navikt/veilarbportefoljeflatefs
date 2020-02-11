@@ -58,7 +58,6 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const iAvtaltAktivitet = (!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET));
     const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : !!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
-    const vedtakStatusEndret = bruker.vedtakStatusEndret ? new Date(bruker.vedtakStatusEndret) : null;
 
     return (
         <div className={className}>
@@ -179,7 +178,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             />
             <DagerSidenKolonne
                 className="col col-xs-2"
-                dato={dagerSiden(vedtakStatusEndret)}
+                dato={dagerSiden(bruker.vedtakStatusEndret)}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
             />
         </div>
