@@ -18,6 +18,9 @@ function getConfig (
         appname: 'Arbeidsrettet oppfølging',
         fnr: null,
         enhet,
+        urler: {
+            saksbehandler:  '/veilarbveileder/api/veileder/v2/me'
+        },
         toggles: {
             visEnhet: false,
             visEnhetVelger: true,

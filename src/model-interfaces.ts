@@ -86,6 +86,7 @@ export interface VeilederModell {
     navn: string;
     fornavn: string;
     etternavn: string;
+    enheter: EnhetModell[]
 }
 
 export enum VurderingsBehov {

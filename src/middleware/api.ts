@@ -49,7 +49,7 @@ export function hentEnhetsVeiledere(enhetId) {
 }
 
 export function hentAktivBruker(): Promise<VeilederModell> {
-    return fetchToJson(`/veilarbveileder/api/veileder/me`, MED_CREDENTIALS)
+    return fetchToJson(`/veilarbveileder/api/veileder/v2/me`, MED_CREDENTIALS)
 }
 
 
