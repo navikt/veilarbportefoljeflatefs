@@ -5,9 +5,10 @@ import { BrukerModell, EtikettType, VurderingsBehov } from '../../model-interfac
 interface EtiketterProps {
     className?: string;
     bruker: BrukerModell;
+    erVedtakStotteFeaturePa: boolean
 }
 
-function Etiketter({className, bruker}: EtiketterProps) {
+function Etiketter({className, bruker, erVedtakStotteFeaturePa}: EtiketterProps) {
     return (
         <span className={className}>
             <Etikett
@@ -36,13 +37,13 @@ function Etiketter({className, bruker}: EtiketterProps) {
             </Etikett>
             <Etikett
                 type={EtikettType.IKKE_VURDERT}
-                skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
+                skalVises={erVedtakStotteFeaturePa ? bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT :  bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
             >
                 Trenger vurdering
             </Etikett>
             <Etikett
                 type={EtikettType.BEHOV_AEV}
-                skalVises={bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
+                skalVises={erVedtakStotteFeaturePa ? bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING :  bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
             >
                 Behov for AEV
             </Etikett>

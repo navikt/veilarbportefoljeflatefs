@@ -14,6 +14,8 @@ import { useLayoutEffect, useRef } from 'react';
 import {OrNothing} from "../utils/types/types";
 import './minoversikt.less';
 import {Checkbox} from "nav-frontend-skjema";
+import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
+import {VEDTAKSTOTTE} from "../konstanter";
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -31,6 +33,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const liRef = useRef<HTMLLIElement>(null);
 
     const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+    const erVedtakStotteFeaturePa = useFeatureSelector()(VEDTAKSTOTTE);
 
     useLayoutEffect(() => {
         if (props.varForrigeBruker) {
@@ -74,7 +77,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                 />
                 <div className="brukerliste__gutter-right">
                     <div className="brukerliste__etiketter">
-                        <Etiketter bruker={bruker}/>
+                        <Etiketter bruker={bruker} erVedtakStotteFeaturePa={erVedtakStotteFeaturePa}/>
                         <Etikett
                             type={EtikettType.NYBRUKER}
                             skalVises={bruker.nyForVeileder}
