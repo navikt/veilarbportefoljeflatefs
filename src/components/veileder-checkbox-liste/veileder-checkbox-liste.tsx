@@ -43,6 +43,10 @@ function VeilederCheckboxListe(props: any) {
         setOpen(props.open);
     }, [props.open]);
 
+    useEffect(() => {
+        setValgteElementer(props.filtervalg.veiledere);
+    }, [props.filtervalg]);
+
     const erValgt = (value: string | undefined): boolean => {
         return !!value && !!valgteElementer.find((valgtElement) => value === valgtElement);
     };
