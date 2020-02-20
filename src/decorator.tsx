@@ -18,16 +18,12 @@ function getConfig (
         appname: 'Arbeidsrettet oppfølging',
         fnr: null,
         enhet,
-        urler: {
-            saksbehandler:  '/veilarbveileder/api/veileder/v2/me'
-        },
         toggles: {
             visEnhet: false,
             visEnhetVelger: true,
             visSokefelt: true,
             visVeilder: true
         },
-        contextholder: true,
         onSok: (fnr) => {
             window.location.pathname = `veilarbpersonflatefs/${fnr}`
         },
@@ -37,33 +33,15 @@ function getConfig (
     }
 }
 
-function useNullStillContextholder() {
-    const [klar, setKlar] = useState(false);
-    useOnMount(() => {
-            // Manuell nullstilling av bruker i context
-            fetch('/modiacontextholder/api/context/aktivbruker', {
-                method: 'DELETE',
-                credentials: 'include'
-            }).then(() => setKlar(true));
-        });
-
-    return klar;
-}
-
 export function Decorator() {
     const dispatch = useDispatch();
     const enhetId = useEnhetSelector();
-    const klar = useNullStillContextholder();
 
     function velgEnhet(enhet: string) {
         dispatch(oppdaterValgtEnhet(enhet));
     }
 
     const config = useCallback(getConfig, [enhetId, velgEnhet])(enhetId, velgEnhet);
-
-    if(!klar) {
-        return null;
-    }
 
     return (
         <InternflateDecorator {...config}/>
