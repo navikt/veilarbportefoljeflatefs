@@ -6,7 +6,7 @@ import { AktiviteterValg } from '../ducks/filtrering';
 import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
-    MOTER_IDAG,
+    MOTER_IDAG, UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -71,6 +71,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.ETTERNAVN}
                     tekst="Etternavn"
+                    title='Etternavn'
                 />
                 <SorteringHeader
                     className="col col-xs-2"
@@ -78,7 +79,8 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
-                    tekst="Fødselsnummer"
+                    tekst="Fødselsnr."
+                    title='Fødselsnummer'
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
@@ -197,6 +199,26 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                 >
                     Varighet møte
                 </Header>
+                <SorteringHeader
+                    sortering={Sorteringsfelt.VEDTAKSTATUS}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS}
+                    skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+                    tekst="Status oppfølgingsvedtak"
+                    className="sortering-header__dato col col-xs-2"
+                    title="Status oppfølgingvedtak"
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.VEDTAKSTATUS_ENDRET}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS_ENDRET}
+                    tekst="Dager siden status"
+                    skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
+                    className="sortering-header__dato col col-xs-2"
+                    title="Dager siden status"
+                />
                 <SorteringHeader
                     sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
                     onClick={sorteringOnClick}

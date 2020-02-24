@@ -1,4 +1,4 @@
-import enheter from './enheter';
+import inloggetVeileder from './inloggetVeileder';
 import me from './me';
 import brukere from './portefolje';
 import veiledere from './veiledere';
@@ -18,7 +18,7 @@ import FetchMock, {
 import { LagretFilter } from '../ducks/lagret-filter';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
-    const enhetportefolje = lagPortefolje(queryParams, enheter.enhetliste[0].enhetId, alleBrukere);
+    const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
     enhetportefolje.brukere.forEach((bruker) => bruker.veilederId = me.ident);
     return enhetportefolje;
 }
@@ -42,7 +42,6 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
                 bruker.fodselsdato = null;
                 bruker.diskresjonskode = Math.random() < 0.5 ? '6' : '7';
                 bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
-
             }
             return bruker;
         });
@@ -110,23 +109,10 @@ mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (args: Handler
 });
 
 // veileder-api
-mock.get('/veilarbveileder/api/veileder/enheter', enheter);
-mock.get('/veilarbveileder/api/veileder/me', me);
+mock.get('/veilarbveileder/api/veileder/v2/me', inloggetVeileder);
 mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', veiledere);
 mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', true);
-mock.get('//veilarbveileder/api/veileder/enheter', {
-    ident: me.ident,
-    enhetliste: [
-        {
-            "enhetId":"1234",
-            "navn":"NAV Testheim"
-        },
-        {
-            "enhetId":"0001",
-            "navn":"NAV Testdalen"
-        }
-    ]
-});
+
 
 // portefolje-api
 mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', ResponseUtils.delayed(1000, statustall));
@@ -170,23 +156,6 @@ mock.post('/veilarbportefolje/api/arbeidsliste/delete', ({body}) => {
 });
 
 // modiacontextholder-api
-mock.get('/modiacontextholder/api/decorator', ResponseUtils.delayed(1000, {
-    "ident":"Z990281",
-    "navn":"F_Z990281 E_Z990281",
-    "fornavn":"F_Z990281",
-    "etternavn":"E_Z990281",
-    "enheter":[
-        {
-            "enhetId":"1234",
-            "navn":"NAV Testheim"
-        },
-        {
-            "enhetId":"0001",
-            "navn":"NAV Testdalen"
-        }
-    ]
-}));
-
 
 mock.get('/modiacontextholder/api/context/aktivenhet', ResponseUtils.delayed(1000, {
     "aktivBruker": null,

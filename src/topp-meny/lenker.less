@@ -1,14 +1,30 @@
 @import "~nav-frontend-core/less/core";
 
 .veilarbportefoljeflatefs {
+    .topp-meny {
+        display: flex;
+        align-items: normal;
+        margin-bottom: 1.5rem;
+    }
+
+    .lenke--frittstaende {
+        border: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+
+    .h2__lenke {
+        margin: 1rem 1rem 1rem 0;
+    }
+
     .oversiktslenke {
-        margin-right: 2rem;
         border-bottom: none;
         text-decoration: none;
         color: @navMorkGra;
-        padding: 0 1.5rem 1.0625rem;
+        padding: .5rem 1.5rem;
         font-weight: 100;
         opacity: .8;
+        margin-top: .2rem;
 
         &:visited, &:active {
             color: @navMorkGra;
@@ -23,7 +39,7 @@
         &:focus {
             box-shadow: 0 0 0 3px @fokusFarge;
             border-radius: 2px;
-            padding-top: 1rem;
+            padding: .5rem 1.5rem;
             outline: none;
         }
 
@@ -43,21 +59,4 @@
         }
     }
 
-    .topp-meny {
-        display: flex;
-        align-items: normal;
-        padding: 0.1rem 0;
-        margin-bottom: 1.5rem;
-    }
-
-    .lenke--frittstaende {
-        border: 0;
-        padding: 0;
-        text-decoration: none;
-    }
-
-    .h2__lenke {
-        display: inline;
-        margin-block-end: 0.8rem;
-    }
 }

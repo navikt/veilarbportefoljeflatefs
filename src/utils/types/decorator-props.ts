@@ -11,6 +11,7 @@ export interface DecoratorProps {
     contextholder?: true | Contextholder;   // Konfigurasjn av tilkobling til contextholder. true; use default. Om man sender inn objekt så kan man overstyre url og om enhet skal generere bekreftelsemodal. Om den ikke settes vil man ikke bruke contextholder.
     urler?: {
         aktoerregister?: string;            // Konfigurasjon av url til aktoerregisteret om man har behov for å sende via en proxy eller ligende. Default-verdien tar hensyn til miljø og kaller direkte mot app.adeo.no/aktoerregister
+        saksbehandler?: string;            // Konfigurasjon av url til aktoerregisteret om man har behov for å sende via en proxy eller ligende. Default-verdien tar hensyn til miljø og kaller direkte mot app.adeo.no/aktoerregister
     }
 }
 

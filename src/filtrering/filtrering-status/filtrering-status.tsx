@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import { fjernFerdigfilter, leggTilFerdigFilter } from './filter-utils';
 import { FiltreringStatusContainer } from './filtrering-status-components/filtrering-wrapper';
-import { FiltreringStatusTrengerVurderingEllerSykmeldt } from './filtrering-status-components/trenger-vurdering-sykemeldt';
+import { FiltreringStatusBehovsVurdering } from './filtrering-status-components/behov-og-arbeidsevnevurdering';
 import { FiltreringStatusAktiviteter } from './filtrering-status-components/aktiviteter';
 import { FiltreringStatusDialog } from './filtrering-status-components/dialog-gruppe';
 import { FiltreringStatusInavtiveBrukere } from './filtrering-status-components/inaktivebrukere';
@@ -13,6 +13,7 @@ import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avt
 import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
 import { FiltervalgModell } from '../../model-interfaces';
 import './filtrering-status.less';
+import {pagineringSetup} from "../../ducks/paginering";
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -24,6 +25,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
     const dispatch = useDispatch();
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
+        dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(
             'ferdigfilterListe', ferdigFilterListe, props.filtergruppe));
     }
@@ -53,7 +55,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 ferdigfilterListe={ferdigfilterListe}
                 hidden={props.filtergruppe === 'veileder'}
             />
-            <FiltreringStatusTrengerVurderingEllerSykmeldt
+            <FiltreringStatusBehovsVurdering
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
             />

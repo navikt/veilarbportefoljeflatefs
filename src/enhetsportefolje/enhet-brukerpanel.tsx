@@ -3,12 +3,14 @@ import classNames from 'classnames';
 import Etiketter from '../components/tabell/etiketter';
 import { FiltervalgModell, VeilederModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
-import CheckBox from '../components/tabell/checkbox';
 import EnhetKolonner from './enhet-kolonner';
 import { useLayoutEffect, useRef } from 'react';
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import {OrNothing} from "../utils/types/types";
+import {Checkbox} from "nav-frontend-skjema";
+import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
+import {VEDTAKSTOTTE} from "../konstanter";
 
 interface EnhetBrukerpanelProps {
     bruker: any;
@@ -23,6 +25,7 @@ interface EnhetBrukerpanelProps {
 function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, forrigeBruker}: EnhetBrukerpanelProps) {
     const liRef = useRef<HTMLLIElement>(null);
     const varForrigeBruker = bruker.fnr === forrigeBruker;
+    const erVedtakStotteFeaturePa = useFeatureSelector()(VEDTAKSTOTTE);
 
     const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
@@ -39,7 +42,13 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
     return (
         <li className={classname} ref={liRef}>
             <div className="brukerliste__gutter-left">
-                <CheckBox bruker={bruker} settMarkert={settMarkert}/>
+                <Checkbox
+                    checked={bruker.markert}
+                    disabled={bruker.fnr === ''}
+                    onChange={()=> settMarkert(bruker.fnr, !bruker.markert)}
+                    label=""
+                    className="brukerliste__checkbox"
+                />
             </div>
             <EnhetKolonner
                 className="brukerliste__innhold flex flex--center"
@@ -50,7 +59,7 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
                 brukersVeileder={brukersVeileder}
             />
             <div className="brukerliste__gutter-right">
-                <Etiketter bruker={bruker}/>
+                <Etiketter bruker={bruker} erVedtakStotteFeaturePa={erVedtakStotteFeaturePa}/>
             </div>
         </li>
     );

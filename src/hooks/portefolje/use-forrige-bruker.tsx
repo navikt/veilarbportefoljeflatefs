@@ -6,9 +6,7 @@ export function useForrigeBruker() {
 
     useEffect(() => {
         const forrigeBrukerFraUrl = getFraBrukerFraUrl();
-        if(forrigeBrukerFraUrl) {
-            setForrigeBruker(forrigeBrukerFraUrl);
-        }
+        setForrigeBruker(forrigeBrukerFraUrl);
     },[forrigeBruker]);
 
     return forrigeBruker;

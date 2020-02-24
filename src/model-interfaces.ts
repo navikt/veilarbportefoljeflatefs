@@ -30,6 +30,8 @@ export enum Sorteringsfelt {
     NAVIDENT = 'veileder_id',
     VEILEDER = 'veileder_navn',
     MOTER_IDAG = 'moterMedNAVIdag',
+    VEDTAKSTATUS = 'vedtakstatus',
+    VEDTAKSTATUS_ENDRET = 'vedtak_status_endret',
     ARBEIDSLISTEIKON = 'arbeidslisteikon'
 }
 
@@ -42,7 +44,8 @@ export enum EtikettType {
     DOED = 'doed',
     IKKE_VURDERT = 'ikke_vurdert',
     BEHOV_AEV = 'behov_aev',
-    ER_SYKMELDT_MED_ARBEIDSGIVER = 'er_sykmeldt_med_arbeidsgiver'
+    ER_SYKMELDT_MED_ARBEIDSGIVER = 'er_sykmeldt_med_arbeidsgiver',
+    TRENGER_REVURDERING = 'revurdering'
 }
 
 export interface FiltervalgModell {
@@ -84,6 +87,7 @@ export interface VeilederModell {
     navn: string;
     fornavn: string;
     etternavn: string;
+    enheter: EnhetModell[]
 }
 
 export enum VurderingsBehov {
@@ -134,6 +138,10 @@ export interface BrukerModell {
     erSykmeldtMedArbeidsgiver: boolean;
     moteStartTid: string;
     moteSluttTid: string;
+    vedtakStatus?: string,
+    vedtakStatusEndret?: string,
+    trengerRevurdering: boolean,
+
 }
 
 // TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen?

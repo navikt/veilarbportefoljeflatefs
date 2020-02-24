@@ -31,3 +31,73 @@
         margin-bottom: 0;
     }
 }
+
+
+.fodselsdato__grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.fodselsdato__container {
+    text-align: center;
+    margin: .2rem;
+
+    label {
+        position: relative;
+        cursor: pointer;
+        padding: .1rem;
+        background-color: white;
+        color: @navBlaDarken20;
+        border: 1px solid transparent;
+    }
+
+    label:hover {
+        border: 1px solid blue;
+    }
+
+    label::before, label::after {
+        position: absolute;
+    }
+
+    label::before {
+        content: "";
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        padding: .2rem;
+
+    }
+
+    label::after {
+        content: "";
+        padding: .2rem;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
+
+    input[type="checkbox"] {
+        opacity: 0;
+        appearance: none;
+    }
+
+    input[type="checkbox"] + label::after {
+        content: none;
+    }
+
+    input[type="checkbox"]:checked + label {
+        background-color: @navBlaDarken20;
+        color: white;
+    }
+
+    input[type="checkbox"]:checked + label::after {
+        content: "";
+    }
+
+    input[type="checkbox"]:focus + label::before {
+        outline: rgb(59, 153, 252) auto 5px;
+    }
+}

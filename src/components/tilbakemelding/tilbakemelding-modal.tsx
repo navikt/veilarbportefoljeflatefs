@@ -73,8 +73,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                     Tilbakemelding
                 </Innholdstittel>
                 <Normaltekst style={styleBottom} className="tilbakemelding-modal__ingress">
-                    Før jul kom det en ny funksjon for veiledergrupper i enhetens oversikt. Hvordan er din opplevelse av
-                    den nye funksjonen? Svarene er anonyme.
+                    Vi gjør en anonym kartlegging. Hvor fornøyd er du med dialogen i aktivitetsplanen?
                 </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
                     <TilfredshetValg
@@ -88,7 +87,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         <div className="tilbakemelding-modal__kommentar">
                             <Textarea
                                 className="tilbakemelding-modal__kommentar-felt"
-                                label='Fortell oss gjerne litt om hvordan du bruker den.'
+                                label='Fortell gjerne mer om hvorfor.'
                                 rows={this.KOMMENTAR_ROWS}
                                 maxLength={this.KOMMENTAR_MAX_CHAR}
                                 value={kommentar}

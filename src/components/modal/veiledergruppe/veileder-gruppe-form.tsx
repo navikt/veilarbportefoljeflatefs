@@ -19,10 +19,6 @@ interface VeilederGruppeForm {
 
 function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
     const {focusRef} = useFocus();
-    const hvisFeil = props.errors ? 'veiledergruppe-modal__harFeil' : 'veiledergruppe-modal__valgteveileder';
-    console.log('hvisfeil', hvisFeil);
-    console.log('props.errors', props.errors);
-    console.log('props.errors.gruppeNavn', typeof props.errors.gruppeNavn);
     return (
         <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit}>
             <Innholdstittel tag="h1" className="blokk-xs">

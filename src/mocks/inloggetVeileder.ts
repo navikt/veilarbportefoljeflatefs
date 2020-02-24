@@ -10,7 +10,16 @@ const alternativEnhet = {
     navn: 'NAV Testdalen'
 };
 
+
+const alternativEnhet2 = {
+    enhetId: '0002',
+    navn: 'NAV Brummedal'
+};
+
 export default {
     ident: innloggetVeileder.ident,
-    enhetliste: [inloggetEnhet, alternativEnhet]
+    navn: 'Britt-Marie Parsson',
+    etternavn: 'Persson',
+    fornavn: 'Britt-Marie',
+    enheter: [inloggetEnhet, alternativEnhet, alternativEnhet2]
 };

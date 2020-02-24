@@ -14,4 +14,5 @@ export default {
     erSykmeldtMedArbeidsgiver: 20,
     trengerVurdering: 42,
     moterMedNAVIdag: 40,
+    underVurdering: 14
 };
