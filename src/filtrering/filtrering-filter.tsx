@@ -20,7 +20,7 @@ import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 import { RadioFilterformNy } from '../components/radio-filterform/radio-filterform-ny';
 import DropdownNy from '../components/dropdown/dropdown-ny';
 import '../components/checkbox-filterform/checkbox-filterform.less';
-
+import FodselsdatoFilterform from '../components/checkbox-filterform/fodselsdato-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -51,7 +51,7 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <DropdownNy
                     name="Fødselsdato"
                     render={(lukkDropdown) =>
-                        <CheckboxFilterform
+                        <FodselsdatoFilterform
                             form="fodselsdagIMnd"
                             valg={fodselsdagIMnd()}
                             filtervalg={filtervalg}
