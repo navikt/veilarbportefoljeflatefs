@@ -14,7 +14,11 @@ import {
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
 
 
-function FilteringVeilederGrupper() {
+interface FilteringVeilederGrupperProps {
+    filtergruppe?: string;
+}
+
+function FilteringVeilederGrupper({ filtergruppe } : FilteringVeilederGrupperProps) {
 
     const [visVeilederGruppeModal, setVeilederGruppeModal] = useState(false);
 
@@ -36,7 +40,10 @@ function FilteringVeilederGrupper() {
     return (
         <div>
             {lagretFilter.length > 0
-                ? <VeilederGruppeInnhold lagretFilter={sortertVeiledergruppe}/>
+                ? <VeilederGruppeInnhold 
+                    lagretFilter={sortertVeiledergruppe} 
+                    filtergruppe={filtergruppe}
+                />
                 : <div className="veiledergruppe-emptystate">
                     <Normaltekst className="veiledergruppe-emptystate__tekst">
                         Ingen lagrede veiledergrupper på enheten

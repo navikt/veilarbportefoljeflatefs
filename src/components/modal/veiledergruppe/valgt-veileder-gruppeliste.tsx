@@ -31,10 +31,10 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
                             Ingen veiledere lagt til i gruppen
                         </Normaltekst>)
                         :
-                        splitArrayITo.map(listeMedVeileder =>
-                            <div>
+                        splitArrayITo.map((listeMedVeileder, idx) =>
+                            <div key={idx}>
                                 {listeMedVeileder.map(veileder =>
-                                    <div className="veiledergruppe-modal__valgteveileder__elem">
+                                    <div key={veileder.ident} className="veiledergruppe-modal__valgteveileder__elem">
                                         <span>{`${veileder.etternavn}, ${veileder.fornavn}`}</span>
                                         <Flatknapp
                                             className="fjern--knapp"

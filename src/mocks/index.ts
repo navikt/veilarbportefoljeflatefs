@@ -167,6 +167,19 @@ mock.get('/modiacontextholder/api/context/aktivbruker', ResponseUtils.delayed(10
     "aktivEnhet": null
 }));
 
+mock.delete('/modiacontextholder/api/context/aktivbruker', ResponseUtils.delayed(1000, {
+    "aktivBruker": null,
+    "aktivEnhet": null
+}));
+
+mock.get('/modiacontextholder/api/decorator', ResponseUtils.delayed(1000, {
+    enheter: [{enhetId: '1234', navn: 'NAV Testheim'}],
+    etternavn: inloggetVeileder.etternavn,
+    fornavn: inloggetVeileder.fornavn,
+    ident: inloggetVeileder.ident,
+    navn: `${inloggetVeileder.fornavn} ${inloggetVeileder.etternavn}`
+}));
+
 // websocket
 class MockWebSocket {
     constructor(uri: string) {
