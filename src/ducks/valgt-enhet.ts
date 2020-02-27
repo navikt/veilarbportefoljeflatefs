@@ -1,7 +1,6 @@
 import { STATUS } from './utils';
 import { Action, Dispatch } from 'redux';
 import { AppState } from '../reducer';
-import {OrNothing} from "../utils/types/types";
 import {pagineringSetup} from "./paginering";
 
 // Actions
@@ -11,7 +10,7 @@ const INIT = 'INIT_VELG_ENHET';
 
 export interface ValgtEnhetState {
     data: {
-        enhetId: OrNothing<string>
+        enhetId: string | null
     };
     status: string,
 }
@@ -19,7 +18,7 @@ export interface ValgtEnhetState {
 const initialState: ValgtEnhetState = {
     status: STATUS.NOT_STARTED,
     data: {
-        enhetId: undefined
+        enhetId: null
     },
 };
 
