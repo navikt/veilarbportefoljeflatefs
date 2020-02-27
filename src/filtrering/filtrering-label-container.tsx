@@ -2,12 +2,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
-    I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
+    fodselsdagIMnd, I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
 } from './filter-konstanter';
 import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne, ListevisningState } from '../ducks/ui/listevisning';
-import {pagineringSetup} from "../ducks/paginering";
+import { pagineringSetup } from '../ducks/paginering';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -46,7 +46,16 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
     let kolonne: Kolonne | null;
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
-            if (value === true) {
+            if (key === 'fodselsdagIMnd' && value && typeof value === 'object') {
+                return value.map((singleValue) => {
+                    return [
+                        <FiltreringLabel
+                            key="alder"
+                            label={`Fødselsdato: ${singleValue}`}
+                            slettFilter={() => slettEnkelt(key, null)}
+                        />];
+                });
+            } else if (value === true) {
                 return [
                     <FiltreringLabel
                         key={key}
@@ -81,14 +90,10 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                         />
                     ));
             } else if (key === 'navnEllerFnrQuery') {
-
                 const trimmedQuery = value.trim();
-
                 if (trimmedQuery !== '') {
-
                     const isFnr = !isNaN(parseInt(trimmedQuery, 10));
                     const labelId = isFnr ? 'Søk på fødselsnummer' : 'Søk på navn';
-
                     return [
                         <FiltreringLabel
                             key={key}
@@ -96,9 +101,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                             slettFilter={() => slettEnkelt(key, '')}
                         />
                     ];
-
                 }
-
             } else if (value) {
                 kolonne = key === 'ytelse' ? Kolonne.UTLOP_YTELSE : getKolonneFraLabel(value);
                 muligMenIkkeValgt = kolonne === Kolonne.AVTALT_AKTIVITET && filtergruppe === 'veileder' ? true :
@@ -112,7 +115,6 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     />
                 ];
             }
-
             return [];
         }).reduce((acc, l) => [...acc, ...l], []);
 
@@ -131,11 +133,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
         slettAlle: () => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(clearFiltervalg(ownProps.filtergruppe))
+            dispatch(clearFiltervalg(ownProps.filtergruppe));
         },
         slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.filtergruppe))
+            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.filtergruppe));
         }
     }
 });
