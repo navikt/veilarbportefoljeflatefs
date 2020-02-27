@@ -52,14 +52,13 @@ function LeggTilArbeidslisteForm({
                                  }: LeggTilArbeidslisteFormProps) {
 
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
-    const initialValues = valgteBrukere.map((bruker) => ({kommentar: '', frist: '', overskrift: '', kategori: ''}));
+    const initialValues = valgteBrukere.map((bruker) => ({kommentar: '', frist: '', overskrift: '', kategori: 'BLA'}));
 
     return (
         <Formik
             initialValues={{arbeidsliste: initialValues}}
             onSubmit={(values, actions) => {
                 onSubmit(values.arbeidsliste);
-                actions.resetForm();
             }}
             render={(formikProps) => {
                 setFormIsDirty(formikProps.dirty);

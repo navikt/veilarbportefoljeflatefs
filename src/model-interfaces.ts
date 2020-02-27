@@ -157,7 +157,7 @@ export interface AktiviteterModell {
     gruppeaktivitet?: string;
 }
 
-export enum ArbeidslisteIkonModell {
+export enum KategoriModell {
     BLA = 'BLA',
     ROD = 'ROD',
     GRONN = 'GRONN',
@@ -172,7 +172,7 @@ export interface ArbeidslisteModell {
     endringstidspunkt: string; // dato
     isOppfolgendeVeileder: boolean;
     sistEndretAv: { veilederId: string };
-    arbeidslisteikon: ArbeidslisteIkonModell;
+    kategori: KategoriModell;
 }
 
 export interface StatustallModell {

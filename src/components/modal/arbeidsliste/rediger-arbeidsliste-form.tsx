@@ -18,8 +18,6 @@ interface RedigerArbeidslisteProps {
 }
 
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
-    let index = 0;
-
     function label(bruker: BrukerModell): React.ReactNode {
         return (
             <Undertittel>
@@ -42,8 +40,8 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     </Undertekst>
                 </div>
                 <div className="skjemaelement dato-kategori-wrapper">
-                    <FormikDatoVelger name={`arbeidsliste[${index++}].frist`} label="Frist"/>
-                    <ArbeidslisteKategori name={`arbeidsliste[${index++}].arbeidslisteikon`} label="Kategori"/>
+                    <FormikDatoVelger name="frist" label="Frist"/>
+                    <ArbeidslisteKategori name="kategori"/>
                 </div>
                 <div className="modal-footer">
                     <Hovedknapp htmlType="submit" className="knapp knapp--hoved" spinner={props.laster}>

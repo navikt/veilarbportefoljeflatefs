@@ -4,18 +4,18 @@ import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import ArbeidslisteIkon from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
-import {BrukerModell, EtikettType, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import { BrukerModell, EtikettType, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import Collapse from 'react-collapse';
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
 import { useLayoutEffect, useRef } from 'react';
-import {OrNothing} from "../utils/types/types";
+import { OrNothing } from '../utils/types/types';
 import './minoversikt.less';
-import {Checkbox} from "nav-frontend-skjema";
-import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
-import {VEDTAKSTOTTE} from "../konstanter";
+import { Checkbox } from 'nav-frontend-skjema';
+import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
+import { VEDTAKSTOTTE } from '../konstanter';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -62,11 +62,11 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     <Checkbox
                         checked={bruker.markert}
                         disabled={bruker.fnr === ''}
-                        onChange={()=> settMarkert(bruker.fnr, !bruker.markert)}
+                        onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
                         label=""
                         className="brukerliste__checkbox"
                     />
-                    <ArbeidslisteIkon skalVises={arbeidslisteAktiv}/>
+                    <ArbeidslisteIkon skalVises={arbeidslisteAktiv} kategori={bruker.arbeidsliste.kategori}/>
                 </div>
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"

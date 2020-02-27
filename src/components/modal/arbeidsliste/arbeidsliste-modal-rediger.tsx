@@ -5,7 +5,7 @@ import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
 import { BrukerModell, Status } from '../../../model-interfaces';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { Form, Formik, FormikProps } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import { STATUS } from '../../../ducks/utils';
 import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
 import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
@@ -66,7 +66,8 @@ function ArbeidslisteModalRediger({
         overskrift: bruker.arbeidsliste.overskrift || '',
         kommentar: bruker.arbeidsliste.kommentar || '',
         frist: bruker.arbeidsliste.frist ?
-            moment(bruker.arbeidsliste.frist).format('YYYY-MM-DD') : ''
+            moment(bruker.arbeidsliste.frist).format('YYYY-MM-DD') : '',
+        kategori: bruker.arbeidsliste.kategori
     };
 
     return (
@@ -101,15 +102,13 @@ function ArbeidslisteModalRediger({
                                     Rediger
                                 </Innholdstittel>
                             </div>
-                            <Form>
-                                <RedigerArbeidslisteForm
-                                    laster={laster}
-                                    sistEndretDato={sistEndretDato}
-                                    sistEndretAv={sistEndretAv}
-                                    lukkModal={() => lukkModal(formikProps)}
-                                    bruker={bruker}
-                                />
-                            </Form>
+                            <RedigerArbeidslisteForm
+                                laster={laster}
+                                sistEndretDato={sistEndretDato}
+                                sistEndretAv={sistEndretAv}
+                                lukkModal={() => lukkModal(formikProps)}
+                                bruker={bruker}
+                            />
                         </div>
                     </NavFrontendModal>)}
             />

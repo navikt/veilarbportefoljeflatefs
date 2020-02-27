@@ -113,7 +113,6 @@ mock.get('/veilarbveileder/api/veileder/v2/me', inloggetVeileder);
 mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', veiledere);
 mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', true);
 
-
 // portefolje-api
 mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', ResponseUtils.delayed(1000, statustall));
 mock.post('/veilarbportefolje/api/enhet/:enhetId/portefolje', (args: HandlerArgument) => lagPortefolje(args.queryParams, args.pathParams.enhetId, brukere));
@@ -145,6 +144,7 @@ mock.put('/veilarbportefolje/api/arbeidsliste/:fnr', ({body}) => {
         kommentar: `${body.kommentar}`,
         overskrift: `${body.overskrift}`,
         frist: `${body.frist}`,
+        kategori: `${body.kategori}`,
         isOppfolgendeVeileder: true,
         arbeidslisteAktiv: null,
         harVeilederTilgang: true
@@ -158,13 +158,13 @@ mock.post('/veilarbportefolje/api/arbeidsliste/delete', ({body}) => {
 // modiacontextholder-api
 
 mock.get('/modiacontextholder/api/context/aktivenhet', ResponseUtils.delayed(1000, {
-    "aktivBruker": null,
-    "aktivEnhet": "1234"
+    'aktivBruker': null,
+    'aktivEnhet': '1234'
 }));
 
 mock.get('/modiacontextholder/api/context/aktivbruker', ResponseUtils.delayed(1000, {
-    "aktivBruker": null,
-    "aktivEnhet": null
+    'aktivBruker': null,
+    'aktivEnhet': null
 }));
 
 // websocket
