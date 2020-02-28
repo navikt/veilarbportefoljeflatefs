@@ -40,7 +40,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 lamellNavn="veiledergrupper"
                 hidden={filtergruppe === 'veileder'}
             >
-                <FilteringVeilederGrupper/>
+                <FilteringVeilederGrupper filtergruppe={filtergruppe} /> 
 
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel

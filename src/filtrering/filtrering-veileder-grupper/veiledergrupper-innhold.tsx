@@ -16,9 +16,11 @@ import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
 import { visIngenEndringerToast } from '../../store/toast/actions';
 import { logEvent } from '../../utils/frontend-logger';
 
+
 interface VeilederGruppeInnholdProps {
     lagretFilter: LagretFilter[]
     filterValg?: FiltervalgModell;
+    filtergruppe?: string;
 }
 
 function isOverflown(element) {
@@ -29,12 +31,16 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     const [valgtGruppe, setValgtGruppe] = useState<LagretFilter>();
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
 
-    const veiledereFilter = useSelector((state: AppState) => state.filtrering.veiledere);
+    const filtreringVeilederoversikt = (state: AppState) => state.filtreringVeilederoversikt.veiledere;
+    const filtreringEnhetensoversikt = (state: AppState) => state.filtrering.veiledere;
+    const selector = props.filtergruppe === 'enhet' ? filtreringEnhetensoversikt : filtreringVeilederoversikt;
+
+    const veiledereFilter = useSelector(selector);
 
     useEffect(() => {
-        const harValgtEttLagretFilter = props.lagretFilter.find(v => veilederlisterErLik(v.filterValg.veiledere, veiledereFilter));
-        if (harValgtEttLagretFilter) {
-            setValgtGruppe(harValgtEttLagretFilter);
+        const valgtFilter = props.lagretFilter.find(v => veilederlisterErLik(v.filterValg.veiledere, veiledereFilter));
+        if (valgtFilter) {
+            setValgtGruppe(valgtFilter);
         }
     }, [veiledereFilter, valgtGruppe, props.lagretFilter]);
 
@@ -48,7 +54,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
             {}, {gruppeId: gruppeId});
         const filterVerdi = finnVeilederGruppe(gruppeId);
         setValgtGruppe(filterVerdi);
-        filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, 'enhet'));
+        filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, props.filtergruppe));
     };
 
     const finnVeilederGruppe = (vg) => props.lagretFilter.find((elem) => elem.filterId === parseInt(vg));
@@ -59,7 +65,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
                 filterId: valgtGruppe.filterId,
                 filterNavn: gruppeNavn,
                 filterValg
-            }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet')));
+            }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, props.filtergruppe)));
         } else {
             dispatch(visIngenEndringerToast());
         }
@@ -80,8 +86,9 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     return (
         <div className="veileder-gruppe__valgfelt" ref={outerDivRef}>
-            {props.lagretFilter.map((veilederGruppe) =>
+            {props.lagretFilter.map((veilederGruppe, idx) =>
                 <VeilederGruppeRad
+                    key={idx}
                     veilederGruppe={veilederGruppe}
                     onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
                     hanterVelgGruppe={(e) => velgGruppe(e.target.value)}
