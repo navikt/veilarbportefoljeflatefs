@@ -19,6 +19,24 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '02. MAR. 2020',
+        versjonId: '02.03.20',
+        tittel: 'Tilrettelegging',
+        tekst: 'Nå kan du registrere brukernes behov for tilrettelegging under Detaljer. Det gjør det enklere å koble disse brukerne sammen med arbeidsgivere som kan inkludere. Brukerne blir søkbare i kandidatsøket i Rekrutteringsbistand. ',
+        children:
+            <>
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/intranett-prosjekter-og-utvikling/SitePages/Finn-kandidat.aspx"
+                    linkTekst="Nyhetssak på Navet"
+                />
+                <TourModalButton
+                    metrikknavn="portefolje.endringslogg_modal.tilrettelegging"
+                    modal={ModalName.TILRETTELEGGING}
+                    knappeTekst="Se hvordan"
+                />
+            </>
+    },
+    {
         dato: '23. JAN. 2020',
         versjonId: '23.01.20',
         tittel: 'Visuelle endringer i oversikten',
