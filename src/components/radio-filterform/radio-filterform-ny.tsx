@@ -27,15 +27,13 @@ export function RadioFilterformNy({filterId, onSubmit, valg, closeDropdown, filt
                         onChange={e => setValgteFilterValg(e.target.value)}
                     />)}
             </div>
-            <div className="checkbox-filterform__under-valg">
-                <div
-                    className={classNames('checkbox-filterform__valg-knapp', 'knapperad', 'blokk-xxs')}
-                >
-                    <button onClick={createHandleOnSubmit}
-                            className={classNames('knapp', 'knapp--mini', {'knapp--hoved': valgtFilterValg})}>
-                        {valgtFilterValg ? 'Velg' : 'Lukk'}
-                    </button>
-                </div>
+            <div
+                className={classNames('checkbox-filterform__under-valg')}
+            >
+                <button onClick={createHandleOnSubmit}
+                        className={classNames('knapp', 'knapp--mini', {'knapp--hoved': valgtFilterValg})}>
+                    {valgtFilterValg ? 'Velg' : 'Lukk'}
+                </button>
             </div>
         </form>
     );
