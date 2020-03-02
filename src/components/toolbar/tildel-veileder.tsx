@@ -68,15 +68,11 @@ function TildelVeileder({skalVises, filtergruppe, gjeldendeVeileder}: TildelVeil
                                 data={data}
                                 onSubmit={() => onSubmit(lukkDropdown)}
                             />
-                            <div className="checkbox-filterform__under-valg">
-                                <div
-                                    className={classNames('checkbox-filterform__valg-knapp', 'knapperad', 'blokk-xxs')}
-                                >
-                                    <button onClick={() => onSubmit(lukkDropdown)}
-                                            className={classNames('knapp', 'knapp--mini', {'knapp--hoved': ident})}>
-                                        {ident ? 'Velg' : 'Lukk'}
-                                    </button>
-                                </div>
+                            <div className={classNames('checkbox-filterform__under-valg', 'blokk-xxs')}>
+                                <button onClick={() => onSubmit(lukkDropdown)}
+                                        className={classNames('knapp', 'knapp--mini', {'knapp--hoved': ident})}>
+                                    {ident ? 'Velg' : 'Lukk'}
+                                </button>
                             </div>
                         </>
                     }
