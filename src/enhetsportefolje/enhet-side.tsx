@@ -2,29 +2,30 @@ import * as React from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import TabellOverskrift from '../components/tabell-overskrift';
-import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
+import { ModalEnhetSideController } from '../components/modal/modal-enhet-side-controller';
 import EnhetTabell from './enhetsportefolje-tabell';
 import EnhetTabellOverskrift from './enhetsportefolje-tabelloverskrift';
 import './enhetsportefolje.less';
 import './brukerliste.less';
-import ToppMeny from "../topp-meny/topp-meny";
-import {usePortefoljeSelector} from "../hooks/redux/use-portefolje-selector";
-import {ListevisningType} from "../ducks/ui/listevisning";
-import {useSetStateFromUrl} from "../hooks/portefolje/use-set-state-from-url";
-import {useFetchPortefolje} from "../hooks/portefolje/use-fetch-portefolje";
-import FiltreringContainer from "../filtrering/filtrering-container";
-import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
-import FiltreringLabelContainer from "../filtrering/filtrering-label-container";
-import {lagLablerTilVeiledereMedIdenter} from "../filtrering/utils";
-import {useDispatch, useSelector} from "react-redux";
-import {AppState} from "../reducer";
-import Toolbar from "../components/toolbar/toolbar";
-import {slettEnkeltFilter} from "../ducks/filtrering";
-import {hentPortefoljeForEnhet} from "../ducks/portefolje";
-import {useFetchPortefoljeData} from "../hooks/portefolje/use-fetch-portefolje-data";
-import {useSyncStateMedUrl} from "../hooks/portefolje/use-sync-state-med-url";
-import {useSetLocalStorageOnUnmount} from "../hooks/portefolje/use-set-local-storage-on-unmount";
-import VelgFilterMelding from "./velg-filter-melding";
+import ToppMeny from '../topp-meny/topp-meny';
+import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
+import { ListevisningType } from '../ducks/ui/listevisning';
+import { useSetStateFromUrl } from '../hooks/portefolje/use-set-state-from-url';
+import { useFetchPortefolje } from '../hooks/portefolje/use-fetch-portefolje';
+import FiltreringContainer from '../filtrering/filtrering-container';
+import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
+import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
+import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../reducer';
+import Toolbar from '../components/toolbar/toolbar';
+import { slettEnkeltFilter } from '../ducks/filtrering';
+import { hentPortefoljeForEnhet } from '../ducks/portefolje';
+import { useFetchPortefoljeData } from '../hooks/portefolje/use-fetch-portefolje-data';
+import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
+import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
+import VelgFilterMelding from './velg-filter-melding';
+import '../style.less';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -33,6 +34,7 @@ function antallFilter(filtervalg) {
             return 1;
         }).reduce((a: number, b: number) => a + b, 0);
     }
+
     return Object.entries(filtervalg)
         .map(([filter, value]) => {
             if (value === true) {
@@ -49,11 +51,10 @@ function antallFilter(filtervalg) {
 
 }
 
-
-function EnhetSide () {
+function EnhetSide() {
     const {statustall, enhettiltak} = useFetchPortefoljeData();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
-    const veilederliste = useSelector( (state: AppState) => state.veiledere.data.veilederListe);
+    const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
 
     useSetStateFromUrl();
@@ -78,7 +79,8 @@ function EnhetSide () {
                     <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                         <div id="oversikt-sideinnhold" role="tabpanel">
                             <div className="row">
-                                <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
+                                <div
+                                    className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12 status-filter-kolonne">
                                     <FiltreringContainer
                                         filtervalg={filtervalg}
                                         enhettiltak={tiltak}
@@ -102,7 +104,7 @@ function EnhetSide () {
                                                 <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
                                                 <div className="sticky-container__skygge">
                                                     <Toolbar
-                                                        onPaginering={()=> dispatch(hentPortefoljeForEnhet(
+                                                        onPaginering={() => dispatch(hentPortefoljeForEnhet(
                                                             enhetId,
                                                             sorteringsrekkefolge,
                                                             sorteringsfelt,
@@ -117,7 +119,7 @@ function EnhetSide () {
                                             </div>
                                             <EnhetTabell/>
                                         </>
-                                        : <VelgFilterMelding/> }
+                                        : <VelgFilterMelding/>}
                                 </div>
                             </div>
                         </div>

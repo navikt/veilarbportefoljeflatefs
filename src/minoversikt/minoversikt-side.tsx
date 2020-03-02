@@ -1,36 +1,37 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from './../innholdslaster/innholdslaster';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import { ListevisningType } from '../ducks/ui/listevisning';
 import './minoversikt-side.less';
 import './minoversikt.less';
-import {useIdentSelector} from "../hooks/redux/use-inlogget-ident";
-import {MinOversiktModalController} from "../components/modal/modal-min-oversikt-controller";
-import MinoversiktTabell from "./minoversikt-portefolje-tabell";
-import MinoversiktTabellOverskrift from "./minoversikt-portefolje-tabelloverskrift";
-import {MinOversiktWrapper} from "./min-oversikt-wrapper";
-import TabellOverskrift from "../components/tabell-overskrift";
-import {useSelectGjeldendeVeileder} from "../hooks/portefolje/use-select-gjeldende-veileder";
-import Toolbar from "../components/toolbar/toolbar";
-import ToppMeny from "../topp-meny/topp-meny";
-import {useSetStateFromUrl} from "../hooks/portefolje/use-set-state-from-url";
-import {useFetchPortefolje} from "../hooks/portefolje/use-fetch-portefolje";
-import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
-import {useFetchPortefoljeData} from "../hooks/portefolje/use-fetch-portefolje-data";
-import FiltreringLabelContainer from "../filtrering/filtrering-label-container";
-import {usePortefoljeSelector} from "../hooks/redux/use-portefolje-selector";
-import FiltreringContainer from "../filtrering/filtrering-container";
-import {sortTiltak} from "../filtrering/filtrering-status/filter-utils";
-import { hentPortefoljeForVeileder } from "../ducks/portefolje";
-import {useDispatch} from "react-redux";
-import {useSyncStateMedUrl} from "../hooks/portefolje/use-sync-state-med-url";
-import {useSetLocalStorageOnUnmount} from "../hooks/portefolje/use-set-local-storage-on-unmount";
+import { useIdentSelector } from '../hooks/redux/use-inlogget-ident';
+import { MinOversiktModalController } from '../components/modal/modal-min-oversikt-controller';
+import MinoversiktTabell from './minoversikt-portefolje-tabell';
+import MinoversiktTabellOverskrift from './minoversikt-portefolje-tabelloverskrift';
+import { MinOversiktWrapper } from './min-oversikt-wrapper';
+import TabellOverskrift from '../components/tabell-overskrift';
+import { useSelectGjeldendeVeileder } from '../hooks/portefolje/use-select-gjeldende-veileder';
+import Toolbar from '../components/toolbar/toolbar';
+import ToppMeny from '../topp-meny/topp-meny';
+import { useSetStateFromUrl } from '../hooks/portefolje/use-set-state-from-url';
+import { useFetchPortefolje } from '../hooks/portefolje/use-fetch-portefolje';
+import { useSetPortefoljeSortering } from '../hooks/portefolje/use-sett-sortering';
+import { useFetchPortefoljeData } from '../hooks/portefolje/use-fetch-portefolje-data';
+import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
+import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
+import FiltreringContainer from '../filtrering/filtrering-container';
+import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
+import { hentPortefoljeForVeileder } from '../ducks/portefolje';
+import { useDispatch } from 'react-redux';
+import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
+import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
+import '../style.less';
 
-function MinoversiktSide () {
+function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.minOversikt);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const{ statustall, enhettiltak, veiledere } = useFetchPortefoljeData(gjeldendeVeileder);
+    const {statustall, enhettiltak, veiledere} = useFetchPortefoljeData(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
 
@@ -45,14 +46,14 @@ function MinoversiktSide () {
     const stickyContainer = antallBrukere > 4 ? 'sticky-container' : 'sticky-container__fjernet';
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
 
-
     return (
         <DocumentTitle title="Min oversikt">
             <div className="minoversikt-side blokk-xl">
                 <ToppMeny>
                     <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere]}>
                         <MinOversiktWrapper>
-                            <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
+                            <div
+                                className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12 status-filter-kolonne">
                                 <FiltreringContainer
                                     filtervalg={filtervalg}
                                     filtergruppe="veileder"
@@ -68,11 +69,12 @@ function MinoversiktSide () {
                                     className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                 />
                                 <div className={stickyContainer}>
-                                    <TabellOverskrift className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
+                                    <TabellOverskrift
+                                        className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
                                     <div className="sticky-container__skygge">
                                         <Toolbar
                                             filtergruppe={ListevisningType.minOversikt}
-                                            onPaginering={()=> dispatch(hentPortefoljeForVeileder(
+                                            onPaginering={() => dispatch(hentPortefoljeForVeileder(
                                                 enhetId,
                                                 gjeldendeVeileder,
                                                 sorteringsrekkefolge,
