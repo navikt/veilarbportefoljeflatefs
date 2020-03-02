@@ -162,9 +162,30 @@ mock.get('/modiacontextholder/api/context/aktivenhet', ResponseUtils.delayed(100
     'aktivEnhet': '1234'
 }));
 
+mock.get('/modiacontextholder/api/decorator', ResponseUtils.delayed(1000, {
+    "ident":"Z992763",
+    "navn":"F_Z992763 E_Z992763",
+    "fornavn":"F_Z992763",
+    "etternavn":"E_Z992763",
+    "enheter":[{enhetId: '1234', navn: 'NAV Testheim'}, {enhetId: '0001', navn: 'NAV Gotham City'}],
+}));
+
 mock.get('/modiacontextholder/api/context/aktivbruker', ResponseUtils.delayed(1000, {
     'aktivBruker': null,
     'aktivEnhet': null
+}));
+
+mock.delete('/modiacontextholder/api/context/aktivbruker', ResponseUtils.delayed(1000, {
+    "aktivBruker": null,
+    "aktivEnhet": null
+}));
+
+mock.get('/modiacontextholder/api/decorator', ResponseUtils.delayed(1000, {
+    enheter: [{enhetId: '1234', navn: 'NAV Testheim'}],
+    etternavn: inloggetVeileder.etternavn,
+    fornavn: inloggetVeileder.fornavn,
+    ident: inloggetVeileder.ident,
+    navn: `${inloggetVeileder.fornavn} ${inloggetVeileder.etternavn}`
 }));
 
 // websocket

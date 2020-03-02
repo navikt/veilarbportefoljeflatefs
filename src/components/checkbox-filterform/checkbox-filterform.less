@@ -37,6 +37,7 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(5, 1fr);
+    grid-row-gap: 5px;
 }
 
 .fodselsdato__container {
@@ -48,12 +49,12 @@
         cursor: pointer;
         padding: .1rem;
         background-color: white;
-        color: @navBlaDarken20;
         border: 1px solid transparent;
     }
 
     label:hover {
-        border: 1px solid blue;
+        color: @navBla;
+        border: 1px solid @navBla;
     }
 
     label::before, label::after {

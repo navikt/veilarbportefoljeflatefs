@@ -19,6 +19,8 @@ import {AppState} from "../reducer";
 import {pagineringSetup} from "../ducks/paginering";
 import {useSetEnhetIUrl} from "../hooks/portefolje/use-set-enhet-i-url";
 import {useSetLocalStorageOnUnmount} from "../hooks/portefolje/use-set-local-storage-on-unmount";
+import FilteringVeilederGrupper from "../filtrering/filtrering-veileder-grupper/filrering-veileder-grupper";
+import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 
 
 function VeiledereSide (){
@@ -46,8 +48,10 @@ function VeiledereSide (){
                 <ToppMeny>
                     <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
                         <section>
+
                             <div id="oversikt-sideinnhold" role="tabpanel">
                                 <div className="row">
+
                                     <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12">
                                         <PanelBase className="blokk-xxxs sok-veileder">
                                             <Undertittel>
@@ -55,6 +59,16 @@ function VeiledereSide (){
                                             </Undertittel>
                                             <FiltreringVeiledere/>
                                         </PanelBase>
+
+                                        <MetrikkEkspanderbartpanel 
+                                            apen={true}
+                                            tittelProps="undertittel" 
+                                            lamellNavn="veiledergrupper_veilederoversikt" 
+                                            tittel="Veiledergrupper"
+                                        >
+                                            <FilteringVeilederGrupper filtergruppe="veiledere"/>
+                                        </MetrikkEkspanderbartpanel>
+
                                     </div>
 
                                     <div className="col-lg-9 col-md-12 col-sm-12">
@@ -69,6 +83,7 @@ function VeiledereSide (){
                                             filtergruppe="veiledere"
                                             className="filtrering-label-container"
                                         />
+
                                         <div className="sticky-container">
                                             <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
                                                 {`Totalt ${veiledere.data.veilederListe.length} veiledere`}

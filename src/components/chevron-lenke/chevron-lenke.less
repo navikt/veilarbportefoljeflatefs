@@ -1,38 +1,35 @@
 @import "~nav-frontend-core/less/_variabler";
 
-.veilarbportefoljeflatefs {
-    .chevron-lenke {
-        background-color: white;
-        background-color: transparent;
-        outline: none;
-        cursor: pointer;
-        box-sizing: border-box;
-        padding: 0.25rem;
-        border-radius: @border-radius-large;
-        border: 2px solid transparent; // Bruk border slik at størrelse ikke endres på :fokus
+.chevron-lenke {
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 0.25rem;
+    border-radius: @border-radius-large;
+    border: 2px solid transparent; // Bruk border slik at størrelse ikke endres på :fokus
 
-        .chevronboks {
-            margin-bottom: 0.125rem;
-            color: @navBla;
-        }
+    .chevronboks {
+        margin-bottom: 0.125rem;
+        color: @navBla;
+    }
 
-        &--hide {
-            visibility: hidden;
-        }
+    &--hide {
+        visibility: hidden;
+    }
 
-        &__tekst {
-            color: @navBla;
-            padding-bottom: 0.125rem;
-        }
+    &__tekst {
+        color: @navBla;
+        padding-bottom: 0.125rem;
+    }
 
-        &:hover {
-            .chevron-lenke__tekst {
-                border-bottom: 1px solid @navBla;
-            }
+    &:hover {
+        .chevron-lenke__tekst {
+            border-bottom: 1px solid @navBla;
         }
+    }
 
-        &:focus {
-            border: 2px solid @navOransje;
-        }
+    &:focus {
+        border: 2px solid @navOransje;
     }
 }

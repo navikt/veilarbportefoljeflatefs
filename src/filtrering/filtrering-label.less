@@ -12,8 +12,6 @@
         border: none;
         border-radius: @border-radius-small;
         display: flex;
-        min-width: 7rem;
-        max-width: 13.75rem;
         background: @navGra20 none;
         padding: 0.5rem;
         justify-content: space-between;
@@ -38,14 +36,14 @@
         &--markert {
             background-color: @navOransjeLighten60;
         }
-    }
 
-    .filtreringlabel__label {
-        padding-right: 1rem;
-        max-width: 11.75rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        &__label {
+            padding-right: .5rem;
+            max-width: 10rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 
     .filtrering-label-slett {
