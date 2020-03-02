@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import '../../minoversikt/minoversikt.less';
 import { ReactComponent as ArbeidslisteikonBla } from '../modal/arbeidsliste/arbeidslisteikon/arbeidslisteikon_bla.svg';
-import { ReactComponent as ArbeidslisteikonRod } from '../modal/arbeidsliste/arbeidslisteikon/arbeidslisteikon_rod.svg';
+import { ReactComponent as ArbeidslisteikonLilla } from '../modal/arbeidsliste/arbeidslisteikon/arbeidslisteikon_lilla.svg';
 import { ReactComponent as ArbeidslisteikonGronn } from '../modal/arbeidsliste/arbeidslisteikon/arbeidslisteikon_gronn.svg';
 import { ReactComponent as ArbeidslisteikonGul } from '../modal/arbeidsliste/arbeidslisteikon/arbeidslisteikon_gul.svg';
 import { KategoriModell } from '../../model-interfaces';
@@ -20,8 +20,8 @@ export default function ArbeidslisteIkonVisning({className, skalVises, kategori}
         switch (kategori) {
             case KategoriModell.BLA:
                 return <ArbeidslisteikonBla/>;
-            case KategoriModell.ROD:
-                return <ArbeidslisteikonRod/>;
+            case KategoriModell.LILLA:
+                return <ArbeidslisteikonLilla/>;
             case KategoriModell.GRONN:
                 return <ArbeidslisteikonGronn/>;
             case KategoriModell.GUL:

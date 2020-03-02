@@ -147,7 +147,7 @@ function lagArbeidsliste() {
     } else if (kategoriType === 3) {
         kategori = KategoriModell.GUL;
     } else {
-        kategori = KategoriModell.ROD;
+        kategori = KategoriModell.LILLA;
     }
 
     return ({

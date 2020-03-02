@@ -159,7 +159,7 @@ export interface AktiviteterModell {
 
 export enum KategoriModell {
     BLA = 'BLA',
-    ROD = 'ROD',
+    LILLA = 'LILLA',
     GRONN = 'GRONN',
     GUL = 'GUL',
 }

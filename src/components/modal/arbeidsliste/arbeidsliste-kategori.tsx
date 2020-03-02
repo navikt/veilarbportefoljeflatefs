@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './arbeidsliste-kategori.less';
 import { ReactComponent as ArbeidslisteikonBla } from './arbeidslisteikon/arbeidslisteikon_bla.svg';
-import { ReactComponent as ArbeidslisteikonRod } from './arbeidslisteikon/arbeidslisteikon_rod.svg';
+import { ReactComponent as ArbeidslisteikonRod } from './arbeidslisteikon/arbeidslisteikon_lilla.svg';
 import { ReactComponent as ArbeidslisteikonGronn } from './arbeidslisteikon/arbeidslisteikon_gronn.svg';
 import { ReactComponent as ArbeidslisteikonGul } from './arbeidslisteikon/arbeidslisteikon_gul.svg';
 import ArbeidslisteIkon from './arbeidslisteikon/arbeidslisteikon';
@@ -24,12 +24,12 @@ function ArbeidslisteKategori(props: { name: string }) {
                             checked={field.value === KategoriModell.BLA}
                         />
                         <ArbeidslisteIkon
-                            value={KategoriModell.ROD}
+                            value={KategoriModell.LILLA}
                             arbeidslisteikon={<ArbeidslisteikonRod/>}
                             name={props.name}
                             tabIndex={2}
-                            onChange={() => form.setFieldValue(props.name, KategoriModell.ROD)}
-                            checked={field.value === KategoriModell.ROD}
+                            onChange={() => form.setFieldValue(props.name, KategoriModell.LILLA)}
+                            checked={field.value === KategoriModell.LILLA}
                         />
                         <ArbeidslisteIkon
                             value={KategoriModell.GRONN}
