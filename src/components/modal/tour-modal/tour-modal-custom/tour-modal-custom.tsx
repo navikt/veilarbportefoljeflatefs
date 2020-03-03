@@ -70,12 +70,12 @@ const stepsVeilederverktoy: Step[] = [
     {
         tittel: 'Arbeidslisteikon',
         bilde: veilederverktoy2,
-        tekst: 'Du kan også klikke på ikonet for arbeidslisten for å legge til, se og redigere kommentaren'
+        tekst: 'Du kan også klikke på ikonet for arbeidslisten for å legge til, se og redigere kommentaren.'
     },
     {
         tittel: 'Kopiere fødselsnummer',
         bilde: veilederverktoy3,
-        tekst: 'Ved ett klikk har du kopiert personens fødselsnummer'
+        tekst: 'Ved ett klikk har du kopiert personens fødselsnummer.'
 
     }
 ];
