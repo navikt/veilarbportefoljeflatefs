@@ -79,7 +79,8 @@ function EnhetSide() {
                     <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                         <div id="oversikt-sideinnhold" role="tabpanel">
                             <div className="row">
-                                <div className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12 status-filter-kolonne">
+                                <div
+                                    className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12 status-filter-kolonne">
                                     <FiltreringContainer
                                         filtervalg={filtervalg}
                                         enhettiltak={tiltak}

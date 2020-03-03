@@ -14,10 +14,11 @@ const alleLastetEllerReloading = (avhengigheter) => (
     avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING))
 );
 const medFeil = (avhengigheter) => avhengigheter.find(harStatus(STATUS.ERROR));
+
 function getFeilmeldingForReducer(feilendeReducer) {
     const status = feilendeReducer.data.response.status;
     if (status >= 500) {
-        return 'Vi har dessverre tekniske problemer. Vi jobber med å løse disse, følg med på driftsmeldinger på Navet: https://navno.sharepoint.com/sites/intranett';
+        return 'Vi har dessverre tekniske problemer. Vi jobber med å løse disse.';
     } else if (status === 403) {
         return 'Beklager, du har ikke tilgang.';
     }
@@ -39,7 +40,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
     constructor(props) {
         super(props);
 
-        this.state = { timeout: false };
+        this.state = {timeout: false};
         this.timer = undefined;
 
         this.renderChildren = this.renderChildren.bind(this);
@@ -50,7 +51,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
     setTimer() {
         if (!this.timer) {
             this.timer = window.setTimeout(() => {
-                this.setState({ timeout: true });
+                this.setState({timeout: true});
             }, 200);
         }
     }
@@ -61,12 +62,12 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
             this.timer = undefined;
 
             // Deferred, slik at setState ikke er en del av render
-            setTimeout(() => this.setState({ timeout: false }), 0);
+            setTimeout(() => this.setState({timeout: false}), 0);
         }
     }
 
     renderChildren() {
-        const { avhengigheter, className, children } = this.props;
+        const {avhengigheter, className, children} = this.props;
 
         if (typeof children === 'function') {
             return <section className={className}>{children(avhengigheter)}</section>;
@@ -75,7 +76,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
     }
 
     render() {
-        const { avhengigheter, className } = this.props;
+        const {avhengigheter, className} = this.props;
         if (alleLastet(avhengigheter)) {
             this.clearTimer();
             return this.renderChildren();
