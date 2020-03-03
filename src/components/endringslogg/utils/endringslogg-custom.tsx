@@ -19,6 +19,20 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '03. MAR. 2020',
+        versjonId: '03.03.20',
+        tittel: 'Endringer i veilederverktøy',
+        tekst: 'Funksjon for legge brukeren til arbeidslisten og tildele veileder ligger nå i Veilederverktøy. Du kan også klikke på arbeidslisteikonet for å legge til, se og redigere kommentaren i arbeidslisten.',
+        children:
+            <>
+                <TourModalButton
+                    metrikknavn="portefolje.endringslogg_modal.veilederverktoy"
+                    modal={ModalName.VEILEDERVERKTOY}
+                    knappeTekst="Se hvordan"
+                />
+            </>
+    },
+    {
         dato: '02. MAR. 2020',
         versjonId: '02.03.20',
         tittel: 'Tilrettelegging',
