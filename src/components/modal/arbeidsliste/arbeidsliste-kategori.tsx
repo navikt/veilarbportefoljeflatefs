@@ -8,7 +8,7 @@ import ArbeidslisteIkon from './arbeidslisteikon/arbeidslisteikon';
 import { Field } from 'formik';
 import { KategoriModell } from '../../../model-interfaces';
 
-function ArbeidslisteKategori(props: { name: string }) {
+function ArbeidslisteKategori(props: { name: string, index: string }) {
     return (
         <Field name={props.name}>
             {({field, form}) => {
@@ -21,6 +21,7 @@ function ArbeidslisteKategori(props: { name: string }) {
                             name={props.name}
                             onChange={() => form.setFieldValue(field.name, KategoriModell.BLA)}
                             checked={field.value === KategoriModell.BLA}
+                            index={props.index}
                         />
                         <ArbeidslisteIkon
                             value={KategoriModell.LILLA}
@@ -28,6 +29,7 @@ function ArbeidslisteKategori(props: { name: string }) {
                             name={props.name}
                             onChange={() => form.setFieldValue(props.name, KategoriModell.LILLA)}
                             checked={field.value === KategoriModell.LILLA}
+                            index={props.index}
                         />
                         <ArbeidslisteIkon
                             value={KategoriModell.GRONN}
@@ -35,6 +37,7 @@ function ArbeidslisteKategori(props: { name: string }) {
                             name={props.name}
                             onChange={() => form.setFieldValue(props.name, KategoriModell.GRONN)}
                             checked={field.value === KategoriModell.GRONN}
+                            index={props.index}
                         />
                         <ArbeidslisteIkon
                             value={KategoriModell.GUL}
@@ -42,6 +45,7 @@ function ArbeidslisteKategori(props: { name: string }) {
                             name={props.name}
                             onChange={() => form.setFieldValue(props.name, KategoriModell.GUL)}
                             checked={field.value === KategoriModell.GUL}
+                            index={props.index}
                         />
                     </div>
                 );

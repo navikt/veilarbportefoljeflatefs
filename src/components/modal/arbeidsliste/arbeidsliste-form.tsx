@@ -27,7 +27,7 @@ function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
                     </div>
                     <div className="skjemaelement dato-kategori-wrapper">
                         <FormikDatoVelger name={`arbeidsliste[${index}].frist`}/>
-                        <ArbeidslisteKategori name={`arbeidsliste[${index}].kategori`}/>
+                        <ArbeidslisteKategori name={`arbeidsliste[${index}].kategori`} index={index}/>
                     </div>
                 </div>
             ))}

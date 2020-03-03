@@ -41,7 +41,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 </div>
                 <div className="skjemaelement dato-kategori-wrapper">
                     <FormikDatoVelger name="frist"/>
-                    <ArbeidslisteKategori name="kategori"/>
+                    <ArbeidslisteKategori name="kategori" index=""/>
                 </div>
                 <div className="modal-footer">
                     <Hovedknapp htmlType="submit" className="knapp knapp--hoved" spinner={props.laster}>

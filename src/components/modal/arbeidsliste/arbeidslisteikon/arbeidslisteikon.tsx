@@ -8,13 +8,14 @@ interface ArbeidslisteikonProps {
     name: string;
     checked: boolean;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    index: string;
 }
 
-function ArbeidslisteIkon({value, arbeidslisteikon, name, checked, onChange}: ArbeidslisteikonProps) {
+function ArbeidslisteIkon({value, arbeidslisteikon, name, checked, onChange, index}: ArbeidslisteikonProps) {
     return (
         <div className="arbeidslisteikon__container">
             <input
-                id={value}
+                id={`${value}[${index}]`}
                 type="radio"
                 name={name}
                 value={value}
@@ -22,7 +23,7 @@ function ArbeidslisteIkon({value, arbeidslisteikon, name, checked, onChange}: Ar
                 onChange={onChange}
             />
             <label
-                htmlFor={value}
+                htmlFor={`${value}[${index}]`}
             >{arbeidslisteikon}</label>
         </div>
     );
