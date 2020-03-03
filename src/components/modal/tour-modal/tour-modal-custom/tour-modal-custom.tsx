@@ -7,6 +7,9 @@ import veiledergruppe3 from './veiledergrupper/veiledergruppe3.png';
 import tilrettelegging1 from './tilrettelegging/tilrettelegging1.jpg';
 import tilrettelegging2 from './tilrettelegging/tilrettelegging2.jpg';
 import tilrettelegging3 from './tilrettelegging/tilrettelegging3.jpg';
+import veilederverktoy1 from './veilederverktoy/veilederverktoy1.png';
+import veilederverktoy2 from './veilederverktoy/veilederverktoy2.png';
+import veilederverktoy3 from './veilederverktoy/veilederverktoy3.png';
 
 const stepsNyKolonne: Step[] = [
     {
@@ -58,6 +61,25 @@ const stepsTilrettelegging: Step[] = [
     }
 ];
 
+const stepsVeilederverktoy: Step[] = [
+    {
+        tittel: 'Veilederverktøy',
+        bilde: veilederverktoy1,
+        tekst: 'Legg til/redigere arbeidsliste og tildel veileder finner du nå i Veilederverktøy.'
+    },
+    {
+        tittel: 'Arbeidslisteikon',
+        bilde: veilederverktoy2,
+        tekst: 'Du kan også klikke på ikonet for arbeidslisten for å legge til, se og redigere kommentaren'
+    },
+    {
+        tittel: 'Kopiere fødselsnummer',
+        bilde: veilederverktoy3,
+        tekst: 'Ved ett klikk har du kopiert personens fødselsnummer'
+
+    }
+];
+
 export function getTour(modal: ModalName) {
     switch (modal) {
         case ModalName.NY_KOLONNE:
@@ -66,6 +88,8 @@ export function getTour(modal: ModalName) {
             return stepsVeiledergrupper;
         case ModalName.TILRETTELEGGING:
             return stepsTilrettelegging;
+        case ModalName.VEILEDERVERKTOY:
+            return stepsVeilederverktoy;
         default:
             return null;
     }
