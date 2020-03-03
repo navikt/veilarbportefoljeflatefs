@@ -136,6 +136,8 @@ mock.post('/veilarbportefolje/api/arbeidsliste/', (args: HandlerArgument) => {
 });
 
 mock.put('/veilarbportefolje/api/arbeidsliste/:fnr', ({body}) => {
+    console.log("kategori", body.kategori);
+
     return {
         sistEndretAv: {
             veilederId: 'Z990007'

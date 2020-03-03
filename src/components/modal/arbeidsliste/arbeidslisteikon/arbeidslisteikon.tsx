@@ -6,25 +6,25 @@ interface ArbeidslisteikonProps {
     value: string;
     arbeidslisteikon: ReactComponentElement<any>;
     name: string;
-    tabIndex: number;
     checked: boolean;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function ArbeidslisteIkon({value, arbeidslisteikon, name, checked, onChange, tabIndex}: ArbeidslisteikonProps) {
+function ArbeidslisteIkon({value, arbeidslisteikon, name, checked, onChange}: ArbeidslisteikonProps) {
     return (
-        <label className="arbeidslisteikon__container" tabIndex={0}>
+        <div className="arbeidslisteikon__container">
             <input
+                id={value}
                 type="radio"
                 name={name}
-                className="arbeidslisteikon__input"
                 value={value}
-                tabIndex={tabIndex}
                 checked={checked}
                 onChange={onChange}
             />
-            {arbeidslisteikon}
-        </label>
+            <label
+                htmlFor={value}
+            >{arbeidslisteikon}</label>
+        </div>
     );
 }
 

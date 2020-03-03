@@ -9,11 +9,10 @@ import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feil
 
 interface FormikDatepickerProps {
     name: any;
-    label: string;
     className?: string;
 }
 
-function FormikDatoVelger({name, label, className}: FormikDatepickerProps) {
+function FormikDatoVelger({name, className}: FormikDatepickerProps) {
     return (
         <Field
             validate={(value: string) => validerDatoFeldt(value, new Date(), true)}
@@ -25,7 +24,7 @@ function FormikDatoVelger({name, label, className}: FormikDatepickerProps) {
                 const datePickerClassName = classNames('skjemaelement', 'datovelger', {'datovelger--harFeil': error});
                 return (
                     <div className={datePickerClassName}>
-                        <span className="skjemaelement__label">{label}</span>
+                        <span className="skjemaelement__label">Frist</span>
                         <Datovelger
                             input={{
                                 id: 'fristInput',

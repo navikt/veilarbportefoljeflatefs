@@ -40,7 +40,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     </Undertekst>
                 </div>
                 <div className="skjemaelement dato-kategori-wrapper">
-                    <FormikDatoVelger name="frist" label="Frist"/>
+                    <FormikDatoVelger name="frist"/>
                     <ArbeidslisteKategori name="kategori"/>
                 </div>
                 <div className="modal-footer">

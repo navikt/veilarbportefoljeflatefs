@@ -26,7 +26,7 @@ function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
                         <FormikTekstArea name={`arbeidsliste[${index}].kommentar`}/>
                     </div>
                     <div className="skjemaelement dato-kategori-wrapper">
-                        <FormikDatoVelger name={`arbeidsliste[${index}].frist`} label="Frist"/>
+                        <FormikDatoVelger name={`arbeidsliste[${index}].frist`}/>
                         <ArbeidslisteKategori name={`arbeidsliste[${index}].kategori`}/>
                     </div>
                 </div>

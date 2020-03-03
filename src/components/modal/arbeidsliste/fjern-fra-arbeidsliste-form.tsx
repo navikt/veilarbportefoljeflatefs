@@ -90,7 +90,8 @@ const mapDispatchToProps = (dispatch) => ({
         const arbeidsliste: ArbeidslisteDataModell[] = valgteBrukere.map((bruker) => ({
             fnr: bruker.fnr,
             kommentar: bruker.arbeidsliste.kommentar,
-            frist: bruker.arbeidsliste.frist
+            frist: bruker.arbeidsliste.frist,
+            kategori: bruker.arbeidsliste.kategori
         }));
         slettArbeidsliste(arbeidsliste)(dispatch)
             .then((res) => oppdaterState(res, lukkModal, arbeidsliste, dispatch));

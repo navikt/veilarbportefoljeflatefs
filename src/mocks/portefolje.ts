@@ -136,6 +136,7 @@ function lagArbeidsliste() {
             isOppfolgendeVeileder: null,
             arbeidslisteAktiv: false,
             sistEndretAv: {},
+            kategori: null
         };
     }
     const kategoriType = rnd(1, 4);

@@ -1,6 +1,12 @@
 import { STATUS } from '../../../ducks/utils';
 import * as React from 'react';
-import { ArbeidslisteDataModell, BrukerModell, Status, VeilederModell } from '../../../model-interfaces';
+import {
+    ArbeidslisteDataModell,
+    BrukerModell,
+    KategoriModell,
+    Status,
+    VeilederModell
+} from '../../../model-interfaces';
 import { postArbeidsliste } from '../../../ducks/arbeidsliste';
 import { markerAlleBrukere, oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
 import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
@@ -36,7 +42,7 @@ interface FormValues {
     kommentar: string;
     overskrift: string;
     frist?: string;
-    kategori?: any;
+    kategori: KategoriModell;
 }
 
 type LeggTilArbeidslisteFormProps = OwnProps & StateProps & DispatchProps;
