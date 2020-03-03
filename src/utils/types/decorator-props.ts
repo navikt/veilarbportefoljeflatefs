@@ -14,6 +14,7 @@ export interface Contextvalue<T> {
     initialValue: string | null;
     display: T;
     onChange(value: string | null): void;
+    ignoreWsEvents?: boolean;
 }
 
 export enum EnhetDisplay {
