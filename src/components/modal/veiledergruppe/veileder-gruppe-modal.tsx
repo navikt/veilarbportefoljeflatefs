@@ -11,6 +11,7 @@ import { OrNothing } from '../../../utils/types/types';
 import VeilederGruppeForm from './veileder-gruppe-form';
 import { logEvent } from '../../../utils/frontend-logger';
 import { initialState } from '../../../ducks/filtrering';
+import { finnSideNavn } from '../../../middleware/metrics-middleware';
 import './modal.less';
 
 interface VeilederModalProps {
@@ -106,7 +107,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     }
 
     function slettVeiledergruppeOgLukkModaler() {
-        logEvent('portefolje.metrikker.veiledergrupper.slettknapp');
+        logEvent('portefolje.metrikker.veiledergrupper.slettknapp', {}, { side: finnSideNavn() });
         props.onSlett && props.onSlett();
         setSletteVeiledergruppeModal(false);
         props.onRequestClose();
@@ -156,7 +157,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     };
 
     const avbrytSletting = () => {
-        logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp');
+        logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp', {}, { side: finnSideNavn() } );
         setSletteVeiledergruppeModal(false);
     };
 
