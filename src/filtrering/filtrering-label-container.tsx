@@ -46,14 +46,14 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
     let kolonne: Kolonne | null;
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
-            if (key === 'fodselsdagIMnd' && value && typeof value === 'object') {
+            if (key === 'fodselsdagIMnd') {
                 return value.map((singleValue) => {
-                    return [
+                    return (
                         <FiltreringLabel
-                            key="alder"
+                            key={`fodselsdagIMnd-${singleValue}`}
                             label={`Fødselsdato: ${singleValue}`}
-                            slettFilter={() => slettEnkelt(key, null)}
-                        />];
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        /> );
                 });
             } else if (value === true) {
                 return [
