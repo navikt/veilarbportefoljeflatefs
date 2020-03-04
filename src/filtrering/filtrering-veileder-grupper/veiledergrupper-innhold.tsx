@@ -15,6 +15,7 @@ import { FiltervalgModell } from '../../model-interfaces';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
 import { visIngenEndringerToast } from '../../store/toast/actions';
 import { logEvent } from '../../utils/frontend-logger';
+import { finnSideNavn } from '../../middleware/metrics-middleware';
 
 
 interface VeilederGruppeInnholdProps {
@@ -51,7 +52,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const velgGruppe = (gruppeId: string) => {
         logEvent('portefolje.metrikker.veiledergrupper.velg-gruppe',
-            {}, {gruppeId: gruppeId});
+                 {}, {gruppeId: gruppeId, sideNavn: finnSideNavn()});
         const filterVerdi = finnVeilederGruppe(gruppeId);
         setValgtGruppe(filterVerdi);
         filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, props.filtergruppe));

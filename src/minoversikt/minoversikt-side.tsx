@@ -60,14 +60,14 @@ function MinoversiktSide() {
                                     enhettiltak={tiltak}
                                 />
                             </div>
+                            <FiltreringLabelContainer
+                                filtervalg={filtervalg}
+                                filtergruppe="veileder"
+                                enhettiltak={enhettiltak.data.tiltak}
+                                listevisning={listevisning}
+                                className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
+                            />
                             <div className={stickyWrapper}>
-                                <FiltreringLabelContainer
-                                    filtervalg={filtervalg}
-                                    filtergruppe="veileder"
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    listevisning={listevisning}
-                                    className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
-                                />
                                 <div className={stickyContainer}>
                                     <TabellOverskrift
                                         className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>

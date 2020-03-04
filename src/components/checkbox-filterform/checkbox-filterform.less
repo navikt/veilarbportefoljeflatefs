@@ -50,6 +50,7 @@
         padding: .1rem;
         background-color: white;
         border: 1px solid transparent;
+        border-radius: 4px;
     }
 
     label:hover {
@@ -99,6 +100,8 @@
     }
 
     input[type="checkbox"]:focus + label::before {
-        outline: rgb(59, 153, 252) auto 5px;
+        border-radius: 4px;
+        box-shadow: 0 0 0 3px @fokusFarge;
+        outline: none;
     }
 }
