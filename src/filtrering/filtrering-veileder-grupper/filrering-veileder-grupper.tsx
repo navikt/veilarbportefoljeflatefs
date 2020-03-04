@@ -12,13 +12,13 @@ import {
     lageNyGruppe,
 } from '../../ducks/lagret-filter';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
-import { defaultVeileder } from '../filtrering-container';
 
-export interface FiltreringsVeilederGrupperProps {
-    filterValg?: FiltervalgModell;
+
+interface FilteringVeilederGrupperProps {
+    filtergruppe?: string;
 }
 
-function FilteringVeilederGrupper(props: FiltreringsVeilederGrupperProps) {
+function FilteringVeilederGrupper({ filtergruppe } : FilteringVeilederGrupperProps) {
 
     const [visVeilederGruppeModal, setVeilederGruppeModal] = useState(false);
 
@@ -32,7 +32,7 @@ function FilteringVeilederGrupper(props: FiltreringsVeilederGrupperProps) {
         enhet && dispatch(lageNyGruppe({
             filterNavn: gruppeNavn,
             filterValg
-        }, enhet.enhetId)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, 'enhet', defaultVeileder)));
+        }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, filtergruppe)));
     };
 
     const sortertVeiledergruppe = lagretFilter.sort((a, b) => a.filterNavn.localeCompare(b.filterNavn));
@@ -40,7 +40,10 @@ function FilteringVeilederGrupper(props: FiltreringsVeilederGrupperProps) {
     return (
         <div>
             {lagretFilter.length > 0
-                ? <VeilederGruppeInnhold lagretFilter={sortertVeiledergruppe}/>
+                ? <VeilederGruppeInnhold 
+                    lagretFilter={sortertVeiledergruppe} 
+                    filtergruppe={filtergruppe}
+                />
                 : <div className="veiledergruppe-emptystate">
                     <Normaltekst className="veiledergruppe-emptystate__tekst">
                         Ingen lagrede veiledergrupper på enheten

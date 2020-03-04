@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import { AppState } from '../../reducer';
 import { getMuligeKolonner } from './listevisning-selectors';
+import {FiltervalgModell} from "../../model-interfaces";
 
 export enum ActionTypeKeys {
     VELG_ALTERNATIV = 'listevisning/velg_alternativ',
@@ -31,6 +32,8 @@ export enum Kolonne {
     MOTER_VARIGHET = 'moter_varighet',
     ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
     ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
+    VEDTAKSTATUS_ENDRET = 'vedtakstatus_endret',
+    VEDTAKSTATUS = 'vedtakstatus'
 }
 
 export enum ListevisningType {
@@ -119,9 +122,8 @@ export const avvelgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({
 });
 export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name});
 
-export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction, AppState>, getState: () => AppState, name: ListevisningType) => {
-    const appState = getState();
-    const nyeMuligeAlternativer = getMuligeKolonner(appState, name);
+export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction, AppState>, filterValg: FiltervalgModell, name: ListevisningType) => {
+    const nyeMuligeAlternativer = getMuligeKolonner(filterValg, name);
 
     dispatch({
         type: ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV,

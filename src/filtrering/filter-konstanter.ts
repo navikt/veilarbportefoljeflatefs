@@ -17,6 +17,7 @@ export const UTLOP_YTELSE = 'UTLOP_YTELSE';
 export const AAP_YTELSE = 'AAP';
 export const AAP_YTELSE_MAXTID = 'AAP_MAXTID';
 export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
+export const UNDER_VURDERING = 'UNDER_VURDERING';
 
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker: UFORDELTE_BRUKERE,
@@ -34,7 +35,8 @@ export const mapFilternavnTilFilterValue = {
     utlopYtelse: UTLOP_YTELSE,
     aapYtelse: AAP_YTELSE,
     aapYtelseMaxtid: AAP_YTELSE_MAXTID,
-    aapYtelseUnntak: AAP_YTELSE_UNNTAK
+    aapYtelseUnntak: AAP_YTELSE_UNNTAK,
+    underVurdering: UNDER_VURDERING,
 };
 
 export const FILTERGRUPPE_ENHET = 'enhet';
@@ -59,6 +61,7 @@ export const ferdigfilterListe = {
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
     ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
     MOTER_IDAG: 'Møte med NAV idag',
+    UNDER_VURDERING: 'Under vurdering',
 };
 
 export const alder = {

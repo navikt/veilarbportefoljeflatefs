@@ -19,40 +19,34 @@ interface VeilederGruppeForm {
 
 function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
     const {focusRef} = useFocus();
-    const hvisFeil = props.errors ? 'veiledergruppe-modal__harFeil' : 'veiledergruppe-modal__valgteveileder';
-    console.log('hvisfeil', hvisFeil);
-    console.log('props.errors', props.errors);
-    console.log('props.errors.gruppeNavn', typeof props.errors.gruppeNavn);
     return (
         <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit}>
             <Innholdstittel tag="h1" className="blokk-xs">
                 {props.modalTittel}
             </Innholdstittel>
-            <div>
-                <Input
-                    label={<p className="veiledergruppe-modal__gruppenavntekst">Gruppenavn: <i>(maks 35 tegn)</i></p>}
-                    value={props.gruppeNavn}
-                    bredde="XL"
-                    onChange={e => props.setGruppeNavn(e.target.value)}
-                    feil={props.errors.gruppeNavn}
-                    maxLength={35}
-                    inputRef={inputRef => (focusRef.current = inputRef)}
-                />
-                <div className="veiledergruppe-modal__sokefilter">
-                    <SokVeiledereVeiledergrupper
-                        erValgt={(ident) => props.filterValg.veiledere ? props.filterValg.veiledere.includes(ident) : false}
-                        hanterVeilederValgt={props.hanterVeilederChange}
-                    />
-                </div>
-                <Normaltekst className="veiledergruppe-modal__tekst">
-                    Veiledere i gruppen: <i> ({props.filterValg.veiledere.length} stk)</i>
-                </Normaltekst>
-                <ValgtVeilederGruppeListe
-                    valgteVeileder={props.filterValg.veiledere}
-                    fjernValgtVeileder={(veilederTarget) => props.hanterVeilederChange(false, veilederTarget)}
-                    feil={props.errors.filterValg}
+            <Input
+                label={<p className="veiledergruppe-modal__gruppenavntekst">Gruppenavn: <i>(maks 35 tegn)</i></p>}
+                value={props.gruppeNavn}
+                bredde="XL"
+                onChange={e => props.setGruppeNavn(e.target.value)}
+                feil={props.errors.gruppeNavn}
+                maxLength={35}
+                inputRef={inputRef => (focusRef.current = inputRef)}
+            />
+            <div className="veiledergruppe-modal__sokefilter">
+                <SokVeiledereVeiledergrupper
+                    erValgt={(ident) => props.filterValg.veiledere ? props.filterValg.veiledere.includes(ident) : false}
+                    hanterVeilederValgt={props.hanterVeilederChange}
                 />
             </div>
+            <Normaltekst className="veiledergruppe-modal__tekst">
+                Veiledere i gruppen: <i> ({props.filterValg.veiledere.length} stk)</i>
+            </Normaltekst>
+            <ValgtVeilederGruppeListe
+                valgteVeileder={props.filterValg.veiledere}
+                fjernValgtVeileder={(veilederTarget) => props.hanterVeilederChange(false, veilederTarget)}
+                feil={props.errors.filterValg}
+            />
             {props.children}
         </form>
     );

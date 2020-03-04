@@ -20,8 +20,20 @@ body {
         background-color: white;
         margin: 0 auto;
         height: 100%;
-        max-height: 5rem;
+        max-height: 8rem;
         box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+    }
+
+    @media (max-width: 870px) {
+        #mainapp {
+            max-height: 10rem;
+        }
+    }
+
+    @media (max-width: 782px) {  //PIXELPUSHING <3
+        #mainapp {
+            max-height: 11rem;
+        }
     }
 }
 
@@ -51,18 +63,31 @@ html {
     @import "./components/barinput/barlabel";
 
     .ekspanderbartPanel--apen .ReactCollapse--collapse {
-        overflow: visible !important;
+        overflow: initial !important;
     }
 }
 
+.decorator-context-modal {
+    padding: 1rem;
+}
 
 .modal__overlay {
     z-index: 2000;
 }
 
+.status-filter-kolonne {
+    max-width: 375px;
+}
+
 @media (min-width: 1200px) {
     .container {
         width: 956px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .status-filter-kolonne {
+        max-width: none;
     }
 }
 

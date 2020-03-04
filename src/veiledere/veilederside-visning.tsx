@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useMemo } from 'react';
+import { useDispatch, useSelector} from 'react-redux';
 import Toolbar from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
-import { PageringOppdatering, pagineringSetup } from '../ducks/paginering';
 import { sortBy } from '../ducks/sortering';
 import { sorter } from '../utils/sortering';
-import { settSide } from '../ducks/ui/side';
 import {
     selectFraIndex,
     selectSeAlle,
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
 import { ListevisningType } from '../ducks/ui/listevisning';
-import { VeiledereState } from '../ducks/veiledere';
 import { PortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import './veiledere.less';
+import {VeilederModell} from "../model-interfaces";
+import {AppState} from "../reducer";
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere && veiledere.length > 0) {
@@ -39,110 +38,49 @@ function propertySort({property, direction}) {
 }
 
 interface VeilederesideVisningProps {
-    settSide: (side: string) => void;
-    sideStorrelse: number;
-    fra: number;
-    sortering: {
-        property: string;
-        direction: string;
-    };
-    sortBy: (sorterEtter: string) => void;
     veilederFilter: string[];
-    veiledere: VeiledereState;
+    veiledere: VeilederModell[];
     portefoljestorrelser: PortefoljeStorrelser;
-    seAlle: boolean;
-    pagineringSetup: (data: PageringOppdatering) => void;
 }
 
-interface VeilederesideVisningState {
-    veiledere: string[];
-}
+function VeilederesideVisning(props: VeilederesideVisningProps) {
+    const dispatch = useDispatch();
+    const fra = useSelector(selectFraIndex);
+    const sideStorrelse = useSelector(selectSideStorrelse);
+    const seAlle = useSelector(selectSeAlle);
+    const sortering = useSelector((state: AppState)=> state.sortering);
 
-class VeilederesideVisning extends Component<VeilederesideVisningProps, VeilederesideVisningState> {
-    constructor(props) {
-        super(props);
+    const veilederListe = useMemo(() => {
+        return props.veiledere
+            .filter(erValgtHvisFiltrering(props.veilederFilter))
+            .map(medPortefoljestorrelse(props.portefoljestorrelser))
+            .sort(propertySort(sortering));
+    },[props.veilederFilter, props.portefoljestorrelser, props.veiledere, sortering]);
 
-        this.state = {
-            veiledere: []
-        };
-
-        this.oppdaterVeilederListe = this.oppdaterVeilederListe.bind(this);
-    }
-
-    componentWillMount() {
-        this.props.settSide('enhet');
-    }
-
-    componentDidMount() {
-        this.oppdaterVeilederListe();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (
-            this.props.veiledere !== prevProps.veiledere ||
-            this.props.veilederFilter !== prevProps.veilederFilter ||
-            this.props.portefoljestorrelser !== prevProps.portefoljestorrelser ||
-            this.props.sortering !== prevProps.sortering
-        ) {
-            this.oppdaterVeilederListe();
+    function getVeiledere() {
+        if (seAlle) {
+            return veilederListe
         }
+        return veilederListe.slice(fra, fra + sideStorrelse);
     }
+    const veiledere = getVeiledere();
 
-    getVeiledere() {
-        if (this.props.seAlle) {
-            return this.state.veiledere;
-        }
-
-        return this.state.veiledere.slice(this.props.fra, this.props.fra + this.props.sideStorrelse);
-    }
-
-    oppdaterVeilederListe() {
-        const veiledere = this.props.veiledere.data.veilederListe
-            .filter(erValgtHvisFiltrering(this.props.veilederFilter))
-            .map(medPortefoljestorrelse(this.props.portefoljestorrelser))
-            .sort(propertySort(this.props.sortering));
-
-        this.props.pagineringSetup({
-            side: 1
-        });
-
-        this.setState({veiledere});
-    }
-
-    render() {
-        const veiledere = this.getVeiledere();
-        return (
-            <div>
-                <Toolbar
-                    filtergruppe={ListevisningType.veilederOversikt}
-                    antallTotalt={this.state.veiledere.length}
-                    sokVeilederSkalVises={false}
-                    id="veilederside-toolbar"
-                />
-                <VeiledereTabell
-                    veiledere={veiledere}
-                    sorterPaaEtternavn={() => this.props.sortBy('etternavn')}
-                    sorterPaaPortefoljestorrelse={() => this.props.sortBy('portefoljestorrelse')}
-                />
-            </div>
-        );
-    }
+    return (
+        <div>
+            <Toolbar
+                filtergruppe={ListevisningType.veilederOversikt}
+                antallTotalt={veilederListe.length}
+                sokVeilederSkalVises={false}
+                id="veilederside-toolbar"
+            />
+            <VeiledereTabell
+                veiledere={veiledere}
+                currentSortering={sortering}
+                sorterPaaEtternavn={() => dispatch(sortBy('etternavn'))}
+                sorterPaaPortefoljestorrelse={() => dispatch(sortBy('portefoljestorrelse'))}
+            />
+        </div>
+    );
 }
 
-const mapStateToProps = (state) => ({
-    veiledere: state.veiledere,
-    portefoljestorrelser: state.portefoljestorrelser,
-    sortering: state.sortering,
-    veilederFilter: state.filtreringVeilederoversikt.veiledere,
-    fra: selectFraIndex(state),
-    sideStorrelse: selectSideStorrelse(state),
-    seAlle: selectSeAlle(state)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    pagineringSetup: (data: PageringOppdatering) => dispatch(pagineringSetup(data)),
-    sortBy: (...args) => dispatch(sortBy(...args)),
-    settSide: (side) => dispatch(settSide(side))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(VeilederesideVisning);
+export default VeilederesideVisning;

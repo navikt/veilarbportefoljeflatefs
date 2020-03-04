@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import { fjernFerdigfilter, leggTilFerdigFilter } from './filter-utils';
 import { FiltreringStatusContainer } from './filtrering-status-components/filtrering-wrapper';
-import { FiltreringStatusTrengerVurderingEllerSykmeldt } from './filtrering-status-components/trenger-vurdering-sykemeldt';
+import { FiltreringStatusBehovsVurdering } from './filtrering-status-components/behov-og-arbeidsevnevurdering';
 import { FiltreringStatusAktiviteter } from './filtrering-status-components/aktiviteter';
 import { FiltreringStatusDialog } from './filtrering-status-components/dialog-gruppe';
 import { FiltreringStatusInavtiveBrukere } from './filtrering-status-components/inaktivebrukere';
@@ -11,13 +11,13 @@ import FiltreringStatusNyeBrukere from './filtrering-status-components/nyebruker
 import FiltreringStatusUfordelteBrukere from './filtrering-status-components/ufordelte-brukere';
 import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avtalt-mote-med-nav';
 import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
-import { FiltervalgModell, VeilederModell } from '../../model-interfaces';
+import { FiltervalgModell } from '../../model-interfaces';
 import './filtrering-status.less';
+import {pagineringSetup} from "../../ducks/paginering";
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
     filtergruppe?: string;
-    veileder: VeilederModell;
 }
 
 export function FiltreringStatus(props: FiltreringStatusProps) {
@@ -25,8 +25,9 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
     const dispatch = useDispatch();
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
+        dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(
-            'ferdigfilterListe', ferdigFilterListe, props.filtergruppe, props.veileder));
+            'ferdigfilterListe', ferdigFilterListe, props.filtergruppe));
     }
 
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -54,7 +55,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 ferdigfilterListe={ferdigfilterListe}
                 hidden={props.filtergruppe === 'veileder'}
             />
-            <FiltreringStatusTrengerVurderingEllerSykmeldt
+            <FiltreringStatusBehovsVurdering
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
             />

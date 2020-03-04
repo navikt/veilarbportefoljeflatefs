@@ -1,6 +1,6 @@
-import { hentEnhetsVeiledere } from './../middleware/api';
+import { hentEnhetsVeiledere } from '../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
-import { EnhetModell, VeilederModell } from '../model-interfaces';
+import {  VeilederModell } from '../model-interfaces';
 
 // Actions
 export const OK = 'veilarbveileder/veiledere/OK';
@@ -11,7 +11,6 @@ export interface VeiledereState {
     status: string;
     data: {
         veilederListe: VeilederModell[];
-        enhet: EnhetModell;
     };
 }
 
@@ -19,9 +18,6 @@ const initialState = {
     status: STATUS.NOT_STARTED,
     data: {
         veilederListe: [],
-        enhet: {
-            enhetId: '',
-        }
     }
 };
 

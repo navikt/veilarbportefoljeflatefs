@@ -60,7 +60,7 @@ function SokVeilederFilter(props: AllProps) {
                         erValgt={ident => valgteVeileder.includes(ident)}
                         hanterVeilederValgt={hanterChange}
                     />
-                    <div className="checkbox-filterform__valg-knapp knapperad blokk-xxs">
+                    <div className="blokk-xxs checkbox-filterform__under-valg">
                         <button
                             onClick={() => createHandleOnSubmit(valgteVeileder, lukkDropDown)}
                             className={classNames('knapp', 'knapp--mini', {'knapp--hoved': harValg})}
@@ -85,7 +85,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     sokEtterVeileder(filterId: string, filterverdi: string[]) {
-        return endreFiltervalg(filterId, filterverdi, ownProps.filtergruppe, ownProps.veileder.ident);
+        return endreFiltervalg(filterId, filterverdi, ownProps.filtergruppe);
     },
     veilederSokt() {
         return veilederSoktFraToolbar();

@@ -11,7 +11,7 @@ import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
-    MOTER_IDAG,
+    MOTER_IDAG, UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -23,20 +23,22 @@ import { BrukerModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import { klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato } from '../utils/dato-utils';
+import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
+import {OrNothing} from "../utils/types/types";
 import './minoversikt.less';
+import {VedtakStatusKolonne} from "../components/tabell/vedtakstatus";
+import {DagerSidenKolonne} from "../components/tabell/kolonner/dagersidenkolonne";
 
 interface MinOversiktKolonnerProps {
     className?: string;
     bruker: BrukerModell;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
-    enhetId: string;
-    skalJusteres: boolean;
+    enhetId: OrNothing<string>;
 }
 
-function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId, skalJusteres}: MinOversiktKolonnerProps) {
+function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
     const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
@@ -59,7 +61,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} skalJusteres={skalJusteres}/>
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}/>
             <BrukerFnr className="col col-xs-2" bruker={bruker}/>
             <DatoKolonne
                 className="col col-xs-2"
@@ -169,6 +171,15 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                 valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
+            />
+            <VedtakStatusKolonne
+                bruker={bruker}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+            />
+            <DagerSidenKolonne
+                className="col col-xs-2"
+                dato={dagerSiden(bruker.vedtakStatusEndret)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
             />
         </div>
     );

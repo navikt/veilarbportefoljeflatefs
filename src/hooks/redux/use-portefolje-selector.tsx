@@ -1,35 +1,38 @@
 import { useSelector } from 'react-redux';
 import { AppState } from '../../reducer';
-import { getFiltertingState, selectValgteAlternativer } from "../../ducks/ui/listevisning-selectors";
-import {Kolonne, ListevisningType} from "../../ducks/ui/listevisning";
+import { getFiltertingState, selectListeVisning } from "../../ducks/ui/listevisning-selectors";
+import { ListevisningState, ListevisningType} from "../../ducks/ui/listevisning";
 import { createSelector } from 'reselect'
 import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from "../../model-interfaces";
+import {OrNothing} from "../../utils/types/types";
+import {PortefoljeState} from "../../ducks/portefolje";
 
-const selectValgtEnhetId = (state: AppState): string => state.enheter.valgtEnhet.enhet!.enhetId;
+const selectValgtEnhetId = (state: AppState) => state.valgtEnhet.data.enhetId;
 const selectSorteringsrekkefolge = (state: AppState) => state.portefolje.sorteringsrekkefolge;
 const selectBrukere = (state: AppState) => state.portefolje.data.brukere;
 const selectSorteringsFeldt = (state: AppState) => state.portefolje.sorteringsfelt;
+const selectPortefolje = (state: AppState) => state.portefolje;
 
-
-const selectValgteKolonner = (state: AppState, listeVisningstype: ListevisningType) => selectValgteAlternativer(state, listeVisningstype);
 
 const selectPortefoljeTabell = createSelector(
+    selectPortefolje,
     selectValgtEnhetId,
     selectSorteringsrekkefolge,
     selectBrukere,
     (state, listevisningType) => getFiltertingState(state, listevisningType),
-    (state, listevisningType) => selectValgteKolonner(state, listevisningType),
+    (state, listevisningType) => selectListeVisning(state, listevisningType),
     selectSorteringsFeldt,
-    (enhetId, sorteringsrekkefolge, brukere, filtervalg, valgteKolonner, sorteringsfelt) =>
-        ({enhetId, sorteringsrekkefolge,brukere, filtervalg, valgteKolonner, sorteringsfelt})
+    (portefolje, enhetId, sorteringsrekkefolge, brukere, filtervalg, listevisning, sorteringsfelt) =>
+        ({portefolje, enhetId, sorteringsrekkefolge,brukere, filtervalg, listevisning, sorteringsfelt})
 );
 
 interface UsePortefoljeSelector {
-    enhetId: string;
+    portefolje: PortefoljeState,
+    enhetId: OrNothing<string>;
     sorteringsrekkefolge: Sorteringsrekkefolge;
     brukere: BrukerModell[],
     filtervalg: FiltervalgModell;
-    valgteKolonner: Kolonne[];
+    listevisning: ListevisningState;
     sorteringsfelt: Sorteringsfelt;
 }
 

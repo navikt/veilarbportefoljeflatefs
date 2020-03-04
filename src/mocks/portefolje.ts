@@ -110,6 +110,21 @@ function lagOverskrift() {
     return null;
 }
 
+function lagVedtakUtkast() {
+    const maybeUtkast = rnd(0, 1);
+    const maybeUtkastOpprettet = rnd(0, 1);
+    if(maybeUtkast > 0.5) {
+        return ({
+            vedtakStatusEndret: randomDate({past: true}),
+            vedtakStatus: maybeUtkastOpprettet ? "UTKAST_OPPRETTET" : "SENDT_TIL_BESLUTTER"
+        })
+    }
+    return ({
+        vedtakStatusEndret: null,
+        vedtakStatus: null
+    });
+}
+
 function lagArbeidsliste() {
     const maybeArbeidsliste = rnd(0, 1);
     if (maybeArbeidsliste > 0.5) {
@@ -143,6 +158,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const ytelse = lagYtelse();
     const arbeidsliste = lagArbeidsliste();
     const erSykmeldtMedArbeidsgiver = Math.random()  < 25 / 100;
+    const vedtakUtkast = lagVedtakUtkast();
 
     return {
         fnr: grunndata.fnr,
@@ -176,6 +192,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         erSykmeldtMedArbeidsgiver,
         moteStartTid: grunndata.moteStartTid,
         moteSluttTid: grunndata.moteSluttTid,
+        vedtakStatus: vedtakUtkast.vedtakStatus,
+        vedtakStatusEndret: vedtakUtkast.vedtakStatusEndret
     };
 }
 

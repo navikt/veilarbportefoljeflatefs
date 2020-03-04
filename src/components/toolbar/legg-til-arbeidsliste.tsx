@@ -1,90 +1,73 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import { VIS_ARBEIDSLISTE_MODAL, visModal } from '../../ducks/modal';
-import { PortefoljeState } from '../../ducks/portefolje';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { ReactComponent as ArbeidslisteIkonLinje } from './arbeidslisteikon-linje.svg';
+import {VIS_ARBEIDSLISTE_MODAL, visModal} from '../../ducks/modal';
 import './toolbar.less';
+import {useLocation, useParams} from "react-router";
+import {BrukerModell} from "../../model-interfaces";
+import {AppState} from "../../reducer";
+import {useIdentSelector} from "../../hooks/redux/use-inlogget-ident";
+import { ReactComponent as ArbeidslisteIkonLinje } from './arbeidslisteikon-linje.svg';
 
-interface StateProps {
-    portefolje: PortefoljeState;
-    visModal?: boolean;
-    veilederIdent: string;
-}
-
-interface DispatchProps {
-    visArbeidslisteModal: () => void;
-}
-
-interface OwnProps {
+interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
 }
 
-type LeggTilArbeidslisteProps = StateProps & DispatchProps & OwnProps & RouteComponentProps<{ ident: string }> ;
 
-class LeggTilArbeidsliste extends React.Component<LeggTilArbeidslisteProps> {
-    constructor(props) {
-        super(props);
-        this.onClickHandler = this.onClickHandler.bind(this);
+function LeggTilArbeidsliste (props: LeggTilArbeidslisteProps ) {
+    const portefolje = useSelector( (state: AppState) => state.portefolje.data);
+    const modalSkalVises = useSelector((state:AppState) => state.modal.modal) === VIS_ARBEIDSLISTE_MODAL;
+    const inloggetVeielder = useIdentSelector();
+    const dispatch = useDispatch();
+
+    const {ident} = useParams();
+    const location = useLocation();
+    const pathname = location.pathname;
+
+    const valgteBrukere = portefolje.brukere.filter((bruker) => bruker.markert === true);
+
+    const skalSkjules = inloggetVeielder && pathname === "/portefolje"
+        ? ident
+            ? ident !== inloggetVeielder.ident
+            : false
+        : true;
+
+    if (skalSkjules) {
+        return null;
     }
 
-    onClickHandler() {
-        this.props.visArbeidslisteModal();
-    }
-
-    arbeidslisteButton(valgteBrukere) {
-        const inneholderBrukerMedArbeidsliste = valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
-        const arbeidslisteButton = (tekst) => (
-            <button
-                type="button"
-                className="toolbar_btn"
-                disabled={valgteBrukere.length < 1 || this.props.visesAnnenVeiledersPortefolje}
-                onClick={this.onClickHandler}
-            >
-                {tekst}
-                <ArbeidslisteIkonLinje className="toolbar__arbeidsliste-ikon"/>
-            </button>
-        );
-
-        if (inneholderBrukerMedArbeidsliste) {
-            return arbeidslisteButton('Fjern fra arbeidsliste');
-        }
-
-        return arbeidslisteButton('Legg i arbeidsliste');
-    }
-
-    render() {
-        const {portefolje} = this.props;
-        const valgteBrukere = portefolje.data.brukere.filter((bruker) => bruker.markert === true);
-        const path = this.props.match.path.split('/')[1];
-        const skalSkjules =
-            path === 'portefolje' ?
-                this.props.match.params.ident ?
-                    this.props.match.params.ident !== this.props.veilederIdent : false
-                : true;
-        const modalSkalVises = this.props.visModal === true;
-
-        if (skalSkjules) {
-            return null;
-        }
-        return (
-            <div className="toolbar_btnwrapper dropdown--toolbar">
-                {this.arbeidslisteButton(valgteBrukere)}
-                {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere}/>}
-            </div>
-        );
-    }
+    return (
+        <div className="toolbar_btnwrapper dropdown--toolbar">
+            <ArbeidsListeKnapp
+                valgteBrukere={valgteBrukere}
+                onClickHandler={() => dispatch(visModal())}
+                visesAnnenVeiledersPortefolje={props.visesAnnenVeiledersPortefolje}
+            />
+            {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
+        </div>
+    );
 }
 
-const mapStateToProps = (state) => ({
-    visModal: state.modal.modal === VIS_ARBEIDSLISTE_MODAL,
-    portefolje: state.portefolje,
-    veilederIdent: state.enheter.ident
-});
+function ArbeidsListeKnapp (props: {valgteBrukere : BrukerModell[], onClickHandler: ()=> void, visesAnnenVeiledersPortefolje: boolean}) {
+    const inneholderBrukerMedArbeidsliste = props.valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
 
-const mapDispatchToProps = (dispatch) => ({
-    visArbeidslisteModal: () => dispatch(visModal()),
-});
+    const arbeidslisteButton = (tekst) => (
+        <button
+            type="button"
+            className="toolbar_btn"
+            disabled={props.valgteBrukere.length < 1 || props.visesAnnenVeiledersPortefolje}
+            onClick={props.onClickHandler}
+        >
+            {tekst}
+            <ArbeidslisteIkonLinje className="toolbar__arbeidsliste-ikon"/>
+        </button>
+    );
 
-export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(withRouter(LeggTilArbeidsliste));
+    if (inneholderBrukerMedArbeidsliste) {
+        return arbeidslisteButton('Fjern fra arbeidsliste');
+    }
+
+    return arbeidslisteButton('Legg i arbeidsliste');
+}
+
+export default LeggTilArbeidsliste;

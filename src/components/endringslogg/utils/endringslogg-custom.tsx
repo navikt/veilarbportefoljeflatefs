@@ -19,6 +19,12 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '04. MAR. 2020',
+        versjonId: '04.03.20',
+        tittel: 'Veiledergrupper i veilederoversikten',
+        tekst: 'Veiledergruppene vises nå også i veilederoversikten. Når du velger en gruppe ser du veilederne i gruppen, og antall brukere hver veileder er tildelt.',
+    },
+    {
         dato: '03. MAR. 2020',
         versjonId: '03.03.20',
         tittel: 'Endringer i veilederverktøy',

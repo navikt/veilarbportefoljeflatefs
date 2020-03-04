@@ -1,5 +1,4 @@
-import { randomFailure } from './utils';
-import enheter from './enheter';
+import inloggetVeileder from './inloggetVeileder';
 import me from './me';
 import brukere from './portefolje';
 import veiledere from './veiledere';
@@ -19,7 +18,7 @@ import FetchMock, {
 import { LagretFilter } from '../ducks/lagret-filter';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
-    const enhetportefolje = lagPortefolje(queryParams, enheter.enhetliste[0].enhetId, alleBrukere);
+    const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
     enhetportefolje.brukere.forEach((bruker) => bruker.veilederId = me.ident);
     return enhetportefolje;
 }
@@ -43,7 +42,6 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
                 bruker.fodselsdato = null;
                 bruker.diskresjonskode = Math.random() < 0.5 ? '6' : '7';
                 bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
-
             }
             return bruker;
         });
@@ -111,10 +109,10 @@ mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (args: Handler
 });
 
 // veileder-api
-mock.get('/veilarbveileder/api/veileder/enheter', enheter);
-mock.get('/veilarbveileder/api/veileder/me', me);
+mock.get('/veilarbveileder/api/veileder/v2/me', inloggetVeileder);
 mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', veiledere);
 mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', true);
+
 
 // portefolje-api
 mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', ResponseUtils.delayed(1000, statustall));
@@ -158,10 +156,37 @@ mock.post('/veilarbportefolje/api/arbeidsliste/delete', ({body}) => {
 });
 
 // modiacontextholder-api
-mock.post('/modiacontextholder/api/context', ResponseUtils.delayed(1000, randomFailure({
-    error: ['111111111111', '222222222222'],
-    data: []
-})));
+
+mock.get('/modiacontextholder/api/context/aktivenhet', ResponseUtils.delayed(1000, {
+    "aktivBruker": null,
+    "aktivEnhet": "1234"
+}));
+
+mock.get('/modiacontextholder/api/decorator', ResponseUtils.delayed(1000, {
+    "ident":"Z992763",
+    "navn":"F_Z992763 E_Z992763",
+    "fornavn":"F_Z992763",
+    "etternavn":"E_Z992763",
+    "enheter":[{enhetId: '1234', navn: 'NAV Testheim'}, {enhetId: '0001', navn: 'NAV Gotham City'}],
+}));
+
+mock.get('/modiacontextholder/api/context/aktivbruker', ResponseUtils.delayed(1000, {
+    "aktivBruker": null,
+    "aktivEnhet": null
+}));
+
+mock.delete('/modiacontextholder/api/context/aktivbruker', ResponseUtils.delayed(1000, {
+    "aktivBruker": null,
+    "aktivEnhet": null
+}));
+
+mock.get('/modiacontextholder/api/decorator', ResponseUtils.delayed(1000, {
+    enheter: [{enhetId: '1234', navn: 'NAV Testheim'}],
+    etternavn: inloggetVeileder.etternavn,
+    fornavn: inloggetVeileder.fornavn,
+    ident: inloggetVeileder.ident,
+    navn: `${inloggetVeileder.fornavn} ${inloggetVeileder.etternavn}`
+}));
 
 // websocket
 class MockWebSocket {
