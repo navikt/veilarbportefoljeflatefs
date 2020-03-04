@@ -130,14 +130,14 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
         case SLETT_VEILEDERGRUPPER_OK: {
             const opprettetTidpunkt = finnSlettetVeilederGruppe(store, action.data);
-            loggSlettVeiledergruppeOK(opprettetTidpunkt);
+            loggSlettVeiledergruppeOK(opprettetTidpunkt, finnSideNavn());
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().lagretFilter.data.length, action.data.filterNavn.trim().length, store.getState().valgtEnhet);
+            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().lagretFilter.data.length, action.data.filterNavn.trim().length, store.getState().valgtEnhet, finnSideNavn());
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
-            loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length);
+            loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length, finnSideNavn());
             break;
     }
 
@@ -239,18 +239,20 @@ const loggSlettVeiledergruppeFeilet = () => {
     logEvent('portefolje.metrikker.veiledergrupper.sletting-feilet');
 };
 
-const loggNyVeiledergruppeOK = (antallVeiledere, antallGrupper, gruppeNavn, enhetId) => {
+const loggNyVeiledergruppeOK = (antallVeiledere, antallGrupper, gruppeNavn, enhetId, sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket',
         {veiledere: antallVeiledere, antallGrupper, gruppeNavn},
-        {enhetId});
+        {enhetId, sideNavn});
 };
 
-const loggRedigerVeiledergruppeOK = (antallVeiledere) => {
+const loggRedigerVeiledergruppeOK = (antallVeiledere, sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.veiledergrupper.lagring-vellykket',
-        {veiledere: antallVeiledere});
+        {veiledere: antallVeiledere},
+        {sideNavn});
 };
 
-const loggSlettVeiledergruppeOK = (opprettetTidspunkt) => {
+const loggSlettVeiledergruppeOK = (opprettetTidspunkt, sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.veiledergrupper.sletting-vellykket',
-        {levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24)});
+        {levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24)},
+        {sideNavn});
 };

@@ -107,7 +107,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     }
 
     function slettVeiledergruppeOgLukkModaler() {
-        logEvent('portefolje.metrikker.veiledergrupper.slettknapp', {}, { side: finnSideNavn() });
+        logEvent('portefolje.metrikker.veiledergrupper.slettknapp', {}, { sideNavn: finnSideNavn() });
         props.onSlett && props.onSlett();
         setSletteVeiledergruppeModal(false);
         props.onRequestClose();
@@ -157,7 +157,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     };
 
     const avbrytSletting = () => {
-        logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp', {}, { side: finnSideNavn() } );
+        logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp', {}, { sideNavn: finnSideNavn() } );
         setSletteVeiledergruppeModal(false);
     };
 

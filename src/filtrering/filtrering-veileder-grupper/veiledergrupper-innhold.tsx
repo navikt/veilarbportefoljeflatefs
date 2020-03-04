@@ -52,7 +52,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const velgGruppe = (gruppeId: string) => {
         logEvent('portefolje.metrikker.veiledergrupper.velg-gruppe',
-                 {}, {gruppeId: gruppeId, side: finnSideNavn()});
+                 {}, {gruppeId: gruppeId, sideNavn: finnSideNavn()});
         const filterVerdi = finnVeilederGruppe(gruppeId);
         setValgtGruppe(filterVerdi);
         filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, props.filtergruppe));
