@@ -87,17 +87,17 @@ function EnhetSide() {
                                         filtergruppe="enhet"
                                     />
                                 </div>
+                                <FiltreringLabelContainer
+                                    filtervalg={{
+                                        ...filtervalg,
+                                        veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
+                                    }}
+                                    filtergruppe="enhet"
+                                    enhettiltak={enhettiltak.data.tiltak}
+                                    listevisning={listevisning}
+                                    className="filtrering-label-container"
+                                />
                                 <div className={stickyWrapper}>
-                                    <FiltreringLabelContainer
-                                        filtervalg={{
-                                            ...filtervalg,
-                                            veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
-                                        }}
-                                        filtergruppe="enhet"
-                                        enhettiltak={enhettiltak.data.tiltak}
-                                        listevisning={listevisning}
-                                        className="filtrering-label-container"
-                                    />
                                     {harFilter
                                         ? <>
                                             <div className={stickyContainer}>
