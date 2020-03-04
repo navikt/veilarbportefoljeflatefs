@@ -24,7 +24,9 @@ function VeiledergruppeToast(props: VeiledergruppeToastProps) {
         startTimer();
         const timer = setTimeout(() => {
             dispatch(props.fjernToast);
-        }, 10000);
+        }, 6000);
+
+
         return () => clearTimeout(timer);
     });
 
