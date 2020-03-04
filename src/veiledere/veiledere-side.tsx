@@ -63,7 +63,7 @@ function VeiledereSide() {
                                         <MetrikkEkspanderbartpanel
                                             apen={true}
                                             tittelProps="undertittel"
-                                            lamellNavn="veiledergrupper_veilederoversikt"
+                                            lamellNavn="veiledergrupper"
                                             tittel="Veiledergrupper"
                                         >
                                             <FilteringVeilederGrupper filtergruppe="veiledere"/>
