@@ -134,7 +134,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().lagretFilter.data.length, action.data.filterNavn.trim().length, store.getState().valgtEnhet, finnSideNavn());
+            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().lagretFilter.data.length, action.data.filterNavn.trim().length, store.getState().valgtEnhet.data.enhetId, finnSideNavn());
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length, finnSideNavn());
