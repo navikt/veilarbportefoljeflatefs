@@ -86,7 +86,7 @@ function EnhetSide() {
                                         filtergruppe="enhet"
                                     />
                                 </div>
-                                <div className="liste-kolonne col-lg-auto col-md-12 col-sm-12">
+                                <div className="liste-kolonne col-lg-9 col-md-12 col-sm-12">
                                     <FiltreringLabelContainer
                                         filtervalg={{
                                             ...filtervalg,
