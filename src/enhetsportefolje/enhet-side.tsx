@@ -67,14 +67,13 @@ function EnhetSide() {
 
     const portefoljeData = portefolje.data;
     const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
-    const stickyWrapper = antallBrukere >= 5 ? 'col-lg-9 col-md-12 col-sm-12' : 'sticky-div col-lg-9 col-md-12 col-sm-12';
     const stickyContainer = antallBrukere >= 5 ? 'sticky-container' : 'sticky-container__fjernet';
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const harFilter = antallFilter(filtervalg) !== 0;
 
     return (
         <DocumentTitle title="Enhetens oversikt">
-            <div className="enhet-side blokk-xl">
+            <div className="side-storrelse blokk-xl">
                 <ToppMeny>
                     <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
                         <div id="oversikt-sideinnhold" role="tabpanel">
@@ -87,17 +86,17 @@ function EnhetSide() {
                                         filtergruppe="enhet"
                                     />
                                 </div>
-                                <FiltreringLabelContainer
-                                    filtervalg={{
-                                        ...filtervalg,
-                                        veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
-                                    }}
-                                    filtergruppe="enhet"
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    listevisning={listevisning}
-                                    className="filtrering-label-container"
-                                />
-                                <div className={stickyWrapper}>
+                                <div className="liste-kolonne col-lg-auto col-md-12 col-sm-12">
+                                    <FiltreringLabelContainer
+                                        filtervalg={{
+                                            ...filtervalg,
+                                            veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
+                                        }}
+                                        filtergruppe="enhet"
+                                        enhettiltak={enhettiltak.data.tiltak}
+                                        listevisning={listevisning}
+                                        className="filtrering-label-container"
+                                    />
                                     {harFilter
                                         ? <>
                                             <div className={stickyContainer}>

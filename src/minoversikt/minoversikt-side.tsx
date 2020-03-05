@@ -42,13 +42,12 @@ function MinoversiktSide() {
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
-    const stickyWrapper = antallBrukere > 4 ? 'col-lg-9 col-md-12 col-sm-12' : 'sticky-div col-lg-9 col-md-12 col-sm-12';
     const stickyContainer = antallBrukere > 4 ? 'sticky-container' : 'sticky-container__fjernet';
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
 
     return (
         <DocumentTitle title="Min oversikt">
-            <div className="minoversikt-side blokk-xl">
+            <div className="side-storrelse blokk-xl">
                 <ToppMeny>
                     <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere]}>
                         <MinOversiktWrapper>
@@ -60,14 +59,14 @@ function MinoversiktSide() {
                                     enhettiltak={tiltak}
                                 />
                             </div>
-                            <FiltreringLabelContainer
-                                filtervalg={filtervalg}
-                                filtergruppe="veileder"
-                                enhettiltak={enhettiltak.data.tiltak}
-                                listevisning={listevisning}
-                                className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
-                            />
-                            <div className={stickyWrapper}>
+                            <div className="liste-kolonne col-lg-9 col-md-12 col-sm-12">
+                                <FiltreringLabelContainer
+                                    filtervalg={filtervalg}
+                                    filtergruppe="veileder"
+                                    enhettiltak={enhettiltak.data.tiltak}
+                                    listevisning={listevisning}
+                                    className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
+                                />
                                 <div className={stickyContainer}>
                                     <TabellOverskrift
                                         className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>

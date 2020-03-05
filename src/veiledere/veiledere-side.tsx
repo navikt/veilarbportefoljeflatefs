@@ -43,14 +43,12 @@ function VeiledereSide() {
 
     return (
         <DocumentTitle title="Veilederoversikt">
-            <div className="veiledere-side">
+            <div className="side-storrelse">
                 <ToppMeny>
                     <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
                         <section>
-
                             <div id="oversikt-sideinnhold" role="tabpanel">
                                 <div className="row">
-
                                     <div
                                         className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12 status-filter-kolonne">
                                         <PanelBase className="blokk-xxxs sok-veileder">
@@ -59,7 +57,6 @@ function VeiledereSide() {
                                             </Undertittel>
                                             <FiltreringVeiledere/>
                                         </PanelBase>
-
                                         <MetrikkEkspanderbartpanel
                                             apen={true}
                                             tittelProps="undertittel"
@@ -68,9 +65,7 @@ function VeiledereSide() {
                                         >
                                             <FilteringVeilederGrupper filtergruppe="veiledere"/>
                                         </MetrikkEkspanderbartpanel>
-
                                     </div>
-
                                     <div className="col-lg-9 col-md-12 col-sm-12">
                                         <FiltreringLabelContainer
                                             filtervalg={{
@@ -83,7 +78,6 @@ function VeiledereSide() {
                                             filtergruppe="veiledere"
                                             className="filtrering-label-container"
                                         />
-
                                         <div className="sticky-container">
                                             <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
                                                 {`Totalt ${veiledere.data.veilederListe.length} veiledere`}
