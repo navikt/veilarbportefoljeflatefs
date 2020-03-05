@@ -19,6 +19,23 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '05. MAR. 2020',
+        tittel: 'Nytt design på dialog',
+        versjonId: '05.03.20',
+        children:
+            <>
+                <ul className="endringslogg-innhold-liste">
+                    <li>Utnytte skjermplassen bedre</li>
+                    <li>På store skjermer vises innholdet i aktiviteten samtidig som dialogen</li>
+                    <li>Enkel automatisk signatur for veileder</li>
+                </ul>
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Hvordan-f%C3%A5-flere-brukere-til-%C3%A5-opprette-et-m%C3%A5l-i-aktivitetsplanen-.aspx"
+                    linkTekst="Les mer på navet"
+                />
+            </>
+    },
+    {
         dato: '04. MAR. 2020',
         versjonId: '04.03.20',
         tittel: 'Veiledergrupper i veilederoversikten',
