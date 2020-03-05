@@ -30,7 +30,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                     <li>Enkel automatisk signatur for veileder</li>
                 </ul>
                 <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Hvordan-f%C3%A5-flere-brukere-til-%C3%A5-opprette-et-m%C3%A5l-i-aktivitetsplanen-.aspx"
+                    url="https://navno.sharepoint.com/sites/intranett-digital-hverdag/SitePages/Endringer-i-dialogen-i-aktivitetsplanen.aspx"
                     linkTekst="Les mer på navet"
                 />
             </>
