@@ -58,7 +58,7 @@ function MinoversiktSide() {
                                     enhettiltak={tiltak}
                                 />
                             </div>
-                            <div>
+                            <div className="liste-kolonne">
                                 <FiltreringLabelContainer
                                     filtervalg={filtervalg}
                                     filtergruppe="veileder"

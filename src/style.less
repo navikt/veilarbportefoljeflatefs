@@ -142,13 +142,18 @@ html {
 
     .oversikt-sideinnhold {
         display: grid;
-        grid-template-columns: auto minmax(805.34px, 1322px);
+        grid-template-columns: 1fr minmax(805px, 1322px);
         column-gap: 16px;
     }
 
     .status-filter-kolonne {
         min-width: 276px;
         max-width: 375px;
+    }
+
+    .liste-kolonne {
+        min-width: 805px;
+        max-width: 1322px;
     }
 
     @media (max-width: 1200px) {
@@ -161,4 +166,5 @@ html {
             max-width: none;
         }
     }
+
 }

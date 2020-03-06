@@ -76,49 +76,51 @@ function EnhetSide() {
             <div className="side-storrelse blokk-xl">
                 <ToppMeny>
                     <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                        <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
-                            <div className="status-filter-kolonne">
-                                <FiltreringContainer
-                                    filtervalg={filtervalg}
-                                    enhettiltak={tiltak}
-                                    filtergruppe="enhet"
-                                />
-                            </div>
-                            <div>
-                                <FiltreringLabelContainer
-                                    filtervalg={{
-                                        ...filtervalg,
-                                        veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
-                                    }}
-                                    filtergruppe="enhet"
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    listevisning={listevisning}
-                                    className="filtrering-label-container"
-                                />
-                                {harFilter
-                                    ? <>
-                                        <div className={stickyContainer}>
-                                            <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
-                                            <div className="sticky-container__skygge">
-                                                <Toolbar
-                                                    onPaginering={() => dispatch(hentPortefoljeForEnhet(
-                                                        enhetId,
-                                                        sorteringsrekkefolge,
-                                                        sorteringsfelt,
-                                                        filtervalg
-                                                    ))}
-                                                    filtergruppe={ListevisningType.enhetensOversikt}
-                                                    sokVeilederSkalVises
-                                                    antallTotalt={portefoljeData.antallTotalt}
-                                                />
-                                                <EnhetTabellOverskrift/>
+                        <section>
+                            <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
+                                <div className="status-filter-kolonne">
+                                    <FiltreringContainer
+                                        filtervalg={filtervalg}
+                                        enhettiltak={tiltak}
+                                        filtergruppe="enhet"
+                                    />
+                                </div>
+                                <div className="liste-kolonne">
+                                    <FiltreringLabelContainer
+                                        filtervalg={{
+                                            ...filtervalg,
+                                            veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
+                                        }}
+                                        filtergruppe="enhet"
+                                        enhettiltak={enhettiltak.data.tiltak}
+                                        listevisning={listevisning}
+                                        className="filtrering-label-container"
+                                    />
+                                    {harFilter
+                                        ? <>
+                                            <div className={stickyContainer}>
+                                                <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
+                                                <div className="sticky-container__skygge">
+                                                    <Toolbar
+                                                        onPaginering={() => dispatch(hentPortefoljeForEnhet(
+                                                            enhetId,
+                                                            sorteringsrekkefolge,
+                                                            sorteringsfelt,
+                                                            filtervalg
+                                                        ))}
+                                                        filtergruppe={ListevisningType.enhetensOversikt}
+                                                        sokVeilederSkalVises
+                                                        antallTotalt={portefoljeData.antallTotalt}
+                                                    />
+                                                    <EnhetTabellOverskrift/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <EnhetTabell/>
-                                    </>
-                                    : <VelgFilterMelding/>}
+                                            <EnhetTabell/>
+                                        </>
+                                        : <VelgFilterMelding/>}
+                                </div>
                             </div>
-                        </div>
+                        </section>
                     </Innholdslaster>
                 </ToppMeny>
                 <ModalEnhetSideController/>

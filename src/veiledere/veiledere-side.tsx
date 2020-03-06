@@ -43,7 +43,7 @@ function VeiledereSide() {
 
     return (
         <DocumentTitle title="Veilederoversikt">
-            <div className="side-storrelse">
+            <div className="side-storrelse blokk-xl">
                 <ToppMeny>
                     <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
                         <section>
@@ -64,7 +64,7 @@ function VeiledereSide() {
                                         <FilteringVeilederGrupper filtergruppe="veiledere"/>
                                     </MetrikkEkspanderbartpanel>
                                 </div>
-                                <div>
+                                <div className="liste-kolonne">
                                     <FiltreringLabelContainer
                                         filtervalg={{
                                             veiledere: lagLablerTilVeiledereMedIdenter(
