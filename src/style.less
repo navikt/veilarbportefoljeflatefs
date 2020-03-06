@@ -31,7 +31,6 @@ body {
     }
 
     @media (max-width: 782px) {
-        //PIXELPUSHING <3
         #mainapp {
             max-height: 11rem;
         }
@@ -76,19 +75,9 @@ html {
     z-index: 2000;
 }
 
-.status-filter-kolonne {
-    max-width: 375px;
-}
-
 @media (min-width: 1200px) {
     .container {
         width: 956px;
-    }
-}
-
-@media (max-width: 1200px) {
-    .status-filter-kolonne {
-        max-width: none;
     }
 }
 
@@ -110,13 +99,6 @@ html {
 
 .text--left {
     text-align: left;
-}
-
-
-.sticky-div {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 .sticky-container {
@@ -149,4 +131,40 @@ html {
 
 .skjemaelement {
     margin-bottom: 1rem;
+}
+
+.veilarbportefoljeflatefs {
+    .side-storrelse {
+        margin: 0 auto;
+        padding: 0 3rem;
+        max-width: 1809px;
+    }
+
+    .oversikt-sideinnhold {
+        display: grid;
+        grid-template-columns: 1fr minmax(805px, 1322px);
+        column-gap: 16px;
+    }
+
+    .status-filter-kolonne {
+        min-width: 276px;
+        max-width: 375px;
+    }
+
+    .liste-kolonne {
+        min-width: 805px;
+        max-width: 1322px;
+    }
+
+    @media (max-width: 1200px) {
+        .oversikt-sideinnhold {
+            grid-template-rows: auto auto;
+            grid-template-columns: none;
+        }
+
+        .status-filter-kolonne {
+            max-width: none;
+        }
+    }
+
 }
