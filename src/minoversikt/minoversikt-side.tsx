@@ -51,15 +51,14 @@ function MinoversiktSide() {
                 <ToppMeny>
                     <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere]}>
                         <MinOversiktWrapper>
-                            <div
-                                className="col-lg-3 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-12 status-filter-kolonne">
+                            <div className="status-filter-kolonne">
                                 <FiltreringContainer
                                     filtervalg={filtervalg}
                                     filtergruppe="veileder"
                                     enhettiltak={tiltak}
                                 />
                             </div>
-                            <div className="liste-kolonne col-lg-9 col-md-12 col-sm-12">
+                            <div>
                                 <FiltreringLabelContainer
                                     filtervalg={filtervalg}
                                     filtergruppe="veileder"

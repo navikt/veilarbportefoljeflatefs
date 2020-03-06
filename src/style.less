@@ -135,21 +135,28 @@ html {
 
 .veilarbportefoljeflatefs {
     .side-storrelse {
-        margin: 0 3rem;
+        margin: 0 auto;
+        padding: 0 3rem;
+        max-width: 1809px;
     }
 
-    @media (min-width: 1920px) {
-        .side-storrelse {
-            max-width: 1809px;
-            margin: 0 auto;
-        }
+    .oversikt-sideinnhold {
+        display: grid;
+        grid-template-columns: minmax(276px, 375px) auto;
+        column-gap: 16px;
     }
 
     .status-filter-kolonne {
+        min-width: 276px;
         max-width: 375px;
     }
 
     @media (max-width: 1200px) {
+        .oversikt-sideinnhold {
+            grid-template-rows: auto auto;
+            grid-template-columns: none;
+        }
+
         .status-filter-kolonne {
             max-width: none;
         }

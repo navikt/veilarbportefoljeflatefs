@@ -1,20 +1,20 @@
-import * as React from "react";
-import {PropsWithChildren} from "react";
-import {Normaltekst} from "nav-frontend-typografi";
-import {Redirect, useParams} from "react-router";
-import {useVeilederListeSelector} from "../hooks/redux/use-veilederliste-selector";
-import {useIdentSelector} from "../hooks/redux/use-inlogget-ident";
+import * as React from 'react';
+import { PropsWithChildren } from 'react';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { Redirect, useParams } from 'react-router';
+import { useVeilederListeSelector } from '../hooks/redux/use-veilederliste-selector';
+import { useIdentSelector } from '../hooks/redux/use-inlogget-ident';
 
-export function MinOversiktWrapper (props: PropsWithChildren<{}>) {
+export function MinOversiktWrapper(props: PropsWithChildren<{}>) {
     const {ident} = useParams();
 
     const innloggetVeileder = useIdentSelector();
     const veiledere = useVeilederListeSelector();
 
-    const visesAnnenVeiledersPortefolje = ident ? ident !== innloggetVeileder!.ident : false ;
+    const visesAnnenVeiledersPortefolje = ident ? ident !== innloggetVeileder!.ident : false;
 
-    if(ident && veiledere.findIndex(v => v.ident === ident) <0 ) {
-        return <Redirect to="/enhet"/>
+    if (ident && veiledere.findIndex(v => v.ident === ident) < 0) {
+        return <Redirect to="/enhet"/>;
     }
 
     const veilederFraUrl = veiledere.find((veileder) => (veileder.ident === ident)) || {fornavn: '', etternavn: ''};
@@ -25,17 +25,12 @@ export function MinOversiktWrapper (props: PropsWithChildren<{}>) {
         </Normaltekst>
     );
 
-
     return (
         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
             {visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
-            <div className="portefolje-side">
-                <div id="oversikt-sideinnhold" role="tabpanel">
-                    <div className="row">
-                        {props.children}
-                    </div>
-                </div>
+            <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold portefolje-side">
+                {props.children}
             </div>
         </section>
-    )
+    );
 }
