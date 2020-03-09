@@ -3,34 +3,32 @@ import {useEffect, useState} from 'react';
 import { useIdentSelector } from '../redux/use-inlogget-ident';
 import {hentStatusTallForVeileder} from "../../middleware/api";
 import {Statustall} from "../../ducks/statustall";
-import {useLocation, useParams} from "react-router";
+import {STATUS} from "../../ducks/utils";
 
 export function useVeilederHarPortefolje() {
 
     const innloggetVeileder = useIdentSelector();
-
-    const { ident } = useParams();
-    const location = useLocation();
-    const pathname = location.pathname;
-
     const identId = innloggetVeileder && innloggetVeileder.ident;
-    const valgtEnhet = useEnhetSelector();
 
-    const [harPortefolje, setHarPortefolje] = useState(false);
-    const [laster, setLaster] = useState(true);
+    const valgtEnhet = useEnhetSelector();
+    const [harPortefolje, setHarPortefolje] = useState({
+        status: STATUS.NOT_STARTED,
+        data: { harPortefolje: false }
+    });
+
 
     useEffect(() => {
-        if (valgtEnhet && identId) {
+        setHarPortefolje(prevState => ({ ...prevState, status: STATUS.PENDING}));
+        if (valgtEnhet) {
             hentStatusTallForVeileder(valgtEnhet, identId)
                 .then((statustall: Statustall) => {
                     const harPortefolje = statustall.totalt > 0;
-                    setHarPortefolje(harPortefolje || pathname === "/portefolje" || (!!ident && ident === identId));
-                    setLaster(false)
+                    setHarPortefolje({status: STATUS.OK , data: {harPortefolje}});
                 })
-                .catch(_=> setLaster(false))
+                .catch(_=> setHarPortefolje(prevState => ({ ...prevState, status: STATUS.ERROR})))
         }
-    }, [valgtEnhet, pathname, identId, ident]);
+    }, [valgtEnhet, identId]);
 
 
-    return {laster, harPortefolje}
+    return harPortefolje;
 }

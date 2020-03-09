@@ -26,6 +26,8 @@ import { useDispatch } from 'react-redux';
 import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
 import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
+import {useVeilederHarPortefolje} from "../hooks/portefolje/use-dispatch-statustall-innloggetveileder";
+import {useParams} from "react-router";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -34,6 +36,8 @@ function MinoversiktSide() {
     const {statustall, enhettiltak, veiledere} = useFetchPortefoljeData(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
+
+    const { ident } = useParams();
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -44,62 +48,62 @@ function MinoversiktSide() {
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
     const stickyContainer = antallBrukere > 4 ? 'sticky-container' : 'sticky-container__fjernet';
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
+    const harPortefolje = useVeilederHarPortefolje();
 
     return (
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse blokk-xl">
-                <ToppMeny>
-                    <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere]}>
-                        <MinOversiktWrapper>
-                            <div className="status-filter-kolonne">
-                                <FiltreringContainer
-                                    filtervalg={filtervalg}
-                                    filtergruppe="veileder"
-                                    enhettiltak={tiltak}
-                                />
-                            </div>
-                            <div className="liste-kolonne">
-                                <FiltreringLabelContainer
-                                    filtervalg={filtervalg}
-                                    filtergruppe="veileder"
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    listevisning={listevisning}
-                                    className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
-                                />
-                                <div className={stickyContainer}>
-                                    <TabellOverskrift
-                                        className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
-                                    <div className="sticky-container__skygge">
-                                        <Toolbar
-                                            filtergruppe={ListevisningType.minOversikt}
-                                            onPaginering={() => dispatch(hentPortefoljeForVeileder(
-                                                enhetId,
-                                                gjeldendeVeileder,
-                                                sorteringsrekkefolge,
-                                                sorteringsfelt,
-                                                filtervalg
-                                            ))}
-                                            gjeldendeVeileder={gjeldendeVeileder}
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            sokVeilederSkalVises={false}
-                                            antallTotalt={portefolje.data.antallTotalt}
-                                        />
-                                        <MinoversiktTabellOverskrift
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            innloggetVeileder={innloggetVeilederIdent!.ident}
-                                            settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                        />
-                                    </div>
+                <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere, harPortefolje]}>
+                    <ToppMeny harPortefolje={harPortefolje.data.harPortefolje || !!ident === !!innloggetVeilederIdent}/>
+                    <MinOversiktWrapper>
+                        <div className="status-filter-kolonne">
+                            <FiltreringContainer
+                                filtervalg={filtervalg}
+                                filtergruppe="veileder"
+                                enhettiltak={tiltak}
+                            />
+                        </div>
+                        <div className="liste-kolonne">
+                            <FiltreringLabelContainer
+                                filtervalg={filtervalg}
+                                filtergruppe="veileder"
+                                enhettiltak={enhettiltak.data.tiltak}
+                                listevisning={listevisning}
+                                className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
+                            />
+                            <div className={stickyContainer}>
+                                <TabellOverskrift
+                                    className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
+                                <div className="sticky-container__skygge">
+                                    <Toolbar
+                                        filtergruppe={ListevisningType.minOversikt}
+                                        onPaginering={() => dispatch(hentPortefoljeForVeileder(
+                                            enhetId,
+                                            gjeldendeVeileder,
+                                            sorteringsrekkefolge,
+                                            sorteringsfelt,
+                                            filtervalg
+                                        ))}
+                                        gjeldendeVeileder={gjeldendeVeileder}
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                        sokVeilederSkalVises={false}
+                                        antallTotalt={portefolje.data.antallTotalt}
+                                    />
+                                    <MinoversiktTabellOverskrift
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                        innloggetVeileder={innloggetVeilederIdent!.ident}
+                                        settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
+                                    />
                                 </div>
-                                <MinoversiktTabell
-                                    innloggetVeileder={innloggetVeilederIdent}
-                                    settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                />
-                                <MinOversiktModalController/>
                             </div>
-                        </MinOversiktWrapper>
-                    </Innholdslaster>
-                </ToppMeny>
+                            <MinoversiktTabell
+                                innloggetVeileder={innloggetVeilederIdent}
+                                settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
+                            />
+                            <MinOversiktModalController/>
+                        </div>
+                    </MinOversiktWrapper>
+                </Innholdslaster>
             </div>
         </DocumentTitle>
     );
