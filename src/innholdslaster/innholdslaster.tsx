@@ -72,7 +72,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
         if (typeof children === 'function') {
             return <section className={className}>{children(avhengigheter)}</section>;
         }
-        return children;
+        return <section className={className}>children</section>;
     }
 
     render() {

@@ -25,6 +25,7 @@ import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
 import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import VelgFilterMelding from './velg-filter-melding';
 import '../style.less';
+import {useMemo} from "react";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -71,6 +72,7 @@ function EnhetSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const harFilter = antallFilter(filtervalg) !== 0;
 
+    const veilederLabel = useMemo(()=> lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter),[filtervalg.veiledere, veilederliste]);
     return (
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse blokk-xl">
@@ -89,7 +91,7 @@ function EnhetSide() {
                                 <FiltreringLabelContainer
                                     filtervalg={{
                                         ...filtervalg,
-                                        veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
+                                        veiledere: veilederLabel
                                     }}
                                     filtergruppe="enhet"
                                     enhettiltak={enhettiltak.data.tiltak}
