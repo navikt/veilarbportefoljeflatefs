@@ -11,7 +11,6 @@ import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { slettEnkeltFilter } from '../ducks/filtrering';
 import './veiledere.less';
 import ToppMeny from '../topp-meny/topp-meny';
-import { useFetchPortefoljeData } from '../hooks/portefolje/use-fetch-portefolje-data';
 import { useOnMount } from '../hooks/use-on-mount';
 import { getSeAlleFromUrl, getSideFromUrl } from '../utils/url-utils';
 import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
@@ -22,13 +21,16 @@ import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-s
 import FilteringVeilederGrupper from '../filtrering/filtrering-veileder-grupper/filrering-veileder-grupper';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 import '../style.less';
+import {useFetchStatusTall} from "../hooks/portefolje/use-fetch-statustall";
 
 function VeiledereSide() {
-    const {statustall, portefoljestorrelser, veiledere} = useFetchPortefoljeData();
+    const statustall = useFetchStatusTall();
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
 
     const dispatch = useDispatch();
     const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
+    const veiledere = useSelector((state: AppState) => state.veiledere);
+    const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
 
     useSetEnhetIUrl();
 
@@ -45,7 +47,7 @@ function VeiledereSide() {
         <DocumentTitle title="Veilederoversikt">
             <div className="side-storrelse blokk-xl">
                 <ToppMeny/>
-                <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
+                <Innholdslaster avhengigheter={[statustall]}>
                     <section>
                         <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
                             <div className="status-filter-kolonne">

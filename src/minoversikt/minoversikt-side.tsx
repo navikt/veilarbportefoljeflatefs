@@ -16,7 +16,6 @@ import ToppMeny from '../topp-meny/topp-meny';
 import { useSetStateFromUrl } from '../hooks/portefolje/use-set-state-from-url';
 import { useFetchPortefolje } from '../hooks/portefolje/use-fetch-portefolje';
 import { useSetPortefoljeSortering } from '../hooks/portefolje/use-sett-sortering';
-import { useFetchPortefoljeData } from '../hooks/portefolje/use-fetch-portefolje-data';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
 import FiltreringContainer from '../filtrering/filtrering-container';
@@ -26,12 +25,13 @@ import { useDispatch } from 'react-redux';
 import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
 import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
+import {useFetchStatusTall} from "../hooks/portefolje/use-fetch-statustall";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.minOversikt);
+    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const {statustall, enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData(gjeldendeVeileder);
+    const statustall = useFetchStatusTall(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
 
@@ -49,7 +49,7 @@ function MinoversiktSide() {
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse blokk-xl">
                 <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje}/>
-                <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere, portefoljestorrelser]}>
+                <Innholdslaster avhengigheter={[statustall]}>
                     <MinOversiktWrapper>
                         <div className="status-filter-kolonne">
                             <FiltreringContainer

@@ -16,16 +16,17 @@ import FiltreringContainer from '../filtrering/filtrering-container';
 import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Toolbar from '../components/toolbar/toolbar';
 import { slettEnkeltFilter } from '../ducks/filtrering';
 import { hentPortefoljeForEnhet } from '../ducks/portefolje';
-import { useFetchPortefoljeData } from '../hooks/portefolje/use-fetch-portefolje-data';
 import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
 import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import VelgFilterMelding from './velg-filter-melding';
 import '../style.less';
-import {useMemo} from "react";
+import {useCallback, useMemo} from "react";
+import {useFetchStatusTall} from "../hooks/portefolje/use-fetch-statustall";
+import {AppState} from "../reducer";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -52,9 +53,9 @@ function antallFilter(filtervalg) {
 }
 
 function EnhetSide() {
-    const {statustall, enhettiltak, veiledere} = useFetchPortefoljeData();
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
-    const veilederliste = veiledere.data.veilederListe;
+    const statustall = useFetchStatusTall();
+    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
+    const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
 
     const dispatch = useDispatch();
 
@@ -64,7 +65,7 @@ function EnhetSide() {
     useFetchPortefolje(ListevisningType.enhetensOversikt);
     useSetLocalStorageOnUnmount();
 
-    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
+    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet')),[dispatch]);
 
     const portefoljeData = portefolje.data;
     const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
@@ -72,12 +73,12 @@ function EnhetSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const harFilter = antallFilter(filtervalg) !== 0;
 
-    const veilederLabel = useMemo(()=> lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter),[filtervalg.veiledere, veilederliste]);
+    const veilederLabel = useMemo(()=> lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter),[filtervalg.veiledere, veilederliste, slettVeilederFilter]);
     return (
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse blokk-xl">
                 <ToppMeny/>
-                <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere]}>
+                <Innholdslaster avhengigheter={[statustall]}>
                     <section>
                         <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
                             <div className="status-filter-kolonne">
