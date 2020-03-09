@@ -22,7 +22,6 @@ import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-s
 import FilteringVeilederGrupper from '../filtrering/filtrering-veileder-grupper/filrering-veileder-grupper';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 import '../style.less';
-import {useVeilederHarPortefolje} from "../hooks/portefolje/use-veileder-har-portefolje";
 
 function VeiledereSide() {
     const {statustall, portefoljestorrelser, veiledere} = useFetchPortefoljeData();
@@ -41,12 +40,11 @@ function VeiledereSide() {
     });
 
     useSetLocalStorageOnUnmount();
-    const harPortefolje = useVeilederHarPortefolje();
 
     return (
         <DocumentTitle title="Veilederoversikt">
             <div className="side-storrelse blokk-xl">
-                <ToppMeny harPortefolje={harPortefolje}/>
+                <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall, veiledere, portefoljestorrelser]}>
                     <section>
                         <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">

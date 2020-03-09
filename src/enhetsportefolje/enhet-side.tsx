@@ -25,7 +25,6 @@ import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
 import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import VelgFilterMelding from './velg-filter-melding';
 import '../style.less';
-import {useVeilederHarPortefolje} from "../hooks/portefolje/use-veileder-har-portefolje";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -52,7 +51,7 @@ function antallFilter(filtervalg) {
 }
 
 function EnhetSide() {
-    const {statustall, enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();
+    const {statustall, enhettiltak, veiledere} = useFetchPortefoljeData();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
     const veilederliste = veiledere.data.veilederListe;
 
@@ -71,13 +70,12 @@ function EnhetSide() {
     const stickyContainer = antallBrukere >= 5 ? 'sticky-container' : 'sticky-container__fjernet';
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const harFilter = antallFilter(filtervalg) !== 0;
-    const harPortefolje = useVeilederHarPortefolje();
 
     return (
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse blokk-xl">
-                <ToppMeny harPortefolje={harPortefolje}/>
-                <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere, portefoljestorrelser]}>
+                <ToppMeny/>
+                <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere]}>
                     <section>
                         <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
                             <div className="status-filter-kolonne">

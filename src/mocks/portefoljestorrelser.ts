@@ -11,6 +11,6 @@ function lagPortefoljeStorrelse() {
 
 export default function lagPortefoljeStorrelser() {
     return {
-        facetResults: new Array(40).fill(lagPortefoljeStorrelse()).concat(new Array(1).fill({value: inloggetVeileder.ident, count: 0}))
+        facetResults: new Array(40).fill(lagPortefoljeStorrelse()).concat(new Array(1).fill({value: inloggetVeileder.ident, count: rnd(0, 50)}))
     };
 }
