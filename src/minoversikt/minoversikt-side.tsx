@@ -26,14 +26,14 @@ import { useDispatch } from 'react-redux';
 import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
 import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
-import {useVeilederHarPortefolje} from "../hooks/portefolje/use-dispatch-statustall-innloggetveileder";
+import {useVeilederHarPortefolje} from "../hooks/portefolje/use-veileder-har-portefolje";
 import {useParams} from "react-router";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.minOversikt);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const {statustall, enhettiltak, veiledere} = useFetchPortefoljeData(gjeldendeVeileder);
+    const {statustall, enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
 
@@ -53,8 +53,8 @@ function MinoversiktSide() {
     return (
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse blokk-xl">
-                <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere, harPortefolje]}>
-                    <ToppMeny harPortefolje={harPortefolje.data.harPortefolje || !!ident === !!innloggetVeilederIdent}/>
+                <ToppMeny harPortefolje={harPortefolje || ident === innloggetVeilederIdent}/>
+                <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere, portefoljestorrelser]}>
                     <MinOversiktWrapper>
                         <div className="status-filter-kolonne">
                             <FiltreringContainer
