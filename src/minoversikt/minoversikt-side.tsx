@@ -31,7 +31,7 @@ function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.minOversikt);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const {statustall, enhettiltak, veiledere} = useFetchPortefoljeData(gjeldendeVeileder);
+    const {statustall, enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
 
@@ -48,58 +48,57 @@ function MinoversiktSide() {
     return (
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse blokk-xl">
-                <ToppMeny>
-                    <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere]}>
-                        <MinOversiktWrapper>
-                            <div className="status-filter-kolonne">
-                                <FiltreringContainer
-                                    filtervalg={filtervalg}
-                                    filtergruppe="veileder"
-                                    enhettiltak={tiltak}
-                                />
-                            </div>
-                            <div className="liste-kolonne">
-                                <FiltreringLabelContainer
-                                    filtervalg={filtervalg}
-                                    filtergruppe="veileder"
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    listevisning={listevisning}
-                                    className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
-                                />
-                                <div className={stickyContainer}>
-                                    <TabellOverskrift
-                                        className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
-                                    <div className="sticky-container__skygge">
-                                        <Toolbar
-                                            filtergruppe={ListevisningType.minOversikt}
-                                            onPaginering={() => dispatch(hentPortefoljeForVeileder(
-                                                enhetId,
-                                                gjeldendeVeileder,
-                                                sorteringsrekkefolge,
-                                                sorteringsfelt,
-                                                filtervalg
-                                            ))}
-                                            gjeldendeVeileder={gjeldendeVeileder}
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            sokVeilederSkalVises={false}
-                                            antallTotalt={portefolje.data.antallTotalt}
-                                        />
-                                        <MinoversiktTabellOverskrift
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            innloggetVeileder={innloggetVeilederIdent!.ident}
-                                            settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                        />
-                                    </div>
+                <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje}/>
+                <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere, portefoljestorrelser]}>
+                    <MinOversiktWrapper>
+                        <div className="status-filter-kolonne">
+                            <FiltreringContainer
+                                filtervalg={filtervalg}
+                                filtergruppe="veileder"
+                                enhettiltak={tiltak}
+                            />
+                        </div>
+                        <div className="liste-kolonne">
+                            <FiltreringLabelContainer
+                                filtervalg={filtervalg}
+                                filtergruppe="veileder"
+                                enhettiltak={enhettiltak.data.tiltak}
+                                listevisning={listevisning}
+                                className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
+                            />
+                            <div className={stickyContainer}>
+                                <TabellOverskrift
+                                    className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
+                                <div className="sticky-container__skygge">
+                                    <Toolbar
+                                        filtergruppe={ListevisningType.minOversikt}
+                                        onPaginering={() => dispatch(hentPortefoljeForVeileder(
+                                            enhetId,
+                                            gjeldendeVeileder,
+                                            sorteringsrekkefolge,
+                                            sorteringsfelt,
+                                            filtervalg
+                                        ))}
+                                        gjeldendeVeileder={gjeldendeVeileder}
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                        sokVeilederSkalVises={false}
+                                        antallTotalt={portefolje.data.antallTotalt}
+                                    />
+                                    <MinoversiktTabellOverskrift
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                        innloggetVeileder={innloggetVeilederIdent!.ident}
+                                        settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
+                                    />
                                 </div>
-                                <MinoversiktTabell
-                                    innloggetVeileder={innloggetVeilederIdent}
-                                    settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                />
-                                <MinOversiktModalController/>
                             </div>
-                        </MinOversiktWrapper>
-                    </Innholdslaster>
-                </ToppMeny>
+                            <MinoversiktTabell
+                                innloggetVeileder={innloggetVeilederIdent}
+                                settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
+                            />
+                            <MinOversiktModalController/>
+                        </div>
+                    </MinOversiktWrapper>
+                </Innholdslaster>
             </div>
         </DocumentTitle>
     );
