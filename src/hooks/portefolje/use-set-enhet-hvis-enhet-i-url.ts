@@ -3,7 +3,7 @@ import {velgEnhetForVeileder} from "../../ducks/valgt-enhet";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../reducer";
 
-export function useFetchEnheter() {
+export function useSetInitalEnhet() {
 
     const inloggetVeilederInfo = useSelector((state :AppState ) => state.inloggetVeileder.data);
 

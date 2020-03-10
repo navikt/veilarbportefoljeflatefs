@@ -2,10 +2,13 @@ import ActiveLink from "./active-link";
 import React from "react";
 import {useIdentSelector} from "../hooks/redux/use-inlogget-ident";
 import {useParams} from "react-router";
+import {useVeilederHarPortefolje} from "../hooks/portefolje/use-veileder-har-portefolje";
 
-export function Lenker (props: {harPortefolje}) {
+export function Lenker (props: {erPaloggetVeileder: boolean}) {
     const veilederIdent = useIdentSelector();
     const {ident} = useParams();
+    const harPortefolje = useVeilederHarPortefolje();
+
 
     const aktivLink = ident ?
         veilederIdent!.ident === ident
@@ -20,7 +23,7 @@ export function Lenker (props: {harPortefolje}) {
                     className="oversiktslenke typo-undertittel"
                     activeClassName={aktivLink}
                     title="Her vises alle brukere som er tildelt deg"
-                    hidden={!props.harPortefolje}
+                    hidden={!(harPortefolje || props.erPaloggetVeileder)}
                 >
                     Min oversikt
                 </ActiveLink>

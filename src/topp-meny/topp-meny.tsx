@@ -1,28 +1,28 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
 import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tour-wrapper';
 import './lenker.less';
 import Toasts from "../components/toast/toast";
-import {Lenker} from "./lenker";
-import {useVeilederHarPortefolje} from "../hooks/portefolje/use-dispatch-statustall-innloggetveileder";
-import NavFrontendSpinner from "nav-frontend-spinner";
+import { Lenker } from "./lenker";
+import {useSelector} from "react-redux";
+import {AppState} from "../reducer";
+import {STATUS} from "../ducks/utils";
 
-function ToppMeny(props: PropsWithChildren<{}>) {
+function ToppMeny(props : {erPaloggetVeileder? : boolean}) {
 
-    const {harPortefolje, laster} = useVeilederHarPortefolje();
 
-    if(laster) {
-        return <NavFrontendSpinner type="XL"/>;
+    //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
+    const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
+
+    if(portefoljestorrelser.status === STATUS.PENDING || portefoljestorrelser.status === STATUS.NOT_STARTED) {
+        return null;
     }
 
     return (
-        <>
-            <div className="topp-meny" role="tablist">
-                <Lenker harPortefolje={harPortefolje}/>
-                <Toasts/>
-                <EndringsloggTourWrapper/>
-            </div>
-            {props.children}
-        </>
+        <div className="topp-meny" role="tablist">
+            <Lenker erPaloggetVeileder={!!props.erPaloggetVeileder}/>
+            <Toasts/>
+            <EndringsloggTourWrapper/>
+        </div>
     );
 }
 
