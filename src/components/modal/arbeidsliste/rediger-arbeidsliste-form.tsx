@@ -8,6 +8,7 @@ import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import { BrukerModell } from '../../../model-interfaces';
+import { logEvent } from '../../../utils/frontend-logger';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -44,7 +45,17 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     <ArbeidslisteKategori name="kategori" index=""/>
                 </div>
                 <div className="modal-footer">
-                    <Hovedknapp htmlType="submit" className="knapp knapp--hoved" spinner={props.laster}>
+                    <Hovedknapp
+                        htmlType="submit"
+                        className="knapp knapp--hoved"
+                        spinner={props.laster}
+                        onClick={() => {
+                            logEvent('portefolje.metrikker.arbeidslistekategori', {
+                                kategori: props.bruker.arbeidsliste.kategori,
+                                leggtil: false
+                            });
+                        }}
+                    >
                         Lagre
                     </Hovedknapp>
                     <button type="button" className="knapp" onClick={props.lukkModal}>

@@ -16,6 +16,7 @@ import './minoversikt.less';
 import { Checkbox } from 'nav-frontend-skjema';
 import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
 import { VEDTAKSTOTTE } from '../konstanter';
+import { logEvent } from '../utils/frontend-logger';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -44,6 +45,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     function handleArbeidslisteButtonClick(event) {
         event.preventDefault();
         setOpen(!apen);
+        logEvent('portefolje.metrikker.ekspander-arbeidsliste', {apen: !apen});
         if (props.onClick) {
             props.onClick(event);
         }

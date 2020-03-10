@@ -10,6 +10,7 @@ import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../../../ducks/mo
 import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
 import { ArbeidslisteDataModell, BrukerModell, Status } from '../../../model-interfaces';
 import './arbeidsliste.less';
+import { logEvent } from '../../../utils/frontend-logger';
 
 function brukerLabel(bruker) {
     return (
@@ -35,6 +36,7 @@ function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraA
     return (
         <form onSubmit={(e) => {
             e.preventDefault();
+            logEvent('portefolje.metrikker.fjern_arbeidsliste');
             onSubmit(valgteBrukere, lukkModal);
         }}>
             <div className={className}>

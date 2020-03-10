@@ -13,6 +13,7 @@ import { redigerArbeidsliste } from '../../../ducks/arbeidsliste';
 import moment from 'moment';
 import { OrNothing } from '../../../utils/types/types';
 import './arbeidsliste.less';
+import { logEvent } from '../../../utils/frontend-logger';
 
 interface Ownprops {
     bruker: BrukerModell;
@@ -70,11 +71,16 @@ function ArbeidslisteModalRediger({
         kategori: bruker.arbeidsliste.kategori
     };
 
+    const klikkRedigerknapp = () => {
+        logEvent('portefolje.metrikker.arbeidsliste.rediger');
+        setIsOpen(true);
+    };
+
     return (
         <>
             <button
                 className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
-                onClick={() => setIsOpen(true)}
+                onClick={klikkRedigerknapp}
             >
                 Rediger
             </button>

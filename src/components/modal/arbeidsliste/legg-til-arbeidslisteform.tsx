@@ -20,6 +20,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { skjulModal } from '../../../ducks/modal';
 import { dateToISODate } from '../../../utils/dato-utils';
 import './arbeidsliste.less';
+import { logEvent } from '../../../utils/frontend-logger';
 
 interface OwnProps {
     valgteBrukere: BrukerModell[];
@@ -59,11 +60,11 @@ function LeggTilArbeidslisteForm({
 
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     const initialValues = valgteBrukere.map((bruker) => ({kommentar: '', frist: '', overskrift: '', kategori: 'BLA'}));
-
     return (
         <Formik
             initialValues={{arbeidsliste: initialValues}}
             onSubmit={(values, actions) => {
+                logEvent('portefolje.metrikker.arbeidslistekategori', {kategori: initialValues, leggtil: true});
                 onSubmit(values.arbeidsliste);
             }}
             render={(formikProps) => {
