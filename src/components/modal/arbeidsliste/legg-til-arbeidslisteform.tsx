@@ -64,7 +64,12 @@ function LeggTilArbeidslisteForm({
         <Formik
             initialValues={{arbeidsliste: initialValues}}
             onSubmit={(values, actions) => {
-                logEvent('portefolje.metrikker.arbeidslistekategori', {kategori: initialValues, leggtil: true});
+                values.arbeidsliste.map(value => logEvent('teamvoff.metrikker.arbeidslistekategori', {
+                    kategori: value.kategori,
+                    leggtil: true,
+                    applikasjon: 'oversikt'
+                }));
+
                 onSubmit(values.arbeidsliste);
             }}
             render={(formikProps) => {
