@@ -181,11 +181,11 @@ mock.delete('/modiacontextholder/api/context/aktivbruker', ResponseUtils.delayed
 }));
 
 mock.get('/modiacontextholder/api/decorator', ResponseUtils.delayed(1000, {
-    enheter: [{enhetId: '1234', navn: 'NAV Testheim'}],
+    enheter: inloggetVeileder.enheter,
     etternavn: inloggetVeileder.etternavn,
     fornavn: inloggetVeileder.fornavn,
     ident: inloggetVeileder.ident,
-    navn: `${inloggetVeileder.fornavn} ${inloggetVeileder.etternavn}`
+    navn: inloggetVeileder.navn
 }));
 
 // websocket

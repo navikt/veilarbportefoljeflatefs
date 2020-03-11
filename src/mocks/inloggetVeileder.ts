@@ -18,8 +18,8 @@ const alternativEnhet2 = {
 
 export default {
     ident: innloggetVeileder.ident,
-    navn: 'Britt-Marie Parsson',
-    etternavn: 'Persson',
-    fornavn: 'Britt-Marie',
+    navn: innloggetVeileder.navn,
+    etternavn: innloggetVeileder.etternavn,
+    fornavn: innloggetVeileder.fornavn,
     enheter: [inloggetEnhet, alternativEnhet, alternativEnhet2]
 };
