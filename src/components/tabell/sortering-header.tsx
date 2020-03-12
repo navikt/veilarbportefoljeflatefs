@@ -11,7 +11,7 @@ interface SorteringHeaderProps extends HeaderProps {
     onClick: (sortering: string) => void;
     rekkefolge: Sorteringsrekkefolge;
     erValgt: boolean;
-    tekst: any;
+    tekst: React.ReactNode;
     title?: string;
 }
 
