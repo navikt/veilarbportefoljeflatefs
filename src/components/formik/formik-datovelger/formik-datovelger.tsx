@@ -8,7 +8,7 @@ import './daypicker.less';
 import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 
 interface FormikDatepickerProps {
-    name: any;
+    name: string;
     className?: string;
 }
 

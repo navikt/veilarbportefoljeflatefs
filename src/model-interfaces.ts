@@ -32,7 +32,7 @@ export enum Sorteringsfelt {
     MOTER_IDAG = 'moterMedNAVIdag',
     VEDTAKSTATUS = 'vedtakstatus',
     VEDTAKSTATUS_ENDRET = 'vedtak_status_endret',
-    ARBEIDSLISTEIKON = 'arbeidslisteikon'
+    ARBEIDSLISTEKATEGORI = 'arbeidslistekategori'
 }
 
 export enum EtikettType {

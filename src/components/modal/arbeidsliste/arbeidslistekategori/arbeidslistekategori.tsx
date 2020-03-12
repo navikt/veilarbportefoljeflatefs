@@ -4,16 +4,16 @@ import { ReactComponentElement } from 'react';
 
 interface ArbeidslisteikonProps {
     value: string;
-    arbeidslisteikon: ReactComponentElement<any>;
+    arbeidslistekategori: ReactComponentElement<any>;
     name: string;
     checked: boolean;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     index: string;
 }
 
-function ArbeidslisteIkon({value, arbeidslisteikon, name, checked, onChange, index}: ArbeidslisteikonProps) {
+function Arbeidslistekategori({value, arbeidslistekategori, name, checked, onChange, index}: ArbeidslisteikonProps) {
     return (
-        <div className="arbeidslisteikon__container">
+        <div className="arbeidslistekategori__container">
             <input
                 id={`${value}[${index}]`}
                 type="radio"
@@ -24,10 +24,10 @@ function ArbeidslisteIkon({value, arbeidslisteikon, name, checked, onChange, ind
             />
             <label
                 htmlFor={`${value}[${index}]`}
-            >{arbeidslisteikon}</label>
+            >{arbeidslistekategori}</label>
         </div>
     );
 }
 
-export default ArbeidslisteIkon;
+export default Arbeidslistekategori;
 

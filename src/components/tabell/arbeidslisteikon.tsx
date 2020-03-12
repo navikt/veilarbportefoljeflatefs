@@ -1,18 +1,18 @@
 import * as React from 'react';
 import '../../minoversikt/minoversikt.less';
-import { ReactComponent as ArbeidslisteikonBla } from '../modal/arbeidsliste/arbeidslisteikon/arbeidslisteikon_bla.svg';
-import { ReactComponent as ArbeidslisteikonLilla } from '../modal/arbeidsliste/arbeidslisteikon/arbeidslisteikon_lilla.svg';
-import { ReactComponent as ArbeidslisteikonGronn } from '../modal/arbeidsliste/arbeidslisteikon/arbeidslisteikon_gronn.svg';
-import { ReactComponent as ArbeidslisteikonGul } from '../modal/arbeidsliste/arbeidslisteikon/arbeidslisteikon_gul.svg';
+import { ReactComponent as ArbeidslisteikonBla } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_bla.svg';
+import { ReactComponent as ArbeidslisteikonLilla } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_lilla.svg';
+import { ReactComponent as ArbeidslisteikonGronn } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_gronn.svg';
+import { ReactComponent as ArbeidslisteikonGul } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_gul.svg';
 import { KategoriModell } from '../../model-interfaces';
 
-interface ArbeidslisteikonProps {
+interface ArbeidslistekategoriProps {
     skalVises: boolean;
     kategori: KategoriModell;
 }
 
-export default function ArbeidslisteIkonVisning({skalVises, kategori}: ArbeidslisteikonProps) {
-    const velgArbeidslisteIkon = () => {
+export default function ArbeidslistekategoriVisning({skalVises, kategori}: ArbeidslistekategoriProps) {
+    const velgArbeidslistekategori = () => {
         switch (kategori) {
             case KategoriModell.BLA:
                 return <ArbeidslisteikonBla/>;
@@ -28,6 +28,6 @@ export default function ArbeidslisteIkonVisning({skalVises, kategori}: Arbeidsli
     };
 
     return <span className='arbeidsliste--ikon'>
-        {skalVises && velgArbeidslisteIkon()}
+        {skalVises && velgArbeidslistekategori()}
         </span>;
 };

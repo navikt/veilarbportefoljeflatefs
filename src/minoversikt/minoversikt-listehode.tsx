@@ -18,7 +18,7 @@ import Header from '../components/tabell/header';
 import TittelValg from '../utils/utils';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './minoversikt.less';
-import { ReactComponent as ArbeidslisteikonBla } from '../components/modal/arbeidsliste/arbeidslisteikon/arbeidslisteikon_bla.svg';
+import { ReactComponent as ArbeidslisteikonBla } from '../components/modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_bla.svg';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -57,11 +57,11 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                     skalVises={filtergruppe in ListevisningType}
                     className="velgalle-checkboks col col-xs-2"/>
                 <SorteringHeader
-                    className="arbeidslisteikon__sorteringsheader"
-                    sortering={Sorteringsfelt.ARBEIDSLISTEIKON}
+                    className="arbeidslistekategori__sorteringsheader"
+                    sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEIKON}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
                     tekst={<ArbeidslisteikonBla/>}
                 />
                 <SorteringHeader

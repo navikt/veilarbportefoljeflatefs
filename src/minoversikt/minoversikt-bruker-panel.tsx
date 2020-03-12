@@ -2,7 +2,7 @@ import * as React from 'react';
 import { MouseEvent, useState } from 'react';
 import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
-import ArbeidslisteIkon from '../components/tabell/arbeidslisteikon';
+import Arbeidslistekategori from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
 import { BrukerModell, EtikettType, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import Collapse from 'react-collapse';
@@ -68,7 +68,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         label=""
                         className="brukerliste__checkbox"
                     />
-                    <ArbeidslisteIkon skalVises={arbeidslisteAktiv} kategori={bruker.arbeidsliste.kategori}/>
+                    <Arbeidslistekategori skalVises={arbeidslisteAktiv} kategori={bruker.arbeidsliste.kategori}/>
                 </div>
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"
