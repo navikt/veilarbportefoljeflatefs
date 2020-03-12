@@ -1,0 +1,82 @@
+@import "~nav-frontend-core/less/core";
+
+.arbeidslistekategori {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+
+    .skjemaelement__label {
+        grid-row: 1;
+    }
+}
+
+.arbeidslistekategori__container {
+    grid-row: 2;
+    justify-self: left;
+    margin-top: .5rem;
+    margin-bottom: .2rem;
+
+    label {
+        position: relative;
+        cursor: pointer;
+        padding: 1rem .5rem .2rem;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    label:hover {
+        border: 1px solid @navGra60;
+    }
+
+    label::before, label::after {
+        position: absolute;
+    }
+
+    svg {
+        height: 25px;
+        width: auto;
+    }
+
+    label::before {
+        content: "";
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        padding: .2rem;
+    }
+
+    label::after {
+        content: "";
+        padding: .2rem;
+        left: 0;
+        top: 0;
+    }
+
+    input[type="radio"] + svg {
+        cursor: pointer;
+        padding: 0.2rem;
+    }
+
+    input[type="radio"] {
+        opacity: 0;
+        appearance: none;
+    }
+
+    input[type="radio"] + label::after {
+        content: none;
+    }
+
+    input[type="radio"]:checked + label {
+        border: 1px solid @navGra80;
+    }
+
+    input[type="radio"]:checked + label::after {
+        content: "";
+    }
+
+    input[type="radio"]:focus + label::before {
+        outline: none;
+        box-shadow: 0 0 0 3px @fokusFarge;
+    }
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="9px" height="19px" viewBox="0 0 9 19" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     class="arbeidslisteikon__svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Arbeidslisteikon blå</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round"
+       stroke-linejoin="round">
+        <g id="Arbeidslisteikon blå"
+           transform="translate(4.727922, 9.727922)
+           rotate(-45.000000)
+           translate(-5, -9.727922)
+           translate(-4.272078, 0.727922)"
+           stroke="#0067C5"
+           fill="#0067C5">
+            <polygon id="Stroke-3449"
+                     points="5.625 17.625 5.625 12.375 0.375 12.375 12.375 0.375 17.625 5.625"/>
+        </g>
+    </g>
+</svg>

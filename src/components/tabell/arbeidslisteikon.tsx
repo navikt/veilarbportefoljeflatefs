@@ -1,15 +1,33 @@
 import * as React from 'react';
-import classNames from 'classnames';
-import './tabell.less';
 import '../../minoversikt/minoversikt.less';
+import { ReactComponent as ArbeidslisteikonBla } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_bla.svg';
+import { ReactComponent as ArbeidslisteikonLilla } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_lilla.svg';
+import { ReactComponent as ArbeidslisteikonGronn } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_gronn.svg';
+import { ReactComponent as ArbeidslisteikonGul } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_gul.svg';
+import { KategoriModell } from '../../model-interfaces';
 
-interface ArbeidslisteikonProps {
-    className?: string;
+interface ArbeidslistekategoriProps {
     skalVises: boolean;
+    kategori: KategoriModell;
 }
 
-const cls = (className?: string) => className ? classNames('arbeidsliste--ikon', className) : 'arbeidsliste--ikon';
+export default function ArbeidslistekategoriVisning({skalVises, kategori}: ArbeidslistekategoriProps) {
+    const velgArbeidslistekategori = () => {
+        switch (kategori) {
+            case KategoriModell.BLA:
+                return <ArbeidslisteikonBla/>;
+            case KategoriModell.LILLA:
+                return <ArbeidslisteikonLilla/>;
+            case KategoriModell.GRONN:
+                return <ArbeidslisteikonGronn/>;
+            case KategoriModell.GUL:
+                return <ArbeidslisteikonGul/>;
+            default:
+                return null;
+        }
+    };
 
-export default ({className, skalVises}: ArbeidslisteikonProps) => {
-    return <span className={skalVises ? cls(className) : className}/>;
+    return <span className='arbeidsliste--ikon'>
+        {skalVises && velgArbeidslistekategori()}
+        </span>;
 };

@@ -2,6 +2,7 @@ import veiledereResponse, { innloggetVeileder } from './veiledere';
 import { aktiviteter } from '../filtrering/filter-konstanter';
 import { rnd, MOCK_CONFIG } from './utils';
 import * as faker from 'faker/locale/nb_NO';
+import { KategoriModell } from '../model-interfaces';
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -21,6 +22,7 @@ const ytelser = [
 function partall() {
     return rnd(0, 4) * 2;
 }
+
 function oddetall() {
     return rnd(1, 5) * 2 - 1;
 }
@@ -35,14 +37,14 @@ function lagGrunndata() {
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
     const kjonnsiffer = kjonn === 'K' ? partall() : oddetall();
     const individsifre = `${arhundre}${kjonnsiffer}`;
-    const venterPaSvarFraBruker = randomDate({past:true});
-    const venterPaSvarFraNAV = randomDate({past:true});
-    const nyesteUtlopteAktivitet = randomDate({past:true});
+    const venterPaSvarFraBruker = randomDate({past: true});
+    const venterPaSvarFraNAV = randomDate({past: true});
+    const nyesteUtlopteAktivitet = randomDate({past: true});
 
     const kontrollsifre = `${rnd(0, 9)}${rnd(0, 9)}`;
 
     const brukerAktiviteter = Object.keys(aktiviteter)
-        .reduce( (acc, curr) => ({...acc, [curr]: Math.random() > 0.05 ? null : new Date() }), {});
+        .reduce((acc, curr) => ({...acc, [curr]: Math.random() > 0.05 ? null : new Date()}), {});
 
     const moteStartTid = Math.random() > 0.5 ? new Date() : null;
 
@@ -76,7 +78,7 @@ function lagYtelse() {
         aapmaxtidUke: '',
         aapmaxtidUkeFasett: '',
         aapUnntakUkerIgjen: '',
-        aapUnntakUkerIgjenFasett:''
+        aapUnntakUkerIgjenFasett: ''
     };
 
     const dag = rnd(1, 31);
@@ -85,9 +87,9 @@ function lagYtelse() {
 
     if (ytelse === 'AAP_MAXTID' || ytelse === 'AAP_UNNTAK') {
         const rndDate = new Date(ar, mnd - 1, dag).getTime();
-        const todayDate =  new Date().getTime();
+        const todayDate = new Date().getTime();
 
-        const aaptidUke = Math.round((rndDate - todayDate) / (1000*60*60*24*7));
+        const aaptidUke = Math.round((rndDate - todayDate) / (1000 * 60 * 60 * 24 * 7));
         const aaptidUkeFasett = `KV${rnd(1, 16)}`;
 
         out.aapmaxtidUke = aaptidUke.toString();
@@ -104,8 +106,8 @@ function lagYtelse() {
 
 function lagOverskrift() {
     const maybeOverskrift = rnd(0, 1);
-    if(maybeOverskrift > 0.5) {
-        return faker.random.word().substr(0,12);
+    if (maybeOverskrift > 0.5) {
+        return faker.random.word().substr(0, 12);
     }
     return null;
 }
@@ -113,11 +115,11 @@ function lagOverskrift() {
 function lagVedtakUtkast() {
     const maybeUtkast = rnd(0, 1);
     const maybeUtkastOpprettet = rnd(0, 1);
-    if(maybeUtkast > 0.5) {
+    if (maybeUtkast > 0.5) {
         return ({
             vedtakStatusEndret: randomDate({past: true}),
-            vedtakStatus: maybeUtkastOpprettet ? "UTKAST_OPPRETTET" : "SENDT_TIL_BESLUTTER"
-        })
+            vedtakStatus: maybeUtkastOpprettet ? 'UTKAST_OPPRETTET' : 'SENDT_TIL_BESLUTTER'
+        });
     }
     return ({
         vedtakStatusEndret: null,
@@ -133,8 +135,20 @@ function lagArbeidsliste() {
             frist: null,
             isOppfolgendeVeileder: null,
             arbeidslisteAktiv: false,
-            sistEndretAv: {}
+            sistEndretAv: {},
+            kategori: null
         };
+    }
+    const kategoriType = rnd(1, 4);
+    let kategori;
+    if (kategoriType === 1) {
+        kategori = KategoriModell.BLA;
+    } else if (kategoriType === 2) {
+        kategori = KategoriModell.GRONN;
+    } else if (kategoriType === 3) {
+        kategori = KategoriModell.GUL;
+    } else {
+        kategori = KategoriModell.LILLA;
     }
 
     return ({
@@ -143,7 +157,8 @@ function lagArbeidsliste() {
         frist: new Date(),
         isOppfolgendeVeileder: true,
         arbeidslisteAktiv: true,
-        sistEndretAv: {veilederId: innloggetVeileder.ident}
+        sistEndretAv: {veilederId: innloggetVeileder.ident},
+        kategori
     });
 }
 
@@ -157,7 +172,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
 
     const ytelse = lagYtelse();
     const arbeidsliste = lagArbeidsliste();
-    const erSykmeldtMedArbeidsgiver = Math.random()  < 25 / 100;
+    const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const vedtakUtkast = lagVedtakUtkast();
 
     return {
@@ -201,10 +216,10 @@ const randomDate = ({past}) => {
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
     let ar = rnd(0, 4) + new Date().getFullYear();
-    if(past) {
-        ar = -rnd(0,4) + new Date().getFullYear();
+    if (past) {
+        ar = -rnd(0, 4) + new Date().getFullYear();
     }
-    return new Date(ar, mnd-1, dag).toISOString();
+    return new Date(ar, mnd - 1, dag).toISOString();
 };
 
 export default new Array(123).fill(0).map(() => lagBruker());

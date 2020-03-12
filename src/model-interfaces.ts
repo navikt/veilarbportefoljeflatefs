@@ -32,6 +32,7 @@ export enum Sorteringsfelt {
     MOTER_IDAG = 'moterMedNAVIdag',
     VEDTAKSTATUS = 'vedtakstatus',
     VEDTAKSTATUS_ENDRET = 'vedtak_status_endret',
+    ARBEIDSLISTEKATEGORI = 'arbeidslistekategori'
 }
 
 export enum EtikettType {
@@ -156,6 +157,13 @@ export interface AktiviteterModell {
     gruppeaktivitet?: string;
 }
 
+export enum KategoriModell {
+    BLA = 'BLA',
+    LILLA = 'LILLA',
+    GRONN = 'GRONN',
+    GUL = 'GUL',
+}
+
 export interface ArbeidslisteModell {
     kommentar?: string;
     overskrift?: string;
@@ -164,6 +172,7 @@ export interface ArbeidslisteModell {
     endringstidspunkt: string; // dato
     isOppfolgendeVeileder: boolean;
     sistEndretAv: { veilederId: string };
+    kategori: KategoriModell;
 }
 
 export interface StatustallModell {

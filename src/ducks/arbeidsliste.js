@@ -1,5 +1,5 @@
 import {STATUS, doThenDispatch} from './utils';
-import { httpArbeidsliste } from '../middleware/api';
+import {httpArbeidsliste} from '../middleware/api';
 import {skjulModal} from "./modal";
 import {markerAlleBrukere} from "./portefolje";
 import {oppdaterState} from "../components/modal/arbeidsliste/legg-til-arbeidslisteform";
@@ -27,23 +27,23 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case ARBEIDSLISTE_LAGRE_PENDING:
-            return { ...state, status: STATUS.PENDING };
+            return {...state, status: STATUS.PENDING};
         case ARBEIDSLISTE_LAGRE_FEILET:
-            return { ...state, status: STATUS.ERROR, data: action.data };
+            return {...state, status: STATUS.ERROR, data: action.data};
         case ARBEIDSLISTE_LAGRE_OK:
-            return { ...state, status: STATUS.OK, data: action.data };
+            return {...state, status: STATUS.OK, data: action.data};
         case ARBEIDSLISTE_SLETT_PENDING:
-            return { ...state, status: STATUS.PENDING };
+            return {...state, status: STATUS.PENDING};
         case ARBEIDSLISTE_SLETT_FEILET:
-            return { ...state, status: STATUS.ERROR, data: action.data };
+            return {...state, status: STATUS.ERROR, data: action.data};
         case ARBEIDSLISTE_SLETT_OK:
-            return { ...state, status: STATUS.OK, data: action.data };
+            return {...state, status: STATUS.OK, data: action.data};
         case ARBEIDSLISTE_REDIGER_PENDING:
-            return { ...state, status: STATUS.PENDING };
+            return {...state, status: STATUS.PENDING};
         case ARBEIDSLISTE_REDIGER_FEILET:
-            return { ...state, status: STATUS.ERROR, data: action.data };
+            return {...state, status: STATUS.ERROR, data: action.data};
         case ARBEIDSLISTE_REDIGER_OK:
-            return { ...state, status: STATUS.OK, data: action.data };
+            return {...state, status: STATUS.OK, data: action.data};
         default:
             return state;
     }
@@ -51,18 +51,19 @@ export default function reducer(state = initialState, action) {
 
 
 // Action Creators
-export function lagreArbeidsliste(arbeidsliste, props){
+export function lagreArbeidsliste(arbeidsliste, props) {
     const {valgteBrukere} = props;
     const liste = arbeidsliste.map((elem, index) => ({
         fnr: valgteBrukere[index].fnr,
         overskrift: elem.overskrift,
         kommentar: elem.kommentar,
-        frist: elem.frist
+        frist: elem.frist,
+        kategori: elem.kategori
     }));
     return dispatch =>
         postArbeidsliste(liste)(dispatch)
             .then((res) => oppdaterState(res, liste, props, dispatch))
-            .then(()=> {
+            .then(() => {
                     dispatch(skjulModal());
                     dispatch(markerAlleBrukere(false));
                 }
@@ -74,14 +75,15 @@ export function redigerArbeidsliste(formData, props) {
     const arbeidsliste = {
         kommentar: formData.kommentar,
         overskrift: formData.overskrift,
-        frist: formData.frist ? dateToISODate(formData.frist) : null
+        frist: formData.frist ? dateToISODate(formData.frist) : null,
+        kategori: formData.kategori
     };
 
     return dispatch =>
         putArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
             .then((res) => oppdaterArbeidsListeState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr,
                 dispatch))
-            .then(() =>  dispatch(skjulModal()));
+            .then(() => dispatch(skjulModal()));
 }
 
 export function postArbeidsliste(arbeidsliste) {

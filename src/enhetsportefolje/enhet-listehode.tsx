@@ -224,4 +224,3 @@ function EnhetListehode({sorteringsrekkefolge, sorteringOnClick, filtervalg, sor
 }
 
 export default EnhetListehode;
-

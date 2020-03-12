@@ -19,6 +19,15 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '13. MAR. 2020',
+        tittel: 'Velg farge på arbeidslisteikonet',
+        versjonId: '13.03.20',
+        tekst: 'Du kan nå merke notatene i arbeidslisten med fire ulike farger. Det kan være nyttig for å organisere og prioritere arbeidslisten. Du kan sortere listen etter farge.',
+        children:
+            <>Standardfargen på ikonet er blå, men du kan endre dette til lilla, grønn eller gul når du legger
+                brukeren til arbeidslisten første gang, eller ved å redigere eksisterende notat.</>
+    },
+    {
         dato: '05. MAR. 2020',
         tittel: 'Nytt design på dialog',
         versjonId: '05.03.20',
