@@ -19,6 +19,12 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '13. MAR. 2020',
+        tittel: 'Endre møteform på et avtalt møte',
+        versjonId: '13.03.20',
+        tekst: 'På aktiviteten "møte" i aktivitetsplanen kan du nå endre møteform, selv om møtet er satt til «Avtalt med NAV». Husk å sende en dialogmelding til brukeren om endringen du gjør.'
+    },
+    {
         dato: '05. MAR. 2020',
         tittel: 'Nytt design på dialog',
         versjonId: '05.03.20',

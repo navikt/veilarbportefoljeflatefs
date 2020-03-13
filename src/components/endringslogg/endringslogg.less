@@ -29,7 +29,7 @@
         position: absolute;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end;
         max-width: 30rem;
         width: 30rem;
         z-index: 1337;
@@ -37,7 +37,7 @@
 
     .collapse-container ::-webkit-scrollbar {
         -webkit-appearance: none;
-        width: 7px;
+        width: 10px;
     }
 
     .collapse-container ::-webkit-scrollbar-thumb {
@@ -63,12 +63,12 @@
         content: '';
         position: absolute;
         top: 5px;
-        right: 8%;
+        right: 4%;
         width: 0;
         height: 0;
-        border-left: 0.8125rem solid transparent;
-        border-right: 0.8125rem solid transparent;
-        border-bottom: 0.6875rem solid @navMorkGra;
+        border-left: .8125rem solid transparent;
+        border-right: .8125rem solid transparent;
+        border-bottom: .6875rem solid @navMorkGra;
     }
 
     .innhold-container {
@@ -80,13 +80,13 @@
         content: '';
         position: absolute;
         top: 3px;
-        right: 8%;
+        right: 4%;
         width: 0;
         height: 0;
-        border-left: 0.8125rem solid transparent;
-        border-right: 0.8125rem solid transparent;
-        border-bottom: 0.6875rem solid @fokusFarge;
-        opacity: 0.78;
+        border-left: .8125rem solid transparent;
+        border-right: .8125rem solid transparent;
+        border-bottom: .6875rem solid @fokusFarge;
+        opacity: .78;
     }
 
     .endringslogg-info-nye-notifikasjoner {
@@ -96,22 +96,23 @@
     }
 
     .endringslogg-info-kolonne {
-        height: 0.5rem;
-        width: 0.5rem;
+        height: .5rem;
+        width: .5rem;
         margin-left: 1rem;
-        margin-right: 0.5rem;
-        margin-top: 0.3rem;
+        margin-right: .5rem;
+        margin-top: .3rem;
         float: left;
     }
 
     .endringslogg-dropDown {
         position: absolute;
         right: 0;
-        padding: 0.5rem 0 0.3rem 0.3rem;
+        padding: .2rem;
         outline: transparent;
         border: none;
         cursor: pointer;
         background-color: transparent;
+        margin-top: .2rem;
     }
 
     .endringslogg-dropDown:focus {
@@ -134,8 +135,8 @@
     }
 
     .endringslogg-nye-notifikasjoner-ikon {
-        height: 0.875rem;
-        width: 0.875rem;
+        height: .875rem;
+        width: .875rem;
         margin: 0 0 0 -0.5444rem;
         background-color: @navBla;;
         border-radius: 50%;
@@ -155,12 +156,12 @@
 
     .endringslogg-title {
         margin-right: auto;
-        margin-left: 0.2rem;
-        padding-right: 0.5rem;
+        margin-left: .2rem;
+        padding-right: .5rem;
     }
 
     .endringslogg-link {
-        margin-top: 0.2rem;
+        margin-top: .2rem;
         display: block;
     }
 
@@ -187,9 +188,9 @@
     }
 
     #external_link {
-        width: 0.668rem;
-        height: 0.668rem;
-        margin-left: 0.3em;
+        width: .668rem;
+        height: .668rem;
+        margin-left: .3em;
     }
 
     .hyperlink-ikon {
@@ -197,15 +198,15 @@
     }
 
     .endringslogg-stepperKnapp {
-        margin-top: 0.8rem;
+        margin-top: .8rem;
     }
 
     .endringslogg-innhold-liste {
         padding-left: 1.25rem;
-        margin: 0 0 0.5rem 0;
+        margin: 0 0 .5rem 0;
     }
 
     .veiledergrupper-navet-tekst {
-        margin-top: 0.5rem;
+        margin-top: .5rem;
     }
 }
