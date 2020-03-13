@@ -16,7 +16,7 @@ import FiltreringContainer from '../filtrering/filtrering-container';
 import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Toolbar from '../components/toolbar/toolbar';
 import { slettEnkeltFilter } from '../ducks/filtrering';
 import { hentPortefoljeForEnhet } from '../ducks/portefolje';
@@ -24,9 +24,9 @@ import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
 import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import VelgFilterMelding from './velg-filter-melding';
 import '../style.less';
-import {useCallback, useMemo} from "react";
-import {useFetchStatusTall} from "../hooks/portefolje/use-fetch-statustall";
-import {AppState} from "../reducer";
+import { useCallback, useMemo } from 'react';
+import { useFetchStatusTall } from '../hooks/portefolje/use-fetch-statustall';
+import { AppState } from '../reducer';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -65,15 +65,15 @@ function EnhetSide() {
     useFetchPortefolje(ListevisningType.enhetensOversikt);
     useSetLocalStorageOnUnmount();
 
-    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet')),[dispatch]);
+    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet')), [dispatch]);
 
     const portefoljeData = portefolje.data;
     const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
-    const stickyContainer = antallBrukere >= 5 ? 'sticky-container' : 'sticky-container__fjernet';
+    const flereEnnFireBrukere = antallBrukere > 4;
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const harFilter = antallFilter(filtervalg) !== 0;
 
-    const veilederLabel = useMemo(()=> lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter),[filtervalg.veiledere, veilederliste, slettVeilederFilter]);
+    const veilederLabel = useMemo(() => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter), [filtervalg.veiledere, veilederliste, slettVeilederFilter]);
     return (
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse blokk-xl">
@@ -101,9 +101,13 @@ function EnhetSide() {
                                 />
                                 {harFilter
                                     ? <>
-                                        <div className={stickyContainer}>
+                                        <div
+                                            className={flereEnnFireBrukere ? 'sticky-container' : 'sticky-container__fjernet'}>
                                             <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
-                                            <div className="sticky-container__skygge">
+                                            <span
+                                                className={flereEnnFireBrukere ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                                            <div
+                                                className={flereEnnFireBrukere ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
                                                 <Toolbar
                                                     onPaginering={() => dispatch(hentPortefoljeForEnhet(
                                                         enhetId,
@@ -117,6 +121,7 @@ function EnhetSide() {
                                                 />
                                                 <EnhetTabellOverskrift/>
                                             </div>
+                                            </span>
                                         </div>
                                         <EnhetTabell/>
                                     </>
