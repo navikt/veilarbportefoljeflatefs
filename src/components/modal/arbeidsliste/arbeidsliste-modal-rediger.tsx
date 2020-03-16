@@ -2,7 +2,7 @@ import * as React from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
-import { BrukerModell, Status } from '../../../model-interfaces';
+import { BrukerModell, KategoriModell, Status } from '../../../model-interfaces';
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { Formik, FormikProps } from 'formik';
@@ -11,8 +11,9 @@ import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
 import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
 import { redigerArbeidsliste } from '../../../ducks/arbeidsliste';
 import moment from 'moment';
-import {OrNothing} from "../../../utils/types/types";
+import { OrNothing } from '../../../utils/types/types';
 import './arbeidsliste.less';
+import { logEvent } from '../../../utils/frontend-logger';
 
 interface Ownprops {
     bruker: BrukerModell;
@@ -33,18 +34,18 @@ interface FormikPropsValues {
     kommentar: string;
     frist: string | null;
     overskrift: string;
-
+    kategori: KategoriModell | null
 }
 
 type ArbeidslisteModalRedigerProps = StateProps & Ownprops & DispatchProps;
 
 function ArbeidslisteModalRediger({
-  bruker,
-  arbeidslisteStatus,
-  sistEndretAv,
-  sistEndretDato,
-  onSubmit
-}: ArbeidslisteModalRedigerProps) {
+                                      bruker,
+                                      arbeidslisteStatus,
+                                      sistEndretAv,
+                                      sistEndretDato,
+                                      onSubmit
+                                  }: ArbeidslisteModalRedigerProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const lukkModalConfirm = (formikProps: FormikProps<FormikPropsValues>) => {
@@ -66,14 +67,20 @@ function ArbeidslisteModalRediger({
         overskrift: bruker.arbeidsliste.overskrift || '',
         kommentar: bruker.arbeidsliste.kommentar || '',
         frist: bruker.arbeidsliste.frist ?
-            moment(bruker.arbeidsliste.frist).format('YYYY-MM-DD') : ''
+            moment(bruker.arbeidsliste.frist).format('YYYY-MM-DD') : '',
+        kategori: bruker.arbeidsliste.kategori
+    };
+
+    const klikkRedigerknapp = () => {
+        logEvent('portefolje.metrikker.arbeidsliste.rediger');
+        setIsOpen(true);
     };
 
     return (
         <>
             <button
                 className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
-                onClick={() => setIsOpen(true)}
+                onClick={klikkRedigerknapp}
             >
                 Rediger
             </button>
@@ -96,7 +103,7 @@ function ArbeidslisteModalRediger({
                             <header className="modal-header"/>
                         </div>
                         <div className="arbeidsliste__modal">
-                            <div className="arbeidsliste-info-tekst">
+                            <div className="arbeidsliste__info-tekst">
                                 <Innholdstittel tag="h1" className="blokk-xs">
                                     Rediger
                                 </Innholdstittel>
@@ -106,6 +113,7 @@ function ArbeidslisteModalRediger({
                                 sistEndretDato={sistEndretDato}
                                 sistEndretAv={sistEndretAv}
                                 lukkModal={() => lukkModal(formikProps)}
+                                bruker={bruker}
                             />
                         </div>
                     </NavFrontendModal>)}

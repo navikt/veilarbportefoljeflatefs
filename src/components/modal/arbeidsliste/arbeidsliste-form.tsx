@@ -5,6 +5,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import FormikInput from '../../formik/formik-input';
 import FormikTekstArea from '../../formik/formik-tekstarea';
 import './arbeidsliste.less';
+import ArbeidslisteKategori from './arbeidsliste-kategori';
 
 function label(bruker: BrukerModell): React.ReactNode {
     return (
@@ -16,22 +17,22 @@ function label(bruker: BrukerModell): React.ReactNode {
 
 function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
     return (
-        <div>
+        <>
             {arbeidsliste.map((bruker, index) => (
-                <div className="input-fields">
+                <div className="arbeidsliste__bruker">
                     <div className="nav-input blokk-s" key={index}>
-                        <legend>
-                            {label(valgteBrukere[index])}
-                        </legend>
+                        <legend>{label(valgteBrukere[index])}</legend>
                         <FormikInput name={`arbeidsliste[${index}].overskrift`}/>
                         <FormikTekstArea name={`arbeidsliste[${index}].kommentar`}/>
                     </div>
-                    <FormikDatoVelger name={`arbeidsliste[${index}].frist`}/>
+                    <div className="skjemaelement dato-kategori-wrapper">
+                        <FormikDatoVelger name={`arbeidsliste[${index}].frist`}/>
+                        <ArbeidslisteKategori name={`arbeidsliste[${index}].kategori`} index={index}/>
+                    </div>
                 </div>
             ))}
-        </div>
+        </>
     );
-
 }
 
 export default ArbeidslisteForm;

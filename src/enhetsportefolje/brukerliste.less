@@ -12,18 +12,18 @@
         li:nth-child(odd) {
             background-color: #F4F4F4;
         }
+
         li {
             border-left: 1px solid @navGra60;
             border-right: 1px solid @navGra60;
             border-bottom: 1px solid @navGra40;
+
             &:first-child {
-                margin-top: 0.5rem;
-                border-top: 1px solid @navGra60;
             }
+
             &:last-child {
                 border-bottom: none;
             }
-
         }
     }
 
@@ -95,11 +95,12 @@
     }
 
     .brukerliste--min-width-minside {
-        min-width: 3rem;
+        min-width: 4rem;
     }
 
     .brukerliste__innhold {
         width: 70%;
+        display: flex;
     }
 
     .brukerliste__gutter-right {

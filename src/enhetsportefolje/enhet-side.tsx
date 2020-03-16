@@ -17,15 +17,16 @@ import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../reducer';
 import Toolbar from '../components/toolbar/toolbar';
 import { slettEnkeltFilter } from '../ducks/filtrering';
 import { hentPortefoljeForEnhet } from '../ducks/portefolje';
-import { useFetchPortefoljeData } from '../hooks/portefolje/use-fetch-portefolje-data';
 import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
 import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import VelgFilterMelding from './velg-filter-melding';
 import '../style.less';
+import { useCallback, useMemo } from 'react';
+import { useFetchStatusTall } from '../hooks/portefolje/use-fetch-statustall';
+import { AppState } from '../reducer';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -52,9 +53,10 @@ function antallFilter(filtervalg) {
 }
 
 function EnhetSide() {
-    const {statustall, enhettiltak} = useFetchPortefoljeData();
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
+    const statustall = useFetchStatusTall();
+    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
+
     const dispatch = useDispatch();
 
     useSetStateFromUrl();
@@ -63,66 +65,72 @@ function EnhetSide() {
     useFetchPortefolje(ListevisningType.enhetensOversikt);
     useSetLocalStorageOnUnmount();
 
-    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
+    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet')), [dispatch]);
 
     const portefoljeData = portefolje.data;
     const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
-    const stickyContainer = antallBrukere >= 5 ? 'sticky-container' : 'sticky-container__fjernet';
+    const flereEnnFireBrukere = antallBrukere > 4;
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const harFilter = antallFilter(filtervalg) !== 0;
 
+    const veilederLabel = useMemo(() => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter), [filtervalg.veiledere, veilederliste, slettVeilederFilter]);
     return (
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse blokk-xl">
-                <ToppMeny>
-                    <Innholdslaster avhengigheter={[statustall, enhettiltak]}>
-                        <section>
-                            <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
-                                <div className="status-filter-kolonne">
-                                    <FiltreringContainer
-                                        filtervalg={filtervalg}
-                                        enhettiltak={tiltak}
-                                        filtergruppe="enhet"
-                                    />
-                                </div>
-                                <div className="liste-kolonne">
-                                    <FiltreringLabelContainer
-                                        filtervalg={{
-                                            ...filtervalg,
-                                            veiledere: lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter)
-                                        }}
-                                        filtergruppe="enhet"
-                                        enhettiltak={enhettiltak.data.tiltak}
-                                        listevisning={listevisning}
-                                        className="filtrering-label-container"
-                                    />
-                                    {harFilter
-                                        ? <>
-                                            <div className={stickyContainer}>
-                                                <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
-                                                <div className="sticky-container__skygge">
-                                                    <Toolbar
-                                                        onPaginering={() => dispatch(hentPortefoljeForEnhet(
-                                                            enhetId,
-                                                            sorteringsrekkefolge,
-                                                            sorteringsfelt,
-                                                            filtervalg
-                                                        ))}
-                                                        filtergruppe={ListevisningType.enhetensOversikt}
-                                                        sokVeilederSkalVises
-                                                        antallTotalt={portefoljeData.antallTotalt}
-                                                    />
-                                                    <EnhetTabellOverskrift/>
-                                                </div>
-                                            </div>
-                                            <EnhetTabell/>
-                                        </>
-                                        : <VelgFilterMelding/>}
-                                </div>
+                <ToppMeny/>
+                <Innholdslaster avhengigheter={[statustall]}>
+                    <section>
+                        <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
+                            <div className="status-filter-kolonne">
+                                <FiltreringContainer
+                                    filtervalg={filtervalg}
+                                    enhettiltak={tiltak}
+                                    filtergruppe="enhet"
+                                />
                             </div>
-                        </section>
-                    </Innholdslaster>
-                </ToppMeny>
+                            <div className="liste-kolonne">
+                                <FiltreringLabelContainer
+                                    filtervalg={{
+                                        ...filtervalg,
+                                        veiledere: veilederLabel
+                                    }}
+                                    filtergruppe="enhet"
+                                    enhettiltak={enhettiltak.data.tiltak}
+                                    listevisning={listevisning}
+                                    className="filtrering-label-container"
+                                />
+                                {harFilter
+                                    ? <>
+                                        <div
+                                            className={flereEnnFireBrukere ? 'sticky-container' : 'sticky-container__fjernet'}>
+                                            <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
+                                            <span
+                                                className={flereEnnFireBrukere ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                                            <div
+                                                className={flereEnnFireBrukere ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
+                                                <Toolbar
+                                                    onPaginering={() => dispatch(hentPortefoljeForEnhet(
+                                                        enhetId,
+                                                        sorteringsrekkefolge,
+                                                        sorteringsfelt,
+                                                        filtervalg
+                                                    ))}
+                                                    filtergruppe={ListevisningType.enhetensOversikt}
+                                                    sokVeilederSkalVises
+                                                    antallTotalt={portefoljeData.antallTotalt}
+                                                />
+                                                <EnhetTabellOverskrift/>
+                                            </div>
+                                            </span>
+                                        </div>
+                                        <EnhetTabell/>
+                                    </>
+                                    : <VelgFilterMelding/>
+                                }
+                            </div>
+                        </div>
+                    </section>
+                </Innholdslaster>
                 <ModalEnhetSideController/>
             </div>
         </DocumentTitle>

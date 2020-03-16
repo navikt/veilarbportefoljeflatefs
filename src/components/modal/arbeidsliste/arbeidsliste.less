@@ -6,7 +6,7 @@
 
     .modal-header {
         height: 4rem;
-        border-bottom: 1px solid #B7B1A9;
+        border-bottom: 1px solid @navGra40;
         padding: 1.13rem 1rem;
     }
 
@@ -15,33 +15,42 @@
             margin: 0 2rem 1rem 2rem;
             padding: 1.5rem;
             border-radius: 4px;
-            background-color: #BA3A26;
-            color: #FFF;
+            background-color: @redError;
+            color: @white;
             list-style-position: inside;
 
             &:focus {
                 outline: 0;
-                box-shadow: 0 0 0 3px #ffbd66;
+                box-shadow: 0 0 0 3px @fokusFarge;
             }
 
             a {
-                color: #FFF;
-                border-bottom: 1px solid #FFF;
+                color: @white;
+                border-bottom: 1px solid @white;
                 text-decoration: none;
             }
         }
 
-        .arbeidsliste-info-tekst {
-            padding: 1rem 2rem 0 2rem;
-        }
+        .arbeidsliste {
+            &__info-tekst {
+                padding: 1rem 2rem 0 2rem;
 
-        .arbeidsliste-normaltekst {
-            padding-left: 2rem;
+                p {
+                    margin-bottom: 0;
+                    font-style: italic;
+                }
+            }
         }
 
         .input-fields {
             padding: 1rem 2rem;
             border: 0;
+
+            .arbeidsliste__bruker {
+                border-bottom: 1px solid @navGra40;
+                margin-bottom: 1rem;
+            }
+
         }
 
         .arbeidslistekommentar {
@@ -67,12 +76,12 @@
 
         .skjemaelement__label {
             margin-bottom: .25em;
+            font-weight: 400;
         }
 
         .modal-footer {
             display: flex;
-            border-top: 1px solid #B7B1A9;
-            padding: 1.7rem 2rem;
+            padding: 1.5rem 0;
         }
 
 
@@ -85,30 +94,25 @@
         padding: 1.7rem 2rem;
     }
 
-    .modal-footer {
-        border-top: 1px solid #B7B1A9;
-        padding: 1.1rem 2rem;
+
+    .tom-portefolje-modal {
+        padding: 0;
+        width: 50%;
+        background-color: @grayBackground;
     }
 }
 
-.arbeidsliste--rediger-lenke {
-    margin-left: 1rem;
-}
-
-.modal.arbeidsliste-modal {
+.arbeidsliste-modal {
     position: relative;
-    border: 1px solid #B7B1A9;
-    background-color: @grayBackground;
+    background-color: #F4F4F4;
     outline: none;
     max-width: 45rem;
     padding: 0;
     width: 100%;
 }
 
-.modal.tom-portefolje-modal {
-    padding: 0;
-    width: 50%;
-    background-color: @grayBackground;
+.arbeidsliste--rediger-lenke {
+    margin-left: 1rem;
 }
 
 .fjern-arbeidsliste {
@@ -126,8 +130,8 @@
     .arbeidsliste-listetekst__lang {
         max-height: 30rem;
         overflow-y: scroll;
-        border-top: 1px solid #B7B1A9;
-        border-bottom: 1px solid #B7B1A9;
+        border-top: 1px solid @navGra40;
+        border-bottom: 1px solid @navGra40;
         margin: 0 4rem 1rem;
 
         ul {
@@ -141,3 +145,12 @@
     }
 }
 
+.dato-kategori-wrapper {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    margin-bottom: .5rem;
+
+    .datovelger {
+        margin: 0 0 auto 0;
+    }
+}

@@ -16,7 +16,6 @@ import ToppMeny from '../topp-meny/topp-meny';
 import { useSetStateFromUrl } from '../hooks/portefolje/use-set-state-from-url';
 import { useFetchPortefolje } from '../hooks/portefolje/use-fetch-portefolje';
 import { useSetPortefoljeSortering } from '../hooks/portefolje/use-sett-sortering';
-import { useFetchPortefoljeData } from '../hooks/portefolje/use-fetch-portefolje-data';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
 import FiltreringContainer from '../filtrering/filtrering-container';
@@ -26,12 +25,13 @@ import { useDispatch } from 'react-redux';
 import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
 import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
+import { useFetchStatusTall } from '../hooks/portefolje/use-fetch-statustall';
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(ListevisningType.minOversikt);
+    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const {statustall, enhettiltak, veiledere} = useFetchPortefoljeData(gjeldendeVeileder);
+    const statustall = useFetchStatusTall(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
 
@@ -42,34 +42,36 @@ function MinoversiktSide() {
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
-    const stickyContainer = antallBrukere > 4 ? 'sticky-container' : 'sticky-container__fjernet';
+    const flereEnnFireBrukere = antallBrukere > 4;
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
 
     return (
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse blokk-xl">
-                <ToppMeny>
-                    <Innholdslaster avhengigheter={[statustall, enhettiltak, veiledere]}>
-                        <MinOversiktWrapper>
-                            <div className="status-filter-kolonne">
-                                <FiltreringContainer
-                                    filtervalg={filtervalg}
-                                    filtergruppe="veileder"
-                                    enhettiltak={tiltak}
-                                />
-                            </div>
-                            <div className="liste-kolonne">
-                                <FiltreringLabelContainer
-                                    filtervalg={filtervalg}
-                                    filtergruppe="veileder"
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    listevisning={listevisning}
-                                    className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
-                                />
-                                <div className={stickyContainer}>
-                                    <TabellOverskrift
-                                        className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
-                                    <div className="sticky-container__skygge">
+                <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje}/>
+                <Innholdslaster avhengigheter={[statustall]}>
+                    <MinOversiktWrapper>
+                        <div className="status-filter-kolonne">
+                            <FiltreringContainer
+                                filtervalg={filtervalg}
+                                filtergruppe="veileder"
+                                enhettiltak={tiltak}
+                            />
+                        </div>
+                        <div className="liste-kolonne">
+                            <FiltreringLabelContainer
+                                filtervalg={filtervalg}
+                                filtergruppe="veileder"
+                                enhettiltak={enhettiltak.data.tiltak}
+                                listevisning={listevisning}
+                                className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
+                            />
+                            <div className={flereEnnFireBrukere ? 'sticky-container' : 'ikke-sticky__container'}>
+                                <TabellOverskrift
+                                    className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
+                                <span className={flereEnnFireBrukere ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                                <div
+                                    className={flereEnnFireBrukere ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
                                         <Toolbar
                                             filtergruppe={ListevisningType.minOversikt}
                                             onPaginering={() => dispatch(hentPortefoljeForVeileder(
@@ -89,20 +91,22 @@ function MinoversiktSide() {
                                             innloggetVeileder={innloggetVeilederIdent!.ident}
                                             settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
                                         />
-                                    </div>
                                 </div>
-                                <MinoversiktTabell
-                                    innloggetVeileder={innloggetVeilederIdent}
-                                    settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                />
-                                <MinOversiktModalController/>
+                                </span>
                             </div>
-                        </MinOversiktWrapper>
-                    </Innholdslaster>
-                </ToppMeny>
+
+                            <MinoversiktTabell
+                                innloggetVeileder={innloggetVeilederIdent}
+                                settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
+                            />
+                            <MinOversiktModalController/>
+                        </div>
+                    </MinOversiktWrapper>
+                </Innholdslaster>
             </div>
         </DocumentTitle>
-    );
+    )
+        ;
 }
 
 export default MinoversiktSide;

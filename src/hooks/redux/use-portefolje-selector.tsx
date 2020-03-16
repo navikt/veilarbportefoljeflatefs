@@ -6,15 +6,18 @@ import { createSelector } from 'reselect'
 import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from "../../model-interfaces";
 import {OrNothing} from "../../utils/types/types";
 import {PortefoljeState} from "../../ducks/portefolje";
+import {EnhettiltakState} from "../../ducks/enhettiltak";
 
 const selectValgtEnhetId = (state: AppState) => state.valgtEnhet.data.enhetId;
 const selectSorteringsrekkefolge = (state: AppState) => state.portefolje.sorteringsrekkefolge;
 const selectBrukere = (state: AppState) => state.portefolje.data.brukere;
 const selectSorteringsFeldt = (state: AppState) => state.portefolje.sorteringsfelt;
 const selectPortefolje = (state: AppState) => state.portefolje;
+const selectEnhetTiltak = (state: AppState) => state.enhettiltak;
 
 
 const selectPortefoljeTabell = createSelector(
+    selectEnhetTiltak,
     selectPortefolje,
     selectValgtEnhetId,
     selectSorteringsrekkefolge,
@@ -22,11 +25,12 @@ const selectPortefoljeTabell = createSelector(
     (state, listevisningType) => getFiltertingState(state, listevisningType),
     (state, listevisningType) => selectListeVisning(state, listevisningType),
     selectSorteringsFeldt,
-    (portefolje, enhetId, sorteringsrekkefolge, brukere, filtervalg, listevisning, sorteringsfelt) =>
-        ({portefolje, enhetId, sorteringsrekkefolge,brukere, filtervalg, listevisning, sorteringsfelt})
+    (enhettiltak, portefolje, enhetId, sorteringsrekkefolge, brukere, filtervalg, listevisning, sorteringsfelt) =>
+        ({enhettiltak, portefolje, enhetId, sorteringsrekkefolge,brukere, filtervalg, listevisning, sorteringsfelt})
 );
 
 interface UsePortefoljeSelector {
+    enhettiltak: EnhettiltakState,
     portefolje: PortefoljeState,
     enhetId: OrNothing<string>;
     sorteringsrekkefolge: Sorteringsrekkefolge;

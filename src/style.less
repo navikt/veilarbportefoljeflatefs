@@ -106,20 +106,67 @@ html {
     top: 0;
     z-index: 1000;
 
-    &__fjernet {
-        position: inherit;
-        top: 0;
-        z-index: 1000;
-    }
-
     .blokk-xxs {
         margin-bottom: 0;
     }
+}
 
+.ikke-sticky {
     &__skygge {
-        box-shadow: 0 5px 8px 0 @navGra40;
-        border: 1px solid @navGra60;
+        height: 16px;
+        top: -16px;
     }
+
+    &__toolbar-container {
+        position: sticky;
+        top: 0;
+        border: 1px solid @navGra60;
+        z-index: 3;
+    }
+
+    &__container {
+        position: inherit;
+        top: 0;
+        z-index: 1;
+    }
+}
+
+.sticky-skygge {
+    position: sticky;
+    z-index: 1;
+    -webkit-backface-visibility: hidden;
+    height: 16px;
+    top: -16px;
+}
+
+.toolbar-container {
+    position: sticky;
+    top: 0;
+    border: 1px solid @navGra60;
+    margin-top: -16px;
+    z-index: 3;
+}
+
+.sticky-skygge::before,
+.sticky-skygge::after {
+    content: '';
+    display: block;
+    height: 16px;
+    position: sticky;
+}
+
+.sticky-skygge::before {
+    top: 145px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 0 3px;
+}
+
+.sticky-skygge::after {
+    background: linear-gradient(white, rgba(255, 255, 255, 0.3));
+    top: 0;
+    z-index: 2;
+    height: 0;
+    width: auto;
 }
 
 #veilederside-toolbar {
@@ -165,6 +212,9 @@ html {
         .status-filter-kolonne {
             max-width: none;
         }
-    }
 
+        //.sticky-skygge::before {
+        //    top: 145px;
+        //}
+    }
 }
