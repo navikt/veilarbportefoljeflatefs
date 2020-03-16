@@ -24,8 +24,8 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '16.03.20',
         tekst: 'Du kan nå merke kommentaren i arbeidslisten med fire ulike farger. Det kan være nyttig for å organisere og prioritere arbeidslisten. Du kan sortere listen etter farge.',
         children:
-            <>Standardfargen på ikonet er blå, men du kan endre dette til lilla, grønn eller gul når du legger brukeren
-                til arbeidslisten første gang, eller ved å redigere eksisterende kommenatar.</>
+            <p>Standardfargen på ikonet er blå, men du kan endre dette til lilla, grønn eller gul når du legger brukeren
+                til arbeidslisten første gang, eller ved å redigere eksisterende kommenatar.</p>
     },
     {
         dato: '13. MAR. 2020',
