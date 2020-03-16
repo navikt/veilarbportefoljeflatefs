@@ -20,12 +20,21 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
         dato: '16. MAR. 2020',
-        tittel: 'Velg farge på arbeidslisteikonet',
+        tittel: 'Farger på arbeidslisteikon og forventet svartid i dialog',
         versjonId: '16.03.20',
-        tekst: 'Du kan nå merke kommentaren i arbeidslisten med fire ulike farger. Det kan være nyttig for å organisere og prioritere arbeidslisten. Du kan sortere listen etter farge.',
         children:
-            <p>Standardfargen på ikonet er blå, men du kan endre dette til lilla, grønn eller gul når du legger brukeren
-                til arbeidslisten første gang, eller ved å redigere eksisterende kommenatar.</p>
+            <ul>
+                <li>
+                    Du kan nå merke kommentaren i arbeidslisten med fire ulike farger. Det kan være nyttig for å
+                    organisere og prioritere arbeidslisten. Du kan sortere listen etter farge. Du kan endre
+                    standardfargen når du legger brukeren til arbeidslisten første gang, eller ved å redigere
+                    eksisterende kommentar.
+                </li>
+                <li>
+                    Bruker får nå informasjon i dialog om at svartiden kan bli lenger enn vanlig på grunn av situasjonen
+                    rundt korona.
+                </li>
+            </ul>
     },
     {
         dato: '13. MAR. 2020',
