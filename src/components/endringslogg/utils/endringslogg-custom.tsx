@@ -19,7 +19,18 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '16. MAR. 2020',
+        dato: '17. MAR. 2020',
+        tittel: 'Filtrere på brukers situasjon fra registrering',
+        versjonId: '17.03.20',
+        tekst: 'Du kan nå filtrere frem brukere basert på situasjonen de har oppgitt på registreringstidspunktet. Da kan man for eksempel filtrere på brukere som har oppgitt at de er, eller står i fare for å bli permittert.',
+        children:
+            <EndringsloggLinkMedIkon
+                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filtre-i-Enhetens--og-Min-oversikt-i-Modia--brukers-svar-fra-registrering-om-sin-situasjon.aspx"
+                linkTekst="Nyhetssak på Navet"
+            />
+    },
+    {
+        dato: '16. MAR. 2020',
         tittel: 'Farger på arbeidslisteikon og forventet svartid i dialog',
         versjonId: '16.03.20',
         children:
@@ -48,14 +59,14 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '05.03.20',
         children:
             <>
-                <ul className="endringslogg-innhold-liste">
+                <ul>
                     <li>Utnytte skjermplassen bedre</li>
                     <li>På store skjermer vises innholdet i aktiviteten samtidig som dialogen</li>
                     <li>Enkel automatisk signatur for veileder</li>
                 </ul>
                 <EndringsloggLinkMedIkon
                     url="https://navno.sharepoint.com/sites/intranett-digital-hverdag/SitePages/Endringer-i-dialogen-i-aktivitetsplanen.aspx"
-                    linkTekst="Les mer på navet"
+                    linkTekst="Nyhetssak på Navet"
                 />
             </>
     },

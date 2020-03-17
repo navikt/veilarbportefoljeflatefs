@@ -171,6 +171,19 @@ export const aktiviteter = {
 
 const veiledere = {};
 
+export const registreringstype = {
+    ER_PERMITTERT: 'Er permittert eller kommer til å bli permittert',
+    USIKKER_JOBBSITUASJON: 'Er usikker på jobbsituasjonen min',
+    MISTET_JOBBEN: 'Har mistet eller kommer til å miste jobben',
+    VIL_FORTSETTE_I_JOBB: 'Har jobb og ønsker å fortsette i den jobben jeg har',
+    DELTIDSJOBB_VIL_MER: 'Har deltidsjobb, men vil jobbe mer',
+    VIL_BYTTE_JOBB: 'Har jobb, men vil bytte',
+    AKKURAT_FULLFORT_UTDANNING: 'Har akkurat fullført utdanning, militærtjeneste eller annet',
+    HAR_SAGT_OPP: 'Har sagt opp eller kommer til å si opp',
+    ALDRI_HATT_JOBB: 'Har aldri vært i jobb',
+    JOBB_OVER_2_AAR: 'Har ikke vært i jobb de 2 siste årene',
+};
+
 export default {
     ytelseUtlopsSortering,
     ferdigfilterListe,
@@ -187,5 +200,6 @@ export default {
     veiledere,
     aktiviteter,
     ytelseAapSortering,
-    manuellBrukerStatus
+    manuellBrukerStatus,
+    registreringstype
 };

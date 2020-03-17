@@ -9,8 +9,12 @@ import { FiltreringStatus } from './filtrering-status/filtrering-status';
 import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-veileder-grupper';
 import { OrNothing } from '../utils/types/types';
 import { Tiltak } from '../ducks/enhettiltak';
-import {pagineringSetup} from "../ducks/paginering";
-
+import { pagineringSetup } from '../ducks/paginering';
+import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
+import { registreringstype } from './filter-konstanter';
+import { ReactComponent as InfoIkon } from '../components/ikoner/info-ikon.svg';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -22,7 +26,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
 
     const dispatch = useDispatch();
 
-    const doEndreFiltervalg = (filterId: string, filterVerdi: string) => {
+    const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
@@ -40,8 +44,29 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 lamellNavn="veiledergrupper"
                 hidden={filtergruppe === 'veileder'}
             >
-                <FilteringVeilederGrupper filtergruppe={filtergruppe} /> 
+                <FilteringVeilederGrupper filtergruppe={filtergruppe}/>
 
+            </MetrikkEkspanderbartpanel>
+            <MetrikkEkspanderbartpanel
+                apen={false}
+                tittel="Registrering"
+                tittelProps="undertittel"
+                lamellNavn="registrering"
+                hidden={filtergruppe === 'registrering'}
+            >
+                <div className="registreringsfilter__infocontainer">
+                    <InfoIkon className="registreringsfilter__infoikon"/>
+                    <Normaltekst className="registreringsfilter__infotekst">
+                        Situasjonen brukeren oppgir på registreringstidspunktet.
+                    </Normaltekst>
+                </div>
+                <CheckboxFilterform
+                    form="registreringstype"
+                    filtervalg={filtervalg}
+                    valg={registreringstype}
+                    endreFilterValg={doEndreFiltervalg}
+                    className="registreringstype"
+                />
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen
