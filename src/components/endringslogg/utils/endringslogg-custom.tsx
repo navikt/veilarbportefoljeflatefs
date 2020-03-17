@@ -23,6 +23,11 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         tittel: 'Filtrere på brukers situasjon fra registrering',
         versjonId: '17.03.20',
         tekst: 'Du kan nå filtrere frem brukere basert på situasjonen de har oppgitt på registreringstidspunktet. Da kan man for eksempel filtrere på brukere som har oppgitt at de er, eller står i fare for å bli permittert.',
+        children:
+            <EndringsloggLinkMedIkon
+                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filtre-i-Enhetens--og-Min-oversikt-i-Modia--brukers-svar-fra-registrering-om-sin-situasjon.aspx"
+                linkTekst="Nyhetssak på Navet"
+            />
     },
     {
         dato: '16. MAR. 2020',
@@ -61,7 +66,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                 </ul>
                 <EndringsloggLinkMedIkon
                     url="https://navno.sharepoint.com/sites/intranett-digital-hverdag/SitePages/Endringer-i-dialogen-i-aktivitetsplanen.aspx"
-                    linkTekst="Les mer på navet"
+                    linkTekst="Nyhetssak på Navet"
                 />
             </>
     },
