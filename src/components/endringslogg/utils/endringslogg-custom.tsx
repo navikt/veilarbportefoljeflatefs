@@ -19,13 +19,28 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '16. MAR. 2020',
-        tittel: 'Velg farge på arbeidslisteikonet',
+        dato: '17. MAR. 2020',
+        tittel: 'Filtrere på brukers situasjon fra registrering',
+        versjonId: '17.03.20',
+        tekst: 'Du kan nå filtrere frem brukere basert på situasjonen de har oppgitt på registreringstidspunktet. Da kan man for eksempel filtrere på brukere som har oppgitt at de er, eller står i fare for å bli permittert.',
+    },
+    {
+        dato: '16. MAR. 2020',
+        tittel: 'Farger på arbeidslisteikon og forventet svartid i dialog',
         versjonId: '16.03.20',
-        tekst: 'Du kan nå merke notatene i arbeidslisten med fire ulike farger. Det kan være nyttig for å organisere og prioritere arbeidslisten. Du kan sortere listen etter farge.',
         children:
-            <>Standardfargen på ikonet er blå, men du kan endre dette til lilla, grønn eller gul når du legger
-                brukeren til arbeidslisten første gang, eller ved å redigere eksisterende notat.</>
+            <ul>
+                <li>
+                    Du kan nå merke kommentaren i arbeidslisten med fire ulike farger. Det kan være nyttig for å
+                    organisere og prioritere arbeidslisten. Du kan sortere listen etter farge. Du kan endre
+                    standardfargen når du legger brukeren til arbeidslisten første gang, eller ved å redigere
+                    eksisterende kommentar.
+                </li>
+                <li>
+                    Bruker får nå informasjon i dialog om at svartiden kan bli lenger enn vanlig på grunn av situasjonen
+                    rundt korona.
+                </li>
+            </ul>
     },
     {
         dato: '13. MAR. 2020',
@@ -39,7 +54,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '05.03.20',
         children:
             <>
-                <ul className="endringslogg-innhold-liste">
+                <ul>
                     <li>Utnytte skjermplassen bedre</li>
                     <li>På store skjermer vises innholdet i aktiviteten samtidig som dialogen</li>
                     <li>Enkel automatisk signatur for veileder</li>
