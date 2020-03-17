@@ -14,6 +14,7 @@ import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filte
 import { registreringstype } from './filter-konstanter';
 import { ReactComponent as InfoIkon } from '../components/ikoner/info-ikon.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -56,7 +57,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 <div className="registreringsfilter__infocontainer">
                     <InfoIkon className="registreringsfilter__infoikon"/>
                     <Normaltekst className="registreringsfilter__infotekst">
-                        Den situasjonen brukere på registreringstidspunktet oppgir at passer best.
+                        Situasjonen brukeren oppgir på registreringstidspunktet.
                     </Normaltekst>
                 </div>
                 <CheckboxFilterform
