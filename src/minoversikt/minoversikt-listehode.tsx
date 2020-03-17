@@ -63,6 +63,7 @@ function MinOversiktListeHode({sorteringsrekkefolge, sorteringOnClick, filterval
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
                     tekst={<ArbeidslisteikonBla/>}
+                    title="Sorter på farge"
                 />
                 <SorteringHeader
                     className="col col-xs-2"
