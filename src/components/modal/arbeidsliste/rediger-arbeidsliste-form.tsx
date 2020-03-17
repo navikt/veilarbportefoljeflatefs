@@ -50,7 +50,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                         className="knapp knapp--hoved"
                         spinner={props.laster}
                         onClick={() => {
-                            logEvent('teamvoff.metrikker.arbeidslistekategori', {
+                            logEvent('portefolje.metrikker.arbeidslistekategori', {
                                 kategori: props.bruker.arbeidsliste.kategori,
                                 leggtil: false,
                                 applikasjon: 'oversikt'
