@@ -19,15 +19,21 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '17. MAR. 2020',
+        dato: '19. MAR. 2020',
         tittel: 'Filtrering på brukers situasjon fra registrering',
-        versjonId: '17.03.20',
+        versjonId: '19.03.20',
         tekst: 'Du kan nå filtrere frem brukere basert på situasjonen de har oppgitt på registreringstidspunktet. Da kan man for eksempel filtrere på brukere som har oppgitt at de er, eller står i fare for å bli permittert.',
         children:
             <EndringsloggLinkMedIkon
                 url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filtre-i-Enhetens--og-Min-oversikt-i-Modia--brukers-svar-fra-registrering-om-sin-situasjon.aspx"
                 linkTekst="Nyhetssak på Navet"
             />
+    },
+    {
+        dato: '18. MAR. 2020',
+        tittel: 'Automatisk melding til permitterte',
+        versjonId: '18.03.20',
+        tekst: 'Brukere som registrerer seg med situasjonen «Er permittert eller kommer til å bli permittert» får nå en automatisk melding i dialogen om hva de nå bør gjøre.'
     },
     {
         dato: '16. MAR. 2020',
