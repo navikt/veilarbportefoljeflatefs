@@ -19,6 +19,12 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '18. MAR. 2020',
+        tittel: 'Automatisk melding til permitterte',
+        versjonId: '18.03.20',
+        tekst: 'Brukere som registrerer seg med situasjonen «Er permittert eller kommer til å bli permittert» får nå en automatisk melding i dialogen om hva de nå bør gjøre.'
+    },
+    {
         dato: '16. MAR. 2020',
         tittel: 'Farger på arbeidslisteikon og forventet svartid i dialog',
         versjonId: '16.03.20',
