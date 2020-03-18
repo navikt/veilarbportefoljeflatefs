@@ -20,7 +20,7 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
         dato: '17. MAR. 2020',
-        tittel: 'Filtrere på brukers situasjon fra registrering',
+        tittel: 'Filtrering på brukers situasjon fra registrering',
         versjonId: '17.03.20',
         tekst: 'Du kan nå filtrere frem brukere basert på situasjonen de har oppgitt på registreringstidspunktet. Da kan man for eksempel filtrere på brukere som har oppgitt at de er, eller står i fare for å bli permittert.',
         children:
