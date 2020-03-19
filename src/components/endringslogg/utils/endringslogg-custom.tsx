@@ -33,7 +33,12 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '18. MAR. 2020',
         tittel: 'Automatisk melding til permitterte',
         versjonId: '18.03.20',
-        tekst: 'Brukere som registrerer seg med situasjonen «Er permittert eller kommer til å bli permittert» får nå en automatisk melding i dialogen om hva de nå bør gjøre.'
+        tekst: 'Brukere som registrerer seg med situasjonen «Er permittert eller kommer til å bli permittert» får nå en automatisk melding i dialogen om hva de nå bør gjøre.',
+        children:
+            <EndringsloggLinkMedIkon
+                url="https://navno.sharepoint.com/sites/intranett-digital-hverdag/SitePages/For-permitterte--Ny-automatisk-dialog-etter-registrering.aspx"
+                linkTekst="Se denne og andre små endringer på Navet"
+            />
     },
     {
         dato: '16. MAR. 2020',
