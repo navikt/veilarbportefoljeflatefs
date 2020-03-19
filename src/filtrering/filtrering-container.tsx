@@ -10,11 +10,6 @@ import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-ve
 import { OrNothing } from '../utils/types/types';
 import { Tiltak } from '../ducks/enhettiltak';
 import { pagineringSetup } from '../ducks/paginering';
-import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
-import { registreringstype } from './filter-konstanter';
-import { ReactComponent as InfoIkon } from '../components/ikoner/info-ikon.svg';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -45,28 +40,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 hidden={filtergruppe === 'veileder'}
             >
                 <FilteringVeilederGrupper filtergruppe={filtergruppe}/>
-
-            </MetrikkEkspanderbartpanel>
-            <MetrikkEkspanderbartpanel
-                apen={false}
-                tittel="Registrering"
-                tittelProps="undertittel"
-                lamellNavn="registrering"
-                hidden={filtergruppe === 'registrering'}
-            >
-                <div className="registreringsfilter__infocontainer">
-                    <InfoIkon className="registreringsfilter__infoikon"/>
-                    <Normaltekst className="registreringsfilter__infotekst">
-                        Situasjonen brukeren oppgir på registreringstidspunktet.
-                    </Normaltekst>
-                </div>
-                <CheckboxFilterform
-                    form="registreringstype"
-                    filtervalg={filtervalg}
-                    valg={registreringstype}
-                    endreFilterValg={doEndreFiltervalg}
-                    className="registreringstype"
-                />
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen
@@ -78,7 +51,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                     filtergruppe={filtergruppe}
                     filtervalg={filtervalg}
                 />
-
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
