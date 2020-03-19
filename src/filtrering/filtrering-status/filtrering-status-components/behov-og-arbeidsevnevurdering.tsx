@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     ER_SYKMELDT_MED_ARBEIDSGIVER,
-    PERMITTERTE_UTEN_OPPFOLGINGSVEDTAK,
     TRENGER_VURDERING,
     UNDER_VURDERING
 } from '../../filter-konstanter';
@@ -16,8 +15,8 @@ import { VEDTAKSTOTTE } from '../../../konstanter';
 
 export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
     const vedtakkStotteFeature = useSelector((state: AppState) => sjekkFeature(state, VEDTAKSTOTTE));
-
     const statusTall = useStatusTallSelector();
+
     return (
         <>
             <BarInputRadio
@@ -42,13 +41,6 @@ export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
                 checked={props.ferdigfilterListe.includes(UNDER_VURDERING)}
                 antall={statusTall.underVurdering}
                 hidden={!vedtakkStotteFeature}
-            />
-            <BarInputRadio
-                filterNavn={'permitterteUtenOppfolgingsvedtak'}
-                handleChange={props.handleChange}
-                max={statusTall.totalt}
-                checked={props.ferdigfilterListe.includes(PERMITTERTE_UTEN_OPPFOLGINGSVEDTAK)}
-                antall={statusTall.permitterteUtenOppfolgingsvedtak}
             />
         </>
     );

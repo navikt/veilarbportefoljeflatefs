@@ -13,7 +13,9 @@ import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avt
 import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
 import { FiltervalgModell } from '../../model-interfaces';
 import './filtrering-status.less';
-import {pagineringSetup} from "../../ducks/paginering";
+import { pagineringSetup } from '../../ducks/paginering';
+import FiltreringStatusPermitterteUtenOppfolgingsvedtak
+    from './filtrering-status-components/permitterte-uten-oppfolgingsvedtak-brukere';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -45,16 +47,22 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     return (
         <FiltreringStatusContainer>
-            <FiltreringStatusNyeBrukere
-                handleChange={handleCheckboxChange}
-                ferdigfilterListe={ferdigfilterListe}
-                hidden={props.filtergruppe !== 'veileder'}
-            />
-            <FiltreringStatusUfordelteBrukere
-                handleChange={handleCheckboxChange}
-                ferdigfilterListe={ferdigfilterListe}
-                hidden={props.filtergruppe === 'veileder'}
-            />
+            <div className="filter-checkboks-container">
+                <FiltreringStatusNyeBrukere
+                    handleChange={handleCheckboxChange}
+                    ferdigfilterListe={ferdigfilterListe}
+                    hidden={props.filtergruppe !== 'veileder'}
+                />
+                <FiltreringStatusUfordelteBrukere
+                    handleChange={handleCheckboxChange}
+                    ferdigfilterListe={ferdigfilterListe}
+                    hidden={props.filtergruppe === 'veileder'}
+                />
+                <FiltreringStatusPermitterteUtenOppfolgingsvedtak
+                    handleChange={handleCheckboxChange}
+                    ferdigfilterListe={ferdigfilterListe}
+                />
+            </div>
             <FiltreringStatusBehovsVurdering
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}

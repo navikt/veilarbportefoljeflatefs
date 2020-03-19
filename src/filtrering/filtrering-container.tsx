@@ -14,7 +14,6 @@ import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filte
 import { registreringstype } from './filter-konstanter';
 import { ReactComponent as InfoIkon } from '../components/ikoner/info-ikon.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -78,7 +77,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                     filtergruppe={filtergruppe}
                     filtervalg={filtervalg}
                 />
-
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
