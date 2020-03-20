@@ -44,28 +44,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 hidden={filtergruppe === 'veileder'}
             >
                 <FilteringVeilederGrupper filtergruppe={filtergruppe}/>
-
-            </MetrikkEkspanderbartpanel>
-            <MetrikkEkspanderbartpanel
-                apen={false}
-                tittel="Registrering"
-                tittelProps="undertittel"
-                lamellNavn="registrering"
-                hidden={filtergruppe === 'registrering'}
-            >
-                <div className="registreringsfilter__infocontainer">
-                    <InfoIkon className="registreringsfilter__infoikon"/>
-                    <Normaltekst className="registreringsfilter__infotekst">
-                        Situasjonen brukeren oppgir på registreringstidspunktet.
-                    </Normaltekst>
-                </div>
-                <CheckboxFilterform
-                    form="registreringstype"
-                    filtervalg={filtervalg}
-                    valg={registreringstype}
-                    endreFilterValg={doEndreFiltervalg}
-                    className="registreringstype"
-                />
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen
