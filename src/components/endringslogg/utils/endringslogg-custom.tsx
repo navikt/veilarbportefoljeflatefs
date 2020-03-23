@@ -4,6 +4,7 @@ import React from 'react';
 import TourModalButton from '../../modal/tour-modal/tour-modal-button';
 import '../endringslogg.less';
 import '../collapse-container-transition.less';
+import {FeaturesState} from "../../../ducks/features";
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -11,10 +12,12 @@ export interface EndringsloggInnlegg {
     tekst?: string;
     versjonId: string;
     children?: React.ReactNode;
+    featureToggleName?: string;
 }
 
 export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
     sett: boolean;
+    erFeaturePa?: boolean;
 }
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
@@ -182,12 +185,13 @@ export function setHarSettAlt() {
     });
 }
 
-export function mapRemoteToState(remotestorage: string[]): EndringsloggInnleggMedSettStatus[] {
+export function mapRemoteToState(remotestorage: string[], features: FeaturesState): EndringsloggInnleggMedSettStatus[] {
     return endringslogginnhold.map((el) => {
         const settRemote = remotestorage.some((ver) => ver === el.versjonId);
         return ({
             ...el,
             sett: settRemote,
+            erFeaturePa: el.featureToggleName ? features[el.featureToggleName] : true
         });
     });
 }
