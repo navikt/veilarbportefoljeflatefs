@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dictionary } from '../../utils/types/types';
 import { FiltervalgModell } from '../../model-interfaces';
 import Grid from '../grid/grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './checkbox-filterform.less';
+import classNames from 'classnames';
 
 interface CheckboxFilterformProps {
     form: string,
     valg: Dictionary<string>
     endreFilterValg: (form: string, filterVerdi: string[]) => void;
-    closeDropdown: () => void;
+    closeDropdown?: () => void;
     filtervalg: FiltervalgModell;
-    columns?: number
+    columns?: number;
+    className?: string;
 }
 
-function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filtervalg, columns = 1}: CheckboxFilterformProps) {
+function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filtervalg, columns = 1, className}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
 
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
+
+    useEffect(() => {
+        setCheckBoxValg(filtervalg[form]);
+    }, [filtervalg, form]);
 
     const velgCheckBox = (e) => {
         e.persist();
@@ -32,24 +38,30 @@ function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filterv
         <form className="skjema checkbox-filterform" onSubmit={(e) => {
             e.preventDefault();
             endreFilterValg(form, checkBoxValg);
-            closeDropdown();
+            if (closeDropdown) {
+                closeDropdown();
+            }
         }}>
             {harValg &&
-            <div className="checkbox-filterform__valg">
+            <div className={classNames('checkbox-filterform__valg', className)}>
                 <Grid columns={columns}>
                     <RenderFields valg={valg} velgCheckBox={velgCheckBox} checkBoxValg={checkBoxValg}/>
                 </Grid>
             </div>
             }
             <div className="checkbox-filterform__under-valg">
-                {checkBoxValg.length > 0
-                    ? <button className="knapp knapp--mini knapp--hoved" type="submit">
+                {closeDropdown ?
+                    checkBoxValg.length > 0
+                        ? <button className="knapp knapp--mini knapp--hoved" type="submit">
+                            Velg
+                        </button>
+                        : <button className="knapp knapp--mini" type="button" onClick={closeDropdown}>
+                            Lukk
+                        </button>
+                    : <button className="knapp knapp--mini knapp--hoved" type="submit">
                         Velg
-                    </button>
-                    : <button className="knapp knapp--mini" type="button" onClick={closeDropdown}>
-                        Lukk
-                    </button>
-                }
+                    </button>}
+
                 {!harValg && <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                     Ingen veiledere funnet
                 </AlertStripe>}

@@ -14,7 +14,16 @@ export enum AktiviteterValg {
     NA = 'NA'
 }
 
-type AktivititetNykkel = 'BEHANDLING' | 'EGEN' | 'GRUPPEAKTIVITET'| 'IJOBB' | 'MOTE' | 'SOKEAVTALE' | 'STILLING' | 'TILTAK' | 'UTDANNINGAKTIVITET'
+type AktivititetNykkel =
+    'BEHANDLING'
+    | 'EGEN'
+    | 'GRUPPEAKTIVITET'
+    | 'IJOBB'
+    | 'MOTE'
+    | 'SOKEAVTALE'
+    | 'STILLING'
+    | 'TILTAK'
+    | 'UTDANNINGAKTIVITET'
 
 export type FiltreringAktiviteterValg = {
     [aktivitet in AktivititetNykkel]: AktiviteterValg;
@@ -38,7 +47,8 @@ export const initialState: FiltervalgModell = {
     manuellBrukerStatus: [],
     hovedmal: [],
     navnEllerFnrQuery: '',
-    veilederNavnQuery: ''
+    veilederNavnQuery: '',
+    registreringstype: []
 };
 
 function fjern(verdi, fjernVerdi) {
@@ -49,7 +59,7 @@ function fjern(verdi, fjernVerdi) {
     } else if (fjernVerdi && typeof verdi === 'object') {
         return Object.entries(verdi)
             .filter(([key]) => key !== fjernVerdi)
-            .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+            .reduce((acc, [key, value]) => ({...acc, [key]: value}), {});
     } else if (fjernVerdi === null) {
         return null;
     } else if (typeof verdi === 'string') {
@@ -86,51 +96,49 @@ export default function reducer(state: FiltervalgModell = initialState, action):
                 tiltakstyper: []
             };
         case SETT_FILTERVALG:
-            return { ...action.data };
+            return {...action.data};
         default:
             return state;
     }
 }
-
-
 
 // Action Creators
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet') {
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
         return {
             type: ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
-            data: { filterId, filterVerdi },
+            data: {filterId, filterVerdi},
             name: filtergruppe
         };
     }
     return {
         type: ENDRE_FILTER,
-        data: { filterId, filterVerdi },
+        data: {filterId, filterVerdi},
         name: filtergruppe
-    }
+    };
 }
 
 export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet') {
     if (filterId === 'aktiviteter' && filterVerdi === 'TILTAK') {
         return {
             type: SLETT_AKTIVITETER_OG_TILTAK_FILTER,
-            data: { filterId, filterVerdi },
+            data: {filterId, filterVerdi},
             name: filtergruppe
         };
     }
-    return  {
+    return {
         type: SLETT_ENKELT_FILTER,
-        data: { filterId, filterVerdi },
+        data: {filterId, filterVerdi},
         name: filtergruppe
-    }
+    };
 }
 
 export function clearFiltervalg(filtergruppe = 'enhet') {
-        return { type: CLEAR_FILTER, name: filtergruppe }
+    return {type: CLEAR_FILTER, name: filtergruppe};
 }
 
 export function veilederSoktFraToolbar() {
     return (dispatch) => {
-        dispatch({ type: VEILEDER_SOKT_FRA_TOOLBAR });
+        dispatch({type: VEILEDER_SOKT_FRA_TOOLBAR});
     };
 }

@@ -70,6 +70,7 @@ export interface FiltervalgModell {
     rettighetsgruppe?: string[];
     manuellBrukerStatus?: string[];
     veilederNavnQuery: string;
+    registreringstype: string[];
 }
 
 export interface EnhetModell {

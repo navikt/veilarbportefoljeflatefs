@@ -1,4 +1,5 @@
 @import "~nav-frontend-core/less/core";
+
 @lg-screen: 1200px;
 @xl-screen: 1600px;
 
@@ -42,5 +43,33 @@
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
         height: 2.44rem;
+    }
+
+    .registreringsfilter {
+        &__infocontainer {
+            display: grid;
+            grid-template-columns: 35px auto;
+            margin: .5rem;
+            padding: .2rem;
+            border: 1px solid @navLysBla;
+            border-radius: 4px;
+            background-color: @navLysBlaLighten80;
+        }
+
+        &__infoikon {
+            margin: .2rem;
+        }
+
+        &__infotekst {
+            margin: auto;
+        }
+    }
+
+    .checkbox-filterform .registreringstype {
+        max-height: 24rem;
+    }
+
+    .registreringstype .skjemaelement {
+        margin-bottom: .5rem;
     }
 }

@@ -9,8 +9,7 @@ import { FiltreringStatus } from './filtrering-status/filtrering-status';
 import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-veileder-grupper';
 import { OrNothing } from '../utils/types/types';
 import { Tiltak } from '../ducks/enhettiltak';
-import {pagineringSetup} from "../ducks/paginering";
-
+import { pagineringSetup } from '../ducks/paginering';
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -22,7 +21,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
 
     const dispatch = useDispatch();
 
-    const doEndreFiltervalg = (filterId: string, filterVerdi: string) => {
+    const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
@@ -40,8 +39,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 lamellNavn="veiledergrupper"
                 hidden={filtergruppe === 'veileder'}
             >
-                <FilteringVeilederGrupper filtergruppe={filtergruppe} /> 
-
+                <FilteringVeilederGrupper filtergruppe={filtergruppe}/>
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen
@@ -53,7 +51,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                     filtergruppe={filtergruppe}
                     filtervalg={filtervalg}
                 />
-
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
