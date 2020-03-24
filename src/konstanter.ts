@@ -13,5 +13,5 @@ export const REGISTRERINGSFILTER = 'veilarbportefolje.registreringsfilter';
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
-    REGISTRERINGSFILTER
+    REGISTRERINGSFILTER,
 ];

@@ -1,6 +1,11 @@
 import { AppState } from '../reducer';
 import { hentFeatures } from '../middleware/api';
-import {PORTEFOLJE_FEATURES, SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE, REGISTRERINGSFILTER} from '../konstanter';
+import {
+    PORTEFOLJE_FEATURES,
+    SPOR_OM_TILBAKEMELDING,
+    VEDTAKSTOTTE,
+    REGISTRERINGSFILTER,
+} from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
 

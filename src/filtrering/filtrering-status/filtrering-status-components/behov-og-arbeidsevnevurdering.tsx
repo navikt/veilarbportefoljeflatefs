@@ -1,18 +1,22 @@
 import React from 'react';
-import {ER_SYKMELDT_MED_ARBEIDSGIVER, TRENGER_VURDERING, UNDER_VURDERING} from '../../filter-konstanter';
+import {
+    ER_SYKMELDT_MED_ARBEIDSGIVER, PERMITTERTE_UTEN_OPPFOLGINGSVEDTAK,
+    TRENGER_VURDERING,
+    UNDER_VURDERING
+} from '../../filter-konstanter';
 import { BarInputRadio } from '../../../components/barinput/barinput-radio';
 import { HiddenIfBarInputRadio } from '../../../components/barinput/barinput-radio';
 import { FiltreringStatusGruppe } from './ufordelte-brukere';
 import { useStatusTallSelector } from '../../../hooks/redux/use-statustall';
-import {useSelector} from "react-redux";
-import {sjekkFeature} from "../../../ducks/features";
-import {AppState} from "../../../reducer";
-import {VEDTAKSTOTTE} from "../../../konstanter";
+import { useSelector } from 'react-redux';
+import { sjekkFeature } from '../../../ducks/features';
+import { AppState } from '../../../reducer';
+import { VEDTAKSTOTTE } from '../../../konstanter';
 
 export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
-    const vedtakkStotteFeature = useSelector((state: AppState)=> sjekkFeature(state, VEDTAKSTOTTE));
-
+    const vedtakkStotteFeature = useSelector((state: AppState) => sjekkFeature(state, VEDTAKSTOTTE));
     const statusTall = useStatusTallSelector();
+
     return (
         <>
             <BarInputRadio
@@ -21,6 +25,13 @@ export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
                 max={statusTall.totalt}
                 checked={props.ferdigfilterListe.includes(TRENGER_VURDERING)}
                 antall={statusTall.trengerVurdering}
+            />
+            <BarInputRadio
+                filterNavn="erPermittertUtenOppfolgingdVedtak"
+                max={statusTall.totalt}
+                antall={statusTall.erPermittertUtenOppfolgingdVedtak}
+                handleChange={props.handleChange}
+                checked={props.ferdigfilterListe.includes(PERMITTERTE_UTEN_OPPFOLGINGSVEDTAK)}
             />
             <HiddenIfBarInputRadio
                 filterNavn="erSykmeldtMedArbeidsgiver"
