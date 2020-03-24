@@ -11,11 +11,13 @@ import { useStatusTallSelector } from '../../../hooks/redux/use-statustall';
 import { useSelector } from 'react-redux';
 import { sjekkFeature } from '../../../ducks/features';
 import { AppState } from '../../../reducer';
-import { VEDTAKSTOTTE } from '../../../konstanter';
+import { PERM_UTEN_OPPFOLGINGSVEDTAK, VEDTAKSTOTTE } from '../../../konstanter';
+import { useFeatureSelector } from '../../../hooks/redux/use-feature-selector';
 
 export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
     const vedtakkStotteFeature = useSelector((state: AppState) => sjekkFeature(state, VEDTAKSTOTTE));
     const statusTall = useStatusTallSelector();
+    const erFilterPa = useFeatureSelector()(PERM_UTEN_OPPFOLGINGSVEDTAK);
 
     return (
         <>
@@ -26,13 +28,14 @@ export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
                 checked={props.ferdigfilterListe.includes(TRENGER_VURDERING)}
                 antall={statusTall.trengerVurdering}
             />
+            {erFilterPa &&
             <BarInputRadio
                 filterNavn="erPermittertUtenOppfolgingdVedtak"
                 max={statusTall.totalt}
                 antall={statusTall.erPermittertUtenOppfolgingdVedtak}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(PERMITTERTE_UTEN_OPPFOLGINGSVEDTAK)}
-            />
+            />}
             <HiddenIfBarInputRadio
                 filterNavn="erSykmeldtMedArbeidsgiver"
                 handleChange={props.handleChange}

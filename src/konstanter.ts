@@ -9,9 +9,11 @@ export const DEFAULT_PAGINERING_STORRELSE = 20;
 export const SPOR_OM_TILBAKEMELDING = 'portefolje.spor_om_tilbakemelding';
 export const VEDTAKSTOTTE = 'veilarbportfolje-hent-data-fra-vedtakstotte';
 export const REGISTRERINGSFILTER = 'veilarbportefolje.registreringsfilter';
+export const PERM_UTEN_OPPFOLGINGSVEDTAK = 'veilarbportefolje.permitterte_uten_oppfolgingsvedtak';
 
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
     REGISTRERINGSFILTER,
+    PERM_UTEN_OPPFOLGINGSVEDTAK,
 ];

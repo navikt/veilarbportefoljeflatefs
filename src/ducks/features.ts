@@ -4,7 +4,7 @@ import {
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
-    REGISTRERINGSFILTER,
+    REGISTRERINGSFILTER, PERM_UTEN_OPPFOLGINGSVEDTAK,
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -17,6 +17,7 @@ const initalState: FeaturesState = {
     [SPOR_OM_TILBAKEMELDING]: false,
     [VEDTAKSTOTTE]: false,
     [REGISTRERINGSFILTER]: false,
+    [PERM_UTEN_OPPFOLGINGSVEDTAK]: false,
 };
 
 // Reducer
