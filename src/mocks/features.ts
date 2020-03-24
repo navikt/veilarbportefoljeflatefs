@@ -1,10 +1,9 @@
-import { SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE, REGISTRERINGSFILTER, PERM_UTEN_OPPFOLGINGSVEDTAK } from '../konstanter';
+import { SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE, REGISTRERINGSFILTER } from '../konstanter';
 
 const toggles = {
     [SPOR_OM_TILBAKEMELDING]: true,
     [VEDTAKSTOTTE]: true,
     [REGISTRERINGSFILTER]: true,
-    [PERM_UTEN_OPPFOLGINGSVEDTAK]: true,
 };
 
 export default toggles;
