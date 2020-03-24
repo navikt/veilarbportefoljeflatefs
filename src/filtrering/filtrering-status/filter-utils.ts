@@ -1,7 +1,7 @@
 import { Tiltak } from '../../ducks/enhettiltak';
 import { OrNothing } from '../../utils/types/types';
 
-const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE', 'NYE_BRUKERE_FOR_VEILEDER', 'PERMITTERTE_UTEN_OPPFOLGINGSVEDTAK'];
+const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE', 'NYE_BRUKERE_FOR_VEILEDER'];
 
 export function leggTilFerdigFilter(filterListe: string[], filter: string): string[] {
     if (CHECKBOX_FILTER.includes(filter)) {

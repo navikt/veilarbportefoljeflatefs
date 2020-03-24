@@ -10,10 +10,6 @@ import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-ve
 import { OrNothing } from '../utils/types/types';
 import { Tiltak } from '../ducks/enhettiltak';
 import { pagineringSetup } from '../ducks/paginering';
-import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
-import { registreringstype } from './filter-konstanter';
-import { ReactComponent as InfoIkon } from '../components/ikoner/info-ikon.svg';
-import { Normaltekst } from 'nav-frontend-typografi';
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;

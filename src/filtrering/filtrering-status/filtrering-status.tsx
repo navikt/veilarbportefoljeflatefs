@@ -14,10 +14,6 @@ import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsl
 import { FiltervalgModell } from '../../model-interfaces';
 import './filtrering-status.less';
 import { pagineringSetup } from '../../ducks/paginering';
-import FiltreringStatusPermitterteUtenOppfolgingsvedtak
-    from './filtrering-status-components/permitterte-uten-oppfolgingsvedtak-brukere';
-import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
-import { PERM_UTEN_OPPFOLGINGSVEDTAK } from '../../konstanter';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -60,13 +56,6 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     ferdigfilterListe={ferdigfilterListe}
                     hidden={props.filtergruppe === 'veileder'}
                 />
-
-                {useFeatureSelector()(PERM_UTEN_OPPFOLGINGSVEDTAK) ?
-                    <FiltreringStatusPermitterteUtenOppfolgingsvedtak
-                        handleChange={handleCheckboxChange}
-                        ferdigfilterListe={ferdigfilterListe}
-                    />
-                    : null}
             </div>
             <FiltreringStatusBehovsVurdering
                 ferdigfilterListe={ferdigfilterListe}

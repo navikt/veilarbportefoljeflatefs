@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    ER_SYKMELDT_MED_ARBEIDSGIVER,
+    ER_SYKMELDT_MED_ARBEIDSGIVER, PERMITTERTE_UTEN_OPPFOLGINGSVEDTAK,
     TRENGER_VURDERING,
     UNDER_VURDERING
 } from '../../filter-konstanter';
@@ -25,6 +25,13 @@ export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
                 max={statusTall.totalt}
                 checked={props.ferdigfilterListe.includes(TRENGER_VURDERING)}
                 antall={statusTall.trengerVurdering}
+            />
+            <BarInputRadio
+                filterNavn="permitterteUtenOppfolgingsvedtak"
+                max={statusTall.totalt}
+                antall={statusTall.permitterteUtenOppfolgingsvedtak}
+                handleChange={props.handleChange}
+                checked={props.ferdigfilterListe.includes(PERMITTERTE_UTEN_OPPFOLGINGSVEDTAK)}
             />
             <HiddenIfBarInputRadio
                 filterNavn="erSykmeldtMedArbeidsgiver"
