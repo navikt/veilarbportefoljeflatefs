@@ -23,7 +23,7 @@ export interface Statustall {
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
-    permitterteUtenOppfolgingsvedtak: number;
+    erPermittertUtenOppfolgingdVedtak: number;
 }
 
 export interface StatustallState {
@@ -48,7 +48,7 @@ export const initalStatusState: StatustallState = {
         moterMedNAVIdag: 0,
         trengerVurdering: 0,
         underVurdering: 0,
-        permitterteUtenOppfolgingsvedtak: 0,
+        erPermittertUtenOppfolgingdVedtak: 0,
     }
 };
 

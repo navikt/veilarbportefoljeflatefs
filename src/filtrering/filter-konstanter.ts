@@ -38,7 +38,8 @@ export const mapFilternavnTilFilterValue = {
     aapYtelseMaxtid: AAP_YTELSE_MAXTID,
     aapYtelseUnntak: AAP_YTELSE_UNNTAK,
     underVurdering: UNDER_VURDERING,
-    permitterteUtenOppfolgingsvedtak: PERMITTERTE_UTEN_OPPFOLGINGSVEDTAK,
+    erPermittertUtenOppfolgingdVedtak: PERMITTERTE_UTEN_OPPFOLGINGSVEDTAK,
+
 };
 
 export const FILTERGRUPPE_ENHET = 'enhet';

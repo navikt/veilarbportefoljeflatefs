@@ -27,9 +27,9 @@ export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
                 antall={statusTall.trengerVurdering}
             />
             <BarInputRadio
-                filterNavn="permitterteUtenOppfolgingsvedtak"
+                filterNavn="erPermittertUtenOppfolgingdVedtak"
                 max={statusTall.totalt}
-                antall={statusTall.permitterteUtenOppfolgingsvedtak}
+                antall={statusTall.erPermittertUtenOppfolgingdVedtak}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(PERMITTERTE_UTEN_OPPFOLGINGSVEDTAK)}
             />
