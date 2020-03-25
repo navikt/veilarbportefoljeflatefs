@@ -45,7 +45,8 @@ export enum EtikettType {
     IKKE_VURDERT = 'ikke_vurdert',
     BEHOV_AEV = 'behov_aev',
     ER_SYKMELDT_MED_ARBEIDSGIVER = 'er_sykmeldt_med_arbeidsgiver',
-    TRENGER_REVURDERING = 'revurdering'
+    TRENGER_REVURDERING = 'revurdering',
+    PERMITTERT_UTEN_14A_VEDTAK = 'permittert_uten_14a_vedtak',
 }
 
 export interface FiltervalgModell {

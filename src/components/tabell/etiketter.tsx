@@ -37,15 +37,23 @@ function Etiketter({className, bruker, erVedtakStotteFeaturePa}: EtiketterProps)
             </Etikett>
             <Etikett
                 type={EtikettType.IKKE_VURDERT}
-                skalVises={erVedtakStotteFeaturePa ? bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT :  bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
+                skalVises={erVedtakStotteFeaturePa ? bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT : bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
             >
                 Trenger vurdering
             </Etikett>
             <Etikett
                 type={EtikettType.BEHOV_AEV}
-                skalVises={erVedtakStotteFeaturePa ? bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING :  bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
+                skalVises={erVedtakStotteFeaturePa ? bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING : bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
             >
                 Behov for AEV
+            </Etikett>
+            <Etikett
+                type={EtikettType.PERMITTERT_UTEN_14A_VEDTAK}
+                // skalVises={erVedtakStotteFeaturePa ? bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING : bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
+                skalVises={bruker.erSykmeldtMedArbeidsgiver}
+
+            >
+                Permittert u/§14a-vedtak
             </Etikett>
             <Etikett
                 type={EtikettType.ER_SYKMELDT_MED_ARBEIDSGIVER}
