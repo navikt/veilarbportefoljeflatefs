@@ -1,6 +1,5 @@
 import * as React from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
-import { Innholdstittel } from 'nav-frontend-typografi';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
 import { BrukerModell, KategoriModell, Status } from '../../../model-interfaces';
 import { useState } from 'react';
@@ -14,6 +13,7 @@ import moment from 'moment';
 import { OrNothing } from '../../../utils/types/types';
 import './arbeidsliste.less';
 import { logEvent } from '../../../utils/frontend-logger';
+import ModalHeader from '../modal-header';
 
 interface Ownprops {
     bruker: BrukerModell;
@@ -84,7 +84,6 @@ function ArbeidslisteModalRediger({
             >
                 Rediger
             </button>
-
             <Formik
                 initialValues={initialValues}
                 onSubmit={(values) => {
@@ -99,15 +98,8 @@ function ArbeidslisteModalRediger({
                         onRequestClose={() => lukkModalConfirm(formikProps)}
                         closeButton
                     >
-                        <div className="modal-header-wrapper">
-                            <header className="modal-header"/>
-                        </div>
-                        <div className="arbeidsliste__modal">
-                            <div className="arbeidsliste__info-tekst">
-                                <Innholdstittel tag="h1" className="blokk-xs">
-                                    Rediger
-                                </Innholdstittel>
-                            </div>
+                        <div className="modal-innhold">
+                            <ModalHeader tittel='Rediger arbeidsliste'/>
                             <RedigerArbeidslisteForm
                                 laster={laster}
                                 sistEndretDato={sistEndretDato}

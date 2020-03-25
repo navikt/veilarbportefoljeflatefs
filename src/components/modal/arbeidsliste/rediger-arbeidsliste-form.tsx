@@ -19,21 +19,13 @@ interface RedigerArbeidslisteProps {
 }
 
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
-    function label(bruker: BrukerModell): React.ReactNode {
-        return (
-            <Undertittel>
-                {`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}
-            </Undertittel>
-        );
-    }
-
     return (
         <Form>
-            <div className="input-fields">
+            <div className="arbeidsliste__bruker">
                 <div className="nav-input blokk-s">
-                    <legend>
-                        {label(props.bruker)}
-                    </legend>
+                    <Undertittel>
+                        {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
+                    </Undertittel>
                     <FormikInput name="overskrift"/>
                     <FormikTekstArea name="kommentar"/>
                     <Undertekst className="arbeidsliste--modal-redigering">
@@ -44,25 +36,29 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     <FormikDatoVelger name="frist"/>
                     <ArbeidslisteKategori name="kategori" index=""/>
                 </div>
-                <div className="modal-footer">
-                    <Hovedknapp
-                        htmlType="submit"
-                        className="knapp knapp--hoved"
-                        spinner={props.laster}
-                        onClick={() => {
-                            logEvent('teamvoff.metrikker.arbeidslistekategori', {
-                                kategori: props.bruker.arbeidsliste.kategori,
-                                leggtil: false,
-                                applikasjon: 'oversikt'
-                            });
-                        }}
-                    >
-                        Lagre
-                    </Hovedknapp>
-                    <button type="button" className="knapp" onClick={props.lukkModal}>
-                        Avbryt
-                    </button>
-                </div>
+            </div>
+            <div className="modal-footer">
+                <Hovedknapp
+                    htmlType="submit"
+                    className="knapp knapp--hoved"
+                    spinner={props.laster}
+                    onClick={() => {
+                        logEvent('teamvoff.metrikker.arbeidslistekategori', {
+                            kategori: props.bruker.arbeidsliste.kategori,
+                            leggtil: false,
+                            applikasjon: 'oversikt'
+                        });
+                    }}
+                >
+                    Lagre
+                </Hovedknapp>
+                <button type="button" className="knapp" onClick={props.lukkModal}>
+                    Avbryt
+                </button>
+                {/*<FjernFraArbeidslisteRedigerModal*/}
+                {/*    lukkModal={props.lukkModal}*/}
+                {/*    valgtBruker={props.bruker.arbeidsliste.arbeidslisteAktiv}*/}
+                {/*/>*/}
             </div>
         </Form>
     );

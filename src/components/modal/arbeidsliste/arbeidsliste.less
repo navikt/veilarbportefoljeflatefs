@@ -7,10 +7,13 @@
     .modal-header {
         height: 4rem;
         border-bottom: 1px solid @navGra40;
-        padding: 1.13rem 1rem;
+        padding: 1.13rem 0;
+        margin-bottom: 1rem;
     }
 
-    .arbeidsliste__modal {
+    .modal-innhold {
+        padding: 1rem 2rem;
+
         .feedbacksummary {
             margin: 0 2rem 1rem 2rem;
             padding: 1.5rem;
@@ -33,24 +36,14 @@
 
         .arbeidsliste {
             &__info-tekst {
-                padding: 1rem 2rem 0 2rem;
-
-                p {
-                    margin-bottom: 0;
-                    font-style: italic;
-                }
+                margin-bottom: 0;
+                font-style: italic;
             }
         }
 
-        .input-fields {
-            padding: 1rem 2rem;
-            border: 0;
-
-            .arbeidsliste__bruker {
-                border-bottom: 1px solid @navGra40;
-                margin-bottom: 1rem;
-            }
-
+        .arbeidsliste__bruker {
+            border-bottom: 1px solid @navGra40;
+            margin-bottom: 1rem;
         }
 
         .arbeidslistekommentar {
@@ -75,7 +68,6 @@
         }
 
         .skjemaelement__label {
-            margin-bottom: .25em;
             font-weight: 400;
         }
 
@@ -83,7 +75,6 @@
             display: flex;
             padding: 1.5rem 0;
         }
-
 
         .arbeidsliste--modal-redigering {
             margin-bottom: 0.625rem;

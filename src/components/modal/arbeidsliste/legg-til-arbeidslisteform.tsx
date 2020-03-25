@@ -75,28 +75,26 @@ function LeggTilArbeidslisteForm({
             render={(formikProps) => {
                 setFormIsDirty(formikProps.dirty);
                 return (
-                    <div className="input-fields">
-                        <Form>
-                            <ArbeidslisteForm
-                                valgteBrukere={valgteBrukere}
-                                arbeidsliste={formikProps.values.arbeidsliste}
-                            />
-                            <div>
-                                <div className="modal-footer">
-                                    <Hovedknapp className="knapp knapp--hoved" spinner={laster}>
-                                        Lagre
-                                    </Hovedknapp>
-                                    <button type="button" className="knapp" onClick={() => {
-                                        formikProps.resetForm();
-                                        fjernMarkerteBrukere();
-                                        lukkModal();
-                                    }}>
-                                        Avbryt
-                                    </button>
-                                </div>
+                    <Form>
+                        <ArbeidslisteForm
+                            valgteBrukere={valgteBrukere}
+                            arbeidsliste={formikProps.values.arbeidsliste}
+                        />
+                        <div>
+                            <div className="modal-footer">
+                                <Hovedknapp className="knapp knapp--hoved" spinner={laster}>
+                                    Lagre
+                                </Hovedknapp>
+                                <button type="button" className="knapp" onClick={() => {
+                                    formikProps.resetForm();
+                                    fjernMarkerteBrukere();
+                                    lukkModal();
+                                }}>
+                                    Avbryt
+                                </button>
                             </div>
-                        </Form>
-                    </div>
+                        </div>
+                    </Form>
                 );
             }}
         />
