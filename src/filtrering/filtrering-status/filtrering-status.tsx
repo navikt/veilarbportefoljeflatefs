@@ -61,7 +61,8 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     ferdigfilterListe={ferdigfilterListe}
                     hidden={props.filtergruppe === 'veileder'}
                 />
-                {erFilterPa && <>
+                {erFilterPa &&
+                <div className="permittering_checkboksgruppe">
                     <FiltreringStatusIkkePermitterteEtterNiendeBrukere
                         handleChange={handleCheckboxChange}
                         ferdigfilterListe={ferdigfilterListe}
@@ -70,7 +71,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                         handleChange={handleCheckboxChange}
                         ferdigfilterListe={ferdigfilterListe}
                     />
-                </>}
+                </div>}
             </div>
             <FiltreringStatusBehovsVurdering
                 ferdigfilterListe={ferdigfilterListe}
