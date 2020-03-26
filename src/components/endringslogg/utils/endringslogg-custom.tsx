@@ -25,15 +25,16 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         tekst: 'Du kan nå filtrere på brukere som har registrert seg etter 9. mars og oppgitt at de er permittert i Enhetens oversikt og Min oversikt i Modia. Brukerne vises også med en etikett i oversikten og på visittkortet over aktivitetsplanen.',
         children:
             <>
-                <EndringsloggLinkMedIkon
-                    // url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filtre-i-Enhetens--og-Min-oversikt-i-Modia--brukers-svar-fra-registrering-om-sin-situasjon.aspx"
-                    url=""
-                    linkTekst="Nyhetssak på Navet"
-                />
                 <TourModalButton
                     metrikknavn="portefolje.endringslogg_modal.permitterte"
                     modal={ModalName.PERMITTERTE}
                     knappeTekst="Se hvordan"
+                    className="permitterte"
+                />
+                <EndringsloggLinkMedIkon
+                    // url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filtre-i-Enhetens--og-Min-oversikt-i-Modia--brukers-svar-fra-registrering-om-sin-situasjon.aspx"
+                    url=""
+                    linkTekst="Nyhetssak på Navet"
                 />
             </>
     },
