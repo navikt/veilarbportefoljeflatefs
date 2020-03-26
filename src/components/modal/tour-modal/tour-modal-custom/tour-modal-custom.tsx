@@ -1,4 +1,5 @@
 import { ModalName, Step } from '../tour-modal';
+import React from 'react';
 import nyKolonne1Bilde from './nyKolonne/nyKolonne-step1.png';
 import nyKolonne2Bilde from './nyKolonne/nyKolonne-step2.png';
 import veiledergruppe1 from './veiledergrupper/veiledergruppe1.png';
@@ -80,6 +81,27 @@ const stepsVeilederverktoy: Step[] = [
     }
 ];
 
+const stepsPermitterte: Step[] = [
+    {
+        tittel: 'Alle unntatt de permitterte',
+        bilde: veilederverktoy1,
+        tekst: <>Filteret viser alle brukere <b>ekskludert</b> de som er permittert <b>etter</b> 9.
+            mars. Det kan kombineres med de andre statusfiltrene, f.eks. "Trenger vurdering".</>
+    },
+    {
+        tittel: 'Permitterte etter 9. mars',
+        bilde: veilederverktoy2,
+        tekst: <>Filteret viser <b>kun</b> de som har svart at de er permittert eller blir permittert og har
+            registrert seg etter 9. mars. De permitterte har etiketten "Permittert etter 9. mars" både i oversikten og
+            aktivitetsplanen.</>
+    },
+    {
+        tittel: 'Kombinasjoner',
+        bilde: veilederverktoy3,
+        tekst: 'Du kan kombinere f.eks. "Permitterte etter 09.03.2020" med "Venter på svar fra NAV" for å se alle som venter på svar i dialog blant de permitterte etter 9. mars. '
+    }
+];
+
 export function getTour(modal: ModalName) {
     switch (modal) {
         case ModalName.NY_KOLONNE:
@@ -90,8 +112,9 @@ export function getTour(modal: ModalName) {
             return stepsTilrettelegging;
         case ModalName.VEILEDERVERKTOY:
             return stepsVeilederverktoy;
+        case ModalName.PERMITTERTE:
+            return stepsPermitterte;
         default:
             return null;
     }
-
 }

@@ -11,12 +11,13 @@ export enum ModalName {
     NY_KOLONNE = 'TOUR_MODAL-NY_KOLONNE',
     VEILEDERGRUPPER = 'TOUR_MODAL-VEILEDERGRUPPER',
     TILRETTELEGGING = 'TOUR_MODAL-TILRETTELEGGING',
-    VEILEDERVERKTOY = 'TOUR_MODAL-VEILEDERVERKTOY'
+    VEILEDERVERKTOY = 'TOUR_MODAL-VEILEDERVERKTOY',
+    PERMITTERTE = 'TOUR_MODAL-PERMITTERTE',
 }
 
 export interface Step {
     tittel: string;
-    tekst: string;
+    tekst: React.ReactNode;
     bilde: string;
 }
 
