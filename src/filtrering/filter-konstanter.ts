@@ -68,7 +68,6 @@ export const ferdigfilterListe = {
     UNDER_VURDERING: 'Under vurdering',
     PERMITTERTE_ETTER_NIENDE_MARS: 'Permitterte etter 09.03.2020',
     IKKE_PERMITTERTE_ETTER_NIENDE_MARS: 'Alle utenom permitterte etter 09.03.2020',
-    // IKKE_PERMITTERTE_ETTER_NIENDE_MARS: `Alle <strong>utenom</strong> permitterte etter 09.03.2020`,
 };
 
 export const alder = {
