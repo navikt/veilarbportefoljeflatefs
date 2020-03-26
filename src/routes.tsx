@@ -6,8 +6,9 @@ import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
 import { loggBrowserMetrikker } from './utils/metrikker/browser-metrikker';
-import {useFetchPortefoljeData} from "./hooks/portefolje/use-fetch-portefolje-data";
-import Innholdslaster from "./innholdslaster/innholdslaster";
+import { useFetchPortefoljeData } from './hooks/portefolje/use-fetch-portefolje-data';
+import Innholdslaster from './innholdslaster/innholdslaster';
+import TourModalLocalStorage from './components/modal/tour-modal/tour-modal-local-storage';
 
 loggBrowserMetrikker();
 
@@ -16,7 +17,7 @@ function Routes() {
     return (
         <div className="portefolje">
             <div className='maincontent side-innhold'>
-                <Innholdslaster avhengigheter={[ enhettiltak, veiledere, portefoljestorrelser]}>
+                <Innholdslaster avhengigheter={[enhettiltak, veiledere, portefoljestorrelser]}>
                     <Switch>
                         <Route
                             path="/enhet"
@@ -36,6 +37,7 @@ function Routes() {
                         />
                     </Switch>
                     <TilbakemeldingFab/>
+                    <TourModalLocalStorage/>
                 </Innholdslaster>
             </div>
         </div>
