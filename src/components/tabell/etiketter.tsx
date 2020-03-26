@@ -48,12 +48,10 @@ function Etiketter({className, bruker, erVedtakStotteFeaturePa}: EtiketterProps)
                 Behov for AEV
             </Etikett>
             <Etikett
-                type={EtikettType.PERMITTERT_UTEN_14A_VEDTAK}
-                // skalVises={erVedtakStotteFeaturePa ? bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING : bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
-                skalVises={bruker.erSykmeldtMedArbeidsgiver}
-
+                type={EtikettType.PERMITTERTE_ETTER_NIENDE_MARS}
+                skalVises={bruker.erPermittertEtterNiendeMars}
             >
-                Permittert u/§14a-vedtak
+                Permitterte etter 9. mars
             </Etikett>
             <Etikett
                 type={EtikettType.ER_SYKMELDT_MED_ARBEIDSGIVER}

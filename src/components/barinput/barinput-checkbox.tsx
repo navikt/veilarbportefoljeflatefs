@@ -9,11 +9,13 @@ interface BarInputCheckboxProps {
     handleChange: ChangeEventHandler<HTMLInputElement>;
     checked: boolean;
     antall: number;
+    labelTekst?: React.ReactNode;
 }
 
-function BarInputCheckbox({filterNavn, max, handleChange, checked, antall}: BarInputCheckboxProps) {
+function BarInputCheckbox({filterNavn, max, handleChange, checked, antall, labelTekst}: BarInputCheckboxProps) {
     const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
-    const labelTekst = ferdigfilterListe[filterVerdi];
+    const egenLabelTekst = labelTekst ? labelTekst : ferdigfilterListe[filterVerdi];
+
     return (
         <BarInput
             className="checkboks"
@@ -21,7 +23,7 @@ function BarInputCheckbox({filterNavn, max, handleChange, checked, antall}: BarI
             name="ferdigfilter"
             id={filterNavn}
             barClassname={filterNavn}
-            labelTekst={labelTekst}
+            labelTekst={egenLabelTekst}
             antall={antall}
             max={max}
             onChange={handleChange}

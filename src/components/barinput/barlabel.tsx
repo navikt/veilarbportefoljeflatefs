@@ -15,7 +15,7 @@ function calcWidth(antall: number, max: number): number {
 
 export interface BarlabelProps {
     htmlFor: string;
-    labelTekst: string;
+    labelTekst: React.ReactNode;
     antall: number;
     max: number;
     className?: string;
