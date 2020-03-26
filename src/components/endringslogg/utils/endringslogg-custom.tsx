@@ -32,8 +32,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                     className="permitterte"
                 />
                 <EndringsloggLinkMedIkon
-                    // url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filtre-i-Enhetens--og-Min-oversikt-i-Modia--brukers-svar-fra-registrering-om-sin-situasjon.aspx"
-                    url=""
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filtre-i-Enhetens--og-Min-oversikt-i-Modia--brukers-svar-fra-registrering-om-sin-situasjon.aspx"
                     linkTekst="Nyhetssak på Navet"
                 />
             </>
