@@ -37,7 +37,7 @@ function Routes() {
                         />
                     </Switch>
                     <TilbakemeldingFab/>
-                    {/*<TourModalLocalStorage/>*/}
+                    <TourModalLocalStorage/>
                 </Innholdslaster>
             </div>
         </div>
