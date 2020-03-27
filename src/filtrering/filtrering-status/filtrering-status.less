@@ -1,3 +1,5 @@
+@import "~nav-frontend-core/less/core";
+
 .veilarbportefoljeflatefs {
     .filtrering-oversikt.panel {
         padding: 0 0.5rem 0 0;
@@ -11,6 +13,43 @@
 
         &__totalt-antall {
             font-weight: 800 !important;
+        }
+    }
+
+    .filter-checkboks-container {
+        border-bottom: 1px solid @navGra60;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .permittering_checkboksgruppe {
+        border-top: 1px solid @navGra60;
+        margin-top: 1rem;
+        padding-top: 1rem;
+
+        .hjelpetekst__wrapper {
+            display: grid;
+            grid-template-columns: auto fit-content(100%);
+        }
+
+        .hjelpetekst {
+            height: 18px;
+            grid-column: 2;
+
+            svg {
+                height: 16px;
+                width: 16px;
+            }
+
+            &__tooltip {
+                z-index: 2000;
+            }
+
+            @media (max-width: 1200px) {
+                &__tooltip {
+                    margin-right: 4rem;
+                }
+            }
         }
     }
 }

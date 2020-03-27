@@ -12,6 +12,8 @@ import {
 import { logEvent } from '../../utils/frontend-logger';
 import './endringslogg.less';
 import './collapse-container-transition.less';
+import {useSelector} from "react-redux";
+import {AppState} from "../../reducer";
 
 function EndringsloggTourWrapper() {
     const veilederIdent = useIdentSelector()!.ident;
@@ -20,10 +22,12 @@ function EndringsloggTourWrapper() {
     const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
+    const alleFeatureToggles = useSelector((state: AppState) => state.features);
+
     useEffect(() => {
         hentSetteVersjonerRemotestorage()
             .then(resp => {
-                setInnholdsliste(mapRemoteToState(resp));
+                setInnholdsliste(mapRemoteToState(resp, alleFeatureToggles));
                 setIsLoading(false)
             })
             .catch(() => {

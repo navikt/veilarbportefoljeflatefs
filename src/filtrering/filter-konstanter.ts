@@ -18,6 +18,8 @@ export const AAP_YTELSE = 'AAP';
 export const AAP_YTELSE_MAXTID = 'AAP_MAXTID';
 export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
+export const PERMITTERTE_ETTER_NIENDE_MARS = 'PERMITTERTE_ETTER_NIENDE_MARS';
+export const IKKE_PERMITTERTE_ETTER_NIENDE_MARS = 'IKKE_PERMITTERTE_ETTER_NIENDE_MARS';
 
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker: UFORDELTE_BRUKERE,
@@ -37,6 +39,8 @@ export const mapFilternavnTilFilterValue = {
     aapYtelseMaxtid: AAP_YTELSE_MAXTID,
     aapYtelseUnntak: AAP_YTELSE_UNNTAK,
     underVurdering: UNDER_VURDERING,
+    permitterteEtterNiendeMars: PERMITTERTE_ETTER_NIENDE_MARS,
+    ikkePermitterteEtterNiendeMars: IKKE_PERMITTERTE_ETTER_NIENDE_MARS,
 };
 
 export const FILTERGRUPPE_ENHET = 'enhet';
@@ -62,6 +66,8 @@ export const ferdigfilterListe = {
     ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
     MOTER_IDAG: 'Møte med NAV idag',
     UNDER_VURDERING: 'Under vurdering',
+    PERMITTERTE_ETTER_NIENDE_MARS: 'Permitterte etter 09.03.2020',
+    IKKE_PERMITTERTE_ETTER_NIENDE_MARS: 'Alle utenom permitterte etter 09.03.2020',
 };
 
 export const alder = {
