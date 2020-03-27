@@ -25,6 +25,7 @@ interface TourModalProps {
     modalName: ModalName;
     open: boolean;
     onClose: (e: boolean) => void;
+    systemtittel?: string;
 }
 
 function TourModal(props: TourModalProps) {
@@ -50,6 +51,7 @@ function TourModal(props: TourModalProps) {
     const hidePrevBtn = stepIndex === 0;
     const nextBtnText = isFinalStep ? 'Ferdig' : 'Neste';
     const nextBtnHandleClick = isFinalStep ? lukkModal : handleNextBtnClicked;
+    const systemtittel = (props.systemtittel === '' || props.systemtittel === undefined) ? 'Ny oppdatering' : props.systemtittel;
 
     return (
         <NavFrontendModal
@@ -62,7 +64,7 @@ function TourModal(props: TourModalProps) {
         >
             <div className="tour-modal__header--wrapper">
                 <header className="tour-modal__header">
-                    <Systemtittel>Ny oppdatering</Systemtittel>
+                    <Systemtittel>{systemtittel}</Systemtittel>
                 </header>
             </div>
             <main className="tour-modal__main">

@@ -10,6 +10,7 @@ interface ModalStepperProps {
     metrikknavn: string;
     knappeTekst?: string;
     className?: string;
+    systemtittel?: string;
 }
 
 export default function TourModalButton(props: ModalStepperProps) {
@@ -17,7 +18,7 @@ export default function TourModalButton(props: ModalStepperProps) {
 
     return (
         <>
-            <Knapp className={classNames("endringslogg-stepperKnapp", props.className)} mini={true} onClick={() => {
+            <Knapp className={classNames('endringslogg-stepperKnapp', props.className)} mini={true} onClick={() => {
                 setOpen(true);
                 logEvent(props.metrikknavn);
             }}>
@@ -27,6 +28,7 @@ export default function TourModalButton(props: ModalStepperProps) {
                 open={open}
                 modalName={props.modal}
                 onClose={() => setOpen(false)}
+                systemtittel={props.systemtittel}
             />
         </>
     );
