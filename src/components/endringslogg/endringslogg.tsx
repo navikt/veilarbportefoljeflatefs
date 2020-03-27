@@ -7,9 +7,6 @@ import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { EndringsloggInnleggMedSettStatus } from './utils/endringslogg-custom';
 import './endringslogg.less';
 import './collapse-container-transition.less';
-import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
-import {useSelector} from "react-redux";
-import {AppState} from "../../reducer";
 
 interface EndringsProps {
     innhold: EndringsloggInnleggMedSettStatus[];
@@ -20,7 +17,9 @@ interface EndringsProps {
 export default function Endringslogg(props: EndringsProps) {
 
     const [endringsloggApen, setEndringsloggApen] = useState(false);
-    const overordnetNotifikasjon = props.innhold.some((element) => !element.sett);
+    const overordnetNotifikasjon = props.innhold
+        .filter((elem) => elem.erFeaturePa)
+        .some((element) => !element.sett);
 
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const buttonRef = useRef<HTMLButtonElement>(null);
