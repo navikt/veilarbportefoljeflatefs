@@ -67,14 +67,13 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     <div className="hjelpetekst__wrapper">
                         <HjelpetekstBase id="hjelpetekst">
                             <>
-                                Alle utenom permitterte etter 09.03.2020: Alle brukere, uavhengig av situasjon ved
+                                <b>Alle utenom permitterte etter 09.03.2020:</b> Alle brukere, uavhengig av situasjon ved
                                 registrering og tidspunkt for registrering, men ekskludert de som har registrert seg som
                                 permittert etter 9. mars 2020.
                                 <br/>
                                 <br/>
-                                Permittert etter 09.03.2020: Brukere som har registrert seg etter 9. mars og som har
-                                svart
-                                at de er permittert.
+                                <b>Permitterte etter 09.03.2020:</b> Brukere som har registrert seg etter 9. mars og som
+                                har svart at de er permittert.
                                 <br/>
                                 <br/>
                                 Merk at situasjonen kan ha endret seg for permitterte brukere.
