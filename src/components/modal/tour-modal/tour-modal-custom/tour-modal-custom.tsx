@@ -86,17 +86,16 @@ const stepsVeilederverktoy: Step[] = [
 
 const stepsPermitterte: Step[] = [
     {
-        tittel: 'Alle utenom de permitterte',
+        tittel: 'Alle utenom permitterte',
         bilde: permitterte1,
-        tekst: <>Filteret viser alle brukere <b>ekskludert</b> de som er permittert <b>etter</b> 9.
-            mars. Det kan kombineres med de andre statusfiltrene, f.eks. "Trenger vurdering".</>
+        tekst: <>Filteret viser alle brukere, uavhengig av situasjon og når de registrerte seg, <b>ekskludert</b> de som
+            er permittert etter 9. mars. Filteret kan kombineres med andre statusfiltre.</>
     },
     {
         tittel: 'Permitterte etter 9. mars',
         bilde: permitterte2,
         tekst: <>Filteret viser <b>kun</b> de som har svart at de er permittert eller blir permittert og har registrert
-            seg etter 9. mars. Du kan kombinere f.eks. "Permitterte etter 09.03.2020" med "Venter på svar fra NAV”.
-        </>
+            seg etter 9. mars. Du kan kombinere filteret med f.eks. "Venter på svar fra NAV”.</>
     },
     {
         tittel: 'Etiketter for permitterte etter 9. mars',
