@@ -5,6 +5,7 @@ import TourModalButton from '../../modal/tour-modal/tour-modal-button';
 import '../endringslogg.less';
 import '../collapse-container-transition.less';
 import {FeaturesState} from "../../../ducks/features";
+import {PERM_UTEN_OPPFOLGINGSVEDTAK} from "../../../konstanter";
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -22,6 +23,7 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        featureToggleName: PERM_UTEN_OPPFOLGINGSVEDTAK,
         dato: '27. MAR. 2020',
         tittel: 'Nye filtre i Modia for permitterte etter 9. mars 2020',
         versjonId: '27.03.20',
