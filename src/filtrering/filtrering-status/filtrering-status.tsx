@@ -18,6 +18,7 @@ import FiltreringStatusIkkePermitterteEtterNiendeBrukere from './filtrering-stat
 import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-components/permitterte-brukere';
 import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
 import { PERM_UTEN_OPPFOLGINGSVEDTAK } from '../../konstanter';
+import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -63,6 +64,23 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 />
                 {erFilterPa &&
                 <div className="permittering_checkboksgruppe">
+                    <div className="hjelpetekst__wrapper">
+                        <HjelpetekstBase id="hjelpetekst">
+                            <>
+                                Alle utenom permitterte etter 09.03.2020: Alle brukere, uavhengig av situasjon ved
+                                registrering og tidspunkt for registrering, men ekskludert de som har registrert seg som
+                                permittert etter 9. mars 2020.
+                                <br/>
+                                <br/>
+                                Permittert etter 09.03.2020: Brukere som har registrert seg etter 9. mars og som har
+                                svart
+                                at de er permittert.
+                                <br/>
+                                <br/>
+                                Merk at situasjonen kan ha endret seg for permitterte brukere.
+                            </>
+                        </HjelpetekstBase>
+                    </div>
                     <FiltreringStatusIkkePermitterteEtterNiendeBrukere
                         handleChange={handleCheckboxChange}
                         ferdigfilterListe={ferdigfilterListe}
