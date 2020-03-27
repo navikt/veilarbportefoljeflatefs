@@ -4,7 +4,7 @@ import { guid } from 'nav-frontend-js-utils';
 import './barlabel.less';
 
 interface BarInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    labelTekst: string;
+    labelTekst: React.ReactNode;
     antall: number;
     max: number;
     barClassname: string;

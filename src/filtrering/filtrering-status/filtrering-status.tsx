@@ -13,7 +13,11 @@ import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avt
 import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
 import { FiltervalgModell } from '../../model-interfaces';
 import './filtrering-status.less';
-import {pagineringSetup} from "../../ducks/paginering";
+import { pagineringSetup } from '../../ducks/paginering';
+import FiltreringStatusIkkePermitterteEtterNiendeBrukere from './filtrering-status-components/ikke-permitterte-brukere';
+import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-components/permitterte-brukere';
+import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
+import { PERM_UTEN_OPPFOLGINGSVEDTAK } from '../../konstanter';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -23,6 +27,7 @@ interface FiltreringStatusProps {
 export function FiltreringStatus(props: FiltreringStatusProps) {
     const ferdigfilterListe = props.filtervalg.ferdigfilterListe!;
     const dispatch = useDispatch();
+    const erFilterPa = useFeatureSelector()(PERM_UTEN_OPPFOLGINGSVEDTAK);
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));
@@ -45,16 +50,29 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     return (
         <FiltreringStatusContainer>
-            <FiltreringStatusNyeBrukere
-                handleChange={handleCheckboxChange}
-                ferdigfilterListe={ferdigfilterListe}
-                hidden={props.filtergruppe !== 'veileder'}
-            />
-            <FiltreringStatusUfordelteBrukere
-                handleChange={handleCheckboxChange}
-                ferdigfilterListe={ferdigfilterListe}
-                hidden={props.filtergruppe === 'veileder'}
-            />
+            <div className="filter-checkboks-container">
+                <FiltreringStatusNyeBrukere
+                    handleChange={handleCheckboxChange}
+                    ferdigfilterListe={ferdigfilterListe}
+                    hidden={props.filtergruppe !== 'veileder'}
+                />
+                <FiltreringStatusUfordelteBrukere
+                    handleChange={handleCheckboxChange}
+                    ferdigfilterListe={ferdigfilterListe}
+                    hidden={props.filtergruppe === 'veileder'}
+                />
+                {erFilterPa &&
+                <div className="permittering_checkboksgruppe">
+                    <FiltreringStatusIkkePermitterteEtterNiendeBrukere
+                        handleChange={handleCheckboxChange}
+                        ferdigfilterListe={ferdigfilterListe}
+                    />
+                    <FiltreringStatusPermitterteEtterNiendeBrukere
+                        handleChange={handleCheckboxChange}
+                        ferdigfilterListe={ferdigfilterListe}
+                    />
+                </div>}
+            </div>
             <FiltreringStatusBehovsVurdering
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}

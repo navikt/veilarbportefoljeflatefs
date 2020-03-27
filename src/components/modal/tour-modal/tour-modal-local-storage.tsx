@@ -2,11 +2,11 @@ import { default as React, useState } from 'react';
 import { default as TourModal, ModalName, } from './tour-modal';
 
 interface TourModalLocalStorageProps {
-    onTourComplete: (e: string) => void;
+    onTourComplete?: (e: string) => void;
 }
 
 export default function TourModalLocalStorage(props: TourModalLocalStorageProps) {
-    const modalNavn = ModalName.MOTE_FILTER;
+    const modalNavn = ModalName.PERMITTERTE;
     const [openModal, setApenModal] = useState(!hasStored(modalNavn));
 
     const lagreIkkeVisModal = () => {
@@ -15,7 +15,7 @@ export default function TourModalLocalStorage(props: TourModalLocalStorageProps)
 
     const lukkModal = (isFinalStep: boolean) => {
         lagreIkkeVisModal();
-        if (isFinalStep) {
+        if (isFinalStep && props.onTourComplete) {
             props.onTourComplete(modalNavn);
         }
         setApenModal(false);

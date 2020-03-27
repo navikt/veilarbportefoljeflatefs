@@ -1,6 +1,6 @@
 import * as Api from './../middleware/api';
 import { doThenDispatch, STATUS } from './utils';
-import {OrNothing} from "../utils/types/types";
+import { OrNothing } from '../utils/types/types';
 
 // Actions
 export const OK = 'veilarbportefoljeflatefs/statustall/OK';
@@ -23,6 +23,8 @@ export interface Statustall {
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
+    permitterteEtterNiendeMars: number;
+    ikkePermitterteEtterNiendeMars: number;
 }
 
 export interface StatustallState {
@@ -47,6 +49,8 @@ export const initalStatusState: StatustallState = {
         moterMedNAVIdag: 0,
         trengerVurdering: 0,
         underVurdering: 0,
+        permitterteEtterNiendeMars: 0,
+        ikkePermitterteEtterNiendeMars: 0,
     }
 };
 

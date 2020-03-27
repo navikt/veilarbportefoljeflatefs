@@ -45,7 +45,8 @@ export enum EtikettType {
     IKKE_VURDERT = 'ikke_vurdert',
     BEHOV_AEV = 'behov_aev',
     ER_SYKMELDT_MED_ARBEIDSGIVER = 'er_sykmeldt_med_arbeidsgiver',
-    TRENGER_REVURDERING = 'revurdering'
+    TRENGER_REVURDERING = 'revurdering',
+    PERMITTERTE_ETTER_NIENDE_MARS = 'permitterte_etter_niende_mars',
 }
 
 export interface FiltervalgModell {
@@ -142,7 +143,7 @@ export interface BrukerModell {
     vedtakStatus?: string,
     vedtakStatusEndret?: string,
     trengerRevurdering: boolean,
-
+    erPermittertEtterNiendeMars: boolean;
 }
 
 // TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen?

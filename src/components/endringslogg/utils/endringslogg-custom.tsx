@@ -9,8 +9,8 @@ import {FeaturesState} from "../../../ducks/features";
 export interface EndringsloggInnlegg {
     tittel: string;
     dato: string;
-    tekst?: string;
     versjonId: string;
+    tekst?: string;
     children?: React.ReactNode;
     featureToggleName?: string;
 }
@@ -22,15 +22,23 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '19. MAR. 2020',
-        tittel: 'Filtrering på brukers situasjon fra registrering',
-        versjonId: '19.03.20',
-        tekst: 'Du kan nå filtrere frem brukere basert på situasjonen de har oppgitt på registreringstidspunktet. Da kan man for eksempel filtrere på brukere som har oppgitt at de er, eller står i fare for å bli permittert.',
+        dato: '27. MAR. 2020',
+        tittel: 'Nye filtre i Modia for permitterte etter 9. mars 2020',
+        versjonId: '27.03.20',
+        tekst: 'Du kan nå filtrere på brukere som har registrert seg etter 9. mars og oppgitt at de er permittert i Enhetens oversikt og Min oversikt i Modia. Brukerne vises også med en etikett i oversikten og på visittkortet over aktivitetsplanen.',
         children:
-            <EndringsloggLinkMedIkon
-                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filtre-i-Enhetens--og-Min-oversikt-i-Modia--brukers-svar-fra-registrering-om-sin-situasjon.aspx"
-                linkTekst="Nyhetssak på Navet"
-            />
+            <>
+                <TourModalButton
+                    metrikknavn="portefolje.endringslogg_modal.permitterte"
+                    modal={ModalName.PERMITTERTE}
+                    knappeTekst="Se hvordan"
+                    className="permitterte"
+                />
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filtre-i-Enhetens--og-Min-oversikt-i-Modia--brukers-svar-fra-registrering-om-sin-situasjon.aspx"
+                    linkTekst="Nyhetssak på Navet"
+                />
+            </>
     },
     {
         dato: '18. MAR. 2020',
