@@ -31,7 +31,7 @@ export function EndringsloggLinkMedIkon(props: { linkTekst: string, url: string 
 export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
     const content = props.innleggsListe.map((endring, index) => {
         return (
-            <EndringsloggInnlegg
+            endring.erFeaturePa && <EndringsloggInnlegg
                 key={index}
                 dato={endring.dato}
                 innholdsTekst={endring.tekst}

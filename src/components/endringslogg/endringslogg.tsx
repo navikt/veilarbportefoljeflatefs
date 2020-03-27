@@ -7,6 +7,9 @@ import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { EndringsloggInnleggMedSettStatus } from './utils/endringslogg-custom';
 import './endringslogg.less';
 import './collapse-container-transition.less';
+import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
+import {useSelector} from "react-redux";
+import {AppState} from "../../reducer";
 
 interface EndringsProps {
     innhold: EndringsloggInnleggMedSettStatus[];

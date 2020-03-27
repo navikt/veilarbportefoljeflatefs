@@ -4,6 +4,8 @@ import React from 'react';
 import TourModalButton from '../../modal/tour-modal/tour-modal-button';
 import '../endringslogg.less';
 import '../collapse-container-transition.less';
+import {FeaturesState} from "../../../ducks/features";
+import {PERM_UTEN_OPPFOLGINGSVEDTAK} from "../../../konstanter";
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -11,14 +13,17 @@ export interface EndringsloggInnlegg {
     versjonId: string;
     tekst?: string;
     children?: React.ReactNode;
+    featureToggleName?: string;
 }
 
 export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
     sett: boolean;
+    erFeaturePa?: boolean;
 }
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        featureToggleName: PERM_UTEN_OPPFOLGINGSVEDTAK,
         dato: '27. MAR. 2020',
         tittel: 'Nye filtre i Modia for permitterte etter 9. mars 2020',
         versjonId: '27.03.20',
@@ -190,12 +195,13 @@ export function setHarSettAlt() {
     });
 }
 
-export function mapRemoteToState(remotestorage: string[]): EndringsloggInnleggMedSettStatus[] {
+export function mapRemoteToState(remotestorage: string[], features: FeaturesState): EndringsloggInnleggMedSettStatus[] {
     return endringslogginnhold.map((el) => {
         const settRemote = remotestorage.some((ver) => ver === el.versjonId);
         return ({
             ...el,
             sett: settRemote,
+            erFeaturePa: el.featureToggleName ? features[el.featureToggleName] : true
         });
     });
 }
