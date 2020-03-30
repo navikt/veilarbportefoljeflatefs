@@ -3,11 +3,14 @@ import { default as TourModal, ModalName } from './tour-modal';
 import { Knapp } from 'nav-frontend-knapper';
 import { logEvent } from '../../../utils/frontend-logger';
 import './tour-modal.less';
+import classNames from 'classnames';
 
 interface ModalStepperProps {
     modal: ModalName;
     metrikknavn: string;
-    knappeTekst ?: string;
+    knappeTekst?: string;
+    className?: string;
+    systemtittel?: string;
 }
 
 export default function TourModalButton(props: ModalStepperProps) {
@@ -15,7 +18,7 @@ export default function TourModalButton(props: ModalStepperProps) {
 
     return (
         <>
-            <Knapp className="endringslogg-stepperKnapp" mini={true} onClick={() => {
+            <Knapp className={classNames('endringslogg-stepperKnapp', props.className)} mini={true} onClick={() => {
                 setOpen(true);
                 logEvent(props.metrikknavn);
             }}>
@@ -25,6 +28,7 @@ export default function TourModalButton(props: ModalStepperProps) {
                 open={open}
                 modalName={props.modal}
                 onClose={() => setOpen(false)}
+                systemtittel={props.systemtittel}
             />
         </>
     );

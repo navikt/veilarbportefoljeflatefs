@@ -17,7 +17,9 @@ interface EndringsProps {
 export default function Endringslogg(props: EndringsProps) {
 
     const [endringsloggApen, setEndringsloggApen] = useState(false);
-    const overordnetNotifikasjon = props.innhold.some((element) => !element.sett);
+    const overordnetNotifikasjon = props.innhold
+        .filter((elem) => elem.erFeaturePa)
+        .some((element) => !element.sett);
 
     const loggNode = useRef<HTMLDivElement>(null);   // Referranse til omsluttende div rundt loggen
     const buttonRef = useRef<HTMLButtonElement>(null);

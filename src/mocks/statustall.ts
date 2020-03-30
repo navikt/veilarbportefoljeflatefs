@@ -15,5 +15,6 @@ export default {
     trengerVurdering: 42,
     moterMedNAVIdag: 40,
     underVurdering: 14,
-    erPermittertUtenOppfolgingdVedtak: 1500,
+    permitterteEtterNiendeMars: 1700,
+    ikkePermitterteEtterNiendeMars: 42,
 };

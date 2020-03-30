@@ -1,4 +1,5 @@
 import { ModalName, Step } from '../tour-modal';
+import React from 'react';
 import nyKolonne1Bilde from './nyKolonne/nyKolonne-step1.png';
 import nyKolonne2Bilde from './nyKolonne/nyKolonne-step2.png';
 import veiledergruppe1 from './veiledergrupper/veiledergruppe1.png';
@@ -10,6 +11,9 @@ import tilrettelegging3 from './tilrettelegging/tilrettelegging3.jpg';
 import veilederverktoy1 from './veilederverktoy/veilederverktoy1.png';
 import veilederverktoy2 from './veilederverktoy/veilederverktoy2.png';
 import veilederverktoy3 from './veilederverktoy/veilederverktoy3.png';
+import permitterte1 from './permitterte/permitterte1.png';
+import permitterte2 from './permitterte/permitterte2.png';
+import permitterte3 from './permitterte/permitterte3.png';
 
 const stepsNyKolonne: Step[] = [
     {
@@ -80,6 +84,26 @@ const stepsVeilederverktoy: Step[] = [
     }
 ];
 
+const stepsPermitterte: Step[] = [
+    {
+        tittel: 'Alle utenom permitterte',
+        bilde: permitterte1,
+        tekst: <>Filteret viser alle brukere, uavhengig av situasjon og når de registrerte seg, <b>ekskludert</b> de som
+            er permittert etter 9. mars. Filteret kan kombineres med andre statusfiltre.</>
+    },
+    {
+        tittel: 'Permitterte etter 9. mars',
+        bilde: permitterte2,
+        tekst: <>Filteret viser <b>kun</b> de som har svart at de er permittert eller blir permittert og har registrert
+            seg etter 9. mars. Du kan kombinere filteret med f.eks. "Venter på svar fra NAV”.</>
+    },
+    {
+        tittel: 'Etiketter for permitterte etter 9. mars',
+        bilde: permitterte3,
+        tekst: 'De permitterte har etiketten "Permittert etter 9. mars”, både i oversikten og i visittkortet over aktivitetsplanen.'
+    }
+];
+
 export function getTour(modal: ModalName) {
     switch (modal) {
         case ModalName.NY_KOLONNE:
@@ -90,8 +114,9 @@ export function getTour(modal: ModalName) {
             return stepsTilrettelegging;
         case ModalName.VEILEDERVERKTOY:
             return stepsVeilederverktoy;
+        case ModalName.PERMITTERTE:
+            return stepsPermitterte;
         default:
             return null;
     }
-
 }

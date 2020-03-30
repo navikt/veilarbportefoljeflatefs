@@ -14,6 +14,11 @@ import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsl
 import { FiltervalgModell } from '../../model-interfaces';
 import './filtrering-status.less';
 import { pagineringSetup } from '../../ducks/paginering';
+import FiltreringStatusIkkePermitterteEtterNiendeBrukere from './filtrering-status-components/ikke-permitterte-brukere';
+import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-components/permitterte-brukere';
+import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
+import { PERM_UTEN_OPPFOLGINGSVEDTAK } from '../../konstanter';
+import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -23,6 +28,7 @@ interface FiltreringStatusProps {
 export function FiltreringStatus(props: FiltreringStatusProps) {
     const ferdigfilterListe = props.filtervalg.ferdigfilterListe!;
     const dispatch = useDispatch();
+    const erFilterPa = useFeatureSelector()(PERM_UTEN_OPPFOLGINGSVEDTAK);
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));
@@ -56,6 +62,33 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     ferdigfilterListe={ferdigfilterListe}
                     hidden={props.filtergruppe === 'veileder'}
                 />
+                {erFilterPa &&
+                <div className="permittering_checkboksgruppe">
+                    <div className="hjelpetekst__wrapper">
+                        <HjelpetekstBase id="hjelpetekst">
+                            <>
+                                <b>Alle utenom permitterte etter 09.03.2020:</b> Alle brukere, uavhengig av situasjon ved
+                                registrering og tidspunkt for registrering, men ekskludert de som har registrert seg som
+                                permittert etter 9. mars 2020.
+                                <br/>
+                                <br/>
+                                <b>Permitterte etter 09.03.2020:</b> Brukere som har registrert seg etter 9. mars og som
+                                har svart at de er permittert.
+                                <br/>
+                                <br/>
+                                Merk at situasjonen kan ha endret seg for permitterte brukere.
+                            </>
+                        </HjelpetekstBase>
+                    </div>
+                    <FiltreringStatusIkkePermitterteEtterNiendeBrukere
+                        handleChange={handleCheckboxChange}
+                        ferdigfilterListe={ferdigfilterListe}
+                    />
+                    <FiltreringStatusPermitterteEtterNiendeBrukere
+                        handleChange={handleCheckboxChange}
+                        ferdigfilterListe={ferdigfilterListe}
+                    />
+                </div>}
             </div>
             <FiltreringStatusBehovsVurdering
                 ferdigfilterListe={ferdigfilterListe}
