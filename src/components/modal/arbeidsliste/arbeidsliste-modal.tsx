@@ -10,7 +10,6 @@ import { BrukerModell } from '../../../model-interfaces';
 import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
 import './arbeidsliste.less';
 import { AppState } from '../../../reducer';
-import ModalHeader from '../modal-header';
 
 interface ArbeidslisteModalProps {
     isOpen: boolean;
@@ -68,12 +67,6 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
                 closeButton
             >
                 <div className="modal-innhold">
-                    <ModalHeader tittel='Legg i arbeidsliste'/>
-                    <div className="arbeidsliste__info-tekst">
-                        <Normaltekst>
-                            {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : 'brukere'} valgt.`}
-                        </Normaltekst>
-                    </div>
                     <LeggTilArbeidslisteForm
                         valgteBrukere={valgteBrukere}
                         lukkModal={this.lukkModal}

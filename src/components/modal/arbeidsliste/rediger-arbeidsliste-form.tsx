@@ -9,6 +9,8 @@ import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import { BrukerModell } from '../../../model-interfaces';
 import { logEvent } from '../../../utils/frontend-logger';
+import ModalHeader from '../modal-header';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -20,43 +22,50 @@ interface RedigerArbeidslisteProps {
 
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     return (
-        <Form>
-            <div className="arbeidsliste__bruker">
-                <div className="nav-input blokk-s">
-                    <Undertittel>
-                        {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
-                    </Undertittel>
-                    <FormikInput name="overskrift"/>
-                    <FormikTekstArea name="kommentar"/>
-                    <Undertekst className="arbeidsliste--modal-redigering">
-                        {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}
-                    </Undertekst>
-                </div>
-                <div className="skjemaelement dato-kategori-wrapper">
-                    <FormikDatoVelger name="frist"/>
-                    <ArbeidslisteKategori name="kategori" index=""/>
-                </div>
+        <>{props.laster ?
+            <div className="modal__spinner-wrapper">
+                <NavFrontendSpinner transparent type='XXL'/>
             </div>
-            <div className="modal-footer">
-                <Hovedknapp
-                    htmlType="submit"
-                    className="knapp knapp--hoved"
-                    spinner={props.laster}
-                    onClick={() => {
-                        logEvent('teamvoff.metrikker.arbeidslistekategori', {
-                            kategori: props.bruker.arbeidsliste.kategori,
-                            leggtil: false,
-                            applikasjon: 'oversikt'
-                        });
-                    }}
-                >
-                    Lagre
-                </Hovedknapp>
-                <button type="button" className="knapp" onClick={props.lukkModal}>
-                    Avbryt
-                </button>
-            </div>
-        </Form>
+            :
+            <Form>
+                <ModalHeader tittel='Rediger arbeidsliste'/>
+                <div className="arbeidsliste__bruker">
+                    <div className="nav-input blokk-s">
+                        <Undertittel>
+                            {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
+                        </Undertittel>
+                        <FormikInput name="overskrift"/>
+                        <FormikTekstArea name="kommentar"/>
+                        <Undertekst className="arbeidsliste--modal-redigering">
+                            {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}
+                        </Undertekst>
+                    </div>
+                    <div className="skjemaelement dato-kategori-wrapper">
+                        <FormikDatoVelger name="frist"/>
+                        <ArbeidslisteKategori name="kategori" index=""/>
+                    </div>
+                </div>
+                <div className="modal-footer">
+                    <Hovedknapp
+                        htmlType="submit"
+                        className="knapp knapp--hoved"
+                        // spinner={props.laster}
+                        onClick={() => {
+                            logEvent('teamvoff.metrikker.arbeidslistekategori', {
+                                kategori: props.bruker.arbeidsliste.kategori,
+                                leggtil: false,
+                                applikasjon: 'oversikt'
+                            });
+                        }}
+                    >
+                        Lagre
+                    </Hovedknapp>
+                    <button type="button" className="knapp" onClick={props.lukkModal}>
+                        Avbryt
+                    </button>
+                </div>
+            </Form>
+        }</>
     );
 }
 

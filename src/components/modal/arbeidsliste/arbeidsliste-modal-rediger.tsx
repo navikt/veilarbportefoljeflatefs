@@ -13,7 +13,6 @@ import moment from 'moment';
 import { OrNothing } from '../../../utils/types/types';
 import './arbeidsliste.less';
 import { logEvent } from '../../../utils/frontend-logger';
-import ModalHeader from '../modal-header';
 
 interface Ownprops {
     bruker: BrukerModell;
@@ -99,7 +98,6 @@ function ArbeidslisteModalRediger({
                         closeButton
                     >
                         <div className="modal-innhold">
-                            <ModalHeader tittel='Rediger arbeidsliste'/>
                             <RedigerArbeidslisteForm
                                 laster={laster}
                                 sistEndretDato={sistEndretDato}
