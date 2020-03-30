@@ -55,10 +55,6 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <button type="button" className="knapp" onClick={props.lukkModal}>
                     Avbryt
                 </button>
-                {/*<FjernFraArbeidslisteRedigerModal*/}
-                {/*    lukkModal={props.lukkModal}*/}
-                {/*    valgtBruker={props.bruker.arbeidsliste.arbeidslisteAktiv}*/}
-                {/*/>*/}
             </div>
         </Form>
     );
