@@ -49,7 +49,6 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     <Hovedknapp
                         htmlType="submit"
                         className="knapp knapp--hoved"
-                        // spinner={props.laster}
                         onClick={() => {
                             logEvent('teamvoff.metrikker.arbeidslistekategori', {
                                 kategori: props.bruker.arbeidsliste.kategori,
