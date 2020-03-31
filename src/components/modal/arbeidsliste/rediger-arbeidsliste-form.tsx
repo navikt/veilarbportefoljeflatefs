@@ -22,11 +22,6 @@ interface RedigerArbeidslisteProps {
 
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     return (
-        <>{props.laster ?
-            <div className="modal__spinner-wrapper">
-                <NavFrontendSpinner transparent type='XXL'/>
-            </div>
-            :
             <Form>
                 <ModalHeader tittel='Rediger arbeidsliste'/>
                 <div className="arbeidsliste__bruker">
@@ -64,7 +59,6 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     </button>
                 </div>
             </Form>
-        }</>
     );
 }
 

@@ -6,10 +6,12 @@ import { skjulModal, VIS_ARBEIDSLISTE_MODAL } from '../../../ducks/modal';
 import { markerAlleBrukere } from '../../../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
-import { BrukerModell } from '../../../model-interfaces';
+import {BrukerModell, Status} from '../../../model-interfaces';
 import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
 import './arbeidsliste.less';
 import { AppState } from '../../../reducer';
+import {STATUS} from "../../../ducks/utils";
+import {LasterModal} from "../lastermodal/laster-modal";
 
 interface ArbeidslisteModalProps {
     isOpen: boolean;
@@ -17,11 +19,13 @@ interface ArbeidslisteModalProps {
     skjulArbeidslisteModal: () => void;
     fjernMarkerteBrukere: () => void;
     innloggetVeileder: string;
+    arbeidslisteStatus?: Status;
 }
 
 interface ArbeidslisteModalState {
     formIsDirty: boolean;
     isOpen: boolean;
+    laster: boolean;
 }
 
 class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteModalState> {
@@ -30,7 +34,8 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
 
         this.state = {
             isOpen: this.props.isOpen,
-            formIsDirty: false
+            formIsDirty: false,
+            laster: props.arbeidslisteStatus !== undefined && props.arbeidslisteStatus !== STATUS.OK
 
         };
         this.lukkModal = this.lukkModal.bind(this);
@@ -40,6 +45,9 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
     componentWillReceiveProps(nextProps: ArbeidslisteModalProps) {
         if (nextProps.isOpen !== this.state.isOpen) {
             this.setState({isOpen: nextProps.isOpen});
+        }
+        if(nextProps.arbeidslisteStatus !== this.props.arbeidslisteStatus) {
+            this.setState({laster: nextProps.arbeidslisteStatus !== undefined && nextProps.arbeidslisteStatus !== STATUS.OK});
         }
     }
 
@@ -110,7 +118,9 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
         const {valgteBrukere} = this.props;
         const fjerne = valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
         return (
-            fjerne ? this.fjernFraModal(valgteBrukere) : this.leggTilModal(valgteBrukere)
+            this.state.laster ?
+                <LasterModal/>
+            : fjerne ? this.fjernFraModal(valgteBrukere) : this.leggTilModal(valgteBrukere)
         );
     }
 }
@@ -118,6 +128,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
 const mapStateToProps = (state: AppState) => ({
     visModal: state.modal.modal === VIS_ARBEIDSLISTE_MODAL,
     innloggetVeileder: state.inloggetVeileder.data!.ident,
+    arbeidslisteStatus: state.arbeidsliste.status
 });
 
 const mapDispatchToProps = (dispatch) => ({

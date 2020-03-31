@@ -61,61 +61,53 @@ function LeggTilArbeidslisteForm({
                                      fjernMarkerteBrukere
                                  }: LeggTilArbeidslisteFormProps) {
 
-    const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     const initialValues = valgteBrukere.map((bruker) => ({kommentar: '', frist: '', overskrift: '', kategori: 'BLA'}));
 
     return (
-        <>{laster ?
-            <div className="modal__spinner-wrapper">
-                <NavFrontendSpinner transparent type='XXL'/>
-            </div>
-            : <Formik
-                initialValues={{arbeidsliste: initialValues}}
-                onSubmit={(values, actions) => {
-                    values.arbeidsliste.map(value => logEvent('teamvoff.metrikker.arbeidslistekategori', {
-                        kategori: value.kategori,
-                        leggtil: true,
-                        applikasjon: 'oversikt'
-                    }));
+        <Formik
+            initialValues={{arbeidsliste: initialValues}}
+            onSubmit={(values, actions) => {
+                values.arbeidsliste.map(value => logEvent('teamvoff.metrikker.arbeidslistekategori', {
+                    kategori: value.kategori,
+                    leggtil: true,
+                    applikasjon: 'oversikt'
+                }));
 
-                    onSubmit(values.arbeidsliste);
-                }}
-                render={(formikProps) => {
-                    setFormIsDirty(formikProps.dirty);
-                    return (
-                        <Form>
-                            <ModalHeader tittel='Legg i arbeidsliste'/>
-                            <Normaltekst className="arbeidsliste__info-tekst">
-                                {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : 'brukere'} valgt.`}
-                            </Normaltekst>
-                            <ArbeidslisteForm
-                                valgteBrukere={valgteBrukere}
-                                arbeidsliste={formikProps.values.arbeidsliste}
-                            />
-                            <div>
-                                <div className="modal-footer">
-                                    <Hovedknapp className="knapp knapp--hoved">
-                                        Lagre
-                                    </Hovedknapp>
-                                    <button type="button" className="knapp" onClick={() => {
-                                        formikProps.resetForm();
-                                        fjernMarkerteBrukere();
-                                        lukkModal();
-                                    }}>
-                                        Avbryt
-                                    </button>
-                                </div>
+                onSubmit(values.arbeidsliste);
+            }}
+            render={(formikProps) => {
+                setFormIsDirty(formikProps.dirty);
+                return (
+                    <Form>
+                        <ModalHeader tittel='Legg i arbeidsliste'/>
+                        <Normaltekst className="arbeidsliste__info-tekst">
+                            {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : 'brukere'} valgt.`}
+                        </Normaltekst>
+                        <ArbeidslisteForm
+                            valgteBrukere={valgteBrukere}
+                            arbeidsliste={formikProps.values.arbeidsliste}
+                        />
+                        <div>
+                            <div className="modal-footer">
+                                <Hovedknapp className="knapp knapp--hoved">
+                                    Lagre
+                                </Hovedknapp>
+                                <button type="button" className="knapp" onClick={() => {
+                                    formikProps.resetForm();
+                                    fjernMarkerteBrukere();
+                                    lukkModal();
+                                }}>
+                                    Avbryt
+                                </button>
                             </div>
-                        </Form>
-                    );
-                }}/>
-        }</>
+                        </div>
+                    </Form>
+                );
+            }}/>
     );
 }
 
-export function
-oppdaterState(res, liste: ArbeidslisteDataModell[],
-              props: { innloggetVeileder: VeilederModell, bruker: BrukerModell }, dispatch) {
+export function oppdaterState(res, liste: ArbeidslisteDataModell[], props: { innloggetVeileder: VeilederModell, bruker: BrukerModell }, dispatch) {
     if (!res) {
         return visServerfeilModal()(dispatch);
     }

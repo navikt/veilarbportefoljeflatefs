@@ -13,6 +13,7 @@ import moment from 'moment';
 import { OrNothing } from '../../../utils/types/types';
 import './arbeidsliste.less';
 import { logEvent } from '../../../utils/frontend-logger';
+import {LasterModal} from "../lastermodal/laster-modal";
 
 interface Ownprops {
     bruker: BrukerModell;
@@ -83,31 +84,33 @@ function ArbeidslisteModalRediger({
             >
                 Rediger
             </button>
-            <Formik
-                initialValues={initialValues}
-                onSubmit={(values) => {
-                    setIsOpen(false);
-                    onSubmit(values);
-                }}
-                render={(formikProps) => (
-                    <NavFrontendModal
-                        className="arbeidsliste-modal"
-                        contentLabel="arbeidsliste"
-                        isOpen={isOpen}
-                        onRequestClose={() => lukkModalConfirm(formikProps)}
-                        closeButton
-                    >
-                        <div className="modal-innhold">
-                            <RedigerArbeidslisteForm
-                                laster={laster}
-                                sistEndretDato={sistEndretDato}
-                                sistEndretAv={sistEndretAv}
-                                lukkModal={() => lukkModal(formikProps)}
-                                bruker={bruker}
-                            />
-                        </div>
-                    </NavFrontendModal>)}
-            />
+            {laster
+                ? <LasterModal/>
+                : <Formik
+                    initialValues={initialValues}
+                    onSubmit={(values) => {
+                        setIsOpen(false);
+                        onSubmit(values);
+                    }}
+                    render={(formikProps) => (
+                        <NavFrontendModal
+                            className="arbeidsliste-modal"
+                            contentLabel="arbeidsliste"
+                            isOpen={isOpen}
+                            onRequestClose={() => lukkModalConfirm(formikProps)}
+                            closeButton
+                        >
+                            <div className="modal-innhold">
+                                <RedigerArbeidslisteForm
+                                    laster={laster}
+                                    sistEndretDato={sistEndretDato}
+                                    sistEndretAv={sistEndretAv}
+                                    lukkModal={() => lukkModal(formikProps)}
+                                    bruker={bruker}
+                                />
+                            </div>
+                        </NavFrontendModal>)}
+                /> }
         </>
 
     );
