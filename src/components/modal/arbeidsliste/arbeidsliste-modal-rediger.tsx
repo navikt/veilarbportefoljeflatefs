@@ -13,7 +13,7 @@ import moment from 'moment';
 import { OrNothing } from '../../../utils/types/types';
 import './arbeidsliste.less';
 import { logEvent } from '../../../utils/frontend-logger';
-import {LasterModal} from "../lastermodal/laster-modal";
+import { LasterModal } from '../lastermodal/laster-modal';
 
 interface Ownprops {
     bruker: BrukerModell;
@@ -110,7 +110,7 @@ function ArbeidslisteModalRediger({
                                 />
                             </div>
                         </NavFrontendModal>)}
-                /> }
+                />}
         </>
 
     );

@@ -1,4 +1,3 @@
-import { STATUS } from '../../../ducks/utils';
 import * as React from 'react';
 import {
     ArbeidslisteDataModell,
@@ -21,7 +20,6 @@ import { skjulModal } from '../../../ducks/modal';
 import { dateToISODate } from '../../../utils/dato-utils';
 import './arbeidsliste.less';
 import { logEvent } from '../../../utils/frontend-logger';
-import NavFrontendSpinner from 'nav-frontend-spinner';
 import ModalHeader from '../modal-header';
 import { Normaltekst } from 'nav-frontend-typografi';
 
