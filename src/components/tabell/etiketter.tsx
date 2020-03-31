@@ -8,7 +8,6 @@ interface EtiketterProps {
     className?: string;
     bruker: BrukerModell;
     erVedtakStotteFeaturePa: boolean;
-
 }
 
 function Etiketter({className, bruker, erVedtakStotteFeaturePa}: EtiketterProps) {
@@ -57,7 +56,7 @@ function Etiketter({className, bruker, erVedtakStotteFeaturePa}: EtiketterProps)
                 type={EtikettType.PERMITTERTE_ETTER_NIENDE_MARS}
                 skalVises={bruker.erPermittertEtterNiendeMars}
             >
-                Permitterte etter 9. mars
+                Permittert etter 9. mars
             </Etikett>
             }
             <Etikett
