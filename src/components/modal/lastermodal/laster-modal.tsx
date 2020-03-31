@@ -10,7 +10,7 @@ export function LasterModal() {
             contentLabel="Laster data"
             onRequestClose={() => {}} // tslint:disable-line:no-empty
             closeButton={false}
-            portalClassName="veilarbvisittkortfs-laster-modal"
+            portalClassName="veilarbportefoljeflatefs-laster-modal"
         >
             <NavFrontendSpinner type="XXL" />
         </ModalWrapper>

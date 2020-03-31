@@ -9,7 +9,7 @@ import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import { BrukerModell } from '../../../model-interfaces';
 import { logEvent } from '../../../utils/frontend-logger';
-import ModalHeader from '../modal-header';
+import ModalHeader from '../modal-header/modal-header';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
