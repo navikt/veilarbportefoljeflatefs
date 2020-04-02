@@ -7,7 +7,7 @@ import { useFocus } from '../../hooks/use-focus';
 interface SokFilterProps<T> {
     data: T[];
     children: (filteredData: T[]) => React.ReactNode;
-    label: string;
+    label?: string;
     placeholder: string;
     limitSize?: number;
 }

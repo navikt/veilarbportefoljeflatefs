@@ -1,6 +1,8 @@
 @import "./listevisning/listevisning";
 @import "../dropdown/dropdown.less";
 
+@bakgrunnsGra: #F4F4F4;
+
 .veilarbportefoljeflatefs {
     .visuallyhidden {
         position: absolute;
@@ -11,10 +13,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 1rem 0.5rem;
+        //padding: 1rem 0 0.5rem;
         border-bottom: none;
         border-radius: @border-radius-base @border-radius-base 0 0;
-        background-color: @white;
+        background-color: @bakgrunnsGra;
         margin-bottom: 0;
         z-index: 1000;
 
@@ -25,22 +27,32 @@
         .toggle__label {
             min-width: 3rem;
         }
-    }
 
-    .toolbar__element {
-        display: flex;
-        flex-direction: row;
-    }
+        &__arbeidsliste-knapp__ikon,
+        &__tildel-veileder-knapp__ikon {
+            min-width: 1.5rem;
+            min-height: 1.5rem;
+        }
 
-    .toolbar__venstre {
-        margin-right: 0.5rem;
-    }
+        &__arbeidsliste-knapp__tekst,
+        &__tildel-veileder-knapp__tekst {
+            padding-right: .5rem;
+        }
 
-    .toolbar__midten {
-    }
+        &__element {
+            display: flex;
+            flex-direction: row;
+        }
 
-    .toolbar__hoyre {
-        margin-left: 0.5rem;
+        &__venstre {
+        }
+
+        &__midten {
+        }
+
+        &__hoyre {
+        }
+
     }
 
     .velgalle-checkboks {
@@ -60,6 +72,7 @@
 
     .arbeidslistekategori__sorteringsheader {
         min-width: 2rem;
+        margin-top: 3px;
 
         .arbeidslisteikon__svg {
             min-width: 1rem;
@@ -85,7 +98,6 @@
 
             &:disabled {
                 color: @navGra20;
-                border: 1px solid @navGra20;
             }
         }
 
@@ -126,7 +138,7 @@
     }
 
     .toolbar_btn {
-        border: 1px solid @navGra60;
+        border: 1px solid transparent;
         padding: 0.5rem;
         width: 100%;
         height: 100%;
@@ -134,14 +146,16 @@
         max-width: 12rem;
         position: relative;
         text-align: inherit;
-        background-color: white;
+        background-color: @bakgrunnsGra;
 
         &:disabled {
-            border: 1px solid @navGra20;
-            color: @navGra20;
-
             #arbeidsliste-svg {
                 opacity: 0.4;
+            }
+
+            &:hover {
+                border-color: transparent;
+                cursor: default;
             }
         }
 
@@ -155,11 +169,12 @@
             border-color: @navBla;
             cursor: pointer;
         }
-    }
 
-    .toolbar__arbeidsliste-ikon {
-        min-width: 1.5rem;
-        position: absolute;
-        right: 0.25rem;
+        &__arbeidsliste,
+        &__tildel-veileder {
+            width: fit-content;
+            display: flex;
+            flex-direction: row;
+        }
     }
 }

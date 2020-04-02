@@ -1,11 +1,13 @@
 import * as React from 'react';
-import TildelVeileder from './tildel-veileder';
 import LeggTilArbeidsliste from './legg-til-arbeidsliste';
 import SokVeileder from './sok-veileder';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 import './toolbar.less';
+import TildelVeilederKnapp from './tildel-veileder-knapp';
+import { visTildelVeilederModal } from '../../ducks/modal';
+import { useDispatch } from 'react-redux';
 
 interface ToolbarProps {
     filtergruppe: ListevisningType;
@@ -18,12 +20,15 @@ interface ToolbarProps {
     id?: string;
 }
 
-function Toolbar (props: ToolbarProps) {
-    const{id, filtergruppe, gjeldendeVeileder, visesAnnenVeiledersPortefolje, sokVeilederSkalVises, antallTotalt, onPaginering} = props;
+function Toolbar(props: ToolbarProps) {
+    const {id, filtergruppe, gjeldendeVeileder, visesAnnenVeiledersPortefolje, sokVeilederSkalVises, antallTotalt, onPaginering} = props;
+    const dispatch = useDispatch();
+
     return (
         <section className="toolbar blokk-xs" id={id}>
             <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
-                <TildelVeileder
+                <TildelVeilederKnapp
+                    onClickHandler={() => dispatch(visTildelVeilederModal())}
                     skalVises={filtergruppe in ListevisningType}
                     filtergruppe={filtergruppe}
                     gjeldendeVeileder={gjeldendeVeileder}
