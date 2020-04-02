@@ -24,9 +24,9 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
         featureToggleName: PERM_UTEN_OPPFOLGINGSVEDTAK,
-        dato: '27. MAR. 2020',
+        dato: '02. APR. 2020',
         tittel: 'Nye filtre i Modia for permitterte etter 9. mars 2020',
-        versjonId: '27.03.20',
+        versjonId: '02.04.20',
         tekst: 'Du kan nå filtrere på brukere som har registrert seg etter 9. mars og oppgitt at de er permittert i Enhetens oversikt og Min oversikt i Modia. Brukerne vises også med en etikett i oversikten og på visittkortet over aktivitetsplanen.',
         children:
             <>
