@@ -14,6 +14,7 @@ import { OrNothing } from '../../../utils/types/types';
 import './arbeidsliste.less';
 import { logEvent } from '../../../utils/frontend-logger';
 import { LasterModal } from '../lastermodal/laster-modal';
+import ModalHeader from '../modal-header/modal-header';
 
 interface Ownprops {
     bruker: BrukerModell;
@@ -100,6 +101,7 @@ function ArbeidslisteModalRediger({
                             onRequestClose={() => lukkModalConfirm(formikProps)}
                             closeButton
                         >
+                            <ModalHeader tittel='Rediger arbeidsliste'/>
                             <div className="modal-innhold">
                                 <RedigerArbeidslisteForm
                                     laster={laster}

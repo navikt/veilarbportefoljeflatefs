@@ -9,7 +9,6 @@ import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import { BrukerModell } from '../../../model-interfaces';
 import { logEvent } from '../../../utils/frontend-logger';
-import ModalHeader from '../modal-header/modal-header';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -22,7 +21,6 @@ interface RedigerArbeidslisteProps {
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     return (
         <Form>
-            <ModalHeader tittel='Rediger arbeidsliste'/>
             <div className="arbeidsliste__bruker">
                 <div className="nav-input blokk-s">
                     <Undertittel>

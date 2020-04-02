@@ -20,7 +20,6 @@ import { skjulModal } from '../../../ducks/modal';
 import { dateToISODate } from '../../../utils/dato-utils';
 import './arbeidsliste.less';
 import { logEvent } from '../../../utils/frontend-logger';
-import ModalHeader from '../modal-header/modal-header';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 interface OwnProps {
@@ -75,7 +74,6 @@ function LeggTilArbeidslisteForm({
                 setFormIsDirty(formikProps.dirty);
                 return (
                     <Form>
-                        <ModalHeader tittel='Legg i arbeidsliste'/>
                         <Normaltekst className="arbeidsliste__info-tekst">
                             {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : 'brukere'} valgt.`}
                         </Normaltekst>

@@ -12,6 +12,7 @@ import './arbeidsliste.less';
 import { AppState } from '../../../reducer';
 import { STATUS } from '../../../ducks/utils';
 import { LasterModal } from '../lastermodal/laster-modal';
+import ModalHeader from '../modal-header/modal-header';
 
 interface ArbeidslisteModalProps {
     isOpen: boolean;
@@ -74,6 +75,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
                 onRequestClose={this.lukkModal}
                 closeButton
             >
+                <ModalHeader tittel='Legg i arbeidsliste'/>
                 <div className="modal-innhold">
                     <LeggTilArbeidslisteForm
                         valgteBrukere={valgteBrukere}
