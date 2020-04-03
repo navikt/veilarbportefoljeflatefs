@@ -18,6 +18,7 @@ import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './enhetsportefolje.less';
 import './brukerliste.less';
+import {OrNothing} from "../utils/types/types";
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -28,11 +29,11 @@ function harValgteAktiviteter(aktiviteter) {
 }
 
 interface EnhetListehodeProps {
-    sorteringsrekkefolge: Sorteringsrekkefolge;
+    sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
     sorteringOnClick: (sortering: string) => void;
     valgteKolonner: Kolonne[];
     filtervalg: FiltervalgModell;
-    sorteringsfelt: string;
+    sorteringsfelt: OrNothing<Sorteringsfelt>;
     filtergruppe: ListevisningType;
 }
 
