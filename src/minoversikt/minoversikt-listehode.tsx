@@ -19,6 +19,7 @@ import TittelValg from '../utils/utils';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './minoversikt.less';
 import { ReactComponent as ArbeidslisteikonBla } from '../components/modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_bla.svg';
+import {OrNothing} from "../utils/types/types";
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -29,9 +30,9 @@ function harValgteAktiviteter(aktiviteter) {
 }
 
 interface MinOversiktListehodeProps {
-    sorteringsrekkefolge: Sorteringsrekkefolge;
+    sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
     sorteringOnClick: (sortering: string) => void;
-    sorteringsfelt: string;
+    sorteringsfelt: OrNothing<Sorteringsfelt>;
     filtervalg: FiltervalgModell;
     brukere: BrukerModell[];
     valgteKolonner: Kolonne[];
