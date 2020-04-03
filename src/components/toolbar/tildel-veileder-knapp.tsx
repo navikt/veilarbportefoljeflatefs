@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { VIS_TILDEL_VEILEDER_MODAL } from '../../ducks/modal';
 import './toolbar.less';
 import { AppState } from '../../reducer';
-import { ReactComponent as TildelVeilederIkon } from './tildel-veileder.svg';
+import { ReactComponent as TildelVeilederIkon } from '../ikoner/person-add-1.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 import TildelVeilederModal from '../modal/tildel-veileder/tildel-veileder-modal';
 
@@ -27,10 +27,10 @@ function TildelVeilederKnapp(props: LeggTilArbeidslisteProps) {
     const aktiv = valgteBrukere.length > 0;
 
     return (
-        <div className="toolbar_btnwrapper dropdown--toolbar">
+        <div className="toolbar_btnwrapper">
             <button
                 type="button"
-                className={'toolbar_btn toolbar_btn__tildel-veileder'}
+                className='toolbar_btn toolbar_btn__tildel-veileder'
                 disabled={!aktiv}
                 onClick={props.onClickHandler}
             >

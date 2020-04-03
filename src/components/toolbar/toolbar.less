@@ -13,12 +13,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        //padding: 1rem 0 0.5rem;
         border-bottom: none;
         border-radius: @border-radius-base @border-radius-base 0 0;
         background-color: @bakgrunnsGra;
-        margin-bottom: 0;
         z-index: 1000;
+        margin-bottom: .5rem;
+        padding-left: .5rem;
 
         .nav-frontend-chevron span {
             .sr-only();
@@ -26,6 +26,10 @@
 
         .toggle__label {
             min-width: 3rem;
+        }
+
+        &__tildel-veileder-knapp__ikon {
+            margin-right: .3rem;
         }
 
         &__arbeidsliste-knapp__ikon,
@@ -43,16 +47,6 @@
             display: flex;
             flex-direction: row;
         }
-
-        &__venstre {
-        }
-
-        &__midten {
-        }
-
-        &__hoyre {
-        }
-
     }
 
     .velgalle-checkboks {
@@ -80,6 +74,10 @@
         }
     }
 
+    .toolbar_btnwrapper {
+        margin: 0 1rem 0 0;
+    }
+
     .dropdown--toolbar {
         border-radius: @border-radius-base;
         width: auto;
@@ -98,6 +96,10 @@
 
             &:disabled {
                 color: @navGra20;
+
+                //&__tildel-veileder-knapp__ikon {
+                //    stroke: @navGra20;
+                //}
             }
         }
 
@@ -149,7 +151,7 @@
         background-color: @bakgrunnsGra;
 
         &:disabled {
-            #arbeidsliste-svg {
+            #arbeidsliste-svg, #tildel-veileder-svg {
                 opacity: 0.4;
             }
 

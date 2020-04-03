@@ -37,7 +37,7 @@ function LeggTilArbeidsliste(props: LeggTilArbeidslisteProps) {
     }
 
     return (
-        <div className="toolbar_btnwrapper dropdown--toolbar">
+        <div className="toolbar_btnwrapper">
             <ArbeidsListeKnapp
                 valgteBrukere={valgteBrukere}
                 onClickHandler={() => dispatch(visArbeidslisteModal())}
@@ -54,7 +54,7 @@ function ArbeidsListeKnapp(props: { valgteBrukere: BrukerModell[], onClickHandle
     const arbeidslisteButton = (tekst) => (
         <button
             type="button"
-            className={'toolbar_btn toolbar_btn__arbeidsliste'}
+            className='toolbar_btn toolbar_btn__arbeidsliste'
             disabled={props.valgteBrukere.length < 1 || props.visesAnnenVeiledersPortefolje}
             onClick={props.onClickHandler}
         >
@@ -66,7 +66,6 @@ function ArbeidsListeKnapp(props: { valgteBrukere: BrukerModell[], onClickHandle
     if (inneholderBrukerMedArbeidsliste) {
         return arbeidslisteButton('Fjern fra arbeidsliste');
     }
-
     return arbeidslisteButton('Legg i arbeidsliste');
 }
 
