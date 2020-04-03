@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { tildelVeileder } from '../../ducks/portefolje';
-import { VeilederModell } from '../../model-interfaces';
-import { AppState } from '../../reducer';
-import SokFilterNy from './sok-filter-ny';
+import { tildelVeileder } from '../../../ducks/portefolje';
+import { VeilederModell } from '../../../model-interfaces';
+import { AppState } from '../../../reducer';
+import SokFilterNy from '../../toolbar/sok-filter-ny';
 import { useState } from 'react';
 import { Radio } from 'nav-frontend-skjema';
-import classNames from 'classnames';
-import './toolbar.less';
+import '../../toolbar/toolbar.less';
+import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
+import { skjulModal } from '../../../ducks/modal';
 
 interface TildelVeilederProps {
     filtergruppe?: string;
@@ -29,16 +30,13 @@ function TildelVeileder({filtergruppe, gjeldendeVeileder}: TildelVeilederProps) 
     const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
 
     const onSubmit = () => {
-        if (ident) {
-            const tilordninger = valgteBrukere
-                .map((bruker) => ({
-                    fraVeilederId: bruker.veilederId,
-                    tilVeilederId: ident,
-                    brukerFnr: bruker.fnr
-                }));
-
-            doTildelTilVeileder(tilordninger, ident);
-        }
+        const tilordninger = valgteBrukere
+            .map((bruker) => ({
+                fraVeilederId: bruker.veilederId,
+                tilVeilederId: ident,
+                brukerFnr: bruker.fnr
+            }));
+        doTildelTilVeileder(tilordninger, ident);
     };
 
     return (
@@ -54,11 +52,15 @@ function TildelVeileder({filtergruppe, gjeldendeVeileder}: TildelVeilederProps) 
                         data={data}
                         onSubmit={() => onSubmit()}
                     />
-                    <div className={classNames('checkbox-filterform__under-valg', 'blokk-xxs')}>
-                        <button onClick={() => onSubmit()}
-                                className={classNames('knapp', 'knapp--mini', {'knapp--hoved': ident})}>
-                            {ident ? 'Velg' : 'Lukk'}
-                        </button>
+                    <div className="modal-footer">
+                        <Hovedknapp className="modal-footer__hovedknapp" htmlType="submit" disabled={!ident}
+                                    onClick={() => onSubmit()}>
+                            Velg
+                        </Hovedknapp>
+                        <Knapp className="modal-footer__lukknapp" htmlType="button"
+                               onClick={() => dispatch(skjulModal())}>
+                            Lukk
+                        </Knapp>
                     </div>
                 </>
             }

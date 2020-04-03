@@ -5,7 +5,7 @@ import './toolbar.less';
 import { AppState } from '../../reducer';
 import { ReactComponent as TildelVeilederIkon } from './tildel-veileder.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
-import TildelVeilederModal from '../modal/tildel-veileder-modal';
+import TildelVeilederModal from '../modal/tildel-veileder/tildel-veileder-modal';
 
 interface LeggTilArbeidslisteProps {
 
@@ -37,9 +37,7 @@ function TildelVeilederKnapp(props: LeggTilArbeidslisteProps) {
                 <TildelVeilederIkon className="toolbar__tildel-veileder-knapp__ikon"/>
                 <Normaltekst className="toolbar__tildel-veileder-knapp__tekst">Tildel veileder</Normaltekst>
             </button>
-            {/*{modalSkalVises && <TildelVeilederModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere}/>}*/}
-            {console.log("valgtebruere", valgteBrukere)}
-            {modalSkalVises && <TildelVeilederModal isOpen={modalSkalVises}/>}
+            {modalSkalVises && <TildelVeilederModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere}/>}
         </div>
     );
 }

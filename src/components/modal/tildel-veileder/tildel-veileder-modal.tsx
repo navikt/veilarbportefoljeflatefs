@@ -1,17 +1,19 @@
-import { markerAlleBrukere } from '../../ducks/portefolje';
-import { skjulModal, VIS_TILDEL_VEILEDER_MODAL } from '../../ducks/modal';
+import { markerAlleBrukere } from '../../../ducks/portefolje';
+import { skjulModal, VIS_TILDEL_VEILEDER_MODAL } from '../../../ducks/modal';
 import React, { Component } from 'react';
-import { AppState } from '../../reducer';
+import { AppState } from '../../../reducer';
 import { connect } from 'react-redux';
 import './tildel-veileder-modal.less';
-import Modal from './modal';
-import TildelVeileder from '../toolbar/tildel-veileder';
+import TildelVeileder from './tildel-veileder';
+import Modal from '../modal';
+import { BrukerModell } from '../../../model-interfaces';
 
 interface TildelVeilederModalProps {
     isOpen: boolean;
     skjulTildelVeilederModal: () => void;
     fjernMarkerteBrukere: () => void;
     innloggetVeileder: string;
+    valgteBrukere: BrukerModell[];
 }
 
 interface TildelVeilederModalState {
@@ -49,6 +51,10 @@ class TildelVeilederModal extends Component<TildelVeilederModalProps, TildelVeil
             fjernMarkerteBrukere();
             skjulTildelVeilederModal();
         }
+    }
+
+    brukere(valgteBrukere: BrukerModell[]) {
+        return valgteBrukere.filter((bruker) => bruker.arbeidsliste);
     }
 
     render() {
