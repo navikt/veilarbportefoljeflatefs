@@ -23,6 +23,12 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '03. APR. 2020',
+        tittel: 'Tekst i dialog forsvinner ikke',
+        versjonId: '03.04.20',
+        tekst: 'Når du starter på en melding i dialogen vil denne nå lagres hos deg i en kort tid (24 timer). Du kan da besøke andre sider samtidig som du jobber med teksten, uten å miste noe.',
+    },
+    {
         featureToggleName: PERM_UTEN_OPPFOLGINGSVEDTAK,
         dato: '02. APR. 2020',
         tittel: 'Nye filtre i Modia for permitterte etter 9. mars 2020',
