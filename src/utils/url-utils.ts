@@ -19,6 +19,8 @@ export function setFraBrukerIUrl(bruker: string) {
     } else if(lastSearch && !fnrRegex.test(lastSearch)) {
         localStorage.setItem('lastsearch', lastSearch.concat(`&fraBruker=${bruker}`));
     }
+        localStorage.setItem('xPos', window.pageXOffset.toString());
+        localStorage.setItem('yPos', window.pageYOffset.toString());
 }
 
 export function getEnhetFromUrl() {
