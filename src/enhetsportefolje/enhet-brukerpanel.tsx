@@ -22,12 +22,15 @@ interface EnhetBrukerpanelProps {
     forrigeBruker?: string;
 }
 
+
+const STICKY_TOOLBAR_HOJDE = 142;
+
 function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, forrigeBruker}: EnhetBrukerpanelProps) {
     const liRef = useRef<HTMLLIElement>(null);
     const varForrigeBruker = bruker.fnr === forrigeBruker;
     const erVedtakStotteFeaturePa = useFeatureSelector()(VEDTAKSTOTTE);
 
-    const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+    const scrollToRef = (ref) => window.scrollTo(0, (ref.current.offsetTop - STICKY_TOOLBAR_HOJDE)); //TAR HÖJDE FÖR STICKY TOOLBAR-CONTAINER SOM ER 142px
 
     useLayoutEffect(() => {
         if (varForrigeBruker) {

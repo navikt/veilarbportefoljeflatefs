@@ -29,11 +29,13 @@ interface MinOversiktBrukerPanelProps {
     varForrigeBruker?: boolean;
 }
 
+const STICKY_TOOLBAR_HOJDE = 142;
+
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const [apen, setOpen] = useState<boolean>(false);
     const liRef = useRef<HTMLLIElement>(null);
 
-    const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+    const scrollToRef = (ref) => window.scrollTo(0, (ref.current.offsetTop - STICKY_TOOLBAR_HOJDE)); //TAR HÖJDE FÖR STICKY TOOLBAR-CONTAINER SOM ER 142px
     const erVedtakStotteFeaturePa = useFeatureSelector()(VEDTAKSTOTTE);
 
     useLayoutEffect(() => {
