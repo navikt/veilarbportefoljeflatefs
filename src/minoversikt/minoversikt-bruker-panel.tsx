@@ -10,7 +10,7 @@ import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import { Kolonne } from '../ducks/ui/listevisning';
 import Etikett from '../components/tabell/etikett';
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect } from 'react';
 import { OrNothing } from '../utils/types/types';
 import './minoversikt.less';
 import { Checkbox } from 'nav-frontend-skjema';
@@ -29,18 +29,21 @@ interface MinOversiktBrukerPanelProps {
     varForrigeBruker?: boolean;
 }
 
-const STICKY_TOOLBAR_HOJDE = 142;
 
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const [apen, setOpen] = useState<boolean>(false);
-    const liRef = useRef<HTMLLIElement>(null);
 
-    const scrollToRef = (ref) => window.scrollTo(0, (ref.current.offsetTop - STICKY_TOOLBAR_HOJDE)); //TAR HÖJDE FÖR STICKY TOOLBAR-CONTAINER SOM ER 142px
     const erVedtakStotteFeaturePa = useFeatureSelector()(VEDTAKSTOTTE);
+
+    const scrollToLastPos = () => {
+        const xPos = parseInt(localStorage.getItem("xPos") || '0');
+        const yPos = parseInt(localStorage.getItem("yPos") || '0');
+        window.scrollTo(xPos, yPos);
+    };
 
     useLayoutEffect(() => {
         if (props.varForrigeBruker) {
-            scrollToRef(liRef);
+            scrollToLastPos();
         }
     }, [props.varForrigeBruker]);
 
@@ -60,7 +63,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     });
 
     return (
-        <li className={classname} ref={liRef}>
+        <li className={classname}>
             <div className="brukerliste__element">
                 <div className="brukerliste__gutter-left brukerliste--min-width-minside">
                     <Checkbox

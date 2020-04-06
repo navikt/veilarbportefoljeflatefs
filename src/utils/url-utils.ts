@@ -23,10 +23,6 @@ export function setFraBrukerIUrl(bruker: string) {
         localStorage.setItem('yPos', window.pageYOffset.toString());
 }
 
-export function getEnhetFromUrl() {
-    return queryString.parse(window.location.search).enhet || '';
-}
-
 export function getSideFromUrl() {
     return parseInt(queryString.parse(window.location.search).side || '1', 10);
 }

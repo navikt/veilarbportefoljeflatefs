@@ -4,7 +4,7 @@ import Etiketter from '../components/tabell/etiketter';
 import { FiltervalgModell, VeilederModell } from '../model-interfaces';
 import { Kolonne } from '../ducks/ui/listevisning';
 import EnhetKolonner from './enhet-kolonner';
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect } from 'react';
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import {OrNothing} from "../utils/types/types";
@@ -23,11 +23,10 @@ interface EnhetBrukerpanelProps {
 }
 
 function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, forrigeBruker}: EnhetBrukerpanelProps) {
-    const liRef = useRef<HTMLLIElement>(null);
     const varForrigeBruker = bruker.fnr === forrigeBruker;
     const erVedtakStotteFeaturePa = useFeatureSelector()(VEDTAKSTOTTE);
 
-    const scrollToRef = () => {
+    const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem("xPos") || '0');
         const yPos = parseInt(localStorage.getItem("yPos") || '0');
         window.scrollTo(xPos, yPos);
@@ -35,7 +34,7 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
 
     useLayoutEffect(() => {
         if (varForrigeBruker) {
-            scrollToRef();
+            scrollToLastPos();
         }
     }, [varForrigeBruker]);
 
@@ -44,7 +43,7 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
     });
 
     return (
-        <li className={classname} ref={liRef}>
+        <li className={classname}>
             <div className="brukerliste__gutter-left">
                 <Checkbox
                     checked={bruker.markert}
