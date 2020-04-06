@@ -5,7 +5,7 @@ import TourModalButton from '../../modal/tour-modal/tour-modal-button';
 import '../endringslogg.less';
 import '../collapse-container-transition.less';
 import { FeaturesState } from '../../../ducks/features';
-import { PERM_UTEN_OPPFOLGINGSVEDTAK } from '../../../konstanter';
+import { PERM_UTEN_OPPFOLGINGSVEDTAK, REGISTRERINGSFILTER } from '../../../konstanter';
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -22,6 +22,13 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 }
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
+    {
+        featureToggleName: REGISTRERINGSFILTER,
+        dato: '06. APR. 2020',
+        tittel: 'Filtrering på brukers situasjon fra registrering',
+        versjonId: '06.04.20',
+        tekst: 'Nå kan du filtrere frem brukere basert på situasjonen de har oppgitt på registreringstidspunktet. Filteret heter "Svar fra registrering" og ligger under filtergruppen "Situasjon", og du kan kombinere filteret med f.eks. "Trenger vurdering".',
+    },
     {
         dato: '03. APR. 2020',
         tittel: 'Tekst i dialog forsvinner ikke',
