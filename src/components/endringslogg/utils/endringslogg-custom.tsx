@@ -28,6 +28,11 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         tittel: 'Filtrering på brukers situasjon fra registrering',
         versjonId: '06.04.20',
         tekst: 'Nå kan du filtrere frem brukere basert på situasjonen de har oppgitt på registreringstidspunktet. Filteret heter "Svar fra registrering" og ligger under filtergruppen "Situasjon", og du kan kombinere filteret med f.eks. "Trenger vurdering".',
+        children:
+            <EndringsloggLinkMedIkon
+                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filtre-i-Enhetens--og-Min-oversikt-i-Modia--brukers-svar-fra-registrering.aspx"
+                linkTekst="Nyhetssak på Navet"
+            />
     },
     {
         dato: '03. APR. 2020',
