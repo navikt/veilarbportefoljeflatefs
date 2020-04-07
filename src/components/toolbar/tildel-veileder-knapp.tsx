@@ -30,12 +30,12 @@ function TildelVeilederKnapp(props: LeggTilArbeidslisteProps) {
         <div className="toolbar_btnwrapper">
             <button
                 type="button"
-                className='toolbar_btn toolbar_btn__tildel-veileder'
+                className='toolbar_btn'
                 disabled={!aktiv}
                 onClick={props.onClickHandler}
             >
-                <TildelVeilederIkon className="toolbar__tildel-veileder-knapp__ikon"/>
-                <Normaltekst className="toolbar__tildel-veileder-knapp__tekst">Tildel veileder</Normaltekst>
+                <TildelVeilederIkon className="toolbar-knapp__ikon" id="tildel-veileder-ikon"/>
+                <Normaltekst className="toolbar-knapp__tekst">Tildel veileder</Normaltekst>
             </button>
             {modalSkalVises && <TildelVeilederModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere}/>}
         </div>

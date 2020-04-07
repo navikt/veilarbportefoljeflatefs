@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Input } from 'nav-frontend-skjema';
 import AlertStripe from 'nav-frontend-alertstriper';
-import './toolbar.less';
+import '../toolbar/toolbar.less';
 import { useFocus } from '../../hooks/use-focus';
 
 interface SokFilterProps<T> {

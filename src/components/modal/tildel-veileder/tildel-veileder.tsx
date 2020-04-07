@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { tildelVeileder } from '../../../ducks/portefolje';
 import { VeilederModell } from '../../../model-interfaces';
 import { AppState } from '../../../reducer';
-import SokFilterNy from '../../toolbar/sok-filter-ny';
 import { useState } from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import '../../toolbar/toolbar.less';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { skjulModal } from '../../../ducks/modal';
+import SokFilterNy from '../../sok-veiledere/sok-filter-ny';
 
 interface TildelVeilederProps {
     filtergruppe?: string;

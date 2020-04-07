@@ -5,6 +5,7 @@ import { avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ } from '../
 import { selectMuligeAlternativer, selectValgteAlternativer } from '../../../ducks/ui/listevisning-selectors';
 import ListevisningRad from './listvisning-rad';
 import './listevisning.less';
+import { ReactComponent as VelgKolonneIkon } from '../../ikoner/settings.svg';
 
 interface OwnProps {
     filtergruppe: ListevisningType;
@@ -39,14 +40,23 @@ const Listevisning = (props: ListevisningProps) => {
         return null;
     }
 
+    function dropdownNavn() {
+        return (
+            <>
+                <VelgKolonneIkon/>
+                <span className="velg-kolonner__tekst">Velg kolonner</span>
+            </>
+        );
+    }
+
     return (
-        <Dropdown name="Velg kolonner" disabled={props.muligeAlternativer.length <= 5}
-                  className="dropdown--fixed dropdown--toolbar toolbar__velg-kolonner">
+        <Dropdown
+            name={dropdownNavn()}
+            disabled={props.muligeAlternativer.length <= 5}
+            className="dropdown--toolbar toolbar__velg-kolonner">
             <section className="radio-filterform__valg">
-                <div className="blokk-s">
-                    Du kan velge hvilke kolonner du ønsker å se i listen, maks 5 kolonner om gangen.
-                </div>
-                <ul className="ustilet">
+                <ul
+                    className="ustilet">
                     {props.muligeAlternativer.map((kolonne) => (
                         <ListevisningRad
                             key={kolonne}

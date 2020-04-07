@@ -222,4 +222,4 @@ const randomDate = ({past}) => {
     return new Date(ar, mnd - 1, dag).toISOString();
 };
 
-export default new Array(4230).fill(0).map(() => lagBruker());
+export default new Array(123).fill(0).map(() => lagBruker());

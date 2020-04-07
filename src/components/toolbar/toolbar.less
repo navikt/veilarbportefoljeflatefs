@@ -28,18 +28,17 @@
             min-width: 3rem;
         }
 
-        &__tildel-veileder-knapp__ikon {
+        #tildel-veileder-ikon {
             margin-right: .3rem;
         }
 
-        &__arbeidsliste-knapp__ikon,
-        &__tildel-veileder-knapp__ikon {
+
+        &-knapp__ikon {
             min-width: 1.5rem;
             min-height: 1.5rem;
         }
 
-        &__arbeidsliste-knapp__tekst,
-        &__tildel-veileder-knapp__tekst {
+        &-knapp__tekst {
             padding-right: .5rem;
         }
 
@@ -83,7 +82,7 @@
         width: auto;
         min-width: 11rem;
         height: 100%;
-        margin: 0 1rem 0 0;
+        margin: 0 1rem 0 0 !important;
 
         .dropdown__btn {
             border: 1px solid @navGra60;
@@ -97,9 +96,10 @@
             &:disabled {
                 color: @navGra20;
 
-                //&__tildel-veileder-knapp__ikon {
-                //    stroke: @navGra20;
-                //}
+                &:hover {
+                    border-color: transparent;
+                    cursor: default;
+                }
             }
         }
 
@@ -142,16 +142,18 @@
     .toolbar_btn {
         border: 1px solid transparent;
         padding: 0.5rem;
-        width: 100%;
         height: 100%;
         margin: 0 0.5rem 0 0;
         max-width: 12rem;
         position: relative;
         text-align: inherit;
         background-color: @bakgrunnsGra;
+        width: fit-content;
+        display: flex;
+        flex-direction: row;
 
         &:disabled {
-            #arbeidsliste-svg, #tildel-veileder-svg {
+            #arbeidsliste-svg, #tildel-veileder-ikon, #sok-veileder-ikon {
                 opacity: 0.4;
             }
 
@@ -164,19 +166,12 @@
         &:focus {
             outline: none;
             border-radius: 2px;
-            box-shadow: 0 0 0 3px @navOransjeLighten40;
+            box-shadow: 0 0 0 3px @fokusFarge;
         }
 
         &:hover {
             border-color: @navBla;
             cursor: pointer;
-        }
-
-        &__arbeidsliste,
-        &__tildel-veileder {
-            width: fit-content;
-            display: flex;
-            flex-direction: row;
         }
     }
 }

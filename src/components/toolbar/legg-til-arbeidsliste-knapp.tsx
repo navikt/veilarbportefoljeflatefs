@@ -7,7 +7,7 @@ import { useLocation, useParams } from 'react-router';
 import { BrukerModell } from '../../model-interfaces';
 import { AppState } from '../../reducer';
 import { useIdentSelector } from '../../hooks/redux/use-inlogget-ident';
-import { ReactComponent as ArbeidslisteIkonLinje } from './arbeidslisteikon-linje.svg';
+import { ReactComponent as ArbeidslisteIkonLinje } from '../ikoner/arbeidslisteikon-linje.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 interface LeggTilArbeidslisteProps {
@@ -55,14 +55,12 @@ function ArbeidsListeKnapp(props: { valgteBrukere: BrukerModell[], onClickHandle
     const arbeidslisteButton = (tekst) => (
         <button
             type="button"
-            className='toolbar_btn toolbar_btn__arbeidsliste'
-            disabled={props.valgteBrukere.length < 1 || props.visesAnnenVeiledersPortefolje}
-            className="toolbar_btn"
+            className='toolbar_btn'
             disabled={props.valgteBrukere.length < 1 || props.visesAnnenVeiledersPortefolje || inneholderBrukerMedOgUtenArbeidsliste}
             onClick={props.onClickHandler}
         >
-            <ArbeidslisteIkonLinje className="toolbar__arbeidsliste-knapp__ikon"/>
-            <Normaltekst className="toolbar__arbeidsliste-knapp__tekst">{tekst}</Normaltekst>
+            <ArbeidslisteIkonLinje className="toolbar-knapp__ikon" id="arbeidsliste-ikon"/>
+            <Normaltekst className="toolbar-knapp__tekst">{tekst}</Normaltekst>
         </button>
     );
 

@@ -1,6 +1,4 @@
 import * as React from 'react';
-import LeggTilArbeidsliste from './legg-til-arbeidsliste';
-import SokVeileder from './sok-veileder';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
 import { ListevisningType } from '../../ducks/ui/listevisning';
@@ -8,6 +6,8 @@ import './toolbar.less';
 import TildelVeilederKnapp from './tildel-veileder-knapp';
 import { visTildelVeilederModal } from '../../ducks/modal';
 import { useDispatch } from 'react-redux';
+import LeggTilArbeidsliste from './legg-til-arbeidsliste-knapp';
+import SokVeilederKnapp from './sok-veileder-knapp';
 
 interface ToolbarProps {
     filtergruppe: ListevisningType;
@@ -21,7 +21,7 @@ interface ToolbarProps {
 }
 
 function Toolbar(props: ToolbarProps) {
-    const {id, filtergruppe, gjeldendeVeileder, visesAnnenVeiledersPortefolje, sokVeilederSkalVises, antallTotalt, onPaginering} = props;
+    const {id, filtergruppe, gjeldendeVeileder, visesAnnenVeiledersPortefolje, antallTotalt, onPaginering} = props;
     const dispatch = useDispatch();
 
     return (
@@ -36,10 +36,10 @@ function Toolbar(props: ToolbarProps) {
                 <LeggTilArbeidsliste
                     visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false}
                 />
-                <SokVeileder
-                    veileder={{}}
+                <SokVeilederKnapp
+                    skalVises={props.sokVeilederSkalVises}
                     filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe}
-                    skalVises={sokVeilederSkalVises}
+                    veileder={{}}
                 />
             </div>
             <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
