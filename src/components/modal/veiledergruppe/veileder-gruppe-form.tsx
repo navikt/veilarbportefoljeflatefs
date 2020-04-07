@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 import { Input } from 'nav-frontend-skjema';
 import { FiltervalgModell } from '../../../model-interfaces';
 import ValgtVeilederGruppeListe from './valgt-veileder-gruppeliste';
@@ -21,9 +21,6 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
     const {focusRef} = useFocus();
     return (
         <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit}>
-            <Innholdstittel tag="h1" className="blokk-xs">
-                {props.modalTittel}
-            </Innholdstittel>
             <Input
                 label={<p className="veiledergruppe-modal__gruppenavntekst">Gruppenavn: <i>(maks 35 tegn)</i></p>}
                 value={props.gruppeNavn}

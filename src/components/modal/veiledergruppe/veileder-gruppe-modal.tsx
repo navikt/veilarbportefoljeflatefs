@@ -13,6 +13,7 @@ import { logEvent } from '../../../utils/frontend-logger';
 import { initialState } from '../../../ducks/filtrering';
 import { finnSideNavn } from '../../../middleware/metrics-middleware';
 import './modal.less';
+import ModalHeader from '../modal-header/modal-header';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -169,6 +170,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                 onRequestClose={lukkModal}
                 portalClassName="veiledergruppe-modal"
             >
+                <ModalHeader tittel={props.modalTittel}/>
                 <VeilederGruppeForm
                     filterValg={filterValg}
                     gruppeNavn={gruppeNavn}
