@@ -16,7 +16,7 @@ export function useSetInitalEnhet() {
 
     const enheter = inloggetVeilederInfo.enheter;
 
-    if( enheter.length === 0) {
+    if(enheter.length === 0) {
         return { hasError: true }
     }
 

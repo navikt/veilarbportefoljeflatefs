@@ -5,7 +5,7 @@ import TourModalButton from '../../modal/tour-modal/tour-modal-button';
 import '../endringslogg.less';
 import '../collapse-container-transition.less';
 import { FeaturesState } from '../../../ducks/features';
-import { PERM_UTEN_OPPFOLGINGSVEDTAK } from '../../../konstanter';
+import { REGISTRERINGSFILTER } from '../../../konstanter';
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -23,7 +23,24 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        featureToggleName: PERM_UTEN_OPPFOLGINGSVEDTAK,
+        featureToggleName: REGISTRERINGSFILTER,
+        dato: '06. APR. 2020',
+        tittel: 'Filtrering på brukers situasjon fra registrering',
+        versjonId: '06.04.20',
+        tekst: 'Nå kan du filtrere frem brukere basert på situasjonen de har oppgitt på registreringstidspunktet. Filteret heter "Svar fra registrering" og ligger under filtergruppen "Situasjon", og du kan kombinere filteret med f.eks. "Trenger vurdering".',
+        children:
+            <EndringsloggLinkMedIkon
+                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filtre-i-Enhetens--og-Min-oversikt-i-Modia--brukers-svar-fra-registrering.aspx"
+                linkTekst="Nyhetssak på Navet"
+            />
+    },
+    {
+        dato: '03. APR. 2020',
+        tittel: 'Tekst i dialog forsvinner ikke',
+        versjonId: '03.04.20',
+        tekst: 'Når du starter på en melding i dialogen vil denne nå lagres hos deg i en kort tid (24 timer). Du kan da besøke andre sider samtidig som du jobber med teksten, uten å miste noe.',
+    },
+    {
         dato: '02. APR. 2020',
         tittel: 'Nye filtre i Modia for permitterte etter 9. mars 2020',
         versjonId: '02.04.20',

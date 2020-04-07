@@ -13,7 +13,7 @@ export function useFetchPortefolje(listevisningType: ListevisningType) {
     const {sorteringsrekkefolge, filtervalg, sorteringsfelt} = usePortefoljeSelector(listevisningType);
 
     useEffect(()=> {
-        if(enhet) {
+        if(enhet && sorteringsrekkefolge && sorteringsfelt) {
             if(listevisningType === ListevisningType.enhetensOversikt) {
                 dispatch(hentPortefoljeForEnhet(enhet, sorteringsrekkefolge, sorteringsfelt, filtervalg));
                 oppdaterAlternativer(dispatch, filtervalg, listevisningType)

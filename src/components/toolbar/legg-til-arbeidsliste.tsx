@@ -50,12 +50,15 @@ function LeggTilArbeidsliste(props: LeggTilArbeidslisteProps) {
 
 function ArbeidsListeKnapp(props: { valgteBrukere: BrukerModell[], onClickHandler: () => void, visesAnnenVeiledersPortefolje: boolean }) {
     const inneholderBrukerMedArbeidsliste = props.valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
+    const inneholderBrukerMedOgUtenArbeidsliste = inneholderBrukerMedArbeidsliste && props.valgteBrukere.some((bruker) => !bruker.arbeidsliste.arbeidslisteAktiv);
 
     const arbeidslisteButton = (tekst) => (
         <button
             type="button"
             className='toolbar_btn toolbar_btn__arbeidsliste'
             disabled={props.valgteBrukere.length < 1 || props.visesAnnenVeiledersPortefolje}
+            className="toolbar_btn"
+            disabled={props.valgteBrukere.length < 1 || props.visesAnnenVeiledersPortefolje || inneholderBrukerMedOgUtenArbeidsliste}
             onClick={props.onClickHandler}
         >
             <ArbeidslisteIkonLinje className="toolbar__arbeidsliste-knapp__ikon"/>

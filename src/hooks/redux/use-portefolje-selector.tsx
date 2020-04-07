@@ -33,11 +33,11 @@ interface UsePortefoljeSelector {
     enhettiltak: EnhettiltakState,
     portefolje: PortefoljeState,
     enhetId: OrNothing<string>;
-    sorteringsrekkefolge: Sorteringsrekkefolge;
+    sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
     brukere: BrukerModell[],
     filtervalg: FiltervalgModell;
     listevisning: ListevisningState;
-    sorteringsfelt: Sorteringsfelt;
+    sorteringsfelt: OrNothing<Sorteringsfelt>;
 }
 
 export function usePortefoljeSelector(listevisningType: ListevisningType): UsePortefoljeSelector {

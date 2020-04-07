@@ -1,4 +1,3 @@
-import { STATUS } from '../../../ducks/utils';
 import * as React from 'react';
 import {
     ArbeidslisteDataModell,
@@ -21,6 +20,7 @@ import { skjulModal } from '../../../ducks/modal';
 import { dateToISODate } from '../../../utils/dato-utils';
 import './arbeidsliste.less';
 import { logEvent } from '../../../utils/frontend-logger';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 interface OwnProps {
     valgteBrukere: BrukerModell[];
@@ -51,19 +51,17 @@ type LeggTilArbeidslisteFormProps = OwnProps & StateProps & DispatchProps;
 function LeggTilArbeidslisteForm({
                                      lukkModal,
                                      valgteBrukere,
-                                     innloggetVeileder,
-                                     arbeidslisteStatus,
                                      onSubmit,
                                      setFormIsDirty,
                                      fjernMarkerteBrukere
                                  }: LeggTilArbeidslisteFormProps) {
 
-    const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     const initialValues = valgteBrukere.map((bruker) => ({kommentar: '', frist: '', overskrift: '', kategori: 'BLA'}));
+
     return (
         <Formik
             initialValues={{arbeidsliste: initialValues}}
-            onSubmit={(values, actions) => {
+            onSubmit={(values) => {
                 values.arbeidsliste.map(value => logEvent('teamvoff.metrikker.arbeidslistekategori', {
                     kategori: value.kategori,
                     leggtil: true,
@@ -75,31 +73,31 @@ function LeggTilArbeidslisteForm({
             render={(formikProps) => {
                 setFormIsDirty(formikProps.dirty);
                 return (
-                    <div className="input-fields">
-                        <Form>
-                            <ArbeidslisteForm
-                                valgteBrukere={valgteBrukere}
-                                arbeidsliste={formikProps.values.arbeidsliste}
-                            />
-                            <div>
-                                <div className="modal-footer">
-                                    <Hovedknapp className="knapp knapp--hoved" spinner={laster}>
-                                        Lagre
-                                    </Hovedknapp>
-                                    <button type="button" className="knapp" onClick={() => {
-                                        formikProps.resetForm();
-                                        fjernMarkerteBrukere();
-                                        lukkModal();
-                                    }}>
-                                        Avbryt
-                                    </button>
-                                </div>
+                    <Form>
+                        <Normaltekst className="arbeidsliste__info-tekst">
+                            {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : 'brukere'} valgt.`}
+                        </Normaltekst>
+                        <ArbeidslisteForm
+                            valgteBrukere={valgteBrukere}
+                            arbeidsliste={formikProps.values.arbeidsliste}
+                        />
+                        <div>
+                            <div className="modal-footer">
+                                <Hovedknapp className="knapp knapp--hoved">
+                                    Lagre
+                                </Hovedknapp>
+                                <button type="button" className="knapp" onClick={() => {
+                                    formikProps.resetForm();
+                                    fjernMarkerteBrukere();
+                                    lukkModal();
+                                }}>
+                                    Avbryt
+                                </button>
                             </div>
-                        </Form>
-                    </div>
+                        </div>
+                    </Form>
                 );
-            }}
-        />
+            }}/>
     );
 }
 

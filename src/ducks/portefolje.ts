@@ -12,6 +12,7 @@ import {
 } from '../components/toolbar/paginering/paginering-selector';
 import { visTilordningOkModal } from './modal';
 import {AppState} from "../reducer";
+import {OrNothing} from "../utils/types/types";
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -43,8 +44,8 @@ export interface PortefoljeData {
 export interface PortefoljeState {
     status: string;
     data: PortefoljeData;
-    sorteringsrekkefolge: Sorteringsrekkefolge;
-    sorteringsfelt: Sorteringsfelt;
+    sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
+    sorteringsfelt: OrNothing<Sorteringsfelt>;
     feilendeTilordninger?: any[];
     tilordningerstatus: string;
 }
@@ -57,8 +58,8 @@ const initialState: PortefoljeState = {
         antallReturnert: 0,
         fraIndex: 0
     },
-    sorteringsrekkefolge: Sorteringsrekkefolge.ikke_satt,
-    sorteringsfelt: Sorteringsfelt.IKKE_SATT,
+    sorteringsrekkefolge: null,
+    sorteringsfelt: null,
     tilordningerstatus: STATUS.OK
 };
 
