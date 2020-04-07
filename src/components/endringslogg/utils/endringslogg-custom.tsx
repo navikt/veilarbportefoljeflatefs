@@ -5,7 +5,6 @@ import TourModalButton from '../../modal/tour-modal/tour-modal-button';
 import '../endringslogg.less';
 import '../collapse-container-transition.less';
 import { FeaturesState } from '../../../ducks/features';
-import { REGISTRERINGSFILTER } from '../../../konstanter';
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -23,7 +22,6 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        featureToggleName: REGISTRERINGSFILTER,
         dato: '06. APR. 2020',
         tittel: 'Filtrering på brukers situasjon fra registrering',
         versjonId: '06.04.20',
