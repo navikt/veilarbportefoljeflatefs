@@ -22,8 +22,6 @@ import DropdownNy from '../components/dropdown/dropdown-ny';
 import '../components/checkbox-filterform/checkbox-filterform.less';
 import FodselsdatoFilterform from '../components/checkbox-filterform/fodselsdato-filterform';
 import { ReactComponent as InfoIkon } from '../components/ikoner/info-ikon.svg';
-import { REGISTRERINGSFILTER } from '../konstanter';
-import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -82,29 +80,27 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Element className="blokk-xxs" tag="h3">
                     Situasjon
                 </Element>
-                {useFeatureSelector()(REGISTRERINGSFILTER) ?
-                    <DropdownNy
-                        name="Svar fra registrering"
-                        render={(lukkDropdown) =>
-                            <>
-                                <div className="registreringsfilter__infocontainer">
-                                    <InfoIkon className="registreringsfilter__infoikon"/>
-                                    <Normaltekst className="registreringsfilter__infotekst">
-                                        Situasjonen brukeren oppgir på registreringstidspunktet.
-                                    </Normaltekst>
-                                </div>
-                                <CheckboxFilterform
-                                    form="registreringstype"
-                                    valg={registreringstype}
-                                    filtervalg={filtervalg}
-                                    endreFilterValg={endreFiltervalg}
-                                    closeDropdown={lukkDropdown}
-                                    className="registreringstype"
-                                />
-                            </>
-                        }
-                    />
-                    : null}
+                <DropdownNy
+                    name="Svar fra registrering"
+                    render={(lukkDropdown) =>
+                        <>
+                            <div className="registreringsfilter__infocontainer">
+                                <InfoIkon className="registreringsfilter__infoikon"/>
+                                <Normaltekst className="registreringsfilter__infotekst">
+                                    Situasjonen brukeren oppgir på registreringstidspunktet.
+                                </Normaltekst>
+                            </div>
+                            <CheckboxFilterform
+                                form="registreringstype"
+                                valg={registreringstype}
+                                filtervalg={filtervalg}
+                                endreFilterValg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                                className="registreringstype"
+                            />
+                        </>
+                    }
+                />
                 <DropdownNy
                     name="Innsatsgruppe"
                     render={(lukkDropdown) =>
