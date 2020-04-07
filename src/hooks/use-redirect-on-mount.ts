@@ -15,23 +15,19 @@ export function useRedirectOnMount() {
     const parsed = queryString.parse(location.search);
 
     useOnMount(() => {
-        if (pathname.includes("/tilbake")) {
-            if(lastPath) {
-                history.replace({pathname: lastPath, search: lastSearch});
-                const sorteringsfelt  = queryString.parse(lastSearch).sorteringsfelt;
-                const sortDirection  = queryString.parse(lastSearch).sorteringsrekkefolge;
-                dispatch(settSortering(sortDirection, sorteringsfelt))
-            } else {
-                history.replace({pathname: "/enhet"});
-            }
-        }
-        else if (Object.keys(parsed).includes('clean')){
+        if (Object.keys(parsed).includes('clean')){
             delete parsed.clean;
             const stringified = queryString.stringify(parsed);
+            dispatch(settSortering('ikke_satt', 'ikke_satt'));
             history.replace(`${pathname}?${stringified}`);
+        } else if(lastPath) {
+            history.replace({pathname: lastPath, search: lastSearch});
+            const sorteringsfelt  = queryString.parse(lastSearch).sorteringsfelt;
+            const sortDirection  = queryString.parse(lastSearch).sorteringsrekkefolge;
+            dispatch(settSortering(sortDirection, sorteringsfelt))
         }
-        else if (location.pathname === "/") {
-            history.push("/enhet")
+        else {
+            history.push("/enhet");
             dispatch(settSortering('ikke_satt', 'ikke_satt'))
         }
     });

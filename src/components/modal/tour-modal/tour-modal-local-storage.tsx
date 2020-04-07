@@ -1,16 +1,12 @@
 import { default as React, useState } from 'react';
 import { default as TourModal, ModalName, } from './tour-modal';
-import {useFeatureSelector} from "../../../hooks/redux/use-feature-selector";
-import {PERM_UTEN_OPPFOLGINGSVEDTAK} from "../../../konstanter";
-
 interface TourModalLocalStorageProps {
     onTourComplete?: (e: string) => void;
 }
 
 export default function TourModalLocalStorage(props: TourModalLocalStorageProps) {
     const modalNavn = ModalName.PERMITTERTE;
-    const erFilterPa = useFeatureSelector()(PERM_UTEN_OPPFOLGINGSVEDTAK);
-    const [openModal, setApenModal] = useState(!hasStored(modalNavn) && erFilterPa);
+    const [openModal, setApenModal] = useState(!hasStored(modalNavn));
 
     const lagreIkkeVisModal = () => {
         window.localStorage.setItem(modalNavn, 'true');
