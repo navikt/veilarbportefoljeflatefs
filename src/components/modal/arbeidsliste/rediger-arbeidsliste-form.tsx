@@ -29,15 +29,6 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
         props.fjernModal();
     };
 
-    const lagre = () => {
-        logEvent('teamvoff.metrikker.arbeidslistekategori', {
-            kategori: props.bruker.arbeidsliste.kategori,
-            leggtil: false,
-            applikasjon: 'oversikt'
-        });
-        props.settMarkert(props.bruker.fnr, false);
-    };
-
     return (
         <Form>
             <div className="arbeidsliste__bruker">
@@ -60,7 +51,13 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <Hovedknapp
                     htmlType="submit"
                     className="knapp knapp--hoved"
-                    onClick={lagre}
+                    onClick={() => {
+                        logEvent('teamvoff.metrikker.arbeidslistekategori', {
+                            kategori: props.bruker.arbeidsliste.kategori,
+                            leggtil: false,
+                            applikasjon: 'oversikt'
+                        });
+                    }}
                 >
                     Lagre
                 </Hovedknapp>
