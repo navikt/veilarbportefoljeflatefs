@@ -101,6 +101,8 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     skalVises={arbeidslisteAktiv}
                     bruker={bruker}
                     innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
+                    markerBruker={() => !bruker.markert ? settMarkert(bruker.fnr, !bruker.markert) : null}
+                    avmarkerBruker={() => settMarkert(bruker.fnr, !bruker.markert)}
                 />
             </Collapse>
         </li>

@@ -21,6 +21,11 @@ interface RedigerArbeidslisteProps {
 }
 
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
+
+    const onClick = () => {
+        logEvent('portefolje.metrikker.fjern-arbeidsliste-modal');
+        props.fjernModal();
+    }
     return (
         <Form>
             <div className="arbeidsliste__bruker">
@@ -58,7 +63,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 </button>
                 <Flatknapp
                     htmlType="button"
-                    onClick={props.fjernModal}
+                    onClick={onClick}
                     className="fjern--knapp"
                 >
                     <SlettIcon/>

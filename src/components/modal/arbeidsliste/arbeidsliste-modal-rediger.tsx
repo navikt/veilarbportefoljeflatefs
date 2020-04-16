@@ -24,6 +24,8 @@ interface Ownprops {
     innloggetVeileder: OrNothing<string>;
     sistEndretDato: Date;
     sistEndretAv?: string;
+    markerBruker: () => void;
+    avmarkerBruker: () => void;
 }
 
 interface DispatchProps {
@@ -51,11 +53,10 @@ function ArbeidslisteModalRediger({
                                       sistEndretAv,
                                       sistEndretDato,
                                       onSubmit,
-                                      // markertBruker
+                                      markerBruker,
+                                      avmarkerBruker
                                   }: ArbeidslisteModalRedigerProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const [isMarkertBruker, setMarkertBruker] = useState<boolean>(false);
-
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
     const valgteBrukere = portefolje.brukere.filter((bruker) => bruker.markert === true);
     const dispatch = useDispatch();
@@ -64,13 +65,14 @@ function ArbeidslisteModalRediger({
     const lukkModalConfirm = (formikProps: FormikProps<FormikPropsValues>) => {
         const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
         if (!formikProps.dirty || window.confirm(dialogTekst)) {
+            avmarkerBruker();
             setIsOpen(false);
             formikProps.resetForm();
         }
     };
 
     const lukkModal = (formikProps: FormikProps<FormikPropsValues>) => {
-        setMarkertBruker(false);
+        avmarkerBruker();
         setIsOpen(false);
         formikProps.resetForm();
     };
@@ -87,13 +89,13 @@ function ArbeidslisteModalRediger({
 
     const klikkRedigerknapp = () => {
         logEvent('portefolje.metrikker.arbeidsliste.rediger');
-        setMarkertBruker(true);
+        markerBruker();
         setIsOpen(true);
     };
 
-    const lukkFjernModal = (formikProps: FormikProps<FormikPropsValues>) => {
+    const lukkFjernModal = () => {
+        avmarkerBruker();
         dispatch(skjulModal());
-        lukkModal(formikProps);
     };
 
     return (
@@ -135,13 +137,12 @@ function ArbeidslisteModalRediger({
                                     bruker={bruker}
                                     isOpen={modalSkalVises}
                                     valgteBrukere={valgteBrukere}
-                                    lukkModal={() => lukkFjernModal(formikProps)}
+                                    lukkModal={() => lukkFjernModal()}
                                 />}
                             </div>
                         </NavFrontendModal>)}
                 />}
         </>
-
     );
 }
 

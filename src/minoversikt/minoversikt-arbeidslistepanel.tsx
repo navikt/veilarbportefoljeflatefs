@@ -4,20 +4,16 @@ import { UndertekstBold } from 'nav-frontend-typografi';
 import { BrukerModell } from '../model-interfaces';
 import { OrNothing } from '../utils/types/types';
 import './minoversikt.less';
-import { useSelector } from 'react-redux';
-import { AppState } from '../reducer';
-import { VIS_FJERN_ARBEIDSLISTE_MODAL } from '../ducks/modal';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
     innloggetVeileder: OrNothing<string>;
     skalVises: boolean;
+    markerBruker: () => void;
+    avmarkerBruker: () => void;
 }
 
-export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises}: ArbeidslistePanelProps) {
-    const modalVises = useSelector((state: AppState) => state.modal.modal) === VIS_FJERN_ARBEIDSLISTE_MODAL;
-    console.log(modalVises);
-
+export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises, markerBruker, avmarkerBruker}: ArbeidslistePanelProps) {
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
     const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
     const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : String.fromCharCode(8212);
@@ -38,6 +34,8 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises}
                             innloggetVeileder={innloggetVeileder}
                             sistEndretDato={sistEndretDato}
                             sistEndretAv={sistEndretAv}
+                            markerBruker={markerBruker}
+                            avmarkerBruker={avmarkerBruker}
                         />
                     </p>
                 </span>
