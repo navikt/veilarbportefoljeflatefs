@@ -29,15 +29,12 @@ interface MinOversiktBrukerPanelProps {
     varForrigeBruker?: boolean;
 }
 
-
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const [apen, setOpen] = useState<boolean>(false);
-
     const erVedtakStotteFeaturePa = useFeatureSelector()(VEDTAKSTOTTE);
-
     const scrollToLastPos = () => {
-        const xPos = parseInt(localStorage.getItem("xPos") || '0');
-        const yPos = parseInt(localStorage.getItem("yPos") || '0');
+        const xPos = parseInt(localStorage.getItem('xPos') || '0');
+        const yPos = parseInt(localStorage.getItem('yPos') || '0');
         window.scrollTo(xPos, yPos);
     };
 
@@ -101,6 +98,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
             </div>
             <Collapse isOpened={apen}>
                 <ArbeidslistePanel
+                    skalVises={arbeidslisteAktiv}
                     bruker={bruker}
                     innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
                 />

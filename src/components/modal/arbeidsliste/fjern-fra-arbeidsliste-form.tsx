@@ -27,9 +27,10 @@ interface FjernFraArbeidslisteFormProps {
     valgteBrukere: BrukerModell[];
     onSubmit: (valgteBrukere: BrukerModell[], props) => void;
     slettFraArbeidslisteStatus?: Status;
+    visBrukerLabel?: boolean;
 }
 
-function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus}: FjernFraArbeidslisteFormProps) {
+function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus, visBrukerLabel = true}: FjernFraArbeidslisteFormProps) {
     const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
     const className = valgteBrukere.length >= 22 ? 'arbeidsliste-listetekst__lang' : 'arbeidsliste-listetekst';
 
@@ -40,9 +41,11 @@ function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraA
             onSubmit(valgteBrukere, lukkModal);
         }}>
             <div className={className}>
+                {visBrukerLabel &&
                 <ul>
                     {valgteBrukere.map((bruker) => brukerLabel(bruker))}
                 </ul>
+                }
             </div>
             <div className="knapper">
                 <Hovedknapp className="knapp knapp--hoved mr1" spinner={laster} htmlType="submit">

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Form, } from 'formik';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import FormikTekstArea from '../../formik/formik-tekstarea';
 import FormikInput from '../../formik/formik-input';
 import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
@@ -9,6 +9,7 @@ import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import { BrukerModell } from '../../../model-interfaces';
 import { logEvent } from '../../../utils/frontend-logger';
+import { ReactComponent as SlettIcon } from '../../ikoner/slett.svg';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -16,6 +17,7 @@ interface RedigerArbeidslisteProps {
     laster: boolean;
     lukkModal: () => void;
     bruker: BrukerModell;
+    fjernModal?: any;
 }
 
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
@@ -51,9 +53,17 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 >
                     Lagre
                 </Hovedknapp>
-                <button type="button" className="knapp" onClick={props.lukkModal}>
+                <button type="button" className="knapp knapp--avbryt" onClick={props.lukkModal}>
                     Avbryt
                 </button>
+                <Flatknapp
+                    htmlType="button"
+                    onClick={props.fjernModal}
+                    className="fjern--knapp"
+                >
+                    <SlettIcon/>
+                    <span>Fjern</span>
+                </Flatknapp>
             </div>
         </Form>
     );
