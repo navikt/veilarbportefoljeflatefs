@@ -18,14 +18,26 @@ interface RedigerArbeidslisteProps {
     lukkModal: () => void;
     bruker: BrukerModell;
     fjernModal?: any;
+    settMarkert: (fnr: string, markert: boolean) => void;
 }
 
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
 
-    const onClick = () => {
+    const fjernBruker = () => {
         logEvent('portefolje.metrikker.fjern-arbeidsliste-modal');
+        props.settMarkert(props.bruker.fnr, true);
         props.fjernModal();
-    }
+    };
+
+    const lagre = () => {
+        logEvent('teamvoff.metrikker.arbeidslistekategori', {
+            kategori: props.bruker.arbeidsliste.kategori,
+            leggtil: false,
+            applikasjon: 'oversikt'
+        });
+        props.settMarkert(props.bruker.fnr, false);
+    };
+
     return (
         <Form>
             <div className="arbeidsliste__bruker">
@@ -48,13 +60,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <Hovedknapp
                     htmlType="submit"
                     className="knapp knapp--hoved"
-                    onClick={() => {
-                        logEvent('teamvoff.metrikker.arbeidslistekategori', {
-                            kategori: props.bruker.arbeidsliste.kategori,
-                            leggtil: false,
-                            applikasjon: 'oversikt'
-                        });
-                    }}
+                    onClick={lagre}
                 >
                     Lagre
                 </Hovedknapp>
@@ -63,7 +69,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 </button>
                 <Flatknapp
                     htmlType="button"
-                    onClick={onClick}
+                    onClick={fjernBruker}
                     className="fjern--knapp"
                 >
                     <SlettIcon/>

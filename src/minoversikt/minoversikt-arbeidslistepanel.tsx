@@ -9,11 +9,10 @@ interface ArbeidslistePanelProps {
     bruker: BrukerModell;
     innloggetVeileder: OrNothing<string>;
     skalVises: boolean;
-    markerBruker: () => void;
-    avmarkerBruker: () => void;
+    settMarkert: (fnr: string, markert: boolean) => void;
 }
 
-export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises, markerBruker, avmarkerBruker}: ArbeidslistePanelProps) {
+export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises, settMarkert}: ArbeidslistePanelProps) {
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
     const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
     const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : String.fromCharCode(8212);
@@ -34,8 +33,7 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises,
                             innloggetVeileder={innloggetVeileder}
                             sistEndretDato={sistEndretDato}
                             sistEndretAv={sistEndretAv}
-                            markerBruker={markerBruker}
-                            avmarkerBruker={avmarkerBruker}
+                            settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
                         />
                     </p>
                 </span>

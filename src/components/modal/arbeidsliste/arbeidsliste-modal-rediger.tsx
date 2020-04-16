@@ -24,14 +24,12 @@ interface Ownprops {
     innloggetVeileder: OrNothing<string>;
     sistEndretDato: Date;
     sistEndretAv?: string;
-    markerBruker: () => void;
-    avmarkerBruker: () => void;
+    settMarkert: (fnr: string, markert: boolean) => void;
 }
 
 interface DispatchProps {
     onSubmit: (formdata: any) => void;
     skjulArbeidslisteModal: () => void;
-    fjernMarkerteBrukere: () => void;
 }
 
 interface StateProps {
@@ -53,8 +51,7 @@ function ArbeidslisteModalRediger({
                                       sistEndretAv,
                                       sistEndretDato,
                                       onSubmit,
-                                      markerBruker,
-                                      avmarkerBruker
+                                      settMarkert
                                   }: ArbeidslisteModalRedigerProps) {
     const [isOpen, setIsOpen] = useState(false);
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
@@ -65,14 +62,14 @@ function ArbeidslisteModalRediger({
     const lukkModalConfirm = (formikProps: FormikProps<FormikPropsValues>) => {
         const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
         if (!formikProps.dirty || window.confirm(dialogTekst)) {
-            avmarkerBruker();
+            // settMarkert(bruker.fnr, true);
             setIsOpen(false);
             formikProps.resetForm();
         }
     };
 
     const lukkModal = (formikProps: FormikProps<FormikPropsValues>) => {
-        avmarkerBruker();
+        // settMarkert(bruker.fnr, true);
         setIsOpen(false);
         formikProps.resetForm();
     };
@@ -89,12 +86,12 @@ function ArbeidslisteModalRediger({
 
     const klikkRedigerknapp = () => {
         logEvent('portefolje.metrikker.arbeidsliste.rediger');
-        markerBruker();
+        dispatch(markerAlleBrukere(false));
         setIsOpen(true);
     };
 
     const lukkFjernModal = () => {
-        avmarkerBruker();
+        settMarkert(bruker.fnr, true);
         dispatch(skjulModal());
     };
 
@@ -131,6 +128,7 @@ function ArbeidslisteModalRediger({
                                     lukkModal={() => lukkModal(formikProps)}
                                     bruker={bruker}
                                     fjernModal={() => dispatch(visFjernArbeidslisteModal())}
+                                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
                                 />
                                 {modalSkalVises &&
                                 <FjernArbeidslisteModal
@@ -169,8 +167,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch, props) => ({
     onSubmit: (formData) => dispatch(redigerArbeidsliste(formData, props)),
     skjulArbeidslisteModal: () => dispatch(skjulModal()),
-    fjernMarkerteBrukere: () => dispatch(markerAlleBrukere(false))
-
 });
 
 export default connect<StateProps, DispatchProps, Ownprops>(mapStateToProps, mapDispatchToProps)(ArbeidslisteModalRediger);
