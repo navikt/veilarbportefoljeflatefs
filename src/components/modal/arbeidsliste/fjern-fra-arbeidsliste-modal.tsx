@@ -12,7 +12,6 @@ interface FjernFraArbeidslisteModalProps {
 }
 
 class FjernArbeidslisteModal extends Component<FjernFraArbeidslisteModalProps> {
-
     fjernFraModal(valgteBrukere) {
         const {isOpen, lukkModal, bruker} = this.props;
         const brukereSomSkalFjernes = valgteBrukere.filter((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);

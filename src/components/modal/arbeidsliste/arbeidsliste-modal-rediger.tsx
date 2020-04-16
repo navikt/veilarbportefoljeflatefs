@@ -29,7 +29,6 @@ interface Ownprops {
 
 interface DispatchProps {
     onSubmit: (formdata: any) => void;
-    skjulArbeidslisteModal: () => void;
 }
 
 interface StateProps {
@@ -164,7 +163,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
     onSubmit: (formData) => dispatch(redigerArbeidsliste(formData, props)),
-    skjulArbeidslisteModal: () => dispatch(skjulModal()),
 });
 
 export default connect<StateProps, DispatchProps, Ownprops>(mapStateToProps, mapDispatchToProps)(ArbeidslisteModalRediger);

@@ -30,7 +30,7 @@ interface FjernFraArbeidslisteFormProps {
     visBrukerLabel?: boolean;
 }
 
-function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus, visBrukerLabel = true}: FjernFraArbeidslisteFormProps) {
+function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus, visBrukerLabel }: FjernFraArbeidslisteFormProps) {
     const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
     const className = valgteBrukere.length >= 22 ? 'arbeidsliste-listetekst__lang' : 'arbeidsliste-listetekst';
 
