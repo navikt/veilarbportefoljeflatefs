@@ -27,7 +27,7 @@ export default function reducer(state = initalState, action) {
 }
 
 // Action Creators
-export function visModal() {
+export function visArbeidslisteModal() {
     return {
         type: VIS_ARBEIDSLISTE_MODAL
     };
