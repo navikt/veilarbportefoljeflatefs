@@ -2,6 +2,7 @@
 export const SKJUL_MODAL = 'modal/skjul';
 export const VIS_ARBEIDSLISTE_MODAL = 'LEGG_I_ARBEIDSLISTE/vis';
 export const VIS_TILDELING_SUKSESS_MODAL = 'VEILEDER_TILORDNET/vis';
+export const VIS_FJERN_ARBEIDSLISTE_MODAL = 'FJERN_ARBEIDSLISTE/vis';
 
 const initalState = {
     modal: undefined,
@@ -15,6 +16,7 @@ export default function reducer(state = initalState, action) {
             return initalState;
         case VIS_ARBEIDSLISTE_MODAL:
         case VIS_TILDELING_SUKSESS_MODAL:
+        case VIS_FJERN_ARBEIDSLISTE_MODAL:
             return {modal: action.type, brukere: action.data || []};
         default:
             return state;
@@ -28,7 +30,12 @@ export function visModal() {
     };
 }
 
-// Action Creators
+export function visFjernArbeidslisteModal() {
+    return {
+        type: VIS_FJERN_ARBEIDSLISTE_MODAL
+    };
+}
+
 export function visTilordningOkModal(data) {
     return {
         type: VIS_TILDELING_SUKSESS_MODAL,
