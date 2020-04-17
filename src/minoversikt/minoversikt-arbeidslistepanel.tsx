@@ -2,21 +2,23 @@ import * as React from 'react';
 import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
 import { UndertekstBold } from 'nav-frontend-typografi';
 import { BrukerModell } from '../model-interfaces';
-import {OrNothing} from "../utils/types/types";
+import { OrNothing } from '../utils/types/types';
 import './minoversikt.less';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
     innloggetVeileder: OrNothing<string>;
+    skalVises: boolean;
+    settMarkert: (fnr: string, markert: boolean) => void;
 }
 
-export default function ArbeidslistePanel({bruker, innloggetVeileder}: ArbeidslistePanelProps) {
-
+export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises, settMarkert}: ArbeidslistePanelProps) {
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
     const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
     const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : String.fromCharCode(8212);
     return (
-        <article className="brukerliste__arbeidslistepanel">
+        skalVises ?
+            <article className="brukerliste__arbeidslistepanel">
             <span className="flex">
                 <span className="brukerliste__gutter-left brukerliste--min-width-minside"/>
                 <span className="brukerliste__arbeidslisteinnhold flex--grow">
@@ -31,10 +33,12 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder}: Arbeidsli
                             innloggetVeileder={innloggetVeileder}
                             sistEndretDato={sistEndretDato}
                             sistEndretAv={sistEndretAv}
+                            settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
                         />
                     </p>
                 </span>
             </span>
-        </article>
+            </article>
+            : <></>
     );
 }
