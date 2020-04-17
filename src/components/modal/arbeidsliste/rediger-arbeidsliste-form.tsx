@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Form, } from 'formik';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import FormikTekstArea from '../../formik/formik-tekstarea';
 import FormikInput from '../../formik/formik-input';
 import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
@@ -9,6 +9,7 @@ import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import { BrukerModell } from '../../../model-interfaces';
 import { logEvent } from '../../../utils/frontend-logger';
+import { ReactComponent as SlettIcon } from '../../ikoner/slett.svg';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -16,24 +17,25 @@ interface RedigerArbeidslisteProps {
     laster: boolean;
     lukkModal: () => void;
     bruker: BrukerModell;
+    fjernModal?: any;
+    settMarkert: (fnr: string, markert: boolean) => void;
 }
 
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
-    function label(bruker: BrukerModell): React.ReactNode {
-        return (
-            <Undertittel>
-                {`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}
-            </Undertittel>
-        );
-    }
+
+    const fjernBruker = () => {
+        logEvent('portefolje.metrikker.fjern-arbeidsliste-modal');
+        props.settMarkert(props.bruker.fnr, true);
+        props.fjernModal();
+    };
 
     return (
         <Form>
-            <div className="input-fields">
+            <div className="arbeidsliste__bruker">
                 <div className="nav-input blokk-s">
-                    <legend>
-                        {label(props.bruker)}
-                    </legend>
+                    <Undertittel>
+                        {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
+                    </Undertittel>
                     <FormikInput name="overskrift"/>
                     <FormikTekstArea name="kommentar"/>
                     <Undertekst className="arbeidsliste--modal-redigering">
@@ -44,25 +46,32 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     <FormikDatoVelger name="frist"/>
                     <ArbeidslisteKategori name="kategori" index=""/>
                 </div>
-                <div className="modal-footer">
-                    <Hovedknapp
-                        htmlType="submit"
-                        className="knapp knapp--hoved"
-                        spinner={props.laster}
-                        onClick={() => {
-                            logEvent('teamvoff.metrikker.arbeidslistekategori', {
-                                kategori: props.bruker.arbeidsliste.kategori,
-                                leggtil: false,
-                                applikasjon: 'oversikt'
-                            });
-                        }}
-                    >
-                        Lagre
-                    </Hovedknapp>
-                    <button type="button" className="knapp" onClick={props.lukkModal}>
-                        Avbryt
-                    </button>
-                </div>
+            </div>
+            <div className="modal-footer">
+                <Hovedknapp
+                    htmlType="submit"
+                    className="knapp knapp--hoved"
+                    onClick={() => {
+                        logEvent('teamvoff.metrikker.arbeidslistekategori', {
+                            kategori: props.bruker.arbeidsliste.kategori,
+                            leggtil: false,
+                            applikasjon: 'oversikt'
+                        });
+                    }}
+                >
+                    Lagre
+                </Hovedknapp>
+                <button type="button" className="knapp knapp--avbryt" onClick={props.lukkModal}>
+                    Avbryt
+                </button>
+                <Flatknapp
+                    htmlType="button"
+                    onClick={fjernBruker}
+                    className="fjern--knapp"
+                >
+                    <SlettIcon/>
+                    <span>Fjern</span>
+                </Flatknapp>
             </div>
         </Form>
     );

@@ -1,25 +1,30 @@
 import * as React from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
-import { Innholdstittel } from 'nav-frontend-typografi';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
 import { BrukerModell, KategoriModell, Status } from '../../../model-interfaces';
 import { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { Formik, FormikProps } from 'formik';
 import { STATUS } from '../../../ducks/utils';
 import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
-import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
+import { markerAlleBrukere, oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
 import { redigerArbeidsliste } from '../../../ducks/arbeidsliste';
 import moment from 'moment';
 import { OrNothing } from '../../../utils/types/types';
 import './arbeidsliste.less';
 import { logEvent } from '../../../utils/frontend-logger';
+import { LasterModal } from '../lastermodal/laster-modal';
+import ModalHeader from '../modal-header/modal-header';
+import { skjulModal, VIS_FJERN_ARBEIDSLISTE_MODAL, visFjernArbeidslisteModal } from '../../../ducks/modal';
+import { AppState } from '../../../reducer';
+import FjernArbeidslisteModal from './fjern-fra-arbeidsliste-modal';
 
 interface Ownprops {
     bruker: BrukerModell;
     innloggetVeileder: OrNothing<string>;
     sistEndretDato: Date;
     sistEndretAv?: string;
+    settMarkert: (fnr: string, markert: boolean) => void;
 }
 
 interface DispatchProps {
@@ -44,9 +49,14 @@ function ArbeidslisteModalRediger({
                                       arbeidslisteStatus,
                                       sistEndretAv,
                                       sistEndretDato,
-                                      onSubmit
+                                      onSubmit,
+                                      settMarkert
                                   }: ArbeidslisteModalRedigerProps) {
     const [isOpen, setIsOpen] = useState(false);
+    const portefolje = useSelector((state: AppState) => state.portefolje.data);
+    const valgteBrukere = portefolje.brukere.filter((bruker) => bruker.markert === true);
+    const dispatch = useDispatch();
+    const modalSkalVises = useSelector((state: AppState) => state.modal.modal) === VIS_FJERN_ARBEIDSLISTE_MODAL;
 
     const lukkModalConfirm = (formikProps: FormikProps<FormikPropsValues>) => {
         const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
@@ -73,7 +83,13 @@ function ArbeidslisteModalRediger({
 
     const klikkRedigerknapp = () => {
         logEvent('portefolje.metrikker.arbeidsliste.rediger');
+        dispatch(markerAlleBrukere(false));
         setIsOpen(true);
+    };
+
+    const lukkFjernModal = () => {
+        settMarkert(bruker.fnr, true);
+        dispatch(skjulModal());
     };
 
     return (
@@ -84,42 +100,44 @@ function ArbeidslisteModalRediger({
             >
                 Rediger
             </button>
-
-            <Formik
-                initialValues={initialValues}
-                onSubmit={(values) => {
-                    setIsOpen(false);
-                    onSubmit(values);
-                }}
-                render={(formikProps) => (
-                    <NavFrontendModal
-                        className="arbeidsliste-modal"
-                        contentLabel="arbeidsliste"
-                        isOpen={isOpen}
-                        onRequestClose={() => lukkModalConfirm(formikProps)}
-                        closeButton
-                    >
-                        <div className="modal-header-wrapper">
-                            <header className="modal-header"/>
-                        </div>
-                        <div className="arbeidsliste__modal">
-                            <div className="arbeidsliste__info-tekst">
-                                <Innholdstittel tag="h1" className="blokk-xs">
-                                    Rediger
-                                </Innholdstittel>
+            {laster
+                ? <LasterModal/>
+                : <Formik
+                    initialValues={initialValues}
+                    onSubmit={(values) => {
+                        setIsOpen(false);
+                        onSubmit(values);
+                    }}
+                    render={(formikProps) => (
+                        <NavFrontendModal
+                            className="arbeidsliste-modal"
+                            contentLabel="arbeidsliste"
+                            isOpen={isOpen}
+                            onRequestClose={() => lukkModalConfirm(formikProps)}
+                            closeButton
+                        >
+                            <ModalHeader tittel='Rediger arbeidsliste'/>
+                            <div className="modal-innhold">
+                                <RedigerArbeidslisteForm
+                                    laster={laster}
+                                    sistEndretDato={sistEndretDato}
+                                    sistEndretAv={sistEndretAv}
+                                    lukkModal={() => lukkModal(formikProps)}
+                                    bruker={bruker}
+                                    fjernModal={() => dispatch(visFjernArbeidslisteModal())}
+                                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                                />
+                                {modalSkalVises &&
+                                <FjernArbeidslisteModal
+                                    bruker={bruker}
+                                    isOpen={modalSkalVises}
+                                    valgteBrukere={valgteBrukere}
+                                    lukkModal={() => lukkFjernModal()}
+                                />}
                             </div>
-                            <RedigerArbeidslisteForm
-                                laster={laster}
-                                sistEndretDato={sistEndretDato}
-                                sistEndretAv={sistEndretAv}
-                                lukkModal={() => lukkModal(formikProps)}
-                                bruker={bruker}
-                            />
-                        </div>
-                    </NavFrontendModal>)}
-            />
+                        </NavFrontendModal>)}
+                />}
         </>
-
     );
 }
 
@@ -144,7 +162,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-    onSubmit: (formData) => dispatch(redigerArbeidsliste(formData, props))
+    onSubmit: (formData) => dispatch(redigerArbeidsliste(formData, props)),
 });
 
 export default connect<StateProps, DispatchProps, Ownprops>(mapStateToProps, mapDispatchToProps)(ArbeidslisteModalRediger);
