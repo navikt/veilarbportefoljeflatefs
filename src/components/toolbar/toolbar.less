@@ -46,6 +46,39 @@
             display: flex;
             flex-direction: row;
         }
+
+        .sok-veileder-container {
+            min-width: 210px;
+
+            .sokfilter .skjemaelement {
+                margin-bottom: 0;
+            }
+
+            .checkbox-filterform {
+                position: absolute;
+                z-index: 2000;
+                background-color: @white;
+                border: 1px solid @navGra40;
+                border-top: none;
+                min-width: 210px;
+                border-radius: 4px;
+
+                &__valg {
+                    margin: 0;
+                    border-bottom: 1px solid @navGra40;
+
+                    .skjemaelement {
+                        margin-bottom: .5rem;
+                    }
+                }
+
+                .alertstripe {
+                    padding: 1rem .7rem;
+                    z-index: 2000;
+                    position: absolute;
+                }
+            }
+        }
     }
 
     .velgalle-checkboks {

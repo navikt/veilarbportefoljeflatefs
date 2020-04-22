@@ -2,34 +2,30 @@ import * as React from 'react';
 import './toolbar.less';
 import { ReactComponent as SokVeilederIkon } from '../ikoner/person-view-1.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
-import SokVeilederInput from './sok-veileder-input';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import SokVeileder from './sok-veileder';
 
 interface SokVeilederProps {
-    // onClickHandler: () => void;
     skalVises?: boolean;
     filtergruppe?: string;
-    veileder: any;
-    apen?: boolean;
-
 }
 
 function SokVeilederKnapp(props: SokVeilederProps) {
-    const [apen, setApen] = useState(props.apen || false);
-    const dispatch = useDispatch();
+    const [inputApen, setApen] = useState(false);
     if (!props.skalVises) {
         return null;
     }
 
-    function toggleInput() {
-        if (!apen) {
-            setApen(apen);
-            dispatch(<SokVeilederInput/>);
-        }
-        setApen(!apen);
-
-        console.log('åpen?', apen);
+    if (inputApen) {
+        return (
+            <div className="sok-veileder-container">
+                <SokVeileder
+                    veileder={{}}
+                    onClick={() => setApen(!inputApen)}
+                    skalVises={inputApen}
+                />
+            </div>
+        );
     }
 
     return (
@@ -37,15 +33,12 @@ function SokVeilederKnapp(props: SokVeilederProps) {
             <button
                 type="button"
                 className='toolbar_btn'
-                // onClick={props.onClickHandler}
-                // onClick={() => dispatch(<SokVeilederInput/>)}
-                onClick={toggleInput}
+                onClick={() => setApen(!inputApen)}
             >
                 <SokVeilederIkon className="toolbar-knapp__ikon" id="sok-veileder-ikon"/>
                 <Normaltekst className="toolbar-knapp__tekst">Søk veileder</Normaltekst>
             </button>
-        </div>
-    );
+        </div>);
 }
 
 export default SokVeilederKnapp;

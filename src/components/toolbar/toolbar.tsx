@@ -39,7 +39,6 @@ function Toolbar(props: ToolbarProps) {
                 <SokVeilederKnapp
                     skalVises={props.sokVeilederSkalVises}
                     filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe}
-                    veileder={{}}
                 />
             </div>
             <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
