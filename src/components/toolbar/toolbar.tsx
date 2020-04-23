@@ -36,9 +36,9 @@ function Toolbar(props: ToolbarProps) {
                 <LeggTilArbeidsliste
                     visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false}
                 />
-                <SokVeilederKnapp
+                <
+                    SokVeilederKnapp
                     skalVises={props.sokVeilederSkalVises}
-                    filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe}
                 />
             </div>
             <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
