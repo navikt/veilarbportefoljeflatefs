@@ -34,7 +34,6 @@ function TildelVeileder({filtergruppe, gjeldendeVeileder, btnOnClick, filtervalg
     const onSubmit = () => {
         btnOnClick();
         if (ident) {
-            console.log('hit');
             const tilordninger = valgteBrukere
                 .map((bruker) => ({
                     fraVeilederId: bruker.veilederId,
