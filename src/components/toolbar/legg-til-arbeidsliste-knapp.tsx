@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import { VIS_ARBEIDSLISTE_MODAL, visModal } from '../../ducks/modal';
+import { VIS_ARBEIDSLISTE_MODAL, visArbeidslisteModal } from '../../ducks/modal';
 import './toolbar.less';
 import { useLocation, useParams } from 'react-router';
 import { BrukerModell } from '../../model-interfaces';
 import { AppState } from '../../reducer';
 import { useIdentSelector } from '../../hooks/redux/use-inlogget-ident';
-import { ReactComponent as ArbeidslisteIkonLinje } from './arbeidslisteikon-linje.svg';
+import { ReactComponent as ArbeidslisteIkonLinje } from '../ikoner/arbeidslisteikon-linje.svg';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
@@ -36,10 +37,10 @@ function LeggTilArbeidsliste(props: LeggTilArbeidslisteProps) {
     }
 
     return (
-        <div className="toolbar_btnwrapper dropdown--toolbar">
+        <div className="toolbar_btnwrapper">
             <ArbeidsListeKnapp
                 valgteBrukere={valgteBrukere}
-                onClickHandler={() => dispatch(visModal())}
+                onClickHandler={() => dispatch(visArbeidslisteModal())}
                 visesAnnenVeiledersPortefolje={props.visesAnnenVeiledersPortefolje}
             />
             {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere}/>}
@@ -54,12 +55,12 @@ function ArbeidsListeKnapp(props: { valgteBrukere: BrukerModell[], onClickHandle
     const arbeidslisteButton = (tekst) => (
         <button
             type="button"
-            className="toolbar_btn"
+            className='toolbar_btn'
             disabled={props.valgteBrukere.length < 1 || props.visesAnnenVeiledersPortefolje || inneholderBrukerMedOgUtenArbeidsliste}
             onClick={props.onClickHandler}
         >
-            {tekst}
-            <ArbeidslisteIkonLinje className="toolbar__arbeidsliste-ikon"/>
+            <ArbeidslisteIkonLinje className="toolbar-knapp__ikon" id="arbeidsliste-ikon"/>
+            <Normaltekst className="toolbar-knapp__tekst">{tekst}</Normaltekst>
         </button>
     );
 

@@ -1,11 +1,14 @@
 import * as React from 'react';
-import TildelVeileder from './tildel-veileder';
-import LeggTilArbeidsliste from './legg-til-arbeidsliste';
-import SokVeileder from './sok-veileder';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
 import { ListevisningType } from '../../ducks/ui/listevisning';
 import './toolbar.less';
+import { useSelector } from 'react-redux';
+import LeggTilArbeidsliste from './legg-til-arbeidsliste-knapp';
+import { AppState } from '../../reducer';
+import ToolbarKnapp from './toolbar-knapp';
+import { ReactComponent as TildelVeilederIkon } from '../ikoner/person-add-1.svg';
+import { ReactComponent as SokVeilederIkon } from '../ikoner/person-view-1.svg';
 
 interface ToolbarProps {
     filtergruppe: ListevisningType;
@@ -18,24 +21,36 @@ interface ToolbarProps {
     id?: string;
 }
 
-function Toolbar (props: ToolbarProps) {
-    const{id, filtergruppe, gjeldendeVeileder, visesAnnenVeiledersPortefolje, sokVeilederSkalVises, antallTotalt, onPaginering} = props;
+function Toolbar(props: ToolbarProps) {
+    const {id, filtergruppe, visesAnnenVeiledersPortefolje, antallTotalt, onPaginering} = props;
+    const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
+    const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
+    const aktiv = valgteBrukere.length > 0;
+
     return (
         <section className="toolbar blokk-xs" id={id}>
             <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
-                <TildelVeileder
-                    skalVises={filtergruppe in ListevisningType}
-                    filtergruppe={filtergruppe}
-                    gjeldendeVeileder={gjeldendeVeileder}
-                />
+                <div className="tildel-veileder-wrapper">
+                    <ToolbarKnapp
+                        skalVises={filtergruppe in ListevisningType}
+                        aktiv={aktiv}
+                        tildelveileder={true}
+                        ikon={<TildelVeilederIkon className="toolbar-knapp__ikon" id="tildel-veileder-ikon"/>}
+                        tittel="Tildel veileder"
+                    />
+                </div>
                 <LeggTilArbeidsliste
                     visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false}
                 />
-                <SokVeileder
-                    veileder={{}}
-                    filtergruppe={filtergruppe === ListevisningType.enhetensOversikt ? 'enhet' : filtergruppe}
-                    skalVises={sokVeilederSkalVises}
-                />
+                <div className="sok-veileder-wrapper">
+                    <ToolbarKnapp
+                        skalVises={props.sokVeilederSkalVises}
+                        aktiv={true}
+                        tildelveileder={false}
+                        ikon={<SokVeilederIkon className="toolbar-knapp__ikon" id="sok-veileder-ikon"/>}
+                        tittel="Søk veileder"
+                    />
+                </div>
             </div>
             <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
                 <Listevisning filtergruppe={filtergruppe}/>

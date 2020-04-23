@@ -180,7 +180,6 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <DropdownNy
                     name="Ytelse"
-                    className="dropdown--140bredde-responsive"
                     render={(lukkDropdown) =>
                         <RadioFilterformNy
                             valg={ytelse}
@@ -197,7 +196,7 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     overskriftTekst="Aktivitet"
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
                 />
-                <Dropdown name="Aktivitet" className="dropdown--140bredde-responsive">
+                <Dropdown name="Aktivitet">
                     <AktivitetFilterform
                         valg={aktiviteter}
                         filtervalg={filtervalg}

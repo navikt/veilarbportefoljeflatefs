@@ -1,6 +1,8 @@
 @import "./listevisning/listevisning";
 @import "../dropdown/dropdown.less";
 
+@bakgrunnsGra: #F4F4F4;
+
 .veilarbportefoljeflatefs {
     .visuallyhidden {
         position: absolute;
@@ -11,12 +13,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 1rem 0.5rem;
         border-bottom: none;
         border-radius: @border-radius-base @border-radius-base 0 0;
-        background-color: @white;
-        margin-bottom: 0;
+        background-color: @bakgrunnsGra;
         z-index: 1000;
+        margin-bottom: .5rem;
+        padding-left: .5rem;
 
         .nav-frontend-chevron span {
             .sr-only();
@@ -25,22 +27,64 @@
         .toggle__label {
             min-width: 3rem;
         }
-    }
 
-    .toolbar__element {
-        display: flex;
-        flex-direction: row;
-    }
+        #tildel-veileder-ikon {
+            margin-right: .3rem;
+        }
 
-    .toolbar__venstre {
-        margin-right: 0.5rem;
-    }
 
-    .toolbar__midten {
-    }
+        &-knapp__ikon {
+            min-width: 1.5rem;
+            min-height: 1.5rem;
+        }
 
-    .toolbar__hoyre {
-        margin-left: 0.5rem;
+        &-knapp__tekst {
+            padding-right: .5rem;
+        }
+
+        &__element {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .sok-veileder-wrapper, .tildel-veileder-wrapper {
+            width: 190px;
+            margin-right: .5rem;
+
+            .toolbarknapp-input {
+                .sokfilter .skjemaelement {
+                    margin-bottom: 0;
+                }
+
+                .checkbox-filterform, .radio-filterform {
+                    position: absolute;
+                    z-index: 2000;
+                    background-color: @white;
+                    border: 1px solid @navGra40;
+                    border-top: none;
+                    border-radius: 0 0 4px 4px;
+                    width: 190px;
+                    margin-right: .5rem;
+
+                    &__valg {
+                        margin: 0;
+                        border-bottom: 1px solid @navGra40;
+                        overflow-x: auto;
+                        max-height: 15.5rem;
+
+                        .skjemaelement {
+                            margin-bottom: .5rem;
+                        }
+                    }
+                }
+
+                .alertstripe {
+                    padding: 1rem .7rem;
+                    z-index: 2000;
+                    position: absolute;
+                }
+            }
+        }
     }
 
     .velgalle-checkboks {
@@ -60,6 +104,7 @@
 
     .arbeidslistekategori__sorteringsheader {
         min-width: 2rem;
+        margin-top: 3px;
 
         .arbeidslisteikon__svg {
             min-width: 1rem;
@@ -72,7 +117,7 @@
         width: auto;
         min-width: 11rem;
         height: 100%;
-        margin: 0 1rem 0 0;
+        margin: 0 1rem 0 0 !important;
 
         .dropdown__btn {
             border: 1px solid @navGra60;
@@ -85,7 +130,11 @@
 
             &:disabled {
                 color: @navGra20;
-                border: 1px solid @navGra20;
+
+                &:hover {
+                    border-color: transparent;
+                    cursor: default;
+                }
             }
         }
 
@@ -126,40 +175,37 @@
     }
 
     .toolbar_btn {
-        border: 1px solid @navGra60;
-        padding: 0.5rem;
-        width: 100%;
+        border: 1px solid transparent;
+        padding: .5rem;
         height: 100%;
         margin: 0 0.5rem 0 0;
-        max-width: 12rem;
         position: relative;
         text-align: inherit;
-        background-color: white;
+        background-color: @bakgrunnsGra;
+        width: 190px;
+        display: flex;
+        flex-direction: row;
 
         &:disabled {
-            border: 1px solid @navGra20;
-            color: @navGra20;
-
-            #arbeidsliste-svg {
+            #arbeidsliste-svg, #tildel-veileder-ikon, #sok-veileder-ikon {
                 opacity: 0.4;
+            }
+
+            &:hover {
+                border-color: transparent;
+                cursor: default;
             }
         }
 
         &:focus {
             outline: none;
             border-radius: 2px;
-            box-shadow: 0 0 0 3px @navOransjeLighten40;
+            box-shadow: 0 0 0 3px @fokusFarge;
         }
 
         &:hover {
             border-color: @navBla;
             cursor: pointer;
         }
-    }
-
-    .toolbar__arbeidsliste-ikon {
-        min-width: 1.5rem;
-        position: absolute;
-        right: 0.25rem;
     }
 }

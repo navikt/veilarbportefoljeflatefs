@@ -5,7 +5,6 @@ import './dropdown.less';
 
 const btnCls = (props: DropdownProps, state: DropdownState) => classNames('dropdown', props.className, {
     'dropdown--apen': state.apen,
-    'dropdown--hover': !props.disabled && state.hover
 });
 
 const btnWrapperCls = (disabled) => classNames('dropdown__btnwrapper', {'dropdown__btnwrapper--disabled': disabled});
@@ -25,7 +24,7 @@ interface DropdownProps {
     hoyre?: boolean;
     apen?: boolean;
     disabled?: boolean;
-    name: string;
+    name: React.ReactNode;
     children: React.ReactChild;
     className?: string;
     onLukk?: () => void;
