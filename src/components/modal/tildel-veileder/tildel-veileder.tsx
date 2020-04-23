@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { tildelVeileder } from '../../../ducks/portefolje';
 import { VeilederModell } from '../../../model-interfaces';
 import { AppState } from '../../../reducer';
@@ -9,6 +9,7 @@ import '../../toolbar/toolbar.less';
 import { Knapp } from 'nav-frontend-knapper';
 import SokFilterNy from '../../sok-veiledere/sok-filter-ny';
 import classNames from 'classnames';
+import { nameToStateSliceMap } from '../../../ducks/utils';
 
 interface TildelVeilederProps {
     filtergruppe?: string;
@@ -16,7 +17,7 @@ interface TildelVeilederProps {
     btnOnClick: () => void;
 }
 
-function TildelVeileder({filtergruppe, gjeldendeVeileder, btnOnClick,}: TildelVeilederProps) {
+function TildelVeileder({filtergruppe, gjeldendeVeileder, btnOnClick}: TildelVeilederProps) {
     const [ident, setIdent] = useState<string | null>(null);
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
@@ -51,9 +52,9 @@ function TildelVeileder({filtergruppe, gjeldendeVeileder, btnOnClick,}: TildelVe
                 <TildelVeilederRenderer
                     ident={ident}
                     onChange={setIdent}
-                    onSubmit={onSubmit}
+                    onSubmit={() => onSubmit()}
                     data={data}
-                    btnOnClick={onSubmit}
+                    btnOnClick={() => onSubmit()}
                 />
             }
         </SokFilterNy>
@@ -96,4 +97,11 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
     );
 }
 
-export default TildelVeileder;
+const mapStateToProps = (state, ownProps) => {
+    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || 'filtrering';
+    return ({
+        filtervalg: state[stateSlice],
+    });
+};
+
+export default connect(mapStateToProps)(TildelVeileder);
