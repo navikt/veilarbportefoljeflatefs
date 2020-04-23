@@ -54,7 +54,7 @@ const Listevisning = (props: ListevisningProps) => {
             name={dropdownNavn()}
             disabled={props.muligeAlternativer.length <= 5}
             className="dropdown--toolbar toolbar__velg-kolonner">
-            <section className="radio-filterform__valg">
+            <section>
                 <ul
                     className="ustilet">
                     {props.muligeAlternativer.map((kolonne) => (

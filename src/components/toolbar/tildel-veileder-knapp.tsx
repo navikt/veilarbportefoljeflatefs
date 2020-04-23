@@ -68,7 +68,7 @@ class TildelVeilederKnapp extends React.Component<TildelVeilederProps, TildelVei
 
         if (this.state.isInputOpen) {
             return (
-                <div className="tildel-veileder-container"
+                <div className="tildel-veileder-input"
                      ref={(ref) => {
                          this.wrapperRef = ref;
                      }}

@@ -65,7 +65,7 @@ class SokVeilederKnapp extends React.Component<SokVeilederProps, SokVeilederStat
 
         if (this.state.isInputOpen) {
             return (
-                <div className="sok-veileder-container"
+                <div className="sok-veileder-input"
                      ref={(ref) => {
                          this.wrapperRef = ref;
                      }}
