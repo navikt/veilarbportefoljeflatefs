@@ -65,16 +65,16 @@ class SokVeilederKnapp extends React.Component<SokVeilederProps, SokVeilederStat
 
         if (this.state.isInputOpen) {
             return (
-                <div ref={(ref) => {
-                    this.wrapperRef = ref;
-                }}>
-                    <div className="sok-veileder-container" onClick={() => this.handleClick()}>
-                        <SokVeileder
-                            veileder={{}}
-                            onClick={() => this.handleButtonClick()}
-                            skalVises={this.props.skalVises}
-                        />
-                    </div>
+                <div className="sok-veileder-container"
+                     ref={(ref) => {
+                         this.wrapperRef = ref;
+                     }}
+                     onClick={() => this.handleClick()}>
+                    <SokVeileder
+                        veileder={{}}
+                        onClick={() => this.handleButtonClick()}
+                        skalVises={this.props.skalVises}
+                    />
                 </div>
             );
         }
@@ -92,7 +92,6 @@ class SokVeilederKnapp extends React.Component<SokVeilederProps, SokVeilederStat
                     <Normaltekst className="toolbar-knapp__tekst">Søk veileder</Normaltekst>
                 </button>
             </div>
-
         );
     }
 }

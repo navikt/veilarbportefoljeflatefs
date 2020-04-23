@@ -1,45 +1,102 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
-import { VIS_TILDEL_VEILEDER_MODAL } from '../../ducks/modal';
 import './toolbar.less';
-import { AppState } from '../../reducer';
 import { ReactComponent as TildelVeilederIkon } from '../ikoner/person-add-1.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
-import TildelVeilederModal from '../modal/tildel-veileder/tildel-veileder-modal';
+import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
 
-interface LeggTilArbeidslisteProps {
-
-    onClickHandler: () => void;
+interface TildelVeilederProps {
     skalVises: boolean;
     filtergruppe?: string;
     gjeldendeVeileder?: string;
+    aktiv: boolean;
 }
 
-function TildelVeilederKnapp(props: LeggTilArbeidslisteProps) {
-    const modalSkalVises = useSelector((state: AppState) => state.modal.modal) === VIS_TILDEL_VEILEDER_MODAL;
-    const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
+interface TildelVeilederState {
+    isInputOpen: boolean;
+    isBtnClicked: boolean;
+}
 
-    if (!props.skalVises) {
-        return null;
+class TildelVeilederKnapp extends React.Component<TildelVeilederProps, TildelVeilederState> {
+    private wrapperRef;
+
+    constructor(props: TildelVeilederProps) {
+        super(props);
+
+        this.state = {
+            isInputOpen: false,
+            isBtnClicked: false,
+        };
     }
 
-    const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
-    const aktiv = valgteBrukere.length > 0;
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
 
-    return (
-        <div className="toolbar_btnwrapper">
-            <button
-                type="button"
-                className='toolbar_btn'
-                disabled={!aktiv}
-                onClick={props.onClickHandler}
-            >
-                <TildelVeilederIkon className="toolbar-knapp__ikon" id="tildel-veileder-ikon"/>
-                <Normaltekst className="toolbar-knapp__tekst">Tildel veileder</Normaltekst>
-            </button>
-            {modalSkalVises && <TildelVeilederModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere}/>}
-        </div>
-    );
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    handleClickOutside = (e) => {
+        if ((this.state.isInputOpen && this.wrapperRef && !this.wrapperRef.contains(e.target))) {
+            this.setState({isInputOpen: false});
+        }
+    };
+
+    handleClick = () => {
+        this.setState(() => {
+            return {isInputOpen: true};
+        });
+    };
+
+    handleButtonClick = () => {
+        this.setState(() => {
+            return {isBtnClicked: true};
+        });
+    };
+
+    render() {
+        if (!this.props.skalVises) {
+            return null;
+        }
+
+        if (this.state.isBtnClicked) {
+            this.setState({
+                isInputOpen: false,
+                isBtnClicked: false,
+            });
+        }
+
+        if (this.state.isInputOpen) {
+            return (
+                <div className="tildel-veileder-container"
+                     ref={(ref) => {
+                         this.wrapperRef = ref;
+                     }}
+                     onClick={() => this.handleClick()}>
+                    <TildelVeileder
+                        btnOnClick={() => this.handleButtonClick()}
+                        skalVises={this.props.skalVises}
+                    />
+                </div>
+            );
+        }
+
+        return (
+            <div className="toolbar_btnwrapper">
+                <button
+                    type="button"
+                    className='toolbar_btn'
+                    disabled={!this.props.aktiv}
+                    onClick={() => this.setState({
+                        isInputOpen: true,
+                    })}
+                >
+                    <TildelVeilederIkon className="toolbar-knapp__ikon" id="tildel-veileder-ikon"/>
+                    <Normaltekst className="toolbar-knapp__tekst">Tildel veileder</Normaltekst>
+                </button>
+            </div>
+        );
+    }
 }
 
 export default TildelVeilederKnapp;

@@ -47,36 +47,41 @@
             flex-direction: row;
         }
 
-        .sok-veileder-container {
+        .sok-veileder-wrapper, .tildel-veileder-wrapper {
             min-width: 210px;
+            margin-right: 1rem;
 
-            .sokfilter .skjemaelement {
-                margin-bottom: 0;
-            }
+            .sok-veileder-container, .tildel-veileder-container {
+                .sokfilter .skjemaelement {
+                    margin-bottom: 0;
+                }
 
-            .checkbox-filterform {
-                position: absolute;
-                z-index: 2000;
-                background-color: @white;
-                border: 1px solid @navGra40;
-                border-top: none;
-                min-width: 210px;
-                border-radius: 4px;
+                .checkbox-filterform, .radio-filterform {
+                    position: absolute;
+                    z-index: 2000;
+                    background-color: @white;
+                    border: 1px solid @navGra40;
+                    border-top: none;
+                    min-width: 210px;
+                    border-radius: 4px;
 
-                &__valg {
-                    margin: 0;
-                    border-bottom: 1px solid @navGra40;
+                    &__valg {
+                        margin: 0;
+                        border-bottom: 1px solid @navGra40;
+                        overflow-x: auto;
+                        max-height: 15.5rem;
 
-                    .skjemaelement {
-                        margin-bottom: .5rem;
+                        .skjemaelement {
+                            margin-bottom: .5rem;
+                        }
                     }
                 }
-            }
 
-            .alertstripe {
-                padding: 1rem .7rem;
-                z-index: 2000;
-                position: absolute;
+                .alertstripe {
+                    padding: 1rem .7rem;
+                    z-index: 2000;
+                    position: absolute;
+                }
             }
         }
     }
@@ -104,10 +109,6 @@
             min-width: 1rem;
             min-height: 20px;
         }
-    }
-
-    .toolbar_btnwrapper {
-        margin: 0 1rem 0 0;
     }
 
     .dropdown--toolbar {
@@ -177,11 +178,10 @@
         padding: 0.5rem;
         height: 100%;
         margin: 0 0.5rem 0 0;
-        max-width: 12rem;
         position: relative;
         text-align: inherit;
         background-color: @bakgrunnsGra;
-        width: fit-content;
+        width: 200px;
         display: flex;
         flex-direction: row;
 
