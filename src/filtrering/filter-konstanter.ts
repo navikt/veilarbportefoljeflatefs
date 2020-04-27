@@ -178,8 +178,8 @@ export const aktiviteter = {
 const veiledere = {};
 
 export const cvJobbprofil = {
-    DELT: 'CV og/eller Jobbprofil delt med NAV',
-    IKKE_DELT: 'Ikke delt CV/Jobbprofil med NAV',
+    DELT: 'CV og/eller jobbprofil delt med NAV',
+    IKKE_DELT: 'Ikke delt CV/jobbprofil med NAV',
     HAR_IKKE: 'Har ikke CV eller jobbprofil'
 };
 

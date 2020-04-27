@@ -12,7 +12,7 @@ import { Tiltak } from '../ducks/enhettiltak';
 import { pagineringSetup } from '../ducks/paginering';
 import FiltreringInformasjonOmBruker from './filtrering-informasjon-fra-bruker/filtrering-informasjon-fra-bruker';
 import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
-import { CVJOBBPROFIL, VEDTAKSTOTTE } from '../konstanter';
+import { CVJOBBPROFIL } from '../konstanter';
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
