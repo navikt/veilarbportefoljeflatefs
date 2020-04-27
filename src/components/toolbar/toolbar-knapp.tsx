@@ -6,7 +6,7 @@ import SokVeileder from './sok-veileder';
 
 interface ToolbarKnappProps {
     skalVises?: boolean;
-    aktiv?: boolean;
+    aktiv: boolean;
     tildelveileder: boolean;
     ikon: React.ReactNode;
     tittel: string;
@@ -88,7 +88,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             <button
                 type="button"
                 className='toolbar_btn'
-                hidden={!props.aktiv}
+                disabled={!props.aktiv}
                 onClick={klikk}
             >
                 {props.ikon}
