@@ -48,7 +48,8 @@ export const initialState: FiltervalgModell = {
     hovedmal: [],
     navnEllerFnrQuery: '',
     veilederNavnQuery: '',
-    registreringstype: []
+    registreringstype: [],
+    cvJobbprofil: [],
 };
 
 function fjern(verdi, fjernVerdi) {

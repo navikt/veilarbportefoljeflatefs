@@ -10,6 +10,9 @@ import FilteringVeilederGrupper from './filtrering-veileder-grupper/filtrering-v
 import { OrNothing } from '../utils/types/types';
 import { Tiltak } from '../ducks/enhettiltak';
 import { pagineringSetup } from '../ducks/paginering';
+import FiltreringInformasjonOmBruker from './filtrering-informasjon-fra-bruker/filtrering-informasjon-fra-bruker';
+import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
+import { CVJOBBPROFIL, VEDTAKSTOTTE } from '../konstanter';
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -20,11 +23,11 @@ interface FiltreringContainerProps {
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
 
     const dispatch = useDispatch();
-
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
+    const erFeaturePa = useFeatureSelector()(CVJOBBPROFIL);
 
     return (
         <div className="blokk-m">
@@ -33,7 +36,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 endreFiltervalg={doEndreFiltervalg}
             />
             <MetrikkEkspanderbartpanel
-                apen={false}
                 tittel="Veiledergrupper"
                 tittelProps="undertittel"
                 lamellNavn="veiledergrupper"
@@ -52,6 +54,18 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                     filtervalg={filtervalg}
                 />
             </MetrikkEkspanderbartpanel>
+            {erFeaturePa &&
+            <MetrikkEkspanderbartpanel
+                tittel="Informasjon fra bruker"
+                tittelProps="undertittel"
+                lamellNavn="informasjon-fra-bruker"
+            >
+                <FiltreringInformasjonOmBruker
+                    filtervalg={filtervalg}
+                    endreFiltervalg={doEndreFiltervalg}
+                />
+            </MetrikkEkspanderbartpanel>
+            }
             <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
                 tittel="Filter"
