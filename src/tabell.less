@@ -1,3 +1,4 @@
+@import "~nav-frontend-core/less/core";
 // TABELLER
 // --------------------------------------------------
 @gray-background: #efefef;
@@ -5,8 +6,6 @@
 
 @rem-as-14px: 0.875rem;
 @line-height-base: 1.428571429;
-// 20/14
-@line-height-computed: floor(@rem-as-14px * @line-height-base);
 
 @table-cell-padding: 8px;
 @table-condensed-cell-padding: 5px;
@@ -30,8 +29,6 @@
     margin-right: 0;
     border-spacing: 0;
     width: 100%;
-    max-width: 100%;
-    margin-bottom: @line-height-computed;
 
     caption {
         padding-top: @table-cell-padding;
@@ -48,20 +45,22 @@
         border-right: 1px solid @navGra60;
     }
 
+    th:last-child {
+        border-right: none;
+    }
+
+    th:first-child {
+        border-left: none;
+    }
+
     thead th {
-        box-shadow: 0 6px 5px 0 rgba(0, 0, 0, 0.4);
-        background-color: @white;
+        background-color: #F4F4F4;
         border-bottom: 1px solid @navGra60;
         position: sticky;
-        top: 5rem;
+        top: 2.5rem;
+        -webkit-backface-visibility: hidden;
     }
 
-    caption {
-        position: absolute;
-        left: -3000px;
-    }
-
-    // Cells
     .tabellheader {
         &__lenke {
             display: flex;
@@ -101,14 +100,20 @@
     }
 
     tbody {
-        tr:nth-child(even) {
-            background-color: @white;
-        }
-
         tr:first-child {
             th, td {
                 border-top-width: 2px;
             }
+        }
+
+        tr:last-child {
+            th, td {
+                border-bottom: none;
+            }
+        }
+
+        tr:nth-child(odd) {
+            background-color: @white;
         }
 
         th, td {

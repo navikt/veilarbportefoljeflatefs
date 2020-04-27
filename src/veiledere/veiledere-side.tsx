@@ -21,7 +21,7 @@ import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-s
 import FilteringVeilederGrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 import '../style.less';
-import {useFetchStatusTall} from "../hooks/portefolje/use-fetch-statustall";
+import { useFetchStatusTall } from '../hooks/portefolje/use-fetch-statustall';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -78,15 +78,11 @@ function VeiledereSide() {
                                     filtergruppe="veiledere"
                                     className="filtrering-label-container"
                                 />
-                                <div className="sticky-container">
-                                    <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
-                                        {`Totalt ${veiledere.data.veilederListe.length} veiledere`}
-                                    </Undertittel>
-                                </div>
                                 <VeiledersideVisning
                                     veiledere={veiledere.data.veilederListe}
                                     portefoljestorrelser={portefoljestorrelser}
                                     veilederFilter={filtervalg.veiledere}
+                                    antallVeiledere={veiledere.data.veilederListe.length}
                                 />
                             </div>
                         </div>

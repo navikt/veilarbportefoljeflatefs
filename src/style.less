@@ -123,7 +123,7 @@ html {
     &__toolbar-container {
         position: sticky;
         top: 0;
-        border: 1px solid @navGra60;
+        border-bottom: 1px solid @navGra60;
         z-index: 3;
     }
 
@@ -161,7 +161,7 @@ html {
 }
 
 .sticky-skygge::before {
-    top: 115px;
+    top: 114px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     margin: 0 4px;
 }
@@ -172,13 +172,6 @@ html {
     z-index: 2;
     height: 0;
     width: auto;
-}
-
-#veilederside-toolbar {
-    position: sticky;
-    top: 1.5rem;
-    border: 1px solid @navGra60;
-    border-bottom: none;
 }
 
 .skjemaelement {
@@ -206,6 +199,7 @@ html {
     .liste-kolonne {
         min-width: 805px;
         max-width: 1322px;
+        margin-bottom: 2rem;
     }
 
     @media (max-width: 1200px) {

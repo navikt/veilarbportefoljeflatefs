@@ -88,7 +88,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             <button
                 type="button"
                 className='toolbar_btn'
-                disabled={!props.aktiv}
+                hidden={!props.aktiv}
                 onClick={klikk}
             >
                 {props.ikon}
@@ -97,4 +97,3 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
         </div>
     );
 }
-

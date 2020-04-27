@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Toolbar from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
 import { sortBy } from '../ducks/sortering';
@@ -12,8 +12,8 @@ import {
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { PortefoljeStorrelser } from '../ducks/portefoljestorrelser';
 import './veiledere.less';
-import {VeilederModell} from "../model-interfaces";
-import {AppState} from "../reducer";
+import { VeilederModell } from '../model-interfaces';
+import { AppState } from '../reducer';
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere && veiledere.length > 0) {
@@ -41,6 +41,7 @@ interface VeilederesideVisningProps {
     veilederFilter: string[];
     veiledere: VeilederModell[];
     portefoljestorrelser: PortefoljeStorrelser;
+    antallVeiledere: number;
 }
 
 function VeilederesideVisning(props: VeilederesideVisningProps) {
@@ -48,30 +49,33 @@ function VeilederesideVisning(props: VeilederesideVisningProps) {
     const fra = useSelector(selectFraIndex);
     const sideStorrelse = useSelector(selectSideStorrelse);
     const seAlle = useSelector(selectSeAlle);
-    const sortering = useSelector((state: AppState)=> state.sortering);
+    const sortering = useSelector((state: AppState) => state.sortering);
 
     const veilederListe = useMemo(() => {
         return props.veiledere
             .filter(erValgtHvisFiltrering(props.veilederFilter))
             .map(medPortefoljestorrelse(props.portefoljestorrelser))
             .sort(propertySort(sortering));
-    },[props.veilederFilter, props.portefoljestorrelser, props.veiledere, sortering]);
+    }, [props.veilederFilter, props.portefoljestorrelser, props.veiledere, sortering]);
 
     function getVeiledere() {
         if (seAlle) {
-            return veilederListe
+            return veilederListe;
         }
         return veilederListe.slice(fra, fra + sideStorrelse);
     }
+
     const veiledere = getVeiledere();
 
     return (
-        <div>
+        <>
             <Toolbar
                 filtergruppe={ListevisningType.veilederOversikt}
                 antallTotalt={veilederListe.length}
                 sokVeilederSkalVises={false}
                 id="veilederside-toolbar"
+                side="veilederoversikt"
+                antallVeiledere={props.antallVeiledere}
             />
             <VeiledereTabell
                 veiledere={veiledere}
@@ -79,7 +83,7 @@ function VeilederesideVisning(props: VeilederesideVisningProps) {
                 sorterPaaEtternavn={() => dispatch(sortBy('etternavn'))}
                 sorterPaaPortefoljestorrelse={() => dispatch(sortBy('portefoljestorrelse'))}
             />
-        </div>
+        </>
     );
 }
 
