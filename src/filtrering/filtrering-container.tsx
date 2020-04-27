@@ -6,7 +6,7 @@ import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
 import { FiltreringStatus } from './filtrering-status/filtrering-status';
-import FilteringVeilederGrupper from './filtrering-veileder-grupper/filrering-veileder-grupper';
+import FilteringVeilederGrupper from './filtrering-veileder-grupper/filtrering-veileder-grupper';
 import { OrNothing } from '../utils/types/types';
 import { Tiltak } from '../ducks/enhettiltak';
 import { pagineringSetup } from '../ducks/paginering';

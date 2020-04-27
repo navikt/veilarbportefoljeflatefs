@@ -16,8 +16,8 @@ interface VeiledereTabellProps {
     sorterPaaPortefoljestorrelse: () => void;
 }
 
-function VeilederTabell (props: VeiledereTabellProps) {
-    const {veiledere, currentSortering } = props;
+function VeilederTabell(props: VeiledereTabellProps) {
+    const {veiledere, currentSortering} = props;
     const sorterEtternavn = currentSortering.property === 'etternavn';
     const sorterPaaPortefoljeStr = currentSortering.property === 'portefoljestorrelse';
 
@@ -50,7 +50,9 @@ function VeilederTabell (props: VeiledereTabellProps) {
     };
 
     return (
-        <table className="tabell veileder-tabell portefolje-tabell typo-undertekst blokk-xs">
+        <div className="veilederoversikt__toolbar-container">
+        <span className="veilederoversikt__sticky-skygge">
+            <table className="tabell veileder-tabell portefolje-tabell typo-undertekst blokk-xs">
             <thead>
             <tr>
                 <th scope="col" className="tabellheader">
@@ -95,8 +97,9 @@ function VeilederTabell (props: VeiledereTabellProps) {
             {veilederElementer}
             </tbody>
         </table>
+        </span>
+        </div>
     );
 }
-
 
 export default VeilederTabell;

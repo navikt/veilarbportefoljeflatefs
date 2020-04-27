@@ -42,7 +42,9 @@ function MinoversiktSide() {
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
-    const flereEnnFireBrukere = antallBrukere > 4;
+    const flereEnnAntallBrukere = (antall: number) => {
+        return antallBrukere > antall;
+    };
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
 
     return (
@@ -66,12 +68,12 @@ function MinoversiktSide() {
                                 listevisning={listevisning}
                                 className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                             />
-                            <div className={flereEnnFireBrukere ? 'sticky-container' : 'ikke-sticky__container'}>
+                            <div className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <TabellOverskrift
                                     className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
-                                <span className={flereEnnFireBrukere ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                                <span className={flereEnnAntallBrukere(4) ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
                                 <div
-                                    className={flereEnnFireBrukere ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
+                                    className={flereEnnAntallBrukere(4) ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
                                         <Toolbar
                                             filtergruppe={ListevisningType.minOversikt}
                                             onPaginering={() => dispatch(hentPortefoljeForVeileder(
@@ -85,6 +87,7 @@ function MinoversiktSide() {
                                             visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                             sokVeilederSkalVises={false}
                                             antallTotalt={portefolje.data.antallTotalt}
+                                            side="minoversikt"
                                         />
                                         <MinoversiktTabellOverskrift
                                             visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
@@ -98,6 +101,7 @@ function MinoversiktSide() {
                             <MinoversiktTabell
                                 innloggetVeileder={innloggetVeilederIdent}
                                 settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
+                                classNameWrapper={flereEnnAntallBrukere(0) ? 'portefolje__container' : 'portefolje__container__tom-liste'}
                             />
                             <MinOversiktModalController/>
                         </div>

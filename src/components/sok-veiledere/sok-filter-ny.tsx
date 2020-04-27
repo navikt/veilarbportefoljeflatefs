@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Input } from 'nav-frontend-skjema';
 import AlertStripe from 'nav-frontend-alertstriper';
-import './toolbar.less';
+import '../toolbar/toolbar.less';
 import { useFocus } from '../../hooks/use-focus';
+import { Input } from 'nav-frontend-skjema';
 
 interface SokFilterProps<T> {
     data: T[];
     children: (filteredData: T[]) => React.ReactNode;
-    label: string;
+    label?: string;
     placeholder: string;
     limitSize?: number;
 }
@@ -45,9 +45,6 @@ function SokFilterNy<T>(props: SokFilterProps<T>) {
                     inputRef={inputRef => (focusRef.current = inputRef)}
                 />
             </div>
-            <span className="text-hide" aria-live="polite" aria-atomic="true">
-                {`Viser ${filteredData.length} treff`}
-            </span>
             {harData
                 ? children(filteredData)
                 : <AlertStripe type="info" className="checkbox-filterform__alertstripe">

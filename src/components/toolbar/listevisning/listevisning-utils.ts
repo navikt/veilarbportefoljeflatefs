@@ -6,8 +6,6 @@ export interface Alternativ {
 }
 
 export const alternativerConfig = new Map<Kolonne, Alternativ>();
-alternativerConfig.set(Kolonne.BRUKER, {tekstlabel: 'Bruker', checkboxDisabled: true});
-alternativerConfig.set(Kolonne.FODSELSNR, {tekstlabel: 'Fødselsnr', checkboxDisabled: true});
 alternativerConfig.set(Kolonne.OPPFOLGINGSTARTET, {tekstlabel: 'Oppfølging startet'});
 alternativerConfig.set(Kolonne.VEILEDER, {tekstlabel: 'Veileder'});
 alternativerConfig.set(Kolonne.NAVIDENT, {tekstlabel: 'NAV-ident'});

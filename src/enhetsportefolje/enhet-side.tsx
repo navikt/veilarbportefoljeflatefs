@@ -69,7 +69,9 @@ function EnhetSide() {
 
     const portefoljeData = portefolje.data;
     const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
-    const flereEnnFireBrukere = antallBrukere > 4;
+    const flereEnnAntallBrukere = (antall: number) => {
+        return antallBrukere > antall;
+    };
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const harFilter = antallFilter(filtervalg) !== 0;
 
@@ -102,12 +104,12 @@ function EnhetSide() {
                                 {harFilter
                                     ? <>
                                         <div
-                                            className={flereEnnFireBrukere ? 'sticky-container' : 'sticky-container__fjernet'}>
+                                            className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'sticky-container__fjernet'}>
                                             <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
                                             <span
-                                                className={flereEnnFireBrukere ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                                                className={flereEnnAntallBrukere(4) ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
                                             <div
-                                                className={flereEnnFireBrukere ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
+                                                className={flereEnnAntallBrukere(4) ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
                                                 <Toolbar
                                                     onPaginering={() => dispatch(hentPortefoljeForEnhet(
                                                         enhetId,
@@ -118,12 +120,15 @@ function EnhetSide() {
                                                     filtergruppe={ListevisningType.enhetensOversikt}
                                                     sokVeilederSkalVises
                                                     antallTotalt={portefoljeData.antallTotalt}
+                                                    side="enhetensoversikt"
                                                 />
                                                 <EnhetTabellOverskrift/>
                                             </div>
                                             </span>
                                         </div>
-                                        <EnhetTabell/>
+                                        <EnhetTabell
+                                            classNameWrapper={flereEnnAntallBrukere(0) ? 'portefolje__container' : 'portefolje__container__tom-liste'}
+                                        />
                                     </>
                                     : <VelgFilterMelding/>
                                 }

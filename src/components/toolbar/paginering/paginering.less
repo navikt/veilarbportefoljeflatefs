@@ -1,5 +1,6 @@
 @import "~nav-frontend-core/less/core";
 @import "~nav-frontend-paneler-style/src/mixins";
+@bakgrunnsGra: #F4F4F4;
 
 .veilarbportefoljeflatefs {
     .paginering {
@@ -16,7 +17,7 @@
     .paginering__knapp {
         border: 1px solid transparent;
         border-left: 1px solid @navGra40;
-        background: none;
+        background-color: transparent !important;
         width: 25%;
         margin: 0 1px;
 
@@ -63,7 +64,7 @@
         }
 
         label {
-            background-color: @white;
+            //background-color: @white;
             display: inline-block;
             padding: 0.3rem 0.5rem;
             border: 1px solid @navGra20;
@@ -82,7 +83,7 @@
 
             input:checked + label {
                 background-color: @navBla;
-                color: @white;
+                //color: @white;
                 border-color: @navBla;
             }
         }

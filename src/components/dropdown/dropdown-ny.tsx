@@ -6,7 +6,6 @@ import './dropdown.less';
 
 const btnCls = (props: DropdownProps, apen: boolean, hover: boolean) => classNames('dropdown', props.className, {
     'dropdown--apen': apen,
-    'dropdown--hover': !props.disabled && hover
 });
 
 const btnWrapperCls = (disabled?: boolean) => classNames('dropdown__btnwrapper', {'dropdown__btnwrapper--disabled': disabled});

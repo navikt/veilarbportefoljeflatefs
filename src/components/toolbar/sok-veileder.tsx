@@ -6,8 +6,6 @@ import { nameToStateSliceMap } from '../../ducks/utils';
 import { FiltervalgModell } from '../../model-interfaces';
 import { VeiledereState } from '../../ducks/veiledere';
 import { useEffect, useState } from 'react';
-import DropdownNy from '../dropdown/dropdown-ny';
-import classNames from 'classnames';
 import SokVeiledere from '../sok-veiledere/sok-veiledere';
 import './toolbar.less';
 
@@ -15,6 +13,7 @@ interface SokVeilederProps {
     filtervalg: FiltervalgModell;
     veiledere: VeiledereState;
     skalVises?: boolean;
+    onClick: () => void;
 }
 
 interface DispatchProps {
@@ -41,8 +40,8 @@ function SokVeilederFilter(props: AllProps) {
         ? setValgteVeileder([veilederTarget, ...valgteVeileder])
         : setValgteVeileder(valgteVeileder.filter(veileder => veileder !== veilederTarget));
 
-    const createHandleOnSubmit = (filterverdi: string[], lukkDropDown: () => void) => {
-        lukkDropDown();
+    const createHandleOnSubmit = (filterverdi: string[]) => {
+        props.onClick();
         if (harValg) {
             props.sokEtterVeileder('veiledere', filterverdi);
             props.veilederSokt();
@@ -51,25 +50,11 @@ function SokVeilederFilter(props: AllProps) {
     };
 
     return (
-        <DropdownNy
-            name="Søk veileder"
-            className="dropdown--fixed dropdown--toolbar"
-            render={lukkDropDown =>
-                <>
-                    <SokVeiledere
-                        erValgt={ident => valgteVeileder.includes(ident)}
-                        hanterVeilederValgt={hanterChange}
-                    />
-                    <div className="blokk-xxs checkbox-filterform__under-valg">
-                        <button
-                            onClick={() => createHandleOnSubmit(valgteVeileder, lukkDropDown)}
-                            className={classNames('knapp', 'knapp--mini', {'knapp--hoved': harValg})}
-                        >
-                            {harValg ? 'Velg' : 'Lukk'}
-                        </button>
-                    </div>
-                </>
-            }
+        <SokVeiledere
+            erValgt={ident => valgteVeileder.includes(ident)}
+            hanterVeilederValgt={hanterChange}
+            btnOnClick={() => createHandleOnSubmit(valgteVeileder)}
+            harValg={harValg}
         />
     );
 }
