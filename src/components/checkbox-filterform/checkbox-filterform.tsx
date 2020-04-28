@@ -81,7 +81,7 @@ function RenderFields(props: { valg: Dictionary<string>, velgCheckBox: (e) => vo
                             type="checkbox"
                             className="skjemaelement__input checkboks"
                             value={filterKey}
-                            checked={props.checkBoxValg.includes(filterKey)}
+                            checked={props.checkBoxValg && props.checkBoxValg.includes(filterKey)}
                             onChange={props.velgCheckBox}
                         />
                         <label htmlFor={filterKey} className="skjemaelement__label">{filterValue}</label>

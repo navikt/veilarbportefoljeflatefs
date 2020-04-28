@@ -53,7 +53,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                             key={`fodselsdagIMnd-${singleValue}`}
                             label={`Fødselsdato: ${singleValue}`}
                             slettFilter={() => slettEnkelt(key, singleValue)}
-                        /> );
+                        />);
                 });
             } else if (value === true) {
                 return [
@@ -64,7 +64,36 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     />
                 ];
             } else if (Array.isArray(value)) {
+                console.log('Array-isArray(true)');
+
                 return value.map((singleValue) => {
+                        console.log('singlevalue', singleValue);
+                        if (singleValue === 'MIN_ARBEIDSLISTE_BLA') {
+                            return (<FiltreringLabel
+                                key={`${key}--${singleValue.key || singleValue}`}
+                                label="Arbeidslisteikon blå"
+                                slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
+                            />);
+                        } else if (singleValue === 'MIN_ARBEIDSLISTE_LILLA') {
+                            return (<FiltreringLabel
+                                key={`${key}--${singleValue.key || singleValue}`}
+                                label="Arbeidslisteikon lilla"
+                                slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
+                            />);
+                        } else if (singleValue === 'MIN_ARBEIDSLISTE_GRONN') {
+                            return (<FiltreringLabel
+                                key={`${key}--${singleValue.key || singleValue}`}
+                                label="Arbeidslisteikon grønn"
+                                slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
+                            />);
+                        } else if (singleValue === 'MIN_ARBEIDSLISTE_GUL') {
+                            return (<FiltreringLabel
+                                key={`${key}--${singleValue.key || singleValue}`}
+                                label="Arbeidslisteikon gul"
+                                slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
+                            />);
+                        }
+
                         return (
                             <FiltreringLabel
                                 key={`${key}--${singleValue.key || singleValue}`}

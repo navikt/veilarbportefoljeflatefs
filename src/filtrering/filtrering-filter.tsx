@@ -14,7 +14,8 @@ import {
     servicegruppe,
     ytelse,
     manuellBrukerStatus,
-    hovedmal, registreringstype
+    hovedmal,
+    registreringstype
 } from './filter-konstanter';
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 import { RadioFilterformNy } from '../components/radio-filterform/radio-filterform-ny';

@@ -11,6 +11,12 @@ export const UTLOPTE_AKTIVITETER = 'UTLOPTE_AKTIVITETER';
 export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
+
+export const MIN_ARBEIDSLISTE_BLA = 'MIN_ARBEIDSLISTE_BLA';
+export const MIN_ARBEIDSLISTE_LILLA = 'MIN_ARBEIDSLISTE_LILLA';
+export const MIN_ARBEIDSLISTE_GRONN = 'MIN_ARBEIDSLISTE_GRONN';
+export const MIN_ARBEIDSLISTE_GUL = 'MIN_ARBEIDSLISTE_GUL';
+
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const MOTER_IDAG = 'MOTER_IDAG';
 export const UTLOP_YTELSE = 'UTLOP_YTELSE';
@@ -34,6 +40,10 @@ export const mapFilternavnTilFilterValue = {
     iavtaltAktivitet: I_AVTALT_AKTIVITET,
     inaktiveBrukere: INAKTIVE_BRUKERE,
     minArbeidsliste: MIN_ARBEIDSLISTE,
+    minArbeidslisteBla: MIN_ARBEIDSLISTE_BLA,
+    minArbeidslisteLilla: MIN_ARBEIDSLISTE_LILLA,
+    minArbeidslisteGronn: MIN_ARBEIDSLISTE_GRONN,
+    minArbeidslisteGul: MIN_ARBEIDSLISTE_GUL,
     utlopYtelse: UTLOP_YTELSE,
     aapYtelse: AAP_YTELSE,
     aapYtelseMaxtid: AAP_YTELSE_MAXTID,
@@ -68,6 +78,13 @@ export const ferdigfilterListe = {
     UNDER_VURDERING: 'Under vurdering',
     PERMITTERTE_ETTER_NIENDE_MARS: 'Permitterte etter 09.03.2020',
     IKKE_PERMITTERTE_ETTER_NIENDE_MARS: 'Alle utenom permitterte etter 09.03.2020',
+};
+
+export const arbeidslistekategori = {
+    BLA: 'Blå',
+    LILLA: 'Lilla',
+    GRONN: 'Grønn',
+    GUL: 'Gul',
 };
 
 export const alder = {
@@ -207,5 +224,6 @@ export default {
     aktiviteter,
     ytelseAapSortering,
     manuellBrukerStatus,
-    registreringstype
+    registreringstype,
+    arbeidslistekategori
 };

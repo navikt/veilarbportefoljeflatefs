@@ -17,6 +17,7 @@ import { pagineringSetup } from '../../ducks/paginering';
 import FiltreringStatusIkkePermitterteEtterNiendeBrukere from './filtrering-status-components/ikke-permitterte-brukere';
 import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-components/permitterte-brukere';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';
+import { MIN_ARBEIDSLISTE } from '../filter-konstanter';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -33,12 +34,19 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
             'ferdigfilterListe', ferdigFilterListe, props.filtergruppe));
     }
 
+    function handleKategoriCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const nyeFerdigfilterListe = e.target.checked
+            ? leggTilFerdigFilter(ferdigfilterListe!, e.target.value)
+            : fjernFerdigfilter(ferdigfilterListe!, e.target.value);
+        dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
+        // if()
+    }
+
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
         const nyeFerdigfilterListe = e.target.checked
             ? leggTilFerdigFilter(ferdigfilterListe!, e.target.value)
             : fjernFerdigfilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
-
     }
 
     function handleRadioButtonChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -110,7 +118,11 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
             <FilterStatusMinArbeidsliste
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
+                handleChangeCheckbox={handleKategoriCheckboxChange}
                 hidden={props.filtergruppe !== 'veileder'}
+                filtervalg={props.filtervalg}
+                endreFiltervalg={dispatchFiltreringStatusChanged}
+                checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
             />
         </FiltreringStatusContainer>
     );
