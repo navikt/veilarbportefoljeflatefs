@@ -79,7 +79,6 @@ function Dropdown(props: DropdownProps) {
         </div>
     );
 
-    console.log("dr", disabled);
     return (
         <div
             className={btnCls(props, apen, hover)}
