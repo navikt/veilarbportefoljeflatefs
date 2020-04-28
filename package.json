@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@types/jest": "24.0.18",
+    "prettier": "1.19.1",
     "yet-another-fetch-mock": "^3.4.0"
   },
   "dependencies": {
@@ -76,7 +77,6 @@
     "nav-frontend-stegindikator-style": "1.0.21",
     "nav-frontend-typografi": "^2.0.18",
     "nav-frontend-typografi-style": "^1.0.19",
-    "prettier": "^1.18.2",
     "prop-types": "^15.7.2",
     "query-string": "4.3.4",
     "react": "^16.13.1",
