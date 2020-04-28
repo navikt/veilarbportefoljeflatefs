@@ -64,10 +64,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                     />
                 ];
             } else if (Array.isArray(value)) {
-                console.log('Array-isArray(true)');
-
                 return value.map((singleValue) => {
-                        console.log('singlevalue', singleValue);
                         if (singleValue === 'MIN_ARBEIDSLISTE_BLA') {
                             return (<FiltreringLabel
                                 key={`${key}--${singleValue.key || singleValue}`}

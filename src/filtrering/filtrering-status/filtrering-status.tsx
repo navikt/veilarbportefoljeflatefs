@@ -39,7 +39,6 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
             ? leggTilFerdigFilter(ferdigfilterListe!, e.target.value)
             : fjernFerdigfilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
-        // if()
     }
 
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
