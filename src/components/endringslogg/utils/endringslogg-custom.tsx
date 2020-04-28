@@ -201,11 +201,11 @@ export function settModalEndring(innholdState: EndringsloggInnleggMedSettStatus[
     });
 }
 
-export function setHarSettAlt() {
+export function setHarSettAlt(endringslogginnhold: EndringsloggInnlegg[]) {
     return endringslogginnhold.map((el) => {
         return ({
             ...el,
-            sett: true,
+            sett: true
         });
     });
 }

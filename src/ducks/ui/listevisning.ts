@@ -13,8 +13,6 @@ export enum ActionTypeKeys {
 }
 
 export enum Kolonne {
-    BRUKER = 'bruker',
-    FODSELSNR = 'fodselsnr',
     OPPFOLGINGSTARTET = 'oppfolgingstartet',
     VEILEDER = 'veileder',
     NAVIDENT = 'navident',
@@ -73,14 +71,14 @@ export interface ListevisningState {
 }
 
 export const initialStateEnhetensOversikt: ListevisningState = {
-    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR],
-    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR],
+    valgte: [],
+    mulige: [],
     lukketInfopanel: false
 };
 
 export const initialStateMinOversikt: ListevisningState = {
-    valgte: [Kolonne.BRUKER, Kolonne.FODSELSNR],
-    mulige: [Kolonne.BRUKER, Kolonne.FODSELSNR],
+    valgte: [],
+    mulige: [],
     lukketInfopanel: false
 };
 
@@ -131,7 +129,7 @@ export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningActi
         name
     });
 
-    if (nyeMuligeAlternativer.length <= 5) {
+    if (nyeMuligeAlternativer.length <= 3) {
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
             kolonner: nyeMuligeAlternativer,
@@ -141,7 +139,7 @@ export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningActi
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
             name,
-            kolonner: nyeMuligeAlternativer.slice(0, 5)
+            kolonner: nyeMuligeAlternativer.slice(0, 3)
         });
     }
 };

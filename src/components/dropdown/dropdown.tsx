@@ -1,155 +1,108 @@
-import * as React from 'react';
-import { Children, cloneElement, Component, ReactElement } from 'react';
+import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
+import { useFocus } from '../../hooks/use-focus';
 import './dropdown.less';
 
-const btnCls = (props: DropdownProps, state: DropdownState) => classNames('dropdown', props.className, {
-    'dropdown--apen': state.apen,
+const btnCls = (props: DropdownProps, apen: boolean, hover: boolean) => classNames('dropdown', props.className, {
+    'dropdown--apen': apen,
 });
 
-const btnWrapperCls = (disabled) => classNames('dropdown__btnwrapper', {'dropdown__btnwrapper--disabled': disabled});
-
-function isChildOf(parent, element) {
-    if (element === document) { // eslint-disable-line no-undef
-        return false;
-    }
-
-    if (element === parent) {
-        return true;
-    }
-    return isChildOf(parent, element.parentNode);
-}
+const btnWrapperCls = (disabled?: boolean) => classNames('dropdown__btnwrapper', {'dropdown__btnwrapper--disabled': disabled});
 
 interface DropdownProps {
     hoyre?: boolean;
     apen?: boolean;
     disabled?: boolean;
     name: React.ReactNode;
-    children: React.ReactChild;
+    render: (lukkDropdown: () => void) => React.ReactChild;
     className?: string;
     onLukk?: () => void;
+    hidden?: boolean;
 }
 
-interface DropdownState {
-    apen: boolean;
-    hover: boolean;
-}
+function Dropdown(props: DropdownProps) {
+    const [apen, setApen] = useState(props.apen || false);
+    const [hover, setHover] = useState(false);
+    const btnRef = useRef<HTMLButtonElement>(null);
+    const divRef = useRef<HTMLDivElement>(null);
+    const {focusRef} = useFocus();
 
-class Dropdown extends Component<DropdownProps, DropdownState> {
-    component: React.ReactNode;
-    btn: HTMLButtonElement | null = null;
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            apen: this.props.apen === true,
-            hover: false
-        };
-
-        this.toggleDropdown = this.toggleDropdown.bind(this);
-        this.lukkDropdown = this.lukkDropdown.bind(this);
-        this.bindComponent = this.bindComponent.bind(this);
-        this.settFokus = this.settFokus.bind(this);
-        this.handler = this.handler.bind(this);
-        this.isHover = this.isHover.bind(this);
-    }
-
-    handler(e: HTMLElementEventMap['click']) {
-        if (this.state.apen && !isChildOf(this.component, e.target)) {
-            this.lukkDropdown();
+    function handler(e) {
+        if (apen && divRef.current && !divRef.current.contains(e.target)) {
+            lukkDropdown();
         }
     }
 
-    componentDidMount() {
-        document.body.addEventListener('click', this.handler); // eslint-disable-line no-undef
-    }
+    useEffect(() => {
+        document.body.addEventListener('click', handler);
+        return () => document.body.removeEventListener('click', handler);
+    });
 
-    componentWillUnmount() {
-        document.body.removeEventListener('click', this.handler); // eslint-disable-line no-undef
-    }
-
-    settFokus(element) { // eslint-disable-line class-methods-use-this
-        if (element !== null) {
-            const elementer = element.querySelector('button, a, input, select');
-            elementer.focus();
-        }
-    }
-
-    toggleDropdown() {
-        const {
-            onLukk = () => void (0)
-        } = this.props;
-        if (this.state.apen) {
+    function toggleDropdown() {
+        const {onLukk = () => void (0)} = props;
+        if (apen) {
             onLukk();
         }
-        this.setState({apen: !this.state.apen});
+        setApen(!apen);
     }
 
-    lukkDropdown() {
-        const {
-            onLukk = () => void (0)
-        } = this.props;
-        this.setState({apen: false});
+    function lukkDropdown() {
+        const {onLukk = () => void (0)} = props;
+        setApen(false);
 
-        if (this.btn != null) {
-            this.btn.focus();
+        if (btnRef.current != null) {
+            btnRef.current.focus();
         }
         onLukk();
     }
 
-    bindComponent(component) {
-        this.component = component;
-    }
-
-    isHover(hoverState) {
+    function isHover(hoverState) {
         return () => {
-            this.setState({hover: hoverState});
+            setHover(hoverState);
         };
     }
 
-    render() {
-        const {name, disabled, children, hoyre} = this.props;
-        const {apen} = this.state;
+    const {name, disabled, render, hoyre, hidden} = props;
 
-        const augmentedChild = Children.map(children, (child: React.ReactChild) => cloneElement<any>(child as ReactElement<any>, {
-            closeDropdown: this.lukkDropdown
-        }));
-        const innhold = !apen ? null : (
-            <div
-                className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`}
-                id={`${name}-dropdown__innhold`}
-                ref={this.settFokus}
-            >
-                {augmentedChild}
-            </div>
-        );
-
-        return (
-            <div
-                className={btnCls(this.props, this.state)}
-                ref={this.bindComponent}
-                onMouseEnter={this.isHover(true)}
-                onMouseLeave={this.isHover(false)}
-            >
-                <div className={btnWrapperCls(disabled)}>
-                    <button
-                        ref={(btn) => {
-                            this.btn = btn;
-                        }}
-                        type="button"
-                        className="dropdown__btn"
-                        onClick={this.toggleDropdown}
-                        aria-expanded={apen}
-                        aria-controls={`${name}-dropdown__innhold`}
-                        disabled={disabled}
-                    >
-                        <span className="dropdown__btntext">{name}</span>
-                    </button>
-                </div>
-                {innhold}
-            </div>
-        );
+    if(hidden) {
+        return null;
     }
+
+    const innhold = !apen ? null : (
+        <div
+            className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`}
+            id={`${name}-dropdown__innhold`}
+            ref={inputRef => (focusRef.current = inputRef)}
+        >
+            {render(lukkDropdown)}
+        </div>
+    );
+
+    console.log("dr", disabled);
+    return (
+        <div
+            className={btnCls(props, apen, hover)}
+            ref={divRef}
+            onMouseEnter={isHover(true)}
+            onMouseLeave={isHover(false)}
+        >
+            <div className={btnWrapperCls(disabled)}>
+                <button
+                    ref={btnRef}
+                    type="button"
+                    className="dropdown__btn"
+                    onClick={toggleDropdown}
+                    aria-expanded={apen}
+                    aria-controls={`${name}-dropdown__innhold`}
+                    disabled={disabled}
+                >
+                    <span className="dropdown__btntext">{name}</span>
+                </button>
+            </div>
+            {innhold}
+        </div>
+    );
 }
 
 export default Dropdown;
