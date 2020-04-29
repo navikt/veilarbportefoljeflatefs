@@ -61,7 +61,7 @@ export function getFiltertingState(state: AppState, name: ListevisningType): Fil
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, name: ListevisningType): Kolonne[] {
 
-    return [Kolonne.BRUKER, Kolonne.FODSELSNR]
+    return ([] as Kolonne[])
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.MOTER_VARIGHET, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
