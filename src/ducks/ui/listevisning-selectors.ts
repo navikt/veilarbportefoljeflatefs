@@ -2,14 +2,16 @@ import { AppState } from '../../reducer';
 import {Kolonne, ListevisningState, ListevisningType} from './listevisning';
 import { AktiviteterValg, FiltreringAktiviteterValg } from '../filtrering';
 import {
-    I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE,
+    I_AVTALT_AKTIVITET,
+    MIN_ARBEIDSLISTE,
     MOTER_IDAG,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
-    AAP_YTELSE_UNNTAK, UNDER_VURDERING
+    AAP_YTELSE_UNNTAK,
+    UNDER_VURDERING
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from "../../model-interfaces";
 
