@@ -4,10 +4,11 @@ import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
 } from './filter-konstanter';
-import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg } from '../ducks/filtrering';
+import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg } from '../ducks/filtrering';
 import { EnhetModell, FiltervalgModell } from '../model-interfaces';
 import { Kolonne, ListevisningState } from '../ducks/ui/listevisning';
 import { pagineringSetup } from '../ducks/paginering';
+import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -55,6 +56,16 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />);
                 });
+            } else if (key === 'arbeidslisteKategori') {
+                return value.map((singleValue) => {
+                    return (
+                        <FiltreringLabelArbeidsliste
+                            key={singleValue}
+                            label={FilterKonstanter[key][singleValue]}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                            kategori={singleValue}
+                        />);
+                });
             } else if (value === true) {
                 return [
                     <FiltreringLabel
@@ -65,32 +76,6 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                 ];
             } else if (Array.isArray(value)) {
                 return value.map((singleValue) => {
-                        if (singleValue === 'MIN_ARBEIDSLISTE_BLA') {
-                            return (<FiltreringLabel
-                                key={`${key}--${singleValue.key || singleValue}`}
-                                label="Arbeidslisteikon blå"
-                                slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
-                            />);
-                        } else if (singleValue === 'MIN_ARBEIDSLISTE_LILLA') {
-                            return (<FiltreringLabel
-                                key={`${key}--${singleValue.key || singleValue}`}
-                                label="Arbeidslisteikon lilla"
-                                slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
-                            />);
-                        } else if (singleValue === 'MIN_ARBEIDSLISTE_GRONN') {
-                            return (<FiltreringLabel
-                                key={`${key}--${singleValue.key || singleValue}`}
-                                label="Arbeidslisteikon grønn"
-                                slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
-                            />);
-                        } else if (singleValue === 'MIN_ARBEIDSLISTE_GUL') {
-                            return (<FiltreringLabel
-                                key={`${key}--${singleValue.key || singleValue}`}
-                                label="Arbeidslisteikon gul"
-                                slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
-                            />);
-                        }
-
                         return (
                             <FiltreringLabel
                                 key={`${key}--${singleValue.key || singleValue}`}
@@ -164,6 +149,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
             dispatch(pagineringSetup({side: 1}));
             dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.filtergruppe));
+            if (filterValue === 'MIN_ARBEIDSLISTE') {
+                dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.filtergruppe));
+            }
+
         }
     }
 });
