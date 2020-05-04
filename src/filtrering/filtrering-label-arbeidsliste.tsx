@@ -8,19 +8,18 @@ import './filtrering-skjema.less';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import { KategoriModell } from '../model-interfaces';
 
-interface FiltreringLabelProps {
+interface FiltreringLabelArbeidslisteProps {
     label: string | { label: string };
     slettFilter: (event: MouseEvent<HTMLButtonElement>) => void;
-    markert?: boolean;
     harMuligMenIkkeValgtKolonne?: boolean;
     kategori: KategoriModell;
 }
 
-function FiltreringLabelArbeidsliste({label, slettFilter, harMuligMenIkkeValgtKolonne = false, markert = false, kategori}: FiltreringLabelProps) {
-    const buttonClassnames = classNames('filtreringlabel', 'typo-undertekst', {'filtreringlabel--markert': markert}, {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne});
+function FiltreringLabelArbeidsliste({label, slettFilter, harMuligMenIkkeValgtKolonne = false, kategori}: FiltreringLabelArbeidslisteProps) {
+    const buttonClassnames = classNames('filtreringlabel', 'typo-undertekst', {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne});
     return (
         <button
-            title={lagConfig(label).label}
+            title={`Arbeidslistekategori ${lagConfig(label).label}`}
             aria-label='Slett filter'
             className={buttonClassnames}
             onClick={slettFilter}>
