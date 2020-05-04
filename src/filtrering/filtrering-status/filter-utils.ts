@@ -5,8 +5,7 @@ import {
     PERMITTERTE_ETTER_NIENDE_MARS
 } from '../filter-konstanter';
 
-const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE', 'NYE_BRUKERE_FOR_VEILEDER', 'PERMITTERTE_ETTER_NIENDE_MARS', 'IKKE_PERMITTERTE_ETTER_NIENDE_MARS',
-    'MIN_ARBEIDSLISTE_BLA', 'MIN_ARBEIDSLISTE_LILLA', 'MIN_ARBEIDSLISTE_GRONN', 'MIN_ARBEIDSLISTE_GUL',];
+const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE', 'NYE_BRUKERE_FOR_VEILEDER', 'PERMITTERTE_ETTER_NIENDE_MARS', 'IKKE_PERMITTERTE_ETTER_NIENDE_MARS'];
 
 export function leggTilFerdigFilter(filterListe: string[], filter: string): string[] {
     const newList = (filter) => filterListe.filter(v => v !== filter);
