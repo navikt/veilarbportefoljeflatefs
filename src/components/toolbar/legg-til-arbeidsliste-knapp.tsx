@@ -7,7 +7,7 @@ import { useLocation, useParams } from 'react-router';
 import { BrukerModell } from '../../model-interfaces';
 import { AppState } from '../../reducer';
 import { useIdentSelector } from '../../hooks/redux/use-inlogget-ident';
-import { ReactComponent as ArbeidslisteIkonLinje } from '../ikoner/arbeidslisteikon-linje.svg';
+import { ReactComponent as ArbeidslisteIkonLinje } from '../ikoner/arbeidsliste/arbeidslisteikon-linje.svg';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 interface LeggTilArbeidslisteProps {

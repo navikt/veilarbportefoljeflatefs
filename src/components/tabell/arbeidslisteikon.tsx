@@ -1,9 +1,9 @@
 import * as React from 'react';
 import '../../minoversikt/minoversikt.less';
-import { ReactComponent as ArbeidslisteikonBla } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_bla.svg';
-import { ReactComponent as ArbeidslisteikonLilla } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_lilla.svg';
-import { ReactComponent as ArbeidslisteikonGronn } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_gronn.svg';
-import { ReactComponent as ArbeidslisteikonGul } from '../modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_gul.svg';
+import { ReactComponent as ArbeidslisteikonBla } from '../ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
+import { ReactComponent as ArbeidslisteikonLilla } from '../ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
+import { ReactComponent as ArbeidslisteikonGronn } from '../ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
+import { ReactComponent as ArbeidslisteikonGul } from '../ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
 import { KategoriModell } from '../../model-interfaces';
 
 interface ArbeidslistekategoriProps {

@@ -12,7 +12,6 @@ function FiltreringStatusPermitterteEtterNiendeBrukere(props: FiltreringStatusGr
     const statusTall = useStatusTallSelector();
 
     return (
-
         <BarInputCheckbox
             filterNavn="permitterteEtterNiendeMars"
             max={statusTall.totalt}
