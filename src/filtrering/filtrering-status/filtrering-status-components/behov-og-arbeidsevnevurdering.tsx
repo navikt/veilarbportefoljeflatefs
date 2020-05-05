@@ -32,7 +32,6 @@ export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
                 max={statusTall.totalt}
                 checked={props.ferdigfilterListe.includes(ER_SYKMELDT_MED_ARBEIDSGIVER)}
                 antall={statusTall.erSykmeldtMedArbeidsgiver}
-                hidden={vedtakkStotteFeature}
             />
             <HiddenIfBarInputRadio
                 filterNavn="underVurdering"

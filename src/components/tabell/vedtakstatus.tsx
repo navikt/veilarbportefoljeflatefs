@@ -8,8 +8,12 @@ interface VedstakStatusKolonneProps {
 }
 
 const vedtakStatusTilTekst = {
-    SENDT_TIL_BESLUTTER: 'Til beslutter',
-    UTKAST_OPPRETTET: 'Utkast'
+    UTKAST_OPPRETTET : 'Utkast',
+    BESLUTTER_PROSESS_STARTET: 'Trenger beslutter',
+    BLI_BESLUTTER : 'Venter på beslutter',
+    GODKJENT_AV_BESLUTTER : 'Klar til utsendelse',
+    KLAR_TIL_BESLUTTER: 'Venter på beslutter',
+    KLAR_TIL_VEILEDER: 'Venter på veileder'
 };
 
 

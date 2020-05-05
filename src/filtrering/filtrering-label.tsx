@@ -20,6 +20,7 @@ function FiltreringLabel({label, slettFilter, harMuligMenIkkeValgtKolonne = fals
     const buttonClassnames = classNames('filtreringlabel', 'typo-undertekst', {'filtreringlabel--markert': markert}, {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne});
     return (
         <button
+            title={lagConfig(label).label}
             aria-label={arialLabel}
             className={buttonClassnames}
             onClick={slettFilter}>

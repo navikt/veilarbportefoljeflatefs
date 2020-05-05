@@ -2,14 +2,16 @@ import { AppState } from '../../reducer';
 import {Kolonne, ListevisningState, ListevisningType} from './listevisning';
 import { AktiviteterValg, FiltreringAktiviteterValg } from '../filtrering';
 import {
-    I_AVTALT_AKTIVITET, MIN_ARBEIDSLISTE,
+    I_AVTALT_AKTIVITET,
+    MIN_ARBEIDSLISTE,
     MOTER_IDAG,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
-    AAP_YTELSE_UNNTAK, UNDER_VURDERING
+    AAP_YTELSE_UNNTAK,
+    UNDER_VURDERING
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from "../../model-interfaces";
 
@@ -61,7 +63,7 @@ export function getFiltertingState(state: AppState, name: ListevisningType): Fil
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, name: ListevisningType): Kolonne[] {
 
-    return [Kolonne.BRUKER, Kolonne.FODSELSNR]
+    return ([] as Kolonne[])
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.MOTER_VARIGHET, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
