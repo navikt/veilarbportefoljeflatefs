@@ -23,7 +23,7 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
         dato: '05. MAI. 2020',
-        tittel: 'Filtrere på fargene på arbeidslisten',
+        tittel: 'Filtrering av arbeidsliste på farger',
         versjonId: '05.05.20',
         tekst: 'Nå kan du filtrere på de ulike fargene på arbeidslisteikonet. Når du velger “Min arbeidsliste” ser du de nye filtervalgene.',
 
