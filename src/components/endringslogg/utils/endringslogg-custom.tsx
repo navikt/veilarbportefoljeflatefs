@@ -25,6 +25,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '05. MAI. 2020',
         tittel: 'Filtrering av arbeidsliste på farger',
         versjonId: '05.05.20',
+        featureToggleName: 'veilarbportefolje.arbeidslistekategori_filtrering',
         tekst: 'Nå kan du filtrere på de ulike fargene på arbeidslisteikonet. Når du velger “Min arbeidsliste” ser du de nye filtervalgene.',
 
     }, {
