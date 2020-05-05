@@ -26,11 +26,11 @@ export function MinOversiktWrapper(props: PropsWithChildren<{}>) {
     );
 
     return (
-        <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
+        <div className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
             {visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
             <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold portefolje-side">
                 {props.children}
             </div>
-        </section>
+        </div>
     );
 }

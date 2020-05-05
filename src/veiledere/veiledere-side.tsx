@@ -48,47 +48,44 @@ function VeiledereSide() {
             <div className="side-storrelse blokk-xl">
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <section>
-                        <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
-                            <div className="status-filter-kolonne">
-                                <PanelBase className="blokk-xxxs sok-veileder">
-                                    <Undertittel>
-                                        Søk veileder
-                                    </Undertittel>
-                                    <FiltreringVeiledere/>
-                                </PanelBase>
-                                <MetrikkEkspanderbartpanel
-                                    apen={true}
-                                    tittelProps="undertittel"
-                                    lamellNavn="veiledergrupper"
-                                    tittel="Veiledergrupper"
-                                >
-                                    <FilteringVeilederGrupper filtergruppe="veiledere"/>
-                                </MetrikkEkspanderbartpanel>
-                            </div>
-                            <div className="liste-kolonne">
-                                <FiltreringLabelContainer
-                                    filtervalg={{
-                                        veiledere: lagLablerTilVeiledereMedIdenter(
-                                            filtervalg.veiledere,
-                                            veiledere.data.veilederListe,
-                                            slettVeilederFilter
-                                        )
-                                    }}
-                                    filtergruppe="veiledere"
-                                    className="filtrering-label-container"
-                                />
-                                <VeiledersideVisning
-                                    veiledere={veiledere.data.veilederListe}
-                                    portefoljestorrelser={portefoljestorrelser}
-                                    veilederFilter={filtervalg.veiledere}
-                                    antallVeiledere={veiledere.data.veilederListe.length}
-                                />
-                            </div>
+                    <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
+                        <div className="status-filter-kolonne">
+                            <PanelBase className="blokk-xxxs sok-veileder">
+                                <Undertittel>
+                                    Søk veileder
+                                </Undertittel>
+                                <FiltreringVeiledere/>
+                            </PanelBase>
+                            <MetrikkEkspanderbartpanel
+                                apen={true}
+                                tittelProps="undertittel"
+                                lamellNavn="veiledergrupper"
+                                tittel="Veiledergrupper"
+                            >
+                                <FilteringVeilederGrupper filtergruppe="veiledere"/>
+                            </MetrikkEkspanderbartpanel>
                         </div>
-                    </section>
+                        <div className="liste-kolonne">
+                            <FiltreringLabelContainer
+                                filtervalg={{
+                                    veiledere: lagLablerTilVeiledereMedIdenter(
+                                        filtervalg.veiledere,
+                                        veiledere.data.veilederListe,
+                                        slettVeilederFilter
+                                    )
+                                }}
+                                filtergruppe="veiledere"
+                                className="filtrering-label-container"
+                            />
+                            <VeiledersideVisning
+                                veiledere={veiledere.data.veilederListe}
+                                portefoljestorrelser={portefoljestorrelser}
+                                veilederFilter={filtervalg.veiledere}
+                                antallVeiledere={veiledere.data.veilederListe.length}
+                            />
+                        </div>
+                    </div>
                 </Innholdslaster>
-
             </div>
         </DocumentTitle>
     );

@@ -81,33 +81,32 @@ function EnhetSide() {
             <div className="side-storrelse blokk-xl">
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <section>
-                        <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
-                            <div className="status-filter-kolonne">
-                                <FiltreringContainer
-                                    filtervalg={filtervalg}
-                                    enhettiltak={tiltak}
-                                    filtergruppe="enhet"
-                                />
-                            </div>
-                            <div className="liste-kolonne">
-                                <FiltreringLabelContainer
-                                    filtervalg={{
-                                        ...filtervalg,
-                                        veiledere: veilederLabel
-                                    }}
-                                    filtergruppe="enhet"
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    listevisning={listevisning}
-                                    className="filtrering-label-container"
-                                />
-                                {harFilter
-                                    ? <>
-                                        <div
-                                            className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'sticky-container__fjernet'}>
-                                            <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
-                                            <span
-                                                className={flereEnnAntallBrukere(4) ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                    <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
+                        <div className="status-filter-kolonne">
+                            <FiltreringContainer
+                                filtervalg={filtervalg}
+                                enhettiltak={tiltak}
+                                filtergruppe="enhet"
+                            />
+                        </div>
+                        <div className="liste-kolonne">
+                            <FiltreringLabelContainer
+                                filtervalg={{
+                                    ...filtervalg,
+                                    veiledere: veilederLabel
+                                }}
+                                filtergruppe="enhet"
+                                enhettiltak={enhettiltak.data.tiltak}
+                                listevisning={listevisning}
+                                className="filtrering-label-container"
+                            />
+                            {harFilter
+                                ? <>
+                                    <div
+                                        className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'sticky-container__fjernet'}>
+                                        <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
+                                        <span
+                                            className={flereEnnAntallBrukere(4) ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
                                             <div
                                                 className={flereEnnAntallBrukere(4) ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
                                                 <Toolbar
@@ -125,16 +124,15 @@ function EnhetSide() {
                                                 <EnhetTabellOverskrift/>
                                             </div>
                                             </span>
-                                        </div>
-                                        <EnhetTabell
-                                            classNameWrapper={flereEnnAntallBrukere(0) ? 'portefolje__container' : 'portefolje__container__tom-liste'}
-                                        />
-                                    </>
-                                    : <VelgFilterMelding/>
-                                }
-                            </div>
+                                    </div>
+                                    <EnhetTabell
+                                        classNameWrapper={flereEnnAntallBrukere(0) ? 'portefolje__container' : 'portefolje__container__tom-liste'}
+                                    />
+                                </>
+                                : <VelgFilterMelding/>
+                            }
                         </div>
-                    </section>
+                    </div>
                 </Innholdslaster>
                 <ModalEnhetSideController/>
             </div>

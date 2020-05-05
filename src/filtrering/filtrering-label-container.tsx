@@ -133,10 +133,10 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                                        harMuligMenIkkeValgtKolonne={false} skalHaKryssIkon={false}/>;
 
     return (
-        <section className={className}>
+        <div className={className}>
             {filterElementer}
             {filterElementer.length >= 3 ? fjernAlle : null}
-        </section>
+        </div>
     );
 }
 
