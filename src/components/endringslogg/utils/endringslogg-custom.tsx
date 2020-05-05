@@ -22,12 +22,18 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '05. MAI. 2020',
+        tittel: 'Filtrere på fargene på arbeidslisten',
+        versjonId: '05.05.20',
+        tekst: 'Nå kan du filtrere på de ulike fargene på arbeidslisteikonet. Når du velger “Min arbeidsliste” ser du de nye filtervalgene.',
+
+    }, {
         dato: '04. MAI. 2020',
         tittel: 'Nå kan du markere et møte som videomøte',
         versjonId: '04.05.20',
         tekst: 'Nettmøte har endret navn til videomøte i aktivitetsplanen. Hvis du velger videomøte, så ligger det nå en lenke til rutinen for videomøte. Brukeren ser ikke denne lenken.',
 
-    },{
+    }, {
         dato: '06. APR. 2020',
         tittel: 'Filtrering på brukers situasjon fra registrering',
         versjonId: '06.04.20',

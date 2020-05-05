@@ -43,7 +43,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
             {erFeaturePa && props.checked && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">
                     <BarInputCheckbox
-                        labelTekst={<><ArbeidslisteikonBla/><span className="arbeidslistetekst">Blå</span></>}
+                        labelTekst={<><ArbeidslisteikonBla/><span className="arbeidslistetekst" title="Arbeidslistekategori blå">Blå</span></>}
                         filterNavn="minArbeidslisteBla"
                         max={statusTall.totalt}
                         handleChange={props.handleChangeCheckbox}
@@ -51,7 +51,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         antall={statusTall.minArbeidslisteBla}
                     />
                     <BarInputCheckbox
-                        labelTekst={<><ArbeidslisteikonLilla/><span className="arbeidslistetekst">Lilla</span></>}
+                        labelTekst={<><ArbeidslisteikonLilla/><span className="arbeidslistetekst" title="Arbeidslistekategori lilla">Lilla</span></>}
                         filterNavn="minArbeidslisteLilla"
                         max={statusTall.totalt}
                         handleChange={props.handleChangeCheckbox}
@@ -59,7 +59,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         antall={statusTall.minArbeidslisteLilla}
                     />
                     <BarInputCheckbox
-                        labelTekst={<><ArbeidslisteikonGronn/><span className="arbeidslistetekst">Grønn</span></>}
+                        labelTekst={<><ArbeidslisteikonGronn/><span className="arbeidslistetekst" title="Arbeidslistekategori grønn">Grønn</span></>}
                         filterNavn="minArbeidslisteGronn"
                         max={statusTall.totalt}
                         handleChange={props.handleChangeCheckbox}
@@ -67,7 +67,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         antall={statusTall.minArbeidslisteGronn}
                     />
                     <BarInputCheckbox
-                        labelTekst={<><ArbeidslisteikonGul/><span className="arbeidslistetekst">Gul</span></>}
+                        labelTekst={<><ArbeidslisteikonGul/><span className="arbeidslistetekst" title="Arbeidslistekategori gul">Gul</span></>}
                         filterNavn="minArbeidslisteGul"
                         max={statusTall.totalt}
                         handleChange={props.handleChangeCheckbox}
