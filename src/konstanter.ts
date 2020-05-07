@@ -7,7 +7,7 @@ export const IKKE_SATT = 'ikke_satt';
 export const DEFAULT_PAGINERING_STORRELSE = 20;
 
 export const SPOR_OM_TILBAKEMELDING = 'portefolje.spor_om_tilbakemelding';
-export const VEDTAKSTOTTE = 'veilarbportfolje-hent-data-fra-vedtakstotte';
+export const VEDTAKSTOTTE = 'pto.vedtaksstotte.pilot';
 export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const ARBEIDSLISTEKATEGORI = 'veilarbportefolje.arbeidslistekategori_filtrering';
 
