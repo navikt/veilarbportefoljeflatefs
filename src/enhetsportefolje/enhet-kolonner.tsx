@@ -28,8 +28,8 @@ import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import {OrNothing} from "../utils/types/types";
 import './enhetsportefolje.less';
 import './brukerliste.less';
-import {VedtakStatusKolonne} from "../components/tabell/vedtakstatus";
 import {DagerSidenKolonne} from "../components/tabell/kolonner/dagersidenkolonne";
+import {TekstKolonne} from "../components/tabell/kolonner/tekstkolonne";
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -153,9 +153,10 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 dato={varighet}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
-            <VedtakStatusKolonne
-                bruker={bruker}
+            <TekstKolonne
+                tekst={bruker.vedtakStatus}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+                className= "col col-xs-2"
             />
             <DagerSidenKolonne
                 className="col col-xs-2"

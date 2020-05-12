@@ -27,8 +27,8 @@ import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetD
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import {OrNothing} from "../utils/types/types";
 import './minoversikt.less';
-import {VedtakStatusKolonne} from "../components/tabell/vedtakstatus";
 import {DagerSidenKolonne} from "../components/tabell/kolonner/dagersidenkolonne";
+import {TekstKolonne} from "../components/tabell/kolonner/tekstkolonne";
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -172,9 +172,10 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                 valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
             />
-            <VedtakStatusKolonne
-                bruker={bruker}
+            <TekstKolonne
+                tekst={bruker.vedtakStatus}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+                className= "col col-xs-2"
             />
             <DagerSidenKolonne
                 className="col col-xs-2"
