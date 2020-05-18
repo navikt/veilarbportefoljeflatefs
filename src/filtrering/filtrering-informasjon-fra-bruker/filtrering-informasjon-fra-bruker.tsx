@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { cvJobbprofil, registreringstype } from '../filter-konstanter';
-import DropdownNy from '../../components/dropdown/dropdown-ny';
+import Dropdown from '../../components/dropdown/dropdown';
 import CheckboxFilterform from '../../components/checkbox-filterform/checkbox-filterform';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { ReactComponent as InfoIkon } from '../../components/ikoner/info-ikon.svg';
@@ -14,7 +14,7 @@ interface FiltreringInformasjonOmBrukerProps {
 const FiltreringInformasjonOmBruker = ({filtervalg, endreFiltervalg}: FiltreringInformasjonOmBrukerProps) => (
     <div className="row">
         <div className="col-sm-12 blokk-xs info-om-brukere__wrapper">
-            <DropdownNy
+            <Dropdown
                 name="CV og jobbprofil"
                 render={(lukkDropdown) =>
                     <CheckboxFilterform
@@ -27,7 +27,7 @@ const FiltreringInformasjonOmBruker = ({filtervalg, endreFiltervalg}: Filtrering
                     />
                 }
             />
-            <DropdownNy
+            <Dropdown
                 name="Svar fra registrering"
                 render={(lukkDropdown) =>
                     <>
