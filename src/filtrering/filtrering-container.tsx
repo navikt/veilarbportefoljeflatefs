@@ -27,7 +27,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
-    const erFeaturePa = useFeatureSelector()(CVJOBBPROFIL);
+    const erCvJobbprofilFeaturePa = useFeatureSelector()(CVJOBBPROFIL);
 
     return (
         <div className="blokk-m">
@@ -54,7 +54,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                     filtervalg={filtervalg}
                 />
             </MetrikkEkspanderbartpanel>
-            {erFeaturePa &&
+            {erCvJobbprofilFeaturePa &&
             <MetrikkEkspanderbartpanel
                 tittel="Informasjon fra bruker"
                 tittelProps="undertittel"

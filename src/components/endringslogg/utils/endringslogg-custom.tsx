@@ -17,7 +17,7 @@ export interface EndringsloggInnlegg {
 
 export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
     sett: boolean;
-    erFeaturePa?: boolean;
+    erEndringsloggFeaturePa?: boolean;
 }
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
@@ -216,7 +216,7 @@ export function mapRemoteToState(remotestorage: string[], features: FeaturesStat
         return ({
             ...el,
             sett: settRemote,
-            erFeaturePa: el.featureToggleName ? features[el.featureToggleName] : true
+            erEndringsloggFeaturePa: el.featureToggleName ? features[el.featureToggleName] : true
         });
     });
 }
