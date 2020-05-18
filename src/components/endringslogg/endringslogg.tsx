@@ -15,7 +15,6 @@ interface EndringsProps {
 }
 
 export default function Endringslogg(props: EndringsProps) {
-
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const overordnetNotifikasjon = props.innhold
         .filter((elem) => elem.erEndringsloggFeaturePa)

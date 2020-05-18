@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../arbeidsliste-kategori.less';
+import './arbeidsliste-kategori.less';
 import { ReactComponentElement } from 'react';
 
 interface ArbeidslisteikonProps {

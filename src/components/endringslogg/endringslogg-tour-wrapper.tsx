@@ -31,8 +31,8 @@ function EndringsloggTourWrapper() {
                 setIsLoading(false)
             })
             .catch(() => {
+                setIsLoading(false);
                 setInnholdsliste(setHarSettAlt);
-                setIsLoading(false)
             })
     },[alleFeatureToggles]);
 
@@ -55,7 +55,7 @@ function EndringsloggTourWrapper() {
                 .catch((e) => console.log(e)); // tslint:disable-line
         }
         if (ulestFelt) {
-            const newList = setHarSettAlt();
+            const newList = setHarSettAlt(innholdsListe);
             setInnholdsliste(newList);
             registrerInnholdRemote(newList);
         }

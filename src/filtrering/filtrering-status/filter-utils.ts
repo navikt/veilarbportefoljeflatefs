@@ -1,6 +1,9 @@
 import { Tiltak } from '../../ducks/enhettiltak';
 import { OrNothing } from '../../utils/types/types';
-import { IKKE_PERMITTERTE_ETTER_NIENDE_MARS, PERMITTERTE_ETTER_NIENDE_MARS } from '../filter-konstanter';
+import {
+    IKKE_PERMITTERTE_ETTER_NIENDE_MARS,
+    PERMITTERTE_ETTER_NIENDE_MARS
+} from '../filter-konstanter';
 
 const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE', 'NYE_BRUKERE_FOR_VEILEDER', 'PERMITTERTE_ETTER_NIENDE_MARS', 'IKKE_PERMITTERTE_ETTER_NIENDE_MARS'];
 

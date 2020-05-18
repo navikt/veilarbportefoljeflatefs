@@ -49,6 +49,7 @@ export const initialState: FiltervalgModell = {
     navnEllerFnrQuery: '',
     veilederNavnQuery: '',
     registreringstype: [],
+    arbeidslisteKategori: [],
     cvJobbprofil: [],
 };
 

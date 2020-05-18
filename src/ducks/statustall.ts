@@ -18,6 +18,10 @@ export interface Statustall {
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;
     minArbeidsliste: number;
+    minArbeidslisteBla: number;
+    minArbeidslisteLilla: number;
+    minArbeidslisteGronn: number;
+    minArbeidslisteGul: number;
     erSykmeldtMedArbeidsgiver: number;
     moterMedNAVIdag: number;
     trengerVurdering: number;
@@ -44,6 +48,10 @@ export const initalStatusState: StatustallState = {
         ikkeIavtaltAktivitet: 0,
         iavtaltAktivitet: 0,
         minArbeidsliste: 0,
+        minArbeidslisteBla: 0,
+        minArbeidslisteLilla: 0,
+        minArbeidslisteGronn: 0,
+        minArbeidslisteGul: 0,
         erSykmeldtMedArbeidsgiver: 0,
         nyeBrukereForVeileder: 0,
         moterMedNAVIdag: 0,

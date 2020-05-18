@@ -17,6 +17,9 @@ import { pagineringSetup } from '../../ducks/paginering';
 import FiltreringStatusIkkePermitterteEtterNiendeBrukere from './filtrering-status-components/ikke-permitterte-brukere';
 import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-components/permitterte-brukere';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';
+import {
+    MIN_ARBEIDSLISTE,
+} from '../filter-konstanter';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -24,7 +27,8 @@ interface FiltreringStatusProps {
 }
 
 export function FiltreringStatus(props: FiltreringStatusProps) {
-    const ferdigfilterListe = props.filtervalg.ferdigfilterListe!;
+    const ferdigfilterListe = props.filtervalg.ferdigfilterListe;
+    const kategoriliste = props.filtervalg.arbeidslisteKategori;
     const dispatch = useDispatch();
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
@@ -33,17 +37,29 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
             'ferdigfilterListe', ferdigFilterListe, props.filtergruppe));
     }
 
+    function dispatchArbeidslisteKategoriChange(e: React.ChangeEvent<HTMLInputElement>) {
+        dispatch(pagineringSetup({side: 1}));
+        const nyeFerdigfilterListe = e.target.checked
+            ? [...kategoriliste, e.target.value]
+            : kategoriliste.filter((elem) => elem !== e.target.value);
+        dispatch(endreFiltervalg(
+            'arbeidslisteKategori', nyeFerdigfilterListe, props.filtergruppe));
+    }
+
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
         const nyeFerdigfilterListe = e.target.checked
             ? leggTilFerdigFilter(ferdigfilterListe!, e.target.value)
             : fjernFerdigfilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
-
     }
 
     function handleRadioButtonChange(e: React.ChangeEvent<HTMLInputElement>) {
         const nyeFerdigfilterListe = leggTilFerdigFilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
+        if (e.target.value !== 'MIN_ARBEIDSLISTE') {
+            dispatch(endreFiltervalg(
+                'arbeidslisteKategori', [], props.filtergruppe));
+        }
     }
 
     return (
@@ -108,9 +124,13 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 handleChange={handleRadioButtonChange}
             />
             <FilterStatusMinArbeidsliste
-                ferdigfilterListe={ferdigfilterListe}
+                ferdigfilterListe={kategoriliste}
                 handleChange={handleRadioButtonChange}
+                handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
                 hidden={props.filtergruppe !== 'veileder'}
+                filtervalg={props.filtervalg}
+                endreFiltervalg={dispatchFiltreringStatusChanged}
+                checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
             />
         </FiltreringStatusContainer>
     );

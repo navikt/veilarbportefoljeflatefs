@@ -1,5 +1,5 @@
 import { range, lag2Sifret } from '../utils/utils';
-import { Sorteringsfelt } from '../model-interfaces';
+import { KategoriModell, Sorteringsfelt } from '../model-interfaces';
 
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
@@ -34,6 +34,10 @@ export const mapFilternavnTilFilterValue = {
     iavtaltAktivitet: I_AVTALT_AKTIVITET,
     inaktiveBrukere: INAKTIVE_BRUKERE,
     minArbeidsliste: MIN_ARBEIDSLISTE,
+    minArbeidslisteBla: KategoriModell.BLA,
+    minArbeidslisteLilla: KategoriModell.LILLA,
+    minArbeidslisteGronn: KategoriModell.GRONN,
+    minArbeidslisteGul: KategoriModell.GUL,
     utlopYtelse: UTLOP_YTELSE,
     aapYtelse: AAP_YTELSE,
     aapYtelseMaxtid: AAP_YTELSE_MAXTID,
@@ -68,6 +72,13 @@ export const ferdigfilterListe = {
     UNDER_VURDERING: 'Under vurdering',
     PERMITTERTE_ETTER_NIENDE_MARS: 'Permitterte etter 09.03.2020',
     IKKE_PERMITTERTE_ETTER_NIENDE_MARS: 'Alle utenom permitterte etter 09.03.2020',
+};
+
+export const arbeidslisteKategori = {
+    BLA: 'Blå',
+    LILLA: 'Lilla',
+    GRONN: 'Grønn',
+    GUL: 'Gul',
 };
 
 export const alder = {
@@ -213,5 +224,6 @@ export default {
     ytelseAapSortering,
     manuellBrukerStatus,
     registreringstype,
+    arbeidslisteKategori,
     cvJobbprofil
 };

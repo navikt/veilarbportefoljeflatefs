@@ -55,7 +55,7 @@ export interface FiltervalgModell {
     inaktiveBrukere?: boolean;
     venterPaSvarFraNAV?: boolean;
     venterPaSvarFraBruker?: boolean;
-    minArbeidsliste?: boolean;
+    arbeidslisteKategori: KategoriModell[];
     alder?: string[];
     kjonn?: string[];
     fodselsdagIMnd?: string[];

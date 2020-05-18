@@ -18,7 +18,7 @@ import Header from '../components/tabell/header';
 import TittelValg from '../utils/utils';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './minoversikt.less';
-import { ReactComponent as ArbeidslisteikonBla } from '../components/modal/arbeidsliste/arbeidslistekategori/arbeidslisteikon_bla.svg';
+import { ReactComponent as ArbeidslisteikonBla } from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
 import {OrNothing} from "../utils/types/types";
 
 function harValgteAktiviteter(aktiviteter) {
