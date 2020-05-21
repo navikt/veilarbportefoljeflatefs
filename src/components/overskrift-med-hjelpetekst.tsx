@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Element } from 'nav-frontend-typografi';
-import { HjelpetekstAuto } from 'nav-frontend-hjelpetekst';
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { logEvent } from '../utils/frontend-logger';
 import { finnSideNavn } from '../middleware/metrics-middleware';
 import '../filtrering/filtrering-skjema.less';
@@ -36,9 +36,9 @@ class OverskriftMedHjelpetekst extends React.Component<OverskriftMedHjelpeTekstP
                 <div ref={(ref) => {
                     this.catchClickRef = ref;
                 }}>
-                    <HjelpetekstAuto id={hjelpeTekst}>
+                    <Hjelpetekst id={hjelpeTekst}>
                         {hjelpeTekst}
-                    </HjelpetekstAuto>
+                    </Hjelpetekst>
                 </div>
             </div>
         );

@@ -1,18 +1,16 @@
 import React from 'react';
 import { Field, FieldProps, getIn } from 'formik';
-import Datovelger from 'nav-datovelger/dist/datovelger/Datovelger';
+import { Datovelger } from 'nav-datovelger';
 import { validerDatoFeldt } from '../../../utils/dato-utils';
 import classNames from 'classnames';
-import moment from 'moment';
 import './daypicker.less';
 import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 
 interface FormikDatepickerProps {
     name: string;
-    className?: string;
 }
 
-function FormikDatoVelger({name, className}: FormikDatepickerProps) {
+function FormikDatoVelger({name}: FormikDatepickerProps) {
     return (
         <Field
             validate={(value: string) => validerDatoFeldt(value, new Date(), true)}
@@ -26,22 +24,14 @@ function FormikDatoVelger({name, className}: FormikDatepickerProps) {
                     <div className={datePickerClassName}>
                         <span className="skjemaelement__label">Frist</span>
                         <Datovelger
+                            id="fristDatovelger"
                             input={{
                                 id: 'fristInput',
                                 name: 'frist',
                                 placeholder: 'dd.mm.åååå',
-                                ariaLabel: 'Frist:',
-                                onChange: (value: string) => setFieldValue(field.name, value)
+                                ariaLabel: 'Frist:'
                             }}
-                            id="fristDatovelger"
-                            onChange={(date: string) => {
-                                // HAKS FØR ATT NAV-DATOVELGER  IKKE STØTTER OPTIONAL DATO
-                                if (!field.value && !moment(date).isValid()) {
-                                    return;
-                                }
-                                setFieldValue(field.name, date);
-                            }
-                            }
+                            onChange={(date?: string) => setFieldValue(field.name, date)}
                             valgtDato={field.value}
                             dayPickerProps={{className: 'datovelger__DayPicker'}}
                         />
