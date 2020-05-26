@@ -82,7 +82,7 @@ function FiltreringFilter ({filtervalg, endreFiltervalg, enhettiltak}: Filtrerin
                 </div>
                 <div className="col-sm-12 blokk-xs">
                     <Element className="blokk-xxs" tag="h3">
-                        Situasjon
+                        Status og brukergrupper
                     </Element>
                     {!useFeatureSelector()(CVJOBBPROFIL) &&
                     <Dropdown
