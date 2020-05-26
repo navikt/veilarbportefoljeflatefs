@@ -73,7 +73,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                     Tilbakemelding
                 </Innholdstittel>
                 <Normaltekst style={styleBottom} className="tilbakemelding-modal__ingress">
-                    Vi gjør en anonym kartlegging. Hvor fornøyd er du med dialogen i aktivitetsplanen?
+                    Hvor fornøyd er du med filtrering på arbeidslistekategorier (farger)? Svarene er anonyme.
                 </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
                     <TilfredshetValg
@@ -87,7 +87,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         <div className="tilbakemelding-modal__kommentar">
                             <Textarea
                                 className="tilbakemelding-modal__kommentar-felt"
-                                label='Fortell gjerne mer om hvorfor.'
+                                label='Fortell gjerne hvordan du bruker kategoriene og filtrering på fargene.'
                                 rows={this.KOMMENTAR_ROWS}
                                 maxLength={this.KOMMENTAR_MAX_CHAR}
                                 value={kommentar}
