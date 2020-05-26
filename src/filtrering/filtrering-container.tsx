@@ -36,6 +36,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 endreFiltervalg={doEndreFiltervalg}
             />
             <MetrikkEkspanderbartpanel
+                apen={false}
                 tittel="Veiledergrupper"
                 tittelProps="undertittel"
                 lamellNavn="veiledergrupper"
@@ -56,6 +57,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
             </MetrikkEkspanderbartpanel>
             {erCvJobbprofilFeaturePa &&
             <MetrikkEkspanderbartpanel
+                apen={false}
                 tittel="Informasjon fra bruker"
                 tittelProps="undertittel"
                 lamellNavn="informasjon-fra-bruker"
