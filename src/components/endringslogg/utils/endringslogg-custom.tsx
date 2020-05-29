@@ -22,6 +22,20 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '29. MAI. 2020',
+        tittel: 'Nytt filter på CV/jobbprofil',
+        versjonId: '29.05.20',
+        featureToggleName: 'veilarbportefolje.cv-jobbprofil',
+        tekst: 'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med NAV. Da blir det enklere å ' +
+            'identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og ' +
+            'jobbprofil på arbeidsplassen.no. Filteret ligger i en ny filtergruppe, “Informasjon fra bruker”, og ' +
+            'filteret “Svar fra registrering” er flyttet til denne gruppen.',
+        children:
+            <EndringsloggLinkMedIkon
+                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nytt-filter-i-oversikten--Delt-ikke-delt-CV-og-jobbprofil-med-NAV.aspx"
+                linkTekst="Nyhetssak på Navet"
+            />
+    }, {
         dato: '05. MAI. 2020',
         tittel: 'Filtrering av arbeidsliste på farger',
         versjonId: '05.05.20',
