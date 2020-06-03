@@ -188,6 +188,11 @@ export const aktiviteter = {
 
 const veiledere = {};
 
+export const cvJobbprofil = {
+    HAR_DELT_CV: 'CV/jobbprofil delt med NAV',
+    HAR_IKKE_DELT_CV: 'Ikke delt CV/jobbprofil med NAV'
+};
+
 export const registreringstype = {
     ER_PERMITTERT: 'Er permittert eller kommer til å bli permittert',
     USIKKER_JOBBSITUASJON: 'Er usikker på jobbsituasjonen min',
@@ -219,5 +224,6 @@ export default {
     ytelseAapSortering,
     manuellBrukerStatus,
     registreringstype,
-    arbeidslisteKategori
+    arbeidslisteKategori,
+    cvJobbprofil
 };

@@ -72,6 +72,7 @@ export interface FiltervalgModell {
     manuellBrukerStatus?: string[];
     veilederNavnQuery: string;
     registreringstype: string[];
+    cvJobbprofil: string[]
 }
 
 export interface EnhetModell {

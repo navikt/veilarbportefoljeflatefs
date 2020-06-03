@@ -4,7 +4,8 @@ import {
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
-    ARBEIDSLISTEKATEGORI
+    ARBEIDSLISTEKATEGORI,
+    CVJOBBPROFIL,
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -17,6 +18,7 @@ const initalState: FeaturesState = {
     [SPOR_OM_TILBAKEMELDING]: false,
     [VEDTAKSTOTTE]: false,
     [ARBEIDSLISTEKATEGORI]: false,
+    [CVJOBBPROFIL]: false,
 };
 
 // Reducer
