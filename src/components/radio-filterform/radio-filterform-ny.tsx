@@ -28,7 +28,7 @@ export function RadioFilterformNy({filterId, onSubmit, valg, closeDropdown, filt
                     />)}
             </div>
             <div
-                className={classNames('checkbox-filterform__under-valg')}
+                className={classNames('radio-filterform__under-valg')}
             >
                 <button onClick={createHandleOnSubmit}
                         className={classNames('knapp', 'knapp--mini', {'knapp--hoved': valgtFilterValg})}>

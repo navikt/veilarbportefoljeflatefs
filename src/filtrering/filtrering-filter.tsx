@@ -22,7 +22,9 @@ import Dropdown from '../components/dropdown/dropdown';
 import '../components/checkbox-filterform/checkbox-filterform.less';
 import FodselsdatoFilterform from '../components/checkbox-filterform/fodselsdato-filterform';
 import { ReactComponent as InfoIkon } from '../components/ikoner/info-ikon.svg';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
+import { CVJOBBPROFIL } from '../konstanter';
+import './filtrering-informasjon-fra-bruker/filtrering-info-fra-bruker.less';
 import {GJEM_HOVEDMAL} from '../konstanter';
 
 interface FiltreringFilterProps {
@@ -33,9 +35,7 @@ interface FiltreringFilterProps {
 
 function FiltreringFilter ({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
     const gjemHovedMal = useFeatureSelector()(GJEM_HOVEDMAL);
-
     return (
-        <div>
             <div className="row">
                 <div className="col-sm-12 blokk-xs">
                     <Element className="blokk-xxs" tag="h3">
@@ -82,8 +82,9 @@ function FiltreringFilter ({filtervalg, endreFiltervalg, enhettiltak}: Filtrerin
                 </div>
                 <div className="col-sm-12 blokk-xs">
                     <Element className="blokk-xxs" tag="h3">
-                        Situasjon
+                        Status og brukergrupper
                     </Element>
+                    {!useFeatureSelector()(CVJOBBPROFIL) &&
                     <Dropdown
                         name="Svar fra registrering"
                         render={(lukkDropdown) =>
@@ -105,6 +106,7 @@ function FiltreringFilter ({filtervalg, endreFiltervalg, enhettiltak}: Filtrerin
                             </>
                         }
                     />
+                    }
                     <Dropdown
                         name="Innsatsgruppe"
                         render={(lukkDropdown) =>
@@ -227,7 +229,6 @@ function FiltreringFilter ({filtervalg, endreFiltervalg, enhettiltak}: Filtrerin
                     />
                 </div>
             </div>
-        </div>
     );
 }
 

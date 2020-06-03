@@ -10,10 +10,12 @@ export const SPOR_OM_TILBAKEMELDING = 'portefolje.spor_om_tilbakemelding';
 export const VEDTAKSTOTTE = 'pto.vedtaksstotte.pilot';
 export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const ARBEIDSLISTEKATEGORI = 'veilarbportefolje.arbeidslistekategori_filtrering';
+export const CVJOBBPROFIL = 'veilarbportefolje.cv-jobbprofil';
 
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
     GJEM_HOVEDMAL,
-    ARBEIDSLISTEKATEGORI
+    ARBEIDSLISTEKATEGORI,
+    CVJOBBPROFIL
 ];
