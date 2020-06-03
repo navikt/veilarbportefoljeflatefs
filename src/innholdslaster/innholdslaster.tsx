@@ -70,9 +70,9 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
         const {avhengigheter, className, children} = this.props;
 
         if (typeof children === 'function') {
-            return <section className={className}>{children(avhengigheter)}</section>;
+            return <div className={className}>{children(avhengigheter)}</div>;
         }
-        return <section className={className}>{children}</section>;
+        return <div className={className}>{children}</div>;
     }
 
     render() {

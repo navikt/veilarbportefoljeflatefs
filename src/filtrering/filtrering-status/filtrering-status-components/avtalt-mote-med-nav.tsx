@@ -12,7 +12,6 @@ function FiltreringStatusAvtaltMoteMedNav(props: FiltreringStatusGruppe) {
             <BarInputRadio
                 filterNavn="avtaltMoteMedNav"
                 handleChange={props.handleChange}
-                max={statusTall.totalt}
                 antall={statusTall.moterMedNAVIdag}
                 checked={props.ferdigfilterListe.includes(MOTER_IDAG)}
             />

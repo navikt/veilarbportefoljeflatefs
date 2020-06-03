@@ -42,9 +42,7 @@ function MinoversiktSide() {
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
-    const flereEnnAntallBrukere = (antall: number) => {
-        return antallBrukere > antall;
-    };
+
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
 
     return (
@@ -68,12 +66,12 @@ function MinoversiktSide() {
                                 listevisning={listevisning}
                                 className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                             />
-                            <div className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'ikke-sticky__container'}>
+                            <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <TabellOverskrift
                                     className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
-                                <span className={flereEnnAntallBrukere(4) ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                                <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
                                 <div
-                                    className={flereEnnAntallBrukere(4) ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
+                                    className={antallBrukere > 4 ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
                                         <Toolbar
                                             filtergruppe={ListevisningType.minOversikt}
                                             onPaginering={() => dispatch(hentPortefoljeForVeileder(
@@ -101,7 +99,7 @@ function MinoversiktSide() {
                             <MinoversiktTabell
                                 innloggetVeileder={innloggetVeilederIdent}
                                 settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                classNameWrapper={flereEnnAntallBrukere(0) ? 'portefolje__container' : 'portefolje__container__tom-liste'}
+                                classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'}
                             />
                             <MinOversiktModalController/>
                         </div>

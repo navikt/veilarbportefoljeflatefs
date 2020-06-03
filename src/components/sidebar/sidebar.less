@@ -1,0 +1,65 @@
+@import "~nav-frontend-core/less/core";
+
+.veilarbportefoljeflatefs {
+    .sidebar {
+        height: fit-content;
+        width: 20rem;
+        position: sticky;
+        top: 0;
+        z-index: 4;
+        display: grid;
+        grid-template-rows: auto auto;
+        row-gap: 5px;
+
+        &__tab {
+            position: relative;
+            display: block;
+            background-color: transparent;
+            padding: .5rem .2rem 0;
+            height: auto;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: 0.3rem solid white;
+
+            &-container {
+                grid-row: 1;
+                display: flex;
+                justify-content: space-between;
+                background-color: white;
+                box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+            }
+
+            &-valgt {
+                border-bottom: 0.3rem solid @navBla;
+            }
+
+
+            &-ikon {
+                width: 3rem;
+                height: 2rem;
+            }
+        }
+
+        &__hidden {
+            .sidebar__tab-valgt {
+                border-bottom: 0.3rem solid white;
+            }
+        }
+
+        &__content-container {
+            grid-row: 2;
+            height: fit-content;
+            z-index: 5;
+            background-color: white;
+            padding: .5rem;
+            position: absolute;
+            width: inherit;
+            box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+
+            .typo-systemtittel {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
+
