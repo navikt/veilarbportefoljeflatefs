@@ -57,7 +57,7 @@ export interface FiltervalgModell {
     venterPaSvarFraBruker?: boolean;
     arbeidslisteKategori: KategoriModell[];
     alder?: string[];
-    kjonn?: null | string[];
+    kjonn?: null | string;
     fodselsdagIMnd?: string[];
     innsatsgruppe?: string[];
     formidlingsgruppe?: string[];
@@ -72,7 +72,7 @@ export interface FiltervalgModell {
     manuellBrukerStatus?: string[];
     veilederNavnQuery: string;
     registreringstype: string[];
-    cvJobbprofil: null | string[]
+    cvJobbprofil: null | string
 }
 
 export interface EnhetModell {
