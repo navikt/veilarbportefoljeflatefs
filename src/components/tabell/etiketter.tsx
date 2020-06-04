@@ -49,6 +49,24 @@ function Etiketter({className, bruker, erVedtakStotteFeaturePa}: EtiketterProps)
                 Behov for AEV
             </Etikett>
             <Etikett
+                type={EtikettType.BEHOV_AEV}
+                skalVises={erVedtakStotteFeaturePa && bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.OPPGITT_HINDRINGER}
+            >
+               Oppgitt hindringer
+            </Etikett>
+            <Etikett
+                type={EtikettType.BEHOV_AEV}
+                skalVises={erVedtakStotteFeaturePa && bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ANTATT_GODE_MULIGHETER}
+            >
+               Antatt gode muligheter
+            </Etikett>
+            <Etikett
+                type={EtikettType.BEHOV_AEV}
+                skalVises={erVedtakStotteFeaturePa && bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING}
+            >
+                Antatt behov for veiledning
+            </Etikett>
+            <Etikett
                 type={EtikettType.PERMITTERTE_ETTER_NIENDE_MARS}
                 skalVises={bruker.erPermittertEtterNiendeMars}
             >

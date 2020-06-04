@@ -5,6 +5,7 @@ import CheckboxFilterform from '../../components/checkbox-filterform/checkbox-fi
 import { Normaltekst } from 'nav-frontend-typografi';
 import { ReactComponent as InfoIkon } from '../../components/ikoner/info-ikon.svg';
 import './filtrering-info-fra-bruker.less';
+import { RadioFilterform } from '../../components/radio-filterform/radio-filterform';
 
 interface FiltreringInformasjonOmBrukerProps {
     filtervalg: any;
@@ -17,13 +18,12 @@ const FiltreringInformasjonOmBruker = ({filtervalg, endreFiltervalg}: Filtrering
             <Dropdown
                 name="CV og jobbprofil"
                 render={(lukkDropdown) =>
-                    <CheckboxFilterform
-                        form="cvJobbprofil"
+                    <RadioFilterform
                         valg={cvJobbprofil}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
-                        endreFilterValg={endreFiltervalg}
                         closeDropdown={lukkDropdown}
-                        className="cvJobbprofil"
+                        filterId="cvJobbprofil"
                     />
                 }
             />
