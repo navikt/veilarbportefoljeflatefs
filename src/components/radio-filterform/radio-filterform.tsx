@@ -3,13 +3,13 @@ import classNames from 'classnames';
 import { Radio } from 'nav-frontend-skjema';
 import './radio-filterform.less';
 
-export function RadioFilterform({filterId, onSubmit, valg, closeDropdown, filtervalg}) {
+export function RadioFilterform({filterId, endreFiltervalg, valg, closeDropdown, filtervalg}) {
 
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[filterId]);
 
     const createHandleOnSubmit = () => {
         if (valgtFilterValg) {
-            onSubmit(filterId, valgtFilterValg);
+            endreFiltervalg(filterId, valgtFilterValg);
         }
         closeDropdown();
     };

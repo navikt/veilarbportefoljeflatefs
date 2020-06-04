@@ -69,16 +69,16 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Dropdown
                     name="Kjønn"
                     render={(lukkDropdown) =>
-                        <CheckboxFilterform
-                            form="kjonn"
-                            filtervalg={filtervalg}
+                        <RadioFilterform
                             valg={kjonn}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
+                            filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
-                            columns={2}
+                            filterId="kjonn"
                         />
                     }
                 />
+
             </div>
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
@@ -190,7 +190,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     render={(lukkDropdown) =>
                         <RadioFilterform
                             valg={ytelse}
-                            onSubmit={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
                             filterId="ytelse"
