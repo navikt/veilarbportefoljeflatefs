@@ -34,7 +34,7 @@ export type FiltreringAktiviteterValg = {
 export const initialState: FiltervalgModell = {
     ferdigfilterListe: [],
     alder: [],
-    kjonn: [],
+    kjonn: null,
     fodselsdagIMnd: [],
     innsatsgruppe: [],
     formidlingsgruppe: [],
@@ -50,7 +50,7 @@ export const initialState: FiltervalgModell = {
     veilederNavnQuery: '',
     registreringstype: [],
     arbeidslisteKategori: [],
-    cvJobbprofil: [],
+    cvJobbprofil: null,
 };
 
 function fjern(verdi, fjernVerdi) {
