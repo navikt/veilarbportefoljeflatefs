@@ -69,12 +69,13 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Dropdown
                     name="Kjønn"
                     render={(lukkDropdown) =>
-                        <RadioFilterform
-                            valg={kjonn}
-                            onSubmit={endreFiltervalg}
+                        <CheckboxFilterform
+                            form="kjonn"
                             filtervalg={filtervalg}
+                            valg={kjonn}
+                            endreFilterValg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
-                            filterId="kjonn"
+                            columns={2}
                         />
                     }
                 />
