@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { cvJobbprofil, registreringstype, ytelse } from '../filter-konstanter';
+import { cvJobbprofil, registreringstype } from '../filter-konstanter';
 import Dropdown from '../../components/dropdown/dropdown';
 import CheckboxFilterform from '../../components/checkbox-filterform/checkbox-filterform';
 import { Normaltekst } from 'nav-frontend-typografi';
