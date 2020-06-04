@@ -98,8 +98,8 @@ export const fodselsdagIMnd = () => range(1, 31, true).reduce((acc, x) => ({
 }), {});
 
 export const kjonn = {
-    K: 'Kvinne',
-    M: 'Mann'
+    K: {label: 'Kvinne'},
+    M: {label: 'Mann'}
 };
 
 export const innsatsgruppe = {
