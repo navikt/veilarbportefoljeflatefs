@@ -75,7 +75,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
                             filterId="kjonn"
-                            columns={2}
                         />
                     }
                 />
