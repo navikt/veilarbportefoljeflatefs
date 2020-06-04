@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { cvJobbprofil, registreringstype } from '../filter-konstanter';
+import { cvJobbprofil, registreringstype, ytelse } from '../filter-konstanter';
 import Dropdown from '../../components/dropdown/dropdown';
 import CheckboxFilterform from '../../components/checkbox-filterform/checkbox-filterform';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { ReactComponent as InfoIkon } from '../../components/ikoner/info-ikon.svg';
 import './filtrering-info-fra-bruker.less';
+import { RadioFilterformNy } from '../../components/radio-filterform/radio-filterform-ny';
 
 interface FiltreringInformasjonOmBrukerProps {
     filtervalg: any;
@@ -17,13 +18,12 @@ const FiltreringInformasjonOmBruker = ({filtervalg, endreFiltervalg}: Filtrering
             <Dropdown
                 name="CV og jobbprofil"
                 render={(lukkDropdown) =>
-                    <CheckboxFilterform
-                        form="cvJobbprofil"
+                    <RadioFilterformNy
                         valg={cvJobbprofil}
+                        onSubmit={endreFiltervalg}
                         filtervalg={filtervalg}
-                        endreFilterValg={endreFiltervalg}
                         closeDropdown={lukkDropdown}
-                        className="cvJobbprofil"
+                        filterId="cvJobbprofil"
                     />
                 }
             />
