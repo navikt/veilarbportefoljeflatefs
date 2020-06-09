@@ -66,6 +66,19 @@
             background-color: @white;
             border-radius: 0 0 @border-radius-small @border-radius-small;
             width: 100%;
+            margin-bottom: 2rem;
+
+        }
+
+        #Kjønn-dropdown__innhold {
+            .radio-filterform__valg {
+                display: flex;
+                flex-direction: row;
+
+                .skjemaelement{
+                    margin-right: 1rem;
+                }
+            }
         }
 
         .hoyre {
@@ -80,6 +93,7 @@
 
         &--apen {
             margin-bottom: -0.05rem;
+            border-bottom: none;
 
             .dropdown__btnwrapper {
                 &:before {

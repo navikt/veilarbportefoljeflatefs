@@ -37,9 +37,9 @@ interface StateProps {
 
 interface FormikPropsValues {
     kommentar: string;
-    frist: string | null;
+    frist: string;
     overskrift: string;
-    kategori: KategoriModell | null
+    kategori: KategoriModell;
 }
 
 type ArbeidslisteModalRedigerProps = StateProps & Ownprops & DispatchProps;
@@ -66,7 +66,7 @@ function ArbeidslisteModalRediger({
         }
     };
 
-    const lukkModal = (formikProps: FormikProps<FormikPropsValues>) => {
+    const lukkModal = (formikProps) => {
         setIsOpen(false);
         formikProps.resetForm();
     };

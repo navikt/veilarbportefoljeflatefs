@@ -8,19 +8,20 @@ import './toolbar.less';
 
 interface MetrikkEkspanderbartpanelProps {
     lamellNavn: string;
+    apen: boolean;
     skalVises?: boolean;
 }
 
 type AllProps = MetrikkEkspanderbartpanelProps & EkspanderbartpanelProps;
 
 function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
-    const [isApen, setIsApen] = useState(false);
+    const [isApen, setIsApen] = useState(props.apen);
 
     const handleOnClick = () => {
         setIsApen(!isApen);
         logEvent('portefolje.metrikker.lamell', {
             navn: props.lamellNavn,
-            apen: isApen,
+            apen: !isApen,
             sideNavn: finnSideNavn(),
         });
     };

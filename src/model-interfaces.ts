@@ -57,7 +57,7 @@ export interface FiltervalgModell {
     venterPaSvarFraBruker?: boolean;
     arbeidslisteKategori: KategoriModell[];
     alder?: string[];
-    kjonn?: string[];
+    kjonn?: null | string;
     fodselsdagIMnd?: string[];
     innsatsgruppe?: string[];
     formidlingsgruppe?: string[];
@@ -72,6 +72,7 @@ export interface FiltervalgModell {
     manuellBrukerStatus?: string[];
     veilederNavnQuery: string;
     registreringstype: string[];
+    cvJobbprofil: null | string
 }
 
 export interface EnhetModell {
@@ -94,7 +95,10 @@ export interface VeilederModell {
 
 export enum VurderingsBehov {
     ARBEIDSEVNE_VURDERING = 'ARBEIDSEVNE_VURDERING',
-    IKKE_VURDERT = 'IKKE_VURDERT'
+    IKKE_VURDERT = 'IKKE_VURDERT',
+    ANTATT_GODE_MULIGHETER = 'ANTATT_GODE_MULIGHETER',
+    ANTATT_BEHOV_FOR_VEILEDNING = 'ANTATT_BEHOV_FOR_VEILEDNING',
+    OPPGITT_HINDRINGER = 'OPPGITT_HINDRINGER'
 }
 
 export interface BrukerModell {

@@ -3,13 +3,13 @@ import classNames from 'classnames';
 import { Radio } from 'nav-frontend-skjema';
 import './radio-filterform.less';
 
-export function RadioFilterformNy({filterId, onSubmit, valg, closeDropdown, filtervalg}) {
+export function RadioFilterform({filterId, endreFiltervalg, valg, closeDropdown, filtervalg}) {
 
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[filterId]);
 
     const createHandleOnSubmit = () => {
         if (valgtFilterValg) {
-            onSubmit(filterId, valgtFilterValg);
+            endreFiltervalg(filterId, valgtFilterValg);
         }
         closeDropdown();
     };
@@ -28,7 +28,7 @@ export function RadioFilterformNy({filterId, onSubmit, valg, closeDropdown, filt
                     />)}
             </div>
             <div
-                className={classNames('checkbox-filterform__under-valg')}
+                className={classNames('radio-filterform__under-valg')}
             >
                 <button onClick={createHandleOnSubmit}
                         className={classNames('knapp', 'knapp--mini', {'knapp--hoved': valgtFilterValg})}>

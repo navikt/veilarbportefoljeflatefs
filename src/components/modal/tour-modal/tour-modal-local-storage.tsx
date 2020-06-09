@@ -1,10 +1,12 @@
 import { default as React, useState } from 'react';
 import { default as TourModal, ModalName, } from './tour-modal';
+
 interface TourModalLocalStorageProps {
     onTourComplete?: (e: string) => void;
+    skalVises?: boolean;
 }
 
-export default function TourModalLocalStorage(props: TourModalLocalStorageProps) {
+export default function TourModalLocalStorage({onTourComplete, skalVises = false}: TourModalLocalStorageProps) {
     const modalNavn = ModalName.PERMITTERTE;
     const [openModal, setApenModal] = useState(!hasStored(modalNavn));
 
@@ -14,18 +16,22 @@ export default function TourModalLocalStorage(props: TourModalLocalStorageProps)
 
     const lukkModal = (isFinalStep: boolean) => {
         lagreIkkeVisModal();
-        if (isFinalStep && props.onTourComplete) {
-            props.onTourComplete(modalNavn);
+        if (isFinalStep && onTourComplete) {
+            onTourComplete(modalNavn);
         }
         setApenModal(false);
     };
 
     return (
-        <TourModal
-            open={openModal}
-            modalName={modalNavn}
-            onClose={lukkModal}
-        />
+        <>
+            {skalVises &&
+            <TourModal
+                open={openModal}
+                modalName={modalNavn}
+                onClose={lukkModal}
+            />
+            }
+        </>
     );
 }
 
