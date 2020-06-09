@@ -74,7 +74,7 @@ function MinoversiktSide() {
                 <Innholdslaster avhengigheter={[statustall]}>
                     <MinOversiktWrapper
                         className={classNames('oversikt-sideinnhold portefolje-side',
-                            isSidebarHidden ? 'oversikt-sideinnhold__hidden' : '')}>
+                            isSidebarHidden && 'oversikt-sideinnhold__hidden')}>
                         <div className="sokefelt-etikett-container">
                             <FiltreringNavnellerfnr
                                 filtervalg={filtervalg}
@@ -96,16 +96,22 @@ function MinoversiktSide() {
                             isSidebarHidden={isSidebarHidden}
                             lukkTab={lukkTab}
                         />
-                        <div
-                            className={classNames('oversikt__container', isSidebarHidden ? 'oversikt__container__hidden' : '')}>
-                            <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
-                                <TabellOverskrift
-                                    className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
-                                <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
-                                <div
-                                    className={antallBrukere > 4 ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
+                        <div className={classNames('oversikt__container',
+                            isSidebarHidden && 'oversikt__container__hidden')}>
+                            <div className={antallBrukere > 4
+                                ? 'sticky-container'
+                                : 'ikke-sticky__container'}>
+                                <span className={antallBrukere > 4
+                                    ? 'sticky-skygge'
+                                    : 'ikke-sticky__skygge'}>
+                                <div className={antallBrukere > 4
+                                    ? 'toolbar-container'
+                                    : 'ikke-sticky__toolbar-container'}>
+                                    <TabellOverskrift
+                                        className={visesAnnenVeiledersPortefolje
+                                            ? 'tabelloverskrift__annen-veileder'
+                                            : 'tabelloverskrift'}/>
                                         <Toolbar
-                                            filtergruppe={ListevisningType.minOversikt}
                                             onPaginering={() => dispatch(hentPortefoljeForVeileder(
                                                 enhetId,
                                                 gjeldendeVeileder,
@@ -113,11 +119,12 @@ function MinoversiktSide() {
                                                 sorteringsfelt,
                                                 filtervalg
                                             ))}
-                                            gjeldendeVeileder={gjeldendeVeileder}
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                            filtergruppe={ListevisningType.minOversikt}
                                             sokVeilederSkalVises={false}
                                             antallTotalt={portefolje.data.antallTotalt}
                                             side="minoversikt"
+                                            gjeldendeVeileder={gjeldendeVeileder}
+                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                         />
                                         <MinoversiktTabellOverskrift
                                             visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
@@ -126,12 +133,14 @@ function MinoversiktSide() {
                                         />
                                 </div>
                                 </span>
+                                <MinoversiktTabell
+                                    innloggetVeileder={innloggetVeilederIdent}
+                                    settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
+                                    classNameWrapper={antallBrukere > 0
+                                        ? 'portefolje__container'
+                                        : 'portefolje__container__tom-liste'}
+                                />
                             </div>
-                            <MinoversiktTabell
-                                innloggetVeileder={innloggetVeilederIdent}
-                                settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'}
-                            />
                             <MinOversiktModalController/>
                         </div>
                     </MinOversiktWrapper>

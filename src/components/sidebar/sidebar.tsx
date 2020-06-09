@@ -6,9 +6,10 @@ import {
 } from '../../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import './sidebar.less';
-import { ReactComponent as StatusIkon } from '../ikoner/settings.svg';
-import { ReactComponent as VeiledergruppeIkon } from '../ikoner/person-view-1.svg';
-import { ReactComponent as FilterIkon } from '../ikoner/info-ikon.svg';
+import { ReactComponent as StatusIkon } from '../ikoner/tab_status.svg';
+import { ReactComponent as FilterIkon } from '../ikoner/tab_filter.svg';
+import { ReactComponent as InfoFraBrukerIkon } from '../ikoner/tab_info-fra-bruker.svg';
+import { ReactComponent as VeiledergruppeIkon } from '../ikoner/tab_veiledergrupper.svg';
 import { FiltervalgModell } from '../../model-interfaces';
 import { OrNothing } from '../../utils/types/types';
 import { Tiltak } from '../../ducks/enhettiltak';
@@ -35,18 +36,17 @@ const sidebar: Sidebar[] = [
         icon: <StatusIkon/>,
         tittel: 'Status'
     }, {
-        type: SidebarTabType.FILTER,
-        icon: <FilterIkon/>,
-        tittel: 'Filter'
-    }, {
-        type: SidebarTabType.INFORMASJON_OM_BRUKER,
-        icon: <VeiledergruppeIkon/>,
-        tittel: 'Informasjon om bruker'
-    },
-    {
         type: SidebarTabType.VEILEDERGRUPPER,
         icon: <VeiledergruppeIkon/>,
         tittel: 'Veiledergrupper'
+    }, {
+        type: SidebarTabType.INFORMASJON_OM_BRUKER,
+        icon: <InfoFraBrukerIkon/>,
+        tittel: 'Informasjon om bruker'
+    }, {
+        type: SidebarTabType.FILTER,
+        icon: <FilterIkon/>,
+        tittel: 'Filter'
     }
 ];
 

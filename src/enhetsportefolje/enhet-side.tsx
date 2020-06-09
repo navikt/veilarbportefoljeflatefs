@@ -83,8 +83,8 @@ function EnhetSide() {
     };
 
     const lukkTab = () => {
-        setIsSidebarHidden(true)
-    }
+        setIsSidebarHidden(true);
+    };
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
@@ -97,8 +97,8 @@ function EnhetSide() {
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div role="tabpanel"
-                         className={classNames('oversikt-sideinnhold', isSidebarHidden ? 'oversikt-sideinnhold__hidden' : '')}
-                    >
+                         className={classNames('oversikt-sideinnhold',
+                             isSidebarHidden && 'oversikt-sideinnhold__hidden')}>
                         <div className="sokefelt-etikett-container">
                             <FiltreringNavnellerfnr
                                 filtervalg={filtervalg}
@@ -123,43 +123,42 @@ function EnhetSide() {
                             isSidebarHidden={isSidebarHidden}
                             lukkTab={lukkTab}
                         />
-                        {harFilter
-                            ?
-                            <div
-                                className={classNames('oversikt__container', isSidebarHidden ? 'oversikt__container__hidden' : '')}>
+                        {harFilter ?
+                            <div className={classNames('oversikt__container',
+                                isSidebarHidden && 'oversikt__container__hidden')}>
                                 <div className={antallBrukere > 4
                                     ? 'sticky-container'
-                                    : 'sticky-container__fjernet'}>
+                                    : 'ikke-sticky__container'}>
                                     <span className={antallBrukere > 4
                                         ? 'sticky-skygge'
                                         : 'ikke-sticky__skygge'}>
-                            <div
-                                className={antallBrukere > 4
-                                    ? 'toolbar-container'
-                                    : 'ikke-sticky__toolbar-container'}>
-                                    <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
-                            <Toolbar
-                                onPaginering={() => dispatch(hentPortefoljeForEnhet(
-                                    enhetId,
-                                    sorteringsrekkefolge,
-                                    sorteringsfelt,
-                                    filtervalg
-                                ))}
-                                filtergruppe={ListevisningType.enhetensOversikt}
-                                sokVeilederSkalVises
-                                antallTotalt={portefoljeData.antallTotalt}
-                                side="enhetensoversikt"
-                            />
-                            <EnhetTabellOverskrift/>
+                            <div className={antallBrukere > 4
+                                ? 'toolbar-container'
+                                : 'ikke-sticky__toolbar-container'}>
+                                    <TabellOverskrift className="tabelloverskrift"/>
+                                <Toolbar
+                                    onPaginering={() => dispatch(hentPortefoljeForEnhet(
+                                        enhetId,
+                                        sorteringsrekkefolge,
+                                        sorteringsfelt,
+                                        filtervalg
+                                    ))}
+                                    filtergruppe={ListevisningType.enhetensOversikt}
+                                    sokVeilederSkalVises
+                                    antallTotalt={portefoljeData.antallTotalt}
+                                    side="enhetensoversikt"
+                                />
+                                <EnhetTabellOverskrift/>
                             </div>
                             </span>
                                     <EnhetTabell
-                                        classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'}
+                                        classNameWrapper={antallBrukere > 0
+                                            ? 'portefolje__container'
+                                            : 'portefolje__container__tom-liste'}
                                     />
                                 </div>
                             </div>
-                            : <VelgFilterMelding/>
-                        }
+                            : <VelgFilterMelding/>}
                     </div>
                 </Innholdslaster>
                 <ModalEnhetSideController/>

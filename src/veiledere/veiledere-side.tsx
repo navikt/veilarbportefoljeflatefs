@@ -45,26 +45,10 @@ function VeiledereSide() {
 
     return (
         <DocumentTitle title="Veilederoversikt">
-            <div className="side-storrelse blokk-xl">
+            <div className="side-storrelse veilederoversikt">
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
-                        <div className="status-filter-kolonne">
-                            <PanelBase className="blokk-xxxs sok-veileder">
-                                <Undertittel>
-                                    Søk veileder
-                                </Undertittel>
-                                <FiltreringVeiledere/>
-                            </PanelBase>
-                            <MetrikkEkspanderbartpanel
-                                apen={true}
-                                tittelProps="undertittel"
-                                lamellNavn="veiledergrupper"
-                                tittel="Veiledergrupper"
-                            >
-                                <FilteringVeilederGrupper filtergruppe="veiledere"/>
-                            </MetrikkEkspanderbartpanel>
-                        </div>
                         <div className="liste-kolonne">
                             <FiltreringLabelContainer
                                 filtervalg={{
@@ -84,6 +68,23 @@ function VeiledereSide() {
                                 antallVeiledere={veiledere.data.veilederListe.length}
                             />
                         </div>
+                        <div className="status-filter-kolonne">
+                            <PanelBase className="blokk-xxxs sok-veileder">
+                                <Undertittel>
+                                    Søk veileder
+                                </Undertittel>
+                                <FiltreringVeiledere/>
+                            </PanelBase>
+                            <MetrikkEkspanderbartpanel
+                                apen={true}
+                                tittelProps="undertittel"
+                                lamellNavn="veiledergrupper"
+                                tittel="Veiledergrupper"
+                            >
+                                <FilteringVeilederGrupper filtergruppe="veiledere"/>
+                            </MetrikkEkspanderbartpanel>
+                        </div>
+
                     </div>
                 </Innholdslaster>
             </div>

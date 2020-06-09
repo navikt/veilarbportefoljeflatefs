@@ -77,12 +77,6 @@ html {
     z-index: 2000;
 }
 
-//@media (min-width: 1200px) {
-//    .container {
-//        width: 956px;
-//    }
-//}
-
 .flex {
     display: flex;
 }
@@ -144,8 +138,8 @@ html {
 .toolbar-container {
     position: sticky;
     top: 0;
-    margin-top: -20px;
     z-index: 3;
+    margin-top: -20px;
     background-color: @bakgrunnsGra;
     border-bottom: 1px solid @navGra60;
     border-radius: 4px;
@@ -188,8 +182,8 @@ html {
 
     .oversikt-sideinnhold {
         display: grid;
-        column-gap: 16px;
-        grid-template-columns: 1fr fit-content(100%);
+        column-gap: 1%;
+        grid-template-columns: 79% 20%;
         grid-template-rows: auto auto;
 
         .sokefelt-etikett-container {
@@ -211,10 +205,6 @@ html {
         &__hidden {
             .oversikt__container {
                 grid-column-end: 3;
-            }
-
-            .toolbar {
-                margin-right: 21rem;
             }
         }
     }
