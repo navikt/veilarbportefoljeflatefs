@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
 export enum SidebarTabInfo {
-    VEILEDERGRUPPER = 'VEILEDERGRUPPER',
     STATUS = 'STATUS',
-    FILTER = 'FILTER'
+    FILTER = 'FILTER',
+    INFORMASJON_OM_BRUKER = 'INFORMASJON_OM_BRUKER',
+    VEILEDERGRUPPER = 'VEILEDERGRUPPER',
 }
 
 export const useSidebarViewStore = () => {

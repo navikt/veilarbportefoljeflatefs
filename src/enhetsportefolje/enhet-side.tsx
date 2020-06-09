@@ -28,9 +28,9 @@ import { AppState } from '../reducer';
 import { useSidebarViewStore } from '../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
-import { Sidebar } from '../components/sidebar/sidebar';
 import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
 import { pagineringSetup } from '../ducks/paginering';
+import Sidebar from '../components/sidebar/sidebar';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -93,7 +93,7 @@ function EnhetSide() {
 
     return (
         <DocumentTitle title="Enhetens oversikt">
-            <div className="side-storrelse blokk-xl">
+            <div className="side-storrelse">
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div role="tabpanel"

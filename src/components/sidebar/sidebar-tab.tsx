@@ -12,7 +12,7 @@ function SidebarTab({tittel, handleClick, children}: StatusTabProps) {
     return (
         <>
             <Systemtittel className="blokk-m">{tittel}</Systemtittel>
-            <Lukknapp overstHjorne className="tab-lukknapp" onClick={handleClick}/>
+            <Lukknapp overstHjorne onClick={handleClick}/>
             {children}
         </>
     );

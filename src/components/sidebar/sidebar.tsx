@@ -1,5 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { SidebarTabInfo, SidebarTabInfo as SidebarTabType, useSidebarViewStore } from '../../store/sidebar/sidebar-view-store';
+import {
+    SidebarTabInfo,
+    SidebarTabInfo as SidebarTabType,
+    useSidebarViewStore
+} from '../../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import './sidebar.less';
 import { ReactComponent as StatusIkon } from '../ikoner/settings.svg';
@@ -16,6 +20,8 @@ import { useDispatch } from 'react-redux';
 import { pagineringSetup } from '../../ducks/paginering';
 import { endreFiltervalg } from '../../ducks/filtrering';
 import FilteringVeilederGrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper';
+import FiltreringInformasjonOmBruker
+    from '../../filtrering/filtrering-informasjon-fra-bruker/filtrering-informasjon-fra-bruker';
 
 interface Sidebar {
     type: SidebarTabType;
@@ -27,17 +33,21 @@ const sidebar: Sidebar[] = [
     {
         type: SidebarTabType.STATUS,
         icon: <StatusIkon/>,
-        tittel: 'Status',
-
+        tittel: 'Status'
     }, {
         type: SidebarTabType.FILTER,
         icon: <FilterIkon/>,
         tittel: 'Filter'
     }, {
+        type: SidebarTabType.INFORMASJON_OM_BRUKER,
+        icon: <VeiledergruppeIkon/>,
+        tittel: 'Informasjon om bruker'
+    },
+    {
         type: SidebarTabType.VEILEDERGRUPPER,
         icon: <VeiledergruppeIkon/>,
         tittel: 'Veiledergrupper'
-    },
+    }
 ];
 
 function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar | undefined {
@@ -53,7 +63,16 @@ function mapTabTilView(tab: Sidebar, isSelected: boolean, onTabClicked: (tab: Si
     );
 }
 
-export const Sidebar = (props: { filtervalg: FiltervalgModell, enhettiltak: OrNothing<Tiltak>, filtergruppe?: string, isSidebarHidden: boolean, handleOnTabClicked: (tab: Sidebar, selectedTab: SidebarTabInfo) => void, lukkTab: () => void }) => {
+interface SidebarProps {
+    filtervalg: FiltervalgModell;
+    enhettiltak: OrNothing<Tiltak>;
+    filtergruppe: string;
+    isSidebarHidden: boolean;
+    handleOnTabClicked: (tab: Sidebar, selectedTab: SidebarTabInfo) => void;
+    lukkTab: () => void
+}
+
+function Sidebar(props: SidebarProps) {
     const {selectedTab, setSelectedTab} = useSidebarViewStore();
     const sidebarRef = useRef<HTMLDivElement>(null);
     const selectedTabData = finnTab(selectedTab, sidebar);
@@ -75,29 +94,33 @@ export const Sidebar = (props: { filtervalg: FiltervalgModell, enhettiltak: OrNo
         if ((selectedTabData as Sidebar).tittel === 'Status') {
             return <SidebarTab tittel="Status"
                                handleClick={props.lukkTab}
+                               children={<FiltreringStatus
+                                   filtergruppe={props.filtergruppe}
+                                   filtervalg={props.filtervalg}/>
+                               }/>;
+        } else if ((selectedTabData as Sidebar).tittel === 'Informasjon om bruker') {
+            return <SidebarTab tittel="Informasjon fra bruker"
+                               handleClick={props.lukkTab}
                                children={
-                            <FiltreringStatus
-                                filtergruppe={props.filtergruppe}
-                                filtervalg={props.filtervalg}
-                            />
-                        }/>;
+                                   <FiltreringInformasjonOmBruker
+                                       filtervalg={props.filtervalg}
+                                       endreFiltervalg={doEndreFiltervalg}
+                                   />
+                               }/>;
         } else if ((selectedTabData as Sidebar).tittel === 'Filter') {
             return <SidebarTab tittel="Filter"
                                handleClick={props.lukkTab}
-                               children={
-                            <FiltreringFilter
-                                endreFiltervalg={doEndreFiltervalg}
-                                filtervalg={props.filtervalg}
-                                enhettiltak={props.enhettiltak}
-                            />
-                        }/>;
+                               children={<FiltreringFilter
+                                   endreFiltervalg={doEndreFiltervalg}
+                                   filtervalg={props.filtervalg}
+                                   enhettiltak={props.enhettiltak}/>
+                               }/>;
         } else if ((selectedTabData as Sidebar).tittel === 'Veiledergrupper') {
             return <SidebarTab tittel="Veiledergrupper"
                                handleClick={props.lukkTab}
-                               children={
-                            <FilteringVeilederGrupper filtergruppe={props.filtergruppe}
-                            />
-                        }/>;
+                               children={<FilteringVeilederGrupper
+                                   filtergruppe={props.filtergruppe}/>
+                               }/>;
         }
     }
 
@@ -105,17 +128,32 @@ export const Sidebar = (props: { filtervalg: FiltervalgModell, enhettiltak: OrNo
         setSelectedTab(selectedTab);
     }, [setSelectedTab, selectedTab]);
 
+    const tabs = () => {
+        const viseVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
+        const erIkkePaEnhetensOversikt = props.filtergruppe === 'veileder';
+
+        if (erIkkePaEnhetensOversikt) {
+            return sidebar.filter(tab => erIkkePaEnhetensOversikt && !viseVeiledergrupper(tab))
+                .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+        } else {
+            return sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+        }
+    };
+
     return (
         <div ref={sidebarRef}
              className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden')}>
             <div className="sidebar__tab-container">
-                {sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked))}
+                {tabs()}
             </div>
             <div
                 className='sidebar__content-container'
-                hidden={props.isSidebarHidden}>
+                hidden={props.isSidebarHidden}
+            >
                 {sidevelger(selectedTabData)}
             </div>
         </div>
     );
-};
+}
+
+export default Sidebar;
