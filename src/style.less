@@ -143,6 +143,10 @@ html {
     background-color: @bakgrunnsGra;
     border-bottom: 1px solid @navGra60;
     border-radius: 4px;
+
+    .tabelloverskrift {
+        padding-top: 1rem;
+    }
 }
 
 .sticky-skygge::before,
@@ -183,7 +187,7 @@ html {
     .oversikt-sideinnhold {
         display: grid;
         column-gap: 1%;
-        grid-template-columns: 79% 20%;
+        grid-template-columns: auto 21rem;
         grid-template-rows: auto auto;
 
         .sokefelt-etikett-container {
@@ -206,6 +210,12 @@ html {
             .oversikt__container {
                 grid-column-end: 3;
             }
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .oversikt__container {
+            grid-column-end: 3;
         }
     }
 }
