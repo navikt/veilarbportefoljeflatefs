@@ -1,0 +1,65 @@
+@import "~nav-frontend-core/less/core";
+
+@bakgrunnsGra: #F4F4F4;
+
+.veilarbportefoljeflatefs {
+    .veiledersok__wrapper {
+        margin-top: 1rem;
+        width: 25%;
+        margin-right: 75%;
+
+        .veiledere__soketabell {
+            a {
+                border-bottom: none;
+                color: @navBla;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .tildelveileder_wrapper {
+        min-height: 3rem;
+    }
+
+    .veileder__hide {
+        display: none;
+    }
+
+    .sok-veileder__gammel {
+        border: 1px solid @navGra60;
+        border-radius: @border-radius-base;
+        margin-bottom: 1rem;
+    }
+
+    .veiledere-undertittel {
+        background-color: #F4F4F4;
+    }
+
+    .veilederoversikt {
+        &__toolbar-container {
+            position: relative;
+            top: 0;
+            margin-top: -18px;
+        }
+
+        &__sticky-skygge::before,
+        &__sticky-skygge::after {
+            content: '';
+            display: block;
+            height: 16px;
+            position: sticky;
+        }
+
+        &__sticky-skygge::before {
+            top: 61px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            margin: 0 4px;
+        }
+
+        &__sticky-skygge::after {
+            top: 0;
+            height: 0;
+            width: auto;
+        }
+    }
+}

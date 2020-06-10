@@ -1,0 +1,63 @@
+@import "~nav-frontend-core/less/core";
+
+.veilarbportefoljeflatefs {
+    .portefolje__container__gammel {
+        margin-bottom: 2rem;
+        border-bottom: 1px solid @navGra60;
+        border-radius: @border-radius-base;
+
+        &__tom-liste__gammel {
+            border-bottom: none;
+        }
+
+        &__sticky__gammel {
+            position: sticky;
+            top: 5rem
+        }
+
+        .innholdslaster {
+            min-height: 1000px;
+        }
+
+        .blokk-xxs {
+            margin-bottom: 0;
+        }
+    }
+
+    .velgfiltermelding {
+        text-align: center;
+
+        &__ikon {
+            position: relative;
+            height: 2.5rem;
+            width: 2.5rem;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 100%;
+            background-color: @navOransjeLighten20;
+
+            &:after {
+                content: "";
+                position: absolute;
+                width: 70%;
+                height: 0.5rem;
+                display: block;
+                margin-left: 15%;
+                background-color: @white;
+                top: calc(1.25rem - 0.25rem);
+                border-radius: 2px;
+            }
+        }
+    }
+
+    .status-filter-kolonne__gammel {
+        .filtrering-navn-fnr {
+            width: auto;
+            margin: .4rem 0 .4rem 0;
+
+            .skjemaelement {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

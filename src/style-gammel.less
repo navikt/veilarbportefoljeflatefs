@@ -1,0 +1,222 @@
+@import "tabell";
+@import '~nav-frontend-core/less/_variabler';
+
+@bakgrunnsGra: #F4F4F4;
+
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #F4F4F4;
+    font-size: 1rem;
+    font-weight: 400;
+    color: @navMorkGra;
+    font-family: @font-family;
+
+    @media print {
+        a[href]:after {
+            content: none !important;
+        }
+    }
+
+    #mainapp {
+        background-color: @white;
+        margin: 0 auto;
+        height: 100%;
+        max-height: 8rem;
+        box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+    }
+
+    @media (max-width: 870px) {
+        #mainapp {
+            max-height: 10rem;
+        }
+    }
+
+    @media (max-width: 782px) {
+        #mainapp {
+            max-height: 11rem;
+        }
+    }
+}
+
+html {
+    height: 100%;
+}
+
+@import "~nav-frontend-alertstriper-style/src/index";
+@import "~nav-frontend-typografi-style/src/index";
+@import "~nav-frontend-core/less/core";
+@import "~nav-frontend-grid-style/src/index";
+@import "~nav-frontend-modal-style/src/index";
+@import "~nav-frontend-paneler-style/src/index";
+@import "~nav-frontend-ekspanderbartpanel-style/src/index";
+@import "~nav-frontend-etiketter-style/src/index";
+@import "~nav-frontend-spinner-style/src/spinner-style";
+@import "~nav-frontend-skjema-style/src/index";
+@import "~nav-frontend-knapper-style/src/index";
+@import "~nav-frontend-paneler-style/src/mixins";
+@import "~nav-frontend-lenker-style/src/lenker-style";
+@import "~nav-frontend-hjelpetekst-style/src/hjelpetekst-style";
+@import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
+
+.veilarbportefoljeflatefs {
+    @import "./components/barinput/barlabel";
+
+    .ekspanderbartPanel--apen .ReactCollapse--collapse {
+        overflow: initial !important;
+    }
+}
+
+.decorator-context-modal {
+    padding: 1rem;
+}
+
+.modal__overlay {
+    z-index: 2000;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 956px;
+    }
+}
+
+.flex {
+    display: flex;
+}
+
+.flex--center {
+    align-items: center;
+}
+
+.flex--grow {
+    flex-grow: 1;
+}
+
+.mr1 {
+    margin-right: 1rem;
+}
+
+.text--left {
+    text-align: left;
+}
+
+.sticky-container__gammel {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: @bakgrunnsGra;
+
+    .toolbar {
+        justify-content: space-between;
+    }
+
+    .blokk-xxs {
+        margin-bottom: 0;
+    }
+}
+
+.ikke-sticky {
+    &__skygge__gammel {
+        height: 16px;
+        top: -16px;
+    }
+
+    &__toolbar-container__gammel {
+        position: sticky;
+        top: 0;
+        border-bottom: 1px solid @navGra60;
+        z-index: 3;
+    }
+
+    &__container__gammel {
+        position: inherit;
+        top: 0;
+        z-index: 1;
+        background-color: @bakgrunnsGra;
+    }
+}
+
+.sticky-skygge__gammel {
+    position: sticky;
+    z-index: 1;
+    -webkit-backface-visibility: hidden;
+    height: 16px;
+    top: -16px;
+}
+
+.toolbar-container__gammel {
+    position: sticky;
+    top: 0;
+    margin-top: -18px;
+    z-index: 3;
+    background-color: @bakgrunnsGra;
+    border-bottom: 1px solid @navGra60;
+    border-radius: 4px;
+}
+
+.sticky-skygge__gammel::before,
+.sticky-skygge__gammel::after {
+    content: '';
+    display: block;
+    height: 16px;
+    position: sticky;
+}
+
+.sticky-skygge__gammel::before {
+    top: 114px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 0 4px;
+}
+
+.sticky-skygge__gammel::after {
+    background: linear-gradient(white, rgba(255, 255, 255, 0.3));
+    top: 0;
+    z-index: 2;
+    height: 0;
+    width: auto;
+}
+
+.skjemaelement {
+    margin-bottom: .5rem;
+}
+
+.veilarbportefoljeflatefs {
+    .side-storrelse__gammel {
+        margin: 0 auto;
+        padding: 0 3rem;
+        max-width: 1809px;
+    }
+
+    .oversikt-sideinnhold__gammel {
+        display: grid;
+        grid-template-columns: 1fr minmax(805px, 1322px);
+        column-gap: 16px;
+    }
+
+    .status-filter-kolonne__gammel {
+        min-width: 320px;
+        max-width: 375px;
+    }
+
+    .liste-kolonne__gammel {
+        min-width: 805px;
+        max-width: 1322px;
+
+        .filtreringlabel {
+            display: inline-flex;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .oversikt-sideinnhold__gammel {
+            grid-template-rows: auto auto;
+            grid-template-columns: none;
+        }
+
+        .status-filter-kolonne__gammel {
+            max-width: none;
+        }
+    }
+}
