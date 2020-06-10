@@ -4,7 +4,7 @@ const toggles = {
     [SPOR_OM_TILBAKEMELDING]: true,
     [VEDTAKSTOTTE]: true,
     [CVJOBBPROFIL]: true,
-    [REDESIGN]: false
+    [REDESIGN]: true
 };
 
 export default toggles;
