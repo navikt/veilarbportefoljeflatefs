@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Radio } from 'nav-frontend-skjema';
 import './radio-filterform.less';
-import Grid from '../grid/grid';
 
-export function RadioFilterform({filterId, onSubmit, valg, closeDropdown, filtervalg, columns = 1}) {
+export function RadioFilterform({filterId, endreFiltervalg, valg, closeDropdown, filtervalg}) {
 
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[filterId]);
 
     const createHandleOnSubmit = () => {
         if (valgtFilterValg) {
-            onSubmit(filterId, valgtFilterValg);
+            endreFiltervalg(filterId, valgtFilterValg);
         }
         closeDropdown();
     };
@@ -18,17 +17,15 @@ export function RadioFilterform({filterId, onSubmit, valg, closeDropdown, filter
     return (
         <form className="skjema radio-filterform" onSubmit={createHandleOnSubmit}>
             <div className="radio-filterform__valg">
-                <Grid columns={columns}>
-                    {Object.keys(valg).map(v =>
-                        <Radio
-                            label={valg[v].label}
-                            value={v}
-                            name={valg[v].label}
-                            className={valg[v].className}
-                            checked={valgtFilterValg === v}
-                            onChange={e => setValgteFilterValg(e.target.value)}
-                        />)}
-                </Grid>
+                {Object.keys(valg).map(v =>
+                    <Radio
+                        label={valg[v].label}
+                        value={v}
+                        name={valg[v].label}
+                        className={valg[v].className}
+                        checked={valgtFilterValg === v}
+                        onChange={e => setValgteFilterValg(e.target.value)}
+                    />)}
             </div>
             <div
                 className={classNames('radio-filterform__under-valg')}

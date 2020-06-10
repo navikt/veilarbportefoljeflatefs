@@ -20,7 +20,7 @@ const FiltreringInformasjonOmBruker = ({filtervalg, endreFiltervalg}: Filtrering
                 render={(lukkDropdown) =>
                     <RadioFilterform
                         valg={cvJobbprofil}
-                        onSubmit={endreFiltervalg}
+                        endreFiltervalg={endreFiltervalg}
                         filtervalg={filtervalg}
                         closeDropdown={lukkDropdown}
                         filterId="cvJobbprofil"

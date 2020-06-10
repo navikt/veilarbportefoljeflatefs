@@ -9,8 +9,6 @@ import { ReactComponent as ArbeidslisteikonLilla } from '../../../components/iko
 import { ReactComponent as ArbeidslisteikonGronn } from '../../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
 import { ReactComponent as ArbeidslisteikonGul } from '../../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
 import BarInputCheckbox from '../../../components/barinput/barinput-checkbox';
-import { ARBEIDSLISTEKATEGORI } from '../../../konstanter';
-import { useFeatureSelector } from '../../../hooks/redux/use-feature-selector';
 import { KategoriModell } from '../../../model-interfaces';
 
 export interface FilterStatusMinArbeidslisteProps {
@@ -24,7 +22,6 @@ export interface FilterStatusMinArbeidslisteProps {
 
 function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
     const statusTall = useStatusTallSelector();
-    const erFeaturePa = useFeatureSelector()(ARBEIDSLISTEKATEGORI);
 
     return (
         <>
@@ -39,7 +36,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                 antall={statusTall.minArbeidsliste}
                 checked={props.checked}
             />
-            {erFeaturePa && props.checked && (
+            {props.checked && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">
                     <BarInputCheckbox
                         labelTekst={<><ArbeidslisteikonBla/><span className="arbeidslistetekst"
