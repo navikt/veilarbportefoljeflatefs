@@ -18,7 +18,7 @@ import FiltreringStatusIkkePermitterteEtterNiendeBrukere from './filtrering-stat
 import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-components/permitterte-brukere';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { MIN_ARBEIDSLISTE, } from '../filter-konstanter';
-import { PopoverOrientering, PopoverProps } from 'nav-frontend-popover';
+import { PopoverOrientering } from 'nav-frontend-popover';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
