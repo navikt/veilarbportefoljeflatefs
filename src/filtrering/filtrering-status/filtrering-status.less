@@ -32,13 +32,17 @@
             grid-template-columns: auto fit-content(100%);
 
             .popover {
-                margin: 0 2rem;
+                max-width: 30rem;
             }
         }
 
         .hjelpetekst {
             height: 18px;
             grid-column: 2;
+
+            &__innhold {
+                padding: 0 1rem;
+            }
 
             svg {
                 height: 16px;
@@ -48,12 +52,16 @@
             &__tooltip {
                 z-index: 2000;
             }
+        }
+    }
 
-            @media (max-width: 1200px) {
-                &__tooltip {
-                    margin-right: 4rem;
-                }
-            }
+    @media (max-width: 1200px) {
+        .hjelpetekst__tooltip {
+            margin-right: 4rem;
+        }
+
+        .hjelpetekst__wrapper .popover {
+            left: -4rem;
         }
     }
 }
