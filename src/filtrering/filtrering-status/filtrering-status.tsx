@@ -16,10 +16,9 @@ import './filtrering-status.less';
 import { pagineringSetup } from '../../ducks/paginering';
 import FiltreringStatusIkkePermitterteEtterNiendeBrukere from './filtrering-status-components/ikke-permitterte-brukere';
 import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-components/permitterte-brukere';
-import HjelpetekstBase from 'nav-frontend-hjelpetekst';
-import {
-    MIN_ARBEIDSLISTE,
-} from '../filter-konstanter';
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import { MIN_ARBEIDSLISTE, } from '../filter-konstanter';
+import { PopoverOrientering } from 'nav-frontend-popover';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -77,21 +76,15 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 />
                 <div className="permittering_checkboksgruppe">
                     <div className="hjelpetekst__wrapper">
-                        <HjelpetekstBase id="hjelpetekst">
-                            <>
-                                <b>Alle utenom permitterte etter 09.03.2020:</b> Alle brukere, uavhengig av situasjon
-                                ved
-                                registrering og tidspunkt for registrering, men ekskludert de som har registrert seg som
-                                permittert etter 9. mars 2020.
-                                <br/>
-                                <br/>
-                                <b>Permitterte etter 09.03.2020:</b> Brukere som har registrert seg etter 9. mars og som
-                                har svart at de er permittert.
-                                <br/>
-                                <br/>
-                                Merk at situasjonen kan ha endret seg for permitterte brukere.
-                            </>
-                        </HjelpetekstBase>
+                        <Hjelpetekst id="hjelpetekst" type={PopoverOrientering.Over}>
+                            <p><b>Alle utenom permitterte etter 09.03.2020:</b> Alle brukere, uavhengig av situasjon
+                                ved registrering og tidspunkt for registrering, men ekskludert de som har registrert seg
+                                som permittert etter 9. mars 2020.
+                            </p>
+                            <p><b>Permitterte etter 09.03.2020:</b> Brukere som har registrert seg etter 9. mars og som
+                                har svart at de er permittert.</p>
+                            <p>Merk at situasjonen kan ha endret seg for permitterte brukere.</p>
+                        </Hjelpetekst>
                     </div>
                     <FiltreringStatusIkkePermitterteEtterNiendeBrukere
                         handleChange={handleCheckboxChange}
