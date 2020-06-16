@@ -43,7 +43,7 @@ class ServerFeilModal extends React.Component<ServerFeilModalProps, ServerFeilMo
                 type={VarselModalType.FEIL}
                 portalClassName="tildeling-veileder-modal"
             >
-                <div style={{margin: '1rem', textAlign: 'center'}}>
+                <div className="server-feil-modal">
                     <Undertittel tag="h1" className="blokk-xxs">
                         Handlingen kan ikke utføres
                     </Undertittel>

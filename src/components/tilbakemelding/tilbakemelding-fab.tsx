@@ -22,7 +22,7 @@ interface TilbakemeldingFabState {
 class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabState> {
 
     private readonly TILBAKEMELDING_PREFIX = 'har_sendt_tilbakemelding';
-    private readonly TILBAKEMELDING_FEATURE_TAG = 'arbeidslistekategori_tilfredshet'; // NB: Husk å endre for hver nye feature
+    private readonly TILBAKEMELDING_FEATURE_TAG = 'videomoter_tilfredshet'; // NB: Husk å endre for hver nye feature
 
     private wrapperRef;
 
@@ -59,7 +59,6 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
     };
 
     handleFabClicked = () => {
-
         if (!this.state.isModalOpen) {
             logEvent('portefolje.tilbakemelding_modal_apnet');
         }
@@ -83,7 +82,6 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
     };
 
     render() {
-
         const {harFeature} = this.props;
         const {isModalOpen, harSendtTilbakemelding, ikkeVisIgjen} = this.state;
         const harRiktigFeatures = harFeature(SPOR_OM_TILBAKEMELDING); // NB: Husk å endre for hver feature
