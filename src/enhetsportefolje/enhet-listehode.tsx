@@ -24,6 +24,7 @@ function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
         const valgteAktiviteter = Object.values(aktiviteter).filter((aktivitetvalg) => aktivitetvalg !== AktiviteterValg.NA);
         return valgteAktiviteter && valgteAktiviteter.length > 0;
+
     }
     return false;
 }

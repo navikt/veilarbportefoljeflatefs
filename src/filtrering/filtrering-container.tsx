@@ -1,18 +1,15 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
-import { endreFiltervalg } from '../ducks/filtrering';
-import { FiltervalgModell } from '../model-interfaces';
+import {useDispatch} from 'react-redux';
+import {endreFiltervalg} from '../ducks/filtrering';
+import {FiltervalgModell} from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
 import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
-import { FiltreringStatus } from './filtrering-status/filtrering-status';
+import {FiltreringStatus} from './filtrering-status/filtrering-status';
 import FilteringVeilederGrupper from './filtrering-veileder-grupper/filtrering-veileder-grupper';
-import { OrNothing } from '../utils/types/types';
-import { Tiltak } from '../ducks/enhettiltak';
-import { pagineringSetup } from '../ducks/paginering';
-import FiltreringInformasjonOmBruker from './filtrering-informasjon-fra-bruker/filtrering-informasjon-fra-bruker';
-import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
-import { CVJOBBPROFIL } from '../konstanter';
+import {OrNothing} from '../utils/types/types';
+import {Tiltak} from '../ducks/enhettiltak';
+import {pagineringSetup} from '../ducks/paginering';
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -27,8 +24,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
-    const erCvJobbprofilFeaturePa = useFeatureSelector()(CVJOBBPROFIL);
-
     return (
         <div className="blokk-m">
             <FiltreringNavnellerfnr
@@ -55,19 +50,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                     filtervalg={filtervalg}
                 />
             </MetrikkEkspanderbartpanel>
-            {erCvJobbprofilFeaturePa &&
-            <MetrikkEkspanderbartpanel
-                apen={false}
-                tittel="Informasjon fra bruker"
-                tittelProps="undertittel"
-                lamellNavn="informasjon-fra-bruker"
-            >
-                <FiltreringInformasjonOmBruker
-                    filtervalg={filtervalg}
-                    endreFiltervalg={doEndreFiltervalg}
-                />
-            </MetrikkEkspanderbartpanel>
-            }
             <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
                 tittel="Filter"

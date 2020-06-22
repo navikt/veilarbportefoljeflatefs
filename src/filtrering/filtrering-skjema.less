@@ -4,45 +4,65 @@
 @xl-screen: 1600px;
 
 .veilarbportefoljeflatefs {
-    .skjemaelement--innrykk {
-        margin-left: 1.25rem;
+  .registreringsfilter {
+    &__infocontainer {
+      display: grid;
+      grid-template-columns: 35px auto;
+      margin: .5rem;
+      padding: .2rem;
+      border: 1px solid @navLysBla;
+      border-radius: 4px;
+      background-color: @navLysBlaLighten80;
     }
 
-    .dropdown--fixed .dropdown__innhold {
-        border-top-right-radius: @border-radius-small;
+    &__infoikon {
+      margin: .2rem;
     }
 
-    .filtrering--overskrift-med-hjelpetekst {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
+    &__infotekst {
+      margin: auto;
+    }
+  }
 
-        svg {
-            height: 16px;
-            width: 16px;
-        }
+  .skjemaelement--innrykk {
+    margin-left: 1.25rem;
+  }
 
-        .hjelpetekst {
-            height: 18px;
-            padding-left: 0.5rem;
-        }
+  .dropdown--fixed .dropdown__innhold {
+    border-top-right-radius: @border-radius-small;
+  }
+
+  .filtrering--overskrift-med-hjelpetekst {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    svg {
+      height: 16px;
+      width: 16px;
     }
 
-    .filtrering-navn-sok {
-        display: flex;
+    .hjelpetekst {
+      height: 18px;
+      padding-left: 0.5rem;
     }
+  }
 
-    .sok-knapp {
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-        height: 2.44rem;
-    }
+  .filtrering-navn-sok {
+    display: flex;
+  }
 
-    .checkbox-filterform .registreringstype {
-        max-height: 24rem;
-    }
+  .sok-knapp {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    height: 2.44rem;
+  }
 
-    .registreringstype .skjemaelement {
-        margin-bottom: .5rem;
-    }
+  .checkbox-filterform .registreringstype {
+    max-height: 24rem;
+  }
+
+  .registreringstype .skjemaelement {
+    margin-bottom: .5rem;
+  }
 }
