@@ -67,12 +67,6 @@ function Etiketter({className, bruker, erVedtakStotteFeaturePa}: EtiketterProps)
                 Antatt behov for veiledning
             </Etikett>
             <Etikett
-                type={EtikettType.PERMITTERTE_ETTER_NIENDE_MARS}
-                skalVises={bruker.erPermittertEtterNiendeMars}
-            >
-                Permittert etter 9. mars
-            </Etikett>
-            <Etikett
                 type={EtikettType.ER_SYKMELDT_MED_ARBEIDSGIVER}
                 skalVises={bruker.erSykmeldtMedArbeidsgiver}
             >
