@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import {Element, Normaltekst} from 'nav-frontend-typografi';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import AktivitetFilterform from '../components/aktivitet-filterform/aktivitet-filterform';
 import {
@@ -14,18 +14,17 @@ import {
     ytelse,
     manuellBrukerStatus,
     hovedmal,
-    registreringstype
+    registreringstype, cvJobbprofil
 } from './filter-konstanter';
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
-import { RadioFilterform } from '../components/radio-filterform/radio-filterform';
+import {RadioFilterform} from '../components/radio-filterform/radio-filterform';
 import Dropdown from '../components/dropdown/dropdown';
 import '../components/checkbox-filterform/checkbox-filterform.less';
 import FodselsdatoFilterform from '../components/checkbox-filterform/fodselsdato-filterform';
-import { ReactComponent as InfoIkon } from '../components/ikoner/info-ikon.svg';
-import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
-import { CVJOBBPROFIL } from '../konstanter';
-import './filtrering-informasjon-fra-bruker/filtrering-info-fra-bruker.less';
-import { GJEM_HOVEDMAL } from '../konstanter';
+import {ReactComponent as InfoIkon} from '../components/ikoner/info-ikon.svg';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {CVJOBBPROFIL, GJEM_HOVEDMAL} from '../konstanter';
+import './filtrering-skjema.less'
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -78,13 +77,25 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                         />
                     }
                 />
-
             </div>
             <div className="col-sm-12 blokk-xs">
                 <Element className="blokk-xxs" tag="h3">
                     Status og brukergrupper
                 </Element>
-                {!useFeatureSelector()(CVJOBBPROFIL) &&
+                {useFeatureSelector()(CVJOBBPROFIL) &&
+                <Dropdown
+                    name="CV og jobbprofil"
+                    render={(lukkDropdown) =>
+                        <RadioFilterform
+                            valg={cvJobbprofil}
+                            endreFiltervalg={endreFiltervalg}
+                            filtervalg={filtervalg}
+                            closeDropdown={lukkDropdown}
+                            filterId="cvJobbprofil"
+                        />
+                    }
+                />
+                }
                 <Dropdown
                     name="Svar fra registrering"
                     render={(lukkDropdown) =>
@@ -106,7 +117,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                         </>
                     }
                 />
-                }
                 <Dropdown
                     name="Innsatsgruppe"
                     render={(lukkDropdown) =>
