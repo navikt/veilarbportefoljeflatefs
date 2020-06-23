@@ -145,9 +145,8 @@ export interface BrukerModell {
     moteStartTid: string;
     moteSluttTid: string;
     vedtakStatus?: string,
-    vedtakStatusEndret?: string,
-    trengerRevurdering: boolean,
-    erPermittertEtterNiendeMars: boolean;
+    vedtakStatusEndret?: string;
+    trengerRevurdering: boolean;
 }
 
 // TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen?
