@@ -22,6 +22,17 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '22. JUN. 2020',
+        tittel: 'Etiketten «Permittert etter 9. mars» er nå fjernet',
+        versjonId: '22.06.20',
+        tekst: 'Mange av de permitterte har fått endring i sin situasjon, og etiketten «Permittert etter 9. mars» er derfor nå fjernet. Du kan fremdeles finne de som har registrert seg etter 9. mars og som har svart «Er permittert eller kommer til å bli permittert» ved å benytte filteret «Permittert etter 09.03.2020».',
+        children:
+            <EndringsloggLinkMedIkon
+                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Etiketten-%E2%80%9CPermittert-etter-9.-mars%E2%80%9D-er-n%C3%A5-fjernet.aspx?source=https%3A%2F%2Fnavno.sharepoint.com%2Fsites%2Ffag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging"
+                linkTekst="Nyhetssak på navet"
+            />
+    },
+    {
         dato: '05. JUN. 2020',
         tittel: 'Nytt filter på CV/jobbprofil',
         versjonId: '05.06.20',

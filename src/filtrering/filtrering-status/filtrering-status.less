@@ -29,20 +29,34 @@
         .hjelpetekst__wrapper {
             display: grid;
             grid-template-columns: auto fit-content(100%);
+
+            .popover {
+                max-width: 30rem;
+            }
         }
 
         .hjelpetekst {
-            height: 18px;
+            height: 16px;
+            width: 16px;
             grid-column: 2;
 
-            svg {
-                height: 16px;
-                width: 16px;
+            &__innhold {
+                padding: 0 1rem;
             }
 
             &__tooltip {
                 z-index: 2000;
             }
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .hjelpetekst__tooltip {
+            margin-right: 4rem;
+        }
+
+        .hjelpetekst__wrapper .popover {
+            left: -4rem;
         }
     }
 }
