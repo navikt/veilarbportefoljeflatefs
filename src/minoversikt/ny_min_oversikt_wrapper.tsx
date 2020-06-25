@@ -10,7 +10,7 @@ interface MinOversiktWrapperProps {
     className: string;
 }
 
-export function Ny_MinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithChildren<{}>) {
+export function  NyMinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithChildren<{}>) {
     const {ident} = useParams();
     const innloggetVeileder = useIdentSelector();
     const veiledere = useVeilederListeSelector();

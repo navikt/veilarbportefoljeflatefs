@@ -6,7 +6,6 @@ import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import MinoversiktTabellOverskrift from './minoversikt-portefolje-tabelloverskrift';
-import {Ny_MinOversiktWrapper} from './ny_min-oversikt-wrapper';
 import TabellOverskrift from '../components/tabell-overskrift';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import Toolbar from '../components/toolbar/toolbar';
@@ -31,6 +30,7 @@ import {pagineringSetup} from '../ducks/paginering';
 import {endreFiltervalg} from '../ducks/filtrering';
 import Sidebar from '../components/sidebar/sidebar';
 import classNames from 'classnames';
+import {NyMinOversiktWrapper} from "./ny_min_oversikt_wrapper";
 
 function Ny_MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -72,7 +72,7 @@ function Ny_MinoversiktSide() {
             <div className="side-storrelse__ny">
                 <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje}/>
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <Ny_MinOversiktWrapper
+                    <NyMinOversiktWrapper
                         className={classNames('oversikt-sideinnhold__ny portefolje-side__ny',
                             isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}>
                         <div className="sokefelt-etikett-container">
@@ -143,7 +143,7 @@ function Ny_MinoversiktSide() {
                             </div>
                             <MinOversiktModalController/>
                         </div>
-                    </Ny_MinOversiktWrapper>
+                    </NyMinOversiktWrapper>
                 </Innholdslaster>
             </div>
         </DocumentTitle>
