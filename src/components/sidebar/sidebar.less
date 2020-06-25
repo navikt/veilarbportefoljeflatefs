@@ -1,72 +1,75 @@
 @import "~nav-frontend-core/less/core";
 
 .veilarbportefoljeflatefs {
-    .sidebar {
-        height: fit-content;
-        width: 100%;
-        position: sticky;
-        top: .5rem;
-        z-index: 4;
-        display: grid;
-        grid-template-rows: auto auto;
-        row-gap: 5px;
+  .sidebar {
+    height: fit-content;
+    width: 100%;
+    position: sticky;
+    top: .5rem;
+    z-index: 4;
+    display: grid;
+    grid-template-rows: auto auto;
+    row-gap: 5px;
 
-        &__tab {
-            position: relative;
-            display: block;
-            background-color: transparent;
-            padding: .5rem .2rem 0;
-            height: auto;
-            cursor: pointer;
-            border: 1px solid transparent;
-            border-bottom: 0.3rem solid white;
+    &__tab {
+      position: relative;
+      display: block;
+      background-color: transparent;
+      padding: .5rem .2rem 0;
+      height: auto;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-bottom: 0.3rem solid white;
 
-            &-container {
-                grid-row: 1;
-                display: flex;
-                justify-content: space-between;
-                background-color: white;
-                box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
-                margin-top: -.5rem;
-            }
+      &-container {
+        grid-row: 1;
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+        margin-top: -.5rem;
+      }
 
-            &-valgt {
-                border-bottom: 0.3rem solid @navBla;
-            }
+      &-valgt {
+        border-bottom: 0.3rem solid @navBla;
+      }
 
-
-            &-ikon {
-                width: 2.5rem;
-                height: 2rem;
-            }
-        }
-
-        &__hidden {
-            .sidebar__tab-valgt {
-                border-bottom: 0.3rem solid white;
-            }
-        }
-
-        &__content-container {
-            grid-row: 2;
-            height: fit-content;
-            z-index: 5;
-            background-color: white;
-            padding: .5rem;
-            position: absolute;
-            width: inherit;
-            box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
-
-            .typo-systemtittel {
-                margin-bottom: 1rem;
-            }
-
-            .lukknapp--overstHjorne {
-                top: .5rem;
-                right: .5rem;
-                border: none;
-            }
-        }
+      &-ikon {
+        width: 2.5rem;
+        height: 2rem;
+      }
     }
+
+    &__hidden {
+      .sidebar__tab-valgt {
+        border-bottom: 0.3rem solid white;
+      }
+    }
+
+    &__content-container {
+      grid-row: 2;
+      height: fit-content;
+      z-index: 5;
+      background-color: white;
+      padding: .5rem;
+      position: absolute;
+      width: inherit;
+      box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+
+      .typo-systemtittel {
+        margin-bottom: 1rem;
+      }
+
+      .lukknapp--overstHjorne {
+        top: .5rem;
+        right: .5rem;
+        border: none;
+      }
+
+      .panel {
+        padding: 0;
+      }
+    }
+  }
 }
 
