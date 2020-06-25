@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
     SidebarTabInfo,
     SidebarTabInfo as SidebarTabType,
@@ -6,23 +6,20 @@ import {
 } from '../../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import './sidebar.less';
-import { ReactComponent as StatusIkon } from '../ikoner/tab_status.svg';
-import { ReactComponent as FilterIkon } from '../ikoner/tab_filter.svg';
-import { ReactComponent as InfoFraBrukerIkon } from '../ikoner/tab_info-fra-bruker.svg';
-import { ReactComponent as VeiledergruppeIkon } from '../ikoner/tab_veiledergrupper.svg';
-import { FiltervalgModell } from '../../model-interfaces';
-import { OrNothing } from '../../utils/types/types';
-import { Tiltak } from '../../ducks/enhettiltak';
-import { logEvent } from '../../utils/frontend-logger';
+import {ReactComponent as StatusIkon} from '../ikoner/tab_status.svg';
+import {ReactComponent as FilterIkon} from '../ikoner/tab_filter.svg';
+import {ReactComponent as VeiledergruppeIkon} from '../ikoner/tab_veiledergrupper.svg';
+import {FiltervalgModell} from '../../model-interfaces';
+import {OrNothing} from '../../utils/types/types';
+import {Tiltak} from '../../ducks/enhettiltak';
+import {logEvent} from '../../utils/frontend-logger';
 import SidebarTab from './sidebar-tab';
-import { FiltreringStatus } from '../../filtrering/filtrering-status/filtrering-status';
+import {FiltreringStatus} from '../../filtrering/filtrering-status/filtrering-status';
 import FiltreringFilter from '../../filtrering/filtrering-filter';
-import { useDispatch } from 'react-redux';
-import { pagineringSetup } from '../../ducks/paginering';
-import { endreFiltervalg } from '../../ducks/filtrering';
+import {useDispatch} from 'react-redux';
+import {pagineringSetup} from '../../ducks/paginering';
+import {endreFiltervalg} from '../../ducks/filtrering';
 import FilteringVeilederGrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper';
-import FiltreringInformasjonOmBruker
-    from '../../filtrering/filtrering-informasjon-fra-bruker/filtrering-informasjon-fra-bruker';
 
 interface Sidebar {
     type: SidebarTabType;
@@ -39,10 +36,6 @@ const sidebar: Sidebar[] = [
         type: SidebarTabType.VEILEDERGRUPPER,
         icon: <VeiledergruppeIkon/>,
         tittel: 'Veiledergrupper'
-    }, {
-        type: SidebarTabType.INFORMASJON_OM_BRUKER,
-        icon: <InfoFraBrukerIkon/>,
-        tittel: 'Informasjon om bruker'
     }, {
         type: SidebarTabType.FILTER,
         icon: <FilterIkon/>,
@@ -97,15 +90,6 @@ function Sidebar(props: SidebarProps) {
                                children={<FiltreringStatus
                                    filtergruppe={props.filtergruppe}
                                    filtervalg={props.filtervalg}/>
-                               }/>;
-        } else if ((selectedTabData as Sidebar).tittel === 'Informasjon om bruker') {
-            return <SidebarTab tittel="Informasjon fra bruker"
-                               handleClick={props.lukkTab}
-                               children={
-                                   <FiltreringInformasjonOmBruker
-                                       filtervalg={props.filtervalg}
-                                       endreFiltervalg={doEndreFiltervalg}
-                                   />
                                }/>;
         } else if ((selectedTabData as Sidebar).tittel === 'Filter') {
             return <SidebarTab tittel="Filter"
