@@ -4,16 +4,13 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Redirect, useParams } from 'react-router';
 import { useVeilederListeSelector } from '../hooks/redux/use-veilederliste-selector';
 import { useIdentSelector } from '../hooks/redux/use-inlogget-ident';
-import classNames from 'classnames';
 
-interface MinOversiktWrapperProps {
-    className: string;
-}
-
-export function MinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithChildren<{}>) {
+export function MinOversiktWrapper(props: PropsWithChildren<{}>) {
     const {ident} = useParams();
+
     const innloggetVeileder = useIdentSelector();
     const veiledere = useVeilederListeSelector();
+
     const visesAnnenVeiledersPortefolje = ident ? ident !== innloggetVeileder!.ident : false;
 
     if (ident && veiledere.findIndex(v => v.ident === ident) < 0) {
@@ -21,15 +18,19 @@ export function MinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithChi
     }
 
     const veilederFraUrl = veiledere.find((veileder) => (veileder.ident === ident)) || {fornavn: '', etternavn: ''};
+
+    const annenVeilederVarsel = (
+        <Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
+            {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
+        </Normaltekst>
+    );
+
     return (
-        <div className={classNames(props.className,
-            visesAnnenVeiledersPortefolje ? 'annen-veileder' : '')}
-             id="oversikt-sideinnhold" role="tabpanel">
-            {visesAnnenVeiledersPortefolje &&
-            <Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
-                {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
-            </Normaltekst>}
-            {props.children}
-        </div>
+        <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
+            {visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
+            <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold portefolje-side">
+                {props.children}
+            </div>
+        </section>
     );
 }

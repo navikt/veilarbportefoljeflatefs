@@ -1,11 +1,11 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import Etiketter from '../components/tabell/etiketter';
-import { FiltervalgModell, VeilederModell } from '../model-interfaces';
-import { Kolonne } from '../ducks/ui/listevisning';
+import {FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {Kolonne} from '../ducks/ui/listevisning';
 import EnhetKolonner from './enhet-kolonner';
-import { useLayoutEffect } from 'react';
-import './enhetsportefolje.less';
+import {useLayoutEffect} from 'react';
+import './ny_enhetsportefolje.less';
 import './brukerliste.less';
 import {OrNothing} from "../utils/types/types";
 import {Checkbox} from "nav-frontend-skjema";
@@ -48,7 +48,7 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
                 <Checkbox
                     checked={bruker.markert}
                     disabled={bruker.fnr === ''}
-                    onChange={()=> settMarkert(bruker.fnr, !bruker.markert)}
+                    onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
                     label=""
                     className="brukerliste__checkbox"
                 />

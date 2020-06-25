@@ -1,0 +1,60 @@
+@import '~nav-frontend-core/less/_variabler';
+
+@bakgrunnsGra: #F4F4F4;
+
+.veilarbportefoljeflatefs {
+  .minoversikt-liste__wrapper {
+    background-color: @bakgrunnsGra;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 0 0 @border-radius-base @border-radius-base;
+    margin-bottom: 0;
+
+    li:nth-child(odd) {
+      background-color: white;
+    }
+  }
+
+  .annen-veileder {
+    padding-top: 1rem;
+    background-color: @navLysBlaLighten20;
+
+    .annen-veileder-varsel {
+      text-align: center;
+      margin: 0;
+    }
+
+    .portefolje-side__ny {
+      padding: 2rem;
+    }
+  }
+
+  .tilbaketilveileder {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 2rem;
+    text-decoration: none;
+    color: @navBla;
+
+    &:active, &:visited, &:hover {
+      color: @navBla;
+    }
+
+    i {
+      position: absolute;
+      margin-top: 12px;
+    }
+
+    span {
+      display: inline-block;
+      position: absolute;
+      margin-left: 20px;
+      white-space: nowrap;
+    }
+  }
+
+  .arbeidsliste--ikon {
+    position: relative;
+    right: -4px;
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import TittelValg, { ytelseFilterErAktiv } from '../utils/utils';
+import TittelValg, {ytelseFilterErAktiv} from '../utils/utils';
 import {
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
@@ -11,12 +11,12 @@ import {
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
-import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
-import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
-import { AktiviteterValg } from '../ducks/filtrering';
+import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {Kolonne, ListevisningType} from '../ducks/ui/listevisning';
+import {AktiviteterValg} from '../ducks/filtrering';
 import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
-import './enhetsportefolje.less';
+import './ny_enhetsportefolje.less';
 import './brukerliste.less';
 import {OrNothing} from "../utils/types/types";
 

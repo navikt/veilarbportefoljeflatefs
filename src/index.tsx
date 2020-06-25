@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'whatwg-fetch';
 import Application from './application';
-import './style.less';
+import './ny_style.less';
 import {erHeroku} from "./utils/utils";
 
 if (!(window as any)._babelPolyfill) {

@@ -25,7 +25,7 @@
         display: none;
     }
 
-    .sok-veileder__gammel {
+    .sok-veileder__ny {
         border: 1px solid @navGra60;
         border-radius: @border-radius-base;
         margin-bottom: 1rem;
@@ -33,6 +33,7 @@
 
     .veiledere-undertittel {
         background-color: #F4F4F4;
+        padding-top: .5rem;
     }
 
     .veilederoversikt {
@@ -42,24 +43,30 @@
             margin-top: -18px;
         }
 
-        &__sticky-skygge::before,
-        &__sticky-skygge::after {
+        &__sticky-skygge__ny::before,
+        &__sticky-skygge__ny::after {
             content: '';
             display: block;
             height: 16px;
             position: sticky;
         }
 
-        &__sticky-skygge::before {
+        &__sticky-skygge__ny::before {
             top: 61px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
             margin: 0 4px;
         }
 
-        &__sticky-skygge::after {
+        &__sticky-skygge__ny::after {
             top: 0;
             height: 0;
             width: auto;
         }
+    }
+
+    .status-filter-kolonne__ny {
+        height: fit-content;
+        position: sticky;
+        top: .5rem;
     }
 }

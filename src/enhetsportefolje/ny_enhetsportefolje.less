@@ -1,16 +1,17 @@
 @import "~nav-frontend-core/less/core";
 
 .veilarbportefoljeflatefs {
-    .portefolje__container__gammel {
+    .portefolje__container__ny {
+        min-height: 100%;
         margin-bottom: 2rem;
         border-bottom: 1px solid @navGra60;
         border-radius: @border-radius-base;
 
-        &__tom-liste__gammel {
+        &__tom-liste {
             border-bottom: none;
         }
 
-        &__sticky__gammel {
+        &__sticky {
             position: sticky;
             top: 5rem
         }
@@ -50,14 +51,12 @@
         }
     }
 
-    .status-filter-kolonne__gammel {
-        .filtrering-navn-fnr {
-            width: auto;
-            margin: .4rem 0 .4rem 0;
+    .filtrering-navn-fnr {
+        width: 16rem;
+        margin: .4rem 1rem .4rem 0;
 
-            .skjemaelement {
-                margin-bottom: 0;
-            }
+        .skjemaelement {
+            margin-bottom: 0;
         }
     }
 }

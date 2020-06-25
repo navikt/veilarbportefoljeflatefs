@@ -1,19 +1,19 @@
 import React from 'react';
 import 'moment/locale/nb';
-import { Route, Switch } from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
+import Ny_EnhetSide from './enhetsportefolje/ny_enhet-side';
+import Ny_veiledereSide from './veiledere/ny_veiledere-side';
+import Ny_MinoversiktSide from "./minoversikt/ny_minoversikt-side";
 import EnhetSide from './enhetsportefolje/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import MinOversiktSide from './minoversikt/minoversikt-side';
-import EnhetSideGammel from './enhetsportefolje/gammel-enhet-side';
-import VeiledereSideGammel from './veiledere/gammel-veiledere-side';
-import MinOversiktSideGammel from './minoversikt/gammel-minoversikt-side';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
-import { loggBrowserMetrikker } from './utils/metrikker/browser-metrikker';
-import { useFetchPortefoljeData } from './hooks/portefolje/use-fetch-portefolje-data';
+import {loggBrowserMetrikker} from './utils/metrikker/browser-metrikker';
+import {useFetchPortefoljeData} from './hooks/portefolje/use-fetch-portefolje-data';
 import Innholdslaster from './innholdslaster/innholdslaster';
 import TourModalLocalStorage from './components/modal/tour-modal/tour-modal-local-storage';
-import { useFeatureSelector } from './hooks/redux/use-feature-selector';
-import { REDESIGN } from './konstanter';
+import {useFeatureSelector} from './hooks/redux/use-feature-selector';
+import {REDESIGN} from './konstanter';
 
 loggBrowserMetrikker();
 
@@ -30,6 +30,24 @@ function Routes() {
                             <>
                                 <Route
                                     path="/enhet"
+                                    component={Ny_EnhetSide}
+                                />
+                                <Route
+                                    path="/veiledere"
+                                    component={Ny_veiledereSide}
+                                />
+                                <Route
+                                    path="/portefolje/:ident"
+                                    component={Ny_MinoversiktSide}
+                                />
+                                <Route
+                                    path="/portefolje"
+                                    component={Ny_MinoversiktSide}
+                                />
+                            </>
+                            : <>
+                                <Route
+                                    path="/enhet"
                                     component={EnhetSide}
                                 />
                                 <Route
@@ -43,24 +61,6 @@ function Routes() {
                                 <Route
                                     path="/portefolje"
                                     component={MinOversiktSide}
-                                />
-                            </>
-                            : <>
-                                <Route
-                                    path="/enhet"
-                                    component={EnhetSideGammel}
-                                />
-                                <Route
-                                    path="/veiledere"
-                                    component={VeiledereSideGammel}
-                                />
-                                <Route
-                                    path="/portefolje/:ident"
-                                    component={MinOversiktSideGammel}
-                                />
-                                <Route
-                                    path="/portefolje"
-                                    component={MinOversiktSideGammel}
                                 />
                             </>
                         }

@@ -60,9 +60,12 @@ html {
 @import "~nav-frontend-hjelpetekst-style/src/hjelpetekst-style";
 @import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
 
-
 .veilarbportefoljeflatefs {
     @import "./components/barinput/barlabel";
+
+    .ekspanderbartPanel__innhold {
+        padding: 0;
+    }
 
     .ekspanderbartPanel--apen .ReactCollapse--collapse {
         overflow: initial !important;
@@ -75,6 +78,12 @@ html {
 
 .modal__overlay {
     z-index: 2000;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 956px;
+    }
 }
 
 .flex {
@@ -98,8 +107,14 @@ html {
 }
 
 .sticky-container {
-    z-index: 5;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     background-color: @bakgrunnsGra;
+
+    .toolbar {
+        justify-content: space-between;
+    }
 
     .blokk-xxs {
         margin-bottom: 0;
@@ -138,15 +153,11 @@ html {
 .toolbar-container {
     position: sticky;
     top: 0;
+    margin-top: -18px;
     z-index: 3;
-    margin-top: -20px;
     background-color: @bakgrunnsGra;
     border-bottom: 1px solid @navGra60;
     border-radius: 4px;
-
-    .tabelloverskrift {
-        padding-top: 1rem;
-    }
 }
 
 .sticky-skygge::before,
@@ -158,7 +169,7 @@ html {
 }
 
 .sticky-skygge::before {
-    top: 113px;
+    top: 114px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     margin: 0 4px;
 }
@@ -180,42 +191,36 @@ html {
         margin: 0 auto;
         padding: 0 3rem;
         max-width: 1809px;
-        display: grid;
-        grid-template-rows: auto 1fr;
     }
 
     .oversikt-sideinnhold {
         display: grid;
-        column-gap: 1%;
-        grid-template-columns: auto 21rem;
-        grid-template-rows: auto auto;
+        grid-template-columns: 1fr minmax(805px, 1322px);
+        column-gap: 16px;
+    }
 
-        .sokefelt-etikett-container {
-            display: flex;
-            flex-wrap: wrap;
-        }
+    .status-filter-kolonne {
+        min-width: 320px;
+        max-width: 375px;
+    }
 
-        .alertstripe--info {
-            grid-row: 2;
-        }
+    .liste-kolonne {
+        min-width: 805px;
+        max-width: 1322px;
 
-        .oversikt__container {
-            grid-row: 2;
-            margin-bottom: 2rem;
-            margin-top: 1rem;
-            grid-column-start: 1;
-        }
-
-        &__hidden {
-            .oversikt__container {
-                grid-column-end: 3;
-            }
+        .filtreringlabel {
+            display: inline-flex;
         }
     }
 
-    @media (max-width: 1400px) {
-        .oversikt__container {
-            grid-column-end: 3;
+    @media (max-width: 1200px) {
+        .oversikt-sideinnhold {
+            grid-template-rows: auto auto;
+            grid-template-columns: none;
+        }
+
+        .status-filter-kolonne {
+            max-width: none;
         }
     }
 }
