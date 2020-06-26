@@ -15,7 +15,6 @@ export function useRedirectOnMount() {
     const parsed = queryString.parse(location.search);
 
     useOnMount(() => {
-        console.log("location.pathname", location.pathname)
         if (Object.keys(parsed).includes('clean')){
             delete parsed.clean;
             const stringified = queryString.stringify(parsed);
