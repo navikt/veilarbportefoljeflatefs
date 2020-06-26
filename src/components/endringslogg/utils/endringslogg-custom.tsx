@@ -36,6 +36,16 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                 />
             </>
     }, {
+        dato: '26. JUN. 2020',
+        tittel: 'Videomøte som alternativ',
+        versjonId: '26.06.20',
+        tekst: 'Brukere som svarer i registreringen at de har problemer med å søke eller være i jobb (profilert til “Behov for AEV”), får et spørsmål om hvordan de ønsker å fortelle mer om sin situasjon. Nå kan bruker også velge videomøte som alternativ.',
+        children:
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-veileder-for-arbeidsrettet-brukeroppfolging/SitePages/Registrering-og-behovsvurdering.aspx"
+                    linkTekst="Se Veileder for arbeidsrettet brukeroppfølging"
+                />
+    }, {
         dato: '22. JUN. 2020',
         tittel: 'Etiketten «Permittert etter 9. mars» er nå fjernet',
         versjonId: '22.06.20',
