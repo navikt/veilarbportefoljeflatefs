@@ -1,10 +1,10 @@
-import { ModalName } from '../../modal/tour-modal/tour-modal';
-import { EndringsloggLinkMedIkon } from '../endringslogg-innhold';
+import {ModalName} from '../../modal/tour-modal/tour-modal';
+import {EndringsloggLinkMedIkon} from '../endringslogg-innhold';
 import React from 'react';
 import TourModalButton from '../../modal/tour-modal/tour-modal-button';
 import '../endringslogg.less';
 import '../collapse-container-transition.less';
-import { FeaturesState } from '../../../ducks/features';
+import {FeaturesState} from '../../../ducks/features';
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -22,6 +22,30 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '01. JUL. 2020',
+        tittel: 'Nytt filter på CV/jobbprofil',
+        versjonId: '01.07.20',
+        featureToggleName: 'veilarbportefolje.cv-jobbprofil',
+        tekst: 'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med NAV. Da blir det enklere å identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og jobbprofil på arbeidsplassen.no.',
+        children:
+            <>
+                <p>Filtrene ligger i gruppen "Status og brukergrupper" under "Filter".</p>
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nytt-filter-i-oversikten--Delt-ikke-delt-CV-og-jobbprofil-med-NAV.aspx"
+                    linkTekst="Nyhetssak på Navet"
+                />
+            </>
+    }, {
+        dato: '26. JUN. 2020',
+        tittel: 'Videomøte som alternativ',
+        versjonId: '26.06.20',
+        tekst: 'Brukere som svarer i registreringen at de har problemer med å søke eller være i jobb (profilert til “Behov for AEV”), får et spørsmål om hvordan de ønsker å fortelle mer om sin situasjon. Nå kan bruker også velge videomøte som alternativ.',
+        children:
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-veileder-for-arbeidsrettet-brukeroppfolging/SitePages/Registrering-og-behovsvurdering.aspx"
+                    linkTekst="Se Veileder for arbeidsrettet brukeroppfølging"
+                />
+    }, {
         dato: '22. JUN. 2020',
         tittel: 'Etiketten «Permittert etter 9. mars» er nå fjernet',
         versjonId: '22.06.20',
@@ -33,21 +57,6 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             />
     },
     {
-        dato: '05. JUN. 2020',
-        tittel: 'Nytt filter på CV/jobbprofil',
-        versjonId: '05.06.20',
-        featureToggleName: 'veilarbportefolje.cv-jobbprofil',
-        tekst: 'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med NAV. Da blir det enklere å identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og jobbprofil på arbeidsplassen.no.',
-        children:
-            <>
-                <p>Filteret ligger i en ny filtergruppe, “Informasjon fra bruker”, og filteret “Svar fra registrering”
-                    er flyttet til denne gruppen.</p>
-                <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nytt-filter-i-oversikten--Delt-ikke-delt-CV-og-jobbprofil-med-NAV.aspx"
-                    linkTekst="Nyhetssak på Navet"
-                />
-            </>
-    }, {
         dato: '05. MAI. 2020',
         tittel: 'Filtrering av arbeidsliste på farger',
         versjonId: '05.05.20',
