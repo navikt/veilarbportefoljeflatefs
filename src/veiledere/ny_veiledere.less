@@ -3,70 +3,88 @@
 @bakgrunnsGra: #F4F4F4;
 
 .veilarbportefoljeflatefs {
-    .veiledersok__wrapper {
-        margin-top: 1rem;
-        width: 25%;
-        margin-right: 75%;
 
-        .veiledere__soketabell {
-            a {
-                border-bottom: none;
-                color: @navBla;
-                text-decoration: none;
-            }
-        }
+  .oversikt-sideinnhold-veilederside__ny {
+    display: grid;
+    grid-template-columns: auto 21rem;
+    column-gap: 1rem;
+  }
+
+  .veiledersok__wrapper {
+    margin-top: 1rem;
+    width: 25%;
+    margin-right: 75%;
+
+    .veiledere__soketabell {
+      a {
+        border-bottom: none;
+        color: @navBla;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .tildelveileder_wrapper {
+    min-height: 3rem;
+  }
+
+  .veileder__hide {
+    display: none;
+  }
+
+  .sok-veileder__ny {
+    border: 1px solid @navGra60;
+    border-radius: @border-radius-base;
+    margin-bottom: 1rem;
+  }
+
+  .veiledere-undertittel {
+    background-color: #F4F4F4;
+    padding-top: .5rem;
+  }
+
+  .veilederoversikt {
+    &__toolbar-container {
+      position: relative;
+      top: 0;
+      margin-top: -18px;
     }
 
-    .tildelveileder_wrapper {
-        min-height: 3rem;
+    &__sticky-skygge__ny::before,
+    &__sticky-skygge__ny::after {
+      content: '';
+      display: block;
+      height: 16px;
+      position: sticky;
     }
 
-    .veileder__hide {
-        display: none;
+    &__sticky-skygge__ny::before {
+      top: 61px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      margin: 0 4px;
     }
 
-    .sok-veileder__ny {
-        border: 1px solid @navGra60;
-        border-radius: @border-radius-base;
-        margin-bottom: 1rem;
+    &__sticky-skygge__ny::after {
+      top: 0;
+      height: 0;
+      width: auto;
     }
+  }
 
-    .veiledere-undertittel {
-        background-color: #F4F4F4;
-        padding-top: .5rem;
-    }
+  .status-filter-kolonne__ny {
+    height: fit-content;
+    position: sticky;
+    top: .5rem;
+  }
 
-    .veilederoversikt {
-        &__toolbar-container {
-            position: relative;
-            top: 0;
-            margin-top: -18px;
-        }
-
-        &__sticky-skygge__ny::before,
-        &__sticky-skygge__ny::after {
-            content: '';
-            display: block;
-            height: 16px;
-            position: sticky;
-        }
-
-        &__sticky-skygge__ny::before {
-            top: 61px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            margin: 0 4px;
-        }
-
-        &__sticky-skygge__ny::after {
-            top: 0;
-            height: 0;
-            width: auto;
-        }
+  @media (max-width: 900px) {
+    .oversikt-sideinnhold-veilederside__ny {
+      display: flex;
+      flex-direction: column-reverse;
     }
 
     .status-filter-kolonne__ny {
-        height: fit-content;
-        position: sticky;
-        top: .5rem;
+      position: inherit;
     }
+  }
 }
