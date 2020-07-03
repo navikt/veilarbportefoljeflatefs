@@ -14,7 +14,7 @@ import {
     NY_VEILEDERGRUPPER_OK,
     REDIGER_VEILEDERGRUPPER_OK,
     SLETT_VEILEDERGRUPPER_OK
-} from '../ducks/lagret-filter';
+} from '../ducks/veiledergrupper_lagret-filter';
 
 interface FilterEndringData {
     filterId: string;

@@ -10,7 +10,7 @@ import { endreFiltervalg, initialState } from '../../ducks/filtrering';
 import { FiltervalgModell } from '../../model-interfaces';
 import {
     lageNyGruppe,
-} from '../../ducks/lagret-filter';
+} from '../../ducks/veiledergrupper_lagret-filter';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
 
 
@@ -40,8 +40,8 @@ function FilteringVeilederGrupper({ filtergruppe } : FilteringVeilederGrupperPro
     return (
         <div>
             {lagretFilter.length > 0
-                ? <VeilederGruppeInnhold 
-                    lagretFilter={sortertVeiledergruppe} 
+                ? <VeilederGruppeInnhold
+                    lagretFilter={sortertVeiledergruppe}
                     filtergruppe={filtergruppe}
                 />
                 : <div className="veiledergruppe-emptystate">

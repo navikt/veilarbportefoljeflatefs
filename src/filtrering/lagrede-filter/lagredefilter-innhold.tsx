@@ -5,9 +5,9 @@ import { Radio } from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import {
     lagreEndringer,
-    LagretFilter,
+    LagretFilter_LagredeFilter,
     slettGruppe
-} from '../../ducks/lagret-filter';
+} from '../../ducks/lagrede-filter_lagret-filter_';
 import { AppState } from '../../reducer';
 import { harGjortEndringer, veilederlisterErLik } from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
 import { VeilederGruppeModal } from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
@@ -19,7 +19,7 @@ import { finnSideNavn } from '../../middleware/metrics-middleware';
 
 
 interface LagredeFilterInnholdProps {
-    lagretFilter: LagretFilter[]
+    lagretFilter: LagretFilter_LagredeFilter[]
     filterValg?: FiltervalgModell;
     filtergruppe?: string;
 }
@@ -29,7 +29,7 @@ function isOverflown(element) {
 }
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
-    const [valgtGruppe, setValgtGruppe] = useState<LagretFilter>();
+    const [valgtGruppe, setValgtGruppe] = useState<LagretFilter_LagredeFilter>();
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
 
     const filtreringVeilederoversikt = (state: AppState) => state.filtreringVeilederoversikt.veiledere;
@@ -116,7 +116,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
 interface VeilederGruppeRad {
     hanterVelgGruppe: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    veilederGruppe: LagretFilter;
+    veilederGruppe: LagretFilter_LagredeFilter;
     veiledereFilter: string[];
     onClickRedigerKnapp: () => void;
 }

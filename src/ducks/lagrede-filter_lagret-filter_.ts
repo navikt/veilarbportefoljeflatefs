@@ -1,11 +1,6 @@
-import {
-    hentEnhetsFilterGrupper,
-    nyVeiledergruppe,
-    redigerVeiledergruppe,
-    slettVeiledergruppe
-} from '../middleware/api';
 import { STATUS, doThenDispatch } from './utils';
 import { FiltervalgModell } from '../model-interfaces';
+import {hentEnhetsFilterGrupper, nyVeiledergruppe, redigerVeiledergruppe, slettVeiledergruppe} from "../middleware/api";
 
 // Actions
 export const HENT_LAGREDEFILTER_OK = 'lagredefilter/OK';
@@ -24,7 +19,7 @@ export const SLETT_LAGREDEFILTER_OK = 'lagredefilter_slette/OK';
 export const SLETT_LAGREDEFILTER_FEILET = 'lagredefilter_slette/FEILET';
 export const SLETT_LAGREDEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
-export interface LagretFilter {
+export interface LagretFilter_LagredeFilter {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
@@ -33,7 +28,7 @@ export interface LagretFilter {
 
 export interface LagretFilterState {
     status: string;
-    data: LagretFilter[];
+    data: LagretFilter_LagredeFilter[];
     error: LagretFilterError | null;
 }
 

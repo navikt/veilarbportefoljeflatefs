@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
-import { NyGruppe, RedigerGruppe } from '../ducks/lagret-filter';
+import { NyGruppe, RedigerGruppe } from '../ducks/veiledergrupper_lagret-filter';
 import { VeilederModell } from '../model-interfaces';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
