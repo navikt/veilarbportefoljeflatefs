@@ -12,6 +12,7 @@ import * as faker from 'faker/locale/nb_NO';
 import FetchMock, { MatcherUtils, MiddlewareUtils } from 'yet-another-fetch-mock';
 import { delayed, jsonResponse } from './utils';
 import { LagretFilter } from '../ducks/lagret-filter';
+import {lagredeFilter} from "./lagrede-filter";
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -53,6 +54,8 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 }
 
 let customVeilederGrupper = veilederGrupper();
+
+let customLagredeFilter = lagredeFilter();
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -107,6 +110,37 @@ mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (req, res, ctx
         return res(ctx.status(200));
     }
     return res(ctx.status(401));
+});
+
+//lagrede filter
+mock.get('/veilarbfilter/api/minelagredefilter/', customLagredeFilter);
+
+mock.put('/veilarbfilter/api/minelagredefilter/:filterId', ({body}) => {
+        let oppdatertFilter = {};
+        customLagredeFilter = customLagredeFilter.map(filter => {
+            if (filter.filterId === body.filterId) {
+                oppdatertFilter = {...filter, filterNavn: body.filterNavn, filterValg: body.filterValg};
+                return oppdatertFilter;
+            }
+            return filter;
+        }) as LagretFilter [] & JSONArray;
+        return oppdatertFilter;
+    }
+);
+
+mock.post('/veilarbfilter/api/minelagredefilter/', (args: HandlerArgument) => {
+    const filterId = Math.floor(Math.random() * 100) + 500;
+    customLagredeFilter = [...customLagredeFilter, {...args.body, filterId}];
+    return {...args.body, filterId};
+});
+
+mock.delete('/veilarbfilter/api/minelagredefilter/:veilederId/filter/:filterId', (args: HandlerArgument) => {
+    const {pathParams} = args;
+    if (pathParams.filterId) {
+        customLagredeFilter = customLagredeFilter.filter(v => v.filterId !== pathParams.filterId) as LagretFilter [] & JSONArray;
+        return {status: 200};
+    }
+    return {status: 401};
 });
 
 // veileder-api

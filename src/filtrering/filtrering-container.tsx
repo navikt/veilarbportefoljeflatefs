@@ -10,6 +10,7 @@ import FilteringVeilederGrupper from './filtrering-veileder-grupper/filtrering-v
 import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
+import FilteringLagredeFilter from "./lagrede-filter/filtrering-lagrede-filter";
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -30,6 +31,15 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 filtervalg={filtervalg}
                 endreFiltervalg={doEndreFiltervalg}
             />
+            <MetrikkEkspanderbartpanel
+                apen={false}
+                tittel="Lagrede filter"
+                tittelProps="undertittel"
+                lamellNavn="lagredefilter"
+                hidden={filtergruppe !== 'veileder'}
+            >
+                <FilteringLagredeFilter filtergruppe={filtergruppe}/>
+            </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={false}
                 tittel="Veiledergrupper"

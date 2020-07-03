@@ -8,21 +8,21 @@ import { STATUS, doThenDispatch } from './utils';
 import { FiltervalgModell } from '../model-interfaces';
 
 // Actions
-export const HENT_VEILEDERGRUPPER_OK = 'veiledergrupper/OK';
-export const HENT_VEILEDERGRUPPER_FEILET = 'veiledergrupper/FEILET';
-export const HENT_VEILEDERGRUPPER_PENDING = 'veiledergrupper/PENDING';
+export const HENT_LAGREDEFILTER_OK = 'lagredefilter/OK';
+export const HENT_LAGREDEFILTER_FEILET = 'lagredefilter/FEILET';
+export const HENT_LAGREDEFILTER_PENDING = 'lagredefilter/PENDING';
 
-export const REDIGER_VEILEDERGRUPPER_OK = 'veiledergrupper_endre/OK';
-export const REDIGER_VEILEDERGRUPPER_FEILET = 'veiledergrupper_endre/FEILET';
-export const REDIGER_VEILEDERGRUPPER_PENDING = 'veiledergrupper_endre/PENDING';
+export const REDIGER_LAGREDEFILTER_OK = 'lagredefilter_endre/OK';
+export const REDIGER_LAGREDEFILTER_FEILET = 'lagredefilter_endre/FEILET';
+export const REDIGER_LAGREDEFILTER_PENDING = 'lagredefilter_endre/PENDING';
 
-export const NY_VEILEDERGRUPPER_OK = 'veiledergrupper_ny/OK';
-export const NY_VEILEDERGRUPPER_FEILET = 'veiledergrupper_ny/FEILET';
-export const NY_VEILEDERGRUPPER_PENDING = 'veiledergrupper_ny/PENDING';
+export const NY_LAGREDEFILTER_OK = 'lagredefilter_ny/OK';
+export const NY_LAGREDEFILTER_FEILET = 'lagredefilter_ny/FEILET';
+export const NY_LAGREDEFILTER_PENDING = 'lagredefilter_ny/PENDING';
 
-export const SLETT_VEILEDERGRUPPER_OK = 'veiledergrupper_slette/OK';
-export const SLETT_VEILEDERGRUPPER_FEILET = 'veiledergrupper_slette/FEILET';
-export const SLETT_VEILEDERGRUPPER_PENDING = 'veiledergrupper_slette/PENDING';
+export const SLETT_LAGREDEFILTER_OK = 'lagredefilter_slette/OK';
+export const SLETT_LAGREDEFILTER_FEILET = 'lagredefilter_slette/FEILET';
+export const SLETT_LAGREDEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
 export interface LagretFilter {
     filterNavn: string;
@@ -34,7 +34,7 @@ export interface LagretFilter {
 export interface LagretFilterState {
     status: string;
     data: LagretFilter[];
-    error: VeilederGruppeError | null;
+    error: LagretFilterError | null;
 }
 
 export interface RedigerGruppe {
@@ -48,7 +48,7 @@ export interface NyGruppe {
     filterValg: FiltervalgModell;
 }
 
-enum VeilederGruppeError {
+enum LagretFilterError {
     LAGRING_FEILET = 'LAGRING_FEILET',
     HENTING_FEILET = 'HENTING_FEILET',
     NY_FEILET = 'NY_FEILET',
@@ -64,25 +64,25 @@ const initialState = {
 //  Reducer
 export default function reducer(state: LagretFilterState = initialState, action) {
     switch (action.type) {
-        case HENT_VEILEDERGRUPPER_PENDING:
-        case NY_VEILEDERGRUPPER_PENDING:
-        case REDIGER_VEILEDERGRUPPER_PENDING:
-        case SLETT_VEILEDERGRUPPER_PENDING:
+        case HENT_LAGREDEFILTER_PENDING:
+        case NY_LAGREDEFILTER_PENDING:
+        case REDIGER_LAGREDEFILTER_PENDING:
+        case SLETT_LAGREDEFILTER_PENDING:
             return {...state, status: STATUS.PENDING};
-        case HENT_VEILEDERGRUPPER_FEILET:
-            return {...state, status: STATUS.ERROR, error: VeilederGruppeError.HENTING_FEILET};
-        case NY_VEILEDERGRUPPER_FEILET:
-            return {...state, status: STATUS.ERROR, error: VeilederGruppeError.NY_FEILET};
-        case REDIGER_VEILEDERGRUPPER_FEILET:
-            return {...state, status: STATUS.ERROR, error: VeilederGruppeError.LAGRING_FEILET};
-        case SLETT_VEILEDERGRUPPER_FEILET:
-            return {...state, status: STATUS.ERROR, error: VeilederGruppeError.SLETTING_FEILET};
+        case HENT_LAGREDEFILTER_FEILET:
+            return {...state, status: STATUS.ERROR, error: LagretFilterError.HENTING_FEILET};
+        case NY_LAGREDEFILTER_FEILET:
+            return {...state, status: STATUS.ERROR, error: LagretFilterError.NY_FEILET};
+        case REDIGER_LAGREDEFILTER_FEILET:
+            return {...state, status: STATUS.ERROR, error: LagretFilterError.LAGRING_FEILET};
+        case SLETT_LAGREDEFILTER_FEILET:
+            return {...state, status: STATUS.ERROR, error: LagretFilterError.SLETTING_FEILET};
 
-        case HENT_VEILEDERGRUPPER_OK:
+        case HENT_LAGREDEFILTER_OK:
             return {...state, status: STATUS.OK, data: action.data};
-        case NY_VEILEDERGRUPPER_OK:
+        case NY_LAGREDEFILTER_OK:
             return {...state, status: STATUS.OK, data: state.data.concat(action.data)};
-        case REDIGER_VEILEDERGRUPPER_OK:
+        case REDIGER_LAGREDEFILTER_OK:
             return {
                 ...state, status: STATUS.OK, data: state.data.map(elem => {
                         if (elem.filterId !== action.data.filterId) {
@@ -92,7 +92,7 @@ export default function reducer(state: LagretFilterState = initialState, action)
                     }
                 )
             };
-        case SLETT_VEILEDERGRUPPER_OK:
+        case SLETT_LAGREDEFILTER_OK:
             return {
                 ...state, status: STATUS.OK, data: state.data.filter(elem => elem.filterId !== action.data)
             };
@@ -105,35 +105,35 @@ export default function reducer(state: LagretFilterState = initialState, action)
 // Action Creators
 export function hentLagretFilterForEnhet(enhetId) {
     return doThenDispatch(() => hentEnhetsFilterGrupper(enhetId), {
-        OK: HENT_VEILEDERGRUPPER_OK,
-        FEILET: HENT_VEILEDERGRUPPER_FEILET,
-        PENDING: HENT_VEILEDERGRUPPER_PENDING
+        OK: HENT_LAGREDEFILTER_OK,
+        FEILET: HENT_LAGREDEFILTER_FEILET,
+        PENDING: HENT_LAGREDEFILTER_PENDING
     });
 }
 
 // Action Creators
 export function lagreEndringer(endringer: RedigerGruppe, enhetId: string) {
     return doThenDispatch(() => redigerVeiledergruppe(endringer, enhetId), {
-        OK: REDIGER_VEILEDERGRUPPER_OK,
-        FEILET: REDIGER_VEILEDERGRUPPER_FEILET,
-        PENDING: REDIGER_VEILEDERGRUPPER_PENDING
+        OK: REDIGER_LAGREDEFILTER_OK,
+        FEILET: REDIGER_LAGREDEFILTER_FEILET,
+        PENDING: REDIGER_LAGREDEFILTER_PENDING
     });
 }
 
 // Action Creators
 export function lageNyGruppe(endringer: NyGruppe, enhetId: string) {
     return doThenDispatch(() => nyVeiledergruppe(endringer, enhetId), {
-        OK: NY_VEILEDERGRUPPER_OK,
-        FEILET: NY_VEILEDERGRUPPER_FEILET,
-        PENDING: NY_VEILEDERGRUPPER_PENDING
+        OK: NY_LAGREDEFILTER_OK,
+        FEILET: NY_LAGREDEFILTER_FEILET,
+        PENDING: NY_LAGREDEFILTER_PENDING
     });
 }
 
 // Action Creators
 export function slettGruppe(enhet: string, filterId: number) {
     return doThenDispatch(() => slettVeiledergruppe(enhet, filterId), {
-        OK: SLETT_VEILEDERGRUPPER_OK,
-        FEILET: SLETT_VEILEDERGRUPPER_FEILET,
-        PENDING: SLETT_VEILEDERGRUPPER_PENDING
+        OK: SLETT_LAGREDEFILTER_OK,
+        FEILET: SLETT_LAGREDEFILTER_FEILET,
+        PENDING: SLETT_LAGREDEFILTER_PENDING
     });
 }
