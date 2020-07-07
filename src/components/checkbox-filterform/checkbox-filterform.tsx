@@ -14,9 +14,10 @@ interface CheckboxFilterformProps {
     filtervalg: FiltervalgModell;
     columns?: number;
     className?: string;
+    emptyCheckboxFilterFormMessage?: string;
 }
 
-function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filtervalg, columns = 1, className}: CheckboxFilterformProps) {
+function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filtervalg, columns = 1, className, emptyCheckboxFilterFormMessage}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
 
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
@@ -63,7 +64,7 @@ function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filterv
                     </button>}
 
                 {!harValg && <AlertStripe type="info" className="checkbox-filterform__alertstripe">
-                    Ingen veiledere funnet
+                    {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
                 </AlertStripe>}
             </div>
         </form>
