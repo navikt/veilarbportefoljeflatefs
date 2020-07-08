@@ -234,6 +234,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             filtervalg={filtervalg}
                             endreFilterValg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
+                            emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
                         />
                     }
                 />
