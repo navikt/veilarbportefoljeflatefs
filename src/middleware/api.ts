@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
-import { NyGruppe, RedigerGruppe } from '../ducks/veiledergrupper_lagret-filter';
+import { NyGruppe, RedigerGruppe } from '../ducks/veiledergrupper_action-reducers';
 import { VeilederModell } from '../model-interfaces';
+import {NyttFilter, RedigerFilter} from "../ducks/lagret-filter_action-reducers";
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -55,6 +56,12 @@ export function hentAktivBruker(): Promise<VeilederModell> {
 
 export function hentEnhetsFilterGrupper(enhetId) {
     const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/`;
+    return fetchToJson(url, MED_CREDENTIALS);
+}
+
+
+export function hentMineLagredeFilter() {
+    const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
@@ -113,4 +120,22 @@ export function hentEnhetTiltak(enhetId) {
 
 export function hentFeatures(featureQueryString: string) {
     return fetchToJson(`${API_BASE_URL}${FEATURE_URL}?${featureQueryString}`);
+}
+
+export function redigerLagretFilter(endringer: RedigerFilter): Promise<RedigerFilter> {
+    const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
+    const config = { ...MED_CREDENTIALS, method: 'put', body: JSON.stringify(endringer) };
+    return fetchToJson(url, config);
+}
+
+export function nyttLagretFilter(endringer: NyGruppe): Promise<NyttFilter> {
+    const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
+    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(endringer) };
+    return fetchToJson(url, config);
+}
+
+export function slettLagretFilter(enhetId: string | undefined | null, filterId: number): Promise<number> {
+    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/filter/${filterId}`;
+    const config = { ...MED_CREDENTIALS, method: 'delete'};
+    return fetch(url, config).then(sjekkStatuskode).then(_ => Promise.resolve(filterId));
 }

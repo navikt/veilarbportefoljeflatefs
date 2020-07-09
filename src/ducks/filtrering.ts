@@ -1,4 +1,5 @@
 import { FiltervalgModell } from '../model-interfaces';
+import {LagretFilter_ActionReducers} from "./lagret-filter_action-reducers";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -7,6 +8,8 @@ export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 export const ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER = 'filtrering/ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER';
 export const SLETT_AKTIVITETER_OG_TILTAK_FILTER = 'filtrering/SLETT_AKTIVITETER_OG_TILTAK_FILTER';
 export const VEILEDER_SOKT_FRA_TOOLBAR = 'filtrering/VEILEDER_SOKT_FRA_TOOLBAR';
+export const VELG_LAGRET_FILTER = 'filtrering/VELG_LAGRET_FILTER';
+
 
 export enum AktiviteterValg {
     JA = 'JA',
@@ -99,6 +102,8 @@ export default function reducer(state: FiltervalgModell = initialState, action):
             };
         case SETT_FILTERVALG:
             return {...action.data};
+        case VELG_LAGRET_FILTER:
+            return {...action.data.filterValg}
         default:
             return state;
     }
@@ -143,4 +148,12 @@ export function veilederSoktFraToolbar() {
     return (dispatch) => {
         dispatch({type: VEILEDER_SOKT_FRA_TOOLBAR});
     };
+}
+
+export function velgLagretFilter(filterVerdi: LagretFilter_ActionReducers, filtergruppe) {
+    return {
+        type: VELG_LAGRET_FILTER,
+        data: filterVerdi,
+        name: filtergruppe
+    }
 }

@@ -10,7 +10,7 @@ import { endreFiltervalg, initialState } from '../../ducks/filtrering';
 import { FiltervalgModell } from '../../model-interfaces';
 import {
     lageNyGruppe,
-} from '../../ducks/veiledergrupper_lagret-filter';
+} from '../../ducks/veiledergrupper_action-reducers';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
 
 
@@ -22,7 +22,7 @@ function FilteringVeilederGrupper({ filtergruppe } : FilteringVeilederGrupperPro
 
     const [visVeilederGruppeModal, setVeilederGruppeModal] = useState(false);
 
-    const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
+    const lagretFilterState = useSelector((state: AppState) => state.veiledergrupperLagretFilter);
     const lagretFilter = lagretFilterState.data;
 
     const dispatch = useDispatch();

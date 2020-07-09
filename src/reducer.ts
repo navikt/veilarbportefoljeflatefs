@@ -11,7 +11,8 @@ import statustallReducer, { StatustallState } from './ducks/statustall';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
-import lagretFilterReducer, { LagretFilterState } from './ducks/veiledergrupper_lagret-filter';
+import veiledergrupperLagretFilterReducer, { VeiledergrupperLagretFilterState } from './ducks/veiledergrupper_action-reducers';
+import lagretFilterReducer, { LagretFilterState } from './ducks/lagret-filter_action-reducers';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer, { EnhettiltakState } from './ducks/enhettiltak';
 import listevisningReducer, {
@@ -61,6 +62,7 @@ export interface AppState {
     arbeidsliste: any;
     enhettiltak: EnhettiltakState;
     features: FeaturesState;
+    veiledergrupperLagretFilter: VeiledergrupperLagretFilterState;
     lagretFilter: LagretFilterState;
     toastReducer: ToastState;
     inloggetVeileder: InloggetVeilederState;
@@ -88,6 +90,7 @@ export default combineReducers<AppState>({
     arbeidsliste: arbeidslisteReducer,
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
+    veiledergrupperLagretFilter: veiledergrupperLagretFilterReducer,
     lagretFilter: lagretFilterReducer,
     toastReducer: toastReducer,
     inloggetVeileder: inloggetVeilederReducer

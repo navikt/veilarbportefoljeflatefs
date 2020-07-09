@@ -2,7 +2,7 @@ import { initialState } from '../ducks/filtrering';
 import { veiledere } from './veiledere';
 import { JSONArray } from 'yet-another-fetch-mock';
 import * as faker from 'faker/locale/nb_NO';
-import {LagretFilter_Veiledergrupper} from "../ducks/veiledergrupper_lagret-filter";
+import {Veiledergrupper_ActionReducers} from "../ducks/veiledergrupper_action-reducers";
 
 export const veilederGrupper = () => {
     const veilederGruppe1 = veiledere.slice(0, 4).map((v) => v.ident);
@@ -43,6 +43,6 @@ export const veilederGrupper = () => {
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             },
 
-        ] as LagretFilter_Veiledergrupper [] & JSONArray
+        ] as Veiledergrupper_ActionReducers [] & JSONArray
     );
 };

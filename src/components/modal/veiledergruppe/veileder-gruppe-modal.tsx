@@ -123,7 +123,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         props.onRequestClose();
     }
 
-    const lagradeGrupper = useSelector((state: AppState) => state.lagretFilter.data
+    const lagradeGrupper = useSelector((state: AppState) => state.veiledergrupperLagretFilter.data
         .filter(v => v.filterId !== props.initialVerdi.filterId));
 
     const lagredeGruppeNavn = lagradeGrupper.map(v => v.filterNavn)

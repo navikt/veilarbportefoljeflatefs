@@ -1,31 +1,34 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from './../innholdslaster/innholdslaster';
-import { ListevisningType } from '../ducks/ui/listevisning';
+import {ListevisningType} from '../ducks/ui/listevisning';
 import './minoversikt-side.less';
 import './minoversikt.less';
-import { useIdentSelector } from '../hooks/redux/use-inlogget-ident';
-import { MinOversiktModalController } from '../components/modal/modal-min-oversikt-controller';
+import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
+import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import MinoversiktTabellOverskrift from './minoversikt-portefolje-tabelloverskrift';
-import { MinOversiktWrapper } from './min-oversikt-wrapper';
+import {MinOversiktWrapper} from './min-oversikt-wrapper';
 import TabellOverskrift from '../components/tabell-overskrift';
-import { useSelectGjeldendeVeileder } from '../hooks/portefolje/use-select-gjeldende-veileder';
+import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import Toolbar from '../components/toolbar/toolbar';
 import ToppMeny from '../topp-meny/topp-meny';
-import { useSetStateFromUrl } from '../hooks/portefolje/use-set-state-from-url';
-import { useFetchPortefolje } from '../hooks/portefolje/use-fetch-portefolje';
-import { useSetPortefoljeSortering } from '../hooks/portefolje/use-sett-sortering';
+import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
+import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
+import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
-import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
+import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import FiltreringContainer from '../filtrering/filtrering-container';
-import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
-import { hentPortefoljeForVeileder } from '../ducks/portefolje';
-import { useDispatch } from 'react-redux';
-import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
-import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
+import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
+import {hentPortefoljeForVeileder} from '../ducks/portefolje';
+import {useDispatch} from 'react-redux';
+import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
+import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
-import { useFetchStatusTall } from '../hooks/portefolje/use-fetch-statustall';
+import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
+import {Knapp} from "nav-frontend-knapper";
+import {LagreFilterMenyModal} from "../components/modal/lagrede-filter/lagrede-filter-meny-modal";
+import {useState} from "react";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -34,6 +37,7 @@ function MinoversiktSide() {
     const statustall = useFetchStatusTall(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
+    const [lagretFilterMenyModalErApen, setLagretFilterMenyModalErApen] = useState(false);
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -61,13 +65,19 @@ function MinoversiktSide() {
                             />
                         </div>
                         <div className="liste-kolonne">
-                            <FiltreringLabelContainer
-                                filtervalg={filtervalg}
-                                filtergruppe="veileder"
-                                enhettiltak={enhettiltak.data.tiltak}
-                                listevisning={listevisning}
-                                className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
-                            />
+                            <div className="etikett-wrapper">
+                                <FiltreringLabelContainer
+                                    filtervalg={filtervalg}
+                                    filtergruppe="veileder"
+                                    enhettiltak={enhettiltak.data.tiltak}
+                                    listevisning={listevisning}
+                                    className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
+                                />
+                                <Knapp className="lagre-filter-knapp" mini
+                                       onClick={() => setLagretFilterMenyModalErApen(true)}>
+                                    Lagre filter
+                                </Knapp>
+                            </div>
                             <div className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <TabellOverskrift
                                     className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
@@ -97,7 +107,6 @@ function MinoversiktSide() {
                                 </div>
                                 </span>
                             </div>
-
                             <MinoversiktTabell
                                 innloggetVeileder={innloggetVeilederIdent}
                                 settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
@@ -107,10 +116,13 @@ function MinoversiktSide() {
                         </div>
                     </MinOversiktWrapper>
                 </Innholdslaster>
+                <LagreFilterMenyModal
+                    isOpen={lagretFilterMenyModalErApen}
+                    onRequestClose={() => setLagretFilterMenyModalErApen(false)}
+                />
             </div>
         </DocumentTitle>
-    )
-        ;
+    );
 }
 
 export default MinoversiktSide;

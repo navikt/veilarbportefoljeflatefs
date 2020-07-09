@@ -24,16 +24,16 @@ export const SLETT_VEILEDERGRUPPER_OK = 'veiledergrupper_slette/OK';
 export const SLETT_VEILEDERGRUPPER_FEILET = 'veiledergrupper_slette/FEILET';
 export const SLETT_VEILEDERGRUPPER_PENDING = 'veiledergrupper_slette/PENDING';
 
-export interface LagretFilter_Veiledergrupper {
+export interface Veiledergrupper_ActionReducers {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
     opprettetDato: Date;
 }
 
-export interface LagretFilterState {
+export interface VeiledergrupperLagretFilterState {
     status: string;
-    data: LagretFilter_Veiledergrupper[];
+    data: Veiledergrupper_ActionReducers[];
     error: VeilederGruppeError | null;
 }
 
@@ -62,7 +62,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: LagretFilterState = initialState, action) {
+export default function reducer(state: VeiledergrupperLagretFilterState = initialState, action) {
     switch (action.type) {
         case HENT_VEILEDERGRUPPER_PENDING:
         case NY_VEILEDERGRUPPER_PENDING:

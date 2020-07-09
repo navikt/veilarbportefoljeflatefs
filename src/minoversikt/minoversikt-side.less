@@ -1,6 +1,10 @@
 @import "~nav-frontend-core/less/core";
 
 .veilarbportefoljeflatefs {
+    .etikett-wrapper {
+        display: grid;
+        grid-template-columns: 80% 20%;
+    }
     .filtrering-label-container__annen-veileder {
         display: flex;
         flex-wrap: wrap;
@@ -10,5 +14,9 @@
 
     .tabelloverskrift__annen-veileder {
         background-color: @navLysBlaLighten20;
+    }
+
+    .lagre-filter-knapp {
+        margin: 0 0 auto auto;
     }
 }

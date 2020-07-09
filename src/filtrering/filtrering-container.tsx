@@ -11,6 +11,7 @@ import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
 import FilteringLagredeFilter from "./lagrede-filter/filtrering-lagrede-filter";
+import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter_action-reducers";
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -21,6 +22,10 @@ interface FiltreringContainerProps {
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
 
     const dispatch = useDispatch();
+
+    // useEffect(() => filtergruppe === "veileder" && dispatch(hentLagredeFilterForVeileder()), [filtergruppe, dispatch])
+    filtergruppe === "veileder" && dispatch(hentLagredeFilterForVeileder())
+
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));

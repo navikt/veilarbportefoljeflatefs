@@ -1,6 +1,13 @@
 import { STATUS, doThenDispatch } from './utils';
 import { FiltervalgModell } from '../model-interfaces';
-import {hentEnhetsFilterGrupper, nyVeiledergruppe, redigerVeiledergruppe, slettVeiledergruppe} from "../middleware/api";
+import {
+    hentMineLagredeFilter,
+    nyttLagretFilter,
+    redigerLagretFilter,
+    slettVeiledergruppe
+} from "../middleware/api";
+import {OrNothing} from "../utils/types/types";
+import {VELG_LAGRET_FILTER} from "./filtrering";
 
 // Actions
 export const HENT_LAGREDEFILTER_OK = 'lagredefilter/OK';
@@ -19,7 +26,7 @@ export const SLETT_LAGREDEFILTER_OK = 'lagredefilter_slette/OK';
 export const SLETT_LAGREDEFILTER_FEILET = 'lagredefilter_slette/FEILET';
 export const SLETT_LAGREDEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
-export interface LagretFilter_LagredeFilter {
+export interface LagretFilter_ActionReducers {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
@@ -28,17 +35,18 @@ export interface LagretFilter_LagredeFilter {
 
 export interface LagretFilterState {
     status: string;
-    data: LagretFilter_LagredeFilter[];
+    data: LagretFilter_ActionReducers[];
+    valgtLagretFilter: OrNothing<LagretFilter_ActionReducers> ;
     error: LagretFilterError | null;
 }
 
-export interface RedigerGruppe {
+export interface RedigerFilter {
     filterNavn: string;
     filterValg: FiltervalgModell;
     filterId: number;
 }
 
-export interface NyGruppe {
+export interface NyttFilter {
     filterNavn: string;
     filterValg: FiltervalgModell;
 }
@@ -53,6 +61,7 @@ enum LagretFilterError {
 const initialState = {
     status: STATUS.NOT_STARTED,
     data: [],
+    valgtLagretFilter: null,
     error: null
 };
 
@@ -72,7 +81,6 @@ export default function reducer(state: LagretFilterState = initialState, action)
             return {...state, status: STATUS.ERROR, error: LagretFilterError.LAGRING_FEILET};
         case SLETT_LAGREDEFILTER_FEILET:
             return {...state, status: STATUS.ERROR, error: LagretFilterError.SLETTING_FEILET};
-
         case HENT_LAGREDEFILTER_OK:
             return {...state, status: STATUS.OK, data: action.data};
         case NY_LAGREDEFILTER_OK:
@@ -91,40 +99,38 @@ export default function reducer(state: LagretFilterState = initialState, action)
             return {
                 ...state, status: STATUS.OK, data: state.data.filter(elem => elem.filterId !== action.data)
             };
-
+        case VELG_LAGRET_FILTER:
+            return {...state, valgtLagretFilter: action.data}
         default:
             return state;
     }
 }
 
 // Action Creators
-export function hentLagretFilterForEnhet(enhetId) {
-    return doThenDispatch(() => hentEnhetsFilterGrupper(enhetId), {
+export function hentLagredeFilterForVeileder() {
+    return doThenDispatch(() => hentMineLagredeFilter(), {
         OK: HENT_LAGREDEFILTER_OK,
         FEILET: HENT_LAGREDEFILTER_FEILET,
         PENDING: HENT_LAGREDEFILTER_PENDING
     });
 }
 
-// Action Creators
-export function lagreEndringer(endringer: RedigerGruppe, enhetId: string) {
-    return doThenDispatch(() => redigerVeiledergruppe(endringer, enhetId), {
+export function lagreEndringer(endringer: RedigerFilter) {
+    return doThenDispatch(() => redigerLagretFilter(endringer), {
         OK: REDIGER_LAGREDEFILTER_OK,
         FEILET: REDIGER_LAGREDEFILTER_FEILET,
         PENDING: REDIGER_LAGREDEFILTER_PENDING
     });
 }
 
-// Action Creators
-export function lageNyGruppe(endringer: NyGruppe, enhetId: string) {
-    return doThenDispatch(() => nyVeiledergruppe(endringer, enhetId), {
+export function lageNyttFilter(endringer: NyttFilter) {
+    return doThenDispatch(() => nyttLagretFilter(endringer), {
         OK: NY_LAGREDEFILTER_OK,
         FEILET: NY_LAGREDEFILTER_FEILET,
         PENDING: NY_LAGREDEFILTER_PENDING
     });
 }
 
-// Action Creators
 export function slettGruppe(enhet: string, filterId: number) {
     return doThenDispatch(() => slettVeiledergruppe(enhet, filterId), {
         OK: SLETT_LAGREDEFILTER_OK,

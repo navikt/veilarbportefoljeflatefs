@@ -1,24 +1,22 @@
-import React  from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../reducer';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
-import LagredeFilterInnhold from "./lagredefilter-innhold";
+import React from 'react';
+import {useSelector} from 'react-redux';
+import {AppState} from '../../reducer';
+import {Normaltekst} from 'nav-frontend-typografi';
+import LagredeFilterInnhold from "./lagrede-filter_innhold";
 
 
 interface FilteringLagredeFilterProps {
     filtergruppe?: string;
 }
 
-function FilteringLagredeFilter({ filtergruppe } : FilteringLagredeFilterProps) {
+function FilteringLagredeFilter({filtergruppe}: FilteringLagredeFilterProps) {
 
-    //const [visVeilederGruppeModal, setVeilederGruppeModal] = useState(false);
 
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const lagretFilter = lagretFilterState.data;
 
-    const dispatch = useDispatch();
-    const enhet = useEnhetSelector();
+    // const dispatch = useDispatch();
+    // const enhet = useEnhetSelector();
 
     // const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
     //     enhet && dispatch(lageNyGruppe({
@@ -26,7 +24,6 @@ function FilteringLagredeFilter({ filtergruppe } : FilteringLagredeFilterProps) 
     //         filterValg
     //     }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, filtergruppe)));
     // };
-
     const sortertLagredeFilter = lagretFilter.sort((forsteFilter, andreFilter) => forsteFilter.filterNavn.localeCompare(andreFilter.filterNavn));
 
     return (
@@ -42,16 +39,13 @@ function FilteringLagredeFilter({ filtergruppe } : FilteringLagredeFilterProps) 
                     </Normaltekst>
                 </div>
             }
-            {/*<LeggTilKnapp onClick={() => {
-                setVeilederGruppeModal(true);
-            }}/>
-            <VeilederGruppeModal
+            {/*<VeilederGruppeModal
                 initialVerdi={{gruppeNavn: '', filterValg: initialState, filterId: -1}}
-                isOpen={visVeilederGruppeModal}
+                isOpen={visLagredeFilterModal}
                 onSubmit={submitEndringer}
-                modalTittel="Ny veiledergruppe"
+                modalTittel="Nytt lagret filter"
                 lagreKnappeTekst="Lagre"
-                onRequestClose={() => setVeilederGruppeModal(false)}
+                onRequestClose={() => setLagredeFilterModal(false)}
             />*/}
         </div>
     );

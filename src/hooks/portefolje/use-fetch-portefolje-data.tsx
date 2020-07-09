@@ -5,7 +5,7 @@ import {AppState} from "../../reducer";
 import {useEnhetSelector} from "../redux/use-enhet-selector";
 import {hentPortefoljeStorrelser} from "../../ducks/portefoljestorrelser";
 import {hentVeiledereForEnhet} from "../../ducks/veiledere";
-import {hentLagretFilterForEnhet} from "../../ducks/veiledergrupper_lagret-filter";
+import {hentLagretFilterForEnhet} from "../../ducks/veiledergrupper_action-reducers";
 
 export function useFetchPortefoljeData() {
     const dispatch = useDispatch();
