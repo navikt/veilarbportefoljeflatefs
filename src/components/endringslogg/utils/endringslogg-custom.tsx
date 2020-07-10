@@ -22,9 +22,9 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '01. JUL. 2020',
+        dato: '10. JUL. 2020',
         tittel: 'Nytt filter på CV/jobbprofil',
-        versjonId: '01.07.20',
+        versjonId: '10.07.20',
         featureToggleName: 'veilarbportefolje.cv-jobbprofil',
         tekst: 'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med NAV. Da blir det enklere å identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og jobbprofil på arbeidsplassen.no.',
         children:
