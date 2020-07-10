@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import {ListevisningType} from '../ducks/ui/listevisning';
@@ -27,8 +28,7 @@ import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-sto
 import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {Knapp} from "nav-frontend-knapper";
-import {LagreFilterMenyModal} from "../components/modal/lagrede-filter/lagrede-filter-meny-modal";
-import {useState} from "react";
+import {LagreFilterModal, Visningstype} from "../components/modal/lagrede-filter/lagre-filter-modal";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -116,7 +116,8 @@ function MinoversiktSide() {
                         </div>
                     </MinOversiktWrapper>
                 </Innholdslaster>
-                <LagreFilterMenyModal
+                <LagreFilterModal
+                    velgVisningstype={Visningstype.MENY}
                     isOpen={lagretFilterMenyModalErApen}
                     onRequestClose={() => setLagretFilterMenyModalErApen(false)}
                 />

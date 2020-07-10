@@ -3,7 +3,7 @@ import { FiltervalgModell } from '../../../model-interfaces';
 import { harGjortEndringer, veilederlisterErLik } from './veileder-gruppe-utils';
 import ModalWrapper from 'nav-frontend-modal';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
-import SletteVeiledergruppeModal from './slett-gruppe-modal';
+import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../../reducer';
@@ -203,10 +203,13 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                 onRequestClose={() => setEndringerIkkeLagretModal(false)}
                 onSubmit={endringerIkkeLagretOgLukkModaler}
             />
-            {props.onSlett && <SletteVeiledergruppeModal
+            {props.onSlett && <BekreftSlettingModal
                 isOpen={visSletteVeiledergruppeModal}
                 onRequestClose={avbrytSletting}
                 onSubmit={slettVeiledergruppeOgLukkModaler}
+                tittel="Slette veiledergruppe"
+                infoTekst="Gruppen vil bli slettet for alle på enheten."
+                navn={gruppeNavn}
             />}
         </>
     );

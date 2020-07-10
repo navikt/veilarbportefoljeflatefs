@@ -12,6 +12,7 @@ import {
     lageNyGruppe,
 } from '../../ducks/veiledergrupper_action-reducers';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
+import {AlertStripeFeil} from "nav-frontend-alertstriper";
 
 
 interface FilteringVeilederGrupperProps {
@@ -37,18 +38,31 @@ function FilteringVeilederGrupper({ filtergruppe } : FilteringVeilederGrupperPro
 
     const sortertVeiledergruppe = lagretFilter.sort((a, b) => a.filterNavn.localeCompare(b.filterNavn));
 
+    const veilederGrupperOK = () => {
+        return lagretFilter.length > 0
+            ? <VeilederGruppeInnhold
+                lagretFilter={sortertVeiledergruppe}
+                filtergruppe={filtergruppe}
+            />
+            : <div className="veiledergruppe-emptystate">
+                <Normaltekst className="veiledergruppe-emptystate__tekst">
+                    Ingen lagrede veiledergrupper på enheten
+                </Normaltekst>
+            </div>
+
+    }
+    const veilederGrupperError = () => {
+        return (
+            <AlertStripeFeil>
+                Det oppsto en feil, og veiledergrupper kunne ikke hentes fram. Prøv igjen senere.
+            </AlertStripeFeil>
+        )
+    }
+
     return (
-        <div>
-            {lagretFilter.length > 0
-                ? <VeilederGruppeInnhold
-                    lagretFilter={sortertVeiledergruppe}
-                    filtergruppe={filtergruppe}
-                />
-                : <div className="veiledergruppe-emptystate">
-                    <Normaltekst className="veiledergruppe-emptystate__tekst">
-                        Ingen lagrede veiledergrupper på enheten
-                    </Normaltekst>
-                </div>
+        <>
+            {
+                !lagretFilterState.error ? veilederGrupperOK() : veilederGrupperError()
             }
             <LeggTilKnapp onClick={() => {
                 setVeilederGruppeModal(true);
@@ -61,7 +75,7 @@ function FilteringVeilederGrupper({ filtergruppe } : FilteringVeilederGrupperPro
                 lagreKnappeTekst="Lagre"
                 onRequestClose={() => setVeilederGruppeModal(false)}
             />
-        </div>
+        </>
     );
 }
 

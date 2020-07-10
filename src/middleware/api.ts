@@ -128,14 +128,14 @@ export function redigerLagretFilter(endringer: RedigerFilter): Promise<RedigerFi
     return fetchToJson(url, config);
 }
 
-export function nyttLagretFilter(endringer: NyGruppe): Promise<NyttFilter> {
+export function nyttLagretFilter(nyttFilter: NyttFilter): Promise<NyttFilter> {
     const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
-    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(endringer) };
+    const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(nyttFilter) };
     return fetchToJson(url, config);
 }
 
-export function slettLagretFilter(enhetId: string | undefined | null, filterId: number): Promise<number> {
-    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/filter/${filterId}`;
+export function slettLagretFilter(filterId: number): Promise<number> {
+    const url = `${VEILARBFILTER_URL}/minelagredefilter/${filterId}`;
     const config = { ...MED_CREDENTIALS, method: 'delete'};
     return fetch(url, config).then(sjekkStatuskode).then(_ => Promise.resolve(filterId));
 }

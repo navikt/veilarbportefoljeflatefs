@@ -1,11 +1,6 @@
-import { STATUS, doThenDispatch } from './utils';
-import { FiltervalgModell } from '../model-interfaces';
-import {
-    hentMineLagredeFilter,
-    nyttLagretFilter,
-    redigerLagretFilter,
-    slettVeiledergruppe
-} from "../middleware/api";
+import {doThenDispatch, STATUS} from './utils';
+import {FiltervalgModell} from '../model-interfaces';
+import {hentMineLagredeFilter, nyttLagretFilter, redigerLagretFilter, slettLagretFilter,} from "../middleware/api";
 import {OrNothing} from "../utils/types/types";
 import {VELG_LAGRET_FILTER} from "./filtrering";
 
@@ -123,16 +118,16 @@ export function lagreEndringer(endringer: RedigerFilter) {
     });
 }
 
-export function lageNyttFilter(endringer: NyttFilter) {
-    return doThenDispatch(() => nyttLagretFilter(endringer), {
+export function lagreNyttFilter(nyttFilter: NyttFilter) {
+    return doThenDispatch(() => nyttLagretFilter(nyttFilter), {
         OK: NY_LAGREDEFILTER_OK,
         FEILET: NY_LAGREDEFILTER_FEILET,
         PENDING: NY_LAGREDEFILTER_PENDING
     });
 }
 
-export function slettGruppe(enhet: string, filterId: number) {
-    return doThenDispatch(() => slettVeiledergruppe(enhet, filterId), {
+export function slettFilter(filterId: number) {
+    return doThenDispatch(() => slettLagretFilter(filterId), {
         OK: SLETT_LAGREDEFILTER_OK,
         FEILET: SLETT_LAGREDEFILTER_FEILET,
         PENDING: SLETT_LAGREDEFILTER_PENDING

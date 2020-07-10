@@ -17,6 +17,7 @@ import FetchMock, {
 } from 'yet-another-fetch-mock';
 import {lagredeFilter} from "./lagrede-filter";
 import {Veiledergrupper_ActionReducers} from "../ducks/veiledergrupper_action-reducers";
+import {LagretFilter_ActionReducers} from "../ducks/lagret-filter_action-reducers";
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -102,10 +103,10 @@ mock.post('/veilarbfilter/api/minelagredefilter/', (args: HandlerArgument) => {
     return {...args.body, filterId};
 });
 
-mock.delete('/veilarbfilter/api/minelagredefilter/:veilederId/filter/:filterId', (args: HandlerArgument) => {
+mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (args: HandlerArgument) => {
     const {pathParams} = args;
     if (pathParams.filterId) {
-        customLagredeFilter = customLagredeFilter.filter(v => v.filterId !== pathParams.filterId) as Veiledergrupper_ActionReducers [] & JSONArray;
+        customLagredeFilter = customLagredeFilter.filter(v => v.filterId !== pathParams.filterId) as LagretFilter_ActionReducers [] & JSONArray;
         return {status: 200};
     }
     return {status: 401};

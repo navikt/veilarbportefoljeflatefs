@@ -17,7 +17,7 @@ export const lagredeFilter = () => {
                 filterId: 2,
                 filterValg: {...initialState, innsatsgruppe:["BATT"], formidlingsgruppe:["ARBS"]},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            },
+            }
         ] as LagretFilter_ActionReducers [] & JSONArray
     );
 };

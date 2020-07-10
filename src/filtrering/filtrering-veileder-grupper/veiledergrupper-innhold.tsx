@@ -140,6 +140,7 @@ function VeilederGruppeRad({veilederGruppe, hanterVelgGruppe, onClickRedigerKnap
             />
             <RedigerKnapp
                 hidden={!erValgt}
+                aria="Rediger veiledergruppe"
                 onClick={onClickRedigerKnapp}
             />
         </div>

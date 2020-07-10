@@ -2,35 +2,40 @@ import React from 'react';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
-import './modal.less';
+import './bekreft-sletting-modal.less';
 
-interface SletteVeiledergruppeModal {
+interface BekreftSlettingModalProps {
     isOpen: boolean;
     onRequestClose: () => void;
     onSubmit: () => void;
+    tittel: string
+    infoTekst?: string
+    navn: string
 }
 
-function SletteVeiledergruppeModal(props: SletteVeiledergruppeModal) {
+function BekreftSlettingModal(props: BekreftSlettingModalProps) {
     return (
         <VarselModal
-            contentLabel="Slette veiledergruppe"
+            contentLabel={props.tittel}
             isOpen={props.isOpen}
             onRequestClose={props.onRequestClose}
-            className="slette-veiledergruppe-modal"
+            className="bekreft-sletting-modal"
             type={VarselModalType.ADVARSEL}
         >
-            <div className="blokk-s slette-veiledergruppe-modal__tekstgruppe">
+            <div className="blokk-s bekreft-sletting-modal__tekstgruppe">
                 <Innholdstittel className="blokk-s">
-                    Slett gruppe
+                    {props.tittel}
                 </Innholdstittel>
+                {props.infoTekst  &&
+                    <Normaltekst>
+                        {props.infoTekst}
+                    </Normaltekst>
+                }
                 <Normaltekst>
-                    Gruppen vil bli slettet for alle på enheten.
-                </Normaltekst>
-                <Normaltekst>
-                    Er du sikker på at du vil slette gruppen?
+                    Er du sikker på at du vil slette <b>{props.navn}</b> ?
                 </Normaltekst>
             </div>
-            <div className="slette-veiledergruppe-modal__knappegruppe">
+            <div className="bekreft-sletting-modal__knappegruppe">
                 <Hovedknapp
                     htmlType="submit"
                     onClick={props.onSubmit}
@@ -48,4 +53,4 @@ function SletteVeiledergruppeModal(props: SletteVeiledergruppeModal) {
     );
 }
 
-export default SletteVeiledergruppeModal;
+export default BekreftSlettingModal;

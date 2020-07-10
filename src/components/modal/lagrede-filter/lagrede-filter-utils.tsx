@@ -16,7 +16,5 @@ export function harGjortEndringer(redigertListe: FiltervalgModell, initialstateL
 }
 
 export function lagredeFilterListerErLik(lagretFilter: FiltervalgModell, nyttFilter: FiltervalgModell): boolean {
-    // console.log("agre", JSON.stringify(lagretFilter))
-    // console.log("nytt", JSON.stringify(nyttFilter))
     return JSON.stringify(lagretFilter) === JSON.stringify(nyttFilter);
 }

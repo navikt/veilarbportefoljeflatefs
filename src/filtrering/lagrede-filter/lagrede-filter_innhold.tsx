@@ -3,15 +3,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import {velgLagretFilter} from '../../ducks/filtrering';
 import {Radio} from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import {
-    LagretFilter_ActionReducers,
-} from '../../ducks/lagret-filter_action-reducers';
+import {LagretFilter_ActionReducers,} from '../../ducks/lagret-filter_action-reducers';
 import {AppState} from '../../reducer';
 import {FiltervalgModell} from '../../model-interfaces';
 import {lagredeFilterListerErLik} from "../../components/modal/lagrede-filter/lagrede-filter-utils";
 import {finnSideNavn} from "../../middleware/metrics-middleware";
 import {logEvent} from "../../utils/frontend-logger";
-
+import {LagreFilterModal, Visningstype} from "../../components/modal/lagrede-filter/lagre-filter-modal";
+import './lagrede-filter_innhold.less'
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter_ActionReducers[]
@@ -22,7 +21,7 @@ interface LagredeFilterInnholdProps {
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const [visEndreFilterModal, setVisEndreFilterModal] = useState(false);
-    const [valgLagretFilter, setValgtLagretFilter] = useState<LagretFilter_ActionReducers>();
+    const [,setValgtLagretFilter] = useState<LagretFilter_ActionReducers>();
 
     const filtreringMinOversikt = (state: AppState) => state.filtreringMinoversikt;
     const filtreringEnhetensOversikt = (state: AppState) => state.filtrering;
@@ -51,6 +50,8 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const finnLagretFilter = (vg) => props.lagretFilter.find((elem) => elem.filterId === parseInt(vg));
 
+    const className  = (props.lagretFilter.length >= 18) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
+
     // const submitEndringer = (filterNavn: string, filterValg: FiltervalgModell) => {
     //     if (valgtFilter && enhet && harGjortEndringer(filterValg.veiledere, valgtFilter.filterValg.veiledere, valgtFilter.filterNavn, filterNavn)) {
     //         dispatch(lagreEndringer({
@@ -69,7 +70,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     // };
 
     return (
-        <div className="lagrede-filter__valgfelt" ref={outerDivRef}>
+        <div className={className} ref={outerDivRef}>
             {props.lagretFilter.map((filter, idx) =>
                 <LagretFilterRad
                     key={idx}
@@ -79,20 +80,10 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
                     filterState={filterState}
                 />
             )}
-            {/*{valgtFilter &&*/}
-            {/*<VeilederGruppeModal*/}
-            {/*    initialVerdi={{*/}
-            {/*        gruppeNavn: valgtFilter.filterNavn,*/}
-            {/*        filterValg: valgtFilter.filterValg,*/}
-            {/*        filterId: valgtFilter.filterId*/}
-            {/*    }}*/}
-            {/*    isOpen={visEndreFilterModal}*/}
-            {/*    onSubmit={submitEndringer}*/}
-            {/*    modalTittel="Rediger veiledergruppe"*/}
-            {/*    lagreKnappeTekst="Lagre endringer"*/}
-            {/*    onRequestClose={() => setVisEndreFilterModal(false)}*/}
-            {/*    onSlett={sletteKnapp}*/}
-            {/*/>}*/}
+            <LagreFilterModal
+                velgVisningstype={Visningstype.OPPDATER}
+                isOpen={visEndreFilterModal}
+                onRequestClose={() => setVisEndreFilterModal(false)}/>
         </div>
     );
 }
@@ -106,7 +97,8 @@ interface LagretFilterRadProps {
 
 function LagretFilterRad({filter, hanterVelgFilter, onClickRedigerKnapp, filterState}: LagretFilterRadProps) {
     const lagretFilterValg = filter.filterValg;
-    const erValgt = lagredeFilterListerErLik(lagretFilterValg, filterState);
+    const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
+    const erValgt = lagretFilterState.valgtLagretFilter != null && lagredeFilterListerErLik(lagretFilterValg, filterState);
 
     return (
         <div className="lagrede-filter__rad">
@@ -121,6 +113,7 @@ function LagretFilterRad({filter, hanterVelgFilter, onClickRedigerKnapp, filterS
             />
             <RedigerKnapp
                 hidden={!erValgt}
+                aria="Rediger lagret filter"
                 onClick={onClickRedigerKnapp}
             />
         </div>
