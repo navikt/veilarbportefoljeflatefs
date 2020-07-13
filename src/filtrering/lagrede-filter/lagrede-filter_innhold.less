@@ -1,6 +1,6 @@
 @import "~nav-frontend-core/less/core";
 
-.veilarbportefoljeflatefs{
+.veilarbportefoljeflatefs {
   .lagrede-filter {
     &__valgfelt {
       padding: .5rem 0 0 .5rem;
@@ -17,13 +17,18 @@
         border-bottom: 1px solid @navGra40;
       }
     }
+
     &__rad {
       display: flex;
       justify-content: space-between;
-      height: 2rem;
+      min-height: 2.5rem;
+
+      .rediger-knapp {
+        height: unset;
+      }
     }
 
-    &__filternavn{
+    &__filternavn {
       width: 85%;
     }
   }

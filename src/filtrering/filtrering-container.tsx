@@ -24,7 +24,11 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
 
     const dispatch = useDispatch();
 
-    useEffect(() => filtergruppe === "veileder" && dispatch(hentLagredeFilterForVeileder()), [filtergruppe, dispatch])
+    useEffect(() => {
+        if (filtergruppe === "veileder") {
+            dispatch(hentLagredeFilterForVeileder());
+        }
+    }, [filtergruppe, dispatch]);
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));

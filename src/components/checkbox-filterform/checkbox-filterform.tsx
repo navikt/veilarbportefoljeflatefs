@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Dictionary } from '../../utils/types/types';
-import { FiltervalgModell } from '../../model-interfaces';
+import React, {useEffect, useState} from 'react';
+import {Dictionary} from '../../utils/types/types';
+import {FiltervalgModell} from '../../model-interfaces';
 import Grid from '../grid/grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './checkbox-filterform.less';
@@ -17,9 +17,18 @@ interface CheckboxFilterformProps {
     emptyCheckboxFilterFormMessage?: string;
 }
 
-function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filtervalg, columns = 1, className, emptyCheckboxFilterFormMessage}: CheckboxFilterformProps) {
-    const harValg = Object.keys(valg).length > 0;
+function CheckboxFilterform({
+                                endreFilterValg,
+                                valg,
+                                closeDropdown,
+                                form,
+                                filtervalg,
+                                columns = 1,
+                                className,
+                                emptyCheckboxFilterFormMessage
+                            }: CheckboxFilterformProps) {
 
+    const harValg = Object.keys(valg).length > 0;
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
 
     useEffect(() => {
@@ -51,8 +60,8 @@ function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filterv
             </div>
             }
             <div className="checkbox-filterform__under-valg">
-                {closeDropdown ?
-                    checkBoxValg.length > 0
+                {closeDropdown
+                    ? checkBoxValg.length > 0
                         ? <button className="knapp knapp--mini knapp--hoved" type="submit">
                             Velg
                         </button>
@@ -61,8 +70,8 @@ function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filterv
                         </button>
                     : <button className="knapp knapp--mini knapp--hoved" type="submit">
                         Velg
-                    </button>}
-
+                    </button>
+                }
                 {!harValg && <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                     {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
                 </AlertStripe>}

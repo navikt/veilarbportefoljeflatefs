@@ -1,21 +1,24 @@
-.lagret-filter-meny-modal {
-  width: 35rem;
+.veilarbportefoljeflatefs-modal {
+  .lagret-filter-meny-modal {
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      margin: 1rem 10%;
 
-  &__wrapper {
+      .ny-knapp {
+        margin-right: 0 !important;
+      }
+    }
+
+    .modal-visningstype {
+      margin: 1rem 0;
+    }
+  }
+
+  .lagret-filter-knapp-wrapper {
     display: flex;
     justify-content: space-between;
-    flex-direction: column;
-    margin: 1rem 10%;
-
-  }
-
-  .modal-visningstype {
     margin: 1rem 0;
   }
-}
-
-.lagret-filter-knapp-wrapper {
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem 0;
 }
