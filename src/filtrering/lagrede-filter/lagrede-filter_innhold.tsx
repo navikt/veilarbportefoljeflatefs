@@ -2,7 +2,11 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import {LagretFilter_ActionReducers, velgLagretFilter,} from '../../ducks/lagret-filter_action-reducers';
+import {
+    avmarkerLagretFilter,
+    LagretFilter_ActionReducers,
+    velgLagretFilter,
+} from '../../ducks/lagret-filter_action-reducers';
 import {AppState} from '../../reducer';
 import {FiltervalgModell} from '../../model-interfaces';
 import {lagredeFilterListerErLik} from "../../components/modal/lagrede-filter/lagrede-filter-utils";
@@ -14,43 +18,36 @@ import './lagrede-filter_innhold.less'
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter_ActionReducers[]
     filterValg?: FiltervalgModell;
-    filtergruppe: string;
+    filtergruppe?: string;
 }
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
+    const outerDivRef = useRef<HTMLDivElement>(null);
+    const className  = (props.lagretFilter.length >= 18) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
 
     const [visEndreFilterModal, setVisEndreFilterModal] = useState(false);
-    const [,setValgtLagretFilter] = useState<LagretFilter_ActionReducers>();
+    const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
 
-    const filtreringMinOversikt = (state: AppState) => state.filtreringMinoversikt;
-    const filtreringEnhetensOversikt = (state: AppState) => state.filtrering;
-
-    const selector = props.filtergruppe === 'veileder' ? filtreringMinOversikt : filtreringEnhetensOversikt;
-
-    const filterState = useSelector(selector);
-
-    useEffect(() => {
-        const valgtFilter = props.lagretFilter.find(elem => lagredeFilterListerErLik(elem.filterValg, filterState));
-        if (valgtFilter) {
-            setValgtLagretFilter(valgtFilter);
-        }
-    }, [filterState, setValgtLagretFilter, props.lagretFilter]);
-
-    const outerDivRef = useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();
 
+    const valgtFilter = props.lagretFilter.find(elem => lagredeFilterListerErLik(elem.filterValg, filtreringMinOversikt));
+    const finnLagretFilter = (filterId) => props.lagretFilter.find((elem) => elem.filterId === parseInt(filterId));
+
     const velgFilter = (filterId: string) => {
-        logEvent('portefolje.metrikker.lagredefilter.velg-gruppe',
-            {}, {filterId: filterId, sideNavn: finnSideNavn()});
         const filterVerdi = finnLagretFilter(filterId);
-        setValgtLagretFilter(filterVerdi);
-        filterVerdi && dispatch(velgLagretFilter(filterVerdi));
-        console.log("VELG FILTER TO", filterId)
+
+        logEvent('portefolje.metrikker.lagredefilter.velg-gruppe',
+            {}, {filterId: filterVerdi!.filterId, sideNavn: finnSideNavn()});
+        dispatch(velgLagretFilter(filterVerdi!));
     };
 
-    const finnLagretFilter = (vg) => props.lagretFilter.find((elem) => elem.filterId === parseInt(vg));
-
-    const className  = (props.lagretFilter.length >= 18) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
+    useEffect(() => {
+        if (valgtFilter){
+            velgFilter(valgtFilter.filterId.toString())
+        }else{
+            dispatch(avmarkerLagretFilter());
+        }
+    }, [valgtFilter]);
 
     return (
         <div className={className} ref={outerDivRef}>
@@ -60,7 +57,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
                     filter={filter}
                     onClickRedigerKnapp={() => setVisEndreFilterModal(true)}
                     hanterVelgFilter={(e) => {velgFilter(e.target.value)}}
-                    filterState={filterState}
+                    filterState={filtreringMinOversikt}
                 />
             )}
             <LagreFilterModal
@@ -79,9 +76,7 @@ interface LagretFilterRadProps {
 }
 
 function LagretFilterRad({filter, hanterVelgFilter, onClickRedigerKnapp, filterState}: LagretFilterRadProps) {
-    const lagretFilterValg = filter.filterValg;
-    const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
-    const erValgt = lagretFilterState.valgtLagretFilter != null && lagredeFilterListerErLik(lagretFilterValg, filterState);
+    const erValgt =  lagredeFilterListerErLik(filter.filterValg, filterState);
 
     return (
         <div className="lagrede-filter__rad">

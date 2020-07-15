@@ -21,6 +21,7 @@ export const SLETT_LAGREDEFILTER_FEILET = 'lagredefilter_slette/FEILET';
 export const SLETT_LAGREDEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
 export const VELG_LAGRET_FILTER = 'lagredefilter_velg/VELG_LAGRET_FILTER';
+export const AVMARKER_LAGRET_FILTER = 'lagredefilter_velg/AVMARKER_LAGRET_FILTER';
 
 
 export interface LagretFilter_ActionReducers {
@@ -104,6 +105,8 @@ export default function reducer(state: LagretFilterState = initialState, action)
             };
         case VELG_LAGRET_FILTER:
             return {...state, valgtLagretFilter: action.data}
+        case AVMARKER_LAGRET_FILTER:
+            return {...state, valgtLagretFilter: {}}
         default:
             return state;
     }
@@ -115,6 +118,14 @@ export function velgLagretFilter(filterVerdi: LagretFilter_ActionReducers) {
     return {
         type: VELG_LAGRET_FILTER,
         data: filterVerdi,
+        name: 'veileder'
+    }
+}
+
+export function avmarkerLagretFilter() {
+    return {
+        type: AVMARKER_LAGRET_FILTER,
+        name: 'veileder'
     }
 }
 
@@ -144,7 +155,7 @@ export function lagreNyttFilter(nyttFilter: NyttFilter) {
 
 export function slettFilter(filterId: number) {
     return doThenDispatch(() => slettLagretFilter(filterId), {
-        OK: SLETT_LAGREDEFILTER_FEILET,
+        OK: SLETT_LAGREDEFILTER_OK,
         FEILET: SLETT_LAGREDEFILTER_FEILET,
         PENDING: SLETT_LAGREDEFILTER_PENDING
     });

@@ -1,28 +1,28 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import persistent from './utils/persistentReducer';
 import valgtEnhetReducer, {ValgtEnhetState} from './ducks/valgt-enhet';
-import portefoljeReducer, { PortefoljeState } from './ducks/portefolje';
+import portefoljeReducer, {PortefoljeState} from './ducks/portefolje';
 import pagineringReducer from './ducks/paginering';
 import sorteringReducer from './ducks/sortering';
-import veiledereReducer, { VeiledereState } from './ducks/veiledere';
-import portefoljestorrelserReducer, { PortefoljeStorrelser } from './ducks/portefoljestorrelser';
-import filtreringReducer, { initialState } from './ducks/filtrering';
-import statustallReducer, { StatustallState } from './ducks/statustall';
+import veiledereReducer, {VeiledereState} from './ducks/veiledere';
+import portefoljestorrelserReducer, {PortefoljeStorrelser} from './ducks/portefoljestorrelser';
+import filtreringReducer, {initialState} from './ducks/filtrering';
+import statustallReducer, {StatustallState} from './ducks/statustall';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
-import veiledergrupperLagretFilterReducer, { VeiledergrupperLagretFilterState } from './ducks/veiledergrupper_action-reducers';
-import lagretFilterReducer, { LagretFilterState } from './ducks/lagret-filter_action-reducers';
+import veiledergrupperLagretFilterReducer, {VeiledergrupperLagretFilterState} from './ducks/veiledergrupper_action-reducers';
+import lagretFilterReducer, {LagretFilterState} from './ducks/lagret-filter_action-reducers';
 import arbeidslisteReducer from './ducks/arbeidsliste';
-import enhetTiltakReducer, { EnhettiltakState } from './ducks/enhettiltak';
+import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
 import listevisningReducer, {
-    ListevisningState,
-    initialStateMinOversikt,
     initialStateEnhetensOversikt,
+    initialStateMinOversikt,
+    ListevisningState,
     ListevisningType
 } from './ducks/ui/listevisning';
-import featuresReducer, { FeaturesState } from './ducks/features';
-import toastReducer, { ToastState } from './store/toast/reducer';
+import featuresReducer, {FeaturesState} from './ducks/features';
+import toastReducer, {ToastState} from './store/toast/reducer';
 import {FiltervalgModell} from "./model-interfaces";
 import inloggetVeilederReducer, {InloggetVeilederState} from "./ducks/inlogget-veileder";
 

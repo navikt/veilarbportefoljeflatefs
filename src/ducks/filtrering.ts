@@ -1,5 +1,5 @@
-import { FiltervalgModell } from '../model-interfaces';
-import {LagretFilter_ActionReducers} from "./lagret-filter_action-reducers";
+import {FiltervalgModell} from '../model-interfaces';
+import {VELG_LAGRET_FILTER} from "./lagret-filter_action-reducers";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -101,12 +101,14 @@ export default function reducer(state: FiltervalgModell = initialState, action):
             };
         case SETT_FILTERVALG:
             return {...action.data};
+        case VELG_LAGRET_FILTER:
+            return {...action.data.filterValg}
         default:
             return state;
     }
 }
 
-// Action Creators
+
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet') {
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
         return {
@@ -146,4 +148,3 @@ export function veilederSoktFraToolbar() {
         dispatch({type: VEILEDER_SOKT_FRA_TOOLBAR});
     };
 }
-
