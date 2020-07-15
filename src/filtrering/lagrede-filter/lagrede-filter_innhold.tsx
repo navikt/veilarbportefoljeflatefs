@@ -1,9 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {velgLagretFilter} from '../../ducks/filtrering';
-import {Radio} from 'nav-frontend-skjema';
+import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import {LagretFilter_ActionReducers,} from '../../ducks/lagret-filter_action-reducers';
+import {LagretFilter_ActionReducers, velgLagretFilter,} from '../../ducks/lagret-filter_action-reducers';
 import {AppState} from '../../reducer';
 import {FiltervalgModell} from '../../model-interfaces';
 import {lagredeFilterListerErLik} from "../../components/modal/lagrede-filter/lagrede-filter-utils";
@@ -15,7 +14,7 @@ import './lagrede-filter_innhold.less'
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter_ActionReducers[]
     filterValg?: FiltervalgModell;
-    filtergruppe?: string;
+    filtergruppe: string;
 }
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
@@ -45,29 +44,13 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
             {}, {filterId: filterId, sideNavn: finnSideNavn()});
         const filterVerdi = finnLagretFilter(filterId);
         setValgtLagretFilter(filterVerdi);
-        filterVerdi && dispatch(velgLagretFilter(filterVerdi, props.filtergruppe));
+        filterVerdi && dispatch(velgLagretFilter(filterVerdi));
+        console.log("VELG FILTER TO", filterId)
     };
 
     const finnLagretFilter = (vg) => props.lagretFilter.find((elem) => elem.filterId === parseInt(vg));
 
     const className  = (props.lagretFilter.length >= 18) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
-
-    // const submitEndringer = (filterNavn: string, filterValg: FiltervalgModell) => {
-    //     if (valgtFilter && enhet && harGjortEndringer(filterValg.veiledere, valgtFilter.filterValg.veiledere, valgtFilter.filterNavn, filterNavn)) {
-    //         dispatch(lagreEndringer({
-    //             filterId: valgtFilter.filterId,
-    //             filterNavn: filterNavn,
-    //             filterValg
-    //         }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, props.filtergruppe)));
-    //     } else {
-    //         dispatch(visIngenEndringerToast());
-    //     }
-    // };
-
-    // const sletteKnapp = () => {
-    //     valgtFilter && enhet && dispatch(slettGruppe(enhet, valgtFilter.filterId))
-    //         .then(() => dispatch(endreFiltervalg('veiledere', [], 'enhet')));
-    // };
 
     return (
         <div className={className} ref={outerDivRef}>

@@ -7,39 +7,43 @@ import {Hovedknapp, Knapp} from "nav-frontend-knapper";
 import BekreftSlettingModal from "../bekreftelse-modal/bekreft-sletting-modal";
 import {erTomtObjekt} from "./lagrede-filter-utils";
 
-export function OppdaterFilter(props: { filterNavn, filterId, lukkModal, feilValidering, feil }) {
+export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, feilValidering, feil, saveRequestSent, setFilterNavn }) {
 
-    const [filterNavn, setFilterNavn] = useState<string>(props.filterNavn)
     const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false)
 
     const dispatch = useDispatch();
     const selector = useSelector((state: AppState) => state.filtreringMinoversikt)
+    const [nyttFilterNavn, setNyttFilterNavn] = useState<string>(props.gammeltFilterNavn)
 
     const doLagreEndringer = () => {
-        const trimmetFilterNavn = filterNavn.trim()
+        const trimmetFilterNavn = nyttFilterNavn.trim()
         const feilmelding = props.feilValidering(trimmetFilterNavn, props.filterId)
 
         if (erTomtObjekt(feilmelding)) {
+            props.setFilterNavn(trimmetFilterNavn)
             dispatch(lagreEndringer({
-                filterNavn: filterNavn,
+                filterNavn: trimmetFilterNavn,
                 filterValg: selector,
                 filterId: props.filterId
             }))
-                .then(props.lukkModal)
+            props.saveRequestSent(true)
         }
     }
     const doSlettFilter = () => {
+        props.setFilterNavn(nyttFilterNavn)
         dispatch(slettFilter(
             props.filterId
         ))
-            .then(props.lukkModal)
+        //TODO add lukkModal for bekreftModal
+        props.saveRequestSent(true)
     }
+
     return (
         <>
             <Input
                 label="Navn:"
-                value={filterNavn}
-                onChange={(e) => setFilterNavn(e.target.value)}
+                value={nyttFilterNavn}
+                onChange={(e) => setNyttFilterNavn(e.target.value)}
                 feil={props.feil.filterNavn}
             />
             <div className="lagret-filter-knapp-wrapper">
@@ -53,7 +57,7 @@ export function OppdaterFilter(props: { filterNavn, filterId, lukkModal, feilVal
                     doSlettFilter()
                 }}
                 tittel="Slette lagret filter"
-                navn={props.filterNavn}/>
+                navn={props.gammeltFilterNavn}/>
         </>
     )
 }

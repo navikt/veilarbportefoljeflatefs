@@ -2,7 +2,6 @@ import {doThenDispatch, STATUS} from './utils';
 import {FiltervalgModell} from '../model-interfaces';
 import {hentMineLagredeFilter, nyttLagretFilter, redigerLagretFilter, slettLagretFilter,} from "../middleware/api";
 import {OrNothing} from "../utils/types/types";
-import {VELG_LAGRET_FILTER} from "./filtrering";
 
 // Actions
 export const HENT_LAGREDEFILTER_OK = 'lagredefilter/OK';
@@ -21,6 +20,9 @@ export const SLETT_LAGREDEFILTER_OK = 'lagredefilter_slette/OK';
 export const SLETT_LAGREDEFILTER_FEILET = 'lagredefilter_slette/FEILET';
 export const SLETT_LAGREDEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
+export const VELG_LAGRET_FILTER = 'lagredefilter_velg/VELG_LAGRET_FILTER';
+
+
 export interface LagretFilter_ActionReducers {
     filterNavn: string;
     filterId: number;
@@ -31,8 +33,8 @@ export interface LagretFilter_ActionReducers {
 export interface LagretFilterState {
     status: string;
     data: LagretFilter_ActionReducers[];
-    valgtLagretFilter: OrNothing<LagretFilter_ActionReducers> ;
-    error: LagretFilterError | null;
+    valgtLagretFilter: OrNothing<LagretFilter_ActionReducers>;
+    handling: HandlingsType | null;
 }
 
 export interface RedigerFilter {
@@ -46,43 +48,46 @@ export interface NyttFilter {
     filterValg: FiltervalgModell;
 }
 
-enum LagretFilterError {
-    LAGRING_FEILET = 'LAGRING_FEILET',
-    HENTING_FEILET = 'HENTING_FEILET',
-    NY_FEILET = 'NY_FEILET',
-    SLETTING_FEILET = 'SLETTING_FEILET'
+export enum HandlingsType {
+    NYTT,
+    REDIGERE,
+    SLETTE,
+    HENTE
 }
 
 const initialState = {
     status: STATUS.NOT_STARTED,
     data: [],
     valgtLagretFilter: null,
-    error: null
+    handling: null
 };
 
 //  Reducer
 export default function reducer(state: LagretFilterState = initialState, action) {
     switch (action.type) {
         case HENT_LAGREDEFILTER_PENDING:
+            return {...state, status: STATUS.PENDING, handling: HandlingsType.HENTE};
         case NY_LAGREDEFILTER_PENDING:
+            return {...state, status: STATUS.PENDING, handling: HandlingsType.NYTT};
         case REDIGER_LAGREDEFILTER_PENDING:
+            return {...state, status: STATUS.PENDING, handling: HandlingsType.REDIGERE};
         case SLETT_LAGREDEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING};
+            return {...state, status: STATUS.PENDING, handling: HandlingsType.SLETTE};
         case HENT_LAGREDEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, error: LagretFilterError.HENTING_FEILET};
+            return {...state, status: STATUS.ERROR, handling: HandlingsType.HENTE};
         case NY_LAGREDEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, error: LagretFilterError.NY_FEILET};
+            return {...state, status: STATUS.ERROR, handling: HandlingsType.NYTT};
         case REDIGER_LAGREDEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, error: LagretFilterError.LAGRING_FEILET};
+            return {...state, status: STATUS.ERROR, handling: HandlingsType.REDIGERE};
         case SLETT_LAGREDEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, error: LagretFilterError.SLETTING_FEILET};
+            return {...state, status: STATUS.ERROR, handling: HandlingsType.SLETTE};
         case HENT_LAGREDEFILTER_OK:
-            return {...state, status: STATUS.OK, data: action.data};
+            return {...state, status: STATUS.OK, data: action.data, handling: HandlingsType.HENTE};
         case NY_LAGREDEFILTER_OK:
-            return {...state, status: STATUS.OK, data: state.data.concat(action.data)};
+            return {...state, status: STATUS.OK, data: state.data.concat(action.data), handling: HandlingsType.NYTT};
         case REDIGER_LAGREDEFILTER_OK:
             return {
-                ...state, status: STATUS.OK, data: state.data.map(elem => {
+                ...state, status: STATUS.OK, handling: HandlingsType.REDIGERE, data: state.data.map(elem => {
                         if (elem.filterId !== action.data.filterId) {
                             return elem;
                         }
@@ -92,7 +97,10 @@ export default function reducer(state: LagretFilterState = initialState, action)
             };
         case SLETT_LAGREDEFILTER_OK:
             return {
-                ...state, status: STATUS.OK, data: state.data.filter(elem => elem.filterId !== action.data)
+                ...state,
+                status: STATUS.OK,
+                handling: HandlingsType.SLETTE,
+                data: state.data.filter(elem => elem.filterId !== action.data)
             };
         case VELG_LAGRET_FILTER:
             return {...state, valgtLagretFilter: action.data}
@@ -102,6 +110,14 @@ export default function reducer(state: LagretFilterState = initialState, action)
 }
 
 // Action Creators
+
+export function velgLagretFilter(filterVerdi: LagretFilter_ActionReducers) {
+    return {
+        type: VELG_LAGRET_FILTER,
+        data: filterVerdi,
+    }
+}
+
 export function hentLagredeFilterForVeileder() {
     return doThenDispatch(() => hentMineLagredeFilter(), {
         OK: HENT_LAGREDEFILTER_OK,
@@ -128,7 +144,7 @@ export function lagreNyttFilter(nyttFilter: NyttFilter) {
 
 export function slettFilter(filterId: number) {
     return doThenDispatch(() => slettLagretFilter(filterId), {
-        OK: SLETT_LAGREDEFILTER_OK,
+        OK: SLETT_LAGREDEFILTER_FEILET,
         FEILET: SLETT_LAGREDEFILTER_FEILET,
         PENDING: SLETT_LAGREDEFILTER_PENDING
     });

@@ -41,13 +41,13 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 endreFiltervalg={doEndreFiltervalg}
             />
             <MetrikkEkspanderbartpanel
-                apen={false}
+                apen={true}
                 tittel="Lagrede filter"
                 tittelProps="undertittel"
                 lamellNavn="lagredefilter"
                 hidden={filtergruppe !== 'veileder'}
             >
-                <FilteringLagredeFilter filtergruppe={filtergruppe}/>
+                <FilteringLagredeFilter/>
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={false}
