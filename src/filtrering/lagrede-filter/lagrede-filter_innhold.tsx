@@ -47,7 +47,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         }else{
             dispatch(avmarkerLagretFilter());
         }
-    }, [valgtFilter]);
+    }, [valgtFilter, dispatch]);
 
     return (
         <div className={className} ref={outerDivRef}>

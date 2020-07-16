@@ -35,6 +35,7 @@ export interface LagretFilterState {
     status: string;
     data: LagretFilter_ActionReducers[];
     valgtLagretFilter: OrNothing<LagretFilter_ActionReducers>;
+    sisteValgteLagredeFilter: OrNothing<number>
     handling: HandlingsType | null;
 }
 
@@ -60,7 +61,8 @@ const initialState = {
     status: STATUS.NOT_STARTED,
     data: [],
     valgtLagretFilter: null,
-    handling: null
+    handling: null,
+    sisteValgteLagredeFilter: null
 };
 
 //  Reducer
@@ -104,9 +106,9 @@ export default function reducer(state: LagretFilterState = initialState, action)
                 data: state.data.filter(elem => elem.filterId !== action.data)
             };
         case VELG_LAGRET_FILTER:
-            return {...state, valgtLagretFilter: action.data}
+            return {...state, valgtLagretFilter: action.data, sisteValgteLagredeFilter: action.data.filterId}
         case AVMARKER_LAGRET_FILTER:
-            return {...state, valgtLagretFilter: {}}
+            return {...state, valgtLagretFilter: null}
         default:
             return state;
     }

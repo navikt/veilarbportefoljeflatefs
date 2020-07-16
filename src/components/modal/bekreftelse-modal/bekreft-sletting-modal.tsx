@@ -1,7 +1,7 @@
 import React from 'react';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
+import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
+import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './bekreft-sletting-modal.less';
 
 interface BekreftSlettingModalProps {
@@ -14,6 +14,11 @@ interface BekreftSlettingModalProps {
 }
 
 function BekreftSlettingModal(props: BekreftSlettingModalProps) {
+    const slettKnapp = () => {
+        props.onSubmit()
+        props.onRequestClose()
+    }
+
     return (
         <VarselModal
             contentLabel={props.tittel}
@@ -38,7 +43,7 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
             <div className="bekreft-sletting-modal__knappegruppe">
                 <Hovedknapp
                     htmlType="submit"
-                    onClick={props.onSubmit}
+                    onClick={slettKnapp}
                 >
                     Slett
                 </Hovedknapp>

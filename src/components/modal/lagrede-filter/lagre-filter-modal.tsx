@@ -11,7 +11,6 @@ import {Innholdstittel, Normaltekst} from "nav-frontend-typografi";
 import {HandlingsType} from "../../../ducks/lagret-filter_action-reducers";
 import {STATUS} from "../../../ducks/utils";
 import {VarselModal, VarselModalType} from "../varselmodal/varselmodal";
-import {lagredeFilterListerErLik} from "./lagrede-filter-utils";
 
 export enum Visningstype {
     MENY,
@@ -26,18 +25,20 @@ export interface LagretFilterValideringsError {
 export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen: boolean, onRequestClose: () => void }) {
 
     const valgtLagretFilter = useSelector((state: AppState) => state.lagretFilter.valgtLagretFilter)
+    const sisteValgteLagredeFilter = useSelector((state: AppState) => state.lagretFilter.sisteValgteLagredeFilter)
     const lagredeFilter = useSelector((state: AppState) => state.lagretFilter.data)
     const lagretFilterHandlingsType = useSelector((state: AppState) => state.lagretFilter.handling)
     const lagretFilterStatus = useSelector((state: AppState) => state.lagretFilter.status)
-    const currentSelection = useSelector((state: AppState) => state.filtreringMinoversikt);
 
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(props.velgVisningstype)
     const [lagretFilterValidering, setLagretFilterValidering] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError)
     const [errorModalErApen, setErrorModalErApen] = useState(false)
     const [filterNavn, setFilterNavn] = useState<string>("")
 
-    const erValgtFilterkombinasjonSammeSomLagretFilter = lagredeFilter.find(elem => lagredeFilterListerErLik(elem.filterValg, currentSelection));
-    // const erValgtFilterkombinasjonSammeSomLagretFilter = lagredeFilterListerErLik(valgtLagretFilter?.filterValg!, currentSelection);
+    const lagretFilterNavn = (filterId) => lagredeFilter.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
+    const [saveRequestSent, setSaveRequestSent] = useState(false)
+    const tillatteHandlinger = [HandlingsType.NYTT, HandlingsType.REDIGERE, HandlingsType.SLETTE]
+
 
     const lukkModal = () => {
         props.onRequestClose();
@@ -62,24 +63,49 @@ export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen
         return feilmelding
     }
 
+    const lagreNyttFilterKnapp = () => {
+        return (
+            <Hovedknapp className="ny-knapp blokk-xs"
+                        onClick={() => setValgtVisningstype(Visningstype.LAGRE_NYTT)}>
+                Lagre som nytt filter
+            </Hovedknapp>
+        )
+    }
+
+    const oppdaterFilterKnapp = () => {
+        return (
+            <Knapp className="eksisterende-knapp"
+                   onClick={() => setValgtVisningstype(Visningstype.OPPDATER)}>
+                Oppdater eksisterende filter
+            </Knapp>
+        )
+    }
+
     const Meny = () => {
         return (
             <div className="lagret-filter-meny-modal__wrapper">
-                {erValgtFilterkombinasjonSammeSomLagretFilter ?
-                    <>
-                        <Normaltekst>Det finnes allerede et lagret filter <b>"{valgtLagretFilter!.filterNavn}"</b> med
-                            denne filterkombinasjonen. Oppdater navnet ved å klikke på knappen under.
-                        </Normaltekst>
-                        <br/>
-                        <Knapp className="eksisterende-knapp"
-                               onClick={() => setValgtVisningstype(Visningstype.OPPDATER)}>
-                            Oppdater eksisterende filter
-                        </Knapp></>
-                    :
-                    <Hovedknapp className="ny-knapp blokk-xs"
-                                onClick={() => setValgtVisningstype(Visningstype.LAGRE_NYTT)}>
-                        Lagre som nytt filter
-                    </Hovedknapp>
+                {/* - valgtLagretFilter != null -> active filter (intentional, unintentional), offer update of selected filter */}
+                {/* - sisteValgteLagredeFilter == null -> offer to save as new filter */}
+                {/* - sisteValgteLagredeFilter != null -> offer to save as new filter or to update existing */}
+                {valgtLagretFilter ?
+                        <>
+                            <Normaltekst>Det finnes allerede et lagret filter <b>"{valgtLagretFilter!.filterNavn}"</b> med
+                                denne filterkombinasjonen. Oppdater navnet ved å klikke på knappen under.
+                            </Normaltekst>
+                            <br/>
+                            {oppdaterFilterKnapp()}
+                        </>
+                    : sisteValgteLagredeFilter ?
+                        <>
+                            {lagreNyttFilterKnapp()}
+
+                            <Normaltekst>Oppdater <b>"{lagretFilterNavn(sisteValgteLagredeFilter)}"</b> ved å klikke på knappen under.</Normaltekst>
+                            {oppdaterFilterKnapp()}
+                        </>
+                        :
+                        <>
+                            {lagreNyttFilterKnapp()}
+                        </>
                 }
             </div>
         )
@@ -93,10 +119,6 @@ export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen
         }
         return "Lagre filter"
     }
-
-    const lagretFilterNavn = lagredeFilter.filter(elem => elem.filterId === valgtLagretFilter?.filterId).map(elem => elem.filterNavn).toString()
-    const [saveRequestSent, setSaveRequestSent] = useState(false)
-    const tillatteHandlinger = [HandlingsType.NYTT, HandlingsType.REDIGERE, HandlingsType.SLETTE]
 
     useEffect(() => {
         if (saveRequestSent && tillatteHandlinger.includes(lagretFilterHandlingsType!)) {
@@ -140,7 +162,7 @@ export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen
 
                     {valgtVisningstype === Visningstype.OPPDATER &&
                     <OppdaterFilter
-                        gammeltFilterNavn={lagretFilterNavn}
+                        gammeltFilterNavn={lagretFilterNavn(valgtLagretFilter?.filterId)}
                         filterId={valgtLagretFilter?.filterId}
                         feilValidering={feilValidering}
                         feil={lagretFilterValidering}
