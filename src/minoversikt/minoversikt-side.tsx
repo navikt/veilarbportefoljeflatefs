@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import {ListevisningType} from '../ducks/ui/listevisning';
@@ -22,22 +22,30 @@ import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {hentPortefoljeForVeileder} from '../ducks/portefolje';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {Knapp} from "nav-frontend-knapper";
 import {LagreFilterModal, Visningstype} from "../components/modal/lagrede-filter/lagre-filter-modal";
+import {AppState} from "../reducer";
+import {erObjektValuesTomt} from "../components/modal/lagrede-filter/lagrede-filter-utils";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatusTall(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
     const [lagretFilterMenyModalErApen, setLagretFilterMenyModalErApen] = useState(false);
+    const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
+    const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
+    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
+
+    useEffect(()=> {
+        setErLagreKnappSkjult(erObjektValuesTomt(filtreringMinOversikt))
+    },[filtreringMinOversikt]);
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -50,7 +58,6 @@ function MinoversiktSide() {
         return antallBrukere > antall;
     };
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
-
     return (
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse blokk-xl">
@@ -73,7 +80,7 @@ function MinoversiktSide() {
                                     listevisning={listevisning}
                                     className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                 />
-                                <Knapp className="lagre-filter-knapp" mini
+                                <Knapp className="lagre-filter-knapp" mini hidden={erLagreKnappSkjult}
                                        onClick={() => setLagretFilterMenyModalErApen(true)}>
                                     Lagre filter
                                 </Knapp>
