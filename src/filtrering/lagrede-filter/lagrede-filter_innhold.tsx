@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
@@ -31,28 +31,21 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const dispatch = useDispatch();
 
     const valgtFilter = props.lagretFilter.find(elem => lagredeFilterListerErLik(elem.filterValg, filtreringMinOversikt));
-
-    //TODO: spør Alexandra om dette senere
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     const finnLagretFilter = (filterId) => props.lagretFilter.find((elem) => elem.filterId === parseInt(filterId));
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const velgFilter = useCallback((filterId: string) => {
+    const velgFilter = (filterId: string) => {
         const filterVerdi = finnLagretFilter(filterId);
 
         logEvent('portefolje.metrikker.lagredefilter.velg-gruppe',
             {}, {filterId: filterVerdi!.filterId, sideNavn: finnSideNavn()});
         dispatch(velgLagretFilter(filterVerdi!));
-    }, [dispatch, finnLagretFilter])
+    };
 
     useEffect(() => {
-        if (valgtFilter) {
-            velgFilter(valgtFilter.filterId.toString())
-        } else {
-            dispatch(avmarkerLagretFilter());
-        }
-    }, [valgtFilter, dispatch, velgFilter]);
+        valgtFilter
+            ? velgFilter(valgtFilter.filterId.toString())
+            : dispatch(avmarkerLagretFilter());
+    }, [valgtFilter, dispatch]);
 
     return (
         <div className={className} ref={outerDivRef}>
