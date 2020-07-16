@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
@@ -23,7 +23,7 @@ interface LagredeFilterInnholdProps {
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
-    const className  = (props.lagretFilter.length >= 18) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
+    const className = (props.lagretFilter.length >= 18) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
 
     const [visEndreFilterModal, setVisEndreFilterModal] = useState(false);
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
@@ -31,23 +31,28 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const dispatch = useDispatch();
 
     const valgtFilter = props.lagretFilter.find(elem => lagredeFilterListerErLik(elem.filterValg, filtreringMinOversikt));
+
+    //TODO: spør Alexandra om dette senere
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const finnLagretFilter = (filterId) => props.lagretFilter.find((elem) => elem.filterId === parseInt(filterId));
 
-    const velgFilter = (filterId: string) => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const velgFilter = useCallback((filterId: string) => {
         const filterVerdi = finnLagretFilter(filterId);
 
         logEvent('portefolje.metrikker.lagredefilter.velg-gruppe',
             {}, {filterId: filterVerdi!.filterId, sideNavn: finnSideNavn()});
         dispatch(velgLagretFilter(filterVerdi!));
-    };
+    }, [dispatch, finnLagretFilter])
 
     useEffect(() => {
-        if (valgtFilter){
+        if (valgtFilter) {
             velgFilter(valgtFilter.filterId.toString())
-        }else{
+        } else {
             dispatch(avmarkerLagretFilter());
         }
-    }, [valgtFilter, dispatch]);
+    }, [valgtFilter, dispatch, velgFilter]);
 
     return (
         <div className={className} ref={outerDivRef}>
@@ -56,7 +61,9 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
                     key={idx}
                     filter={filter}
                     onClickRedigerKnapp={() => setVisEndreFilterModal(true)}
-                    hanterVelgFilter={(e) => {velgFilter(e.target.value)}}
+                    hanterVelgFilter={(e) => {
+                        velgFilter(e.target.value)
+                    }}
                     filterState={filtreringMinOversikt}
                 />
             )}
@@ -76,7 +83,7 @@ interface LagretFilterRadProps {
 }
 
 function LagretFilterRad({filter, hanterVelgFilter, onClickRedigerKnapp, filterState}: LagretFilterRadProps) {
-    const erValgt =  lagredeFilterListerErLik(filter.filterValg, filterState);
+    const erValgt = lagredeFilterListerErLik(filter.filterValg, filterState);
 
     return (
         <div className="lagrede-filter__rad">
