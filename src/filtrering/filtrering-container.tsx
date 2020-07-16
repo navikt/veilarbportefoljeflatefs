@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import {FiltervalgModell} from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
@@ -13,6 +13,9 @@ import {pagineringSetup} from '../ducks/paginering';
 import FilteringLagredeFilter from "./lagrede-filter/filtrering-lagrede-filter";
 import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter_action-reducers";
 import {useEffect} from "react";
+import {AppState} from "../reducer";
+import {sjekkFeature} from "../ducks/features";
+import {LAGREDE_FILTER} from "../konstanter";
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -34,21 +37,26 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
+
+    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
+
     return (
         <div className="blokk-m">
             <FiltreringNavnellerfnr
                 filtervalg={filtervalg}
                 endreFiltervalg={doEndreFiltervalg}
             />
-            <MetrikkEkspanderbartpanel
-                apen={true}
-                tittel="Lagrede filter"
-                tittelProps="undertittel"
-                lamellNavn="lagredefilter"
-                hidden={filtergruppe !== 'veileder'}
-            >
-                <FilteringLagredeFilter/>
-            </MetrikkEkspanderbartpanel>
+            {lagredeFilterFeatureToggleErPa &&
+                <MetrikkEkspanderbartpanel
+                    apen={false}
+                    tittel="Lagrede filter"
+                    tittelProps="undertittel"
+                    lamellNavn="lagredefilter"
+                    hidden={filtergruppe !== 'veileder'}
+                >
+                    <FilteringLagredeFilter/>
+                </MetrikkEkspanderbartpanel>
+            }
             <MetrikkEkspanderbartpanel
                 apen={false}
                 tittel="Veiledergrupper"

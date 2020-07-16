@@ -22,7 +22,7 @@ export interface LagretFilterValideringsError {
     filterNavn: OrNothing<string>
 }
 
-export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen: boolean, onRequestClose: () => void }) {
+export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen: boolean, onRequestClose: () => void, erNavnEllerFnrBrukt? }) {
 
     const valgtLagretFilter = useSelector((state: AppState) => state.lagretFilter.valgtLagretFilter)
     const sisteValgteLagredeFilter = useSelector((state: AppState) => state.lagretFilter.sisteValgteLagredeFilter)
@@ -81,31 +81,40 @@ export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen
         )
     }
 
+
     const Meny = () => {
         return (
             <div className="lagret-filter-meny-modal__wrapper">
                 {/* - valgtLagretFilter != null -> active filter (intentional, unintentional), offer update of selected filter */}
                 {/* - sisteValgteLagredeFilter == null -> offer to save as new filter */}
                 {/* - sisteValgteLagredeFilter != null -> offer to save as new filter or to update existing */}
-                {valgtLagretFilter ?
-                        <>
-                            <Normaltekst>Det finnes allerede et lagret filter <b>"{valgtLagretFilter!.filterNavn}"</b> med
+                {/* - hvis fødselsnummer/navn er tilstede -> offer a message saying you cannot save filter with this option*/}
+
+                {props.erNavnEllerFnrBrukt ?
+                    <>
+                        <Normaltekst>Fødselsnummer og navn kan ikke brukes i lagrede filter.</Normaltekst>
+                        <Normaltekst>Du må fjerne fødselsnummer og navn for å lagre filteret.</Normaltekst>
+                    </>
+                    : valgtLagretFilter
+                        ? <>
+                            <Normaltekst>Det finnes allerede et lagret
+                                filter <b>"{valgtLagretFilter!.filterNavn}"</b> med
                                 denne filterkombinasjonen. Oppdater navnet ved å klikke på knappen under.
                             </Normaltekst>
                             <br/>
                             {oppdaterFilterKnapp()}
                         </>
-                    : sisteValgteLagredeFilter ?
-                        <>
-                            {lagreNyttFilterKnapp()}
-
-                            <Normaltekst>Oppdater <b>"{lagretFilterNavn(sisteValgteLagredeFilter)}"</b> ved å klikke på knappen under.</Normaltekst>
-                            {oppdaterFilterKnapp()}
-                        </>
-                        :
-                        <>
-                            {lagreNyttFilterKnapp()}
-                        </>
+                        : sisteValgteLagredeFilter
+                            ? <>
+                                {lagreNyttFilterKnapp()}
+                                <Normaltekst>Oppdater <b>"{lagretFilterNavn(sisteValgteLagredeFilter)}"</b> ved å klikke
+                                    på
+                                    knappen under.</Normaltekst>
+                                {oppdaterFilterKnapp()}
+                            </>
+                            : <>
+                                {lagreNyttFilterKnapp()}
+                            </>
                 }
             </div>
         )

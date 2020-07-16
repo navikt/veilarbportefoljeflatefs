@@ -10,9 +10,9 @@ export function erTomtObjekt(objekt): boolean {
 }
 
 export function erObjektValuesTomt(minOversiktObjekt): boolean {
-    return Object.values(minOversiktObjekt).filter(value => !erValueTomt(value)).length == 0
+    return Object.values(minOversiktObjekt).filter(value => !erValueTomt(value)).length === 0
 }
 
-function erValueTomt(value){
-    return value == null || value == "" || isEmptyArray(value) || erTomtObjekt(value)
+function erValueTomt(value) {
+    return value === null || value === "" || isEmptyArray(value) || erTomtObjekt(value)
 }

@@ -31,6 +31,8 @@ import {Knapp} from "nav-frontend-knapper";
 import {LagreFilterModal, Visningstype} from "../components/modal/lagrede-filter/lagre-filter-modal";
 import {AppState} from "../reducer";
 import {erObjektValuesTomt} from "../components/modal/lagrede-filter/lagrede-filter-utils";
+import {sjekkFeature} from "../ducks/features";
+import {LAGREDE_FILTER} from "../konstanter";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -40,12 +42,14 @@ function MinoversiktSide() {
     const dispatch = useDispatch();
     const [lagretFilterMenyModalErApen, setLagretFilterMenyModalErApen] = useState(false);
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
-    const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
+    const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
+    const [erNavnEllerFnrBrukt, setErNavnEllerFnrBrukt] = useState(false);
 
-    useEffect(()=> {
+    useEffect(() => {
         setErLagreKnappSkjult(erObjektValuesTomt(filtreringMinOversikt))
-    },[filtreringMinOversikt]);
+        setErNavnEllerFnrBrukt(filtreringMinOversikt.navnEllerFnrQuery !== "")
+    }, [filtreringMinOversikt]);
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -58,6 +62,9 @@ function MinoversiktSide() {
         return antallBrukere > antall;
     };
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
+
+    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
+
     return (
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse blokk-xl">
@@ -80,10 +87,11 @@ function MinoversiktSide() {
                                     listevisning={listevisning}
                                     className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                 />
+                                {lagredeFilterFeatureToggleErPa &&
                                 <Knapp className="lagre-filter-knapp" mini hidden={erLagreKnappSkjult}
                                        onClick={() => setLagretFilterMenyModalErApen(true)}>
                                     Lagre filter
-                                </Knapp>
+                                </Knapp>}
                             </div>
                             <div className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <TabellOverskrift
@@ -127,6 +135,7 @@ function MinoversiktSide() {
                     velgVisningstype={Visningstype.MENY}
                     isOpen={lagretFilterMenyModalErApen}
                     onRequestClose={() => setLagretFilterMenyModalErApen(false)}
+                    erNavnEllerFnrBrukt={erNavnEllerFnrBrukt}
                 />
             </div>
         </DocumentTitle>
