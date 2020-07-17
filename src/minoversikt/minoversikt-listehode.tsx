@@ -1,8 +1,7 @@
 import * as React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import { ytelseFilterErAktiv } from '../utils/utils';
-import { BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
-import { AktiviteterValg } from '../ducks/filtrering';
+import {ytelseFilterErAktiv} from '../utils/utils';
+import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
@@ -13,17 +12,17 @@ import {
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
-import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
+import {Kolonne, ListevisningType} from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
 import TittelValg from '../utils/utils';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './minoversikt.less';
-import { ReactComponent as ArbeidslisteikonBla } from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
+import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
 import {OrNothing} from "../utils/types/types";
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
-        const valgteAktiviteter = Object.values(aktiviteter).filter((aktivitetvalg) => aktivitetvalg !== AktiviteterValg.NA);
+        const valgteAktiviteter = Object.values(aktiviteter).filter((aktivitetvalg) => aktivitetvalg !== null);
         return valgteAktiviteter && valgteAktiviteter.length > 0;
     }
     return false;

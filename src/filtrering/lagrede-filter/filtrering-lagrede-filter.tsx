@@ -15,7 +15,7 @@ function FilteringLagredeFilter() {
     const lagretFilterOK = () => {
         return lagretFilter.length > 0
             ? <LagredeFilterInnhold filtergruppe="veileder"
-                lagretFilter={sortertLagredeFilter}
+                                    lagretFilter={sortertLagredeFilter}
             />
             : <div className="lagredefilter-emptystate">
                 <Normaltekst className="lagredefilter-emptystate__tekst">
@@ -36,9 +36,10 @@ function FilteringLagredeFilter() {
 
     return (
         <>
-            {
-                !(lagretFilterState.handling === HandlingsType.HENTE && lagretFilterState.status === STATUS.ERROR)  ? lagretFilterOK() : lagretFilterError()
-            }
+            {!(lagretFilterState.handling === HandlingsType.HENTE
+                && lagretFilterState.status === STATUS.ERROR)
+                ? lagretFilterOK()
+                : lagretFilterError()}
         </>
     );
 }

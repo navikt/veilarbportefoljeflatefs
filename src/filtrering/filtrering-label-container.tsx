@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
 } from './filter-konstanter';
-import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg } from '../ducks/filtrering';
-import { EnhetModell, FiltervalgModell } from '../model-interfaces';
-import { Kolonne, ListevisningState } from '../ducks/ui/listevisning';
-import { pagineringSetup } from '../ducks/paginering';
+import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg} from '../ducks/filtrering';
+import {EnhetModell, FiltervalgModell} from '../model-interfaces';
+import {Kolonne, ListevisningState} from '../ducks/ui/listevisning';
+import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 
 interface FiltreringLabelContainerProps {
@@ -91,7 +91,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
             } else if (value && typeof value === 'object') { // value er aktiviteter
                 muligMenIkkeValgt = harMuligMenIkkeValgtKolonne(listevisning, Kolonne.UTLOP_AKTIVITET);
                 return Object.entries(value)
-                    .filter(([_, aktivitetvalue]) => aktivitetvalue !== AktiviteterValg.NA)
+                    .filter(([_, aktivitetvalue]) => aktivitetvalue !== null)
                     .map(([aktivitetkey, aktivitetvalue]) => (
                         <FiltreringLabel
                             key={`aktivitet-${aktivitetkey}`}

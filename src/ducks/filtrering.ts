@@ -1,5 +1,6 @@
 import {FiltervalgModell} from '../model-interfaces';
 import {VELG_LAGRET_FILTER} from "./lagret-filter_action-reducers";
+import {OrNothing} from "../utils/types/types";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -9,11 +10,9 @@ export const ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER = 'filtrering/ENDRE_AKTIVI
 export const SLETT_AKTIVITETER_OG_TILTAK_FILTER = 'filtrering/SLETT_AKTIVITETER_OG_TILTAK_FILTER';
 export const VEILEDER_SOKT_FRA_TOOLBAR = 'filtrering/VEILEDER_SOKT_FRA_TOOLBAR';
 
-
 export enum AktiviteterValg {
     JA = 'JA',
-    NEI = 'NEI',
-    NA = 'NA'
+    NEI = 'NEI'
 }
 
 type AktivititetNykkel =
@@ -28,7 +27,7 @@ type AktivititetNykkel =
     | 'UTDANNINGAKTIVITET'
 
 export type FiltreringAktiviteterValg = {
-    [aktivitet in AktivititetNykkel]: AktiviteterValg;
+    [aktivitet in AktivititetNykkel]: OrNothing<AktiviteterValg>
 };
 
 //  Reducer

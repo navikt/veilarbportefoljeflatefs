@@ -3,7 +3,7 @@ import {LAGREDE_FILTER, SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE} from '../konstante
 const toggles = {
     [SPOR_OM_TILBAKEMELDING]: true,
     [VEDTAKSTOTTE]: true,
-    [LAGREDE_FILTER]: true
+    [LAGREDE_FILTER]: false
 };
 
 export default toggles;

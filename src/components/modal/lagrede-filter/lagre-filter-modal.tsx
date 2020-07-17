@@ -132,7 +132,6 @@ export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen
     useEffect(() => {
         if (saveRequestSent && tillatteHandlinger.includes(lagretFilterHandlingsType!)) {
             if (lagretFilterStatus === STATUS.PENDING) {
-                console.log("pending: ", lagretFilterStatus);
             } else if (lagretFilterStatus === STATUS.ERROR) {
                 setErrorModalErApen(true)
                 setSaveRequestSent(false)

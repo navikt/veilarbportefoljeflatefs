@@ -1,5 +1,5 @@
 import {FiltervalgModell} from "../../../model-interfaces";
-import {isEmptyArray} from "formik";
+import {isEmptyArray, isObject} from "formik";
 
 export function lagredeFilterListerErLik(lagretFilter: FiltervalgModell, nyttFilter: FiltervalgModell): boolean {
     return JSON.stringify(lagretFilter) === JSON.stringify(nyttFilter);
@@ -15,4 +15,14 @@ export function erObjektValuesTomt(minOversiktObjekt): boolean {
 
 function erValueTomt(value) {
     return value === null || value === "" || isEmptyArray(value) || erTomtObjekt(value)
+}
+
+export function antallFilter(minOversiktObjekt) {
+    return Object.values(minOversiktObjekt).filter(value => !erValueTomt(value))
+        .reduce((acc: number, filter) => isObject(filter)
+            ? acc + antallFilter(filter)
+            : Array.isArray(filter)
+                ? acc + filter.length
+                : acc + 1
+            , 0);
 }

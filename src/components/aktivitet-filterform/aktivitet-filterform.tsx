@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import SubmitKnapp from './../submit-knapp';
-import { AktiviteterValg, FiltreringAktiviteterValg } from '../../ducks/filtrering';
+import {FiltreringAktiviteterValg} from '../../ducks/filtrering';
 import './aktivitet-filterform.less';
 
 const aktivitetInitialState: FiltreringAktiviteterValg = {
-    'BEHANDLING': AktiviteterValg.NA,
-    'EGEN': AktiviteterValg.NA,
-    'GRUPPEAKTIVITET': AktiviteterValg.NA,
-    'IJOBB': AktiviteterValg.NA,
-    'MOTE': AktiviteterValg.NA,
-    'SOKEAVTALE': AktiviteterValg.NA,
-    'STILLING': AktiviteterValg.NA,
-    'TILTAK': AktiviteterValg.NA,
-    'UTDANNINGAKTIVITET': AktiviteterValg.NA
+    'BEHANDLING': null,
+    'EGEN': null,
+    'GRUPPEAKTIVITET': null,
+    'IJOBB': null,
+    'MOTE': null,
+    'SOKEAVTALE': null,
+    'STILLING': null,
+    'TILTAK': null,
+    'UTDANNINGAKTIVITET': null
 };
 
 function AktivitetFilterform(props) {
 
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter));
-
     const handleRadioChange = (aktivitetKey, verdi) => {
         setValgteAktiviteter(prevState => ({...prevState, [aktivitetKey]: verdi}));
     };

@@ -1,6 +1,6 @@
 import React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import TittelValg, { ytelseFilterErAktiv } from '../utils/utils';
+import TittelValg, {ytelseFilterErAktiv} from '../utils/utils';
 import {
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
@@ -11,9 +11,8 @@ import {
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
-import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
-import { Kolonne, ListevisningType } from '../ducks/ui/listevisning';
-import { AktiviteterValg } from '../ducks/filtrering';
+import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {Kolonne, ListevisningType} from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './enhetsportefolje.less';
@@ -22,7 +21,7 @@ import {OrNothing} from "../utils/types/types";
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
-        const valgteAktiviteter = Object.values(aktiviteter).filter((aktivitetvalg) => aktivitetvalg !== AktiviteterValg.NA);
+        const valgteAktiviteter = Object.values(aktiviteter).filter((aktivitetvalg) => aktivitetvalg !== null);
         return valgteAktiviteter && valgteAktiviteter.length > 0;
 
     }

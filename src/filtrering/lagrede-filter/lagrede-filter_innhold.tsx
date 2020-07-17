@@ -76,7 +76,13 @@ interface LagretFilterRadProps {
 }
 
 function LagretFilterRad({filter, hanterVelgFilter, onClickRedigerKnapp, filterState}: LagretFilterRadProps) {
-    const erValgt = lagredeFilterListerErLik(filter.filterValg, filterState);
+    const erValgt = lagredeFilterListerErLik(filter.filterValg, filterState)
+
+    useEffect(() => {
+        if (erValgt) {
+            logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter')
+        }
+    }, [erValgt])
 
     return (
         <div className="lagrede-filter__rad">
