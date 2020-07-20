@@ -7,10 +7,7 @@ export function harGjortEndringerIGruppeNavn(gruppeNavn: string, initialGruppeNa
 }
 
 export function harGjortEndringer(redigertListe: string[], initialstateListe: string[], gruppeNavn: string, initialGruppeNavn: string) {
-    if (harGjortEndringerIGruppeNavn(gruppeNavn, initialGruppeNavn)) {
-        return true;
-    }
-    return harGjortEndringerIFilterValg(redigertListe, initialstateListe);
+    return harGjortEndringerIGruppeNavn(gruppeNavn, initialGruppeNavn) || harGjortEndringerIFilterValg(redigertListe, initialstateListe);
 }
 
 export function veilederlisterErLik(lagretVeilederGruppe: string[], veiledereFilter: string[]) : boolean {

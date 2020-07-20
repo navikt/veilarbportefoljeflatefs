@@ -1,12 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import {
-    avmarkerLagretFilter,
-    LagretFilter_ActionReducers,
-    velgLagretFilter,
-} from '../../ducks/lagret-filter_action-reducers';
+import {avmarkerLagretFilter, LagretFilter, velgLagretFilter,} from '../../ducks/lagret-filter';
 import {AppState} from '../../reducer';
 import {FiltervalgModell} from '../../model-interfaces';
 import {lagredeFilterListerErLik} from "../../components/modal/lagrede-filter/lagrede-filter-utils";
@@ -16,7 +12,7 @@ import {LagreFilterModal, Visningstype} from "../../components/modal/lagrede-fil
 import './lagrede-filter_innhold.less'
 
 interface LagredeFilterInnholdProps {
-    lagretFilter: LagretFilter_ActionReducers[]
+    lagretFilter: LagretFilter[]
     filterValg?: FiltervalgModell;
     filtergruppe?: string;
 }
@@ -31,21 +27,21 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const dispatch = useDispatch();
 
     const valgtFilter = props.lagretFilter.find(elem => lagredeFilterListerErLik(elem.filterValg, filtreringMinOversikt));
-    const finnLagretFilter = (filterId) => props.lagretFilter.find((elem) => elem.filterId === parseInt(filterId));
+    const finnLagretFilter = useCallback((filterId) => props.lagretFilter.find((elem) => elem.filterId === parseInt(filterId)),[props.lagretFilter]);
 
-    const velgFilter = (filterId: string) => {
+    const velgFilter = useCallback((filterId: string) => {
         const filterVerdi = finnLagretFilter(filterId);
 
         logEvent('portefolje.metrikker.lagredefilter.velg-gruppe',
             {}, {filterId: filterVerdi!.filterId, sideNavn: finnSideNavn()});
         dispatch(velgLagretFilter(filterVerdi!));
-    };
+    },[finnLagretFilter, dispatch]);
 
     useEffect(() => {
         valgtFilter
             ? velgFilter(valgtFilter.filterId.toString())
             : dispatch(avmarkerLagretFilter());
-    }, [valgtFilter, dispatch]);
+    }, [valgtFilter, dispatch, velgFilter]);
 
     return (
         <div className={className} ref={outerDivRef}>
@@ -70,7 +66,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
 interface LagretFilterRadProps {
     hanterVelgFilter: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    filter: LagretFilter_ActionReducers;
+    filter: LagretFilter;
     filterState: FiltervalgModell;
     onClickRedigerKnapp: () => void;
 }

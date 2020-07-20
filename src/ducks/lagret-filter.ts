@@ -24,7 +24,7 @@ export const VELG_LAGRET_FILTER = 'lagredefilter_velg/VELG_LAGRET_FILTER';
 export const AVMARKER_LAGRET_FILTER = 'lagredefilter_velg/AVMARKER_LAGRET_FILTER';
 
 
-export interface LagretFilter_ActionReducers {
+export interface LagretFilter {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
@@ -33,10 +33,10 @@ export interface LagretFilter_ActionReducers {
 
 export interface LagretFilterState {
     status: string;
-    data: LagretFilter_ActionReducers[];
-    valgtLagretFilter: OrNothing<LagretFilter_ActionReducers>;
+    data: LagretFilter[];
+    valgtLagretFilter: OrNothing<LagretFilter>;
     sisteValgteLagredeFilter: OrNothing<number>
-    handling: HandlingsType | null;
+    handlingType: HandlingsType | null;
 }
 
 export interface RedigerFilter {
@@ -61,7 +61,7 @@ const initialState = {
     status: STATUS.NOT_STARTED,
     data: [],
     valgtLagretFilter: null,
-    handling: null,
+    handlingType: null,
     sisteValgteLagredeFilter: null
 };
 
@@ -116,7 +116,7 @@ export default function reducer(state: LagretFilterState = initialState, action)
 
 // Action Creators
 
-export function velgLagretFilter(filterVerdi: LagretFilter_ActionReducers) {
+export function velgLagretFilter(filterVerdi: LagretFilter) {
     return {
         type: VELG_LAGRET_FILTER,
         data: filterVerdi,

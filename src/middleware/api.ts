@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
-import { NyGruppe, RedigerGruppe } from '../ducks/veiledergrupper_action-reducers';
-import { VeilederModell } from '../model-interfaces';
-import {NyttFilter, RedigerFilter} from "../ducks/lagret-filter_action-reducers";
+import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
+import {NyGruppe, RedigerGruppe} from '../ducks/veiledergrupper_action-reducers';
+import {VeilederModell} from '../model-interfaces';
+import {NyttFilter, RedigerFilter} from "../ducks/lagret-filter";
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';

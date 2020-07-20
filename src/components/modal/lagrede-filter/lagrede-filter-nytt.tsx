@@ -1,27 +1,50 @@
 import {Input} from "nav-frontend-skjema";
 import {Hovedknapp} from "nav-frontend-knapper";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../../reducer";
-import {lagreNyttFilter} from "../../../ducks/lagret-filter_action-reducers";
+import {lagreNyttFilter} from "../../../ducks/lagret-filter";
 import {Normaltekst} from "nav-frontend-typografi";
-import {erTomtObjekt} from "./lagrede-filter-utils";
+import {erTomtObjekt, feilValidering} from "./lagrede-filter-utils";
+import {STATUS} from "../../../ducks/utils";
+import {LagretFilterValideringsError} from "./lagre-filter-modal";
+import {ErrorModalType, LagredeFilterVarselModal} from "./varsel-modal";
 
-export function LagreNytt(props: { lukkModal, feilValidering, feilmelding, saveRequestSent, filterNavn, setFilterNavn }) {
+export function LagreNytt(props: { lukkModal}) {
 
     const filterValg = useSelector((state: AppState) => state.filtreringMinoversikt)
+    const {status, data} = useSelector((state: AppState) => state.lagretFilter)
+    const [filterNavn, setFilterNavn] = useState("")
+    const [saveRequestSent, setSaveRequestSent] = useState(false)
+    const [errorModalErApen, setErrorModalErApen] = useState(false)
+    const [feilmelding, setFeilmelding] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError)
+    const lukkModal = props.lukkModal
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        if (saveRequestSent) {
+            if (status === STATUS.PENDING) {
+            } else if (status === STATUS.ERROR) {
+                setErrorModalErApen(true)
+                setSaveRequestSent(false)
+            } else if (status === STATUS.OK) {
+                setErrorModalErApen(false)
+                setSaveRequestSent(false)
+                lukkModal()
+            }
+        }
+    }, [status, saveRequestSent, lukkModal])
+
     const doLagreNyttFilter = () => {
-        const trimmetFilterNavn = props.filterNavn.trim()
-        const feilmelding = props.feilValidering(trimmetFilterNavn)
+        const trimmetFilterNavn = filterNavn.trim()
+        setFeilmelding(feilValidering(trimmetFilterNavn, data))
 
         if (erTomtObjekt(feilmelding)) {
             dispatch(lagreNyttFilter({
                 filterNavn: trimmetFilterNavn,
                 filterValg: filterValg
             }))
-            props.saveRequestSent(true)
+            setSaveRequestSent(true)
         }
     }
 
@@ -31,14 +54,19 @@ export function LagreNytt(props: { lukkModal, feilValidering, feilmelding, saveR
             <br/>
             <Input
                 label="Navn:"
-                value={props.filterNavn}
-                onChange={(e) => props.setFilterNavn(e.target.value)}
-                feil={props.feilmelding.filterNavn}
+                value={filterNavn}
+                onChange={(e) => setFilterNavn(e.target.value)}
+                feil={feilmelding.filterNavn}
             />
             <div className="lagret-filter-knapp-wrapper">
                 <Hovedknapp mini onClick={doLagreNyttFilter}>Lagre</Hovedknapp>
             </div>
-
+            <LagredeFilterVarselModal
+                filterNavn={filterNavn}
+                erApen = {errorModalErApen}
+                setErrorModalErApen = {setErrorModalErApen}
+                modalType={ErrorModalType.LAGRE}
+            />
         </>
     )
 }

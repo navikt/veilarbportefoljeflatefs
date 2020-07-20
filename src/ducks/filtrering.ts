@@ -1,5 +1,5 @@
 import {FiltervalgModell} from '../model-interfaces';
-import {VELG_LAGRET_FILTER} from "./lagret-filter_action-reducers";
+import {VELG_LAGRET_FILTER} from "./lagret-filter";
 import {OrNothing} from "../utils/types/types";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';

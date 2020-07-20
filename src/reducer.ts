@@ -12,7 +12,7 @@ import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import veiledergrupperLagretFilterReducer, {VeiledergrupperLagretFilterState} from './ducks/veiledergrupper_action-reducers';
-import lagretFilterReducer, {LagretFilterState} from './ducks/lagret-filter_action-reducers';
+import lagretFilterReducer, {LagretFilterState} from './ducks/lagret-filter';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
 import listevisningReducer, {

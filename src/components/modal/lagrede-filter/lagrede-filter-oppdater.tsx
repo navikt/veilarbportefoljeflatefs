@@ -1,41 +1,73 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../../reducer";
-import {lagreEndringer, slettFilter} from "../../../ducks/lagret-filter_action-reducers";
+import {LagretFilterValideringsError} from "./lagre-filter-modal";
+import {STATUS} from "../../../ducks/utils";
+import {erTomtObjekt, feilValidering} from "./lagrede-filter-utils";
 import {Input} from "nav-frontend-skjema";
 import {Hovedknapp, Knapp} from "nav-frontend-knapper";
+import {ErrorModalType, LagredeFilterVarselModal} from "./varsel-modal";
 import BekreftSlettingModal from "../bekreftelse-modal/bekreft-sletting-modal";
-import {erTomtObjekt} from "./lagrede-filter-utils";
+import {lagreEndringer, slettFilter} from "../../../ducks/lagret-filter";
 
-export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, feilValidering, feil, saveRequestSent, setFilterNavn }) {
+export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }) {
 
     const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false)
 
     const dispatch = useDispatch();
     const selector = useSelector((state: AppState) => state.filtreringMinoversikt)
+    const {status, data} = useSelector((state: AppState) => state.lagretFilter)
     const [nyttFilterNavn, setNyttFilterNavn] = useState<string>(props.gammeltFilterNavn)
+
+    const [errorModalErApen, setErrorModalErApen] = useState(false)
+    const [saveRequestSent, setSaveRequestSent] = useState(false)
+    const [deleteRequestSent, setDeleteRequestSent] = useState(false)
+
+    const [feilmelding, setFeilmelding] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError)
+    const { gammeltFilterNavn, filterId, lukkModal } = props
+
+    useEffect(() => {
+        if (saveRequestSent) {
+            if (status === STATUS.PENDING) {
+            } else if (status === STATUS.ERROR) {
+                setSaveRequestSent(false)
+                setErrorModalErApen(true)
+            } else if (status === STATUS.OK) {
+                setSaveRequestSent(false)
+                lukkModal()
+            }
+        }
+        else if (deleteRequestSent){
+            if (status === STATUS.PENDING) {
+            } else if (status === STATUS.ERROR) {
+                setDeleteRequestSent(false)
+                setErrorModalErApen(true)
+            } else if (status === STATUS.OK) {
+                setDeleteRequestSent(false)
+                lukkModal()
+            }
+        }
+    }, [status, saveRequestSent, deleteRequestSent, lukkModal, nyttFilterNavn])
 
     const doLagreEndringer = () => {
         const trimmetFilterNavn = nyttFilterNavn.trim()
-        const feilmelding = props.feilValidering(trimmetFilterNavn, props.filterId)
+        setFeilmelding(feilValidering(trimmetFilterNavn, data, filterId))
 
         if (erTomtObjekt(feilmelding)) {
-            props.setFilterNavn(trimmetFilterNavn)
+            setNyttFilterNavn(trimmetFilterNavn)
             dispatch(lagreEndringer({
                 filterNavn: trimmetFilterNavn,
                 filterValg: selector,
-                filterId: props.filterId
+                filterId: filterId
             }))
-            props.saveRequestSent(true)
+            setSaveRequestSent(true)
         }
     }
     const doSlettFilter = () => {
-        props.setFilterNavn(nyttFilterNavn)
         dispatch(slettFilter(
-            props.filterId
+            filterId
         ))
-        //TODO add lukkModal for bekreftModal
-        props.saveRequestSent(true)
+        setDeleteRequestSent(true)
     }
 
     return (
@@ -44,7 +76,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, 
                 label="Navn:"
                 value={nyttFilterNavn}
                 onChange={(e) => setNyttFilterNavn(e.target.value)}
-                feil={props.feil.filterNavn}
+                feil={feilmelding.filterNavn}
             />
             <div className="lagret-filter-knapp-wrapper">
                 <Hovedknapp mini onClick={doLagreEndringer}>Lagre</Hovedknapp>
@@ -57,7 +89,13 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, 
                     doSlettFilter()
                 }}
                 tittel="Slette lagret filter"
-                navn={props.gammeltFilterNavn}/>
+                navn={gammeltFilterNavn}/>
+            <LagredeFilterVarselModal
+                filterNavn={nyttFilterNavn}
+                erApen={errorModalErApen}
+                modalType={saveRequestSent ? ErrorModalType.OPPDATERE : ErrorModalType.SLETTE}
+                setErrorModalErApen = {setErrorModalErApen}
+            />
         </>
     )
 }

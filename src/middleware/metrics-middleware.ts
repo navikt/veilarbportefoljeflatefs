@@ -1,8 +1,4 @@
-import {
-    ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
-    ENDRE_FILTER,
-    VEILEDER_SOKT_FRA_TOOLBAR
-} from '../ducks/filtrering';
+import {ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER, ENDRE_FILTER, VEILEDER_SOKT_FRA_TOOLBAR} from '../ducks/filtrering';
 import {logEvent} from '../utils/frontend-logger';
 import {SETUP} from '../ducks/paginering';
 import {SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER} from '../ducks/portefolje';
@@ -17,10 +13,12 @@ import {
 } from '../ducks/veiledergrupper_action-reducers';
 import {
     NY_LAGREDEFILTER_FEILET,
-    NY_LAGREDEFILTER_OK, REDIGER_LAGREDEFILTER_FEILET,
-    REDIGER_LAGREDEFILTER_OK, SLETT_LAGREDEFILTER_FEILET,
+    NY_LAGREDEFILTER_OK,
+    REDIGER_LAGREDEFILTER_FEILET,
+    REDIGER_LAGREDEFILTER_OK,
+    SLETT_LAGREDEFILTER_FEILET,
     SLETT_LAGREDEFILTER_OK
-} from "../ducks/lagret-filter_action-reducers";
+} from "../ducks/lagret-filter";
 import {antallFilter} from "../components/modal/lagrede-filter/lagrede-filter-utils";
 
 interface FilterEndringData {

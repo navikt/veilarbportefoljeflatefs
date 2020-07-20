@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import {FiltervalgModell} from '../model-interfaces';
@@ -11,8 +12,7 @@ import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
 import FilteringLagredeFilter from "./lagrede-filter/filtrering-lagrede-filter";
-import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter_action-reducers";
-import {useEffect} from "react";
+import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
 import {AppState} from "../reducer";
 import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";

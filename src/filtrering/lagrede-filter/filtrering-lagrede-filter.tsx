@@ -4,7 +4,7 @@ import {AppState} from '../../reducer';
 import {Normaltekst} from 'nav-frontend-typografi';
 import LagredeFilterInnhold from "./lagrede-filter_innhold";
 import {AlertStripeFeil} from "nav-frontend-alertstriper";
-import {HandlingsType} from "../../ducks/lagret-filter_action-reducers";
+import {HandlingsType} from "../../ducks/lagret-filter";
 import {STATUS} from "../../ducks/utils";
 
 
@@ -36,7 +36,7 @@ function FilteringLagredeFilter() {
 
     return (
         <>
-            {!(lagretFilterState.handling === HandlingsType.HENTE
+            {!(lagretFilterState.handlingType === HandlingsType.HENTE
                 && lagretFilterState.status === STATUS.ERROR)
                 ? lagretFilterOK()
                 : lagretFilterError()}

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Modal from "../modal";
 import {useSelector} from "react-redux";
 import {AppState} from "../../../reducer";
@@ -7,10 +7,8 @@ import "./lagret-filter.less"
 import {OppdaterFilter} from "./lagrede-filter-oppdater";
 import {LagreNytt} from "./lagrede-filter-nytt";
 import {OrNothing} from "../../../utils/types/types";
-import {Innholdstittel, Normaltekst} from "nav-frontend-typografi";
-import {HandlingsType} from "../../../ducks/lagret-filter_action-reducers";
-import {STATUS} from "../../../ducks/utils";
-import {VarselModal, VarselModalType} from "../varselmodal/varselmodal";
+import {Normaltekst} from "nav-frontend-typografi";
+
 
 export enum Visningstype {
     MENY,
@@ -24,43 +22,13 @@ export interface LagretFilterValideringsError {
 
 export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen: boolean, onRequestClose: () => void, erNavnEllerFnrBrukt? }) {
 
-    const valgtLagretFilter = useSelector((state: AppState) => state.lagretFilter.valgtLagretFilter)
-    const sisteValgteLagredeFilter = useSelector((state: AppState) => state.lagretFilter.sisteValgteLagredeFilter)
-    const lagredeFilter = useSelector((state: AppState) => state.lagretFilter.data)
-    const lagretFilterHandlingsType = useSelector((state: AppState) => state.lagretFilter.handling)
-    const lagretFilterStatus = useSelector((state: AppState) => state.lagretFilter.status)
-
+    const {valgtLagretFilter, sisteValgteLagredeFilter, data} = useSelector((state: AppState) => state.lagretFilter)
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(props.velgVisningstype)
-    const [lagretFilterValidering, setLagretFilterValidering] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError)
-    const [errorModalErApen, setErrorModalErApen] = useState(false)
-    const [filterNavn, setFilterNavn] = useState<string>("")
-
-    const lagretFilterNavn = (filterId) => lagredeFilter.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
-    const [saveRequestSent, setSaveRequestSent] = useState(false)
-    const tillatteHandlinger = [HandlingsType.NYTT, HandlingsType.REDIGERE, HandlingsType.SLETTE]
-
+    const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
 
     const lukkModal = () => {
         props.onRequestClose();
         setValgtVisningstype(props.velgVisningstype)
-    }
-
-    const feilValidering = (filterNavn, filterId?) => {
-        let feilmelding: any = {} as LagretFilterValideringsError
-        if (!filterNavn) {
-            feilmelding.filterNavn = "Lagret filter mangler navn, legg inn filternavn."
-        }
-
-        if (filterNavn.length > 255) {
-            feilmelding.filterNavn = "Filternavn er for langt, kan ikke ha mer enn 255 bokstaver."
-        }
-
-        if (lagredeFilter.find(elem => elem.filterId !== filterId && elem.filterNavn.toLowerCase() === filterNavn.toLowerCase())) {
-            feilmelding.filterNavn = "Filternavn er allerede i bruk."
-        }
-
-        setLagretFilterValidering(feilmelding)
-        return feilmelding
     }
 
     const lagreNyttFilterKnapp = () => {
@@ -129,20 +97,6 @@ export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen
         return "Lagre filter"
     }
 
-    useEffect(() => {
-        if (saveRequestSent && tillatteHandlinger.includes(lagretFilterHandlingsType!)) {
-            if (lagretFilterStatus === STATUS.PENDING) {
-            } else if (lagretFilterStatus === STATUS.ERROR) {
-                setErrorModalErApen(true)
-                setSaveRequestSent(false)
-            } else if (lagretFilterStatus === STATUS.OK) {
-                setSaveRequestSent(false)
-                props.onRequestClose();
-                setValgtVisningstype(props.velgVisningstype)
-            }
-        }
-    }, [lagretFilterStatus, lagretFilterHandlingsType, saveRequestSent, tillatteHandlinger, props])
-
     return (
         <>
             <Modal
@@ -160,64 +114,17 @@ export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen
 
                     {valgtVisningstype === Visningstype.LAGRE_NYTT &&
                     <LagreNytt
-                        feilValidering={feilValidering}
-                        feilmelding={lagretFilterValidering}
                         lukkModal={lukkModal}
-                        saveRequestSent={setSaveRequestSent}
-                        filterNavn={filterNavn}
-                        setFilterNavn={setFilterNavn}
                     />}
 
                     {valgtVisningstype === Visningstype.OPPDATER &&
                     <OppdaterFilter
                         gammeltFilterNavn={lagretFilterNavn(valgtLagretFilter?.filterId)}
                         filterId={valgtLagretFilter?.filterId}
-                        feilValidering={feilValidering}
-                        feil={lagretFilterValidering}
                         lukkModal={lukkModal}
-                        setFilterNavn={setFilterNavn}
-                        saveRequestSent={setSaveRequestSent}
                     />}
                 </div>
             </Modal>
-
-            <VarselModal contentLabel="Error"
-                         onRequestClose={() => setErrorModalErApen(false)}
-                         isOpen={errorModalErApen}
-                         type={VarselModalType.FEIL}
-                         closeButton={false}>
-                {
-                    lagretFilterHandlingsType === HandlingsType.NYTT &&
-                    <>
-                        <Innholdstittel>Filteret kunne ikke opprettes</Innholdstittel>
-                        <br/>
-                        <Normaltekst>Det oppsto en feil, og filteret "<b>{filterNavn}</b>" kunne ikke opprettes. Prøv
-                            igjen senere.</Normaltekst>
-                    </>
-                }
-                {
-                    lagretFilterHandlingsType === HandlingsType.REDIGERE &&
-                    <>
-                        <Innholdstittel>Filteret kunne ikke lagres</Innholdstittel>
-                        <br/>
-                        <Normaltekst>Det oppsto en feil, og filteret "<b>{filterNavn}</b>" kunne ikke lagres. Prøv
-                            igjen senere.</Normaltekst>
-                    </>}
-                {
-                    lagretFilterHandlingsType === HandlingsType.SLETTE &&
-                    <>
-                        <Innholdstittel>Filteret kunne ikke slettes</Innholdstittel>
-                        <br/>
-                        <Normaltekst>Det oppsto en feil, og filteret "<b>{filterNavn}</b>" kunne ikke slettes. Prøv
-                            igjen senere.</Normaltekst>
-                    </>
-                }
-                <Hovedknapp mini
-                            className="error-knapp"
-                            onClick={() => setErrorModalErApen(false)}>
-                    Lukk
-                </Hovedknapp>
-            </VarselModal>
         </>
     );
 }
