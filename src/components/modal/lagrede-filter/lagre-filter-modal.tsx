@@ -119,8 +119,8 @@ export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen
 
                     {valgtVisningstype === Visningstype.OPPDATER &&
                     <OppdaterFilter
-                        gammeltFilterNavn={lagretFilterNavn(valgtLagretFilter?.filterId)}
-                        filterId={valgtLagretFilter?.filterId}
+                        gammeltFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
+                        filterId={sisteValgteLagredeFilter!}
                         lukkModal={lukkModal}
                     />}
                 </div>

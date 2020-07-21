@@ -11,7 +11,7 @@ export function erTomtObjekt(objekt): boolean {
 }
 
 export function erObjektValuesTomt(minOversiktObjekt): boolean {
-    return Object.values(minOversiktObjekt).filter(value => !erValueTomt(value)).length === 0
+    return Object.values(minOversiktObjekt).every(value => erValueTomt(value))
 }
 
 function erValueTomt(value) {
@@ -28,7 +28,7 @@ export function antallFilter(minOversiktObjekt) {
             , 0);
 }
 
-export function feilValidering (filterNavn, eksisterendeFilter, filterId?, ) {
+export function feilValidering (filterNavn, eksisterendeFilter, filterId?) {
     let feilmelding: any = {} as LagretFilterValideringsError
     if (!filterNavn) {
         feilmelding.filterNavn = "Lagret filter mangler navn, legg inn filternavn."

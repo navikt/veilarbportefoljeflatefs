@@ -3,12 +3,12 @@ import {Hovedknapp} from "nav-frontend-knapper";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../../reducer";
-import {lagreNyttFilter} from "../../../ducks/lagret-filter";
 import {Normaltekst} from "nav-frontend-typografi";
 import {erTomtObjekt, feilValidering} from "./lagrede-filter-utils";
 import {STATUS} from "../../../ducks/utils";
 import {LagretFilterValideringsError} from "./lagre-filter-modal";
 import {ErrorModalType, LagredeFilterVarselModal} from "./varsel-modal";
+import {lagreNyttFilter} from "../../../ducks/lagret-filter";
 
 export function LagreNytt(props: { lukkModal}) {
 
@@ -17,7 +17,7 @@ export function LagreNytt(props: { lukkModal}) {
     const [filterNavn, setFilterNavn] = useState("")
     const [saveRequestSent, setSaveRequestSent] = useState(false)
     const [errorModalErApen, setErrorModalErApen] = useState(false)
-    const [feilmelding, setFeilmelding] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError)
+    const [feilmelding, setFeilmelding] = useState({} as LagretFilterValideringsError)
     const lukkModal = props.lukkModal
     const dispatch = useDispatch();
 
@@ -37,9 +37,10 @@ export function LagreNytt(props: { lukkModal}) {
 
     const doLagreNyttFilter = () => {
         const trimmetFilterNavn = filterNavn.trim()
-        setFeilmelding(feilValidering(trimmetFilterNavn, data))
+        const feilValideringResponse = feilValidering(trimmetFilterNavn, data)
+        setFeilmelding(feilValideringResponse)
 
-        if (erTomtObjekt(feilmelding)) {
+        if (erTomtObjekt(feilValideringResponse)) {
             dispatch(lagreNyttFilter({
                 filterNavn: trimmetFilterNavn,
                 filterValg: filterValg

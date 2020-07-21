@@ -51,9 +51,10 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
 
     const doLagreEndringer = () => {
         const trimmetFilterNavn = nyttFilterNavn.trim()
-        setFeilmelding(feilValidering(trimmetFilterNavn, data, filterId))
+        const feilValideringResponse = feilValidering(trimmetFilterNavn, data, filterId)
+        setFeilmelding(feilValideringResponse)
 
-        if (erTomtObjekt(feilmelding)) {
+        if (erTomtObjekt(feilValideringResponse)) {
             setNyttFilterNavn(trimmetFilterNavn)
             dispatch(lagreEndringer({
                 filterNavn: trimmetFilterNavn,
