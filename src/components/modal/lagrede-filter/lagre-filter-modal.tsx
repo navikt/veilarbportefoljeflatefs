@@ -2,12 +2,12 @@ import React, {useState} from "react";
 import Modal from "../modal";
 import {useSelector} from "react-redux";
 import {AppState} from "../../../reducer";
-import {Hovedknapp, Knapp} from "nav-frontend-knapper";
 import "./lagret-filter.less"
 import {OppdaterFilter} from "./lagrede-filter-oppdater";
 import {LagreNytt} from "./lagrede-filter-nytt";
 import {OrNothing} from "../../../utils/types/types";
-import {Normaltekst} from "nav-frontend-typografi";
+import hiddenIf from "../../hidden-if/hidden-if";
+import {Meny} from "./lagrede-filter-meny";
 
 
 export enum Visningstype {
@@ -20,81 +20,24 @@ export interface LagretFilterValideringsError {
     filterNavn: OrNothing<string>
 }
 
-export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen: boolean, onRequestClose: () => void, erNavnEllerFnrBrukt? }) {
+const VisningstypeToTittel = new Map<Visningstype, string>([
+    [Visningstype.LAGRE_NYTT, 'Lagre nytt filter'],
+    [Visningstype.OPPDATER, 'Endre filter'],
+    [Visningstype.MENY, 'Lagre filter']
+]);
 
-    const {valgtLagretFilter, sisteValgteLagredeFilter, data} = useSelector((state: AppState) => state.lagretFilter)
+const HiddenIfMeny = hiddenIf(Meny);
+const HiddenIfLagreNytt = hiddenIf(LagreNytt)
+const HiddenIfOppdaterFilter = hiddenIf(OppdaterFilter);
+
+export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen: boolean, onRequestClose: () => void, erNavnEllerFnrBrukt? }) {
+    const {sisteValgteLagredeFilter, data} = useSelector((state: AppState) => state.lagretFilter)
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(props.velgVisningstype)
     const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
 
     const lukkModal = () => {
         props.onRequestClose();
         setValgtVisningstype(props.velgVisningstype)
-    }
-
-    const lagreNyttFilterKnapp = () => {
-        return (
-            <Hovedknapp className="ny-knapp blokk-xs"
-                        onClick={() => setValgtVisningstype(Visningstype.LAGRE_NYTT)}>
-                Lagre som nytt filter
-            </Hovedknapp>
-        )
-    }
-
-    const oppdaterFilterKnapp = () => {
-        return (
-            <Knapp className="eksisterende-knapp"
-                   onClick={() => setValgtVisningstype(Visningstype.OPPDATER)}>
-                Oppdater eksisterende filter
-            </Knapp>
-        )
-    }
-
-
-    const Meny = () => {
-        return (
-            <div className="lagret-filter-meny-modal__wrapper">
-                {/* - valgtLagretFilter != null -> active filter (intentional, unintentional), offer update of selected filter */}
-                {/* - sisteValgteLagredeFilter == null -> offer to save as new filter */}
-                {/* - sisteValgteLagredeFilter != null -> offer to save as new filter or to update existing */}
-                {/* - hvis fødselsnummer/navn er tilstede -> offer a message saying you cannot save filter with this option*/}
-
-                {props.erNavnEllerFnrBrukt ?
-                    <>
-                        <Normaltekst>Fødselsnummer og navn kan ikke brukes i lagrede filter.</Normaltekst>
-                        <Normaltekst>Du må fjerne fødselsnummer og navn for å lagre filteret.</Normaltekst>
-                    </>
-                    : valgtLagretFilter
-                        ? <>
-                            <Normaltekst>Det finnes allerede et lagret
-                                filter <b>"{valgtLagretFilter!.filterNavn}"</b> med
-                                denne filterkombinasjonen. Oppdater navnet ved å klikke på knappen under.
-                            </Normaltekst>
-                            <br/>
-                            {oppdaterFilterKnapp()}
-                        </>
-                        : sisteValgteLagredeFilter
-                            ? <>
-                                {lagreNyttFilterKnapp()}
-                                <Normaltekst>Oppdater <b>"{lagretFilterNavn(sisteValgteLagredeFilter)}"</b> ved å klikke
-                                    på
-                                    knappen under.</Normaltekst>
-                                {oppdaterFilterKnapp()}
-                            </>
-                            : <>
-                                {lagreNyttFilterKnapp()}
-                            </>
-                }
-            </div>
-        )
-    }
-
-    const modalTittel = () => {
-        if (valgtVisningstype === Visningstype.LAGRE_NYTT) {
-            return "Lagre nytt filter"
-        } else if (valgtVisningstype === Visningstype.OPPDATER) {
-            return "Endre filter"
-        }
-        return "Lagre filter"
     }
 
     return (
@@ -104,25 +47,23 @@ export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen
                 contentLabel="Lagre filter meny modal"
                 isOpen={props.isOpen}
                 onRequestClose={lukkModal}
-                tittel={modalTittel()}
+                tittel={VisningstypeToTittel.get(valgtVisningstype)}
             >
                 <div className="modal-visningstype">
+                    <HiddenIfMeny hidden={valgtVisningstype !== Visningstype.MENY}
+                                  setValgtVisningstype={setValgtVisningstype}
+                                  sisteFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
+                                  erNavnEllerFnrBrukt={props.erNavnEllerFnrBrukt}
+                    />
 
-                    {valgtVisningstype === Visningstype.MENY &&
-                    <Meny/>
-                    }
+                    <HiddenIfLagreNytt hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
+                        lukkModal={lukkModal}/>
 
-                    {valgtVisningstype === Visningstype.LAGRE_NYTT &&
-                    <LagreNytt
-                        lukkModal={lukkModal}
-                    />}
-
-                    {valgtVisningstype === Visningstype.OPPDATER &&
-                    <OppdaterFilter
+                    <HiddenIfOppdaterFilter hidden={valgtVisningstype !== Visningstype.OPPDATER}
                         gammeltFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
                         filterId={sisteValgteLagredeFilter!}
                         lukkModal={lukkModal}
-                    />}
+                    />
                 </div>
             </Modal>
         </>

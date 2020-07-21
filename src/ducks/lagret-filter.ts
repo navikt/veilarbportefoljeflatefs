@@ -69,28 +69,28 @@ const initialState = {
 export default function reducer(state: LagretFilterState = initialState, action) {
     switch (action.type) {
         case HENT_LAGREDEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handling: HandlingsType.HENTE};
+            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.HENTE};
         case NY_LAGREDEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handling: HandlingsType.NYTT};
+            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.NYTT};
         case REDIGER_LAGREDEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handling: HandlingsType.REDIGERE};
+            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.REDIGERE};
         case SLETT_LAGREDEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handling: HandlingsType.SLETTE};
+            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.SLETTE};
         case HENT_LAGREDEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handling: HandlingsType.HENTE};
+            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.HENTE};
         case NY_LAGREDEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handling: HandlingsType.NYTT};
+            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.NYTT};
         case REDIGER_LAGREDEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handling: HandlingsType.REDIGERE};
+            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.REDIGERE};
         case SLETT_LAGREDEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handling: HandlingsType.SLETTE};
+            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.SLETTE};
         case HENT_LAGREDEFILTER_OK:
-            return {...state, status: STATUS.OK, data: action.data, handling: HandlingsType.HENTE};
+            return {...state, status: STATUS.OK, data: action.data, handlingType: HandlingsType.HENTE};
         case NY_LAGREDEFILTER_OK:
-            return {...state, status: STATUS.OK, data: state.data.concat(action.data), handling: HandlingsType.NYTT};
+            return {...state, status: STATUS.OK, data: state.data.concat(action.data),  handlingType: HandlingsType.NYTT};
         case REDIGER_LAGREDEFILTER_OK:
             return {
-                ...state, status: STATUS.OK, handling: HandlingsType.REDIGERE, data: state.data.map(elem => {
+                ...state, status: STATUS.OK, handlingType: HandlingsType.REDIGERE, data: state.data.map(elem => {
                         if (elem.filterId !== action.data.filterId) {
                             return elem;
                         }
@@ -102,7 +102,7 @@ export default function reducer(state: LagretFilterState = initialState, action)
             return {
                 ...state,
                 status: STATUS.OK,
-                handling: HandlingsType.SLETTE,
+                handlingType: HandlingsType.SLETTE,
                 data: state.data.filter(elem => elem.filterId !== action.data)
             };
         case VELG_LAGRET_FILTER:

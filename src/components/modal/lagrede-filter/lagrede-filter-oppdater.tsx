@@ -24,7 +24,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
     const [deleteRequestSent, setDeleteRequestSent] = useState(false)
 
     const [feilmelding, setFeilmelding] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError)
-    const { gammeltFilterNavn, filterId, lukkModal } = props
+    const {gammeltFilterNavn, filterId, lukkModal} = props
 
     useEffect(() => {
         if (saveRequestSent) {
@@ -36,8 +36,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
                 setSaveRequestSent(false)
                 lukkModal()
             }
-        }
-        else if (deleteRequestSent){
+        } else if (deleteRequestSent) {
             if (status === STATUS.PENDING) {
             } else if (status === STATUS.ERROR) {
                 setDeleteRequestSent(false)
@@ -49,7 +48,8 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
         }
     }, [status, saveRequestSent, deleteRequestSent, lukkModal, nyttFilterNavn])
 
-    const doLagreEndringer = () => {
+    const doLagreEndringer = (event) => {
+        event.preventDefault()
         const trimmetFilterNavn = nyttFilterNavn.trim()
         const feilValideringResponse = feilValidering(trimmetFilterNavn, data, filterId)
         setFeilmelding(feilValideringResponse)
@@ -73,16 +73,18 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
 
     return (
         <>
-            <Input
-                label="Navn:"
-                value={nyttFilterNavn}
-                onChange={(e) => setNyttFilterNavn(e.target.value)}
-                feil={feilmelding.filterNavn}
-            />
-            <div className="lagret-filter-knapp-wrapper">
-                <Hovedknapp mini onClick={doLagreEndringer}>Lagre</Hovedknapp>
-                <Knapp mini onClick={() => setVisBekreftSlettModal(true)}>Slett</Knapp>
-            </div>
+            <form onSubmit={(e) => doLagreEndringer(e)}>
+                <Input
+                    label="Navn:"
+                    value={nyttFilterNavn}
+                    onChange={(e) => setNyttFilterNavn(e.target.value)}
+                    feil={feilmelding.filterNavn}
+                />
+                <div className="lagret-filter-knapp-wrapper">
+                    <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>
+                    <Knapp mini onClick={() => setVisBekreftSlettModal(true)}>Slett</Knapp>
+                </div>
+            </form>
             <BekreftSlettingModal
                 isOpen={visBekreftSlettModal}
                 onRequestClose={() => setVisBekreftSlettModal(false)}
@@ -95,7 +97,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
                 filterNavn={nyttFilterNavn}
                 erApen={errorModalErApen}
                 modalType={saveRequestSent ? ErrorModalType.OPPDATERE : ErrorModalType.SLETTE}
-                setErrorModalErApen = {setErrorModalErApen}
+                setErrorModalErApen={setErrorModalErApen}
             />
         </>
     )

@@ -11,6 +11,7 @@ import {STATUS} from "../../ducks/utils";
 function FilteringLagredeFilter() {
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const lagretFilter = lagretFilterState.data;
+    const sortertLagredeFilter = lagretFilter.sort((forsteFilter, andreFilter) => forsteFilter.filterNavn.localeCompare(andreFilter.filterNavn));
 
     const lagretFilterOK = () => {
         return lagretFilter.length > 0
@@ -32,14 +33,12 @@ function FilteringLagredeFilter() {
         )
     }
 
-    const sortertLagredeFilter = lagretFilter.sort((forsteFilter, andreFilter) => forsteFilter.filterNavn.localeCompare(andreFilter.filterNavn));
-
     return (
         <>
-            {!(lagretFilterState.handlingType === HandlingsType.HENTE
+            {(lagretFilterState.handlingType === HandlingsType.HENTE
                 && lagretFilterState.status === STATUS.ERROR)
-                ? lagretFilterOK()
-                : lagretFilterError()}
+                ? lagretFilterError()
+                : lagretFilterOK()}
         </>
     );
 }

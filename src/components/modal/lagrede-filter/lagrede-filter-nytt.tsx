@@ -11,15 +11,15 @@ import {ErrorModalType, LagredeFilterVarselModal} from "./varsel-modal";
 import {lagreNyttFilter} from "../../../ducks/lagret-filter";
 
 export function LagreNytt(props: { lukkModal}) {
-
     const filterValg = useSelector((state: AppState) => state.filtreringMinoversikt)
     const {status, data} = useSelector((state: AppState) => state.lagretFilter)
     const [filterNavn, setFilterNavn] = useState("")
     const [saveRequestSent, setSaveRequestSent] = useState(false)
     const [errorModalErApen, setErrorModalErApen] = useState(false)
     const [feilmelding, setFeilmelding] = useState({} as LagretFilterValideringsError)
-    const lukkModal = props.lukkModal
     const dispatch = useDispatch();
+    const lukkModal = props.lukkModal
+
 
     useEffect(() => {
         if (saveRequestSent) {
@@ -33,35 +33,38 @@ export function LagreNytt(props: { lukkModal}) {
                 lukkModal()
             }
         }
-    }, [status, saveRequestSent, lukkModal])
+    }, [lukkModal, saveRequestSent, status])
 
-    const doLagreNyttFilter = () => {
+    const doLagreNyttFilter = (event) => {
+        event.preventDefault()
         const trimmetFilterNavn = filterNavn.trim()
         const feilValideringResponse = feilValidering(trimmetFilterNavn, data)
         setFeilmelding(feilValideringResponse)
 
         if (erTomtObjekt(feilValideringResponse)) {
+            setSaveRequestSent(true)
             dispatch(lagreNyttFilter({
                 filterNavn: trimmetFilterNavn,
                 filterValg: filterValg
             }))
-            setSaveRequestSent(true)
         }
     }
 
     return (
         <>
-            <Normaltekst>Du vil finne igjen filteret under "Lagrede filter".</Normaltekst>
-            <br/>
-            <Input
-                label="Navn:"
-                value={filterNavn}
-                onChange={(e) => setFilterNavn(e.target.value)}
-                feil={feilmelding.filterNavn}
-            />
-            <div className="lagret-filter-knapp-wrapper">
-                <Hovedknapp mini onClick={doLagreNyttFilter}>Lagre</Hovedknapp>
-            </div>
+            <form onSubmit={(e)=>doLagreNyttFilter(e)}>
+                <Normaltekst>Du vil finne igjen filteret under "Lagrede filter".</Normaltekst>
+                <br/>
+                <Input
+                    label="Navn:"
+                    value={filterNavn}
+                    onChange={(e) => setFilterNavn(e.target.value)}
+                    feil={feilmelding.filterNavn}
+                />
+                <div className="lagret-filter-knapp-wrapper">
+                    <Hovedknapp mini htmlType={"submit"}>Lagre</Hovedknapp>
+                </div>
+            </form>
             <LagredeFilterVarselModal
                 filterNavn={filterNavn}
                 erApen = {errorModalErApen}

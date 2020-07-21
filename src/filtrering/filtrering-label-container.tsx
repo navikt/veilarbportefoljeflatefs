@@ -2,9 +2,11 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
-    I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
+    I_AVTALT_AKTIVITET,
+    UTLOPTE_AKTIVITETER,
+    VENTER_PA_SVAR_FRA_BRUKER,
 } from './filter-konstanter';
-import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg} from '../ducks/filtrering';
+import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne, ListevisningState} from '../ducks/ui/listevisning';
 import {pagineringSetup} from '../ducks/paginering';
@@ -91,7 +93,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
             } else if (value && typeof value === 'object') { // value er aktiviteter
                 muligMenIkkeValgt = harMuligMenIkkeValgtKolonne(listevisning, Kolonne.UTLOP_AKTIVITET);
                 return Object.entries(value)
-                    .filter(([_, aktivitetvalue]) => aktivitetvalue !== null)
+                    .filter(([_, aktivitetvalue]) => aktivitetvalue !== AktiviteterValg.NA)
                     .map(([aktivitetkey, aktivitetvalue]) => (
                         <FiltreringLabel
                             key={`aktivitet-${aktivitetkey}`}

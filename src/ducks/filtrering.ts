@@ -1,6 +1,5 @@
 import {FiltervalgModell} from '../model-interfaces';
 import {VELG_LAGRET_FILTER} from "./lagret-filter";
-import {OrNothing} from "../utils/types/types";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -12,7 +11,8 @@ export const VEILEDER_SOKT_FRA_TOOLBAR = 'filtrering/VEILEDER_SOKT_FRA_TOOLBAR';
 
 export enum AktiviteterValg {
     JA = 'JA',
-    NEI = 'NEI'
+    NEI = 'NEI',
+    NA = 'NA'
 }
 
 type AktivititetNykkel =
@@ -27,7 +27,7 @@ type AktivititetNykkel =
     | 'UTDANNINGAKTIVITET'
 
 export type FiltreringAktiviteterValg = {
-    [aktivitet in AktivititetNykkel]: OrNothing<AktiviteterValg>
+    [aktivitet in AktivititetNykkel]: AktiviteterValg;
 };
 
 //  Reducer
@@ -62,6 +62,7 @@ function fjern(verdi, fjernVerdi) {
     } else if (fjernVerdi && typeof verdi === 'object') {
         return Object.entries(verdi)
             .filter(([key]) => key !== fjernVerdi)
+            .filter(([_,value]) => value !== AktiviteterValg.NA)
             .reduce((acc, [key, value]) => ({...acc, [key]: value}), {});
     } else if (fjernVerdi === null) {
         return null;

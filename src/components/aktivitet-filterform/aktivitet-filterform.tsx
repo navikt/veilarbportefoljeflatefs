@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
 import SubmitKnapp from './../submit-knapp';
-import {FiltreringAktiviteterValg} from '../../ducks/filtrering';
+import {AktiviteterValg, FiltreringAktiviteterValg} from '../../ducks/filtrering';
 import './aktivitet-filterform.less';
 
 const aktivitetInitialState: FiltreringAktiviteterValg = {
-    'BEHANDLING': null,
-    'EGEN': null,
-    'GRUPPEAKTIVITET': null,
-    'IJOBB': null,
-    'MOTE': null,
-    'SOKEAVTALE': null,
-    'STILLING': null,
-    'TILTAK': null,
-    'UTDANNINGAKTIVITET': null
+    'BEHANDLING': AktiviteterValg.NA,
+    'EGEN': AktiviteterValg.NA,
+    'GRUPPEAKTIVITET': AktiviteterValg.NA,
+    'IJOBB': AktiviteterValg.NA,
+    'MOTE': AktiviteterValg.NA,
+    'SOKEAVTALE': AktiviteterValg.NA,
+    'STILLING': AktiviteterValg.NA,
+    'TILTAK': AktiviteterValg.NA,
+    'UTDANNINGAKTIVITET': AktiviteterValg.NA
 };
 
 function AktivitetFilterform(props) {
