@@ -1,7 +1,6 @@
 import { initialState } from '../ducks/filtrering';
 import { veiledere } from './veiledere';
 import { LagretFilter } from '../ducks/lagret-filter';
-import { JSONArray } from 'yet-another-fetch-mock';
 import * as faker from 'faker/locale/nb_NO';
 
 export const veilederGrupper = () => {
@@ -43,6 +42,6 @@ export const veilederGrupper = () => {
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             },
 
-        ] as LagretFilter [] & JSONArray
+        ] as LagretFilter []
     );
 };
