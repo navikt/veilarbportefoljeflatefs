@@ -87,11 +87,10 @@ function MinoversiktSide() {
                                     listevisning={listevisning}
                                     className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                 />
-                                {lagredeFilterFeatureToggleErPa &&
-                                <Knapp className="lagre-filter-knapp" mini hidden={erLagreKnappSkjult}
+                                <Knapp className="lagre-filter-knapp" mini hidden={erLagreKnappSkjult || !lagredeFilterFeatureToggleErPa}
                                        onClick={() => setLagretFilterMenyModalErApen(true)}>
                                     Lagre filter
-                                </Knapp>}
+                                </Knapp>
                             </div>
                             <div className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <TabellOverskrift
