@@ -3,6 +3,7 @@ import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './bekreft-sletting-modal.less';
+import hiddenIf from "../../hidden-if/hidden-if";
 
 interface BekreftSlettingModalProps {
     isOpen: boolean;
@@ -12,6 +13,8 @@ interface BekreftSlettingModalProps {
     infoTekst?: string
     navn: string
 }
+
+const HiddenIfInfotekst = hiddenIf(Normaltekst)
 
 function BekreftSlettingModal(props: BekreftSlettingModalProps) {
     const slettKnapp = () => {
@@ -31,11 +34,7 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
                 <Innholdstittel className="blokk-s">
                     {props.tittel}
                 </Innholdstittel>
-                {props.infoTekst &&
-                <Normaltekst>
-                    {props.infoTekst}
-                </Normaltekst>
-                }
+                <HiddenIfInfotekst hidden={!props.infoTekst} >{props.infoTekst}</HiddenIfInfotekst>
                 <Normaltekst>
                     Er du sikker på at du vil slette <b>{props.navn}</b> ?
                 </Normaltekst>

@@ -46,17 +46,15 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 filtervalg={filtervalg}
                 endreFiltervalg={doEndreFiltervalg}
             />
-            {lagredeFilterFeatureToggleErPa &&
-                <MetrikkEkspanderbartpanel
-                    apen={false}
-                    tittel="Lagrede filter"
-                    tittelProps="undertittel"
-                    lamellNavn="lagredefilter"
-                    hidden={filtergruppe !== 'veileder'}
-                >
-                    <FilteringLagredeFilter/>
-                </MetrikkEkspanderbartpanel>
-            }
+            <MetrikkEkspanderbartpanel
+                apen={false}
+                tittel="Lagrede filter"
+                tittelProps="undertittel"
+                lamellNavn="lagredefilter"
+                hidden={filtergruppe !== 'veileder' || !lagredeFilterFeatureToggleErPa}
+            >
+                <FilteringLagredeFilter/>
+            </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={false}
                 tittel="Veiledergrupper"
