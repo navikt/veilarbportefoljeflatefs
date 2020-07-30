@@ -10,7 +10,7 @@ import {
     NY_VEILEDERGRUPPER_OK,
     REDIGER_VEILEDERGRUPPER_OK,
     SLETT_VEILEDERGRUPPER_OK
-} from '../ducks/veiledergrupper_action-reducers';
+} from '../ducks/veiledergrupper_filter';
 import {
     NY_LAGREDEFILTER_FEILET,
     NY_LAGREDEFILTER_OK,

@@ -31,10 +31,10 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
                 <Innholdstittel className="blokk-s">
                     {props.tittel}
                 </Innholdstittel>
-                {props.infoTekst  &&
-                    <Normaltekst>
-                        {props.infoTekst}
-                    </Normaltekst>
+                {props.infoTekst &&
+                <Normaltekst>
+                    {props.infoTekst}
+                </Normaltekst>
                 }
                 <Normaltekst>
                     Er du sikker på at du vil slette <b>{props.navn}</b> ?

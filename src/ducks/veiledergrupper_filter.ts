@@ -1,11 +1,6 @@
-import {
-    hentEnhetsFilterGrupper,
-    nyVeiledergruppe,
-    redigerVeiledergruppe,
-    slettVeiledergruppe
-} from '../middleware/api';
-import { STATUS, doThenDispatch } from './utils';
-import { FiltervalgModell } from '../model-interfaces';
+import {hentEnhetsFilterGrupper, nyVeiledergruppe, redigerVeiledergruppe, slettVeiledergruppe} from '../middleware/api';
+import {doThenDispatch, STATUS} from './utils';
+import {FiltervalgModell} from '../model-interfaces';
 
 // Actions
 export const HENT_VEILEDERGRUPPER_OK = 'veiledergrupper/OK';
@@ -24,7 +19,7 @@ export const SLETT_VEILEDERGRUPPER_OK = 'veiledergrupper_slette/OK';
 export const SLETT_VEILEDERGRUPPER_FEILET = 'veiledergrupper_slette/FEILET';
 export const SLETT_VEILEDERGRUPPER_PENDING = 'veiledergrupper_slette/PENDING';
 
-export interface Veiledergrupper_ActionReducers {
+export interface VeiledergrupperFilter {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
@@ -33,7 +28,7 @@ export interface Veiledergrupper_ActionReducers {
 
 export interface VeiledergrupperLagretFilterState {
     status: string;
-    data: Veiledergrupper_ActionReducers[];
+    data: VeiledergrupperFilter[];
     error: VeilederGruppeError | null;
 }
 

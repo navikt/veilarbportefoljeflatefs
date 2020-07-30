@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
-import {NyGruppe, RedigerGruppe} from '../ducks/veiledergrupper_action-reducers';
+import {NyGruppe, RedigerGruppe} from '../ducks/veiledergrupper_filter';
 import {VeilederModell} from '../model-interfaces';
 import {NyttFilter, RedigerFilter} from "../ducks/lagret-filter";
 

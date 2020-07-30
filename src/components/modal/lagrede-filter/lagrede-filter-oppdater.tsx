@@ -64,6 +64,12 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
             setSaveRequestSent(true)
         }
     }
+
+    const bekreftSletting = (event) => {
+        event.preventDefault()
+        setVisBekreftSlettModal(true)
+    }
+
     const doSlettFilter = () => {
         dispatch(slettFilter(
             filterId
@@ -82,7 +88,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
                 />
                 <div className="lagret-filter-knapp-wrapper">
                     <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>
-                    <Knapp mini onClick={() => setVisBekreftSlettModal(true)}>Slett</Knapp>
+                    <Knapp mini onClick={(e) => bekreftSletting(e)}>Slett</Knapp>
                 </div>
             </form>
             <BekreftSlettingModal

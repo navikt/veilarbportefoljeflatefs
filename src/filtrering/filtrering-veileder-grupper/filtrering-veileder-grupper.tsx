@@ -10,7 +10,7 @@ import { endreFiltervalg, initialState } from '../../ducks/filtrering';
 import { FiltervalgModell } from '../../model-interfaces';
 import {
     lageNyGruppe,
-} from '../../ducks/veiledergrupper_action-reducers';
+} from '../../ducks/veiledergrupper_filter';
 import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
 import {AlertStripeFeil} from "nav-frontend-alertstriper";
 

@@ -18,6 +18,7 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
 function AktivitetFilterform(props) {
 
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter));
+
     const handleRadioChange = (aktivitetKey, verdi) => {
         setValgteAktiviteter(prevState => ({...prevState, [aktivitetKey]: verdi}));
     };

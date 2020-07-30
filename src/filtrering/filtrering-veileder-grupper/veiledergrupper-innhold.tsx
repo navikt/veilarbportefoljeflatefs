@@ -5,9 +5,9 @@ import { Radio } from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import {
     lagreEndringer,
-    Veiledergrupper_ActionReducers,
+    VeiledergrupperFilter,
     slettGruppe
-} from '../../ducks/veiledergrupper_action-reducers';
+} from '../../ducks/veiledergrupper_filter';
 import { AppState } from '../../reducer';
 import { harGjortEndringer, veilederlisterErLik } from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
 import { VeilederGruppeModal } from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
@@ -19,7 +19,7 @@ import { finnSideNavn } from '../../middleware/metrics-middleware';
 
 
 interface VeilederGruppeInnholdProps {
-    lagretFilter: Veiledergrupper_ActionReducers[]
+    lagretFilter: VeiledergrupperFilter[]
     filterValg?: FiltervalgModell;
     filtergruppe?: string;
 }
@@ -29,7 +29,7 @@ function isOverflown(element) {
 }
 
 function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
-    const [valgtGruppe, setValgtGruppe] = useState<Veiledergrupper_ActionReducers>();
+    const [valgtGruppe, setValgtGruppe] = useState<VeiledergrupperFilter>();
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
 
     const filtreringVeilederoversikt = (state: AppState) => state.filtreringVeilederoversikt.veiledere;
@@ -116,7 +116,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
 interface VeilederGruppeRad {
     hanterVelgGruppe: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    veilederGruppe: Veiledergrupper_ActionReducers;
+    veilederGruppe: VeiledergrupperFilter;
     veiledereFilter: string[];
     onClickRedigerKnapp: () => void;
 }

@@ -17,7 +17,7 @@ import FetchMock, {
     ResponseUtils
 } from 'yet-another-fetch-mock';
 import {lagredeFilter} from "./lagrede-filter";
-import {Veiledergrupper_ActionReducers} from "../ducks/veiledergrupper_action-reducers";
+import {VeiledergrupperFilter} from "../ducks/veiledergrupper_filter";
 import {LagretFilter} from "../ducks/lagret-filter";
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
@@ -93,7 +93,7 @@ mock.put('/veilarbfilter/api/minelagredefilter/', ({body}) => {
                 return oppdatertFilter;
             }
             return filter;
-        }) as Veiledergrupper_ActionReducers [] & JSONArray;
+        }) as VeiledergrupperFilter [] & JSONArray;
         return oppdatertFilter;
     }
 );
@@ -123,7 +123,7 @@ mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}) => {
                 return oppdatertGruppe;
             }
             return v;
-        }) as Veiledergrupper_ActionReducers [] & JSONArray;
+        }) as VeiledergrupperFilter [] & JSONArray;
         return oppdatertGruppe;
     }
 );
@@ -137,7 +137,7 @@ mock.post('/veilarbfilter/api/enhet/:enhetId', (args: HandlerArgument) => {
 mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (args: HandlerArgument) => {
     const {pathParams} = args;
     if (pathParams.filterId) {
-        customVeilederGrupper = customVeilederGrupper.filter(v => v.filterId !== pathParams.filterId) as Veiledergrupper_ActionReducers [] & JSONArray;
+        customVeilederGrupper = customVeilederGrupper.filter(v => v.filterId !== pathParams.filterId) as VeiledergrupperFilter [] & JSONArray;
         return {status: 200};
     }
     return {status: 401};
