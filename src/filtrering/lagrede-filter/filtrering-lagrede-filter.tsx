@@ -15,9 +15,7 @@ function FilteringLagredeFilter() {
 
     const lagretFilterOK = () => {
         return lagretFilter.length > 0
-            ? <LagredeFilterInnhold filtergruppe="veileder"
-                                    lagretFilter={sortertLagredeFilter}
-            />
+            ? <LagredeFilterInnhold lagretFilter={sortertLagredeFilter}/>
             : <div className="lagredefilter-emptystate">
                 <Normaltekst className="lagredefilter-emptystate__tekst">
                     Ingen lagrede filter

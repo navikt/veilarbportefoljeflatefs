@@ -1,21 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { endreFiltervalg } from '../../ducks/filtrering';
-import { Radio } from 'nav-frontend-skjema';
+import React, {useEffect, useRef, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {endreFiltervalg} from '../../ducks/filtrering';
+import {Radio} from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import {
-    lagreEndringer,
-    VeiledergrupperFilter,
-    slettGruppe
-} from '../../ducks/veiledergrupper_filter';
-import { AppState } from '../../reducer';
-import { harGjortEndringer, veilederlisterErLik } from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
-import { VeilederGruppeModal } from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
-import { FiltervalgModell } from '../../model-interfaces';
-import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
-import { visIngenEndringerToast } from '../../store/toast/actions';
-import { logEvent } from '../../utils/frontend-logger';
-import { finnSideNavn } from '../../middleware/metrics-middleware';
+import {lagreEndringer, slettGruppe, VeiledergrupperFilter} from '../../ducks/veiledergrupper_filter';
+import {AppState} from '../../reducer';
+import {harGjortEndringer, veilederlisterErLik} from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
+import {VeilederGruppeModal} from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
+import {FiltervalgModell} from '../../model-interfaces';
+import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
+import {visIngenEndringerToast} from '../../store/toast/actions';
+import {logEvent} from '../../utils/frontend-logger';
+import {finnSideNavn} from '../../middleware/metrics-middleware';
 
 
 interface VeilederGruppeInnholdProps {
@@ -52,7 +48,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const velgGruppe = (gruppeId: string) => {
         logEvent('portefolje.metrikker.veiledergrupper.velg-gruppe',
-                 {}, {filterId: gruppeId, sideNavn: finnSideNavn()});
+                 {}, {gruppeId: gruppeId, sideNavn: finnSideNavn()});
         const filterVerdi = finnVeilederGruppe(gruppeId);
         setValgtGruppe(filterVerdi);
         filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, props.filtergruppe));

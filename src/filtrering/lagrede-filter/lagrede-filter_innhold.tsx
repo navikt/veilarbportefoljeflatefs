@@ -13,8 +13,6 @@ import './lagrede-filter_innhold.less'
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[]
-    filterValg?: FiltervalgModell;
-    filtergruppe?: string;
 }
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
@@ -32,7 +30,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const velgFilter = useCallback((filterId: string) => {
         const filterVerdi = finnLagretFilter(filterId);
 
-        logEvent('portefolje.metrikker.lagredefilter.velg-gruppe',
+        logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {}, {filterId: filterVerdi!.filterId, sideNavn: finnSideNavn()});
         dispatch(velgLagretFilter(filterVerdi!));
     },[finnLagretFilter, dispatch]);
@@ -76,9 +74,10 @@ function LagretFilterRad({filter, hanterVelgFilter, onClickRedigerKnapp, filterS
 
     useEffect(() => {
         if (erValgt) {
-            logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter')
+            logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter', {},
+                {filterId: filter.filterId, sideNavn: finnSideNavn()})
         }
-    }, [erValgt])
+    }, [erValgt, filter])
 
     return (
         <div className="lagrede-filter__rad">
