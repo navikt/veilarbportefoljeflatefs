@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import SubmitKnapp from './../submit-knapp';
-import {AktiviteterValg, FiltreringAktiviteterValg} from '../../ducks/filtrering';
+import { AktiviteterValg, FiltreringAktiviteterValg } from '../../ducks/filtrering';
 import './aktivitet-filterform.less';
 
 const aktivitetInitialState: FiltreringAktiviteterValg = {
