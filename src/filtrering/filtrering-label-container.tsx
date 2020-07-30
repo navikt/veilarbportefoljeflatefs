@@ -1,15 +1,13 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
-    I_AVTALT_AKTIVITET,
-    UTLOPTE_AKTIVITETER,
-    VENTER_PA_SVAR_FRA_BRUKER,
+    I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
 } from './filter-konstanter';
-import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
-import {EnhetModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne, ListevisningState} from '../ducks/ui/listevisning';
-import {pagineringSetup} from '../ducks/paginering';
+import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg } from '../ducks/filtrering';
+import { EnhetModell, FiltervalgModell } from '../model-interfaces';
+import { Kolonne, ListevisningState } from '../ducks/ui/listevisning';
+import { pagineringSetup } from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 
 interface FiltreringLabelContainerProps {
