@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../../reducer";
 import {LagretFilterValideringsError} from "./lagre-filter-modal";
-import {STATUS} from "../../../ducks/utils";
 import {erTomtObjekt, feilValidering} from "./lagrede-filter-utils";
 import {Input} from "nav-frontend-skjema";
 import {Hovedknapp, Knapp} from "nav-frontend-knapper";
 import {ErrorModalType, LagredeFilterVarselModal} from "./varsel-modal";
 import BekreftSlettingModal from "../bekreftelse-modal/bekreft-sletting-modal";
 import {lagreEndringer, slettFilter} from "../../../ducks/lagret-filter";
+import {useRequestHandler} from "../../../hooks/use-request-handler";
 
 export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }) {
 
@@ -16,37 +16,14 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
 
     const dispatch = useDispatch();
     const selector = useSelector((state: AppState) => state.filtreringMinoversikt)
-    const {status, data} = useSelector((state: AppState) => state.lagretFilter)
+    const data = useSelector((state: AppState) => state.lagretFilter.data)
     const [nyttFilterNavn, setNyttFilterNavn] = useState<string>(props.gammeltFilterNavn)
-
-    const [errorModalErApen, setErrorModalErApen] = useState(false)
-    const [saveRequestSent, setSaveRequestSent] = useState(false)
-    const [deleteRequestSent, setDeleteRequestSent] = useState(false)
 
     const [feilmelding, setFeilmelding] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError)
     const {gammeltFilterNavn, filterId, lukkModal} = props
 
-    useEffect(() => {
-        if (saveRequestSent) {
-            if (status === STATUS.PENDING) {
-            } else if (status === STATUS.ERROR) {
-                setSaveRequestSent(false)
-                setErrorModalErApen(true)
-            } else if (status === STATUS.OK) {
-                setSaveRequestSent(false)
-                lukkModal()
-            }
-        } else if (deleteRequestSent) {
-            if (status === STATUS.PENDING) {
-            } else if (status === STATUS.ERROR) {
-                setDeleteRequestSent(false)
-                setErrorModalErApen(true)
-            } else if (status === STATUS.OK) {
-                setDeleteRequestSent(false)
-                lukkModal()
-            }
-        }
-    }, [status, saveRequestSent, deleteRequestSent, lukkModal, nyttFilterNavn])
+    const requestHandlerOpddater = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal);
+    const requestHandlerSlette = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal);
 
     const doLagreEndringer = (event) => {
         event.preventDefault()
@@ -61,7 +38,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
                 filterValg: selector,
                 filterId: filterId
             }))
-            setSaveRequestSent(true)
+            requestHandlerOpddater.setSaveRequestSent(true)
         }
     }
 
@@ -74,7 +51,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
         dispatch(slettFilter(
             filterId
         ))
-        setDeleteRequestSent(true)
+        requestHandlerSlette.setSaveRequestSent(true)
     }
 
     return (
@@ -99,9 +76,15 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
                 navn={gammeltFilterNavn}/>
             <LagredeFilterVarselModal
                 filterNavn={nyttFilterNavn}
-                erApen={errorModalErApen}
-                modalType={saveRequestSent ? ErrorModalType.OPPDATERE : ErrorModalType.SLETTE}
-                setErrorModalErApen={setErrorModalErApen}
+                erApen={requestHandlerOpddater.errorModalErApen}
+                modalType={ErrorModalType.OPPDATERE}
+                setErrorModalErApen={requestHandlerOpddater.setErrorModalErApen}
+            />
+            <LagredeFilterVarselModal
+                filterNavn={nyttFilterNavn}
+                erApen={requestHandlerSlette.errorModalErApen}
+                modalType={ErrorModalType.SLETTE}
+                setErrorModalErApen={requestHandlerSlette.setErrorModalErApen}
             />
         </>
     )
