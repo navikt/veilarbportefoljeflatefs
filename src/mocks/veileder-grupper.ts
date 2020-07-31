@@ -1,6 +1,5 @@
-import { initialState } from '../ducks/filtrering';
-import { veiledere } from './veiledere';
-import { JSONArray } from 'yet-another-fetch-mock';
+import {initialState} from '../ducks/filtrering';
+import {veiledere} from './veiledere';
 import * as faker from 'faker/locale/nb_NO';
 import {VeiledergrupperFilter} from "../ducks/veiledergrupper_filter";
 
@@ -42,6 +41,6 @@ export const veilederGrupper = () => {
                 filterValg: {...initialState, veiledere: veilederGruppe5},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             }
-        ] as VeiledergrupperFilter [] & JSONArray
+        ] as VeiledergrupperFilter []
     );
 };
