@@ -35,11 +35,10 @@ const navnEllerFnrErBruktInnhold = () => {
 const oppdatereFilterInnhold = (filterNavn, setValgtVisningstype) => {
     return (
         <>
-            <Normaltekst>Det finnes allerede et lagret
+            <Normaltekst className="blokk xs">Det finnes allerede et lagret
                 filter <b>"{filterNavn}"</b> med
                 denne filterkombinasjonen. Oppdater navnet ved å klikke på knappen under.
             </Normaltekst>
-            <br/>
             {oppdaterFilterKnapp(setValgtVisningstype)}
         </>
     )

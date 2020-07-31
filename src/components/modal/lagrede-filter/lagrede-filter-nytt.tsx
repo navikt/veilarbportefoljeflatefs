@@ -37,14 +37,13 @@ export function LagreNytt(props: { lukkModal}) {
 
     const doLagreNyttFilter = (event) => {
         event.preventDefault()
-        const trimmetFilterNavn = filterNavn.trim()
-        const feilValideringResponse = feilValidering(trimmetFilterNavn, data)
+        const feilValideringResponse = feilValidering(filterNavn, data)
         setFeilmelding(feilValideringResponse)
 
         if (erTomtObjekt(feilValideringResponse)) {
             setSaveRequestSent(true)
             dispatch(lagreNyttFilter({
-                filterNavn: trimmetFilterNavn,
+                filterNavn: filterNavn,
                 filterValg: filterValg
             }))
         }
@@ -53,8 +52,7 @@ export function LagreNytt(props: { lukkModal}) {
     return (
         <>
             <form onSubmit={(e)=>doLagreNyttFilter(e)}>
-                <Normaltekst>Du vil finne igjen filteret under "Lagrede filter".</Normaltekst>
-                <br/>
+                <Normaltekst className="blokk xs">Du vil finne igjen filteret under "Lagrede filter".</Normaltekst>
                 <Input
                     label="Navn:"
                     value={filterNavn}

@@ -30,6 +30,9 @@ export function antallFilter(minOversiktObjekt) {
 
 export function feilValidering (filterNavn, eksisterendeFilter, filterId?) {
     let feilmelding: any = {} as LagretFilterValideringsError
+
+    filterNavn = filterNavn.trim()
+
     if (!filterNavn) {
         feilmelding.filterNavn = "Lagret filter mangler navn, legg inn filternavn."
     }

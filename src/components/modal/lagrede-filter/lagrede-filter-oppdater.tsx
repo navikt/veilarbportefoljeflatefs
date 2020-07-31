@@ -94,9 +94,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
             <BekreftSlettingModal
                 isOpen={visBekreftSlettModal}
                 onRequestClose={() => setVisBekreftSlettModal(false)}
-                onSubmit={() => {
-                    doSlettFilter()
-                }}
+                onSubmit={doSlettFilter}
                 tittel="Slette lagret filter"
                 navn={gammeltFilterNavn}/>
             <LagredeFilterVarselModal
