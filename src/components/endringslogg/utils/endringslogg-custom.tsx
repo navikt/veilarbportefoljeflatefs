@@ -22,6 +22,12 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '03. AUG. 2020',
+        tittel: 'Brukernotifikasjon om CV',
+        versjonId: '03.08.20',
+        tekst: 'Fra mandag 3. august vil noen brukere få notifikasjon på forsiden av Ditt NAV om utfylling av CV og jobbprofil. Vi tester ut om flere brukere da legger inn sin CV raskere. Dersom resultatene er gode, får alle brukere denne notifikasjonen.',
+    },
+    {
         dato: '10. JUL. 2020',
         tittel: 'Nytt filter på CV/jobbprofil',
         versjonId: '10.07.20',
