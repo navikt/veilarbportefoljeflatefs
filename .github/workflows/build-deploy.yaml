@@ -52,7 +52,7 @@ jobs:
   deploy-q0:
     name: Deply q0 fss
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/lagredeFilter'
+    if: github.ref == 'refs/heads/dev'
     needs: build-docker-image
     steps:
       - uses: actions/checkout@v1
@@ -64,7 +64,7 @@ jobs:
           VAR: version=${{ env.IMAGE_TAG }},namespace=q0
   deploy-q1:
     name: Deply q1 fss
-    if: github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/lagredeFilter'
     needs: build-docker-image
     runs-on: ubuntu-latest
     steps:
