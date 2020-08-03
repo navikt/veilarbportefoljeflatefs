@@ -23,7 +23,7 @@ import '../components/checkbox-filterform/checkbox-filterform.less';
 import FodselsdatoFilterform from '../components/checkbox-filterform/fodselsdato-filterform';
 import {ReactComponent as InfoIkon} from '../components/ikoner/info-ikon.svg';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {CVJOBBPROFIL, GJEM_HOVEDMAL} from '../konstanter';
+import {GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less'
 
 interface FiltreringFilterProps {
@@ -82,7 +82,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Element className="blokk-xxs" tag="h3">
                     Status og brukergrupper
                 </Element>
-                {useFeatureSelector()(CVJOBBPROFIL) &&
                 <Dropdown
                     name="CV og jobbprofil"
                     render={(lukkDropdown) =>
@@ -95,7 +94,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                         />
                     }
                 />
-                }
                 <Dropdown
                     name="Svar fra registrering"
                     render={(lukkDropdown) =>
