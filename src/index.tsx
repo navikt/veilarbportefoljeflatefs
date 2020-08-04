@@ -16,11 +16,6 @@ if(window.localStorage.getItem('filterVersjon') !== 'v1') {
     localStorage.removeItem('enhetsState');
 }
 
-if(erHeroku()){
-    window.localStorage.setItem('lastpath','/enhet');
-    window.localStorage.setItem('lastsearch','?enhet=1234&seAlle=false&side=1&sorteringsfelt=ikke_satt&sorteringsrekkefolge=ikke_satt');
-}
-
 if(process.env.REACT_APP_MOCK === 'true') {
     console.log('=========================='); // tslint:disable-line
     console.log('======== MED MOCK ========'); // tslint:disable-line

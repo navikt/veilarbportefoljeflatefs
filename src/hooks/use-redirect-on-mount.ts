@@ -3,6 +3,8 @@ import {useOnMount} from "./use-on-mount";
 import * as queryString from "query-string";
 import {settSortering} from "../ducks/portefolje";
 import {useDispatch} from "react-redux";
+import {erHeroku} from "../utils/utils";
+import {oppdaterValgtEnhet} from "../ducks/valgt-enhet";
 
 export function useRedirectOnMount() {
     const history = useHistory();
@@ -29,6 +31,10 @@ export function useRedirectOnMount() {
         else if(location.pathname === '/tilbake' || location.pathname === "/"){
             history.push("/enhet");
             dispatch(settSortering('ikke_satt', 'ikke_satt'))
+        }
+        else if(erHeroku()){
+            history.push("/enhet");
+            dispatch(oppdaterValgtEnhet("1234"))
         }
         else {
             dispatch(settSortering('ikke_satt', 'ikke_satt'))
