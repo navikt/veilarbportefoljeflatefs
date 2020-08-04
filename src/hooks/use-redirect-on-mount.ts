@@ -34,7 +34,9 @@ export function useRedirectOnMount() {
         }
         else if(erHeroku()){
             history.push("/enhet");
+            //DEKORATORN VIKER IKKE PÅ HEROKU SÅ DETTA ER EN HAKS FOR ATT FÅ ENHET SATT
             dispatch(oppdaterValgtEnhet("1234"))
+            dispatch(settSortering('ikke_satt', 'ikke_satt'))
         }
         else {
             dispatch(settSortering('ikke_satt', 'ikke_satt'))
