@@ -22,7 +22,13 @@ export function useRedirectOnMount() {
             const stringified = queryString.stringify(parsed);
             dispatch(settSortering('ikke_satt', 'ikke_satt'));
             history.replace(`${pathname}?${stringified}`);
-        } else if(lastPath && location.pathname === '/tilbake') {
+        } else if(erHeroku()){
+            history.push("/enhet");
+            //DEKORATORN VIKER IKKE PÅ HEROKU SÅ DETTA ER EN HAKS FOR ATT FÅ ENHET SATT
+            dispatch(oppdaterValgtEnhet("1234"))
+            dispatch(settSortering('ikke_satt', 'ikke_satt'))
+        }
+        else if(lastPath && location.pathname === '/tilbake') {
             history.replace({pathname: lastPath, search: lastSearch});
             const sorteringsfelt  = queryString.parse(lastSearch).sorteringsfelt;
             const sortDirection  = queryString.parse(lastSearch).sorteringsrekkefolge;
@@ -30,12 +36,6 @@ export function useRedirectOnMount() {
         }
         else if(location.pathname === '/tilbake' || location.pathname === "/"){
             history.push("/enhet");
-            dispatch(settSortering('ikke_satt', 'ikke_satt'))
-        }
-        else if(erHeroku()){
-            history.push("/enhet");
-            //DEKORATORN VIKER IKKE PÅ HEROKU SÅ DETTA ER EN HAKS FOR ATT FÅ ENHET SATT
-            dispatch(oppdaterValgtEnhet("1234"))
             dispatch(settSortering('ikke_satt', 'ikke_satt'))
         }
         else {
