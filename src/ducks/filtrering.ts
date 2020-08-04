@@ -110,6 +110,9 @@ export default function reducer(state: FiltervalgModell = initialState, action):
 
 
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet') {
+    if (Array.isArray(filterVerdi)){
+        filterVerdi.sort()
+    }
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
         return {
             type: ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
