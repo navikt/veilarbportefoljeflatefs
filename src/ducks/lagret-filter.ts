@@ -104,6 +104,7 @@ export default function reducer(state: LagretFilterState = initialState, action)
                 status: STATUS.OK,
                 handlingType: HandlingsType.SLETTE,
                 valgtLagretFilter: null,
+                sisteValgteLagredeFilter: null,
                 data: state.data.filter(elem => elem.filterId !== action.data)
             };
         case VELG_LAGRET_FILTER:
