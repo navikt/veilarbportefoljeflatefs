@@ -40,7 +40,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
         if (filtergruppe === "veileder" && handlingType === HandlingsType.NYTT){
             setErLagredeListApen(true)
         }
-    },[handlingType])
+    },[handlingType, filtergruppe])
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
