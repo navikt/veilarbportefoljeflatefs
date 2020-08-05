@@ -27,7 +27,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
     const dispatch = useDispatch();
 
     const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
-    const handlingType = useSelector((state: AppState) => state.lagretFilter.handlingType);
+    const sisteHandlingType = useSelector((state: AppState) => state.lagretFilter.handlingType);
     const [erLagredeListApen, setErLagredeListApen] = useState(false)
 
     useEffect(() => {
@@ -37,10 +37,10 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
     }, [filtergruppe, dispatch])
 
     useEffect(() => {
-        if (filtergruppe === "veileder" && handlingType === HandlingsType.NYTT){
+        if (filtergruppe === "veileder" && sisteHandlingType === HandlingsType.NYTT) {
             setErLagredeListApen(true)
         }
-    },[handlingType, filtergruppe])
+    }, [filtergruppe, sisteHandlingType])
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));

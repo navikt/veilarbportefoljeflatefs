@@ -22,7 +22,7 @@ export function LagreNytt(props: { lukkModal}) {
 
     const doLagreNyttFilter = (event) => {
         event.preventDefault()
-        const feilValideringResponse = feilValidering(filterNavn, data)
+        const feilValideringResponse = feilValidering(filterNavn, filterValg, data)
         setFeilmelding(feilValideringResponse)
 
         if (erTomtObjekt(feilValideringResponse)) {
@@ -43,6 +43,7 @@ export function LagreNytt(props: { lukkModal}) {
                     value={filterNavn}
                     onChange={(e) => setFilterNavn(e.target.value)}
                     feil={feilmelding.filterNavn}
+                    autoFocus={true}
                 />
                 <div className="lagret-filter-knapp-wrapper">
                     <Hovedknapp mini htmlType={"submit"}>Lagre</Hovedknapp>

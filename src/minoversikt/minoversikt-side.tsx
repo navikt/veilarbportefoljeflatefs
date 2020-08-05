@@ -30,9 +30,12 @@ import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {Knapp} from "nav-frontend-knapper";
 import {LagreFilterModal, Visningstype} from "../components/modal/lagrede-filter/lagre-filter-modal";
 import {AppState} from "../reducer";
-import {erObjektValuesTomt} from "../components/modal/lagrede-filter/lagrede-filter-utils";
+import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/lagrede-filter/lagrede-filter-utils";
 import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
+import {logEvent} from "../utils/frontend-logger";
+import {finnSideNavn} from "../middleware/metrics-middleware";
+import {avmarkerSisteVelgtFilter, avmarkerVelgtFilter, markerVelgtFilter} from "../ducks/lagret-filter";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -41,15 +44,13 @@ function MinoversiktSide() {
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
     const [lagretFilterMenyModalErApen, setLagretFilterMenyModalErApen] = useState(false);
+    const [modalVisningstype, setModalVisningstype] = useState<Visningstype>(Visningstype.MENY);
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
+    const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
     const [erNavnEllerFnrBrukt, setErNavnEllerFnrBrukt] = useState(false);
-
-    useEffect(() => {
-        setErLagreKnappSkjult(erObjektValuesTomt(filtreringMinOversikt))
-        setErNavnEllerFnrBrukt(filtreringMinOversikt.navnEllerFnrQuery !== "")
-    }, [filtreringMinOversikt]);
+    const {sisteValgteLagredeFilter, valgtLagretFilter} = useSelector((state: AppState) => state.lagretFilter)
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -64,6 +65,36 @@ function MinoversiktSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
 
     const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
+
+    useEffect(() => {
+        const erMinOversiktFilterErTomt = erObjektValuesTomt(filtreringMinOversikt)
+        setErLagreKnappSkjult(erMinOversiktFilterErTomt)
+        setErNavnEllerFnrBrukt(filtreringMinOversikt.navnEllerFnrQuery !== "")
+        if (erMinOversiktFilterErTomt){
+            dispatch(avmarkerSisteVelgtFilter())
+        }
+    }, [filtreringMinOversikt, dispatch]);
+
+    useEffect(()=>{
+        const valgtFilter = lagretFilterList.find(elem => lagredeFilterListerErLik(elem.filterValg, filtreringMinOversikt));
+        if (valgtFilter){
+            dispatch(markerVelgtFilter(valgtFilter));
+            logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
+                {}, {filterId: valgtFilter.filterId, sideNavn: finnSideNavn()});
+        }else{
+            dispatch(avmarkerVelgtFilter());
+        }
+    },[filtreringMinOversikt, lagretFilterList, dispatch])
+
+    function lagreFilterModal(event) {
+        event.preventDefault()
+
+        if (valgtLagretFilter) setModalVisningstype(Visningstype.OPPDATER)
+        else if (!sisteValgteLagredeFilter) setModalVisningstype(Visningstype.LAGRE_NYTT)
+        else setModalVisningstype(Visningstype.MENY)
+
+        setLagretFilterMenyModalErApen(true)
+    }
 
     return (
         <DocumentTitle title="Min oversikt">
@@ -88,7 +119,7 @@ function MinoversiktSide() {
                                     className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                 />
                                 <Knapp className="lagre-filter-knapp" mini hidden={erLagreKnappSkjult || !lagredeFilterFeatureToggleErPa}
-                                       onClick={() => setLagretFilterMenyModalErApen(true)}>
+                                       onClick={(event) => lagreFilterModal(event)}>
                                     Lagre filter
                                 </Knapp>
                             </div>
@@ -131,7 +162,7 @@ function MinoversiktSide() {
                     </MinOversiktWrapper>
                 </Innholdslaster>
                 <LagreFilterModal
-                    velgVisningstype={Visningstype.MENY}
+                    velgVisningstype={modalVisningstype}
                     isOpen={lagretFilterMenyModalErApen}
                     onRequestClose={() => setLagretFilterMenyModalErApen(false)}
                     erNavnEllerFnrBrukt={erNavnEllerFnrBrukt}

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Modal from "../modal";
 import {useSelector} from "react-redux";
 import {AppState} from "../../../reducer";
@@ -30,7 +30,7 @@ const HiddenIfMeny = hiddenIf(Meny);
 const HiddenIfLagreNytt = hiddenIf(LagreNytt)
 const HiddenIfOppdaterFilter = hiddenIf(OppdaterFilter);
 
-export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen: boolean, onRequestClose: () => void, erNavnEllerFnrBrukt? }) {
+export function LagreFilterModal(props: { isOpen: boolean, velgVisningstype, onRequestClose: () => void, erNavnEllerFnrBrukt? }) {
     const {sisteValgteLagredeFilter, data} = useSelector((state: AppState) => state.lagretFilter)
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(props.velgVisningstype)
     const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
@@ -39,6 +39,10 @@ export function LagreFilterModal(props: { velgVisningstype: Visningstype, isOpen
         props.onRequestClose();
         setValgtVisningstype(props.velgVisningstype)
     }
+
+    useEffect(()=>{
+        setValgtVisningstype(props.velgVisningstype)
+    },[props.velgVisningstype])
 
     return (
         <>

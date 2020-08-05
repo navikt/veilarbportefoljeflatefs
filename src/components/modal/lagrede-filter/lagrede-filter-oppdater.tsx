@@ -15,7 +15,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
     const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false)
 
     const dispatch = useDispatch();
-    const selector = useSelector((state: AppState) => state.filtreringMinoversikt)
+    const filterValg = useSelector((state: AppState) => state.filtreringMinoversikt)
     const data = useSelector((state: AppState) => state.lagretFilter.data)
     const [nyttFilterNavn, setNyttFilterNavn] = useState<string>(props.gammeltFilterNavn)
 
@@ -28,14 +28,14 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
     const doLagreEndringer = (event) => {
         event.preventDefault()
         const trimmetFilterNavn = nyttFilterNavn.trim()
-        const feilValideringResponse = feilValidering(trimmetFilterNavn, data, filterId)
+        const feilValideringResponse = feilValidering(trimmetFilterNavn, filterValg, data, filterId)
         setFeilmelding(feilValideringResponse)
 
         if (erTomtObjekt(feilValideringResponse)) {
             setNyttFilterNavn(trimmetFilterNavn)
             dispatch(lagreEndringer({
                 filterNavn: trimmetFilterNavn,
-                filterValg: selector,
+                filterValg: filterValg,
                 filterId: filterId
             }))
             requestHandlerOpddater.setSaveRequestSent(true)
@@ -62,6 +62,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
                     value={nyttFilterNavn}
                     onChange={(e) => setNyttFilterNavn(e.target.value)}
                     feil={feilmelding.filterNavn}
+                    autoFocus={true}
                 />
                 <div className="lagret-filter-knapp-wrapper">
                     <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>

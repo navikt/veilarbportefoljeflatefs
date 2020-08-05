@@ -2,8 +2,6 @@ import {Normaltekst} from "nav-frontend-typografi";
 import React from "react";
 import {Hovedknapp, Knapp} from "nav-frontend-knapper";
 import {Visningstype} from "./lagre-filter-modal";
-import {useSelector} from "react-redux";
-import {AppState} from "../../../reducer";
 
 const lagreNyttFilterKnapp = (setValgtVisningstype) => {
     return (
@@ -32,18 +30,6 @@ const navnEllerFnrErBruktInnhold = () => {
     )
 }
 
-const oppdatereFilterInnhold = (filterNavn, setValgtVisningstype) => {
-    return (
-        <>
-            <Normaltekst className="blokk xs">Det finnes allerede et lagret
-                filter <b>"{filterNavn}"</b> med
-                denne filterkombinasjonen. Oppdater navnet ved å klikke på knappen under.
-            </Normaltekst>
-            {oppdaterFilterKnapp(setValgtVisningstype)}
-        </>
-    )
-}
-
 const oppdatereEllerLagreNyttFilterInnhold = (filterNavn, setValgtVisningstype) => {
     return (
         <>
@@ -55,19 +41,11 @@ const oppdatereEllerLagreNyttFilterInnhold = (filterNavn, setValgtVisningstype) 
         </>
     )
 }
-const lagreNyttFilterInnhold = (setValgtVisningstype) => {
-    return lagreNyttFilterKnapp(setValgtVisningstype)
-}
 
 export function Meny(props: { setValgtVisningstype, sisteFilterNavn, erNavnEllerFnrBrukt }) {
-    const {valgtLagretFilter, sisteValgteLagredeFilter} = useSelector((state: AppState) => state.lagretFilter)
-
     const getInhold = () => {
         if (props.erNavnEllerFnrBrukt) return navnEllerFnrErBruktInnhold()
-        else if (valgtLagretFilter) return oppdatereFilterInnhold(props.sisteFilterNavn, props.setValgtVisningstype)
-        else if (sisteValgteLagredeFilter) return oppdatereEllerLagreNyttFilterInnhold(props.sisteFilterNavn, props.setValgtVisningstype)
-
-        return lagreNyttFilterInnhold(props.setValgtVisningstype)
+        return oppdatereEllerLagreNyttFilterInnhold(props.sisteFilterNavn, props.setValgtVisningstype)
     }
 
     return (

@@ -1,5 +1,5 @@
 import {FiltervalgModell} from '../model-interfaces';
-import {VELG_LAGRET_FILTER} from "./lagret-filter";
+import {LagretFilter, VELG_LAGRET_FILTER} from "./lagret-filter";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -108,6 +108,13 @@ export default function reducer(state: FiltervalgModell = initialState, action):
     }
 }
 
+export function velgLagretFilter(filterVerdi: LagretFilter) {
+    return {
+        type: VELG_LAGRET_FILTER,
+        data: filterVerdi,
+        name: 'veileder'
+    }
+}
 
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet') {
     if (Array.isArray(filterVerdi)){

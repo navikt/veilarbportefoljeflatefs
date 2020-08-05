@@ -28,7 +28,7 @@ export function antallFilter(minOversiktObjekt) {
             , 0);
 }
 
-export function feilValidering (filterNavn, eksisterendeFilter, filterId?) {
+export function feilValidering (filterNavn, filterValg, eksisterendeFilter, filterId?) {
     let feilmelding: any = {} as LagretFilterValideringsError
 
     filterNavn = filterNavn.trim()
@@ -44,5 +44,10 @@ export function feilValidering (filterNavn, eksisterendeFilter, filterId?) {
     if (eksisterendeFilter.find(elem => elem.filterId !== filterId && elem.filterNavn.toLowerCase() === filterNavn.toLowerCase())) {
         feilmelding.filterNavn = "Filternavn er allerede i bruk."
     }
+
+    if (eksisterendeFilter.find(elem => elem.filterId !== filterId && lagredeFilterListerErLik(elem.filterValg,filterValg))){
+        feilmelding.filterNavn = "Filter valg eksisterer allerede."
+    }
+
     return feilmelding
 }
