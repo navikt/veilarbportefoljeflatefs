@@ -116,15 +116,11 @@ mock.get('/veilarbfilter/api/minelagredefilter/', jsonResponse(customLagredeFilt
 
 
 mock.put('/veilarbfilter/api/minelagredefilter/', ({body}, res, ctx) => {
-        let oppdatertFilter = {};
-        customLagredeFilter = customLagredeFilter.map(filter => {
-            if (filter.filterId === body.filterId) {
-                oppdatertFilter = {...filter, filterNavn: body.filterNavn, filterValg: body.filterValg};
-                return oppdatertFilter;
-            }
-            return filter;
-        }) as LagretFilter [];
-        return res(ctx.json(customLagredeFilter));
+        let filterIndex = customLagredeFilter.findIndex(elem => elem.filterId === body.filterId)
+        customLagredeFilter[filterIndex] = body;
+        return res(
+            ctx.json(customLagredeFilter[filterIndex])
+        );
     }
 );
 

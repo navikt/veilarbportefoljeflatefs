@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import {FiltervalgModell} from '../model-interfaces';
@@ -12,7 +12,7 @@ import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
 import FilteringLagredeFilter from "./lagrede-filter/filtrering-lagrede-filter";
-import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
+import {HandlingsType, hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
 import {AppState} from "../reducer";
 import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
@@ -24,21 +24,28 @@ interface FiltreringContainerProps {
 }
 
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
-
     const dispatch = useDispatch();
+
+    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
+    const handlingType = useSelector((state: AppState) => state.lagretFilter.handlingType);
+    const [erLagredeListApen, setErLagredeListApen] = useState(false)
 
     useEffect(() => {
         if (filtergruppe === "veileder") {
             dispatch(hentLagredeFilterForVeileder());
         }
-    }, [filtergruppe, dispatch]);
+    }, [filtergruppe, dispatch])
+
+    useEffect(() => {
+        if (filtergruppe === "veileder" && handlingType === HandlingsType.NYTT){
+            setErLagredeListApen(true)
+        }
+    },[handlingType])
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
-
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
 
     return (
         <div className="blokk-m">
@@ -47,7 +54,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 endreFiltervalg={doEndreFiltervalg}
             />
             <MetrikkEkspanderbartpanel
-                apen={false}
+                apen={erLagredeListApen}
                 tittel="Lagrede filter"
                 tittelProps="undertittel"
                 lamellNavn="lagredefilter"
