@@ -34,9 +34,7 @@ const oppdatereEllerLagreNyttFilterInnhold = (filterNavn, setValgtVisningstype) 
     return (
         <>
             {lagreNyttFilterKnapp(setValgtVisningstype)}
-            <Normaltekst>Oppdater <b>"{filterNavn}"</b> ved å klikke
-                på
-                knappen under.</Normaltekst>
+            <Normaltekst>Oppdater <b>"{filterNavn}"</b> ved å klikke på knappen under.</Normaltekst>
             {oppdaterFilterKnapp(setValgtVisningstype)}
         </>
     )

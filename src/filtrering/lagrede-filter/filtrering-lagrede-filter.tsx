@@ -26,7 +26,7 @@ function FilteringLagredeFilter() {
     const lagretFilterError = () => {
         return (
             <AlertStripeFeil>
-                Det oppsto en feil, og lagrede filter kunne ikke hentes fram. Prøv igjen senere.
+                Det oppsto en feil, og mine filter kunne ikke hentes fram. Prøv igjen senere.
             </AlertStripeFeil>
         )
     }

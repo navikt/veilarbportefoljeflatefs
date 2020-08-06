@@ -55,7 +55,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
             />
             <MetrikkEkspanderbartpanel
                 apen={erLagredeListApen}
-                tittel="Lagrede filter"
+                tittel="Mine filter"
                 tittelProps="undertittel"
                 lamellNavn="lagredefilter"
                 hidden={filtergruppe !== 'veileder' || !lagredeFilterFeatureToggleErPa}

@@ -37,13 +37,14 @@ export function LagreNytt(props: { lukkModal}) {
     return (
         <>
             <form onSubmit={(e)=>doLagreNyttFilter(e)}>
-                <Normaltekst className="blokk xs">Du vil finne igjen filteret under "Lagrede filter".</Normaltekst>
+                <Normaltekst className="blokk xs">Du vil finne igjen filteret under "Mine filter".</Normaltekst>
                 <Input
                     label="Navn:"
                     value={filterNavn}
                     onChange={(e) => setFilterNavn(e.target.value)}
                     feil={feilmelding.filterNavn}
                     autoFocus={true}
+                    maxLength={255}
                 />
                 <div className="lagret-filter-knapp-wrapper">
                     <Hovedknapp mini htmlType={"submit"}>Lagre</Hovedknapp>

@@ -34,7 +34,7 @@ export function feilValidering (filterNavn, filterValg, eksisterendeFilter, filt
     filterNavn = filterNavn.trim()
 
     if (!filterNavn) {
-        feilmelding.filterNavn = "Lagret filter mangler navn, legg inn filternavn."
+        feilmelding.filterNavn = "Filteret mangler navn."
     }
 
     if (filterNavn.length > 255) {

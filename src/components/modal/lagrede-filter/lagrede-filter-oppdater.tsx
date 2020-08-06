@@ -63,6 +63,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
                     onChange={(e) => setNyttFilterNavn(e.target.value)}
                     feil={feilmelding.filterNavn}
                     autoFocus={true}
+                    maxLength={255}
                 />
                 <div className="lagret-filter-knapp-wrapper">
                     <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>
