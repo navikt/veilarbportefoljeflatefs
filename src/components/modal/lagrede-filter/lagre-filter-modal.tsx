@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Modal from "../modal";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../../reducer";
 import "./lagret-filter.less"
 import {OppdaterFilter} from "./lagrede-filter-oppdater";
@@ -8,12 +8,15 @@ import {LagreNytt} from "./lagrede-filter-nytt";
 import {OrNothing} from "../../../utils/types/types";
 import hiddenIf from "../../hidden-if/hidden-if";
 import {Meny} from "./lagrede-filter-meny";
+import {FnrFeil} from "./lagrede-filter-fnr-feil";
+import {lukkLagreFilterModal} from "../../../ducks/lagret-filter";
 
 
 export enum Visningstype {
     MENY,
     LAGRE_NYTT,
-    OPPDATER
+    OPPDATER,
+    FNR_FEIL
 }
 
 export interface LagretFilterValideringsError {
@@ -23,33 +26,40 @@ export interface LagretFilterValideringsError {
 const VisningstypeToTittel = new Map<Visningstype, string>([
     [Visningstype.LAGRE_NYTT, 'Lagre nytt filter'],
     [Visningstype.OPPDATER, 'Endre filter'],
-    [Visningstype.MENY, 'Lagre filter']
+    [Visningstype.MENY, 'Lagre filter'],
+    [Visningstype.FNR_FEIL, 'Lagre filter']
 ]);
 
 const HiddenIfMeny = hiddenIf(Meny);
 const HiddenIfLagreNytt = hiddenIf(LagreNytt)
 const HiddenIfOppdaterFilter = hiddenIf(OppdaterFilter);
+const HiddenIfFnrFeil = hiddenIf(FnrFeil)
 
-export function LagreFilterModal(props: { isOpen: boolean, velgVisningstype, onRequestClose: () => void, erNavnEllerFnrBrukt? }) {
-    const {sisteValgteLagredeFilter, data} = useSelector((state: AppState) => state.lagretFilter)
-    const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(props.velgVisningstype)
+export function LagreFilterModal() {
+    const {sisteValgteLagredeFilter, data, valgtLagretFilter, erModalApen} = useSelector((state: AppState) => state.lagretFilter)
     const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
+    const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
+    const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(Visningstype.MENY)
+
+    const dispatch = useDispatch();
 
     const lukkModal = () => {
-        props.onRequestClose();
-        setValgtVisningstype(props.velgVisningstype)
+        dispatch(lukkLagreFilterModal())
     }
 
-    useEffect(()=>{
-        setValgtVisningstype(props.velgVisningstype)
-    },[props.velgVisningstype])
+    useEffect(() => {
+        if (filtreringMinOversikt.navnEllerFnrQuery.trim().length > 0) setValgtVisningstype(Visningstype.FNR_FEIL)
+        else if (valgtLagretFilter) setValgtVisningstype(Visningstype.OPPDATER)
+        else if (!sisteValgteLagredeFilter) setValgtVisningstype(Visningstype.LAGRE_NYTT)
+        else setValgtVisningstype(Visningstype.MENY)
+    },[filtreringMinOversikt, valgtLagretFilter, sisteValgteLagredeFilter])
 
     return (
         <>
             <Modal
                 className="lagret-filter-meny-modal"
                 contentLabel="Lagre filter meny modal"
-                isOpen={props.isOpen}
+                isOpen={erModalApen}
                 onRequestClose={lukkModal}
                 tittel={VisningstypeToTittel.get(valgtVisningstype)}
             >
@@ -57,7 +67,6 @@ export function LagreFilterModal(props: { isOpen: boolean, velgVisningstype, onR
                     <HiddenIfMeny hidden={valgtVisningstype !== Visningstype.MENY}
                                   setValgtVisningstype={setValgtVisningstype}
                                   sisteFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
-                                  erNavnEllerFnrBrukt={props.erNavnEllerFnrBrukt}
                     />
 
                     <HiddenIfLagreNytt hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
@@ -68,6 +77,8 @@ export function LagreFilterModal(props: { isOpen: boolean, velgVisningstype, onR
                         filterId={sisteValgteLagredeFilter!}
                         lukkModal={lukkModal}
                     />
+
+                    <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL}/>
                 </div>
             </Modal>
         </>

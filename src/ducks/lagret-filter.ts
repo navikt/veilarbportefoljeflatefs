@@ -25,6 +25,9 @@ export const MARKER_LAGRET_FILTER = 'lagredefilter_velg/MARKER_LAGRET_FILTER';
 export const AVMARKER_LAGRET_FILTER = 'lagredefilter_velg/AVMARKER_LAGRET_FILTER';
 export const AVMARKER_SISTE_VALGT_FILTER = 'lagredefilter_velg/AVMARKER_SISTE_VALGT_FILTER';
 
+export const APEN_LAGRE_FILTER_MODAL = 'lagredefilter_velg/APEN_MODAL';
+export const LUKK_LAGRE_FILTER_MODAL = 'lagredefilter_velg/LUKK_MODAL';
+
 export interface LagretFilter {
     filterNavn: string;
     filterId: number;
@@ -38,6 +41,7 @@ export interface LagretFilterState {
     valgtLagretFilter: OrNothing<LagretFilter>;
     sisteValgteLagredeFilter: OrNothing<number>
     handlingType: HandlingsType | null;
+    erModalApen: boolean
 }
 
 export interface RedigerFilter {
@@ -63,7 +67,8 @@ const initialState = {
     data: [],
     valgtLagretFilter: null,
     handlingType: null,
-    sisteValgteLagredeFilter: null
+    sisteValgteLagredeFilter: null,
+    erModalApen : false
 };
 
 //  Reducer
@@ -114,6 +119,10 @@ export default function reducer(state: LagretFilterState = initialState, action)
             return {...state, valgtLagretFilter: null}
         case AVMARKER_SISTE_VALGT_FILTER:
             return {...state, sisteValgteLagredeFilter: null}
+        case APEN_LAGRE_FILTER_MODAL:
+            return {...state, erModalApen: true}
+        case LUKK_LAGRE_FILTER_MODAL:
+            return {...state, erModalApen: false}
         default:
             return state;
     }
@@ -138,6 +147,20 @@ export function avmarkerVelgtFilter() {
 export function avmarkerSisteVelgtFilter() {
     return {
         type: AVMARKER_SISTE_VALGT_FILTER,
+        name: 'veileder'
+    }
+}
+
+export function apenLagreFilterModal() {
+    return {
+        type: APEN_LAGRE_FILTER_MODAL,
+        name: 'veileder'
+    }
+}
+
+export function lukkLagreFilterModal() {
+    return {
+        type: LUKK_LAGRE_FILTER_MODAL,
         name: 'veileder'
     }
 }

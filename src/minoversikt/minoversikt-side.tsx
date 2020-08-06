@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import {ListevisningType} from '../ducks/ui/listevisning';
@@ -22,20 +21,14 @@ import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {hentPortefoljeForVeileder} from '../ducks/portefolje';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
-import {Knapp} from "nav-frontend-knapper";
-import {LagreFilterModal, Visningstype} from "../components/modal/lagrede-filter/lagre-filter-modal";
-import {AppState} from "../reducer";
-import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/lagrede-filter/lagrede-filter-utils";
-import {sjekkFeature} from "../ducks/features";
-import {LAGREDE_FILTER} from "../konstanter";
-import {logEvent} from "../utils/frontend-logger";
-import {finnSideNavn} from "../middleware/metrics-middleware";
-import {avmarkerSisteVelgtFilter, avmarkerVelgtFilter, markerVelgtFilter} from "../ducks/lagret-filter";
+import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
+import {MinoversiktLagreFilterKnapp} from "./minoversikt-lagre-filter-knapp";
+import {LagreFilterController} from "./lagre-filter-controller";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -43,14 +36,7 @@ function MinoversiktSide() {
     const statustall = useFetchStatusTall(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
-    const [lagretFilterMenyModalErApen, setLagretFilterMenyModalErApen] = useState(false);
-    const [modalVisningstype, setModalVisningstype] = useState<Visningstype>(Visningstype.MENY);
-    const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
-    const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
-    const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
-    const [erNavnEllerFnrBrukt, setErNavnEllerFnrBrukt] = useState(false);
-    const {sisteValgteLagredeFilter, valgtLagretFilter} = useSelector((state: AppState) => state.lagretFilter)
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -63,38 +49,6 @@ function MinoversiktSide() {
         return antallBrukere > antall;
     };
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
-
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
-
-    useEffect(() => {
-        const erMinOversiktFilterErTomt = erObjektValuesTomt(filtreringMinOversikt)
-        setErLagreKnappSkjult(erMinOversiktFilterErTomt)
-        setErNavnEllerFnrBrukt(filtreringMinOversikt.navnEllerFnrQuery !== "")
-        if (erMinOversiktFilterErTomt){
-            dispatch(avmarkerSisteVelgtFilter())
-        }
-    }, [filtreringMinOversikt, dispatch]);
-
-    useEffect(()=>{
-        const valgtFilter = lagretFilterList.find(elem => lagredeFilterListerErLik(elem.filterValg, filtreringMinOversikt));
-        if (valgtFilter){
-            dispatch(markerVelgtFilter(valgtFilter));
-            logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
-                {}, {filterId: valgtFilter.filterId, sideNavn: finnSideNavn()});
-        }else{
-            dispatch(avmarkerVelgtFilter());
-        }
-    },[filtreringMinOversikt, lagretFilterList, dispatch])
-
-    function lagreFilterModal(event) {
-        event.preventDefault()
-
-        if (valgtLagretFilter) setModalVisningstype(Visningstype.OPPDATER)
-        else if (!sisteValgteLagredeFilter) setModalVisningstype(Visningstype.LAGRE_NYTT)
-        else setModalVisningstype(Visningstype.MENY)
-
-        setLagretFilterMenyModalErApen(true)
-    }
 
     return (
         <DocumentTitle title="Min oversikt">
@@ -118,10 +72,7 @@ function MinoversiktSide() {
                                     listevisning={listevisning}
                                     className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                 />
-                                <Knapp className="lagre-filter-knapp" mini hidden={erLagreKnappSkjult || !lagredeFilterFeatureToggleErPa}
-                                       onClick={(event) => lagreFilterModal(event)}>
-                                    Lagre filter
-                                </Knapp>
+                                <MinoversiktLagreFilterKnapp/>
                             </div>
                             <div className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <TabellOverskrift
@@ -161,12 +112,8 @@ function MinoversiktSide() {
                         </div>
                     </MinOversiktWrapper>
                 </Innholdslaster>
-                <LagreFilterModal
-                    velgVisningstype={modalVisningstype}
-                    isOpen={lagretFilterMenyModalErApen}
-                    onRequestClose={() => setLagretFilterMenyModalErApen(false)}
-                    erNavnEllerFnrBrukt={erNavnEllerFnrBrukt}
-                />
+                <LagreFilterModal/>
+                <LagreFilterController/>
             </div>
         </DocumentTitle>
     );

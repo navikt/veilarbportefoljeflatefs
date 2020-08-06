@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import {FiltervalgModell} from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
@@ -11,11 +11,8 @@ import FilteringVeilederGrupper from './filtrering-veileder-grupper/filtrering-v
 import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
-import FilteringLagredeFilter from "./lagrede-filter/filtrering-lagrede-filter";
-import {HandlingsType, hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
-import {AppState} from "../reducer";
-import {sjekkFeature} from "../ducks/features";
-import {LAGREDE_FILTER} from "../konstanter";
+import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
+import {MinoversiktExpanderbarpanel} from "../minoversikt/minoversikt-expanderbarpanel";
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -26,21 +23,12 @@ interface FiltreringContainerProps {
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
     const dispatch = useDispatch();
 
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
-    const sisteHandlingType = useSelector((state: AppState) => state.lagretFilter.handlingType);
-    const [erLagredeListApen, setErLagredeListApen] = useState(false)
-
     useEffect(() => {
         if (filtergruppe === "veileder") {
             dispatch(hentLagredeFilterForVeileder());
         }
     }, [filtergruppe, dispatch])
 
-    useEffect(() => {
-        if (filtergruppe === "veileder" && sisteHandlingType === HandlingsType.NYTT) {
-            setErLagredeListApen(true)
-        }
-    }, [filtergruppe, sisteHandlingType])
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
@@ -53,15 +41,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 filtervalg={filtervalg}
                 endreFiltervalg={doEndreFiltervalg}
             />
-            <MetrikkEkspanderbartpanel
-                apen={erLagredeListApen}
-                tittel="Mine filter"
-                tittelProps="undertittel"
-                lamellNavn="lagredefilter"
-                hidden={filtergruppe !== 'veileder' || !lagredeFilterFeatureToggleErPa}
-            >
-                <FilteringLagredeFilter/>
-            </MetrikkEkspanderbartpanel>
+            <MinoversiktExpanderbarpanel filtergruppe={filtergruppe}/>
             <MetrikkEkspanderbartpanel
                 apen={false}
                 tittel="Veiledergrupper"

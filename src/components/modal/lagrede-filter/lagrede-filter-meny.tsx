@@ -3,7 +3,7 @@ import React from "react";
 import {Hovedknapp, Knapp} from "nav-frontend-knapper";
 import {Visningstype} from "./lagre-filter-modal";
 
-const lagreNyttFilterKnapp = (setValgtVisningstype) => {
+const lagreNyttFilterKnapp = (setValgtVisningstype: (visningstype: Visningstype) => void) => {
     return (
         <Hovedknapp className="ny-knapp blokk-xs"
                     onClick={() => setValgtVisningstype(Visningstype.LAGRE_NYTT)}>
@@ -12,7 +12,7 @@ const lagreNyttFilterKnapp = (setValgtVisningstype) => {
     )
 }
 
-const oppdaterFilterKnapp = (setValgtVisningstype) => {
+const oppdaterFilterKnapp = (setValgtVisningstype: (visningstype: Visningstype) => void) => {
     return (
         <Knapp className="eksisterende-knapp"
                onClick={() => setValgtVisningstype(Visningstype.OPPDATER)}>
@@ -21,16 +21,7 @@ const oppdaterFilterKnapp = (setValgtVisningstype) => {
     )
 }
 
-const navnEllerFnrErBruktInnhold = () => {
-    return (
-        <>
-            <Normaltekst>Fødselsnummer og navn kan ikke brukes i lagrede filter.</Normaltekst>
-            <Normaltekst>Du må fjerne fødselsnummer og navn for å lagre filteret.</Normaltekst>
-        </>
-    )
-}
-
-const oppdatereEllerLagreNyttFilterInnhold = (filterNavn, setValgtVisningstype) => {
+const oppdatereEllerLagreNyttFilterInnhold = (filterNavn, setValgtVisningstype: (visningstype: Visningstype) => void) => {
     return (
         <>
             {lagreNyttFilterKnapp(setValgtVisningstype)}
@@ -40,9 +31,8 @@ const oppdatereEllerLagreNyttFilterInnhold = (filterNavn, setValgtVisningstype) 
     )
 }
 
-export function Meny(props: { setValgtVisningstype, sisteFilterNavn, erNavnEllerFnrBrukt }) {
+export function Meny(props: { setValgtVisningstype, sisteFilterNavn }) {
     const getInhold = () => {
-        if (props.erNavnEllerFnrBrukt) return navnEllerFnrErBruktInnhold()
         return oppdatereEllerLagreNyttFilterInnhold(props.sisteFilterNavn, props.setValgtVisningstype)
     }
 
