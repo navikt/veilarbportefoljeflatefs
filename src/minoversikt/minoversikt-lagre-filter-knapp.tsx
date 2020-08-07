@@ -23,6 +23,7 @@ export function MinoversiktLagreFilterKnapp(){
 
     useEffect(() => {
         const erMinOversiktFilterErTomt = erObjektValuesTomt(filtreringMinOversikt)
+        console.log("minoversikt change", erMinOversiktFilterErTomt)
         setErLagreKnappSkjult(erMinOversiktFilterErTomt)
     }, [filtreringMinOversikt]);
 
