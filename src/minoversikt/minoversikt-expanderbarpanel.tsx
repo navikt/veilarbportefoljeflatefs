@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
-import {apenLagreFilterLamell, HandlingsType, lukkLagreFilterLamell} from "../ducks/lagret-filter";
+import {HandlingsType} from "../ducks/lagret-filter";
 import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
 import hiddenIf from "../components/hidden-if/hidden-if";
 
@@ -13,30 +13,30 @@ import hiddenIf from "../components/hidden-if/hidden-if";
 export const HiddenIfEkspanderbartpanel = hiddenIf(Ekspanderbartpanel)
 
 export function MinoversiktExpanderbarpanel(props: {filtergruppe}){
+    const sessionConfig = {
+        key: '@lagret-filter-lamell-apen',
+    };
+
     const dispatch = useDispatch()
     const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
     const sisteHandlingType = useSelector((state: AppState) => state.lagretFilter.handlingType);
-    const erLamellApen = useSelector((state: AppState) => state.lagretFilter.erLamellApen);
-
-    const [erApen, setErApen] = useState(erLamellApen)
+    const [erApen, setErApen] = useState<boolean>(sessionStorage.getItem(sessionConfig.key) === "true")
 
     const handleOnClick = () => {
         if (erApen){
-            dispatch(lukkLagreFilterLamell())
+            setErApen(false)
+            sessionStorage.setItem(sessionConfig.key, "false");
         }else{
-            dispatch(apenLagreFilterLamell())
+            setErApen(true)
+            sessionStorage.setItem(sessionConfig.key, "true");
         }
     }
 
     useEffect(() => {
         if (sisteHandlingType === HandlingsType.NYTT) {
-            dispatch(apenLagreFilterLamell())
+            setErApen(true)
         }
     }, [sisteHandlingType, dispatch])
-
-    useEffect(()=>{
-        setErApen(erLamellApen)
-    },[erLamellApen])
 
     return(
         <div className="blokk-xxs portefolje__ekspanderbarpanel">

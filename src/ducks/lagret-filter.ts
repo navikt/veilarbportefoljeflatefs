@@ -44,8 +44,7 @@ export interface LagretFilterState {
     valgtLagretFilter: OrNothing<LagretFilter>;
     sisteValgteLagredeFilter: OrNothing<number>
     handlingType: HandlingsType | null;
-    erModalApen: boolean,
-    erLamellApen: boolean
+    erModalApen: boolean
 }
 
 export interface RedigerFilter {
@@ -72,8 +71,7 @@ const initialState = {
     valgtLagretFilter: null,
     handlingType: null,
     sisteValgteLagredeFilter: null,
-    erModalApen : false,
-    erLamellApen: false
+    erModalApen : false
 };
 
 //  Reducer
@@ -128,10 +126,6 @@ export default function reducer(state: LagretFilterState = initialState, action)
             return {...state, erModalApen: true}
         case LUKK_LAGRE_FILTER_MODAL:
             return {...state, erModalApen: false}
-        case APEN_LAGRE_FILTER_LAMELL:
-            return {...state, erLamellApen: true}
-        case LUKK_LAGRE_FILTER_LAMELL:
-            return {...state, erLamellApen: false}
         default:
             return state;
     }
@@ -170,20 +164,6 @@ export function apenLagreFilterModal() {
 export function lukkLagreFilterModal() {
     return {
         type: LUKK_LAGRE_FILTER_MODAL,
-        name: 'veileder'
-    }
-}
-
-export function apenLagreFilterLamell() {
-    return {
-        type: APEN_LAGRE_FILTER_LAMELL,
-        name: 'veileder'
-    }
-}
-
-export function lukkLagreFilterLamell() {
-    return {
-        type: LUKK_LAGRE_FILTER_LAMELL,
         name: 'veileder'
     }
 }
