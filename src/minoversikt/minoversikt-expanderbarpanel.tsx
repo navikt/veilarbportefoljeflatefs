@@ -1,35 +1,55 @@
 import FilteringLagredeFilter from "../filtrering/lagrede-filter/filtrering-lagrede-filter";
-import MetrikkEkspanderbartpanel from "../components/toolbar/metrikk-ekspanderbartpanel";
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
-import {HandlingsType} from "../ducks/lagret-filter";
+import {apenLagreFilterLamell, HandlingsType, lukkLagreFilterLamell} from "../ducks/lagret-filter";
+import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
+import hiddenIf from "../components/hidden-if/hidden-if";
 
+
+export const HiddenIfEkspanderbartpanel = hiddenIf(Ekspanderbartpanel)
 
 export function MinoversiktExpanderbarpanel(props: {filtergruppe}){
+    const dispatch = useDispatch()
     const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
     const sisteHandlingType = useSelector((state: AppState) => state.lagretFilter.handlingType);
+    const erLamellApen = useSelector((state: AppState) => state.lagretFilter.erLamellApen);
 
-    const [erApen, setErApen] = useState(false)
+    const [erApen, setErApen] = useState(erLamellApen)
+
+    const handleOnClick = () => {
+        if (erApen){
+            dispatch(lukkLagreFilterLamell())
+        }else{
+            dispatch(apenLagreFilterLamell())
+        }
+    }
 
     useEffect(() => {
         if (sisteHandlingType === HandlingsType.NYTT) {
-            setErApen(true)
+            dispatch(apenLagreFilterLamell())
         }
-    }, [sisteHandlingType])
+    }, [sisteHandlingType, dispatch])
+
+    useEffect(()=>{
+        setErApen(erLamellApen)
+    },[erLamellApen])
 
     return(
-        <MetrikkEkspanderbartpanel
+        <div className="blokk-xxs portefolje__ekspanderbarpanel">
+        <HiddenIfEkspanderbartpanel
             apen={erApen}
             tittel="Mine filter"
             tittelProps="undertittel"
-            lamellNavn="lagredefilter"
             hidden={props.filtergruppe !== 'veileder' || !lagredeFilterFeatureToggleErPa}
+            border={true}
+            onClick={handleOnClick}
         >
             <FilteringLagredeFilter/>
-        </MetrikkEkspanderbartpanel>
+        </HiddenIfEkspanderbartpanel>
+        </div>
     )
 }

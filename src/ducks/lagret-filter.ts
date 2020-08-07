@@ -25,8 +25,11 @@ export const MARKER_LAGRET_FILTER = 'lagredefilter_velg/MARKER_LAGRET_FILTER';
 export const AVMARKER_LAGRET_FILTER = 'lagredefilter_velg/AVMARKER_LAGRET_FILTER';
 export const AVMARKER_SISTE_VALGT_FILTER = 'lagredefilter_velg/AVMARKER_SISTE_VALGT_FILTER';
 
-export const APEN_LAGRE_FILTER_MODAL = 'lagredefilter_velg/APEN_MODAL';
-export const LUKK_LAGRE_FILTER_MODAL = 'lagredefilter_velg/LUKK_MODAL';
+export const APEN_LAGRE_FILTER_MODAL = 'lagredefilter_velg/APEN_LAGRE_FILTER_MODAL';
+export const LUKK_LAGRE_FILTER_MODAL = 'lagredefilter_velg/LUKK_LAGRE_FILTER_MODAL';
+
+export const APEN_LAGRE_FILTER_LAMELL = 'lagredefilter_velg/APEN_LAGRE_FILTER_LAMELL';
+export const LUKK_LAGRE_FILTER_LAMELL = 'lagredefilter_velg/LUKK_LAGRE_FILTER_LAMELL';
 
 export interface LagretFilter {
     filterNavn: string;
@@ -41,7 +44,8 @@ export interface LagretFilterState {
     valgtLagretFilter: OrNothing<LagretFilter>;
     sisteValgteLagredeFilter: OrNothing<number>
     handlingType: HandlingsType | null;
-    erModalApen: boolean
+    erModalApen: boolean,
+    erLamellApen: boolean
 }
 
 export interface RedigerFilter {
@@ -68,7 +72,8 @@ const initialState = {
     valgtLagretFilter: null,
     handlingType: null,
     sisteValgteLagredeFilter: null,
-    erModalApen : false
+    erModalApen : false,
+    erLamellApen: false
 };
 
 //  Reducer
@@ -123,6 +128,10 @@ export default function reducer(state: LagretFilterState = initialState, action)
             return {...state, erModalApen: true}
         case LUKK_LAGRE_FILTER_MODAL:
             return {...state, erModalApen: false}
+        case APEN_LAGRE_FILTER_LAMELL:
+            return {...state, erLamellApen: true}
+        case LUKK_LAGRE_FILTER_LAMELL:
+            return {...state, erLamellApen: false}
         default:
             return state;
     }
@@ -161,6 +170,20 @@ export function apenLagreFilterModal() {
 export function lukkLagreFilterModal() {
     return {
         type: LUKK_LAGRE_FILTER_MODAL,
+        name: 'veileder'
+    }
+}
+
+export function apenLagreFilterLamell() {
+    return {
+        type: APEN_LAGRE_FILTER_LAMELL,
+        name: 'veileder'
+    }
+}
+
+export function lukkLagreFilterLamell() {
+    return {
+        type: LUKK_LAGRE_FILTER_LAMELL,
         name: 'veileder'
     }
 }
