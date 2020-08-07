@@ -1,4 +1,3 @@
-import * as React from "react";
 import {useEffect} from "react";
 import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/lagrede-filter/lagrede-filter-utils";
 import {avmarkerSisteVelgtFilter, avmarkerVelgtFilter, markerVelgtFilter} from "../ducks/lagret-filter";
@@ -32,7 +31,5 @@ export function LagreFilterController(){
     },[filtreringMinOversikt, lagretFilterList, dispatch])
 
 
-    return (
-        <span></span>
-        )
+    return null
 }
