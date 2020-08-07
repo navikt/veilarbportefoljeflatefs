@@ -15,7 +15,9 @@ export function erObjektValuesTomt(minOversiktObjekt): boolean {
 }
 
 function erValueTomt(value) {
-    return value === null || value === 'NA' || value === "" || isEmptyArray(value) || erTomtObjekt(value)
+    if (value instanceof Object) return erObjektValuesTomt(value)
+    else if (Array.isArray(value)) return isEmptyArray(value)
+    else return value === null || value === 'NA' || value === "" || erTomtObjekt(value)
 }
 
 export function antallFilter(minOversiktObjekt) {

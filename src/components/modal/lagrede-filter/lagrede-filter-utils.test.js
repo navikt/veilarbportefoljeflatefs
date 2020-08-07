@@ -33,7 +33,6 @@ describe('Lagrede filter utils', () => {
                 registreringstype: [],
                 cvJobbprofil: null,
                 arbeidslisteKategori: []
-
             };
 
             expect(erObjektValuesTomt(filtervalgModell) === true);
