@@ -44,7 +44,6 @@ export function LagreFilterModal() {
     const dispatch = useDispatch();
 
     const lukkModal = () => {
-        setValgtVisningstype(Visningstype.MENY)
         dispatch(lukkLagreFilterModal())
     }
 
@@ -53,7 +52,7 @@ export function LagreFilterModal() {
         else if (valgtLagretFilter) setValgtVisningstype(Visningstype.OPPDATER)
         else if (!sisteValgteLagredeFilter) setValgtVisningstype(Visningstype.LAGRE_NYTT)
         else setValgtVisningstype(Visningstype.MENY)
-    },[filtreringMinOversikt, valgtLagretFilter, sisteValgteLagredeFilter])
+    },[filtreringMinOversikt, valgtLagretFilter, sisteValgteLagredeFilter, erModalApen])
 
     return (
         <>
