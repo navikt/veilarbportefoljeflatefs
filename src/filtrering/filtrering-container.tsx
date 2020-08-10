@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import {FiltervalgModell} from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
@@ -12,7 +12,10 @@ import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
 import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
-import {MinoversiktExpanderbarpanel} from "../minoversikt/minoversikt-expanderbarpanel";
+import FilteringLagredeFilter from "./lagrede-filter/filtrering-lagrede-filter";
+import {AppState} from "../reducer";
+import {sjekkFeature} from "../ducks/features";
+import {LAGREDE_FILTER} from "../konstanter";
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -22,6 +25,7 @@ interface FiltreringContainerProps {
 
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
     const dispatch = useDispatch();
+    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
 
     useEffect(() => {
         if (filtergruppe === "veileder") {
@@ -35,13 +39,37 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
 
+    const sessionConfig = {
+        key: '@lagret-filter-lamell-apen',
+    };
+
+    const [erLagredeFilterApen, setErLagredeFilterApen] = useState<boolean>(sessionStorage.getItem(sessionConfig.key) === "true")
+    const klikkPaLagredeFilter = () => {
+        if (erLagredeFilterApen) {
+            setErLagredeFilterApen(false)
+            sessionStorage.setItem(sessionConfig.key, "false");
+        } else {
+            setErLagredeFilterApen(true)
+            sessionStorage.setItem(sessionConfig.key, "true");
+        }
+    }
+
     return (
         <div className="blokk-m">
             <FiltreringNavnellerfnr
                 filtervalg={filtervalg}
                 endreFiltervalg={doEndreFiltervalg}
             />
-            <MinoversiktExpanderbarpanel filtergruppe={filtergruppe}/>
+            <MetrikkEkspanderbartpanel
+                apen={erLagredeFilterApen}
+                lamellNavn="mine-filter"
+                tittel="Mine filter"
+                tittelProps="undertittel"
+                onClick={klikkPaLagredeFilter}
+                hidden={!lagredeFilterFeatureToggleErPa || filtergruppe !== 'veileder'}
+            >
+                <FilteringLagredeFilter/>
+            </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={false}
                 tittel="Veiledergrupper"

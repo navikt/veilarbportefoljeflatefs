@@ -10,6 +10,7 @@ interface MetrikkEkspanderbartpanelProps {
     lamellNavn: string;
     apen: boolean;
     skalVises?: boolean;
+    onClick?: () => void;
 }
 
 type AllProps = MetrikkEkspanderbartpanelProps & EkspanderbartpanelProps;

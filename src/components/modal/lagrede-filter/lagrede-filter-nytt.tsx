@@ -10,7 +10,7 @@ import {ErrorModalType, LagredeFilterVarselModal} from "./varsel-modal";
 import {lagreNyttFilter} from "../../../ducks/lagret-filter";
 import {useRequestHandler} from "../../../hooks/use-request-handler";
 
-export function LagreNytt(props: { lukkModal}) {
+export function LagreNytt(props: { lukkModal }) {
     const filterValg = useSelector((state: AppState) => state.filtreringMinoversikt)
     const data = useSelector((state: AppState) => state.lagretFilter.data)
     const [filterNavn, setFilterNavn] = useState("")
@@ -36,7 +36,7 @@ export function LagreNytt(props: { lukkModal}) {
 
     return (
         <>
-            <form onSubmit={(e)=>doLagreNyttFilter(e)}>
+            <form onSubmit={(e) => doLagreNyttFilter(e)}>
                 <Normaltekst className="blokk xs">Du vil finne igjen filteret under "Mine filter".</Normaltekst>
                 <Input
                     label="Navn:"
@@ -47,13 +47,13 @@ export function LagreNytt(props: { lukkModal}) {
                     maxLength={255}
                 />
                 <div className="lagret-filter-knapp-wrapper">
-                    <Hovedknapp mini htmlType={"submit"}>Lagre</Hovedknapp>
+                    <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>
                 </div>
             </form>
             <LagredeFilterVarselModal
                 filterNavn={filterNavn}
-                erApen = {requestHandler.errorModalErApen}
-                setErrorModalErApen = {requestHandler.setErrorModalErApen}
+                erApen={requestHandler.errorModalErApen}
+                setErrorModalErApen={requestHandler.setErrorModalErApen}
                 modalType={ErrorModalType.LAGRE}
             />
         </>
