@@ -1,8 +1,7 @@
-import React from 'react';
-import Ekspanderbartpanel, { EkspanderbartpanelProps } from 'nav-frontend-ekspanderbartpanel';
-import { logEvent } from '../../utils/frontend-logger';
-import { finnSideNavn } from '../../middleware/metrics-middleware';
-import { PropsWithChildren, useState } from 'react';
+import React, {PropsWithChildren, useState} from 'react';
+import Ekspanderbartpanel, {EkspanderbartpanelProps} from 'nav-frontend-ekspanderbartpanel';
+import {logEvent} from '../../utils/frontend-logger';
+import {finnSideNavn} from '../../middleware/metrics-middleware';
 import hiddenIf from '../hidden-if/hidden-if';
 import '../toolbar/toolbar.less';
 import classNames from "classnames";
@@ -22,6 +21,9 @@ function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
 
     const handleOnClick = () => {
         setIsApen(!isApen);
+        if (props.onClick) {
+            props.onClick()
+        }
         logEvent('portefolje.metrikker.lamell', {
             navn: props.lamellNavn,
             apen: !isApen,

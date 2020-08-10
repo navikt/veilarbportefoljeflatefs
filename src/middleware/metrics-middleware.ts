@@ -12,6 +12,8 @@ import {
     SLETT_VEILEDERGRUPPER_OK
 } from '../ducks/veiledergrupper_filter';
 import {
+    HENT_LAGREDEFILTER_FEILET,
+    HENT_LAGREDEFILTER_OK,
     NY_LAGREDEFILTER_FEILET,
     NY_LAGREDEFILTER_OK,
     REDIGER_LAGREDEFILTER_FEILET,
@@ -145,6 +147,9 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
 
         //lagrede filter
+        case HENT_LAGREDEFILTER_OK:
+            loggAntallLagredeFilter(action.data);
+            break;
         case NY_LAGREDEFILTER_OK:
             loggAntallBokstaverIFilterNavn(action.data.filterNavn)
             loggAntallFilterOK(action.data.filterValg)
@@ -160,6 +165,9 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             loggSlettLagretFilterOK(opprettetTidspunkt);
             break;
 
+        case HENT_LAGREDEFILTER_FEILET:
+            loggHentLagretFilterFeilet()
+            break;
         case NY_LAGREDEFILTER_FEILET:
             loggNyttLagretFilterFeilet()
             break;
@@ -309,6 +317,10 @@ const loggSlettLagretFilterOK = (opprettetTidspunkt) => {
         {});
 };
 
+const loggHentLagretFilterFeilet = () => {
+    logEvent('portefolje.metrikker.lagredefilter.henting-feilet');
+};
+
 const loggNyttLagretFilterFeilet = () => {
     logEvent('portefolje.metrikker.lagredefilter.oppretting-feilet');
 };
@@ -330,3 +342,8 @@ const loggAntallBokstaverIFilterNavn = (filterNavn) => {
     logEvent('portefolje.metrikker.lagredefilter.filternavn',
         {filterNavn: filterNavn.length})
 };
+
+const loggAntallLagredeFilter = (antallFilter) => {
+    logEvent('portefolje.metrikker.lagredefilter.hent',
+        {antallFilter: antallFilter})
+}
