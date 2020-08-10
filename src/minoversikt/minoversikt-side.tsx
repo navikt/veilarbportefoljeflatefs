@@ -28,7 +28,7 @@ import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
 import {MinoversiktLagreFilterKnapp} from "./minoversikt-lagre-filter-knapp";
-import {LagreFilterController} from "./lagre-filter-controller";
+import {useLagreFilterController} from "./use-lagre-filter-controller";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -42,6 +42,7 @@ function MinoversiktSide() {
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
     useFetchPortefolje(ListevisningType.minOversikt);
+    useLagreFilterController();
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
@@ -113,7 +114,6 @@ function MinoversiktSide() {
                     </MinOversiktWrapper>
                 </Innholdslaster>
                 <LagreFilterModal/>
-                <LagreFilterController/>
             </div>
         </DocumentTitle>
     );
