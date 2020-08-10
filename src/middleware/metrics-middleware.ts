@@ -87,7 +87,6 @@ function finnSlettetGruppe(store: any, filterId: number) {
     return undefined;
 }
 
-
 export const metricsMiddleWare = (store: any) => (next: any) => (action: any) => {
     const {type, data, kolonne} = action;
     const sideNavn = finnSideNavn();
@@ -149,7 +148,8 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
 
         //lagrede filter
         case HENT_LAGREDEFILTER_OK:
-
+            const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(store.getState().inloggetVeileder.data.ident);
+            loggAntallLagredeFilter(action.data.length, veilederIdentTilNonsens);
             break;
         case NY_LAGREDEFILTER_OK:
             loggAntallBokstaverIFilterNavn(action.data.filterNavn)
@@ -344,3 +344,7 @@ const loggAntallBokstaverIFilterNavn = (filterNavn) => {
         {filterNavn: filterNavn.length})
 };
 
+const loggAntallLagredeFilter = (antallFilter, veilederIdentHash) => {
+    logEvent('portefolje.metrikker.lagredefilter.antall-per-veileder',
+        {antallFilter: antallFilter, veilederhash: veilederIdentHash})
+}
