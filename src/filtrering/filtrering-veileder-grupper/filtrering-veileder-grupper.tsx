@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../reducer';
-import { LeggTilKnapp } from '../../components/knapper/legg-til-knapp';
+import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppState} from '../../reducer';
+import {LeggTilKnapp} from '../../components/knapper/legg-til-knapp';
 import VeilederGruppeInnhold from './veiledergrupper-innhold';
 import './veileder-gruppe.less';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { VeilederGruppeModal } from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
-import { endreFiltervalg, initialState } from '../../ducks/filtrering';
-import { FiltervalgModell } from '../../model-interfaces';
+import {Normaltekst} from 'nav-frontend-typografi';
+import {VeilederGruppeModal} from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
+import {endreFiltervalg, initialState} from '../../ducks/filtrering';
+import {FiltervalgModell} from '../../model-interfaces';
 import {
     lageNyGruppe,
 } from '../../ducks/veiledergrupper_filter';
-import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
+import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {AlertStripeFeil} from "nav-frontend-alertstriper";
 
 
@@ -19,7 +19,7 @@ interface FilteringVeilederGrupperProps {
     filtergruppe?: string;
 }
 
-function FilteringVeilederGrupper({ filtergruppe } : FilteringVeilederGrupperProps) {
+function FilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps) {
 
     const [visVeilederGruppeModal, setVeilederGruppeModal] = useState(false);
 
@@ -62,7 +62,7 @@ function FilteringVeilederGrupper({ filtergruppe } : FilteringVeilederGrupperPro
     return (
         <>
             {
-                !lagretFilterState.error ? veilederGrupperOK() : veilederGrupperError()
+                lagretFilterState.error ? veilederGrupperError() : veilederGrupperOK()
             }
             <LeggTilKnapp onClick={() => {
                 setVeilederGruppeModal(true);
