@@ -44,6 +44,7 @@ export function LagreFilterModal() {
     const dispatch = useDispatch();
 
     const lukkModal = () => {
+        setValgtVisningstype(Visningstype.MENY)
         dispatch(lukkLagreFilterModal())
     }
 
