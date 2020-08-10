@@ -1,39 +1,42 @@
 @import "~nav-frontend-core/less/core";
 
 .veilarbportefoljeflatefs {
-  .lagrede-filter {
-    &__valgfelt {
-      padding: .5rem 0 0 .5rem;
-      max-height: fit-content;
-      overflow-y: hidden;
-      border-top-width: 0;
-      border-bottom-width: 0;
-
-      &__lang {
-        padding-top: .5rem;
-        max-height: 19.5rem;
-        overflow-y: scroll;
-        border-top: 1px solid @navGra40;
-        border-bottom: 1px solid @navGra40;
-      }
-
-      .skjemaelement__label {
-        word-break: break-word;
-      }
+  .lagrede-filter-wrapper {
+    .ekspanderbartPanel__innhold {
+      padding: 0;
     }
 
-    &__rad {
-      display: flex;
-      justify-content: space-between;
-      min-height: 2.5rem;
+    .lagrede-filter {
+      &__valgfelt {
+        padding: .5rem 1rem 0;
+        max-height: fit-content;
+        overflow-y: hidden;
+        border-top-width: 0;
+        border-bottom-width: 0;
 
-      .rediger-knapp {
-        height: unset;
+        &__lang {
+          padding-top: .5rem;
+          max-height: 19.5rem;
+          overflow-y: scroll;
+          border-top: 1px solid @navGra40;
+          border-bottom: 1px solid @navGra40;
+        }
+
+        .skjemaelement__label {
+          word-break: break-word;
+        }
       }
-    }
 
-    &__filternavn {
-      width: 85%;
+      &__rad {
+        display: flex;
+        justify-content: space-between;
+        min-height: 2.5rem;
+
+      }
+
+      &__filternavn {
+        width: 85%;
+      }
     }
   }
 }

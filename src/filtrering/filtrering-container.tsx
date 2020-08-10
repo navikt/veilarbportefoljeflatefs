@@ -5,7 +5,7 @@ import {endreFiltervalg} from '../ducks/filtrering';
 import {FiltervalgModell} from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
 import FiltreringNavnellerfnr from './filtrering-navnellerfnr';
-import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
+import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {FiltreringStatus} from './filtrering-status/filtrering-status';
 import FilteringVeilederGrupper from './filtrering-veileder-grupper/filtrering-veileder-grupper';
 import {OrNothing} from '../utils/types/types';
@@ -67,6 +67,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 tittelProps="undertittel"
                 onClick={klikkPaLagredeFilter}
                 hidden={!lagredeFilterFeatureToggleErPa || filtergruppe !== 'veileder'}
+                className="lagrede-filter-wrapper"
             >
                 <FilteringLagredeFilter/>
             </MetrikkEkspanderbartpanel>

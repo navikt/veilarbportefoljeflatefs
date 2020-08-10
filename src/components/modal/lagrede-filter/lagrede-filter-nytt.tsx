@@ -37,7 +37,7 @@ export function LagreNytt(props: { lukkModal }) {
     return (
         <>
             <form onSubmit={(e) => doLagreNyttFilter(e)}>
-                <Normaltekst className="blokk xs">Du vil finne igjen filteret under "Mine filter".</Normaltekst>
+                <Normaltekst className="blokk-xs">Du vil finne igjen filteret under "Mine filter".</Normaltekst>
                 <Input
                     label="Navn:"
                     value={filterNavn}
