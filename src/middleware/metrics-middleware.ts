@@ -345,7 +345,6 @@ const loggAntallBokstaverIFilterNavn = (filterNavn) => {
 };
 
 const loggAntallLagredeFilter = (antallFilter, veilederIdentHash) => {
-    console.log(veilederIdentHash)
     logEvent('portefolje.metrikker.lagredefilter.antall-per-veileder',
-        {antallFilter: antallFilter, veilederhash: veilederIdentHash})
+        {antallFilter: antallFilter, id: veilederIdentHash})
 }
