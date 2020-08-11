@@ -16,6 +16,8 @@ import FilteringLagredeFilter from "./lagrede-filter/filtrering-lagrede-filter";
 import {AppState} from "../reducer";
 import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
+import {logEvent} from "../utils/frontend-logger";
+import {finnSideNavn} from "../middleware/metrics-middleware";
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -52,6 +54,11 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
             setErLagredeFilterApen(true)
             sessionStorage.setItem(sessionConfig.key, "true");
         }
+        logEvent('portefolje.metrikker.lamell', {
+            navn: "mine-filter",
+            apen: !erLagredeFilterApen,
+            sideNavn: finnSideNavn(),
+        });
     }
 
     return (

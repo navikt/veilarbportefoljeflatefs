@@ -10,7 +10,6 @@ interface MetrikkEkspanderbartpanelProps {
     lamellNavn: string;
     apen: boolean;
     skalVises?: boolean;
-    onClick?: () => void;
     className?: string;
 }
 
@@ -20,10 +19,8 @@ function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
     const [isApen, setIsApen] = useState(props.apen);
 
     const handleOnClick = () => {
+        console.log("lam", lamellNavn)
         setIsApen(!isApen);
-        if (props.onClick) {
-            props.onClick()
-        }
         logEvent('portefolje.metrikker.lamell', {
             navn: props.lamellNavn,
             apen: !isApen,
@@ -35,7 +32,7 @@ function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
         return null;
     }
 
-    const {children, onClick, lamellNavn, className, ...rest} = props;
+    const {children, lamellNavn, className, ...rest} = props;
     return (
         <div className={classNames("blokk-xxs portefolje__ekspanderbarpanel", className)}>
             <Ekspanderbartpanel

@@ -28,9 +28,6 @@ export const AVMARKER_SISTE_VALGT_FILTER = 'lagredefilter_velg/AVMARKER_SISTE_VA
 export const APEN_LAGRE_FILTER_MODAL = 'lagredefilter_velg/APEN_LAGRE_FILTER_MODAL';
 export const LUKK_LAGRE_FILTER_MODAL = 'lagredefilter_velg/LUKK_LAGRE_FILTER_MODAL';
 
-export const APEN_LAGRE_FILTER_LAMELL = 'lagredefilter_velg/APEN_LAGRE_FILTER_LAMELL';
-export const LUKK_LAGRE_FILTER_LAMELL = 'lagredefilter_velg/LUKK_LAGRE_FILTER_LAMELL';
-
 export interface LagretFilter {
     filterNavn: string;
     filterId: number;
@@ -44,7 +41,7 @@ export interface LagretFilterState {
     valgtLagretFilter: OrNothing<LagretFilter>;
     sisteValgteLagredeFilter: OrNothing<number>
     handlingType: HandlingsType | null;
-    erModalApen: boolean
+    erModalApen: boolean;
 }
 
 export interface RedigerFilter {
@@ -71,7 +68,7 @@ const initialState = {
     valgtLagretFilter: null,
     handlingType: null,
     sisteValgteLagredeFilter: null,
-    erModalApen : false
+    erModalApen: false,
 };
 
 //  Reducer
@@ -96,8 +93,14 @@ export default function reducer(state: LagretFilterState = initialState, action)
         case HENT_LAGREDEFILTER_OK:
             return {...state, status: STATUS.OK, data: action.data, handlingType: HandlingsType.HENTE};
         case NY_LAGREDEFILTER_OK:
-            return {...state, status: STATUS.OK, data: state.data.concat(action.data),  handlingType: HandlingsType.NYTT};
-        case REDIGER_LAGREDEFILTER_OK:
+            return {
+                ...state,
+                status: STATUS.OK,
+                handlingType: HandlingsType.NYTT,
+                data: state.data.concat(action.data)
+            };
+        case
+        REDIGER_LAGREDEFILTER_OK:
             return {
                 ...state, status: STATUS.OK, handlingType: HandlingsType.REDIGERE, data: state.data.map(elem => {
                         if (elem.filterId !== action.data.filterId) {
@@ -107,7 +110,8 @@ export default function reducer(state: LagretFilterState = initialState, action)
                     }
                 )
             };
-        case SLETT_LAGREDEFILTER_OK:
+        case
+        SLETT_LAGREDEFILTER_OK:
             return {
                 ...state,
                 status: STATUS.OK,
@@ -116,15 +120,20 @@ export default function reducer(state: LagretFilterState = initialState, action)
                 sisteValgteLagredeFilter: null,
                 data: state.data.filter(elem => elem.filterId !== action.data)
             };
-        case MARKER_LAGRET_FILTER:
+        case
+        MARKER_LAGRET_FILTER:
             return {...state, valgtLagretFilter: action.data, sisteValgteLagredeFilter: action.data.filterId}
-        case AVMARKER_LAGRET_FILTER:
+        case
+        AVMARKER_LAGRET_FILTER:
             return {...state, valgtLagretFilter: null}
-        case AVMARKER_SISTE_VALGT_FILTER:
+        case
+        AVMARKER_SISTE_VALGT_FILTER:
             return {...state, sisteValgteLagredeFilter: null}
-        case APEN_LAGRE_FILTER_MODAL:
+        case
+        APEN_LAGRE_FILTER_MODAL:
             return {...state, erModalApen: true}
-        case LUKK_LAGRE_FILTER_MODAL:
+        case
+        LUKK_LAGRE_FILTER_MODAL:
             return {...state, erModalApen: false}
         default:
             return state;

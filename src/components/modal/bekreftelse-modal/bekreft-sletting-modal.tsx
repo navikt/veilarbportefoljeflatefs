@@ -34,9 +34,9 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
                 <Innholdstittel className="blokk-s">
                     {props.tittel}
                 </Innholdstittel>
-                <HiddenIfInfotekst hidden={!props.infoTekst} >{props.infoTekst}</HiddenIfInfotekst>
+                <HiddenIfInfotekst hidden={!props.infoTekst}>{props.infoTekst}</HiddenIfInfotekst>
                 <Normaltekst>
-                    Er du sikker på at du vil slette <b>{props.navn}</b> ?
+                    Er du sikker på at du vil slette <b>{props.navn}</b>?
                 </Normaltekst>
             </div>
             <div className="bekreft-sletting-modal__knappegruppe">

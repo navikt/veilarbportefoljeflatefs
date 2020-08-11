@@ -16,9 +16,7 @@ export function LagreNytt(props: { lukkModal }) {
     const [filterNavn, setFilterNavn] = useState("")
     const [feilmelding, setFeilmelding] = useState({} as LagretFilterValideringsError)
     const dispatch = useDispatch();
-    const lukkModal = props.lukkModal
-
-    const requestHandler = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal)
+    const requestHandler = useRequestHandler((state: AppState) => state.lagretFilter.status, props.lukkModal)
 
     const doLagreNyttFilter = (event) => {
         event.preventDefault()

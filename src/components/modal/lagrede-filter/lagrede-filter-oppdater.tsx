@@ -11,16 +11,14 @@ import {lagreEndringer, slettFilter} from "../../../ducks/lagret-filter";
 import {useRequestHandler} from "../../../hooks/use-request-handler";
 
 export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }) {
-
-    const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false)
-
     const dispatch = useDispatch();
     const filterValg = useSelector((state: AppState) => state.filtreringMinoversikt)
     const data = useSelector((state: AppState) => state.lagretFilter.data)
+    const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false)
     const [nyttFilterNavn, setNyttFilterNavn] = useState<string>(props.gammeltFilterNavn)
 
     const [feilmelding, setFeilmelding] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError)
-    const {gammeltFilterNavn, filterId, lukkModal} = props
+    const {gammeltFilterNavn, filterId, lukkModal} = props;
 
     const requestHandlerOpddater = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal);
     const requestHandlerSlette = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal);
@@ -48,9 +46,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }
     }
 
     const doSlettFilter = () => {
-        dispatch(slettFilter(
-            filterId
-        ))
+        dispatch(slettFilter(filterId))
         requestHandlerSlette.setSaveRequestSent(true)
     }
 

@@ -11,7 +11,6 @@ import {Meny} from "./lagrede-filter-meny";
 import {FnrFeil} from "./lagrede-filter-fnr-feil";
 import {lukkLagreFilterModal} from "../../../ducks/lagret-filter";
 
-
 export enum Visningstype {
     MENY,
     LAGRE_NYTT,
@@ -52,36 +51,35 @@ export function LagreFilterModal() {
         else if (valgtLagretFilter) setValgtVisningstype(Visningstype.OPPDATER)
         else if (!sisteValgteLagredeFilter) setValgtVisningstype(Visningstype.LAGRE_NYTT)
         else setValgtVisningstype(Visningstype.MENY)
-    },[filtreringMinOversikt, valgtLagretFilter, sisteValgteLagredeFilter, erModalApen])
+    }, [filtreringMinOversikt, valgtLagretFilter, sisteValgteLagredeFilter, erModalApen])
 
     return (
-        <>
-            <Modal
-                className="lagret-filter-meny-modal"
-                contentLabel="Lagre filter meny modal"
-                isOpen={erModalApen}
-                onRequestClose={lukkModal}
-                tittel={VisningstypeToTittel.get(valgtVisningstype)}
-            >
-                <div className="modal-visningstype">
-                    <HiddenIfMeny hidden={valgtVisningstype !== Visningstype.MENY}
-                                  setValgtVisningstype={setValgtVisningstype}
-                                  sisteFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
-                    />
+        <Modal
+            className="lagret-filter-meny-modal"
+            contentLabel="Lagre filter meny modal"
+            isOpen={erModalApen}
+            onRequestClose={lukkModal}
+            tittel={VisningstypeToTittel.get(valgtVisningstype)}
+        >
+            <div className="modal-visningstype">
+                <HiddenIfMeny hidden={valgtVisningstype !== Visningstype.MENY}
+                              setValgtVisningstype={setValgtVisningstype}
+                              sisteFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
+                />
 
-                    <HiddenIfLagreNytt hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
-                        lukkModal={lukkModal}/>
+                <HiddenIfLagreNytt hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
+                                   lukkModal={lukkModal}
+                />
 
-                    <HiddenIfOppdaterFilter hidden={valgtVisningstype !== Visningstype.OPPDATER}
-                        gammeltFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
-                        filterId={sisteValgteLagredeFilter!}
-                        lukkModal={lukkModal}
-                    />
+                <HiddenIfOppdaterFilter hidden={valgtVisningstype !== Visningstype.OPPDATER}
+                                        gammeltFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
+                                        filterId={sisteValgteLagredeFilter!}
+                                        lukkModal={lukkModal}
+                />
 
-                    <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL}/>
-                </div>
-            </Modal>
-        </>
+                <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL}/>
+            </div>
+        </Modal>
     );
 }
 

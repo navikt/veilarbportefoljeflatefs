@@ -21,24 +21,10 @@ const oppdaterFilterKnapp = (setValgtVisningstype: (visningstype: Visningstype) 
     )
 }
 
-const oppdatereEllerLagreNyttFilterInnhold = (filterNavn, setValgtVisningstype: (visningstype: Visningstype) => void) => {
-    return (
-        <>
-            {lagreNyttFilterKnapp(setValgtVisningstype)}
-            <Normaltekst>Oppdater <b>"{filterNavn}"</b> ved å klikke på knappen under.</Normaltekst>
-            {oppdaterFilterKnapp(setValgtVisningstype)}
-        </>
-    )
-}
-
-export function Meny(props: { setValgtVisningstype, sisteFilterNavn }) {
-    const getInhold = () => {
-        return oppdatereEllerLagreNyttFilterInnhold(props.sisteFilterNavn, props.setValgtVisningstype)
-    }
-
-    return (
-        <div className="lagret-filter-meny-modal__wrapper">
-            {getInhold()}
-        </div>
-    )
+export function Meny(props: { setValgtVisningstype: (visningstype: Visningstype) => void, sisteFilterNavn }) {
+    return <div className="lagret-filter-meny-modal__wrapper">
+        {lagreNyttFilterKnapp(props.setValgtVisningstype)}
+        <Normaltekst>Oppdater <b>"{props.sisteFilterNavn}"</b> ved å klikke på knappen under.</Normaltekst>
+        {oppdaterFilterKnapp(props.setValgtVisningstype)}
+    </div>
 }

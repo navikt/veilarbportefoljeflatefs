@@ -2,23 +2,20 @@
 
 .veilarbportefoljeflatefs {
   .lagrede-filter-wrapper {
-    .ekspanderbartPanel__innhold {
-      padding: 0;
+    &__tekst {
+      font-style: italic;
+      margin: 0.5rem 0;
     }
 
     .lagredefilter-emptystate {
       text-align: left;
       margin-left: 1rem;
-
-      &__tekst {
-        font-style: italic;
-        margin: 0.5rem 0 !important;
-      }
     }
 
     .lagrede-filter {
       &__valgfelt {
-        padding: .5rem 1rem 0;
+        padding-top: .5rem;
+        padding-left: .5rem;
         max-height: fit-content;
         overflow-y: hidden;
         border-top-width: 0;
@@ -26,7 +23,8 @@
 
         &__lang {
           padding-top: .5rem;
-          max-height: 19.5rem;
+          padding-left: .5rem;
+          max-height: 19rem;
           overflow-y: scroll;
           border-top: 1px solid @navGra40;
           border-bottom: 1px solid @navGra40;
