@@ -19,7 +19,6 @@ function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
     const [isApen, setIsApen] = useState(props.apen);
 
     const handleOnClick = () => {
-        console.log("lam", lamellNavn)
         setIsApen(!isApen);
         logEvent('portefolje.metrikker.lamell', {
             navn: props.lamellNavn,
