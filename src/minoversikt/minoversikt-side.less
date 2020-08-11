@@ -1,14 +1,23 @@
 @import "~nav-frontend-core/less/core";
 
 .veilarbportefoljeflatefs {
-    .filtrering-label-container__annen-veileder {
-        display: flex;
-        flex-wrap: wrap;
-        z-index: 1000;
-        background-color: @navLysBlaLighten20;
-    }
+  .etikett-wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
 
-    .tabelloverskrift__annen-veileder {
-        background-color: @navLysBlaLighten20;
-    }
+  .filtrering-label-container__annen-veileder {
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 1000;
+    background-color: @navLysBlaLighten20;
+  }
+
+  .tabelloverskrift__annen-veileder {
+    background-color: @navLysBlaLighten20;
+  }
+
+  .lagre-filter-knapp {
+    margin: 0 0 auto auto;
+  }
 }

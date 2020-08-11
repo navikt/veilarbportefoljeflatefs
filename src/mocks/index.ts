@@ -4,14 +4,15 @@ import brukere from './portefolje';
 import veiledere from './veiledere';
 import statustall from './statustall';
 import tiltak from './tiltak';
-import { veilederGrupper } from './veileder-grupper';
+import {veilederGrupper} from './veileder-grupper';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
-import { endringsloggListe } from './endringslogg';
+import {endringsloggListe} from './endringslogg';
 import * as faker from 'faker/locale/nb_NO';
-import FetchMock, { MatcherUtils, MiddlewareUtils } from 'yet-another-fetch-mock';
-import { delayed, jsonResponse } from './utils';
-import { LagretFilter } from '../ducks/lagret-filter';
+import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
+import {delayed, jsonResponse} from './utils';
+import {LagretFilter} from '../ducks/lagret-filter';
+import {lagredeFilter} from "./lagrede-filter";
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -53,6 +54,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 }
 
 let customVeilederGrupper = veilederGrupper();
+let customLagredeFilter = lagredeFilter();
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -72,7 +74,7 @@ mock.mock(
         MatcherUtils.url('/veilarbremotestore/'),
     ), (req, res, ctx) => res(
         ctx.json(Object.assign(endringsloggListe, req.body)))
-    );
+);
 
 mock.get('/veilarbremotestore/', jsonResponse(endringsloggListe));
 
@@ -108,6 +110,37 @@ mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (req, res, ctx
     }
     return res(ctx.status(401));
 });
+
+//lagrede filter
+mock.get('/veilarbfilter/api/minelagredefilter/', jsonResponse(customLagredeFilter));
+
+
+mock.put('/veilarbfilter/api/minelagredefilter/', ({body}, res, ctx) => {
+        let filterIndex = customLagredeFilter.findIndex(elem => elem.filterId === body.filterId)
+        customLagredeFilter[filterIndex] = body;
+        return res(
+            ctx.json(customLagredeFilter[filterIndex])
+        );
+    }
+);
+
+mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
+    const filterId = Math.floor(Math.random() * 100) + 500;
+    customLagredeFilter = [...customLagredeFilter, {...req.body, filterId}];
+    return res(
+        ctx.json({...req.body, filterId})
+    );
+});
+
+mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) => {
+    const {pathParams} = req;
+    if (pathParams.filterId) {
+        customLagredeFilter = customLagredeFilter.filter(v => v.filterId !== pathParams.filterId);
+        return res(ctx.status(200));
+    }
+    return res(ctx.status(401));
+});
+
 
 // veileder-api
 mock.get('/veilarbveileder/api/veileder/v2/me', jsonResponse(inloggetVeileder));

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import 'whatwg-fetch';
 import Application from './application';
 import './style.less';
-import {erHeroku} from "./utils/utils";
 
 if (!(window as any)._babelPolyfill) {
     require('babel-polyfill'); // tslint:disable-line

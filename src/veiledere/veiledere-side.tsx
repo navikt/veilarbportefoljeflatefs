@@ -19,7 +19,7 @@ import { pagineringSetup } from '../ducks/paginering';
 import { useSetEnhetIUrl } from '../hooks/portefolje/use-set-enhet-i-url';
 import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import FilteringVeilederGrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper';
-import MetrikkEkspanderbartpanel from '../components/toolbar/metrikk-ekspanderbartpanel';
+import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import '../style.less';
 import { useFetchStatusTall } from '../hooks/portefolje/use-fetch-statustall';
 
