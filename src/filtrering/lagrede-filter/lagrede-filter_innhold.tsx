@@ -6,6 +6,8 @@ import './lagrede-filter_innhold.less'
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../reducer";
 import {velgLagretFilter} from "../../ducks/filtrering";
+import {logEvent} from "../../utils/frontend-logger";
+import {finnSideNavn} from "../../middleware/metrics-middleware";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[]
@@ -37,6 +39,8 @@ function LagretFilterRad({filter}: LagretFilterRadProps) {
     const valgtLagretFilter = useSelector((state: AppState) => state.lagretFilter.valgtLagretFilter);
 
     function velgFilter(event) {
+        logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
+            {}, {filterId: filter.filterId, sideNavn: finnSideNavn()});
         dispatch(velgLagretFilter(filter))
     }
 
