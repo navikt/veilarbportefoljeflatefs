@@ -150,15 +150,15 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case HENT_LAGREDEFILTER_OK:
             const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(store.getState().inloggetVeileder.data.ident);
             loggAntallLagredeFilter(action.data.length, veilederIdentTilNonsens);
+
+            action.data.forEach(lagretFilter => loggAntallFilterOK(lagretFilter.filterId, lagretFilter.filterValg))
             break;
         case NY_LAGREDEFILTER_OK:
             loggAntallBokstaverIFilterNavn(action.data.filterNavn)
-            loggAntallFilterOK(action.data.filterValg)
             loggNyttLagretFilterOK();
             break;
         case REDIGER_LAGREDEFILTER_OK:
             loggAntallBokstaverIFilterNavn(action.data.filterNavn)
-            loggAntallFilterOK(action.data.filterValg)
             loggRedigerLagretFilterOK();
             break;
         case SLETT_LAGREDEFILTER_OK:
@@ -334,9 +334,9 @@ const loggSlettLagretFilterFeilet = () => {
     logEvent('portefolje.metrikker.lagredefilter.sletting-feilet');
 };
 
-const loggAntallFilterOK = (filterValg) => {
+const loggAntallFilterOK = (filterId, filterValg) => {
     logEvent('portefolje.metrikker.lagredefilter.antall-filter',
-        {antallFilter: antallFilter(filterValg)})
+        {antallFilter: antallFilter(filterValg)}, {filterId: filterId})
 };
 
 const loggAntallBokstaverIFilterNavn = (filterNavn) => {
