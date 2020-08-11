@@ -48,7 +48,7 @@ export function feilValidering (filterNavn, filterValg, eksisterendeFilter, filt
     }
 
     if (eksisterendeFilter.find(elem => elem.filterId !== filterId && lagredeFilterListerErLik(elem.filterValg,filterValg))){
-        feilmelding.filterNavn = "Filter valg eksisterer allerede."
+        feilmelding.filterNavn = "Valgt filter er allerede lagret."
     }
 
     return feilmelding
