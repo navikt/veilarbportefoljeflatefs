@@ -1,4 +1,5 @@
-import { FiltervalgModell } from '../model-interfaces';
+import {FiltervalgModell} from '../model-interfaces';
+import {LagretFilter, VELG_LAGRET_FILTER} from "./lagret-filter";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -61,6 +62,7 @@ function fjern(verdi, fjernVerdi) {
     } else if (fjernVerdi && typeof verdi === 'object') {
         return Object.entries(verdi)
             .filter(([key]) => key !== fjernVerdi)
+            .filter(([_,value]) => value !== AktiviteterValg.NA)
             .reduce((acc, [key, value]) => ({...acc, [key]: value}), {});
     } else if (fjernVerdi === null) {
         return null;
@@ -99,13 +101,25 @@ export default function reducer(state: FiltervalgModell = initialState, action):
             };
         case SETT_FILTERVALG:
             return {...action.data};
+        case VELG_LAGRET_FILTER:
+            return {...action.data.filterValg}
         default:
             return state;
     }
 }
 
-// Action Creators
+export function velgLagretFilter(filterVerdi: LagretFilter) {
+    return {
+        type: VELG_LAGRET_FILTER,
+        data: filterVerdi,
+        name: 'veileder'
+    }
+}
+
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet') {
+    if (Array.isArray(filterVerdi)){
+        filterVerdi.sort()
+    }
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
         return {
             type: ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
