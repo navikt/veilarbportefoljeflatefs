@@ -15,7 +15,7 @@ interface LagredeFilterInnholdProps {
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
-    const className = (props.lagretFilter.length >= 18) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
+    const className = (props.lagretFilter.length >= 7) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
 
     return (
         <div className={className} ref={outerDivRef}>
