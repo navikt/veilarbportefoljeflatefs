@@ -33,7 +33,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
         if (filtergruppe === "veileder" && lagredeFilterFeatureToggleErPa) {
             dispatch(hentLagredeFilterForVeileder());
         }
-    }, [filtergruppe, dispatch])
+    }, [filtergruppe, dispatch, lagredeFilterFeatureToggleErPa])
 
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
