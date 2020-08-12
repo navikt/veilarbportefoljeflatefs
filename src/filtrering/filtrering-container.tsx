@@ -30,7 +30,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
     const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
 
     useEffect(() => {
-        if (filtergruppe === "veileder") {
+        if (filtergruppe === "veileder" && lagredeFilterFeatureToggleErPa) {
             dispatch(hentLagredeFilterForVeileder());
         }
     }, [filtergruppe, dispatch])
