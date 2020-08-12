@@ -165,7 +165,6 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             const opprettetTidspunkt = finnSlettetGruppe(store, action.data)
             loggSlettLagretFilterOK(opprettetTidspunkt);
             break;
-
         case HENT_LAGREDEFILTER_FEILET:
             loggHentLagretFilterFeilet()
             break;
