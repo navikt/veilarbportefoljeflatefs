@@ -77,7 +77,7 @@ jobs:
           VAR: version=${{ env.IMAGE_TAG }},namespace=q1
   deploy-prod:
     name: deply prod fss
-    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/master'
     needs: build-docker-image
     runs-on: ubuntu-latest
     steps:
