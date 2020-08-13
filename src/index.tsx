@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'whatwg-fetch';
 import Application from './application';
 import './ny_style.less';
-import {erHeroku} from "./utils/utils";
+import './style.less';
 
 if (!(window as any)._babelPolyfill) {
     require('babel-polyfill'); // tslint:disable-line
@@ -14,11 +14,6 @@ if(window.localStorage.getItem('filterVersjon') !== 'v1') {
     localStorage.setItem('filterVersjon', 'v1');
     localStorage.removeItem('veilederState');
     localStorage.removeItem('enhetsState');
-}
-
-if(erHeroku()){
-    window.localStorage.setItem('lastpath','/enhet');
-    window.localStorage.setItem('lastsearch','?enhet=1234&seAlle=false&side=1&sorteringsfelt=ikke_satt&sorteringsrekkefolge=ikke_satt');
 }
 
 if(process.env.REACT_APP_MOCK === 'true') {

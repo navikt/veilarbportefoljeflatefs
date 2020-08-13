@@ -1,25 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { endreFiltervalg } from '../../ducks/filtrering';
-import { Radio } from 'nav-frontend-skjema';
+import React, {useEffect, useRef, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {endreFiltervalg} from '../../ducks/filtrering';
+import {Radio} from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import {
-    lagreEndringer,
-    LagretFilter,
-    slettGruppe
-} from '../../ducks/lagret-filter';
-import { AppState } from '../../reducer';
-import { harGjortEndringer, veilederlisterErLik } from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
-import { VeilederGruppeModal } from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
-import { FiltervalgModell } from '../../model-interfaces';
-import { useEnhetSelector } from '../../hooks/redux/use-enhet-selector';
-import { visIngenEndringerToast } from '../../store/toast/actions';
-import { logEvent } from '../../utils/frontend-logger';
-import { finnSideNavn } from '../../middleware/metrics-middleware';
+import {lagreEndringer, slettGruppe, VeiledergrupperFilter} from '../../ducks/veiledergrupper_filter';
+import {AppState} from '../../reducer';
+import {harGjortEndringer, veilederlisterErLik} from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
+import {VeilederGruppeModal} from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
+import {FiltervalgModell} from '../../model-interfaces';
+import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
+import {visIngenEndringerToast} from '../../store/toast/actions';
+import {logEvent} from '../../utils/frontend-logger';
+import {finnSideNavn} from '../../middleware/metrics-middleware';
 
 
 interface VeilederGruppeInnholdProps {
-    lagretFilter: LagretFilter[]
+    lagretFilter: VeiledergrupperFilter[]
     filterValg?: FiltervalgModell;
     filtergruppe?: string;
 }
@@ -29,7 +25,7 @@ function isOverflown(element) {
 }
 
 function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
-    const [valgtGruppe, setValgtGruppe] = useState<LagretFilter>();
+    const [valgtGruppe, setValgtGruppe] = useState<VeiledergrupperFilter>();
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
 
     const filtreringVeilederoversikt = (state: AppState) => state.filtreringVeilederoversikt.veiledere;
@@ -116,7 +112,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
 interface VeilederGruppeRad {
     hanterVelgGruppe: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    veilederGruppe: LagretFilter;
+    veilederGruppe: VeiledergrupperFilter;
     veiledereFilter: string[];
     onClickRedigerKnapp: () => void;
 }
@@ -140,6 +136,7 @@ function VeilederGruppeRad({veilederGruppe, hanterVelgGruppe, onClickRedigerKnap
             />
             <RedigerKnapp
                 hidden={!erValgt}
+                aria="Rediger veiledergruppe"
                 onClick={onClickRedigerKnapp}
             />
         </div>

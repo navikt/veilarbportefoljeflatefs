@@ -4,18 +4,15 @@ import brukere from './portefolje';
 import veiledere from './veiledere';
 import statustall from './statustall';
 import tiltak from './tiltak';
-import { veilederGrupper } from './veileder-grupper';
+import {veilederGrupper} from './veileder-grupper';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
-import { endringsloggListe } from './endringslogg';
+import {endringsloggListe} from './endringslogg';
 import * as faker from 'faker/locale/nb_NO';
-import FetchMock, {
-    HandlerArgument,
-    JSONArray,
-    MatcherUtils,
-    MiddlewareUtils, ResponseUtils
-} from 'yet-another-fetch-mock';
-import { LagretFilter } from '../ducks/lagret-filter';
+import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
+import {delayed, jsonResponse} from './utils';
+import {LagretFilter} from '../ducks/lagret-filter';
+import {lagredeFilter} from "./lagrede-filter";
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -57,6 +54,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 }
 
 let customVeilederGrupper = veilederGrupper();
+let customLagredeFilter = lagredeFilter();
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -67,21 +65,23 @@ const mock = FetchMock.configure({
 });
 
 // features
-mock.get('/veilarbportefoljeflatefs/api/feature', features);
+mock.get('/veilarbportefoljeflatefs/api/feature', jsonResponse(features));
 
 // endringslogg
 mock.mock(
     MatcherUtils.combine(
         MatcherUtils.method('PATCH'),
         MatcherUtils.url('/veilarbremotestore/'),
-    ), (args: HandlerArgument) => Object.assign(endringsloggListe, args.body));
+    ), (req, res, ctx) => res(
+        ctx.json(Object.assign(endringsloggListe, req.body)))
+);
 
-mock.get('/veilarbremotestore/', endringsloggListe);
+mock.get('/veilarbremotestore/', jsonResponse(endringsloggListe));
 
 //veiledergrupper
-mock.get('/veilarbfilter/api/enhet/:enhetId/', customVeilederGrupper);
+mock.get('/veilarbfilter/api/enhet/:enhetId/', jsonResponse(customVeilederGrupper));
 
-mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}) => {
+mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}, res, ctx) => {
         let oppdatertGruppe = {};
         customVeilederGrupper = customVeilederGrupper.map(v => {
             if (v.filterId === body.filterId) {
@@ -89,38 +89,75 @@ mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}) => {
                 return oppdatertGruppe;
             }
             return v;
-        }) as LagretFilter [] & JSONArray;
-        return oppdatertGruppe;
+        }) as LagretFilter[];
+        return res(ctx.json(oppdatertGruppe));
     }
 );
 
-mock.post('/veilarbfilter/api/enhet/:enhetId', (args: HandlerArgument) => {
+mock.post('/veilarbfilter/api/enhet/:enhetId', (req, res, ctx) => {
     const filterId = Math.floor(Math.random() * 100) + 500;
-    customVeilederGrupper = [...customVeilederGrupper, {...args.body, filterId}];
-    return {...args.body, filterId};
+    customVeilederGrupper = [...customVeilederGrupper, {...req.body, filterId}];
+    return res(
+        ctx.json({...req.body, filterId})
+    );
 });
 
-mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (args: HandlerArgument) => {
-    const {pathParams} = args;
+mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (req, res, ctx) => {
+    const {pathParams} = req;
     if (pathParams.filterId) {
-        customVeilederGrupper = customVeilederGrupper.filter(v => v.filterId !== pathParams.filterId) as LagretFilter [] & JSONArray;
-        return {status: 200};
+        customVeilederGrupper = customVeilederGrupper.filter(v => v.filterId !== pathParams.filterId)
+        return res(ctx.status(200));
     }
-    return {status: 401};
+    return res(ctx.status(401));
 });
+
+//lagrede filter
+mock.get('/veilarbfilter/api/minelagredefilter/', jsonResponse(customLagredeFilter));
+
+
+mock.put('/veilarbfilter/api/minelagredefilter/', ({body}, res, ctx) => {
+        let filterIndex = customLagredeFilter.findIndex(elem => elem.filterId === body.filterId)
+        customLagredeFilter[filterIndex] = body;
+        return res(
+            ctx.json(customLagredeFilter[filterIndex])
+        );
+    }
+);
+
+mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
+    const filterId = Math.floor(Math.random() * 100) + 500;
+    customLagredeFilter = [...customLagredeFilter, {...req.body, filterId}];
+    return res(
+        ctx.json({...req.body, filterId})
+    );
+});
+
+mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) => {
+    const {pathParams} = req;
+    if (pathParams.filterId) {
+        customLagredeFilter = customLagredeFilter.filter(v => v.filterId !== pathParams.filterId);
+        return res(ctx.status(200));
+    }
+    return res(ctx.status(401));
+});
+
 
 // veileder-api
-mock.get('/veilarbveileder/api/veileder/v2/me', inloggetVeileder);
-mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', veiledere);
-mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', true);
+mock.get('/veilarbveileder/api/veileder/v2/me', jsonResponse(inloggetVeileder));
+mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', jsonResponse(veiledere));
+mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', jsonResponse(true));
 
 // portefolje-api
-mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', ResponseUtils.delayed(1000, statustall));
-mock.post('/veilarbportefolje/api/enhet/:enhetId/portefolje', (args: HandlerArgument) => lagPortefolje(args.queryParams, args.pathParams.enhetId, brukere));
-mock.get('/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser', lagPortefoljeStorrelser());
-mock.post('/veilarbportefolje/api/veileder/:ident/portefolje', (args: HandlerArgument) => lagPortefoljeForVeileder(args.queryParams, brukere));
-mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', ResponseUtils.delayed(1000, statustall));
-mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', tiltak);
+mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', delayed(1000, jsonResponse(statustall)));
+mock.post('/veilarbportefolje/api/enhet/:enhetId/portefolje', (req, res, ctx) => res(
+    ctx.json(lagPortefolje(req.queryParams, req.pathParams.enhetId, brukere))
+));
+mock.get('/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser', jsonResponse(lagPortefoljeStorrelser()));
+mock.post('/veilarbportefolje/api/veileder/:ident/portefolje', (req, res, ctx) => res(
+    ctx.json(lagPortefoljeForVeileder(req.queryParams, brukere))
+));
+mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(1000, jsonResponse(statustall)));
+mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', jsonResponse(tiltak));
 
 // situasjon-api
 function tildel(body: any) {
@@ -129,15 +166,17 @@ function tildel(body: any) {
     //return {feilendeTilordninger: body}; //alle feilende brukere
 }
 
-mock.post('/veilarboppfolging/api/tilordneveileder/', ({body}) => tildel(body));
+mock.post('/veilarboppfolging/api/tilordneveileder/', ({body}, res, ctx) => res(
+    ctx.json(tildel(body))
+));
 
 // arbeidsliste-api
-mock.post('/veilarbportefolje/api/arbeidsliste/', (args: HandlerArgument) => {
-    return {error: [], data: args.body.map((arbeidsliste) => arbeidsliste.fnr)};
-});
+mock.post('/veilarbportefolje/api/arbeidsliste/', (req, res, ctx) => res(
+    ctx.json({error: [], data: req.body.map((arbeidsliste) => arbeidsliste.fnr)})
+));
 
-mock.put('/veilarbportefolje/api/arbeidsliste/:fnr', ({body}) => {
-    return {
+mock.put('/veilarbportefolje/api/arbeidsliste/:fnr', ({body}, res, ctx) => res(
+    ctx.json({
         sistEndretAv: {
             veilederId: 'Z990007'
         },
@@ -149,37 +188,37 @@ mock.put('/veilarbportefolje/api/arbeidsliste/:fnr', ({body}) => {
         isOppfolgendeVeileder: true,
         arbeidslisteAktiv: null,
         harVeilederTilgang: true
-    };
-});
+    })
+));
 
-mock.post('/veilarbportefolje/api/arbeidsliste/delete', ({body}) => {
-    return {error: [], data: body.map((arbeidsliste) => arbeidsliste.fnr)};
-});
+mock.post('/veilarbportefolje/api/arbeidsliste/delete', ({body}, res, ctx) => res(
+    ctx.json({error: [], data: body.map((arbeidsliste) => arbeidsliste.fnr)})
+));
 
 // modiacontextholder-api
 
-mock.get('/modiacontextholder/api/context/aktivenhet', ResponseUtils.delayed(1000, {
+mock.get('/modiacontextholder/api/context/aktivenhet', delayed(1000, jsonResponse({
     'aktivBruker': null,
     'aktivEnhet': '1234'
-}));
+})));
 
-mock.get('/modiacontextholder/api/context/aktivbruker', ResponseUtils.delayed(1000, {
+mock.get('/modiacontextholder/api/context/aktivbruker', delayed(1000, jsonResponse({
     'aktivBruker': null,
     'aktivEnhet': null
-}));
+})));
 
-mock.delete('/modiacontextholder/api/context/aktivbruker', ResponseUtils.delayed(1000, {
+mock.delete('/modiacontextholder/api/context/aktivbruker', delayed(1000, jsonResponse({
     'aktivBruker': null,
     'aktivEnhet': null
-}));
+})));
 
-mock.get('/modiacontextholder/api/decorator', ResponseUtils.delayed(1000, {
+mock.get('/modiacontextholder/api/decorator', delayed(1000, jsonResponse({
     enheter: inloggetVeileder.enheter,
     etternavn: inloggetVeileder.etternavn,
     fornavn: inloggetVeileder.fornavn,
     ident: inloggetVeileder.ident,
     navn: inloggetVeileder.navn
-}));
+})));
 
 // websocket
 class MockWebSocket {

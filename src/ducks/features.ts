@@ -1,11 +1,12 @@
-import { AppState } from '../reducer';
-import { hentFeatures } from '../middleware/api';
+import {AppState} from '../reducer';
+import {hentFeatures} from '../middleware/api';
 import {
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
     CVJOBBPROFIL,
     REDESIGN
+    LAGREDE_FILTER
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -19,6 +20,7 @@ const initalState: FeaturesState = {
     [VEDTAKSTOTTE]: false,
     [CVJOBBPROFIL]: false,
     [REDESIGN]: false
+    [LAGREDE_FILTER]: false
 };
 
 // Reducer
