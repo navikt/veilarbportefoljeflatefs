@@ -79,7 +79,7 @@ function Ny_MinoversiktSide() {
                     <NyMinOversiktWrapper
                         className={classNames('oversikt-sideinnhold__ny portefolje-side__ny',
                             isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}>
-                        <div className="filtrering-knapp__wrapper">
+                        <div className="sokefelt-knapp__container">
                             <FiltreringNavnellerfnr
                                 filtervalg={filtervalg}
                                 endreFiltervalg={doEndreFiltervalg}

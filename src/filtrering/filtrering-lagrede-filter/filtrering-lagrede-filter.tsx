@@ -12,7 +12,6 @@ function FiltreringLagredeFilter() {
     const lagretFilter = lagretFilterState.data;
     const sortertLagredeFilter = lagretFilter.sort((a, b) => a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : 1);
 
-    console.log("filterstate", lagretFilterState)
     const lagretFilterOK = () => {
         return lagretFilter.length > 0
             ? <LagredeFilterInnhold lagretFilter={sortertLagredeFilter}/>

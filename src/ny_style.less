@@ -190,7 +190,7 @@ html {
     grid-template-columns: 1fr 21rem;
     grid-template-rows: auto auto auto;
 
-    .filtrering-knapp__wrapper {
+    .sokefelt-knapp__container {
       grid-row: 1;
       grid-column: 1;
       display: flex;
@@ -215,8 +215,7 @@ html {
       grid-row: 3;
       grid-column-start: 1;
       grid-column-end: 2;
-      margin-bottom: 2rem;
-      margin-top: 1rem;
+      margin: 1rem 0 2rem;
     }
 
     .alertstripe--info {
@@ -234,9 +233,15 @@ html {
     }
   }
 
-  @media (max-width: 1400px) {
-    .oversikt__container {
-      grid-column-end: 3;
+  @media (max-width: 1200px) {
+    .oversikt-sideinnhold__ny {
+      .oversikt__container {
+        grid-column-end: 3;
+      }
+
+      .sidebar {
+        z-index: 1200;
+      }
     }
   }
 }
