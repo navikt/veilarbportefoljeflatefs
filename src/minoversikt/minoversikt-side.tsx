@@ -25,7 +25,7 @@ import {useDispatch} from 'react-redux';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
-import { useFetchStatusTall } from '../hooks/portefolje/use-fetch-statustall';
+import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
 import {MinoversiktLagreFilterKnapp} from "./minoversikt-lagre-filter-knapp";
 import {useLagreFilterController} from "./use-lagre-filter-controller";
@@ -65,27 +65,6 @@ function MinoversiktSide() {
                             />
                         </div>
                         <div className="liste-kolonne">
-                            <FiltreringLabelContainer
-                                filtervalg={filtervalg}
-                                filtergruppe="veileder"
-                                enhettiltak={enhettiltak.data.tiltak}
-                                listevisning={listevisning}
-                                className={visesAnnenVeiledersPortefolje
-                                    ? 'filtrering-label-container__annen-veileder'
-                                    : 'filtrering-label-container'}
-                            />
-                            <div className={flereEnnAntallBrukere(4)
-                                    ? 'sticky-container'
-                                    : 'ikke-sticky__container'}>
-                                <TabellOverskrift className={visesAnnenVeiledersPortefolje
-                                    ? 'tabelloverskrift__annen-veileder blokk-xxs'
-                                    : 'tabelloverskrift blokk-xxs'}/>
-                                <span className={flereEnnAntallBrukere(4)
-                                    ? 'sticky-skygge'
-                                    : 'ikke-sticky__skygge'}>
-                                <div className={flereEnnAntallBrukere(4)
-                                    ? 'toolbar-container'
-                                    : 'ikke-sticky__toolbar-container'}>
                             <div className="etikett-wrapper">
                                 <FiltreringLabelContainer
                                     filtervalg={filtervalg}

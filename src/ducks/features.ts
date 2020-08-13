@@ -5,7 +5,7 @@ import {
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
     CVJOBBPROFIL,
-    REDESIGN
+    REDESIGN,
     LAGREDE_FILTER
 } from '../konstanter';
 
@@ -19,7 +19,7 @@ const initalState: FeaturesState = {
     [SPOR_OM_TILBAKEMELDING]: false,
     [VEDTAKSTOTTE]: false,
     [CVJOBBPROFIL]: false,
-    [REDESIGN]: false
+    [REDESIGN]: false,
     [LAGREDE_FILTER]: false
 };
 
