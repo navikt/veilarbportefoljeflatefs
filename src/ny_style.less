@@ -158,7 +158,7 @@ html {
 }
 
 .sticky-skygge__ny::before {
-  top: 113px;
+  top: 104px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   margin: 0 4px;
 }
@@ -187,27 +187,48 @@ html {
   .oversikt-sideinnhold__ny {
     display: grid;
     column-gap: 1%;
-    grid-template-columns: auto 21rem;
-    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 21rem;
+    grid-template-rows: auto auto auto;
 
-    .sokefelt-etikett-container {
+    .filtrering-knapp__wrapper {
+      grid-row: 1;
+      grid-column: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .sidebar {
+      grid-row: 1;
+      grid-column: 2;
+    }
+
+    .ny__filtrering-label-container {
+      grid-row: 2;
+      grid-column-start: 1;
+      grid-column-end: 2;
       display: flex;
       flex-wrap: wrap;
+    }
+
+    .oversikt__container {
+      grid-row: 3;
+      grid-column-start: 1;
+      grid-column-end: 2;
+      margin-bottom: 2rem;
+      margin-top: 1rem;
     }
 
     .alertstripe--info {
       grid-row: 2;
     }
 
-    .oversikt__container {
-      grid-row: 2;
-      margin-bottom: 2rem;
-      margin-top: 1rem;
-      grid-column-start: 1;
-    }
-
     &__hidden {
       .oversikt__container {
+        grid-column-end: 3;
+      }
+
+      .ny__filtrering-label-container {
         grid-column-end: 3;
       }
     }

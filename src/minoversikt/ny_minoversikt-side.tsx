@@ -31,6 +31,9 @@ import {endreFiltervalg} from '../ducks/filtrering';
 import Sidebar from '../components/sidebar/sidebar';
 import classNames from 'classnames';
 import {NyMinOversiktWrapper} from "./ny_min_oversikt_wrapper";
+import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
+import {UseLagreFilterController} from "./use-lagre-filter-controller";
+import {NyMinOversiktLagreFilterKnapp} from "./ny_min-oversikt-lagre-filter-knapp";
 
 function Ny_MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -44,6 +47,7 @@ function Ny_MinoversiktSide() {
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
     useFetchPortefolje(ListevisningType.minOversikt);
+    UseLagreFilterController();
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
@@ -75,19 +79,20 @@ function Ny_MinoversiktSide() {
                     <NyMinOversiktWrapper
                         className={classNames('oversikt-sideinnhold__ny portefolje-side__ny',
                             isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}>
-                        <div className="sokefelt-etikett-container">
+                        <div className="filtrering-knapp__wrapper">
                             <FiltreringNavnellerfnr
                                 filtervalg={filtervalg}
                                 endreFiltervalg={doEndreFiltervalg}
                             />
-                            <FiltreringLabelContainer
-                                filtervalg={filtervalg}
-                                filtergruppe="veileder"
-                                enhettiltak={enhettiltak.data.tiltak}
-                                listevisning={listevisning}
-                                className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__ny__annen-veileder' : 'filtrering-label-container__ny'}
-                            />
+                            <NyMinOversiktLagreFilterKnapp/>
                         </div>
+                        <FiltreringLabelContainer
+                            filtervalg={filtervalg}
+                            filtergruppe="veileder"
+                            enhettiltak={enhettiltak.data.tiltak}
+                            listevisning={listevisning}
+                            className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__ny__annen-veileder' : 'ny__filtrering-label-container'}
+                        />
                         <Sidebar
                             filtervalg={filtervalg}
                             filtergruppe="veileder"
@@ -145,6 +150,7 @@ function Ny_MinoversiktSide() {
                         </div>
                     </NyMinOversiktWrapper>
                 </Innholdslaster>
+                <LagreFilterModal/>
             </div>
         </DocumentTitle>
     );

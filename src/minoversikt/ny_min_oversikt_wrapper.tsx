@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { PropsWithChildren } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { Redirect, useParams } from 'react-router';
-import { useVeilederListeSelector } from '../hooks/redux/use-veilederliste-selector';
-import { useIdentSelector } from '../hooks/redux/use-inlogget-ident';
+import {PropsWithChildren} from 'react';
+import {Normaltekst} from 'nav-frontend-typografi';
+import {Redirect, useParams} from 'react-router';
+import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
+import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
 import classNames from 'classnames';
 
 interface MinOversiktWrapperProps {
     className: string;
 }
 
-export function  NyMinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithChildren<{}>) {
+export function NyMinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithChildren<{}>) {
     const {ident} = useParams();
     const innloggetVeileder = useIdentSelector();
     const veiledere = useVeilederListeSelector();

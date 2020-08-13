@@ -27,8 +27,8 @@ import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-sto
 import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
-import {MinoversiktLagreFilterKnapp} from "./minoversikt-lagre-filter-knapp";
-import {useLagreFilterController} from "./use-lagre-filter-controller";
+import {MinOversiktLagreFilterKnapp} from "./min-oversikt-lagre-filter-knapp";
+import {UseLagreFilterController} from "./use-lagre-filter-controller";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -42,7 +42,7 @@ function MinoversiktSide() {
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
     useFetchPortefolje(ListevisningType.minOversikt);
-    useLagreFilterController();
+    UseLagreFilterController();
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
@@ -73,7 +73,7 @@ function MinoversiktSide() {
                                     listevisning={listevisning}
                                     className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                 />
-                                <MinoversiktLagreFilterKnapp/>
+                                <MinOversiktLagreFilterKnapp/>
                             </div>
                             <div className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <TabellOverskrift

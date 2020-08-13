@@ -2,22 +2,24 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {Normaltekst} from 'nav-frontend-typografi';
-import LagredeFilterInnhold from "./lagrede-filter_innhold";
 import {AlertStripeFeil} from "nav-frontend-alertstriper";
 import {HandlingsType} from "../../ducks/lagret-filter";
 import {STATUS} from "../../ducks/utils";
+import NyLagredeFilterInnhold from "./ny_lagrede-filter_innhold";
+import './ny_lagrede-filter-innhold.less'
 
-
-function FilteringLagredeFilter() {
+function NyFiltreringLagredeFilter() {
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const lagretFilter = lagretFilterState.data;
     const sortertLagredeFilter = lagretFilter.sort((a, b) => a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : 1);
 
+    console.log("lengde", lagretFilterState)
+
     const lagretFilterOK = () => {
         return lagretFilter.length > 0
-            ? <LagredeFilterInnhold lagretFilter={sortertLagredeFilter}/>
-            : <div className="lagredefilter-emptystate">
-                <Normaltekst className="lagredefilter-emptystate__tekst">
+            ? <NyLagredeFilterInnhold lagretFilter={sortertLagredeFilter}/>
+            : <div className="ny__lagredefilter-emptystate">
+                <Normaltekst className="ny__lagredefilter-emptystate__tekst">
                     Ingen lagrede filter
                 </Normaltekst>
             </div>
@@ -41,4 +43,4 @@ function FilteringLagredeFilter() {
     );
 }
 
-export default FilteringLagredeFilter;
+export default NyFiltreringLagredeFilter;

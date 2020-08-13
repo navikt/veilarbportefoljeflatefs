@@ -9,6 +9,7 @@ import './sidebar.less';
 import {ReactComponent as StatusIkon} from '../ikoner/tab_status.svg';
 import {ReactComponent as FilterIkon} from '../ikoner/tab_filter.svg';
 import {ReactComponent as VeiledergruppeIkon} from '../ikoner/tab_veiledergrupper.svg';
+import {ReactComponent as MineFilterIkon} from '../ikoner/tab_lagrede-filter.svg';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
@@ -20,6 +21,7 @@ import {useDispatch} from 'react-redux';
 import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import FilteringVeilederGrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper';
+import NyFiltreringLagredeFilter from "../../filtrering/filtrering-lagrede-filter/ny_filtrering-lagrede-filter";
 
 interface Sidebar {
     type: SidebarTabType;
@@ -32,6 +34,10 @@ const sidebar: Sidebar[] = [
         type: SidebarTabType.STATUS,
         icon: <StatusIkon/>,
         tittel: 'Status'
+    }, {
+        type: SidebarTabType.MINE_FILTER,
+        icon: <MineFilterIkon/>,
+        tittel: 'Mine filter'
     }, {
         type: SidebarTabType.VEILEDERGRUPPER,
         icon: <VeiledergruppeIkon/>,
@@ -105,6 +111,12 @@ function Sidebar(props: SidebarProps) {
                                children={<FilteringVeilederGrupper
                                    filtergruppe={props.filtergruppe}/>
                                }/>;
+        } else if ((selectedTabData as Sidebar).tittel === 'Mine filter') {
+            return <SidebarTab tittel="Mine filter"
+                               handleClick={props.lukkTab}
+                               children={
+                                   <NyFiltreringLagredeFilter/>
+                               }/>;
         }
     }
 
@@ -113,11 +125,17 @@ function Sidebar(props: SidebarProps) {
     }, [setSelectedTab, selectedTab]);
 
     const tabs = () => {
-        const viseVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
-        const erIkkePaEnhetensOversikt = props.filtergruppe === 'veileder';
+        const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
+        const visLagredeFilter = tab => tab.type === SidebarTabType.MINE_FILTER;
 
-        if (erIkkePaEnhetensOversikt) {
-            return sidebar.filter(tab => erIkkePaEnhetensOversikt && !viseVeiledergrupper(tab))
+        const erPaMinOversikt = props.filtergruppe === 'veileder';
+        const erPaEnhetensOversikt = props.filtergruppe === 'enhet';
+
+        if (erPaMinOversikt) {
+            return sidebar.filter(tab => erPaMinOversikt && !visVeiledergrupper(tab))
+                .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+        } else if (erPaEnhetensOversikt) {
+            return sidebar.filter(tab => erPaEnhetensOversikt && !visLagredeFilter(tab))
                 .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
         } else {
             return sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));

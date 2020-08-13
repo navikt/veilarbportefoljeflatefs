@@ -5,12 +5,12 @@ import {apenLagreFilterModal, LagretFilter} from '../../ducks/lagret-filter';
 import './lagrede-filter_innhold.less'
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../reducer";
-import {velgLagretFilter} from "../../ducks/filtrering";
 import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn} from "../../middleware/metrics-middleware";
+import {velgLagretFilter} from "../../ducks/filtrering";
 
 interface LagredeFilterInnholdProps {
-    lagretFilter: LagretFilter[]
+    lagretFilter: LagretFilter[];
 }
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {

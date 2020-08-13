@@ -2,34 +2,34 @@ import * as React from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import TabellOverskrift from '../components/tabell-overskrift';
-import { ModalEnhetSideController } from '../components/modal/modal-enhet-side-controller';
+import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
 import EnhetTabell from './enhetsportefolje-tabell';
 import EnhetTabellOverskrift from './enhetsportefolje-tabelloverskrift';
 import './ny_enhetsportefolje.less';
 import './brukerliste.less';
 import ToppMeny from '../topp-meny/topp-meny';
-import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
-import { ListevisningType } from '../ducks/ui/listevisning';
-import { useSetStateFromUrl } from '../hooks/portefolje/use-set-state-from-url';
-import { useFetchPortefolje } from '../hooks/portefolje/use-fetch-portefolje';
+import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
+import {ListevisningType} from '../ducks/ui/listevisning';
+import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
+import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
-import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import { useDispatch, useSelector } from 'react-redux';
+import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
+import {useDispatch, useSelector} from 'react-redux';
 import Toolbar from '../components/toolbar/toolbar';
-import { endreFiltervalg, slettEnkeltFilter } from '../ducks/filtrering';
-import { hentPortefoljeForEnhet } from '../ducks/portefolje';
-import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
-import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
+import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
+import {hentPortefoljeForEnhet} from '../ducks/portefolje';
+import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
+import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import VelgFilterMelding from './velg-filter-melding';
 import '../ny_style.less';
-import { useCallback, useMemo } from 'react';
-import { useFetchStatusTall } from '../hooks/portefolje/use-fetch-statustall';
-import { AppState } from '../reducer';
-import { useSidebarViewStore } from '../store/sidebar/sidebar-view-store';
+import {useCallback, useMemo} from 'react';
+import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
+import {AppState} from '../reducer';
+import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
-import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
-import { pagineringSetup } from '../ducks/paginering';
+import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
+import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
 
 function antallFilter(filtervalg) {
@@ -99,22 +99,22 @@ function Ny_EnhetSide() {
                     <div role="tabpanel"
                          className={classNames('oversikt-sideinnhold__ny',
                              isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}>
-                        <div className="sokefelt-etikett-container">
+                        <div className="filtrering-knapp__wrapper">
                             <FiltreringNavnellerfnr
                                 filtervalg={filtervalg}
                                 endreFiltervalg={doEndreFiltervalg}
                             />
-                            <FiltreringLabelContainer
-                                filtervalg={{
-                                    ...filtervalg,
-                                    veiledere: veilederLabel
-                                }}
-                                filtergruppe="enhet"
-                                enhettiltak={enhettiltak.data.tiltak}
-                                listevisning={listevisning}
-                                className="filtrering-label-container__ny"
-                            />
                         </div>
+                        <FiltreringLabelContainer
+                            filtervalg={{
+                                ...filtervalg,
+                                veiledere: veilederLabel
+                            }}
+                            filtergruppe="enhet"
+                            enhettiltak={enhettiltak.data.tiltak}
+                            listevisning={listevisning}
+                            className="ny__filtrering-label-container"
+                        />
                         <Sidebar
                             filtervalg={filtervalg}
                             filtergruppe="enhet"

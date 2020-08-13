@@ -4,7 +4,7 @@ import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 
-export function UseLagreFilterController() {
+export function NyUseLagreFilterController() {
     const dispatch = useDispatch()
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);

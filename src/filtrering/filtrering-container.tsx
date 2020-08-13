@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import {FiltervalgModell} from '../model-interfaces';
@@ -11,8 +11,7 @@ import FilteringVeilederGrupper from './filtrering-veileder-grupper/filtrering-v
 import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
-import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
-import FilteringLagredeFilter from "./lagrede-filter/filtrering-lagrede-filter";
+import FiltreringLagredeFilter from "./filtrering-lagrede-filter/filtrering-lagrede-filter";
 import {AppState} from "../reducer";
 import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
@@ -28,13 +27,6 @@ interface FiltreringContainerProps {
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
     const dispatch = useDispatch();
     const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
-
-    useEffect(() => {
-        if (filtergruppe === "veileder" && lagredeFilterFeatureToggleErPa) {
-            dispatch(hentLagredeFilterForVeileder());
-        }
-    }, [filtergruppe, dispatch, lagredeFilterFeatureToggleErPa])
-
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
@@ -76,7 +68,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 hidden={!lagredeFilterFeatureToggleErPa || filtergruppe !== 'veileder'}
                 className="lagrede-filter-wrapper"
             >
-                <FilteringLagredeFilter/>
+                <FiltreringLagredeFilter/>
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={false}
