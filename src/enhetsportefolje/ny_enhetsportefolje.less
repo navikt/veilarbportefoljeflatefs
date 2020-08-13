@@ -1,62 +1,62 @@
 @import "~nav-frontend-core/less/core";
 
 .veilarbportefoljeflatefs {
-    .portefolje__container__ny {
-        min-height: 100%;
-        margin-bottom: 2rem;
-        border-bottom: 1px solid @navGra60;
-        border-radius: @border-radius-base;
+  .portefolje__container__ny {
+    min-height: 100%;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid @navGra60;
+    border-radius: @border-radius-base;
 
-        &__tom-liste {
-            border-bottom: none;
-        }
-
-        &__sticky {
-            position: sticky;
-            top: 5rem
-        }
-
-        .innholdslaster {
-            min-height: 1000px;
-        }
-
-        .blokk-xxs {
-            margin-bottom: 0;
-        }
+    &__tom-liste {
+      border-bottom: none;
     }
 
-    .velgfiltermelding {
-        text-align: center;
-
-        &__ikon {
-            position: relative;
-            height: 2.5rem;
-            width: 2.5rem;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 100%;
-            background-color: @navOransjeLighten20;
-
-            &:after {
-                content: "";
-                position: absolute;
-                width: 70%;
-                height: 0.5rem;
-                display: block;
-                margin-left: 15%;
-                background-color: @white;
-                top: calc(1.25rem - 0.25rem);
-                border-radius: 2px;
-            }
-        }
+    &__sticky {
+      position: sticky;
+      top: 5rem
     }
 
-    .filtrering-navn-fnr {
-        width: 16rem;
-        margin: .4rem 1rem .4rem 0;
-
-        .skjemaelement {
-            margin-bottom: 0;
-        }
+    .innholdslaster {
+      min-height: 1000px;
     }
+
+    .blokk-xxs {
+      margin-bottom: 0;
+    }
+  }
+
+  .velgfiltermelding {
+    text-align: center;
+
+    &__ikon {
+      position: relative;
+      height: 2.5rem;
+      width: 2.5rem;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 100%;
+      background-color: @navOransjeLighten20;
+
+      &:after {
+        content: "";
+        position: absolute;
+        width: 70%;
+        height: 0.5rem;
+        display: block;
+        margin-left: 15%;
+        background-color: @white;
+        top: calc(1.25rem - 0.25rem);
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .filtrering-navn-fnr {
+    width: 16rem;
+    margin: .5rem 1rem .5rem 0;
+
+    .skjemaelement {
+      margin-bottom: 0;
+    }
+  }
 }

@@ -17,11 +17,14 @@ import {logEvent} from '../../utils/frontend-logger';
 import SidebarTab from './sidebar-tab';
 import {FiltreringStatus} from '../../filtrering/filtrering-status/filtrering-status';
 import FiltreringFilter from '../../filtrering/filtrering-filter';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import FilteringVeilederGrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper';
 import NyFiltreringLagredeFilter from "../../filtrering/filtrering-lagrede-filter/ny_filtrering-lagrede-filter";
+import {AppState} from "../../reducer";
+import {HandlingsType} from "../../ducks/lagret-filter";
+import {STATUS} from "../../ducks/utils";
 
 interface Sidebar {
     type: SidebarTabType;
@@ -75,14 +78,23 @@ function Sidebar(props: SidebarProps) {
     const {selectedTab, setSelectedTab} = useSidebarViewStore();
     const sidebarRef = useRef<HTMLDivElement>(null);
     const selectedTabData = finnTab(selectedTab, sidebar);
+    const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const nyttLagretFilter = lagretFilterState.handlingType === HandlingsType.NYTT && lagretFilterState.status === STATUS.OK;
+        const oppdatertLagretFilter = lagretFilterState.handlingType === HandlingsType.REDIGERE && lagretFilterState.status === STATUS.OK;
+
+        if (nyttLagretFilter || oppdatertLagretFilter) {
+            return setSelectedTab(SidebarTabInfo.MINE_FILTER);
+        }
+    }, [setSelectedTab, lagretFilterState.handlingType, lagretFilterState.status])
 
     function handleOnTabClicked(tab: Sidebar) {
         setSelectedTab(tab.type);
         props.handleOnTabClicked(tab, selectedTab);
         logEvent('portefolje.metrikker.sidebar-tab', {tab: tab.type,});
     }
-
-    const dispatch = useDispatch();
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));

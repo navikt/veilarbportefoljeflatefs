@@ -4,7 +4,7 @@ import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 
-export function UseLagreFilterController() {
+export function useLagreFilterController() {
     const dispatch = useDispatch()
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
@@ -13,7 +13,7 @@ export function UseLagreFilterController() {
     useEffect(() => {
         const valgtFilter = lagretFilterList.find(elem => lagredeFilterListerErLik(elem.filterValg, filtreringMinOversikt));
 
-        if (erObjektValuesTomt(filtreringMinOversikt)){
+        if (erObjektValuesTomt(filtreringMinOversikt)) {
             dispatch(avmarkerSisteVelgtFilter());
         }
 

@@ -32,7 +32,7 @@ import Sidebar from '../components/sidebar/sidebar';
 import classNames from 'classnames';
 import {NyMinOversiktWrapper} from "./ny_min_oversikt_wrapper";
 import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
-import {UseLagreFilterController} from "./use-lagre-filter-controller";
+import {useLagreFilterController} from "./use-lagre-filter-controller";
 import {NyMinOversiktLagreFilterKnapp} from "./ny_min-oversikt-lagre-filter-knapp";
 
 function Ny_MinoversiktSide() {
@@ -47,7 +47,7 @@ function Ny_MinoversiktSide() {
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
     useFetchPortefolje(ListevisningType.minOversikt);
-    UseLagreFilterController();
+    useLagreFilterController();
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
@@ -56,7 +56,7 @@ function Ny_MinoversiktSide() {
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi));
+        dispatch(endreFiltervalg(filterId, filterVerdi, "veileder"));
     };
 
     const handleOnTabClicked = (tab, selectedTab) => {

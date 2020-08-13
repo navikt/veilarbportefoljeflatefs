@@ -55,8 +55,6 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
     const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
 
     useEffect(() => {
-        console.log("test 2")
-
         if (filtergruppe === "veileder" && lagredeFilterFeatureToggleErPa) {
             dispatch(hentLagredeFilterForVeileder());
         }
