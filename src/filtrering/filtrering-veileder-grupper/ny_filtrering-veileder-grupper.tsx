@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {LeggTilKnapp} from '../../components/knapper/legg-til-knapp';
-import VeilederGruppeInnhold from './veiledergrupper-innhold';
 import './veileder-gruppe.less';
 import {Normaltekst} from 'nav-frontend-typografi';
 import {VeilederGruppeModal} from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
