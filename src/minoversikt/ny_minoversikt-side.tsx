@@ -91,7 +91,7 @@ function Ny_MinoversiktSide() {
                             filtergruppe="veileder"
                             enhettiltak={enhettiltak.data.tiltak}
                             listevisning={listevisning}
-                            className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__ny__annen-veileder' : 'ny__filtrering-label-container'}
+                            className={visesAnnenVeiledersPortefolje ? 'ny__filtrering-label-container__annen-veileder' : 'ny__filtrering-label-container'}
                         />
                         <Sidebar
                             filtervalg={filtervalg}

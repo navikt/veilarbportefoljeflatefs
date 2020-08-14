@@ -25,6 +25,9 @@ import NyFiltreringLagredeFilter from "../../filtrering/filtrering-lagrede-filte
 import {AppState} from "../../reducer";
 import {HandlingsType} from "../../ducks/lagret-filter";
 import {STATUS} from "../../ducks/utils";
+import {NyFiltreringStatus} from "../../filtrering/filtrering-status/ny_filtrering-status";
+import NyFiltreringFilter from "../../filtrering/ny_filtrering-filter";
+import NyFilteringVeilederGrupper from "../../filtrering/filtrering-veileder-grupper/ny_filtrering-veileder-grupper";
 
 interface Sidebar {
     type: SidebarTabType;
@@ -105,14 +108,14 @@ function Sidebar(props: SidebarProps) {
         if ((selectedTabData as Sidebar).tittel === 'Status') {
             return <SidebarTab tittel="Status"
                                handleClick={props.lukkTab}
-                               children={<FiltreringStatus
+                               children={<NyFiltreringStatus
                                    filtergruppe={props.filtergruppe}
                                    filtervalg={props.filtervalg}/>
                                }/>;
         } else if ((selectedTabData as Sidebar).tittel === 'Filter') {
             return <SidebarTab tittel="Filter"
                                handleClick={props.lukkTab}
-                               children={<FiltreringFilter
+                               children={<NyFiltreringFilter
                                    endreFiltervalg={doEndreFiltervalg}
                                    filtervalg={props.filtervalg}
                                    enhettiltak={props.enhettiltak}/>
@@ -120,7 +123,7 @@ function Sidebar(props: SidebarProps) {
         } else if ((selectedTabData as Sidebar).tittel === 'Veiledergrupper') {
             return <SidebarTab tittel="Veiledergrupper"
                                handleClick={props.lukkTab}
-                               children={<FilteringVeilederGrupper
+                               children={<NyFilteringVeilederGrupper
                                    filtergruppe={props.filtergruppe}/>
                                }/>;
         } else if ((selectedTabData as Sidebar).tittel === 'Mine filter') {

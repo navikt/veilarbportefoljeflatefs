@@ -188,8 +188,13 @@ html {
   .oversikt-sideinnhold__ny {
     display: grid;
     column-gap: 1%;
-    grid-template-columns: 1fr 21rem;
+    grid-template-columns: auto 21rem;
     grid-template-rows: auto auto auto;
+
+    .annen-veileder-varsel {
+      grid-row: 1;
+      grid-column: 1;
+    }
 
     .sokefelt-knapp__container {
       grid-row: 1;
@@ -200,11 +205,11 @@ html {
     }
 
     .sidebar {
-      grid-row: 1;
+      grid-row-start: 1;
       grid-column: 2;
     }
 
-    .ny__filtrering-label-container {
+    .ny__filtrering-label-container, .ny__filtrering-label-container__annen-veileder {
       grid-row: 2;
       grid-column-start: 1;
       grid-column-end: 2;

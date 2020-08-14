@@ -28,7 +28,7 @@ export const lagredeFilter = () => {
         }, {
             filterNavn: 'Under 19',
             filterId: 5,
-            filterValg: {...initialState, alder:["19-og-under"]},
+            filterValg: {...initialState, alder: ["19-og-under"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
             filterNavn: 'Kvinner',
@@ -45,7 +45,12 @@ export const lagredeFilter = () => {
             filterId: 8,
             filterValg: {...initialState, alder: ["40-49"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-        }
+        }, {
+            filterNavn: 'enda en',
+            filterId: 9,
+            filterValg: {...initialState, alder: ["40-49"], kjonn: ["M"]},
+            opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+        },
         ] as LagretFilter []
     );
 };

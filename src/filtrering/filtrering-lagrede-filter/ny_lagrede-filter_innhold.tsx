@@ -8,6 +8,7 @@ import {AppState} from "../../reducer";
 import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn} from "../../middleware/metrics-middleware";
 import {velgLagretFilter} from "../../ducks/filtrering";
+import '../../components/sidebar/sidebar.less'
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -15,10 +16,8 @@ interface LagredeFilterInnholdProps {
 
 function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
-    const className = (props.lagretFilter.length >= 7) ? 'ny__lagrede-filter__valgfelt lang' : 'ny__lagrede-filter__valgfelt'
-
     return (
-        <div className={className} ref={outerDivRef}>
+        <div className='ny__lagrede-filter__valgfelt' ref={outerDivRef}>
             {props.lagretFilter.map((filter, idx) =>
                 <LagretFilterRad
                     key={idx}
