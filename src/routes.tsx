@@ -26,44 +26,22 @@ function Routes() {
             <div className='maincontent side-innhold'>
                 <Innholdslaster avhengigheter={[enhettiltak, veiledere, portefoljestorrelser]}>
                     <Switch>
-                        {erRedesignTogglePa ?
-                            <>
-                                <Route
-                                    path="/enhet"
-                                    component={Ny_EnhetSide}
-                                />
-                                <Route
-                                    path="/veiledere"
-                                    component={Ny_veiledereSide}
-                                />
-                                <Route
-                                    path="/portefolje/:ident"
-                                    component={Ny_MinoversiktSide}
-                                />
-                                <Route
-                                    path="/portefolje"
-                                    component={Ny_MinoversiktSide}
-                                />
-                            </>
-                            : <>
-                                <Route
-                                    path="/enhet"
-                                    component={EnhetSide}
-                                />
-                                <Route
-                                    path="/veiledere"
-                                    component={VeiledereSide}
-                                />
-                                <Route
-                                    path="/portefolje/:ident"
-                                    component={MinOversiktSide}
-                                />
-                                <Route
-                                    path="/portefolje"
-                                    component={MinOversiktSide}
-                                />
-                            </>
-                        }
+                        <Route
+                            path="/enhet"
+                            component={erRedesignTogglePa ? Ny_EnhetSide : EnhetSide}
+                        />
+                        <Route
+                            path="/veiledere"
+                            component={erRedesignTogglePa ? Ny_veiledereSide : VeiledereSide}
+                        />
+                        <Route
+                            path="/portefolje/:ident"
+                            component={erRedesignTogglePa ? Ny_MinoversiktSide : MinOversiktSide}
+                        />
+                        <Route
+                            path="/portefolje"
+                            component={erRedesignTogglePa ? Ny_MinoversiktSide : MinOversiktSide}
+                        />
                     </Switch>
                     <TilbakemeldingFab/>
                     <TourModalLocalStorage/>
