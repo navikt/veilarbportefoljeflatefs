@@ -1,0 +1,36 @@
+@import "~nav-frontend-core/less/core";
+
+.veilarbportefoljeflatefs {
+  .til-toppen-knapp {
+    transition: opacity 0.5s ease-in;
+    opacity: 1;
+    right: 2rem;
+    bottom: 2rem;
+    height: 55px;
+
+    &.knapp {
+      padding: .5rem;
+      position: fixed;
+      border: none;
+
+      &:hover {
+        background-color: transparent;
+        transform: scale(1.15);
+        cursor: pointer;
+      }
+    }
+
+    &--skjul {
+      opacity: 0;
+
+      &:hover {
+        cursor: unset;
+      }
+    }
+
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
