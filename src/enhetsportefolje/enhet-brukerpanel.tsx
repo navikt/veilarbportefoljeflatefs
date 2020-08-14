@@ -19,7 +19,7 @@ interface EnhetBrukerpanelProps {
     filtervalg: FiltervalgModell;
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];
-    forrigeBruker?: string;
+    forrigeBruker: OrNothing<string>;
 }
 
 function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, forrigeBruker}: EnhetBrukerpanelProps) {

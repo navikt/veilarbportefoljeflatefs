@@ -59,7 +59,6 @@ function VeiledereSide() {
                                 </PanelBase>
                                 <MetrikkEkspanderbartpanel
                                     apen={true}
-                                    tittelProps="undertittel"
                                     lamellNavn="veiledergrupper"
                                     tittel="Veiledergrupper"
                                 >
