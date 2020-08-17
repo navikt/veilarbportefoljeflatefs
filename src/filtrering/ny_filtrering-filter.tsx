@@ -37,7 +37,7 @@ function NyFiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtreri
     const gjemHovedMal = useFeatureSelector()(GJEM_HOVEDMAL);
     return (
         <div className="filtrering-filter">
-            <div className="col-sm-12 blokk-xs">
+            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
                     Demografi
                 </Element>
@@ -79,7 +79,7 @@ function NyFiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtreri
                     }
                 />
             </div>
-            <div className="col-sm-12 blokk-xs">
+            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
                     Status og brukergrupper
                 </Element>
@@ -178,7 +178,7 @@ function NyFiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtreri
                     }
                 />
             </div>
-            <div className="col-sm-12 blokk-xs">
+            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
                     Rettighetsgruppe og ytelse
                 </Element>
@@ -207,7 +207,7 @@ function NyFiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtreri
                     }
                 />
             </div>
-            <div className="col-sm-12">
+            <div className="col-sm-12 filtrering-filter__kolonne">
                 <OverskriftMedHjelpeTekst
                     overskriftTekst="Aktivitet"
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
