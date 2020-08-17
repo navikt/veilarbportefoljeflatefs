@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import throttle from 'lodash.throttle';
 import classNames from 'classnames';
 import './til-toppen-knapp.less'
-import {ReactComponent as TilToppenIkon} from '../ikoner/til-toppen.svg';
+import {ReactComponent as TilToppenIkonBla} from '../ikoner/til-toppen-bla.svg';
 
 export const TilToppenKnapp = () => {
     const [scrollPosition, setScrollPosition] = useState<number | undefined>();
@@ -37,7 +37,7 @@ export const TilToppenKnapp = () => {
             aria-hidden={!knappSkalVises}
             onClick={onClick}
         >
-            <TilToppenIkon/>
+            <TilToppenIkonBla/>
         </button>
     );
 };

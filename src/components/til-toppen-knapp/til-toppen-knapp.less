@@ -2,21 +2,19 @@
 
 .veilarbportefoljeflatefs {
   .til-toppen-knapp {
-    transition: opacity 0.5s ease-in;
-    opacity: 1;
     right: 2rem;
     bottom: 2rem;
-    height: 55px;
+    transition: opacity 0.5s ease-in;
+    fill: white;
+    opacity: 1;
 
     &.knapp {
-      padding: .5rem;
+      padding: 0.5rem;
       position: fixed;
-      border: none;
+      background-color: #F4F4F4;
 
       &:hover {
-        background-color: transparent;
-        transform: scale(1.15);
-        cursor: pointer;
+        background-color: #0074df;
       }
     }
 
@@ -29,8 +27,12 @@
     }
 
     svg {
-      width: 40px;
-      height: 40px;
+      width: 22px;
+      height: 24px;
+    }
+
+    &:focus {
+      fill: #0074df;
     }
   }
 }
