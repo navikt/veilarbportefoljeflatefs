@@ -12,6 +12,8 @@ import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
+import {ThunkDispatch} from "redux-thunk";
+import {AnyAction} from "redux";
 
 
 interface VeilederGruppeInnholdProps {
@@ -43,7 +45,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const outerDivRef = useRef<HTMLDivElement>(null);
 
-    const dispatch = useDispatch();
+    const dispatch : ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const enhet = useEnhetSelector();
 
     const velgGruppe = (gruppeId: string) => {

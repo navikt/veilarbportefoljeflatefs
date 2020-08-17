@@ -3,6 +3,8 @@ import {avmarkerSisteVelgtFilter, avmarkerVelgtFilter, markerVelgtFilter} from "
 import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/lagrede-filter/lagrede-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
+import {logEvent} from "../utils/frontend-logger";
+import {finnSideNavn} from "../middleware/metrics-middleware";
 
 export function useLagreFilterController() {
     const dispatch = useDispatch()
@@ -20,6 +22,8 @@ export function useLagreFilterController() {
         if (valgtFilter) {
             dispatch(markerVelgtFilter(valgtFilter));
         } else {
+            logEvent('portefolje.metrikker.lagredefilter.direkte-filtrering',
+                {}, {sideNavn: finnSideNavn()});
             dispatch(avmarkerVelgtFilter());
         }
     }, [filtreringMinOversikt, lagretFilterList, dispatch])

@@ -63,7 +63,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 apen={erLagredeFilterApen}
                 lamellNavn="mine-filter"
                 tittel="Mine filter"
-                tittelProps="undertittel"
                 onClick={klikkPaLagredeFilter}
                 hidden={!lagredeFilterFeatureToggleErPa || filtergruppe !== 'veileder'}
                 className="lagrede-filter-wrapper"
@@ -73,7 +72,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
             <MetrikkEkspanderbartpanel
                 apen={false}
                 tittel="Veiledergrupper"
-                tittelProps="undertittel"
                 lamellNavn="veiledergrupper"
                 hidden={filtergruppe === 'veileder'}
             >
@@ -82,7 +80,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
             <MetrikkEkspanderbartpanel
                 apen
                 tittel="Status"
-                tittelProps="undertittel"
                 lamellNavn="status"
             >
                 <FiltreringStatus
@@ -93,7 +90,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
             <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== 'veileder'}
                 tittel="Filter"
-                tittelProps="undertittel"
                 lamellNavn="filtergruppe"
             >
                 <FiltreringFilter
