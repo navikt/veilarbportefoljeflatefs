@@ -9,7 +9,7 @@ export function FiltreringStatusContainer(props: {children: React.ReactNode}) {
     const brukereTekst = tekstAntallBrukere(statusTall.totalt);
 
     return (
-        <div className="filtrering-oversikt panel">
+        <div className="filtrering-oversikt">
             <Element className="filtrering-oversikt__totalt-antall blokk-xxs" tag="h3">
                 {brukereTekst}
             </Element>

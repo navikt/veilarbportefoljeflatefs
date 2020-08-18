@@ -27,7 +27,7 @@ import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-sto
 import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
-import {MinoversiktLagreFilterKnapp} from "./minoversikt-lagre-filter-knapp";
+import {MinOversiktLagreFilterKnapp} from "./min-oversikt-lagre-filter-knapp";
 import {useLagreFilterController} from "./use-lagre-filter-controller";
 
 function MinoversiktSide() {
@@ -73,7 +73,7 @@ function MinoversiktSide() {
                                     listevisning={listevisning}
                                     className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                 />
-                                <MinoversiktLagreFilterKnapp/>
+                                <MinOversiktLagreFilterKnapp/>
                             </div>
                             <div className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <TabellOverskrift

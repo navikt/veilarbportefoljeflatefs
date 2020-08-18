@@ -1,84 +1,85 @@
 @import "~nav-frontend-core/less/core";
 
 .veilarbportefoljeflatefs {
-    .filtrering-label-container {
-        display: flex;
-        flex-wrap: wrap;
-        z-index: 1000;
-        background-color: #F4F4F4;
+  .filtrering-label-container {
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 1000;
+    background-color: #F4F4F4;
+  }
+
+  .filtreringlabel {
+    border: none;
+    border-radius: @border-radius-small;
+    display: flex;
+    background: @navGra20 none;
+    padding: 0.5rem;
+    justify-content: space-between;
+    font-weight: normal; // TODO få designerne til å bruke fonter som faktisk finnes.
+    margin: .5rem 1rem .5rem 0;
+
+    &:hover {
+      box-shadow: inset 0 -0.125em 0 @navMorkGra;
     }
 
-    .filtreringlabel {
-        border: none;
-        border-radius: @border-radius-small;
-        display: flex;
-        background: @navGra20 none;
-        padding: 0.5rem;
-        justify-content: space-between;
-        font-weight: normal; // TODO få designerne til å bruke fonter som faktisk finnes.
-        margin-right: 1rem;
-        margin-bottom: 1rem;
-
-        &:hover {
-            box-shadow: inset 0 -0.125em 0 @navMorkGra;
-        }
-
-        &:active {
-            background-color: @navDypBla;
-            color: @white;
-        }
-
-        &:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px @fokusFarge;
-        }
-
-        &--markert {
-            background-color: @navOransjeLighten60;
-        }
-
-        &__label {
-            padding-right: .5rem;
-            max-width: 10rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        &__container {
-            display: flex;
-
-            .arbeidsliste--ikon {
-                margin-right: .5rem;
-                right: 0;
-                height: 0;
-            }
-
-            .filter-ikon-x-svg {
-                margin-left: .5rem;
-            }
-        }
+    &:active {
+      background-color: @navDypBla;
+      color: @white;
     }
 
-    .filtrering-label-slett {
-        margin: 20px 8px 32px 3px;
-        cursor: pointer;
-        background-color: rgb(183, 177, 169);
-        border: none;
-        padding: 5px;
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px @fokusFarge;
     }
 
-    .filtreringlabel-slett-filter {
-        padding-right: 0;
+    &--markert {
+      background-color: @navOransjeLighten60;
     }
 
-    .filter-ikon-x-svg {
-        width: 0.875rem;
-        height: 0.875rem;
-        align-self: center;
+    &__label {
+      padding-right: .5rem;
+      max-width: 10rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .filtreringlabel:active svg path {
-        fill: #ffffff;
+    &__container {
+      display: flex;
+
+      .arbeidsliste--ikon {
+        margin-right: .5rem;
+        right: 0;
+        height: 0;
+      }
+
+      .filter-ikon-x-svg {
+        margin-left: .5rem;
+      }
     }
+  }
+
+  .slett-alle-filtervalg-knapp {
+    background-color: @navGra60;
+    color: white;
+    padding-right: 0;
+  }
+
+  .filtrering-label-slett {
+    margin: 20px 8px 32px 3px;
+    cursor: pointer;
+    background-color: rgb(183, 177, 169);
+    border: none;
+    padding: 5px;
+  }
+  
+  .filter-ikon-x-svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    align-self: center;
+  }
+
+  .filtreringlabel:active svg path {
+    fill: #ffffff;
+  }
 }

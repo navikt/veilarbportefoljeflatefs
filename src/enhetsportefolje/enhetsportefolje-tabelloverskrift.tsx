@@ -2,7 +2,7 @@ import React from 'react';
 import EnhetListehode from './enhet-listehode';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {ListevisningType} from '../ducks/ui/listevisning';
-import './enhetsportefolje.less';
+import './ny_enhetsportefolje.less';
 import './brukerliste.less';
 import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
 

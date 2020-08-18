@@ -1,4 +1,5 @@
 @import "tabell";
+@import '~nav-frontend-core/less/_variabler';
 
 @bakgrunnsGra: #F4F4F4;
 
@@ -59,9 +60,12 @@ html {
 @import "~nav-frontend-hjelpetekst-style/src/hjelpetekst-style";
 @import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
 
-
 .veilarbportefoljeflatefs {
     @import "./components/barinput/barlabel";
+
+    .ekspanderbartPanel__innhold {
+        padding: 1rem;
+    }
 
     .ekspanderbartPanel--apen .ReactCollapse--collapse {
         overflow: initial !important;
@@ -107,6 +111,10 @@ html {
     top: 0;
     z-index: 10;
     background-color: @bakgrunnsGra;
+
+    .toolbar {
+        justify-content: space-between;
+    }
 
     .blokk-xxs {
         margin-bottom: 0;
@@ -199,7 +207,10 @@ html {
     .liste-kolonne {
         min-width: 805px;
         max-width: 1322px;
-        margin-bottom: 2rem;
+
+        .filtreringlabel {
+            display: inline-flex;
+        }
     }
 
     @media (max-width: 1200px) {

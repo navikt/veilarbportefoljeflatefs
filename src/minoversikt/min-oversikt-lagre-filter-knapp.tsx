@@ -9,7 +9,7 @@ import {LAGREDE_FILTER} from "../konstanter";
 import {apenLagreFilterModal} from "../ducks/lagret-filter";
 
 
-export function MinoversiktLagreFilterKnapp(){
+export function MinOversiktLagreFilterKnapp() {
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
@@ -32,6 +32,4 @@ export function MinoversiktLagreFilterKnapp(){
             Lagre filter
         </Knapp>
     )
-
-
 }

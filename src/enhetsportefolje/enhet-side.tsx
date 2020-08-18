@@ -103,13 +103,16 @@ function EnhetSide() {
                                 />
                                 {harFilter
                                     ? <>
-                                        <div
-                                            className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'sticky-container__fjernet'}>
+                                        <div className={flereEnnAntallBrukere(4)
+                                            ? 'sticky-container'
+                                            : 'sticky-container__fjernet'}>
                                             <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
-                                            <span
-                                                className={flereEnnAntallBrukere(4) ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
-                                            <div
-                                                className={flereEnnAntallBrukere(4) ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
+                                            <span className={flereEnnAntallBrukere(4)
+                                                ? 'sticky-skygge'
+                                                : 'ikke-sticky__skygge'}>
+                                            <div className={flereEnnAntallBrukere(4)
+                                                ? 'toolbar-container'
+                                                : 'ikke-sticky__toolbar-container'}>
                                                 <Toolbar
                                                     onPaginering={() => dispatch(hentPortefoljeForEnhet(
                                                         enhetId,
@@ -127,7 +130,9 @@ function EnhetSide() {
                                             </span>
                                         </div>
                                         <EnhetTabell
-                                            classNameWrapper={flereEnnAntallBrukere(0) ? 'portefolje__container' : 'portefolje__container__tom-liste'}
+                                            classNameWrapper={flereEnnAntallBrukere(0)
+                                                ? 'portefolje__container'
+                                                : 'portefolje__container__tom-liste'}
                                         />
                                     </>
                                     : <VelgFilterMelding/>
