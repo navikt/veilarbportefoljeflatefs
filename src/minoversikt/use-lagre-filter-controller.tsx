@@ -22,9 +22,9 @@ export function useLagreFilterController() {
         if (valgtFilter) {
             dispatch(markerVelgtFilter(valgtFilter));
         } else {
+            dispatch(avmarkerVelgtFilter());
             logEvent('portefolje.metrikker.lagredefilter.direkte-filtrering',
                 {}, {sideNavn: finnSideNavn()});
-            dispatch(avmarkerVelgtFilter());
         }
     }, [filtreringMinOversikt, lagretFilterList, dispatch])
 
