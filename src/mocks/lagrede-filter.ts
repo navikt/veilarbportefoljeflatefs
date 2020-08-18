@@ -18,12 +18,12 @@ export const lagredeFilter = () => {
         }, {
             filterNavn: 'Test',
             filterId: 3,
-            filterValg: {...initialState, kjonn: ["K"], formidlingsgruppe: ["ARBS"]},
+            filterValg: {...initialState, kjonn: "K", formidlingsgruppe: ["ARBS"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
             filterNavn: 'Team Voff',
             filterId: 4,
-            filterValg: {...initialState, kjonn: ["M"], formidlingsgruppe: ["ARBS"]},
+            filterValg: {...initialState, kjonn: "M", formidlingsgruppe: ["ARBS"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
             filterNavn: 'Under 19',
@@ -33,12 +33,12 @@ export const lagredeFilter = () => {
         }, {
             filterNavn: 'Kvinner',
             filterId: 6,
-            filterValg: {...initialState, kjonn: ["K"]},
+            filterValg: {...initialState, kjonn: "K"},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
             filterNavn: 'Menn',
             filterId: 7,
-            filterValg: {...initialState, kjonn: ["M"]},
+            filterValg: {...initialState, kjonn: "M"},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
             filterNavn: '40-49 år',
@@ -48,7 +48,7 @@ export const lagredeFilter = () => {
         }, {
             filterNavn: 'enda en',
             filterId: 9,
-            filterValg: {...initialState, alder: ["40-49"], kjonn: ["M"]},
+            filterValg: {...initialState, alder: ["40-49"], kjonn: "M"},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         },
         ] as LagretFilter []
