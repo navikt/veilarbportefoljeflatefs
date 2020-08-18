@@ -84,8 +84,6 @@ function Sidebar(props: SidebarProps) {
     const dispatch = useDispatch();
     const erLagredeFilterFeatureTogglePa = useFeatureSelector()(LAGREDE_FILTER);
 
-    console.log("test", erLagredeFilterFeatureTogglePa)
-
     useEffect(() => {
         const nyttLagretFilter = lagretFilterState.handlingType === HandlingsType.NYTT && lagretFilterState.status === STATUS.OK;
         const oppdatertLagretFilter = lagretFilterState.handlingType === HandlingsType.REDIGERE && lagretFilterState.status === STATUS.OK;
