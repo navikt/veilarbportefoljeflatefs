@@ -25,6 +25,8 @@ import {STATUS} from "../../ducks/utils";
 import {NyFiltreringStatus} from "../../filtrering/filtrering-status/ny_filtrering-status";
 import NyFiltreringFilter from "../../filtrering/ny_filtrering-filter";
 import NyFilteringVeilederGrupper from "../../filtrering/filtrering-veileder-grupper/ny_filtrering-veileder-grupper";
+import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
+import {LAGREDE_FILTER} from "../../konstanter";
 
 interface Sidebar {
     type: SidebarTabType;
@@ -36,11 +38,11 @@ const sidebar: Sidebar[] = [
     {
         type: SidebarTabType.STATUS,
         icon: <StatusIkon/>,
-        tittel: 'Status'
+        tittel: 'Status',
     }, {
         type: SidebarTabType.MINE_FILTER,
         icon: <MineFilterIkon/>,
-        tittel: 'Mine filter'
+        tittel: 'Mine filter',
     }, {
         type: SidebarTabType.VEILEDERGRUPPER,
         icon: <VeiledergruppeIkon/>,
@@ -80,6 +82,9 @@ function Sidebar(props: SidebarProps) {
     const selectedTabData = finnTab(selectedTab, sidebar);
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const dispatch = useDispatch();
+    const erLagredeFilterFeatureTogglePa = useFeatureSelector()(LAGREDE_FILTER);
+
+    console.log("test", erLagredeFilterFeatureTogglePa)
 
     useEffect(() => {
         const nyttLagretFilter = lagretFilterState.handlingType === HandlingsType.NYTT && lagretFilterState.status === STATUS.OK;
@@ -144,8 +149,14 @@ function Sidebar(props: SidebarProps) {
         const erPaEnhetensOversikt = props.filtergruppe === 'enhet';
 
         if (erPaMinOversikt) {
-            return sidebar.filter(tab => erPaMinOversikt && !visVeiledergrupper(tab))
-                .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+            if (!erLagredeFilterFeatureTogglePa) {
+                return sidebar.filter(tab => erPaMinOversikt && !visVeiledergrupper(tab) && !visLagredeFilter(tab))
+                    .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+            } else {
+                return sidebar.filter(tab => erPaMinOversikt && !visVeiledergrupper(tab))
+                    .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+            }
+
         } else if (erPaEnhetensOversikt) {
             return sidebar.filter(tab => erPaEnhetensOversikt && !visLagredeFilter(tab))
                 .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
