@@ -5,7 +5,7 @@ import { settBrukerSomMarkert } from '../ducks/portefolje';
 import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { useForrigeBruker } from '../hooks/portefolje/use-forrige-bruker';
-import './enhetsportefolje.less';
+import './ny_enhetsportefolje.less';
 import './brukerliste.less';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { AppState } from '../reducer';

@@ -12,8 +12,8 @@ import {
     ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
-import { Kolonne } from '../ducks/ui/listevisning';
-import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
+import {Kolonne} from '../ducks/ui/listevisning';
+import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {
     aapRettighetsperiode,
     nesteUtlopsdatoEllerNull,
@@ -26,7 +26,7 @@ import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import {OrNothing} from "../utils/types/types";
-import './enhetsportefolje.less';
+import './ny_enhetsportefolje.less';
 import './brukerliste.less';
 import {DagerSidenKolonne} from "../components/tabell/kolonner/dagersidenkolonne";
 import {TekstKolonne} from "../components/tabell/kolonner/tekstkolonne";
@@ -156,7 +156,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <TekstKolonne
                 tekst={bruker.vedtakStatus}
                 skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
-                className= "col col-xs-2"
+                className="col col-xs-2"
             />
             <DagerSidenKolonne
                 className="col col-xs-2"

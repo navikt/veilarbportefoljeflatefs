@@ -50,7 +50,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const velgGruppe = (gruppeId: string) => {
         logEvent('portefolje.metrikker.veiledergrupper.velg-gruppe',
-                 {}, {gruppeId: gruppeId, sideNavn: finnSideNavn()});
+            {}, {gruppeId: gruppeId, sideNavn: finnSideNavn()});
         const filterVerdi = finnVeilederGruppe(gruppeId);
         setValgtGruppe(filterVerdi);
         filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, props.filtergruppe));
@@ -68,7 +68,6 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
         } else {
             dispatch(visIngenEndringerToast());
         }
-
     };
 
     const sletteKnapp = () => {
@@ -122,7 +121,6 @@ interface VeilederGruppeRad {
 function VeilederGruppeRad({veilederGruppe, hanterVelgGruppe, onClickRedigerKnapp, veiledereFilter}: VeilederGruppeRad) {
 
     const lagretVeilederGruppe = veilederGruppe.filterValg.veiledere;
-
     const erValgt = veilederlisterErLik(lagretVeilederGruppe, veiledereFilter);
 
     return (

@@ -2,23 +2,22 @@ import React, {useRef} from 'react';
 import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import {apenLagreFilterModal, LagretFilter} from '../../ducks/lagret-filter';
-import './lagrede-filter_innhold.less'
+import './ny_lagrede-filter-innhold.less'
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../reducer";
-import {velgLagretFilter} from "../../ducks/filtrering";
 import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn} from "../../middleware/metrics-middleware";
+import {velgLagretFilter} from "../../ducks/filtrering";
+import '../../components/sidebar/sidebar.less'
 
 interface LagredeFilterInnholdProps {
-    lagretFilter: LagretFilter[]
+    lagretFilter: LagretFilter[];
 }
 
-function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
+function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
-    const className = (props.lagretFilter.length >= 7) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
-
     return (
-        <div className={className} ref={outerDivRef}>
+        <div className='ny__lagrede-filter__valgfelt' ref={outerDivRef}>
             {props.lagretFilter.map((filter, idx) =>
                 <LagretFilterRad
                     key={idx}
@@ -44,14 +43,14 @@ function LagretFilterRad({filter}: LagretFilterRadProps) {
         dispatch(velgLagretFilter(filter))
     }
 
-    function onClickRedigerKnapp(){
+    function onClickRedigerKnapp() {
         dispatch(apenLagreFilterModal())
     }
 
     return (
-        <div className="lagrede-filter__rad">
+        <div className="ny__lagrede-filter__rad">
             <Radio
-                className="lagrede-filter__filternavn"
+                className="ny__lagrede-filter__filternavn"
                 key={filter.filterId}
                 name="lagretFilter"
                 label={filter.filterNavn}
@@ -68,4 +67,4 @@ function LagretFilterRad({filter}: LagretFilterRadProps) {
     );
 }
 
-export default LagredeFilterInnhold;
+export default NyLagredeFilterInnhold;

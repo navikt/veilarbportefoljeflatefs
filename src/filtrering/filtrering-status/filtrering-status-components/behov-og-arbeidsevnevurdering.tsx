@@ -22,21 +22,18 @@ export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
             <BarInputRadio
                 filterNavn="trengerVurdering"
                 handleChange={props.handleChange}
-                max={statusTall.totalt}
                 checked={props.ferdigfilterListe.includes(TRENGER_VURDERING)}
                 antall={statusTall.trengerVurdering}
             />
             <HiddenIfBarInputRadio
                 filterNavn="erSykmeldtMedArbeidsgiver"
                 handleChange={props.handleChange}
-                max={statusTall.totalt}
                 checked={props.ferdigfilterListe.includes(ER_SYKMELDT_MED_ARBEIDSGIVER)}
                 antall={statusTall.erSykmeldtMedArbeidsgiver}
             />
             <HiddenIfBarInputRadio
                 filterNavn="underVurdering"
                 handleChange={props.handleChange}
-                max={statusTall.totalt}
                 checked={props.ferdigfilterListe.includes(UNDER_VURDERING)}
                 antall={statusTall.underVurdering}
                 hidden={!vedtakkStotteFeature}

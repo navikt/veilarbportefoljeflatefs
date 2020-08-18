@@ -1,0 +1,40 @@
+@import "~nav-frontend-core/less/core";
+
+.veilarbportefoljeflatefs {
+
+  .sidebar__content-container .ny__lagrede-filter__valgfelt {
+    padding: .5rem;
+  }
+
+  .ny {
+    &__lagrede-filter-wrapper {
+      &__tekst {
+        font-style: italic;
+        margin: 0.5rem 0;
+      }
+
+      &__lagredefilter-emptystate {
+        text-align: left;
+        margin-left: 1rem;
+      }
+    }
+
+    &__lagrede-filter {
+      &__valgfelt {
+        .skjemaelement__label {
+          word-break: break-word;
+        }
+      }
+
+      &__rad {
+        display: flex;
+        justify-content: space-between;
+        min-height: 2.5rem;
+      }
+
+      &__filternavn {
+        width: 85%;
+      }
+    }
+  }
+}
