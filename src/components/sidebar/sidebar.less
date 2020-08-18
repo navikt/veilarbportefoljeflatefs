@@ -1,0 +1,109 @@
+@import "~nav-frontend-core/less/core";
+
+.veilarbportefoljeflatefs {
+  .sidebar {
+    height: fit-content;
+    width: 100%;
+    position: sticky;
+    top: .5rem;
+    z-index: 4;
+    display: grid;
+    grid-template-rows: auto auto;
+    row-gap: 5px;
+
+    &__tab {
+      position: relative;
+      display: block;
+      background-color: transparent;
+      padding: .5rem .2rem 0;
+      height: auto;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-bottom: 0.3rem solid white;
+
+      &-container {
+        grid-row: 1;
+        display: flex;
+        justify-content: space-around;
+        background-color: white;
+        box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+        margin-top: -.5rem;
+        height: 3.5rem;
+      }
+
+      &-valgt {
+        border-bottom: 0.3rem solid @navBla;
+      }
+
+      &-ikon {
+        width: 2.5rem;
+        height: 2rem;
+      }
+    }
+
+    &__hidden {
+      .sidebar__tab-valgt {
+        border-bottom: 0.3rem solid white;
+      }
+    }
+
+    &__content-container {
+      grid-row: 2;
+      height: fit-content;
+      z-index: 5;
+      background-color: white;
+      padding: .5rem;
+      position: absolute;
+      width: inherit;
+      box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+
+      .typo-systemtittel {
+        margin-bottom: 1rem;
+      }
+
+      .lukknapp--overstHjorne {
+        top: .5rem;
+        right: .5rem;
+        border: none;
+      }
+
+      .filtrering-filter {
+       &__kolonne {
+        padding: 0;
+        }
+      }
+
+      .filtrering-filter, .ny__filtrering-oversikt, .ny__lagrede-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
+        height: auto;
+        overflow-y: auto;
+        border-top: 1px solid @navGra40;
+        border-bottom: 1px solid @navGra40;
+        padding: .5rem;
+      }
+    }
+  }
+
+  @media (max-height: 1100px) {
+    .sidebar__content-container {
+      .filtrering-filter, .ny__filtrering-oversikt, .ny__lagrede-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
+        max-height: 70vh;
+      }
+    }
+  }
+
+  @media (max-height: 870px) {
+    .sidebar__content-container {
+      .filtrering-filter, .ny__filtrering-oversikt, .ny__lagrede-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
+        max-height: 60vh;
+      }
+    }
+  }
+
+  @media (max-height: 640px) {
+    .sidebar__content-container {
+      .filtrering-filter, .ny__filtrering-oversikt, .ny__lagrede-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
+        max-height: 50vh;
+      }
+    }
+  }
+}

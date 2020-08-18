@@ -10,11 +10,9 @@ export interface FiltreringStatusGruppe {
 
 function FiltreringStatusPermitterteEtterNiendeBrukere(props: FiltreringStatusGruppe) {
     const statusTall = useStatusTallSelector();
-
     return (
         <BarInputCheckbox
             filterNavn="permitterteEtterNiendeMars"
-            max={statusTall.totalt}
             antall={statusTall.permitterteEtterNiendeMars}
             handleChange={props.handleChange}
             checked={props.ferdigfilterListe.includes(PERMITTERTE_ETTER_NIENDE_MARS)}

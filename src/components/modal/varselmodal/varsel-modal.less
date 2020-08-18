@@ -1,29 +1,27 @@
 .varsel-modal {
-    section {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
+  div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__ikon {
+    margin: -2rem auto 0 auto; //plasserer et ikon med størrelsen 64x64 i midten av modalen
+    align-items: center;
+  }
+
+  &__innhold > * {
+    margin-bottom: 0.5rem;
+  }
+
+  .modal__overlay {
+    z-index: 2002;
+
+    .ReactModal__Content {
+      overflow: visible;
+      width: 576px;
+      padding: 0 1rem;
+      font-family: Source Sans Pro, Arial, sans-serif;
     }
-
-    svg {
-        margin: -2rem auto 0 auto; //placerar en ikon med størrelsen 64x64 i mitten
-    }
-
-    &__innhold > * {
-        margin-bottom: 0.5rem;
-
-    }
-
-    .modal__overlay {
-        z-index: 2002;
-
-        .ReactModal__Content {
-            overflow: visible;
-            width: 576px;
-            padding: 0 1rem;
-            font-family: Source Sans Pro, Arial, sans-serif;
-
-        }
-    }
+  }
 }
-

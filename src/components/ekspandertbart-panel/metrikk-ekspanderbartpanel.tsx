@@ -1,10 +1,11 @@
 import React, {PropsWithChildren, useState} from 'react';
-import Ekspanderbartpanel, {EkspanderbartpanelProps} from 'nav-frontend-ekspanderbartpanel';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import hiddenIf from '../hidden-if/hidden-if';
 import '../toolbar/toolbar.less';
 import classNames from "classnames";
+import {EkspanderbartpanelBaseProps} from "nav-frontend-ekspanderbartpanel/lib/ekspanderbartpanel-base";
 
 interface MetrikkEkspanderbartpanelProps {
     lamellNavn: string;
@@ -13,7 +14,7 @@ interface MetrikkEkspanderbartpanelProps {
     className?: string;
 }
 
-type AllProps = MetrikkEkspanderbartpanelProps & EkspanderbartpanelProps;
+type AllProps = MetrikkEkspanderbartpanelProps & EkspanderbartpanelBaseProps;
 
 function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
     const [isApen, setIsApen] = useState(props.apen);

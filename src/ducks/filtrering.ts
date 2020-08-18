@@ -72,7 +72,7 @@ function fjern(verdi, fjernVerdi) {
     } else if (fjernVerdi && typeof verdi === 'object') {
         return Object.entries(verdi)
             .filter(([key]) => key !== fjernVerdi)
-            .filter(([_,value]) => value !== AktiviteterValg.NA)
+            .filter(([_, value]) => value !== AktiviteterValg.NA)
             .reduce((acc, [key, value]) => ({...acc, [key]: value}), {});
     } else if (fjernVerdi === null) {
         return null;
@@ -127,7 +127,7 @@ export function velgLagretFilter(filterVerdi: LagretFilter) {
 }
 
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet') {
-    if (Array.isArray(filterVerdi)){
+    if (Array.isArray(filterVerdi)) {
         filterVerdi.sort()
     }
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {

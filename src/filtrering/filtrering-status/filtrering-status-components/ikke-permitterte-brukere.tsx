@@ -14,7 +14,6 @@ function FiltreringStatusIkkePermitterteEtterNiendeBrukere(props: FiltreringStat
     return (
         <BarInputCheckbox
             filterNavn="ikkePermitterteEtterNiendeMars"
-            max={statusTall.totalt}
             antall={statusTall.ikkePermitterteEtterNiendeMars}
             handleChange={props.handleChange}
             checked={props.ferdigfilterListe.includes(IKKE_PERMITTERTE_ETTER_NIENDE_MARS)}

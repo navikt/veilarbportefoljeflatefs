@@ -1,10 +1,10 @@
 import React from 'react';
 import ModalWrapper from 'nav-frontend-modal';
-import { ReactComponent as AdvarselSirkelIkon } from './advarsel-sirkel.svg';
-import { ReactComponent as SuksessSirkelIkon } from './ok-sirkel.svg';
-import { ReactComponent as FeilSirkelIkon } from './feil-sirkel.svg';
+import {ReactComponent as AdvarselSirkelIkon} from './advarsel-sirkel.svg';
+import {ReactComponent as SuksessSirkelIkon} from './ok-sirkel.svg';
+import {ReactComponent as FeilSirkelIkon} from './feil-sirkel.svg';
 import classNames from 'classnames';
-import './varsel-modal.less';
+import './varsel-modal.less'
 
 export enum VarselModalType {
     ADVARSEL,
@@ -37,7 +37,9 @@ export function VarselModal({type, contentLabel, isOpen, onRequestClose, childre
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
             onAfterOpen={onAfterOpen}
         >
-            {getIkone(type)}
+            <div className='varsel-modal__ikon'>
+                {getIkon(type)}
+            </div>
             <div className={classNames('varsel-modal__innhold', className)}>
                 {children}
             </div>
@@ -45,7 +47,7 @@ export function VarselModal({type, contentLabel, isOpen, onRequestClose, childre
     );
 }
 
-function getIkone(varselModalType: VarselModalType) {
+function getIkon(varselModalType: VarselModalType) {
     switch (varselModalType) {
         case VarselModalType.ADVARSEL:
             return <AdvarselSirkelIkon/>;

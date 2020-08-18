@@ -1,9 +1,11 @@
-import {LAGREDE_FILTER, SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE} from '../konstanter';
+import {SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE, CVJOBBPROFIL, REDESIGN, LAGREDE_FILTER} from '../konstanter';
 
 const toggles = {
     [SPOR_OM_TILBAKEMELDING]: true,
     [VEDTAKSTOTTE]: true,
-    [LAGREDE_FILTER]: true
+    [CVJOBBPROFIL]: true,
+    [LAGREDE_FILTER]: true,
+    [REDESIGN]: true
 };
 
 export default toggles;

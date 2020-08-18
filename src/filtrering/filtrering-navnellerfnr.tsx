@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
-import { Input } from 'nav-frontend-skjema';
-import { FiltervalgModell } from '../model-interfaces';
-import { useEffect, useState } from 'react';
+import React, {useRef} from 'react';
+import {Input} from 'nav-frontend-skjema';
+import {FiltervalgModell} from '../model-interfaces';
+import {useEffect, useState} from 'react';
 
 interface FiltreringNavnEllerFnrProps {
     filtervalg: FiltervalgModell;

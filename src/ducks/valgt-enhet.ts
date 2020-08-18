@@ -45,7 +45,7 @@ export function velgEnhetForVeileder(valgtEnhet) {
 }
 
 export function oppdaterValgtEnhet(nyEnhet: string) {
-    return (dispatch: Dispatch<Action, AppState>, getState: () => AppState) => {
+    return (dispatch: Dispatch<Action>, getState: () => AppState) => {
         const state = getState();
         const valgtEnhet = state.valgtEnhet.data;
 
