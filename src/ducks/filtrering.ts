@@ -42,7 +42,17 @@ export const initialState: FiltervalgModell = {
     servicegruppe: [],
     rettighetsgruppe: [],
     veiledere: [],
-    aktiviteter: {} as FiltreringAktiviteterValg,
+    aktiviteter: {
+        BEHANDLING: AktiviteterValg.NA,
+        EGEN: AktiviteterValg.NA,
+        GRUPPEAKTIVITET: AktiviteterValg.NA,
+        IJOBB: AktiviteterValg.NA,
+        MOTE: AktiviteterValg.NA,
+        SOKEAVTALE: AktiviteterValg.NA,
+        STILLING: AktiviteterValg.NA,
+        TILTAK: AktiviteterValg.NA,
+        UTDANNINGAKTIVITET: AktiviteterValg.NA
+    } as FiltreringAktiviteterValg,
     tiltakstyper: [],
     ytelse: null,
     manuellBrukerStatus: [],
