@@ -20,7 +20,10 @@ function Etiketter({className, bruker, erVedtakStotteFeaturePa}: EtiketterProps)
             >
                 Død
             </Bas>
-            <Advarsel hidden={bruker.sikkerhetstiltak.length === 0}>
+            <Advarsel
+                hidden={bruker.sikkerhetstiltak.length === 0}
+                typo="undertekst"
+            >
                 Sikkerhetstiltak
             </Advarsel>
             <Fokus
