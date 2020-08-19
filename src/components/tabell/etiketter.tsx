@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Etikett from './etikett';
-import { BrukerModell, EtikettType, VurderingsBehov } from '../../model-interfaces';
+import {BrukerModell, VurderingsBehov} from '../../model-interfaces';
+import {Advarsel, Bas, Fokus, Info} from "./etikett";
 
 interface EtiketterProps {
     className?: string;
@@ -12,72 +12,71 @@ function Etiketter({className, bruker, erVedtakStotteFeaturePa}: EtiketterProps)
 
     return (
         <span className={className}>
-            <Etikett
-                type={EtikettType.DOED}
-                skalVises={bruker.erDoed}
+            <Bas
+                type="info"
+                className="etikett--doed"
+                hidden={!bruker.erDoed}
+                typo="undertekst"
             >
                 Død
-            </Etikett>
-            <Etikett
-                type={EtikettType.SIKKERHETSTILTAK}
-                skalVises={bruker.sikkerhetstiltak.length > 0}
-            >
+            </Bas>
+            <Advarsel hidden={bruker.sikkerhetstiltak.length === 0}>
                 Sikkerhetstiltak
-            </Etikett>
-            <Etikett
-                type={EtikettType.DISKRESJONSKODE}
-                skalVises={!!bruker.diskresjonskode}
+            </Advarsel>
+            <Fokus
+                hidden={!bruker.diskresjonskode}
+                typo="undertekst"
             >
                 {`Kode ${bruker.diskresjonskode}`}
-            </Etikett>
-            <Etikett
-                type={EtikettType.EGEN_ANSATT}
-                skalVises={bruker.egenAnsatt}
+            </Fokus>
+            <Fokus
+                hidden={!bruker.egenAnsatt}
+                typo="undertekst"
             >
                Egen ansatt
-            </Etikett>
-            <Etikett
-                type={EtikettType.IKKE_VURDERT}
-                skalVises={erVedtakStotteFeaturePa ? bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT : bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT}
+            </Fokus>
+            <Info
+                hidden={erVedtakStotteFeaturePa ? bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT}
+                typo="undertekst"
             >
                 Trenger vurdering
-            </Etikett>
-            <Etikett
-                type={EtikettType.BEHOV_AEV}
-                skalVises={erVedtakStotteFeaturePa ? bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING : bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING}
+            </Info>
+            <Info
+                hidden={erVedtakStotteFeaturePa ? bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING}
+                typo="undertekst"
             >
                 Behov for AEV
-            </Etikett>
-            <Etikett
-                type={EtikettType.BEHOV_AEV}
-                skalVises={erVedtakStotteFeaturePa && bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.OPPGITT_HINDRINGER}
+            </Info>
+            <Info
+                hidden={!erVedtakStotteFeaturePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.OPPGITT_HINDRINGER}
+                typo="undertekst"
             >
                Oppgitt hindringer
-            </Etikett>
-            <Etikett
-                type={EtikettType.BEHOV_AEV}
-                skalVises={erVedtakStotteFeaturePa && bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ANTATT_GODE_MULIGHETER}
+            </Info>
+            <Info
+                hidden={!erVedtakStotteFeaturePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ANTATT_GODE_MULIGHETER}
+                typo="undertekst"
             >
                Antatt gode muligheter
-            </Etikett>
-            <Etikett
-                type={EtikettType.BEHOV_AEV}
-                skalVises={erVedtakStotteFeaturePa && bruker.trengerVurdering && bruker.vurderingsBehov === VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING}
+            </Info>
+            <Info
+                hidden={!erVedtakStotteFeaturePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING}
+                typo="undertekst"
             >
                 Antatt behov for veiledning
-            </Etikett>
-            <Etikett
-                type={EtikettType.ER_SYKMELDT_MED_ARBEIDSGIVER}
-                skalVises={bruker.erSykmeldtMedArbeidsgiver}
+            </Info>
+            <Info
+                hidden={!bruker.erSykmeldtMedArbeidsgiver}
+                typo="undertekst"
             >
                 Sykmeldt
-            </Etikett>
-            <Etikett
-                type={EtikettType.TRENGER_REVURDERING}
-                skalVises={bruker.trengerRevurdering}
+            </Info>
+            <Info
+                hidden={!bruker.trengerRevurdering}
+                typo="undertekst"
             >
                 Revurdering
-            </Etikett>
+            </Info>
         </span>
     );
 }
