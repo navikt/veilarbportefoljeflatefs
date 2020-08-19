@@ -31,6 +31,7 @@ import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
+import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -57,7 +58,8 @@ function antallFilter(filtervalg) {
 
 function Ny_EnhetSide() {
     const statustall = useFetchStatusTall();
-    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
+    const enhetensOversikt = ListevisningType.enhetensOversikt
+    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} = usePortefoljeSelector(enhetensOversikt);
     const dispatch = useDispatch();
     const portefoljeData = portefolje.data;
     const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
@@ -66,24 +68,25 @@ function Ny_EnhetSide() {
     const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet')), [dispatch]);
     const veilederLabel = useMemo(() => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter), [filtervalg.veiledere, veilederliste, slettVeilederFilter]);
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
-    const {isSidebarHidden, setIsSidebarHidden} = useSidebarViewStore();
+    const {isSidebarHidden} = useSidebarViewStore(enhetensOversikt);
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
-    useFetchPortefolje(ListevisningType.enhetensOversikt);
+    useFetchPortefolje(enhetensOversikt);
     useSetLocalStorageOnUnmount();
 
     const handleOnTabClicked = (tab, selectedTab) => {
         if (isSidebarHidden) {
-            setIsSidebarHidden(false);
-        } else if (tab.type === selectedTab) {
-            setIsSidebarHidden(true);
+            dispatch(visSidebar(enhetensOversikt))
+
+        } else if (tab.type === selectedTab.selectedTab) {
+            dispatch(skjulSidebar(enhetensOversikt))
         }
     };
 
     const lukkTab = () => {
-        setIsSidebarHidden(true);
+        dispatch(skjulSidebar(enhetensOversikt))
     };
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
@@ -143,7 +146,7 @@ function Ny_EnhetSide() {
                                         sorteringsfelt,
                                         filtervalg
                                     ))}
-                                    filtergruppe={ListevisningType.enhetensOversikt}
+                                    filtergruppe={enhetensOversikt}
                                     sokVeilederSkalVises
                                     antallTotalt={portefoljeData.antallTotalt}
                                     side="enhetensoversikt"

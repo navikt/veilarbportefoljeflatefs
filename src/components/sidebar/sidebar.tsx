@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {
     SidebarTabInfo,
     SidebarTabInfo as SidebarTabType,
-    useSidebarViewStore
+    useSidebarViewStore,
 } from '../../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import './sidebar.less';
@@ -20,13 +20,14 @@ import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import NyFiltreringLagredeFilter from "../../filtrering/filtrering-lagrede-filter/ny_filtrering-lagrede-filter";
 import {AppState} from "../../reducer";
-import {HandlingsType} from "../../ducks/lagret-filter";
-import {STATUS} from "../../ducks/utils";
 import {NyFiltreringStatus} from "../../filtrering/filtrering-status/ny_filtrering-status";
 import NyFiltreringFilter from "../../filtrering/ny_filtrering-filter";
 import NyFilteringVeilederGrupper from "../../filtrering/filtrering-veileder-grupper/ny_filtrering-veileder-grupper";
 import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
 import {LAGREDE_FILTER} from "../../konstanter";
+import {ListevisningType} from "../../ducks/ui/listevisning";
+import {HandlingsType} from "../../ducks/lagret-filter";
+import {STATUS} from "../../ducks/utils";
 
 interface Sidebar {
     type: SidebarTabType;
@@ -54,6 +55,7 @@ const sidebar: Sidebar[] = [
     }
 ];
 
+
 function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar | undefined {
     return tabs.find(t => t.type === viewType);
 }
@@ -77,9 +79,11 @@ interface SidebarProps {
 }
 
 function Sidebar(props: SidebarProps) {
-    const {selectedTab, setSelectedTab} = useSidebarViewStore();
+    const erPaMinOversikt = props.filtergruppe === 'veileder';
+    const erPaEnhetensOversikt = props.filtergruppe === 'enhet';
     const sidebarRef = useRef<HTMLDivElement>(null);
-    const selectedTabData = finnTab(selectedTab, sidebar);
+    const selectedTab = useSidebarViewStore(erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt)
+    const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const dispatch = useDispatch();
     const erLagredeFilterFeatureTogglePa = useFeatureSelector()(LAGREDE_FILTER);
@@ -89,12 +93,20 @@ function Sidebar(props: SidebarProps) {
         const oppdatertLagretFilter = lagretFilterState.handlingType === HandlingsType.REDIGERE && lagretFilterState.status === STATUS.OK;
 
         if (nyttLagretFilter || oppdatertLagretFilter) {
-            return setSelectedTab(SidebarTabInfo.MINE_FILTER);
+            dispatch({
+                type: 'sidebarTabEndret',
+                selectedTab: SidebarTabInfo.MINE_FILTER,
+                name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
+            })
         }
-    }, [setSelectedTab, lagretFilterState.handlingType, lagretFilterState.status])
+    }, [dispatch, erPaMinOversikt, lagretFilterState.handlingType, lagretFilterState.status])
 
     function handleOnTabClicked(tab: Sidebar) {
-        setSelectedTab(tab.type);
+        dispatch({
+            type: 'sidebarTabEndret',
+            selectedTab: tab.type,
+            name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
+        })
         props.handleOnTabClicked(tab, selectedTab);
         logEvent('portefolje.metrikker.sidebar-tab', {tab: tab.type,});
     }
@@ -135,28 +147,21 @@ function Sidebar(props: SidebarProps) {
         }
     }
 
-    useEffect(() => {
-        setSelectedTab(selectedTab);
-    }, [setSelectedTab, selectedTab]);
-
     const tabs = () => {
         const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
         const visLagredeFilter = tab => tab.type === SidebarTabType.MINE_FILTER;
 
-        const erPaMinOversikt = props.filtergruppe === 'veileder';
-        const erPaEnhetensOversikt = props.filtergruppe === 'enhet';
-
         if (erPaMinOversikt) {
             if (!erLagredeFilterFeatureTogglePa) {
-                return sidebar.filter(tab => erPaMinOversikt && !visVeiledergrupper(tab) && !visLagredeFilter(tab))
+                return sidebar.filter(tab => !visVeiledergrupper(tab) && !visLagredeFilter(tab))
                     .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
             } else {
-                return sidebar.filter(tab => erPaMinOversikt && !visVeiledergrupper(tab))
+                return sidebar.filter(tab => !visVeiledergrupper(tab))
                     .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
             }
 
         } else if (erPaEnhetensOversikt) {
-            return sidebar.filter(tab => erPaEnhetensOversikt && !visLagredeFilter(tab))
+            return sidebar.filter(tab => !visLagredeFilter(tab))
                 .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
         } else {
             return sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));

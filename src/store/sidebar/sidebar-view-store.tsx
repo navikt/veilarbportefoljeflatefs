@@ -1,4 +1,6 @@
-import {useState} from 'react';
+import {useSelector} from "react-redux";
+import {AppState} from "../../reducer";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 export enum SidebarTabInfo {
     STATUS = 'STATUS',
@@ -7,8 +9,14 @@ export enum SidebarTabInfo {
     MINE_FILTER = 'MINE_FILTER'
 }
 
-export const useSidebarViewStore = () => {
-    const [selectedTab, setSelectedTab] = useState<SidebarTabInfo>(SidebarTabInfo.STATUS);
-    const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(false);
-    return {selectedTab, setSelectedTab, isSidebarHidden, setIsSidebarHidden};
+export function sidebarSelector(state: AppState, name: string) {
+    if (name === ListevisningType.minOversikt) {
+        return state.ui.sidebarMinOversikt;
+    }
+    return state.ui.sidebarEnhetensOversikt;
+}
+
+export const useSidebarViewStore = (name: string) => {
+    return useSelector((state: AppState) => sidebarSelector(state, name));
 };
+
