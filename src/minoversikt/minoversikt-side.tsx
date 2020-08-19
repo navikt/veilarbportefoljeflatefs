@@ -44,6 +44,7 @@ function MinoversiktSide() {
     useFetchPortefolje(ListevisningType.minOversikt);
     useLagreFilterController();
 
+
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
     const flereEnnAntallBrukere = (antall: number) => {
