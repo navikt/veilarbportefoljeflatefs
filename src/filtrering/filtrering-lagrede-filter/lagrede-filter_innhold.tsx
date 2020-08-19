@@ -5,9 +5,9 @@ import {apenLagreFilterModal, LagretFilter} from '../../ducks/lagret-filter';
 import './lagrede-filter_innhold.less'
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../reducer";
-import {logEvent} from "../../utils/frontend-logger";
-import {finnSideNavn} from "../../middleware/metrics-middleware";
 import {velgLagretFilter} from "../../ducks/filtrering";
+import {logEvent} from "../../utils/frontend-logger";
+import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -37,10 +37,12 @@ function LagretFilterRad({filter}: LagretFilterRadProps) {
     const dispatch = useDispatch();
 
     const valgtLagretFilter = useSelector((state: AppState) => state.lagretFilter.valgtLagretFilter);
+    const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
+    const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 
     function velgFilter(event) {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
-            {}, {filterId: filter.filterId, sideNavn: finnSideNavn()});
+            {}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
         dispatch(velgLagretFilter(filter))
     }
 

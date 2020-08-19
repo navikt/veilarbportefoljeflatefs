@@ -172,7 +172,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
     return next(action);
 };
 
-function mapVeilederIdentTilNonsens(veilederIdent: string) {
+export function mapVeilederIdentTilNonsens(veilederIdent: string) {
     return [...veilederIdent]
         .map(veilederChar => veilederChar.charCodeAt(0) << 6)
         .map(veilederChar => veilederChar % 255)
