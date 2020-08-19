@@ -68,8 +68,8 @@
       }
 
       .filtrering-filter {
-       &__kolonne {
-        padding: 0;
+        &__kolonne {
+          padding: 0;
         }
       }
 
@@ -79,7 +79,15 @@
         border-top: 1px solid @navGra40;
         border-bottom: 1px solid @navGra40;
         padding: .5rem;
-        max-height: 90vh;
+        max-height: 80vh;
+      }
+    }
+  }
+
+  @media (max-height: 1250px) {
+    .sidebar__content-container {
+      .filtrering-filter, .ny__filtrering-oversikt, .ny__lagrede-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
+        max-height: 75vh;
       }
     }
   }
