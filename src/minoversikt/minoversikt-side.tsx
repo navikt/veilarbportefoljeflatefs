@@ -21,7 +21,7 @@ import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import FiltreringContainer from '../filtrering/filtrering-container';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {hentPortefoljeForVeileder} from '../ducks/portefolje';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
@@ -29,9 +29,6 @@ import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
 import {MinoversiktLagreFilterKnapp} from "./minoversikt-lagre-filter-knapp";
 import {useLagreFilterController} from "./use-lagre-filter-controller";
-import {AppState} from "../reducer";
-import {sjekkFeature} from "../ducks/features";
-import {LAGREDE_FILTER} from "../konstanter";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -40,16 +37,13 @@ function MinoversiktSide() {
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
     useFetchPortefolje(ListevisningType.minOversikt);
+    useLagreFilterController();
 
-    if (lagredeFilterFeatureToggleErPa){
-        useLagreFilterController();
-    }
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
