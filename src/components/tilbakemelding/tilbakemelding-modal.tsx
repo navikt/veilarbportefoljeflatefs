@@ -1,8 +1,8 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Textarea } from 'nav-frontend-skjema';
-import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import {Hovedknapp} from 'nav-frontend-knapper';
+import {Textarea} from 'nav-frontend-skjema';
+import {Element, Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import TilfredshetValg from './tilfredshet-valg';
 import './tilbakemelding-modal.less';
 
@@ -62,18 +62,19 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
         this.setState({tilfredshet});
     };
 
-    renderForm = () => {
 
+    renderForm = () => {
         const {tilfredshet, kommentar} = this.state;
         const harBesvartTilfredshet = tilfredshet > 0;
+        const visFritekst = false;
         return (
-            <div>
+            <>
                 <Innholdstittel className="blokk-xxs tilbakemelding-modal__tittel">
-                    Flere videomøter?
+                    Tilbakemelding
                 </Innholdstittel>
                 <Normaltekst className="tilbakemelding-modal__ingress">
-                    Hva hvis brukeren selv kan ønske videomøte som kanal for et møte med NAV-veileder. Hva tenker du om
-                    det?
+                    Hvor fornøyd er du med oversiktene (Min oversikt, Enhetens oversikt, Veilederoversikt)? Svarene er
+                    anonyme.
                 </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
                     <TilfredshetValg
@@ -84,6 +85,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                 </div>
                 {harBesvartTilfredshet && (
                     <form className="tilbakemelding-modal__ekspander" onSubmit={this.handleFormSubmitted}>
+                        {visFritekst &&
                         <div className="tilbakemelding-modal__kommentar">
                             <Textarea
                                 className="tilbakemelding-modal__kommentar-felt"
@@ -93,13 +95,13 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                                 value={kommentar}
                                 onChange={this.handleKommentarChanged}
                             />
-                        </div>
+                        </div>}
                         <Hovedknapp role="submit" className="knapp--hoved">
                             Send
                         </Hovedknapp>
                     </form>
                 )}
-            </div>
+            </>
         );
     };
 
