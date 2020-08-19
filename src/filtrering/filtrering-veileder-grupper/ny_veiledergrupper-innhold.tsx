@@ -14,6 +14,8 @@ import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import '../../components/sidebar/sidebar.less'
 import './ny_veileder-gruppe.less'
+import {ThunkDispatch} from "redux-thunk";
+import {AnyAction} from "redux";
 
 interface VeilederGruppeInnholdProps {
     lagretFilter: VeiledergrupperFilter[]
@@ -44,7 +46,7 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const outerDivRef = useRef<HTMLDivElement>(null);
 
-    const dispatch = useDispatch();
+    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const enhet = useEnhetSelector();
 
     const velgGruppe = (gruppeId: string) => {
@@ -63,7 +65,8 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
                 filterId: valgtGruppe.filterId,
                 filterNavn: gruppeNavn,
                 filterValg
-            }, enhet))(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, props.filtergruppe)));
+            }, enhet))
+                .then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, props.filtergruppe)));
         } else {
             dispatch(visIngenEndringerToast());
         }
@@ -71,7 +74,7 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const sletteKnapp = () => {
         valgtGruppe && enhet && dispatch(slettGruppe(enhet, valgtGruppe.filterId))
-            (() => dispatch(endreFiltervalg('veiledere', [], 'enhet')));
+        (() => dispatch(endreFiltervalg('veiledere', [], 'enhet')));
     };
 
     useEffect(() => {
