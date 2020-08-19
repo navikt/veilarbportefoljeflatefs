@@ -111,7 +111,7 @@ function NyFiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtreri
                                 filtervalg={filtervalg}
                                 endreFilterValg={endreFiltervalg}
                                 closeDropdown={lukkDropdown}
-                                className="registreringstype"
+                                className="ny__registreringstype"
                             />
                         </>
                     }
@@ -234,6 +234,7 @@ function NyFiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtreri
                             endreFilterValg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                             emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
+                            className="tiltakstyper"
                         />
                     }
                 />
