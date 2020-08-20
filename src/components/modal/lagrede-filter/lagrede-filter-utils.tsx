@@ -3,34 +3,27 @@ import {isEmptyArray, isObject} from "formik";
 import {LagretFilterValideringsError} from "./lagre-filter-modal";
 
 export function lagredeFilterListerErLik(lagretFilter: FiltervalgModell, nyttFilter: FiltervalgModell): boolean {
-    return objectEquals(lagretFilter, nyttFilter)
+    return deepEqual(lagretFilter, nyttFilter)
 }
 
-function objectEquals(lagretFilter, nyttFilter) {
-    // if both are functions
-    if (lagretFilter === null || lagretFilter === undefined || nyttFilter === null || nyttFilter === undefined) {
-        return lagretFilter === nyttFilter;
-    }
-    if (lagretFilter === nyttFilter || lagretFilter.valueOf() === nyttFilter.valueOf()) {
-        return true;
-    }
+function deepEqual(object1, object2) {
+    const keys1 = Object.keys(object1);
+    const keys2 = Object.keys(object2);
 
-    // if they are not functions or strictly equal, they both need to be objects
-    if (!(lagretFilter instanceof Object)) {
-        return false;
-    }
-    if (!(nyttFilter instanceof Object)) {
+    if (keys1.length !== keys2.length) {
         return false;
     }
 
-    const filterliste = Object.keys(lagretFilter);
-    return Object.keys(nyttFilter).every(function (elem) {
-        return filterliste.indexOf(elem) !== -1;
-    })
-        ? filterliste.every(function (i) {
-            return objectEquals(lagretFilter[i], nyttFilter[i]);
-        })
-        : false;
+    for (const key of keys1) {
+        const val1 = object1[key];
+        const val2 = object2[key];
+        const areObjects = isObject(val1) && isObject(val2);
+        if ((areObjects && !deepEqual(val1, val2)) || (!areObjects && val1 !== val2)) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 export function erTomtObjekt(objekt): boolean {
