@@ -59,7 +59,7 @@ function Ny_MinoversiktSide() {
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, "veileder"));
+        dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
 
     const handleOnTabClicked = (tab, selectedTab) => {

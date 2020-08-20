@@ -61,7 +61,7 @@ function MinoversiktSide() {
                         <div className="status-filter-kolonne">
                             <FiltreringContainer
                                 filtervalg={filtervalg}
-                                filtergruppe="veileder"
+                                filtergruppe={filtergruppe}
                                 enhettiltak={tiltak}
                             />
                         </div>
@@ -69,7 +69,7 @@ function MinoversiktSide() {
                             <div className="etikett-wrapper">
                                 <FiltreringLabelContainer
                                     filtervalg={filtervalg}
-                                    filtergruppe="veileder"
+                                    filtergruppe={filtergruppe}
                                     enhettiltak={enhettiltak.data.tiltak}
                                     listevisning={listevisning}
                                     className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}

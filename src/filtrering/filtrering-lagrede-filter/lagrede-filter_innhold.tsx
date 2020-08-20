@@ -35,21 +35,17 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         if (erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) {
             return false;
         }
-        if(erPaMinOversikt && (veiledergrupper || ufordelteBrukere)) {
+        else if (erPaMinOversikt && (veiledergrupper || ufordelteBrukere)) {
             return false;
         }
         return true;
     }
 
-    const getAlertTekst = () => {
-        if (erPaMinOversikt) return "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig"
-        else if (erPaEnhetensOversikt) return "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig"
-    }
-
     return (
         <>
             <HiddenAlertStripe hidden={false}>
-                {getAlertTekst()}
+                {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig"}
+                {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig"}
             </HiddenAlertStripe>
             <div className={className} ref={outerDivRef}>
                 {props.lagretFilter.filter(elem => leavePossibleFilters(elem))

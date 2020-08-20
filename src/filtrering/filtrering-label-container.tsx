@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
@@ -11,8 +11,6 @@ import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {useEffect} from "react";
 import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
-import {AppState} from "../reducer";
-import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
 import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
