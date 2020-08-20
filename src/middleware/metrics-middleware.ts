@@ -65,7 +65,7 @@ function finnFiltreringForSide(store: any, sideNavn: SideNavn) {
 
     switch (sideNavn) {
         case SideNavn.ENHETENS_OVERSIKT:
-            filtrering = state.filtrering;
+            filtrering = state.filtreringEnhetensOversikt;
             break;
         case SideNavn.VEILEDER_OVERSIKT:
             filtrering = state.filtreringVeilederoversikt;
@@ -187,7 +187,6 @@ export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, sto
     }
 
     if (Array.isArray(data.filterVerdi)) {
-
         const filtrering = finnFiltreringForSide(store, sideNavn);
         const prevFilter = filtrering[data.filterId];
         const lagtTilFilterVerdier = finnElementerSomErLagtTil(prevFilter, data.filterVerdi);

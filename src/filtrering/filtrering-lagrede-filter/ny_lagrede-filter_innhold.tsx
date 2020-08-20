@@ -43,7 +43,7 @@ function LagretFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     function velgFilter(event) {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {}, {filterId: filter.filterId, sideNavn: finnSideNavn()});
-        dispatch(velgLagretFilter(filter))
+        dispatch(velgLagretFilter(filter, filtergruppe))
     }
 
     function onClickRedigerKnapp() {

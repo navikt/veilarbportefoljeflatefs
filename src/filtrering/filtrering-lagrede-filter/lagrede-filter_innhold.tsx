@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import {apenLagreFilterModal, LagretFilter} from '../../ducks/lagret-filter';
@@ -8,8 +8,6 @@ import {AppState} from "../../reducer";
 import {velgLagretFilter} from "../../ducks/filtrering";
 import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
-import {veilederlisterErLik} from "../../components/modal/veiledergruppe/veileder-gruppe-utils";
-import {useLagreFilterController} from "../../minoversikt/use-lagre-filter-controller";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -30,12 +28,12 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const leavePossibleFilters = (elem) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes("MIN_ARBEIDSLISTE");
         const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
-        // const veiledergrupper = elem.filterValg;
+        const veiledergrupper = elem.filterValg.veilederGruppe.length > 0;
 
         if (erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori)) {
             return false;
         }
-        if(erPaMinOversikt) {
+        if(erPaMinOversikt && (veiledergrupper)) {
 
         }
         return true;
@@ -73,7 +71,7 @@ function LagretFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     function velgFilter(event) {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
-        dispatch(velgLagretFilter(filter))
+        dispatch(velgLagretFilter(filter, filtergruppe))
     }
 
     function onClickRedigerKnapp() {

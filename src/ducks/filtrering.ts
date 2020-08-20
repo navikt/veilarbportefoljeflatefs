@@ -118,11 +118,11 @@ export default function reducer(state: FiltervalgModell = initialState, action):
     }
 }
 
-export function velgLagretFilter(filterVerdi: LagretFilter) {
+export function velgLagretFilter(filterVerdi: LagretFilter, filtergruppe: string) {
     return {
         type: VELG_LAGRET_FILTER,
         data: filterVerdi,
-        name: 'veileder'
+        name: filtergruppe
     }
 }
 
