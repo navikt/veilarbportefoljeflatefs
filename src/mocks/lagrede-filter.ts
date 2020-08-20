@@ -50,7 +50,12 @@ export const lagredeFilter = () => {
             filterId: 9,
             filterValg: {...initialState, alder: ["40-49"], kjonn: "M"},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-        },
+        }, {
+            filterNavn: 'Nye brukere',
+            filterId: 10,
+            filterValg: {...initialState, ferdigfilterListe: ["NYE_BRUKERE_FOR_VEILEDER"]},
+            opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+        }
         ] as LagretFilter []
     );
 };
