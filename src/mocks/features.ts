@@ -5,7 +5,7 @@ const toggles = {
     [VEDTAKSTOTTE]: true,
     [CVJOBBPROFIL]: true,
     [LAGREDE_FILTER]: true,
-    [REDESIGN]: true
+    [REDESIGN]: false
 };
 
 export default toggles;

@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import { nameToStateSliceMap } from '../../../ducks/utils';
 
 interface TildelVeilederProps {
-    filtergruppe?: string;
+    filtergruppe: string;
     gjeldendeVeileder?: string;
     btnOnClick: () => void;
 }

@@ -127,6 +127,10 @@ export function velgLagretFilter(filterVerdi: LagretFilter) {
 }
 
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet') {
+    console.log("filterid", filterId)
+    console.log("filterverdi", filterVerdi)
+    console.log("gruppe", filtergruppe)
+
     if (Array.isArray(filterVerdi)) {
         filterVerdi.sort()
     }

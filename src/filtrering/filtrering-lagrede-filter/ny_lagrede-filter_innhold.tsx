@@ -12,6 +12,7 @@ import '../../components/sidebar/sidebar.less'
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
+    filtergruppe: string;
 }
 
 function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
@@ -22,6 +23,7 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
                 <LagretFilterRad
                     key={idx}
                     filter={filter}
+                    filtergruppe={props.filtergruppe}
                 />
             )}
         </div>
@@ -30,9 +32,10 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
 interface LagretFilterRadProps {
     filter: LagretFilter;
+    filtergruppe: string;
 }
 
-function LagretFilterRad({filter}: LagretFilterRadProps) {
+function LagretFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     const dispatch = useDispatch();
 
     const valgtLagretFilter = useSelector((state: AppState) => state.lagretFilter.valgtLagretFilter);
@@ -44,7 +47,7 @@ function LagretFilterRad({filter}: LagretFilterRadProps) {
     }
 
     function onClickRedigerKnapp() {
-        dispatch(apenLagreFilterModal())
+        dispatch(apenLagreFilterModal(filtergruppe))
     }
 
     return (

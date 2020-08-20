@@ -17,7 +17,7 @@ import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 
 interface FilteringVeilederGrupperProps {
-    filtergruppe?: string;
+    filtergruppe: string;
 }
 
 function NyFilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps) {

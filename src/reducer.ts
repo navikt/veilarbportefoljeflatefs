@@ -56,7 +56,7 @@ export interface AppState {
     veiledere: VeiledereState;
     portefoljestorrelser: PortefoljeStorrelser;
     statustall: StatustallState;
-    filtrering: FiltervalgModell;
+    filtreringEnhetensOversikt: FiltervalgModell;
     filtreringMinoversikt: FiltervalgModell;
     filtreringVeilederoversikt: FiltervalgModell;
     modal: any;
@@ -67,6 +67,8 @@ export interface AppState {
     features: FeaturesState;
     veiledergrupperLagretFilter: VeiledergrupperLagretFilterState;
     lagretFilter: LagretFilterState;
+    lagretFilterMinOversikt: LagretFilterState;
+    lagretFilterEnhetensOversikt: LagretFilterState;
     toastReducer: ToastState;
     inloggetVeileder: InloggetVeilederState;
 }
@@ -85,9 +87,8 @@ export default combineReducers<AppState>({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     statustall: statustallReducer,
-    filtrering: persistent('enhetsState', window.location, named('enhet', filtreringReducer), initialState),
-    filtreringMinoversikt: persistent('veilederState', window.location,
-        named('veileder', filtreringReducer), initialState),
+    filtreringEnhetensOversikt: persistent('enhetsState', window.location, named('enhet', filtreringReducer), initialState),
+    filtreringMinoversikt: persistent('veilederState', window.location, named('veileder', filtreringReducer), initialState),
     filtreringVeilederoversikt: named('veiledere', filtreringReducer),
     modal: modalReducer,
     serverfeilModal: serverfeilModalReducer,
@@ -97,6 +98,8 @@ export default combineReducers<AppState>({
     features: featuresReducer,
     veiledergrupperLagretFilter: veiledergrupperLagretFilterReducer,
     lagretFilter: lagretFilterReducer,
+    lagretFilterMinOversikt: named('veileder', lagretFilterReducer),
+    lagretFilterEnhetensOversikt: named('enhet', lagretFilterReducer),
     toastReducer: toastReducer,
     inloggetVeileder: inloggetVeilederReducer
 });

@@ -142,7 +142,7 @@ function Sidebar(props: SidebarProps) {
             return <SidebarTab tittel="Mine filter"
                                handleClick={props.lukkTab}
                                children={
-                                   <NyFiltreringLagredeFilter/>
+                                   <NyFiltreringLagredeFilter filtergruppe={props.filtergruppe}/>
                                }/>;
         }
     }

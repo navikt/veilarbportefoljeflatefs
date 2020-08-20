@@ -8,7 +8,7 @@ import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
 import {apenLagreFilterModal} from "../ducks/lagret-filter";
 
-export function NyMinOversiktLagreFilterKnapp() {
+export function NyMinOversiktLagreFilterKnapp(props: { filtergruppe: string }) {
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
@@ -17,7 +17,7 @@ export function NyMinOversiktLagreFilterKnapp() {
 
     function lagreFilterModal(event) {
         event.preventDefault()
-        dispatch(apenLagreFilterModal())
+        dispatch(apenLagreFilterModal(props.filtergruppe))
     }
 
     useEffect(() => {

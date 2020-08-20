@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import {apenLagreFilterModal, LagretFilter} from '../../ducks/lagret-filter';
@@ -8,35 +8,65 @@ import {AppState} from "../../reducer";
 import {velgLagretFilter} from "../../ducks/filtrering";
 import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
+import {veilederlisterErLik} from "../../components/modal/veiledergruppe/veileder-gruppe-utils";
+import {useLagreFilterController} from "../../minoversikt/use-lagre-filter-controller";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
+    filtergruppe: string;
 }
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
     const className = (props.lagretFilter.length >= 7) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
 
+    const erPaMinOversikt = props.filtergruppe === "veileder";
+    const erPaEnhetensOversikt = props.filtergruppe === "enhet";
+
+    // const minArbeidsliste = props.lagretFilter.find(elem => elem.filterValg)
+    // const minArbeidsliste = props.lagretFilter.find(elem => elem.filterValg.kjonn)
+    // console.log("arnljaern", minArbeidsliste)
+
+    const leavePossibleFilters = (elem) => {
+        const arbeidsliste = elem.filterValg.ferdigfilterListe.includes("MIN_ARBEIDSLISTE");
+        const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
+        // const veiledergrupper = elem.filterValg;
+
+        if (erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori)) {
+            return false;
+        }
+        if(erPaMinOversikt) {
+
+        }
+        return true;
+    }
+
     return (
-        <div className={className} ref={outerDivRef}>
-            {props.lagretFilter.map((filter, idx) =>
-                <LagretFilterRad
-                    key={idx}
-                    filter={filter}
-                />
-            )}
-        </div>
-    );
+        <>
+            <div className={className} ref={outerDivRef}>
+                {props.lagretFilter.filter(elem => leavePossibleFilters(elem))
+                    .map((filter, idx) =>
+                        <LagretFilterRad
+                            key={idx}
+                            filter={filter}
+                            filtergruppe={props.filtergruppe}
+                        />
+                    )}
+            </div>
+        </>
+    )
+        ;
 }
 
 interface LagretFilterRadProps {
     filter: LagretFilter;
+    filtergruppe: string;
 }
 
-function LagretFilterRad({filter}: LagretFilterRadProps) {
+function LagretFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     const dispatch = useDispatch();
 
-    const valgtLagretFilter = useSelector((state: AppState) => state.lagretFilter.valgtLagretFilter);
+    const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === "enhet" ? state.lagretFilterEnhetensOversikt.valgtLagretFilter : state.lagretFilterMinOversikt.valgtLagretFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 
@@ -46,8 +76,8 @@ function LagretFilterRad({filter}: LagretFilterRadProps) {
         dispatch(velgLagretFilter(filter))
     }
 
-    function onClickRedigerKnapp(){
-        dispatch(apenLagreFilterModal())
+    function onClickRedigerKnapp() {
+        dispatch(apenLagreFilterModal(filtergruppe))
     }
 
     return (

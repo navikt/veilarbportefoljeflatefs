@@ -141,39 +141,39 @@ export default function reducer(state: LagretFilterState = initialState, action)
 }
 
 // Action Creators
-export function markerVelgtFilter(filterVerdi: LagretFilter) {
+export function markerVelgtFilter(filterVerdi: LagretFilter, filtergruppe: string) {
     return {
         type: MARKER_LAGRET_FILTER,
         data: filterVerdi,
-        name: 'veileder'
+        name: filtergruppe
     }
 }
 
-export function avmarkerVelgtFilter() {
+export function avmarkerVelgtFilter(filtergruppe: string) {
     return {
         type: AVMARKER_LAGRET_FILTER,
-        name: 'veileder'
+        name: filtergruppe
     }
 }
 
-export function avmarkerSisteVelgtFilter() {
+export function avmarkerSisteVelgtFilter(filtergruppe: string) {
     return {
         type: AVMARKER_SISTE_VALGT_FILTER,
-        name: 'veileder'
+        name: filtergruppe
     }
 }
 
-export function apenLagreFilterModal() {
+export function apenLagreFilterModal(filtergruppe: string) {
     return {
         type: APEN_LAGRE_FILTER_MODAL,
-        name: 'veileder'
+        name: filtergruppe
     }
 }
 
-export function lukkLagreFilterModal() {
+export function lukkLagreFilterModal(filtergruppe: string) {
     return {
         type: LUKK_LAGRE_FILTER_MODAL,
-        name: 'veileder'
+        name: filtergruppe
     }
 }
 

@@ -2,31 +2,32 @@ import * as React from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import TabellOverskrift from '../components/tabell-overskrift';
-import { ModalEnhetSideController } from '../components/modal/modal-enhet-side-controller';
+import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
 import EnhetTabell from './enhetsportefolje-tabell';
 import EnhetTabellOverskrift from './enhetsportefolje-tabelloverskrift';
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import ToppMeny from '../topp-meny/topp-meny';
-import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
-import { ListevisningType } from '../ducks/ui/listevisning';
-import { useSetStateFromUrl } from '../hooks/portefolje/use-set-state-from-url';
-import { useFetchPortefolje } from '../hooks/portefolje/use-fetch-portefolje';
+import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
+import {ListevisningType} from '../ducks/ui/listevisning';
+import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
+import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
 import FiltreringContainer from '../filtrering/filtrering-container';
-import { sortTiltak } from '../filtrering/filtrering-status/filter-utils';
+import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
-import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import { useDispatch, useSelector } from 'react-redux';
+import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
+import {useDispatch, useSelector} from 'react-redux';
 import Toolbar from '../components/toolbar/toolbar';
-import { slettEnkeltFilter } from '../ducks/filtrering';
-import { hentPortefoljeForEnhet } from '../ducks/portefolje';
-import { useSyncStateMedUrl } from '../hooks/portefolje/use-sync-state-med-url';
-import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
+import {slettEnkeltFilter} from '../ducks/filtrering';
+import {hentPortefoljeForEnhet} from '../ducks/portefolje';
+import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
+import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import VelgFilterMelding from './velg-filter-melding';
 import '../style.less';
-import { useCallback, useMemo } from 'react';
-import { useFetchStatusTall } from '../hooks/portefolje/use-fetch-statustall';
-import { AppState } from '../reducer';
+import {useCallback, useMemo} from 'react';
+import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
+import {AppState} from '../reducer';
+import {useLagreFilterController} from "../minoversikt/use-lagre-filter-controller";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -56,16 +57,17 @@ function EnhetSide() {
     const statustall = useFetchStatusTall();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
-
     const dispatch = useDispatch();
+    const filtergruppe = "enhet";
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
     useFetchPortefolje(ListevisningType.enhetensOversikt);
     useSetLocalStorageOnUnmount();
+    useLagreFilterController({filtergruppe: filtergruppe});
 
-    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet')), [dispatch]);
+    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe)), [dispatch]);
 
     const portefoljeData = portefolje.data;
     const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
@@ -87,7 +89,7 @@ function EnhetSide() {
                                 <FiltreringContainer
                                     filtervalg={filtervalg}
                                     enhettiltak={tiltak}
-                                    filtergruppe="enhet"
+                                    filtergruppe={filtergruppe}
                                 />
                             </div>
                             <div className="liste-kolonne">
@@ -96,7 +98,7 @@ function EnhetSide() {
                                         ...filtervalg,
                                         veiledere: veilederLabel
                                     }}
-                                    filtergruppe="enhet"
+                                    filtergruppe={filtergruppe}
                                     enhettiltak={enhettiltak.data.tiltak}
                                     listevisning={listevisning}
                                     className="filtrering-label-container"

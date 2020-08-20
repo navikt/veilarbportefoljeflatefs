@@ -15,11 +15,10 @@ import {finnSideNavn} from '../../middleware/metrics-middleware';
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 
-
 interface VeilederGruppeInnholdProps {
     lagretFilter: VeiledergrupperFilter[]
     filterValg?: FiltervalgModell;
-    filtergruppe?: string;
+    filtergruppe: string;
 }
 
 function isOverflown(element) {
@@ -31,7 +30,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
 
     const filtreringVeilederoversikt = (state: AppState) => state.filtreringVeilederoversikt.veiledere;
-    const filtreringEnhetensoversikt = (state: AppState) => state.filtrering.veiledere;
+    const filtreringEnhetensoversikt = (state: AppState) => state.filtreringEnhetensOversikt.veiledere;
     const selector = props.filtergruppe === 'enhet' ? filtreringEnhetensoversikt : filtreringVeilederoversikt;
 
     const veiledereFilter = useSelector(selector);
@@ -45,7 +44,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const outerDivRef = useRef<HTMLDivElement>(null);
 
-    const dispatch : ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const enhet = useEnhetSelector();
 
     const velgGruppe = (gruppeId: string) => {

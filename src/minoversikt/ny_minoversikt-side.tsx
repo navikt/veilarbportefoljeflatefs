@@ -44,12 +44,13 @@ function Ny_MinoversiktSide() {
     const statustall = useFetchStatusTall(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(minOversikt);
     const dispatch = useDispatch();
+    const filtergruppe = "veileder";
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
     useFetchPortefolje(minOversikt);
-    useLagreFilterController();
+    useLagreFilterController({filtergruppe: filtergruppe});
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
@@ -87,18 +88,18 @@ function Ny_MinoversiktSide() {
                                 filtervalg={filtervalg}
                                 endreFiltervalg={doEndreFiltervalg}
                             />
-                            <NyMinOversiktLagreFilterKnapp/>
+                            <NyMinOversiktLagreFilterKnapp filtergruppe={filtergruppe}/>
                         </div>
                         <FiltreringLabelContainer
                             filtervalg={filtervalg}
-                            filtergruppe="veileder"
+                            filtergruppe={filtergruppe}
                             enhettiltak={enhettiltak.data.tiltak}
                             listevisning={listevisning}
                             className={visesAnnenVeiledersPortefolje ? 'ny__filtrering-label-container__annen-veileder' : 'ny__filtrering-label-container'}
                         />
                         <Sidebar
                             filtervalg={filtervalg}
-                            filtergruppe="veileder"
+                            filtergruppe={filtergruppe}
                             enhettiltak={tiltak}
                             handleOnTabClicked={handleOnTabClicked}
                             isSidebarHidden={isSidebarHidden}
@@ -153,7 +154,7 @@ function Ny_MinoversiktSide() {
                         </div>
                     </NyMinOversiktWrapper>
                 </Innholdslaster>
-                <LagreFilterModal/>
+                <LagreFilterModal filtergruppe={filtergruppe}/>
             </div>
         </DocumentTitle>
     );

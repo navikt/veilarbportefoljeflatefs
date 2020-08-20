@@ -34,7 +34,7 @@ const HiddenIfLagreNytt = hiddenIf(LagreNytt)
 const HiddenIfOppdaterFilter = hiddenIf(OppdaterFilter);
 const HiddenIfFnrFeil = hiddenIf(FnrFeil)
 
-export function LagreFilterModal() {
+export function LagreFilterModal(props: { filtergruppe: string }) {
     const {sisteValgteLagredeFilter, data, valgtLagretFilter, erModalApen} = useSelector((state: AppState) => state.lagretFilter)
     const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
@@ -43,7 +43,7 @@ export function LagreFilterModal() {
     const dispatch = useDispatch();
 
     const lukkModal = () => {
-        dispatch(lukkLagreFilterModal())
+        dispatch(lukkLagreFilterModal(props.filtergruppe))
     }
 
     useEffect(() => {

@@ -14,6 +14,7 @@ import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
 import {AppState} from "../reducer";
 import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
+import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -52,13 +53,13 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
     let kolonne: Kolonne | null;
 
     const dispatch = useDispatch();
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
+    const lagredeFilterFeatureToggleErPa = useFeatureSelector()(LAGREDE_FILTER);
 
     useEffect(() => {
-        if (filtergruppe === "veileder" && lagredeFilterFeatureToggleErPa) {
+        if (lagredeFilterFeatureToggleErPa) {
             dispatch(hentLagredeFilterForVeileder());
         }
-    }, [filtergruppe, dispatch, lagredeFilterFeatureToggleErPa])
+    }, [dispatch, lagredeFilterFeatureToggleErPa])
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
