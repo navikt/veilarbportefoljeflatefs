@@ -3,7 +3,33 @@ import {isEmptyArray, isObject} from "formik";
 import {LagretFilterValideringsError} from "./lagre-filter-modal";
 
 export function lagredeFilterListerErLik(lagretFilter: FiltervalgModell, nyttFilter: FiltervalgModell): boolean {
-    return JSON.stringify(lagretFilter) === JSON.stringify(nyttFilter);
+    return objectEquals(lagretFilter, nyttFilter)
+}
+
+function objectEquals(x, y) {
+    // if both are function
+    if (x === null || x === undefined || y === null || y === undefined) {
+        return x === y;
+    }
+    if (x === y || x.valueOf() === y.valueOf()) {
+        return true;
+    }
+
+    // if they are not function or strictly equal, they both need to be Objects
+    if (!(x instanceof Object)) {
+        return false;
+    }
+    if (!(y instanceof Object)) {
+        return false;
+    }
+
+    var p = Object.keys(x);
+    return Object.keys(y).every(function (i) {
+        return p.indexOf(i) !== -1;
+    }) ?
+        p.every(function (i) {
+            return objectEquals(x[i], y[i]);
+        }) : false;
 }
 
 export function erTomtObjekt(objekt): boolean {
