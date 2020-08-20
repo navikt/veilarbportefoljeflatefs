@@ -8,11 +8,15 @@ import {AppState} from "../../reducer";
 import {velgLagretFilter} from "../../ducks/filtrering";
 import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
+import {AlertStripeInfo} from "nav-frontend-alertstriper";
+import hiddenIf from "../../components/hidden-if/hidden-if";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
     filtergruppe: string;
 }
+
+const HiddenAlertStripe = hiddenIf(AlertStripeInfo)
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
@@ -21,26 +25,32 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const erPaMinOversikt = props.filtergruppe === "veileder";
     const erPaEnhetensOversikt = props.filtergruppe === "enhet";
 
-    // const minArbeidsliste = props.lagretFilter.find(elem => elem.filterValg)
-    // const minArbeidsliste = props.lagretFilter.find(elem => elem.filterValg.kjonn)
-    // console.log("arnljaern", minArbeidsliste)
-
     const leavePossibleFilters = (elem) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes("MIN_ARBEIDSLISTE");
         const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
-        const veiledergrupper = elem.filterValg.veilederGruppe.length > 0;
+        const veiledergrupper = elem.filterValg.veiledere.length > 0;
+        const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
+        const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
 
-        if (erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori)) {
+        if (erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) {
             return false;
         }
-        if(erPaMinOversikt && (veiledergrupper)) {
-
+        if(erPaMinOversikt && (veiledergrupper || ufordelteBrukere)) {
+            return false;
         }
         return true;
     }
 
+    const getAlertTekst = () => {
+        if (erPaMinOversikt) return "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig"
+        else if (erPaEnhetensOversikt) return "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig"
+    }
+
     return (
         <>
+            <HiddenAlertStripe hidden={false}>
+                {getAlertTekst()}
+            </HiddenAlertStripe>
             <div className={className} ref={outerDivRef}>
                 {props.lagretFilter.filter(elem => leavePossibleFilters(elem))
                     .map((filter, idx) =>
