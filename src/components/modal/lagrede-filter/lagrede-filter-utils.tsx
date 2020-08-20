@@ -3,6 +3,8 @@ import {isEmptyArray, isObject} from "formik";
 import {LagretFilterValideringsError} from "./lagre-filter-modal";
 
 export function lagredeFilterListerErLik(lagretFilter: FiltervalgModell, nyttFilter: FiltervalgModell): boolean {
+    console.log("lagretFilter", lagretFilter);
+    console.log("nyttFilter", nyttFilter);
     return JSON.stringify(lagretFilter) === JSON.stringify(nyttFilter);
 }
 
