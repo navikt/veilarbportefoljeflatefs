@@ -25,6 +25,7 @@ import featuresReducer, {FeaturesState} from './ducks/features';
 import toastReducer, {ToastState} from './store/toast/reducer';
 import {FiltervalgModell} from "./model-interfaces";
 import inloggetVeilederReducer, {InloggetVeilederState} from "./ducks/inlogget-veileder";
+import sidebarReducer, {initialStateSidebar} from "./ducks/sidebar-tab";
 
 
 function named(name, reducer) {
@@ -45,6 +46,8 @@ export interface AppState {
     ui: {
         listevisningMinOversikt: ListevisningState;
         listevisningEnhetensOversikt: ListevisningState;
+        sidebarMinOversikt: any;
+        sidebarEnhetensOversikt: any;
     };
     valgtEnhet: ValgtEnhetState;
     portefolje: PortefoljeState;
@@ -71,7 +74,9 @@ export interface AppState {
 export default combineReducers<AppState>({
     ui: combineReducers({
         listevisningMinOversikt: persistent('minOversiktListevisningState', window.location, named(ListevisningType.minOversikt, listevisningReducer), initialStateMinOversikt),
-        listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', window.location, named(ListevisningType.enhetensOversikt, listevisningReducer), initialStateEnhetensOversikt)
+        listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', window.location, named(ListevisningType.enhetensOversikt, listevisningReducer), initialStateEnhetensOversikt),
+        sidebarMinOversikt: persistent('minOversiktSidebar', window.location, named(ListevisningType.minOversikt, sidebarReducer), initialStateSidebar),
+        sidebarEnhetensOversikt: persistent('enhetensOversiktSidebar', window.location, named(ListevisningType.enhetensOversikt, sidebarReducer), initialStateSidebar)
     }),
     valgtEnhet: valgtEnhetReducer,
     portefolje: portefoljeReducer,

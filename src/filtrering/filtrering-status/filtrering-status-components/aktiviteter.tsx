@@ -6,7 +6,7 @@ import { useStatusTallSelector } from '../../../hooks/redux/use-statustall';
 
 interface FiltreringStatusAktivitetProps {
     ferdigfilterListe: string[];
-    handleChange: (e: any)=> void;
+    handleChange: (e: any) => void;
 }
 
 export function FiltreringStatusAktiviteter(props: FiltreringStatusAktivitetProps) {
@@ -16,20 +16,17 @@ export function FiltreringStatusAktiviteter(props: FiltreringStatusAktivitetProp
             <BarInputRadio
                 filterNavn="utlopteAktiviteter"
                 antall={statusTall.utlopteAktiviteter}
-                max={statusTall.totalt}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
             />
             <BarInputRadio
                 filterNavn="ikkeIavtaltAktivitet"
-                max={statusTall.totalt}
                 antall={statusTall.ikkeIavtaltAktivitet}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(IKKE_I_AVTALT_AKTIVITET)}
             />
             <BarInputRadio
                 filterNavn="iavtaltAktivitet"
-                max={statusTall.totalt}
                 antall={statusTall.iavtaltAktivitet}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}

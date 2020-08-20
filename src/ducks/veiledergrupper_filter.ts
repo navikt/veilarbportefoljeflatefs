@@ -19,6 +19,7 @@ export const SLETT_VEILEDERGRUPPER_OK = 'veiledergrupper_slette/OK';
 export const SLETT_VEILEDERGRUPPER_FEILET = 'veiledergrupper_slette/FEILET';
 export const SLETT_VEILEDERGRUPPER_PENDING = 'veiledergrupper_slette/PENDING';
 
+
 export interface VeiledergrupperFilter {
     filterNavn: string;
     filterId: number;

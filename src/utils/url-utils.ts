@@ -3,8 +3,8 @@ import  { basename } from '../history';
 import { IKKE_SATT } from '../konstanter';
 
 
-export function getFraBrukerFraUrl() {
-    return queryString.parse(window.location.search).fraBruker;
+export function getFraBrukerFraUrl(): string {
+    return queryString.parse(window.location.search).fraBruker as string;
 }
 
 export function setFraBrukerIUrl(bruker: string) {
@@ -24,7 +24,7 @@ export function setFraBrukerIUrl(bruker: string) {
 }
 
 export function getSideFromUrl() {
-    return parseInt(queryString.parse(window.location.search).side || '1', 10);
+    return parseInt(queryString.parse(window.location.search).side as string || '1', 10);
 }
 
 export function getInitialStateFromUrl () {

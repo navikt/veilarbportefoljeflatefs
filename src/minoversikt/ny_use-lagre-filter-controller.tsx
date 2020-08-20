@@ -1,0 +1,28 @@
+import {useEffect} from "react";
+import {avmarkerSisteVelgtFilter, avmarkerVelgtFilter, markerVelgtFilter} from "../ducks/lagret-filter";
+import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/lagrede-filter/lagrede-filter-utils";
+import {useDispatch, useSelector} from "react-redux";
+import {AppState} from "../reducer";
+
+export function NyUseLagreFilterController() {
+    const dispatch = useDispatch()
+    const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
+    const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
+
+
+    useEffect(() => {
+        const valgtFilter = lagretFilterList.find(elem => lagredeFilterListerErLik(elem.filterValg, filtreringMinOversikt));
+
+        if (erObjektValuesTomt(filtreringMinOversikt)){
+            dispatch(avmarkerSisteVelgtFilter());
+        }
+
+        if (valgtFilter) {
+            dispatch(markerVelgtFilter(valgtFilter));
+        } else {
+            dispatch(avmarkerVelgtFilter());
+        }
+    }, [filtreringMinOversikt, lagretFilterList, dispatch])
+
+    return null;
+}

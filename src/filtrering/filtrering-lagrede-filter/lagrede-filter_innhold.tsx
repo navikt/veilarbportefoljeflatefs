@@ -10,7 +10,7 @@ import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
 
 interface LagredeFilterInnholdProps {
-    lagretFilter: LagretFilter[]
+    lagretFilter: LagretFilter[];
 }
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {

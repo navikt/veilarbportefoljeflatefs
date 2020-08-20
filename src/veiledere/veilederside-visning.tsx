@@ -11,7 +11,7 @@ import {
 } from '../components/toolbar/paginering/paginering-selector';
 import { ListevisningType } from '../ducks/ui/listevisning';
 import { PortefoljeStorrelser } from '../ducks/portefoljestorrelser';
-import './veiledere.less';
+import './ny_veiledere.less';
 import { VeilederModell } from '../model-interfaces';
 import { AppState } from '../reducer';
 

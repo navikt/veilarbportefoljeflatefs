@@ -1,7 +1,7 @@
 import {doThenDispatch, STATUS} from './utils';
 import {FiltervalgModell} from '../model-interfaces';
-import {hentMineLagredeFilter, nyttLagretFilter, redigerLagretFilter, slettLagretFilter,} from "../middleware/api";
 import {OrNothing} from "../utils/types/types";
+import {hentMineLagredeFilter, nyttLagretFilter, redigerLagretFilter, slettLagretFilter} from "../middleware/api";
 
 // Actions
 export const HENT_LAGREDEFILTER_OK = 'lagredefilter/OK';

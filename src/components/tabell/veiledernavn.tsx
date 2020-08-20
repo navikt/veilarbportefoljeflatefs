@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { BrukerModell, EtikettType, VeilederModell } from '../../model-interfaces';
-import Etikett from './etikett';
+import { BrukerModell, VeilederModell } from '../../model-interfaces';
+import {Info} from './etikett';
 
 interface VeiledernavnProps {
     className?: string;
@@ -16,12 +16,13 @@ function VeilederNavn({className, bruker, skalVises, veileder}: VeiledernavnProp
 
     const veilederNavn = <span>{veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : ''}</span>;
 
-    const ufordeltBrukerEtikett = <Etikett
-        type={EtikettType.UFORDELTBRUKER}
-        skalVises={bruker.nyForEnhet}
-    >
-        Ufordelt bruker
-    </Etikett>;
+    const ufordeltBrukerEtikett =
+        <Info
+            hidden={!bruker.nyForEnhet}
+            typo="undertekst"
+        >
+            Ufordelt bruker
+        </Info>;
 
     return (
         <div className={className}>
