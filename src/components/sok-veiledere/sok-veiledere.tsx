@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../reducer';
 import '../checkbox-filterform/checkbox-filterform.less';
-import '../../style.less';
+import '../../ny_style.less';
 import SokFilterNy from './sok-filter-ny';
 import classNames from 'classnames';
 

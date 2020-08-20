@@ -35,20 +35,6 @@ export enum Sorteringsfelt {
     ARBEIDSLISTEKATEGORI = 'arbeidslistekategori'
 }
 
-export enum EtikettType {
-    NYBRUKER = 'nybruker',
-    UFORDELTBRUKER = 'ufordeltbruker',
-    EGEN_ANSATT = 'egen-ansatt',
-    DISKRESJONSKODE = 'diskresjonskode',
-    SIKKERHETSTILTAK = 'sikkerhetstiltak',
-    DOED = 'doed',
-    IKKE_VURDERT = 'ikke_vurdert',
-    BEHOV_AEV = 'behov_aev',
-    ER_SYKMELDT_MED_ARBEIDSGIVER = 'er_sykmeldt_med_arbeidsgiver',
-    TRENGER_REVURDERING = 'revurdering',
-    PERMITTERTE_ETTER_NIENDE_MARS = 'permitterte_etter_niende_mars',
-}
-
 export interface FiltervalgModell {
     ferdigfilterListe: string[];
     nyeBrukereForVeileder?: boolean;

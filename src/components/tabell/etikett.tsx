@@ -1,22 +1,8 @@
-import * as React from 'react';
-import Tabelletiketter from '../tabelletiketter/tabelletiketter';
-import { EtikettType } from '../../model-interfaces';
+import hiddenIf from "../hidden-if/hidden-if";
+import EtikettBase, {EtikettAdvarsel, EtikettFokus, EtikettInfo} from "nav-frontend-etiketter";
+import './etiketter.less';
 
-interface EtikettProps {
-    type: EtikettType;
-    children: React.ReactChild;
-    skalVises: boolean;
-}
-
-function Etikett({ type, children, skalVises }: EtikettProps) {
-    if (!skalVises) {
-        return null;
-    }
-    return (
-        <Tabelletiketter type={type}>
-            {children}
-        </Tabelletiketter>
-    );
-}
-
-export default Etikett;
+export const Advarsel = hiddenIf(EtikettAdvarsel);
+export const Info = hiddenIf(EtikettInfo);
+export const Fokus = hiddenIf(EtikettFokus);
+export const Bas = hiddenIf(EtikettBase);

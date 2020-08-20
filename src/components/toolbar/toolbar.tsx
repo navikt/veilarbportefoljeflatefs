@@ -53,7 +53,7 @@ function Toolbar(props: ToolbarProps) {
         }
     };
     return (
-        <section className="toolbar blokk-xs" id={id}>
+        <div className="toolbar blokk-xs" id={id}>
             <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
                 {props.side === 'veilederoversikt' &&
                 <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
@@ -78,7 +78,7 @@ function Toolbar(props: ToolbarProps) {
                     antallTotalt={antallTotalt}
                 />
             </div>
-        </section>
+        </div>
     );
 }
 

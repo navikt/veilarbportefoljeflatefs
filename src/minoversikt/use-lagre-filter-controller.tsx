@@ -21,7 +21,7 @@ export function useLagreFilterController() {
         }
         const valgtFilter = lagretFilterList.find(elem => lagredeFilterListerErLik(elem.filterValg, filtreringMinOversikt));
 
-        if (erObjektValuesTomt(filtreringMinOversikt)){
+        if (erObjektValuesTomt(filtreringMinOversikt)) {
             dispatch(avmarkerSisteVelgtFilter());
         }
 

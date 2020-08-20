@@ -1,0 +1,254 @@
+@import "tabell";
+@import '~nav-frontend-core/less/_variabler';
+
+@bakgrunnsGra: #F4F4F4;
+
+body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #F4F4F4;
+  font-size: 1rem;
+  font-weight: 400;
+  color: @navMorkGra;
+  font-family: @font-family;
+
+  @media print {
+    a[href]:after {
+      content: none !important;
+    }
+  }
+
+  #mainapp {
+    background-color: @white;
+    margin: 0 auto;
+    height: 100%;
+    max-height: 8rem;
+    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+  }
+
+  @media (max-width: 870px) {
+    #mainapp {
+      max-height: 10rem;
+    }
+  }
+
+  @media (max-width: 782px) {
+    #mainapp {
+      max-height: 11rem;
+    }
+  }
+}
+
+html {
+  height: 100%;
+}
+
+@import "~nav-frontend-alertstriper-style/src/index";
+@import "~nav-frontend-typografi-style/src/index";
+@import "~nav-frontend-core/less/core";
+@import "~nav-frontend-grid-style/src/index";
+@import "~nav-frontend-modal-style/src/index";
+@import "~nav-frontend-paneler-style/src/index";
+@import "~nav-frontend-ekspanderbartpanel-style/src/index";
+@import "~nav-frontend-etiketter-style/src/index";
+@import "~nav-frontend-spinner-style/src/spinner-style";
+@import "~nav-frontend-skjema-style/src/index";
+@import "~nav-frontend-knapper-style/src/index";
+@import "~nav-frontend-paneler-style/src/mixins";
+@import "~nav-frontend-lenker-style/src/lenker-style";
+@import "~nav-frontend-hjelpetekst-style/src/hjelpetekst-style";
+@import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
+
+
+.veilarbportefoljeflatefs {
+  @import "./components/barinput/barlabel";
+
+  .ekspanderbartPanel--apen .ReactCollapse--collapse {
+    overflow: initial !important;
+  }
+}
+
+.decorator-context-modal {
+  padding: 1rem;
+}
+
+.modal__overlay {
+  z-index: 2000;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex--center {
+  align-items: center;
+}
+
+.flex--grow {
+  flex-grow: 1;
+}
+
+.mr1 {
+  margin-right: 1rem;
+}
+
+.text--left {
+  text-align: left;
+}
+
+.sticky-container__ny {
+  z-index: 5;
+  background-color: @bakgrunnsGra;
+
+  .blokk-xxs {
+    margin-bottom: 0;
+  }
+}
+
+.ikke-sticky__ny {
+  &__skygge {
+    height: 16px;
+    top: -16px;
+  }
+
+  &__toolbar-container {
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid @navGra60;
+    z-index: 3;
+  }
+
+  &__container {
+    position: inherit;
+    top: 0;
+    z-index: 1;
+    background-color: @bakgrunnsGra;
+  }
+}
+
+.sticky-skygge__ny {
+  position: sticky;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  height: 16px;
+  top: -16px;
+}
+
+.toolbar-container__ny {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  margin-top: -20px;
+  background-color: @bakgrunnsGra;
+  border-bottom: 1px solid @navGra60;
+  border-radius: 4px;
+
+  .tabelloverskrift__ny {
+    padding-top: .3rem;
+    background-color: @bakgrunnsGra;
+  }
+}
+
+.sticky-skygge__ny::before,
+.sticky-skygge__ny::after {
+  content: '';
+  display: block;
+  height: 16px;
+  position: sticky;
+}
+
+.sticky-skygge__ny::before {
+  top: 108px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  margin: 0 4px;
+}
+
+.sticky-skygge__ny::after {
+  background: linear-gradient(white, rgba(255, 255, 255, 0.3));
+  top: 0;
+  z-index: 2;
+  height: 0;
+  width: auto;
+}
+
+.skjemaelement {
+  margin-bottom: .5rem;
+}
+
+.veilarbportefoljeflatefs {
+  .side-storrelse__ny {
+    margin: 0 auto;
+    padding: 0 3rem;
+    max-width: 1809px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+
+  .oversikt-sideinnhold__ny {
+    display: grid;
+    column-gap: 1%;
+    grid-template-columns: auto 21rem;
+    grid-template-rows: auto auto auto;
+
+    .annen-veileder-varsel {
+      grid-row: 1;
+      grid-column: 1;
+    }
+
+    .sokefelt-knapp__container {
+      grid-row: 1;
+      grid-column: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .sidebar {
+      grid-row-start: 1;
+      grid-column: 2;
+    }
+
+    .ny__filtrering-label-container, .ny__filtrering-label-container__annen-veileder {
+      grid-row: 2;
+      grid-column-start: 1;
+      grid-column-end: 2;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .oversikt__container {
+      grid-row: 3;
+      grid-column-start: 1;
+      grid-column-end: 2;
+      margin: 1rem 0 2rem;
+    }
+
+    .alertstripe--info {
+      grid-row: 2;
+      grid-column: 1;
+    }
+
+    &__hidden {
+      .oversikt__container {
+        grid-column-end: 3;
+      }
+
+      .ny__filtrering-label-container {
+        grid-column-end: 3;
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .oversikt-sideinnhold__ny {
+      .oversikt__container {
+        grid-column-end: 3;
+      }
+
+      .sidebar {
+        z-index: 1200;
+      }
+    }
+  }
+}

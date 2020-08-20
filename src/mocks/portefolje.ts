@@ -118,7 +118,7 @@ function lagVedtakUtkast() {
     if (maybeUtkast > 0.5) {
         return ({
             vedtakStatusEndret: randomDate({past: true}),
-            vedtakStatus: maybeUtkastOpprettet ? 'UTKAST_OPPRETTET' : 'SENDT_TIL_BESLUTTER'
+            vedtakStatus: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter'
         });
     }
     return ({
