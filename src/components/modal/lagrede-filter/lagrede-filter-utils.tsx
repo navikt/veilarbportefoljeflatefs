@@ -23,11 +23,11 @@ function objectEquals(lagretFilter, nyttFilter) {
         return false;
     }
 
-    const p = Object.keys(lagretFilter!);
-    return Object.keys(nyttFilter!).every(function (i) {
-        return p.indexOf(i) !== -1;
+    const filterliste = Object.keys(lagretFilter);
+    return Object.keys(nyttFilter).every(function (elem) {
+        return filterliste.indexOf(elem) !== -1;
     })
-        ? p.every(function (i) {
+        ? filterliste.every(function (i) {
             return objectEquals(lagretFilter[i], nyttFilter[i]);
         })
         : false;
