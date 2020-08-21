@@ -8,47 +8,22 @@ import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
 import {velgLagretFilter} from "../../ducks/filtrering";
 import '../../components/sidebar/sidebar.less'
-import Hjelpetekst from "nav-frontend-hjelpetekst";
-import {PopoverOrientering} from "nav-frontend-popover";
-import hiddenIf from "../../components/hidden-if/hidden-if";
 import {LagretFilter} from "../../ducks/lagret-filter";
 import {apenLagreFilterModal} from "../../ducks/lagret-filter-ui";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
     filtergruppe: string;
+    fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
 }
 
 function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
-    const erPaMinOversikt = props.filtergruppe === "veileder";
-    const erPaEnhetensOversikt = props.filtergruppe === "enhet";
-
-    const fjernUtilgjengeligeFilter = (elem) => {
-        const arbeidsliste = elem.filterValg.ferdigfilterListe.includes("MIN_ARBEIDSLISTE");
-        const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
-        const veiledergrupper = elem.filterValg.veiledere.length > 0;
-        const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
-        const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
-
-        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere))
-            || (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
-            return false;
-        }
-        return true;
-    }
-
-    const HiddenHjelpetekst = hiddenIf(Hjelpetekst)
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
-        return props.lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
+        return props.lagretFilter.filter(elem => props.fjernUtilgjengeligeFilter(elem))
     }
     return (
         <>
-            <HiddenHjelpetekst type={PopoverOrientering.Venstre}
-                               hidden={filtrertListe().length === props.lagretFilter.length}>
-                {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig i Min oversikt."}
-                {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig i Enhetens oversikt."}
-            </HiddenHjelpetekst>
             <div className='ny__lagrede-filter__valgfelt' ref={outerDivRef}>
                 {filtrertListe().map((filter, idx) =>
                     <LagretFilterRad

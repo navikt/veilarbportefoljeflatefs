@@ -3,19 +3,19 @@ import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {Normaltekst} from 'nav-frontend-typografi';
 import {AlertStripeFeil} from "nav-frontend-alertstriper";
-import {HandlingsType} from "../../ducks/lagret-filter";
+import {HandlingsType, LagretFilter} from "../../ducks/lagret-filter";
 import {STATUS} from "../../ducks/utils";
 import NyLagredeFilterInnhold from "./ny_lagrede-filter_innhold";
 import './ny_lagrede-filter-innhold.less'
 
-function NyFiltreringLagredeFilter(props: {filtergruppe: string}) {
+function NyFiltreringLagredeFilter(props: { filtergruppe: string, fjernUtilgjengeligeFilter: (elem: LagretFilter) => void, sortertLagredeFilter }) {
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const lagretFilter = lagretFilterState.data;
-    const sortertLagredeFilter = lagretFilter.sort((a, b) => (a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : (a.filterNavn.toLowerCase() > b.filterNavn.toLowerCase() ? 1 : 0)));
 
     const lagretFilterOK = () => {
         return lagretFilter.length > 0
-            ? <NyLagredeFilterInnhold lagretFilter={sortertLagredeFilter} filtergruppe={props.filtergruppe}/>
+            ? <NyLagredeFilterInnhold lagretFilter={props.sortertLagredeFilter} filtergruppe={props.filtergruppe}
+                                      fjernUtilgjengeligeFilter={props.fjernUtilgjengeligeFilter}/>
             : <div className="ny__lagredefilter-emptystate">
                 <Normaltekst className="ny__lagredefilter-emptystate__tekst">
                     Ingen lagrede filter

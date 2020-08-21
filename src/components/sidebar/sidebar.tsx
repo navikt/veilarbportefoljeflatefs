@@ -87,6 +87,8 @@ function Sidebar(props: SidebarProps) {
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const dispatch = useDispatch();
     const erLagredeFilterFeatureTogglePa = useFeatureSelector()(LAGREDE_FILTER);
+    const lagretFilter = lagretFilterState.data;
+    const sortertLagredeFilter = lagretFilter.sort((a, b) => (a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : (a.filterNavn.toLowerCase() > b.filterNavn.toLowerCase() ? 1 : 0)));
 
     useEffect(() => {
         const nyttLagretFilter = lagretFilterState.handlingType === HandlingsType.NYTT && lagretFilterState.status === STATUS.OK;
@@ -116,6 +118,22 @@ function Sidebar(props: SidebarProps) {
         dispatch(endreFiltervalg(filterId, filterVerdi, props.filtergruppe));
     };
 
+
+    const fjernUtilgjengeligeFilter = (elem) => {
+        const arbeidsliste = elem.filterValg.ferdigfilterListe.includes("MIN_ARBEIDSLISTE");
+        const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
+        const veiledergrupper = elem.filterValg.veiledere.length > 0;
+        const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
+        const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
+
+        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere))
+            || (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
+            return false;
+        }
+        return true;
+    }
+
+
     function sidevelger(selectedTabData) {
         if ((selectedTabData as Sidebar).tittel === 'Status') {
             return <SidebarTab tittel="Status"
@@ -142,8 +160,15 @@ function Sidebar(props: SidebarProps) {
             return <SidebarTab tittel="Mine filter"
                                handleClick={props.lukkTab}
                                children={
-                                   <NyFiltreringLagredeFilter filtergruppe={props.filtergruppe}/>
-                               }/>;
+                                   <NyFiltreringLagredeFilter filtergruppe={props.filtergruppe}
+                                                              fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
+                                                              sortertLagredeFilter={sortertLagredeFilter}/>
+                               }
+                               lagretFilter={sortertLagredeFilter}
+                               fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
+                               filtergruppe={props.filtergruppe}
+            />
+                ;
         }
     }
 
