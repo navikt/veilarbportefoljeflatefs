@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import {apenLagreFilterModal, LagretFilter} from '../../ducks/lagret-filter';
@@ -21,6 +21,12 @@ const HiddenAlertStripe = hiddenIf(AlertStripeInfo)
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
     const className = (props.lagretFilter.length >= 7) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
+    const [erAlertStripeSynligIMinOversikt,setErAlertStripeSynligIMinOversikt] = useState(false)
+    const [erAlertStripeSynligIEnhetensOversikt,setErAlertStripeSynligIEnhetensOversikt] = useState(false)
+
+    const filteredList = () => {
+        return props.lagretFilter.filter(elem => leavePossibleFilters(elem))
+    }
 
     const erPaMinOversikt = props.filtergruppe === "veileder";
     const erPaEnhetensOversikt = props.filtergruppe === "enhet";
@@ -43,13 +49,12 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     return (
         <>
-            <HiddenAlertStripe hidden={false}>
+            <HiddenAlertStripe hidden={filteredList().length === props.lagretFilter.length}>
                 {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig"}
                 {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig"}
             </HiddenAlertStripe>
             <div className={className} ref={outerDivRef}>
-                {props.lagretFilter.filter(elem => leavePossibleFilters(elem))
-                    .map((filter, idx) =>
+                {filteredList().map((filter, idx) =>
                         <LagretFilterRad
                             key={idx}
                             filter={filter}
