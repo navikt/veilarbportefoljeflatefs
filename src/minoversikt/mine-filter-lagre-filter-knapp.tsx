@@ -30,11 +30,12 @@ export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     }
 
     useEffect(() => {
-        const ingenFilterValgtMinOversikt = erObjektValuesTomt(filtreringMinOversikt)
-        const ingenFilterValgtEnhetensOversikt = erObjektValuesTomt(filtreringEnhetensOversikt)
+        const ingenFilterValgt = erPaMinOversikt
+            ? erObjektValuesTomt(filtreringMinOversikt)
+            : erObjektValuesTomt(filtreringEnhetensOversikt)
 
-        if ((erPaMinOversikt && valgtFilter && !ingenFilterValgtMinOversikt) ||
-            (erPaEnhetensOversikt && valgtFilter && !ingenFilterValgtEnhetensOversikt)) {
+        if ((erPaMinOversikt && valgtFilter && !ingenFilterValgt) ||
+            (erPaEnhetensOversikt && valgtFilter && !ingenFilterValgt)) {
             setErLagreKnappSkjult(false)
         } else {
             setErLagreKnappSkjult(true)

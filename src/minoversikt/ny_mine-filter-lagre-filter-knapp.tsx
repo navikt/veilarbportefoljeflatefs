@@ -8,7 +8,7 @@ import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
 import {apenLagreFilterModal} from "../ducks/lagret-filter";
 
-export function NyMineFiltreLagreFilterKnapp(props: { filtergruppe: string }) {
+export function NyMineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const filtreringEnhetensOversikt = useSelector((state: AppState) => state.filtreringEnhetensOversikt);
