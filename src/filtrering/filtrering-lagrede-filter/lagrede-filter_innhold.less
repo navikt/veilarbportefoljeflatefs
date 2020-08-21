@@ -14,6 +14,7 @@
 
     .lagrede-filter {
       &__valgfelt {
+        padding: .5rem;
         max-height: fit-content;
         overflow-y: hidden;
         border-top-width: 0;
@@ -44,30 +45,32 @@
       }
     }
 
-    .hjelpetekst__wrapper {
-      display: grid;
-      grid-template-columns: auto fit-content(100%);
+    .mine-filter_alertstripe {
+      margin-bottom: .5rem;
+    }
 
-      .hjelpetekst {
-        display: flex;
-        margin-left: auto;
-        margin-bottom: .5rem;
-      }
+    .hjelpetekst {
+      display: flex;
+      margin-left: auto;
+      margin-bottom: .5rem;
 
-      .popover {
-        max-width: 30rem;
+      &__tooltip {
+        z-index: 2000;
       }
     }
   }
 
-  .mine-filter_alertstripe {
-    margin-bottom: .5rem;
-  }
-}
+  @media (max-width: 1200px) {
+    .hjelpetekst__tooltip {
+      margin-right: 4rem;
+    }
 
+    .popover {
+      left: -4rem;
 
-@media (max-width: 1200px) {
-  .veilarbportefoljeflatefs .lagrede-filter-wrapper .hjelpetekst__wrapper .popover__pil {
-    left: 451px !important;
+      &__pil {
+        left: 613px !important;
+      }
+    }
   }
 }

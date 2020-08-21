@@ -55,16 +55,9 @@ export const lagredeFilter = () => {
             filterId: 10,
             filterValg: {...initialState, ferdigfilterListe: ["NYE_BRUKERE_FOR_VEILEDER"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-        },
-        {
-            filterNavn: 'Veiledere',
-            filterId: 11,
-            filterValg: {...initialState, veiledere: ['Z627132', 'Z672713', 'Z837951', 'Z857676', 'Z916651']},
-            opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-        },
-        {
+        }, {
             filterNavn: 'UfordelteBrukere',
-            filterId: 12,
+            filterId: 11,
             filterValg: {...initialState, ferdigfilterListe: ["UFORDELTE_BRUKERE"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }

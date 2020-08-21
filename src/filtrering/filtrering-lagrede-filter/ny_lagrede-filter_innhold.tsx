@@ -11,6 +11,7 @@ import {velgLagretFilter} from "../../ducks/filtrering";
 import '../../components/sidebar/sidebar.less'
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 import {PopoverOrientering} from "nav-frontend-popover";
+import hiddenIf from "../../components/hidden-if/hidden-if";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -28,24 +29,25 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
         const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
 
-        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
-            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
+        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere))
+            || (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
             return false;
         }
         return true;
     }
 
+    const HiddenHjelpetekst = hiddenIf(Hjelpetekst)
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
         return props.lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
     }
     return (
         <>
-            <Hjelpetekst type={PopoverOrientering.Venstre}>
+            <HiddenHjelpetekst type={PopoverOrientering.Venstre}
+                               hidden={filtrertListe().length === props.lagretFilter.length}>
                 {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig i Min oversikt."}
                 {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig i Enhetens oversikt."}
-            </Hjelpetekst>
-
+            </HiddenHjelpetekst>
             <div className='ny__lagrede-filter__valgfelt' ref={outerDivRef}>
                 {filtrertListe().map((filter, idx) =>
                     <LagretFilterRad

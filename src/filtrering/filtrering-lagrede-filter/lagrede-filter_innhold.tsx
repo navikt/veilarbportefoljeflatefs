@@ -28,15 +28,14 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
         const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
 
-        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
-            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
+        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere))
+            || (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
             return false;
         }
         return true;
     }
 
-    const HiddenHjelpetekst = hiddenIf(Hjelpetekst)
-
+    const HiddenHjelpetekst = hiddenIf(Hjelpetekst);
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
         return props.lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
@@ -47,13 +46,11 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     return (
         <>
-            <div className="hjelpetekst__wrapper">
-                <HiddenHjelpetekst type={PopoverOrientering.Over}
-                                   hidden={filtrertListe().length === props.lagretFilter.length}>
-                    {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig i Min oversikt."}
-                    {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig i Enhetens oversikt."}
-                </HiddenHjelpetekst>
-            </div>
+            <HiddenHjelpetekst type={PopoverOrientering.Over}
+                               hidden={filtrertListe().length === props.lagretFilter.length}>
+                {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig i Min oversikt."}
+                {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig i Enhetens oversikt."}
+            </HiddenHjelpetekst>
             <div className={className} ref={outerDivRef}>
                 {filtrertListe().map((filter, idx) =>
                     <LagretFilterRad
