@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
-import {apenLagreFilterModal} from "../ducks/lagret-filter";
+import {apenLagreFilterModal} from "../ducks/lagret-filter-ui";
 
 export function NyMineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
