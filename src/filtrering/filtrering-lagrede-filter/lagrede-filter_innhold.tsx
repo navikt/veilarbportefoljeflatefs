@@ -12,6 +12,7 @@ import {PopoverOrientering} from "nav-frontend-popover";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 import hiddenIf from "../../components/hidden-if/hidden-if";
 import {apenLagreFilterModal} from "../../ducks/lagret-filter-ui";
+import {Normaltekst} from "nav-frontend-typografi";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -29,14 +30,15 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
         const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
 
-        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere))
-            || (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
+        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
+            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
             return false;
         }
         return true;
     }
 
-    const HiddenHjelpetekst = hiddenIf(Hjelpetekst);
+    const HiddenHjelpetekst = hiddenIf(Hjelpetekst)
+
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
         return props.lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
@@ -45,13 +47,8 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         ? 'lagrede-filter__valgfelt__lang'
         : 'lagrede-filter__valgfelt'
 
-    return (
-        <>
-            <HiddenHjelpetekst type={PopoverOrientering.Over}
-                               hidden={filtrertListe().length === props.lagretFilter.length}>
-                {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig i Min oversikt."}
-                {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig i Enhetens oversikt."}
-            </HiddenHjelpetekst>
+    const getFiltrertListeInnhold = () => {
+        return (
             <div className={className} ref={outerDivRef}>
                 {filtrertListe().map((filter, idx) =>
                     <LagretFilterRad
@@ -60,7 +57,33 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
                         filtergruppe={props.filtergruppe}
                     />
                 )}
+            </div>)
+    }
+
+    const getEmptyState = () => {
+        return (
+            <div className="lagredefilter-emptystate">
+                <Normaltekst className="lagredefilter-emptystate__tekst">
+                    Ingen lagrede filter
+                </Normaltekst>
             </div>
+        )
+    }
+
+    const getInnhold = () => {
+        return filtrertListe().length > 0 ? getFiltrertListeInnhold() : getEmptyState()
+    }
+
+    return (
+        <>
+            <div className="hjelpetekst__wrapper">
+                <HiddenHjelpetekst type={PopoverOrientering.Over}
+                                   hidden={filtrertListe().length === props.lagretFilter.length}>
+                    {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig i Min oversikt."}
+                    {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig i Enhetens oversikt."}
+                </HiddenHjelpetekst>
+            </div>
+            {getInnhold()}
         </>
     )
 }
