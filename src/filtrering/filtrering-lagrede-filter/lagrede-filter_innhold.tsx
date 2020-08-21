@@ -8,15 +8,13 @@ import {AppState} from "../../reducer";
 import {velgLagretFilter} from "../../ducks/filtrering";
 import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
-import {AlertStripeInfo} from "nav-frontend-alertstriper";
-import hiddenIf from "../../components/hidden-if/hidden-if";
+import {PopoverOrientering} from "nav-frontend-popover";
+import Hjelpetekst from "nav-frontend-hjelpetekst";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
     filtergruppe: string;
 }
-
-const HiddenAlertStripe = hiddenIf(AlertStripeInfo)
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const leavePossibleFilters = (elem) => {
@@ -44,10 +42,12 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     return (
         <>
-            <HiddenAlertStripe hidden={filteredList().length === props.lagretFilter.length}>
-                {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig"}
-                {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig"}
-            </HiddenAlertStripe>
+            <div className="hjelpetekst__wrapper">
+                <Hjelpetekst type={PopoverOrientering.Over}>
+                    {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig i Min oversikt."}
+                    {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig i Enhetens oversikt."}
+                </Hjelpetekst>
+            </div>
             <div className={className} ref={outerDivRef}>
                 {filteredList().map((filter, idx) =>
                     <LagretFilterRad
@@ -59,7 +59,6 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
             </div>
         </>
     )
-        ;
 }
 
 interface LagretFilterRadProps {

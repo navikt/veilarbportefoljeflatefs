@@ -38,12 +38,37 @@
         display: flex;
         justify-content: space-between;
         min-height: 2.5rem;
-
       }
 
       &__filternavn {
         width: 85%;
       }
     }
+
+    .hjelpetekst__wrapper {
+      display: grid;
+      grid-template-columns: auto fit-content(100%);
+
+      .hjelpetekst {
+        display: flex;
+        margin-left: auto;
+        margin-bottom: .5rem;
+      }
+
+      .popover {
+        max-width: 30rem;
+      }
+    }
+  }
+
+  .mine-filter_alertstripe {
+    margin-bottom: .5rem;
+  }
+}
+
+
+@media (max-width: 1200px) {
+  .veilarbportefoljeflatefs .lagrede-filter-wrapper .hjelpetekst__wrapper .popover__pil {
+    left: 451px !important;
   }
 }
