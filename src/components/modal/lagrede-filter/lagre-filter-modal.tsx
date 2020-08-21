@@ -66,17 +66,16 @@ export function LagreFilterModal(props: { filtergruppe: string }) {
                               setValgtVisningstype={setValgtVisningstype}
                               sisteFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
                 />
-
                 <HiddenIfLagreNytt hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
                                    lukkModal={lukkModal}
+                                   filtergruppe={props.filtergruppe}
                 />
-
                 <HiddenIfOppdaterFilter hidden={valgtVisningstype !== Visningstype.OPPDATER}
                                         gammeltFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
                                         filterId={sisteValgteLagredeFilter!}
                                         lukkModal={lukkModal}
+                                        filtergruppe={props.filtergruppe}
                 />
-
                 <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL}/>
             </div>
         </Modal>

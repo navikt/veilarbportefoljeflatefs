@@ -8,10 +8,11 @@ import {sjekkFeature} from "../ducks/features";
 import {LAGREDE_FILTER} from "../konstanter";
 import {apenLagreFilterModal} from "../ducks/lagret-filter";
 
-
-export function MinOversiktLagreFilterKnapp(props: {filtergruppe: string}) {
+export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
+    const filtreringEnhetensOversikt = useSelector((state: AppState) => state.filtreringEnhetensOversikt);
+
     const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
 
     const dispatch = useDispatch();
@@ -23,8 +24,9 @@ export function MinOversiktLagreFilterKnapp(props: {filtergruppe: string}) {
 
     useEffect(() => {
         const erMinOversiktFilterErTomt = erObjektValuesTomt(filtreringMinOversikt)
-        setErLagreKnappSkjult(erMinOversiktFilterErTomt)
-    }, [filtreringMinOversikt]);
+        const erEnhetensOversiktFilterErTomt = erObjektValuesTomt(filtreringEnhetensOversikt)
+        props.filtergruppe === 'enhet' ? setErLagreKnappSkjult(erEnhetensOversiktFilterErTomt) : setErLagreKnappSkjult(erMinOversiktFilterErTomt)
+    }, [filtreringMinOversikt, filtreringEnhetensOversikt, props.filtergruppe]);
 
     return (
         <Knapp className="lagre-filter-knapp" mini hidden={erLagreKnappSkjult || !lagredeFilterFeatureToggleErPa}

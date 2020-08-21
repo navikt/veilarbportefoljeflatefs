@@ -28,6 +28,8 @@ import {useCallback, useMemo} from 'react';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
 import {useLagreFilterController} from "../minoversikt/use-lagre-filter-controller";
+import {MineFilterLagreFilterKnapp} from "../minoversikt/mine-filter-lagre-filter-knapp";
+import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -83,16 +85,16 @@ function EnhetSide() {
             <div className="side-storrelse blokk-xl">
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <section>
-                        <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
-                            <div className="status-filter-kolonne">
-                                <FiltreringContainer
-                                    filtervalg={filtervalg}
-                                    enhettiltak={tiltak}
-                                    filtergruppe={filtergruppe}
-                                />
-                            </div>
-                            <div className="liste-kolonne">
+                    <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
+                        <div className="status-filter-kolonne">
+                            <FiltreringContainer
+                                filtervalg={filtervalg}
+                                enhettiltak={tiltak}
+                                filtergruppe={filtergruppe}
+                            />
+                        </div>
+                        <div className="liste-kolonne">
+                            <div className="etikett-wrapper">
                                 <FiltreringLabelContainer
                                     filtervalg={{
                                         ...filtervalg,
@@ -103,15 +105,17 @@ function EnhetSide() {
                                     listevisning={listevisning}
                                     className="filtrering-label-container"
                                 />
-                                {harFilter
-                                    ? <>
-                                        <div className={flereEnnAntallBrukere(4)
-                                            ? 'sticky-container'
-                                            : 'sticky-container__fjernet'}>
-                                            <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
-                                            <span className={flereEnnAntallBrukere(4)
-                                                ? 'sticky-skygge'
-                                                : 'ikke-sticky__skygge'}>
+                                <MineFilterLagreFilterKnapp filtergruppe={filtergruppe}/>
+                            </div>
+                            {harFilter
+                                ? <>
+                                    <div className={flereEnnAntallBrukere(4)
+                                        ? 'sticky-container'
+                                        : 'sticky-container__fjernet'}>
+                                        <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
+                                        <span className={flereEnnAntallBrukere(4)
+                                            ? 'sticky-skygge'
+                                            : 'ikke-sticky__skygge'}>
                                             <div className={flereEnnAntallBrukere(4)
                                                 ? 'toolbar-container'
                                                 : 'ikke-sticky__toolbar-container'}>
@@ -130,19 +134,19 @@ function EnhetSide() {
                                                 <EnhetTabellOverskrift/>
                                             </div>
                                             </span>
-                                        </div>
-                                        <EnhetTabell
-                                            classNameWrapper={flereEnnAntallBrukere(0)
-                                                ? 'portefolje__container'
-                                                : 'portefolje__container__tom-liste'}
-                                        />
-                                    </>
-                                    : <VelgFilterMelding/>
-                                }
-                            </div>
+                                    </div>
+                                    <EnhetTabell
+                                        classNameWrapper={flereEnnAntallBrukere(0)
+                                            ? 'portefolje__container'
+                                            : 'portefolje__container__tom-liste'}
+                                    />
+                                </>
+                                : <VelgFilterMelding/>
+                            }
                         </div>
-                    </section>
+                    </div>
                 </Innholdslaster>
+                <LagreFilterModal filtergruppe={filtergruppe}/>
                 <ModalEnhetSideController/>
             </div>
         </DocumentTitle>
