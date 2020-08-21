@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import {apenLagreFilterModal, LagretFilter} from '../../ducks/lagret-filter';
@@ -19,18 +19,6 @@ interface LagredeFilterInnholdProps {
 const HiddenAlertStripe = hiddenIf(AlertStripeInfo)
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
-    const outerDivRef = useRef<HTMLDivElement>(null);
-    const className = (props.lagretFilter.length >= 7) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
-    const [erAlertStripeSynligIMinOversikt,setErAlertStripeSynligIMinOversikt] = useState(false)
-    const [erAlertStripeSynligIEnhetensOversikt,setErAlertStripeSynligIEnhetensOversikt] = useState(false)
-
-    const filteredList = () => {
-        return props.lagretFilter.filter(elem => leavePossibleFilters(elem))
-    }
-
-    const erPaMinOversikt = props.filtergruppe === "veileder";
-    const erPaEnhetensOversikt = props.filtergruppe === "enhet";
-
     const leavePossibleFilters = (elem) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes("MIN_ARBEIDSLISTE");
         const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
@@ -38,14 +26,21 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
         const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
 
-        if (erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) {
-            return false;
-        }
-        else if (erPaMinOversikt && (veiledergrupper || ufordelteBrukere)) {
+        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
+            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
             return false;
         }
         return true;
     }
+
+    const outerDivRef = useRef<HTMLDivElement>(null);
+    const filteredList = () => {
+        return props.lagretFilter.filter(elem => leavePossibleFilters(elem))
+    }
+    const className = (filteredList().length >= 7) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
+
+    const erPaMinOversikt = props.filtergruppe === "veileder";
+    const erPaEnhetensOversikt = props.filtergruppe === "enhet";
 
     return (
         <>
@@ -55,12 +50,12 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
             </HiddenAlertStripe>
             <div className={className} ref={outerDivRef}>
                 {filteredList().map((filter, idx) =>
-                        <LagretFilterRad
-                            key={idx}
-                            filter={filter}
-                            filtergruppe={props.filtergruppe}
-                        />
-                    )}
+                    <LagretFilterRad
+                        key={idx}
+                        filter={filter}
+                        filtergruppe={props.filtergruppe}
+                    />
+                )}
             </div>
         </>
     )
