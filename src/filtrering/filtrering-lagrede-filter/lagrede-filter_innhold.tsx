@@ -36,13 +36,10 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const filtrertListe = () => {
         return props.lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
     }
-    const className = (filtrertListe().length >= 7)
-        ? 'lagrede-filter__valgfelt__lang'
-        : 'lagrede-filter__valgfelt'
 
     const hentFiltrertListeinnhold = () => {
         return (
-            <div className={className} ref={outerDivRef}>
+            <div className='lagrede-filter__valgfelt' ref={outerDivRef}>
                 {filtrertListe().map((filter, idx) =>
                     <LagretFilterRad
                         key={idx}

@@ -8,6 +8,7 @@ import {apenLagreFilterModal} from "../../ducks/lagret-filter-ui";
 import {Radio} from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
 import React from "react";
+import './ny_lagrede-filter-innhold.less'
 
 interface LagretFilterRadProps {
     filter: LagretFilter;
