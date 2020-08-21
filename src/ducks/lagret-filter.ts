@@ -1,6 +1,5 @@
 import {doThenDispatch, STATUS} from './utils';
 import {FiltervalgModell} from '../model-interfaces';
-import {OrNothing} from "../utils/types/types";
 import {hentMineLagredeFilter, nyttLagretFilter, redigerLagretFilter, slettLagretFilter} from "../middleware/api";
 
 // Actions
@@ -20,14 +19,6 @@ export const SLETT_LAGREDEFILTER_OK = 'lagredefilter_slette/OK';
 export const SLETT_LAGREDEFILTER_FEILET = 'lagredefilter_slette/FEILET';
 export const SLETT_LAGREDEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
-export const VELG_LAGRET_FILTER = 'lagredefilter_velg/VELG_LAGRET_FILTER';
-export const MARKER_LAGRET_FILTER = 'lagredefilter_velg/MARKER_LAGRET_FILTER';
-export const AVMARKER_LAGRET_FILTER = 'lagredefilter_velg/AVMARKER_LAGRET_FILTER';
-export const AVMARKER_SISTE_VALGT_FILTER = 'lagredefilter_velg/AVMARKER_SISTE_VALGT_FILTER';
-
-export const APEN_LAGRE_FILTER_MODAL = 'lagredefilter_velg/APEN_LAGRE_FILTER_MODAL';
-export const LUKK_LAGRE_FILTER_MODAL = 'lagredefilter_velg/LUKK_LAGRE_FILTER_MODAL';
-
 export interface LagretFilter {
     filterNavn: string;
     filterId: number;
@@ -38,10 +29,7 @@ export interface LagretFilter {
 export interface LagretFilterState {
     status: string;
     data: LagretFilter[];
-    valgtLagretFilter: OrNothing<LagretFilter>;
-    sisteValgteLagredeFilter: OrNothing<number>
     handlingType: HandlingsType | null;
-    erModalApen: boolean;
 }
 
 export interface RedigerFilter {
@@ -65,10 +53,7 @@ export enum HandlingsType {
 const initialState = {
     status: STATUS.NOT_STARTED,
     data: [],
-    valgtLagretFilter: null,
-    handlingType: null,
-    sisteValgteLagredeFilter: null,
-    erModalApen: false,
+    handlingType: null
 };
 
 //  Reducer
@@ -116,66 +101,13 @@ export default function reducer(state: LagretFilterState = initialState, action)
                 ...state,
                 status: STATUS.OK,
                 handlingType: HandlingsType.SLETTE,
-                valgtLagretFilter: null,
-                sisteValgteLagredeFilter: null,
                 data: state.data.filter(elem => elem.filterId !== action.data)
             };
-        case
-        MARKER_LAGRET_FILTER:
-            return {...state, valgtLagretFilter: action.data, sisteValgteLagredeFilter: action.data.filterId}
-        case
-        AVMARKER_LAGRET_FILTER:
-            return {...state, valgtLagretFilter: null}
-        case
-        AVMARKER_SISTE_VALGT_FILTER:
-            return {...state, sisteValgteLagredeFilter: null}
-        case
-        APEN_LAGRE_FILTER_MODAL:
-            return {...state, erModalApen: true}
-        case
-        LUKK_LAGRE_FILTER_MODAL:
-            return {...state, erModalApen: false}
         default:
             return state;
     }
 }
 
-// Action Creators
-export function markerVelgtFilter(filterVerdi: LagretFilter, filtergruppe: string) {
-    return {
-        type: MARKER_LAGRET_FILTER,
-        data: filterVerdi,
-        name: filtergruppe
-    }
-}
-
-export function avmarkerVelgtFilter(filtergruppe: string) {
-    return {
-        type: AVMARKER_LAGRET_FILTER,
-        name: filtergruppe
-    }
-}
-
-export function avmarkerSisteVelgtFilter(filtergruppe: string) {
-    return {
-        type: AVMARKER_SISTE_VALGT_FILTER,
-        name: filtergruppe
-    }
-}
-
-export function apenLagreFilterModal(filtergruppe: string) {
-    return {
-        type: APEN_LAGRE_FILTER_MODAL,
-        name: filtergruppe
-    }
-}
-
-export function lukkLagreFilterModal(filtergruppe: string) {
-    return {
-        type: LUKK_LAGRE_FILTER_MODAL,
-        name: filtergruppe
-    }
-}
 
 export function hentLagredeFilterForVeileder() {
     return doThenDispatch(() => hentMineLagredeFilter(), {
