@@ -1,7 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import {Normaltekst} from 'nav-frontend-typografi';
 import LagredeFilterInnhold from "./lagrede-filter_innhold";
 import {AlertStripeFeil} from "nav-frontend-alertstriper";
 import {HandlingsType} from "../../ducks/lagret-filter";
@@ -13,13 +12,9 @@ function FiltreringLagredeFilter(props: { filtergruppe: string }) {
     const sortertLagredeFilter = lagretFilter.sort((a, b) => (a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : (a.filterNavn.toLowerCase() > b.filterNavn.toLowerCase() ? 1 : 0)));
 
     const lagretFilterOK = () => {
-        return lagretFilter.length > 0
-            ? <LagredeFilterInnhold lagretFilter={sortertLagredeFilter} filtergruppe={props.filtergruppe}/>
-            : <div className="lagredefilter-emptystate">
-                <Normaltekst className="lagredefilter-emptystate__tekst">
-                    Ingen lagrede filter
-                </Normaltekst>
-            </div>
+        return (
+            <LagredeFilterInnhold lagretFilter={sortertLagredeFilter} filtergruppe={props.filtergruppe}/>
+        )
     }
 
     const lagretFilterError = () => {
