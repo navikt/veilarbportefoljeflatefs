@@ -35,7 +35,9 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const filteredList = () => {
         return props.lagretFilter.filter(elem => leavePossibleFilters(elem))
     }
-    const className = (filteredList().length >= 7) ? 'lagrede-filter__valgfelt__lang' : 'lagrede-filter__valgfelt'
+    const className = (filteredList().length >= 7)
+        ? 'lagrede-filter__valgfelt__lang'
+        : 'lagrede-filter__valgfelt'
 
     const erPaMinOversikt = props.filtergruppe === "veileder";
     const erPaEnhetensOversikt = props.filtergruppe === "enhet";
@@ -69,7 +71,9 @@ interface LagretFilterRadProps {
 function LagretFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     const dispatch = useDispatch();
 
-    const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === "enhet" ? state.lagretFilterEnhetensOversikt.valgtLagretFilter : state.lagretFilterMinOversikt.valgtLagretFilter);
+    const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === "veileder"
+        ? state.lagretFilterMinOversikt.valgtLagretFilter
+        : state.lagretFilterEnhetensOversikt.valgtLagretFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 
