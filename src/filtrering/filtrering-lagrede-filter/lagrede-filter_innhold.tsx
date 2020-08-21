@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import {apenLagreFilterModal, LagretFilter} from '../../ducks/lagret-filter';
+import {LagretFilter} from '../../ducks/lagret-filter';
 import './lagrede-filter_innhold.less'
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../reducer";
@@ -11,6 +11,7 @@ import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics
 import {PopoverOrientering} from "nav-frontend-popover";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 import hiddenIf from "../../components/hidden-if/hidden-if";
+import {apenLagreFilterModal} from "../../ducks/lagret-filter-ui";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];

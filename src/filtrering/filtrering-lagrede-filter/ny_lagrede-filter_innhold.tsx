@@ -1,7 +1,6 @@
 import React, {useRef} from 'react';
 import {Radio} from 'nav-frontend-skjema'
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import {apenLagreFilterModal, LagretFilter} from '../../ducks/lagret-filter';
 import './ny_lagrede-filter-innhold.less'
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../reducer";
@@ -12,6 +11,8 @@ import '../../components/sidebar/sidebar.less'
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 import {PopoverOrientering} from "nav-frontend-popover";
 import hiddenIf from "../../components/hidden-if/hidden-if";
+import {LagretFilter} from "../../ducks/lagret-filter";
+import {apenLagreFilterModal} from "../../ducks/lagret-filter-ui";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -75,7 +76,7 @@ function LagretFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 
-    function velgFilter(event) {
+    function velgFilter() {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
         dispatch(velgLagretFilter(filter, filtergruppe))
@@ -93,7 +94,7 @@ function LagretFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
                 name="lagretFilter"
                 label={filter.filterNavn}
                 value={filter.filterId}
-                onChange={(event) => velgFilter(event)}
+                onChange={() => velgFilter()}
                 checked={valgtLagretFilter?.filterId === filter.filterId}
             />
             <RedigerKnapp

@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import {avmarkerSisteVelgtFilter, avmarkerVelgtFilter, markerVelgtFilter} from "../ducks/lagret-filter";
+import {avmarkerSisteVelgtFilter, avmarkerVelgtFilter, markerVelgtFilter} from "../ducks/lagret-filter-ui";
 import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/lagrede-filter/lagrede-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";

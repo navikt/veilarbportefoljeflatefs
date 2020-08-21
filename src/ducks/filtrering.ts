@@ -1,5 +1,6 @@
 import {FiltervalgModell} from '../model-interfaces';
-import {LagretFilter, VELG_LAGRET_FILTER} from "./lagret-filter";
+import {LagretFilter} from "./lagret-filter";
+import {VELG_LAGRET_FILTER} from "./lagret-filter-ui";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';

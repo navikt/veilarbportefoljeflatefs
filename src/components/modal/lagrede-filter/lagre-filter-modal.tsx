@@ -9,7 +9,7 @@ import {OrNothing} from "../../../utils/types/types";
 import hiddenIf from "../../hidden-if/hidden-if";
 import {Meny} from "./lagrede-filter-meny";
 import {FnrFeil} from "./lagrede-filter-fnr-feil";
-import {lukkLagreFilterModal} from "../../../ducks/lagret-filter";
+import {lukkLagreFilterModal} from "../../../ducks/lagret-filter-ui";
 
 export enum Visningstype {
     MENY,
@@ -35,7 +35,8 @@ const HiddenIfOppdaterFilter = hiddenIf(OppdaterFilter);
 const HiddenIfFnrFeil = hiddenIf(FnrFeil)
 
 export function LagreFilterModal(props: { filtergruppe: string }) {
-    const {sisteValgteLagredeFilter, data, valgtLagretFilter, erModalApen} = useSelector((state: AppState) => state.lagretFilter)
+    const {sisteValgteLagredeFilter, valgtLagretFilter, erModalApen} = useSelector((state: AppState) => (props.filtergruppe === 'enhet') ? state.lagretFilterEnhetensOversikt : state.lagretFilterMinOversikt)
+    const data = useSelector((state: AppState) => state.lagretFilter.data)
     const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(Visningstype.MENY)

@@ -1,8 +1,8 @@
 import {useEffect} from "react";
-import {avmarkerSisteVelgtFilter, avmarkerVelgtFilter, markerVelgtFilter} from "../ducks/lagret-filter";
 import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/lagrede-filter/lagrede-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
+import {avmarkerSisteVelgtFilter, avmarkerVelgtFilter, markerVelgtFilter} from "../ducks/lagret-filter-ui";
 
 export function NyUseLagreFilterController(props: {filtergruppe: string}) {
     const dispatch = useDispatch()
