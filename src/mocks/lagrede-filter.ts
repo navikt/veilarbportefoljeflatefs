@@ -21,14 +21,14 @@ export const lagredeFilter = () => {
             filterValg: {...initialState, kjonn: "K", formidlingsgruppe: ["ARBS"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
-            filterNavn: 'Team Voff',
+            filterNavn: 'arbeidsliste',
             filterId: 4,
-            filterValg: {...initialState, kjonn: "M", formidlingsgruppe: ["ARBS"]},
+            filterValg: {...initialState, ferdigfilterListe: ["MIN_ARBEIDSLISTE"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
-            filterNavn: 'Under 19',
+            filterNavn: 'GUL',
             filterId: 5,
-            filterValg: {...initialState, alder: ["19-og-under"]},
+            filterValg: {...initialState, arbeidslisteKategori: ["GUL"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
             filterNavn: 'Kvinner',
@@ -36,24 +36,36 @@ export const lagredeFilter = () => {
             filterValg: {...initialState, kjonn: "K"},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
-            filterNavn: 'Menn',
+            filterNavn: 'LILLA',
             filterId: 7,
-            filterValg: {...initialState, kjonn: "M"},
+            filterValg: {...initialState, arbeidslisteKategori: ["LILLA"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
-            filterNavn: '40-49 år',
+            filterNavn: 'GRØNN',
             filterId: 8,
-            filterValg: {...initialState, alder: ["40-49"]},
+            filterValg: {...initialState, arbeidslisteKategori: ["GRONN"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
-            filterNavn: 'enda en',
+            filterNavn: 'BLÅ',
             filterId: 9,
-            filterValg: {...initialState, alder: ["40-49"], kjonn: "M"},
+            filterValg: {...initialState, arbeidslisteKategori: ["BLA"], alder: ["20-24"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }, {
             filterNavn: 'Nye brukere',
             filterId: 10,
             filterValg: {...initialState, ferdigfilterListe: ["NYE_BRUKERE_FOR_VEILEDER"]},
+            opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+        },
+        {
+            filterNavn: 'Veiledere',
+            filterId: 11,
+            filterValg: {...initialState, veiledere: ['Z627132', 'Z672713', 'Z837951', 'Z857676', 'Z916651']},
+            opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+        },
+        {
+            filterNavn: 'UfordelteBrukere',
+            filterId: 12,
+            filterValg: {...initialState, ferdigfilterListe: ["UFORDELTE_BRUKERE"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }
         ] as LagretFilter []

@@ -22,7 +22,7 @@ import {NyFiltreringStatusContainer} from "./filtrering-status-components/ny_fil
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
-    filtergruppe?: string;
+    filtergruppe: string;
 }
 
 export function NyFiltreringStatus(props: FiltreringStatusProps) {

@@ -4,44 +4,44 @@
 @bakgrunnsGra: #F4F4F4;
 
 body {
-    margin: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #F4F4F4;
+  font-size: 1rem;
+  font-weight: 400;
+  color: @navMorkGra;
+  font-family: @font-family;
+
+  @media print {
+    a[href]:after {
+      content: none !important;
+    }
+  }
+
+  #mainapp {
+    background-color: @white;
+    margin: 0 auto;
     height: 100%;
-    width: 100%;
-    background-color: #F4F4F4;
-    font-size: 1rem;
-    font-weight: 400;
-    color: @navMorkGra;
-    font-family: @font-family;
+    max-height: 8rem;
+    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+  }
 
-    @media print {
-        a[href]:after {
-            content: none !important;
-        }
-    }
-
+  @media (max-width: 870px) {
     #mainapp {
-        background-color: @white;
-        margin: 0 auto;
-        height: 100%;
-        max-height: 8rem;
-        box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+      max-height: 10rem;
     }
+  }
 
-    @media (max-width: 870px) {
-        #mainapp {
-            max-height: 10rem;
-        }
+  @media (max-width: 782px) {
+    #mainapp {
+      max-height: 11rem;
     }
-
-    @media (max-width: 782px) {
-        #mainapp {
-            max-height: 11rem;
-        }
-    }
+  }
 }
 
 html {
-    height: 100%;
+  height: 100%;
 }
 
 @import "~nav-frontend-alertstriper-style/src/index";
@@ -61,166 +61,166 @@ html {
 @import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
 
 .veilarbportefoljeflatefs {
-    @import "./components/barinput/barlabel";
+  @import "./components/barinput/barlabel";
 
-    .ekspanderbartPanel__innhold {
-        padding: 1rem;
-    }
+  .ekspanderbartPanel__innhold {
+    padding: 0 1rem 1rem;
+  }
 
-    .ekspanderbartPanel--apen .ReactCollapse--collapse {
-        overflow: initial !important;
-    }
+  .ekspanderbartPanel--apen .ReactCollapse--collapse {
+    overflow: initial !important;
+  }
 }
 
 .decorator-context-modal {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .modal__overlay {
-    z-index: 2000;
+  z-index: 2000;
 }
 
 @media (min-width: 1200px) {
-    .container {
-        width: 956px;
-    }
+  .container {
+    width: 956px;
+  }
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .flex--center {
-    align-items: center;
+  align-items: center;
 }
 
 .flex--grow {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .mr1 {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
 
 .text--left {
-    text-align: left;
+  text-align: left;
 }
 
 .sticky-container {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background-color: @bakgrunnsGra;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: @bakgrunnsGra;
 
-    .toolbar {
-        justify-content: space-between;
-    }
+  .toolbar {
+    justify-content: space-between;
+  }
 
-    .blokk-xxs {
-        margin-bottom: 0;
-    }
+  .blokk-xxs {
+    margin-bottom: 0;
+  }
 }
 
 .ikke-sticky {
-    &__skygge {
-        height: 16px;
-        top: -16px;
-    }
+  &__skygge {
+    height: 16px;
+    top: -16px;
+  }
 
-    &__toolbar-container {
-        position: sticky;
-        top: 0;
-        border-bottom: 1px solid @navGra60;
-        z-index: 3;
-    }
+  &__toolbar-container {
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid @navGra60;
+    z-index: 3;
+  }
 
-    &__container {
-        position: inherit;
-        top: 0;
-        z-index: 1;
-        background-color: @bakgrunnsGra;
-    }
+  &__container {
+    position: inherit;
+    top: 0;
+    z-index: 1;
+    background-color: @bakgrunnsGra;
+  }
 }
 
 .sticky-skygge {
-    position: sticky;
-    z-index: 1;
-    -webkit-backface-visibility: hidden;
-    height: 16px;
-    top: -16px;
+  position: sticky;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  height: 16px;
+  top: -16px;
 }
 
 .toolbar-container {
-    position: sticky;
-    top: 0;
-    margin-top: -18px;
-    z-index: 3;
-    background-color: @bakgrunnsGra;
-    border-bottom: 1px solid @navGra60;
-    border-radius: 4px;
+  position: sticky;
+  top: 0;
+  margin-top: -18px;
+  z-index: 3;
+  background-color: @bakgrunnsGra;
+  border-bottom: 1px solid @navGra60;
+  border-radius: 4px;
 }
 
 .sticky-skygge::before,
 .sticky-skygge::after {
-    content: '';
-    display: block;
-    height: 16px;
-    position: sticky;
+  content: '';
+  display: block;
+  height: 16px;
+  position: sticky;
 }
 
 .sticky-skygge::before {
-    top: 114px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    margin: 0 4px;
+  top: 114px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  margin: 0 4px;
 }
 
 .sticky-skygge::after {
-    background: linear-gradient(white, rgba(255, 255, 255, 0.3));
-    top: 0;
-    z-index: 2;
-    height: 0;
-    width: auto;
+  background: linear-gradient(white, rgba(255, 255, 255, 0.3));
+  top: 0;
+  z-index: 2;
+  height: 0;
+  width: auto;
 }
 
 .skjemaelement {
-    margin-bottom: .5rem;
+  margin-bottom: .5rem;
 }
 
 .veilarbportefoljeflatefs {
-    .side-storrelse {
-        margin: 0 auto;
-        padding: 0 3rem;
-        max-width: 1809px;
-    }
+  .side-storrelse {
+    margin: 0 auto;
+    padding: 0 3rem;
+    max-width: 1809px;
+  }
 
+  .oversikt-sideinnhold {
+    display: grid;
+    grid-template-columns: 1fr minmax(805px, 1322px);
+    column-gap: 16px;
+  }
+
+  .status-filter-kolonne {
+    min-width: 320px;
+    max-width: 375px;
+  }
+
+  .liste-kolonne {
+    min-width: 805px;
+    max-width: 1322px;
+
+    .filtreringlabel {
+      display: inline-flex;
+    }
+  }
+
+  @media (max-width: 1200px) {
     .oversikt-sideinnhold {
-        display: grid;
-        grid-template-columns: 1fr minmax(805px, 1322px);
-        column-gap: 16px;
+      grid-template-rows: auto auto;
+      grid-template-columns: none;
     }
 
     .status-filter-kolonne {
-        min-width: 320px;
-        max-width: 375px;
+      max-width: none;
     }
-
-    .liste-kolonne {
-        min-width: 805px;
-        max-width: 1322px;
-
-        .filtreringlabel {
-            display: inline-flex;
-        }
-    }
-
-    @media (max-width: 1200px) {
-        .oversikt-sideinnhold {
-            grid-template-rows: auto auto;
-            grid-template-columns: none;
-        }
-
-        .status-filter-kolonne {
-            max-width: none;
-        }
-    }
+  }
 }

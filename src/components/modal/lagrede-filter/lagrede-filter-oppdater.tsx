@@ -10,9 +10,9 @@ import BekreftSlettingModal from "../bekreftelse-modal/bekreft-sletting-modal";
 import {lagreEndringer, slettFilter} from "../../../ducks/lagret-filter";
 import {useRequestHandler} from "../../../hooks/use-request-handler";
 
-export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal }) {
+export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, filtergruppe }) {
     const dispatch = useDispatch();
-    const filterValg = useSelector((state: AppState) => state.filtreringMinoversikt)
+    const filterValg = useSelector((state: AppState) => props.filtergruppe === 'veileder' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
     const data = useSelector((state: AppState) => state.lagretFilter.data)
     const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false)
     const [nyttFilterNavn, setNyttFilterNavn] = useState<string>(props.gammeltFilterNavn)

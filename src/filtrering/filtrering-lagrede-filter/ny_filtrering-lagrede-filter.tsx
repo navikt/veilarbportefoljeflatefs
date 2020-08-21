@@ -8,14 +8,14 @@ import {STATUS} from "../../ducks/utils";
 import NyLagredeFilterInnhold from "./ny_lagrede-filter_innhold";
 import './ny_lagrede-filter-innhold.less'
 
-function NyFiltreringLagredeFilter() {
+function NyFiltreringLagredeFilter(props: {filtergruppe: string}) {
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const lagretFilter = lagretFilterState.data;
     const sortertLagredeFilter = lagretFilter.sort((a, b) => a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : 1);
 
     const lagretFilterOK = () => {
         return lagretFilter.length > 0
-            ? <NyLagredeFilterInnhold lagretFilter={sortertLagredeFilter}/>
+            ? <NyLagredeFilterInnhold lagretFilter={sortertLagredeFilter} filtergruppe={props.filtergruppe}/>
             : <div className="ny__lagredefilter-emptystate">
                 <Normaltekst className="ny__lagredefilter-emptystate__tekst">
                     Ingen lagrede filter

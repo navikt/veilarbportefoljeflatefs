@@ -32,6 +32,7 @@ import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
 import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
+import {useLagreFilterController} from "../minoversikt/use-lagre-filter-controller";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -69,12 +70,14 @@ function Ny_EnhetSide() {
     const veilederLabel = useMemo(() => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter), [filtervalg.veiledere, veilederliste, slettVeilederFilter]);
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const {isSidebarHidden} = useSidebarViewStore(enhetensOversikt);
+    const filtergruppe = "enhet";
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
     useFetchPortefolje(enhetensOversikt);
     useSetLocalStorageOnUnmount();
+    useLagreFilterController({filtergruppe: filtergruppe});
 
     const handleOnTabClicked = (tab, selectedTab) => {
         if (isSidebarHidden) {
@@ -91,7 +94,7 @@ function Ny_EnhetSide() {
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi));
+        dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
 
     return (
@@ -113,14 +116,14 @@ function Ny_EnhetSide() {
                                 ...filtervalg,
                                 veiledere: veilederLabel
                             }}
-                            filtergruppe="enhet"
+                            filtergruppe={filtergruppe}
                             enhettiltak={enhettiltak.data.tiltak}
                             listevisning={listevisning}
                             className="ny__filtrering-label-container"
                         />
                         <Sidebar
                             filtervalg={filtervalg}
-                            filtergruppe="enhet"
+                            filtergruppe={filtergruppe}
                             enhettiltak={tiltak}
                             handleOnTabClicked={handleOnTabClicked}
                             isSidebarHidden={isSidebarHidden}

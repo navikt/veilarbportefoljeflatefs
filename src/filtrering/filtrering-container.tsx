@@ -21,7 +21,7 @@ import {finnSideNavn} from "../middleware/metrics-middleware";
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
     filtervalg: FiltervalgModell;
-    filtergruppe?: string;
+    filtergruppe: string;
 }
 
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
@@ -64,10 +64,10 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 lamellNavn="mine-filter"
                 tittel="Mine filter"
                 onClick={klikkPaLagredeFilter}
-                hidden={!lagredeFilterFeatureToggleErPa || filtergruppe !== 'veileder'}
+                hidden={!lagredeFilterFeatureToggleErPa}
                 className="lagrede-filter-wrapper"
             >
-                <FiltreringLagredeFilter/>
+                <FiltreringLagredeFilter filtergruppe={filtergruppe}/>
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={false}
