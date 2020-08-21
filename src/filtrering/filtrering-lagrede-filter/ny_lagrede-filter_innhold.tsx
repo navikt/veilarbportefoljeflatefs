@@ -1,15 +1,9 @@
 import React, {useRef} from 'react';
-import {Radio} from 'nav-frontend-skjema'
-import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import './ny_lagrede-filter-innhold.less'
-import {useDispatch, useSelector} from "react-redux";
-import {AppState} from "../../reducer";
-import {logEvent} from "../../utils/frontend-logger";
-import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
-import {velgLagretFilter} from "../../ducks/filtrering";
 import '../../components/sidebar/sidebar.less'
 import {LagretFilter} from "../../ducks/lagret-filter";
-import {apenLagreFilterModal} from "../../ducks/lagret-filter-ui";
+import {Normaltekst} from "nav-frontend-typografi";
+import NyLagretFilterRad from "./ny_lagret-filter-rad";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -22,63 +16,33 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const filtrertListe = () => {
         return props.lagretFilter.filter(elem => props.fjernUtilgjengeligeFilter(elem))
     }
-    return (
-        <>
-            <div className='ny__lagrede-filter__valgfelt' ref={outerDivRef}>
+
+    const hentFiltrertListeinnhold = () => {
+        return (
+            <div className="ny__lagrede-filter__valgfelt" ref={outerDivRef}>
                 {filtrertListe().map((filter, idx) =>
-                    <LagretFilterRad
+                    <NyLagretFilterRad
                         key={idx}
                         filter={filter}
                         filtergruppe={props.filtergruppe}
                     />
                 )}
-            </div>
-        </>
-    );
-}
-
-interface LagretFilterRadProps {
-    filter: LagretFilter;
-    filtergruppe: string;
-}
-
-function LagretFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
-    const dispatch = useDispatch();
-
-    const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === "veileder"
-        ? state.lagretFilterMinOversikt.valgtLagretFilter
-        : state.lagretFilterEnhetensOversikt.valgtLagretFilter);
-    const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
-    const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
-
-    function velgFilter() {
-        logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
-            {}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
-        dispatch(velgLagretFilter(filter, filtergruppe))
+            </div>)
     }
 
-    function onClickRedigerKnapp() {
-        dispatch(apenLagreFilterModal(filtergruppe))
+    const getEmptyState = () => {
+        return (
+            <div className="lagredefilter-emptystate">
+                <Normaltekst className="lagredefilter-emptystate__tekst">
+                    Ingen lagrede filter
+                </Normaltekst>
+            </div>
+        )
     }
 
     return (
-        <div className="ny__lagrede-filter__rad">
-            <Radio
-                className="ny__lagrede-filter__filternavn"
-                key={filter.filterId}
-                name="lagretFilter"
-                label={filter.filterNavn}
-                value={filter.filterId}
-                onChange={() => velgFilter()}
-                checked={valgtLagretFilter?.filterId === filter.filterId}
-            />
-            <RedigerKnapp
-                hidden={valgtLagretFilter?.filterId !== filter.filterId}
-                aria="Rediger lagret filter"
-                onClick={onClickRedigerKnapp}
-            />
-        </div>
-    );
+        filtrertListe().length > 0 ? hentFiltrertListeinnhold() : getEmptyState()
+    )
 }
 
 export default NyLagredeFilterInnhold;

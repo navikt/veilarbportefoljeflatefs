@@ -11,26 +11,15 @@ function FiltreringLagredeFilter(props: { filtergruppe: string }) {
     const lagretFilter = lagretFilterState.data;
     const sortertLagredeFilter = lagretFilter.sort((a, b) => (a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : (a.filterNavn.toLowerCase() > b.filterNavn.toLowerCase() ? 1 : 0)));
 
-    const lagretFilterOK = () => {
-        return (
-            <LagredeFilterInnhold lagretFilter={sortertLagredeFilter} filtergruppe={props.filtergruppe}/>
-        )
-    }
-
-    const lagretFilterError = () => {
-        return (
-            <AlertStripeFeil>
-                Det oppsto en feil, og mine filter kunne ikke hentes fram. Prøv igjen senere.
-            </AlertStripeFeil>
-        )
-    }
-
     return (
         <>
             {(lagretFilterState.handlingType === HandlingsType.HENTE
                 && lagretFilterState.status === STATUS.ERROR)
-                ? lagretFilterError()
-                : lagretFilterOK()}
+                ? <AlertStripeFeil>
+                    Det oppsto en feil, og mine filter kunne ikke hentes fram. Prøv igjen senere.
+                </AlertStripeFeil>
+                : <LagredeFilterInnhold lagretFilter={sortertLagredeFilter}
+                                        filtergruppe={props.filtergruppe}/>}
         </>
     );
 }
