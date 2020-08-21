@@ -33,6 +33,8 @@ import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
 import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
 import {useLagreFilterController} from "../minoversikt/use-lagre-filter-controller";
+import {NyMineFilterLagreFilterKnapp} from "../minoversikt/ny_mine-filter-lagre-filter-knapp";
+import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -110,6 +112,7 @@ function Ny_EnhetSide() {
                                 filtervalg={filtervalg}
                                 endreFiltervalg={doEndreFiltervalg}
                             />
+                            <NyMineFilterLagreFilterKnapp filtergruppe={filtergruppe}/>
                         </div>
                         <FiltreringLabelContainer
                             filtervalg={{
@@ -167,6 +170,7 @@ function Ny_EnhetSide() {
                             : <VelgFilterMelding/>}
                     </div>
                 </Innholdslaster>
+                <LagreFilterModal filtergruppe={filtergruppe}/>
                 <ModalEnhetSideController/>
             </div>
         </DocumentTitle>

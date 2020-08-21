@@ -11,7 +11,7 @@ import './ny_lagrede-filter-innhold.less'
 function NyFiltreringLagredeFilter(props: {filtergruppe: string}) {
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const lagretFilter = lagretFilterState.data;
-    const sortertLagredeFilter = lagretFilter.sort((a, b) => a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : 1);
+    const sortertLagredeFilter = lagretFilter.sort((a, b) => (a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : (a.filterNavn.toLowerCase() > b.filterNavn.toLowerCase() ? 1 : 0)));
 
     const lagretFilterOK = () => {
         return lagretFilter.length > 0

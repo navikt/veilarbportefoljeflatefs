@@ -10,6 +10,7 @@ import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
 import {PopoverOrientering} from "nav-frontend-popover";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
+import hiddenIf from "../../components/hidden-if/hidden-if";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -17,7 +18,10 @@ interface LagredeFilterInnholdProps {
 }
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
-    const leavePossibleFilters = (elem) => {
+    const erPaMinOversikt = props.filtergruppe === "veileder";
+    const erPaEnhetensOversikt = props.filtergruppe === "enhet";
+
+    const fjernUtilgjengeligeFilter = (elem) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes("MIN_ARBEIDSLISTE");
         const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
         const veiledergrupper = elem.filterValg.veiledere.length > 0;
@@ -31,27 +35,27 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         return true;
     }
 
+    const HiddenHjelpetekst = hiddenIf(Hjelpetekst)
+
     const outerDivRef = useRef<HTMLDivElement>(null);
-    const filteredList = () => {
-        return props.lagretFilter.filter(elem => leavePossibleFilters(elem))
+    const filtrertListe = () => {
+        return props.lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
     }
-    const className = (filteredList().length >= 7)
+    const className = (filtrertListe().length >= 7)
         ? 'lagrede-filter__valgfelt__lang'
         : 'lagrede-filter__valgfelt'
-
-    const erPaMinOversikt = props.filtergruppe === "veileder";
-    const erPaEnhetensOversikt = props.filtergruppe === "enhet";
 
     return (
         <>
             <div className="hjelpetekst__wrapper">
-                <Hjelpetekst type={PopoverOrientering.Over}>
+                <HiddenHjelpetekst type={PopoverOrientering.Over}
+                                   hidden={filtrertListe().length === props.lagretFilter.length}>
                     {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig i Min oversikt."}
                     {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig i Enhetens oversikt."}
-                </Hjelpetekst>
+                </HiddenHjelpetekst>
             </div>
             <div className={className} ref={outerDivRef}>
-                {filteredList().map((filter, idx) =>
+                {filtrertListe().map((filter, idx) =>
                     <LagretFilterRad
                         key={idx}
                         filter={filter}
