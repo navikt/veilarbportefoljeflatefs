@@ -9,6 +9,7 @@ import {ErrorModalType, LagredeFilterVarselModal} from "./varsel-modal";
 import BekreftSlettingModal from "../bekreftelse-modal/bekreft-sletting-modal";
 import {lagreEndringer, slettFilter} from "../../../ducks/lagret-filter";
 import {useRequestHandler} from "../../../hooks/use-request-handler";
+import {avmarkerSisteVelgtFilter} from "../../../ducks/lagret-filter-ui";
 
 export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, filtergruppe }) {
     const dispatch = useDispatch();
@@ -47,6 +48,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, 
 
     const doSlettFilter = () => {
         dispatch(slettFilter(filterId))
+        dispatch(avmarkerSisteVelgtFilter(props.filtergruppe));
         requestHandlerSlette.setSaveRequestSent(true)
     }
 

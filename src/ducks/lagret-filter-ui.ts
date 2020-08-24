@@ -1,5 +1,5 @@
 import {OrNothing} from "../utils/types/types";
-import {LagretFilter, SLETT_LAGREDEFILTER_OK} from "./lagret-filter";
+import {LagretFilter} from "./lagret-filter";
 
 // Actions
 export const VELG_LAGRET_FILTER = 'lagredefilter_velg/VELG_LAGRET_FILTER';
@@ -27,13 +27,6 @@ const initialState = {
 //  Reducer
 export default function reducer(state: LagretFilterUIState = initialState, action):LagretFilterUIState {
     switch (action.type) {
-        case
-        SLETT_LAGREDEFILTER_OK:
-            return {
-                ...state,
-                valgtLagretFilter: null,
-                sisteValgteLagredeFilter: null
-            };
         case
         MARKER_LAGRET_FILTER:
             return {...state, valgtLagretFilter: action.data, sisteValgteLagredeFilter: action.data.filterId}
