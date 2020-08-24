@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import './ny_lagrede-filter-innhold.less'
 import '../../components/sidebar/sidebar.less'
 import {LagretFilter} from "../../ducks/lagret-filter";
@@ -11,11 +11,22 @@ interface LagredeFilterInnholdProps {
     fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
 }
 
+function isOverflown(element) {
+    return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+}
+
 function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
         return props.lagretFilter.filter(elem => props.fjernUtilgjengeligeFilter(elem))
     }
+
+    useEffect(() => {
+        if (outerDivRef.current && isOverflown(outerDivRef.current)) {
+            outerDivRef.current.style.borderTop = '1px solid #888888';
+            outerDivRef.current.style.borderBottom = '1px solid #888888';
+        }
+    });
 
     const hentFiltrertListeinnhold = () => {
         return (

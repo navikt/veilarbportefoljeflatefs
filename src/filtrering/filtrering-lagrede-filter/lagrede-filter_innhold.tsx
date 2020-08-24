@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import './lagrede-filter_innhold.less'
 import {PopoverOrientering} from "nav-frontend-popover";
@@ -10,6 +10,10 @@ import LagretFilterRad from "./lagret-filter-rad";
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
     filtergruppe: string;
+}
+
+function isOverflown(element) {
+    return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
 function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
@@ -36,6 +40,13 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const filtrertListe = () => {
         return props.lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
     }
+
+    useEffect(() => {
+        if (outerDivRef.current && isOverflown(outerDivRef.current)) {
+            outerDivRef.current.style.borderTop = '1px solid #888888';
+            outerDivRef.current.style.borderBottom = '1px solid #888888';
+        }
+    });
 
     const hentFiltrertListeinnhold = () => {
         return (
