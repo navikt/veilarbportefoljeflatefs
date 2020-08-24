@@ -34,7 +34,6 @@ function SidebarTab({tittel, handleClick, children, lagretFilter, fjernUtilgjeng
                     {filtergruppe === 'enhet' && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig i Enhetens oversikt."}
                 </HiddenInfoIkon>}
             </Systemtittel>
-
             <Lukknapp overstHjorne onClick={handleClick}/>
             {children}
         </>
