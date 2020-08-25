@@ -5,16 +5,17 @@ import AktivitetFilterform from '../components/aktivitet-filterform/aktivitet-fi
 import {
     aktiviteter,
     alder,
+    cvJobbprofil,
     fodselsdagIMnd,
     formidlingsgruppe,
+    hovedmal,
     innsatsgruppe,
     kjonn,
+    manuellBrukerStatus,
+    registreringstype,
     rettighetsgruppe,
     servicegruppe,
-    ytelse,
-    manuellBrukerStatus,
-    hovedmal,
-    registreringstype, cvJobbprofil
+    ytelse
 } from './filter-konstanter';
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 import {RadioFilterform} from '../components/radio-filterform/radio-filterform';
@@ -26,6 +27,7 @@ import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less'
 import '../components/sidebar/sidebar.less'
+import {PopoverOrientering} from "nav-frontend-popover";
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -211,6 +213,7 @@ function NyFiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtreri
                 <OverskriftMedHjelpeTekst
                     overskriftTekst="Aktivitet"
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
+                    orientering={PopoverOrientering.Venstre}
                 />
                 <Dropdown
                     name="Aktivitet"
