@@ -9,12 +9,13 @@ import hiddenIf from '../hidden-if/hidden-if';
 
 interface BarinputRadioProps {
     filterNavn: string;
+    max: number;
     handleChange: ChangeEventHandler<HTMLInputElement>;
     checked: boolean;
     antall: number;
 }
 
-export function BarInputRadio({filterNavn, handleChange, checked, antall}: BarinputRadioProps) {
+export function BarInputRadio({filterNavn, max, handleChange, checked, antall}: BarinputRadioProps) {
     const filterVerdi = mapFilternavnTilFilterValue[filterNavn]; // TODO :SENDE SOM PROPS?
     const labelTekst = ferdigfilterListe[filterVerdi];  // TODO: SENDE SOM PROPS?
 
@@ -29,6 +30,7 @@ export function BarInputRadio({filterNavn, handleChange, checked, antall}: Barin
             checked={checked}
             labelTekst={labelTekst}
             antall={antall}
+            max={max}
             barClassname={filterNavn}
         />
     );

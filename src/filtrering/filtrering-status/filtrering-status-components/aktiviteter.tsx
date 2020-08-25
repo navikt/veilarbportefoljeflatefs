@@ -18,18 +18,21 @@ export function FiltreringStatusAktiviteter(props: FiltreringStatusAktivitetProp
                 antall={statusTall.utlopteAktiviteter}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
+                max={statusTall.totalt}
             />
             <BarInputRadio
                 filterNavn="ikkeIavtaltAktivitet"
                 antall={statusTall.ikkeIavtaltAktivitet}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(IKKE_I_AVTALT_AKTIVITET)}
+                max={statusTall.totalt}
             />
             <BarInputRadio
                 filterNavn="iavtaltAktivitet"
                 antall={statusTall.iavtaltAktivitet}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
+                max={statusTall.totalt}
             />
         </BarInputGruppe>
     );

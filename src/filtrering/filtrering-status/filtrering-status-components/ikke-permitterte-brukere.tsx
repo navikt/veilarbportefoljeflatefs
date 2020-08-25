@@ -18,6 +18,7 @@ function FiltreringStatusIkkePermitterteEtterNiendeBrukere(props: FiltreringStat
             handleChange={props.handleChange}
             checked={props.ferdigfilterListe.includes(IKKE_PERMITTERTE_ETTER_NIENDE_MARS)}
             labelTekst={<>Alle <b>utenom</b> permitterte etter 09.03.2020</>}
+            max={statusTall.totalt}
         />
     );
 }

@@ -15,12 +15,14 @@ export function FiltreringStatusDialog(props: FiltreringStatusGruppe) {
                 antall={statusTall.venterPaSvarFraNAV}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
+                max={statusTall.totalt}
             />
             <BarInputRadio
                 filterNavn="venterPaSvarFraBruker"
                 antall={statusTall.venterPaSvarFraBruker}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
+                max={statusTall.totalt}
             />
         </BarInputGruppe>
     );
