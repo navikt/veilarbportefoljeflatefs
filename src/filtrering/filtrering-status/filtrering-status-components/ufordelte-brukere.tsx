@@ -18,6 +18,7 @@ function FiltreringStatusUfordelteBrukere(props: FiltreringStatusGruppe) {
             antall={statusTall.ufordelteBrukere}
             handleChange={props.handleChange}
             checked={props.ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
+            max={statusTall.totalt}
         />
     );
 }

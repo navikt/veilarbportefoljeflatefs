@@ -35,6 +35,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                 handleChange={props.handleChange}
                 antall={statusTall.minArbeidsliste}
                 checked={props.checked}
+                max={statusTall.totalt}
             />
             {props.checked && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">
@@ -45,6 +46,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.BLA)}
                         antall={statusTall.minArbeidslisteBla}
+                        max={statusTall.totalt}
                     />
                     <BarInputCheckbox
                         labelTekst={<><ArbeidslisteikonLilla/><span className="arbeidslistetekst"
@@ -53,6 +55,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.LILLA)}
                         antall={statusTall.minArbeidslisteLilla}
+                        max={statusTall.totalt}
                     />
                     <BarInputCheckbox
                         labelTekst={<><ArbeidslisteikonGronn/><span className="arbeidslistetekst"
@@ -61,6 +64,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.GRONN)}
                         antall={statusTall.minArbeidslisteGronn}
+                        max={statusTall.totalt}
                     />
                     <BarInputCheckbox
                         labelTekst={<><ArbeidslisteikonGul/><span className="arbeidslistetekst"
@@ -69,6 +73,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.GUL)}
                         antall={statusTall.minArbeidslisteGul}
+                        max={statusTall.totalt}
                     />
                 </div>
             )}

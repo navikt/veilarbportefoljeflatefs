@@ -15,6 +15,7 @@ export function FiltreringStatusInavtiveBrukere(props: FiltreringStatusGruppe) {
                 handleChange={props.handleChange}
                 antall={statusTall.inaktiveBrukere}
                 checked={props.ferdigfilterListe.includes(INAKTIVE_BRUKERE)}
+                max={statusTall.totalt}
             />
         </BarInputGruppe>
     );
