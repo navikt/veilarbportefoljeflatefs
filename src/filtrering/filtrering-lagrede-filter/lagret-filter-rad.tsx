@@ -7,15 +7,17 @@ import {velgLagretFilter} from "../../ducks/filtrering";
 import {apenLagreFilterModal} from "../../ducks/lagret-filter-ui";
 import {Radio} from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
-import React from "react";
+import React, {RefObject, useRef} from "react";
 
 interface LagretFilterRadProps {
     filter: LagretFilter;
     filtergruppe: string;
+    parentDiv: RefObject<HTMLDivElement>
 }
 
-function LagretFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
+function LagretFilterRad({filter, filtergruppe, parentDiv}: LagretFilterRadProps) {
     const dispatch = useDispatch();
+    const checkboxRef = useRef<HTMLDivElement>(null);
 
     const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === "veileder"
         ? state.lagretFilterMinOversikt.valgtLagretFilter
@@ -33,8 +35,21 @@ function LagretFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
         dispatch(apenLagreFilterModal(filtergruppe))
     }
 
+    function scrollAndSelect(){
+        if (parentDiv.current != null && checkboxRef.current && valgtLagretFilter && valgtLagretFilter?.filterId === filter.filterId){
+            parentDiv.current.scrollTo(
+                {
+                    top: checkboxRef.current.offsetTop-parentDiv.current.offsetTop,
+                    left: 0,
+                    behavior: 'smooth'
+                }
+            )
+        }
+        return valgtLagretFilter?.filterId === filter.filterId
+    }
+
     return (
-        <div className="lagrede-filter__rad">
+        <div className="lagrede-filter__rad" ref={checkboxRef}>
             <Radio
                 className="lagrede-filter__filternavn"
                 key={filter.filterId}
@@ -42,7 +57,7 @@ function LagretFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
                 label={filter.filterNavn}
                 value={filter.filterId}
                 onChange={(event) => velgFilter(event)}
-                checked={valgtLagretFilter?.filterId === filter.filterId}
+                checked={scrollAndSelect()}
             />
             <RedigerKnapp
                 hidden={valgtLagretFilter?.filterId !== filter.filterId}
