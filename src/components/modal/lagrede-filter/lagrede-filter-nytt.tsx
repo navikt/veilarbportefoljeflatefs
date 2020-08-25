@@ -10,8 +10,8 @@ import {ErrorModalType, LagredeFilterVarselModal} from "./varsel-modal";
 import {lagreNyttFilter} from "../../../ducks/lagret-filter";
 import {useRequestHandler} from "../../../hooks/use-request-handler";
 
-export function LagreNytt(props: { lukkModal }) {
-    const filterValg = useSelector((state: AppState) => state.filtreringMinoversikt)
+export function LagreNytt(props: { filtergruppe: string, lukkModal }) {
+    const filterValg = useSelector((state: AppState) => props.filtergruppe === 'veileder' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
     const data = useSelector((state: AppState) => state.lagretFilter.data)
     const [filterNavn, setFilterNavn] = useState("")
     const [feilmelding, setFeilmelding] = useState({} as LagretFilterValideringsError)

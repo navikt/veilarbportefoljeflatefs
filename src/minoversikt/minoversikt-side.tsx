@@ -27,7 +27,7 @@ import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-sto
 import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
-import {MinoversiktLagreFilterKnapp} from "./minoversikt-lagre-filter-knapp";
+import {MineFilterLagreFilterKnapp} from "./mine-filter-lagre-filter-knapp";
 import {useLagreFilterController} from "./use-lagre-filter-controller";
 
 function MinoversiktSide() {
@@ -37,13 +37,13 @@ function MinoversiktSide() {
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
+    const filtergruppe = "veileder";
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
     useFetchPortefolje(ListevisningType.minOversikt);
-    useLagreFilterController();
-
+    useLagreFilterController({filtergruppe: filtergruppe});
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
@@ -61,7 +61,7 @@ function MinoversiktSide() {
                         <div className="status-filter-kolonne">
                             <FiltreringContainer
                                 filtervalg={filtervalg}
-                                filtergruppe="veileder"
+                                filtergruppe={filtergruppe}
                                 enhettiltak={tiltak}
                             />
                         </div>
@@ -69,12 +69,12 @@ function MinoversiktSide() {
                             <div className="etikett-wrapper">
                                 <FiltreringLabelContainer
                                     filtervalg={filtervalg}
-                                    filtergruppe="veileder"
+                                    filtergruppe={filtergruppe}
                                     enhettiltak={enhettiltak.data.tiltak}
                                     listevisning={listevisning}
                                     className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
                                 />
-                                <MinoversiktLagreFilterKnapp/>
+                                <MineFilterLagreFilterKnapp filtergruppe={filtergruppe}/>
                             </div>
                             <div className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <TabellOverskrift
@@ -114,7 +114,7 @@ function MinoversiktSide() {
                         </div>
                     </MinOversiktWrapper>
                 </Innholdslaster>
-                <LagreFilterModal/>
+                <LagreFilterModal filtergruppe={filtergruppe}/>
             </div>
         </DocumentTitle>
     );

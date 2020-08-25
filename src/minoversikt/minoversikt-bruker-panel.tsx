@@ -4,12 +4,11 @@ import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import Arbeidslistekategori from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
-import { BrukerModell, EtikettType, FiltervalgModell, VeilederModell } from '../model-interfaces';
+import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
 import Collapse from 'react-collapse';
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import { Kolonne } from '../ducks/ui/listevisning';
-import Etikett from '../components/tabell/etikett';
 import { useLayoutEffect } from 'react';
 import { OrNothing } from '../utils/types/types';
 import './minoversikt.less';
@@ -17,6 +16,7 @@ import { Checkbox } from 'nav-frontend-skjema';
 import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
 import { VEDTAKSTOTTE } from '../konstanter';
 import { logEvent } from '../utils/frontend-logger';
+import {Info} from "../components/tabell/etikett";
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -82,12 +82,9 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                 <div className="brukerliste__gutter-right">
                     <div className="brukerliste__etiketter">
                         <Etiketter bruker={bruker} erVedtakStotteFeaturePa={erVedtakStotteFeaturePa}/>
-                        <Etikett
-                            type={EtikettType.NYBRUKER}
-                            skalVises={bruker.nyForVeileder}
-                        >
+                        <Info hidden={!bruker.nyForVeileder} typo="undertekst">
                             Ny bruker
-                        </Etikett>
+                        </Info>
                     </div>
                     <ArbeidslisteButton
                         skalVises={arbeidslisteAktiv}

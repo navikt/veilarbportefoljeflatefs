@@ -1,14 +1,18 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER, VENTER_PA_SVAR_FRA_BRUKER,
 } from './filter-konstanter';
-import { slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg } from '../ducks/filtrering';
-import { EnhetModell, FiltervalgModell } from '../model-interfaces';
-import { Kolonne, ListevisningState } from '../ducks/ui/listevisning';
-import { pagineringSetup } from '../ducks/paginering';
+import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg} from '../ducks/filtrering';
+import {EnhetModell, FiltervalgModell} from '../model-interfaces';
+import {Kolonne, ListevisningState} from '../ducks/ui/listevisning';
+import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
+import {useEffect} from "react";
+import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
+import {LAGREDE_FILTER} from "../konstanter";
+import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -45,6 +49,16 @@ function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
 function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, actions: {slettAlle, slettEnkelt}, filtergruppe, className}: FiltreringLabelContainerProps) {
     let muligMenIkkeValgt: boolean;
     let kolonne: Kolonne | null;
+
+    const dispatch = useDispatch();
+    const lagredeFilterFeatureToggleErPa = useFeatureSelector()(LAGREDE_FILTER);
+
+    useEffect(() => {
+        if (lagredeFilterFeatureToggleErPa) {
+            dispatch(hentLagredeFilterForVeileder());
+        }
+    }, [dispatch, lagredeFilterFeatureToggleErPa])
+
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
             if (key === 'fodselsdagIMnd') {
@@ -133,10 +147,10 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                                        harMuligMenIkkeValgtKolonne={false} skalHaKryssIkon={false}/>;
 
     return (
-        <section className={className}>
+        <div className={className}>
             {filterElementer}
             {filterElementer.length >= 3 ? fjernAlle : null}
-        </section>
+        </div>
     );
 }
 

@@ -13,10 +13,11 @@ import {
 } from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {AlertStripeFeil} from "nav-frontend-alertstriper";
-
+import { ThunkDispatch } from "redux-thunk";
+import {AnyAction} from "redux";
 
 interface FilteringVeilederGrupperProps {
-    filtergruppe?: string;
+    filtergruppe: string;
 }
 
 function FilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps) {
@@ -26,14 +27,18 @@ function FilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps)
     const lagretFilterState = useSelector((state: AppState) => state.veiledergrupperLagretFilter);
     const lagretFilter = lagretFilterState.data;
 
-    const dispatch = useDispatch();
+    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const enhet = useEnhetSelector();
 
     const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
-        enhet && dispatch(lageNyGruppe({
+        const endringer = {
             filterNavn: gruppeNavn,
             filterValg
-        }, enhet)).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, filtergruppe)));
+        }
+        if(enhet) {
+            dispatch(lageNyGruppe(endringer, enhet))
+                .then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, filtergruppe)));
+        }
     };
 
     const sortertVeiledergruppe = lagretFilter.sort((a, b) => a.filterNavn.localeCompare(b.filterNavn));

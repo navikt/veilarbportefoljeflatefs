@@ -73,7 +73,7 @@ export function doThenDispatch(fn, {OK, FEILET, PENDING}) {
 }
 
 export const stateSliceToNameMap = {
-    filtrering: 'enhet',
+    filtreringEnhetensOversikt: 'enhet',
     filtreringMinoversikt: 'veileder',
     filtreringVeilederoversikt: 'veiledere'
 };

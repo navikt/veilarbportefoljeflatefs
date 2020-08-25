@@ -300,7 +300,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                         const filtervalg = getState().filtreringMinoversikt;
                         dispatch(hentPortefoljeForVeileder(enhet, veilederIdent, rekkefolge, sorteringsfelt, filtervalg))
                     } else {
-                        const filtervalg = getState().filtrering;
+                        const filtervalg = getState().filtreringEnhetensOversikt;
                         dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filtervalg))
                     }
 

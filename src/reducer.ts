@@ -13,6 +13,7 @@ import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import veiledergrupperLagretFilterReducer, {VeiledergrupperLagretFilterState} from './ducks/veiledergrupper_filter';
 import lagretFilterReducer, {LagretFilterState} from './ducks/lagret-filter';
+import lagretFilterUI, {LagretFilterUIState} from './ducks/lagret-filter-ui';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
 import listevisningReducer, {
@@ -25,6 +26,7 @@ import featuresReducer, {FeaturesState} from './ducks/features';
 import toastReducer, {ToastState} from './store/toast/reducer';
 import {FiltervalgModell} from "./model-interfaces";
 import inloggetVeilederReducer, {InloggetVeilederState} from "./ducks/inlogget-veileder";
+import sidebarReducer, {initialStateSidebar} from "./ducks/sidebar-tab";
 
 
 function named(name, reducer) {
@@ -45,6 +47,8 @@ export interface AppState {
     ui: {
         listevisningMinOversikt: ListevisningState;
         listevisningEnhetensOversikt: ListevisningState;
+        sidebarMinOversikt: any;
+        sidebarEnhetensOversikt: any;
     };
     valgtEnhet: ValgtEnhetState;
     portefolje: PortefoljeState;
@@ -53,7 +57,7 @@ export interface AppState {
     veiledere: VeiledereState;
     portefoljestorrelser: PortefoljeStorrelser;
     statustall: StatustallState;
-    filtrering: FiltervalgModell;
+    filtreringEnhetensOversikt: FiltervalgModell;
     filtreringMinoversikt: FiltervalgModell;
     filtreringVeilederoversikt: FiltervalgModell;
     modal: any;
@@ -64,6 +68,8 @@ export interface AppState {
     features: FeaturesState;
     veiledergrupperLagretFilter: VeiledergrupperLagretFilterState;
     lagretFilter: LagretFilterState;
+    lagretFilterMinOversikt: LagretFilterUIState;
+    lagretFilterEnhetensOversikt: LagretFilterUIState;
     toastReducer: ToastState;
     inloggetVeileder: InloggetVeilederState;
 }
@@ -71,7 +77,9 @@ export interface AppState {
 export default combineReducers<AppState>({
     ui: combineReducers({
         listevisningMinOversikt: persistent('minOversiktListevisningState', window.location, named(ListevisningType.minOversikt, listevisningReducer), initialStateMinOversikt),
-        listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', window.location, named(ListevisningType.enhetensOversikt, listevisningReducer), initialStateEnhetensOversikt)
+        listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', window.location, named(ListevisningType.enhetensOversikt, listevisningReducer), initialStateEnhetensOversikt),
+        sidebarMinOversikt: persistent('minOversiktSidebar', window.location, named(ListevisningType.minOversikt, sidebarReducer), initialStateSidebar),
+        sidebarEnhetensOversikt: persistent('enhetensOversiktSidebar', window.location, named(ListevisningType.enhetensOversikt, sidebarReducer), initialStateSidebar)
     }),
     valgtEnhet: valgtEnhetReducer,
     portefolje: portefoljeReducer,
@@ -80,9 +88,8 @@ export default combineReducers<AppState>({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     statustall: statustallReducer,
-    filtrering: persistent('enhetsState', window.location, named('enhet', filtreringReducer), initialState),
-    filtreringMinoversikt: persistent('veilederState', window.location,
-        named('veileder', filtreringReducer), initialState),
+    filtreringEnhetensOversikt: persistent('enhetsState', window.location, named('enhet', filtreringReducer), initialState),
+    filtreringMinoversikt: persistent('veilederState', window.location, named('veileder', filtreringReducer), initialState),
     filtreringVeilederoversikt: named('veiledere', filtreringReducer),
     modal: modalReducer,
     serverfeilModal: serverfeilModalReducer,
@@ -92,6 +99,8 @@ export default combineReducers<AppState>({
     features: featuresReducer,
     veiledergrupperLagretFilter: veiledergrupperLagretFilterReducer,
     lagretFilter: lagretFilterReducer,
+    lagretFilterMinOversikt: named('veileder', lagretFilterUI),
+    lagretFilterEnhetensOversikt: named('enhet', lagretFilterUI),
     toastReducer: toastReducer,
     inloggetVeileder: inloggetVeilederReducer
 });

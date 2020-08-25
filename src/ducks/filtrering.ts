@@ -1,5 +1,6 @@
 import {FiltervalgModell} from '../model-interfaces';
-import {LagretFilter, VELG_LAGRET_FILTER} from "./lagret-filter";
+import {LagretFilter} from "./lagret-filter";
+import {VELG_LAGRET_FILTER} from "./lagret-filter-ui";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -42,7 +43,17 @@ export const initialState: FiltervalgModell = {
     servicegruppe: [],
     rettighetsgruppe: [],
     veiledere: [],
-    aktiviteter: {} as FiltreringAktiviteterValg,
+    aktiviteter: {
+        BEHANDLING: AktiviteterValg.NA,
+        EGEN: AktiviteterValg.NA,
+        GRUPPEAKTIVITET: AktiviteterValg.NA,
+        IJOBB: AktiviteterValg.NA,
+        MOTE: AktiviteterValg.NA,
+        SOKEAVTALE: AktiviteterValg.NA,
+        STILLING: AktiviteterValg.NA,
+        TILTAK: AktiviteterValg.NA,
+        UTDANNINGAKTIVITET: AktiviteterValg.NA
+    } as FiltreringAktiviteterValg,
     tiltakstyper: [],
     ytelse: null,
     manuellBrukerStatus: [],
@@ -62,7 +73,7 @@ function fjern(verdi, fjernVerdi) {
     } else if (fjernVerdi && typeof verdi === 'object') {
         return Object.entries(verdi)
             .filter(([key]) => key !== fjernVerdi)
-            .filter(([_,value]) => value !== AktiviteterValg.NA)
+            .filter(([_, value]) => value !== AktiviteterValg.NA)
             .reduce((acc, [key, value]) => ({...acc, [key]: value}), {});
     } else if (fjernVerdi === null) {
         return null;
@@ -108,16 +119,16 @@ export default function reducer(state: FiltervalgModell = initialState, action):
     }
 }
 
-export function velgLagretFilter(filterVerdi: LagretFilter) {
+export function velgLagretFilter(filterVerdi: LagretFilter, filtergruppe: string) {
     return {
         type: VELG_LAGRET_FILTER,
         data: filterVerdi,
-        name: 'veileder'
+        name: filtergruppe
     }
 }
 
 export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet') {
-    if (Array.isArray(filterVerdi)){
+    if (Array.isArray(filterVerdi)) {
         filterVerdi.sort()
     }
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {

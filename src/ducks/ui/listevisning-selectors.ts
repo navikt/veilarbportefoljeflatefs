@@ -53,7 +53,7 @@ function harIkkeValgtTiltakstype(tiltakstyper: string[]): boolean {
 export function getFiltertingState(state: AppState, name: ListevisningType): FiltervalgModell {
     switch (name) {
         case ListevisningType.enhetensOversikt:
-            return state.filtrering;
+            return state.filtreringEnhetensOversikt;
         case ListevisningType.minOversikt:
             return state.filtreringMinoversikt;
         case ListevisningType.veilederOversikt:

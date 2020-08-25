@@ -9,7 +9,7 @@ import {OrNothing} from "../../../utils/types/types";
 import hiddenIf from "../../hidden-if/hidden-if";
 import {Meny} from "./lagrede-filter-meny";
 import {FnrFeil} from "./lagrede-filter-fnr-feil";
-import {lukkLagreFilterModal} from "../../../ducks/lagret-filter";
+import {lukkLagreFilterModal} from "../../../ducks/lagret-filter-ui";
 
 export enum Visningstype {
     MENY,
@@ -34,8 +34,9 @@ const HiddenIfLagreNytt = hiddenIf(LagreNytt)
 const HiddenIfOppdaterFilter = hiddenIf(OppdaterFilter);
 const HiddenIfFnrFeil = hiddenIf(FnrFeil)
 
-export function LagreFilterModal() {
-    const {sisteValgteLagredeFilter, data, valgtLagretFilter, erModalApen} = useSelector((state: AppState) => state.lagretFilter)
+export function LagreFilterModal(props: { filtergruppe: string }) {
+    const {sisteValgteLagredeFilter, valgtLagretFilter, erModalApen} = useSelector((state: AppState) => (props.filtergruppe === 'veileder') ? state.lagretFilterMinOversikt : state.lagretFilterEnhetensOversikt)
+    const data = useSelector((state: AppState) => state.lagretFilter.data)
     const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(Visningstype.MENY)
@@ -43,7 +44,7 @@ export function LagreFilterModal() {
     const dispatch = useDispatch();
 
     const lukkModal = () => {
-        dispatch(lukkLagreFilterModal())
+        dispatch(lukkLagreFilterModal(props.filtergruppe))
     }
 
     useEffect(() => {
@@ -66,17 +67,16 @@ export function LagreFilterModal() {
                               setValgtVisningstype={setValgtVisningstype}
                               sisteFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
                 />
-
                 <HiddenIfLagreNytt hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
                                    lukkModal={lukkModal}
+                                   filtergruppe={props.filtergruppe}
                 />
-
                 <HiddenIfOppdaterFilter hidden={valgtVisningstype !== Visningstype.OPPDATER}
                                         gammeltFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
                                         filterId={sisteValgteLagredeFilter!}
                                         lukkModal={lukkModal}
+                                        filtergruppe={props.filtergruppe}
                 />
-
                 <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL}/>
             </div>
         </Modal>

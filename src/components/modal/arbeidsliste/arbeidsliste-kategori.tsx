@@ -40,7 +40,7 @@ function ArbeidslisteKategori(props: { name: string, index: string }) {
                             onChange={() => form.setFieldValue(props.name, KategoriModell.GRONN)}
                             checked={field.value === KategoriModell.GRONN}
                             index={props.index}
-                            title="Arbeidslisteikon gronn"
+                            title="Arbeidslisteikon grønn"
                         />
                         <Arbeidslistekategori
                             value={KategoriModell.GUL}

@@ -11,7 +11,6 @@ function FiltreringStatusNyeBrukere(props: FiltreringStatusGruppe) {
     return (
         <BarInputCheckbox
             filterNavn="nyeBrukere"
-            max={statusTall.totalt}
             antall={statusTall.nyeBrukereForVeileder}
             handleChange={props.handleChange}
             checked={props.ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}

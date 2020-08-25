@@ -22,7 +22,7 @@ import { PopoverOrientering } from 'nav-frontend-popover';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
-    filtergruppe?: string;
+    filtergruppe: string;
 }
 
 export function FiltreringStatus(props: FiltreringStatusProps) {

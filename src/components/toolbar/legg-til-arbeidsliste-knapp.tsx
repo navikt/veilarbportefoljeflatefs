@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import { VIS_ARBEIDSLISTE_MODAL, visArbeidslisteModal } from '../../ducks/modal';
+import {useDispatch, useSelector} from 'react-redux';
+import {VIS_ARBEIDSLISTE_MODAL, visArbeidslisteModal} from '../../ducks/modal';
 import './toolbar.less';
-import { useLocation, useParams } from 'react-router';
-import { BrukerModell } from '../../model-interfaces';
-import { AppState } from '../../reducer';
-import { useIdentSelector } from '../../hooks/redux/use-inlogget-ident';
-import { ReactComponent as ArbeidslisteIkonLinje } from '../ikoner/arbeidsliste/arbeidslisteikon-linje.svg';
-import { Normaltekst } from 'nav-frontend-typografi';
+import {useLocation, useParams} from 'react-router';
+import {BrukerModell} from '../../model-interfaces';
+import {AppState} from '../../reducer';
+import {useIdentSelector} from '../../hooks/redux/use-inlogget-ident';
+import {ReactComponent as ArbeidslisteIkonLinje} from '../ikoner/arbeidsliste/arbeidslisteikon-linje.svg';
+import {Normaltekst} from 'nav-frontend-typografi';
+import ArbeidslisteModal from "../modal/arbeidsliste/arbeidsliste-modal";
 
 interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
@@ -17,7 +17,7 @@ interface LeggTilArbeidslisteProps {
 function LeggTilArbeidsliste(props: LeggTilArbeidslisteProps) {
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
     const modalSkalVises = useSelector((state: AppState) => state.modal.modal) === VIS_ARBEIDSLISTE_MODAL;
-    const inloggetVeielder = useIdentSelector();
+    const innloggetVeileder = useIdentSelector();
     const dispatch = useDispatch();
 
     const {ident} = useParams();
@@ -26,9 +26,9 @@ function LeggTilArbeidsliste(props: LeggTilArbeidslisteProps) {
 
     const valgteBrukere = portefolje.brukere.filter((bruker) => bruker.markert === true);
 
-    const skalSkjules = inloggetVeielder && pathname === '/portefolje'
+    const skalSkjules = innloggetVeileder && pathname === '/portefolje'
         ? ident
-            ? ident !== inloggetVeielder.ident
+            ? ident !== innloggetVeileder.ident
             : false
         : true;
 

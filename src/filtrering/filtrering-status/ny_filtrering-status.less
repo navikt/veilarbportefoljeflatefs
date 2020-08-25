@@ -1,0 +1,59 @@
+@import "~nav-frontend-core/less/core";
+
+.veilarbportefoljeflatefs {
+
+  .ny__filtrering-oversikt {
+    .skjema__input {
+      padding: 0.15rem 0;
+    }
+
+    &__totalt-antall {
+      font-weight: 800 !important;
+    }
+  }
+
+  .filter-checkboks-container {
+    border-bottom: 1px solid @navGra60;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .permittering_checkboksgruppe {
+    border-top: 1px solid @navGra60;
+    margin-top: 1rem;
+    padding-top: 1rem;
+
+    .hjelpetekst__wrapper {
+      display: grid;
+      grid-template-columns: auto fit-content(100%);
+
+      .popover {
+        max-width: 30rem;
+      }
+    }
+
+    .hjelpetekst {
+      height: 16px;
+      width: 16px;
+      grid-column: 2;
+
+      &__innhold {
+        padding: 0 1rem;
+      }
+
+      &__tooltip {
+        z-index: 2000;
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .hjelpetekst__tooltip {
+      margin-right: 4rem;
+    }
+
+    .hjelpetekst__wrapper .popover {
+      left: -4rem;
+    }
+  }
+}

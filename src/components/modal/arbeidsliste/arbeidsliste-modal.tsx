@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import NavFrontendModal from 'nav-frontend-modal';
-import { skjulModal, VIS_ARBEIDSLISTE_MODAL } from '../../../ducks/modal';
-import { markerAlleBrukere } from '../../../ducks/portefolje';
+import {skjulModal} from '../../../ducks/modal';
+import {markerAlleBrukere} from '../../../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
-import { BrukerModell, Status } from '../../../model-interfaces';
+import {BrukerModell, Status} from '../../../model-interfaces';
 import './arbeidsliste.less';
-import { AppState } from '../../../reducer';
-import { STATUS } from '../../../ducks/utils';
-import { LasterModal } from '../lastermodal/laster-modal';
+import {AppState} from '../../../reducer';
+import {STATUS} from '../../../ducks/utils';
+import {LasterModal} from '../lastermodal/laster-modal';
 import ModalHeader from '../modal-header/modal-header';
-import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
+import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 
 interface ArbeidslisteModalProps {
     isOpen: boolean;
@@ -41,15 +41,6 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
         };
         this.lukkModal = this.lukkModal.bind(this);
         this.setFormIsDirty = this.setFormIsDirty.bind(this);
-    }
-
-    componentWillReceiveProps(nextProps: ArbeidslisteModalProps) {
-        if (nextProps.isOpen !== this.state.isOpen) {
-            this.setState({isOpen: nextProps.isOpen});
-        }
-        if (nextProps.arbeidslisteStatus !== this.props.arbeidslisteStatus) {
-            this.setState({laster: nextProps.arbeidslisteStatus !== undefined && nextProps.arbeidslisteStatus !== STATUS.OK});
-        }
     }
 
     setFormIsDirty(formIsDirty: boolean) {
@@ -128,7 +119,6 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
 }
 
 const mapStateToProps = (state: AppState) => ({
-    visModal: state.modal.modal === VIS_ARBEIDSLISTE_MODAL,
     innloggetVeileder: state.inloggetVeileder.data!.ident,
     arbeidslisteStatus: state.arbeidsliste.status
 });

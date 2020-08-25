@@ -3,7 +3,27 @@ import {isEmptyArray, isObject} from "formik";
 import {LagretFilterValideringsError} from "./lagre-filter-modal";
 
 export function lagredeFilterListerErLik(lagretFilter: FiltervalgModell, nyttFilter: FiltervalgModell): boolean {
-    return JSON.stringify(lagretFilter) === JSON.stringify(nyttFilter);
+    return deepEqual(lagretFilter, nyttFilter)
+}
+
+function deepEqual(object1, object2) {
+    const keys1 = Object.keys(object1);
+    const keys2 = Object.keys(object2);
+
+    if (keys1.length !== keys2.length) {
+        return false;
+    }
+
+    for (const key of keys1) {
+        const val1 = object1[key];
+        const val2 = object2[key];
+        const areObjects = isObject(val1) && isObject(val2);
+        if ((areObjects && !deepEqual(val1, val2)) || (!areObjects && val1 !== val2)) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 export function erTomtObjekt(objekt): boolean {
@@ -30,7 +50,7 @@ export function antallFilter(minOversiktObjekt) {
             , 0);
 }
 
-export function feilValidering (filterNavn, filterValg, eksisterendeFilter, filterId?) {
+export function feilValidering(filterNavn, filterValg, eksisterendeFilter, filterId?) {
     let feilmelding: any = {} as LagretFilterValideringsError
 
     filterNavn = filterNavn.trim()
@@ -47,7 +67,7 @@ export function feilValidering (filterNavn, filterValg, eksisterendeFilter, filt
         feilmelding.filterNavn = "Filternavn er allerede i bruk."
     }
 
-    if (eksisterendeFilter.find(elem => elem.filterId !== filterId && lagredeFilterListerErLik(elem.filterValg,filterValg))){
+    if (eksisterendeFilter.find(elem => elem.filterId !== filterId && lagredeFilterListerErLik(elem.filterValg, filterValg))) {
         feilmelding.filterNavn = "Valgt filter er allerede lagret."
     }
 

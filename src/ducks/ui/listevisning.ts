@@ -1,5 +1,4 @@
 import { Dispatch } from 'redux';
-import { AppState } from '../../reducer';
 import { getMuligeKolonner } from './listevisning-selectors';
 import {FiltervalgModell} from "../../model-interfaces";
 
@@ -120,7 +119,7 @@ export const avvelgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({
 });
 export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name});
 
-export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction, AppState>, filterValg: FiltervalgModell, name: ListevisningType) => {
+export const oppdaterAlternativer = (dispatch: Dispatch<OppdaterListevisningAction>, filterValg: FiltervalgModell, name: ListevisningType) => {
     const nyeMuligeAlternativer = getMuligeKolonner(filterValg, name);
 
     dispatch({
