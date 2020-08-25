@@ -56,6 +56,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
                         key={idx}
                         filter={filter}
                         filtergruppe={props.filtergruppe}
+                        parentDiv={outerDivRef}
                     />
                 )}
             </div>)
