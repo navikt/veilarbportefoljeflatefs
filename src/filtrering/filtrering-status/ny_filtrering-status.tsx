@@ -2,23 +2,24 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
-import {FiltreringStatusBehovsVurdering} from './filtrering-status-components/behov-og-arbeidsevnevurdering';
-import {FiltreringStatusAktiviteter} from './filtrering-status-components/aktiviteter';
-import {FiltreringStatusDialog} from './filtrering-status-components/dialog-gruppe';
-import {FiltreringStatusInavtiveBrukere} from './filtrering-status-components/inaktivebrukere';
-import FiltreringStatusNyeBrukere from './filtrering-status-components/nyebrukere';
-import FiltreringStatusUfordelteBrukere from './filtrering-status-components/ufordelte-brukere';
-import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avtalt-mote-med-nav';
-import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
 import {FiltervalgModell} from '../../model-interfaces';
 import './filtrering-status.less';
 import {pagineringSetup} from '../../ducks/paginering';
-import FiltreringStatusIkkePermitterteEtterNiendeBrukere from './filtrering-status-components/ikke-permitterte-brukere';
-import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-components/permitterte-brukere';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {MIN_ARBEIDSLISTE,} from '../filter-konstanter';
 import {PopoverOrientering} from 'nav-frontend-popover';
 import {NyFiltreringStatusContainer} from "./filtrering-status-components/ny_filtrering-wrapper";
+import {NyFiltreringStatusAktiviteter} from "./filtrering-status-components/ny_aktiviteter";
+import NyFiltreringStatusNyeBrukere from "./filtrering-status-components/ny_nye-brukere";
+import NyFiltreringStatusUfordelteBrukere from "./filtrering-status-components/ny_ufordelte-brukere";
+import NyFiltreringStatusPermitterteEtterNiendeBrukere from "./filtrering-status-components/ny_permitterte-brukere";
+import {NyFiltreringStatusBehovsVurdering} from "./filtrering-status-components/ny_behov-og-arbeidsevnevurdering";
+import {NyFiltreringStatusDialog} from "./filtrering-status-components/ny_dialog-gruppe";
+import NyFiltreringStatusAvtaltMoteMedNav from "./filtrering-status-components/ny_avtalt-mote-med-nav";
+import {NyFiltreringStatusInavtiveBrukere} from "./filtrering-status-components/ny_inaktive-brukere";
+import NyFilterStatusMinArbeidsliste from "./filtrering-status-components/ny_arbeidsliste";
+import NyFiltreringStatusIkkePermitterteEtterNiendeBrukere
+    from "./filtrering-status-components/ny_ikke-permitterte-brukere";
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -64,12 +65,12 @@ export function NyFiltreringStatus(props: FiltreringStatusProps) {
     return (
         <NyFiltreringStatusContainer>
             <div className="filter-checkboks-container">
-                <FiltreringStatusNyeBrukere
+                <NyFiltreringStatusNyeBrukere
                     handleChange={handleCheckboxChange}
                     ferdigfilterListe={ferdigfilterListe}
                     hidden={props.filtergruppe !== 'veileder'}
                 />
-                <FiltreringStatusUfordelteBrukere
+                <NyFiltreringStatusUfordelteBrukere
                     handleChange={handleCheckboxChange}
                     ferdigfilterListe={ferdigfilterListe}
                     hidden={props.filtergruppe === 'veileder'}
@@ -86,37 +87,37 @@ export function NyFiltreringStatus(props: FiltreringStatusProps) {
                             <p>Merk at situasjonen kan ha endret seg for permitterte brukere.</p>
                         </Hjelpetekst>
                     </div>
-                    <FiltreringStatusIkkePermitterteEtterNiendeBrukere
+                    <NyFiltreringStatusIkkePermitterteEtterNiendeBrukere
                         handleChange={handleCheckboxChange}
                         ferdigfilterListe={ferdigfilterListe}
                     />
-                    <FiltreringStatusPermitterteEtterNiendeBrukere
+                    <NyFiltreringStatusPermitterteEtterNiendeBrukere
                         handleChange={handleCheckboxChange}
                         ferdigfilterListe={ferdigfilterListe}
                     />
                 </div>
             </div>
-            <FiltreringStatusBehovsVurdering
+            <NyFiltreringStatusBehovsVurdering
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
             />
-            <FiltreringStatusDialog
+            <NyFiltreringStatusDialog
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
             />
-            <FiltreringStatusAvtaltMoteMedNav
+            <NyFiltreringStatusAvtaltMoteMedNav
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
             />
-            <FiltreringStatusAktiviteter
+            <NyFiltreringStatusAktiviteter
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
             />
-            <FiltreringStatusInavtiveBrukere
+            <NyFiltreringStatusInavtiveBrukere
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
             />
-            <FilterStatusMinArbeidsliste
+            <NyFilterStatusMinArbeidsliste
                 ferdigfilterListe={kategoriliste}
                 handleChange={handleRadioButtonChange}
                 handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
