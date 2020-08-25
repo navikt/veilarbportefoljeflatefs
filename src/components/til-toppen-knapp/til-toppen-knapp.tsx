@@ -3,6 +3,8 @@ import throttle from 'lodash.throttle';
 import classNames from 'classnames';
 import './til-toppen-knapp.less'
 import {ReactComponent as TilToppenIkonBla} from '../ikoner/til-toppen-bla.svg';
+import {logEvent} from "../../utils/frontend-logger";
+import {finnSideNavn} from "../../middleware/metrics-middleware";
 
 export const TilToppenKnapp = () => {
     const [scrollPosition, setScrollPosition] = useState<number | undefined>();
@@ -19,6 +21,7 @@ export const TilToppenKnapp = () => {
         if (knappRef && knappRef.current) {
             knappRef.current.blur();
         }
+        logEvent('portefolje.metrikker.tiltoppenknapp', {sideNavn: finnSideNavn()})
     };
 
     useEffect(() => {

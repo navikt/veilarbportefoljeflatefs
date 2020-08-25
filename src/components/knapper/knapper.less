@@ -1,36 +1,35 @@
 @import "~nav-frontend-core/less/core";
 
 .veilarbportefoljeflatefs {
-    .rediger-knapp {
-        padding: 0.2rem;
-        background: transparent;
-        border: none;
-        height: fit-content;
+  .rediger-knapp {
+    background: transparent;
+    border: none;
+    height: fit-content;
+  }
+
+  .rediger-knapp:focus {
+    outline: none;
+    border-radius: 4px;
+    border: 2px solid @fokusFarge;
+    padding-bottom: 0;
+  }
+
+  .rediger-knapp:hover {
+    #pen {
+      fill: @navBla;
     }
 
-    .rediger-knapp:focus {
-        outline: none;
-        border-radius: 4px;
-        border: 2px solid @fokusFarge;
-        padding-bottom: 0;
+    #symbol {
+      stroke: none;
     }
+  }
 
-    .rediger-knapp:hover {
-        #pen {
-            fill: @navBla;
-        }
-
-        #symbol {
-            stroke: none;
-        }
-    }
-
-    .veiledergruppe-knapp {
-        padding: 0.3rem 0.5rem;
-        text-transform: none;
-    }
+  .veiledergruppe-knapp {
+    padding: 0.3rem 0.5rem;
+    text-transform: none;
+  }
 }
 
 .ny-gruppe-knapp {
-    margin: -2px 0;
+  margin: -2px 0;
 }
