@@ -9,7 +9,11 @@ import {STATUS} from "../../ducks/utils";
 function FiltreringLagredeFilter(props: { filtergruppe: string }) {
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const lagretFilter = lagretFilterState.data;
-    const sortertLagredeFilter = lagretFilter.sort((a, b) => (a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : (a.filterNavn.toLowerCase() > b.filterNavn.toLowerCase() ? 1 : 0)));
+
+    const sortering = () => {
+        return lagretFilter.sort((a, b) => a.filterNavn.toLowerCase()
+            .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
+    }
 
     return (
         <>
@@ -18,7 +22,7 @@ function FiltreringLagredeFilter(props: { filtergruppe: string }) {
                 ? <AlertStripeFeil>
                     Det oppsto en feil, og mine filter kunne ikke hentes fram. Prøv igjen senere.
                 </AlertStripeFeil>
-                : <LagredeFilterInnhold lagretFilter={sortertLagredeFilter}
+                : <LagredeFilterInnhold lagretFilter={sortering()}
                                         filtergruppe={props.filtergruppe}/>}
         </>
     );
