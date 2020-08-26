@@ -12,10 +12,12 @@ import React, {RefObject, useRef} from "react";
 interface LagretFilterRadProps {
     filter: LagretFilter;
     filtergruppe: string;
-    parentDiv: RefObject<HTMLDivElement>
+    parentDiv: RefObject<HTMLDivElement>;
+    autoscroll?: boolean;
 }
 
-function LagretFilterRad({filter, filtergruppe, parentDiv}: LagretFilterRadProps) {
+function LagretFilterRad({filter, filtergruppe, parentDiv, autoscroll}: LagretFilterRadProps) {
+    autoscroll = (autoscroll == undefined) ? true: autoscroll;
     const dispatch = useDispatch();
     const checkboxRef = useRef<HTMLDivElement>(null);
 
@@ -36,7 +38,7 @@ function LagretFilterRad({filter, filtergruppe, parentDiv}: LagretFilterRadProps
     }
 
     function scrollAndSelect(){
-        if (parentDiv.current != null && checkboxRef.current && valgtLagretFilter && valgtLagretFilter?.filterId === filter.filterId){
+        if (autoscroll && parentDiv.current != null && checkboxRef.current && valgtLagretFilter && valgtLagretFilter?.filterId === filter.filterId){
             parentDiv.current.scrollTo(
                 {
                     top: checkboxRef.current.offsetTop-parentDiv.current.offsetTop,

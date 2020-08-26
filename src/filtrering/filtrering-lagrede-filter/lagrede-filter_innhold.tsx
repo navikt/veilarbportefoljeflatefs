@@ -1,11 +1,13 @@
-import React, {useEffect, useRef} from 'react';
-import {LagretFilter} from '../../ducks/lagret-filter';
+import React, { useEffect, useRef, useState } from 'react';
+import { LagretFilter } from '../../ducks/lagret-filter';
 import './lagrede-filter_innhold.less'
-import {PopoverOrientering} from "nav-frontend-popover";
+import { PopoverOrientering } from "nav-frontend-popover";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 import hiddenIf from "../../components/hidden-if/hidden-if";
-import {Normaltekst} from "nav-frontend-typografi";
-import LagretFilterRad from "./lagret-filter-rad";
+import { Normaltekst } from "nav-frontend-typografi";
+import DragAndDropRow from './drag-and-drop-row';
+import DragAndDropContainer from './drag-and-drop-container';
+import LagretFilterRad from './lagret-filter-rad';
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -48,17 +50,47 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         }
     });
 
+    const [src, setSrc] = useState(-1); // TODO: flytt til DragAndDropContainer
+    const [dest, setDest] = useState(-1); // TODO: flytt til DragAndDropContainer
+    const [dragAndDropList, setdragAndDropList] = useState(filtrertListe()); // TODO: flytt til DragAndDropContainer
+
+    const isDragging = (src !== -1)
+    console.log("Is dragging: " + isDragging)
     const hentFiltrertListeinnhold = () => {
+        let liste
+        if (dragAndDropList.length == 0) {
+            liste = filtrertListe()
+            console.log(liste)
+            setdragAndDropList(filtrertListe())
+        } else {
+            liste = dragAndDropList;
+        }
         return (
             <div className='lagrede-filter__valgfelt' ref={outerDivRef}>
-                {filtrertListe().map((filter, idx) =>
-                    <LagretFilterRad
-                        key={idx}
-                        filter={filter}
-                        filtergruppe={props.filtergruppe}
-                        parentDiv={outerDivRef}
-                    />
-                )}
+                <DragAndDropContainer
+                    liste={liste}
+                    setdragAndDropList={setdragAndDropList}
+                    setIsDestination={setDest}
+                    setIsSource={setSrc}
+                    destIndex={dest}
+                    sourceIndex={src}>
+                    {liste.map((filter, idx) =>
+                        <DragAndDropRow key={idx}
+                            idx={idx}
+                            setIsDestination={setDest}
+                            setIsSource={setSrc}
+                            destIndex={dest}
+                            sourceIndex={src}
+                        >
+                            <LagretFilterRad
+                                filter={filter}
+                                filtergruppe={props.filtergruppe}
+                                parentDiv={outerDivRef}
+                                autoscroll={!isDragging}
+                            />
+                        </DragAndDropRow>
+                    )}
+                </DragAndDropContainer>
             </div>)
     }
 
@@ -80,7 +112,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         <>
             <div className="hjelpetekst__wrapper">
                 <HiddenHjelpetekst type={PopoverOrientering.Over}
-                                   hidden={filtrertListe().length === props.lagretFilter.length}>
+                    hidden={filtrertListe().length === props.lagretFilter.length}>
                     {erPaMinOversikt && "Filter som inneholder Veiledergrupper og “Ufordelte brukere” er ikke tilgjengelig i Min oversikt."}
                     {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og “Nye brukere” er ikke tilgjengelig i Enhetens oversikt."}
                 </HiddenHjelpetekst>

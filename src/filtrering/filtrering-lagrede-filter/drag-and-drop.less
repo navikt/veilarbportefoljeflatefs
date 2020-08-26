@@ -1,0 +1,32 @@
+@dropSpaceMargin: 0.4rem;
+@dropSpacePadding: 0.2rem;
+
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+
+.drag-and-drop-container {
+  list-style-type: none;
+}
+
+.drag-and-drop-row {
+  cursor: move;
+}
+
+.drag-and-drop-row.over-from-below {
+  padding-top: @dropSpacePadding;
+  margin-top: @dropSpaceMargin;
+  border-top: 2px solid blue;
+}
+
+.drag-and-drop-row.over-from-above {
+  padding-bottom: @dropSpacePadding;
+  margin-bottom: @dropSpaceMargin;
+  border-bottom: 2px solid blue;
+}
