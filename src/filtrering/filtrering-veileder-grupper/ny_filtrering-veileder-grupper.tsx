@@ -38,7 +38,8 @@ function NyFilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProp
             .then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, filtergruppe)));
     };
 
-    const sortertVeiledergruppe = lagretFilter.sort((a, b) => a.filterNavn.localeCompare(b.filterNavn));
+    const sortertVeiledergruppe = lagretFilter.sort((a, b) => a.filterNavn.toLowerCase()
+        .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
 
     const veilederGrupperOK = () => {
         return lagretFilter.length > 0
