@@ -88,7 +88,8 @@ function Sidebar(props: SidebarProps) {
     const dispatch = useDispatch();
     const erLagredeFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
     const lagretFilter = lagretFilterState.data;
-    const sortertLagredeFilter = lagretFilter.sort((a, b) => (a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : (a.filterNavn.toLowerCase() > b.filterNavn.toLowerCase() ? 1 : 0)));
+    const sortertLagredeFilter = lagretFilter.sort((a, b) => a.filterNavn.toLowerCase()
+            .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
 
     useEffect(() => {
         const nyttLagretFilter = lagretFilterState.handlingType === HandlingsType.NYTT && lagretFilterState.status === STATUS.OK;
