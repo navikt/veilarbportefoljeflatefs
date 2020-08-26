@@ -15,11 +15,11 @@ interface DragAndDropContainerProps {
 
 function DragAndDropContainer(props: DragAndDropContainerProps) {
     const dragContainer = useRef<HTMLUListElement>(null);
-    const [dragIsInsideElement, setdDagIsInsideElement] = useState(false);
+    const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const handleDragStart = (e) => {
         if (dragContainer.current) {
             if (dragContainer.current.contains(e.target) && !dragIsInsideElement) {
-                setdDagIsInsideElement(true)
+                setdDragIsInsideElement(true)
             }
         }
     };
@@ -27,7 +27,7 @@ function DragAndDropContainer(props: DragAndDropContainerProps) {
     const handleDragLeave = (e) => {
         if (dragContainer.current) {
             if (!dragContainer.current.contains(e.target) && dragIsInsideElement) {
-                setdDagIsInsideElement(false)
+                setdDragIsInsideElement(false)
             }
         }
     };
