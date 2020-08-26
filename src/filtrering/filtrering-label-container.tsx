@@ -11,7 +11,7 @@ import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {useEffect} from "react";
 import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
-import {LAGREDE_FILTER} from "../konstanter";
+import {MINE_FILTER} from "../konstanter";
 import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 interface FiltreringLabelContainerProps {
@@ -51,7 +51,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
     let kolonne: Kolonne | null;
 
     const dispatch = useDispatch();
-    const lagredeFilterFeatureToggleErPa = useFeatureSelector()(LAGREDE_FILTER);
+    const lagredeFilterFeatureToggleErPa = useFeatureSelector()(MINE_FILTER);
 
     useEffect(() => {
         if (lagredeFilterFeatureToggleErPa) {

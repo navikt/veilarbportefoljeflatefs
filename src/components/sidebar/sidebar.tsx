@@ -24,7 +24,7 @@ import {NyFiltreringStatus} from "../../filtrering/filtrering-status/ny_filtreri
 import NyFiltreringFilter from "../../filtrering/ny_filtrering-filter";
 import NyFilteringVeilederGrupper from "../../filtrering/filtrering-veileder-grupper/ny_filtrering-veileder-grupper";
 import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
-import {LAGREDE_FILTER} from "../../konstanter";
+import {MINE_FILTER} from "../../konstanter";
 import {ListevisningType} from "../../ducks/ui/listevisning";
 import {HandlingsType} from "../../ducks/lagret-filter";
 import {STATUS} from "../../ducks/utils";
@@ -86,7 +86,7 @@ function Sidebar(props: SidebarProps) {
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const dispatch = useDispatch();
-    const erLagredeFilterFeatureTogglePa = useFeatureSelector()(LAGREDE_FILTER);
+    const erLagredeFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
     const lagretFilter = lagretFilterState.data;
     const sortertLagredeFilter = lagretFilter.sort((a, b) => (a.filterNavn.toLowerCase() < b.filterNavn.toLowerCase() ? -1 : (a.filterNavn.toLowerCase() > b.filterNavn.toLowerCase() ? 1 : 0)));
 

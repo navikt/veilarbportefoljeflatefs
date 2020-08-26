@@ -13,7 +13,7 @@ import {useFetchPortefoljeData} from './hooks/portefolje/use-fetch-portefolje-da
 import Innholdslaster from './innholdslaster/innholdslaster';
 import TourModalLocalStorage from './components/modal/tour-modal/tour-modal-local-storage';
 import {useFeatureSelector} from './hooks/redux/use-feature-selector';
-import {REDESIGN} from './konstanter';
+import {MINE_FILTER, REDESIGN} from './konstanter';
 import {TilToppenKnapp} from "./components/til-toppen-knapp/til-toppen-knapp";
 
 loggBrowserMetrikker();
@@ -21,6 +21,7 @@ loggBrowserMetrikker();
 function Routes() {
     const {enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();
     const erRedesignTogglePa = useFeatureSelector()(REDESIGN);
+    const erMineFilterTogglePa = useFeatureSelector()(MINE_FILTER);
 
     return (
         <div className="portefolje">
@@ -46,7 +47,7 @@ function Routes() {
                     </Switch>
                     <TilbakemeldingFab/>
                     <TilToppenKnapp/>
-                    <TourModalLocalStorage/>
+                    <TourModalLocalStorage skalVises={erMineFilterTogglePa}/>
                 </Innholdslaster>
             </div>
         </div>
