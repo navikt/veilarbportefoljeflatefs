@@ -1,4 +1,4 @@
-import { ModalName, Step } from '../tour-modal';
+import {ModalName, Step} from '../tour-modal';
 import React from 'react';
 import nyKolonne1Bilde from './nyKolonne/nyKolonne-step1.png';
 import nyKolonne2Bilde from './nyKolonne/nyKolonne-step2.png';
@@ -14,6 +14,9 @@ import veilederverktoy3 from './veilederverktoy/veilederverktoy3.png';
 import permitterte1 from './permitterte/permitterte1.png';
 import permitterte2 from './permitterte/permitterte2.png';
 import permitterte3 from './permitterte/permitterte3.png';
+import mineFilter1 from './mine-filter/mine-filter1.png';
+import mineFilter2 from './mine-filter/mine-filter2.png'
+import mineFilter3 from './mine-filter/mine-filter3.png'
 
 const stepsNyKolonne: Step[] = [
     {
@@ -104,6 +107,24 @@ const stepsPermitterte: Step[] = [
     }
 ];
 
+const stepsMineFilter: Step[] = [
+    {
+        tittel: 'Mine filter',
+        bilde: mineFilter1,
+        tekst: 'Nå kan du lagre enkeltfiltre og kombinasjoner av flere filter. Da får du enklere tilgang på filtreringer du bruker mye.'
+    },
+    {
+        tittel: 'Lagre nytt filter',
+        bilde: mineFilter2,
+        tekst: 'Gjør filtreringen du ønsker å lagre. Klikk på knappen «Lagre filter» og gi filteret et navn.'
+    },
+    {
+        tittel: 'Endre navn eller slett filter',
+        bilde: mineFilter3,
+        tekst: 'Velg det aktuelle filteret og klikk på blyantsymbolet for å redigere navnet eller slette filteret.'
+    },
+];
+
 export function getTour(modal: ModalName) {
     switch (modal) {
         case ModalName.NY_KOLONNE:
@@ -116,6 +137,8 @@ export function getTour(modal: ModalName) {
             return stepsVeilederverktoy;
         case ModalName.PERMITTERTE:
             return stepsPermitterte;
+        case ModalName.MINE_FILTER:
+            return stepsMineFilter;
         default:
             return null;
     }

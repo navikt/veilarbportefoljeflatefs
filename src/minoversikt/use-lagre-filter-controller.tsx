@@ -6,13 +6,13 @@ import {AppState} from "../reducer";
 import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";
 import {sjekkFeature} from "../ducks/features";
-import {LAGREDE_FILTER} from "../konstanter";
+import {MINE_FILTER} from "../konstanter";
 
 export function useLagreFilterController(props: { filtergruppe: string }) {
     const dispatch = useDispatch()
     const filtrering = useSelector((state: AppState) => props.filtergruppe === "veileder" ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
     const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
+    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, MINE_FILTER));
 
     useEffect(() => {
         if (!lagredeFilterFeatureToggleErPa) {

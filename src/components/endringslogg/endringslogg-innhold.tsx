@@ -1,9 +1,9 @@
 import classNames from 'classnames/dedupe';
-import { EtikettLiten, Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { default as React } from 'react';
-import { ReactComponent as LinkIcon } from './external-link.svg';
+import {EtikettLiten, Normaltekst, Undertittel} from 'nav-frontend-typografi';
+import {default as React} from 'react';
+import {ReactComponent as LinkIcon} from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
-import { EndringsloggInnleggMedSettStatus } from './utils/endringslogg-custom';
+import {EndringsloggInnleggMedSettStatus} from './utils/endringslogg-custom';
 import './endringslogg.less';
 import './collapse-container-transition.less';
 
@@ -19,9 +19,9 @@ interface EndringsloggInnholdProps {
     innleggsListe: EndringsloggInnleggMedSettStatus[];
 }
 
-export function EndringsloggLinkMedIkon(props: { linkTekst: string, url: string }) {
+export function EndringsloggLinkMedIkon(props: { linkTekst: string, url: string, className?: string }) {
     return (
-        <Lenke className="endringslogg-link" target="_blank" href={props.url}>
+        <Lenke className={classNames("endringslogg-link", props.className)} target="_blank" href={props.url}>
             {props.linkTekst ? props.linkTekst : props.url}
             <LinkIcon/>
         </Lenke>

@@ -14,7 +14,7 @@ import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLagredeFilter from "./filtrering-lagrede-filter/filtrering-lagrede-filter";
 import {AppState} from "../reducer";
 import {sjekkFeature} from "../ducks/features";
-import {LAGREDE_FILTER} from "../konstanter";
+import {MINE_FILTER} from "../konstanter";
 import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";
 
@@ -26,7 +26,7 @@ interface FiltreringContainerProps {
 
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
     const dispatch = useDispatch();
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
+    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, MINE_FILTER));
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
