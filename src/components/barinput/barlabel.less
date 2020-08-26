@@ -1,101 +1,107 @@
 @import "~nav-frontend-core/less/core";
 
 .barlabel {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+
+  &__labeltext {
+    width: 100%;
+    padding-right: 0.5rem;
+  }
+
+  &__barwrapper {
     display: flex;
-    justify-content: space-between;
-    margin-top: 2px;
+    justify-content: flex-start;
+    align-items: center;
 
-    &__labeltext {
-        width: 100%;
-        padding-right: 0.5rem;
+    flex-basis: 45%;
+    flex-shrink: 0;
+    flex-grow: 0;
+
+
+    .arbeidsliste {
+      flex-basis: 3rem;
+      display: inline-flex;
     }
+  }
 
-    &__barwrapper {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-basis: 45%;
-        flex-shrink: 0;
-        flex-grow: 0;
+  &__antall {
+    flex-basis: 3rem;
+    text-align: right;
+    padding-right: 0.5rem;
+    font-weight: 800;
+    margin-top: -0.3rem;
+  }
 
-        .arbeidsliste {
-            flex-basis: 3rem;
-            display: inline-flex;
-        }
-    }
+  &__bar {
+    position: relative;
+    height: 1rem;
+    flex-grow: 1;
+  }
 
-    &__antall {
-        flex-basis: 3rem;
-        text-align: right;
-        padding-right: 0.5rem;
-        font-weight: 800;
-        margin-top: -0.3rem;
-    }
+  &__bartrack {
+    display: block;
+    background-color: @navLysGra;
+    height: 12px;
+    border-radius: 1rem;
+    width: 100%;
+  }
 
-    &__bar {
-        position: relative;
-        height: 1rem;
-        flex-grow: 1;
-    }
+  &__barface {
+    position: absolute;
+    display: block;
+    background-color: @navLysBlaLighten20;
+    height: 12px;
+    border-radius: 1rem;
+    transition: width cubic-bezier(0.4, 0, 0.2, 1) 1337ms;
+    left: 0;
+    top: 0;
+  }
 
-    &__bartrack {
-        display: block;
-        background-color: @navLysGra;
-        height: 12px;
-        border-radius: 1rem;
-        width: 100%;
-    }
+  &.ufordeltebrukere .barlabel__barface {
+    background-color: @navLillaLighten20;
+  }
 
-    &__barface {
-        position: absolute;
-        display: block;
-        background-color: @navLysBlaLighten20;
-        height: 12px;
-        border-radius: 1rem;
-        transition: width cubic-bezier(0.4, 0, 0.2, 1) 1337ms;
-        left: 0;
-        top: 0;
-    }
+  &.venterPaSvarFraNAV .barlabel__barface {
+    background-color: @navLillaLighten20;
+  }
 
-    &.ufordeltebrukere .barlabel__barface {
-        background-color: @navLillaLighten20;
-    }
+  &.venterPaSvarFraBruker .barlabel__barface {
+    background-color: @navLimeGronnLighten20;
+  }
 
-    &.venterPaSvarFraNAV .barlabel__barface {
-        background-color: @navLillaLighten20;
-    }
+  &.avtaltMoteMedNav .barlabel__barface {
+    background-color: @navDypBlaDarken80;
+  }
 
-    &.venterPaSvarFraBruker .barlabel__barface {
-        background-color: @navLimeGronnLighten20;
-    }
+  &.utlopteAktiviteter .barlabel__barface {
+    background-color: @navGra60;
+  }
 
-    &.avtaltMoteMedNav .barlabel__barface {
-        background-color: @navDypBlaDarken80;
-    }
+  &.ikkeIAvtaltAktivitet .barlabel__barface {
+    background-color: @navGra60;
+  }
 
-    &.utlopteAktiviteter .barlabel__barface {
-        background-color: @navGra60;
-    }
+  &.iAvtaltAktivitet .barlabel__barface {
+    background-color: @navDypBlaLighten20;
+  }
 
-    &.ikkeIAvtaltAktivitet .barlabel__barface {
-        background-color: @navGra60;
-    }
+  &.inaktiveBrukere .barlabel__barface {
+    background-color: @navGra60;
+  }
 
-    &.iAvtaltAktivitet .barlabel__barface {
-        background-color: @navDypBlaLighten20;
-    }
-
-    &.inaktiveBrukere .barlabel__barface {
-        background-color: @navGra60;
-    }
-
-    &.minArbeidsliste .barlabel__barface {
-        background-color: @navGra60;
-    }
+  &.minArbeidsliste .barlabel__barface {
+    background-color: @navGra60;
+  }
 }
 
 .forsteBarlabelIGruppe {
-    padding-top: 1rem;
-    border-top: 1px solid @navGra60;
-    margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid @navGra60;
+  margin-top: 1rem;
+}
+
+.ny__barlabel__barwrapper {
+  flex: none;
 }

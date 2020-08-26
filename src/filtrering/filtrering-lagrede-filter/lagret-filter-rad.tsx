@@ -37,13 +37,15 @@ function LagretFilterRad({filter, filtergruppe, parentDiv}: LagretFilterRadProps
 
     function scrollAndSelect(){
         if (parentDiv.current != null && checkboxRef.current && valgtLagretFilter && valgtLagretFilter?.filterId === filter.filterId){
-            parentDiv.current.scrollTo(
-                {
-                    top: checkboxRef.current.offsetTop-parentDiv.current.offsetTop,
-                    left: 0,
-                    behavior: 'smooth'
-                }
-            )
+            if (parentDiv.current.offsetTop + parentDiv.current.scrollTop  > checkboxRef.current.offsetTop || checkboxRef.current.offsetTop > parentDiv.current.offsetTop + parentDiv.current.clientHeight){
+                parentDiv.current.scrollTo(
+                   {
+                       top: checkboxRef.current.offsetTop-parentDiv.current.offsetTop,
+                       left: 0,
+                       behavior: 'smooth'
+                   }
+               )
+            }
         }
         return valgtLagretFilter?.filterId === filter.filterId
     }
