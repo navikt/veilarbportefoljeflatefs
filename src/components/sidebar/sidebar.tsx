@@ -186,7 +186,12 @@ function Sidebar(props: SidebarProps) {
             }
 
         } else if (erPaEnhetensOversikt) {
-            return sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+            if (!erLagredeFilterFeatureTogglePa) {
+                return sidebar.filter(tab => !visLagredeFilter(tab))
+                    .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+            } else {
+                return sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+            }
         }
     };
 
