@@ -1,4 +1,4 @@
-@dropSpaceMargin: 0.4rem;
+@dropSpaceMargin: 0.7rem;
 @dropSpacePadding: 0.2rem;
 
 [draggable] {
@@ -20,8 +20,8 @@
 }
 
 .drag-and-drop-row.over-from-below {
-  padding-top: @dropSpacePadding;
-  margin-top: @dropSpaceMargin;
+  padding-top: @dropSpacePadding + 0.5rem;
+  margin-top: @dropSpaceMargin - 0.5rem;
   border-top: 2px solid blue;
 }
 
