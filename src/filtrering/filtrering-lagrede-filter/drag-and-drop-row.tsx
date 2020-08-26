@@ -21,6 +21,8 @@ function DragAndDropRow(props: DragAndDropRowProps) {
     };
 
     const handleOver = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         if (dragNode.current && dragNode.current.contains(e.target)) {
             if (props.idx !== props.sourceIndex) {
                 if (props.idx !== props.destIndex) {

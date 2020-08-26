@@ -34,10 +34,8 @@ function DragAndDropContainer(props: DragAndDropContainerProps) {
 
     const handleDragEnd = (e) => {
         if (dragIsInsideElement && props.destIndex !== -1 && props.sourceIndex !== -1) {
-            let temp = props.liste[props.sourceIndex]
-            props.liste[props.sourceIndex] = props.liste[props.destIndex]
-            props.liste[props.destIndex] = temp
-            props.setdragAndDropList(props.liste)
+            const nyListe = flyttElementIArray(props.liste, props.sourceIndex,props.destIndex)
+            props.setdragAndDropList(nyListe)
         }
         props.setIsSource(-1)
         props.setIsDestination(-1)
@@ -52,5 +50,12 @@ function DragAndDropContainer(props: DragAndDropContainerProps) {
         </ul>
     );
 }
+
+function flyttElementIArray(arr: any[], src_index: number, dest_index: number) {
+    const verdiSomFlyttes = arr[src_index]
+    arr.splice(src_index, 1);
+    arr.splice(dest_index, 0, verdiSomFlyttes);
+    return arr; 
+};
 
 export default DragAndDropContainer;

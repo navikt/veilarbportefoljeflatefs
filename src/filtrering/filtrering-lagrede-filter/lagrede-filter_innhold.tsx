@@ -55,7 +55,6 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const [dragAndDropList, setdragAndDropList] = useState(filtrertListe()); // TODO: flytt til DragAndDropContainer
 
     const isDragging = (src !== -1)
-    console.log("Is dragging: " + isDragging)
     const hentFiltrertListeinnhold = () => {
         let liste
         if (dragAndDropList.length == 0) {
