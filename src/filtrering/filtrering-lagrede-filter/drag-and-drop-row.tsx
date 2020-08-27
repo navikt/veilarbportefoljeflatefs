@@ -4,6 +4,7 @@ import { useEventListener } from '../../hooks/use-event-listener';
 export interface DragAndDropRowProps {
     children: React.ReactNode;
     idx: number;
+    dropAnimation: boolean
     sourceIndex: number;
     destIndex: number;
     setIsSource: React.Dispatch<React.SetStateAction<number>>;
@@ -42,9 +43,10 @@ function DragAndDropRow(props: DragAndDropRowProps) {
     useEventListener('dragover', handleOver);
 
     let dragAndDropCssClass = "drag-and-drop-row"
-    if (props.destIndex == props.idx)
+    dragAndDropCssClass += (props.dropAnimation) ? " dropped" : ""
+    if (props.destIndex === props.idx)
         dragAndDropCssClass += (props.sourceIndex <= props.destIndex) ? " over-from-above" : " over-from-below"
-    else if (props.sourceIndex == props.idx)
+    else if (props.sourceIndex === props.idx)
         dragAndDropCssClass += " drag-elem"
     
     return (

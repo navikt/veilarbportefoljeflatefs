@@ -14,10 +14,6 @@
   list-style-type: none;
 }
 
-.drag-and-drop-row {
-  cursor: move;
-}
-
 .drag-and-drop-row.drag-elem {
   border: 1px dashed @navMorkGra;
   margin-bottom: 0.2rem;
@@ -33,4 +29,23 @@
 .drag-and-drop-row.over-from-above {
   margin-bottom: @dropSpaceSize;
   border-bottom: 2px solid @navBla;
+}
+
+.dropped {
+  margin-bottom: 0rem;
+  animation-name: example;
+  animation-duration: 0.3s;
+
+}
+
+@keyframes example {
+  0% {
+    transform: scale(0.5);
+    transform-origin: left;
+    margin-left: 0.4rem;
+  }
+
+  100% {
+    transform: scale(1)
+  }
 }

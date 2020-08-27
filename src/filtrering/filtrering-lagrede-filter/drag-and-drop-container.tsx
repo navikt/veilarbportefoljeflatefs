@@ -11,6 +11,7 @@ interface DragAndDropContainerProps {
     setIsDestination: React.Dispatch<React.SetStateAction<number>>;
     sourceIndex: number;
     destIndex: number;
+    setDropIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function DragAndDropContainer(props: DragAndDropContainerProps) {
@@ -20,6 +21,7 @@ function DragAndDropContainer(props: DragAndDropContainerProps) {
         if (dragContainer.current) {
             if (dragContainer.current.contains(e.target) && !dragIsInsideElement) {
                 setdDragIsInsideElement(true)
+                props.setDropIndex(-1)
             }
         }
     };
@@ -36,6 +38,8 @@ function DragAndDropContainer(props: DragAndDropContainerProps) {
         if (dragIsInsideElement && props.destIndex !== -1 && props.sourceIndex !== -1) {
             const nyListe = flyttElementIArray(props.liste, props.sourceIndex, props.destIndex)
             props.setdragAndDropList(nyListe)
+            props.setDropIndex(props.destIndex)
+            setdDragIsInsideElement(false)
         }
         props.setIsSource(-1)
         props.setIsDestination(-1)

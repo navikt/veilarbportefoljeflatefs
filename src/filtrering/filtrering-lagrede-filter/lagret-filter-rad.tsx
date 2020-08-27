@@ -17,7 +17,7 @@ interface LagretFilterRadProps {
 }
 
 function LagretFilterRad({filter, filtergruppe, parentDiv, autoscroll}: LagretFilterRadProps) {
-    autoscroll = (autoscroll == undefined) ? true: autoscroll;
+    autoscroll = (autoscroll === undefined) ? true: autoscroll;
     const dispatch = useDispatch();
     const checkboxRef = useRef<HTMLDivElement>(null);
 

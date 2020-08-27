@@ -53,11 +53,12 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const [src, setSrc] = useState(-1); // TODO: flytt til DragAndDropContainer
     const [dest, setDest] = useState(-1); // TODO: flytt til DragAndDropContainer
     const [dragAndDropList, setdragAndDropList] = useState(filtrertListe()); // TODO: flytt til DragAndDropContainer
+    const [dropIndex, setDropIndex] = useState(-1); // TODO: flytt til DragAndDropContainer
 
     const isDragging = (src !== -1)
     const hentFiltrertListeinnhold = () => {
         let liste
-        if (dragAndDropList.length == 0) {
+        if (dragAndDropList.length === 0) {
             liste = filtrertListe()
             console.log(liste)
             setdragAndDropList(filtrertListe())
@@ -72,7 +73,8 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
                     setIsDestination={setDest}
                     setIsSource={setSrc}
                     destIndex={dest}
-                    sourceIndex={src}>
+                    sourceIndex={src}
+                    setDropIndex={setDropIndex}>
                     {liste.map((filter, idx) =>
                         <DragAndDropRow key={idx}
                             idx={idx}
@@ -80,6 +82,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
                             setIsSource={setSrc}
                             destIndex={dest}
                             sourceIndex={src}
+                            dropAnimation={idx === dropIndex}
                         >
                             <LagretFilterRad
                                 filter={filter}
