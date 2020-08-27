@@ -44,7 +44,9 @@ function DragAndDropRow(props: DragAndDropRowProps) {
     let dragAndDropCssClass = "drag-and-drop-row"
     if (props.destIndex == props.idx)
         dragAndDropCssClass += (props.sourceIndex <= props.destIndex) ? " over-from-above" : " over-from-below"
-
+    else if (props.sourceIndex == props.idx)
+        dragAndDropCssClass += " drag-elem"
+    
     return (
         <li ref={dragNode} className={dragAndDropCssClass} draggable="true" >
             {props.children}

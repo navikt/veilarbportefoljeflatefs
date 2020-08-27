@@ -34,7 +34,7 @@ function DragAndDropContainer(props: DragAndDropContainerProps) {
 
     const handleDragEnd = (e) => {
         if (dragIsInsideElement && props.destIndex !== -1 && props.sourceIndex !== -1) {
-            const nyListe = flyttElementIArray(props.liste, props.sourceIndex,props.destIndex)
+            const nyListe = flyttElementIArray(props.liste, props.sourceIndex, props.destIndex)
             props.setdragAndDropList(nyListe)
         }
         props.setIsSource(-1)

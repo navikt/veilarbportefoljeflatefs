@@ -1,12 +1,11 @@
-@dropSpaceMargin: 0.7rem;
-@dropSpacePadding: 0.2rem;
+@import "~nav-frontend-core/less/core";
+@dropSpaceSize: 0.7rem;
 
 [draggable] {
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  /* Required to make elements draggable in old WebKit */
   -khtml-user-drag: element;
   -webkit-user-drag: element;
 }
@@ -19,14 +18,19 @@
   cursor: move;
 }
 
+.drag-and-drop-row.drag-elem {
+  border: 1px dashed @navMorkGra;
+  margin-bottom: 0.2rem;
+  padding-left: 0.4rem;
+  padding-top: 0.5rem;
+}
+
 .drag-and-drop-row.over-from-below {
-  padding-top: @dropSpacePadding + 0.5rem;
-  margin-top: @dropSpaceMargin - 0.5rem;
-  border-top: 2px solid blue;
+  padding-top: @dropSpaceSize;
+  border-top: 2px solid @navBla;
 }
 
 .drag-and-drop-row.over-from-above {
-  padding-bottom: @dropSpacePadding;
-  margin-bottom: @dropSpaceMargin;
-  border-bottom: 2px solid blue;
+  margin-bottom: @dropSpaceSize;
+  border-bottom: 2px solid @navBla;
 }
