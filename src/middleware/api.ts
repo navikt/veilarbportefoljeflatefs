@@ -62,7 +62,9 @@ export function hentEnhetsFilterGrupper(enhetId) {
 
 export function hentMineLagredeFilter() {
     const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
-    return fetchToJson(url, MED_CREDENTIALS);
+    return fetchToJson(url, MED_CREDENTIALS).catch(function(error){
+        console.log(error)
+    });
 }
 
 export function fetchPortefoljeStorrelser(enhetId) {
