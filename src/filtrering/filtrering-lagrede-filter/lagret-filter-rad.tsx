@@ -8,6 +8,7 @@ import {apenLagreFilterModal} from "../../ducks/lagret-filter-ui";
 import {Radio} from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
 import React, {RefObject, useRef} from "react";
+import {antallFilter} from "../../components/modal/lagrede-filter/lagrede-filter-utils";
 
 interface LagretFilterRadProps {
     filter: LagretFilter;
@@ -27,7 +28,7 @@ function LagretFilterRad({filter, filtergruppe, parentDiv}: LagretFilterRadProps
 
     function velgFilter(event) {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
-            {}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
+            {antallFilter: antallFilter(filter)}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
         dispatch(velgLagretFilter(filter, filtergruppe))
     }
 
