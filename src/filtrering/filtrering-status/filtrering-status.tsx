@@ -19,6 +19,7 @@ import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-c
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { MIN_ARBEIDSLISTE, } from '../filter-konstanter';
 import { PopoverOrientering } from 'nav-frontend-popover';
+import {useWindowWidth} from "../../hooks/use-window-width";
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -76,7 +77,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 />
                 <div className="permittering_checkboksgruppe">
                     <div className="hjelpetekst__wrapper">
-                        <Hjelpetekst id="hjelpetekst" type={PopoverOrientering.Over}>
+                        <Hjelpetekst id="hjelpetekst" type={useWindowWidth() < 1200 ? PopoverOrientering.Venstre : PopoverOrientering.Over}>
                             <p><b>Alle utenom permitterte etter 09.03.2020:</b> Alle brukere, uavhengig av situasjon
                                 ved registrering og tidspunkt for registrering, men ekskludert de som har registrert seg
                                 som permittert etter 9. mars 2020.

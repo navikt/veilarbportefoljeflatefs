@@ -8,6 +8,7 @@ import {Normaltekst} from "nav-frontend-typografi";
 import LagretFilterRad from "./lagret-filter-rad";
 import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
 import {REDESIGN} from "../../konstanter";
+import {useWindowWidth} from "../../hooks/use-window-width";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -81,15 +82,14 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     return (
         <>
-            {/*<div className="hjelpetekst__wrapper">*/}
-            <HiddenHjelpetekst type={PopoverOrientering.Over}
-                               hidden={filtrertListe().length === props.lagretFilter.length}
-                               id="hjelpetekst"
-                               className={erRedesignFeatureTogglePa ? 'ny__hjelpetekst' : 'gammelt__hjelpetekst'}>
+            <HiddenHjelpetekst
+                type={useWindowWidth() < 1200 ? PopoverOrientering.Venstre : PopoverOrientering.Over}
+                hidden={filtrertListe().length === props.lagretFilter.length}
+                id="hjelpetekst"
+                className={erRedesignFeatureTogglePa ? 'ny__hjelpetekst' : 'gammelt__hjelpetekst'}>
                 {erPaMinOversikt && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
                 {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}
             </HiddenHjelpetekst>
-            {/*</div>*/}
             {hentInnhold()}
         </>
     )

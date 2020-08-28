@@ -32,7 +32,6 @@ function SidebarTab({tittel, handleClick, children, lagretFilter, fjernUtilgjeng
                     </Systemtittel>
                 </div>
                 {lagretFilter && fjernUtilgjengeligeFilter &&
-                // <div className="sidebar__meny-hjelpetekst">
                 <HiddenInfoIkon type={PopoverOrientering.Venstre}
                                 hidden={filtrertListe()!.length === lagretFilter.length}
                                 id="hjelpetekst"
@@ -40,10 +39,9 @@ function SidebarTab({tittel, handleClick, children, lagretFilter, fjernUtilgjeng
                     {filtergruppe === 'veileder' && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
                     {filtergruppe === 'enhet' && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}
                 </HiddenInfoIkon>
-                    // </div>
                 }
                 <div className="sidebar-header__lukknapp">
-                <Lukknapp overstHjorne onClick={handleClick}/>
+                    <Lukknapp overstHjorne onClick={handleClick}/>
                 </div>
             </div>
             {children}
