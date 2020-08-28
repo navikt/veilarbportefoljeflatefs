@@ -11,9 +11,10 @@ import {sjekkFeature} from '../../../ducks/features';
 import {AppState} from '../../../reducer';
 import {VEDTAKSTOTTE} from '../../../konstanter';
 import {HiddenIfNyBarInputRadio, NyBarInputRadio} from "../../../components/barinput/ny_bar_input_radio";
+import {useFeatureSelector} from "../../../hooks/redux/use-feature-selector";
 
 export function NyFiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
-    const vedtakkStotteFeature = useSelector((state: AppState) => sjekkFeature(state, VEDTAKSTOTTE));
+    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE)
     const statusTall = useStatusTallSelector();
 
     return (
@@ -35,7 +36,7 @@ export function NyFiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe)
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(UNDER_VURDERING)}
                 antall={statusTall.underVurdering}
-                hidden={!vedtakkStotteFeature}
+                hidden={!erVedtaksStotteFeatureTogglePa}
             />
         </>
     );

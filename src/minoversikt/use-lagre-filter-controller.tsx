@@ -7,15 +7,16 @@ import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";
 import {sjekkFeature} from "../ducks/features";
 import {MINE_FILTER} from "../konstanter";
+import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 export function useLagreFilterController(props: { filtergruppe: string }) {
     const dispatch = useDispatch()
     const filtrering = useSelector((state: AppState) => props.filtergruppe === "veileder" ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
     const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, MINE_FILTER));
+    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER)
 
     useEffect(() => {
-        if (!lagredeFilterFeatureToggleErPa) {
+        if (!erMineFilterFeatureTogglePa) {
             return;
         }
         const valgtFilter = lagretFilterList.find(elem => lagredeFilterListerErLik(elem.filterValg, filtrering));
@@ -33,7 +34,7 @@ export function useLagreFilterController(props: { filtergruppe: string }) {
                 {}, {sideNavn: finnSideNavn()});
         }
 
-    }, [filtrering, lagretFilterList, dispatch, lagredeFilterFeatureToggleErPa, props.filtergruppe])
+    }, [filtrering, lagretFilterList, dispatch, erMineFilterFeatureTogglePa, props.filtergruppe])
 
     return null;
 }

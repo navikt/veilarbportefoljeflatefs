@@ -24,7 +24,7 @@ interface EnhetBrukerpanelProps {
 
 function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, forrigeBruker}: EnhetBrukerpanelProps) {
     const varForrigeBruker = bruker.fnr === forrigeBruker;
-    const erVedtakStotteFeaturePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
 
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem("xPos") || '0');
@@ -62,7 +62,7 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
                 brukersVeileder={brukersVeileder}
             />
             <div className="brukerliste__gutter-right">
-                <Etiketter bruker={bruker} erVedtakStotteFeaturePa={erVedtakStotteFeaturePa}/>
+                <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa}/>
             </div>
         </li>
     );

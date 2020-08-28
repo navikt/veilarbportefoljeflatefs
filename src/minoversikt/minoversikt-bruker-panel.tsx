@@ -31,7 +31,7 @@ interface MinOversiktBrukerPanelProps {
 
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const [apen, setOpen] = useState<boolean>(false);
-    const erVedtakStotteFeaturePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem('xPos') || '0');
         const yPos = parseInt(localStorage.getItem('yPos') || '0');
@@ -81,7 +81,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                 />
                 <div className="brukerliste__gutter-right">
                     <div className="brukerliste__etiketter">
-                        <Etiketter bruker={bruker} erVedtakStotteFeaturePa={erVedtakStotteFeaturePa}/>
+                        <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa}/>
                         <Info hidden={!bruker.nyForVeileder} typo="undertekst">
                             Ny bruker
                         </Info>
