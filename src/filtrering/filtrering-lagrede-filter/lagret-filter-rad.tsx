@@ -36,7 +36,7 @@ function LagretFilterRad({ filter, filtergruppe, parentDiv }: LagretFilterRadPro
     }
 
     function scrollAndSelect() {
-        if (parentDiv.current != null && checkboxRef.current && valgtLagretFilter && valgtLagretFilter?.filterId === filter.filterId) {
+        if (parentDiv.current !== null && checkboxRef.current && valgtLagretFilter && valgtLagretFilter?.filterId === filter.filterId) {
             parentDiv.current.scrollTo(
                 {
                     top: checkboxRef.current.offsetTop - parentDiv.current.offsetTop,

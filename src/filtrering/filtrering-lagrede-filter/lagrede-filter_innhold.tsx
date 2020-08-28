@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { LagretFilter } from '../../ducks/lagret-filter';
 import './lagrede-filter_innhold.less'
 import { PopoverOrientering } from "nav-frontend-popover";

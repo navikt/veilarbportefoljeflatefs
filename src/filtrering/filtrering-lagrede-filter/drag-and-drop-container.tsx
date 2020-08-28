@@ -64,10 +64,10 @@ function DragAndDropContainer({ dragAndDropElements }: DragAndDropProps) {
     );
 }
 
-function flyttElementIArray(arr: any[], src_index: number, dest_index: number) {
-    const verdiSomFlyttes = arr[src_index]
-    arr.splice(src_index, 1);
-    arr.splice(dest_index, 0, verdiSomFlyttes);
+function flyttElementIArray(arr: any[], fromIndex: number, toIndex: number) {
+    const verdiSomFlyttes = arr[fromIndex]
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, verdiSomFlyttes);
     return arr;
 };
 
