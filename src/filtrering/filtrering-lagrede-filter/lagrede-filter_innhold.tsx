@@ -39,7 +39,20 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
-        return props.lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
+        const filtere = props.lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
+        filtere.sort((a: LagretFilter, b: LagretFilter) => {
+            if (a.sortering !== null) {
+                if (b.sortering !== null) {
+                    return a.sortering - b.sortering
+                }
+                return -1
+            }
+            if (b.sortering !== null) {
+                return 1
+            }
+            return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, { numeric: true })
+        });
+        return filtere
     }
 
     useEffect(() => {
