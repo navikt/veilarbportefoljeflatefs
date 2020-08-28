@@ -27,6 +27,7 @@ import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less'
 import {PopoverOrientering} from "nav-frontend-popover";
+import {useWindowWidth} from "../hooks/use-window-width";
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -35,7 +36,8 @@ interface FiltreringFilterProps {
 }
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
-    const gjemHovedMal = useFeatureSelector()(GJEM_HOVEDMAL);
+    const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
+
     return (
         <div className="row">
             <div className="col-sm-12 blokk-xs">
@@ -131,7 +133,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Hovedmål"
-                    hidden={gjemHovedMal}
+                    hidden={erGjemHovedmalFeatureTogglePa}
                     render={(lukkDropdown) =>
                         <CheckboxFilterform
                             form="hovedmal"
@@ -212,7 +214,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <OverskriftMedHjelpeTekst
                     overskriftTekst="Aktivitet"
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
-                    orientering={PopoverOrientering.Over}
+                    orientering={useWindowWidth() < 1200 ? PopoverOrientering.Venstre : PopoverOrientering.Over}
                 />
                 <Dropdown
                     name="Aktivitet"

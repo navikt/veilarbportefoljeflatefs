@@ -27,36 +27,12 @@
     padding-top: 1rem;
 
     .hjelpetekst {
-      height: 16px;
-      width: 16px;
       grid-column: 2;
 
       &__wrapper {
         display: grid;
         grid-template-columns: auto fit-content(100%);
-
-        .popover {
-          max-width: 30rem;
-        }
       }
-
-      &__innhold {
-        padding: 0 1rem;
-      }
-
-      &__tooltip {
-        z-index: 2000;
-      }
-    }
-  }
-
-  @media (max-width: 1200px) {
-    .hjelpetekst__tooltip {
-      margin-right: 4rem;
-    }
-
-    .hjelpetekst__wrapper .popover {
-      left: -4rem;
     }
   }
 }

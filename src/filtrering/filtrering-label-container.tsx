@@ -51,13 +51,13 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
     let kolonne: Kolonne | null;
 
     const dispatch = useDispatch();
-    const lagredeFilterFeatureToggleErPa = useFeatureSelector()(MINE_FILTER);
+    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
 
     useEffect(() => {
-        if (lagredeFilterFeatureToggleErPa) {
+        if (erMineFilterFeatureTogglePa) {
             dispatch(hentLagredeFilterForVeileder());
         }
-    }, [dispatch, lagredeFilterFeatureToggleErPa])
+    }, [dispatch, erMineFilterFeatureTogglePa])
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {

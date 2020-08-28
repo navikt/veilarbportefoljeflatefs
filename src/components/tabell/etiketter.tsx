@@ -5,10 +5,10 @@ import {Advarsel, Bas, Fokus, Info} from "./etikett";
 interface EtiketterProps {
     className?: string;
     bruker: BrukerModell;
-    erVedtakStotteFeaturePa: boolean;
+    erVedtakStotteFeatureTogglePa: boolean;
 }
 
-function Etiketter({className, bruker, erVedtakStotteFeaturePa}: EtiketterProps) {
+function Etiketter({className, bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
 
     return (
         <span className={className}>
@@ -39,31 +39,31 @@ function Etiketter({className, bruker, erVedtakStotteFeaturePa}: EtiketterProps)
                Egen ansatt
             </Fokus>
             <Info
-                hidden={erVedtakStotteFeaturePa ? bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT}
+                hidden={erVedtakStotteFeatureTogglePa ? bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT}
                 typo="undertekst"
             >
                 Trenger vurdering
             </Info>
             <Info
-                hidden={erVedtakStotteFeaturePa ? bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING}
+                hidden={erVedtakStotteFeatureTogglePa ? bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING}
                 typo="undertekst"
             >
                 Behov for AEV
             </Info>
             <Info
-                hidden={!erVedtakStotteFeaturePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.OPPGITT_HINDRINGER}
+                hidden={!erVedtakStotteFeatureTogglePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.OPPGITT_HINDRINGER}
                 typo="undertekst"
             >
                Oppgitt hindringer
             </Info>
             <Info
-                hidden={!erVedtakStotteFeaturePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ANTATT_GODE_MULIGHETER}
+                hidden={!erVedtakStotteFeatureTogglePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ANTATT_GODE_MULIGHETER}
                 typo="undertekst"
             >
                Antatt gode muligheter
             </Info>
             <Info
-                hidden={!erVedtakStotteFeaturePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING}
+                hidden={!erVedtakStotteFeatureTogglePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING}
                 typo="undertekst"
             >
                 Antatt behov for veiledning

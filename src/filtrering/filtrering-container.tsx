@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import {FiltervalgModell} from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
@@ -12,11 +12,10 @@ import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLagredeFilter from "./filtrering-lagrede-filter/filtrering-lagrede-filter";
-import {AppState} from "../reducer";
-import {sjekkFeature} from "../ducks/features";
 import {MINE_FILTER} from "../konstanter";
 import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";
+import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -26,7 +25,7 @@ interface FiltreringContainerProps {
 
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
     const dispatch = useDispatch();
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, MINE_FILTER));
+    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER)
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
@@ -64,7 +63,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 lamellNavn="mine-filter"
                 tittel="Mine filter"
                 onClick={klikkPaLagredeFilter}
-                hidden={!lagredeFilterFeatureToggleErPa}
+                hidden={!erMineFilterFeatureTogglePa}
                 className="lagrede-filter-wrapper"
             >
                 <FiltreringLagredeFilter filtergruppe={filtergruppe}/>

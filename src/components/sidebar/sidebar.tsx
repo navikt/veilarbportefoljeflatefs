@@ -86,10 +86,10 @@ function Sidebar(props: SidebarProps) {
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
     const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
     const dispatch = useDispatch();
-    const erLagredeFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
+    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
     const lagretFilter = lagretFilterState.data;
     const sortertLagredeFilter = lagretFilter.sort((a, b) => a.filterNavn.toLowerCase()
-            .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
+        .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
 
     useEffect(() => {
         const nyttLagretFilter = lagretFilterState.handlingType === HandlingsType.NYTT && lagretFilterState.status === STATUS.OK;
@@ -169,7 +169,6 @@ function Sidebar(props: SidebarProps) {
                                fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
                                filtergruppe={props.filtergruppe}
             />
-                ;
         }
     }
 
@@ -178,7 +177,7 @@ function Sidebar(props: SidebarProps) {
         const visLagredeFilter = tab => tab.type === SidebarTabType.MINE_FILTER;
 
         if (erPaMinOversikt) {
-            if (!erLagredeFilterFeatureTogglePa) {
+            if (!erMineFilterFeatureTogglePa) {
                 return sidebar.filter(tab => !visVeiledergrupper(tab) && !visLagredeFilter(tab))
                     .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
             } else {
@@ -187,7 +186,7 @@ function Sidebar(props: SidebarProps) {
             }
 
         } else if (erPaEnhetensOversikt) {
-            if (!erLagredeFilterFeatureTogglePa) {
+            if (!erMineFilterFeatureTogglePa) {
                 return sidebar.filter(tab => !visLagredeFilter(tab))
                     .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
             } else {

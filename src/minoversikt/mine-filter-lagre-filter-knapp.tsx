@@ -4,9 +4,9 @@ import {useEffect, useState} from "react";
 import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/lagrede-filter/lagrede-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
-import {sjekkFeature} from "../ducks/features";
 import {MINE_FILTER} from "../konstanter";
 import {apenLagreFilterModal} from "../ducks/lagret-filter-ui";
+import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
@@ -20,7 +20,7 @@ export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
     const valgtFilter = !lagretFilterList.find(elem => lagredeFilterListerErLik(elem.filterValg, filtrering));
 
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, MINE_FILTER));
+    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER)
 
     const dispatch = useDispatch();
 
@@ -44,7 +44,7 @@ export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
 
     return (
         <Knapp className="lagre-filter-knapp" mini
-               hidden={erLagreKnappSkjult || !lagredeFilterFeatureToggleErPa}
+               hidden={erLagreKnappSkjult || !erMineFilterFeatureTogglePa}
                onClick={(event) => lagreFilterModal(event)}>
             Lagre filter
         </Knapp>

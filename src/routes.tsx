@@ -20,8 +20,8 @@ loggBrowserMetrikker();
 
 function Routes() {
     const {enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();
-    const erRedesignTogglePa = useFeatureSelector()(REDESIGN);
-    const erMineFilterTogglePa = useFeatureSelector()(MINE_FILTER);
+    const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
+    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
 
     return (
         <div className="portefolje">
@@ -30,24 +30,24 @@ function Routes() {
                     <Switch>
                         <Route
                             path="/enhet"
-                            component={erRedesignTogglePa ? Ny_EnhetSide : EnhetSide}
+                            component={erRedesignFeatureTogglePa ? Ny_EnhetSide : EnhetSide}
                         />
                         <Route
                             path="/veiledere"
-                            component={erRedesignTogglePa ? Ny_veiledereSide : VeiledereSide}
+                            component={erRedesignFeatureTogglePa ? Ny_veiledereSide : VeiledereSide}
                         />
                         <Route
                             path="/portefolje/:ident"
-                            component={erRedesignTogglePa ? Ny_MinoversiktSide : MinOversiktSide}
+                            component={erRedesignFeatureTogglePa ? Ny_MinoversiktSide : MinOversiktSide}
                         />
                         <Route
                             path="/portefolje"
-                            component={erRedesignTogglePa ? Ny_MinoversiktSide : MinOversiktSide}
+                            component={erRedesignFeatureTogglePa ? Ny_MinoversiktSide : MinOversiktSide}
                         />
                     </Switch>
                     <TilbakemeldingFab/>
                     <TilToppenKnapp/>
-                    <TourModalLocalStorage skalVises={erMineFilterTogglePa}/>
+                    <TourModalLocalStorage skalVises={erMineFilterFeatureTogglePa}/>
                 </Innholdslaster>
             </div>
         </div>
