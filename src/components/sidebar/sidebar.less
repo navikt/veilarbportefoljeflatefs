@@ -15,11 +15,17 @@
       position: relative;
       display: block;
       background-color: transparent;
-      padding: .5rem .2rem 0;
+      padding: .5rem .8rem 0;
       height: auto;
       cursor: pointer;
       border: 1px solid transparent;
       border-bottom: 0.3rem solid white;
+
+      &:hover {
+        border-bottom: 0.3rem solid @navBla;
+        cursor: pointer;
+        opacity: 1;
+      }
 
       &-container {
         grid-row: 1;
@@ -44,6 +50,12 @@
     &__hidden {
       .sidebar__tab-valgt {
         border-bottom: 0.3rem solid white;
+
+        &:hover {
+          border-bottom: 0.3rem solid @navBla;
+          cursor: pointer;
+          opacity: 1;
+        }
       }
     }
 

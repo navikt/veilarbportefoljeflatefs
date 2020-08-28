@@ -7,7 +7,7 @@ import hiddenIf from "../../components/hidden-if/hidden-if";
 import {Normaltekst} from "nav-frontend-typografi";
 import LagretFilterRad from "./lagret-filter-rad";
 import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
-import {MINE_FILTER, REDESIGN} from "../../konstanter";
+import {REDESIGN} from "../../konstanter";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
