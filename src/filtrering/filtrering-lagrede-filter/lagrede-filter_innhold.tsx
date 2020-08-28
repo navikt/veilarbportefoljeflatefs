@@ -5,7 +5,6 @@ import { PopoverOrientering } from "nav-frontend-popover";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 import hiddenIf from "../../components/hidden-if/hidden-if";
 import { Normaltekst } from "nav-frontend-typografi";
-import DragAndDropRow from './drag-and-drop-row';
 import DragAndDropContainer from './drag-and-drop-container';
 import LagretFilterRad from './lagret-filter-rad';
 
@@ -50,49 +49,17 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         }
     });
 
-    const [src, setSrc] = useState(-1); // TODO: flytt til DragAndDropContainer
-    const [dest, setDest] = useState(-1); // TODO: flytt til DragAndDropContainer
-    const [dragAndDropList, setdragAndDropList] = useState(filtrertListe()); // TODO: flytt til DragAndDropContainer
-    const [dropIndex, setDropIndex] = useState(-1); // TODO: flytt til DragAndDropContainer
-
-    const isDragging = (src !== -1)
     const hentFiltrertListeinnhold = () => {
-        let liste
-        if (dragAndDropList.length === 0) {
-            liste = filtrertListe()
-            console.log(liste)
-            setdragAndDropList(filtrertListe())
-        } else {
-            liste = dragAndDropList;
-        }
+        const LagretFilterRader = filtrertListe().map((filter) =>
+            <LagretFilterRad
+                filter={filter}
+                filtergruppe={props.filtergruppe}
+                parentDiv={outerDivRef}
+            />)
+
         return (
             <div className='lagrede-filter__valgfelt' ref={outerDivRef}>
-                <DragAndDropContainer
-                    liste={liste}
-                    setdragAndDropList={setdragAndDropList}
-                    setIsDestination={setDest}
-                    setIsSource={setSrc}
-                    destIndex={dest}
-                    sourceIndex={src}
-                    setDropIndex={setDropIndex}>
-                    {liste.map((filter, idx) =>
-                        <DragAndDropRow key={idx}
-                            idx={idx}
-                            setIsDestination={setDest}
-                            setIsSource={setSrc}
-                            destIndex={dest}
-                            sourceIndex={src}
-                            dropAnimation={idx === dropIndex}
-                        >
-                            <LagretFilterRad
-                                filter={filter}
-                                filtergruppe={props.filtergruppe}
-                                parentDiv={outerDivRef}
-                                autoscroll={!isDragging}
-                            />
-                        </DragAndDropRow>
-                    )}
-                </DragAndDropContainer>
+                <DragAndDropContainer dragAndDropElements={LagretFilterRader} />
             </div>)
     }
 

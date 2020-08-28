@@ -1,23 +1,21 @@
-import {LagretFilter} from "../../ducks/lagret-filter";
-import {useDispatch, useSelector} from "react-redux";
-import {AppState} from "../../reducer";
-import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
-import {logEvent} from "../../utils/frontend-logger";
-import {velgLagretFilter} from "../../ducks/filtrering";
-import {apenLagreFilterModal} from "../../ducks/lagret-filter-ui";
-import {Radio} from "nav-frontend-skjema";
+import { LagretFilter } from "../../ducks/lagret-filter";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../../reducer";
+import { finnSideNavn, mapVeilederIdentTilNonsens } from "../../middleware/metrics-middleware";
+import { logEvent } from "../../utils/frontend-logger";
+import { velgLagretFilter } from "../../ducks/filtrering";
+import { apenLagreFilterModal } from "../../ducks/lagret-filter-ui";
+import { Radio } from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
-import React, {RefObject, useRef} from "react";
+import React, { RefObject, useRef } from "react";
 
 interface LagretFilterRadProps {
     filter: LagretFilter;
     filtergruppe: string;
     parentDiv: RefObject<HTMLDivElement>;
-    autoscroll?: boolean;
 }
 
-function LagretFilterRad({filter, filtergruppe, parentDiv, autoscroll}: LagretFilterRadProps) {
-    autoscroll = (autoscroll === undefined) ? true: autoscroll;
+function LagretFilterRad({ filter, filtergruppe, parentDiv }: LagretFilterRadProps) {
     const dispatch = useDispatch();
     const checkboxRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +27,7 @@ function LagretFilterRad({filter, filtergruppe, parentDiv, autoscroll}: LagretFi
 
     function velgFilter(event) {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
-            {}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
+            {}, { filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens });
         dispatch(velgLagretFilter(filter, filtergruppe))
     }
 
@@ -37,11 +35,11 @@ function LagretFilterRad({filter, filtergruppe, parentDiv, autoscroll}: LagretFi
         dispatch(apenLagreFilterModal(filtergruppe))
     }
 
-    function scrollAndSelect(){
-        if (autoscroll && parentDiv.current != null && checkboxRef.current && valgtLagretFilter && valgtLagretFilter?.filterId === filter.filterId){
+    function scrollAndSelect() {
+        if (parentDiv.current != null && checkboxRef.current && valgtLagretFilter && valgtLagretFilter?.filterId === filter.filterId) {
             parentDiv.current.scrollTo(
                 {
-                    top: checkboxRef.current.offsetTop-parentDiv.current.offsetTop,
+                    top: checkboxRef.current.offsetTop - parentDiv.current.offsetTop,
                     left: 0,
                     behavior: 'smooth'
                 }

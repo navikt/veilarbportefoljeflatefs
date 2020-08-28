@@ -1,27 +1,26 @@
 import React, { useRef, useState } from "react";
-import './drag-and-drop.less';
 import { useEventListener } from "../../hooks/use-event-listener";
+import DragAndDropRow from "./drag-and-drop-row";
+import './drag-and-drop.less';
 
-interface DragAndDropContainerProps {
-    liste: any[];
-    children: React.ReactNode;
 
-    setdragAndDropList: React.Dispatch<React.SetStateAction<any[]>>;
-    setIsSource: React.Dispatch<React.SetStateAction<number>>;
-    setIsDestination: React.Dispatch<React.SetStateAction<number>>;
-    sourceIndex: number;
-    destIndex: number;
-    setDropIndex: React.Dispatch<React.SetStateAction<number>>;
+export interface DragAndDropProps {
+    dragAndDropElements: JSX.Element[]
 }
 
-function DragAndDropContainer(props: DragAndDropContainerProps) {
-    const dragContainer = useRef<HTMLUListElement>(null);
+
+function DragAndDropContainer({ dragAndDropElements }: DragAndDropProps) {
+    const [srcIndex, setSrcIndex] = useState(-1);
+    const [destIndex, setDestIndex] = useState(-1);
+    const [dropIndex, setDropIndex] = useState(-1);
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
+    const dragContainer = useRef<HTMLUListElement>(null);
+
     const handleDragStart = (e) => {
         if (dragContainer.current) {
             if (dragContainer.current.contains(e.target) && !dragIsInsideElement) {
                 setdDragIsInsideElement(true)
-                props.setDropIndex(-1)
+                setDropIndex(-1)
             }
         }
     };
@@ -35,14 +34,13 @@ function DragAndDropContainer(props: DragAndDropContainerProps) {
     };
 
     const handleDragEnd = (e) => {
-        if (dragIsInsideElement && props.destIndex !== -1 && props.sourceIndex !== -1) {
-            const nyListe = flyttElementIArray(props.liste, props.sourceIndex, props.destIndex)
-            props.setdragAndDropList(nyListe)
-            props.setDropIndex(props.destIndex)
+        if (dragIsInsideElement && destIndex !== -1 && srcIndex !== -1) {
+            flyttElementIArray(dragAndDropElements, srcIndex, destIndex)
+            setDropIndex(destIndex)
             setdDragIsInsideElement(false)
         }
-        props.setIsSource(-1)
-        props.setIsDestination(-1)
+        setSrcIndex(-1)
+        setDestIndex(-1)
     };
 
     useEventListener('dragenter', handleDragStart);
@@ -50,7 +48,18 @@ function DragAndDropContainer(props: DragAndDropContainerProps) {
     useEventListener('dragend', handleDragEnd);
     return (
         <ul ref={dragContainer} className="drag-and-drop-container" >
-            {props.children}
+            {dragAndDropElements.map((feild, idx) =>
+                <DragAndDropRow key={idx}
+                    idx={idx}
+                    setIsDestination={setDestIndex}
+                    setIsSource={setSrcIndex}
+                    destIndex={destIndex}
+                    sourceIndex={srcIndex}
+                    dropAnimation={idx === dropIndex}
+                >
+                    {feild}
+                </DragAndDropRow>
+            )}
         </ul>
     );
 }
@@ -59,7 +68,7 @@ function flyttElementIArray(arr: any[], src_index: number, dest_index: number) {
     const verdiSomFlyttes = arr[src_index]
     arr.splice(src_index, 1);
     arr.splice(dest_index, 0, verdiSomFlyttes);
-    return arr; 
+    return arr;
 };
 
 export default DragAndDropContainer;
