@@ -4,14 +4,11 @@ import {
     TRENGER_VURDERING,
     UNDER_VURDERING
 } from '../../filter-konstanter';
-import { BarInputRadio } from '../../../components/barinput/barinput-radio';
-import { HiddenIfBarInputRadio } from '../../../components/barinput/barinput-radio';
-import { FiltreringStatusGruppe } from './ufordelte-brukere';
-import { useStatusTallSelector } from '../../../hooks/redux/use-statustall';
-import { useSelector } from 'react-redux';
-import { sjekkFeature } from '../../../ducks/features';
-import { AppState } from '../../../reducer';
-import { VEDTAKSTOTTE } from '../../../konstanter';
+import {BarInputRadio} from '../../../components/barinput/barinput-radio';
+import {HiddenIfBarInputRadio} from '../../../components/barinput/barinput-radio';
+import {FiltreringStatusGruppe} from './ufordelte-brukere';
+import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
+import {VEDTAKSTOTTE} from '../../../konstanter';
 import {useFeatureSelector} from "../../../hooks/redux/use-feature-selector";
 
 export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {

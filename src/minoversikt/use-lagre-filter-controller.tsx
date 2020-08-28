@@ -5,7 +5,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";
-import {sjekkFeature} from "../ducks/features";
 import {MINE_FILTER} from "../konstanter";
 import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 

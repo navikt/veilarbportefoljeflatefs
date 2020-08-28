@@ -34,7 +34,6 @@ function SidebarTab({tittel, handleClick, children, lagretFilter, fjernUtilgjeng
                 {lagretFilter && fjernUtilgjengeligeFilter &&
                 <HiddenInfoIkon type={PopoverOrientering.Venstre}
                                 hidden={filtrertListe()!.length === lagretFilter.length}
-                                id="hjelpetekst"
                 >
                     {filtergruppe === 'veileder' && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
                     {filtergruppe === 'enhet' && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}

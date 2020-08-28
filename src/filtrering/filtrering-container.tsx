@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import {FiltervalgModell} from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
@@ -12,8 +12,6 @@ import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLagredeFilter from "./filtrering-lagrede-filter/filtrering-lagrede-filter";
-import {AppState} from "../reducer";
-import {sjekkFeature} from "../ducks/features";
 import {MINE_FILTER} from "../konstanter";
 import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";

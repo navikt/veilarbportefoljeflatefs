@@ -4,7 +4,6 @@ import {useEffect, useState} from "react";
 import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/lagrede-filter/lagrede-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
-import {sjekkFeature} from "../ducks/features";
 import {MINE_FILTER} from "../konstanter";
 import {apenLagreFilterModal} from "../ducks/lagret-filter-ui";
 import {useFeatureSelector} from "../hooks/redux/use-feature-selector";

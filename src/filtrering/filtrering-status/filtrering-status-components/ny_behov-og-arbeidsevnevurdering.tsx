@@ -6,9 +6,6 @@ import {
 } from '../../filter-konstanter';
 import {FiltreringStatusGruppe} from './ufordelte-brukere';
 import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
-import {useSelector} from 'react-redux';
-import {sjekkFeature} from '../../../ducks/features';
-import {AppState} from '../../../reducer';
 import {VEDTAKSTOTTE} from '../../../konstanter';
 import {HiddenIfNyBarInputRadio, NyBarInputRadio} from "../../../components/barinput/ny_bar_input_radio";
 import {useFeatureSelector} from "../../../hooks/redux/use-feature-selector";

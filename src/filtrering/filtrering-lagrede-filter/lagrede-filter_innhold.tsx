@@ -85,7 +85,6 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
             <HiddenHjelpetekst
                 type={useWindowWidth() < 1200 ? PopoverOrientering.Venstre : PopoverOrientering.Over}
                 hidden={filtrertListe().length === props.lagretFilter.length}
-                id="hjelpetekst"
                 className={erRedesignFeatureTogglePa ? 'ny__hjelpetekst' : 'gammelt__hjelpetekst'}>
                 {erPaMinOversikt && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
                 {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}
