@@ -65,15 +65,18 @@ export const initialState: FiltervalgModell = {
     cvJobbprofil: null,
 };
 
-function fjern(verdi, fjernVerdi) {
+function fjern(filterId, verdi, fjernVerdi) {
     if (typeof verdi === 'boolean') {
         return false;
     } else if (Array.isArray(verdi)) {
         return verdi.filter((enkeltVerdi) => enkeltVerdi !== fjernVerdi);
+    } else if (filterId === 'aktiviteter'){
+        var tomtVerdi = {};
+        tomtVerdi[fjernVerdi] = AktiviteterValg.NA;
+        return Object.assign({}, verdi, tomtVerdi)
     } else if (fjernVerdi && typeof verdi === 'object') {
         return Object.entries(verdi)
             .filter(([key]) => key !== fjernVerdi)
-            .filter(([_, value]) => value !== AktiviteterValg.NA)
             .reduce((acc, [key, value]) => ({...acc, [key]: value}), {});
     } else if (fjernVerdi === null) {
         return null;
@@ -96,7 +99,7 @@ export default function reducer(state: FiltervalgModell = initialState, action):
         case SLETT_ENKELT_FILTER:
             return {
                 ...state,
-                [action.data.filterId]: fjern(state[action.data.filterId], action.data.filterVerdi)
+                [action.data.filterId]: fjern(action.data.filterId, state[action.data.filterId], action.data.filterVerdi)
             };
         case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
             return {
@@ -107,7 +110,7 @@ export default function reducer(state: FiltervalgModell = initialState, action):
         case SLETT_AKTIVITETER_OG_TILTAK_FILTER:
             return {
                 ...state,
-                [action.data.filterId]: fjern(state[action.data.filterId], action.data.filterVerdi),
+                [action.data.filterId]: fjern(action.data.filterId, state[action.data.filterId], action.data.filterVerdi),
                 tiltakstyper: []
             };
         case SETT_FILTERVALG:

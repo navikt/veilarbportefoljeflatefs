@@ -4,42 +4,38 @@ import {
     TRENGER_VURDERING,
     UNDER_VURDERING
 } from '../../filter-konstanter';
-import { BarInputRadio } from '../../../components/barinput/barinput-radio';
-import { HiddenIfBarInputRadio } from '../../../components/barinput/barinput-radio';
-import { FiltreringStatusGruppe } from './ufordelte-brukere';
-import { useStatusTallSelector } from '../../../hooks/redux/use-statustall';
-import { useSelector } from 'react-redux';
-import { sjekkFeature } from '../../../ducks/features';
-import { AppState } from '../../../reducer';
-import { VEDTAKSTOTTE } from '../../../konstanter';
+import {FiltreringStatusGruppe} from './ufordelte-brukere';
+import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
+import {useSelector} from 'react-redux';
+import {sjekkFeature} from '../../../ducks/features';
+import {AppState} from '../../../reducer';
+import {VEDTAKSTOTTE} from '../../../konstanter';
+import {HiddenIfNyBarInputRadio, NyBarInputRadio} from "../../../components/barinput/ny_bar_input_radio";
 
-export function FiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
+export function NyFiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
     const vedtakkStotteFeature = useSelector((state: AppState) => sjekkFeature(state, VEDTAKSTOTTE));
     const statusTall = useStatusTallSelector();
 
     return (
         <>
-            <BarInputRadio
+            <NyBarInputRadio
                 filterNavn="trengerVurdering"
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(TRENGER_VURDERING)}
                 antall={statusTall.trengerVurdering}
-                max={statusTall.totalt}
             />
-            <HiddenIfBarInputRadio
+            <HiddenIfNyBarInputRadio
                 filterNavn="erSykmeldtMedArbeidsgiver"
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(ER_SYKMELDT_MED_ARBEIDSGIVER)}
                 antall={statusTall.erSykmeldtMedArbeidsgiver}
-                max={statusTall.totalt}
             />
-            <HiddenIfBarInputRadio
+            <HiddenIfNyBarInputRadio
                 filterNavn="underVurdering"
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(UNDER_VURDERING)}
                 antall={statusTall.underVurdering}
                 hidden={!vedtakkStotteFeature}
-                max={statusTall.totalt}
             />
         </>
     );

@@ -1,30 +1,28 @@
-import React, { ChangeEventHandler } from 'react';
-import BarInput from './barinput';
-import { ferdigfilterListe, mapFilternavnTilFilterValue } from '../../filtrering/filter-konstanter';
+import React, {ChangeEventHandler} from 'react';
+import {ferdigfilterListe, mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
 import './barlabel.less';
+import NyBarInput from "./ny_barinput";
 
 interface BarInputCheckboxProps {
     filterNavn: string;
-    max: number;
     handleChange: ChangeEventHandler<HTMLInputElement>;
     checked: boolean;
     antall: number;
     labelTekst?: React.ReactNode;
 }
 
-function BarInputCheckbox({filterNavn, max, handleChange, checked, antall, labelTekst}: BarInputCheckboxProps) {
+function NyBarInputCheckbox({filterNavn, handleChange, checked, antall, labelTekst}: BarInputCheckboxProps) {
     const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
     const egenLabelTekst = labelTekst ? labelTekst : ferdigfilterListe[filterVerdi];
 
     return (
-        <BarInput
+        <NyBarInput
             className="checkboks"
             type="checkbox"
             name="ferdigfilter"
             id={filterNavn}
             barClassname={filterNavn}
             labelTekst={egenLabelTekst}
-            max={max}
             antall={antall}
             onChange={handleChange}
             value={filterVerdi}
@@ -33,4 +31,4 @@ function BarInputCheckbox({filterNavn, max, handleChange, checked, antall, label
     );
 }
 
-export default BarInputCheckbox;
+export default NyBarInputCheckbox;

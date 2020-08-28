@@ -10,7 +10,7 @@ export const SPOR_OM_TILBAKEMELDING = 'portefolje.spor_om_tilbakemelding';
 export const VEDTAKSTOTTE = 'pto.vedtaksstotte.pilot';
 export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const CVJOBBPROFIL = 'veilarbportefolje.cv-jobbprofil';
-export const LAGREDE_FILTER = 'veilarbportefolje.lagrede_filter'
+export const MINE_FILTER = 'veilarbportefolje.lagrede_filter'
 export const REDESIGN = 'veilarbportefolje.redesign';
 
 export const PORTEFOLJE_FEATURES = [
@@ -18,6 +18,6 @@ export const PORTEFOLJE_FEATURES = [
     VEDTAKSTOTTE,
     GJEM_HOVEDMAL,
     CVJOBBPROFIL,
-    LAGREDE_FILTER,
+    MINE_FILTER,
     REDESIGN,
 ];

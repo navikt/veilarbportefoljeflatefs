@@ -1,5 +1,5 @@
-import { default as React, useState } from 'react';
-import { default as TourModal, ModalName, } from './tour-modal';
+import {default as React, useState} from 'react';
+import {default as TourModal, ModalName,} from './tour-modal';
 
 interface TourModalLocalStorageProps {
     onTourComplete?: (e: string) => void;
@@ -7,7 +7,7 @@ interface TourModalLocalStorageProps {
 }
 
 export default function TourModalLocalStorage({onTourComplete, skalVises = false}: TourModalLocalStorageProps) {
-    const modalNavn = ModalName.PERMITTERTE;
+    const modalNavn = ModalName.MINE_FILTER;
     const [openModal, setApenModal] = useState(!hasStored(modalNavn));
 
     const lagreIkkeVisModal = () => {

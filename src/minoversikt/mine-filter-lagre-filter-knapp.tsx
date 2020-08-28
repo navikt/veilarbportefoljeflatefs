@@ -5,7 +5,7 @@ import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 import {sjekkFeature} from "../ducks/features";
-import {LAGREDE_FILTER} from "../konstanter";
+import {MINE_FILTER} from "../konstanter";
 import {apenLagreFilterModal} from "../ducks/lagret-filter-ui";
 
 export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
@@ -20,7 +20,7 @@ export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
     const valgtFilter = !lagretFilterList.find(elem => lagredeFilterListerErLik(elem.filterValg, filtrering));
 
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, LAGREDE_FILTER));
+    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, MINE_FILTER));
 
     const dispatch = useDispatch();
 

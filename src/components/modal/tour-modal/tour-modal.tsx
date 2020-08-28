@@ -1,9 +1,9 @@
-import { default as React, useState } from 'react';
+import {default as React, useState} from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
-import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
-import ChevronLenke, { Retning } from '../../chevron-lenke/chevron-lenke';
+import {Normaltekst, Systemtittel, Undertittel} from 'nav-frontend-typografi';
+import ChevronLenke, {Retning} from '../../chevron-lenke/chevron-lenke';
 import Stegviser from '../../stegviser/stegviser';
-import { getTour } from './tour-modal-custom/tour-modal-custom';
+import {getTour} from './tour-modal-custom/tour-modal-custom';
 import './tour-modal.less';
 
 export enum ModalName {
@@ -13,6 +13,7 @@ export enum ModalName {
     TILRETTELEGGING = 'TOUR_MODAL-TILRETTELEGGING',
     VEILEDERVERKTOY = 'TOUR_MODAL-VEILEDERVERKTOY',
     PERMITTERTE = 'TOUR_MODAL-PERMITTERTE',
+    MINE_FILTER = 'TOUR_MODAL-MINE_FILTER'
 }
 
 export interface Step {

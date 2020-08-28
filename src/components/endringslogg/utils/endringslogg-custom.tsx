@@ -22,6 +22,25 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '26. AUG. 2020',
+        tittel: 'Lagre filter',
+        versjonId: '26.08.20',
+        featureToggleName: 'veilarbportefolje.lagrede_filter',
+        tekst: 'Nå kan du lagre filter i oversikten. Dette kan være nyttig for å lage kombinasjoner av flere filter og som en snarvei til et filter du bruker ofte. Filtrene finner du i “Mine filter”.',
+        children:
+            <>
+                <TourModalButton
+                    metrikknavn="portefolje.endringslogg_modal.mine-filter"
+                    modal={ModalName.MINE_FILTER}
+                    knappeTekst="Se hvordan"
+                />
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Lagre-filtre-i-Min-oversikt.aspx "
+                    linkTekst="Nyhetssak på Navet"
+                    className="endringslogg_mine-filter"
+                />
+            </>
+    }, {
         dato: '03. AUG. 2020',
         tittel: 'Brukernotifikasjon om CV',
         versjonId: '03.08.20',
@@ -46,10 +65,10 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '26.06.20',
         tekst: 'Brukere som svarer i registreringen at de har problemer med å søke eller være i jobb (profilert til “Behov for AEV”), får et spørsmål om hvordan de ønsker å fortelle mer om sin situasjon. Nå kan bruker også velge videomøte som alternativ.',
         children:
-                <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-veileder-for-arbeidsrettet-brukeroppfolging/SitePages/Registrering-og-behovsvurdering.aspx"
-                    linkTekst="Se Veileder for arbeidsrettet brukeroppfølging"
-                />
+            <EndringsloggLinkMedIkon
+                url="https://navno.sharepoint.com/sites/fag-og-ytelser-veileder-for-arbeidsrettet-brukeroppfolging/SitePages/Registrering-og-behovsvurdering.aspx"
+                linkTekst="Se Veileder for arbeidsrettet brukeroppfølging"
+            />
     }, {
         dato: '22. JUN. 2020',
         tittel: 'Etiketten «Permittert etter 9. mars» er nå fjernet',
@@ -65,7 +84,6 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '05. MAI. 2020',
         tittel: 'Filtrering av arbeidsliste på farger',
         versjonId: '05.05.20',
-        featureToggleName: 'veilarbportefolje.arbeidslistekategori_filtrering',
         tekst: 'Nå kan du filtrere på de ulike fargene på arbeidslisteikonet. Når du velger “Min arbeidsliste” ser du de nye filtervalgene.',
 
     }, {
@@ -230,12 +248,11 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         tekst: 'Nå kan du opprette grupper av veiledere i «Enhetens oversikt». Det gjør det enklere å få oversikt over status til brukerne i avdelinger og team på NAV-kontoret.',
         children:
             <>
-                <div className="veiledergrupper-navet-tekst">
-                    <EndringsloggLinkMedIkon
-                        url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/N%C3%A5-kan-du-lage-avdelinger-og-team-i-oversikten.aspx?source=https%3A%2F%2Fnavno.sharepoint.com%2Fsites%2Ffag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging"
-                        linkTekst="Nyhetssak på Navet"
-                    />
-                </div>
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/N%C3%A5-kan-du-lage-avdelinger-og-team-i-oversikten.aspx?source=https%3A%2F%2Fnavno.sharepoint.com%2Fsites%2Ffag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging"
+                    linkTekst="Nyhetssak på Navet"
+                    className="veiledergrupper-navet-tekst"
+                />
                 <TourModalButton
                     metrikknavn="portefolje.endringslogg_modal.veiledergrupper"
                     modal={ModalName.VEILEDERGRUPPER}

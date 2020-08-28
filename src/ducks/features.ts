@@ -6,7 +6,7 @@ import {
     VEDTAKSTOTTE,
     CVJOBBPROFIL,
     REDESIGN,
-    LAGREDE_FILTER
+    MINE_FILTER
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -20,7 +20,7 @@ const initalState: FeaturesState = {
     [VEDTAKSTOTTE]: false,
     [CVJOBBPROFIL]: false,
     [REDESIGN]: false,
-    [LAGREDE_FILTER]: false
+    [MINE_FILTER]: false
 };
 
 // Reducer

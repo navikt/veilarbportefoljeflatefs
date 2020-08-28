@@ -40,8 +40,8 @@ function erValueTomt(value) {
     else return value === null || value === 'NA' || value === "" || erTomtObjekt(value)
 }
 
-export function antallFilter(minOversiktObjekt) {
-    return Object.values(minOversiktObjekt).filter(value => !erValueTomt(value))
+export function antallFilter(filterValg) {
+    return Object.values(filterValg).filter(value => !erValueTomt(value))
         .reduce((acc: number, filter) => isObject(filter)
             ? acc + antallFilter(filter)
             : Array.isArray(filter)

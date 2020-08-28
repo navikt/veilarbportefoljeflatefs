@@ -1,26 +1,25 @@
-import React, { ChangeEventHandler } from 'react';
-import BarInput from './barinput';
+import React, {ChangeEventHandler} from 'react';
 import {
     ferdigfilterListe,
     mapFilternavnTilFilterValue
 } from '../../filtrering/filter-konstanter';
 import './barlabel.less';
 import hiddenIf from '../hidden-if/hidden-if';
+import NyBarInput from "./ny_barinput";
 
 interface BarinputRadioProps {
     filterNavn: string;
-    max: number;
     handleChange: ChangeEventHandler<HTMLInputElement>;
     checked: boolean;
     antall: number;
 }
 
-export function BarInputRadio({filterNavn, max, handleChange, checked, antall}: BarinputRadioProps) {
+export function NyBarInputRadio({filterNavn, handleChange, checked, antall}: BarinputRadioProps) {
     const filterVerdi = mapFilternavnTilFilterValue[filterNavn]; // TODO :SENDE SOM PROPS?
     const labelTekst = ferdigfilterListe[filterVerdi];  // TODO: SENDE SOM PROPS?
 
     return (
-        <BarInput
+        <NyBarInput
             type="radio"
             name="ferdigfilter"
             className="radioknapp"
@@ -30,10 +29,9 @@ export function BarInputRadio({filterNavn, max, handleChange, checked, antall}: 
             checked={checked}
             labelTekst={labelTekst}
             antall={antall}
-            max={max}
             barClassname={filterNavn}
         />
     );
 }
 
-export const HiddenIfBarInputRadio = hiddenIf(BarInputRadio);
+export const HiddenIfNyBarInputRadio = hiddenIf(NyBarInputRadio);
