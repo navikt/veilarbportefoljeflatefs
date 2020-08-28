@@ -89,7 +89,7 @@ function Sidebar(props: SidebarProps) {
     const erLagredeFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
     const lagretFilter = lagretFilterState.data;
     const sortertLagredeFilter = lagretFilter.sort((a, b) => a.filterNavn.toLowerCase()
-            .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
+        .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
 
     useEffect(() => {
         const nyttLagretFilter = lagretFilterState.handlingType === HandlingsType.NYTT && lagretFilterState.status === STATUS.OK;
@@ -169,7 +169,6 @@ function Sidebar(props: SidebarProps) {
                                fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
                                filtergruppe={props.filtergruppe}
             />
-                ;
         }
     }
 
