@@ -2,14 +2,14 @@ import React, {useEffect, useState} from "react";
 import Modal from "../modal";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../../reducer";
-import "./lagret-filter.less"
-import {OppdaterFilter} from "./lagrede-filter-oppdater";
-import {LagreNytt} from "./lagrede-filter-nytt";
+import "./mine-filter.less"
+import {OppdaterMineFilter} from "./mine-filter-oppdater";
+import {LagreNyttMineFilter} from "./mine-filter-nytt";
 import {OrNothing} from "../../../utils/types/types";
 import hiddenIf from "../../hidden-if/hidden-if";
-import {Meny} from "./lagrede-filter-meny";
-import {FnrFeil} from "./lagrede-filter-fnr-feil";
-import {lukkLagreFilterModal} from "../../../ducks/lagret-filter-ui";
+import {Meny} from "./mine-filter-meny";
+import {MineFilterFnrFeil} from "./mine-filter-fnr-feil";
+import {lukkMineFilterModal} from "../../../ducks/lagret-filter-ui";
 
 export enum Visningstype {
     MENY,
@@ -30,13 +30,13 @@ const VisningstypeToTittel = new Map<Visningstype, string>([
 ]);
 
 const HiddenIfMeny = hiddenIf(Meny);
-const HiddenIfLagreNytt = hiddenIf(LagreNytt)
-const HiddenIfOppdaterFilter = hiddenIf(OppdaterFilter);
-const HiddenIfFnrFeil = hiddenIf(FnrFeil)
+const HiddenIfLagreNytt = hiddenIf(LagreNyttMineFilter)
+const HiddenIfOppdaterFilter = hiddenIf(OppdaterMineFilter);
+const HiddenIfFnrFeil = hiddenIf(MineFilterFnrFeil)
 
-export function LagreFilterModal(props: { filtergruppe: string }) {
-    const {sisteValgteLagredeFilter, valgtLagretFilter, erModalApen} = useSelector((state: AppState) => (props.filtergruppe === 'veileder') ? state.lagretFilterMinOversikt : state.lagretFilterEnhetensOversikt)
-    const data = useSelector((state: AppState) => state.lagretFilter.data)
+export function MineFilterModal(props: { filtergruppe: string }) {
+    const {sisteValgteMineFilter, valgtMineFilter, erModalApen} = useSelector((state: AppState) => (props.filtergruppe === 'veileder') ? state.mineFilterMinOversikt : state.mineFilterEnhetensOversikt)
+    const data = useSelector((state: AppState) => state.mineFilter.data)
     const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(Visningstype.MENY)
@@ -44,20 +44,20 @@ export function LagreFilterModal(props: { filtergruppe: string }) {
     const dispatch = useDispatch();
 
     const lukkModal = () => {
-        dispatch(lukkLagreFilterModal(props.filtergruppe))
+        dispatch(lukkMineFilterModal(props.filtergruppe))
     }
 
     useEffect(() => {
         if (filtreringMinOversikt.navnEllerFnrQuery.trim().length > 0) setValgtVisningstype(Visningstype.FNR_FEIL)
-        else if (valgtLagretFilter) setValgtVisningstype(Visningstype.OPPDATER)
-        else if (!sisteValgteLagredeFilter) setValgtVisningstype(Visningstype.LAGRE_NYTT)
+        else if (valgtMineFilter) setValgtVisningstype(Visningstype.OPPDATER)
+        else if (!sisteValgteMineFilter) setValgtVisningstype(Visningstype.LAGRE_NYTT)
         else setValgtVisningstype(Visningstype.MENY)
-    }, [filtreringMinOversikt, valgtLagretFilter, sisteValgteLagredeFilter, erModalApen])
+    }, [filtreringMinOversikt, valgtMineFilter, sisteValgteMineFilter, erModalApen])
 
     return (
         <Modal
-            className="lagret-filter-meny-modal"
-            contentLabel="Lagre filter meny modal"
+            className="mine-filter-meny-modal"
+            contentLabel="Mine filter meny modal"
             isOpen={erModalApen}
             onRequestClose={lukkModal}
             tittel={VisningstypeToTittel.get(valgtVisningstype)}
@@ -65,15 +65,15 @@ export function LagreFilterModal(props: { filtergruppe: string }) {
             <div className="modal-visningstype">
                 <HiddenIfMeny hidden={valgtVisningstype !== Visningstype.MENY}
                               setValgtVisningstype={setValgtVisningstype}
-                              sisteFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
+                              sisteFilterNavn={lagretFilterNavn(sisteValgteMineFilter!)}
                 />
                 <HiddenIfLagreNytt hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
                                    lukkModal={lukkModal}
                                    filtergruppe={props.filtergruppe}
                 />
                 <HiddenIfOppdaterFilter hidden={valgtVisningstype !== Visningstype.OPPDATER}
-                                        gammeltFilterNavn={lagretFilterNavn(sisteValgteLagredeFilter!)}
-                                        filterId={sisteValgteLagredeFilter!}
+                                        gammeltFilterNavn={lagretFilterNavn(sisteValgteMineFilter!)}
+                                        filterId={sisteValgteMineFilter!}
                                         lukkModal={lukkModal}
                                         filtergruppe={props.filtergruppe}
                 />

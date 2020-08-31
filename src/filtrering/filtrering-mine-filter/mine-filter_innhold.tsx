@@ -1,17 +1,17 @@
 import React, {useEffect, useRef} from 'react';
-import {LagretFilter} from '../../ducks/lagret-filter';
-import './lagrede-filter_innhold.less'
+import {MineFilter} from '../../ducks/mine-filter';
+import './mine-filter_innhold.less'
 import {PopoverOrientering} from "nav-frontend-popover";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 import hiddenIf from "../../components/hidden-if/hidden-if";
 import {Normaltekst} from "nav-frontend-typografi";
-import LagretFilterRad from "./lagret-filter-rad";
+import MineFilterRad from "./mine-filter-rad";
 import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
 import {REDESIGN} from "../../konstanter";
 import {useWindowWidth} from "../../hooks/use-window-width";
 
 interface LagredeFilterInnholdProps {
-    lagretFilter: LagretFilter[];
+    mineFilter: MineFilter[];
     filtergruppe: string;
 }
 
@@ -42,7 +42,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
-        return props.lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
+        return props.mineFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
     }
 
     useEffect(() => {
@@ -54,9 +54,9 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const hentFiltrertListeinnhold = () => {
         return (
-            <div className='lagrede-filter__valgfelt' ref={outerDivRef}>
+            <div className='mine-filter__valgfelt' ref={outerDivRef}>
                 {filtrertListe().map((filter, idx) =>
-                    <LagretFilterRad
+                    <MineFilterRad
                         key={idx}
                         filter={filter}
                         filtergruppe={props.filtergruppe}
@@ -68,8 +68,8 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const getEmptyState = () => {
         return (
-            <div className="lagredefilter-emptystate">
-                <Normaltekst className="lagredefilter-emptystate__tekst">
+            <div className="mine-filter-emptystate">
+                <Normaltekst className="mine-filter-emptystate__tekst">
                     Ingen lagrede filter
                 </Normaltekst>
             </div>
@@ -84,7 +84,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         <>
             <HiddenHjelpetekst
                 type={useWindowWidth() < 1200 ? PopoverOrientering.Venstre : PopoverOrientering.Over}
-                hidden={filtrertListe().length === props.lagretFilter.length}
+                hidden={filtrertListe().length === props.mineFilter.length}
                 className={erRedesignFeatureTogglePa ? 'ny__hjelpetekst' : 'gammelt__hjelpetekst'}>
                 {erPaMinOversikt && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
                 {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}

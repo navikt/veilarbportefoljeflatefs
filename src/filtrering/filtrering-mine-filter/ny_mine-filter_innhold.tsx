@@ -1,14 +1,14 @@
 import React, {useEffect, useRef} from 'react';
-import './ny_lagrede-filter-innhold.less'
+import './ny_mine-filter-innhold.less'
 import '../../components/sidebar/sidebar.less'
-import {LagretFilter} from "../../ducks/lagret-filter";
+import {MineFilter} from "../../ducks/mine-filter";
 import {Normaltekst} from "nav-frontend-typografi";
-import NyLagretFilterRad from "./ny_lagret-filter-rad";
+import NyMineFilterRad from "./ny_mine-filter-rad";
 
 interface LagredeFilterInnholdProps {
-    lagretFilter: LagretFilter[];
+    lagretFilter: MineFilter[];
     filtergruppe: string;
-    fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
+    fjernUtilgjengeligeFilter: (elem: MineFilter) => void;
 }
 
 function isOverflown(element) {
@@ -30,9 +30,9 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const hentFiltrertListeinnhold = () => {
         return (
-            <div className="ny__lagrede-filter__valgfelt" ref={outerDivRef}>
+            <div className="ny__mine-filter__valgfelt" ref={outerDivRef}>
                 {filtrertListe().map((filter, idx) =>
-                    <NyLagretFilterRad
+                    <NyMineFilterRad
                         key={idx}
                         filter={filter}
                         filtergruppe={props.filtergruppe}
@@ -43,8 +43,8 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const getEmptyState = () => {
         return (
-            <div className="lagredefilter-emptystate">
-                <Normaltekst className="lagredefilter-emptystate__tekst">
+            <div className="mine-filter-emptystate">
+                <Normaltekst className="mine-filter-emptystate__tekst">
                     Ingen lagrede filter
                 </Normaltekst>
             </div>

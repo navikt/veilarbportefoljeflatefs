@@ -11,7 +11,7 @@ import FilteringVeilederGrupper from './filtrering-veileder-grupper/filtrering-v
 import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
-import FiltreringLagredeFilter from "./filtrering-lagrede-filter/filtrering-lagrede-filter";
+import FiltreringMineFilter from "./filtrering-mine-filter/filtrering-mine-filter";
 import {MINE_FILTER} from "../konstanter";
 import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";
@@ -64,9 +64,9 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 tittel="Mine filter"
                 onClick={klikkPaLagredeFilter}
                 hidden={!erMineFilterFeatureTogglePa}
-                className="lagrede-filter-wrapper"
+                className="mine-filter-wrapper"
             >
-                <FiltreringLagredeFilter filtergruppe={filtergruppe}/>
+                <FiltreringMineFilter filtergruppe={filtergruppe}/>
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={false}

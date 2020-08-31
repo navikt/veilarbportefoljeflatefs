@@ -9,7 +9,7 @@ import './sidebar.less';
 import {ReactComponent as StatusIkon} from '../ikoner/tab_status.svg';
 import {ReactComponent as FilterIkon} from '../ikoner/tab_filter.svg';
 import {ReactComponent as VeiledergruppeIkon} from '../ikoner/tab_veiledergrupper.svg';
-import {ReactComponent as MineFilterIkon} from '../ikoner/tab_lagrede-filter.svg';
+import {ReactComponent as MineFilterIkon} from '../ikoner/tab_mine-filter.svg';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
@@ -18,7 +18,7 @@ import SidebarTab from './sidebar-tab';
 import {useDispatch, useSelector} from 'react-redux';
 import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
-import NyFiltreringLagredeFilter from "../../filtrering/filtrering-lagrede-filter/ny_filtrering-lagrede-filter";
+import NyFiltreringMineFilter from "../../filtrering/filtrering-mine-filter/ny_filtrering-mine-filter";
 import {AppState} from "../../reducer";
 import {NyFiltreringStatus} from "../../filtrering/filtrering-status/ny_filtrering-status";
 import NyFiltreringFilter from "../../filtrering/ny_filtrering-filter";
@@ -26,7 +26,7 @@ import NyFilteringVeilederGrupper from "../../filtrering/filtrering-veileder-gru
 import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
 import {MINE_FILTER} from "../../konstanter";
 import {ListevisningType} from "../../ducks/ui/listevisning";
-import {HandlingsType} from "../../ducks/lagret-filter";
+import {HandlingsType} from "../../ducks/mine-filter";
 import {STATUS} from "../../ducks/utils";
 
 interface Sidebar {
@@ -84,16 +84,16 @@ function Sidebar(props: SidebarProps) {
     const sidebarRef = useRef<HTMLDivElement>(null);
     const selectedTab = useSidebarViewStore(erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt)
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
-    const lagretFilterState = useSelector((state: AppState) => state.lagretFilter);
+    const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const dispatch = useDispatch();
     const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
-    const lagretFilter = lagretFilterState.data;
-    const sortertLagredeFilter = lagretFilter.sort((a, b) => a.filterNavn.toLowerCase()
+    const mineFilter = mineFilterState.data;
+    const sortertMineFilter = mineFilter.sort((a, b) => a.filterNavn.toLowerCase()
         .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
 
     useEffect(() => {
-        const nyttLagretFilter = lagretFilterState.handlingType === HandlingsType.NYTT && lagretFilterState.status === STATUS.OK;
-        const oppdatertLagretFilter = lagretFilterState.handlingType === HandlingsType.REDIGERE && lagretFilterState.status === STATUS.OK;
+        const nyttLagretFilter = mineFilterState.handlingType === HandlingsType.NYTT && mineFilterState.status === STATUS.OK;
+        const oppdatertLagretFilter = mineFilterState.handlingType === HandlingsType.REDIGERE && mineFilterState.status === STATUS.OK;
 
         if (nyttLagretFilter || oppdatertLagretFilter) {
             dispatch({
@@ -102,7 +102,7 @@ function Sidebar(props: SidebarProps) {
                 name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
             })
         }
-    }, [dispatch, erPaMinOversikt, lagretFilterState.handlingType, lagretFilterState.status])
+    }, [dispatch, erPaMinOversikt, mineFilterState.handlingType, mineFilterState.status])
 
     function handleOnTabClicked(tab: Sidebar) {
         dispatch({
@@ -161,11 +161,11 @@ function Sidebar(props: SidebarProps) {
             return <SidebarTab tittel="Mine filter"
                                handleClick={props.lukkTab}
                                children={
-                                   <NyFiltreringLagredeFilter filtergruppe={props.filtergruppe}
-                                                              fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
-                                                              sortertLagredeFilter={sortertLagredeFilter}/>
+                                   <NyFiltreringMineFilter filtergruppe={props.filtergruppe}
+                                                           fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
+                                                           sortertMineFilter={sortertMineFilter}/>
                                }
-                               lagretFilter={sortertLagredeFilter}
+                               mineFilter={sortertMineFilter}
                                fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
                                filtergruppe={props.filtergruppe}
             />

@@ -26,7 +26,7 @@ import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
-import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
+import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 import {MineFilterLagreFilterKnapp} from "./mine-filter-lagre-filter-knapp";
 import {useLagreFilterController} from "./use-lagre-filter-controller";
 
@@ -114,7 +114,7 @@ function MinoversiktSide() {
                         </div>
                     </MinOversiktWrapper>
                 </Innholdslaster>
-                <LagreFilterModal filtergruppe={filtergruppe}/>
+                <MineFilterModal filtergruppe={filtergruppe}/>
             </div>
         </DocumentTitle>
     );
