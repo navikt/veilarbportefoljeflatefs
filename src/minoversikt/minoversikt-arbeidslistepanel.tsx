@@ -12,32 +12,39 @@ interface ArbeidslistePanelProps {
     settMarkert: (fnr: string, markert: boolean) => void;
 }
 
-export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises, settMarkert}: ArbeidslistePanelProps) {
+export default function ArbeidslistePanel({ bruker, innloggetVeileder, skalVises, settMarkert }: ArbeidslistePanelProps) {
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
     const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
     const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : String.fromCharCode(8212);
+    const arbeidslisteFrist = new Date(bruker.arbeidsliste.frist);
+
     return (
         skalVises ?
             <article className="brukerliste__arbeidslistepanel">
-            <span className="flex">
-                <span className="brukerliste__gutter-left brukerliste--min-width-minside"/>
-                <span className="brukerliste__arbeidslisteinnhold flex--grow">
-                    <UndertekstBold>
-                        {overskrift}
-                    </UndertekstBold>
-                    <p>{bruker.arbeidsliste.kommentar}</p>
-                    <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
-                        {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
-                        <ArbeidslisteModalRediger
-                            bruker={bruker}
-                            innloggetVeileder={innloggetVeileder}
-                            sistEndretDato={sistEndretDato}
-                            sistEndretAv={sistEndretAv}
-                            settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                        />
-                    </p>
+                <span className="flex">
+                    <span className="brukerliste__gutter-left brukerliste--min-width-minside" />
+                    <span className="brukerliste__arbeidslisteinnhold flex--grow">
+                        <UndertekstBold>
+                            {overskrift}
+                        </UndertekstBold>
+                        <p>{bruker.arbeidsliste.kommentar}</p>
+                        <div className="brukerliste__arbeidslisteinnhold-hboks">
+                            <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
+                                Fristdato {arbeidslisteFrist.toLocaleDateString()}
+                            </p>
+                            <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
+                                {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
+                                <ArbeidslisteModalRediger
+                                    bruker={bruker}
+                                    innloggetVeileder={innloggetVeileder}
+                                    sistEndretDato={sistEndretDato}
+                                    sistEndretAv={sistEndretAv}
+                                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                                />
+                            </p>
+                        </div>
+                    </span>
                 </span>
-            </span>
             </article>
             : <></>
     );
