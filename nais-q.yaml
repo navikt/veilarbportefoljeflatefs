@@ -9,19 +9,27 @@ metadata:
 spec:
   image: docker.pkg.github.com/navikt/veilarbportefoljeflatefs/veilarbportefoljeflatefs:{{version}}
   port: 8080
+  webproxy: true
   liveness:
     path: veilarbportefoljeflatefs/internal/isAlive
-    initialDelay: 20
+    initialDelay: 5
   readiness:
-    path: veilarbportefoljeflatefs/internal/selftest
-    initialDelay: 20
+    path: veilarbportefoljeflatefs/internal/isReady
+    initialDelay: 5
   replicas:
-    min: 2
-    max: 4
-    cpuThresholdPercentage: 50
+    min: 1
+    max: 2
+    cpuThresholdPercentage: 75
+  resources:
+    limits:
+      cpu: "1"
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
   prometheus:
     enabled: true
-    path: veilarbportefoljeflatefs/internal/metrics
+    path: veilarbportefoljeflatefs/internal/prometheus
   ingresses:
     - https://veilarbportefoljeflatefs-{{namespace}}.nais.preprod.local
     - https://app-{{namespace}}.adeo.no/veilarbportefoljeflatefs
