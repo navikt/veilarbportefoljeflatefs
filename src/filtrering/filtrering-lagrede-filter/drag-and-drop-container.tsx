@@ -1,20 +1,38 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, RefObject, useEffect } from "react";
 import { useEventListener } from "../../hooks/use-event-listener";
 import DragAndDropRow from "./drag-and-drop-row";
 import './drag-and-drop.less';
+import { LagretFilter } from "../../ducks/lagret-filter";
+import LagretFilterRad from "./lagret-filter-rad";
 
 
 export interface DragAndDropProps {
-    dragAndDropElements: JSX.Element[]
+    dragAndDropElements: LagretFilter[];
+    filtergruppe: string;
+    outerDivRef: RefObject<HTMLDivElement>;
 }
 
 
-function DragAndDropContainer({ dragAndDropElements }: DragAndDropProps) {
+function DragAndDropContainer({ dragAndDropElements, filtergruppe, outerDivRef }: DragAndDropProps) {
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
     const [dropIndex, setDropIndex] = useState(-1);
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
+    const [LagretFilterRader, setLagretFilterRader] = useState([<></>]);
+
+    // To prevent too many updates
+    useEffect(() => {
+        setLagretFilterRader(dragAndDropElements.map((filter) =>
+            <LagretFilterRad
+                filter={filter}
+                filtergruppe={filtergruppe}
+                parentDiv={outerDivRef}
+            />))
+            // TODO: Make call to update in DB?
+            console.log("Update DB")
+            console.log(dragAndDropElements)
+    }, [dropIndex]);
 
     const handleDragStart = (e) => {
         if (dragContainer.current) {
@@ -48,7 +66,7 @@ function DragAndDropContainer({ dragAndDropElements }: DragAndDropProps) {
     useEventListener('dragend', handleDragEnd);
     return (
         <ul ref={dragContainer} className="drag-and-drop-container" >
-            {dragAndDropElements.map((feild, idx) =>
+            {LagretFilterRader.map((feild, idx) =>
                 <DragAndDropRow key={idx}
                     idx={idx}
                     setIsDestination={setDestIndex}

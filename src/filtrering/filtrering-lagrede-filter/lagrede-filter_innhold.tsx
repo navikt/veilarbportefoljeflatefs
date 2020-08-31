@@ -6,7 +6,6 @@ import Hjelpetekst from "nav-frontend-hjelpetekst";
 import hiddenIf from "../../components/hidden-if/hidden-if";
 import { Normaltekst } from "nav-frontend-typografi";
 import DragAndDropContainer from './drag-and-drop-container';
-import LagretFilterRad from './lagret-filter-rad';
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -63,16 +62,13 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     });
 
     const hentFiltrertListeinnhold = () => {
-        const LagretFilterRader = filtrertListe().map((filter) =>
-            <LagretFilterRad
-                filter={filter}
-                filtergruppe={props.filtergruppe}
-                parentDiv={outerDivRef}
-            />)
-
         return (
             <div className='lagrede-filter__valgfelt' ref={outerDivRef}>
-                <DragAndDropContainer dragAndDropElements={LagretFilterRader} />
+                <DragAndDropContainer 
+                dragAndDropElements={filtrertListe()}
+                filtergruppe={props.filtergruppe}
+                outerDivRef={outerDivRef}
+                />
             </div>)
     }
 
