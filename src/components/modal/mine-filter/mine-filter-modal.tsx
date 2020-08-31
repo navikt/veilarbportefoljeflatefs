@@ -9,7 +9,7 @@ import {OrNothing} from "../../../utils/types/types";
 import hiddenIf from "../../hidden-if/hidden-if";
 import {Meny} from "./mine-filter-meny";
 import {MineFilterFnrFeil} from "./mine-filter-fnr-feil";
-import {lukkMineFilterModal} from "../../../ducks/lagret-filter-ui";
+import {lukkMineFilterModal} from "../../../ducks/mine-filter-ui";
 
 export enum Visningstype {
     MENY,
@@ -35,8 +35,8 @@ const HiddenIfOppdaterFilter = hiddenIf(OppdaterMineFilter);
 const HiddenIfFnrFeil = hiddenIf(MineFilterFnrFeil)
 
 export function MineFilterModal(props: { filtergruppe: string }) {
-    const {sisteValgteMineFilter, valgtMineFilter, erModalApen} = useSelector((state: AppState) => (props.filtergruppe === 'veileder') ? state.mineFilterMinOversikt : state.mineFilterEnhetensOversikt)
-    const data = useSelector((state: AppState) => state.mineFilter.data)
+    const {sisteValgteMineFilter, valgtMineFilter, erModalApen} = useSelector((state: AppState) => (props.filtergruppe === 'veileder') ? state.lagretFilterMinOversikt : state.lagretFilterEnhetensOversikt)
+    const data = useSelector((state: AppState) => state.lagretFilter.data)
     const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(Visningstype.MENY)

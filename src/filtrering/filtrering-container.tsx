@@ -36,18 +36,18 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
         key: '@lagret-filter-lamell-apen',
     };
 
-    const [erLagredeFilterApen, setErLagredeFilterApen] = useState<boolean>(sessionStorage.getItem(sessionConfig.key) === "true")
-    const klikkPaLagredeFilter = () => {
-        if (erLagredeFilterApen) {
-            setErLagredeFilterApen(false)
+    const [erMineFilterApen, setErMineFilterApen] = useState<boolean>(sessionStorage.getItem(sessionConfig.key) === "true")
+    const klikkPaMineFilter = () => {
+        if (erMineFilterApen) {
+            setErMineFilterApen(false)
             sessionStorage.setItem(sessionConfig.key, "false");
         } else {
-            setErLagredeFilterApen(true)
+            setErMineFilterApen(true)
             sessionStorage.setItem(sessionConfig.key, "true");
         }
         logEvent('portefolje.metrikker.lamell', {
             navn: "mine-filter",
-            apen: !erLagredeFilterApen,
+            apen: !erMineFilterApen,
             sideNavn: finnSideNavn(),
         });
     }
@@ -59,10 +59,10 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 endreFiltervalg={doEndreFiltervalg}
             />
             <MetrikkEkspanderbartpanel
-                apen={erLagredeFilterApen}
+                apen={erMineFilterApen}
                 lamellNavn="mine-filter"
                 tittel="Mine filter"
-                onClick={klikkPaLagredeFilter}
+                onClick={klikkPaMineFilter}
                 hidden={!erMineFilterFeatureTogglePa}
                 className="mine-filter-wrapper"
             >

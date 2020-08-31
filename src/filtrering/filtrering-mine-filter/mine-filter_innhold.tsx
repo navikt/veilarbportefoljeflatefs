@@ -10,7 +10,7 @@ import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
 import {REDESIGN} from "../../konstanter";
 import {useWindowWidth} from "../../hooks/use-window-width";
 
-interface LagredeFilterInnholdProps {
+interface MineFilterInnholdProps {
     mineFilter: MineFilter[];
     filtergruppe: string;
 }
@@ -19,7 +19,7 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
+function MineFilterInnhold(props: MineFilterInnholdProps) {
     const erPaMinOversikt = props.filtergruppe === "veileder";
     const erPaEnhetensOversikt = props.filtergruppe === "enhet";
     const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
@@ -95,4 +95,4 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 }
 
 
-export default LagredeFilterInnhold;
+export default MineFilterInnhold;

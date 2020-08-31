@@ -2,12 +2,12 @@ import {useEffect} from "react";
 import {erObjektValuesTomt, mineFilterListerErLik} from "../components/modal/mine-filter/mine-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
-import {avmarkerSisteValgtFilter, avmarkerValgtFilter, markerValgtFilter} from "../ducks/lagret-filter-ui";
+import {avmarkerSisteValgtFilter, avmarkerValgtFilter, markerValgtFilter} from "../ducks/mine-filter-ui";
 
 export function NyUseLagreFilterController(props: {filtergruppe: string}) {
     const dispatch = useDispatch()
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
-    const lagretFilterList = useSelector((state: AppState) => state.mineFilter.data);
+    const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
 
 
     useEffect(() => {

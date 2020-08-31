@@ -84,7 +84,7 @@ function Sidebar(props: SidebarProps) {
     const sidebarRef = useRef<HTMLDivElement>(null);
     const selectedTab = useSidebarViewStore(erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt)
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
-    const mineFilterState = useSelector((state: AppState) => state.mineFilter);
+    const mineFilterState = useSelector((state: AppState) => state.lagretFilter);
     const dispatch = useDispatch();
     const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
     const mineFilter = mineFilterState.data;
@@ -174,11 +174,11 @@ function Sidebar(props: SidebarProps) {
 
     const tabs = () => {
         const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
-        const visLagredeFilter = tab => tab.type === SidebarTabType.MINE_FILTER;
+        const visMineFilter = tab => tab.type === SidebarTabType.MINE_FILTER;
 
         if (erPaMinOversikt) {
             if (!erMineFilterFeatureTogglePa) {
-                return sidebar.filter(tab => !visVeiledergrupper(tab) && !visLagredeFilter(tab))
+                return sidebar.filter(tab => !visVeiledergrupper(tab) && !visMineFilter(tab))
                     .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
             } else {
                 return sidebar.filter(tab => !visVeiledergrupper(tab))
@@ -187,7 +187,7 @@ function Sidebar(props: SidebarProps) {
 
         } else if (erPaEnhetensOversikt) {
             if (!erMineFilterFeatureTogglePa) {
-                return sidebar.filter(tab => !visLagredeFilter(tab))
+                return sidebar.filter(tab => !visMineFilter(tab))
                     .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
             } else {
                 return sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));

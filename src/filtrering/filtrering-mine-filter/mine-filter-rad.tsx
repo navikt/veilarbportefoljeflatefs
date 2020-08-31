@@ -4,7 +4,7 @@ import {AppState} from "../../reducer";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
 import {logEvent} from "../../utils/frontend-logger";
 import {velgLagretFilter} from "../../ducks/filtrering";
-import {apneMineFilterModal} from "../../ducks/lagret-filter-ui";
+import {apneMineFilterModal} from "../../ducks/mine-filter-ui";
 import {Radio} from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
 import React, {RefObject, useRef} from "react";
@@ -21,8 +21,8 @@ function MineFilterRad({filter, filtergruppe, parentDiv}: LagretFilterRadProps) 
     const checkboxRef = useRef<HTMLDivElement>(null);
 
     const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === "veileder"
-        ? state.mineFilterMinOversikt.valgtMineFilter
-        : state.mineFilterEnhetensOversikt.valgtMineFilter);
+        ? state.lagretFilterMinOversikt.valgtMineFilter
+        : state.lagretFilterEnhetensOversikt.valgtMineFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 

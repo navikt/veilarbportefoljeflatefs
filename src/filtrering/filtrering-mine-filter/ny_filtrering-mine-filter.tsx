@@ -8,7 +8,7 @@ import './ny_mine-filter-innhold.less'
 import NyttMineFilterInnhold from "./ny_mine-filter_innhold";
 
 function NyFiltreringMineFilter(props: { filtergruppe: string, fjernUtilgjengeligeFilter: (elem: MineFilter) => void, sortertMineFilter }) {
-    const mineFilterState = useSelector((state: AppState) => state.mineFilter);
+    const mineFilterState = useSelector((state: AppState) => state.lagretFilter);
 
     return (
         <>

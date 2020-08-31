@@ -9,20 +9,20 @@ import {ErrorModalType, MineFilterVarselModal} from "./varsel-modal";
 import BekreftSlettingModal from "../bekreftelse-modal/bekreft-sletting-modal";
 import {lagreEndringer, slettFilter} from "../../../ducks/mine-filter";
 import {useRequestHandler} from "../../../hooks/use-request-handler";
-import {avmarkerSisteValgtFilter} from "../../../ducks/lagret-filter-ui";
+import {avmarkerSisteValgtFilter} from "../../../ducks/mine-filter-ui";
 
 export function OppdaterMineFilter(props: { gammeltFilterNavn, filterId, lukkModal, filtergruppe }) {
     const dispatch = useDispatch();
     const filterValg = useSelector((state: AppState) => props.filtergruppe === 'veileder' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
-    const data = useSelector((state: AppState) => state.mineFilter.data)
+    const data = useSelector((state: AppState) => state.lagretFilter.data)
     const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false)
     const [nyttFilterNavn, setNyttFilterNavn] = useState<string>(props.gammeltFilterNavn)
 
     const [feilmelding, setFeilmelding] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError)
     const {gammeltFilterNavn, filterId, lukkModal} = props;
 
-    const requestHandlerOpddater = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
-    const requestHandlerSlette = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
+    const requestHandlerOppdater = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal);
+    const requestHandlerSlette = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal);
 
     const doLagreEndringer = (event) => {
         event.preventDefault()
@@ -37,7 +37,7 @@ export function OppdaterMineFilter(props: { gammeltFilterNavn, filterId, lukkMod
                 filterValg: filterValg,
                 filterId: filterId
             }))
-            requestHandlerOpddater.setSaveRequestSent(true)
+            requestHandlerOppdater.setSaveRequestSent(true)
         }
     }
 
@@ -63,7 +63,7 @@ export function OppdaterMineFilter(props: { gammeltFilterNavn, filterId, lukkMod
                     autoFocus={true}
                     maxLength={255}
                 />
-                <div className="lagret-filter-knapp-wrapper">
+                <div className="mine-filter-knapp-wrapper">
                     <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>
                     <Knapp mini onClick={(e) => bekreftSletting(e)}>Slett</Knapp>
                 </div>
@@ -76,9 +76,9 @@ export function OppdaterMineFilter(props: { gammeltFilterNavn, filterId, lukkMod
                 navn={gammeltFilterNavn}/>
             <MineFilterVarselModal
                 filterNavn={nyttFilterNavn}
-                erApen={requestHandlerOpddater.errorModalErApen}
+                erApen={requestHandlerOppdater.errorModalErApen}
                 modalType={ErrorModalType.OPPDATERE}
-                setErrorModalErApen={requestHandlerOpddater.setErrorModalErApen}
+                setErrorModalErApen={requestHandlerOppdater.setErrorModalErApen}
             />
             <MineFilterVarselModal
                 filterNavn={nyttFilterNavn}
