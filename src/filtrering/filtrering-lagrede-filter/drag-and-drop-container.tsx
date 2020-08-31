@@ -1,4 +1,4 @@
-import React, { useRef, useState, RefObject, useEffect } from "react";
+import React, { useRef, useState, RefObject } from "react";
 import { useEventListener } from "../../hooks/use-event-listener";
 import DragAndDropRow from "./drag-and-drop-row";
 import './drag-and-drop.less';
@@ -19,20 +19,6 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe, outerDivRef }
     const [dropIndex, setDropIndex] = useState(-1);
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
-    const [LagretFilterRader, setLagretFilterRader] = useState([<></>]);
-
-    // To prevent too many updates
-    useEffect(() => {
-        setLagretFilterRader(dragAndDropElements.map((filter) =>
-            <LagretFilterRad
-                filter={filter}
-                filtergruppe={filtergruppe}
-                parentDiv={outerDivRef}
-            />))
-            // TODO: Make call to update in DB?
-            console.log("Update DB")
-            console.log(dragAndDropElements)
-    }, [dropIndex]);
 
     const handleDragStart = (e) => {
         if (dragContainer.current) {
@@ -56,6 +42,9 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe, outerDivRef }
             flyttElementIArray(dragAndDropElements, srcIndex, destIndex)
             setDropIndex(destIndex)
             setdDragIsInsideElement(false)
+            
+            // TODO: Make call to update in DB?
+            console.log("Update DB")
         }
         setSrcIndex(-1)
         setDestIndex(-1)
@@ -66,7 +55,7 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe, outerDivRef }
     useEventListener('dragend', handleDragEnd);
     return (
         <ul ref={dragContainer} className="drag-and-drop-container" >
-            {LagretFilterRader.map((feild, idx) =>
+            {dragAndDropElements.map((feild, idx) =>
                 <DragAndDropRow key={idx}
                     idx={idx}
                     setIsDestination={setDestIndex}
@@ -75,7 +64,11 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe, outerDivRef }
                     sourceIndex={srcIndex}
                     dropAnimation={idx === dropIndex}
                 >
-                    {feild}
+                    <LagretFilterRad
+                        filter={feild}
+                        filtergruppe={filtergruppe}
+                        parentDiv={outerDivRef}
+                    />
                 </DragAndDropRow>
             )}
         </ul>
