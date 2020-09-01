@@ -24,25 +24,26 @@ export default function ArbeidslistePanel({ bruker, innloggetVeileder, skalVises
                 <span className="flex">
                     <span className="brukerliste__gutter-left brukerliste--min-width-minside" />
                     <span className="brukerliste__arbeidslisteinnhold flex--grow">
-                        <UndertekstBold>
-                            {overskrift}
-                        </UndertekstBold>
-                        <p>{bruker.arbeidsliste.kommentar}</p>
                         <div className="brukerliste__arbeidslisteinnhold-hboks">
+                            <UndertekstBold>
+                                {overskrift}
+                            </UndertekstBold>
                             <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
-                                Fristdato {arbeidslisteFrist.toLocaleDateString()}
-                            </p>
-                            <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
-                                {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
-                                <ArbeidslisteModalRediger
-                                    bruker={bruker}
-                                    innloggetVeileder={innloggetVeileder}
-                                    sistEndretDato={sistEndretDato}
-                                    sistEndretAv={sistEndretAv}
-                                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                                />
+                                Arbeidsliste frist: {arbeidslisteFrist.toLocaleDateString()} 
                             </p>
                         </div>
+                        <p>{bruker.arbeidsliste.kommentar}</p>
+                        <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
+                            {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
+                            <ArbeidslisteModalRediger
+                                bruker={bruker}
+                                innloggetVeileder={innloggetVeileder}
+                                sistEndretDato={sistEndretDato}
+                                sistEndretAv={sistEndretAv}
+                                settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                            />
+                        </p>
+
                     </span>
                 </span>
             </article>
