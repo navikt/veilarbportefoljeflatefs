@@ -1,3 +1,5 @@
+import {ListevisningType} from "./ui/listevisning";
+
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
     PENDING: 'PENDING',
@@ -55,7 +57,7 @@ export function handterFeil(dispatch, action) {
     };
 }
 
-export function fetchToJson(url: string, config: RequestInit = {}){
+export function fetchToJson(url: string, config: RequestInit = {}) {
     return fetch(url, config)
         .then(sjekkStatuskode)
         .then(toJson);
@@ -73,9 +75,9 @@ export function doThenDispatch(fn, {OK, FEILET, PENDING}) {
 }
 
 export const stateSliceToNameMap = {
-    filtreringEnhetensOversikt: 'enhet',
-    filtreringMinoversikt: 'veileder',
-    filtreringVeilederoversikt: 'veiledere'
+    filtreringEnhetensOversikt: ListevisningType.enhetensOversikt,
+    filtreringMinoversikt: ListevisningType.minOversikt,
+    filtreringVeilederoversikt: ListevisningType.veilederOversikt
 };
 
 export const nameToStateSliceMap = Object.entries(stateSliceToNameMap)
