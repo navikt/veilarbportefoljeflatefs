@@ -1,9 +1,9 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import './ny_mine-filter-innhold.less'
 import '../../components/sidebar/sidebar.less'
-import {MineFilter} from "../../ducks/mine-filter";
-import {Normaltekst} from "nav-frontend-typografi";
-import NyMineFilterRad from "./ny_mine-filter-rad";
+import { MineFilter } from "../../ducks/mine-filter";
+import { Normaltekst } from "nav-frontend-typografi";
+import DragAndDropContainer from './drag-and-drop-container';
 
 interface MineFilterInnholdProps {
     lagretFilter: MineFilter[];
@@ -31,13 +31,10 @@ function NyMineFilterInnhold(props: MineFilterInnholdProps) {
     const hentFiltrertListeinnhold = () => {
         return (
             <div className="ny__mine-filter__valgfelt" ref={outerDivRef}>
-                {filtrertListe().map((filter, idx) =>
-                    <NyMineFilterRad
-                        key={idx}
-                        filter={filter}
-                        filtergruppe={props.filtergruppe}
-                    />
-                )}
+                <DragAndDropContainer
+                    dragAndDropElements={filtrertListe()}
+                    filtergruppe={props.filtergruppe}
+                />
             </div>)
     }
 

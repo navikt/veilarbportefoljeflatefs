@@ -1,18 +1,21 @@
-import React, { useRef, useState, RefObject } from "react";
+import React, { useRef, useState } from "react";
 import { useEventListener } from "../../hooks/use-event-listener";
 import DragAndDropRow from "./drag-and-drop-row";
 import './drag-and-drop.less';
 import { MineFilter } from "../../ducks/mine-filter";
-import MineFilterRad from "./mine-filter-rad";
+import NyMineFilterRad from "./ny_mine-filter-rad";
 
 export interface DragAndDropProps {
     dragAndDropElements: MineFilter[];
     filtergruppe: string;
-    outerDivRef: RefObject<HTMLDivElement>;
 }
 
+interface SorteringOgId {
+    sortOrder: number;
+    filterId: number;
+}
 
-function DragAndDropContainer({ dragAndDropElements, filtergruppe, outerDivRef }: DragAndDropProps) {
+function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDropProps) {
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
     const [dropIndex, setDropIndex] = useState(-1);
@@ -41,9 +44,12 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe, outerDivRef }
             flyttElementIArray(dragAndDropElements, srcIndex, destIndex)
             setDropIndex(destIndex)
             setdDragIsInsideElement(false)
-            
-            // TODO: Make call to update in DB?
-            console.log("Update DB")
+
+            const idAndPriorities: SorteringOgId[] = dragAndDropElements.map((filter, idx) => ({
+                sortOrder: idx,
+                filterId: filter.filterId
+            }))
+            console.log(JSON.stringify(idAndPriorities))
         }
         setSrcIndex(-1)
         setDestIndex(-1)
@@ -54,7 +60,7 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe, outerDivRef }
     useEventListener('dragend', handleDragEnd);
     return (
         <ul ref={dragContainer} className="drag-and-drop-container" >
-            {dragAndDropElements.map((feild, idx) =>
+            {dragAndDropElements.map((filter, idx) =>
                 <DragAndDropRow key={idx}
                     idx={idx}
                     setIsDestination={setDestIndex}
@@ -63,10 +69,9 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe, outerDivRef }
                     sourceIndex={srcIndex}
                     dropAnimation={idx === dropIndex}
                 >
-                    <MineFilterRad
-                        filter={feild}
+                    <NyMineFilterRad
+                        filter={filter}
                         filtergruppe={filtergruppe}
-                        parentDiv={outerDivRef}
                     />
                 </DragAndDropRow>
             )}

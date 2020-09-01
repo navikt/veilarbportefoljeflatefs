@@ -24,7 +24,7 @@ export interface MineFilter {
     filterId: number;
     filterValg: FiltervalgModell;
     opprettetDato: Date;
-    sortering: number | null;
+    sortOrder: number | null;
 }
 
 export interface MineFilterState {
