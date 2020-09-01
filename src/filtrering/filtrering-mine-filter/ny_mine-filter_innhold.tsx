@@ -5,7 +5,7 @@ import {MineFilter} from "../../ducks/mine-filter";
 import {Normaltekst} from "nav-frontend-typografi";
 import NyMineFilterRad from "./ny_mine-filter-rad";
 
-interface LagredeFilterInnholdProps {
+interface MineFilterInnholdProps {
     lagretFilter: MineFilter[];
     filtergruppe: string;
     fjernUtilgjengeligeFilter: (elem: MineFilter) => void;
@@ -15,7 +15,7 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
+function NyMineFilterInnhold(props: MineFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
         return props.lagretFilter.filter(elem => props.fjernUtilgjengeligeFilter(elem))
@@ -56,4 +56,4 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     )
 }
 
-export default NyLagredeFilterInnhold;
+export default NyMineFilterInnhold;

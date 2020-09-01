@@ -5,7 +5,7 @@ import {erObjektValuesTomt, mineFilterListerErLik} from "../components/modal/min
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 import {MINE_FILTER} from "../konstanter";
-import {apneMineFilterModal} from "../ducks/lagret-filter-ui";
+import {apneMineFilterModal} from "../ducks/mine-filter-ui";
 import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 export function NyMineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
@@ -17,7 +17,7 @@ export function NyMineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     const erPaEnhetensOversikt = props.filtergruppe === 'enhet';
 
     const filtrering = useSelector((state: AppState) => erPaMinOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
-    const lagretFilterList = useSelector((state: AppState) => state.mineFilter.data);
+    const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
     const valgtFilter = !lagretFilterList.find(elem => mineFilterListerErLik(elem.filterValg, filtrering));
 
     const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER)

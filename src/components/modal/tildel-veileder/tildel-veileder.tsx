@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { tildelVeileder } from '../../../ducks/portefolje';
-import { VeilederModell } from '../../../model-interfaces';
-import { AppState } from '../../../reducer';
-import { useState } from 'react';
-import { Radio } from 'nav-frontend-skjema';
+import {connect, useDispatch, useSelector} from 'react-redux';
+import {tildelVeileder} from '../../../ducks/portefolje';
+import {VeilederModell} from '../../../model-interfaces';
+import {AppState} from '../../../reducer';
+import {useState} from 'react';
+import {Radio} from 'nav-frontend-skjema';
 import '../../toolbar/toolbar.less';
-import { Knapp } from 'nav-frontend-knapper';
+import {Knapp} from 'nav-frontend-knapper';
 import SokFilterNy from '../../sok-veiledere/sok-filter-ny';
 import classNames from 'classnames';
-import { nameToStateSliceMap } from '../../../ducks/utils';
+import {nameToStateSliceMap} from '../../../ducks/utils';
 
 interface TildelVeilederProps {
     filtergruppe?: string;
@@ -98,7 +98,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || 'filtrering';
+    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe]
     return ({
         filtervalg: state[stateSlice],
     });
