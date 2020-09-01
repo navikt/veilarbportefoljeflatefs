@@ -60,7 +60,7 @@ function SokVeilederFilter(props: AllProps) {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || 'filtrering';
+    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || 'filtreringEnhetensOversikt';
     return ({
         veiledere: state.veiledere,
         filtervalg: state[stateSlice],

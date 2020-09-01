@@ -13,7 +13,6 @@ import {ReactComponent as MineFilterIkon} from '../ikoner/tab_mine-filter.svg';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {logEvent} from '../../utils/frontend-logger';
 import SidebarTab from './sidebar-tab';
 import {useDispatch, useSelector} from 'react-redux';
 import {pagineringSetup} from '../../ducks/paginering';
@@ -55,7 +54,6 @@ const sidebar: Sidebar[] = [
     }
 ];
 
-
 function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar | undefined {
     return tabs.find(t => t.type === viewType);
 }
@@ -85,6 +83,7 @@ function Sidebar(props: SidebarProps) {
     const selectedTab = useSidebarViewStore(erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt)
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
     const mineFilterState = useSelector((state: AppState) => state.lagretFilter);
+    const sidebarTabEndret = 'sidebarTabEndret';
     const dispatch = useDispatch();
     const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
     const mineFilter = mineFilterState.data;
@@ -97,7 +96,7 @@ function Sidebar(props: SidebarProps) {
 
         if (nyttLagretFilter || oppdatertLagretFilter) {
             dispatch({
-                type: 'sidebarTabEndret',
+                type: sidebarTabEndret,
                 selectedTab: SidebarTabInfo.MINE_FILTER,
                 name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
             })
@@ -106,12 +105,11 @@ function Sidebar(props: SidebarProps) {
 
     function handleOnTabClicked(tab: Sidebar) {
         dispatch({
-            type: 'sidebarTabEndret',
+            type: sidebarTabEndret,
             selectedTab: tab.type,
             name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
         })
         props.handleOnTabClicked(tab, selectedTab);
-        logEvent('portefolje.metrikker.sidebar-tab', {tab: tab.type,});
     }
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
@@ -119,21 +117,17 @@ function Sidebar(props: SidebarProps) {
         dispatch(endreFiltervalg(filterId, filterVerdi, props.filtergruppe));
     };
 
-
     const fjernUtilgjengeligeFilter = (elem) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes("MIN_ARBEIDSLISTE");
         const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
-        const veiledergrupper = elem.filterValg.veiledere.length > 0;
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
+
+        const veiledergrupper = elem.filterValg.veiledere.length > 0;
         const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
 
-        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere))
-            || (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
-            return false;
-        }
-        return true;
+        return !((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere))
+            || (erPaMinOversikt && (veiledergrupper || ufordelteBrukere)));
     }
-
 
     function sidevelger(selectedTabData) {
         if ((selectedTabData as Sidebar).tittel === 'Status') {
