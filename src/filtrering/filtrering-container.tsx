@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import {FiltervalgModell} from '../model-interfaces';
 import FiltreringFilter from './filtrering-filter';
@@ -11,12 +11,11 @@ import FilteringVeilederGrupper from './filtrering-veileder-grupper/filtrering-v
 import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
-import FiltreringLagredeFilter from "./filtrering-lagrede-filter/filtrering-lagrede-filter";
-import {AppState} from "../reducer";
-import {sjekkFeature} from "../ducks/features";
+import FiltreringMineFilter from "./filtrering-mine-filter/filtrering-mine-filter";
 import {MINE_FILTER} from "../konstanter";
 import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";
+import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -26,7 +25,7 @@ interface FiltreringContainerProps {
 
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
     const dispatch = useDispatch();
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, MINE_FILTER));
+    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER)
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
@@ -37,18 +36,18 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
         key: '@lagret-filter-lamell-apen',
     };
 
-    const [erLagredeFilterApen, setErLagredeFilterApen] = useState<boolean>(sessionStorage.getItem(sessionConfig.key) === "true")
-    const klikkPaLagredeFilter = () => {
-        if (erLagredeFilterApen) {
-            setErLagredeFilterApen(false)
+    const [erMineFilterApen, setErMineFilterApen] = useState<boolean>(sessionStorage.getItem(sessionConfig.key) === "true")
+    const klikkPaMineFilter = () => {
+        if (erMineFilterApen) {
+            setErMineFilterApen(false)
             sessionStorage.setItem(sessionConfig.key, "false");
         } else {
-            setErLagredeFilterApen(true)
+            setErMineFilterApen(true)
             sessionStorage.setItem(sessionConfig.key, "true");
         }
         logEvent('portefolje.metrikker.lamell', {
             navn: "mine-filter",
-            apen: !erLagredeFilterApen,
+            apen: !erMineFilterApen,
             sideNavn: finnSideNavn(),
         });
     }
@@ -60,14 +59,14 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 endreFiltervalg={doEndreFiltervalg}
             />
             <MetrikkEkspanderbartpanel
-                apen={erLagredeFilterApen}
+                apen={erMineFilterApen}
                 lamellNavn="mine-filter"
                 tittel="Mine filter"
-                onClick={klikkPaLagredeFilter}
-                hidden={!lagredeFilterFeatureToggleErPa}
-                className="lagrede-filter-wrapper"
+                onClick={klikkPaMineFilter}
+                hidden={!erMineFilterFeatureTogglePa}
+                className="mine-filter-wrapper"
             >
-                <FiltreringLagredeFilter filtergruppe={filtergruppe}/>
+                <FiltreringMineFilter filtergruppe={filtergruppe}/>
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={false}

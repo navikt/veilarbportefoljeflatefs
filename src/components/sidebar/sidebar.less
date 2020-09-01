@@ -15,11 +15,17 @@
       position: relative;
       display: block;
       background-color: transparent;
-      padding: .5rem .2rem 0;
+      padding: .5rem .8rem 0;
       height: auto;
       cursor: pointer;
       border: 1px solid transparent;
       border-bottom: 0.3rem solid white;
+
+      &:hover {
+        border-bottom: 0.3rem solid @navBla;
+        cursor: pointer;
+        opacity: 1;
+      }
 
       &-container {
         grid-row: 1;
@@ -44,6 +50,12 @@
     &__hidden {
       .sidebar__tab-valgt {
         border-bottom: 0.3rem solid white;
+
+        &:hover {
+          border-bottom: 0.3rem solid @navBla;
+          cursor: pointer;
+          opacity: 1;
+        }
       }
     }
 
@@ -57,25 +69,6 @@
       width: inherit;
       box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
 
-      .typo-systemtittel {
-        margin-bottom: .5rem;
-        display: flex;
-      }
-
-      .lukknapp--overstHjorne {
-        top: .5rem;
-        right: .5rem;
-        border: none;
-      }
-
-      .hjelpetekst {
-        margin-left: 9rem;
-        margin-top: auto;
-
-        &__innhold {
-          max-width: 24rem;
-        }
-      }
 
       .filtrering-filter {
         &__kolonne {
@@ -83,43 +76,73 @@
         }
       }
 
-      .filtrering-filter, .ny__filtrering-oversikt, .ny__lagrede-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
+      .filtrering-filter, .ny__filtrering-oversikt, .ny__mine-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
         height: auto;
         overflow-y: auto;
         padding: .5rem;
         max-height: 80vh;
       }
-    }
-  }
 
-  @media (max-height: 1250px) {
-    .sidebar__content-container {
-      .filtrering-filter, .ny__filtrering-oversikt, .ny__lagrede-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
-        max-height: 75vh;
+      .sidebar-header {
+        display: grid;
+        grid-template-columns: 80% 10% 10%;
+        margin-bottom: 1rem;
+
+        &__tekst {
+          grid-column: 1;
+          margin: auto 0;
+
+          h2 {
+            margin-bottom: 0;
+          }
+        }
+
+        .hjelpetekst {
+          grid-column: 2;
+          margin: auto 0;
+        }
+
+        &__lukknapp {
+          grid-column: 3;
+
+          .lukknapp--overstHjorne {
+            top: .5rem;
+            right: .5rem;
+            border: none;
+          }
+        }
       }
     }
-  }
 
-  @media (max-height: 1100px) {
-    .sidebar__content-container {
-      .filtrering-filter, .ny__filtrering-oversikt, .ny__lagrede-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
-        max-height: 70vh;
+    @media (max-height: 1250px) {
+      .sidebar__content-container {
+        .filtrering-filter, .ny__filtrering-oversikt, .ny__mine-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
+          max-height: 75vh;
+        }
       }
     }
-  }
 
-  @media (max-height: 870px) {
-    .sidebar__content-container {
-      .filtrering-filter, .ny__filtrering-oversikt, .ny__lagrede-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
-        max-height: 60vh;
+    @media (max-height: 1100px) {
+      .sidebar__content-container {
+        .filtrering-filter, .ny__filtrering-oversikt, .ny__mine-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
+          max-height: 70vh;
+        }
       }
     }
-  }
 
-  @media (max-height: 640px) {
-    .sidebar__content-container {
-      .filtrering-filter, .ny__filtrering-oversikt, .ny__lagrede-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
-        max-height: 50vh;
+    @media (max-height: 870px) {
+      .sidebar__content-container {
+        .filtrering-filter, .ny__filtrering-oversikt, .ny__mine-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
+          max-height: 60vh;
+        }
+      }
+    }
+
+    @media (max-height: 640px) {
+      .sidebar__content-container {
+        .filtrering-filter, .ny__filtrering-oversikt, .ny__mine-filter__valgfelt, .ny__veileder-gruppe__valgfelt {
+          max-height: 50vh;
+        }
       }
     }
   }

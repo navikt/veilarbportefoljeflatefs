@@ -29,7 +29,7 @@ import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
 import {useLagreFilterController} from "../minoversikt/use-lagre-filter-controller";
 import {MineFilterLagreFilterKnapp} from "../minoversikt/mine-filter-lagre-filter-knapp";
-import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
+import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -146,7 +146,7 @@ function EnhetSide() {
                         </div>
                     </div>
                 </Innholdslaster>
-                <LagreFilterModal filtergruppe={filtergruppe}/>
+                <MineFilterModal filtergruppe={filtergruppe}/>
                 <ModalEnhetSideController/>
             </div>
         </DocumentTitle>

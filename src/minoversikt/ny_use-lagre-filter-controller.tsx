@@ -1,8 +1,8 @@
 import {useEffect} from "react";
-import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/lagrede-filter/lagrede-filter-utils";
+import {erObjektValuesTomt, mineFilterListerErLik} from "../components/modal/mine-filter/mine-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
-import {avmarkerSisteVelgtFilter, avmarkerVelgtFilter, markerVelgtFilter} from "../ducks/lagret-filter-ui";
+import {avmarkerSisteValgtFilter, avmarkerValgtFilter, markerValgtFilter} from "../ducks/mine-filter-ui";
 
 export function NyUseLagreFilterController(props: {filtergruppe: string}) {
     const dispatch = useDispatch()
@@ -11,16 +11,16 @@ export function NyUseLagreFilterController(props: {filtergruppe: string}) {
 
 
     useEffect(() => {
-        const valgtFilter = lagretFilterList.find(elem => lagredeFilterListerErLik(elem.filterValg, filtreringMinOversikt));
+        const valgtFilter = lagretFilterList.find(elem => mineFilterListerErLik(elem.filterValg, filtreringMinOversikt));
 
         if (erObjektValuesTomt(filtreringMinOversikt)){
-            dispatch(avmarkerSisteVelgtFilter(props.filtergruppe));
+            dispatch(avmarkerSisteValgtFilter(props.filtergruppe));
         }
 
         if (valgtFilter) {
-            dispatch(markerVelgtFilter(valgtFilter, props.filtergruppe));
+            dispatch(markerValgtFilter(valgtFilter, props.filtergruppe));
         } else {
-            dispatch(avmarkerVelgtFilter(props.filtergruppe));
+            dispatch(avmarkerValgtFilter(props.filtergruppe));
         }
     }, [filtreringMinOversikt, lagretFilterList, dispatch])
 

@@ -1,6 +1,6 @@
-import {erObjektValuesTomt, lagredeFilterListerErLik} from "./lagrede-filter-utils";
+import {erObjektValuesTomt, mineFilterListerErLik} from "./mine-filter-utils";
 
-describe('Lagrede filter utils', () => {
+describe('Mine filter utils', () => {
     describe('Er objekt values tomt', () => {
         it('sjekk minoversikt', () => {
             const filtervalgModell = {
@@ -105,7 +105,7 @@ describe('Lagrede filter utils', () => {
                 arbeidslisteKategori: []
             };
 
-            expect(lagredeFilterListerErLik(model1, model2)).toBe(true);
+            expect(mineFilterListerErLik(model1, model2)).toBe(true);
         });
 
         it('Kjonn er ikke lik', () => {
@@ -173,7 +173,7 @@ describe('Lagrede filter utils', () => {
                 arbeidslisteKategori: []
             };
 
-            expect(lagredeFilterListerErLik(model1, model2)).toBe(false);
+            expect(mineFilterListerErLik(model1, model2)).toBe(false);
         });
 
         it('Aktiviteter verdi er lik', () => {
@@ -241,7 +241,7 @@ describe('Lagrede filter utils', () => {
                 arbeidslisteKategori: []
             };
 
-            expect(lagredeFilterListerErLik(model1, model2)).toBe(true);
+            expect(mineFilterListerErLik(model1, model2)).toBe(true);
         });
     });
 });

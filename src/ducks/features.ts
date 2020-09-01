@@ -4,7 +4,6 @@ import {
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
-    CVJOBBPROFIL,
     REDESIGN,
     MINE_FILTER
 } from '../konstanter';
@@ -18,7 +17,6 @@ export interface FeaturesState {
 const initalState: FeaturesState = {
     [SPOR_OM_TILBAKEMELDING]: false,
     [VEDTAKSTOTTE]: false,
-    [CVJOBBPROFIL]: false,
     [REDESIGN]: false,
     [MINE_FILTER]: false
 };

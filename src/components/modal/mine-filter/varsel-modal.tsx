@@ -16,7 +16,7 @@ const errorModalTypeToTittel = new Map<ErrorModalType, string>([
     [ErrorModalType.SLETTE, 'Filteret kunne ikke slettes']
 ]);
 
-export function LagredeFilterVarselModal(props: { filterNavn: string, modalType: ErrorModalType, erApen: boolean, setErrorModalErApen}) {
+export function MineFilterVarselModal(props: { filterNavn: string, modalType: ErrorModalType, erApen: boolean, setErrorModalErApen}) {
 
     let HiddenIfNormalTekst = hiddenIf(Normaltekst);
 

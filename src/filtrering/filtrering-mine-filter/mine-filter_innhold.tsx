@@ -1,14 +1,17 @@
-import React, { useEffect, useRef } from 'react';
-import { LagretFilter } from '../../ducks/lagret-filter';
-import './lagrede-filter_innhold.less'
-import { PopoverOrientering } from "nav-frontend-popover";
+import React, {useEffect, useRef} from 'react';
+import {MineFilter} from '../../ducks/mine-filter';
+import './mine-filter_innhold.less'
+import {PopoverOrientering} from "nav-frontend-popover";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 import hiddenIf from "../../components/hidden-if/hidden-if";
-import { Normaltekst } from "nav-frontend-typografi";
+import {Normaltekst} from "nav-frontend-typografi";
+import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
+import {REDESIGN} from "../../konstanter";
+import {useWindowWidth} from "../../hooks/use-window-width";
 import DragAndDropContainer from './drag-and-drop-container';
 
-interface LagredeFilterInnholdProps {
-    lagretFilter: LagretFilter[];
+interface MineFilterInnholdProps {
+    mineFilter: MineFilter[];
     filtergruppe: string;
 }
 
@@ -16,9 +19,10 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
+function MineFilterInnhold(props: MineFilterInnholdProps) {
     const erPaMinOversikt = props.filtergruppe === "veileder";
     const erPaEnhetensOversikt = props.filtergruppe === "enhet";
+    const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
 
     const fjernUtilgjengeligeFilter = (elem) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes("MIN_ARBEIDSLISTE");
@@ -38,8 +42,8 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
-        const filtere = props.lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
-        filtere.sort((a: LagretFilter, b: LagretFilter) => {
+       const filtere = props.mineFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
+        filtere.sort((a: MineFilter, b: MineFilter) => {
             if (a.sortering !== null) {
                 if (b.sortering !== null) {
                     return a.sortering - b.sortering
@@ -74,8 +78,8 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const getEmptyState = () => {
         return (
-            <div className="lagredefilter-emptystate">
-                <Normaltekst className="lagredefilter-emptystate__tekst">
+            <div className="mine-filter-emptystate">
+                <Normaltekst className="mine-filter-emptystate__tekst">
                     Ingen lagrede filter
                 </Normaltekst>
             </div>
@@ -88,17 +92,17 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     return (
         <>
-            <div className="hjelpetekst__wrapper">
-                <HiddenHjelpetekst type={PopoverOrientering.Over}
-                    hidden={filtrertListe().length === props.lagretFilter.length}>
-                    {erPaMinOversikt && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
-                    {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}
-                </HiddenHjelpetekst>
-            </div>
+            <HiddenHjelpetekst
+                type={useWindowWidth() < 1200 ? PopoverOrientering.Venstre : PopoverOrientering.Over}
+                hidden={filtrertListe().length === props.mineFilter.length}
+                className={erRedesignFeatureTogglePa ? 'ny__hjelpetekst' : 'gammelt__hjelpetekst'}>
+                {erPaMinOversikt && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
+                {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}
+            </HiddenHjelpetekst>
             {hentInnhold()}
         </>
     )
 }
 
 
-export default LagredeFilterInnhold;
+export default MineFilterInnhold;

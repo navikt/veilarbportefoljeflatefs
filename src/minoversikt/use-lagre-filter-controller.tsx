@@ -1,39 +1,39 @@
 import {useEffect} from "react";
-import {avmarkerSisteVelgtFilter, avmarkerVelgtFilter, markerVelgtFilter} from "../ducks/lagret-filter-ui";
-import {erObjektValuesTomt, lagredeFilterListerErLik} from "../components/modal/lagrede-filter/lagrede-filter-utils";
+import {avmarkerSisteValgtFilter, avmarkerValgtFilter, markerValgtFilter} from "../ducks/mine-filter-ui";
+import {erObjektValuesTomt, mineFilterListerErLik} from "../components/modal/mine-filter/mine-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";
-import {sjekkFeature} from "../ducks/features";
 import {MINE_FILTER} from "../konstanter";
+import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 export function useLagreFilterController(props: { filtergruppe: string }) {
     const dispatch = useDispatch()
     const filtrering = useSelector((state: AppState) => props.filtergruppe === "veileder" ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
     const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
-    const lagredeFilterFeatureToggleErPa = useSelector((state: AppState) => sjekkFeature(state, MINE_FILTER));
+    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER)
 
     useEffect(() => {
-        if (!lagredeFilterFeatureToggleErPa) {
+        if (!erMineFilterFeatureTogglePa) {
             return;
         }
-        const valgtFilter = lagretFilterList.find(elem => lagredeFilterListerErLik(elem.filterValg, filtrering));
+        const valgtFilter = lagretFilterList.find(elem => mineFilterListerErLik(elem.filterValg, filtrering));
 
         if (erObjektValuesTomt(filtrering) || erObjektValuesTomt(filtrering)) {
-            dispatch(avmarkerSisteVelgtFilter(props.filtergruppe));
+            dispatch(avmarkerSisteValgtFilter(props.filtergruppe));
         }
 
         if (valgtFilter) {
-            dispatch(markerVelgtFilter(valgtFilter, props.filtergruppe));
+            dispatch(markerValgtFilter(valgtFilter, props.filtergruppe));
 
         } else {
-            dispatch(avmarkerVelgtFilter(props.filtergruppe));
+            dispatch(avmarkerValgtFilter(props.filtergruppe));
             logEvent('portefolje.metrikker.lagredefilter.direkte-filtrering',
                 {}, {sideNavn: finnSideNavn()});
         }
 
-    }, [filtrering, lagretFilterList, dispatch, lagredeFilterFeatureToggleErPa, props.filtergruppe])
+    }, [filtrering, lagretFilterList, dispatch, erMineFilterFeatureTogglePa, props.filtergruppe])
 
     return null;
 }

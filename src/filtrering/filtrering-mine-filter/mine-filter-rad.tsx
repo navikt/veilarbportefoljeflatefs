@@ -1,28 +1,28 @@
-import { LagretFilter } from "../../ducks/lagret-filter";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../../reducer";
-import { finnSideNavn, mapVeilederIdentTilNonsens } from "../../middleware/metrics-middleware";
-import { logEvent } from "../../utils/frontend-logger";
-import { velgLagretFilter } from "../../ducks/filtrering";
-import { apenLagreFilterModal } from "../../ducks/lagret-filter-ui";
-import { Radio } from "nav-frontend-skjema";
+import {MineFilter} from "../../ducks/mine-filter";
+import {useDispatch, useSelector} from "react-redux";
+import {AppState} from "../../reducer";
+import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
+import {logEvent} from "../../utils/frontend-logger";
+import {velgLagretFilter} from "../../ducks/filtrering";
+import {apneMineFilterModal} from "../../ducks/mine-filter-ui";
+import {Radio} from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
-import React, { RefObject, useRef } from "react";
-import { antallFilter } from "../../components/modal/lagrede-filter/lagrede-filter-utils";
+import React, {RefObject, useRef} from "react";
+import {antallFilter} from "../../components/modal/mine-filter/mine-filter-utils";
 
 interface LagretFilterRadProps {
-    filter: LagretFilter;
+    filter: MineFilter;
     filtergruppe: string;
     parentDiv: RefObject<HTMLDivElement>;
 }
 
-function LagretFilterRad({ filter, filtergruppe, parentDiv }: LagretFilterRadProps) {
+function MineFilterRad({filter, filtergruppe, parentDiv}: LagretFilterRadProps) {
     const dispatch = useDispatch();
     const checkboxRef = useRef<HTMLDivElement>(null);
 
     const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === "veileder"
-        ? state.lagretFilterMinOversikt.valgtLagretFilter
-        : state.lagretFilterEnhetensOversikt.valgtLagretFilter);
+        ? state.lagretFilterMinOversikt.valgtMineFilter
+        : state.lagretFilterEnhetensOversikt.valgtMineFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 
@@ -33,7 +33,7 @@ function LagretFilterRad({ filter, filtergruppe, parentDiv }: LagretFilterRadPro
     }
 
     function onClickRedigerKnapp() {
-        dispatch(apenLagreFilterModal(filtergruppe))
+        dispatch(apneMineFilterModal(filtergruppe))
     }
 
     function scrollAndSelect() {
@@ -52,11 +52,11 @@ function LagretFilterRad({ filter, filtergruppe, parentDiv }: LagretFilterRadPro
     }
 
     return (
-        <div className="lagrede-filter__rad" ref={checkboxRef}>
+        <div className="mine-filter__rad" ref={checkboxRef}>
             <Radio
-                className="lagrede-filter__filternavn"
+                className="mine-filter__filternavn"
                 key={filter.filterId}
-                name="lagretFilter"
+                name="mineFilter"
                 label={filter.filterNavn}
                 value={filter.filterId}
                 onChange={(event) => velgFilter(event)}
@@ -71,4 +71,4 @@ function LagretFilterRad({ filter, filtergruppe, parentDiv }: LagretFilterRadPro
     );
 }
 
-export default LagretFilterRad;
+export default MineFilterRad;

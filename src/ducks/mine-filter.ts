@@ -1,6 +1,6 @@
 import {doThenDispatch, STATUS} from './utils';
 import {FiltervalgModell} from '../model-interfaces';
-import {hentMineLagredeFilter, nyttLagretFilter, redigerLagretFilter, slettLagretFilter} from "../middleware/api";
+import {hentMineFilter, nyttMineFilter, redigerMineFilter, slettMineFilter} from "../middleware/api";
 
 // Actions
 export const HENT_LAGREDEFILTER_OK = 'lagredefilter/OK';
@@ -19,7 +19,7 @@ export const SLETT_LAGREDEFILTER_OK = 'lagredefilter_slette/OK';
 export const SLETT_LAGREDEFILTER_FEILET = 'lagredefilter_slette/FEILET';
 export const SLETT_LAGREDEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
-export interface LagretFilter {
+export interface MineFilter {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
@@ -27,19 +27,19 @@ export interface LagretFilter {
     sortering: number | null;
 }
 
-export interface LagretFilterState {
+export interface MineFilterState {
     status: string;
-    data: LagretFilter[];
+    data: MineFilter[];
     handlingType: HandlingsType | null;
 }
 
-export interface RedigerFilter {
+export interface RedigerMineFilter {
     filterNavn: string;
     filterValg: FiltervalgModell;
     filterId: number;
 }
 
-export interface NyttFilter {
+export interface NyttMineFilter {
     filterNavn: string;
     filterValg: FiltervalgModell;
 }
@@ -58,7 +58,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: LagretFilterState = initialState, action) {
+export default function reducer(state: MineFilterState = initialState, action) {
     switch (action.type) {
         case HENT_LAGREDEFILTER_PENDING:
             return {...state, status: STATUS.PENDING, handlingType: HandlingsType.HENTE};
@@ -110,24 +110,24 @@ export default function reducer(state: LagretFilterState = initialState, action)
 }
 
 
-export function hentLagredeFilterForVeileder() {
-    return doThenDispatch(() => hentMineLagredeFilter(), {
+export function hentMineFilterForVeileder() {
+    return doThenDispatch(() => hentMineFilter(), {
         OK: HENT_LAGREDEFILTER_OK,
         FEILET: HENT_LAGREDEFILTER_FEILET,
         PENDING: HENT_LAGREDEFILTER_PENDING
     });
 }
 
-export function lagreEndringer(endringer: RedigerFilter) {
-    return doThenDispatch(() => redigerLagretFilter(endringer), {
+export function lagreEndringer(endringer: RedigerMineFilter) {
+    return doThenDispatch(() => redigerMineFilter(endringer), {
         OK: REDIGER_LAGREDEFILTER_OK,
         FEILET: REDIGER_LAGREDEFILTER_FEILET,
         PENDING: REDIGER_LAGREDEFILTER_PENDING
     });
 }
 
-export function lagreNyttFilter(nyttFilter: NyttFilter) {
-    return doThenDispatch(() => nyttLagretFilter(nyttFilter), {
+export function lagreNyttFilter(nyttFilter: NyttMineFilter) {
+    return doThenDispatch(() => nyttMineFilter(nyttFilter), {
         OK: NY_LAGREDEFILTER_OK,
         FEILET: NY_LAGREDEFILTER_FEILET,
         PENDING: NY_LAGREDEFILTER_PENDING
@@ -135,7 +135,7 @@ export function lagreNyttFilter(nyttFilter: NyttFilter) {
 }
 
 export function slettFilter(filterId: number) {
-    return doThenDispatch(() => slettLagretFilter(filterId), {
+    return doThenDispatch(() => slettMineFilter(filterId), {
         OK: SLETT_LAGREDEFILTER_OK,
         FEILET: SLETT_LAGREDEFILTER_FEILET,
         PENDING: SLETT_LAGREDEFILTER_PENDING

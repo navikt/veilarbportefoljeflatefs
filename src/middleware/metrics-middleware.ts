@@ -19,7 +19,7 @@ import {
     REDIGER_LAGREDEFILTER_OK,
     SLETT_LAGREDEFILTER_FEILET,
     SLETT_LAGREDEFILTER_OK
-} from "../ducks/lagret-filter";
+} from "../ducks/mine-filter";
 
 interface FilterEndringData {
     filterId: string;
@@ -91,7 +91,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
 
     switch (type) {
         case ENDRE_FILTER:
-            loggEndreFilter(sideNavn, data, store);
+            loggEndreMineFilter(sideNavn, data, store);
             break;
         case SETUP:
             loggPaginering(sideNavn, data);
@@ -144,28 +144,28 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length, sideNavn);
             break;
 
-        //lagrede filter
+        //mine filter
         case NY_LAGREDEFILTER_OK:
-            loggNyttLagretFilterOK(sideNavn);
+            loggNyttMineFilterOK(sideNavn);
             break;
         case REDIGER_LAGREDEFILTER_OK:
-            loggRedigerLagretFilterOK(sideNavn);
+            loggRedigerMineFilterOK(sideNavn);
             break;
         case SLETT_LAGREDEFILTER_OK:
             const opprettetTidspunkt = finnSlettetGruppe(store, action.data)
-            loggSlettLagretFilterOK(opprettetTidspunkt, sideNavn);
+            loggSlettMineFilterOK(opprettetTidspunkt, sideNavn);
             break;
         case HENT_LAGREDEFILTER_FEILET:
-            loggHentLagretFilterFeilet(sideNavn)
+            loggHentMineFilterFeilet(sideNavn)
             break;
         case NY_LAGREDEFILTER_FEILET:
-            loggNyttLagretFilterFeilet(sideNavn)
+            loggNyttMineFilterFeilet(sideNavn)
             break;
         case REDIGER_LAGREDEFILTER_FEILET:
-            loggRedigerLagretFilterFeilet(sideNavn)
+            loggRedigerMineFilterFeilet(sideNavn)
             break;
         case SLETT_LAGREDEFILTER_FEILET:
-            loggSlettLagretFilterFeilet(sideNavn)
+            loggSlettMineFilterFeilet(sideNavn)
             break;
     }
 
@@ -180,7 +180,7 @@ export function mapVeilederIdentTilNonsens(veilederIdent: string) {
         .join('');
 }
 
-export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
+export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
     const veilederIdent = mapVeilederIdentTilNonsens(store.getState().inloggetVeileder.data.ident);
     if (data.filterId === 'veilederNavnQuery') {
         return;
@@ -286,21 +286,21 @@ const loggSlettVeiledergruppeOK = (opprettetTidspunkt, sideNavn: SideNavn) => {
 };
 
 
-//Lagrede filter
-const loggNyttLagretFilterOK = (sideNavn: SideNavn) => {
+//Mine filter
+const loggNyttMineFilterOK = (sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.lagredefilter.oppretting-vellykket',
         {sideNavn: sideNavn},
         {});
 };
 
-const loggRedigerLagretFilterOK = (sideNavn: SideNavn) => {
+const loggRedigerMineFilterOK = (sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.lagredefilter.lagring-vellykket',
         {sideNavn: sideNavn},
         {});
 };
 
 
-const loggSlettLagretFilterOK = (opprettetTidspunkt, sideNavn: SideNavn) => {
+const loggSlettMineFilterOK = (opprettetTidspunkt, sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.lagredefilter.sletting-vellykket',
         {
             levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24),
@@ -309,19 +309,19 @@ const loggSlettLagretFilterOK = (opprettetTidspunkt, sideNavn: SideNavn) => {
         {});
 };
 
-const loggHentLagretFilterFeilet = (sideNavn: SideNavn) => {
+const loggHentMineFilterFeilet = (sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.lagredefilter.henting-feilet', {sideNavn: sideNavn});
 };
 
-const loggNyttLagretFilterFeilet = (sideNavn: SideNavn) => {
+const loggNyttMineFilterFeilet = (sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.lagredefilter.oppretting-feilet', {sideNavn: sideNavn});
 };
 
-const loggRedigerLagretFilterFeilet = (sideNavn: SideNavn) => {
+const loggRedigerMineFilterFeilet = (sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.lagredefilter.lagring-feilet', {sideNavn: sideNavn});
 };
 
-const loggSlettLagretFilterFeilet = (sideNavn: SideNavn) => {
+const loggSlettMineFilterFeilet = (sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.lagredefilter.sletting-feilet', {sideNavn: sideNavn});
 };
 

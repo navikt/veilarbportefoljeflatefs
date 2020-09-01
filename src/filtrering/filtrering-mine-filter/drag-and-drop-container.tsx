@@ -2,12 +2,11 @@ import React, { useRef, useState, RefObject } from "react";
 import { useEventListener } from "../../hooks/use-event-listener";
 import DragAndDropRow from "./drag-and-drop-row";
 import './drag-and-drop.less';
-import { LagretFilter } from "../../ducks/lagret-filter";
-import LagretFilterRad from "./lagret-filter-rad";
-
+import { MineFilter } from "../../ducks/mine-filter";
+import MineFilterRad from "./mine-filter-rad";
 
 export interface DragAndDropProps {
-    dragAndDropElements: LagretFilter[];
+    dragAndDropElements: MineFilter[];
     filtergruppe: string;
     outerDivRef: RefObject<HTMLDivElement>;
 }
@@ -64,7 +63,7 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe, outerDivRef }
                     sourceIndex={srcIndex}
                     dropAnimation={idx === dropIndex}
                 >
-                    <LagretFilterRad
+                    <MineFilterRad
                         filter={feild}
                         filtergruppe={filtergruppe}
                         parentDiv={outerDivRef}

@@ -1,17 +1,17 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../../reducer";
-import {LagretFilterValideringsError} from "./lagre-filter-modal";
-import {erTomtObjekt, feilValidering} from "./lagrede-filter-utils";
+import {LagretFilterValideringsError} from "./mine-filter-modal";
+import {erTomtObjekt, feilValidering} from "./mine-filter-utils";
 import {Input} from "nav-frontend-skjema";
 import {Hovedknapp, Knapp} from "nav-frontend-knapper";
-import {ErrorModalType, LagredeFilterVarselModal} from "./varsel-modal";
+import {ErrorModalType, MineFilterVarselModal} from "./varsel-modal";
 import BekreftSlettingModal from "../bekreftelse-modal/bekreft-sletting-modal";
-import {lagreEndringer, slettFilter} from "../../../ducks/lagret-filter";
+import {lagreEndringer, slettFilter} from "../../../ducks/mine-filter";
 import {useRequestHandler} from "../../../hooks/use-request-handler";
-import {avmarkerSisteVelgtFilter} from "../../../ducks/lagret-filter-ui";
+import {avmarkerSisteValgtFilter} from "../../../ducks/mine-filter-ui";
 
-export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, filtergruppe }) {
+export function OppdaterMineFilter(props: { gammeltFilterNavn, filterId, lukkModal, filtergruppe }) {
     const dispatch = useDispatch();
     const filterValg = useSelector((state: AppState) => props.filtergruppe === 'veileder' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
     const data = useSelector((state: AppState) => state.lagretFilter.data)
@@ -21,7 +21,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, 
     const [feilmelding, setFeilmelding] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError)
     const {gammeltFilterNavn, filterId, lukkModal} = props;
 
-    const requestHandlerOpddater = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal);
+    const requestHandlerOppdater = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal);
     const requestHandlerSlette = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal);
 
     const doLagreEndringer = (event) => {
@@ -37,7 +37,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, 
                 filterValg: filterValg,
                 filterId: filterId
             }))
-            requestHandlerOpddater.setSaveRequestSent(true)
+            requestHandlerOppdater.setSaveRequestSent(true)
         }
     }
 
@@ -48,7 +48,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, 
 
     const doSlettFilter = () => {
         dispatch(slettFilter(filterId))
-        dispatch(avmarkerSisteVelgtFilter(props.filtergruppe));
+        dispatch(avmarkerSisteValgtFilter(props.filtergruppe));
         requestHandlerSlette.setSaveRequestSent(true)
     }
 
@@ -63,7 +63,7 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, 
                     autoFocus={true}
                     maxLength={255}
                 />
-                <div className="lagret-filter-knapp-wrapper">
+                <div className="mine-filter-knapp-wrapper">
                     <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>
                     <Knapp mini onClick={(e) => bekreftSletting(e)}>Slett</Knapp>
                 </div>
@@ -74,13 +74,13 @@ export function OppdaterFilter(props: { gammeltFilterNavn, filterId, lukkModal, 
                 onSubmit={doSlettFilter}
                 tittel="Slette lagret filter"
                 navn={gammeltFilterNavn}/>
-            <LagredeFilterVarselModal
+            <MineFilterVarselModal
                 filterNavn={nyttFilterNavn}
-                erApen={requestHandlerOpddater.errorModalErApen}
+                erApen={requestHandlerOppdater.errorModalErApen}
                 modalType={ErrorModalType.OPPDATERE}
-                setErrorModalErApen={requestHandlerOpddater.setErrorModalErApen}
+                setErrorModalErApen={requestHandlerOppdater.setErrorModalErApen}
             />
-            <LagredeFilterVarselModal
+            <MineFilterVarselModal
                 filterNavn={nyttFilterNavn}
                 erApen={requestHandlerSlette.errorModalErApen}
                 modalType={ErrorModalType.SLETTE}

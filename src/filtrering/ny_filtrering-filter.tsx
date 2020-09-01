@@ -36,7 +36,7 @@ interface FiltreringFilterProps {
 }
 
 function NyFiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
-    const gjemHovedMal = useFeatureSelector()(GJEM_HOVEDMAL);
+    const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     return (
         <div className="filtrering-filter">
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
@@ -132,7 +132,7 @@ function NyFiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtreri
                 />
                 <Dropdown
                     name="Hovedmål"
-                    hidden={gjemHovedMal}
+                    hidden={erGjemHovedmalFeatureTogglePa}
                     render={(lukkDropdown) =>
                         <CheckboxFilterform
                             form="hovedmal"
