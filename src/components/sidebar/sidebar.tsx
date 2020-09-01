@@ -27,6 +27,8 @@ import {MINE_FILTER} from "../../konstanter";
 import {ListevisningType} from "../../ducks/ui/listevisning";
 import {HandlingsType} from "../../ducks/mine-filter";
 import {STATUS} from "../../ducks/utils";
+import {logEvent} from "../../utils/frontend-logger";
+import {finnSideNavn} from "../../middleware/metrics-middleware";
 
 interface Sidebar {
     type: SidebarTabType;
@@ -110,6 +112,10 @@ function Sidebar(props: SidebarProps) {
             name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
         })
         props.handleOnTabClicked(tab, selectedTab);
+        logEvent('portefolje.metrikker.sidebar-tab', {
+            tab: tab.type,
+            sideNavn: finnSideNavn()
+        });
     }
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
