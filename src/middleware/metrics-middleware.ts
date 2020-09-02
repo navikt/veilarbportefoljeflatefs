@@ -20,6 +20,8 @@ import {
     SLETT_MINEFILTER_FEILET,
     SLETT_MINEFILTER_OK
 } from "../ducks/mine-filter";
+import {useSelector} from "react-redux";
+import {AppState} from "../reducer";
 
 interface FilterEndringData {
     filterId: string;
@@ -78,7 +80,7 @@ function finnFiltreringForSide(store: any, sideNavn: SideNavn) {
 }
 
 function finnSlettetGruppe(store: any, filterId: number) {
-    const lagretGruppe = store.getState().lagretFilter.data.find(v => v.filterId === filterId);
+    const lagretGruppe = store.getState().mineFilter.data.find(v => v.filterId === filterId);
     if (lagretGruppe) {
         return lagretGruppe.opprettetDato;
     }
@@ -138,7 +140,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().lagretFilter.data.length, action.data.filterNavn.trim().length, store.getState().valgtEnhet.data.enhetId, finnSideNavn());
+            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().mineFilter.data.length, action.data.filterNavn.trim().length, store.getState().valgtEnhet.data.enhetId, finnSideNavn());
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length, sideNavn);

@@ -4,7 +4,7 @@ const toggles = {
     [SPOR_OM_TILBAKEMELDING]: true,
     [VEDTAKSTOTTE]: true,
     [MINE_FILTER]: true,
-    [REDESIGN]: true
+    [REDESIGN]: false
 };
 
 export default toggles;
