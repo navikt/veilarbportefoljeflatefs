@@ -91,7 +91,7 @@ const mapStateToProps = (state): StateProps => ({
 
 const mapDispatchToProps = (dispatch) => ({
     endreFiltervalg: (filterId: string, filterVerdi: string) => {
-        dispatch(endreFiltervalg(filterId, filterVerdi, 'veiledere'));
+        dispatch(endreFiltervalg(filterId, filterVerdi, 'veilederOversikt'));
     }
 });
 

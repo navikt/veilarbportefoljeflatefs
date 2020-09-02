@@ -18,7 +18,7 @@ interface LagretFilterRadProps {
 function NyMineFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     const dispatch = useDispatch();
 
-    const valgtMittFilter = useSelector((state: AppState) => filtergruppe === "veileder"
+    const valgtMittFilter = useSelector((state: AppState) => filtergruppe === 'minOversikt'
         ? state.lagretFilterMinOversikt.valgtMineFilter
         : state.lagretFilterEnhetensOversikt.valgtMineFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);

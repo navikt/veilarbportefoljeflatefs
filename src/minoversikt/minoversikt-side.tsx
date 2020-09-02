@@ -37,7 +37,7 @@ function MinoversiktSide() {
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
-    const filtergruppe = "veileder";
+    const filtergruppe = 'minOversikt';
 
     useSetStateFromUrl();
     useSyncStateMedUrl();

@@ -44,7 +44,7 @@ function Ny_MinoversiktSide() {
     const statustall = useFetchStatusTall(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(minOversikt);
     const dispatch = useDispatch();
-    const filtergruppe = "veileder";
+    const filtergruppe = 'minOversikt';
 
     useSetStateFromUrl();
     useSyncStateMedUrl();

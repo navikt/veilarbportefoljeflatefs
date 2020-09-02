@@ -13,8 +13,8 @@ export function NyMineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const filtreringEnhetensOversikt = useSelector((state: AppState) => state.filtreringEnhetensOversikt);
 
-    const erPaMinOversikt = props.filtergruppe === 'veileder';
-    const erPaEnhetensOversikt = props.filtergruppe === 'enhet';
+    const erPaMinOversikt = props.filtergruppe === 'minOversikt';
+    const erPaEnhetensOversikt = props.filtergruppe === 'enhetensOversikt';
 
     const filtrering = useSelector((state: AppState) => erPaMinOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
     const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);

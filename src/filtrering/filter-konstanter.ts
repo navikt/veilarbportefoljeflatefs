@@ -47,7 +47,7 @@ export const mapFilternavnTilFilterValue = {
     ikkePermitterteEtterNiendeMars: IKKE_PERMITTERTE_ETTER_NIENDE_MARS,
 };
 
-export const FILTERGRUPPE_ENHET = 'enhet';
+export const FILTERGRUPPE_ENHET = 'enhetensOversikt';
 
 export function lagConfig(data: any): any {
     if (typeof data === 'string') {

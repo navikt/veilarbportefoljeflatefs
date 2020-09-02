@@ -31,7 +31,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const filtreringVeilederoversikt = (state: AppState) => state.filtreringVeilederoversikt.veiledere;
     const filtreringEnhetensoversikt = (state: AppState) => state.filtreringEnhetensOversikt.veiledere;
-    const selector = props.filtergruppe === 'enhet' ? filtreringEnhetensoversikt : filtreringVeilederoversikt;
+    const selector = props.filtergruppe === 'enhetensOversikt' ? filtreringEnhetensoversikt : filtreringVeilederoversikt;
 
     const veiledereFilter = useSelector(selector);
 
@@ -52,7 +52,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
             {}, {gruppeId: gruppeId, sideNavn: finnSideNavn()});
         const filterVerdi = finnVeilederGruppe(gruppeId);
         setValgtGruppe(filterVerdi);
-        filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, props.filtergruppe));
+        filterVerdi && dispatch(endreFiltervalg('veilederOversikt', filterVerdi.filterValg.veiledere, props.filtergruppe));
     };
 
     const finnVeilederGruppe = (vg) => props.lagretFilter.find((elem) => elem.filterId === parseInt(vg));
@@ -71,7 +71,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const sletteKnapp = () => {
         valgtGruppe && enhet && dispatch(slettGruppe(enhet, valgtGruppe.filterId))
-            .then(() => dispatch(endreFiltervalg('veiledere', [], 'enhet')));
+            .then(() => dispatch(endreFiltervalg('veiledere', [], 'enhetensOversikt')));
     };
 
     useEffect(() => {

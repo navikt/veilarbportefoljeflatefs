@@ -35,8 +35,8 @@ function SidebarTab({tittel, handleClick, children, mineFilter, fjernUtilgjengel
                 <HiddenInfoIkon type={PopoverOrientering.Venstre}
                                 hidden={filtrertListe()!.length === mineFilter.length}
                 >
-                    {filtergruppe === 'veileder' && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
-                    {filtergruppe === 'enhet' && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}
+                    {filtergruppe === 'minOversikt' && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
+                    {filtergruppe === 'enhetensOversikt' && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}
                 </HiddenInfoIkon>
                 }
                 <div className="sidebar-header__lukknapp">

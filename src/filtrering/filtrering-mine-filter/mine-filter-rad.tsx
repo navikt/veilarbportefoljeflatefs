@@ -20,7 +20,7 @@ function MineFilterRad({filter, filtergruppe, parentDiv}: LagretFilterRadProps) 
     const dispatch = useDispatch();
     const checkboxRef = useRef<HTMLDivElement>(null);
 
-    const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === "veileder"
+    const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === 'minOversikt'
         ? state.lagretFilterMinOversikt.valgtMineFilter
         : state.lagretFilterEnhetensOversikt.valgtMineFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);

@@ -33,7 +33,7 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const filtreringVeilederoversikt = (state: AppState) => state.filtreringVeilederoversikt.veiledere;
     const filtreringEnhetensoversikt = (state: AppState) => state.filtreringEnhetensOversikt.veiledere;
-    const selector = props.filtergruppe === 'enhet' ? filtreringEnhetensoversikt : filtreringVeilederoversikt;
+    const selector = props.filtergruppe === 'enhetensOversikt' ? filtreringEnhetensoversikt : filtreringVeilederoversikt;
 
     const veiledereFilter = useSelector(selector);
 
@@ -74,7 +74,7 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const sletteKnapp = () => {
         valgtGruppe && enhet && dispatch(slettGruppe(enhet, valgtGruppe.filterId))
-        (() => dispatch(endreFiltervalg('veiledere', [], 'enhet')));
+        (() => dispatch(endreFiltervalg('veiledere', [], 'enhetensOversikt')));
     };
 
     useEffect(() => {

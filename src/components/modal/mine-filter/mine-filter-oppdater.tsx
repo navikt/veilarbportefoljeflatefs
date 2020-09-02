@@ -13,7 +13,7 @@ import {avmarkerSisteValgtFilter} from "../../../ducks/mine-filter-ui";
 
 export function OppdaterMineFilter(props: { gammeltFilterNavn, filterId, lukkModal, filtergruppe }) {
     const dispatch = useDispatch();
-    const filterValg = useSelector((state: AppState) => props.filtergruppe === 'veileder' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
+    const filterValg = useSelector((state: AppState) => props.filtergruppe === 'minOversikt' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
     const data = useSelector((state: AppState) => state.lagretFilter.data)
     const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false)
     const [nyttFilterNavn, setNyttFilterNavn] = useState<string>(props.gammeltFilterNavn)

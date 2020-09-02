@@ -11,7 +11,7 @@ import {lagreNyttFilter} from "../../../ducks/mine-filter";
 import {useRequestHandler} from "../../../hooks/use-request-handler";
 
 export function LagreNyttMineFilter(props: { filtergruppe: string, lukkModal }) {
-    const filterValg = useSelector((state: AppState) => props.filtergruppe === 'veileder' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
+    const filterValg = useSelector((state: AppState) => props.filtergruppe === 'minOversikt' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
     const data = useSelector((state: AppState) => state.lagretFilter.data)
     const [filterNavn, setFilterNavn] = useState("")
     const [feilmelding, setFeilmelding] = useState({} as LagretFilterValideringsError)

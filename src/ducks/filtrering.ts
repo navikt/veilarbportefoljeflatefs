@@ -130,7 +130,7 @@ export function velgLagretFilter(filterVerdi: MineFilter, filtergruppe: string) 
     }
 }
 
-export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet') {
+export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhetensOversikt') {
     if (Array.isArray(filterVerdi)) {
         filterVerdi.sort()
     }
@@ -148,7 +148,7 @@ export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: str
     };
 }
 
-export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet') {
+export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhetensOversikt') {
     if (filterId === 'aktiviteter' && filterVerdi === 'TILTAK') {
         return {
             type: SLETT_AKTIVITETER_OG_TILTAK_FILTER,
@@ -163,7 +163,7 @@ export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet')
     };
 }
 
-export function clearFiltervalg(filtergruppe = 'enhet') {
+export function clearFiltervalg(filtergruppe = 'enhetensOversikt') {
     return {type: CLEAR_FILTER, name: filtergruppe};
 }
 

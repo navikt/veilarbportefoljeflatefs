@@ -60,7 +60,7 @@ function EnhetSide() {
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
-    const filtergruppe = "enhet";
+    const filtergruppe = 'enhetensOversikt';
 
     useSetStateFromUrl();
     useSyncStateMedUrl();

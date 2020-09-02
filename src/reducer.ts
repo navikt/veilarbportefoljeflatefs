@@ -88,9 +88,9 @@ export default combineReducers<AppState>({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     statustall: statustallReducer,
-    filtreringEnhetensOversikt: persistent('enhetsState', window.location, named('enhet', filtreringReducer), initialState),
-    filtreringMinoversikt: persistent('veilederState', window.location, named('veileder', filtreringReducer), initialState),
-    filtreringVeilederoversikt: named('veiledere', filtreringReducer),
+    filtreringEnhetensOversikt: persistent('enhetsState', window.location, named('enhetensOversikt', filtreringReducer), initialState),
+    filtreringMinoversikt: persistent('veilederState', window.location, named('minOversikt', filtreringReducer), initialState),
+    filtreringVeilederoversikt: named('veilederOversikt', filtreringReducer),
     modal: modalReducer,
     serverfeilModal: serverfeilModalReducer,
     feilmeldingModal: feilmedlingModalReducer,
@@ -99,8 +99,8 @@ export default combineReducers<AppState>({
     features: featuresReducer,
     veiledergrupperLagretFilter: veiledergrupperLagretFilterReducer,
     lagretFilter: mineFilterReducer,
-    lagretFilterMinOversikt: named('veileder', mineFilterUI),
-    lagretFilterEnhetensOversikt: named('enhet', mineFilterUI),
+    lagretFilterMinOversikt: named('mineFilterMinOversikt', mineFilterUI),
+    lagretFilterEnhetensOversikt: named('mineFilterEnhetensOversikt', mineFilterUI),
     toastReducer: toastReducer,
     inloggetVeileder: inloggetVeilederReducer
 });

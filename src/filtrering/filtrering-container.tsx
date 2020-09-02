@@ -72,7 +72,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 apen={false}
                 tittel="Veiledergrupper"
                 lamellNavn="veiledergrupper"
-                hidden={filtergruppe === 'veileder'}
+                hidden={filtergruppe === 'minOversikt'}
             >
                 <FilteringVeilederGrupper filtergruppe={filtergruppe}/>
             </MetrikkEkspanderbartpanel>
@@ -87,7 +87,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 />
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
-                apen={filtergruppe !== 'veileder'}
+                apen={filtergruppe !== 'minOversikt'}
                 tittel="Filter"
                 lamellNavn="filtergruppe"
             >

@@ -68,11 +68,11 @@ function Ny_EnhetSide() {
     const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
     const harFilter = antallFilter(filtervalg) !== 0;
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
-    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet')), [dispatch]);
+    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhetensOversikt')), [dispatch]);
     const veilederLabel = useMemo(() => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter), [filtervalg.veiledere, veilederliste, slettVeilederFilter]);
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const {isSidebarHidden} = useSidebarViewStore(enhetensOversikt);
-    const filtergruppe = "enhet";
+    const filtergruppe = 'enhetensOversikt';
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -98,6 +98,8 @@ function Ny_EnhetSide() {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
+
+    console.log("filtergruppe", filtergruppe);
 
     return (
         <DocumentTitle title="Enhetens oversikt">

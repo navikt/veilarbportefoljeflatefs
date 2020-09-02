@@ -162,7 +162,7 @@ const mapStateToProps = (state): StateProps => ({
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
     sokEtterVeileder(veiledere: string[]) {
-        dispatch(endreFiltervalg('veiledere', veiledere, 'veiledere',));
+        dispatch(endreFiltervalg('veiledere', veiledere, 'veilederOversikt',));
     }
 });
 

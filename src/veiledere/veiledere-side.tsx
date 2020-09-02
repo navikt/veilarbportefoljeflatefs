@@ -29,7 +29,7 @@ function VeiledereSide() {
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
 
     const dispatch = useDispatch();
-    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
+    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veilederOversikt', ident, 'enhetensOversikt'));
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
 
@@ -63,7 +63,7 @@ function VeiledereSide() {
                                     lamellNavn="veiledergrupper"
                                     tittel="Veiledergrupper"
                                 >
-                                    <FilteringVeilederGrupper filtergruppe="veiledere"/>
+                                    <FilteringVeilederGrupper filtergruppe='veilederOversikt'/>
                                 </MetrikkEkspanderbartpanel>
                             </div>
                             <div className="liste-kolonne">
@@ -75,7 +75,7 @@ function VeiledereSide() {
                                             slettVeilederFilter
                                         )
                                     }}
-                                    filtergruppe="veiledere"
+                                    filtergruppe='veilederOversikt'
                                     className="filtrering-label-container"
                                 />
                                 <VeiledersideVisning

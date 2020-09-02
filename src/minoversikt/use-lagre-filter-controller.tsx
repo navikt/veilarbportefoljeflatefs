@@ -10,7 +10,7 @@ import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 export function useLagreFilterController(props: { filtergruppe: string }) {
     const dispatch = useDispatch()
-    const filtrering = useSelector((state: AppState) => props.filtergruppe === "veileder" ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
+    const filtrering = useSelector((state: AppState) => props.filtergruppe === 'minOversikt' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
     const lagretFilterList = useSelector((state: AppState) => state.lagretFilter.data);
     const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER)
 

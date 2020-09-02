@@ -68,12 +68,12 @@ export function NyFiltreringStatus(props: FiltreringStatusProps) {
                 <NyFiltreringStatusNyeBrukere
                     handleChange={handleCheckboxChange}
                     ferdigfilterListe={ferdigfilterListe}
-                    hidden={props.filtergruppe !== 'veileder'}
+                    hidden={props.filtergruppe !== 'minOversikt'}
                 />
                 <NyFiltreringStatusUfordelteBrukere
                     handleChange={handleCheckboxChange}
                     ferdigfilterListe={ferdigfilterListe}
-                    hidden={props.filtergruppe === 'veileder'}
+                    hidden={props.filtergruppe === 'minOversikt'}
                 />
                 <div className="permittering_checkboksgruppe">
                     <div className="hjelpetekst__wrapper">
@@ -121,7 +121,7 @@ export function NyFiltreringStatus(props: FiltreringStatusProps) {
                 ferdigfilterListe={kategoriliste}
                 handleChange={handleRadioButtonChange}
                 handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
-                hidden={props.filtergruppe !== 'veileder'}
+                hidden={props.filtergruppe !== 'minOversikt'}
                 filtervalg={props.filtervalg}
                 endreFiltervalg={dispatchFiltreringStatusChanged}
                 checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
