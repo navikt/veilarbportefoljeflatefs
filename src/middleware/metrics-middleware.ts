@@ -12,13 +12,13 @@ import {
     SLETT_VEILEDERGRUPPER_OK
 } from '../ducks/veiledergrupper_filter';
 import {
-    HENT_LAGREDEFILTER_FEILET,
-    NY_LAGREDEFILTER_FEILET,
-    NY_LAGREDEFILTER_OK,
-    REDIGER_LAGREDEFILTER_FEILET,
-    REDIGER_LAGREDEFILTER_OK,
-    SLETT_LAGREDEFILTER_FEILET,
-    SLETT_LAGREDEFILTER_OK
+    HENT_MINEFILTER_FEILET,
+    NY_MINEFILTER_FEILET,
+    NY_MINEFILTER_OK,
+    REDIGER_MINEFILTER_FEILET,
+    REDIGER_MINEFILTER_OK,
+    SLETT_MINEFILTER_FEILET,
+    SLETT_MINEFILTER_OK
 } from "../ducks/mine-filter";
 
 interface FilterEndringData {
@@ -145,26 +145,26 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
 
         //mine filter
-        case NY_LAGREDEFILTER_OK:
+        case NY_MINEFILTER_OK:
             loggNyttMineFilterOK(sideNavn);
             break;
-        case REDIGER_LAGREDEFILTER_OK:
+        case REDIGER_MINEFILTER_OK:
             loggRedigerMineFilterOK(sideNavn);
             break;
-        case SLETT_LAGREDEFILTER_OK:
+        case SLETT_MINEFILTER_OK:
             const opprettetTidspunkt = finnSlettetGruppe(store, action.data)
             loggSlettMineFilterOK(opprettetTidspunkt, sideNavn);
             break;
-        case HENT_LAGREDEFILTER_FEILET:
+        case HENT_MINEFILTER_FEILET:
             loggHentMineFilterFeilet(sideNavn)
             break;
-        case NY_LAGREDEFILTER_FEILET:
+        case NY_MINEFILTER_FEILET:
             loggNyttMineFilterFeilet(sideNavn)
             break;
-        case REDIGER_LAGREDEFILTER_FEILET:
+        case REDIGER_MINEFILTER_FEILET:
             loggRedigerMineFilterFeilet(sideNavn)
             break;
-        case SLETT_LAGREDEFILTER_FEILET:
+        case SLETT_MINEFILTER_FEILET:
             loggSlettMineFilterFeilet(sideNavn)
             break;
     }
@@ -286,7 +286,7 @@ const loggSlettVeiledergruppeOK = (opprettetTidspunkt, sideNavn: SideNavn) => {
 };
 
 
-//Mine filter
+//Lagrede filter
 const loggNyttMineFilterOK = (sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.lagredefilter.oppretting-vellykket',
         {sideNavn: sideNavn},
