@@ -3,21 +3,21 @@ import {FiltervalgModell} from '../model-interfaces';
 import {hentMineFilter, nyttMineFilter, redigerMineFilter, slettMineFilter} from "../middleware/api";
 
 // Actions
-export const HENT_LAGREDEFILTER_OK = 'lagredefilter/OK';
-export const HENT_LAGREDEFILTER_FEILET = 'lagredefilter/FEILET';
-export const HENT_LAGREDEFILTER_PENDING = 'lagredefilter/PENDING';
+export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
+export const HENT_MINEFILTER_FEILET = 'lagredefilter/FEILET';
+export const HENT_MINEFILTER_PENDING = 'lagredefilter/PENDING';
 
-export const REDIGER_LAGREDEFILTER_OK = 'lagredefilter_endre/OK';
-export const REDIGER_LAGREDEFILTER_FEILET = 'lagredefilter_endre/FEILET';
-export const REDIGER_LAGREDEFILTER_PENDING = 'lagredefilter_endre/PENDING';
+export const REDIGER_MINEFILTER_OK = 'lagredefilter_endre/OK';
+export const REDIGER_MINEFILTER_FEILET = 'lagredefilter_endre/FEILET';
+export const REDIGER_MINEFILTER_PENDING = 'lagredefilter_endre/PENDING';
 
-export const NY_LAGREDEFILTER_OK = 'lagredefilter_ny/OK';
-export const NY_LAGREDEFILTER_FEILET = 'lagredefilter_ny/FEILET';
-export const NY_LAGREDEFILTER_PENDING = 'lagredefilter_ny/PENDING';
+export const NY_MINEFILTER_OK = 'lagredefilter_ny/OK';
+export const NY_MINEFILTER_FEILET = 'lagredefilter_ny/FEILET';
+export const NY_MINEFILTER_PENDING = 'lagredefilter_ny/PENDING';
 
-export const SLETT_LAGREDEFILTER_OK = 'lagredefilter_slette/OK';
-export const SLETT_LAGREDEFILTER_FEILET = 'lagredefilter_slette/FEILET';
-export const SLETT_LAGREDEFILTER_PENDING = 'lagredefilter_slette/PENDING';
+export const SLETT_MINEFILTER_OK = 'lagredefilter_slette/OK';
+export const SLETT_MINEFILTER_FEILET = 'lagredefilter_slette/FEILET';
+export const SLETT_MINEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
 export interface MineFilter {
     filterNavn: string;
@@ -59,25 +59,25 @@ const initialState = {
 //  Reducer
 export default function reducer(state: MineFilterState = initialState, action) {
     switch (action.type) {
-        case HENT_LAGREDEFILTER_PENDING:
+        case HENT_MINEFILTER_PENDING:
             return {...state, status: STATUS.PENDING, handlingType: HandlingsType.HENTE};
-        case NY_LAGREDEFILTER_PENDING:
+        case NY_MINEFILTER_PENDING:
             return {...state, status: STATUS.PENDING, handlingType: HandlingsType.NYTT};
-        case REDIGER_LAGREDEFILTER_PENDING:
+        case REDIGER_MINEFILTER_PENDING:
             return {...state, status: STATUS.PENDING, handlingType: HandlingsType.REDIGERE};
-        case SLETT_LAGREDEFILTER_PENDING:
+        case SLETT_MINEFILTER_PENDING:
             return {...state, status: STATUS.PENDING, handlingType: HandlingsType.SLETTE};
-        case HENT_LAGREDEFILTER_FEILET:
+        case HENT_MINEFILTER_FEILET:
             return {...state, status: STATUS.ERROR, handlingType: HandlingsType.HENTE};
-        case NY_LAGREDEFILTER_FEILET:
+        case NY_MINEFILTER_FEILET:
             return {...state, status: STATUS.ERROR, handlingType: HandlingsType.NYTT};
-        case REDIGER_LAGREDEFILTER_FEILET:
+        case REDIGER_MINEFILTER_FEILET:
             return {...state, status: STATUS.ERROR, handlingType: HandlingsType.REDIGERE};
-        case SLETT_LAGREDEFILTER_FEILET:
+        case SLETT_MINEFILTER_FEILET:
             return {...state, status: STATUS.ERROR, handlingType: HandlingsType.SLETTE};
-        case HENT_LAGREDEFILTER_OK:
+        case HENT_MINEFILTER_OK:
             return {...state, status: STATUS.OK, data: action.data, handlingType: HandlingsType.HENTE};
-        case NY_LAGREDEFILTER_OK:
+        case NY_MINEFILTER_OK:
             return {
                 ...state,
                 status: STATUS.OK,
@@ -85,7 +85,7 @@ export default function reducer(state: MineFilterState = initialState, action) {
                 data: state.data.concat(action.data)
             };
         case
-        REDIGER_LAGREDEFILTER_OK:
+        REDIGER_MINEFILTER_OK:
             return {
                 ...state, status: STATUS.OK, handlingType: HandlingsType.REDIGERE, data: state.data.map(elem => {
                         if (elem.filterId !== action.data.filterId) {
@@ -96,7 +96,7 @@ export default function reducer(state: MineFilterState = initialState, action) {
                 )
             };
         case
-        SLETT_LAGREDEFILTER_OK:
+        SLETT_MINEFILTER_OK:
             return {
                 ...state,
                 status: STATUS.OK,
@@ -111,32 +111,32 @@ export default function reducer(state: MineFilterState = initialState, action) {
 
 export function hentMineFilterForVeileder() {
     return doThenDispatch(() => hentMineFilter(), {
-        OK: HENT_LAGREDEFILTER_OK,
-        FEILET: HENT_LAGREDEFILTER_FEILET,
-        PENDING: HENT_LAGREDEFILTER_PENDING
+        OK: HENT_MINEFILTER_OK,
+        FEILET: HENT_MINEFILTER_FEILET,
+        PENDING: HENT_MINEFILTER_PENDING
     });
 }
 
 export function lagreEndringer(endringer: RedigerMineFilter) {
     return doThenDispatch(() => redigerMineFilter(endringer), {
-        OK: REDIGER_LAGREDEFILTER_OK,
-        FEILET: REDIGER_LAGREDEFILTER_FEILET,
-        PENDING: REDIGER_LAGREDEFILTER_PENDING
+        OK: REDIGER_MINEFILTER_OK,
+        FEILET: REDIGER_MINEFILTER_FEILET,
+        PENDING: REDIGER_MINEFILTER_PENDING
     });
 }
 
 export function lagreNyttFilter(nyttFilter: NyttMineFilter) {
     return doThenDispatch(() => nyttMineFilter(nyttFilter), {
-        OK: NY_LAGREDEFILTER_OK,
-        FEILET: NY_LAGREDEFILTER_FEILET,
-        PENDING: NY_LAGREDEFILTER_PENDING
+        OK: NY_MINEFILTER_OK,
+        FEILET: NY_MINEFILTER_FEILET,
+        PENDING: NY_MINEFILTER_PENDING
     });
 }
 
 export function slettFilter(filterId: number) {
     return doThenDispatch(() => slettMineFilter(filterId), {
-        OK: SLETT_LAGREDEFILTER_OK,
-        FEILET: SLETT_LAGREDEFILTER_FEILET,
-        PENDING: SLETT_LAGREDEFILTER_PENDING
+        OK: SLETT_MINEFILTER_OK,
+        FEILET: SLETT_MINEFILTER_FEILET,
+        PENDING: SLETT_MINEFILTER_PENDING
     });
 }

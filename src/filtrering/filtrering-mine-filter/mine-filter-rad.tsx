@@ -20,13 +20,13 @@ function MineFilterRad({filter, filtergruppe, parentDiv}: LagretFilterRadProps) 
     const dispatch = useDispatch();
     const checkboxRef = useRef<HTMLDivElement>(null);
 
-    const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === 'minOversikt'
-        ? state.lagretFilterMinOversikt.valgtMineFilter
-        : state.lagretFilterEnhetensOversikt.valgtMineFilter);
+    const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === "minOversikt"
+        ? state.mineFilterMinOversikt.valgtMineFilter
+        : state.mineFilterEnhetensOversikt.valgtMineFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 
-    function velgFilter(event) {
+    function velgFilter() {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {antallFilter: antallFilter(filter.filterValg)}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
         dispatch(velgLagretFilter(filter, filtergruppe))
@@ -59,7 +59,7 @@ function MineFilterRad({filter, filtergruppe, parentDiv}: LagretFilterRadProps) 
                 name="mineFilter"
                 label={filter.filterNavn}
                 value={filter.filterId}
-                onChange={(event) => velgFilter(event)}
+                onChange={() => velgFilter()}
                 checked={scrollAndSelect()}
             />
             <RedigerKnapp

@@ -31,11 +31,9 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
         const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
 
-        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
-            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
-            return false;
-        }
-        return true;
+        return !((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
+            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere)));
+
     }
 
     const HiddenHjelpetekst = hiddenIf(Hjelpetekst)

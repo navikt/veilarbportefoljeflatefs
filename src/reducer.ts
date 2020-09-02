@@ -12,8 +12,6 @@ import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import veiledergrupperLagretFilterReducer, {VeiledergrupperLagretFilterState} from './ducks/veiledergrupper_filter';
-import mineFilterReducer, {MineFilterState} from './ducks/mine-filter';
-import mineFilterUI, {MineFilterUIState} from './ducks/mine-filter-ui';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
 import listevisningReducer, {
@@ -67,9 +65,9 @@ export interface AppState {
     enhettiltak: EnhettiltakState;
     features: FeaturesState;
     veiledergrupperLagretFilter: VeiledergrupperLagretFilterState;
-    lagretFilter: MineFilterState;
-    lagretFilterMinOversikt: MineFilterUIState;
-    lagretFilterEnhetensOversikt: MineFilterUIState;
+    mineFilter: MineFilterState;
+    mineFilterMinOversikt: MineFilterUIState;
+    mineFilterEnhetensOversikt: MineFilterUIState;
     toastReducer: ToastState;
     inloggetVeileder: InloggetVeilederState;
 }
@@ -98,9 +96,9 @@ export default combineReducers<AppState>({
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
     veiledergrupperLagretFilter: veiledergrupperLagretFilterReducer,
-    lagretFilter: mineFilterReducer,
-    lagretFilterMinOversikt: named('mineFilterMinOversikt', mineFilterUI),
-    lagretFilterEnhetensOversikt: named('mineFilterEnhetensOversikt', mineFilterUI),
+    mineFilter: mineFilterReducer,
+    mineFilterMinOversikt: named('veileder', mineFilterUI),
+    mineFilterEnhetensOversikt: named('enhet', mineFilterUI),
     toastReducer: toastReducer,
     inloggetVeileder: inloggetVeilederReducer
 });

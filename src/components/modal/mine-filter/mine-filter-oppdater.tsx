@@ -14,15 +14,15 @@ import {avmarkerSisteValgtFilter} from "../../../ducks/mine-filter-ui";
 export function OppdaterMineFilter(props: { gammeltFilterNavn, filterId, lukkModal, filtergruppe }) {
     const dispatch = useDispatch();
     const filterValg = useSelector((state: AppState) => props.filtergruppe === 'minOversikt' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
-    const data = useSelector((state: AppState) => state.lagretFilter.data)
+    const data = useSelector((state: AppState) => state.mineFilter.data)
     const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false)
     const [nyttFilterNavn, setNyttFilterNavn] = useState<string>(props.gammeltFilterNavn)
 
     const [feilmelding, setFeilmelding] = useState<LagretFilterValideringsError>({} as LagretFilterValideringsError)
     const {gammeltFilterNavn, filterId, lukkModal} = props;
 
-    const requestHandlerOppdater = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal);
-    const requestHandlerSlette = useRequestHandler((state: AppState) => state.lagretFilter.status, lukkModal);
+    const requestHandlerOppdater = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
+    const requestHandlerSlette = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
 
     const doLagreEndringer = (event) => {
         event.preventDefault()
@@ -63,7 +63,7 @@ export function OppdaterMineFilter(props: { gammeltFilterNavn, filterId, lukkMod
                     autoFocus={true}
                     maxLength={255}
                 />
-                <div className="mine-filter-knapp-wrapper">
+                <div className="lagret-filter-knapp-wrapper">
                     <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>
                     <Knapp mini onClick={(e) => bekreftSletting(e)}>Slett</Knapp>
                 </div>

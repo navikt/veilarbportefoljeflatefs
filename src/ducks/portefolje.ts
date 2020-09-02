@@ -1,18 +1,15 @@
 import * as Api from './../middleware/api';
-import { doThenDispatch, handterFeil, STATUS, toJson } from './utils';
-import { pagineringSetup } from './paginering';
-import { TILDELING_FEILET, visFeiletModal } from './modal-feilmelding-brukere';
-import { visServerfeilModal } from './modal-serverfeil';
-import { hentStatusTall } from './statustall';
-import { BrukerModell, Sorteringsfelt, Sorteringsrekkefolge } from '../model-interfaces';
-import {
-    selectFraIndex,
-    selectSeAlle,
-    selectSideStorrelse
-} from '../components/toolbar/paginering/paginering-selector';
-import { visTilordningOkModal } from './modal';
+import {doThenDispatch, handterFeil, STATUS, toJson} from './utils';
+import {pagineringSetup} from './paginering';
+import {TILDELING_FEILET, visFeiletModal} from './modal-feilmelding-brukere';
+import {visServerfeilModal} from './modal-serverfeil';
+import {hentStatusTall} from './statustall';
+import {BrukerModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {selectFraIndex, selectSeAlle, selectSideStorrelse} from '../components/toolbar/paginering/paginering-selector';
+import {visTilordningOkModal} from './modal';
 import {AppState} from "../reducer";
 import {OrNothing} from "../utils/types/types";
+import {ListevisningType} from "./ui/listevisning";
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -283,7 +280,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                     dispatch(visTilordningOkModal(tilordninger.map(tillordning => ({brukerFnr: tillordning.brukerFnr}))));
                     dispatch(pagineringSetup({side: 1}));
                 }
-                if (filtergruppe === 'minOversikt') {
+                if (filtergruppe === ListevisningType.minOversikt) {
                     dispatch({
                         type: OPPDATER_ANTALL,
                         antallTilordninger: tilordninger.length - res.feilendeTilordninger.length
@@ -296,7 +293,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                     const enhet = getState().valgtEnhet.data.enhetId;
                     const rekkefolge = getState().portefolje.sorteringsrekkefolge;
                     const sorteringsfelt = getState().portefolje.sorteringsfelt;
-                    if(filtergruppe === 'minOversikt'){
+                    if(filtergruppe === ListevisningType.minOversikt){
                         const filtervalg = getState().filtreringMinoversikt;
                         dispatch(hentPortefoljeForVeileder(enhet, veilederIdent, rekkefolge, sorteringsfelt, filtervalg))
                     } else {

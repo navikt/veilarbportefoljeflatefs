@@ -19,8 +19,8 @@ function NyMineFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     const dispatch = useDispatch();
 
     const valgtMittFilter = useSelector((state: AppState) => filtergruppe === 'minOversikt'
-        ? state.lagretFilterMinOversikt.valgtMineFilter
-        : state.lagretFilterEnhetensOversikt.valgtMineFilter);
+        ? state.mineFilterMinOversikt.valgtMineFilter
+        : state.mineFilterEnhetensOversikt.valgtMineFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 

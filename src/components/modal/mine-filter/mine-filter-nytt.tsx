@@ -12,11 +12,11 @@ import {useRequestHandler} from "../../../hooks/use-request-handler";
 
 export function LagreNyttMineFilter(props: { filtergruppe: string, lukkModal }) {
     const filterValg = useSelector((state: AppState) => props.filtergruppe === 'minOversikt' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
-    const data = useSelector((state: AppState) => state.lagretFilter.data)
+    const data = useSelector((state: AppState) => state.mineFilter.data)
     const [filterNavn, setFilterNavn] = useState("")
     const [feilmelding, setFeilmelding] = useState({} as LagretFilterValideringsError)
     const dispatch = useDispatch();
-    const requestHandler = useRequestHandler((state: AppState) => state.lagretFilter.status, props.lukkModal)
+    const requestHandler = useRequestHandler((state: AppState) => state.mineFilter.status, props.lukkModal)
 
     const doLagreNyttFilter = (event) => {
         event.preventDefault()
@@ -44,7 +44,7 @@ export function LagreNyttMineFilter(props: { filtergruppe: string, lukkModal }) 
                     autoFocus={true}
                     maxLength={255}
                 />
-                <div className="mine-filter-knapp-wrapper">
+                <div className="lagret-filter-knapp-wrapper">
                     <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>
                 </div>
             </form>

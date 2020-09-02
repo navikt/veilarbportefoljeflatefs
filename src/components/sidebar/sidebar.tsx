@@ -84,7 +84,7 @@ function Sidebar(props: SidebarProps) {
     const sidebarRef = useRef<HTMLDivElement>(null);
     const selectedTab = useSidebarViewStore(erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt)
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
-    const mineFilterState = useSelector((state: AppState) => state.lagretFilter);
+    const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const sidebarTabEndret = 'sidebarTabEndret';
     const dispatch = useDispatch();
     const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
