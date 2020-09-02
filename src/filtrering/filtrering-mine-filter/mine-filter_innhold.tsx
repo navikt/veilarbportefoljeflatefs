@@ -10,7 +10,7 @@ import { REDESIGN } from "../../konstanter";
 import { useWindowWidth } from "../../hooks/use-window-width";
 import DragAndDropContainer from './drag-and-drop-container';
 
-interface MineFilterInnholdProps {
+interface LagredeFilterInnholdProps {
     mineFilter: MineFilter[];
     filtergruppe: string;
 }
@@ -19,7 +19,7 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function MineFilterInnhold(props: MineFilterInnholdProps) {
+function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const erPaMinOversikt = props.filtergruppe === "veileder";
     const erPaEnhetensOversikt = props.filtergruppe === "enhet";
     const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
@@ -31,11 +31,9 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
         const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
 
-        if ((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
-            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))) {
-            return false;
-        }
-        return true;
+        return !((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
+            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere)));
+
     }
 
     const HiddenHjelpetekst = hiddenIf(Hjelpetekst)
@@ -104,4 +102,4 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
 }
 
 
-export default MineFilterInnhold;
+export default LagredeFilterInnhold;

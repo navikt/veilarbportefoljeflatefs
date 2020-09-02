@@ -1,6 +1,6 @@
 import {FiltervalgModell} from '../model-interfaces';
 import {MineFilter} from "./mine-filter";
-import {VELG_MINE_FILTER} from "./mine-filter-ui";
+import {VELG_MINE_FILTER} from "./lagret-filter-ui";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';

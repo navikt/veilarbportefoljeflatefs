@@ -1,28 +1,29 @@
 import * as React from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { tildelVeileder } from '../../../ducks/portefolje';
-import { VeilederModell } from '../../../model-interfaces';
-import { AppState } from '../../../reducer';
-import { useState } from 'react';
-import { Radio } from 'nav-frontend-skjema';
+import {useState} from 'react';
+import {connect, useDispatch, useSelector} from 'react-redux';
+import {tildelVeileder} from '../../../ducks/portefolje';
+import {VeilederModell} from '../../../model-interfaces';
+import {AppState} from '../../../reducer';
+import {Radio} from 'nav-frontend-skjema';
 import '../../toolbar/toolbar.less';
-import { Knapp } from 'nav-frontend-knapper';
+import {Knapp} from 'nav-frontend-knapper';
 import SokFilterNy from '../../sok-veiledere/sok-filter-ny';
 import classNames from 'classnames';
-import { nameToStateSliceMap } from '../../../ducks/utils';
+import {nameToStateSliceMap} from '../../../ducks/utils';
+import {useSelectGjeldendeVeileder} from "../../../hooks/portefolje/use-select-gjeldende-veileder";
 
 interface TildelVeilederProps {
     filtergruppe?: string;
-    gjeldendeVeileder?: string;
     btnOnClick: () => void;
 }
 
-function TildelVeileder({filtergruppe, gjeldendeVeileder, btnOnClick}: TildelVeilederProps) {
+function TildelVeileder({filtergruppe, btnOnClick}: TildelVeilederProps) {
     const [ident, setIdent] = useState<string | null>(null);
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
     const sorterVeiledere = veiledere.sort((a, b) => a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1);
+    const gjeldendeVeileder = useSelectGjeldendeVeileder();
 
     const doTildelTilVeileder = (tilordninger, tilVeileder) => {
         return dispatch(tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder));
@@ -98,7 +99,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || 'filtrering';
+    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe]
     return ({
         filtervalg: state[stateSlice],
     });
