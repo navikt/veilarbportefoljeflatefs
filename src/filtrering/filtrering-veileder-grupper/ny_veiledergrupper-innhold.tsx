@@ -74,7 +74,7 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const sletteKnapp = () => {
         valgtGruppe && enhet && dispatch(slettGruppe(enhet, valgtGruppe.filterId))
-        (() => dispatch(endreFiltervalg('veiledere', [], 'enhet')));
+            .then(() => dispatch(endreFiltervalg('veiledere', [], 'enhet')));
     };
 
     useEffect(() => {

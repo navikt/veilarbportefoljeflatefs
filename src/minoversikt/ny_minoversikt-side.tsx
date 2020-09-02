@@ -31,7 +31,7 @@ import {endreFiltervalg} from '../ducks/filtrering';
 import Sidebar from '../components/sidebar/sidebar';
 import classNames from 'classnames';
 import {NyMinOversiktWrapper} from "./ny_min_oversikt_wrapper";
-import {LagreFilterModal} from "../components/modal/lagrede-filter/lagre-filter-modal";
+import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 import {useLagreFilterController} from "./use-lagre-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "./ny_mine-filter-lagre-filter-knapp";
 import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
@@ -154,7 +154,7 @@ function Ny_MinoversiktSide() {
                         </div>
                     </NyMinOversiktWrapper>
                 </Innholdslaster>
-                <LagreFilterModal filtergruppe={filtergruppe}/>
+                <MineFilterModal filtergruppe={filtergruppe}/>
             </div>
         </DocumentTitle>
     );

@@ -36,7 +36,9 @@
         text-decoration: none;
         color: @navBla;
 
-        &:active, &:visited, &:hover {
+        &:active,
+        &:visited,
+        &:hover {
             color: @navBla;
         }
 
@@ -56,5 +58,15 @@
     .arbeidsliste--ikon {
         position: relative;
         right: -4px;
+    }
+
+    .brukerliste__arbeidslisteinnhold-hboks {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+
+    .brukerliste__arbeidslisteinnhold-hboks :last-child {
+        margin-left: 1rem;
     }
 }

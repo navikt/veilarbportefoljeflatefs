@@ -2,7 +2,7 @@
 import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
 import {NyGruppe, RedigerGruppe} from '../ducks/veiledergrupper_filter';
 import {VeilederModell} from '../model-interfaces';
-import {NyttFilter, RedigerFilter} from "../ducks/lagret-filter";
+import {NyttMineFilter, RedigerMineFilter} from "../ducks/mine-filter";
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -60,7 +60,7 @@ export function hentEnhetsFilterGrupper(enhetId) {
 }
 
 
-export function hentMineLagredeFilter() {
+export function hentMineFilter() {
     const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
@@ -122,19 +122,19 @@ export function hentFeatures(featureQueryString: string) {
     return fetchToJson(`${API_BASE_URL}${FEATURE_URL}?${featureQueryString}`);
 }
 
-export function redigerLagretFilter(endringer: RedigerFilter): Promise<RedigerFilter> {
+export function redigerMineFilter(endringer: RedigerMineFilter): Promise<RedigerMineFilter> {
     const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
     const config = { ...MED_CREDENTIALS, method: 'put', body: JSON.stringify(endringer) };
     return fetchToJson(url, config);
 }
 
-export function nyttLagretFilter(nyttFilter: NyttFilter): Promise<NyttFilter> {
+export function nyttMineFilter(nyttFilter: NyttMineFilter): Promise<NyttMineFilter> {
     const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(nyttFilter) };
     return fetchToJson(url, config);
 }
 
-export function slettLagretFilter(filterId: number): Promise<number> {
+export function slettMineFilter(filterId: number): Promise<number> {
     const url = `${VEILARBFILTER_URL}/minelagredefilter/${filterId}`;
     const config = { ...MED_CREDENTIALS, method: 'delete'};
     return fetch(url, config).then(sjekkStatuskode).then(_ => Promise.resolve(filterId));

@@ -4,19 +4,19 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../../reducer";
 import {Normaltekst} from "nav-frontend-typografi";
-import {erTomtObjekt, feilValidering} from "./lagrede-filter-utils";
-import {LagretFilterValideringsError} from "./lagre-filter-modal";
-import {ErrorModalType, LagredeFilterVarselModal} from "./varsel-modal";
-import {lagreNyttFilter} from "../../../ducks/lagret-filter";
+import {erTomtObjekt, feilValidering} from "./mine-filter-utils";
+import {LagretFilterValideringsError} from "./mine-filter-modal";
+import {ErrorModalType, MineFilterVarselModal} from "./varsel-modal";
+import {lagreNyttFilter} from "../../../ducks/mine-filter";
 import {useRequestHandler} from "../../../hooks/use-request-handler";
 
-export function LagreNytt(props: { filtergruppe: string, lukkModal }) {
+export function LagreNyttMineFilter(props: { filtergruppe: string, lukkModal }) {
     const filterValg = useSelector((state: AppState) => props.filtergruppe === 'veileder' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
-    const data = useSelector((state: AppState) => state.lagretFilter.data)
+    const data = useSelector((state: AppState) => state.mineFilter.data)
     const [filterNavn, setFilterNavn] = useState("")
     const [feilmelding, setFeilmelding] = useState({} as LagretFilterValideringsError)
     const dispatch = useDispatch();
-    const requestHandler = useRequestHandler((state: AppState) => state.lagretFilter.status, props.lukkModal)
+    const requestHandler = useRequestHandler((state: AppState) => state.mineFilter.status, props.lukkModal)
 
     const doLagreNyttFilter = (event) => {
         event.preventDefault()
@@ -48,7 +48,7 @@ export function LagreNytt(props: { filtergruppe: string, lukkModal }) {
                     <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>
                 </div>
             </form>
-            <LagredeFilterVarselModal
+            <MineFilterVarselModal
                 filterNavn={filterNavn}
                 erApen={requestHandler.errorModalErApen}
                 setErrorModalErApen={requestHandler.setErrorModalErApen}

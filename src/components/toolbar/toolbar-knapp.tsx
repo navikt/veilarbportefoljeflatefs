@@ -1,8 +1,9 @@
-import { default as React, useRef, useState } from 'react';
-import { useEventListener } from '../../hooks/use-event-listener';
+import {default as React, useRef, useState} from 'react';
+import {useEventListener} from '../../hooks/use-event-listener';
 import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
-import { Normaltekst } from 'nav-frontend-typografi';
+import {Normaltekst} from 'nav-frontend-typografi';
 import SokVeileder from './sok-veileder';
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface ToolbarKnappProps {
     skalVises?: boolean;
@@ -10,6 +11,7 @@ interface ToolbarKnappProps {
     tildelveileder: boolean;
     ikon: React.ReactNode;
     tittel: string;
+    filtergruppe: ListevisningType
 }
 
 export default function ToolbarKnapp(props: ToolbarKnappProps) {
@@ -48,6 +50,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
                 <TildelVeileder
                     btnOnClick={() => setBtnClicked(true)}
                     skalVises={props.skalVises}
+                    filtergruppe={props.filtergruppe}
                 />
             );
         } else {

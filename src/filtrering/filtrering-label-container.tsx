@@ -10,7 +10,7 @@ import {Kolonne, ListevisningState} from '../ducks/ui/listevisning';
 import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {useEffect} from "react";
-import {hentLagredeFilterForVeileder} from "../ducks/lagret-filter";
+import {hentMineFilterForVeileder} from "../ducks/mine-filter";
 import {MINE_FILTER} from "../konstanter";
 import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
@@ -55,7 +55,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
 
     useEffect(() => {
         if (erMineFilterFeatureTogglePa) {
-            dispatch(hentLagredeFilterForVeileder());
+            dispatch(hentMineFilterForVeileder());
         }
     }, [dispatch, erMineFilterFeatureTogglePa])
 

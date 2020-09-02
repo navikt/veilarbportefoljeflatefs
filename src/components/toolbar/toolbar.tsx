@@ -1,15 +1,15 @@
 import * as React from 'react';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
-import { ListevisningType } from '../../ducks/ui/listevisning';
+import {ListevisningType} from '../../ducks/ui/listevisning';
 import './toolbar.less';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import LeggTilArbeidsliste from './legg-til-arbeidsliste-knapp';
-import { AppState } from '../../reducer';
+import {AppState} from '../../reducer';
 import ToolbarKnapp from './toolbar-knapp';
-import { ReactComponent as TildelVeilederIkon } from '../ikoner/person-add-1.svg';
-import { ReactComponent as SokVeilederIkon } from '../ikoner/person-view-1.svg';
-import { Undertittel } from 'nav-frontend-typografi';
+import {ReactComponent as TildelVeilederIkon} from '../ikoner/person-add-1.svg';
+import {ReactComponent as SokVeilederIkon} from '../ikoner/person-view-1.svg';
+import {Undertittel} from 'nav-frontend-typografi';
 
 interface ToolbarProps {
     filtergruppe: ListevisningType;
@@ -45,6 +45,7 @@ function Toolbar(props: ToolbarProps) {
                             aktiv={true}
                             tildelveileder={false}
                             ikon={<SokVeilederIkon className="toolbar-knapp__ikon" id="sok-veileder-ikon"/>}
+                            filtergruppe={filtergruppe}
                         />
                     </div>
                 );
@@ -66,6 +67,7 @@ function Toolbar(props: ToolbarProps) {
                         aktiv={aktiv}
                         tildelveileder={true}
                         ikon={<TildelVeilederIkon className="toolbar-knapp__ikon" id="tildel-veileder-ikon"/>}
+                        filtergruppe={filtergruppe}
                     />
                 </div>
                 {oversikt(props.side)}

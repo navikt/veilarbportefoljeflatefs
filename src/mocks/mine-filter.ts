@@ -1,8 +1,8 @@
 import { initialState} from '../ducks/filtrering';
 import * as faker from 'faker/locale/nb_NO';
-import {LagretFilter} from "../ducks/lagret-filter";
+import {MineFilter} from "../ducks/mine-filter";
 
-export const lagredeFilter = () => {
+export const mineFilter = () => {
     return (
         [
             {
@@ -61,6 +61,6 @@ export const lagredeFilter = () => {
             filterValg: {...initialState, ferdigfilterListe: ["UFORDELTE_BRUKERE"]},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
         }
-        ] as LagretFilter []
+        ] as MineFilter []
     );
 };

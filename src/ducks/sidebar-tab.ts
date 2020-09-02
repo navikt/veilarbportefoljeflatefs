@@ -1,6 +1,6 @@
 import {SidebarTabInfo} from "../store/sidebar/sidebar-view-store";
-import {finnSideNavn} from "../middleware/metrics-middleware";
 import {logEvent} from "../utils/frontend-logger";
+import {finnSideNavn} from "../middleware/metrics-middleware";
 
 export const initialStateSidebar = {
     selectedTab: SidebarTabInfo.STATUS,

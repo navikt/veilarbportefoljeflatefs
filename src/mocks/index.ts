@@ -11,8 +11,8 @@ import {endringsloggListe} from './endringslogg';
 import * as faker from 'faker/locale/nb_NO';
 import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
-import {LagretFilter} from '../ducks/lagret-filter';
-import {lagredeFilter} from "./lagrede-filter";
+import {MineFilter} from '../ducks/mine-filter';
+import {mineFilter} from "./mine-filter";
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -54,7 +54,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 }
 
 let customVeilederGrupper = veilederGrupper();
-let customLagredeFilter = lagredeFilter();
+let customMineFilter = mineFilter();
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -89,7 +89,7 @@ mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}, res, ctx) => {
                 return oppdatertGruppe;
             }
             return v;
-        }) as LagretFilter[];
+        }) as MineFilter[];
         return res(ctx.json(oppdatertGruppe));
     }
 );
@@ -111,22 +111,22 @@ mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (req, res, ctx
     return res(ctx.status(401));
 });
 
-//lagrede filter
-mock.get('/veilarbfilter/api/minelagredefilter/', jsonResponse(customLagredeFilter));
+//mine filter
+mock.get('/veilarbfilter/api/minelagredefilter/', jsonResponse(customMineFilter));
 
 
 mock.put('/veilarbfilter/api/minelagredefilter/', ({body}, res, ctx) => {
-        let filterIndex = customLagredeFilter.findIndex(elem => elem.filterId === body.filterId)
-        customLagredeFilter[filterIndex] = body;
+        let filterIndex = customMineFilter.findIndex(elem => elem.filterId === body.filterId)
+        customMineFilter[filterIndex] = body;
         return res(
-            ctx.json(customLagredeFilter[filterIndex])
+            ctx.json(customMineFilter[filterIndex])
         );
     }
 );
 
 mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
     const filterId = Math.floor(Math.random() * 100) + 500;
-    customLagredeFilter = [...customLagredeFilter, {...req.body, filterId}];
+    customMineFilter = [...customMineFilter, {...req.body, filterId}];
     return res(
         ctx.json({...req.body, filterId})
     );
@@ -135,7 +135,7 @@ mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
 mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) => {
     const {pathParams} = req;
     if (pathParams.filterId) {
-        customLagredeFilter = customLagredeFilter.filter(v => v.filterId !== pathParams.filterId);
+        customMineFilter = customMineFilter.filter(v => v.filterId !== pathParams.filterId);
         return res(ctx.status(200));
     }
     return res(ctx.status(401));

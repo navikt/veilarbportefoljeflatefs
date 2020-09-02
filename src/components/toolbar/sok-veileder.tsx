@@ -60,10 +60,7 @@ function SokVeilederFilter(props: AllProps) {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe]
-        || (ownProps.filtergruppe === 'enhet'
-            ? 'filtreringEnhetensOversikt'
-            : 'filtreringMinoversikt')
+    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || (ownProps.filtergruppe === 'enhet' ? 'filtreringEnhetensOversikt' : 'filtreringMinoversikt')
     return ({
         veiledere: state.veiledere,
         filtervalg: state[stateSlice],
