@@ -38,24 +38,23 @@ import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
 
 function Ny_MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
-    const minOversikt = ListevisningType.minOversikt;
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(minOversikt);
+    const filtergruppe = ListevisningType.minOversikt;
+    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(filtergruppe);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatusTall(gjeldendeVeileder);
-    const settSorteringogHentPortefolje = useSetPortefoljeSortering(minOversikt);
+    const settSorteringogHentPortefolje = useSetPortefoljeSortering(filtergruppe);
     const dispatch = useDispatch();
-    const filtergruppe = 'minOversikt';
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
-    useFetchPortefolje(minOversikt);
+    useFetchPortefolje(filtergruppe);
     useMineFilterController({filtergruppe: filtergruppe});
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
-    const {isSidebarHidden} = useSidebarViewStore(minOversikt);
+    const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
@@ -64,15 +63,15 @@ function Ny_MinoversiktSide() {
 
     const handleOnTabClicked = (tab, selectedTab) => {
         if (isSidebarHidden) {
-            dispatch(visSidebar(minOversikt))
+            dispatch(visSidebar(filtergruppe))
 
         } else if (tab.type === selectedTab.selectedTab) {
-            dispatch(skjulSidebar(minOversikt))
+            dispatch(skjulSidebar(filtergruppe))
         }
     };
 
     const lukkTab = () => {
-        dispatch(skjulSidebar(minOversikt))
+        dispatch(skjulSidebar(filtergruppe))
     };
 
     return (
@@ -128,7 +127,7 @@ function Ny_MinoversiktSide() {
                                                 sorteringsfelt,
                                                 filtervalg
                                             ))}
-                                            filtergruppe={minOversikt}
+                                            filtergruppe={filtergruppe}
                                             sokVeilederSkalVises={false}
                                             antallTotalt={portefolje.data.antallTotalt}
                                             side="minoversikt"

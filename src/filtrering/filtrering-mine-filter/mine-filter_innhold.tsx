@@ -9,6 +9,7 @@ import MineFilterRad from "./mine-filter-rad";
 import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
 import {REDESIGN} from "../../konstanter";
 import {useWindowWidth} from "../../hooks/use-window-width";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface MineFilterInnholdProps {
     mineFilter: MineFilter[];
@@ -20,7 +21,7 @@ function isOverflown(element) {
 }
 
 function MineFilterInnhold(props: MineFilterInnholdProps) {
-    const erPaMinOversikt = props.filtergruppe === 'minOversikt';
+    const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
     const erPaEnhetensOversikt = props.filtergruppe === 'enhetensOversikt';
     const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
 
