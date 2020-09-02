@@ -16,7 +16,13 @@ export default function ArbeidslistePanel({ bruker, innloggetVeileder, skalVises
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
     const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
     const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : String.fromCharCode(8212);
-    const arbeidslisteFrist = new Date(bruker.arbeidsliste.frist);
+    
+    let arbeidslisteFristTekst;
+    if(bruker.arbeidsliste.frist != null){
+        arbeidslisteFristTekst = new Date(bruker.arbeidsliste.frist).toLocaleDateString();
+    }else{
+        arbeidslisteFristTekst = "Ingen valgt frist."
+    }
 
     return (
         skalVises ?
@@ -29,7 +35,7 @@ export default function ArbeidslistePanel({ bruker, innloggetVeileder, skalVises
                                 {overskrift}
                             </UndertekstBold>
                             <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
-                                Arbeidsliste frist: {arbeidslisteFrist.toLocaleDateString()} 
+                                Arbeidsliste frist: {arbeidslisteFristTekst} 
                             </p>
                         </div>
                         <p>{bruker.arbeidsliste.kommentar}</p>
