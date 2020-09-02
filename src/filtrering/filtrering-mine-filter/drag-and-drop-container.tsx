@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
-import { useEventListener } from "../../hooks/use-event-listener";
-import DragAndDropRow from "./drag-and-drop-row";
+import React, { useRef, useState } from 'react';
+import { useEventListener } from '../../hooks/use-event-listener';
+import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
-import { MineFilter } from "../../ducks/mine-filter";
-import NyMineFilterRad from "./ny_mine-filter-rad";
+import { MineFilter } from '../../ducks/mine-filter';
+import NyMineFilterRad from './ny_mine-filter-rad';
 
 export interface DragAndDropProps {
     dragAndDropElements: MineFilter[];
@@ -25,8 +25,8 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
     const handleDragStart = (e) => {
         if (dragContainer.current) {
             if (dragContainer.current.contains(e.target) && !dragIsInsideElement) {
-                setdDragIsInsideElement(true)
-                setDropIndex(-1)
+                setdDragIsInsideElement(true);
+                setDropIndex(-1);
             }
         }
     };
@@ -34,34 +34,35 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
     const handleDragLeave = (e) => {
         if (dragContainer.current) {
             if (!dragContainer.current.contains(e.target) && dragIsInsideElement) {
-                setdDragIsInsideElement(false)
+                setdDragIsInsideElement(false);
             }
         }
     };
 
     const handleDragEnd = (e) => {
         if (dragIsInsideElement && destIndex !== -1 && srcIndex !== -1) {
-            flyttElementIArray(dragAndDropElements, srcIndex, destIndex)
-            setDropIndex(destIndex)
-            setdDragIsInsideElement(false)
+            flyttElementIArray(dragAndDropElements, srcIndex, destIndex);
+            setDropIndex(destIndex);
+            setdDragIsInsideElement(false);
 
             const idAndPriorities: SorteringOgId[] = dragAndDropElements.map((filter, idx) => ({
                 sortOrder: idx,
                 filterId: filter.filterId
-            }))
-            console.log(JSON.stringify(idAndPriorities))
+            }));
+            console.log(JSON.stringify(idAndPriorities));
         }
-        setSrcIndex(-1)
-        setDestIndex(-1)
+        setSrcIndex(-1);
+        setDestIndex(-1);
     };
 
     useEventListener('dragenter', handleDragStart);
     useEventListener('dragleave', handleDragLeave);
     useEventListener('dragend', handleDragEnd);
     return (
-        <ul ref={dragContainer} className="drag-and-drop-container" >
-            {dragAndDropElements.map((filter, idx) =>
-                <DragAndDropRow key={idx}
+        <ul ref={dragContainer} className="drag-and-drop-container">
+            {dragAndDropElements.map((filter, idx) => (
+                <DragAndDropRow
+                    key={idx}
                     idx={idx}
                     setIsDestination={setDestIndex}
                     setIsSource={setSrcIndex}
@@ -69,21 +70,18 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
                     sourceIndex={srcIndex}
                     dropAnimation={idx === dropIndex}
                 >
-                    <NyMineFilterRad
-                        filter={filter}
-                        filtergruppe={filtergruppe}
-                    />
+                    <NyMineFilterRad filter={filter} filtergruppe={filtergruppe} />
                 </DragAndDropRow>
-            )}
+            ))}
         </ul>
     );
 }
 
 function flyttElementIArray(arr: any[], fromIndex: number, toIndex: number) {
-    const verdiSomFlyttes = arr[fromIndex]
+    const verdiSomFlyttes = arr[fromIndex];
     arr.splice(fromIndex, 1);
     arr.splice(toIndex, 0, verdiSomFlyttes);
     return arr;
-};
+}
 
 export default DragAndDropContainer;
