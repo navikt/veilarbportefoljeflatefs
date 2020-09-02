@@ -2,15 +2,16 @@ import React, { useRef, useState } from 'react';
 import { useEventListener } from '../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
-import { MineFilter } from '../../ducks/mine-filter';
+import { MineFilter, lagreSorteringForFilter } from '../../ducks/mine-filter';
 import NyMineFilterRad from './ny_mine-filter-rad';
+import { useDispatch } from 'react-redux';
 
 export interface DragAndDropProps {
     dragAndDropElements: MineFilter[];
     filtergruppe: string;
 }
 
-interface SorteringOgId {
+export interface SorteringOgId {
     sortOrder: number;
     filterId: number;
 }
@@ -21,6 +22,8 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
     const [dropIndex, setDropIndex] = useState(-1);
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
+
+    const dispatch = useDispatch();
 
     const handleDragStart = (e) => {
         if (dragContainer.current) {
@@ -49,7 +52,13 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
                 sortOrder: idx,
                 filterId: filter.filterId
             }));
-            console.log(JSON.stringify(idAndPriorities));
+            // (Stian temp kommentar) Alt 1: use only redux (Not working)
+                dispatch(lagreSorteringForFilter(idAndPriorities));
+
+            // (Stian temp kommentar) Alt 2: use direct post call and thene manually change state in redux? (Also not working) 
+                //lagreSorterinFiltere(idAndPriorities)
+                // TODO: update redux state with new sorting order
+
         }
         setSrcIndex(-1);
         setDestIndex(-1);

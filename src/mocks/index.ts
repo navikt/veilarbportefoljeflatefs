@@ -13,6 +13,7 @@ import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
 import {MineFilter} from '../ducks/mine-filter';
 import {mineFilter} from "./mine-filter";
+import { SorteringOgId } from '../filtrering/filtrering-mine-filter/drag-and-drop-container';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -141,6 +142,18 @@ mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) =>
     return res(ctx.status(401));
 });
 
+mock.post('/veilarbfilter/api/minelagredefilter/sortering/', (req, res, ctx) => {
+    const sorteringer = req.body as SorteringOgId[];
+    sorteringer.forEach(elem => {
+        const elemFilter = customMineFilter.find(filter => elem.filterId === filter.filterId);
+        if(elemFilter != null){
+            elemFilter.sortOrder = elem.sortOrder;
+        }
+    });
+    return res(
+        ctx.json({...req.body})
+    );
+});
 
 // veileder-api
 mock.get('/veilarbveileder/api/veileder/v2/me', jsonResponse(inloggetVeileder));
