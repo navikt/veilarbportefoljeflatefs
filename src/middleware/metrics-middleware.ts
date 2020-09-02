@@ -20,8 +20,6 @@ import {
     SLETT_MINEFILTER_FEILET,
     SLETT_MINEFILTER_OK
 } from "../ducks/mine-filter";
-import {useSelector} from "react-redux";
-import {AppState} from "../reducer";
 
 interface FilterEndringData {
     filterId: string;
