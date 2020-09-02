@@ -55,6 +55,7 @@ function antallFilter(filtervalg) {
 
 }
 
+
 function EnhetSide() {
     const statustall = useFetchStatusTall();
     const filtergruppe = ListevisningType.enhetensOversikt;
@@ -69,7 +70,9 @@ function EnhetSide() {
     useSetLocalStorageOnUnmount();
     useMineFilterController({filtergruppe: filtergruppe});
 
-    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe)), [dispatch]);
+    const slettVeilederFilter = useCallback(ident =>
+            dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe)),
+        [dispatch, filtergruppe]);
 
     const portefoljeData = portefolje.data;
     const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
