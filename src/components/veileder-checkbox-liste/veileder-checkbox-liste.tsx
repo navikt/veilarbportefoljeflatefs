@@ -7,6 +7,7 @@ import { endreFiltervalg } from '../../ducks/filtrering';
 import { VeiledereState } from '../../ducks/veiledere';
 import { FiltervalgModell, VeilederModell } from '../../model-interfaces';
 import './veileder-checkbox-liste.less';
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -162,7 +163,7 @@ const mapStateToProps = (state): StateProps => ({
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
     sokEtterVeileder(veiledere: string[]) {
-        dispatch(endreFiltervalg('veiledere', veiledere, 'veilederOversikt',));
+        dispatch(endreFiltervalg('veiledere', veiledere, ListevisningType.veilederOversikt,));
     }
 });
 

@@ -3,6 +3,7 @@ import { Input } from 'nav-frontend-skjema';
 import { connect } from 'react-redux';
 import { endreFiltervalg } from '../ducks/filtrering';
 import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
+import {ListevisningType} from "../ducks/ui/listevisning";
 
 interface FiltreringVeiledereState {
     veilederNavnQuery?: string;
@@ -91,7 +92,7 @@ const mapStateToProps = (state): StateProps => ({
 
 const mapDispatchToProps = (dispatch) => ({
     endreFiltervalg: (filterId: string, filterVerdi: string) => {
-        dispatch(endreFiltervalg(filterId, filterVerdi, 'veilederOversikt'));
+        dispatch(endreFiltervalg(filterId, filterVerdi, ListevisningType.veilederOversikt));
     }
 });
 

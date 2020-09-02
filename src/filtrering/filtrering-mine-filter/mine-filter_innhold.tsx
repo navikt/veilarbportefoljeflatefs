@@ -22,7 +22,7 @@ function isOverflown(element) {
 
 function MineFilterInnhold(props: MineFilterInnholdProps) {
     const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
-    const erPaEnhetensOversikt = props.filtergruppe === 'enhetensOversikt';
+    const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
     const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
 
     const fjernUtilgjengeligeFilter = (elem) => {

@@ -16,6 +16,7 @@ import {MINE_FILTER} from "../konstanter";
 import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";
 import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
+import {ListevisningType} from "../ducks/ui/listevisning";
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -72,7 +73,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 apen={false}
                 tittel="Veiledergrupper"
                 lamellNavn="veiledergrupper"
-                hidden={filtergruppe === 'minOversikt'}
+                hidden={filtergruppe === ListevisningType.minOversikt}
             >
                 <FilteringVeilederGrupper filtergruppe={filtergruppe}/>
             </MetrikkEkspanderbartpanel>
@@ -87,7 +88,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 />
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
-                apen={filtergruppe !== 'minOversikt'}
+                apen={filtergruppe !== ListevisningType.minOversikt}
                 tittel="Filter"
                 lamellNavn="filtergruppe"
             >

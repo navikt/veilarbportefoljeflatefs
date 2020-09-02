@@ -20,6 +20,7 @@ import {NyFiltreringStatusInavtiveBrukere} from "./filtrering-status-components/
 import NyFilterStatusMinArbeidsliste from "./filtrering-status-components/ny_arbeidsliste";
 import NyFiltreringStatusIkkePermitterteEtterNiendeBrukere
     from "./filtrering-status-components/ny_ikke-permitterte-brukere";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -68,12 +69,12 @@ export function NyFiltreringStatus(props: FiltreringStatusProps) {
                 <NyFiltreringStatusNyeBrukere
                     handleChange={handleCheckboxChange}
                     ferdigfilterListe={ferdigfilterListe}
-                    hidden={props.filtergruppe !== 'minOversikt'}
+                    hidden={props.filtergruppe !== ListevisningType.minOversikt}
                 />
                 <NyFiltreringStatusUfordelteBrukere
                     handleChange={handleCheckboxChange}
                     ferdigfilterListe={ferdigfilterListe}
-                    hidden={props.filtergruppe === 'minOversikt'}
+                    hidden={props.filtergruppe === ListevisningType.minOversikt}
                 />
                 <div className="permittering_checkboksgruppe">
                     <div className="hjelpetekst__wrapper">
@@ -121,7 +122,7 @@ export function NyFiltreringStatus(props: FiltreringStatusProps) {
                 ferdigfilterListe={kategoriliste}
                 handleChange={handleRadioButtonChange}
                 handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
-                hidden={props.filtergruppe !== 'minOversikt'}
+                hidden={props.filtergruppe !== ListevisningType.minOversikt}
                 filtervalg={props.filtervalg}
                 endreFiltervalg={dispatchFiltreringStatusChanged}
                 checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}

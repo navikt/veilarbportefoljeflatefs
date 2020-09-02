@@ -1,35 +1,36 @@
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Undertittel } from 'nav-frontend-typografi';
+import {useDispatch, useSelector} from 'react-redux';
+import {Undertittel} from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
-import { lagLablerTilVeiledereMedIdenter } from '../filtrering/utils';
-import { slettEnkeltFilter } from '../ducks/filtrering';
+import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
+import {slettEnkeltFilter} from '../ducks/filtrering';
 import './veiledere.less';
 import ToppMeny from '../topp-meny/topp-meny';
-import { useOnMount } from '../hooks/use-on-mount';
-import { getSeAlleFromUrl, getSideFromUrl } from '../utils/url-utils';
-import { loggSkjermMetrikker, Side } from '../utils/metrikker/skjerm-metrikker';
-import { AppState } from '../reducer';
-import { pagineringSetup } from '../ducks/paginering';
-import { useSetEnhetIUrl } from '../hooks/portefolje/use-set-enhet-i-url';
-import { useSetLocalStorageOnUnmount } from '../hooks/portefolje/use-set-local-storage-on-unmount';
+import {useOnMount} from '../hooks/use-on-mount';
+import {getSeAlleFromUrl, getSideFromUrl} from '../utils/url-utils';
+import {loggSkjermMetrikker, Side} from '../utils/metrikker/skjerm-metrikker';
+import {AppState} from '../reducer';
+import {pagineringSetup} from '../ducks/paginering';
+import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
+import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import FilteringVeilederGrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper';
 import '../style.less';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import '../style.less';
-import { useFetchStatusTall } from '../hooks/portefolje/use-fetch-statustall';
+import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
+import {ListevisningType} from "../ducks/ui/listevisning";
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
 
     const dispatch = useDispatch();
-    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veilederOversikt', ident, 'enhetensOversikt'));
+    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veilederOversikt', ident, ListevisningType.enhetensOversikt));
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
 
@@ -63,7 +64,7 @@ function VeiledereSide() {
                                     lamellNavn="veiledergrupper"
                                     tittel="Veiledergrupper"
                                 >
-                                    <FilteringVeilederGrupper filtergruppe='veilederOversikt'/>
+                                    <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt}/>
                                 </MetrikkEkspanderbartpanel>
                             </div>
                             <div className="liste-kolonne">
@@ -75,7 +76,7 @@ function VeiledereSide() {
                                             slettVeilederFilter
                                         )
                                     }}
-                                    filtergruppe='veilederOversikt'
+                                    filtergruppe={ListevisningType.veilederOversikt}
                                     className="filtrering-label-container"
                                 />
                                 <VeiledersideVisning

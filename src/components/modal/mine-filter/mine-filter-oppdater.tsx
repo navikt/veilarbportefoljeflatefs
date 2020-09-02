@@ -10,10 +10,11 @@ import BekreftSlettingModal from "../bekreftelse-modal/bekreft-sletting-modal";
 import {lagreEndringer, slettFilter} from "../../../ducks/mine-filter";
 import {useRequestHandler} from "../../../hooks/use-request-handler";
 import {avmarkerSisteValgtFilter} from "../../../ducks/mine-filter-ui";
+import {ListevisningType} from "../../../ducks/ui/listevisning";
 
 export function OppdaterMineFilter(props: { gammeltFilterNavn, filterId, lukkModal, filtergruppe }) {
     const dispatch = useDispatch();
-    const filterValg = useSelector((state: AppState) => props.filtergruppe === 'minOversikt' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
+    const filterValg = useSelector((state: AppState) => props.filtergruppe === ListevisningType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
     const data = useSelector((state: AppState) => state.mineFilter.data)
     const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false)
     const [nyttFilterNavn, setNyttFilterNavn] = useState<string>(props.gammeltFilterNavn)

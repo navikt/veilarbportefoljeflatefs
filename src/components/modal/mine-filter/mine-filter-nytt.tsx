@@ -9,9 +9,10 @@ import {LagretFilterValideringsError} from "./mine-filter-modal";
 import {ErrorModalType, MineFilterVarselModal} from "./varsel-modal";
 import {lagreNyttFilter} from "../../../ducks/mine-filter";
 import {useRequestHandler} from "../../../hooks/use-request-handler";
+import {ListevisningType} from "../../../ducks/ui/listevisning";
 
 export function LagreNyttMineFilter(props: { filtergruppe: string, lukkModal }) {
-    const filterValg = useSelector((state: AppState) => props.filtergruppe === 'minOversikt' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
+    const filterValg = useSelector((state: AppState) => props.filtergruppe === ListevisningType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt)
     const data = useSelector((state: AppState) => state.mineFilter.data)
     const [filterNavn, setFilterNavn] = useState("")
     const [feilmelding, setFeilmelding] = useState({} as LagretFilterValideringsError)

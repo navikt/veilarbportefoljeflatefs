@@ -20,6 +20,7 @@ import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { MIN_ARBEIDSLISTE, } from '../filter-konstanter';
 import { PopoverOrientering } from 'nav-frontend-popover';
 import {useWindowWidth} from "../../hooks/use-window-width";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -68,12 +69,12 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 <FiltreringStatusNyeBrukere
                     handleChange={handleCheckboxChange}
                     ferdigfilterListe={ferdigfilterListe}
-                    hidden={props.filtergruppe !== 'minOversikt'}
+                    hidden={props.filtergruppe !== ListevisningType.minOversikt}
                 />
                 <FiltreringStatusUfordelteBrukere
                     handleChange={handleCheckboxChange}
                     ferdigfilterListe={ferdigfilterListe}
-                    hidden={props.filtergruppe === 'minOversikt'}
+                    hidden={props.filtergruppe === ListevisningType.minOversikt}
                 />
                 <div className="permittering_checkboksgruppe">
                     <div className="hjelpetekst__wrapper">
@@ -121,7 +122,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 ferdigfilterListe={kategoriliste}
                 handleChange={handleRadioButtonChange}
                 handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
-                hidden={props.filtergruppe !== 'minOversikt'}
+                hidden={props.filtergruppe !== ListevisningType.minOversikt}
                 filtervalg={props.filtervalg}
                 endreFiltervalg={dispatchFiltreringStatusChanged}
                 checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}

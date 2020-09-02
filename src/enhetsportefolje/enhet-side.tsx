@@ -57,15 +57,15 @@ function antallFilter(filtervalg) {
 
 function EnhetSide() {
     const statustall = useFetchStatusTall();
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
+    const filtergruppe = ListevisningType.enhetensOversikt;
+    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(filtergruppe);
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
-    const filtergruppe = 'enhetensOversikt';
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
-    useFetchPortefolje(ListevisningType.enhetensOversikt);
+    useFetchPortefolje(filtergruppe);
     useSetLocalStorageOnUnmount();
     useMineFilterController({filtergruppe: filtergruppe});
 
@@ -126,7 +126,7 @@ function EnhetSide() {
                                                         sorteringsfelt,
                                                         filtervalg
                                                     ))}
-                                                    filtergruppe={ListevisningType.enhetensOversikt}
+                                                    filtergruppe={filtergruppe}
                                                     sokVeilederSkalVises
                                                     antallTotalt={portefoljeData.antallTotalt}
                                                     side="enhetensoversikt"

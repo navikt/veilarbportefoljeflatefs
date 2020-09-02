@@ -11,6 +11,7 @@ import SokFilterNy from '../../sok-veiledere/sok-filter-ny';
 import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from "../../../hooks/portefolje/use-select-gjeldende-veileder";
+import {ListevisningType} from "../../../ducks/ui/listevisning";
 
 interface TildelVeilederProps {
     filtergruppe?: string;
@@ -100,7 +101,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
 
 const mapStateToProps = (state, ownProps) => {
     const stateSlice = nameToStateSliceMap[ownProps.filtergruppe]
-        || (ownProps.filtergruppe === 'enhetensOversikt'
+        || (ownProps.filtergruppe === ListevisningType.enhetensOversikt
             ? 'filtreringEnhetensOversikt'
             : 'filtreringMinoversikt')
     return ({

@@ -7,14 +7,15 @@ import {AppState} from "../reducer";
 import {MINE_FILTER} from "../konstanter";
 import {apneMineFilterModal} from "../ducks/mine-filter-ui";
 import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
+import {ListevisningType} from "../ducks/ui/listevisning";
 
 export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const filtreringEnhetensOversikt = useSelector((state: AppState) => state.filtreringEnhetensOversikt);
 
-    const erPaMinOversikt = props.filtergruppe === 'minOversikt';
-    const erPaEnhetensOversikt = props.filtergruppe === 'enhetensOversikt';
+    const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
+    const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
 
     const filtrering = useSelector((state: AppState) => erPaMinOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
     const lagretFilterList = useSelector((state: AppState) => state.mineFilter.data);
