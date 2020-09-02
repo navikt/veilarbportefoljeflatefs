@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { endreFiltervalg, veilederSoktFraToolbar } from '../../ducks/filtrering';
-import { nameToStateSliceMap } from '../../ducks/utils';
-import { FiltervalgModell } from '../../model-interfaces';
-import { VeiledereState } from '../../ducks/veiledere';
-import { useEffect, useState } from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {endreFiltervalg, veilederSoktFraToolbar} from '../../ducks/filtrering';
+import {nameToStateSliceMap} from '../../ducks/utils';
+import {FiltervalgModell} from '../../model-interfaces';
+import {VeiledereState} from '../../ducks/veiledere';
+import {useEffect, useState} from 'react';
 import SokVeiledere from '../sok-veiledere/sok-veiledere';
 import './toolbar.less';
 
@@ -60,7 +60,10 @@ function SokVeilederFilter(props: AllProps) {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || 'filtrering';
+    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe]
+        || (ownProps.filtergruppe === 'enhet'
+            ? 'filtreringEnhetensOversikt'
+            : 'filtreringMinoversikt')
     return ({
         veiledere: state.veiledere,
         filtervalg: state[stateSlice],

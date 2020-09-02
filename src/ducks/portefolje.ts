@@ -283,7 +283,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                     dispatch(visTilordningOkModal(tilordninger.map(tillordning => ({brukerFnr: tillordning.brukerFnr}))));
                     dispatch(pagineringSetup({side: 1}));
                 }
-                if (filtergruppe === 'minOversikt') {
+                if (filtergruppe === 'veileder') {
                     dispatch({
                         type: OPPDATER_ANTALL,
                         antallTilordninger: tilordninger.length - res.feilendeTilordninger.length
@@ -296,7 +296,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                     const enhet = getState().valgtEnhet.data.enhetId;
                     const rekkefolge = getState().portefolje.sorteringsrekkefolge;
                     const sorteringsfelt = getState().portefolje.sorteringsfelt;
-                    if(filtergruppe === 'minOversikt'){
+                    if(filtergruppe === 'veileder'){
                         const filtervalg = getState().filtreringMinoversikt;
                         dispatch(hentPortefoljeForVeileder(enhet, veilederIdent, rekkefolge, sorteringsfelt, filtervalg))
                     } else {
