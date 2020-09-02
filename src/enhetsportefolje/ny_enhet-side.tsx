@@ -98,8 +98,6 @@ function Ny_EnhetSide() {
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
 
-    console.log("filtergruppe", filtergruppe);
-
     return (
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse__ny">
