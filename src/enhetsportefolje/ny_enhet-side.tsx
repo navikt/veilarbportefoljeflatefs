@@ -32,7 +32,7 @@ import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
 import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
-import {useLagreFilterController} from "../minoversikt/use-lagre-filter-controller";
+import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "../minoversikt/ny_mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 
@@ -79,7 +79,7 @@ function Ny_EnhetSide() {
 
     useFetchPortefolje(enhetensOversikt);
     useSetLocalStorageOnUnmount();
-    useLagreFilterController({filtergruppe: filtergruppe});
+    useMineFilterController({filtergruppe: filtergruppe});
 
     const handleOnTabClicked = (tab, selectedTab) => {
         if (isSidebarHidden) {

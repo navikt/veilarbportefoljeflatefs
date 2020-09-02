@@ -79,8 +79,8 @@ interface SidebarProps {
 }
 
 function Sidebar(props: SidebarProps) {
-    const erPaMinOversikt = props.filtergruppe === 'minOversikt';
-    const erPaEnhetensOversikt = props.filtergruppe === 'enhetensOversikt';
+    const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
+    const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
     const sidebarRef = useRef<HTMLDivElement>(null);
     const selectedTab = useSidebarViewStore(erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt)
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);

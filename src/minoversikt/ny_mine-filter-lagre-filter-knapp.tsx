@@ -5,7 +5,7 @@ import {erObjektValuesTomt, mineFilterListerErLik} from "../components/modal/min
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 import {MINE_FILTER} from "../konstanter";
-import {apneMineFilterModal} from "../ducks/lagret-filter-ui";
+import {apneMineFilterModal} from "../ducks/mine-filter-ui";
 import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 export function NyMineFilterLagreFilterKnapp(props: { filtergruppe: string }) {

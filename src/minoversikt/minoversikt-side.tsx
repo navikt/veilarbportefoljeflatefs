@@ -28,7 +28,7 @@ import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 import {MineFilterLagreFilterKnapp} from "./mine-filter-lagre-filter-knapp";
-import {useLagreFilterController} from "./use-lagre-filter-controller";
+import {useMineFilterController} from "./use-mine-filter-controller";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -37,13 +37,13 @@ function MinoversiktSide() {
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
-    const filtergruppe = 'minOversikt';
+    const filtergruppe = ListevisningType.minOversikt;
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
     useFetchPortefolje(ListevisningType.minOversikt);
-    useLagreFilterController({filtergruppe: filtergruppe});
+    useMineFilterController({filtergruppe: filtergruppe});
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;

@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import {avmarkerSisteValgtFilter, avmarkerValgtFilter, markerValgtFilter} from "../ducks/lagret-filter-ui";
+import {avmarkerSisteValgtFilter, avmarkerValgtFilter, markerValgtFilter} from "../ducks/mine-filter-ui";
 import {erObjektValuesTomt, mineFilterListerErLik} from "../components/modal/mine-filter/mine-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
@@ -7,10 +7,11 @@ import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";
 import {MINE_FILTER} from "../konstanter";
 import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
+import {ListevisningType} from "../ducks/ui/listevisning";
 
-export function useLagreFilterController(props: { filtergruppe: string }) {
+export function useMineFilterController(props: { filtergruppe: string }) {
     const dispatch = useDispatch()
-    const filtrering = useSelector((state: AppState) => props.filtergruppe === 'minOversikt' ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
+    const filtrering = useSelector((state: AppState) => props.filtergruppe === ListevisningType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
     const lagretFilterList = useSelector((state: AppState) => state.mineFilter.data);
     const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER)
 

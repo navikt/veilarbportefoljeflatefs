@@ -32,7 +32,7 @@ import Sidebar from '../components/sidebar/sidebar';
 import classNames from 'classnames';
 import {NyMinOversiktWrapper} from "./ny_min_oversikt_wrapper";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
-import {useLagreFilterController} from "./use-lagre-filter-controller";
+import {useMineFilterController} from "./use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "./ny_mine-filter-lagre-filter-knapp";
 import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
 
@@ -50,7 +50,7 @@ function Ny_MinoversiktSide() {
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
     useFetchPortefolje(minOversikt);
-    useLagreFilterController({filtergruppe: filtergruppe});
+    useMineFilterController({filtergruppe: filtergruppe});
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;

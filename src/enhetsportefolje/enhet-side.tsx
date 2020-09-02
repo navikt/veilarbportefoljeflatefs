@@ -27,7 +27,7 @@ import '../style.less';
 import {useCallback, useMemo} from 'react';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
-import {useLagreFilterController} from "../minoversikt/use-lagre-filter-controller";
+import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {MineFilterLagreFilterKnapp} from "../minoversikt/mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 
@@ -67,7 +67,7 @@ function EnhetSide() {
 
     useFetchPortefolje(ListevisningType.enhetensOversikt);
     useSetLocalStorageOnUnmount();
-    useLagreFilterController({filtergruppe: filtergruppe});
+    useMineFilterController({filtergruppe: filtergruppe});
 
     const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe)), [dispatch]);
 

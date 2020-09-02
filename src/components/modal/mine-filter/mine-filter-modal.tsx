@@ -10,6 +10,7 @@ import hiddenIf from "../../hidden-if/hidden-if";
 import {Meny} from "./mine-filter-meny";
 import {MineFilterFnrFeil} from "./mine-filter-fnr-feil";
 import {lukkMineFilterModal} from "../../../ducks/mine-filter-ui";
+import {ListevisningType} from "../../../ducks/ui/listevisning";
 
 export enum Visningstype {
     MENY,
@@ -35,7 +36,7 @@ const HiddenIfOppdaterFilter = hiddenIf(OppdaterMineFilter);
 const HiddenIfFnrFeil = hiddenIf(MineFilterFnrFeil)
 
 export function MineFilterModal(props: { filtergruppe: string }) {
-    const {sisteValgteMineFilter, valgtMineFilter, erModalApen} = useSelector((state: AppState) => (props.filtergruppe === 'minOversikt') ? state.mineFilterMinOversikt : state.mineFilterEnhetensOversikt)
+    const {sisteValgteMineFilter, valgtMineFilter, erModalApen} = useSelector((state: AppState) => (props.filtergruppe === ListevisningType.minOversikt) ? state.mineFilterMinOversikt : state.mineFilterEnhetensOversikt)
     const data = useSelector((state: AppState) => state.mineFilter.data)
     const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);

@@ -25,6 +25,8 @@ import toastReducer, {ToastState} from './store/toast/reducer';
 import {FiltervalgModell} from "./model-interfaces";
 import inloggetVeilederReducer, {InloggetVeilederState} from "./ducks/inlogget-veileder";
 import sidebarReducer, {initialStateSidebar} from "./ducks/sidebar-tab";
+import mineFilterReducer, {MineFilterState} from "./ducks/mine-filter";
+import mineFilterUI, {MineFilterUIState} from "./ducks/mine-filter-ui";
 
 
 function named(name, reducer) {
