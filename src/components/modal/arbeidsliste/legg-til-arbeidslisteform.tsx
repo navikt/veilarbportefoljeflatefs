@@ -6,21 +6,21 @@ import {
     Status,
     VeilederModell
 } from '../../../model-interfaces';
-import { postArbeidsliste } from '../../../ducks/arbeidsliste';
-import { markerAlleBrukere, oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
-import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
-import { LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal } from '../../../ducks/modal-feilmelding-brukere';
-import { leggTilStatustall } from '../../../ducks/statustall';
-import { AppState } from '../../../reducer';
-import { Form, Formik } from 'formik';
+import {postArbeidsliste} from '../../../ducks/arbeidsliste';
+import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
+import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
+import {LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
+import {leggTilStatustall} from '../../../ducks/statustall';
+import {AppState} from '../../../reducer';
+import {Form, Formik} from 'formik';
 import ArbeidslisteForm from './arbeidsliste-form';
-import { connect } from 'react-redux';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { skjulModal } from '../../../ducks/modal';
-import { dateToISODate } from '../../../utils/dato-utils';
+import {connect} from 'react-redux';
+import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
+import {skjulModal} from '../../../ducks/modal';
+import {dateToISODate} from '../../../utils/dato-utils';
 import './arbeidsliste.less';
-import { logEvent } from '../../../utils/frontend-logger';
-import { Normaltekst } from 'nav-frontend-typografi';
+import {logEvent} from '../../../utils/frontend-logger';
+import {Normaltekst} from 'nav-frontend-typografi';
 
 interface OwnProps {
     valgteBrukere: BrukerModell[];
@@ -86,13 +86,13 @@ function LeggTilArbeidslisteForm({
                                 <Hovedknapp className="knapp knapp--hoved">
                                     Lagre
                                 </Hovedknapp>
-                                <button type="button" className="knapp" onClick={() => {
+                                <Flatknapp className="knapp" onClick={() => {
                                     formikProps.resetForm();
                                     fjernMarkerteBrukere();
                                     lukkModal();
                                 }}>
                                     Avbryt
-                                </button>
+                                </Flatknapp>
                             </div>
                         </div>
                     </Form>

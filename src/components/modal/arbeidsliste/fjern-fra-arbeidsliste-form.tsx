@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { Element } from 'nav-frontend-typografi';
 import { slettArbeidsliste } from '../../../ducks/arbeidsliste';
@@ -48,12 +48,12 @@ function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraA
                 }
             </div>
             <div className="knapper">
-                <Hovedknapp className="knapp knapp--hoved mr1" spinner={laster} htmlType="submit">
+                <Hovedknapp className="knapp knapp--hoved" spinner={laster} htmlType="submit">
                     Bekreft
                 </Hovedknapp>
-                <button type="button" className="knapp" onClick={lukkModal}>
+                <Flatknapp className="knapp" onClick={lukkModal}>
                     Avbryt
-                </button>
+                </Flatknapp>
             </div>
         </form>
     );

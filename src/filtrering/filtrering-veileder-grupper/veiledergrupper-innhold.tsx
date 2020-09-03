@@ -23,7 +23,7 @@ interface VeilederGruppeInnholdProps {
 }
 
 function isOverflown(element) {
-    return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+    return element.scrollHeight > element.clientHeight
 }
 
 function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
