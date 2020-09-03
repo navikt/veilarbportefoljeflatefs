@@ -32,7 +32,7 @@ import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
 import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
-import {useLagreFilterController} from "../minoversikt/use-lagre-filter-controller";
+import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "../minoversikt/ny_mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 
@@ -61,37 +61,36 @@ function antallFilter(filtervalg) {
 
 function Ny_EnhetSide() {
     const statustall = useFetchStatusTall();
-    const enhetensOversikt = ListevisningType.enhetensOversikt
-    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} = usePortefoljeSelector(enhetensOversikt);
+    const filtergruppe = ListevisningType.enhetensOversikt;
+    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} = usePortefoljeSelector(filtergruppe);
     const dispatch = useDispatch();
     const portefoljeData = portefolje.data;
     const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
     const harFilter = antallFilter(filtervalg) !== 0;
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
-    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet')), [dispatch]);
+    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.enhetensOversikt)), [dispatch]);
     const veilederLabel = useMemo(() => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter), [filtervalg.veiledere, veilederliste, slettVeilederFilter]);
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
-    const {isSidebarHidden} = useSidebarViewStore(enhetensOversikt);
-    const filtergruppe = "enhet";
+    const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
-    useFetchPortefolje(enhetensOversikt);
+    useFetchPortefolje(filtergruppe);
     useSetLocalStorageOnUnmount();
-    useLagreFilterController({filtergruppe: filtergruppe});
+    useMineFilterController({filtergruppe: filtergruppe});
 
     const handleOnTabClicked = (tab, selectedTab) => {
         if (isSidebarHidden) {
-            dispatch(visSidebar(enhetensOversikt))
+            dispatch(visSidebar(filtergruppe))
 
         } else if (tab.type === selectedTab.selectedTab) {
-            dispatch(skjulSidebar(enhetensOversikt))
+            dispatch(skjulSidebar(filtergruppe))
         }
     };
 
     const lukkTab = () => {
-        dispatch(skjulSidebar(enhetensOversikt))
+        dispatch(skjulSidebar(filtergruppe))
     };
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
@@ -152,10 +151,9 @@ function Ny_EnhetSide() {
                                         sorteringsfelt,
                                         filtervalg
                                     ))}
-                                    filtergruppe={enhetensOversikt}
+                                    filtergruppe={filtergruppe}
                                     sokVeilederSkalVises
                                     antallTotalt={portefoljeData.antallTotalt}
-                                    side="enhetensoversikt"
                                 />
                                 <EnhetTabellOverskrift/>
                             </div>
