@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
-import { useEventListener } from '../../hooks/use-event-listener';
+import React, {useRef, useState} from 'react';
+import {useEventListener} from '../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
-import { MineFilter, lagreSorteringForFilter } from '../../ducks/mine-filter';
+import {lagreSorteringForFilter, MineFilter} from '../../ducks/mine-filter';
 import NyMineFilterRad from './ny_mine-filter-rad';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 export interface DragAndDropProps {
     dragAndDropElements: MineFilter[];
@@ -52,13 +52,7 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
                 sortOrder: idx,
                 filterId: filter.filterId
             }));
-            // (Stian temp kommentar) Alt 1: use only redux (Not working)
-                dispatch(lagreSorteringForFilter(idAndPriorities));
-
-            // (Stian temp kommentar) Alt 2: use direct post call and thene manually change state in redux? (Also not working) 
-                //lagreSorterinFiltere(idAndPriorities)
-                // TODO: update redux state with new sorting order
-
+            dispatch(lagreSorteringForFilter(idAndPriorities));
         }
         setSrcIndex(-1);
         setDestIndex(-1);

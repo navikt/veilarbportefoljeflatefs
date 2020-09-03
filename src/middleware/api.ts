@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
-import { fetchToJson, sjekkStatuskode } from '../ducks/utils';
-import { NyGruppe, RedigerGruppe } from '../ducks/veiledergrupper_filter';
-import { VeilederModell } from '../model-interfaces';
-import { NyttMineFilter, RedigerMineFilter } from '../ducks/mine-filter';
-import { SorteringOgId } from '../filtrering/filtrering-mine-filter/drag-and-drop-container';
+import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
+import {NyGruppe, RedigerGruppe} from '../ducks/veiledergrupper_filter';
+import {VeilederModell} from '../model-interfaces';
+import {NyttMineFilter, RedigerMineFilter} from '../ducks/mine-filter';
+import {SorteringOgId} from '../filtrering/filtrering-mine-filter/drag-and-drop-container';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -141,7 +141,7 @@ export function slettMineFilter(filterId: number): Promise<number> {
 }
 
 export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise<number> {
-    const url = `${VEILARBFILTER_URL}/minelagredefilter/sortering/`;
+    const url = `${VEILARBFILTER_URL}/minelagredefilter/lagresortering/`;
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(sorteringOgIder) };
     return fetchToJson(url, config);
 }

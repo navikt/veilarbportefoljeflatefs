@@ -13,7 +13,7 @@ import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
 import {MineFilter} from '../ducks/mine-filter';
 import {mineFilter} from "./mine-filter";
-import { SorteringOgId } from '../filtrering/filtrering-mine-filter/drag-and-drop-container';
+import {SorteringOgId} from '../filtrering/filtrering-mine-filter/drag-and-drop-container';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -130,6 +130,12 @@ mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
     customMineFilter = [...customMineFilter, {...req.body, filterId}];
     return res(
         ctx.json({...req.body, filterId})
+    );
+});
+
+mock.post('/veilarbfilter/api/minelagredefilter/lagresortering', (req, res, ctx) => {
+    return res(
+        ctx.json(true)
     );
 });
 
