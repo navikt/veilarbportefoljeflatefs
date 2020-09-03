@@ -74,7 +74,7 @@ function VeilederesideVisning(props: VeilederesideVisningProps) {
                 antallTotalt={veilederListe.length}
                 sokVeilederSkalVises={false}
                 id="veilederside-toolbar"
-                side="veilederoversikt"
+                side={ListevisningType.veilederOversikt}
                 antallVeiledere={props.antallVeiledere}
             />
             <VeiledereTabell

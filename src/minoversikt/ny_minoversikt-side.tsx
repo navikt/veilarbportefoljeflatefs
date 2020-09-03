@@ -130,7 +130,6 @@ function Ny_MinoversiktSide() {
                                             filtergruppe={filtergruppe}
                                             sokVeilederSkalVises={false}
                                             antallTotalt={portefolje.data.antallTotalt}
-                                            side="minoversikt"
                                             gjeldendeVeileder={gjeldendeVeileder}
                                             visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                         />

@@ -101,9 +101,6 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
 
 const mapStateToProps = (state, ownProps) => {
     const stateSlice = nameToStateSliceMap[ownProps.filtergruppe]
-        || (ownProps.filtergruppe === ListevisningType.enhetensOversikt
-            ? 'filtreringEnhetensOversikt'
-            : 'filtreringMinoversikt')
     return ({
         filtervalg: state[stateSlice],
     });

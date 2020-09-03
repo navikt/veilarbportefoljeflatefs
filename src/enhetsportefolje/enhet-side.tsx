@@ -132,7 +132,6 @@ function EnhetSide() {
                                                     filtergruppe={filtergruppe}
                                                     sokVeilederSkalVises
                                                     antallTotalt={portefoljeData.antallTotalt}
-                                                    side="enhetensoversikt"
                                                 />
                                                 <EnhetTabellOverskrift/>
                                             </div>

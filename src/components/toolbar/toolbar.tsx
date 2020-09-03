@@ -20,7 +20,6 @@ interface ToolbarProps {
     gjeldendeVeileder?: string;
     antallTotalt: number;
     id?: string;
-    side: string;
     antallVeiledere?: number;
 }
 
@@ -32,11 +31,11 @@ function Toolbar(props: ToolbarProps) {
 
     const oversikt = (side) => {
         switch (side) {
-            case 'minoversikt':
+            case ListevisningType.minOversikt:
                 return (
                     <LeggTilArbeidsliste visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false}/>
                 );
-            case 'enhetensoversikt':
+            case ListevisningType.enhetensOversikt:
                 return (
                     <div className="sok-veileder-wrapper">
                         <ToolbarKnapp
@@ -49,14 +48,14 @@ function Toolbar(props: ToolbarProps) {
                         />
                     </div>
                 );
-            case 'veilederoversikt':
+            case ListevisningType.veilederOversikt:
                 return (<></>);
         }
     };
     return (
         <div className="toolbar blokk-xs" id={id}>
             <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
-                {props.side === 'veilederoversikt' &&
+                {props.filtergruppe === ListevisningType.veilederOversikt &&
                 <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
                     {`Totalt ${props.antallVeiledere} veiledere`}
                 </Undertittel>}
@@ -70,7 +69,7 @@ function Toolbar(props: ToolbarProps) {
                         filtergruppe={filtergruppe}
                     />
                 </div>
-                {oversikt(props.side)}
+                {oversikt(props.filtergruppe)}
             </div>
             <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">
                 <Listevisning filtergruppe={filtergruppe}/>

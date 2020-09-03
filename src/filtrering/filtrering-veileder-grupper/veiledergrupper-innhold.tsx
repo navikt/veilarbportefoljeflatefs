@@ -53,7 +53,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
             {}, {gruppeId: gruppeId, sideNavn: finnSideNavn()});
         const filterVerdi = finnVeilederGruppe(gruppeId);
         setValgtGruppe(filterVerdi);
-        filterVerdi && dispatch(endreFiltervalg('veilederOversikt', filterVerdi.filterValg.veiledere, props.filtergruppe));
+        filterVerdi && dispatch(endreFiltervalg('veiledere', filterVerdi.filterValg.veiledere, props.filtergruppe));
     };
 
     const finnVeilederGruppe = (vg) => props.lagretFilter.find((elem) => elem.filterId === parseInt(vg));

@@ -95,7 +95,6 @@ function MinoversiktSide() {
                                             visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                             sokVeilederSkalVises={false}
                                             antallTotalt={portefolje.data.antallTotalt}
-                                            side="minoversikt"
                                         />
                                         <MinoversiktTabellOverskrift
                                             visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
