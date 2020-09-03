@@ -11,7 +11,6 @@ import SokFilterNy from '../../sok-veiledere/sok-filter-ny';
 import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from "../../../hooks/portefolje/use-select-gjeldende-veileder";
-import {ListevisningType} from "../../../ducks/ui/listevisning";
 
 interface TildelVeilederProps {
     filtergruppe?: string;

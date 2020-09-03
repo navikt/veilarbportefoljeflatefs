@@ -9,6 +9,7 @@ import {Radio} from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
 import React, {RefObject, useRef} from "react";
 import {antallFilter} from "../../components/modal/mine-filter/mine-filter-utils";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface LagretFilterRadProps {
     filter: MineFilter;

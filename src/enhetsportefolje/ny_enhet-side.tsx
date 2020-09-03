@@ -154,7 +154,6 @@ function Ny_EnhetSide() {
                                     filtergruppe={filtergruppe}
                                     sokVeilederSkalVises
                                     antallTotalt={portefoljeData.antallTotalt}
-                                    side={ListevisningType.enhetensOversikt}
                                 />
                                 <EnhetTabellOverskrift/>
                             </div>
