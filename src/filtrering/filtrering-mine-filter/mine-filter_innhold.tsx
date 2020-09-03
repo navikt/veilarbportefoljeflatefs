@@ -9,8 +9,9 @@ import MineFilterRad from "./mine-filter-rad";
 import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
 import {REDESIGN} from "../../konstanter";
 import {useWindowWidth} from "../../hooks/use-window-width";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
-interface LagredeFilterInnholdProps {
+interface MineFilterInnholdProps {
     mineFilter: MineFilter[];
     filtergruppe: string;
 }
@@ -19,9 +20,9 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
-    const erPaMinOversikt = props.filtergruppe === "veileder";
-    const erPaEnhetensOversikt = props.filtergruppe === "enhet";
+function MineFilterInnhold(props: MineFilterInnholdProps) {
+    const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
+    const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
     const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
 
     const fjernUtilgjengeligeFilter = (elem) => {
@@ -93,4 +94,4 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 }
 
 
-export default LagredeFilterInnhold;
+export default MineFilterInnhold;

@@ -6,7 +6,7 @@ import FilterKonstanter, {
 } from './filter-konstanter';
 import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg} from '../ducks/filtrering';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne, ListevisningState} from '../ducks/ui/listevisning';
+import {Kolonne, ListevisningState, ListevisningType} from '../ducks/ui/listevisning';
 import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {useEffect} from "react";
@@ -129,7 +129,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                 }
             } else if (value) {
                 kolonne = key === 'ytelse' ? Kolonne.UTLOP_YTELSE : getKolonneFraLabel(value);
-                muligMenIkkeValgt = kolonne === Kolonne.AVTALT_AKTIVITET && filtergruppe === 'veileder' ? true :
+                muligMenIkkeValgt = kolonne === Kolonne.AVTALT_AKTIVITET && filtergruppe === ListevisningType.minOversikt ? true :
                     harMuligMenIkkeValgtKolonne(listevisning, kolonne);
                 return [
                     <FiltreringLabel

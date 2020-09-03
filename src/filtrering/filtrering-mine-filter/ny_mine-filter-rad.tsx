@@ -4,11 +4,12 @@ import {AppState} from "../../reducer";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
 import {logEvent} from "../../utils/frontend-logger";
 import {velgLagretFilter} from "../../ducks/filtrering";
-import {apneMineFilterModal} from "../../ducks/lagret-filter-ui";
+import {apneMineFilterModal} from "../../ducks/mine-filter-ui";
 import {Radio} from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
 import React from "react";
 import './ny_mine-filter-innhold.less'
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface LagretFilterRadProps {
     filter: MineFilter;
@@ -18,7 +19,7 @@ interface LagretFilterRadProps {
 function NyMineFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     const dispatch = useDispatch();
 
-    const valgtMittFilter = useSelector((state: AppState) => filtergruppe === "veileder"
+    const valgtMittFilter = useSelector((state: AppState) => filtergruppe === ListevisningType.minOversikt
         ? state.mineFilterMinOversikt.valgtMineFilter
         : state.mineFilterEnhetensOversikt.valgtMineFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);

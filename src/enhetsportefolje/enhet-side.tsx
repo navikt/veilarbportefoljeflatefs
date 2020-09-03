@@ -27,7 +27,7 @@ import '../style.less';
 import {useCallback, useMemo} from 'react';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
-import {useLagreFilterController} from "../minoversikt/use-lagre-filter-controller";
+import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {MineFilterLagreFilterKnapp} from "../minoversikt/mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 
@@ -55,21 +55,24 @@ function antallFilter(filtervalg) {
 
 }
 
+
 function EnhetSide() {
     const statustall = useFetchStatusTall();
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
+    const filtergruppe = ListevisningType.enhetensOversikt;
+    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(filtergruppe);
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
-    const filtergruppe = "enhet";
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
-    useFetchPortefolje(ListevisningType.enhetensOversikt);
+    useFetchPortefolje(filtergruppe);
     useSetLocalStorageOnUnmount();
-    useLagreFilterController({filtergruppe: filtergruppe});
+    useMineFilterController({filtergruppe: filtergruppe});
 
-    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe)), [dispatch]);
+    const slettVeilederFilter = useCallback(ident =>
+            dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe)),
+        [dispatch, filtergruppe]);
 
     const portefoljeData = portefolje.data;
     const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
@@ -126,10 +129,9 @@ function EnhetSide() {
                                                         sorteringsfelt,
                                                         filtervalg
                                                     ))}
-                                                    filtergruppe={ListevisningType.enhetensOversikt}
+                                                    filtergruppe={filtergruppe}
                                                     sokVeilederSkalVises
                                                     antallTotalt={portefoljeData.antallTotalt}
-                                                    side="enhetensoversikt"
                                                 />
                                                 <EnhetTabellOverskrift/>
                                             </div>

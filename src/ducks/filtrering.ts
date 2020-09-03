@@ -1,6 +1,7 @@
 import {FiltervalgModell} from '../model-interfaces';
 import {MineFilter} from "./mine-filter";
-import {VELG_MINE_FILTER} from "./lagret-filter-ui";
+import {VELG_MINE_FILTER} from "./mine-filter-ui";
+import {ListevisningType} from "./ui/listevisning";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -70,7 +71,7 @@ function fjern(filterId, verdi, fjernVerdi) {
         return false;
     } else if (Array.isArray(verdi)) {
         return verdi.filter((enkeltVerdi) => enkeltVerdi !== fjernVerdi);
-    } else if (filterId === 'aktiviteter'){
+    } else if (filterId === 'aktiviteter') {
         var tomtVerdi = {};
         tomtVerdi[fjernVerdi] = AktiviteterValg.NA;
         return Object.assign({}, verdi, tomtVerdi)
@@ -130,7 +131,7 @@ export function velgLagretFilter(filterVerdi: MineFilter, filtergruppe: string) 
     }
 }
 
-export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = 'enhet') {
+export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = ListevisningType.enhetensOversikt) {
     if (Array.isArray(filterVerdi)) {
         filterVerdi.sort()
     }
@@ -148,7 +149,7 @@ export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: str
     };
 }
 
-export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet') {
+export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = ListevisningType.enhetensOversikt) {
     if (filterId === 'aktiviteter' && filterVerdi === 'TILTAK') {
         return {
             type: SLETT_AKTIVITETER_OG_TILTAK_FILTER,
@@ -163,7 +164,7 @@ export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = 'enhet')
     };
 }
 
-export function clearFiltervalg(filtergruppe = 'enhet') {
+export function clearFiltervalg(filtergruppe = ListevisningType.enhetensOversikt) {
     return {type: CLEAR_FILTER, name: filtergruppe};
 }
 

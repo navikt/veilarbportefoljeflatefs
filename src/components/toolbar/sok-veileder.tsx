@@ -8,6 +8,7 @@ import {VeiledereState} from '../../ducks/veiledere';
 import {useEffect, useState} from 'react';
 import SokVeiledere from '../sok-veiledere/sok-veiledere';
 import './toolbar.less';
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface SokVeilederProps {
     filtervalg: FiltervalgModell;
@@ -60,7 +61,7 @@ function SokVeilederFilter(props: AllProps) {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || (ownProps.filtergruppe === 'enhet' ? 'filtreringEnhetensOversikt' : 'filtreringMinoversikt')
+    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || (ownProps.filtergruppe === ListevisningType.enhetensOversikt ? 'filtreringEnhetensOversikt' : 'filtreringMinoversikt')
     return ({
         veiledere: state.veiledere,
         filtervalg: state[stateSlice],
