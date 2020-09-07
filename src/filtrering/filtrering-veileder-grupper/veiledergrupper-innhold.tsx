@@ -15,6 +15,7 @@ import {finnSideNavn} from '../../middleware/metrics-middleware';
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {ListevisningType} from "../../ducks/ui/listevisning";
+import './veileder-gruppe.less'
 
 interface VeilederGruppeInnholdProps {
     lagretFilter: VeiledergrupperFilter[]
