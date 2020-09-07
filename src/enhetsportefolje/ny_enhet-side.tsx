@@ -71,7 +71,7 @@ function Ny_EnhetSide() {
     const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.enhetensOversikt)), [dispatch]);
     const veilederLabel = useMemo(() => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter), [filtervalg.veiledere, veilederliste, slettVeilederFilter]);
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
-    const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
+    const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
 
     useSetStateFromUrl();
     useSyncStateMedUrl();

@@ -29,6 +29,7 @@ import {HandlingsType} from "../../ducks/mine-filter";
 import {STATUS} from "../../ducks/utils";
 import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn} from "../../middleware/metrics-middleware";
+import {SIDEBAR_TAB_ENDRET} from "../../ducks/sidebar-tab";
 
 interface Sidebar {
     type: SidebarTabType;
@@ -85,11 +86,9 @@ function Sidebar(props: SidebarProps) {
     const selectedTab = useSidebarViewStore(erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt)
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
-    const sidebarTabEndret = 'sidebarTabEndret';
     const dispatch = useDispatch();
     const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
-    const mineFilter = mineFilterState.data;
-    const sortertMineFilter = mineFilter.sort((a, b) => a.filterNavn.toLowerCase()
+    const sortertMineFilter = mineFilterState.data.sort((a, b) => a.filterNavn.toLowerCase()
         .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
 
     useEffect(() => {
@@ -98,7 +97,7 @@ function Sidebar(props: SidebarProps) {
 
         if (nyttLagretFilter || oppdatertLagretFilter) {
             dispatch({
-                type: sidebarTabEndret,
+                type: SIDEBAR_TAB_ENDRET,
                 selectedTab: SidebarTabInfo.MINE_FILTER,
                 name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
             })
@@ -107,7 +106,7 @@ function Sidebar(props: SidebarProps) {
 
     function handleOnTabClicked(tab: Sidebar) {
         dispatch({
-            type: sidebarTabEndret,
+            type: SIDEBAR_TAB_ENDRET,
             selectedTab: tab.type,
             name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
         })
