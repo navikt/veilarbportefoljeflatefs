@@ -14,7 +14,6 @@ import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import '../../components/sidebar/sidebar.less'
 import './ny_veileder-gruppe.less'
-import './veileder-gruppe.less'
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {ListevisningType} from "../../ducks/ui/listevisning";
