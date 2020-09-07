@@ -1,19 +1,14 @@
-import React, {useRef, useState} from 'react';
-import {useEventListener} from '../../hooks/use-event-listener';
+import React, { useRef, useState } from 'react';
+import { useEventListener } from '../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
 import NyMineFilterRad from './ny_mine-filter-rad';
-import {useDispatch} from 'react-redux';
-import {lagreSorteringForFilter, MineFilter} from "../../ducks/mine-filter";
+import { useDispatch } from 'react-redux';
+import { lagreSorteringForFilter, MineFilter, SorteringOgId } from '../../ducks/mine-filter';
 
 export interface DragAndDropProps {
     dragAndDropElements: MineFilter[];
     filtergruppe: string;
-}
-
-export interface SorteringOgId {
-    sortOrder: number;
-    filterId: number;
 }
 
 function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDropProps) {

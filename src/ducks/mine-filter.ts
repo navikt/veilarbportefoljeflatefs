@@ -1,13 +1,12 @@
-import {doThenDispatch, STATUS} from './utils';
-import {FiltervalgModell} from '../model-interfaces';
+import { doThenDispatch, STATUS, sendResultatTilDispatch, handterFeil } from './utils';
+import { FiltervalgModell } from '../model-interfaces';
 import {
     hentMineFilter,
     lagreSorteringFiltere,
     nyttMineFilter,
     redigerMineFilter,
     slettMineFilter
-} from "../middleware/api";
-import {SorteringOgId} from '../filtrering/filtrering-mine-filter/drag-and-drop-container';
+} from '../middleware/api';
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
@@ -28,7 +27,6 @@ export const SLETT_MINEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
 export const SORTER_MINEFILTER_OK = 'lagredefilter_sortering/OK';
 export const SORTER_MINEFILTER_FEILET = 'lagredefilter_sortering/FEILET';
-export const SORTER_MINEFILTER_PENDING = 'lagredefilter_sortering/PENDING';
 
 export interface MineFilter {
     filterNavn: string;
@@ -53,6 +51,11 @@ export interface RedigerMineFilter {
 export interface NyttMineFilter {
     filterNavn: string;
     filterValg: FiltervalgModell;
+}
+
+export interface SorteringOgId {
+    sortOrder: number;
+    filterId: number;
 }
 
 export enum HandlingsType {
@@ -117,8 +120,6 @@ export default function reducer(state: MineFilterState = initialState, action) {
                 data: state.data.filter((elem) => elem.filterId !== action.data)
             };
 
-        case SORTER_MINEFILTER_PENDING:
-            return { ...state, status: STATUS.PENDING, handlingType: HandlingsType.SORTERING };
         case SORTER_MINEFILTER_FEILET:
             return { ...state, status: STATUS.ERROR, handlingType: HandlingsType.SORTERING };
         case SORTER_MINEFILTER_OK:
@@ -166,9 +167,9 @@ export function slettFilter(filterId: number) {
 }
 
 export function lagreSorteringForFilter(sorteringOgIder: SorteringOgId[]) {
-    return doThenDispatch(() => lagreSorteringFiltere(sorteringOgIder), {
-        OK: SORTER_MINEFILTER_OK,
-        FEILET: SORTER_MINEFILTER_FEILET,
-        PENDING: SORTER_MINEFILTER_PENDING
-    });
+    return (dispatch) => {
+        return lagreSorteringFiltere(sorteringOgIder)
+            .then((data) => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
+            .catch(handterFeil(dispatch, SORTER_MINEFILTER_FEILET));
+    };
 }

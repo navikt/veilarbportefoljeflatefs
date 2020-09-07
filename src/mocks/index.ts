@@ -11,9 +11,8 @@ import {endringsloggListe} from './endringslogg';
 import * as faker from 'faker/locale/nb_NO';
 import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
-import {MineFilter} from '../ducks/mine-filter';
+import {MineFilter, SorteringOgId} from '../ducks/mine-filter';
 import {mineFilter} from "./mine-filter";
-import {SorteringOgId} from '../filtrering/filtrering-mine-filter/drag-and-drop-container';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);

@@ -2,8 +2,7 @@
 import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
 import {NyGruppe, RedigerGruppe} from '../ducks/veiledergrupper_filter';
 import {VeilederModell} from '../model-interfaces';
-import {NyttMineFilter, RedigerMineFilter} from '../ducks/mine-filter';
-import {SorteringOgId} from '../filtrering/filtrering-mine-filter/drag-and-drop-container';
+import {NyttMineFilter, RedigerMineFilter, SorteringOgId} from '../ducks/mine-filter';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
