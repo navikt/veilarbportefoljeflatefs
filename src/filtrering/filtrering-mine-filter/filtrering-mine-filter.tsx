@@ -9,8 +9,6 @@ import {STATUS} from "../../ducks/utils";
 function FiltreringMineFilter(props: { filtergruppe: string }) {
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const mineFilter = mineFilterState.data;
-    const sortertMineFilter = mineFilter.sort((a, b) => a.filterNavn.toLowerCase()
-        .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
 
     return (
         <>
@@ -19,7 +17,7 @@ function FiltreringMineFilter(props: { filtergruppe: string }) {
                 ? <AlertStripeFeil>
                     Det oppsto en feil, og mine filter kunne ikke hentes fram. Prøv igjen senere.
                 </AlertStripeFeil>
-                : <LagredeFilterInnhold mineFilter={sortertMineFilter}
+                : <LagredeFilterInnhold mineFilter={mineFilter}
                                         filtergruppe={props.filtergruppe}/>}
         </>
     );

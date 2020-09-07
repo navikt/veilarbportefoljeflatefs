@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from 'react';
-import { MineFilter } from '../../ducks/mine-filter';
+import React, {useEffect, useRef} from 'react';
+import {MineFilter} from '../../ducks/mine-filter';
 import './mine-filter_innhold.less';
-import { PopoverOrientering } from 'nav-frontend-popover';
+import {PopoverOrientering} from 'nav-frontend-popover';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import hiddenIf from '../../components/hidden-if/hidden-if';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
-import { REDESIGN } from '../../konstanter';
-import { useWindowWidth } from '../../hooks/use-window-width';
+import {Normaltekst} from 'nav-frontend-typografi';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {REDESIGN} from '../../konstanter';
+import {useWindowWidth} from '../../hooks/use-window-width';
 import DragAndDropContainer from './drag-and-drop-container';
 
 interface LagredeFilterInnholdProps {

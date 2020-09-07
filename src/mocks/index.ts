@@ -133,12 +133,6 @@ mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
     );
 });
 
-mock.post('/veilarbfilter/api/minelagredefilter/lagresortering', (req, res, ctx) => {
-    return res(
-        ctx.json(true)
-    );
-});
-
 mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) => {
     const {pathParams} = req;
     if (pathParams.filterId) {
@@ -148,16 +142,17 @@ mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) =>
     return res(ctx.status(401));
 });
 
-mock.post('/veilarbfilter/api/minelagredefilter/sortering/', (req, res, ctx) => {
+mock.post('/veilarbfilter/api/minelagredefilter/lagresortering/', (req, res, ctx) => {
     const sorteringer = req.body as SorteringOgId[];
     sorteringer.forEach(elem => {
-        const elemFilter = customMineFilter.find(filter => elem.filterId === filter.filterId);
-        if(elemFilter != null){
-            elemFilter.sortOrder = elem.sortOrder;
+        const customMineFilterElem = customMineFilter.find(filter => elem.filterId === filter.filterId);
+        if(customMineFilterElem){
+            customMineFilterElem.sortOrder = elem.sortOrder;
         }
     });
     return res(
-        ctx.json({...req.body})
+        ctx.json(customMineFilter),
+        ctx.status(200)
     );
 });
 

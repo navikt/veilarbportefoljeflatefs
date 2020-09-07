@@ -1,7 +1,13 @@
 import {doThenDispatch, STATUS} from './utils';
 import {FiltervalgModell} from '../model-interfaces';
-import {hentMineFilter, nyttMineFilter, redigerMineFilter, slettMineFilter, lagreSorteringFiltere} from "../middleware/api";
-import { SorteringOgId } from '../filtrering/filtrering-mine-filter/drag-and-drop-container';
+import {
+    hentMineFilter,
+    lagreSorteringFiltere,
+    nyttMineFilter,
+    redigerMineFilter,
+    slettMineFilter
+} from "../middleware/api";
+import {SorteringOgId} from '../filtrering/filtrering-mine-filter/drag-and-drop-container';
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
@@ -110,12 +116,18 @@ export default function reducer(state: MineFilterState = initialState, action) {
                 handlingType: HandlingsType.SLETTE,
                 data: state.data.filter((elem) => elem.filterId !== action.data)
             };
-        //case SORTER_MINEFILTER_OK:
-            // (Stian temp kommentar) Write code to update state with new sorting
-        //case SORTER_MINEFILTER_PENDING:
-            // (Stian temp kommentar) dont know what to put here, is it possible to not update on pending?
-        //case SORTER_MINEFILTER_FEILET:
-            // (Stian temp kommentar) unkown what to write
+
+        case SORTER_MINEFILTER_PENDING:
+            return { ...state, status: STATUS.PENDING, handlingType: HandlingsType.SORTERING };
+        case SORTER_MINEFILTER_FEILET:
+            return { ...state, status: STATUS.ERROR, handlingType: HandlingsType.SORTERING };
+        case SORTER_MINEFILTER_OK:
+            return {
+                ...state,
+                status: STATUS.OK,
+                handlingType: HandlingsType.SORTERING,
+                data: action.data
+            };
         default:
             return state;
     }

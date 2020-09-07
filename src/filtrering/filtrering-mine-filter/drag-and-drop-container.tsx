@@ -2,9 +2,9 @@ import React, {useRef, useState} from 'react';
 import {useEventListener} from '../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
-import {lagreSorteringForFilter, MineFilter} from '../../ducks/mine-filter';
 import NyMineFilterRad from './ny_mine-filter-rad';
 import {useDispatch} from 'react-redux';
+import {lagreSorteringForFilter, MineFilter} from "../../ducks/mine-filter";
 
 export interface DragAndDropProps {
     dragAndDropElements: MineFilter[];
