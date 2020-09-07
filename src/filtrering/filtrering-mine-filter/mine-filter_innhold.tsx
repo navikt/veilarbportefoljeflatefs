@@ -1,16 +1,17 @@
 import React, {useEffect, useRef} from 'react';
 import {MineFilter} from '../../ducks/mine-filter';
-import './mine-filter_innhold.less';
-import {PopoverOrientering} from 'nav-frontend-popover';
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import hiddenIf from '../../components/hidden-if/hidden-if';
-import {Normaltekst} from 'nav-frontend-typografi';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {REDESIGN} from '../../konstanter';
-import {useWindowWidth} from '../../hooks/use-window-width';
+import './mine-filter_innhold.less'
+import {PopoverOrientering} from "nav-frontend-popover";
+import Hjelpetekst from "nav-frontend-hjelpetekst";
+import hiddenIf from "../../components/hidden-if/hidden-if";
+import {Normaltekst} from "nav-frontend-typografi";
+import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
+import {REDESIGN} from "../../konstanter";
+import {useWindowWidth} from "../../hooks/use-window-width";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 import DragAndDropContainer from './drag-and-drop-container';
 
-interface LagredeFilterInnholdProps {
+interface MineFilterInnholdProps {
     mineFilter: MineFilter[];
     filtergruppe: string;
 }
@@ -19,9 +20,9 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
-    const erPaMinOversikt = props.filtergruppe === 'veileder';
-    const erPaEnhetensOversikt = props.filtergruppe === 'enhet';
+function MineFilterInnhold(props: MineFilterInnholdProps) {
+    const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
+    const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
     const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
 
     const fjernUtilgjengeligeFilter = (elem) => {
@@ -101,4 +102,5 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     );
 }
 
-export default LagredeFilterInnhold;
+
+export default MineFilterInnhold;

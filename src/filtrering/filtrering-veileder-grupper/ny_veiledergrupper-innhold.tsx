@@ -16,6 +16,7 @@ import '../../components/sidebar/sidebar.less'
 import './ny_veileder-gruppe.less'
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface VeilederGruppeInnholdProps {
     lagretFilter: VeiledergrupperFilter[]
@@ -33,7 +34,7 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const filtreringVeilederoversikt = (state: AppState) => state.filtreringVeilederoversikt.veiledere;
     const filtreringEnhetensoversikt = (state: AppState) => state.filtreringEnhetensOversikt.veiledere;
-    const selector = props.filtergruppe === 'enhet' ? filtreringEnhetensoversikt : filtreringVeilederoversikt;
+    const selector = props.filtergruppe === ListevisningType.enhetensOversikt ? filtreringEnhetensoversikt : filtreringVeilederoversikt;
 
     const veiledereFilter = useSelector(selector);
 
@@ -74,7 +75,7 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const sletteKnapp = () => {
         valgtGruppe && enhet && dispatch(slettGruppe(enhet, valgtGruppe.filterId))
-            .then(() => dispatch(endreFiltervalg('veiledere', [], 'enhet')));
+        (() => dispatch(endreFiltervalg('veiledere', [], ListevisningType.enhetensOversikt)));
     };
 
     useEffect(() => {

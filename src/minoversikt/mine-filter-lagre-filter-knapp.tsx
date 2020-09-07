@@ -5,16 +5,17 @@ import {erObjektValuesTomt, mineFilterListerErLik} from "../components/modal/min
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 import {MINE_FILTER} from "../konstanter";
-import {apneMineFilterModal} from "../ducks/lagret-filter-ui";
+import {apneMineFilterModal} from "../ducks/mine-filter-ui";
 import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
+import {ListevisningType} from "../ducks/ui/listevisning";
 
 export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const filtreringEnhetensOversikt = useSelector((state: AppState) => state.filtreringEnhetensOversikt);
 
-    const erPaMinOversikt = props.filtergruppe === 'veileder';
-    const erPaEnhetensOversikt = props.filtergruppe === 'enhet';
+    const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
+    const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
 
     const filtrering = useSelector((state: AppState) => erPaMinOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
     const lagretFilterList = useSelector((state: AppState) => state.mineFilter.data);

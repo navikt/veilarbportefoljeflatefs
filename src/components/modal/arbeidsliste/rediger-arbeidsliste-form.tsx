@@ -61,9 +61,9 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 >
                     Lagre
                 </Hovedknapp>
-                <button type="button" className="knapp knapp--avbryt" onClick={props.lukkModal}>
+                <Flatknapp className="knapp knapp--avbryt" onClick={props.lukkModal}>
                     Avbryt
-                </button>
+                </Flatknapp>
                 <Flatknapp
                     htmlType="button"
                     onClick={fjernBruker}

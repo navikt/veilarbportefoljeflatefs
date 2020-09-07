@@ -12,8 +12,6 @@ import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import veiledergrupperLagretFilterReducer, {VeiledergrupperLagretFilterState} from './ducks/veiledergrupper_filter';
-import lagretFilterReducer, {MineFilterState} from './ducks/mine-filter';
-import lagretFilterUI, {MineFilterUIState} from './ducks/lagret-filter-ui';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
 import listevisningReducer, {
@@ -27,6 +25,8 @@ import toastReducer, {ToastState} from './store/toast/reducer';
 import {FiltervalgModell} from "./model-interfaces";
 import inloggetVeilederReducer, {InloggetVeilederState} from "./ducks/inlogget-veileder";
 import sidebarReducer, {initialStateSidebar} from "./ducks/sidebar-tab";
+import mineFilterReducer, {MineFilterState} from "./ducks/mine-filter";
+import mineFilterUI, {MineFilterUIState} from "./ducks/mine-filter-ui";
 
 
 function named(name, reducer) {
@@ -88,9 +88,9 @@ export default combineReducers<AppState>({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     statustall: statustallReducer,
-    filtreringEnhetensOversikt: persistent('enhetsState', window.location, named('enhet', filtreringReducer), initialState),
-    filtreringMinoversikt: persistent('veilederState', window.location, named('veileder', filtreringReducer), initialState),
-    filtreringVeilederoversikt: named('veiledere', filtreringReducer),
+    filtreringEnhetensOversikt: persistent('enhetsState', window.location, named(ListevisningType.enhetensOversikt, filtreringReducer), initialState),
+    filtreringMinoversikt: persistent('veilederState', window.location, named(ListevisningType.minOversikt, filtreringReducer), initialState),
+    filtreringVeilederoversikt: named(ListevisningType.veilederOversikt, filtreringReducer),
     modal: modalReducer,
     serverfeilModal: serverfeilModalReducer,
     feilmeldingModal: feilmedlingModalReducer,
@@ -98,9 +98,9 @@ export default combineReducers<AppState>({
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
     veiledergrupperLagretFilter: veiledergrupperLagretFilterReducer,
-    mineFilter: lagretFilterReducer,
-    mineFilterMinOversikt: named('veileder', lagretFilterUI),
-    mineFilterEnhetensOversikt: named('enhet', lagretFilterUI),
+    mineFilter: mineFilterReducer,
+    mineFilterMinOversikt: named(ListevisningType.minOversikt, mineFilterUI),
+    mineFilterEnhetensOversikt: named(ListevisningType.enhetensOversikt, mineFilterUI),
     toastReducer: toastReducer,
     inloggetVeileder: inloggetVeilederReducer
 });

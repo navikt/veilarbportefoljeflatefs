@@ -21,13 +21,14 @@ import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-sto
 import FilteringVeilederGrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import MetrikkEkspanderbartpanel from "../components/ekspandertbart-panel/metrikk-ekspanderbartpanel";
+import {ListevisningType} from "../ducks/ui/listevisning";
 
 function Ny_veiledereSide() {
     const statustall = useFetchStatusTall();
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
 
     const dispatch = useDispatch();
-    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, 'enhet'));
+    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.enhetensOversikt));
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
 
@@ -57,7 +58,7 @@ function Ny_veiledereSide() {
                                         slettVeilederFilter
                                     )
                                 }}
-                                filtergruppe="veiledere"
+                                filtergruppe={ListevisningType.veilederOversikt}
                                 className="filtrering-label-container"
                             />
                             <VeiledersideVisning
@@ -79,7 +80,7 @@ function Ny_veiledereSide() {
                                 lamellNavn="veiledergrupper"
                                 tittel="Veiledergrupper"
                             >
-                                <FilteringVeilederGrupper filtergruppe="veiledere"/>
+                                <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt}/>
                             </MetrikkEkspanderbartpanel>
                         </div>
 
