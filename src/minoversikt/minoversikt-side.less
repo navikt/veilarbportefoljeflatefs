@@ -4,6 +4,31 @@
   .etikett-wrapper {
     display: grid;
     grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+  }
+
+  .veiledergruppe-alertstripe {
+    grid-row: 1;
+    max-width: 46rem;
+
+    .alertstripe {
+      &__tekst {
+        display: flex;
+        max-width: 100%;
+
+        p {
+          margin: auto 1rem auto 0;
+        }
+
+        .lukknapp {
+
+        }
+      }
+    }
+  }
+
+  .filtrering-label-container {
+    grid-row: 2;
   }
 
   .filtrering-label-container__annen-veileder {
@@ -12,9 +37,10 @@
     z-index: 1000;
     background-color: @navLysBlaLighten20;
   }
-    .filtrering-label-container__annen-veileder {
-        background-color: @navLysBlaLighten20;
-    }
+
+  .filtrering-label-container__annen-veileder {
+    background-color: @navLysBlaLighten20;
+  }
 
   .tabelloverskrift__annen-veileder {
     background-color: @navLysBlaLighten20;

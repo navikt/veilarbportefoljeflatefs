@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { FiltervalgModell } from '../../../model-interfaces';
-import { harGjortEndringer, veilederlisterErLik } from './veileder-gruppe-utils';
+import React, {useEffect, useState} from 'react';
+import {FiltervalgModell} from '../../../model-interfaces';
+import {harGjortEndringer, veilederlisterErLik} from './veileder-gruppe-utils';
 import ModalWrapper from 'nav-frontend-modal';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
+import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
-import { useSelector } from 'react-redux';
-import { AppState } from '../../../reducer';
-import { OrNothing } from '../../../utils/types/types';
+import {useSelector} from 'react-redux';
+import {AppState} from '../../../reducer';
+import {OrNothing} from '../../../utils/types/types';
 import VeilederGruppeForm from './veileder-gruppe-form';
-import { logEvent } from '../../../utils/frontend-logger';
-import { initialState } from '../../../ducks/filtrering';
-import { finnSideNavn } from '../../../middleware/metrics-middleware';
+import {logEvent} from '../../../utils/frontend-logger';
+import {initialState} from '../../../ducks/filtrering';
+import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import './modal.less';
 import ModalHeader from '../modal-header/modal-header';
+import AlertStripe from "nav-frontend-alertstriper";
+import veiledere from "../../../mocks/veiledere";
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -108,7 +110,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     }
 
     function slettVeiledergruppeOgLukkModaler() {
-        logEvent('portefolje.metrikker.veiledergrupper.slettknapp', {}, { sideNavn: finnSideNavn() });
+        logEvent('portefolje.metrikker.veiledergrupper.slettknapp', {}, {sideNavn: finnSideNavn()});
         props.onSlett && props.onSlett();
         setSletteVeiledergruppeModal(false);
         props.onRequestClose();
@@ -158,7 +160,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     };
 
     const avbrytSletting = () => {
-        logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp', {}, { sideNavn: finnSideNavn() } );
+        logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp', {}, {sideNavn: finnSideNavn()});
         setSletteVeiledergruppeModal(false);
     };
 

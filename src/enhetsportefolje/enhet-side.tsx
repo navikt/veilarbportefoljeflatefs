@@ -30,6 +30,8 @@ import {AppState} from '../reducer';
 import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {MineFilterLagreFilterKnapp} from "../minoversikt/mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
+import AlertStripe from "nav-frontend-alertstriper";
+import Lukknapp from "nav-frontend-lukknapp";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -98,6 +100,13 @@ function EnhetSide() {
                         </div>
                         <div className="liste-kolonne">
                             <div className="etikett-wrapper">
+                                <AlertStripe type="info" className="veiledergruppe-alertstripe">
+                                    <p className="veiledergruppe-alertstripe__tekst">
+                                        Følgende veiledere(e) er fjernet fra denne gruppen fordi de ikke lenger har
+                                        tilgang til enheten:
+                                    </p>
+                                    <Lukknapp className="veiledergruppe-alertstripe__knapp"/>
+                                </AlertStripe>
                                 <FiltreringLabelContainer
                                     filtervalg={{
                                         ...filtervalg,
