@@ -4,7 +4,8 @@ import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
 import NyMineFilterRad from './ny_mine-filter-rad';
 import { useDispatch } from 'react-redux';
-import { lagreSorteringForFilter, MineFilter, SorteringOgId } from '../../ducks/mine-filter';
+import { lagreSorteringForFilter, MineFilter } from '../../ducks/mine-filter';
+import { Checkbox } from 'nav-frontend-skjema';
 
 export interface DragAndDropProps {
     dragAndDropElements: MineFilter[];
@@ -12,13 +13,44 @@ export interface DragAndDropProps {
 }
 
 function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDropProps) {
+    const [isDraggable, setisDraggable] = useState(false);
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
     const [dropIndex, setDropIndex] = useState(-1);
+    const [ariaTekst, setAriaTekst] = useState('');
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
 
     const dispatch = useDispatch();
+
+    const orderIsRequestedToChange = () => {
+        if (destIndex !== -1 && srcIndex !== -1 && destIndex < dragAndDropElements.length) {
+            if (srcIndex < destIndex)
+                setAriaTekst(
+                    dragAndDropElements[srcIndex].filterNavn +
+                        ' flyttet under ' +
+                        dragAndDropElements[destIndex].filterNavn
+                );
+            else
+                setAriaTekst(
+                    dragAndDropElements[srcIndex].filterNavn +
+                        ' flyttet over ' +
+                        dragAndDropElements[destIndex].filterNavn
+                );
+            flyttElementIArray(dragAndDropElements, srcIndex, destIndex);
+
+            setdDragIsInsideElement(false);
+            setDropIndex(destIndex);
+
+            const idAndPriorities = dragAndDropElements.map((filter, idx) => ({
+                sortOrder: idx,
+                filterId: filter.filterId
+            }));
+            dispatch(lagreSorteringForFilter(idAndPriorities));
+        }
+        setSrcIndex(-1);
+        setDestIndex(-1);
+    };
 
     const handleDragStart = (e) => {
         if (dragContainer.current) {
@@ -38,40 +70,72 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
     };
 
     const handleDragEnd = (e) => {
-        if (dragIsInsideElement && destIndex !== -1 && srcIndex !== -1) {
-            flyttElementIArray(dragAndDropElements, srcIndex, destIndex);
-            setDropIndex(destIndex);
-            setdDragIsInsideElement(false);
-
-            const idAndPriorities: SorteringOgId[] = dragAndDropElements.map((filter, idx) => ({
-                sortOrder: idx,
-                filterId: filter.filterId
-            }));
-            dispatch(lagreSorteringForFilter(idAndPriorities));
+        if (dragIsInsideElement) {
+            orderIsRequestedToChange();
+        } else {
+            setSrcIndex(-1);
+            setDestIndex(-1);
         }
-        setSrcIndex(-1);
-        setDestIndex(-1);
+    };
+
+    const handleKeyUp = (e) => {
+        if (dragContainer.current) {
+            if (dragContainer.current.contains(e.target)) {
+                if (e.keyCode === 38 || e.keyCode === 40) {
+                    orderIsRequestedToChange();
+                }
+            }
+        }
     };
 
     useEventListener('dragenter', handleDragStart);
     useEventListener('dragleave', handleDragLeave);
     useEventListener('dragend', handleDragEnd);
+    useEventListener('keyup', handleKeyUp);
+
+    let endreRekkefølgeCheckbox = (
+        <Checkbox
+            label={'Endre rekkefølge:'}
+            aria-label={isDraggable ? 'Marker filter og endre rekkefølge med piltast.' : 'Endre rekkefølge'}
+            defaultChecked={false}
+            onChange={(e) => {
+                setisDraggable(e.target.checked);
+                setDropIndex(-1);
+            }}
+        />
+    );
+    if (isDraggable) {
+        return (
+            <>
+                {endreRekkefølgeCheckbox}
+                <ul ref={dragContainer} className="drag-and-drop-container">
+                    {dragAndDropElements.map((filter, idx) => (
+                        <DragAndDropRow
+                            key={idx}
+                            idx={idx}
+                            setIsDestination={setDestIndex}
+                            setIsSource={setSrcIndex}
+                            destIndex={destIndex}
+                            sourceIndex={srcIndex}
+                            dropIndex={dropIndex}
+                            filterNavn={filter.filterNavn}
+                            setDropIndex={setDropIndex}
+                            ariaTekstDropElement={ariaTekst}
+                        ></DragAndDropRow>
+                    ))}
+                </ul>
+            </>
+        );
+    }
     return (
-        <ul ref={dragContainer} className="drag-and-drop-container">
-            {dragAndDropElements.map((filter, idx) => (
-                <DragAndDropRow
-                    key={idx}
-                    idx={idx}
-                    setIsDestination={setDestIndex}
-                    setIsSource={setSrcIndex}
-                    destIndex={destIndex}
-                    sourceIndex={srcIndex}
-                    dropAnimation={idx === dropIndex}
-                >
-                    <NyMineFilterRad filter={filter} filtergruppe={filtergruppe} />
-                </DragAndDropRow>
-            ))}
-        </ul>
+        <>
+            {endreRekkefølgeCheckbox}
+            <ul ref={dragContainer} className="drag-and-drop-container">
+                {dragAndDropElements.map((filter, idx) => (
+                    <NyMineFilterRad key={idx} filter={filter} filtergruppe={filtergruppe} />
+                ))}
+            </ul>
+        </>
     );
 }
 
