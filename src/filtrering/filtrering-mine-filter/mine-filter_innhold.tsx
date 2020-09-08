@@ -1,14 +1,14 @@
-import React, {useEffect, useRef} from 'react';
-import {MineFilter} from '../../ducks/mine-filter';
-import './mine-filter_innhold.less'
-import {PopoverOrientering} from "nav-frontend-popover";
-import Hjelpetekst from "nav-frontend-hjelpetekst";
-import hiddenIf from "../../components/hidden-if/hidden-if";
-import {Normaltekst} from "nav-frontend-typografi";
-import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
-import {REDESIGN} from "../../konstanter";
-import {useWindowWidth} from "../../hooks/use-window-width";
-import {ListevisningType} from "../../ducks/ui/listevisning";
+import React, { useEffect, useRef } from 'react';
+import { MineFilter } from '../../ducks/mine-filter';
+import './mine-filter_innhold.less';
+import { PopoverOrientering } from 'nav-frontend-popover';
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import hiddenIf from '../../components/hidden-if/hidden-if';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
+import { REDESIGN } from '../../konstanter';
+import { useWindowWidth } from '../../hooks/use-window-width';
+import { ListevisningType } from '../../ducks/ui/listevisning';
 import DragAndDropContainer from './drag-and-drop-container';
 
 interface MineFilterInnholdProps {
@@ -42,20 +42,7 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
 
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
-        const filtere = props.mineFilter.filter((elem) => fjernUtilgjengeligeFilter(elem));
-        filtere.sort((a: MineFilter, b: MineFilter) => {
-            if (a.sortOrder !== null) {
-                if (b.sortOrder !== null) {
-                    return a.sortOrder - b.sortOrder;
-                }
-                return -1;
-            }
-            if (b.sortOrder !== null) {
-                return 1;
-            }
-            return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, { numeric: true });
-        });
-        return filtere;
+        return props.mineFilter.filter((elem) => fjernUtilgjengeligeFilter(elem));
     };
 
     useEffect(() => {
@@ -101,6 +88,5 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
         </>
     );
 }
-
 
 export default MineFilterInnhold;
