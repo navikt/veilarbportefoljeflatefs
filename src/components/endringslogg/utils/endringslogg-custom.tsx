@@ -22,7 +22,17 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '26. AUG. 2020',
+        dato: '8. september 2020',
+        tittel: 'Varsel til bruker før møter',
+        versjonId: '08.09.20',
+        tekst: 'For møter som er innkalt gjennom aktivitetsplanen, vil det nå bli sendt ut påminnelse til brukeren 24 timer før møtet.',
+        children:
+            <EndringsloggLinkMedIkon
+                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/N%C3%A5-f%C3%A5r-brukerne-automatisk-varsel-om-m%C3%B8te-med-NAV.aspx"
+                linkTekst="Nyhetssak på Navet"
+            />
+    }, {
+        dato: '26. august 2020',
         tittel: 'Lagre filter',
         versjonId: '26.08.20',
         featureToggleName: 'veilarbportefolje.lagrede_filter',
@@ -41,13 +51,13 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                 />
             </>
     }, {
-        dato: '03. AUG. 2020',
+        dato: '3. august 2020',
         tittel: 'Brukernotifikasjon om CV',
         versjonId: '03.08.20',
         tekst: 'Fra mandag 3. august vil noen brukere få notifikasjon på forsiden av Ditt NAV om utfylling av CV og jobbprofil. Vi tester ut om flere brukere da legger inn sin CV raskere. Dersom resultatene er gode, får alle brukere denne notifikasjonen.',
     },
     {
-        dato: '10. JUL. 2020',
+        dato: '10. juli 2020',
         tittel: 'Nytt filter på CV/jobbprofil',
         versjonId: '10.07.20',
         tekst: 'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med NAV. Da blir det enklere å identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og jobbprofil på arbeidsplassen.no.',
@@ -60,7 +70,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                 />
             </>
     }, {
-        dato: '26. JUN. 2020',
+        dato: '26. juni 2020',
         tittel: 'Videomøte som alternativ',
         versjonId: '26.06.20',
         tekst: 'Brukere som svarer i registreringen at de har problemer med å søke eller være i jobb (profilert til “Behov for AEV”), får et spørsmål om hvordan de ønsker å fortelle mer om sin situasjon. Nå kan bruker også velge videomøte som alternativ.',
@@ -70,7 +80,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                 linkTekst="Se Veileder for arbeidsrettet brukeroppfølging"
             />
     }, {
-        dato: '22. JUN. 2020',
+        dato: '22. juni 2020',
         tittel: 'Etiketten «Permittert etter 9. mars» er nå fjernet',
         versjonId: '22.06.20',
         tekst: 'Mange av de permitterte har fått endring i sin situasjon, og etiketten «Permittert etter 9. mars» er derfor nå fjernet. Du kan fremdeles finne de som har registrert seg etter 9. mars og som har svart «Er permittert eller kommer til å bli permittert» ved å benytte filteret «Permittert etter 09.03.2020».',
@@ -81,19 +91,19 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             />
     },
     {
-        dato: '05. MAI. 2020',
+        dato: '5. mai 2020',
         tittel: 'Filtrering av arbeidsliste på farger',
         versjonId: '05.05.20',
         tekst: 'Nå kan du filtrere på de ulike fargene på arbeidslisteikonet. Når du velger “Min arbeidsliste” ser du de nye filtervalgene.',
 
     }, {
-        dato: '04. MAI. 2020',
+        dato: '4. mai 2020',
         tittel: 'Nå kan du markere et møte som videomøte',
         versjonId: '04.05.20',
         tekst: 'Nettmøte har endret navn til videomøte i aktivitetsplanen. Hvis du velger videomøte, så ligger det nå en lenke til rutinen for videomøte. Brukeren ser ikke denne lenken.',
 
     }, {
-        dato: '06. APR. 2020',
+        dato: '6. april 2020',
         tittel: 'Filtrering på brukers situasjon fra registrering',
         versjonId: '06.04.20',
         tekst: 'Nå kan du filtrere frem brukere basert på situasjonen de har oppgitt på registreringstidspunktet. Filteret heter "Svar fra registrering" og ligger under filtergruppen "Situasjon", og du kan kombinere filteret med f.eks. "Trenger vurdering".',
@@ -104,13 +114,13 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             />
     },
     {
-        dato: '03. APR. 2020',
+        dato: '3. april 2020',
         tittel: 'Tekst i dialog forsvinner ikke',
         versjonId: '03.04.20',
         tekst: 'Når du starter på en melding i dialogen vil denne nå lagres hos deg i en kort tid (24 timer). Du kan da besøke andre sider samtidig som du jobber med teksten, uten å miste noe.',
     },
     {
-        dato: '02. APR. 2020',
+        dato: '2. april 2020',
         tittel: 'Nye filtre i Modia for permitterte etter 9. mars 2020',
         versjonId: '02.04.20',
         tekst: 'Du kan nå filtrere på brukere som har registrert seg etter 9. mars og oppgitt at de er permittert i Enhetens oversikt og Min oversikt i Modia. Brukerne vises også med en etikett i oversikten og på visittkortet over aktivitetsplanen.',
@@ -129,7 +139,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             </>
     },
     {
-        dato: '18. MAR. 2020',
+        dato: '18. mars 2020',
         tittel: 'Automatisk melding til permitterte',
         versjonId: '18.03.20',
         tekst: 'Brukere som registrerer seg med situasjonen «Er permittert eller kommer til å bli permittert» får nå en automatisk melding i dialogen om hva de nå bør gjøre.',
@@ -140,7 +150,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             />
     },
     {
-        dato: '16. MAR. 2020',
+        dato: '16. mars 2020',
         tittel: 'Farger på arbeidslisteikon og forventet svartid i dialog',
         versjonId: '16.03.20',
         children:
@@ -158,13 +168,13 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             </ul>
     },
     {
-        dato: '13. MAR. 2020',
+        dato: '13. mars 2020',
         tittel: 'Endre møteform på et avtalt møte',
         versjonId: '13.03.20',
         tekst: 'På aktiviteten "møte" i aktivitetsplanen kan du nå endre møteform, selv om møtet er satt til «Avtalt med NAV». Husk å sende en dialogmelding til brukeren om endringen du gjør.'
     },
     {
-        dato: '05. MAR. 2020',
+        dato: '5. mars 2020',
         tittel: 'Nytt design på dialog',
         versjonId: '05.03.20',
         children:
@@ -181,13 +191,13 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             </>
     },
     {
-        dato: '04. MAR. 2020',
+        dato: '4. mars 2020',
         versjonId: '04.03.20',
         tittel: 'Veiledergrupper i veilederoversikten',
         tekst: 'Veiledergruppene vises nå også i veilederoversikten. Når du velger en gruppe ser du veilederne i gruppen, og antall brukere hver veileder er tildelt.',
     },
     {
-        dato: '03. MAR. 2020',
+        dato: '3. mars 2020',
         versjonId: '03.03.20',
         tittel: 'Endringer i veilederverktøy',
         tekst: 'Funksjon for legge brukeren til arbeidslisten og tildele veileder ligger nå i Veilederverktøy. Du kan også klikke på arbeidslisteikonet for å legge til, se og redigere kommentaren i arbeidslisten.',
@@ -201,7 +211,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             </>
     },
     {
-        dato: '02. MAR. 2020',
+        dato: '2. mars 2020',
         versjonId: '02.03.20',
         tittel: 'Tilrettelegging',
         tekst: 'Nå kan du registrere brukernes behov for tilrettelegging under Detaljer. Det gjør det enklere å koble disse brukerne sammen med arbeidsgivere som kan inkludere. Brukerne blir søkbare i kandidatsøket i Rekrutteringsbistand. ',
@@ -219,7 +229,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             </>
     },
     {
-        dato: '23. JAN. 2020',
+        dato: '23. januar 2020',
         versjonId: '23.01.20',
         tittel: 'Visuelle endringer i oversikten',
         children:
@@ -235,14 +245,14 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             </>
     },
     {
-        dato: '17. JAN. 2020',
+        dato: '17. januar 2020',
         versjonId: '17.01.20',
         tittel: 'Stolpediagramvisning er fjernet',
         tekst: 'Når du filtrerer på ytelse har det vært en funksjonalitet for å se et stolpediagram som viser antall personer med ytelsen fordelt på tidsperioder.',
         children: <p>Funksjonaliteten har vært lite brukt og er derfor nå fjernet.</p>
     },
     {
-        dato: '12. DES. 2019',
+        dato: '12. desember 2019',
         versjonId: '12.12.19',
         tittel: 'Veiledergrupper',
         tekst: 'Nå kan du opprette grupper av veiledere i «Enhetens oversikt». Det gjør det enklere å få oversikt over status til brukerne i avdelinger og team på NAV-kontoret.',
