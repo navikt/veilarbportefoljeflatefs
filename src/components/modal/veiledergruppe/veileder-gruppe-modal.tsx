@@ -14,8 +14,6 @@ import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import './modal.less';
 import ModalHeader from '../modal-header/modal-header';
-import AlertStripe from "nav-frontend-alertstriper";
-import veiledere from "../../../mocks/veiledere";
 
 interface VeilederModalProps {
     initialVerdi: {

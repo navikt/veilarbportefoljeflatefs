@@ -7,7 +7,6 @@ import { useFocus } from '../../../hooks/use-focus';
 import './modal.less';
 import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
 import AlertStripe from "nav-frontend-alertstriper";
-import ModalWrapper from "nav-frontend-modal";
 
 interface VeilederGruppeForm {
     filterValg: FiltervalgModell;
