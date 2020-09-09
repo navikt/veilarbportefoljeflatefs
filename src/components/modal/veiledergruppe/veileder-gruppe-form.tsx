@@ -1,12 +1,11 @@
-import React, { PropsWithChildren } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { Input } from 'nav-frontend-skjema';
-import { FiltervalgModell } from '../../../model-interfaces';
+import React, {PropsWithChildren} from 'react';
+import {Normaltekst} from 'nav-frontend-typografi';
+import {Input} from 'nav-frontend-skjema';
+import {FiltervalgModell} from '../../../model-interfaces';
 import ValgtVeilederGruppeListe from './valgt-veileder-gruppeliste';
-import { useFocus } from '../../../hooks/use-focus';
+import {useFocus} from '../../../hooks/use-focus';
 import './modal.less';
 import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
-import AlertStripe from "nav-frontend-alertstriper";
 
 interface VeilederGruppeForm {
     filterValg: FiltervalgModell;
@@ -22,11 +21,6 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
     const {focusRef} = useFocus();
     return (
         <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit}>
-            {props.modalTittel === "Rediger veiledergruppe" &&
-            <AlertStripe type={"info"} className="veiledergruppe-modal__alertstripe">
-                Følgende veiledere(e) er fjernet fra denne gruppen fordi de ikke lenger har tilgang til
-                enheten: {props.modalTittel}
-            </AlertStripe>}
             <Input
                 label={<p className="veiledergruppe-modal__gruppenavntekst">Gruppenavn: <i>(maks 35 tegn)</i></p>}
                 value={props.gruppeNavn}
