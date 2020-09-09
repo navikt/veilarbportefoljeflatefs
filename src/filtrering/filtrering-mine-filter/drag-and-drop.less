@@ -9,8 +9,15 @@
     -khtml-user-drag: element;
     -webkit-user-drag: element;
 }
-#message {
-    visibility: hidden;
+#drag-icon {
+    height: 1rem;
+    width: auto;
+    float: right;
+    visibility: visible;
+    margin-right: 1rem;
+}
+
+.drag-and-drop-row:focus #drag-icon {
 }
 
 .drag-and-drop-container {
@@ -21,7 +28,10 @@
 }
 
 .drag-and-drop-row {
+    height: 2rem;
     padding: 0.2rem;
+    display: flex;
+    align-items: center;
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;

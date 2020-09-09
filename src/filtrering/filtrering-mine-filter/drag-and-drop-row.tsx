@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useEventListener } from '../../hooks/use-event-listener';
+import { ReactComponent as DragIcon } from './dragIcon.svg';
 
 export interface DragAndDropRowProps {
     idx: number;
@@ -93,12 +94,14 @@ function DragAndDropRow({
                 draggable="true"
                 tabIndex={0}
             >
+                <DragIcon aria-disabled={true} />
                 {filterNavn}
             </li>
         );
     }
     return (
         <li ref={dragNode} className={dragAndDropCssClass} draggable="true" tabIndex={0}>
+            <DragIcon aria-disabled={true} />
             {filterNavn}
         </li>
     );
