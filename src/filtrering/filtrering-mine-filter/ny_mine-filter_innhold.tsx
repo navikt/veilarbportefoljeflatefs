@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import './ny_mine-filter-innhold.less'
-import '../../components/sidebar/sidebar.less'
-import { MineFilter } from "../../ducks/mine-filter";
-import { Normaltekst } from "nav-frontend-typografi";
+import './ny_mine-filter-innhold.less';
+import '../../components/sidebar/sidebar.less';
+import { MineFilter } from '../../ducks/mine-filter';
+import { Normaltekst } from 'nav-frontend-typografi';
 import DragAndDropContainer from './drag-and-drop-container';
 
 interface LagredeFilterInnholdProps {
@@ -18,8 +18,8 @@ function isOverflown(element) {
 function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
-        return props.lagretFilter.filter(elem => props.fjernUtilgjengeligeFilter(elem))
-    }
+        return props.lagretFilter.filter((elem) => props.fjernUtilgjengeligeFilter(elem));
+    };
 
     useEffect(() => {
         if (outerDivRef.current && isOverflown(outerDivRef.current)) {
@@ -31,26 +31,20 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const hentFiltrertListeinnhold = () => {
         return (
             <div className="ny__mine-filter__valgfelt" ref={outerDivRef}>
-                <DragAndDropContainer
-                    dragAndDropElements={filtrertListe()}
-                    filtergruppe={props.filtergruppe}
-                />
-            </div>)
-    }
+                <DragAndDropContainer stateFilterOrder={filtrertListe()} filtergruppe={props.filtergruppe} />
+            </div>
+        );
+    };
 
     const getEmptyState = () => {
         return (
             <div className="mine-filter-emptystate">
-                <Normaltekst className="mine-filter-emptystate__tekst">
-                    Ingen lagrede filter
-                </Normaltekst>
+                <Normaltekst className="mine-filter-emptystate__tekst">Ingen lagrede filter</Normaltekst>
             </div>
-        )
-    }
+        );
+    };
 
-    return (
-        filtrertListe().length > 0 ? hentFiltrertListeinnhold() : getEmptyState()
-    )
+    return filtrertListe().length > 0 ? hentFiltrertListeinnhold() : getEmptyState();
 }
 
 export default NyLagredeFilterInnhold;

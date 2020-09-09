@@ -9,11 +9,12 @@ import { Checkbox } from 'nav-frontend-skjema';
 import { Fareknapp, Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
 
 export interface DragAndDropProps {
-    dragAndDropElements: MineFilter[];
+    stateFilterOrder: MineFilter[];
     filtergruppe: string;
 }
 
-function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDropProps) {
+function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropProps) {
+    const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
     const [isDraggable, setisDraggable] = useState(false);
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
@@ -25,7 +26,7 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
     const dispatch = useDispatch();
 
     const saveOrder = () => {
-        const idAndPriorities = dragAndDropElements.map((filter, idx) => ({
+        const idAndPriorities = dragAndDropOrder.map((filter, idx) => ({
             sortOrder: idx,
             filterId: filter.filterId
         }));
@@ -34,7 +35,7 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
     };
 
     const avbryt = () => {
-        dragAndDropElements.sort((a: MineFilter, b: MineFilter) => {
+        dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {
             if (a.sortOrder !== null) {
                 if (b.sortOrder !== null) {
                     return a.sortOrder - b.sortOrder;
@@ -46,31 +47,28 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
             }
             return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, { numeric: true });
         });
+        setDragAndDropOrder([...stateFilterOrder]);
         setisDraggable(false);
     };
 
     const alfabetiskSort = () => {
-        dragAndDropElements.sort((a: MineFilter, b: MineFilter) => {
+        dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {
             return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, { numeric: true });
         });
-        setSrcIndex(-2); // TODO: Kjap løsning for force refresh component
+        setDragAndDropOrder([...dragAndDropOrder]);
     };
 
     const orderIsRequestedToChange = () => {
-        if (destIndex !== -1 && srcIndex !== -1 && destIndex < dragAndDropElements.length) {
+        if (destIndex !== -1 && srcIndex !== -1 && destIndex < dragAndDropOrder.length) {
             if (srcIndex < destIndex)
                 setAriaTekst(
-                    dragAndDropElements[srcIndex].filterNavn +
-                        ' flyttet under ' +
-                        dragAndDropElements[destIndex].filterNavn
+                    dragAndDropOrder[srcIndex].filterNavn + ' flyttet under ' + dragAndDropOrder[destIndex].filterNavn
                 );
             else
                 setAriaTekst(
-                    dragAndDropElements[srcIndex].filterNavn +
-                        ' flyttet over ' +
-                        dragAndDropElements[destIndex].filterNavn
+                    dragAndDropOrder[srcIndex].filterNavn + ' flyttet over ' + dragAndDropOrder[destIndex].filterNavn
                 );
-            flyttElementIArray(dragAndDropElements, srcIndex, destIndex);
+            flyttElementIArray(dragAndDropOrder, srcIndex, destIndex);
 
             setdDragIsInsideElement(false);
             setDropIndex(destIndex);
@@ -138,7 +136,7 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
             <>
                 {endreRekkefølgeCheckbox}
                 <ul ref={dragContainer} className="drag-and-drop-container">
-                    {dragAndDropElements.map((filter, idx) => (
+                    {dragAndDropOrder.map((filter, idx) => (
                         <DragAndDropRow
                             key={idx}
                             idx={idx}
@@ -171,7 +169,7 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
         <>
             {endreRekkefølgeCheckbox}
             <ul ref={dragContainer} className="drag-and-drop-container">
-                {dragAndDropElements.map((filter, idx) => (
+                {dragAndDropOrder.map((filter, idx) => (
                     <NyMineFilterRad key={idx} filter={filter} filtergruppe={filtergruppe} />
                 ))}
             </ul>
