@@ -28,6 +28,7 @@ function Toolbar(props: ToolbarProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
+    const veiledereGrammatikk = props.antallVeiledere === 1 ? 'veileder' : 'veiledere';
 
     const oversikt = (side) => {
         switch (side) {
@@ -57,7 +58,7 @@ function Toolbar(props: ToolbarProps) {
             <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
                 {props.filtergruppe === ListevisningType.veilederOversikt &&
                 <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
-                    {`Totalt ${props.antallVeiledere} veiledere`}
+                    {props.antallVeiledere === 0 ? `Ingen veiledere` : `Totalt ${props.antallVeiledere} ${veiledereGrammatikk}`}
                 </Undertittel>}
                 {props.filtergruppe !== ListevisningType.veilederOversikt &&
                 <div className="tildel-veileder-wrapper">
