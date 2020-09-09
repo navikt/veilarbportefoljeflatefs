@@ -1,16 +1,17 @@
+export const tekstAntallBrukere = (tall) => {
+    if (tall === 0) {
+        return 'Ingen brukere'
+    } else if (tall === 1) {
+        return 'Totalt 1 bruker'
+    }
+    return `Totalt ${tall} brukere`
+};
 
-export const tekstAntallBrukere = (tall) => byggAntallBrukereObjekt(tall)[tall];
-
-const byggAntallBrukereObjekt = (tall) => ({
-    0: 'Ingen brukere',
-    1: 'Totalt 1 bruker',
-    [tall]: `Totalt ${tall} brukere`
-});
-
-export const tekstValgteBrukere = (antallValgt) => byggValgteBrukereObjekt(antallValgt)[antallValgt];
-
-const byggValgteBrukereObjekt = (antallValgt) => ({
-    0: 'Ingen brukere valgt',
-    1: '1 bruker valgt',
-    [antallValgt]: `${antallValgt} brukere valgt`
-});
+export const tekstValgteBrukere = (antallValgt) => {
+    if (antallValgt === 0) {
+        return 'Ingen brukere valgt.'
+    } else if (antallValgt === 1) {
+        return '1 bruker valgt.'
+    }
+    return `${antallValgt} brukere valgt.`
+};
