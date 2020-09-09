@@ -6,6 +6,7 @@ import NyMineFilterRad from './ny_mine-filter-rad';
 import { useDispatch } from 'react-redux';
 import { lagreSorteringForFilter, MineFilter } from '../../ducks/mine-filter';
 import { Checkbox } from 'nav-frontend-skjema';
+import { Fareknapp, Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
 
 export interface DragAndDropProps {
     dragAndDropElements: MineFilter[];
@@ -22,6 +23,38 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
     const dragContainer = useRef<HTMLUListElement>(null);
 
     const dispatch = useDispatch();
+
+    const saveOrder = () => {
+        const idAndPriorities = dragAndDropElements.map((filter, idx) => ({
+            sortOrder: idx,
+            filterId: filter.filterId
+        }));
+        dispatch(lagreSorteringForFilter(idAndPriorities));
+        setisDraggable(false);
+    };
+
+    const avbryt = () => {
+        dragAndDropElements.sort((a: MineFilter, b: MineFilter) => {
+            if (a.sortOrder !== null) {
+                if (b.sortOrder !== null) {
+                    return a.sortOrder - b.sortOrder;
+                }
+                return -1;
+            }
+            if (b.sortOrder !== null) {
+                return 1;
+            }
+            return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, { numeric: true });
+        });
+        setisDraggable(false);
+    };
+
+    const alfabetiskSort = () => {
+        dragAndDropElements.sort((a: MineFilter, b: MineFilter) => {
+            return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, { numeric: true });
+        });
+        setSrcIndex(-2); // TODO: Kjap løsning for force refresh component
+    };
 
     const orderIsRequestedToChange = () => {
         if (destIndex !== -1 && srcIndex !== -1 && destIndex < dragAndDropElements.length) {
@@ -41,12 +74,6 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
 
             setdDragIsInsideElement(false);
             setDropIndex(destIndex);
-
-            const idAndPriorities = dragAndDropElements.map((filter, idx) => ({
-                sortOrder: idx,
-                filterId: filter.filterId
-            }));
-            dispatch(lagreSorteringForFilter(idAndPriorities));
         }
         setSrcIndex(-1);
         setDestIndex(-1);
@@ -98,7 +125,9 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
             label={'Endre rekkefølge:'}
             aria-label={isDraggable ? 'Marker filter og endre rekkefølge med piltast.' : 'Endre rekkefølge'}
             defaultChecked={false}
+            checked={isDraggable}
             onChange={(e) => {
+                if (!e.target.checked) avbryt();
                 setisDraggable(e.target.checked);
                 setDropIndex(-1);
             }}
@@ -124,6 +153,17 @@ function DragAndDropContainer({ dragAndDropElements, filtergruppe }: DragAndDrop
                         ></DragAndDropRow>
                     ))}
                 </ul>
+                <div className="drag-and-drop-knapper">
+                    <Hovedknapp mini onClick={(e) => saveOrder()}>
+                        Lagre
+                    </Hovedknapp>
+                    <Fareknapp mini onClick={(e) => avbryt()}>
+                        Avbryt
+                    </Fareknapp>
+                    <Flatknapp mini onClick={() => alfabetiskSort()}>
+                        Sorter
+                    </Flatknapp>
+                </div>
             </>
         );
     }
