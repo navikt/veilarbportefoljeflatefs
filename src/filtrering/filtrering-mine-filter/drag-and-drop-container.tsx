@@ -70,6 +70,7 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
                 );
             flyttElementIArray(dragAndDropOrder, srcIndex, destIndex);
 
+            setDragAndDropOrder([...dragAndDropOrder]);
             setdDragIsInsideElement(false);
             setDropIndex(destIndex);
         }
@@ -122,7 +123,6 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
         <Checkbox
             label={'Endre rekkefølge:'}
             aria-label={isDraggable ? 'Marker filter og endre rekkefølge med piltast.' : 'Endre rekkefølge'}
-            defaultChecked={false}
             checked={isDraggable}
             onChange={(e) => {
                 if (!e.target.checked) avbryt();
@@ -181,7 +181,6 @@ function flyttElementIArray(arr: any[], fromIndex: number, toIndex: number) {
     const verdiSomFlyttes = arr[fromIndex];
     arr.splice(fromIndex, 1);
     arr.splice(toIndex, 0, verdiSomFlyttes);
-    return arr;
 }
 
 export default DragAndDropContainer;
