@@ -18,7 +18,6 @@ function FiltreringLabel({label, slettFilter, harMuligMenIkkeValgtKolonne = fals
     const arialLabel = skalHaKryssIkon ? 'Slett filter' : ' Slett alle filtervalg';
     const slettAlleFiltervalg = arialLabel === " Slett alle filtervalg";
     const buttonClassnames = classNames('filtreringlabel', 'typo-undertekst', {'filtreringlabel--markert': markert}, {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne}, {'slett-alle-filtervalg-knapp': slettAlleFiltervalg});
-    console.log(lagConfig(label))
     return (
         <button
             title={lagConfig(label).label}
