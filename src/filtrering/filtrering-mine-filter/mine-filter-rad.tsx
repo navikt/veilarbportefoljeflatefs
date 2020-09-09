@@ -10,6 +10,7 @@ import RedigerKnapp from "../../components/knapper/rediger-knapp";
 import React, {RefObject, useRef} from "react";
 import {antallFilter} from "../../components/modal/mine-filter/mine-filter-utils";
 import {ListevisningType} from "../../ducks/ui/listevisning";
+import {finnVeiledereSomErIkkeAktiv} from "../utils";
 
 interface LagretFilterRadProps {
     filter: MineFilter;
@@ -26,11 +27,19 @@ function MineFilterRad({filter, filtergruppe, parentDiv}: LagretFilterRadProps) 
         : state.mineFilterEnhetensOversikt.valgtMineFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
+    const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
 
     function velgFilter() {
+        finnVeilederSomErIkkeAktiv()
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {antallFilter: antallFilter(filter.filterValg)}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
         dispatch(velgLagretFilter(filter, filtergruppe))
+    }
+
+    function finnVeilederSomErIkkeAktiv(){
+        let aktivVeiledere = veilederliste.map(v => v.ident);
+        let valgtVeiledere = filter.filterValg.veiledere;
+        let inaktiveVeiledere = finnVeiledereSomErIkkeAktiv(aktivVeiledere, valgtVeiledere);
     }
 
     function onClickRedigerKnapp() {

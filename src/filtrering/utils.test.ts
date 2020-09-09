@@ -1,4 +1,4 @@
-import {lagLablerTilVeiledereMedIdenter} from "./utils";
+import {finnVeiledereSomErIkkeAktiv, lagLablerTilVeiledereMedIdenter} from "./utils";
 
 describe('Test lagLablerTilVeiledereMedIdenter', () => {
     it('Test when all veiledere are active', () => {
@@ -66,3 +66,14 @@ describe('Test lagLablerTilVeiledereMedIdenter', () => {
         )
     });
 });
+
+describe('Test fjernVeilederFraFilter', () => {
+    it('Test when we are removing one veileder', () => {
+        var aktiveVeiledere = ['A2']
+        var valgtVeiledere = ['A1', 'A2', 'A3']
+        let veiledereSomErIkkeAktiv = finnVeiledereSomErIkkeAktiv(aktiveVeiledere, valgtVeiledere);
+        expect(veiledereSomErIkkeAktiv.length).toBe(2);
+        expect(veiledereSomErIkkeAktiv.includes('A1'))
+        expect(veiledereSomErIkkeAktiv.includes('A3'))
+    });
+})
