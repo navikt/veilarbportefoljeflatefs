@@ -59,6 +59,7 @@ function Toolbar(props: ToolbarProps) {
                 <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
                     {`Totalt ${props.antallVeiledere} veiledere`}
                 </Undertittel>}
+                {props.filtergruppe !== ListevisningType.veilederOversikt &&
                 <div className="tildel-veileder-wrapper">
                     <ToolbarKnapp
                         tittel="Tildel veileder"
@@ -68,7 +69,7 @@ function Toolbar(props: ToolbarProps) {
                         ikon={<TildelVeilederIkon className="toolbar-knapp__ikon" id="tildel-veileder-ikon"/>}
                         filtergruppe={filtergruppe}
                     />
-                </div>
+                </div>}
                 {oversikt(props.filtergruppe)}
             </div>
             <div className="toolbar__element toolbar__hoyre toolbar--skille-mellom-elementer">

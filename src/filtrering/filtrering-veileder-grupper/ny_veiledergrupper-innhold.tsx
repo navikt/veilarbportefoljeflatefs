@@ -18,6 +18,7 @@ import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {ListevisningType} from "../../ducks/ui/listevisning";
 
+
 interface VeilederGruppeInnholdProps {
     lagretFilter: VeiledergrupperFilter[]
     filterValg?: FiltervalgModell;
