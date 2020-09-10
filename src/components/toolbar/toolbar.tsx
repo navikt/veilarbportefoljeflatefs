@@ -3,6 +3,7 @@ import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import './toolbar.less';
+import '../../ny_style.less'
 import {useSelector} from 'react-redux';
 import LeggTilArbeidsliste from './legg-til-arbeidsliste-knapp';
 import {AppState} from '../../reducer';
@@ -10,6 +11,7 @@ import ToolbarKnapp from './toolbar-knapp';
 import {ReactComponent as TildelVeilederIkon} from '../ikoner/person-add-1.svg';
 import {ReactComponent as SokVeilederIkon} from '../ikoner/person-view-1.svg';
 import {Undertittel} from 'nav-frontend-typografi';
+import classNames from "classnames";
 
 interface ToolbarProps {
     filtergruppe: ListevisningType;
@@ -21,10 +23,11 @@ interface ToolbarProps {
     antallTotalt: number;
     id?: string;
     antallVeiledere?: number;
+    scrolling?: boolean;
 }
 
 function Toolbar(props: ToolbarProps) {
-    const {id, filtergruppe, visesAnnenVeiledersPortefolje, antallTotalt, onPaginering} = props;
+    const {id, filtergruppe, visesAnnenVeiledersPortefolje, antallTotalt, onPaginering, scrolling = false} = props;
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
@@ -54,7 +57,7 @@ function Toolbar(props: ToolbarProps) {
         }
     };
     return (
-        <div className="toolbar blokk-xs" id={id}>
+        <div className={classNames("toolbar blokk-xs", scrolling && "toolbar__hidden")} id={id}>
             <div className="toolbar__element toolbar__venstre toolbar--skille-mellom-elementer">
                 {props.filtergruppe === ListevisningType.veilederOversikt &&
                 <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">

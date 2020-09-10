@@ -22,7 +22,7 @@ import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import VelgFilterMelding from './velg-filter-melding';
 import '../ny_style.less';
-import {useCallback, useMemo} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
@@ -98,6 +98,22 @@ function Ny_EnhetSide() {
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
 
+    const [scrolling, setScrolling] = useState(false);
+
+    useEffect(() => {
+        function onScroll() {
+            let currentPosition = window.pageYOffset;
+            if (currentPosition > 200) {
+                setScrolling(true);
+            } else {
+                setScrolling(false);
+            }
+        }
+
+        window.addEventListener("scroll", onScroll);
+        return window.addEventListener("scroll", onScroll);
+    });
+
     return (
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse__ny">
@@ -106,6 +122,14 @@ function Ny_EnhetSide() {
                     <div role="tabpanel"
                          className={classNames('oversikt-sideinnhold__ny',
                              isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}>
+                        <Sidebar
+                            filtervalg={filtervalg}
+                            filtergruppe={filtergruppe}
+                            enhettiltak={tiltak}
+                            handleOnTabClicked={handleOnTabClicked}
+                            isSidebarHidden={isSidebarHidden}
+                            lukkTab={lukkTab}
+                        />
                         <div className="sokefelt-knapp__container">
                             <FiltreringNavnellerfnr
                                 filtervalg={filtervalg}
@@ -122,14 +146,6 @@ function Ny_EnhetSide() {
                             enhettiltak={enhettiltak.data.tiltak}
                             listevisning={listevisning}
                             className="ny__filtrering-label-container"
-                        />
-                        <Sidebar
-                            filtervalg={filtervalg}
-                            filtergruppe={filtergruppe}
-                            enhettiltak={tiltak}
-                            handleOnTabClicked={handleOnTabClicked}
-                            isSidebarHidden={isSidebarHidden}
-                            lukkTab={lukkTab}
                         />
                         {harFilter ?
                             <div className={classNames('oversikt__container',
@@ -154,6 +170,7 @@ function Ny_EnhetSide() {
                                     filtergruppe={filtergruppe}
                                     sokVeilederSkalVises
                                     antallTotalt={portefoljeData.antallTotalt}
+                                    scrolling={isSidebarHidden && scrolling}
                                 />
                                 <EnhetTabellOverskrift/>
                             </div>

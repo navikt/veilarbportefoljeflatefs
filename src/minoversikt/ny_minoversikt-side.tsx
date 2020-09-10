@@ -35,6 +35,7 @@ import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal
 import {useMineFilterController} from "./use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "./ny_mine-filter-lagre-filter-knapp";
 import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
+import {useEffect, useState} from "react";
 
 function Ny_MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -74,6 +75,21 @@ function Ny_MinoversiktSide() {
         dispatch(skjulSidebar(filtergruppe))
     };
 
+    const [scrolling, setScrolling] = useState(false);
+
+    useEffect(() => {
+        function onScroll() {
+            let currentPosition = window.pageYOffset;
+            if (currentPosition > 200) {
+                setScrolling(true);
+            } else {
+                setScrolling(false);
+            }
+        }
+        window.addEventListener("scroll", onScroll);
+        return window.addEventListener("scroll", onScroll);
+    });
+
     return (
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse__ny">
@@ -82,6 +98,14 @@ function Ny_MinoversiktSide() {
                     <NyMinOversiktWrapper
                         className={classNames('oversikt-sideinnhold__ny portefolje-side__ny',
                             isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}>
+                        <Sidebar
+                            filtervalg={filtervalg}
+                            filtergruppe={filtergruppe}
+                            enhettiltak={tiltak}
+                            handleOnTabClicked={handleOnTabClicked}
+                            isSidebarHidden={isSidebarHidden}
+                            lukkTab={lukkTab}
+                        />
                         <div className="sokefelt-knapp__container">
                             <FiltreringNavnellerfnr
                                 filtervalg={filtervalg}
@@ -95,14 +119,6 @@ function Ny_MinoversiktSide() {
                             enhettiltak={enhettiltak.data.tiltak}
                             listevisning={listevisning}
                             className={visesAnnenVeiledersPortefolje ? 'ny__filtrering-label-container__annen-veileder' : 'ny__filtrering-label-container'}
-                        />
-                        <Sidebar
-                            filtervalg={filtervalg}
-                            filtergruppe={filtergruppe}
-                            enhettiltak={tiltak}
-                            handleOnTabClicked={handleOnTabClicked}
-                            isSidebarHidden={isSidebarHidden}
-                            lukkTab={lukkTab}
                         />
                         <div className={classNames('oversikt__container',
                             isSidebarHidden && 'oversikt__container__hidden')}>
@@ -118,26 +134,27 @@ function Ny_MinoversiktSide() {
                                     <TabellOverskrift
                                         className={visesAnnenVeiledersPortefolje
                                             ? 'tabelloverskrift__ny__annen-veileder'
-                                            : 'tabelloverskrift__ny'}/>
-                                        <Toolbar
-                                            onPaginering={() => dispatch(hentPortefoljeForVeileder(
-                                                enhetId,
-                                                gjeldendeVeileder,
-                                                sorteringsrekkefolge,
-                                                sorteringsfelt,
-                                                filtervalg
-                                            ))}
-                                            filtergruppe={filtergruppe}
-                                            sokVeilederSkalVises={false}
-                                            antallTotalt={portefolje.data.antallTotalt}
-                                            gjeldendeVeileder={gjeldendeVeileder}
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                        />
-                                        <MinoversiktTabellOverskrift
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            innloggetVeileder={innloggetVeilederIdent!.ident}
-                                            settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                        />
+                                            : classNames('tabelloverskrift__ny', isSidebarHidden && scrolling && 'tabelloverskrift__ny__hidden')}/>
+                                    <Toolbar
+                                        onPaginering={() => dispatch(hentPortefoljeForVeileder(
+                                            enhetId,
+                                            gjeldendeVeileder,
+                                            sorteringsrekkefolge,
+                                            sorteringsfelt,
+                                            filtervalg
+                                        ))}
+                                        filtergruppe={filtergruppe}
+                                        sokVeilederSkalVises={false}
+                                        antallTotalt={portefolje.data.antallTotalt}
+                                        gjeldendeVeileder={gjeldendeVeileder}
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                        scrolling={isSidebarHidden && scrolling}
+                                    />
+                                    <MinoversiktTabellOverskrift
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                        innloggetVeileder={innloggetVeilederIdent!.ident}
+                                        settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
+                                    />
                                 </div>
                                 </span>
                                 <MinoversiktTabell
