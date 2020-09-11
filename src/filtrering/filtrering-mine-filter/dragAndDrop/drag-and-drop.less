@@ -101,6 +101,7 @@
 .flytt-knapp {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
+    pointer-events: none;
 }
 
 .drag-and-drop-row #Symbols {
@@ -112,9 +113,21 @@
     visibility: visible;
 }
 
+.drag-and-drop-row:focus .flytt-knapp {
+    pointer-events: auto;
+}
+
 .flytt-knapp:first-child {
     margin-right: 0.2rem;
 }
+
+.drag-and-drop-row:focus .flytt-knapp:hover {
+    border-style: solid;
+    border-radius: @border-radius-large;
+    border-color: @navBla;
+    pointer-events: auto;
+}
+
 .flytt-knapp:last-child {
     margin-left: 0.2rem;
 }
