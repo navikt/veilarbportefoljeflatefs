@@ -138,7 +138,7 @@ function DragAndDropRow({
     });
 
     const flyttKnapper = (
-        <div className="flytt-knapper">
+        <div className="flytt-knapper" aria-hidden="true">
             {idx !== 0 && (
                 <div
                     className="flytt-knapp"
@@ -170,6 +170,7 @@ function DragAndDropRow({
             tabIndex={tabIndex}
             role="option"
             aria-describedby="operation"
+            aria-selected={true}
         >
             <DragIcon aria-disabled={true} />
             {filterNavn}

@@ -52,11 +52,21 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
         if (destIndex !== -1 && srcIndex !== -1 && destIndex < dragAndDropOrder.length) {
             if (srcIndex < destIndex)
                 setAriaTekst(
-                    dragAndDropOrder[srcIndex].filterNavn + ' flyttet under ' + dragAndDropOrder[destIndex].filterNavn
+                    dragAndDropOrder[srcIndex].filterNavn +
+                        ' flyttet under ' +
+                        dragAndDropOrder[destIndex].filterNavn +
+                        ', til posisjon ' +
+                        (destIndex + 1) +
+                        '.'
                 );
             else
                 setAriaTekst(
-                    dragAndDropOrder[srcIndex].filterNavn + ' flyttet over ' + dragAndDropOrder[destIndex].filterNavn
+                    dragAndDropOrder[srcIndex].filterNavn +
+                        ' flyttet over ' +
+                        dragAndDropOrder[destIndex].filterNavn +
+                        ', til posisjon ' +
+                        (destIndex + 1) +
+                        '.'
                 );
             flyttElementIArray(dragAndDropOrder, srcIndex, destIndex);
 
