@@ -8,7 +8,6 @@ import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import MinoversiktTabellOverskrift from './minoversikt-portefolje-tabelloverskrift';
 import TabellOverskrift from '../components/tabell-overskrift';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
-import Toolbar from '../components/toolbar/toolbar';
 import ToppMeny from '../topp-meny/topp-meny';
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
 import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
@@ -36,6 +35,8 @@ import {useMineFilterController} from "./use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "./ny_mine-filter-lagre-filter-knapp";
 import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
 import {useEffect, useState} from "react";
+import {useWindowWidth} from "../hooks/use-window-width";
+import NyToolbar from "../components/toolbar/ny_toolbar";
 
 function Ny_MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -86,9 +87,12 @@ function Ny_MinoversiktSide() {
                 setScrolling(false);
             }
         }
+
         window.addEventListener("scroll", onScroll);
         return window.addEventListener("scroll", onScroll);
     });
+
+    const windowWidth = useWindowWidth() < 1200;
 
     return (
         <DocumentTitle title="Min oversikt">
@@ -134,8 +138,12 @@ function Ny_MinoversiktSide() {
                                     <TabellOverskrift
                                         className={visesAnnenVeiledersPortefolje
                                             ? 'tabelloverskrift__ny__annen-veileder'
-                                            : classNames('tabelloverskrift__ny', isSidebarHidden && scrolling && 'tabelloverskrift__ny__hidden')}/>
-                                    <Toolbar
+                                            : classNames('tabelloverskrift__ny',
+                                                (((scrolling && isSidebarHidden)
+                                                    || (scrolling && windowWidth)
+                                                    || (!isSidebarHidden && windowWidth))
+                                                    && "tabelloverskrift__ny__hidden"))}/>
+                                    <NyToolbar
                                         onPaginering={() => dispatch(hentPortefoljeForVeileder(
                                             enhetId,
                                             gjeldendeVeileder,
@@ -148,7 +156,8 @@ function Ny_MinoversiktSide() {
                                         antallTotalt={portefolje.data.antallTotalt}
                                         gjeldendeVeileder={gjeldendeVeileder}
                                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                        scrolling={isSidebarHidden && scrolling}
+                                        scrolling={scrolling}
+                                        isSidebarHidden={isSidebarHidden}
                                     />
                                     <MinoversiktTabellOverskrift
                                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}

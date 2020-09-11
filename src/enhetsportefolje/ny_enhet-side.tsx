@@ -15,7 +15,6 @@ import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {useDispatch, useSelector} from 'react-redux';
-import Toolbar from '../components/toolbar/toolbar';
 import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
@@ -35,6 +34,8 @@ import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
 import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "../minoversikt/ny_mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
+import {useWindowWidth} from "../hooks/use-window-width";
+import NyToolbar from "../components/toolbar/ny_toolbar";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -114,6 +115,8 @@ function Ny_EnhetSide() {
         return window.addEventListener("scroll", onScroll);
     });
 
+    const windowWidth = useWindowWidth() < 1200;
+
     return (
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse__ny">
@@ -159,8 +162,13 @@ function Ny_EnhetSide() {
                             <div className={antallBrukere > 4
                                 ? 'toolbar-container__ny'
                                 : 'ikke-sticky__ny__toolbar-container'}>
-                                    <TabellOverskrift className="tabelloverskrift"/>
-                                <Toolbar
+                                    <TabellOverskrift
+                                        className={classNames('tabelloverskrift__ny',
+                                            (((scrolling && isSidebarHidden)
+                                                || (scrolling && windowWidth)
+                                                || (!isSidebarHidden && windowWidth))
+                                            && "tabelloverskrift__ny__hidden"))}/>
+                                <NyToolbar
                                     onPaginering={() => dispatch(hentPortefoljeForEnhet(
                                         enhetId,
                                         sorteringsrekkefolge,
@@ -170,7 +178,8 @@ function Ny_EnhetSide() {
                                     filtergruppe={filtergruppe}
                                     sokVeilederSkalVises
                                     antallTotalt={portefoljeData.antallTotalt}
-                                    scrolling={isSidebarHidden && scrolling}
+                                    scrolling={scrolling}
+                                    isSidebarHidden={isSidebarHidden}
                                 />
                                 <EnhetTabellOverskrift/>
                             </div>

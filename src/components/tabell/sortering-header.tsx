@@ -2,8 +2,8 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { Sorteringsfelt, Sorteringsrekkefolge } from '../../model-interfaces';
 import Header, { HeaderProps } from './header';
-import { ReactComponent as PilAscending } from './arrow-up.svg';
-import { ReactComponent as PilDescending } from './arrow-down.svg';
+import { ReactComponent as PilAscending } from '../ikoner/arrow-up.svg';
+import { ReactComponent as PilDescending } from '../ikoner/arrow-down.svg';
 import './tabell.less';
 import {OrNothing} from "../../utils/types/types";
 
