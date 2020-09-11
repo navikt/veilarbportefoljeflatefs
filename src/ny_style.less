@@ -215,7 +215,6 @@ html {
     column-gap: 1%;
     grid-template-columns: 21rem auto;
     grid-template-rows: auto auto auto;
-    //max-width: 100%;
 
     .annen-veileder-varsel {
       grid-row: 1;
@@ -283,16 +282,27 @@ html {
       }
     }
 
+    .tabelloverskrift__ny__extra, .toolbar__extra {
+      margin-top: 3rem;
+    }
+
     .tabelloverskrift__ny__hidden, .toolbar__hidden {
       display: flex;
       flex-direction: column;
 
       .toolbar__knapperad {
-        align-self: flex-start;
+        margin-top: .5rem;
+        align-self: flex-end;
+        margin-bottom: .5rem;
+
+        .toolbar_btn {
+          margin-right: 0;
+        }
       }
 
       .toolbar__paginering {
         align-self: flex-end;
+        width: 24rem;
       }
     }
   }
