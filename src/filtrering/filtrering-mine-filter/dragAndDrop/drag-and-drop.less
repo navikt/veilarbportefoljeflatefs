@@ -23,6 +23,8 @@
 
 .drag-and-drop-knapper {
     margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .drag-and-drop-container {
@@ -37,6 +39,7 @@
     padding: 0.2rem;
     display: flex;
     align-items: center;
+    height: fit-content;
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
@@ -95,6 +98,11 @@
     margin-left: auto;
 }
 
+.flytt-knapp {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+
 .drag-and-drop-row #Symbols {
     visibility: hidden;
     height: 1.5rem;
@@ -104,10 +112,14 @@
     visibility: visible;
 }
 
-.flytt-knapp:focus #Symbols {
-    visibility: visible;
+.flytt-knapp:first-child {
+    margin-right: 0.2rem;
+}
+.flytt-knapp:last-child {
+    margin-left: 0.2rem;
 }
 
-.flytt-knapp:focus .drag-up {
-    visibility: visible;
+.drag-and-drop-knapp-avbryt {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }

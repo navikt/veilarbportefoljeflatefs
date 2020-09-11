@@ -6,7 +6,7 @@ import NyMineFilterRad from '../ny_mine-filter-rad';
 import { useDispatch } from 'react-redux';
 import { lagreSorteringForFilter, MineFilter } from '../../../ducks/mine-filter';
 import { Checkbox } from 'nav-frontend-skjema';
-import { Fareknapp, Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
+import { Hovedknapp, Flatknapp, Knapp } from 'nav-frontend-knapper';
 
 export interface DragAndDropProps {
     stateFilterOrder: MineFilter[];
@@ -26,6 +26,7 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
     const dragContainer = useRef<HTMLUListElement>(null);
 
     const dispatch = useDispatch();
+
     const lagreRekkefølge = () => {
         const idAndPriorities = dragAndDropOrder.map((filter, idx) => ({
             sortOrder: idx,
@@ -169,14 +170,19 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
                     ))}
                 </ul>
                 <div className="drag-and-drop-knapper">
-                    <Hovedknapp mini onClick={(e) => lagreRekkefølge()}>
+                    <Hovedknapp className="drag-and-drop-knapp-lagre" mini onClick={(e) => lagreRekkefølge()}>
                         Lagre
                     </Hovedknapp>
-                    <Fareknapp mini onClick={(e) => avbryt()}>
+                    <Knapp className="drag-and-drop-knapp-avbryt" mini onClick={(e) => avbryt()}>
                         Avbryt
-                    </Fareknapp>
-                    <Flatknapp mini onClick={(e) => alfabetiskSort()}>
-                        Sorter
+                    </Knapp>
+                    <Flatknapp
+                        className="drag-and-drop-knapp-nullstill"
+                        aria-label="Nullstill til alfabetisk sortering"
+                        mini
+                        onClick={(e) => alfabetiskSort()}
+                    >
+                        Nullstill
                     </Flatknapp>
                 </div>
             </>
