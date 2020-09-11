@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { useEventListener } from '../../hooks/use-event-listener';
+import { useEventListener } from '../../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
-import NyMineFilterRad from './ny_mine-filter-rad';
+import NyMineFilterRad from '../ny_mine-filter-rad';
 import { useDispatch } from 'react-redux';
-import { lagreSorteringForFilter, MineFilter } from '../../ducks/mine-filter';
+import { lagreSorteringForFilter, MineFilter } from '../../../ducks/mine-filter';
 import { Checkbox } from 'nav-frontend-skjema';
 import { Fareknapp, Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
 
@@ -19,13 +19,14 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
     const [dropIndex, setDropIndex] = useState(-1);
+    const [requestRowInFocuse, setRequestRowInFocuse] = useState(-1);
+    const [updateRequest, setUpdateRequest] = useState(false);
     const [ariaTekst, setAriaTekst] = useState('');
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
 
     const dispatch = useDispatch();
-
-    const saveOrder = () => {
+    const lagreRekkefølge = () => {
         const idAndPriorities = dragAndDropOrder.map((filter, idx) => ({
             sortOrder: idx,
             filterId: filter.filterId
@@ -35,18 +36,6 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
     };
 
     const avbryt = () => {
-        dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {
-            if (a.sortOrder !== null) {
-                if (b.sortOrder !== null) {
-                    return a.sortOrder - b.sortOrder;
-                }
-                return -1;
-            }
-            if (b.sortOrder !== null) {
-                return 1;
-            }
-            return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, { numeric: true });
-        });
         setDragAndDropOrder([...stateFilterOrder]);
         setisDraggable(false);
     };
@@ -55,6 +44,7 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
         dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {
             return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, { numeric: true });
         });
+        setAriaTekst('Filtre har blitt sortert i alfabetisk rekkefølge.');
         setDragAndDropOrder([...dragAndDropOrder]);
     };
 
@@ -73,25 +63,27 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
             setDragAndDropOrder([...dragAndDropOrder]);
             setdDragIsInsideElement(false);
             setDropIndex(destIndex);
+            setRequestRowInFocuse(destIndex);
         }
         setSrcIndex(-1);
         setDestIndex(-1);
     };
 
+    if (updateRequest) {
+        orderIsRequestedToChange();
+        setUpdateRequest(false);
+    }
+
     const handleDragStart = (e) => {
-        if (dragContainer.current) {
-            if (dragContainer.current.contains(e.target) && !dragIsInsideElement) {
-                setdDragIsInsideElement(true);
-                setDropIndex(-1);
-            }
+        if (dragContainer.current && dragContainer.current.contains(e.target) && !dragIsInsideElement) {
+            setdDragIsInsideElement(true);
+            setDropIndex(-1);
         }
     };
 
     const handleDragLeave = (e) => {
-        if (dragContainer.current) {
-            if (!dragContainer.current.contains(e.target) && dragIsInsideElement) {
-                setdDragIsInsideElement(false);
-            }
+        if (dragContainer.current && !dragContainer.current.contains(e.target) && dragIsInsideElement) {
+            setdDragIsInsideElement(false);
         }
     };
 
@@ -105,11 +97,21 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
     };
 
     const handleKeyUp = (e) => {
-        if (dragContainer.current) {
-            if (dragContainer.current.contains(e.target)) {
-                if (e.keyCode === 38 || e.keyCode === 40) {
-                    orderIsRequestedToChange();
-                }
+        if (dragContainer.current && dragContainer.current.contains(e.target)) {
+            if (e.altKey && (e.keyCode === 38 || e.keyCode === 40)) {
+                // Piltast opp og ned
+                orderIsRequestedToChange();
+            } else if (e.keyCode === 32) {
+                // Space
+                setAriaTekst(
+                    'Bruk piltast opp eller ned for å velge et annet filter. Hold nede alt og press opp eller ned for å endre rekkefølgen til filter. Enter for å lagre. Escape for å avbryte.'
+                );
+            } else if (e.keyCode === 27) {
+                // Esc.
+                avbryt();
+            } else if (e.keyCode === 13) {
+                // Enter
+                lagreRekkefølge();
             }
         }
     };
@@ -122,7 +124,6 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
     let endreRekkefølgeCheckbox = (
         <Checkbox
             label={'Endre rekkefølge:'}
-            aria-label={isDraggable ? 'Marker filter og endre rekkefølge med piltast.' : 'Endre rekkefølge'}
             checked={isDraggable}
             onChange={(e) => {
                 if (!e.target.checked) avbryt();
@@ -135,7 +136,10 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
         return (
             <>
                 {endreRekkefølgeCheckbox}
-                <ul ref={dragContainer} className="drag-and-drop-container">
+                <span aria-live="assertive" className="assistive-text">
+                    {ariaTekst}
+                </span>
+                <ul ref={dragContainer} className="drag-and-drop-container" role={'listbox'}>
                     {dragAndDropOrder.map((filter, idx) => (
                         <DragAndDropRow
                             key={idx}
@@ -146,19 +150,22 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
                             sourceIndex={srcIndex}
                             dropIndex={dropIndex}
                             filterNavn={filter.filterNavn}
+                            setRequestRowInFocuse={setRequestRowInFocuse}
                             setDropIndex={setDropIndex}
-                            ariaTekstDropElement={ariaTekst}
+                            setRequestUpdate={setUpdateRequest}
+                            shouldBeFocused={idx === requestRowInFocuse}
+                            isLastRow={idx === dragAndDropOrder.length - 1}
                         ></DragAndDropRow>
                     ))}
                 </ul>
                 <div className="drag-and-drop-knapper">
-                    <Hovedknapp mini onClick={(e) => saveOrder()}>
+                    <Hovedknapp mini onClick={(e) => lagreRekkefølge()}>
                         Lagre
                     </Hovedknapp>
                     <Fareknapp mini onClick={(e) => avbryt()}>
                         Avbryt
                     </Fareknapp>
-                    <Flatknapp mini onClick={() => alfabetiskSort()}>
+                    <Flatknapp mini onClick={(e) => alfabetiskSort()}>
                         Sorter
                     </Flatknapp>
                 </div>

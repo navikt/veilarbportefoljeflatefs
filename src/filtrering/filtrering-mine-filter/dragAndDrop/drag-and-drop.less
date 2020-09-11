@@ -9,12 +9,16 @@
     -khtml-user-drag: element;
     -webkit-user-drag: element;
 }
-#drag-icon {
-    height: 1rem;
-    width: auto;
-    float: right;
-    visibility: visible;
-    margin-right: 1rem;
+
+.assistive-text {
+    position: absolute;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
 }
 
 .drag-and-drop-knapper {
@@ -76,4 +80,34 @@
     100% {
         transform: scale(1);
     }
+}
+
+#drag-icon {
+    height: 1rem;
+    width: auto;
+    float: right;
+    visibility: visible;
+    margin-right: 1rem;
+}
+
+.flytt-knapper {
+    display: flex;
+    margin-left: auto;
+}
+
+.drag-and-drop-row #Symbols {
+    visibility: hidden;
+    height: 1.5rem;
+    width: auto;
+}
+.drag-and-drop-row:focus #Symbols {
+    visibility: visible;
+}
+
+.flytt-knapp:focus #Symbols {
+    visibility: visible;
+}
+
+.flytt-knapp:focus .drag-up {
+    visibility: visible;
 }

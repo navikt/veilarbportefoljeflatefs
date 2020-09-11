@@ -3,7 +3,7 @@ import './ny_mine-filter-innhold.less';
 import '../../components/sidebar/sidebar.less';
 import { MineFilter } from '../../ducks/mine-filter';
 import { Normaltekst } from 'nav-frontend-typografi';
-import DragAndDropContainer from './drag-and-drop-container';
+import DragAndDropContainer from './dragAndDrop/drag-and-drop-container';
 
 interface LagredeFilterInnholdProps {
     lagretFilter: MineFilter[];

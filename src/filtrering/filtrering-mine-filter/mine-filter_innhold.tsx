@@ -9,7 +9,7 @@ import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
 import { REDESIGN } from '../../konstanter';
 import { useWindowWidth } from '../../hooks/use-window-width';
 import { ListevisningType } from '../../ducks/ui/listevisning';
-import DragAndDropContainer from './drag-and-drop-container';
+import DragAndDropContainer from './dragAndDrop/drag-and-drop-container';
 
 interface MineFilterInnholdProps {
     mineFilter: MineFilter[];
