@@ -82,7 +82,7 @@ function Ny_MinoversiktSide() {
     useEffect(() => {
         function onScroll() {
             let currentPosition = window.pageYOffset;
-            if (currentPosition > 230) {
+            if (currentPosition > 220) {
                 setScrolling(true);
             } else {
                 setScrolling(false);
