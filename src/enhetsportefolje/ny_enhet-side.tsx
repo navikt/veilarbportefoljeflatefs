@@ -26,7 +26,6 @@ import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
-import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
@@ -36,6 +35,7 @@ import {NyMineFilterLagreFilterKnapp} from "../minoversikt/ny_mine-filter-lagre-
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 import {useWindowWidth} from "../hooks/use-window-width";
 import NyToolbar from "../components/toolbar/ny_toolbar";
+import NyFiltreringNavnellerfnr from "../filtrering/ny_filtrering-navnellerfnr";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -134,7 +134,7 @@ function Ny_EnhetSide() {
                             lukkTab={lukkTab}
                         />
                         <div className="sokefelt-knapp__container">
-                            <FiltreringNavnellerfnr
+                            <NyFiltreringNavnellerfnr
                                 filtervalg={filtervalg}
                                 endreFiltervalg={doEndreFiltervalg}
                             />

@@ -24,7 +24,6 @@ import './ny__minoversikt-side.less';
 import './ny__minoversikt.less'
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
-import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import {pagineringSetup} from '../ducks/paginering';
 import {endreFiltervalg} from '../ducks/filtrering';
 import Sidebar from '../components/sidebar/sidebar';
@@ -37,6 +36,7 @@ import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
 import {useEffect, useState} from "react";
 import {useWindowWidth} from "../hooks/use-window-width";
 import NyToolbar from "../components/toolbar/ny_toolbar";
+import NyFiltreringNavnellerfnr from "../filtrering/ny_filtrering-navnellerfnr";
 
 function Ny_MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -111,7 +111,7 @@ function Ny_MinoversiktSide() {
                             lukkTab={lukkTab}
                         />
                         <div className="sokefelt-knapp__container">
-                            <FiltreringNavnellerfnr
+                            <NyFiltreringNavnellerfnr
                                 filtervalg={filtervalg}
                                 endreFiltervalg={doEndreFiltervalg}
                             />
