@@ -4,220 +4,227 @@
 @bakgrunnsGra: #F4F4F4;
 
 .veilarbportefoljeflatefs {
-    .visuallyhidden {
-        position: absolute;
-        left: -1000000000px;
+  .visuallyhidden {
+    position: absolute;
+    left: -1000000000px;
+  }
+
+  #veilederside-toolbar {
+    padding-left: 0;
+    margin-bottom: 0;
+    position: sticky;
+    top: 0;
+    border: none;
+    background-color: #F4F4F4;
+    justify-content: space-between;
+  }
+
+  .toolbar {
+    display: flex;
+    align-items: center;
+    border-bottom: none;
+    border-radius: @border-radius-base @border-radius-base 0 0;
+    background-color: @bakgrunnsGra;
+    z-index: 1000;
+    margin-bottom: .5rem;
+    justify-content: space-between;
+
+    .nav-frontend-chevron span {
+      .sr-only();
     }
 
-    #veilederside-toolbar {
-        padding-left: 0;
-        margin-bottom: 0;
-        position: sticky;
-        top: 0;
-        border: none;
-        background-color: #F4F4F4;
-        justify-content: space-between;
+    .toggle__label {
+      min-width: 3rem;
     }
 
-    .toolbar {
-        display: flex;
-        align-items: center;
-        border-bottom: none;
-        border-radius: @border-radius-base @border-radius-base 0 0;
-        background-color: @bakgrunnsGra;
-        z-index: 1000;
-        margin-bottom: .5rem;
-        padding-left: .5rem;
-
-        .nav-frontend-chevron span {
-            .sr-only();
-        }
-
-        .toggle__label {
-            min-width: 3rem;
-        }
-
-        #tildel-veileder-ikon {
-            margin-right: .3rem;
-        }
-
-
-        &-knapp__ikon {
-            min-width: 1.5rem;
-            min-height: 1.5rem;
-        }
-
-        &-knapp__tekst {
-            padding-right: .5rem;
-        }
-
-        &__element {
-            display: flex;
-            flex-direction: row;
-        }
-
-        .sok-veileder-wrapper, .tildel-veileder-wrapper {
-            width: 190px;
-            margin-right: .5rem;
-
-            .toolbarknapp-input {
-                .sokfilter .skjemaelement {
-                    margin-bottom: 0;
-                }
-
-                .checkbox-filterform__under-valg {
-                    padding-top: .5rem;
-                }
-
-                .checkbox-filterform, .radio-filterform {
-                    position: absolute;
-                    z-index: 2000;
-                    background-color: @white;
-                    border: 1px solid @navGra40;
-                    border-top: none;
-                    border-radius: 0 0 4px 4px;
-                    width: 190px;
-                    margin-right: .5rem;
-
-                    &__valg {
-                        margin: 0;
-                        overflow-x: auto;
-                        max-height: 15.5rem;
-
-                        .skjemaelement {
-                            margin-bottom: .5rem;
-                        }
-                    }
-                }
-
-                .alertstripe {
-                    padding: 1rem .7rem;
-                    z-index: 2000;
-                    position: absolute;
-                }
-            }
-        }
+    #tildel-veileder-ikon {
+      margin-right: .3rem;
     }
 
-    .velgalle-checkboks {
-        margin: 0;
-        color: @navDypBla;
-        padding: 0;
-        width: auto;
-        top: -15px;
 
-        .skjemaelement__label:before {
-            top: 2px;
-        }
-
-        input:disabled + label {
-        }
+    &-knapp__ikon {
+      min-width: 1.5rem;
+      min-height: 1.5rem;
     }
 
-    .arbeidslistekategori__sorteringsheader {
-        min-width: 2rem;
-        margin-top: 3px;
-
-        .arbeidslisteikon__svg {
-            min-width: 1rem;
-            min-height: 20px;
-        }
+    &-knapp__tekst {
+      padding-right: .5rem;
     }
 
-    .dropdown--toolbar {
-        border-radius: @border-radius-base;
-        width: auto;
-        min-width: 11rem;
-        height: 100%;
-        margin: 0 1rem 0 0 !important;
+    &__element {
+      display: flex;
+      flex-direction: row;
+    }
 
-        .dropdown__btn {
-            border: 1px solid @navGra60;
-            padding: 0.5rem;
-            cursor: pointer;
+    .tildel-veileder-wrapper {
+      margin-right: .5rem;
+    }
 
-            &:hover {
-                border-color: @navBla;
-            }
+    &__paginering {
+      width: 24rem;
+    }
 
-            &:disabled {
-                color: @navGra20;
+    .sok-veileder-wrapper, .tildel-veileder-wrapper {
+      width: 186px;
 
-                &:hover {
-                    border-color: transparent;
-                    cursor: default;
-                }
-            }
+      .toolbarknapp-input {
+        .sokfilter .skjemaelement {
+          margin-bottom: 0;
         }
 
-        .dropdown__btnwrapper {
-            &:before, &:after {
-                .chevronline-mixin(0.75rem);
-                top: 50%;
-            }
+        .checkbox-filterform__under-valg {
+          padding-top: .5rem;
         }
 
-        .dropdown__innhold {
-            width: 286px;
-        }
+        .checkbox-filterform, .radio-filterform {
+          position: absolute;
+          z-index: 2000;
+          background-color: @white;
+          border: 1px solid @navGra40;
+          border-top: none;
+          border-radius: 0 0 4px 4px;
+          width: 190px;
+          margin-right: .5rem;
 
-        .sokfilter {
-            text-align: center;
+          &__valg {
+            margin: 0;
+            overflow-x: auto;
+            max-height: 15.5rem;
 
             .skjemaelement {
-                margin-bottom: 0;
+              margin-bottom: .5rem;
             }
-
-            .skjemaelement__label {
-                .sr-only();
-            }
-
-            .skjemaelement__input {
-                height: 1.8rem;
-                width: 90%;
-                margin-top: 10px;
-                margin-bottom: 10px;
-                background: no-repeat 99% 130%;
-            }
-
-            .skjemaelement__input::-ms-clear {
-                display: none;
-            }
+          }
         }
+
+        .alertstripe {
+          padding: 1rem .7rem;
+          z-index: 2000;
+          position: absolute;
+        }
+      }
+    }
+  }
+
+  .velgalle-checkboks {
+    margin: 0;
+    color: @navDypBla;
+    padding: 0;
+    width: auto;
+    top: -15px;
+
+    .skjemaelement__label:before {
+      top: 2px;
     }
 
-    .toolbar_btn {
-        border: 1px solid transparent;
-        padding: .5rem;
-        height: 100%;
-        margin: 0 0.5rem 0 0;
-        position: relative;
-        text-align: inherit;
-        background-color: @bakgrunnsGra;
-        width: 190px;
-        display: flex;
-        flex-direction: row;
+    input:disabled + label {
+    }
+  }
 
-        &:disabled {
-            #arbeidsliste-svg, #tildel-veileder-ikon, #sok-veileder-ikon {
-                opacity: 0.4;
-            }
+  .arbeidslistekategori__sorteringsheader {
+    min-width: 2rem;
+    margin-top: 3px;
 
-            &:hover {
-                border-color: transparent;
-                cursor: default;
-            }
-        }
+    .arbeidslisteikon__svg {
+      min-width: 1rem;
+      min-height: 20px;
+    }
+  }
 
-        &:focus {
-            outline: none;
-            border-radius: 2px;
-            box-shadow: 0 0 0 3px @fokusFarge;
-        }
+  .dropdown--toolbar {
+    border-radius: @border-radius-base;
+    width: auto;
+    min-width: 11rem;
+    height: 100%;
+    margin: 0 1rem 0 0 !important;
+
+    .dropdown__btn {
+      border: 1px solid @navGra60;
+      padding: 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        border-color: @navBla;
+      }
+
+      &:disabled {
+        color: @navGra20;
 
         &:hover {
-            border-color: @navBla;
-            cursor: pointer;
+          border-color: transparent;
+          cursor: default;
         }
+      }
     }
+
+    .dropdown__btnwrapper {
+      &:before, &:after {
+        .chevronline-mixin(0.75rem);
+        top: 50%;
+      }
+    }
+
+    .dropdown__innhold {
+      width: 286px;
+    }
+
+    .sokfilter {
+      text-align: center;
+
+      .skjemaelement {
+        margin-bottom: 0;
+      }
+
+      .skjemaelement__label {
+        .sr-only();
+      }
+
+      .skjemaelement__input {
+        height: 1.8rem;
+        width: 90%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background: no-repeat 99% 130%;
+      }
+
+      .skjemaelement__input::-ms-clear {
+        display: none;
+      }
+    }
+  }
+
+  .toolbar_btn {
+    border: 1px solid transparent;
+    padding: .5rem;
+    height: 100%;
+    margin: 0 0.5rem 0 0;
+    position: relative;
+    text-align: inherit;
+    background-color: @bakgrunnsGra;
+    width: 186px;
+    display: flex;
+    flex-direction: row;
+
+    &:disabled {
+      #arbeidsliste-svg, #tildel-veileder-ikon, #sok-veileder-ikon {
+        opacity: 0.4;
+      }
+
+      &:hover {
+        border-color: transparent;
+        cursor: default;
+      }
+    }
+
+    &:focus {
+      outline: none;
+      border-radius: 2px;
+      box-shadow: 0 0 0 3px @fokusFarge;
+    }
+
+    &:hover {
+      border-color: @navBla;
+      cursor: pointer;
+    }
+  }
 }

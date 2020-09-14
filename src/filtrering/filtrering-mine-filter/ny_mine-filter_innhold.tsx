@@ -43,8 +43,8 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const getEmptyState = () => {
         return (
-            <div className="mine-filter-emptystate">
-                <Normaltekst className="mine-filter-emptystate__tekst">
+            <div className="ny__mine-filter-emptystate">
+                <Normaltekst className="ny__mine-filter-emptystate__tekst">
                     Ingen lagrede filter
                 </Normaltekst>
             </div>

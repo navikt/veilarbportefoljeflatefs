@@ -49,6 +49,21 @@ function Ny_veiledereSide() {
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold-veilederside__ny">
+                        <div className="status-filter-kolonne__ny">
+                            <PanelBase className="blokk-xxxs sok-veileder__ny">
+                                <Undertittel>
+                                    Søk veileder
+                                </Undertittel>
+                                <FiltreringVeiledere/>
+                            </PanelBase>
+                            <MetrikkEkspanderbartpanel
+                                apen={true}
+                                lamellNavn="veiledergrupper"
+                                tittel="Veiledergrupper"
+                            >
+                                <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt}/>
+                            </MetrikkEkspanderbartpanel>
+                        </div>
                         <div className="liste-kolonne__ny">
                             <FiltreringLabelContainer
                                 filtervalg={{
@@ -68,22 +83,6 @@ function Ny_veiledereSide() {
                                 antallVeiledere={veiledere.data.veilederListe.length}
                             />
                         </div>
-                        <div className="status-filter-kolonne__ny">
-                            <PanelBase className="blokk-xxxs sok-veileder__ny">
-                                <Undertittel>
-                                    Søk veileder
-                                </Undertittel>
-                                <FiltreringVeiledere/>
-                            </PanelBase>
-                            <MetrikkEkspanderbartpanel
-                                apen={true}
-                                lamellNavn="veiledergrupper"
-                                tittel="Veiledergrupper"
-                            >
-                                <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt}/>
-                            </MetrikkEkspanderbartpanel>
-                        </div>
-
                     </div>
                 </Innholdslaster>
             </div>
