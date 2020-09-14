@@ -73,6 +73,7 @@ function Ny_EnhetSide() {
     const veilederLabel = useMemo(() => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter), [filtervalg.veiledere, veilederliste, slettVeilederFilter]);
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
+    const windowWidth = useWindowWidth();
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -104,7 +105,7 @@ function Ny_EnhetSide() {
     useEffect(() => {
         function onScroll() {
             let currentPosition = window.pageYOffset;
-            if (currentPosition > 200) {
+            if (currentPosition > 230) {
                 setScrolling(true);
             } else {
                 setScrolling(false);
@@ -115,7 +116,6 @@ function Ny_EnhetSide() {
         return window.addEventListener("scroll", onScroll);
     });
 
-    const windowWidth = useWindowWidth() < 1200;
 
     return (
         <DocumentTitle title="Enhetens oversikt">
@@ -164,10 +164,10 @@ function Ny_EnhetSide() {
                                 : 'ikke-sticky__ny__toolbar-container'}>
                                     <TabellOverskrift
                                         className={classNames('tabelloverskrift__ny',
-                                            (((scrolling && isSidebarHidden)
-                                                || (scrolling && windowWidth)
-                                                || (!isSidebarHidden && windowWidth))
-                                            && "tabelloverskrift__ny__hidden"))}/>
+                                            (((scrolling && isSidebarHidden) ||
+                                                (scrolling && windowWidth < 1200) ||
+                                                (!isSidebarHidden && windowWidth < 1200 && scrolling))
+                                                && "tabelloverskrift__ny__hidden"))}/>
                                 <NyToolbar
                                     onPaginering={() => dispatch(hentPortefoljeForEnhet(
                                         enhetId,

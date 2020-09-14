@@ -62,12 +62,10 @@ function NyToolbar(props: ToolbarProps) {
     const windowWidth = useWindowWidth() < 1200;
     return (
         <div className={classNames("toolbar blokk-xs",
-            ((
-                (scrolling && isSidebarHidden && !windowWidth) ||
+            (((scrolling && isSidebarHidden && !windowWidth) ||
                 (scrolling && windowWidth && !isSidebarHidden) ||
                 (!isSidebarHidden && windowWidth))
-                && "toolbar__hidden"),
-            isSidebarHidden && windowWidth && scrolling && "toolbar__extra")}
+                && "toolbar__hidden"))}
              id={id}>
             <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__knapperad">
                 {filtergruppe === ListevisningType.veilederOversikt &&

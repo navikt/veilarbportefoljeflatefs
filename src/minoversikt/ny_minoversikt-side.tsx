@@ -57,6 +57,7 @@ function Ny_MinoversiktSide() {
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
+    const windowWidth = useWindowWidth();
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
@@ -81,7 +82,8 @@ function Ny_MinoversiktSide() {
     useEffect(() => {
         function onScroll() {
             let currentPosition = window.pageYOffset;
-            if (currentPosition > 200) {
+            console.log(currentPosition)
+            if (currentPosition > 230) {
                 setScrolling(true);
             } else {
                 setScrolling(false);
@@ -92,7 +94,6 @@ function Ny_MinoversiktSide() {
         return window.addEventListener("scroll", onScroll);
     });
 
-    const windowWidth = useWindowWidth() < 1200;
 
     return (
         <DocumentTitle title="Min oversikt">
@@ -139,9 +140,9 @@ function Ny_MinoversiktSide() {
                                         className={visesAnnenVeiledersPortefolje
                                             ? 'tabelloverskrift__ny__annen-veileder'
                                             : classNames('tabelloverskrift__ny',
-                                                (((scrolling && isSidebarHidden)
-                                                    || (scrolling && windowWidth)
-                                                    || (!isSidebarHidden && windowWidth))
+                                                (((scrolling && isSidebarHidden) ||
+                                                    (scrolling && windowWidth < 1200) ||
+                                                    (!isSidebarHidden && windowWidth < 1200 && scrolling))
                                                     && "tabelloverskrift__ny__hidden"))}/>
                                     <NyToolbar
                                         onPaginering={() => dispatch(hentPortefoljeForVeileder(

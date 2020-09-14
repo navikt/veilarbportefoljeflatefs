@@ -159,6 +159,7 @@ html {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row: 2;
+    margin-top: .5rem;
   }
 
   .brukerliste__header {
@@ -167,8 +168,9 @@ html {
     grid-row: 3;
   }
 
-  .tabelloverskrift__ny__hidden, .toolbar__hidden {
+  .tabelloverskrift__ny__hidden {
     grid-column-start: 2;
+    padding-bottom: 2rem;
   }
 }
 
@@ -276,30 +278,6 @@ html {
 
       .sidebar {
         z-index: 1200;
-      }
-    }
-
-    .tabelloverskrift__ny__extra, .toolbar__extra {
-      margin-top: 3rem;
-    }
-
-    .tabelloverskrift__ny__hidden, .toolbar__hidden {
-      display: flex;
-      flex-direction: column;
-
-      .toolbar__knapperad {
-        margin-top: .5rem;
-        align-self: flex-end;
-        margin-bottom: .5rem;
-
-        .toolbar_btn {
-          margin-right: 0;
-        }
-      }
-
-      .toolbar__paginering {
-        align-self: flex-end;
-        width: 24rem;
       }
     }
   }
