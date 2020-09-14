@@ -29,11 +29,11 @@ interface ToolbarProps {
 }
 
 function NyToolbar(props: ToolbarProps) {
-    const {id, filtergruppe, visesAnnenVeiledersPortefolje, antallTotalt, onPaginering, scrolling = false, isSidebarHidden = false} = props;
+    const {id, filtergruppe, visesAnnenVeiledersPortefolje, antallTotalt, onPaginering, scrolling = false, isSidebarHidden = false, antallVeiledere, sokVeilederSkalVises} = props;
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
-    const veiledereGrammatikk = props.antallVeiledere === 1 ? 'veileder' : 'veiledere';
+    const veiledereGrammatikk = antallVeiledere === 1 ? 'veileder' : 'veiledere';
 
     const oversikt = (side) => {
         switch (side) {
@@ -46,7 +46,7 @@ function NyToolbar(props: ToolbarProps) {
                     <div className="sok-veileder-wrapper">
                         <ToolbarKnapp
                             tittel="Søk veileder"
-                            skalVises={props.sokVeilederSkalVises}
+                            skalVises={sokVeilederSkalVises}
                             aktiv={true}
                             tildelveileder={false}
                             ikon={<SokVeilederIkon className="toolbar-knapp__ikon" id="sok-veileder-ikon"/>}
@@ -70,11 +70,11 @@ function NyToolbar(props: ToolbarProps) {
             isSidebarHidden && windowWidth && scrolling && "toolbar__extra")}
              id={id}>
             <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__knapperad">
-                {props.filtergruppe === ListevisningType.veilederOversikt &&
+                {filtergruppe === ListevisningType.veilederOversikt &&
                 <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
-                    {props.antallVeiledere === 0 ? `Ingen veiledere` : `Totalt ${props.antallVeiledere} ${veiledereGrammatikk}`}
+                    {antallVeiledere === 0 ? `Ingen veiledere` : `Totalt ${antallVeiledere} ${veiledereGrammatikk}`}
                 </Undertittel>}
-                {props.filtergruppe !== ListevisningType.veilederOversikt &&
+                {filtergruppe !== ListevisningType.veilederOversikt &&
                 <div className="tildel-veileder-wrapper">
                     <ToolbarKnapp
                         tittel="Tildel veileder"
@@ -85,7 +85,7 @@ function NyToolbar(props: ToolbarProps) {
                         filtergruppe={filtergruppe}
                     />
                 </div>}
-                {oversikt(props.filtergruppe)}
+                {oversikt(filtergruppe)}
             </div>
             <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__paginering">
                 <Listevisning filtergruppe={filtergruppe}/>
