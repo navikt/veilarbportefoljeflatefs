@@ -33,12 +33,7 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const hentFiltrertListeinnhold = () => {
         return (
             <div className="ny__mine-filter__valgfelt" ref={outerDivRef}>
-                <DragAndDropContainer
-                    stateFilterOrder={filtrertListe()}
-                    filtergruppe={props.filtergruppe}
-                    isDraggable={isDraggable}
-                    setisDraggable={setisDraggable}
-                />
+                <DragAndDropContainer stateFilterOrder={filtrertListe()} filtergruppe={props.filtergruppe} />
             </div>
         );
     };

@@ -6,15 +6,14 @@ import NyMineFilterRad from '../ny_mine-filter-rad';
 import {useDispatch} from 'react-redux';
 import {lagreSorteringForFilter, MineFilter} from '../../../ducks/mine-filter';
 import {Hovedknapp, Flatknapp, Knapp} from 'nav-frontend-knapper';
+import {Checkbox} from 'nav-frontend-skjema';
 
 export interface DragAndDropProps {
     stateFilterOrder: MineFilter[];
     filtergruppe: string;
-    isDraggable: boolean;
-    setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function DragAndDropContainer({stateFilterOrder, filtergruppe, isDraggable, setisDraggable}: DragAndDropProps) {
+function DragAndDropContainer({stateFilterOrder, filtergruppe}: DragAndDropProps) {
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
@@ -24,6 +23,8 @@ function DragAndDropContainer({stateFilterOrder, filtergruppe, isDraggable, seti
     const [ariaTekst, setAriaTekst] = useState('');
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
+
+    const [isDraggable, setisDraggable] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -131,10 +132,21 @@ function DragAndDropContainer({stateFilterOrder, filtergruppe, isDraggable, seti
     useEventListener('dragleave', handleDragLeave);
     useEventListener('dragend', handleDragEnd);
     useEventListener('keyup', handleKeyUp);
-
+    let endreRekkefølgeCheckbox = (
+        <Checkbox
+            label={'Endre rekkefølge:'}
+            checked={isDraggable}
+            onChange={(e) => {
+                if (!e.target.checked) avbryt();
+                setisDraggable(e.target.checked);
+                setDropIndex(-1);
+            }}
+        />
+    );
     if (isDraggable) {
         return (
             <>
+                {endreRekkefølgeCheckbox}
                 <span aria-live="assertive" className="assistive-text">
                     {ariaTekst}
                 </span>
@@ -178,6 +190,7 @@ function DragAndDropContainer({stateFilterOrder, filtergruppe, isDraggable, seti
     }
     return (
         <>
+            {endreRekkefølgeCheckbox}
             <ul ref={dragContainer} className="drag-and-drop-container">
                 {dragAndDropOrder.map((filter, idx) => (
                     <NyMineFilterRad key={idx} filter={filter} filtergruppe={filtergruppe} />
