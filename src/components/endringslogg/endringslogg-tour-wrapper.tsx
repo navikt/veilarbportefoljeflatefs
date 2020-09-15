@@ -47,7 +47,7 @@ function EndringsloggTourWrapper() {
             krypterVeilederident(veilederIdent)
                 .then((res) =>
                     logEvent('portefolje.endringslogg', {
-                        feature: 'veiledergrupper',
+                        feature: 'mine-filter', //Husk å endre denne ved bytte
                         tidBrukt,
                         nyeNotifikasjoner: ulestFelt,
                     }, {hash: hexString(res)})

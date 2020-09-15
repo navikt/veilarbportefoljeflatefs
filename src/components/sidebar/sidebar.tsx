@@ -29,6 +29,9 @@ import {HandlingsType} from "../../ducks/mine-filter";
 import {STATUS} from "../../ducks/utils";
 import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn} from "../../middleware/metrics-middleware";
+import useOutsideClick from "../../hooks/use-outside-click";
+import {useWindowWidth} from "../../hooks/use-window-width";
+import {skjulSidebar} from "../../ducks/sidebar-tab";
 import {SIDEBAR_TAB_ENDRET} from "../../ducks/sidebar-tab";
 
 interface Sidebar {
@@ -88,7 +91,9 @@ function Sidebar(props: SidebarProps) {
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const dispatch = useDispatch();
     const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
-    const sortertMineFilter = mineFilterState.data.sort((a, b) => a.filterNavn.toLowerCase()
+    const mineFilter = mineFilterState.data;
+    const windowWidth = useWindowWidth();
+    const sortertMineFilter = mineFilter.sort((a, b) => a.filterNavn.toLowerCase()
         .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
 
     useEffect(() => {
@@ -193,6 +198,12 @@ function Sidebar(props: SidebarProps) {
             }
         }
     };
+
+    useOutsideClick(sidebarRef, () => {
+        if (windowWidth < 1200 && !props.isSidebarHidden) {
+            dispatch(skjulSidebar(props.filtergruppe))
+        }
+    });
 
     return (
         <div ref={sidebarRef}
