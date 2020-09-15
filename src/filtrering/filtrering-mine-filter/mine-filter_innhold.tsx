@@ -9,7 +9,7 @@ import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {REDESIGN} from '../../konstanter';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import DragAndDropContainer from './dragAndDrop/drag-and-drop-container';
+import DragAndDrop from './dragAndDrop/drag-and-drop';
 
 interface MineFilterInnholdProps {
     mineFilter: MineFilter[];
@@ -56,7 +56,7 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
     const hentFiltrertListeinnhold = () => {
         return (
             <div className="lagrede-filter__valgfelt" ref={outerDivRef}>
-                <DragAndDropContainer
+                <DragAndDrop
                     stateFilterOrder={filtrertListe()}
                     filtergruppe={props.filtergruppe}
                     isDraggable={isDraggable}

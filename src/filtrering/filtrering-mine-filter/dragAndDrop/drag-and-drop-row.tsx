@@ -39,12 +39,10 @@ function DragAndDropRow({
 
     const flyttOpp = () => {
         if (sourceIndex !== idx) setIsSource(idx);
-        if (dropIndex !== -1) setDropIndex(-1);
         setIsDestination(idx - 1);
     };
     const flyttNed = () => {
         if (sourceIndex !== idx) setIsSource(idx);
-        if (dropIndex !== -1) setDropIndex(-1);
         setIsDestination(idx + 1);
     };
     const flyttFokusOpp = () => {
@@ -62,13 +60,11 @@ function DragAndDropRow({
 
     const flyttOppAndRequestUpdate = () => {
         flyttOpp();
-        dragNode.current?.focus();
         setRequestUpdate(true);
     };
 
     const flyttNedAndRequestUpdate = () => {
         flyttNed();
-        dragNode.current?.focus();
         setRequestUpdate(true);
     };
 

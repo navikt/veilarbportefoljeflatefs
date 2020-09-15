@@ -2,21 +2,24 @@ import React, {useRef, useState, useEffect} from 'react';
 import {useEventListener} from '../../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
-import NyMineFilterRad from '../ny_mine-filter-rad';
-import {useDispatch} from 'react-redux';
-import {lagreSorteringForFilter, MineFilter} from '../../../ducks/mine-filter';
+import {MineFilter} from '../../../ducks/mine-filter';
 import {Hovedknapp, Flatknapp, Knapp} from 'nav-frontend-knapper';
-import ToggleSwitch from '../toggleSwitch/ToggleSwitch';
 
-export interface DragAndDropProps {
-    stateFilterOrder: MineFilter[];
-    filtergruppe: string;
-    isDraggable: boolean;
-    setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
+export interface DragAndDropContainerProps {
+    dragAndDropOrder: MineFilter[];
+    setDragAndDropOrder: React.Dispatch<React.SetStateAction<MineFilter[]>>;
+    lagreRekkefølge: () => void;
+    avbryt: () => void;
+    onUnmount: () => void;
 }
 
-function DragAndDropContainer({stateFilterOrder, filtergruppe, isDraggable, setisDraggable}: DragAndDropProps) {
-    const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
+function DragAndDropContainer({
+    dragAndDropOrder,
+    setDragAndDropOrder,
+    lagreRekkefølge,
+    avbryt,
+    onUnmount: onOnmount
+}: DragAndDropContainerProps) {
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
     const [dropIndex, setDropIndex] = useState(-1);
@@ -26,30 +29,12 @@ function DragAndDropContainer({stateFilterOrder, filtergruppe, isDraggable, seti
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (!isDraggable) {
-            if (dropIndex != -1) setDropIndex(-1);
-            if (requestRowInFocuse !== -1) setRequestRowInFocuse(-1);
-            lagreRekkefølge();
-        }
-    }, [isDraggable, setDropIndex, setRequestRowInFocuse, lagreSorteringForFilter]);
-
-    const lagreRekkefølge = () => {
-        const idAndPriorities = dragAndDropOrder.map((filter, idx) => ({
-            sortOrder: idx,
-            filterId: filter.filterId
-        }));
-        dispatch(lagreSorteringForFilter(idAndPriorities));
-
-        if (!isDraggable) setisDraggable(false);
-    };
-
-    const avbryt = () => {
-        setDragAndDropOrder([...stateFilterOrder]);
-        setisDraggable(false);
-    };
+    useEffect(
+        () => () => {
+            onOnmount();
+        },
+        [onOnmount]
+    );
 
     const alfabetiskSort = () => {
         dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {
@@ -142,57 +127,46 @@ function DragAndDropContainer({stateFilterOrder, filtergruppe, isDraggable, seti
     useEventListener('dragend', handleDragEnd);
     useEventListener('keyup', handleKeyUp);
 
-    if (isDraggable) {
-        return (
-            <>
-                <span aria-live="assertive" className="assistive-text">
-                    {ariaTekst}
-                </span>
-                <ul ref={dragContainer} className="drag-and-drop-container" role={'listbox'}>
-                    {dragAndDropOrder.map((filter, idx) => (
-                        <DragAndDropRow
-                            key={idx}
-                            idx={idx}
-                            setIsDestination={setDestIndex}
-                            setIsSource={setSrcIndex}
-                            destIndex={destIndex}
-                            sourceIndex={srcIndex}
-                            dropIndex={dropIndex}
-                            filterNavn={filter.filterNavn}
-                            setRequestRowInFocuse={setRequestRowInFocuse}
-                            setDropIndex={setDropIndex}
-                            setRequestUpdate={setUpdateRequest}
-                            shouldBeFocused={idx === requestRowInFocuse}
-                            isLastRow={idx === dragAndDropOrder.length - 1}
-                        ></DragAndDropRow>
-                    ))}
-                </ul>
-                <div className="drag-and-drop-knapper">
-                    <Hovedknapp className="drag-and-drop-knapp-lagre" mini onClick={(e) => lagreRekkefølge()}>
-                        Lagre
-                    </Hovedknapp>
-                    <Knapp className="drag-and-drop-knapp-avbryt" mini onClick={(e) => avbryt()}>
-                        Avbryt
-                    </Knapp>
-                    <Flatknapp
-                        className="drag-and-drop-knapp-nullstill"
-                        aria-label="Nullstill til alfabetisk sortering"
-                        mini
-                        onClick={(e) => alfabetiskSort()}
-                    >
-                        Nullstill
-                    </Flatknapp>
-                </div>
-            </>
-        );
-    }
     return (
         <>
-            <ul ref={dragContainer} className="drag-and-drop-container">
+            <span aria-live="assertive" className="assistive-text">
+                {ariaTekst}
+            </span>
+            <ul ref={dragContainer} className="drag-and-drop-container" role={'listbox'}>
                 {dragAndDropOrder.map((filter, idx) => (
-                    <NyMineFilterRad key={idx} filter={filter} filtergruppe={filtergruppe} />
+                    <DragAndDropRow
+                        key={idx}
+                        idx={idx}
+                        setIsDestination={setDestIndex}
+                        setIsSource={setSrcIndex}
+                        destIndex={destIndex}
+                        sourceIndex={srcIndex}
+                        dropIndex={dropIndex}
+                        filterNavn={filter.filterNavn}
+                        setRequestRowInFocuse={setRequestRowInFocuse}
+                        setDropIndex={setDropIndex}
+                        setRequestUpdate={setUpdateRequest}
+                        shouldBeFocused={idx === requestRowInFocuse}
+                        isLastRow={idx === dragAndDropOrder.length - 1}
+                    ></DragAndDropRow>
                 ))}
             </ul>
+            <div className="drag-and-drop-knapper">
+                <Hovedknapp className="drag-and-drop-knapp-lagre" mini onClick={(e) => lagreRekkefølge()}>
+                    Lagre
+                </Hovedknapp>
+                <Knapp className="drag-and-drop-knapp-avbryt" mini onClick={(e) => avbryt()}>
+                    Avbryt
+                </Knapp>
+                <Flatknapp
+                    className="drag-and-drop-knapp-nullstill"
+                    aria-label="Nullstill til alfabetisk sortering"
+                    mini
+                    onClick={(e) => alfabetiskSort()}
+                >
+                    Nullstill
+                </Flatknapp>
+            </div>
         </>
     );
 }

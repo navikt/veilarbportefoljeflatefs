@@ -8,14 +8,16 @@ interface ToggleSwitchProps {
     onClose?: () => void;
     defaultChecked?: boolean;
     checked?: boolean;
+    ariaLabel?: string;
 }
 
-function ToggleSwitch({onOpen, onClose, defaultChecked, checked}: ToggleSwitchProps) {
+function ToggleSwitch({onOpen, onClose, defaultChecked, checked, ariaLabel}: ToggleSwitchProps) {
     return (
         <label className="toggle-switch">
             <input
                 className="toggle-input"
                 type="checkbox"
+                aria-label={ariaLabel}
                 defaultChecked={defaultChecked}
                 checked={checked}
                 onChange={(e) => {

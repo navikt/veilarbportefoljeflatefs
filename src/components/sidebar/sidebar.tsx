@@ -191,6 +191,7 @@ function Sidebar(props: SidebarProps) {
                                 checked={isMinefiltereDraggable}
                                 onOpen={() => setIsMinefiltereDraggable(true)}
                                 onClose={() => setIsMinefiltereDraggable(false)}
+                                ariaLabel={'Endre rekkefølge'}
                             />
                         </>
                     }
