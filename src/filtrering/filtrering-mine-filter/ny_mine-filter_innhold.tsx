@@ -9,6 +9,8 @@ interface LagredeFilterInnholdProps {
     lagretFilter: MineFilter[];
     filtergruppe: string;
     fjernUtilgjengeligeFilter: (elem: MineFilter) => void;
+    isDraggable: boolean;
+    setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function isOverflown(element) {
@@ -17,7 +19,6 @@ function isOverflown(element) {
 
 function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
-    const [isDraggable, setisDraggable] = useState(false);
 
     const filtrertListe = () => {
         return props.lagretFilter.filter((elem) => props.fjernUtilgjengeligeFilter(elem));
@@ -33,7 +34,12 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const hentFiltrertListeinnhold = () => {
         return (
             <div className="ny__mine-filter__valgfelt" ref={outerDivRef}>
-                <DragAndDropContainer stateFilterOrder={filtrertListe()} filtergruppe={props.filtergruppe} />
+                <DragAndDropContainer
+                    stateFilterOrder={filtrertListe()}
+                    filtergruppe={props.filtergruppe}
+                    isDraggable={props.isDraggable}
+                    setisDraggable={props.setisDraggable}
+                />
             </div>
         );
     };

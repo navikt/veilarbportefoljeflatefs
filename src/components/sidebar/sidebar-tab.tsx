@@ -17,7 +17,7 @@ function SidebarTab(props: StatusTabProps) {
                 <div className="sidebar-header__tekst">
                     <Systemtittel className="blokk-m">{tittel}</Systemtittel>
                 </div>
-                {meta}
+                <div className="sidebar-header__meta">{meta}</div>
                 <div className="sidebar-header__lukknapp">
                     <Lukknapp overstHjorne onClick={handleClick} />
                 </div>

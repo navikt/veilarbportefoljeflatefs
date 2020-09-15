@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {
     SidebarTabInfo,
     SidebarTabInfo as SidebarTabType,
@@ -30,6 +30,7 @@ import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {PopoverOrientering} from 'nav-frontend-popover';
+import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggleSwitch/ToggleSwitch';
 
 interface Sidebar {
     type: SidebarTabType;
@@ -96,6 +97,7 @@ function sortMineFilter(a: MineFilter, b: MineFilter) {
 }
 
 function Sidebar(props: SidebarProps) {
+    const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
     const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
     const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
     const sidebarRef = useRef<HTMLDivElement>(null);
@@ -185,6 +187,11 @@ function Sidebar(props: SidebarProps) {
                                 {props.filtergruppe === ListevisningType.enhetensOversikt &&
                                     'Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt.'}
                             </Hjelpetekst>
+                            <ToggleSwitch
+                                checked={isMinefiltereDraggable}
+                                onOpen={() => setIsMinefiltereDraggable(true)}
+                                onClose={() => setIsMinefiltereDraggable(false)}
+                            />
                         </>
                     }
                 >
@@ -192,6 +199,8 @@ function Sidebar(props: SidebarProps) {
                         filtergruppe={props.filtergruppe}
                         fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
                         sortertMineFilter={mineFilter.sort(sortMineFilter)}
+                        isDraggable={isMinefiltereDraggable}
+                        setisDraggable={setIsMinefiltereDraggable}
                     />
                 </SidebarTab>
             );
