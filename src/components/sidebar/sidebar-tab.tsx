@@ -1,47 +1,25 @@
 import React from 'react';
 import {Systemtittel} from 'nav-frontend-typografi';
 import Lukknapp from 'nav-frontend-lukknapp';
-import hiddenIf from "../hidden-if/hidden-if";
-import {PopoverOrientering} from "nav-frontend-popover";
-import Hjelpetekst from "nav-frontend-hjelpetekst";
-import {MineFilter} from "../../ducks/mine-filter";
-import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface StatusTabProps {
     tittel: string;
     handleClick: () => void;
     children: React.ReactNode;
-    mineFilter?: MineFilter[];
-    fjernUtilgjengeligeFilter?: (elem: MineFilter) => void;
-    filtergruppe?: string;
+    meta?: React.ReactNode;
 }
 
-function SidebarTab({tittel, handleClick, children, mineFilter, fjernUtilgjengeligeFilter, filtergruppe}: StatusTabProps) {
-    const HiddenInfoIkon = hiddenIf(Hjelpetekst)
-
-    const filtrertListe = () => {
-        if (mineFilter && fjernUtilgjengeligeFilter) {
-            return mineFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
-        }
-    }
+function SidebarTab(props: StatusTabProps) {
+    const {tittel, handleClick, meta, children} = props;
     return (
         <>
             <div className="sidebar-header">
                 <div className="sidebar-header__tekst">
-                    <Systemtittel className="blokk-m" title={tittel}>
-                        {tittel}
-                    </Systemtittel>
+                    <Systemtittel className="blokk-m">{tittel}</Systemtittel>
                 </div>
-                {mineFilter && fjernUtilgjengeligeFilter &&
-                <HiddenInfoIkon type={PopoverOrientering.Venstre}
-                                hidden={filtrertListe()!.length === mineFilter.length}
-                >
-                    {filtergruppe === ListevisningType.minOversikt && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
-                    {filtergruppe === ListevisningType.enhetensOversikt && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}
-                </HiddenInfoIkon>
-                }
+                {meta}
                 <div className="sidebar-header__lukknapp">
-                    <Lukknapp overstHjorne onClick={handleClick}/>
+                    <Lukknapp overstHjorne onClick={handleClick} />
                 </div>
             </div>
             {children}

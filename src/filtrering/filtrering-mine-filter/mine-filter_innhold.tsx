@@ -1,14 +1,14 @@
-import React, { useEffect, useRef } from 'react';
-import { MineFilter } from '../../ducks/mine-filter';
+import React, {useEffect, useRef, useState} from 'react';
+import {MineFilter} from '../../ducks/mine-filter';
 import './mine-filter_innhold.less';
-import { PopoverOrientering } from 'nav-frontend-popover';
+import {PopoverOrientering} from 'nav-frontend-popover';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import hiddenIf from '../../components/hidden-if/hidden-if';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { useFeatureSelector } from '../../hooks/redux/use-feature-selector';
-import { REDESIGN } from '../../konstanter';
-import { useWindowWidth } from '../../hooks/use-window-width';
-import { ListevisningType } from '../../ducks/ui/listevisning';
+import {Normaltekst} from 'nav-frontend-typografi';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {REDESIGN} from '../../konstanter';
+import {useWindowWidth} from '../../hooks/use-window-width';
+import {ListevisningType} from '../../ducks/ui/listevisning';
 import DragAndDropContainer from './dragAndDrop/drag-and-drop-container';
 
 interface MineFilterInnholdProps {
@@ -24,6 +24,7 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
     const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
     const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
     const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
+    const [isDraggable, setisDraggable] = useState(false);
 
     const fjernUtilgjengeligeFilter = (elem) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
@@ -55,7 +56,12 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
     const hentFiltrertListeinnhold = () => {
         return (
             <div className="lagrede-filter__valgfelt" ref={outerDivRef}>
-                <DragAndDropContainer stateFilterOrder={filtrertListe()} filtergruppe={props.filtergruppe} />
+                <DragAndDropContainer
+                    stateFilterOrder={filtrertListe()}
+                    filtergruppe={props.filtergruppe}
+                    isDraggable={isDraggable}
+                    setisDraggable={setisDraggable}
+                />
             </div>
         );
     };

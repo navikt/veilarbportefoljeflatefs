@@ -1,20 +1,19 @@
-import {SidebarTabInfo} from "../store/sidebar/sidebar-view-store";
-import {logEvent} from "../utils/frontend-logger";
-import {finnSideNavn} from "../middleware/metrics-middleware";
+import {SidebarTabInfo} from '../store/sidebar/sidebar-view-store';
+import {logEvent} from '../utils/frontend-logger';
+import {finnSideNavn} from '../middleware/metrics-middleware';
 
 export const initialStateSidebar = {
     selectedTab: SidebarTabInfo.STATUS,
     isSidebarHidden: false
 };
 
-
 export default function sidebarReducer(state = initialStateSidebar, action) {
     switch (action.type) {
-        case "sidebarTabEndret":
+        case 'sidebarTabEndret':
             return {...state, selectedTab: action.selectedTab};
-        case "sidebarSkjult":
+        case 'sidebarSkjult':
             return {...state, isSidebarHidden: true};
-        case "sidebarVises":
+        case 'sidebarVises':
             return {...state, isSidebarHidden: false};
         default:
             return state;
@@ -22,11 +21,10 @@ export default function sidebarReducer(state = initialStateSidebar, action) {
 }
 
 export function skjulSidebar(listeoversikt: string) {
-    logEvent('portefolje.metrikker.sidebar-synlig',
-        {
-            sideNavn: finnSideNavn(),
-            erLukket: true
-        });
+    logEvent('portefolje.metrikker.sidebar-synlig', {
+        sideNavn: finnSideNavn(),
+        erLukket: true
+    });
     return {
         type: 'sidebarSkjult',
         name: listeoversikt
@@ -34,11 +32,10 @@ export function skjulSidebar(listeoversikt: string) {
 }
 
 export function visSidebar(listeoversikt: string) {
-    logEvent('portefolje.metrikker.sidebar-synlig',
-        {
-            sideNavn: finnSideNavn(),
-            erLukket: false
-        });
+    logEvent('portefolje.metrikker.sidebar-synlig', {
+        sideNavn: finnSideNavn(),
+        erLukket: false
+    });
     return {
         type: 'sidebarVises',
         name: listeoversikt

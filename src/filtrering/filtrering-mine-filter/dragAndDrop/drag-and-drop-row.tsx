@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from 'react';
-import { useEventListener } from '../../../hooks/use-event-listener';
-import { ReactComponent as DragIcon } from './dragIcon.svg';
-import { ReactComponent as PilAscending } from '../../../components/tabell/arrow-up.svg';
-import { ReactComponent as PilDescending } from '../../../components/tabell/arrow-down.svg';
+import React, {useRef, useEffect} from 'react';
+import {useEventListener} from '../../../hooks/use-event-listener';
+import {ReactComponent as DragIcon} from './dragIcon.svg';
+import {ReactComponent as PilAscending} from '../../../components/tabell/arrow-up.svg';
+import {ReactComponent as PilDescending} from '../../../components/tabell/arrow-down.svg';
 import classNames from 'classnames';
 
 export interface DragAndDropRowProps {

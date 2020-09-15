@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './ny_mine-filter-innhold.less';
 import '../../components/sidebar/sidebar.less';
-import { MineFilter } from '../../ducks/mine-filter';
-import { Normaltekst } from 'nav-frontend-typografi';
+import {MineFilter} from '../../ducks/mine-filter';
+import {Normaltekst} from 'nav-frontend-typografi';
 import DragAndDropContainer from './dragAndDrop/drag-and-drop-container';
 
 interface LagredeFilterInnholdProps {
@@ -17,6 +17,8 @@ function isOverflown(element) {
 
 function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
+    const [isDraggable, setisDraggable] = useState(false);
+
     const filtrertListe = () => {
         return props.lagretFilter.filter((elem) => props.fjernUtilgjengeligeFilter(elem));
     };
@@ -31,7 +33,12 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const hentFiltrertListeinnhold = () => {
         return (
             <div className="ny__mine-filter__valgfelt" ref={outerDivRef}>
-                <DragAndDropContainer stateFilterOrder={filtrertListe()} filtergruppe={props.filtergruppe} />
+                <DragAndDropContainer
+                    stateFilterOrder={filtrertListe()}
+                    filtergruppe={props.filtergruppe}
+                    isDraggable={isDraggable}
+                    setisDraggable={setisDraggable}
+                />
             </div>
         );
     };

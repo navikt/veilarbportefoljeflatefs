@@ -1,21 +1,21 @@
-import React, { useRef, useState } from 'react';
-import { useEventListener } from '../../../hooks/use-event-listener';
+import React, {useRef, useState} from 'react';
+import {useEventListener} from '../../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
 import NyMineFilterRad from '../ny_mine-filter-rad';
-import { useDispatch } from 'react-redux';
-import { lagreSorteringForFilter, MineFilter } from '../../../ducks/mine-filter';
-import { Checkbox } from 'nav-frontend-skjema';
-import { Hovedknapp, Flatknapp, Knapp } from 'nav-frontend-knapper';
+import {useDispatch} from 'react-redux';
+import {lagreSorteringForFilter, MineFilter} from '../../../ducks/mine-filter';
+import {Hovedknapp, Flatknapp, Knapp} from 'nav-frontend-knapper';
 
 export interface DragAndDropProps {
     stateFilterOrder: MineFilter[];
     filtergruppe: string;
+    isDraggable: boolean;
+    setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropProps) {
+function DragAndDropContainer({stateFilterOrder, filtergruppe, isDraggable, setisDraggable}: DragAndDropProps) {
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
-    const [isDraggable, setisDraggable] = useState(false);
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
     const [dropIndex, setDropIndex] = useState(-1);
@@ -43,7 +43,7 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
 
     const alfabetiskSort = () => {
         dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {
-            return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, { numeric: true });
+            return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
         });
         setAriaTekst('Filtre har blitt sortert i alfabetisk rekkefølge.');
         setDragAndDropOrder([...dragAndDropOrder]);
@@ -132,21 +132,9 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
     useEventListener('dragend', handleDragEnd);
     useEventListener('keyup', handleKeyUp);
 
-    let endreRekkefølgeCheckbox = (
-        <Checkbox
-            label={'Endre rekkefølge:'}
-            checked={isDraggable}
-            onChange={(e) => {
-                if (!e.target.checked) avbryt();
-                setisDraggable(e.target.checked);
-                setDropIndex(-1);
-            }}
-        />
-    );
     if (isDraggable) {
         return (
             <>
-                {endreRekkefølgeCheckbox}
                 <span aria-live="assertive" className="assistive-text">
                     {ariaTekst}
                 </span>
@@ -190,7 +178,6 @@ function DragAndDropContainer({ stateFilterOrder, filtergruppe }: DragAndDropPro
     }
     return (
         <>
-            {endreRekkefølgeCheckbox}
             <ul ref={dragContainer} className="drag-and-drop-container">
                 {dragAndDropOrder.map((filter, idx) => (
                     <NyMineFilterRad key={idx} filter={filter} filtergruppe={filtergruppe} />
