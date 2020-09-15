@@ -1,0 +1,94 @@
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 3.75rem;
+    height: 2.125rem;
+}
+
+.toggle-switch .toggle-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 2.125rem;
+}
+
+.switch-slider:before {
+    position: absolute;
+    content: '';
+    height: 1.625rem;
+    width: 1.625rem;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+.toggle-input:checked + .switch-slider {
+    background-color: #2196f3;
+}
+
+.toggle-input:focus + .switch-slider {
+    box-shadow: 0 0 1px #2196f3;
+}
+
+.toggle-input:checked + .switch-slider:before {
+    -webkit-transform: translateX(1.625rem);
+    -ms-transform: translateX(1.625rem);
+    transform: translateX(1.625rem);
+}
+
+.toggle-input:checked ~ .toggle-switch-lås-åpen {
+    visibility: visible;
+    animation-name: quick-fade;
+    animation-duration: 0.4s;
+}
+
+.toggle-input:not(:checked) ~ .toggle-switch-lås-lukked {
+    visibility: visible;
+    animation-name: quick-fade;
+    animation-duration: 0.4s;
+}
+
+.toggle-switch-lås {
+    cursor: pointer;
+}
+
+.toggle-switch-lås-åpen {
+    position: absolute;
+    top: 0.2rem;
+    left: 4px;
+    bottom: 4px;
+    visibility: hidden;
+}
+
+.toggle-switch-lås-lukked {
+    position: absolute;
+    top: 0.2rem;
+    left: 1.9rem;
+    bottom: 4px;
+    visibility: hidden;
+}
+
+@keyframes quick-fade {
+    0% {
+        visibility: hidden;
+    }
+
+    85% {
+        visibility: visible;
+    }
+}
