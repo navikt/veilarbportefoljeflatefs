@@ -7,40 +7,43 @@ export const initialStateSidebar = {
     isSidebarHidden: false
 };
 
+export const SIDEBAR_TAB_ENDRET = 'sidebarTabEndret';
+export const SIDEBAR_SKJULT = 'sidebarSkjult';
+export const SIDEBAR_VISES = 'sidebarVises';
 
 export default function sidebarReducer(state = initialStateSidebar, action) {
     switch (action.type) {
-        case "sidebarTabEndret":
-            return {...state, selectedTab: action.selectedTab};
-        case "sidebarSkjult":
+        case SIDEBAR_TAB_ENDRET:
+            return {selectedTab: action.selectedTab};
+        case SIDEBAR_SKJULT:
             return {...state, isSidebarHidden: true};
-        case "sidebarVises":
+        case SIDEBAR_VISES:
             return {...state, isSidebarHidden: false};
         default:
             return state;
     }
 }
 
-export function skjulSidebar(listeoversikt: string) {
-    logEvent('portefolje.metrikker.sidebar-synlig',
-        {
-            sideNavn: finnSideNavn(),
-            erLukket: true
-        });
+export function visSidebar(filtergruppe: string) {
+    logEvent("portefolje.metrikker.sidebar-synlig", {
+        sideNavn: finnSideNavn(),
+        isSidebarHidden: false
+    });
     return {
-        type: 'sidebarSkjult',
-        name: listeoversikt
+        type: SIDEBAR_VISES,
+        name: filtergruppe,
+        isSidebarHidden: false
     };
 }
 
-export function visSidebar(listeoversikt: string) {
-    logEvent('portefolje.metrikker.sidebar-synlig',
-        {
-            sideNavn: finnSideNavn(),
-            erLukket: false
-        });
+export function skjulSidebar(filtergruppe: string) {
+    logEvent("portefolje.metrikker.sidebar-synlig", {
+        sideNavn: finnSideNavn(),
+        isSidebarHidden: true
+    });
     return {
-        type: 'sidebarVises',
-        name: listeoversikt
+        type: SIDEBAR_SKJULT,
+        name: filtergruppe,
+        isSidebarHidden: true
     };
 }

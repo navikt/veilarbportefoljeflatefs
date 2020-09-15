@@ -6,6 +6,9 @@ import {PopoverOrientering} from "nav-frontend-popover";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 import {MineFilter} from "../../ducks/mine-filter";
 import {ListevisningType} from "../../ducks/ui/listevisning";
+import {logEvent} from "../../utils/frontend-logger";
+import {finnSideNavn} from "../../middleware/metrics-middleware";
+import {SidebarTabInfo} from "../../store/sidebar/sidebar-view-store";
 
 interface StatusTabProps {
     tittel: string;
@@ -14,9 +17,10 @@ interface StatusTabProps {
     mineFilter?: MineFilter[];
     fjernUtilgjengeligeFilter?: (elem: MineFilter) => void;
     filtergruppe?: string;
+    tab: SidebarTabInfo;
 }
 
-function SidebarTab({tittel, handleClick, children, mineFilter, fjernUtilgjengeligeFilter, filtergruppe}: StatusTabProps) {
+function SidebarTab({tittel, handleClick, children, mineFilter, fjernUtilgjengeligeFilter, filtergruppe, tab}: StatusTabProps) {
     const HiddenInfoIkon = hiddenIf(Hjelpetekst)
 
     const filtrertListe = () => {
@@ -24,6 +28,12 @@ function SidebarTab({tittel, handleClick, children, mineFilter, fjernUtilgjengel
             return mineFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
         }
     }
+
+    const lukkTab = () => {
+        logEvent('portefolje.metrikker.lukk-pa-kryss', {tab: tab, sideNavn: finnSideNavn()})
+        handleClick();
+    }
+
     return (
         <>
             <div className="sidebar-header">
@@ -41,7 +51,7 @@ function SidebarTab({tittel, handleClick, children, mineFilter, fjernUtilgjengel
                 </HiddenInfoIkon>
                 }
                 <div className="sidebar-header__lukknapp">
-                    <Lukknapp overstHjorne onClick={handleClick}/>
+                    <Lukknapp overstHjorne onClick={lukkTab}/>
                 </div>
             </div>
             {children}

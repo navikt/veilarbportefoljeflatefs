@@ -32,6 +32,7 @@ import {finnSideNavn} from "../../middleware/metrics-middleware";
 import useOutsideClick from "../../hooks/use-outside-click";
 import {useWindowWidth} from "../../hooks/use-window-width";
 import {skjulSidebar} from "../../ducks/sidebar-tab";
+import {SIDEBAR_TAB_ENDRET} from "../../ducks/sidebar-tab";
 
 interface Sidebar {
     type: SidebarTabType;
@@ -88,7 +89,6 @@ function Sidebar(props: SidebarProps) {
     const selectedTab = useSidebarViewStore(erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt)
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
-    const sidebarTabEndret = 'sidebarTabEndret';
     const dispatch = useDispatch();
     const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
     const mineFilter = mineFilterState.data;
@@ -102,7 +102,7 @@ function Sidebar(props: SidebarProps) {
 
         if (nyttLagretFilter || oppdatertLagretFilter) {
             dispatch({
-                type: sidebarTabEndret,
+                type: SIDEBAR_TAB_ENDRET,
                 selectedTab: SidebarTabInfo.MINE_FILTER,
                 name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
             })
@@ -111,14 +111,14 @@ function Sidebar(props: SidebarProps) {
 
     function handleOnTabClicked(tab: Sidebar) {
         dispatch({
-            type: sidebarTabEndret,
+            type: SIDEBAR_TAB_ENDRET,
             selectedTab: tab.type,
             name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
         })
         props.handleOnTabClicked(tab, selectedTab);
         logEvent('portefolje.metrikker.sidebar-tab', {
             tab: tab.type,
-            sideNavn: finnSideNavn()
+            sideNavn: finnSideNavn(),
         });
     }
 
@@ -143,6 +143,7 @@ function Sidebar(props: SidebarProps) {
         if ((selectedTabData as Sidebar).tittel === 'Status') {
             return <SidebarTab tittel="Status"
                                handleClick={props.lukkTab}
+                               tab={selectedTabData.type}
                                children={<NyFiltreringStatus
                                    filtergruppe={props.filtergruppe}
                                    filtervalg={props.filtervalg}/>
@@ -150,6 +151,7 @@ function Sidebar(props: SidebarProps) {
         } else if ((selectedTabData as Sidebar).tittel === 'Filter') {
             return <SidebarTab tittel="Filter"
                                handleClick={props.lukkTab}
+                               tab={selectedTabData.type}
                                children={<NyFiltreringFilter
                                    endreFiltervalg={doEndreFiltervalg}
                                    filtervalg={props.filtervalg}
@@ -158,12 +160,14 @@ function Sidebar(props: SidebarProps) {
         } else if ((selectedTabData as Sidebar).tittel === 'Veiledergrupper') {
             return <SidebarTab tittel="Veiledergrupper"
                                handleClick={props.lukkTab}
+                               tab={selectedTabData.type}
                                children={<NyFilteringVeilederGrupper
                                    filtergruppe={props.filtergruppe}/>
                                }/>;
         } else if ((selectedTabData as Sidebar).tittel === 'Mine filter') {
             return <SidebarTab tittel="Mine filter"
                                handleClick={props.lukkTab}
+                               tab={selectedTabData.type}
                                children={
                                    <NyFiltreringMineFilter filtergruppe={props.filtergruppe}
                                                            fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
@@ -201,6 +205,7 @@ function Sidebar(props: SidebarProps) {
 
     useOutsideClick(sidebarRef, () => {
         if (windowWidth < 1200 && !props.isSidebarHidden) {
+            logEvent('portefolje.metrikker.klikk-utenfor', {sideNavn: finnSideNavn()})
             dispatch(skjulSidebar(props.filtergruppe))
         }
     });
