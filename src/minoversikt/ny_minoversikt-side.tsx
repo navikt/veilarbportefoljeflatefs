@@ -37,6 +37,8 @@ import {useEffect, useState} from "react";
 import {useWindowWidth} from "../hooks/use-window-width";
 import NyToolbar from "../components/toolbar/ny_toolbar";
 import NyFiltreringNavnellerfnr from "../filtrering/ny_filtrering-navnellerfnr";
+import {logEvent} from "../utils/frontend-logger";
+import {finnSideNavn} from "../middleware/metrics-middleware";
 
 function Ny_MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -69,6 +71,8 @@ function Ny_MinoversiktSide() {
             dispatch(visSidebar(filtergruppe))
 
         } else if (tab.type === selectedTab.selectedTab) {
+            logEvent('portefolje.metrikker.lukk-pa-tab',
+                {tab: tab.type, sideNavn: finnSideNavn()})
             dispatch(skjulSidebar(filtergruppe))
         }
     };

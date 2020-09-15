@@ -36,6 +36,8 @@ import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal
 import {useWindowWidth} from "../hooks/use-window-width";
 import NyToolbar from "../components/toolbar/ny_toolbar";
 import NyFiltreringNavnellerfnr from "../filtrering/ny_filtrering-navnellerfnr";
+import {logEvent} from "../utils/frontend-logger";
+import {finnSideNavn} from "../middleware/metrics-middleware";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -87,6 +89,8 @@ function Ny_EnhetSide() {
             dispatch(visSidebar(filtergruppe))
 
         } else if (tab.type === selectedTab.selectedTab) {
+            logEvent('portefolje.metrikker.lukk-pa-tab',
+                {tab: tab.type, sideNavn: finnSideNavn()})
             dispatch(skjulSidebar(filtergruppe))
         }
     };

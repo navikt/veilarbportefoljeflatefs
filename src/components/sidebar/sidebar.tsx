@@ -118,7 +118,7 @@ function Sidebar(props: SidebarProps) {
         props.handleOnTabClicked(tab, selectedTab);
         logEvent('portefolje.metrikker.sidebar-tab', {
             tab: tab.type,
-            sideNavn: finnSideNavn()
+            sideNavn: finnSideNavn(),
         });
     }
 
@@ -143,6 +143,7 @@ function Sidebar(props: SidebarProps) {
         if ((selectedTabData as Sidebar).tittel === 'Status') {
             return <SidebarTab tittel="Status"
                                handleClick={props.lukkTab}
+                               tab={selectedTabData.type}
                                children={<NyFiltreringStatus
                                    filtergruppe={props.filtergruppe}
                                    filtervalg={props.filtervalg}/>
@@ -150,20 +151,23 @@ function Sidebar(props: SidebarProps) {
         } else if ((selectedTabData as Sidebar).tittel === 'Filter') {
             return <SidebarTab tittel="Filter"
                                handleClick={props.lukkTab}
+                               tab={selectedTabData.type}
                                children={<NyFiltreringFilter
-                                   endreFiltervalg={doEndreFiltervalg}
+                                                        endreFiltervalg={doEndreFiltervalg}
                                    filtervalg={props.filtervalg}
                                    enhettiltak={props.enhettiltak}/>
                                }/>;
         } else if ((selectedTabData as Sidebar).tittel === 'Veiledergrupper') {
             return <SidebarTab tittel="Veiledergrupper"
                                handleClick={props.lukkTab}
+                               tab={selectedTabData.type}
                                children={<NyFilteringVeilederGrupper
                                    filtergruppe={props.filtergruppe}/>
                                }/>;
         } else if ((selectedTabData as Sidebar).tittel === 'Mine filter') {
             return <SidebarTab tittel="Mine filter"
                                handleClick={props.lukkTab}
+                               tab={selectedTabData.type}
                                children={
                                    <NyFiltreringMineFilter filtergruppe={props.filtergruppe}
                                                            fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
@@ -201,6 +205,7 @@ function Sidebar(props: SidebarProps) {
 
     useOutsideClick(sidebarRef, () => {
         if (windowWidth < 1200 && !props.isSidebarHidden) {
+            logEvent('portefolje.metrikker.klikk-utenfor', {sideNavn: finnSideNavn()})
             dispatch(skjulSidebar(props.filtergruppe))
         }
     });
