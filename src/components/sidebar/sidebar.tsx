@@ -153,7 +153,7 @@ function Sidebar(props: SidebarProps) {
                                handleClick={props.lukkTab}
                                tab={selectedTabData.type}
                                children={<NyFiltreringFilter
-                                                        endreFiltervalg={doEndreFiltervalg}
+                                   endreFiltervalg={doEndreFiltervalg}
                                    filtervalg={props.filtervalg}
                                    enhettiltak={props.enhettiltak}/>
                                }/>;
