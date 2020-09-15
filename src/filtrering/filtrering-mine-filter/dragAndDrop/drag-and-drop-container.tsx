@@ -152,15 +152,25 @@ function DragAndDropContainer({
                 ))}
             </ul>
             <div className="drag-and-drop-knapper">
-                <Hovedknapp className="drag-and-drop-knapp-lagre" mini onClick={(e) => lagreRekkefølge()}>
+                <Hovedknapp
+                    className="drag-and-drop-knapp-lagre"
+                    aria-label="Lagre sortering."
+                    mini
+                    onClick={(e) => lagreRekkefølge()}
+                >
                     Lagre
                 </Hovedknapp>
-                <Knapp className="drag-and-drop-knapp-avbryt" mini onClick={(e) => avbryt()}>
+                <Knapp
+                    className="drag-and-drop-knapp-avbryt"
+                    aria-label="Avbryt sortering."
+                    mini
+                    onClick={(e) => avbryt()}
+                >
                     Avbryt
                 </Knapp>
                 <Flatknapp
                     className="drag-and-drop-knapp-nullstill"
-                    aria-label="Nullstill til alfabetisk sortering"
+                    aria-label="Nullstill til alfabetisk sortering."
                     mini
                     onClick={(e) => alfabetiskSort()}
                 >
