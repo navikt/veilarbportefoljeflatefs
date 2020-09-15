@@ -30,7 +30,11 @@ function SidebarTab({tittel, handleClick, children, mineFilter, fjernUtilgjengel
     }
 
     const lukkTab = () => {
-        logEvent('portefolje.metrikker.lukk-pa-kryss', {tab: tab, sideNavn: finnSideNavn()})
+        logEvent('portefolje.metrikker.lukk-pa-kryss',
+            {
+                tab: tab,
+                sideNavn: finnSideNavn()
+            })
         handleClick();
     }
 

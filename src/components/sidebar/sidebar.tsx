@@ -95,6 +95,7 @@ function Sidebar(props: SidebarProps) {
     const windowWidth = useWindowWidth();
     const sortertMineFilter = mineFilter.sort((a, b) => a.filterNavn.toLowerCase()
         .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
+    const isSidebarHidden = useSidebarViewStore(props.filtergruppe).isSidebarHidden;
 
     useEffect(() => {
         const nyttLagretFilter = mineFilterState.handlingType === HandlingsType.NYTT && mineFilterState.status === STATUS.OK;
@@ -119,6 +120,7 @@ function Sidebar(props: SidebarProps) {
         logEvent('portefolje.metrikker.sidebar-tab', {
             tab: tab.type,
             sideNavn: finnSideNavn(),
+            isSidebarHidden: isSidebarHidden
         });
     }
 
