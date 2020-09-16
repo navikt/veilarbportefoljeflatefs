@@ -30,12 +30,12 @@ function DragAndDropContainer({
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
 
-    useEffect(
-        () => () => {
-            onOnmount();
-        },
-        [onOnmount]
-    );
+    const onOnmountRef = React.useRef(onOnmount);
+    useEffect(() => {
+        onOnmountRef.current = onOnmount;
+    }, [onOnmount]);
+
+    useEffect(() => () => onOnmountRef.current(), []);
 
     const alfabetiskSort = () => {
         dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {

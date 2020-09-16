@@ -5,6 +5,7 @@ import {
     fjernLagreEndringerToast,
     fjernOpprettGruppeToast,
     fjernSletteGruppeToast,
+    fjernSorteringToast,
     ToastActionType
 } from '../../store/toast/actions';
 import hiddenIf from '../hidden-if/hidden-if';
@@ -42,6 +43,12 @@ function Toasts({toasts}: StateProps) {
                 toastTekst="Du har ikke gjort noen endringer"
                 alertstripe="info"
                 fjernToast={fjernIngenEndringerToast()}
+            />;
+        case ToastActionType.VIS_LAGRE_SORTERING_TOAST:
+            return <VeiledergruppeToast
+                toastTekst="Din sortering er lagret"
+                alertstripe="info"
+                fjernToast={fjernSorteringToast()}
             />;
 
         case ToastActionType.FJERN_OPPRETT_GRUPPE_TOAST:

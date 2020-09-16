@@ -23,6 +23,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
             filterId: filter.filterId
         }));
         if (!harSammeRekkefølge(dragAndDropOrder, stateFilterOrder)) {
+            dispatch({type: 'sortering_endre/OK'});
             dispatch(lagreSorteringForFilter(idAndPriorities));
         }
 
@@ -34,10 +35,13 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
         setisDraggable(false);
     };
 
+    const lagre = () => {
+        // Automatisk lagring på onUnmount.
+        setisDraggable(false);
+    };
+
     const onUnmount = () => {
-        if (!isDraggable) {
-            lagreRekkefølge();
-        }
+        lagreRekkefølge();
     };
 
     if (isDraggable) {
@@ -45,7 +49,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
             <DragAndDropContainer
                 dragAndDropOrder={dragAndDropOrder}
                 setDragAndDropOrder={setDragAndDropOrder}
-                lagreRekkefølge={lagreRekkefølge}
+                lagreRekkefølge={lagre}
                 avbryt={avbryt}
                 onUnmount={onUnmount}
             />
