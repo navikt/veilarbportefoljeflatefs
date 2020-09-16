@@ -78,7 +78,7 @@ export function NyFiltreringStatus(props: FiltreringStatusProps) {
                 />
                 <div className="permittering_checkboksgruppe">
                     <div className="hjelpetekst__wrapper">
-                        <Hjelpetekst id="hjelpetekst" type={PopoverOrientering.Venstre}>
+                        <Hjelpetekst id="hjelpetekst" type={PopoverOrientering.Hoyre}>
                             <p><b>Alle utenom permitterte etter 09.03.2020:</b> Alle brukere, uavhengig av situasjon
                                 ved registrering og tidspunkt for registrering, men ekskludert de som har registrert seg
                                 som permittert etter 9. mars 2020.

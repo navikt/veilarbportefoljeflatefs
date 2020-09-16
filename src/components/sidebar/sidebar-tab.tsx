@@ -47,7 +47,7 @@ function SidebarTab({tittel, handleClick, children, mineFilter, fjernUtilgjengel
                     </Systemtittel>
                 </div>
                 {mineFilter && fjernUtilgjengeligeFilter &&
-                <HiddenInfoIkon type={PopoverOrientering.Venstre}
+                <HiddenInfoIkon type={PopoverOrientering.Hoyre}
                                 hidden={filtrertListe()!.length === mineFilter.length}
                 >
                     {filtergruppe === ListevisningType.minOversikt && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
