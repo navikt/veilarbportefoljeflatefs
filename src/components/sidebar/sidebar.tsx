@@ -22,8 +22,6 @@ import {AppState} from "../../reducer";
 import {NyFiltreringStatus} from "../../filtrering/filtrering-status/ny_filtrering-status";
 import NyFiltreringFilter from "../../filtrering/ny_filtrering-filter";
 import NyFilteringVeilederGrupper from "../../filtrering/filtrering-veileder-grupper/ny_filtrering-veileder-grupper";
-import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
-import {MINE_FILTER} from "../../konstanter";
 import {ListevisningType} from "../../ducks/ui/listevisning";
 import {HandlingsType} from "../../ducks/mine-filter";
 import {STATUS} from "../../ducks/utils";
@@ -90,7 +88,6 @@ function Sidebar(props: SidebarProps) {
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const dispatch = useDispatch();
-    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
     const mineFilter = mineFilterState.data;
     const windowWidth = useWindowWidth();
     const sortertMineFilter = mineFilter.sort((a, b) => a.filterNavn.toLowerCase()
@@ -184,25 +181,11 @@ function Sidebar(props: SidebarProps) {
 
     const tabs = () => {
         const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
-        const visMineFilter = tab => tab.type === SidebarTabType.MINE_FILTER;
 
-        if (erPaMinOversikt) {
-            if (!erMineFilterFeatureTogglePa) {
-                return sidebar.filter(tab => !visVeiledergrupper(tab) && !visMineFilter(tab))
-                    .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
-            } else {
-                return sidebar.filter(tab => !visVeiledergrupper(tab))
-                    .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
-            }
-
-        } else if (erPaEnhetensOversikt) {
-            if (!erMineFilterFeatureTogglePa) {
-                return sidebar.filter(tab => !visMineFilter(tab))
-                    .map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
-            } else {
-                return sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
-            }
-        }
+        if (erPaMinOversikt)
+            return sidebar.filter(tab => !visVeiledergrupper(tab)).map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+        else if (erPaEnhetensOversikt)
+            return sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
     };
 
     useOutsideClick(sidebarRef, () => {

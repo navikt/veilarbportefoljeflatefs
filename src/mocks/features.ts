@@ -1,9 +1,8 @@
-import {SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE, REDESIGN, MINE_FILTER} from '../konstanter';
+import {SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE, REDESIGN} from '../konstanter';
 
 const toggles = {
     [SPOR_OM_TILBAKEMELDING]: true,
     [VEDTAKSTOTTE]: true,
-    [MINE_FILTER]: true,
     [REDESIGN]: true
 };
 
