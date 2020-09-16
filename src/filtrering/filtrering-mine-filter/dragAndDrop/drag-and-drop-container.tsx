@@ -4,6 +4,7 @@ import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
 import {MineFilter} from '../../../ducks/mine-filter';
 import {Hovedknapp, Flatknapp, Knapp} from 'nav-frontend-knapper';
+import {Element} from 'nav-frontend-typografi';
 
 export interface DragAndDropContainerProps {
     dragAndDropOrder: MineFilter[];
@@ -132,6 +133,7 @@ function DragAndDropContainer({
             <span aria-live="assertive" className="assistive-text">
                 {ariaTekst}
             </span>
+            <Element tag={'h3'}>Endre rekkefølge</Element>
             <ul ref={dragContainer} className="drag-and-drop-container" role={'listbox'}>
                 {dragAndDropOrder.map((filter, idx) => (
                     <DragAndDropRow
