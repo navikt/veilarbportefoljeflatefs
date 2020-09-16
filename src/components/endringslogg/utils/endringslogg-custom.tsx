@@ -35,7 +35,6 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '26. august 2020',
         tittel: 'Lagre filter',
         versjonId: '26.08.20',
-        featureToggleName: 'veilarbportefolje.lagrede_filter',
         tekst: 'Nå kan du lagre filter i oversikten. Dette kan være nyttig for å lage kombinasjoner av flere filter og som en snarvei til et filter du bruker ofte. Filtrene finner du i “Mine filter”.',
         children:
             <>

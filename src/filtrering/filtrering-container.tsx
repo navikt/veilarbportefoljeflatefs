@@ -12,10 +12,8 @@ import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
 import FiltreringMineFilter from "./filtrering-mine-filter/filtrering-mine-filter";
-import {MINE_FILTER} from "../konstanter";
 import {logEvent} from "../utils/frontend-logger";
 import {finnSideNavn} from "../middleware/metrics-middleware";
-import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 import {ListevisningType} from "../ducks/ui/listevisning";
 
 interface FiltreringContainerProps {
@@ -26,7 +24,6 @@ interface FiltreringContainerProps {
 
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {
     const dispatch = useDispatch();
-    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER)
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
@@ -64,7 +61,6 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 lamellNavn="mine-filter"
                 tittel="Mine filter"
                 onClick={klikkPaLagredeFilter}
-                hidden={!erMineFilterFeatureTogglePa}
                 className="mine-filter-wrapper"
             >
                 <FiltreringMineFilter filtergruppe={filtergruppe}/>

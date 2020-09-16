@@ -11,8 +11,6 @@ import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {useEffect} from "react";
 import {hentMineFilterForVeileder} from "../ducks/mine-filter";
-import {MINE_FILTER} from "../konstanter";
-import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -51,13 +49,11 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
     let kolonne: Kolonne | null;
 
     const dispatch = useDispatch();
-    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
 
     useEffect(() => {
-        if (erMineFilterFeatureTogglePa) {
-            dispatch(hentMineFilterForVeileder());
-        }
-    }, [dispatch, erMineFilterFeatureTogglePa])
+        dispatch(hentMineFilterForVeileder());
+
+    }, [dispatch])
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {

@@ -4,8 +4,7 @@ import {
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
-    REDESIGN,
-    MINE_FILTER
+    REDESIGN
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -18,7 +17,6 @@ const initalState: FeaturesState = {
     [SPOR_OM_TILBAKEMELDING]: false,
     [VEDTAKSTOTTE]: false,
     [REDESIGN]: false,
-    [MINE_FILTER]: false
 };
 
 // Reducer
