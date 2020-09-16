@@ -23,7 +23,7 @@ function DragAndDropContainer({
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
     const [dropIndex, setDropIndex] = useState(-1);
-    const [requestRowInFocuse, setRequestRowInFocuse] = useState(-1);
+    const [requestRowInFocuse, setRequestRowInFocuse] = useState(0);
     const [updateRequest, setUpdateRequest] = useState(false);
     const [ariaTekst, setAriaTekst] = useState('');
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
