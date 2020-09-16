@@ -1,42 +1,62 @@
 import * as React from 'react';
-import {Normaltekst, Undertittel} from 'nav-frontend-typografi';
-import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { VarselModal, VarselModalType } from './varselmodal/varselmodal';
 import './feilmelding-brukere.less';
-import {useState} from "react";
 
 interface ServerFeilModalProps {
-    isOpen: boolean;
+    isOpen?: boolean;
     onClose: () => void;
 }
 
-export default function ServerFeilModal(props: ServerFeilModalProps) {
-    const [isOpen, setIsOpen] = useState(props.isOpen);
+interface ServerFeilModalState {
+    isOpen: boolean;
+}
 
-    const lukkModal = () => {
-        props.onClose();
-        setIsOpen(false)
+class ServerFeilModal extends React.Component<ServerFeilModalProps, ServerFeilModalState> {
+    constructor(props) {
+        super(props);
+
+        this.state = {isOpen: this.props.isOpen || false};
+        this.lukkModal = this.lukkModal.bind(this);
     }
 
-    return (
-        <VarselModal
-            contentLabel="Fikk feil fra server"
-            isOpen={isOpen}
-            onRequestClose={lukkModal}
-            closeButton={false}
-            type={VarselModalType.FEIL}
-            portalClassName="tildeling-veileder-modal"
-        >
-            <div className="server-feil-modal">
-                <Undertittel tag="h1" className="blokk-xxs">
-                    Handlingen kan ikke utføres
-                </Undertittel>
-                <Normaltekst className="blokk-s">
-                    Noe gikk feil, prøv igjen senere.
-                </Normaltekst>
-                <button className="knapp knapp--hoved blokk-s" onClick={lukkModal}>
-                    Ok
-                </button>
-            </div>
-        </VarselModal>
-    );
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isOpen !== this.state.isOpen) {
+            this.setState({isOpen: nextProps.isOpen});
+        }
+    }
+
+    lukkModal() {
+        const {onClose} = this.props;
+        onClose();
+
+        this.setState({isOpen: false});
+    }
+
+    render() {
+        return (
+            <VarselModal
+                contentLabel="Fikk feil fra server"
+                isOpen={this.state.isOpen}
+                onRequestClose={this.lukkModal}
+                closeButton={false}
+                type={VarselModalType.FEIL}
+                portalClassName="tildeling-veileder-modal"
+            >
+                <div className="server-feil-modal">
+                    <Undertittel tag="h1" className="blokk-xxs">
+                        Handlingen kan ikke utføres
+                    </Undertittel>
+                    <Normaltekst className="blokk-s">
+                        Noe gikk feil, prøv igjen senere.
+                    </Normaltekst>
+                    <button className="knapp knapp--hoved blokk-s" onClick={this.lukkModal}>
+                        Ok
+                    </button>
+                </div>
+            </VarselModal>
+        );
+    }
 }
+
+export default ServerFeilModal;
