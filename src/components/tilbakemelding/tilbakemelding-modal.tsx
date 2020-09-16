@@ -89,7 +89,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         <div className="tilbakemelding-modal__kommentar">
                             <Textarea
                                 className="tilbakemelding-modal__kommentar-felt"
-                                label='Fortell gjerne litt mer om hvorfor'
+                                label='Fortell gjerne litt mer om hvorfor.'
                                 rows={this.KOMMENTAR_ROWS}
                                 maxLength={this.KOMMENTAR_MAX_CHAR}
                                 value={kommentar}
