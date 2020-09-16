@@ -66,14 +66,14 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
     renderForm = () => {
         const {tilfredshet, kommentar} = this.state;
         const harBesvartTilfredshet = tilfredshet > 0;
-        const visFritekst = false;
+        const visFritekst = true;
         return (
             <>
                 <Innholdstittel className="blokk-xxs tilbakemelding-modal__tittel">
-                    Tilbakemelding
+                    Den digitale dialogen
                 </Innholdstittel>
                 <Normaltekst className="tilbakemelding-modal__ingress">
-                    Hvor fornøyd er du med oversiktene (Min oversikt, Enhetens oversikt, Veilederoversikt)? Svarene er
+                    Vi gjør en kartlegging av dialogen. Hvor fornøyd er du med den digitale dialogen? Svarene er
                     anonyme.
                 </Normaltekst>
                 <div className="tilbakemelding-modal__tilfredshet">
@@ -89,7 +89,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                         <div className="tilbakemelding-modal__kommentar">
                             <Textarea
                                 className="tilbakemelding-modal__kommentar-felt"
-                                label='Hvorfor det? Svaret ditt er anonymt.'
+                                label='Fortell gjerne litt mer om hvorfor.'
                                 rows={this.KOMMENTAR_ROWS}
                                 maxLength={this.KOMMENTAR_MAX_CHAR}
                                 value={kommentar}
@@ -128,7 +128,6 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
     }
 
     render() {
-
         const {open} = this.props;
         const {harSendt, harBlittVist, ikkeVisIgjen} = this.state;
 
