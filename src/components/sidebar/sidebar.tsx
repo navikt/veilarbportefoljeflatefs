@@ -181,11 +181,9 @@ function Sidebar(props: SidebarProps) {
 
     const tabs = () => {
         const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
-
         if (erPaMinOversikt)
             return sidebar.filter(tab => !visVeiledergrupper(tab)).map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
-        else if (erPaEnhetensOversikt)
-            return sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+        return sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
     };
 
     useOutsideClick(sidebarRef, () => {
