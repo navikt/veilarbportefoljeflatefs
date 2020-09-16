@@ -156,7 +156,7 @@ function DragAndDropContainer({
             <div className="drag-and-drop-knapper">
                 <Hovedknapp
                     className="drag-and-drop-knapp-lagre"
-                    aria-label="Lagre sortering."
+                    aria-label="Lagre sortering"
                     mini
                     onClick={(e) => lagreRekkefølge()}
                 >
@@ -164,7 +164,7 @@ function DragAndDropContainer({
                 </Hovedknapp>
                 <Knapp
                     className="drag-and-drop-knapp-avbryt"
-                    aria-label="Avbryt sortering."
+                    aria-label="Avbryt sortering"
                     mini
                     onClick={(e) => avbryt()}
                 >
@@ -172,7 +172,7 @@ function DragAndDropContainer({
                 </Knapp>
                 <Flatknapp
                     className="drag-and-drop-knapp-nullstill"
-                    aria-label="Nullstill til alfabetisk sortering."
+                    aria-label="Nullstill til alfabetisk sortering"
                     mini
                     onClick={(e) => alfabetiskSort()}
                 >
