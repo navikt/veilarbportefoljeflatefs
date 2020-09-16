@@ -40,7 +40,7 @@ function NyMineFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
             <Radio
                 className="ny__mine-filter__filternavn"
                 key={filter.filterId}
-                name="lagretFilter"
+                name="mineFilter"
                 label={filter.filterNavn}
                 value={filter.filterId}
                 onChange={() => velgFilter()}
