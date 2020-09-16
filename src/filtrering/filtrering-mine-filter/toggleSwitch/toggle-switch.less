@@ -1,3 +1,5 @@
+@import '~nav-frontend-core/less/core';
+
 .toggle-switch {
     position: relative;
     display: inline-block;
@@ -19,8 +21,6 @@
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
     border-radius: 2.125rem;
 }
 
@@ -38,11 +38,12 @@
 }
 
 .toggle-input:checked + .switch-slider {
-    background-color: #2196f3;
+    background-color: @navBla;
 }
 
 .toggle-input:focus + .switch-slider {
-    box-shadow: 0 0 1px #2196f3;
+    border: 1px solid @fokusFarge;
+    box-shadow: 0 0 5px black;
 }
 
 .toggle-input:checked + .switch-slider:before {
