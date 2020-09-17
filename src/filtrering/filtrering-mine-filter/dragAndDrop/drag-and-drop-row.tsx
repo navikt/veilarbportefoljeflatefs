@@ -12,7 +12,15 @@ export interface DragAndDropRowProps {
     onClick: (from: number, to: number) => void;
 }
 
-function Fle({idx, filterNavn, isLastRow, shouldBeFocused, requestFocus, className, onClick}: DragAndDropRowProps) {
+function DragAndDropRow({
+    idx,
+    filterNavn,
+    isLastRow,
+    shouldBeFocused,
+    requestFocus,
+    className,
+    onClick
+}: DragAndDropRowProps) {
     const dragNode = useRef<HTMLLIElement>(null);
     useEffect(() => {
         if (shouldBeFocused) {
@@ -45,4 +53,4 @@ function Fle({idx, filterNavn, isLastRow, shouldBeFocused, requestFocus, classNa
     );
 }
 
-export default React.memo(Fle);
+export default React.memo(DragAndDropRow);

@@ -6,6 +6,8 @@ import {MineFilter} from '../../../ducks/mine-filter';
 import {Hovedknapp, Flatknapp, Knapp} from 'nav-frontend-knapper';
 import {Element} from 'nav-frontend-typografi';
 import classNames from 'classnames';
+import {handleDragEnter, handleDragEnd, handleDragStart, handleDragOver} from './mouse-drag-event-listeners';
+import {handleKeyUp, handleKeyDown} from './keyboard-event-listeners';
 
 export interface DragAndDropContainerProps {
     dragAndDropOrder: MineFilter[];
@@ -39,7 +41,7 @@ function DragAndDropContainer({
     }, [onOnmount, dragAndDropOrder]);
     useEffect(() => () => onOnmountRef.current(), []);
 
-    const eventIsInsideContainer = (e) => dragContainer.current && dragContainer.current.contains(e.target);
+    const eventIsInsideContainer = (e) => dragContainer.current !== null && dragContainer.current.contains(e.target);
 
     const alfabetiskSort = () => {
         dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {
@@ -84,40 +86,6 @@ function DragAndDropContainer({
         [dragAndDropOrderRef, setDragAndDropOrder]
     );
 
-    const handleDragEnter = (e) => {
-        if (eventIsInsideContainer(e)) {
-            setdDragIsInsideElement(true);
-        } else {
-            setdDragIsInsideElement(false);
-        }
-    };
-
-    const handleDragStart = (e) => {
-        if (eventIsInsideContainer(e)) {
-            setSrcIndex(e.target.value);
-        }
-    };
-
-    const handleDragEnd = (e) => {
-        if (dragIsInsideElement) {
-            requestNewOrder(srcIndex, destIndex);
-        }
-        setSrcIndex(-1);
-        setDestIndex(-1);
-    };
-
-    const handleOver = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (eventIsInsideContainer(e)) {
-            if (typeof e.target.value === 'number') {
-                setDestIndex(e.target.value);
-            }
-        } else {
-            setDestIndex(-1);
-        }
-    };
-
     const requestFocus = useCallback((row: number) => {
         if (row !== -1) setDropIndex(-1);
         setSrcIndex(-1);
@@ -125,64 +93,54 @@ function DragAndDropContainer({
         setRequestRowInFocuse(row);
     }, []);
 
-    const handleKeyDown = (e) => {
-        if (dragContainer.current && dragContainer.current.contains(e.target)) {
-            if (e.keyCode === 38 || e.keyCode === 40) {
-                e.preventDefault();
-                if (e.keyCode === 38) {
-                    if (e.altKey) {
-                        setSrcIndex(e.target.value);
-                        setDestIndex(e.target.value - 1);
-                    } else {
-                        requestFocus(e.target.value - 1);
-                    }
-                } else {
-                    if (e.altKey) {
-                        // CSS endring
-                        setSrcIndex(e.target.value);
-                        setDestIndex(e.target.value + 1);
-                    } else {
-                        requestFocus(e.target.value + 1);
-                    }
-                    setSrcIndex(e.target.value);
-                }
-                setDropIndex(-1);
-            } else if (e.keyCode === 32) e.preventDefault();
-        }
-    };
+    const prepFlyttOpp = useCallback((index: number) => {
+        setSrcIndex(index);
+        setDestIndex(index - 1);
+    }, []);
 
-    const handleKeyUp = (e) => {
-        if (dragContainer.current && dragContainer.current.contains(e.target)) {
-            if (e.altKey && (e.keyCode === 38 || e.keyCode === 40)) {
-                // Piltast opp og ned
-                if (e.keyCode === 38) {
-                    requestNewOrder(e.target.value, e.target.value - 1);
-                } else {
-                    requestNewOrder(e.target.value, e.target.value + 1);
-                }
-            } else if (e.keyCode === 32) {
-                // Space
-                setAriaTekst(
-                    'Bruk piltast opp eller ned for å velge et annet filter. Hold nede alt og press opp eller ned for å endre rekkefølgen til filter. Enter for å lagre. Escape for å avbryte.'
-                );
-            } else if (e.keyCode === 27) {
-                // Esc.
-                avbryt();
-            } else if (e.keyCode === 13) {
-                // Enter
-                lagreRekkefølge();
-            }
-            setDestIndex(-1);
-            setSrcIndex(-1);
-        }
-    };
+    const prepFlyttNed = useCallback((index: number) => {
+        setSrcIndex(index);
+        setDestIndex(index + 1);
+    }, []);
 
-    useEventListener('dragenter', handleDragEnter);
-    useEventListener('dragend', handleDragEnd);
-    useEventListener('keyup', handleKeyUp);
-    useEventListener('keydown', handleKeyDown);
-    useEventListener('dragover', handleOver);
-    useEventListener('dragstart', handleDragStart);
+    useEventListener(
+        'keyup',
+        handleKeyUp({
+            eventIsInsideContainer,
+            requestNewOrder,
+            lagreRekkefølge,
+            avbryt,
+            setAriaTekst,
+            setDestIndex,
+            setSrcIndex
+        })
+    );
+    useEventListener(
+        'keydown',
+        handleKeyDown({
+            eventIsInsideContainer,
+            setDropIndex,
+            prepFlyttOpp,
+            prepFlyttNed,
+            requestFocus
+        })
+    );
+
+    useEventListener('dragstart', handleDragStart({eventIsInsideContainer, setSrcIndex}));
+    useEventListener('dragenter', handleDragEnter({eventIsInsideContainer, setdDragIsInsideElement}));
+    useEventListener('dragover', handleDragOver({eventIsInsideContainer, setDestIndex}));
+    useEventListener(
+        'dragend',
+        handleDragEnd({
+            srcIndex,
+            destIndex,
+            dragIsInsideElement,
+            requestNewOrder,
+            setSrcIndex,
+            setDestIndex,
+            eventIsInsideContainer
+        })
+    );
 
     return (
         <>
