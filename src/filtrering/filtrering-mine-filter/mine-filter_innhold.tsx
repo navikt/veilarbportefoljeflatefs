@@ -11,6 +11,8 @@ import {useWindowWidth} from '../../hooks/use-window-width';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import DragAndDrop from './dragAndDrop/drag-and-drop';
 
+const HiddenHjelpetekst = hiddenIf(Hjelpetekst);
+
 interface MineFilterInnholdProps {
     mineFilter: MineFilter[];
     filtergruppe: string;
@@ -38,8 +40,6 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
             (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))
         );
     };
-
-    const HiddenHjelpetekst = hiddenIf(Hjelpetekst);
 
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {

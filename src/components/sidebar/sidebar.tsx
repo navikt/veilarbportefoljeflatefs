@@ -30,7 +30,7 @@ import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {PopoverOrientering} from 'nav-frontend-popover';
-import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggleSwitch/ToggleSwitch';
+import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggleSwitch/toggle-switch';
 
 interface Sidebar {
     type: SidebarTabType;

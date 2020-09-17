@@ -1,10 +1,11 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useRef, useState, useEffect, useCallback} from 'react';
 import {useEventListener} from '../../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
 import {MineFilter} from '../../../ducks/mine-filter';
 import {Hovedknapp, Flatknapp, Knapp} from 'nav-frontend-knapper';
 import {Element} from 'nav-frontend-typografi';
+import classNames from 'classnames';
 
 export interface DragAndDropContainerProps {
     dragAndDropOrder: MineFilter[];
@@ -25,17 +26,20 @@ function DragAndDropContainer({
     const [destIndex, setDestIndex] = useState(-1);
     const [dropIndex, setDropIndex] = useState(-1);
     const [requestRowInFocuse, setRequestRowInFocuse] = useState(0);
-    const [updateRequest, setUpdateRequest] = useState(false);
     const [ariaTekst, setAriaTekst] = useState('');
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
 
-    const onOnmountRef = React.useRef(onOnmount);
+    const onOnmountRef = useRef(onOnmount);
+    const dragAndDropOrderRef = useRef(dragAndDropOrder);
+
     useEffect(() => {
         onOnmountRef.current = onOnmount;
-    }, [onOnmount]);
-
+        dragAndDropOrderRef.current = dragAndDropOrder;
+    }, [onOnmount, dragAndDropOrder]);
     useEffect(() => () => onOnmountRef.current(), []);
+
+    const eventIsInsideContainer = (e) => dragContainer.current && dragContainer.current.contains(e.target);
 
     const alfabetiskSort = () => {
         dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {
@@ -45,61 +49,105 @@ function DragAndDropContainer({
         setDragAndDropOrder([...dragAndDropOrder]);
     };
 
-    const orderIsRequestedToChange = () => {
-        if (destIndex !== -1 && srcIndex !== -1 && destIndex < dragAndDropOrder.length) {
-            if (srcIndex < destIndex)
-                setAriaTekst(
-                    dragAndDropOrder[srcIndex].filterNavn +
-                        ' flyttet under ' +
-                        dragAndDropOrder[destIndex].filterNavn +
-                        ', til posisjon ' +
-                        (destIndex + 1) +
-                        '.'
-                );
-            else
-                setAriaTekst(
-                    dragAndDropOrder[srcIndex].filterNavn +
-                        ' flyttet over ' +
-                        dragAndDropOrder[destIndex].filterNavn +
-                        ', til posisjon ' +
-                        (destIndex + 1) +
-                        '.'
-                );
-            flyttElementIArray(dragAndDropOrder, srcIndex, destIndex);
+    const requestNewOrder = useCallback(
+        (from: number, to: number) => {
+            if (to !== from && to !== -1 && from !== -1 && to < dragAndDropOrderRef.current.length) {
+                if (from < to)
+                    setAriaTekst(
+                        dragAndDropOrderRef.current[from].filterNavn +
+                            ' flyttet under ' +
+                            dragAndDropOrderRef.current[to].filterNavn +
+                            ', til posisjon ' +
+                            (to + 1) +
+                            '.'
+                    );
+                else
+                    setAriaTekst(
+                        dragAndDropOrderRef.current[from].filterNavn +
+                            ' flyttet over ' +
+                            dragAndDropOrderRef.current[to].filterNavn +
+                            ', til posisjon ' +
+                            (to + 1) +
+                            '.'
+                    );
+                flyttElementIArray(dragAndDropOrderRef.current, from, to);
 
-            setDragAndDropOrder([...dragAndDropOrder]);
+                setDragAndDropOrder([...dragAndDropOrderRef.current]);
+                setDropIndex(to);
+                setRequestRowInFocuse(to);
+            } else {
+                setDropIndex(-1);
+            }
+            setSrcIndex(-1);
+            setDestIndex(-1);
+        },
+        [dragAndDropOrderRef, setDragAndDropOrder]
+    );
+
+    const handleDragEnter = (e) => {
+        if (eventIsInsideContainer(e)) {
+            setdDragIsInsideElement(true);
+        } else {
             setdDragIsInsideElement(false);
-            setDropIndex(destIndex);
-            setRequestRowInFocuse(destIndex);
         }
-        setSrcIndex(-1);
-        setDestIndex(-1);
     };
-
-    if (updateRequest) {
-        orderIsRequestedToChange();
-        setUpdateRequest(false);
-    }
 
     const handleDragStart = (e) => {
-        if (dragContainer.current && dragContainer.current.contains(e.target) && !dragIsInsideElement) {
-            setdDragIsInsideElement(true);
-            setDropIndex(-1);
-        }
-    };
-
-    const handleDragLeave = (e) => {
-        if (dragContainer.current && !dragContainer.current.contains(e.target) && dragIsInsideElement) {
-            setdDragIsInsideElement(false);
+        if (eventIsInsideContainer(e)) {
+            setSrcIndex(e.target.value);
         }
     };
 
     const handleDragEnd = (e) => {
         if (dragIsInsideElement) {
-            orderIsRequestedToChange();
+            requestNewOrder(srcIndex, destIndex);
+        }
+        setSrcIndex(-1);
+        setDestIndex(-1);
+    };
+
+    const handleOver = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (eventIsInsideContainer(e)) {
+            if (typeof e.target.value === 'number') {
+                setDestIndex(e.target.value);
+            }
         } else {
-            setSrcIndex(-1);
             setDestIndex(-1);
+        }
+    };
+
+    const requestFocus = useCallback((row: number) => {
+        if (row !== -1) setDropIndex(-1);
+        setSrcIndex(-1);
+        setDestIndex(-1);
+        setRequestRowInFocuse(row);
+    }, []);
+
+    const handleKeyDown = (e) => {
+        if (dragContainer.current && dragContainer.current.contains(e.target)) {
+            if (e.keyCode === 38 || e.keyCode === 40) {
+                e.preventDefault();
+                if (e.keyCode === 38) {
+                    if (e.altKey) {
+                        setSrcIndex(e.target.value);
+                        setDestIndex(e.target.value - 1);
+                    } else {
+                        requestFocus(e.target.value - 1);
+                    }
+                } else {
+                    if (e.altKey) {
+                        // CSS endring
+                        setSrcIndex(e.target.value);
+                        setDestIndex(e.target.value + 1);
+                    } else {
+                        requestFocus(e.target.value + 1);
+                    }
+                    setSrcIndex(e.target.value);
+                }
+                setDropIndex(-1);
+            } else if (e.keyCode === 32) e.preventDefault();
         }
     };
 
@@ -107,7 +155,11 @@ function DragAndDropContainer({
         if (dragContainer.current && dragContainer.current.contains(e.target)) {
             if (e.altKey && (e.keyCode === 38 || e.keyCode === 40)) {
                 // Piltast opp og ned
-                orderIsRequestedToChange();
+                if (e.keyCode === 38) {
+                    requestNewOrder(e.target.value, e.target.value - 1);
+                } else {
+                    requestNewOrder(e.target.value, e.target.value + 1);
+                }
             } else if (e.keyCode === 32) {
                 // Space
                 setAriaTekst(
@@ -120,13 +172,17 @@ function DragAndDropContainer({
                 // Enter
                 lagreRekkefølge();
             }
+            setDestIndex(-1);
+            setSrcIndex(-1);
         }
     };
 
-    useEventListener('dragenter', handleDragStart);
-    useEventListener('dragleave', handleDragLeave);
+    useEventListener('dragenter', handleDragEnter);
     useEventListener('dragend', handleDragEnd);
     useEventListener('keyup', handleKeyUp);
+    useEventListener('keydown', handleKeyDown);
+    useEventListener('dragover', handleOver);
+    useEventListener('dragstart', handleDragStart);
 
     return (
         <>
@@ -139,17 +195,18 @@ function DragAndDropContainer({
                     <DragAndDropRow
                         key={idx}
                         idx={idx}
-                        setIsDestination={setDestIndex}
-                        setIsSource={setSrcIndex}
-                        destIndex={destIndex}
-                        sourceIndex={srcIndex}
-                        dropIndex={dropIndex}
                         filterNavn={filter.filterNavn}
-                        setRequestRowInFocuse={setRequestRowInFocuse}
-                        setDropIndex={setDropIndex}
-                        setRequestUpdate={setUpdateRequest}
-                        shouldBeFocused={idx === requestRowInFocuse}
                         isLastRow={idx === dragAndDropOrder.length - 1}
+                        shouldBeFocused={idx === requestRowInFocuse}
+                        requestFocus={requestFocus}
+                        onClick={requestNewOrder}
+                        className={classNames({
+                            'drag-and-drop-row': true,
+                            dropped: dropIndex === idx,
+                            'drag-elem': srcIndex === idx,
+                            'over-from-above': destIndex === idx && srcIndex < destIndex,
+                            'over-from-below': destIndex === idx && srcIndex > destIndex
+                        })}
                     ></DragAndDropRow>
                 ))}
             </ul>
