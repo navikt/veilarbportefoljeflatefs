@@ -29,7 +29,7 @@ import classNames from 'classnames';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
-import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
+import {skjulSidebar} from "../ducks/sidebar-tab";
 import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "../minoversikt/ny_mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
@@ -74,6 +74,7 @@ function Ny_EnhetSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
     const windowWidth = useWindowWidth();
+    const id = "enhetens-oversikt";
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -81,15 +82,6 @@ function Ny_EnhetSide() {
     useFetchPortefolje(filtergruppe);
     useSetLocalStorageOnUnmount();
     useMineFilterController({filtergruppe: filtergruppe});
-
-    const handleOnTabClicked = (tab, selectedTab) => {
-        if (isSidebarHidden) {
-            dispatch(visSidebar(filtergruppe))
-
-        } else if (tab.type === selectedTab.selectedTab) {
-            dispatch(skjulSidebar(filtergruppe))
-        }
-    };
 
     const lukkTab = () => {
         dispatch(skjulSidebar(filtergruppe))
@@ -119,17 +111,23 @@ function Ny_EnhetSide() {
 
     return (
         <DocumentTitle title="Enhetens oversikt">
-            <div className="side-storrelse__ny">
+            <div className="side-storrelse__ny"
+                 role="tab"
+                 aria-controls={id}
+                 id={id}
+            >
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <div role="tabpanel"
-                         className={classNames('oversikt-sideinnhold__ny',
-                             isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}>
+                    <div
+                        className={classNames('oversikt-sideinnhold__ny', isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}
+                        role="tabpanel"
+                        aria-labelledby={id}
+                        id={id}
+                    >
                         <Sidebar
                             filtervalg={filtervalg}
                             filtergruppe={filtergruppe}
                             enhettiltak={tiltak}
-                            handleOnTabClicked={handleOnTabClicked}
                             isSidebarHidden={isSidebarHidden}
                             lukkTab={lukkTab}
                         />
