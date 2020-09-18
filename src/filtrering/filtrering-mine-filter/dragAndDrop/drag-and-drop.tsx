@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect, useCallback} from 'react';
 import './drag-and-drop.less';
 import {MineFilter, lagreSorteringForFilter} from '../../../ducks/mine-filter';
 import DragAndDropContainer from './drag-and-drop-container';
@@ -14,10 +14,9 @@ export interface DragAndDropProps {
 
 function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggable}: DragAndDropProps) {
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
-
     const dispatch = useDispatch();
 
-    const lagreRekkefølge = () => {
+    const lagreRekkefølge = useCallback(() => {
         const idAndPriorities = dragAndDropOrder.map((filter, idx) => ({
             sortOrder: idx,
             filterId: filter.filterId
@@ -26,11 +25,19 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
             dispatch({type: 'sortering_endre/OK'});
             dispatch(lagreSorteringForFilter(idAndPriorities));
         }
+        setisDraggable(false);
+    }, [dragAndDropOrder, stateFilterOrder, setisDraggable, dispatch]);
 
-        if (isDraggable) setisDraggable(false);
-    };
+    const onUnmountRef = useRef(() => {
+        lagreRekkefølge();
+    });
+
+    useEffect(() => {
+        onUnmountRef.current = () => lagreRekkefølge();
+    }, [lagreRekkefølge]);
 
     const avbryt = () => {
+        onUnmountRef.current = () => null;
         setDragAndDropOrder([...stateFilterOrder]);
         setisDraggable(false);
     };
@@ -40,10 +47,6 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
         setisDraggable(false);
     };
 
-    const onUnmount = () => {
-        lagreRekkefølge();
-    };
-
     if (isDraggable) {
         return (
             <DragAndDropContainer
@@ -51,7 +54,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
                 setDragAndDropOrder={setDragAndDropOrder}
                 lagreRekkefølge={lagre}
                 avbryt={avbryt}
-                onUnmount={onUnmount}
+                onUnmount={onUnmountRef}
             />
         );
     }

@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect, useCallback} from 'react';
+import React, {useRef, useState, useEffect, useCallback, MutableRefObject} from 'react';
 import {useEventListener} from '../../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
@@ -14,7 +14,7 @@ export interface DragAndDropContainerProps {
     setDragAndDropOrder: React.Dispatch<React.SetStateAction<MineFilter[]>>;
     lagreRekkefølge: () => void;
     avbryt: () => void;
-    onUnmount: () => void;
+    onUnmount: MutableRefObject<() => void>;
 }
 
 function DragAndDropContainer({
@@ -22,7 +22,7 @@ function DragAndDropContainer({
     setDragAndDropOrder,
     lagreRekkefølge,
     avbryt,
-    onUnmount: onOnmount
+    onUnmount
 }: DragAndDropContainerProps) {
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
@@ -31,17 +31,11 @@ function DragAndDropContainer({
     const [ariaTekst, setAriaTekst] = useState('');
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
-
-    const onOnmountRef = useRef(onOnmount);
     const dragAndDropOrderRef = useRef(dragAndDropOrder);
 
     useEffect(() => {
-        onOnmountRef.current = onOnmount;
         dragAndDropOrderRef.current = dragAndDropOrder;
-    }, [onOnmount, dragAndDropOrder]);
-    useEffect(() => () => onOnmountRef.current(), []);
-
-    const eventIsInsideContainer = (e) => dragContainer.current !== null && dragContainer.current.contains(e.target);
+    }, [dragAndDropOrder]);
 
     const alfabetiskSort = () => {
         dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {
@@ -93,6 +87,29 @@ function DragAndDropContainer({
         setRequestRowInFocuse(row);
     }, []);
 
+    //-------- Function call on unMount --------
+    useEffect(() => () => onUnmount.current(), [onUnmount]);
+
+    //-------- Drag and drop with mouse handeling --------
+    const eventIsInsideContainer = (e) => dragContainer.current !== null && dragContainer.current.contains(e.target);
+
+    useEventListener('dragstart', handleDragStart({eventIsInsideContainer, setSrcIndex}));
+    useEventListener('dragenter', handleDragEnter({eventIsInsideContainer, setdDragIsInsideElement}));
+    useEventListener('dragover', handleDragOver({eventIsInsideContainer, setDestIndex}));
+    useEventListener(
+        'dragend',
+        handleDragEnd({
+            srcIndex,
+            destIndex,
+            dragIsInsideElement,
+            requestNewOrder,
+            setSrcIndex,
+            setDestIndex,
+            eventIsInsideContainer
+        })
+    );
+
+    //-------- Keybord handeling --------
     const prepFlyttOpp = useCallback((index: number) => {
         setSrcIndex(index);
         setDestIndex(index - 1);
@@ -123,22 +140,6 @@ function DragAndDropContainer({
             prepFlyttOpp,
             prepFlyttNed,
             requestFocus
-        })
-    );
-
-    useEventListener('dragstart', handleDragStart({eventIsInsideContainer, setSrcIndex}));
-    useEventListener('dragenter', handleDragEnter({eventIsInsideContainer, setdDragIsInsideElement}));
-    useEventListener('dragover', handleDragOver({eventIsInsideContainer, setDestIndex}));
-    useEventListener(
-        'dragend',
-        handleDragEnd({
-            srcIndex,
-            destIndex,
-            dragIsInsideElement,
-            requestNewOrder,
-            setSrcIndex,
-            setDestIndex,
-            eventIsInsideContainer
         })
     );
 
