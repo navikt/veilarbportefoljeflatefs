@@ -8,6 +8,7 @@ import classNames from 'classnames';
 
 interface MinOversiktWrapperProps {
     className: string;
+    id: string;
 }
 
 export function NyMinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithChildren<{}>) {
@@ -22,9 +23,11 @@ export function NyMinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithC
 
     const veilederFraUrl = veiledere.find((veileder) => (veileder.ident === ident)) || {fornavn: '', etternavn: ''};
     return (
-        <div className={classNames(props.className,
-            visesAnnenVeiledersPortefolje ? 'annen-veileder' : '')}
-             id="oversikt-sideinnhold" role="tabpanel">
+        <div className={classNames(props.className, visesAnnenVeiledersPortefolje ? 'annen-veileder' : '')}
+             role="tabpanel"
+             aria-labelledby={props.id}
+             id={props.id}
+        >
             {visesAnnenVeiledersPortefolje &&
             <Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
                 {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}

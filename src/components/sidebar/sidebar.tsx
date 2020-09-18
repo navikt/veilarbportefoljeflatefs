@@ -13,24 +13,19 @@ import {ReactComponent as MineFilterIkon} from '../ikoner/tab_mine-filter.svg';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import SidebarTab from './sidebar-tab';
 import {useDispatch, useSelector} from 'react-redux';
-import {pagineringSetup} from '../../ducks/paginering';
-import {endreFiltervalg} from '../../ducks/filtrering';
-import NyFiltreringMineFilter from "../../filtrering/filtrering-mine-filter/ny_filtrering-mine-filter";
 import {AppState} from "../../reducer";
-import {NyFiltreringStatus} from "../../filtrering/filtrering-status/ny_filtrering-status";
-import NyFiltreringFilter from "../../filtrering/ny_filtrering-filter";
-import NyFilteringVeilederGrupper from "../../filtrering/filtrering-veileder-grupper/ny_filtrering-veileder-grupper";
 import {ListevisningType} from "../../ducks/ui/listevisning";
 import {HandlingsType} from "../../ducks/mine-filter";
 import {STATUS} from "../../ducks/utils";
 import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn} from "../../middleware/metrics-middleware";
-import useOutsideClick from "../../hooks/use-outside-click";
+import outsideClick from "../../hooks/use-outside-click";
 import {useWindowWidth} from "../../hooks/use-window-width";
-import {skjulSidebar} from "../../ducks/sidebar-tab";
+import {skjulSidebar, visSidebar} from "../../ducks/sidebar-tab";
 import {SIDEBAR_TAB_ENDRET} from "../../ducks/sidebar-tab";
+import {keyCodes} from "../../utils/utils";
+import Sidevelger from "./sidevelger";
 
 interface Sidebar {
     type: SidebarTabType;
@@ -42,11 +37,11 @@ const sidebar: Sidebar[] = [
     {
         type: SidebarTabType.STATUS,
         icon: <StatusIkon/>,
-        tittel: 'Status',
+        tittel: 'Status'
     }, {
         type: SidebarTabType.MINE_FILTER,
         icon: <MineFilterIkon/>,
-        tittel: 'Mine filter',
+        tittel: 'Mine filter'
     }, {
         type: SidebarTabType.VEILEDERGRUPPER,
         icon: <VeiledergruppeIkon/>,
@@ -58,41 +53,42 @@ const sidebar: Sidebar[] = [
     }
 ];
 
-function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar | undefined {
-    return tabs.find(t => t.type === viewType);
-}
-
-function mapTabTilView(tab: Sidebar, isSelected: boolean, onTabClicked: (tab: Sidebar) => void) {
-    const classes = classNames('sidebar__tab', {'sidebar__tab-valgt': isSelected});
-    return (
-        <button className={classes} onClick={() => onTabClicked(tab)} key={tab.type}>
-            <div className="sidebar__tab-ikon">{tab.icon}</div>
-        </button>
-    );
-}
-
 interface SidebarProps {
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
     filtergruppe: string;
     isSidebarHidden: boolean;
-    handleOnTabClicked: (tab: Sidebar, selectedTab: SidebarTabInfo) => void;
     lukkTab: () => void
 }
 
 function Sidebar(props: SidebarProps) {
     const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
-    const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
     const sidebarRef = useRef<HTMLDivElement>(null);
     const selectedTab = useSidebarViewStore(erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt)
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const dispatch = useDispatch();
-    const mineFilter = mineFilterState.data;
     const windowWidth = useWindowWidth();
-    const sortertMineFilter = mineFilter.sort((a, b) => a.filterNavn.toLowerCase()
-        .localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true}));
     const isSidebarHidden = useSidebarViewStore(props.filtergruppe).isSidebarHidden;
+
+    const tabFocus = () => {
+        if (erPaMinOversikt) {
+            if (selectedTabData.type === "STATUS") return 0;
+            else if (selectedTabData.type === "MINE_FILTER") return 1;
+            else if (selectedTabData.type === "FILTER") return 2;
+
+        } else {
+            if (selectedTabData.type === "STATUS") return 0;
+            else if (selectedTabData.type === "MINE_FILTER") return 1;
+            else if (selectedTabData.type === "VEILEDERGRUPPER") return 2;
+            else if (selectedTabData.type === "FILTER") return 3;
+        }
+        return 0;
+    }
+
+    let tabFoc = tabFocus();
+
+    const keyCode = (e) => e.which || e.keyCode;
 
     useEffect(() => {
         const nyttLagretFilter = mineFilterState.handlingType === HandlingsType.NYTT && mineFilterState.status === STATUS.OK;
@@ -107,13 +103,78 @@ function Sidebar(props: SidebarProps) {
         }
     }, [dispatch, erPaMinOversikt, mineFilterState.handlingType, mineFilterState.status])
 
-    function handleOnTabClicked(tab: Sidebar) {
+    function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar {
+        return tabs.find(t => t.type === viewType) as Sidebar;
+    }
+
+    const mapTabTilView = (tab: Sidebar, isSelected: boolean,) => {
+        return (
+            <button className={classNames('sidebar__tab', {'sidebar__tab-valgt': isSelected})}
+                    onClick={(e) => handleMouseClick(e, tab)}
+                    role="tab"
+                    aria-selected={!isSidebarHidden && isSelected}
+                    aria-controls={tab.type}
+                    id={tab.type}
+                    tabIndex={(!isSelected && -1) || 0}
+                    onKeyUp={e => handleKeyUp(e, tab)}
+            >
+                <div className="sidebar__tab-ikon">{tab.icon}</div>
+            </button>
+        );
+    }
+
+    function handleKeyUp(e, tab) {
+        const sidebarTabs = document.querySelectorAll('button.sidebar__tab');
+        e.preventDefault();
+
+        if (keyCode(e) === keyCodes.space) {
+            handleOnTabClicked(e, tab);
+        } else if (keyCode(e) === keyCodes.right || keyCode(e) === keyCodes.left) {
+            sidebarTabs[tabFoc].setAttribute("tabindex", "-1");
+            sidebarTabs[tabFoc].setAttribute("className", "sidebar__tab");
+            sidebarTabs[tabFoc].setAttribute("aria-selected", "false");
+
+            if (keyCode(e) === keyCodes.right) {
+                tabFoc++;
+                // Hvis vi er i enden av tabpanelet, gå til starten
+                if (tabFoc >= Tabs().length) {
+                    tabFoc = 0;
+                }
+            } else if (keyCode(e) === keyCodes.left) {
+                tabFoc--;
+                // Hvis vi er i starten av tabpanelet, gå til enden
+                if (tabFoc < 0) {
+                    tabFoc = Tabs().length - 1;
+                }
+            }
+            sidebarTabs[tabFoc].setAttribute("tabindex", "0");
+            sidebarTabs[tabFoc].setAttribute("className", "sidebar__tab sidebar__tab-valgt");
+            sidebarTabs[tabFoc].setAttribute("aria-selected", "true");
+
+            // @ts-ignore
+            sidebarTabs[tabFoc].focus();
+        }
+    }
+
+    function handleMouseClick(e, tab: Sidebar) {
+        e.preventDefault();
+        handleOnTabClicked(e, tab)
+    }
+
+    function handleOnTabClicked(e, tab: Sidebar) {
         dispatch({
             type: SIDEBAR_TAB_ENDRET,
             selectedTab: tab.type,
             name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
         })
-        props.handleOnTabClicked(tab, selectedTab);
+
+        if (isSidebarHidden) {
+            dispatch(visSidebar(props.filtergruppe))
+
+        } else if (tab.type === selectedTab.selectedTab) {
+            dispatch(skjulSidebar(props.filtergruppe))
+        }
+
         logEvent('portefolje.metrikker.sidebar-tab', {
             tab: tab.type,
             sideNavn: finnSideNavn(),
@@ -121,72 +182,21 @@ function Sidebar(props: SidebarProps) {
         });
     }
 
-    const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
-        dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, props.filtergruppe));
-    };
-
-    const fjernUtilgjengeligeFilter = (elem) => {
-        const arbeidsliste = elem.filterValg.ferdigfilterListe.includes("MIN_ARBEIDSLISTE");
-        const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
-        const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
-
-        const veiledergrupper = elem.filterValg.veiledere.length > 0;
-        const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
-
-        return !((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere))
-            || (erPaMinOversikt && (veiledergrupper || ufordelteBrukere)));
-    }
-
-    function sidevelger(selectedTabData) {
-        if ((selectedTabData as Sidebar).tittel === 'Status') {
-            return <SidebarTab tittel="Status"
-                               handleClick={props.lukkTab}
-                               tab={selectedTabData.type}
-                               children={<NyFiltreringStatus
-                                   filtergruppe={props.filtergruppe}
-                                   filtervalg={props.filtervalg}/>
-                               }/>;
-        } else if ((selectedTabData as Sidebar).tittel === 'Filter') {
-            return <SidebarTab tittel="Filter"
-                               handleClick={props.lukkTab}
-                               tab={selectedTabData.type}
-                               children={<NyFiltreringFilter
-                                   endreFiltervalg={doEndreFiltervalg}
-                                   filtervalg={props.filtervalg}
-                                   enhettiltak={props.enhettiltak}/>
-                               }/>;
-        } else if ((selectedTabData as Sidebar).tittel === 'Veiledergrupper') {
-            return <SidebarTab tittel="Veiledergrupper"
-                               handleClick={props.lukkTab}
-                               tab={selectedTabData.type}
-                               children={<NyFilteringVeilederGrupper
-                                   filtergruppe={props.filtergruppe}/>
-                               }/>;
-        } else if ((selectedTabData as Sidebar).tittel === 'Mine filter') {
-            return <SidebarTab tittel="Mine filter"
-                               handleClick={props.lukkTab}
-                               tab={selectedTabData.type}
-                               children={
-                                   <NyFiltreringMineFilter filtergruppe={props.filtergruppe}
-                                                           fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
-                                                           sortertMineFilter={sortertMineFilter}/>
-                               }
-                               mineFilter={sortertMineFilter}
-                               fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
-                               filtergruppe={props.filtergruppe}
-            />
-        }
-    }
-
-    const tabs = () => {
+    const Tabs = () => {
         const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
-        if (erPaMinOversikt)
-            return sidebar.filter(tab => !visVeiledergrupper(tab)).map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
-        return sidebar.map(tab => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked));
+        if (erPaMinOversikt) {
+            return sidebar.filter(tab => !visVeiledergrupper(tab)).map(tab =>
+                mapTabTilView(tab,
+                    tab.type === (selectedTabData as Sidebar).type
+                ))
+        }
+        return sidebar.map(tab =>
+            mapTabTilView(tab,
+                tab.type === (selectedTabData as Sidebar).type
+            ))
     };
 
-    useOutsideClick(sidebarRef, () => {
+    outsideClick(sidebarRef, () => {
         if (windowWidth < 1200 && !props.isSidebarHidden) {
             logEvent('portefolje.metrikker.klikk-utenfor', {sideNavn: finnSideNavn()})
             dispatch(skjulSidebar(props.filtergruppe))
@@ -195,17 +205,31 @@ function Sidebar(props: SidebarProps) {
 
     return (
         <div ref={sidebarRef}
-             className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden')}>
-            <div className="sidebar__tab-container">
-                {tabs()}
-            </div>
-            <div
-                className='sidebar__content-container'
-                hidden={props.isSidebarHidden}
+             className={classNames('sidebar',
+                 props.isSidebarHidden && 'sidebar__hidden', 'tabs')}>
+            <div className="sidebar__tab-container"
+                 role="tablist"
+                 aria-label="Faner for filtrering"
+                 aria-labelledby={selectedTabData.type}
             >
-                {sidevelger(selectedTabData)}
+                {Tabs()}
+            </div>
+            <div className='sidebar__content-container'
+                 role="tabpanel"
+                 hidden={isSidebarHidden}
+                 aria-labelledby={selectedTabData.type}
+                 id={selectedTabData.type}
+                 tabIndex={0}
+            >
+                {Sidevelger(
+                    selectedTabData,
+                    props.lukkTab,
+                    props.filtergruppe,
+                    props.filtervalg,
+                    props.enhettiltak)}
             </div>
         </div>
+
     );
 }
 

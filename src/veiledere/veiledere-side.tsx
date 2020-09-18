@@ -50,7 +50,10 @@ function VeiledereSide() {
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
                     <section>
-                        <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
+                        <div id="veileder-oversikt"
+                             role="tabpanel"
+                             className="oversikt-sideinnhold"
+                             aria-labelledby="veileder-oversikt">
                             <div className="status-filter-kolonne">
                                 <PanelBase className="blokk-xxxs sok-veileder">
                                     <Undertittel>

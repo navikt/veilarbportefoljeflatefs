@@ -1,4 +1,4 @@
-import { AktiviteterModell } from '../model-interfaces';
+import {AktiviteterModell} from '../model-interfaces';
 import {Maybe} from "./types";
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
@@ -84,3 +84,18 @@ export default function TittelValg(ytelseSorteringHeader) {
     }
     return '';
 }
+
+export const keyCodes = {
+    tab: 9,
+    enter: 13,
+    space: 32,
+    pageup: 33,
+    pagedown: 34,
+    end: 35,
+    home: 36,
+    left: 37,
+    up: 38,
+    right: 39,
+    down: 40,
+    esc: 27
+};

@@ -32,7 +32,7 @@ import {NyMinOversiktWrapper} from "./ny_min_oversikt_wrapper";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 import {useMineFilterController} from "./use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "./ny_mine-filter-lagre-filter-knapp";
-import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
+import {skjulSidebar} from "../ducks/sidebar-tab";
 import {useEffect, useState} from "react";
 import {useWindowWidth} from "../hooks/use-window-width";
 import NyToolbar from "../components/toolbar/ny_toolbar";
@@ -58,19 +58,11 @@ function Ny_MinoversiktSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
     const windowWidth = useWindowWidth();
+    const id = "min-oversikt";
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
-    };
-
-    const handleOnTabClicked = (tab, selectedTab) => {
-        if (isSidebarHidden) {
-            dispatch(visSidebar(filtergruppe))
-
-        } else if (tab.type === selectedTab.selectedTab) {
-            dispatch(skjulSidebar(filtergruppe))
-        }
     };
 
     const lukkTab = () => {
@@ -96,17 +88,21 @@ function Ny_MinoversiktSide() {
 
     return (
         <DocumentTitle title="Min oversikt">
-            <div className="side-storrelse__ny">
+            <div className="side-storrelse__ny"
+                 role="tab"
+                 aria-controls={id}
+                 id={id}
+            >
                 <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje}/>
                 <Innholdslaster avhengigheter={[statustall]}>
                     <NyMinOversiktWrapper
-                        className={classNames('oversikt-sideinnhold__ny portefolje-side__ny',
-                            isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}>
+                        className={classNames('oversikt-sideinnhold__ny portefolje-side__ny', isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}
+                        id={id}
+                    >
                         <Sidebar
                             filtervalg={filtervalg}
                             filtergruppe={filtergruppe}
                             enhettiltak={tiltak}
-                            handleOnTabClicked={handleOnTabClicked}
                             isSidebarHidden={isSidebarHidden}
                             lukkTab={lukkTab}
                         />
