@@ -1,7 +1,7 @@
 @import '~nav-frontend-core/less/core';
 
 @main-width: 2.9rem;
-@main-higth: 1.5rem;
+@main-higth: 1.6rem;
 .toggle-switch {
     position: relative;
     display: inline-block;
@@ -32,7 +32,7 @@
     height: @main-higth * 0.76;
     width: @main-higth * 0.76;
     left: 4px;
-    bottom: 2px;
+    bottom: 3px;
     background-color: white;
     -webkit-transition: 0.4s;
     transition: 0.4s;
@@ -49,9 +49,9 @@
 }
 
 .toggle-input:checked + .switch-slider:before {
-    -webkit-transform: translateX(1.323rem);
-    -ms-transform: translateX(1.323rem);
-    transform: translateX(1.323rem);
+    -webkit-transform: translateX(1.223rem);
+    -ms-transform: translateX(1.223rem);
+    transform: translateX(1.223rem);
 }
 
 .toggle-input:checked ~ .toggle-switch-lås-åpen {
@@ -81,7 +81,7 @@
 .toggle-switch-lås-lukked {
     position: absolute;
     top: 0.2rem;
-    left: @main-width * 0.5;
+    left: @main-width * 0.53;
     bottom: @main-higth * 0.12;
     visibility: hidden;
 }
