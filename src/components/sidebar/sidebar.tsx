@@ -69,7 +69,6 @@ function Sidebar(props: SidebarProps) {
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const dispatch = useDispatch();
     const windowWidth = useWindowWidth();
-
     const isSidebarHidden = useSidebarViewStore(props.filtergruppe).isSidebarHidden;
 
     const tabFocus = () => {
@@ -128,7 +127,6 @@ function Sidebar(props: SidebarProps) {
         const sidebarTabs = document.querySelectorAll('button.sidebar__tab');
         e.preventDefault();
 
-        console.log(tabFoc)
         if (keyCode(e) === keyCodes.space) {
             handleOnTabClicked(e, tab);
         } else if (keyCode(e) === keyCodes.right || keyCode(e) === keyCodes.left) {
