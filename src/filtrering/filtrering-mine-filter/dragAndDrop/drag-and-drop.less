@@ -93,7 +93,7 @@
     visibility: visible;
     align-self: baseline;
     margin-right: 1rem;
-    margin-top: 0.2rem;
+    margin-top: 0.3em;
 }
 
 .flytt-knapper {
@@ -105,6 +105,10 @@
     padding-right: 0.5rem;
     padding-left: 0.5rem;
     pointer-events: none;
+    border-radius: @border-radius-large;
+    border-style: solid;
+    border-width: 2px;
+    border-color: transparent;
 }
 
 .drag-and-drop-row #Symbols {
@@ -125,9 +129,6 @@
 }
 
 .drag-and-drop-row:focus .flytt-knapp:hover {
-    border-style: solid;
-    border-width: 2px;
-    border-radius: @border-radius-large;
     border-color: @navBla;
     pointer-events: auto;
 }
