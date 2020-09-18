@@ -21,7 +21,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
             sortOrder: idx,
             filterId: filter.filterId
         }));
-        if (!harSammeRekkefølge(dragAndDropOrder, stateFilterOrder)) {
+        if (harEndretRekkefølge(dragAndDropOrder, stateFilterOrder)) {
             dispatch({type: 'sortering_endre/OK'});
             dispatch(lagreSorteringForFilter(idAndPriorities));
         }
@@ -68,8 +68,8 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     );
 }
 
-function harSammeRekkefølge(a: MineFilter[], b: MineFilter[]) {
-    return (
+function harEndretRekkefølge(a: MineFilter[], b: MineFilter[]) {
+    return !(
         Array.isArray(a) &&
         Array.isArray(b) &&
         a.length === b.length &&
