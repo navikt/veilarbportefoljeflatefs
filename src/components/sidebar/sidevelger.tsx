@@ -39,7 +39,7 @@ function Sidevelger(selectedTabData, lukkTab, filtergruppe, filtervalg, enhettil
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
 
-    const fjernUtilgjengeligeFilter = (elem) => {
+    const fjernUtilgjengeligeFilter = (elem: MineFilter) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
         const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes('NYE_BRUKERE_FOR_VEILEDER');

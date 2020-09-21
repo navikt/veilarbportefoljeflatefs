@@ -1,9 +1,5 @@
-import React, {useRef, useEffect} from 'react';
-import {
-    SidebarTabInfo,
-    SidebarTabInfo as SidebarTabType,
-    useSidebarViewStore
-} from '../../store/sidebar/sidebar-view-store';
+import React, {useRef} from 'react';
+import {SidebarTabInfo as SidebarTabType, useSidebarViewStore} from '../../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import './sidebar.less';
 import {ReactComponent as StatusIkon} from '../ikoner/tab_status.svg';
@@ -13,11 +9,8 @@ import {ReactComponent as MineFilterIkon} from '../ikoner/tab_mine-filter.svg';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppState} from '../../reducer';
+import {useDispatch} from 'react-redux';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import {HandlingsType} from '../../ducks/mine-filter';
-import {STATUS} from '../../ducks/utils';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import outsideClick from '../../hooks/use-outside-click';
@@ -70,7 +63,6 @@ function Sidebar(props: SidebarProps) {
         erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
     );
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
-    const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const dispatch = useDispatch();
     const windowWidth = useWindowWidth();
     const isSidebarHidden = useSidebarViewStore(props.filtergruppe).isSidebarHidden;
@@ -92,21 +84,6 @@ function Sidebar(props: SidebarProps) {
     let tabFoc = tabFocus();
 
     const keyCode = (e) => e.which || e.keyCode;
-
-    useEffect(() => {
-        const nyttLagretFilter =
-            mineFilterState.handlingType === HandlingsType.NYTT && mineFilterState.status === STATUS.OK;
-        const oppdatertLagretFilter =
-            mineFilterState.handlingType === HandlingsType.REDIGERE && mineFilterState.status === STATUS.OK;
-
-        if (nyttLagretFilter || oppdatertLagretFilter) {
-            dispatch({
-                type: SIDEBAR_TAB_ENDRET,
-                selectedTab: SidebarTabInfo.MINE_FILTER,
-                name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
-            });
-        }
-    }, [dispatch, erPaMinOversikt, mineFilterState.handlingType, mineFilterState.status]);
 
     function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar {
         return tabs.find((t) => t.type === viewType) as Sidebar;
