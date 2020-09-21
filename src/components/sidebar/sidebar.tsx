@@ -124,7 +124,7 @@ function Sidebar(props: SidebarProps) {
     }
 
     function handleKeyUp(e, tab) {
-        const sidebarTabs = document.querySelectorAll('button.sidebar__tab');
+        const sidebarTabs: NodeListOf<HTMLDivElement> = document.querySelectorAll('button.sidebar__tab');
         e.preventDefault();
 
         if (keyCode(e) === keyCodes.space) {
@@ -151,7 +151,6 @@ function Sidebar(props: SidebarProps) {
             sidebarTabs[tabFoc].setAttribute("className", "sidebar__tab sidebar__tab-valgt");
             sidebarTabs[tabFoc].setAttribute("aria-selected", "true");
 
-            // @ts-ignore
             sidebarTabs[tabFoc].focus();
         }
     }
