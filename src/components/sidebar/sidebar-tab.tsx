@@ -52,8 +52,7 @@ function SidebarTab({tittel, handleClick, children, mineFilter, fjernUtilgjengel
                 >
                     {filtergruppe === ListevisningType.minOversikt && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
                     {filtergruppe === ListevisningType.enhetensOversikt && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}
-                </HiddenInfoIkon>
-                }
+                </HiddenInfoIkon>}
                 <div className="sidebar-header__lukknapp">
                     <Lukknapp overstHjorne onClick={lukkTab}/>
                 </div>

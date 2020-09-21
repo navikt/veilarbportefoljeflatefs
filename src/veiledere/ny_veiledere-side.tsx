@@ -31,7 +31,7 @@ function Ny_veiledereSide() {
     const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.veilederOversikt));
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
-
+    const id = "veileder-oversikt";
     useSetEnhetIUrl();
 
     useOnMount(() => {
@@ -45,10 +45,20 @@ function Ny_veiledereSide() {
 
     return (
         <DocumentTitle title="Veilederoversikt">
-            <div className="side-storrelse__ny veilederoversikt">
+            <div className="side-storrelse__ny veilederoversikt"
+                 role="tab"
+                 aria-controls={id}
+                 id={id}
+            >
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold-veilederside__ny">
+                    <div
+                        className="oversikt-sideinnhold-veilederside__ny"
+                        role="tabpanel"
+                        aria-labelledby={id}
+                        id={id}
+                    >
+
                         <div className="status-filter-kolonne__ny">
                             <PanelBase className="blokk-xxxs sok-veileder__ny">
                                 <Undertittel>

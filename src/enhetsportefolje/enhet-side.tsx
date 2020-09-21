@@ -88,7 +88,10 @@ function EnhetSide() {
             <div className="side-storrelse blokk-xl">
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold">
+                    <div id="enhetens-oversikt"
+                         role="tabpanel"
+                         className="oversikt-sideinnhold"
+                         aria-labelledby="enhetens-oversikt">
                         <div className="status-filter-kolonne">
                             <FiltreringContainer
                                 filtervalg={filtervalg}

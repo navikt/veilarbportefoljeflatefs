@@ -13,7 +13,8 @@
     "heroku-serve": "node heroku-server.js",
     "heroku-postbuild": "cross-env REACT_APP_MOCK=true npm run build",
     "test": "craco test --watchAll=false",
-    "lint": "echo not implemented"
+    "lint": "echo not implemented",
+    "cypress": "./node_modules/.bin/cypress open"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",
@@ -38,6 +39,7 @@
     "classnames": "^2.2.6",
     "craco-less": "1.17.0",
     "cross-env": "7.0.2",
+    "cypress": "^5.2.0",
     "express": "4.17.1",
     "faker": "4.1.0",
     "formik": "^2.1.5",
@@ -74,8 +76,11 @@
     "nav-frontend-skjema-style": "^2.0.9",
     "nav-frontend-spinner": "^2.0.5",
     "nav-frontend-spinner-style": "^0.2.5",
+    "nav-frontend-tabs": "0.0.44",
+    "nav-frontend-tabs-style": "0.0.27",
     "nav-frontend-typografi": "^2.0.26",
     "nav-frontend-typografi-style": "^1.0.22",
+    "prop-types": "^15.7.2",
     "query-string": "6.13.1",
     "react": "^16.13.1",
     "react-collapse": "5.0.1",
