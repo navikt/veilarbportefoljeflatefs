@@ -1,10 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { HoyreChevron, VenstreChevron } from 'nav-frontend-chevron';
+import {connect} from 'react-redux';
+import {HoyreChevron, VenstreChevron} from 'nav-frontend-chevron';
 import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
-import { pagineringSetup } from '../../../ducks/paginering';
-import { selectSeAlle, selectSide, selectSideStorrelse } from './paginering-selector';
+import {pagineringSetup} from '../../../ducks/paginering';
+import {selectSeAlle, selectSide, selectSideStorrelse} from './paginering-selector';
 import './paginering.less';
 
 interface StateProps {
@@ -40,7 +40,7 @@ function Paginering(props: PagineringProps) {
     const erPaForsteSide: boolean = side === 1;
     const erPaSisteSide: boolean = side >= antallSider;
 
-    const totalPagenering = (sideNumber: number, seAlleBool: boolean): void => {
+    const totalPaginering = (sideNumber: number, seAlleBool: boolean): void => {
         endrePaginering(sideNumber, seAlleBool);
         if (onChange) {
             onChange();
@@ -52,18 +52,18 @@ function Paginering(props: PagineringProps) {
             <KnappPanel
                 disabled={!seAlle && antallTotalt <= sideStorrelse}
                 pressed={seAlle && antallTotalt <= sideStorrelse}
-                onClick={() => totalPagenering(1, !seAlle)}
+                onClick={() => totalPaginering(1, !seAlle)}
             >
                 {!seAlle ? 'Se alle' :
                     'Se færre'
                 }
             </KnappPanel>
 
-            <KnappPanel disabled={erPaForsteSide} onClick={() => totalPagenering(side - 1, seAlle)}>
+            <KnappPanel disabled={erPaForsteSide} onClick={() => totalPaginering(side - 1, seAlle)}>
                 <VenstreChevron/>
             </KnappPanel>
 
-            {!erPaForsteSide && <KnappPanel onClick={() => totalPagenering(1, seAlle)}>1</KnappPanel>}
+            {!erPaForsteSide && <KnappPanel onClick={() => totalPaginering(1, seAlle)}>1</KnappPanel>}
 
             <KnappPanel>
                 <strong>{side}</strong>
@@ -71,13 +71,13 @@ function Paginering(props: PagineringProps) {
 
             {(!erPaSisteSide && !seAlle) &&
             <KnappPanel
-                onClick={() => totalPagenering(antallSider, seAlle)}
+                onClick={() => totalPaginering(antallSider, seAlle)}
             >
                 {antallSider}
             </KnappPanel>
             }
 
-            <KnappPanel disabled={erPaSisteSide || seAlle} onClick={() => totalPagenering(side + 1, seAlle)}>
+            <KnappPanel disabled={erPaSisteSide || seAlle} onClick={() => totalPaginering(side + 1, seAlle)}>
                 <HoyreChevron/>
             </KnappPanel>
         </div>

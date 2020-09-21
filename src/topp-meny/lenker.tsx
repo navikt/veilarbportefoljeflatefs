@@ -24,6 +24,7 @@ export function Lenker (props: {erPaloggetVeileder: boolean}) {
                     activeClassName={aktivLink}
                     title="Her vises alle brukere som er tildelt deg"
                     hidden={!(harPortefolje || props.erPaloggetVeileder)}
+                    ariaControls="min-oversikt"
                 >
                     Min oversikt
                 </ActiveLink>
@@ -35,6 +36,7 @@ export function Lenker (props: {erPaloggetVeileder: boolean}) {
                     className="oversiktslenke typo-undertittel"
                     activeClassName="oversiktslenke--valgt"
                     title="Her vises alle brukere som tilhører enheten"
+                    ariaControls="enhetens-oversikt"
                 >
                     Enhetens oversikt
                 </ActiveLink>
@@ -46,6 +48,7 @@ export function Lenker (props: {erPaloggetVeileder: boolean}) {
                     className="oversiktslenke typo-undertittel"
                     activeClassName="oversiktslenke--valgt"
                     title="Her vises alle veilederne som tilhører enheten"
+                    ariaControls="veileder-oversikt"
                 >
                     Veilederoversikt
                 </ActiveLink>

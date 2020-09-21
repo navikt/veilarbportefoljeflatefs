@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { PropsWithChildren } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { Redirect, useParams } from 'react-router';
-import { useVeilederListeSelector } from '../hooks/redux/use-veilederliste-selector';
-import { useIdentSelector } from '../hooks/redux/use-inlogget-ident';
+import {PropsWithChildren} from 'react';
+import {Normaltekst} from 'nav-frontend-typografi';
+import {Redirect, useParams} from 'react-router';
+import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
+import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
 
 export function MinOversiktWrapper(props: PropsWithChildren<{}>) {
     const {ident} = useParams();
@@ -28,7 +28,10 @@ export function MinOversiktWrapper(props: PropsWithChildren<{}>) {
     return (
         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
             {visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
-            <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold portefolje-side">
+            <div id="min-oversikt"
+                 role="tabpanel"
+                 className="oversikt-sideinnhold portefolje-side"
+                 aria-labelledby="min-oversikt">
                 {props.children}
             </div>
         </section>

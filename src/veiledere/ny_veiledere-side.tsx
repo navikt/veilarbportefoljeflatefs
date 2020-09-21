@@ -28,10 +28,10 @@ function Ny_veiledereSide() {
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
 
     const dispatch = useDispatch();
-    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.enhetensOversikt));
+    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.veilederOversikt));
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
-
+    const id = "veileder-oversikt";
     useSetEnhetIUrl();
 
     useOnMount(() => {
@@ -45,10 +45,35 @@ function Ny_veiledereSide() {
 
     return (
         <DocumentTitle title="Veilederoversikt">
-            <div className="side-storrelse__ny veilederoversikt">
+            <div className="side-storrelse__ny veilederoversikt"
+                 role="tab"
+                 aria-controls={id}
+                 id={id}
+            >
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <div id="oversikt-sideinnhold" role="tabpanel" className="oversikt-sideinnhold-veilederside__ny">
+                    <div
+                        className="oversikt-sideinnhold-veilederside__ny"
+                        role="tabpanel"
+                        aria-labelledby={id}
+                        id={id}
+                    >
+
+                        <div className="status-filter-kolonne__ny">
+                            <PanelBase className="blokk-xxxs sok-veileder__ny">
+                                <Undertittel>
+                                    Søk veileder
+                                </Undertittel>
+                                <FiltreringVeiledere/>
+                            </PanelBase>
+                            <MetrikkEkspanderbartpanel
+                                apen={true}
+                                lamellNavn="veiledergrupper"
+                                tittel="Veiledergrupper"
+                            >
+                                <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt}/>
+                            </MetrikkEkspanderbartpanel>
+                        </div>
                         <div className="liste-kolonne__ny">
                             <FiltreringLabelContainer
                                 filtervalg={{
@@ -68,22 +93,6 @@ function Ny_veiledereSide() {
                                 antallVeiledere={veiledere.data.veilederListe.length}
                             />
                         </div>
-                        <div className="status-filter-kolonne__ny">
-                            <PanelBase className="blokk-xxxs sok-veileder__ny">
-                                <Undertittel>
-                                    Søk veileder
-                                </Undertittel>
-                                <FiltreringVeiledere/>
-                            </PanelBase>
-                            <MetrikkEkspanderbartpanel
-                                apen={true}
-                                lamellNavn="veiledergrupper"
-                                tittel="Veiledergrupper"
-                            >
-                                <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt}/>
-                            </MetrikkEkspanderbartpanel>
-                        </div>
-
                     </div>
                 </Innholdslaster>
             </div>

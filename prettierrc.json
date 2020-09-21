@@ -1,8 +1,17 @@
 {
+<<<<<<< HEAD
     "trailingComma": "none",
     "tabWidth": 4,
     "semi": true,
     "singleQuote": true,
     "printWidth": 120,
     "bracketSpacing": false
+=======
+  "trailingComma": "none",
+  "tabWidth": 4,
+  "semi": true,
+  "singleQuote": true,
+  "printWidth": 120,
+  "bracketSpacing": false
+>>>>>>> 2869d76a192e8121b10d57565d51440fe04d4684
 }

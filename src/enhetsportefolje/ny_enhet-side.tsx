@@ -15,26 +15,27 @@ import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {useDispatch, useSelector} from 'react-redux';
-import Toolbar from '../components/toolbar/toolbar';
 import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import VelgFilterMelding from './velg-filter-melding';
 import '../ny_style.less';
-import {useCallback, useMemo} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
-import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
-import {skjulSidebar, visSidebar} from "../ducks/sidebar-tab";
+import {skjulSidebar} from "../ducks/sidebar-tab";
 import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "../minoversikt/ny_mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
+import {useWindowWidth} from "../hooks/use-window-width";
+import NyToolbar from "../components/toolbar/ny_toolbar";
+import NyFiltreringNavnellerfnr from "../filtrering/ny_filtrering-navnellerfnr";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -71,7 +72,9 @@ function Ny_EnhetSide() {
     const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.enhetensOversikt)), [dispatch]);
     const veilederLabel = useMemo(() => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter), [filtervalg.veiledere, veilederliste, slettVeilederFilter]);
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
-    const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
+    const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
+    const windowWidth = useWindowWidth();
+    const id = "enhetens-oversikt";
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -79,15 +82,6 @@ function Ny_EnhetSide() {
     useFetchPortefolje(filtergruppe);
     useSetLocalStorageOnUnmount();
     useMineFilterController({filtergruppe: filtergruppe});
-
-    const handleOnTabClicked = (tab, selectedTab) => {
-        if (isSidebarHidden) {
-            dispatch(visSidebar(filtergruppe))
-
-        } else if (tab.type === selectedTab.selectedTab) {
-            dispatch(skjulSidebar(filtergruppe))
-        }
-    };
 
     const lukkTab = () => {
         dispatch(skjulSidebar(filtergruppe))
@@ -98,16 +92,47 @@ function Ny_EnhetSide() {
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
 
+    const [scrolling, setScrolling] = useState(false);
+
+    useEffect(() => {
+        function onScroll() {
+            let currentPosition = window.pageYOffset;
+            if (currentPosition > 220) {
+                setScrolling(true);
+            } else {
+                setScrolling(false);
+            }
+        }
+
+        window.addEventListener("scroll", onScroll);
+        return window.addEventListener("scroll", onScroll);
+    });
+
+
     return (
         <DocumentTitle title="Enhetens oversikt">
-            <div className="side-storrelse__ny">
+            <div className="side-storrelse__ny"
+                 role="tab"
+                 aria-controls={id}
+                 id={id}
+            >
                 <ToppMeny/>
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <div role="tabpanel"
-                         className={classNames('oversikt-sideinnhold__ny',
-                             isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}>
+                    <div
+                        className={classNames('oversikt-sideinnhold__ny', isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}
+                        role="tabpanel"
+                        aria-labelledby={id}
+                        id={id}
+                    >
+                        <Sidebar
+                            filtervalg={filtervalg}
+                            filtergruppe={filtergruppe}
+                            enhettiltak={tiltak}
+                            isSidebarHidden={isSidebarHidden}
+                            lukkTab={lukkTab}
+                        />
                         <div className="sokefelt-knapp__container">
-                            <FiltreringNavnellerfnr
+                            <NyFiltreringNavnellerfnr
                                 filtervalg={filtervalg}
                                 endreFiltervalg={doEndreFiltervalg}
                             />
@@ -123,14 +148,6 @@ function Ny_EnhetSide() {
                             listevisning={listevisning}
                             className="ny__filtrering-label-container"
                         />
-                        <Sidebar
-                            filtervalg={filtervalg}
-                            filtergruppe={filtergruppe}
-                            enhettiltak={tiltak}
-                            handleOnTabClicked={handleOnTabClicked}
-                            isSidebarHidden={isSidebarHidden}
-                            lukkTab={lukkTab}
-                        />
                         {harFilter ?
                             <div className={classNames('oversikt__container',
                                 isSidebarHidden && 'oversikt__container__hidden')}>
@@ -143,8 +160,13 @@ function Ny_EnhetSide() {
                             <div className={antallBrukere > 4
                                 ? 'toolbar-container__ny'
                                 : 'ikke-sticky__ny__toolbar-container'}>
-                                    <TabellOverskrift className="tabelloverskrift"/>
-                                <Toolbar
+                                    <TabellOverskrift
+                                        className={classNames('tabelloverskrift__ny',
+                                            (((scrolling && isSidebarHidden) ||
+                                                (scrolling && windowWidth < 1200) ||
+                                                (!isSidebarHidden && windowWidth < 1200 && scrolling))
+                                                && "tabelloverskrift__ny__hidden"))}/>
+                                <NyToolbar
                                     onPaginering={() => dispatch(hentPortefoljeForEnhet(
                                         enhetId,
                                         sorteringsrekkefolge,
@@ -154,6 +176,8 @@ function Ny_EnhetSide() {
                                     filtergruppe={filtergruppe}
                                     sokVeilederSkalVises
                                     antallTotalt={portefoljeData.antallTotalt}
+                                    scrolling={scrolling}
+                                    isSidebarHidden={isSidebarHidden}
                                 />
                                 <EnhetTabellOverskrift/>
                             </div>

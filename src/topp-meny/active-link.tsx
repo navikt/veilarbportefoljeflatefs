@@ -7,17 +7,19 @@ interface ActiveLinkProps {
     activeClassName: string;
     children: React.ReactNode;
     to: string;
+    ariaControls: string;
     title?: string;
-    hidden?: boolean
+    hidden?: boolean;
 }
 
-function ActiveLink({className, activeClassName, to, children, title, hidden}: ActiveLinkProps) {
+function ActiveLink({className, activeClassName, to, children, title, hidden, ariaControls}: ActiveLinkProps) {
     return (
         <NavLink
             to={to}
             className={className}
             activeClassName={classnames(className, activeClassName)}
-            aria-controls="oversikt-sideinnhold"
+            aria-controls={ariaControls}
+            id={ariaControls}
             role="tab"
             title={title}
             hidden={hidden}

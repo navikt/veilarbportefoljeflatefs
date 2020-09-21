@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {
     SidebarTabInfo,
     SidebarTabInfo as SidebarTabType,
@@ -13,24 +13,18 @@ import {ReactComponent as MineFilterIkon} from '../ikoner/tab_mine-filter.svg';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import SidebarTab from './sidebar-tab';
 import {useDispatch, useSelector} from 'react-redux';
-import {pagineringSetup} from '../../ducks/paginering';
-import {endreFiltervalg} from '../../ducks/filtrering';
-import NyFiltreringMineFilter from '../../filtrering/filtrering-mine-filter/ny_filtrering-mine-filter';
 import {AppState} from '../../reducer';
-import {NyFiltreringStatus} from '../../filtrering/filtrering-status/ny_filtrering-status';
-import NyFiltreringFilter from '../../filtrering/ny_filtrering-filter';
-import NyFilteringVeilederGrupper from '../../filtrering/filtrering-veileder-grupper/ny_filtrering-veileder-grupper';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {MINE_FILTER} from '../../konstanter';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import {MineFilter} from '../../ducks/mine-filter';
+import {HandlingsType} from '../../ducks/mine-filter';
+import {STATUS} from '../../ducks/utils';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import {PopoverOrientering} from 'nav-frontend-popover';
-import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggleSwitch/toggle-switch';
+import outsideClick from '../../hooks/use-outside-click';
+import {useWindowWidth} from '../../hooks/use-window-width';
+import {skjulSidebar, visSidebar, SIDEBAR_TAB_ENDRET} from '../../ducks/sidebar-tab';
+import {keyCodes} from '../../utils/utils';
+import Sidevelger from './sidevelger';
 
 interface Sidebar {
     type: SidebarTabType;
@@ -61,191 +55,173 @@ const sidebar: Sidebar[] = [
     }
 ];
 
-function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar | undefined {
-    return tabs.find((t) => t.type === viewType);
-}
-
-function mapTabTilView(tab: Sidebar, isSelected: boolean, onTabClicked: (tab: Sidebar) => void) {
-    const classes = classNames('sidebar__tab', {'sidebar__tab-valgt': isSelected});
-    return (
-        <button className={classes} onClick={() => onTabClicked(tab)} key={tab.type}>
-            <div className="sidebar__tab-ikon">{tab.icon}</div>
-        </button>
-    );
-}
-
 interface SidebarProps {
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
     filtergruppe: string;
     isSidebarHidden: boolean;
-    handleOnTabClicked: (tab: Sidebar, selectedTab: SidebarTabInfo) => void;
     lukkTab: () => void;
 }
 
-function sortMineFilter(a: MineFilter, b: MineFilter) {
-    if (a.sortOrder !== null) {
-        if (b.sortOrder !== null) {
-            return a.sortOrder - b.sortOrder;
-        }
-        return -1;
-    }
-    if (b.sortOrder !== null) {
-        return 1;
-    }
-    return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
-}
-
 function Sidebar(props: SidebarProps) {
-    const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
     const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
-    const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
     const sidebarRef = useRef<HTMLDivElement>(null);
     const selectedTab = useSidebarViewStore(
         erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
     );
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
-    const sidebarTabEndret = 'sidebarTabEndret';
     const dispatch = useDispatch();
-    const erMineFilterFeatureTogglePa = useFeatureSelector()(MINE_FILTER);
-    const mineFilter = mineFilterState.data;
+    const windowWidth = useWindowWidth();
+    const isSidebarHidden = useSidebarViewStore(props.filtergruppe).isSidebarHidden;
 
-    function handleOnTabClicked(tab: Sidebar) {
-        dispatch({
-            type: sidebarTabEndret,
-            selectedTab: tab.type,
-            name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
-        });
-        props.handleOnTabClicked(tab, selectedTab);
-        logEvent('portefolje.metrikker.sidebar-tab', {
-            tab: tab.type,
-            sideNavn: finnSideNavn()
-        });
-    }
-
-    const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
-        dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, props.filtergruppe));
+    const tabFocus = () => {
+        if (erPaMinOversikt) {
+            if (selectedTabData.type === 'STATUS') return 0;
+            else if (selectedTabData.type === 'MINE_FILTER') return 1;
+            else if (selectedTabData.type === 'FILTER') return 2;
+        } else {
+            if (selectedTabData.type === 'STATUS') return 0;
+            else if (selectedTabData.type === 'MINE_FILTER') return 1;
+            else if (selectedTabData.type === 'VEILEDERGRUPPER') return 2;
+            else if (selectedTabData.type === 'FILTER') return 3;
+        }
+        return 0;
     };
 
-    const fjernUtilgjengeligeFilter = (elem: MineFilter) => {
-        const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
-        const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
-        const nyeBrukere = elem.filterValg.ferdigfilterListe.includes('NYE_BRUKERE_FOR_VEILEDER');
+    let tabFoc = tabFocus();
 
-        const veiledergrupper = elem.filterValg.veiledere.length > 0;
-        const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes('UFORDELTE_BRUKERE');
+    const keyCode = (e) => e.which || e.keyCode;
 
-        return !(
-            (erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
-            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))
+    useEffect(() => {
+        const nyttLagretFilter =
+            mineFilterState.handlingType === HandlingsType.NYTT && mineFilterState.status === STATUS.OK;
+        const oppdatertLagretFilter =
+            mineFilterState.handlingType === HandlingsType.REDIGERE && mineFilterState.status === STATUS.OK;
+
+        if (nyttLagretFilter || oppdatertLagretFilter) {
+            dispatch({
+                type: SIDEBAR_TAB_ENDRET,
+                selectedTab: SidebarTabInfo.MINE_FILTER,
+                name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
+            });
+        }
+    }, [dispatch, erPaMinOversikt, mineFilterState.handlingType, mineFilterState.status]);
+
+    function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar {
+        return tabs.find((t) => t.type === viewType) as Sidebar;
+    }
+
+    const mapTabTilView = (tab: Sidebar, isSelected: boolean) => {
+        return (
+            <button
+                className={classNames('sidebar__tab', {'sidebar__tab-valgt': isSelected})}
+                onClick={(e) => handleMouseClick(e, tab)}
+                role="tab"
+                aria-selected={!isSidebarHidden && isSelected}
+                aria-controls={tab.type}
+                id={tab.type}
+                tabIndex={(!isSelected && -1) || 0}
+                onKeyUp={(e) => handleKeyUp(e, tab)}
+            >
+                <div className="sidebar__tab-ikon">{tab.icon}</div>
+            </button>
         );
     };
 
-    function sidevelger(selectedTabData) {
-        if (!selectedTabData) {
-            return null;
-        }
+    function handleKeyUp(e, tab) {
+        const sidebarTabs: NodeListOf<HTMLDivElement> = document.querySelectorAll('button.sidebar__tab');
+        e.preventDefault();
 
-        if (selectedTabData.tittel === 'Status') {
-            return (
-                <SidebarTab
-                    tittel="Status"
-                    handleClick={props.lukkTab}
-                    children={<NyFiltreringStatus filtergruppe={props.filtergruppe} filtervalg={props.filtervalg} />}
-                />
-            );
-        } else if (selectedTabData.tittel === 'Filter') {
-            return (
-                <SidebarTab tittel="Filter" handleClick={props.lukkTab}>
-                    <NyFiltreringFilter
-                        endreFiltervalg={doEndreFiltervalg}
-                        filtervalg={props.filtervalg}
-                        enhettiltak={props.enhettiltak}
-                    />
-                </SidebarTab>
-            );
-        } else if (selectedTabData.tittel === 'Veiledergrupper') {
-            return (
-                <SidebarTab
-                    tittel="Veiledergrupper"
-                    handleClick={props.lukkTab}
-                    children={<NyFilteringVeilederGrupper filtergruppe={props.filtergruppe} />}
-                />
-            );
-        } else if (selectedTabData.tittel === 'Mine filter') {
-            return (
-                <SidebarTab
-                    tittel="Mine filter"
-                    handleClick={props.lukkTab}
-                    meta={
-                        <>
-                            <Hjelpetekst type={PopoverOrientering.Venstre}>
-                                {props.filtergruppe === ListevisningType.minOversikt &&
-                                    'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.'}
-                                {props.filtergruppe === ListevisningType.enhetensOversikt &&
-                                    'Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt.'}
-                            </Hjelpetekst>
-                            <ToggleSwitch
-                                checked={isMinefiltereDraggable}
-                                onOpen={() => setIsMinefiltereDraggable(true)}
-                                onClose={() => setIsMinefiltereDraggable(false)}
-                                ariaLabel={'Endre rekkefølge'}
-                            />
-                        </>
-                    }
-                >
-                    <NyFiltreringMineFilter
-                        filtergruppe={props.filtergruppe}
-                        fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
-                        sortertMineFilter={mineFilter.sort(sortMineFilter)}
-                        isDraggable={isMinefiltereDraggable}
-                        setisDraggable={setIsMinefiltereDraggable}
-                    />
-                </SidebarTab>
-            );
+        if (keyCode(e) === keyCodes.space) {
+            handleOnTabClicked(e, tab);
+        } else if (keyCode(e) === keyCodes.right || keyCode(e) === keyCodes.left) {
+            sidebarTabs[tabFoc].setAttribute('tabindex', '-1');
+            sidebarTabs[tabFoc].setAttribute('className', 'sidebar__tab');
+            sidebarTabs[tabFoc].setAttribute('aria-selected', 'false');
+
+            if (keyCode(e) === keyCodes.right) {
+                tabFoc++;
+                // Hvis vi er i enden av tabpanelet, gå til starten
+                if (tabFoc >= Tabs().length) {
+                    tabFoc = 0;
+                }
+            } else if (keyCode(e) === keyCodes.left) {
+                tabFoc--;
+                // Hvis vi er i starten av tabpanelet, gå til enden
+                if (tabFoc < 0) {
+                    tabFoc = Tabs().length - 1;
+                }
+            }
+            sidebarTabs[tabFoc].setAttribute('tabindex', '0');
+            sidebarTabs[tabFoc].setAttribute('className', 'sidebar__tab sidebar__tab-valgt');
+            sidebarTabs[tabFoc].setAttribute('aria-selected', 'true');
+
+            sidebarTabs[tabFoc].focus();
         }
     }
 
-    const tabs = () => {
-        const visVeiledergrupper = (tab) => tab.type === SidebarTabType.VEILEDERGRUPPER;
-        const visMineFilter = (tab) => tab.type === SidebarTabType.MINE_FILTER;
+    function handleMouseClick(e, tab: Sidebar) {
+        e.preventDefault();
+        handleOnTabClicked(e, tab);
+    }
 
-        if (erPaMinOversikt) {
-            if (!erMineFilterFeatureTogglePa) {
-                return sidebar
-                    .filter((tab) => !visVeiledergrupper(tab) && !visMineFilter(tab))
-                    .map((tab) =>
-                        mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked)
-                    );
-            } else {
-                return sidebar
-                    .filter((tab) => !visVeiledergrupper(tab))
-                    .map((tab) =>
-                        mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked)
-                    );
-            }
-        } else if (erPaEnhetensOversikt) {
-            if (!erMineFilterFeatureTogglePa) {
-                return sidebar
-                    .filter((tab) => !visMineFilter(tab))
-                    .map((tab) =>
-                        mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked)
-                    );
-            } else {
-                return sidebar.map((tab) =>
-                    mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, handleOnTabClicked)
-                );
-            }
+    function handleOnTabClicked(e, tab: Sidebar) {
+        dispatch({
+            type: SIDEBAR_TAB_ENDRET,
+            selectedTab: tab.type,
+            name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
+        });
+
+        if (isSidebarHidden) {
+            dispatch(visSidebar(props.filtergruppe));
+        } else if (tab.type === selectedTab.selectedTab) {
+            dispatch(skjulSidebar(props.filtergruppe));
         }
+
+        logEvent('portefolje.metrikker.sidebar-tab', {
+            tab: tab.type,
+            sideNavn: finnSideNavn(),
+            isSidebarHidden: isSidebarHidden
+        });
+    }
+
+    const Tabs = () => {
+        const visVeiledergrupper = (tab) => tab.type === SidebarTabType.VEILEDERGRUPPER;
+        if (erPaMinOversikt) {
+            return sidebar
+                .filter((tab) => !visVeiledergrupper(tab))
+                .map((tab) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type));
+        }
+        return sidebar.map((tab) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type));
     };
 
+    outsideClick(sidebarRef, () => {
+        if (windowWidth < 1200 && !props.isSidebarHidden) {
+            logEvent('portefolje.metrikker.klikk-utenfor', {sideNavn: finnSideNavn()});
+            dispatch(skjulSidebar(props.filtergruppe));
+        }
+    });
+
     return (
-        <div ref={sidebarRef} className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden')}>
-            <div className="sidebar__tab-container">{tabs()}</div>
-            <div className="sidebar__content-container" hidden={props.isSidebarHidden}>
-                {sidevelger(selectedTabData)}
+        <div ref={sidebarRef} className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden', 'tabs')}>
+            <div
+                className="sidebar__tab-container"
+                role="tablist"
+                aria-label="Faner for filtrering"
+                aria-labelledby={selectedTabData.type}
+            >
+                {Tabs()}
+            </div>
+            <div
+                className="sidebar__content-container"
+                role="tabpanel"
+                hidden={isSidebarHidden}
+                aria-labelledby={selectedTabData.type}
+                id={selectedTabData.type}
+                tabIndex={0}
+            >
+                {Sidevelger(selectedTabData, props.lukkTab, props.filtergruppe, props.filtervalg, props.enhettiltak)}
             </div>
         </div>
     );

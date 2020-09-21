@@ -213,7 +213,7 @@ function NyFiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtreri
                 <OverskriftMedHjelpeTekst
                     overskriftTekst="Aktivitet"
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
-                    orientering={PopoverOrientering.Venstre}
+                    orientering={PopoverOrientering.Hoyre}
                 />
                 <Dropdown
                     name="Aktivitet"
