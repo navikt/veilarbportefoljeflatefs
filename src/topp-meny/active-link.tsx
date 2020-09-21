@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
-import classnames from 'classnames';
+import classNames from "classnames";
 
 interface ActiveLinkProps {
     className: string;
@@ -17,12 +17,13 @@ function ActiveLink({className, activeClassName, to, children, title, hidden, ar
         <NavLink
             to={to}
             className={className}
-            activeClassName={classnames(className, activeClassName)}
+            activeClassName={classNames(className, activeClassName)}
             aria-controls={ariaControls}
             id={ariaControls}
             role="tab"
             title={title}
             hidden={hidden}
+            data-testid={ariaControls}
         >
             {children}
         </NavLink>

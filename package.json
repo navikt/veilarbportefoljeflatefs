@@ -29,6 +29,7 @@
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
     "prettier": "1.19.1",
+    "webpack": "^4.44.2",
     "yet-another-fetch-mock": "4.0.0"
   },
   "dependencies": {
@@ -40,6 +41,7 @@
     "craco-less": "1.17.0",
     "cross-env": "7.0.2",
     "cypress": "^5.2.0",
+    "cypress-wait-until": "^1.7.1",
     "express": "4.17.1",
     "faker": "4.1.0",
     "formik": "^2.1.5",
@@ -96,7 +98,8 @@
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
     "reselect": "^4.0.0",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "webpack-cli": "^3.3.12"
   },
   "eslintConfig": {
     "extends": "react-app"

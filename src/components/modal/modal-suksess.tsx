@@ -10,8 +10,9 @@ interface ModalSuksessProps {
     onRequestClose: () => void;
     tittel: string;
     tekst: string;
-    closeButton?: boolean;
     hovedknappTekst: string;
+    closeButton?: boolean;
+    testNavn?: string;
 }
 
 function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
@@ -38,6 +39,7 @@ function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
             <Hovedknapp
                 htmlType="submit"
                 onClick={props.onRequestClose}
+                data-testid={`modal-suksess_${props.testNavn}`}
             >
                 {props.hovedknappTekst}
             </Hovedknapp>
@@ -54,6 +56,7 @@ export function TildelingerOk(props: { isOpen: boolean, onRequestClose: () => vo
             tekst="Følgende bruker(e) ble tildelt veileder:"
             closeButton={false}
             hovedknappTekst="Lukk"
+            testNavn="tildel-veileder"
         >
             <FnrList listeMedFnr={props.fnr}/>
         </ModalSuksess>

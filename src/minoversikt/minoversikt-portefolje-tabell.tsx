@@ -39,7 +39,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
             <div className={props.classNameWrapper}>
                 <div className="minoversikt-liste__wrapper typo-undertekst blokk-xs">
                     <ul className="brukerliste">
-                        {brukere.map((bruker) =>
+                        {brukere.map((bruker, index) =>
                             <MinoversiktBrukerPanel
                                 key={bruker.fnr || bruker.guid}
                                 bruker={bruker}
@@ -49,6 +49,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
                                 filtervalg={filtervalg}
                                 valgteKolonner={listevisning.valgte}
                                 innloggetVeileder={props.innloggetVeileder}
+                                radId={index}
                             />
                         )}
                     </ul>

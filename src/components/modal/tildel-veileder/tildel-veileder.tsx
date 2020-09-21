@@ -74,7 +74,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
     return (
         <form className="skjema radio-filterform" onSubmit={onSubmit}>
             <div className="radio-filterform__valg">
-                {data.map(veileder =>
+                {data.map((veileder, index) =>
                     <Radio
                         name="veileder"
                         key={veileder.ident}
@@ -82,6 +82,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
                         value={veileder.ident}
                         checked={ident ? ident === veileder.ident : false}
                         onChange={e => onChange(e.target.value)}
+                        data-testid={`tildel-veileder_valg_${index}`}
                     />
                 )}
             </div>
@@ -90,6 +91,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
                     onClick={btnOnClick}
                     className={classNames('knapp', 'knapp--mini', {'knapp--hoved': ident})}
                     htmlType={ident ? 'submit' : 'button'}
+                    data-testid={ident ? 'tildel-veileder_velg-knapp' : 'tildel-veileder_lukk-knapp'}
                 >
                     {ident ? 'Velg' : 'Lukk'}
                 </Knapp>
