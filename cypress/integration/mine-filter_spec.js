@@ -14,7 +14,7 @@ describe('Start ting', () => {
             return false;
         })
         cy.get('[data-testid=enhetens-oversikt]').contains('Enhetens oversikt')
-            .should("have.class", "oversiktslenke--valgt")
+            .should('exist')
     })
 })
 

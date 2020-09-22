@@ -10,7 +10,8 @@ describe('Tildel veileder', () => {
             console.log(err);
             return false;
         })
-        cy.get('[data-testid=enhetens-oversikt]').contains( 'Enhetens oversikt').should('exist')
+        cy.get('[data-testid=enhetens-oversikt]').contains('Enhetens oversikt')
+            .should('exist')
     })
     it('Gå til min oversikt', () => {
         cy.get(`[data-testid=min-oversikt]`).click()
