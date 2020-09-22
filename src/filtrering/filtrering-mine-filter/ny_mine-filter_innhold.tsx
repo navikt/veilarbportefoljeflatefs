@@ -31,9 +31,9 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const hentFiltrertListeinnhold = () => {
         return (
             <div className="ny__mine-filter__valgfelt" ref={outerDivRef}>
-                {filtrertListe().map((filter, idx) =>
+                {filtrertListe().map((filter, index) =>
                     <NyMineFilterRad
-                        key={idx}
+                        key={index}
                         filter={filter}
                         filtergruppe={props.filtergruppe}
                     />

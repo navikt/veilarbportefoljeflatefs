@@ -6,7 +6,7 @@ import {Visningstype} from "./mine-filter-modal";
 const lagreNyttMineFilterKnapp = (setValgtVisningstype: (visningstype: Visningstype) => void) => {
     return (
         <Hovedknapp className="ny-knapp"
-                    data-testid="lagre-nytt-filter-knapp"
+                    data-testid="lagre-nytt-filter-modal-knapp"
                     onClick={() => setValgtVisningstype(Visningstype.LAGRE_NYTT)}>
             Lagre som nytt filter
         </Hovedknapp>
@@ -16,6 +16,7 @@ const lagreNyttMineFilterKnapp = (setValgtVisningstype: (visningstype: Visningst
 const oppdaterMineFilterKnapp = (setValgtVisningstype: (visningstype: Visningstype) => void) => {
     return (
         <Knapp className="eksisterende-knapp"
+               data-testid="oppdater-eksisterende-filter-modal-knapp"
                onClick={() => setValgtVisningstype(Visningstype.OPPDATER)}>
             Oppdater eksisterende filter
         </Knapp>
@@ -25,7 +26,8 @@ const oppdaterMineFilterKnapp = (setValgtVisningstype: (visningstype: Visningsty
 export function Meny(props: { setValgtVisningstype: (visningstype: Visningstype) => void, sisteFilterNavn }) {
     return <div className="mine-filter-meny-modal__wrapper">
         {lagreNyttMineFilterKnapp(props.setValgtVisningstype)}
-        <Normaltekst>Oppdater <b>"{props.sisteFilterNavn}"</b> ved å klikke på knappen under.</Normaltekst>
+        <Normaltekst data-testid="mine-filter-modal-oppdater-filter-tekst"
+        >Oppdater <b>"{props.sisteFilterNavn}"</b> ved å klikke på knappen under.</Normaltekst>
         {oppdaterMineFilterKnapp(props.setValgtVisningstype)}
     </div>
 }

@@ -14,9 +14,10 @@ import {ListevisningType} from "../../ducks/ui/listevisning";
 interface LagretFilterRadProps {
     filter: MineFilter;
     filtergruppe: string;
+    dataTestid?: string;
 }
 
-function NyMineFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
+function NyMineFilterRad({filter, filtergruppe, dataTestid}: LagretFilterRadProps) {
     const dispatch = useDispatch();
 
     const valgtMittFilter = useSelector((state: AppState) => filtergruppe === ListevisningType.minOversikt
@@ -36,7 +37,7 @@ function NyMineFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     }
 
     return (
-        <div className="ny__mine-filter__rad">
+        <div className="ny__mine-filter__rad" data-testid={`mine-filter-rad-wrapper`}>
             <Radio
                 className="ny__mine-filter__filternavn"
                 key={filter.filterId}
@@ -45,11 +46,13 @@ function NyMineFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
                 value={filter.filterId}
                 onChange={() => velgFilter()}
                 checked={valgtMittFilter?.filterId === filter.filterId}
+                data-testid={`mine-filter-rad_${filter.filterNavn}`}
             />
             <RedigerKnapp
                 hidden={valgtMittFilter?.filterId !== filter.filterId}
                 aria="Rediger mitt filter"
                 onClick={onClickRedigerKnapp}
+                dataTestid={`rediger-filter-knapp_${filter.filterNavn}`}
             />
         </div>
     );

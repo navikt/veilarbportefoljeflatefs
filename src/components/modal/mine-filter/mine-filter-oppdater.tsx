@@ -63,10 +63,16 @@ export function OppdaterMineFilter(props: { gammeltFilterNavn, filterId, lukkMod
                     feil={feilmelding.filterNavn}
                     autoFocus={true}
                     maxLength={255}
+                    data-testid="redigere-filter-navn-input"
                 />
                 <div className="lagret-filter-knapp-wrapper">
-                    <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>
-                    <Knapp mini onClick={(e) => bekreftSletting(e)}>Slett</Knapp>
+                    <Hovedknapp mini htmlType="submit"
+                                data-testid="rediger-filter-modal-lagre-knapp"
+                    >Lagre</Hovedknapp>
+                    <Knapp mini onClick={(e) => bekreftSletting(e)}
+                           data-testid="rediger-filter-modal-slette-knapp">
+                        Slett
+                    </Knapp>
                 </div>
             </form>
             <BekreftSlettingModal
