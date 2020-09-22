@@ -1,6 +1,4 @@
 @import '~nav-frontend-core/less/core';
-@dropSpaceSize: 0.5rem;
-
 [draggable] {
     -moz-user-select: none;
     -khtml-user-select: none;
@@ -55,21 +53,19 @@
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
     border: 2px @fokusFarge;
-    padding-bottom: 0.4rem;
     padding-left: 0.4rem;
-    padding-top: 0.4rem;
 }
 
 .drag-and-drop-row.over-from-below {
-    margin-top: @dropSpaceSize / 2;
-    padding-top: @dropSpaceSize / 2;
-    border-top: 2px solid @navBla;
+    -webkit-box-shadow: 0px -2px 0px 0px @navBla;
+    -moz-box-shadow: 0px -2px 0px 0px @navBla;
+    box-shadow: 0px -2px 0px 0px @navBla;
 }
 
 .drag-and-drop-row.over-from-above {
-    margin-bottom: @dropSpaceSize / 2;
-    padding-bottom: @dropSpaceSize / 2;
-    border-bottom: 2px solid @navBla;
+    -webkit-box-shadow: 0px 2px 0px 0px @navBla;
+    -moz-box-shadow: 0px 2px 0px 0px @navBla;
+    box-shadow: 0px 2px 0px 0px @navBla;
 }
 
 .dropped {
