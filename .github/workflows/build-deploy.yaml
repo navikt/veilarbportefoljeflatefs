@@ -7,6 +7,24 @@ env:
   PRINT_PAYLOAD: true
 
 jobs:
+  test:
+    name: Cypress run
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        machines: [ 1, 2, 3 ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+        with:
+          record: true
+          parallel: true
+          group: 'Actions example'
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
   build:
     name: Build Project
     runs-on: ubuntu-latest
@@ -90,7 +108,7 @@ jobs:
           VAR: version=${{ env.IMAGE_TAG }}
   release-dev:
     name: Create dev release
-    needs: [deploy-q0, deploy-q1]
+    needs: [ deploy-q0, deploy-q1 ]
     runs-on: ubuntu-latest
     steps:
       - name: Create release
