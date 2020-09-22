@@ -21,6 +21,10 @@
     clip: rect(0 0 0 0);
 }
 
+.drag-and-drop-tittel {
+    width: 85% !important;
+}
+
 .drag-and-drop-knapper {
     margin-top: 0.5rem;
     display: flex;
@@ -50,7 +54,7 @@
     cursor: grabbing;
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
-    border: 1px dashed @navMorkGra;
+    border: 2px @fokusFarge;
     margin-bottom: 0.4rem;
     padding-left: 0.4rem;
     padding-top: 0.4rem;
@@ -76,9 +80,9 @@
 
 @keyframes drop-animation {
     0% {
-        transform: scale(0.5);
+        transform: scale(0.75);
         transform-origin: left;
-        margin-left: 0.4rem;
+        margin-left: 0.1rem;
     }
 
     100% {
@@ -129,7 +133,7 @@
 }
 
 .drag-and-drop-row:focus .flytt-knapp:hover {
-    border-color: @navBla;
+    border-color: @fokusFarge;
     pointer-events: auto;
 }
 

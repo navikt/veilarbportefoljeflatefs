@@ -4,7 +4,7 @@ import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
 import {MineFilter} from '../../../ducks/mine-filter';
 import {Hovedknapp, Flatknapp, Knapp} from 'nav-frontend-knapper';
-import {Element} from 'nav-frontend-typografi';
+import {Normaltekst} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {handleDragEnter, handleDragEnd, handleDragStart, handleDragOver} from './mouse-drag-event-listeners';
 import {handleKeyUp, handleKeyDown} from './keyboard-event-listeners';
@@ -93,7 +93,7 @@ function DragAndDropContainer({
     //-------- Drag and drop with mouse handeling --------
     const eventIsInsideContainer = (e) => dragContainer.current !== null && dragContainer.current.contains(e.target);
 
-    useEventListener('dragstart', handleDragStart({eventIsInsideContainer, setSrcIndex}));
+    useEventListener('dragstart', handleDragStart({eventIsInsideContainer, setSrcIndex, setDropIndex}));
     useEventListener('dragenter', handleDragEnter({eventIsInsideContainer, setdDragIsInsideElement}));
     useEventListener('dragover', handleDragOver({eventIsInsideContainer, setDestIndex}));
     useEventListener(
@@ -148,7 +148,9 @@ function DragAndDropContainer({
             <span aria-live="assertive" className="assistive-text">
                 {ariaTekst}
             </span>
-            <Element tag={'h3'}>Endre rekkefølge</Element>
+            <Normaltekst tag={'h3'} className="drag-and-drop-tittel" aria-live="polite">
+                Endre rekkefølge med ALT + piltaster eller dra og slipp:
+            </Normaltekst>
             <ul ref={dragContainer} className="drag-and-drop-container" role={'listbox'}>
                 {dragAndDropOrder.map((filter, idx) => (
                     <DragAndDropRow

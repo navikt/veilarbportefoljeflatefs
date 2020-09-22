@@ -30,12 +30,13 @@ function ToggleSwitch({onOpen, onClose, defaultChecked, checked, ariaLabel}: Tog
                 }}
             />
             <span className="switch-slider"></span>
-            <div className="toggle-switch-lås toggle-switch-lås-lukked">
+            <div className="toggle-switch-las__lukked">
                 <LåsLukket />
             </div>
-            <div className="toggle-switch-lås toggle-switch-lås-åpen">
+            <div className="toggle-switch-las__apen">
                 <LåsÅpen />
             </div>
+            <div className="toggle-switch-border"></div>
         </label>
     );
 }

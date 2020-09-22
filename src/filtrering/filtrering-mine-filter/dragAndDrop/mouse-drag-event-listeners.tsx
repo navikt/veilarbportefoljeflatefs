@@ -7,6 +7,7 @@ export interface HandleDragEnterProps {
 
 export interface HandleDragStartProps {
     setSrcIndex: React.Dispatch<React.SetStateAction<number>>;
+    setDropIndex: React.Dispatch<React.SetStateAction<number>>;
     eventIsInsideContainer: (e: React.MouseEvent) => boolean;
 }
 export interface HandleDragEndProps {
@@ -34,10 +35,11 @@ export function handleDragEnter({eventIsInsideContainer, setdDragIsInsideElement
     };
 }
 
-export function handleDragStart({eventIsInsideContainer, setSrcIndex}: HandleDragStartProps) {
+export function handleDragStart({eventIsInsideContainer, setSrcIndex, setDropIndex}: HandleDragStartProps) {
     return (e) => {
         if (eventIsInsideContainer(e)) {
             if (typeof e.target.value === 'number') setSrcIndex(e.target.value);
+            setDropIndex(-1);
         }
     };
 }
