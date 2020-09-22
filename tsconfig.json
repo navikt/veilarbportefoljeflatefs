@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "http://localhost:3000",
     "target": "es6",
     "lib": [
       "dom",

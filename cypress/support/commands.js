@@ -23,3 +23,22 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+// describe('Kjør før alle tester', () => {
+//     before('Åpne oversikten', () => {
+//         it('Start server', () => {
+//             cy.server();
+//         })
+//         it('Gå til page', () => {
+//             // cy.visit('/')
+//             // cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
+//             Cypress.on('uncaught:exception', (err) => {
+//                 console.log(err);
+//                 return false;
+//             })
+//         })
+//         it('Forvent document', () => {
+//             cy.get('[data-testid=enhetens-oversikt]').should('contain', 'Enhetens oversikt')
+//         })
+//     })
+// })

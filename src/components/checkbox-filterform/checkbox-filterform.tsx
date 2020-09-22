@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Dictionary } from '../../utils/types/types';
-import { FiltervalgModell } from '../../model-interfaces';
+import React, {useEffect, useState} from 'react';
+import {Dictionary} from '../../utils/types/types';
+import {FiltervalgModell} from '../../model-interfaces';
 import Grid from '../grid/grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './checkbox-filterform.less';
@@ -53,13 +53,23 @@ function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filterv
             <div className="checkbox-filterform__under-valg">
                 {closeDropdown ?
                     checkBoxValg.length > 0
-                        ? <button className="knapp knapp--mini knapp--hoved" type="submit">
+                        ? <button className="knapp knapp--mini knapp--hoved"
+                                  type="submit"
+                                  data-testid={'checkbox-filterform__velg-knapp'}
+                        >
                             Velg
                         </button>
-                        : <button className="knapp knapp--mini" type="button" onClick={closeDropdown}>
+                        : <button className="knapp knapp--mini"
+                                  type="button"
+                                  onClick={closeDropdown}
+                                  data-testid={'checkbox-filterform__lukk-knapp'}
+                        >
                             Lukk
                         </button>
-                    : <button className="knapp knapp--mini knapp--hoved" type="submit">
+                    : <button className="knapp knapp--mini knapp--hoved"
+                              type="submit"
+                              data-testid={'checkbox-filterform__velg-knapp'}
+                    >
                         Velg
                     </button>}
 
@@ -84,6 +94,7 @@ function RenderFields(props: { valg: Dictionary<string>, velgCheckBox: (e) => vo
                             value={filterKey}
                             checked={props.checkBoxValg.includes(filterKey)}
                             onChange={props.velgCheckBox}
+                            data-testid={`filter_${filterKey}`}
                         />
                         <label htmlFor={filterKey} className="skjemaelement__label">{filterValue}</label>
                     </div>

@@ -44,9 +44,14 @@ export function LagreNyttMineFilter(props: { filtergruppe: string, lukkModal }) 
                     feil={feilmelding.filterNavn}
                     autoFocus={true}
                     maxLength={255}
+                    data-testid="lagre-nytt-filter-navn-input"
                 />
                 <div className="lagret-filter-knapp-wrapper">
-                    <Hovedknapp mini htmlType="submit">Lagre</Hovedknapp>
+                    <Hovedknapp mini
+                                htmlType="submit"
+                                data-testid="lagre-nytt-filter-modal-lagre-knapp">
+                        Lagre
+                    </Hovedknapp>
                 </div>
             </form>
             <MineFilterVarselModal

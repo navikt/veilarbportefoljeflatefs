@@ -13,17 +13,29 @@ interface FiltreringLabelProps {
     skalHaKryssIkon?: boolean;
 }
 
-function FiltreringLabel({label, slettFilter, harMuligMenIkkeValgtKolonne = false, markert = false, skalHaKryssIkon = true}: FiltreringLabelProps) {
+function FiltreringLabel({
+                             label,
+                             slettFilter,
+                             harMuligMenIkkeValgtKolonne = false,
+                             markert = false,
+                             skalHaKryssIkon = true
+                         }: FiltreringLabelProps) {
     const className = classNames('filtreringlabel__label', {'filtreringlabel-slett-filter': !skalHaKryssIkon});
     const arialLabel = skalHaKryssIkon ? 'Slett filter' : ' Slett alle filtervalg';
     const slettAlleFiltervalg = arialLabel === " Slett alle filtervalg";
-    const buttonClassnames = classNames('filtreringlabel', 'typo-undertekst', {'filtreringlabel--markert': markert}, {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne}, {'slett-alle-filtervalg-knapp': slettAlleFiltervalg});
+    const buttonClassnames = classNames(
+        `filtreringlabel`,
+        'typo-undertekst',
+        {'filtreringlabel--markert': markert},
+        {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne},
+        {'slett-alle-filtervalg-knapp': slettAlleFiltervalg});
     return (
         <button
             title={lagConfig(label).label}
             aria-label={arialLabel}
             className={buttonClassnames}
-            onClick={slettFilter}>
+            onClick={slettFilter}
+            data-testid={`filtreringlabel`}>
             <span className={className}>{lagConfig(label).label}</span>
             {skalHaKryssIkon && <FilterIkon/>}
         </button>

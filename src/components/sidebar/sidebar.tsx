@@ -117,6 +117,7 @@ function Sidebar(props: SidebarProps) {
                     id={tab.type}
                     tabIndex={(!isSelected && -1) || 0}
                     onKeyUp={e => handleKeyUp(e, tab)}
+                    data-testid={`sidebar-tab_${tab.type}`}
             >
                 <div className="sidebar__tab-ikon">{tab.icon}</div>
             </button>

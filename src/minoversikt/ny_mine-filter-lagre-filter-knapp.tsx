@@ -42,6 +42,7 @@ export function NyMineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     return (
         <Knapp className="ny__lagre-filter-knapp" mini
                hidden={erLagreKnappSkjult}
+               data-testid="lagre-filter-knapp"
                onClick={(event) => lagreFilterModal(event)}>
             Lagre filter
         </Knapp>

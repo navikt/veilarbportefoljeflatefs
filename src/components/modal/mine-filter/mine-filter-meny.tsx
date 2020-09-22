@@ -6,6 +6,7 @@ import {Visningstype} from "./mine-filter-modal";
 const lagreNyttMineFilterKnapp = (setValgtVisningstype: (visningstype: Visningstype) => void) => {
     return (
         <Hovedknapp className="ny-knapp"
+                    data-testid="lagre-nytt-filter-knapp"
                     onClick={() => setValgtVisningstype(Visningstype.LAGRE_NYTT)}>
             Lagre som nytt filter
         </Hovedknapp>
