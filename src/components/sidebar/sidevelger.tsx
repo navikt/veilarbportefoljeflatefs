@@ -13,6 +13,11 @@ import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {PopoverOrientering} from 'nav-frontend-popover';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggleSwitch/toggle-switch';
 import {MineFilter} from '../../ducks/mine-filter';
+import {skjulSidebar} from '../../ducks/sidebar-tab';
+import Sidebar from './sidebar';
+import {FiltervalgModell} from '../../model-interfaces';
+import {OrNothing} from '../../utils/types/types';
+import {Tiltak} from '../../ducks/enhettiltak';
 
 function sortMineFilter(a: MineFilter, b: MineFilter) {
     if (a.sortOrder !== null) {
@@ -27,7 +32,14 @@ function sortMineFilter(a: MineFilter, b: MineFilter) {
     return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
 }
 
-function Sidevelger(selectedTabData, lukkTab, filtergruppe, filtervalg, enhettiltak) {
+interface SidevelgerProps {
+    selectedTabData: Sidebar;
+    filtergruppe: string;
+    filtervalg: FiltervalgModell;
+    enhettiltak: OrNothing<Tiltak>;
+}
+
+function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: SidevelgerProps) {
     const dispatch = useDispatch();
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
@@ -58,13 +70,21 @@ function Sidevelger(selectedTabData, lukkTab, filtergruppe, filtervalg, enhettil
 
     if (selectedTabData.tittel === 'Status') {
         return (
-            <SidebarTab tittel="Status" handleClick={lukkTab} tab={selectedTabData.type}>
+            <SidebarTab
+                tittel="Status"
+                handleClick={() => dispatch(skjulSidebar(filtergruppe))}
+                tab={selectedTabData.type}
+            >
                 <NyFiltreringStatus filtergruppe={filtergruppe} filtervalg={filtervalg} />
             </SidebarTab>
         );
     } else if (selectedTabData.tittel === 'Filter') {
         return (
-            <SidebarTab tittel="Filter" handleClick={lukkTab} tab={selectedTabData.type}>
+            <SidebarTab
+                tittel="Filter"
+                handleClick={() => dispatch(skjulSidebar(filtergruppe))}
+                tab={selectedTabData.type}
+            >
                 <NyFiltreringFilter
                     endreFiltervalg={doEndreFiltervalg}
                     filtervalg={filtervalg}
@@ -74,7 +94,11 @@ function Sidevelger(selectedTabData, lukkTab, filtergruppe, filtervalg, enhettil
         );
     } else if (selectedTabData.tittel === 'Veiledergrupper') {
         return (
-            <SidebarTab tittel="Veiledergrupper" handleClick={lukkTab} tab={selectedTabData.type}>
+            <SidebarTab
+                tittel="Veiledergrupper"
+                handleClick={() => dispatch(skjulSidebar(filtergruppe))}
+                tab={selectedTabData.type}
+            >
                 <NyFilteringVeilederGrupper filtergruppe={filtergruppe} />
             </SidebarTab>
         );
@@ -82,7 +106,7 @@ function Sidevelger(selectedTabData, lukkTab, filtergruppe, filtervalg, enhettil
         return (
             <SidebarTab
                 tittel="Mine filter"
-                handleClick={lukkTab}
+                handleClick={() => dispatch(skjulSidebar(filtergruppe))}
                 tab={selectedTabData.type}
                 meta={
                     <>
@@ -111,6 +135,7 @@ function Sidevelger(selectedTabData, lukkTab, filtergruppe, filtervalg, enhettil
             </SidebarTab>
         );
     }
+    return null;
 }
 
 export default Sidevelger;

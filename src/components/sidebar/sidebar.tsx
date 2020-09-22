@@ -53,7 +53,6 @@ interface SidebarProps {
     enhettiltak: OrNothing<Tiltak>;
     filtergruppe: string;
     isSidebarHidden: boolean;
-    lukkTab: () => void;
 }
 
 function Sidebar(props: SidebarProps) {
@@ -180,8 +179,13 @@ function Sidebar(props: SidebarProps) {
         }
     });
 
+    const ariaFaneTekst = isSidebarHidden ? 'Tab lukket.' : 'Tab åpnet.';
+
     return (
         <div ref={sidebarRef} className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden', 'tabs')}>
+            <span aria-live="assertive" className="assistive-text">
+                {ariaFaneTekst}
+            </span>
             <div
                 className="sidebar__tab-container"
                 role="tablist"
@@ -198,7 +202,12 @@ function Sidebar(props: SidebarProps) {
                 id={selectedTabData.type}
                 tabIndex={0}
             >
-                {Sidevelger(selectedTabData, props.lukkTab, props.filtergruppe, props.filtervalg, props.enhettiltak)}
+                <Sidevelger
+                    selectedTabData={selectedTabData}
+                    filtergruppe={props.filtergruppe}
+                    filtervalg={props.filtervalg}
+                    enhettiltak={props.enhettiltak}
+                />
             </div>
         </div>
     );
