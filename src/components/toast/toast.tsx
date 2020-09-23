@@ -11,7 +11,7 @@ import {
 import hiddenIf from '../hidden-if/hidden-if';
 import { AppState } from '../../reducer';
 import { OrNothing } from '../../utils/types/types';
-import VeiledergruppeToast from './veiledergruppe-toast';
+import TimedToast from './veiledergruppe-toast';
 import './toast.less';
 
 interface StateProps {
@@ -21,33 +21,33 @@ interface StateProps {
 function Toasts({toasts}: StateProps) {
     switch (toasts) {
         case ToastActionType.VIS_OPPRETT_GRUPPE_TOAST:
-            return <VeiledergruppeToast
+            return <TimedToast
                 toastTekst="Gruppen er opprettet"
                 alertstripe="suksess"
                 fjernToast={fjernOpprettGruppeToast()}
             />;
         case ToastActionType.VIS_LAGRE_ENDRINGER_TOAST:
-            return <VeiledergruppeToast
+            return <TimedToast
                 toastTekst="Gruppen er lagret"
                 alertstripe="suksess"
                 fjernToast={fjernLagreEndringerToast()}
             />;
         case ToastActionType.VIS_SLETTE_GRUPPE_TOAST:
-            return <VeiledergruppeToast
+            return <TimedToast
                 toastTekst="Gruppen er slettet"
                 alertstripe="suksess"
                 fjernToast={fjernSletteGruppeToast()}
             />;
         case ToastActionType.VIS_INGEN_ENDRINGER_TOAST:
-            return <VeiledergruppeToast
+            return <TimedToast
                 toastTekst="Du har ikke gjort noen endringer"
                 alertstripe="info"
                 fjernToast={fjernIngenEndringerToast()}
             />;
         case ToastActionType.VIS_LAGRE_SORTERING_TOAST:
-            return <VeiledergruppeToast
+            return <TimedToast
                 toastTekst="Din sortering er lagret"
-                alertstripe="info"
+                alertstripe="suksess"
                 fjernToast={fjernSorteringToast()}
             />;
 
