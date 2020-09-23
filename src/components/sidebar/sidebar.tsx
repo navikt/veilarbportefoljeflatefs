@@ -89,6 +89,7 @@ function Sidebar(props: SidebarProps) {
     }
 
     const mapTabTilView = (tab: Sidebar, isSelected: boolean) => {
+        const ariaFaneTekst = isSidebarHidden ? 'Tab lukket.' : 'Tab åpen.';
         return (
             <button
                 className={classNames('sidebar__tab', {'sidebar__tab-valgt': isSelected})}
@@ -99,6 +100,7 @@ function Sidebar(props: SidebarProps) {
                 id={tab.type}
                 tabIndex={(!isSelected && -1) || 0}
                 onKeyUp={(e) => handleKeyUp(e, tab)}
+                title={ariaFaneTekst}
             >
                 <div className="sidebar__tab-ikon">{tab.icon}</div>
             </button>
@@ -179,13 +181,8 @@ function Sidebar(props: SidebarProps) {
         }
     });
 
-    const ariaFaneTekst = isSidebarHidden ? 'Tab lukket.' : 'Tab åpnet.';
-
     return (
         <div ref={sidebarRef} className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden', 'tabs')}>
-            <span aria-live="assertive" className="assistive-text">
-                {ariaFaneTekst}
-            </span>
             <div
                 className="sidebar__tab-container"
                 role="tablist"
