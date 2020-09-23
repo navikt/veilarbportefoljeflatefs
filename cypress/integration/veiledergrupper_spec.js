@@ -21,7 +21,7 @@ describe('Start ting', () => {
 describe('Lag ny veiledergruppe', () => {
     it('Sjekk at det er 5 filtre i Mine filter', () => {
         cy.get('[data-testid=sidebar-tab_VEILEDERGRUPPER]').click()
-        cy.get('[data-testid=mine-filter-rad-wrapper]').should('have.length', 5)
+        cy.get('[data-testid=veiledergruppe-rad-wrapper]').should('have.length', 5)
     })
     // it('Gå til Status i sidebaren', () => {
     //     cy.get('[data-testid=sidebar-tab_STATUS]').click()

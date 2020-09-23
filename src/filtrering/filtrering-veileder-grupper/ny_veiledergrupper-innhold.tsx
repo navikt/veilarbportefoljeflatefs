@@ -123,12 +123,11 @@ interface VeilederGruppeRad {
 }
 
 function VeilederGruppeRad({veilederGruppe, hanterVelgGruppe, onClickRedigerKnapp, veiledereFilter}: VeilederGruppeRad) {
-
     const lagretVeilederGruppe = veilederGruppe.filterValg.veiledere;
     const erValgt = veilederlisterErLik(lagretVeilederGruppe, veiledereFilter);
 
     return (
-        <div className="ny__veileder-gruppe__rad">
+        <div className="ny__veileder-gruppe__rad" data-testid="veiledergruppe-rad-wrapper">
             <Radio
                 className="ny__veileder-gruppe__gruppenavn"
                 key={veilederGruppe.filterId}

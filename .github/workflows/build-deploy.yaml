@@ -17,7 +17,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - run: npm i
-      - run: npm start
       - name: Cypress run
         uses: cypress-io/github-action@v1
         with:
