@@ -18,7 +18,7 @@ jobs:
           browser: chrome
           headless: true
           start: npm start cypress:run
-          wait-on: http://localhost:3001
+          wait-on: http://localhost:3000
 
 #    name: Cypress run
 #    runs-on: ubuntu-latest
