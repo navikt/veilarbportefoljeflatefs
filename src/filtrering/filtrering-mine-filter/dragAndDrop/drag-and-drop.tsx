@@ -22,7 +22,6 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
             filterId: filter.filterId
         }));
         if (harEndretRekkefølge(dragAndDropOrder, stateFilterOrder)) {
-            dispatch({type: 'sortering_endre/OK'});
             dispatch(lagreSorteringForFilter(idAndPriorities));
         }
         setisDraggable(false);

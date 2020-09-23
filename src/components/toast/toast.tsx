@@ -50,11 +50,18 @@ function Toasts({toasts}: StateProps) {
                 alertstripe="suksess"
                 fjernToast={fjernSorteringToast()}
             />;
+        case ToastActionType.VIS_SORTERING_FEILET_TOAST:
+            return <TimedToast
+                toastTekst="Din sortering ble ikke lagret"
+                alertstripe="feil"
+                fjernToast={fjernSorteringToast()}
+            />;
 
         case ToastActionType.FJERN_OPPRETT_GRUPPE_TOAST:
         case ToastActionType.FJERN_LAGRE_ENDRINGER_TOAST:
         case ToastActionType.FJERN_SLETTE_GRUPPE_TOAST:
         case ToastActionType.FJERN_INGEN_ENDRINGER_TOAST:
+        case ToastActionType.FJERN_SORTERING_TOAST:
             return null;
         default:
             return null;

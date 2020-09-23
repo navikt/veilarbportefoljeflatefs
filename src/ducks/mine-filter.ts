@@ -1,4 +1,4 @@
-import { doThenDispatch, STATUS, sendResultatTilDispatch, handterFeil } from './utils';
+import { doThenDispatch, STATUS } from './utils';
 import { FiltervalgModell } from '../model-interfaces';
 import {
     hentMineFilter,
@@ -27,6 +27,7 @@ export const SLETT_MINEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
 export const SORTER_MINEFILTER_OK = 'lagredefilter_sortering/OK';
 export const SORTER_MINEFILTER_FEILET = 'lagredefilter_sortering/FEILET';
+export const SORTER_MINEFILTER_PENDING = 'lagredefilter_sortering/PENDING';
 
 export interface MineFilter {
     filterNavn: string;
@@ -167,9 +168,9 @@ export function slettFilter(filterId: number) {
 }
 
 export function lagreSorteringForFilter(sorteringOgIder: SorteringOgId[]) {
-    return (dispatch) => {
-        return lagreSorteringFiltere(sorteringOgIder)
-            .then((data) => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
-            .catch(handterFeil(dispatch, SORTER_MINEFILTER_FEILET));
-    };
+        return doThenDispatch(()=> lagreSorteringFiltere(sorteringOgIder), {
+            OK: SORTER_MINEFILTER_OK,
+            FEILET: SORTER_MINEFILTER_FEILET,
+            PENDING: SORTER_MINEFILTER_PENDING
+        });
 }

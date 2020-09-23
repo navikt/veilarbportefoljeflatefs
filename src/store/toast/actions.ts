@@ -7,8 +7,9 @@ export enum ToastActionType {
     FJERN_OPPRETT_GRUPPE_TOAST = 'FJERN_OPPRETT_GRUPPE_TOAST',
     VIS_INGEN_ENDRINGER_TOAST = 'VIS_INGEN_ENDRINGER_TOAST',
     FJERN_INGEN_ENDRINGER_TOAST = 'FJERN_INGEN_ENDRINGER_TOAST',
-    VIS_LAGRE_SORTERING_TOAST = 'sortering_endre/OK',
-    FJERN_LAGRE_SORTERING_TOAST = 'FJERN_SORTERING_TOAST'
+    VIS_LAGRE_SORTERING_TOAST = 'lagredefilter_sortering/OK',
+    VIS_SORTERING_FEILET_TOAST = 'lagredefilter_sortering/FEILET',
+    FJERN_SORTERING_TOAST = 'FJERN_SORTERING_TOAST'
 }
 
 export interface ToastAction {
@@ -35,4 +36,4 @@ export const fjernIngenEndringerToast = (): ToastAction =>
     toastAction(ToastActionType.FJERN_INGEN_ENDRINGER_TOAST);
 
 export const fjernSorteringToast = (): ToastAction =>
-        toastAction(ToastActionType.FJERN_INGEN_ENDRINGER_TOAST);
+    toastAction(ToastActionType.FJERN_SORTERING_TOAST);

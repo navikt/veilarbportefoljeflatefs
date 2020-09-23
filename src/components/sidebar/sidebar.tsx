@@ -88,10 +88,11 @@ function Sidebar(props: SidebarProps) {
         return tabs.find((t) => t.type === viewType) as Sidebar;
     }
 
-    const mapTabTilView = (tab: Sidebar, isSelected: boolean) => {
+    const mapTabTilView = (tab: Sidebar, isSelected: boolean, key: number) => {
         const ariaFaneTekst = isSidebarHidden ? 'Tab lukket.' : 'Tab åpen.';
         return (
             <button
+                key={key}
                 className={classNames('sidebar__tab', {'sidebar__tab-valgt': isSelected})}
                 onClick={(e) => handleMouseClick(e, tab)}
                 role="tab"
@@ -169,9 +170,9 @@ function Sidebar(props: SidebarProps) {
         if (erPaMinOversikt) {
             return sidebar
                 .filter((tab) => !visVeiledergrupper(tab))
-                .map((tab) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type));
+                .map((tab,key) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, key));
         }
-        return sidebar.map((tab) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type));
+        return sidebar.map((tab,key) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, key));
     };
 
     outsideClick(sidebarRef, () => {

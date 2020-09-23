@@ -28,7 +28,7 @@ function DragAndDropContainer({
     const [destIndex, setDestIndex] = useState(-1);
     const [dropIndex, setDropIndex] = useState(-1);
     const [requestRowInFocuse, setRequestRowInFocuse] = useState(0);
-    const [ariaTekst, setAriaTekst] = useState('Bruk piltast opp eller ned for å velge et annet filter. Hold nede alt og press opp eller ned for å endre rekkefølgen til filter. Enter for å lagre. Escape for å avbryte.');
+    const [ariaTekst, setAriaTekst] = useState('');
     const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
     const dragAndDropOrderRef = useRef(dragAndDropOrder);
@@ -148,7 +148,7 @@ function DragAndDropContainer({
             <span aria-live="assertive" className="assistive-text">
                 {ariaTekst}
             </span>
-            <Normaltekst tag={'h3'} className="drag-and-drop-tittel" aria-disabled="true">
+            <Normaltekst tag={'h3'} className="drag-and-drop-tittel" aria-readonly="true" aria-live="polite">
                 Endre rekkefølge med ALT + piltaster eller dra og slipp:
             </Normaltekst>
             <ul ref={dragContainer} className="drag-and-drop-container" role={'listbox'}>
