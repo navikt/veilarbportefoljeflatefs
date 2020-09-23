@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {MineFilter} from '../../ducks/mine-filter';
 import './mine-filter_innhold.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
@@ -9,7 +9,7 @@ import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {REDESIGN} from '../../konstanter';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import DragAndDrop from './dragAndDrop/drag-and-drop';
+import MineFilterRad from './mine-filter-rad';
 
 const HiddenHjelpetekst = hiddenIf(Hjelpetekst);
 
@@ -26,7 +26,6 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
     const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
     const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
     const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
-    const [isDraggable, setisDraggable] = useState(false);
 
     const fjernUtilgjengeligeFilter = (elem) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
@@ -55,15 +54,16 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
 
     const hentFiltrertListeinnhold = () => {
         return (
-            <div className="lagrede-filter__valgfelt" ref={outerDivRef}>
-                <DragAndDrop
-                    stateFilterOrder={filtrertListe()}
-                    filtergruppe={props.filtergruppe}
-                    isDraggable={isDraggable}
-                    setisDraggable={setisDraggable}
-                />
-            </div>
-        );
+            <div className='mine-filter__valgfelt' ref={outerDivRef}>
+                {filtrertListe().map((filter, idx) =>
+                    <MineFilterRad
+                        key={idx}
+                        filter={filter}
+                        filtergruppe={props.filtergruppe}
+                        parentDiv={outerDivRef}
+                    />
+                )}
+            </div>)
     };
 
     const getEmptyState = () => {
