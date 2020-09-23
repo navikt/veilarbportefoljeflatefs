@@ -14,7 +14,6 @@
     "heroku-postbuild": "cross-env REACT_APP_MOCK=true npm run build",
     "test": "craco test --watchAll=false",
     "lint": "echo not implemented",
-    "start:cypress": "npm-run-all -p",
     "cypress:clear": "cypress cache clear",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --record --key 462e10dd-00e4-42e9-94c2-cec8057f5ba7"
@@ -31,6 +30,7 @@
     "@types/react-redux": "7.1.9",
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
+    "cypress": "^5.2.0",
     "prettier": "1.19.1",
     "start-server-and-test": "^1.11.4",
     "webpack": "^4.44.2",
@@ -44,7 +44,6 @@
     "classnames": "^2.2.6",
     "craco-less": "1.17.0",
     "cross-env": "7.0.2",
-    "cypress": "^5.2.0",
     "cypress-run": "^1.1.1",
     "cypress-wait-until": "^1.7.1",
     "express": "4.17.1",
