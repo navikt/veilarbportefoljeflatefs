@@ -18,8 +18,8 @@ jobs:
         uses: actions/checkout@v1
       - run: npm i
 #      - run: npm start & wait-on http://localhost:3000
-      - run: npm start
-      - run: npm run cypress run rec
+      - run: cy:test
+#      - run: npm run cypress run rec
       - name: Cypress run
         uses: cypress-io/github-action@v1
         with:
