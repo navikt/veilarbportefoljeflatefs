@@ -18,7 +18,6 @@ jobs:
         with:
           browser: chrome
           headless: true
-#          start: npm start cypress:run --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
           start: npm start cypress:run
           wait-on: http://localhost:3000
           record: true
