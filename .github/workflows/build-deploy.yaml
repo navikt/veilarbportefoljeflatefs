@@ -27,7 +27,7 @@ jobs:
           start: npm start cypress:run
           wait-on: http://localhost:3000
         env:
-        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
   build:
     name: Build Project
