@@ -8,7 +8,7 @@ env:
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -20,24 +20,24 @@ jobs:
           headless: true
           start: npm run start:cypress
           wait-on: http://localhost:3001
-    test-build-and-push:
-      name: Test, build and push
-      needs: cypress-run
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v1
-          name: Checkout
-        - name: Lag tag for image
-          run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-        - name: Lag full image referanse
-          run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
-        - name: Build app and publish Docker image
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: |
-            docker build --tag ${IMAGE} .
-            echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
-            docker push ${IMAGE}
+      test-build-and-push:
+        name: Test, build and push
+        needs: cypress-run
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v1
+            name: Checkout
+          - name: Lag tag for image
+            run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+          - name: Lag full image referanse
+            run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+          - name: Build app and publish Docker image
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            run: |
+              docker build --tag ${IMAGE} .
+              echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
+              docker push ${IMAGE}
 #    name: Cypress run
 #    runs-on: ubuntu-latest
 #    strategy:
@@ -58,9 +58,6 @@ jobs:
 #          group: 'Actions example'
 #        env:
 #          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-
-
-
 
   build:
     name: Build Project
