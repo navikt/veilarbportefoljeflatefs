@@ -22,7 +22,7 @@ jobs:
           wait-on: http://localhost:3000
           record: true
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.462e10dd-00e4-42e9-94c2-cec8057f5ba7 }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
   build:
     name: Build Project
