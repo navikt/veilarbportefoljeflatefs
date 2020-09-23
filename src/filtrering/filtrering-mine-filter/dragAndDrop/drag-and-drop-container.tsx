@@ -148,7 +148,7 @@ function DragAndDropContainer({
             <span aria-live="assertive" className="assistive-text">
                 {ariaTekst}
             </span>
-            <Normaltekst tag={'h3'} className="drag-and-drop-tittel" aria-live="polite">
+            <Normaltekst tag={'h3'} className="drag-and-drop-tittel" aria-live="assertive">
                 Endre rekkefølge med ALT + piltaster eller dra og slipp:
             </Normaltekst>
             <ul ref={dragContainer} className="drag-and-drop-container" role={'listbox'}>
