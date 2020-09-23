@@ -22,6 +22,20 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '23. september 2020',
+        tittel: 'Endring i filtermenyen',
+        versjonId: '23.09.20',
+        featureToggleName: 'veilarbportefolje.redesign',
+        children:
+            <>
+                <ul>
+                    <li>Filtrene ligger nå i faner og sitter fast på siden når du scroller i listen. Du kan lukke
+                        filtermenyen når du ønsker større plass til listen.
+                    </li>
+                    <li>Du kan endre rekkefølge på dine lagrede filter.</li>
+                </ul>
+            </>
+    }, {
         dato: '8. september 2020',
         tittel: 'Varsel til bruker før møter',
         versjonId: '08.09.20',
