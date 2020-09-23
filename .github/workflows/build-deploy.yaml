@@ -18,7 +18,7 @@ jobs:
         with:
           browser: chrome
           headless: true
-          start: npm start run cypress:run
+          start: npm run cytest
           wait-on: http://localhost:3000
 
   build:
@@ -33,6 +33,7 @@ jobs:
       - uses: actions/cache@v1
         with:
           path: ./node_modules
+          key: ${{ runner.os }}-node-cache-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-cache
       - run: npm ci
