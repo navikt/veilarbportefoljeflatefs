@@ -8,26 +8,60 @@ env:
 
 jobs:
   test:
-    name: Cypress run
+cypress-run:
+  runs-on: ubuntu-16.04
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Cypress run
+      uses: cypress-io/github-action@v1
+      with:
+        browser: chrome
+        headless: true
+        start: npm run start:cypress
+        wait-on: http://localhost:3001
+  test-build-and-push:
+    name: Test, build and push
+    needs: cypress-run
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        machines: [ 1, 2, 3 ]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - run: npm i
-#      - run: npm start & wait-on http://localhost:3000
-      - run: cy:test
-#      - run: npm run cypress run rec
-      - name: Cypress run
-        uses: cypress-io/github-action@v1
-        with:
-          record: true
-          parallel: true
-          group: 'Actions example'
+      - uses: actions/checkout@v1
+        name: Checkout
+      - name: Lag tag for image
+        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+      - name: Lag full image referanse
+        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+      - name: Build app and publish Docker image
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker build --tag ${IMAGE} .
+          echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
+          docker push ${IMAGE}
+#    name: Cypress run
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        machines: [ 1, 2, 3 ]
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v1
+#      - run: npm i
+##      - run: npm start & wait-on http://localhost:3000
+#      - run: cy:test
+##      - run: npm run cypress run rec
+#      - name: Cypress run
+#        uses: cypress-io/github-action@v1
+#        with:
+#          record: true
+#          parallel: true
+#          group: 'Actions example'
+#        env:
+#          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+
+
 
   build:
     name: Build Project
