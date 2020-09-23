@@ -8,56 +8,25 @@ env:
 
 jobs:
   test:
-    name: Parallel on every OS
-    on: [ push, pull_request ]
-    jobs:
-      parallel-runs-across-platforms:
-        name: every OS
-        strategy:
-          matrix:
-            # run 2 copies of the current job in parallel
-            # and they will load balance all specs
-            os: [ 'ubuntu-latest', 'windows-latest', 'macos-latest' ]
-            machines: [ 1, 2 ]
-        runs-on: ${{ matrix.os }}
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v1
-          - run: npm i
-          # because of "record" and "parallel" parameters
-          # these containers will load balance all found tests among themselves
-          - name: run tests
-            uses: cypress-io/github-action@v1
-            timeout-minutes: 10
-            with:
-              record: true
-              parallel: true
-              group: Parallel 2x on ${{ matrix.os }}
-              # on Mac and Linux we can use "npm start"
-              start: npm start
-              # but for this particular project on Windows we need a different start command
-              start-windows: npm run start:ci:windows
-            env:
-              # pass the Dashboard record key as an environment variable
-              CYPRESS_RECORD_KEY: ${{ secrets.dashboardRecordKey }}
-
-  #    name: Cypress run
-  #    runs-on: ubuntu-latest
-  #    strategy:
-  #      matrix:
-  #        machines: [ 1, 2, 3 ]
-  #    steps:
-  #      - name: Checkout
-  #        uses: actions/checkout@v1
-  #      - run: npm i
-  #      - name: Cypress run
-  #        uses: cypress-io/github-action@v1
-  #        with:
-  #          record: true
-  #          parallel: true
-  #          group: 'Actions example'
-  #        env:
-  #          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+    name: Cypress run
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        machines: [ 1, 2, 3 ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - run: npm i
+      - run: npm start & wait-on http://localhost:8080
+#      - run: npm run cypress run rec
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+        with:
+          record: true
+          parallel: true
+          group: 'Actions example'
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
   build:
     name: Build Project
