@@ -7,38 +7,37 @@ env:
   PRINT_PAYLOAD: true
 
 jobs:
-  test:
-cypress-run:
-  runs-on: ubuntu-16.04
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Cypress run
-      uses: cypress-io/github-action@v1
-      with:
-        browser: chrome
-        headless: true
-        start: npm run start:cypress
-        wait-on: http://localhost:3001
-  test-build-and-push:
-    name: Test, build and push
-    needs: cypress-run
-    runs-on: ubuntu-latest
+  cypress-run:
+    runs-on: ubuntu-16.04
     steps:
-      - uses: actions/checkout@v1
-        name: Checkout
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-      - name: Lag full image referanse
-        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
-      - name: Build app and publish Docker image
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          docker build --tag ${IMAGE} .
-          echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
-          docker push ${IMAGE}
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+        with:
+          browser: chrome
+          headless: true
+          start: npm run start:cypress
+          wait-on: http://localhost:3001
+    test-build-and-push:
+      name: Test, build and push
+      needs: cypress-run
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+          name: Checkout
+        - name: Lag tag for image
+          run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+        - name: Lag full image referanse
+          run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+        - name: Build app and publish Docker image
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            docker build --tag ${IMAGE} .
+            echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
+            docker push ${IMAGE}
 #    name: Cypress run
 #    runs-on: ubuntu-latest
 #    strategy:
