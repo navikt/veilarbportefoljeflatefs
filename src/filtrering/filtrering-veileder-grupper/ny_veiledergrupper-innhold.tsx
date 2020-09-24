@@ -88,9 +88,9 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     return (
         <div className="ny__veileder-gruppe__valgfelt" ref={outerDivRef}>
-            {props.lagretFilter.map((veilederGruppe, idx) =>
+            {props.lagretFilter.map((veilederGruppe, index) =>
                 <VeilederGruppeRad
-                    key={idx}
+                    key={index}
                     veilederGruppe={veilederGruppe}
                     onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
                     hanterVelgGruppe={(e) => velgGruppe(e.target.value)}
@@ -127,7 +127,8 @@ function VeilederGruppeRad({veilederGruppe, hanterVelgGruppe, onClickRedigerKnap
     const erValgt = veilederlisterErLik(lagretVeilederGruppe, veiledereFilter);
 
     return (
-        <div className="ny__veileder-gruppe__rad" data-testid="veiledergruppe-rad-wrapper">
+        <div className="ny__veileder-gruppe__rad"
+             data-testid="veiledergruppe-rad-wrapper">
             <Radio
                 className="ny__veileder-gruppe__gruppenavn"
                 key={veilederGruppe.filterId}
@@ -136,11 +137,13 @@ function VeilederGruppeRad({veilederGruppe, hanterVelgGruppe, onClickRedigerKnap
                 value={veilederGruppe.filterId}
                 onChange={hanterVelgGruppe}
                 checked={erValgt}
+                data-testid={`veiledergruppe-rad_${veilederGruppe.filterNavn}`}
             />
             <RedigerKnapp
                 hidden={!erValgt}
                 aria="Rediger veiledergruppe"
                 onClick={onClickRedigerKnapp}
+                dataTestid={`rediger-veiledergruppe-knapp_${veilederGruppe.filterNavn}`}
             />
         </div>
     );

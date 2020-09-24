@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import './toast.less';
-import { useDispatch } from 'react-redux';
-import { useTimer } from '../../hooks/use-timer';
+import {useDispatch} from 'react-redux';
+import {useTimer} from '../../hooks/use-timer';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 interface VeiledergruppeToastProps {
@@ -25,14 +25,16 @@ function VeiledergruppeToast(props: VeiledergruppeToastProps) {
         const timer = setTimeout(() => {
             dispatch(props.fjernToast);
         }, 6000);
-
-
         return () => clearTimeout(timer);
     });
 
     return (
-        <div className="veiledergruppe-toast" ref={toastRef} tabIndex={0}>
-            <AlertStripe type={props.alertstripe} className="veiledergruppe-toast__alertstripe">
+        <div className="veiledergruppe-toast"
+             ref={toastRef}
+             tabIndex={0}>
+            <AlertStripe type={props.alertstripe}
+                         className="veiledergruppe-toast__alertstripe"
+                         data-testid="veiledergruppe-toast">
                 <span className="veiledergruppe-toast__tekst">
                     {props.toastTekst}
                 </span>

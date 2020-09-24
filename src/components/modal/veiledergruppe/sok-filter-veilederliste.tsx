@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Input } from 'nav-frontend-skjema';
+import React, {useEffect, useState} from 'react';
+import {Input} from 'nav-frontend-skjema';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 interface SokFilterProps<T> {
@@ -39,6 +39,7 @@ function SokFilterVeilederliste<T>(props: SokFilterProps<T>) {
                     value={query}
                     inputClassName="sokfilter__input"
                     onChange={e => setQuery(e.target.value)}
+                    data-testid="veiledergruppe-modal-sok-veileder-input"
                 />
             </div>
             <span className="text-hide" aria-live="polite" aria-atomic="true">

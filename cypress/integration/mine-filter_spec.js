@@ -2,6 +2,11 @@ import React from "react";
 
 const mineFilterNavn = "Voff";
 const mineFilterNavnRedigert = "Mjau";
+const klikkPaSidebarTab = (tab) => {
+    it(`Gå til ${tab} i sidebaren`, () => {
+        cy.get(`[data-testid=sidebar-tab_${tab}]`).click()
+    })
+}
 
 //TODO bør få dette over i commands.js-filen, men den kjører foreløpig ikke med Cypress run
 describe('Start ting', () => {
@@ -23,9 +28,7 @@ describe('Lag nytt filter', () => {
         cy.get('[data-testid=sidebar-tab_MINE_FILTER]').click()
         cy.get('[data-testid=mine-filter-rad-wrapper]').should('have.length', 5)
     })
-    it('Gå til Status i sidebaren', () => {
-        cy.get('[data-testid=sidebar-tab_STATUS]').click()
-    })
+    klikkPaSidebarTab("STATUS")
     it('Filtrer på ufordelte brukere', () => {
         cy.get('[data-testid=filter-checkboks-container_ufordeltebruker]').check({force: true})
     })
@@ -42,7 +45,7 @@ describe('Lag nytt filter', () => {
     it('Trykk på velg', () => {
         cy.get('[data-testid=checkbox-filterform__velg-knapp]').click()
     })
-    it('Sjekk at etiketten for <= 19 år er der', () => {
+    it('Sjekk at etiketten for ≤ 19 år er der', () => {
         cy.get('[data-testid=filtreringlabel]').contains("≤ 19 år")
     })
     it('Klikk Lagre filter-knapp', () => {
@@ -101,6 +104,13 @@ describe('Rediger filtervalg', () => {
     it('Fjern etikett med ufordelte brukere', () => {
         cy.get('[data-testid=filtreringlabel]').contains("Ufordelte brukere").click()
     })
+    klikkPaSidebarTab("STATUS")
+    it('Legg til filter', () => {
+        cy.get('[data-testid=filter-checkboks-container_avtaltMoteMedNav]').check({force: true})
+    })
+    it('Fjern etikett med ufordelte brukere', () => {
+        cy.get('[data-testid=filtreringlabel]').contains("≤ 19 år").click()
+    })
     it('Klikk Lagre filter-knapp', () => {
         cy.get('[data-testid=lagre-filter-knapp]').click()
     })
@@ -114,7 +124,7 @@ describe('Rediger filtervalg', () => {
         cy.get('[data-testid=rediger-filter-modal-lagre-knapp]').click()
     })
     it('Sjekk at det er ett filtervalg', () => {
-        cy.get('[data-testid=filtreringlabel]').should('have.length', 1)
+        cy.get('[data-testid=filtreringlabel]').should('have.length', 1).contains("Møte med NAV idag")
     })
     it('Sjekk at det er 6 filtre i Mine filter', () => {
         cy.get('[data-testid=mine-filter-rad-wrapper]').should('have.length', 6)

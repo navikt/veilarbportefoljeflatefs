@@ -1,8 +1,8 @@
-import { Checkbox } from 'nav-frontend-skjema';
+import {Checkbox} from 'nav-frontend-skjema';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import '../../../ny_style.less';
-import { AppState } from '../../../reducer';
+import {AppState} from '../../../reducer';
 import SokFilterVeilederliste from './sok-filter-veilederliste';
 
 interface SokVeiledereProps {
@@ -22,13 +22,14 @@ function SokVeiledereVeiledergrupper({erValgt, hanterVeilederValgt}: SokVeileder
             {liste =>
                 <div>
                     <div className="checkbox-filterform__valg">
-                        {liste.map(elem =>
+                        {liste.map((elem, index) =>
                             <Checkbox
                                 key={elem.ident}
                                 label={`${elem.etternavn}, ${elem.fornavn}`}
                                 value={elem.ident}
                                 checked={erValgt(elem.ident)}
                                 onChange={e => hanterVeilederValgt(e.target.checked, e.target.value)}
+                                data-testid={`veiledergruppe-modal-veileder-checkbox_${index}`}
                             />)}
                     </div>
                 </div>

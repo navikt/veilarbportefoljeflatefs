@@ -35,7 +35,7 @@ function FiltreringLabel({
             aria-label={arialLabel}
             className={buttonClassnames}
             onClick={slettFilter}
-            data-testid={`filtreringlabel`}>
+            data-testid='filtreringlabel'>
             <span className={className}>{lagConfig(label).label}</span>
             {skalHaKryssIkon && <FilterIkon/>}
         </button>

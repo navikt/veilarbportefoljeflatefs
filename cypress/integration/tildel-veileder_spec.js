@@ -1,7 +1,7 @@
 import React from "react";
 
-describe('Tildel veileder', () => {
 //TODO bør få dette over i commands.js-filen, men den kjører foreløpig ikke med Cypress run
+describe('Start ting', () => {
     it('Åpne browser med oversikten', () => {
         cy.server();
         cy.visit('/')
@@ -13,6 +13,8 @@ describe('Tildel veileder', () => {
         cy.get('[data-testid=enhetens-oversikt]').contains('Enhetens oversikt')
             .should('exist')
     })
+})
+describe('Tildel veileder', () => {
     it('Gå til min oversikt', () => {
         cy.get(`[data-testid=min-oversikt]`).click()
         cy.url().should('include', '/veilarbportefoljeflatefs/portefolje')

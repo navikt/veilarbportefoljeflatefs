@@ -1,7 +1,6 @@
 import React from "react";
-
-describe('Søk veileder', () => {
 //TODO bør få dette over i commands.js-filen, men den kjører foreløpig ikke med Cypress run
+describe('Start ting', () => {
     it('Åpne browser med oversikten', () => {
         cy.server();
         cy.visit('/')
@@ -13,6 +12,8 @@ describe('Søk veileder', () => {
         cy.get('[data-testid=enhetens-oversikt]').contains('Enhetens oversikt')
             .should('exist')
     })
+})
+describe('Søk veileder', () => {
     it('Filtrer på ufordelte brukere', () => {
         cy.get('[data-testid=filter-checkboks-container_ufordeltebruker]').check({force: true})
     })

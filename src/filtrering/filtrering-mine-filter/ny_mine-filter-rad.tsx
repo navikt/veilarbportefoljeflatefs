@@ -37,7 +37,8 @@ function NyMineFilterRad({filter, filtergruppe, dataTestid}: LagretFilterRadProp
     }
 
     return (
-        <div className="ny__mine-filter__rad" data-testid={`mine-filter-rad-wrapper`}>
+        <div className="ny__mine-filter__rad"
+             data-testid='mine-filter-rad-wrapper'>
             <Radio
                 className="ny__mine-filter__filternavn"
                 key={filter.filterId}
