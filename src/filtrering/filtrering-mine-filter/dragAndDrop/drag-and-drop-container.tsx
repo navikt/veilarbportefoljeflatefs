@@ -1,28 +1,26 @@
-import React, {useRef, useState, useEffect, useCallback, MutableRefObject} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useEventListener} from '../../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
 import {MineFilter} from '../../../ducks/mine-filter';
-import {Hovedknapp, Flatknapp, Knapp} from 'nav-frontend-knapper';
+import {Flatknapp, Hovedknapp, Knapp} from 'nav-frontend-knapper';
 import {Normaltekst} from 'nav-frontend-typografi';
 import classNames from 'classnames';
-import {handleDragEnter, handleDragEnd, handleDragStart, handleDragOver} from './mouse-drag-event-listeners';
-import {handleKeyUp, handleKeyDown} from './keyboard-event-listeners';
+import {handleDragEnd, handleDragEnter, handleDragOver, handleDragStart} from './mouse-drag-event-listeners';
+import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';
 
 export interface DragAndDropContainerProps {
     dragAndDropOrder: MineFilter[];
     setDragAndDropOrder: React.Dispatch<React.SetStateAction<MineFilter[]>>;
     lagreRekkefølge: () => void;
     avbryt: () => void;
-    onUnmount: MutableRefObject<() => void>;
 }
 
 function DragAndDropContainer({
     dragAndDropOrder,
     setDragAndDropOrder,
     lagreRekkefølge,
-    avbryt,
-    onUnmount
+    avbryt
 }: DragAndDropContainerProps) {
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
@@ -87,8 +85,6 @@ function DragAndDropContainer({
         setRequestRowInFocuse(row);
     }, []);
 
-    //-------- Function call on unMount --------
-    useEffect(() => () => onUnmount.current(), [onUnmount]);
 
     //-------- Drag and drop with mouse handeling --------
     const eventIsInsideContainer = (e) => dragContainer.current !== null && dragContainer.current.contains(e.target);
