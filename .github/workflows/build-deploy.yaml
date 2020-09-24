@@ -44,7 +44,7 @@ jobs:
   build-docker-image:
     runs-on: ubuntu-latest
     name: Build and publish Docker image
-    needs: build
+    needs: build, cypress-run
     if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v1
@@ -70,7 +70,7 @@ jobs:
     name: Deply q0 fss
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev'
-    needs: build-docker-image cypress-run
+    needs: build-docker-image
     steps:
       - uses: actions/checkout@v1
       - uses: nais/deploy/actions/deploy@v1
@@ -82,7 +82,7 @@ jobs:
   deploy-q1:
     name: Deply q1 fss
     if: github.ref == 'refs/heads/dev'
-    needs: build-docker-image cypress-run
+    needs: build-docker-image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -95,7 +95,7 @@ jobs:
   deploy-prod:
     name: deply prod fss
     if: github.ref == 'refs/heads/master'
-    needs: build-docker-image cypress-run
+    needs: build-docker-image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
