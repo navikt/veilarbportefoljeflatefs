@@ -1,5 +1,9 @@
-import React, {useRef} from 'react';
-import {SidebarTabInfo as SidebarTabType, useSidebarViewStore} from '../../store/sidebar/sidebar-view-store';
+import React, {useRef, Dispatch} from 'react';
+import {
+    SidebarTabInfo as SidebarTabType,
+    useSidebarViewStore,
+    SidebarTabInfo
+} from '../../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import './sidebar.less';
 import {ReactComponent as StatusIkon} from '../ikoner/tab_status.svg';
@@ -23,6 +27,20 @@ interface Sidebar {
     type: SidebarTabType;
     icon: React.ReactNode;
     tittel: string;
+}
+
+interface EndreSideBarProps {
+    dispatch: Dispatch<any>;
+    currentListevisningsType: ListevisningType | string;
+    requestedTab: SidebarTabInfo;
+}
+
+export function endreSideBar({dispatch, currentListevisningsType, requestedTab}: EndreSideBarProps) {
+    dispatch({
+        name: currentListevisningsType,
+        selectedTab: requestedTab,
+        type: SIDEBAR_TAB_ENDRET
+    });
 }
 
 const sidebar: Sidebar[] = [
@@ -146,10 +164,10 @@ function Sidebar(props: SidebarProps) {
     }
 
     function handleOnTabClicked(e, tab: Sidebar) {
-        dispatch({
-            type: SIDEBAR_TAB_ENDRET,
-            selectedTab: tab.type,
-            name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
+        endreSideBar({
+            dispatch: dispatch,
+            requestedTab: tab.type,
+            currentListevisningsType: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
         });
 
         if (isSidebarHidden) {
@@ -170,9 +188,9 @@ function Sidebar(props: SidebarProps) {
         if (erPaMinOversikt) {
             return sidebar
                 .filter((tab) => !visVeiledergrupper(tab))
-                .map((tab,key) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, key));
+                .map((tab, key) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, key));
         }
-        return sidebar.map((tab,key) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, key));
+        return sidebar.map((tab, key) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, key));
     };
 
     outsideClick(sidebarRef, () => {

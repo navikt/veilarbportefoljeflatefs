@@ -14,6 +14,7 @@ import {ListevisningType} from '../../../ducks/ui/listevisning';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
+import {endreSideBar} from '../../sidebar/sidebar';
 
 export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModal; filtergruppe}) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
@@ -47,10 +48,10 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
                     filterId: filterId
                 })
             ).then(() => {
-                dispatch({
-                    name: props.filtergruppe,
-                    type: 'sidebarTabEndret',
-                    selectedTab: SidebarTabInfo.MINE_FILTER
+                endreSideBar({
+                    dispatch: dispatch,
+                    requestedTab: SidebarTabInfo.MINE_FILTER,
+                    currentListevisningsType: props.filtergruppe
                 });
             });
             requestHandlerOppdater.setSaveRequestSent(true);

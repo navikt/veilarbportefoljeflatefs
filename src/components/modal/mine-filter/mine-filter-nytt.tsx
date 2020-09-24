@@ -13,6 +13,7 @@ import {ListevisningType} from '../../../ducks/ui/listevisning';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
+import {endreSideBar} from '../../sidebar/sidebar';
 
 export function LagreNyttMineFilter(props: {filtergruppe: string; lukkModal}) {
     const filterValg = useSelector((state: AppState) =>
@@ -40,10 +41,10 @@ export function LagreNyttMineFilter(props: {filtergruppe: string; lukkModal}) {
                     filterValg: filterValg
                 })
             ).then(() => {
-                dispatch({
-                    name: props.filtergruppe,
-                    type: 'sidebarTabEndret',
-                    selectedTab: SidebarTabInfo.MINE_FILTER
+                endreSideBar({
+                    dispatch: dispatch,
+                    requestedTab: SidebarTabInfo.MINE_FILTER,
+                    currentListevisningsType: props.filtergruppe
                 });
             });
         }
