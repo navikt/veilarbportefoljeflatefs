@@ -119,17 +119,16 @@ describe('Rediger filtervalg', () => {
     it('Toasten skal vise "Gruppen er lagret"', () => {
         cy.get('[data-testid=veiledergruppe-toast]').should("be.visible").contains("Gruppen er lagret")
     })
-    //TODO denne funker ikke
-    // it(`Etiketten skal inneholde ${markusAasenEtikett}`, () => {
-    //     cy.get('[data-testid=filtreringlabel]').contains(markusAasenEtikett)
-    // })
+    it('Sjekk at det er ett filtervalg', () => {
+        cy.get('[data-testid=filtreringlabel]').should('have.length', 1).contains(markusAasenEtikett)
+    })
 })
 
-describe('Slett lagret filter', () => {
+describe('Slett veiledergruppe', () => {
     it('Klikk på blyantsymbolet', () => {
         cy.get(`[data-testid=rediger-veiledergruppe-knapp_${gruppenavnRedigert}]`).click()
     })
-    it('Slett filter', () => {
+    it('Klikk på slette-knapp', () => {
         cy.get('[data-testid=veiledergruppe-modal-slette-knapp]').click()
     })
     it('Bekreft sletting', () => {
@@ -137,5 +136,8 @@ describe('Slett lagret filter', () => {
     })
     it('Det eksisterer 5 veiledergrupper', () => {
         cy.get('[data-testid=veiledergruppe-rad-wrapper]').should('have.length', 5)
+    })
+    it('Toasten skal vise "Gruppen er slettet"', () => {
+        cy.get('[data-testid=veiledergruppe-toast]').should("be.visible").contains("Gruppen er slettet")
     })
 })
