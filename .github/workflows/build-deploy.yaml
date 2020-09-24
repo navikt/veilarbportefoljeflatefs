@@ -10,7 +10,7 @@ jobs:
   cypress-run:
     name: Cypress run
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    if: ${{ github.event_name == 'pull_request' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,7 +24,6 @@ jobs:
           record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-
   build:
     name: Build Project
     runs-on: ubuntu-latest
