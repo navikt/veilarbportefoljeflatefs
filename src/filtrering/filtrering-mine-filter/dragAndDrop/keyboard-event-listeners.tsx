@@ -65,10 +65,6 @@ export function handleKeyUp({
                 } else {
                     requestNewOrder(e.target.value, e.target.value + 1);
                 }
-            } else if (e.keyCode === keyCodes.space) {
-                setAriaTekst(
-                    'Bruk piltast opp eller ned for å velge et annet filter. Hold nede alt-knappen og trykk opp eller ned for å endre rekkefølgen til filteret. Trykk enter for å lagre, og escape for å avbryte.'
-                );
             } else if (e.keyCode === keyCodes.esc) {
                 avbryt();
             } else if (e.keyCode === keyCodes.enter) {
