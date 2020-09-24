@@ -24,7 +24,6 @@ jobs:
           record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-
   build:
     name: Build Project
     runs-on: ubuntu-latest
@@ -71,9 +70,7 @@ jobs:
     name: Deply q0 fss
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev'
-    needs:
-    - build-docker-image
-    - cypress-run
+    needs: build-docker-image
     steps:
       - uses: actions/checkout@v1
       - uses: nais/deploy/actions/deploy@v1
@@ -85,9 +82,7 @@ jobs:
   deploy-q1:
     name: Deply q1 fss
     if: github.ref == 'refs/heads/dev'
-    needs:
-    - build-docker-image
-    - cypress-run
+    needs: build-docker-image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -101,8 +96,8 @@ jobs:
     name: deply prod fss
     if: github.ref == 'refs/heads/master'
     needs:
-    - build-docker-image
-    - cypress-run
+      - build-docker-image
+      - cypress-run
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
