@@ -127,7 +127,6 @@ function DragAndDropContainer({
             requestNewOrder,
             lagreRekkefølge,
             avbryt,
-            setAriaTekst,
             setDestIndex,
             setSrcIndex
         })

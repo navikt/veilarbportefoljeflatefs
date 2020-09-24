@@ -1,9 +1,10 @@
-import React, {useState, useRef, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import './drag-and-drop.less';
 import {MineFilter, lagreSorteringForFilter} from '../../../ducks/mine-filter';
 import DragAndDropContainer from './drag-and-drop-container';
 import NyMineFilterRad from '../ny_mine-filter-rad';
 import {useDispatch} from 'react-redux';
+import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
 
 export interface DragAndDropProps {
     stateFilterOrder: MineFilter[];
@@ -14,6 +15,7 @@ export interface DragAndDropProps {
 
 function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggable}: DragAndDropProps) {
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
+    const [onUnmountRef, setOnUnmount] = useOnlyOnUnmount();
     const dispatch = useDispatch();
 
     const lagreRekkefølge = useCallback(() => {
@@ -27,16 +29,12 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
         setisDraggable(false);
     }, [dragAndDropOrder, stateFilterOrder, setisDraggable, dispatch]);
 
-    const onUnmountRef = useRef(() => {
-        lagreRekkefølge();
-    });
-
     useEffect(() => {
-        onUnmountRef.current = () => lagreRekkefølge();
-    }, [lagreRekkefølge]);
+        setOnUnmount(lagreRekkefølge);
+    }, [lagreRekkefølge, setOnUnmount]);
 
     const avbryt = () => {
-        onUnmountRef.current = () => null;
+        setOnUnmount(() => null);
         setDragAndDropOrder([...stateFilterOrder]);
         setisDraggable(false);
     };

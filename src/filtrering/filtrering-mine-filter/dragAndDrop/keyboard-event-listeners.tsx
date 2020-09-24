@@ -13,7 +13,6 @@ export interface HandleKeyUpProps {
     requestNewOrder: (from: number, to: number) => void;
     lagreRekkefølge: () => void;
     avbryt: () => void;
-    setAriaTekst: React.Dispatch<React.SetStateAction<string>>;
     setDestIndex: React.Dispatch<React.SetStateAction<number>>;
     setSrcIndex: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -51,7 +50,6 @@ export function handleKeyDown({
 export function handleKeyUp({
     eventIsInsideContainer,
     requestNewOrder,
-    setAriaTekst,
     setDestIndex,
     setSrcIndex,
     avbryt,
