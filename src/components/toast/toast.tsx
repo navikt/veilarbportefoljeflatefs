@@ -11,7 +11,7 @@ import {
 import hiddenIf from '../hidden-if/hidden-if';
 import { AppState } from '../../reducer';
 import { OrNothing } from '../../utils/types/types';
-import TimedToast from './veiledergruppe-toast';
+import TimedToast from './timed-toast';
 import './toast.less';
 
 interface StateProps {
