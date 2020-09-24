@@ -37,7 +37,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
             if (isDraggable){
                 lagreRekkefolge()
             } };
-    },[isDraggable])
+    },[isDraggable, lagreRekkefolge])
 
     if (isDraggable) {
         return (
