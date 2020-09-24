@@ -1,7 +1,7 @@
 import React from 'react';
 import './toggle-switch.less';
-import {ReactComponent as LåsLukket} from './lock-close.svg';
-import {ReactComponent as LåsÅpen} from './lock-open.svg';
+import {ReactComponent as LasLukket} from './lock-close.svg';
+import {ReactComponent as LasApen} from './lock-open.svg';
 
 interface ToggleSwitchProps {
     onOpen?: () => void;
@@ -31,10 +31,10 @@ function ToggleSwitch({onOpen, onClose, defaultChecked, checked, ariaLabel}: Tog
             />
             <span className="switch-slider"></span>
             <div className="toggle-switch-las__lukked">
-                <LåsLukket />
+                <LasLukket />
             </div>
             <div className="toggle-switch-las__apen">
-                <LåsÅpen />
+                <LasApen />
             </div>
             <div className="toggle-switch-border"></div>
         </label>
