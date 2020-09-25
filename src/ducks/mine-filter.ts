@@ -1,5 +1,5 @@
-import { doThenDispatch, STATUS } from './utils';
-import { FiltervalgModell } from '../model-interfaces';
+import {doThenDispatch, STATUS, sendResultatTilDispatch, handterFeil} from './utils';
+import {FiltervalgModell} from '../model-interfaces';
 import {
     hentMineFilter,
     lagreSorteringFiltere,
@@ -27,7 +27,6 @@ export const SLETT_MINEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
 export const SORTER_MINEFILTER_OK = 'lagredefilter_sortering/OK';
 export const SORTER_MINEFILTER_FEILET = 'lagredefilter_sortering/FEILET';
-export const SORTER_MINEFILTER_PENDING = 'lagredefilter_sortering/PENDING';
 
 export interface MineFilter {
     filterNavn: string;
@@ -77,23 +76,23 @@ const initialState = {
 export default function reducer(state: MineFilterState = initialState, action) {
     switch (action.type) {
         case HENT_MINEFILTER_PENDING:
-            return { ...state, status: STATUS.PENDING, handlingType: HandlingsType.HENTE };
+            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.HENTE};
         case NY_MINEFILTER_PENDING:
-            return { ...state, status: STATUS.PENDING, handlingType: HandlingsType.NYTT };
+            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.NYTT};
         case REDIGER_MINEFILTER_PENDING:
-            return { ...state, status: STATUS.PENDING, handlingType: HandlingsType.REDIGERE };
+            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.REDIGERE};
         case SLETT_MINEFILTER_PENDING:
-            return { ...state, status: STATUS.PENDING, handlingType: HandlingsType.SLETTE };
+            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.SLETTE};
         case HENT_MINEFILTER_FEILET:
-            return { ...state, status: STATUS.ERROR, handlingType: HandlingsType.HENTE };
+            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.HENTE};
         case NY_MINEFILTER_FEILET:
-            return { ...state, status: STATUS.ERROR, handlingType: HandlingsType.NYTT };
+            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.NYTT};
         case REDIGER_MINEFILTER_FEILET:
-            return { ...state, status: STATUS.ERROR, handlingType: HandlingsType.REDIGERE };
+            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.REDIGERE};
         case SLETT_MINEFILTER_FEILET:
-            return { ...state, status: STATUS.ERROR, handlingType: HandlingsType.SLETTE };
+            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.SLETTE};
         case HENT_MINEFILTER_OK:
-            return { ...state, status: STATUS.OK, data: action.data, handlingType: HandlingsType.HENTE };
+            return {...state, status: STATUS.OK, data: action.data, handlingType: HandlingsType.HENTE};
         case NY_MINEFILTER_OK:
             return {
                 ...state,
@@ -122,7 +121,7 @@ export default function reducer(state: MineFilterState = initialState, action) {
             };
 
         case SORTER_MINEFILTER_FEILET:
-            return { ...state, status: STATUS.ERROR, handlingType: HandlingsType.SORTERING };
+            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.SORTERING};
         case SORTER_MINEFILTER_OK:
             return {
                 ...state,
@@ -168,9 +167,9 @@ export function slettFilter(filterId: number) {
 }
 
 export function lagreSorteringForFilter(sorteringOgIder: SorteringOgId[]) {
-        return doThenDispatch(()=> lagreSorteringFiltere(sorteringOgIder), {
-            OK: SORTER_MINEFILTER_OK,
-            FEILET: SORTER_MINEFILTER_FEILET,
-            PENDING: SORTER_MINEFILTER_PENDING
-        });
+    return (dispatch) => {
+        return lagreSorteringFiltere(sorteringOgIder)
+            .then((data) => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
+            .catch(handterFeil(dispatch, SORTER_MINEFILTER_FEILET));
+    };
 }

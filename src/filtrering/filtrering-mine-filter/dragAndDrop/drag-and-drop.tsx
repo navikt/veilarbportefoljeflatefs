@@ -29,10 +29,6 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
         setisDraggable(false);
     }, [dragAndDropOrder, stateFilterOrder, setisDraggable, dispatch]);
 
-    useEffect(() => {
-        setOnUnmount(lagreRekkefølge);
-    }, [lagreRekkefølge, setOnUnmount]);
-
     const avbryt = () => {
         setOnUnmount(() => null);
         setDragAndDropOrder([...stateFilterOrder]);
@@ -43,6 +39,14 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
         // Automatisk lagring på onUnmount.
         setisDraggable(false);
     };
+
+    useEffect(() => {
+        setOnUnmount(lagreRekkefølge);
+    }, [lagreRekkefølge, setOnUnmount]);
+
+    useEffect(() => {
+        setDragAndDropOrder([...stateFilterOrder]);
+    }, [stateFilterOrder]);
 
     if (isDraggable) {
         return (
