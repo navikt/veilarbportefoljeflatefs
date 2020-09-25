@@ -1,15 +1,17 @@
 import React, {useEffect, useRef} from 'react';
 import {MineFilter} from '../../ducks/mine-filter';
-import './mine-filter_innhold.less'
-import {PopoverOrientering} from "nav-frontend-popover";
-import Hjelpetekst from "nav-frontend-hjelpetekst";
-import hiddenIf from "../../components/hidden-if/hidden-if";
-import {Normaltekst} from "nav-frontend-typografi";
-import MineFilterRad from "./mine-filter-rad";
-import {useFeatureSelector} from "../../hooks/redux/use-feature-selector";
-import {REDESIGN} from "../../konstanter";
-import {useWindowWidth} from "../../hooks/use-window-width";
-import {ListevisningType} from "../../ducks/ui/listevisning";
+import './mine-filter_innhold.less';
+import {PopoverOrientering} from 'nav-frontend-popover';
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import hiddenIf from '../../components/hidden-if/hidden-if';
+import {Normaltekst} from 'nav-frontend-typografi';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {REDESIGN} from '../../konstanter';
+import {useWindowWidth} from '../../hooks/use-window-width';
+import {ListevisningType} from '../../ducks/ui/listevisning';
+import MineFilterRad from './mine-filter-rad';
+
+const HiddenHjelpetekst = hiddenIf(Hjelpetekst);
 
 interface MineFilterInnholdProps {
     mineFilter: MineFilter[];
@@ -26,23 +28,22 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
     const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
 
     const fjernUtilgjengeligeFilter = (elem) => {
-        const arbeidsliste = elem.filterValg.ferdigfilterListe.includes("MIN_ARBEIDSLISTE");
+        const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
         const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
         const veiledergrupper = elem.filterValg.veiledere.length > 0;
-        const nyeBrukere = elem.filterValg.ferdigfilterListe.includes("NYE_BRUKERE_FOR_VEILEDER");
-        const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes("UFORDELTE_BRUKERE");
+        const nyeBrukere = elem.filterValg.ferdigfilterListe.includes('NYE_BRUKERE_FOR_VEILEDER');
+        const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes('UFORDELTE_BRUKERE');
 
-        return !((erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
-            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere)));
-
-    }
-
-    const HiddenHjelpetekst = hiddenIf(Hjelpetekst)
+        return !(
+            (erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
+            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))
+        );
+    };
 
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
-        return props.mineFilter.filter(elem => fjernUtilgjengeligeFilter(elem))
-    }
+        return props.mineFilter.filter((elem) => fjernUtilgjengeligeFilter(elem));
+    };
 
     useEffect(() => {
         if (outerDivRef.current && isOverflown(outerDivRef.current)) {
@@ -63,35 +64,35 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
                     />
                 )}
             </div>)
-    }
+    };
 
     const getEmptyState = () => {
         return (
             <div className="mine-filter-emptystate">
-                <Normaltekst className="mine-filter-emptystate__tekst">
-                    Ingen lagrede filter
-                </Normaltekst>
+                <Normaltekst className="mine-filter-emptystate__tekst">Ingen lagrede filter</Normaltekst>
             </div>
-        )
-    }
+        );
+    };
 
     const hentInnhold = () => {
-        return filtrertListe().length > 0 ? hentFiltrertListeinnhold() : getEmptyState()
-    }
+        return filtrertListe().length > 0 ? hentFiltrertListeinnhold() : getEmptyState();
+    };
 
     return (
         <>
             <HiddenHjelpetekst
                 type={useWindowWidth() < 1200 ? PopoverOrientering.Venstre : PopoverOrientering.Over}
                 hidden={filtrertListe().length === props.mineFilter.length}
-                className={erRedesignFeatureTogglePa ? 'ny__hjelpetekst' : 'gammelt__hjelpetekst'}>
-                {erPaMinOversikt && "Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt."}
-                {erPaEnhetensOversikt && "Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt."}
+                className={erRedesignFeatureTogglePa ? 'ny__hjelpetekst' : 'gammelt__hjelpetekst'}
+            >
+                {erPaMinOversikt &&
+                    'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.'}
+                {erPaEnhetensOversikt &&
+                    'Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt.'}
             </HiddenHjelpetekst>
             {hentInnhold()}
         </>
-    )
+    );
 }
-
 
 export default MineFilterInnhold;

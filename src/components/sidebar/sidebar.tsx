@@ -1,8 +1,8 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef, Dispatch} from 'react';
 import {
-    SidebarTabInfo,
     SidebarTabInfo as SidebarTabType,
     useSidebarViewStore,
+    SidebarTabInfo
 } from '../../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import './sidebar.less';
@@ -13,19 +13,15 @@ import {ReactComponent as MineFilterIkon} from '../ikoner/tab_mine-filter.svg';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppState} from "../../reducer";
-import {ListevisningType} from "../../ducks/ui/listevisning";
-import {HandlingsType} from "../../ducks/mine-filter";
-import {STATUS} from "../../ducks/utils";
-import {logEvent} from "../../utils/frontend-logger";
-import {finnSideNavn} from "../../middleware/metrics-middleware";
-import outsideClick from "../../hooks/use-outside-click";
-import {useWindowWidth} from "../../hooks/use-window-width";
-import {skjulSidebar, visSidebar} from "../../ducks/sidebar-tab";
-import {SIDEBAR_TAB_ENDRET} from "../../ducks/sidebar-tab";
-import {keyCodes} from "../../utils/utils";
-import Sidevelger from "./sidevelger";
+import {useDispatch} from 'react-redux';
+import {ListevisningType} from '../../ducks/ui/listevisning';
+import {logEvent} from '../../utils/frontend-logger';
+import {finnSideNavn} from '../../middleware/metrics-middleware';
+import outsideClick from '../../hooks/use-outside-click';
+import {useWindowWidth} from '../../hooks/use-window-width';
+import {skjulSidebar, visSidebar, SIDEBAR_TAB_ENDRET} from '../../ducks/sidebar-tab';
+import {keyCodes} from '../../utils/utils';
+import Sidevelger from './sidevelger';
 
 interface Sidebar {
     type: SidebarTabType;
@@ -33,22 +29,39 @@ interface Sidebar {
     tittel: string;
 }
 
+interface EndreSideBarProps {
+    dispatch: Dispatch<any>;
+    currentListevisningsType: ListevisningType | string;
+    requestedTab: SidebarTabInfo;
+}
+
+export function endreSideBar({dispatch, currentListevisningsType, requestedTab}: EndreSideBarProps) {
+    dispatch({
+        name: currentListevisningsType,
+        selectedTab: requestedTab,
+        type: SIDEBAR_TAB_ENDRET
+    });
+}
+
 const sidebar: Sidebar[] = [
     {
         type: SidebarTabType.STATUS,
-        icon: <StatusIkon/>,
+        icon: <StatusIkon />,
         tittel: 'Status'
-    }, {
+    },
+    {
         type: SidebarTabType.MINE_FILTER,
-        icon: <MineFilterIkon/>,
+        icon: <MineFilterIkon />,
         tittel: 'Mine filter'
-    }, {
+    },
+    {
         type: SidebarTabType.VEILEDERGRUPPER,
-        icon: <VeiledergruppeIkon/>,
+        icon: <VeiledergruppeIkon />,
         tittel: 'Veiledergrupper'
-    }, {
+    },
+    {
         type: SidebarTabType.FILTER,
-        icon: <FilterIkon/>,
+        icon: <FilterIkon />,
         tittel: 'Filter'
     }
 ];
@@ -58,70 +71,60 @@ interface SidebarProps {
     enhettiltak: OrNothing<Tiltak>;
     filtergruppe: string;
     isSidebarHidden: boolean;
-    lukkTab: () => void
 }
 
 function Sidebar(props: SidebarProps) {
     const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
     const sidebarRef = useRef<HTMLDivElement>(null);
-    const selectedTab = useSidebarViewStore(erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt)
+    const selectedTab = useSidebarViewStore(
+        erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
+    );
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
-    const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const dispatch = useDispatch();
     const windowWidth = useWindowWidth();
     const isSidebarHidden = useSidebarViewStore(props.filtergruppe).isSidebarHidden;
 
     const tabFocus = () => {
         if (erPaMinOversikt) {
-            if (selectedTabData.type === "STATUS") return 0;
-            else if (selectedTabData.type === "MINE_FILTER") return 1;
-            else if (selectedTabData.type === "FILTER") return 2;
-
+            if (selectedTabData.type === 'STATUS') return 0;
+            else if (selectedTabData.type === 'MINE_FILTER') return 1;
+            else if (selectedTabData.type === 'FILTER') return 2;
         } else {
-            if (selectedTabData.type === "STATUS") return 0;
-            else if (selectedTabData.type === "MINE_FILTER") return 1;
-            else if (selectedTabData.type === "VEILEDERGRUPPER") return 2;
-            else if (selectedTabData.type === "FILTER") return 3;
+            if (selectedTabData.type === 'STATUS') return 0;
+            else if (selectedTabData.type === 'MINE_FILTER') return 1;
+            else if (selectedTabData.type === 'VEILEDERGRUPPER') return 2;
+            else if (selectedTabData.type === 'FILTER') return 3;
         }
         return 0;
-    }
+    };
 
     let tabFoc = tabFocus();
 
     const keyCode = (e) => e.which || e.keyCode;
 
-    useEffect(() => {
-        const nyttLagretFilter = mineFilterState.handlingType === HandlingsType.NYTT && mineFilterState.status === STATUS.OK;
-        const oppdatertLagretFilter = mineFilterState.handlingType === HandlingsType.REDIGERE && mineFilterState.status === STATUS.OK;
-
-        if (nyttLagretFilter || oppdatertLagretFilter) {
-            dispatch({
-                type: SIDEBAR_TAB_ENDRET,
-                selectedTab: SidebarTabInfo.MINE_FILTER,
-                name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
-            })
-        }
-    }, [dispatch, erPaMinOversikt, mineFilterState.handlingType, mineFilterState.status])
-
     function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar {
-        return tabs.find(t => t.type === viewType) as Sidebar;
+        return tabs.find((t) => t.type === viewType) as Sidebar;
     }
 
-    const mapTabTilView = (tab: Sidebar, isSelected: boolean,) => {
+    const mapTabTilView = (tab: Sidebar, isSelected: boolean, key: number) => {
+        const ariaFaneTekst = isSidebarHidden ? 'Tab lukket.' : 'Tab åpen.';
         return (
-            <button className={classNames('sidebar__tab', {'sidebar__tab-valgt': isSelected})}
-                    onClick={(e) => handleMouseClick(e, tab)}
-                    role="tab"
-                    aria-selected={!isSidebarHidden && isSelected}
-                    aria-controls={tab.type}
-                    id={tab.type}
-                    tabIndex={(!isSelected && -1) || 0}
-                    onKeyUp={e => handleKeyUp(e, tab)}
+            <button
+                key={key}
+                className={classNames('sidebar__tab', {'sidebar__tab-valgt': isSelected})}
+                onClick={(e) => handleMouseClick(e, tab)}
+                role="tab"
+                aria-selected={!isSidebarHidden && isSelected}
+                aria-controls={tab.type}
+                id={tab.type}
+                tabIndex={(!isSelected && -1) || 0}
+                onKeyUp={(e) => handleKeyUp(e, tab)}
+                title={ariaFaneTekst}
             >
                 <div className="sidebar__tab-ikon">{tab.icon}</div>
             </button>
         );
-    }
+    };
 
     function handleKeyUp(e, tab) {
         const sidebarTabs: NodeListOf<HTMLDivElement> = document.querySelectorAll('button.sidebar__tab');
@@ -130,9 +133,9 @@ function Sidebar(props: SidebarProps) {
         if (keyCode(e) === keyCodes.space) {
             handleOnTabClicked(e, tab);
         } else if (keyCode(e) === keyCodes.right || keyCode(e) === keyCodes.left) {
-            sidebarTabs[tabFoc].setAttribute("tabindex", "-1");
-            sidebarTabs[tabFoc].setAttribute("className", "sidebar__tab");
-            sidebarTabs[tabFoc].setAttribute("aria-selected", "false");
+            sidebarTabs[tabFoc].setAttribute('tabindex', '-1');
+            sidebarTabs[tabFoc].setAttribute('className', 'sidebar__tab');
+            sidebarTabs[tabFoc].setAttribute('aria-selected', 'false');
 
             if (keyCode(e) === keyCodes.right) {
                 tabFoc++;
@@ -147,9 +150,9 @@ function Sidebar(props: SidebarProps) {
                     tabFoc = Tabs().length - 1;
                 }
             }
-            sidebarTabs[tabFoc].setAttribute("tabindex", "0");
-            sidebarTabs[tabFoc].setAttribute("className", "sidebar__tab sidebar__tab-valgt");
-            sidebarTabs[tabFoc].setAttribute("aria-selected", "true");
+            sidebarTabs[tabFoc].setAttribute('tabindex', '0');
+            sidebarTabs[tabFoc].setAttribute('className', 'sidebar__tab sidebar__tab-valgt');
+            sidebarTabs[tabFoc].setAttribute('aria-selected', 'true');
 
             sidebarTabs[tabFoc].focus();
         }
@@ -157,21 +160,20 @@ function Sidebar(props: SidebarProps) {
 
     function handleMouseClick(e, tab: Sidebar) {
         e.preventDefault();
-        handleOnTabClicked(e, tab)
+        handleOnTabClicked(e, tab);
     }
 
     function handleOnTabClicked(e, tab: Sidebar) {
-        dispatch({
-            type: SIDEBAR_TAB_ENDRET,
-            selectedTab: tab.type,
-            name: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
-        })
+        endreSideBar({
+            dispatch: dispatch,
+            requestedTab: tab.type,
+            currentListevisningsType: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
+        });
 
         if (isSidebarHidden) {
-            dispatch(visSidebar(props.filtergruppe))
-
+            dispatch(visSidebar(props.filtergruppe));
         } else if (tab.type === selectedTab.selectedTab) {
-            dispatch(skjulSidebar(props.filtergruppe))
+            dispatch(skjulSidebar(props.filtergruppe));
         }
 
         logEvent('portefolje.metrikker.sidebar-tab', {
@@ -182,53 +184,48 @@ function Sidebar(props: SidebarProps) {
     }
 
     const Tabs = () => {
-        const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
+        const visVeiledergrupper = (tab) => tab.type === SidebarTabType.VEILEDERGRUPPER;
         if (erPaMinOversikt) {
-            return sidebar.filter(tab => !visVeiledergrupper(tab)).map(tab =>
-                mapTabTilView(tab,
-                    tab.type === (selectedTabData as Sidebar).type
-                ))
+            return sidebar
+                .filter((tab) => !visVeiledergrupper(tab))
+                .map((tab, key) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, key));
         }
-        return sidebar.map(tab =>
-            mapTabTilView(tab,
-                tab.type === (selectedTabData as Sidebar).type
-            ))
+        return sidebar.map((tab, key) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, key));
     };
 
     outsideClick(sidebarRef, () => {
         if (windowWidth < 1200 && !props.isSidebarHidden) {
-            logEvent('portefolje.metrikker.klikk-utenfor', {sideNavn: finnSideNavn()})
-            dispatch(skjulSidebar(props.filtergruppe))
+            logEvent('portefolje.metrikker.klikk-utenfor', {sideNavn: finnSideNavn()});
+            dispatch(skjulSidebar(props.filtergruppe));
         }
     });
 
     return (
-        <div ref={sidebarRef}
-             className={classNames('sidebar',
-                 props.isSidebarHidden && 'sidebar__hidden', 'tabs')}>
-            <div className="sidebar__tab-container"
-                 role="tablist"
-                 aria-label="Faner for filtrering"
-                 aria-labelledby={selectedTabData.type}
+        <div ref={sidebarRef} className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden', 'tabs')}>
+            <div
+                className="sidebar__tab-container"
+                role="tablist"
+                aria-label="Faner for filtrering"
+                aria-labelledby={selectedTabData.type}
             >
                 {Tabs()}
             </div>
-            <div className='sidebar__content-container'
-                 role="tabpanel"
-                 hidden={isSidebarHidden}
-                 aria-labelledby={selectedTabData.type}
-                 id={selectedTabData.type}
-                 tabIndex={0}
+            <div
+                className="sidebar__content-container"
+                role="tabpanel"
+                hidden={isSidebarHidden}
+                aria-labelledby={selectedTabData.type}
+                id={selectedTabData.type}
+                tabIndex={0}
             >
-                {Sidevelger(
-                    selectedTabData,
-                    props.lukkTab,
-                    props.filtergruppe,
-                    props.filtervalg,
-                    props.enhettiltak)}
+                <Sidevelger
+                    selectedTabData={selectedTabData}
+                    filtergruppe={props.filtergruppe}
+                    filtervalg={props.filtervalg}
+                    enhettiltak={props.enhettiltak}
+                />
             </div>
         </div>
-
     );
 }
 

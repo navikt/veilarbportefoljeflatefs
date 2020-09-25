@@ -14,18 +14,10 @@ https://confluence.adeo.no/x/PQJ8DQ
 
 ## Kjøre applikasjonen stand alone
 
-Fra `web/src/frontend/`, kjør:
+Fra `.`, kjør:
 
 ```
-npm run dev
-```
-
-## Frontendbygg
-
-Fra `web/src/frontend/`, kjør:
-
-```
-npm run build
+npm start
 ```
 P.S. Husk og kjøre en `npm i` før du bygger
 

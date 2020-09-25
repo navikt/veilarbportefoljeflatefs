@@ -29,7 +29,6 @@ import classNames from 'classnames';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
-import {skjulSidebar} from "../ducks/sidebar-tab";
 import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "../minoversikt/ny_mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
@@ -60,9 +59,11 @@ function antallFilter(filtervalg) {
         }).reduce((a, b) => a + b, 0);
 }
 
+const filtergruppe = ListevisningType.enhetensOversikt;
+const id = "enhetens-oversikt";
+
 function Ny_EnhetSide() {
     const statustall = useFetchStatusTall();
-    const filtergruppe = ListevisningType.enhetensOversikt;
     const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} = usePortefoljeSelector(filtergruppe);
     const dispatch = useDispatch();
     const portefoljeData = portefolje.data;
@@ -74,7 +75,6 @@ function Ny_EnhetSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
     const windowWidth = useWindowWidth();
-    const id = "enhetens-oversikt";
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -82,10 +82,6 @@ function Ny_EnhetSide() {
     useFetchPortefolje(filtergruppe);
     useSetLocalStorageOnUnmount();
     useMineFilterController({filtergruppe: filtergruppe});
-
-    const lukkTab = () => {
-        dispatch(skjulSidebar(filtergruppe))
-    };
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
@@ -129,7 +125,6 @@ function Ny_EnhetSide() {
                             filtergruppe={filtergruppe}
                             enhettiltak={tiltak}
                             isSidebarHidden={isSidebarHidden}
-                            lukkTab={lukkTab}
                         />
                         <div className="sokefelt-knapp__container">
                             <NyFiltreringNavnellerfnr
