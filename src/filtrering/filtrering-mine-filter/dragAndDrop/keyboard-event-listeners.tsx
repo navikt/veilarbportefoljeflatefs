@@ -29,13 +29,13 @@ export function handleKeyDown({
             if (e.keyCode === keyCodes.down || e.keyCode === keyCodes.up) {
                 e.preventDefault();
                 if (e.keyCode === keyCodes.up) {
-                    if (e.altKey) {
+                    if (e.shiftKey) {
                         prepFlyttOpp(e.target.value);
                     } else {
                         requestFocus(e.target.value - 1);
                     }
                 } else {
-                    if (e.altKey) {
+                    if (e.shiftKey) {
                         prepFlyttNed(e.target.value);
                     } else {
                         requestFocus(e.target.value + 1);
@@ -57,7 +57,7 @@ export function handleKeyUp({
 }: HandleKeyUpProps) {
     return (e) => {
         if (eventIsInsideContainer(e)) {
-            if (e.altKey && (e.keyCode === keyCodes.up || e.keyCode === keyCodes.down)) {
+            if (e.shiftKey && (e.keyCode === keyCodes.up || e.keyCode === keyCodes.down)) {
                 if (e.keyCode === keyCodes.up) {
                     requestNewOrder(e.target.value, e.target.value - 1);
                 } else {

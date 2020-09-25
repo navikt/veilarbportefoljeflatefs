@@ -148,7 +148,7 @@ function DragAndDropContainer({
                 {ariaTekst}
             </span>
             <Normaltekst tag={'h3'} className="drag-and-drop-tittel" aria-readonly="true" aria-live="polite">
-                Endre rekkefølge med ALT + piltaster eller dra og slipp:
+                Endre rekkefølge med SHIFT-tast + piltaster eller dra og slipp:
             </Normaltekst>
             <ul ref={dragContainer} className="drag-and-drop-container" role={'listbox'}>
                 {dragAndDropOrder.map((filter, idx) => (
