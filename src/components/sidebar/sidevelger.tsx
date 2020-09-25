@@ -110,7 +110,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                 tab={selectedTabData.type}
                 meta={
                     <>
-                        <Hjelpetekst type={PopoverOrientering.Venstre}>
+                        <Hjelpetekst type={PopoverOrientering.Hoyre}>
                             {filtergruppe === ListevisningType.minOversikt &&
                                 'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.'}
                             {filtergruppe === ListevisningType.enhetensOversikt &&
