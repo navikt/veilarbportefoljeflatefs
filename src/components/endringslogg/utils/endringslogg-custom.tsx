@@ -22,9 +22,9 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '25. september 2020',
+        dato: '28. september 2020',
         tittel: 'Endringer i filtrene',
-        versjonId: '25.09.20',
+        versjonId: '28.09.20',
         featureToggleName: 'veilarbportefolje.redesign',
         children:
             <>
