@@ -5,12 +5,13 @@ import {
     fjernLagreEndringerToast,
     fjernOpprettGruppeToast,
     fjernSletteGruppeToast,
+    fjernSorteringToast,
     ToastActionType
 } from '../../store/toast/actions';
 import hiddenIf from '../hidden-if/hidden-if';
 import { AppState } from '../../reducer';
 import { OrNothing } from '../../utils/types/types';
-import VeiledergruppeToast from './veiledergruppe-toast';
+import TimedToast from './timed-toast';
 import './toast.less';
 
 interface StateProps {
@@ -20,34 +21,47 @@ interface StateProps {
 function Toasts({toasts}: StateProps) {
     switch (toasts) {
         case ToastActionType.VIS_OPPRETT_GRUPPE_TOAST:
-            return <VeiledergruppeToast
+            return <TimedToast
                 toastTekst="Gruppen er opprettet"
                 alertstripe="suksess"
                 fjernToast={fjernOpprettGruppeToast()}
             />;
         case ToastActionType.VIS_LAGRE_ENDRINGER_TOAST:
-            return <VeiledergruppeToast
+            return <TimedToast
                 toastTekst="Gruppen er lagret"
                 alertstripe="suksess"
                 fjernToast={fjernLagreEndringerToast()}
             />;
         case ToastActionType.VIS_SLETTE_GRUPPE_TOAST:
-            return <VeiledergruppeToast
+            return <TimedToast
                 toastTekst="Gruppen er slettet"
                 alertstripe="suksess"
                 fjernToast={fjernSletteGruppeToast()}
             />;
         case ToastActionType.VIS_INGEN_ENDRINGER_TOAST:
-            return <VeiledergruppeToast
+            return <TimedToast
                 toastTekst="Du har ikke gjort noen endringer"
                 alertstripe="info"
                 fjernToast={fjernIngenEndringerToast()}
+            />;
+        case ToastActionType.VIS_LAGRE_SORTERING_TOAST:
+            return <TimedToast
+                toastTekst="Din sortering er lagret"
+                alertstripe="suksess"
+                fjernToast={fjernSorteringToast()}
+            />;
+        case ToastActionType.VIS_SORTERING_FEILET_TOAST:
+            return <TimedToast
+                toastTekst="Din sortering ble ikke lagret"
+                alertstripe="feil"
+                fjernToast={fjernSorteringToast()}
             />;
 
         case ToastActionType.FJERN_OPPRETT_GRUPPE_TOAST:
         case ToastActionType.FJERN_LAGRE_ENDRINGER_TOAST:
         case ToastActionType.FJERN_SLETTE_GRUPPE_TOAST:
         case ToastActionType.FJERN_INGEN_ENDRINGER_TOAST:
+        case ToastActionType.FJERN_SORTERING_TOAST:
             return null;
         default:
             return null;

@@ -1,6 +1,6 @@
-import {SidebarTabInfo} from "../store/sidebar/sidebar-view-store";
-import {logEvent} from "../utils/frontend-logger";
-import {finnSideNavn} from "../middleware/metrics-middleware";
+import {SidebarTabInfo} from '../store/sidebar/sidebar-view-store';
+import {logEvent} from '../utils/frontend-logger';
+import {finnSideNavn} from '../middleware/metrics-middleware';
 
 export const initialStateSidebar = {
     selectedTab: SidebarTabInfo.STATUS,
@@ -25,7 +25,7 @@ export default function sidebarReducer(state = initialStateSidebar, action) {
 }
 
 export function visSidebar(filtergruppe: string) {
-    logEvent("portefolje.metrikker.sidebar-synlig", {
+    logEvent('portefolje.metrikker.sidebar-synlig', {
         sideNavn: finnSideNavn(),
         isSidebarHidden: false
     });
@@ -37,7 +37,7 @@ export function visSidebar(filtergruppe: string) {
 }
 
 export function skjulSidebar(filtergruppe: string) {
-    logEvent("portefolje.metrikker.sidebar-synlig", {
+    logEvent('portefolje.metrikker.sidebar-synlig', {
         sideNavn: finnSideNavn(),
         isSidebarHidden: true
     });

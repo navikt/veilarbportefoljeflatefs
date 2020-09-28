@@ -32,15 +32,16 @@ import {NyMinOversiktWrapper} from "./ny_min_oversikt_wrapper";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 import {useMineFilterController} from "./use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "./ny_mine-filter-lagre-filter-knapp";
-import {skjulSidebar} from "../ducks/sidebar-tab";
 import {useEffect, useState} from "react";
 import {useWindowWidth} from "../hooks/use-window-width";
 import NyToolbar from "../components/toolbar/ny_toolbar";
 import NyFiltreringNavnellerfnr from "../filtrering/ny_filtrering-navnellerfnr";
 
+const filtergruppe = ListevisningType.minOversikt;
+const id = "min-oversikt";
+
 function Ny_MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
-    const filtergruppe = ListevisningType.minOversikt;
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(filtergruppe);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatusTall(gjeldendeVeileder);
@@ -58,15 +59,10 @@ function Ny_MinoversiktSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
     const windowWidth = useWindowWidth();
-    const id = "min-oversikt";
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
-    };
-
-    const lukkTab = () => {
-        dispatch(skjulSidebar(filtergruppe))
     };
 
     const [scrolling, setScrolling] = useState(false);
@@ -104,7 +100,6 @@ function Ny_MinoversiktSide() {
                             filtergruppe={filtergruppe}
                             enhettiltak={tiltak}
                             isSidebarHidden={isSidebarHidden}
-                            lukkTab={lukkTab}
                         />
                         <div className="sokefelt-knapp__container">
                             <NyFiltreringNavnellerfnr

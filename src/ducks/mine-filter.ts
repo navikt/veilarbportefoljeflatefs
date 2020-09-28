@@ -1,6 +1,12 @@
-import {doThenDispatch, STATUS} from './utils';
+import {doThenDispatch, STATUS, sendResultatTilDispatch, handterFeil} from './utils';
 import {FiltervalgModell} from '../model-interfaces';
-import {hentMineFilter, nyttMineFilter, redigerMineFilter, slettMineFilter} from "../middleware/api";
+import {
+    hentMineFilter,
+    lagreSorteringFiltere,
+    nyttMineFilter,
+    redigerMineFilter,
+    slettMineFilter
+} from '../middleware/api';
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
@@ -19,11 +25,15 @@ export const SLETT_MINEFILTER_OK = 'lagredefilter_slette/OK';
 export const SLETT_MINEFILTER_FEILET = 'lagredefilter_slette/FEILET';
 export const SLETT_MINEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
+export const SORTER_MINEFILTER_OK = 'lagredefilter_sortering/OK';
+export const SORTER_MINEFILTER_FEILET = 'lagredefilter_sortering/FEILET';
+
 export interface MineFilter {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
     opprettetDato: Date;
+    sortOrder: number | null;
 }
 
 export interface MineFilterState {
@@ -43,11 +53,17 @@ export interface NyttMineFilter {
     filterValg: FiltervalgModell;
 }
 
+export interface SorteringOgId {
+    sortOrder: number;
+    filterId: number;
+}
+
 export enum HandlingsType {
     NYTT,
     REDIGERE,
     SLETTE,
-    HENTE
+    HENTE,
+    SORTERING
 }
 
 const initialState = {
@@ -84,30 +100,39 @@ export default function reducer(state: MineFilterState = initialState, action) {
                 handlingType: HandlingsType.NYTT,
                 data: state.data.concat(action.data)
             };
-        case
-        REDIGER_MINEFILTER_OK:
+        case REDIGER_MINEFILTER_OK:
             return {
-                ...state, status: STATUS.OK, handlingType: HandlingsType.REDIGERE, data: state.data.map(elem => {
-                        if (elem.filterId !== action.data.filterId) {
-                            return elem;
-                        }
-                        return action.data;
+                ...state,
+                status: STATUS.OK,
+                handlingType: HandlingsType.REDIGERE,
+                data: state.data.map((elem) => {
+                    if (elem.filterId !== action.data.filterId) {
+                        return elem;
                     }
-                )
+                    return action.data;
+                })
             };
-        case
-        SLETT_MINEFILTER_OK:
+        case SLETT_MINEFILTER_OK:
             return {
                 ...state,
                 status: STATUS.OK,
                 handlingType: HandlingsType.SLETTE,
-                data: state.data.filter(elem => elem.filterId !== action.data)
+                data: state.data.filter((elem) => elem.filterId !== action.data)
+            };
+
+        case SORTER_MINEFILTER_FEILET:
+            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.SORTERING};
+        case SORTER_MINEFILTER_OK:
+            return {
+                ...state,
+                status: STATUS.OK,
+                handlingType: HandlingsType.SORTERING,
+                data: action.data
             };
         default:
             return state;
     }
 }
-
 
 export function hentMineFilterForVeileder() {
     return doThenDispatch(() => hentMineFilter(), {
@@ -139,4 +164,12 @@ export function slettFilter(filterId: number) {
         FEILET: SLETT_MINEFILTER_FEILET,
         PENDING: SLETT_MINEFILTER_PENDING
     });
+}
+
+export function lagreSorteringForFilter(sorteringOgIder: SorteringOgId[]) {
+    return (dispatch) => {
+        return lagreSorteringFiltere(sorteringOgIder)
+            .then((data) => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
+            .catch(handterFeil(dispatch, SORTER_MINEFILTER_FEILET));
+    };
 }
