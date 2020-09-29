@@ -37,7 +37,7 @@ describe('Lag ny veiledergruppe', () => {
         cy.getByTestId('veiledergruppe-modal-lagre-knapp').click()
     })
     it('Toasten skal vise "Gruppen er opprettet"', () => {
-        cy.getByTestId('veiledergruppe-toast').contains("Gruppen er opprettet")
+        cy.getByTestId('timed-toast').contains("Gruppen er opprettet")
     })
     it('Etikettene skal inneholde Andersen og Jonas', () => {
         cy.getByTestId('filtreringlabel').contains(andersen)
@@ -65,7 +65,7 @@ describe('Rediger filternavn', () => {
         cy.getByTestId('veiledergruppe-modal-lagre-knapp').click()
     })
     it('Toasten skal vise "Gruppen er lagret"', () => {
-        cy.getByTestId('veiledergruppe-toast').contains("Gruppen er lagret")
+        cy.getByTestId('timed-toast').contains("Gruppen er lagret")
     })
     it('Sjekk at filternavn er oppdatert', () => {
         cy.getByTestId('veiledergruppe-rad-wrapper')
@@ -105,7 +105,7 @@ describe('Rediger filtervalg', () => {
         cy.getByTestId('veiledergruppe-rad-wrapper').should('have.length', 6)
     })
     it('Toasten skal vise "Gruppen er lagret"', () => {
-        cy.getByTestId('veiledergruppe-toast').should("be.visible").contains("Gruppen er lagret")
+        cy.getByTestId('timed-toast').should("be.visible").contains("Gruppen er lagret")
     })
     it('Sjekk at det er ett filtervalg', () => {
         cy.getByTestId('filtreringlabel').should('have.length', 1).contains(aasen)
@@ -126,6 +126,6 @@ describe('Slett veiledergruppe', () => {
         cy.getByTestId('veiledergruppe-rad-wrapper').should('have.length', 5)
     })
     it('Toasten skal vise "Gruppen er slettet"', () => {
-        cy.getByTestId('veiledergruppe-toast').should("be.visible").contains("Gruppen er slettet")
+        cy.getByTestId('timed-toast').should("be.visible").contains("Gruppen er slettet")
     })
 })
