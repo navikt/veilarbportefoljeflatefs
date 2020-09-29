@@ -22,7 +22,6 @@ import {slettEnkeltFilter} from '../ducks/filtrering';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
-import VelgFilterMelding from './velg-filter-melding';
 import '../style.less';
 import {useCallback, useMemo} from 'react';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
@@ -30,6 +29,7 @@ import {AppState} from '../reducer';
 import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {MineFilterLagreFilterKnapp} from "../minoversikt/mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
+import Alertstripe from "nav-frontend-alertstriper";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -146,7 +146,14 @@ function EnhetSide() {
                                             : 'portefolje__container__tom-liste'}
                                     />
                                 </>
-                                : <VelgFilterMelding/>
+                                : <Alertstripe type="info"
+                                               className="blokk-m"
+                                               aria-live="assertive"
+                                               role="alert"
+                                               aria-atomic="true"
+                                               data-testid='alertstripe_filtrering'>
+                                    Du må gjøre en filtrering for å se brukere i listen.
+                                </Alertstripe>
                             }
                         </div>
                     </div>

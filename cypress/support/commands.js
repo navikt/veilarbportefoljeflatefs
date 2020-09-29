@@ -23,16 +23,23 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+
+Cypress.Commands.add('getByTestId', (selector, ...args) => {
+    return cy.get(`[data-testid=${selector}]`, ...args);
+});
+
 Cypress.Commands.add('start', () => {
-    before('Åpne browser med oversikten', () => {
-        cy.server();
-        cy.visit('/')
-        cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
-        Cypress.on('uncaught:exception', (err) => {
-            console.log(err);
-            return false;
-        })
-        cy.get('[data-testid=enhetens-oversikt]').contains('Enhetens oversikt')
-            .should('exist')
+    cy.server();
+    cy.visit('/')
+    cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
+    Cypress.on('uncaught:exception', (err) => {
+        console.log(err);
+        return false;
     })
+    cy.get('[data-testid=enhetens-oversikt]').contains('Enhetens oversikt')
+        .should('exist')
+})
+
+Cypress.Commands.add("klikkTab", (tab) => {
+    cy.getByTestId(`sidebar-tab_${tab}`).click()
 })

@@ -14,9 +14,10 @@ interface SorteringHeaderProps extends HeaderProps {
     erValgt: boolean;
     tekst: React.ReactNode;
     title?: string;
+    headerId: string;
 }
 
-function SorteringHeader({sortering, onClick, rekkefolge, erValgt, tekst, skalVises = true, className = '', title}: SorteringHeaderProps) {
+function SorteringHeader({sortering, onClick, rekkefolge, erValgt, tekst, skalVises = true, className = '', title, headerId}: SorteringHeaderProps) {
 
     const ariaLabel = erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'inaktiv';
     const sorteringspil = () => {
@@ -31,7 +32,7 @@ function SorteringHeader({sortering, onClick, rekkefolge, erValgt, tekst, skalVi
     };
 
     return (
-        <Header skalVises={skalVises} className={className}>
+        <Header skalVises={skalVises} className={className} headerId={headerId}>
             <div className="sorteringheader__lenke">
                 <button
                     onClick={() => onClick(sortering || Sorteringsrekkefolge.ikke_satt)}
