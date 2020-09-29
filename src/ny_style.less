@@ -147,7 +147,7 @@ html {
   grid-template-columns: 21.8rem auto;
   grid-template-rows: auto auto auto;
 
-  .tabelloverskrift__ny {
+  .tabelloverskrift__ny, .tabelloverskrift__ny__annen-veileder {
     padding-top: .3rem;
     background-color: @bakgrunnsGra;
     grid-column-start: 1;
@@ -217,7 +217,7 @@ html {
 
     .annen-veileder-varsel {
       grid-row: 1;
-      grid-column: 1;
+      grid-column: 2;
     }
 
     .sokefelt-knapp__container {
@@ -228,13 +228,25 @@ html {
       justify-content: space-between;
     }
 
+    .annen-veileder-varsel ~ .sokefelt-knapp__container{
+      grid-row: 2;
+    }
+
     .sidebar {
       grid-row-start: 1;
       grid-column: 1;
     }
 
-    .ny__filtrering-label-container, .ny__filtrering-label-container__annen-veileder {
+    .ny__filtrering-label-container {
       grid-row: 2;
+      grid-column-start: 2;
+      grid-column-end: 3;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .ny__filtrering-label-container__annen-veileder{
+      grid-row: 3;
       grid-column-start: 2;
       grid-column-end: 3;
       display: flex;
@@ -246,6 +258,9 @@ html {
       grid-column-start: 2;
       grid-column-end: 3;
       margin: 1rem 0 2rem;
+    }
+    .annen-veileder-varsel ~ .oversikt__container{
+      grid-row: 4;
     }
 
     .alertstripe--info {
