@@ -11,7 +11,7 @@ import {endringsloggListe} from './endringslogg';
 import * as faker from 'faker/locale/nb_NO';
 import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
-import {MineFilter} from '../ducks/mine-filter';
+import {MineFilter, SorteringOgId} from '../ducks/mine-filter';
 import {mineFilter} from "./mine-filter";
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
@@ -141,6 +141,19 @@ mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) =>
     return res(ctx.status(401));
 });
 
+mock.post('/veilarbfilter/api/minelagredefilter/lagresortering/', (req, res, ctx) => {
+    const sorteringer = req.body as SorteringOgId[];
+    sorteringer.forEach(elem => {
+        const customMineFilterElem = customMineFilter.find(filter => elem.filterId === filter.filterId);
+        if(customMineFilterElem){
+            customMineFilterElem.sortOrder = elem.sortOrder;
+        }
+    });
+    return res(
+        ctx.json(customMineFilter),
+        ctx.status(200)
+    );
+});
 
 // veileder-api
 mock.get('/veilarbveileder/api/veileder/v2/me', jsonResponse(inloggetVeileder));

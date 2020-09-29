@@ -18,7 +18,9 @@ import {
     REDIGER_MINEFILTER_FEILET,
     REDIGER_MINEFILTER_OK,
     SLETT_MINEFILTER_FEILET,
-    SLETT_MINEFILTER_OK
+    SLETT_MINEFILTER_OK,
+    SORTER_MINEFILTER_FEILET,
+    SORTER_MINEFILTER_OK
 } from "../ducks/mine-filter";
 
 interface FilterEndringData {
@@ -177,6 +179,12 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case SLETT_MINEFILTER_FEILET:
             loggSlettMineFilterFeilet(sideNavn)
             break;
+        case SORTER_MINEFILTER_OK:
+            loggSorterMineFilterOK(sideNavn)
+            break;
+        case SORTER_MINEFILTER_FEILET:
+            loggSorterMineFilterFeilet(sideNavn)
+            break;
     }
 
     return next(action);
@@ -334,4 +342,13 @@ const loggRedigerMineFilterFeilet = (sideNavn: SideNavn) => {
 const loggSlettMineFilterFeilet = (sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.lagredefilter.sletting-feilet', {sideNavn: sideNavn});
 };
+
+const loggSorterMineFilterOK = (sideNavn: SideNavn) => {
+    logEvent('portefolje.metrikker.lagredefilter.sortering-vellykket', {sideNavn: sideNavn});
+};
+
+const loggSorterMineFilterFeilet = (sideNavn: SideNavn) => {
+    logEvent('portefolje.metrikker.lagredefilter.sortering-feilet', {sideNavn: sideNavn});
+};
+
 

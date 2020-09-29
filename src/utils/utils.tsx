@@ -1,8 +1,8 @@
 import {AktiviteterModell} from '../model-interfaces';
-import {Maybe} from "./types";
+import {Maybe} from './types';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
-    return new Array((end - start) + ((inclusive) ? 1 : 0)).fill(0).map((_, i) => start + i);
+    return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
 }
 
 export function lag2Sifret(n: number): string {
@@ -29,7 +29,12 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer: Maybe<AktiviteterModell>)
 }
 
 export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFiltervalg): Maybe<AktiviteterModell> {
-    if (!aktiviteterFiltervalg || Object.keys(aktiviteterFiltervalg).length === 0 || !brukerAktiviteter || Object.keys(aktiviteterFiltervalg).length === 0) {
+    if (
+        !aktiviteterFiltervalg ||
+        Object.keys(aktiviteterFiltervalg).length === 0 ||
+        !brukerAktiviteter ||
+        Object.keys(aktiviteterFiltervalg).length === 0
+    ) {
         return null;
     }
     return Object.entries(aktiviteterFiltervalg)
@@ -47,9 +52,8 @@ export function erDev() {
 }
 
 export function erHeroku() {
-    return window.location.host.includes("herokuapp");
+    return window.location.host.includes('herokuapp');
 }
-
 
 export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
     if (!utlopsdatoStr) {

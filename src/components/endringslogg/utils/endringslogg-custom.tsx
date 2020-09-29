@@ -22,6 +22,23 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '29. september 2020',
+        tittel: 'Endringer i filtrene',
+        versjonId: '29.09.20',
+        featureToggleName: 'veilarbportefolje.redesign',
+        children:
+            <>
+                <ul>
+                    <li>Nå kan du bestemme rekkefølgen på filtrene i Mine filter. Klikk på hengelåssymbolet for å endre
+                        rekkefølgen.
+                    </li>
+                    <li>Filtrene er lagt i klikkbare faner med ikoner. Da må du skrolle mindre og får raskere tilgang
+                        til filtrene. Filtrene ligger fast på siden slik at du alltid ser dem når du scroller i listen.
+                        Du kan lukke filtermenyen dersom du ønsker større plass til listen.
+                    </li>
+                </ul>
+            </>
+    }, {
         dato: '8. september 2020',
         tittel: 'Varsel til bruker før møter',
         versjonId: '08.09.20',

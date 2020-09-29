@@ -4,13 +4,13 @@ import {useDispatch} from 'react-redux';
 import {useTimer} from '../../hooks/use-timer';
 import AlertStripe from 'nav-frontend-alertstriper';
 
-interface VeiledergruppeToastProps {
+interface TimedToastProps {
     toastTekst: string;
     alertstripe: any;
     fjernToast: any;
 }
 
-function VeiledergruppeToast(props: VeiledergruppeToastProps) {
+function TimedToast(props: TimedToastProps) {
     const toastRef = useRef<HTMLDivElement>(null);
     const {startTimer} = useTimer();
 
@@ -29,13 +29,13 @@ function VeiledergruppeToast(props: VeiledergruppeToastProps) {
     });
 
     return (
-        <div className="veiledergruppe-toast"
+        <div className="timed-toast"
              ref={toastRef}
              tabIndex={0}>
             <AlertStripe type={props.alertstripe}
-                         className="veiledergruppe-toast__alertstripe"
-                         data-testid="veiledergruppe-toast">
-                <span className="veiledergruppe-toast__tekst">
+                         className="timed-toast__alertstripe"
+                         data-testid="timed-toast">
+                <span className="timed-toast__tekst">
                     {props.toastTekst}
                 </span>
             </AlertStripe>
@@ -43,4 +43,4 @@ function VeiledergruppeToast(props: VeiledergruppeToastProps) {
     );
 }
 
-export default VeiledergruppeToast;
+export default TimedToast;
