@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {PropsWithChildren} from 'react';
-import {Normaltekst} from 'nav-frontend-typografi';
 import {Redirect, useParams} from 'react-router';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
 import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
 import classNames from 'classnames';
+import './ny__minoversikt.less'
 
 interface MinOversiktWrapperProps {
     className: string;
@@ -21,17 +21,12 @@ export function NyMinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithC
         return <Redirect to="/enhet"/>;
     }
 
-    const veilederFraUrl = veiledere.find((veileder) => (veileder.ident === ident)) || {fornavn: '', etternavn: ''};
     return (
         <div className={classNames(props.className, visesAnnenVeiledersPortefolje ? 'annen-veileder' : '')}
              role="tabpanel"
              aria-labelledby={props.id}
              id={props.id}
         >
-            {visesAnnenVeiledersPortefolje &&
-            <Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
-                {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
-            </Normaltekst>}
             {props.children}
         </div>
     );

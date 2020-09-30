@@ -36,6 +36,9 @@ import {useEffect, useState} from "react";
 import {useWindowWidth} from "../hooks/use-window-width";
 import NyToolbar from "../components/toolbar/ny_toolbar";
 import NyFiltreringNavnellerfnr from "../filtrering/ny_filtrering-navnellerfnr";
+import {Normaltekst} from "nav-frontend-typografi";
+import {useVeilederListeSelector} from "../hooks/redux/use-veilederliste-selector";
+import {useParams} from "react-router";
 
 const filtergruppe = ListevisningType.minOversikt;
 const id = "min-oversikt";
@@ -60,6 +63,10 @@ function Ny_MinoversiktSide() {
     const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
     const windowWidth = useWindowWidth();
 
+    const {ident} = useParams();
+    const veiledere = useVeilederListeSelector();
+    const veilederFraUrl = veiledere.find((veileder) => (veileder.ident === ident)) || {fornavn: '', etternavn: ''};
+
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
@@ -81,6 +88,9 @@ function Ny_MinoversiktSide() {
         return window.addEventListener("scroll", onScroll);
     });
 
+    if (visesAnnenVeiledersPortefolje) {
+        document.body.style.backgroundColor = "rgb(133, 213, 240)"
+    }
 
     return (
         <DocumentTitle title="Min oversikt">
@@ -106,6 +116,10 @@ function Ny_MinoversiktSide() {
                                 filtervalg={filtervalg}
                                 endreFiltervalg={doEndreFiltervalg}
                             />
+                            {visesAnnenVeiledersPortefolje &&
+                            <Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
+                                {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
+                            </Normaltekst>}
                             <NyMineFilterLagreFilterKnapp filtergruppe={filtergruppe}/>
                         </div>
                         <FiltreringLabelContainer
