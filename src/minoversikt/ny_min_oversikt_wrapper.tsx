@@ -22,7 +22,7 @@ export function NyMinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithC
     }
 
     return (
-        <div className={classNames(props.className, visesAnnenVeiledersPortefolje ? 'annen-veileder' : '')}
+        <div className={classNames(props.className, visesAnnenVeiledersPortefolje ? 'ny__annen-veileder' : '')}
              role="tabpanel"
              aria-labelledby={props.id}
              id={props.id}
