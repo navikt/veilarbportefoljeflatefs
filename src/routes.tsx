@@ -15,12 +15,14 @@ import TourModalLocalStorage from './components/modal/tour-modal/tour-modal-loca
 import {useFeatureSelector} from './hooks/redux/use-feature-selector';
 import {REDESIGN} from './konstanter';
 import {TilToppenKnapp} from "./components/til-toppen-knapp/til-toppen-knapp";
+import './ny_style.less'
 
 loggBrowserMetrikker();
 
 function Routes() {
     const {enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();
     const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
+    document.body.style.backgroundColor = "#F4F4F4";
 
     return (
         <div className="portefolje">
