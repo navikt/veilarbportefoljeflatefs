@@ -103,9 +103,9 @@ mock.post('/veilarbfilter/api/enhet/:enhetId', (req, res, ctx) => {
 });
 
 mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (req, res, ctx) => {
-    const {pathParams} = req;
-    if (pathParams.filterId) {
-        customVeilederGrupper = customVeilederGrupper.filter(v => v.filterId !== pathParams.filterId)
+    const filterId = parseInt(req.pathParams.filterId)
+    if (!isNaN(filterId)) {
+        customVeilederGrupper = customVeilederGrupper.filter(v => v.filterId !== filterId)
         return res(ctx.status(200));
     }
     return res(ctx.status(401));
@@ -133,9 +133,9 @@ mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
 });
 
 mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) => {
-    const {pathParams} = req;
-    if (pathParams.filterId) {
-        customMineFilter = customMineFilter.filter(v => v.filterId !== pathParams.filterId);
+    const filterId = parseInt(req.pathParams.filterId)
+    if (!isNaN(filterId)) {
+        customMineFilter = customMineFilter.filter(v => v.filterId !== filterId);
         return res(ctx.status(200));
     }
     return res(ctx.status(401));
