@@ -18,12 +18,12 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     const [onUnmountRef, setOnUnmount] = useOnlyOnUnmount();
     const dispatch = useDispatch();
 
-    const lagreRekkefølge = useCallback(() => {
+    const lagreRekkefolge = useCallback(() => {
         const idAndPriorities = dragAndDropOrder.map((filter, idx) => ({
             sortOrder: idx,
             filterId: filter.filterId
         }));
-        if (harEndretRekkefølge(dragAndDropOrder, stateFilterOrder)) {
+        if (harEndretRekkefolge(dragAndDropOrder, stateFilterOrder)) {
             dispatch(lagreSorteringForFilter(idAndPriorities));
         }
         setisDraggable(false);
@@ -41,8 +41,8 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     };
 
     useEffect(() => {
-        setOnUnmount(lagreRekkefølge);
-    }, [lagreRekkefølge, setOnUnmount]);
+        setOnUnmount(lagreRekkefolge);
+    }, [lagreRekkefolge, setOnUnmount]);
 
     useEffect(() => {
         setDragAndDropOrder([...stateFilterOrder]);
@@ -69,7 +69,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     );
 }
 
-function harEndretRekkefølge(a: MineFilter[], b: MineFilter[]) {
+function harEndretRekkefolge(a: MineFilter[], b: MineFilter[]) {
     return !(
         Array.isArray(a) &&
         Array.isArray(b) &&
