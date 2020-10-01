@@ -36,7 +36,6 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     };
 
     const lagre = () => {
-        // Automatisk lagring på onUnmount.
         setisDraggable(false);
     };
 
@@ -53,7 +52,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
             <DragAndDropContainer
                 dragAndDropOrder={dragAndDropOrder}
                 setDragAndDropOrder={setDragAndDropOrder}
-                lagreRekkefølge={lagre}
+                lagreRekkefolge={lagre}
                 avbryt={avbryt}
                 onUnmount={onUnmountRef}
             />
