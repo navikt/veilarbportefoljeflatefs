@@ -8,22 +8,23 @@ export interface HandleKeyDownProps {
     prepFlyttNed: (index: number) => void;
     requestFocus: (index: number) => void;
 }
+
 export interface HandleKeyUpProps {
     eventIsInsideContainer: (e: React.MouseEvent) => boolean;
     requestNewOrder: (from: number, to: number) => void;
-    lagreRekkefølge: () => void;
+    lagreRekkefolge: () => void;
     avbryt: () => void;
     setDestIndex: React.Dispatch<React.SetStateAction<number>>;
     setSrcIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export function handleKeyDown({
-    eventIsInsideContainer,
-    setDropIndex,
-    prepFlyttOpp,
-    prepFlyttNed,
-    requestFocus
-}: HandleKeyDownProps) {
+                                  eventIsInsideContainer,
+                                  setDropIndex,
+                                  prepFlyttOpp,
+                                  prepFlyttNed,
+                                  requestFocus
+                              }: HandleKeyDownProps) {
     return (e) => {
         if (eventIsInsideContainer(e)) {
             if (e.keyCode === keyCodes.down || e.keyCode === keyCodes.up) {
@@ -48,13 +49,13 @@ export function handleKeyDown({
 }
 
 export function handleKeyUp({
-    eventIsInsideContainer,
-    requestNewOrder,
-    setDestIndex,
-    setSrcIndex,
-    avbryt,
-    lagreRekkefølge
-}: HandleKeyUpProps) {
+                                eventIsInsideContainer,
+                                requestNewOrder,
+                                setDestIndex,
+                                setSrcIndex,
+                                avbryt,
+                                lagreRekkefolge
+                            }: HandleKeyUpProps) {
     return (e) => {
         if (eventIsInsideContainer(e)) {
             if (e.shiftKey && (e.keyCode === keyCodes.up || e.keyCode === keyCodes.down)) {
@@ -66,7 +67,7 @@ export function handleKeyUp({
             } else if (e.keyCode === keyCodes.esc) {
                 avbryt();
             } else if (e.keyCode === keyCodes.enter) {
-                lagreRekkefølge();
+                lagreRekkefolge();
             }
             setDestIndex(-1);
             setSrcIndex(-1);

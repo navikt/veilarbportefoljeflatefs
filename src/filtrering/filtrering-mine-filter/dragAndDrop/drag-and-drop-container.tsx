@@ -12,18 +12,18 @@ import {handleKeyUp, handleKeyDown} from './keyboard-event-listeners';
 export interface DragAndDropContainerProps {
     dragAndDropOrder: MineFilter[];
     setDragAndDropOrder: React.Dispatch<React.SetStateAction<MineFilter[]>>;
-    lagreRekkefølge: () => void;
+    lagreRekkefolge: () => void;
     avbryt: () => void;
     onUnmount: MutableRefObject<() => void>;
 }
 
 function DragAndDropContainer({
-    dragAndDropOrder,
-    setDragAndDropOrder,
-    lagreRekkefølge,
-    avbryt,
-    onUnmount
-}: DragAndDropContainerProps) {
+                                  dragAndDropOrder,
+                                  setDragAndDropOrder,
+                                  lagreRekkefolge,
+                                  avbryt,
+                                  onUnmount
+                              }: DragAndDropContainerProps) {
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
     const [dropIndex, setDropIndex] = useState(-1);
@@ -41,7 +41,7 @@ function DragAndDropContainer({
         dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {
             return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
         });
-        setAriaTekst('Filtre har blitt sortert i alfabetisk rekkefølge.');
+        setAriaTekst('Filtrene har blitt sortert i alfabetisk rekkefølge.');
         setDragAndDropOrder([...dragAndDropOrder]);
     };
 
@@ -51,20 +51,20 @@ function DragAndDropContainer({
                 if (from < to)
                     setAriaTekst(
                         dragAndDropOrderRef.current[from].filterNavn +
-                            ' flyttet under ' +
-                            dragAndDropOrderRef.current[to].filterNavn +
-                            ', til posisjon ' +
-                            (to + 1) +
-                            '.'
+                        ' flyttet under ' +
+                        dragAndDropOrderRef.current[to].filterNavn +
+                        ', til posisjon ' +
+                        (to + 1) +
+                        '.'
                     );
                 else
                     setAriaTekst(
                         dragAndDropOrderRef.current[from].filterNavn +
-                            ' flyttet over ' +
-                            dragAndDropOrderRef.current[to].filterNavn +
-                            ', til posisjon ' +
-                            (to + 1) +
-                            '.'
+                        ' flyttet over ' +
+                        dragAndDropOrderRef.current[to].filterNavn +
+                        ', til posisjon ' +
+                        (to + 1) +
+                        '.'
                     );
                 flyttElementIArray(dragAndDropOrderRef.current, from, to);
 
@@ -125,7 +125,7 @@ function DragAndDropContainer({
         handleKeyUp({
             eventIsInsideContainer,
             requestNewOrder,
-            lagreRekkefølge,
+            lagreRekkefolge: lagreRekkefolge,
             avbryt,
             setDestIndex,
             setSrcIndex
@@ -167,7 +167,7 @@ function DragAndDropContainer({
                             'over-from-above': destIndex === idx && srcIndex < destIndex,
                             'over-from-below': destIndex === idx && srcIndex > destIndex
                         })}
-                    ></DragAndDropRow>
+                    />
                 ))}
             </ul>
             <div className="drag-and-drop-knapper">
@@ -175,7 +175,7 @@ function DragAndDropContainer({
                     className="drag-and-drop-knapp-lagre"
                     aria-label="Lagre sortering"
                     mini
-                    onClick={(e) => lagreRekkefølge()}
+                    onClick={() => lagreRekkefolge()}
                 >
                     Lagre
                 </Hovedknapp>
@@ -183,7 +183,7 @@ function DragAndDropContainer({
                     className="drag-and-drop-knapp-avbryt"
                     aria-label="Avbryt sortering"
                     mini
-                    onClick={(e) => avbryt()}
+                    onClick={() => avbryt()}
                 >
                     Avbryt
                 </Knapp>
@@ -191,7 +191,7 @@ function DragAndDropContainer({
                     className="drag-and-drop-knapp-nullstill"
                     aria-label="Nullstill til alfabetisk sortering"
                     mini
-                    onClick={(e) => alfabetiskSort()}
+                    onClick={() => alfabetiskSort()}
                 >
                     Nullstill
                 </Flatknapp>
