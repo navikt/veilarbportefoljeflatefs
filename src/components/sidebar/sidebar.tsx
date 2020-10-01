@@ -188,9 +188,9 @@ function Sidebar(props: SidebarProps) {
         if (erPaMinOversikt) {
             return sidebar
                 .filter((tab) => !visVeiledergrupper(tab))
-                .map((tab, key) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, key));
+                .map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
         }
-        return sidebar.map((tab, key) => mapTabTilView(tab, tab.type === (selectedTabData as Sidebar).type, key));
+        return sidebar.map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
     };
 
     outsideClick(sidebarRef, () => {
