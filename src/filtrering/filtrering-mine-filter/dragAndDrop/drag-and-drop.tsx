@@ -70,7 +70,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     );
 }
 
-function harEndretRekkefølge(a: Filter[], b: Filter[]) {
+function harEndretRekkefolge(a: Filter[], b: Filter[]) {
     return !(
         Array.isArray(a) &&
         Array.isArray(b) &&

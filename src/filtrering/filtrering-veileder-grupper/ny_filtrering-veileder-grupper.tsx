@@ -8,16 +8,13 @@ import {endreFiltervalg, initialState} from '../../ducks/filtrering';
 import {FiltervalgModell} from '../../model-interfaces';
 import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
-import {AlertStripeFeil} from 'nav-frontend-alertstriper';
-import NyVeilederGruppeInnhold from './ny_veiledergrupper-innhold';
-import {ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
-import {AlertStripeFeil} from "nav-frontend-alertstriper";
-import NyVeilederGruppeInnhold from "./ny_veiledergrupper-innhold";
-import {ThunkDispatch} from "redux-thunk";
-import {AnyAction} from "redux";
+
 import {ListevisningType} from "../../ducks/ui/listevisning";
 import {STATUS} from "../../ducks/utils";
+import {ThunkDispatch} from "redux-thunk";
+import {AnyAction} from "redux";
+import NyVeilederGruppeInnhold from "./ny_veiledergrupper-innhold";
+import {AlertStripeFeil} from "nav-frontend-alertstriper";
 
 interface FilteringVeilederGrupperProps {
     filtergruppe: ListevisningType;

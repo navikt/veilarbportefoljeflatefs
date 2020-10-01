@@ -36,6 +36,9 @@ import {useWindowWidth} from "../hooks/use-window-width";
 import NyToolbar from "../components/toolbar/ny_toolbar";
 import NyFiltreringNavnellerfnr from "../filtrering/ny_filtrering-navnellerfnr";
 import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
+import {Normaltekst} from "nav-frontend-typografi";
+import {useParams} from "react-router";
+import {useVeilederListeSelector} from "../hooks/redux/use-veilederliste-selector";
 
 const filtergruppe = ListevisningType.minOversikt;
 const id = "min-oversikt";
