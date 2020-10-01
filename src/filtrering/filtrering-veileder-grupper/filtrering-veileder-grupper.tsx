@@ -7,17 +7,16 @@ import './veileder-gruppe.less';
 import {Normaltekst} from 'nav-frontend-typografi';
 import {VeilederGruppeModal} from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
 import {endreFiltervalg, initialState} from '../../ducks/filtrering';
-import {FiltervalgModell} from '../../model-interfaces';
-import {
-    lageNyGruppe,
-} from '../../ducks/veiledergrupper_filter';
+import {FiltervalgModell, Status} from '../../model-interfaces';
+import {lageNyGruppe,} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {AlertStripeFeil} from "nav-frontend-alertstriper";
-import { ThunkDispatch } from "redux-thunk";
+import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface FilteringVeilederGrupperProps {
-    filtergruppe: string;
+    filtergruppe: ListevisningType;
 }
 
 function FilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps) {
@@ -68,7 +67,7 @@ function FilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps)
     return (
         <>
             {
-                lagretFilterState.error ? veilederGrupperError() : veilederGrupperOK()
+                lagretFilterState.status === Status.ERROR ? veilederGrupperError() : veilederGrupperOK()
             }
             <LeggTilKnapp onClick={() => {
                 setVeilederGruppeModal(true);

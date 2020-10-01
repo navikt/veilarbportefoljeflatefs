@@ -1,6 +1,6 @@
-import { initialState } from '../ducks/filtrering';
+import {initialState} from '../ducks/filtrering';
 import * as faker from 'faker/locale/nb_NO';
-import {MineFilter} from "../ducks/mine-filter";
+import {Filter} from "../ducks/filter";
 
 export const mineFilter = () => {
     return (
@@ -72,6 +72,6 @@ export const mineFilter = () => {
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
                 sortOrder: 1,
             }
-        ]  as MineFilter []
+        ]  as Filter []
     );
 };

@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import {erObjektValuesTomt, mineFilterListerErLik} from "../components/modal/mine-filter/mine-filter-utils";
+import {erObjektValuesTomt, filterValgModellErLik} from "../components/modal/mine-filter/mine-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 import {avmarkerSisteValgtFilter, avmarkerValgtFilter, markerValgtFilter} from "../ducks/mine-filter-ui";
@@ -11,7 +11,7 @@ export function NyUseMineFilterController(props: {filtergruppe: string}) {
 
 
     useEffect(() => {
-        const valgtFilter = lagretFilterList.find(elem => mineFilterListerErLik(elem.filterValg, filtreringMinOversikt));
+        const valgtFilter = lagretFilterList.find(elem => filterValgModellErLik(elem.filterValg, filtreringMinOversikt));
 
         if (erObjektValuesTomt(filtreringMinOversikt)){
             dispatch(avmarkerSisteValgtFilter(props.filtergruppe));

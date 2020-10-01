@@ -12,14 +12,14 @@ import {ListevisningType} from '../../ducks/ui/listevisning';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {PopoverOrientering} from 'nav-frontend-popover';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggleSwitch/toggle-switch';
-import {MineFilter} from '../../ducks/mine-filter';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import Sidebar from './sidebar';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
+import {Filter} from "../../ducks/filter";
 
-function sortMineFilter(a: MineFilter, b: MineFilter) {
+function sortMineFilter(a: Filter, b: Filter) {
     if (a.sortOrder !== null) {
         if (b.sortOrder !== null) {
             return a.sortOrder - b.sortOrder;
@@ -34,7 +34,7 @@ function sortMineFilter(a: MineFilter, b: MineFilter) {
 
 interface SidevelgerProps {
     selectedTabData: Sidebar;
-    filtergruppe: string;
+    filtergruppe: ListevisningType;
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
 }
@@ -51,7 +51,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
 
-    const fjernUtilgjengeligeFilter = (elem: MineFilter) => {
+    const fjernUtilgjengeligeFilter = (elem: Filter) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
         const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes('NYE_BRUKERE_FOR_VEILEDER');

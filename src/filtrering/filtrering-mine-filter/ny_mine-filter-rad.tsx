@@ -1,27 +1,27 @@
-import {MineFilter} from "../../ducks/mine-filter";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../reducer";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
 import {logEvent} from "../../utils/frontend-logger";
 import {velgLagretFilter} from "../../ducks/filtrering";
-import {apneMineFilterModal} from "../../ducks/mine-filter-ui";
+import {apneMineFilterModal, markerValgtFilter} from "../../ducks/mine-filter-ui";
 import {Radio} from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
 import React from "react";
 import './ny_mine-filter-innhold.less'
 import {ListevisningType} from "../../ducks/ui/listevisning";
+import {Filter} from "../../ducks/filter";
 
 interface LagretFilterRadProps {
-    filter: MineFilter;
-    filtergruppe: string;
+    filter: Filter;
+    filtergruppe: ListevisningType;
 }
 
 function NyMineFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     const dispatch = useDispatch();
 
     const valgtMittFilter = useSelector((state: AppState) => filtergruppe === ListevisningType.minOversikt
-        ? state.mineFilterMinOversikt.valgtMineFilter
-        : state.mineFilterEnhetensOversikt.valgtMineFilter);
+        ? state.mineFilterMinOversikt.valgtFilter
+        : state.mineFilterEnhetensOversikt.valgtFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 
@@ -29,6 +29,7 @@ function NyMineFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
         dispatch(velgLagretFilter(filter, filtergruppe))
+        dispatch(markerValgtFilter(filter, filtergruppe));
     }
 
     function onClickRedigerKnapp() {

@@ -1,5 +1,4 @@
 import React, {useEffect, useRef} from 'react';
-import {MineFilter} from '../../ducks/mine-filter';
 import './mine-filter_innhold.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
@@ -10,12 +9,13 @@ import {REDESIGN} from '../../konstanter';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import MineFilterRad from './mine-filter-rad';
+import {Filter} from "../../ducks/filter";
 
 const HiddenHjelpetekst = hiddenIf(Hjelpetekst);
 
 interface MineFilterInnholdProps {
-    mineFilter: MineFilter[];
-    filtergruppe: string;
+    mineFilter: Filter[];
+    filtergruppe: ListevisningType;
 }
 
 function isOverflown(element) {

@@ -2,14 +2,15 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {AlertStripeFeil} from 'nav-frontend-alertstriper';
-import {HandlingsType, MineFilter} from '../../ducks/mine-filter';
 import {STATUS} from '../../ducks/utils';
 import './ny_mine-filter-innhold.less';
 import NyttMineFilterInnhold from './ny_mine-filter_innhold';
+import {Filter, HandlingsType} from "../../ducks/filter";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 function NyFiltreringMineFilter(props: {
-    filtergruppe: string;
-    fjernUtilgjengeligeFilter: (elem: MineFilter) => void;
+    filtergruppe: ListevisningType;
+    fjernUtilgjengeligeFilter: (elem: Filter) => void;
     sortertMineFilter;
     isDraggable: boolean;
     setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;

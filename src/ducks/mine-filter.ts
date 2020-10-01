@@ -1,5 +1,4 @@
-import {doThenDispatch, STATUS, sendResultatTilDispatch, handterFeil} from './utils';
-import {FiltervalgModell} from '../model-interfaces';
+import {doThenDispatch, handterFeil, sendResultatTilDispatch, STATUS} from './utils';
 import {
     hentMineFilter,
     lagreSorteringFiltere,
@@ -7,6 +6,7 @@ import {
     redigerMineFilter,
     slettMineFilter
 } from '../middleware/api';
+import {FilterState, HandlingsType, NyttFilter, RedigerFilter, SorteringOgId} from "./filter";
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
@@ -28,43 +28,6 @@ export const SLETT_MINEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 export const SORTER_MINEFILTER_OK = 'lagredefilter_sortering/OK';
 export const SORTER_MINEFILTER_FEILET = 'lagredefilter_sortering/FEILET';
 
-export interface MineFilter {
-    filterNavn: string;
-    filterId: number;
-    filterValg: FiltervalgModell;
-    opprettetDato: Date;
-    sortOrder: number | null;
-}
-
-export interface MineFilterState {
-    status: string;
-    data: MineFilter[];
-    handlingType: HandlingsType | null;
-}
-
-export interface RedigerMineFilter {
-    filterNavn: string;
-    filterValg: FiltervalgModell;
-    filterId: number;
-}
-
-export interface NyttMineFilter {
-    filterNavn: string;
-    filterValg: FiltervalgModell;
-}
-
-export interface SorteringOgId {
-    sortOrder: number;
-    filterId: number;
-}
-
-export enum HandlingsType {
-    NYTT,
-    REDIGERE,
-    SLETTE,
-    HENTE,
-    SORTERING
-}
 
 const initialState = {
     status: STATUS.NOT_STARTED,
@@ -73,7 +36,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: MineFilterState = initialState, action) {
+export default function reducer(state: FilterState = initialState, action) {
     switch (action.type) {
         case HENT_MINEFILTER_PENDING:
             return {...state, status: STATUS.PENDING, handlingType: HandlingsType.HENTE};
@@ -142,7 +105,7 @@ export function hentMineFilterForVeileder() {
     });
 }
 
-export function lagreEndringer(endringer: RedigerMineFilter) {
+export function lagreEndringer(endringer: RedigerFilter) {
     return doThenDispatch(() => redigerMineFilter(endringer), {
         OK: REDIGER_MINEFILTER_OK,
         FEILET: REDIGER_MINEFILTER_FEILET,
@@ -150,7 +113,7 @@ export function lagreEndringer(endringer: RedigerMineFilter) {
     });
 }
 
-export function lagreNyttFilter(nyttFilter: NyttMineFilter) {
+export function lagreNyttFilter(nyttFilter: NyttFilter) {
     return doThenDispatch(() => nyttMineFilter(nyttFilter), {
         OK: NY_MINEFILTER_OK,
         FEILET: NY_MINEFILTER_FEILET,

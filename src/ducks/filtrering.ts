@@ -1,7 +1,7 @@
 import {FiltervalgModell} from '../model-interfaces';
-import {MineFilter} from "./mine-filter";
 import {VELG_MINE_FILTER} from "./mine-filter-ui";
 import {ListevisningType} from "./ui/listevisning";
+import {Filter} from "./filter";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -123,7 +123,7 @@ export default function reducer(state: FiltervalgModell = initialState, action):
     }
 }
 
-export function velgLagretFilter(filterVerdi: MineFilter, filtergruppe: string) {
+export function velgLagretFilter(filterVerdi: Filter, filtergruppe: ListevisningType) {
     return {
         type: VELG_MINE_FILTER,
         data: filterVerdi,
@@ -131,7 +131,7 @@ export function velgLagretFilter(filterVerdi: MineFilter, filtergruppe: string) 
     }
 }
 
-export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: string = ListevisningType.enhetensOversikt) {
+export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: ListevisningType = ListevisningType.enhetensOversikt) {
     if (Array.isArray(filterVerdi)) {
         filterVerdi.sort()
     }

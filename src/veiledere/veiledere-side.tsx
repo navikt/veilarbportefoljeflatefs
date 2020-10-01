@@ -23,13 +23,14 @@ import '../style.less';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {ListevisningType} from "../ducks/ui/listevisning";
+import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
-
+    const filtergruppe = ListevisningType.veilederOversikt;
     const dispatch = useDispatch();
-    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.veilederOversikt));
+    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe));
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
 
@@ -43,6 +44,7 @@ function VeiledereSide() {
     });
 
     useSetLocalStorageOnUnmount();
+    LagredeFilterUIController({filtergruppe: filtergruppe});
 
     return (
         <DocumentTitle title="Veilederoversikt">

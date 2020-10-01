@@ -1,4 +1,4 @@
-import {erObjektValuesTomt, mineFilterListerErLik} from "./mine-filter-utils";
+import {erObjektValuesTomt, filterValgModellErLik} from "./mine-filter-utils";
 
 describe('Mine filter utils', () => {
     describe('Er objekt values tomt', () => {
@@ -105,7 +105,7 @@ describe('Mine filter utils', () => {
                 arbeidslisteKategori: []
             };
 
-            expect(mineFilterListerErLik(model1, model2)).toBe(true);
+            expect(filterValgModellErLik(model1, model2)).toBe(true);
         });
 
         it('Kjonn er ikke lik', () => {
@@ -173,7 +173,7 @@ describe('Mine filter utils', () => {
                 arbeidslisteKategori: []
             };
 
-            expect(mineFilterListerErLik(model1, model2)).toBe(false);
+            expect(filterValgModellErLik(model1, model2)).toBe(false);
         });
 
         it('Aktiviteter verdi er lik', () => {
@@ -241,7 +241,7 @@ describe('Mine filter utils', () => {
                 arbeidslisteKategori: []
             };
 
-            expect(mineFilterListerErLik(model1, model2)).toBe(true);
+            expect(filterValgModellErLik(model1, model2)).toBe(true);
         });
     });
 });

@@ -12,9 +12,15 @@ import {AlertStripeFeil} from 'nav-frontend-alertstriper';
 import NyVeilederGruppeInnhold from './ny_veiledergrupper-innhold';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
+import {AlertStripeFeil} from "nav-frontend-alertstriper";
+import NyVeilederGruppeInnhold from "./ny_veiledergrupper-innhold";
+import {ThunkDispatch} from "redux-thunk";
+import {AnyAction} from "redux";
+import {ListevisningType} from "../../ducks/ui/listevisning";
+import {STATUS} from "../../ducks/utils";
 
 interface FilteringVeilederGrupperProps {
-    filtergruppe: string;
+    filtergruppe: ListevisningType;
 }
 
 function NyFilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps) {
@@ -64,12 +70,12 @@ function NyFilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProp
 
     return (
         <>
-            {lagretFilterState.error ? veilederGrupperError() : veilederGrupperOK()}
-            <LeggTilKnapp
-                onClick={() => {
-                    setVeilederGruppeModal(true);
-                }}
-            />
+            {
+                lagretFilterState.status === STATUS.ERROR ? veilederGrupperError() : veilederGrupperOK()
+            }
+            <LeggTilKnapp onClick={() => {
+                setVeilederGruppeModal(true);
+            }}/>
             <VeilederGruppeModal
                 initialVerdi={{gruppeNavn: '', filterValg: initialState, filterId: -1}}
                 isOpen={visVeilederGruppeModal}

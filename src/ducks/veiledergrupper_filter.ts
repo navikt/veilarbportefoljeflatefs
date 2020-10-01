@@ -1,6 +1,6 @@
 import {hentEnhetsFilterGrupper, nyVeiledergruppe, redigerVeiledergruppe, slettVeiledergruppe} from '../middleware/api';
 import {doThenDispatch, STATUS} from './utils';
-import {FiltervalgModell} from '../model-interfaces';
+import {FilterState, NyttFilter, RedigerFilter} from "./filter";
 
 // Actions
 export const HENT_VEILEDERGRUPPER_OK = 'veiledergrupper/OK';
@@ -20,45 +20,14 @@ export const SLETT_VEILEDERGRUPPER_FEILET = 'veiledergrupper_slette/FEILET';
 export const SLETT_VEILEDERGRUPPER_PENDING = 'veiledergrupper_slette/PENDING';
 
 
-export interface VeiledergrupperFilter {
-    filterNavn: string;
-    filterId: number;
-    filterValg: FiltervalgModell;
-    opprettetDato: Date;
-}
-
-export interface VeiledergrupperLagretFilterState {
-    status: string;
-    data: VeiledergrupperFilter[];
-    error: VeilederGruppeError | null;
-}
-
-export interface RedigerGruppe {
-    filterNavn: string;
-    filterValg: FiltervalgModell;
-    filterId: number;
-}
-
-export interface NyGruppe {
-    filterNavn: string;
-    filterValg: FiltervalgModell;
-}
-
-enum VeilederGruppeError {
-    LAGRING_FEILET = 'LAGRING_FEILET',
-    HENTING_FEILET = 'HENTING_FEILET',
-    NY_FEILET = 'NY_FEILET',
-    SLETTING_FEILET = 'SLETTING_FEILET'
-}
-
 const initialState = {
     status: STATUS.NOT_STARTED,
     data: [],
-    error: null
+    handlingType: null
 };
 
 //  Reducer
-export default function reducer(state: VeiledergrupperLagretFilterState = initialState, action) {
+export default function reducer(state: FilterState = initialState, action) {
     switch (action.type) {
         case HENT_VEILEDERGRUPPER_PENDING:
         case NY_VEILEDERGRUPPER_PENDING:
@@ -66,13 +35,13 @@ export default function reducer(state: VeiledergrupperLagretFilterState = initia
         case SLETT_VEILEDERGRUPPER_PENDING:
             return {...state, status: STATUS.PENDING};
         case HENT_VEILEDERGRUPPER_FEILET:
-            return {...state, status: STATUS.ERROR, error: VeilederGruppeError.HENTING_FEILET};
+            return {...state, status: STATUS.ERROR};
         case NY_VEILEDERGRUPPER_FEILET:
-            return {...state, status: STATUS.ERROR, error: VeilederGruppeError.NY_FEILET};
+            return {...state, status: STATUS.ERROR};
         case REDIGER_VEILEDERGRUPPER_FEILET:
-            return {...state, status: STATUS.ERROR, error: VeilederGruppeError.LAGRING_FEILET};
+            return {...state, status: STATUS.ERROR};
         case SLETT_VEILEDERGRUPPER_FEILET:
-            return {...state, status: STATUS.ERROR, error: VeilederGruppeError.SLETTING_FEILET};
+            return {...state, status: STATUS.ERROR};
 
         case HENT_VEILEDERGRUPPER_OK:
             return {...state, status: STATUS.OK, data: action.data};
@@ -108,7 +77,7 @@ export function hentLagretFilterForEnhet(enhetId) {
 }
 
 // Action Creators
-export function lagreEndringer(endringer: RedigerGruppe, enhetId: string) {
+export function lagreEndringer(endringer: RedigerFilter, enhetId: string) {
     return doThenDispatch(() => redigerVeiledergruppe(endringer, enhetId), {
         OK: REDIGER_VEILEDERGRUPPER_OK,
         FEILET: REDIGER_VEILEDERGRUPPER_FEILET,
@@ -117,7 +86,7 @@ export function lagreEndringer(endringer: RedigerGruppe, enhetId: string) {
 }
 
 // Action Creators
-export function lageNyGruppe(endringer: NyGruppe, enhetId: string) {
+export function lageNyGruppe(endringer: NyttFilter, enhetId: string) {
     return doThenDispatch(() => nyVeiledergruppe(endringer, enhetId), {
         OK: NY_VEILEDERGRUPPER_OK,
         FEILET: NY_VEILEDERGRUPPER_FEILET,

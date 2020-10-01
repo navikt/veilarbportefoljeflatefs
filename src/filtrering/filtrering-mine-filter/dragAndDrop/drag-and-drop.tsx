@@ -1,14 +1,16 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './drag-and-drop.less';
-import {MineFilter, lagreSorteringForFilter} from '../../../ducks/mine-filter';
+import {lagreSorteringForFilter} from '../../../ducks/mine-filter';
 import DragAndDropContainer from './drag-and-drop-container';
 import NyMineFilterRad from '../ny_mine-filter-rad';
 import {useDispatch} from 'react-redux';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
+import {Filter} from "../../../ducks/filter";
+import {ListevisningType} from "../../../ducks/ui/listevisning";
 
 export interface DragAndDropProps {
-    stateFilterOrder: MineFilter[];
-    filtergruppe: string;
+    stateFilterOrder: Filter[];
+    filtergruppe: ListevisningType;
     isDraggable: boolean;
     setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -68,7 +70,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     );
 }
 
-function harEndretRekkefolge(a: MineFilter[], b: MineFilter[]) {
+function harEndretRekkefølge(a: Filter[], b: Filter[]) {
     return !(
         Array.isArray(a) &&
         Array.isArray(b) &&

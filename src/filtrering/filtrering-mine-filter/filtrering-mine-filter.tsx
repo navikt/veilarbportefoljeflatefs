@@ -3,10 +3,11 @@ import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import LagredeFilterInnhold from './mine-filter_innhold';
 import {AlertStripeFeil} from 'nav-frontend-alertstriper';
-import {HandlingsType} from '../../ducks/mine-filter';
 import {STATUS} from '../../ducks/utils';
+import {HandlingsType} from "../../ducks/filter";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
-function FiltreringMineFilter(props: {filtergruppe: string}) {
+function FiltreringMineFilter(props: {filtergruppe: ListevisningType}) {
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const mineFilter = mineFilterState.data;
     mineFilter.sort((a, b) =>
