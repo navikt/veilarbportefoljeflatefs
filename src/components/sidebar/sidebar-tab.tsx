@@ -27,9 +27,9 @@ function SidebarTab({tittel, handleClick, meta, children, tab}: StatusTabProps) 
                 <div className="sidebar-header__tekst">
                     <Systemtittel className="blokk-m">{tittel}</Systemtittel>
                 </div>
-                <div className="sidebar-header__meta">{meta}</div>
+                {meta && <div className="sidebar-header__meta">{meta}</div>}
                 <div className="sidebar-header__lukknapp">
-                    <Lukknapp overstHjorne onClick={lukkTab} />
+                    <Lukknapp overstHjorne onClick={lukkTab}/>
                 </div>
             </div>
             {children}
