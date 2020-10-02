@@ -67,7 +67,7 @@ export interface AppState {
     arbeidsliste: any;
     enhettiltak: EnhettiltakState;
     features: FeaturesState;
-    veiledergrupperLagretFilter: LagretFilterState;
+    veiledergrupper: LagretFilterState;
     mineFilter: LagretFilterState;
     mineFilterMinOversikt: LagretFilterUIState;
     mineFilterEnhetensOversikt: LagretFilterUIState;
@@ -99,7 +99,7 @@ export default combineReducers<AppState>({
     arbeidsliste: arbeidslisteReducer,
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
-    veiledergrupperLagretFilter: veiledergrupperLagretFilterReducer,
+    veiledergrupper: veiledergrupperLagretFilterReducer,
     mineFilter: mineFilterReducer,
     mineFilterMinOversikt: named(ListevisningType.minOversikt, lagretFilterUIState),
     mineFilterEnhetensOversikt: named(ListevisningType.enhetensOversikt, lagretFilterUIState),

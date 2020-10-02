@@ -23,7 +23,7 @@ function FilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps)
 
     const [visVeilederGruppeModal, setVeilederGruppeModal] = useState(false);
 
-    const lagretFilterState = useSelector((state: AppState) => state.veiledergrupperLagretFilter);
+    const lagretFilterState = useSelector((state: AppState) => state.veiledergrupper);
     const lagretFilter = lagretFilterState.data;
 
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();

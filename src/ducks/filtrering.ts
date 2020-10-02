@@ -123,7 +123,7 @@ export default function reducer(state: FiltervalgModell = initialState, action):
     }
 }
 
-export function velgLagretFilter(filterVerdi: LagretFilter, filtergruppe: ListevisningType) {
+export function velgMineFilter(filterVerdi: LagretFilter, filtergruppe: ListevisningType) {
     return {
         type: VELG_MINE_FILTER,
         data: filterVerdi,

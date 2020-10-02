@@ -15,16 +15,16 @@ export const LUKK_MINE_FILTER_MODAL = 'lagretfilter_velg/LUKK_MINE_FILTER_MODAL'
 
 
 export interface LagretFilterUIState {
-    valgtLagretFilter: OrNothing<LagretFilter>;
+    valgtMineFilter: OrNothing<LagretFilter>;
     valgtVeilederGruppe: OrNothing<LagretFilter>;
-    sisteValgtLagretFilter: OrNothing<number>
+    sisteValgtMineFilter: OrNothing<number>
     erModalApen: boolean;
 }
 
 const initialState = {
-    valgtLagretFilter: null,
+    valgtMineFilter: null,
     valgtVeilederGruppe: null,
-    sisteValgtLagretFilter: null,
+    sisteValgtMineFilter: null,
     erModalApen: false,
 };
 
@@ -33,13 +33,13 @@ export default function reducer(state: LagretFilterUIState = initialState, actio
     switch (action.type) {
         case
         MARKER_MINE_FILTER:
-            return {...state, valgtLagretFilter: action.data, sisteValgtLagretFilter: action.data.filterId}
+            return {...state, valgtMineFilter: action.data, sisteValgtMineFilter: action.data.filterId}
         case
         AVMARKER_MINE_FILTER:
-            return {...state, valgtLagretFilter: null}
+            return {...state, valgtMineFilter: null}
         case
         AVMARKER_SISTE_VALGT_MINE_FILTER:
-            return {...state, sisteValgtLagretFilter: null}
+            return {...state, sisteValgtMineFilter: null}
         case
         MARKER_VEILEDER_GRUPPE:
             return {...state, valgtVeilederGruppe: action.data}

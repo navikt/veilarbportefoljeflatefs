@@ -17,7 +17,7 @@ export function NyMineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
 
     const filtrering = useSelector((state: AppState) => erPaMinOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
     const lagretFilterList = useSelector((state: AppState) => state.mineFilter.data);
-    const valgtFilter = !lagretFilterList.find(elem => lagretFilterValgModellErLik(elem.filterValg, filtrering));
+    const valgtMineFilter = !lagretFilterList.find(elem => lagretFilterValgModellErLik(elem.filterValg, filtrering));
 
     const dispatch = useDispatch();
 
@@ -31,13 +31,13 @@ export function NyMineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
             ? erObjektValuesTomt(filtreringMinOversikt)
             : erObjektValuesTomt(filtreringEnhetensOversikt)
 
-        if ((erPaMinOversikt && valgtFilter && !ingenFilterValgt) ||
-            (erPaEnhetensOversikt && valgtFilter && !ingenFilterValgt)) {
+        if ((erPaMinOversikt && valgtMineFilter && !ingenFilterValgt) ||
+            (erPaEnhetensOversikt && valgtMineFilter && !ingenFilterValgt)) {
             setErLagreKnappSkjult(false)
         } else {
             setErLagreKnappSkjult(true)
         }
-    }, [filtreringMinOversikt, filtreringEnhetensOversikt, erPaMinOversikt, erPaEnhetensOversikt, erLagreKnappSkjult, valgtFilter]);
+    }, [filtreringMinOversikt, filtreringEnhetensOversikt, erPaMinOversikt, erPaEnhetensOversikt, erLagreKnappSkjult, valgtMineFilter]);
 
     return (
         <Knapp className="ny__lagre-filter-knapp" mini

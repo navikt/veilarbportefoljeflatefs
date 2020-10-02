@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {finnSideNavn, mapVeilederIdentTilNonsens} from '../../middleware/metrics-middleware';
 import {logEvent} from '../../utils/frontend-logger';
-import {velgLagretFilter} from '../../ducks/filtrering';
+import {velgMineFilter} from '../../ducks/filtrering';
 import {apneMineFilterModal, markerMineFilter} from '../../ducks/lagret-filter-ui-state';
 import {Radio} from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
@@ -11,20 +11,20 @@ import {antallFilter} from '../../components/modal/mine-filter/mine-filter-utils
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from "../../ducks/lagretFilter";
 
-interface LagretFilterRadProps {
+interface MineFilterRadProps {
     lagretFilter: LagretFilter;
     filtergruppe: ListevisningType;
     parentDiv: RefObject<HTMLDivElement>;
 }
 
-function MineFilterRad({lagretFilter, filtergruppe, parentDiv}: LagretFilterRadProps) {
+function MineFilterRad({lagretFilter, filtergruppe, parentDiv}: MineFilterRadProps) {
     const dispatch = useDispatch();
     const checkboxRef = useRef<HTMLDivElement>(null);
 
     const valgtLagretFilter = useSelector((state: AppState) =>
         filtergruppe === ListevisningType.minOversikt
-            ? state.mineFilterMinOversikt.valgtLagretFilter
-            : state.mineFilterEnhetensOversikt.valgtLagretFilter
+            ? state.mineFilterMinOversikt.valgtMineFilter
+            : state.mineFilterEnhetensOversikt.valgtMineFilter
     );
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
@@ -39,7 +39,7 @@ function MineFilterRad({lagretFilter, filtergruppe, parentDiv}: LagretFilterRadP
                 id: veilederIdentTilNonsens
             }
         );
-        dispatch(velgLagretFilter(lagretFilter, filtergruppe));
+        dispatch(velgMineFilter(lagretFilter, filtergruppe));
         dispatch(markerMineFilter(lagretFilter, filtergruppe));
     }
 

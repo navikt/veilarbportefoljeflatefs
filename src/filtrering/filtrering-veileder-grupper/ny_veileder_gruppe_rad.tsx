@@ -22,7 +22,7 @@ function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
     const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe);
     const valgtGruppe = (filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEngetensOversikt)
 
-    function velgFilter() {
+    function velgGruppe() {
         logEvent('portefolje.metrikker.veiledergrupper.velg-gruppe',
             {}, {gruppeId: veilederGruppe.filterId, sideNavn: finnSideNavn()});
         dispatch(endreFiltervalg('veiledere', veilederGruppe.filterValg.veiledere, filtergruppe))
@@ -37,7 +37,7 @@ function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
                 name="veiledergruppe"
                 label={veilederGruppe.filterNavn}
                 value={veilederGruppe.filterId}
-                onChange={()=> velgFilter()}
+                onChange={()=> velgGruppe()}
                 checked={valgtGruppe?.filterId === veilederGruppe.filterId}
             />
             <RedigerKnapp

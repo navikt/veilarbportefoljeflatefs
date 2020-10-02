@@ -22,7 +22,7 @@ export function LagredeFilterUIController(props: { filtergruppe: ListevisningTyp
     const filtreringVeilederoversikt = useSelector((state: AppState) => state.filtreringVeilederoversikt);
 
     const lagretMineFilter = useSelector((state: AppState) => state.mineFilter.data);
-    const lagretVeilederGrupper = useSelector((state: AppState) => state.veiledergrupperLagretFilter.data);
+    const lagretVeilederGrupper = useSelector((state: AppState) => state.veiledergrupper.data);
 
     useEffect(() => {
         const getFiltrering = () => {
@@ -31,24 +31,19 @@ export function LagredeFilterUIController(props: { filtergruppe: ListevisningTyp
             else if (props.filtergruppe === ListevisningType.enhetensOversikt) return filtreringEnhetensOversikt;
         }
 
-        const getLagretFilter = () => {
-            if (props.filtergruppe === ListevisningType.veilederOversikt) return lagretVeilederGrupper;
-            else return lagretMineFilter;
-        }
-
-        const valgtFilter = getLagretFilter().filter(elem => lagretFilterValgModellErLik(elem.filterValg,getFiltrering()))
+        const valgtMineFilter = lagretMineFilter.filter(elem => lagretFilterValgModellErLik(elem.filterValg,getFiltrering()))
         const valgtVeilederGruppe = lagretVeilederGrupper.filter(elem => veilederlisterErLik(elem.filterValg.veiledere,getFiltrering()!.veiledere))
 
         if (erObjektValuesTomt(getFiltrering())) {
             dispatch(avmarkerSisteValgtMineFilter(props.filtergruppe));
         }
 
-        if (valgtFilter.length === 0){
+        if (valgtMineFilter.length === 0){
             dispatch(avmarkerValgtMineFilter(props.filtergruppe));
             logEvent('portefolje.metrikker.lagredefilter.direkte-filtrering',
                 {}, {sideNavn: finnSideNavn()});
-        }else if (valgtFilter.length === 1){
-            dispatch(markerMineFilter(valgtFilter[0], props.filtergruppe));
+        }else if (valgtMineFilter.length === 1){
+            dispatch(markerMineFilter(valgtMineFilter[0], props.filtergruppe));
         }
 
         if (valgtVeilederGruppe.length === 0){
