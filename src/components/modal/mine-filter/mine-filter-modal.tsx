@@ -9,7 +9,7 @@ import {OrNothing} from "../../../utils/types/types";
 import hiddenIf from "../../hidden-if/hidden-if";
 import {Meny} from "./mine-filter-meny";
 import {MineFilterFnrFeil} from "./mine-filter-fnr-feil";
-import {lukkMineFilterModal} from "../../../ducks/mine-filter-ui";
+import {lukkLagreFilterModal} from "../../../ducks/lagret-filter-ui-state";
 import {ListevisningType} from "../../../ducks/ui/listevisning";
 
 export enum Visningstype {
@@ -36,7 +36,7 @@ const HiddenIfOppdaterFilter = hiddenIf(OppdaterMineFilter);
 const HiddenIfFnrFeil = hiddenIf(MineFilterFnrFeil)
 
 export function MineFilterModal(props: { filtergruppe: string }) {
-    const {sisteValgteFilter, valgtFilter, erModalApen} = useSelector((state: AppState) => (props.filtergruppe === ListevisningType.minOversikt) ? state.lagretFilterMinOversikt : state.lagretFilterEnhetensOversikt)
+    const {sisteValgteFilter, valgtLagretFilter, erModalApen} = useSelector((state: AppState) => (props.filtergruppe === ListevisningType.minOversikt) ? state.mineFilterMinOversikt : state.mineFilterEnhetensOversikt)
     const data = useSelector((state: AppState) => state.mineFilter.data)
     const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
@@ -45,15 +45,15 @@ export function MineFilterModal(props: { filtergruppe: string }) {
     const dispatch = useDispatch();
 
     const lukkModal = () => {
-        dispatch(lukkMineFilterModal(props.filtergruppe))
+        dispatch(lukkLagreFilterModal(props.filtergruppe))
     }
 
     useEffect(() => {
         if (filtreringMinOversikt.navnEllerFnrQuery.trim().length > 0) setValgtVisningstype(Visningstype.FNR_FEIL)
-        else if (valgtFilter) setValgtVisningstype(Visningstype.OPPDATER)
+        else if (valgtLagretFilter) setValgtVisningstype(Visningstype.OPPDATER)
         else if (!sisteValgteFilter) setValgtVisningstype(Visningstype.LAGRE_NYTT)
         else setValgtVisningstype(Visningstype.MENY)
-    }, [filtreringMinOversikt, valgtFilter, sisteValgteFilter, erModalApen])
+    }, [filtreringMinOversikt, valgtLagretFilter, sisteValgteFilter, erModalApen])
 
     return (
         <Modal

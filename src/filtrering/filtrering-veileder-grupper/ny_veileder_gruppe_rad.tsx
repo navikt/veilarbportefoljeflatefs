@@ -8,7 +8,7 @@ import {ListevisningType} from "../../ducks/ui/listevisning";
 import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn} from "../../middleware/metrics-middleware";
 import {AppState} from "../../reducer";
-import {markerValgtVeilederGruppe} from "../../ducks/mine-filter-ui";
+import {markerValgtVeilederGruppe} from "../../ducks/lagret-filter-ui-state";
 
 interface VeilederGruppeRad {
     veilederGruppe: LagretFilter;
@@ -18,8 +18,8 @@ interface VeilederGruppeRad {
 
 function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: VeilederGruppeRad) {
     const dispatch = useDispatch();
-    const valgtGruppeEngetensOversikt = useSelector((state: AppState) => state.lagretFilterEnhetensOversikt.valgtVeilederGruppe);
-    const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.lagretFilterVeilederOversikt.valgtVeilederGruppe);
+    const valgtGruppeEngetensOversikt = useSelector((state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe);
+    const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe);
     const valgtGruppe = (filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEngetensOversikt)
 
     function velgFilter() {

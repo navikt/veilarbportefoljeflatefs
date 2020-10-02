@@ -1,10 +1,10 @@
 import Knapp from "nav-frontend-knapper/lib/knapp";
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {erObjektValuesTomt, filterValgModellErLik} from "../components/modal/mine-filter/mine-filter-utils";
+import {erObjektValuesTomt, lagretFilterValgModellErLik} from "../components/modal/mine-filter/mine-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
-import {apneMineFilterModal} from "../ducks/mine-filter-ui";
+import {apneLagreFilterModal} from "../ducks/lagret-filter-ui-state";
 import {ListevisningType} from "../ducks/ui/listevisning";
 
 export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
@@ -17,13 +17,13 @@ export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
 
     const filtrering = useSelector((state: AppState) => erPaMinOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
     const lagretFilterList = useSelector((state: AppState) => state.mineFilter.data);
-    const valgtFilter = !lagretFilterList.find(elem => filterValgModellErLik(elem.filterValg, filtrering));
+    const valgtFilter = !lagretFilterList.find(elem => lagretFilterValgModellErLik(elem.filterValg, filtrering));
 
     const dispatch = useDispatch();
 
     function lagreFilterModal(event) {
         event.preventDefault()
-        dispatch(apneMineFilterModal(props.filtergruppe))
+        dispatch(apneLagreFilterModal(props.filtergruppe))
     }
 
     useEffect(() => {

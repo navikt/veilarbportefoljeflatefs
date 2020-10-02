@@ -2,7 +2,7 @@ import {FiltervalgModell} from "../../../model-interfaces";
 import {isEmptyArray, isObject} from "formik";
 import {LagretFilterValideringsError} from "./mine-filter-modal";
 
-export function filterValgModellErLik(filter1?: FiltervalgModell, filter2?: FiltervalgModell): boolean {
+export function lagretFilterValgModellErLik(filter1?: FiltervalgModell, filter2?: FiltervalgModell): boolean {
     return deepEqual(filter1, filter2)
 }
 
@@ -67,7 +67,7 @@ export function feilValidering(filterNavn, filterValg, eksisterendeFilter, filte
         feilmelding.filterNavn = "Filternavn er allerede i bruk."
     }
 
-    if (eksisterendeFilter.find(elem => elem.filterId !== filterId && filterValgModellErLik(elem.filterValg, filterValg))) {
+    if (eksisterendeFilter.find(elem => elem.filterId !== filterId && lagretFilterValgModellErLik(elem.filterValg, filterValg))) {
         feilmelding.filterNavn = "Valgt filter er allerede lagret."
     }
 

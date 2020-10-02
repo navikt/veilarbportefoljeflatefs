@@ -1,12 +1,12 @@
 import {useEffect} from "react";
 import {
-    avmarkerSisteValgtFilter,
-    avmarkerValgtFilter,
+    avmarkerSisteValgtLagretFilter,
+    avmarkerValgtLagretFilter,
     avmarkerValgtVeilederGruppe,
-    markerValgtFilter,
+    markerValgtLagretFilter,
     markerValgtVeilederGruppe
-} from "../ducks/mine-filter-ui";
-import {erObjektValuesTomt, filterValgModellErLik} from "../components/modal/mine-filter/mine-filter-utils";
+} from "../ducks/lagret-filter-ui-state";
+import {erObjektValuesTomt, lagretFilterValgModellErLik} from "../components/modal/mine-filter/mine-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
 import {logEvent} from "../utils/frontend-logger";
@@ -36,19 +36,19 @@ export function LagredeFilterUIController(props: { filtergruppe: ListevisningTyp
             else return lagretMineFilter;
         }
 
-        const valgtFilter = getLagretFilter().filter(elem => filterValgModellErLik(elem.filterValg,getFiltrering()))
+        const valgtFilter = getLagretFilter().filter(elem => lagretFilterValgModellErLik(elem.filterValg,getFiltrering()))
         const valgtVeilederGruppe = lagretVeilederGrupper.filter(elem => veilederlisterErLik(elem.filterValg.veiledere,getFiltrering()!.veiledere))
 
         if (erObjektValuesTomt(getFiltrering())) {
-            dispatch(avmarkerSisteValgtFilter(props.filtergruppe));
+            dispatch(avmarkerSisteValgtLagretFilter(props.filtergruppe));
         }
 
         if (valgtFilter.length === 0){
-            dispatch(avmarkerValgtFilter(props.filtergruppe));
+            dispatch(avmarkerValgtLagretFilter(props.filtergruppe));
             logEvent('portefolje.metrikker.lagredefilter.direkte-filtrering',
                 {}, {sideNavn: finnSideNavn()});
         }else if (valgtFilter.length === 1){
-            dispatch(markerValgtFilter(valgtFilter[0], props.filtergruppe));
+            dispatch(markerValgtLagretFilter(valgtFilter[0], props.filtergruppe));
         }
 
         if (valgtVeilederGruppe.length === 0){

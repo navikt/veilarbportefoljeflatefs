@@ -3,7 +3,7 @@ import {AppState} from "../../reducer";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
 import {logEvent} from "../../utils/frontend-logger";
 import {velgLagretFilter} from "../../ducks/filtrering";
-import {apneMineFilterModal, markerValgtFilter} from "../../ducks/mine-filter-ui";
+import {apneLagreFilterModal, markerValgtLagretFilter} from "../../ducks/lagret-filter-ui-state";
 import {Radio} from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
 import React from "react";
@@ -12,43 +12,43 @@ import {ListevisningType} from "../../ducks/ui/listevisning";
 import {LagretFilter} from "../../ducks/lagretFilter";
 
 interface LagretFilterRadProps {
-    filter: LagretFilter;
+    lagretFilter: LagretFilter;
     filtergruppe: ListevisningType;
 }
 
-function NyMineFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
+function NyMineFilterRad({lagretFilter, filtergruppe}: LagretFilterRadProps) {
     const dispatch = useDispatch();
 
-    const valgtMittFilter = useSelector((state: AppState) => filtergruppe === ListevisningType.minOversikt
-        ? state.lagretFilterMinOversikt.valgtFilter
-        : state.lagretFilterEnhetensOversikt.valgtFilter);
+    const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === ListevisningType.minOversikt
+        ? state.mineFilterMinOversikt.valgtLagretFilter
+        : state.mineFilterEnhetensOversikt.valgtLagretFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 
     function velgFilter() {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
-            {}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
-        dispatch(velgLagretFilter(filter, filtergruppe))
-        dispatch(markerValgtFilter(filter, filtergruppe));
+            {}, {filterId: lagretFilter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
+        dispatch(velgLagretFilter(lagretFilter, filtergruppe))
+        dispatch(markerValgtLagretFilter(lagretFilter, filtergruppe));
     }
 
     function onClickRedigerKnapp() {
-        dispatch(apneMineFilterModal(filtergruppe))
+        dispatch(apneLagreFilterModal(filtergruppe))
     }
 
     return (
         <div className="ny__mine-filter__rad">
             <Radio
                 className="ny__mine-filter__filternavn"
-                key={filter.filterId}
+                key={lagretFilter.filterId}
                 name="mineFilter"
-                label={filter.filterNavn}
-                value={filter.filterId}
+                label={lagretFilter.filterNavn}
+                value={lagretFilter.filterId}
                 onChange={() => velgFilter()}
-                checked={valgtMittFilter?.filterId === filter.filterId}
+                checked={valgtLagretFilter?.filterId === lagretFilter.filterId}
             />
             <RedigerKnapp
-                hidden={valgtMittFilter?.filterId !== filter.filterId}
+                hidden={valgtLagretFilter?.filterId !== lagretFilter.filterId}
                 aria="Rediger mitt filter"
                 onClick={onClickRedigerKnapp}
             />

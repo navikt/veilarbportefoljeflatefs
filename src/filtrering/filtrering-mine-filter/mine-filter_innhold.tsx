@@ -58,7 +58,7 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
                 {filtrertListe().map((filter, idx) =>
                     <MineFilterRad
                         key={idx}
-                        filter={filter}
+                        lagretFilter={filter}
                         filtergruppe={props.filtergruppe}
                         parentDiv={outerDivRef}
                     />

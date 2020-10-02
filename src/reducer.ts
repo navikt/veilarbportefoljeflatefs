@@ -26,7 +26,7 @@ import {FiltervalgModell} from "./model-interfaces";
 import inloggetVeilederReducer, {InloggetVeilederState} from "./ducks/inlogget-veileder";
 import sidebarReducer, {initialStateSidebar} from "./ducks/sidebar-tab";
 import mineFilterReducer from "./ducks/mine-filter";
-import mineFilterUI, {FilterUIState} from "./ducks/mine-filter-ui";
+import lagretFilterUIState, {LagretFilterUIState} from "./ducks/lagret-filter-ui-state";
 import {LagretFilterState} from "./ducks/lagretFilter";
 
 
@@ -69,9 +69,9 @@ export interface AppState {
     features: FeaturesState;
     veiledergrupperLagretFilter: LagretFilterState;
     mineFilter: LagretFilterState;
-    lagretFilterMinOversikt: FilterUIState;
-    lagretFilterEnhetensOversikt: FilterUIState;
-    lagretFilterVeilederOversikt: FilterUIState;
+    mineFilterMinOversikt: LagretFilterUIState;
+    mineFilterEnhetensOversikt: LagretFilterUIState;
+    mineFilterVeilederOversikt: LagretFilterUIState;
     toastReducer: ToastState;
     inloggetVeileder: InloggetVeilederState;
 }
@@ -101,9 +101,9 @@ export default combineReducers<AppState>({
     features: featuresReducer,
     veiledergrupperLagretFilter: veiledergrupperLagretFilterReducer,
     mineFilter: mineFilterReducer,
-    lagretFilterMinOversikt: named(ListevisningType.minOversikt, mineFilterUI),
-    lagretFilterEnhetensOversikt: named(ListevisningType.enhetensOversikt, mineFilterUI),
-    lagretFilterVeilederOversikt: named(ListevisningType.veilederOversikt, mineFilterUI),
+    mineFilterMinOversikt: named(ListevisningType.minOversikt, lagretFilterUIState),
+    mineFilterEnhetensOversikt: named(ListevisningType.enhetensOversikt, lagretFilterUIState),
+    mineFilterVeilederOversikt: named(ListevisningType.veilederOversikt, lagretFilterUIState),
     toastReducer: toastReducer,
     inloggetVeileder: inloggetVeilederReducer
 });

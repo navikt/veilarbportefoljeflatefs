@@ -64,7 +64,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     return (
         <>
             {dragAndDropOrder.map((filter, idx) => (
-                <NyMineFilterRad key={idx} filter={filter} filtergruppe={filtergruppe} />
+                <NyMineFilterRad key={idx} lagretFilter={filter} filtergruppe={filtergruppe} />
             ))}
         </>
     );
