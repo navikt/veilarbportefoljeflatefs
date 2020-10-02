@@ -3,7 +3,7 @@ import {NyFiltreringStatus} from '../../filtrering/filtrering-status/ny_filtreri
 import NyFiltreringFilter from '../../filtrering/ny_filtrering-filter';
 import NyFilteringVeilederGrupper from '../../filtrering/filtrering-veileder-grupper/ny_filtrering-veileder-grupper';
 import NyFiltreringMineFilter from '../../filtrering/filtrering-mine-filter/ny_filtrering-mine-filter';
-import React, {useState} from 'react';
+import React, {RefObject, useState} from 'react';
 import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {useDispatch, useSelector} from 'react-redux';
@@ -18,6 +18,7 @@ import Sidebar from './sidebar';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
+import outsideClick from '../../hooks/use-outside-click';
 
 export function sortMineFilter(a: MineFilter, b: MineFilter) {
     if (a.sortOrder !== null) {
@@ -37,9 +38,10 @@ interface SidevelgerProps {
     filtergruppe: string;
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
+    sidebarRef: RefObject<HTMLDivElement>;
 }
 
-function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: SidevelgerProps) {
+function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak, sidebarRef}: SidevelgerProps) {
     const dispatch = useDispatch();
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
@@ -50,6 +52,10 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
+
+    outsideClick(sidebarRef, () => {
+        setIsMinefiltereDraggable(false);
+    });
 
     const fjernUtilgjengeligeFilter = (elem: MineFilter) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');

@@ -223,6 +223,7 @@ function Sidebar(props: SidebarProps) {
                     filtergruppe={props.filtergruppe}
                     filtervalg={props.filtervalg}
                     enhettiltak={props.enhettiltak}
+                    sidebarRef={sidebarRef}
                 />
             </div>
         </div>
