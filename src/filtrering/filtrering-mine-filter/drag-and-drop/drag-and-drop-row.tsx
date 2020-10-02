@@ -21,7 +21,7 @@ function DragAndDropRow(props: DragAndDropRowProps) {
             dragNode.current?.focus();
             props.requestFocus(-1);
         }
-    }, [props.shouldBeFocused, props.requestFocus]);
+    }, [props, props.shouldBeFocused, props.requestFocus]);
 
     const tabIndex = props.idx === 0 ? 0 : -1;
 
