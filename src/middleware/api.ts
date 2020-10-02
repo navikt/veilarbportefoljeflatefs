@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
 import {VeilederModell} from '../model-interfaces';
-import {NyttFilter, RedigerFilter, SorteringOgId} from "../ducks/filter";
+import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from "../ducks/lagretFilter";
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -73,13 +73,13 @@ export function tilordneVeileder(tilordninger) {
     return fetch(url, config).then(sjekkStatuskode);
 }
 
-export function redigerVeiledergruppe(endringer: RedigerFilter, enhetId: string): Promise<RedigerFilter> {
+export function redigerVeiledergruppe(endringer: RedigerLagretFilter, enhetId: string): Promise<RedigerLagretFilter> {
     const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
     const config = { ...MED_CREDENTIALS, method: 'put', body: JSON.stringify(endringer) };
     return fetchToJson(url, config);
 }
 
-export function nyVeiledergruppe(endringer: NyttFilter, enhetId: string): Promise<NyttFilter> {
+export function nyVeiledergruppe(endringer: NyttLagretFilter, enhetId: string): Promise<NyttLagretFilter> {
     const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(endringer) };
     return fetchToJson(url, config);
@@ -118,13 +118,13 @@ export function hentFeatures(featureQueryString: string) {
     return fetchToJson(`${API_BASE_URL}${FEATURE_URL}?${featureQueryString}`);
 }
 
-export function redigerMineFilter(endringer: RedigerFilter): Promise<RedigerFilter> {
+export function redigerMineFilter(endringer: RedigerLagretFilter): Promise<RedigerLagretFilter> {
     const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
     const config = { ...MED_CREDENTIALS, method: 'put', body: JSON.stringify(endringer) };
     return fetchToJson(url, config);
 }
 
-export function nyttMineFilter(nyttFilter: NyttFilter): Promise<NyttFilter> {
+export function nyttMineFilter(nyttFilter: NyttLagretFilter): Promise<NyttLagretFilter> {
     const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
     const config = { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(nyttFilter) };
     return fetchToJson(url, config);

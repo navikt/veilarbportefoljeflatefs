@@ -1,6 +1,6 @@
 import {FiltervalgModell} from "../model-interfaces";
 
-export interface Filter {
+export interface LagretFilter {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
@@ -8,19 +8,19 @@ export interface Filter {
     sortOrder: number | null;
 }
 
-export interface FilterState {
+export interface LagretFilterState {
     status: string;
-    data: Filter[];
+    data: LagretFilter[];
     handlingType: HandlingsType | null;
 }
 
-export interface RedigerFilter {
+export interface RedigerLagretFilter {
     filterNavn: string;
     filterValg: FiltervalgModell;
     filterId: number;
 }
 
-export interface NyttFilter {
+export interface NyttLagretFilter {
     filterNavn: string;
     filterValg: FiltervalgModell;
 }

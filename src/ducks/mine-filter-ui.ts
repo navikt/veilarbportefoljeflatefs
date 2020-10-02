@@ -1,5 +1,5 @@
 import {OrNothing} from "../utils/types/types";
-import {Filter} from "./filter";
+import {LagretFilter} from "./lagretFilter";
 
 // Actions
 export const VELG_MINE_FILTER = 'minefilter_velg/VELG_MINE_FILTER';
@@ -15,8 +15,8 @@ export const LUKK_LAGRE_FILTER_MODAL = 'minefilter_velg/LUKK_MINE_FILTER_MODAL';
 
 
 export interface FilterUIState {
-    valgtFilter: OrNothing<Filter>;
-    valgtVeilederGruppe: OrNothing<Filter>;
+    valgtFilter: OrNothing<LagretFilter>;
+    valgtVeilederGruppe: OrNothing<LagretFilter>;
     sisteValgteFilter: OrNothing<number>
     erModalApen: boolean;
 }
@@ -59,7 +59,7 @@ export default function reducer(state: FilterUIState = initialState, action): Fi
 }
 
 // Action Creators
-export function markerValgtFilter(filterVerdi: Filter, filtergruppe: string) {
+export function markerValgtFilter(filterVerdi: LagretFilter, filtergruppe: string) {
     return {
         type: MARKER_MINE_FILTER,
         data: filterVerdi,
@@ -67,7 +67,7 @@ export function markerValgtFilter(filterVerdi: Filter, filtergruppe: string) {
     }
 }
 
-export function markerValgtVeilederGruppe(filterVerdi: Filter, filtergruppe: string) {
+export function markerValgtVeilederGruppe(filterVerdi: LagretFilter, filtergruppe: string) {
     return {
         type: MARKER_VEILEDER_GRUPPE,
         data: filterVerdi,

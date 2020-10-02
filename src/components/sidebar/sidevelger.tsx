@@ -17,9 +17,9 @@ import Sidebar from './sidebar';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {Filter} from "../../ducks/filter";
+import {LagretFilter} from "../../ducks/lagretFilter";
 
-function sortMineFilter(a: Filter, b: Filter) {
+function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
         if (b.sortOrder !== null) {
             return a.sortOrder - b.sortOrder;
@@ -51,7 +51,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
 
-    const fjernUtilgjengeligeFilter = (elem: Filter) => {
+    const fjernUtilgjengeligeFilter = (elem: LagretFilter) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
         const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes('NYE_BRUKERE_FOR_VEILEDER');

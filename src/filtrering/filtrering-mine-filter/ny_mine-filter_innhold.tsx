@@ -3,13 +3,13 @@ import './ny_mine-filter-innhold.less';
 import '../../components/sidebar/sidebar.less';
 import {Normaltekst} from 'nav-frontend-typografi';
 import DragAndDrop from './dragAndDrop/drag-and-drop';
-import {Filter} from "../../ducks/filter";
+import {LagretFilter} from "../../ducks/lagretFilter";
 import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface LagredeFilterInnholdProps {
-    lagretFilter: Filter[];
+    lagretFilter: LagretFilter[];
     filtergruppe: ListevisningType;
-    fjernUtilgjengeligeFilter: (elem: Filter) => void;
+    fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
     isDraggable: boolean;
     setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
 }

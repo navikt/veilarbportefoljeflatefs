@@ -9,10 +9,10 @@ import RedigerKnapp from "../../components/knapper/rediger-knapp";
 import React from "react";
 import './ny_mine-filter-innhold.less'
 import {ListevisningType} from "../../ducks/ui/listevisning";
-import {Filter} from "../../ducks/filter";
+import {LagretFilter} from "../../ducks/lagretFilter";
 
 interface LagretFilterRadProps {
-    filter: Filter;
+    filter: LagretFilter;
     filtergruppe: ListevisningType;
 }
 
@@ -20,8 +20,8 @@ function NyMineFilterRad({filter, filtergruppe}: LagretFilterRadProps) {
     const dispatch = useDispatch();
 
     const valgtMittFilter = useSelector((state: AppState) => filtergruppe === ListevisningType.minOversikt
-        ? state.mineFilterMinOversikt.valgtFilter
-        : state.mineFilterEnhetensOversikt.valgtFilter);
+        ? state.lagretFilterMinOversikt.valgtFilter
+        : state.lagretFilterEnhetensOversikt.valgtFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 

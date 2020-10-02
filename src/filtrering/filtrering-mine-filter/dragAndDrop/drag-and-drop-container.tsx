@@ -7,11 +7,11 @@ import {Normaltekst} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {handleDragEnd, handleDragEnter, handleDragOver, handleDragStart} from './mouse-drag-event-listeners';
 import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';
-import {Filter} from "../../../ducks/filter";
+import {LagretFilter} from "../../../ducks/lagretFilter";
 
 export interface DragAndDropContainerProps {
-    dragAndDropOrder: Filter[];
-    setDragAndDropOrder: React.Dispatch<React.SetStateAction<Filter[]>>;
+    dragAndDropOrder: LagretFilter[];
+    setDragAndDropOrder: React.Dispatch<React.SetStateAction<LagretFilter[]>>;
     lagreRekkefolge: () => void;
     avbryt: () => void;
     onUnmount: MutableRefObject<() => void>;
@@ -38,7 +38,7 @@ function DragAndDropContainer({
     }, [dragAndDropOrder]);
 
     const alfabetiskSort = () => {
-        dragAndDropOrder.sort((a: Filter, b: Filter) => {
+        dragAndDropOrder.sort((a: LagretFilter, b: LagretFilter) => {
             return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
         });
         setAriaTekst('Filtrene har blitt sortert i alfabetisk rekkefølge.');

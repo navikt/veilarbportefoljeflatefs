@@ -12,7 +12,7 @@ import * as faker from 'faker/locale/nb_NO';
 import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
 import {mineFilter} from "./mine-filter";
-import {Filter, SorteringOgId} from "../ducks/filter";
+import {LagretFilter, SorteringOgId} from "../ducks/lagretFilter";
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -89,7 +89,7 @@ mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}, res, ctx) => {
                 return oppdatertGruppe;
             }
             return v;
-        }) as Filter[];
+        }) as LagretFilter[];
         return res(ctx.json(oppdatertGruppe));
     }
 );

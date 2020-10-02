@@ -1,6 +1,6 @@
 import {initialState} from '../ducks/filtrering';
 import * as faker from 'faker/locale/nb_NO';
-import {Filter} from "../ducks/filter";
+import {LagretFilter} from "../ducks/lagretFilter";
 
 export const mineFilter = () => {
     return (
@@ -72,6 +72,6 @@ export const mineFilter = () => {
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
                 sortOrder: 1,
             }
-        ]  as Filter []
+        ]  as LagretFilter []
     );
 };

@@ -1,6 +1,6 @@
 import {hentEnhetsFilterGrupper, nyVeiledergruppe, redigerVeiledergruppe, slettVeiledergruppe} from '../middleware/api';
 import {doThenDispatch, STATUS} from './utils';
-import {FilterState, NyttFilter, RedigerFilter} from "./filter";
+import {LagretFilterState, NyttLagretFilter, RedigerLagretFilter} from "./lagretFilter";
 
 // Actions
 export const HENT_VEILEDERGRUPPER_OK = 'veiledergrupper/OK';
@@ -27,7 +27,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: FilterState = initialState, action) {
+export default function reducer(state: LagretFilterState = initialState, action) {
     switch (action.type) {
         case HENT_VEILEDERGRUPPER_PENDING:
         case NY_VEILEDERGRUPPER_PENDING:
@@ -77,7 +77,7 @@ export function hentLagretFilterForEnhet(enhetId) {
 }
 
 // Action Creators
-export function lagreEndringer(endringer: RedigerFilter, enhetId: string) {
+export function lagreEndringer(endringer: RedigerLagretFilter, enhetId: string) {
     return doThenDispatch(() => redigerVeiledergruppe(endringer, enhetId), {
         OK: REDIGER_VEILEDERGRUPPER_OK,
         FEILET: REDIGER_VEILEDERGRUPPER_FEILET,
@@ -86,7 +86,7 @@ export function lagreEndringer(endringer: RedigerFilter, enhetId: string) {
 }
 
 // Action Creators
-export function lageNyGruppe(endringer: NyttFilter, enhetId: string) {
+export function lageNyGruppe(endringer: NyttLagretFilter, enhetId: string) {
     return doThenDispatch(() => nyVeiledergruppe(endringer, enhetId), {
         OK: NY_VEILEDERGRUPPER_OK,
         FEILET: NY_VEILEDERGRUPPER_FEILET,

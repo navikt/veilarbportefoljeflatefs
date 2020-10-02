@@ -6,7 +6,7 @@ import {
     redigerMineFilter,
     slettMineFilter
 } from '../middleware/api';
-import {FilterState, HandlingsType, NyttFilter, RedigerFilter, SorteringOgId} from "./filter";
+import {HandlingsType, LagretFilterState, NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from "./lagretFilter";
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
@@ -36,7 +36,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: FilterState = initialState, action) {
+export default function reducer(state: LagretFilterState = initialState, action) {
     switch (action.type) {
         case HENT_MINEFILTER_PENDING:
             return {...state, status: STATUS.PENDING, handlingType: HandlingsType.HENTE};
@@ -105,7 +105,7 @@ export function hentMineFilterForVeileder() {
     });
 }
 
-export function lagreEndringer(endringer: RedigerFilter) {
+export function lagreEndringer(endringer: RedigerLagretFilter) {
     return doThenDispatch(() => redigerMineFilter(endringer), {
         OK: REDIGER_MINEFILTER_OK,
         FEILET: REDIGER_MINEFILTER_FEILET,
@@ -113,7 +113,7 @@ export function lagreEndringer(endringer: RedigerFilter) {
     });
 }
 
-export function lagreNyttFilter(nyttFilter: NyttFilter) {
+export function lagreNyttFilter(nyttFilter: NyttLagretFilter) {
     return doThenDispatch(() => nyttMineFilter(nyttFilter), {
         OK: NY_MINEFILTER_OK,
         FEILET: NY_MINEFILTER_FEILET,

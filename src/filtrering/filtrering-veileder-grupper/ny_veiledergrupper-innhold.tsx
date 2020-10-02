@@ -13,12 +13,12 @@ import './ny_veileder-gruppe.less'
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {ListevisningType} from "../../ducks/ui/listevisning";
-import {Filter} from "../../ducks/filter";
+import {LagretFilter} from "../../ducks/lagretFilter";
 import VeilederGruppeRad from "./ny_veileder_gruppe_rad";
 
 
 interface VeilederGruppeInnholdProps {
-    lagretFilter: Filter[]
+    lagretFilter: LagretFilter[]
     filterValg?: FiltervalgModell;
     filtergruppe: ListevisningType;
 }
@@ -29,8 +29,8 @@ function isOverflown(element) {
 
 function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
-    const valgtGruppeEngetensOversikt = useSelector((state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe);
-    const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe);
+    const valgtGruppeEngetensOversikt = useSelector((state: AppState) => state.lagretFilterEnhetensOversikt.valgtVeilederGruppe);
+    const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.lagretFilterVeilederOversikt.valgtVeilederGruppe);
     const valgtGruppe = (props.filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEngetensOversikt)
 
     const outerDivRef = useRef<HTMLDivElement>(null);

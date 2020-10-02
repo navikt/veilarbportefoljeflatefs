@@ -4,7 +4,7 @@ import {AppState} from '../../reducer';
 import LagredeFilterInnhold from './mine-filter_innhold';
 import {AlertStripeFeil} from 'nav-frontend-alertstriper';
 import {STATUS} from '../../ducks/utils';
-import {HandlingsType} from "../../ducks/filter";
+import {HandlingsType} from "../../ducks/lagretFilter";
 import {ListevisningType} from "../../ducks/ui/listevisning";
 
 function FiltreringMineFilter(props: {filtergruppe: ListevisningType}) {

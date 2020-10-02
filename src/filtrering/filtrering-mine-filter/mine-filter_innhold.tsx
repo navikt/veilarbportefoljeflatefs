@@ -9,12 +9,12 @@ import {REDESIGN} from '../../konstanter';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import MineFilterRad from './mine-filter-rad';
-import {Filter} from "../../ducks/filter";
+import {LagretFilter} from "../../ducks/lagretFilter";
 
 const HiddenHjelpetekst = hiddenIf(Hjelpetekst);
 
 interface MineFilterInnholdProps {
-    mineFilter: Filter[];
+    mineFilter: LagretFilter[];
     filtergruppe: ListevisningType;
 }
 

@@ -1,7 +1,7 @@
 import {initialState} from '../ducks/filtrering';
 import {veiledere} from './veiledere';
 import * as faker from 'faker/locale/nb_NO';
-import {Filter} from "../ducks/filter";
+import {LagretFilter} from "../ducks/lagretFilter";
 
 export const veilederGrupper = () => {
     const veilederGruppe1 = veiledere.slice(0, 4).map((v) => v.ident);
@@ -47,6 +47,6 @@ export const veilederGrupper = () => {
                 filterValg: {...initialState, veiledere: veilederGruppe5},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             }
-        ] as Filter []
+        ] as LagretFilter []
     );
 };
