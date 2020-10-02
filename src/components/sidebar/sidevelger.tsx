@@ -19,7 +19,7 @@ import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 
-function sortMineFilter(a: MineFilter, b: MineFilter) {
+export function sortMineFilter(a: MineFilter, b: MineFilter) {
     if (a.sortOrder !== null) {
         if (b.sortOrder !== null) {
             return a.sortOrder - b.sortOrder;

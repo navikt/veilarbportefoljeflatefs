@@ -5,6 +5,7 @@ import DragAndDropContainer from './drag-and-drop-container';
 import NyMineFilterRad from '../ny_mine-filter-rad';
 import {useDispatch} from 'react-redux';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
+import {sortMineFilter} from '../../../components/sidebar/sidevelger';
 
 export interface DragAndDropProps {
     stateFilterOrder: MineFilter[];
@@ -44,8 +45,8 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     }, [lagreRekkefolge, setOnUnmount]);
 
     useEffect(() => {
-        setDragAndDropOrder([...stateFilterOrder]);
-    }, [stateFilterOrder]);
+        setDragAndDropOrder(overskrivStateRekefulge(stateFilterOrder, dragAndDropOrder));
+    }, [stateFilterOrder, dragAndDropOrder]);
 
     if (isDraggable) {
         return (
@@ -66,6 +67,19 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
             ))}
         </>
     );
+}
+
+function overskrivStateRekefulge(stateArray: MineFilter[], dragAndDropArray: MineFilter[]) {
+    const newDragAndDropArray = [...stateArray];
+    newDragAndDropArray.forEach(
+        (a: MineFilter) => (a.sortOrder = dragAndDropArray.findIndex((b) => b.filterId === a.filterId))
+    );
+    newDragAndDropArray.sort(sortMineFilter);
+
+    if (harEndretRekkefolge(newDragAndDropArray, dragAndDropArray)) {
+        return newDragAndDropArray;
+    }
+    return dragAndDropArray;
 }
 
 function harEndretRekkefolge(a: MineFilter[], b: MineFilter[]) {
