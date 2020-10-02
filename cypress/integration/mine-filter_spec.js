@@ -3,7 +3,6 @@ import React from "react";
 const mineFilterNavn = "Voff";
 const mineFilterNavnRedigert = "Mjau";
 
-
 describe('Lag nytt filter', () => {
     it('Sjekk at det er 5 filtre i Mine filter', () => {
         cy.getByTestId('sidebar-tab_MINE_FILTER').click()
@@ -134,6 +133,7 @@ describe('Slett lagret filter', () => {
     })
 })
 
+//TODO drag and drop
 xdescribe('Sjekk at drag and drop funker', () => {
     it('Klikk på mine filter-tab', () => {
         cy.klikkTab("MINE_FILTER")

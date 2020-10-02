@@ -38,7 +38,9 @@ export const TilToppenKnapp = () => {
             ref={knappRef}
             className={classNames('til-toppen-knapp', 'knapp', !knappSkalVises && 'til-toppen-knapp--skjul')}
             aria-hidden={!knappSkalVises}
+            hidden={!knappSkalVises}
             onClick={onClick}
+            data-testid='til-toppen-knapp'
         >
             <TilToppenIkonBla/>
         </button>

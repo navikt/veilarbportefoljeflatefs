@@ -31,3 +31,28 @@ Cypress.Commands.add('getByTestId', (selector, ...args) => {
 Cypress.Commands.add("klikkTab", (tab) => {
     cy.getByTestId(`sidebar-tab_${tab}`).click();
 })
+
+Cypress.Commands.add("gaTilOversikt", (side) => {
+    if (side === 'min-oversikt') {
+        cy.getByTestId(side).click()
+        cy.url().should('include', '/veilarbportefoljeflatefs/portefolje')
+        // cy.route({
+        //     method: 'GET',
+        //     url: '/veilarbportefoljeflatefs/api/feature'
+        // })
+    } else if (side === 'enhetens-oversikt') {
+        cy.getByTestId(side).click()
+        cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
+        // cy.route({
+        //     method: 'GET',
+        //     url: '/veilarbportefoljeflatefs/api/feature'
+        // })
+    } else if (side === 'veileder-oversikt') {
+        cy.getByTestId(side).click()
+        cy.url().should('include', '/veilarbportefoljeflatefs/veiledere')
+    }
+    cy.route({
+        method: 'GET',
+        url: '/veilarbportefoljeflatefs/api/feature'
+    })
+})
