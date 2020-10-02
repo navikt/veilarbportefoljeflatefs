@@ -102,7 +102,7 @@ export function apneLagreFilterModal(filtergruppe: string) {
     }
 }
 
-export function lukkLagreFilterModal(filtergruppe: string) {
+export function lukkLagretFilterModal(filtergruppe: string) {
     return {
         type: LUKK_LAGRE_FILTER_MODAL,
         name: filtergruppe
