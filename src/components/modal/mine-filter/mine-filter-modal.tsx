@@ -9,7 +9,7 @@ import {OrNothing} from "../../../utils/types/types";
 import hiddenIf from "../../hidden-if/hidden-if";
 import {Meny} from "./mine-filter-meny";
 import {MineFilterFnrFeil} from "./mine-filter-fnr-feil";
-import {lukkLagretFilterModal} from "../../../ducks/lagret-filter-ui-state";
+import {lukkMineFilterModal} from "../../../ducks/lagret-filter-ui-state";
 import {ListevisningType} from "../../../ducks/ui/listevisning";
 
 export enum Visningstype {
@@ -45,7 +45,7 @@ export function MineFilterModal(props: { filtergruppe: string }) {
     const dispatch = useDispatch();
 
     const lukkModal = () => {
-        dispatch(lukkLagretFilterModal(props.filtergruppe))
+        dispatch(lukkMineFilterModal(props.filtergruppe))
     }
 
     useEffect(() => {

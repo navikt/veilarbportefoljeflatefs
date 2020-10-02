@@ -3,7 +3,7 @@ import {AppState} from "../../reducer";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
 import {logEvent} from "../../utils/frontend-logger";
 import {velgLagretFilter} from "../../ducks/filtrering";
-import {apneLagreFilterModal, markerValgtLagretFilter} from "../../ducks/lagret-filter-ui-state";
+import {apneMineFilterModal, markerMineFilter} from "../../ducks/lagret-filter-ui-state";
 import {Radio} from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
 import React from "react";
@@ -29,11 +29,11 @@ function NyMineFilterRad({lagretFilter, filtergruppe}: LagretFilterRadProps) {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {}, {filterId: lagretFilter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
         dispatch(velgLagretFilter(lagretFilter, filtergruppe))
-        dispatch(markerValgtLagretFilter(lagretFilter, filtergruppe));
+        dispatch(markerMineFilter(lagretFilter, filtergruppe));
     }
 
     function onClickRedigerKnapp() {
-        dispatch(apneLagreFilterModal(filtergruppe))
+        dispatch(apneMineFilterModal(filtergruppe))
     }
 
     return (

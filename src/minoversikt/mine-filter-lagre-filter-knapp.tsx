@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from "../components/modal/mine-filter/mine-filter-utils";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../reducer";
-import {apneLagreFilterModal} from "../ducks/lagret-filter-ui-state";
+import {apneMineFilterModal} from "../ducks/lagret-filter-ui-state";
 import {ListevisningType} from "../ducks/ui/listevisning";
 
 export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
@@ -23,7 +23,7 @@ export function MineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
 
     function lagreFilterModal(event) {
         event.preventDefault()
-        dispatch(apneLagreFilterModal(props.filtergruppe))
+        dispatch(apneMineFilterModal(props.filtergruppe))
     }
 
     useEffect(() => {

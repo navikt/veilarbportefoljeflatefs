@@ -2,16 +2,16 @@ import {OrNothing} from "../utils/types/types";
 import {LagretFilter} from "./lagretFilter";
 
 // Actions
-export const VELG_LAGRET_FILTER = 'lagretfilter_velg/VELG_LAGRET_FILTER';
-export const MARKER_LAGRET_FILTER = 'lagretfilter_velg/MARKER_LAGRET_FILTER';
-export const AVMARKER_LAGRET_FILTER = 'lagretfilter_velg/AVMARKER_LAGRET_FILTER';
-export const AVMARKER_SISTE_VALGT_LAGRET_FILTER = 'lagretfilter_velg/AVMARKER_SISTE_VALGT_FILTER';
+export const VELG_MINE_FILTER = 'lagretfilter_velg/VELG_MINE_FILTER';
+export const MARKER_MINE_FILTER = 'lagretfilter_velg/MARKER_MINE_FILTER';
+export const AVMARKER_MINE_FILTER = 'lagretfilter_velg/AVMARKER_MINE_FILTER';
+export const AVMARKER_SISTE_VALGT_MINE_FILTER = 'lagretfilter_velg/AVMARKER_SISTE_VALGT_MINE_FILTER';
 
 export const MARKER_VEILEDER_GRUPPE = 'lagretfilter_velg/MARKER_VEILEDER_GRUPPE';
 export const AVMARKER_VEILEDER_GRUPPE = 'lagretfilter_velg/AVMARKER_VEILEDER_GRUPPE';
 
-export const APEN_LAGRE_FILTER_MODAL = 'lagretfilter_velg/APEN_LAGRE_FILTER_MODAL';
-export const LUKK_LAGRE_FILTER_MODAL = 'lagretfilter_velg/LUKK_LAGRE_FILTER_MODAL';
+export const APEN_MINE_FILTER_MODAL = 'lagretfilter_velg/APEN_MINE_FILTER_MODAL';
+export const LUKK_MINE_FILTER_MODAL = 'lagretfilter_velg/LUKK_MINE_FILTER_MODAL';
 
 
 export interface LagretFilterUIState {
@@ -32,13 +32,13 @@ const initialState = {
 export default function reducer(state: LagretFilterUIState = initialState, action): LagretFilterUIState {
     switch (action.type) {
         case
-        MARKER_LAGRET_FILTER:
+        MARKER_MINE_FILTER:
             return {...state, valgtLagretFilter: action.data, sisteValgtLagretFilter: action.data.filterId}
         case
-        AVMARKER_LAGRET_FILTER:
+        AVMARKER_MINE_FILTER:
             return {...state, valgtLagretFilter: null}
         case
-        AVMARKER_SISTE_VALGT_LAGRET_FILTER:
+        AVMARKER_SISTE_VALGT_MINE_FILTER:
             return {...state, sisteValgtLagretFilter: null}
         case
         MARKER_VEILEDER_GRUPPE:
@@ -47,10 +47,10 @@ export default function reducer(state: LagretFilterUIState = initialState, actio
         AVMARKER_VEILEDER_GRUPPE:
             return {...state, valgtVeilederGruppe: null}
             case
-        APEN_LAGRE_FILTER_MODAL:
+        APEN_MINE_FILTER_MODAL:
             return {...state, erModalApen: true}
         case
-        LUKK_LAGRE_FILTER_MODAL:
+        LUKK_MINE_FILTER_MODAL:
             return {...state, erModalApen: false}
         default:
             return state;
@@ -58,9 +58,9 @@ export default function reducer(state: LagretFilterUIState = initialState, actio
 }
 
 // Action Creators
-export function markerValgtLagretFilter(filterVerdi: LagretFilter, filtergruppe: string) {
+export function markerMineFilter(filterVerdi: LagretFilter, filtergruppe: string) {
     return {
-        type: MARKER_LAGRET_FILTER,
+        type: MARKER_MINE_FILTER,
         data: filterVerdi,
         name: filtergruppe
     }
@@ -74,9 +74,9 @@ export function markerValgtVeilederGruppe(filterVerdi: LagretFilter, filtergrupp
     }
 }
 
-export function avmarkerValgtLagretFilter(filtergruppe: string) {
+export function avmarkerValgtMineFilter(filtergruppe: string) {
     return {
-        type: AVMARKER_LAGRET_FILTER,
+        type: AVMARKER_MINE_FILTER,
         name: filtergruppe
     }
 }
@@ -88,23 +88,23 @@ export function avmarkerValgtVeilederGruppe(filtergruppe: string) {
     }
 }
 
-export function avmarkerSisteValgtLagretFilter(filtergruppe: string) {
+export function avmarkerSisteValgtMineFilter(filtergruppe: string) {
     return {
-        type: AVMARKER_SISTE_VALGT_LAGRET_FILTER,
+        type: AVMARKER_SISTE_VALGT_MINE_FILTER,
         name: filtergruppe
     }
 }
 
-export function apneLagreFilterModal(filtergruppe: string) {
+export function apneMineFilterModal(filtergruppe: string) {
     return {
-        type: APEN_LAGRE_FILTER_MODAL,
+        type: APEN_MINE_FILTER_MODAL,
         name: filtergruppe
     }
 }
 
-export function lukkLagretFilterModal(filtergruppe: string) {
+export function lukkMineFilterModal(filtergruppe: string) {
     return {
-        type: LUKK_LAGRE_FILTER_MODAL,
+        type: LUKK_MINE_FILTER_MODAL,
         name: filtergruppe
     }
 }

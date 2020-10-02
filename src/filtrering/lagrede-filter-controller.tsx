@@ -1,9 +1,9 @@
 import {useEffect} from "react";
 import {
-    avmarkerSisteValgtLagretFilter,
-    avmarkerValgtLagretFilter,
+    avmarkerSisteValgtMineFilter,
+    avmarkerValgtMineFilter,
     avmarkerValgtVeilederGruppe,
-    markerValgtLagretFilter,
+    markerMineFilter,
     markerValgtVeilederGruppe
 } from "../ducks/lagret-filter-ui-state";
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from "../components/modal/mine-filter/mine-filter-utils";
@@ -40,15 +40,15 @@ export function LagredeFilterUIController(props: { filtergruppe: ListevisningTyp
         const valgtVeilederGruppe = lagretVeilederGrupper.filter(elem => veilederlisterErLik(elem.filterValg.veiledere,getFiltrering()!.veiledere))
 
         if (erObjektValuesTomt(getFiltrering())) {
-            dispatch(avmarkerSisteValgtLagretFilter(props.filtergruppe));
+            dispatch(avmarkerSisteValgtMineFilter(props.filtergruppe));
         }
 
         if (valgtFilter.length === 0){
-            dispatch(avmarkerValgtLagretFilter(props.filtergruppe));
+            dispatch(avmarkerValgtMineFilter(props.filtergruppe));
             logEvent('portefolje.metrikker.lagredefilter.direkte-filtrering',
                 {}, {sideNavn: finnSideNavn()});
         }else if (valgtFilter.length === 1){
-            dispatch(markerValgtLagretFilter(valgtFilter[0], props.filtergruppe));
+            dispatch(markerMineFilter(valgtFilter[0], props.filtergruppe));
         }
 
         if (valgtVeilederGruppe.length === 0){

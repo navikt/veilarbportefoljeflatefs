@@ -1,5 +1,5 @@
 import {FiltervalgModell} from '../model-interfaces';
-import {VELG_LAGRET_FILTER} from "./lagret-filter-ui-state";
+import {VELG_MINE_FILTER} from "./lagret-filter-ui-state";
 import {ListevisningType} from "./ui/listevisning";
 import {LagretFilter} from "./lagretFilter";
 // Actions
@@ -116,7 +116,7 @@ export default function reducer(state: FiltervalgModell = initialState, action):
             };
         case SETT_FILTERVALG:
             return {...action.data};
-        case VELG_LAGRET_FILTER:
+        case VELG_MINE_FILTER:
             return {...action.data.filterValg}
         default:
             return state;
@@ -125,7 +125,7 @@ export default function reducer(state: FiltervalgModell = initialState, action):
 
 export function velgLagretFilter(filterVerdi: LagretFilter, filtergruppe: ListevisningType) {
     return {
-        type: VELG_LAGRET_FILTER,
+        type: VELG_MINE_FILTER,
         data: filterVerdi,
         name: filtergruppe
     }

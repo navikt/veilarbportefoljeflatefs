@@ -9,7 +9,7 @@ import {ErrorModalType, MineFilterVarselModal} from './varsel-modal';
 import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
 import {lagreEndringer, slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
-import {avmarkerSisteValgtLagretFilter} from '../../../ducks/lagret-filter-ui-state';
+import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {ListevisningType} from '../../../ducks/ui/listevisning';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
@@ -65,7 +65,7 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
 
     const doSlettFilter = () => {
         dispatch(slettFilter(filterId));
-        dispatch(avmarkerSisteValgtLagretFilter(props.filtergruppe));
+        dispatch(avmarkerSisteValgtMineFilter(props.filtergruppe));
         requestHandlerSlette.setSaveRequestSent(true);
     };
 
