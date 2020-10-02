@@ -19,6 +19,7 @@
     "cypress:run": "cypress run"
   },
   "devDependencies": {
+    "@4tw/cypress-drag-drop": "^1.4.0",
     "@types/classnames": "^2.2.10",
     "@types/faker": "4.1.12",
     "@types/jest": "26.0.9",
@@ -31,6 +32,7 @@
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
     "cypress": "^5.2.0",
+    "cypress-dark": "^1.7.14",
     "prettier": "1.19.1",
     "start-server-and-test": "^1.11.4",
     "webpack": "^4.44.2",
@@ -44,6 +46,7 @@
     "classnames": "^2.2.6",
     "craco-less": "1.17.0",
     "cross-env": "7.0.2",
+    "cypress-drag-drop": "^1.1.1",
     "cypress-run": "^1.1.1",
     "cypress-wait-until": "^1.7.1",
     "express": "4.17.1",

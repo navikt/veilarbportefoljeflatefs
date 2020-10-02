@@ -1,12 +1,13 @@
 import React from "react";
 
 describe('Tildel veileder', () => {
-    it('Start system', () => {
-        cy.start();
-    })
     it('Gå til min oversikt', () => {
         cy.getByTestId(`min-oversikt`).click()
         cy.url().should('include', '/veilarbportefoljeflatefs/portefolje')
+        cy.route({
+            method: 'GET',
+            url: '/veilarbportefoljeflatefs/api/feature'
+        })
     })
     it('Velg bruker', () => {
         cy.getByTestId(`brukerliste-checkbox_min-oversikt_7`).check()

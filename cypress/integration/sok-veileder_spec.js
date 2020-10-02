@@ -1,9 +1,6 @@
 import React from "react";
 
 describe('Søk veileder', () => {
-    it('Start system', () => {
-        cy.start();
-    })
     it('Filtrer på ufordelte brukere', () => {
         cy.getByTestId('filter-checkboks-container_ufordeltebruker').check({force: true})
     })

@@ -13,7 +13,7 @@ interface ToggleSwitchProps {
 
 function ToggleSwitch({onOpen, onClose, defaultChecked, checked, ariaLabel}: ToggleSwitchProps) {
     return (
-        <label className="toggle-switch">
+        <label className="toggle-switch" data-testid="toggle-knapp">
             <input
                 className="toggle-input"
                 type="checkbox"
@@ -29,14 +29,14 @@ function ToggleSwitch({onOpen, onClose, defaultChecked, checked, ariaLabel}: Tog
                     }
                 }}
             />
-            <span className="switch-slider"></span>
+            <span className="switch-slider"/>
             <div className="toggle-switch-las__lukked">
-                <LasLukket />
+                <LasLukket/>
             </div>
             <div className="toggle-switch-las__apen">
-                <LasApen />
+                <LasApen/>
             </div>
-            <div className="toggle-switch-border"></div>
+            <div className="toggle-switch-border"/>
         </label>
     );
 }

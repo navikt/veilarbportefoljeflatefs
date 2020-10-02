@@ -11,7 +11,7 @@ import {AppState} from '../../reducer';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {PopoverOrientering} from 'nav-frontend-popover';
-import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggleSwitch/toggle-switch';
+import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 import {MineFilter} from '../../ducks/mine-filter';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import Sidebar from './sidebar';

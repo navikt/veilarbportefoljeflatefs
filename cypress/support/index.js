@@ -17,4 +17,21 @@
 import './commands'
 
 // Alternatively you can use CommonJS syntax:
-// require('./commands')
+require('cypress-dark');
+require('@4tw/cypress-drag-drop');
+
+before(() => {
+    cy.server();
+    cy.visit('/')
+    cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
+    Cypress.on('uncaught:exception', (err) => {
+        console.log(err);
+        return false;
+    })
+    cy.route({
+        method: 'GET',
+        url: '/veilarbportefoljeflatefs/api/feature'
+    })
+    cy.getByTestId('enhetens-oversikt').contains('Enhetens oversikt')
+        .should('exist');
+})

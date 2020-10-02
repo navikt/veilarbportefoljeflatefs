@@ -87,10 +87,8 @@ function DragAndDropContainer({
         setRequestRowInFocuse(row);
     }, []);
 
-    //-------- Function call on unMount --------
     useEffect(() => () => onUnmount.current(), [onUnmount]);
 
-    //-------- Drag and drop with mouse handeling --------
     const eventIsInsideContainer = (e) => dragContainer.current !== null && dragContainer.current.contains(e.target);
 
     useEventListener('dragstart', handleDragStart({eventIsInsideContainer, setSrcIndex, setDropIndex}));
@@ -109,7 +107,6 @@ function DragAndDropContainer({
         })
     );
 
-    //-------- Keybord handeling --------
     const prepFlyttOpp = useCallback((index: number) => {
         setSrcIndex(index);
         setDestIndex(index - 1);

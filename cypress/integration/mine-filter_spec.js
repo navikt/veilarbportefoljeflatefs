@@ -5,9 +5,6 @@ const mineFilterNavnRedigert = "Mjau";
 
 
 describe('Lag nytt filter', () => {
-    it('Start system', () => {
-        cy.start();
-    })
     it('Sjekk at det er 5 filtre i Mine filter', () => {
         cy.getByTestId('sidebar-tab_MINE_FILTER').click()
         cy.getByTestId('mine-filter-rad-wrapper').should('have.length', 5)
@@ -45,6 +42,11 @@ describe('Lag nytt filter', () => {
     })
     it('Klikk lagre', () => {
         cy.getByTestId('lagre-nytt-filter-modal-lagre-knapp').click()
+    })
+    //TODO forvente route 500/200
+    it('Sjekk at Mine filter er åpen', () => {
+        cy.getByTestId('sidebar-tab_MINE_FILTER')
+            .should("have.class", "sidebar__tab-valgt")
     })
     it('Sjekk at Mine filter er åpen', () => {
         cy.getByTestId('sidebar-tab_MINE_FILTER')
@@ -131,3 +133,35 @@ describe('Slett lagret filter', () => {
         cy.getByTestId('mine-filter-rad-wrapper').should('have.length', 5)
     })
 })
+
+xdescribe('Sjekk at drag and drop funker', () => {
+    it('Klikk på mine filter-tab', () => {
+        cy.klikkTab("MINE_FILTER")
+    })
+    it('Klikk på hengelåsen', () => {
+        cy.getByTestId('toggle-knapp').click()
+    })
+    it('Dra øverste filter til nederste rad', () => {
+        cy.getByTestId('drag-drop-rad').contains("UfordelteBrukere")
+            .trigger('mousedown', {which: 1})
+            .trigger('mousemove', {clientX: 340, clientY: 130})
+            .trigger('mouseup', {force: true})
+
+        cy.getByTestId('drag-drop-rad').contains("UfordelteBrukere").should("have.value", 4)
+
+    })
+    it('Ufordelte brukere skal ha fokus', () => {
+        cy.getByTestId('drag-drop-rad').contains('UfordelteBrukere').should("have.focus");
+    })
+    it('Klikk øverste filter til nederste rad', () => {
+        cy.getByTestId('drag-drop-rad').contains('UfordelteBrukere').should("have.value", 0);
+        cy.getByTestId('flytt-knapp_ned_0').should("be.visible");
+        cy.getByTestId('flytt-knapp_ned_0').click();
+        cy.getByTestId('drag-drop-rad').contains('UfordelteBrukere').should("have.value", 1);
+
+    })
+
+})
+
+//TODO sjekk at filter som ikke skal være i min oversikt ikke er der
+//TODO sjekk at filter som ikke skal være i enhetens oversikt ikke er der

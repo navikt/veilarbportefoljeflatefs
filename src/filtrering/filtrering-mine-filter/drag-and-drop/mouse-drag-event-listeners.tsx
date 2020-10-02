@@ -53,7 +53,7 @@ export function handleDragEnd({
                                   setSrcIndex,
                                   setDestIndex
                               }: HandleDragEndProps) {
-    return (e) => {
+    return () => {
         if (dragIsInsideElement) {
             requestNewOrder(srcIndex, destIndex);
         }

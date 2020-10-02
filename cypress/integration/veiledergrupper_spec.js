@@ -8,9 +8,6 @@ const aasen = "Aasen"
 const minstEnVeileder = "Du må legge til veiledere."
 
 describe('Lag ny veiledergruppe', () => {
-    it('Start system', () => {
-        cy.start();
-    })
     it('Det eksisterer 5 veiledergrupper', () => {
         cy.getByTestId('sidebar-tab_VEILEDERGRUPPER').click()
         cy.getByTestId('veiledergruppe-rad-wrapper').should('have.length', 5)
