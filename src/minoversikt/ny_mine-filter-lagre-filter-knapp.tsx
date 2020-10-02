@@ -16,8 +16,8 @@ export function NyMineFilterLagreFilterKnapp(props: { filtergruppe: string }) {
     const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
 
     const filtrering = useSelector((state: AppState) => erPaMinOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt);
-    const lagretFilterList = useSelector((state: AppState) => state.mineFilter.data);
-    const valgtMineFilter = !lagretFilterList.find(elem => lagretFilterValgModellErLik(elem.filterValg, filtrering));
+    const mineFilterList = useSelector((state: AppState) => state.mineFilter.data);
+    const valgtMineFilter = !mineFilterList.find(elem => lagretFilterValgModellErLik(elem.filterValg, filtrering));
 
     const dispatch = useDispatch();
 

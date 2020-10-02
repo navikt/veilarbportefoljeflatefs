@@ -18,9 +18,9 @@ interface VeilederGruppeRad {
 
 function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: VeilederGruppeRad) {
     const dispatch = useDispatch();
-    const valgtGruppeEngetensOversikt = useSelector((state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe);
+    const valgtGruppeEnhetensOversikt = useSelector((state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe);
     const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe);
-    const valgtGruppe = (filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEngetensOversikt)
+    const valgtGruppe = (filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEnhetensOversikt)
 
     function velgGruppe() {
         logEvent('portefolje.metrikker.veiledergrupper.velg-gruppe',

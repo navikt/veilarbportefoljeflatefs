@@ -12,11 +12,11 @@ import {ListevisningType} from "../../ducks/ui/listevisning";
 import {LagretFilter} from "../../ducks/lagretFilter";
 
 interface NyMineFilterRadProps {
-    lagretFilter: LagretFilter;
+    mineFilter: LagretFilter;
     filtergruppe: ListevisningType;
 }
 
-function NyMineFilterRad({lagretFilter, filtergruppe}: NyMineFilterRadProps) {
+function NyMineFilterRad({mineFilter, filtergruppe}: NyMineFilterRadProps) {
     const dispatch = useDispatch();
 
     const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === ListevisningType.minOversikt
@@ -27,9 +27,9 @@ function NyMineFilterRad({lagretFilter, filtergruppe}: NyMineFilterRadProps) {
 
     function velgFilter() {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
-            {}, {filterId: lagretFilter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
-        dispatch(velgMineFilter(lagretFilter, filtergruppe))
-        dispatch(markerMineFilter(lagretFilter, filtergruppe));
+            {}, {filterId: mineFilter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
+        dispatch(velgMineFilter(mineFilter, filtergruppe))
+        dispatch(markerMineFilter(mineFilter, filtergruppe));
     }
 
     function onClickRedigerKnapp() {
@@ -40,15 +40,15 @@ function NyMineFilterRad({lagretFilter, filtergruppe}: NyMineFilterRadProps) {
         <div className="ny__mine-filter__rad">
             <Radio
                 className="ny__mine-filter__filternavn"
-                key={lagretFilter.filterId}
+                key={mineFilter.filterId}
                 name="mineFilter"
-                label={lagretFilter.filterNavn}
-                value={lagretFilter.filterId}
+                label={mineFilter.filterNavn}
+                value={mineFilter.filterId}
                 onChange={() => velgFilter()}
-                checked={valgtLagretFilter?.filterId === lagretFilter.filterId}
+                checked={valgtLagretFilter?.filterId === mineFilter.filterId}
             />
             <RedigerKnapp
-                hidden={valgtLagretFilter?.filterId !== lagretFilter.filterId}
+                hidden={valgtLagretFilter?.filterId !== mineFilter.filterId}
                 aria="Rediger mitt filter"
                 onClick={onClickRedigerKnapp}
             />
