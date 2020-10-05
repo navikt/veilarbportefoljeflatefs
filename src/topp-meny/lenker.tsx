@@ -4,14 +4,13 @@ import {useIdentSelector} from "../hooks/redux/use-inlogget-ident";
 import {useParams} from "react-router";
 import {useVeilederHarPortefolje} from "../hooks/portefolje/use-veileder-har-portefolje";
 
-export function Lenker (props: {erPaloggetVeileder: boolean}) {
+export function Lenker(props: { erPaloggetVeileder: boolean }) {
     const veilederIdent = useIdentSelector();
     const {ident} = useParams();
     const harPortefolje = useVeilederHarPortefolje();
 
-
-    const aktivLink = ident ?
-        veilederIdent!.ident === ident
+    const aktivLink = ident
+        ? veilederIdent!.ident === ident
             ? 'oversiktslenke--valgt'
             : ''
         : 'oversiktslenke--valgt';
@@ -29,7 +28,6 @@ export function Lenker (props: {erPaloggetVeileder: boolean}) {
                     Min oversikt
                 </ActiveLink>
             </h2>
-
             <h2 className="h2__lenke">
                 <ActiveLink
                     to="/enhet"
@@ -41,7 +39,6 @@ export function Lenker (props: {erPaloggetVeileder: boolean}) {
                     Enhetens oversikt
                 </ActiveLink>
             </h2>
-
             <h2 className="h2__lenke">
                 <ActiveLink
                     to="/veiledere"

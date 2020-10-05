@@ -8,8 +8,16 @@ const aasen = "Aasen"
 const minstEnVeileder = "Du må legge til veiledere."
 
 describe('Lag ny veiledergruppe', () => {
+    it('Start server', () => {
+        cy.configure();
+    })
+    it('Gå til enhetens oversikt', () => {
+        cy.gaTilOversikt("enhetens-oversikt")
+    })
+    it('Gå til Veiledergrupper tab', () => {
+        cy.klikkTab("VEILEDERGRUPPER");
+    })
     it('Det eksisterer 5 veiledergrupper', () => {
-        cy.getByTestId('sidebar-tab_VEILEDERGRUPPER').click()
         cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', 5)
     })
     it('Klikk på ny gruppe', () => {

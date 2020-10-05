@@ -4,6 +4,9 @@ const mineFilterNavn = "Voff";
 const mineFilterNavnRedigert = "Mjau";
 
 describe('Lag nytt filter', () => {
+    it('Start server', () => {
+        cy.configure();
+    })
     it('Sjekk at det er 5 filtre i Mine filter', () => {
         cy.getByTestId('sidebar-tab_MINE_FILTER').click()
         cy.getByTestId('mine-filter_rad-wrapper').should('have.length', 5)

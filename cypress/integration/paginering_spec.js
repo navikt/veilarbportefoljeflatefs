@@ -1,11 +1,14 @@
 describe('Paginering og til toppen-knapp', () => {
+    it('Start server', () => {
+        cy.configure();
+    })
     it('Gå til min oversikt', () => {
         cy.gaTilOversikt('min-oversikt')
     })
     it('Klikk på se alle', () => {
         cy.getByTestId('se-alle_knapp').should("be.visible").contains("Se alle");
         cy.getByTestId('se-faerre_knapp').should("not.be.visible");
-        cy.getByTestId('se-alle_knapp').contains("Se alle").click();
+        cy.getByTestId('se-alle_knapp').contains("Se alle").click({force: true});
         cy.getByTestId('se-alle_knapp').should("not.be.visible");
         cy.getByTestId('se-faerre_knapp').should("be.visible").contains("Se færre");
     })

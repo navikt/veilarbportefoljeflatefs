@@ -1,6 +1,9 @@
 import React from "react";
 
 describe('Velg andre kolonner', () => {
+    it('Start server', () => {
+        cy.configure();
+    })
     it('Alertstripe synes', () => {
         cy.getByTestId('alertstripe_filtrering').should('be.visible')
     })
