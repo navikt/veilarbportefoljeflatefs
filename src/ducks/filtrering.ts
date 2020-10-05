@@ -1,8 +1,8 @@
 import {FiltervalgModell} from '../model-interfaces';
-import {VELG_MINE_FILTER} from "./lagret-filter-ui-state";
 import {ListevisningType} from "./ui/listevisning";
 import {LagretFilter} from "./lagretFilter";
 // Actions
+export const VELG_MINE_FILTER = 'lagretfilter_velg/VELG_MINE_FILTER';
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
 export const SLETT_ENKELT_FILTER = 'filtrering/SLETT_ENKELT_FILTER';

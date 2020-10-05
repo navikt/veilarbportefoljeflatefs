@@ -5,7 +5,7 @@ import ModalWrapper from 'nav-frontend-modal';
 import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import {OrNothing} from '../../../utils/types/types';
 import VeilederGruppeForm from './veileder-gruppe-form';
@@ -14,21 +14,15 @@ import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import './modal.less';
 import ModalHeader from '../modal-header/modal-header';
+import {lukkVeilederGruppeModal} from "../../../ducks/lagret-filter-ui-state";
+import {ListevisningType} from "../../../ducks/ui/listevisning";
 
 interface VeilederModalProps {
-    initialVerdi: {
-        gruppeNavn: string,
-        filterValg: FiltervalgModell,
-        filterId: number
-    }
     onSubmit: (gruppeNavn: string, filterValg: FiltervalgModell) => void
     onSlett?: () => void;
-    onRequestClose: () => void;
-    isOpen: boolean
     modalTittel: string,
     lagreKnappeTekst: string
-    validerGruppenavn?: (gruppenavn: string) => OrNothing<string>;
-    filterValg?: FiltervalgModell;
+    filtergruppe: ListevisningType;
 }
 
 interface VeilederGruppeErrors {
@@ -37,6 +31,8 @@ interface VeilederGruppeErrors {
 }
 
 export function VeilederGruppeModal(props: VeilederModalProps) {
+    const dispatch = useDispatch();
+    const [filterId, setFilterId] = useState<number>();
     const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
     const [gruppeNavn, setGruppeNavn] = useState<string>('');
     const [errors, setErrors] = useState<VeilederGruppeErrors>({} as VeilederGruppeErrors);
@@ -45,12 +41,24 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
 
-    useEffect(() => {
-        setFilterValg(props.initialVerdi.filterValg);
-        setGruppeNavn(props.initialVerdi.gruppeNavn);
+    const valgtGruppeEngetensOversikt = useSelector((state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe);
+    const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe);
+    const valgtGruppe = (props.filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEngetensOversikt)
+    const erVeilederGruppeModalApen = useSelector((state:AppState) => (props.filtergruppe === ListevisningType.veilederOversikt ? state.mineFilterVeilederOversikt.erVeilederGruppeModalApen : state.mineFilterEnhetensOversikt.erVeilederGruppeModalApen))
+
+    useEffect(()=>{
+        if (valgtGruppe){
+            setFilterId(valgtGruppe.filterId)
+            setGruppeNavn(valgtGruppe?.filterNavn)
+            setFilterValg(valgtGruppe?.filterValg)
+        }else{
+            setFilterId(-1)
+            setGruppeNavn('')
+            setFilterValg(initialState)
+        }
         setErrors({} as VeilederGruppeErrors);
         setHarForsoktSubmitte(false);
-    }, [props.initialVerdi.filterValg, props.initialVerdi.gruppeNavn]);
+    }, [props.filtergruppe, valgtGruppe]);
 
     const fjernVeiledereFraListen = (veilederTarget: string) => {
         setFilterValg(prevState => ({...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}));
@@ -72,19 +80,18 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             if (harForsoktSubmitte) {
                 validate(gruppeNavn, {...filterValg, veiledere: [...filterValg.veiledere, veilederTarget]});
             }
-
         } else {
             fjernVeiledereFraListen(veilederTarget);
         }
     };
 
     function lukkModal() {
-        if (harGjortEndringer(filterValg.veiledere, props.initialVerdi.filterValg.veiledere, props.initialVerdi.gruppeNavn, gruppeNavn)) {
+        if (valgtGruppe && harGjortEndringer(filterValg.veiledere, valgtGruppe.filterValg.veiledere, valgtGruppe.filterNavn, gruppeNavn)) {
             setEndringerIkkeLagretModal(true);
             return;
         }
         setErrors({} as VeilederGruppeErrors);
-        props.onRequestClose();
+        dispatch(lukkVeilederGruppeModal(props.filtergruppe))
     }
 
     function lagreVeilederGruppeEndringer(e) {
@@ -100,31 +107,27 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         }
         props.onSubmit(gruppeNavn, filterValg);
 
-        setFilterValg(initialState);
-        setGruppeNavn('');
         setErrors({} as VeilederGruppeErrors);
         setHarForsoktSubmitte(false);
-        props.onRequestClose();
+        dispatch(lukkVeilederGruppeModal(props.filtergruppe))
     }
 
     function slettVeiledergruppeOgLukkModaler() {
         logEvent('portefolje.metrikker.veiledergrupper.slettknapp', {}, { sideNavn: finnSideNavn() });
         props.onSlett && props.onSlett();
         setSletteVeiledergruppeModal(false);
-        props.onRequestClose();
+        dispatch(lukkVeilederGruppeModal(props.filtergruppe))
     }
 
     function endringerIkkeLagretOgLukkModaler() {
         setEndringerIkkeLagretModal(false);
-        setFilterValg(props.initialVerdi.filterValg);
-        setGruppeNavn(props.initialVerdi.gruppeNavn);
         setErrors({} as VeilederGruppeErrors);
         setHarForsoktSubmitte(false);
-        props.onRequestClose();
+        dispatch(lukkVeilederGruppeModal(props.filtergruppe))
     }
 
     const lagredeGrupper = useSelector((state: AppState) => state.veiledergrupper.data
-        .filter(v => v.filterId !== props.initialVerdi.filterId));
+        .filter(v => v.filterId !== filterId));
 
     const lagredeGruppeNavn = lagredeGrupper.map(v => v.filterNavn)
         .map(v => v.trim())
@@ -165,7 +168,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     return (
         <>
             <ModalWrapper
-                isOpen={props.isOpen}
+                isOpen={erVeilederGruppeModalApen}
                 contentLabel={props.modalTittel}
                 onRequestClose={lukkModal}
                 portalClassName="veiledergruppe-modal"
