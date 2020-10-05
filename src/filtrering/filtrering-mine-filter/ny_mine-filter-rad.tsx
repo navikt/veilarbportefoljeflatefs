@@ -19,7 +19,7 @@ interface NyMineFilterRadProps {
 function NyMineFilterRad({mineFilter, filtergruppe}: NyMineFilterRadProps) {
     const dispatch = useDispatch();
 
-    const valgtLagretFilter = useSelector((state: AppState) => filtergruppe === ListevisningType.minOversikt
+    const valgtMineFilter = useSelector((state: AppState) => filtergruppe === ListevisningType.minOversikt
         ? state.mineFilterMinOversikt.valgtMineFilter
         : state.mineFilterEnhetensOversikt.valgtMineFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
@@ -45,10 +45,10 @@ function NyMineFilterRad({mineFilter, filtergruppe}: NyMineFilterRadProps) {
                 label={mineFilter.filterNavn}
                 value={mineFilter.filterId}
                 onChange={() => velgFilter()}
-                checked={valgtLagretFilter?.filterId === mineFilter.filterId}
+                checked={valgtMineFilter?.filterId === mineFilter.filterId}
             />
             <RedigerKnapp
-                hidden={valgtLagretFilter?.filterId !== mineFilter.filterId}
+                hidden={valgtMineFilter?.filterId !== mineFilter.filterId}
                 aria="Rediger mitt filter"
                 onClick={onClickRedigerKnapp}
             />
