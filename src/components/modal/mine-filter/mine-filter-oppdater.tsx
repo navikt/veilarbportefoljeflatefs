@@ -83,11 +83,11 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
                 />
                 <div className="lagret-filter-knapp-wrapper">
                     <Hovedknapp mini htmlType="submit"
-                                data-testid="rediger-filter-modal-lagre-knapp">
+                                data-testid="rediger-filter_modal_lagre-knapp">
                         Lagre
                     </Hovedknapp>
                     <Knapp mini onClick={(e) => bekreftSletting(e)}
-                           data-testid="rediger-filter-modal-slette-knapp">
+                           data-testid="rediger-filter_modal_slett-knapp">
                         Slett
                     </Knapp>
                 </div>

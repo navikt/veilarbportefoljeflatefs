@@ -183,7 +183,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                     <div className="veiledergruppe-modal__knappegruppe">
                         <Hovedknapp className="veiledergruppe-modal__knappegruppe__lagre"
                                     htmlType="submit"
-                                    data-testid="veiledergruppe-modal-lagre-knapp">
+                                    data-testid="veiledergruppe_modal_lagre-knapp">
                             {props.lagreKnappeTekst}
                         </Hovedknapp>
                         <Flatknapp className="veiledergruppe-modal__knappegruppe__avbryt" htmlType="button"
@@ -194,7 +194,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                             className="veiledergruppe-modal__knappegruppe__slett"
                             onClick={() => setSletteVeiledergruppeModal(true)}
                             htmlType="button"
-                            data-testid="veiledergruppe-modal-slette-knapp"
+                            data-testid="veiledergruppe_modal_slette-knapp"
                         >
                             Slett gruppe
                         </Flatknapp>}

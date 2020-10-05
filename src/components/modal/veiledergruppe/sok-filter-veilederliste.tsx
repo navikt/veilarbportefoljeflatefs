@@ -39,7 +39,7 @@ function SokFilterVeilederliste<T>(props: SokFilterProps<T>) {
                     value={query}
                     inputClassName="sokfilter__input"
                     onChange={e => setQuery(e.target.value)}
-                    data-testid="veiledergruppe-modal-sok-veileder-input"
+                    data-testid="veiledergruppe_modal_sok-veileder-input"
                 />
             </div>
             <span className="text-hide" aria-live="polite" aria-atomic="true">

@@ -55,7 +55,7 @@ function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filterv
                     checkBoxValg.length > 0
                         ? <button className="knapp knapp--mini knapp--hoved"
                                   type="submit"
-                                  data-testid={'checkbox-filterform__velg-knapp'}
+                                  data-testid={'checkbox-filterform_velg-knapp'}
                         >
                             Velg
                         </button>
@@ -68,7 +68,7 @@ function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filterv
                         </button>
                     : <button className="knapp knapp--mini knapp--hoved"
                               type="submit"
-                              data-testid={'checkbox-filterform__velg-knapp'}
+                              data-testid={'checkbox-filterform_velg-knapp'}
                     >
                         Velg
                     </button>}

@@ -29,7 +29,7 @@ function SokVeiledereVeiledergrupper({erValgt, hanterVeilederValgt}: SokVeileder
                                 value={elem.ident}
                                 checked={erValgt(elem.ident)}
                                 onChange={e => hanterVeilederValgt(e.target.checked, e.target.value)}
-                                data-testid={`veiledergruppe-modal-veileder-checkbox_${index}`}
+                                data-testid={`veiledergruppe_modal_veileder-checkbox_${index}`}
                             />)}
                     </div>
                 </div>

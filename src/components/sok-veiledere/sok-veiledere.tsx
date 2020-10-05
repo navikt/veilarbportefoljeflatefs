@@ -33,7 +33,7 @@ function SokVeiledere(props: SokVeiledereProps) {
                                 value={elem.ident}
                                 checked={props.erValgt(elem.ident)}
                                 onChange={e => props.hanterVeilederValgt(e.target.checked, e.target.value)}
-                                data-testid={`sok-veileder_valg_${index}`}
+                                data-testid={`sok-veileder_rad_${index}`}
                             />)}
                     </div>
                     <div className="blokk-xxs checkbox-filterform__under-valg">

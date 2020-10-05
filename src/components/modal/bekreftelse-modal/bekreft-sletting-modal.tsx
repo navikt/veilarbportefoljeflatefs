@@ -43,7 +43,7 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
                 <Hovedknapp
                     htmlType="submit"
                     onClick={slettKnapp}
-                    data-testid="bekreft-sletting-modal-slett-knapp"
+                    data-testid="bekreft-sletting_modal_slett-knapp"
                 >
                     Slett
                 </Hovedknapp>

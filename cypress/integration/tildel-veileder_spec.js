@@ -5,7 +5,7 @@ describe('Tildel veileder', () => {
         cy.gaTilOversikt('min-oversikt')
     })
     it('Velg bruker', () => {
-        cy.getByTestId(`brukerliste-checkbox_min-oversikt_7`).check()
+        cy.getByTestId(`min-oversikt_brukerliste-checkbox_7`).check()
     })
     it('Klikk tildel bruker', () => {
         cy.getByTestId(`tildel-veileder-knapp`).click()
@@ -18,6 +18,6 @@ describe('Tildel veileder', () => {
     })
     it('Lukk modal', () => {
         cy.wait(5000)
-        cy.getByTestId(`modal-suksess_tildel-veileder`).click()
+        cy.getByTestId('modal-suksess_tildel-veileder').click()
     })
 })

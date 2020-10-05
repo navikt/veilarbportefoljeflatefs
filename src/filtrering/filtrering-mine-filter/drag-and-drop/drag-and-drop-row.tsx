@@ -36,7 +36,7 @@ function DragAndDropRow(props: DragAndDropRowProps) {
             aria-describedby="operation"
             aria-selected={true}
             value={props.idx}
-            data-testid='drag-drop-rad'
+            data-testid='drag-drop_rad'
         >
             <DragIcon aria-disabled={true}/>
             {props.filterNavn}

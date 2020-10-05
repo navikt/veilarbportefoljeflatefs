@@ -13,7 +13,8 @@ function NyBarInput({labelTekst, antall, max, barClassname, ...props}: BarInputP
     const htmlFor = props.id || guid();
     return (
         <div className="skjema__input">
-            <input {...props} data-testid={`filter-checkboks-container_${barClassname}`}/>
+            <input {...props}
+                   data-testid={`filter_checkboks-container_${barClassname}`}/>
             <NyBarlabel
                 htmlFor={htmlFor}
                 labelTekst={labelTekst}

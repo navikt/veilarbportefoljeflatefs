@@ -18,7 +18,6 @@ function KnappPanel({children, disabled = false, pressed = false, selected = fal
             aria-disabled={disabled}
             aria-pressed={pressed}
             disabled={disabled}
-            aria-selected={selected}
             {...props}
         >
             {children}

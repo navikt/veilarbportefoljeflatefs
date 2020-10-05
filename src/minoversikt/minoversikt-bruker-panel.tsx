@@ -70,7 +70,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
                         label=""
                         className="brukerliste__checkbox"
-                        data-testid={`brukerliste-checkbox_min-oversikt_${radId}`}
+                        data-testid={`min-oversikt_brukerliste-checkbox_${radId}`}
                     />
                     <Arbeidslistekategori skalVises={arbeidslisteAktiv} kategori={bruker.arbeidsliste.kategori}/>
                 </div>

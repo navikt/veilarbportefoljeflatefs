@@ -53,7 +53,7 @@ function Paginering(props: PagineringProps) {
                 disabled={!seAlle && antallTotalt <= sideStorrelse}
                 pressed={seAlle && antallTotalt <= sideStorrelse}
                 onClick={() => totalPaginering(1, !seAlle)}
-                data-testid={!seAlle ? "se-alle-knapp" : "se-faerre-knapp"}
+                data-testid={!seAlle ? "se-alle_knapp" : "se-faerre_knapp"}
             >
                 {!seAlle
                     ? 'Se alle'
@@ -63,7 +63,7 @@ function Paginering(props: PagineringProps) {
 
             <KnappPanel disabled={erPaForsteSide}
                         onClick={() => totalPaginering(side - 1, seAlle)}
-                        data-testid="paginering-venstre"
+                        data-testid="paginering_venstre"
             >
                 <VenstreChevron/>
             </KnappPanel>
@@ -88,7 +88,7 @@ function Paginering(props: PagineringProps) {
 
             <KnappPanel disabled={erPaSisteSide || seAlle}
                         onClick={() => totalPaginering(side + 1, seAlle)}
-                        data-testid="paginering-hoyre"
+                        data-testid="paginering_hoyre"
             >
                 <HoyreChevron/>
             </KnappPanel>

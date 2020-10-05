@@ -22,7 +22,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
     return (
         <form className="veiledergruppe-modal__form"
               onSubmit={props.onSubmit}
-              data-testid="veiledergrupper-modal-form">
+              data-testid="veiledergruppe_modal_form">
             <Input
                 label={<p className="veiledergruppe-modal__gruppenavntekst">
                     Gruppenavn: <i>(maks 35 tegn)</i>
@@ -33,7 +33,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
                 feil={props.errors.gruppeNavn}
                 maxLength={35}
                 inputRef={inputRef => (focusRef.current = inputRef)}
-                data-testid="veiledergruppe-modal-gruppenavn-input"
+                data-testid="veiledergruppe_modal_gruppenavn-input"
             />
             <div className="veiledergruppe-modal__sokefilter">
                 <SokVeiledereVeiledergrupper
@@ -44,7 +44,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
                 />
             </div>
             <Normaltekst className="veiledergruppe-modal__tekst"
-                         data-testid={`veiledergruppe-modal-antall-valgte-veiledere_${props.filterValg.veiledere.length}`}
+                         data-testid={`veiledergruppe_modal_antall-valgte-veiledere_${props.filterValg.veiledere.length}`}
             >
                 Veiledere i gruppen: <i> ({props.filterValg.veiledere.length} stk)</i>
             </Normaltekst>

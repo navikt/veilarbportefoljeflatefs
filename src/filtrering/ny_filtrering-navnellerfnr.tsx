@@ -53,7 +53,7 @@ function NyFiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnE
                 placeholder="Søk etter navn eller fødselsnummer"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNavnEllerFnrQuery(e.target.value)}
                 value={navnEllerFnrQuery}
-                data-testid="input-sok-navn-fnr"
+                data-testid="sok-navn-fnr_input"
             />
         </div>
     );

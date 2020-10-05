@@ -128,7 +128,7 @@ function VeilederGruppeRad({veilederGruppe, hanterVelgGruppe, onClickRedigerKnap
 
     return (
         <div className="ny__veileder-gruppe__rad"
-             data-testid="veiledergruppe-rad-wrapper">
+             data-testid="veiledergruppe_rad-wrapper">
             <Radio
                 className="ny__veileder-gruppe__gruppenavn"
                 key={veilederGruppe.filterId}
@@ -143,7 +143,7 @@ function VeilederGruppeRad({veilederGruppe, hanterVelgGruppe, onClickRedigerKnap
                 hidden={!erValgt}
                 aria="Rediger veiledergruppe"
                 onClick={onClickRedigerKnapp}
-                dataTestid={`rediger-veiledergruppe-knapp_${veilederGruppe.filterNavn}`}
+                dataTestid={`rediger-veiledergruppe_knapp_${veilederGruppe.filterNavn}`}
             />
         </div>
     );

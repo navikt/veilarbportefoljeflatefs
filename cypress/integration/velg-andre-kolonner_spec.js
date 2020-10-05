@@ -5,7 +5,7 @@ describe('Velg andre kolonner', () => {
         cy.getByTestId('alertstripe_filtrering').should('be.visible')
     })
     it('Filtrer på i avtalt aktivitet', () => {
-        cy.getByTestId("filter-checkboks-container_iavtaltAktivitet")
+        cy.getByTestId("filter_checkboks-container_iavtaltAktivitet")
             .check({force: true})
     })
     it('"Veileder" skal vises i kolonnene', () => {
@@ -15,7 +15,7 @@ describe('Velg andre kolonner', () => {
         cy.getByTestId('sorteringheader_oppfolging-startet').should('not.be.visible')
     })
     it('Klikk på Velg kolonner', () => {
-        cy.get('[data-testid="[object Object]-dropdown-knapp"]')
+        cy.get('[data-testid="dropdown-knapp_[object Object]"]')
             .contains("Velg kolonner")
             .should("not.be.disabled")
             .click()

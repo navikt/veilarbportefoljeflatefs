@@ -40,7 +40,7 @@ export const TilToppenKnapp = () => {
             aria-hidden={!knappSkalVises}
             hidden={!knappSkalVises}
             onClick={onClick}
-            data-testid='til-toppen-knapp'
+            data-testid='til-toppen_knapp'
         >
             <TilToppenIkonBla/>
         </button>
