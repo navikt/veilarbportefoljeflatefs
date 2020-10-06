@@ -16,7 +16,7 @@ import {LagretFilter} from "../../ducks/lagretFilter";
 import VeilederGruppeRad from "./ny_veileder_gruppe_rad";
 
 interface VeilederGruppeInnholdProps {
-    lagretFilter: LagretFilter[]
+    veiledergruppe: LagretFilter[]
     filterValg?: FiltervalgModell;
     filtergruppe: ListevisningType;
 }
@@ -29,9 +29,9 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
     const outerDivRef = useRef<HTMLDivElement>(null);
 
-    const valgtGruppeEngetensOversikt = useSelector((state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe);
+    const valgtGruppeEnhetensOversikt = useSelector((state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe);
     const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe);
-    const valgtGruppe = (props.filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEngetensOversikt)
+    const valgtGruppe = (props.filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEnhetensOversikt)
 
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const enhet = useEnhetSelector();
@@ -62,7 +62,7 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     return (
         <div className="veileder-gruppe__valgfelt" ref={outerDivRef}>
-            {props.lagretFilter.map((veilederGruppe, idx) =>
+            {props.veiledergruppe.map((veilederGruppe, idx) =>
                 <VeilederGruppeRad
                     key={idx}
                     veilederGruppe={veilederGruppe}

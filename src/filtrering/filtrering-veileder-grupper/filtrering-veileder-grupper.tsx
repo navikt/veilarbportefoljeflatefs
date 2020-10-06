@@ -46,7 +46,7 @@ function FilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps)
     const veilederGrupperOK = () => {
         return lagretFilter.length > 0
             ? <VeilederGruppeInnhold
-                lagretFilter={sortertVeiledergruppe}
+                veiledergruppe={sortertVeiledergruppe}
                 filtergruppe={filtergruppe}
             />
             : <div className="veiledergruppe-emptystate">

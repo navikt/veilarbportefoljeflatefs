@@ -29,9 +29,9 @@ function isOverflown(element) {
 
 function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
-    const valgtGruppeEngetensOversikt = useSelector((state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe);
+    const valgtGruppeEnhetensOversikt = useSelector((state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe);
     const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe);
-    const valgtGruppe = (props.filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEngetensOversikt)
+    const valgtGruppe = (props.filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEnhetensOversikt)
 
     const outerDivRef = useRef<HTMLDivElement>(null);
 
