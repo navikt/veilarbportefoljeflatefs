@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {lagreEndringer, slettGruppe} from '../../ducks/veiledergrupper_filter';
@@ -15,7 +15,6 @@ import {AnyAction} from "redux";
 import {ListevisningType} from "../../ducks/ui/listevisning";
 import {LagretFilter} from "../../ducks/lagretFilter";
 import VeilederGruppeRad from "./ny_veileder_gruppe_rad";
-import {apneVeilederGruppeModal} from "../../ducks/lagret-filter-ui-state";
 
 
 interface VeilederGruppeInnholdProps {
@@ -29,6 +28,7 @@ function isOverflown(element) {
 }
 
 function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
+    const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
     const valgtGruppeEngetensOversikt = useSelector((state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe);
     const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe);
     const valgtGruppe = (props.filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEngetensOversikt)
@@ -53,7 +53,7 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     const sletteKnapp = () => {
         valgtGruppe && enhet && dispatch(slettGruppe(enhet, valgtGruppe.filterId))
-            .then(() => dispatch(endreFiltervalg('veiledere', [], props.filtergruppe)));
+            .then(() => dispatch(endreFiltervalg('veiledere', [], ListevisningType.enhetensOversikt)));
     };
 
     useEffect(() => {
@@ -69,17 +69,23 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
                 <VeilederGruppeRad
                     key={idx}
                     veilederGruppe={veilederGruppe}
-                    onClickRedigerKnapp={()=>dispatch(apneVeilederGruppeModal(props.filtergruppe))}
+                    onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
                     filtergruppe={props.filtergruppe}
                 />
             )}
             {valgtGruppe &&
             <VeilederGruppeModal
+                initialVerdi={{
+                    gruppeNavn: valgtGruppe.filterNavn,
+                    filterValg: valgtGruppe.filterValg,
+                    filterId: valgtGruppe.filterId
+                }}
+                isOpen={visEndreGruppeModal}
                 onSubmit={submitEndringer}
                 modalTittel="Rediger veiledergruppe"
                 lagreKnappeTekst="Lagre endringer"
+                onRequestClose={() => setVisEndreGruppeModal(false)}
                 onSlett={sletteKnapp}
-                filtergruppe={props.filtergruppe}
             />}
         </div>
     );

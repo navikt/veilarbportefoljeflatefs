@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {LeggTilKnapp} from '../../components/knapper/legg-til-knapp';
 import {Normaltekst} from 'nav-frontend-typografi';
 import {VeilederGruppeModal} from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
-import {endreFiltervalg} from '../../ducks/filtrering';
+import {endreFiltervalg, initialState} from '../../ducks/filtrering';
 import {FiltervalgModell} from '../../model-interfaces';
 import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
@@ -15,13 +15,14 @@ import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import NyVeilederGruppeInnhold from "./ny_veiledergrupper-innhold";
 import {AlertStripeFeil} from "nav-frontend-alertstriper";
-import {apneVeilederGruppeModal, avmarkerValgtVeilederGruppe} from "../../ducks/lagret-filter-ui-state";
 
 interface FilteringVeilederGrupperProps {
     filtergruppe: ListevisningType;
 }
 
 function NyFilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps) {
+    const [visVeilederGruppeModal, setVeilederGruppeModal] = useState(false);
+
     const lagretFilterState = useSelector((state: AppState) => state.veiledergrupper);
     const lagretFilter = lagretFilterState.data;
 
@@ -70,14 +71,15 @@ function NyFilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProp
                 lagretFilterState.status === STATUS.ERROR ? veilederGrupperError() : veilederGrupperOK()
             }
             <LeggTilKnapp onClick={() => {
-                dispatch(avmarkerValgtVeilederGruppe(filtergruppe))
-                dispatch(apneVeilederGruppeModal(filtergruppe))
+                setVeilederGruppeModal(true);
             }}/>
             <VeilederGruppeModal
+                initialVerdi={{gruppeNavn: '', filterValg: initialState, filterId: -1}}
+                isOpen={visVeilederGruppeModal}
                 onSubmit={submitEndringer}
                 modalTittel="Ny veiledergruppe"
                 lagreKnappeTekst="Lagre"
-                filtergruppe={filtergruppe}
+                onRequestClose={() => setVeilederGruppeModal(false)}
             />
         </>
     );

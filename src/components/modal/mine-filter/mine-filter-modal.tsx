@@ -36,7 +36,7 @@ const HiddenIfOppdaterFilter = hiddenIf(OppdaterMineFilter);
 const HiddenIfFnrFeil = hiddenIf(MineFilterFnrFeil)
 
 export function MineFilterModal(props: { filtergruppe: string }) {
-    const {sisteValgtMineFilter, valgtMineFilter, erMineFilterModalApen} = useSelector((state: AppState) => (props.filtergruppe === ListevisningType.minOversikt) ? state.mineFilterMinOversikt : state.mineFilterEnhetensOversikt)
+    const {sisteValgtMineFilter, valgtMineFilter, erModalApen} = useSelector((state: AppState) => (props.filtergruppe === ListevisningType.minOversikt) ? state.mineFilterMinOversikt : state.mineFilterEnhetensOversikt)
     const data = useSelector((state: AppState) => state.mineFilter.data)
     const lagretFilterNavn = (filterId) => data.filter(elem => elem.filterId === filterId).map(elem => elem.filterNavn).toString()
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
@@ -53,13 +53,13 @@ export function MineFilterModal(props: { filtergruppe: string }) {
         else if (valgtMineFilter) setValgtVisningstype(Visningstype.OPPDATER)
         else if (!sisteValgtMineFilter) setValgtVisningstype(Visningstype.LAGRE_NYTT)
         else setValgtVisningstype(Visningstype.MENY)
-    }, [filtreringMinOversikt, valgtMineFilter, sisteValgtMineFilter, erMineFilterModalApen])
+    }, [filtreringMinOversikt, valgtMineFilter, sisteValgtMineFilter, erModalApen])
 
     return (
         <Modal
             className="mine-filter-meny-modal"
             contentLabel="Mine filter meny modal"
-            isOpen={erMineFilterModalApen}
+            isOpen={erModalApen}
             onRequestClose={lukkModal}
             tittel={VisningstypeToTittel.get(valgtVisningstype)}
         >

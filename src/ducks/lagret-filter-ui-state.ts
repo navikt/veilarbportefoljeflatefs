@@ -2,6 +2,7 @@ import {OrNothing} from "../utils/types/types";
 import {LagretFilter} from "./lagretFilter";
 
 // Actions
+export const VELG_MINE_FILTER = 'lagretfilter_velg/VELG_MINE_FILTER';
 export const MARKER_MINE_FILTER = 'lagretfilter_velg/MARKER_MINE_FILTER';
 export const AVMARKER_MINE_FILTER = 'lagretfilter_velg/AVMARKER_MINE_FILTER';
 export const AVMARKER_SISTE_VALGT_MINE_FILTER = 'lagretfilter_velg/AVMARKER_SISTE_VALGT_MINE_FILTER';
@@ -12,24 +13,19 @@ export const AVMARKER_VEILEDER_GRUPPE = 'lagretfilter_velg/AVMARKER_VEILEDER_GRU
 export const APEN_MINE_FILTER_MODAL = 'lagretfilter_velg/APEN_MINE_FILTER_MODAL';
 export const LUKK_MINE_FILTER_MODAL = 'lagretfilter_velg/LUKK_MINE_FILTER_MODAL';
 
-export const APEN_VEILEDER_GRUPPE_MODAL = 'lagretfilter_velg/APEN_VEILEDER_GRUPPE_MODAL';
-export const LUKK_VEILEDER_GRUPPE_MODAL = 'lagretfilter_velg/LUKK_VEILEDER_GRUPPE_MODAL';
-
 
 export interface LagretFilterUIState {
     valgtMineFilter: OrNothing<LagretFilter>;
     valgtVeilederGruppe: OrNothing<LagretFilter>;
     sisteValgtMineFilter: OrNothing<number>
-    erMineFilterModalApen: boolean;
-    erVeilederGruppeModalApen: boolean;
+    erModalApen: boolean;
 }
 
 const initialState = {
     valgtMineFilter: null,
     valgtVeilederGruppe: null,
     sisteValgtMineFilter: null,
-    erMineFilterModalApen: false,
-    erVeilederGruppeModalApen: false
+    erModalApen: false,
 };
 
 //  Reducer
@@ -50,16 +46,12 @@ export default function reducer(state: LagretFilterUIState = initialState, actio
         case
         AVMARKER_VEILEDER_GRUPPE:
             return {...state, valgtVeilederGruppe: null}
-        case
+            case
         APEN_MINE_FILTER_MODAL:
-            return {...state, erMineFilterModalApen: true}
+            return {...state, erModalApen: true}
         case
         LUKK_MINE_FILTER_MODAL:
-            return {...state, erMineFilterModalApen: false}
-        case APEN_VEILEDER_GRUPPE_MODAL:
-            return {...state, erVeilederGruppeModalApen: true}
-        case LUKK_VEILEDER_GRUPPE_MODAL:
-            return {...state, erVeilederGruppeModalApen: false}
+            return {...state, erModalApen: false}
         default:
             return state;
     }
@@ -113,20 +105,6 @@ export function apneMineFilterModal(filtergruppe: string) {
 export function lukkMineFilterModal(filtergruppe: string) {
     return {
         type: LUKK_MINE_FILTER_MODAL,
-        name: filtergruppe
-    }
-}
-
-export function apneVeilederGruppeModal(filtergruppe: string) {
-    return {
-        type: APEN_VEILEDER_GRUPPE_MODAL,
-        name: filtergruppe
-    }
-}
-
-export function lukkVeilederGruppeModal(filtergruppe: string) {
-    return {
-        type: LUKK_VEILEDER_GRUPPE_MODAL,
         name: filtergruppe
     }
 }
