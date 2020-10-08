@@ -1,14 +1,15 @@
 import React, {useEffect, useRef} from 'react';
 import './ny_mine-filter-innhold.less';
 import '../../components/sidebar/sidebar.less';
-import {MineFilter} from '../../ducks/mine-filter';
 import {Normaltekst} from 'nav-frontend-typografi';
 import DragAndDrop from './dragAndDrop/drag-and-drop';
+import {LagretFilter} from "../../ducks/lagretFilter";
+import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface LagredeFilterInnholdProps {
-    lagretFilter: MineFilter[];
-    filtergruppe: string;
-    fjernUtilgjengeligeFilter: (elem: MineFilter) => void;
+    lagretFilter: LagretFilter[];
+    filtergruppe: ListevisningType;
+    fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
     isDraggable: boolean;
     setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
 }

@@ -1,14 +1,16 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './drag-and-drop.less';
-import {MineFilter, lagreSorteringForFilter} from '../../../ducks/mine-filter';
+import {lagreSorteringForFilter} from '../../../ducks/mine-filter';
 import DragAndDropContainer from './drag-and-drop-container';
 import NyMineFilterRad from '../ny_mine-filter-rad';
 import {useDispatch} from 'react-redux';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
+import {LagretFilter} from "../../../ducks/lagretFilter";
+import {ListevisningType} from "../../../ducks/ui/listevisning";
 
 export interface DragAndDropProps {
-    stateFilterOrder: MineFilter[];
-    filtergruppe: string;
+    stateFilterOrder: LagretFilter[];
+    filtergruppe: ListevisningType;
     isDraggable: boolean;
     setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -62,13 +64,13 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     return (
         <>
             {dragAndDropOrder.map((filter, idx) => (
-                <NyMineFilterRad key={idx} filter={filter} filtergruppe={filtergruppe} />
+                <NyMineFilterRad key={idx} mineFilter={filter} filtergruppe={filtergruppe} />
             ))}
         </>
     );
 }
 
-function harEndretRekkefolge(a: MineFilter[], b: MineFilter[]) {
+function harEndretRekkefolge(a: LagretFilter[], b: LagretFilter[]) {
     return !(
         Array.isArray(a) &&
         Array.isArray(b) &&
