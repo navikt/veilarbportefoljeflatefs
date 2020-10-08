@@ -6,6 +6,7 @@ export interface LagretFilter {
     filterValg: FiltervalgModell;
     opprettetDato: Date;
     sortOrder: number | null;
+    cleanedUp: boolean
 }
 
 export interface LagretFilterState {

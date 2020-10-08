@@ -14,12 +14,14 @@ import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import './modal.less';
 import ModalHeader from '../modal-header/modal-header';
+import {erTomtObjekt} from "../mine-filter/mine-filter-utils";
 
 interface VeilederModalProps {
     initialVerdi: {
         gruppeNavn: string,
         filterValg: FiltervalgModell,
-        filterId: number
+        filterId: number,
+        cleanedUp?: boolean
     }
     onSubmit: (gruppeNavn: string, filterValg: FiltervalgModell) => void
     onSlett?: () => void;
@@ -135,6 +137,15 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         gruppeNavn: v.filterNavn
     }));
 
+    useEffect(()=>{
+        if (lagredeGrupper.length > 0 && erTomtObjekt(errors) && props.isOpen && props.initialVerdi.cleanedUp){
+            const finnLikVeilederGruppe = lagredeGrupper.find(v => veilederlisterErLik(v.filterValg.veiledere, props.initialVerdi.filterValg.veiledere));
+            if (finnLikVeilederGruppe){
+                setErrors({filterValg: "En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '"+finnLikVeilederGruppe.filterNavn+"'. Du må fjerne/legge til veiledere eller slette gruppen."} as VeilederGruppeErrors);
+            }
+        }
+    },[lagredeGrupper, props.initialVerdi, props.isOpen, errors])
+
     const validate = (gruppeNavn, filterValg) => {
         let errors: any = {};
 
@@ -147,6 +158,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         if (filterValg.veiledere.length <= 1) {
             errors.filterValg = 'Veiledergrupper må ha 2 eller flere veiledere, legg til veiledere.';
         }
+
         const finnLikVeilederGruppe = lagredeVeilederGrupper.find(v => veilederlisterErLik(v.veiledere, filterValg.veiledere));
 
         if (finnLikVeilederGruppe) {

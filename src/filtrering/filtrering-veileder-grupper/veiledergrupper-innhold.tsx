@@ -75,7 +75,8 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
                 initialVerdi={{
                     gruppeNavn: valgtGruppe.filterNavn,
                     filterValg: valgtGruppe.filterValg,
-                    filterId: valgtGruppe.filterId
+                    filterId: valgtGruppe.filterId,
+                    cleanedUp: valgtGruppe.cleanedUp
                 }}
                 isOpen={visEndreGruppeModal}
                 onSubmit={submitEndringer}

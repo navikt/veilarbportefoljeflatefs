@@ -9,6 +9,7 @@ import {logEvent} from "../../utils/frontend-logger";
 import {finnSideNavn} from "../../middleware/metrics-middleware";
 import {AppState} from "../../reducer";
 import {markerValgtVeilederGruppe} from "../../ducks/lagret-filter-ui-state";
+import {veilederlisterErLik} from "../../components/modal/mine-filter";
 
 interface VeilederGruppeRad {
     veilederGruppe: LagretFilter;
@@ -22,11 +23,23 @@ function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
     const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe);
     const valgtGruppe = (filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEnhetensOversikt)
 
+    const lagredeGrupper = useSelector((state: AppState) => state.veiledergrupper.data
+        .filter(v => v.filterId !== veilederGruppe.filterId));
+
+    const erDetLikGruppe = () => {
+        return lagredeGrupper.find(lagredeGruppe => veilederlisterErLik(lagredeGruppe.filterValg.veiledere, veilederGruppe.filterValg.veiledere))
+    }
+
     function velgGruppe() {
         logEvent('portefolje.metrikker.veiledergrupper.velg-gruppe',
             {}, {gruppeId: veilederGruppe.filterId, sideNavn: finnSideNavn()});
         dispatch(endreFiltervalg('veiledere', veilederGruppe.filterValg.veiledere, filtergruppe))
         dispatch(markerValgtVeilederGruppe(veilederGruppe, filtergruppe));
+
+        //show automatically  modal if veiledergruppe after cleanup is the same as some other veiledergruppe
+        if (veilederGruppe.cleanedUp && erDetLikGruppe){
+            onClickRedigerKnapp()
+        }
     }
 
     return (

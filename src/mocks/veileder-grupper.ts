@@ -16,36 +16,42 @@ export const veilederGrupper = () => {
                 filterId: 12,
                 filterValg: {...initialState, veiledere: veilederGruppe1},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                cleanedUp: false
             },
             {
                 filterNavn: 'Prinsessegruppen',
                 filterId: 13,
                 filterValg: {...initialState, veiledere: veilederGruppe2},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                cleanedUp: false
             },
             {
                 filterNavn: 'Team Awesome',
                 filterId: 14,
                 filterValg: {...initialState, veiledere: veilederGruppe3},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                cleanedUp: false
             },
             {
                 filterNavn: 'Team VOFF',
                 filterId: 15,
                 filterValg: {...initialState, veiledere: veilederGruppe4},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                cleanedUp: false
             },
             {
                 filterNavn: 'Ungdomsavdelingen',
                 filterId: 16,
                 filterValg: {...initialState, veiledere: veilederGruppe5},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                cleanedUp: false
             },
             {
                 filterNavn: 'Ungdomsavdelingen 1',
                 filterId: 17,
                 filterValg: {...initialState, veiledere: veilederGruppe5},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                cleanedUp: true
             }
         ] as LagretFilter []
     );
