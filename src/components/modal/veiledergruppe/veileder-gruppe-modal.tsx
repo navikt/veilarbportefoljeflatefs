@@ -21,7 +21,7 @@ interface VeilederModalProps {
         gruppeNavn: string,
         filterValg: FiltervalgModell,
         filterId: number,
-        cleanedUp?: boolean
+        filterCleanup?: boolean
     }
     onSubmit: (gruppeNavn: string, filterValg: FiltervalgModell) => void
     onSlett?: () => void;
@@ -138,7 +138,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     }));
 
     useEffect(()=>{
-        if (lagredeGrupper.length > 0 && erTomtObjekt(errors) && props.isOpen && props.initialVerdi.cleanedUp){
+        if (lagredeGrupper.length > 0 && erTomtObjekt(errors) && props.isOpen && props.initialVerdi.filterCleanup){
             const finnLikVeilederGruppe = lagredeGrupper.find(v => veilederlisterErLik(v.filterValg.veiledere, props.initialVerdi.filterValg.veiledere));
             if (finnLikVeilederGruppe){
                 setErrors({filterValg: "En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '"+finnLikVeilederGruppe.filterNavn+"'. Du må fjerne/legge til veiledere eller slette gruppen."} as VeilederGruppeErrors);

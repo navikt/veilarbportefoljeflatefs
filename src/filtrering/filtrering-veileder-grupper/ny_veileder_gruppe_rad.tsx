@@ -37,7 +37,7 @@ function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
         dispatch(markerValgtVeilederGruppe(veilederGruppe, filtergruppe));
 
         //show automatically  modal if veiledergruppe after cleanup is the same as some other veiledergruppe
-        if (veilederGruppe.cleanedUp && erDetLikGruppe){
+        if (veilederGruppe.filterCleanup && erDetLikGruppe){
             onClickRedigerKnapp()
         }
     }
