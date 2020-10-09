@@ -156,7 +156,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             errors.gruppeNavn = 'Gruppenavn er allerede i bruk.';
         }
         if (filterValg.veiledere.length < 1) {
-            errors.filterValg = 'Veiledergrupper må ha en eller flere veiledere, legg til veiledere.';
+            errors.filterValg = 'Du må legge til veiledere.';
         }
 
         const finnLikVeilederGruppe = lagredeVeilederGrupper.find(v => veilederlisterErLik(v.veiledere, filterValg.veiledere));
