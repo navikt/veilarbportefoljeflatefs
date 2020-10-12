@@ -1,7 +1,7 @@
 import {initialState} from '../ducks/filtrering';
 import {veiledere} from './veiledere';
 import * as faker from 'faker/locale/nb_NO';
-import {VeiledergrupperFilter} from "../ducks/veiledergrupper_filter";
+import {LagretFilter} from "../ducks/lagretFilter";
 
 export const veilederGrupper = () => {
     const veilederGruppe1 = veiledere.slice(0, 4).map((v) => v.ident);
@@ -12,35 +12,47 @@ export const veilederGrupper = () => {
     return (
         [
             {
-                filterNavn: 'Fantastic Four',
+                filterNavn: 'Fantastic 4',
                 filterId: 12,
                 filterValg: {...initialState, veiledere: veilederGruppe1},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                filterCleanup: false
             },
             {
                 filterNavn: 'Prinsessegruppen',
                 filterId: 13,
                 filterValg: {...initialState, veiledere: veilederGruppe2},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                filterCleanup: false
             },
             {
                 filterNavn: 'Team Awesome',
                 filterId: 14,
                 filterValg: {...initialState, veiledere: veilederGruppe3},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                filterCleanup: false
             },
             {
                 filterNavn: 'Team VOFF',
                 filterId: 15,
                 filterValg: {...initialState, veiledere: veilederGruppe4},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                filterCleanup: false
             },
             {
                 filterNavn: 'Ungdomsavdelingen',
                 filterId: 16,
                 filterValg: {...initialState, veiledere: veilederGruppe5},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                filterCleanup: false
+            },
+            {
+                filterNavn: 'Ungdomsavdelingen 1',
+                filterId: 17,
+                filterValg: {...initialState, veiledere: veilederGruppe5},
+                opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+                filterCleanup: true
             }
-        ] as VeiledergrupperFilter []
+        ] as LagretFilter []
     );
 };

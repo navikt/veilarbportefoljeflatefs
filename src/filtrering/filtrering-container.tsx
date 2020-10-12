@@ -19,7 +19,7 @@ import {ListevisningType} from "../ducks/ui/listevisning";
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
     filtervalg: FiltervalgModell;
-    filtergruppe: string;
+    filtergruppe: ListevisningType;
 }
 
 function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: FiltreringContainerProps) {

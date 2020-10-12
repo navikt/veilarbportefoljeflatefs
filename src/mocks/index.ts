@@ -11,8 +11,8 @@ import {endringsloggListe} from './endringslogg';
 import * as faker from 'faker/locale/nb_NO';
 import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
-import {MineFilter, SorteringOgId} from '../ducks/mine-filter';
 import {mineFilter} from "./mine-filter";
+import {LagretFilter, SorteringOgId} from "../ducks/lagretFilter";
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -89,7 +89,7 @@ mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}, res, ctx) => {
                 return oppdatertGruppe;
             }
             return v;
-        }) as MineFilter[];
+        }) as LagretFilter[];
         return res(ctx.json(oppdatertGruppe));
     }
 );
@@ -103,9 +103,9 @@ mock.post('/veilarbfilter/api/enhet/:enhetId', (req, res, ctx) => {
 });
 
 mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (req, res, ctx) => {
-    const {pathParams} = req;
-    if (pathParams.filterId) {
-        customVeilederGrupper = customVeilederGrupper.filter(v => v.filterId !== pathParams.filterId)
+    const filterId = parseInt(req.pathParams.filterId)
+    if (!isNaN(filterId)) {
+        customVeilederGrupper = customVeilederGrupper.filter(v => v.filterId !== filterId)
         return res(ctx.status(200));
     }
     return res(ctx.status(401));
@@ -133,9 +133,9 @@ mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
 });
 
 mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) => {
-    const {pathParams} = req;
-    if (pathParams.filterId) {
-        customMineFilter = customMineFilter.filter(v => v.filterId !== pathParams.filterId);
+    const filterId = parseInt(req.pathParams.filterId)
+    if (!isNaN(filterId)) {
+        customMineFilter = customMineFilter.filter(v => v.filterId !== filterId);
         return res(ctx.status(200));
     }
     return res(ctx.status(401));
