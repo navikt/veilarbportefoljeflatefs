@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import TabellOverskrift from '../components/tabell-overskrift';
@@ -21,7 +22,6 @@ import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import VelgFilterMelding from './velg-filter-melding';
 import '../ny_style.less';
-import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
@@ -29,12 +29,13 @@ import classNames from 'classnames';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
-import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "../minoversikt/ny_mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 import {useWindowWidth} from "../hooks/use-window-width";
 import NyToolbar from "../components/toolbar/ny_toolbar";
 import NyFiltreringNavnellerfnr from "../filtrering/ny_filtrering-navnellerfnr";
+import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
+
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -81,7 +82,7 @@ function Ny_EnhetSide() {
 
     useFetchPortefolje(filtergruppe);
     useSetLocalStorageOnUnmount();
-    useMineFilterController({filtergruppe: filtergruppe});
+    LagredeFilterUIController({filtergruppe: filtergruppe});
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
