@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import {ListevisningType} from '../ducks/ui/listevisning';
@@ -30,15 +31,14 @@ import Sidebar from '../components/sidebar/sidebar';
 import classNames from 'classnames';
 import {NyMinOversiktWrapper} from "./ny_min_oversikt_wrapper";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
-import {useMineFilterController} from "./use-mine-filter-controller";
 import {NyMineFilterLagreFilterKnapp} from "./ny_mine-filter-lagre-filter-knapp";
-import {useEffect, useState} from "react";
 import {useWindowWidth} from "../hooks/use-window-width";
 import NyToolbar from "../components/toolbar/ny_toolbar";
 import NyFiltreringNavnellerfnr from "../filtrering/ny_filtrering-navnellerfnr";
+import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
 import {Normaltekst} from "nav-frontend-typografi";
-import {useVeilederListeSelector} from "../hooks/redux/use-veilederliste-selector";
 import {useParams} from "react-router";
+import {useVeilederListeSelector} from "../hooks/redux/use-veilederliste-selector";
 
 const filtergruppe = ListevisningType.minOversikt;
 const id = "min-oversikt";
@@ -55,7 +55,7 @@ function Ny_MinoversiktSide() {
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
     useFetchPortefolje(filtergruppe);
-    useMineFilterController({filtergruppe: filtergruppe});
+    LagredeFilterUIController({filtergruppe: filtergruppe});
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;

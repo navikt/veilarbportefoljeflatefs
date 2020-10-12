@@ -1,17 +1,17 @@
-import React, {useRef, useState, useEffect, useCallback, MutableRefObject} from 'react';
+import React, {MutableRefObject, useCallback, useEffect, useRef, useState} from 'react';
 import {useEventListener} from '../../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
-import {MineFilter} from '../../../ducks/mine-filter';
-import {Hovedknapp, Flatknapp, Knapp} from 'nav-frontend-knapper';
+import {Flatknapp, Hovedknapp, Knapp} from 'nav-frontend-knapper';
 import {Normaltekst} from 'nav-frontend-typografi';
 import classNames from 'classnames';
-import {handleDragEnter, handleDragEnd, handleDragStart, handleDragOver} from './mouse-drag-event-listeners';
-import {handleKeyUp, handleKeyDown} from './keyboard-event-listeners';
+import {handleDragEnd, handleDragEnter, handleDragOver, handleDragStart} from './mouse-drag-event-listeners';
+import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';
+import {LagretFilter} from "../../../ducks/lagretFilter";
 
 export interface DragAndDropContainerProps {
-    dragAndDropOrder: MineFilter[];
-    setDragAndDropOrder: React.Dispatch<React.SetStateAction<MineFilter[]>>;
+    dragAndDropOrder: LagretFilter[];
+    setDragAndDropOrder: React.Dispatch<React.SetStateAction<LagretFilter[]>>;
     lagreRekkefolge: () => void;
     avbryt: () => void;
     onUnmount: MutableRefObject<() => void>;
@@ -38,7 +38,7 @@ function DragAndDropContainer({
     }, [dragAndDropOrder]);
 
     const alfabetiskSort = () => {
-        dragAndDropOrder.sort((a: MineFilter, b: MineFilter) => {
+        dragAndDropOrder.sort((a: LagretFilter, b: LagretFilter) => {
             return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
         });
         setAriaTekst('Filtrene har blitt sortert i alfabetisk rekkefølge.');
