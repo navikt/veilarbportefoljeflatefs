@@ -12,7 +12,7 @@ export const veilederGrupper = () => {
     return (
         [
             {
-                filterNavn: 'Fantastic Four',
+                filterNavn: 'Fantastic 4',
                 filterId: 12,
                 filterValg: {...initialState, veiledere: veilederGruppe1},
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
