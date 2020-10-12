@@ -36,7 +36,6 @@ function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
         dispatch(endreFiltervalg('veiledere', veilederGruppe.filterValg.veiledere, filtergruppe))
         dispatch(markerValgtVeilederGruppe(veilederGruppe, filtergruppe));
 
-        //show automatically  modal if veiledergruppe after cleanup is the same as some other veiledergruppe
         if (veilederGruppe.filterCleanup && erDetLikGruppe() !== undefined){
             onClickRedigerKnapp()
         }
