@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and publish Docker image
     needs: build
-    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master || github.ref == 'refs/heads/fixErrorHandlingVeilarbFilter'
+    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/fixErrorHandlingVeilarbFilter'
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
