@@ -147,7 +147,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         if (lagredeGrupper.length > 0 && erTomtObjekt(errors) && props.isOpen && props.initialVerdi.filterCleanup){
             const finnLikVeilederGruppe = lagredeGrupper.find(v => veilederlisterErLik(v.filterValg.veiledere, props.initialVerdi.filterValg.veiledere));
             if (finnLikVeilederGruppe !== undefined){
-                const errorTekst = "En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '"+finnLikVeilederGruppe.filterNavn+"'. Du må fjerne/legge til veiledere eller slette gruppen."
+                const errorTekst = "En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '"+finnLikVeilederGruppe.filterNavn+"'. Du må legge til/fjerne veiledere eller slette gruppen."
                 setAlertTekst(errorTekst)
                 setErrors({filterValg: errorTekst} as VeilederGruppeErrors);
             }
