@@ -16,7 +16,7 @@ export default function ArbeidslistePanel({ bruker, innloggetVeileder, skalVises
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
     const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
     const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : String.fromCharCode(8212);
-    
+
     let arbeidslisteFristTekst;
     if(bruker.arbeidsliste.frist != null){
         arbeidslisteFristTekst = new Date(bruker.arbeidsliste.frist).toLocaleDateString();
@@ -31,11 +31,11 @@ export default function ArbeidslistePanel({ bruker, innloggetVeileder, skalVises
                     <span className="brukerliste__gutter-left brukerliste--min-width-minside" />
                     <span className="brukerliste__arbeidslisteinnhold flex--grow">
                         <div className="brukerliste__arbeidslisteinnhold-hboks">
-                            <UndertekstBold>
+                            <UndertekstBold data-testid='chevron_arbeidslisteinnhold_tittel'>
                                 {overskrift}
                             </UndertekstBold>
                             <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
-                                Arbeidsliste frist: {arbeidslisteFristTekst} 
+                                Arbeidsliste frist: {arbeidslisteFristTekst}
                             </p>
                         </div>
                         <p>{bruker.arbeidsliste.kommentar}</p>

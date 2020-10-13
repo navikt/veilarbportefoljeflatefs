@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { Form, } from 'formik';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
+import {Form,} from 'formik';
+import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import FormikTekstArea from '../../formik/formik-tekstarea';
 import FormikInput from '../../formik/formik-input';
 import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
+import {Undertekst, Undertittel} from 'nav-frontend-typografi';
 import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
-import { BrukerModell } from '../../../model-interfaces';
-import { logEvent } from '../../../utils/frontend-logger';
-import { ReactComponent as SlettIcon } from '../../ikoner/slett.svg';
+import {BrukerModell} from '../../../model-interfaces';
+import {logEvent} from '../../../utils/frontend-logger';
+import {ReactComponent as SlettIcon} from '../../ikoner/slett.svg';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -51,6 +51,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <Hovedknapp
                     htmlType="submit"
                     className="knapp knapp--hoved"
+                    data-testid='modal_rediger-arbeidsliste_lagre-knapp'
                     onClick={() => {
                         logEvent('teamvoff.metrikker.arbeidslistekategori', {
                             kategori: props.bruker.arbeidsliste.kategori,
@@ -61,13 +62,16 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 >
                     Lagre
                 </Hovedknapp>
-                <Flatknapp className="knapp knapp--avbryt" onClick={props.lukkModal}>
+                <Flatknapp className="knapp knapp--avbryt"
+                           onClick={props.lukkModal}
+                           data-testid='modal_rediger-arbeidsliste_avbryt-knapp'>
                     Avbryt
                 </Flatknapp>
                 <Flatknapp
                     htmlType="button"
                     onClick={fjernBruker}
                     className="fjern--knapp"
+                    data-testid='modal_rediger-arbeidsliste_fjern-knapp'
                 >
                     <SlettIcon/>
                     <span>Fjern</span>

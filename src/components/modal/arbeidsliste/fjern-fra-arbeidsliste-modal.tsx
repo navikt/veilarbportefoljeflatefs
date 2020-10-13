@@ -23,6 +23,7 @@ class FjernArbeidslisteModal extends Component<FjernFraArbeidslisteModalProps> {
                 onRequestClose={lukkModal}
                 contentLabel="Fjern brukere fra arbeidsliste"
                 type={VarselModalType.ADVARSEL}
+                dataTestClass='modal_varsel_fjern-fra-arbeidsliste'
             >
                 <div className="fjern-arbeidsliste">
                     <div className="arbeidsliste-headertekst">

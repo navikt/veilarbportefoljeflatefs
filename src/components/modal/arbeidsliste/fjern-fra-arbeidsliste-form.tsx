@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
-import { connect } from 'react-redux';
-import { Element } from 'nav-frontend-typografi';
-import { slettArbeidsliste } from '../../../ducks/arbeidsliste';
-import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
-import { leggTilStatustall } from '../../../ducks/statustall';
-import { STATUS } from '../../../ducks/utils';
-import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../../../ducks/modal-feilmelding-brukere';
-import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
-import { ArbeidslisteDataModell, BrukerModell, Status } from '../../../model-interfaces';
+import {connect} from 'react-redux';
+import {Element} from 'nav-frontend-typografi';
+import {slettArbeidsliste} from '../../../ducks/arbeidsliste';
+import {oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
+import {leggTilStatustall} from '../../../ducks/statustall';
+import {STATUS} from '../../../ducks/utils';
+import {FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
+import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
+import {ArbeidslisteDataModell, BrukerModell, Status} from '../../../model-interfaces';
 import './arbeidsliste.less';
-import { logEvent } from '../../../utils/frontend-logger';
+import {logEvent} from '../../../utils/frontend-logger';
 
 function brukerLabel(bruker) {
     return (
@@ -30,7 +30,7 @@ interface FjernFraArbeidslisteFormProps {
     visBrukerLabel?: boolean;
 }
 
-function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus, visBrukerLabel }: FjernFraArbeidslisteFormProps) {
+function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus, visBrukerLabel}: FjernFraArbeidslisteFormProps) {
     const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
     const className = valgteBrukere.length >= 22 ? 'arbeidsliste-listetekst__lang' : 'arbeidsliste-listetekst';
 
@@ -48,7 +48,10 @@ function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraA
                 }
             </div>
             <div className="knapper">
-                <Hovedknapp className="knapp knapp--hoved" spinner={laster} htmlType="submit">
+                <Hovedknapp className="knapp knapp--hoved"
+                            spinner={laster}
+                            htmlType="submit"
+                            data-testid='modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp'>
                     Bekreft
                 </Hovedknapp>
                 <Flatknapp className="knapp" onClick={lukkModal}>

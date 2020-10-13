@@ -58,6 +58,7 @@ function ArbeidsListeKnapp(props: { valgteBrukere: BrukerModell[], onClickHandle
             className='toolbar_btn'
             disabled={props.valgteBrukere.length < 1 || props.visesAnnenVeiledersPortefolje || inneholderBrukerMedOgUtenArbeidsliste}
             onClick={props.onClickHandler}
+            data-testid={inneholderBrukerMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'}
         >
             <ArbeidslisteIkonLinje className="toolbar-knapp__ikon" id="arbeidsliste-ikon"/>
             <Normaltekst className="toolbar-knapp__tekst">{tekst}</Normaltekst>

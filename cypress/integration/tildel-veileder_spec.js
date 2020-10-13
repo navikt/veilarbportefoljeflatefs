@@ -8,7 +8,9 @@ describe('Tildel veileder', () => {
         cy.gaTilOversikt('min-oversikt')
     })
     it('Velg bruker', () => {
-        cy.checkbox('min-oversikt_brukerliste-checkbox_7')
+        cy.getByTestId('min-oversikt_brukerliste-checkbox').should('not.be.checked')
+        cy.getByTestId('min-oversikt_brukerliste-checkbox').eq(Math.floor(Math.random() * 6) + 1).check()
+        cy.getByTestId('min-oversikt_brukerliste-checkbox').should('be.checked')
     })
     it('Klikk tildel veileder', () => {
         cy.getByTestId(`tildel-veileder_knapp`).click()

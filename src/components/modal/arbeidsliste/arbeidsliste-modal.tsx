@@ -60,7 +60,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
     leggTilModal(valgteBrukere: BrukerModell[]) {
         return (
             <NavFrontendModal
-                className='arbeidsliste-modal'
+                className='arbeidsliste-modal legg-i-arbeidsliste'
                 contentLabel="arbeidsliste"
                 isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
@@ -88,6 +88,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
                 onRequestClose={this.lukkModal}
                 contentLabel="Fjern brukere fra arbeidsliste"
                 type={VarselModalType.ADVARSEL}
+                dataTestClass='modal_varsel_fjern-fra-arbeidsliste'
             >
                 <div className="fjern-arbeidsliste">
                     <div className="arbeidsliste-headertekst">

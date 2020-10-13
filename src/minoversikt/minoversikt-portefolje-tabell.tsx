@@ -1,18 +1,18 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
-import { settBrukerSomMarkert } from '../ducks/portefolje';
-import { ListevisningType } from '../ducks/ui/listevisning';
-import { usePortefoljeSelector } from '../hooks/redux/use-portefolje-selector';
-import { useForrigeBruker } from '../hooks/portefolje/use-forrige-bruker';
-import { OrNothing } from '../utils/types/types';
-import { VeilederModell } from '../model-interfaces';
-import { useOnUnmount } from '../hooks/use-on-unmount';
-import { updateLastPath } from '../utils/url-utils';
+import {settBrukerSomMarkert} from '../ducks/portefolje';
+import {ListevisningType} from '../ducks/ui/listevisning';
+import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
+import {useForrigeBruker} from '../hooks/portefolje/use-forrige-bruker';
+import {OrNothing} from '../utils/types/types';
+import {VeilederModell} from '../model-interfaces';
+import {useOnUnmount} from '../hooks/use-on-unmount';
+import {updateLastPath} from '../utils/url-utils';
 import './minoversikt.less';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { STATUS } from '../ducks/utils';
-import { AppState } from '../reducer';
+import {STATUS} from '../ducks/utils';
+import {AppState} from '../reducer';
 
 interface MinOversiktTabellProps {
     innloggetVeileder: OrNothing<VeilederModell>;
@@ -38,7 +38,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
         <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
             <div className={props.classNameWrapper}>
                 <div className="minoversikt-liste__wrapper typo-undertekst blokk-xs">
-                    <ul className="brukerliste">
+                    <ul className="brukerliste" data-testid='brukerliste'>
                         {brukere.map((bruker, index) =>
                             <MinoversiktBrukerPanel
                                 key={bruker.fnr || bruker.guid}
@@ -49,7 +49,6 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
                                 filtervalg={filtervalg}
                                 valgteKolonner={listevisning.valgte}
                                 innloggetVeileder={props.innloggetVeileder}
-                                radId={index}
                             />
                         )}
                     </ul>

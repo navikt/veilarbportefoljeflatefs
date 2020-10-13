@@ -21,7 +21,7 @@ function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
             {arbeidsliste.map((bruker, index) => (
                 <div className="arbeidsliste__bruker">
                     <div className="nav-input blokk-s" key={index}>
-                        <legend>{label(valgteBrukere[index])}</legend>
+                        <legend data-testid='modal_legg-i-arbeidsliste_navn'>{label(valgteBrukere[index])}</legend>
                         <FormikInput name={`arbeidsliste[${index}].overskrift`}/>
                         <FormikTekstArea name={`arbeidsliste[${index}].kommentar`}/>
                     </div>

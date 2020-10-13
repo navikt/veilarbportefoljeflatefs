@@ -75,7 +75,7 @@ function LeggTilArbeidslisteForm({
                 return (
                     <Form>
                         <Normaltekst className="arbeidsliste__info-tekst">
-                            {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : 'brukere'} valgt.`}
+                            {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : ' brukere'} valgt.`}
                         </Normaltekst>
                         <ArbeidslisteForm
                             valgteBrukere={valgteBrukere}
@@ -83,14 +83,17 @@ function LeggTilArbeidslisteForm({
                         />
                         <div>
                             <div className="modal-footer">
-                                <Hovedknapp className="knapp knapp--hoved">
+                                <Hovedknapp className="knapp knapp--hoved"
+                                            data-testid='modal_arbeidsliste_lagre-knapp'>
                                     Lagre
                                 </Hovedknapp>
-                                <Flatknapp className="knapp" onClick={() => {
-                                    formikProps.resetForm();
-                                    fjernMarkerteBrukere();
-                                    lukkModal();
-                                }}>
+                                <Flatknapp className="knapp"
+                                           data-testid='modal_arbeidsliste_avbryt-knapp'
+                                           onClick={() => {
+                                               formikProps.resetForm();
+                                               fjernMarkerteBrukere();
+                                               lukkModal();
+                                           }}>
                                     Avbryt
                                 </Flatknapp>
                             </div>

@@ -23,9 +23,23 @@ interface VarselModalProps {
     portalClassName?: string;
     type: VarselModalType
     onAfterOpen?: () => void;
+    dataTestClass?: string;
 }
 
-export function VarselModal({type, contentLabel, isOpen, onRequestClose, children, closeTimeoutMS, closeButton, shouldCloseOnOverlayClick, className, portalClassName, onAfterOpen}: React.PropsWithChildren<VarselModalProps>) {
+export function VarselModal({
+                                type,
+                                contentLabel,
+                                isOpen,
+                                onRequestClose,
+                                children,
+                                closeTimeoutMS,
+                                closeButton,
+                                shouldCloseOnOverlayClick,
+                                className,
+                                portalClassName,
+                                onAfterOpen,
+                                dataTestClass
+                            }: React.PropsWithChildren<VarselModalProps>) {
     return (
         <ModalWrapper
             isOpen={isOpen}
@@ -33,7 +47,7 @@ export function VarselModal({type, contentLabel, isOpen, onRequestClose, childre
             onRequestClose={onRequestClose}
             closeTimeoutMS={closeTimeoutMS}
             closeButton={closeButton}
-            portalClassName={classNames('varsel-modal', portalClassName)}
+            portalClassName={classNames('varsel-modal', portalClassName, dataTestClass)}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
             onAfterOpen={onAfterOpen}
         >

@@ -1,19 +1,19 @@
 import * as React from 'react';
 import './arbeidsliste-kategori.less';
-import { ReactComponent as ArbeidslisteikonBla } from '../../ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
-import { ReactComponent as ArbeidslisteikonLilla } from '../../ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
-import { ReactComponent as ArbeidslisteikonGronn } from '../../ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
-import { ReactComponent as ArbeidslisteikonGul } from '../../ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
+import {ReactComponent as ArbeidslisteikonBla} from '../../ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
+import {ReactComponent as ArbeidslisteikonLilla} from '../../ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
+import {ReactComponent as ArbeidslisteikonGronn} from '../../ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
+import {ReactComponent as ArbeidslisteikonGul} from '../../ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
 import Arbeidslistekategori from './arbeidslistekategori';
-import { Field } from 'formik';
-import { KategoriModell } from '../../../model-interfaces';
+import {Field} from 'formik';
+import {KategoriModell} from '../../../model-interfaces';
 
 function ArbeidslisteKategori(props: { name: string, index: string }) {
     return (
         <Field name={props.name}>
             {({field, form}) => {
                 return (
-                    <div className="arbeidslistekategori">
+                    <div className="arbeidslistekategori" data-testid='modal_arbeidslistekategori'>
                         <span className="skjemaelement__label">Kategori</span>
                         <Arbeidslistekategori
                             value={KategoriModell.BLA}

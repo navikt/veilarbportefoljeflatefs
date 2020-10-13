@@ -2,7 +2,7 @@ import * as React from 'react';
 import {MouseEvent, useState} from 'react';
 import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
-import Arbeidslistekategori from '../components/tabell/arbeidslisteikon';
+import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import Collapse from 'react-collapse';
@@ -27,7 +27,6 @@ interface MinOversiktBrukerPanelProps {
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
-    radId?: number;
 }
 
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
@@ -54,25 +53,33 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
         }
     }
 
-    const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker, radId} = props;
+    const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker} = props;
     const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
-    const classname = classNames({
-        'brukerliste--forrigeBruker': varForrigeBruker,
-    });
+
+    const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
+    const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
+    const testIdDisabled = bruker.fnr === '' ? '_disabled' : '';
 
     return (
-        <li className={classname}>
+        <li className={classNames({
+            'brukerliste--forrigeBruker': varForrigeBruker
+        }, 'brukerliste_element')}
+            data-testid={`brukerliste_element${testIdArbeidslisteAktiv}${testIdArbeidslisteKategori}${testIdDisabled}`}
+            data-cy={`brukerliste_element${testIdArbeidslisteAktiv}`}
+        >
             <div className="brukerliste__element">
-                <div className="brukerliste__gutter-left brukerliste--min-width-minside">
+                <div className="brukerliste__gutter-left brukerliste--min-width-minside"
+                >
                     <Checkbox
                         checked={bruker.markert}
                         disabled={bruker.fnr === ''}
                         onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
                         label=""
                         className="brukerliste__checkbox"
-                        data-testid={`min-oversikt_brukerliste-checkbox_${radId}`}
+                        data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
                     />
-                    <Arbeidslistekategori skalVises={arbeidslisteAktiv} kategori={bruker.arbeidsliste.kategori}/>
+                    <ArbeidslistekategoriVisning skalVises={arbeidslisteAktiv} kategori={bruker.arbeidsliste.kategori}
+                                                 dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste.kategori}`}/>
                 </div>
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"
@@ -92,6 +99,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         skalVises={arbeidslisteAktiv}
                         apen={apen}
                         onClick={handleArbeidslisteButtonClick}
+                        dataTestid={`min-oversikt_brukerliste-chevron${testIdArbeidslisteAktiv}${testIdDisabled}`}
                     />
                 </div>
             </div>

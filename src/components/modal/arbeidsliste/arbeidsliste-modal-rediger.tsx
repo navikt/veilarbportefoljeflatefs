@@ -1,22 +1,22 @@
 import * as React from 'react';
 import NavFrontendModal from 'nav-frontend-modal';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
-import { BrukerModell, KategoriModell, Status } from '../../../model-interfaces';
-import { useState } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { Formik, FormikProps } from 'formik';
-import { STATUS } from '../../../ducks/utils';
-import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
-import { markerAlleBrukere, oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
-import { redigerArbeidsliste } from '../../../ducks/arbeidsliste';
+import {BrukerModell, KategoriModell, Status} from '../../../model-interfaces';
+import {useState} from 'react';
+import {connect, useDispatch, useSelector} from 'react-redux';
+import {Formik, FormikProps} from 'formik';
+import {STATUS} from '../../../ducks/utils';
+import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
+import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
+import {redigerArbeidsliste} from '../../../ducks/arbeidsliste';
 import moment from 'moment';
-import { OrNothing } from '../../../utils/types/types';
+import {OrNothing} from '../../../utils/types/types';
 import './arbeidsliste.less';
-import { logEvent } from '../../../utils/frontend-logger';
-import { LasterModal } from '../lastermodal/laster-modal';
+import {logEvent} from '../../../utils/frontend-logger';
+import {LasterModal} from '../lastermodal/laster-modal';
 import ModalHeader from '../modal-header/modal-header';
-import { skjulModal, VIS_FJERN_ARBEIDSLISTE_MODAL, visFjernArbeidslisteModal } from '../../../ducks/modal';
-import { AppState } from '../../../reducer';
+import {skjulModal, VIS_FJERN_ARBEIDSLISTE_MODAL, visFjernArbeidslisteModal} from '../../../ducks/modal';
+import {AppState} from '../../../reducer';
 import FjernArbeidslisteModal from './fjern-fra-arbeidsliste-modal';
 
 interface Ownprops {
@@ -97,6 +97,7 @@ function ArbeidslisteModalRediger({
             <button
                 className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
                 onClick={klikkRedigerknapp}
+                data-testid='min-oversikt_chevron-arbeidsliste_rediger-knapp'
             >
                 Rediger
             </button>
@@ -110,7 +111,7 @@ function ArbeidslisteModalRediger({
                     }}
                     render={(formikProps) => (
                         <NavFrontendModal
-                            className="arbeidsliste-modal"
+                            className="arbeidsliste-modal rediger-arbeidsliste"
                             contentLabel="arbeidsliste"
                             isOpen={isOpen}
                             onRequestClose={() => lukkModalConfirm(formikProps)}

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Field, getIn } from 'formik';
-import { Input } from 'nav-frontend-skjema';
+import {Field, getIn} from 'formik';
+import {Input} from 'nav-frontend-skjema';
 
 const TITTEL_MAKS_LENGDE = 30;
 
@@ -32,6 +32,7 @@ function FormikInput({name}) {
                         bredde="L"
                         feil={feil}
                         value={field.value}
+                        data-testid='modal_arbeidsliste_tittel'
                     />
                 );
             }}
