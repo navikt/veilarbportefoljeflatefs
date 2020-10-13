@@ -1,4 +1,4 @@
-xdescribe('Lag én ny arbeidsliste', () => {
+describe('Lag én ny arbeidsliste', () => {
     it('Start server', () => {
         cy.configure();
     })
@@ -37,12 +37,6 @@ xdescribe('Lag én ny arbeidsliste', () => {
 })
 
 describe('Lag to nye arbeidslister', () => {
-    it('Start server', () => {
-        cy.configure();
-    })
-    it('Gå til min oversikt', () => {
-        cy.gaTilOversikt('min-oversikt');
-    })
     let antallMedArbeidsliste = 0;
 
     it('Det eksisterer fler enn 0 brukere med arbeidsliste', () => {
@@ -99,7 +93,7 @@ describe('Lag to nye arbeidslister', () => {
     })
 })
 
-xdescribe('Rediger arbeidsliste', () => {
+describe('Rediger arbeidsliste', () => {
     it('Åpne chevron hos bruker med arbeidsliste', () => {
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().children()
             .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-lukket');
@@ -132,7 +126,7 @@ xdescribe('Rediger arbeidsliste', () => {
     })
 })
 
-xdescribe('Slett arbeidsliste', () => {
+describe('Slett arbeidsliste via fjern-knapp', () => {
     let antallFor = 0;
     it('Velg bruker med arbeidsliste', () => {
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
@@ -160,6 +154,46 @@ xdescribe('Slett arbeidsliste', () => {
             })
             .then(() => {
                 expect(antallEtter).to.be.equals(antallFor - 1)
+            });
+    })
+})
+
+describe('Slett arbeidsliste via rediger-modal', () => {
+    let antallForSletting = 0;
+    it('Åpne chevron hos bruker med arbeidsliste', () => {
+        cy.get('[data-cy=brukerliste_element_arbeidsliste]')
+            .then(ant => {
+                antallForSletting += Cypress.$(ant).length;
+            });
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().children()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-lukket');
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().click();
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().children()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen');
+    })
+
+    it('Klikk rediger', () => {
+        cy.get('.rediger-arbeidsliste').should('not.be.visible')
+        cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
+        cy.get('.rediger-arbeidsliste').should('be.visible')
+    })
+
+    it('Klikk fjern-knapp', () => {
+        cy.getByTestId('modal_rediger-arbeidsliste_fjern-knapp').click();
+    })
+    it('Klikk bekreft', () => {
+        cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('be.visible').click();
+        cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.be.visible');
+    })
+
+    let antallEtterSletting = 0;
+    it('Det skal være en mindre bruker med arbeidsliste', () => {
+        cy.get('[data-cy=brukerliste_element_arbeidsliste]').should('be.visible')
+            .then(ant => {
+                antallEtterSletting += Cypress.$(ant).length;
+            })
+            .then(() => {
+                expect(antallEtterSletting).to.be.equals(antallForSletting - 1)
             });
     })
 })

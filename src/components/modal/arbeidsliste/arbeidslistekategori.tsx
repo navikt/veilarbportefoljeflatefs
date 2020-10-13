@@ -10,11 +10,12 @@ interface ArbeidslisteikonProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     index: string;
     title: string;
+    dataTestId: string;
 }
 
-function Arbeidslistekategori({value, arbeidslistekategori, name, checked, onChange, index, title}: ArbeidslisteikonProps) {
+function Arbeidslistekategori({value, arbeidslistekategori, name, checked, onChange, index, title, dataTestId}: ArbeidslisteikonProps) {
     return (
-        <div className="arbeidslistekategori__container" title={title}>
+        <div className="arbeidslistekategori__container" title={title} data-testid={dataTestId}>
             <input
                 id={`${value}[${index}]`}
                 type="radio"
@@ -22,7 +23,6 @@ function Arbeidslistekategori({value, arbeidslistekategori, name, checked, onCha
                 value={value}
                 checked={checked}
                 onChange={onChange}
-                data-testid={`modal_arbeidslistekategori_${arbeidslistekategori}`}
             />
             <label
                 htmlFor={`${value}[${index}]`}

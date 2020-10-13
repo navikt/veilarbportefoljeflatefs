@@ -17,8 +17,8 @@ describe('Lag ny veiledergruppe', () => {
     it('Gå til Veiledergrupper tab', () => {
         cy.klikkTab("VEILEDERGRUPPER");
     })
-    it('Det eksisterer 5 veiledergrupper', () => {
-        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', 5)
+    it('Det eksisterer 6 veiledergrupper', () => {
+        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', 6)
     })
     it('Klikk på ny gruppe', () => {
         cy.getByTestId('veiledergruppe_ny-gruppe_knapp').click()
@@ -48,8 +48,8 @@ describe('Lag ny veiledergruppe', () => {
         cy.getByTestId('filtreringlabel').contains(andersen)
         cy.getByTestId('filtreringlabel').contains(jonas)
     })
-    it('Det eksisterer 6 veiledergrupper', () => {
-        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', 6)
+    it('Det eksisterer 7 veiledergrupper', () => {
+        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', 7)
     })
     it('Ny gruppe skal være valgt', () => {
         cy.getByTestId('veiledergruppe_rad-wrapper')
@@ -76,8 +76,8 @@ describe('Rediger filternavn', () => {
         cy.getByTestId('veiledergruppe_rad-wrapper')
             .contains(gruppenavnRedigert)
     })
-    it('Det eksisterer 6 veiledergrupper', () => {
-        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', 6)
+    it('Det eksisterer 7 veiledergrupper', () => {
+        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', 7)
     })
 })
 
@@ -106,8 +106,8 @@ describe('Rediger filtervalg', () => {
     it('Klikk lagre endringer', () => {
         cy.getByTestId('veiledergruppe_modal_lagre-knapp').contains("Lagre endringer").click()
     })
-    it('Det eksisterer 6 veiledergrupper', () => {
-        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', 6)
+    it('Det eksisterer 7 veiledergrupper', () => {
+        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', 7)
     })
     it('Toasten skal vise "Gruppen er lagret"', () => {
         cy.getByTestId('timed-toast').should("be.visible").contains("Gruppen er lagret")
@@ -127,8 +127,8 @@ describe('Slett veiledergruppe', () => {
     it('Bekreft sletting', () => {
         cy.getByTestId('bekreft-sletting_modal_slett-knapp').click()
     })
-    it('Det eksisterer 5 veiledergrupper', () => {
-        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', 5)
+    it('Det eksisterer 6 veiledergrupper', () => {
+        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', 6)
     })
     it('Toasten skal vise "Gruppen er slettet"', () => {
         cy.getByTestId('timed-toast').should("be.visible").contains("Gruppen er slettet")
