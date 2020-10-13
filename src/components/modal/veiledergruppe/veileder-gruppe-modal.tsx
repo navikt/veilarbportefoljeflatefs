@@ -14,12 +14,16 @@ import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import './modal.less';
 import ModalHeader from '../modal-header/modal-header';
+import {erTomtObjekt} from "../mine-filter/mine-filter-utils";
+import {AlertStripeAdvarsel} from "nav-frontend-alertstriper";
+import hiddenIf from "../../hidden-if/hidden-if";
 
 interface VeilederModalProps {
     initialVerdi: {
         gruppeNavn: string,
         filterValg: FiltervalgModell,
-        filterId: number
+        filterId: number,
+        filterCleanup?: boolean
     }
     onSubmit: (gruppeNavn: string, filterValg: FiltervalgModell) => void
     onSlett?: () => void;
@@ -36,11 +40,14 @@ interface VeilederGruppeErrors {
     filterValg: OrNothing<string>
 }
 
+const HiddenIfAlertStripe = hiddenIf(AlertStripeAdvarsel);
+
 export function VeilederGruppeModal(props: VeilederModalProps) {
     const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
     const [gruppeNavn, setGruppeNavn] = useState<string>('');
     const [errors, setErrors] = useState<VeilederGruppeErrors>({} as VeilederGruppeErrors);
     const [harForsoktSubmitte, setHarForsoktSubmitte] = useState(false);
+    const [alertTekst, setAlertTekst] = useState("")
 
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
@@ -84,6 +91,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             return;
         }
         setErrors({} as VeilederGruppeErrors);
+        setAlertTekst("")
         props.onRequestClose();
     }
 
@@ -123,7 +131,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         props.onRequestClose();
     }
 
-    const lagredeGrupper = useSelector((state: AppState) => state.veiledergrupperLagretFilter.data
+    const lagredeGrupper = useSelector((state: AppState) => state.veiledergrupper.data
         .filter(v => v.filterId !== props.initialVerdi.filterId));
 
     const lagredeGruppeNavn = lagredeGrupper.map(v => v.filterNavn)
@@ -134,6 +142,17 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         veiledere: v.filterValg.veiledere,
         gruppeNavn: v.filterNavn
     }));
+
+    useEffect(()=>{
+        if (lagredeGrupper.length > 0 && erTomtObjekt(errors) && props.isOpen && props.initialVerdi.filterCleanup){
+            const finnLikVeilederGruppe = lagredeGrupper.find(v => veilederlisterErLik(v.filterValg.veiledere, props.initialVerdi.filterValg.veiledere));
+            if (finnLikVeilederGruppe !== undefined){
+                const errorTekst = "En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '"+finnLikVeilederGruppe.filterNavn+"'. Du må legge til/fjerne veiledere eller slette gruppen."
+                setAlertTekst(errorTekst)
+                setErrors({filterValg: errorTekst} as VeilederGruppeErrors);
+            }
+        }
+    },[lagredeGrupper, props.initialVerdi, props.isOpen, errors])
 
     const validate = (gruppeNavn, filterValg) => {
         let errors: any = {};
@@ -147,6 +166,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         if (filterValg.veiledere.length < 1) {
             errors.filterValg = 'Du må legge til veiledere.';
         }
+
         const finnLikVeilederGruppe = lagredeVeilederGrupper.find(v => veilederlisterErLik(v.veiledere, filterValg.veiledere));
 
         if (finnLikVeilederGruppe) {
@@ -171,6 +191,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                 portalClassName="veiledergruppe-modal"
             >
                 <ModalHeader tittel={props.modalTittel}/>
+                <HiddenIfAlertStripe hidden={alertTekst.length === 0} className="alerttext">{alertTekst}</HiddenIfAlertStripe>
                 <VeilederGruppeForm
                     filterValg={filterValg}
                     gruppeNavn={gruppeNavn}

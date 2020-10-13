@@ -28,7 +28,7 @@ import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 import {MineFilterLagreFilterKnapp} from "./mine-filter-lagre-filter-knapp";
-import {useMineFilterController} from "./use-mine-filter-controller";
+import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -43,7 +43,7 @@ function MinoversiktSide() {
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
     useFetchPortefolje(ListevisningType.minOversikt);
-    useMineFilterController({filtergruppe: filtergruppe});
+    LagredeFilterUIController({filtergruppe: filtergruppe});
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;

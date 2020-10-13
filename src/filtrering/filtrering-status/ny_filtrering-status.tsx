@@ -22,7 +22,7 @@ import {ListevisningType} from '../../ducks/ui/listevisning';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
-    filtergruppe: string;
+    filtergruppe: ListevisningType;
 }
 
 export function NyFiltreringStatus(props: FiltreringStatusProps) {

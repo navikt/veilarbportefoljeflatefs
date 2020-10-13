@@ -1,8 +1,8 @@
-import React, {useRef, Dispatch} from 'react';
+import React, {Dispatch, useRef} from 'react';
 import {
     SidebarTabInfo as SidebarTabType,
-    useSidebarViewStore,
-    SidebarTabInfo
+    SidebarTabInfo,
+    useSidebarViewStore
 } from '../../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import './sidebar.less';
@@ -19,7 +19,7 @@ import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import outsideClick from '../../hooks/use-outside-click';
 import {useWindowWidth} from '../../hooks/use-window-width';
-import {skjulSidebar, visSidebar, SIDEBAR_TAB_ENDRET} from '../../ducks/sidebar-tab';
+import {SIDEBAR_TAB_ENDRET, skjulSidebar, visSidebar} from '../../ducks/sidebar-tab';
 import {keyCodes} from '../../utils/utils';
 import Sidevelger from './sidevelger';
 
@@ -66,7 +66,7 @@ const sidebar: Sidebar[] = [
 interface SidebarProps {
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
-    filtergruppe: string;
+    filtergruppe: ListevisningType;
     isSidebarHidden: boolean;
 }
 

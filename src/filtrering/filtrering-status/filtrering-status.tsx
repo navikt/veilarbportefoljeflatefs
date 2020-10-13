@@ -1,30 +1,30 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { endreFiltervalg } from '../../ducks/filtrering';
-import { fjernFerdigfilter, leggTilFerdigFilter } from './filter-utils';
-import { FiltreringStatusContainer } from './filtrering-status-components/filtrering-wrapper';
-import { FiltreringStatusBehovsVurdering } from './filtrering-status-components/behov-og-arbeidsevnevurdering';
-import { FiltreringStatusAktiviteter } from './filtrering-status-components/aktiviteter';
-import { FiltreringStatusDialog } from './filtrering-status-components/dialog-gruppe';
-import { FiltreringStatusInavtiveBrukere } from './filtrering-status-components/inaktivebrukere';
+import {useDispatch} from 'react-redux';
+import {endreFiltervalg} from '../../ducks/filtrering';
+import {fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
+import {FiltreringStatusContainer} from './filtrering-status-components/filtrering-wrapper';
+import {FiltreringStatusBehovsVurdering} from './filtrering-status-components/behov-og-arbeidsevnevurdering';
+import {FiltreringStatusAktiviteter} from './filtrering-status-components/aktiviteter';
+import {FiltreringStatusDialog} from './filtrering-status-components/dialog-gruppe';
+import {FiltreringStatusInavtiveBrukere} from './filtrering-status-components/inaktivebrukere';
 import FiltreringStatusNyeBrukere from './filtrering-status-components/nyebrukere';
 import FiltreringStatusUfordelteBrukere from './filtrering-status-components/ufordelte-brukere';
 import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avtalt-mote-med-nav';
 import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
-import { FiltervalgModell } from '../../model-interfaces';
+import {FiltervalgModell} from '../../model-interfaces';
 import './filtrering-status.less';
-import { pagineringSetup } from '../../ducks/paginering';
+import {pagineringSetup} from '../../ducks/paginering';
 import FiltreringStatusIkkePermitterteEtterNiendeBrukere from './filtrering-status-components/ikke-permitterte-brukere';
 import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-components/permitterte-brukere';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import { MIN_ARBEIDSLISTE, } from '../filter-konstanter';
-import { PopoverOrientering } from 'nav-frontend-popover';
+import {MIN_ARBEIDSLISTE,} from '../filter-konstanter';
+import {PopoverOrientering} from 'nav-frontend-popover';
 import {useWindowWidth} from "../../hooks/use-window-width";
 import {ListevisningType} from "../../ducks/ui/listevisning";
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
-    filtergruppe: string;
+    filtergruppe: ListevisningType;
 }
 
 export function FiltreringStatus(props: FiltreringStatusProps) {

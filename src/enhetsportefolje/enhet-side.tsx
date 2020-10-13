@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useCallback, useMemo} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import TabellOverskrift from '../components/tabell-overskrift';
@@ -23,13 +24,12 @@ import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
-import {useCallback, useMemo} from 'react';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
-import {useMineFilterController} from "../minoversikt/use-mine-filter-controller";
 import {MineFilterLagreFilterKnapp} from "../minoversikt/mine-filter-lagre-filter-knapp";
 import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
 import Alertstripe from "nav-frontend-alertstriper";
+import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -68,7 +68,7 @@ function EnhetSide() {
 
     useFetchPortefolje(filtergruppe);
     useSetLocalStorageOnUnmount();
-    useMineFilterController({filtergruppe: filtergruppe});
+    LagredeFilterUIController({filtergruppe: filtergruppe});
 
     const slettVeilederFilter = useCallback(ident =>
             dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe)),

@@ -11,7 +11,7 @@ import statustallReducer, {StatustallState} from './ducks/statustall';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
-import veiledergrupperLagretFilterReducer, {VeiledergrupperLagretFilterState} from './ducks/veiledergrupper_filter';
+import veiledergrupperLagretFilterReducer from './ducks/veiledergrupper_filter';
 import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
 import listevisningReducer, {
@@ -25,8 +25,9 @@ import toastReducer, {ToastState} from './store/toast/reducer';
 import {FiltervalgModell} from "./model-interfaces";
 import inloggetVeilederReducer, {InloggetVeilederState} from "./ducks/inlogget-veileder";
 import sidebarReducer, {initialStateSidebar} from "./ducks/sidebar-tab";
-import mineFilterReducer, {MineFilterState} from "./ducks/mine-filter";
-import mineFilterUI, {MineFilterUIState} from "./ducks/mine-filter-ui";
+import mineFilterReducer from "./ducks/mine-filter";
+import lagretFilterUIState, {LagretFilterUIState} from "./ducks/lagret-filter-ui-state";
+import {LagretFilterState} from "./ducks/lagretFilter";
 
 
 function named(name, reducer) {
@@ -66,10 +67,11 @@ export interface AppState {
     arbeidsliste: any;
     enhettiltak: EnhettiltakState;
     features: FeaturesState;
-    veiledergrupperLagretFilter: VeiledergrupperLagretFilterState;
-    mineFilter: MineFilterState;
-    mineFilterMinOversikt: MineFilterUIState;
-    mineFilterEnhetensOversikt: MineFilterUIState;
+    veiledergrupper: LagretFilterState;
+    mineFilter: LagretFilterState;
+    mineFilterMinOversikt: LagretFilterUIState;
+    mineFilterEnhetensOversikt: LagretFilterUIState;
+    mineFilterVeilederOversikt: LagretFilterUIState;
     toastReducer: ToastState;
     inloggetVeileder: InloggetVeilederState;
 }
@@ -97,10 +99,11 @@ export default combineReducers<AppState>({
     arbeidsliste: arbeidslisteReducer,
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
-    veiledergrupperLagretFilter: veiledergrupperLagretFilterReducer,
+    veiledergrupper: veiledergrupperLagretFilterReducer,
     mineFilter: mineFilterReducer,
-    mineFilterMinOversikt: named(ListevisningType.minOversikt, mineFilterUI),
-    mineFilterEnhetensOversikt: named(ListevisningType.enhetensOversikt, mineFilterUI),
+    mineFilterMinOversikt: named(ListevisningType.minOversikt, lagretFilterUIState),
+    mineFilterEnhetensOversikt: named(ListevisningType.enhetensOversikt, lagretFilterUIState),
+    mineFilterVeilederOversikt: named(ListevisningType.veilederOversikt, lagretFilterUIState),
     toastReducer: toastReducer,
     inloggetVeileder: inloggetVeilederReducer
 });

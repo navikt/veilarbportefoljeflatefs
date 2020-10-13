@@ -1,26 +1,26 @@
-import {MineFilter} from "../../ducks/mine-filter";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../reducer";
 import {finnSideNavn, mapVeilederIdentTilNonsens} from "../../middleware/metrics-middleware";
 import {logEvent} from "../../utils/frontend-logger";
-import {velgLagretFilter} from "../../ducks/filtrering";
-import {apneMineFilterModal} from "../../ducks/mine-filter-ui";
+import {velgMineFilter} from "../../ducks/filtrering";
+import {apneMineFilterModal, markerMineFilter} from "../../ducks/lagret-filter-ui-state";
 import {Radio} from "nav-frontend-skjema";
 import RedigerKnapp from "../../components/knapper/rediger-knapp";
 import React from "react";
 import './ny_mine-filter-innhold.less'
 import {ListevisningType} from "../../ducks/ui/listevisning";
+import {LagretFilter} from "../../ducks/lagretFilter";
 
-interface LagretFilterRadProps {
-    filter: MineFilter;
-    filtergruppe: string;
+interface NyMineFilterRadProps {
+    mineFilter: LagretFilter;
+    filtergruppe: ListevisningType;
     dataTestid?: string;
 }
 
-function NyMineFilterRad({filter, filtergruppe, dataTestid}: LagretFilterRadProps) {
+function NyMineFilterRad({mineFilter, filtergruppe, dataTestid}: NyMineFilterRadProps) {
     const dispatch = useDispatch();
 
-    const valgtMittFilter = useSelector((state: AppState) => filtergruppe === ListevisningType.minOversikt
+    const valgtMineFilter = useSelector((state: AppState) => filtergruppe === ListevisningType.minOversikt
         ? state.mineFilterMinOversikt.valgtMineFilter
         : state.mineFilterEnhetensOversikt.valgtMineFilter);
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
@@ -28,8 +28,9 @@ function NyMineFilterRad({filter, filtergruppe, dataTestid}: LagretFilterRadProp
 
     function velgFilter() {
         logEvent('portefolje.metrikker.lagredefilter.valgt-lagret-filter',
-            {}, {filterId: filter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
-        dispatch(velgLagretFilter(filter, filtergruppe))
+            {}, {filterId: mineFilter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens});
+        dispatch(velgMineFilter(mineFilter, filtergruppe))
+        dispatch(markerMineFilter(mineFilter, filtergruppe));
     }
 
     function onClickRedigerKnapp() {
@@ -41,16 +42,16 @@ function NyMineFilterRad({filter, filtergruppe, dataTestid}: LagretFilterRadProp
              data-testid='mine-filter_rad-wrapper'>
             <Radio
                 className="ny__mine-filter__filternavn"
-                key={filter.filterId}
+                key={mineFilter.filterId}
                 name="mineFilter"
-                label={filter.filterNavn}
-                value={filter.filterId}
+                label={mineFilter.filterNavn}
+                value={mineFilter.filterId}
                 onChange={() => velgFilter()}
-                checked={valgtMittFilter?.filterId === filter.filterId}
+                checked={valgtMineFilter?.filterId === mineFilter.filterId}
                 data-testid={`mine-filter-rad_${filter.filterNavn}`}
             />
             <RedigerKnapp
-                hidden={valgtMittFilter?.filterId !== filter.filterId}
+                hidden={valgtMineFilter?.filterId !== mineFilter.filterId}
                 aria="Rediger mitt filter"
                 onClick={onClickRedigerKnapp}
                 dataTestid={`rediger-filter_knapp_${filter.filterNavn}`}
