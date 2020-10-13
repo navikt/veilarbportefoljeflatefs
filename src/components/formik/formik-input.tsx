@@ -4,8 +4,13 @@ import {Input} from 'nav-frontend-skjema';
 
 const TITTEL_MAKS_LENGDE = 30;
 
-function FormikInput({name}) {
+interface FormikInputProps {
+    name: string;
+    index?: number
+}
 
+function FormikInput({name, index}: FormikInputProps) {
+    const indexId = index ? `_${index}` : '';
     const validate = (value: string): string | undefined => {
         let error: undefined | string;
         if (!value) {
@@ -32,7 +37,7 @@ function FormikInput({name}) {
                         bredde="L"
                         feil={feil}
                         value={field.value}
-                        data-testid='modal_arbeidsliste_tittel'
+                        data-testid={`modal_arbeidsliste_tittel${indexId}`}
                     />
                 );
             }}

@@ -36,7 +36,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     <Undertittel>
                         {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
                     </Undertittel>
-                    <FormikInput name="overskrift"/>
+                    <FormikInput name="overskrift" />
                     <FormikTekstArea name="kommentar"/>
                     <Undertekst className="arbeidsliste--modal-redigering">
                         {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}

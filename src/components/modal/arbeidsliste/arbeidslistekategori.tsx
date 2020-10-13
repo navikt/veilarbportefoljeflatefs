@@ -22,6 +22,7 @@ function Arbeidslistekategori({value, arbeidslistekategori, name, checked, onCha
                 value={value}
                 checked={checked}
                 onChange={onChange}
+                data-testid={`modal_arbeidslistekategori_${arbeidslistekategori}`}
             />
             <label
                 htmlFor={`${value}[${index}]`}

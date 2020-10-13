@@ -48,13 +48,13 @@ function NyMineFilterRad({mineFilter, filtergruppe, dataTestid}: NyMineFilterRad
                 value={mineFilter.filterId}
                 onChange={() => velgFilter()}
                 checked={valgtMineFilter?.filterId === mineFilter.filterId}
-                data-testid={`mine-filter-rad_${filter.filterNavn}`}
+                data-testid={`mine-filter-rad_${mineFilter.filterNavn}`}
             />
             <RedigerKnapp
                 hidden={valgtMineFilter?.filterId !== mineFilter.filterId}
                 aria="Rediger mitt filter"
                 onClick={onClickRedigerKnapp}
-                dataTestid={`rediger-filter_knapp_${filter.filterNavn}`}
+                dataTestid={`rediger-filter_knapp_${mineFilter.filterNavn}`}
             />
         </div>
     );

@@ -36,26 +36,30 @@ function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
         dispatch(endreFiltervalg('veiledere', veilederGruppe.filterValg.veiledere, filtergruppe))
         dispatch(markerValgtVeilederGruppe(veilederGruppe, filtergruppe));
 
-        if (veilederGruppe.filterCleanup && erDetLikGruppe() !== undefined){
+        if (veilederGruppe.filterCleanup && erDetLikGruppe() !== undefined) {
             onClickRedigerKnapp()
         }
     }
 
     return (
-        <div className="ny__veileder-gruppe__rad">
+        <div className="ny__veileder-gruppe__rad"
+             data-testid="veiledergruppe_rad-wrapper">
             <Radio
                 className="ny__veileder-gruppe__gruppenavn"
                 key={veilederGruppe.filterId}
                 name="veiledergruppe"
                 label={veilederGruppe.filterNavn}
                 value={veilederGruppe.filterId}
-                onChange={()=> velgGruppe()}
+                onChange={() => velgGruppe()}
                 checked={valgtGruppe?.filterId === veilederGruppe.filterId}
+                data-testid={`veiledergruppe-rad_${veilederGruppe.filterNavn}`}
             />
             <RedigerKnapp
                 hidden={valgtGruppe?.filterId !== veilederGruppe.filterId}
                 aria="Rediger veiledergruppe"
                 onClick={onClickRedigerKnapp}
+                dataTestid={`rediger-veiledergruppe_knapp_${veilederGruppe.filterNavn}`}
+
             />
         </div>
     );

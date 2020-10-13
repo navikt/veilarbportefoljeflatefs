@@ -22,8 +22,8 @@ function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
                 <div className="arbeidsliste__bruker">
                     <div className="nav-input blokk-s" key={index}>
                         <legend data-testid='modal_legg-i-arbeidsliste_navn'>{label(valgteBrukere[index])}</legend>
-                        <FormikInput name={`arbeidsliste[${index}].overskrift`}/>
-                        <FormikTekstArea name={`arbeidsliste[${index}].kommentar`}/>
+                        <FormikInput name={`arbeidsliste[${index}].overskrift`} index={index}/>
+                        <FormikTekstArea name={`arbeidsliste[${index}].kommentar`} index={index}/>
                     </div>
                     <div className="skjemaelement dato-kategori-wrapper">
                         <FormikDatoVelger name={`arbeidsliste[${index}].frist`}/>

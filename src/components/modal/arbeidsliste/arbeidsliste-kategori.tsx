@@ -13,7 +13,7 @@ function ArbeidslisteKategori(props: { name: string, index: string }) {
         <Field name={props.name}>
             {({field, form}) => {
                 return (
-                    <div className="arbeidslistekategori" data-testid='modal_arbeidslistekategori'>
+                    <div className="arbeidslistekategori">
                         <span className="skjemaelement__label">Kategori</span>
                         <Arbeidslistekategori
                             value={KategoriModell.BLA}
