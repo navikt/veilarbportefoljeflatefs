@@ -50,8 +50,7 @@ function ArbeidslisteModalRediger({
                                       sistEndretAv,
                                       sistEndretDato,
                                       onSubmit,
-                                      settMarkert
-                                  }: ArbeidslisteModalRedigerProps) {
+                                      settMarkert}: ArbeidslisteModalRedigerProps) {
     const [isOpen, setIsOpen] = useState(false);
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
     const valgteBrukere = portefolje.brukere.filter((bruker) => bruker.markert === true);

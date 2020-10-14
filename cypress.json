@@ -4,6 +4,5 @@
   "viewportWidth": 1800,
   "requestTimeout": 10000,
   "defaultCommandTimeout": 10000,
-  "projectId": "r1wxsg",
-  "video": false
+  "projectId": "r1wxsg"
 }

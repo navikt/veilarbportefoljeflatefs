@@ -73,7 +73,7 @@ function LeggTilArbeidslisteForm({
             render={(formikProps) => {
                 setFormIsDirty(formikProps.dirty);
                 return (
-                    <Form>
+                    <Form data-testid='modal_arbeidsliste_form'>
                         <Normaltekst className="arbeidsliste__info-tekst">
                             {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : ' brukere'} valgt.`}
                         </Normaltekst>

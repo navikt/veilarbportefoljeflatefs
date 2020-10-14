@@ -1,7 +1,7 @@
 import * as React from 'react';
 import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
-import { BrukerModell } from '../../../model-interfaces';
-import { Undertittel } from 'nav-frontend-typografi';
+import {BrukerModell} from '../../../model-interfaces';
+import {Undertittel} from 'nav-frontend-typografi';
 import FormikInput from '../../formik/formik-input';
 import FormikTekstArea from '../../formik/formik-tekstarea';
 import './arbeidsliste.less';

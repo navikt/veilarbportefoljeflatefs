@@ -93,4 +93,3 @@ Cypress.Commands.add("configure", () => {
         .should('exist');
 })
 
-

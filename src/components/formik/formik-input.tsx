@@ -11,6 +11,7 @@ interface FormikInputProps {
 
 function FormikInput({name, index}: FormikInputProps) {
     const indexId = index ? `_${index}` : '';
+
     const validate = (value: string): string | undefined => {
         let error: undefined | string;
         if (!value) {
@@ -22,7 +23,7 @@ function FormikInput({name, index}: FormikInputProps) {
     };
 
     return (
-        <Field validate={validate} name={name}>
+        <Field validate={validate} name={name} >
             {({field, form}) => {
                 const touched = getIn(form.touched, name);
                 const errors = getIn(form.errors, name);

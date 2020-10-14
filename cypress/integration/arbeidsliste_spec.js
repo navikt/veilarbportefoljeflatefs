@@ -1,9 +1,9 @@
-describe('Lag én ny arbeidsliste', () => {
+describe('Lag én ny arbeidsliste og sjekk validering', () => {
     it('Start server', () => {
         cy.configure();
     })
     it('Gå til min oversikt', () => {
-        cy.gaTilOversikt('min-oversikt');
+        cy.gaTilOversikt('min-oversikt')
     })
     it('Velg bruker uten arbeidsliste', () => {
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
@@ -18,22 +18,42 @@ describe('Lag én ny arbeidsliste', () => {
         cy.getByTestId('legg-i-arbeidsliste_knapp').click();
         cy.get('.legg-i-arbeidsliste').should('be.visible')
     })
+    it('Klikk lagre med tom tittel og tom kommentar', () => {
+        cy.getByTestId('modal_arbeidsliste_lagre-knapp').contains('Lagre').click();
+        cy.getByTestId('modal_arbeidsliste_form').contains("Du må fylle ut en tittel");
+        cy.getByTestId('modal_arbeidsliste_form').contains("Du må fylle ut en kommentar");
+    })
+    it('Legg inn tittel, sjekk at validering er borte', () => {
+        cy.getByTestId('modal_arbeidsliste_tittel').type('validering');
+        cy.getByTestId('modal_arbeidsliste_lagre-knapp').contains('Lagre').click();
+        cy.getByTestId('modal_arbeidsliste_form').should('not.contain', "Du må fylle ut en tittel");
+    })
     let fornavn = '';
-    it('Legg inn tittel, kommentar, dato og gul kategori', () => {
+    it('Legg inn dato og gul kategori', () => {
         cy.getByTestId('modal_legg-i-arbeidsliste_navn').then(($navn) => {
             fornavn = ($navn.text()).split(' ')[0]
         })
-        cy.getByTestId('modal_arbeidsliste_tittel').type('arbeidslistetittel');
-        cy.getByTestId('modal_arbeidsliste_kommentar').type('arbeidslistekommentar');
         cy.get('#fristInput').type('01.03.2066');
         cy.getByTestId('modal_arbeidslistekategori_GUL').click();
+    })
+    it('Legg inn kommentar, sjekk at validering er borte', () => {
+        cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar');
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').contains('Lagre').click();
-        cy.get('.legg-i-arbeidsliste')
-            .should('not.be.visible')
+        cy.getByTestId('modal_arbeidsliste_form').should('not.contain', "Du må fylle ut en kommentar");
+        cy.getByTestId('modal_arbeidsliste_form').should('not.be.visible');
     })
     it('Brukeren skal nå ha gult arbeidslisteikon', () => {
+        cy.get('.legg-i-arbeidsliste')
+            .should('not.be.visible')
         cy.getByTestId('brukerliste_element_arbeidsliste-GUL').contains(fornavn).first()
     })
+    // it('Lukk chevron', () => {
+    //     cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').children()
+    //         .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen').first();
+    //     cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().click();
+    //     cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().children()
+    //         .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-lukket');
+    // })
 })
 
 describe('Lag to nye arbeidslister', () => {
@@ -94,35 +114,42 @@ describe('Lag to nye arbeidslister', () => {
 })
 
 describe('Rediger arbeidsliste', () => {
+    let tittel;
+    let kommentar;
     it('Åpne chevron hos bruker med arbeidsliste', () => {
-        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().children()
-            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-lukket');
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').children()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-lukket').first();
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().click();
-        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().children()
-            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen');
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').children()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen').first();
+
+        cy.getByTestId('chevron_arbeidslisteinnhold_tittel')
+            .then(($tittel) => {
+                tittel = $tittel.text();
+            })
+
+        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar')
+            .then(($kommentar) => {
+                kommentar = $kommentar.text();
+            })
     })
-    let arbeidslistetittel;
-    let nyTittel;
+    let nyTittel = 'Redigering av tittel';
+    let nyKommentar = 'Redigering av kommentar';
+
     it('Klikk rediger', () => {
         cy.get('.rediger-arbeidsliste').should('not.be.visible')
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
         cy.get('.rediger-arbeidsliste').should('be.visible')
-        cy.getByTestId('chevron_arbeidslisteinnhold_tittel')
-            .then(($tittel) => {
-                arbeidslistetittel = $tittel.text()
-            })
     })
-    it('Skriv ny tittel', () => {
-        const redigertTittel = 'Redigering av tittel';
-        cy.getByTestId('modal_arbeidsliste_tittel').clear().type(redigertTittel);
+    it('Skriv ny tittel og kommentar', () => {
+        cy.getByTestId('modal_arbeidsliste_tittel').clear().type(nyTittel);
+        cy.getByTestId('modal_arbeidsliste_kommentar').clear().type(nyKommentar);
         cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
         cy.get('.rediger-arbeidsliste').should('not.be.visible');
-        cy.getByTestId('chevron_arbeidslisteinnhold_tittel').contains(redigertTittel)
-        cy.getByTestId('chevron_arbeidslisteinnhold_tittel')
-            .then(($tittel) => {
-                nyTittel = $tittel.text()
-            })
-        expect(nyTittel).to.not.equals(arbeidslistetittel);
+    })
+    it('Ny tittel og kommentar skal leses i chevron', () => {
+        cy.getByTestId('chevron_arbeidslisteinnhold_tittel').contains(nyTittel)
+        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').contains(nyKommentar)
     })
 })
 
@@ -195,5 +222,84 @@ describe('Slett arbeidsliste via rediger-modal', () => {
             .then(() => {
                 expect(antallEtterSletting).to.be.equals(antallForSletting - 1)
             });
+    })
+})
+
+describe('Sjekk validering i rediger arbeidsliste-modal', () => {
+    it('Åpne chevron hos bruker med arbeidsliste', () => {
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').children()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-lukket').first();
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().click();
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().children()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen');
+    })
+
+    it('Klikk rediger', () => {
+        cy.get('.rediger-arbeidsliste').should('not.be.visible')
+        cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
+        cy.get('.rediger-arbeidsliste').should('be.visible')
+    })
+
+    it('Fjern tittel og kommentar og klikk Lagre', () => {
+        cy.getByTestId('modal_arbeidsliste_tittel').clear();
+        cy.getByTestId('modal_arbeidsliste_kommentar').clear();
+        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').contains('Lagre').click();
+        cy.getByTestId('modal_rediger-arbeidsliste_form').contains("Du må fylle ut en tittel");
+        cy.getByTestId('modal_rediger-arbeidsliste_form').contains("Du må fylle ut en kommentar");
+    })
+    it('Legg til tittel, sjekk at valideringen er borte', () => {
+        cy.getByTestId('modal_arbeidsliste_tittel').type('Heisann sveisann');
+        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').contains('Lagre').click();
+        cy.getByTestId('modal_rediger-arbeidsliste_form').should('not.contain', "Du må fylle ut en tittel");
+    })
+    it('Legg til kommentar, sjekk at valideringen er borte', () => {
+        cy.getByTestId('modal_arbeidsliste_kommentar').type('Her er en kjempefin kommentar truddelu');
+        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').contains('Lagre').click();
+        cy.getByTestId('modal_rediger-arbeidsliste_form').should('not.contain', "Du må fylle ut en kommentar");
+    })
+    it('Lukk chevron', () => {
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').children()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen').first();
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().click();
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().children()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-lukket');
+    })
+})
+
+describe('Avbryt redigering, ingen endringer lagret', () => {
+    let tittel;
+    let kommentar;
+    it('Åpne chevron hos bruker med arbeidsliste', () => {
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').children()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-lukket').first();
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().click();
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').children()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen').first();
+
+        cy.getByTestId('chevron_arbeidslisteinnhold_tittel')
+            .then(($tittel) => {
+                tittel = $tittel.text();
+            })
+
+        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar')
+            .then(($kommentar) => {
+                kommentar = $kommentar.text();
+            })
+    })
+    it('Klikk rediger', () => {
+        cy.get('.rediger-arbeidsliste').should('not.be.visible');
+        cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
+        cy.get('.rediger-arbeidsliste').should('be.visible');
+    })
+    const nyTittel = 'Skal ikke lagres'
+    const nyKommentar = 'Kommentar skal heller ikke lagres'
+    it('Endre tittel og kommentar og klikk avbryt', () => {
+        cy.getByTestId('modal_arbeidsliste_tittel').clear().type(nyTittel);
+        cy.getByTestId('modal_arbeidsliste_kommentar').clear().type(nyKommentar);
+        cy.getByTestId('modal_rediger-arbeidsliste_avbryt-knapp').contains('Avbryt').click();
+    })
+    it('Tittel og kommentar skal være som det var før', () => {
+        cy.getByTestId('chevron_arbeidslisteinnhold_tittel').should("contain", tittel);
+        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').should("contain", kommentar);
     })
 })

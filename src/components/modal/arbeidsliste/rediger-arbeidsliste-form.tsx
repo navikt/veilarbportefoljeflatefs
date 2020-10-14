@@ -30,7 +30,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     };
 
     return (
-        <Form>
+        <Form data-testid='modal_rediger-arbeidsliste_form'>
             <div className="arbeidsliste__bruker">
                 <div className="nav-input blokk-s">
                     <Undertittel>
