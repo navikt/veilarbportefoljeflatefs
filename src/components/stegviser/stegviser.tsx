@@ -12,12 +12,13 @@ function Stegviser(props: StegviserProps) {
         return new Array(props.antallSteg)
             .fill(0)
             .map((_, i) => (
-                <div key={i} className={cls('stegviser__steg', {'stegviser__steg--selected': i === props.valgtSteg})}/>
+                <div key={i}
+                     className={cls('stegviser__steg', {'stegviser__steg--selected': i === props.valgtSteg})}/>
             ));
     };
 
     return (
-        <div className="stegviser">
+        <div className="stegviser" data-testid='endringslogg_stegviser'>
             {mapTilSteg(props.antallSteg, props.valgtSteg)}
         </div>
     );

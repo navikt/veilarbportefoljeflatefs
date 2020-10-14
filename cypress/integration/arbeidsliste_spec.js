@@ -47,13 +47,6 @@ describe('Lag én ny arbeidsliste og sjekk validering', () => {
             .should('not.be.visible')
         cy.getByTestId('brukerliste_element_arbeidsliste-GUL').contains(fornavn).first()
     })
-    // it('Lukk chevron', () => {
-    //     cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').children()
-    //         .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen').first();
-    //     cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().click();
-    //     cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().children()
-    //         .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-lukket');
-    // })
 })
 
 describe('Lag to nye arbeidslister', () => {
@@ -109,13 +102,13 @@ describe('Lag to nye arbeidslister', () => {
             .then(() => {
                 expect(antallMedArbeidslisteEtterOppretting).to.be.equals(antallMedArbeidsliste + 2)
             });
-
     })
 })
 
 describe('Rediger arbeidsliste', () => {
     let tittel;
     let kommentar;
+
     it('Åpne chevron hos bruker med arbeidsliste', () => {
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').children()
             .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-lukket').first();
@@ -133,6 +126,7 @@ describe('Rediger arbeidsliste', () => {
                 kommentar = $kommentar.text();
             })
     })
+
     let nyTittel = 'Redigering av tittel';
     let nyKommentar = 'Redigering av kommentar';
 
@@ -233,13 +227,11 @@ describe('Sjekk validering i rediger arbeidsliste-modal', () => {
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste').first().children()
             .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen');
     })
-
     it('Klikk rediger', () => {
         cy.get('.rediger-arbeidsliste').should('not.be.visible')
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
         cy.get('.rediger-arbeidsliste').should('be.visible')
     })
-
     it('Fjern tittel og kommentar og klikk Lagre', () => {
         cy.getByTestId('modal_arbeidsliste_tittel').clear();
         cy.getByTestId('modal_arbeidsliste_kommentar').clear();

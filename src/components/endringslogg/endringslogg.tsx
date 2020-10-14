@@ -1,10 +1,10 @@
-import { default as React, RefObject, useRef, useState } from 'react';
-import { ReactComponent as AlarmIcon } from './icon-v3.svg';
+import {default as React, RefObject, useRef, useState} from 'react';
+import {ReactComponent as AlarmIcon} from './icon-v3.svg';
 import EndringsloggInnhold from './endringslogg-innhold';
 import TransitionContainer from './utils/transition-container';
-import { useEventListener } from '../../hooks/use-event-listener';
+import {useEventListener} from '../../hooks/use-event-listener';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import { EndringsloggInnleggMedSettStatus } from './utils/endringslogg-custom';
+import {EndringsloggInnleggMedSettStatus} from './utils/endringslogg-custom';
 import './endringslogg.less';
 import './collapse-container-transition.less';
 
@@ -75,7 +75,7 @@ export default function Endringslogg(props: EndringsProps) {
             />
             <TransitionContainer visible={endringsloggApen}>
                 <EndringsloggHeader/>
-                <div className={'innhold-container'}>
+                <div className={'innhold-container'} data-testid='endringslogg-innhold'>
                     <EndringsloggInnhold innleggsListe={props.innhold}/>
                 </div>
             </TransitionContainer>
@@ -94,7 +94,9 @@ function EndringsloggKnapp(props: EndringsloggKnappProps) {
     return (
         <button ref={props.buttonRef}
                 className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
-                onClick={props.klikk}>
+                onClick={props.klikk}
+                data-testid='endringslogg-knapp'
+        >
             <AlarmIcon/>
             {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}/>}
         </button>

@@ -77,7 +77,7 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
                     value={nyttFilterNavn}
                     onChange={(e) => setNyttFilterNavn(e.target.value)}
                     feil={feilmelding.filterNavn}
-                    autoFocus={true}
+                    autoFocus
                     maxLength={255}
                     data-testid="redigere-filter-navn-input"
                 />

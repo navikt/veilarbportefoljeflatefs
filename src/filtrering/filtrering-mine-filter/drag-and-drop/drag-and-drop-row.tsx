@@ -34,11 +34,11 @@ function DragAndDropRow(props: DragAndDropRowProps) {
             tabIndex={tabIndex}
             role="option"
             aria-describedby="operation"
-            aria-selected={true}
+            aria-selected
             value={props.idx}
             data-testid='drag-drop_rad'
         >
-            <DragIcon aria-disabled={true}/>
+            <DragIcon aria-disabled/>
             {props.filterNavn}
             <FlyttKnappWrapper
                 showUpBtn={props.idx !== 0}

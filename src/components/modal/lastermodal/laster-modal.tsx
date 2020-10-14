@@ -6,7 +6,7 @@ import './laster-modal.less';
 export function LasterModal() {
     return (
         <ModalWrapper
-            isOpen={true}
+            isOpen
             contentLabel="Laster data"
             onRequestClose={() => {}} // tslint:disable-line:no-empty
             closeButton={false}

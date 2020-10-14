@@ -74,7 +74,7 @@ function Paginering(props: PagineringProps) {
                 data-testid='paginering-tall_1'
             >1</KnappPanel>}
 
-            <KnappPanel data-testid={`paginering-tall_${side}`} selected={true}>
+            <KnappPanel data-testid={`paginering-tall_${side}`} selected>
                 <strong>{side}</strong>
             </KnappPanel>
 

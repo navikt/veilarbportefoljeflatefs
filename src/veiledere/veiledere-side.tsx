@@ -64,7 +64,7 @@ function VeiledereSide() {
                                     <FiltreringVeiledere/>
                                 </PanelBase>
                                 <MetrikkEkspanderbartpanel
-                                    apen={true}
+                                    apen
                                     lamellNavn="veiledergrupper"
                                     tittel="Veiledergrupper"
                                 >

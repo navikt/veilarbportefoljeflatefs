@@ -59,7 +59,7 @@ export function LagreNyttMineFilter(props: {filtergruppe: string; lukkModal}) {
                     value={filterNavn}
                     onChange={(e) => setFilterNavn(e.target.value)}
                     feil={feilmelding.filterNavn}
-                    autoFocus={true}
+                    autoFocus
                     maxLength={255}
                     data-testid="lagre-nytt-filter_modal_navn-input"
                 />
