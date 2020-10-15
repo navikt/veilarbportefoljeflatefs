@@ -46,7 +46,10 @@ function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filterv
             {harValg &&
             <div className={classNames('checkbox-filterform__valg', className)}>
                 <Grid columns={columns}>
-                    <RenderFields valg={valg} velgCheckBox={velgCheckBox} checkBoxValg={checkBoxValg}/>
+                    <RenderFields valg={valg}
+                                  velgCheckBox={velgCheckBox}
+                                  checkBoxValg={checkBoxValg}
+                    />
                 </Grid>
             </div>
             }
@@ -55,20 +58,20 @@ function CheckboxFilterform({endreFilterValg, valg, closeDropdown, form, filterv
                     checkBoxValg.length > 0
                         ? <button className="knapp knapp--mini knapp--hoved"
                                   type="submit"
-                                  data-testid={'checkbox-filterform_velg-knapp'}
+                                  data-testid='checkbox-filterform_velg-knapp'
                         >
                             Velg
                         </button>
                         : <button className="knapp knapp--mini"
                                   type="button"
                                   onClick={closeDropdown}
-                                  data-testid={'checkbox-filterform__lukk-knapp'}
+                                  data-testid='checkbox-filterform_lukk-knapp'
                         >
                             Lukk
                         </button>
                     : <button className="knapp knapp--mini knapp--hoved"
                               type="submit"
-                              data-testid={'checkbox-filterform_velg-knapp'}
+                              data-testid='checkbox-filterform_velg-knapp'
                     >
                         Velg
                     </button>}

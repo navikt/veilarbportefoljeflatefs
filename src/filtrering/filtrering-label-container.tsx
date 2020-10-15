@@ -143,7 +143,7 @@ function FiltreringLabelContainer({filtervalg, enhettiltak, listevisning, action
                                        harMuligMenIkkeValgtKolonne={false} skalHaKryssIkon={false}/>;
 
     return (
-        <div className={className}>
+        <div className={className} data-testid='filtrering_label-container'>
             {filterElementer}
             {filterElementer.length >= 3 ? fjernAlle : null}
         </div>

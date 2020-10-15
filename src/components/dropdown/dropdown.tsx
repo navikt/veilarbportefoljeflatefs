@@ -74,6 +74,7 @@ function Dropdown(props: DropdownProps) {
             className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`}
             id={`${name}-dropdown__innhold`}
             ref={inputRef => (focusRef.current = inputRef)}
+            data-testid={`filter_dropdown-innhold_${name}`}
         >
             {render(lukkDropdown)}
         </div>
