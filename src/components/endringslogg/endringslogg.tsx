@@ -98,7 +98,8 @@ function EndringsloggKnapp(props: EndringsloggKnappProps) {
                 data-testid='endringslogg-knapp'
         >
             <AlarmIcon/>
-            {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}/>}
+            {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'}
+                                             data-testid='endringslogg_nye-notifikasjoner'/>}
         </button>
     );
 }
