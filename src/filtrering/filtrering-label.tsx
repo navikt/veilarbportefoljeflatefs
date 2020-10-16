@@ -4,6 +4,9 @@ import {ReactComponent as FilterIkon} from './filtrering-veileder-grupper/filter
 import classNames from 'classnames';
 import './filtrering-label.less';
 import './filtrering-skjema.less';
+import { useDispatch } from 'react-redux';
+import { ToastActionType } from '../store/toast/actions';
+import { useToastSelector } from '../hooks/redux/use-toast-selector';
 
 interface FiltreringLabelProps {
     label: string | { label: string };
@@ -18,6 +21,15 @@ function FiltreringLabel({label, slettFilter, harMuligMenIkkeValgtKolonne = fals
     const arialLabel = skalHaKryssIkon ? 'Slett filter' : ' Slett alle filtervalg';
     const slettAlleFiltervalg = arialLabel === " Slett alle filtervalg";
     const buttonClassnames = classNames('filtreringlabel', 'typo-undertekst', {'filtreringlabel--markert': markert}, {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne}, {'slett-alle-filtervalg-knapp': slettAlleFiltervalg});
+    const dispatch = useDispatch();
+    const toastSelector = useToastSelector()
+
+    if(label === undefined){
+        if(toastSelector !== ToastActionType.VIS_FILTER_FEIL_TOAST)
+            dispatch({type: ToastActionType.VIS_FILTER_FEIL_TOAST})
+            
+        return null;
+    }
     return (
         <button
             title={lagConfig(label).label}

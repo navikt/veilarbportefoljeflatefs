@@ -1,4 +1,4 @@
-import {initialState} from '../ducks/filtrering';
+import {AktiviteterValg, initialState} from '../ducks/filtrering';
 import * as faker from 'faker/locale/nb_NO';
 import {LagretFilter} from "../ducks/lagretFilter";
 
@@ -71,6 +71,22 @@ export const mineFilter = () => {
                 filterValg: { ...initialState, ferdigfilterListe: ["UFORDELTE_BRUKERE"] },
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
                 sortOrder: 1,
+            },{
+            filterNavn: 'Problematisk filter',
+            filterId: 12,
+            filterValg: { ...initialState, aktiviteter: {
+                BEHANDLING: AktiviteterValg.NA,
+                EGEN: AktiviteterValg.NA,
+                GRUPPEAKTIVITET: AktiviteterValg.NA,
+                IJOBB: AktiviteterValg.NA,
+                MOTE: AktiviteterValg.NA,
+                SOKEAVTALE: AktiviteterValg.NA,
+                STILLING: AktiviteterValg.NA,
+                TILTAK: AktiviteterValg.JA,
+                UTDANNINGAKTIVITET: AktiviteterValg.NA},
+            tiltakstyper: ["IkkeEksisterendeTiltak"] },
+            opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
+            sortOrder: 9,
             }
         ]  as LagretFilter []
     );

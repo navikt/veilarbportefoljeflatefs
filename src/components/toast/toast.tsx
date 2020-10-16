@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
+    fjernFilterFeiletToast,
     fjernIngenEndringerToast,
     fjernLagreEndringerToast,
     fjernOpprettGruppeToast,
@@ -56,12 +57,19 @@ function Toasts({toasts}: StateProps) {
                 alertstripe="feil"
                 fjernToast={fjernSorteringToast()}
             />;
+        case ToastActionType.VIS_FILTER_FEIL_TOAST:
+            return <TimedToast
+                toastTekst="Det er en teknisk feil ved ett eller flere filter."
+                alertstripe="feil"
+                fjernToast={fjernFilterFeiletToast()}
+            />;
 
         case ToastActionType.FJERN_OPPRETT_GRUPPE_TOAST:
         case ToastActionType.FJERN_LAGRE_ENDRINGER_TOAST:
         case ToastActionType.FJERN_SLETTE_GRUPPE_TOAST:
         case ToastActionType.FJERN_INGEN_ENDRINGER_TOAST:
         case ToastActionType.FJERN_SORTERING_TOAST:
+        case ToastActionType.FJERN_VIS_FILTER_FEIL_TOAST:
             return null;
         default:
             return null;
