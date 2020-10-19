@@ -1,19 +1,19 @@
-import React, { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useMemo} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import Toolbar from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
-import { sortBy } from '../ducks/sortering';
-import { sorter } from '../utils/sortering';
+import {sortBy} from '../ducks/sortering';
+import {sorter} from '../utils/sortering';
 import {
     selectFraIndex,
     selectSeAlle,
     selectSideStorrelse
 } from '../components/toolbar/paginering/paginering-selector';
-import { ListevisningType } from '../ducks/ui/listevisning';
-import { PortefoljeStorrelser } from '../ducks/portefoljestorrelser';
+import {ListevisningType} from '../ducks/ui/listevisning';
+import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
 import './ny_veiledere.less';
-import { VeilederModell } from '../model-interfaces';
-import { AppState } from '../reducer';
+import {VeilederModell} from '../model-interfaces';
+import {AppState} from '../reducer';
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere && veiledere.length > 0) {

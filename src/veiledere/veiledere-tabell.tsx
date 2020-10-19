@@ -27,6 +27,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
                 <Link
                     to={`/portefolje/${veileder.ident}`}
                     className="lenke lenke--frittstaende"
+                    data-testid='veilederoversikt_navn_lenke'
                 >
                     {`${veileder.navn}`}
                 </Link>
@@ -41,9 +42,9 @@ function VeilederTabell(props: VeiledereTabellProps) {
         const className = 'tabellheader__pil';
         if (sorterPaa) {
             if (currentSortering.direction === 'ascending') {
-                return <PilAscending className={className}/>;
+                return <PilAscending className={className} data-testid='sorteringspil_ascending'/>;
             } else if (currentSortering.direction === 'descending') {
-                return <PilDescending className={className}/>;
+                return <PilDescending className={className} data-testid='sorteringspil_descending'/>;
             }
         }
         return null;
@@ -74,7 +75,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
                     NAV-ident
                 </th>
                 <th className="tabellheader tabell-element-center" scope="col">
-                    <div className="tabellheader__lenke">
+                    <div className="tabellheader__lenke" data-testid='veilederoversikt_sortering_antall-brukere'>
                         <button
                             onClick={props.sorterPaaPortefoljestorrelse}
                             className={
@@ -93,7 +94,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
                 <th/>
             </tr>
             </thead>
-            <tbody>
+            <tbody data-testid='veilederoversikt_veilederliste_tbody'>
             {veilederElementer}
             </tbody>
         </table>

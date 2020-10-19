@@ -29,26 +29,31 @@ Cypress.Commands.add('getByTestId', (selector, ...args) => {
 });
 
 Cypress.Commands.add("klikkTab", (tab) => {
+    const Status = "Status";
+    const Filter = "Filter";
+    const MineFilter = "Mine filter";
+    const Veiledergrupper = "Veiledergrupper";
+
     if (tab === "VEILEDERGRUPPER") {
-        if (cy.getByTestId("sidebar_content-container").should("not.contain", "Veiledergrupper")) {
+        if (cy.getByTestId("sidebar_content-container").should("not.contain", Veiledergrupper)) {
             cy.getByTestId(`sidebar-tab_${tab}`).click();
         }
-        cy.getByTestId("sidebar_content-container").contains("Veiledergrupper");
+        cy.getByTestId("sidebar_content-container").contains(Veiledergrupper);
     } else if (tab === "MINE_FILTER") {
-        if (cy.getByTestId("sidebar_content-container").should("not.contain", "Mine filter")) {
+        if (cy.getByTestId("sidebar_content-container").should("not.contain", MineFilter)) {
             cy.getByTestId(`sidebar-tab_${tab}`).click();
         }
-        cy.getByTestId("sidebar_content-container").contains("Mine filter");
+        cy.getByTestId("sidebar_content-container").contains(MineFilter);
     } else if (tab === "STATUS") {
-        if (cy.getByTestId("sidebar_content-container").should("not.contain", "Status")) {
+        if (cy.getByTestId("sidebar_content-container").should("not.contain", Status)) {
             cy.getByTestId(`sidebar-tab_${tab}`).click();
         }
-        cy.getByTestId("sidebar_content-container").contains("Status");
+        cy.getByTestId("sidebar_content-container").contains(Status);
     } else if (tab === "FILTER") {
-        if (cy.getByTestId("sidebar_content-container").should("not.contain", "Filter")) {
+        if (cy.getByTestId("sidebar_content-container").should("not.contain", Filter)) {
             cy.getByTestId(`sidebar-tab_${tab}`).click();
         }
-        cy.getByTestId("sidebar_content-container").contains("Filter");
+        cy.getByTestId("sidebar_content-container").contains(Filter);
     }
 })
 
@@ -72,9 +77,18 @@ Cypress.Commands.add("gaTilOversikt", (side) => {
 })
 
 Cypress.Commands.add("checkbox", (testid) => {
-    cy.getByTestId(testid).should("not.be.checked");
-    cy.getByTestId(testid).check({force: true})
+    cy.getByTestId(testid).should("not.be.checked").check({force: true});
     cy.getByTestId(testid).should("be.checked");
+})
+
+Cypress.Commands.add("checkboxFirst", (testid) => {
+    cy.getByTestId(testid).first().should("not.be.checked").check({force: true});
+    cy.getByTestId(testid).first().should("be.checked");
+})
+
+Cypress.Commands.add("checkboxLast", (testid) => {
+    cy.getByTestId(testid).last().should("not.be.checked").check({force: true});
+    cy.getByTestId(testid).last().should("be.checked");
 })
 
 Cypress.Commands.add("configure", () => {

@@ -117,7 +117,7 @@ function Ny_MinoversiktSide() {
                                 endreFiltervalg={doEndreFiltervalg}
                             />
                             {visesAnnenVeiledersPortefolje &&
-                            <Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
+                            <Normaltekst tag="h1" className="blokk-s annen-veileder-varsel" data-testid='annen-veileder_infotekst'>
                                 {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
                             </Normaltekst>}
                             <NyMineFilterLagreFilterKnapp filtergruppe={filtergruppe}/>

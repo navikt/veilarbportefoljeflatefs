@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ReactNode, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import {ReactNode, useEffect, useState} from 'react';
+import {connect} from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Checkbox } from 'nav-frontend-skjema';
-import { endreFiltervalg } from '../../ducks/filtrering';
-import { VeiledereState } from '../../ducks/veiledere';
-import { FiltervalgModell, VeilederModell } from '../../model-interfaces';
+import {Checkbox} from 'nav-frontend-skjema';
+import {endreFiltervalg} from '../../ducks/filtrering';
+import {VeiledereState} from '../../ducks/veiledere';
+import {FiltervalgModell, VeilederModell} from '../../model-interfaces';
 import './veileder-checkbox-liste.less';
 import {ListevisningType} from "../../ducks/ui/listevisning";
 
@@ -24,13 +24,19 @@ interface KnappProps {
 }
 
 const LukkeKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
-    <button className="knapp knapp--mini checkbox-liste__valg-knapp" type="button" onClick={props.onClick}>
+    <button className="knapp knapp--mini checkbox-liste__valg-knapp"
+            type="button"
+            onClick={props.onClick}
+            data-testid='veilederoversikt_sok-veileder_lukk-knapp'>
         Lukk
     </button>
 );
 
 const SubmitKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
-    <button className="knapp knapp--mini knapp--hoved checkbox-liste__valg-knapp" type="button" onClick={props.onClick}>
+    <button className="knapp knapp--mini knapp--hoved checkbox-liste__valg-knapp"
+            type="button"
+            onClick={props.onClick}
+            data-testid='veilederoversikt_sok-veileder_velg-knapp'>
         Velg
     </button>
 );
@@ -108,7 +114,7 @@ function VeilederCheckboxListe(props: any) {
             return null;
         }
 
-        return veiledere.filter((vlg) => vlg.ident && vlg.navn).map((vlg) => {
+        return veiledere.filter((vlg) => vlg.ident && vlg.navn).map((vlg, index) => {
             const identErValgt = erValgt(vlg.ident);
             return (
                 <Checkbox
@@ -116,6 +122,7 @@ function VeilederCheckboxListe(props: any) {
                     label={vlg.navn}
                     checked={identErValgt}
                     onChange={() => handleCheckboxOnClick(vlg.ident)}
+                    data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
                 />
             );
         });
@@ -132,7 +139,7 @@ function VeilederCheckboxListe(props: any) {
     if (harValg) {
         return (
             <form className="checkbox-liste">
-                <div className="checkbox-liste__valg">
+                <div className="checkbox-liste__valg" data-testid='veilederoversikt_sok-veileder_veilederliste'>
                     {valgCheckboxListe}
                 </div>
                 <div className="checkbox-liste__valg-footer">
@@ -147,7 +154,8 @@ function VeilederCheckboxListe(props: any) {
     } else {
         return (
             <div className="checkbox-liste__valg-footer">
-                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+                <AlertStripe type="info" className="checkbox-filterform__alertstripe"
+                             data-testid='veilederoversikt_alertstripe_info'>
                     Ingen veiledere funnet
                 </AlertStripe>
             </div>

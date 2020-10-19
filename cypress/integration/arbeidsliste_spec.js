@@ -7,15 +7,11 @@ describe('Lag én ny arbeidsliste og sjekk validering', () => {
     })
     it('Velg bruker uten arbeidsliste', () => {
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').first().should("not.be.checked");
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').first().check();
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').first().should("be.checked");
+        cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
     })
     it('Klikk Legg i arbeidsliste', () => {
         cy.get('.legg-i-arbeidsliste').should('not.be.visible')
-        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
-        cy.getByTestId('legg-i-arbeidsliste_knapp').contains('Legg i arbeidsliste');
-        cy.getByTestId('legg-i-arbeidsliste_knapp').click();
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').contains('Legg i arbeidsliste').click();
         cy.get('.legg-i-arbeidsliste').should('be.visible')
     })
     it('Klikk lagre med tom tittel og tom kommentar', () => {
@@ -39,12 +35,10 @@ describe('Lag én ny arbeidsliste og sjekk validering', () => {
     it('Legg inn kommentar, sjekk at validering er borte', () => {
         cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar');
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').contains('Lagre').click();
-        cy.getByTestId('modal_arbeidsliste_form').should('not.contain', "Du må fylle ut en kommentar");
-        cy.getByTestId('modal_arbeidsliste_form').should('not.be.visible');
+        cy.getByTestId('modal_arbeidsliste_form').should('not.contain', "Du må fylle ut en kommentar").should('not.be.visible');
     })
     it('Brukeren skal nå ha gult arbeidslisteikon', () => {
-        cy.get('.legg-i-arbeidsliste')
-            .should('not.be.visible')
+        cy.get('.legg-i-arbeidsliste').should('not.be.visible')
         cy.getByTestId('brukerliste_element_arbeidsliste-GUL').contains(fornavn).first()
     })
 })
@@ -63,35 +57,24 @@ describe('Lag to nye arbeidslister', () => {
     })
     it('Velg to brukere uten arbeidsliste', () => {
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').first().should("not.be.checked");
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').first().check();
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').first().should("be.checked");
-
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').last().should("not.be.checked");
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').last().check();
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').last().should("be.checked");
+        cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
+        cy.checkboxLast('min-oversikt_brukerliste-checkbox');
     })
     it('Klikk Legg i arbeidsliste', () => {
         cy.get('.legg-i-arbeidsliste').should('not.be.visible')
-        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
-        cy.getByTestId('legg-i-arbeidsliste_knapp').contains('Legg i arbeidsliste');
-        cy.getByTestId('legg-i-arbeidsliste_knapp').click();
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').contains('Legg i arbeidsliste').click();
         cy.get('.legg-i-arbeidsliste').should('be.visible')
     })
     it('Legg inn tittel, kommentar, dato og lilla kategori på første arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_tittel').type('arbeidslistetittel');
         cy.getByTestId('modal_arbeidsliste_kommentar').type('arbeidslistekommentar');
-
         cy.getByTestId('modal_arbeidslistekategori_LILLA').click();
     })
     it('Legg inn tittel, kommentar, dato og blå kategori på andre arbeidsliste', () => {
-
         cy.getByTestId('modal_arbeidsliste_tittel_1').type('heiheihei hallå');
-        cy.getByTestId('modal_arbeidsliste_kommentar_1').type('tester om dette funker da');
-
+        cy.getByTestId('modal_arbeidsliste_kommentar_1').type('Team Voff er best i test hehehe');
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').contains('Lagre').click();
-        cy.get('.legg-i-arbeidsliste')
-            .should('not.be.visible')
+        cy.get('.legg-i-arbeidsliste').should('not.be.visible')
     })
     let antallMedArbeidslisteEtterOppretting = 0;
     it(`Det eksisterer to flere brukere med arbeidsliste`, () => {
@@ -131,9 +114,9 @@ describe('Rediger arbeidsliste', () => {
     let nyKommentar = 'Redigering av kommentar';
 
     it('Klikk rediger', () => {
-        cy.get('.rediger-arbeidsliste').should('not.be.visible')
+        cy.get('.rediger-arbeidsliste').should('not.be.visible');
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
-        cy.get('.rediger-arbeidsliste').should('be.visible')
+        cy.get('.rediger-arbeidsliste').should('be.visible');
     })
     it('Skriv ny tittel og kommentar', () => {
         cy.getByTestId('modal_arbeidsliste_tittel').clear().type(nyTittel);
@@ -155,9 +138,7 @@ describe('Slett arbeidsliste via fjern-knapp', () => {
                 antallFor += Cypress.$(ant).length;
             });
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
-        cy.getByTestId('min-oversikt_brukerliste-checkbox_arbeidsliste').first().should("not.be.checked");
-        cy.getByTestId('min-oversikt_brukerliste-checkbox_arbeidsliste').first().check();
-        cy.getByTestId('min-oversikt_brukerliste-checkbox_arbeidsliste').first().should("be.checked");
+        cy.checkboxFirst('min-oversikt_brukerliste-checkbox_arbeidsliste');
     })
     it('Klikk Fjern fra arbeidsliste', () => {
         cy.getByTestId('fjern-fra-arbeidsliste_knapp').should('be.enabled').click();
@@ -194,9 +175,9 @@ describe('Slett arbeidsliste via rediger-modal', () => {
     })
 
     it('Klikk rediger', () => {
-        cy.get('.rediger-arbeidsliste').should('not.be.visible')
+        cy.get('.rediger-arbeidsliste').should('not.be.visible');
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
-        cy.get('.rediger-arbeidsliste').should('be.visible')
+        cy.get('.rediger-arbeidsliste').should('be.visible');
     })
 
     it('Klikk fjern-knapp', () => {
@@ -228,9 +209,9 @@ describe('Sjekk validering i rediger arbeidsliste-modal', () => {
             .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen');
     })
     it('Klikk rediger', () => {
-        cy.get('.rediger-arbeidsliste').should('not.be.visible')
+        cy.get('.rediger-arbeidsliste').should('not.be.visible');
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
-        cy.get('.rediger-arbeidsliste').should('be.visible')
+        cy.get('.rediger-arbeidsliste').should('be.visible');
     })
     it('Fjern tittel og kommentar og klikk Lagre', () => {
         cy.getByTestId('modal_arbeidsliste_tittel').clear();

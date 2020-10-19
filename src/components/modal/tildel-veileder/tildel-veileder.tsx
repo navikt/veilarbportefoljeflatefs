@@ -72,7 +72,7 @@ interface TildelVeilederRendererProps {
 
 function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: TildelVeilederRendererProps) {
     return (
-        <form className="skjema radio-filterform" onSubmit={onSubmit}>
+        <form className="skjema radio-filterform" onSubmit={onSubmit} data-testid='tildel-veileder_dropdown'>
             <div className="radio-filterform__valg">
                 {data.map((veileder, index) =>
                     <Radio
