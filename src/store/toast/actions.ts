@@ -10,8 +10,6 @@ export enum ToastActionType {
     VIS_LAGRE_SORTERING_TOAST = 'lagredefilter_sortering/OK',
     VIS_SORTERING_FEILET_TOAST = 'lagredefilter_sortering/FEILET',
     FJERN_SORTERING_TOAST = 'FJERN_SORTERING_TOAST',
-    VIS_FILTER_FEIL_TOAST = 'VIS_FILTER_FEIL_TOAST',
-    FJERN_VIS_FILTER_FEIL_TOAST = 'FJERN_VIS_FILTER_FEIL_TOAST'
 }
 
 export interface ToastAction {
@@ -39,6 +37,3 @@ export const fjernIngenEndringerToast = (): ToastAction =>
 
 export const fjernSorteringToast = (): ToastAction =>
     toastAction(ToastActionType.FJERN_SORTERING_TOAST);
-
-export const fjernFilterFeiletToast = (): ToastAction =>
-    toastAction(ToastActionType.FJERN_VIS_FILTER_FEIL_TOAST);
