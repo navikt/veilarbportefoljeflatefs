@@ -4,7 +4,8 @@ import {ReactComponent as FilterIkon} from './filtrering-veileder-grupper/filter
 import classNames from 'classnames';
 import './filtrering-label.less';
 import './filtrering-skjema.less';
-import Modal from '../components/modal/modal';
+import {VarselModal, VarselModalType} from '../components/modal/varselmodal/varselmodal';
+import {Undertittel, Normaltekst} from 'nav-frontend-typografi';
 
 interface FiltreringLabelProps {
     label: string | {label: string};
@@ -35,14 +36,23 @@ function FiltreringLabel({
 
     if (label === undefined) {
         return (
-            <Modal
+            <VarselModal
+                contentLabel={'Feil med filter'}
                 isOpen={feilemeldingOpen}
+                type={VarselModalType.FEIL}
+                closeButton={false}
                 onRequestClose={() => setFeilemeldingOpen(false)}
-                contentLabel="Min modalrute"
-                tittel={'Oops'}
             >
-                <div style={{padding: '2rem 2.5rem'}}>Det er en teknisk feil ved ett eller flere filter.</div>
-            </Modal>
+                <div className="server-feil-modal">
+                    <Undertittel tag="h1" className="blokk-xxs">
+                        Det er en teknisk feil ved et eller flere filter.
+                    </Undertittel>
+                    <Normaltekst className="blokk-s">Prøv igjen senere.</Normaltekst>
+                    <button className="knapp knapp--hoved blokk-s" onClick={() => setFeilemeldingOpen(false)}>
+                        Ok
+                    </button>
+                </div>
+            </VarselModal>
         );
     }
     return (
