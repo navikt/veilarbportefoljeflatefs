@@ -26,20 +26,20 @@ export default function FilterFeilModal(props: FilterFeilModalProps) {
             type={VarselModalType.FEIL}
             closeButton={false}
             onRequestClose={lukkModal}
+            portalClassName="filter-feil-modal"
+            className="filter-feil-modal__content"
         >
-            <div className="server-feil-modal">
-                <Undertittel tag="h1" className="blokk-xxs">
-                    Det oppstå en teknisk feil.
-                </Undertittel>
-                <Normaltekst className="blokk-s">
-                    Det er et problem med et eller flere filtere.
-                    <br />
-                    Prøv igjen senere.
-                </Normaltekst>
-                <button className="knapp knapp--hoved blokk-s" onClick={lukkModal}>
-                    Ok
-                </button>
-            </div>
+            <Undertittel tag="h1" className="blokk-xxs">
+                Det oppstå en teknisk feil.
+            </Undertittel>
+            <Normaltekst className="blokk-s">
+                Det er et problem med et eller flere filtere.
+                <br />
+                Prøv igjen senere.
+            </Normaltekst>
+            <button className="knapp knapp--hoved blokk-s" onClick={lukkModal}>
+                Ok
+            </button>
         </VarselModal>
     );
 }
