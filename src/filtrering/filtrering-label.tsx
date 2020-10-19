@@ -1,11 +1,10 @@
-import React, {MouseEvent, useState} from 'react';
+import React, {MouseEvent} from 'react';
 import {lagConfig} from './filter-konstanter';
 import {ReactComponent as FilterIkon} from './filtrering-veileder-grupper/filter-ikon.svg';
 import classNames from 'classnames';
 import './filtrering-label.less';
 import './filtrering-skjema.less';
-import {VarselModal, VarselModalType} from '../components/modal/varselmodal/varselmodal';
-import {Undertittel, Normaltekst} from 'nav-frontend-typografi';
+import FilterFeilModal from '../components/modal/filter-feil-modal';
 
 interface FiltreringLabelProps {
     label: string | {label: string};
@@ -32,28 +31,9 @@ function FiltreringLabel({
         {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne},
         {'slett-alle-filtervalg-knapp': slettAlleFiltervalg}
     );
-    const [feilemeldingOpen, setFeilemeldingOpen] = useState(true);
 
     if (label === undefined) {
-        return (
-            <VarselModal
-                contentLabel={'Feil med filter'}
-                isOpen={feilemeldingOpen}
-                type={VarselModalType.FEIL}
-                closeButton={false}
-                onRequestClose={() => setFeilemeldingOpen(false)}
-            >
-                <div className="server-feil-modal">
-                    <Undertittel tag="h1" className="blokk-xxs">
-                        Det er en teknisk feil ved et eller flere filter.
-                    </Undertittel>
-                    <Normaltekst className="blokk-s">Prøv igjen senere.</Normaltekst>
-                    <button className="knapp knapp--hoved blokk-s" onClick={() => setFeilemeldingOpen(false)}>
-                        Ok
-                    </button>
-                </div>
-            </VarselModal>
-        );
+        return (<FilterFeilModal isOpen={true}/>);
     }
     return (
         <button
