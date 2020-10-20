@@ -10,7 +10,7 @@ jobs:
   cypress-run:
     name: Cypress run
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/frontend-test'
+    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
