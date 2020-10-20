@@ -25,7 +25,7 @@ describe('Lag ny veiledergruppe', () => {
                 antallVeiledergrupper += Cypress.$(ant).length;
             })
     })
-    it('Det skal være riktig antall veiledergrupper', () => {
+    it('Det skal være riktig antall veiledergrupper ', () => {
         cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper);
     })
     it('Klikk på ny gruppe', () => {
