@@ -30,10 +30,10 @@ export default function FilterFeilModal(props: FilterFeilModalProps) {
             className="filter-feil-modal__content"
         >
             <Undertittel tag="h1" className="blokk-xxs">
-                Det oppstå en teknisk feil.
+                Det oppstod en teknisk feil.
             </Undertittel>
             <Normaltekst className="blokk-s">
-                Det er et problem med et eller flere filtere.
+                Det oppstod et problem med ett eller flere filter.
                 <br />
                 Prøv igjen senere.
             </Normaltekst>
