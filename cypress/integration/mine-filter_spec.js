@@ -1,17 +1,27 @@
 import React from "react";
 
 const mineFilterNavn = "Voff";
+const mineFilterNavnMinOversikt = "Bjeff";
 const mineFilterNavnRedigert = "Mjau";
 const forLangtFilterNavn = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum Lorem Ipsum.";
 const eksisterendeFilterNavn = "Denne brukes til test, la stå";
+let antallFilter = 0;
 
 describe('Lag nytt filter', () => {
     it('Start server', () => {
         cy.configure();
     })
-    it('Det skal være 5 filtre i Mine filter', () => {
+    it('Gå til Mine filter-tab', () => {
         cy.getByTestId('sidebar-tab_MINE_FILTER').click();
-        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', 5);
+    })
+    it('Finn antall filter', () => {
+        cy.get('[data-testid=mine-filter_rad-wrapper]')
+            .then(ant => {
+                antallFilter += Cypress.$(ant).length;
+            })
+    })
+    it('Det skal være riktig antall filter i Mine filter', () => {
+        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', antallFilter);
     })
     it('Klikk på status-tab', () => {
         cy.klikkTab("STATUS");
@@ -72,8 +82,8 @@ describe('Lag nytt filter', () => {
     it('Etikettene viser to filtervalg', () => {
         cy.getByTestId('filtreringlabel').should('have.length', 2);
     })
-    it('Det skal være 6 filtre i Mine filter', () => {
-        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', 6);
+    it('Det skal være riktig antall filter i Mine filter', () => {
+        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', antallFilter + 1);
     })
 })
 
@@ -93,8 +103,8 @@ describe('Rediger filternavn', () => {
     it('Etikettene viser to filtervalg', () => {
         cy.getByTestId('filtreringlabel').should('have.length', 2);
     })
-    it('Det skal være 6 filtre i Mine filter', () => {
-        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', 6);
+    it('Det skal være riktig antall filter i Mine filter', () => {
+        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', antallFilter + 1);
     })
 })
 
@@ -126,8 +136,8 @@ describe('Rediger filtervalg', () => {
     it('Etikettene viser Møte med NAV i dag', () => {
         cy.getByTestId('filtreringlabel').should('have.length', 1).contains("Møte med NAV idag");
     })
-    it('Det skal være 6 filtre i Mine filter', () => {
-        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', 6);
+    it('Det skal være riktig antall filter i Mine filter', () => {
+        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', antallFilter + 1);
     })
 })
 
@@ -142,8 +152,8 @@ describe('Slett lagret filter', () => {
         cy.wait(2000);
         cy.getByTestId('bekreft-sletting_modal_slett-knapp').click();
     })
-    it('Det skal være 5 filtre i Mine filter', () => {
-        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', 5);
+    it('Det skal være riktig antall filter i Mine filter', () => {
+        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', antallFilter);
     })
 })
 
@@ -174,6 +184,3 @@ xdescribe('Sjekk at drag and drop funker', () => {
 
     })
 })
-
-//TODO sjekk at filter som ikke skal være i min oversikt ikke er der
-//TODO sjekk at filter som ikke skal være i enhetens oversikt ikke er der

@@ -23,6 +23,21 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+Cypress.Commands.add("configure", () => {
+    cy.server();
+    cy.visit('/')
+    cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
+    Cypress.on('uncaught:exception', (err) => {
+        console.log(err);
+        return false;
+    })
+    cy.route({
+        method: 'GET',
+        url: '/veilarbportefoljeflatefs/api/feature'
+    })
+    cy.getByTestId('enhetens-oversikt').contains('Enhetens oversikt')
+        .should('exist');
+})
 
 Cypress.Commands.add('getByTestId', (selector, ...args) => {
     return cy.get(`[data-testid=${selector}]`, ...args);
@@ -36,22 +51,22 @@ Cypress.Commands.add("klikkTab", (tab) => {
 
     if (tab === "VEILEDERGRUPPER") {
         if (cy.getByTestId("sidebar_content-container").should("not.contain", Veiledergrupper)) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click();
+            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
         }
         cy.getByTestId("sidebar_content-container").contains(Veiledergrupper);
     } else if (tab === "MINE_FILTER") {
         if (cy.getByTestId("sidebar_content-container").should("not.contain", MineFilter)) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click();
+            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
         }
         cy.getByTestId("sidebar_content-container").contains(MineFilter);
     } else if (tab === "STATUS") {
         if (cy.getByTestId("sidebar_content-container").should("not.contain", Status)) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click();
+            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
         }
         cy.getByTestId("sidebar_content-container").contains(Status);
     } else if (tab === "FILTER") {
         if (cy.getByTestId("sidebar_content-container").should("not.contain", Filter)) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click();
+            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
         }
         cy.getByTestId("sidebar_content-container").contains(Filter);
     }
@@ -91,19 +106,4 @@ Cypress.Commands.add("checkboxLast", (testid) => {
     cy.getByTestId(testid).last().should("be.checked");
 })
 
-Cypress.Commands.add("configure", () => {
-    cy.server();
-    cy.visit('/')
-    cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
-    Cypress.on('uncaught:exception', (err) => {
-        console.log(err);
-        return false;
-    })
-    cy.route({
-        method: 'GET',
-        url: '/veilarbportefoljeflatefs/api/feature'
-    })
-    cy.getByTestId('enhetens-oversikt').contains('Enhetens oversikt')
-        .should('exist');
-})
 
