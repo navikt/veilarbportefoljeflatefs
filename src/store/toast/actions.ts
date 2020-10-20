@@ -37,3 +37,4 @@ export const fjernIngenEndringerToast = (): ToastAction =>
 
 export const fjernSorteringToast = (): ToastAction =>
     toastAction(ToastActionType.FJERN_SORTERING_TOAST);
+    

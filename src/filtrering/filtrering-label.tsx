@@ -4,28 +4,46 @@ import {ReactComponent as FilterIkon} from './filtrering-veileder-grupper/filter
 import classNames from 'classnames';
 import './filtrering-label.less';
 import './filtrering-skjema.less';
+import FilterFeilModal from '../components/modal/filter-feil-modal';
 
 interface FiltreringLabelProps {
-    label: string | { label: string };
+    label: string | {label: string};
     slettFilter: (event: MouseEvent<HTMLButtonElement>) => void;
     markert?: boolean;
     harMuligMenIkkeValgtKolonne?: boolean;
     skalHaKryssIkon?: boolean;
 }
 
-function FiltreringLabel({label, slettFilter, harMuligMenIkkeValgtKolonne = false, markert = false, skalHaKryssIkon = true}: FiltreringLabelProps) {
+function FiltreringLabel({
+    label,
+    slettFilter,
+    harMuligMenIkkeValgtKolonne = false,
+    markert = false,
+    skalHaKryssIkon = true
+}: FiltreringLabelProps) {
     const className = classNames('filtreringlabel__label', {'filtreringlabel-slett-filter': !skalHaKryssIkon});
     const arialLabel = skalHaKryssIkon ? 'Slett filter' : ' Slett alle filtervalg';
-    const slettAlleFiltervalg = arialLabel === " Slett alle filtervalg";
-    const buttonClassnames = classNames('filtreringlabel', 'typo-undertekst', {'filtreringlabel--markert': markert}, {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne}, {'slett-alle-filtervalg-knapp': slettAlleFiltervalg});
+    const slettAlleFiltervalg = arialLabel === ' Slett alle filtervalg';
+    const buttonClassnames = classNames(
+        'filtreringlabel',
+        'typo-undertekst',
+        {'filtreringlabel--markert': markert},
+        {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne},
+        {'slett-alle-filtervalg-knapp': slettAlleFiltervalg}
+    );
+
+    if (label === undefined) {
+        return (<FilterFeilModal isOpen={true}/>);
+    }
     return (
         <button
             title={lagConfig(label).label}
             aria-label={arialLabel}
             className={buttonClassnames}
-            onClick={slettFilter}>
+            onClick={slettFilter}
+        >
             <span className={className}>{lagConfig(label).label}</span>
-            {skalHaKryssIkon && <FilterIkon/>}
+            {skalHaKryssIkon && <FilterIkon />}
         </button>
     );
 }
