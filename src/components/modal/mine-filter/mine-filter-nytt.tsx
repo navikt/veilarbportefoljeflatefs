@@ -15,7 +15,7 @@ import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
 
-export function LagreNyttMineFilter(props: {filtergruppe: string; lukkModal}) {
+export function LagreNyttMineFilter(props: { filtergruppe: string; lukkModal }) {
     const filterValg = useSelector((state: AppState) =>
         props.filtergruppe === ListevisningType.minOversikt
             ? state.filtreringMinoversikt
@@ -52,7 +52,8 @@ export function LagreNyttMineFilter(props: {filtergruppe: string; lukkModal}) {
 
     return (
         <>
-            <form onSubmit={(e) => doLagreNyttFilter(e)}>
+            <form onSubmit={(e) => doLagreNyttFilter(e)}
+                  data-testid="lagre-nytt-filter_modal_form">
                 <Normaltekst className="blokk-xs">Du vil finne igjen filteret under "Mine filter".</Normaltekst>
                 <Input
                     label="Navn:"
@@ -60,7 +61,6 @@ export function LagreNyttMineFilter(props: {filtergruppe: string; lukkModal}) {
                     onChange={(e) => setFilterNavn(e.target.value)}
                     feil={feilmelding.filterNavn}
                     autoFocus
-                    maxLength={255}
                     data-testid="lagre-nytt-filter_modal_navn-input"
                 />
                 <div className="lagret-filter-knapp-wrapper">

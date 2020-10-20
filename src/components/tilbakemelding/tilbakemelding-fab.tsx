@@ -1,11 +1,11 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import './tilbakemelding-fab.less';
-import { sjekkFeature } from '../../ducks/features';
-import { SPOR_OM_TILBAKEMELDING } from '../../konstanter';
-import TilbakemeldingModal, { Tilbakemelding } from './tilbakemelding-modal';
-import { logEvent } from '../../utils/frontend-logger';
+import {sjekkFeature} from '../../ducks/features';
+import {SPOR_OM_TILBAKEMELDING} from '../../konstanter';
+import TilbakemeldingModal, {Tilbakemelding} from './tilbakemelding-modal';
+import {logEvent} from '../../utils/frontend-logger';
 
 // FAB = Floating Action Button
 
@@ -97,7 +97,8 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
                 this.wrapperRef = ref;
             }}>
                 <div className={classNames('tilbakemelding-fab', {'tilbakemelding-fab__trykket': isModalOpen})}
-                     onClick={this.handleFabClicked}>
+                     onClick={this.handleFabClicked}
+                     data-testid={isModalOpen ? 'tilbakemelding_fab_knapp_trykket' : 'tilbakemelding_fab_knapp'}>
                     <img
                         alt="Åpne/Lukk tilbakemeldingform"
                         className={classNames({

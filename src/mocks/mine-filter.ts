@@ -18,7 +18,7 @@ export const mineFilter = () => {
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
                 sortOrder: null,
             }, {
-                filterNavn: '2. Test',
+                filterNavn: 'Denne brukes til test, la stå',
                 filterId: 3,
                 filterValg: { ...initialState, kjonn: "K", formidlingsgruppe: ["ARBS"] },
                 opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
