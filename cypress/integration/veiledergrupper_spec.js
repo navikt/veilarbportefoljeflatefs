@@ -32,8 +32,9 @@ describe('Lag ny veiledergruppe', () => {
         cy.getByTestId('veiledergruppe_ny-gruppe_knapp').click();
     })
     it('Søk veileder', () => {
-        cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(andersen);
         cy.getByTestId('veiledergruppe_modal_gruppenavn-input').clear();
+        cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(andersen);
+        cy.getByTestId('veiledergruppe_modal_sok-veileder-input').should('have.value', andersen);
     })
     it('Velg søkt veileder', () => {
         cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({force: true});

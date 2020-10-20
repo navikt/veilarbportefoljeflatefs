@@ -43,6 +43,25 @@ Cypress.Commands.add('getByTestId', (selector, ...args) => {
     return cy.get(`[data-testid=${selector}]`, ...args);
 });
 
+Cypress.Commands.add("gaTilOversikt", (side) => {
+    if (side === 'min-oversikt') {
+        if (cy.getByTestId(side).should("not.have.class", ".oversiktslenke--valgt")) {
+            cy.getByTestId(side).click({force: true});
+        }
+        cy.url().should('include', '/veilarbportefoljeflatefs/portefolje')
+    } else if (side === 'enhetens-oversikt') {
+        if (cy.getByTestId(side).should("not.have.class", ".oversiktslenke--valgt")) {
+            cy.getByTestId(side).click({force: true})
+        }
+        cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
+    } else if (side === 'veileder-oversikt') {
+        if (cy.getByTestId(side).should("not.have.class", ".oversiktslenke--valgt")) {
+            cy.getByTestId(side).click({force: true})
+        }
+        cy.url().should('include', '/veilarbportefoljeflatefs/veiledere')
+    }
+})
+
 Cypress.Commands.add("klikkTab", (tab) => {
     const Status = "Status";
     const Filter = "Filter";
@@ -69,25 +88,6 @@ Cypress.Commands.add("klikkTab", (tab) => {
             cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
         }
         cy.getByTestId("sidebar_content-container").contains(Filter);
-    }
-})
-
-Cypress.Commands.add("gaTilOversikt", (side) => {
-    if (side === 'min-oversikt') {
-        if (cy.getByTestId(side).should("not.have.class", ".oversiktslenke--valgt")) {
-            cy.getByTestId(side).click({force: true});
-        }
-        cy.url().should('include', '/veilarbportefoljeflatefs/portefolje')
-    } else if (side === 'enhetens-oversikt') {
-        if (cy.getByTestId(side).should("not.have.class", ".oversiktslenke--valgt")) {
-            cy.getByTestId(side).click({force: true})
-        }
-        cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
-    } else if (side === 'veileder-oversikt') {
-        if (cy.getByTestId(side).should("not.have.class", ".oversiktslenke--valgt")) {
-            cy.getByTestId(side).click({force: true})
-        }
-        cy.url().should('include', '/veilarbportefoljeflatefs/veiledere')
     }
 })
 
