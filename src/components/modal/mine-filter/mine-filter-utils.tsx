@@ -54,8 +54,7 @@ export function feilValidering(filterNavn, filterValg, eksisterendeFilter, filte
     let feilmelding: any = {} as LagretFilterValideringsError
 
     filterNavn = filterNavn.trim();
-
-    console.log("lngde", filterNavn.length)
+    filterNavn = filterNavn.trim();
 
     if (!filterNavn) {
         feilmelding.filterNavn = "Filteret mangler navn."

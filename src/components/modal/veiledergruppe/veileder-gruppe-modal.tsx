@@ -143,16 +143,16 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         gruppeNavn: v.filterNavn
     }));
 
-    useEffect(()=>{
-        if (lagredeGrupper.length > 0 && erTomtObjekt(errors) && props.isOpen && props.initialVerdi.filterCleanup){
+    useEffect(() => {
+        if (lagredeGrupper.length > 0 && erTomtObjekt(errors) && props.isOpen && props.initialVerdi.filterCleanup) {
             const finnLikVeilederGruppe = lagredeGrupper.find(v => veilederlisterErLik(v.filterValg.veiledere, props.initialVerdi.filterValg.veiledere));
-            if (finnLikVeilederGruppe !== undefined){
-                const errorTekst = "En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '"+finnLikVeilederGruppe.filterNavn+"'. Du må legge til/fjerne veiledere eller slette gruppen."
+            if (finnLikVeilederGruppe !== undefined) {
+                const errorTekst = `En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '${finnLikVeilederGruppe.filterNavn}'. Du må legge til/fjerne veiledere eller slette gruppen.`
                 setAlertTekst(errorTekst)
                 setErrors({filterValg: errorTekst} as VeilederGruppeErrors);
             }
         }
-    },[lagredeGrupper, props.initialVerdi, props.isOpen, errors])
+    }, [lagredeGrupper, props.initialVerdi, props.isOpen, errors])
 
     const validate = (gruppeNavn, filterValg) => {
         let errors: any = {};
@@ -191,7 +191,8 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                 portalClassName="veiledergruppe-modal"
             >
                 <ModalHeader tittel={props.modalTittel}/>
-                <HiddenIfAlertStripe hidden={alertTekst.length === 0} className="alerttext">{alertTekst}</HiddenIfAlertStripe>
+                <HiddenIfAlertStripe hidden={alertTekst.length === 0}
+                                     className="alerttext">{alertTekst}</HiddenIfAlertStripe>
                 <VeilederGruppeForm
                     filterValg={filterValg}
                     gruppeNavn={gruppeNavn}
