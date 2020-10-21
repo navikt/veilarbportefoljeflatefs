@@ -1,7 +1,7 @@
 @import "./listevisning/listevisning";
 @import "../dropdown/dropdown.less";
 
-@bakgrunnsGra: #F4F4F4;
+@bakgrunnsGra: #f4f4f4;
 
 .veilarbportefoljeflatefs {
   .visuallyhidden {
@@ -15,7 +15,7 @@
     position: sticky;
     top: 0;
     border: none;
-    background-color: #F4F4F4;
+    background-color: #f4f4f4;
     justify-content: space-between;
   }
 
@@ -26,7 +26,7 @@
     border-radius: @border-radius-base @border-radius-base 0 0;
     background-color: @bakgrunnsGra;
     z-index: 1000;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
     justify-content: space-between;
 
     .nav-frontend-chevron span {
@@ -38,9 +38,8 @@
     }
 
     #tildel-veileder-ikon {
-      margin-right: .3rem;
+      margin-right: 0.3rem;
     }
-
 
     &-knapp__ikon {
       min-width: 1.5rem;
@@ -48,7 +47,7 @@
     }
 
     &-knapp__tekst {
-      padding-right: .5rem;
+      padding-right: 0.5rem;
     }
 
     &__element {
@@ -57,14 +56,15 @@
     }
 
     .tildel-veileder-wrapper {
-      margin-right: .5rem;
+      margin-right: 0.5rem;
     }
 
     &__paginering {
       width: 24rem;
     }
 
-    .sok-veileder-wrapper, .tildel-veileder-wrapper {
+    .sok-veileder-wrapper,
+    .tildel-veileder-wrapper {
       width: 186px;
 
       .toolbarknapp-input {
@@ -73,10 +73,11 @@
         }
 
         .checkbox-filterform__under-valg {
-          padding-top: .5rem;
+          padding-top: 0.5rem;
         }
 
-        .checkbox-filterform, .radio-filterform {
+        .checkbox-filterform,
+        .radio-filterform {
           position: absolute;
           z-index: 2000;
           background-color: @white;
@@ -84,7 +85,7 @@
           border-top: none;
           border-radius: 0 0 4px 4px;
           width: 190px;
-          margin-right: .5rem;
+          margin-right: 0.5rem;
 
           &__valg {
             margin: 0;
@@ -92,13 +93,13 @@
             max-height: 15.5rem;
 
             .skjemaelement {
-              margin-bottom: .5rem;
+              margin-bottom: 0.5rem;
             }
           }
         }
 
         .alertstripe {
-          padding: 1rem .7rem;
+          padding: 1rem 0.7rem;
           z-index: 2000;
           position: absolute;
         }
@@ -158,7 +159,8 @@
     }
 
     .dropdown__btnwrapper {
-      &:before, &:after {
+      &:before,
+      &:after {
         .chevronline-mixin(0.75rem);
         top: 50%;
       }
@@ -195,7 +197,7 @@
 
   .toolbar_btn {
     border: 1px solid transparent;
-    padding: .5rem;
+    padding: 0.5rem;
     height: 100%;
     margin: 0 0.5rem 0 0;
     position: relative;
@@ -206,7 +208,9 @@
     flex-direction: row;
 
     &:disabled {
-      #arbeidsliste-svg, #tildel-veileder-ikon, #sok-veileder-ikon {
+      #arbeidsliste-svg,
+      #tildel-veileder-ikon,
+      #sok-veileder-ikon {
         opacity: 0.4;
       }
 

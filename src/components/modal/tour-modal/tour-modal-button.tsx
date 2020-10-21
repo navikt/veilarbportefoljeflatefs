@@ -1,38 +1,40 @@
-import {default as React, useState} from 'react';
-import {default as TourModal, ModalName} from './tour-modal';
-import {Knapp} from 'nav-frontend-knapper';
-import {logEvent} from '../../../utils/frontend-logger';
-import './tour-modal.less';
-import classNames from 'classnames';
+import { default as React, useState } from "react";
+import { default as TourModal, ModalName } from "./tour-modal";
+import { Knapp } from "nav-frontend-knapper";
+import { logEvent } from "../../../utils/frontend-logger";
+import "./tour-modal.less";
+import classNames from "classnames";
 
 interface ModalStepperProps {
-    modal: ModalName;
-    metrikknavn: string;
-    knappeTekst?: string;
-    className?: string;
-    systemtittel?: string;
+  modal: ModalName;
+  metrikknavn: string;
+  knappeTekst?: string;
+  className?: string;
+  systemtittel?: string;
 }
 
 export default function TourModalButton(props: ModalStepperProps) {
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-    return (
-        <>
-            <Knapp className={classNames('endringslogg-stepperKnapp', props.className)}
-                   mini
-                   data-testid='endringslogg_se-hvordan-knapp'
-                   onClick={() => {
-                       setOpen(true);
-                       logEvent(props.metrikknavn);
-                   }}>
-                {props.knappeTekst ? props.knappeTekst : 'Se hvordan'}
-            </Knapp>
-            <TourModal
-                open={open}
-                modalName={props.modal}
-                onClose={() => setOpen(false)}
-                systemtittel={props.systemtittel}
-            />
-        </>
-    );
+  return (
+    <>
+      <Knapp
+        className={classNames("endringslogg-stepperKnapp", props.className)}
+        mini
+        data-testid="endringslogg_se-hvordan-knapp"
+        onClick={() => {
+          setOpen(true);
+          logEvent(props.metrikknavn);
+        }}
+      >
+        {props.knappeTekst ? props.knappeTekst : "Se hvordan"}
+      </Knapp>
+      <TourModal
+        open={open}
+        modalName={props.modal}
+        onClose={() => setOpen(false)}
+        systemtittel={props.systemtittel}
+      />
+    </>
+  );
 }

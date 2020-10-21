@@ -1,29 +1,32 @@
-import React from 'react';
-import BarInputGruppe from '../../../components/barinput/barinput-gruppe';
-import { BarInputRadio } from '../../../components/barinput/barinput-radio';
-import { VENTER_PA_SVAR_FRA_BRUKER, VENTER_PA_SVAR_FRA_NAV } from '../../filter-konstanter';
-import { FiltreringStatusGruppe } from './ufordelte-brukere';
-import { useStatusTallSelector } from '../../../hooks/redux/use-statustall';
+import React from "react";
+import BarInputGruppe from "../../../components/barinput/barinput-gruppe";
+import { BarInputRadio } from "../../../components/barinput/barinput-radio";
+import {
+  VENTER_PA_SVAR_FRA_BRUKER,
+  VENTER_PA_SVAR_FRA_NAV
+} from "../../filter-konstanter";
+import { FiltreringStatusGruppe } from "./ufordelte-brukere";
+import { useStatusTallSelector } from "../../../hooks/redux/use-statustall";
 
 export function FiltreringStatusDialog(props: FiltreringStatusGruppe) {
-    const statusTall = useStatusTallSelector();
+  const statusTall = useStatusTallSelector();
 
-    return (
-        <BarInputGruppe>
-            <BarInputRadio
-                filterNavn="venterPaSvarFraNAV"
-                antall={statusTall.venterPaSvarFraNAV}
-                handleChange={props.handleChange}
-                checked={props.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
-                max={statusTall.totalt}
-            />
-            <BarInputRadio
-                filterNavn="venterPaSvarFraBruker"
-                antall={statusTall.venterPaSvarFraBruker}
-                handleChange={props.handleChange}
-                checked={props.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
-                max={statusTall.totalt}
-            />
-        </BarInputGruppe>
-    );
+  return (
+    <BarInputGruppe>
+      <BarInputRadio
+        filterNavn="venterPaSvarFraNAV"
+        antall={statusTall.venterPaSvarFraNAV}
+        handleChange={props.handleChange}
+        checked={props.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
+        max={statusTall.totalt}
+      />
+      <BarInputRadio
+        filterNavn="venterPaSvarFraBruker"
+        antall={statusTall.venterPaSvarFraBruker}
+        handleChange={props.handleChange}
+        checked={props.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
+        max={statusTall.totalt}
+      />
+    </BarInputGruppe>
+  );
 }

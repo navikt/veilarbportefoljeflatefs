@@ -1,40 +1,40 @@
-import {FiltervalgModell} from "../model-interfaces";
+import { FiltervalgModell } from "../model-interfaces";
 
 export interface LagretFilter {
-    filterNavn: string;
-    filterId: number;
-    filterValg: FiltervalgModell;
-    opprettetDato: Date;
-    sortOrder: number | null;
-    filterCleanup: boolean
+  filterNavn: string;
+  filterId: number;
+  filterValg: FiltervalgModell;
+  opprettetDato: Date;
+  sortOrder: number | null;
+  filterCleanup: boolean;
 }
 
 export interface LagretFilterState {
-    status: string;
-    data: LagretFilter[];
-    handlingType: HandlingsType | null;
+  status: string;
+  data: LagretFilter[];
+  handlingType: HandlingsType | null;
 }
 
 export interface RedigerLagretFilter {
-    filterNavn: string;
-    filterValg: FiltervalgModell;
-    filterId: number;
+  filterNavn: string;
+  filterValg: FiltervalgModell;
+  filterId: number;
 }
 
 export interface NyttLagretFilter {
-    filterNavn: string;
-    filterValg: FiltervalgModell;
+  filterNavn: string;
+  filterValg: FiltervalgModell;
 }
 
 export interface SorteringOgId {
-    sortOrder: number;
-    filterId: number;
+  sortOrder: number;
+  filterId: number;
 }
 
 export enum HandlingsType {
-    NYTT,
-    REDIGERE,
-    SLETTE,
-    HENTE,
-    SORTERING
+  NYTT,
+  REDIGERE,
+  SLETTE,
+  HENTE,
+  SORTERING
 }

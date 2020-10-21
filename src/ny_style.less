@@ -1,7 +1,7 @@
 @import "tabell";
-@import '~nav-frontend-core/less/_variabler';
+@import "~nav-frontend-core/less/_variabler";
 
-@bakgrunnsGra: #F4F4F4;
+@bakgrunnsGra: #f4f4f4;
 
 body {
   margin: 0;
@@ -23,7 +23,7 @@ body {
     margin: 0 auto;
     height: 100%;
     max-height: 8rem;
-    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, .5);
+    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
   }
 
   @media (max-width: 870px) {
@@ -58,7 +58,6 @@ html {
 @import "~nav-frontend-lenker-style/src/lenker-style";
 @import "~nav-frontend-hjelpetekst-style/src/hjelpetekst-style";
 @import "./forslag_nav_frontend"; // TODO Vi bør se det som ligger her, og evt. få det inn i NF.
-
 
 .veilarbportefoljeflatefs {
   @import "./components/barinput/barlabel";
@@ -147,7 +146,7 @@ html {
   grid-template-rows: auto auto auto;
 
   .tabelloverskrift__ny {
-    padding-top: .3rem;
+    padding-top: 0.3rem;
     background-color: @bakgrunnsGra;
     grid-column-start: 1;
     grid-column-end: 3;
@@ -158,7 +157,7 @@ html {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row: 2;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   }
 
   .brukerliste__header {
@@ -175,7 +174,7 @@ html {
 
 .sticky-skygge__ny::before,
 .sticky-skygge__ny::after {
-  content: '';
+  content: "";
   display: block;
   height: 16px;
   position: sticky;
@@ -196,7 +195,7 @@ html {
 }
 
 .skjemaelement {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .veilarbportefoljeflatefs {
@@ -232,7 +231,8 @@ html {
       grid-column: 1;
     }
 
-    .ny__filtrering-label-container, .ny__filtrering-label-container__annen-veileder {
+    .ny__filtrering-label-container,
+    .ny__filtrering-label-container__annen-veileder {
       grid-row: 2;
       grid-column-start: 2;
       grid-column-end: 3;

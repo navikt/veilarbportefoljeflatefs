@@ -1,155 +1,154 @@
 @import "~nav-frontend-core/less/core";
 
 .modal {
+  padding: 0;
+  border-radius: 3px;
+
+  .modal-innhold {
+    padding: 0 2rem;
+
+    .feedbacksummary {
+      margin: 0 2rem 1rem 2rem;
+      padding: 1.5rem;
+      border-radius: 4px;
+      background-color: @redError;
+      color: @white;
+      list-style-position: inside;
+
+      &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 3px @fokusFarge;
+      }
+
+      a {
+        color: @white;
+        border-bottom: 1px solid @white;
+        text-decoration: none;
+      }
+    }
+
+    .arbeidsliste {
+      &__info-tekst {
+        margin-bottom: 0;
+        font-style: italic;
+      }
+    }
+
+    .arbeidsliste__bruker {
+      border-bottom: 1px solid @navGra40;
+      margin-bottom: 1rem;
+    }
+
+    .arbeidslistekommentar {
+      width: 100%;
+      padding-bottom: 0.6rem;
+    }
+
+    .typo-undertittel {
+      margin-bottom: 0.5rem;
+    }
+
+    .skjemaelement--harFeil textarea {
+      margin-bottom: 0.5rem;
+    }
+
+    .knapp--hoved {
+      margin-right: 1rem;
+    }
+
+    .datovelger__DayPicker {
+      top: -15rem;
+    }
+
+    .skjemaelement__label {
+      font-weight: 400;
+    }
+
+    .modal-footer {
+      display: flex;
+      padding: 0.5rem 0 1.5rem 0;
+
+      .fjern--knapp {
+        margin-left: auto;
+
+        svg {
+          stroke: @navGra60;
+          margin-right: 0.3rem;
+          margin-bottom: -0.2rem;
+        }
+
+        span {
+          margin-left: 0.5rem;
+        }
+      }
+    }
+
+    .arbeidsliste--modal-redigering {
+      margin-bottom: 0.625rem;
+    }
+  }
+
+  .innhold {
+    padding: 1.7rem 2rem;
+  }
+
+  .tom-portefolje-modal {
     padding: 0;
-    border-radius: 3px;
-
-    .modal-innhold {
-        padding: 0 2rem;
-
-        .feedbacksummary {
-            margin: 0 2rem 1rem 2rem;
-            padding: 1.5rem;
-            border-radius: 4px;
-            background-color: @redError;
-            color: @white;
-            list-style-position: inside;
-
-            &:focus {
-                outline: 0;
-                box-shadow: 0 0 0 3px @fokusFarge;
-            }
-
-            a {
-                color: @white;
-                border-bottom: 1px solid @white;
-                text-decoration: none;
-            }
-        }
-
-        .arbeidsliste {
-            &__info-tekst {
-                margin-bottom: 0;
-                font-style: italic;
-            }
-        }
-
-        .arbeidsliste__bruker {
-            border-bottom: 1px solid @navGra40;
-            margin-bottom: 1rem;
-        }
-
-        .arbeidslistekommentar {
-            width: 100%;
-            padding-bottom: 0.6rem;
-        }
-
-        .typo-undertittel {
-            margin-bottom: 0.5rem;
-        }
-
-        .skjemaelement--harFeil textarea {
-            margin-bottom: 0.5rem;
-        }
-
-        .knapp--hoved {
-            margin-right: 1rem;
-        }
-
-        .datovelger__DayPicker {
-            top: -15rem;
-        }
-
-        .skjemaelement__label {
-            font-weight: 400;
-        }
-
-        .modal-footer {
-            display: flex;
-            padding: .5rem 0 1.5rem 0;
-
-            .fjern--knapp {
-                margin-left: auto;
-
-                svg {
-                    stroke: @navGra60;
-                    margin-right: .3rem;
-                    margin-bottom: -.2rem;
-                }
-
-                span {
-                    margin-left: .5rem;
-                }
-            }
-        }
-
-        .arbeidsliste--modal-redigering {
-            margin-bottom: 0.625rem;
-        }
-    }
-
-    .innhold {
-        padding: 1.7rem 2rem;
-    }
-
-
-    .tom-portefolje-modal {
-        padding: 0;
-        width: 50%;
-        background-color: @grayBackground;
-    }
+    width: 50%;
+    background-color: @grayBackground;
+  }
 }
 
 .arbeidsliste-modal {
-    position: relative;
-    background-color: #F4F4F4;
-    outline: none;
-    max-width: 50rem;
-    padding: 0;
-    width: 100%;
+  position: relative;
+  background-color: #f4f4f4;
+  outline: none;
+  max-width: 50rem;
+  padding: 0;
+  width: 100%;
 }
 
 .arbeidsliste--rediger-lenke {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 
 .fjern-arbeidsliste {
-    padding: 1.5rem 0;
+  padding: 1.5rem 0;
 
-    .arbeidsliste-headertekst {
-        text-align: center;
+  .arbeidsliste-headertekst {
+    text-align: center;
+  }
+
+  .arbeidsliste-listetekst {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .arbeidsliste-listetekst__lang {
+    max-height: 30rem;
+    overflow-y: scroll;
+    border-top: 1px solid @navGra40;
+    border-bottom: 1px solid @navGra40;
+    margin: 0 4rem 1rem;
+
+    ul {
+      margin-top: 0;
     }
+  }
 
-    .arbeidsliste-listetekst {
-        width: 60%;
-        margin: 0 auto;
-    }
-
-    .arbeidsliste-listetekst__lang {
-        max-height: 30rem;
-        overflow-y: scroll;
-        border-top: 1px solid @navGra40;
-        border-bottom: 1px solid @navGra40;
-        margin: 0 4rem 1rem;
-
-        ul {
-            margin-top: 0;
-        }
-    }
-
-    .knapper {
-        display: flex;
-        justify-content: center;
-        margin: 0 6rem;
-    }
+  .knapper {
+    display: flex;
+    justify-content: center;
+    margin: 0 6rem;
+  }
 }
 
 .dato-kategori-wrapper {
-    display: grid;
-    grid-template-columns: 60% 40%;
-    margin-bottom: .5rem;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin-bottom: 0.5rem;
 
-    .datovelger {
-        margin: 0 0 auto 0;
-    }
+  .datovelger {
+    margin: 0 0 auto 0;
+  }
 }

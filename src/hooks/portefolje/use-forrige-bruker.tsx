@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import { getFraBrukerFraUrl } from '../../utils/url-utils';
-import {OrNothing} from "../../utils/types/types";
+import { useEffect, useState } from "react";
+import { getFraBrukerFraUrl } from "../../utils/url-utils";
+import { OrNothing } from "../../utils/types/types";
 
 export function useForrigeBruker() {
-    const [forrigeBruker, setForrigeBruker]= useState<OrNothing<string>>(null);
+  const [forrigeBruker, setForrigeBruker] = useState<OrNothing<string>>(null);
 
-    useEffect(() => {
-        const forrigeBrukerFraUrl = getFraBrukerFraUrl();
-        setForrigeBruker(forrigeBrukerFraUrl);
-    },[forrigeBruker]);
+  useEffect(() => {
+    const forrigeBrukerFraUrl = getFraBrukerFraUrl();
+    setForrigeBruker(forrigeBrukerFraUrl);
+  }, [forrigeBruker]);
 
-    return forrigeBruker;
+  return forrigeBruker;
 }
