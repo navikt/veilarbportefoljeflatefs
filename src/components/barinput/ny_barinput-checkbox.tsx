@@ -1,7 +1,7 @@
 import React, {ChangeEventHandler} from 'react';
 import {ferdigfilterListe, mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
 import './barlabel.less';
-import NyBarInput from "./ny_barinput";
+import NyBarInput from './ny_barinput';
 
 interface BarInputCheckboxProps {
     filterNavn: string;

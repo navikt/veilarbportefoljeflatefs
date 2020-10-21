@@ -1,25 +1,22 @@
 import React, {useCallback} from 'react';
-import NAVSPA from "@navikt/navspa";
-import {DecoratorProps, EnhetDisplay, FnrDisplay} from "./utils/types/decorator-props";
-import {useDispatch} from "react-redux";
-import {oppdaterValgtEnhet} from "./ducks/valgt-enhet";
-import {useEnhetSelector} from "./hooks/redux/use-enhet-selector";
+import NAVSPA from '@navikt/navspa';
+import {DecoratorProps, EnhetDisplay, FnrDisplay} from './utils/types/decorator-props';
+import {useDispatch} from 'react-redux';
+import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
+import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 
 const RESET_VALUE = '\u0000';
 const InternflateDecorator = NAVSPA.importer<DecoratorProps>('internarbeidsflatefs');
 
-function getConfig (
-    enhet: string | null,
-    settValgtEnhet: (enhet) => void,
-): DecoratorProps {
+function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): DecoratorProps {
     return {
         appname: 'Arbeidsrettet oppfølging',
         fnr: {
             initialValue: RESET_VALUE,
             display: FnrDisplay.SOKEFELT,
             ignoreWsEvents: true,
-            onChange: (value) => {
-                if(value) {
+            onChange: value => {
+                if (value) {
                     window.location.pathname = `veilarbpersonflatefs/${value}`;
                 }
             }
@@ -30,13 +27,13 @@ function getConfig (
         enhet: {
             initialValue: enhet,
             display: EnhetDisplay.ENHET_VALG,
-            onChange: (value) => {
-                if(value){
+            onChange: value => {
+                if (value) {
                     settValgtEnhet(value);
                 }
             }
         }
-    }
+    };
 }
 
 export function Decorator() {
@@ -48,8 +45,5 @@ export function Decorator() {
 
     const config = useCallback(getConfig, [enhetId, velgEnhet])(enhetId, velgEnhet);
 
-    return (
-        <InternflateDecorator {...config}/>
-    )
-
+    return <InternflateDecorator {...config} />;
 }

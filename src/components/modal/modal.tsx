@@ -25,10 +25,8 @@ function Modal({children, className, contentLabel, isOpen = true, onRequestClose
             portalClassName="veilarbportefoljeflatefs-modal"
             closeButton={true}
         >
-            <ModalHeader tittel={tittel}/>
-            <div className="modal-innhold">
-                {children}
-            </div>
+            <ModalHeader tittel={tittel} />
+            <div className="modal-innhold">{children}</div>
         </NavFrontendModal>
     );
 }

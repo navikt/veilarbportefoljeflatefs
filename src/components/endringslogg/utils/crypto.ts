@@ -9,7 +9,7 @@ declare global {
         msCrypto: {
             subtle: {
                 digest(algoritm: string, data: Uint8Array): MsCryptoOperation;
-            }
+            };
         };
     }
 }
@@ -31,7 +31,7 @@ export function getCrypto(): CompatCrypto {
                     return digest;
                 }
 
-                const msDigest = (digest as unknown as MsCryptoOperation);
+                const msDigest = (digest as unknown) as MsCryptoOperation;
                 return new Promise((resolve, reject) => {
                     msDigest.oncomplete = () => resolve(msDigest.result);
                     msDigest.onerror = () => reject(Error('Kunde ikke hashe veileder id'));

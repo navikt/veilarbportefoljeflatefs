@@ -29,7 +29,7 @@ function SidebarTab({tittel, handleClick, meta, children, tab}: StatusTabProps) 
                 </div>
                 {meta && <div className="sidebar-header__meta">{meta}</div>}
                 <div className="sidebar-header__lukknapp">
-                    <Lukknapp overstHjorne onClick={lukkTab}/>
+                    <Lukknapp overstHjorne onClick={lukkTab} />
                 </div>
             </div>
             {children}

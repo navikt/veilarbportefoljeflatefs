@@ -1,11 +1,6 @@
 import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
-import {
-    PORTEFOLJE_FEATURES,
-    SPOR_OM_TILBAKEMELDING,
-    VEDTAKSTOTTE,
-    REDESIGN
-} from '../konstanter';
+import {PORTEFOLJE_FEATURES, SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE, REDESIGN} from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
 
@@ -16,7 +11,7 @@ export interface FeaturesState {
 const initalState: FeaturesState = {
     [SPOR_OM_TILBAKEMELDING]: false,
     [VEDTAKSTOTTE]: false,
-    [REDESIGN]: false,
+    [REDESIGN]: false
 };
 
 // Reducer
@@ -34,15 +29,14 @@ export default function reducer(state: FeaturesState = initalState, action): Fea
 
 // Action Creators
 export function hentFeaturesFraUnleash() {
-    const featureQueryString = PORTEFOLJE_FEATURES
-        .map((feature) => `feature=${feature}`)
-        .join('&');
-    return (dispatch) => {
-        hentFeatures(featureQueryString)
-            .then((json) => dispatch({
+    const featureQueryString = PORTEFOLJE_FEATURES.map(feature => `feature=${feature}`).join('&');
+    return dispatch => {
+        hentFeatures(featureQueryString).then(json =>
+            dispatch({
                 type: ADD_FEATURE,
                 features: json
-            }));
+            })
+        );
     };
 }
 

@@ -1,4 +1,3 @@
-
 export const logEvent = (logTag: string, fields?: {}, tags?: {}): void => {
     const frontendlogger = (window as any).frontendlogger;
 

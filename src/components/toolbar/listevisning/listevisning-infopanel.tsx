@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Lukknapp from 'nav-frontend-lukknapp';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { AppState } from '../../../reducer';
-import { ListevisningType, lukkInfopanel } from '../../../ducks/ui/listevisning';
-import { selectMuligeAlternativer } from '../../../ducks/ui/listevisning-selectors';
-import { ReactComponent as Ikon } from './info-ikon.svg';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {AppState} from '../../../reducer';
+import {ListevisningType, lukkInfopanel} from '../../../ducks/ui/listevisning';
+import {selectMuligeAlternativer} from '../../../ducks/ui/listevisning-selectors';
+import {ReactComponent as Ikon} from './info-ikon.svg';
 import './listevisning.less';
 
 interface StateProps {
@@ -30,12 +30,13 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
     return (
         <div className="alertstripe alertstripe--solid alertstripe--info blokk-m">
             <span className="alertstripe__ikon" aria-label="info">
-                <Ikon/>
+                <Ikon />
             </span>
             <div className="listevisning--infopanel" aria-live="assertive" role="alert" aria-atomic="true">
                 <span> Du kan kun se fem kolonner av gangen. Klikk på “Velg Kolonner” og velg det du ønsker å se.</span>
-                <Lukknapp className="listevisning--infopanel__lukkKnapp"
-                          onClick={() => props.lukkPanel(props.name)}>Lukk</Lukknapp>
+                <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={() => props.lukkPanel(props.name)}>
+                    Lukk
+                </Lukknapp>
             </div>
         </div>
     );
@@ -56,10 +57,13 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-const mapActionsToProps = (dispatch) => {
-    return bindActionCreators({
-        lukkPanel: lukkInfopanel
-    }, dispatch);
+const mapActionsToProps = dispatch => {
+    return bindActionCreators(
+        {
+            lukkPanel: lukkInfopanel
+        },
+        dispatch
+    );
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(ListevisningInfoPanel);

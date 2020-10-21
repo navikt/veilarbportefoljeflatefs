@@ -1,71 +1,71 @@
 @import '~nav-frontend-core/less/_variabler';
 
-@bakgrunnsGra: #F4F4F4;
+@bakgrunnsGra: #f4f4f4;
 
 .veilarbportefoljeflatefs {
-  .minoversikt-liste__wrapper {
-    background-color: @bakgrunnsGra;
-    border-top: none;
-    border-bottom: none;
-    border-radius: 0 0 @border-radius-base @border-radius-base;
-    margin-bottom: 0;
+    .minoversikt-liste__wrapper {
+        background-color: @bakgrunnsGra;
+        border-top: none;
+        border-bottom: none;
+        border-radius: 0 0 @border-radius-base @border-radius-base;
+        margin-bottom: 0;
 
-    li:nth-child(odd) {
-      background-color: white;
-    }
-  }
-
-  .annen-veileder {
-    padding-top: 1rem;
-
-    .annen-veileder-varsel {
-      text-align: center;
-      margin: 0;
+        li:nth-child(odd) {
+            background-color: white;
+        }
     }
 
-    .portefolje-side {
-      padding: 2rem;
-    }
-  }
+    .annen-veileder {
+        padding-top: 1rem;
 
-  .tilbaketilveileder {
-    display: inline-block;
-    position: relative;
-    margin-bottom: 2rem;
-    text-decoration: none;
-    color: @navBla;
+        .annen-veileder-varsel {
+            text-align: center;
+            margin: 0;
+        }
 
-    &:active,
-    &:visited,
-    &:hover {
-      color: @navBla;
+        .portefolje-side {
+            padding: 2rem;
+        }
     }
 
-    i {
-      position: absolute;
-      margin-top: 12px;
+    .tilbaketilveileder {
+        display: inline-block;
+        position: relative;
+        margin-bottom: 2rem;
+        text-decoration: none;
+        color: @navBla;
+
+        &:active,
+        &:visited,
+        &:hover {
+            color: @navBla;
+        }
+
+        i {
+            position: absolute;
+            margin-top: 12px;
+        }
+
+        span {
+            display: inline-block;
+            position: absolute;
+            margin-left: 20px;
+            white-space: nowrap;
+        }
     }
 
-    span {
-      display: inline-block;
-      position: absolute;
-      margin-left: 20px;
-      white-space: nowrap;
+    .arbeidsliste--ikon {
+        position: relative;
+        right: -4px;
     }
-  }
 
-  .arbeidsliste--ikon {
-    position: relative;
-    right: -4px;
-  }
+    .brukerliste__arbeidslisteinnhold-hboks {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
 
-  .brukerliste__arbeidslisteinnhold-hboks {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-  }
-
-  .brukerliste__arbeidslisteinnhold-hboks :last-child {
-    margin-left: 1rem;
-  }
+    .brukerliste__arbeidslisteinnhold-hboks :last-child {
+        margin-left: 1rem;
+    }
 }

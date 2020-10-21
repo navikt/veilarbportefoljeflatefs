@@ -1,7 +1,7 @@
 import * as Api from './../middleware/api';
-import { doThenDispatch, STATUS } from './utils';
-import { initalStatusState, StatustallState } from './statustall';
-import {OrNothing} from "../utils/types/types";
+import {doThenDispatch, STATUS} from './utils';
+import {initalStatusState, StatustallState} from './statustall';
+import {OrNothing} from '../utils/types/types';
 
 // Actions
 export const OK = 'veilarbportefoljeflatefs/statustallInnloggetVeileder/OK';
@@ -28,7 +28,7 @@ export default function reducer(state: StatustallState = initalStatusState, acti
 
 // Action Creators
 export function hentStatusTallForInnloggetVeileder(enhet: string, veileder: OrNothing<string>) {
-    if(veileder) {
+    if (veileder) {
         return doThenDispatch(() => Api.hentStatusTallForVeileder(enhet, veileder), {
             OK,
             FEILET,

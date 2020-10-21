@@ -1,4 +1,4 @@
-import { innloggetVeileder } from './veiledere';
+import {innloggetVeileder} from './veiledere';
 
 export const inloggetEnhet = {
     enhetId: '1234',
@@ -9,7 +9,6 @@ const alternativEnhet = {
     enhetId: '0001',
     navn: 'NAV Testdalen'
 };
-
 
 const alternativEnhet2 = {
     enhetId: '0002',

@@ -1,19 +1,18 @@
 import * as React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Laster from './innholdslaster-laster';
-import { STATUS } from '../ducks/utils';
+import {STATUS} from '../ducks/utils';
 
-const array = (value) => (Array.isArray(value) ? value : [value]);
-const harStatus = (...status) => (element) => array(status).includes(element.status);
+const array = value => (Array.isArray(value) ? value : [value]);
+const harStatus = (...status) => element => array(status).includes(element.status);
 
-const noenHarFeil = (avhengigheter) => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
+const noenHarFeil = avhengigheter => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
 
-const alleLastet = (avhengigheter) => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
+const alleLastet = avhengigheter => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
 
-const alleLastetEllerReloading = (avhengigheter) => (
-    avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING))
-);
-const medFeil = (avhengigheter) => avhengigheter.find(harStatus(STATUS.ERROR));
+const alleLastetEllerReloading = avhengigheter =>
+    avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING));
+const medFeil = avhengigheter => avhengigheter.find(harStatus(STATUS.ERROR));
 
 function getFeilmeldingForReducer(feilendeReducer) {
     const status = feilendeReducer.data.response.status;
@@ -88,8 +87,8 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
             this.clearTimer();
             const feilendeReducer = medFeil(avhengigheter);
 
-            const feilmelding = getFeilmeldingForReducer(feilendeReducer) ||
-                ('Det skjedde en feil ved innlastningen av data');
+            const feilmelding =
+                getFeilmeldingForReducer(feilendeReducer) || 'Det skjedde en feil ved innlastningen av data';
 
             return (
                 <AlertStripe type="advarsel" className={className}>
@@ -98,7 +97,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
             );
         }
 
-        return <Laster/>;
+        return <Laster />;
     }
 }
 

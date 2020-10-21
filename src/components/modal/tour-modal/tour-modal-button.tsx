@@ -1,7 +1,7 @@
-import { default as React, useState } from 'react';
-import { default as TourModal, ModalName } from './tour-modal';
-import { Knapp } from 'nav-frontend-knapper';
-import { logEvent } from '../../../utils/frontend-logger';
+import {default as React, useState} from 'react';
+import {default as TourModal, ModalName} from './tour-modal';
+import {Knapp} from 'nav-frontend-knapper';
+import {logEvent} from '../../../utils/frontend-logger';
 import './tour-modal.less';
 import classNames from 'classnames';
 
@@ -18,10 +18,14 @@ export default function TourModalButton(props: ModalStepperProps) {
 
     return (
         <>
-            <Knapp className={classNames('endringslogg-stepperKnapp', props.className)} mini={true} onClick={() => {
-                setOpen(true);
-                logEvent(props.metrikknavn);
-            }}>
+            <Knapp
+                className={classNames('endringslogg-stepperKnapp', props.className)}
+                mini={true}
+                onClick={() => {
+                    setOpen(true);
+                    logEvent(props.metrikknavn);
+                }}
+            >
                 {props.knappeTekst ? props.knappeTekst : 'Se hvordan'}
             </Knapp>
             <TourModal

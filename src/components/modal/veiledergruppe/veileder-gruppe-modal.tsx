@@ -14,30 +14,30 @@ import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import './modal.less';
 import ModalHeader from '../modal-header/modal-header';
-import {erTomtObjekt} from "../mine-filter/mine-filter-utils";
-import {AlertStripeAdvarsel} from "nav-frontend-alertstriper";
-import hiddenIf from "../../hidden-if/hidden-if";
+import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
+import {AlertStripeAdvarsel} from 'nav-frontend-alertstriper';
+import hiddenIf from '../../hidden-if/hidden-if';
 
 interface VeilederModalProps {
     initialVerdi: {
-        gruppeNavn: string,
-        filterValg: FiltervalgModell,
-        filterId: number,
-        filterCleanup?: boolean
-    }
-    onSubmit: (gruppeNavn: string, filterValg: FiltervalgModell) => void
+        gruppeNavn: string;
+        filterValg: FiltervalgModell;
+        filterId: number;
+        filterCleanup?: boolean;
+    };
+    onSubmit: (gruppeNavn: string, filterValg: FiltervalgModell) => void;
     onSlett?: () => void;
     onRequestClose: () => void;
-    isOpen: boolean
-    modalTittel: string,
-    lagreKnappeTekst: string
+    isOpen: boolean;
+    modalTittel: string;
+    lagreKnappeTekst: string;
     validerGruppenavn?: (gruppenavn: string) => OrNothing<string>;
     filterValg?: FiltervalgModell;
 }
 
 interface VeilederGruppeErrors {
-    gruppeNavn: OrNothing<string>,
-    filterValg: OrNothing<string>
+    gruppeNavn: OrNothing<string>;
+    filterValg: OrNothing<string>;
 }
 
 const HiddenIfAlertStripe = hiddenIf(AlertStripeAdvarsel);
@@ -47,7 +47,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     const [gruppeNavn, setGruppeNavn] = useState<string>('');
     const [errors, setErrors] = useState<VeilederGruppeErrors>({} as VeilederGruppeErrors);
     const [harForsoktSubmitte, setHarForsoktSubmitte] = useState(false);
-    const [alertTekst, setAlertTekst] = useState("")
+    const [alertTekst, setAlertTekst] = useState('');
 
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
@@ -79,19 +79,25 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             if (harForsoktSubmitte) {
                 validate(gruppeNavn, {...filterValg, veiledere: [...filterValg.veiledere, veilederTarget]});
             }
-
         } else {
             fjernVeiledereFraListen(veilederTarget);
         }
     };
 
     function lukkModal() {
-        if (harGjortEndringer(filterValg.veiledere, props.initialVerdi.filterValg.veiledere, props.initialVerdi.gruppeNavn, gruppeNavn)) {
+        if (
+            harGjortEndringer(
+                filterValg.veiledere,
+                props.initialVerdi.filterValg.veiledere,
+                props.initialVerdi.gruppeNavn,
+                gruppeNavn
+            )
+        ) {
             setEndringerIkkeLagretModal(true);
             return;
         }
         setErrors({} as VeilederGruppeErrors);
-        setAlertTekst("")
+        setAlertTekst('');
         props.onRequestClose();
     }
 
@@ -116,7 +122,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     }
 
     function slettVeiledergruppeOgLukkModaler() {
-        logEvent('portefolje.metrikker.veiledergrupper.slettknapp', {}, { sideNavn: finnSideNavn() });
+        logEvent('portefolje.metrikker.veiledergrupper.slettknapp', {}, {sideNavn: finnSideNavn()});
         props.onSlett && props.onSlett();
         setSletteVeiledergruppeModal(false);
         props.onRequestClose();
@@ -131,10 +137,12 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         props.onRequestClose();
     }
 
-    const lagredeGrupper = useSelector((state: AppState) => state.veiledergrupper.data
-        .filter(v => v.filterId !== props.initialVerdi.filterId));
+    const lagredeGrupper = useSelector((state: AppState) =>
+        state.veiledergrupper.data.filter(v => v.filterId !== props.initialVerdi.filterId)
+    );
 
-    const lagredeGruppeNavn = lagredeGrupper.map(v => v.filterNavn)
+    const lagredeGruppeNavn = lagredeGrupper
+        .map(v => v.filterNavn)
         .map(v => v.trim())
         .map(v => v.toLowerCase());
 
@@ -143,16 +151,21 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         gruppeNavn: v.filterNavn
     }));
 
-    useEffect(()=>{
-        if (lagredeGrupper.length > 0 && erTomtObjekt(errors) && props.isOpen && props.initialVerdi.filterCleanup){
-            const finnLikVeilederGruppe = lagredeGrupper.find(v => veilederlisterErLik(v.filterValg.veiledere, props.initialVerdi.filterValg.veiledere));
-            if (finnLikVeilederGruppe !== undefined){
-                const errorTekst = "En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '"+finnLikVeilederGruppe.filterNavn+"'. Du må legge til/fjerne veiledere eller slette gruppen."
-                setAlertTekst(errorTekst)
+    useEffect(() => {
+        if (lagredeGrupper.length > 0 && erTomtObjekt(errors) && props.isOpen && props.initialVerdi.filterCleanup) {
+            const finnLikVeilederGruppe = lagredeGrupper.find(v =>
+                veilederlisterErLik(v.filterValg.veiledere, props.initialVerdi.filterValg.veiledere)
+            );
+            if (finnLikVeilederGruppe !== undefined) {
+                const errorTekst =
+                    "En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '" +
+                    finnLikVeilederGruppe.filterNavn +
+                    "'. Du må legge til/fjerne veiledere eller slette gruppen.";
+                setAlertTekst(errorTekst);
                 setErrors({filterValg: errorTekst} as VeilederGruppeErrors);
             }
         }
-    },[lagredeGrupper, props.initialVerdi, props.isOpen, errors])
+    }, [lagredeGrupper, props.initialVerdi, props.isOpen, errors]);
 
     const validate = (gruppeNavn, filterValg) => {
         let errors: any = {};
@@ -167,7 +180,9 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             errors.filterValg = 'Du må legge til veiledere.';
         }
 
-        const finnLikVeilederGruppe = lagredeVeilederGrupper.find(v => veilederlisterErLik(v.veiledere, filterValg.veiledere));
+        const finnLikVeilederGruppe = lagredeVeilederGrupper.find(v =>
+            veilederlisterErLik(v.veiledere, filterValg.veiledere)
+        );
 
         if (finnLikVeilederGruppe) {
             errors.filterValg = `Det finnes allerede en gruppe med disse veilederne ved navn "${finnLikVeilederGruppe.gruppeNavn}"`;
@@ -178,7 +193,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     };
 
     const avbrytSletting = () => {
-        logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp', {}, { sideNavn: finnSideNavn() } );
+        logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp', {}, {sideNavn: finnSideNavn()});
         setSletteVeiledergruppeModal(false);
     };
 
@@ -190,8 +205,10 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                 onRequestClose={lukkModal}
                 portalClassName="veiledergruppe-modal"
             >
-                <ModalHeader tittel={props.modalTittel}/>
-                <HiddenIfAlertStripe hidden={alertTekst.length === 0} className="alerttext">{alertTekst}</HiddenIfAlertStripe>
+                <ModalHeader tittel={props.modalTittel} />
+                <HiddenIfAlertStripe hidden={alertTekst.length === 0} className="alerttext">
+                    {alertTekst}
+                </HiddenIfAlertStripe>
                 <VeilederGruppeForm
                     filterValg={filterValg}
                     gruppeNavn={gruppeNavn}
@@ -205,17 +222,22 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                         <Hovedknapp className="veiledergruppe-modal__knappegruppe__lagre" htmlType="submit">
                             {props.lagreKnappeTekst}
                         </Hovedknapp>
-                        <Flatknapp className="veiledergruppe-modal__knappegruppe__avbryt" htmlType="button"
-                                   onClick={lukkModal}>
+                        <Flatknapp
+                            className="veiledergruppe-modal__knappegruppe__avbryt"
+                            htmlType="button"
+                            onClick={lukkModal}
+                        >
                             Avbryt
                         </Flatknapp>
-                        {props.onSlett && <Flatknapp
-                            className="veiledergruppe-modal__knappegruppe__slett"
-                            onClick={() => setSletteVeiledergruppeModal(true)}
-                            htmlType="button"
-                        >
-                            Slett gruppe
-                        </Flatknapp>}
+                        {props.onSlett && (
+                            <Flatknapp
+                                className="veiledergruppe-modal__knappegruppe__slett"
+                                onClick={() => setSletteVeiledergruppeModal(true)}
+                                htmlType="button"
+                            >
+                                Slett gruppe
+                            </Flatknapp>
+                        )}
                     </div>
                 </VeilederGruppeForm>
             </ModalWrapper>
@@ -224,17 +246,16 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                 onRequestClose={() => setEndringerIkkeLagretModal(false)}
                 onSubmit={endringerIkkeLagretOgLukkModaler}
             />
-            {props.onSlett && <BekreftSlettingModal
-                isOpen={visSletteVeiledergruppeModal}
-                onRequestClose={avbrytSletting}
-                onSubmit={slettVeiledergruppeOgLukkModaler}
-                tittel="Slette veiledergruppe"
-                infoTekst="Gruppen vil bli slettet for alle på enheten."
-                navn={gruppeNavn}
-            />}
+            {props.onSlett && (
+                <BekreftSlettingModal
+                    isOpen={visSletteVeiledergruppeModal}
+                    onRequestClose={avbrytSletting}
+                    onSubmit={slettVeiledergruppeOgLukkModaler}
+                    tittel="Slette veiledergruppe"
+                    infoTekst="Gruppen vil bli slettet for alle på enheten."
+                    navn={gruppeNavn}
+                />
+            )}
         </>
     );
 }
-
-
-

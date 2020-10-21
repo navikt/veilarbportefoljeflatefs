@@ -1,7 +1,7 @@
 import {FiltervalgModell} from '../model-interfaces';
-import {VELG_MINE_FILTER} from "./lagret-filter-ui-state";
-import {ListevisningType} from "./ui/listevisning";
-import {LagretFilter} from "./lagretFilter";
+import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
+import {ListevisningType} from './ui/listevisning';
+import {LagretFilter} from './lagretFilter';
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -18,7 +18,7 @@ export enum AktiviteterValg {
 }
 
 type AktivititetNykkel =
-    'BEHANDLING'
+    | 'BEHANDLING'
     | 'EGEN'
     | 'GRUPPEAKTIVITET'
     | 'IJOBB'
@@ -26,7 +26,7 @@ type AktivititetNykkel =
     | 'SOKEAVTALE'
     | 'STILLING'
     | 'TILTAK'
-    | 'UTDANNINGAKTIVITET'
+    | 'UTDANNINGAKTIVITET';
 
 export type FiltreringAktiviteterValg = {
     [aktivitet in AktivititetNykkel]: AktiviteterValg;
@@ -63,18 +63,18 @@ export const initialState: FiltervalgModell = {
     veilederNavnQuery: '',
     registreringstype: [],
     arbeidslisteKategori: [],
-    cvJobbprofil: null,
+    cvJobbprofil: null
 };
 
 function fjern(filterId, verdi, fjernVerdi) {
     if (typeof verdi === 'boolean') {
         return false;
     } else if (Array.isArray(verdi)) {
-        return verdi.filter((enkeltVerdi) => enkeltVerdi !== fjernVerdi);
+        return verdi.filter(enkeltVerdi => enkeltVerdi !== fjernVerdi);
     } else if (filterId === 'aktiviteter') {
         var tomtVerdi = {};
         tomtVerdi[fjernVerdi] = AktiviteterValg.NA;
-        return Object.assign({}, verdi, tomtVerdi)
+        return Object.assign({}, verdi, tomtVerdi);
     } else if (fjernVerdi && typeof verdi === 'object') {
         return Object.entries(verdi)
             .filter(([key]) => key !== fjernVerdi)
@@ -100,7 +100,11 @@ export default function reducer(state: FiltervalgModell = initialState, action):
         case SLETT_ENKELT_FILTER:
             return {
                 ...state,
-                [action.data.filterId]: fjern(action.data.filterId, state[action.data.filterId], action.data.filterVerdi)
+                [action.data.filterId]: fjern(
+                    action.data.filterId,
+                    state[action.data.filterId],
+                    action.data.filterVerdi
+                )
             };
         case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
             return {
@@ -111,13 +115,17 @@ export default function reducer(state: FiltervalgModell = initialState, action):
         case SLETT_AKTIVITETER_OG_TILTAK_FILTER:
             return {
                 ...state,
-                [action.data.filterId]: fjern(action.data.filterId, state[action.data.filterId], action.data.filterVerdi),
+                [action.data.filterId]: fjern(
+                    action.data.filterId,
+                    state[action.data.filterId],
+                    action.data.filterVerdi
+                ),
                 tiltakstyper: []
             };
         case SETT_FILTERVALG:
             return {...action.data};
         case VELG_MINE_FILTER:
-            return {...action.data.filterValg}
+            return {...action.data.filterValg};
         default:
             return state;
     }
@@ -128,12 +136,16 @@ export function velgMineFilter(filterVerdi: LagretFilter, filtergruppe: Listevis
         type: VELG_MINE_FILTER,
         data: filterVerdi,
         name: filtergruppe
-    }
+    };
 }
 
-export function endreFiltervalg(filterId: string, filterVerdi, filtergruppe: ListevisningType = ListevisningType.enhetensOversikt) {
+export function endreFiltervalg(
+    filterId: string,
+    filterVerdi,
+    filtergruppe: ListevisningType = ListevisningType.enhetensOversikt
+) {
     if (Array.isArray(filterVerdi)) {
-        filterVerdi.sort()
+        filterVerdi.sort();
     }
     if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
         return {
@@ -169,7 +181,7 @@ export function clearFiltervalg(filtergruppe = ListevisningType.enhetensOversikt
 }
 
 export function veilederSoktFraToolbar() {
-    return (dispatch) => {
+    return dispatch => {
         dispatch({type: VEILEDER_SOKT_FRA_TOOLBAR});
     };
 }

@@ -7,9 +7,9 @@ import {hentStatusTall} from './statustall';
 import {BrukerModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {selectFraIndex, selectSeAlle, selectSideStorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {visTilordningOkModal} from './modal';
-import {AppState} from "../reducer";
-import {OrNothing} from "../utils/types/types";
-import {ListevisningType} from "./ui/listevisning";
+import {AppState} from '../reducer';
+import {OrNothing} from '../utils/types/types';
+import {ListevisningType} from './ui/listevisning';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -27,7 +27,7 @@ const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_F
 const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
 
 function lagBrukerGuid(bruker) {
-    return bruker.fnr === '' ? (`${Math.random()}`).slice(2) : bruker.fnr;
+    return bruker.fnr === '' ? `${Math.random()}`.slice(2) : bruker.fnr;
 }
 
 // Reducer
@@ -61,9 +61,9 @@ const initialState: PortefoljeState = {
 };
 
 function updateVeilederForBruker(brukere, veilederId, feilende) {
-    const feilendeFnr = feilende.map((b) => b.brukerFnr);
+    const feilendeFnr = feilende.map(b => b.brukerFnr);
 
-    return brukere.map((bruker) => {
+    return brukere.map(bruker => {
         if (bruker.markert && !feilendeFnr.includes(bruker.fnr)) {
             return {
                 ...bruker,
@@ -76,7 +76,7 @@ function updateVeilederForBruker(brukere, veilederId, feilende) {
 }
 
 function updateBrukerInArray(brukere, action) {
-    return brukere.map((bruker) => {
+    return brukere.map(bruker => {
         if (bruker.guid === action.guid) {
             return {
                 ...bruker,
@@ -88,17 +88,16 @@ function updateBrukerInArray(brukere, action) {
 }
 
 function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
-    return brukere
-        .map((bruker) => {
-            const arbeidslisteForBruker = arbeidsliste.filter((a) => a.fnr === bruker.fnr);
-            if (arbeidslisteForBruker.length === 1) {
-                return {
-                    ...bruker,
-                    arbeidsliste: {...bruker.arbeidsliste, ...arbeidslisteForBruker[0]}
-                };
-            }
-            return bruker;
-        });
+    return brukere.map(bruker => {
+        const arbeidslisteForBruker = arbeidsliste.filter(a => a.fnr === bruker.fnr);
+        if (arbeidslisteForBruker.length === 1) {
+            return {
+                ...bruker,
+                arbeidsliste: {...bruker.arbeidsliste, ...arbeidslisteForBruker[0]}
+            };
+        }
+        return bruker;
+    });
 }
 
 export default function reducer(state = initialState, action): PortefoljeState {
@@ -116,7 +115,7 @@ export default function reducer(state = initialState, action): PortefoljeState {
                 status: STATUS.OK,
                 data: {
                     ...action.data,
-                    brukere: action.data.brukere.map((bruker) => ({...bruker, guid: lagBrukerGuid(bruker)}))
+                    brukere: action.data.brukere.map(bruker => ({...bruker, guid: lagBrukerGuid(bruker)}))
                 }
             };
         case SETT_SORTERING: {
@@ -175,13 +174,12 @@ export default function reducer(state = initialState, action): PortefoljeState {
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: state.data.brukere
-                        .map((bruker) => {
-                            if (bruker.fnr !== '') {
-                                return {...bruker, markert: action.markert};
-                            }
-                            return {...bruker};
-                        })
+                    brukere: state.data.brukere.map(bruker => {
+                        if (bruker.fnr !== '') {
+                            return {...bruker, markert: action.markert};
+                        }
+                        return {...bruker};
+                    })
                 }
             };
         }
@@ -190,10 +188,7 @@ export default function reducer(state = initialState, action): PortefoljeState {
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: updateArbeidslisteForBrukere(
-                        state.data.brukere,
-                        action.arbeidsliste
-                    )
+                    brukere: updateArbeidslisteForBrukere(state.data.brukere, action.arbeidsliste)
                 }
             };
         }
@@ -229,35 +224,38 @@ export function hentPortefoljeForVeileder(enhet, veileder, rekkefolge, sortering
 }
 
 export function settSortering(rekkefolge, felt) {
-    return (dispatch) => dispatch({
-        type: SETT_SORTERING,
-        sorteringsrekkefolge: rekkefolge,
-        sorteringsfelt: felt
-    });
+    return dispatch =>
+        dispatch({
+            type: SETT_SORTERING,
+            sorteringsrekkefolge: rekkefolge,
+            sorteringsfelt: felt
+        });
 }
 
 export function settBrukerSomMarkert(guid, markert) {
-    return (dispatch) => dispatch({
-        type: SETT_MARKERT_BRUKER,
-        guid,
-        markert
-    });
+    return dispatch =>
+        dispatch({
+            type: SETT_MARKERT_BRUKER,
+            guid,
+            markert
+        });
 }
 
 export function markerAlleBrukere(markert) {
-    return (dispatch) => dispatch({
-        type: SETT_MARKERT_BRUKER_ALLE,
-        markert,
-    });
+    return dispatch =>
+        dispatch({
+            type: SETT_MARKERT_BRUKER_ALLE,
+            markert
+        });
 }
 
 export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veilederIdent) {
-    return (dispatch, getState: ()=> AppState) => {
+    return (dispatch, getState: () => AppState) => {
         dispatch({type: TILDEL_VEILEDER_RELOAD});
         dispatch({type: PENDING});
         Api.tilordneVeileder(tilordninger)
             .then(toJson)
-            .then((res) => {
+            .then(res => {
                 dispatch({
                     type: TILDEL_VEILEDER,
                     tilVeileder,
@@ -277,7 +275,9 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                         brukereOk: vellykkedeTilordninger
                     })(dispatch);
                 } else {
-                    dispatch(visTilordningOkModal(tilordninger.map(tillordning => ({brukerFnr: tillordning.brukerFnr}))));
+                    dispatch(
+                        visTilordningOkModal(tilordninger.map(tillordning => ({brukerFnr: tillordning.brukerFnr})))
+                    );
                     dispatch(pagineringSetup({side: 1}));
                 }
                 if (filtergruppe === ListevisningType.minOversikt) {
@@ -293,17 +293,18 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                     const enhet = getState().valgtEnhet.data.enhetId;
                     const rekkefolge = getState().portefolje.sorteringsrekkefolge;
                     const sorteringsfelt = getState().portefolje.sorteringsfelt;
-                    if(filtergruppe === ListevisningType.minOversikt){
+                    if (filtergruppe === ListevisningType.minOversikt) {
                         const filtervalg = getState().filtreringMinoversikt;
-                        dispatch(hentPortefoljeForVeileder(enhet, veilederIdent, rekkefolge, sorteringsfelt, filtervalg))
+                        dispatch(
+                            hentPortefoljeForVeileder(enhet, veilederIdent, rekkefolge, sorteringsfelt, filtervalg)
+                        );
                     } else {
                         const filtervalg = getState().filtreringEnhetensOversikt;
-                        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filtervalg))
+                        dispatch(hentPortefoljeForEnhet(enhet, rekkefolge, sorteringsfelt, filtervalg));
                     }
-
                 }, 2000);
             })
-            .catch((error) => {
+            .catch(error => {
                 visServerfeilModal()(dispatch);
                 // TILDEL_VEILEDER_FEILET setter errorstatus slik at spinner forsvinner
                 return handterFeil(dispatch, TILDEL_VEILEDER_FEILET)(error);
@@ -319,8 +320,9 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
 }
 
 export function oppdaterArbeidslisteForBruker(arbeidsliste) {
-    return (dispatch) => dispatch({
-        type: OPPDATER_ARBEIDSLISTE,
-        arbeidsliste
-    });
+    return dispatch =>
+        dispatch({
+            type: OPPDATER_ARBEIDSLISTE,
+            arbeidsliste
+        });
 }

@@ -39,7 +39,7 @@ export function NyFiltreringStatus(props: FiltreringStatusProps) {
         dispatch(pagineringSetup({side: 1}));
         const nyeFerdigfilterListe = e.target.checked
             ? [...kategoriliste, e.target.value]
-            : kategoriliste.filter((elem) => elem !== e.target.value);
+            : kategoriliste.filter(elem => elem !== e.target.value);
         dispatch(endreFiltervalg('arbeidslisteKategori', nyeFerdigfilterListe, props.filtergruppe));
     }
 

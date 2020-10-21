@@ -11,7 +11,8 @@ import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
-    MOTER_IDAG, UNDER_VURDERING,
+    MOTER_IDAG,
+    UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -19,16 +20,16 @@ import {
     ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
-import { BrukerModell, FiltervalgModell } from '../model-interfaces';
-import { Kolonne } from '../ducks/ui/listevisning';
+import {BrukerModell, FiltervalgModell} from '../model-interfaces';
+import {Kolonne} from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import {OrNothing} from "../utils/types/types";
+import {OrNothing} from '../utils/types/types';
 import './minoversikt.less';
-import {DagerSidenKolonne} from "../components/tabell/kolonner/dagersidenkolonne";
-import {TekstKolonne} from "../components/tabell/kolonner/tekstkolonne";
+import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
+import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -56,13 +57,20 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
-    const iAvtaltAktivitet = (!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET));
-    const avtaltAktivitetOgTiltak = iAvtaltAktivitet ? false : !!valgteAktivitetstyper && filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const iAvtaltAktivitet =
+        !!ferdigfilterListe &&
+        ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
+        valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+    const avtaltAktivitetOgTiltak = iAvtaltAktivitet
+        ? false
+        : !!valgteAktivitetstyper &&
+          filtervalg.tiltakstyper.length === 0 &&
+          valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId}/>
-            <BrukerFnr className="col col-xs-2" bruker={bruker}/>
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
+            <BrukerFnr className="col col-xs-2" bruker={bruker} />
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
@@ -71,29 +79,38 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={arbeidslisteFrist}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(MIN_ARBEIDSLISTE) &&
+                    valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)
+                }
             />
             <ArbeidslisteOverskrift
                 className="col col-xs-2"
                 bruker={bruker}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MIN_ARBEIDSLISTE) && valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(MIN_ARBEIDSLISTE) &&
+                    valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
+                }
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && (
-                    ytelse === ytelsevalgIntl.DAGPENGER ||
-                    ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
-                    ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI ||
-                    ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER
-                )}
+                skalVises={
+                    ytelseErValgtKolonne &&
+                    (ytelse === ytelsevalgIntl.DAGPENGER ||
+                        ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
+                        ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI ||
+                        ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER)
+                }
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING)}
+                skalVises={ytelseErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -117,7 +134,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && (ytelse === ytelsevalgIntl.TILTAKSPENGER)}
+                skalVises={ytelseErValgtKolonne && ytelse === ytelsevalgIntl.TILTAKSPENGER}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -132,12 +149,20 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <TidKolonne
                 className="col col-xs-2"
                 dato={moteStartTid}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(MOTER_IDAG) &&
+                    valgteKolonner.includes(Kolonne.MOTER_IDAG)
+                }
             />
             <VarighetKolonne
                 className="col col-xs-2"
                 dato={varighet}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(MOTER_IDAG) &&
+                    valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
+                }
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -157,30 +182,47 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={bruker.aktivitetStart ? new Date(bruker.aktivitetStart) : null}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
+                    valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)
+                }
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={bruker.nesteAktivitetStart ? new Date(bruker.nesteAktivitetStart) : null}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
+                    valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)
+                }
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
+                    valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)
+                }
             />
             <TekstKolonne
                 tekst={bruker.vedtakStatus}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
-                className= "col col-xs-2"
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(UNDER_VURDERING) &&
+                    valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
+                }
+                className="col col-xs-2"
             />
             <DagerSidenKolonne
                 className="col col-xs-2"
                 dato={dagerSiden(bruker.vedtakStatusEndret)}
-                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(UNDER_VURDERING) &&
+                    valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
+                }
             />
         </div>
     );

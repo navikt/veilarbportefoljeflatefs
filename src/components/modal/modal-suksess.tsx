@@ -1,8 +1,8 @@
-import { VarselModal, VarselModalType } from './varselmodal/varselmodal';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import React, { PropsWithChildren } from 'react';
-import { Fnr, FnrList } from '../fnr-list';
+import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
+import {Hovedknapp} from 'nav-frontend-knapper';
+import React, {PropsWithChildren} from 'react';
+import {Fnr, FnrList} from '../fnr-list';
 import './feilmelding-brukere.less';
 
 interface ModalSuksessProps {
@@ -26,26 +26,18 @@ function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
             closeButton={props.closeButton}
         >
             <div className="blokk-s tildeling-veileder-modal__tekstgruppe">
-                <Innholdstittel className="blokk-s">
-                    {props.tittel}
-                </Innholdstittel>
-                <Normaltekst>
-                    {props.tekst}
-                </Normaltekst>
+                <Innholdstittel className="blokk-s">{props.tittel}</Innholdstittel>
+                <Normaltekst>{props.tekst}</Normaltekst>
                 {props.children}
-
             </div>
-            <Hovedknapp
-                htmlType="submit"
-                onClick={props.onRequestClose}
-            >
+            <Hovedknapp htmlType="submit" onClick={props.onRequestClose}>
                 {props.hovedknappTekst}
             </Hovedknapp>
         </VarselModal>
     );
 }
 
-export function TildelingerOk(props: { isOpen: boolean, onRequestClose: () => void; fnr: Fnr[] }) {
+export function TildelingerOk(props: {isOpen: boolean; onRequestClose: () => void; fnr: Fnr[]}) {
     return (
         <ModalSuksess
             isOpen={props.isOpen}
@@ -55,7 +47,7 @@ export function TildelingerOk(props: { isOpen: boolean, onRequestClose: () => vo
             closeButton={false}
             hovedknappTekst="Lukk"
         >
-            <FnrList listeMedFnr={props.fnr}/>
+            <FnrList listeMedFnr={props.fnr} />
         </ModalSuksess>
     );
 }

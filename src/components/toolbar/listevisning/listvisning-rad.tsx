@@ -1,8 +1,8 @@
-import { Kolonne } from '../../../ducks/ui/listevisning';
-import { alternativerConfig } from './listevisning-utils';
-import { ChangeEvent } from 'react';
+import {Kolonne} from '../../../ducks/ui/listevisning';
+import {alternativerConfig} from './listevisning-utils';
+import {ChangeEvent} from 'react';
 import * as React from 'react';
-import { Checkbox } from 'nav-frontend-skjema';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface ListevisningRadProps {
     kolonne: Kolonne;
@@ -25,7 +25,7 @@ function ListevisningRad(props: ListevisningRadProps) {
                 value={props.kolonne.toString()}
                 checked={props.valgt}
                 disabled={props.disabled || alternativ.checkboxDisabled}
-                onChange={((e: ChangeEvent<HTMLInputElement>) => props.onChange(props.kolonne, e.target.checked))}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => props.onChange(props.kolonne, e.target.checked)}
             />
         </li>
     );

@@ -1,9 +1,9 @@
-import { DependencyList, useEffect } from 'react';
+import {DependencyList, useEffect} from 'react';
 
 export function useEventListener(eventName: string, handleEvent: (event?: any) => void, deps?: DependencyList) {
     useEffect(() => {
         const app = document.getElementById('applikasjon');
-        if(app) {
+        if (app) {
             app.addEventListener(eventName, handleEvent, false);
             return () => {
                 app.removeEventListener(eventName, handleEvent, false);

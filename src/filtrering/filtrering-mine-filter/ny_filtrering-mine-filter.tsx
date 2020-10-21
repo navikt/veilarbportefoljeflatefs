@@ -5,8 +5,8 @@ import {AlertStripeFeil} from 'nav-frontend-alertstriper';
 import {STATUS} from '../../ducks/utils';
 import './ny_mine-filter-innhold.less';
 import NyttMineFilterInnhold from './ny_mine-filter_innhold';
-import {HandlingsType, LagretFilter} from "../../ducks/lagretFilter";
-import {ListevisningType} from "../../ducks/ui/listevisning";
+import {HandlingsType, LagretFilter} from '../../ducks/lagretFilter';
+import {ListevisningType} from '../../ducks/ui/listevisning';
 
 function NyFiltreringMineFilter(props: {
     filtergruppe: ListevisningType;

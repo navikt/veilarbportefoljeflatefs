@@ -4,8 +4,8 @@ import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import hiddenIf from '../hidden-if/hidden-if';
 import '../toolbar/toolbar.less';
-import classNames from "classnames";
-import {EkspanderbartpanelBaseProps} from "nav-frontend-ekspanderbartpanel/lib/ekspanderbartpanel-base";
+import classNames from 'classnames';
+import {EkspanderbartpanelBaseProps} from 'nav-frontend-ekspanderbartpanel/lib/ekspanderbartpanel-base';
 
 interface MetrikkEkspanderbartpanelProps {
     lamellNavn: string;
@@ -24,7 +24,7 @@ function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
         logEvent('portefolje.metrikker.lamell', {
             navn: props.lamellNavn,
             apen: !isApen,
-            sideNavn: finnSideNavn(),
+            sideNavn: finnSideNavn()
         });
     };
 
@@ -34,12 +34,8 @@ function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
 
     const {children, lamellNavn, className, ...rest} = props;
     return (
-        <div className={classNames("blokk-xxs portefolje__ekspanderbarpanel", className)}>
-            <Ekspanderbartpanel
-                border={true}
-                onClick={handleOnClick}
-                {...rest}
-            >
+        <div className={classNames('blokk-xxs portefolje__ekspanderbarpanel', className)}>
+            <Ekspanderbartpanel border={true} onClick={handleOnClick} {...rest}>
                 {children}
             </Ekspanderbartpanel>
         </div>

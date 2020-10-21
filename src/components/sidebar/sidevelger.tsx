@@ -17,7 +17,7 @@ import Sidebar from './sidebar';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {LagretFilter} from "../../ducks/lagretFilter";
+import {LagretFilter} from '../../ducks/lagretFilter';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {

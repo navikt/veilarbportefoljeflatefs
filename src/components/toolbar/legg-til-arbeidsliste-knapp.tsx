@@ -8,7 +8,7 @@ import {AppState} from '../../reducer';
 import {useIdentSelector} from '../../hooks/redux/use-inlogget-ident';
 import {ReactComponent as ArbeidslisteIkonLinje} from '../ikoner/arbeidsliste/arbeidslisteikon-linje.svg';
 import {Normaltekst} from 'nav-frontend-typografi';
-import ArbeidslisteModal from "../modal/arbeidsliste/arbeidsliste-modal";
+import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
 
 interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
@@ -24,13 +24,10 @@ function LeggTilArbeidsliste(props: LeggTilArbeidslisteProps) {
     const location = useLocation();
     const pathname = location.pathname;
 
-    const valgteBrukere = portefolje.brukere.filter((bruker) => bruker.markert === true);
+    const valgteBrukere = portefolje.brukere.filter(bruker => bruker.markert === true);
 
-    const skalSkjules = innloggetVeileder && pathname === '/portefolje'
-        ? ident
-            ? ident !== innloggetVeileder.ident
-            : false
-        : true;
+    const skalSkjules =
+        innloggetVeileder && pathname === '/portefolje' ? (ident ? ident !== innloggetVeileder.ident : false) : true;
 
     if (skalSkjules) {
         return null;
@@ -43,23 +40,32 @@ function LeggTilArbeidsliste(props: LeggTilArbeidslisteProps) {
                 onClickHandler={() => dispatch(visArbeidslisteModal())}
                 visesAnnenVeiledersPortefolje={props.visesAnnenVeiledersPortefolje}
             />
-            {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere}/>}
+            {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
         </div>
     );
 }
 
-function ArbeidsListeKnapp(props: { valgteBrukere: BrukerModell[], onClickHandler: () => void, visesAnnenVeiledersPortefolje: boolean }) {
-    const inneholderBrukerMedArbeidsliste = props.valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
-    const inneholderBrukerMedOgUtenArbeidsliste = inneholderBrukerMedArbeidsliste && props.valgteBrukere.some((bruker) => !bruker.arbeidsliste.arbeidslisteAktiv);
+function ArbeidsListeKnapp(props: {
+    valgteBrukere: BrukerModell[];
+    onClickHandler: () => void;
+    visesAnnenVeiledersPortefolje: boolean;
+}) {
+    const inneholderBrukerMedArbeidsliste = props.valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
+    const inneholderBrukerMedOgUtenArbeidsliste =
+        inneholderBrukerMedArbeidsliste && props.valgteBrukere.some(bruker => !bruker.arbeidsliste.arbeidslisteAktiv);
 
-    const arbeidslisteButton = (tekst) => (
+    const arbeidslisteButton = tekst => (
         <button
             type="button"
-            className='toolbar_btn'
-            disabled={props.valgteBrukere.length < 1 || props.visesAnnenVeiledersPortefolje || inneholderBrukerMedOgUtenArbeidsliste}
+            className="toolbar_btn"
+            disabled={
+                props.valgteBrukere.length < 1 ||
+                props.visesAnnenVeiledersPortefolje ||
+                inneholderBrukerMedOgUtenArbeidsliste
+            }
             onClick={props.onClickHandler}
         >
-            <ArbeidslisteIkonLinje className="toolbar-knapp__ikon" id="arbeidsliste-ikon"/>
+            <ArbeidslisteIkonLinje className="toolbar-knapp__ikon" id="arbeidsliste-ikon" />
             <Normaltekst className="toolbar-knapp__tekst">{tekst}</Normaltekst>
         </button>
     );

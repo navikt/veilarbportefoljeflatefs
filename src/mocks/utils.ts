@@ -1,4 +1,4 @@
-import { MockHandler, MockRequest, MockResponse, MockContext } from 'yet-another-fetch-mock';
+import {MockHandler, MockRequest, MockResponse, MockContext} from 'yet-another-fetch-mock';
 
 export const MOCK_CONFIG = {
     failureRate: -1,
@@ -27,9 +27,9 @@ export function delayed(ms: number, handler: MockHandler): MockHandler {
     return async (req, res, ctx) => {
         await ctx.delay(ms)({});
         return handler(req, res, ctx);
-    }
+    };
 }
 
 export function jsonResponse(json: any): MockHandler {
-    return (req: MockRequest, res: MockResponse, ctx: MockContext) => res(ctx.json(json))
+    return (req: MockRequest, res: MockResponse, ctx: MockContext) => res(ctx.json(json));
 }

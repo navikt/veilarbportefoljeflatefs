@@ -1,23 +1,21 @@
 import * as React from 'react';
 import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
-import { connect } from 'react-redux';
-import { Element } from 'nav-frontend-typografi';
-import { slettArbeidsliste } from '../../../ducks/arbeidsliste';
-import { oppdaterArbeidslisteForBruker } from '../../../ducks/portefolje';
-import { leggTilStatustall } from '../../../ducks/statustall';
-import { STATUS } from '../../../ducks/utils';
-import { FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal } from '../../../ducks/modal-feilmelding-brukere';
-import { visServerfeilModal } from '../../../ducks/modal-serverfeil';
-import { ArbeidslisteDataModell, BrukerModell, Status } from '../../../model-interfaces';
+import {connect} from 'react-redux';
+import {Element} from 'nav-frontend-typografi';
+import {slettArbeidsliste} from '../../../ducks/arbeidsliste';
+import {oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
+import {leggTilStatustall} from '../../../ducks/statustall';
+import {STATUS} from '../../../ducks/utils';
+import {FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
+import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
+import {ArbeidslisteDataModell, BrukerModell, Status} from '../../../model-interfaces';
 import './arbeidsliste.less';
-import { logEvent } from '../../../utils/frontend-logger';
+import {logEvent} from '../../../utils/frontend-logger';
 
 function brukerLabel(bruker) {
     return (
         <li key={bruker.fnr}>
-            <Element>
-                {`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}
-            </Element>
+            <Element>{`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}</Element>
         </li>
     );
 }
@@ -30,22 +28,26 @@ interface FjernFraArbeidslisteFormProps {
     visBrukerLabel?: boolean;
 }
 
-function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, slettFraArbeidslisteStatus, visBrukerLabel }: FjernFraArbeidslisteFormProps) {
+function FjernFraArbeidslisteForm({
+    lukkModal,
+    valgteBrukere,
+    onSubmit,
+    slettFraArbeidslisteStatus,
+    visBrukerLabel
+}: FjernFraArbeidslisteFormProps) {
     const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
     const className = valgteBrukere.length >= 22 ? 'arbeidsliste-listetekst__lang' : 'arbeidsliste-listetekst';
 
     return (
-        <form onSubmit={(e) => {
-            e.preventDefault();
-            logEvent('portefolje.metrikker.fjern_arbeidsliste');
-            onSubmit(valgteBrukere, lukkModal);
-        }}>
+        <form
+            onSubmit={e => {
+                e.preventDefault();
+                logEvent('portefolje.metrikker.fjern_arbeidsliste');
+                onSubmit(valgteBrukere, lukkModal);
+            }}
+        >
             <div className={className}>
-                {visBrukerLabel &&
-                <ul>
-                    {valgteBrukere.map((bruker) => brukerLabel(bruker))}
-                </ul>
-                }
+                {visBrukerLabel && <ul>{valgteBrukere.map(bruker => brukerLabel(bruker))}</ul>}
             </div>
             <div className="knapper">
                 <Hovedknapp className="knapp knapp--hoved" spinner={laster} htmlType="submit">
@@ -68,11 +70,11 @@ function oppdaterState(res, lukkModal: () => void, arbeidsliste: ArbeidslisteDat
     const brukereError = res.data.error;
 
     const arbeidslisteToDispatch = arbeidsliste
-        .map((a) => ({
+        .map(a => ({
             ...a,
             arbeidslisteAktiv: false
         }))
-        .filter((bruker) => brukereOK.includes(bruker.fnr));
+        .filter(bruker => brukereOK.includes(bruker.fnr));
 
     if (brukereError.length > 0) {
         visFeiletModal({
@@ -86,20 +88,19 @@ function oppdaterState(res, lukkModal: () => void, arbeidsliste: ArbeidslisteDat
     return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     slettFraArbeidslisteStatus: state.arbeidsliste.status
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     onSubmit: (valgteBrukere, lukkModal) => {
-        const arbeidsliste: ArbeidslisteDataModell[] = valgteBrukere.map((bruker) => ({
+        const arbeidsliste: ArbeidslisteDataModell[] = valgteBrukere.map(bruker => ({
             fnr: bruker.fnr,
             kommentar: bruker.arbeidsliste.kommentar,
             frist: bruker.arbeidsliste.frist,
             kategori: bruker.arbeidsliste.kategori
         }));
-        slettArbeidsliste(arbeidsliste)(dispatch)
-            .then((res) => oppdaterState(res, lukkModal, arbeidsliste, dispatch));
+        slettArbeidsliste(arbeidsliste)(dispatch).then(res => oppdaterState(res, lukkModal, arbeidsliste, dispatch));
     }
 });
 

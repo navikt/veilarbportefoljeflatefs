@@ -1,4 +1,4 @@
-import {ListevisningType} from "./ui/listevisning";
+import {ListevisningType} from './ui/listevisning';
 
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
@@ -21,16 +21,17 @@ export function sjekkStatuskode(response) {
     if (response.status >= 200 && response.status < 300 && response.ok) {
         return response;
     }
-    if (response.status === 401) {	
-        if(!window.location.href.toString().includes("/feilsider/401.html")){
-            window.location.href = '/veilarbportefoljeflatefs/feilsider/401.html';	
+    if (response.status === 401) {
+        if (!window.location.href.toString().includes('/feilsider/401.html')) {
+            window.location.href = '/veilarbportefoljeflatefs/feilsider/401.html';
         }
     }
     return Promise.reject(new FetchError(response.statusText, response));
 }
 
 export function toJson(response) {
-    if (response.status !== 204) { // No content
+    if (response.status !== 204) {
+        // No content
         return response.json();
     }
     return response;
@@ -46,9 +47,9 @@ export function sendResultatTilDispatch(dispatch, action) {
 }
 
 export function handterFeil(dispatch, action) {
-    return (error) => {
+    return error => {
         if (error.response) {
-            error.response.text().then((data) => {
+            error.response.text().then(data => {
                 console.error(error, error.stack, data); // tslint:disable-line no-console
                 dispatch({type: action, data: {response: error.response, data}});
             });

@@ -1,11 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import {Innholdstittel} from 'nav-frontend-typografi';
 import './modal-header.less';
 
 interface OwnProps {
     className?: string;
-    tittel?: React.ReactNode
+    tittel?: React.ReactNode;
 }
 
 function ModalHeader({className, tittel}: OwnProps) {

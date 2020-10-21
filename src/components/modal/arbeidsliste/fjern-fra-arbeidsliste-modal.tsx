@@ -1,8 +1,8 @@
-import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
-import React, { Component } from 'react';
-import { BrukerModell } from '../../../model-interfaces';
+import React, {Component} from 'react';
+import {BrukerModell} from '../../../model-interfaces';
 
 interface FjernFraArbeidslisteModalProps {
     isOpen: boolean;
@@ -14,8 +14,9 @@ interface FjernFraArbeidslisteModalProps {
 class FjernArbeidslisteModal extends Component<FjernFraArbeidslisteModalProps> {
     fjernFraModal(valgteBrukere) {
         const {isOpen, lukkModal, bruker} = this.props;
-        const brukereSomSkalFjernes = valgteBrukere.filter((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
-        const navn = bruker.fornavn === '' && bruker.etternavn === '' ? 'en bruker' : `${bruker.fornavn} ${bruker.etternavn}`;
+        const brukereSomSkalFjernes = valgteBrukere.filter(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
+        const navn =
+            bruker.fornavn === '' && bruker.etternavn === '' ? 'en bruker' : `${bruker.fornavn} ${bruker.etternavn}`;
 
         return (
             <VarselModal
@@ -40,15 +41,12 @@ class FjernArbeidslisteModal extends Component<FjernFraArbeidslisteModalProps> {
                     />
                 </div>
             </VarselModal>
-
         );
     }
 
     render() {
         const {valgteBrukere} = this.props;
-        return (
-            this.fjernFraModal(valgteBrukere)
-        );
+        return this.fjernFraModal(valgteBrukere);
     }
 }
 

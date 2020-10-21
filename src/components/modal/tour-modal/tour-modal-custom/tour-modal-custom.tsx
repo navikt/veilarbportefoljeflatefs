@@ -15,21 +15,21 @@ import permitterte1 from './permitterte/permitterte1.png';
 import permitterte2 from './permitterte/permitterte2.png';
 import permitterte3 from './permitterte/permitterte3.png';
 import mineFilter1 from './mine-filter/mine-filter1.png';
-import mineFilter2 from './mine-filter/mine-filter2.png'
-import mineFilter3 from './mine-filter/mine-filter3.png'
+import mineFilter2 from './mine-filter/mine-filter2.png';
+import mineFilter3 from './mine-filter/mine-filter3.png';
 
 const stepsNyKolonne: Step[] = [
     {
         tittel: 'Startdato for oppfølgingsperioden',
         bilde: nyKolonne1Bilde,
-        tekst: 'Oversikten har en ny kolonne, «Oppfølging startet». Klikk på kolonnetittelen for å sortere etter startdato.'
+        tekst:
+            'Oversikten har en ny kolonne, «Oppfølging startet». Klikk på kolonnetittelen for å sortere etter startdato.'
     },
     {
         tittel: 'Velg kolonner',
         bilde: nyKolonne2Bilde,
         tekst: 'Dersom det ikke er plass til å vise alle kolonner samtidig, kan du bruke «Velg kolonner».'
-    },
-
+    }
 ];
 
 const stepsVeiledergrupper: Step[] = [
@@ -46,7 +46,8 @@ const stepsVeiledergrupper: Step[] = [
     {
         tittel: 'Bruk av en gruppe',
         bilde: veiledergruppe3,
-        tekst: 'I listen ser du alle brukerne som er tildelt veilederne i gruppen. Klikk på blyantsymbolet for å redigere eller slette gruppen.'
+        tekst:
+            'I listen ser du alle brukerne som er tildelt veilederne i gruppen. Klikk på blyantsymbolet for å redigere eller slette gruppen.'
     }
 ];
 
@@ -83,7 +84,6 @@ const stepsVeilederverktoy: Step[] = [
         tittel: 'Kopiere fødselsnummer',
         bilde: veilederverktoy3,
         tekst: 'Ved ett klikk har du kopiert personens fødselsnummer.'
-
     }
 ];
 
@@ -91,19 +91,28 @@ const stepsPermitterte: Step[] = [
     {
         tittel: 'Alle utenom permitterte',
         bilde: permitterte1,
-        tekst: <>Filteret viser alle brukere, uavhengig av situasjon og når de registrerte seg, <b>ekskludert</b> de som
-            er permittert etter 9. mars. Filteret kan kombineres med andre statusfiltre.</>
+        tekst: (
+            <>
+                Filteret viser alle brukere, uavhengig av situasjon og når de registrerte seg, <b>ekskludert</b> de som
+                er permittert etter 9. mars. Filteret kan kombineres med andre statusfiltre.
+            </>
+        )
     },
     {
         tittel: 'Permitterte etter 9. mars',
         bilde: permitterte2,
-        tekst: <>Filteret viser <b>kun</b> de som har svart at de er permittert eller blir permittert og har registrert
-            seg etter 9. mars. Du kan kombinere filteret med f.eks. "Venter på svar fra NAV”.</>
+        tekst: (
+            <>
+                Filteret viser <b>kun</b> de som har svart at de er permittert eller blir permittert og har registrert
+                seg etter 9. mars. Du kan kombinere filteret med f.eks. "Venter på svar fra NAV”.
+            </>
+        )
     },
     {
         tittel: 'Etiketter for permitterte etter 9. mars',
         bilde: permitterte3,
-        tekst: 'De permitterte har etiketten "Permittert etter 9. mars”, både i oversikten og i visittkortet over aktivitetsplanen.'
+        tekst:
+            'De permitterte har etiketten "Permittert etter 9. mars”, både i oversikten og i visittkortet over aktivitetsplanen.'
     }
 ];
 
@@ -111,7 +120,8 @@ const stepsMineFilter: Step[] = [
     {
         tittel: 'Mine filter',
         bilde: mineFilter1,
-        tekst: 'Nå kan du lagre enkeltfiltre og kombinasjoner av flere filter. Da får du enklere tilgang på filtreringer du bruker mye.'
+        tekst:
+            'Nå kan du lagre enkeltfiltre og kombinasjoner av flere filter. Da får du enklere tilgang på filtreringer du bruker mye.'
     },
     {
         tittel: 'Lagre nytt filter',
@@ -122,7 +132,7 @@ const stepsMineFilter: Step[] = [
         tittel: 'Endre navn eller slett filter',
         bilde: mineFilter3,
         tekst: 'Velg det aktuelle filteret og klikk på blyantsymbolet for å redigere navnet eller slette filteret.'
-    },
+    }
 ];
 
 export function getTour(modal: ModalName) {

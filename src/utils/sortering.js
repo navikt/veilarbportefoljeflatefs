@@ -1,12 +1,11 @@
-
 export const DIRECTION = {
     ASC: 'ascending',
     DESC: 'descending',
     NA: 'na'
 };
 
-const norskStringSort = (prop) => (a, b) => a[prop].localeCompare(b[prop]);
-const annetSort = (prop) => (a, b) => a[prop] - b[prop];
+const norskStringSort = prop => (a, b) => a[prop].localeCompare(b[prop]);
+const annetSort = prop => (a, b) => a[prop] - b[prop];
 
 export function sorter(property, direction) {
     const directionBias = direction === DIRECTION.DESC ? -1 : 1;

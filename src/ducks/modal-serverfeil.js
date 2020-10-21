@@ -5,7 +5,6 @@ export const SLETTING_FEILET_MODAL = 'veiledergrupper_slette/FEILET';
 export const REDIGERING_FEILET_MODAL = 'veiledergrupper_endre/FEILET';
 export const NY_FEILET_MODAL = 'veiledergrupper_ny/FEILET';
 
-
 // Reducer
 const initalState = {
     aarsak: undefined,
@@ -28,14 +27,15 @@ export default function reducer(state = initalState, action) {
 
 // Action Creators
 export function visServerfeilModal() {
-    return (dispatch) => dispatch({
-        type: VIS_SERVERFEIL_MODAL
-    });
+    return dispatch =>
+        dispatch({
+            type: VIS_SERVERFEIL_MODAL
+        });
 }
 
 export function skjulServerfeilModal() {
-    return (dispatch) => dispatch({
-        type: SKJUL_SERVERFEIL_MODAL
-    });
+    return dispatch =>
+        dispatch({
+            type: SKJUL_SERVERFEIL_MODAL
+        });
 }
-

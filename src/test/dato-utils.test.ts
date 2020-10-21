@@ -1,4 +1,4 @@
-import { klokkeslettTilMinutter, minuttDifferanse } from '../utils/dato-utils';
+import {klokkeslettTilMinutter, minuttDifferanse} from '../utils/dato-utils';
 
 describe('dato utils test', () => {
     describe('omvandler allt til minutter dersom tidskolonne skall kunne vare mer generisk', () => {

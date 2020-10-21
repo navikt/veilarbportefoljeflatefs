@@ -1,61 +1,63 @@
 @import '~nav-frontend-core/less/_variabler';
 
-@bakgrunnsGra: #F4F4F4;
+@bakgrunnsGra: #f4f4f4;
 
 .veilarbportefoljeflatefs {
-  .minoversikt-liste__wrapper {
-    background-color: @bakgrunnsGra;
-    border-top: none;
-    border-bottom: none;
-    border-radius: 0 0 @border-radius-base @border-radius-base;
-    margin-bottom: 0;
+    .minoversikt-liste__wrapper {
+        background-color: @bakgrunnsGra;
+        border-top: none;
+        border-bottom: none;
+        border-radius: 0 0 @border-radius-base @border-radius-base;
+        margin-bottom: 0;
 
-    li:nth-child(odd) {
-      background-color: white;
-    }
-  }
-
-  .ny__annen-veileder {
-    .annen-veileder-varsel {
-      text-align: center;
-      margin: auto 1rem;
-      font-weight: bolder;
-    }
-  }
-
-  .tilbaketilveileder {
-    display: inline-block;
-    position: relative;
-    margin-bottom: 2rem;
-    text-decoration: none;
-    color: @navBla;
-
-    &:active, &:visited, &:hover {
-      color: @navBla;
+        li:nth-child(odd) {
+            background-color: white;
+        }
     }
 
-    i {
-      position: absolute;
-      margin-top: 12px;
+    .ny__annen-veileder {
+        .annen-veileder-varsel {
+            text-align: center;
+            margin: auto 1rem;
+            font-weight: bolder;
+        }
     }
 
-    span {
-      display: inline-block;
-      position: absolute;
-      margin-left: 20px;
-      white-space: nowrap;
+    .tilbaketilveileder {
+        display: inline-block;
+        position: relative;
+        margin-bottom: 2rem;
+        text-decoration: none;
+        color: @navBla;
+
+        &:active,
+        &:visited,
+        &:hover {
+            color: @navBla;
+        }
+
+        i {
+            position: absolute;
+            margin-top: 12px;
+        }
+
+        span {
+            display: inline-block;
+            position: absolute;
+            margin-left: 20px;
+            white-space: nowrap;
+        }
     }
-  }
 
-  .arbeidsliste--ikon {
-    position: relative;
-    right: -4px;
-  }
+    .arbeidsliste--ikon {
+        position: relative;
+        right: -4px;
+    }
 
-  .ny__lagre-filter-knapp {
-    height: fit-content;
-    width: fit-content;
-    margin: auto 0 auto auto;
-    background-color: transparent;
-  }
+    .ny__lagre-filter-knapp {
+        height: fit-content;
+        width: fit-content;
+        margin: auto 0 auto auto;
+        background-color: transparent;
+    }
 }

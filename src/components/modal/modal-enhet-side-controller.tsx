@@ -1,5 +1,5 @@
 import React from 'react';
-import { TILDELING_FEILET } from '../../ducks/modal-feilmelding-brukere';
+import {TILDELING_FEILET} from '../../ducks/modal-feilmelding-brukere';
 import ServerFeilModal from './server-feil-modal';
 import {
     NY_FEILET_MODAL,
@@ -7,16 +7,23 @@ import {
     SLETTING_FEILET_MODAL,
     VIS_SERVERFEIL_MODAL
 } from '../../ducks/modal-serverfeil';
-import { TildelingerOk } from './modal-suksess';
-import { VIS_TILDELING_SUKSESS_MODAL } from '../../ducks/modal';
+import {TildelingerOk} from './modal-suksess';
+import {VIS_TILDELING_SUKSESS_MODAL} from '../../ducks/modal';
 import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
-import { useModalControllerSelector } from '../../hooks/redux/use-modal-controller.selector';
+import {useModalControllerSelector} from '../../hooks/redux/use-modal-controller.selector';
 import VeiledergruppeendringFeiletModal from './veiledergruppe/veiledergruppeendring-feilet-modal';
-import { logEvent } from '../../utils/frontend-logger';
+import {logEvent} from '../../utils/frontend-logger';
 import './feilmelding-brukere.less';
 
 export function ModalEnhetSideController() {
-    const {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal} = useModalControllerSelector();
+    const {
+        serverfeilModalSkalVises,
+        feilmeldingModal,
+        modal,
+        closeServerfeilModal,
+        closeFeilmeldingModal,
+        closeModal
+    } = useModalControllerSelector();
 
     const lukkTildelingFeiletModal = () => {
         closeFeilmeldingModal();
@@ -67,8 +74,5 @@ export function ModalEnhetSideController() {
                 tekst="Beklager, men gruppen kunne ikke redigeres."
             />
         </>
-
     );
 }
-
-

@@ -52,7 +52,8 @@ function TourModal(props: TourModalProps) {
     const hidePrevBtn = stepIndex === 0;
     const nextBtnText = isFinalStep ? 'Ferdig' : 'Neste';
     const nextBtnHandleClick = isFinalStep ? lukkModal : handleNextBtnClicked;
-    const systemtittel = (props.systemtittel === '' || props.systemtittel === undefined) ? 'Ny oppdatering' : props.systemtittel;
+    const systemtittel =
+        props.systemtittel === '' || props.systemtittel === undefined ? 'Ny oppdatering' : props.systemtittel;
 
     return (
         <NavFrontendModal
@@ -70,11 +71,7 @@ function TourModal(props: TourModalProps) {
             </div>
             <main className="tour-modal__main">
                 <div className="tour-modal__main--bilde-wrapper">
-                    <img
-                        alt="Bilde på endringen"
-                        src={step.bilde}
-                        className="tour-modal__main--bilde"
-                    />
+                    <img alt="Bilde på endringen" src={step.bilde} className="tour-modal__main--bilde" />
                 </div>
                 <div className="tour-modal__main--beskrivelse">
                     <Undertittel className="blokk-xxxs">{step.tittel}</Undertittel>
@@ -82,10 +79,14 @@ function TourModal(props: TourModalProps) {
                 </div>
             </main>
             <footer className="tour-modal__footer">
-                <ChevronLenke retning={Retning.VENSTRE} tekst="Forrige" hide={hidePrevBtn}
-                              onClick={handlePreviousBtnClicked}/>
-                <Stegviser antallSteg={steps.length} valgtSteg={stepIndex}/>
-                <ChevronLenke retning={Retning.HOYRE} tekst={nextBtnText} onClick={nextBtnHandleClick}/>
+                <ChevronLenke
+                    retning={Retning.VENSTRE}
+                    tekst="Forrige"
+                    hide={hidePrevBtn}
+                    onClick={handlePreviousBtnClicked}
+                />
+                <Stegviser antallSteg={steps.length} valgtSteg={stepIndex} />
+                <ChevronLenke retning={Retning.HOYRE} tekst={nextBtnText} onClick={nextBtnHandleClick} />
             </footer>
         </NavFrontendModal>
     );

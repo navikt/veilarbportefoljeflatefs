@@ -2,7 +2,7 @@ import React from 'react';
 import {UFORDELTE_BRUKERE} from '../../filter-konstanter';
 import hiddenIf from '../../../components/hidden-if/hidden-if';
 import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
-import NyBarInputCheckbox from "../../../components/barinput/ny_barinput-checkbox";
+import NyBarInputCheckbox from '../../../components/barinput/ny_barinput-checkbox';
 
 export interface FiltreringStatusGruppe {
     ferdigfilterListe: string[];

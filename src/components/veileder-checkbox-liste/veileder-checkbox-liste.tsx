@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { ReactNode, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import {ReactNode, useEffect, useState} from 'react';
+import {connect} from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Checkbox } from 'nav-frontend-skjema';
-import { endreFiltervalg } from '../../ducks/filtrering';
-import { VeiledereState } from '../../ducks/veiledere';
-import { FiltervalgModell, VeilederModell } from '../../model-interfaces';
+import {Checkbox} from 'nav-frontend-skjema';
+import {endreFiltervalg} from '../../ducks/filtrering';
+import {VeiledereState} from '../../ducks/veiledere';
+import {FiltervalgModell, VeilederModell} from '../../model-interfaces';
 import './veileder-checkbox-liste.less';
-import {ListevisningType} from "../../ducks/ui/listevisning";
+import {ListevisningType} from '../../ducks/ui/listevisning';
 
 interface StateProps {
     veiledere: VeiledereState;
@@ -36,7 +36,6 @@ const SubmitKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
 );
 
 function VeilederCheckboxListe(props: any) {
-
     const [valgteElementer, setValgteElementer] = useState<string[]>([]);
     const [open, setOpen] = useState<boolean>(props.open);
 
@@ -49,24 +48,22 @@ function VeilederCheckboxListe(props: any) {
     }, [props.filtervalg]);
 
     const erValgt = (value: string | undefined): boolean => {
-        return !!value && !!valgteElementer.find((valgtElement) => value === valgtElement);
+        return !!value && !!valgteElementer.find(valgtElement => value === valgtElement);
     };
 
     const getFiltrerteVeiledere = (): VeilederModell[] => {
-
         const {veilederNavnQuery, veiledere} = props;
 
         const query = veilederNavnQuery ? veilederNavnQuery.toLowerCase().trim() : '';
 
-        return veiledere.data.veilederListe
-            .filter((veileder) =>
+        return veiledere.data.veilederListe.filter(
+            veileder =>
                 (veileder.navn && veileder.navn.toLowerCase().indexOf(query) >= 0) ||
-                (veileder.ident && veileder.ident.toLowerCase().indexOf(query) >= 0));
-
+                (veileder.ident && veileder.ident.toLowerCase().indexOf(query) >= 0)
+        );
     };
 
     const handleCheckboxOnClick = (value: string | undefined) => {
-
         if (!value) {
             return;
         }
@@ -78,13 +75,12 @@ function VeilederCheckboxListe(props: any) {
             valgteElem = [...valgteElementer, value];
             setValgteElementer(valgteElem);
         } else if (valueErValgt) {
-            valgteElem = valgteElementer.filter((valgtElement) => value !== valgtElement);
+            valgteElem = valgteElementer.filter(valgtElement => value !== valgtElement);
             setValgteElementer(valgteElem);
         }
-
     };
 
-    const handleSubmitKnappOnClick = (e) => {
+    const handleSubmitKnappOnClick = e => {
         e.preventDefault();
 
         props.sokEtterVeileder(valgteElementer);
@@ -94,7 +90,7 @@ function VeilederCheckboxListe(props: any) {
         }
     };
 
-    const handleLukkeKnappOnClick = (e) => {
+    const handleLukkeKnappOnClick = e => {
         e.preventDefault();
 
         if (props.onClose) {
@@ -103,22 +99,23 @@ function VeilederCheckboxListe(props: any) {
     };
 
     const mapVeiledereToCheckboxList = (veiledere?: VeilederModell[]): ReactNode[] | null => {
-
         if (!veiledere) {
             return null;
         }
 
-        return veiledere.filter((vlg) => vlg.ident && vlg.navn).map((vlg) => {
-            const identErValgt = erValgt(vlg.ident);
-            return (
-                <Checkbox
-                    key={vlg.ident}
-                    label={vlg.navn}
-                    checked={identErValgt}
-                    onChange={() => handleCheckboxOnClick(vlg.ident)}
-                />
-            );
-        });
+        return veiledere
+            .filter(vlg => vlg.ident && vlg.navn)
+            .map(vlg => {
+                const identErValgt = erValgt(vlg.ident);
+                return (
+                    <Checkbox
+                        key={vlg.ident}
+                        label={vlg.navn}
+                        checked={identErValgt}
+                        onChange={() => handleCheckboxOnClick(vlg.ident)}
+                    />
+                );
+            });
     };
 
     const valgCheckboxListe = mapVeiledereToCheckboxList(getFiltrerteVeiledere());
@@ -132,15 +129,13 @@ function VeilederCheckboxListe(props: any) {
     if (harValg) {
         return (
             <form className="checkbox-liste">
-                <div className="checkbox-liste__valg">
-                    {valgCheckboxListe}
-                </div>
+                <div className="checkbox-liste__valg">{valgCheckboxListe}</div>
                 <div className="checkbox-liste__valg-footer">
-                    {harValgteElementer ?
-                        <SubmitKnapp onClick={handleSubmitKnappOnClick}/>
-                        :
-                        <LukkeKnapp onClick={handleLukkeKnappOnClick}/>
-                    }
+                    {harValgteElementer ? (
+                        <SubmitKnapp onClick={handleSubmitKnappOnClick} />
+                    ) : (
+                        <LukkeKnapp onClick={handleLukkeKnappOnClick} />
+                    )}
                 </div>
             </form>
         );
@@ -163,7 +158,7 @@ const mapStateToProps = (state): StateProps => ({
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
     sokEtterVeileder(veiledere: string[]) {
-        dispatch(endreFiltervalg('veiledere', veiledere, ListevisningType.veilederOversikt,));
+        dispatch(endreFiltervalg('veiledere', veiledere, ListevisningType.veilederOversikt));
     }
 });
 

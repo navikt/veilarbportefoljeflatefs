@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import './toast.less';
-import { useDispatch } from 'react-redux';
-import { useTimer } from '../../hooks/use-timer';
+import {useDispatch} from 'react-redux';
+import {useTimer} from '../../hooks/use-timer';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 interface TimedToastProps {
@@ -26,16 +26,13 @@ function TimedToast(props: TimedToastProps) {
             dispatch(props.fjernToast);
         }, 6000);
 
-
         return () => clearTimeout(timer);
     });
 
     return (
         <div className="timed-toast" ref={toastRef} tabIndex={0}>
             <AlertStripe type={props.alertstripe} className="timed-toast__alertstripe">
-                <span className="timed-toast__tekst">
-                    {props.toastTekst}
-                </span>
+                <span className="timed-toast__tekst">{props.toastTekst}</span>
             </AlertStripe>
         </div>
     );

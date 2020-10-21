@@ -22,8 +22,8 @@ import FilteringVeilederGrupper from '../filtrering/filtrering-veileder-grupper/
 import '../style.less';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
-import {ListevisningType} from "../ducks/ui/listevisning";
-import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
+import {ListevisningType} from '../ducks/ui/listevisning';
+import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -49,26 +49,26 @@ function VeiledereSide() {
     return (
         <DocumentTitle title="Veilederoversikt">
             <div className="side-storrelse blokk-xl">
-                <ToppMeny/>
+                <ToppMeny />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <section>
-                        <div id="veileder-oversikt"
-                             role="tabpanel"
-                             className="oversikt-sideinnhold"
-                             aria-labelledby="veileder-oversikt">
+                        <div
+                            id="veileder-oversikt"
+                            role="tabpanel"
+                            className="oversikt-sideinnhold"
+                            aria-labelledby="veileder-oversikt"
+                        >
                             <div className="status-filter-kolonne">
                                 <PanelBase className="blokk-xxxs sok-veileder">
-                                    <Undertittel>
-                                        Søk veileder
-                                    </Undertittel>
-                                    <FiltreringVeiledere/>
+                                    <Undertittel>Søk veileder</Undertittel>
+                                    <FiltreringVeiledere />
                                 </PanelBase>
                                 <MetrikkEkspanderbartpanel
                                     apen={true}
                                     lamellNavn="veiledergrupper"
                                     tittel="Veiledergrupper"
                                 >
-                                    <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt}/>
+                                    <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt} />
                                 </MetrikkEkspanderbartpanel>
                             </div>
                             <div className="liste-kolonne">
@@ -93,7 +93,6 @@ function VeiledereSide() {
                         </div>
                     </section>
                 </Innholdslaster>
-
             </div>
         </DocumentTitle>
     );

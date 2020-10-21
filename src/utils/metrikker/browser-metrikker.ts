@@ -1,4 +1,4 @@
-import { logEvent } from '../frontend-logger';
+import {logEvent} from '../frontend-logger';
 
 const BROWSER_METRIKKER_LOG_TAG = 'portefolje.browser_metrikker';
 const BROWSER_METRIKKER_LOCAL_STORAGE_KEY = 'har_logget_browser_metrikker';
@@ -39,10 +39,10 @@ function getBrowserZoom(): number {
 export const loggBrowserMetrikker = (): void => {
     const browserAgent = getBrowserAgent();
 
-    logEvent('portefolje.browser_bruk', { browser: browserAgent, zoom: getBrowserZoom() });
+    logEvent('portefolje.browser_bruk', {browser: browserAgent, zoom: getBrowserZoom()});
 
     if (window.localStorage.getItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY) == null) {
         window.localStorage.setItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY, 'true');
-        logEvent(BROWSER_METRIKKER_LOG_TAG, { browser: browserAgent });
+        logEvent(BROWSER_METRIKKER_LOG_TAG, {browser: browserAgent});
     }
 };

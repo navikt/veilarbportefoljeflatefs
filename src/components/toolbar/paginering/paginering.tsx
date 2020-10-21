@@ -26,15 +26,7 @@ interface OwnProps {
 type PagineringProps = StateProps & OwnProps & DispatchProps;
 
 function Paginering(props: PagineringProps) {
-    const {
-        className,
-        onChange,
-        side,
-        sideStorrelse,
-        antallTotalt,
-        seAlle,
-        endrePaginering
-    } = props;
+    const {className, onChange, side, sideStorrelse, antallTotalt, seAlle, endrePaginering} = props;
 
     const antallSider: number = Math.ceil(antallTotalt / sideStorrelse);
     const erPaForsteSide: boolean = side === 1;
@@ -54,13 +46,11 @@ function Paginering(props: PagineringProps) {
                 pressed={seAlle && antallTotalt <= sideStorrelse}
                 onClick={() => totalPaginering(1, !seAlle)}
             >
-                {!seAlle ? 'Se alle' :
-                    'Se færre'
-                }
+                {!seAlle ? 'Se alle' : 'Se færre'}
             </KnappPanel>
 
             <KnappPanel disabled={erPaForsteSide} onClick={() => totalPaginering(side - 1, seAlle)}>
-                <VenstreChevron/>
+                <VenstreChevron />
             </KnappPanel>
 
             {!erPaForsteSide && <KnappPanel onClick={() => totalPaginering(1, seAlle)}>1</KnappPanel>}
@@ -69,27 +59,23 @@ function Paginering(props: PagineringProps) {
                 <strong>{side}</strong>
             </KnappPanel>
 
-            {(!erPaSisteSide && !seAlle) &&
-            <KnappPanel
-                onClick={() => totalPaginering(antallSider, seAlle)}
-            >
-                {antallSider}
-            </KnappPanel>
-            }
+            {!erPaSisteSide && !seAlle && (
+                <KnappPanel onClick={() => totalPaginering(antallSider, seAlle)}>{antallSider}</KnappPanel>
+            )}
 
             <KnappPanel disabled={erPaSisteSide || seAlle} onClick={() => totalPaginering(side + 1, seAlle)}>
-                <HoyreChevron/>
+                <HoyreChevron />
             </KnappPanel>
         </div>
     );
 }
 
 const mapStateToProps = (state): StateProps => {
-    return ({
+    return {
         side: selectSide(state),
         sideStorrelse: selectSideStorrelse(state),
-        seAlle: selectSeAlle(state),
-    });
+        seAlle: selectSeAlle(state)
+    };
 };
 
 const mapDispatchToProps = (dispatch, props: OwnProps) => ({

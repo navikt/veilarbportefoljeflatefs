@@ -13,7 +13,6 @@ interface TilfredshetValgState {
 }
 
 class TilfredshetValg extends React.Component<TilfredshetValgProps, TilfredshetValgState> {
-
     constructor(props: TilfredshetValgProps) {
         super(props);
 
@@ -31,12 +30,10 @@ class TilfredshetValg extends React.Component<TilfredshetValgProps, TilfredshetV
         const {tilfredshet} = this.state;
         const erValgt = ikonTilfredshet === tilfredshet;
         const harValgt = tilfredshet > 0;
-        return classNames('tilfredshet-valg__ikon',
-            {
-                'tilfredshet-valg__ikon--valgt': erValgt,
-                'tilfredshet-valg__ikon--ikke-valgt': harValgt && !erValgt
-            }
-        );
+        return classNames('tilfredshet-valg__ikon', {
+            'tilfredshet-valg__ikon--valgt': erValgt,
+            'tilfredshet-valg__ikon--ikke-valgt': harValgt && !erValgt
+        });
     };
 
     render() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {guid} from 'nav-frontend-js-utils';
 import './barlabel.less';
-import NyBarlabel from "./ny_barlabel";
+import NyBarlabel from './ny_barlabel';
 
 interface BarInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     labelTekst: React.ReactNode;

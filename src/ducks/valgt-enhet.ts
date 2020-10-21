@@ -1,7 +1,7 @@
-import { STATUS } from './utils';
-import { Action, Dispatch } from 'redux';
-import { AppState } from '../reducer';
-import {pagineringSetup} from "./paginering";
+import {STATUS} from './utils';
+import {Action, Dispatch} from 'redux';
+import {AppState} from '../reducer';
+import {pagineringSetup} from './paginering';
 
 // Actions
 const PENDING = 'veilarbportefolje/enheter/PENDING';
@@ -10,32 +10,31 @@ const INIT = 'INIT_VELG_ENHET';
 
 export interface ValgtEnhetState {
     data: {
-        enhetId: string | null
+        enhetId: string | null;
     };
-    status: string,
+    status: string;
 }
 
 const initialState: ValgtEnhetState = {
     status: STATUS.NOT_STARTED,
     data: {
         enhetId: null
-    },
+    }
 };
 
 //  Reducer
 export default function reducer(state: ValgtEnhetState = initialState, action): ValgtEnhetState {
     switch (action.type) {
         case PENDING:
-            return { ...state, status: STATUS.PENDING };
+            return {...state, status: STATUS.PENDING};
         case INIT:
             return {...state, data: {enhetId: action.valgtEnhet}};
         case OK:
-            return {...state, data: {enhetId: action.valgtEnhet}, status: STATUS.OK };
+            return {...state, data: {enhetId: action.valgtEnhet}, status: STATUS.OK};
         default:
             return state;
     }
 }
-
 
 export function velgEnhetForVeileder(valgtEnhet) {
     return {
@@ -49,7 +48,7 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
         const state = getState();
         const valgtEnhet = state.valgtEnhet.data;
 
-        if(valgtEnhet && valgtEnhet.enhetId === nyEnhet ) {
+        if (valgtEnhet && valgtEnhet.enhetId === nyEnhet) {
             return;
         }
         dispatch(velgEnhetForVeileder(nyEnhet));

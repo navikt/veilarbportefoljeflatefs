@@ -1,10 +1,9 @@
 import React from 'react';
-import { Element } from 'nav-frontend-typografi';
-import { useStatusTallSelector } from '../../../hooks/redux/use-statustall';
-import { tekstAntallBrukere } from '../../../utils/tekst-utils';
+import {Element} from 'nav-frontend-typografi';
+import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
+import {tekstAntallBrukere} from '../../../utils/tekst-utils';
 
 export function FiltreringStatusContainer(props: {children: React.ReactNode}) {
-
     const statusTall = useStatusTallSelector();
     const brukereTekst = tekstAntallBrukere(statusTall.totalt);
 

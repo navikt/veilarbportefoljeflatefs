@@ -16,11 +16,11 @@ function lagUkerTekst(ukerIgjen, minVal) {
     return `${ukerIgjen} uker`;
 }
 
-function UkeKolonne({ className, ukerIgjen, minVal, skalVises }: UkekolonneProps) {
+function UkeKolonne({className, ukerIgjen, minVal, skalVises}: UkekolonneProps) {
     if (!skalVises) {
         return null;
     }
-    return (<span className={className}>{lagUkerTekst(ukerIgjen, minVal)}</span>);
+    return <span className={className}>{lagUkerTekst(ukerIgjen, minVal)}</span>;
 }
 
 export default UkeKolonne;

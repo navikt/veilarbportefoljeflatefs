@@ -1,6 +1,6 @@
-import {useSelector} from "react-redux";
-import {AppState} from "../../reducer";
-import {ListevisningType} from "../../ducks/ui/listevisning";
+import {useSelector} from 'react-redux';
+import {AppState} from '../../reducer';
+import {ListevisningType} from '../../ducks/ui/listevisning';
 
 export enum SidebarTabInfo {
     STATUS = 'STATUS',
@@ -19,4 +19,3 @@ export function sidebarSelector(state: AppState, name: string) {
 export const useSidebarViewStore = (name: string) => {
     return useSelector((state: AppState) => sidebarSelector(state, name));
 };
-

@@ -1,11 +1,11 @@
-import { getCrypto } from './crypto';
-import { fetchHarSettInnlegg, registrerSettInnlegg } from './endringslogg-api';
-import { EndringsloggInnleggMedSettStatus } from './endringslogg-custom';
+import {getCrypto} from './crypto';
+import {fetchHarSettInnlegg, registrerSettInnlegg} from './endringslogg-api';
+import {EndringsloggInnleggMedSettStatus} from './endringslogg-custom';
 
 export function hexString(buffer) {
     const byteArray = new Uint8Array(buffer);
 
-    const hexCodes = [...byteArray].map((value) => {
+    const hexCodes = [...byteArray].map(value => {
         const hexCode = value.toString(16);
         const paddedHexCode = hexCode.padStart(2, '0');
         return paddedHexCode;
@@ -62,16 +62,16 @@ export function slettersjonerLocalstorage() {
 }
 
 export async function hentSetteVersjonerRemotestorage(): Promise<string[]> {
-    const temp = await(fetchHarSettInnlegg());
+    const temp = await fetchHarSettInnlegg();
     return temp.endringslogg ? temp.endringslogg.split(',') : [];
 }
 
 export async function registrerInnholdIRemoteStorage(endringslogg: EndringsloggInnleggMedSettStatus[]) {
     const message: string[] = [];
-    endringslogg.forEach( (e)=> {
-        if(!message.includes(e.versjonId) && e.sett) {
+    endringslogg.forEach(e => {
+        if (!message.includes(e.versjonId) && e.sett) {
             message.push(e.versjonId);
         }
     });
-    await(registrerSettInnlegg(message.join(',')));
+    await registrerSettInnlegg(message.join(','));
 }

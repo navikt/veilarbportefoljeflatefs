@@ -1,11 +1,10 @@
 import React from 'react';
-import { Textarea } from 'nav-frontend-skjema';
-import { Field, getIn } from 'formik';
+import {Textarea} from 'nav-frontend-skjema';
+import {Field, getIn} from 'formik';
 
 const KOMMENTAR_MAKS_LENGDE = 500;
 
 function FormikTekstArea({name}) {
-
     const validate = (value: string) => {
         let error: undefined | string;
         if (!value) {
@@ -33,7 +32,8 @@ function FormikTekstArea({name}) {
                         name={name}
                         feil={feil}
                         maxLength={500}
-                    />);
+                    />
+                );
             }}
         </Field>
     );

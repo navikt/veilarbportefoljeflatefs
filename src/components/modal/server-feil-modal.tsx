@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Normaltekst, Undertittel} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import './feilmelding-brukere.less';
-import {useState} from "react";
+import {useState} from 'react';
 
 interface ServerFeilModalProps {
     isOpen: boolean;
@@ -14,8 +14,8 @@ export default function ServerFeilModal(props: ServerFeilModalProps) {
 
     const lukkModal = () => {
         props.onClose();
-        setIsOpen(false)
-    }
+        setIsOpen(false);
+    };
 
     return (
         <VarselModal
@@ -30,9 +30,7 @@ export default function ServerFeilModal(props: ServerFeilModalProps) {
                 <Undertittel tag="h1" className="blokk-xxs">
                     Handlingen kan ikke utføres
                 </Undertittel>
-                <Normaltekst className="blokk-s">
-                    Noe gikk feil, prøv igjen senere.
-                </Normaltekst>
+                <Normaltekst className="blokk-s">Noe gikk feil, prøv igjen senere.</Normaltekst>
                 <button className="knapp knapp--hoved blokk-s" onClick={lukkModal}>
                     Ok
                 </button>

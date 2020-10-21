@@ -14,9 +14,9 @@ const initalState = {
 export default function reducer(state = initalState, action) {
     switch (action.type) {
         case SKJUL_FEILMELDING_MODAL:
-            return { ...initalState };
+            return {...initalState};
         case VIS_FEILMELDING_MODAL:
-            return { ...action.data };
+            return {...action.data};
         default:
             return state;
     }
@@ -24,15 +24,16 @@ export default function reducer(state = initalState, action) {
 
 // Action Creators
 export function visFeiletModal(data) {
-    return (dispatch) => dispatch({
-        type: VIS_FEILMELDING_MODAL,
-        data
-    });
+    return dispatch =>
+        dispatch({
+            type: VIS_FEILMELDING_MODAL,
+            data
+        });
 }
 
 export function skjulFeilmeldingModal() {
-    return (dispatch) => dispatch({
-        type: SKJUL_FEILMELDING_MODAL
-    });
+    return dispatch =>
+        dispatch({
+            type: SKJUL_FEILMELDING_MODAL
+        });
 }
-

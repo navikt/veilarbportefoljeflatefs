@@ -1,22 +1,22 @@
 import * as React from 'react';
-import { MouseEvent, useState } from 'react';
+import {MouseEvent, useState} from 'react';
 import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import Arbeidslistekategori from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
-import { BrukerModell, FiltervalgModell, VeilederModell } from '../model-interfaces';
+import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import Collapse from 'react-collapse';
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
-import { Kolonne } from '../ducks/ui/listevisning';
-import { useLayoutEffect } from 'react';
-import { OrNothing } from '../utils/types/types';
+import {Kolonne} from '../ducks/ui/listevisning';
+import {useLayoutEffect} from 'react';
+import {OrNothing} from '../utils/types/types';
 import './minoversikt.less';
-import { Checkbox } from 'nav-frontend-skjema';
-import { useFeatureSelector } from '../hooks/redux/use-feature-selector';
-import { VEDTAKSTOTTE } from '../konstanter';
-import { logEvent } from '../utils/frontend-logger';
-import {Info} from "../components/tabell/etikett";
+import {Checkbox} from 'nav-frontend-skjema';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {VEDTAKSTOTTE} from '../konstanter';
+import {logEvent} from '../utils/frontend-logger';
+import {Info} from '../components/tabell/etikett';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -56,7 +56,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker} = props;
     const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
     const classname = classNames({
-        'brukerliste--forrigeBruker': varForrigeBruker,
+        'brukerliste--forrigeBruker': varForrigeBruker
     });
 
     return (
@@ -70,7 +70,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         label=""
                         className="brukerliste__checkbox"
                     />
-                    <Arbeidslistekategori skalVises={arbeidslisteAktiv} kategori={bruker.arbeidsliste.kategori}/>
+                    <Arbeidslistekategori skalVises={arbeidslisteAktiv} kategori={bruker.arbeidsliste.kategori} />
                 </div>
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"
@@ -81,7 +81,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                 />
                 <div className="brukerliste__gutter-right">
                     <div className="brukerliste__etiketter">
-                        <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa}/>
+                        <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
                         <Info hidden={!bruker.nyForVeileder} typo="undertekst">
                             Ny bruker
                         </Info>

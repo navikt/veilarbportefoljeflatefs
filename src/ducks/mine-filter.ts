@@ -6,7 +6,7 @@ import {
     redigerMineFilter,
     slettMineFilter
 } from '../middleware/api';
-import {HandlingsType, LagretFilterState, NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from "./lagretFilter";
+import {HandlingsType, LagretFilterState, NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from './lagretFilter';
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
@@ -27,7 +27,6 @@ export const SLETT_MINEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 
 export const SORTER_MINEFILTER_OK = 'lagredefilter_sortering/OK';
 export const SORTER_MINEFILTER_FEILET = 'lagredefilter_sortering/FEILET';
-
 
 const initialState = {
     status: STATUS.NOT_STARTED,
@@ -68,7 +67,7 @@ export default function reducer(state: LagretFilterState = initialState, action)
                 ...state,
                 status: STATUS.OK,
                 handlingType: HandlingsType.REDIGERE,
-                data: state.data.map((elem) => {
+                data: state.data.map(elem => {
                     if (elem.filterId !== action.data.filterId) {
                         return elem;
                     }
@@ -80,7 +79,7 @@ export default function reducer(state: LagretFilterState = initialState, action)
                 ...state,
                 status: STATUS.OK,
                 handlingType: HandlingsType.SLETTE,
-                data: state.data.filter((elem) => elem.filterId !== action.data)
+                data: state.data.filter(elem => elem.filterId !== action.data)
             };
 
         case SORTER_MINEFILTER_FEILET:
@@ -130,9 +129,9 @@ export function slettFilter(filterId: number) {
 }
 
 export function lagreSorteringForFilter(sorteringOgIder: SorteringOgId[]) {
-    return (dispatch) => {
+    return dispatch => {
         return lagreSorteringFiltere(sorteringOgIder)
-            .then((data) => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
+            .then(data => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
             .catch(handterFeil(dispatch, SORTER_MINEFILTER_FEILET));
     };
 }

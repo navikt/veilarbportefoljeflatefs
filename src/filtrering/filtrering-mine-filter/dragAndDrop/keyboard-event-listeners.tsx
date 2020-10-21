@@ -19,13 +19,13 @@ export interface HandleKeyUpProps {
 }
 
 export function handleKeyDown({
-                                  eventIsInsideContainer,
-                                  setDropIndex,
-                                  prepFlyttOpp,
-                                  prepFlyttNed,
-                                  requestFocus
-                              }: HandleKeyDownProps) {
-    return (e) => {
+    eventIsInsideContainer,
+    setDropIndex,
+    prepFlyttOpp,
+    prepFlyttNed,
+    requestFocus
+}: HandleKeyDownProps) {
+    return e => {
         if (eventIsInsideContainer(e)) {
             if (e.keyCode === keyCodes.down || e.keyCode === keyCodes.up) {
                 e.preventDefault();
@@ -49,14 +49,14 @@ export function handleKeyDown({
 }
 
 export function handleKeyUp({
-                                eventIsInsideContainer,
-                                requestNewOrder,
-                                setDestIndex,
-                                setSrcIndex,
-                                avbryt,
-                                lagreRekkefolge
-                            }: HandleKeyUpProps) {
-    return (e) => {
+    eventIsInsideContainer,
+    requestNewOrder,
+    setDestIndex,
+    setSrcIndex,
+    avbryt,
+    lagreRekkefolge
+}: HandleKeyUpProps) {
+    return e => {
         if (eventIsInsideContainer(e)) {
             if (e.shiftKey && (e.keyCode === keyCodes.up || e.keyCode === keyCodes.down)) {
                 if (e.keyCode === keyCodes.up) {

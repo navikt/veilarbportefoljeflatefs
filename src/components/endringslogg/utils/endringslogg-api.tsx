@@ -1,25 +1,26 @@
-import { sjekkStatuskode } from '../../../ducks/utils';
+import {sjekkStatuskode} from '../../../ducks/utils';
 
 const credentials = 'same-origin';
 
 const MED_CREDENTIALS: RequestInit = {
     credentials,
     headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
     }
 };
 export const REMOTE_STORE_URL = '/veilarbremotestore/';
 
-export function fetchHarSettInnlegg(): Promise<{ endringslogg: string }> {
-    return fetch(`${REMOTE_STORE_URL}?ressurs=endringslogg`, {credentials: 'same-origin'})
-        .then(responseToJson);
+export function fetchHarSettInnlegg(): Promise<{endringslogg: string}> {
+    return fetch(`${REMOTE_STORE_URL}?ressurs=endringslogg`, {credentials: 'same-origin'}).then(responseToJson);
 }
 
 function responseToJson(response) {
-    if (response.status >= 500) { // Internal error
+    if (response.status >= 500) {
+        // Internal error
         throw Error('Bad response 500');
     }
-    if (response.status !== 204) { // No content
+    if (response.status !== 204) {
+        // No content
         return response.json();
     }
     return response;
