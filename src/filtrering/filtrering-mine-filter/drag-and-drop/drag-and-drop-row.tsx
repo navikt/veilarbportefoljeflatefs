@@ -2,7 +2,7 @@ import React, {useRef, useEffect} from 'react';
 import {ReactComponent as DragIcon} from './dragIcon.svg';
 import FlyttKnappWrapper from './flytt-knapp-wrapper';
 
-interface DragAndDropRowProps {
+export interface DragAndDropRowProps {
     idx: number;
     filterNavn: string;
     isLastRow: boolean;
@@ -12,39 +12,43 @@ interface DragAndDropRowProps {
     onClick: (from: number, to: number) => void;
 }
 
-function DragAndDropRow(props: DragAndDropRowProps) {
+function DragAndDropRow({
+    idx,
+    filterNavn,
+    isLastRow,
+    shouldBeFocused,
+    requestFocus,
+    className,
+    onClick
+}: DragAndDropRowProps) {
     const dragNode = useRef<HTMLLIElement>(null);
-
     useEffect(() => {
-        if (props.shouldBeFocused) {
+        if (shouldBeFocused) {
             dragNode.current?.focus();
-            props.requestFocus(-1);
+            requestFocus(-1);
         }
-    }, [props, props.shouldBeFocused, props.requestFocus]);
+    }, [shouldBeFocused, requestFocus]);
 
-    const tabIndex = props.idx === 0 ? 0 : -1;
-
+    const tabIndex = idx === 0 ? 0 : -1;
     return (
         <li
-            onClick={props.requestFocus}
             ref={dragNode}
-            className={props.className}
+            className={className}
             draggable="true"
             tabIndex={tabIndex}
             role="option"
             aria-describedby="operation"
-            aria-selected
-            value={props.idx}
-            data-testid="drag-drop_rad"
+            aria-selected={true}
+            value={idx}
         >
-            <DragIcon aria-disabled />
-            {props.filterNavn}
+            <DragIcon aria-disabled={true} />
+            {filterNavn}
             <FlyttKnappWrapper
-                showUpBtn={props.idx !== 0}
-                showDownBtn={!props.isLastRow}
-                onClickUp={() => props.onClick(props.idx, props.idx - 1)}
-                onClickDown={() => props.onClick(props.idx, props.idx + 1)}
-                idx={props.idx}
+                showUpBtn={idx !== 0}
+                showDownBtn={!isLastRow}
+                onClickUp={() => onClick(idx, idx - 1)}
+                onClickDown={() => onClick(idx, idx + 1)}
+                idx={idx}
             />
         </li>
     );

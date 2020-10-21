@@ -4,19 +4,20 @@ import {endreFiltervalg} from '../../ducks/filtrering';
 import {lagreEndringer, slettGruppe} from '../../ducks/veiledergrupper_filter';
 import {AppState} from '../../reducer';
 import {harGjortEndringer} from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
-import {VeilederGruppeModal} from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
+import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
 import {FiltervalgModell} from '../../model-interfaces';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
+import '../../components/sidebar/sidebar.less';
+import './veiledergruppe.less';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import './veileder-gruppe.less';
 import {LagretFilter} from '../../ducks/lagretFilter';
-import VeilederGruppeRad from './ny_veileder_gruppe_rad';
+import VeiledergruppeRad from './veiledergruppe_rad';
 
-interface VeilederGruppeInnholdProps {
-    veiledergruppe: LagretFilter[];
+interface VeiledergruppeInnholdProps {
+    lagretFilter: LagretFilter[];
     filterValg?: FiltervalgModell;
     filtergruppe: ListevisningType;
 }
@@ -25,20 +26,20 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
+function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
-    const outerDivRef = useRef<HTMLDivElement>(null);
-
     const valgtGruppeEnhetensOversikt = useSelector(
-        (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe
+        (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeiledergruppe
     );
     const valgtGruppeVeilederOversikt = useSelector(
-        (state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe
+        (state: AppState) => state.mineFilterVeilederOversikt.valgtVeiledergruppe
     );
     const valgtGruppe =
         props.filtergruppe === ListevisningType.veilederOversikt
             ? valgtGruppeVeilederOversikt
             : valgtGruppeEnhetensOversikt;
+
+    const outerDivRef = useRef<HTMLDivElement>(null);
 
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const enhet = useEnhetSelector();
@@ -86,16 +87,16 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     return (
         <div className="veileder-gruppe__valgfelt" ref={outerDivRef}>
-            {props.veiledergruppe.map((veilederGruppe, idx) => (
-                <VeilederGruppeRad
-                    key={idx}
+            {props.lagretFilter.map((veilederGruppe, index) => (
+                <VeiledergruppeRad
+                    key={index}
                     veilederGruppe={veilederGruppe}
                     onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
                     filtergruppe={props.filtergruppe}
                 />
             ))}
             {valgtGruppe && (
-                <VeilederGruppeModal
+                <VeiledergruppeModal
                     initialVerdi={{
                         gruppeNavn: valgtGruppe.filterNavn,
                         filterValg: valgtGruppe.filterValg,
@@ -114,4 +115,4 @@ function VeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     );
 }
 
-export default VeilederGruppeInnhold;
+export default VeiledergruppeInnhold;

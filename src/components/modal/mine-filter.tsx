@@ -18,9 +18,9 @@ export function harGjortEndringer(
     );
 }
 
-export function veilederlisterErLik(lagretVeilederGruppe: string[], veiledereFilter: string[]): boolean {
+export function veilederlisterErLik(lagretVeiledergruppe: string[], veiledereFilter: string[]): boolean {
     return (
-        lagretVeilederGruppe.length === veiledereFilter.length &&
-        lagretVeilederGruppe.every(v => veiledereFilter.includes(v))
+        lagretVeiledergruppe.length === veiledereFilter.length &&
+        lagretVeiledergruppe.every(v => veiledereFilter.includes(v))
     );
 }

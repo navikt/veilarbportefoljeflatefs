@@ -4,7 +4,7 @@ import brukere from './portefolje';
 import veiledere from './veiledere';
 import statustall from './statustall';
 import tiltak from './tiltak';
-import {veilederGrupper} from './veileder-grupper';
+import {veiledergrupper} from './veiledergrupper';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
 import {endringsloggListe} from './endringslogg';
@@ -51,7 +51,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
     };
 }
 
-let customVeilederGrupper = veilederGrupper();
+let customVeiledergrupper = veiledergrupper();
 let customMineFilter = mineFilter();
 
 const mock = FetchMock.configure({
@@ -71,11 +71,11 @@ mock.mock(
 mock.get('/veilarbremotestore/', jsonResponse(endringsloggListe));
 
 //veiledergrupper
-mock.get('/veilarbfilter/api/enhet/:enhetId/', jsonResponse(customVeilederGrupper));
+mock.get('/veilarbfilter/api/enhet/:enhetId/', jsonResponse(customVeiledergrupper));
 
 mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}, res, ctx) => {
     let oppdatertGruppe = {};
-    customVeilederGrupper = customVeilederGrupper.map(v => {
+    customVeiledergrupper = customVeiledergrupper.map(v => {
         if (v.filterId === body.filterId) {
             oppdatertGruppe = {...v, filterNavn: body.filterNavn, filterValg: body.filterValg};
             return oppdatertGruppe;
@@ -87,14 +87,14 @@ mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}, res, ctx) => {
 
 mock.post('/veilarbfilter/api/enhet/:enhetId', (req, res, ctx) => {
     const filterId = Math.floor(Math.random() * 100) + 500;
-    customVeilederGrupper = [...customVeilederGrupper, {...req.body, filterId}];
+    customVeiledergrupper = [...customVeiledergrupper, {...req.body, filterId}];
     return res(ctx.json({...req.body, filterId}));
 });
 
 mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (req, res, ctx) => {
     const filterId = parseInt(req.pathParams.filterId);
     if (!isNaN(filterId)) {
-        customVeilederGrupper = customVeilederGrupper.filter(v => v.filterId !== filterId);
+        customVeiledergrupper = customVeiledergrupper.filter(v => v.filterId !== filterId);
         return res(ctx.status(200));
     }
     return res(ctx.status(401));

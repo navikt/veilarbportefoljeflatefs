@@ -15,14 +15,14 @@ export const LUKK_MINE_FILTER_MODAL = 'lagretfilter_velg/LUKK_MINE_FILTER_MODAL'
 
 export interface LagretFilterUIState {
     valgtMineFilter: OrNothing<LagretFilter>;
-    valgtVeilederGruppe: OrNothing<LagretFilter>;
+    valgtVeiledergruppe: OrNothing<LagretFilter>;
     sisteValgtMineFilter: OrNothing<number>;
     erModalApen: boolean;
 }
 
 const initialState = {
     valgtMineFilter: null,
-    valgtVeilederGruppe: null,
+    valgtVeiledergruppe: null,
     sisteValgtMineFilter: null,
     erModalApen: false
 };
@@ -41,9 +41,9 @@ export default function reducer(state: LagretFilterUIState = initialState, actio
         case AVMARKER_SISTE_VALGT_MINE_FILTER:
             return {...state, sisteValgtMineFilter: null};
         case MARKER_VEILEDER_GRUPPE:
-            return {...state, valgtVeilederGruppe: action.data};
+            return {...state, valgtVeiledergruppe: action.data};
         case AVMARKER_VEILEDER_GRUPPE:
-            return {...state, valgtVeilederGruppe: null};
+            return {...state, valgtVeiledergruppe: null};
         case APEN_MINE_FILTER_MODAL:
             return {...state, erModalApen: true};
         case LUKK_MINE_FILTER_MODAL:
@@ -62,7 +62,7 @@ export function markerMineFilter(filterVerdi: LagretFilter, filtergruppe: string
     };
 }
 
-export function markerValgtVeilederGruppe(filterVerdi: LagretFilter, filtergruppe: string) {
+export function markerValgtVeiledergruppe(filterVerdi: LagretFilter, filtergruppe: string) {
     return {
         type: MARKER_VEILEDER_GRUPPE,
         data: filterVerdi,
@@ -77,7 +77,7 @@ export function avmarkerValgtMineFilter(filtergruppe: string) {
     };
 }
 
-export function avmarkerValgtVeilederGruppe(filtergruppe: string) {
+export function avmarkerValgtVeiledergruppe(filtergruppe: string) {
     return {
         type: AVMARKER_VEILEDER_GRUPPE,
         name: filtergruppe

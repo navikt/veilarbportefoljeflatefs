@@ -27,7 +27,7 @@ import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import {OrNothing} from '../utils/types/types';
-import './ny_enhetsportefolje.less';
+import './enhetsportefolje.less';
 import './brukerliste.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';

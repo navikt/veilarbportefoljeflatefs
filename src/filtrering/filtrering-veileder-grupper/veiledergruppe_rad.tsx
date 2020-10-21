@@ -8,22 +8,22 @@ import {ListevisningType} from '../../ducks/ui/listevisning';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import {AppState} from '../../reducer';
-import {markerValgtVeilederGruppe} from '../../ducks/lagret-filter-ui-state';
+import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
 
-interface VeilederGruppeRad {
+interface VeiledergruppeRadProps {
     veilederGruppe: LagretFilter;
     onClickRedigerKnapp: () => void;
     filtergruppe: ListevisningType;
 }
 
-function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: VeilederGruppeRad) {
+function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: VeiledergruppeRadProps) {
     const dispatch = useDispatch();
     const valgtGruppeEnhetensOversikt = useSelector(
-        (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe
+        (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeiledergruppe
     );
     const valgtGruppeVeilederOversikt = useSelector(
-        (state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe
+        (state: AppState) => state.mineFilterVeilederOversikt.valgtVeiledergruppe
     );
     const valgtGruppe =
         filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEnhetensOversikt;
@@ -45,7 +45,7 @@ function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
             {gruppeId: veilederGruppe.filterId, sideNavn: finnSideNavn()}
         );
         dispatch(endreFiltervalg('veiledere', veilederGruppe.filterValg.veiledere, filtergruppe));
-        dispatch(markerValgtVeilederGruppe(veilederGruppe, filtergruppe));
+        dispatch(markerValgtVeiledergruppe(veilederGruppe, filtergruppe));
 
         if (veilederGruppe.filterCleanup && erDetLikGruppe() !== undefined) {
             onClickRedigerKnapp();
@@ -53,9 +53,9 @@ function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
     }
 
     return (
-        <div className="ny__veileder-gruppe__rad" data-testid="veiledergruppe_rad-wrapper">
+        <div className="veileder-gruppe__rad" data-testid="veiledergruppe_rad-wrapper">
             <Radio
-                className="ny__veileder-gruppe__gruppenavn"
+                className="veileder-gruppe__gruppenavn"
                 key={veilederGruppe.filterId}
                 name="veiledergruppe"
                 label={veilederGruppe.filterNavn}
@@ -74,4 +74,4 @@ function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
     );
 }
 
-export default VeilederGruppeRad;
+export default VeiledergruppeRad;

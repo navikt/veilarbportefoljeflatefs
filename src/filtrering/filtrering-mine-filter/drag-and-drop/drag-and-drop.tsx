@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import './drag-and-drop.less';
 import {lagreSorteringForFilter} from '../../../ducks/mine-filter';
 import DragAndDropContainer from './drag-and-drop-container';
-import NyMineFilterRad from '../ny_mine-filter-rad';
+import MineFilterRad from '../mine-filter-rad';
 import {useDispatch} from 'react-redux';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
 import {LagretFilter} from '../../../ducks/lagretFilter';
@@ -64,7 +64,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     return (
         <>
             {dragAndDropOrder.map((filter, idx) => (
-                <NyMineFilterRad key={idx} mineFilter={filter} filtergruppe={filtergruppe} />
+                <MineFilterRad key={idx} mineFilter={filter} filtergruppe={filtergruppe} />
             ))}
         </>
     );

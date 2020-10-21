@@ -5,7 +5,7 @@ import {FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import EnhetKolonner from './enhet-kolonner';
 import {useLayoutEffect} from 'react';
-import './ny_enhetsportefolje.less';
+import './enhetsportefolje.less';
 import './brukerliste.less';
 import {OrNothing} from '../utils/types/types';
 import {Checkbox} from 'nav-frontend-skjema';

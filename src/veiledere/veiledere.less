@@ -3,6 +3,12 @@
 @bakgrunnsGra: #f4f4f4;
 
 .veilarbportefoljeflatefs {
+    .oversikt-sideinnhold-veilederside {
+        display: grid;
+        grid-template-columns: 21rem auto;
+        column-gap: 1rem;
+    }
+
     .veiledersok__wrapper {
         margin-top: 1rem;
         width: 25%;
@@ -28,11 +34,12 @@
     .sok-veileder {
         border: 1px solid @navGra60;
         border-radius: @border-radius-base;
-        margin-bottom: 1rem;
+        margin: 0.5rem 0 1rem;
     }
 
     .veiledere-undertittel {
         background-color: #f4f4f4;
+        padding-top: 0.5rem;
     }
 
     .veilederoversikt {
@@ -60,6 +67,23 @@
             top: 0;
             height: 0;
             width: auto;
+        }
+    }
+
+    .status-filter-kolonne {
+        height: fit-content;
+        position: sticky;
+        top: 0.5rem;
+    }
+
+    @media (max-width: 900px) {
+        .oversikt-sideinnhold-veilederside {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .status-filter-kolonne {
+            position: inherit;
         }
     }
 }

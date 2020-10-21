@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useCallback, useMemo} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import TabellOverskrift from '../components/tabell-overskrift';
@@ -13,21 +13,26 @@ import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {ListevisningType} from '../ducks/ui/listevisning';
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
 import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
-import FiltreringContainer from '../filtrering/filtrering-container';
-import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {useDispatch, useSelector} from 'react-redux';
-import Toolbar from '../components/toolbar/toolbar';
-import {slettEnkeltFilter} from '../ducks/filtrering';
+import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
+import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
+import classNames from 'classnames';
+import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
+import {pagineringSetup} from '../ducks/paginering';
+import Sidebar from '../components/sidebar/sidebar';
 import {MineFilterLagreFilterKnapp} from '../minoversikt/mine-filter-lagre-filter-knapp';
 import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
+import {useWindowWidth} from '../hooks/use-window-width';
+import Toolbar from '../components/toolbar/toolbar';
+import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import Alertstripe from 'nav-frontend-alertstriper';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 
@@ -57,20 +62,39 @@ function antallFilter(filtervalg) {
         .reduce((a, b) => a + b, 0);
 }
 
+const filtergruppe = ListevisningType.enhetensOversikt;
+const id = 'enhetens-oversikt';
+
 function EnhetSide() {
     const statustall = useFetchStatusTall();
-    const filtergruppe = ListevisningType.enhetensOversikt;
     const {
         portefolje,
         filtervalg,
-        listevisning,
         enhetId,
         sorteringsrekkefolge,
         sorteringsfelt,
-        enhettiltak
+        enhettiltak,
+        listevisning
     } = usePortefoljeSelector(filtergruppe);
-    const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
+    const portefoljeData = portefolje.data;
+    const antallBrukere =
+        portefoljeData.antallReturnert > portefoljeData.antallTotalt
+            ? portefoljeData.antallTotalt
+            : portefoljeData.antallReturnert;
+    const harFilter = antallFilter(filtervalg) !== 0;
+    const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
+    const slettVeilederFilter = useCallback(
+        ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.enhetensOversikt)),
+        [dispatch]
+    );
+    const veilederLabel = useMemo(
+        () => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter),
+        [filtervalg.veiledere, veilederliste, slettVeilederFilter]
+    );
+    const tiltak = sortTiltak(enhettiltak.data.tiltak);
+    const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
+    const windowWidth = useWindowWidth();
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -79,118 +103,127 @@ function EnhetSide() {
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({filtergruppe: filtergruppe});
 
-    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe)), [
-        dispatch,
-        filtergruppe
-    ]);
-
-    const portefoljeData = portefolje.data;
-    const antallBrukere =
-        portefoljeData.antallReturnert > portefoljeData.antallTotalt
-            ? portefoljeData.antallTotalt
-            : portefoljeData.antallReturnert;
-    const flereEnnAntallBrukere = (antall: number) => {
-        return antallBrukere > antall;
+    const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
+        dispatch(pagineringSetup({side: 1}));
+        dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
-    const tiltak = sortTiltak(enhettiltak.data.tiltak);
-    const harFilter = antallFilter(filtervalg) !== 0;
 
-    const veilederLabel = useMemo(
-        () => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter),
-        [filtervalg.veiledere, veilederliste, slettVeilederFilter]
-    );
+    const [scrolling, setScrolling] = useState(false);
+
+    useEffect(() => {
+        function onScroll() {
+            let currentPosition = window.pageYOffset;
+            if (currentPosition > 220) {
+                setScrolling(true);
+            } else {
+                setScrolling(false);
+            }
+        }
+
+        window.addEventListener('scroll', onScroll);
+        return window.addEventListener('scroll', onScroll);
+    });
+
     return (
         <DocumentTitle title="Enhetens oversikt">
-            <div className="side-storrelse blokk-xl">
+            <div className="side-storrelse" role="tab" aria-controls={id} id={id}>
                 <ToppMeny />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div
-                        id="enhetens-oversikt"
+                        className={classNames(
+                            'oversikt-sideinnhold',
+                            isSidebarHidden && 'oversikt-sideinnhold__hidden'
+                        )}
                         role="tabpanel"
-                        className="oversikt-sideinnhold"
-                        aria-labelledby="enhetens-oversikt"
+                        aria-labelledby={id}
+                        id={id}
                     >
-                        <div className="status-filter-kolonne">
-                            <FiltreringContainer
-                                filtervalg={filtervalg}
-                                enhettiltak={tiltak}
-                                filtergruppe={filtergruppe}
-                            />
+                        <Sidebar
+                            filtervalg={filtervalg}
+                            filtergruppe={filtergruppe}
+                            enhettiltak={tiltak}
+                            isSidebarHidden={isSidebarHidden}
+                        />
+                        <div className="sokefelt-knapp__container">
+                            <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
+                            <MineFilterLagreFilterKnapp filtergruppe={filtergruppe} />
                         </div>
-                        <div className="liste-kolonne">
-                            <div className="etikett-wrapper">
-                                <FiltreringLabelContainer
-                                    filtervalg={{
-                                        ...filtervalg,
-                                        veiledere: veilederLabel
-                                    }}
-                                    filtergruppe={filtergruppe}
-                                    enhettiltak={enhettiltak.data.tiltak}
-                                    listevisning={listevisning}
-                                    className="filtrering-label-container"
-                                />
-                                <MineFilterLagreFilterKnapp filtergruppe={filtergruppe} />
-                            </div>
-                            {harFilter ? (
-                                <>
-                                    <div
-                                        className={
-                                            flereEnnAntallBrukere(4) ? 'sticky-container' : 'sticky-container__fjernet'
-                                        }
-                                    >
-                                        <TabellOverskrift className="tabelloverskrift blokk-xxs" />
-                                        <span
+                        <FiltreringLabelContainer
+                            filtervalg={{
+                                ...filtervalg,
+                                veiledere: veilederLabel
+                            }}
+                            filtergruppe={filtergruppe}
+                            enhettiltak={enhettiltak.data.tiltak}
+                            listevisning={listevisning}
+                            className="filtrering-label-container"
+                        />
+                        {harFilter ? (
+                            <div
+                                className={classNames(
+                                    'oversikt__container',
+                                    isSidebarHidden && 'oversikt__container__hidden'
+                                )}
+                            >
+                                <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
+                                    <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                                        <div
                                             className={
-                                                flereEnnAntallBrukere(4) ? 'sticky-skygge' : 'ikke-sticky__skygge'
+                                                antallBrukere > 4
+                                                    ? 'toolbar-container'
+                                                    : 'ikke-sticky__toolbar-container'
                                             }
                                         >
-                                            <div
-                                                className={
-                                                    flereEnnAntallBrukere(4)
-                                                        ? 'toolbar-container'
-                                                        : 'ikke-sticky__toolbar-container'
-                                                }
-                                            >
-                                                <Toolbar
-                                                    onPaginering={() =>
-                                                        dispatch(
-                                                            hentPortefoljeForEnhet(
-                                                                enhetId,
-                                                                sorteringsrekkefolge,
-                                                                sorteringsfelt,
-                                                                filtervalg
-                                                            )
+                                            <TabellOverskrift
+                                                className={classNames(
+                                                    'tabelloverskrift',
+                                                    ((scrolling && isSidebarHidden) ||
+                                                        (scrolling && windowWidth < 1200) ||
+                                                        (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
+                                                        'tabelloverskrift__hidden'
+                                                )}
+                                            />
+                                            <Toolbar
+                                                onPaginering={() =>
+                                                    dispatch(
+                                                        hentPortefoljeForEnhet(
+                                                            enhetId,
+                                                            sorteringsrekkefolge,
+                                                            sorteringsfelt,
+                                                            filtervalg
                                                         )
-                                                    }
-                                                    filtergruppe={filtergruppe}
-                                                    sokVeilederSkalVises
-                                                    antallTotalt={portefoljeData.antallTotalt}
-                                                />
-                                                <EnhetTabellOverskrift />
-                                            </div>
-                                        </span>
-                                    </div>
+                                                    )
+                                                }
+                                                filtergruppe={filtergruppe}
+                                                sokVeilederSkalVises
+                                                antallTotalt={portefoljeData.antallTotalt}
+                                                scrolling={scrolling}
+                                                isSidebarHidden={isSidebarHidden}
+                                            />
+                                            <EnhetTabellOverskrift />
+                                        </div>
+                                    </span>
                                     <EnhetTabell
                                         classNameWrapper={
-                                            flereEnnAntallBrukere(0)
+                                            antallBrukere > 0
                                                 ? 'portefolje__container'
                                                 : 'portefolje__container__tom-liste'
                                         }
                                     />
-                                </>
-                            ) : (
-                                <Alertstripe
-                                    type="info"
-                                    className="blokk-m"
-                                    aria-live="assertive"
-                                    role="alert"
-                                    aria-atomic="true"
-                                    data-testid="alertstripe_filtrering"
-                                >
-                                    Du må gjøre en filtrering for å se brukere i listen.
-                                </Alertstripe>
-                            )}
-                        </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <Alertstripe
+                                type="info"
+                                className="blokk-m"
+                                aria-live="assertive"
+                                role="alert"
+                                aria-atomic="true"
+                                data-testid="alertstripe_filtrering"
+                            >
+                                Du må gjøre en filtrering for å se brukere i listen.
+                            </Alertstripe>
+                        )}
                     </div>
                 </Innholdslaster>
                 <MineFilterModal filtergruppe={filtergruppe} />

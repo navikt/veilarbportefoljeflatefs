@@ -14,8 +14,8 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import "./commands";
+import './commands';
 
 // Alternatively you can use CommonJS syntax:
-require("cypress-dark");
-require("@4tw/cypress-drag-drop");
+require('cypress-dark');
+require('@4tw/cypress-drag-drop');

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Application from './application';
-import './ny_style.less';
 import './style.less';
 
 if (!(window as any)._babelPolyfill) {

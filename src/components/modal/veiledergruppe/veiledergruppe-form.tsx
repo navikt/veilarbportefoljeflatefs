@@ -2,12 +2,12 @@ import React, {PropsWithChildren} from 'react';
 import {Normaltekst} from 'nav-frontend-typografi';
 import {Input} from 'nav-frontend-skjema';
 import {FiltervalgModell} from '../../../model-interfaces';
-import ValgtVeilederGruppeListe from './valgt-veileder-gruppeliste';
+import ValgtVeiledergruppeListe from './valgt-veiledergruppe-liste';
 import {useFocus} from '../../../hooks/use-focus';
 import './modal.less';
 import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
 
-interface VeilederGruppeForm {
+interface VeiledergruppeFormProps {
     filterValg: FiltervalgModell;
     hanterVeilederChange: (erValgt: boolean, veilederIdent: string) => void;
     gruppeNavn: string;
@@ -17,7 +17,7 @@ interface VeilederGruppeForm {
     errors: any;
 }
 
-function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
+function VeiledergruppeForm(props: PropsWithChildren<VeiledergruppeFormProps>) {
     const {focusRef} = useFocus();
     return (
         <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit} data-testid="veiledergruppe_modal_form">
@@ -47,7 +47,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
             >
                 Veiledere i gruppen: <i> ({props.filterValg.veiledere.length} stk)</i>
             </Normaltekst>
-            <ValgtVeilederGruppeListe
+            <ValgtVeiledergruppeListe
                 valgteVeileder={props.filterValg.veiledere}
                 fjernValgtVeileder={veilederTarget => props.hanterVeilederChange(false, veilederTarget)}
                 feil={props.errors.filterValg}
@@ -57,4 +57,4 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
     );
 }
 
-export default VeilederGruppeForm;
+export default VeiledergruppeForm;

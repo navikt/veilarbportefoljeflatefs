@@ -1,48 +1,28 @@
 import React, {useEffect, useRef} from 'react';
 import './mine-filter_innhold.less';
-import {PopoverOrientering} from 'nav-frontend-popover';
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import hiddenIf from '../../components/hidden-if/hidden-if';
+import '../../components/sidebar/sidebar.less';
 import {Normaltekst} from 'nav-frontend-typografi';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {REDESIGN} from '../../konstanter';
-import {useWindowWidth} from '../../hooks/use-window-width';
-import {ListevisningType} from '../../ducks/ui/listevisning';
-import MineFilterRad from './mine-filter-rad';
 import {LagretFilter} from '../../ducks/lagretFilter';
+import {ListevisningType} from '../../ducks/ui/listevisning';
+import DragAndDrop from './drag-and-drop/drag-and-drop';
 
-const HiddenHjelpetekst = hiddenIf(Hjelpetekst);
-
-interface MineFilterInnholdProps {
-    mineFilter: LagretFilter[];
+interface LagredeFilterInnholdProps {
+    lagretFilter: LagretFilter[];
     filtergruppe: ListevisningType;
+    fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
+    isDraggable: boolean;
+    setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function MineFilterInnhold(props: MineFilterInnholdProps) {
-    const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
-    const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
-    const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
-
-    const fjernUtilgjengeligeFilter = elem => {
-        const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
-        const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
-        const veiledergrupper = elem.filterValg.veiledere.length > 0;
-        const nyeBrukere = elem.filterValg.ferdigfilterListe.includes('NYE_BRUKERE_FOR_VEILEDER');
-        const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes('UFORDELTE_BRUKERE');
-
-        return !(
-            (erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
-            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))
-        );
-    };
-
+function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
+
     const filtrertListe = () => {
-        return props.mineFilter.filter(elem => fjernUtilgjengeligeFilter(elem));
+        return props.lagretFilter.filter(elem => props.fjernUtilgjengeligeFilter(elem));
     };
 
     useEffect(() => {
@@ -55,14 +35,12 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
     const hentFiltrertListeinnhold = () => {
         return (
             <div className="mine-filter__valgfelt" ref={outerDivRef}>
-                {filtrertListe().map((filter, idx) => (
-                    <MineFilterRad
-                        key={idx}
-                        lagretFilter={filter}
-                        filtergruppe={props.filtergruppe}
-                        parentDiv={outerDivRef}
-                    />
-                ))}
+                <DragAndDrop
+                    stateFilterOrder={filtrertListe()}
+                    filtergruppe={props.filtergruppe}
+                    isDraggable={props.isDraggable}
+                    setisDraggable={props.setisDraggable}
+                />
             </div>
         );
     };
@@ -75,25 +53,7 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
         );
     };
 
-    const hentInnhold = () => {
-        return filtrertListe().length > 0 ? hentFiltrertListeinnhold() : getEmptyState();
-    };
-
-    return (
-        <>
-            <HiddenHjelpetekst
-                type={useWindowWidth() < 1200 ? PopoverOrientering.Venstre : PopoverOrientering.Over}
-                hidden={filtrertListe().length === props.mineFilter.length}
-                className={erRedesignFeatureTogglePa ? 'ny__hjelpetekst' : 'gammelt__hjelpetekst'}
-            >
-                {erPaMinOversikt &&
-                    'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.'}
-                {erPaEnhetensOversikt &&
-                    'Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt.'}
-            </HiddenHjelpetekst>
-            {hentInnhold()}
-        </>
-    );
+    return filtrertListe().length > 0 ? hentFiltrertListeinnhold() : getEmptyState();
 }
 
-export default MineFilterInnhold;
+export default LagredeFilterInnhold;
