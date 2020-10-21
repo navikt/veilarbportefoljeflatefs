@@ -31,14 +31,15 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
                 className={classNames('veiledergruppe-modal__valgteveileder', {
                     'skjemaelement__input--harFeil': props.feil
                 })}
+                data-testid="veiledergruppe_modal_valgte-veiledere_wrapper"
             >
                 {veiledere.length === 0 ? (
                     <Normaltekst className="veiledergruppe-modal__valgteveileder__tom-liste-tekst">
                         Ingen veiledere lagt til i gruppen
                     </Normaltekst>
                 ) : (
-                    splitArrayITo.map((listeMedVeileder, idx) => (
-                        <div key={idx}>
+                    splitArrayITo.map((listeMedVeileder, index) => (
+                        <div key={index}>
                             {listeMedVeileder.map(veileder => (
                                 <div key={veileder.ident} className="veiledergruppe-modal__valgteveileder__elem">
                                     <span>{`${veileder.etternavn}, ${veileder.fornavn}`}</span>
@@ -46,6 +47,7 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
                                         className="fjern--knapp"
                                         htmlType="button"
                                         onClick={() => props.fjernValgtVeileder(veileder.ident)}
+                                        data-testid="veiledergruppe_modal_valgt-veileder_fjern-knapp"
                                     >
                                         <SlettIkon />
                                     </Flatknapp>

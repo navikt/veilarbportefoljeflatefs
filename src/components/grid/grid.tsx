@@ -27,9 +27,16 @@ function Grid(props: Props) {
         const rawRow = Math.floor(index / props.columns) + 1;
         const rawColumn = (index % props.columns) + 1;
 
-        const childStyle = {gridColumn: rawColumn, msGridColumn: rawColumn, gridRow: rawRow, msGridRow: rawColumn};
+        const childStyle = {
+            gridColumn: rawColumn,
+            msGridColumn: rawColumn,
+            gridRow: rawRow,
+            msGridRow: rawColumn
+        };
 
-        return React.cloneElement(child, {style: Object.assign({}, child.props.style, childStyle)});
+        return React.cloneElement(child, {
+            style: Object.assign({}, child.props.style, childStyle)
+        });
     });
 
     return (

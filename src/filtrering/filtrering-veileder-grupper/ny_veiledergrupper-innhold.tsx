@@ -87,9 +87,9 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     return (
         <div className="ny__veileder-gruppe__valgfelt" ref={outerDivRef}>
-            {props.lagretFilter.map((veilederGruppe, idx) => (
+            {props.lagretFilter.map((veilederGruppe, index) => (
                 <VeilederGruppeRad
-                    key={idx}
+                    key={index}
                     veilederGruppe={veilederGruppe}
                     onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
                     filtergruppe={props.filtergruppe}

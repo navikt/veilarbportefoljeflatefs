@@ -14,9 +14,10 @@ import {LagretFilter} from '../../ducks/lagretFilter';
 interface NyMineFilterRadProps {
     mineFilter: LagretFilter;
     filtergruppe: ListevisningType;
+    dataTestid?: string;
 }
 
-function NyMineFilterRad({mineFilter, filtergruppe}: NyMineFilterRadProps) {
+function NyMineFilterRad({mineFilter, filtergruppe, dataTestid}: NyMineFilterRadProps) {
     const dispatch = useDispatch();
 
     const valgtMineFilter = useSelector((state: AppState) =>
@@ -31,7 +32,11 @@ function NyMineFilterRad({mineFilter, filtergruppe}: NyMineFilterRadProps) {
         logEvent(
             'portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {},
-            {filterId: mineFilter.filterId, sideNavn: finnSideNavn(), id: veilederIdentTilNonsens}
+            {
+                filterId: mineFilter.filterId,
+                sideNavn: finnSideNavn(),
+                id: veilederIdentTilNonsens
+            }
         );
         dispatch(velgMineFilter(mineFilter, filtergruppe));
         dispatch(markerMineFilter(mineFilter, filtergruppe));
@@ -42,7 +47,7 @@ function NyMineFilterRad({mineFilter, filtergruppe}: NyMineFilterRadProps) {
     }
 
     return (
-        <div className="ny__mine-filter__rad">
+        <div className="ny__mine-filter__rad" data-testid="mine-filter_rad-wrapper">
             <Radio
                 className="ny__mine-filter__filternavn"
                 key={mineFilter.filterId}
@@ -51,11 +56,13 @@ function NyMineFilterRad({mineFilter, filtergruppe}: NyMineFilterRadProps) {
                 value={mineFilter.filterId}
                 onChange={() => velgFilter()}
                 checked={valgtMineFilter?.filterId === mineFilter.filterId}
+                data-testid={`mine-filter-rad_${mineFilter.filterNavn}`}
             />
             <RedigerKnapp
                 hidden={valgtMineFilter?.filterId !== mineFilter.filterId}
                 aria="Rediger mitt filter"
                 onClick={onClickRedigerKnapp}
+                dataTestid={`rediger-filter_knapp_${mineFilter.filterNavn}`}
             />
         </div>
     );

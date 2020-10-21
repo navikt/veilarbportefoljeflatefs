@@ -60,11 +60,11 @@ function TourModal(props: TourModalProps) {
             className="tour-modal"
             contentLabel="TourModal"
             isOpen={props.open}
-            closeButton={true}
-            shouldCloseOnOverlayClick={true}
+            closeButton
+            shouldCloseOnOverlayClick
             onRequestClose={lukkModal}
         >
-            <div className="tour-modal__header--wrapper">
+            <div className="tour-modal__header--wrapper" data-testid="endringslogg_tour-modal">
                 <header className="tour-modal__header">
                     <Systemtittel>{systemtittel}</Systemtittel>
                 </header>
@@ -84,9 +84,15 @@ function TourModal(props: TourModalProps) {
                     tekst="Forrige"
                     hide={hidePrevBtn}
                     onClick={handlePreviousBtnClicked}
+                    dataTestId="endringslogg_forrige-knapp"
                 />
                 <Stegviser antallSteg={steps.length} valgtSteg={stepIndex} />
-                <ChevronLenke retning={Retning.HOYRE} tekst={nextBtnText} onClick={nextBtnHandleClick} />
+                <ChevronLenke
+                    retning={Retning.HOYRE}
+                    tekst={nextBtnText}
+                    onClick={nextBtnHandleClick}
+                    dataTestId={isFinalStep ? 'endringslogg_ferdig-knapp' : 'endringslogg_neste-knapp'}
+                />
             </footer>
         </NavFrontendModal>
     );

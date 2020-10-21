@@ -75,7 +75,7 @@ export default function Endringslogg(props: EndringsProps) {
             />
             <TransitionContainer visible={endringsloggApen}>
                 <EndringsloggHeader />
-                <div className={'innhold-container'}>
+                <div className={'innhold-container'} data-testid="endringslogg-innhold">
                     <EndringsloggInnhold innleggsListe={props.innhold} />
                 </div>
             </TransitionContainer>
@@ -96,9 +96,12 @@ function EndringsloggKnapp(props: EndringsloggKnappProps) {
             ref={props.buttonRef}
             className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
             onClick={props.klikk}
+            data-testid="endringslogg-knapp"
         >
             <AlarmIcon />
-            {props.nyeNotifikasjoner && <div className={'endringslogg-nye-notifikasjoner-ikon'} />}
+            {props.nyeNotifikasjoner && (
+                <div className={'endringslogg-nye-notifikasjoner-ikon'} data-testid="endringslogg_nye-notifikasjoner" />
+            )}
         </button>
     );
 }

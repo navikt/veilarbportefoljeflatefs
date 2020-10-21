@@ -30,7 +30,11 @@ export default function reducer(state: ValgtEnhetState = initialState, action): 
         case INIT:
             return {...state, data: {enhetId: action.valgtEnhet}};
         case OK:
-            return {...state, data: {enhetId: action.valgtEnhet}, status: STATUS.OK};
+            return {
+                ...state,
+                data: {enhetId: action.valgtEnhet},
+                status: STATUS.OK
+            };
         default:
             return state;
     }

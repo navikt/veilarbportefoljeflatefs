@@ -55,7 +55,7 @@ function NyToolbar(props: ToolbarProps) {
                         <ToolbarKnapp
                             tittel="Søk veileder"
                             skalVises={sokVeilederSkalVises}
-                            aktiv={true}
+                            aktiv
                             tildelveileder={false}
                             ikon={<SokVeilederIkon className="toolbar-knapp__ikon" id="sok-veileder-ikon" />}
                             filtergruppe={filtergruppe}
@@ -91,7 +91,7 @@ function NyToolbar(props: ToolbarProps) {
                             tittel="Tildel veileder"
                             skalVises={filtergruppe in ListevisningType}
                             aktiv={aktiv}
-                            tildelveileder={true}
+                            tildelveileder
                             ikon={<TildelVeilederIkon className="toolbar-knapp__ikon" id="tildel-veileder-ikon" />}
                             filtergruppe={filtergruppe}
                         />

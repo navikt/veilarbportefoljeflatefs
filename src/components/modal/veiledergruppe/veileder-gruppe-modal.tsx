@@ -60,9 +60,15 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     }, [props.initialVerdi.filterValg, props.initialVerdi.gruppeNavn]);
 
     const fjernVeiledereFraListen = (veilederTarget: string) => {
-        setFilterValg(prevState => ({...prevState, veiledere: prevState.veiledere.filter(v => v !== veilederTarget)}));
+        setFilterValg(prevState => ({
+            ...prevState,
+            veiledere: prevState.veiledere.filter(v => v !== veilederTarget)
+        }));
         if (harForsoktSubmitte) {
-            validate(gruppeNavn, {...filterValg, veiledere: filterValg.veiledere.filter(v => v !== veilederTarget)});
+            validate(gruppeNavn, {
+                ...filterValg,
+                veiledere: filterValg.veiledere.filter(v => v !== veilederTarget)
+            });
         }
     };
 
@@ -75,9 +81,15 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
 
     const hanterChange = (erValgt: boolean, veilederTarget: string) => {
         if (erValgt) {
-            setFilterValg(prevState => ({...prevState, veiledere: [...prevState.veiledere, veilederTarget]}));
+            setFilterValg(prevState => ({
+                ...prevState,
+                veiledere: [...prevState.veiledere, veilederTarget]
+            }));
             if (harForsoktSubmitte) {
-                validate(gruppeNavn, {...filterValg, veiledere: [...filterValg.veiledere, veilederTarget]});
+                validate(gruppeNavn, {
+                    ...filterValg,
+                    veiledere: [...filterValg.veiledere, veilederTarget]
+                });
             }
         } else {
             fjernVeiledereFraListen(veilederTarget);
@@ -157,10 +169,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                 veilederlisterErLik(v.filterValg.veiledere, props.initialVerdi.filterValg.veiledere)
             );
             if (finnLikVeilederGruppe !== undefined) {
-                const errorTekst =
-                    "En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '" +
-                    finnLikVeilederGruppe.filterNavn +
-                    "'. Du må legge til/fjerne veiledere eller slette gruppen.";
+                const errorTekst = `En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '${finnLikVeilederGruppe.filterNavn}'. Du må legge til/fjerne veiledere eller slette gruppen.`;
                 setAlertTekst(errorTekst);
                 setErrors({filterValg: errorTekst} as VeilederGruppeErrors);
             }
@@ -219,7 +228,11 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                     errors={errors}
                 >
                     <div className="veiledergruppe-modal__knappegruppe">
-                        <Hovedknapp className="veiledergruppe-modal__knappegruppe__lagre" htmlType="submit">
+                        <Hovedknapp
+                            className="veiledergruppe-modal__knappegruppe__lagre"
+                            htmlType="submit"
+                            data-testid="veiledergruppe_modal_lagre-knapp"
+                        >
                             {props.lagreKnappeTekst}
                         </Hovedknapp>
                         <Flatknapp
@@ -234,6 +247,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                                 className="veiledergruppe-modal__knappegruppe__slett"
                                 onClick={() => setSletteVeiledergruppeModal(true)}
                                 htmlType="button"
+                                data-testid="veiledergruppe_modal_slette-knapp"
                             >
                                 Slett gruppe
                             </Flatknapp>

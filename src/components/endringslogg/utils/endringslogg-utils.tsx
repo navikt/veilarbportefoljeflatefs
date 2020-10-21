@@ -23,7 +23,6 @@ export function krypterVeilederident(veileder: string): Promise<ArrayBuffer> {
 
 function encodeString(stringToBeEncoded: string): Uint8Array {
     let data;
-    // @ts-ignore
     if (typeof TextEncoder === 'undefined') {
         const utf8 = unescape(encodeURIComponent(stringToBeEncoded));
         data = new Uint8Array(utf8.length);
@@ -38,6 +37,7 @@ function encodeString(stringToBeEncoded: string): Uint8Array {
 }
 
 const LOCALSTORAGE_KEY = 'Endringslogg';
+
 export function hentSetteVersjonerLocalstorage(): string[] {
     const setteVersjoner: string[] = [];
     const localstorageInnhold = localStorage.getItem(LOCALSTORAGE_KEY);

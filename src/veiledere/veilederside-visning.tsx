@@ -28,7 +28,10 @@ function medPortefoljestorrelse(portefoljeStorrelse) {
         {}
     );
 
-    return veileder => ({...veileder, portefoljestorrelse: storrelseMap[veileder.ident] || 0});
+    return veileder => ({
+        ...veileder,
+        portefoljestorrelse: storrelseMap[veileder.ident] || 0
+    });
 }
 
 function propertySort({property, direction}) {

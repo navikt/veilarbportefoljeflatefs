@@ -53,7 +53,7 @@ function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
     }
 
     return (
-        <div className="ny__veileder-gruppe__rad">
+        <div className="ny__veileder-gruppe__rad" data-testid="veiledergruppe_rad-wrapper">
             <Radio
                 className="ny__veileder-gruppe__gruppenavn"
                 key={veilederGruppe.filterId}
@@ -62,11 +62,13 @@ function VeilederGruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
                 value={veilederGruppe.filterId}
                 onChange={() => velgGruppe()}
                 checked={valgtGruppe?.filterId === veilederGruppe.filterId}
+                data-testid={`veiledergruppe-rad_${veilederGruppe.filterNavn}`}
             />
             <RedigerKnapp
                 hidden={valgtGruppe?.filterId !== veilederGruppe.filterId}
                 aria="Rediger veiledergruppe"
                 onClick={onClickRedigerKnapp}
+                dataTestid={`rediger-veiledergruppe_knapp_${veilederGruppe.filterNavn}`}
             />
         </div>
     );

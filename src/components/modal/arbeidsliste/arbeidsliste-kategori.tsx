@@ -9,6 +9,8 @@ import {Field} from 'formik';
 import {KategoriModell} from '../../../model-interfaces';
 
 function ArbeidslisteKategori(props: {name: string; index: string}) {
+    const indexId = props.index ? `_${props.index}` : '';
+
     return (
         <Field name={props.name}>
             {({field, form}) => {
@@ -23,6 +25,7 @@ function ArbeidslisteKategori(props: {name: string; index: string}) {
                             checked={field.value === KategoriModell.BLA}
                             index={props.index}
                             title="Arbeidslisteikon blå"
+                            dataTestId={`modal_arbeidslistekategori_${KategoriModell.BLA}${indexId}`}
                         />
                         <Arbeidslistekategori
                             value={KategoriModell.LILLA}
@@ -32,6 +35,7 @@ function ArbeidslisteKategori(props: {name: string; index: string}) {
                             checked={field.value === KategoriModell.LILLA}
                             index={props.index}
                             title="Arbeidslisteikon lilla"
+                            dataTestId={`modal_arbeidslistekategori_${KategoriModell.LILLA}${indexId}`}
                         />
                         <Arbeidslistekategori
                             value={KategoriModell.GRONN}
@@ -41,6 +45,7 @@ function ArbeidslisteKategori(props: {name: string; index: string}) {
                             checked={field.value === KategoriModell.GRONN}
                             index={props.index}
                             title="Arbeidslisteikon grønn"
+                            dataTestId={`modal_arbeidslistekategori_${KategoriModell.GRONN}${indexId}`}
                         />
                         <Arbeidslistekategori
                             value={KategoriModell.GUL}
@@ -50,6 +55,7 @@ function ArbeidslisteKategori(props: {name: string; index: string}) {
                             checked={field.value === KategoriModell.GUL}
                             index={props.index}
                             title="Arbeidslisteikon gul"
+                            dataTestId={`modal_arbeidslistekategori_${KategoriModell.GUL}${indexId}`}
                         />
                     </div>
                 );

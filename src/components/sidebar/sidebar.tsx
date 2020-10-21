@@ -111,7 +111,9 @@ function Sidebar(props: SidebarProps) {
         return (
             <button
                 key={key}
-                className={classNames('sidebar__tab', {'sidebar__tab-valgt': isSelected})}
+                className={classNames('sidebar__tab', {
+                    'sidebar__tab-valgt': isSelected
+                })}
                 onClick={e => handleMouseClick(e, tab)}
                 role="tab"
                 aria-selected={!isSidebarHidden && isSelected}
@@ -120,6 +122,7 @@ function Sidebar(props: SidebarProps) {
                 tabIndex={(!isSelected && -1) || 0}
                 onKeyUp={e => handleKeyUp(e, tab)}
                 title={ariaFaneTekst}
+                data-testid={`sidebar-tab_${tab.type}`}
             >
                 <div className="sidebar__tab-ikon">{tab.icon}</div>
             </button>
@@ -195,7 +198,9 @@ function Sidebar(props: SidebarProps) {
 
     outsideClick(sidebarRef, () => {
         if (windowWidth < 1200 && !props.isSidebarHidden) {
-            logEvent('portefolje.metrikker.klikk-utenfor', {sideNavn: finnSideNavn()});
+            logEvent('portefolje.metrikker.klikk-utenfor', {
+                sideNavn: finnSideNavn()
+            });
             dispatch(skjulSidebar(props.filtergruppe));
         }
     });
@@ -217,6 +222,7 @@ function Sidebar(props: SidebarProps) {
                 aria-labelledby={selectedTabData.type}
                 id={selectedTabData.type}
                 tabIndex={0}
+                data-testid="sidebar_content-container"
             >
                 <Sidevelger
                     selectedTabData={selectedTabData}

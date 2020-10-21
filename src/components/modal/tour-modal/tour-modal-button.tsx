@@ -20,7 +20,8 @@ export default function TourModalButton(props: ModalStepperProps) {
         <>
             <Knapp
                 className={classNames('endringslogg-stepperKnapp', props.className)}
-                mini={true}
+                mini
+                data-testid="endringslogg_se-hvordan-knapp"
                 onClick={() => {
                     setOpen(true);
                     logEvent(props.metrikknavn);

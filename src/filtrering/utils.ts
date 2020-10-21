@@ -5,6 +5,9 @@ export const lagLablerTilVeiledereMedIdenter = (identer, veiledere, doSlettFilte
             if (!veileder) {
                 return doSlettFilter(ident);
             }
-            return {label: `${veileder.etternavn}, ${veileder.fornavn} (${ident})`, key: ident};
+            return {
+                label: `${veileder.etternavn}, ${veileder.fornavn} (${ident})`,
+                key: ident
+            };
         })
         .filter(ident => ident);

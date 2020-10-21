@@ -14,5 +14,12 @@ export function useModalControllerSelector() {
     const closeServerfeilModal = () => dispatch(skjulServerfeilModal());
     const closeFeilmeldingModal = () => dispatch(skjulFeilmeldingModal());
     const closeModal = () => dispatch(skjulModal());
-    return {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal};
+    return {
+        serverfeilModalSkalVises,
+        feilmeldingModal,
+        modal,
+        closeServerfeilModal,
+        closeFeilmeldingModal,
+        closeModal
+    };
 }

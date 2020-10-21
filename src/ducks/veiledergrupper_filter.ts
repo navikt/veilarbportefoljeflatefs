@@ -45,7 +45,11 @@ export default function reducer(state: LagretFilterState = initialState, action)
         case HENT_VEILEDERGRUPPER_OK:
             return {...state, status: STATUS.OK, data: action.data};
         case NY_VEILEDERGRUPPER_OK:
-            return {...state, status: STATUS.OK, data: state.data.concat(action.data)};
+            return {
+                ...state,
+                status: STATUS.OK,
+                data: state.data.concat(action.data)
+            };
         case REDIGER_VEILEDERGRUPPER_OK:
             return {
                 ...state,

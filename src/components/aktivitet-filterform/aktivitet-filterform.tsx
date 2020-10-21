@@ -21,7 +21,10 @@ function AktivitetFilterform(props) {
     );
 
     const handleRadioChange = (aktivitetKey, verdi) => {
-        setValgteAktiviteter(prevState => ({...prevState, [aktivitetKey]: verdi}));
+        setValgteAktiviteter(prevState => ({
+            ...prevState,
+            [aktivitetKey]: verdi
+        }));
     };
 
     const fields = Object.entries(props.valg).map(([kode, verdi]) => [
@@ -37,6 +40,7 @@ function AktivitetFilterform(props) {
                     className="skjemaelement__input radioknapp"
                     onChange={() => handleRadioChange(kode, 'JA')}
                     key={`Ja, ${verdi}`}
+                    data-testid={`filter_aktivitet-${kode}-ja`}
                 />
                 <label htmlFor={`aktivitet-${kode}-ja`} className="skjemaelement__label aktivitet_radioknapp_label">
                     <span className="sr-only">Ja, {verdi}</span>
@@ -50,6 +54,7 @@ function AktivitetFilterform(props) {
                     className="skjemaelement__input radioknapp"
                     onChange={() => handleRadioChange(kode, 'NEI')}
                     key={`NEJ, ${verdi}`}
+                    data-testid={`filter_aktivitet-${kode}-nei`}
                 />
                 <label htmlFor={`aktivitet-${kode}-nei`} className="skjemaelement__label aktivitet_radioknapp_label">
                     <span className="sr-only">Nei, {verdi}</span>
@@ -72,11 +77,12 @@ function AktivitetFilterform(props) {
             </div>
             <div className="aktivitetfilterform__valg">{fields}</div>
             <div className="aktivitetfilter_knapper blokk-xxs">
-                <SubmitKnapp pristine={false} closeDropdown={props.closeDropdown} />
+                <SubmitKnapp pristine={false} closeDropdown={props.closeDropdown} dataTestId="filter_aktivitet" />
                 <button
                     type="button"
                     className="knapp knapp--standard knapp--mini"
                     onClick={() => setValgteAktiviteter(aktivitetInitialState)}
+                    data-testid="filter_aktivitet_fjern-knapp"
                 >
                     Fjern aktiviteter
                 </button>

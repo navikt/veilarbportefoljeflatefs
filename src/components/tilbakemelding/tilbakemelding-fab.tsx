@@ -69,7 +69,10 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
 
     handleTilbakemeldingSendt = (tilbakemelding: Tilbakemelding) => {
         window.localStorage.setItem(this.tilbakemeldingLocalStorageName(), 'true');
-        logEvent('portefolje.tilbakemelding', {feature: this.TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding});
+        logEvent('portefolje.tilbakemelding', {
+            feature: this.TILBAKEMELDING_FEATURE_TAG,
+            ...tilbakemelding
+        });
     };
 
     handleIkkeVisIgjen = () => {
@@ -98,8 +101,11 @@ class TilbakemeldingFab extends React.Component<StateProps, TilbakemeldingFabSta
                 }}
             >
                 <div
-                    className={classNames('tilbakemelding-fab', {'tilbakemelding-fab__trykket': isModalOpen})}
+                    className={classNames('tilbakemelding-fab', {
+                        'tilbakemelding-fab__trykket': isModalOpen
+                    })}
                     onClick={this.handleFabClicked}
+                    data-testid={isModalOpen ? 'tilbakemelding_fab_knapp_trykket' : 'tilbakemelding_fab_knapp'}
                 >
                     <img
                         alt="Åpne/Lukk tilbakemeldingform"

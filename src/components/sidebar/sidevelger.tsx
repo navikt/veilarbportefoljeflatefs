@@ -11,13 +11,13 @@ import {AppState} from '../../reducer';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {PopoverOrientering} from 'nav-frontend-popover';
-import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggleSwitch/toggle-switch';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import Sidebar from './sidebar';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {LagretFilter} from '../../ducks/lagretFilter';
+import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {

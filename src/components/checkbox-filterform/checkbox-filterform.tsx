@@ -63,16 +63,29 @@ function CheckboxFilterform({
             <div className="checkbox-filterform__under-valg">
                 {closeDropdown ? (
                     checkBoxValg.length > 0 ? (
-                        <button className="knapp knapp--mini knapp--hoved" type="submit">
+                        <button
+                            className="knapp knapp--mini knapp--hoved"
+                            type="submit"
+                            data-testid="checkbox-filterform_velg-knapp"
+                        >
                             Velg
                         </button>
                     ) : (
-                        <button className="knapp knapp--mini" type="button" onClick={closeDropdown}>
+                        <button
+                            className="knapp knapp--mini"
+                            type="button"
+                            onClick={closeDropdown}
+                            data-testid="checkbox-filterform_lukk-knapp"
+                        >
                             Lukk
                         </button>
                     )
                 ) : (
-                    <button className="knapp knapp--mini knapp--hoved" type="submit">
+                    <button
+                        className="knapp knapp--mini knapp--hoved"
+                        type="submit"
+                        data-testid="checkbox-filterform_velg-knapp"
+                    >
                         Velg
                     </button>
                 )}
@@ -99,6 +112,7 @@ function RenderFields(props: {valg: Dictionary<string>; velgCheckBox: (e) => voi
                         value={filterKey}
                         checked={props.checkBoxValg.includes(filterKey)}
                         onChange={props.velgCheckBox}
+                        data-testid={`filter_${filterKey}`}
                     />
                     <label htmlFor={filterKey} className="skjemaelement__label">
                         {filterValue}

@@ -140,13 +140,22 @@ export const manuellBrukerStatus = {
 
 export const ytelse = {
     DAGPENGER: {label: 'Dagpenger'},
-    ORDINARE_DAGPENGER: {label: 'Ordinære dagpenger', className: 'skjemaelement--innrykk'},
-    DAGPENGER_MED_PERMITTERING: {label: 'Dagpenger under permittering', className: 'skjemaelement--innrykk'},
+    ORDINARE_DAGPENGER: {
+        label: 'Ordinære dagpenger',
+        className: 'skjemaelement--innrykk'
+    },
+    DAGPENGER_MED_PERMITTERING: {
+        label: 'Dagpenger under permittering',
+        className: 'skjemaelement--innrykk'
+    },
     DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI: {
         label: 'Dagpenger v/perm fiskeindustri',
         className: 'skjemaelement--innrykk'
     },
-    LONNSGARANTIMIDLER_DAGPENGER: {label: 'Lønnsgarantimidler dagpenger', className: 'skjemaelement--innrykk'},
+    LONNSGARANTIMIDLER_DAGPENGER: {
+        label: 'Lønnsgarantimidler dagpenger',
+        className: 'skjemaelement--innrykk'
+    },
     AAP: {label: 'AAP'},
     AAP_MAXTID: {label: 'AAP maxtid', className: 'skjemaelement--innrykk'},
     AAP_UNNTAK: {label: 'AAP unntak', className: 'skjemaelement--innrykk'},
@@ -170,9 +179,18 @@ export const ytelseUtlopsSortering = {
 };
 
 export const ytelseAapSortering = {
-    AAP: {vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE},
-    AAP_MAXTID: {vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_MAXTID_UKE},
-    AAP_UNNTAK: {vedtaksperiode: Sorteringsfelt.UTLOPSDATO, rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKE}
+    AAP: {
+        vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
+        rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE
+    },
+    AAP_MAXTID: {
+        vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
+        rettighetsperiode: Sorteringsfelt.AAP_MAXTID_UKE
+    },
+    AAP_UNNTAK: {
+        vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
+        rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKE
+    }
 };
 
 export const rettighetsgruppe = {

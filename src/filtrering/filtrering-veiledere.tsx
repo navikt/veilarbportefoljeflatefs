@@ -74,6 +74,7 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
                     onChange={this.handleChange}
                     value={veilederNavnQuery}
                     onFocus={() => this.setFocus(true)}
+                    data-testid="veilederoversikt_sok-veileder-input"
                 />
                 {hasFocus && (
                     <VeilederCheckboxListe

@@ -38,7 +38,7 @@ interface FiltreringFilterProps {
 function NyFiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     return (
-        <div className="filtrering-filter">
+        <div className="filtrering-filter" data-testid="filtrering-filter_container">
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
                     Demografi

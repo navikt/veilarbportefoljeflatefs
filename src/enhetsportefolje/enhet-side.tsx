@@ -23,12 +23,12 @@ import {slettEnkeltFilter} from '../ducks/filtrering';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
-import VelgFilterMelding from './velg-filter-melding';
 import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
 import {MineFilterLagreFilterKnapp} from '../minoversikt/mine-filter-lagre-filter-knapp';
 import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
+import Alertstripe from 'nav-frontend-alertstriper';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 
 function antallFilter(filtervalg) {
@@ -179,7 +179,16 @@ function EnhetSide() {
                                     />
                                 </>
                             ) : (
-                                <VelgFilterMelding />
+                                <Alertstripe
+                                    type="info"
+                                    className="blokk-m"
+                                    aria-live="assertive"
+                                    role="alert"
+                                    aria-atomic="true"
+                                    data-testid="alertstripe_filtrering"
+                                >
+                                    Du må gjøre en filtrering for å se brukere i listen.
+                                </Alertstripe>
                             )}
                         </div>
                     </div>

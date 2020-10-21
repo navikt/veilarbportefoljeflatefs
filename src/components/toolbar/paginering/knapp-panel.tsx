@@ -6,9 +6,10 @@ interface KnappPanelProps {
     disabled?: boolean;
     pressed?: boolean;
     onClick?: () => void;
+    selected?: boolean;
 }
 
-function KnappPanel({children, disabled = false, pressed = false, ...props}: KnappPanelProps) {
+function KnappPanel({children, disabled = false, pressed = false, selected = false, ...props}: KnappPanelProps) {
     const classes = classNames('paginering__knapp', {
         disabled,
         'paginering__knapp--pressed': pressed

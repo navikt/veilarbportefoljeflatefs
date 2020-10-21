@@ -24,13 +24,23 @@ interface KnappProps {
 }
 
 const LukkeKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
-    <button className="knapp knapp--mini checkbox-liste__valg-knapp" type="button" onClick={props.onClick}>
+    <button
+        className="knapp knapp--mini checkbox-liste__valg-knapp"
+        type="button"
+        onClick={props.onClick}
+        data-testid="veilederoversikt_sok-veileder_lukk-knapp"
+    >
         Lukk
     </button>
 );
 
 const SubmitKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
-    <button className="knapp knapp--mini knapp--hoved checkbox-liste__valg-knapp" type="button" onClick={props.onClick}>
+    <button
+        className="knapp knapp--mini knapp--hoved checkbox-liste__valg-knapp"
+        type="button"
+        onClick={props.onClick}
+        data-testid="veilederoversikt_sok-veileder_velg-knapp"
+    >
         Velg
     </button>
 );
@@ -105,7 +115,7 @@ function VeilederCheckboxListe(props: any) {
 
         return veiledere
             .filter(vlg => vlg.ident && vlg.navn)
-            .map(vlg => {
+            .map((vlg, index) => {
                 const identErValgt = erValgt(vlg.ident);
                 return (
                     <Checkbox
@@ -113,6 +123,7 @@ function VeilederCheckboxListe(props: any) {
                         label={vlg.navn}
                         checked={identErValgt}
                         onChange={() => handleCheckboxOnClick(vlg.ident)}
+                        data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
                     />
                 );
             });
@@ -129,7 +140,9 @@ function VeilederCheckboxListe(props: any) {
     if (harValg) {
         return (
             <form className="checkbox-liste">
-                <div className="checkbox-liste__valg">{valgCheckboxListe}</div>
+                <div className="checkbox-liste__valg" data-testid="veilederoversikt_sok-veileder_veilederliste">
+                    {valgCheckboxListe}
+                </div>
                 <div className="checkbox-liste__valg-footer">
                     {harValgteElementer ? (
                         <SubmitKnapp onClick={handleSubmitKnappOnClick} />
@@ -142,7 +155,11 @@ function VeilederCheckboxListe(props: any) {
     } else {
         return (
             <div className="checkbox-liste__valg-footer">
-                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+                <AlertStripe
+                    type="info"
+                    className="checkbox-filterform__alertstripe"
+                    data-testid="veilederoversikt_alertstripe_info"
+                >
                     Ingen veiledere funnet
                 </AlertStripe>
             </div>

@@ -29,7 +29,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     };
 
     return (
-        <Form>
+        <Form data-testid="modal_rediger-arbeidsliste_form">
             <div className="arbeidsliste__bruker">
                 <div className="nav-input blokk-s">
                     <Undertittel>
@@ -50,6 +50,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <Hovedknapp
                     htmlType="submit"
                     className="knapp knapp--hoved"
+                    data-testid="modal_rediger-arbeidsliste_lagre-knapp"
                     onClick={() => {
                         logEvent('teamvoff.metrikker.arbeidslistekategori', {
                             kategori: props.bruker.arbeidsliste.kategori,
@@ -60,10 +61,19 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 >
                     Lagre
                 </Hovedknapp>
-                <Flatknapp className="knapp knapp--avbryt" onClick={props.lukkModal}>
+                <Flatknapp
+                    className="knapp knapp--avbryt"
+                    onClick={props.lukkModal}
+                    data-testid="modal_rediger-arbeidsliste_avbryt-knapp"
+                >
                     Avbryt
                 </Flatknapp>
-                <Flatknapp htmlType="button" onClick={fjernBruker} className="fjern--knapp">
+                <Flatknapp
+                    htmlType="button"
+                    onClick={fjernBruker}
+                    className="fjern--knapp"
+                    data-testid="modal_rediger-arbeidsliste_fjern-knapp"
+                >
                     <SlettIcon />
                     <span>Fjern</span>
                 </Flatknapp>

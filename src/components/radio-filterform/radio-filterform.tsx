@@ -30,7 +30,9 @@ export function RadioFilterform({filterId, endreFiltervalg, valg, closeDropdown,
             <div className={classNames('radio-filterform__under-valg')}>
                 <button
                     onClick={createHandleOnSubmit}
-                    className={classNames('knapp', 'knapp--mini', {'knapp--hoved': valgtFilterValg})}
+                    className={classNames('knapp', 'knapp--mini', {
+                        'knapp--hoved': valgtFilterValg
+                    })}
                 >
                     {valgtFilterValg ? 'Velg' : 'Lukk'}
                 </button>

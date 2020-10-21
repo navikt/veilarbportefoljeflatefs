@@ -25,13 +25,12 @@ function TimedToast(props: TimedToastProps) {
         const timer = setTimeout(() => {
             dispatch(props.fjernToast);
         }, 6000);
-
         return () => clearTimeout(timer);
     });
 
     return (
         <div className="timed-toast" ref={toastRef} tabIndex={0}>
-            <AlertStripe type={props.alertstripe} className="timed-toast__alertstripe">
+            <AlertStripe type={props.alertstripe} className="timed-toast__alertstripe" data-testid="timed-toast">
                 <span className="timed-toast__tekst">{props.toastTekst}</span>
             </AlertStripe>
         </div>

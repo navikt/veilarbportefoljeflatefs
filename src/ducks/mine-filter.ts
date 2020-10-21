@@ -38,23 +38,60 @@ const initialState = {
 export default function reducer(state: LagretFilterState = initialState, action) {
     switch (action.type) {
         case HENT_MINEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.HENTE};
+            return {
+                ...state,
+                status: STATUS.PENDING,
+                handlingType: HandlingsType.HENTE
+            };
         case NY_MINEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.NYTT};
+            return {
+                ...state,
+                status: STATUS.PENDING,
+                handlingType: HandlingsType.NYTT
+            };
         case REDIGER_MINEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.REDIGERE};
+            return {
+                ...state,
+                status: STATUS.PENDING,
+                handlingType: HandlingsType.REDIGERE
+            };
         case SLETT_MINEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.SLETTE};
+            return {
+                ...state,
+                status: STATUS.PENDING,
+                handlingType: HandlingsType.SLETTE
+            };
         case HENT_MINEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.HENTE};
+            return {
+                ...state,
+                status: STATUS.ERROR,
+                handlingType: HandlingsType.HENTE
+            };
         case NY_MINEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.NYTT};
+            return {
+                ...state,
+                status: STATUS.ERROR,
+                handlingType: HandlingsType.NYTT
+            };
         case REDIGER_MINEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.REDIGERE};
+            return {
+                ...state,
+                status: STATUS.ERROR,
+                handlingType: HandlingsType.REDIGERE
+            };
         case SLETT_MINEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.SLETTE};
+            return {
+                ...state,
+                status: STATUS.ERROR,
+                handlingType: HandlingsType.SLETTE
+            };
         case HENT_MINEFILTER_OK:
-            return {...state, status: STATUS.OK, data: action.data, handlingType: HandlingsType.HENTE};
+            return {
+                ...state,
+                status: STATUS.OK,
+                data: action.data,
+                handlingType: HandlingsType.HENTE
+            };
         case NY_MINEFILTER_OK:
             return {
                 ...state,
@@ -83,7 +120,11 @@ export default function reducer(state: LagretFilterState = initialState, action)
             };
 
         case SORTER_MINEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.SORTERING};
+            return {
+                ...state,
+                status: STATUS.ERROR,
+                handlingType: HandlingsType.SORTERING
+            };
         case SORTER_MINEFILTER_OK:
             return {
                 ...state,

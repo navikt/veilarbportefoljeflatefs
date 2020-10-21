@@ -31,7 +31,11 @@ const initialState = {
 export default function reducer(state: LagretFilterUIState = initialState, action): LagretFilterUIState {
     switch (action.type) {
         case MARKER_MINE_FILTER:
-            return {...state, valgtMineFilter: action.data, sisteValgtMineFilter: action.data.filterId};
+            return {
+                ...state,
+                valgtMineFilter: action.data,
+                sisteValgtMineFilter: action.data.filterId
+            };
         case AVMARKER_MINE_FILTER:
             return {...state, valgtMineFilter: null};
         case AVMARKER_SISTE_VALGT_MINE_FILTER:

@@ -21,7 +21,9 @@ function FiltreringLabel({
     markert = false,
     skalHaKryssIkon = true
 }: FiltreringLabelProps) {
-    const className = classNames('filtreringlabel__label', {'filtreringlabel-slett-filter': !skalHaKryssIkon});
+    const className = classNames('filtreringlabel__label', {
+        'filtreringlabel-slett-filter': !skalHaKryssIkon
+    });
     const arialLabel = skalHaKryssIkon ? 'Slett filter' : ' Slett alle filtervalg';
     const slettAlleFiltervalg = arialLabel === ' Slett alle filtervalg';
     const buttonClassnames = classNames(
@@ -41,6 +43,7 @@ function FiltreringLabel({
             aria-label={arialLabel}
             className={buttonClassnames}
             onClick={slettFilter}
+            data-testid="filtreringlabel"
         >
             <span className={className}>{lagConfig(label).label}</span>
             {skalHaKryssIkon && <FilterIkon />}

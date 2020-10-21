@@ -72,7 +72,11 @@ function FilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps)
                 }}
             />
             <VeilederGruppeModal
-                initialVerdi={{gruppeNavn: '', filterValg: initialState, filterId: -1}}
+                initialVerdi={{
+                    gruppeNavn: '',
+                    filterValg: initialState,
+                    filterId: -1
+                }}
                 isOpen={visVeilederGruppeModal}
                 onSubmit={submitEndringer}
                 modalTittel="Ny veiledergruppe"

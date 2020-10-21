@@ -45,25 +45,43 @@ function Paginering(props: PagineringProps) {
                 disabled={!seAlle && antallTotalt <= sideStorrelse}
                 pressed={seAlle && antallTotalt <= sideStorrelse}
                 onClick={() => totalPaginering(1, !seAlle)}
+                data-testid={!seAlle ? 'se-alle_knapp' : 'se-faerre_knapp'}
             >
                 {!seAlle ? 'Se alle' : 'Se færre'}
             </KnappPanel>
 
-            <KnappPanel disabled={erPaForsteSide} onClick={() => totalPaginering(side - 1, seAlle)}>
+            <KnappPanel
+                disabled={erPaForsteSide}
+                onClick={() => totalPaginering(side - 1, seAlle)}
+                data-testid="paginering_venstre"
+            >
                 <VenstreChevron />
             </KnappPanel>
 
-            {!erPaForsteSide && <KnappPanel onClick={() => totalPaginering(1, seAlle)}>1</KnappPanel>}
+            {!erPaForsteSide && (
+                <KnappPanel onClick={() => totalPaginering(1, seAlle)} data-testid="paginering-tall_1">
+                    1
+                </KnappPanel>
+            )}
 
-            <KnappPanel>
+            <KnappPanel data-testid={`paginering-tall_${side}`} selected>
                 <strong>{side}</strong>
             </KnappPanel>
 
             {!erPaSisteSide && !seAlle && (
-                <KnappPanel onClick={() => totalPaginering(antallSider, seAlle)}>{antallSider}</KnappPanel>
+                <KnappPanel
+                    onClick={() => totalPaginering(antallSider, seAlle)}
+                    data-testid={`paginering-tall_${antallSider}`}
+                >
+                    {antallSider}
+                </KnappPanel>
             )}
 
-            <KnappPanel disabled={erPaSisteSide || seAlle} onClick={() => totalPaginering(side + 1, seAlle)}>
+            <KnappPanel
+                disabled={erPaSisteSide || seAlle}
+                onClick={() => totalPaginering(side + 1, seAlle)}
+                data-testid="paginering_hoyre"
+            >
                 <HoyreChevron />
             </KnappPanel>
         </div>

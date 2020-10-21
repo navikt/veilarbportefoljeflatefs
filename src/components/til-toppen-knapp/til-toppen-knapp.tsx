@@ -21,7 +21,9 @@ export const TilToppenKnapp = () => {
         if (knappRef && knappRef.current) {
             knappRef.current.blur();
         }
-        logEvent('portefolje.metrikker.tiltoppenknapp', {sideNavn: finnSideNavn()});
+        logEvent('portefolje.metrikker.tiltoppenknapp', {
+            sideNavn: finnSideNavn()
+        });
     };
 
     useEffect(() => {
@@ -37,8 +39,9 @@ export const TilToppenKnapp = () => {
         <button
             ref={knappRef}
             className={classNames('til-toppen-knapp', 'knapp', !knappSkalVises && 'til-toppen-knapp--skjul')}
-            aria-hidden={!knappSkalVises}
+            hidden={!knappSkalVises}
             onClick={onClick}
+            data-testid="til-toppen_knapp"
         >
             <TilToppenIkonBla />
         </button>

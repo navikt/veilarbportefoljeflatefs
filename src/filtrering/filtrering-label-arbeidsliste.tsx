@@ -32,7 +32,7 @@ function FiltreringLabelArbeidsliste({
             onClick={slettFilter}
         >
             <span className="filtreringlabel__container">
-                <ArbeidslistekategoriVisning skalVises={true} kategori={kategori} />
+                <ArbeidslistekategoriVisning skalVises kategori={kategori} />
                 {lagConfig(label).label}
                 <FilterIkon />
             </span>

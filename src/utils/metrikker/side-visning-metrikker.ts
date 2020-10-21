@@ -8,7 +8,10 @@ export const loggSideVisning = (veilederIdent: OrNothing<VeilederModell>, side: 
     if (veilederIdent) {
         krypterVeilederident(veilederIdent.ident).then(buffer => {
             const identHash = hexString(buffer);
-            logEvent('portefolje.metrikker.side-visning', {veilederId: identHash, side});
+            logEvent('portefolje.metrikker.side-visning', {
+                veilederId: identHash,
+                side
+            });
         });
     }
 };

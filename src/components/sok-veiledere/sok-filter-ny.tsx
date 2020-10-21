@@ -48,6 +48,7 @@ function SokFilterNy<T>(props: SokFilterProps<T>) {
                     inputClassName="sokfilter__input"
                     onChange={e => setQuery(e.target.value)}
                     inputRef={inputRef => (focusRef.current = inputRef)}
+                    data-testid="sok-filter_input"
                 />
             </div>
             {harData ? (

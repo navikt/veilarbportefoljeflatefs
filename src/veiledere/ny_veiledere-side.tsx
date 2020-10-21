@@ -56,11 +56,7 @@ function Ny_veiledereSide() {
                                 <Undertittel>Søk veileder</Undertittel>
                                 <FiltreringVeiledere />
                             </PanelBase>
-                            <MetrikkEkspanderbartpanel
-                                apen={true}
-                                lamellNavn="veiledergrupper"
-                                tittel="Veiledergrupper"
-                            >
+                            <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
                                 <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt} />
                             </MetrikkEkspanderbartpanel>
                         </div>

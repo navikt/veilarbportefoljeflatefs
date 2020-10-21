@@ -80,7 +80,13 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
 
     return (
         <div className="toolbar_btnwrapper">
-            <button type="button" className="toolbar_btn" disabled={!props.aktiv} onClick={klikk}>
+            <button
+                type="button"
+                className="toolbar_btn"
+                disabled={!props.aktiv}
+                onClick={klikk}
+                data-testid={props.tildelveileder ? 'tildel-veileder_knapp' : 'sok-veileder_knapp'}
+            >
                 {props.ikon}
                 <Normaltekst className="toolbar-knapp__tekst">{props.tittel}</Normaltekst>
             </button>

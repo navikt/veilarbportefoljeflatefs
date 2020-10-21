@@ -9,23 +9,28 @@ import {KategoriModell} from '../../model-interfaces';
 interface ArbeidslistekategoriProps {
     skalVises: boolean;
     kategori: KategoriModell;
+    dataTestid?: string;
 }
 
-export default function ArbeidslistekategoriVisning({skalVises, kategori}: ArbeidslistekategoriProps) {
+export default function ArbeidslistekategoriVisning({skalVises, kategori, dataTestid}: ArbeidslistekategoriProps) {
     const velgArbeidslistekategori = () => {
         switch (kategori) {
             case KategoriModell.BLA:
-                return <ArbeidslisteikonBla />;
+                return <ArbeidslisteikonBla data-testid={dataTestid} />;
             case KategoriModell.LILLA:
-                return <ArbeidslisteikonLilla />;
+                return <ArbeidslisteikonLilla data-testid={dataTestid} />;
             case KategoriModell.GRONN:
-                return <ArbeidslisteikonGronn />;
+                return <ArbeidslisteikonGronn data-testid={dataTestid} />;
             case KategoriModell.GUL:
-                return <ArbeidslisteikonGul />;
+                return <ArbeidslisteikonGul data-testid={dataTestid} />;
             default:
                 return null;
         }
     };
 
-    return <span className="arbeidsliste--ikon">{skalVises && velgArbeidslistekategori()}</span>;
+    return (
+        <span className="arbeidsliste--ikon" data-testid="brukerliste_span_arbeidslisteikon">
+            {skalVises && velgArbeidslistekategori()}
+        </span>
+    );
 }

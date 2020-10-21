@@ -51,7 +51,7 @@ function Listevisning(props: ListevisningProps) {
                     {muligeAlternativer.map(kolonne => (
                         <ListevisningRad
                             key={kolonne}
-                            kolonne={kolonne}
+                            kolonneoverskrift={kolonne}
                             valgt={erValgt(kolonne)}
                             disabled={valgteAlternativ.length >= 3 && !erValgt(kolonne)}
                             onChange={handleChange}

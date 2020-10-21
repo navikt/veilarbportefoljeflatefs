@@ -20,7 +20,6 @@ import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
-import VelgFilterMelding from './velg-filter-melding';
 import '../ny_style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
@@ -34,6 +33,7 @@ import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal
 import {useWindowWidth} from '../hooks/use-window-width';
 import NyToolbar from '../components/toolbar/ny_toolbar';
 import NyFiltreringNavnellerfnr from '../filtrering/ny_filtrering-navnellerfnr';
+import Alertstripe from 'nav-frontend-alertstriper';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 
 function antallFilter(filtervalg) {
@@ -219,7 +219,16 @@ function Ny_EnhetSide() {
                                 </div>
                             </div>
                         ) : (
-                            <VelgFilterMelding />
+                            <Alertstripe
+                                type="info"
+                                className="blokk-m"
+                                aria-live="assertive"
+                                role="alert"
+                                aria-atomic="true"
+                                data-testid="alertstripe_filtrering"
+                            >
+                                Du må gjøre en filtrering for å se brukere i listen.
+                            </Alertstripe>
                         )}
                     </div>
                 </Innholdslaster>

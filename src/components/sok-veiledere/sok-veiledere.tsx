@@ -25,20 +25,24 @@ function SokVeiledere(props: SokVeiledereProps) {
             {liste => (
                 <div className="checkbox-filterform">
                     <div className="checkbox-filterform__valg">
-                        {liste.map(elem => (
+                        {liste.map((elem, index) => (
                             <Checkbox
                                 key={elem.ident}
                                 label={`${elem.etternavn}, ${elem.fornavn}`}
                                 value={elem.ident}
                                 checked={props.erValgt(elem.ident)}
                                 onChange={e => props.hanterVeilederValgt(e.target.checked, e.target.value)}
+                                data-testid={`sok-veileder_rad_${index}`}
                             />
                         ))}
                     </div>
                     <div className="blokk-xxs checkbox-filterform__under-valg">
                         <button
                             onClick={props.btnOnClick}
-                            className={classNames('knapp', 'knapp--mini', {'knapp--hoved': props.harValg})}
+                            className={classNames('knapp', 'knapp--mini', {
+                                'knapp--hoved': props.harValg
+                            })}
+                            data-testid={props.harValg ? 'sok-veileder_velg-knapp' : 'sok-veileder_lukk-knapp'}
                         >
                             {props.harValg ? 'Velg' : 'Lukk'}
                         </button>

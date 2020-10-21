@@ -15,7 +15,9 @@ function FormikDatoVelger({name}: FormikDatepickerProps) {
         <Field validate={(value: string) => validerDatoFeldt(value, new Date(), true)} name={name} id={name}>
             {({field, form: {errors, setFieldValue}}: FieldProps) => {
                 const error = getIn(errors, name);
-                const datePickerClassName = classNames('skjemaelement', 'datovelger', {'datovelger--harFeil': error});
+                const datePickerClassName = classNames('skjemaelement', 'datovelger', {
+                    'datovelger--harFeil': error
+                });
                 return (
                     <div className={datePickerClassName}>
                         <span className="skjemaelement__label">Frist</span>

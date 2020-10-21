@@ -90,10 +90,11 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                                     maxLength={this.KOMMENTAR_MAX_CHAR}
                                     value={kommentar}
                                     onChange={this.handleKommentarChanged}
+                                    data-testid="tilfredshet_kommentarfelt"
                                 />
                             </div>
                         )}
-                        <Hovedknapp role="submit" className="knapp--hoved">
+                        <Hovedknapp role="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
                             Send
                         </Hovedknapp>
                     </form>
@@ -144,6 +145,7 @@ class TilbakemeldingModal extends React.Component<TilbakemeldingModalProps, Tilb
                     className={classNames('tilbakemelding-modal__innhold', {
                         'tilbakemelding-modal__innhold--takk': harSendt
                     })}
+                    data-testid={harSendt ? 'tilbakemelding_modal_takk' : 'tilbakemelding_modal'}
                 >
                     {harSendt ? this.renderTakkMelding() : this.renderForm()}
                 </div>

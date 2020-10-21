@@ -21,13 +21,14 @@ function SokVeiledereVeiledergrupper({erValgt, hanterVeilederValgt}: SokVeileder
             {liste => (
                 <div>
                     <div className="checkbox-filterform__valg">
-                        {liste.map(elem => (
+                        {liste.map((elem, index) => (
                             <Checkbox
                                 key={elem.ident}
                                 label={`${elem.etternavn}, ${elem.fornavn}`}
                                 value={elem.ident}
                                 checked={erValgt(elem.ident)}
                                 onChange={e => hanterVeilederValgt(e.target.checked, e.target.value)}
+                                data-testid={`veiledergruppe_modal_veileder-checkbox_${index}`}
                             />
                         ))}
                     </div>

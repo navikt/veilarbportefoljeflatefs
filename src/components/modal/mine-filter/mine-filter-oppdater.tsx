@@ -77,14 +77,14 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
                     value={nyttFilterNavn}
                     onChange={e => setNyttFilterNavn(e.target.value)}
                     feil={feilmelding.filterNavn}
-                    autoFocus={true}
-                    maxLength={255}
+                    autoFocus
+                    data-testid="redigere-filter-navn-input"
                 />
                 <div className="lagret-filter-knapp-wrapper">
-                    <Hovedknapp mini htmlType="submit">
+                    <Hovedknapp mini htmlType="submit" data-testid="rediger-filter_modal_lagre-knapp">
                         Lagre
                     </Hovedknapp>
-                    <Knapp mini onClick={e => bekreftSletting(e)}>
+                    <Knapp mini onClick={e => bekreftSletting(e)} data-testid="rediger-filter_modal_slett-knapp">
                         Slett
                     </Knapp>
                 </div>

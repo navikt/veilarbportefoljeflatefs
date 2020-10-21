@@ -7,19 +7,27 @@ export const mineFilter = () => {
         {
             filterNavn: '1. Unge arbeidsledige møter idag',
             filterId: 1,
-            filterValg: {...initialState, alder: ['20-24'], ferdigfilterListe: ['MOTER_IDAG']},
+            filterValg: {
+                ...initialState,
+                alder: ['20-24'],
+                ferdigfilterListe: ['MOTER_IDAG']
+            },
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             sortOrder: null
         },
         {
             filterNavn: '10. Spesiell tilpasset innsats',
             filterId: 2,
-            filterValg: {...initialState, innsatsgruppe: ['BATT'], formidlingsgruppe: ['ARBS']},
+            filterValg: {
+                ...initialState,
+                innsatsgruppe: ['BATT'],
+                formidlingsgruppe: ['ARBS']
+            },
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             sortOrder: null
         },
         {
-            filterNavn: '2. Test',
+            filterNavn: 'Denne brukes til test, la stå',
             filterId: 3,
             filterValg: {...initialState, kjonn: 'K', formidlingsgruppe: ['ARBS']},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
@@ -63,14 +71,21 @@ export const mineFilter = () => {
         {
             filterNavn: 'BLÅ',
             filterId: 9,
-            filterValg: {...initialState, arbeidslisteKategori: ['BLA'], alder: ['20-24']},
+            filterValg: {
+                ...initialState,
+                arbeidslisteKategori: ['BLA'],
+                alder: ['20-24']
+            },
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             sortOrder: 2
         },
         {
             filterNavn: 'Nye brukere',
             filterId: 10,
-            filterValg: {...initialState, ferdigfilterListe: ['NYE_BRUKERE_FOR_VEILEDER']},
+            filterValg: {
+                ...initialState,
+                ferdigfilterListe: ['NYE_BRUKERE_FOR_VEILEDER']
+            },
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             sortOrder: null
         },

@@ -12,25 +12,27 @@ interface ChevronLenkeProps {
     retning: Retning;
     tekst: string;
     hide?: boolean;
+    dataTestId: string;
 
     onClick(event: React.MouseEvent<HTMLButtonElement>): void;
 }
 
 function ChevronLenke(props: ChevronLenkeProps) {
-    const {retning, tekst, onClick, hide} = props;
+    const {retning, tekst, onClick, hide, dataTestId} = props;
     const clsPar = ['chevron-lenke', {'chevron-lenke--hide': hide}];
-    if (retning === Retning.VENSTRE) {
-        return (
-            <button className={cls(clsPar)} onClick={onClick}>
-                <VenstreChevron />
-                <span className="chevron-lenke__tekst">{tekst}</span>
-            </button>
-        );
-    }
     return (
-        <button className={cls(clsPar)} onClick={onClick}>
-            <span className="chevron-lenke__tekst">{tekst}</span>
-            <HoyreChevron />
+        <button className={cls(clsPar)} onClick={onClick} data-testid={dataTestId}>
+            {retning === Retning.VENSTRE ? (
+                <>
+                    <VenstreChevron />
+                    <span className="chevron-lenke__tekst">{tekst}</span>
+                </>
+            ) : (
+                <>
+                    <span className="chevron-lenke__tekst">{tekst}</span>
+                    <HoyreChevron />
+                </>
+            )}
         </button>
     );
 }

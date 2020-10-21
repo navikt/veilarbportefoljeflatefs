@@ -50,7 +50,12 @@ function FjernFraArbeidslisteForm({
                 {visBrukerLabel && <ul>{valgteBrukere.map(bruker => brukerLabel(bruker))}</ul>}
             </div>
             <div className="knapper">
-                <Hovedknapp className="knapp knapp--hoved" spinner={laster} htmlType="submit">
+                <Hovedknapp
+                    className="knapp knapp--hoved"
+                    spinner={laster}
+                    htmlType="submit"
+                    data-testid="modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp"
+                >
                     Bekreft
                 </Hovedknapp>
                 <Flatknapp className="knapp" onClick={lukkModal}>

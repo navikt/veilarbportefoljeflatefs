@@ -93,7 +93,11 @@ function ArbeidslisteModalRediger({
 
     return (
         <>
-            <button className="lenke lenke--frittstående arbeidsliste--rediger-lenke" onClick={klikkRedigerknapp}>
+            <button
+                className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
+                onClick={klikkRedigerknapp}
+                data-testid="min-oversikt_chevron-arbeidsliste_rediger-knapp"
+            >
                 Rediger
             </button>
             {laster ? (
@@ -107,7 +111,7 @@ function ArbeidslisteModalRediger({
                     }}
                     render={formikProps => (
                         <NavFrontendModal
-                            className="arbeidsliste-modal"
+                            className="arbeidsliste-modal rediger-arbeidsliste"
                             contentLabel="arbeidsliste"
                             isOpen={isOpen}
                             onRequestClose={() => lukkModalConfirm(formikProps)}

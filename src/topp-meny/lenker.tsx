@@ -24,7 +24,6 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                     Min oversikt
                 </ActiveLink>
             </h2>
-
             <h2 className="h2__lenke">
                 <ActiveLink
                     to="/enhet"
@@ -36,7 +35,6 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                     Enhetens oversikt
                 </ActiveLink>
             </h2>
-
             <h2 className="h2__lenke">
                 <ActiveLink
                     to="/veiledere"

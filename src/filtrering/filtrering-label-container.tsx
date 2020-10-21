@@ -158,7 +158,7 @@ function FiltreringLabelContainer({
     );
 
     return (
-        <div className={className}>
+        <div className={className} data-testid="filtrering_label-container">
             {filterElementer}
             {filterElementer.length >= 3 ? fjernAlle : null}
         </div>

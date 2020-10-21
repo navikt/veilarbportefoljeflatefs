@@ -83,6 +83,7 @@ function EnhetListehode({
                     tekst="Etternavn"
                     className="col col-xs-2"
                     title="Etternavn"
+                    headerId="etternavn"
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.FODSELSNUMMER}
@@ -92,6 +93,7 @@ function EnhetListehode({
                     tekst="Fødselsnr."
                     className="col col-xs-2"
                     title="Fødselsnummer"
+                    headerId="fnr"
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
@@ -102,11 +104,13 @@ function EnhetListehode({
                     className="sortering-header__dato col col-xs-2"
                     skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                     title="Startdato for pågående oppfølgingsperiode"
+                    headerId="oppfolging-startet"
                 />
                 <Header
                     className="col col-xs-2"
                     skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
                     title="Navn på tildelt veileder"
+                    headerId="veileder"
                 >
                     Veileder
                 </Header>
@@ -119,6 +123,7 @@ function EnhetListehode({
                     skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
                     className="header__veilederident col col-xs-2"
                     title="NAV-ident på tildelt veileder"
+                    headerId="navident"
                 />
                 <SorteringHeader
                     sortering={ytelseUtlopsdatoNavn}
@@ -129,6 +134,7 @@ function EnhetListehode({
                     skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                     className="sortering-header__dato col col-xs-2"
                     title={TittelValg(ytelseSorteringHeader)}
+                    headerId="ytelse-utlopsdato"
                 />
                 <SorteringHeader
                     sortering={ytelseUtlopsdatoNavn}
@@ -143,6 +149,7 @@ function EnhetListehode({
                     }
                     className="sortering-header__dato col col-xs-2"
                     title="Gjenstående uker på gjeldende vedtak"
+                    headerId="ytelse-utlopsdato-navn"
                 />
                 <SorteringHeader
                     sortering={aapRettighetsperiode}
@@ -157,6 +164,7 @@ function EnhetListehode({
                     }
                     className="sortering-header__dato col col-xs-2"
                     title="Gjenstående uker av rettighetsperioden for ytelsen"
+                    headerId="rettighetsperiode-gjenstaende"
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
@@ -171,6 +179,7 @@ function EnhetListehode({
                     }
                     className="sortering-header__dato col col-xs-2"
                     title='Dato på meldingen som er merket "Venter på svar fra NAV"'
+                    headerId="venter-pa-svar-fra-nav"
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
@@ -185,6 +194,7 @@ function EnhetListehode({
                     }
                     className="sortering-header__dato col col-xs-2"
                     title='Dato på meldingen som er merket "Venter på svar fra bruker"'
+                    headerId="venter-pa-svar-fra-bruker"
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
@@ -199,6 +209,7 @@ function EnhetListehode({
                     }
                     className="sortering-header__dato col col-xs-2"
                     title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
+                    headerId="utlopte-aktiviteter"
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
@@ -209,6 +220,7 @@ function EnhetListehode({
                     skalVises={iAvtaltAktivitet}
                     className="sortering-header__dato col col-xs-2"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
+                    headerId="i-avtalt-aktivitet"
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
@@ -219,6 +231,7 @@ function EnhetListehode({
                     skalVises={avtaltAktivitetOgTiltak}
                     className="sortering-header__dato col col-xs-2"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
+                    headerId="valgte-aktiviteter"
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.MOTER_IDAG}
@@ -233,6 +246,7 @@ function EnhetListehode({
                     }
                     className="sortering-header__dato col col-xs-2"
                     title="Tidspunktet møtet starter"
+                    headerId="moter-idag"
                 />
                 <Header
                     skalVises={
@@ -242,6 +256,7 @@ function EnhetListehode({
                     }
                     className="sortering-header__dato col col-xs-2"
                     title="Varighet på møtet"
+                    headerId="varighet-mote"
                 >
                     Varighet møte
                 </Header>
@@ -258,6 +273,7 @@ function EnhetListehode({
                     tekst="Status oppfølgingsvedtak"
                     className="sortering-header__dato col col-xs-2"
                     title="Status oppfølgingvedtak"
+                    headerId="vedtakstatus"
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.VEDTAKSTATUS_ENDRET}
@@ -272,6 +288,7 @@ function EnhetListehode({
                     }
                     className="sortering-header__dato col col-xs-2"
                     title="Dager siden fikk status"
+                    headerId="vedtakstatus-endret"
                 />
             </div>
             <div className="brukerliste__gutter-right" />
