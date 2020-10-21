@@ -77,11 +77,7 @@ mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}, res, ctx) => {
     let oppdatertGruppe = {};
     customVeilederGrupper = customVeilederGrupper.map(v => {
         if (v.filterId === body.filterId) {
-            oppdatertGruppe = {
-                ...v,
-                filterNavn: body.filterNavn,
-                filterValg: body.filterValg
-            };
+            oppdatertGruppe = {...v, filterNavn: body.filterNavn, filterValg: body.filterValg};
             return oppdatertGruppe;
         }
         return v;
@@ -167,12 +163,7 @@ mock.post('/veilarboppfolging/api/tilordneveileder/', ({body}, res, ctx) => res(
 
 // arbeidsliste-api
 mock.post('/veilarbportefolje/api/arbeidsliste/', (req, res, ctx) =>
-    res(
-        ctx.json({
-            error: [],
-            data: req.body.map(arbeidsliste => arbeidsliste.fnr)
-        })
-    )
+    res(ctx.json({error: [], data: req.body.map(arbeidsliste => arbeidsliste.fnr)}))
 );
 
 mock.put('/veilarbportefolje/api/arbeidsliste/:fnr', ({body}, res, ctx) =>

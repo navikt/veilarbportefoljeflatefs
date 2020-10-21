@@ -46,10 +46,7 @@ function lagGrunndata() {
     const kontrollsifre = `${rnd(0, 9)}${rnd(0, 9)}`;
 
     const brukerAktiviteter = Object.keys(aktiviteter).reduce(
-        (acc, curr) => ({
-            ...acc,
-            [curr]: Math.random() > 0.05 ? null : new Date()
-        }),
+        (acc, curr) => ({...acc, [curr]: Math.random() > 0.05 ? null : new Date()}),
         {}
     );
 

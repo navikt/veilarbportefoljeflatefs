@@ -10,9 +10,7 @@ const btnCls = (props: DropdownProps, apen: boolean, hover: boolean) =>
     });
 
 const btnWrapperCls = (disabled?: boolean) =>
-    classNames('dropdown__btnwrapper', {
-        'dropdown__btnwrapper--disabled': disabled
-    });
+    classNames('dropdown__btnwrapper', {'dropdown__btnwrapper--disabled': disabled});
 
 interface DropdownProps {
     hoyre?: boolean;
@@ -78,7 +76,6 @@ function Dropdown(props: DropdownProps) {
             className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`}
             id={`${name}-dropdown__innhold`}
             ref={inputRef => (focusRef.current = inputRef)}
-            data-testid={`filter_dropdown-innhold_${name}`}
         >
             {render(lukkDropdown)}
         </div>
@@ -100,7 +97,6 @@ function Dropdown(props: DropdownProps) {
                     aria-expanded={apen}
                     aria-controls={`${name}-dropdown__innhold`}
                     disabled={disabled}
-                    data-testid={`dropdown-knapp_${name}`}
                 >
                     <span className="dropdown__btntext">{name}</span>
                 </button>

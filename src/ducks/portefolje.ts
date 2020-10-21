@@ -115,10 +115,7 @@ export default function reducer(state = initialState, action): PortefoljeState {
                 status: STATUS.OK,
                 data: {
                     ...action.data,
-                    brukere: action.data.brukere.map(bruker => ({
-                        ...bruker,
-                        guid: lagBrukerGuid(bruker)
-                    }))
+                    brukere: action.data.brukere.map(bruker => ({...bruker, guid: lagBrukerGuid(bruker)}))
                 }
             };
         case SETT_SORTERING: {
@@ -279,11 +276,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                     })(dispatch);
                 } else {
                     dispatch(
-                        visTilordningOkModal(
-                            tilordninger.map(tillordning => ({
-                                brukerFnr: tillordning.brukerFnr
-                            }))
-                        )
+                        visTilordningOkModal(tilordninger.map(tillordning => ({brukerFnr: tillordning.brukerFnr})))
                     );
                     dispatch(pagineringSetup({side: 1}));
                 }

@@ -39,9 +39,7 @@ function DragAndDropContainer({
 
     const alfabetiskSort = () => {
         dragAndDropOrder.sort((a: LagretFilter, b: LagretFilter) => {
-            return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {
-                numeric: true
-            });
+            return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
         });
         setAriaTekst('Filtrene har blitt sortert i alfabetisk rekkefølge.');
         setDragAndDropOrder([...dragAndDropOrder]);
@@ -89,8 +87,10 @@ function DragAndDropContainer({
         setRequestRowInFocuse(row);
     }, []);
 
+    //-------- Function call on unMount --------
     useEffect(() => () => onUnmount.current(), [onUnmount]);
 
+    //-------- Drag and drop with mouse handeling --------
     const eventIsInsideContainer = e => dragContainer.current !== null && dragContainer.current.contains(e.target);
 
     useEventListener('dragstart', handleDragStart({eventIsInsideContainer, setSrcIndex, setDropIndex}));
@@ -109,6 +109,7 @@ function DragAndDropContainer({
         })
     );
 
+    //-------- Keybord handeling --------
     const prepFlyttOpp = useCallback((index: number) => {
         setSrcIndex(index);
         setDestIndex(index - 1);

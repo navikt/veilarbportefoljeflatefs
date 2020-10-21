@@ -39,10 +39,7 @@ function getBrowserZoom(): number {
 export const loggBrowserMetrikker = (): void => {
     const browserAgent = getBrowserAgent();
 
-    logEvent('portefolje.browser_bruk', {
-        browser: browserAgent,
-        zoom: getBrowserZoom()
-    });
+    logEvent('portefolje.browser_bruk', {browser: browserAgent, zoom: getBrowserZoom()});
 
     if (window.localStorage.getItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY) == null) {
         window.localStorage.setItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY, 'true');

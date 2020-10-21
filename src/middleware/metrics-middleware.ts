@@ -234,10 +234,7 @@ export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData,
 };
 
 const loggEndreAktivitetFilter = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.endre_filter', {
-        sideNavn,
-        filter: 'aktiviteter'
-    });
+    logEvent('portefolje.metrikker.endre_filter', {sideNavn, filter: 'aktiviteter'});
 };
 
 const loggPaginering = (sideNavn: SideNavn, data: any) => {
@@ -269,11 +266,7 @@ const loggEndreSortering = (sideNavn: SideNavn, sorteringsfelt: string, rekkefol
         (sorteringsfelt !== 'etternavn' || rekkefolge !== 'ascending') &&
         (sorteringsfelt !== 'ikke_satt' || rekkefolge !== 'ikke_satt')
     ) {
-        logEvent('portefolje.metrikker.endre_sortering', {
-            sideNavn,
-            sorteringsfelt,
-            rekkefolge
-        });
+        logEvent('portefolje.metrikker.endre_sortering', {sideNavn, sorteringsfelt, rekkefolge});
     }
 };
 
@@ -313,9 +306,7 @@ const loggRedigerVeiledergruppeOK = (antallVeiledere, sideNavn: SideNavn) => {
 const loggSlettVeiledergruppeOK = (opprettetTidspunkt, sideNavn: SideNavn) => {
     logEvent(
         'portefolje.metrikker.veiledergrupper.sletting-vellykket',
-        {
-            levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24)
-        },
+        {levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24)},
         {sideNavn}
     );
 };
@@ -341,37 +332,25 @@ const loggSlettMineFilterOK = (opprettetTidspunkt, sideNavn: SideNavn) => {
 };
 
 const loggHentMineFilterFeilet = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.lagredefilter.henting-feilet', {
-        sideNavn: sideNavn
-    });
+    logEvent('portefolje.metrikker.lagredefilter.henting-feilet', {sideNavn: sideNavn});
 };
 
 const loggNyttMineFilterFeilet = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.lagredefilter.oppretting-feilet', {
-        sideNavn: sideNavn
-    });
+    logEvent('portefolje.metrikker.lagredefilter.oppretting-feilet', {sideNavn: sideNavn});
 };
 
 const loggRedigerMineFilterFeilet = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.lagredefilter.lagring-feilet', {
-        sideNavn: sideNavn
-    });
+    logEvent('portefolje.metrikker.lagredefilter.lagring-feilet', {sideNavn: sideNavn});
 };
 
 const loggSlettMineFilterFeilet = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.lagredefilter.sletting-feilet', {
-        sideNavn: sideNavn
-    });
+    logEvent('portefolje.metrikker.lagredefilter.sletting-feilet', {sideNavn: sideNavn});
 };
 
 const loggSorterMineFilterOK = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.lagredefilter.sortering-vellykket', {
-        sideNavn: sideNavn
-    });
+    logEvent('portefolje.metrikker.lagredefilter.sortering-vellykket', {sideNavn: sideNavn});
 };
 
 const loggSorterMineFilterFeilet = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.lagredefilter.sortering-feilet', {
-        sideNavn: sideNavn
-    });
+    logEvent('portefolje.metrikker.lagredefilter.sortering-feilet', {sideNavn: sideNavn});
 };

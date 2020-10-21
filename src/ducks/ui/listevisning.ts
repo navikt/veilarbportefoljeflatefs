@@ -89,10 +89,7 @@ export function listevisningReducer(state = initialStateMinOversikt, action: Lis
         case ActionTypeKeys.VELG_ALTERNATIV:
             return {...state, valgte: addIfNotExists(action.kolonne, state.valgte)};
         case ActionTypeKeys.AVVELG_ALTERNATIV:
-            return {
-                ...state,
-                valgte: state.valgte.filter(alternativ => alternativ !== action.kolonne)
-            };
+            return {...state, valgte: state.valgte.filter(alternativ => alternativ !== action.kolonne)};
         case ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV:
             return {...state, valgte: action.kolonner};
         case ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV:
@@ -116,10 +113,7 @@ export const avvelgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({
     kolonne,
     name
 });
-export const lukkInfopanel = (name: ListevisningType) => ({
-    type: ActionTypeKeys.LUKK_INFOPANEL,
-    name
-});
+export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name});
 
 export const oppdaterAlternativer = (
     dispatch: Dispatch<OppdaterListevisningAction>,
