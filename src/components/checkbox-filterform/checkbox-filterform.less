@@ -1,107 +1,107 @@
-@import "~nav-frontend-core/less/core";
+@import '~nav-frontend-core/less/core';
 
 .checkbox-filterform {
-  &__valg {
-    max-height: 16rem;
-    overflow-x: auto;
-    padding: 0.5rem 0.5rem 0;
-  }
+    &__valg {
+        max-height: 16rem;
+        overflow-x: auto;
+        padding: 0.5rem 0.5rem 0;
+    }
 
-  .registreringstype {
-    max-height: none;
-  }
+    .registreringstype {
+        max-height: none;
+    }
 
-  &__valg-knapp {
-    margin-top: 1rem;
-  }
+    &__valg-knapp {
+        margin-top: 1rem;
+    }
 
-  &__under-valg {
-    padding: 0.5rem 0 0.5rem 0.5rem;
-  }
+    &__under-valg {
+        padding: 0.5rem 0 0.5rem 0.5rem;
+    }
 
-  &__alertstripe {
-    padding: 0.5rem 0 1rem 0.5rem;
-    border: none;
-  }
+    &__alertstripe {
+        padding: 0.5rem 0 1rem 0.5rem;
+        border: none;
+    }
 }
 
 .field__container {
-  position: relative;
+    position: relative;
 
-  :last-child {
-    margin-bottom: 0;
-  }
+    :last-child {
+        margin-bottom: 0;
+    }
 }
 
 .fodselsdato__grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-row-gap: 5px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-row-gap: 5px;
 }
 
 .fodselsdato__container {
-  text-align: center;
-  margin: 0.2rem;
+    text-align: center;
+    margin: 0.2rem;
 
-  label {
-    position: relative;
-    cursor: pointer;
-    padding: 0.1rem;
-    background-color: @white;
-    border: 1px solid transparent;
-    border-radius: 4px;
-  }
+    label {
+        position: relative;
+        cursor: pointer;
+        padding: 0.1rem;
+        background-color: @white;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
 
-  label:hover {
-    color: @navBla;
-    border: 1px solid @navBla;
-  }
+    label:hover {
+        color: @navBla;
+        border: 1px solid @navBla;
+    }
 
-  label::before,
-  label::after {
-    position: absolute;
-  }
+    label::before,
+    label::after {
+        position: absolute;
+    }
 
-  label::before {
-    content: "";
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    padding: 0.2rem;
-  }
+    label::before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        padding: 0.2rem;
+    }
 
-  label::after {
-    content: "";
-    padding: 0.2rem;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-  }
+    label::after {
+        content: '';
+        padding: 0.2rem;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
 
-  input[type="checkbox"] {
-    opacity: 0;
-    appearance: none;
-  }
+    input[type='checkbox'] {
+        opacity: 0;
+        appearance: none;
+    }
 
-  input[type="checkbox"] + label::after {
-    content: none;
-  }
+    input[type='checkbox'] + label::after {
+        content: none;
+    }
 
-  input[type="checkbox"]:checked + label {
-    background-color: @navBlaDarken20;
-    color: white;
-  }
+    input[type='checkbox']:checked + label {
+        background-color: @navBlaDarken20;
+        color: white;
+    }
 
-  input[type="checkbox"]:checked + label::after {
-    content: "";
-  }
+    input[type='checkbox']:checked + label::after {
+        content: '';
+    }
 
-  input[type="checkbox"]:focus + label::before {
-    border-radius: 4px;
-    box-shadow: 0 0 0 3px @fokusFarge;
-    outline: none;
-  }
+    input[type='checkbox']:focus + label::before {
+        border-radius: 4px;
+        box-shadow: 0 0 0 3px @fokusFarge;
+        outline: none;
+    }
 }

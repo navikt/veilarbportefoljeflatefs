@@ -1,72 +1,72 @@
-@import "~nav-frontend-core/less/core";
+@import '~nav-frontend-core/less/core';
 
 @bakgrunnsGra: #f4f4f4;
 
 .veilarbportefoljeflatefs {
-  .typo-normal {
-    width: 100%;
-  }
-
-  .listevisning--infopanel {
-    display: flex;
-    width: 100%;
-    position: relative;
-  }
-
-  .listevisning--infopanel__lukkKnapp {
-    position: absolute;
-    height: 2rem;
-    width: 2rem;
-    right: -0.25rem;
-    top: -0.25rem;
-  }
-
-  .skjemaelement__input:disabled {
-    + label {
-      cursor: default;
-
-      &::before {
-        background-color: @grayIcon;
-        border-color: @grayIcon;
-      }
+    .typo-normal {
+        width: 100%;
     }
-  }
 
-  .ustilet {
-    padding: 1rem 0.5rem 0;
-  }
+    .listevisning--infopanel {
+        display: flex;
+        width: 100%;
+        position: relative;
+    }
 
-  .toolbar__velg-kolonner {
-    margin-right: 1rem;
-    min-width: 10rem;
+    .listevisning--infopanel__lukkKnapp {
+        position: absolute;
+        height: 2rem;
+        width: 2rem;
+        right: -0.25rem;
+        top: -0.25rem;
+    }
 
-    .dropdown {
-      margin-bottom: 0;
+    .skjemaelement__input:disabled {
+        + label {
+            cursor: default;
 
-      &__btnwrapper--disabled {
+            &::before {
+                background-color: @grayIcon;
+                border-color: @grayIcon;
+            }
+        }
+    }
+
+    .ustilet {
+        padding: 1rem 0.5rem 0;
+    }
+
+    .toolbar__velg-kolonner {
+        margin-right: 1rem;
+        min-width: 10rem;
+
+        .dropdown {
+            margin-bottom: 0;
+
+            &__btnwrapper--disabled {
+                svg {
+                    opacity: 0.4;
+                }
+
+                &:hover {
+                    border: none;
+                }
+            }
+
+            &__btn {
+                background-color: @bakgrunnsGra;
+                border: 1px solid transparent;
+                padding: 0.5rem 0.5rem 0 0.5rem !important;
+            }
+        }
+
         svg {
-          opacity: 0.4;
+            margin-right: 0.2rem;
         }
 
-        &:hover {
-          border: none;
+        .velg-kolonner__tekst {
+            position: absolute;
+            top: 10px;
         }
-      }
-
-      &__btn {
-        background-color: @bakgrunnsGra;
-        border: 1px solid transparent;
-        padding: 0.5rem 0.5rem 0 0.5rem !important;
-      }
     }
-
-    svg {
-      margin-right: 0.2rem;
-    }
-
-    .velg-kolonner__tekst {
-      position: absolute;
-      top: 10px;
-    }
-  }
 }

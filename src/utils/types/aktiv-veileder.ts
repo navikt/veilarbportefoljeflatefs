@@ -1,3 +1,3 @@
 export interface AktivBrukerModell {
-  ident: string;
+    ident: string;
 }

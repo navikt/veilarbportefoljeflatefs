@@ -1,45 +1,42 @@
-import { hentAktivBruker } from "../middleware/api";
-import { STATUS, doThenDispatch } from "./utils";
-import { VeilederModell } from "../model-interfaces";
-import { OrNothing } from "../utils/types/types";
+import {hentAktivBruker} from '../middleware/api';
+import {STATUS, doThenDispatch} from './utils';
+import {VeilederModell} from '../model-interfaces';
+import {OrNothing} from '../utils/types/types';
 
 // Actions
-export const OK = "veilarbveileder/me/OK";
-export const FEILET = "veilarbveileder/me/FEILET";
-export const PENDING = "veilarbveileder/me/PENDING";
+export const OK = 'veilarbveileder/me/OK';
+export const FEILET = 'veilarbveileder/me/FEILET';
+export const PENDING = 'veilarbveileder/me/PENDING';
 
 export interface InloggetVeilederState {
-  status: any;
-  data: OrNothing<VeilederModell>;
+    status: any;
+    data: OrNothing<VeilederModell>;
 }
 
 const initialState = {
-  status: STATUS.NOT_STARTED,
-  data: null
+    status: STATUS.NOT_STARTED,
+    data: null
 };
 
 //  Reducer
-export default function reducer(
-  state: InloggetVeilederState = initialState,
-  action
-) {
-  switch (action.type) {
-    case PENDING:
-      return { ...state, status: STATUS.PENDING };
-    case FEILET:
-      return { ...state, status: STATUS.ERROR, data: action.data };
-    case OK:
-      return { ...state, status: STATUS.OK, data: action.data };
-    default:
-      return state;
-  }
+export default function reducer(state: InloggetVeilederState = initialState, action) {
+    switch (action.type) {
+        case PENDING:
+            return {...state, status: STATUS.PENDING};
+        case FEILET:
+            return {...state, status: STATUS.ERROR, data: action.data};
+        case OK:
+            return {...state, status: STATUS.OK, data: action.data};
+        default:
+            return state;
+    }
 }
 
 // Action Creators
 export function hentInloggetVeileder() {
-  return doThenDispatch(() => hentAktivBruker(), {
-    OK,
-    FEILET,
-    PENDING
-  });
+    return doThenDispatch(() => hentAktivBruker(), {
+        OK,
+        FEILET,
+        PENDING
+    });
 }

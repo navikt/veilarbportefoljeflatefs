@@ -1,106 +1,106 @@
-@import "~nav-frontend-core/less/core";
+@import '~nav-frontend-core/less/core';
 
 .barlabel {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2px;
-
-  &__labeltext {
-    width: 100%;
-    padding-right: 0.5rem;
-  }
-
-  &__barwrapper {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: space-between;
+    margin-top: 2px;
 
-    flex-basis: 45%;
-    flex-shrink: 0;
-    flex-grow: 0;
-
-    .arbeidsliste {
-      flex-basis: 3rem;
-      display: inline-flex;
+    &__labeltext {
+        width: 100%;
+        padding-right: 0.5rem;
     }
-  }
 
-  &__antall {
-    flex-basis: 3rem;
-    text-align: right;
-    padding-right: 0.5rem;
-    font-weight: 800;
-    margin-top: -0.3rem;
-  }
+    &__barwrapper {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
 
-  &__bar {
-    position: relative;
-    height: 1rem;
-    flex-grow: 1;
-  }
+        flex-basis: 45%;
+        flex-shrink: 0;
+        flex-grow: 0;
 
-  &__bartrack {
-    display: block;
-    background-color: @navLysGra;
-    height: 12px;
-    border-radius: 1rem;
-    width: 100%;
-  }
+        .arbeidsliste {
+            flex-basis: 3rem;
+            display: inline-flex;
+        }
+    }
 
-  &__barface {
-    position: absolute;
-    display: block;
-    background-color: @navLysBlaLighten20;
-    height: 12px;
-    border-radius: 1rem;
-    transition: width cubic-bezier(0.4, 0, 0.2, 1) 1337ms;
-    left: 0;
-    top: 0;
-  }
+    &__antall {
+        flex-basis: 3rem;
+        text-align: right;
+        padding-right: 0.5rem;
+        font-weight: 800;
+        margin-top: -0.3rem;
+    }
 
-  &.ufordeltebrukere .barlabel__barface {
-    background-color: @navLillaLighten20;
-  }
+    &__bar {
+        position: relative;
+        height: 1rem;
+        flex-grow: 1;
+    }
 
-  &.venterPaSvarFraNAV .barlabel__barface {
-    background-color: @navLillaLighten20;
-  }
+    &__bartrack {
+        display: block;
+        background-color: @navLysGra;
+        height: 12px;
+        border-radius: 1rem;
+        width: 100%;
+    }
 
-  &.venterPaSvarFraBruker .barlabel__barface {
-    background-color: @navLimeGronnLighten20;
-  }
+    &__barface {
+        position: absolute;
+        display: block;
+        background-color: @navLysBlaLighten20;
+        height: 12px;
+        border-radius: 1rem;
+        transition: width cubic-bezier(0.4, 0, 0.2, 1) 1337ms;
+        left: 0;
+        top: 0;
+    }
 
-  &.avtaltMoteMedNav .barlabel__barface {
-    background-color: @navDypBlaDarken80;
-  }
+    &.ufordeltebrukere .barlabel__barface {
+        background-color: @navLillaLighten20;
+    }
 
-  &.utlopteAktiviteter .barlabel__barface {
-    background-color: @navGra60;
-  }
+    &.venterPaSvarFraNAV .barlabel__barface {
+        background-color: @navLillaLighten20;
+    }
 
-  &.ikkeIAvtaltAktivitet .barlabel__barface {
-    background-color: @navGra60;
-  }
+    &.venterPaSvarFraBruker .barlabel__barface {
+        background-color: @navLimeGronnLighten20;
+    }
 
-  &.iAvtaltAktivitet .barlabel__barface {
-    background-color: @navDypBlaLighten20;
-  }
+    &.avtaltMoteMedNav .barlabel__barface {
+        background-color: @navDypBlaDarken80;
+    }
 
-  &.inaktiveBrukere .barlabel__barface {
-    background-color: @navGra60;
-  }
+    &.utlopteAktiviteter .barlabel__barface {
+        background-color: @navGra60;
+    }
 
-  &.minArbeidsliste .barlabel__barface {
-    background-color: @navGra60;
-  }
+    &.ikkeIAvtaltAktivitet .barlabel__barface {
+        background-color: @navGra60;
+    }
+
+    &.iAvtaltAktivitet .barlabel__barface {
+        background-color: @navDypBlaLighten20;
+    }
+
+    &.inaktiveBrukere .barlabel__barface {
+        background-color: @navGra60;
+    }
+
+    &.minArbeidsliste .barlabel__barface {
+        background-color: @navGra60;
+    }
 }
 
 .forsteBarlabelIGruppe {
-  padding-top: 1rem;
-  border-top: 1px solid @navGra60;
-  margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid @navGra60;
+    margin-top: 1rem;
 }
 
 .ny__barlabel__barwrapper {
-  flex: none;
+    flex: none;
 }

@@ -1,83 +1,83 @@
-@import "~nav-frontend-core/less/core";
+@import '~nav-frontend-core/less/core';
 
 .arbeidslistekategori {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
 
-  .skjemaelement__label {
-    grid-row: 1;
-  }
+    .skjemaelement__label {
+        grid-row: 1;
+    }
 }
 
 .arbeidslistekategori__container {
-  grid-row: 2;
-  justify-self: left;
-  margin-top: 0.5rem;
-  margin-bottom: 0.2rem;
+    grid-row: 2;
+    justify-self: left;
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
 
-  label {
-    position: relative;
-    cursor: pointer;
-    padding: 1rem 0.5rem 0.2rem;
-    border: 1px solid transparent;
-    border-radius: 4px;
-  }
+    label {
+        position: relative;
+        cursor: pointer;
+        padding: 1rem 0.5rem 0.2rem;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
 
-  label:hover {
-    border: 1px solid @navGra60;
-  }
+    label:hover {
+        border: 1px solid @navGra60;
+    }
 
-  label::before,
-  label::after {
-    position: absolute;
-  }
+    label::before,
+    label::after {
+        position: absolute;
+    }
 
-  svg {
-    height: 25px;
-    width: auto;
-  }
+    svg {
+        height: 25px;
+        width: auto;
+    }
 
-  label::before {
-    content: "";
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    padding: 0.2rem;
-  }
+    label::before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        padding: 0.2rem;
+    }
 
-  label::after {
-    content: "";
-    padding: 0.2rem;
-    left: 0;
-    top: 0;
-  }
+    label::after {
+        content: '';
+        padding: 0.2rem;
+        left: 0;
+        top: 0;
+    }
 
-  input[type="radio"] + svg {
-    cursor: pointer;
-    padding: 0.2rem;
-  }
+    input[type='radio'] + svg {
+        cursor: pointer;
+        padding: 0.2rem;
+    }
 
-  input[type="radio"] {
-    opacity: 0;
-    appearance: none;
-  }
+    input[type='radio'] {
+        opacity: 0;
+        appearance: none;
+    }
 
-  input[type="radio"] + label::after {
-    content: none;
-  }
+    input[type='radio'] + label::after {
+        content: none;
+    }
 
-  input[type="radio"]:checked + label {
-    border: 1px solid @navGra80;
-  }
+    input[type='radio']:checked + label {
+        border: 1px solid @navGra80;
+    }
 
-  input[type="radio"]:checked + label::after {
-    content: "";
-  }
+    input[type='radio']:checked + label::after {
+        content: '';
+    }
 
-  input[type="radio"]:focus + label::before {
-    outline: none;
-    box-shadow: 0 0 0 3px @fokusFarge;
-  }
+    input[type='radio']:focus + label::before {
+        outline: none;
+        box-shadow: 0 0 0 3px @fokusFarge;
+    }
 }

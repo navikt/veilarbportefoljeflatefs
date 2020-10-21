@@ -1,1 +1,1 @@
-export const basename = "/veilarbportefoljeflatefs";
+export const basename = '/veilarbportefoljeflatefs';

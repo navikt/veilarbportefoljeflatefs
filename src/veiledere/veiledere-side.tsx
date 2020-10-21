@@ -1,108 +1,97 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Undertittel } from "nav-frontend-typografi";
-import DocumentTitle from "react-document-title";
-import VeiledersideVisning from "./veilederside-visning";
-import Innholdslaster from "../innholdslaster/innholdslaster";
-import FiltreringVeiledere from "../filtrering/filtrering-veiledere";
-import PanelBase from "nav-frontend-paneler";
-import FiltreringLabelContainer from "../filtrering/filtrering-label-container";
-import { lagLablerTilVeiledereMedIdenter } from "../filtrering/utils";
-import { slettEnkeltFilter } from "../ducks/filtrering";
-import "./veiledere.less";
-import ToppMeny from "../topp-meny/topp-meny";
-import { useOnMount } from "../hooks/use-on-mount";
-import { getSeAlleFromUrl, getSideFromUrl } from "../utils/url-utils";
-import { loggSkjermMetrikker, Side } from "../utils/metrikker/skjerm-metrikker";
-import { AppState } from "../reducer";
-import { pagineringSetup } from "../ducks/paginering";
-import { useSetEnhetIUrl } from "../hooks/portefolje/use-set-enhet-i-url";
-import { useSetLocalStorageOnUnmount } from "../hooks/portefolje/use-set-local-storage-on-unmount";
-import FilteringVeilederGrupper from "../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper";
-import "../style.less";
-import MetrikkEkspanderbartpanel from "../components/ekspandertbart-panel/metrikk-ekspanderbartpanel";
-import { useFetchStatusTall } from "../hooks/portefolje/use-fetch-statustall";
-import { ListevisningType } from "../ducks/ui/listevisning";
-import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
+import * as React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Undertittel} from 'nav-frontend-typografi';
+import DocumentTitle from 'react-document-title';
+import VeiledersideVisning from './veilederside-visning';
+import Innholdslaster from '../innholdslaster/innholdslaster';
+import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
+import PanelBase from 'nav-frontend-paneler';
+import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
+import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
+import {slettEnkeltFilter} from '../ducks/filtrering';
+import './veiledere.less';
+import ToppMeny from '../topp-meny/topp-meny';
+import {useOnMount} from '../hooks/use-on-mount';
+import {getSeAlleFromUrl, getSideFromUrl} from '../utils/url-utils';
+import {loggSkjermMetrikker, Side} from '../utils/metrikker/skjerm-metrikker';
+import {AppState} from '../reducer';
+import {pagineringSetup} from '../ducks/paginering';
+import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
+import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
+import FilteringVeilederGrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper';
+import '../style.less';
+import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
+import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
+import {ListevisningType} from '../ducks/ui/listevisning';
+import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 
 function VeiledereSide() {
-  const statustall = useFetchStatusTall();
-  const filtervalg = useSelector(
-    (state: AppState) => state.filtreringVeilederoversikt
-  );
-  const filtergruppe = ListevisningType.veilederOversikt;
-  const dispatch = useDispatch();
-  const slettVeilederFilter = ident =>
-    dispatch(slettEnkeltFilter("veiledere", ident, filtergruppe));
-  const veiledere = useSelector((state: AppState) => state.veiledere);
-  const portefoljestorrelser = useSelector(
-    (state: AppState) => state.portefoljestorrelser
-  );
+    const statustall = useFetchStatusTall();
+    const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
+    const filtergruppe = ListevisningType.veilederOversikt;
+    const dispatch = useDispatch();
+    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe));
+    const veiledere = useSelector((state: AppState) => state.veiledere);
+    const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
 
-  useSetEnhetIUrl();
+    useSetEnhetIUrl();
 
-  useOnMount(() => {
-    const side = getSideFromUrl();
-    const seAlle = getSeAlleFromUrl();
-    dispatch(pagineringSetup({ side, seAlle }));
-    loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
-  });
+    useOnMount(() => {
+        const side = getSideFromUrl();
+        const seAlle = getSeAlleFromUrl();
+        dispatch(pagineringSetup({side, seAlle}));
+        loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
+    });
 
-  useSetLocalStorageOnUnmount();
-  LagredeFilterUIController({ filtergruppe: filtergruppe });
+    useSetLocalStorageOnUnmount();
+    LagredeFilterUIController({filtergruppe: filtergruppe});
 
-  return (
-    <DocumentTitle title="Veilederoversikt">
-      <div className="side-storrelse blokk-xl">
-        <ToppMeny />
-        <Innholdslaster avhengigheter={[statustall]}>
-          <section>
-            <div
-              id="veileder-oversikt"
-              role="tabpanel"
-              className="oversikt-sideinnhold"
-              aria-labelledby="veileder-oversikt"
-            >
-              <div className="status-filter-kolonne">
-                <PanelBase className="blokk-xxxs sok-veileder">
-                  <Undertittel>Søk veileder</Undertittel>
-                  <FiltreringVeiledere />
-                </PanelBase>
-                <MetrikkEkspanderbartpanel
-                  apen
-                  lamellNavn="veiledergrupper"
-                  tittel="Veiledergrupper"
-                >
-                  <FilteringVeilederGrupper
-                    filtergruppe={ListevisningType.veilederOversikt}
-                  />
-                </MetrikkEkspanderbartpanel>
-              </div>
-              <div className="liste-kolonne">
-                <FiltreringLabelContainer
-                  filtervalg={{
-                    veiledere: lagLablerTilVeiledereMedIdenter(
-                      filtervalg.veiledere,
-                      veiledere.data.veilederListe,
-                      slettVeilederFilter
-                    )
-                  }}
-                  filtergruppe={ListevisningType.veilederOversikt}
-                  className="filtrering-label-container"
-                />
-                <VeiledersideVisning
-                  veiledere={veiledere.data.veilederListe}
-                  portefoljestorrelser={portefoljestorrelser}
-                  veilederFilter={filtervalg.veiledere}
-                  antallVeiledere={veiledere.data.veilederListe.length}
-                />
-              </div>
+    return (
+        <DocumentTitle title="Veilederoversikt">
+            <div className="side-storrelse blokk-xl">
+                <ToppMeny />
+                <Innholdslaster avhengigheter={[statustall]}>
+                    <section>
+                        <div
+                            id="veileder-oversikt"
+                            role="tabpanel"
+                            className="oversikt-sideinnhold"
+                            aria-labelledby="veileder-oversikt"
+                        >
+                            <div className="status-filter-kolonne">
+                                <PanelBase className="blokk-xxxs sok-veileder">
+                                    <Undertittel>Søk veileder</Undertittel>
+                                    <FiltreringVeiledere />
+                                </PanelBase>
+                                <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
+                                    <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt} />
+                                </MetrikkEkspanderbartpanel>
+                            </div>
+                            <div className="liste-kolonne">
+                                <FiltreringLabelContainer
+                                    filtervalg={{
+                                        veiledere: lagLablerTilVeiledereMedIdenter(
+                                            filtervalg.veiledere,
+                                            veiledere.data.veilederListe,
+                                            slettVeilederFilter
+                                        )
+                                    }}
+                                    filtergruppe={ListevisningType.veilederOversikt}
+                                    className="filtrering-label-container"
+                                />
+                                <VeiledersideVisning
+                                    veiledere={veiledere.data.veilederListe}
+                                    portefoljestorrelser={portefoljestorrelser}
+                                    veilederFilter={filtervalg.veiledere}
+                                    antallVeiledere={veiledere.data.veilederListe.length}
+                                />
+                            </div>
+                        </div>
+                    </section>
+                </Innholdslaster>
             </div>
-          </section>
-        </Innholdslaster>
-      </div>
-    </DocumentTitle>
-  );
+        </DocumentTitle>
+    );
 }
 
 export default VeiledereSide;

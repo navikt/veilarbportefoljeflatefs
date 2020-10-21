@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
 export interface HiddenProps {
-  hidden?: boolean;
+    hidden?: boolean;
 }
 
 export default function hiddenIf<PROPS>(
-  Component: React.ComponentType<PROPS>
+    Component: React.ComponentType<PROPS>
 ): React.ComponentType<PROPS & HiddenProps> {
-  return (props: PROPS & HiddenProps) => {
-    const { hidden, ...rest } = props as any; // tslint:disable-line
-    if (hidden) {
-      return null;
-    }
-    return <Component {...rest} />;
-  };
+    return (props: PROPS & HiddenProps) => {
+        const {hidden, ...rest} = props as any; // tslint:disable-line
+        if (hidden) {
+            return null;
+        }
+        return <Component {...rest} />;
+    };
 }

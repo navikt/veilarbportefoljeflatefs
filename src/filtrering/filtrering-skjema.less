@@ -1,60 +1,60 @@
-@import "~nav-frontend-core/less/core";
+@import '~nav-frontend-core/less/core';
 
 .veilarbportefoljeflatefs {
-  .registreringsfilter {
-    &__infocontainer {
-      display: grid;
-      grid-template-columns: 35px auto;
-      margin: 0.5rem;
-      padding: 0.2rem;
-      border: 1px solid @navLysBla;
-      border-radius: 4px;
-      background-color: @navLysBlaLighten80;
+    .registreringsfilter {
+        &__infocontainer {
+            display: grid;
+            grid-template-columns: 35px auto;
+            margin: 0.5rem;
+            padding: 0.2rem;
+            border: 1px solid @navLysBla;
+            border-radius: 4px;
+            background-color: @navLysBlaLighten80;
+        }
+
+        &__infoikon {
+            margin: 0.2rem;
+        }
+
+        &__infotekst {
+            margin: auto;
+        }
     }
 
-    &__infoikon {
-      margin: 0.2rem;
+    .skjemaelement--innrykk {
+        margin-left: 1.25rem;
     }
 
-    &__infotekst {
-      margin: auto;
+    .dropdown--fixed .dropdown__innhold {
+        border-top-right-radius: @border-radius-small;
     }
-  }
 
-  .skjemaelement--innrykk {
-    margin-left: 1.25rem;
-  }
+    .filtrering--overskrift-med-hjelpetekst {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-  .dropdown--fixed .dropdown__innhold {
-    border-top-right-radius: @border-radius-small;
-  }
+    .filtrering-navn-sok {
+        display: flex;
+    }
 
-  .filtrering--overskrift-med-hjelpetekst {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    .sok-knapp {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        height: 2.44rem;
+    }
 
-  .filtrering-navn-sok {
-    display: flex;
-  }
+    .checkbox-filterform .registreringstype {
+        max-height: 24rem;
+    }
 
-  .sok-knapp {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    height: 2.44rem;
-  }
+    .checkbox-filterform .ny__registreringstype,
+    .tiltakstyper {
+        max-height: none;
+    }
 
-  .checkbox-filterform .registreringstype {
-    max-height: 24rem;
-  }
-
-  .checkbox-filterform .ny__registreringstype,
-  .tiltakstyper {
-    max-height: none;
-  }
-
-  .registreringstype .skjemaelement {
-    margin-bottom: 0.5rem;
-  }
+    .registreringstype .skjemaelement {
+        margin-bottom: 0.5rem;
+    }
 }

@@ -1,39 +1,39 @@
 .veilarbportefoljeflatefs {
-  .veileder-gruppe {
-    &__rad {
-      display: flex;
-      justify-content: space-between;
-      min-height: 2rem;
+    .veileder-gruppe {
+        &__rad {
+            display: flex;
+            justify-content: space-between;
+            min-height: 2rem;
+        }
+
+        &__knapperad {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0.5rem 0;
+        }
+
+        &__valgfelt {
+            overflow-y: auto;
+            max-height: 15rem;
+            padding: 0.5rem;
+        }
+
+        &__gruppenavn {
+            width: 85%;
+        }
+
+        .rediger-knapp {
+            width: 15%;
+            border: 2px solid transparent;
+        }
     }
 
-    &__knapperad {
-      display: flex;
-      justify-content: space-between;
-      margin: 1rem 0.5rem 0;
-    }
+    .veiledergruppe-emptystate {
+        text-align: left;
 
-    &__valgfelt {
-      overflow-y: auto;
-      max-height: 15rem;
-      padding: 0.5rem;
+        &__tekst {
+            font-style: italic;
+            margin: 0.5rem 0;
+        }
     }
-
-    &__gruppenavn {
-      width: 85%;
-    }
-
-    .rediger-knapp {
-      width: 15%;
-      border: 2px solid transparent;
-    }
-  }
-
-  .veiledergruppe-emptystate {
-    text-align: left;
-
-    &__tekst {
-      font-style: italic;
-      margin: 0.5rem 0;
-    }
-  }
 }
