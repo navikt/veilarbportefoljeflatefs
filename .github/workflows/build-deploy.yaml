@@ -113,7 +113,9 @@ jobs:
           VAR: version=${{ env.IMAGE_TAG }}
   release-dev:
     name: Create dev release
-    needs: [ deploy-q0, deploy-q1 ]
+    needs: 
+      - deploy-q0
+      - deploy-q1
     runs-on: ubuntu-latest
     steps:
       - name: Create release
